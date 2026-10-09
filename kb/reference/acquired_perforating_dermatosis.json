@@ -1,175 +1,443 @@
 {
- "id": "acquired_perforating_dermatosis",
- "name": "acquired perforating dermatosis",
- "aliases": [
-  "acquired perforating disease",
-  "perforating dermatosis of chronic renal failure and diabetes"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Umbrella term for perforating disorders arising in adults, classically associated with chronic kidney disease and diabetes mellitus, characterised by transepidermal elimination of dermal material.",
-   "Presents as intensely pruritic, umbilicated papules and nodules with a central keratotic plug, favouring the extensor surfaces of the limbs and the trunk.",
-   "Koebnerisation is prominent; scratching provokes new lesions arranged in linear streaks, and the itch-scratch cycle perpetuates the eruption.",
-   "Histology shows a channel of transepidermal elimination extruding degenerate collagen, elastic fibres or keratin through the epidermis or a follicular infundibulum.",
-   "The four classic perforating dermatoses (Kyrle disease, reactive perforating collagenosis, perforating folliculitis, elastosis perforans serpiginosa) show overlapping features when acquired in adults, hence the unifying term.",
-   "Strongly linked to end-stage renal disease on haemodialysis and to poorly controlled diabetic nephropathy; screening for occult renal or metabolic disease is warranted at presentation.",
-   "Management targets the underlying disease and pruritus: emollients, topical retinoids or corticosteroids, phototherapy (narrowband ultraviolet B), and control of uraemia or glycaemia.",
-   "Reported associations extend beyond renal disease to hypothyroidism, hepatic dysfunction, malignancy and certain drugs (notably targeted anticancer agents)."
+  "id": "acquired_perforating_dermatosis",
+  "name": "acquired perforating dermatosis",
+  "aliases": [
+    "acquired perforating disease",
+    "perforating dermatosis of chronic renal failure and diabetes"
   ],
-  "pathophysiology": "Acquired perforating dermatosis reflects abnormal transepidermal elimination of altered dermal connective tissue, in which degenerate collagen and/or elastic fibres, and sometimes keratinous debris, are extruded through the epidermis or follicular epithelium. In the setting of chronic kidney disease and diabetes, microangiopathy, deposition of substances that cannot be cleared by failing kidneys, dermal microdeposits (including calcium and urate), and advanced glycation end-products are thought to injure dermal matrix and provoke a foreign-body-like elimination response. Repetitive trauma from scratching (driven by uraemic or metabolic pruritus) initiates and perpetuates lesions through Koebnerisation, and epidermal hyperproliferation forms the characteristic keratotic plug overlying a perforating channel.",
-  "additionalDifferentials": [
-   "prurigo nodularis",
-   "folliculitis and acneiform eruptions",
-   "hypertrophic lichen planus",
-   "multiple keratoacanthomas",
-   "dermatofibromas",
-   "perforating granuloma annulare",
-   "arthropod bite reactions"
-  ],
-  "additionalInvestigations": [
-   "skin biopsy with elastic tissue and connective tissue stains to demonstrate the perforating channel and eliminated material",
-   "renal function tests (urea, creatinine, estimated glomerular filtration rate)",
-   "fasting glucose and glycated haemoglobin",
-   "liver function tests and thyroid function tests",
-   "urinalysis for proteinuria",
-   "full blood count and calcium/phosphate profile",
-   "age-appropriate malignancy screening where clinically indicated"
-  ],
-  "redFlags": [
-   "new-onset perforating eruption without known renal or metabolic disease, prompting evaluation for occult systemic illness or malignancy",
-   "rapidly progressive lesions or systemic symptoms (weight loss, night sweats) suggesting underlying neoplasm",
-   "signs of secondary bacterial infection of excoriated lesions",
-   "intractable pruritus indicating poorly controlled uraemia or hyperglycaemia"
-  ],
-  "prognosis": "The eruption tends to be chronic and relapsing, mirroring the course of the underlying renal or metabolic disease; lesions may improve with control of the systemic condition or after renal transplantation but often persist while pruritus and scratching continue.",
-  "pitfalls": [
-   "attributing intensely pruritic umbilicated papules to simple prurigo and overlooking the diagnostic transepidermal elimination on biopsy",
-   "failing to investigate for underlying chronic kidney disease, diabetes or occult malignancy at first presentation",
-   "biopsying an excoriated or superinfected lesion rather than an intact keratotic papule, obscuring the histology",
-   "expecting durable clearance from topical therapy alone without addressing the systemic driver and the itch-scratch cycle"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "Andrews' Diseases of the Skin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Optimise the underlying disorder — tight glycaemic control in diabetes and adequate dialysis or renal transplantation in chronic kidney disease",
-   "Control the driving pruritus with emollients, topical corticosteroids, gabapentinoids and narrowband UVB phototherapy",
-   "Topical keratolytics and retinoids to address the hyperkeratotic plugs",
-   "Interrupt the itch-scratch cycle to limit Koebnerisation and formation of new lesions",
-   "Screen at presentation for occult renal or metabolic disease",
-   "Multidisciplinary dermatology and nephrology input for this chronic, relapsing eruption"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acquired_perforating_dermatosis-pathway",
-   "title": "acquired perforating dermatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Umbrella term for perforating disorders arising in adults, classically associated with chronic kidney disease and diabetes mellitus, characterised by transepidermal elimination of dermal material.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: new-onset perforating eruption without known renal or metabolic disease, prompting evaluation for occult systemic illness or malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: skin biopsy with elastic tissue and connective tissue stains to demonstrate the perforating channel and eliminated material, renal function tests (urea, creatinine, estimated glomerular filtration rate), fasting glucose"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Optimise the underlying disorder - tight glycaemic control in diabetes and adequate dialysis or renal transplantation in chronic kidney disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: attributing intensely pruritic umbilicated papules to simple prurigo and overlooking the diagnostic transepidermal elimination on biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acquired perforating dermatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "acquired_perforating_dermatosis-matrix",
-   "title": "acquired perforating dermatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Umbrella term for perforating disorders arising in adults, classically associated with chronic kidney disease and diabetes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Umbrella term for perforating disorders arising in adults, classically associated with chronic kidney disease and diabetes mellitus, characterised by transepidermal elimination of dermal material.",
+      "Presents as intensely pruritic, umbilicated papules and nodules with a central keratotic plug, favouring the extensor surfaces of the limbs and the trunk.",
+      "Koebnerisation is prominent; scratching provokes new lesions arranged in linear streaks, and the itch-scratch cycle perpetuates the eruption.",
+      "Histology shows a channel of transepidermal elimination extruding degenerate collagen, elastic fibres or keratin through the epidermis or a follicular infundibulum.",
+      "The four classic perforating dermatoses (Kyrle disease, reactive perforating collagenosis, perforating folliculitis, elastosis perforans serpiginosa) show overlapping features when acquired in adults, hence the unifying term.",
+      "Strongly linked to end-stage renal disease on haemodialysis and to poorly controlled diabetic nephropathy; screening for occult renal or metabolic disease is warranted at presentation.",
+      "Management targets the underlying disease and pruritus: emollients, topical retinoids or corticosteroids, phototherapy (narrowband ultraviolet B), and control of uraemia or glycaemia.",
+      "Reported associations extend beyond renal disease to hypothyroidism, hepatic dysfunction, malignancy and certain drugs (notably targeted anticancer agents)."
     ],
-    [
-     "Key Investigations",
-     "skin biopsy with elastic tissue and connective tissue stains to demonstrate the perforating channel and eliminated material,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acquired perforating dermatosis reflects abnormal transepidermal elimination of altered dermal connective tissue, in which degenerate collagen and/or elastic fibres, and sometimes keratinous debris, are extruded through the epidermis or follicular epithelium. In the setting of chronic kidney disease and diabetes, microangiopathy, deposition of substances that cannot be cleared by failing kidneys, dermal microdeposits (including calcium and urate), and advanced glycation end-products are thought to injure dermal matrix and provoke a foreign-body-like elimination response. Repetitive trauma from scratching (driven by uraemic or metabolic pruritus) initiates and perpetuates lesions through Koebnerisation, and epidermal hyperproliferation forms the characteristic keratotic plug overlying a perforating channel.",
+    "additionalDifferentials": [
+      "prurigo nodularis",
+      "folliculitis and acneiform eruptions",
+      "hypertrophic lichen planus",
+      "multiple keratoacanthomas",
+      "dermatofibromas",
+      "perforating granuloma annulare",
+      "arthropod bite reactions"
     ],
-    [
-     "Primary Differentials",
-     "prurigo nodularis, folliculitis and acneiform eruptions, hypertrophic lichen planus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "skin biopsy with elastic tissue and connective tissue stains to demonstrate the perforating channel and eliminated material",
+      "renal function tests (urea, creatinine, estimated glomerular filtration rate)",
+      "fasting glucose and glycated haemoglobin",
+      "liver function tests and thyroid function tests",
+      "urinalysis for proteinuria",
+      "full blood count and calcium/phosphate profile",
+      "age-appropriate malignancy screening where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Optimise the underlying disorder - tight glycaemic control in diabetes and adequate dialysis or renal transplantation in chronic",
-     "Core treatment modality"
+    "redFlags": [
+      "new-onset perforating eruption without known renal or metabolic disease, prompting evaluation for occult systemic illness or malignancy",
+      "rapidly progressive lesions or systemic symptoms (weight loss, night sweats) suggesting underlying neoplasm",
+      "signs of secondary bacterial infection of excoriated lesions",
+      "intractable pruritus indicating poorly controlled uraemia or hyperglycaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "attributing intensely pruritic umbilicated papules to simple prurigo and overlooking the diagnostic transepidermal elimination on",
-     "Prevent diagnostic or management error"
+    "prognosis": "The eruption tends to be chronic and relapsing, mirroring the course of the underlying renal or metabolic disease; lesions may improve with control of the systemic condition or after renal transplantation but often persist while pruritus and scratching continue.",
+    "pitfalls": [
+      "attributing intensely pruritic umbilicated papules to simple prurigo and overlooking the diagnostic transepidermal elimination on biopsy",
+      "failing to investigate for underlying chronic kidney disease, diabetes or occult malignancy at first presentation",
+      "biopsying an excoriated or superinfected lesion rather than an intact keratotic papule, obscuring the histology",
+      "expecting durable clearance from topical therapy alone without addressing the systemic driver and the itch-scratch cycle"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "Andrews' Diseases of the Skin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Optimise the underlying disorder — tight glycaemic control in diabetes and adequate dialysis or renal transplantation in chronic kidney disease",
+      "Control the driving pruritus with emollients, topical corticosteroids, gabapentinoids and narrowband UVB phototherapy",
+      "Topical keratolytics and retinoids to address the hyperkeratotic plugs",
+      "Interrupt the itch-scratch cycle to limit Koebnerisation and formation of new lesions",
+      "Screen at presentation for occult renal or metabolic disease",
+      "Multidisciplinary dermatology and nephrology input for this chronic, relapsing eruption"
     ]
-   ],
-   "caption": "Overview comparison matrix for acquired perforating dermatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acquired-perforating-dermatosis-real-image",
-   "title": "acquired perforating dermatosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "acquired_perforating_dermatosis-pathway",
+      "title": "acquired perforating dermatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Umbrella term for perforating disorders arising in adults, classically associated with chronic kidney disease and diabetes mellitus, characterised by transepidermal elimination of dermal material.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: new-onset perforating eruption without known renal or metabolic disease, prompting evaluation for occult systemic illness or malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: skin biopsy with elastic tissue and connective tissue stains to demonstrate the perforating channel and eliminated material, renal function tests (urea, creatinine, estimated glomerular filtration rate), fasting glucose"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Optimise the underlying disorder - tight glycaemic control in diabetes and adequate dialysis or renal transplantation in chronic kidney disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: attributing intensely pruritic umbilicated papules to simple prurigo and overlooking the diagnostic transepidermal elimination on biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acquired perforating dermatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acquired_perforating_dermatosis-matrix",
+      "title": "acquired perforating dermatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Umbrella term for perforating disorders arising in adults, classically associated with chronic kidney disease and diabetes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "skin biopsy with elastic tissue and connective tissue stains to demonstrate the perforating channel and eliminated material,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "prurigo nodularis, folliculitis and acneiform eruptions, hypertrophic lichen planus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Optimise the underlying disorder - tight glycaemic control in diabetes and adequate dialysis or renal transplantation in chronic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "attributing intensely pruritic umbilicated papules to simple prurigo and overlooking the diagnostic transepidermal elimination on",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acquired perforating dermatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_perforating_dermatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with elastic and connective tissue stains",
+          "cells": [
+            {
+              "text": "Perforating channel and eliminated material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests (urea, creatinine, eGFR)",
+          "cells": [
+            {
+              "text": "Renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes mellitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for proteinuria",
+          "cells": [
+            {
+              "text": "Renal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver and thyroid function tests",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age-appropriate malignancy screening",
+          "cells": [
+            {
+              "text": "Occult neoplasm where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_perforating_dermatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tight glycaemic control; dialysis or renal transplantation",
+          "cells": [
+            {
+              "text": "Underlying disorder"
+            },
+            {
+              "text": "Diabetes and chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients, topical corticosteroids, gabapentinoids or narrowband UVB",
+          "cells": [
+            {
+              "text": "Driving pruritus"
+            },
+            {
+              "text": "Control of itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical keratolytics and retinoids",
+          "cells": [
+            {
+              "text": "Hyperkeratotic plugs"
+            },
+            {
+              "text": "Address the plugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interrupt the itch-scratch cycle",
+          "cells": [
+            {
+              "text": "Limits Koebnerisation and new lesions"
+            },
+            {
+              "text": "Stop scratching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for occult renal or metabolic disease",
+          "cells": [
+            {
+              "text": "At presentation"
+            },
+            {
+              "text": "Initial screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary dermatology and nephrology input",
+          "cells": [
+            {
+              "text": "Chronic, relapsing eruption"
+            },
+            {
+              "text": "Specialist input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_perforating_dermatosis-dx-mgmt",
+      "title": "Diagnosis and management of acquired perforating dermatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Itchy umbilicated papules with keratotic plugs in an adult with CKD or diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New eruption without known renal or metabolic disease, or systemic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Screen for occult systemic illness or malignancy; urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with elastic and connective tissue stains",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Transepidermal elimination channel shown on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Check renal function, glucose, HbA1c and urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review prurigo nodularis, folliculitis and other mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tight glycaemic control, dialysis or renal transplant as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emollients, topical steroids, gabapentinoids or narrowband UVB for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Keratolytics and retinoids for keratotic plugs; stop scratching",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and relapsing; mirrors underlying renal or metabolic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

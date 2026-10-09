@@ -1,176 +1,903 @@
 {
- "id": "rocky_mountain_spotted_fever",
- "name": "Rocky Mountain spotted fever",
- "aliases": [
-  "RMSF",
-  "Rickettsia rickettsii infection",
-  "spotted fever rickettsiosis",
-  "tick-borne typhus"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Rickettsia rickettsii and transmitted by ixodid (hard) ticks such as Dermacentor species; despite the name it is most common in the south-eastern and south-central United States rather than the Rocky Mountains",
-   "After an incubation of roughly 2-14 days patients develop fever, severe headache, myalgia and malaise, with the classic rash appearing a few days later",
-   "The rash is typically maculopapular then petechial and characteristically begins on the wrists and ankles before spreading centripetally to the trunk, often involving the palms and soles",
-   "A recalled tick bite is absent in a substantial proportion of cases, so its absence must never be used to exclude the diagnosis",
-   "Doxycycline is first-line therapy for all ages, including young children, and should be started empirically on clinical suspicion without waiting for confirmatory serology",
-   "Delay in starting effective treatment beyond about the fifth day of illness is the strongest predictor of death, making early empirical therapy critical",
-   "The core lesion is an infective vasculitis, so laboratory clues include thrombocytopenia, hyponatraemia and raised transaminases rather than a marked leucocytosis"
+  "id": "rocky_mountain_spotted_fever",
+  "name": "Rocky Mountain spotted fever",
+  "aliases": [
+    "RMSF",
+    "Rickettsia rickettsii infection",
+    "spotted fever rickettsiosis",
+    "tick-borne typhus"
   ],
-  "pathophysiology": "Rickettsia rickettsii is an obligate intracellular Gram-negative bacterium that, following inoculation by a feeding tick, invades and multiplies within vascular endothelial cells and to a lesser extent smooth muscle of small and medium vessels. Widespread infection of the endothelium produces a systemic small-vessel vasculitis with increased vascular permeability, microvascular leak, oedema, activation of coagulation and localised microthrombi. This vascular injury underlies the rash, the tissue oedema and hypovolaemia, and end-organ damage affecting the brain, lungs, kidneys and other organs, and in severe disease can progress to shock, disseminated intravascular coagulation and multi-organ failure.",
-  "additionalDifferentials": [
-   "Meningococcaemia",
-   "Other spotted fever group rickettsioses and typhus",
-   "Human monocytic ehrlichiosis or granulocytic anaplasmosis",
-   "Viral exanthems including measles and enteroviral infection",
-   "Secondary syphilis",
-   "Immune thrombocytopenia or thrombotic microangiopathy",
-   "Drug hypersensitivity reaction"
-  ],
-  "additionalInvestigations": [
-   "Indirect immunofluorescence antibody serology on paired acute and convalescent sera (the reference confirmatory test, though often negative early)",
-   "PCR of whole blood or, preferably, of a skin biopsy of the rash",
-   "Immunohistochemical staining of a skin biopsy for rickettsiae",
-   "Full blood count and film looking for thrombocytopenia",
-   "Serum sodium, renal function and liver enzymes",
-   "Coagulation studies where disseminated intravascular coagulation is suspected"
-  ],
-  "redFlags": [
-   "Altered mental state, meningism or focal neurological signs suggesting meningoencephalitis",
-   "Petechial or purpuric rash with hypotension indicating fulminant disease",
-   "Respiratory distress or non-cardiogenic pulmonary oedema",
-   "Oliguria and rising creatinine signalling acute kidney injury",
-   "Presentation after several days of untreated illness, when mortality rises sharply"
-  ],
-  "prognosis": "With prompt doxycycline most patients recover fully, but untreated or late-treated disease carries a high case-fatality rate; survivors of severe illness may be left with neurological deficits or, rarely, limb loss from vascular compromise.",
-  "pitfalls": [
-   "Withholding doxycycline in children over unfounded concerns about dental staining, when short courses are safe and life-saving",
-   "Excluding the diagnosis because there is no rash early or no recalled tick exposure",
-   "Waiting for serological confirmation before treating, since antibodies are usually undetectable in the first week",
-   "Mistaking early non-specific fever for a self-limiting viral illness and discharging without follow-up",
-   "Substituting a beta-lactam, which is ineffective against rickettsiae"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate empirical doxycycline on clinical suspicion for patients of all ages, including young children, without awaiting confirmatory serology",
-   "Avoid any delay in starting effective therapy, as early treatment is the strongest determinant of survival",
-   "Supportive care with careful intravenous fluid resuscitation for microvascular leak and hypovolaemia, avoiding fluid overload and pulmonary oedema",
-   "Monitoring and management of complications such as thrombocytopenia, disseminated intravascular coagulation, renal impairment and neurological or pulmonary involvement, with organ support in severe disease",
-   "Reserve chloramphenicol only where doxycycline is genuinely contraindicated, recognising it is less effective",
-   "Advice on tick-bite avoidance and prompt tick removal for prevention"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rocky_mountain_spotted_fever-pathway",
-   "title": "Rocky Mountain spotted fever: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Rickettsia rickettsii and transmitted by ixodid (hard) ticks such as Dermacentor species; despite the name it is most common in the south-eastern and south-central United States rather than the Rocky Mountains",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Altered mental state, meningism or focal neurological signs suggesting meningoencephalitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Indirect immunofluorescence antibody serology on paired acute and convalescent sera (the reference confirmatory test, though often negative early), PCR of whole blood or, preferably, of a skin biopsy of the rash,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate empirical doxycycline on clinical suspicion for patients of all ages, including young children, without awaiting confirmatory serology"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Withholding doxycycline in children over unfounded concerns about dental staining, when short courses are safe and life-saving"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rocky mountain spotted fever."
-  }
- ],
- "tables": [
-  {
-   "id": "rocky_mountain_spotted_fever-matrix",
-   "title": "Rocky Mountain spotted fever: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Rickettsia rickettsii and transmitted by ixodid (hard) ticks such as Dermacentor species; despite the name it is most",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Rickettsia rickettsii and transmitted by ixodid (hard) ticks such as Dermacentor species; despite the name it is most common in the south-eastern and south-central United States rather than the Rocky Mountains",
+      "After an incubation of roughly 2-14 days patients develop fever, severe headache, myalgia and malaise, with the classic rash appearing a few days later",
+      "The rash is typically maculopapular then petechial and characteristically begins on the wrists and ankles before spreading centripetally to the trunk, often involving the palms and soles",
+      "A recalled tick bite is absent in a substantial proportion of cases, so its absence must never be used to exclude the diagnosis",
+      "Doxycycline is first-line therapy for all ages, including young children, and should be started empirically on clinical suspicion without waiting for confirmatory serology",
+      "Delay in starting effective treatment beyond about the fifth day of illness is the strongest predictor of death, making early empirical therapy critical",
+      "The core lesion is an infective vasculitis, so laboratory clues include thrombocytopenia, hyponatraemia and raised transaminases rather than a marked leucocytosis"
     ],
-    [
-     "Key Investigations",
-     "Indirect immunofluorescence antibody serology on paired acute and convalescent sera (the reference confirmatory test, though",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rickettsia rickettsii is an obligate intracellular Gram-negative bacterium that, following inoculation by a feeding tick, invades and multiplies within vascular endothelial cells and to a lesser extent smooth muscle of small and medium vessels. Widespread infection of the endothelium produces a systemic small-vessel vasculitis with increased vascular permeability, microvascular leak, oedema, activation of coagulation and localised microthrombi. This vascular injury underlies the rash, the tissue oedema and hypovolaemia, and end-organ damage affecting the brain, lungs, kidneys and other organs, and in severe disease can progress to shock, disseminated intravascular coagulation and multi-organ failure.",
+    "additionalDifferentials": [
+      "Meningococcaemia",
+      "Other spotted fever group rickettsioses and typhus",
+      "Human monocytic ehrlichiosis or granulocytic anaplasmosis",
+      "Viral exanthems including measles and enteroviral infection",
+      "Secondary syphilis",
+      "Immune thrombocytopenia or thrombotic microangiopathy",
+      "Drug hypersensitivity reaction"
     ],
-    [
-     "Primary Differentials",
-     "Meningococcaemia, Other spotted fever group rickettsioses and typhus, Human monocytic ehrlichiosis or granulocytic anaplasmosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Indirect immunofluorescence antibody serology on paired acute and convalescent sera (the reference confirmatory test, though often negative early)",
+      "PCR of whole blood or, preferably, of a skin biopsy of the rash",
+      "Immunohistochemical staining of a skin biopsy for rickettsiae",
+      "Full blood count and film looking for thrombocytopenia",
+      "Serum sodium, renal function and liver enzymes",
+      "Coagulation studies where disseminated intravascular coagulation is suspected"
     ],
-    [
-     "Management Strategy",
-     "Immediate empirical doxycycline on clinical suspicion for patients of all ages, including young children, without awaiting",
-     "Core treatment modality"
+    "redFlags": [
+      "Altered mental state, meningism or focal neurological signs suggesting meningoencephalitis",
+      "Petechial or purpuric rash with hypotension indicating fulminant disease",
+      "Respiratory distress or non-cardiogenic pulmonary oedema",
+      "Oliguria and rising creatinine signalling acute kidney injury",
+      "Presentation after several days of untreated illness, when mortality rises sharply"
     ],
-    [
-     "Clinical Pitfall",
-     "Withholding doxycycline in children over unfounded concerns about dental staining, when short courses are safe and life-saving",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt doxycycline most patients recover fully, but untreated or late-treated disease carries a high case-fatality rate; survivors of severe illness may be left with neurological deficits or, rarely, limb loss from vascular compromise.",
+    "pitfalls": [
+      "Withholding doxycycline in children over unfounded concerns about dental staining, when short courses are safe and life-saving",
+      "Excluding the diagnosis because there is no rash early or no recalled tick exposure",
+      "Waiting for serological confirmation before treating, since antibodies are usually undetectable in the first week",
+      "Mistaking early non-specific fever for a self-limiting viral illness and discharging without follow-up",
+      "Substituting a beta-lactam, which is ineffective against rickettsiae"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate empirical doxycycline on clinical suspicion for patients of all ages, including young children, without awaiting confirmatory serology",
+      "Avoid any delay in starting effective therapy, as early treatment is the strongest determinant of survival",
+      "Supportive care with careful intravenous fluid resuscitation for microvascular leak and hypovolaemia, avoiding fluid overload and pulmonary oedema",
+      "Monitoring and management of complications such as thrombocytopenia, disseminated intravascular coagulation, renal impairment and neurological or pulmonary involvement, with organ support in severe disease",
+      "Reserve chloramphenicol only where doxycycline is genuinely contraindicated, recognising it is less effective",
+      "Advice on tick-bite avoidance and prompt tick removal for prevention"
     ]
-   ],
-   "caption": "Overview comparison matrix for rocky mountain spotted fever."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rocky-mountain-spotted-fever-real-image",
-   "title": "Rocky Mountain spotted fever: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "rocky_mountain_spotted_fever-pathway",
+      "title": "Rocky Mountain spotted fever: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Rickettsia rickettsii and transmitted by ixodid (hard) ticks such as Dermacentor species; despite the name it is most common in the south-eastern and south-central United States rather than the Rocky Mountains",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Altered mental state, meningism or focal neurological signs suggesting meningoencephalitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Indirect immunofluorescence antibody serology on paired acute and convalescent sera (the reference confirmatory test, though often negative early), PCR of whole blood or, preferably, of a skin biopsy of the rash,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate empirical doxycycline on clinical suspicion for patients of all ages, including young children, without awaiting confirmatory serology"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Withholding doxycycline in children over unfounded concerns about dental staining, when short courses are safe and life-saving"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rocky mountain spotted fever."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rocky_mountain_spotted_fever-matrix",
+      "title": "Rocky Mountain spotted fever: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Rickettsia rickettsii and transmitted by ixodid (hard) ticks such as Dermacentor species; despite the name it is most",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Indirect immunofluorescence antibody serology on paired acute and convalescent sera (the reference confirmatory test, though",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Meningococcaemia, Other spotted fever group rickettsioses and typhus, Human monocytic ehrlichiosis or granulocytic anaplasmosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate empirical doxycycline on clinical suspicion for patients of all ages, including young children, without awaiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Withholding doxycycline in children over unfounded concerns about dental staining, when short courses are safe and life-saving",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rocky mountain spotted fever."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 174-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 143-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rocky_mountain_spotted_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired acute and convalescent IFA serology",
+          "cells": [
+            {
+              "text": "Reference confirmatory test; often negative early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of whole blood or skin biopsy of the rash",
+          "cells": [
+            {
+              "text": "Rickettsial DNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry of skin biopsy",
+          "cells": [
+            {
+              "text": "Rickettsiae in tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rocky_mountain_spotted_fever-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other spotted fever group rickettsioses and typhus",
+          "cells": [
+            {
+              "text": "Shared serological cross-reaction; doxycycline is started on suspicion regardless"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral exanthems including measles",
+          "cells": [
+            {
+              "text": "Fulminant disease is marked by a petechial or purpuric rash with hypotension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rocky_mountain_spotted_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical doxycycline",
+          "cells": [
+            {
+              "text": "Immediately on clinical suspicion for all ages, including young children, without awaiting serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timing",
+          "cells": [
+            {
+              "text": "Avoid delay; early treatment is the strongest determinant of survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Careful IV fluids for microvascular leak and hypovolaemia, avoiding overload and pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rocky_mountain_spotted_fever-ddx-2",
+      "kind": "ddx",
+      "title": "Features of selected rickettsial infections",
+      "rowHeader": "Disease",
+      "columns": [
+        "Organism",
+        "Transmission",
+        "Geographic range",
+        "Incubation period, days",
+        "Duration, days",
+        "Rash, %",
+        "Eschar, %",
+        "Lymphadenopathy"
+      ],
+      "rows": [
+        {
+          "parameter": "Rocky Mountain spotted fever",
+          "cells": [
+            {
+              "text": "Rickettsia rickettsii"
+            },
+            {
+              "text": "Tick bite: Dermacentor andersoni, D. variabilis (United States); Amblyomma cajennense, A. aureolatum (Central/South America); Rhipicephalus sanguineus (Mexico, Brazil, United States)"
+            },
+            {
+              "text": "Not separately listed in the source row"
+            },
+            {
+              "text": "2 to 14"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "<1"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mediterranean spotted fever",
+          "cells": [
+            {
+              "text": "R. conorii"
+            },
+            {
+              "text": "Tick bite: R. sanguineus, R. pumilio"
+            },
+            {
+              "text": "Southern Europe, Africa, Middle East, Central Asia"
+            },
+            {
+              "text": "5 to 7"
+            },
+            {
+              "text": "7 to 14"
+            },
+            {
+              "text": "97"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "African tick-bite fever",
+          "cells": [
+            {
+              "text": "R. africae"
+            },
+            {
+              "text": "Tick bite: A. hebraeum, A. variegatum"
+            },
+            {
+              "text": "Sub-Saharan Africa, West Indies"
+            },
+            {
+              "text": "4 to 10"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maculatum disease",
+          "cells": [
+            {
+              "text": "R. parkeri"
+            },
+            {
+              "text": "A. maculatum"
+            },
+            {
+              "text": "United States, South America"
+            },
+            {
+              "text": "2 to 10"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "88"
+            },
+            {
+              "text": "94"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rickettsialpox",
+          "cells": [
+            {
+              "text": "R. akari"
+            },
+            {
+              "text": "Mite bite: Liponyssoides sanguineus"
+            },
+            {
+              "text": "United States, Ukraine, Turkey, Mexico, Croatia"
+            },
+            {
+              "text": "10 to 17"
+            },
+            {
+              "text": "3 to 11"
+            },
+            {
+              "text": "100"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tick-borne lymphadenopathy",
+          "cells": [
+            {
+              "text": "R. slovaca"
+            },
+            {
+              "text": "Tick bite: Dermacentor marginatus, D. reticularis"
+            },
+            {
+              "text": "Europe"
+            },
+            {
+              "text": "7 to 9"
+            },
+            {
+              "text": "17 to 180"
+            },
+            {
+              "text": "5"
+            },
+            {
+              "text": "100"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Flea-borne spotted fever",
+          "cells": [
+            {
+              "text": "R. felis"
+            },
+            {
+              "text": "Flea (mechanism undetermined): Ctenocephalides felis"
+            },
+            {
+              "text": "Worldwide"
+            },
+            {
+              "text": "8 to 16"
+            },
+            {
+              "text": "8 to 16"
+            },
+            {
+              "text": "80"
+            },
+            {
+              "text": "15"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epidemic typhus",
+          "cells": [
+            {
+              "text": "R. prowazekii"
+            },
+            {
+              "text": "Louse feces: Pediculus humanus corporis, fleas and lice of flying squirrels, or recrudescence"
+            },
+            {
+              "text": "Worldwide"
+            },
+            {
+              "text": "7 to 14"
+            },
+            {
+              "text": "10 to 18"
+            },
+            {
+              "text": "80"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Murine typhus",
+          "cells": [
+            {
+              "text": "R. typhi"
+            },
+            {
+              "text": "Flea feces: Xenopsylla cheopis, C. felis, others"
+            },
+            {
+              "text": "Worldwide"
+            },
+            {
+              "text": "8 to 16"
+            },
+            {
+              "text": "9 to 18"
+            },
+            {
+              "text": "80"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Human monocytotropic ehrlichiosis",
+          "cells": [
+            {
+              "text": "Ehrlichia chaffeensis"
+            },
+            {
+              "text": "Tick bite: Amblyomma americanum, D. variabilis"
+            },
+            {
+              "text": "United States"
+            },
+            {
+              "text": "1 to 21"
+            },
+            {
+              "text": "3 to 21"
+            },
+            {
+              "text": "26"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ewingii ehrlichiosis",
+          "cells": [
+            {
+              "text": "E. ewingii"
+            },
+            {
+              "text": "Tick bite: A. americanum"
+            },
+            {
+              "text": "United States"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "Not stated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Human granulocytotropic anaplasmosis",
+          "cells": [
+            {
+              "text": "Anaplasma phagocytophilum"
+            },
+            {
+              "text": "Tick bite: Ixodes scapularis, I. ricinus, I. pacificus, I. persulcatus"
+            },
+            {
+              "text": "United States, Europe, Asia"
+            },
+            {
+              "text": "4 to 8"
+            },
+            {
+              "text": "3 to 14"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Scrub typhus",
+          "cells": [
+            {
+              "text": "Orientia tsutsugamushi"
+            },
+            {
+              "text": "Mite bite: Leptotrombidium deliense, others"
+            },
+            {
+              "text": "Asia, Australia, New Guinea, Pacific Islands"
+            },
+            {
+              "text": "9 to 18"
+            },
+            {
+              "text": "6 to 21"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "35"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Q fever",
+          "cells": [
+            {
+              "text": "Coxiella burnetii"
+            },
+            {
+              "text": "Inhalation of aerosols of infected parturition material (sheep, dogs, others), ingestion of infected milk or other routes (rest of cell cut off in source)"
+            },
+            {
+              "text": "Worldwide"
+            },
+            {
+              "text": "3 to 30"
+            },
+            {
+              "text": "5 to 57"
+            },
+            {
+              "text": "<1"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "For Rocky Mountain spotted fever the geographic range appears merged into the transmission cell in the source (the geographic cell is blank). Source footnote (a) on lymphadenopathy is cut off at the page edge."
+    },
+    {
+      "id": "rocky_mountain_spotted_fever-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common causes of petechial or purpuric rashes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral infections",
+          "cells": [
+            {
+              "text": "Enteroviruses; influenza and other respiratory viruses; measles virus; Epstein-Barr virus; cytomegalovirus; parvovirus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Coagulation",
+          "cells": [
+            {
+              "text": "Deficiency of protein C or S (including postvaricella protein S deficiency)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Platelet disorders",
+          "cells": [
+            {
+              "text": "Idiopathic thrombocytopenic purpura, drug effects, bone marrow infiltration"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other noninfective",
+          "cells": [
+            {
+              "text": "Henoch-Schonlein purpura; connective tissue disorders; trauma (including nonaccidental injury in children)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial sepsis",
+          "cells": [
+            {
+              "text": "Pneumococcal, streptococcal, staphylococcal, or gram-negative bacterial sepsis"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rocky_mountain_spotted_fever-dx-mgmt",
+      "title": "Diagnosis and management of Rocky Mountain spotted fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Febrile illness with headache and rash, suspected spotted fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (meningoencephalitis, shock, respiratory distress, oliguria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intensive care for shock, pulmonary oedema or acute kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired IFA serology, PCR or skin biopsy, FBC with platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is rickettsial infection confirmed by serology, PCR or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider meningococcaemia, other rickettsioses or viral exanthems; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate empirical doxycycline for all ages, without awaiting serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid delay; early treatment is the strongest determinant of survival",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Careful IV fluids for microvascular leak; avoid overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Early treatment is the strongest determinant of survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

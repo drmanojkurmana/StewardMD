@@ -1,173 +1,451 @@
 {
- "id": "morvan_syndrome",
- "name": "Morvan syndrome",
- "aliases": [
-  "Morvan's fibrillary chorea",
-  "CASPR2 antibody syndrome",
-  "contactin-associated protein-like 2 antibody disease",
-  "peripheral nerve hyperexcitability with encephalopathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Cerebrovascular",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / peer-reviewed autoimmune neurology literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classic triad combines peripheral nerve hyperexcitability (neuromyotonia), dysautonomia, and an encephalopathy with severe insomnia",
-   "Muscle twitching, cramps, and undulating myokymia reflect continuous motor unit activity often visible as rippling movements",
-   "Profound agrypnia (near-total loss of sleep) with confusion, hallucinations, and fluctuating consciousness is a hallmark feature",
-   "Autonomic disturbance manifests as hyperhidrosis, tachycardia, labile blood pressure, and constipation",
-   "Antibodies target the voltage-gated potassium channel complex, chiefly CASPR2 and sometimes contactin-2 or LGI1",
-   "A significant proportion have an underlying thymoma or other malignancy, so tumour screening is essential",
-   "Immunotherapy for autoimmune encephalitis and treatment of any associated tumour usually improve symptoms"
+  "id": "morvan_syndrome",
+  "name": "Morvan syndrome",
+  "aliases": [
+    "Morvan's fibrillary chorea",
+    "CASPR2 antibody syndrome",
+    "contactin-associated protein-like 2 antibody disease",
+    "peripheral nerve hyperexcitability with encephalopathy"
   ],
-  "pathophysiology": "Morvan syndrome is an autoimmune disorder in which antibodies against the voltage-gated potassium channel complex, most often the CASPR2 protein, disrupt neuronal excitability. CASPR2 is expressed at juxtaparanodal regions of peripheral nerves and within limbic and thalamic circuits, so loss of its function produces both continuous peripheral motor nerve firing and central nervous system dysfunction. The result is peripheral nerve hyperexcitability with neuromyotonia, autonomic overactivity, and an encephalopathy dominated by intractable insomnia and fluctuating cognition. A subset is paraneoplastic, driven by thymoma, which sustains the aberrant immune response.",
-  "additionalDifferentials": [
-   "Isaacs syndrome (acquired neuromyotonia without prominent encephalopathy)",
-   "Limbic encephalitis from LGI1 or other autoimmune causes",
-   "Fatal familial insomnia and other prion disorders",
-   "Serotonin syndrome or neuroleptic malignant syndrome",
-   "Thyrotoxicosis with tremor and autonomic overdrive",
-   "Delirium from toxic, metabolic, or withdrawal states"
-  ],
-  "additionalInvestigations": [
-   "Serum and CSF testing for CASPR2 and associated VGKC-complex antibodies",
-   "Nerve conduction studies and electromyography showing fasciculations, myokymic and neuromyotonic discharges",
-   "Cross-sectional chest imaging to detect thymoma and wider malignancy screening",
-   "Brain MRI to assess for limbic or thalamic signal change",
-   "Autonomic function testing and polysomnography to characterise dysautonomia and sleep loss"
-  ],
-  "redFlags": [
-   "Severe agrypnia with agitation, hallucinations, and cardiovascular instability",
-   "Autonomic crisis with malignant arrhythmia or extreme blood pressure swings",
-   "Rapidly progressive encephalopathy suggesting a paraneoplastic driver",
-   "Discovery of an underlying thymoma or occult malignancy"
-  ],
-  "prognosis": "With immunotherapy and removal of any associated tumour many patients improve substantially, but relapses occur and paraneoplastic cases carry the prognosis of the underlying malignancy. Autonomic instability can be life-threatening during the acute phase.",
-  "pitfalls": [
-   "Attributing the insomnia and confusion to a primary psychiatric disorder and delaying immunotherapy",
-   "Failing to screen for thymoma once the antibody syndrome is recognised",
-   "Overlooking subtle neuromyotonia because myokymia is mistaken for benign fasciculation",
-   "Not monitoring for autonomic and cardiac complications during acute illness"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immunotherapy is the mainstay: corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove the pathogenic CASPR2/VGKC-complex antibodies",
-   "Escalate to second-line immunosuppression such as rituximab or cyclophosphamide in refractory or relapsing disease",
-   "Screen for and resect an underlying thymoma, as thymectomy is essential in paraneoplastic cases and can drive remission",
-   "Relieve neuromyotonia symptomatically with membrane-stabilising sodium-channel blockers such as carbamazepine or phenytoin",
-   "Manage autonomic instability and profound insomnia in a high-dependency setting, as labile blood pressure and cardiac dysrhythmia can be life-threatening",
-   "Monitor for relapse and continue malignancy surveillance after treatment",
-   "Coordinate multidisciplinary care across neurology, oncology and autonomic and sleep specialists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "morvan_syndrome-pathway",
-   "title": "Morvan syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic triad combines peripheral nerve hyperexcitability (neuromyotonia), dysautonomia, and an encephalopathy with severe insomnia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe agrypnia with agitation, hallucinations, and cardiovascular instability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and CSF testing for CASPR2 and associated VGKC-complex antibodies, Nerve conduction studies and electromyography showing fasciculations, myokymic and neuromyotonic discharges, Cross-sectional chest imaging to detect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immunotherapy is the mainstay: corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove the pathogenic CASPR2/VGKC-complex antibodies"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the insomnia and confusion to a primary psychiatric disorder and delaying immunotherapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of morvan syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "morvan_syndrome-matrix",
-   "title": "Morvan syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic triad combines peripheral nerve hyperexcitability (neuromyotonia), dysautonomia, and an encephalopathy with severe",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Cerebrovascular",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / peer-reviewed autoimmune neurology literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classic triad combines peripheral nerve hyperexcitability (neuromyotonia), dysautonomia, and an encephalopathy with severe insomnia",
+      "Muscle twitching, cramps, and undulating myokymia reflect continuous motor unit activity often visible as rippling movements",
+      "Profound agrypnia (near-total loss of sleep) with confusion, hallucinations, and fluctuating consciousness is a hallmark feature",
+      "Autonomic disturbance manifests as hyperhidrosis, tachycardia, labile blood pressure, and constipation",
+      "Antibodies target the voltage-gated potassium channel complex, chiefly CASPR2 and sometimes contactin-2 or LGI1",
+      "A significant proportion have an underlying thymoma or other malignancy, so tumour screening is essential",
+      "Immunotherapy for autoimmune encephalitis and treatment of any associated tumour usually improve symptoms"
     ],
-    [
-     "Key Investigations",
-     "Serum and CSF testing for CASPR2 and associated VGKC-complex antibodies, Nerve conduction studies and electromyography showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Morvan syndrome is an autoimmune disorder in which antibodies against the voltage-gated potassium channel complex, most often the CASPR2 protein, disrupt neuronal excitability. CASPR2 is expressed at juxtaparanodal regions of peripheral nerves and within limbic and thalamic circuits, so loss of its function produces both continuous peripheral motor nerve firing and central nervous system dysfunction. The result is peripheral nerve hyperexcitability with neuromyotonia, autonomic overactivity, and an encephalopathy dominated by intractable insomnia and fluctuating cognition. A subset is paraneoplastic, driven by thymoma, which sustains the aberrant immune response.",
+    "additionalDifferentials": [
+      "Isaacs syndrome (acquired neuromyotonia without prominent encephalopathy)",
+      "Limbic encephalitis from LGI1 or other autoimmune causes",
+      "Fatal familial insomnia and other prion disorders",
+      "Serotonin syndrome or neuroleptic malignant syndrome",
+      "Thyrotoxicosis with tremor and autonomic overdrive",
+      "Delirium from toxic, metabolic, or withdrawal states"
     ],
-    [
-     "Primary Differentials",
-     "Isaacs syndrome (acquired neuromyotonia without prominent encephalopathy), Limbic encephalitis from LGI1 or other autoimmune",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and CSF testing for CASPR2 and associated VGKC-complex antibodies",
+      "Nerve conduction studies and electromyography showing fasciculations, myokymic and neuromyotonic discharges",
+      "Cross-sectional chest imaging to detect thymoma and wider malignancy screening",
+      "Brain MRI to assess for limbic or thalamic signal change",
+      "Autonomic function testing and polysomnography to characterise dysautonomia and sleep loss"
     ],
-    [
-     "Management Strategy",
-     "Immunotherapy is the mainstay: corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove the",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe agrypnia with agitation, hallucinations, and cardiovascular instability",
+      "Autonomic crisis with malignant arrhythmia or extreme blood pressure swings",
+      "Rapidly progressive encephalopathy suggesting a paraneoplastic driver",
+      "Discovery of an underlying thymoma or occult malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the insomnia and confusion to a primary psychiatric disorder and delaying immunotherapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "With immunotherapy and removal of any associated tumour many patients improve substantially, but relapses occur and paraneoplastic cases carry the prognosis of the underlying malignancy. Autonomic instability can be life-threatening during the acute phase.",
+    "pitfalls": [
+      "Attributing the insomnia and confusion to a primary psychiatric disorder and delaying immunotherapy",
+      "Failing to screen for thymoma once the antibody syndrome is recognised",
+      "Overlooking subtle neuromyotonia because myokymia is mistaken for benign fasciculation",
+      "Not monitoring for autonomic and cardiac complications during acute illness"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immunotherapy is the mainstay: corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove the pathogenic CASPR2/VGKC-complex antibodies",
+      "Escalate to second-line immunosuppression such as rituximab or cyclophosphamide in refractory or relapsing disease",
+      "Screen for and resect an underlying thymoma, as thymectomy is essential in paraneoplastic cases and can drive remission",
+      "Relieve neuromyotonia symptomatically with membrane-stabilising sodium-channel blockers such as carbamazepine or phenytoin",
+      "Manage autonomic instability and profound insomnia in a high-dependency setting, as labile blood pressure and cardiac dysrhythmia can be life-threatening",
+      "Monitor for relapse and continue malignancy surveillance after treatment",
+      "Coordinate multidisciplinary care across neurology, oncology and autonomic and sleep specialists"
     ]
-   ],
-   "caption": "Overview comparison matrix for morvan syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "morvan-syndrome-real-image",
-   "title": "Morvan syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "morvan_syndrome-pathway",
+      "title": "Morvan syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic triad combines peripheral nerve hyperexcitability (neuromyotonia), dysautonomia, and an encephalopathy with severe insomnia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe agrypnia with agitation, hallucinations, and cardiovascular instability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and CSF testing for CASPR2 and associated VGKC-complex antibodies, Nerve conduction studies and electromyography showing fasciculations, myokymic and neuromyotonic discharges, Cross-sectional chest imaging to detect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immunotherapy is the mainstay: corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove the pathogenic CASPR2/VGKC-complex antibodies"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the insomnia and confusion to a primary psychiatric disorder and delaying immunotherapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of morvan syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "morvan_syndrome-matrix",
+      "title": "Morvan syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic triad combines peripheral nerve hyperexcitability (neuromyotonia), dysautonomia, and an encephalopathy with severe",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and CSF testing for CASPR2 and associated VGKC-complex antibodies, Nerve conduction studies and electromyography showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isaacs syndrome (acquired neuromyotonia without prominent encephalopathy), Limbic encephalitis from LGI1 or other autoimmune",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immunotherapy is the mainstay: corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the insomnia and confusion to a primary psychiatric disorder and delaying immunotherapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for morvan syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / peer-reviewed autoimmune neurology literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "morvan_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF CASPR2 and VGKC-complex antibodies",
+          "cells": [
+            {
+              "text": "Defines the antibody syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NCS and EMG",
+          "cells": [
+            {
+              "text": "Fasciculations, myokymic and neuromyotonic discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and malignancy screen",
+          "cells": [
+            {
+              "text": "Detects thymoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Limbic or thalamic signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic testing and polysomnography",
+          "cells": [
+            {
+              "text": "Dysautonomia and sleep loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morvan_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isaacs syndrome",
+          "cells": [
+            {
+              "text": "Acquired neuromyotonia without prominent encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limbic encephalitis (LGI1 or other)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatal familial insomnia and prion disorders",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morvan_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids with IVIG or plasma exchange",
+          "cells": [
+            {
+              "text": "Immunotherapy mainstay to remove the pathogenic antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab or cyclophosphamide",
+          "cells": [
+            {
+              "text": "Refractory or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thymoma screening and resection",
+          "cells": [
+            {
+              "text": "Thymectomy essential in paraneoplastic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Carbamazepine or phenytoin for neuromyotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dependency care",
+          "cells": [
+            {
+              "text": "Labile blood pressure, dysrhythmia and profound insomnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse and malignancy surveillance",
+          "cells": [
+            {
+              "text": "Continue after treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "morvan_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Morvan syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Insomnia, confusion and hallucinations with fasciculations and neuromyotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Agrypnia with agitation, autonomic crisis or paraneoplastic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "High-dependency care with early immunotherapy and cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CASPR2 antibodies, EMG, chest imaging for thymoma, brain MRI, polysomnography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CASPR2 positive with neuromyotonia and encephalopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Isaacs syndrome, LGI1 encephalitis, prion disease, delirium",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Steroids with IVIG or plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rituximab or cyclophosphamide if refractory or relapsing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for and resect thymoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Carbamazepine or phenytoin for neuromyotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many improve with immunotherapy and tumour removal; relapses occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

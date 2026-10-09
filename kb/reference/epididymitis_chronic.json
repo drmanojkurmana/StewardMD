@@ -1,176 +1,483 @@
 {
- "id": "epididymitis_chronic",
- "name": "Chronic epididymitis",
- "aliases": [
-  "chronic epididymitis",
-  "chronic epididymal pain",
-  "chronic epididymo-orchialgia"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Andrology / Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Chronic epididymitis is persistent discomfort or pain localised to the epididymis, conventionally present for three months or more, often with a palpably firm or thickened epididymis",
-   "It is frequently non-infective and inflammatory or of uncertain cause, in contrast to acute epididymitis which is usually driven by sexually transmitted or urinary organisms",
-   "The pain may be constant or intermittent, is often dull and aching, and can radiate to the groin, lower abdomen, or perineum",
-   "Careful examination localises tenderness to the epididymis and helps exclude a testicular mass, and scrotal ultrasound supports assessment",
-   "A history of previous acute epididymitis, scrotal surgery, or vasectomy is common and may point to a post-inflammatory or obstructive congestive mechanism",
-   "Management is largely conservative and symptomatic, with reassurance, supportive measures, analgesia, and anti-inflammatory strategies rather than repeated courses of antibiotics",
-   "Antibiotics are appropriate only when active infection is demonstrated, and their reflexive prolonged use should be avoided",
-   "Refractory cases require careful multidisciplinary pain management, and surgery such as epididymectomy is a last resort with counselling about uncertain benefit"
+  "id": "epididymitis_chronic",
+  "name": "Chronic epididymitis",
+  "aliases": [
+    "chronic epididymitis",
+    "chronic epididymal pain",
+    "chronic epididymo-orchialgia"
   ],
-  "pathophysiology": "Chronic epididymitis denotes long-standing epididymal pain that in most cases is not due to ongoing infection. It may follow an episode of acute epididymitis, with residual inflammation, fibrosis, and scarring of the epididymal tubules, or arise from congestion and obstruction, as can occur after vasectomy. In many men no infective or structural cause is identified and the condition is best understood as a chronic inflammatory or neuropathic pain state involving sensitisation of scrotal afferent nerves. Coexisting or overlapping chronic pelvic pain and referred pain from the lower urinary or musculoskeletal structures frequently contribute. The distinction from acute infective epididymitis is important because it changes management away from antimicrobial therapy towards a chronic-pain approach.",
-  "additionalDifferentials": [
-   "Chronic orchialgia and idiopathic chronic scrotal pain",
-   "Recurrent acute infective epididymitis",
-   "Spermatocele or epididymal cyst",
-   "Testicular tumour",
-   "Varicocele",
-   "Referred pain from ureteric calculus, inguinal hernia, or nerve entrapment",
-   "Post-vasectomy pain syndrome"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination to localise tenderness and exclude a testicular mass",
-   "Scrotal ultrasound to assess the epididymis and testis and detect cysts, varicocele, or tumour",
-   "Urine analysis and culture to identify or exclude urinary infection",
-   "Sexually transmitted infection screening where risk factors or urethral symptoms are present",
-   "Assessment for referred causes including abdominal, inguinal, and musculoskeletal examination",
-   "Review of previous scrotal surgery or vasectomy contributing to symptoms"
-  ],
-  "redFlags": [
-   "A discrete or hard testicular mass on examination or ultrasound requiring tumour exclusion",
-   "Acute severe pain with swelling suggesting torsion or superimposed acute infection",
-   "Systemic features of infection such as fever and rigors",
-   "Progressive or unexplained scrotal swelling"
-  ],
-  "prognosis": "The condition is benign but can be persistent and frustrating, with symptoms often waxing and waning; many men improve with conservative measures and time, though a subset have long-lasting pain that is difficult to abolish and requires ongoing pain-focused management.",
-  "pitfalls": [
-   "Repeatedly prescribing antibiotics in the absence of proven infection",
-   "Overlooking a testicular tumour presenting as chronic scrotal discomfort",
-   "Failing to consider referred pain from the ureter, hernia, or entrapped nerves",
-   "Proceeding to surgery without realistic counselling about uncertain outcomes",
-   "Neglecting the psychological impact and the value of a chronic-pain approach"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "European Association of Urology guidelines on chronic pelvic pain",
-   "British Association of Urological Surgeons guidance on scrotal pain"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Shift management away from repeated antibiotic courses, reserving antimicrobials only for microbiologically proven infection",
-   "Provide conservative symptomatic care with reassurance, scrotal support, local heat and activity modification",
-   "Treat pain with anti-inflammatory analgesia and, where a neuropathic component is evident, neuromodulatory agents such as amitriptyline or a gabapentinoid",
-   "Address contributing factors including post-vasectomy congestion, referred abdominal or musculoskeletal pain and overlapping chronic pelvic pain syndrome, with pelvic-floor physiotherapy",
-   "Consider spermatic cord nerve block for refractory pain, and epididymectomy only as a last resort after careful counselling",
-   "Refer to a chronic pain pathway or specialist andrology service and offer psychological support for persistent symptoms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "epididymitis_chronic-pathway",
-   "title": "Chronic epididymitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Chronic epididymitis is persistent discomfort or pain localised to the epididymis, conventionally present for three months or more, often with a palpably firm or thickened epididymis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A discrete or hard testicular mass on examination or ultrasound requiring tumour exclusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination to localise tenderness and exclude a testicular mass, Scrotal ultrasound to assess the epididymis and testis and detect cysts, varicocele, or tumour, Urine analysis and culture to identify or exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Shift management away from repeated antibiotic courses, reserving antimicrobials only for microbiologically proven infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeatedly prescribing antibiotics in the absence of proven infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic epididymitis."
-  }
- ],
- "tables": [
-  {
-   "id": "epididymitis_chronic-matrix",
-   "title": "Chronic epididymitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Chronic epididymitis is persistent discomfort or pain localised to the epididymis, conventionally present for three months or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Andrology / Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Chronic epididymitis is persistent discomfort or pain localised to the epididymis, conventionally present for three months or more, often with a palpably firm or thickened epididymis",
+      "It is frequently non-infective and inflammatory or of uncertain cause, in contrast to acute epididymitis which is usually driven by sexually transmitted or urinary organisms",
+      "The pain may be constant or intermittent, is often dull and aching, and can radiate to the groin, lower abdomen, or perineum",
+      "Careful examination localises tenderness to the epididymis and helps exclude a testicular mass, and scrotal ultrasound supports assessment",
+      "A history of previous acute epididymitis, scrotal surgery, or vasectomy is common and may point to a post-inflammatory or obstructive congestive mechanism",
+      "Management is largely conservative and symptomatic, with reassurance, supportive measures, analgesia, and anti-inflammatory strategies rather than repeated courses of antibiotics",
+      "Antibiotics are appropriate only when active infection is demonstrated, and their reflexive prolonged use should be avoided",
+      "Refractory cases require careful multidisciplinary pain management, and surgery such as epididymectomy is a last resort with counselling about uncertain benefit"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination to localise tenderness and exclude a testicular mass, Scrotal ultrasound to assess the epididymis and testis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic epididymitis denotes long-standing epididymal pain that in most cases is not due to ongoing infection. It may follow an episode of acute epididymitis, with residual inflammation, fibrosis, and scarring of the epididymal tubules, or arise from congestion and obstruction, as can occur after vasectomy. In many men no infective or structural cause is identified and the condition is best understood as a chronic inflammatory or neuropathic pain state involving sensitisation of scrotal afferent nerves. Coexisting or overlapping chronic pelvic pain and referred pain from the lower urinary or musculoskeletal structures frequently contribute. The distinction from acute infective epididymitis is important because it changes management away from antimicrobial therapy towards a chronic-pain approach.",
+    "additionalDifferentials": [
+      "Chronic orchialgia and idiopathic chronic scrotal pain",
+      "Recurrent acute infective epididymitis",
+      "Spermatocele or epididymal cyst",
+      "Testicular tumour",
+      "Varicocele",
+      "Referred pain from ureteric calculus, inguinal hernia, or nerve entrapment",
+      "Post-vasectomy pain syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Chronic orchialgia and idiopathic chronic scrotal pain, Recurrent acute infective epididymitis, Spermatocele or epididymal cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination to localise tenderness and exclude a testicular mass",
+      "Scrotal ultrasound to assess the epididymis and testis and detect cysts, varicocele, or tumour",
+      "Urine analysis and culture to identify or exclude urinary infection",
+      "Sexually transmitted infection screening where risk factors or urethral symptoms are present",
+      "Assessment for referred causes including abdominal, inguinal, and musculoskeletal examination",
+      "Review of previous scrotal surgery or vasectomy contributing to symptoms"
     ],
-    [
-     "Management Strategy",
-     "Shift management away from repeated antibiotic courses, reserving antimicrobials only for microbiologically proven infection",
-     "Core treatment modality"
+    "redFlags": [
+      "A discrete or hard testicular mass on examination or ultrasound requiring tumour exclusion",
+      "Acute severe pain with swelling suggesting torsion or superimposed acute infection",
+      "Systemic features of infection such as fever and rigors",
+      "Progressive or unexplained scrotal swelling"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeatedly prescribing antibiotics in the absence of proven infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign but can be persistent and frustrating, with symptoms often waxing and waning; many men improve with conservative measures and time, though a subset have long-lasting pain that is difficult to abolish and requires ongoing pain-focused management.",
+    "pitfalls": [
+      "Repeatedly prescribing antibiotics in the absence of proven infection",
+      "Overlooking a testicular tumour presenting as chronic scrotal discomfort",
+      "Failing to consider referred pain from the ureter, hernia, or entrapped nerves",
+      "Proceeding to surgery without realistic counselling about uncertain outcomes",
+      "Neglecting the psychological impact and the value of a chronic-pain approach"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "European Association of Urology guidelines on chronic pelvic pain",
+      "British Association of Urological Surgeons guidance on scrotal pain"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Shift management away from repeated antibiotic courses, reserving antimicrobials only for microbiologically proven infection",
+      "Provide conservative symptomatic care with reassurance, scrotal support, local heat and activity modification",
+      "Treat pain with anti-inflammatory analgesia and, where a neuropathic component is evident, neuromodulatory agents such as amitriptyline or a gabapentinoid",
+      "Address contributing factors including post-vasectomy congestion, referred abdominal or musculoskeletal pain and overlapping chronic pelvic pain syndrome, with pelvic-floor physiotherapy",
+      "Consider spermatic cord nerve block for refractory pain, and epididymectomy only as a last resort after careful counselling",
+      "Refer to a chronic pain pathway or specialist andrology service and offer psychological support for persistent symptoms"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic epididymitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "epididymitis-chronic-real-image",
-   "title": "Chronic epididymitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "epididymitis_chronic-pathway",
+      "title": "Chronic epididymitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Chronic epididymitis is persistent discomfort or pain localised to the epididymis, conventionally present for three months or more, often with a palpably firm or thickened epididymis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A discrete or hard testicular mass on examination or ultrasound requiring tumour exclusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination to localise tenderness and exclude a testicular mass, Scrotal ultrasound to assess the epididymis and testis and detect cysts, varicocele, or tumour, Urine analysis and culture to identify or exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Shift management away from repeated antibiotic courses, reserving antimicrobials only for microbiologically proven infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeatedly prescribing antibiotics in the absence of proven infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic epididymitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "epididymitis_chronic-matrix",
+      "title": "Chronic epididymitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chronic epididymitis is persistent discomfort or pain localised to the epididymis, conventionally present for three months or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination to localise tenderness and exclude a testicular mass, Scrotal ultrasound to assess the epididymis and testis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic orchialgia and idiopathic chronic scrotal pain, Recurrent acute infective epididymitis, Spermatocele or epididymal cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Shift management away from repeated antibiotic courses, reserving antimicrobials only for microbiologically proven infection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeatedly prescribing antibiotics in the absence of proven infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic epididymitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epididymitis_chronic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Localises tenderness and excludes a testicular mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Epididymis and testis; cysts, varicocele or tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine analysis and culture",
+          "cells": [
+            {
+              "text": "Identifies or excludes urinary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexually transmitted infection screening",
+          "cells": [
+            {
+              "text": "Where risk factors or urethral symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for referred causes",
+          "cells": [
+            {
+              "text": "Abdominal, inguinal and musculoskeletal sources"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of previous scrotal surgery or vasectomy",
+          "cells": [
+            {
+              "text": "Contribution to symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epididymitis_chronic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent acute infective epididymitis",
+          "cells": [
+            {
+              "text": "Acute episodes are usually infective; chronic disease is frequently non-infective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular tumour",
+          "cells": [
+            {
+              "text": "A discrete or hard testicular mass requires exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-vasectomy pain syndrome",
+          "cells": [
+            {
+              "text": "Previous vasectomy contributes to symptoms through congestion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epididymitis_chronic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop repeated antibiotic courses",
+          "cells": [
+            {
+              "text": "Antimicrobials reserved for microbiologically proven infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Reassurance, scrotal support, local heat and activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory analgesia",
+          "cells": [
+            {
+              "text": "Amitriptyline or a gabapentinoid where a neuropathic component is evident"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address contributing factors",
+          "cells": [
+            {
+              "text": "Post-vasectomy congestion, referred abdominal or musculoskeletal pain, and overlapping chronic pelvic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spermatic cord nerve block",
+          "cells": [
+            {
+              "text": "For refractory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymectomy",
+          "cells": [
+            {
+              "text": "Last resort, after careful counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pain pathway and psychological support",
+          "cells": [
+            {
+              "text": "Specialist andrology or chronic pain referral for persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epididymitis_chronic-dx-mgmt",
+      "title": "Diagnosis and management of Chronic epididymitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent localised epididymal pain lasting three months or more",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hard testicular mass, acute severe pain, fever, progressive swelling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude testicular tumour, torsion or superimposed acute infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination, scrotal ultrasound, urine culture and STI screening where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Referred pain or a contributing cause (vasectomy, scrotal surgery) identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess: consider chronic orchialgia or referred ureteric, hernia or nerve pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop repeated antibiotics unless infection is proven",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Scrotal support, local heat and activity modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-inflammatory analgesia; amitriptyline or gabapentinoid if neuropathic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Spermatic cord nerve block for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Epididymectomy only as a last resort after counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign but persistent; many men improve with conservative measures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

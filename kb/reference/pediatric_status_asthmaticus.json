@@ -1,175 +1,430 @@
 {
- "id": "pediatric_status_asthmaticus",
- "name": "Pediatric Status Asthmaticus",
- "aliases": [
-  "status asthmaticus",
-  "acute severe asthma",
-  "severe asthma exacerbation"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A severe, sustained asthma exacerbation that does not respond adequately to initial bronchodilator therapy and constitutes a medical emergency.",
-   "Assessment combines clinical signs (work of breathing, accessory muscle use, air entry, mental state) with objective measures such as oxygen saturation and, where feasible, peak flow.",
-   "A quiet chest with poor air entry is ominous, indicating severe airflow limitation rather than improvement.",
-   "Rising carbon dioxide on blood gas in a tiring child signals impending respiratory failure; early in an attack hypocapnia is expected, so a normalising or high CO2 is a warning sign.",
-   "First-line treatment uses inhaled short-acting beta-agonists, often with inhaled anticholinergic agents, and early systemic corticosteroids, alongside oxygen to maintain saturations.",
-   "Escalation options for refractory cases include intravenous magnesium sulfate, continuous nebulised bronchodilator, and intravenous beta-agonist, with careful monitoring.",
-   "Agitation, drowsiness, exhaustion, cyanosis, or a silent chest indicate life-threatening disease requiring intensive care and possible ventilatory support.",
-   "Mechanical ventilation carries particular risks in asthma (air trapping and barotrauma) and is reserved for refractory respiratory failure using lung-protective, permissive strategies.",
-   "Identifying and addressing triggers, ensuring correct inhaler technique, and providing a written action plan help prevent recurrence."
+  "id": "pediatric_status_asthmaticus",
+  "name": "Pediatric Status Asthmaticus",
+  "aliases": [
+    "status asthmaticus",
+    "acute severe asthma",
+    "severe asthma exacerbation"
   ],
-  "pathophysiology": "Acute severe asthma results from intense airway inflammation, bronchial smooth muscle constriction, mucosal oedema, and mucus plugging, producing widespread airflow obstruction that is worse on expiration. Air trapping and dynamic hyperinflation increase the work of breathing and impair gas exchange, causing ventilation-perfusion mismatch and hypoxaemia. Early tachypnoea drives off carbon dioxide, but as the child fatigues and obstruction worsens, alveolar ventilation falls, carbon dioxide rises, and respiratory acidosis develops, heralding respiratory failure. Hyperinflation also impairs venous return and can compromise cardiac output.",
-  "additionalDifferentials": [
-   "Bronchiolitis or viral-induced wheeze in younger children",
-   "Foreign body aspiration",
-   "Anaphylaxis with bronchospasm",
-   "Pneumonia with wheeze",
-   "Vocal cord dysfunction",
-   "Cardiac failure or a wheeze-mimicking cardiac lesion"
-  ],
-  "additionalInvestigations": [
-   "Continuous pulse oximetry and clinical severity scoring",
-   "Blood gas in severe or deteriorating cases to assess for rising carbon dioxide",
-   "Peak expiratory flow where age and cooperation allow",
-   "Chest radiograph if complications such as pneumothorax, consolidation, or foreign body are suspected",
-   "Electrolytes when high-dose beta-agonist therapy is used (risk of hypokalaemia)"
-  ],
-  "redFlags": [
-   "Silent chest with poor air entry",
-   "Exhaustion, drowsiness, confusion, or agitation indicating hypoxia and impending failure",
-   "Rising or normalising carbon dioxide in a tiring child (impending respiratory failure)",
-   "Cyanosis or falling oxygen saturation despite maximal therapy",
-   "Poor response to initial bronchodilators or rapid clinical deterioration"
-  ],
-  "prognosis": "Most children with severe exacerbations recover fully with prompt, escalating treatment. A minority progress to respiratory failure requiring intensive care and ventilation, which carries higher risk. Poor prognostic factors include delayed treatment, prior life-threatening attacks, and inadequate preventive management; good discharge planning reduces relapse.",
-  "pitfalls": [
-   "Misreading a quiet chest or a normalising carbon dioxide as improvement rather than deterioration",
-   "Delaying systemic corticosteroids or under-treating a severe exacerbation",
-   "Over-relying on oxygen saturation alone without assessing work of breathing and mental state",
-   "Instituting mechanical ventilation without anticipating air trapping and barotrauma",
-   "Discharging without addressing triggers, inhaler technique, and an action plan"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give controlled oxygen to maintain adequate saturations alongside repeated or continuous nebulised short-acting beta-agonists and inhaled ipratropium",
-   "Start systemic corticosteroids early, oral where tolerated or intravenous in the severely unwell child",
-   "Escalate refractory cases with intravenous magnesium sulfate, continuous nebulised bronchodilator and an intravenous beta-agonist, considering intravenous aminophylline",
-   "Recognise impending respiratory failure such as a silent chest, exhaustion or a rising carbon dioxide and provide respiratory support with non-invasive ventilation or intubation and mechanical ventilation in intensive care",
-   "Monitor continuously with pulse oximetry and clinical scoring, checking blood gases in deteriorating children and electrolytes for beta-agonist-induced hypokalaemia",
-   "Investigate for complications such as pneumothorax or consolidation when suspected",
-   "Before discharge, optimise inhaler technique, provide a written asthma action plan and arrange follow-up to prevent recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pediatric_status_asthmaticus-pathway",
-   "title": "Pediatric Status Asthmaticus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A severe, sustained asthma exacerbation that does not respond adequately to initial bronchodilator therapy and constitutes a medical emergency.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Silent chest with poor air entry",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Continuous pulse oximetry and clinical severity scoring, Blood gas in severe or deteriorating cases to assess for rising carbon dioxide, Peak expiratory flow where age and cooperation allow"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give controlled oxygen to maintain adequate saturations alongside repeated or continuous nebulised short-acting beta-agonists and inhaled ipratropium"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misreading a quiet chest or a normalising carbon dioxide as improvement rather than deterioration"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pediatric status asthmaticus."
-  }
- ],
- "tables": [
-  {
-   "id": "pediatric_status_asthmaticus-matrix",
-   "title": "Pediatric Status Asthmaticus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A severe, sustained asthma exacerbation that does not respond adequately to initial bronchodilator therapy and constitutes a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A severe, sustained asthma exacerbation that does not respond adequately to initial bronchodilator therapy and constitutes a medical emergency.",
+      "Assessment combines clinical signs (work of breathing, accessory muscle use, air entry, mental state) with objective measures such as oxygen saturation and, where feasible, peak flow.",
+      "A quiet chest with poor air entry is ominous, indicating severe airflow limitation rather than improvement.",
+      "Rising carbon dioxide on blood gas in a tiring child signals impending respiratory failure; early in an attack hypocapnia is expected, so a normalising or high CO2 is a warning sign.",
+      "First-line treatment uses inhaled short-acting beta-agonists, often with inhaled anticholinergic agents, and early systemic corticosteroids, alongside oxygen to maintain saturations.",
+      "Escalation options for refractory cases include intravenous magnesium sulfate, continuous nebulised bronchodilator, and intravenous beta-agonist, with careful monitoring.",
+      "Agitation, drowsiness, exhaustion, cyanosis, or a silent chest indicate life-threatening disease requiring intensive care and possible ventilatory support.",
+      "Mechanical ventilation carries particular risks in asthma (air trapping and barotrauma) and is reserved for refractory respiratory failure using lung-protective, permissive strategies.",
+      "Identifying and addressing triggers, ensuring correct inhaler technique, and providing a written action plan help prevent recurrence."
     ],
-    [
-     "Key Investigations",
-     "Continuous pulse oximetry and clinical severity scoring, Blood gas in severe or deteriorating cases to assess for rising carbon",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute severe asthma results from intense airway inflammation, bronchial smooth muscle constriction, mucosal oedema, and mucus plugging, producing widespread airflow obstruction that is worse on expiration. Air trapping and dynamic hyperinflation increase the work of breathing and impair gas exchange, causing ventilation-perfusion mismatch and hypoxaemia. Early tachypnoea drives off carbon dioxide, but as the child fatigues and obstruction worsens, alveolar ventilation falls, carbon dioxide rises, and respiratory acidosis develops, heralding respiratory failure. Hyperinflation also impairs venous return and can compromise cardiac output.",
+    "additionalDifferentials": [
+      "Bronchiolitis or viral-induced wheeze in younger children",
+      "Foreign body aspiration",
+      "Anaphylaxis with bronchospasm",
+      "Pneumonia with wheeze",
+      "Vocal cord dysfunction",
+      "Cardiac failure or a wheeze-mimicking cardiac lesion"
     ],
-    [
-     "Primary Differentials",
-     "Bronchiolitis or viral-induced wheeze in younger children, Foreign body aspiration, Anaphylaxis with bronchospasm",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Continuous pulse oximetry and clinical severity scoring",
+      "Blood gas in severe or deteriorating cases to assess for rising carbon dioxide",
+      "Peak expiratory flow where age and cooperation allow",
+      "Chest radiograph if complications such as pneumothorax, consolidation, or foreign body are suspected",
+      "Electrolytes when high-dose beta-agonist therapy is used (risk of hypokalaemia)"
     ],
-    [
-     "Management Strategy",
-     "Give controlled oxygen to maintain adequate saturations alongside repeated or continuous nebulised short-acting beta-agonists and",
-     "Core treatment modality"
+    "redFlags": [
+      "Silent chest with poor air entry",
+      "Exhaustion, drowsiness, confusion, or agitation indicating hypoxia and impending failure",
+      "Rising or normalising carbon dioxide in a tiring child (impending respiratory failure)",
+      "Cyanosis or falling oxygen saturation despite maximal therapy",
+      "Poor response to initial bronchodilators or rapid clinical deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Misreading a quiet chest or a normalising carbon dioxide as improvement rather than deterioration",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most children with severe exacerbations recover fully with prompt, escalating treatment. A minority progress to respiratory failure requiring intensive care and ventilation, which carries higher risk. Poor prognostic factors include delayed treatment, prior life-threatening attacks, and inadequate preventive management; good discharge planning reduces relapse.",
+    "pitfalls": [
+      "Misreading a quiet chest or a normalising carbon dioxide as improvement rather than deterioration",
+      "Delaying systemic corticosteroids or under-treating a severe exacerbation",
+      "Over-relying on oxygen saturation alone without assessing work of breathing and mental state",
+      "Instituting mechanical ventilation without anticipating air trapping and barotrauma",
+      "Discharging without addressing triggers, inhaler technique, and an action plan"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give controlled oxygen to maintain adequate saturations alongside repeated or continuous nebulised short-acting beta-agonists and inhaled ipratropium",
+      "Start systemic corticosteroids early, oral where tolerated or intravenous in the severely unwell child",
+      "Escalate refractory cases with intravenous magnesium sulfate, continuous nebulised bronchodilator and an intravenous beta-agonist, considering intravenous aminophylline",
+      "Recognise impending respiratory failure such as a silent chest, exhaustion or a rising carbon dioxide and provide respiratory support with non-invasive ventilation or intubation and mechanical ventilation in intensive care",
+      "Monitor continuously with pulse oximetry and clinical scoring, checking blood gases in deteriorating children and electrolytes for beta-agonist-induced hypokalaemia",
+      "Investigate for complications such as pneumothorax or consolidation when suspected",
+      "Before discharge, optimise inhaler technique, provide a written asthma action plan and arrange follow-up to prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for pediatric status asthmaticus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pediatric-status-asthmaticus-real-image",
-   "title": "Pediatric Status Asthmaticus: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pediatric_status_asthmaticus-pathway",
+      "title": "Pediatric Status Asthmaticus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A severe, sustained asthma exacerbation that does not respond adequately to initial bronchodilator therapy and constitutes a medical emergency.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Silent chest with poor air entry",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Continuous pulse oximetry and clinical severity scoring, Blood gas in severe or deteriorating cases to assess for rising carbon dioxide, Peak expiratory flow where age and cooperation allow"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give controlled oxygen to maintain adequate saturations alongside repeated or continuous nebulised short-acting beta-agonists and inhaled ipratropium"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misreading a quiet chest or a normalising carbon dioxide as improvement rather than deterioration"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pediatric status asthmaticus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pediatric_status_asthmaticus-matrix",
+      "title": "Pediatric Status Asthmaticus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A severe, sustained asthma exacerbation that does not respond adequately to initial bronchodilator therapy and constitutes a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Continuous pulse oximetry and clinical severity scoring, Blood gas in severe or deteriorating cases to assess for rising carbon",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bronchiolitis or viral-induced wheeze in younger children, Foreign body aspiration, Anaphylaxis with bronchospasm",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give controlled oxygen to maintain adequate saturations alongside repeated or continuous nebulised short-acting beta-agonists and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misreading a quiet chest or a normalising carbon dioxide as improvement rather than deterioration",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pediatric status asthmaticus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pediatric_status_asthmaticus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous pulse oximetry and severity scoring",
+          "cells": [
+            {
+              "text": "Oxygenation and clinical severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas in severe or deteriorating cases",
+          "cells": [
+            {
+              "text": "Rising carbon dioxide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peak expiratory flow where age allows",
+          "cells": [
+            {
+              "text": "Objective airflow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph if complicated",
+          "cells": [
+            {
+              "text": "Pneumothorax, consolidation or foreign body"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pediatric_status_asthmaticus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchiolitis or viral-induced wheeze",
+          "cells": [
+            {
+              "text": "Younger children; age and viral history distinguish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign body aspiration",
+          "cells": [
+            {
+              "text": "Sudden onset with focal signs; history separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pediatric_status_asthmaticus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Controlled oxygen and bronchodilators",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Repeated or continuous nebulised short-acting beta-agonists with ipratropium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early systemic corticosteroids",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Oral where tolerated, intravenous if severely unwell"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for refractory cases",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Specialist care for non-response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical monitoring",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Work of breathing and mental state, not saturation alone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pediatric_status_asthmaticus-dx-mgmt",
+      "title": "Diagnosis and management of Pediatric Status Asthmaticus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe asthma attack not responding to initial bronchodilators, in a tiring child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (silent chest, drowsiness, rising carbon dioxide or cyanosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric critical care review for impending respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous oximetry, severity score, blood gas if deteriorating, chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the exacerbation severe, with hypoxia or rising carbon dioxide on assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bronchiolitis, foreign body, anaphylaxis, pneumonia or vocal cord dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Controlled oxygen with repeated or continuous nebulised short-acting beta-agonists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ipratropium added to nebulised bronchodilators in severe attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early systemic corticosteroids, oral or intravenous as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalation for refractory cases, judged on work of breathing and mental state",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most recover fully with prompt treatment; a minority progress to ventilation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

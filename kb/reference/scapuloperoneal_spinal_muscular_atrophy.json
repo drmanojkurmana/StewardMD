@@ -1,174 +1,461 @@
 {
- "id": "scapuloperoneal_spinal_muscular_atrophy",
- "name": "Scapuloperoneal spinal muscular atrophy",
- "aliases": [
-  "scapuloperoneal SMA",
-  "SPSMA",
-  "TRPV4-related scapuloperoneal SMA",
-  "Davidenkow syndrome",
-  "TRPV4"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley and Daroff Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Motor neuronopathy in which weakness and wasting predominate in a scapuloperoneal distribution, affecting shoulder-girdle and peroneal (lower leg) muscles",
-   "An autosomal dominant form is caused by variants in TRPV4, a calcium-permeable cation channel, and can overlap with congenital and distal neuropathy phenotypes",
-   "Presents with scapular winging, difficulty raising the arms, and foot drop, with a variable age of onset from childhood to adulthood",
-   "Sensory involvement is usually minimal, consistent with a predominantly motor neurone or motor axonal process",
-   "TRPV4-related disease is notable for its phenotypic breadth, ranging from scapuloperoneal SMA to congenital distal SMA and axonal CMT type 2C, sometimes with vocal cord paresis and skeletal abnormalities",
-   "Electrophysiology shows a motor neuronopathy or motor axonal pattern with denervation and preserved sensory responses in the classic forms",
-   "Diagnosis requires the characteristic distribution together with genetic confirmation, most often of a TRPV4 variant"
+  "id": "scapuloperoneal_spinal_muscular_atrophy",
+  "name": "Scapuloperoneal spinal muscular atrophy",
+  "aliases": [
+    "scapuloperoneal SMA",
+    "SPSMA",
+    "TRPV4-related scapuloperoneal SMA",
+    "Davidenkow syndrome",
+    "TRPV4"
   ],
-  "pathophysiology": "Scapuloperoneal spinal muscular atrophy is a lower motor neurone disorder in which degeneration of anterior horn cells produces weakness in a distinctive scapuloperoneal pattern. The dominant TRPV4-associated form results from variants in a calcium-permeable transient receptor potential channel; the mutations are thought to alter channel gating and calcium handling in motor neurones, leading to selective vulnerability of the neurones supplying shoulder-girdle and peroneal muscles. Because the pathology is largely confined to motor neurones and their axons, sensory function is typically preserved, and the electrophysiology reflects denervation with normal sensory responses. TRPV4 variants can also affect the peripheral nerve and skeleton, explaining the associated phenotypes.",
-  "additionalDifferentials": [
-   "Facioscapulohumeral muscular dystrophy",
-   "Scapuloperoneal muscular dystrophy (myopathic forms)",
-   "Distal hereditary motor neuropathies",
-   "Axonal CMT type 2 (including TRPV4-related CMT2C)",
-   "Amyotrophic lateral sclerosis in adult presentations",
-   "Emery-Dreifuss and other limb-girdle myopathies"
-  ],
-  "additionalInvestigations": [
-   "Electromyography and nerve conduction studies showing motor neuronopathy with preserved sensory responses",
-   "TRPV4 sequencing and a hereditary neuromuscular gene panel",
-   "Creatine kinase and muscle imaging to help separate neurogenic from myopathic causes",
-   "Facioscapulohumeral dystrophy genetic testing where the pattern overlaps",
-   "Assessment for vocal cord paresis and skeletal abnormalities in suspected TRPV4 disease",
-   "Detailed family history for dominant inheritance"
-  ],
-  "redFlags": [
-   "Vocal cord paresis causing stridor or airway compromise",
-   "Respiratory muscle involvement with breathlessness",
-   "Rapidly progressive or asymmetric weakness suggesting motor neurone disease",
-   "Significant bulbar involvement requiring review"
-  ],
-  "prognosis": "Usually slowly progressive with long preservation of function, though severity is variable; congenital TRPV4-related forms and those with vocal cord or respiratory involvement can be more severe.",
-  "pitfalls": [
-   "Confusing the scapuloperoneal weakness pattern with facioscapulohumeral dystrophy",
-   "Overlooking the wide TRPV4 phenotypic spectrum, including CMT2C and skeletal features",
-   "Assuming a myopathic cause without electrophysiology to identify a neurogenic process",
-   "Missing vocal cord involvement that carries airway risk"
-  ],
-  "references": [
-   "GeneReviews: TRPV4-Related Neuromuscular Disorders",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy exists, so manage supportively with physiotherapy to maintain strength and prevent contractures",
-   "Provide ankle-foot orthoses for foot drop and occupational therapy and mobility aids to preserve function",
-   "Monitor respiratory function and screen for vocal cord paresis, arranging airway intervention if laryngeal involvement causes obstruction",
-   "Undertake periodic assessment for the skeletal abnormalities associated with TRPV4-related disease",
-   "Coordinate care through a multidisciplinary neuromuscular service",
-   "Offer genetic counselling for the autosomal dominant inheritance and testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scapuloperoneal_spinal_muscular_atrophy-pathway",
-   "title": "Scapuloperoneal spinal muscular atrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Motor neuronopathy in which weakness and wasting predominate in a scapuloperoneal distribution, affecting shoulder-girdle and peroneal (lower leg) muscles",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Vocal cord paresis causing stridor or airway compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electromyography and nerve conduction studies showing motor neuronopathy with preserved sensory responses, TRPV4 sequencing and a hereditary neuromuscular gene panel, Creatine kinase and muscle imaging to help separate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy exists, so manage supportively with physiotherapy to maintain strength and prevent contractures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the scapuloperoneal weakness pattern with facioscapulohumeral dystrophy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scapuloperoneal spinal muscular atrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "scapuloperoneal_spinal_muscular_atrophy-matrix",
-   "title": "Scapuloperoneal spinal muscular atrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Motor neuronopathy in which weakness and wasting predominate in a scapuloperoneal distribution, affecting shoulder-girdle and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley and Daroff Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Motor neuronopathy in which weakness and wasting predominate in a scapuloperoneal distribution, affecting shoulder-girdle and peroneal (lower leg) muscles",
+      "An autosomal dominant form is caused by variants in TRPV4, a calcium-permeable cation channel, and can overlap with congenital and distal neuropathy phenotypes",
+      "Presents with scapular winging, difficulty raising the arms, and foot drop, with a variable age of onset from childhood to adulthood",
+      "Sensory involvement is usually minimal, consistent with a predominantly motor neurone or motor axonal process",
+      "TRPV4-related disease is notable for its phenotypic breadth, ranging from scapuloperoneal SMA to congenital distal SMA and axonal CMT type 2C, sometimes with vocal cord paresis and skeletal abnormalities",
+      "Electrophysiology shows a motor neuronopathy or motor axonal pattern with denervation and preserved sensory responses in the classic forms",
+      "Diagnosis requires the characteristic distribution together with genetic confirmation, most often of a TRPV4 variant"
     ],
-    [
-     "Key Investigations",
-     "Electromyography and nerve conduction studies showing motor neuronopathy with preserved sensory responses, TRPV4 sequencing and a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scapuloperoneal spinal muscular atrophy is a lower motor neurone disorder in which degeneration of anterior horn cells produces weakness in a distinctive scapuloperoneal pattern. The dominant TRPV4-associated form results from variants in a calcium-permeable transient receptor potential channel; the mutations are thought to alter channel gating and calcium handling in motor neurones, leading to selective vulnerability of the neurones supplying shoulder-girdle and peroneal muscles. Because the pathology is largely confined to motor neurones and their axons, sensory function is typically preserved, and the electrophysiology reflects denervation with normal sensory responses. TRPV4 variants can also affect the peripheral nerve and skeleton, explaining the associated phenotypes.",
+    "additionalDifferentials": [
+      "Facioscapulohumeral muscular dystrophy",
+      "Scapuloperoneal muscular dystrophy (myopathic forms)",
+      "Distal hereditary motor neuropathies",
+      "Axonal CMT type 2 (including TRPV4-related CMT2C)",
+      "Amyotrophic lateral sclerosis in adult presentations",
+      "Emery-Dreifuss and other limb-girdle myopathies"
     ],
-    [
-     "Primary Differentials",
-     "Facioscapulohumeral muscular dystrophy, Scapuloperoneal muscular dystrophy (myopathic forms), Distal hereditary motor neuropathies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electromyography and nerve conduction studies showing motor neuronopathy with preserved sensory responses",
+      "TRPV4 sequencing and a hereditary neuromuscular gene panel",
+      "Creatine kinase and muscle imaging to help separate neurogenic from myopathic causes",
+      "Facioscapulohumeral dystrophy genetic testing where the pattern overlaps",
+      "Assessment for vocal cord paresis and skeletal abnormalities in suspected TRPV4 disease",
+      "Detailed family history for dominant inheritance"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy exists, so manage supportively with physiotherapy to maintain strength and prevent contractures",
-     "Core treatment modality"
+    "redFlags": [
+      "Vocal cord paresis causing stridor or airway compromise",
+      "Respiratory muscle involvement with breathlessness",
+      "Rapidly progressive or asymmetric weakness suggesting motor neurone disease",
+      "Significant bulbar involvement requiring review"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the scapuloperoneal weakness pattern with facioscapulohumeral dystrophy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Usually slowly progressive with long preservation of function, though severity is variable; congenital TRPV4-related forms and those with vocal cord or respiratory involvement can be more severe.",
+    "pitfalls": [
+      "Confusing the scapuloperoneal weakness pattern with facioscapulohumeral dystrophy",
+      "Overlooking the wide TRPV4 phenotypic spectrum, including CMT2C and skeletal features",
+      "Assuming a myopathic cause without electrophysiology to identify a neurogenic process",
+      "Missing vocal cord involvement that carries airway risk"
+    ],
+    "references": [
+      "GeneReviews: TRPV4-Related Neuromuscular Disorders",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy exists, so manage supportively with physiotherapy to maintain strength and prevent contractures",
+      "Provide ankle-foot orthoses for foot drop and occupational therapy and mobility aids to preserve function",
+      "Monitor respiratory function and screen for vocal cord paresis, arranging airway intervention if laryngeal involvement causes obstruction",
+      "Undertake periodic assessment for the skeletal abnormalities associated with TRPV4-related disease",
+      "Coordinate care through a multidisciplinary neuromuscular service",
+      "Offer genetic counselling for the autosomal dominant inheritance and testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for scapuloperoneal spinal muscular atrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scapuloperoneal-spinal-muscular-atrophy-real-image",
-   "title": "Scapuloperoneal spinal muscular atrophy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "scapuloperoneal_spinal_muscular_atrophy-pathway",
+      "title": "Scapuloperoneal spinal muscular atrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Motor neuronopathy in which weakness and wasting predominate in a scapuloperoneal distribution, affecting shoulder-girdle and peroneal (lower leg) muscles",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Vocal cord paresis causing stridor or airway compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electromyography and nerve conduction studies showing motor neuronopathy with preserved sensory responses, TRPV4 sequencing and a hereditary neuromuscular gene panel, Creatine kinase and muscle imaging to help separate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy exists, so manage supportively with physiotherapy to maintain strength and prevent contractures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the scapuloperoneal weakness pattern with facioscapulohumeral dystrophy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scapuloperoneal spinal muscular atrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scapuloperoneal_spinal_muscular_atrophy-matrix",
+      "title": "Scapuloperoneal spinal muscular atrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Motor neuronopathy in which weakness and wasting predominate in a scapuloperoneal distribution, affecting shoulder-girdle and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electromyography and nerve conduction studies showing motor neuronopathy with preserved sensory responses, TRPV4 sequencing and a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Facioscapulohumeral muscular dystrophy, Scapuloperoneal muscular dystrophy (myopathic forms), Distal hereditary motor neuropathies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy exists, so manage supportively with physiotherapy to maintain strength and prevent contractures",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the scapuloperoneal weakness pattern with facioscapulohumeral dystrophy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scapuloperoneal spinal muscular atrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley and Daroff Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scapuloperoneal_spinal_muscular_atrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EMG and nerve conduction",
+          "cells": [
+            {
+              "text": "Motor neuronopathy with preserved sensory responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TRPV4 sequencing and neuromuscular panel",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and muscle imaging",
+          "cells": [
+            {
+              "text": "Separate neurogenic from myopathic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FSHD genetic testing",
+          "cells": [
+            {
+              "text": "Where the pattern overlaps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vocal cord and skeletal assessment",
+          "cells": [
+            {
+              "text": "Suspected TRPV4 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scapuloperoneal_spinal_muscular_atrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Facioscapulohumeral muscular dystrophy",
+          "cells": [
+            {
+              "text": "Weakness pattern can be confused; FSHD genetic testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scapuloperoneal muscular dystrophy",
+          "cells": [
+            {
+              "text": "Myopathic forms, separated by CK and muscle imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axonal CMT type 2 (TRPV4-related CMT2C)",
+          "cells": [
+            {
+              "text": "Part of the wide TRPV4 spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scapuloperoneal_spinal_muscular_atrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Maintain strength and prevent contractures; no disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and aids",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses for foot drop; occupational therapy and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and laryngeal monitoring",
+          "cells": [
+            {
+              "text": "Screen for vocal cord paresis; airway intervention if obstructed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal assessment",
+          "cells": [
+            {
+              "text": "Periodic review in TRPV4-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neuromuscular care",
+          "cells": [
+            {
+              "text": "Coordinated service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; test at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scapuloperoneal_spinal_muscular_atrophy-dx-mgmt",
+      "title": "Diagnosis and management of Scapuloperoneal spinal muscular atrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive scapular and peroneal weakness with foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Vocal cord paresis with stridor, breathlessness, rapid or asymmetric weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Airway review and respiratory support; exclude motor neurone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EMG with preserved sensory responses, TRPV4 sequencing, CK, muscle imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do neurogenic EMG findings and a TRPV4 variant fit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test for FSHD; consider distal HMN, CMT2 and scapuloperoneal dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy; ankle-foot orthoses for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor respiratory function and screen for vocal cord paresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multidisciplinary neuromuscular care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually slowly progressive; severity variable, worse if congenital or vocal cord disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

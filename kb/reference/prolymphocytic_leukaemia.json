@@ -1,171 +1,447 @@
 {
- "id": "prolymphocytic_leukaemia",
- "name": "Prolymphocytic leukaemia",
- "aliases": [
-  "PLL",
-  "T-cell prolymphocytic leukaemia",
-  "B-cell prolymphocytic leukaemia"
- ],
- "class": "non_infective",
- "system": "Haematological / Lymphoid",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Haematology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, aggressive mature lymphoid leukaemia in which prolymphocytes dominate the blood",
-   "Occurs in B-cell and T-cell forms, with the T-cell type being the more common and particularly aggressive",
-   "Typically presents in older adults with a very high lymphocyte count, marked splenomegaly and often minimal lymphadenopathy",
-   "T-cell disease may involve the skin, serous effusions and central nervous system",
-   "Prolymphocytes are larger than mature lymphocytes and have a prominent central nucleolus",
-   "T-cell prolymphocytic leukaemia commonly shows abnormalities involving the TCL1 locus and chromosome 11 (ATM)",
-   "It is distinguished from chronic lymphocytic leukaemia by morphology, immunophenotype and its aggressive course"
+  "id": "prolymphocytic_leukaemia",
+  "name": "Prolymphocytic leukaemia",
+  "aliases": [
+    "PLL",
+    "T-cell prolymphocytic leukaemia",
+    "B-cell prolymphocytic leukaemia"
   ],
-  "pathophysiology": "Prolymphocytic leukaemia is a clonal proliferation of intermediate-sized lymphoid cells arrested at the prolymphocyte stage. In the T-cell form, rearrangements activating the TCL1 oncogene, together with ATM inactivation from chromosome 11 abnormalities, drive proliferation and impair DNA damage responses, producing an aggressive disease with high tumour burden. The B-cell form is a distinct clonal B-cell disorder. Extensive marrow, splenic and blood involvement accounts for the very high counts, cytopenias and organomegaly, while tissue tropism in T-cell disease explains skin and serosal involvement.",
-  "additionalDifferentials": [
-   "Chronic lymphocytic leukaemia with increased prolymphocytes",
-   "Mantle cell lymphoma in leukaemic phase",
-   "Adult T-cell leukaemia/lymphoma",
-   "Sezary syndrome",
-   "Hairy cell leukaemia variant",
-   "Large granular lymphocytic leukaemia"
-  ],
-  "additionalInvestigations": [
-   "Blood film for prolymphocyte morphology",
-   "Flow cytometry to define B- or T-cell lineage and immunophenotype",
-   "Cytogenetics and molecular testing (including TCL1 and ATM/chromosome 11 assessment)",
-   "Bone marrow examination",
-   "Imaging to assess splenomegaly and any nodal or extranodal disease"
-  ],
-  "redFlags": [
-   "Very high and rapidly rising lymphocyte count with cytopenias",
-   "Symptomatic massive splenomegaly",
-   "Central nervous system or serosal involvement in T-cell disease",
-   "Rapid clinical deterioration"
-  ],
-  "prognosis": "T-cell prolymphocytic leukaemia is aggressive with historically poor survival, although targeted antibody therapy and, where feasible, allogeneic transplantation have improved outcomes; the B-cell form is also aggressive but somewhat variable.",
-  "pitfalls": [
-   "Misclassifying it as chronic lymphocytic leukaemia and underestimating its aggressiveness",
-   "Failing to distinguish B-cell from T-cell disease, which affects treatment",
-   "Overlooking central nervous system or skin involvement",
-   "Delaying treatment in a rapidly progressive leukaemia"
-  ],
-  "references": [
-   "Wintrobe's Clinical Hematology (standard reference)",
-   "WHO Classification of Haematolymphoid Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat T-cell prolymphocytic leukaemia primarily with the anti-CD52 monoclonal antibody alemtuzumab, to which it is uniquely responsive",
-   "Consolidate responders with allogeneic haematopoietic stem cell transplantation where fitness and a donor allow, as the only potentially durable option",
-   "Treat the B-cell form with chemoimmunotherapy and targeted agents such as rituximab-based regimens, and BTK inhibitors or venetoclax where molecular features indicate",
-   "Provide supportive care with transfusion for cytopenias, tumour lysis prophylaxis, and antimicrobial prophylaxis against viral, fungal and Pneumocystis infection with CMV monitoring during alemtuzumab",
-   "Address extranodal T-cell disease including skin infiltration, serous effusions and central nervous system involvement",
-   "Enrol in clinical trials given the aggressive course, and involve palliative care for patients unfit for intensive therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "prolymphocytic_leukaemia-pathway",
-   "title": "Prolymphocytic leukaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, aggressive mature lymphoid leukaemia in which prolymphocytes dominate the blood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Very high and rapidly rising lymphocyte count with cytopenias",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood film for prolymphocyte morphology, Flow cytometry to define B- or T-cell lineage and immunophenotype, Cytogenetics and molecular testing (including TCL1 and ATM/chromosome 11 assessment)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat T-cell prolymphocytic leukaemia primarily with the anti-CD52 monoclonal antibody alemtuzumab, to which it is uniquely responsive"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying it as chronic lymphocytic leukaemia and underestimating its aggressiveness"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of prolymphocytic leukaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "prolymphocytic_leukaemia-matrix",
-   "title": "Prolymphocytic leukaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, aggressive mature lymphoid leukaemia in which prolymphocytes dominate the blood",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological / Lymphoid",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Haematology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, aggressive mature lymphoid leukaemia in which prolymphocytes dominate the blood",
+      "Occurs in B-cell and T-cell forms, with the T-cell type being the more common and particularly aggressive",
+      "Typically presents in older adults with a very high lymphocyte count, marked splenomegaly and often minimal lymphadenopathy",
+      "T-cell disease may involve the skin, serous effusions and central nervous system",
+      "Prolymphocytes are larger than mature lymphocytes and have a prominent central nucleolus",
+      "T-cell prolymphocytic leukaemia commonly shows abnormalities involving the TCL1 locus and chromosome 11 (ATM)",
+      "It is distinguished from chronic lymphocytic leukaemia by morphology, immunophenotype and its aggressive course"
     ],
-    [
-     "Key Investigations",
-     "Blood film for prolymphocyte morphology, Flow cytometry to define B- or T-cell lineage and immunophenotype, Cytogenetics and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Prolymphocytic leukaemia is a clonal proliferation of intermediate-sized lymphoid cells arrested at the prolymphocyte stage. In the T-cell form, rearrangements activating the TCL1 oncogene, together with ATM inactivation from chromosome 11 abnormalities, drive proliferation and impair DNA damage responses, producing an aggressive disease with high tumour burden. The B-cell form is a distinct clonal B-cell disorder. Extensive marrow, splenic and blood involvement accounts for the very high counts, cytopenias and organomegaly, while tissue tropism in T-cell disease explains skin and serosal involvement.",
+    "additionalDifferentials": [
+      "Chronic lymphocytic leukaemia with increased prolymphocytes",
+      "Mantle cell lymphoma in leukaemic phase",
+      "Adult T-cell leukaemia/lymphoma",
+      "Sezary syndrome",
+      "Hairy cell leukaemia variant",
+      "Large granular lymphocytic leukaemia"
     ],
-    [
-     "Primary Differentials",
-     "Chronic lymphocytic leukaemia with increased prolymphocytes, Mantle cell lymphoma in leukaemic phase, Adult T-cell",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood film for prolymphocyte morphology",
+      "Flow cytometry to define B- or T-cell lineage and immunophenotype",
+      "Cytogenetics and molecular testing (including TCL1 and ATM/chromosome 11 assessment)",
+      "Bone marrow examination",
+      "Imaging to assess splenomegaly and any nodal or extranodal disease"
     ],
-    [
-     "Management Strategy",
-     "Treat T-cell prolymphocytic leukaemia primarily with the anti-CD52 monoclonal antibody alemtuzumab, to which it is uniquely",
-     "Core treatment modality"
+    "redFlags": [
+      "Very high and rapidly rising lymphocyte count with cytopenias",
+      "Symptomatic massive splenomegaly",
+      "Central nervous system or serosal involvement in T-cell disease",
+      "Rapid clinical deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying it as chronic lymphocytic leukaemia and underestimating its aggressiveness",
-     "Prevent diagnostic or management error"
+    "prognosis": "T-cell prolymphocytic leukaemia is aggressive with historically poor survival, although targeted antibody therapy and, where feasible, allogeneic transplantation have improved outcomes; the B-cell form is also aggressive but somewhat variable.",
+    "pitfalls": [
+      "Misclassifying it as chronic lymphocytic leukaemia and underestimating its aggressiveness",
+      "Failing to distinguish B-cell from T-cell disease, which affects treatment",
+      "Overlooking central nervous system or skin involvement",
+      "Delaying treatment in a rapidly progressive leukaemia"
+    ],
+    "references": [
+      "Wintrobe's Clinical Hematology (standard reference)",
+      "WHO Classification of Haematolymphoid Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat T-cell prolymphocytic leukaemia primarily with the anti-CD52 monoclonal antibody alemtuzumab, to which it is uniquely responsive",
+      "Consolidate responders with allogeneic haematopoietic stem cell transplantation where fitness and a donor allow, as the only potentially durable option",
+      "Treat the B-cell form with chemoimmunotherapy and targeted agents such as rituximab-based regimens, and BTK inhibitors or venetoclax where molecular features indicate",
+      "Provide supportive care with transfusion for cytopenias, tumour lysis prophylaxis, and antimicrobial prophylaxis against viral, fungal and Pneumocystis infection with CMV monitoring during alemtuzumab",
+      "Address extranodal T-cell disease including skin infiltration, serous effusions and central nervous system involvement",
+      "Enrol in clinical trials given the aggressive course, and involve palliative care for patients unfit for intensive therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for prolymphocytic leukaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "prolymphocytic-leukaemia-real-image",
-   "title": "Prolymphocytic leukaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "prolymphocytic_leukaemia-pathway",
+      "title": "Prolymphocytic leukaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, aggressive mature lymphoid leukaemia in which prolymphocytes dominate the blood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Very high and rapidly rising lymphocyte count with cytopenias",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood film for prolymphocyte morphology, Flow cytometry to define B- or T-cell lineage and immunophenotype, Cytogenetics and molecular testing (including TCL1 and ATM/chromosome 11 assessment)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat T-cell prolymphocytic leukaemia primarily with the anti-CD52 monoclonal antibody alemtuzumab, to which it is uniquely responsive"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying it as chronic lymphocytic leukaemia and underestimating its aggressiveness"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of prolymphocytic leukaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "prolymphocytic_leukaemia-matrix",
+      "title": "Prolymphocytic leukaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, aggressive mature lymphoid leukaemia in which prolymphocytes dominate the blood",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood film for prolymphocyte morphology, Flow cytometry to define B- or T-cell lineage and immunophenotype, Cytogenetics and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic lymphocytic leukaemia with increased prolymphocytes, Mantle cell lymphoma in leukaemic phase, Adult T-cell",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat T-cell prolymphocytic leukaemia primarily with the anti-CD52 monoclonal antibody alemtuzumab, to which it is uniquely",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying it as chronic lymphocytic leukaemia and underestimating its aggressiveness",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for prolymphocytic leukaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prolymphocytic_leukaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood film",
+          "cells": [
+            {
+              "text": "Prolymphocyte morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry",
+          "cells": [
+            {
+              "text": "B- or T-cell lineage and immunophenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetics and molecular testing (TCL1, ATM/chromosome 11)",
+          "cells": [
+            {
+              "text": "TCL1 and ATM or chromosome 11 assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Marrow involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Splenomegaly and nodal or extranodal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prolymphocytic_leukaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic lymphocytic leukaemia with increased prolymphocytes",
+          "cells": [
+            {
+              "text": "Increased prolymphocytes on blood film"
+            },
+            {
+              "text": "Blood film morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adult T-cell leukaemia/lymphoma",
+          "cells": [
+            {
+              "text": "T-cell lineage on flow cytometry"
+            },
+            {
+              "text": "Flow cytometry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prolymphocytic_leukaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Alemtuzumab for T-cell disease",
+          "cells": [
+            {
+              "text": "Anti-CD52 monoclonal antibody, to which it is uniquely responsive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic transplant",
+          "cells": [
+            {
+              "text": "Consolidation of responders where fitness and a donor allow; the only potentially durable option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-cell form",
+          "cells": [
+            {
+              "text": "Chemoimmunotherapy with rituximab-based regimens; BTK inhibitors or venetoclax where molecular features allow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Transfusion for cytopenias, tumour lysis prophylaxis, and antimicrobial prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extranodal disease",
+          "cells": [
+            {
+              "text": "Skin infiltration, serous effusions and CNS involvement in T-cell disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trials and palliation",
+          "cells": [
+            {
+              "text": "Clinical trials given the aggressive course; palliative care for those unfit for intensive therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prolymphocytic_leukaemia-dx-mgmt",
+      "title": "Diagnosis and management of Prolymphocytic leukaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prolymphocytic leukaemia: very high lymphocyte count with prolymphocytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly rising lymphocytes with cytopenias, massive splenomegaly, or CNS involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology review for cytopenias, massive spleen or CNS disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film; flow cytometry; TCL1 and ATM cytogenetics; marrow; spleen and node imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lineage confirmed by flow cytometry with CLL and ATLL excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CLL, mantle cell lymphoma or ATLL; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "T-cell disease: alemtuzumab, to which it is uniquely responsive",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allogeneic stem-cell transplant for responders where fit with a donor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "B-cell form: chemoimmunotherapy, BTK inhibitors or venetoclax where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care: transfusion, tumour lysis and infection prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Clinical trial enrolment; palliative care for those unfit for intensive therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

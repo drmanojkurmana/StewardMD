@@ -1,173 +1,462 @@
 {
- "id": "luscan_lumish_syndrome",
- "name": "Luscan-Lumish syndrome",
- "aliases": [
-  "LLS",
-  "SETD2-related overgrowth syndrome",
-  "SETD2 overgrowth and intellectual disability"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "This is a chromatin-related overgrowth syndrome characterised by macrocephaly, tall stature, and neurodevelopmental difficulties",
-   "It is caused by heterozygous loss-of-function variants in SETD2, a histone methyltransferase gene responsible for trimethylation of histone H3 at lysine 36",
-   "Intellectual disability, autism spectrum features, and speech and language delay are prominent",
-   "Obesity and advanced bone age may accompany the tall stature and macrocephaly",
-   "It sits within the differential of Sotos and related overgrowth syndromes and is usually distinguished by molecular testing rather than clinical features alone",
-   "Diagnosis is established by exome or genome sequencing, or a targeted overgrowth/intellectual disability panel",
-   "Management is supportive and anticipatory, focusing on developmental, educational, and behavioural interventions with surveillance of growth and associated features"
+  "id": "luscan_lumish_syndrome",
+  "name": "Luscan-Lumish syndrome",
+  "aliases": [
+    "LLS",
+    "SETD2-related overgrowth syndrome",
+    "SETD2 overgrowth and intellectual disability"
   ],
-  "pathophysiology": "Luscan-Lumish syndrome is an overgrowth disorder within the group of chromatin-modification syndromes. It results from germline heterozygous loss-of-function variants in SETD2, which encodes a histone methyltransferase that catalyses trimethylation of histone H3 at lysine 36, an epigenetic mark that regulates transcription, splicing, and DNA repair. Reduced SETD2 activity disturbs these chromatin-dependent gene-expression programmes during development, giving rise to generalised overgrowth, macrocephaly, and neurodevelopmental impairment. Inheritance is autosomal dominant, and reported cases are frequently de novo. As with other genes in this pathway, distinct classes of SETD2 variant have been linked to different clinical presentations.",
-  "additionalDifferentials": [
-   "Sotos syndrome (NSD1-related)",
-   "Weaver syndrome (EZH2-related)",
-   "Tatton-Brown-Rahman syndrome (DNMT3A-related)",
-   "Malan syndrome (NFIX-related)",
-   "Fragile X syndrome",
-   "Other histone-modification-related intellectual disability syndromes"
-  ],
-  "additionalInvestigations": [
-   "Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel",
-   "Chromosomal microarray to exclude copy number causes",
-   "Developmental and autism-focused behavioural assessment",
-   "Growth monitoring including consideration of bone age",
-   "MRI of the brain if neurological signs or marked macrocephaly are present",
-   "Ophthalmological and general paediatric review as indicated"
-  ],
-  "redFlags": [
-   "Rapidly increasing head circumference or focal neurological signs",
-   "Developmental regression prompting reassessment",
-   "Severe behavioural disturbance affecting safety or function",
-   "Emergence of features suggesting an alternative or additional diagnosis"
-  ],
-  "prognosis": "The condition is not known to shorten lifespan for most individuals, and the outlook is governed principally by the severity of intellectual disability and autism spectrum features. Early and sustained developmental and educational support optimises functional outcomes.",
-  "pitfalls": [
-   "Anchoring on a clinical diagnosis of Sotos syndrome and not extending genetic testing to SETD2",
-   "Assuming overgrowth syndromes are clinically distinguishable when molecular testing is usually required",
-   "Underestimating the autism spectrum and language needs that benefit from targeted intervention",
-   "Omitting genetic counselling regarding autosomal dominant, commonly de novo, inheritance"
-  ],
-  "references": [
-   "GeneReviews (University of Washington)",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific drug therapy; care centres on early developmental and educational intervention for intellectual disability and speech and language delay",
-   "Autism-focused behavioural therapy alongside speech, occupational and physiotherapy support",
-   "Serial growth monitoring including bone age, with dietetic input to address obesity and overgrowth",
-   "Neurological assessment and brain MRI where macrocephaly is marked or neurological signs emerge",
-   "Routine ophthalmological and general paediatric surveillance",
-   "Coordinate care through a multidisciplinary paediatric and clinical genetics team",
-   "Genetic counselling for the autosomal dominant inheritance, with parental testing given the frequency of de novo variants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "luscan_lumish_syndrome-pathway",
-   "title": "Luscan-Lumish syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "This is a chromatin-related overgrowth syndrome characterised by macrocephaly, tall stature, and neurodevelopmental difficulties",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly increasing head circumference or focal neurological signs",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel, Chromosomal microarray to exclude copy number causes, Developmental and autism-focused behavioural assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific drug therapy; care centres on early developmental and educational intervention for intellectual disability and speech and language delay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Anchoring on a clinical diagnosis of Sotos syndrome and not extending genetic testing to SETD2"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of luscan-lumish syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "luscan_lumish_syndrome-matrix",
-   "title": "Luscan-Lumish syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "This is a chromatin-related overgrowth syndrome characterised by macrocephaly, tall stature, and neurodevelopmental difficulties",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "This is a chromatin-related overgrowth syndrome characterised by macrocephaly, tall stature, and neurodevelopmental difficulties",
+      "It is caused by heterozygous loss-of-function variants in SETD2, a histone methyltransferase gene responsible for trimethylation of histone H3 at lysine 36",
+      "Intellectual disability, autism spectrum features, and speech and language delay are prominent",
+      "Obesity and advanced bone age may accompany the tall stature and macrocephaly",
+      "It sits within the differential of Sotos and related overgrowth syndromes and is usually distinguished by molecular testing rather than clinical features alone",
+      "Diagnosis is established by exome or genome sequencing, or a targeted overgrowth/intellectual disability panel",
+      "Management is supportive and anticipatory, focusing on developmental, educational, and behavioural interventions with surveillance of growth and associated features"
     ],
-    [
-     "Key Investigations",
-     "Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel, Chromosomal microarray to exclude copy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Luscan-Lumish syndrome is an overgrowth disorder within the group of chromatin-modification syndromes. It results from germline heterozygous loss-of-function variants in SETD2, which encodes a histone methyltransferase that catalyses trimethylation of histone H3 at lysine 36, an epigenetic mark that regulates transcription, splicing, and DNA repair. Reduced SETD2 activity disturbs these chromatin-dependent gene-expression programmes during development, giving rise to generalised overgrowth, macrocephaly, and neurodevelopmental impairment. Inheritance is autosomal dominant, and reported cases are frequently de novo. As with other genes in this pathway, distinct classes of SETD2 variant have been linked to different clinical presentations.",
+    "additionalDifferentials": [
+      "Sotos syndrome (NSD1-related)",
+      "Weaver syndrome (EZH2-related)",
+      "Tatton-Brown-Rahman syndrome (DNMT3A-related)",
+      "Malan syndrome (NFIX-related)",
+      "Fragile X syndrome",
+      "Other histone-modification-related intellectual disability syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Sotos syndrome (NSD1-related), Weaver syndrome (EZH2-related), Tatton-Brown-Rahman syndrome (DNMT3A-related)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel",
+      "Chromosomal microarray to exclude copy number causes",
+      "Developmental and autism-focused behavioural assessment",
+      "Growth monitoring including consideration of bone age",
+      "MRI of the brain if neurological signs or marked macrocephaly are present",
+      "Ophthalmological and general paediatric review as indicated"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific drug therapy; care centres on early developmental and educational intervention for intellectual disability",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly increasing head circumference or focal neurological signs",
+      "Developmental regression prompting reassessment",
+      "Severe behavioural disturbance affecting safety or function",
+      "Emergence of features suggesting an alternative or additional diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Anchoring on a clinical diagnosis of Sotos syndrome and not extending genetic testing to SETD2",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is not known to shorten lifespan for most individuals, and the outlook is governed principally by the severity of intellectual disability and autism spectrum features. Early and sustained developmental and educational support optimises functional outcomes.",
+    "pitfalls": [
+      "Anchoring on a clinical diagnosis of Sotos syndrome and not extending genetic testing to SETD2",
+      "Assuming overgrowth syndromes are clinically distinguishable when molecular testing is usually required",
+      "Underestimating the autism spectrum and language needs that benefit from targeted intervention",
+      "Omitting genetic counselling regarding autosomal dominant, commonly de novo, inheritance"
+    ],
+    "references": [
+      "GeneReviews (University of Washington)",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific drug therapy; care centres on early developmental and educational intervention for intellectual disability and speech and language delay",
+      "Autism-focused behavioural therapy alongside speech, occupational and physiotherapy support",
+      "Serial growth monitoring including bone age, with dietetic input to address obesity and overgrowth",
+      "Neurological assessment and brain MRI where macrocephaly is marked or neurological signs emerge",
+      "Routine ophthalmological and general paediatric surveillance",
+      "Coordinate care through a multidisciplinary paediatric and clinical genetics team",
+      "Genetic counselling for the autosomal dominant inheritance, with parental testing given the frequency of de novo variants"
     ]
-   ],
-   "caption": "Overview comparison matrix for luscan-lumish syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "luscan-lumish-syndrome-real-image",
-   "title": "Luscan-Lumish syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "luscan_lumish_syndrome-pathway",
+      "title": "Luscan-Lumish syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "This is a chromatin-related overgrowth syndrome characterised by macrocephaly, tall stature, and neurodevelopmental difficulties",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly increasing head circumference or focal neurological signs",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel, Chromosomal microarray to exclude copy number causes, Developmental and autism-focused behavioural assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific drug therapy; care centres on early developmental and educational intervention for intellectual disability and speech and language delay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Anchoring on a clinical diagnosis of Sotos syndrome and not extending genetic testing to SETD2"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of luscan-lumish syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "luscan_lumish_syndrome-matrix",
+      "title": "Luscan-Lumish syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "This is a chromatin-related overgrowth syndrome characterised by macrocephaly, tall stature, and neurodevelopmental difficulties",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel, Chromosomal microarray to exclude copy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sotos syndrome (NSD1-related), Weaver syndrome (EZH2-related), Tatton-Brown-Rahman syndrome (DNMT3A-related)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific drug therapy; care centres on early developmental and educational intervention for intellectual disability",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Anchoring on a clinical diagnosis of Sotos syndrome and not extending genetic testing to SETD2",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for luscan-lumish syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "luscan_lumish_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome or genome sequencing, or overgrowth gene panel",
+          "cells": [
+            {
+              "text": "SETD2 loss-of-function variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Copy number causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring with bone age",
+          "cells": [
+            {
+              "text": "Tall stature and advanced bone age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Marked macrocephaly or neurological signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability and speech delay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "luscan_lumish_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sotos syndrome (NSD1)",
+          "cells": [
+            {
+              "text": "Shared overgrowth phenotype; molecular testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weaver syndrome (EZH2)",
+          "cells": [
+            {
+              "text": "Overgrowth with a different gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tatton-Brown-Rahman syndrome (DNMT3A)",
+          "cells": [
+            {
+              "text": "Overgrowth with a different gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fragile X syndrome",
+          "cells": [
+            {
+              "text": "Intellectual disability; chromosomal or gene testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "luscan_lumish_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-specific drug therapy",
+          "cells": [
+            {
+              "text": "Care centres on early developmental and educational intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural and therapy support",
+          "cells": [
+            {
+              "text": "Autism-focused therapy with speech, occupational and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth surveillance",
+          "cells": [
+            {
+              "text": "Serial growth monitoring with bone age and dietetic input for obesity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological assessment",
+          "cells": [
+            {
+              "text": "Brain MRI where macrocephaly is marked or signs emerge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant, commonly de novo; parental testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "luscan_lumish_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Luscan-Lumish syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Macrocephaly, tall stature and developmental delay in a child with overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid head growth, focal signs or developmental regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review and brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exome or genome sequencing, microarray, bone age, developmental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a heterozygous SETD2 loss-of-function variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sotos, Weaver, Tatton-Brown-Rahman or Malan syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early developmental and educational intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Autism-focused behavioural and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial growth monitoring with bone age and diet advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Brain MRI and neurological assessment where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with parental testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifespan usually not shortened; outlook depends on intellectual disability severity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

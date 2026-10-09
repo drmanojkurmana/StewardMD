@@ -1,173 +1,493 @@
 {
- "id": "otitis_media_with_effusion",
- "name": "Otitis media with effusion",
- "aliases": [
-  "OME",
-  "glue ear",
-  "serous otitis media",
-  "secretory otitis media"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by a non-infected fluid collection in the middle ear behind an intact tympanic membrane, without acute signs of infection",
-   "A leading cause of acquired conductive hearing loss in children and often presents as inattention, poor school performance or delayed speech",
-   "Frequently follows acute otitis media or arises from persistent Eustachian tube dysfunction, often related to adenoid hypertrophy",
-   "Otoscopy may reveal a dull, retracted drum, an air-fluid level or bubbles, and reduced mobility",
-   "Tympanometry showing a flat (type B) trace and audiometry demonstrating conductive loss support the diagnosis",
-   "In adults, unilateral persistent effusion should prompt examination of the postnasal space to exclude a nasopharyngeal tumour",
-   "Many cases resolve spontaneously, so an initial period of watchful waiting with reassessment is appropriate",
-   "Persistent effusion with significant hearing loss may be managed with ventilation (grommet) tubes, often alongside adenoidectomy"
+  "id": "otitis_media_with_effusion",
+  "name": "Otitis media with effusion",
+  "aliases": [
+    "OME",
+    "glue ear",
+    "serous otitis media",
+    "secretory otitis media"
   ],
-  "pathophysiology": "Otitis media with effusion results from prolonged Eustachian tube dysfunction that impairs middle ear ventilation. Persistent negative pressure encourages transudation of fluid and metaplasia of the middle ear mucosa toward a secretory epithelium, producing a serous or mucoid (glue-like) effusion. The retained fluid dampens ossicular movement and causes a conductive hearing loss. Contributing factors include adenoid hypertrophy, recurrent upper respiratory infections, allergy, cleft palate and, in adults, nasopharyngeal masses obstructing the tube.",
-  "additionalDifferentials": [
-   "Acute otitis media",
-   "Chronic suppurative otitis media",
-   "Congenital ossicular or cochlear hearing loss",
-   "Tympanosclerosis",
-   "Nasopharyngeal carcinoma (in unilateral adult cases)",
-   "Cholesteatoma with retraction"
-  ],
-  "additionalInvestigations": [
-   "Pneumatic otoscopy to assess drum mobility",
-   "Tympanometry to detect middle ear fluid and negative pressure",
-   "Pure tone audiometry to quantify conductive hearing loss",
-   "Nasopharyngeal examination or endoscopy in persistent unilateral adult effusion",
-   "Assessment of adenoids and allergic or sinonasal contributors"
-  ],
-  "redFlags": [
-   "Unilateral persistent effusion in an adult raising concern for nasopharyngeal carcinoma",
-   "Progressive hearing loss affecting speech and language development in a child",
-   "Signs of retraction pocket or cholesteatoma developing",
-   "Effusion associated with cranial nerve signs or neck mass"
-  ],
-  "prognosis": "The majority of childhood cases resolve spontaneously within weeks to months; persistent disease can impair hearing and language development but generally responds well to ventilation tubes and treatment of underlying causes.",
-  "pitfalls": [
-   "Overprescribing antibiotics for a fundamentally non-infective effusion",
-   "Failing to examine the nasopharynx in an adult with unilateral effusion",
-   "Intervening surgically too early before allowing spontaneous resolution",
-   "Missing associated speech, language or educational impact in children"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initial period of active observation, since most childhood effusions resolve spontaneously within weeks to months",
-   "Insertion of ventilation tubes (grommets) for persistent bilateral effusion with hearing loss affecting speech, language or schooling",
-   "Adjuvant adenoidectomy where adenoid hypertrophy contributes, particularly in recurrent disease",
-   "Hearing aids as an alternative for persistent hearing loss when surgery is declined or unsuitable",
-   "Treat contributing factors such as allergy, sinonasal disease and recurrent upper respiratory infection",
-   "In adults, examine the postnasal space and image to exclude a nasopharyngeal tumour when the effusion is unilateral and persistent",
-   "Monitor hearing and speech-and-language development with audiometry and tympanometry"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "otitis_media_with_effusion-pathway",
-   "title": "Otitis media with effusion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by a non-infected fluid collection in the middle ear behind an intact tympanic membrane, without acute signs of infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unilateral persistent effusion in an adult raising concern for nasopharyngeal carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pneumatic otoscopy to assess drum mobility, Tympanometry to detect middle ear fluid and negative pressure, Pure tone audiometry to quantify conductive hearing loss"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initial period of active observation, since most childhood effusions resolve spontaneously within weeks to months"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overprescribing antibiotics for a fundamentally non-infective effusion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of otitis media with effusion."
-  }
- ],
- "tables": [
-  {
-   "id": "otitis_media_with_effusion-matrix",
-   "title": "Otitis media with effusion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by a non-infected fluid collection in the middle ear behind an intact tympanic membrane, without acute signs of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by a non-infected fluid collection in the middle ear behind an intact tympanic membrane, without acute signs of infection",
+      "A leading cause of acquired conductive hearing loss in children and often presents as inattention, poor school performance or delayed speech",
+      "Frequently follows acute otitis media or arises from persistent Eustachian tube dysfunction, often related to adenoid hypertrophy",
+      "Otoscopy may reveal a dull, retracted drum, an air-fluid level or bubbles, and reduced mobility",
+      "Tympanometry showing a flat (type B) trace and audiometry demonstrating conductive loss support the diagnosis",
+      "In adults, unilateral persistent effusion should prompt examination of the postnasal space to exclude a nasopharyngeal tumour",
+      "Many cases resolve spontaneously, so an initial period of watchful waiting with reassessment is appropriate",
+      "Persistent effusion with significant hearing loss may be managed with ventilation (grommet) tubes, often alongside adenoidectomy"
     ],
-    [
-     "Key Investigations",
-     "Pneumatic otoscopy to assess drum mobility, Tympanometry to detect middle ear fluid and negative pressure, Pure tone audiometry",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Otitis media with effusion results from prolonged Eustachian tube dysfunction that impairs middle ear ventilation. Persistent negative pressure encourages transudation of fluid and metaplasia of the middle ear mucosa toward a secretory epithelium, producing a serous or mucoid (glue-like) effusion. The retained fluid dampens ossicular movement and causes a conductive hearing loss. Contributing factors include adenoid hypertrophy, recurrent upper respiratory infections, allergy, cleft palate and, in adults, nasopharyngeal masses obstructing the tube.",
+    "additionalDifferentials": [
+      "Acute otitis media",
+      "Chronic suppurative otitis media",
+      "Congenital ossicular or cochlear hearing loss",
+      "Tympanosclerosis",
+      "Nasopharyngeal carcinoma (in unilateral adult cases)",
+      "Cholesteatoma with retraction"
     ],
-    [
-     "Primary Differentials",
-     "Acute otitis media, Chronic suppurative otitis media, Congenital ossicular or cochlear hearing loss",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pneumatic otoscopy to assess drum mobility",
+      "Tympanometry to detect middle ear fluid and negative pressure",
+      "Pure tone audiometry to quantify conductive hearing loss",
+      "Nasopharyngeal examination or endoscopy in persistent unilateral adult effusion",
+      "Assessment of adenoids and allergic or sinonasal contributors"
     ],
-    [
-     "Management Strategy",
-     "Initial period of active observation, since most childhood effusions resolve spontaneously within weeks to months",
-     "Core treatment modality"
+    "redFlags": [
+      "Unilateral persistent effusion in an adult raising concern for nasopharyngeal carcinoma",
+      "Progressive hearing loss affecting speech and language development in a child",
+      "Signs of retraction pocket or cholesteatoma developing",
+      "Effusion associated with cranial nerve signs or neck mass"
     ],
-    [
-     "Clinical Pitfall",
-     "Overprescribing antibiotics for a fundamentally non-infective effusion",
-     "Prevent diagnostic or management error"
+    "prognosis": "The majority of childhood cases resolve spontaneously within weeks to months; persistent disease can impair hearing and language development but generally responds well to ventilation tubes and treatment of underlying causes.",
+    "pitfalls": [
+      "Overprescribing antibiotics for a fundamentally non-infective effusion",
+      "Failing to examine the nasopharynx in an adult with unilateral effusion",
+      "Intervening surgically too early before allowing spontaneous resolution",
+      "Missing associated speech, language or educational impact in children"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initial period of active observation, since most childhood effusions resolve spontaneously within weeks to months",
+      "Insertion of ventilation tubes (grommets) for persistent bilateral effusion with hearing loss affecting speech, language or schooling",
+      "Adjuvant adenoidectomy where adenoid hypertrophy contributes, particularly in recurrent disease",
+      "Hearing aids as an alternative for persistent hearing loss when surgery is declined or unsuitable",
+      "Treat contributing factors such as allergy, sinonasal disease and recurrent upper respiratory infection",
+      "In adults, examine the postnasal space and image to exclude a nasopharyngeal tumour when the effusion is unilateral and persistent",
+      "Monitor hearing and speech-and-language development with audiometry and tympanometry"
     ]
-   ],
-   "caption": "Overview comparison matrix for otitis media with effusion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "otitis-media-with-effusion-real-image",
-   "title": "Otitis media with effusion: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "otitis_media_with_effusion-pathway",
+      "title": "Otitis media with effusion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by a non-infected fluid collection in the middle ear behind an intact tympanic membrane, without acute signs of infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unilateral persistent effusion in an adult raising concern for nasopharyngeal carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pneumatic otoscopy to assess drum mobility, Tympanometry to detect middle ear fluid and negative pressure, Pure tone audiometry to quantify conductive hearing loss"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initial period of active observation, since most childhood effusions resolve spontaneously within weeks to months"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overprescribing antibiotics for a fundamentally non-infective effusion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of otitis media with effusion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "otitis_media_with_effusion-matrix",
+      "title": "Otitis media with effusion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by a non-infected fluid collection in the middle ear behind an intact tympanic membrane, without acute signs of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pneumatic otoscopy to assess drum mobility, Tympanometry to detect middle ear fluid and negative pressure, Pure tone audiometry",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute otitis media, Chronic suppurative otitis media, Congenital ossicular or cochlear hearing loss",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initial period of active observation, since most childhood effusions resolve spontaneously within weeks to months",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overprescribing antibiotics for a fundamentally non-infective effusion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for otitis media with effusion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "otitis_media_with_effusion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pneumatic otoscopy",
+          "cells": [
+            {
+              "text": "Drum mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry",
+          "cells": [
+            {
+              "text": "Middle ear fluid and negative pressure; a flat type B trace"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure tone audiometry",
+          "cells": [
+            {
+              "text": "Conductive hearing loss, quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasopharyngeal examination or endoscopy",
+          "cells": [
+            {
+              "text": "Persistent unilateral effusion in an adult"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenoid and allergic or sinonasal assessment",
+          "cells": [
+            {
+              "text": "Contributing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otitis_media_with_effusion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute otitis media",
+          "cells": [
+            {
+              "text": "Non-infected fluid behind an intact drum, without acute signs of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasopharyngeal carcinoma",
+          "cells": [
+            {
+              "text": "Unilateral persistent effusion in an adult"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholesteatoma with retraction",
+          "cells": [
+            {
+              "text": "A retraction pocket or cholesteatoma developing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otitis_media_with_effusion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Active observation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Most childhood effusions resolve within weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation tubes",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "For persistent bilateral effusion with hearing loss affecting speech, language or schooling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenoidectomy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Where adenoid hypertrophy contributes, particularly in recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aids",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "An alternative when surgery is declined or unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributing factors",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Allergy, sinonasal disease and recurrent upper respiratory infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adult nasopharyngeal check",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Examine the postnasal space and image when unilateral and persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Audiometry and tympanometry, with speech and language review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "otitis_media_with_effusion-dx-mgmt",
+      "title": "Diagnosis and management of Otitis media with effusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless hearing loss with a dull, retracted drum; effusion behind intact drum",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (unilateral adult effusion, cholesteatoma pocket or cranial nerve signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: nasopharyngeal examination and imaging for a tumour in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pneumatic otoscopy, tympanometry (flat type B), audiometry, nasendoscopy if adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is there persistent effusion with conductive hearing loss and no infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acute otitis media, cholesteatoma or chronic suppurative otitis media",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Active observation first; most childhood effusions resolve within weeks to months",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ventilation tubes for persistent bilateral effusion with hearing loss affecting speech",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adenoidectomy where adenoid hypertrophy contributes, especially in recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing aids if surgery is declined; treat allergy and sinonasal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor hearing, speech and language with audiometry and tympanometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most childhood cases resolve; persistent disease affects language but responds to tubes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

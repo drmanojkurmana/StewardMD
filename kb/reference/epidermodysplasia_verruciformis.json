@@ -1,179 +1,486 @@
 {
- "id": "epidermodysplasia_verruciformis",
- "name": "Epidermodysplasia verruciformis",
- "aliases": [
-  "EV",
-  "Lewandowsky-Lutz dysplasia",
-  "TMC6",
-  "TMC8"
- ],
- "class": "non_infective",
- "system": "Skin",
- "specialty": "Dermatology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Dermatology genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare inherited genodermatosis characterised by lifelong abnormal susceptibility to specific beta-genus human papillomaviruses, most often caused by biallelic loss-of-function variants in TMC6 (EVER1) or TMC8 (EVER2).",
-   "Presents in childhood with widespread flat wart-like papules together with reddish-brown or hypopigmented pityriasis versicolor-like macules on the face, neck, trunk and limbs.",
-   "The characteristic oncogenic beta-HPV types, notably HPV5 and HPV8, confer a high lifetime risk of cutaneous squamous cell carcinoma, especially at sun-exposed sites.",
-   "Malignant transformation typically emerges from the third to fourth decades, driven by combined viral and ultraviolet damage.",
-   "Strict lifelong photoprotection is central to reducing the risk of malignant transformation.",
-   "An acquired EV-like phenotype occurs with T-cell immunodeficiency, such as HIV infection, transplantation immunosuppression or GATA2 deficiency, and must be distinguished from the inherited disease.",
-   "Lesions are typically refractory and recurrent, so the goal is surveillance and early treatment of malignancy rather than cure.",
-   "Consanguinity and affected siblings support the usual autosomal recessive inheritance."
+  "id": "epidermodysplasia_verruciformis",
+  "name": "Epidermodysplasia verruciformis",
+  "aliases": [
+    "EV",
+    "Lewandowsky-Lutz dysplasia",
+    "TMC6",
+    "TMC8"
   ],
-  "pathophysiology": "Classic epidermodysplasia verruciformis results from biallelic loss-of-function variants in TMC6 (EVER1) or TMC8 (EVER2) on chromosome 17q25, which encode transmembrane proteins of the endoplasmic reticulum that form a complex with the zinc transporter ZnT-1 and help regulate intracellular zinc homeostasis in keratinocytes. Their loss produces a selective intrinsic keratinocyte susceptibility to beta-papillomaviruses, permitting unchecked cutaneous replication of otherwise commensal beta-HPV types. Persistent infection with oncogenic types such as HPV5 and HPV8, acting together with ultraviolet-induced DNA damage, drives keratinocyte transformation and cutaneous squamous cell carcinoma. Because the defect is largely confined to cutaneous immunity against these viruses, affected individuals are otherwise generally not broadly immunodeficient, in contrast to acquired EV where a systemic T-cell defect underlies the phenotype. Rarer forms have been linked to other genes affecting keratinocyte antiviral immunity, such as CIB1.",
-  "additionalDifferentials": [
-   "Acquired epidermodysplasia verruciformis (HIV infection, iatrogenic immunosuppression, GATA2 or other T-cell immunodeficiencies)",
-   "Extensive common or plane warts (verruca plana) without the underlying genodermatosis",
-   "Pityriasis versicolor, which the macular lesions closely mimic",
-   "Tinea corporis and other superficial dermatoses",
-   "Seborrhoeic and actinic keratoses in older patients",
-   "Disseminated superficial actinic porokeratosis",
-   "Acrokeratosis verruciformis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing the characteristic enlarged keratinocytes with blue-grey cytoplasm (EV cells)",
-   "HPV typing by PCR from lesional skin, seeking beta-HPV types, especially HPV5 and HPV8",
-   "Molecular genetic testing of TMC6 and TMC8 and related genes",
-   "Assessment for immunodeficiency to distinguish acquired EV, including HIV testing and lymphocyte subsets",
-   "Dermoscopy and regular total-body skin surveillance",
-   "Biopsy of any changing, indurated or ulcerated lesion to detect squamous cell carcinoma",
-   "Family screening and genetic counselling"
-  ],
-  "redFlags": [
-   "A lesion becoming indurated, ulcerated, painful or rapidly enlarging, suggesting squamous cell carcinoma",
-   "New lesions concentrated on sun-exposed skin",
-   "Onset of an EV-like eruption in an adult, prompting a search for acquired immunodeficiency",
-   "Regional lymphadenopathy suggesting metastatic cutaneous malignancy"
-  ],
-  "prognosis": "Skin lesions persist lifelong; the major determinant of outcome is cutaneous squamous cell carcinoma, which is often multiple and can be locally aggressive, so prognosis depends on rigorous photoprotection and surveillance with early excision.",
-  "pitfalls": [
-   "Dismissing the macular lesions as ordinary pityriasis versicolor",
-   "Failing to distinguish inherited EV from an acquired EV-like phenotype that signals underlying immunodeficiency",
-   "Under-appreciating the malignant potential and neglecting long-term skin surveillance",
-   "Providing inadequate photoprotection advice",
-   "Pursuing aggressive destruction of all warts rather than targeted management with cancer surveillance"
-  ],
-  "references": [
-   "Dermatology reference texts",
-   "Clinical genetics reference texts",
-   "Cutaneous oncology and HPV guidelines (source-neutral)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Enforce strict lifelong photoprotection with sun avoidance, broad-spectrum sunscreen and protective clothing, as this is the central measure to limit ultraviolet-driven malignant transformation",
-   "Treat wart-like and dysplastic lesions with topical retinoids, imiquimod, 5-fluorouracil or cryotherapy, and use systemic retinoids (acitretin) for widespread or refractory disease",
-   "Undertake regular total-body skin surveillance with dermoscopy and biopsy any changing, indurated or ulcerated lesion",
-   "Excise cutaneous squamous cell carcinomas early, using margin-controlled (Mohs) or wide surgical excision for aggressive tumours",
-   "In acquired EV-like disease, screen for and treat the underlying immunodeficiency, including HIV and GATA2 defects, and minimise iatrogenic immunosuppression where feasible",
-   "Offer genetic counselling for the autosomal recessive TMC6/TMC8 inheritance and arrange family testing",
-   "Refer to dermatology and clinical genetics for long-term coordinated care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "epidermodysplasia_verruciformis-pathway",
-   "title": "Epidermodysplasia verruciformis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare inherited genodermatosis characterised by lifelong abnormal susceptibility to specific beta-genus human papillomaviruses, most often caused by biallelic loss-of-function variants in TMC6 (EVER1) or TMC8 (EVER2).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A lesion becoming indurated, ulcerated, painful or rapidly enlarging, suggesting squamous cell carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing the characteristic enlarged keratinocytes with blue-grey cytoplasm (EV cells), HPV typing by PCR from lesional skin, seeking beta-HPV types, especially HPV5 and HPV8, Molecular genetic testing of TMC6"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Enforce strict lifelong photoprotection with sun avoidance, broad-spectrum sunscreen and protective clothing, as this is the central measure to limit ultraviolet-driven malignant transformation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing the macular lesions as ordinary pityriasis versicolor"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of epidermodysplasia verruciformis."
-  }
- ],
- "tables": [
-  {
-   "id": "epidermodysplasia_verruciformis-matrix",
-   "title": "Epidermodysplasia verruciformis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare inherited genodermatosis characterised by lifelong abnormal susceptibility to specific beta-genus human papillomaviruses,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin",
+  "specialty": "Dermatology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dermatology genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare inherited genodermatosis characterised by lifelong abnormal susceptibility to specific beta-genus human papillomaviruses, most often caused by biallelic loss-of-function variants in TMC6 (EVER1) or TMC8 (EVER2).",
+      "Presents in childhood with widespread flat wart-like papules together with reddish-brown or hypopigmented pityriasis versicolor-like macules on the face, neck, trunk and limbs.",
+      "The characteristic oncogenic beta-HPV types, notably HPV5 and HPV8, confer a high lifetime risk of cutaneous squamous cell carcinoma, especially at sun-exposed sites.",
+      "Malignant transformation typically emerges from the third to fourth decades, driven by combined viral and ultraviolet damage.",
+      "Strict lifelong photoprotection is central to reducing the risk of malignant transformation.",
+      "An acquired EV-like phenotype occurs with T-cell immunodeficiency, such as HIV infection, transplantation immunosuppression or GATA2 deficiency, and must be distinguished from the inherited disease.",
+      "Lesions are typically refractory and recurrent, so the goal is surveillance and early treatment of malignancy rather than cure.",
+      "Consanguinity and affected siblings support the usual autosomal recessive inheritance."
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing the characteristic enlarged keratinocytes with blue-grey cytoplasm (EV cells), HPV typing by PCR from",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Classic epidermodysplasia verruciformis results from biallelic loss-of-function variants in TMC6 (EVER1) or TMC8 (EVER2) on chromosome 17q25, which encode transmembrane proteins of the endoplasmic reticulum that form a complex with the zinc transporter ZnT-1 and help regulate intracellular zinc homeostasis in keratinocytes. Their loss produces a selective intrinsic keratinocyte susceptibility to beta-papillomaviruses, permitting unchecked cutaneous replication of otherwise commensal beta-HPV types. Persistent infection with oncogenic types such as HPV5 and HPV8, acting together with ultraviolet-induced DNA damage, drives keratinocyte transformation and cutaneous squamous cell carcinoma. Because the defect is largely confined to cutaneous immunity against these viruses, affected individuals are otherwise generally not broadly immunodeficient, in contrast to acquired EV where a systemic T-cell defect underlies the phenotype. Rarer forms have been linked to other genes affecting keratinocyte antiviral immunity, such as CIB1.",
+    "additionalDifferentials": [
+      "Acquired epidermodysplasia verruciformis (HIV infection, iatrogenic immunosuppression, GATA2 or other T-cell immunodeficiencies)",
+      "Extensive common or plane warts (verruca plana) without the underlying genodermatosis",
+      "Pityriasis versicolor, which the macular lesions closely mimic",
+      "Tinea corporis and other superficial dermatoses",
+      "Seborrhoeic and actinic keratoses in older patients",
+      "Disseminated superficial actinic porokeratosis",
+      "Acrokeratosis verruciformis"
     ],
-    [
-     "Primary Differentials",
-     "Acquired epidermodysplasia verruciformis (HIV infection, iatrogenic immunosuppression, GATA2 or other T-cell immunodeficiencies),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing the characteristic enlarged keratinocytes with blue-grey cytoplasm (EV cells)",
+      "HPV typing by PCR from lesional skin, seeking beta-HPV types, especially HPV5 and HPV8",
+      "Molecular genetic testing of TMC6 and TMC8 and related genes",
+      "Assessment for immunodeficiency to distinguish acquired EV, including HIV testing and lymphocyte subsets",
+      "Dermoscopy and regular total-body skin surveillance",
+      "Biopsy of any changing, indurated or ulcerated lesion to detect squamous cell carcinoma",
+      "Family screening and genetic counselling"
     ],
-    [
-     "Management Strategy",
-     "Enforce strict lifelong photoprotection with sun avoidance, broad-spectrum sunscreen and protective clothing, as this is the",
-     "Core treatment modality"
+    "redFlags": [
+      "A lesion becoming indurated, ulcerated, painful or rapidly enlarging, suggesting squamous cell carcinoma",
+      "New lesions concentrated on sun-exposed skin",
+      "Onset of an EV-like eruption in an adult, prompting a search for acquired immunodeficiency",
+      "Regional lymphadenopathy suggesting metastatic cutaneous malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing the macular lesions as ordinary pityriasis versicolor",
-     "Prevent diagnostic or management error"
+    "prognosis": "Skin lesions persist lifelong; the major determinant of outcome is cutaneous squamous cell carcinoma, which is often multiple and can be locally aggressive, so prognosis depends on rigorous photoprotection and surveillance with early excision.",
+    "pitfalls": [
+      "Dismissing the macular lesions as ordinary pityriasis versicolor",
+      "Failing to distinguish inherited EV from an acquired EV-like phenotype that signals underlying immunodeficiency",
+      "Under-appreciating the malignant potential and neglecting long-term skin surveillance",
+      "Providing inadequate photoprotection advice",
+      "Pursuing aggressive destruction of all warts rather than targeted management with cancer surveillance"
+    ],
+    "references": [
+      "Dermatology reference texts",
+      "Clinical genetics reference texts",
+      "Cutaneous oncology and HPV guidelines (source-neutral)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Enforce strict lifelong photoprotection with sun avoidance, broad-spectrum sunscreen and protective clothing, as this is the central measure to limit ultraviolet-driven malignant transformation",
+      "Treat wart-like and dysplastic lesions with topical retinoids, imiquimod, 5-fluorouracil or cryotherapy, and use systemic retinoids (acitretin) for widespread or refractory disease",
+      "Undertake regular total-body skin surveillance with dermoscopy and biopsy any changing, indurated or ulcerated lesion",
+      "Excise cutaneous squamous cell carcinomas early, using margin-controlled (Mohs) or wide surgical excision for aggressive tumours",
+      "In acquired EV-like disease, screen for and treat the underlying immunodeficiency, including HIV and GATA2 defects, and minimise iatrogenic immunosuppression where feasible",
+      "Offer genetic counselling for the autosomal recessive TMC6/TMC8 inheritance and arrange family testing",
+      "Refer to dermatology and clinical genetics for long-term coordinated care"
     ]
-   ],
-   "caption": "Overview comparison matrix for epidermodysplasia verruciformis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "epidermodysplasia-verruciformis-real-image",
-   "title": "Epidermodysplasia verruciformis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "epidermodysplasia_verruciformis-pathway",
+      "title": "Epidermodysplasia verruciformis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare inherited genodermatosis characterised by lifelong abnormal susceptibility to specific beta-genus human papillomaviruses, most often caused by biallelic loss-of-function variants in TMC6 (EVER1) or TMC8 (EVER2).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A lesion becoming indurated, ulcerated, painful or rapidly enlarging, suggesting squamous cell carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing the characteristic enlarged keratinocytes with blue-grey cytoplasm (EV cells), HPV typing by PCR from lesional skin, seeking beta-HPV types, especially HPV5 and HPV8, Molecular genetic testing of TMC6"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Enforce strict lifelong photoprotection with sun avoidance, broad-spectrum sunscreen and protective clothing, as this is the central measure to limit ultraviolet-driven malignant transformation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing the macular lesions as ordinary pityriasis versicolor"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of epidermodysplasia verruciformis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "epidermodysplasia_verruciformis-matrix",
+      "title": "Epidermodysplasia verruciformis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare inherited genodermatosis characterised by lifelong abnormal susceptibility to specific beta-genus human papillomaviruses,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing the characteristic enlarged keratinocytes with blue-grey cytoplasm (EV cells), HPV typing by PCR from",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acquired epidermodysplasia verruciformis (HIV infection, iatrogenic immunosuppression, GATA2 or other T-cell immunodeficiencies),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Enforce strict lifelong photoprotection with sun avoidance, broad-spectrum sunscreen and protective clothing, as this is the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing the macular lesions as ordinary pityriasis versicolor",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for epidermodysplasia verruciformis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epidermodysplasia_verruciformis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Enlarged keratinocytes with blue-grey cytoplasm (EV cells)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPV typing by PCR from lesional skin",
+          "cells": [
+            {
+              "text": "Beta-HPV types, especially HPV5 and HPV8"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "TMC6 and TMC8 and related genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunodeficiency assessment, including HIV testing and lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Distinguishes acquired EV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy and total-body skin surveillance",
+          "cells": [
+            {
+              "text": "Changing lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of changing, indurated or ulcerated lesions",
+          "cells": [
+            {
+              "text": "Squamous cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidermodysplasia_verruciformis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired epidermodysplasia verruciformis (HIV, iatrogenic immunosuppression, GATA2)",
+          "cells": [
+            {
+              "text": "Occurs with T-cell immunodeficiency such as HIV, transplant immunosuppression or GATA2 defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pityriasis versicolor",
+          "cells": [
+            {
+              "text": "Macular lesions mimic it closely; dismissing them as this is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidermodysplasia_verruciformis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong photoprotection",
+          "cells": [
+            {
+              "text": "Sun avoidance, broad-spectrum sunscreen and protective clothing; the central measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or ablative treatment of wart-like lesions",
+          "cells": [
+            {
+              "text": "Topical retinoids, imiquimod, 5-fluorouracil or cryotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic retinoid",
+          "cells": [
+            {
+              "text": "Acitretin for widespread or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total-body skin surveillance",
+          "cells": [
+            {
+              "text": "Dermoscopy, with biopsy of any changing, indurated or ulcerated lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early excision of squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Margin-controlled (Mohs) or wide excision for aggressive tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying immunodeficiency",
+          "cells": [
+            {
+              "text": "In acquired disease, including HIV and GATA2 defects; minimise iatrogenic immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive TMC6/TMC8 inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and clinical genetics",
+          "cells": [
+            {
+              "text": "Long-term coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epidermodysplasia_verruciformis-dx-mgmt",
+      "title": "Diagnosis and management of Epidermodysplasia verruciformis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Widespread flat wart-like papules and pityriasis versicolor-like lesions from childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (indurated, ulcerated or enlarging lesion, or regional lymphadenopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Early biopsy and excision of suspected squamous cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for EV cells; HPV PCR typing; immunodeficiency screen including HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "EV cells on biopsy with beta-HPV types (HPV5 or HPV8) detected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess for acquired EV-like phenotype and underlying immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict lifelong photoprotection, the central measure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical retinoids, imiquimod, 5-fluorouracil or cryotherapy for warts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acitretin for widespread or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Total-body skin surveillance with dermoscopy and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive TMC6/TMC8",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lesions persist lifelong; squamous cell carcinoma is the main determinant of outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

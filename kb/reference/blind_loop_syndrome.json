@@ -1,172 +1,554 @@
 {
- "id": "blind_loop_syndrome",
- "name": "Blind loop syndrome (small intestinal bacterial overgrowth)",
- "aliases": [
-  "small intestinal bacterial overgrowth",
-  "SIBO",
-  "stagnant loop syndrome",
-  "bacterial overgrowth syndrome"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with bloating, flatulence, abdominal discomfort, diarrhoea and, when severe, steatorrhoea and weight loss",
-   "Characteristically causes vitamin B12 deficiency because bacteria consume the vitamin, while folate is often normal or high as bacteria synthesise it",
-   "Fat malabsorption arises from bacterial deconjugation of bile acids, which impairs micelle formation, and may cause fat-soluble vitamin deficiency",
-   "It results from stasis or loss of the normal barriers to bacterial colonisation, for example surgically created blind loops, strictures, diverticula, dysmotility or loss of gastric acid",
-   "Hydrogen (and methane) breath testing after a carbohydrate load is a widely used non-invasive diagnostic approach, though jejunal aspirate culture is a reference standard",
-   "Correcting or bypassing the underlying anatomical or motility abnormality is important where feasible",
-   "Treatment uses antibiotic courses for bacterial overgrowth together with nutritional replacement, and cyclical antibiotics may be needed for recurrent disease"
+  "id": "blind_loop_syndrome",
+  "name": "Blind loop syndrome (small intestinal bacterial overgrowth)",
+  "aliases": [
+    "small intestinal bacterial overgrowth",
+    "SIBO",
+    "stagnant loop syndrome",
+    "bacterial overgrowth syndrome"
   ],
-  "pathophysiology": "Blind loop syndrome, or small intestinal bacterial overgrowth, occurs when excessive numbers of colonic-type bacteria colonise the normally sparsely populated small intestine. Normal protective mechanisms include gastric acid, intact intestinal motility that sweeps the lumen, the ileocaecal valve and immune defences; anatomical stasis from a surgically created blind loop, strictures, fistulae or diverticula, or impaired motility, allows bacteria to proliferate. These bacteria deconjugate bile acids, impairing fat absorption and causing steatorrhoea, consume dietary vitamin B12 leading to deficiency, and synthesise folate. They also injure the mucosa and produce gas and toxic metabolites, giving rise to the diarrhoea, bloating and malabsorption that characterise the syndrome.",
-  "additionalDifferentials": [
-   "Coeliac disease",
-   "Chronic pancreatic exocrine insufficiency",
-   "Irritable bowel syndrome",
-   "Inflammatory bowel disease, especially with strictures or fistulae",
-   "Chronic intestinal pseudo-obstruction",
-   "Bile acid diarrhoea"
-  ],
-  "additionalInvestigations": [
-   "Hydrogen and methane breath testing after a carbohydrate substrate",
-   "Jejunal aspirate culture where available as a reference test",
-   "Vitamin B12 and folate levels showing the typical pattern of low B12 with normal or raised folate",
-   "Assessment of fat malabsorption and fat-soluble vitamins",
-   "Imaging or endoscopy to identify a blind loop, stricture, diverticula or dysmotility"
-  ],
-  "redFlags": [
-   "Significant weight loss and malnutrition",
-   "Severe or neurological features of vitamin B12 deficiency",
-   "Symptoms suggesting an underlying stricture, fistula or malignancy",
-   "Failure to respond to antibiotics, prompting reassessment of the diagnosis and anatomy"
-  ],
-  "prognosis": "Symptoms usually improve with antibiotic treatment and correction of deficiencies, but relapse is common when a fixed anatomical or motility abnormality cannot be corrected, and some patients need recurrent or cyclical therapy.",
-  "pitfalls": [
-   "Diagnosing irritable bowel syndrome without considering bacterial overgrowth in at-risk patients",
-   "Overlooking the underlying anatomical or motility cause that perpetuates overgrowth",
-   "Failing to replace vitamin B12 and fat-soluble vitamins",
-   "Relying on a single breath test result given its limited sensitivity and specificity"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "American College of Gastroenterology guidance on small intestinal bacterial overgrowth"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antibiotic therapy (such as rifaximin, or rotating courses of tetracyclines with metronidazole) to reduce the bacterial overgrowth, given cyclically where relapse occurs",
-   "Correct or bypass the underlying anatomical stasis (blind loop, stricture, fistula or diverticula) surgically where feasible, and use prokinetics for dysmotility",
-   "Parenteral vitamin B12 replacement together with supplementation of the fat-soluble vitamins A, D, E and K",
-   "Nutritional support with correction of malnutrition and a modified-fat diet incorporating medium-chain triglycerides for steatorrhoea",
-   "Symptomatic control of diarrhoea and bloating",
-   "Monitor haematinics, nutritional status and symptoms for relapse, anticipating recurrent or cyclical treatment when a fixed abnormality cannot be corrected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "blind_loop_syndrome-pathway",
-   "title": "Blind loop syndrome (small intestinal bacterial overgrowth): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with bloating, flatulence, abdominal discomfort, diarrhoea and, when severe, steatorrhoea and weight loss",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant weight loss and malnutrition",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Hydrogen and methane breath testing after a carbohydrate substrate, Jejunal aspirate culture where available as a reference test, Vitamin B12 and folate levels showing the typical pattern of low B12 with normal or raised"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antibiotic therapy (such as rifaximin, or rotating courses of tetracyclines with metronidazole) to reduce the bacterial overgrowth, given cyclically where relapse occurs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing irritable bowel syndrome without considering bacterial overgrowth in at-risk patients"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of blind loop syndrome (small intestinal bacterial overgrowth)."
-  }
- ],
- "tables": [
-  {
-   "id": "blind_loop_syndrome-matrix",
-   "title": "Blind loop syndrome (small intestinal bacterial overgrowth): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with bloating, flatulence, abdominal discomfort, diarrhoea and, when severe, steatorrhoea and weight loss",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with bloating, flatulence, abdominal discomfort, diarrhoea and, when severe, steatorrhoea and weight loss",
+      "Characteristically causes vitamin B12 deficiency because bacteria consume the vitamin, while folate is often normal or high as bacteria synthesise it",
+      "Fat malabsorption arises from bacterial deconjugation of bile acids, which impairs micelle formation, and may cause fat-soluble vitamin deficiency",
+      "It results from stasis or loss of the normal barriers to bacterial colonisation, for example surgically created blind loops, strictures, diverticula, dysmotility or loss of gastric acid",
+      "Hydrogen (and methane) breath testing after a carbohydrate load is a widely used non-invasive diagnostic approach, though jejunal aspirate culture is a reference standard",
+      "Correcting or bypassing the underlying anatomical or motility abnormality is important where feasible",
+      "Treatment uses antibiotic courses for bacterial overgrowth together with nutritional replacement, and cyclical antibiotics may be needed for recurrent disease"
     ],
-    [
-     "Key Investigations",
-     "Hydrogen and methane breath testing after a carbohydrate substrate, Jejunal aspirate culture where available as a reference test,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Blind loop syndrome, or small intestinal bacterial overgrowth, occurs when excessive numbers of colonic-type bacteria colonise the normally sparsely populated small intestine. Normal protective mechanisms include gastric acid, intact intestinal motility that sweeps the lumen, the ileocaecal valve and immune defences; anatomical stasis from a surgically created blind loop, strictures, fistulae or diverticula, or impaired motility, allows bacteria to proliferate. These bacteria deconjugate bile acids, impairing fat absorption and causing steatorrhoea, consume dietary vitamin B12 leading to deficiency, and synthesise folate. They also injure the mucosa and produce gas and toxic metabolites, giving rise to the diarrhoea, bloating and malabsorption that characterise the syndrome.",
+    "additionalDifferentials": [
+      "Coeliac disease",
+      "Chronic pancreatic exocrine insufficiency",
+      "Irritable bowel syndrome",
+      "Inflammatory bowel disease, especially with strictures or fistulae",
+      "Chronic intestinal pseudo-obstruction",
+      "Bile acid diarrhoea"
     ],
-    [
-     "Primary Differentials",
-     "Coeliac disease, Chronic pancreatic exocrine insufficiency, Irritable bowel syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Hydrogen and methane breath testing after a carbohydrate substrate",
+      "Jejunal aspirate culture where available as a reference test",
+      "Vitamin B12 and folate levels showing the typical pattern of low B12 with normal or raised folate",
+      "Assessment of fat malabsorption and fat-soluble vitamins",
+      "Imaging or endoscopy to identify a blind loop, stricture, diverticula or dysmotility"
     ],
-    [
-     "Management Strategy",
-     "Antibiotic therapy (such as rifaximin, or rotating courses of tetracyclines with metronidazole) to reduce the bacterial",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant weight loss and malnutrition",
+      "Severe or neurological features of vitamin B12 deficiency",
+      "Symptoms suggesting an underlying stricture, fistula or malignancy",
+      "Failure to respond to antibiotics, prompting reassessment of the diagnosis and anatomy"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing irritable bowel syndrome without considering bacterial overgrowth in at-risk patients",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms usually improve with antibiotic treatment and correction of deficiencies, but relapse is common when a fixed anatomical or motility abnormality cannot be corrected, and some patients need recurrent or cyclical therapy.",
+    "pitfalls": [
+      "Diagnosing irritable bowel syndrome without considering bacterial overgrowth in at-risk patients",
+      "Overlooking the underlying anatomical or motility cause that perpetuates overgrowth",
+      "Failing to replace vitamin B12 and fat-soluble vitamins",
+      "Relying on a single breath test result given its limited sensitivity and specificity"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "American College of Gastroenterology guidance on small intestinal bacterial overgrowth"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antibiotic therapy (such as rifaximin, or rotating courses of tetracyclines with metronidazole) to reduce the bacterial overgrowth, given cyclically where relapse occurs",
+      "Correct or bypass the underlying anatomical stasis (blind loop, stricture, fistula or diverticula) surgically where feasible, and use prokinetics for dysmotility",
+      "Parenteral vitamin B12 replacement together with supplementation of the fat-soluble vitamins A, D, E and K",
+      "Nutritional support with correction of malnutrition and a modified-fat diet incorporating medium-chain triglycerides for steatorrhoea",
+      "Symptomatic control of diarrhoea and bloating",
+      "Monitor haematinics, nutritional status and symptoms for relapse, anticipating recurrent or cyclical treatment when a fixed abnormality cannot be corrected"
     ]
-   ],
-   "caption": "Overview comparison matrix for blind loop syndrome (small intestinal bacterial overgrowth)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "blind-loop-syndrome-real-image",
-   "title": "Blind loop syndrome (small intestinal bacterial overgrowth): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "blind_loop_syndrome-pathway",
+      "title": "Blind loop syndrome (small intestinal bacterial overgrowth): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with bloating, flatulence, abdominal discomfort, diarrhoea and, when severe, steatorrhoea and weight loss",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant weight loss and malnutrition",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Hydrogen and methane breath testing after a carbohydrate substrate, Jejunal aspirate culture where available as a reference test, Vitamin B12 and folate levels showing the typical pattern of low B12 with normal or raised"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antibiotic therapy (such as rifaximin, or rotating courses of tetracyclines with metronidazole) to reduce the bacterial overgrowth, given cyclically where relapse occurs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing irritable bowel syndrome without considering bacterial overgrowth in at-risk patients"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of blind loop syndrome (small intestinal bacterial overgrowth)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "blind_loop_syndrome-matrix",
+      "title": "Blind loop syndrome (small intestinal bacterial overgrowth): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with bloating, flatulence, abdominal discomfort, diarrhoea and, when severe, steatorrhoea and weight loss",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Hydrogen and methane breath testing after a carbohydrate substrate, Jejunal aspirate culture where available as a reference test,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coeliac disease, Chronic pancreatic exocrine insufficiency, Irritable bowel syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antibiotic therapy (such as rifaximin, or rotating courses of tetracyclines with metronidazole) to reduce the bacterial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing irritable bowel syndrome without considering bacterial overgrowth in at-risk patients",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for blind loop syndrome (small intestinal bacterial overgrowth)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 294-7",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blind_loop_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in blind loop syndrome",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydrogen and methane breath test after a carbohydrate load",
+          "cells": [
+            {
+              "text": "Non-invasive diagnosis; limited sensitivity and specificity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jejunal aspirate culture",
+          "cells": [
+            {
+              "text": "Reference test, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 and folate levels",
+          "cells": [
+            {
+              "text": "Low B12 with normal or raised folate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat malabsorption and fat-soluble vitamins",
+          "cells": [
+            {
+              "text": "Steatorrhoea and fat-soluble vitamin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or endoscopy",
+          "cells": [
+            {
+              "text": "Blind loop, stricture, diverticula or dysmotility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "blind_loop_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of bloating and diarrhoea",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "Overgrowth should be considered in at-risk patients before diagnosing IBS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease with strictures or fistulae",
+          "cells": [
+            {
+              "text": "Strictures or fistulae are anatomical causes to identify on imaging or endoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "blind_loop_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in blind loop syndrome",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antibiotic therapy",
+          "cells": [
+            {
+              "text": "Rifaximin, or rotating courses of tetracyclines with metronidazole"
+            },
+            {
+              "text": "Given cyclically where relapse occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anatomical or motility cause",
+          "cells": [
+            {
+              "text": "Surgical correction or bypass of blind loop, stricture, fistula or diverticula; prokinetics for dysmotility"
+            },
+            {
+              "text": "Where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12",
+          "cells": [
+            {
+              "text": "Parenteral vitamin B12 replacement"
+            },
+            {
+              "text": "Consumed by the bacteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamins",
+          "cells": [
+            {
+              "text": "Supplement vitamins A, D, E and K"
+            },
+            {
+              "text": "Fat malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Correct malnutrition; modified-fat diet with medium-chain triglycerides"
+            },
+            {
+              "text": "For steatorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom control",
+          "cells": [
+            {
+              "text": "Symptomatic control of diarrhoea and bloating"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Haematinics, nutritional status and symptoms for relapse"
+            },
+            {
+              "text": "Recurrent or cyclical therapy may be needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "blind_loop_syndrome-ddx-2",
+      "kind": "ddx",
+      "title": "Diagnostic studies in causes of steatorrhea",
+      "rowHeader": "Condition",
+      "columns": [
+        "D-xylose test",
+        "Schilling test",
+        "Duodenal mucosal biopsy"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "50% abnormal; if abnormal, normal with pancreatic enzymes"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bacterial overgrowth syndrome",
+          "cells": [
+            {
+              "text": "Normal or only modestly abnormal"
+            },
+            {
+              "text": "Often abnormal; if abnormal, normal after antibiotics"
+            },
+            {
+              "text": "Usually normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ileal disease",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Abnormal"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Celiac disease",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Abnormal, probably flat"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intestinal lymphangiectasia",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Abnormal, dilated lymphatics"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blind_loop_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of blind loop syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bloating, flatulence, diarrhoea and weight loss in a patient with stasis or motility risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: weight loss, severe B12 deficiency or neurological signs, or no response to antibiotics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: exclude stricture, fistula or malignancy; urgent B12 replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hydrogen or methane breath test after carbohydrate; vitamin B12 and folate levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Check fat-soluble vitamins; imaging or endoscopy for blind loop, stricture or dysmotility",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Overgrowth shown, with low B12 and normal or high folate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antibiotic course such as rifaximin; B12 and fat-soluble vitamin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider IBS, coeliac disease, pancreatic insufficiency or bile acid diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct the anatomical or motility cause where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Improves with treatment; relapse common if a fixed abnormality remains",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

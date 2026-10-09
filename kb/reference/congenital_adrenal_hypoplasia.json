@@ -1,178 +1,465 @@
 {
- "id": "congenital_adrenal_hypoplasia",
- "name": "Congenital adrenal hypoplasia (NR0B1/DAX1)",
- "aliases": [
-  "congenital adrenal hypoplasia",
-  "X-linked adrenal hypoplasia congenita",
-  "AHC",
-  "NR0B1 deficiency",
-  "DAX1 deficiency"
- ],
- "class": "non_infective",
- "system": "Endocrine / Adrenal",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sperling Pediatric Endocrinology / Endocrine Society Clinical Practice Guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare cause of primary adrenal insufficiency; the classic X-linked form results from mutations in the NR0B1 gene encoding the nuclear receptor DAX1",
-   "It typically presents in male infants with a salt-wasting adrenal crisis (hyponatraemia, hyperkalaemia, hypoglycaemia and hypotension) or with more insidious glucocorticoid and mineralocorticoid deficiency in childhood",
-   "It is characteristically combined with hypogonadotropic hypogonadism, which becomes apparent as absent or arrested puberty",
-   "Because it is X-linked, affected individuals are usually boys with carrier mothers, and a family history of infant deaths or adrenal insufficiency may be present",
-   "It is distinguished from congenital adrenal hyperplasia by the absence of a steroidogenic enzyme block and virilisation and by low gonadotropins",
-   "Management is lifelong glucocorticoid and mineralocorticoid replacement, with induction of puberty and fertility issues addressed later",
-   "Contiguous gene deletions at Xp21 can associate it with Duchenne muscular dystrophy and glycerol kinase deficiency"
+  "id": "congenital_adrenal_hypoplasia",
+  "name": "Congenital adrenal hypoplasia (NR0B1/DAX1)",
+  "aliases": [
+    "congenital adrenal hypoplasia",
+    "X-linked adrenal hypoplasia congenita",
+    "AHC",
+    "NR0B1 deficiency",
+    "DAX1 deficiency"
   ],
-  "pathophysiology": "DAX1, encoded by NR0B1, is a nuclear receptor essential for development of the adrenal cortex and of the hypothalamic-pituitary-gonadal axis. Loss-of-function mutations impair formation of the definitive adrenal cortex, producing primary adrenal insufficiency with deficient cortisol and aldosterone, and disrupt gonadotropin secretion and gonadal function, causing hypogonadotropic hypogonadism. Impaired spermatogenesis tends to persist even with gonadotropin therapy, reflecting a combined central and gonadal defect.",
-  "additionalDifferentials": [
-   "Congenital adrenal hyperplasia",
-   "Other causes of primary adrenal insufficiency such as adrenoleukodystrophy or autoimmune adrenalitis",
-   "ACTH resistance syndromes and familial glucocorticoid deficiency",
-   "Adrenal hypoplasia from steroidogenic factor-1 (NR5A1/SF1) defects",
-   "Secondary adrenal insufficiency",
-   "Isolated hypogonadotropic hypogonadism such as Kallmann syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum electrolytes and glucose with paired cortisol and ACTH, expected to show low cortisol and high ACTH in primary failure",
-   "Plasma renin and aldosterone to confirm mineralocorticoid deficiency",
-   "ACTH (Synacthen) stimulation test showing an impaired cortisol response",
-   "Gonadotropins (LH and FSH) and sex steroids, expected to be low in hypogonadotropic hypogonadism",
-   "17-hydroxyprogesterone and a steroid profile to exclude congenital adrenal hyperplasia",
-   "NR0B1 (DAX1) genetic testing and evaluation for contiguous Xp21 gene deletions",
-   "Adrenal imaging where structural assessment is needed"
-  ],
-  "redFlags": [
-   "A salt-wasting adrenal crisis in a male infant requiring emergency treatment",
-   "A family history of infant deaths or X-linked adrenal disease",
-   "Failure to enter or progress through puberty",
-   "Features suggesting a contiguous gene syndrome such as muscular dystrophy or developmental delay"
-  ],
-  "prognosis": "With early diagnosis and lifelong hormone replacement the outlook is good, but survival depends on prompt recognition and treatment of adrenal crises; fertility is usually impaired despite treatment, and associated gene deletions worsen the prognosis.",
-  "pitfalls": [
-   "Misdiagnosing it as congenital adrenal hyperplasia and missing the correct genetic cause",
-   "Failing to anticipate pubertal failure and delaying induction of puberty",
-   "Under-recognising precipitants of adrenal crisis and giving inadequate sick-day dosing",
-   "Overlooking an associated Xp21 contiguous gene deletion syndrome"
-  ],
-  "references": [
-   "Sperling Pediatric Endocrinology",
-   "Endocrine Society Clinical Practice Guidelines"
-  ],
-  "crossLinks": [
-   "adrenal_hemorrhage_neonatal"
-  ],
-  "management": [
-   "Provide lifelong glucocorticoid replacement with hydrocortisone for cortisol deficiency",
-   "Give mineralocorticoid replacement with fludrocortisone and salt supplementation for aldosterone deficiency",
-   "Treat salt-wasting adrenal crisis promptly with parenteral hydrocortisone, intravenous fluids and glucose, and correction of hyperkalaemia and hypoglycaemia",
-   "Educate on sick-day dosing and provide an emergency steroid card and injectable hydrocortisone",
-   "Induce and maintain puberty with testosterone replacement for the associated hypogonadotropic hypogonadism",
-   "Counsel on impaired fertility that often persists despite gonadotropin therapy and discuss assisted reproduction",
-   "Offer genetic counselling for X-linked NR0B1 inheritance, test carrier mothers and evaluate for contiguous Xp21 gene deletions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_adrenal_hypoplasia-pathway",
-   "title": "Congenital adrenal hypoplasia (NR0B1/DAX1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare cause of primary adrenal insufficiency; the classic X-linked form results from mutations in the NR0B1 gene encoding the nuclear receptor DAX1",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A salt-wasting adrenal crisis in a male infant requiring emergency treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum electrolytes and glucose with paired cortisol and ACTH, expected to show low cortisol and high ACTH in primary failure, Plasma renin and aldosterone to confirm mineralocorticoid deficiency, ACTH (Synacthen)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide lifelong glucocorticoid replacement with hydrocortisone for cortisol deficiency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as congenital adrenal hyperplasia and missing the correct genetic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital adrenal hypoplasia (nr0b1/dax1)."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_adrenal_hypoplasia-matrix",
-   "title": "Congenital adrenal hypoplasia (NR0B1/DAX1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare cause of primary adrenal insufficiency; the classic X-linked form results from mutations in the NR0B1 gene encoding the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Adrenal",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sperling Pediatric Endocrinology / Endocrine Society Clinical Practice Guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare cause of primary adrenal insufficiency; the classic X-linked form results from mutations in the NR0B1 gene encoding the nuclear receptor DAX1",
+      "It typically presents in male infants with a salt-wasting adrenal crisis (hyponatraemia, hyperkalaemia, hypoglycaemia and hypotension) or with more insidious glucocorticoid and mineralocorticoid deficiency in childhood",
+      "It is characteristically combined with hypogonadotropic hypogonadism, which becomes apparent as absent or arrested puberty",
+      "Because it is X-linked, affected individuals are usually boys with carrier mothers, and a family history of infant deaths or adrenal insufficiency may be present",
+      "It is distinguished from congenital adrenal hyperplasia by the absence of a steroidogenic enzyme block and virilisation and by low gonadotropins",
+      "Management is lifelong glucocorticoid and mineralocorticoid replacement, with induction of puberty and fertility issues addressed later",
+      "Contiguous gene deletions at Xp21 can associate it with Duchenne muscular dystrophy and glycerol kinase deficiency"
     ],
-    [
-     "Key Investigations",
-     "Serum electrolytes and glucose with paired cortisol and ACTH, expected to show low cortisol and high ACTH in primary failure,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "DAX1, encoded by NR0B1, is a nuclear receptor essential for development of the adrenal cortex and of the hypothalamic-pituitary-gonadal axis. Loss-of-function mutations impair formation of the definitive adrenal cortex, producing primary adrenal insufficiency with deficient cortisol and aldosterone, and disrupt gonadotropin secretion and gonadal function, causing hypogonadotropic hypogonadism. Impaired spermatogenesis tends to persist even with gonadotropin therapy, reflecting a combined central and gonadal defect.",
+    "additionalDifferentials": [
+      "Congenital adrenal hyperplasia",
+      "Other causes of primary adrenal insufficiency such as adrenoleukodystrophy or autoimmune adrenalitis",
+      "ACTH resistance syndromes and familial glucocorticoid deficiency",
+      "Adrenal hypoplasia from steroidogenic factor-1 (NR5A1/SF1) defects",
+      "Secondary adrenal insufficiency",
+      "Isolated hypogonadotropic hypogonadism such as Kallmann syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Congenital adrenal hyperplasia, Other causes of primary adrenal insufficiency such as adrenoleukodystrophy or autoimmune",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum electrolytes and glucose with paired cortisol and ACTH, expected to show low cortisol and high ACTH in primary failure",
+      "Plasma renin and aldosterone to confirm mineralocorticoid deficiency",
+      "ACTH (Synacthen) stimulation test showing an impaired cortisol response",
+      "Gonadotropins (LH and FSH) and sex steroids, expected to be low in hypogonadotropic hypogonadism",
+      "17-hydroxyprogesterone and a steroid profile to exclude congenital adrenal hyperplasia",
+      "NR0B1 (DAX1) genetic testing and evaluation for contiguous Xp21 gene deletions",
+      "Adrenal imaging where structural assessment is needed"
     ],
-    [
-     "Management Strategy",
-     "Provide lifelong glucocorticoid replacement with hydrocortisone for cortisol deficiency",
-     "Core treatment modality"
+    "redFlags": [
+      "A salt-wasting adrenal crisis in a male infant requiring emergency treatment",
+      "A family history of infant deaths or X-linked adrenal disease",
+      "Failure to enter or progress through puberty",
+      "Features suggesting a contiguous gene syndrome such as muscular dystrophy or developmental delay"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as congenital adrenal hyperplasia and missing the correct genetic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis and lifelong hormone replacement the outlook is good, but survival depends on prompt recognition and treatment of adrenal crises; fertility is usually impaired despite treatment, and associated gene deletions worsen the prognosis.",
+    "pitfalls": [
+      "Misdiagnosing it as congenital adrenal hyperplasia and missing the correct genetic cause",
+      "Failing to anticipate pubertal failure and delaying induction of puberty",
+      "Under-recognising precipitants of adrenal crisis and giving inadequate sick-day dosing",
+      "Overlooking an associated Xp21 contiguous gene deletion syndrome"
+    ],
+    "references": [
+      "Sperling Pediatric Endocrinology",
+      "Endocrine Society Clinical Practice Guidelines"
+    ],
+    "crossLinks": [
+      "adrenal_hemorrhage_neonatal"
+    ],
+    "management": [
+      "Provide lifelong glucocorticoid replacement with hydrocortisone for cortisol deficiency",
+      "Give mineralocorticoid replacement with fludrocortisone and salt supplementation for aldosterone deficiency",
+      "Treat salt-wasting adrenal crisis promptly with parenteral hydrocortisone, intravenous fluids and glucose, and correction of hyperkalaemia and hypoglycaemia",
+      "Educate on sick-day dosing and provide an emergency steroid card and injectable hydrocortisone",
+      "Induce and maintain puberty with testosterone replacement for the associated hypogonadotropic hypogonadism",
+      "Counsel on impaired fertility that often persists despite gonadotropin therapy and discuss assisted reproduction",
+      "Offer genetic counselling for X-linked NR0B1 inheritance, test carrier mothers and evaluate for contiguous Xp21 gene deletions"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital adrenal hypoplasia (nr0b1/dax1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-adrenal-hypoplasia-real-image",
-   "title": "Congenital adrenal hypoplasia (NR0B1/DAX1): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "congenital_adrenal_hypoplasia-pathway",
+      "title": "Congenital adrenal hypoplasia (NR0B1/DAX1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare cause of primary adrenal insufficiency; the classic X-linked form results from mutations in the NR0B1 gene encoding the nuclear receptor DAX1",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A salt-wasting adrenal crisis in a male infant requiring emergency treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum electrolytes and glucose with paired cortisol and ACTH, expected to show low cortisol and high ACTH in primary failure, Plasma renin and aldosterone to confirm mineralocorticoid deficiency, ACTH (Synacthen)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide lifelong glucocorticoid replacement with hydrocortisone for cortisol deficiency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as congenital adrenal hyperplasia and missing the correct genetic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital adrenal hypoplasia (nr0b1/dax1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_adrenal_hypoplasia-matrix",
+      "title": "Congenital adrenal hypoplasia (NR0B1/DAX1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare cause of primary adrenal insufficiency; the classic X-linked form results from mutations in the NR0B1 gene encoding the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum electrolytes and glucose with paired cortisol and ACTH, expected to show low cortisol and high ACTH in primary failure,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital adrenal hyperplasia, Other causes of primary adrenal insufficiency such as adrenoleukodystrophy or autoimmune",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide lifelong glucocorticoid replacement with hydrocortisone for cortisol deficiency",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as congenital adrenal hyperplasia and missing the correct genetic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital adrenal hypoplasia (nr0b1/dax1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sperling Pediatric Endocrinology / Endocrine Society Clinical Practice Guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_adrenal_hypoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes, glucose, paired cortisol and ACTH",
+          "cells": [
+            {
+              "text": "Low cortisol and high ACTH in primary failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Mineralocorticoid deficiency confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACTH (Synacthen) stimulation test",
+          "cells": [
+            {
+              "text": "Impaired cortisol response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LH, FSH and sex steroids",
+          "cells": [
+            {
+              "text": "Low, in hypogonadotropic hypogonadism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NR0B1 (DAX1) genetic testing",
+          "cells": [
+            {
+              "text": "Contiguous Xp21 gene deletions evaluated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_adrenal_hypoplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Excluded by 17-hydroxyprogesterone and steroid profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal hypoplasia from NR5A1 (SF1) defects",
+          "cells": [
+            {
+              "text": "Named look-alike; genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated hypogonadotropic hypogonadism (Kallmann syndrome)",
+          "cells": [
+            {
+              "text": "Hypogonadotropic pattern without adrenal failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_adrenal_hypoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong glucocorticoid replacement",
+          "cells": [
+            {
+              "text": "Hydrocortisone for cortisol deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mineralocorticoid replacement",
+          "cells": [
+            {
+              "text": "Fludrocortisone and salt supplementation for aldosterone deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crisis treatment",
+          "cells": [
+            {
+              "text": "Parenteral hydrocortisone, intravenous fluids and glucose; correct hyperkalaemia and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day dosing",
+          "cells": [
+            {
+              "text": "Emergency steroid card and injectable hydrocortisone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Puberty induction",
+          "cells": [
+            {
+              "text": "Testosterone replacement for hypogonadotropic hypogonadism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility counselling",
+          "cells": [
+            {
+              "text": "Impaired fertility often persists despite gonadotropin therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked NR0B1; test carrier mothers; contiguous Xp21 deletions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_adrenal_hypoplasia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital adrenal hypoplasia (NR0B1/DAX1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital adrenal hypoplasia (NR0B1): primary adrenal failure in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (salt-wasting crisis, family X-linked deaths, pubertal failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency parenteral hydrocortisone, IV fluids and glucose for adrenal crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cortisol and ACTH; renin and aldosterone; Synacthen test; LH, FSH; NR0B1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does NR0B1 testing confirm the defect with a low-cortisol, high-ACTH pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital adrenal hyperplasia or secondary adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong hydrocortisone for cortisol deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fludrocortisone and salt supplementation for aldosterone deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Testosterone replacement to induce and maintain puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sick-day dosing; genetic counselling and carrier testing of mothers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With early diagnosis and lifelong replacement outlook is good; crises are the main risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

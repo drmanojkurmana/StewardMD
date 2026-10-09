@@ -1,169 +1,467 @@
 {
- "id": "loose_anagen_syndrome",
- "name": "Loose anagen syndrome",
- "aliases": [
-  "LAS",
-  "loose anagen hair syndrome",
-  "LAHS"
- ],
- "class": "non_infective",
- "system": "Dermatology / Trichology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A disorder mainly of young children in which anagen hairs are poorly anchored and can be pulled out painlessly with little force",
-   "It typically presents in fair-haired girls aged around two to six with sparse, dull, unruly hair that seems never to need cutting and does not grow long",
-   "The hair-pull test easily extracts numerous anagen hairs, and light microscopy shows anagen roots lacking sheaths with a ruffled proximal cuticle and a distorted floppy-sock appearance",
-   "Trichoscopy may show rectangular black granular structures and solitary yellow dots",
-   "It is non-scarring with preserved follicular ostia, and hair anchorage tends to improve as the child grows",
-   "It is usually sporadic, though familial cases with autosomal dominant inheritance and associations with certain genetic syndromes are described",
-   "No specific treatment is required beyond gentle hair care and reassurance, as the condition generally improves spontaneously through childhood"
+  "id": "loose_anagen_syndrome",
+  "name": "Loose anagen syndrome",
+  "aliases": [
+    "LAS",
+    "loose anagen hair syndrome",
+    "LAHS"
   ],
-  "pathophysiology": "Loose anagen syndrome results from defective anchorage of the hair shaft within the follicle owing to abnormal or premature keratinisation of the inner root sheath, so that cohesion between the shaft and the surrounding sheaths is impaired and anagen hairs are easily and painlessly extracted. Mutations affecting the companion-layer and inner-root-sheath keratin, including K6HF (KRT75), have been implicated. Because the follicles are structurally intact and not destroyed, the process is non-scarring and anchorage typically strengthens with maturity.",
-  "additionalDifferentials": [
-   "Telogen effluvium, with club hairs, older patients and a trigger history",
-   "Alopecia areata, which is patchy with exclamation-mark hairs",
-   "Short anagen syndrome",
-   "Hair-shaft disorders causing fragility such as trichorrhexis nodosa",
-   "Trichotillomania"
-  ],
-  "additionalInvestigations": [
-   "Gentle hair-pull test extracting numerous anagen hairs",
-   "Light microscopy (trichogram) showing sheathless anagen roots with ruffled cuticles",
-   "Trichoscopy for solitary yellow dots and black granular structures",
-   "Assessment for associated ectodermal or syndromic features",
-   "Reassurance-based follow-up to document improvement with age"
-  ],
-  "redFlags": [
-   "Features suggesting an associated genetic syndrome such as dysmorphism or ectodermal defects",
-   "Progressive loss or scarring, prompting reconsideration of the diagnosis",
-   "Onset or persistence into adulthood requiring exclusion of other causes"
-  ],
-  "prognosis": "The condition is benign and non-scarring, with hair anchorage and density generally improving spontaneously as the child grows, although hair may remain somewhat sparse or slow-growing.",
-  "pitfalls": [
-   "Misinterpreting easily pulled hairs as alopecia areata or an effluvium",
-   "Overlooking associated syndromic features in familial cases",
-   "Subjecting children to unnecessary treatment for a self-limiting condition",
-   "Failing to perform trichogram microscopy, which is the key diagnostic test"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure families that this is a benign, non-scarring condition in which hair anchorage and density usually improve spontaneously as the child grows",
-   "Advise gentle hair care, avoiding traction, harsh brushing and chemical or heat treatments that dislodge the poorly anchored anagen hairs",
-   "Confirm the diagnosis with the hair-pull test and trichogram rather than pursuing unnecessary investigation, avoiding an erroneous label of alopecia areata",
-   "Consider topical minoxidil in persistent or cosmetically troublesome cases, recognising the evidence is limited",
-   "Assess for associated ectodermal or syndromic features and refer to clinical genetics if a broader syndrome is suspected",
-   "Provide dermatology follow-up to document improvement with age"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "loose_anagen_syndrome-pathway",
-   "title": "Loose anagen syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A disorder mainly of young children in which anagen hairs are poorly anchored and can be pulled out painlessly with little force",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting an associated genetic syndrome such as dysmorphism or ectodermal defects",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Gentle hair-pull test extracting numerous anagen hairs, Light microscopy (trichogram) showing sheathless anagen roots with ruffled cuticles, Trichoscopy for solitary yellow dots and black granular structures"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure families that this is a benign, non-scarring condition in which hair anchorage and density usually improve spontaneously as the child grows"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting easily pulled hairs as alopecia areata or an effluvium"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of loose anagen syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "loose_anagen_syndrome-matrix",
-   "title": "Loose anagen syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A disorder mainly of young children in which anagen hairs are poorly anchored and can be pulled out painlessly with little force",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Trichology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A disorder mainly of young children in which anagen hairs are poorly anchored and can be pulled out painlessly with little force",
+      "It typically presents in fair-haired girls aged around two to six with sparse, dull, unruly hair that seems never to need cutting and does not grow long",
+      "The hair-pull test easily extracts numerous anagen hairs, and light microscopy shows anagen roots lacking sheaths with a ruffled proximal cuticle and a distorted floppy-sock appearance",
+      "Trichoscopy may show rectangular black granular structures and solitary yellow dots",
+      "It is non-scarring with preserved follicular ostia, and hair anchorage tends to improve as the child grows",
+      "It is usually sporadic, though familial cases with autosomal dominant inheritance and associations with certain genetic syndromes are described",
+      "No specific treatment is required beyond gentle hair care and reassurance, as the condition generally improves spontaneously through childhood"
     ],
-    [
-     "Key Investigations",
-     "Gentle hair-pull test extracting numerous anagen hairs, Light microscopy (trichogram) showing sheathless anagen roots with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Loose anagen syndrome results from defective anchorage of the hair shaft within the follicle owing to abnormal or premature keratinisation of the inner root sheath, so that cohesion between the shaft and the surrounding sheaths is impaired and anagen hairs are easily and painlessly extracted. Mutations affecting the companion-layer and inner-root-sheath keratin, including K6HF (KRT75), have been implicated. Because the follicles are structurally intact and not destroyed, the process is non-scarring and anchorage typically strengthens with maturity.",
+    "additionalDifferentials": [
+      "Telogen effluvium, with club hairs, older patients and a trigger history",
+      "Alopecia areata, which is patchy with exclamation-mark hairs",
+      "Short anagen syndrome",
+      "Hair-shaft disorders causing fragility such as trichorrhexis nodosa",
+      "Trichotillomania"
     ],
-    [
-     "Primary Differentials",
-     "Telogen effluvium, with club hairs, older patients and a trigger history, Alopecia areata, which is patchy with exclamation-mark",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Gentle hair-pull test extracting numerous anagen hairs",
+      "Light microscopy (trichogram) showing sheathless anagen roots with ruffled cuticles",
+      "Trichoscopy for solitary yellow dots and black granular structures",
+      "Assessment for associated ectodermal or syndromic features",
+      "Reassurance-based follow-up to document improvement with age"
     ],
-    [
-     "Management Strategy",
-     "Reassure families that this is a benign, non-scarring condition in which hair anchorage and density usually improve spontaneously",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting an associated genetic syndrome such as dysmorphism or ectodermal defects",
+      "Progressive loss or scarring, prompting reconsideration of the diagnosis",
+      "Onset or persistence into adulthood requiring exclusion of other causes"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting easily pulled hairs as alopecia areata or an effluvium",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and non-scarring, with hair anchorage and density generally improving spontaneously as the child grows, although hair may remain somewhat sparse or slow-growing.",
+    "pitfalls": [
+      "Misinterpreting easily pulled hairs as alopecia areata or an effluvium",
+      "Overlooking associated syndromic features in familial cases",
+      "Subjecting children to unnecessary treatment for a self-limiting condition",
+      "Failing to perform trichogram microscopy, which is the key diagnostic test"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure families that this is a benign, non-scarring condition in which hair anchorage and density usually improve spontaneously as the child grows",
+      "Advise gentle hair care, avoiding traction, harsh brushing and chemical or heat treatments that dislodge the poorly anchored anagen hairs",
+      "Confirm the diagnosis with the hair-pull test and trichogram rather than pursuing unnecessary investigation, avoiding an erroneous label of alopecia areata",
+      "Consider topical minoxidil in persistent or cosmetically troublesome cases, recognising the evidence is limited",
+      "Assess for associated ectodermal or syndromic features and refer to clinical genetics if a broader syndrome is suspected",
+      "Provide dermatology follow-up to document improvement with age"
     ]
-   ],
-   "caption": "Overview comparison matrix for loose anagen syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "loose-anagen-syndrome-real-image",
-   "title": "Loose anagen syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "loose_anagen_syndrome-pathway",
+      "title": "Loose anagen syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A disorder mainly of young children in which anagen hairs are poorly anchored and can be pulled out painlessly with little force",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting an associated genetic syndrome such as dysmorphism or ectodermal defects",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Gentle hair-pull test extracting numerous anagen hairs, Light microscopy (trichogram) showing sheathless anagen roots with ruffled cuticles, Trichoscopy for solitary yellow dots and black granular structures"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure families that this is a benign, non-scarring condition in which hair anchorage and density usually improve spontaneously as the child grows"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting easily pulled hairs as alopecia areata or an effluvium"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of loose anagen syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "loose_anagen_syndrome-matrix",
+      "title": "Loose anagen syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A disorder mainly of young children in which anagen hairs are poorly anchored and can be pulled out painlessly with little force",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Gentle hair-pull test extracting numerous anagen hairs, Light microscopy (trichogram) showing sheathless anagen roots with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Telogen effluvium, with club hairs, older patients and a trigger history, Alopecia areata, which is patchy with exclamation-mark",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure families that this is a benign, non-scarring condition in which hair anchorage and density usually improve spontaneously",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting easily pulled hairs as alopecia areata or an effluvium",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for loose anagen syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "loose_anagen_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hair-pull test",
+          "cells": [
+            {
+              "text": "Numerous anagen hairs extracted painlessly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichogram (light microscopy)",
+          "cells": [
+            {
+              "text": "Sheathless anagen roots with ruffled cuticles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Solitary yellow dots and black granular structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for ectodermal or syndromic features",
+          "cells": [
+            {
+              "text": "Familial cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance-based follow-up",
+          "cells": [
+            {
+              "text": "Documents improvement with age"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loose_anagen_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Telogen effluvium",
+          "cells": [
+            {
+              "text": "Club hairs, older patients and a trigger history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alopecia areata",
+          "cells": [
+            {
+              "text": "Patchy loss with exclamation-mark hairs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short anagen syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichotillomania",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loose_anagen_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and non-scarring; improves as the child grows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle hair care",
+          "cells": [
+            {
+              "text": "Avoid traction, harsh brushing, and chemical or heat treatments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation by testing",
+          "cells": [
+            {
+              "text": "Hair-pull test and trichogram, rather than unneeded investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical minoxidil",
+          "cells": [
+            {
+              "text": "For persistent or cosmetically troublesome cases; evidence is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndrome review",
+          "cells": [
+            {
+              "text": "Clinical genetics if a broader syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Documents improvement with age"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "loose_anagen_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Loose anagen syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fair-haired young child with sparse, dull hair that does not grow long",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dysmorphism or ectodermal defects, progressive loss, scarring)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: clinical genetics referral and reassessment of the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hair-pull test, trichogram, trichoscopy, ectodermal and syndromic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the hair-pull test and trichogram show sheathless anagen roots?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider telogen effluvium or alopecia areata",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign and non-scarring, improving with age",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gentle hair care avoiding traction, heat and chemicals",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Confirm with hair-pull test and trichogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider topical minoxidil for persistent cosmetic concern; evidence limited",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Clinical genetics review if a syndrome is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign, non-scarring; anchorage and density generally improve; may stay sparse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

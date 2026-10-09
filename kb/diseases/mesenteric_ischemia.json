@@ -211,25 +211,571 @@
       "caption": "Diagnostic and clinical overview matrix for acute mesenteric ischemia."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "mesenteric-ischemia-real-image",
-      "title": "Acute mesenteric ischemia: Diagnostic Imaging Evaluation",
-      "type": "xray",
-      "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-      "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Mesenteric Ischemia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/acute-mesenteric-ischemia"
+    },
+    {
+      "id": "c3",
+      "label": "Bala et al, WSES guidelines on acute mesenteric ischemia, World J Emerg Surg 2022",
+      "kind": "web",
+      "url": "https://eprints.whiterose.ac.uk/192562/1/s13017-022-00443-x.pdf"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mesenteric_ischemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in acute mesenteric ischemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cardiothoracic Ratio",
-          "description": "Heart size, mediastinal width, and great vessel contours."
+          "parameter": "Pain out of proportion to examination",
+          "cells": [
+            {
+              "text": "Present in about 95% of arterial AMI"
+            },
+            {
+              "text": "{{hy:Most common complaint; signs lag because injury starts in the mucosa}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Visceral Fields",
-          "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+          "parameter": "CT angiography",
+          "cells": [
+            {
+              "text": "Thin-cut (1 mm or less) CTA without delay"
+            },
+            {
+              "text": "Gold standard; every 6 h of delay in CTA doubles mortality"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Bony Thorax & Soft Tissues",
-          "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+          "parameter": "Venous-phase CT",
+          "cells": [
+            {
+              "text": "Bowel-wall thickening with splanchnic venous thrombus"
+            },
+            {
+              "text": "Detects mesenteric venous thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-dimer",
+          "unit": "mg/L",
+          "cells": [
+            {
+              "text": "Above 0.9 mg/L: specificity 82%, sensitivity 60%",
+              "op": ">",
+              "value": 0.9
+            },
+            {
+              "text": "No patient with normal D-dimer had ischemia in one study"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lactate, leukocytosis, acidosis",
+          "cells": [
+            {
+              "text": "May be normal in reversible ischemia"
+            },
+            {
+              "text": "Late and nonspecific; do not wait for them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain abdominal x-ray",
+          "cells": [
+            {
+              "text": "Not recommended to diagnose ischemia"
+            },
+            {
+              "text": "Late signs: free air, pneumatosis, portal venous gas"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mesenteric duplex",
+          "cells": [
+            {
+              "text": "Fasting study; high SMA peak velocity about 80% PPV"
+            },
+            {
+              "text": "Screening tool, mainly for chronic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiogram",
+          "cells": [
+            {
+              "text": "Look for AF, recent MI or valve source of emboli"
+            },
+            {
+              "text": "Must not delay surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type: arterial embolus",
+          "cells": [
+            {
+              "text": "About 50% (Harrison); over 40% (Merck)"
+            },
+            {
+              "text": "Lodges in mid to distal SMA past middle colic origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type: arterial thrombosis",
+          "cells": [
+            {
+              "text": "About 25 to 30% (Harrison); 30% (Merck)"
+            },
+            {
+              "text": "Acute on chronic atherosclerosis, prior intestinal angina"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type: non-occlusive ischemia",
+          "cells": [
+            {
+              "text": "About 20% (Harrison); 15% (Merck)"
+            },
+            {
+              "text": "Critically ill on vasopressors with multiorgan dysfunction"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Type: mesenteric venous thrombosis",
+          "cells": [
+            {
+              "text": "Under 10% (Harrison, WSES); 15% (Merck)"
+            },
+            {
+              "text": "Subacute vague pain; screen for thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mortality",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "30 to 70% overall; about 50% if untreated",
+              "range": [
+                30,
+                70
+              ]
+            },
+            {
+              "text": "Driven by diagnostic delay"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Source conflict on type frequencies: Harrison gives embolus about 50%, thrombosis 25 to 30%, NOMI about 20%, venous under 10%; Merck gives over 40%, 30%, 15% and 15%. Harrison calls duplex sensitive and specific; Merck says it has low sensitivity for arterial occlusion."
+    },
+    {
+      "id": "mesenteric_ischemia-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute mesenteric ischemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Perforated viscus",
+          "cells": [
+            {
+              "text": "Peritonitis with free air"
+            },
+            {
+              "text": "Plain film or CT showing free air"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ischemic colitis",
+          "cells": [
+            {
+              "text": "Small-vessel, mainly mucosal injury with bleeding; after aortic repair"
+            },
+            {
+              "text": "Colonoscopy to grade injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic mesenteric ischemia",
+          "cells": [
+            {
+              "text": "Postprandial pain, fear of eating, weight loss over 6 to 12 months"
+            },
+            {
+              "text": "{{hy:CTA or fasting duplex}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GI malignancy",
+          "cells": [
+            {
+              "text": "Chronic pain and weight loss"
+            },
+            {
+              "text": "Endoscopy and CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superior mesenteric artery syndrome",
+          "cells": [
+            {
+              "text": "Duodenal compression after weight loss or immobilisation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Median arcuate ligament syndrome",
+          "cells": [
+            {
+              "text": "Celiac artery compression"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mesenteric_ischemia-treatment",
+      "kind": "treatment",
+      "title": "Management of acute mesenteric ischemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluid resuscitation, electrolyte correction, NG decompression",
+          "cells": [
+            {
+              "text": "As soon as AMI is diagnosed"
+            },
+            {
+              "text": "Improves visceral perfusion"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Immediately in all patients"
+            },
+            {
+              "text": "Tailor to local stewardship"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Systemic heparin",
+          "cells": [
+            {
+              "text": "All patients; post-operatively target aPTT 40 to 60"
+            },
+            {
+              "text": "Early heparin linked to better survival; LMWH if no surgery planned"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Laparotomy or laparoscopy",
+          "cells": [
+            {
+              "text": "{{hy:Overt peritonitis}}"
+            },
+            {
+              "text": "Embolectomy, revascularisation or resection of necrotic bowel"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Endovascular revascularisation",
+          "cells": [
+            {
+              "text": "Arterial occlusion when expertise is available"
+            },
+            {
+              "text": "Primary option per WSES; thrombolysis or embolectomy per Merck"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Damage control surgery with second look",
+          "cells": [
+            {
+              "text": "After bowel resection or with severe sepsis"
+            },
+            {
+              "text": "Temporary closure to reassess viability"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Treat cause and intra-arterial papaverine",
+          "cells": [
+            {
+              "text": "Non-occlusive ischemia"
+            },
+            {
+              "text": "Stop vasopressors where possible; dose not stated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Continuous unfractionated heparin",
+          "cells": [
+            {
+              "text": "Mesenteric venous thrombosis without peritonitis"
+            },
+            {
+              "text": "Non-operative first line"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Long-term anticoagulation and imaging surveillance",
+          "cells": [
+            {
+              "text": "After revascularisation, embolism or venous thrombosis"
+            },
+            {
+              "text": "Merck adds dual antiplatelet therapy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Palliation discussion",
+          "cells": [
+            {
+              "text": "Massive gut necrosis"
+            },
+            {
+              "text": "Consider comorbidity and advance directives"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mesenteric_ischemia-dx-mgmt",
+      "title": "Diagnosis and management of acute mesenteric ischemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe abdominal pain out of proportion to examination",
+          "cite": "c3"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Resuscitate, antibiotics, NG tube; start heparin",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Overt peritonitis?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Emergency laparotomy, revascularise, resect, second look",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CT angiography without delay",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "CTA finding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endovascular or open revascularisation",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Continuous unfractionated heparin, non-operative",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat cause, cut vasopressors, consider papaverine",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Signs of bowel infarction?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resect necrotic bowel with damage control",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "ICU care, long-term anticoagulation, surveillance",
+          "cite": "c3"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Seek alternative diagnosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Arterial occlusion"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Venous thrombosis"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "Non-occlusive"
+        },
+        {
+          "from": "n6",
+          "to": "n13",
+          "label": "Normal"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
         }
       ]
     }

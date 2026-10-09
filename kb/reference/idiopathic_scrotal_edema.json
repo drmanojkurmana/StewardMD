@@ -1,173 +1,462 @@
 {
- "id": "idiopathic_scrotal_edema",
- "name": "Idiopathic scrotal oedema",
- "aliases": [
-  "acute idiopathic scrotal edema of childhood",
-  "acute idiopathic scrotal oedema",
-  "idiopathic scrotal edema",
-  "idiopathic scrotal oedema"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Idiopathic scrotal oedema is a benign, self-limiting cause of an acute scrotum, occurring predominantly in prepubertal boys",
-   "It presents with rapid onset of scrotal swelling, erythema, and oedema that often extends beyond the scrotum to the perineum, groin, or penis",
-   "The swelling is typically out of proportion to the pain, and the testis, when palpable, is non-tender, helping distinguish it from testicular torsion",
-   "The erythema and oedema can spread across the midline and may be bilateral, a pattern unusual for torsion or infection",
-   "Colour Doppler ultrasound shows a normal or increased testicular blood flow with marked oedema of the scrotal wall, the fountain sign of increased peri-testicular flow being described",
-   "Management is conservative with reassurance, rest, and simple analgesia, and symptoms usually resolve within a few days",
-   "The main clinical task is to exclude testicular torsion and other serious causes of the acute paediatric scrotum"
+  "id": "idiopathic_scrotal_edema",
+  "name": "Idiopathic scrotal oedema",
+  "aliases": [
+    "acute idiopathic scrotal edema of childhood",
+    "acute idiopathic scrotal oedema",
+    "idiopathic scrotal edema",
+    "idiopathic scrotal oedema"
   ],
-  "pathophysiology": "Idiopathic scrotal oedema is an acute inflammatory oedema of the scrotal wall and adjacent tissues of uncertain cause, sometimes considered a localised allergic or hypersensitivity phenomenon. Inflammation is confined to the superficial soft tissues, producing striking wall oedema and erythema while sparing the testis and its blood supply. Because the testicular parenchyma and perfusion remain normal, the condition is self-limiting and resolves without lasting effect once the inflammatory reaction subsides.",
-  "additionalDifferentials": [
-   "Testicular torsion (must be excluded)",
-   "Epididymo-orchitis",
-   "Torsion of the appendix testis",
-   "Henoch-Schonlein purpura involving the scrotum",
-   "Cellulitis of the scrotum",
-   "Incarcerated inguinal hernia",
-   "Insect bite or contact reaction"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination of testicular lie, tenderness, and cremasteric reflex",
-   "Colour Doppler scrotal ultrasound confirming preserved testicular perfusion with wall oedema",
-   "Urinalysis to help exclude infection",
-   "Assessment for a systemic vasculitis such as Henoch-Schonlein purpura when there is a rash",
-   "Observation and reassessment to confirm the expected rapid resolution"
-  ],
-  "redFlags": [
-   "Severe pain, abnormal testicular lie, or absent cremasteric reflex suggesting torsion",
-   "Reduced testicular blood flow on Doppler",
-   "Systemic illness or a purpuric rash suggesting vasculitis",
-   "Rapidly progressive swelling with signs of infection"
-  ],
-  "prognosis": "Idiopathic scrotal oedema is benign and self-limiting, resolving within a few days with conservative care and no threat to testicular viability, although recurrence is occasionally reported.",
-  "pitfalls": [
-   "Attributing the acute scrotum to idiopathic oedema and missing testicular torsion",
-   "Prescribing antibiotics for presumed infection when the process is inflammatory and self-limiting",
-   "Overlooking Henoch-Schonlein purpura or another systemic cause",
-   "Failing to reassess if swelling or pain does not settle as expected"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Campbell-Walsh-Wein Urology, Pediatric Urology section"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Exclude testicular torsion first with clinical assessment and colour Doppler ultrasound, as this is a benign self-limiting condition needing no specific drug therapy",
-   "Manage conservatively with reassurance, rest and scrotal support",
-   "Provide simple analgesia for the mild discomfort, which is characteristically out of proportion to the swelling",
-   "Consider a short course of antihistamines given the presumed hypersensitivity nature of the oedema",
-   "Observe for the expected rapid resolution over a few days and reassess if symptoms fail to settle",
-   "Safety-net for the small chance of recurrence and advise re-presentation if pain becomes prominent"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "idiopathic_scrotal_edema-pathway",
-   "title": "Idiopathic scrotal oedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Idiopathic scrotal oedema is a benign, self-limiting cause of an acute scrotum, occurring predominantly in prepubertal boys",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe pain, abnormal testicular lie, or absent cremasteric reflex suggesting torsion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination of testicular lie, tenderness, and cremasteric reflex, Colour Doppler scrotal ultrasound confirming preserved testicular perfusion with wall oedema, Urinalysis to help exclude infection"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Exclude testicular torsion first with clinical assessment and colour Doppler ultrasound, as this is a benign self-limiting condition needing no specific drug therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the acute scrotum to idiopathic oedema and missing testicular torsion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of idiopathic scrotal oedema."
-  }
- ],
- "tables": [
-  {
-   "id": "idiopathic_scrotal_edema-matrix",
-   "title": "Idiopathic scrotal oedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Idiopathic scrotal oedema is a benign, self-limiting cause of an acute scrotum, occurring predominantly in prepubertal boys",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Idiopathic scrotal oedema is a benign, self-limiting cause of an acute scrotum, occurring predominantly in prepubertal boys",
+      "It presents with rapid onset of scrotal swelling, erythema, and oedema that often extends beyond the scrotum to the perineum, groin, or penis",
+      "The swelling is typically out of proportion to the pain, and the testis, when palpable, is non-tender, helping distinguish it from testicular torsion",
+      "The erythema and oedema can spread across the midline and may be bilateral, a pattern unusual for torsion or infection",
+      "Colour Doppler ultrasound shows a normal or increased testicular blood flow with marked oedema of the scrotal wall, the fountain sign of increased peri-testicular flow being described",
+      "Management is conservative with reassurance, rest, and simple analgesia, and symptoms usually resolve within a few days",
+      "The main clinical task is to exclude testicular torsion and other serious causes of the acute paediatric scrotum"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination of testicular lie, tenderness, and cremasteric reflex, Colour Doppler scrotal ultrasound confirming",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Idiopathic scrotal oedema is an acute inflammatory oedema of the scrotal wall and adjacent tissues of uncertain cause, sometimes considered a localised allergic or hypersensitivity phenomenon. Inflammation is confined to the superficial soft tissues, producing striking wall oedema and erythema while sparing the testis and its blood supply. Because the testicular parenchyma and perfusion remain normal, the condition is self-limiting and resolves without lasting effect once the inflammatory reaction subsides.",
+    "additionalDifferentials": [
+      "Testicular torsion (must be excluded)",
+      "Epididymo-orchitis",
+      "Torsion of the appendix testis",
+      "Henoch-Schonlein purpura involving the scrotum",
+      "Cellulitis of the scrotum",
+      "Incarcerated inguinal hernia",
+      "Insect bite or contact reaction"
     ],
-    [
-     "Primary Differentials",
-     "Testicular torsion (must be excluded), Epididymo-orchitis, Torsion of the appendix testis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination of testicular lie, tenderness, and cremasteric reflex",
+      "Colour Doppler scrotal ultrasound confirming preserved testicular perfusion with wall oedema",
+      "Urinalysis to help exclude infection",
+      "Assessment for a systemic vasculitis such as Henoch-Schonlein purpura when there is a rash",
+      "Observation and reassessment to confirm the expected rapid resolution"
     ],
-    [
-     "Management Strategy",
-     "Exclude testicular torsion first with clinical assessment and colour Doppler ultrasound, as this is a benign self-limiting",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe pain, abnormal testicular lie, or absent cremasteric reflex suggesting torsion",
+      "Reduced testicular blood flow on Doppler",
+      "Systemic illness or a purpuric rash suggesting vasculitis",
+      "Rapidly progressive swelling with signs of infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the acute scrotum to idiopathic oedema and missing testicular torsion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Idiopathic scrotal oedema is benign and self-limiting, resolving within a few days with conservative care and no threat to testicular viability, although recurrence is occasionally reported.",
+    "pitfalls": [
+      "Attributing the acute scrotum to idiopathic oedema and missing testicular torsion",
+      "Prescribing antibiotics for presumed infection when the process is inflammatory and self-limiting",
+      "Overlooking Henoch-Schonlein purpura or another systemic cause",
+      "Failing to reassess if swelling or pain does not settle as expected"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Campbell-Walsh-Wein Urology, Pediatric Urology section"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Exclude testicular torsion first with clinical assessment and colour Doppler ultrasound, as this is a benign self-limiting condition needing no specific drug therapy",
+      "Manage conservatively with reassurance, rest and scrotal support",
+      "Provide simple analgesia for the mild discomfort, which is characteristically out of proportion to the swelling",
+      "Consider a short course of antihistamines given the presumed hypersensitivity nature of the oedema",
+      "Observe for the expected rapid resolution over a few days and reassess if symptoms fail to settle",
+      "Safety-net for the small chance of recurrence and advise re-presentation if pain becomes prominent"
     ]
-   ],
-   "caption": "Overview comparison matrix for idiopathic scrotal oedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "idiopathic-scrotal-edema-real-image",
-   "title": "Idiopathic scrotal oedema: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "idiopathic_scrotal_edema-pathway",
+      "title": "Idiopathic scrotal oedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Idiopathic scrotal oedema is a benign, self-limiting cause of an acute scrotum, occurring predominantly in prepubertal boys",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe pain, abnormal testicular lie, or absent cremasteric reflex suggesting torsion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination of testicular lie, tenderness, and cremasteric reflex, Colour Doppler scrotal ultrasound confirming preserved testicular perfusion with wall oedema, Urinalysis to help exclude infection"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Exclude testicular torsion first with clinical assessment and colour Doppler ultrasound, as this is a benign self-limiting condition needing no specific drug therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the acute scrotum to idiopathic oedema and missing testicular torsion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of idiopathic scrotal oedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "idiopathic_scrotal_edema-matrix",
+      "title": "Idiopathic scrotal oedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Idiopathic scrotal oedema is a benign, self-limiting cause of an acute scrotum, occurring predominantly in prepubertal boys",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination of testicular lie, tenderness, and cremasteric reflex, Colour Doppler scrotal ultrasound confirming",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Testicular torsion (must be excluded), Epididymo-orchitis, Torsion of the appendix testis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Exclude testicular torsion first with clinical assessment and colour Doppler ultrasound, as this is a benign self-limiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the acute scrotum to idiopathic oedema and missing testicular torsion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for idiopathic scrotal oedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "idiopathic_scrotal_edema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of testicular lie, tenderness and cremasteric reflex",
+          "cells": [
+            {
+              "text": "Torsion features absent when lie normal and reflex present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour Doppler scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Preserved testicular perfusion with wall oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Helps exclude infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for vasculitis when there is a rash",
+          "cells": [
+            {
+              "text": "Henoch-Schonlein purpura"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation and reassessment",
+          "cells": [
+            {
+              "text": "Expected rapid resolution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_scrotal_edema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Testicular torsion",
+          "cells": [
+            {
+              "text": "Severe pain, abnormal testicular lie, absent cremasteric reflex or reduced Doppler flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Henoch-Schonlein purpura of the scrotum",
+          "cells": [
+            {
+              "text": "Purpuric rash or systemic illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymo-orchitis",
+          "cells": [
+            {
+              "text": "Infection; excluded with urinalysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_scrotal_edema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude torsion first",
+          "cells": [
+            {
+              "text": "Clinical assessment and colour Doppler ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Reassurance, rest and scrotal support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesia for discomfort out of proportion to the swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamines",
+          "cells": [
+            {
+              "text": "Short course, given presumed hypersensitivity nature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Expected rapid resolution over a few days; reassess if not settling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety-net",
+          "cells": [
+            {
+              "text": "Re-present if pain becomes prominent; small chance of recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "idiopathic_scrotal_edema-dx-mgmt",
+      "title": "Diagnosis and management of Idiopathic scrotal oedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute scrotal swelling in a prepubertal boy, pain out of proportion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe pain, abnormal lie, absent cremasteric reflex or reduced Doppler flow?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for testicular torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Testicular lie and cremaster examination, colour Doppler ultrasound, urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Perfused testis with oedema and no torsion or infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat infection or vasculitis; investigate further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance, rest and scrotal support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia for discomfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short course of antihistamines given presumed hypersensitivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Observe for rapid resolution over a few days",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Re-present if pain becomes prominent",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign, self-limiting course; resolves over days",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

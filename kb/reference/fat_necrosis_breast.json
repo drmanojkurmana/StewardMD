@@ -1,176 +1,463 @@
 {
- "id": "fat_necrosis_breast",
- "name": "Fat necrosis of the breast",
- "aliases": [
-  "fat necrosis",
-  "breast fat necrosis",
-  "traumatic fat necrosis",
-  "post-surgical fat necrosis"
- ],
- "class": "non_infective",
- "system": "Breast",
- "specialty": "Breast Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard breast surgery textbook and breast imaging guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Fat necrosis is a benign inflammatory response of breast adipose tissue to injury, and it is an important mimic of carcinoma on both examination and imaging",
-   "There is often a history of trauma, breast surgery, radiotherapy, fat grafting, or anticoagulation, though the precipitating event may be forgotten",
-   "It can present as a firm, sometimes irregular lump, occasionally with skin tethering, dimpling, or bruising, closely resembling malignancy",
-   "Imaging appearances are highly variable, ranging from a benign oil cyst with a characteristic rim to spiculated masses or suspicious microcalcification that overlap with cancer",
-   "Because it can look malignant, triple assessment with core biopsy is frequently required to reach a confident benign diagnosis",
-   "An oil cyst with typical features on mammography or ultrasound may be diagnostic and avoid the need for biopsy",
-   "Most established fat necrosis needs no treatment beyond reassurance once malignancy is excluded, and it tends to settle or stabilise over time",
-   "Any lesion with persisting or discordant suspicious features should be biopsied or excised rather than assumed benign"
+  "id": "fat_necrosis_breast",
+  "name": "Fat necrosis of the breast",
+  "aliases": [
+    "fat necrosis",
+    "breast fat necrosis",
+    "traumatic fat necrosis",
+    "post-surgical fat necrosis"
   ],
-  "pathophysiology": "Fat necrosis occurs when adipocytes are damaged by trauma, surgery, radiotherapy, or ischaemia, releasing lipid that triggers a local inflammatory reaction. Macrophages and giant cells engulf the released fat, and the process evolves through acute inflammation, the formation of lipid-laden oil cysts, and eventual fibrosis and dystrophic calcification. The resulting scarring can distort surrounding tissue and tether the skin, while the calcification and architectural change on imaging can closely imitate carcinoma. The variable stage of evolution explains the wide spectrum of clinical and radiological appearances.",
-  "additionalDifferentials": [
-   "Breast carcinoma",
-   "Fibroadenoma or other benign solid lump",
-   "Breast abscess or infection",
-   "Haematoma",
-   "Radial scar or complex sclerosing lesion",
-   "Duct ectasia with skin change"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination and history for trauma, surgery, or radiotherapy as part of triple assessment",
-   "Mammography, which may show an oil cyst, calcification, or a suspicious mass",
-   "Ultrasound to characterise the lesion",
-   "Core needle biopsy where imaging or clinical features are not clearly benign",
-   "Magnetic resonance imaging in selected cases when other imaging is indeterminate",
-   "Interval imaging follow-up when a lesion is presumed benign but not biopsied"
-  ],
-  "redFlags": [
-   "Spiculated mass or suspicious microcalcification that could represent carcinoma",
-   "Skin tethering or dimpling without a clear benign explanation",
-   "Discordant triple assessment findings",
-   "A lesion that enlarges or fails to settle over time",
-   "Associated axillary lymphadenopathy"
-  ],
-  "prognosis": "Fat necrosis is benign with an excellent prognosis; once cancer is excluded, most lesions stabilise, resolve, or persist as an inert scar or oil cyst, and it carries no increased risk of malignancy.",
-  "pitfalls": [
-   "Assuming a lump is fat necrosis on the basis of trauma history alone and missing a coincidental carcinoma",
-   "Failing to biopsy imaging features that overlap with malignancy",
-   "Ignoring discordance between clinical, imaging, and pathological findings",
-   "Attributing skin tethering to fat necrosis without adequate assessment",
-   "Not arranging follow-up for a presumed benign but unbiopsied lesion"
-  ],
-  "references": [
-   "Standard breast surgery reference text on benign breast disease",
-   "Breast imaging guidance on benign mimics of malignancy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the benign diagnosis with triple assessment, using core needle biopsy where imaging or examination is not clearly benign",
-   "Reassure and manage conservatively once malignancy is excluded, as most lesions stabilise, resolve or persist as an inert oil cyst",
-   "Provide simple analgesia and supportive measures such as warm compresses for tenderness",
-   "Aspirate a symptomatic oil cyst or surgically excise a persistent, enlarging or troublesome mass",
-   "Arrange interval imaging follow-up when a lesion is presumed benign but not biopsied",
-   "Review the precipitating factor such as trauma, surgery, radiotherapy, fat grafting or anticoagulation, and reassure that there is no increased cancer risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fat_necrosis_breast-pathway",
-   "title": "Fat necrosis of the breast: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Fat necrosis is a benign inflammatory response of breast adipose tissue to injury, and it is an important mimic of carcinoma on both examination and imaging",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Spiculated mass or suspicious microcalcification that could represent carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination and history for trauma, surgery, or radiotherapy as part of triple assessment, Mammography, which may show an oil cyst, calcification, or a suspicious mass, Ultrasound to characterise the lesion"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the benign diagnosis with triple assessment, using core needle biopsy where imaging or examination is not clearly benign"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a lump is fat necrosis on the basis of trauma history alone and missing a coincidental carcinoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fat necrosis of the breast."
-  }
- ],
- "tables": [
-  {
-   "id": "fat_necrosis_breast-matrix",
-   "title": "Fat necrosis of the breast: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Fat necrosis is a benign inflammatory response of breast adipose tissue to injury, and it is an important mimic of carcinoma on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Breast",
+  "specialty": "Breast Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard breast surgery textbook and breast imaging guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Fat necrosis is a benign inflammatory response of breast adipose tissue to injury, and it is an important mimic of carcinoma on both examination and imaging",
+      "There is often a history of trauma, breast surgery, radiotherapy, fat grafting, or anticoagulation, though the precipitating event may be forgotten",
+      "It can present as a firm, sometimes irregular lump, occasionally with skin tethering, dimpling, or bruising, closely resembling malignancy",
+      "Imaging appearances are highly variable, ranging from a benign oil cyst with a characteristic rim to spiculated masses or suspicious microcalcification that overlap with cancer",
+      "Because it can look malignant, triple assessment with core biopsy is frequently required to reach a confident benign diagnosis",
+      "An oil cyst with typical features on mammography or ultrasound may be diagnostic and avoid the need for biopsy",
+      "Most established fat necrosis needs no treatment beyond reassurance once malignancy is excluded, and it tends to settle or stabilise over time",
+      "Any lesion with persisting or discordant suspicious features should be biopsied or excised rather than assumed benign"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination and history for trauma, surgery, or radiotherapy as part of triple assessment, Mammography, which may show",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fat necrosis occurs when adipocytes are damaged by trauma, surgery, radiotherapy, or ischaemia, releasing lipid that triggers a local inflammatory reaction. Macrophages and giant cells engulf the released fat, and the process evolves through acute inflammation, the formation of lipid-laden oil cysts, and eventual fibrosis and dystrophic calcification. The resulting scarring can distort surrounding tissue and tether the skin, while the calcification and architectural change on imaging can closely imitate carcinoma. The variable stage of evolution explains the wide spectrum of clinical and radiological appearances.",
+    "additionalDifferentials": [
+      "Breast carcinoma",
+      "Fibroadenoma or other benign solid lump",
+      "Breast abscess or infection",
+      "Haematoma",
+      "Radial scar or complex sclerosing lesion",
+      "Duct ectasia with skin change"
     ],
-    [
-     "Primary Differentials",
-     "Breast carcinoma, Fibroadenoma or other benign solid lump, Breast abscess or infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination and history for trauma, surgery, or radiotherapy as part of triple assessment",
+      "Mammography, which may show an oil cyst, calcification, or a suspicious mass",
+      "Ultrasound to characterise the lesion",
+      "Core needle biopsy where imaging or clinical features are not clearly benign",
+      "Magnetic resonance imaging in selected cases when other imaging is indeterminate",
+      "Interval imaging follow-up when a lesion is presumed benign but not biopsied"
     ],
-    [
-     "Management Strategy",
-     "Confirm the benign diagnosis with triple assessment, using core needle biopsy where imaging or examination is not clearly benign",
-     "Core treatment modality"
+    "redFlags": [
+      "Spiculated mass or suspicious microcalcification that could represent carcinoma",
+      "Skin tethering or dimpling without a clear benign explanation",
+      "Discordant triple assessment findings",
+      "A lesion that enlarges or fails to settle over time",
+      "Associated axillary lymphadenopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a lump is fat necrosis on the basis of trauma history alone and missing a coincidental carcinoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Fat necrosis is benign with an excellent prognosis; once cancer is excluded, most lesions stabilise, resolve, or persist as an inert scar or oil cyst, and it carries no increased risk of malignancy.",
+    "pitfalls": [
+      "Assuming a lump is fat necrosis on the basis of trauma history alone and missing a coincidental carcinoma",
+      "Failing to biopsy imaging features that overlap with malignancy",
+      "Ignoring discordance between clinical, imaging, and pathological findings",
+      "Attributing skin tethering to fat necrosis without adequate assessment",
+      "Not arranging follow-up for a presumed benign but unbiopsied lesion"
+    ],
+    "references": [
+      "Standard breast surgery reference text on benign breast disease",
+      "Breast imaging guidance on benign mimics of malignancy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the benign diagnosis with triple assessment, using core needle biopsy where imaging or examination is not clearly benign",
+      "Reassure and manage conservatively once malignancy is excluded, as most lesions stabilise, resolve or persist as an inert oil cyst",
+      "Provide simple analgesia and supportive measures such as warm compresses for tenderness",
+      "Aspirate a symptomatic oil cyst or surgically excise a persistent, enlarging or troublesome mass",
+      "Arrange interval imaging follow-up when a lesion is presumed benign but not biopsied",
+      "Review the precipitating factor such as trauma, surgery, radiotherapy, fat grafting or anticoagulation, and reassure that there is no increased cancer risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for fat necrosis of the breast."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fat-necrosis-breast-real-image",
-   "title": "Fat necrosis of the breast: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fat_necrosis_breast-pathway",
+      "title": "Fat necrosis of the breast: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Fat necrosis is a benign inflammatory response of breast adipose tissue to injury, and it is an important mimic of carcinoma on both examination and imaging",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Spiculated mass or suspicious microcalcification that could represent carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination and history for trauma, surgery, or radiotherapy as part of triple assessment, Mammography, which may show an oil cyst, calcification, or a suspicious mass, Ultrasound to characterise the lesion"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the benign diagnosis with triple assessment, using core needle biopsy where imaging or examination is not clearly benign"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a lump is fat necrosis on the basis of trauma history alone and missing a coincidental carcinoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fat necrosis of the breast."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fat_necrosis_breast-matrix",
+      "title": "Fat necrosis of the breast: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Fat necrosis is a benign inflammatory response of breast adipose tissue to injury, and it is an important mimic of carcinoma on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination and history for trauma, surgery, or radiotherapy as part of triple assessment, Mammography, which may show",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Breast carcinoma, Fibroadenoma or other benign solid lump, Breast abscess or infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the benign diagnosis with triple assessment, using core needle biopsy where imaging or examination is not clearly benign",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a lump is fat necrosis on the basis of trauma history alone and missing a coincidental carcinoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fat necrosis of the breast."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard breast surgery textbook and breast imaging guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fat_necrosis_breast-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination and history",
+          "cells": [
+            {
+              "text": "Trauma, surgery or radiotherapy in triple assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography",
+          "cells": [
+            {
+              "text": "Oil cyst, calcification or a suspicious mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Characterises the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core needle biopsy",
+          "cells": [
+            {
+              "text": "Where imaging or examination is not clearly benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI in selected cases",
+          "cells": [
+            {
+              "text": "Indeterminate imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging follow-up",
+          "cells": [
+            {
+              "text": "Presumed benign but not biopsied"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fat_necrosis_breast-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Breast carcinoma",
+          "cells": [
+            {
+              "text": "Spiculated mass or suspicious microcalcification; biopsy excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibroadenoma or other benign solid lump",
+          "cells": [
+            {
+              "text": "Listed in the differential of a firm breast lump"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast abscess or haematoma",
+          "cells": [
+            {
+              "text": "Infection or bleeding after trauma or surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fat_necrosis_breast-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Triple assessment with core biopsy",
+          "cells": [
+            {
+              "text": "Confirms the benign diagnosis where not clearly benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance once malignancy excluded",
+          "cells": [
+            {
+              "text": "Most lesions stabilise, resolve or persist as an inert oil cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia and warm compresses",
+          "cells": [
+            {
+              "text": "Tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration or excision",
+          "cells": [
+            {
+              "text": "Symptomatic oil cyst (aspiration); persistent, enlarging or troublesome mass (excision)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging",
+          "cells": [
+            {
+              "text": "Presumed benign but unbiopsied lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of precipitating factor",
+          "cells": [
+            {
+              "text": "Trauma, surgery, radiotherapy, fat grafting or anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fat_necrosis_breast-dx-mgmt",
+      "title": "Diagnosis and management of Fat necrosis of the breast",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm breast lump after trauma, surgery, radiotherapy or fat grafting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (spiculated mass, skin tethering, discordant findings, enlarging lesion, nodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent triple assessment with core biopsy for suspicious features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mammography; ultrasound; core biopsy where not clearly benign; MRI if indeterminate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Benign pathology or typical oil cyst on imaging, with malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy or excise; treat as carcinoma until excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure once malignancy excluded; most lesions settle",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia and warm compresses for tenderness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspirate a symptomatic oil cyst or excise a persistent mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Interval imaging for presumed benign but unbiopsied lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with excellent prognosis; most lesions stabilise or persist as inert scar or cyst",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

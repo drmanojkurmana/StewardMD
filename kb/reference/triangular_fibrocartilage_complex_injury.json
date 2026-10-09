@@ -1,169 +1,458 @@
 {
- "id": "triangular_fibrocartilage_complex_injury",
- "name": "Triangular fibrocartilage complex injury",
- "aliases": [
-  "TFCC injury",
-  "TFCC tear"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Hand surgery / Orthopaedics / Sports medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hand surgery and sports medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The triangular fibrocartilage complex stabilises the distal radioulnar joint and cushions the ulnar wrist, and its injury causes ulnar-sided wrist pain",
-   "Symptoms include ulnar wrist pain worse with rotation and gripping, clicking and sometimes distal radioulnar joint instability",
-   "Injuries are broadly traumatic or degenerative, the latter associated with positive ulnar variance and ulnar impaction",
-   "The fovea sign, with tenderness in the soft spot between the ulnar styloid and flexor carpi ulnaris, supports the diagnosis",
-   "MRI, and definitively wrist arthroscopy, characterise the tear and its location",
-   "Peripheral traumatic tears in the vascular zone can heal or be repaired, whereas central and degenerative tears are managed differently"
+  "id": "triangular_fibrocartilage_complex_injury",
+  "name": "Triangular fibrocartilage complex injury",
+  "aliases": [
+    "TFCC injury",
+    "TFCC tear"
   ],
-  "pathophysiology": "The triangular fibrocartilage complex comprises the articular disc, ligaments and sheath that support the distal radioulnar joint and transmit load across the ulnar wrist. Acute injury from a fall onto the extended wrist or forceful rotation tears the complex, while chronic degenerative tears develop where excess ulnar length increases load on the disc (ulnar impaction). The peripheral portion is vascular and can heal, whereas the central avascular disc does not, which determines whether repair or debridement is appropriate. Loss of complex integrity may destabilise the distal radioulnar joint.",
-  "additionalDifferentials": [
-   "Ulnar impaction syndrome",
-   "Distal radioulnar joint instability of other cause",
-   "Extensor carpi ulnaris tendon pathology",
-   "Lunotriquetral ligament injury",
-   "Hook of hamate fracture or pisotriquetral pathology"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination including the fovea sign and distal radioulnar joint stability testing",
-   "Radiographs assessing ulnar variance",
-   "MRI, ideally with arthrography, to image the tear",
-   "Wrist arthroscopy as the definitive diagnostic and often therapeutic tool",
-   "Comparison with the contralateral wrist for instability"
-  ],
-  "redFlags": [
-   "Distal radioulnar joint instability",
-   "Associated fracture",
-   "Progressive pain and weakness despite conservative care",
-   "Features suggesting an alternative structural injury"
-  ],
-  "prognosis": "Many injuries respond to a period of immobilisation and rehabilitation; peripheral repairs and procedures to address ulnar impaction generally do well, whereas untreated instability can lead to chronic pain and arthritis.",
-  "pitfalls": [
-   "Attributing ulnar wrist pain to a simple sprain and missing the diagnosis",
-   "Overlooking distal radioulnar joint instability",
-   "Not recognising ulnar impaction as the driver of a degenerative tear",
-   "Expecting central avascular tears to heal like peripheral ones"
-  ],
-  "references": [
-   "Hand surgery reference texts (standard reference)",
-   "Sports medicine references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initial conservative management with wrist immobilisation in a splint or cast, activity modification and analgesia or a non-steroidal anti-inflammatory drug",
-   "Rehabilitation and physiotherapy to restore range of movement, grip strength and forearm rotation",
-   "Arthroscopic repair of peripheral traumatic tears in the vascular zone, which have healing potential",
-   "Arthroscopic debridement of irreparable central and degenerative tears",
-   "Ulnar shortening osteotomy or a wafer procedure to offload the disc in positive ulnar variance with ulnar impaction",
-   "Stabilise the distal radioulnar joint where the injury has caused instability",
-   "Refer to hand surgery for wrist arthroscopy, which serves as both definitive diagnosis and treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "triangular_fibrocartilage_complex_injury-pathway",
-   "title": "Triangular fibrocartilage complex injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The triangular fibrocartilage complex stabilises the distal radioulnar joint and cushions the ulnar wrist, and its injury causes ulnar-sided wrist pain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Distal radioulnar joint instability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination including the fovea sign and distal radioulnar joint stability testing, Radiographs assessing ulnar variance, MRI, ideally with arthrography, to image the tear"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initial conservative management with wrist immobilisation in a splint or cast, activity modification and analgesia or a non-steroidal anti-inflammatory drug"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing ulnar wrist pain to a simple sprain and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of triangular fibrocartilage complex injury."
-  }
- ],
- "tables": [
-  {
-   "id": "triangular_fibrocartilage_complex_injury-matrix",
-   "title": "Triangular fibrocartilage complex injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The triangular fibrocartilage complex stabilises the distal radioulnar joint and cushions the ulnar wrist, and its injury causes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Hand surgery / Orthopaedics / Sports medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hand surgery and sports medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The triangular fibrocartilage complex stabilises the distal radioulnar joint and cushions the ulnar wrist, and its injury causes ulnar-sided wrist pain",
+      "Symptoms include ulnar wrist pain worse with rotation and gripping, clicking and sometimes distal radioulnar joint instability",
+      "Injuries are broadly traumatic or degenerative, the latter associated with positive ulnar variance and ulnar impaction",
+      "The fovea sign, with tenderness in the soft spot between the ulnar styloid and flexor carpi ulnaris, supports the diagnosis",
+      "MRI, and definitively wrist arthroscopy, characterise the tear and its location",
+      "Peripheral traumatic tears in the vascular zone can heal or be repaired, whereas central and degenerative tears are managed differently"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination including the fovea sign and distal radioulnar joint stability testing, Radiographs assessing ulnar",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The triangular fibrocartilage complex comprises the articular disc, ligaments and sheath that support the distal radioulnar joint and transmit load across the ulnar wrist. Acute injury from a fall onto the extended wrist or forceful rotation tears the complex, while chronic degenerative tears develop where excess ulnar length increases load on the disc (ulnar impaction). The peripheral portion is vascular and can heal, whereas the central avascular disc does not, which determines whether repair or debridement is appropriate. Loss of complex integrity may destabilise the distal radioulnar joint.",
+    "additionalDifferentials": [
+      "Ulnar impaction syndrome",
+      "Distal radioulnar joint instability of other cause",
+      "Extensor carpi ulnaris tendon pathology",
+      "Lunotriquetral ligament injury",
+      "Hook of hamate fracture or pisotriquetral pathology"
     ],
-    [
-     "Primary Differentials",
-     "Ulnar impaction syndrome, Distal radioulnar joint instability of other cause, Extensor carpi ulnaris tendon pathology",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination including the fovea sign and distal radioulnar joint stability testing",
+      "Radiographs assessing ulnar variance",
+      "MRI, ideally with arthrography, to image the tear",
+      "Wrist arthroscopy as the definitive diagnostic and often therapeutic tool",
+      "Comparison with the contralateral wrist for instability"
     ],
-    [
-     "Management Strategy",
-     "Initial conservative management with wrist immobilisation in a splint or cast, activity modification and analgesia or a",
-     "Core treatment modality"
+    "redFlags": [
+      "Distal radioulnar joint instability",
+      "Associated fracture",
+      "Progressive pain and weakness despite conservative care",
+      "Features suggesting an alternative structural injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing ulnar wrist pain to a simple sprain and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many injuries respond to a period of immobilisation and rehabilitation; peripheral repairs and procedures to address ulnar impaction generally do well, whereas untreated instability can lead to chronic pain and arthritis.",
+    "pitfalls": [
+      "Attributing ulnar wrist pain to a simple sprain and missing the diagnosis",
+      "Overlooking distal radioulnar joint instability",
+      "Not recognising ulnar impaction as the driver of a degenerative tear",
+      "Expecting central avascular tears to heal like peripheral ones"
+    ],
+    "references": [
+      "Hand surgery reference texts (standard reference)",
+      "Sports medicine references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initial conservative management with wrist immobilisation in a splint or cast, activity modification and analgesia or a non-steroidal anti-inflammatory drug",
+      "Rehabilitation and physiotherapy to restore range of movement, grip strength and forearm rotation",
+      "Arthroscopic repair of peripheral traumatic tears in the vascular zone, which have healing potential",
+      "Arthroscopic debridement of irreparable central and degenerative tears",
+      "Ulnar shortening osteotomy or a wafer procedure to offload the disc in positive ulnar variance with ulnar impaction",
+      "Stabilise the distal radioulnar joint where the injury has caused instability",
+      "Refer to hand surgery for wrist arthroscopy, which serves as both definitive diagnosis and treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for triangular fibrocartilage complex injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "triangular-fibrocartilage-complex-injury-real-image",
-   "title": "Triangular fibrocartilage complex injury: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "triangular_fibrocartilage_complex_injury-pathway",
+      "title": "Triangular fibrocartilage complex injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The triangular fibrocartilage complex stabilises the distal radioulnar joint and cushions the ulnar wrist, and its injury causes ulnar-sided wrist pain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Distal radioulnar joint instability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination including the fovea sign and distal radioulnar joint stability testing, Radiographs assessing ulnar variance, MRI, ideally with arthrography, to image the tear"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initial conservative management with wrist immobilisation in a splint or cast, activity modification and analgesia or a non-steroidal anti-inflammatory drug"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing ulnar wrist pain to a simple sprain and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of triangular fibrocartilage complex injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "triangular_fibrocartilage_complex_injury-matrix",
+      "title": "Triangular fibrocartilage complex injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The triangular fibrocartilage complex stabilises the distal radioulnar joint and cushions the ulnar wrist, and its injury causes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination including the fovea sign and distal radioulnar joint stability testing, Radiographs assessing ulnar",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ulnar impaction syndrome, Distal radioulnar joint instability of other cause, Extensor carpi ulnaris tendon pathology",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initial conservative management with wrist immobilisation in a splint or cast, activity modification and analgesia or a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing ulnar wrist pain to a simple sprain and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for triangular fibrocartilage complex injury."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hand surgery and sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "triangular_fibrocartilage_complex_injury-dx-mgmt",
+      "title": "Diagnosis and management of Triangular fibrocartilage complex injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TFCC injury: ulnar-sided wrist pain worse with rotation and gripping",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: distal radioulnar instability, associated fracture, or progressive pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hand surgery review for instability or fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fovea sign; ulnar variance on radiographs; MRI; arthroscopy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI or arthroscopy confirm a TFCC tear and its location?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ulnar impaction, lunotriquetral injury or extensor tendon pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immobilisation, activity modification and analgesia first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rehabilitation for range, grip and forearm rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Arthroscopic repair of peripheral vascular-zone tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Arthroscopic debridement of central or degenerative tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Ulnar shortening for impaction; stabilise the DRUJ if unstable",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many respond to immobilisation and rehabilitation; untreated instability risks arthritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "triangular_fibrocartilage_complex_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination with fovea sign and DRUJ stability",
+          "cells": [
+            {
+              "text": "Ulnar-sided tenderness and instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs for ulnar variance",
+          "cells": [
+            {
+              "text": "Positive ulnar variance and impaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or arthrography",
+          "cells": [
+            {
+              "text": "Tear location"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wrist arthroscopy",
+          "cells": [
+            {
+              "text": "Definitive diagnosis and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral wrist comparison",
+          "cells": [
+            {
+              "text": "Instability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "triangular_fibrocartilage_complex_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ulnar impaction syndrome",
+          "cells": [
+            {
+              "text": "Positive ulnar variance drives the degenerative tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lunotriquetral ligament injury",
+          "cells": [
+            {
+              "text": "Injury in the proximal carpal row; imaging distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensor carpi ulnaris tendon pathology",
+          "cells": [
+            {
+              "text": "Tendon-sheath tenderness rather than fovea tenderness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "triangular_fibrocartilage_complex_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Splint or cast immobilisation",
+          "cells": [
+            {
+              "text": "With activity modification and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Range, grip strength and forearm rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic repair",
+          "cells": [
+            {
+              "text": "Peripheral traumatic tears in the vascular zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic debridement",
+          "cells": [
+            {
+              "text": "Irreparable central or degenerative tears"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar shortening or wafer procedure",
+          "cells": [
+            {
+              "text": "Positive ulnar variance with impaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DRUJ stabilisation",
+          "cells": [
+            {
+              "text": "Where injury has caused instability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

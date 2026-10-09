@@ -1,170 +1,448 @@
 {
- "id": "gm1_gangliosidosis",
- "name": "GM1 gangliosidosis",
- "aliases": [
-  "beta-galactosidase deficiency",
-  "GLB1 deficiency",
-  "generalized gangliosidosis"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive disorder caused by deficiency of the enzyme beta-galactosidase, leading to accumulation of GM1 ganglioside and related substrates in neurons and other tissues",
-   "The infantile form combines features of a gangliosidosis and a storage disorder, with neurodegeneration together with coarse facies, hepatosplenomegaly, and skeletal changes",
-   "A cherry-red macular spot may be present in a substantial proportion of infantile cases",
-   "Dysostosis multiplex on skeletal imaging overlaps with the mucopolysaccharidoses, reflecting glycosaminoglycan storage",
-   "Late-infantile/juvenile and adult forms exist, with the adult form often presenting with dystonia and slower progression and fewer somatic features",
-   "The same enzyme deficiency underlies Morquio syndrome type B, which is predominantly a skeletal phenotype with preserved intellect",
-   "Hypotonia and developmental regression dominate the early infantile presentation, later progressing to spasticity and seizures",
-   "No curative therapy is established, so management is supportive with genetic counselling for families"
+  "id": "gm1_gangliosidosis",
+  "name": "GM1 gangliosidosis",
+  "aliases": [
+    "beta-galactosidase deficiency",
+    "GLB1 deficiency",
+    "generalized gangliosidosis"
   ],
-  "pathophysiology": "GM1 gangliosidosis results from biallelic pathogenic variants in GLB1, encoding lysosomal beta-galactosidase. Deficient enzyme activity impairs removal of terminal galactose residues, causing accumulation of GM1 ganglioside within neurons and of galactose-containing oligosaccharides and keratan sulfate in visceral and skeletal tissues. Neuronal ganglioside storage drives progressive neurodegeneration, while systemic substrate accumulation produces the organomegaly and dysostosis that overlap with the mucopolysaccharidoses. The severity and phenotype depend on residual enzyme activity, spanning severe infantile disease to milder adult-onset forms.",
-  "additionalDifferentials": [
-   "GM2 gangliosidoses (Tay-Sachs and Sandhoff disease)",
-   "Mucopolysaccharidoses given the shared dysostosis and coarse features",
-   "Niemann-Pick disease and other storage disorders with organomegaly",
-   "Other causes of infantile neurodegeneration with cherry-red spot",
-   "Morquio syndrome type B for the skeletal-predominant phenotype"
-  ],
-  "additionalInvestigations": [
-   "Assay of beta-galactosidase enzyme activity in leukocytes or fibroblasts",
-   "GLB1 molecular genetic testing to confirm the diagnosis",
-   "Urinary oligosaccharide analysis",
-   "Skeletal survey for dysostosis multiplex",
-   "Ophthalmological examination and neuroimaging"
-  ],
-  "redFlags": [
-   "Rapid neurodevelopmental regression in an infant with organomegaly",
-   "Emerging seizures or feeding and swallowing difficulty",
-   "Progressive dystonia in juvenile or adult presentations",
-   "Cardiac involvement in more severe phenotypes"
-  ],
-  "prognosis": "The infantile form is severe and progressive, typically fatal in early childhood. Late-infantile and juvenile forms progress more slowly, and the adult form has a protracted course often dominated by movement disorder. No disease-modifying therapy is currently established, so care is supportive.",
-  "pitfalls": [
-   "Confusing it with a mucopolysaccharidosis because of the shared skeletal and facial features",
-   "Not distinguishing it from the GM2 gangliosidoses without enzyme testing",
-   "Overlooking the milder adult dystonic form",
-   "Failing to provide genetic counselling to at-risk relatives"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive symptomatic care as no disease-modifying enzyme or gene therapy is currently established",
-   "Control seizures with antiseizure medication tailored to seizure type",
-   "Optimise nutrition and airway safety with feeding support and gastrostomy where dysphagia and aspiration risk develop",
-   "Manage spasticity and dystonia with muscle relaxants, physiotherapy and, in the adult movement-predominant form, targeted movement-disorder therapy",
-   "Provide respiratory care with chest physiotherapy and prompt treatment of aspiration and recurrent infection",
-   "Coordinate multidisciplinary neurology, metabolic, ophthalmology and palliative care, and offer genetic counselling with carrier and prenatal testing for autosomal recessive GLB1 disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gm1_gangliosidosis-pathway",
-   "title": "GM1 gangliosidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive disorder caused by deficiency of the enzyme beta-galactosidase, leading to accumulation of GM1 ganglioside and related substrates in neurons and other tissues",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid neurodevelopmental regression in an infant with organomegaly",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assay of beta-galactosidase enzyme activity in leukocytes or fibroblasts, GLB1 molecular genetic testing to confirm the diagnosis, Urinary oligosaccharide analysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive symptomatic care as no disease-modifying enzyme or gene therapy is currently established"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with a mucopolysaccharidosis because of the shared skeletal and facial features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gm1 gangliosidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "gm1_gangliosidosis-matrix",
-   "title": "GM1 gangliosidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive disorder caused by deficiency of the enzyme beta-galactosidase, leading to accumulation of GM1 ganglioside",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive disorder caused by deficiency of the enzyme beta-galactosidase, leading to accumulation of GM1 ganglioside and related substrates in neurons and other tissues",
+      "The infantile form combines features of a gangliosidosis and a storage disorder, with neurodegeneration together with coarse facies, hepatosplenomegaly, and skeletal changes",
+      "A cherry-red macular spot may be present in a substantial proportion of infantile cases",
+      "Dysostosis multiplex on skeletal imaging overlaps with the mucopolysaccharidoses, reflecting glycosaminoglycan storage",
+      "Late-infantile/juvenile and adult forms exist, with the adult form often presenting with dystonia and slower progression and fewer somatic features",
+      "The same enzyme deficiency underlies Morquio syndrome type B, which is predominantly a skeletal phenotype with preserved intellect",
+      "Hypotonia and developmental regression dominate the early infantile presentation, later progressing to spasticity and seizures",
+      "No curative therapy is established, so management is supportive with genetic counselling for families"
     ],
-    [
-     "Key Investigations",
-     "Assay of beta-galactosidase enzyme activity in leukocytes or fibroblasts, GLB1 molecular genetic testing to confirm the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "GM1 gangliosidosis results from biallelic pathogenic variants in GLB1, encoding lysosomal beta-galactosidase. Deficient enzyme activity impairs removal of terminal galactose residues, causing accumulation of GM1 ganglioside within neurons and of galactose-containing oligosaccharides and keratan sulfate in visceral and skeletal tissues. Neuronal ganglioside storage drives progressive neurodegeneration, while systemic substrate accumulation produces the organomegaly and dysostosis that overlap with the mucopolysaccharidoses. The severity and phenotype depend on residual enzyme activity, spanning severe infantile disease to milder adult-onset forms.",
+    "additionalDifferentials": [
+      "GM2 gangliosidoses (Tay-Sachs and Sandhoff disease)",
+      "Mucopolysaccharidoses given the shared dysostosis and coarse features",
+      "Niemann-Pick disease and other storage disorders with organomegaly",
+      "Other causes of infantile neurodegeneration with cherry-red spot",
+      "Morquio syndrome type B for the skeletal-predominant phenotype"
     ],
-    [
-     "Primary Differentials",
-     "GM2 gangliosidoses (Tay-Sachs and Sandhoff disease), Mucopolysaccharidoses given the shared dysostosis and coarse features,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assay of beta-galactosidase enzyme activity in leukocytes or fibroblasts",
+      "GLB1 molecular genetic testing to confirm the diagnosis",
+      "Urinary oligosaccharide analysis",
+      "Skeletal survey for dysostosis multiplex",
+      "Ophthalmological examination and neuroimaging"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive symptomatic care as no disease-modifying enzyme or gene therapy is currently established",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid neurodevelopmental regression in an infant with organomegaly",
+      "Emerging seizures or feeding and swallowing difficulty",
+      "Progressive dystonia in juvenile or adult presentations",
+      "Cardiac involvement in more severe phenotypes"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with a mucopolysaccharidosis because of the shared skeletal and facial features",
-     "Prevent diagnostic or management error"
+    "prognosis": "The infantile form is severe and progressive, typically fatal in early childhood. Late-infantile and juvenile forms progress more slowly, and the adult form has a protracted course often dominated by movement disorder. No disease-modifying therapy is currently established, so care is supportive.",
+    "pitfalls": [
+      "Confusing it with a mucopolysaccharidosis because of the shared skeletal and facial features",
+      "Not distinguishing it from the GM2 gangliosidoses without enzyme testing",
+      "Overlooking the milder adult dystonic form",
+      "Failing to provide genetic counselling to at-risk relatives"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive symptomatic care as no disease-modifying enzyme or gene therapy is currently established",
+      "Control seizures with antiseizure medication tailored to seizure type",
+      "Optimise nutrition and airway safety with feeding support and gastrostomy where dysphagia and aspiration risk develop",
+      "Manage spasticity and dystonia with muscle relaxants, physiotherapy and, in the adult movement-predominant form, targeted movement-disorder therapy",
+      "Provide respiratory care with chest physiotherapy and prompt treatment of aspiration and recurrent infection",
+      "Coordinate multidisciplinary neurology, metabolic, ophthalmology and palliative care, and offer genetic counselling with carrier and prenatal testing for autosomal recessive GLB1 disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for gm1 gangliosidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gm1-gangliosidosis-real-image",
-   "title": "GM1 gangliosidosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "gm1_gangliosidosis-pathway",
+      "title": "GM1 gangliosidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive disorder caused by deficiency of the enzyme beta-galactosidase, leading to accumulation of GM1 ganglioside and related substrates in neurons and other tissues",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid neurodevelopmental regression in an infant with organomegaly",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assay of beta-galactosidase enzyme activity in leukocytes or fibroblasts, GLB1 molecular genetic testing to confirm the diagnosis, Urinary oligosaccharide analysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive symptomatic care as no disease-modifying enzyme or gene therapy is currently established"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with a mucopolysaccharidosis because of the shared skeletal and facial features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gm1 gangliosidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gm1_gangliosidosis-matrix",
+      "title": "GM1 gangliosidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive disorder caused by deficiency of the enzyme beta-galactosidase, leading to accumulation of GM1 ganglioside",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assay of beta-galactosidase enzyme activity in leukocytes or fibroblasts, GLB1 molecular genetic testing to confirm the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "GM2 gangliosidoses (Tay-Sachs and Sandhoff disease), Mucopolysaccharidoses given the shared dysostosis and coarse features,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive symptomatic care as no disease-modifying enzyme or gene therapy is currently established",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with a mucopolysaccharidosis because of the shared skeletal and facial features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gm1 gangliosidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gm1_gangliosidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-galactosidase enzyme assay in leukocytes or fibroblasts",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLB1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary oligosaccharide analysis",
+          "cells": [
+            {
+              "text": "Oligosaccharide pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Dysostosis multiplex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination and neuroimaging",
+          "cells": [
+            {
+              "text": "Eye and brain findings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gm1_gangliosidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "GM2 gangliosidoses (Tay-Sachs and Sandhoff)",
+          "cells": [
+            {
+              "text": "Separated by enzyme testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morquio syndrome type B",
+          "cells": [
+            {
+              "text": "Skeletal-predominant phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gm1_gangliosidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive symptomatic care",
+          "cells": [
+            {
+              "text": "No disease-modifying enzyme or gene therapy established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Tailored to seizure type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Gastrostomy where dysphagia and aspiration risk develop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity and dystonia",
+          "cells": [
+            {
+              "text": "Muscle relaxants, physiotherapy and targeted movement therapy in adult forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory care",
+          "cells": [
+            {
+              "text": "Chest physiotherapy and prompt treatment of aspiration and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary and palliative care",
+          "cells": [
+            {
+              "text": "Neurology, metabolic, ophthalmology and palliative teams"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier and prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gm1_gangliosidosis-dx-mgmt",
+      "title": "Diagnosis and management of GM1 gangliosidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GM1 gangliosidosis: infant regression with organomegaly and cherry-red spot",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid regression, seizures, feeding difficulty, cardiac involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent feeding and airway review for dysphagia or aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Beta-galactosidase assay, GLB1 testing, urine oligosaccharides and skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does reduced beta-galactosidase activity with GLB1 variants confirm GM1?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GM2 gangliosidosis, Niemann-Pick disease or Morquio syndrome type B",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; no established disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication tailored to seizure type",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gastrostomy where dysphagia and aspiration risk develop",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Respiratory care and prompt treatment of aspiration and infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infantile form is severe, often fatal in early childhood; later forms progress slower",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

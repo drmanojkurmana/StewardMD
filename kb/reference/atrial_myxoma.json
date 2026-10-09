@@ -1,167 +1,455 @@
 {
- "id": "atrial_myxoma",
- "name": "Atrial myxoma",
- "aliases": [
-  "cardiac myxoma"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology / Cardiac surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Cardiology references / cardiac tumour literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest primary cardiac tumour, benign, and most often arising in the left atrium near the fossa ovalis",
-   "The classic triad of manifestations is obstructive, embolic and constitutional",
-   "Obstruction can mimic mitral stenosis, sometimes with a tumour plop and positional symptoms",
-   "Embolism (systemic from left-sided, pulmonary from right-sided tumours) can cause stroke or limb ischaemia",
-   "Constitutional features include fever, weight loss and raised inflammatory markers, mimicking endocarditis or vasculitis",
-   "Most are sporadic, but multiple or recurrent myxomas suggest the Carney complex; treatment is surgical excision"
+  "id": "atrial_myxoma",
+  "name": "Atrial myxoma",
+  "aliases": [
+    "cardiac myxoma"
   ],
-  "pathophysiology": "An atrial myxoma is a benign neoplasm of primitive mesenchymal cells, typically pedunculated and attached to the atrial septum. Its gelatinous, friable surface and mobility explain the clinical triad: a pedunculated mass can prolapse into the atrioventricular valve during diastole causing intermittent inflow obstruction, fragments or surface thrombus can embolise, and cytokine production (notably interleukin-6) drives constitutional and inflammatory features. Left atrial tumours embolise systemically, while right atrial tumours embolise to the lungs.",
-  "additionalDifferentials": [
-   "Mitral stenosis",
-   "Infective endocarditis",
-   "Left atrial thrombus",
-   "Other cardiac tumours (papillary fibroelastoma, sarcoma)",
-   "Vasculitis or other cause of constitutional illness"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography (transthoracic and transoesophageal) to characterise the mass",
-   "Cardiac MRI for tissue characterisation and extent",
-   "Assessment for embolic complications",
-   "Inflammatory markers",
-   "Evaluation for Carney complex if multiple, recurrent or young-onset"
-  ],
-  "redFlags": [
-   "Embolic stroke or systemic embolism",
-   "Syncope or haemodynamic compromise from valve obstruction",
-   "Features suggesting malignant cardiac tumour",
-   "Recurrent or multiple tumours suggesting a familial syndrome"
-  ],
-  "prognosis": "Surgical excision is usually curative for sporadic myxomas with an excellent prognosis, though recurrence occurs, particularly in familial (Carney complex) cases requiring surveillance.",
-  "pitfalls": [
-   "Mistaking it for infective endocarditis or vasculitis given constitutional features",
-   "Attributing obstructive symptoms solely to mitral stenosis",
-   "Overlooking a myxoma as a source of embolic stroke",
-   "Not considering Carney complex in young or recurrent cases"
-  ],
-  "references": [
-   "Braunwald's Heart Disease",
-   "Cardiac tumour references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake prompt complete surgical excision of the tumour together with its septal attachment as the curative mainstay, given the ongoing embolic and obstructive risk",
-   "Characterise the mass fully with echocardiography before operation and expedite surgery rather than delay",
-   "Manage complications encountered at presentation, including heart failure from inflow obstruction and embolic events such as stroke or limb ischaemia",
-   "Perform surveillance echocardiography after resection to detect recurrence",
-   "Evaluate for the Carney complex when the myxoma is multiple, recurrent, familial or arises in a young patient, and screen first-degree relatives echocardiographically",
-   "Coordinate care between cardiology and cardiac surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "atrial_myxoma-pathway",
-   "title": "Atrial myxoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest primary cardiac tumour, benign, and most often arising in the left atrium near the fossa ovalis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Embolic stroke or systemic embolism",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography (transthoracic and transoesophageal) to characterise the mass, Cardiac MRI for tissue characterisation and extent, Assessment for embolic complications"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake prompt complete surgical excision of the tumour together with its septal attachment as the curative mainstay, given the ongoing embolic and obstructive risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for infective endocarditis or vasculitis given constitutional features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of atrial myxoma."
-  }
- ],
- "tables": [
-  {
-   "id": "atrial_myxoma-matrix",
-   "title": "Atrial myxoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest primary cardiac tumour, benign, and most often arising in the left atrium near the fossa ovalis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology / Cardiac surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cardiology references / cardiac tumour literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest primary cardiac tumour, benign, and most often arising in the left atrium near the fossa ovalis",
+      "The classic triad of manifestations is obstructive, embolic and constitutional",
+      "Obstruction can mimic mitral stenosis, sometimes with a tumour plop and positional symptoms",
+      "Embolism (systemic from left-sided, pulmonary from right-sided tumours) can cause stroke or limb ischaemia",
+      "Constitutional features include fever, weight loss and raised inflammatory markers, mimicking endocarditis or vasculitis",
+      "Most are sporadic, but multiple or recurrent myxomas suggest the Carney complex; treatment is surgical excision"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography (transthoracic and transoesophageal) to characterise the mass, Cardiac MRI for tissue characterisation and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An atrial myxoma is a benign neoplasm of primitive mesenchymal cells, typically pedunculated and attached to the atrial septum. Its gelatinous, friable surface and mobility explain the clinical triad: a pedunculated mass can prolapse into the atrioventricular valve during diastole causing intermittent inflow obstruction, fragments or surface thrombus can embolise, and cytokine production (notably interleukin-6) drives constitutional and inflammatory features. Left atrial tumours embolise systemically, while right atrial tumours embolise to the lungs.",
+    "additionalDifferentials": [
+      "Mitral stenosis",
+      "Infective endocarditis",
+      "Left atrial thrombus",
+      "Other cardiac tumours (papillary fibroelastoma, sarcoma)",
+      "Vasculitis or other cause of constitutional illness"
     ],
-    [
-     "Primary Differentials",
-     "Mitral stenosis, Infective endocarditis, Left atrial thrombus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography (transthoracic and transoesophageal) to characterise the mass",
+      "Cardiac MRI for tissue characterisation and extent",
+      "Assessment for embolic complications",
+      "Inflammatory markers",
+      "Evaluation for Carney complex if multiple, recurrent or young-onset"
     ],
-    [
-     "Management Strategy",
-     "Undertake prompt complete surgical excision of the tumour together with its septal attachment as the curative mainstay, given the",
-     "Core treatment modality"
+    "redFlags": [
+      "Embolic stroke or systemic embolism",
+      "Syncope or haemodynamic compromise from valve obstruction",
+      "Features suggesting malignant cardiac tumour",
+      "Recurrent or multiple tumours suggesting a familial syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for infective endocarditis or vasculitis given constitutional features",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical excision is usually curative for sporadic myxomas with an excellent prognosis, though recurrence occurs, particularly in familial (Carney complex) cases requiring surveillance.",
+    "pitfalls": [
+      "Mistaking it for infective endocarditis or vasculitis given constitutional features",
+      "Attributing obstructive symptoms solely to mitral stenosis",
+      "Overlooking a myxoma as a source of embolic stroke",
+      "Not considering Carney complex in young or recurrent cases"
+    ],
+    "references": [
+      "Braunwald's Heart Disease",
+      "Cardiac tumour references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake prompt complete surgical excision of the tumour together with its septal attachment as the curative mainstay, given the ongoing embolic and obstructive risk",
+      "Characterise the mass fully with echocardiography before operation and expedite surgery rather than delay",
+      "Manage complications encountered at presentation, including heart failure from inflow obstruction and embolic events such as stroke or limb ischaemia",
+      "Perform surveillance echocardiography after resection to detect recurrence",
+      "Evaluate for the Carney complex when the myxoma is multiple, recurrent, familial or arises in a young patient, and screen first-degree relatives echocardiographically",
+      "Coordinate care between cardiology and cardiac surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for atrial myxoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "atrial-myxoma-real-image",
-   "title": "Atrial myxoma: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "atrial_myxoma-pathway",
+      "title": "Atrial myxoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest primary cardiac tumour, benign, and most often arising in the left atrium near the fossa ovalis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Embolic stroke or systemic embolism",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography (transthoracic and transoesophageal) to characterise the mass, Cardiac MRI for tissue characterisation and extent, Assessment for embolic complications"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake prompt complete surgical excision of the tumour together with its septal attachment as the curative mainstay, given the ongoing embolic and obstructive risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for infective endocarditis or vasculitis given constitutional features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of atrial myxoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "atrial_myxoma-matrix",
+      "title": "Atrial myxoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest primary cardiac tumour, benign, and most often arising in the left atrium near the fossa ovalis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography (transthoracic and transoesophageal) to characterise the mass, Cardiac MRI for tissue characterisation and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mitral stenosis, Infective endocarditis, Left atrial thrombus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake prompt complete surgical excision of the tumour together with its septal attachment as the curative mainstay, given the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for infective endocarditis or vasculitis given constitutional features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for atrial myxoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cardiology references / cardiac tumour literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atrial_myxoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic and transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Characterises the mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Tissue characterisation and extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for embolic complications",
+          "cells": [
+            {
+              "text": "Embolic complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Constitutional features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for Carney complex",
+          "cells": [
+            {
+              "text": "Multiple, recurrent or young-onset tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrial_myxoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mitral stenosis",
+          "cells": [
+            {
+              "text": "Obstructive symptoms should not be attributed to it alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective endocarditis",
+          "cells": [
+            {
+              "text": "Constitutional features can mimic it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrial_myxoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Excision together with the septal attachment"
+            },
+            {
+              "text": "Curative mainstay; embolic risk persists until removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative echocardiography",
+          "cells": [
+            {
+              "text": "Characterise the mass fully"
+            },
+            {
+              "text": "Expedite surgery rather than delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "Heart failure from inflow obstruction; embolic stroke or limb ischaemia"
+            },
+            {
+              "text": "At presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance echocardiography",
+          "cells": [
+            {
+              "text": "After resection to detect recurrence"
+            },
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex evaluation",
+          "cells": [
+            {
+              "text": "Multiple, recurrent, familial or young-onset myxoma; screen first-degree relatives"
+            },
+            {
+              "text": "Familial pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Cardiology and cardiac surgery"
+            },
+            {
+              "text": "Coordinated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atrial_myxoma-dx-mgmt",
+      "title": "Diagnosis and management of Atrial myxoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Left atrial mass with embolic or obstructive symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Embolic stroke, syncope or features of malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Expedite surgery; manage stroke or limb ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TTE and TOE, cardiac MRI, embolic assessment, inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mass characterised on echo and MRI as a myxoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prompt complete surgical excision with septal attachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage heart failure from inflow obstruction at presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveillance echocardiography after resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Evaluate for Carney complex if multiple or familial",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Screen first-degree relatives when Carney complex is suspected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

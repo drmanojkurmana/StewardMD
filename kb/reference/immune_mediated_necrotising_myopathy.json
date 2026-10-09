@@ -1,184 +1,570 @@
 {
- "id": "immune_mediated_necrotising_myopathy",
- "name": "immune mediated necrotising myopathy",
- "aliases": [
-  "IMNM",
-  "Immune-mediated necrotising myopathy",
-  "anti-HMGCR myopathy",
-  "anti-SRP myopathy",
-  "immune mediated necrotizing myopathy",
-  "immune-mediated necrotising myositis",
-  "necrotising autoimmune myopathy"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Subacute, severe, symmetrical proximal weakness with markedly elevated creatine kinase, typically higher than in dermatomyositis or polymyositis.",
-   "Two defining myositis-specific antibodies: anti-SRP and anti-HMGCR; a seronegative subgroup also exists.",
-   "Anti-HMGCR disease is associated with prior statin exposure, but occurs without statins, particularly in younger patients, and weakness progresses despite drug withdrawal.",
-   "Persistence or progression of weakness after stopping a statin distinguishes immune-mediated necrotising myopathy from self-limited toxic statin myopathy.",
-   "Muscle biopsy shows scattered necrotic and regenerating fibres with sparse inflammatory infiltrate, sarcolemmal MHC-I upregulation and membrane-attack-complex deposition on capillaries and non-necrotic fibres.",
-   "Anti-SRP disease tends to be more severe, treatment-resistant and may involve the myocardium; anti-HMGCR disease often responds well to intravenous immunoglobulin.",
-   "Dysphagia is common and an early marker of disease severity.",
-   "An underlying occult malignancy should be considered, particularly in older and seronegative patients."
+  "id": "immune_mediated_necrotising_myopathy",
+  "name": "immune mediated necrotising myopathy",
+  "aliases": [
+    "IMNM",
+    "Immune-mediated necrotising myopathy",
+    "anti-HMGCR myopathy",
+    "anti-SRP myopathy",
+    "immune mediated necrotizing myopathy",
+    "immune-mediated necrotising myositis",
+    "necrotising autoimmune myopathy"
   ],
-  "pathophysiology": "Immune-mediated necrotising myopathy is a humorally driven idiopathic inflammatory myopathy in which antibodies, rather than a T-cell-rich infiltrate, are thought to be directly pathogenic. Circulating anti-signal-recognition-particle (anti-SRP) and anti-3-hydroxy-3-methylglutaryl-coenzyme-A-reductase (anti-HMGCR) antibodies target antigens expressed on the myofibre surface, with antibody titres broadly tracking disease activity. Complement is activated on the sarcolemma and capillaries, generating membrane-attack complex and leading to repeated cycles of myofibre necrosis and regeneration. Because regenerating fibres re-express HMGCR, which is upregulated by statins, statin exposure is thought to prime and sustain the anti-HMGCR response in genetically susceptible individuals, so autoimmunity continues even after the drug is withdrawn.",
-  "additionalDifferentials": [
-   "Polymyositis",
-   "Dermatomyositis",
-   "Inclusion body myositis",
-   "Self-limited toxic (statin) myopathy",
-   "Limb-girdle muscular dystrophy and dysferlinopathy",
-   "Metabolic myopathy",
-   "Hypothyroid myopathy"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase and other muscle enzymes",
-   "Myositis-specific antibody panel including anti-SRP and anti-HMGCR",
-   "Electromyography looking for an irritable myopathic pattern",
-   "Muscle MRI to detect oedema and guide biopsy site",
-   "Muscle biopsy with immunohistochemistry for MHC-I and complement (C5b-9) deposition",
-   "Cardiac assessment with echocardiography or cardiac MRI, especially in anti-SRP disease",
-   "Age-appropriate malignancy screening and swallow assessment"
-  ],
-  "redFlags": [
-   "Dysphagia with aspiration risk",
-   "Respiratory muscle weakness and falling respiratory reserve",
-   "Cardiac involvement, particularly in anti-SRP disease",
-   "Rapidly progressive generalised weakness",
-   "Features suggesting an underlying malignancy"
-  ],
-  "prognosis": "The course is typically chronic and frequently treatment-refractory, especially with anti-SRP antibodies, requiring prolonged combination immunotherapy and carrying a high relapse rate on tapering. Anti-HMGCR disease often responds well to intravenous immunoglobulin, whereas untreated disease may lead to fixed proximal weakness and disability.",
-  "pitfalls": [
-   "Misattributing persistent weakness to self-limited statin myopathy when it is in fact anti-HMGCR immune-mediated necrotising myopathy.",
-   "Interpreting the sparse inflammatory infiltrate on biopsy as a muscular dystrophy and overlooking complement and MHC-I markers.",
-   "Failing to recognise the seronegative subgroup when standard antibody testing is negative.",
-   "Omitting cardiac assessment and malignancy screening.",
-   "Undertreating anti-SRP disease, which typically needs early aggressive immunosuppression."
-  ],
-  "references": [
-   "European Neuromuscular Centre (ENMC) criteria for immune-mediated necrotising myopathy",
-   "EULAR/ACR classification criteria for idiopathic inflammatory myopathies",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate withdrawal of any implicated statin in anti-HMGCR disease, recognising that weakness commonly progresses despite cessation and still requires immunotherapy",
-   "Corticosteroids as initial immunosuppression, with early introduction of a steroid-sparing agent such as methotrexate, azathioprine or mycophenolate mofetil",
-   "Intravenous immunoglobulin, which is particularly effective in anti-HMGCR disease and may be used as an early or sole agent",
-   "Rituximab or other escalation for anti-SRP or treatment-refractory disease",
-   "Physiotherapy and graded rehabilitation to preserve muscle strength and function",
-   "Monitoring of creatine kinase, antibody titres and objective muscle strength to track disease activity and guide tapering",
-   "Cardiac surveillance with echocardiography or cardiac MRI, especially in anti-SRP disease which may involve the myocardium",
-   "Management within a combined rheumatology and neuromuscular service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "immune_mediated_necrotising_myopathy-pathway",
-   "title": "immune mediated necrotising myopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Subacute, severe, symmetrical proximal weakness with markedly elevated creatine kinase, typically higher than in dermatomyositis or polymyositis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Dysphagia with aspiration risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase and other muscle enzymes, Myositis-specific antibody panel including anti-SRP and anti-HMGCR, Electromyography looking for an irritable myopathic pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate withdrawal of any implicated statin in anti-HMGCR disease, recognising that weakness commonly progresses despite cessation and still requires immunotherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misattributing persistent weakness to self-limited statin myopathy when it is in fact anti-HMGCR immune-mediated necrotising myopathy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of immune mediated necrotising myopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "immune_mediated_necrotising_myopathy-matrix",
-   "title": "immune mediated necrotising myopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Subacute, severe, symmetrical proximal weakness with markedly elevated creatine kinase, typically higher than in dermatomyositis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Subacute, severe, symmetrical proximal weakness with markedly elevated creatine kinase, typically higher than in dermatomyositis or polymyositis.",
+      "Two defining myositis-specific antibodies: anti-SRP and anti-HMGCR; a seronegative subgroup also exists.",
+      "Anti-HMGCR disease is associated with prior statin exposure, but occurs without statins, particularly in younger patients, and weakness progresses despite drug withdrawal.",
+      "Persistence or progression of weakness after stopping a statin distinguishes immune-mediated necrotising myopathy from self-limited toxic statin myopathy.",
+      "Muscle biopsy shows scattered necrotic and regenerating fibres with sparse inflammatory infiltrate, sarcolemmal MHC-I upregulation and membrane-attack-complex deposition on capillaries and non-necrotic fibres.",
+      "Anti-SRP disease tends to be more severe, treatment-resistant and may involve the myocardium; anti-HMGCR disease often responds well to intravenous immunoglobulin.",
+      "Dysphagia is common and an early marker of disease severity.",
+      "An underlying occult malignancy should be considered, particularly in older and seronegative patients."
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase and other muscle enzymes, Myositis-specific antibody panel including anti-SRP and anti-HMGCR,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Immune-mediated necrotising myopathy is a humorally driven idiopathic inflammatory myopathy in which antibodies, rather than a T-cell-rich infiltrate, are thought to be directly pathogenic. Circulating anti-signal-recognition-particle (anti-SRP) and anti-3-hydroxy-3-methylglutaryl-coenzyme-A-reductase (anti-HMGCR) antibodies target antigens expressed on the myofibre surface, with antibody titres broadly tracking disease activity. Complement is activated on the sarcolemma and capillaries, generating membrane-attack complex and leading to repeated cycles of myofibre necrosis and regeneration. Because regenerating fibres re-express HMGCR, which is upregulated by statins, statin exposure is thought to prime and sustain the anti-HMGCR response in genetically susceptible individuals, so autoimmunity continues even after the drug is withdrawn.",
+    "additionalDifferentials": [
+      "Polymyositis",
+      "Dermatomyositis",
+      "Inclusion body myositis",
+      "Self-limited toxic (statin) myopathy",
+      "Limb-girdle muscular dystrophy and dysferlinopathy",
+      "Metabolic myopathy",
+      "Hypothyroid myopathy"
     ],
-    [
-     "Primary Differentials",
-     "Polymyositis, Dermatomyositis, Inclusion body myositis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase and other muscle enzymes",
+      "Myositis-specific antibody panel including anti-SRP and anti-HMGCR",
+      "Electromyography looking for an irritable myopathic pattern",
+      "Muscle MRI to detect oedema and guide biopsy site",
+      "Muscle biopsy with immunohistochemistry for MHC-I and complement (C5b-9) deposition",
+      "Cardiac assessment with echocardiography or cardiac MRI, especially in anti-SRP disease",
+      "Age-appropriate malignancy screening and swallow assessment"
     ],
-    [
-     "Management Strategy",
-     "Immediate withdrawal of any implicated statin in anti-HMGCR disease, recognising that weakness commonly progresses despite",
-     "Core treatment modality"
+    "redFlags": [
+      "Dysphagia with aspiration risk",
+      "Respiratory muscle weakness and falling respiratory reserve",
+      "Cardiac involvement, particularly in anti-SRP disease",
+      "Rapidly progressive generalised weakness",
+      "Features suggesting an underlying malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Misattributing persistent weakness to self-limited statin myopathy when it is in fact anti-HMGCR immune-mediated necrotising",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is typically chronic and frequently treatment-refractory, especially with anti-SRP antibodies, requiring prolonged combination immunotherapy and carrying a high relapse rate on tapering. Anti-HMGCR disease often responds well to intravenous immunoglobulin, whereas untreated disease may lead to fixed proximal weakness and disability.",
+    "pitfalls": [
+      "Misattributing persistent weakness to self-limited statin myopathy when it is in fact anti-HMGCR immune-mediated necrotising myopathy.",
+      "Interpreting the sparse inflammatory infiltrate on biopsy as a muscular dystrophy and overlooking complement and MHC-I markers.",
+      "Failing to recognise the seronegative subgroup when standard antibody testing is negative.",
+      "Omitting cardiac assessment and malignancy screening.",
+      "Undertreating anti-SRP disease, which typically needs early aggressive immunosuppression."
+    ],
+    "references": [
+      "European Neuromuscular Centre (ENMC) criteria for immune-mediated necrotising myopathy",
+      "EULAR/ACR classification criteria for idiopathic inflammatory myopathies",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate withdrawal of any implicated statin in anti-HMGCR disease, recognising that weakness commonly progresses despite cessation and still requires immunotherapy",
+      "Corticosteroids as initial immunosuppression, with early introduction of a steroid-sparing agent such as methotrexate, azathioprine or mycophenolate mofetil",
+      "Intravenous immunoglobulin, which is particularly effective in anti-HMGCR disease and may be used as an early or sole agent",
+      "Rituximab or other escalation for anti-SRP or treatment-refractory disease",
+      "Physiotherapy and graded rehabilitation to preserve muscle strength and function",
+      "Monitoring of creatine kinase, antibody titres and objective muscle strength to track disease activity and guide tapering",
+      "Cardiac surveillance with echocardiography or cardiac MRI, especially in anti-SRP disease which may involve the myocardium",
+      "Management within a combined rheumatology and neuromuscular service"
     ]
-   ],
-   "caption": "Overview comparison matrix for immune mediated necrotising myopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "immune-mediated-necrotising-myopathy-real-image",
-   "title": "immune mediated necrotising myopathy: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "immune_mediated_necrotising_myopathy-pathway",
+      "title": "immune mediated necrotising myopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Subacute, severe, symmetrical proximal weakness with markedly elevated creatine kinase, typically higher than in dermatomyositis or polymyositis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Dysphagia with aspiration risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase and other muscle enzymes, Myositis-specific antibody panel including anti-SRP and anti-HMGCR, Electromyography looking for an irritable myopathic pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate withdrawal of any implicated statin in anti-HMGCR disease, recognising that weakness commonly progresses despite cessation and still requires immunotherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misattributing persistent weakness to self-limited statin myopathy when it is in fact anti-HMGCR immune-mediated necrotising myopathy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of immune mediated necrotising myopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "immune_mediated_necrotising_myopathy-matrix",
+      "title": "immune mediated necrotising myopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Subacute, severe, symmetrical proximal weakness with markedly elevated creatine kinase, typically higher than in dermatomyositis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase and other muscle enzymes, Myositis-specific antibody panel including anti-SRP and anti-HMGCR,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Polymyositis, Dermatomyositis, Inclusion body myositis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate withdrawal of any implicated statin in anti-HMGCR disease, recognising that weakness commonly progresses despite",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misattributing persistent weakness to self-limited statin myopathy when it is in fact anti-HMGCR immune-mediated necrotising",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for immune mediated necrotising myopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 387-11",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "immune_mediated_necrotising_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Markedly elevated; typically higher than in dermatomyositis or polymyositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myositis-specific antibody panel",
+          "cells": [
+            {
+              "text": "Anti-SRP or anti-HMGCR; a seronegative subgroup also exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Irritable myopathic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Oedema; guides the biopsy site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "MHC-I and complement C5b-9 deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography or cardiac MRI",
+          "cells": [
+            {
+              "text": "Myocardial involvement, especially in anti-SRP disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screen and swallow assessment",
+          "cells": [
+            {
+              "text": "Associated malignancy and dysphagia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immune_mediated_necrotising_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Self-limited statin myopathy",
+          "cells": [
+            {
+              "text": "Resolves on withdrawal; anti-HMGCR weakness progresses despite withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb-girdle muscular dystrophy or dysferlinopathy",
+          "cells": [
+            {
+              "text": "Sparse inflammatory infiltrate can mimic a dystrophy; complement and MHC-I markers separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immune_mediated_necrotising_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Statin withdrawal",
+          "cells": [
+            {
+              "text": "Immediate in anti-HMGCR disease; immunotherapy still required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids and steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Initial steroids, then methotrexate, azathioprine or mycophenolate mofetil"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Particularly effective in anti-HMGCR disease; may be an early or sole agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Rituximab for anti-SRP or treatment-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and graded rehabilitation to preserve strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Creatine kinase, antibody titres, muscle strength and cardiac surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immune_mediated_necrotising_myopathy-ddx-2",
+      "kind": "ddx",
+      "title": "Drug-induced myopathies and their toxic reactions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Major toxic reaction"
+      ],
+      "rows": [
+        {
+          "parameter": "Lipid-lowering agents (fibrates, HMG-CoA reductase inhibitors, niacin)",
+          "cells": [
+            {
+              "text": "All three classes can cause a range of toxicity: raised serum creatine kinase without symptoms, myalgias, exercise-induced pain, rhabdomyolysis and myoglobinuria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Acute high-dose treatment can cause acute quadriplegic myopathy, often together with nondepolarizing neuromuscular blockers but also without them; chronic use mainly causes proximal weakness"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nondepolarizing neuromuscular blocking agents",
+          "cells": [
+            {
+              "text": "Acute quadriplegic myopathy, with or without glucocorticoids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zidovudine",
+          "cells": [
+            {
+              "text": "Mitochondrial myopathy with ragged red fibers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drugs of abuse (alcohol, amphetamines, cocaine, heroin, phencyclidine, meperidine)",
+          "cells": [
+            {
+              "text": "Widespread muscle breakdown, rhabdomyolysis and myoglobinuria; local injection causes muscle necrosis, skin induration and limb contractures"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autoimmune toxic myopathy: d-penicillamine",
+          "cells": [
+            {
+              "text": "May cause polymyositis and myasthenia gravis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amphophilic cationic drugs (amiodarone, chloroquine, hydroxychloroquine)",
+          "cells": [
+            {
+              "text": "Painless proximal weakness with autophagic vacuoles on muscle biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antimicrotubular drug: colchicine",
+          "cells": [
+            {
+              "text": "Painless proximal weakness, especially in renal failure; biopsy shows autophagic vacuoles"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "immune_mediated_necrotising_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of immune mediated necrotising myopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute severe proximal weakness with very high creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dysphagia, respiratory weakness, cardiac involvement or malignancy features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallow and respiratory assessment; cardiac review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, anti-SRP and anti-HMGCR panel, EMG, muscle MRI, biopsy with MHC-I and C5b-9",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Necrotising pattern with antibody or seronegative biopsy confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider statin myopathy or a dystrophy; review biopsy again",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw statin in anti-HMGCR disease; immunotherapy still required",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids, then methotrexate, azathioprine or mycophenolate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous immunoglobulin, particularly in anti-HMGCR disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rituximab for anti-SRP or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and cardiac surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Immunotherapy guided by CK and strength; tapered as disease responds",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

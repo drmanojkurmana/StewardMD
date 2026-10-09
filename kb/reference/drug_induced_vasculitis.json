@@ -1,179 +1,502 @@
 {
- "id": "drug_induced_vasculitis",
- "name": "Drug-induced vasculitis",
- "aliases": [
-  "Drug-induced vasculitis",
-  "Drug-associated vasculitis",
-  "Drug-induced ANCA-associated vasculitis"
- ],
- "class": "non_infective",
- "system": "Multisystem",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kelley and Firestein's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Drug-induced vasculitis most often manifests as a small-vessel leukocytoclastic vasculitis with palpable purpura on dependent areas, typically days to weeks after starting the culprit drug.",
-   "A distinct drug-induced ANCA-associated vasculitis is well recognised, classically with antimyeloperoxidase antibodies, and can affect the kidneys and lungs.",
-   "Antithyroid drugs, hydralazine, minocycline, certain anti-tumour necrosis factor agents and cocaine adulterated with levamisole are among the well-described triggers.",
-   "Very high-titre antimyeloperoxidase antibodies, antibodies to multiple antigens, or combined MPO and PR3 positivity should raise suspicion of a drug cause.",
-   "Withdrawal of the offending agent is the cornerstone of management and often leads to resolution of milder cutaneous disease.",
-   "Severe organ-threatening disease (glomerulonephritis, alveolar haemorrhage) may still require immunosuppression despite drug cessation.",
-   "Levamisole-adulterated cocaine characteristically causes retiform purpura with ear involvement, neutropenia and positive ANCA.",
-   "A detailed drug and substance history, including over-the-counter agents and illicit drugs, is essential to identify the trigger."
+  "id": "drug_induced_vasculitis",
+  "name": "Drug-induced vasculitis",
+  "aliases": [
+    "Drug-induced vasculitis",
+    "Drug-associated vasculitis",
+    "Drug-induced ANCA-associated vasculitis"
   ],
-  "pathophysiology": "Drug-induced vasculitis arises when a drug or its metabolites trigger an immune-mediated attack on blood vessel walls. In hypersensitivity small-vessel vasculitis the drug acts as a hapten, driving immune-complex formation and deposition in postcapillary venules with complement activation and neutrophil-mediated leukocytoclastic injury. In drug-induced ANCA-associated vasculitis certain agents promote the generation of antineutrophil cytoplasmic antibodies, often against myeloperoxidase; some drugs are thought to alter neutrophil extracellular trap formation or unmask sequestered antigens, breaking tolerance. The result ranges from purely cutaneous disease to a necrotising small-vessel vasculitis with renal and pulmonary involvement indistinguishable from idiopathic disease.",
-  "additionalDifferentials": [
-   "Idiopathic ANCA-associated vasculitis",
-   "IgA vasculitis (Henoch-Schoenlein purpura)",
-   "Cryoglobulinaemic vasculitis",
-   "Infection-associated vasculitis",
-   "Connective tissue disease-associated vasculitis",
-   "Septic emboli or infective endocarditis",
-   "Thrombotic or occlusive vasculopathy"
-  ],
-  "additionalInvestigations": [
-   "Detailed drug, over-the-counter and illicit substance history including timeline",
-   "ANCA testing with antigen specificity (MPO and PR3), noting high titres or dual positivity",
-   "Skin biopsy confirming leukocytoclastic vasculitis",
-   "Renal function and urinalysis to detect glomerulonephritis",
-   "Full blood count looking for neutropenia (as with levamisole)",
-   "Complement, cryoglobulins and infection screen to exclude alternatives",
-   "Urine toxicology where illicit drug exposure is suspected"
-  ],
-  "redFlags": [
-   "Rapidly progressive glomerulonephritis with rising creatinine",
-   "Pulmonary haemorrhage or hypoxia",
-   "Extensive retiform purpura with skin necrosis",
-   "Severe neutropenia or agranulocytosis",
-   "Systemic features persisting despite drug withdrawal"
-  ],
-  "prognosis": "Cutaneous-limited disease usually resolves after the culprit drug is stopped, but organ-threatening ANCA-associated forms can cause lasting renal impairment if not treated promptly. Rechallenge with the offending agent risks recurrence and should be avoided.",
-  "pitfalls": [
-   "Failing to take a complete drug and substance history, including illicit drugs and supplements.",
-   "Not recognising drug-induced ANCA vasculitis and treating it as idiopathic while continuing the trigger.",
-   "Missing levamisole-adulterated cocaine as a cause of retiform purpura with neutropenia.",
-   "Assuming all drug-induced vasculitis is benign and self-limiting when severe organ involvement can occur.",
-   "Rechallenging the patient with the causative drug, precipitating relapse."
-  ],
-  "references": [
-   "Kelley and Firestein's Textbook of Rheumatology, current edition",
-   "Oxford Textbook of Medicine, current edition",
-   "Consensus reviews on drug-induced and ANCA-associated vasculitis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and permanently withdraw the culprit agent (for example antithyroid drugs, hydralazine, minocycline, anti-tumour necrosis factor agents or levamisole-adulterated cocaine) as the cornerstone of treatment",
-   "For milder cutaneous leukocytoclastic disease, provide supportive care with leg elevation, wound care for purpura and analgesia while awaiting resolution after drug cessation",
-   "Treat organ-threatening ANCA-associated disease (glomerulonephritis or alveolar haemorrhage) with corticosteroids plus a further immunosuppressive agent such as cyclophosphamide or rituximab",
-   "Reserve plasma exchange for severe pulmonary haemorrhage or rapidly progressive renal failure",
-   "Monitor renal function and urinalysis for evolving glomerulonephritis and check the full blood count for drug-induced neutropenia",
-   "Refer promptly to rheumatology and nephrology for confirmation, biopsy and immunosuppression decisions",
-   "Document the reaction clearly and avoid rechallenge with the offending drug, which risks recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "drug_induced_vasculitis-pathway",
-   "title": "Drug-induced vasculitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Drug-induced vasculitis most often manifests as a small-vessel leukocytoclastic vasculitis with palpable purpura on dependent areas, typically days to weeks after starting the culprit drug.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive glomerulonephritis with rising creatinine",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed drug, over-the-counter and illicit substance history including timeline, ANCA testing with antigen specificity (MPO and PR3), noting high titres or dual positivity, Skin biopsy confirming leukocytoclastic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and permanently withdraw the culprit agent (for example antithyroid drugs, hydralazine, minocycline, anti-tumour necrosis factor agents or levamisole-adulterated cocaine) as the cornerstone of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to take a complete drug and substance history, including illicit drugs and supplements."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of drug-induced vasculitis."
-  }
- ],
- "tables": [
-  {
-   "id": "drug_induced_vasculitis-matrix",
-   "title": "Drug-induced vasculitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Drug-induced vasculitis most often manifests as a small-vessel leukocytoclastic vasculitis with palpable purpura on dependent",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kelley and Firestein's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Drug-induced vasculitis most often manifests as a small-vessel leukocytoclastic vasculitis with palpable purpura on dependent areas, typically days to weeks after starting the culprit drug.",
+      "A distinct drug-induced ANCA-associated vasculitis is well recognised, classically with antimyeloperoxidase antibodies, and can affect the kidneys and lungs.",
+      "Antithyroid drugs, hydralazine, minocycline, certain anti-tumour necrosis factor agents and cocaine adulterated with levamisole are among the well-described triggers.",
+      "Very high-titre antimyeloperoxidase antibodies, antibodies to multiple antigens, or combined MPO and PR3 positivity should raise suspicion of a drug cause.",
+      "Withdrawal of the offending agent is the cornerstone of management and often leads to resolution of milder cutaneous disease.",
+      "Severe organ-threatening disease (glomerulonephritis, alveolar haemorrhage) may still require immunosuppression despite drug cessation.",
+      "Levamisole-adulterated cocaine characteristically causes retiform purpura with ear involvement, neutropenia and positive ANCA.",
+      "A detailed drug and substance history, including over-the-counter agents and illicit drugs, is essential to identify the trigger."
     ],
-    [
-     "Key Investigations",
-     "Detailed drug, over-the-counter and illicit substance history including timeline, ANCA testing with antigen specificity (MPO and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Drug-induced vasculitis arises when a drug or its metabolites trigger an immune-mediated attack on blood vessel walls. In hypersensitivity small-vessel vasculitis the drug acts as a hapten, driving immune-complex formation and deposition in postcapillary venules with complement activation and neutrophil-mediated leukocytoclastic injury. In drug-induced ANCA-associated vasculitis certain agents promote the generation of antineutrophil cytoplasmic antibodies, often against myeloperoxidase; some drugs are thought to alter neutrophil extracellular trap formation or unmask sequestered antigens, breaking tolerance. The result ranges from purely cutaneous disease to a necrotising small-vessel vasculitis with renal and pulmonary involvement indistinguishable from idiopathic disease.",
+    "additionalDifferentials": [
+      "Idiopathic ANCA-associated vasculitis",
+      "IgA vasculitis (Henoch-Schoenlein purpura)",
+      "Cryoglobulinaemic vasculitis",
+      "Infection-associated vasculitis",
+      "Connective tissue disease-associated vasculitis",
+      "Septic emboli or infective endocarditis",
+      "Thrombotic or occlusive vasculopathy"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic ANCA-associated vasculitis, IgA vasculitis (Henoch-Schoenlein purpura), Cryoglobulinaemic vasculitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed drug, over-the-counter and illicit substance history including timeline",
+      "ANCA testing with antigen specificity (MPO and PR3), noting high titres or dual positivity",
+      "Skin biopsy confirming leukocytoclastic vasculitis",
+      "Renal function and urinalysis to detect glomerulonephritis",
+      "Full blood count looking for neutropenia (as with levamisole)",
+      "Complement, cryoglobulins and infection screen to exclude alternatives",
+      "Urine toxicology where illicit drug exposure is suspected"
     ],
-    [
-     "Management Strategy",
-     "Identify and permanently withdraw the culprit agent (for example antithyroid drugs, hydralazine, minocycline, anti-tumour",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive glomerulonephritis with rising creatinine",
+      "Pulmonary haemorrhage or hypoxia",
+      "Extensive retiform purpura with skin necrosis",
+      "Severe neutropenia or agranulocytosis",
+      "Systemic features persisting despite drug withdrawal"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to take a complete drug and substance history, including illicit drugs and supplements.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cutaneous-limited disease usually resolves after the culprit drug is stopped, but organ-threatening ANCA-associated forms can cause lasting renal impairment if not treated promptly. Rechallenge with the offending agent risks recurrence and should be avoided.",
+    "pitfalls": [
+      "Failing to take a complete drug and substance history, including illicit drugs and supplements.",
+      "Not recognising drug-induced ANCA vasculitis and treating it as idiopathic while continuing the trigger.",
+      "Missing levamisole-adulterated cocaine as a cause of retiform purpura with neutropenia.",
+      "Assuming all drug-induced vasculitis is benign and self-limiting when severe organ involvement can occur.",
+      "Rechallenging the patient with the causative drug, precipitating relapse."
+    ],
+    "references": [
+      "Kelley and Firestein's Textbook of Rheumatology, current edition",
+      "Oxford Textbook of Medicine, current edition",
+      "Consensus reviews on drug-induced and ANCA-associated vasculitis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and permanently withdraw the culprit agent (for example antithyroid drugs, hydralazine, minocycline, anti-tumour necrosis factor agents or levamisole-adulterated cocaine) as the cornerstone of treatment",
+      "For milder cutaneous leukocytoclastic disease, provide supportive care with leg elevation, wound care for purpura and analgesia while awaiting resolution after drug cessation",
+      "Treat organ-threatening ANCA-associated disease (glomerulonephritis or alveolar haemorrhage) with corticosteroids plus a further immunosuppressive agent such as cyclophosphamide or rituximab",
+      "Reserve plasma exchange for severe pulmonary haemorrhage or rapidly progressive renal failure",
+      "Monitor renal function and urinalysis for evolving glomerulonephritis and check the full blood count for drug-induced neutropenia",
+      "Refer promptly to rheumatology and nephrology for confirmation, biopsy and immunosuppression decisions",
+      "Document the reaction clearly and avoid rechallenge with the offending drug, which risks recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for drug-induced vasculitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "drug-induced-vasculitis-real-image",
-   "title": "Drug-induced vasculitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "drug_induced_vasculitis-pathway",
+      "title": "Drug-induced vasculitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Drug-induced vasculitis most often manifests as a small-vessel leukocytoclastic vasculitis with palpable purpura on dependent areas, typically days to weeks after starting the culprit drug.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive glomerulonephritis with rising creatinine",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed drug, over-the-counter and illicit substance history including timeline, ANCA testing with antigen specificity (MPO and PR3), noting high titres or dual positivity, Skin biopsy confirming leukocytoclastic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and permanently withdraw the culprit agent (for example antithyroid drugs, hydralazine, minocycline, anti-tumour necrosis factor agents or levamisole-adulterated cocaine) as the cornerstone of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to take a complete drug and substance history, including illicit drugs and supplements."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of drug-induced vasculitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "drug_induced_vasculitis-matrix",
+      "title": "Drug-induced vasculitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Drug-induced vasculitis most often manifests as a small-vessel leukocytoclastic vasculitis with palpable purpura on dependent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed drug, over-the-counter and illicit substance history including timeline, ANCA testing with antigen specificity (MPO and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic ANCA-associated vasculitis, IgA vasculitis (Henoch-Schoenlein purpura), Cryoglobulinaemic vasculitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and permanently withdraw the culprit agent (for example antithyroid drugs, hydralazine, minocycline, anti-tumour",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to take a complete drug and substance history, including illicit drugs and supplements.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for drug-induced vasculitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley and Firestein's Textbook of Rheumatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_induced_vasculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANCA testing with antigen specificity (MPO and PR3)",
+          "cells": [
+            {
+              "text": "High titres or dual positivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Leukocytoclastic vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Glomerulonephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Neutropenia, as with levamisole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine toxicology where illicit exposure is suspected",
+          "cells": [
+            {
+              "text": "Illicit drug exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_vasculitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic ANCA-associated vasculitis",
+          "cells": [
+            {
+              "text": "Drug-induced ANCA vasculitis is easily treated as idiopathic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgA vasculitis (Henoch-Schoenlein purpura)",
+          "cells": [
+            {
+              "text": "Cutaneous purpura without organ-threatening ANCA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic emboli or infective endocarditis",
+          "cells": [
+            {
+              "text": "Infection excluded by cultures and screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_vasculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the culprit agent",
+          "cells": [
+            {
+              "text": "Permanent withdrawal; the cornerstone of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for cutaneous disease",
+          "cells": [
+            {
+              "text": "Leg elevation, purpura wound care and analgesia while resolving"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-threatening ANCA disease",
+          "cells": [
+            {
+              "text": "Corticosteroids plus cyclophosphamide or rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Severe pulmonary haemorrhage or rapidly progressive renal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, urinalysis and full blood count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Rheumatology and nephrology for biopsy and immunosuppression decisions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid rechallenge",
+          "cells": [
+            {
+              "text": "Recurrence risk; document the reaction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_vasculitis-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs linked to vasculitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Vasculitis",
+          "cells": [
+            {
+              "text": "allopurinol, amphetamines, cocaine, thiazides, penicillamine, propylthiouracil, montelukast, TNF inhibitors, hepatitis B vaccine, trimethoprim/sulfamethoxazole"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_induced_vasculitis-dx-mgmt",
+      "title": "Diagnosis and management of Drug-induced vasculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected drug-induced vasculitis: purpura and systemic illness after a new drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid glomerulonephritis, pulmonary haemorrhage, skin necrosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rheumatology and nephrology review for organ-threatening disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug and illicit history; ANCA with MPO and PR3; skin biopsy; renal tests; FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show leukocytoclastic vasculitis with a compatible drug exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic ANCA vasculitis, IgA vasculitis or infection-associated vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Permanently withdraw the culprit agent, the cornerstone of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Leg elevation, purpura wound care and analgesia for cutaneous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids with cyclophosphamide or rituximab for organ-threatening disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Plasma exchange for severe pulmonary haemorrhage or rapidly progressive renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor renal function, urinalysis and neutrophils; avoid rechallenge",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Cutaneous disease resolves after withdrawal; ANCA forms can leave lasting renal damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

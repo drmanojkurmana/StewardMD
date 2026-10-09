@@ -1,175 +1,462 @@
 {
- "id": "fibrous_dysplasia",
- "name": "Fibrous dysplasia of bone (GNAS)",
- "aliases": [
-  "fibrous dysplasia",
-  "GNAS-associated fibrous dysplasia",
-  "polyostotic fibrous dysplasia",
-  "McCune-Albright syndrome spectrum"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by post-zygotic activating mutations in GNAS, producing a mosaic distribution so disease can be monostotic or polyostotic",
-   "Normal bone and marrow are replaced by expansile fibro-osseous tissue, giving the classic radiographic ground-glass appearance",
-   "When combined with cafe-au-lait macules (often with irregular coast-of-Maine borders) and endocrine hyperfunction such as precocious puberty, the picture is McCune-Albright syndrome",
-   "Associated endocrinopathies include precocious puberty, thyrotoxicosis, growth-hormone excess, and Cushing syndrome, all reflecting autonomous glandular activation",
-   "Craniofacial lesions may cause facial asymmetry, dental problems, and, if foramina are narrowed, visual or hearing compromise",
-   "The bone lesions can oversecrete FGF23, producing renal phosphate wasting and hypophosphataemic osteomalacia that aggravates deformity and fracture risk",
-   "Management is largely supportive with orthopaedic correction of deformity and fracture, treatment of associated endocrinopathy, and bisphosphonates considered for bone pain"
+  "id": "fibrous_dysplasia",
+  "name": "Fibrous dysplasia of bone (GNAS)",
+  "aliases": [
+    "fibrous dysplasia",
+    "GNAS-associated fibrous dysplasia",
+    "polyostotic fibrous dysplasia",
+    "McCune-Albright syndrome spectrum"
   ],
-  "pathophysiology": "Fibrous dysplasia arises from somatic gain-of-function mutations in the GNAS gene encoding the alpha subunit of the stimulatory G protein, leading to constitutive activation of adenylate cyclase and elevated cyclic AMP in affected cells. Because the mutation occurs after fertilisation, the resulting mosaicism explains the variable and patchy distribution of disease. In bone, the mutation impairs osteoblast differentiation so that normal bone marrow is replaced by disorganised fibrous stroma with immature woven bone. The same signalling defect in endocrine tissue drives autonomous hormone secretion, and lesional cells can produce excess FGF23, causing renal phosphate wasting.",
-  "additionalDifferentials": [
-   "Paget disease of bone",
-   "Ossifying fibroma and other fibro-osseous jaw lesions",
-   "Enchondroma or other benign bone tumour",
-   "Low-grade central osteosarcoma",
-   "Neurofibromatosis with bone involvement",
-   "Simple or aneurysmal bone cyst",
-   "Metastatic or myelomatous bone disease"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs showing ground-glass lucency, cortical thinning, and deformity such as the shepherd's-crook femur",
-   "Whole-body bone scintigraphy to map polyostotic disease",
-   "Serum alkaline phosphatase and bone turnover markers",
-   "Serum phosphate and FGF23 assessment for renal phosphate wasting",
-   "Endocrine screening for precocious puberty, thyroid, growth-hormone, and cortisol excess",
-   "Targeted imaging or biopsy where malignant change is suspected"
-  ],
-  "redFlags": [
-   "New or worsening bone pain, rapid swelling, or a soft-tissue mass suggesting malignant transformation",
-   "Cranial lesions causing visual loss, proptosis, or hearing deterioration",
-   "Pathological fracture through a lesion",
-   "Signs of a functioning endocrine tumour such as thyrotoxic crisis or Cushingoid features"
-  ],
-  "prognosis": "Monostotic disease is often mild and stable, whereas extensive polyostotic disease and McCune-Albright syndrome can cause progressive deformity, recurrent fractures, and endocrine morbidity; malignant transformation is rare but serious.",
-  "pitfalls": [
-   "Mistaking a ground-glass lesion for a more aggressive tumour and performing unnecessary radical surgery",
-   "Overlooking associated endocrinopathy in a child presenting with bone disease and cafe-au-lait spots",
-   "Missing FGF23-mediated hypophosphataemia that worsens bone weakness",
-   "Attributing all new pain to benign disease and failing to investigate possible sarcomatous change"
-  ],
-  "references": [
-   "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
-   "International consensus guidelines on fibrous dysplasia / McCune-Albright syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Bisphosphonates to reduce bone pain from metabolically active lesions",
-   "Correction of FGF23-driven hypophosphataemic osteomalacia with oral phosphate and an active vitamin D metabolite such as calcitriol",
-   "Orthopaedic surgery for fracture fixation and correction of deformity such as the shepherd's-crook femur, with internal fixation of load-bearing lesions",
-   "Treatment of associated endocrinopathies in McCune-Albright syndrome: aromatase inhibitors or tamoxifen for precocious puberty, antithyroid therapy for thyrotoxicosis, and agents targeting growth-hormone or cortisol excess",
-   "Regular monitoring of bone turnover markers, serum phosphate and lesion progression, with surveillance for rare malignant transformation",
-   "Craniofacial surveillance for optic-nerve or auditory canal compromise, with decompression reserved for progressive deficit",
-   "Multidisciplinary care spanning metabolic bone, endocrinology, orthopaedics and craniofacial specialists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fibrous_dysplasia-pathway",
-   "title": "Fibrous dysplasia of bone (GNAS): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by post-zygotic activating mutations in GNAS, producing a mosaic distribution so disease can be monostotic or polyostotic",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or worsening bone pain, rapid swelling, or a soft-tissue mass suggesting malignant transformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs showing ground-glass lucency, cortical thinning, and deformity such as the shepherd's-crook femur, Whole-body bone scintigraphy to map polyostotic disease, Serum alkaline phosphatase and bone turnover"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Bisphosphonates to reduce bone pain from metabolically active lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a ground-glass lesion for a more aggressive tumour and performing unnecessary radical surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fibrous dysplasia of bone (gnas)."
-  }
- ],
- "tables": [
-  {
-   "id": "fibrous_dysplasia-matrix",
-   "title": "Fibrous dysplasia of bone (GNAS): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by post-zygotic activating mutations in GNAS, producing a mosaic distribution so disease can be monostotic or polyostotic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by post-zygotic activating mutations in GNAS, producing a mosaic distribution so disease can be monostotic or polyostotic",
+      "Normal bone and marrow are replaced by expansile fibro-osseous tissue, giving the classic radiographic ground-glass appearance",
+      "When combined with cafe-au-lait macules (often with irregular coast-of-Maine borders) and endocrine hyperfunction such as precocious puberty, the picture is McCune-Albright syndrome",
+      "Associated endocrinopathies include precocious puberty, thyrotoxicosis, growth-hormone excess, and Cushing syndrome, all reflecting autonomous glandular activation",
+      "Craniofacial lesions may cause facial asymmetry, dental problems, and, if foramina are narrowed, visual or hearing compromise",
+      "The bone lesions can oversecrete FGF23, producing renal phosphate wasting and hypophosphataemic osteomalacia that aggravates deformity and fracture risk",
+      "Management is largely supportive with orthopaedic correction of deformity and fracture, treatment of associated endocrinopathy, and bisphosphonates considered for bone pain"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs showing ground-glass lucency, cortical thinning, and deformity such as the shepherd's-crook femur, Whole-body",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fibrous dysplasia arises from somatic gain-of-function mutations in the GNAS gene encoding the alpha subunit of the stimulatory G protein, leading to constitutive activation of adenylate cyclase and elevated cyclic AMP in affected cells. Because the mutation occurs after fertilisation, the resulting mosaicism explains the variable and patchy distribution of disease. In bone, the mutation impairs osteoblast differentiation so that normal bone marrow is replaced by disorganised fibrous stroma with immature woven bone. The same signalling defect in endocrine tissue drives autonomous hormone secretion, and lesional cells can produce excess FGF23, causing renal phosphate wasting.",
+    "additionalDifferentials": [
+      "Paget disease of bone",
+      "Ossifying fibroma and other fibro-osseous jaw lesions",
+      "Enchondroma or other benign bone tumour",
+      "Low-grade central osteosarcoma",
+      "Neurofibromatosis with bone involvement",
+      "Simple or aneurysmal bone cyst",
+      "Metastatic or myelomatous bone disease"
     ],
-    [
-     "Primary Differentials",
-     "Paget disease of bone, Ossifying fibroma and other fibro-osseous jaw lesions, Enchondroma or other benign bone tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs showing ground-glass lucency, cortical thinning, and deformity such as the shepherd's-crook femur",
+      "Whole-body bone scintigraphy to map polyostotic disease",
+      "Serum alkaline phosphatase and bone turnover markers",
+      "Serum phosphate and FGF23 assessment for renal phosphate wasting",
+      "Endocrine screening for precocious puberty, thyroid, growth-hormone, and cortisol excess",
+      "Targeted imaging or biopsy where malignant change is suspected"
     ],
-    [
-     "Management Strategy",
-     "Bisphosphonates to reduce bone pain from metabolically active lesions",
-     "Core treatment modality"
+    "redFlags": [
+      "New or worsening bone pain, rapid swelling, or a soft-tissue mass suggesting malignant transformation",
+      "Cranial lesions causing visual loss, proptosis, or hearing deterioration",
+      "Pathological fracture through a lesion",
+      "Signs of a functioning endocrine tumour such as thyrotoxic crisis or Cushingoid features"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a ground-glass lesion for a more aggressive tumour and performing unnecessary radical surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "Monostotic disease is often mild and stable, whereas extensive polyostotic disease and McCune-Albright syndrome can cause progressive deformity, recurrent fractures, and endocrine morbidity; malignant transformation is rare but serious.",
+    "pitfalls": [
+      "Mistaking a ground-glass lesion for a more aggressive tumour and performing unnecessary radical surgery",
+      "Overlooking associated endocrinopathy in a child presenting with bone disease and cafe-au-lait spots",
+      "Missing FGF23-mediated hypophosphataemia that worsens bone weakness",
+      "Attributing all new pain to benign disease and failing to investigate possible sarcomatous change"
+    ],
+    "references": [
+      "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+      "International consensus guidelines on fibrous dysplasia / McCune-Albright syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Bisphosphonates to reduce bone pain from metabolically active lesions",
+      "Correction of FGF23-driven hypophosphataemic osteomalacia with oral phosphate and an active vitamin D metabolite such as calcitriol",
+      "Orthopaedic surgery for fracture fixation and correction of deformity such as the shepherd's-crook femur, with internal fixation of load-bearing lesions",
+      "Treatment of associated endocrinopathies in McCune-Albright syndrome: aromatase inhibitors or tamoxifen for precocious puberty, antithyroid therapy for thyrotoxicosis, and agents targeting growth-hormone or cortisol excess",
+      "Regular monitoring of bone turnover markers, serum phosphate and lesion progression, with surveillance for rare malignant transformation",
+      "Craniofacial surveillance for optic-nerve or auditory canal compromise, with decompression reserved for progressive deficit",
+      "Multidisciplinary care spanning metabolic bone, endocrinology, orthopaedics and craniofacial specialists"
     ]
-   ],
-   "caption": "Overview comparison matrix for fibrous dysplasia of bone (gnas)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fibrous-dysplasia-real-image",
-   "title": "Fibrous dysplasia of bone (GNAS): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "fibrous_dysplasia-pathway",
+      "title": "Fibrous dysplasia of bone (GNAS): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by post-zygotic activating mutations in GNAS, producing a mosaic distribution so disease can be monostotic or polyostotic",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or worsening bone pain, rapid swelling, or a soft-tissue mass suggesting malignant transformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs showing ground-glass lucency, cortical thinning, and deformity such as the shepherd's-crook femur, Whole-body bone scintigraphy to map polyostotic disease, Serum alkaline phosphatase and bone turnover"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Bisphosphonates to reduce bone pain from metabolically active lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a ground-glass lesion for a more aggressive tumour and performing unnecessary radical surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fibrous dysplasia of bone (gnas)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fibrous_dysplasia-matrix",
+      "title": "Fibrous dysplasia of bone (GNAS): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by post-zygotic activating mutations in GNAS, producing a mosaic distribution so disease can be monostotic or polyostotic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs showing ground-glass lucency, cortical thinning, and deformity such as the shepherd's-crook femur, Whole-body",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Paget disease of bone, Ossifying fibroma and other fibro-osseous jaw lesions, Enchondroma or other benign bone tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Bisphosphonates to reduce bone pain from metabolically active lesions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a ground-glass lesion for a more aggressive tumour and performing unnecessary radical surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fibrous dysplasia of bone (gnas)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibrous_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Ground-glass lucency, cortical thinning and shepherd's-crook deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body bone scintigraphy",
+          "cells": [
+            {
+              "text": "Polyostotic disease map"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alkaline phosphatase and bone turnover markers",
+          "cells": [
+            {
+              "text": "Metabolic activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum phosphate and FGF23",
+          "cells": [
+            {
+              "text": "Renal phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine screening",
+          "cells": [
+            {
+              "text": "Precocious puberty, thyroid, growth-hormone or cortisol excess"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrous_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Paget disease of bone",
+          "cells": [
+            {
+              "text": "Other metabolic bone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ossifying fibroma of the jaw",
+          "cells": [
+            {
+              "text": "Fibro-osseous jaw lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-grade central osteosarcoma",
+          "cells": [
+            {
+              "text": "Malignant mimic; targeted imaging or biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrous_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bisphosphonates",
+          "cells": [
+            {
+              "text": "Bone pain from metabolically active lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral phosphate and active vitamin D",
+          "cells": [
+            {
+              "text": "FGF23-driven hypophosphataemic osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surgery",
+          "cells": [
+            {
+              "text": "Fracture fixation and correction of deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aromatase inhibitors or tamoxifen",
+          "cells": [
+            {
+              "text": "Precocious puberty in McCune-Albright syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial surveillance",
+          "cells": [
+            {
+              "text": "Optic nerve or auditory canal compromise; decompression if progressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular bone turnover and phosphate monitoring",
+          "cells": [
+            {
+              "text": "Progression and rare malignant change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic bone, endocrinology, orthopaedics and craniofacial"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibrous_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Fibrous dysplasia of bone (GNAS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bone lesion with ground-glass appearance, possibly with cafe-au-lait spots",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new pain or swelling, cranial lesion, pathological fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for malignant change or cranial nerve compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs; bone scintigraphy; ALP and turnover markers; phosphate, FGF23; endocrine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Polyostotic or monostotic lesion with GNAS-related features on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Paget disease, fibro-osseous jaw lesion or low-grade osteosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bisphosphonates for painful metabolically active lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral phosphate and active vitamin D for FGF23 phosphate wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic correction of deformity and fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat associated endocrinopathy, such as precocious puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monostotic disease often mild; polyostotic and McCune-Albright disease can progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

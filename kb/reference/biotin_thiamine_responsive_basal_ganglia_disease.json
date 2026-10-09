@@ -1,176 +1,237 @@
 {
- "id": "biotin_thiamine_responsive_basal_ganglia_disease",
- "name": "Biotin-thiamine-responsive basal ganglia disease",
- "aliases": [
-  "BTBGD",
-  "SLC19A3 deficiency",
-  "thiamine transporter-2 deficiency",
-  "thiamine metabolism dysfunction syndrome 2",
-  "biotin-responsive basal ganglia disease"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder caused by biallelic variants in SLC19A3, which encodes the thiamine transporter-2 (hTHTR2)",
-   "Impaired thiamine transport into cells produces episodic energy failure in thiamine-dependent tissues, particularly the basal ganglia",
-   "Classic childhood presentation is a subacute encephalopathy with confusion, dystonia, dysarthria, seizures and cogwheel rigidity, often triggered by febrile illness",
-   "Neuroimaging characteristically shows symmetrical signal change and swelling in the caudate nuclei and putamen, sometimes with cortical involvement",
-   "It is one of the few metabolic encephalopathies that is genuinely treatable, with dramatic improvement following high-dose biotin and thiamine supplementation",
-   "Delayed treatment or missed crises lead to stepwise accumulation of irreversible basal ganglia injury and fixed dystonia",
-   "An infantile Leigh-like variant and an adult Wernicke-like variant broaden the phenotypic spectrum",
-   "Lifelong supplementation is required, and interruption can precipitate acute deterioration"
+  "id": "biotin_thiamine_responsive_basal_ganglia_disease",
+  "name": "Biotin-thiamine-responsive basal ganglia disease",
+  "aliases": [
+    "BTBGD",
+    "SLC19A3 deficiency",
+    "thiamine transporter-2 deficiency",
+    "thiamine metabolism dysfunction syndrome 2",
+    "biotin-responsive basal ganglia disease"
   ],
-  "pathophysiology": "The disease arises from deficient function of thiamine transporter-2 encoded by SLC19A3, which mediates thiamine uptake into cells. Because thiamine (as thiamine pyrophosphate) is an essential cofactor for pyruvate dehydrogenase, alpha-ketoglutarate dehydrogenase and transketolase, transporter failure produces intracellular thiamine deficiency and impaired oxidative energy metabolism. The basal ganglia, with high metabolic demand, are especially vulnerable, so metabolic stress such as fever or fasting precipitates acute energy crises with cytotoxic oedema and neuronal injury. Supraphysiological biotin and thiamine are thought to drive residual transporter activity and alternative uptake pathways, restoring intracellular thiamine.",
-  "additionalDifferentials": [
-   "Leigh syndrome and other mitochondrial encephalopathies",
-   "Acute disseminated encephalomyelitis",
-   "Wilson disease",
-   "Juvenile Huntington disease and other inherited dystonias",
-   "Viral or autoimmune encephalitis",
-   "Nutritional thiamine deficiency (Wernicke encephalopathy)"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI seeking symmetrical caudate and putaminal signal change with swelling",
-   "Molecular genetic testing of SLC19A3 to confirm the diagnosis",
-   "Cerebrospinal fluid and plasma metabolic screen to exclude mimics",
-   "Blood lactate and pyruvate to assess for mitochondrial or energy-metabolism disease",
-   "A monitored therapeutic trial of biotin and thiamine with clinical and radiological response",
-   "Electroencephalography when seizures are present"
-  ],
-  "redFlags": [
-   "Subacute encephalopathy with dystonia and rigidity following a febrile illness",
-   "Rapid neurological deterioration during intercurrent illness or fasting",
-   "Symmetrical basal ganglia signal change on imaging",
-   "Deterioration after stopping vitamin supplementation"
-  ],
-  "prognosis": "Prognosis depends critically on how early treatment begins; when high-dose biotin and thiamine are started promptly, recovery from acute crises can be near-complete. Delayed or missed episodes cause cumulative basal ganglia damage with residual dystonia, dysarthria and cognitive impairment.",
-  "pitfalls": [
-   "Missing a treatable diagnosis and managing the child only as viral or autoimmune encephalitis",
-   "Stopping supplementation once the child improves, precipitating relapse",
-   "Failing to escalate treatment urgently during febrile crises",
-   "Overlooking atypical infantile or adult-onset presentations"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong supplementation with high-dose biotin and thiamine as the disease-specific mainstay, driving residual thiamine transport and restoring oxidative energy metabolism",
-   "During febrile illness, fasting or other metabolic stress, escalate biotin and thiamine promptly to avert acute energy-crisis encephalopathy",
-   "Aggressive treatment of intercurrent fever and avoidance of fasting to prevent precipitating crises",
-   "Symptomatic management of dystonia and seizures during and after acute episodes",
-   "Surveillance with serial neurological assessment and brain MRI for evolving caudate and putaminal change",
-   "Coordinate care through metabolic medicine and neurology",
-   "Offer genetic counselling and cascade SLC19A3 testing to at-risk relatives given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "biotin_thiamine_responsive_basal_ganglia_disease-pathway",
-   "title": "Biotin-thiamine-responsive basal ganglia disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder caused by biallelic variants in SLC19A3, which encodes the thiamine transporter-2 (hTHTR2)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Subacute encephalopathy with dystonia and rigidity following a febrile illness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI seeking symmetrical caudate and putaminal signal change with swelling, Molecular genetic testing of SLC19A3 to confirm the diagnosis, Cerebrospinal fluid and plasma metabolic screen to exclude mimics"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong supplementation with high-dose biotin and thiamine as the disease-specific mainstay, driving residual thiamine transport and restoring oxidative energy metabolism"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing a treatable diagnosis and managing the child only as viral or autoimmune encephalitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of biotin-thiamine-responsive basal ganglia disease."
-  }
- ],
- "tables": [
-  {
-   "id": "biotin_thiamine_responsive_basal_ganglia_disease-matrix",
-   "title": "Biotin-thiamine-responsive basal ganglia disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder caused by biallelic variants in SLC19A3, which encodes the thiamine transporter-2 (hTHTR2)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder caused by biallelic variants in SLC19A3, which encodes the thiamine transporter-2 (hTHTR2)",
+      "Impaired thiamine transport into cells produces episodic energy failure in thiamine-dependent tissues, particularly the basal ganglia",
+      "Classic childhood presentation is a subacute encephalopathy with confusion, dystonia, dysarthria, seizures and cogwheel rigidity, often triggered by febrile illness",
+      "Neuroimaging characteristically shows symmetrical signal change and swelling in the caudate nuclei and putamen, sometimes with cortical involvement",
+      "It is one of the few metabolic encephalopathies that is genuinely treatable, with dramatic improvement following high-dose biotin and thiamine supplementation",
+      "Delayed treatment or missed crises lead to stepwise accumulation of irreversible basal ganglia injury and fixed dystonia",
+      "An infantile Leigh-like variant and an adult Wernicke-like variant broaden the phenotypic spectrum",
+      "Lifelong supplementation is required, and interruption can precipitate acute deterioration"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI seeking symmetrical caudate and putaminal signal change with swelling, Molecular genetic testing of SLC19A3 to confirm",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The disease arises from deficient function of thiamine transporter-2 encoded by SLC19A3, which mediates thiamine uptake into cells. Because thiamine (as thiamine pyrophosphate) is an essential cofactor for pyruvate dehydrogenase, alpha-ketoglutarate dehydrogenase and transketolase, transporter failure produces intracellular thiamine deficiency and impaired oxidative energy metabolism. The basal ganglia, with high metabolic demand, are especially vulnerable, so metabolic stress such as fever or fasting precipitates acute energy crises with cytotoxic oedema and neuronal injury. Supraphysiological biotin and thiamine are thought to drive residual transporter activity and alternative uptake pathways, restoring intracellular thiamine.",
+    "additionalDifferentials": [
+      "Leigh syndrome and other mitochondrial encephalopathies",
+      "Acute disseminated encephalomyelitis",
+      "Wilson disease",
+      "Juvenile Huntington disease and other inherited dystonias",
+      "Viral or autoimmune encephalitis",
+      "Nutritional thiamine deficiency (Wernicke encephalopathy)"
     ],
-    [
-     "Primary Differentials",
-     "Leigh syndrome and other mitochondrial encephalopathies, Acute disseminated encephalomyelitis, Wilson disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI seeking symmetrical caudate and putaminal signal change with swelling",
+      "Molecular genetic testing of SLC19A3 to confirm the diagnosis",
+      "Cerebrospinal fluid and plasma metabolic screen to exclude mimics",
+      "Blood lactate and pyruvate to assess for mitochondrial or energy-metabolism disease",
+      "A monitored therapeutic trial of biotin and thiamine with clinical and radiological response",
+      "Electroencephalography when seizures are present"
     ],
-    [
-     "Management Strategy",
-     "Lifelong supplementation with high-dose biotin and thiamine as the disease-specific mainstay, driving residual thiamine transport",
-     "Core treatment modality"
+    "redFlags": [
+      "Subacute encephalopathy with dystonia and rigidity following a febrile illness",
+      "Rapid neurological deterioration during intercurrent illness or fasting",
+      "Symmetrical basal ganglia signal change on imaging",
+      "Deterioration after stopping vitamin supplementation"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing a treatable diagnosis and managing the child only as viral or autoimmune encephalitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends critically on how early treatment begins; when high-dose biotin and thiamine are started promptly, recovery from acute crises can be near-complete. Delayed or missed episodes cause cumulative basal ganglia damage with residual dystonia, dysarthria and cognitive impairment.",
+    "pitfalls": [
+      "Missing a treatable diagnosis and managing the child only as viral or autoimmune encephalitis",
+      "Stopping supplementation once the child improves, precipitating relapse",
+      "Failing to escalate treatment urgently during febrile crises",
+      "Overlooking atypical infantile or adult-onset presentations"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong supplementation with high-dose biotin and thiamine as the disease-specific mainstay, driving residual thiamine transport and restoring oxidative energy metabolism",
+      "During febrile illness, fasting or other metabolic stress, escalate biotin and thiamine promptly to avert acute energy-crisis encephalopathy",
+      "Aggressive treatment of intercurrent fever and avoidance of fasting to prevent precipitating crises",
+      "Symptomatic management of dystonia and seizures during and after acute episodes",
+      "Surveillance with serial neurological assessment and brain MRI for evolving caudate and putaminal change",
+      "Coordinate care through metabolic medicine and neurology",
+      "Offer genetic counselling and cascade SLC19A3 testing to at-risk relatives given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for biotin-thiamine-responsive basal ganglia disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "biotin-thiamine-responsive-basal-ganglia-disease-real-image",
-   "title": "Biotin-thiamine-responsive basal ganglia disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "biotin_thiamine_responsive_basal_ganglia_disease-pathway",
+      "title": "Biotin-thiamine-responsive basal ganglia disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder caused by biallelic variants in SLC19A3, which encodes the thiamine transporter-2 (hTHTR2)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Subacute encephalopathy with dystonia and rigidity following a febrile illness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI seeking symmetrical caudate and putaminal signal change with swelling, Molecular genetic testing of SLC19A3 to confirm the diagnosis, Cerebrospinal fluid and plasma metabolic screen to exclude mimics"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong supplementation with high-dose biotin and thiamine as the disease-specific mainstay, driving residual thiamine transport and restoring oxidative energy metabolism"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing a treatable diagnosis and managing the child only as viral or autoimmune encephalitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of biotin-thiamine-responsive basal ganglia disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "biotin_thiamine_responsive_basal_ganglia_disease-matrix",
+      "title": "Biotin-thiamine-responsive basal ganglia disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder caused by biallelic variants in SLC19A3, which encodes the thiamine transporter-2 (hTHTR2)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI seeking symmetrical caudate and putaminal signal change with swelling, Molecular genetic testing of SLC19A3 to confirm",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Leigh syndrome and other mitochondrial encephalopathies, Acute disseminated encephalomyelitis, Wilson disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong supplementation with high-dose biotin and thiamine as the disease-specific mainstay, driving residual thiamine transport",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing a treatable diagnosis and managing the child only as viral or autoimmune encephalitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for biotin-thiamine-responsive basal ganglia disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "biotin_thiamine_responsive_basal_ganglia_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in biotin-thiamine-responsive basal ganglia disease",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Brain MRI", "cells": [{"text": "Symmetrical caudate and putaminal signal change with swelling; cortical involvement may occur"}], "cite": "c1"},
+        {"parameter": "SLC19A3 molecular genetic testing", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "CSF and plasma metabolic screen", "cells": [{"text": "Excludes mimics"}], "cite": "c1"},
+        {"parameter": "Blood lactate and pyruvate", "cells": [{"text": "Mitochondrial or energy-metabolism disease"}], "cite": "c1"},
+        {"parameter": "Monitored therapeutic trial of biotin and thiamine", "cells": [{"text": "Clinical and radiological response"}], "cite": "c1"},
+        {"parameter": "Electroencephalography", "cells": [{"text": "When seizures are present"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biotin_thiamine_responsive_basal_ganglia_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike encephalopathies",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Leigh syndrome and mitochondrial encephalopathies", "cells": [{"text": "Separated by lactate and pyruvate testing and by response to biotin and thiamine"}], "cite": "c1"},
+        {"parameter": "Nutritional thiamine deficiency (Wernicke encephalopathy)", "cells": [{"text": "An adult Wernicke-like variant also occurs in this disease; genetic testing separates them"}], "cite": "c1"},
+        {"parameter": "Viral or autoimmune encephalitis", "cells": [{"text": "Managed as encephalitis, a treatable diagnosis is missed"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biotin_thiamine_responsive_basal_ganglia_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options in biotin-thiamine-responsive basal ganglia disease",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Lifelong biotin and thiamine", "cells": [{"text": "Lifelong high-dose biotin and thiamine supplementation"}, {"text": "Disease-specific mainstay"}], "cite": "c1"},
+        {"parameter": "Escalation during illness", "cells": [{"text": "Escalate biotin and thiamine promptly during fever, fasting or metabolic stress"}, {"text": "Averts acute energy-crisis encephalopathy"}], "cite": "c1"},
+        {"parameter": "Intercurrent fever and fasting", "cells": [{"text": "Aggressive treatment of fever and avoidance of fasting"}, {"text": "Prevents precipitating crises"}], "cite": "c1"},
+        {"parameter": "Symptomatic care", "cells": [{"text": "Symptomatic management of dystonia and seizures during and after acute episodes"}, {"text": "Supportive"}], "cite": "c1"},
+        {"parameter": "Surveillance", "cells": [{"text": "Serial neurological assessment and brain MRI for evolving caudate and putaminal change"}, {"text": "Tracks progression"}], "cite": "c1"},
+        {"parameter": "Coordinated care", "cells": [{"text": "Metabolic medicine and neurology"}, {"text": "Multidisciplinary"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling and cascade SLC19A3 testing for at-risk relatives"}, {"text": "Autosomal recessive inheritance"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "biotin_thiamine_responsive_basal_ganglia_disease-dx-mgmt",
+      "title": "Diagnosis and management of biotin-thiamine-responsive basal ganglia disease",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Subacute encephalopathy with dystonia, dysarthria, seizures or rigidity, often after fever", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: rapid deterioration in illness, symmetrical basal ganglia change, or relapse after stopping supplements?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: high-dose biotin and thiamine immediately; treat the fever", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Brain MRI for caudate and putamen signal; CSF and plasma metabolic screen; lactate and pyruvate", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "SLC19A3 genetic testing to confirm the diagnosis", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Symmetrical basal ganglia change with SLC19A3 variants confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Lifelong high-dose biotin and thiamine; escalate during febrile illness", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider Leigh syndrome, Wernicke-like encephalopathy or encephalitis", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Serial neurological review and MRI; cascade testing of relatives", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Near-complete recovery when treated early; delayed treatment leaves fixed dystonia", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

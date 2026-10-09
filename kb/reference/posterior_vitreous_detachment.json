@@ -1,174 +1,490 @@
 {
- "id": "posterior_vitreous_detachment",
- "name": "Posterior vitreous detachment",
- "aliases": [
-  "PVD",
-  "acute posterior vitreous detachment",
-  "vitreous separation"
- ],
- "class": "non_infective",
- "system": "Special senses / Eye (vitreoretinal interface)",
- "specialty": "Ophthalmology / Vitreoretinal",
- "referenceOnly": true,
- "reference": {
-  "source": "Royal College of Ophthalmologists guidance / Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Age-related separation of the posterior vitreous cortex from the internal limiting membrane of the retina, driven by vitreous liquefaction (synchysis) and weakening of vitreoretinal adhesion",
-   "Classic symptoms are the sudden onset of floaters together with flashing lights (photopsia) from vitreoretinal traction, often more noticeable in dim light or with eye movement",
-   "A Weiss ring, the detached annulus of condensed vitreous from around the optic disc, is effectively pathognomonic when seen",
-   "The principal danger is that traction may create a retinal tear, which can progress to rhegmatogenous retinal detachment; a meaningful proportion of symptomatic acute PVDs have a tear at presentation",
-   "Pigmented cells in the anterior vitreous, described as tobacco dust or Shafer's sign, strongly suggest a retinal break and mandate careful peripheral examination",
-   "Accompanying vitreous haemorrhage substantially raises the likelihood of a retinal tear and should prompt urgent, thorough retinal assessment",
-   "All symptomatic patients need dilated fundus examination with scleral indentation; those with an initially normal examination warrant safety-netting and often repeat review because breaks can appear later",
-   "Risk is increased in myopia, after cataract surgery, following trauma, and in the fellow eye of a patient who has had a PVD-related tear or detachment"
+  "id": "posterior_vitreous_detachment",
+  "name": "Posterior vitreous detachment",
+  "aliases": [
+    "PVD",
+    "acute posterior vitreous detachment",
+    "vitreous separation"
   ],
-  "pathophysiology": "With ageing the vitreous gel undergoes liquefaction (synchysis) while the adhesion between the posterior vitreous cortex and the internal limiting membrane weakens. When liquefied vitreous passes through a dehiscence in the posterior cortex into the retrohyaloid space, the cortex peels away from the retina, producing a posterior vitreous detachment. Where focal vitreoretinal adhesions persist, for example at the vitreous base, along retinal vessels or at areas of lattice degeneration, dynamic traction during separation can tear the retina or avulse a vessel, causing a retinal break and/or vitreous haemorrhage. Photopsiae arise from mechanical stimulation of the retina by this traction, while floaters reflect condensed vitreous and the Weiss ring casting shadows on the retina.",
-  "additionalDifferentials": [
-   "Retinal tear or rhegmatogenous retinal detachment",
-   "Vitreous haemorrhage from other causes such as proliferative retinopathy, retinal vein occlusion or a retinal macroaneurysm",
-   "Retinal migraine or cortical or occipital photopsia",
-   "Posterior uveitis or vitritis producing floaters",
-   "Vitreomacular traction syndrome",
-   "Ocular ischaemia or other retinal cause of photopsia"
-  ],
-  "additionalInvestigations": [
-   "Dilated slit-lamp biomicroscopy with peripheral retinal examination and scleral indentation",
-   "Assessment for Shafer's sign (pigment in the anterior vitreous)",
-   "B-scan ultrasonography when the fundus view is obscured, for example by vitreous haemorrhage, to detect PVD, tears or detachment",
-   "OCT to demonstrate a Weiss ring, vitreomacular traction or coexisting macular pathology",
-   "Documented visual acuity and confrontation or formal visual field assessment",
-   "Repeat examination after an interval, or sooner if new symptoms develop, to detect delayed retinal breaks"
-  ],
-  "redFlags": [
-   "A curtain, shadow or progressive field defect suggesting retinal detachment",
-   "A sudden shower of floaters or vitreous haemorrhage indicating a probable retinal tear",
-   "Tobacco dust (Shafer's sign) in the anterior vitreous",
-   "Progressive increase in floaters or flashes, or any loss of central vision"
-  ],
-  "prognosis": "An uncomplicated posterior vitreous detachment is benign, and symptoms usually diminish over weeks to months as floaters settle and the patient adapts. The overall prognosis depends on prompt detection and treatment of any associated retinal tear, which when treated early usually prevents progression to detachment.",
-  "pitfalls": [
-   "Failing to perform, or to repeat, an adequate peripheral retinal examination with indentation and so missing a retinal break",
-   "Discharging a patient with a vitreous haemorrhage without excluding a tear or arranging timely follow-up",
-   "Ignoring new or changing symptoms after an initially normal examination",
-   "Attributing all floaters to benign PVD without considering uveitis, haemorrhage or detachment"
-  ],
-  "references": [
-   "Royal College of Ophthalmologists guidance on posterior vitreous detachment and retinal detachment",
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "Ryan's Retina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe uncomplicated cases without a retinal break, as symptoms usually settle over weeks to months as floaters disperse and the patient adapts",
-   "Perform dilated peripheral retinal examination with scleral indentation at presentation to detect any retinal tear",
-   "Treat an identified retinal break promptly with laser retinopexy or cryotherapy to prevent progression to rhegmatogenous retinal detachment",
-   "Investigate obscuring vitreous haemorrhage with B-scan ultrasonography and pursue urgent retinal assessment given the high associated tear rate",
-   "Safety-net with clear advice to return urgently for a shower of new floaters, increasing flashes, or a curtain or shadow across the vision",
-   "Arrange repeat examination after an interval, and sooner if new symptoms develop, to detect delayed retinal breaks"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "posterior_vitreous_detachment-pathway",
-   "title": "Posterior vitreous detachment: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Age-related separation of the posterior vitreous cortex from the internal limiting membrane of the retina, driven by vitreous liquefaction (synchysis) and weakening of vitreoretinal adhesion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A curtain, shadow or progressive field defect suggesting retinal detachment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated slit-lamp biomicroscopy with peripheral retinal examination and scleral indentation, Assessment for Shafer's sign (pigment in the anterior vitreous), B-scan ultrasonography when the fundus view is obscured, for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe uncomplicated cases without a retinal break, as symptoms usually settle over weeks to months as floaters disperse and the patient adapts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to perform, or to repeat, an adequate peripheral retinal examination with indentation and so missing a retinal break"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of posterior vitreous detachment."
-  }
- ],
- "tables": [
-  {
-   "id": "posterior_vitreous_detachment-matrix",
-   "title": "Posterior vitreous detachment: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Age-related separation of the posterior vitreous cortex from the internal limiting membrane of the retina, driven by vitreous",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Special senses / Eye (vitreoretinal interface)",
+  "specialty": "Ophthalmology / Vitreoretinal",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Royal College of Ophthalmologists guidance / Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Age-related separation of the posterior vitreous cortex from the internal limiting membrane of the retina, driven by vitreous liquefaction (synchysis) and weakening of vitreoretinal adhesion",
+      "Classic symptoms are the sudden onset of floaters together with flashing lights (photopsia) from vitreoretinal traction, often more noticeable in dim light or with eye movement",
+      "A Weiss ring, the detached annulus of condensed vitreous from around the optic disc, is effectively pathognomonic when seen",
+      "The principal danger is that traction may create a retinal tear, which can progress to rhegmatogenous retinal detachment; a meaningful proportion of symptomatic acute PVDs have a tear at presentation",
+      "Pigmented cells in the anterior vitreous, described as tobacco dust or Shafer's sign, strongly suggest a retinal break and mandate careful peripheral examination",
+      "Accompanying vitreous haemorrhage substantially raises the likelihood of a retinal tear and should prompt urgent, thorough retinal assessment",
+      "All symptomatic patients need dilated fundus examination with scleral indentation; those with an initially normal examination warrant safety-netting and often repeat review because breaks can appear later",
+      "Risk is increased in myopia, after cataract surgery, following trauma, and in the fellow eye of a patient who has had a PVD-related tear or detachment"
     ],
-    [
-     "Key Investigations",
-     "Dilated slit-lamp biomicroscopy with peripheral retinal examination and scleral indentation, Assessment for Shafer's sign",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "With ageing the vitreous gel undergoes liquefaction (synchysis) while the adhesion between the posterior vitreous cortex and the internal limiting membrane weakens. When liquefied vitreous passes through a dehiscence in the posterior cortex into the retrohyaloid space, the cortex peels away from the retina, producing a posterior vitreous detachment. Where focal vitreoretinal adhesions persist, for example at the vitreous base, along retinal vessels or at areas of lattice degeneration, dynamic traction during separation can tear the retina or avulse a vessel, causing a retinal break and/or vitreous haemorrhage. Photopsiae arise from mechanical stimulation of the retina by this traction, while floaters reflect condensed vitreous and the Weiss ring casting shadows on the retina.",
+    "additionalDifferentials": [
+      "Retinal tear or rhegmatogenous retinal detachment",
+      "Vitreous haemorrhage from other causes such as proliferative retinopathy, retinal vein occlusion or a retinal macroaneurysm",
+      "Retinal migraine or cortical or occipital photopsia",
+      "Posterior uveitis or vitritis producing floaters",
+      "Vitreomacular traction syndrome",
+      "Ocular ischaemia or other retinal cause of photopsia"
     ],
-    [
-     "Primary Differentials",
-     "Retinal tear or rhegmatogenous retinal detachment, Vitreous haemorrhage from other causes such as proliferative retinopathy,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated slit-lamp biomicroscopy with peripheral retinal examination and scleral indentation",
+      "Assessment for Shafer's sign (pigment in the anterior vitreous)",
+      "B-scan ultrasonography when the fundus view is obscured, for example by vitreous haemorrhage, to detect PVD, tears or detachment",
+      "OCT to demonstrate a Weiss ring, vitreomacular traction or coexisting macular pathology",
+      "Documented visual acuity and confrontation or formal visual field assessment",
+      "Repeat examination after an interval, or sooner if new symptoms develop, to detect delayed retinal breaks"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe uncomplicated cases without a retinal break, as symptoms usually settle over weeks to months as floaters",
-     "Core treatment modality"
+    "redFlags": [
+      "A curtain, shadow or progressive field defect suggesting retinal detachment",
+      "A sudden shower of floaters or vitreous haemorrhage indicating a probable retinal tear",
+      "Tobacco dust (Shafer's sign) in the anterior vitreous",
+      "Progressive increase in floaters or flashes, or any loss of central vision"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to perform, or to repeat, an adequate peripheral retinal examination with indentation and so missing a retinal break",
-     "Prevent diagnostic or management error"
+    "prognosis": "An uncomplicated posterior vitreous detachment is benign, and symptoms usually diminish over weeks to months as floaters settle and the patient adapts. The overall prognosis depends on prompt detection and treatment of any associated retinal tear, which when treated early usually prevents progression to detachment.",
+    "pitfalls": [
+      "Failing to perform, or to repeat, an adequate peripheral retinal examination with indentation and so missing a retinal break",
+      "Discharging a patient with a vitreous haemorrhage without excluding a tear or arranging timely follow-up",
+      "Ignoring new or changing symptoms after an initially normal examination",
+      "Attributing all floaters to benign PVD without considering uveitis, haemorrhage or detachment"
+    ],
+    "references": [
+      "Royal College of Ophthalmologists guidance on posterior vitreous detachment and retinal detachment",
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "Ryan's Retina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe uncomplicated cases without a retinal break, as symptoms usually settle over weeks to months as floaters disperse and the patient adapts",
+      "Perform dilated peripheral retinal examination with scleral indentation at presentation to detect any retinal tear",
+      "Treat an identified retinal break promptly with laser retinopexy or cryotherapy to prevent progression to rhegmatogenous retinal detachment",
+      "Investigate obscuring vitreous haemorrhage with B-scan ultrasonography and pursue urgent retinal assessment given the high associated tear rate",
+      "Safety-net with clear advice to return urgently for a shower of new floaters, increasing flashes, or a curtain or shadow across the vision",
+      "Arrange repeat examination after an interval, and sooner if new symptoms develop, to detect delayed retinal breaks"
     ]
-   ],
-   "caption": "Overview comparison matrix for posterior vitreous detachment."
-  }
- ],
- "diagrams": [
-  {
-   "id": "posterior-vitreous-detachment-real-image",
-   "title": "Posterior vitreous detachment: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "posterior_vitreous_detachment-pathway",
+      "title": "Posterior vitreous detachment: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Age-related separation of the posterior vitreous cortex from the internal limiting membrane of the retina, driven by vitreous liquefaction (synchysis) and weakening of vitreoretinal adhesion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A curtain, shadow or progressive field defect suggesting retinal detachment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated slit-lamp biomicroscopy with peripheral retinal examination and scleral indentation, Assessment for Shafer's sign (pigment in the anterior vitreous), B-scan ultrasonography when the fundus view is obscured, for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe uncomplicated cases without a retinal break, as symptoms usually settle over weeks to months as floaters disperse and the patient adapts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to perform, or to repeat, an adequate peripheral retinal examination with indentation and so missing a retinal break"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of posterior vitreous detachment."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "posterior_vitreous_detachment-matrix",
+      "title": "Posterior vitreous detachment: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Age-related separation of the posterior vitreous cortex from the internal limiting membrane of the retina, driven by vitreous",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated slit-lamp biomicroscopy with peripheral retinal examination and scleral indentation, Assessment for Shafer's sign",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Retinal tear or rhegmatogenous retinal detachment, Vitreous haemorrhage from other causes such as proliferative retinopathy,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe uncomplicated cases without a retinal break, as symptoms usually settle over weeks to months as floaters",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to perform, or to repeat, an adequate peripheral retinal examination with indentation and so missing a retinal break",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for posterior vitreous detachment."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Royal College of Ophthalmologists guidance / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_vitreous_detachment-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated slit-lamp with peripheral retinal examination and scleral indentation",
+          "cells": [
+            {
+              "text": "Retinal breaks excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shafer's sign check",
+          "cells": [
+            {
+              "text": "Pigment in the anterior vitreous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Fundus obscured, for example by haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT",
+          "cells": [
+            {
+              "text": "Weiss ring, vitreomacular traction or macular pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity and field assessment",
+          "cells": [
+            {
+              "text": "Baseline function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat examination after an interval",
+          "cells": [
+            {
+              "text": "Delayed retinal tear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_vitreous_detachment-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinal tear or retinal detachment",
+          "cells": [
+            {
+              "text": "Curtain or shadow in the field"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreous haemorrhage from other causes",
+          "cells": [
+            {
+              "text": "Proliferative retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal migraine or occipital photopsia",
+          "cells": [
+            {
+              "text": "Transient, without floaters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior uveitis or vitritis",
+          "cells": [
+            {
+              "text": "Inflammatory cells in the vitreous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreomacular traction syndrome",
+          "cells": [
+            {
+              "text": "Traction on OCT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_vitreous_detachment-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Uncomplicated cases without a retinal break"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral retinal examination",
+          "cells": [
+            {
+              "text": "Dilated examination with scleral indentation at presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal break treatment",
+          "cells": [
+            {
+              "text": "Laser retinopexy or cryotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhage work-up",
+          "cells": [
+            {
+              "text": "B-scan ultrasonography and urgent review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety-net advice",
+          "cells": [
+            {
+              "text": "Urgent return for new shower of floaters or field loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Repeat examination after an interval"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_vitreous_detachment-dx-mgmt",
+      "title": "Diagnosis and management of Posterior vitreous detachment",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New floaters or flashes in a patient with a posterior vitreous detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (curtain or shadow, shower of floaters, Shafer's sign, central loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal specialist review for suspected retinal break or detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated peripheral examination with indentation; OCT; B-scan if view obscured",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does peripheral examination exclude a retinal break or tear?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider retinal tear, vitreous haemorrhage, uveitis or retinal migraine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe uncomplicated cases without a retinal break",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dilated peripheral examination with scleral indentation at presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat a retinal break promptly with laser retinopexy or cryotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "B-scan to investigate obscuring vitreous haemorrhage urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Safety-net advice to return urgently for new symptoms or field loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Uncomplicated detachment is benign; symptoms usually settle over weeks to months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

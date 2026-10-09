@@ -1,178 +1,503 @@
 {
- "id": "loeys_dietz_syndrome",
- "name": "Loeys-Dietz syndrome",
- "aliases": [
-  "LDS",
-  "TGFBR1-related aortopathy",
-  "TGFBR2-related aortopathy",
-  "TGF-beta signalling vasculopathy"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant connective-tissue disorder caused by pathogenic variants in genes of the TGF-beta signalling pathway, most often TGFBR1 and TGFBR2, and also SMAD3, TGFB2, and TGFB3",
-   "Characterised by arterial tortuosity and aneurysms that can affect the aorta and its branches well beyond the aortic root",
-   "The triad of arterial tortuosity, hypertelorism, and a bifid or broad uvula/cleft palate is a classic clinical clue",
-   "Aneurysms tend to dissect at smaller diameters and younger ages than in Marfan syndrome, so surveillance and surgical thresholds are more aggressive",
-   "Whole-arterial-tree imaging from head to pelvis is recommended because aneurysms are not confined to the aortic root",
-   "Ectopia lentis is characteristically absent, which helps distinguish it from Marfan syndrome",
-   "Craniofacial, skeletal, and cutaneous features overlap with Marfan and Ehlers-Danlos syndromes, so genetic testing guides definitive classification",
-   "Management combines medical aortic protection (beta-blockers and/or angiotensin-receptor blockers), close imaging surveillance, and earlier prophylactic vascular surgery"
+  "id": "loeys_dietz_syndrome",
+  "name": "Loeys-Dietz syndrome",
+  "aliases": [
+    "LDS",
+    "TGFBR1-related aortopathy",
+    "TGFBR2-related aortopathy",
+    "TGF-beta signalling vasculopathy"
   ],
-  "pathophysiology": "Loeys-Dietz syndrome arises from variants that disturb transforming growth factor beta signalling within the vascular wall. Paradoxically, despite loss-of-function receptor variants, downstream TGF-beta signalling is upregulated, driving abnormal extracellular matrix remodelling and smooth-muscle cell dysfunction. The result is a fragile, tortuous arterial tree with a propensity to aneurysm formation and dissection throughout the aorta and its branches. The same signalling disturbance underlies the craniofacial, skeletal, and connective-tissue features, and the widespread vascular fragility explains the elevated risk of rupture at relatively small vessel diameters.",
-  "additionalDifferentials": [
-   "Marfan syndrome",
-   "Vascular Ehlers-Danlos syndrome",
-   "Arterial tortuosity syndrome",
-   "Familial thoracic aortic aneurysm and dissection",
-   "Shprintzen-Goldberg syndrome",
-   "Ehlers-Danlos syndrome, hypermobile type"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography with aortic root measurement",
-   "Head-to-pelvis CT or MR angiography to map arterial tortuosity and aneurysms",
-   "Molecular genetic testing of the TGF-beta pathway aortopathy gene panel",
-   "Slit-lamp examination to confirm absence of ectopia lentis and assess other ocular features",
-   "Cervical spine imaging for instability before intervention or anaesthesia",
-   "Skeletal review for scoliosis, pectus deformity, and club foot"
-  ],
-  "redFlags": [
-   "Acute severe chest, back, or abdominal pain suggesting arterial dissection or rupture",
-   "Aneurysm growth or an aortic diameter reaching the individualised surgical threshold",
-   "Aneurysms in cerebral or visceral arteries detected on surveillance imaging",
-   "Signs of cervical spine instability, especially peri-operatively",
-   "Pregnancy complications given the heightened maternal dissection risk"
-  ],
-  "prognosis": "Prognosis has improved substantially with recognition, aggressive imaging surveillance, medical aortic protection, and earlier surgery, but the widespread and aggressive arterial disease still carries meaningful risk of dissection and rupture. Outcomes vary with the causative gene and the extent of vascular involvement.",
-  "pitfalls": [
-   "Applying Marfan aortic surgical thresholds, which are too conservative for Loeys-Dietz syndrome",
-   "Imaging only the aortic root and missing distal or branch-vessel aneurysms",
-   "Overlooking cervical spine instability before intubation or surgery",
-   "Confusing it with Marfan syndrome despite the absence of ectopia lentis",
-   "Underestimating the maternal vascular risk during pregnancy"
-  ],
-  "references": [
-   "GeneReviews: Loeys-Dietz syndrome",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use beta-blockade and/or angiotensin-receptor blockade to reduce aortic wall stress and slow aneurysm growth",
-   "Undertake prophylactic aortic root and vascular surgery at smaller diameters and younger ages than in Marfan syndrome, given dissection at small calibre",
-   "Perform whole-arterial-tree imaging surveillance from head to pelvis at regular intervals, not just the aortic root",
-   "Advise activity modification, avoiding heavy isometric exertion and contact or competitive sport",
-   "Control blood pressure and counsel on the high vascular risk of pregnancy",
-   "Manage within a multidisciplinary team spanning clinical genetics, cardiology and cardiothoracic/vascular surgery, addressing skeletal and craniofacial features",
-   "Provide genetic counselling and cascade family testing of the TGF-beta pathway gene given autosomal dominant inheritance",
-   "Assess the cervical spine for instability before anaesthesia or intervention"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "loeys_dietz_syndrome-pathway",
-   "title": "Loeys-Dietz syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant connective-tissue disorder caused by pathogenic variants in genes of the TGF-beta signalling pathway, most often TGFBR1 and TGFBR2, and also SMAD3, TGFB2, and TGFB3",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe chest, back, or abdominal pain suggesting arterial dissection or rupture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography with aortic root measurement, Head-to-pelvis CT or MR angiography to map arterial tortuosity and aneurysms, Molecular genetic testing of the TGF-beta pathway aortopathy gene panel"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use beta-blockade and/or angiotensin-receptor blockade to reduce aortic wall stress and slow aneurysm growth"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Applying Marfan aortic surgical thresholds, which are too conservative for Loeys-Dietz syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of loeys-dietz syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "loeys_dietz_syndrome-matrix",
-   "title": "Loeys-Dietz syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant connective-tissue disorder caused by pathogenic variants in genes of the TGF-beta signalling pathway, most",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant connective-tissue disorder caused by pathogenic variants in genes of the TGF-beta signalling pathway, most often TGFBR1 and TGFBR2, and also SMAD3, TGFB2, and TGFB3",
+      "Characterised by arterial tortuosity and aneurysms that can affect the aorta and its branches well beyond the aortic root",
+      "The triad of arterial tortuosity, hypertelorism, and a bifid or broad uvula/cleft palate is a classic clinical clue",
+      "Aneurysms tend to dissect at smaller diameters and younger ages than in Marfan syndrome, so surveillance and surgical thresholds are more aggressive",
+      "Whole-arterial-tree imaging from head to pelvis is recommended because aneurysms are not confined to the aortic root",
+      "Ectopia lentis is characteristically absent, which helps distinguish it from Marfan syndrome",
+      "Craniofacial, skeletal, and cutaneous features overlap with Marfan and Ehlers-Danlos syndromes, so genetic testing guides definitive classification",
+      "Management combines medical aortic protection (beta-blockers and/or angiotensin-receptor blockers), close imaging surveillance, and earlier prophylactic vascular surgery"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography with aortic root measurement, Head-to-pelvis CT or MR angiography to map arterial tortuosity and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Loeys-Dietz syndrome arises from variants that disturb transforming growth factor beta signalling within the vascular wall. Paradoxically, despite loss-of-function receptor variants, downstream TGF-beta signalling is upregulated, driving abnormal extracellular matrix remodelling and smooth-muscle cell dysfunction. The result is a fragile, tortuous arterial tree with a propensity to aneurysm formation and dissection throughout the aorta and its branches. The same signalling disturbance underlies the craniofacial, skeletal, and connective-tissue features, and the widespread vascular fragility explains the elevated risk of rupture at relatively small vessel diameters.",
+    "additionalDifferentials": [
+      "Marfan syndrome",
+      "Vascular Ehlers-Danlos syndrome",
+      "Arterial tortuosity syndrome",
+      "Familial thoracic aortic aneurysm and dissection",
+      "Shprintzen-Goldberg syndrome",
+      "Ehlers-Danlos syndrome, hypermobile type"
     ],
-    [
-     "Primary Differentials",
-     "Marfan syndrome, Vascular Ehlers-Danlos syndrome, Arterial tortuosity syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography with aortic root measurement",
+      "Head-to-pelvis CT or MR angiography to map arterial tortuosity and aneurysms",
+      "Molecular genetic testing of the TGF-beta pathway aortopathy gene panel",
+      "Slit-lamp examination to confirm absence of ectopia lentis and assess other ocular features",
+      "Cervical spine imaging for instability before intervention or anaesthesia",
+      "Skeletal review for scoliosis, pectus deformity, and club foot"
     ],
-    [
-     "Management Strategy",
-     "Use beta-blockade and/or angiotensin-receptor blockade to reduce aortic wall stress and slow aneurysm growth",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe chest, back, or abdominal pain suggesting arterial dissection or rupture",
+      "Aneurysm growth or an aortic diameter reaching the individualised surgical threshold",
+      "Aneurysms in cerebral or visceral arteries detected on surveillance imaging",
+      "Signs of cervical spine instability, especially peri-operatively",
+      "Pregnancy complications given the heightened maternal dissection risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Applying Marfan aortic surgical thresholds, which are too conservative for Loeys-Dietz syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis has improved substantially with recognition, aggressive imaging surveillance, medical aortic protection, and earlier surgery, but the widespread and aggressive arterial disease still carries meaningful risk of dissection and rupture. Outcomes vary with the causative gene and the extent of vascular involvement.",
+    "pitfalls": [
+      "Applying Marfan aortic surgical thresholds, which are too conservative for Loeys-Dietz syndrome",
+      "Imaging only the aortic root and missing distal or branch-vessel aneurysms",
+      "Overlooking cervical spine instability before intubation or surgery",
+      "Confusing it with Marfan syndrome despite the absence of ectopia lentis",
+      "Underestimating the maternal vascular risk during pregnancy"
+    ],
+    "references": [
+      "GeneReviews: Loeys-Dietz syndrome",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use beta-blockade and/or angiotensin-receptor blockade to reduce aortic wall stress and slow aneurysm growth",
+      "Undertake prophylactic aortic root and vascular surgery at smaller diameters and younger ages than in Marfan syndrome, given dissection at small calibre",
+      "Perform whole-arterial-tree imaging surveillance from head to pelvis at regular intervals, not just the aortic root",
+      "Advise activity modification, avoiding heavy isometric exertion and contact or competitive sport",
+      "Control blood pressure and counsel on the high vascular risk of pregnancy",
+      "Manage within a multidisciplinary team spanning clinical genetics, cardiology and cardiothoracic/vascular surgery, addressing skeletal and craniofacial features",
+      "Provide genetic counselling and cascade family testing of the TGF-beta pathway gene given autosomal dominant inheritance",
+      "Assess the cervical spine for instability before anaesthesia or intervention"
     ]
-   ],
-   "caption": "Overview comparison matrix for loeys-dietz syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "loeys-dietz-syndrome-real-image",
-   "title": "Loeys-Dietz syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "loeys_dietz_syndrome-pathway",
+      "title": "Loeys-Dietz syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant connective-tissue disorder caused by pathogenic variants in genes of the TGF-beta signalling pathway, most often TGFBR1 and TGFBR2, and also SMAD3, TGFB2, and TGFB3",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe chest, back, or abdominal pain suggesting arterial dissection or rupture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography with aortic root measurement, Head-to-pelvis CT or MR angiography to map arterial tortuosity and aneurysms, Molecular genetic testing of the TGF-beta pathway aortopathy gene panel"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use beta-blockade and/or angiotensin-receptor blockade to reduce aortic wall stress and slow aneurysm growth"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Applying Marfan aortic surgical thresholds, which are too conservative for Loeys-Dietz syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of loeys-dietz syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "loeys_dietz_syndrome-matrix",
+      "title": "Loeys-Dietz syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant connective-tissue disorder caused by pathogenic variants in genes of the TGF-beta signalling pathway, most",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography with aortic root measurement, Head-to-pelvis CT or MR angiography to map arterial tortuosity and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Marfan syndrome, Vascular Ehlers-Danlos syndrome, Arterial tortuosity syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use beta-blockade and/or angiotensin-receptor blockade to reduce aortic wall stress and slow aneurysm growth",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Applying Marfan aortic surgical thresholds, which are too conservative for Loeys-Dietz syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for loeys-dietz syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "loeys_dietz_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with aortic root measurement",
+          "cells": [
+            {
+              "text": "Root dimensions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head-to-pelvis CT or MR angiography",
+          "cells": [
+            {
+              "text": "Arterial tortuosity and aneurysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TGF-beta pathway aortopathy gene panel",
+          "cells": [
+            {
+              "text": "Confirms the gene variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Absence of ectopia lentis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine imaging",
+          "cells": [
+            {
+              "text": "Instability before intervention or anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal review",
+          "cells": [
+            {
+              "text": "Scoliosis, pectus deformity and club foot"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loeys_dietz_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Marfan syndrome",
+          "cells": [
+            {
+              "text": "Ectopia lentis is absent here; surgical thresholds differ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular Ehlers-Danlos syndrome",
+          "cells": [
+            {
+              "text": "Overlapping vascular features; genetic testing classifies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial tortuosity syndrome",
+          "cells": [
+            {
+              "text": "Arterial tortuosity; genetic testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial thoracic aortic aneurysm and dissection",
+          "cells": [
+            {
+              "text": "Aortic disease without the syndromic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loeys_dietz_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blockade and angiotensin-receptor blockade",
+          "cells": [
+            {
+              "text": "Reduce aortic wall stress and slow aneurysm growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic vascular surgery",
+          "cells": [
+            {
+              "text": "At smaller diameters and younger ages than in Marfan, given dissection at small calibre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-arterial imaging surveillance",
+          "cells": [
+            {
+              "text": "Head to pelvis at regular intervals, not only the aortic root"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Avoid heavy isometric exertion and contact or competitive sport"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and pregnancy",
+          "cells": [
+            {
+              "text": "Blood pressure control; counselling on high maternal vascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Genetics, cardiology and vascular surgery; skeletal and craniofacial features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; cascade family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine",
+          "cells": [
+            {
+              "text": "Assessed for instability before anaesthesia or intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "loeys_dietz_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Loeys-Dietz syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arterial tortuosity, hypertelorism and bifid uvula with aneurysms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute chest, back or abdominal pain, threshold size, neck instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vascular surgical review for dissection or rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aortic root echo, head-to-pelvis CT or MR angiography, TGF-beta gene panel, slit-lamp",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic TGF-beta pathway variant identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Marfan syndrome, vascular EDS or arterial tortuosity syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blocker and or ARB to reduce aortic wall stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prophylactic surgery at smaller diameters than in Marfan",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Whole-arterial surveillance from head to pelvis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid heavy isometric exertion and contact sports",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade genetic testing and cervical spine assessment before anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Improved by surveillance and earlier surgery; widespread arterial disease still at risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

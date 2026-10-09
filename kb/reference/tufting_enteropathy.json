@@ -1,173 +1,460 @@
 {
- "id": "tufting_enteropathy",
- "name": "Tufting enteropathy",
- "aliases": [
-  "EPCAM",
-  "congenital tufting enteropathy",
-  "intestinal epithelial dysplasia",
-  "CTE"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Genetics",
- "specialty": "Gastroenterology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive congenital enteropathy caused chiefly by biallelic EPCAM variants, with a syndromic form linked to SPINT2",
-   "Presents in early infancy with severe watery diarrhoea and failure to thrive requiring parenteral nutrition",
-   "Small-bowel biopsy shows villus atrophy, crypt abnormalities and characteristic focal epithelial tufts of crowded, disorganised enterocytes",
-   "EpCAM immunostaining is typically reduced or absent at the enterocyte membrane, supporting the diagnosis",
-   "The diarrhoea reflects disrupted enterocyte adhesion and impaired absorptive surface rather than a single transporter defect",
-   "The SPINT2-related variant may be accompanied by choanal atresia, keratitis and other congenital anomalies",
-   "Long-term nutritional dependence is common, and severe refractory cases may require intestinal transplantation"
+  "id": "tufting_enteropathy",
+  "name": "Tufting enteropathy",
+  "aliases": [
+    "EPCAM",
+    "congenital tufting enteropathy",
+    "intestinal epithelial dysplasia",
+    "CTE"
   ],
-  "pathophysiology": "Tufting enteropathy results from defective enterocyte adhesion and epithelial organisation. Loss-of-function variants in EPCAM disrupt the epithelial cell adhesion molecule, impairing cell-cell contacts and the normal architecture of the intestinal epithelium. Enterocytes crowd and pile into focal tufts at the villus surface, with associated villus atrophy and crypt changes, so the absorptive surface is compromised. The syndromic SPINT2-associated form involves a serine protease inhibitor and additional developmental anomalies. The net effect is failure of fluid and nutrient absorption producing chronic diarrhoea from early infancy.",
-  "additionalDifferentials": [
-   "Microvillus inclusion disease",
-   "Autoimmune enteropathy and IPEX syndrome",
-   "Congenital chloride or sodium diarrhoea",
-   "Enteroendocrine cell dysgenesis (NEUROG3)",
-   "Trichohepatoenteric syndrome",
-   "Coeliac disease and other later-onset enteropathies"
-  ],
-  "additionalInvestigations": [
-   "Small-bowel mucosal biopsy with assessment for epithelial tufts and villus atrophy",
-   "EpCAM immunohistochemistry of biopsy tissue",
-   "Stool electrolytes and faecal osmotic gap to characterise the diarrhoea",
-   "Molecular testing for EPCAM and SPINT2 variants",
-   "Assessment for extraintestinal anomalies (e.g. choanal, ophthalmic) in suspected syndromic disease"
-  ],
-  "redFlags": [
-   "Severe dehydration and electrolyte disturbance in a young infant with intractable diarrhoea",
-   "Failure to thrive despite optimised feeding, indicating a congenital enteropathy",
-   "Associated congenital anomalies suggesting the syndromic SPINT2-related form",
-   "Complications of long-term parenteral nutrition such as line sepsis or cholestasis"
-  ],
-  "prognosis": "Most patients require prolonged or indefinite parenteral nutrition; some achieve partial enteral tolerance while severe refractory disease may progress to intestinal transplantation. Outcome is influenced by nutritional complications and any associated anomalies.",
-  "pitfalls": [
-   "Confusing the histology with coeliac disease or other villus-atrophy enteropathies without recognising the diagnostic tufts",
-   "Relying on light microscopy alone rather than adding EpCAM staining and genetics",
-   "Attributing chronic diarrhoea to feed intolerance and delaying definitive evaluation",
-   "Missing associated congenital anomalies that point to a syndromic cause"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Long-term parenteral nutrition as the mainstay to sustain fluid, electrolyte and nutritional needs from early infancy",
-   "Meticulous central venous catheter care with prevention and prompt treatment of catheter-related bloodstream infection and line complications",
-   "Cautious introduction and advancement of enteral feeds to promote any achievable enteral tolerance",
-   "Monitoring and management of intestinal-failure-associated liver disease, growth, and micronutrient and trace-element status",
-   "Consideration of intestinal or combined liver-intestinal transplantation for refractory disease or failure of parenteral nutrition",
-   "Assessment and management of associated anomalies (choanal atresia, keratitis) in SPINT2-related syndromic disease",
-   "Multidisciplinary intestinal-failure and gastroenterology care, with genetic counselling for autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tufting_enteropathy-pathway",
-   "title": "Tufting enteropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive congenital enteropathy caused chiefly by biallelic EPCAM variants, with a syndromic form linked to SPINT2",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe dehydration and electrolyte disturbance in a young infant with intractable diarrhoea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Small-bowel mucosal biopsy with assessment for epithelial tufts and villus atrophy, EpCAM immunohistochemistry of biopsy tissue, Stool electrolytes and faecal osmotic gap to characterise the diarrhoea"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Long-term parenteral nutrition as the mainstay to sustain fluid, electrolyte and nutritional needs from early infancy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the histology with coeliac disease or other villus-atrophy enteropathies without recognising the diagnostic tufts"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tufting enteropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "tufting_enteropathy-matrix",
-   "title": "Tufting enteropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive congenital enteropathy caused chiefly by biallelic EPCAM variants, with a syndromic form linked to SPINT2",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Genetics",
+  "specialty": "Gastroenterology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive congenital enteropathy caused chiefly by biallelic EPCAM variants, with a syndromic form linked to SPINT2",
+      "Presents in early infancy with severe watery diarrhoea and failure to thrive requiring parenteral nutrition",
+      "Small-bowel biopsy shows villus atrophy, crypt abnormalities and characteristic focal epithelial tufts of crowded, disorganised enterocytes",
+      "EpCAM immunostaining is typically reduced or absent at the enterocyte membrane, supporting the diagnosis",
+      "The diarrhoea reflects disrupted enterocyte adhesion and impaired absorptive surface rather than a single transporter defect",
+      "The SPINT2-related variant may be accompanied by choanal atresia, keratitis and other congenital anomalies",
+      "Long-term nutritional dependence is common, and severe refractory cases may require intestinal transplantation"
     ],
-    [
-     "Key Investigations",
-     "Small-bowel mucosal biopsy with assessment for epithelial tufts and villus atrophy, EpCAM immunohistochemistry of biopsy tissue,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tufting enteropathy results from defective enterocyte adhesion and epithelial organisation. Loss-of-function variants in EPCAM disrupt the epithelial cell adhesion molecule, impairing cell-cell contacts and the normal architecture of the intestinal epithelium. Enterocytes crowd and pile into focal tufts at the villus surface, with associated villus atrophy and crypt changes, so the absorptive surface is compromised. The syndromic SPINT2-associated form involves a serine protease inhibitor and additional developmental anomalies. The net effect is failure of fluid and nutrient absorption producing chronic diarrhoea from early infancy.",
+    "additionalDifferentials": [
+      "Microvillus inclusion disease",
+      "Autoimmune enteropathy and IPEX syndrome",
+      "Congenital chloride or sodium diarrhoea",
+      "Enteroendocrine cell dysgenesis (NEUROG3)",
+      "Trichohepatoenteric syndrome",
+      "Coeliac disease and other later-onset enteropathies"
     ],
-    [
-     "Primary Differentials",
-     "Microvillus inclusion disease, Autoimmune enteropathy and IPEX syndrome, Congenital chloride or sodium diarrhoea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Small-bowel mucosal biopsy with assessment for epithelial tufts and villus atrophy",
+      "EpCAM immunohistochemistry of biopsy tissue",
+      "Stool electrolytes and faecal osmotic gap to characterise the diarrhoea",
+      "Molecular testing for EPCAM and SPINT2 variants",
+      "Assessment for extraintestinal anomalies (e.g. choanal, ophthalmic) in suspected syndromic disease"
     ],
-    [
-     "Management Strategy",
-     "Long-term parenteral nutrition as the mainstay to sustain fluid, electrolyte and nutritional needs from early infancy",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe dehydration and electrolyte disturbance in a young infant with intractable diarrhoea",
+      "Failure to thrive despite optimised feeding, indicating a congenital enteropathy",
+      "Associated congenital anomalies suggesting the syndromic SPINT2-related form",
+      "Complications of long-term parenteral nutrition such as line sepsis or cholestasis"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the histology with coeliac disease or other villus-atrophy enteropathies without recognising the diagnostic tufts",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients require prolonged or indefinite parenteral nutrition; some achieve partial enteral tolerance while severe refractory disease may progress to intestinal transplantation. Outcome is influenced by nutritional complications and any associated anomalies.",
+    "pitfalls": [
+      "Confusing the histology with coeliac disease or other villus-atrophy enteropathies without recognising the diagnostic tufts",
+      "Relying on light microscopy alone rather than adding EpCAM staining and genetics",
+      "Attributing chronic diarrhoea to feed intolerance and delaying definitive evaluation",
+      "Missing associated congenital anomalies that point to a syndromic cause"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Long-term parenteral nutrition as the mainstay to sustain fluid, electrolyte and nutritional needs from early infancy",
+      "Meticulous central venous catheter care with prevention and prompt treatment of catheter-related bloodstream infection and line complications",
+      "Cautious introduction and advancement of enteral feeds to promote any achievable enteral tolerance",
+      "Monitoring and management of intestinal-failure-associated liver disease, growth, and micronutrient and trace-element status",
+      "Consideration of intestinal or combined liver-intestinal transplantation for refractory disease or failure of parenteral nutrition",
+      "Assessment and management of associated anomalies (choanal atresia, keratitis) in SPINT2-related syndromic disease",
+      "Multidisciplinary intestinal-failure and gastroenterology care, with genetic counselling for autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for tufting enteropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tufting-enteropathy-real-image",
-   "title": "Tufting enteropathy: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "tufting_enteropathy-pathway",
+      "title": "Tufting enteropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive congenital enteropathy caused chiefly by biallelic EPCAM variants, with a syndromic form linked to SPINT2",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe dehydration and electrolyte disturbance in a young infant with intractable diarrhoea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Small-bowel mucosal biopsy with assessment for epithelial tufts and villus atrophy, EpCAM immunohistochemistry of biopsy tissue, Stool electrolytes and faecal osmotic gap to characterise the diarrhoea"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Long-term parenteral nutrition as the mainstay to sustain fluid, electrolyte and nutritional needs from early infancy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the histology with coeliac disease or other villus-atrophy enteropathies without recognising the diagnostic tufts"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tufting enteropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tufting_enteropathy-matrix",
+      "title": "Tufting enteropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive congenital enteropathy caused chiefly by biallelic EPCAM variants, with a syndromic form linked to SPINT2",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Small-bowel mucosal biopsy with assessment for epithelial tufts and villus atrophy, EpCAM immunohistochemistry of biopsy tissue,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Microvillus inclusion disease, Autoimmune enteropathy and IPEX syndrome, Congenital chloride or sodium diarrhoea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Long-term parenteral nutrition as the mainstay to sustain fluid, electrolyte and nutritional needs from early infancy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the histology with coeliac disease or other villus-atrophy enteropathies without recognising the diagnostic tufts",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tufting enteropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tufting_enteropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Small-bowel mucosal biopsy",
+          "cells": [
+            {
+              "text": "Focal epithelial tufts of crowded, disorganised enterocytes; villus atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EpCAM immunohistochemistry",
+          "cells": [
+            {
+              "text": "Reduced or absent membrane EpCAM staining supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool electrolytes and faecal osmotic gap",
+          "cells": [
+            {
+              "text": "Characterises the watery diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EPCAM and SPINT2 genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic EPCAM variants; SPINT2 variants in the syndromic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for choanal and ophthalmic anomalies",
+          "cells": [
+            {
+              "text": "Choanal atresia and keratitis suggest the SPINT2-related form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tufting_enteropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Microvillus inclusion disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease and other villus-atrophy enteropathies",
+          "cells": [
+            {
+              "text": "Villus atrophy alone is shared; focal epithelial tufts are the diagnostic clue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feed intolerance",
+          "cells": [
+            {
+              "text": "Diarrhoea and failure to thrive despite optimised feeding indicate a congenital enteropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tufting_enteropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Long-term parenteral nutrition",
+          "cells": [
+            {
+              "text": "Mainstay from early infancy for fluid, electrolyte and nutritional needs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central venous catheter care",
+          "cells": [
+            {
+              "text": "Prevent and promptly treat catheter-related bloodstream infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious enteral feeding",
+          "cells": [
+            {
+              "text": "Introduce and advance feeds to promote any achievable enteral tolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of intestinal-failure liver disease",
+          "cells": [
+            {
+              "text": "Growth, micronutrient and trace-element status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal or liver-intestinal transplantation",
+          "cells": [
+            {
+              "text": "Refractory disease or failure of parenteral nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Care of associated anomalies",
+          "cells": [
+            {
+              "text": "Choanal atresia and keratitis in SPINT2-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary intestinal-failure care",
+          "cells": [
+            {
+              "text": "Gastroenterology team with genetic counselling for autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tufting_enteropathy-dx-mgmt",
+      "title": "Diagnosis and management of Tufting enteropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tufting enteropathy: severe watery diarrhoea and failure to thrive in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe dehydration, failure to thrive, congenital anomalies)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent correction of dehydration and electrolyte disturbance; start parenteral nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Small-bowel biopsy for tufts; EpCAM staining; EPCAM and SPINT2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do biopsy tufts and reduced EpCAM staining confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider microvillus inclusion disease or other congenital enteropathies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Long-term parenteral nutrition as the mainstay from early infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Central line care to prevent and treat catheter-related bloodstream infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cautious enteral feed advancement to promote any enteral tolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Transplantation referral if disease is refractory or parenteral nutrition fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most need prolonged parenteral nutrition; some gain partial enteral tolerance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

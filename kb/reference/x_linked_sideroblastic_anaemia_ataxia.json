@@ -1,180 +1,384 @@
 {
- "id": "x_linked_sideroblastic_anaemia_ataxia",
- "name": "X-linked sideroblastic anaemia with ataxia",
- "aliases": [
-  "ABCB7",
-  "ASAT",
-  "X-linked sideroblastic anaemia and ataxia",
-  "X-linked sideroblastic anaemia with ataxia (ABCB7)",
-  "XLSA/A",
-  "x linked sideroblastic anemia ataxia"
- ],
- "class": "non_infective",
- "system": "Haematology / Neurology",
- "specialty": "Haematology / Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Haematology and neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked recessive disorder caused by ABCB7 variants; ABCB7 is a mitochondrial inner-membrane ATP-binding cassette transporter required for cytosolic iron-sulphur cluster maturation.",
-   "Defined by the combination of early-onset, non-progressive or only slowly progressive spinocerebellar ataxia with a mild sideroblastic anaemia.",
-   "The ataxia usually dominates the clinical picture, presenting in infancy or early childhood with incoordination, gait disturbance and dysarthria.",
-   "The anaemia is typically mild and hypochromic and microcytic, often detected only on investigation, with ring sideroblasts on bone marrow examination.",
-   "Free erythrocyte protoporphyrin is characteristically raised, which helps distinguish it from ALAS2-related X-linked sideroblastic anaemia.",
-   "Almost exclusively affects males; obligate female carriers are usually asymptomatic but may show a minor dimorphic red-cell population.",
-   "Brain imaging may demonstrate cerebellar atrophy or hypoplasia.",
-   "Iron supplementation is unhelpful and risks iron overload, and the anaemia rarely requires transfusion."
+  "id": "x_linked_sideroblastic_anaemia_ataxia",
+  "name": "X-linked sideroblastic anaemia with ataxia",
+  "aliases": [
+    "ABCB7",
+    "ASAT",
+    "X-linked sideroblastic anaemia and ataxia",
+    "X-linked sideroblastic anaemia with ataxia (ABCB7)",
+    "XLSA/A",
+    "x linked sideroblastic anemia ataxia"
   ],
-  "pathophysiology": "ABCB7 on chromosome Xq13.3 encodes a half-type ATP-binding cassette transporter located in the inner mitochondrial membrane that exports a sulphur-containing intermediate needed for the biogenesis of cytosolic and nuclear iron-sulphur (Fe-S) clusters. Missense variants that partially impair this transporter disrupt cytosolic Fe-S cluster assembly and derange mitochondrial iron handling, so iron accumulates within perinuclear mitochondria of erythroid precursors to produce ring sideroblasts and a sideroblastic anaemia, while impaired Fe-S-dependent processes in the developing and mature nervous system, particularly the cerebellum, give rise to the characteristic ataxia. Because the gene lies on the X chromosome and the variants are typically hypomorphic rather than null, the disease manifests in hemizygous males with a comparatively mild, largely non-progressive course, whereas heterozygous females are protected by the wild-type allele.",
-  "additionalDifferentials": [
-   "ALAS2-related X-linked sideroblastic anaemia, which lacks ataxia",
-   "Other congenital sideroblastic anaemias (for example SLC25A38 and GLRX5 related)",
-   "Thiamine-responsive megaloblastic anaemia (SLC19A2)",
-   "Myopathy, lactic acidosis and sideroblastic anaemia (MLASA; PUS1, YARS2)",
-   "Pearson marrow-pancreas syndrome",
-   "Friedreich ataxia and other early-onset hereditary ataxias",
-   "Ataxia with isolated vitamin E deficiency and abetalipoproteinaemia"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film (hypochromic microcytic, sometimes dimorphic)",
-   "Bone marrow examination with Perls' Prussian-blue stain for ring sideroblasts",
-   "Free erythrocyte protoporphyrin",
-   "Iron studies including ferritin, with vigilance for iron overload",
-   "Brain MRI for cerebellar atrophy or hypoplasia",
-   "Molecular genetic testing of ABCB7 with exclusion of ALAS2",
-   "Structured neurological assessment of the ataxia"
-  ],
-  "redFlags": [
-   "Progressive worsening of ataxia",
-   "Symptomatic anaemia",
-   "Evidence of iron overload, especially after inappropriate iron therapy or transfusion",
-   "Developmental regression rather than the expected static course"
-  ],
-  "prognosis": "The ataxia is typically non-progressive or only slowly progressive and the anaemia is mild, so most affected males have a near-normal life expectancy provided iron overload is avoided.",
-  "pitfalls": [
-   "The anaemia can be so mild that it is overlooked, and the ataxia is then wrongly attributed to another cause.",
-   "Iron supplementation is inappropriate and risks iron overload.",
-   "The condition is easily confused with Friedreich ataxia and other early-onset ataxias.",
-   "Only males are typically affected, so a negative family history among female relatives is unhelpful."
-  ],
-  "references": [
-   "Standard haematology reference texts",
-   "Neurogenetics reference texts",
-   "Reviews of the congenital sideroblastic anaemias"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive management of the usually mild anaemia, with transfusion reserved for symptomatic cases",
-   "Avoidance of iron supplementation with monitoring to prevent iron overload",
-   "Physiotherapy and occupational therapy to support gait and coordination affected by the cerebellar ataxia",
-   "Speech and language therapy for dysarthria",
-   "Neurological follow-up recognising the largely non-progressive course",
-   "Haematology review with periodic iron studies and blood counts",
-   "Genetic counselling with ABCB7 testing and assessment of obligate female carriers"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "x_linked_sideroblastic_anaemia_ataxia-pathway",
-   "title": "X-linked sideroblastic anaemia with ataxia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked recessive disorder caused by ABCB7 variants; ABCB7 is a mitochondrial inner-membrane ATP-binding cassette transporter required for cytosolic iron-sulphur cluster maturation.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive worsening of ataxia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film (hypochromic microcytic, sometimes dimorphic), Bone marrow examination with Perls' Prussian-blue stain for ring sideroblasts, Free erythrocyte protoporphyrin"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive management of the usually mild anaemia, with transfusion reserved for symptomatic cases"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: The anaemia can be so mild that it is overlooked, and the ataxia is then wrongly attributed to another cause."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of x-linked sideroblastic anaemia with ataxia."
-  }
- ],
- "tables": [
-  {
-   "id": "x_linked_sideroblastic_anaemia_ataxia-matrix",
-   "title": "X-linked sideroblastic anaemia with ataxia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked recessive disorder caused by ABCB7 variants; ABCB7 is a mitochondrial inner-membrane ATP-binding cassette transporter",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Neurology",
+  "specialty": "Haematology / Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Haematology and neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked recessive disorder caused by ABCB7 variants; ABCB7 is a mitochondrial inner-membrane ATP-binding cassette transporter required for cytosolic iron-sulphur cluster maturation.",
+      "Defined by the combination of early-onset, non-progressive or only slowly progressive spinocerebellar ataxia with a mild sideroblastic anaemia.",
+      "The ataxia usually dominates the clinical picture, presenting in infancy or early childhood with incoordination, gait disturbance and dysarthria.",
+      "The anaemia is typically mild and hypochromic and microcytic, often detected only on investigation, with ring sideroblasts on bone marrow examination.",
+      "Free erythrocyte protoporphyrin is characteristically raised, which helps distinguish it from ALAS2-related X-linked sideroblastic anaemia.",
+      "Almost exclusively affects males; obligate female carriers are usually asymptomatic but may show a minor dimorphic red-cell population.",
+      "Brain imaging may demonstrate cerebellar atrophy or hypoplasia.",
+      "Iron supplementation is unhelpful and risks iron overload, and the anaemia rarely requires transfusion."
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film (hypochromic microcytic, sometimes dimorphic), Bone marrow examination with Perls' Prussian-blue",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ABCB7 on chromosome Xq13.3 encodes a half-type ATP-binding cassette transporter located in the inner mitochondrial membrane that exports a sulphur-containing intermediate needed for the biogenesis of cytosolic and nuclear iron-sulphur (Fe-S) clusters. Missense variants that partially impair this transporter disrupt cytosolic Fe-S cluster assembly and derange mitochondrial iron handling, so iron accumulates within perinuclear mitochondria of erythroid precursors to produce ring sideroblasts and a sideroblastic anaemia, while impaired Fe-S-dependent processes in the developing and mature nervous system, particularly the cerebellum, give rise to the characteristic ataxia. Because the gene lies on the X chromosome and the variants are typically hypomorphic rather than null, the disease manifests in hemizygous males with a comparatively mild, largely non-progressive course, whereas heterozygous females are protected by the wild-type allele.",
+    "additionalDifferentials": [
+      "ALAS2-related X-linked sideroblastic anaemia, which lacks ataxia",
+      "Other congenital sideroblastic anaemias (for example SLC25A38 and GLRX5 related)",
+      "Thiamine-responsive megaloblastic anaemia (SLC19A2)",
+      "Myopathy, lactic acidosis and sideroblastic anaemia (MLASA; PUS1, YARS2)",
+      "Pearson marrow-pancreas syndrome",
+      "Friedreich ataxia and other early-onset hereditary ataxias",
+      "Ataxia with isolated vitamin E deficiency and abetalipoproteinaemia"
     ],
-    [
-     "Primary Differentials",
-     "ALAS2-related X-linked sideroblastic anaemia, which lacks ataxia, Other congenital sideroblastic anaemias (for example SLC25A38",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film (hypochromic microcytic, sometimes dimorphic)",
+      "Bone marrow examination with Perls' Prussian-blue stain for ring sideroblasts",
+      "Free erythrocyte protoporphyrin",
+      "Iron studies including ferritin, with vigilance for iron overload",
+      "Brain MRI for cerebellar atrophy or hypoplasia",
+      "Molecular genetic testing of ABCB7 with exclusion of ALAS2",
+      "Structured neurological assessment of the ataxia"
     ],
-    [
-     "Management Strategy",
-     "Supportive management of the usually mild anaemia, with transfusion reserved for symptomatic cases",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive worsening of ataxia",
+      "Symptomatic anaemia",
+      "Evidence of iron overload, especially after inappropriate iron therapy or transfusion",
+      "Developmental regression rather than the expected static course"
     ],
-    [
-     "Clinical Pitfall",
-     "The anaemia can be so mild that it is overlooked, and the ataxia is then wrongly attributed to another cause.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The ataxia is typically non-progressive or only slowly progressive and the anaemia is mild, so most affected males have a near-normal life expectancy provided iron overload is avoided.",
+    "pitfalls": [
+      "The anaemia can be so mild that it is overlooked, and the ataxia is then wrongly attributed to another cause.",
+      "Iron supplementation is inappropriate and risks iron overload.",
+      "The condition is easily confused with Friedreich ataxia and other early-onset ataxias.",
+      "Only males are typically affected, so a negative family history among female relatives is unhelpful."
+    ],
+    "references": [
+      "Standard haematology reference texts",
+      "Neurogenetics reference texts",
+      "Reviews of the congenital sideroblastic anaemias"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive management of the usually mild anaemia, with transfusion reserved for symptomatic cases",
+      "Avoidance of iron supplementation with monitoring to prevent iron overload",
+      "Physiotherapy and occupational therapy to support gait and coordination affected by the cerebellar ataxia",
+      "Speech and language therapy for dysarthria",
+      "Neurological follow-up recognising the largely non-progressive course",
+      "Haematology review with periodic iron studies and blood counts",
+      "Genetic counselling with ABCB7 testing and assessment of obligate female carriers"
     ]
-   ],
-   "caption": "Overview comparison matrix for x-linked sideroblastic anaemia with ataxia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "x-linked-sideroblastic-anaemia-ataxia-real-image",
-   "title": "X-linked sideroblastic anaemia with ataxia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "x_linked_sideroblastic_anaemia_ataxia-pathway",
+      "title": "X-linked sideroblastic anaemia with ataxia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked recessive disorder caused by ABCB7 variants; ABCB7 is a mitochondrial inner-membrane ATP-binding cassette transporter required for cytosolic iron-sulphur cluster maturation.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive worsening of ataxia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film (hypochromic microcytic, sometimes dimorphic), Bone marrow examination with Perls' Prussian-blue stain for ring sideroblasts, Free erythrocyte protoporphyrin"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive management of the usually mild anaemia, with transfusion reserved for symptomatic cases"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: The anaemia can be so mild that it is overlooked, and the ataxia is then wrongly attributed to another cause."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of x-linked sideroblastic anaemia with ataxia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "x_linked_sideroblastic_anaemia_ataxia-matrix",
+      "title": "X-linked sideroblastic anaemia with ataxia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked recessive disorder caused by ABCB7 variants; ABCB7 is a mitochondrial inner-membrane ATP-binding cassette transporter",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film (hypochromic microcytic, sometimes dimorphic), Bone marrow examination with Perls' Prussian-blue",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "ALAS2-related X-linked sideroblastic anaemia, which lacks ataxia, Other congenital sideroblastic anaemias (for example SLC25A38",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive management of the usually mild anaemia, with transfusion reserved for symptomatic cases",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "The anaemia can be so mild that it is overlooked, and the ataxia is then wrongly attributed to another cause.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for x-linked sideroblastic anaemia with ataxia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology and neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_sideroblastic_anaemia_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Hypochromic microcytic, sometimes dimorphic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination with Perls stain",
+          "cells": [
+            {
+              "text": "Ring sideroblasts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_sideroblastic_anaemia_ataxia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ALAS2-related X-linked sideroblastic anaemia",
+          "cells": [
+            {
+              "text": "Lacks ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other congenital sideroblastic anaemias",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_sideroblastic_anaemia_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management of the anaemia",
+          "cells": [
+            {
+              "text": "Usually mild"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion for symptomatic cases",
+          "cells": [
+            {
+              "text": "Reserved for symptomatic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid inappropriate iron therapy",
+          "cells": [
+            {
+              "text": "Iron overload"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_sideroblastic_anaemia_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of X-linked sideroblastic anaemia with ataxia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked sideroblastic anaemia with ataxia: ataxia with mild microcytic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive ataxia, symptomatic anaemia or iron overload)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for progressive ataxia or symptomatic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film, marrow Perls stain, ABCB7 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ABCB7 testing confirm a variant with ataxia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ALAS2 sideroblastic anaemia or other congenital form",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive management of the usually mild anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transfusion for symptomatic cases only",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid inappropriate iron therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Mild anaemia can be missed; ataxia is then wrongly attributed elsewhere",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

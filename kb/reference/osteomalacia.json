@@ -1,178 +1,516 @@
 {
- "id": "osteomalacia",
- "name": "osteomalacia",
- "aliases": [
-  "adult rickets",
-  "defective bone mineralisation"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Metabolic bone medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Oxford Textbook of Endocrinology and Diabetes",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Osteomalacia is impaired mineralisation of newly formed osteoid in the mature skeleton; the childhood equivalent, affecting the growth plate, is rickets.",
-   "The commonest cause worldwide is vitamin D deficiency (nutritional, malabsorption, limited sunlight); hypophosphataemia and mineralisation inhibitors are important non-calcipenic causes.",
-   "Classic biochemistry is low or low-normal calcium, low phosphate, raised alkaline phosphatase, raised PTH and low 25-hydroxyvitamin D.",
-   "Diffuse bone pain with a proximal myopathy (waddling gait, difficulty rising from a chair) is characteristic, often with bony tenderness on sternal or tibial pressure.",
-   "Looser zones (pseudofractures) on the compression side of long bones, pubic rami, scapula and ribs are a near-pathognomonic radiological feature.",
-   "Distinguish calcipenic forms (vitamin D or calcium deficiency, high PTH) from phosphopenic forms (renal phosphate wasting, FGF23-mediated) as treatment differs fundamentally.",
-   "Transiliac bone biopsy after tetracycline double-labelling showing increased osteoid thickness and prolonged mineralisation lag time is the gold standard but rarely required.",
-   "Hypocalcaemia and hypophosphataemia may worsen transiently when repletion begins ('hungry bone'), so monitor biochemistry during treatment."
+  "id": "osteomalacia",
+  "name": "osteomalacia",
+  "aliases": [
+    "adult rickets",
+    "defective bone mineralisation"
   ],
-  "pathophysiology": "Mature bone is continually remodelled, with osteoblasts laying down unmineralised osteoid that is subsequently mineralised by deposition of calcium and phosphate as hydroxyapatite. In osteomalacia this mineralisation step fails or lags, so accumulating unmineralised osteoid weakens the skeleton. The dominant mechanism is inadequate availability of calcium and phosphate at the mineralising front, most often from vitamin D deficiency (reduced intestinal calcium and phosphate absorption, secondary hyperparathyroidism and renal phosphate loss). Other routes include chronic hypophosphataemia from renal phosphate wasting (FGF23 excess, Fanconi syndrome), renal failure with impaired 1-alpha-hydroxylation, hypophosphatasia (low tissue-non-specific alkaline phosphatase), and inhibitors of mineralisation such as aluminium, fluoride and some bisphosphonates.",
-  "additionalDifferentials": [
-   "osteoporosis",
-   "Paget's disease of bone",
-   "renal osteodystrophy",
-   "metastatic bone disease or multiple myeloma",
-   "polymyalgia rheumatica (proximal myopathy mimic)",
-   "primary hyperparathyroidism",
-   "fibromyalgia"
-  ],
-  "additionalInvestigations": [
-   "serum calcium, phosphate and alkaline phosphatase",
-   "25-hydroxyvitamin D and PTH",
-   "renal profile with urine phosphate and tubular reabsorption of phosphate (TmP/GFR)",
-   "plain radiographs seeking Looser zones",
-   "coeliac serology and markers of malabsorption",
-   "intact FGF23 where unexplained phosphate wasting is suspected",
-   "transiliac bone biopsy with tetracycline labelling in diagnostic uncertainty"
-  ],
-  "redFlags": [
-   "symptomatic hypocalcaemia (tetany, seizures, prolonged QT interval)",
-   "insufficiency fractures, particularly of the femoral neck",
-   "severe proximal weakness causing recurrent falls",
-   "unexplained renal phosphate wasting raising suspicion of tumour-induced osteomalacia",
-   "underlying malabsorption such as coeliac disease or previous bariatric surgery"
-  ],
-  "prognosis": "Prognosis is excellent when the underlying deficiency is corrected, with bone pain and proximal myopathy usually resolving over weeks to months. Established skeletal deformity or fractures may leave residual disability.",
-  "pitfalls": [
-   "attributing symptoms to osteoporosis or fibromyalgia and missing osteomalacia",
-   "assuming normal serum calcium excludes the diagnosis",
-   "failing to seek an underlying malabsorptive cause",
-   "not distinguishing calcipenic from phosphopenic mechanisms before treatment",
-   "giving vitamin D alone when renal phosphate wasting is the primary problem"
-  ],
-  "references": [
-   "Oxford Textbook of Endocrinology and Diabetes",
-   "Williams Textbook of Endocrinology",
-   "Kumar and Clark's Clinical Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correction of the underlying deficiency — in calcipenic disease, vitamin D repletion with colecalciferol or ergocalciferol plus calcium supplementation",
-   "For phosphopenic forms, phosphate supplementation with an active vitamin D metabolite such as calcitriol or alfacalcidol, and an anti-FGF23 antibody such as burosumab where FGF23-mediated wasting is confirmed",
-   "Treatment of the specific cause, including a gluten-free diet in coeliac disease, active vitamin D analogues in renal impairment, and resection of a causative tumour in tumour-induced osteomalacia",
-   "Symptomatic support with analgesia for bone pain and rehabilitation for proximal myopathy",
-   "Biochemical monitoring of calcium, phosphate, alkaline phosphatase and parathyroid hormone, adjusting therapy to normalise mineralisation and avoid hypercalcaemia",
-   "Orthopaedic management of pseudofractures, completed fractures and skeletal deformity",
-   "Referral to metabolic bone specialists for phosphopenic, hereditary or refractory disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "osteomalacia-pathway",
-   "title": "osteomalacia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Osteomalacia is impaired mineralisation of newly formed osteoid in the mature skeleton; the childhood equivalent, affecting the growth plate, is rickets.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: symptomatic hypocalcaemia (tetany, seizures, prolonged QT interval)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: serum calcium, phosphate and alkaline phosphatase, 25-hydroxyvitamin D and PTH, renal profile with urine phosphate and tubular reabsorption of phosphate (TmP/GFR)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correction of the underlying deficiency - in calcipenic disease, vitamin D repletion with colecalciferol or ergocalciferol plus calcium supplementation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: attributing symptoms to osteoporosis or fibromyalgia and missing osteomalacia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of osteomalacia."
-  }
- ],
- "tables": [
-  {
-   "id": "osteomalacia-matrix",
-   "title": "osteomalacia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Osteomalacia is impaired mineralisation of newly formed osteoid in the mature skeleton; the childhood equivalent, affecting the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Metabolic bone medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oxford Textbook of Endocrinology and Diabetes",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Osteomalacia is impaired mineralisation of newly formed osteoid in the mature skeleton; the childhood equivalent, affecting the growth plate, is rickets.",
+      "The commonest cause worldwide is vitamin D deficiency (nutritional, malabsorption, limited sunlight); hypophosphataemia and mineralisation inhibitors are important non-calcipenic causes.",
+      "Classic biochemistry is low or low-normal calcium, low phosphate, raised alkaline phosphatase, raised PTH and low 25-hydroxyvitamin D.",
+      "Diffuse bone pain with a proximal myopathy (waddling gait, difficulty rising from a chair) is characteristic, often with bony tenderness on sternal or tibial pressure.",
+      "Looser zones (pseudofractures) on the compression side of long bones, pubic rami, scapula and ribs are a near-pathognomonic radiological feature.",
+      "Distinguish calcipenic forms (vitamin D or calcium deficiency, high PTH) from phosphopenic forms (renal phosphate wasting, FGF23-mediated) as treatment differs fundamentally.",
+      "Transiliac bone biopsy after tetracycline double-labelling showing increased osteoid thickness and prolonged mineralisation lag time is the gold standard but rarely required.",
+      "Hypocalcaemia and hypophosphataemia may worsen transiently when repletion begins ('hungry bone'), so monitor biochemistry during treatment."
     ],
-    [
-     "Key Investigations",
-     "serum calcium, phosphate and alkaline phosphatase, 25-hydroxyvitamin D and PTH, renal profile with urine phosphate and tubular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mature bone is continually remodelled, with osteoblasts laying down unmineralised osteoid that is subsequently mineralised by deposition of calcium and phosphate as hydroxyapatite. In osteomalacia this mineralisation step fails or lags, so accumulating unmineralised osteoid weakens the skeleton. The dominant mechanism is inadequate availability of calcium and phosphate at the mineralising front, most often from vitamin D deficiency (reduced intestinal calcium and phosphate absorption, secondary hyperparathyroidism and renal phosphate loss). Other routes include chronic hypophosphataemia from renal phosphate wasting (FGF23 excess, Fanconi syndrome), renal failure with impaired 1-alpha-hydroxylation, hypophosphatasia (low tissue-non-specific alkaline phosphatase), and inhibitors of mineralisation such as aluminium, fluoride and some bisphosphonates.",
+    "additionalDifferentials": [
+      "osteoporosis",
+      "Paget's disease of bone",
+      "renal osteodystrophy",
+      "metastatic bone disease or multiple myeloma",
+      "polymyalgia rheumatica (proximal myopathy mimic)",
+      "primary hyperparathyroidism",
+      "fibromyalgia"
     ],
-    [
-     "Primary Differentials",
-     "osteoporosis, Paget's disease of bone, renal osteodystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "serum calcium, phosphate and alkaline phosphatase",
+      "25-hydroxyvitamin D and PTH",
+      "renal profile with urine phosphate and tubular reabsorption of phosphate (TmP/GFR)",
+      "plain radiographs seeking Looser zones",
+      "coeliac serology and markers of malabsorption",
+      "intact FGF23 where unexplained phosphate wasting is suspected",
+      "transiliac bone biopsy with tetracycline labelling in diagnostic uncertainty"
     ],
-    [
-     "Management Strategy",
-     "Correction of the underlying deficiency - in calcipenic disease, vitamin D repletion with colecalciferol or ergocalciferol plus",
-     "Core treatment modality"
+    "redFlags": [
+      "symptomatic hypocalcaemia (tetany, seizures, prolonged QT interval)",
+      "insufficiency fractures, particularly of the femoral neck",
+      "severe proximal weakness causing recurrent falls",
+      "unexplained renal phosphate wasting raising suspicion of tumour-induced osteomalacia",
+      "underlying malabsorption such as coeliac disease or previous bariatric surgery"
     ],
-    [
-     "Clinical Pitfall",
-     "attributing symptoms to osteoporosis or fibromyalgia and missing osteomalacia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent when the underlying deficiency is corrected, with bone pain and proximal myopathy usually resolving over weeks to months. Established skeletal deformity or fractures may leave residual disability.",
+    "pitfalls": [
+      "attributing symptoms to osteoporosis or fibromyalgia and missing osteomalacia",
+      "assuming normal serum calcium excludes the diagnosis",
+      "failing to seek an underlying malabsorptive cause",
+      "not distinguishing calcipenic from phosphopenic mechanisms before treatment",
+      "giving vitamin D alone when renal phosphate wasting is the primary problem"
+    ],
+    "references": [
+      "Oxford Textbook of Endocrinology and Diabetes",
+      "Williams Textbook of Endocrinology",
+      "Kumar and Clark's Clinical Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correction of the underlying deficiency — in calcipenic disease, vitamin D repletion with colecalciferol or ergocalciferol plus calcium supplementation",
+      "For phosphopenic forms, phosphate supplementation with an active vitamin D metabolite such as calcitriol or alfacalcidol, and an anti-FGF23 antibody such as burosumab where FGF23-mediated wasting is confirmed",
+      "Treatment of the specific cause, including a gluten-free diet in coeliac disease, active vitamin D analogues in renal impairment, and resection of a causative tumour in tumour-induced osteomalacia",
+      "Symptomatic support with analgesia for bone pain and rehabilitation for proximal myopathy",
+      "Biochemical monitoring of calcium, phosphate, alkaline phosphatase and parathyroid hormone, adjusting therapy to normalise mineralisation and avoid hypercalcaemia",
+      "Orthopaedic management of pseudofractures, completed fractures and skeletal deformity",
+      "Referral to metabolic bone specialists for phosphopenic, hereditary or refractory disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for osteomalacia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "osteomalacia-real-image",
-   "title": "osteomalacia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "osteomalacia-pathway",
+      "title": "osteomalacia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Osteomalacia is impaired mineralisation of newly formed osteoid in the mature skeleton; the childhood equivalent, affecting the growth plate, is rickets.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: symptomatic hypocalcaemia (tetany, seizures, prolonged QT interval)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: serum calcium, phosphate and alkaline phosphatase, 25-hydroxyvitamin D and PTH, renal profile with urine phosphate and tubular reabsorption of phosphate (TmP/GFR)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correction of the underlying deficiency - in calcipenic disease, vitamin D repletion with colecalciferol or ergocalciferol plus calcium supplementation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: attributing symptoms to osteoporosis or fibromyalgia and missing osteomalacia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of osteomalacia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "osteomalacia-matrix",
+      "title": "osteomalacia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Osteomalacia is impaired mineralisation of newly formed osteoid in the mature skeleton; the childhood equivalent, affecting the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "serum calcium, phosphate and alkaline phosphatase, 25-hydroxyvitamin D and PTH, renal profile with urine phosphate and tubular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "osteoporosis, Paget's disease of bone, renal osteodystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correction of the underlying deficiency - in calcipenic disease, vitamin D repletion with colecalciferol or ergocalciferol plus",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "attributing symptoms to osteoporosis or fibromyalgia and missing osteomalacia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for osteomalacia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oxford Textbook of Endocrinology and Diabetes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteomalacia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate and alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Low or low-normal calcium, low phosphate and raised alkaline phosphatase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25-hydroxyvitamin D and PTH",
+          "cells": [
+            {
+              "text": "Vitamin D deficiency; raised PTH in calcipenic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal profile with urine phosphate and TmP/GFR",
+          "cells": [
+            {
+              "text": "Renal phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Looser zones (pseudofractures)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and malabsorption markers",
+          "cells": [
+            {
+              "text": "Malabsorption as the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intact FGF23",
+          "cells": [
+            {
+              "text": "FGF23-mediated phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transiliac bone biopsy with tetracycline labelling",
+          "cells": [
+            {
+              "text": "Increased osteoid thickness, in diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteomalacia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteoporosis",
+          "cells": [
+            {
+              "text": "Osteomalacia is a mineralisation defect; biochemistry separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal osteodystrophy",
+          "cells": [
+            {
+              "text": "Renal impairment; treated with active vitamin D analogues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymyalgia rheumatica",
+          "cells": [
+            {
+              "text": "Proximal myopathy mimics osteomalacia; biochemistry separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteomalacia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin D repletion",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Colecalciferol or ergocalciferol with calcium supplementation in calcipenic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphate with active vitamin D",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Calcitriol or alfacalcidol for phosphopenic forms; burosumab where FGF23-mediated wasting is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the specific cause",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Gluten-free diet in coeliac disease; resection of a causative tumour in tumour-induced osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic support",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Analgesia for bone pain and rehabilitation for proximal myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical monitoring",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Calcium, phosphate, alkaline phosphatase and PTH, avoiding hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Pseudofractures, fractures and skeletal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Metabolic bone specialists for phosphopenic, hereditary or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteomalacia-dx-mgmt",
+      "title": "Diagnosis and management of osteomalacia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diffuse bone pain with proximal weakness and waddling gait; osteomalacia suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (tetany or QT prolongation, insufficiency fracture or tumour phosphate loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent correction of symptomatic hypocalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, ALP, 25-OH vitamin D, PTH, urine phosphate and radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are calcium, phosphate and vitamin D abnormal, with Looser zones or raised ALP?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteoporosis, renal osteodystrophy, Paget disease or myeloma; retest",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vitamin D repletion with colecalciferol or ergocalciferol, plus calcium if calcipenic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Phosphate with calcitriol or alfacalcidol; burosumab where FGF23 wasting is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the cause: gluten-free diet, or resection of a causative tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesia for bone pain; rehabilitation for proximal myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor calcium, phosphate, ALP and PTH to avoid hypercalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent when the deficiency is corrected; established deformity may leave disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

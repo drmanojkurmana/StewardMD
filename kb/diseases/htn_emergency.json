@@ -206,25 +206,655 @@
       "caption": "Diagnostic and clinical overview matrix for hypertensive emergency."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "htn-emergency-real-image",
-      "title": "Hypertensive emergency: 12-Lead Diagnostic Electrocardiogram",
-      "type": "ecg",
-      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hypertensive Emergencies",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/hypertension/hypertensive-emergencies",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 247-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 247-10",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "htn_emergency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining hypertensive emergency and finding organ damage",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Conduction & Axis",
-          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+          "parameter": "Systolic BP",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": ">=180",
+              "op": ">=",
+              "value": 180
+            },
+            {
+              "text": "Severe hypertension"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Repolarization",
-          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+          "parameter": "Diastolic BP",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": ">=120",
+              "op": ">=",
+              "value": 120
+            },
+            {
+              "text": "Severe hypertension"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Rhythm & Intervals",
-          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+          "parameter": "Target-organ damage",
+          "cells": [
+            {
+              "text": "Encephalopathy, pulmonary oedema, ischaemia, dissection, AKI, eclampsia, retinopathy"
+            },
+            {
+              "text": "{{hy:Emergency only if acute organ damage is present}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No organ damage",
+          "cells": [
+            {
+              "text": "Severe BP alone, grade 1 to 2 retinopathy at most"
+            },
+            {
+              "text": "Urgency: oral agents, no immediate lowering"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fundoscopy",
+          "cells": [
+            {
+              "text": "Haemorrhages, cotton-wool spots, exudates, papilloedema"
+            },
+            {
+              "text": "Retinal end-organ damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film and reticulocytes",
+          "cells": [
+            {
+              "text": "Schistocytes, anaemia"
+            },
+            {
+              "text": "Microangiopathic haemolysis in malignant hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and creatinine",
+          "cells": [
+            {
+              "text": "RBCs, casts, proteinuria, rising creatinine"
+            },
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG, chest x-ray",
+          "cells": [
+            {
+              "text": "Chest pain or dyspnoea"
+            },
+            {
+              "text": "Ischaemia, oedema, dissection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT head",
+          "cells": [
+            {
+              "text": "Neurological findings"
+            },
+            {
+              "text": "Bleed, oedema or infarct"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison describes the threshold as about 180/100 to 120 mm Hg; Merck uses >=180 systolic and/or >=120 diastolic."
+    },
+    {
+      "id": "htn_emergency-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic or cause a hypertensive emergency",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypertensive urgency",
+          "cells": [
+            {
+              "text": "{{hy:No acute organ damage}}; often anxiety or pain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stroke with reactive hypertension",
+          "cells": [
+            {
+              "text": "BP high as a result of stroke; rapid lowering may harm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aortic dissection",
+          "cells": [
+            {
+              "text": "Tearing pain; needs faster control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma crisis",
+          "cells": [
+            {
+              "text": "Paroxysmal severe hypertension, sweating, palpitations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eclampsia or severe pre-eclampsia",
+          "cells": [
+            {
+              "text": "Pregnant or postpartum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cocaine or sympathomimetic use",
+          "cells": [
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleroderma renal crisis",
+          "cells": [
+            {
+              "text": "Systemic sclerosis, AKI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TTP or HUS",
+          "cells": [
+            {
+              "text": "Microangiopathy with low platelets"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "htn_emergency-treatment",
+      "kind": "treatment",
+      "title": "Treatment of hypertensive emergency",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lower MAP by 20% to 25%",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over the first 1 to 2 h",
+              "range": [
+                20,
+                25
+              ]
+            },
+            {
+              "text": "{{hy:ICU with short-acting titratable IV drug; do not normalise urgently}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clevidipine",
+          "cells": [
+            {
+              "text": "Most emergencies"
+            },
+            {
+              "text": "Preferred over nitroprusside; care in acute HFrEF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nicardipine",
+          "cells": [
+            {
+              "text": "Postoperative hypertension, pregnancy"
+            },
+            {
+              "text": "Care in myocardial ischaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Labetalol",
+          "cells": [
+            {
+              "text": "Most emergencies including pregnancy"
+            },
+            {
+              "text": "Avoid in asthma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitroglycerin",
+          "cells": [
+            {
+              "text": "Myocardial ischaemia, acute heart failure, pulmonary oedema"
+            },
+            {
+              "text": "Preferred over nitroprusside in coronary disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Esmolol or beta-blocker with nitroprusside",
+          "cells": [
+            {
+              "text": "Aortic dissection"
+            },
+            {
+              "text": "Faster control needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitroprusside",
+          "unit": "mcg/kg/min",
+          "cells": [
+            {
+              "text": "Cyanide risk above 2 mcg/kg/min",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Check thiocyanate daily after 3 days; higher mortality than alternatives"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydralazine",
+          "cells": [
+            {
+              "text": "Eclampsia"
+            },
+            {
+              "text": "Pregnancy option"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Phentolamine",
+          "cells": [
+            {
+              "text": "Confirmed phaeochromocytoma"
+            },
+            {
+              "text": "Rarely used"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid oral nifedipine",
+          "cells": [
+            {
+              "text": "Any hypertensive crisis"
+            },
+            {
+              "text": "Precipitous hypotension"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Slow lowering",
+          "cells": [
+            {
+              "text": "Acute hypertensive retinopathy or stroke"
+            },
+            {
+              "text": "Abrupt drop risks optic disc or brain infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for secondary hypertension",
+          "cells": [
+            {
+              "text": "After control"
+            },
+            {
+              "text": "Renovascular disease is common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Drug doses are not stated in the source opened."
+    },
+    {
+      "id": "htn_emergency-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Blood pressure classification",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Systolic, mmHg",
+        "Diastolic, mmHg"
+      ],
+      "rows": [
+        {
+          "parameter": "Normal",
+          "cells": [
+            {
+              "text": "<120"
+            },
+            {
+              "text": "and <80"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prehypertension",
+          "cells": [
+            {
+              "text": "120 to 139"
+            },
+            {
+              "text": "or 80 to 89"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 1 hypertension",
+          "cells": [
+            {
+              "text": "140 to 159"
+            },
+            {
+              "text": "or 90 to 99"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 2 hypertension",
+          "cells": [
+            {
+              "text": "160 or higher"
+            },
+            {
+              "text": "or 100 or higher"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Isolated systolic hypertension",
+          "cells": [
+            {
+              "text": "140 or higher"
+            },
+            {
+              "text": "and <90"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "htn_emergency-treatment-2",
+      "kind": "treatment",
+      "title": "IV antihypertensive doses in hypertensive emergencies",
+      "rowHeader": "Option",
+      "columns": [
+        "Intravenous dose"
+      ],
+      "rows": [
+        {
+          "parameter": "Nitroprusside",
+          "cells": [
+            {
+              "text": "Initial 0.3 ug/kg/min; usual 2 to 4 ug/kg/min; maximum 10 ug/kg/min for 10 min"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Nicardipine",
+          "cells": [
+            {
+              "text": "Initial 5 mg/h; titrate by 2.5 mg/h at 5 to 15 min intervals; maximum 15 mg/h"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Labetalol",
+          "cells": [
+            {
+              "text": "2 mg/min up to 300 mg, or 20 mg over 2 min then 40 to 80 mg at 10-min intervals up to 300 mg total"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Esmolol",
+          "cells": [
+            {
+              "text": "Initial 80 to 500 ug/kg over 1 min, then 50 to 300 ug/kg/min"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Phentolamine",
+          "cells": [
+            {
+              "text": "5 to 15 mg bolus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Nitroglycerin",
+          "cells": [
+            {
+              "text": "Initial 5 ug/min, then titrate by 5 ug/min at 3 to 5 min intervals; if no response at 20 ug/min, increments of 10 to 20 ug/min may be used"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hydralazine",
+          "cells": [
+            {
+              "text": "10 to 50 mg at 30-min intervals"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The labetalol row is printed twice in the source. The asterisk footnote text was not shown on the printed page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "htn_emergency-dx-mgmt",
+      "title": "Assessment and management of severe hypertension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "BP >=180 systolic or >=120 diastolic",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Fundoscopy, ECG, urinalysis, creatinine, film; CT if neuro signs",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Acute target-organ damage?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Urgency: oral therapy and early follow-up",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Aortic dissection, eclampsia or phaeochromocytoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Rapid control with condition-specific IV drug",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Acute stroke?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Cautious lowering per stroke protocol",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "ICU: IV clevidipine, nicardipine or labetalol; MAP down 20% to 25%",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
         }
       ]
     }

@@ -1,178 +1,456 @@
 {
- "id": "collagenofibrotic_glomerulopathy",
- "name": "Collagenofibrotic Glomerulopathy",
- "aliases": [
-  "Collagen type III glomerulopathy",
-  "Collagenofibrotic glomerulonephropathy"
- ],
- "class": "non_infective",
- "system": "Renal / Glomerular",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Nephrology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare glomerular disorder defined by massive accumulation of type III collagen fibrils within the mesangium and subendothelial space of the glomerular basement membrane.",
-   "Characteristically presents with slowly progressive proteinuria, often nephrotic, with hypertension and gradual decline in renal function.",
-   "Serum levels of the aminoterminal propeptide of type III procollagen are markedly raised, providing a supportive circulating marker.",
-   "Distinct from nail-patella syndrome despite both showing glomerular collagen fibrils, as collagenofibrotic glomerulopathy lacks the nail, patellar and skeletal anomalies.",
-   "Both sporadic and familial forms are described, with some familial cases suggesting autosomal recessive inheritance.",
-   "Light microscopy shows enlarged glomeruli with a lobular, membranoproliferative-like appearance but immunofluorescence for immunoglobulins is typically negative.",
-   "Electron microscopy is diagnostic, revealing curved, frayed, banded collagen fibrils, best appreciated with phosphotungstic acid staining.",
-   "No specific therapy exists; management centres on supportive nephroprotection and control of blood pressure and proteinuria."
+  "id": "collagenofibrotic_glomerulopathy",
+  "name": "Collagenofibrotic Glomerulopathy",
+  "aliases": [
+    "Collagen type III glomerulopathy",
+    "Collagenofibrotic glomerulonephropathy"
   ],
-  "pathophysiology": "Collagenofibrotic glomerulopathy is characterised by abnormal deposition of atypical type III collagen fibrils within the glomerulus, predominantly in the subendothelial zone and mesangial matrix. Unlike normal collagen, these fibrils are laid down where they are not usually found and accumulate progressively, expanding the mesangium and thickening the capillary walls to produce a lobular, membranoproliferative-like architecture without true cellular proliferation. The circulating aminoterminal propeptide of type III procollagen is elevated, indicating dysregulated systemic type III collagen metabolism, although the precise defect in collagen synthesis, processing or clearance remains incompletely understood. Some familial clustering points to an inherited, likely autosomal recessive, disturbance of collagen handling, while sporadic cases also occur. The abundant fibrillar collagen distorts the filtration barrier and impairs glomerular haemodynamics, giving rise to progressive proteinuria and gradual loss of filtration capacity. Ultrastructurally the deposited fibrils are curved and frayed with a characteristic periodic banding, distinguishing the disorder from other fibrillary and collagen-related glomerulopathies.",
-  "additionalDifferentials": [
-   "Nail-patella syndrome (glomerular collagen fibrils with characteristic nail, patellar and skeletal features)",
-   "Fibrillary glomerulonephritis (Congo red negative fibrils, immunoglobulin positive)",
-   "Immunotactoid glomerulopathy (larger microtubular deposits)",
-   "Amyloidosis (Congo red positive fibrils)",
-   "Membranoproliferative glomerulonephritis",
-   "Diabetic nodular glomerulosclerosis",
-   "Idiopathic nodular glomerulosclerosis"
-  ],
-  "additionalInvestigations": [
-   "Renal biopsy with light microscopy, immunofluorescence and electron microscopy",
-   "Phosphotungstic acid and type III collagen immunostaining to highlight the fibrils",
-   "Serum aminoterminal propeptide of type III procollagen",
-   "Congo red staining to exclude amyloid",
-   "Quantification of proteinuria and serial renal function",
-   "Clinical and radiological assessment for nail, patellar and skeletal anomalies to exclude nail-patella syndrome",
-   "Family history and, where relevant, genetic evaluation"
-  ],
-  "redFlags": [
-   "Nephrotic-range proteinuria with progressive hypoalbuminaemia and oedema",
-   "Accelerating decline in renal function",
-   "Severe or resistant hypertension",
-   "Superimposed thrombotic microangiopathy in reported cases",
-   "Recurrence of proteinuria after kidney transplantation"
-  ],
-  "prognosis": "The disorder generally follows a slowly progressive course, with many patients advancing to kidney failure over years, although the rate is variable. Prognosis is worse with heavy persistent proteinuria and poorly controlled hypertension.",
-  "pitfalls": [
-   "Mistaking the lobular appearance for membranoproliferative glomerulonephritis without performing electron microscopy",
-   "Confusing the condition with nail-patella syndrome despite the absence of extrarenal features",
-   "Overlooking the diagnosis when immunofluorescence is negative and dismissing the biopsy as non-specific",
-   "Failing to use phosphotungstic acid or type III collagen staining to demonstrate the fibrils",
-   "Assuming immunosuppression will help, when management is essentially supportive"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology (standard reference)",
-   "Heptinstall's Pathology of the Kidney (standard reference)",
-   "Brenner and Rector's The Kidney (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control blood pressure",
-   "Optimise blood-pressure control to slow progression of chronic kidney disease",
-   "Supportive management of nephrotic-range proteinuria with dietary sodium restriction, diuretics for oedema and a statin for dyslipidaemia",
-   "Serial monitoring of proteinuria and renal function to track progression",
-   "Timely planning for renal replacement therapy by dialysis or transplantation as kidney function declines",
-   "Nephrology referral for biopsy-based diagnosis and coordination of care",
-   "Genetic counselling and family screening given the reported autosomal recessive familial forms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "collagenofibrotic_glomerulopathy-pathway",
-   "title": "Collagenofibrotic Glomerulopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare glomerular disorder defined by massive accumulation of type III collagen fibrils within the mesangium and subendothelial space of the glomerular basement membrane.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Nephrotic-range proteinuria with progressive hypoalbuminaemia and oedema",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal biopsy with light microscopy, immunofluorescence and electron microscopy, Phosphotungstic acid and type III collagen immunostaining to highlight the fibrils, Serum aminoterminal propeptide of type III procollagen"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control blood pressure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the lobular appearance for membranoproliferative glomerulonephritis without performing electron microscopy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of collagenofibrotic glomerulopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "collagenofibrotic_glomerulopathy-matrix",
-   "title": "Collagenofibrotic Glomerulopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare glomerular disorder defined by massive accumulation of type III collagen fibrils within the mesangium and subendothelial",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Glomerular",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nephrology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare glomerular disorder defined by massive accumulation of type III collagen fibrils within the mesangium and subendothelial space of the glomerular basement membrane.",
+      "Characteristically presents with slowly progressive proteinuria, often nephrotic, with hypertension and gradual decline in renal function.",
+      "Serum levels of the aminoterminal propeptide of type III procollagen are markedly raised, providing a supportive circulating marker.",
+      "Distinct from nail-patella syndrome despite both showing glomerular collagen fibrils, as collagenofibrotic glomerulopathy lacks the nail, patellar and skeletal anomalies.",
+      "Both sporadic and familial forms are described, with some familial cases suggesting autosomal recessive inheritance.",
+      "Light microscopy shows enlarged glomeruli with a lobular, membranoproliferative-like appearance but immunofluorescence for immunoglobulins is typically negative.",
+      "Electron microscopy is diagnostic, revealing curved, frayed, banded collagen fibrils, best appreciated with phosphotungstic acid staining.",
+      "No specific therapy exists; management centres on supportive nephroprotection and control of blood pressure and proteinuria."
     ],
-    [
-     "Key Investigations",
-     "Renal biopsy with light microscopy, immunofluorescence and electron microscopy, Phosphotungstic acid and type III collagen",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Collagenofibrotic glomerulopathy is characterised by abnormal deposition of atypical type III collagen fibrils within the glomerulus, predominantly in the subendothelial zone and mesangial matrix. Unlike normal collagen, these fibrils are laid down where they are not usually found and accumulate progressively, expanding the mesangium and thickening the capillary walls to produce a lobular, membranoproliferative-like architecture without true cellular proliferation. The circulating aminoterminal propeptide of type III procollagen is elevated, indicating dysregulated systemic type III collagen metabolism, although the precise defect in collagen synthesis, processing or clearance remains incompletely understood. Some familial clustering points to an inherited, likely autosomal recessive, disturbance of collagen handling, while sporadic cases also occur. The abundant fibrillar collagen distorts the filtration barrier and impairs glomerular haemodynamics, giving rise to progressive proteinuria and gradual loss of filtration capacity. Ultrastructurally the deposited fibrils are curved and frayed with a characteristic periodic banding, distinguishing the disorder from other fibrillary and collagen-related glomerulopathies.",
+    "additionalDifferentials": [
+      "Nail-patella syndrome (glomerular collagen fibrils with characteristic nail, patellar and skeletal features)",
+      "Fibrillary glomerulonephritis (Congo red negative fibrils, immunoglobulin positive)",
+      "Immunotactoid glomerulopathy (larger microtubular deposits)",
+      "Amyloidosis (Congo red positive fibrils)",
+      "Membranoproliferative glomerulonephritis",
+      "Diabetic nodular glomerulosclerosis",
+      "Idiopathic nodular glomerulosclerosis"
     ],
-    [
-     "Primary Differentials",
-     "Nail-patella syndrome (glomerular collagen fibrils with characteristic nail, patellar and skeletal features), Fibrillary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal biopsy with light microscopy, immunofluorescence and electron microscopy",
+      "Phosphotungstic acid and type III collagen immunostaining to highlight the fibrils",
+      "Serum aminoterminal propeptide of type III procollagen",
+      "Congo red staining to exclude amyloid",
+      "Quantification of proteinuria and serial renal function",
+      "Clinical and radiological assessment for nail, patellar and skeletal anomalies to exclude nail-patella syndrome",
+      "Family history and, where relevant, genetic evaluation"
     ],
-    [
-     "Management Strategy",
-     "Renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control blood",
-     "Core treatment modality"
+    "redFlags": [
+      "Nephrotic-range proteinuria with progressive hypoalbuminaemia and oedema",
+      "Accelerating decline in renal function",
+      "Severe or resistant hypertension",
+      "Superimposed thrombotic microangiopathy in reported cases",
+      "Recurrence of proteinuria after kidney transplantation"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the lobular appearance for membranoproliferative glomerulonephritis without performing electron microscopy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder generally follows a slowly progressive course, with many patients advancing to kidney failure over years, although the rate is variable. Prognosis is worse with heavy persistent proteinuria and poorly controlled hypertension.",
+    "pitfalls": [
+      "Mistaking the lobular appearance for membranoproliferative glomerulonephritis without performing electron microscopy",
+      "Confusing the condition with nail-patella syndrome despite the absence of extrarenal features",
+      "Overlooking the diagnosis when immunofluorescence is negative and dismissing the biopsy as non-specific",
+      "Failing to use phosphotungstic acid or type III collagen staining to demonstrate the fibrils",
+      "Assuming immunosuppression will help, when management is essentially supportive"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology (standard reference)",
+      "Heptinstall's Pathology of the Kidney (standard reference)",
+      "Brenner and Rector's The Kidney (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control blood pressure",
+      "Optimise blood-pressure control to slow progression of chronic kidney disease",
+      "Supportive management of nephrotic-range proteinuria with dietary sodium restriction, diuretics for oedema and a statin for dyslipidaemia",
+      "Serial monitoring of proteinuria and renal function to track progression",
+      "Timely planning for renal replacement therapy by dialysis or transplantation as kidney function declines",
+      "Nephrology referral for biopsy-based diagnosis and coordination of care",
+      "Genetic counselling and family screening given the reported autosomal recessive familial forms"
     ]
-   ],
-   "caption": "Overview comparison matrix for collagenofibrotic glomerulopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "collagenofibrotic-glomerulopathy-real-image",
-   "title": "Collagenofibrotic Glomerulopathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "collagenofibrotic_glomerulopathy-pathway",
+      "title": "Collagenofibrotic Glomerulopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare glomerular disorder defined by massive accumulation of type III collagen fibrils within the mesangium and subendothelial space of the glomerular basement membrane.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Nephrotic-range proteinuria with progressive hypoalbuminaemia and oedema",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal biopsy with light microscopy, immunofluorescence and electron microscopy, Phosphotungstic acid and type III collagen immunostaining to highlight the fibrils, Serum aminoterminal propeptide of type III procollagen"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control blood pressure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the lobular appearance for membranoproliferative glomerulonephritis without performing electron microscopy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of collagenofibrotic glomerulopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "collagenofibrotic_glomerulopathy-matrix",
+      "title": "Collagenofibrotic Glomerulopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare glomerular disorder defined by massive accumulation of type III collagen fibrils within the mesangium and subendothelial",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal biopsy with light microscopy, immunofluorescence and electron microscopy, Phosphotungstic acid and type III collagen",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nail-patella syndrome (glomerular collagen fibrils with characteristic nail, patellar and skeletal features), Fibrillary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control blood",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the lobular appearance for membranoproliferative glomerulonephritis without performing electron microscopy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for collagenofibrotic glomerulopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "collagenofibrotic_glomerulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy with electron microscopy",
+          "cells": [
+            {
+              "text": "Lobular appearance; EM needed to avoid confusion with MPGN"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum aminoterminal propeptide of type III procollagen",
+          "cells": [
+            {
+              "text": "Markedly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congo red staining",
+          "cells": [
+            {
+              "text": "Amyloid excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail, patellar and skeletal assessment",
+          "cells": [
+            {
+              "text": "Nail-patella syndrome excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenofibrotic_glomerulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nail-patella syndrome",
+          "cells": [
+            {
+              "text": "Nail, patellar and skeletal features; no extrarenal features in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrillary glomerulonephritis",
+          "cells": [
+            {
+              "text": "Congo red negative fibrils; immunoglobulin positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis",
+          "cells": [
+            {
+              "text": "Congo red positive fibrils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunotactoid glomerulopathy",
+          "cells": [
+            {
+              "text": "Larger microtubular deposits"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenofibrotic_glomerulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Renin-angiotensin blockade to reduce proteinuria and control blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "To slow progression of chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic-range proteinuria care",
+          "cells": [
+            {
+              "text": "Dietary sodium restriction, diuretics for oedema, statin for dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Proteinuria and renal function to track progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement planning",
+          "cells": [
+            {
+              "text": "Dialysis or transplantation as kidney function declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Reported autosomal recessive familial forms; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "collagenofibrotic_glomerulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Collagenofibrotic Glomerulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected collagenofibrotic glomerulopathy: slowly progressive nephrotic proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (accelerating decline, resistant hypertension, microangiopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review; check for superimposed thrombotic microangiopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal biopsy with EM, type III collagen stain, procollagen III propeptide, Congo red",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show type III collagen fibrils without amyloid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nail-patella syndrome, fibrillary GN, amyloidosis or immunotactoid GN",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACE inhibitor or ARB to reduce proteinuria and control blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary sodium restriction, diuretics and statin for nephrotic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial proteinuria and renal function monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Plan dialysis or transplantation as kidney function declines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually slowly progressive; many advance to kidney failure over years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

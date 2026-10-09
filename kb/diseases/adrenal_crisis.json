@@ -205,25 +205,483 @@
       "caption": "Diagnostic and clinical overview matrix for adrenal crisis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "adrenal-crisis-real-image",
-      "title": "Adrenal crisis: Diagnostic Renal Ultrasonography",
-      "type": "ultrasound",
-      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Addison Disease",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/adrenal-disorders/addison-disease",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adrenal_crisis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Laboratory clues and confirmatory tests in adrenal crisis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Renal Cortex",
-          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+          "parameter": "Serum sodium",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "<135",
+              "op": "<",
+              "value": 135
+            },
+            {
+              "text": "Suggests primary adrenal insufficiency"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Corticomedullary Junction",
-          "description": "Medullary pyramid definition and structural architecture."
+          "parameter": "Serum potassium",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": ">5",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Mineralocorticoid loss in primary disease"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Collecting System",
-          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+          "parameter": "Sodium:potassium ratio",
+          "cells": [
+            {
+              "text": "<30:1",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Supports primary adrenal insufficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fasting glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<50",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "Hypoglycaemia; treat at once"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bicarbonate",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "<15 to 20",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "Metabolic acidosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BUN",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">20",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Volume depletion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cortisol with ACTH",
+          "cells": [
+            {
+              "text": "Cortisol <5 mcg/dL with ACTH >=50 pg/mL"
+            },
+            {
+              "text": "{{hy:Diagnostic of primary adrenal insufficiency, especially in shock}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ACTH low",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "<5 pg/mL with low cortisol",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Suggests secondary insufficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Short cosyntropin test",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Peak <18 mcg/dL (<500 nmol/L) at 30 or 60 min",
+              "op": "<",
+              "value": 18
+            },
+            {
+              "text": "After recovery; 250 mcg IV or IM; cutoff is assay dependent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Baseline sample",
+          "cells": [
+            {
+              "text": "Draw cortisol and ACTH before steroids"
+            },
+            {
+              "text": "Testing must never delay treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other findings",
+          "cells": [
+            {
+              "text": "Normochromic anaemia, lymphocytosis, eosinophilia, raised creatinine"
+            },
+            {
+              "text": "Supportive only"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison quotes a stimulation cutoff of about 450 to 500 nmol/L (16 to 18 mcg/dL); Merck gives <18 mcg/dL with a range of 15 to 18 mcg/dL by assay."
+    },
+    {
+      "id": "adrenal_crisis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic adrenal crisis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic shock",
+          "cells": [
+            {
+              "text": "Infection source; also the commonest precipitant of crisis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypovolaemic or cardiogenic shock",
+          "cells": [
+            {
+              "text": "Clear volume loss or cardiac cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylactic or neurogenic shock",
+          "cells": [
+            {
+              "text": "Allergen exposure or spinal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute surgical abdomen",
+          "cells": [
+            {
+              "text": "{{hy:Abdominal pain, vomiting and fever can mimic it}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary neurological disease",
+          "cells": [
+            {
+              "text": "Falling responsiveness to coma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_crisis-treatment",
+      "kind": "treatment",
+      "title": "Emergency treatment of adrenal crisis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydrocortisone IV bolus",
+          "cells": [
+            {
+              "text": "{{hy:On suspicion, before results}}"
+            },
+            {
+              "text": "100 mg IV over 30 seconds"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydrocortisone repeat",
+          "cells": [
+            {
+              "text": "First 24 h"
+            },
+            {
+              "text": "100 mg IV every 6 to 8 h, or infusion 1 to 2 mg/h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "5% dextrose in 0.9% saline",
+          "cells": [
+            {
+              "text": "Immediate volume expansion"
+            },
+            {
+              "text": "1 L over 1 to 2 h, then 0.9% saline until BP, volume and sodium recover"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potassium replacement",
+          "cells": [
+            {
+              "text": "Potassium falls during rehydration"
+            },
+            {
+              "text": "Monitor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inotropes",
+          "cells": [
+            {
+              "text": "Hypotension before hydrocortisone acts"
+            },
+            {
+              "text": "BP should improve within about 1 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat precipitant",
+          "cells": [
+            {
+              "text": "Infection, trauma, surgery, salt loss"
+            },
+            {
+              "text": "Treat infection vigorously"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Taper",
+          "cells": [
+            {
+              "text": "Marked improvement"
+            },
+            {
+              "text": "150 mg total over second 24 h, then 75 mg on day 3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "After recovery"
+            },
+            {
+              "text": "Hydrocortisone 15 to 20 mg daily orally plus fludrocortisone 0.1 mg daily; fludrocortisone not needed on high-dose hydrocortisone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sick-day rules",
+          "cells": [
+            {
+              "text": "Intercurrent illness"
+            },
+            {
+              "text": "Double the dose; carry 100 mg injectable hydrocortisone and medical ID"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adrenal_crisis-dx-mgmt",
+      "title": "Diagnosis and management of adrenal crisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Shock, vomiting, abdominal pain or confusion; possible adrenal insufficiency",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Draw cortisol and ACTH; check Na, K, glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Hydrocortisone 100 mg IV now",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "1 L 5% dextrose in saline over 1 to 2 h, then saline",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "BP improving within about 1 h?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Inotropes; look for sepsis or other shock",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hydrocortisone 100 mg every 6 to 8 h; treat precipitant",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Recovered?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Taper; cosyntropin test; oral maintenance and sick-day rules",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Continue stress-dose hydrocortisone and ICU care",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
         }
       ]
     }

@@ -119,7 +119,7 @@
     ]
   },
   "review": {
-    "status": "approved",
+    "status": "ai_drafted",
     "reviewedBy": null,
     "reviewedAt": null
   },
@@ -341,6 +341,786 @@
         {
           "label": "Silhouette Sign",
           "description": "Loss of structural cardiac/diaphragmatic boundary where consolidation abuts the margin."
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c4",
+      "label": "CAP predisposing-factor/pathogen table, user-supplied low-resolution screenshot; source line not shown",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ATS/IDSA guideline, Community-acquired pneumonia in adults, 2019",
+      "url": "https://academic.oup.com/ajrccm/article/200/7/e45/8496962",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 257-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 257-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 147-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CAP-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and severity assessment in non-severe CAP",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Diagnostic standard",
+          "cells": [
+            {
+              "text": "Compatible clinical picture plus a new infiltrate on chest film"
+            },
+            {
+              "text": "Physical exam alone: sensitivity about 58%, specificity about 67%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CURB-65",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "1 point each: confusion, urea >7 mmol/L, RR >=30/min, SBP <=90 or DBP <=60 mmHg, age >=65"
+            },
+            {
+              "text": "0: outpatient (30-day mortality about 1.5%); 1 to 2: usually admit; >=3: mortality about 22%, consider ICU"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia Severity Index",
+          "cells": [
+            {
+              "text": "20 variables, classes 1 to 5 (mortality about 0.1% to 29.2%)",
+              "range": [
+                0.1,
+                29.2
+              ]
+            },
+            {
+              "text": "{{hy:Preferred over CURB-65 for site-of-care decision; classes 1 to 2 suit outpatient care}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Room-air oxygen saturation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "<92",
+              "op": "<",
+              "value": 92
+            },
+            {
+              "text": "Admit regardless of score"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe CAP (excludes this entry)",
+          "cells": [
+            {
+              "text": "1 major criterion or 3 or more minor criteria",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Major: vasopressors or mechanical ventilation. Minor include RR >=30, PaO2/FiO2 <=250, BUN >=20 mg/dL, platelets <100,000/uL, temperature <36 deg C"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sputum Gram stain and culture",
+          "cells": [
+            {
+              "text": "Not routine in outpatients"
+            },
+            {
+              "text": "Inpatients with severe CAP, MRSA or Pseudomonas risk, or IV antibiotics and admission in last 90 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adequate sputum specimen",
+          "cells": [
+            {
+              "text": ">25 neutrophils and <10 squamous cells per low-power field"
+            },
+            {
+              "text": "Otherwise the sample is unreliable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Yield about 5% to 14% in hospitalised CAP",
+              "range": [
+                5,
+                14
+              ]
+            },
+            {
+              "text": "Not for outpatients; not routine for non-severe inpatients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procalcitonin",
+          "cells": [
+            {
+              "text": "Any value"
+            },
+            {
+              "text": "Start antibiotics regardless of initial level"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Usual pathogens, outpatients",
+          "cells": [
+            {
+              "text": "S. pneumoniae, M. pneumoniae, H. influenzae, C. pneumoniae, respiratory viruses"
+            },
+            {
+              "text": "Non-ICU inpatients add Legionella"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "PSI and CURB-65 are not designed to decide ICU admission; use severe CAP criteria for that."
+    },
+    {
+      "id": "CAP-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic community-acquired pneumonia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute bronchitis",
+          "cells": [
+            {
+              "text": "Cough without consolidation or abnormal vital signs"
+            },
+            {
+              "text": "{{hy:Chest x-ray without a new infiltrate}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COPD or chronic bronchitis exacerbation",
+          "cells": [
+            {
+              "text": "Known COPD; airway rather than alveolar process"
+            },
+            {
+              "text": "Chest x-ray"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "Upper-lobe cavitating lesion"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure or pulmonary oedema",
+          "cells": [
+            {
+              "text": "Non-infectious mimic; consider when not improving"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism or infarction",
+          "cells": [
+            {
+              "text": "Non-infectious mimic of infiltrate"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung carcinoma",
+          "cells": [
+            {
+              "text": "Relapse or recurrence in the same segment"
+            },
+            {
+              "text": "CT chest for postobstructive pneumonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypersensitivity or radiation pneumonitis, connective tissue lung disease",
+          "cells": [
+            {
+              "text": "Fails to respond to antibiotics"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Separating tests marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "CAP-treatment",
+      "kind": "treatment",
+      "title": "Empiric antibiotics for non-severe CAP in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Macrolide or doxycycline",
+          "cells": [
+            {
+              "text": "Outpatient, previously healthy, no antibiotics in past 3 months"
+            },
+            {
+              "text": "Clarithromycin 500 mg PO twice daily, or azithromycin 500 mg PO once then 250 mg daily, or doxycycline 100 mg PO twice daily"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Amoxicillin",
+          "cells": [
+            {
+              "text": "{{hy:Outpatient, no comorbidity, no MRSA or Pseudomonas risk (ATS/IDSA 2019 first choice)}}"
+            },
+            {
+              "text": "1 g three times daily; 2019 limits macrolide monotherapy to areas with pneumococcal macrolide resistance <25%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Respiratory fluoroquinolone",
+          "cells": [
+            {
+              "text": "Outpatient with comorbidity or antibiotics in past 3 months"
+            },
+            {
+              "text": "Moxifloxacin 400 mg PO daily, gemifloxacin 320 mg PO daily or levofloxacin 750 mg PO daily"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Beta-lactam plus macrolide",
+          "cells": [
+            {
+              "text": "Outpatient with comorbidity or antibiotics in past 3 months (choose a class not recently used)"
+            },
+            {
+              "text": "Preferred high-dose amoxicillin 1 g three times daily or amoxicillin-clavulanate 2 g twice daily; alternatives ceftriaxone 1 to 2 g IV daily, cefpodoxime 200 mg PO twice daily, cefuroxime 500 mg PO twice daily; doxycycline 100 mg PO twice daily can replace the macrolide"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Respiratory fluoroquinolone",
+          "cells": [
+            {
+              "text": "Inpatient, non-ICU; also for penicillin allergy"
+            },
+            {
+              "text": "Moxifloxacin 400 mg PO or IV daily, gemifloxacin 320 mg PO daily or levofloxacin 750 mg PO or IV daily"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Beta-lactam plus macrolide",
+          "cells": [
+            {
+              "text": "Inpatient, non-ICU"
+            },
+            {
+              "text": "Cefotaxime 1 to 2 g IV every 8 h, ceftriaxone 1 to 2 g IV daily, ampicillin 1 to 2 g IV every 4 to 6 h or ertapenem 1 g IV daily (selected patients), plus oral clarithromycin or azithromycin or IV azithromycin 1 g once then 500 mg daily; doxycycline 100 mg IV every 12 h can replace the macrolide"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Beta-lactam plus doxycycline",
+          "cells": [
+            {
+              "text": "Inpatient with contraindication to both macrolides and fluoroquinolones"
+            },
+            {
+              "text": "Doxycycline 100 mg twice daily (conditional, low quality)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add CA-MRSA cover",
+          "cells": [
+            {
+              "text": "CA-MRSA is a consideration"
+            },
+            {
+              "text": "Linezolid 600 mg IV every 12 h or vancomycin 1 g IV every 12 h (ATS/IDSA 2019: vancomycin 15 mg/kg every 12 h)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Antipseudomonal beta-lactam plus ciprofloxacin or levofloxacin",
+          "cells": [
+            {
+              "text": "Pseudomonas is a consideration"
+            },
+            {
+              "text": "Piperacillin-tazobactam 4.5 g IV every 6 h, cefepime 1 to 2 g IV every 12 h, imipenem 500 mg IV every 6 h or meropenem 1 g IV every 8 h, plus ciprofloxacin 400 mg IV every 12 h or levofloxacin 750 mg IV daily"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Oseltamivir",
+          "cells": [
+            {
+              "text": "Influenza-positive CAP"
+            },
+            {
+              "text": "Inpatients strong, outpatients conditional; still give antibacterials"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Until clinically stable and no less than 5 days",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Stability: normal vitals, eating, normal mentation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Not routinely in non-severe CAP"
+            },
+            {
+              "text": "Strong recommendation against"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Tables PDF Table 257-4 (older guidance) lists a macrolide or doxycycline first for healthy outpatients; ATS/IDSA 2019 prefers amoxicillin and allows a macrolide only where pneumococcal macrolide resistance is <25%. The PDF defines high-level resistance as MIC >16 ug/mL in 25% of isolates. Vancomycin dose also differs between sources. Follow-up chest imaging: ATS/IDSA recommend against routine imaging, Harrison suggests a film about 4 to 6 weeks after hospitalisation."
+    },
+    {
+      "id": "CAP-treatment-2",
+      "kind": "treatment",
+      "title": "Empirical antibiotics for community-acquired pneumonia by setting",
+      "rowHeader": "Option",
+      "columns": [
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Outpatient, previously healthy, no antibiotics in past 3 months",
+          "cells": [
+            {
+              "text": "A macrolide (clarithromycin 500 mg PO bid, or azithromycin 500 mg PO once then 250 mg qd), or doxycycline 100 mg PO bid"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Outpatient, comorbidities or antibiotics in past 3 months (choose a different class)",
+          "cells": [
+            {
+              "text": "A respiratory fluoroquinolone (moxifloxacin 400 mg PO qd, gemifloxacin 320 mg PO qd, levofloxacin 750 mg PO qd), or a beta-lactam plus a macrolide (a). Beta-lactam preferred: high-dose amoxicillin 1 g tid or amoxicillin/clavulanate 2 g bid. Beta-lactam alternatives: ceftriaxone 1 to 2 g IV qd, cefpodoxime 200 mg PO bid, cefuroxime 500 mg PO bid"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Region with high rate of high-level pneumococcal macrolide resistance (b)",
+          "cells": [
+            {
+              "text": "Consider the alternatives listed for patients with comorbidities"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Inpatient, non-ICU",
+          "cells": [
+            {
+              "text": "A respiratory fluoroquinolone (moxifloxacin 400 mg PO or IV qd, gemifloxacin 320 mg PO qd, levofloxacin 750 mg PO or IV qd), or a beta-lactam (c) (cefotaxime 1 to 2 g IV q8h, ceftriaxone 1 to 2 g IV qd, ampicillin 1 to 2 g IV q4 to 6h, ertapenem 1 g IV qd in selected patients) plus a macrolide (d) (oral clarithromycin or azithromycin as above, or IV azithromycin 1 g once then 500 mg qd)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Inpatient, ICU",
+          "cells": [
+            {
+              "text": "A beta-lactam (e) (cefotaxime 1 to 2 g IV q8h, ceftriaxone 2 g IV qd, ampicillin-sulbactam 2 g IV q8h) plus azithromycin or a fluoroquinolone (as for non-ICU inpatients)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Special concern: Pseudomonas",
+          "cells": [
+            {
+              "text": "An antipneumococcal, antipseudomonal beta-lactam (piperacillin/tazobactam 4.5 g IV q6h, cefepime 1 to 2 g IV q12h, imipenem 500 mg IV q6h, meropenem 1 g IV q8h) plus ciprofloxacin 400 mg IV q12h or levofloxacin 750 mg IV qd; or the same beta-lactams plus an aminoglycoside (amikacin 15 mg/kg qd or tobramycin 1.7 mg/kg qd) and azithromycin; or the same beta-lactams (f) plus an aminoglycoside plus an antipneumococcal fluoroquinolone"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Special concern: CA-MRSA",
+          "cells": [
+            {
+              "text": "Add linezolid 600 mg IV q12h or vancomycin 1 g IV q12h"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "(a) Doxycycline 100 mg PO bid is an alternative to the macrolide. (b) MIC above 16 ug/mL in 25% of isolates. (c) Use a respiratory fluoroquinolone for penicillin-allergic patients. (d) Doxycycline 100 mg IV q12h is an alternative to the macrolide. (e) For penicillin allergy use a respiratory fluoroquinolone and aztreonam 2 g IV q8h. (f) Text not shown on the printed page."
+    },
+    {
+      "id": "CAP-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Clinical clues suggestive of Legionnaires' disease",
+      "rowHeader": "Clue",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Diarrhea",
+          "cells": [
+            {
+              "text": "Clinical clue"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "High fever",
+          "cells": [
+            {
+              "text": "Above 40 deg C (104 deg F)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Sputum Gram stain",
+          "cells": [
+            {
+              "text": "Numerous neutrophils but no organisms seen on Gram's stain of respiratory secretions"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Hyponatremia",
+          "cells": [
+            {
+              "text": "Serum sodium <131 (unit printed in the source as mg/dL)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Treatment failure",
+          "cells": [
+            {
+              "text": "No response to beta-lactam drugs (penicillins or cephalosporins) and aminoglycosides"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Environmental exposure",
+          "cells": [
+            {
+              "text": "Illness in an environment where the potable water supply is known to be contaminated with Legionella"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Recent hospitalization",
+          "cells": [
+            {
+              "text": "Symptom onset within 10 days after hospital discharge"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CAP-dx-mgmt",
+      "title": "Diagnosis and management of community-acquired pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cough with fever, crackles or pleuritic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New infiltrate on chest x-ray?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Consider bronchitis or other mimic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Severe CAP: 1 major or 3 or more minor criteria?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Manage as severe CAP in ICU or high-dependency care",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "PSI class 1 to 2 (or CURB-65 0) and SpO2 92% or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Comorbidity present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Amoxicillin 1 g three times daily or doxycycline 100 mg twice daily",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-lactam plus macrolide or doxycycline, or respiratory fluoroquinolone",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Admit; beta-lactam plus macrolide or fluoroquinolone alone",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "MRSA or Pseudomonas risk factors?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Add MRSA or Pseudomonas cover; send sputum and blood cultures",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "decision",
+          "text": "Not improving by about day 3?",
+          "cite": "c1"
+        },
+        {
+          "id": "n14",
+          "type": "action",
+          "text": "Reassess for resistant organism, empyema, abscess or mimic",
+          "cite": "c1"
+        },
+        {
+          "id": "n15",
+          "type": "outcome",
+          "text": "Treat at least 5 days and until clinically stable",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes, outpatient"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "No, admit"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Yes"
+        },
+        {
+          "from": "n13",
+          "to": "n15",
+          "label": "No"
+        },
+        {
+          "from": "n14",
+          "to": "n15",
+          "label": "Next"
         }
       ]
     }

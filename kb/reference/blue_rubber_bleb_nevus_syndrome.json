@@ -1,176 +1,235 @@
 {
- "id": "blue_rubber_bleb_nevus_syndrome",
- "name": "Blue rubber bleb naevus syndrome",
- "aliases": [
-  "BRBNS",
-  "Bean syndrome",
-  "TEK/TIE2-associated multifocal venous malformation",
-  "blue rubber bleb naevus syndrome",
-  "blue rubber bleb nevus syndrome"
- ],
- "class": "non_infective",
- "system": "Vascular anomalies / Dermatology",
- "specialty": "Vascular Anomalies",
- "referenceOnly": true,
- "reference": {
-  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by multifocal venous malformations of the skin and gastrointestinal tract rather than a single lesion",
-   "Cutaneous lesions are soft, compressible, blue-to-purple rubbery nodules that refill after being emptied and may be tender or sweat-associated",
-   "The gastrointestinal venous malformations, most numerous in the small bowel, are the major source of morbidity through chronic occult bleeding and iron-deficiency anaemia",
-   "Acute or life-threatening haemorrhage, intussusception and volvulus are recognised complications of the bowel lesions",
-   "Somatic activating variants in TEK (TIE2) are implicated, and most cases are sporadic",
-   "Lesions are venous malformations (slow-flow) in the ISSVA scheme, not tumours, and are GLUT1-negative",
-   "Localised intravascular coagulopathy with a raised D-dimer can accompany extensive venous malformations",
-   "Management is multidisciplinary and often includes sirolimus for extensive or bleeding disease, endoscopic or surgical treatment of bowel lesions, sclerotherapy for symptomatic cutaneous lesions and iron replacement"
+  "id": "blue_rubber_bleb_nevus_syndrome",
+  "name": "Blue rubber bleb naevus syndrome",
+  "aliases": [
+    "BRBNS",
+    "Bean syndrome",
+    "TEK/TIE2-associated multifocal venous malformation",
+    "blue rubber bleb naevus syndrome",
+    "blue rubber bleb nevus syndrome"
   ],
-  "pathophysiology": "Blue rubber bleb naevus syndrome is a disorder of multifocal slow-flow venous malformations affecting the skin and, characteristically, the gastrointestinal tract. The malformations consist of ectatic, thin-walled venous channels lined by quiescent endothelium, and somatic activating changes in the TEK (TIE2) receptor tyrosine kinase pathway drive their formation. Because venous channels can trap and consume clotting factors, extensive lesions may produce a localised intravascular coagulopathy. Bowel lesions bleed chronically, leading to iron-deficiency anaemia, and can rarely precipitate acute haemorrhage or mechanical complications.",
-  "additionalDifferentials": [
-   "Isolated sporadic venous malformation",
-   "Hereditary haemorrhagic telangiectasia (Osler-Weber-Rendu)",
-   "Maffucci syndrome (venous malformations with enchondromas)",
-   "Glomuvenous malformation",
-   "Multifocal lymphatic or venolymphatic malformations",
-   "Gastrointestinal angiodysplasia"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and iron studies to quantify chronic blood loss anaemia",
-   "Coagulation screen including D-dimer and fibrinogen for localised intravascular coagulopathy",
-   "MRI to map the extent and depth of venous malformations",
-   "Upper and lower gastrointestinal endoscopy and capsule endoscopy for small-bowel lesions",
-   "Faecal occult blood testing to document gastrointestinal loss",
-   "Histopathology when the diagnosis is uncertain"
-  ],
-  "redFlags": [
-   "Acute gastrointestinal haemorrhage with haemodynamic compromise",
-   "Symptoms of intussusception or volvulus (obstruction, severe abdominal pain)",
-   "Symptomatic anaemia from ongoing occult blood loss",
-   "Evidence of consumptive or localised intravascular coagulopathy",
-   "Rapid lesion enlargement or new neurological signs suggesting central nervous system involvement"
-  ],
-  "prognosis": "Cutaneous lesions are largely a cosmetic and comfort issue, but gastrointestinal disease often requires lifelong management of anaemia and recurrent bleeding; with iron replacement, medical therapy and targeted endoscopic or surgical treatment most patients do well, though extensive bowel involvement can be difficult to control.",
-  "pitfalls": [
-   "Regarding the condition as a purely cutaneous naevus and failing to investigate the gastrointestinal tract",
-   "Missing small-bowel lesions because they lie beyond the reach of standard endoscopy",
-   "Overlooking localised intravascular coagulopathy before intervention",
-   "Attributing anaemia to another cause and delaying evaluation of occult bleeding"
-  ],
-  "references": [
-   "ISSVA Classification of Vascular Anomalies",
-   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Sirolimus (an mTOR inhibitor) as targeted medical therapy to control bleeding and reduce lesion burden",
-   "Iron replacement and transfusion for the chronic gastrointestinal bleeding and iron-deficiency anaemia",
-   "Endoscopic ablation or resection (sclerotherapy, band ligation, argon plasma coagulation) and surgical resection of dominant small-bowel lesions",
-   "Monitor for and manage localised intravascular coagulopathy with a coagulation screen, D-dimer and fibrinogen, using low-molecular-weight heparin where indicated",
-   "Urgent surgical intervention for acute complications such as life-threatening haemorrhage, intussusception or volvulus",
-   "Coordinated care through a multidisciplinary vascular anomalies service with long-term surveillance of anaemia and bleeding"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "blue_rubber_bleb_nevus_syndrome-pathway",
-   "title": "Blue rubber bleb naevus syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by multifocal venous malformations of the skin and gastrointestinal tract rather than a single lesion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute gastrointestinal haemorrhage with haemodynamic compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and iron studies to quantify chronic blood loss anaemia, Coagulation screen including D-dimer and fibrinogen for localised intravascular coagulopathy, MRI to map the extent and depth of venous malformations"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Sirolimus (an mTOR inhibitor) as targeted medical therapy to control bleeding and reduce lesion burden"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regarding the condition as a purely cutaneous naevus and failing to investigate the gastrointestinal tract"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of blue rubber bleb naevus syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "blue_rubber_bleb_nevus_syndrome-matrix",
-   "title": "Blue rubber bleb naevus syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by multifocal venous malformations of the skin and gastrointestinal tract rather than a single lesion",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular anomalies / Dermatology",
+  "specialty": "Vascular Anomalies",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by multifocal venous malformations of the skin and gastrointestinal tract rather than a single lesion",
+      "Cutaneous lesions are soft, compressible, blue-to-purple rubbery nodules that refill after being emptied and may be tender or sweat-associated",
+      "The gastrointestinal venous malformations, most numerous in the small bowel, are the major source of morbidity through chronic occult bleeding and iron-deficiency anaemia",
+      "Acute or life-threatening haemorrhage, intussusception and volvulus are recognised complications of the bowel lesions",
+      "Somatic activating variants in TEK (TIE2) are implicated, and most cases are sporadic",
+      "Lesions are venous malformations (slow-flow) in the ISSVA scheme, not tumours, and are GLUT1-negative",
+      "Localised intravascular coagulopathy with a raised D-dimer can accompany extensive venous malformations",
+      "Management is multidisciplinary and often includes sirolimus for extensive or bleeding disease, endoscopic or surgical treatment of bowel lesions, sclerotherapy for symptomatic cutaneous lesions and iron replacement"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and iron studies to quantify chronic blood loss anaemia, Coagulation screen including D-dimer and fibrinogen for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Blue rubber bleb naevus syndrome is a disorder of multifocal slow-flow venous malformations affecting the skin and, characteristically, the gastrointestinal tract. The malformations consist of ectatic, thin-walled venous channels lined by quiescent endothelium, and somatic activating changes in the TEK (TIE2) receptor tyrosine kinase pathway drive their formation. Because venous channels can trap and consume clotting factors, extensive lesions may produce a localised intravascular coagulopathy. Bowel lesions bleed chronically, leading to iron-deficiency anaemia, and can rarely precipitate acute haemorrhage or mechanical complications.",
+    "additionalDifferentials": [
+      "Isolated sporadic venous malformation",
+      "Hereditary haemorrhagic telangiectasia (Osler-Weber-Rendu)",
+      "Maffucci syndrome (venous malformations with enchondromas)",
+      "Glomuvenous malformation",
+      "Multifocal lymphatic or venolymphatic malformations",
+      "Gastrointestinal angiodysplasia"
     ],
-    [
-     "Primary Differentials",
-     "Isolated sporadic venous malformation, Hereditary haemorrhagic telangiectasia (Osler-Weber-Rendu), Maffucci syndrome (venous",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and iron studies to quantify chronic blood loss anaemia",
+      "Coagulation screen including D-dimer and fibrinogen for localised intravascular coagulopathy",
+      "MRI to map the extent and depth of venous malformations",
+      "Upper and lower gastrointestinal endoscopy and capsule endoscopy for small-bowel lesions",
+      "Faecal occult blood testing to document gastrointestinal loss",
+      "Histopathology when the diagnosis is uncertain"
     ],
-    [
-     "Management Strategy",
-     "Sirolimus (an mTOR inhibitor) as targeted medical therapy to control bleeding and reduce lesion burden",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute gastrointestinal haemorrhage with haemodynamic compromise",
+      "Symptoms of intussusception or volvulus (obstruction, severe abdominal pain)",
+      "Symptomatic anaemia from ongoing occult blood loss",
+      "Evidence of consumptive or localised intravascular coagulopathy",
+      "Rapid lesion enlargement or new neurological signs suggesting central nervous system involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Regarding the condition as a purely cutaneous naevus and failing to investigate the gastrointestinal tract",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cutaneous lesions are largely a cosmetic and comfort issue, but gastrointestinal disease often requires lifelong management of anaemia and recurrent bleeding; with iron replacement, medical therapy and targeted endoscopic or surgical treatment most patients do well, though extensive bowel involvement can be difficult to control.",
+    "pitfalls": [
+      "Regarding the condition as a purely cutaneous naevus and failing to investigate the gastrointestinal tract",
+      "Missing small-bowel lesions because they lie beyond the reach of standard endoscopy",
+      "Overlooking localised intravascular coagulopathy before intervention",
+      "Attributing anaemia to another cause and delaying evaluation of occult bleeding"
+    ],
+    "references": [
+      "ISSVA Classification of Vascular Anomalies",
+      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Sirolimus (an mTOR inhibitor) as targeted medical therapy to control bleeding and reduce lesion burden",
+      "Iron replacement and transfusion for the chronic gastrointestinal bleeding and iron-deficiency anaemia",
+      "Endoscopic ablation or resection (sclerotherapy, band ligation, argon plasma coagulation) and surgical resection of dominant small-bowel lesions",
+      "Monitor for and manage localised intravascular coagulopathy with a coagulation screen, D-dimer and fibrinogen, using low-molecular-weight heparin where indicated",
+      "Urgent surgical intervention for acute complications such as life-threatening haemorrhage, intussusception or volvulus",
+      "Coordinated care through a multidisciplinary vascular anomalies service with long-term surveillance of anaemia and bleeding"
     ]
-   ],
-   "caption": "Overview comparison matrix for blue rubber bleb naevus syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "blue-rubber-bleb-nevus-syndrome-real-image",
-   "title": "Blue rubber bleb naevus syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "blue_rubber_bleb_nevus_syndrome-pathway",
+      "title": "Blue rubber bleb naevus syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by multifocal venous malformations of the skin and gastrointestinal tract rather than a single lesion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute gastrointestinal haemorrhage with haemodynamic compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and iron studies to quantify chronic blood loss anaemia, Coagulation screen including D-dimer and fibrinogen for localised intravascular coagulopathy, MRI to map the extent and depth of venous malformations"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Sirolimus (an mTOR inhibitor) as targeted medical therapy to control bleeding and reduce lesion burden"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regarding the condition as a purely cutaneous naevus and failing to investigate the gastrointestinal tract"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of blue rubber bleb naevus syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "blue_rubber_bleb_nevus_syndrome-matrix",
+      "title": "Blue rubber bleb naevus syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by multifocal venous malformations of the skin and gastrointestinal tract rather than a single lesion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and iron studies to quantify chronic blood loss anaemia, Coagulation screen including D-dimer and fibrinogen for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated sporadic venous malformation, Hereditary haemorrhagic telangiectasia (Osler-Weber-Rendu), Maffucci syndrome (venous",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Sirolimus (an mTOR inhibitor) as targeted medical therapy to control bleeding and reduce lesion burden",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regarding the condition as a purely cutaneous naevus and failing to investigate the gastrointestinal tract",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for blue rubber bleb naevus syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blue_rubber_bleb_nevus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in blue rubber bleb naevus syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Full blood count and iron studies", "cells": [{"text": "Chronic blood-loss anaemia"}], "cite": "c1"},
+        {"parameter": "Coagulation screen with D-dimer and fibrinogen", "cells": [{"text": "Localised intravascular coagulopathy"}], "cite": "c1"},
+        {"parameter": "MRI", "cells": [{"text": "Extent and depth of the venous malformations"}], "cite": "c1"},
+        {"parameter": "Upper and lower endoscopy and capsule endoscopy", "cells": [{"text": "Small-bowel lesions"}], "cite": "c1"},
+        {"parameter": "Faecal occult blood testing", "cells": [{"text": "Gastrointestinal blood loss"}], "cite": "c1"},
+        {"parameter": "Histopathology", "cells": [{"text": "When the diagnosis is uncertain"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blue_rubber_bleb_nevus_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike vascular anomalies",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Maffucci syndrome", "cells": [{"text": "Venous malformations with enchondromas; enchondromas are not part of this syndrome"}], "cite": "c1"},
+        {"parameter": "Multifocal lymphatic or venolymphatic malformations", "cells": [{"text": "Lesions here are slow-flow venous malformations, not lymphatic"}], "cite": "c1"},
+        {"parameter": "Isolated sporadic venous malformation", "cells": [{"text": "Multifocal skin and gastrointestinal lesions rather than a single lesion"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blue_rubber_bleb_nevus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in blue rubber bleb naevus syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Sirolimus", "cells": [{"text": "Sirolimus, an mTOR inhibitor, to control bleeding and reduce lesion burden"}, {"text": "For extensive or bleeding disease"}], "cite": "c1"},
+        {"parameter": "Iron replacement and transfusion", "cells": [{"text": "Iron replacement and transfusion for chronic bleeding and anaemia"}, {"text": "Iron-deficiency anaemia"}], "cite": "c1"},
+        {"parameter": "Endoscopic or surgical treatment", "cells": [{"text": "Sclerotherapy, band ligation or argon plasma coagulation; surgical resection of dominant small-bowel lesions"}, {"text": "Bowel lesions"}], "cite": "c1"},
+        {"parameter": "Coagulopathy", "cells": [{"text": "Monitor with D-dimer and fibrinogen; low-molecular-weight heparin where indicated"}, {"text": "Localised intravascular coagulopathy"}], "cite": "c1"},
+        {"parameter": "Acute complications", "cells": [{"text": "Urgent surgery for life-threatening haemorrhage, intussusception or volvulus"}, {"text": "Emergency"}], "cite": "c1"},
+        {"parameter": "Cutaneous lesions", "cells": [{"text": "Sclerotherapy for symptomatic cutaneous lesions"}, {"text": "Symptomatic only"}], "cite": "c1"},
+        {"parameter": "Vascular anomalies service", "cells": [{"text": "Multidisciplinary care with long-term surveillance of anaemia and bleeding"}, {"text": "Ongoing"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blue_rubber_bleb_nevus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of blue rubber bleb naevus syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Soft blue rubbery skin nodules with chronic occult bleeding and iron-deficiency anaemia", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: acute haemorrhage, intussusception or volvulus, or consumptive coagulopathy?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent resuscitation and surgical review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "FBC, iron studies, D-dimer, fibrinogen; faecal occult blood", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "MRI for extent; upper, lower and capsule endoscopy for small-bowel lesions", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Multifocal venous malformations confirmed with gastrointestinal lesions?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Iron replacement; sirolimus for bleeding; endoscopic ablation of dominant lesions", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider Maffucci syndrome, lymphatic malformation or angiodysplasia", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Most do well with iron and targeted treatment; extensive bowel disease is hard to control", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

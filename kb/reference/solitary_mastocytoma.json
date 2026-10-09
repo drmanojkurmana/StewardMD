@@ -1,167 +1,436 @@
 {
- "id": "solitary_mastocytoma",
- "name": "Solitary mastocytoma",
- "aliases": [
-  "mastocytoma of skin"
- ],
- "class": "non_infective",
- "system": "Skin",
- "specialty": "Dermatology / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Dermatology references / mastocytosis literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A solitary (or few) cutaneous accumulation of mast cells, usually appearing in infancy",
-   "Presents as a single red-brown or yellowish plaque or nodule, sometimes with a peau d'orange surface",
-   "Stroking produces urtication and can cause blistering in infants (a strong Darier sign)",
-   "Vigorous rubbing may provoke flushing from localised mediator release",
-   "It is benign and typically regresses spontaneously during childhood",
-   "Management is conservative with reassurance and trigger avoidance; systemic disease is rare with a solitary lesion"
+  "id": "solitary_mastocytoma",
+  "name": "Solitary mastocytoma",
+  "aliases": [
+    "mastocytoma of skin"
   ],
-  "pathophysiology": "A solitary mastocytoma is a localised benign collection of mast cells within the skin, part of the cutaneous mastocytosis spectrum. Mechanical stimulation degranulates the concentrated mast cells, releasing histamine and other mediators to produce a brisk weal-and-flare and, in infants, blistering. Because the mast cell burden is limited to a small area, systemic mediator effects are uncommon, and the lesion generally involutes as the child grows.",
-  "additionalDifferentials": [
-   "Juvenile xanthogranuloma",
-   "Spitz naevus",
-   "Congenital melanocytic naevus",
-   "Other cutaneous mastocytosis",
-   "Insect bite reaction"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis with a positive Darier sign",
-   "Skin biopsy where the diagnosis is uncertain",
-   "Baseline tryptase if multiple lesions or systemic features",
-   "Reassurance and monitoring for spontaneous regression",
-   "Trigger history"
-  ],
-  "redFlags": [
-   "Multiple lesions or systemic symptoms suggesting broader mastocytosis",
-   "Marked flushing or hypotension on stimulation",
-   "Atypical features suggesting an alternative diagnosis",
-   "Persistence or growth into later childhood"
-  ],
-  "prognosis": "The prognosis is excellent, with most solitary mastocytomas regressing spontaneously during childhood and rarely causing systemic problems.",
-  "pitfalls": [
-   "Provoking blistering or flushing by vigorously rubbing the lesion",
-   "Confusing it with a melanocytic or xanthogranulomatous lesion",
-   "Assuming systemic disease from a single lesion",
-   "Unnecessary excision of a self-limiting lesion"
-  ],
-  "references": [
-   "Dermatology reference texts (standard reference)",
-   "Mastocytosis clinical guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative management with reassurance, since most solitary mastocytomas involute spontaneously during childhood",
-   "Advise avoidance of mast-cell degranulating triggers such as friction, temperature extremes and drugs like NSAIDs and opioids",
-   "Oral H1-antihistamines to control pruritus, flushing and urtication from local mediator release",
-   "Topical corticosteroids for symptomatic or blistering lesions",
-   "Reserve surgical excision for persistent, troublesome or diagnostically uncertain lesions",
-   "Monitor for spontaneous regression and review if additional lesions or systemic mediator symptoms emerge"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "solitary_mastocytoma-pathway",
-   "title": "Solitary mastocytoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A solitary (or few) cutaneous accumulation of mast cells, usually appearing in infancy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Multiple lesions or systemic symptoms suggesting broader mastocytosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis with a positive Darier sign, Skin biopsy where the diagnosis is uncertain, Baseline tryptase if multiple lesions or systemic features"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative management with reassurance, since most solitary mastocytomas involute spontaneously during childhood"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Provoking blistering or flushing by vigorously rubbing the lesion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of solitary mastocytoma."
-  }
- ],
- "tables": [
-  {
-   "id": "solitary_mastocytoma-matrix",
-   "title": "Solitary mastocytoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A solitary (or few) cutaneous accumulation of mast cells, usually appearing in infancy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin",
+  "specialty": "Dermatology / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dermatology references / mastocytosis literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A solitary (or few) cutaneous accumulation of mast cells, usually appearing in infancy",
+      "Presents as a single red-brown or yellowish plaque or nodule, sometimes with a peau d'orange surface",
+      "Stroking produces urtication and can cause blistering in infants (a strong Darier sign)",
+      "Vigorous rubbing may provoke flushing from localised mediator release",
+      "It is benign and typically regresses spontaneously during childhood",
+      "Management is conservative with reassurance and trigger avoidance; systemic disease is rare with a solitary lesion"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis with a positive Darier sign, Skin biopsy where the diagnosis is uncertain, Baseline tryptase if multiple",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A solitary mastocytoma is a localised benign collection of mast cells within the skin, part of the cutaneous mastocytosis spectrum. Mechanical stimulation degranulates the concentrated mast cells, releasing histamine and other mediators to produce a brisk weal-and-flare and, in infants, blistering. Because the mast cell burden is limited to a small area, systemic mediator effects are uncommon, and the lesion generally involutes as the child grows.",
+    "additionalDifferentials": [
+      "Juvenile xanthogranuloma",
+      "Spitz naevus",
+      "Congenital melanocytic naevus",
+      "Other cutaneous mastocytosis",
+      "Insect bite reaction"
     ],
-    [
-     "Primary Differentials",
-     "Juvenile xanthogranuloma, Spitz naevus, Congenital melanocytic naevus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis with a positive Darier sign",
+      "Skin biopsy where the diagnosis is uncertain",
+      "Baseline tryptase if multiple lesions or systemic features",
+      "Reassurance and monitoring for spontaneous regression",
+      "Trigger history"
     ],
-    [
-     "Management Strategy",
-     "Conservative management with reassurance, since most solitary mastocytomas involute spontaneously during childhood",
-     "Core treatment modality"
+    "redFlags": [
+      "Multiple lesions or systemic symptoms suggesting broader mastocytosis",
+      "Marked flushing or hypotension on stimulation",
+      "Atypical features suggesting an alternative diagnosis",
+      "Persistence or growth into later childhood"
     ],
-    [
-     "Clinical Pitfall",
-     "Provoking blistering or flushing by vigorously rubbing the lesion",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent, with most solitary mastocytomas regressing spontaneously during childhood and rarely causing systemic problems.",
+    "pitfalls": [
+      "Provoking blistering or flushing by vigorously rubbing the lesion",
+      "Confusing it with a melanocytic or xanthogranulomatous lesion",
+      "Assuming systemic disease from a single lesion",
+      "Unnecessary excision of a self-limiting lesion"
+    ],
+    "references": [
+      "Dermatology reference texts (standard reference)",
+      "Mastocytosis clinical guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative management with reassurance, since most solitary mastocytomas involute spontaneously during childhood",
+      "Advise avoidance of mast-cell degranulating triggers such as friction, temperature extremes and drugs like NSAIDs and opioids",
+      "Oral H1-antihistamines to control pruritus, flushing and urtication from local mediator release",
+      "Topical corticosteroids for symptomatic or blistering lesions",
+      "Reserve surgical excision for persistent, troublesome or diagnostically uncertain lesions",
+      "Monitor for spontaneous regression and review if additional lesions or systemic mediator symptoms emerge"
     ]
-   ],
-   "caption": "Overview comparison matrix for solitary mastocytoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "solitary-mastocytoma-real-image",
-   "title": "Solitary mastocytoma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "solitary_mastocytoma-pathway",
+      "title": "Solitary mastocytoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A solitary (or few) cutaneous accumulation of mast cells, usually appearing in infancy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Multiple lesions or systemic symptoms suggesting broader mastocytosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis with a positive Darier sign, Skin biopsy where the diagnosis is uncertain, Baseline tryptase if multiple lesions or systemic features"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative management with reassurance, since most solitary mastocytomas involute spontaneously during childhood"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Provoking blistering or flushing by vigorously rubbing the lesion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of solitary mastocytoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "solitary_mastocytoma-matrix",
+      "title": "Solitary mastocytoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A solitary (or few) cutaneous accumulation of mast cells, usually appearing in infancy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis with a positive Darier sign, Skin biopsy where the diagnosis is uncertain, Baseline tryptase if multiple",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Juvenile xanthogranuloma, Spitz naevus, Congenital melanocytic naevus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative management with reassurance, since most solitary mastocytomas involute spontaneously during childhood",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Provoking blistering or flushing by vigorously rubbing the lesion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for solitary mastocytoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references / mastocytosis literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "solitary_mastocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis with a positive Darier sign",
+          "cells": [
+            {
+              "text": "Urtication on stroking, with blistering in infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline tryptase",
+          "cells": [
+            {
+              "text": "Multiple lesions or systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for spontaneous regression",
+          "cells": [
+            {
+              "text": "Expected course in childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger history",
+          "cells": [
+            {
+              "text": "Degranulation triggers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "solitary_mastocytoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Juvenile xanthogranuloma",
+          "cells": [
+            {
+              "text": "A xanthogranulomatous lesion that can be confused with it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spitz naevus",
+          "cells": [
+            {
+              "text": "A melanocytic lesion that can be confused with it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "solitary_mastocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Most involute spontaneously during childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Friction, temperature extremes, NSAIDs and opioids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "H1-antihistamines",
+          "cells": [
+            {
+              "text": "Pruritus, flushing and urtication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Symptomatic or blistering lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Persistent, troublesome or diagnostically uncertain lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Review if more lesions or systemic symptoms appear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "solitary_mastocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Solitary mastocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Single plaque with urtication on stroking in infancy: suspected mastocytoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (multiple lesions, systemic symptoms, persistence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Systemic mastocytosis work-up with baseline tryptase",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical Darier sign; skin biopsy if uncertain; tryptase if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a positive Darier sign present with a single lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider juvenile xanthogranuloma, Spitz naevus or other mastocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance; most regress spontaneously in childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid friction, temperature extremes, NSAIDs and opioids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "H1-antihistamines for pruritus and urtication",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical steroid for blistering; excision if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually regresses in childhood; systemic disease is rare with a solitary lesion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

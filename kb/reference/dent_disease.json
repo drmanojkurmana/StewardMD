@@ -1,176 +1,474 @@
 {
- "id": "dent_disease",
- "name": "Dent disease",
- "aliases": [
-  "Dent's disease",
-  "X-linked recessive nephrolithiasis",
-  "CLCN5",
-  "OCRL",
-  "Dent disease type 1 and type 2"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked proximal tubulopathy affecting mainly males, caused by variants in CLCN5 (Dent disease 1) or OCRL (Dent disease 2)",
-   "The defining feature is low-molecular-weight proteinuria, which is often the earliest and most consistent abnormality",
-   "Hypercalciuria is characteristic and drives nephrocalcinosis and recurrent nephrolithiasis",
-   "Additional proximal tubular dysfunction may include phosphaturia, aminoaciduria, glycosuria and impaired urinary acidification, at times amounting to a partial Fanconi syndrome",
-   "Progressive chronic kidney disease develops in many affected males, sometimes reaching kidney failure in adulthood",
-   "Dent disease 2 (OCRL) can show mild extrarenal features overlapping with Lowe syndrome, such as subclinical cataract or mild cognitive involvement",
-   "Female carriers may have milder manifestations such as low-molecular-weight proteinuria or hypercalciuria"
+  "id": "dent_disease",
+  "name": "Dent disease",
+  "aliases": [
+    "Dent's disease",
+    "X-linked recessive nephrolithiasis",
+    "CLCN5",
+    "OCRL",
+    "Dent disease type 1 and type 2"
   ],
-  "pathophysiology": "Dent disease is an inherited disorder of the renal proximal tubule caused by loss of function of the endosomal chloride/proton exchanger encoded by CLCN5, or of the phosphatase encoded by OCRL. Both proteins are required for normal acidification and trafficking within the endocytic machinery that reabsorbs filtered low-molecular-weight proteins via the megalin-cubilin receptor system. Defective endosomal function impairs receptor-mediated endocytosis, so filtered proteins escape into the urine, producing the hallmark low-molecular-weight proteinuria. Associated disturbances of calcium and phosphate handling generate hypercalciuria, nephrocalcinosis and stones, and cumulative tubular and interstitial damage leads to progressive decline in kidney function.",
-  "additionalDifferentials": [
-   "Lowe syndrome (oculocerebrorenal syndrome)",
-   "Other causes of renal Fanconi syndrome (e.g. cystinosis)",
-   "Idiopathic hypercalciuria with nephrolithiasis",
-   "Nephronophthisis and other tubulointerstitial disease",
-   "X-linked hypophosphataemia",
-   "Distal renal tubular acidosis with nephrocalcinosis"
-  ],
-  "additionalInvestigations": [
-   "Quantification of low-molecular-weight proteinuria (e.g. urinary retinol-binding protein or beta-2-microglobulin relative to creatinine)",
-   "Urinary calcium-to-creatinine ratio to document hypercalciuria",
-   "Renal ultrasound for nephrocalcinosis and stones",
-   "Assessment of proximal tubular function including phosphate, glucose, amino acids and acid-base status",
-   "Genetic testing of CLCN5 and OCRL",
-   "Serial measurement of kidney function to monitor progression"
-  ],
-  "redFlags": [
-   "Rapidly declining kidney function",
-   "Recurrent obstructing renal stones or symptomatic nephrocalcinosis",
-   "Growth failure in a child suggesting significant tubular or renal impairment",
-   "Features suggesting evolving extrarenal disease in OCRL-related cases"
-  ],
-  "prognosis": "Dent disease is slowly progressive; many affected males develop chronic kidney disease and a proportion reach kidney failure between the third and fifth decades, while proteinuria and hypercalciuria are usually present from childhood. Progression rate varies and extrarenal disease is generally mild.",
-  "pitfalls": [
-   "Overlooking the diagnosis because dipstick testing detects albumin poorly and misses low-molecular-weight proteinuria",
-   "Attributing recurrent stones to idiopathic hypercalciuria without checking for tubular proteinuria",
-   "Failing to distinguish Dent disease 2 from Lowe syndrome when OCRL is involved",
-   "Assuming female relatives are entirely unaffected"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "OMIM: Dent disease (CLCN5/OCRL)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific cure; management centres on reducing hypercalciuria with thiazide diuretics, with attention to avoiding volume depletion and hypokalaemia",
-   "Ensure generous fluid intake and consider citrate supplementation and dietary measures to limit stone formation and nephrocalcinosis",
-   "Replace proximal tubular losses and treat metabolic bone disease with phosphate and vitamin D supplementation where phosphaturia or rickets develops",
-   "Slow chronic kidney disease progression through blood-pressure control, cautious renin-angiotensin blockade and avoidance of nephrotoxic agents",
-   "Surveillance with serial kidney function, low-molecular-weight proteinuria, urinary calcium and renal ultrasound for nephrocalcinosis and stones",
-   "Manage acute stone episodes and refer to urology for recurrent nephrolithiasis",
-   "Institute renal replacement therapy and transplantation for kidney failure, noting the tubulopathy does not recur in the allograft",
-   "Offer genetic counselling for X-linked inheritance and screen at-risk male relatives and carrier females"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dent_disease-pathway",
-   "title": "Dent disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked proximal tubulopathy affecting mainly males, caused by variants in CLCN5 (Dent disease 1) or OCRL (Dent disease 2)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly declining kidney function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Quantification of low-molecular-weight proteinuria (e.g. urinary retinol-binding protein or beta-2-microglobulin relative to creatinine), Urinary calcium-to-creatinine ratio to document hypercalciuria, Renal ultrasound for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific cure; management centres on reducing hypercalciuria with thiazide diuretics, with attention to avoiding volume depletion and hypokalaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis because dipstick testing detects albumin poorly and misses low-molecular-weight proteinuria"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dent disease."
-  }
- ],
- "tables": [
-  {
-   "id": "dent_disease-matrix",
-   "title": "Dent disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked proximal tubulopathy affecting mainly males, caused by variants in CLCN5 (Dent disease 1) or OCRL (Dent disease 2)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked proximal tubulopathy affecting mainly males, caused by variants in CLCN5 (Dent disease 1) or OCRL (Dent disease 2)",
+      "The defining feature is low-molecular-weight proteinuria, which is often the earliest and most consistent abnormality",
+      "Hypercalciuria is characteristic and drives nephrocalcinosis and recurrent nephrolithiasis",
+      "Additional proximal tubular dysfunction may include phosphaturia, aminoaciduria, glycosuria and impaired urinary acidification, at times amounting to a partial Fanconi syndrome",
+      "Progressive chronic kidney disease develops in many affected males, sometimes reaching kidney failure in adulthood",
+      "Dent disease 2 (OCRL) can show mild extrarenal features overlapping with Lowe syndrome, such as subclinical cataract or mild cognitive involvement",
+      "Female carriers may have milder manifestations such as low-molecular-weight proteinuria or hypercalciuria"
     ],
-    [
-     "Key Investigations",
-     "Quantification of low-molecular-weight proteinuria (e.g. urinary retinol-binding protein or beta-2-microglobulin relative to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dent disease is an inherited disorder of the renal proximal tubule caused by loss of function of the endosomal chloride/proton exchanger encoded by CLCN5, or of the phosphatase encoded by OCRL. Both proteins are required for normal acidification and trafficking within the endocytic machinery that reabsorbs filtered low-molecular-weight proteins via the megalin-cubilin receptor system. Defective endosomal function impairs receptor-mediated endocytosis, so filtered proteins escape into the urine, producing the hallmark low-molecular-weight proteinuria. Associated disturbances of calcium and phosphate handling generate hypercalciuria, nephrocalcinosis and stones, and cumulative tubular and interstitial damage leads to progressive decline in kidney function.",
+    "additionalDifferentials": [
+      "Lowe syndrome (oculocerebrorenal syndrome)",
+      "Other causes of renal Fanconi syndrome (e.g. cystinosis)",
+      "Idiopathic hypercalciuria with nephrolithiasis",
+      "Nephronophthisis and other tubulointerstitial disease",
+      "X-linked hypophosphataemia",
+      "Distal renal tubular acidosis with nephrocalcinosis"
     ],
-    [
-     "Primary Differentials",
-     "Lowe syndrome (oculocerebrorenal syndrome), Other causes of renal Fanconi syndrome (e.g. cystinosis), Idiopathic hypercalciuria",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Quantification of low-molecular-weight proteinuria (e.g. urinary retinol-binding protein or beta-2-microglobulin relative to creatinine)",
+      "Urinary calcium-to-creatinine ratio to document hypercalciuria",
+      "Renal ultrasound for nephrocalcinosis and stones",
+      "Assessment of proximal tubular function including phosphate, glucose, amino acids and acid-base status",
+      "Genetic testing of CLCN5 and OCRL",
+      "Serial measurement of kidney function to monitor progression"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific cure; management centres on reducing hypercalciuria with thiazide diuretics, with attention to avoiding",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly declining kidney function",
+      "Recurrent obstructing renal stones or symptomatic nephrocalcinosis",
+      "Growth failure in a child suggesting significant tubular or renal impairment",
+      "Features suggesting evolving extrarenal disease in OCRL-related cases"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis because dipstick testing detects albumin poorly and misses low-molecular-weight proteinuria",
-     "Prevent diagnostic or management error"
+    "prognosis": "Dent disease is slowly progressive; many affected males develop chronic kidney disease and a proportion reach kidney failure between the third and fifth decades, while proteinuria and hypercalciuria are usually present from childhood. Progression rate varies and extrarenal disease is generally mild.",
+    "pitfalls": [
+      "Overlooking the diagnosis because dipstick testing detects albumin poorly and misses low-molecular-weight proteinuria",
+      "Attributing recurrent stones to idiopathic hypercalciuria without checking for tubular proteinuria",
+      "Failing to distinguish Dent disease 2 from Lowe syndrome when OCRL is involved",
+      "Assuming female relatives are entirely unaffected"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "OMIM: Dent disease (CLCN5/OCRL)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific cure; management centres on reducing hypercalciuria with thiazide diuretics, with attention to avoiding volume depletion and hypokalaemia",
+      "Ensure generous fluid intake and consider citrate supplementation and dietary measures to limit stone formation and nephrocalcinosis",
+      "Replace proximal tubular losses and treat metabolic bone disease with phosphate and vitamin D supplementation where phosphaturia or rickets develops",
+      "Slow chronic kidney disease progression through blood-pressure control, cautious renin-angiotensin blockade and avoidance of nephrotoxic agents",
+      "Surveillance with serial kidney function, low-molecular-weight proteinuria, urinary calcium and renal ultrasound for nephrocalcinosis and stones",
+      "Manage acute stone episodes and refer to urology for recurrent nephrolithiasis",
+      "Institute renal replacement therapy and transplantation for kidney failure, noting the tubulopathy does not recur in the allograft",
+      "Offer genetic counselling for X-linked inheritance and screen at-risk male relatives and carrier females"
     ]
-   ],
-   "caption": "Overview comparison matrix for dent disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dent-disease-real-image",
-   "title": "Dent disease: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "dent_disease-pathway",
+      "title": "Dent disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked proximal tubulopathy affecting mainly males, caused by variants in CLCN5 (Dent disease 1) or OCRL (Dent disease 2)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly declining kidney function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Quantification of low-molecular-weight proteinuria (e.g. urinary retinol-binding protein or beta-2-microglobulin relative to creatinine), Urinary calcium-to-creatinine ratio to document hypercalciuria, Renal ultrasound for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific cure; management centres on reducing hypercalciuria with thiazide diuretics, with attention to avoiding volume depletion and hypokalaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis because dipstick testing detects albumin poorly and misses low-molecular-weight proteinuria"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dent disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dent_disease-matrix",
+      "title": "Dent disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked proximal tubulopathy affecting mainly males, caused by variants in CLCN5 (Dent disease 1) or OCRL (Dent disease 2)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Quantification of low-molecular-weight proteinuria (e.g. urinary retinol-binding protein or beta-2-microglobulin relative to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lowe syndrome (oculocerebrorenal syndrome), Other causes of renal Fanconi syndrome (e.g. cystinosis), Idiopathic hypercalciuria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific cure; management centres on reducing hypercalciuria with thiazide diuretics, with attention to avoiding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis because dipstick testing detects albumin poorly and misses low-molecular-weight proteinuria",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dent disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dent_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-molecular-weight proteinuria (retinol-binding protein or beta-2-microglobulin)",
+          "cells": [
+            {
+              "text": "Tubular proteinuria, which dipstick testing misses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proximal tubular function panel",
+          "cells": [
+            {
+              "text": "Phosphate, glucose, amino acid and acid-base losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of CLCN5 and OCRL",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dent_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lowe syndrome",
+          "cells": [
+            {
+              "text": "OCRL-related; separated from Dent disease 2 by extrarenal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic hypercalciuria with nephrolithiasis",
+          "cells": [
+            {
+              "text": "Recurrent stones attributed to it without checking for tubular proteinuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dent_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thiazide diuretics",
+          "cells": [
+            {
+              "text": "Reduce hypercalciuria; avoid volume depletion and hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration, citrate and diet",
+          "cells": [
+            {
+              "text": "Generous fluids; citrate and dietary measures to limit stones and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphate and vitamin D",
+          "cells": [
+            {
+              "text": "Replace proximal tubular losses and treat metabolic bone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slowing CKD progression",
+          "cells": [
+            {
+              "text": "Blood-pressure control, cautious renin-angiotensin blockade, avoid nephrotoxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Kidney function, low-molecular-weight proteinuria, urinary calcium and renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone management",
+          "cells": [
+            {
+              "text": "Treat acute episodes; urology referral for recurrent nephrolithiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement and transplant",
+          "cells": [
+            {
+              "text": "Kidney failure; the tubulopathy does not recur in the allograft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked; screen at-risk male relatives and carrier females"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dent_disease-dx-mgmt",
+      "title": "Diagnosis and management of Dent disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dent disease: low-molecular-weight proteinuria with hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling kidney function, obstructing stones, growth failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology and urology review for obstruction or rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Low-molecular-weight proteinuria, urinary calcium ratio, renal ultrasound; CLCN5 and OCRL",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are CLCN5 or OCRL variants found with tubular proteinuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic hypercalciuria, Lowe syndrome or other Fanconi causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Thiazide diuretics to reduce hypercalciuria; avoid volume depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Generous fluids; citrate and diet to limit stones and nephrocalcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Phosphate and vitamin D for phosphaturia, rickets or bone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood-pressure control and avoidance of nephrotoxins to slow CKD",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial kidney function, proteinuria and ultrasound surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive; many affected males develop CKD and some reach kidney failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

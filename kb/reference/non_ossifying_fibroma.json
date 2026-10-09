@@ -1,182 +1,442 @@
 {
- "id": "non_ossifying_fibroma",
- "name": "Non-ossifying fibroma",
- "aliases": [
-  "Fibrous cortical defect",
-  "Fibroxanthoma",
-  "Metaphyseal fibrous defect",
-  "NOF",
-  "fibrous cortical defect",
-  "fibroxanthoma",
-  "metaphyseal fibrous defect",
-  "nonossifying fibroma"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Orthopaedics / Musculoskeletal radiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Greenspan, Orthopedic Imaging: A Practical Approach",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "One of the most common incidental bone lesions of childhood and adolescence, typically found in the metaphysis of long bones about the knee (distal femur, proximal and distal tibia).",
-   "The small purely cortical form is termed a fibrous cortical defect, whereas the larger lesion extending into the medullary cavity is called a non-ossifying fibroma; they represent a spectrum of the same process.",
-   "Radiographs show an eccentric, cortically based, well-defined lucent lesion with a thin sclerotic scalloped or grape-cluster margin and its long axis parallel to the shaft.",
-   "It is a classic do-not-touch or leave-me-alone lesion; imaging is diagnostic and biopsy of a typical lesion is unnecessary.",
-   "Most lesions regress spontaneously and ossify from the diaphyseal side with skeletal maturation, becoming uncommon after early adulthood.",
-   "Large lesions occupying more than roughly half the transverse diameter of the bone carry a risk of pathological fracture and may warrant curettage and grafting.",
-   "Multiple non-ossifying fibromas with extraskeletal features (cafe-au-lait macules, learning difficulty, hypogonadism, ocular and cardiovascular anomalies) constitute Jaffe-Campanacci syndrome.",
-   "An association with neurofibromatosis type 1 should be considered when lesions are multiple."
+  "id": "non_ossifying_fibroma",
+  "name": "Non-ossifying fibroma",
+  "aliases": [
+    "Fibrous cortical defect",
+    "Fibroxanthoma",
+    "Metaphyseal fibrous defect",
+    "NOF",
+    "fibrous cortical defect",
+    "fibroxanthoma",
+    "metaphyseal fibrous defect",
+    "nonossifying fibroma"
   ],
-  "pathophysiology": "Non-ossifying fibroma is a benign, developmental, non-neoplastic fibrous lesion rather than a true tumour, believed to arise near the physis and to migrate away from the growth plate into the metaphysis and diaphysis as the bone lengthens. Histologically it consists of a cellular proliferation of bland spindle-shaped fibroblasts arranged in a storiform (whorled) pattern, admixed with lipid-laden foam cells, scattered multinucleated osteoclast-type giant cells and haemosiderin deposition, accounting for the alternative name fibroxanthoma. The lesion is self-limiting and resolves through progressive ossification and remodelling, so that most examples heal spontaneously by the end of the second decade.",
-  "additionalDifferentials": [
-   "Fibrous dysplasia",
-   "Chondromyxoid fibroma",
-   "Aneurysmal bone cyst",
-   "Simple (unicameral) bone cyst",
-   "Desmoplastic fibroma",
-   "Osteofibrous dysplasia",
-   "Giant cell tumour (in the skeletally mature)"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs, which are usually diagnostic on their own",
-   "MRI reserved for atypical appearances or diagnostic uncertainty",
-   "CT to assess cortical thinning and fracture risk in large lesions",
-   "Clinical assessment for cafe-au-lait macules and other features of neurofibromatosis type 1 or Jaffe-Campanacci syndrome",
-   "Interval follow-up radiographs to confirm expected regression and ossification",
-   "Biopsy only in genuinely atypical lesions, since it is not required for classic ones"
-  ],
-  "redFlags": [
-   "Pain in the absence of a pathological fracture",
-   "Rapid or unexpected enlargement of the lesion",
-   "Cortical breach or an associated soft-tissue mass",
-   "Size approaching the threshold for pathological fracture in a weight-bearing bone",
-   "Atypical location such as the axial skeleton or a flat bone"
-  ],
-  "prognosis": "The prognosis is excellent, with spontaneous resolution the rule and a very low recurrence rate after curettage of large or fractured lesions. Malignant potential is essentially absent.",
-  "pitfalls": [
-   "Performing an unnecessary biopsy of a radiographically classic lesion",
-   "Misinterpreting a benign lesion as an aggressive or malignant tumour",
-   "Underestimating the fracture risk of a large lesion in a weight-bearing bone",
-   "Overlooking a syndromic association when lesions are multiple"
-  ],
-  "references": [
-   "Greenspan, Orthopedic Imaging: A Practical Approach",
-   "WHO Classification of Tumours of Soft Tissue and Bone (current edition)",
-   "Resnick, Diagnosis of Bone and Joint Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the typical asymptomatic lesion conservatively, as this is a classic leave-alone lesion requiring no intervention",
-   "Avoid biopsy of radiologically classic lesions, since plain radiographs alone are diagnostic",
-   "Confirm the expected spontaneous regression and ossification with interval follow-up radiographs through skeletal maturation",
-   "Assess large lesions occupying much of the transverse bone width with CT for cortical thinning and pathological fracture risk",
-   "Offer curettage and bone grafting, with internal fixation, for large lesions at fracture risk or after a pathological fracture",
-   "Advise activity modification or protected weight-bearing where a substantial lesion threatens fracture",
-   "Evaluate for café-au-lait macules and features of neurofibromatosis type 1 or Jaffe-Campanacci syndrome when lesions are multiple"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "non_ossifying_fibroma-pathway",
-   "title": "Non-ossifying fibroma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "One of the most common incidental bone lesions of childhood and adolescence, typically found in the metaphysis of long bones about the knee (distal femur, proximal and distal tibia).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Pain in the absence of a pathological fracture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs, which are usually diagnostic on their own, MRI reserved for atypical appearances or diagnostic uncertainty, CT to assess cortical thinning and fracture risk in large lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the typical asymptomatic lesion conservatively, as this is a classic leave-alone lesion requiring no intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing an unnecessary biopsy of a radiographically classic lesion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of non-ossifying fibroma."
-  }
- ],
- "tables": [
-  {
-   "id": "non_ossifying_fibroma-matrix",
-   "title": "Non-ossifying fibroma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "One of the most common incidental bone lesions of childhood and adolescence, typically found in the metaphysis of long bones",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Orthopaedics / Musculoskeletal radiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Greenspan, Orthopedic Imaging: A Practical Approach",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "One of the most common incidental bone lesions of childhood and adolescence, typically found in the metaphysis of long bones about the knee (distal femur, proximal and distal tibia).",
+      "The small purely cortical form is termed a fibrous cortical defect, whereas the larger lesion extending into the medullary cavity is called a non-ossifying fibroma; they represent a spectrum of the same process.",
+      "Radiographs show an eccentric, cortically based, well-defined lucent lesion with a thin sclerotic scalloped or grape-cluster margin and its long axis parallel to the shaft.",
+      "It is a classic do-not-touch or leave-me-alone lesion; imaging is diagnostic and biopsy of a typical lesion is unnecessary.",
+      "Most lesions regress spontaneously and ossify from the diaphyseal side with skeletal maturation, becoming uncommon after early adulthood.",
+      "Large lesions occupying more than roughly half the transverse diameter of the bone carry a risk of pathological fracture and may warrant curettage and grafting.",
+      "Multiple non-ossifying fibromas with extraskeletal features (cafe-au-lait macules, learning difficulty, hypogonadism, ocular and cardiovascular anomalies) constitute Jaffe-Campanacci syndrome.",
+      "An association with neurofibromatosis type 1 should be considered when lesions are multiple."
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs, which are usually diagnostic on their own, MRI reserved for atypical appearances or diagnostic uncertainty, CT",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Non-ossifying fibroma is a benign, developmental, non-neoplastic fibrous lesion rather than a true tumour, believed to arise near the physis and to migrate away from the growth plate into the metaphysis and diaphysis as the bone lengthens. Histologically it consists of a cellular proliferation of bland spindle-shaped fibroblasts arranged in a storiform (whorled) pattern, admixed with lipid-laden foam cells, scattered multinucleated osteoclast-type giant cells and haemosiderin deposition, accounting for the alternative name fibroxanthoma. The lesion is self-limiting and resolves through progressive ossification and remodelling, so that most examples heal spontaneously by the end of the second decade.",
+    "additionalDifferentials": [
+      "Fibrous dysplasia",
+      "Chondromyxoid fibroma",
+      "Aneurysmal bone cyst",
+      "Simple (unicameral) bone cyst",
+      "Desmoplastic fibroma",
+      "Osteofibrous dysplasia",
+      "Giant cell tumour (in the skeletally mature)"
     ],
-    [
-     "Primary Differentials",
-     "Fibrous dysplasia, Chondromyxoid fibroma, Aneurysmal bone cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs, which are usually diagnostic on their own",
+      "MRI reserved for atypical appearances or diagnostic uncertainty",
+      "CT to assess cortical thinning and fracture risk in large lesions",
+      "Clinical assessment for cafe-au-lait macules and other features of neurofibromatosis type 1 or Jaffe-Campanacci syndrome",
+      "Interval follow-up radiographs to confirm expected regression and ossification",
+      "Biopsy only in genuinely atypical lesions, since it is not required for classic ones"
     ],
-    [
-     "Management Strategy",
-     "Manage the typical asymptomatic lesion conservatively, as this is a classic leave-alone lesion requiring no intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "Pain in the absence of a pathological fracture",
+      "Rapid or unexpected enlargement of the lesion",
+      "Cortical breach or an associated soft-tissue mass",
+      "Size approaching the threshold for pathological fracture in a weight-bearing bone",
+      "Atypical location such as the axial skeleton or a flat bone"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing an unnecessary biopsy of a radiographically classic lesion",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent, with spontaneous resolution the rule and a very low recurrence rate after curettage of large or fractured lesions. Malignant potential is essentially absent.",
+    "pitfalls": [
+      "Performing an unnecessary biopsy of a radiographically classic lesion",
+      "Misinterpreting a benign lesion as an aggressive or malignant tumour",
+      "Underestimating the fracture risk of a large lesion in a weight-bearing bone",
+      "Overlooking a syndromic association when lesions are multiple"
+    ],
+    "references": [
+      "Greenspan, Orthopedic Imaging: A Practical Approach",
+      "WHO Classification of Tumours of Soft Tissue and Bone (current edition)",
+      "Resnick, Diagnosis of Bone and Joint Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the typical asymptomatic lesion conservatively, as this is a classic leave-alone lesion requiring no intervention",
+      "Avoid biopsy of radiologically classic lesions, since plain radiographs alone are diagnostic",
+      "Confirm the expected spontaneous regression and ossification with interval follow-up radiographs through skeletal maturation",
+      "Assess large lesions occupying much of the transverse bone width with CT for cortical thinning and pathological fracture risk",
+      "Offer curettage and bone grafting, with internal fixation, for large lesions at fracture risk or after a pathological fracture",
+      "Advise activity modification or protected weight-bearing where a substantial lesion threatens fracture",
+      "Evaluate for café-au-lait macules and features of neurofibromatosis type 1 or Jaffe-Campanacci syndrome when lesions are multiple"
     ]
-   ],
-   "caption": "Overview comparison matrix for non-ossifying fibroma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "non-ossifying-fibroma-real-image",
-   "title": "Non-ossifying fibroma: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "non_ossifying_fibroma-pathway",
+      "title": "Non-ossifying fibroma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "One of the most common incidental bone lesions of childhood and adolescence, typically found in the metaphysis of long bones about the knee (distal femur, proximal and distal tibia).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Pain in the absence of a pathological fracture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs, which are usually diagnostic on their own, MRI reserved for atypical appearances or diagnostic uncertainty, CT to assess cortical thinning and fracture risk in large lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the typical asymptomatic lesion conservatively, as this is a classic leave-alone lesion requiring no intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing an unnecessary biopsy of a radiographically classic lesion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of non-ossifying fibroma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "non_ossifying_fibroma-matrix",
+      "title": "Non-ossifying fibroma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "One of the most common incidental bone lesions of childhood and adolescence, typically found in the metaphysis of long bones",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs, which are usually diagnostic on their own, MRI reserved for atypical appearances or diagnostic uncertainty, CT",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fibrous dysplasia, Chondromyxoid fibroma, Aneurysmal bone cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the typical asymptomatic lesion conservatively, as this is a classic leave-alone lesion requiring no intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing an unnecessary biopsy of a radiographically classic lesion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for non-ossifying fibroma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Greenspan, Orthopedic Imaging: A Practical Approach",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "non_ossifying_fibroma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Usually diagnostic on their own"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Atypical appearance or diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Cortical thickness and integrity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "non_ossifying_fibroma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibrous dysplasia",
+          "cells": [
+            {
+              "text": "Expansile bone with ground-glass matrix"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondromyxoid fibroma",
+          "cells": [
+            {
+              "text": "Lobulated lytic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aneurysmal bone cyst",
+          "cells": [
+            {
+              "text": "Expansile lesion with fluid levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple unicameral bone cyst",
+          "cells": [
+            {
+              "text": "Fluid-filled lesion without a soft-tissue component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmoplastic fibroma",
+          "cells": [
+            {
+              "text": "Aggressive fibrous lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "non_ossifying_fibroma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Classic leave-alone lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid biopsy of classic lesions",
+          "cells": [
+            {
+              "text": "Unnecessary when radiologically typical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Curettage for large or fractured lesions",
+          "cells": [
+            {
+              "text": "Very low recurrence rate after curettage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protected weight-bearing after fracture",
+          "cells": [
+            {
+              "text": "Pathological fracture management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "non_ossifying_fibroma-dx-mgmt",
+      "title": "Diagnosis and management of Non-ossifying fibroma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental metaphyseal lucency about the knee in a child or adolescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pain without fracture, rapid growth, cortical breach)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging review if rapid enlargement or cortical breach",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plain radiographs, MRI for atypical features, CT for cortical assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Classic radiographic appearance in a child with no red flags?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fibrous dysplasia or aneurysmal bone cyst; image further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Leave the typical asymptomatic lesion alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid biopsy of radiologically classic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Curettage for large or fractured lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for enlargement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; spontaneous resolution is the rule and malignant potential is very low",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

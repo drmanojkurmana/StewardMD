@@ -1,191 +1,690 @@
 {
- "id": "meningococcal_disease",
- "name": "Meningococcal Disease",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 160,
- "page": 1244,
- "aliases": [
-  "meningococcemia",
-  "Neisseria meningitidis infection"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1244-1253",
-  "clinicalPearls": [
-   "Neisseria meningitidis most commonly causes asymptomatic nasopharyngeal colonization; invasive disease is rare and usually presents as either bacterial meningitis or meningococcal septicemia (p.1244).",
-   "A nonblanching petechial or purpuric rash develops in over 80% of cases, but it is often absent early in the illness and may begin as a blanching maculopapular or urticarial eruption indistinguishable from common viral rashes before becoming petechial/purpuric over hours; some patients, including those with overwhelming sepsis, have no rash at all (p.1248).",
-   "In the most severe cases large purpuric lesions develop (purpura fulminans) with signs of peripheral ischemia (p.1248).",
-   "Roughly 30-50% present with a meningitis syndrome alone, up to 40% of meningitis patients also have features of septicemia, and meningococcal septicemia alone accounts for up to 20% of cases (p.1248).",
-   "In fulminant disease death may occur within hours of the first symptoms; early septicemic symptoms are nonspecific and influenza-like (fever, headache, myalgia, vomiting, abdominal pain) (p.1248).",
-   "In children, hypotension is a late sign; they more commonly present with compensated shock (tachycardia, poor peripheral perfusion, normal blood pressure) (p.1248).",
-   "Terminal complement component (C5-9), properdin or factor D deficiency, and treatment with complement inhibitors such as eculizumab, increase the risk of meningococcal disease (up to ~600-fold) and may cause recurrent attacks (p.1247).",
-   "Chronic meningococcemia is rarely recognized and presents as recurrent episodes of petechial rash with fever, joint pain/arthritis, and splenomegaly, with bacteremia that characteristically clears without treatment then recurs (p.1248-1249).",
-   "Tobacco smoking (and passive smoke exposure) is an important risk factor that damages the nasopharyngeal epithelium and increases both carriage and invasive disease (p.1247).",
-   "Immunization is regarded as the only rational approach to prevention at a population level; chemoprophylaxis of close contacts aims to eradicate carriage of the invasive strain (p.1250-1253)."
+  "id": "meningococcal_disease",
+  "name": "Meningococcal Disease",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 160,
+  "page": 1244,
+  "aliases": [
+    "meningococcemia",
+    "Neisseria meningitidis infection"
   ],
-  "pathophysiology": "N. meningitidis colonizes the human nasopharynx, then in a susceptible individual may invade the mucosa into the bloodstream, usually within a few days of acquisition. The polysaccharide capsule is a key virulence factor providing resistance to phagocytosis; acapsular strains rarely cause invasive disease. During growth meningococci shed outer-membrane blebs containing lipopolysaccharide (LPS, endotoxin), which binds CD14/TLR4 to trigger an inflammatory cascade (TNF-alpha, IL-1, IL-6, IL-8, IL-10, PAI-1 and others). Disease severity relates to both endotoxin levels and the magnitude of the inflammatory response. Endothelial injury is central to meningococcemia, causing increased vascular permeability (capillary leak with hypovolemia, tissue and pulmonary edema), altered vascular tone, loss of thromboresistance, intravascular coagulation, and myocardial dysfunction. Procoagulant activation with tissue factor upregulation, downregulation of anticoagulant pathways (loss of thrombomodulin/protein C receptors; reduced antithrombin III, protein C, protein S, tissue factor pathway inhibitor) and impaired thrombolysis from high PAI-1 produce purpura fulminans and skin/limb infarction. Shock results from hypovolemia plus myocardial depression (hypoxia, metabolic derangements such as hypocalcemia, cytokines). Bacteria reaching the meninges provoke a local cytokine-driven inflammatory response that can cause cerebral edema and raised intracranial pressure (p.1247-1248).",
-  "additionalDifferentials": [
-   "Other causes of bacterial meningitis (presentation of meningococcal meningitis is indistinguishable unless an associated petechial/purpuric rash or gram-negative diplococci are present) (p.1248-1249)",
-   "Differential of chronic meningococcemia: bacterial endocarditis, acute rheumatic fever, Henoch-Schonlein purpura, infectious mononucleosis, disseminated gonococcal infection, immune-mediated vasculitis (p.1248-1249)"
-  ],
-  "infectionMimics": [
-   "Viral infections (enteroviruses, influenza and other respiratory viruses, measles, Epstein-Barr virus, cytomegalovirus, parvovirus) - most patients presenting with a petechial/purpuric rash have a viral infection (p.1248)",
-   "Pneumococcal, streptococcal, staphylococcal, or other gram-negative bacterial sepsis (p.1248)"
-  ],
-  "nonInfectiousMimics": [
-   "Protein C or S deficiency (including post-varicella protein S deficiency) (p.1248)",
-   "Platelet disorders (e.g., idiopathic thrombocytopenic purpura, drug effects, bone marrow infiltration) (p.1248)",
-   "Henoch-Schonlein purpura, connective tissue disorders, and trauma (including nonaccidental injury in children) (p.1248)"
-  ],
-  "additionalInvestigations": [
-   "Blood culture for confirmation and public health investigation (positive in up to ~75% of cases); avoid media containing sodium polyanethol sulfonate, which may inhibit meningococcal growth, and avoid delay in transport (p.1249)",
-   "Real-time PCR of whole blood increases diagnostic yield by more than 40% and may remain positive for several days after antibiotics (p.1249)",
-   "Lumbar puncture for CSF in suspected meningitis (unless contraindicated); CSF Gram stain is up to ~80% sensitive, CSF culture sensitivity ~90%, plus PCR where available; CSF latex agglutination antigen testing is insensitive and should be replaced by molecular diagnosis (p.1249)",
-   "Inflammatory markers (WBC count, C-reactive protein, procalcitonin, ESR) may support the diagnosis but can be normal or low in rapidly progressive disease and do not exclude it (p.1249)",
-   "Severe septicemia laboratory findings: hypoglycemia, acidosis, hypokalemia, hypocalcemia, hypomagnesemia, hypophosphatemia, anemia, coagulopathy (p.1249)",
-   "Measure total hemolytic complement activity to assess for complement deficiency in patients with recurrent disease, particularly non-B capsular groups (p.1247)"
-  ],
-  "redFlags": [
-   "A nonblanching (petechial or purpuric) rash in a febrile patient should be treated as a medical emergency suggestive of meningococcal disease (p.1248)",
-   "Purpura fulminans / large purpuric lesions with peripheral ischemia (p.1248)",
-   "Signs of shock: tachycardia, poor peripheral perfusion, tachypnea, oliguria, cold mottled extremities, limb pain (hypotension is a late sign in children) (p.1248)",
-   "Reduced level of consciousness, agitation, or confusion (decreased cerebral perfusion or raised intracranial pressure) (p.1248)",
-   "Features of raised intracranial pressure: reduced consciousness, relative bradycardia and hypertension, focal neurologic signs, abnormal posturing, unequal/dilated/poorly reactive pupils (p.1248)",
-   "Rapid progression - death may occur within hours of first symptoms in fulminant cases (p.1248)"
-  ],
-  "prognosis": "About 10% of patients with meningococcal disease die despite antimicrobial therapy and intensive care. Fulminant meningococcemia is more likely to cause death or ischemic skin loss than meningitis alone. Factors associated with poorer prognosis include shock; extremes of age (infancy and old age) and adolescence; coma; purpura fulminans; disseminated intravascular coagulation; thrombocytopenia; leukopenia; absence of meningitis; metabolic acidosis; low antithrombin and protein S/C levels; high PAI-1; and a low ESR or C-reactive protein. The Glasgow Meningococcal Septicaemia Prognostic Score (GMSPS) performs well for severity assessment, though scoring systems do not direct specific interventions; the management priority remains recognition and urgent treatment of compromised airway, breathing, or circulation. Most patients improve rapidly with appropriate antibiotics and supportive care. Complications include scarring after purpuric skin necrosis (~10%, sometimes requiring skin grafting), amputation in 1-2% of survivors after peripheral ischemia or compartment syndrome, hearing loss (~5%), neurologic complications (~7%), chronic pain, and psychological/psychosocial sequelae (p.1249-1250).",
-  "pitfalls": [
-   "A normal or low WBC count and inflammatory markers do not exclude meningococcal disease and may occur in rapidly progressive disease (p.1249)",
-   "The rash may be absent early or absent altogether (including in overwhelming sepsis), and may initially appear blanching/viral before becoming petechial or purpuric (p.1248)",
-   "Most patients with a petechial/purpuric rash and fever do NOT have meningococcal disease - fewer than 10% of children (and in some settings under 1%) with this presentation are found to have it, so most have a viral cause (p.1248)",
-   "Lumbar puncture should generally be avoided in meningococcal septicemia because positioning may critically compromise circulation in hypovolemic shock; it is also contraindicated with raised intracranial pressure, uncorrected shock, coagulopathy, thrombocytopenia, respiratory insufficiency, local infection, or ongoing convulsions (p.1249)",
-   "A normal CT brain scan does not exclude raised intracranial pressure in meningococcal meningitis (p.1249)",
-   "CSF latex agglutination antigen testing and urinary antigen testing are insensitive; throat-swab identification has limited diagnostic value because N. meningitidis is normal nasopharyngeal flora (p.1249)",
-   "Postmeningococcal reactive (immune-complex) disease arising ~4-10 days after onset (rash, arthritis, iritis, pericarditis/polyserositis with fever) can be mistaken for relapse and lead to unnecessarily prolonged antibiotics; it resolves spontaneously (p.1249)",
-   "Aggressive fluid resuscitation with unbuffered electrolyte solutions was found to increase mortality in febrile African children (p.1249-1250)"
-  ],
-  "severityClassification": "Clinical spectrum spans asymptomatic nasopharyngeal carriage, occult bacteremia, localized/focal infection (pneumonia, arthritis, osteomyelitis, pericarditis, conjunctivitis), meningitis, and meningococcal septicemia, with chronic meningococcemia as a relapsing form. The Glasgow Meningococcal Septicaemia Prognostic Score (GMSPS) is used for severity assessment. Fulminant meningococcemia with purpura fulminans and Waterhouse-Friderichsen syndrome (overwhelming meningococcal sepsis) represents the most severe end of the spectrum (p.1244, p.1248-1249).",
-  "references": [
-   "Harrison 22e p.1244",
-   "Harrison 22e p.1247",
-   "Harrison 22e p.1248",
-   "Harrison 22e p.1249",
-   "Harrison 22e p.1250",
-   "Harrison 22e p.1253"
-  ],
-  "crossLinks": [
-   "MENINGITIS",
-   "SEPSIS",
-   "SEPTIC_SHOCK"
-  ],
-  "management": [
-   "Immediate empirical parenteral third-generation cephalosporin such as ceftriaxone or cefotaxime, with pre-hospital benzylpenicillin, without delaying for lumbar puncture",
-   "Aggressive fluid resuscitation with vasoactive and inotropic support and intensive care admission for septic shock",
-   "Correction of coagulopathy and metabolic derangements such as hypoglycaemia, acidosis and electrolyte disturbance",
-   "Airway protection and ventilatory support for capillary leak, pulmonary oedema and respiratory failure",
-   "Surgical and wound care for purpura fulminans and peripheral ischaemic necrosis",
-   "Urgent chemoprophylaxis of close contacts with rifampicin, ciprofloxacin or ceftriaxone, and meningococcal vaccination for prevention",
-   "Statutory public health notification and outbreak investigation",
-   "Complement activity screening in recurrent disease with referral to immunology"
-  ]
- },
- "algorithms": [
-  {
-   "id": "meningococcal_disease-pathway",
-   "title": "Meningococcal Disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Neisseria meningitidis most commonly causes asymptomatic nasopharyngeal colonization; invasive disease is rare and usually presents as either bacterial meningitis or meningococcal septicemia (p.1244).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A nonblanching (petechial or purpuric) rash in a febrile patient should be treated as a medical emergency suggestive of meningococcal disease (p.1248)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood culture for confirmation and public health investigation (positive in up to ~75% of cases); avoid media containing sodium polyanethol sulfonate, which may inhibit meningococcal growth, and avoid delay in transport"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate empirical parenteral third-generation cephalosporin such as ceftriaxone or cefotaxime, with pre-hospital benzylpenicillin, without delaying for lumbar puncture"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: A normal or low WBC count and inflammatory markers do not exclude meningococcal disease and may occur in rapidly progressive disease (p.1249)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of meningococcal disease."
-  }
- ],
- "tables": [
-  {
-   "id": "meningococcal_disease-matrix",
-   "title": "Meningococcal Disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Neisseria meningitidis most commonly causes asymptomatic nasopharyngeal colonization; invasive disease is rare and usually",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1244-1253",
+    "clinicalPearls": [
+      "Neisseria meningitidis most commonly causes asymptomatic nasopharyngeal colonization; invasive disease is rare and usually presents as either bacterial meningitis or meningococcal septicemia (p.1244).",
+      "A nonblanching petechial or purpuric rash develops in over 80% of cases, but it is often absent early in the illness and may begin as a blanching maculopapular or urticarial eruption indistinguishable from common viral rashes before becoming petechial/purpuric over hours; some patients, including those with overwhelming sepsis, have no rash at all (p.1248).",
+      "In the most severe cases large purpuric lesions develop (purpura fulminans) with signs of peripheral ischemia (p.1248).",
+      "Roughly 30-50% present with a meningitis syndrome alone, up to 40% of meningitis patients also have features of septicemia, and meningococcal septicemia alone accounts for up to 20% of cases (p.1248).",
+      "In fulminant disease death may occur within hours of the first symptoms; early septicemic symptoms are nonspecific and influenza-like (fever, headache, myalgia, vomiting, abdominal pain) (p.1248).",
+      "In children, hypotension is a late sign; they more commonly present with compensated shock (tachycardia, poor peripheral perfusion, normal blood pressure) (p.1248).",
+      "Terminal complement component (C5-9), properdin or factor D deficiency, and treatment with complement inhibitors such as eculizumab, increase the risk of meningococcal disease (up to ~600-fold) and may cause recurrent attacks (p.1247).",
+      "Chronic meningococcemia is rarely recognized and presents as recurrent episodes of petechial rash with fever, joint pain/arthritis, and splenomegaly, with bacteremia that characteristically clears without treatment then recurs (p.1248-1249).",
+      "Tobacco smoking (and passive smoke exposure) is an important risk factor that damages the nasopharyngeal epithelium and increases both carriage and invasive disease (p.1247).",
+      "Immunization is regarded as the only rational approach to prevention at a population level; chemoprophylaxis of close contacts aims to eradicate carriage of the invasive strain (p.1250-1253)."
     ],
-    [
-     "Key Investigations",
-     "Blood culture for confirmation and public health investigation (positive in up to ~75% of cases); avoid media containing sodium",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "N. meningitidis colonizes the human nasopharynx, then in a susceptible individual may invade the mucosa into the bloodstream, usually within a few days of acquisition. The polysaccharide capsule is a key virulence factor providing resistance to phagocytosis; acapsular strains rarely cause invasive disease. During growth meningococci shed outer-membrane blebs containing lipopolysaccharide (LPS, endotoxin), which binds CD14/TLR4 to trigger an inflammatory cascade (TNF-alpha, IL-1, IL-6, IL-8, IL-10, PAI-1 and others). Disease severity relates to both endotoxin levels and the magnitude of the inflammatory response. Endothelial injury is central to meningococcemia, causing increased vascular permeability (capillary leak with hypovolemia, tissue and pulmonary edema), altered vascular tone, loss of thromboresistance, intravascular coagulation, and myocardial dysfunction. Procoagulant activation with tissue factor upregulation, downregulation of anticoagulant pathways (loss of thrombomodulin/protein C receptors; reduced antithrombin III, protein C, protein S, tissue factor pathway inhibitor) and impaired thrombolysis from high PAI-1 produce purpura fulminans and skin/limb infarction. Shock results from hypovolemia plus myocardial depression (hypoxia, metabolic derangements such as hypocalcemia, cytokines). Bacteria reaching the meninges provoke a local cytokine-driven inflammatory response that can cause cerebral edema and raised intracranial pressure (p.1247-1248).",
+    "additionalDifferentials": [
+      "Other causes of bacterial meningitis (presentation of meningococcal meningitis is indistinguishable unless an associated petechial/purpuric rash or gram-negative diplococci are present) (p.1248-1249)",
+      "Differential of chronic meningococcemia: bacterial endocarditis, acute rheumatic fever, Henoch-Schonlein purpura, infectious mononucleosis, disseminated gonococcal infection, immune-mediated vasculitis (p.1248-1249)"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of bacterial meningitis (presentation of meningococcal meningitis is indistinguishable unless an associated",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Viral infections (enteroviruses, influenza and other respiratory viruses, measles, Epstein-Barr virus, cytomegalovirus, parvovirus) - most patients presenting with a petechial/purpuric rash have a viral infection (p.1248)",
+      "Pneumococcal, streptococcal, staphylococcal, or other gram-negative bacterial sepsis (p.1248)"
     ],
-    [
-     "Management Strategy",
-     "Immediate empirical parenteral third-generation cephalosporin such as ceftriaxone or cefotaxime, with pre-hospital",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Protein C or S deficiency (including post-varicella protein S deficiency) (p.1248)",
+      "Platelet disorders (e.g., idiopathic thrombocytopenic purpura, drug effects, bone marrow infiltration) (p.1248)",
+      "Henoch-Schonlein purpura, connective tissue disorders, and trauma (including nonaccidental injury in children) (p.1248)"
     ],
-    [
-     "Clinical Pitfall",
-     "A normal or low WBC count and inflammatory markers do not exclude meningococcal disease and may occur in rapidly progressive",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Blood culture for confirmation and public health investigation (positive in up to ~75% of cases); avoid media containing sodium polyanethol sulfonate, which may inhibit meningococcal growth, and avoid delay in transport (p.1249)",
+      "Real-time PCR of whole blood increases diagnostic yield by more than 40% and may remain positive for several days after antibiotics (p.1249)",
+      "Lumbar puncture for CSF in suspected meningitis (unless contraindicated); CSF Gram stain is up to ~80% sensitive, CSF culture sensitivity ~90%, plus PCR where available; CSF latex agglutination antigen testing is insensitive and should be replaced by molecular diagnosis (p.1249)",
+      "Inflammatory markers (WBC count, C-reactive protein, procalcitonin, ESR) may support the diagnosis but can be normal or low in rapidly progressive disease and do not exclude it (p.1249)",
+      "Severe septicemia laboratory findings: hypoglycemia, acidosis, hypokalemia, hypocalcemia, hypomagnesemia, hypophosphatemia, anemia, coagulopathy (p.1249)",
+      "Measure total hemolytic complement activity to assess for complement deficiency in patients with recurrent disease, particularly non-B capsular groups (p.1247)"
+    ],
+    "redFlags": [
+      "A nonblanching (petechial or purpuric) rash in a febrile patient should be treated as a medical emergency suggestive of meningococcal disease (p.1248)",
+      "Purpura fulminans / large purpuric lesions with peripheral ischemia (p.1248)",
+      "Signs of shock: tachycardia, poor peripheral perfusion, tachypnea, oliguria, cold mottled extremities, limb pain (hypotension is a late sign in children) (p.1248)",
+      "Reduced level of consciousness, agitation, or confusion (decreased cerebral perfusion or raised intracranial pressure) (p.1248)",
+      "Features of raised intracranial pressure: reduced consciousness, relative bradycardia and hypertension, focal neurologic signs, abnormal posturing, unequal/dilated/poorly reactive pupils (p.1248)",
+      "Rapid progression - death may occur within hours of first symptoms in fulminant cases (p.1248)"
+    ],
+    "prognosis": "About 10% of patients with meningococcal disease die despite antimicrobial therapy and intensive care. Fulminant meningococcemia is more likely to cause death or ischemic skin loss than meningitis alone. Factors associated with poorer prognosis include shock; extremes of age (infancy and old age) and adolescence; coma; purpura fulminans; disseminated intravascular coagulation; thrombocytopenia; leukopenia; absence of meningitis; metabolic acidosis; low antithrombin and protein S/C levels; high PAI-1; and a low ESR or C-reactive protein. The Glasgow Meningococcal Septicaemia Prognostic Score (GMSPS) performs well for severity assessment, though scoring systems do not direct specific interventions; the management priority remains recognition and urgent treatment of compromised airway, breathing, or circulation. Most patients improve rapidly with appropriate antibiotics and supportive care. Complications include scarring after purpuric skin necrosis (~10%, sometimes requiring skin grafting), amputation in 1-2% of survivors after peripheral ischemia or compartment syndrome, hearing loss (~5%), neurologic complications (~7%), chronic pain, and psychological/psychosocial sequelae (p.1249-1250).",
+    "pitfalls": [
+      "A normal or low WBC count and inflammatory markers do not exclude meningococcal disease and may occur in rapidly progressive disease (p.1249)",
+      "The rash may be absent early or absent altogether (including in overwhelming sepsis), and may initially appear blanching/viral before becoming petechial or purpuric (p.1248)",
+      "Most patients with a petechial/purpuric rash and fever do NOT have meningococcal disease - fewer than 10% of children (and in some settings under 1%) with this presentation are found to have it, so most have a viral cause (p.1248)",
+      "Lumbar puncture should generally be avoided in meningococcal septicemia because positioning may critically compromise circulation in hypovolemic shock; it is also contraindicated with raised intracranial pressure, uncorrected shock, coagulopathy, thrombocytopenia, respiratory insufficiency, local infection, or ongoing convulsions (p.1249)",
+      "A normal CT brain scan does not exclude raised intracranial pressure in meningococcal meningitis (p.1249)",
+      "CSF latex agglutination antigen testing and urinary antigen testing are insensitive; throat-swab identification has limited diagnostic value because N. meningitidis is normal nasopharyngeal flora (p.1249)",
+      "Postmeningococcal reactive (immune-complex) disease arising ~4-10 days after onset (rash, arthritis, iritis, pericarditis/polyserositis with fever) can be mistaken for relapse and lead to unnecessarily prolonged antibiotics; it resolves spontaneously (p.1249)",
+      "Aggressive fluid resuscitation with unbuffered electrolyte solutions was found to increase mortality in febrile African children (p.1249-1250)"
+    ],
+    "severityClassification": "Clinical spectrum spans asymptomatic nasopharyngeal carriage, occult bacteremia, localized/focal infection (pneumonia, arthritis, osteomyelitis, pericarditis, conjunctivitis), meningitis, and meningococcal septicemia, with chronic meningococcemia as a relapsing form. The Glasgow Meningococcal Septicaemia Prognostic Score (GMSPS) is used for severity assessment. Fulminant meningococcemia with purpura fulminans and Waterhouse-Friderichsen syndrome (overwhelming meningococcal sepsis) represents the most severe end of the spectrum (p.1244, p.1248-1249).",
+    "references": [
+      "Harrison 22e p.1244",
+      "Harrison 22e p.1247",
+      "Harrison 22e p.1248",
+      "Harrison 22e p.1249",
+      "Harrison 22e p.1250",
+      "Harrison 22e p.1253"
+    ],
+    "crossLinks": [
+      "MENINGITIS",
+      "SEPSIS",
+      "SEPTIC_SHOCK"
+    ],
+    "management": [
+      "Immediate empirical parenteral third-generation cephalosporin such as ceftriaxone or cefotaxime, with pre-hospital benzylpenicillin, without delaying for lumbar puncture",
+      "Aggressive fluid resuscitation with vasoactive and inotropic support and intensive care admission for septic shock",
+      "Correction of coagulopathy and metabolic derangements such as hypoglycaemia, acidosis and electrolyte disturbance",
+      "Airway protection and ventilatory support for capillary leak, pulmonary oedema and respiratory failure",
+      "Surgical and wound care for purpura fulminans and peripheral ischaemic necrosis",
+      "Urgent chemoprophylaxis of close contacts with rifampicin, ciprofloxacin or ceftriaxone, and meningococcal vaccination for prevention",
+      "Statutory public health notification and outbreak investigation",
+      "Complement activity screening in recurrent disease with referral to immunology"
     ]
-   ],
-   "caption": "Overview comparison matrix for meningococcal disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "meningococcal-disease-real-image",
-   "title": "Meningococcal Disease: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "meningococcal_disease-pathway",
+      "title": "Meningococcal Disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Neisseria meningitidis most commonly causes asymptomatic nasopharyngeal colonization; invasive disease is rare and usually presents as either bacterial meningitis or meningococcal septicemia (p.1244).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A nonblanching (petechial or purpuric) rash in a febrile patient should be treated as a medical emergency suggestive of meningococcal disease (p.1248)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood culture for confirmation and public health investigation (positive in up to ~75% of cases); avoid media containing sodium polyanethol sulfonate, which may inhibit meningococcal growth, and avoid delay in transport"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate empirical parenteral third-generation cephalosporin such as ceftriaxone or cefotaxime, with pre-hospital benzylpenicillin, without delaying for lumbar puncture"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: A normal or low WBC count and inflammatory markers do not exclude meningococcal disease and may occur in rapidly progressive disease (p.1249)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of meningococcal disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "meningococcal_disease-matrix",
+      "title": "Meningococcal Disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Neisseria meningitidis most commonly causes asymptomatic nasopharyngeal colonization; invasive disease is rare and usually",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood culture for confirmation and public health investigation (positive in up to ~75% of cases); avoid media containing sodium",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of bacterial meningitis (presentation of meningococcal meningitis is indistinguishable unless an associated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate empirical parenteral third-generation cephalosporin such as ceftriaxone or cefotaxime, with pre-hospital",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "A normal or low WBC count and inflammatory markers do not exclude meningococcal disease and may occur in rapidly progressive",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for meningococcal disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Meningococcal Disease: Clinical Guidance",
+      "kind": "web",
+      "url": "https://www.cdc.gov/meningococcal/hcp/clinical-guidance/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "CDC Surveillance Manual, Chapter 8: Meningococcal Disease",
+      "kind": "web",
+      "url": "https://www.cdc.gov/surv-manual/php/table-of-contents/chapter-8-meningococcal-disease.html"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 143-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 381-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meningococcal_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognition and diagnosis of meningococcal disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Nonblanching rash with fever",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Petechial or purpuric rash in over 80%",
+              "op": ">",
+              "value": 80
+            },
+            {
+              "text": "{{hy:Treat as an emergency; rash may be absent or blanching early}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Presentation pattern",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Meningitis alone 30 to 50%; septicaemia alone up to 20%",
+              "range": [
+                30,
+                50
+              ]
+            },
+            {
+              "text": "Up to 40% of meningitis cases also septic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shock in children",
+          "cells": [
+            {
+              "text": "Tachycardia, poor perfusion, cold limbs with normal BP"
+            },
+            {
+              "text": "Hypotension is late"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in up to about 75%",
+              "op": "=",
+              "value": 75
+            },
+            {
+              "text": "Take before antibiotics without delaying them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood PCR",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Raises yield by over 40%",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Stays positive for days after antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF Gram stain and culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Gram stain up to 80%, culture about 90% sensitive",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "Gram-negative diplococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture",
+          "cells": [
+            {
+              "text": "Avoid in septicaemia, shock, raised ICP, coagulopathy, seizures"
+            },
+            {
+              "text": "Normal CT does not exclude raised ICP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Can be normal early in fulminant disease"
+            },
+            {
+              "text": "Do not exclude infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent disease",
+          "cells": [
+            {
+              "text": "Check total haemolytic complement"
+            },
+            {
+              "text": "C5 to C9, properdin, factor D deficiency, eculizumab"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meningococcal_disease-ddx",
+      "kind": "ddx",
+      "title": "Causes of fever with petechial or purpuric rash",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral infection (enterovirus, influenza, measles, EBV, CMV, parvovirus)",
+          "cells": [
+            {
+              "text": "Most children with fever and petechiae; well-looking"
+            },
+            {
+              "text": "Clinical course, viral PCR"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Other bacterial sepsis (pneumococcal, streptococcal, staphylococcal, gram-negative)",
+          "cells": [
+            {
+              "text": "Source such as pneumonia or skin"
+            },
+            {
+              "text": "Blood culture"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Other bacterial meningitis",
+          "cells": [
+            {
+              "text": "No rash; CSF Gram stain differs"
+            },
+            {
+              "text": "CSF Gram stain, culture, PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia or marrow infiltration",
+          "cells": [
+            {
+              "text": "Afebrile, isolated low platelets"
+            },
+            {
+              "text": "Platelet count and film"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Henoch-Schonlein purpura",
+          "cells": [
+            {
+              "text": "Palpable purpura on legs, arthritis, abdominal pain"
+            },
+            {
+              "text": "Urinalysis; normal platelets"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Protein C or S deficiency",
+          "cells": [
+            {
+              "text": "Purpura fulminans after varicella"
+            },
+            {
+              "text": "Protein C and S levels"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Nonaccidental injury",
+          "cells": [
+            {
+              "text": "Pattern or distribution of bruising in a child"
+            },
+            {
+              "text": "Safeguarding assessment"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "meningococcal_disease-treatment",
+      "kind": "treatment",
+      "title": "Treatment and prevention of meningococcal disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empiric cephalosporin",
+          "cells": [
+            {
+              "text": "{{hy:Immediately on suspicion; do not wait for LP}}"
+            },
+            {
+              "text": "Ceftriaxone or cefotaxime; switch to penicillin G or ampicillin only if susceptible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Empiric meningitis cover",
+          "cells": [
+            {
+              "text": "Adults over 55 or debilitated"
+            },
+            {
+              "text": "Add ampicillin to cephalosporin plus vancomycin until organism known"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Shock management",
+          "cells": [
+            {
+              "text": "Septicaemia with shock"
+            },
+            {
+              "text": "Fluids, vasoactive support, ICU; correct glucose, acidosis, electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clear carriage before discharge",
+          "cells": [
+            {
+              "text": "Treated without ceftriaxone or cefotaxime"
+            },
+            {
+              "text": "Rifampin 4 doses over 2 days, or single dose ciprofloxacin or ceftriaxone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rifampin prophylaxis",
+          "cells": [
+            {
+              "text": "Close contacts, age 1 month or older"
+            },
+            {
+              "text": "10 mg/kg PO every 12 h for 2 days (max 600 mg); not in pregnancy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ceftriaxone prophylaxis",
+          "cells": [
+            {
+              "text": "Close contacts, including pregnancy"
+            },
+            {
+              "text": "125 mg IM under 15 years; 250 mg IM at 15 years or older"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ciprofloxacin prophylaxis",
+          "cells": [
+            {
+              "text": "Close contacts where no ciprofloxacin resistance"
+            },
+            {
+              "text": "20 mg/kg PO once (max 500 mg)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Timing of prophylaxis",
+          "cells": [
+            {
+              "text": "As soon as possible"
+            },
+            {
+              "text": "Little benefit after 14 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Notification and vaccination",
+          "cells": [
+            {
+              "text": "All cases"
+            },
+            {
+              "text": "Public health notification; vaccinate per serogroup"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meningococcal_disease-dx-mgmt",
+      "title": "Diagnosis and management of meningococcal disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with nonblanching rash or suspected meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Ceftriaxone or cefotaxime immediately; blood culture and PCR",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Signs of shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Resuscitate, vasoactive support, ICU",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised ICP, coagulopathy or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lumbar puncture with CSF Gram stain, culture, PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Defer LP; rely on blood culture and PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "N. meningitidis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Treat other cause of fever and petechiae",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Notify public health; identify close contacts",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Contacts: rifampin, ciprofloxacin or ceftriaxone promptly",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

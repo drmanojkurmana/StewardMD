@@ -1,170 +1,466 @@
 {
- "id": "microangiopathic_haemolytic_anaemia",
- "name": "Microangiopathic haemolytic anaemia",
- "aliases": [
-  "MAHA"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Haematology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mechanical (non-immune) haemolysis in which red cells are fragmented as they pass through abnormal small vessels",
-   "The blood film hallmark is schistocytes (red cell fragments) with features of haemolysis and often thrombocytopenia",
-   "The direct antiglobulin test is negative, distinguishing it from immune haemolysis",
-   "It is a syndrome, not a single disease, and the key task is to identify the underlying cause",
-   "Thrombotic microangiopathies (TTP, haemolytic uraemic syndrome) are urgent causes requiring specific treatment",
-   "Other causes include disseminated intravascular coagulation, malignant hypertension, pre-eclampsia/HELLP, disseminated cancer and mechanical heart valves"
+  "id": "microangiopathic_haemolytic_anaemia",
+  "name": "Microangiopathic haemolytic anaemia",
+  "aliases": [
+    "MAHA"
   ],
-  "pathophysiology": "Microangiopathic haemolytic anaemia results from physical shearing of red cells within the microcirculation or across abnormal surfaces. In thrombotic microangiopathies, platelet-rich or fibrin thrombi partially occlude small vessels, and red cells passing through are fragmented into schistocytes. Similar fragmentation occurs across fibrin strands in disseminated intravascular coagulation, in vessels damaged by malignant hypertension or vasculitis, or across prosthetic valves. Because the process is mechanical, the antiglobulin test is negative, and consumption of platelets is common in thrombotic causes.",
-  "additionalDifferentials": [
-   "Thrombotic thrombocytopenic purpura",
-   "Haemolytic uraemic syndrome (including atypical)",
-   "Disseminated intravascular coagulation",
-   "Malignant hypertension",
-   "Pre-eclampsia and HELLP syndrome",
-   "Disseminated malignancy or mechanical valve haemolysis"
-  ],
-  "additionalInvestigations": [
-   "Blood film for schistocytes and platelet count",
-   "Direct antiglobulin test (negative in MAHA)",
-   "Coagulation screen and fibrinogen to assess for DIC",
-   "Renal function and blood pressure",
-   "Cause-specific tests (ADAMTS13, complement studies, pregnancy assessment)"
-  ],
-  "redFlags": [
-   "Thrombocytopenia with neurological or renal features suggesting a thrombotic microangiopathy",
-   "Rapidly rising creatinine",
-   "Pregnancy with hypertension and haemolysis (HELLP)",
-   "Evidence of disseminated intravascular coagulation"
-  ],
-  "prognosis": "Prognosis depends entirely on the cause; thrombotic thrombocytopenic purpura is rapidly fatal untreated but responds to prompt plasma exchange, whereas other causes require treatment of the underlying process.",
-  "pitfalls": [
-   "Missing thrombotic thrombocytopenic purpura, a medical emergency, by delaying ADAMTS13 testing and plasma exchange",
-   "Attributing MAHA to immune haemolysis despite a negative antiglobulin test",
-   "Overlooking pregnancy-related causes",
-   "Failing to search systematically for the underlying cause"
-  ],
-  "references": [
-   "Haematology reference texts (standard reference)",
-   "Thrombotic microangiopathy guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause, as this is a syndrome rather than a single disease",
-   "Initiate urgent therapeutic plasma exchange when thrombotic thrombocytopenic purpura is suspected, alongside corticosteroids, with caplacizumab and rituximab as adjuncts",
-   "Treat complement-mediated (atypical) haemolytic uraemic syndrome with a complement C5 inhibitor such as eculizumab, and manage shiga-toxin-associated HUS supportively",
-   "In disseminated intravascular coagulation, treat the precipitating illness and replace fibrinogen and platelets guided by bleeding",
-   "Control accelerated (malignant) hypertension with parenteral antihypertensives, and expedite delivery in pre-eclampsia or HELLP syndrome",
-   "Transfuse red cells for symptomatic anaemia but avoid platelet transfusion in TTP unless there is life-threatening haemorrhage",
-   "Monitor the blood film, platelet count and renal function to track response and detect relapse",
-   "Refer urgently to haematology, with nephrology or obstetric input as relevant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "microangiopathic_haemolytic_anaemia-pathway",
-   "title": "Microangiopathic haemolytic anaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mechanical (non-immune) haemolysis in which red cells are fragmented as they pass through abnormal small vessels",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Thrombocytopenia with neurological or renal features suggesting a thrombotic microangiopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood film for schistocytes and platelet count, Direct antiglobulin test (negative in MAHA), Coagulation screen and fibrinogen to assess for DIC"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause, as this is a syndrome rather than a single disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing thrombotic thrombocytopenic purpura, a medical emergency, by delaying ADAMTS13 testing and plasma exchange"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of microangiopathic haemolytic anaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "microangiopathic_haemolytic_anaemia-matrix",
-   "title": "Microangiopathic haemolytic anaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mechanical (non-immune) haemolysis in which red cells are fragmented as they pass through abnormal small vessels",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Haematology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mechanical (non-immune) haemolysis in which red cells are fragmented as they pass through abnormal small vessels",
+      "The blood film hallmark is schistocytes (red cell fragments) with features of haemolysis and often thrombocytopenia",
+      "The direct antiglobulin test is negative, distinguishing it from immune haemolysis",
+      "It is a syndrome, not a single disease, and the key task is to identify the underlying cause",
+      "Thrombotic microangiopathies (TTP, haemolytic uraemic syndrome) are urgent causes requiring specific treatment",
+      "Other causes include disseminated intravascular coagulation, malignant hypertension, pre-eclampsia/HELLP, disseminated cancer and mechanical heart valves"
     ],
-    [
-     "Key Investigations",
-     "Blood film for schistocytes and platelet count, Direct antiglobulin test (negative in MAHA), Coagulation screen and fibrinogen to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Microangiopathic haemolytic anaemia results from physical shearing of red cells within the microcirculation or across abnormal surfaces. In thrombotic microangiopathies, platelet-rich or fibrin thrombi partially occlude small vessels, and red cells passing through are fragmented into schistocytes. Similar fragmentation occurs across fibrin strands in disseminated intravascular coagulation, in vessels damaged by malignant hypertension or vasculitis, or across prosthetic valves. Because the process is mechanical, the antiglobulin test is negative, and consumption of platelets is common in thrombotic causes.",
+    "additionalDifferentials": [
+      "Thrombotic thrombocytopenic purpura",
+      "Haemolytic uraemic syndrome (including atypical)",
+      "Disseminated intravascular coagulation",
+      "Malignant hypertension",
+      "Pre-eclampsia and HELLP syndrome",
+      "Disseminated malignancy or mechanical valve haemolysis"
     ],
-    [
-     "Primary Differentials",
-     "Thrombotic thrombocytopenic purpura, Haemolytic uraemic syndrome (including atypical), Disseminated intravascular coagulation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood film for schistocytes and platelet count",
+      "Direct antiglobulin test (negative in MAHA)",
+      "Coagulation screen and fibrinogen to assess for DIC",
+      "Renal function and blood pressure",
+      "Cause-specific tests (ADAMTS13, complement studies, pregnancy assessment)"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause, as this is a syndrome rather than a single disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Thrombocytopenia with neurological or renal features suggesting a thrombotic microangiopathy",
+      "Rapidly rising creatinine",
+      "Pregnancy with hypertension and haemolysis (HELLP)",
+      "Evidence of disseminated intravascular coagulation"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing thrombotic thrombocytopenic purpura, a medical emergency, by delaying ADAMTS13 testing and plasma exchange",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends entirely on the cause; thrombotic thrombocytopenic purpura is rapidly fatal untreated but responds to prompt plasma exchange, whereas other causes require treatment of the underlying process.",
+    "pitfalls": [
+      "Missing thrombotic thrombocytopenic purpura, a medical emergency, by delaying ADAMTS13 testing and plasma exchange",
+      "Attributing MAHA to immune haemolysis despite a negative antiglobulin test",
+      "Overlooking pregnancy-related causes",
+      "Failing to search systematically for the underlying cause"
+    ],
+    "references": [
+      "Haematology reference texts (standard reference)",
+      "Thrombotic microangiopathy guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause, as this is a syndrome rather than a single disease",
+      "Initiate urgent therapeutic plasma exchange when thrombotic thrombocytopenic purpura is suspected, alongside corticosteroids, with caplacizumab and rituximab as adjuncts",
+      "Treat complement-mediated (atypical) haemolytic uraemic syndrome with a complement C5 inhibitor such as eculizumab, and manage shiga-toxin-associated HUS supportively",
+      "In disseminated intravascular coagulation, treat the precipitating illness and replace fibrinogen and platelets guided by bleeding",
+      "Control accelerated (malignant) hypertension with parenteral antihypertensives, and expedite delivery in pre-eclampsia or HELLP syndrome",
+      "Transfuse red cells for symptomatic anaemia but avoid platelet transfusion in TTP unless there is life-threatening haemorrhage",
+      "Monitor the blood film, platelet count and renal function to track response and detect relapse",
+      "Refer urgently to haematology, with nephrology or obstetric input as relevant"
     ]
-   ],
-   "caption": "Overview comparison matrix for microangiopathic haemolytic anaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "microangiopathic-haemolytic-anaemia-real-image",
-   "title": "Microangiopathic haemolytic anaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "microangiopathic_haemolytic_anaemia-pathway",
+      "title": "Microangiopathic haemolytic anaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mechanical (non-immune) haemolysis in which red cells are fragmented as they pass through abnormal small vessels",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Thrombocytopenia with neurological or renal features suggesting a thrombotic microangiopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood film for schistocytes and platelet count, Direct antiglobulin test (negative in MAHA), Coagulation screen and fibrinogen to assess for DIC"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause, as this is a syndrome rather than a single disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing thrombotic thrombocytopenic purpura, a medical emergency, by delaying ADAMTS13 testing and plasma exchange"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of microangiopathic haemolytic anaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "microangiopathic_haemolytic_anaemia-matrix",
+      "title": "Microangiopathic haemolytic anaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mechanical (non-immune) haemolysis in which red cells are fragmented as they pass through abnormal small vessels",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood film for schistocytes and platelet count, Direct antiglobulin test (negative in MAHA), Coagulation screen and fibrinogen to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thrombotic thrombocytopenic purpura, Haemolytic uraemic syndrome (including atypical), Disseminated intravascular coagulation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause, as this is a syndrome rather than a single disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing thrombotic thrombocytopenic purpura, a medical emergency, by delaying ADAMTS13 testing and plasma exchange",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for microangiopathic haemolytic anaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "microangiopathic_haemolytic_anaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood film for schistocytes and platelet count",
+          "cells": [
+            {
+              "text": "Schistocytes and platelet count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Negative in MAHA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen and fibrinogen",
+          "cells": [
+            {
+              "text": "DIC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and blood pressure",
+          "cells": [
+            {
+              "text": "Renal involvement and blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cause-specific tests (ADAMTS13, complement studies, pregnancy assessment)",
+          "cells": [
+            {
+              "text": "Cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microangiopathic_haemolytic_anaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thrombotic thrombocytopenic purpura",
+          "cells": [
+            {
+              "text": "Thrombocytopenia with neurological or renal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolytic uraemic syndrome",
+          "cells": [
+            {
+              "text": "Rapidly rising creatinine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Evidence of disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-eclampsia and HELLP syndrome",
+          "cells": [
+            {
+              "text": "Pregnancy with hypertension and haemolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microangiopathic_haemolytic_anaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Identify and treat the cause",
+          "cells": [
+            {
+              "text": "MAHA is a syndrome rather than a single disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange for suspected TTP",
+          "cells": [
+            {
+              "text": "Urgent, with corticosteroids; caplacizumab and rituximab as adjuncts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement inhibition for atypical HUS",
+          "cells": [
+            {
+              "text": "C5 inhibitor such as eculizumab; supportive care for Shiga-toxin HUS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Treat the precipitating illness; replace fibrinogen and platelets guided by bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertensive emergencies",
+          "cells": [
+            {
+              "text": "Parenteral antihypertensives for malignant hypertension; expedite delivery in pre-eclampsia or HELLP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion",
+          "cells": [
+            {
+              "text": "Red cells for symptomatic anaemia; avoid platelet transfusion in TTP unless life-threatening haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood film, platelet count and renal function for response and relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "microangiopathic_haemolytic_anaemia-dx-mgmt",
+      "title": "Diagnosis and management of Microangiopathic haemolytic anaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anaemia with schistocytes on blood film and thrombocytopenia; suspected MAHA",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological or renal features, rising creatinine, pregnancy with hypertension, or DIC?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology referral; urgent plasma exchange if TTP is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film; platelet count; DAT; coagulation and fibrinogen; ADAMTS13",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a thrombotic microangiopathy cause identified on ADAMTS13 or complement tests?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DIC, malignant hypertension or mechanical valve haemolysis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause; MAHA is a syndrome rather than a single disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent plasma exchange with corticosteroids for suspected TTP",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Complement C5 inhibitor for atypical HUS; supportive care for Shiga-toxin HUS",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Parenteral antihypertensives; expedite delivery in pre-eclampsia or HELLP",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor blood film, platelets and renal function for response and relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

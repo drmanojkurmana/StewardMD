@@ -1,172 +1,470 @@
 {
- "id": "infant_gord",
- "name": "Infant Gastro-oesophageal Reflux Disease",
- "aliases": [
-  "infant GORD",
-  "infant GERD",
-  "gastro-oesophageal reflux disease in infancy"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "It is essential to distinguish physiological gastro-oesophageal reflux, which is common and benign in healthy infants, from reflux disease, in which reflux causes troublesome symptoms or complications.",
-   "Effortless regurgitation or posseting in a thriving, comfortable infant (the happy spitter) is normal and typically improves as the infant matures and begins to sit and take solids.",
-   "Reflux disease is suggested by poor weight gain, feeding refusal or distress, persistent irritability, back-arching with feeds, or respiratory symptoms attributable to reflux.",
-   "Diagnosis is largely clinical from the history and examination; investigations are reserved for atypical presentations, complications, or diagnostic uncertainty.",
-   "First-line management uses conservative measures such as optimising feeding volume and technique, thickened feeds where appropriate, and positioning advice consistent with safe sleep guidance.",
-   "A trial of cow's milk protein elimination is reasonable when allergy is suspected, since it can mimic or coexist with reflux disease.",
-   "Acid-suppressing medication is not appropriate for uncomplicated physiological reflux and should be limited to infants with clear evidence of reflux disease.",
-   "Warning features such as bilious or forceful vomiting, gastrointestinal bleeding, or onset of vomiting after six months point away from simple reflux and toward an alternative diagnosis."
+  "id": "infant_gord",
+  "name": "Infant Gastro-oesophageal Reflux Disease",
+  "aliases": [
+    "infant GORD",
+    "infant GERD",
+    "gastro-oesophageal reflux disease in infancy"
   ],
-  "pathophysiology": "Gastro-oesophageal reflux occurs when gastric contents pass back into the oesophagus, largely through transient relaxations of the lower oesophageal sphincter. Reflux is especially common in infancy because of a short oesophagus, a predominantly liquid and high-volume diet, frequent recumbency, and immaturity of the antireflux barrier. In most infants this is physiological and self-resolving. Reflux disease develops when refluxate causes oesophageal mucosal injury and pain, impairs feeding and growth, or reaches the airway to provoke respiratory symptoms. Contributing factors include delayed gastric emptying and, in some infants, cow's milk protein allergy that produces overlapping symptoms.",
-  "additionalDifferentials": [
-   "Physiological gastro-oesophageal reflux (normal regurgitation)",
-   "Cow's milk protein allergy",
-   "Pyloric stenosis (with projectile non-bilious vomiting)",
-   "Overfeeding",
-   "Infection (including urinary tract infection)",
-   "Intestinal obstruction or malrotation (particularly with bilious vomiting)"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment with growth monitoring (usually sufficient)",
-   "Trial of cow's milk protein elimination when allergy is suspected",
-   "Upper gastrointestinal contrast study to assess anatomy if obstruction or malrotation is a concern",
-   "Oesophageal pH or impedance monitoring in selected complex cases",
-   "Endoscopy when oesophagitis or another mucosal complication is suspected"
-  ],
-  "redFlags": [
-   "Bilious vomiting or haematemesis",
-   "Forceful or projectile vomiting suggesting pyloric stenosis",
-   "Faltering growth or feeding refusal",
-   "Onset of vomiting after six months or persistence beyond infancy",
-   "Systemic signs such as fever, lethargy, or a bulging fontanelle"
-  ],
-  "prognosis": "Physiological reflux resolves in the great majority of infants during the first year to eighteen months as the infant matures; reflux disease also generally improves with time and appropriate management, though some infants with underlying conditions require more prolonged treatment.",
-  "pitfalls": [
-   "Treating benign physiological reflux with acid suppression or unnecessary investigation",
-   "Missing an alternative diagnosis such as pyloric stenosis or malrotation presenting with vomiting",
-   "Overlooking cow's milk protein allergy as a mimicking or coexisting cause",
-   "Recommending positioning that conflicts with safe sleep advice"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and conservative measures for physiological reflux in a thriving infant, including feed-volume and technique optimisation, thickened feeds and positioning consistent with safe-sleep advice",
-   "A trial of cow's milk protein elimination, using maternal dairy exclusion in breastfed infants or an extensively hydrolysed formula, where allergy is suspected",
-   "Acid suppression with a proton pump inhibitor or H2-receptor antagonist reserved for proven reflux disease or oesophagitis, not for uncomplicated regurgitation",
-   "Avoidance of routine acid-suppressing medication for effortless regurgitation alone",
-   "Growth monitoring and feeding support to detect faltering growth and feeding difficulty",
-   "Referral for paediatric specialist assessment and investigation for atypical features, complications or treatment failure, with fundoplication reserved for severe refractory disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "infant_gord-pathway",
-   "title": "Infant Gastro-oesophageal Reflux Disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "It is essential to distinguish physiological gastro-oesophageal reflux, which is common and benign in healthy infants, from reflux disease, in which reflux causes troublesome symptoms or complications.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilious vomiting or haematemesis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment with growth monitoring (usually sufficient), Trial of cow's milk protein elimination when allergy is suspected, Upper gastrointestinal contrast study to assess anatomy if obstruction or malrotation is a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and conservative measures for physiological reflux in a thriving infant, including feed-volume and technique optimisation, thickened feeds and positioning consistent with safe-sleep advice"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating benign physiological reflux with acid suppression or unnecessary investigation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of infant gastro-oesophageal reflux disease."
-  }
- ],
- "tables": [
-  {
-   "id": "infant_gord-matrix",
-   "title": "Infant Gastro-oesophageal Reflux Disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "It is essential to distinguish physiological gastro-oesophageal reflux, which is common and benign in healthy infants, from",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "It is essential to distinguish physiological gastro-oesophageal reflux, which is common and benign in healthy infants, from reflux disease, in which reflux causes troublesome symptoms or complications.",
+      "Effortless regurgitation or posseting in a thriving, comfortable infant (the happy spitter) is normal and typically improves as the infant matures and begins to sit and take solids.",
+      "Reflux disease is suggested by poor weight gain, feeding refusal or distress, persistent irritability, back-arching with feeds, or respiratory symptoms attributable to reflux.",
+      "Diagnosis is largely clinical from the history and examination; investigations are reserved for atypical presentations, complications, or diagnostic uncertainty.",
+      "First-line management uses conservative measures such as optimising feeding volume and technique, thickened feeds where appropriate, and positioning advice consistent with safe sleep guidance.",
+      "A trial of cow's milk protein elimination is reasonable when allergy is suspected, since it can mimic or coexist with reflux disease.",
+      "Acid-suppressing medication is not appropriate for uncomplicated physiological reflux and should be limited to infants with clear evidence of reflux disease.",
+      "Warning features such as bilious or forceful vomiting, gastrointestinal bleeding, or onset of vomiting after six months point away from simple reflux and toward an alternative diagnosis."
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment with growth monitoring (usually sufficient), Trial of cow's milk protein elimination when allergy is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gastro-oesophageal reflux occurs when gastric contents pass back into the oesophagus, largely through transient relaxations of the lower oesophageal sphincter. Reflux is especially common in infancy because of a short oesophagus, a predominantly liquid and high-volume diet, frequent recumbency, and immaturity of the antireflux barrier. In most infants this is physiological and self-resolving. Reflux disease develops when refluxate causes oesophageal mucosal injury and pain, impairs feeding and growth, or reaches the airway to provoke respiratory symptoms. Contributing factors include delayed gastric emptying and, in some infants, cow's milk protein allergy that produces overlapping symptoms.",
+    "additionalDifferentials": [
+      "Physiological gastro-oesophageal reflux (normal regurgitation)",
+      "Cow's milk protein allergy",
+      "Pyloric stenosis (with projectile non-bilious vomiting)",
+      "Overfeeding",
+      "Infection (including urinary tract infection)",
+      "Intestinal obstruction or malrotation (particularly with bilious vomiting)"
     ],
-    [
-     "Primary Differentials",
-     "Physiological gastro-oesophageal reflux (normal regurgitation), Cow's milk protein allergy, Pyloric stenosis (with projectile",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment with growth monitoring (usually sufficient)",
+      "Trial of cow's milk protein elimination when allergy is suspected",
+      "Upper gastrointestinal contrast study to assess anatomy if obstruction or malrotation is a concern",
+      "Oesophageal pH or impedance monitoring in selected complex cases",
+      "Endoscopy when oesophagitis or another mucosal complication is suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and conservative measures for physiological reflux in a thriving infant, including feed-volume and technique",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilious vomiting or haematemesis",
+      "Forceful or projectile vomiting suggesting pyloric stenosis",
+      "Faltering growth or feeding refusal",
+      "Onset of vomiting after six months or persistence beyond infancy",
+      "Systemic signs such as fever, lethargy, or a bulging fontanelle"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating benign physiological reflux with acid suppression or unnecessary investigation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Physiological reflux resolves in the great majority of infants during the first year to eighteen months as the infant matures; reflux disease also generally improves with time and appropriate management, though some infants with underlying conditions require more prolonged treatment.",
+    "pitfalls": [
+      "Treating benign physiological reflux with acid suppression or unnecessary investigation",
+      "Missing an alternative diagnosis such as pyloric stenosis or malrotation presenting with vomiting",
+      "Overlooking cow's milk protein allergy as a mimicking or coexisting cause",
+      "Recommending positioning that conflicts with safe sleep advice"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and conservative measures for physiological reflux in a thriving infant, including feed-volume and technique optimisation, thickened feeds and positioning consistent with safe-sleep advice",
+      "A trial of cow's milk protein elimination, using maternal dairy exclusion in breastfed infants or an extensively hydrolysed formula, where allergy is suspected",
+      "Acid suppression with a proton pump inhibitor or H2-receptor antagonist reserved for proven reflux disease or oesophagitis, not for uncomplicated regurgitation",
+      "Avoidance of routine acid-suppressing medication for effortless regurgitation alone",
+      "Growth monitoring and feeding support to detect faltering growth and feeding difficulty",
+      "Referral for paediatric specialist assessment and investigation for atypical features, complications or treatment failure, with fundoplication reserved for severe refractory disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for infant gastro-oesophageal reflux disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "infant-gord-real-image",
-   "title": "Infant Gastro-oesophageal Reflux Disease: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "infant_gord-pathway",
+      "title": "Infant Gastro-oesophageal Reflux Disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "It is essential to distinguish physiological gastro-oesophageal reflux, which is common and benign in healthy infants, from reflux disease, in which reflux causes troublesome symptoms or complications.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilious vomiting or haematemesis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment with growth monitoring (usually sufficient), Trial of cow's milk protein elimination when allergy is suspected, Upper gastrointestinal contrast study to assess anatomy if obstruction or malrotation is a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and conservative measures for physiological reflux in a thriving infant, including feed-volume and technique optimisation, thickened feeds and positioning consistent with safe-sleep advice"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating benign physiological reflux with acid suppression or unnecessary investigation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of infant gastro-oesophageal reflux disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "infant_gord-matrix",
+      "title": "Infant Gastro-oesophageal Reflux Disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "It is essential to distinguish physiological gastro-oesophageal reflux, which is common and benign in healthy infants, from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment with growth monitoring (usually sufficient), Trial of cow's milk protein elimination when allergy is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Physiological gastro-oesophageal reflux (normal regurgitation), Cow's milk protein allergy, Pyloric stenosis (with projectile",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and conservative measures for physiological reflux in a thriving infant, including feed-volume and technique",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating benign physiological reflux with acid suppression or unnecessary investigation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for infant gastro-oesophageal reflux disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infant_gord-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment with growth monitoring",
+          "cells": [
+            {
+              "text": "Usually sufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cow's milk protein elimination trial",
+          "cells": [
+            {
+              "text": "When allergy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal contrast study",
+          "cells": [
+            {
+              "text": "Obstruction or malrotation concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal pH or impedance monitoring",
+          "cells": [
+            {
+              "text": "Selected complex cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy",
+          "cells": [
+            {
+              "text": "Oesophagitis or another mucosal complication"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infant_gord-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological gastro-oesophageal reflux",
+          "cells": [
+            {
+              "text": "Effortless regurgitation in a thriving infant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cow's milk protein allergy",
+          "cells": [
+            {
+              "text": "Mimics or coexists; tested by elimination trial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyloric stenosis",
+          "cells": [
+            {
+              "text": "Projectile non-bilious vomiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malrotation or intestinal obstruction",
+          "cells": [
+            {
+              "text": "Bilious vomiting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infant_gord-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and feeding technique",
+          "cells": [
+            {
+              "text": "Feed volume, technique, thickened feeds and positioning consistent with safe-sleep advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cow's milk protein elimination",
+          "cells": [
+            {
+              "text": "Maternal dairy exclusion or extensively hydrolysed formula where allergy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid suppression",
+          "cells": [
+            {
+              "text": "Proton pump inhibitor or H2-receptor antagonist only for proven reflux disease or oesophagitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine acid suppression",
+          "cells": [
+            {
+              "text": "Not for effortless regurgitation alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Detects faltering growth and feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Atypical features or treatment failure; fundoplication for severe refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infant_gord-dx-mgmt",
+      "title": "Diagnosis and management of Infant Gastro-oesophageal Reflux Disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Regurgitation or posseting in an infant with feeding or growth concerns",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bilious or projectile vomiting, haematemesis, faltering growth or fever?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric review for pyloric stenosis or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Growth monitoring and review; contrast study or pH monitoring if complex",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thriving infant with effortless regurgitation only?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Trial of cow's milk protein elimination; consider specialist assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and optimise feeding technique and positioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thickened feeds in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cow's milk protein elimination where allergy is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Acid suppression only for proven reflux disease or oesophagitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Growth and feeding monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Physiological reflux typically improves with age; specialist referral if refractory",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

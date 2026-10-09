@@ -1,188 +1,710 @@
 {
- "id": "CELIAC_DISEASE",
- "name": "Coeliac disease",
- "system": "Gastroenterology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "coeliac",
-  "celiac",
-  "gluten enteropathy",
-  "celiac sprue",
-  "gluten-sensitive enteropathy",
-  "non-tropical sprue",
-  "celiac enteropathy"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Consider in any patient with chronic diarrhoea, bloating, weight loss, or unexplained iron-deficiency anaemia, even without overt GI symptoms",
-   "Can present atypically with isolated osteoporosis, infertility, elevated transaminases, peripheral neuropathy, or dental enamel defects",
-   "Dermatitis herpetiformis is a specific cutaneous marker and is essentially pathognomonic when biopsy-confirmed",
-   "Serologic testing must be performed while the patient is still on a gluten-containing diet, otherwise antibody titres normalise and results are falsely negative",
-   "First-degree relatives and patients with type 1 diabetes, autoimmune thyroid disease, or Down/Turner syndrome have markedly increased prevalence and warrant screening",
-   "Selective IgA deficiency can cause false-negative IgA-based serology, so total IgA should be checked concurrently",
-   "Symptomatic response to a gluten-free diet supports but does not confirm the diagnosis; histology and serology should ideally precede dietary change"
+  "id": "CELIAC_DISEASE",
+  "name": "Coeliac disease",
+  "system": "Gastroenterology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "coeliac",
+    "celiac",
+    "gluten enteropathy",
+    "celiac sprue",
+    "gluten-sensitive enteropathy",
+    "non-tropical sprue",
+    "celiac enteropathy"
   ],
-  "pathophysiology": "Coeliac disease is an immune-mediated enteropathy triggered by dietary gluten (from wheat, barley, and rye) in genetically susceptible individuals, most of whom carry HLA-DQ2 or HLA-DQ8. Deamidation of gluten peptides by tissue transglutaminase enhances their binding to these HLA molecules, driving an aberrant T-cell response that damages small intestinal enterocytes. The resulting villous atrophy, crypt hyperplasia, and intraepithelial lymphocytosis impair mucosal absorptive surface area, leading to malabsorption of macronutrients and micronutrients.",
-  "additionalDifferentials": [
-   "Tropical sprue",
-   "Small intestinal bacterial overgrowth",
-   "Autoimmune enteropathy",
-   "Common variable immunodeficiency with enteropathy",
-   "Crohn disease of the small bowel",
-   "Irritable bowel syndrome"
-  ],
-  "infectionMimics": [
-   "Giardiasis",
-   "Tropical sprue (presumed infectious/environmental etiology)",
-   "Whipple disease"
-  ],
-  "nonInfectiousMimics": [
-   "Non-coeliac gluten sensitivity",
-   "Lactose intolerance",
-   "Autoimmune enteropathy",
-   "Collagenous sprue",
-   "Eosinophilic gastroenteritis",
-   "Olmesartan-induced enteropathy"
-  ],
-  "additionalInvestigations": [
-   "IgA tissue transglutaminase antibody — first-line serologic screen, high sensitivity and specificity",
-   "Total serum IgA — excludes IgA deficiency causing false-negative serology",
-   "IgA or IgG deamidated gliadin peptide antibody — useful adjunct, especially in young children or IgA-deficient patients",
-   "Upper endoscopy with multiple duodenal biopsies — confirms diagnosis via villous atrophy, crypt hyperplasia, and intraepithelial lymphocytosis",
-   "HLA-DQ2/DQ8 genotyping — high negative predictive value, useful to exclude disease when serology/histology are equivocal",
-   "Complete blood count and iron studies — screens for iron-deficiency anaemia from malabsorption",
-   "Bone mineral density (DEXA) — assesses for osteopenia/osteoporosis from calcium/vitamin D malabsorption",
-   "Fat-soluble vitamin levels (A, D, E, K) and folate/B12 — evaluates extent of malabsorption"
-  ],
-  "redFlags": [
-   "Persistent or worsening symptoms despite strict gluten-free diet — consider refractory coeliac disease or alternative diagnosis",
-   "New abdominal pain, obstruction, or GI bleeding in a known coeliac patient — raises concern for enteropathy-associated T-cell lymphoma or ulcerative jejunoileitis",
-   "Severe malnutrition, hypoalbuminemia, or electrolyte derangement requiring urgent nutritional support",
-   "Unexplained weight loss with anaemia in an older adult — exclude malignancy alongside coeliac workup",
-   "Signs of adrenal or severe metabolic crisis from long-standing malabsorption"
-  ],
-  "pitfalls": [
-   "Testing serology after the patient has already started a gluten-free diet, producing false-negative results",
-   "Relying on serology alone without confirmatory duodenal biopsy, or biopsying too few sites reducing diagnostic yield",
-   "Missing the diagnosis in atypical presentations (isolated anaemia, infertility, elevated liver enzymes) because classic diarrhoea is absent",
-   "Failing to screen at-risk relatives or patients with associated autoimmune conditions"
-  ],
-  "prognosis": "Most patients respond well to strict, lifelong adherence to a gluten-free diet, with resolution of symptoms and mucosal healing over months to years. A small subset develops refractory disease or, rarely, enteropathy-associated T-cell lymphoma, particularly with prolonged undiagnosed or poorly controlled disease.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Chapter on Celiac Disease (Gastroenterology section, Disorders of Malabsorption)"
-  ],
-  "crossLinks": [
-   "iron_deficiency_anemia"
-  ],
-  "management": [
-   "Strict lifelong gluten-free diet excluding wheat, barley and rye as the definitive treatment, supervised by a dietitian.",
-   "Correction of micronutrient deficiencies including iron, folate, vitamin B12, vitamin D and calcium.",
-   "Bone-health protection with dual-energy X-ray absorptiometry and calcium and vitamin D supplementation as needed.",
-   "Pneumococcal vaccination in view of the functional hyposplenism associated with the disease.",
-   "Monitoring of dietary adherence and mucosal recovery, including tissue transglutaminase antibody trends, with investigation of non-response for refractory disease or enteropathy-associated T-cell lymphoma.",
-   "Screening of first-degree relatives and for associated autoimmune conditions such as thyroid disease and type 1 diabetes.",
-   "Dapsone alongside the gluten-free diet for coexisting dermatitis herpetiformis, with gastroenterology and dietetic multidisciplinary follow-up."
-  ]
- },
- "algorithms": [
-  {
-   "id": "celiac_disease-pathway",
-   "title": "Coeliac disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Consider in any patient with chronic diarrhoea, bloating, weight loss, or unexplained iron-deficiency anaemia, even without overt GI symptoms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent or worsening symptoms despite strict gluten-free diet - consider refractory coeliac disease or alternative diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: IgA tissue transglutaminase antibody - first-line serologic screen, high sensitivity and specificity, Total serum IgA - excludes IgA deficiency causing false-negative serology, IgA or IgG deamidated gliadin peptide"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Strict lifelong gluten-free diet excluding wheat, barley and rye as the definitive treatment, supervised by a dietitian."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Testing serology after the patient has already started a gluten-free diet, producing false-negative results"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coeliac disease."
-  }
- ],
- "tables": [
-  {
-   "id": "celiac_disease-matrix",
-   "title": "Coeliac disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Consider in any patient with chronic diarrhoea, bloating, weight loss, or unexplained iron-deficiency anaemia, even without overt",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Consider in any patient with chronic diarrhoea, bloating, weight loss, or unexplained iron-deficiency anaemia, even without overt GI symptoms",
+      "Can present atypically with isolated osteoporosis, infertility, elevated transaminases, peripheral neuropathy, or dental enamel defects",
+      "Dermatitis herpetiformis is a specific cutaneous marker and is essentially pathognomonic when biopsy-confirmed",
+      "Serologic testing must be performed while the patient is still on a gluten-containing diet, otherwise antibody titres normalise and results are falsely negative",
+      "First-degree relatives and patients with type 1 diabetes, autoimmune thyroid disease, or Down/Turner syndrome have markedly increased prevalence and warrant screening",
+      "Selective IgA deficiency can cause false-negative IgA-based serology, so total IgA should be checked concurrently",
+      "Symptomatic response to a gluten-free diet supports but does not confirm the diagnosis; histology and serology should ideally precede dietary change"
     ],
-    [
-     "Key Investigations",
-     "IgA tissue transglutaminase antibody - first-line serologic screen, high sensitivity and specificity, Total serum IgA - excludes",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Coeliac disease is an immune-mediated enteropathy triggered by dietary gluten (from wheat, barley, and rye) in genetically susceptible individuals, most of whom carry HLA-DQ2 or HLA-DQ8. Deamidation of gluten peptides by tissue transglutaminase enhances their binding to these HLA molecules, driving an aberrant T-cell response that damages small intestinal enterocytes. The resulting villous atrophy, crypt hyperplasia, and intraepithelial lymphocytosis impair mucosal absorptive surface area, leading to malabsorption of macronutrients and micronutrients.",
+    "additionalDifferentials": [
+      "Tropical sprue",
+      "Small intestinal bacterial overgrowth",
+      "Autoimmune enteropathy",
+      "Common variable immunodeficiency with enteropathy",
+      "Crohn disease of the small bowel",
+      "Irritable bowel syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Tropical sprue, Small intestinal bacterial overgrowth, Autoimmune enteropathy",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Giardiasis",
+      "Tropical sprue (presumed infectious/environmental etiology)",
+      "Whipple disease"
     ],
-    [
-     "Management Strategy",
-     "Strict lifelong gluten-free diet excluding wheat, barley and rye as the definitive treatment, supervised by a dietitian.",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Non-coeliac gluten sensitivity",
+      "Lactose intolerance",
+      "Autoimmune enteropathy",
+      "Collagenous sprue",
+      "Eosinophilic gastroenteritis",
+      "Olmesartan-induced enteropathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Testing serology after the patient has already started a gluten-free diet, producing false-negative results",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "IgA tissue transglutaminase antibody — first-line serologic screen, high sensitivity and specificity",
+      "Total serum IgA — excludes IgA deficiency causing false-negative serology",
+      "IgA or IgG deamidated gliadin peptide antibody — useful adjunct, especially in young children or IgA-deficient patients",
+      "Upper endoscopy with multiple duodenal biopsies — confirms diagnosis via villous atrophy, crypt hyperplasia, and intraepithelial lymphocytosis",
+      "HLA-DQ2/DQ8 genotyping — high negative predictive value, useful to exclude disease when serology/histology are equivocal",
+      "Complete blood count and iron studies — screens for iron-deficiency anaemia from malabsorption",
+      "Bone mineral density (DEXA) — assesses for osteopenia/osteoporosis from calcium/vitamin D malabsorption",
+      "Fat-soluble vitamin levels (A, D, E, K) and folate/B12 — evaluates extent of malabsorption"
+    ],
+    "redFlags": [
+      "Persistent or worsening symptoms despite strict gluten-free diet — consider refractory coeliac disease or alternative diagnosis",
+      "New abdominal pain, obstruction, or GI bleeding in a known coeliac patient — raises concern for enteropathy-associated T-cell lymphoma or ulcerative jejunoileitis",
+      "Severe malnutrition, hypoalbuminemia, or electrolyte derangement requiring urgent nutritional support",
+      "Unexplained weight loss with anaemia in an older adult — exclude malignancy alongside coeliac workup",
+      "Signs of adrenal or severe metabolic crisis from long-standing malabsorption"
+    ],
+    "pitfalls": [
+      "Testing serology after the patient has already started a gluten-free diet, producing false-negative results",
+      "Relying on serology alone without confirmatory duodenal biopsy, or biopsying too few sites reducing diagnostic yield",
+      "Missing the diagnosis in atypical presentations (isolated anaemia, infertility, elevated liver enzymes) because classic diarrhoea is absent",
+      "Failing to screen at-risk relatives or patients with associated autoimmune conditions"
+    ],
+    "prognosis": "Most patients respond well to strict, lifelong adherence to a gluten-free diet, with resolution of symptoms and mucosal healing over months to years. A small subset develops refractory disease or, rarely, enteropathy-associated T-cell lymphoma, particularly with prolonged undiagnosed or poorly controlled disease.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Chapter on Celiac Disease (Gastroenterology section, Disorders of Malabsorption)"
+    ],
+    "crossLinks": [
+      "iron_deficiency_anemia"
+    ],
+    "management": [
+      "Strict lifelong gluten-free diet excluding wheat, barley and rye as the definitive treatment, supervised by a dietitian.",
+      "Correction of micronutrient deficiencies including iron, folate, vitamin B12, vitamin D and calcium.",
+      "Bone-health protection with dual-energy X-ray absorptiometry and calcium and vitamin D supplementation as needed.",
+      "Pneumococcal vaccination in view of the functional hyposplenism associated with the disease.",
+      "Monitoring of dietary adherence and mucosal recovery, including tissue transglutaminase antibody trends, with investigation of non-response for refractory disease or enteropathy-associated T-cell lymphoma.",
+      "Screening of first-degree relatives and for associated autoimmune conditions such as thyroid disease and type 1 diabetes.",
+      "Dapsone alongside the gluten-free diet for coexisting dermatitis herpetiformis, with gastroenterology and dietetic multidisciplinary follow-up."
     ]
-   ],
-   "caption": "Overview comparison matrix for coeliac disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "celiac-disease-real-image",
-   "title": "Coeliac disease: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "celiac_disease-pathway",
+      "title": "Coeliac disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Consider in any patient with chronic diarrhoea, bloating, weight loss, or unexplained iron-deficiency anaemia, even without overt GI symptoms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent or worsening symptoms despite strict gluten-free diet - consider refractory coeliac disease or alternative diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: IgA tissue transglutaminase antibody - first-line serologic screen, high sensitivity and specificity, Total serum IgA - excludes IgA deficiency causing false-negative serology, IgA or IgG deamidated gliadin peptide"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Strict lifelong gluten-free diet excluding wheat, barley and rye as the definitive treatment, supervised by a dietitian."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Testing serology after the patient has already started a gluten-free diet, producing false-negative results"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coeliac disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "celiac_disease-matrix",
+      "title": "Coeliac disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Consider in any patient with chronic diarrhoea, bloating, weight loss, or unexplained iron-deficiency anaemia, even without overt",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "IgA tissue transglutaminase antibody - first-line serologic screen, high sensitivity and specificity, Total serum IgA - excludes",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tropical sprue, Small intestinal bacterial overgrowth, Autoimmune enteropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Strict lifelong gluten-free diet excluding wheat, barley and rye as the definitive treatment, supervised by a dietitian.",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Testing serology after the patient has already started a gluten-free diet, producing false-negative results",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coeliac disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Celiac Disease",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/malabsorption-syndromes/celiac-disease",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 294-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 294-7",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CELIAC_DISEASE-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests for coeliac disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "tTG-IgA and EMA (IgA)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity above 90",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "{{hy:Test while still eating gluten}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total IgA",
+          "cells": [
+            {
+              "text": "Measure with tTG"
+            },
+            {
+              "text": "If IgA deficient, use IgG anti-tTG and anti-DGP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duodenal biopsy (second part)",
+          "cells": [
+            {
+              "text": "Villous atrophy, raised intraepithelial lymphocytes, crypt hyperplasia"
+            },
+            {
+              "text": "Confirms diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HLA-DQ2 or DQ8",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Carried by over 95% of patients",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Negative result effectively excludes coeliac disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HLA association strength",
+          "cells": [
+            {
+              "text": "DQ2 (DQA1*0501), strength +++"
+            },
+            {
+              "text": "Strong class II association"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Steatorrhoea work-up",
+          "cells": [
+            {
+              "text": "D-xylose decreased, Schilling normal, duodenal biopsy flat"
+            },
+            {
+              "text": "Pattern separates from pancreatic and ileal causes"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "First-degree relatives",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 7.5 affected",
+              "op": "=",
+              "value": 7.5
+            },
+            {
+              "text": "Screen relatives"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 17 of patients",
+              "op": "=",
+              "value": 17
+            },
+            {
+              "text": "Skin marker of the disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prevalence",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Biopsy-proven 0.4 to 0.8",
+              "range": [
+                0.4,
+                0.8
+              ]
+            },
+            {
+              "text": "Up to 1.4% by serology"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "CELIAC_DISEASE-ddx",
+      "kind": "ddx",
+      "title": "Other causes of an abnormal small-bowel biopsy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Biopsy finding"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Short or absent villi, mononuclear infiltrate, epithelial damage, crypt hypertrophy (diffuse, non-specific)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tropical sprue",
+          "cells": [
+            {
+              "text": "Similar to coeliac disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Patchy villous damage, lymphocyte infiltration"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Folate or vitamin B12 deficiency, radiation enteritis",
+          "cells": [
+            {
+              "text": "Short villi, fewer crypt mitoses, megalocytosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Zollinger-Ellison syndrome",
+          "cells": [
+            {
+              "text": "Mucosal ulceration and erosion from acid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Protein-calorie malnutrition",
+          "cells": [
+            {
+              "text": "Villous atrophy with secondary bacterial overgrowth"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drug-induced enteritis",
+          "cells": [
+            {
+              "text": "Variable histology"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Intestinal lymphoma",
+          "cells": [
+            {
+              "text": "{{hy:Malignant cells in lamina propria and submucosa; suspect if diet fails}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Whipple disease",
+          "cells": [
+            {
+              "text": "PAS-positive macrophages in lamina propria"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Agammaglobulinaemia",
+          "cells": [
+            {
+              "text": "No plasma cells; villi normal or flat"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Eosinophilic gastroenteritis",
+          "cells": [
+            {
+              "text": "Eosinophil infiltration of lamina propria and mucosa"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Giardiasis and other infections",
+          "cells": [
+            {
+              "text": "Specific organisms seen"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Non-coeliac gluten sensitivity",
+          "cells": [
+            {
+              "text": "Normal villi and negative serology"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "CELIAC_DISEASE-treatment",
+      "kind": "treatment",
+      "title": "Treatment of coeliac disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict gluten-free diet",
+          "cells": [
+            {
+              "text": "{{hy:All patients, lifelong}}"
+            },
+            {
+              "text": "Avoid wheat, rye and barley; symptoms settle in 1 to 2 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dietitian referral and support groups",
+          "cells": [
+            {
+              "text": "At diagnosis"
+            },
+            {
+              "text": "Even small amounts of gluten cause relapse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Iron, folate, calcium, multivitamin",
+          "cells": [
+            {
+              "text": "Deficiencies at diagnosis"
+            },
+            {
+              "text": "Oral replacement guided by levels"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Repeat biopsy",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "After 3 to 6",
+              "range": [
+                3,
+                6
+              ]
+            },
+            {
+              "text": "Persistent change prompts search for lymphoma or other cause"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            },
+            {
+              "text": "Control symptoms; no dose in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bowel rest and parenteral nutrition",
+          "cells": [
+            {
+              "text": "Seriously ill at diagnosis, mostly children"
+            },
+            {
+              "text": "Rare in adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surveillance for malignancy",
+          "cells": [
+            {
+              "text": "Recurrent symptoms after good response"
+            },
+            {
+              "text": "Lymphoma in 6% to 8%, usually after 20 to 40 years"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CELIAC_DISEASE-dx-mgmt",
+      "title": "Diagnosis and management of coeliac disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diarrhoea, weight loss, iron deficiency or high-risk relative",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "tTG-IgA with total IgA while eating gluten",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "IgA deficient?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IgG anti-tTG and anti-DGP",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Serology positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Clinical suspicion still high?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Coeliac disease unlikely; look for other causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Duodenal biopsy from the second part",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Villous atrophy with intraepithelial lymphocytosis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "HLA-DQ2/DQ8; negative effectively excludes coeliac disease",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong gluten-free diet with dietitian; replace deficiencies",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Repeat biopsy at 3 to 6 months; investigate non-response",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Discordant"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

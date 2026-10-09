@@ -1,174 +1,461 @@
 {
- "id": "revesz_syndrome",
- "name": "Revesz syndrome",
- "aliases": [
-  "Revesz-Debuse syndrome",
-  "Dyskeratosis congenita, Revesz variant"
- ],
- "class": "non_infective",
- "system": "Haematological / multisystem",
- "specialty": "Paediatric haematology / Medical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Telomere biology disorder references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare, severe multisystem telomere biology disorder at the severe end of the dyskeratosis congenita spectrum, overlapping clinically with Hoyeraal-Hreidarsson syndrome.",
-   "Most cases are caused by heterozygous, frequently de novo, TINF2 variants affecting the shelterin protein TIN2, producing extremely short telomeres.",
-   "The hallmark is bilateral exudative (Coats-like) retinopathy with retinal vascular abnormalities, exudates and a high risk of detachment, presenting in infancy or early childhood.",
-   "Bone marrow failure and aplastic anaemia typically develop in early childhood and are a major cause of death.",
-   "Neurological features include intracranial calcification, cerebellar hypoplasia and psychomotor impairment.",
-   "Intrauterine growth restriction, fine sparse hair and nail changes are often present.",
-   "Diagnosis rests on very short leucocyte telomeres (flow-FISH) with TINF2 sequencing."
+  "id": "revesz_syndrome",
+  "name": "Revesz syndrome",
+  "aliases": [
+    "Revesz-Debuse syndrome",
+    "Dyskeratosis congenita, Revesz variant"
   ],
-  "pathophysiology": "Revesz syndrome sits within the telomere biology disorder spectrum and is caused chiefly by pathogenic variants in TINF2, which encodes TIN2, a core component of the six-protein shelterin complex that caps and protects telomeres and links the double-stranded telomeric binding proteins TRF1 and TRF2 to the TPP1-POT1 module. Disease-associated TINF2 variants, which cluster in a mutational hotspot, destabilise telomere protection and impair telomerase recruitment, producing extremely short telomeres and premature replicative senescence or apoptosis in proliferative tissues. The severity of telomere shortening explains the early, multisystem phenotype: failure of the haematopoietic compartment (aplastic anaemia), a distinctive bilateral exudative (Coats-type) retinopathy arising from retinal microvascular compromise, and central nervous system involvement with cerebellar hypoplasia and intracranial calcification, features that overlap with Hoyeraal-Hreidarsson syndrome.",
-  "additionalDifferentials": [
-   "Hoyeraal-Hreidarsson syndrome (severe infantile dyskeratosis congenita) — overlapping and often allelic",
-   "Coats disease (usually isolated and unilateral exudative retinopathy)",
-   "Coats plus syndrome / CRMCC (CTC1-related, with intracranial calcification and cysts)",
-   "Familial exudative vitreoretinopathy",
-   "Retinoblastoma (in the differential diagnosis of leucocoria)",
-   "Other inherited bone marrow failure syndromes such as Fanconi anaemia",
-   "Congenital (TORCH) infections presenting with retinopathy and intracranial calcification"
-  ],
-  "additionalInvestigations": [
-   "Leucocyte telomere length by flow-FISH",
-   "TINF2 sequencing, with a broader telomere-gene panel if negative",
-   "Full blood count and bone marrow examination with cytogenetics",
-   "Dilated fundoscopy and retinal imaging, with examination under anaesthesia in young children",
-   "Neuroimaging (MRI/CT) for cerebellar hypoplasia and intracranial calcification",
-   "Chromosome breakage study to exclude Fanconi anaemia"
-  ],
-  "redFlags": [
-   "Leucocoria or exudative retinal detachment threatening vision",
-   "Progressive pancytopenia or marrow failure requiring transfusion or transplant assessment",
-   "Failure to thrive with developmental regression",
-   "Signs of raised intracranial pressure"
-  ],
-  "prognosis": "Poor; the combination of early aplastic anaemia, progressive retinopathy and neurological involvement usually leads to death in childhood, although the course varies with severity.",
-  "pitfalls": [
-   "Misdiagnosing the retinopathy as isolated Coats disease and missing the systemic telomere disorder",
-   "Attributing retinopathy together with intracranial calcification solely to congenital infection",
-   "Using standard-intensity transplant conditioning, which is poorly tolerated in telomere biology disorders",
-   "Assuming autosomal recessive inheritance when many TINF2 cases are de novo dominant"
-  ],
-  "references": [
-   "Dyskeratosis congenita and telomere biology disorder reviews",
-   "Paediatric haematology references",
-   "Inherited bone marrow failure syndrome guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Support the failing marrow with androgens such as danazol or oxymetholone plus transfusion, monitoring for progression",
-   "Consider haematopoietic stem cell transplantation using reduced-intensity conditioning for severe bone marrow failure, given the heightened organ sensitivity of telomere disorders",
-   "Treat the exudative (Coats-like) retinopathy with laser photocoagulation or anti-VEGF therapy to reduce the risk of detachment",
-   "Screen for and manage neurological complications, including cerebellar hypoplasia and intracranial calcification",
-   "Surveil for myelodysplasia, leukaemia and other malignancies inherent to telomere biology disorders",
-   "Offer genetic counselling and family testing for the TINF2 telomere variant, noting frequent de novo occurrence",
-   "Provide multidisciplinary supportive and palliative care given the poor prognosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "revesz_syndrome-pathway",
-   "title": "Revesz syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare, severe multisystem telomere biology disorder at the severe end of the dyskeratosis congenita spectrum, overlapping clinically with Hoyeraal-Hreidarsson syndrome.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Leucocoria or exudative retinal detachment threatening vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Leucocyte telomere length by flow-FISH, TINF2 sequencing, with a broader telomere-gene panel if negative, Full blood count and bone marrow examination with cytogenetics"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Support the failing marrow with androgens such as danazol or oxymetholone plus transfusion, monitoring for progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the retinopathy as isolated Coats disease and missing the systemic telomere disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of revesz syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "revesz_syndrome-matrix",
-   "title": "Revesz syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare, severe multisystem telomere biology disorder at the severe end of the dyskeratosis congenita spectrum, overlapping",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological / multisystem",
+  "specialty": "Paediatric haematology / Medical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Telomere biology disorder references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare, severe multisystem telomere biology disorder at the severe end of the dyskeratosis congenita spectrum, overlapping clinically with Hoyeraal-Hreidarsson syndrome.",
+      "Most cases are caused by heterozygous, frequently de novo, TINF2 variants affecting the shelterin protein TIN2, producing extremely short telomeres.",
+      "The hallmark is bilateral exudative (Coats-like) retinopathy with retinal vascular abnormalities, exudates and a high risk of detachment, presenting in infancy or early childhood.",
+      "Bone marrow failure and aplastic anaemia typically develop in early childhood and are a major cause of death.",
+      "Neurological features include intracranial calcification, cerebellar hypoplasia and psychomotor impairment.",
+      "Intrauterine growth restriction, fine sparse hair and nail changes are often present.",
+      "Diagnosis rests on very short leucocyte telomeres (flow-FISH) with TINF2 sequencing."
     ],
-    [
-     "Key Investigations",
-     "Leucocyte telomere length by flow-FISH, TINF2 sequencing, with a broader telomere-gene panel if negative, Full blood count and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Revesz syndrome sits within the telomere biology disorder spectrum and is caused chiefly by pathogenic variants in TINF2, which encodes TIN2, a core component of the six-protein shelterin complex that caps and protects telomeres and links the double-stranded telomeric binding proteins TRF1 and TRF2 to the TPP1-POT1 module. Disease-associated TINF2 variants, which cluster in a mutational hotspot, destabilise telomere protection and impair telomerase recruitment, producing extremely short telomeres and premature replicative senescence or apoptosis in proliferative tissues. The severity of telomere shortening explains the early, multisystem phenotype: failure of the haematopoietic compartment (aplastic anaemia), a distinctive bilateral exudative (Coats-type) retinopathy arising from retinal microvascular compromise, and central nervous system involvement with cerebellar hypoplasia and intracranial calcification, features that overlap with Hoyeraal-Hreidarsson syndrome.",
+    "additionalDifferentials": [
+      "Hoyeraal-Hreidarsson syndrome (severe infantile dyskeratosis congenita) — overlapping and often allelic",
+      "Coats disease (usually isolated and unilateral exudative retinopathy)",
+      "Coats plus syndrome / CRMCC (CTC1-related, with intracranial calcification and cysts)",
+      "Familial exudative vitreoretinopathy",
+      "Retinoblastoma (in the differential diagnosis of leucocoria)",
+      "Other inherited bone marrow failure syndromes such as Fanconi anaemia",
+      "Congenital (TORCH) infections presenting with retinopathy and intracranial calcification"
     ],
-    [
-     "Primary Differentials",
-     "Hoyeraal-Hreidarsson syndrome (severe infantile dyskeratosis congenita) - overlapping and often allelic, Coats disease (usually",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Leucocyte telomere length by flow-FISH",
+      "TINF2 sequencing, with a broader telomere-gene panel if negative",
+      "Full blood count and bone marrow examination with cytogenetics",
+      "Dilated fundoscopy and retinal imaging, with examination under anaesthesia in young children",
+      "Neuroimaging (MRI/CT) for cerebellar hypoplasia and intracranial calcification",
+      "Chromosome breakage study to exclude Fanconi anaemia"
     ],
-    [
-     "Management Strategy",
-     "Support the failing marrow with androgens such as danazol or oxymetholone plus transfusion, monitoring for progression",
-     "Core treatment modality"
+    "redFlags": [
+      "Leucocoria or exudative retinal detachment threatening vision",
+      "Progressive pancytopenia or marrow failure requiring transfusion or transplant assessment",
+      "Failure to thrive with developmental regression",
+      "Signs of raised intracranial pressure"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the retinopathy as isolated Coats disease and missing the systemic telomere disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Poor; the combination of early aplastic anaemia, progressive retinopathy and neurological involvement usually leads to death in childhood, although the course varies with severity.",
+    "pitfalls": [
+      "Misdiagnosing the retinopathy as isolated Coats disease and missing the systemic telomere disorder",
+      "Attributing retinopathy together with intracranial calcification solely to congenital infection",
+      "Using standard-intensity transplant conditioning, which is poorly tolerated in telomere biology disorders",
+      "Assuming autosomal recessive inheritance when many TINF2 cases are de novo dominant"
+    ],
+    "references": [
+      "Dyskeratosis congenita and telomere biology disorder reviews",
+      "Paediatric haematology references",
+      "Inherited bone marrow failure syndrome guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Support the failing marrow with androgens such as danazol or oxymetholone plus transfusion, monitoring for progression",
+      "Consider haematopoietic stem cell transplantation using reduced-intensity conditioning for severe bone marrow failure, given the heightened organ sensitivity of telomere disorders",
+      "Treat the exudative (Coats-like) retinopathy with laser photocoagulation or anti-VEGF therapy to reduce the risk of detachment",
+      "Screen for and manage neurological complications, including cerebellar hypoplasia and intracranial calcification",
+      "Surveil for myelodysplasia, leukaemia and other malignancies inherent to telomere biology disorders",
+      "Offer genetic counselling and family testing for the TINF2 telomere variant, noting frequent de novo occurrence",
+      "Provide multidisciplinary supportive and palliative care given the poor prognosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for revesz syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "revesz-syndrome-real-image",
-   "title": "Revesz syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "revesz_syndrome-pathway",
+      "title": "Revesz syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare, severe multisystem telomere biology disorder at the severe end of the dyskeratosis congenita spectrum, overlapping clinically with Hoyeraal-Hreidarsson syndrome.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Leucocoria or exudative retinal detachment threatening vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Leucocyte telomere length by flow-FISH, TINF2 sequencing, with a broader telomere-gene panel if negative, Full blood count and bone marrow examination with cytogenetics"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Support the failing marrow with androgens such as danazol or oxymetholone plus transfusion, monitoring for progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the retinopathy as isolated Coats disease and missing the systemic telomere disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of revesz syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "revesz_syndrome-matrix",
+      "title": "Revesz syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare, severe multisystem telomere biology disorder at the severe end of the dyskeratosis congenita spectrum, overlapping",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Leucocyte telomere length by flow-FISH, TINF2 sequencing, with a broader telomere-gene panel if negative, Full blood count and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hoyeraal-Hreidarsson syndrome (severe infantile dyskeratosis congenita) - overlapping and often allelic, Coats disease (usually",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Support the failing marrow with androgens such as danazol or oxymetholone plus transfusion, monitoring for progression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the retinopathy as isolated Coats disease and missing the systemic telomere disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for revesz syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Telomere biology disorder references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "revesz_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Leucocyte telomere length by flow-FISH",
+          "cells": [
+            {
+              "text": "Telomere length, the test for a telomere biology disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TINF2 sequencing",
+          "cells": [
+            {
+              "text": "TINF2 telomere variant, frequently de novo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and bone marrow with cytogenetics",
+          "cells": [
+            {
+              "text": "Progressive pancytopenia or marrow failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundoscopy and retinal imaging",
+          "cells": [
+            {
+              "text": "Exudative retinopathy, which can threaten the retina"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging (MRI or CT)",
+          "cells": [
+            {
+              "text": "Cerebellar hypoplasia and intracranial calcification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "revesz_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hoyeraal-Hreidarsson syndrome",
+          "cells": [
+            {
+              "text": "Severe infantile dyskeratosis congenita; overlapping and often allelic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coats disease",
+          "cells": [
+            {
+              "text": "Usually isolated and unilateral exudative retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coats plus syndrome (CTC1-related)",
+          "cells": [
+            {
+              "text": "Intracranial calcification and cysts with retinopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "revesz_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Androgens and transfusion",
+          "cells": [
+            {
+              "text": "Danazol or oxymetholone with transfusion for failing marrow; monitor progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stem cell transplantation",
+          "cells": [
+            {
+              "text": "Reduced-intensity conditioning for severe bone marrow failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinopathy treatment",
+          "cells": [
+            {
+              "text": "Laser photocoagulation or anti-VEGF for exudative retinopathy, to reduce detachment risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological care",
+          "cells": [
+            {
+              "text": "Screen and manage cerebellar hypoplasia and intracranial calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Myelodysplasia, leukaemia and other malignancies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "TINF2 testing of family members; frequent de novo occurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "Multidisciplinary support given the poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "revesz_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Revesz syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with marrow failure, exudative retinopathy and neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (leucocoria, exudative detachment, marrow failure, raised ICP)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent eye review for threatened vision; haematology for marrow failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Telomere length, TINF2 sequencing, marrow with cytogenetics, fundoscopy, brain imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TINF2 sequencing or telomere testing confirm the disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test a broader telomere gene panel; consider Coats or Hoyeraal-Hreidarsson",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Androgens and transfusion for failing marrow; monitor progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduced-intensity stem cell transplant for severe marrow failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser or anti-VEGF for exudative retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Malignancy surveillance and palliative support given the poor prognosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Poor prognosis; early marrow failure and progressive retinopathy often fatal in childhood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

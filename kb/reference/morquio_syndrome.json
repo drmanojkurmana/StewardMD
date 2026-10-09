@@ -1,175 +1,453 @@
 {
- "id": "morquio_syndrome",
- "name": "Morquio syndrome (MPS IV)",
- "aliases": [
-  "MPS IV",
-  "mucopolysaccharidosis type IV",
-  "Morquio A (GALNS deficiency)",
-  "Morquio B (beta-galactosidase deficiency)",
-  "keratan sulfate storage disease"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Distinguished by a severe skeletal dysplasia with markedly short trunk and normal intelligence, setting it apart from most other mucopolysaccharidoses",
-   "Two subtypes exist: type A from N-acetylgalactosamine-6-sulfatase deficiency and type B from beta-galactosidase deficiency",
-   "Atlantoaxial instability with odontoid hypoplasia is a hallmark and poses a major risk of cervical cord compression",
-   "Keratan sulfate is the principal accumulated and excreted glycosaminoglycan",
-   "Genu valgum, pectus carinatum, kyphoscoliosis, and ligamentous laxity are characteristic",
-   "Corneal clouding and hearing loss occur, but cognition is preserved",
-   "Diagnosis relies on the specific enzyme assay supported by urinary keratan sulfate, with molecular confirmation"
+  "id": "morquio_syndrome",
+  "name": "Morquio syndrome (MPS IV)",
+  "aliases": [
+    "MPS IV",
+    "mucopolysaccharidosis type IV",
+    "Morquio A (GALNS deficiency)",
+    "Morquio B (beta-galactosidase deficiency)",
+    "keratan sulfate storage disease"
   ],
-  "pathophysiology": "Morquio syndrome is caused by deficiency of enzymes needed to degrade keratan sulfate. In type A, biallelic GALNS variants cause deficiency of N-acetylgalactosamine-6-sulfatase; in type B, GLB1 variants cause deficiency of beta-galactosidase. The resulting block in keratan sulfate (and, in type A, also chondroitin-6-sulfate) degradation leads to lysosomal accumulation, which disproportionately affects cartilage and bone and produces the distinctive spondyloepiphyseal dysplasia. Because keratan sulfate is concentrated in cartilage and cornea rather than the brain, intelligence is characteristically normal. Excess keratan sulfate is excreted in the urine, though levels can normalise with age. Both subtypes are inherited in an autosomal recessive manner.",
-  "additionalDifferentials": [
-   "Other mucopolysaccharidoses, particularly Maroteaux-Lamy syndrome (MPS VI)",
-   "Spondyloepiphyseal dysplasia congenita",
-   "Other primary skeletal dysplasias with short trunk",
-   "GM1 gangliosidosis (allelic with Morquio B through GLB1)",
-   "Multiple epiphyseal dysplasia",
-   "Achondroplasia and other disproportionate short-stature syndromes"
-  ],
-  "additionalInvestigations": [
-   "Enzyme assay for N-acetylgalactosamine-6-sulfatase or beta-galactosidase",
-   "Urinary keratan sulfate quantification",
-   "GALNS or GLB1 gene sequencing",
-   "Cervical spine imaging including flexion-extension views to assess atlantoaxial instability and odontoid hypoplasia",
-   "Skeletal survey to characterise the dysplasia",
-   "Echocardiography, ophthalmology, and audiology for extraskeletal involvement"
-  ],
-  "redFlags": [
-   "Atlantoaxial instability with signs of cervical myelopathy",
-   "Respiratory compromise from thoracic cage deformity and airway narrowing",
-   "Anaesthetic risk from a difficult airway and unstable cervical spine",
-   "Progressive cardiac valve disease"
-  ],
-  "prognosis": "Intelligence is preserved and survival into adulthood is usual, but skeletal complications, especially cervical instability and restrictive respiratory disease, cause significant morbidity and can be life-threatening if unrecognised. Enzyme replacement therapy is available for type A and may improve endurance and some somatic features.",
-  "pitfalls": [
-   "Failing to screen for atlantoaxial instability before any anaesthetic or surgical procedure",
-   "Mistaking the disorder for a primary skeletal dysplasia without measuring glycosaminoglycans",
-   "Missing Morquio B because of overlap with GM1 gangliosidosis phenotypes",
-   "Assuming normal urinary keratan sulfate excludes the diagnosis in older patients"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Disease-specific enzyme replacement therapy with elosulfase alfa for type A disease",
-   "Cervical spine surveillance with flexion-extension imaging and timely surgical stabilisation or decompression for atlantoaxial instability and odontoid hypoplasia, given the risk of cervical cord compression",
-   "Respiratory monitoring for restrictive and obstructive disease and sleep-disordered breathing, with airway and ventilatory support as needed",
-   "Careful anaesthetic planning for any procedure because of cervical instability and a difficult airway",
-   "Orthopaedic management of genu valgum, kyphoscoliosis and joint problems, with physiotherapy and mobility aids",
-   "Regular ophthalmology for corneal clouding, audiology for hearing loss and cardiac surveillance for valve disease",
-   "Multidisciplinary metabolic and genetics-led care with genetic counselling for autosomal recessive inheritance and family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "morquio_syndrome-pathway",
-   "title": "Morquio syndrome (MPS IV): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Distinguished by a severe skeletal dysplasia with markedly short trunk and normal intelligence, setting it apart from most other mucopolysaccharidoses",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Atlantoaxial instability with signs of cervical myelopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Enzyme assay for N-acetylgalactosamine-6-sulfatase or beta-galactosidase, Urinary keratan sulfate quantification, GALNS or GLB1 gene sequencing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Disease-specific enzyme replacement therapy with elosulfase alfa for type A disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to screen for atlantoaxial instability before any anaesthetic or surgical procedure"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of morquio syndrome (mps iv)."
-  }
- ],
- "tables": [
-  {
-   "id": "morquio_syndrome-matrix",
-   "title": "Morquio syndrome (MPS IV): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Distinguished by a severe skeletal dysplasia with markedly short trunk and normal intelligence, setting it apart from most other",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Distinguished by a severe skeletal dysplasia with markedly short trunk and normal intelligence, setting it apart from most other mucopolysaccharidoses",
+      "Two subtypes exist: type A from N-acetylgalactosamine-6-sulfatase deficiency and type B from beta-galactosidase deficiency",
+      "Atlantoaxial instability with odontoid hypoplasia is a hallmark and poses a major risk of cervical cord compression",
+      "Keratan sulfate is the principal accumulated and excreted glycosaminoglycan",
+      "Genu valgum, pectus carinatum, kyphoscoliosis, and ligamentous laxity are characteristic",
+      "Corneal clouding and hearing loss occur, but cognition is preserved",
+      "Diagnosis relies on the specific enzyme assay supported by urinary keratan sulfate, with molecular confirmation"
     ],
-    [
-     "Key Investigations",
-     "Enzyme assay for N-acetylgalactosamine-6-sulfatase or beta-galactosidase, Urinary keratan sulfate quantification, GALNS or GLB1",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Morquio syndrome is caused by deficiency of enzymes needed to degrade keratan sulfate. In type A, biallelic GALNS variants cause deficiency of N-acetylgalactosamine-6-sulfatase; in type B, GLB1 variants cause deficiency of beta-galactosidase. The resulting block in keratan sulfate (and, in type A, also chondroitin-6-sulfate) degradation leads to lysosomal accumulation, which disproportionately affects cartilage and bone and produces the distinctive spondyloepiphyseal dysplasia. Because keratan sulfate is concentrated in cartilage and cornea rather than the brain, intelligence is characteristically normal. Excess keratan sulfate is excreted in the urine, though levels can normalise with age. Both subtypes are inherited in an autosomal recessive manner.",
+    "additionalDifferentials": [
+      "Other mucopolysaccharidoses, particularly Maroteaux-Lamy syndrome (MPS VI)",
+      "Spondyloepiphyseal dysplasia congenita",
+      "Other primary skeletal dysplasias with short trunk",
+      "GM1 gangliosidosis (allelic with Morquio B through GLB1)",
+      "Multiple epiphyseal dysplasia",
+      "Achondroplasia and other disproportionate short-stature syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Other mucopolysaccharidoses, particularly Maroteaux-Lamy syndrome (MPS VI), Spondyloepiphyseal dysplasia congenita, Other primary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Enzyme assay for N-acetylgalactosamine-6-sulfatase or beta-galactosidase",
+      "Urinary keratan sulfate quantification",
+      "GALNS or GLB1 gene sequencing",
+      "Cervical spine imaging including flexion-extension views to assess atlantoaxial instability and odontoid hypoplasia",
+      "Skeletal survey to characterise the dysplasia",
+      "Echocardiography, ophthalmology, and audiology for extraskeletal involvement"
     ],
-    [
-     "Management Strategy",
-     "Disease-specific enzyme replacement therapy with elosulfase alfa for type A disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Atlantoaxial instability with signs of cervical myelopathy",
+      "Respiratory compromise from thoracic cage deformity and airway narrowing",
+      "Anaesthetic risk from a difficult airway and unstable cervical spine",
+      "Progressive cardiac valve disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to screen for atlantoaxial instability before any anaesthetic or surgical procedure",
-     "Prevent diagnostic or management error"
+    "prognosis": "Intelligence is preserved and survival into adulthood is usual, but skeletal complications, especially cervical instability and restrictive respiratory disease, cause significant morbidity and can be life-threatening if unrecognised. Enzyme replacement therapy is available for type A and may improve endurance and some somatic features.",
+    "pitfalls": [
+      "Failing to screen for atlantoaxial instability before any anaesthetic or surgical procedure",
+      "Mistaking the disorder for a primary skeletal dysplasia without measuring glycosaminoglycans",
+      "Missing Morquio B because of overlap with GM1 gangliosidosis phenotypes",
+      "Assuming normal urinary keratan sulfate excludes the diagnosis in older patients"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Disease-specific enzyme replacement therapy with elosulfase alfa for type A disease",
+      "Cervical spine surveillance with flexion-extension imaging and timely surgical stabilisation or decompression for atlantoaxial instability and odontoid hypoplasia, given the risk of cervical cord compression",
+      "Respiratory monitoring for restrictive and obstructive disease and sleep-disordered breathing, with airway and ventilatory support as needed",
+      "Careful anaesthetic planning for any procedure because of cervical instability and a difficult airway",
+      "Orthopaedic management of genu valgum, kyphoscoliosis and joint problems, with physiotherapy and mobility aids",
+      "Regular ophthalmology for corneal clouding, audiology for hearing loss and cardiac surveillance for valve disease",
+      "Multidisciplinary metabolic and genetics-led care with genetic counselling for autosomal recessive inheritance and family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for morquio syndrome (mps iv)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "morquio-syndrome-real-image",
-   "title": "Morquio syndrome (MPS IV): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "morquio_syndrome-pathway",
+      "title": "Morquio syndrome (MPS IV): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Distinguished by a severe skeletal dysplasia with markedly short trunk and normal intelligence, setting it apart from most other mucopolysaccharidoses",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Atlantoaxial instability with signs of cervical myelopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Enzyme assay for N-acetylgalactosamine-6-sulfatase or beta-galactosidase, Urinary keratan sulfate quantification, GALNS or GLB1 gene sequencing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Disease-specific enzyme replacement therapy with elosulfase alfa for type A disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to screen for atlantoaxial instability before any anaesthetic or surgical procedure"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of morquio syndrome (mps iv)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "morquio_syndrome-matrix",
+      "title": "Morquio syndrome (MPS IV): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Distinguished by a severe skeletal dysplasia with markedly short trunk and normal intelligence, setting it apart from most other",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Enzyme assay for N-acetylgalactosamine-6-sulfatase or beta-galactosidase, Urinary keratan sulfate quantification, GALNS or GLB1",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other mucopolysaccharidoses, particularly Maroteaux-Lamy syndrome (MPS VI), Spondyloepiphyseal dysplasia congenita, Other primary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Disease-specific enzyme replacement therapy with elosulfase alfa for type A disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to screen for atlantoaxial instability before any anaesthetic or surgical procedure",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for morquio syndrome (mps iv)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "morquio_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "GALNS or beta-galactosidase enzyme assay",
+          "cells": [
+            {
+              "text": "N-acetylgalactosamine-6-sulfatase or beta-galactosidase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary keratan sulfate",
+          "cells": [
+            {
+              "text": "Quantification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GALNS or GLB1 sequencing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine flexion-extension imaging",
+          "cells": [
+            {
+              "text": "Atlantoaxial instability and odontoid hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Characterises the dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morquio_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Maroteaux-Lamy syndrome (MPS VI)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spondyloepiphyseal dysplasia congenita",
+          "cells": [
+            {
+              "text": "Measuring glycosaminoglycans separates it from primary skeletal dysplasias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GM1 gangliosidosis",
+          "cells": [
+            {
+              "text": "Allelic with Morquio B through GLB1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morquio_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Elosulfase alfa",
+          "cells": [
+            {
+              "text": "Enzyme replacement for type A disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine surveillance",
+          "cells": [
+            {
+              "text": "Stabilisation or decompression for atlantoaxial instability and odontoid hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Restrictive and obstructive disease, sleep-disordered breathing; airway and ventilatory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaesthetic planning",
+          "cells": [
+            {
+              "text": "Cervical instability and difficult airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Genu valgum, kyphoscoliosis, joints; physiotherapy and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye, ear and heart surveillance",
+          "cells": [
+            {
+              "text": "Corneal clouding, hearing loss, valve disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "morquio_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Morquio syndrome (MPS IV)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short-trunk skeletal dysplasia with corneal clouding and genu valgum",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cervical myelopathy signs, respiratory compromise or difficult airway?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cervical imaging, airway-safe anaesthesia and spinal surgery review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary keratan sulfate, enzyme assay, flexion-extension C-spine films",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Enzyme deficiency and GALNS or GLB1 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MPS VI, SED congenita, GM1 gangliosidosis, other dysplasias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Elosulfase alfa for type A disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cervical surveillance and surgical stabilisation for instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory monitoring and careful anaesthetic planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic, eye, hearing and cardiac follow-up; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Intelligence preserved; survival to adulthood usual, skeletal and respiratory limits",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

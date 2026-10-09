@@ -150,6 +150,8 @@ for f in kb/dist/kb.core.js kb/dist/kb.clinical.js kb/dist/kb.enrichment.js \
   [ -f "$f" ] && cp "$f" "$WWW/kb/dist/"
 done
 [ -d kb/ai ] && cp -R kb/ai/. "$WWW/kb/ai/"
+# Schema v2 disease tables and flowcharts: 64 on-demand buckets (kb/tools/build-kb-v2.mjs), read by kb-v2-loader.js.
+[ -d kb/dist/v2 ] && mkdir -p "$WWW/kb/dist/v2" && cp kb/dist/v2/*.json "$WWW/kb/dist/v2/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
 # Oncology protocol templates (static, plain JSON - same trust tier as kb/treatments, NOT the
 # encrypted Pro KB). Fetched directly by the client, no kb-loader.js change (Phase 3).

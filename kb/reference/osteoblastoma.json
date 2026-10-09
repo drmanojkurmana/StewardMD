@@ -1,180 +1,477 @@
 {
- "id": "osteoblastoma",
- "name": "Osteoblastoma",
- "aliases": [
-  "osteoblastoma",
-  "giant osteoid osteoma",
-  "benign osteoblastoma"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Oncology",
- "specialty": "Orthopaedic Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign bone-forming tumour histologically similar to osteoid osteoma but larger, by convention greater than about two centimetres, with true growth potential",
-   "Shows a predilection for the posterior elements of the spine as well as long bones, and typically affects adolescents and young adults",
-   "Pain is a common presenting feature but is usually less nocturnal and less reliably relieved by non-steroidal anti-inflammatory drugs than in osteoid osteoma",
-   "Spinal lesions may cause a painful scoliosis, radiculopathy or, uncommonly, cord compression",
-   "Imaging shows an expansile, well-defined lytic lesion, often with matrix mineralisation and less surrounding reactive sclerosis than osteoid osteoma",
-   "An aggressive variant exists that can mimic malignancy radiologically and histologically, requiring careful pathological review",
-   "Treatment is surgical, typically curettage or en bloc excision, with the extent guided by lesion size, site and aggressiveness"
+  "id": "osteoblastoma",
+  "name": "Osteoblastoma",
+  "aliases": [
+    "osteoblastoma",
+    "giant osteoid osteoma",
+    "benign osteoblastoma"
   ],
-  "pathophysiology": "Osteoblastoma is a benign osteoblastic neoplasm composed of osteoid and woven bone deposited by plump osteoblasts within a richly vascular stroma. Although its cellular make-up resembles osteoid osteoma, it lacks the self-limited behaviour of that lesion, being larger and capable of progressive, sometimes locally aggressive, growth. Unlike osteoid osteoma it excites comparatively little reactive sclerosis and produces less prostaglandin-driven nocturnal pain. The aggressive subtype shows epithelioid osteoblasts and more permeative growth, creating overlap with osteosarcoma that demands careful histological and radiological correlation.",
-  "additionalDifferentials": [
-   "Osteoid osteoma (smaller, marked reactive sclerosis)",
-   "Osteosarcoma, especially the osteoblastoma-like variant",
-   "Aneurysmal bone cyst",
-   "Giant cell tumour of bone",
-   "Osteomyelitis",
-   "Metastasis or other primary bone tumour"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs showing an expansile lytic lesion with variable matrix mineralisation",
-   "CT to define bony architecture, matrix and cortical integrity",
-   "MRI to assess marrow and soft-tissue extent, particularly in the spine",
-   "Bone scintigraphy demonstrating increased uptake",
-   "Image-guided or open biopsy with expert bone pathology review",
-   "Staging imaging when an aggressive or malignant lesion is suspected"
-  ],
-  "redFlags": [
-   "Rapid enlargement, cortical destruction or a soft-tissue mass raising concern for osteosarcoma",
-   "Neurological deficit or cord compression from a spinal lesion",
-   "Histological features overlapping with malignancy on biopsy",
-   "Recurrent lesion after previous excision"
-  ],
-  "prognosis": "Most osteoblastomas are cured by complete surgical removal, though incompletely excised lesions may recur locally. The aggressive variant has a higher recurrence rate and requires closer follow-up, and its distinction from osteosarcoma is critical to outcome.",
-  "pitfalls": [
-   "Misclassifying an osteoblastoma-like osteosarcoma as benign osteoblastoma on limited biopsy",
-   "Underestimating the local aggressiveness and recurrence potential of the aggressive variant",
-   "Treating a large lesion as if it were self-limiting like osteoid osteoma",
-   "Inadequate excision leading to local recurrence"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Soft Tissue and Bone",
-   "Standard orthopaedic oncology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Osteoblastoma is a benign bone-forming tumor with no role for systemic anticancer therapy or radiotherapy in typical cases; management is surgical with curative intent",
-   "Localized non-spinal non-aggressive lesions are managed with intralesional curettage plus bone grafting or cementation, aiming for complete removal while preserving function",
-   "Aggressive-variant or recurrent lesions favor wider surgical margins up to en bloc excision given higher local recurrence risk and histological overlap with osteosarcoma",
-   "Spinal posterior element lesions require decompression of neural structures when radiculopathy or cord compression is present, with resection and instrumented stabilization if the posterior column is destabilized",
-   "There is no sequential drug-line framework as with malignant disease; a single primary surgical intervention is standard, with subsequent management guided by completeness of excision and recurrence",
-   "Recurrence after incomplete excision is managed with re-resection using wider margins; no established systemic or radiotherapy salvage regimen exists",
-   "Radiotherapy is generally avoided given the tumor's benign nature and long-term radiation risk in often young patients",
-   "Systemic chemotherapy or targeted agents have no role since this is not a systemic disease",
-   "Analgesia is used adjunctively for pain control while awaiting definitive surgery, as a symptomatic rather than disease-modifying measure",
-   "Post-operative clinical and imaging surveillance is used to detect local recurrence, with increased intensity and duration after incomplete excision or in the aggressive histological variant",
-   "Ongoing pathological correlation is warranted if imaging or clinical behavior departs from the expected benign course, to exclude a missed or evolving osteosarcoma",
-   "Any suspected osteoblastoma should be referred to orthopedic oncology before biopsy or intervention given overlap with osteosarcoma and the risk of an inadequate initial procedure",
-   "Spinal lesions with neurological deficit, cord compression, or progressive painful scoliosis warrant urgent referral for surgical decompression and stabilization",
-   "Biopsy specimens with atypical, permeative, or epithelioid osteoblastic features should undergo expert bone pathology review before finalizing a treatment plan, to avoid mistaking an osteoblastoma-like osteosarcoma for benign disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "osteoblastoma-pathway",
-   "title": "Osteoblastoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign bone-forming tumour histologically similar to osteoid osteoma but larger, by convention greater than about two centimetres, with true growth potential",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid enlargement, cortical destruction or a soft-tissue mass raising concern for osteosarcoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs showing an expansile lytic lesion with variable matrix mineralisation, CT to define bony architecture, matrix and cortical integrity, MRI to assess marrow and soft-tissue extent, particularly in the spine"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Osteoblastoma is a benign bone-forming tumor with no role for systemic anticancer therapy or radiotherapy in typical cases; management is surgical with curative intent"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying an osteoblastoma-like osteosarcoma as benign osteoblastoma on limited biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of osteoblastoma."
-  }
- ],
- "tables": [
-  {
-   "id": "osteoblastoma-matrix",
-   "title": "Osteoblastoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign bone-forming tumour histologically similar to osteoid osteoma but larger, by convention greater than about two",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Oncology",
+  "specialty": "Orthopaedic Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign bone-forming tumour histologically similar to osteoid osteoma but larger, by convention greater than about two centimetres, with true growth potential",
+      "Shows a predilection for the posterior elements of the spine as well as long bones, and typically affects adolescents and young adults",
+      "Pain is a common presenting feature but is usually less nocturnal and less reliably relieved by non-steroidal anti-inflammatory drugs than in osteoid osteoma",
+      "Spinal lesions may cause a painful scoliosis, radiculopathy or, uncommonly, cord compression",
+      "Imaging shows an expansile, well-defined lytic lesion, often with matrix mineralisation and less surrounding reactive sclerosis than osteoid osteoma",
+      "An aggressive variant exists that can mimic malignancy radiologically and histologically, requiring careful pathological review",
+      "Treatment is surgical, typically curettage or en bloc excision, with the extent guided by lesion size, site and aggressiveness"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs showing an expansile lytic lesion with variable matrix mineralisation, CT to define bony architecture, matrix",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Osteoblastoma is a benign osteoblastic neoplasm composed of osteoid and woven bone deposited by plump osteoblasts within a richly vascular stroma. Although its cellular make-up resembles osteoid osteoma, it lacks the self-limited behaviour of that lesion, being larger and capable of progressive, sometimes locally aggressive, growth. Unlike osteoid osteoma it excites comparatively little reactive sclerosis and produces less prostaglandin-driven nocturnal pain. The aggressive subtype shows epithelioid osteoblasts and more permeative growth, creating overlap with osteosarcoma that demands careful histological and radiological correlation.",
+    "additionalDifferentials": [
+      "Osteoid osteoma (smaller, marked reactive sclerosis)",
+      "Osteosarcoma, especially the osteoblastoma-like variant",
+      "Aneurysmal bone cyst",
+      "Giant cell tumour of bone",
+      "Osteomyelitis",
+      "Metastasis or other primary bone tumour"
     ],
-    [
-     "Primary Differentials",
-     "Osteoid osteoma (smaller, marked reactive sclerosis), Osteosarcoma, especially the osteoblastoma-like variant, Aneurysmal bone",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs showing an expansile lytic lesion with variable matrix mineralisation",
+      "CT to define bony architecture, matrix and cortical integrity",
+      "MRI to assess marrow and soft-tissue extent, particularly in the spine",
+      "Bone scintigraphy demonstrating increased uptake",
+      "Image-guided or open biopsy with expert bone pathology review",
+      "Staging imaging when an aggressive or malignant lesion is suspected"
     ],
-    [
-     "Management Strategy",
-     "Osteoblastoma is a benign bone-forming tumor with no role for systemic anticancer therapy or radiotherapy in typical cases;",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid enlargement, cortical destruction or a soft-tissue mass raising concern for osteosarcoma",
+      "Neurological deficit or cord compression from a spinal lesion",
+      "Histological features overlapping with malignancy on biopsy",
+      "Recurrent lesion after previous excision"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying an osteoblastoma-like osteosarcoma as benign osteoblastoma on limited biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most osteoblastomas are cured by complete surgical removal, though incompletely excised lesions may recur locally. The aggressive variant has a higher recurrence rate and requires closer follow-up, and its distinction from osteosarcoma is critical to outcome.",
+    "pitfalls": [
+      "Misclassifying an osteoblastoma-like osteosarcoma as benign osteoblastoma on limited biopsy",
+      "Underestimating the local aggressiveness and recurrence potential of the aggressive variant",
+      "Treating a large lesion as if it were self-limiting like osteoid osteoma",
+      "Inadequate excision leading to local recurrence"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Soft Tissue and Bone",
+      "Standard orthopaedic oncology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Osteoblastoma is a benign bone-forming tumor with no role for systemic anticancer therapy or radiotherapy in typical cases; management is surgical with curative intent",
+      "Localized non-spinal non-aggressive lesions are managed with intralesional curettage plus bone grafting or cementation, aiming for complete removal while preserving function",
+      "Aggressive-variant or recurrent lesions favor wider surgical margins up to en bloc excision given higher local recurrence risk and histological overlap with osteosarcoma",
+      "Spinal posterior element lesions require decompression of neural structures when radiculopathy or cord compression is present, with resection and instrumented stabilization if the posterior column is destabilized",
+      "There is no sequential drug-line framework as with malignant disease; a single primary surgical intervention is standard, with subsequent management guided by completeness of excision and recurrence",
+      "Recurrence after incomplete excision is managed with re-resection using wider margins; no established systemic or radiotherapy salvage regimen exists",
+      "Radiotherapy is generally avoided given the tumor's benign nature and long-term radiation risk in often young patients",
+      "Systemic chemotherapy or targeted agents have no role since this is not a systemic disease",
+      "Analgesia is used adjunctively for pain control while awaiting definitive surgery, as a symptomatic rather than disease-modifying measure",
+      "Post-operative clinical and imaging surveillance is used to detect local recurrence, with increased intensity and duration after incomplete excision or in the aggressive histological variant",
+      "Ongoing pathological correlation is warranted if imaging or clinical behavior departs from the expected benign course, to exclude a missed or evolving osteosarcoma",
+      "Any suspected osteoblastoma should be referred to orthopedic oncology before biopsy or intervention given overlap with osteosarcoma and the risk of an inadequate initial procedure",
+      "Spinal lesions with neurological deficit, cord compression, or progressive painful scoliosis warrant urgent referral for surgical decompression and stabilization",
+      "Biopsy specimens with atypical, permeative, or epithelioid osteoblastic features should undergo expert bone pathology review before finalizing a treatment plan, to avoid mistaking an osteoblastoma-like osteosarcoma for benign disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for osteoblastoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "osteoblastoma-real-image",
-   "title": "Osteoblastoma: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "osteoblastoma-pathway",
+      "title": "Osteoblastoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign bone-forming tumour histologically similar to osteoid osteoma but larger, by convention greater than about two centimetres, with true growth potential",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid enlargement, cortical destruction or a soft-tissue mass raising concern for osteosarcoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs showing an expansile lytic lesion with variable matrix mineralisation, CT to define bony architecture, matrix and cortical integrity, MRI to assess marrow and soft-tissue extent, particularly in the spine"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Osteoblastoma is a benign bone-forming tumor with no role for systemic anticancer therapy or radiotherapy in typical cases; management is surgical with curative intent"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying an osteoblastoma-like osteosarcoma as benign osteoblastoma on limited biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of osteoblastoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "osteoblastoma-matrix",
+      "title": "Osteoblastoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign bone-forming tumour histologically similar to osteoid osteoma but larger, by convention greater than about two",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs showing an expansile lytic lesion with variable matrix mineralisation, CT to define bony architecture, matrix",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Osteoid osteoma (smaller, marked reactive sclerosis), Osteosarcoma, especially the osteoblastoma-like variant, Aneurysmal bone",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Osteoblastoma is a benign bone-forming tumor with no role for systemic anticancer therapy or radiotherapy in typical cases;",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying an osteoblastoma-like osteosarcoma as benign osteoblastoma on limited biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for osteoblastoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteoblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Expansile lytic lesion with variable matrix mineralisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Bony architecture, matrix and cortical integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Marrow and soft-tissue extent, particularly in the spine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy",
+          "cells": [
+            {
+              "text": "Increased uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with expert bone pathology review",
+          "cells": [
+            {
+              "text": "Histology; overlap with malignancy in the aggressive variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "When an aggressive or malignant lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteoblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteoid osteoma",
+          "cells": [
+            {
+              "text": "Smaller, with marked reactive sclerosis; osteoblastoma is larger and does not self-limit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteosarcoma, osteoblastoma-like variant",
+          "cells": [
+            {
+              "text": "Rapid growth, cortical destruction or a soft-tissue mass favours osteosarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteoblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgery with curative intent",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Single primary surgical intervention; no systemic therapy or radiotherapy in typical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional curettage",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "With bone grafting or cementation for non-spinal, non-aggressive lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wider margins for aggressive disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Up to en bloc excision for aggressive-variant or recurrent lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal decompression",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For radiculopathy or cord compression; resection and stabilisation if the posterior column is destabilised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Re-resection with wider margins; no established systemic or radiotherapy salvage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy avoided",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Generally avoided, given the benign nature and long-term radiation risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteoblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Osteoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful expansile bone lesion over 2 cm, often in spine or long bone of a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cortical destruction, soft-tissue mass, cord compression or recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: sarcoma or orthopaedic oncology review for suspected osteosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, CT, MRI, bone scintigraphy and biopsy with bone pathology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion benign on pathology review, with osteosarcoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteoid osteoma, aneurysmal bone cyst or osteosarcoma; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intralesional curettage with bone graft or cementation for non-aggressive lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wider margins up to en bloc excision for aggressive or recurrent lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spinal decompression for radiculopathy or cord compression; stabilise if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Re-resection with wider margins for recurrence; radiotherapy generally avoided",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually cured by complete removal; the aggressive variant needs closer follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

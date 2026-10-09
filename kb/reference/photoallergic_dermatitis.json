@@ -1,173 +1,471 @@
 {
- "id": "photoallergic_dermatitis",
- "name": "Photoallergic contact dermatitis",
- "aliases": [
-  "photoallergy",
-  "photoallergic contact dermatitis",
-  "photoallergic eczema",
-  "photoallergic reaction"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A delayed type IV hypersensitivity reaction in which ultraviolet light (usually UVA) converts a topically applied or, less often, systemic chemical into an allergen the immune system then reacts to",
-   "Presents as an eczematous, sometimes vesicular, itchy eruption favouring sun-exposed sites such as the face, V of the neck, dorsa of the hands and forearms",
-   "Characteristically spares shaded areas including the upper eyelids, submental region, behind the ears and beneath the chin, which helps distinguish it from an airborne dermatitis",
-   "Common culprits include organic ultraviolet filters in sunscreens, topical non-steroidal anti-inflammatory drugs (e.g. ketoprofen), fragrances and certain antimicrobials",
-   "Unlike phototoxicity, it requires prior sensitisation, affects only a minority of exposed people, may spread beyond exposed skin and is not simply dose-dependent",
-   "Photopatch testing, in which duplicate allergen sets are applied and one set irradiated with UVA, is the key confirmatory investigation",
-   "Management centres on identifying and withdrawing the responsible agent, rigorous photoprotection and topical corticosteroids for the acute eruption"
+  "id": "photoallergic_dermatitis",
+  "name": "Photoallergic contact dermatitis",
+  "aliases": [
+    "photoallergy",
+    "photoallergic contact dermatitis",
+    "photoallergic eczema",
+    "photoallergic reaction"
   ],
-  "pathophysiology": "Photoallergic contact dermatitis is an acquired, immunologically mediated (type IV, cell-mediated) response. A chemical applied to or reaching the skin absorbs ultraviolet radiation, most often in the UVA range, and is thereby altered to form a photoproduct or a stable hapten-protein complex that becomes antigenic. After an initial sensitisation phase, subsequent exposure to both the chemical and light provokes a T-cell-driven eczematous reaction. Because an immunological memory response is required, only previously sensitised individuals react, the amount of allergen needed is small, and the eruption may extend to covered skin, distinguishing it from the direct, non-immunological tissue damage of a phototoxic reaction.",
-  "additionalDifferentials": [
-   "Phototoxic (photoirritant) dermatitis, which occurs on first exposure and is dose-dependent",
-   "Airborne allergic contact dermatitis, which typically involves shaded folds such as the eyelids and submental area",
-   "Chronic actinic dermatitis and other idiopathic photodermatoses such as polymorphic light eruption",
-   "Systemic photodistributed drug eruption",
-   "Cutaneous lupus erythematosus with photosensitivity",
-   "Seborrhoeic or atopic dermatitis of the face and neck"
-  ],
-  "additionalInvestigations": [
-   "Photopatch testing with parallel irradiated and non-irradiated allergen series and comparison of the two",
-   "Standard patch testing to detect coexisting ordinary contact allergy",
-   "Detailed history of topical products, medicaments, fragrances and occupational or recreational light exposure",
-   "Phototesting to determine the action spectrum and minimal erythema dose when chronic actinic dermatitis is suspected",
-   "Skin biopsy in atypical cases to confirm a spongiotic dermatitis and exclude mimics",
-   "Autoimmune serology (e.g. antinuclear and extractable nuclear antigen antibodies) to exclude photosensitive lupus"
-  ],
-  "redFlags": [
-   "Progression to a persistent, disabling photosensitivity suggestive of evolving chronic actinic dermatitis",
-   "Widespread erythroderma or systemic upset raising the possibility of a severe drug reaction",
-   "Failure to improve despite allergen avoidance, prompting reassessment for an underlying photodermatosis or connective tissue disease",
-   "Features of cutaneous or systemic lupus rather than simple contact photoallergy"
-  ],
-  "prognosis": "The outlook is good once the responsible agent is identified and avoided, with resolution of the eczema and no long-term sequelae in most patients; a minority develop persistent light reactivity that may evolve towards chronic actinic dermatitis.",
-  "pitfalls": [
-   "Mistaking photoallergy for simple sunburn or phototoxicity and failing to arrange photopatch testing",
-   "Overlooking the sunscreen itself as the allergen, so that increasing photoprotection paradoxically worsens the eruption",
-   "Confusing the distribution with airborne contact dermatitis and missing the shaded-site sparing",
-   "Attributing a photodistributed eruption solely to a topical agent when a systemic drug is responsible"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Association of Dermatologists photopatch testing guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and permanently avoid the culprit photoallergen, commonly organic sunscreen filters, topical non-steroidal anti-inflammatory drugs such as ketoprofen, fragrances or antimicrobials",
-   "Institute strict photoprotection with broad-spectrum inorganic UVA-blocking sunscreen, protective clothing and sun avoidance",
-   "Treat the eczematous eruption with topical corticosteroids, escalating to a short oral corticosteroid course for severe widespread flares",
-   "Confirm the responsible agent with photopatch testing",
-   "Relieve symptoms with emollients and antihistamines for pruritus",
-   "Monitor for evolution into persistent light reactivity or chronic actinic dermatitis in the minority who do not settle"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "photoallergic_dermatitis-pathway",
-   "title": "Photoallergic contact dermatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A delayed type IV hypersensitivity reaction in which ultraviolet light (usually UVA) converts a topically applied or, less often, systemic chemical into an allergen the immune system then reacts to",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progression to a persistent, disabling photosensitivity suggestive of evolving chronic actinic dermatitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Photopatch testing with parallel irradiated and non-irradiated allergen series and comparison of the two, Standard patch testing to detect coexisting ordinary contact allergy, Detailed history of topical products,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and permanently avoid the culprit photoallergen, commonly organic sunscreen filters, topical non-steroidal anti-inflammatory drugs such as ketoprofen, fragrances or antimicrobials"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking photoallergy for simple sunburn or phototoxicity and failing to arrange photopatch testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of photoallergic contact dermatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "photoallergic_dermatitis-matrix",
-   "title": "Photoallergic contact dermatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A delayed type IV hypersensitivity reaction in which ultraviolet light (usually UVA) converts a topically applied or, less often,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A delayed type IV hypersensitivity reaction in which ultraviolet light (usually UVA) converts a topically applied or, less often, systemic chemical into an allergen the immune system then reacts to",
+      "Presents as an eczematous, sometimes vesicular, itchy eruption favouring sun-exposed sites such as the face, V of the neck, dorsa of the hands and forearms",
+      "Characteristically spares shaded areas including the upper eyelids, submental region, behind the ears and beneath the chin, which helps distinguish it from an airborne dermatitis",
+      "Common culprits include organic ultraviolet filters in sunscreens, topical non-steroidal anti-inflammatory drugs (e.g. ketoprofen), fragrances and certain antimicrobials",
+      "Unlike phototoxicity, it requires prior sensitisation, affects only a minority of exposed people, may spread beyond exposed skin and is not simply dose-dependent",
+      "Photopatch testing, in which duplicate allergen sets are applied and one set irradiated with UVA, is the key confirmatory investigation",
+      "Management centres on identifying and withdrawing the responsible agent, rigorous photoprotection and topical corticosteroids for the acute eruption"
     ],
-    [
-     "Key Investigations",
-     "Photopatch testing with parallel irradiated and non-irradiated allergen series and comparison of the two, Standard patch testing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Photoallergic contact dermatitis is an acquired, immunologically mediated (type IV, cell-mediated) response. A chemical applied to or reaching the skin absorbs ultraviolet radiation, most often in the UVA range, and is thereby altered to form a photoproduct or a stable hapten-protein complex that becomes antigenic. After an initial sensitisation phase, subsequent exposure to both the chemical and light provokes a T-cell-driven eczematous reaction. Because an immunological memory response is required, only previously sensitised individuals react, the amount of allergen needed is small, and the eruption may extend to covered skin, distinguishing it from the direct, non-immunological tissue damage of a phototoxic reaction.",
+    "additionalDifferentials": [
+      "Phototoxic (photoirritant) dermatitis, which occurs on first exposure and is dose-dependent",
+      "Airborne allergic contact dermatitis, which typically involves shaded folds such as the eyelids and submental area",
+      "Chronic actinic dermatitis and other idiopathic photodermatoses such as polymorphic light eruption",
+      "Systemic photodistributed drug eruption",
+      "Cutaneous lupus erythematosus with photosensitivity",
+      "Seborrhoeic or atopic dermatitis of the face and neck"
     ],
-    [
-     "Primary Differentials",
-     "Phototoxic (photoirritant) dermatitis, which occurs on first exposure and is dose-dependent, Airborne allergic contact",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Photopatch testing with parallel irradiated and non-irradiated allergen series and comparison of the two",
+      "Standard patch testing to detect coexisting ordinary contact allergy",
+      "Detailed history of topical products, medicaments, fragrances and occupational or recreational light exposure",
+      "Phototesting to determine the action spectrum and minimal erythema dose when chronic actinic dermatitis is suspected",
+      "Skin biopsy in atypical cases to confirm a spongiotic dermatitis and exclude mimics",
+      "Autoimmune serology (e.g. antinuclear and extractable nuclear antigen antibodies) to exclude photosensitive lupus"
     ],
-    [
-     "Management Strategy",
-     "Identify and permanently avoid the culprit photoallergen, commonly organic sunscreen filters, topical non-steroidal",
-     "Core treatment modality"
+    "redFlags": [
+      "Progression to a persistent, disabling photosensitivity suggestive of evolving chronic actinic dermatitis",
+      "Widespread erythroderma or systemic upset raising the possibility of a severe drug reaction",
+      "Failure to improve despite allergen avoidance, prompting reassessment for an underlying photodermatosis or connective tissue disease",
+      "Features of cutaneous or systemic lupus rather than simple contact photoallergy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking photoallergy for simple sunburn or phototoxicity and failing to arrange photopatch testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is good once the responsible agent is identified and avoided, with resolution of the eczema and no long-term sequelae in most patients; a minority develop persistent light reactivity that may evolve towards chronic actinic dermatitis.",
+    "pitfalls": [
+      "Mistaking photoallergy for simple sunburn or phototoxicity and failing to arrange photopatch testing",
+      "Overlooking the sunscreen itself as the allergen, so that increasing photoprotection paradoxically worsens the eruption",
+      "Confusing the distribution with airborne contact dermatitis and missing the shaded-site sparing",
+      "Attributing a photodistributed eruption solely to a topical agent when a systemic drug is responsible"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Association of Dermatologists photopatch testing guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and permanently avoid the culprit photoallergen, commonly organic sunscreen filters, topical non-steroidal anti-inflammatory drugs such as ketoprofen, fragrances or antimicrobials",
+      "Institute strict photoprotection with broad-spectrum inorganic UVA-blocking sunscreen, protective clothing and sun avoidance",
+      "Treat the eczematous eruption with topical corticosteroids, escalating to a short oral corticosteroid course for severe widespread flares",
+      "Confirm the responsible agent with photopatch testing",
+      "Relieve symptoms with emollients and antihistamines for pruritus",
+      "Monitor for evolution into persistent light reactivity or chronic actinic dermatitis in the minority who do not settle"
     ]
-   ],
-   "caption": "Overview comparison matrix for photoallergic contact dermatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "photoallergic-dermatitis-real-image",
-   "title": "Photoallergic contact dermatitis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "photoallergic_dermatitis-pathway",
+      "title": "Photoallergic contact dermatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A delayed type IV hypersensitivity reaction in which ultraviolet light (usually UVA) converts a topically applied or, less often, systemic chemical into an allergen the immune system then reacts to",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progression to a persistent, disabling photosensitivity suggestive of evolving chronic actinic dermatitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Photopatch testing with parallel irradiated and non-irradiated allergen series and comparison of the two, Standard patch testing to detect coexisting ordinary contact allergy, Detailed history of topical products,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and permanently avoid the culprit photoallergen, commonly organic sunscreen filters, topical non-steroidal anti-inflammatory drugs such as ketoprofen, fragrances or antimicrobials"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking photoallergy for simple sunburn or phototoxicity and failing to arrange photopatch testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of photoallergic contact dermatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "photoallergic_dermatitis-matrix",
+      "title": "Photoallergic contact dermatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A delayed type IV hypersensitivity reaction in which ultraviolet light (usually UVA) converts a topically applied or, less often,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Photopatch testing with parallel irradiated and non-irradiated allergen series and comparison of the two, Standard patch testing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Phototoxic (photoirritant) dermatitis, which occurs on first exposure and is dose-dependent, Airborne allergic contact",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and permanently avoid the culprit photoallergen, commonly organic sunscreen filters, topical non-steroidal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking photoallergy for simple sunburn or phototoxicity and failing to arrange photopatch testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for photoallergic contact dermatitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "photoallergic_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Photopatch testing with irradiated and non-irradiated series",
+          "cells": [
+            {
+              "text": "Photoallergen, by comparing the two series"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard patch testing",
+          "cells": [
+            {
+              "text": "Coexisting ordinary contact allergy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed history of topical products, medicaments and light exposure",
+          "cells": [
+            {
+              "text": "Culprit agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototesting (action spectrum, minimal erythema dose)",
+          "cells": [
+            {
+              "text": "When chronic actinic dermatitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical cases",
+          "cells": [
+            {
+              "text": "Spongiotic dermatitis; mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology (ANA, ENA)",
+          "cells": [
+            {
+              "text": "Photosensitive lupus excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "photoallergic_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Phototoxic dermatitis",
+          "cells": [
+            {
+              "text": "Occurs on first exposure and is dose-dependent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airborne allergic contact dermatitis",
+          "cells": [
+            {
+              "text": "Shaded folds such as the eyelids and submental area"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic actinic dermatitis",
+          "cells": [
+            {
+              "text": "Persistent, disabling photosensitivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "photoallergic_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Culprit avoidance",
+          "cells": [
+            {
+              "text": "Permanent avoidance of the culprit photoallergen, commonly organic sunscreen filters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Broad-spectrum inorganic UVA-blocking sunscreen, protective clothing and sun avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eczema treatment",
+          "cells": [
+            {
+              "text": "Topical corticosteroids; a short oral course for severe widespread disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm agent",
+          "cells": [
+            {
+              "text": "Photopatch testing to identify the responsible agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom relief",
+          "cells": [
+            {
+              "text": "Emollients and antihistamines for pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Evolution to persistent light reactivity or chronic actinic dermatitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "photoallergic_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of Photoallergic contact dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Eczematous eruption on sun-exposed skin after topical or medicament use",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (disabling photosensitivity, erythroderma, lupus features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for erythroderma or a suspected severe drug reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Photopatch testing with irradiated and non-irradiated series; exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does photopatch testing identify a photoallergen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider phototoxic dermatitis, airborne contact dermatitis or a photodermatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and avoid the culprit photoallergen, such as organic sunscreen filters",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict photoprotection with broad-spectrum UVA-blocking sunscreen and clothing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids for the eczema; short oral course for severe widespread disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emollients and antihistamines to relieve pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for persistent light reactivity or chronic actinic dermatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good outlook once the agent is avoided; a minority develop persistent light reactivity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

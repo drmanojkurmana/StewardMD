@@ -1,176 +1,790 @@
 {
- "id": "aa_amyloidosis",
- "name": "AA Amyloidosis (Serum Amyloid A / Reactive Systemic Amyloidosis)",
- "aliases": [
-  "Secondary amyloidosis",
-  "Reactive amyloidosis",
-  "Inflammatory amyloidosis"
- ],
- "class": "non_infective",
- "system": "Multisystem / Haematology",
- "specialty": "Haematology / Amyloidosis",
- "referenceOnly": true,
- "reference": {
-  "source": "Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "AA amyloidosis results from deposition of fragments of serum amyloid A, an acute-phase apolipoprotein whose hepatic synthesis is driven by interleukin-6, interleukin-1 and tumour necrosis factor during sustained inflammation.",
-   "It complicates chronic inflammatory disorders such as rheumatoid arthritis, juvenile idiopathic arthritis, spondyloarthropathies and inflammatory bowel disease, and chronic infections including bronchiectasis, tuberculosis and osteomyelitis.",
-   "Hereditary periodic fever syndromes, notably familial Mediterranean fever, TRAPS and the cryopyrin-associated syndromes, are important and treatable causes, particularly in younger patients.",
-   "The kidney is the dominant target, with proteinuria progressing to nephrotic syndrome and chronic kidney disease as the usual presentation.",
-   "Hepatosplenomegaly, gastrointestinal involvement with diarrhoea and malabsorption, and less often cardiac disease may occur; macroglossia and periorbital purpura, characteristic of AL, are absent.",
-   "The circulating serum amyloid A concentration tracks disease activity and is the key monitoring biomarker; sustained suppression can halt or reverse amyloid deposition.",
-   "The therapeutic cornerstone is aggressive control of the underlying inflammatory drive, using interleukin-6, interleukin-1 or tumour necrosis factor blockade, with colchicine for familial Mediterranean fever.",
-   "Incidence has fallen substantially with improved control of chronic inflammatory and infective disease."
+  "id": "aa_amyloidosis",
+  "name": "AA Amyloidosis (Serum Amyloid A / Reactive Systemic Amyloidosis)",
+  "aliases": [
+    "Secondary amyloidosis",
+    "Reactive amyloidosis",
+    "Inflammatory amyloidosis"
   ],
-  "pathophysiology": "Persistent activation of the acute-phase response raises hepatic production of serum amyloid A, an HDL-associated apolipoprotein. When the circulating concentration remains chronically elevated, proteolytic processing yields amyloidogenic AA fragments that polymerise into fibrils and deposit in the extracellular space, with particular avidity for the renal glomeruli, interstitium and vasculature, as well as the liver, spleen and gut. Fibril accumulation disrupts tissue architecture and organ function, and the rate of deposition is broadly proportional to the magnitude and duration of the serum amyloid A elevation, so that suppressing inflammation can stabilise or regress disease. Individual susceptibility is modified by serum amyloid A isotype and other genetic factors, which explains why only a minority of patients with chronic inflammation develop amyloidosis.",
-  "additionalDifferentials": [
-   "AL (immunoglobulin light-chain) amyloidosis",
-   "ATTR and other hereditary amyloidoses",
-   "Diabetic nephropathy and other causes of nephrotic syndrome",
-   "Membranous nephropathy and focal segmental glomerulosclerosis",
-   "Chronic glomerulonephritis",
-   "Hepatosplenomegaly due to lymphoproliferative disease"
-  ],
-  "additionalInvestigations": [
-   "Abdominal subcutaneous fat aspirate or rectal or renal biopsy with Congo red staining and AA immunohistochemistry",
-   "Serum amyloid A and C-reactive protein to gauge inflammatory activity",
-   "Renal function and quantified proteinuria by urine protein to creatinine ratio",
-   "Serum free light chains and immunofixation to exclude AL amyloidosis",
-   "SAP scintigraphy to assess total organ amyloid burden",
-   "Genetic testing for periodic fever syndromes where clinically suspected",
-   "Targeted investigations to identify the underlying inflammatory or infective focus"
-  ],
-  "redFlags": [
-   "New nephrotic-range proteinuria in a patient with long-standing inflammatory disease",
-   "Progressive decline in renal function",
-   "Persistently elevated serum amyloid A and C-reactive protein despite treatment",
-   "Unexplained hepatosplenomegaly or malabsorption"
-  ],
-  "prognosis": "Outcome is largely determined by renal involvement and by the ability to suppress the underlying inflammation. Sustained normalisation of serum amyloid A can arrest progression and permit regression, whereas uncontrolled inflammation leads to end-stage renal disease.",
-  "pitfalls": [
-   "Inferring the amyloid type from the clinical setting rather than confirming it by tissue typing, as AL can coexist with inflammatory disease",
-   "Failing to search for an occult inflammatory or infective focus",
-   "Not considering a hereditary periodic fever syndrome in younger patients",
-   "Relying on C-reactive protein alone when serum amyloid A is the more informative activity marker"
-  ],
-  "references": [
-   "Oxford Textbook of Medicine, chapter on systemic amyloidosis",
-   "Comprehensive Clinical Nephrology, chapter on renal amyloidosis",
-   "International Society of Amyloidosis nomenclature guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress the underlying inflammatory driver to lower serum amyloid A, using DMARDs and biologics including IL-6 and TNF inhibitors for rheumatoid and other inflammatory arthritides and definitive treatment of any chronic infection",
-   "Treat familial Mediterranean fever with colchicine and target other hereditary periodic fever syndromes with IL-1 inhibitors such as anakinra or canakinumab, or with TNF blockade, as appropriate",
-   "Manage renal involvement with control of proteinuria, RAAS blockade, treatment of oedema and general chronic-kidney-disease care",
-   "Provide renal replacement therapy for end-stage renal disease, with kidney transplantation considered once inflammation is controlled",
-   "Monitor serum amyloid A and C-reactive protein as biomarkers of disease activity, aiming for sustained suppression to arrest or reverse amyloid deposition",
-   "Offer genetic testing and counselling where a hereditary periodic fever syndrome is identified",
-   "Coordinate care between the relevant inflammatory-disease specialist, nephrology and a specialist amyloidosis centre"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aa_amyloidosis-pathway",
-   "title": "AA Amyloidosis (Serum Amyloid A / Reactive Systemic Amyloidosis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "AA amyloidosis results from deposition of fragments of serum amyloid A, an acute-phase apolipoprotein whose hepatic synthesis is driven by interleukin-6, interleukin-1 and tumour necrosis factor during sustained inflammation.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New nephrotic-range proteinuria in a patient with long-standing inflammatory disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Abdominal subcutaneous fat aspirate or rectal or renal biopsy with Congo red staining and AA immunohistochemistry, Serum amyloid A and C-reactive protein to gauge inflammatory activity, Renal function and quantified"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress the underlying inflammatory driver to lower serum amyloid A, using DMARDs and biologics including IL-6 and TNF inhibitors for rheumatoid and other inflammatory arthritides and definitive treatment of any"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Inferring the amyloid type from the clinical setting rather than confirming it by tissue typing, as AL can coexist with inflammatory disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aa amyloidosis (serum amyloid a / reactive systemic amyloidosis)."
-  }
- ],
- "tables": [
-  {
-   "id": "aa_amyloidosis-matrix",
-   "title": "AA Amyloidosis (Serum Amyloid A / Reactive Systemic Amyloidosis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "AA amyloidosis results from deposition of fragments of serum amyloid A, an acute-phase apolipoprotein whose hepatic synthesis is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem / Haematology",
+  "specialty": "Haematology / Amyloidosis",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "AA amyloidosis results from deposition of fragments of serum amyloid A, an acute-phase apolipoprotein whose hepatic synthesis is driven by interleukin-6, interleukin-1 and tumour necrosis factor during sustained inflammation.",
+      "It complicates chronic inflammatory disorders such as rheumatoid arthritis, juvenile idiopathic arthritis, spondyloarthropathies and inflammatory bowel disease, and chronic infections including bronchiectasis, tuberculosis and osteomyelitis.",
+      "Hereditary periodic fever syndromes, notably familial Mediterranean fever, TRAPS and the cryopyrin-associated syndromes, are important and treatable causes, particularly in younger patients.",
+      "The kidney is the dominant target, with proteinuria progressing to nephrotic syndrome and chronic kidney disease as the usual presentation.",
+      "Hepatosplenomegaly, gastrointestinal involvement with diarrhoea and malabsorption, and less often cardiac disease may occur; macroglossia and periorbital purpura, characteristic of AL, are absent.",
+      "The circulating serum amyloid A concentration tracks disease activity and is the key monitoring biomarker; sustained suppression can halt or reverse amyloid deposition.",
+      "The therapeutic cornerstone is aggressive control of the underlying inflammatory drive, using interleukin-6, interleukin-1 or tumour necrosis factor blockade, with colchicine for familial Mediterranean fever.",
+      "Incidence has fallen substantially with improved control of chronic inflammatory and infective disease."
     ],
-    [
-     "Key Investigations",
-     "Abdominal subcutaneous fat aspirate or rectal or renal biopsy with Congo red staining and AA immunohistochemistry, Serum amyloid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Persistent activation of the acute-phase response raises hepatic production of serum amyloid A, an HDL-associated apolipoprotein. When the circulating concentration remains chronically elevated, proteolytic processing yields amyloidogenic AA fragments that polymerise into fibrils and deposit in the extracellular space, with particular avidity for the renal glomeruli, interstitium and vasculature, as well as the liver, spleen and gut. Fibril accumulation disrupts tissue architecture and organ function, and the rate of deposition is broadly proportional to the magnitude and duration of the serum amyloid A elevation, so that suppressing inflammation can stabilise or regress disease. Individual susceptibility is modified by serum amyloid A isotype and other genetic factors, which explains why only a minority of patients with chronic inflammation develop amyloidosis.",
+    "additionalDifferentials": [
+      "AL (immunoglobulin light-chain) amyloidosis",
+      "ATTR and other hereditary amyloidoses",
+      "Diabetic nephropathy and other causes of nephrotic syndrome",
+      "Membranous nephropathy and focal segmental glomerulosclerosis",
+      "Chronic glomerulonephritis",
+      "Hepatosplenomegaly due to lymphoproliferative disease"
     ],
-    [
-     "Primary Differentials",
-     "AL (immunoglobulin light-chain) amyloidosis, ATTR and other hereditary amyloidoses, Diabetic nephropathy and other causes of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Abdominal subcutaneous fat aspirate or rectal or renal biopsy with Congo red staining and AA immunohistochemistry",
+      "Serum amyloid A and C-reactive protein to gauge inflammatory activity",
+      "Renal function and quantified proteinuria by urine protein to creatinine ratio",
+      "Serum free light chains and immunofixation to exclude AL amyloidosis",
+      "SAP scintigraphy to assess total organ amyloid burden",
+      "Genetic testing for periodic fever syndromes where clinically suspected",
+      "Targeted investigations to identify the underlying inflammatory or infective focus"
     ],
-    [
-     "Management Strategy",
-     "Suppress the underlying inflammatory driver to lower serum amyloid A, using DMARDs and biologics including IL-6 and TNF",
-     "Core treatment modality"
+    "redFlags": [
+      "New nephrotic-range proteinuria in a patient with long-standing inflammatory disease",
+      "Progressive decline in renal function",
+      "Persistently elevated serum amyloid A and C-reactive protein despite treatment",
+      "Unexplained hepatosplenomegaly or malabsorption"
     ],
-    [
-     "Clinical Pitfall",
-     "Inferring the amyloid type from the clinical setting rather than confirming it by tissue typing, as AL can coexist with",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is largely determined by renal involvement and by the ability to suppress the underlying inflammation. Sustained normalisation of serum amyloid A can arrest progression and permit regression, whereas uncontrolled inflammation leads to end-stage renal disease.",
+    "pitfalls": [
+      "Inferring the amyloid type from the clinical setting rather than confirming it by tissue typing, as AL can coexist with inflammatory disease",
+      "Failing to search for an occult inflammatory or infective focus",
+      "Not considering a hereditary periodic fever syndrome in younger patients",
+      "Relying on C-reactive protein alone when serum amyloid A is the more informative activity marker"
+    ],
+    "references": [
+      "Oxford Textbook of Medicine, chapter on systemic amyloidosis",
+      "Comprehensive Clinical Nephrology, chapter on renal amyloidosis",
+      "International Society of Amyloidosis nomenclature guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress the underlying inflammatory driver to lower serum amyloid A, using DMARDs and biologics including IL-6 and TNF inhibitors for rheumatoid and other inflammatory arthritides and definitive treatment of any chronic infection",
+      "Treat familial Mediterranean fever with colchicine and target other hereditary periodic fever syndromes with IL-1 inhibitors such as anakinra or canakinumab, or with TNF blockade, as appropriate",
+      "Manage renal involvement with control of proteinuria, RAAS blockade, treatment of oedema and general chronic-kidney-disease care",
+      "Provide renal replacement therapy for end-stage renal disease, with kidney transplantation considered once inflammation is controlled",
+      "Monitor serum amyloid A and C-reactive protein as biomarkers of disease activity, aiming for sustained suppression to arrest or reverse amyloid deposition",
+      "Offer genetic testing and counselling where a hereditary periodic fever syndrome is identified",
+      "Coordinate care between the relevant inflammatory-disease specialist, nephrology and a specialist amyloidosis centre"
     ]
-   ],
-   "caption": "Overview comparison matrix for aa amyloidosis (serum amyloid a / reactive systemic amyloidosis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aa-amyloidosis-real-image",
-   "title": "AA Amyloidosis (Serum Amyloid A / Reactive Systemic Amyloidosis): 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "aa_amyloidosis-pathway",
+      "title": "AA Amyloidosis (Serum Amyloid A / Reactive Systemic Amyloidosis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "AA amyloidosis results from deposition of fragments of serum amyloid A, an acute-phase apolipoprotein whose hepatic synthesis is driven by interleukin-6, interleukin-1 and tumour necrosis factor during sustained inflammation.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New nephrotic-range proteinuria in a patient with long-standing inflammatory disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Abdominal subcutaneous fat aspirate or rectal or renal biopsy with Congo red staining and AA immunohistochemistry, Serum amyloid A and C-reactive protein to gauge inflammatory activity, Renal function and quantified"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress the underlying inflammatory driver to lower serum amyloid A, using DMARDs and biologics including IL-6 and TNF inhibitors for rheumatoid and other inflammatory arthritides and definitive treatment of any"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Inferring the amyloid type from the clinical setting rather than confirming it by tissue typing, as AL can coexist with inflammatory disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aa amyloidosis (serum amyloid a / reactive systemic amyloidosis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aa_amyloidosis-matrix",
+      "title": "AA Amyloidosis (Serum Amyloid A / Reactive Systemic Amyloidosis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "AA amyloidosis results from deposition of fragments of serum amyloid A, an acute-phase apolipoprotein whose hepatic synthesis is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Abdominal subcutaneous fat aspirate or rectal or renal biopsy with Congo red staining and AA immunohistochemistry, Serum amyloid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "AL (immunoglobulin light-chain) amyloidosis, ATTR and other hereditary amyloidoses, Diabetic nephropathy and other causes of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress the underlying inflammatory driver to lower serum amyloid A, using DMARDs and biologics including IL-6 and TNF",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Inferring the amyloid type from the clinical setting rather than confirming it by tissue typing, as AL can coexist with",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aa amyloidosis (serum amyloid a / reactive systemic amyloidosis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oxford Textbook of Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 112-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aa_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fat aspirate or rectal or renal biopsy with Congo red and AA immunohistochemistry",
+          "cells": [
+            {
+              "text": "Tissue typing confirms the AA type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum amyloid A and C-reactive protein",
+          "cells": [
+            {
+              "text": "Gauges inflammatory activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urine protein to creatinine ratio",
+          "cells": [
+            {
+              "text": "Quantified proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains and immunofixation",
+          "cells": [
+            {
+              "text": "Excludes AL amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAP scintigraphy",
+          "cells": [
+            {
+              "text": "Total organ amyloid burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for periodic fever syndromes",
+          "cells": [
+            {
+              "text": "Hereditary periodic fever syndrome where clinically suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted investigations for the underlying inflammatory or infective focus",
+          "cells": [
+            {
+              "text": "The driver of raised serum amyloid A"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aa_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "AL (immunoglobulin light-chain) amyloidosis",
+          "cells": [
+            {
+              "text": "Can coexist with inflammatory disease"
+            },
+            {
+              "text": "Serum free light chains and immunofixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of nephrotic syndrome",
+          "cells": [
+            {
+              "text": "Diabetic, membranous or focal segmental disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aa_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "DMARDs and biologics, including IL-6 and TNF inhibitors",
+          "cells": [
+            {
+              "text": "Suppress the inflammatory driver to lower serum amyloid A"
+            },
+            {
+              "text": "Definitive treatment of any chronic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colchicine for familial Mediterranean fever",
+          "cells": [
+            {
+              "text": "Hereditary periodic fever syndromes"
+            },
+            {
+              "text": "IL-1 inhibitors (anakinra, canakinumab) or TNF blockade for other syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RAAS blockade and proteinuria control",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            },
+            {
+              "text": "Manage oedema and general chronic kidney disease care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "End-stage renal disease"
+            },
+            {
+              "text": "Kidney transplantation considered once inflammation is controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial serum amyloid A and C-reactive protein",
+          "cells": [
+            {
+              "text": "Biomarkers of disease activity"
+            },
+            {
+              "text": "Sustained suppression aims to arrest amyloid deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "Where a hereditary periodic fever syndrome is identified"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated specialist care",
+          "cells": [
+            {
+              "text": "Inflammatory-disease specialist, nephrology and amyloidosis centre"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aa_amyloidosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Amyloid fibril proteins and clinical syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Precursor protein",
+        "Clinical syndrome",
+        "Clinical involvement"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic: AL",
+          "cells": [
+            {
+              "text": "Immunoglobulin light chain"
+            },
+            {
+              "text": "Primary or myeloma associated (footnote a)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AH",
+          "cells": [
+            {
+              "text": "Immunoglobulin heavy chain"
+            },
+            {
+              "text": "Primary or myeloma associated (rare)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AA",
+          "cells": [
+            {
+              "text": "Serum amyloid A protein"
+            },
+            {
+              "text": "Secondary, reactive (footnote b)"
+            },
+            {
+              "text": "Renal, any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: Abeta2M",
+          "cells": [
+            {
+              "text": "Beta2-microglobulin"
+            },
+            {
+              "text": "Hemodialysis associated"
+            },
+            {
+              "text": "Synovial membrane, bone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ATTR",
+          "cells": [
+            {
+              "text": "Transthyretin"
+            },
+            {
+              "text": "Familial (mutant); senile systemic (wild type)"
+            },
+            {
+              "text": "Cardiac, peripheral and autonomic nerves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAI",
+          "cells": [
+            {
+              "text": "Apolipoprotein AI"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Hepatic, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAII",
+          "cells": [
+            {
+              "text": "Apolipoprotein AII"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AGel",
+          "cells": [
+            {
+              "text": "Gelsolin"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Corneas, cranial nerves, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AFib",
+          "cells": [
+            {
+              "text": "Fibrinogen A alpha"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALys",
+          "cells": [
+            {
+              "text": "Lysozyme"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALECT2",
+          "cells": [
+            {
+              "text": "Leukocyte chemotactic factor 2"
+            },
+            {
+              "text": "Uncertain (printed as ?)"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: Abeta",
+          "cells": [
+            {
+              "text": "Amyloid beta protein"
+            },
+            {
+              "text": "Alzheimer's disease"
+            },
+            {
+              "text": "Down syndrome (as printed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACys",
+          "cells": [
+            {
+              "text": "Cystatin C"
+            },
+            {
+              "text": "Cerebral amyloid angiopathy"
+            },
+            {
+              "text": "CNS, vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APrP",
+          "cells": [
+            {
+              "text": "Prion protein"
+            },
+            {
+              "text": "Spongiform encephalopathies"
+            },
+            {
+              "text": "CNS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AIAPP",
+          "cells": [
+            {
+              "text": "Islet amyloid polypeptide (amylin)"
+            },
+            {
+              "text": "Diabetes associated"
+            },
+            {
+              "text": "Pancreas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACal",
+          "cells": [
+            {
+              "text": "Calcitonin"
+            },
+            {
+              "text": "Medullary carcinoma of the thyroid"
+            },
+            {
+              "text": "Thyroid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AANF",
+          "cells": [
+            {
+              "text": "Atrial natriuretic factor"
+            },
+            {
+              "text": "Age related"
+            },
+            {
+              "text": "Cardiac atria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APro",
+          "cells": [
+            {
+              "text": "Prolactin"
+            },
+            {
+              "text": "Endocrinopathy"
+            },
+            {
+              "text": "Pituitary"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote letters a and b appear on the AL and AA rows in the source but their text is not printed. The Abeta row layout is as printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aa_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of AA Amyloidosis (Serum Amyloid A / Reactive Systemic Amyloidosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic inflammatory disease with new proteinuria or falling GFR",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Nephrotic-range proteinuria in long-standing inflammatory disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology and inflammatory-disease specialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum amyloid A, CRP, urine protein to creatinine ratio and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Congo red positive with AA-type immunohistochemistry on tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude AL with free light chains and immunofixation; SAP scintigraphy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review other causes; search for an infective or inflammatory focus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Suppress the inflammatory driver with DMARDs or IL-6 or TNF inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Colchicine for familial Mediterranean fever; IL-1 inhibitors for others",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "RAAS blockade and proteinuria control; monitor serum amyloid A",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome set by renal involvement and control of inflammation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

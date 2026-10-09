@@ -1,173 +1,471 @@
 {
- "id": "familial_gastrointestinal_stromal_tumor",
- "name": "Familial gastrointestinal stromal tumour",
- "aliases": [
-  "KIT",
-  "PDGFRA",
-  "familial GIST",
-  "hereditary GIST syndrome"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Genetics",
- "specialty": "Gastroenterology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant predisposition to gastrointestinal stromal tumours caused by germline activating variants in KIT or, less often, PDGFRA",
-   "Affected families develop multiple GISTs, typically at a younger age than sporadic cases, most commonly in the stomach and small intestine",
-   "Tumours arise from the interstitial cells of Cajal and characteristically express KIT (CD117) on immunohistochemistry",
-   "Associated features in some kindreds include diffuse hyperplasia of interstitial cells of Cajal, cutaneous hyperpigmentation, mastocytosis and dysphagia",
-   "Presentation may include gastrointestinal bleeding, abdominal mass, obstruction or an incidental submucosal lesion",
-   "Because the tumours are driven by constitutive receptor tyrosine-kinase signalling, tyrosine-kinase inhibition is the principal systemic therapy for GIST",
-   "Genetic counselling and surveillance are important given the dominant inheritance and multiplicity of tumours"
+  "id": "familial_gastrointestinal_stromal_tumor",
+  "name": "Familial gastrointestinal stromal tumour",
+  "aliases": [
+    "KIT",
+    "PDGFRA",
+    "familial GIST",
+    "hereditary GIST syndrome"
   ],
-  "pathophysiology": "Familial gastrointestinal stromal tumour syndrome is driven by germline activating variants in the receptor tyrosine-kinase genes KIT or PDGFRA. These variants cause ligand-independent, constitutive activation of the receptor and its downstream proliferative signalling pathways in the interstitial cells of Cajal, the gut pacemaker cells from which GISTs derive. The inherited mutation predisposes to hyperplasia of these cells and to the development of multiple stromal tumours throughout the gastrointestinal tract, often at an earlier age than sporadic disease. The specific germline variant influences tumour distribution, associated phenotypic features and sensitivity to targeted tyrosine-kinase inhibition.",
-  "additionalDifferentials": [
-   "Sporadic gastrointestinal stromal tumour",
-   "Carney triad and Carney-Stratakis syndrome (SDH-deficient GIST)",
-   "Neurofibromatosis type 1 associated GISTs",
-   "Leiomyoma and leiomyosarcoma of the gut",
-   "Schwannoma and other mesenchymal tumours",
-   "Neuroendocrine tumours of the gastrointestinal tract"
-  ],
-  "additionalInvestigations": [
-   "Endoscopy and endoscopic ultrasound to characterise submucosal lesions",
-   "Cross-sectional imaging for tumour staging and surveillance",
-   "Histology with KIT (CD117) and DOG1 immunohistochemistry",
-   "Germline and tumour molecular testing for KIT and PDGFRA variants",
-   "Family history assessment, genetic counselling and cascade testing of relatives"
-  ],
-  "redFlags": [
-   "Gastrointestinal haemorrhage or anaemia from an ulcerated tumour",
-   "Bowel obstruction or a rapidly enlarging abdominal mass",
-   "Features suggesting metastatic spread such as hepatic lesions",
-   "Multiple or early-onset tumours indicating a hereditary syndrome requiring family evaluation"
-  ],
-  "prognosis": "Outcome depends on tumour size, mitotic activity, site and resectability; localised tumours may be cured surgically while advanced disease is managed with tyrosine-kinase inhibition. The hereditary predisposition means new tumours can arise over time, so long-term surveillance is required.",
-  "pitfalls": [
-   "Assuming a GIST is sporadic and missing a hereditary syndrome in a patient with multiple or early tumours",
-   "Failing to arrange genetic counselling and family screening once a germline variant is identified",
-   "Overlooking SDH-deficient and NF1-associated GISTs, which behave and respond differently",
-   "Not confirming KIT/DOG1 status, risking misclassification of the mesenchymal tumour"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "DeVita, Hellman, and Rosenberg's Cancer: Principles and Practice of Oncology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical resection of localised or symptomatic gastrointestinal stromal tumours",
-   "Tyrosine-kinase inhibition with imatinib as the principal systemic therapy for advanced, metastatic or high-risk resected disease, guided by KIT/PDGFRA genotype",
-   "Recognise imatinib-resistant genotypes such as PDGFRA D842V, which require alternative agents like avapritinib",
-   "Lifelong endoscopic and cross-sectional imaging surveillance for new or recurrent tumours",
-   "Management of complications such as gastrointestinal haemorrhage and obstruction",
-   "Genetic counselling with germline KIT and PDGFRA testing and cascade screening of relatives",
-   "Multidisciplinary management through a specialist sarcoma and GIST service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_gastrointestinal_stromal_tumor-pathway",
-   "title": "Familial gastrointestinal stromal tumour: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant predisposition to gastrointestinal stromal tumours caused by germline activating variants in KIT or, less often, PDGFRA",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Gastrointestinal haemorrhage or anaemia from an ulcerated tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Endoscopy and endoscopic ultrasound to characterise submucosal lesions, Cross-sectional imaging for tumour staging and surveillance, Histology with KIT (CD117) and DOG1 immunohistochemistry"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical resection of localised or symptomatic gastrointestinal stromal tumours"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a GIST is sporadic and missing a hereditary syndrome in a patient with multiple or early tumours"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial gastrointestinal stromal tumour."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_gastrointestinal_stromal_tumor-matrix",
-   "title": "Familial gastrointestinal stromal tumour: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant predisposition to gastrointestinal stromal tumours caused by germline activating variants in KIT or, less",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Genetics",
+  "specialty": "Gastroenterology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant predisposition to gastrointestinal stromal tumours caused by germline activating variants in KIT or, less often, PDGFRA",
+      "Affected families develop multiple GISTs, typically at a younger age than sporadic cases, most commonly in the stomach and small intestine",
+      "Tumours arise from the interstitial cells of Cajal and characteristically express KIT (CD117) on immunohistochemistry",
+      "Associated features in some kindreds include diffuse hyperplasia of interstitial cells of Cajal, cutaneous hyperpigmentation, mastocytosis and dysphagia",
+      "Presentation may include gastrointestinal bleeding, abdominal mass, obstruction or an incidental submucosal lesion",
+      "Because the tumours are driven by constitutive receptor tyrosine-kinase signalling, tyrosine-kinase inhibition is the principal systemic therapy for GIST",
+      "Genetic counselling and surveillance are important given the dominant inheritance and multiplicity of tumours"
     ],
-    [
-     "Key Investigations",
-     "Endoscopy and endoscopic ultrasound to characterise submucosal lesions, Cross-sectional imaging for tumour staging and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Familial gastrointestinal stromal tumour syndrome is driven by germline activating variants in the receptor tyrosine-kinase genes KIT or PDGFRA. These variants cause ligand-independent, constitutive activation of the receptor and its downstream proliferative signalling pathways in the interstitial cells of Cajal, the gut pacemaker cells from which GISTs derive. The inherited mutation predisposes to hyperplasia of these cells and to the development of multiple stromal tumours throughout the gastrointestinal tract, often at an earlier age than sporadic disease. The specific germline variant influences tumour distribution, associated phenotypic features and sensitivity to targeted tyrosine-kinase inhibition.",
+    "additionalDifferentials": [
+      "Sporadic gastrointestinal stromal tumour",
+      "Carney triad and Carney-Stratakis syndrome (SDH-deficient GIST)",
+      "Neurofibromatosis type 1 associated GISTs",
+      "Leiomyoma and leiomyosarcoma of the gut",
+      "Schwannoma and other mesenchymal tumours",
+      "Neuroendocrine tumours of the gastrointestinal tract"
     ],
-    [
-     "Primary Differentials",
-     "Sporadic gastrointestinal stromal tumour, Carney triad and Carney-Stratakis syndrome (SDH-deficient GIST), Neurofibromatosis type",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Endoscopy and endoscopic ultrasound to characterise submucosal lesions",
+      "Cross-sectional imaging for tumour staging and surveillance",
+      "Histology with KIT (CD117) and DOG1 immunohistochemistry",
+      "Germline and tumour molecular testing for KIT and PDGFRA variants",
+      "Family history assessment, genetic counselling and cascade testing of relatives"
     ],
-    [
-     "Management Strategy",
-     "Surgical resection of localised or symptomatic gastrointestinal stromal tumours",
-     "Core treatment modality"
+    "redFlags": [
+      "Gastrointestinal haemorrhage or anaemia from an ulcerated tumour",
+      "Bowel obstruction or a rapidly enlarging abdominal mass",
+      "Features suggesting metastatic spread such as hepatic lesions",
+      "Multiple or early-onset tumours indicating a hereditary syndrome requiring family evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a GIST is sporadic and missing a hereditary syndrome in a patient with multiple or early tumours",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on tumour size, mitotic activity, site and resectability; localised tumours may be cured surgically while advanced disease is managed with tyrosine-kinase inhibition. The hereditary predisposition means new tumours can arise over time, so long-term surveillance is required.",
+    "pitfalls": [
+      "Assuming a GIST is sporadic and missing a hereditary syndrome in a patient with multiple or early tumours",
+      "Failing to arrange genetic counselling and family screening once a germline variant is identified",
+      "Overlooking SDH-deficient and NF1-associated GISTs, which behave and respond differently",
+      "Not confirming KIT/DOG1 status, risking misclassification of the mesenchymal tumour"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "DeVita, Hellman, and Rosenberg's Cancer: Principles and Practice of Oncology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical resection of localised or symptomatic gastrointestinal stromal tumours",
+      "Tyrosine-kinase inhibition with imatinib as the principal systemic therapy for advanced, metastatic or high-risk resected disease, guided by KIT/PDGFRA genotype",
+      "Recognise imatinib-resistant genotypes such as PDGFRA D842V, which require alternative agents like avapritinib",
+      "Lifelong endoscopic and cross-sectional imaging surveillance for new or recurrent tumours",
+      "Management of complications such as gastrointestinal haemorrhage and obstruction",
+      "Genetic counselling with germline KIT and PDGFRA testing and cascade screening of relatives",
+      "Multidisciplinary management through a specialist sarcoma and GIST service"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial gastrointestinal stromal tumour."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-gastrointestinal-stromal-tumor-real-image",
-   "title": "Familial gastrointestinal stromal tumour: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "familial_gastrointestinal_stromal_tumor-pathway",
+      "title": "Familial gastrointestinal stromal tumour: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant predisposition to gastrointestinal stromal tumours caused by germline activating variants in KIT or, less often, PDGFRA",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Gastrointestinal haemorrhage or anaemia from an ulcerated tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Endoscopy and endoscopic ultrasound to characterise submucosal lesions, Cross-sectional imaging for tumour staging and surveillance, Histology with KIT (CD117) and DOG1 immunohistochemistry"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical resection of localised or symptomatic gastrointestinal stromal tumours"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a GIST is sporadic and missing a hereditary syndrome in a patient with multiple or early tumours"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial gastrointestinal stromal tumour."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_gastrointestinal_stromal_tumor-matrix",
+      "title": "Familial gastrointestinal stromal tumour: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant predisposition to gastrointestinal stromal tumours caused by germline activating variants in KIT or, less",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Endoscopy and endoscopic ultrasound to characterise submucosal lesions, Cross-sectional imaging for tumour staging and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sporadic gastrointestinal stromal tumour, Carney triad and Carney-Stratakis syndrome (SDH-deficient GIST), Neurofibromatosis type",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical resection of localised or symptomatic gastrointestinal stromal tumours",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a GIST is sporadic and missing a hereditary syndrome in a patient with multiple or early tumours",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial gastrointestinal stromal tumour."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_gastrointestinal_stromal_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopy and endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Characterise submucosal lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Tumour staging and surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology with KIT (CD117) and DOG1 immunohistochemistry",
+          "cells": [
+            {
+              "text": "Confirms the mesenchymal tumour type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline and tumour testing for KIT and PDGFRA",
+          "cells": [
+            {
+              "text": "Causative variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and cascade testing",
+          "cells": [
+            {
+              "text": "Relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_gastrointestinal_stromal_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Carney triad or Carney-Stratakis syndrome (SDH-deficient GIST)",
+          "cells": [
+            {
+              "text": "Behaves and responds differently from KIT-driven disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurofibromatosis type 1-associated GIST",
+          "cells": [
+            {
+              "text": "Behaves and responds differently from KIT-driven disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic gastrointestinal stromal tumour",
+          "cells": [
+            {
+              "text": "Occurs singly and later; multiple or early tumours point to a syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_gastrointestinal_stromal_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Localised or symptomatic tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imatinib",
+          "cells": [
+            {
+              "text": "Principal systemic therapy for advanced, metastatic or high-risk resected disease, guided by KIT or PDGFR genotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative agents for imatinib-resistant genotypes",
+          "cells": [
+            {
+              "text": "PDGFRA D842V requires agents such as avapritinib"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong endoscopic and cross-sectional surveillance",
+          "cells": [
+            {
+              "text": "New or recurrent tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of haemorrhage and obstruction",
+          "cells": [
+            {
+              "text": "Complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "Germline KIT and PDGFRA testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist sarcoma and GIST multidisciplinary care",
+          "cells": [
+            {
+              "text": "Coordinated management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_gastrointestinal_stromal_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Familial gastrointestinal stromal tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple or early-onset gastrointestinal stromal tumours in one family",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (bleeding or anaemia, obstruction, rapidly enlarging mass, liver lesions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Manage bleeding or obstruction; specialist GIST service review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopic ultrasound; cross-sectional imaging; KIT and DOG1 staining; germline testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Germline KIT or PDGFRA variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SDH-deficient or NF1-associated GIST; sporadic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of localised or symptomatic tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Imatinib for advanced, metastatic or high-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alternative agents for imatinib-resistant genotypes such as PDGFRA D842V",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong endoscopic and imaging surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and cascade screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Localised tumours may be cured surgically; advanced disease is managed long term",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

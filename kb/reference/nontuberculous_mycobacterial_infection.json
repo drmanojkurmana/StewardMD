@@ -1,190 +1,679 @@
 {
- "id": "nontuberculous_mycobacterial_infection",
- "name": "Nontuberculous Mycobacterial Infection",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 185,
- "page": 1414,
- "aliases": [
-  "NTM",
-  "MAC",
-  "Mycobacterium avium complex"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1414-1418",
-  "clinicalPearls": [
-   "NTM (also termed atypical, environmental, or mycobacteria other than tuberculosis) are ubiquitous in soil and water and refer to mycobacteria other than M. tuberculosis and its close relatives and M. leprae; over 199 species are recognized (p.1414).",
-   "Most NTM cause human disease only when host defense is impaired (e.g., bronchiectasis) or breached by inoculation (liposuction, trauma, cardiac surgery); human-to-human transmission is rare and occurs almost exclusively in cystic fibrosis (p.1414).",
-   "Pulmonary disease is by far the most common form in North America and is highly associated with pulmonary epithelial defects but NOT with systemic immunodeficiency; disseminated disease instead denotes significant immune dysfunction such as advanced HIV (p.1414, 1416).",
-   "Pulmonary MAC most commonly presents in the 6th-7th decade in women with months to years of nagging intermittent cough and fatigue; pulmonary NTM in a tall, thin woman with chest-wall abnormalities is termed 'Lady Windermere syndrome' (p.1416).",
-   "Pulmonary MAC affects older nonsmoking white women more than men (onset ~60 years); such patients tend to be taller and thinner with high rates of scoliosis, mitral valve prolapse, and pectus anomalies (p.1416).",
-   "Male smokers with upper-lobe cavitary disease tend to carry the same single MAC strain indefinitely, whereas nonsmoking women with nodular bronchiectasis carry several MAC strains simultaneously that change over the disease course (p.1416).",
-   "M. kansasii can produce a clinical syndrome strongly resembling tuberculosis with hemoptysis, chest pain, and cavitary lung disease (p.1416).",
-   "Disseminated MAC (or M. kansasii) in advanced HIV is now uncommon in North America owing to effective prophylaxis and improved HIV treatment; when common, the portal of entry was the bowel with spread to bone marrow and bloodstream (p.1415).",
-   "Disseminated NTM is often indolent and progressive over weeks to months with malaise, fever, weight loss, organomegaly, lymphadenopathy, and anemia; blood cultures may be negative even though involved organs carry heavy organism burdens, sometimes with grossly impaired granulomatous response (p.1415).",
-   "Isolated cervical lymphadenopathy is the most common form of NTM infection in young children in North America (usually MAC); the swelling is firm and relatively painless with few systemic signs and is often diagnosed inadvertently at biopsy for suspected malignancy (p.1416).",
-   "Children with isolated cervical or intrathoracic NTM infection do NOT commonly have underlying immune defects and usually do NOT go on to develop other opportunistic infections (p.1416).",
-   "Cutaneous NTM usually requires a break in the skin; rapidly growing NTM (M. abscessus, M. fortuitum, M. chelonae) cause outbreaks via contaminated surgical instruments/injections, with painful erythematous draining subcutaneous nodules typically WITHOUT fever or systemic symptoms (p.1416).",
-   "M. marinum (fish tanks, pools, fish handling) causes 'fish-tank granuloma' and can spread up the arm in a sporotrichoid pattern; M. ulcerans causes painless Buruli ulcer via the toxin mycolactone (p.1416).",
-   "'Hot-tub lung' is a pulmonary hypersensitivity reaction to NTM (most often MAC) growing in underchlorinated water, distinct from true pulmonary or disseminated infection (p.1415).",
-   "For susceptibility testing, only MAC testing for clarithromycin and M. kansasii testing for rifampin is indicated; few data support other in vitro susceptibility tests, and MAC isolates not previously exposed to macrolides are almost always susceptible (p.1417)."
+  "id": "nontuberculous_mycobacterial_infection",
+  "name": "Nontuberculous Mycobacterial Infection",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 185,
+  "page": 1414,
+  "aliases": [
+    "NTM",
+    "MAC",
+    "Mycobacterium avium complex"
   ],
-  "pathophysiology": "NTM are ubiquitous environmental organisms (soil and water) with specific niches (e.g., M. simiae in aquifers, M. fortuitum in pedicure baths, M. immunogenum in metalworking fluids). Because exposure is essentially universal yet disease is rare, normal host defenses are strong and significant disease implies a specific susceptibility. Mycobacteria are phagocytosed by macrophages, which release IL-12; IL-12 activates T and NK cells (via STAT4) to secrete IFN-gamma, which activates macrophages/neutrophils (via STAT1) and upregulates TNF-alpha, forming a positive IFN-gamma/IL-12 feedback loop critical for mycobacterial control. Disseminated NTM correlates with declining CD4+ T cells (advanced HIV, idiopathic CD4 lymphocytopenia), TNF-alpha inhibitors (which impair granuloma formation), Mendelian mutations in the IFN-gamma/IL-12 pathway (IFNG, IFNGR1, IFNGR2, STAT1, GATA2, ISG15, IRF8, IL-12A, IL-12RB1, IL-12RB2, CYBB, IKBKG/NEMO and others), or neutralizing anti-IFN-gamma autoantibodies. Only ~70% of non-HIV disseminated cases have a genetic diagnosis. In contrast, the best-recognized substrate for pulmonary NTM is bronchiectasis (cystic fibrosis, primary ciliary dyskinesia, STAT3 hyper-IgE/Job's syndrome, idiopathic), but the mechanism by which bronchiectasis predisposes to locally destructive yet non-systemic disease is unknown (p.1414-1415).",
-  "additionalDifferentials": [
-   "Pulmonary tuberculosis (M. kansasii closely mimics TB; PPD/IGRA cross-reactivity)",
-   "Malignancy (painless cervical adenopathy in children; isolated intrathoracic NTM mistaken for cancer)",
-   "Bronchiectasis exacerbation / underlying structural lung disease",
-   "Pulmonary alveolar proteinosis (predisposes to NTM and Nocardia)",
-   "Sporotrichosis (sporotrichoid spread mimicked by M. marinum)"
-  ],
-  "infectionMimics": [
-   "M. tuberculosis (clinical, radiographic, and AFB-smear overlap)",
-   "Nocardia (gram-positive beaded filamentous rods; alveolar proteinosis predisposes to both)",
-   "Sporothrix schenckii (sporotrichoid ascending nodules akin to M. marinum)"
-  ],
-  "nonInfectiousMimics": [
-   "Malignancy presenting as painless cervical or intrathoracic adenopathy",
-   "Hot-tub lung (hypersensitivity pneumonitis-type reaction to NTM rather than invasive infection)"
-  ],
-  "additionalInvestigations": [
-   "Acid-fast or fluorochrome smears of sputum or body fluids (organisms may appear as beaded gram-positive rods at high burden, but this is unreliable)",
-   "Mycobacterial culture using separate processing and dedicated blood culture media; differentiate rapidly growing (<7 days) from slowly growing (>=7 days) species; some labs hold cultures 6 weeks",
-   "Liquid culture media for faster isolation; lower incubation temperature (30C) for M. marinum, M. haemophilum, M. ulcerans; special additives (iron/blood for M. haemophilum, mycobactin J for M. genavense)",
-   "Species-level identification by biochemical tests, nucleic acid probes/sequencing, HPLC or mass spectrometry; molecular detection for noncultivable species (e.g., M. tilburgii)",
-   "Chest CT (tree-in-bud bronchiolar pattern, lingular and right-middle-lobe involvement, bronchiectasis, cavitation)",
-   "IGRA (note M. marinum, M. kansasii, M. szulgai carry ESAT6/CFP10 and may cause false-positive IGRA; IGRA is indeterminate with anti-IFN-gamma autoantibodies)",
-   "Genetic evaluation of the IFN-gamma/IL-12 pathway and screening for anti-IFN-gamma autoantibodies in disseminated disease without iatrogenic cause; GATA2 evaluation when myelodysplasia coexists"
-  ],
-  "redFlags": [
-   "Disseminated involvement of two or more organs without an iatrogenic cause (prompts IFN-gamma/IL-12 pathway genetic investigation)",
-   "Disseminated NTM with bacterial/viral infections plus conical/peg/missing teeth or abnormal hair pattern in males (suggests NEMO/IKBKG NF-kB defect, possibly with immunoglobulin defects)",
-   "Mycobacterial disease with myelodysplasia (investigate GATA2 deficiency)",
-   "Disseminated MAC and rapidly growing NTM with other opportunistic infections (e.g., Talaromyces), especially in East Asian women (anti-IFN-gamma autoantibodies)",
-   "Infected indwelling IV catheters/lines (M. abscessus, M. fortuitum from contaminated water) requiring catheter removal"
-  ],
-  "prognosis": "NTM cause chronic infections evolving slowly over weeks to years, so emergent therapy before diagnosis and speciation is rarely needed. Treatment is complex, often poorly tolerated, and potentially toxic; inadequate single-drug therapy is almost always associated with emergence of resistance and relapse. Pulmonary MAC therapy is prolonged, generally continued for 12 months after culture conversion (typically at least 18 months total). The typical lag between symptom onset and diagnosis is about 5 years in older women (p.1416-1418).",
-  "pitfalls": [
-   "Not all NTM isolations, especially from the lung, reflect disease or require treatment; distinguishing colonization/contamination from true infection requires an appropriate clinical and radiographic setting (nodules, bronchiectasis, cavities) plus repeated isolation per American Thoracic Society criteria (p.1417).",
-   "The single most critical and sensitive step in diagnosis is simply to suspect NTM and request the correct, separately processed mycobacterial smears, cultures, and dedicated blood culture media; many cases go undiagnosed because the appropriate test was never ordered (p.1416-1417).",
-   "M. gordonae is frequently recovered from respiratory samples but is almost never a pathogen (p.1417).",
-   "PPD does not differentiate NTM from M. tuberculosis well; intermediate (~10 mm) reactions overlap, BCG cross-reacts, but large reactions (>15 mm) most commonly signify TB (p.1416-1417).",
-   "Slow-growing NTM typically do NOT proliferate in routine blood culture media, so suspicion and correct bottles are essential; biopsy isolation is strong evidence but laboratory contamination does occur (confirm with organisms on stained sections) (p.1417)."
-  ],
-  "severityClassification": "American Thoracic Society criteria for pulmonary NTM diagnosis: growth of NTM from two of three sputum samples (regardless of smear), OR a positive bronchoalveolar lavage sample (regardless of smear), OR a lung parenchymal biopsy with granulomatous inflammation or mycobacteria on section plus NTM on culture, in an appropriate clinical and radiographic setting. Isolation of NTM from blood or organ biopsy in a compatible clinical setting is considered diagnostic. NTM are categorized as rapidly growing (<7 days) versus slowly growing (>=7 days) (p.1417).",
-  "references": [
-   "Harrison 22e p.1414-1418"
-  ],
-  "crossLinks": [
-   "PULMONARY_TB",
-   "BRONCHIECTASIS_EXACERBATION"
-  ],
-  "management": [
-   "Treat with prolonged multidrug antimycobacterial therapy chosen by species and susceptibility — for Mycobacterium avium complex a macrolide combined with rifampicin and ethambutol",
-   "Never rely on single-drug therapy, since monotherapy reliably selects for resistance",
-   "Use amikacin- and macrolide-containing regimens for rapidly growing species such as M. abscessus, and rifampicin-based therapy for M. kansasii",
-   "Address the underlying susceptibility — optimise antiretroviral therapy in advanced HIV and reconsider TNF-alpha inhibitors that impair granuloma formation",
-   "Add surgical resection or debridement for localised disease and remove infected foreign material or prostheses",
-   "Monitor for culture conversion and for drug toxicity such as aminoglycoside ototoxicity and ethambutol ocular effects",
-   "Manage through an infectious diseases specialist, reserving urgent empirical therapy for the rare fulminant case given the generally chronic course"
-  ]
- },
- "algorithms": [
-  {
-   "id": "nontuberculous_mycobacterial_infection-pathway",
-   "title": "Nontuberculous Mycobacterial Infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "NTM (also termed atypical, environmental, or mycobacteria other than tuberculosis) are ubiquitous in soil and water and refer to mycobacteria other than M. tuberculosis and its close relatives and M. leprae; over 199 species are recognized",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disseminated involvement of two or more organs without an iatrogenic cause (prompts IFN-gamma/IL-12 pathway genetic investigation)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Acid-fast or fluorochrome smears of sputum or body fluids (organisms may appear as beaded gram-positive rods at high burden, but this is unreliable), Mycobacterial culture using separate processing and dedicated blood"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with prolonged multidrug antimycobacterial therapy chosen by species and susceptibility - for Mycobacterium avium complex a macrolide combined with rifampicin and ethambutol"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not all NTM isolations, especially from the lung, reflect disease or require treatment; distinguishing colonization/contamination from true infection requires an appropriate clinical and radiographic setting"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nontuberculous mycobacterial infection."
-  }
- ],
- "tables": [
-  {
-   "id": "nontuberculous_mycobacterial_infection-matrix",
-   "title": "Nontuberculous Mycobacterial Infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "NTM (also termed atypical, environmental, or mycobacteria other than tuberculosis) are ubiquitous in soil and water and refer to",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1414-1418",
+    "clinicalPearls": [
+      "NTM (also termed atypical, environmental, or mycobacteria other than tuberculosis) are ubiquitous in soil and water and refer to mycobacteria other than M. tuberculosis and its close relatives and M. leprae; over 199 species are recognized (p.1414).",
+      "Most NTM cause human disease only when host defense is impaired (e.g., bronchiectasis) or breached by inoculation (liposuction, trauma, cardiac surgery); human-to-human transmission is rare and occurs almost exclusively in cystic fibrosis (p.1414).",
+      "Pulmonary disease is by far the most common form in North America and is highly associated with pulmonary epithelial defects but NOT with systemic immunodeficiency; disseminated disease instead denotes significant immune dysfunction such as advanced HIV (p.1414, 1416).",
+      "Pulmonary MAC most commonly presents in the 6th-7th decade in women with months to years of nagging intermittent cough and fatigue; pulmonary NTM in a tall, thin woman with chest-wall abnormalities is termed 'Lady Windermere syndrome' (p.1416).",
+      "Pulmonary MAC affects older nonsmoking white women more than men (onset ~60 years); such patients tend to be taller and thinner with high rates of scoliosis, mitral valve prolapse, and pectus anomalies (p.1416).",
+      "Male smokers with upper-lobe cavitary disease tend to carry the same single MAC strain indefinitely, whereas nonsmoking women with nodular bronchiectasis carry several MAC strains simultaneously that change over the disease course (p.1416).",
+      "M. kansasii can produce a clinical syndrome strongly resembling tuberculosis with hemoptysis, chest pain, and cavitary lung disease (p.1416).",
+      "Disseminated MAC (or M. kansasii) in advanced HIV is now uncommon in North America owing to effective prophylaxis and improved HIV treatment; when common, the portal of entry was the bowel with spread to bone marrow and bloodstream (p.1415).",
+      "Disseminated NTM is often indolent and progressive over weeks to months with malaise, fever, weight loss, organomegaly, lymphadenopathy, and anemia; blood cultures may be negative even though involved organs carry heavy organism burdens, sometimes with grossly impaired granulomatous response (p.1415).",
+      "Isolated cervical lymphadenopathy is the most common form of NTM infection in young children in North America (usually MAC); the swelling is firm and relatively painless with few systemic signs and is often diagnosed inadvertently at biopsy for suspected malignancy (p.1416).",
+      "Children with isolated cervical or intrathoracic NTM infection do NOT commonly have underlying immune defects and usually do NOT go on to develop other opportunistic infections (p.1416).",
+      "Cutaneous NTM usually requires a break in the skin; rapidly growing NTM (M. abscessus, M. fortuitum, M. chelonae) cause outbreaks via contaminated surgical instruments/injections, with painful erythematous draining subcutaneous nodules typically WITHOUT fever or systemic symptoms (p.1416).",
+      "M. marinum (fish tanks, pools, fish handling) causes 'fish-tank granuloma' and can spread up the arm in a sporotrichoid pattern; M. ulcerans causes painless Buruli ulcer via the toxin mycolactone (p.1416).",
+      "'Hot-tub lung' is a pulmonary hypersensitivity reaction to NTM (most often MAC) growing in underchlorinated water, distinct from true pulmonary or disseminated infection (p.1415).",
+      "For susceptibility testing, only MAC testing for clarithromycin and M. kansasii testing for rifampin is indicated; few data support other in vitro susceptibility tests, and MAC isolates not previously exposed to macrolides are almost always susceptible (p.1417)."
     ],
-    [
-     "Key Investigations",
-     "Acid-fast or fluorochrome smears of sputum or body fluids (organisms may appear as beaded gram-positive rods at high burden, but",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "NTM are ubiquitous environmental organisms (soil and water) with specific niches (e.g., M. simiae in aquifers, M. fortuitum in pedicure baths, M. immunogenum in metalworking fluids). Because exposure is essentially universal yet disease is rare, normal host defenses are strong and significant disease implies a specific susceptibility. Mycobacteria are phagocytosed by macrophages, which release IL-12; IL-12 activates T and NK cells (via STAT4) to secrete IFN-gamma, which activates macrophages/neutrophils (via STAT1) and upregulates TNF-alpha, forming a positive IFN-gamma/IL-12 feedback loop critical for mycobacterial control. Disseminated NTM correlates with declining CD4+ T cells (advanced HIV, idiopathic CD4 lymphocytopenia), TNF-alpha inhibitors (which impair granuloma formation), Mendelian mutations in the IFN-gamma/IL-12 pathway (IFNG, IFNGR1, IFNGR2, STAT1, GATA2, ISG15, IRF8, IL-12A, IL-12RB1, IL-12RB2, CYBB, IKBKG/NEMO and others), or neutralizing anti-IFN-gamma autoantibodies. Only ~70% of non-HIV disseminated cases have a genetic diagnosis. In contrast, the best-recognized substrate for pulmonary NTM is bronchiectasis (cystic fibrosis, primary ciliary dyskinesia, STAT3 hyper-IgE/Job's syndrome, idiopathic), but the mechanism by which bronchiectasis predisposes to locally destructive yet non-systemic disease is unknown (p.1414-1415).",
+    "additionalDifferentials": [
+      "Pulmonary tuberculosis (M. kansasii closely mimics TB; PPD/IGRA cross-reactivity)",
+      "Malignancy (painless cervical adenopathy in children; isolated intrathoracic NTM mistaken for cancer)",
+      "Bronchiectasis exacerbation / underlying structural lung disease",
+      "Pulmonary alveolar proteinosis (predisposes to NTM and Nocardia)",
+      "Sporotrichosis (sporotrichoid spread mimicked by M. marinum)"
     ],
-    [
-     "Primary Differentials",
-     "Pulmonary tuberculosis (M. kansasii closely mimics TB; PPD/IGRA cross-reactivity), Malignancy (painless cervical adenopathy in",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "M. tuberculosis (clinical, radiographic, and AFB-smear overlap)",
+      "Nocardia (gram-positive beaded filamentous rods; alveolar proteinosis predisposes to both)",
+      "Sporothrix schenckii (sporotrichoid ascending nodules akin to M. marinum)"
     ],
-    [
-     "Management Strategy",
-     "Treat with prolonged multidrug antimycobacterial therapy chosen by species and susceptibility - for Mycobacterium avium complex a",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Malignancy presenting as painless cervical or intrathoracic adenopathy",
+      "Hot-tub lung (hypersensitivity pneumonitis-type reaction to NTM rather than invasive infection)"
     ],
-    [
-     "Clinical Pitfall",
-     "Not all NTM isolations, especially from the lung, reflect disease or require treatment; distinguishing colonization/contamination",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Acid-fast or fluorochrome smears of sputum or body fluids (organisms may appear as beaded gram-positive rods at high burden, but this is unreliable)",
+      "Mycobacterial culture using separate processing and dedicated blood culture media; differentiate rapidly growing (<7 days) from slowly growing (>=7 days) species; some labs hold cultures 6 weeks",
+      "Liquid culture media for faster isolation; lower incubation temperature (30C) for M. marinum, M. haemophilum, M. ulcerans; special additives (iron/blood for M. haemophilum, mycobactin J for M. genavense)",
+      "Species-level identification by biochemical tests, nucleic acid probes/sequencing, HPLC or mass spectrometry; molecular detection for noncultivable species (e.g., M. tilburgii)",
+      "Chest CT (tree-in-bud bronchiolar pattern, lingular and right-middle-lobe involvement, bronchiectasis, cavitation)",
+      "IGRA (note M. marinum, M. kansasii, M. szulgai carry ESAT6/CFP10 and may cause false-positive IGRA; IGRA is indeterminate with anti-IFN-gamma autoantibodies)",
+      "Genetic evaluation of the IFN-gamma/IL-12 pathway and screening for anti-IFN-gamma autoantibodies in disseminated disease without iatrogenic cause; GATA2 evaluation when myelodysplasia coexists"
+    ],
+    "redFlags": [
+      "Disseminated involvement of two or more organs without an iatrogenic cause (prompts IFN-gamma/IL-12 pathway genetic investigation)",
+      "Disseminated NTM with bacterial/viral infections plus conical/peg/missing teeth or abnormal hair pattern in males (suggests NEMO/IKBKG NF-kB defect, possibly with immunoglobulin defects)",
+      "Mycobacterial disease with myelodysplasia (investigate GATA2 deficiency)",
+      "Disseminated MAC and rapidly growing NTM with other opportunistic infections (e.g., Talaromyces), especially in East Asian women (anti-IFN-gamma autoantibodies)",
+      "Infected indwelling IV catheters/lines (M. abscessus, M. fortuitum from contaminated water) requiring catheter removal"
+    ],
+    "prognosis": "NTM cause chronic infections evolving slowly over weeks to years, so emergent therapy before diagnosis and speciation is rarely needed. Treatment is complex, often poorly tolerated, and potentially toxic; inadequate single-drug therapy is almost always associated with emergence of resistance and relapse. Pulmonary MAC therapy is prolonged, generally continued for 12 months after culture conversion (typically at least 18 months total). The typical lag between symptom onset and diagnosis is about 5 years in older women (p.1416-1418).",
+    "pitfalls": [
+      "Not all NTM isolations, especially from the lung, reflect disease or require treatment; distinguishing colonization/contamination from true infection requires an appropriate clinical and radiographic setting (nodules, bronchiectasis, cavities) plus repeated isolation per American Thoracic Society criteria (p.1417).",
+      "The single most critical and sensitive step in diagnosis is simply to suspect NTM and request the correct, separately processed mycobacterial smears, cultures, and dedicated blood culture media; many cases go undiagnosed because the appropriate test was never ordered (p.1416-1417).",
+      "M. gordonae is frequently recovered from respiratory samples but is almost never a pathogen (p.1417).",
+      "PPD does not differentiate NTM from M. tuberculosis well; intermediate (~10 mm) reactions overlap, BCG cross-reacts, but large reactions (>15 mm) most commonly signify TB (p.1416-1417).",
+      "Slow-growing NTM typically do NOT proliferate in routine blood culture media, so suspicion and correct bottles are essential; biopsy isolation is strong evidence but laboratory contamination does occur (confirm with organisms on stained sections) (p.1417)."
+    ],
+    "severityClassification": "American Thoracic Society criteria for pulmonary NTM diagnosis: growth of NTM from two of three sputum samples (regardless of smear), OR a positive bronchoalveolar lavage sample (regardless of smear), OR a lung parenchymal biopsy with granulomatous inflammation or mycobacteria on section plus NTM on culture, in an appropriate clinical and radiographic setting. Isolation of NTM from blood or organ biopsy in a compatible clinical setting is considered diagnostic. NTM are categorized as rapidly growing (<7 days) versus slowly growing (>=7 days) (p.1417).",
+    "references": [
+      "Harrison 22e p.1414-1418"
+    ],
+    "crossLinks": [
+      "PULMONARY_TB",
+      "BRONCHIECTASIS_EXACERBATION"
+    ],
+    "management": [
+      "Treat with prolonged multidrug antimycobacterial therapy chosen by species and susceptibility — for Mycobacterium avium complex a macrolide combined with rifampicin and ethambutol",
+      "Never rely on single-drug therapy, since monotherapy reliably selects for resistance",
+      "Use amikacin- and macrolide-containing regimens for rapidly growing species such as M. abscessus, and rifampicin-based therapy for M. kansasii",
+      "Address the underlying susceptibility — optimise antiretroviral therapy in advanced HIV and reconsider TNF-alpha inhibitors that impair granuloma formation",
+      "Add surgical resection or debridement for localised disease and remove infected foreign material or prostheses",
+      "Monitor for culture conversion and for drug toxicity such as aminoglycoside ototoxicity and ethambutol ocular effects",
+      "Manage through an infectious diseases specialist, reserving urgent empirical therapy for the rare fulminant case given the generally chronic course"
     ]
-   ],
-   "caption": "Overview comparison matrix for nontuberculous mycobacterial infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nontuberculous-mycobacterial-infection-real-image",
-   "title": "Nontuberculous Mycobacterial Infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "nontuberculous_mycobacterial_infection-pathway",
+      "title": "Nontuberculous Mycobacterial Infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "NTM (also termed atypical, environmental, or mycobacteria other than tuberculosis) are ubiquitous in soil and water and refer to mycobacteria other than M. tuberculosis and its close relatives and M. leprae; over 199 species are recognized",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disseminated involvement of two or more organs without an iatrogenic cause (prompts IFN-gamma/IL-12 pathway genetic investigation)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Acid-fast or fluorochrome smears of sputum or body fluids (organisms may appear as beaded gram-positive rods at high burden, but this is unreliable), Mycobacterial culture using separate processing and dedicated blood"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with prolonged multidrug antimycobacterial therapy chosen by species and susceptibility - for Mycobacterium avium complex a macrolide combined with rifampicin and ethambutol"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not all NTM isolations, especially from the lung, reflect disease or require treatment; distinguishing colonization/contamination from true infection requires an appropriate clinical and radiographic setting"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nontuberculous mycobacterial infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nontuberculous_mycobacterial_infection-matrix",
+      "title": "Nontuberculous Mycobacterial Infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "NTM (also termed atypical, environmental, or mycobacteria other than tuberculosis) are ubiquitous in soil and water and refer to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Acid-fast or fluorochrome smears of sputum or body fluids (organisms may appear as beaded gram-positive rods at high burden, but",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pulmonary tuberculosis (M. kansasii closely mimics TB; PPD/IGRA cross-reactivity), Malignancy (painless cervical adenopathy in",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with prolonged multidrug antimycobacterial therapy chosen by species and susceptibility - for Mycobacterium avium complex a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not all NTM isolations, especially from the lung, reflect disease or require treatment; distinguishing colonization/contamination",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nontuberculous mycobacterial infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ATS/ERS/ESCMID/IDSA NTM guideline 2020, Recommended Treatment Regimens table (Clin Infect Dis)",
+      "kind": "web",
+      "url": "https://academic.oup.com/view-large/219735566"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nontuberculous_mycobacterial_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of pulmonary NTM disease (ATS criteria)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical and radiographic setting",
+          "cells": [
+            {
+              "text": "Symptoms with nodules, bronchiectasis or cavities on CT"
+            },
+            {
+              "text": "Tree-in-bud, lingula and right middle lobe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiology: sputum",
+          "unit": "samples",
+          "cells": [
+            {
+              "text": "Same NTM in 2 of 3 sputum samples",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "{{hy:One sputum isolate is not enough}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiology: BAL",
+          "cells": [
+            {
+              "text": "One positive BAL culture"
+            },
+            {
+              "text": "Regardless of smear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiology: biopsy",
+          "cells": [
+            {
+              "text": "Granulomas or AFB on tissue plus positive culture"
+            },
+            {
+              "text": "Or blood or organ isolate in compatible setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth rate",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Rapid growers under 7 days; slow 7 days or more",
+              "op": "<",
+              "value": 7
+            },
+            {
+              "text": "Some labs hold 6 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typical patient",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Thin older woman, onset about 60",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Scoliosis, pectus, MVP common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species identification",
+          "cells": [
+            {
+              "text": "Probes, sequencing or mass spectrometry"
+            },
+            {
+              "text": "M. gordonae is almost never a pathogen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IGRA and PPD",
+          "cells": [
+            {
+              "text": "M. kansasii, marinum, szulgai cause false-positive IGRA"
+            },
+            {
+              "text": "PPD over 15 mm usually TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated disease",
+          "cells": [
+            {
+              "text": "Two or more organs without iatrogenic cause"
+            },
+            {
+              "text": "Test HIV, IFN-gamma/IL-12 pathway, anti-IFN-gamma antibodies, GATA2"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nontuberculous_mycobacterial_infection-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic NTM infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Contact history, IGRA positive; M. kansasii looks like TB"
+            },
+            {
+              "text": "NAAT (Xpert) and culture with speciation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other cavitary infection",
+          "cells": [
+            {
+              "text": "Nocardia, Rhodococcus, Legionella, fungi in immunocompromised host"
+            },
+            {
+              "text": "Cultures and modified AFB"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Solitary nodule or mass, smoker"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchiectasis exacerbation without NTM",
+          "cells": [
+            {
+              "text": "Pseudomonas or other bacteria"
+            },
+            {
+              "text": "Repeated mycobacterial cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hot-tub lung",
+          "cells": [
+            {
+              "text": "Hypersensitivity reaction after hot tub exposure"
+            },
+            {
+              "text": "Exposure history, CT, BAL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporotrichosis (vs M. marinum)",
+          "cells": [
+            {
+              "text": "Ascending nodules after plant injury"
+            },
+            {
+              "text": "Culture at 30 C and fungal culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nontuberculous_mycobacterial_infection-treatment",
+      "kind": "treatment",
+      "title": "Treatment of NTM lung disease",
+      "rowHeader": "Option",
+      "columns": [
+        "Regimen",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "MAC, nodular-bronchiectatic",
+          "cells": [
+            {
+              "text": "Azithromycin (or clarithromycin), rifampicin (or rifabutin), ethambutol three times weekly"
+            },
+            {
+              "text": "{{hy:Never macrolide monotherapy}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MAC, cavitary",
+          "cells": [
+            {
+              "text": "Same three drugs daily plus IV amikacin or streptomycin"
+            },
+            {
+              "text": "Aminoglycoside may be three times weekly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MAC, refractory",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Culture positive after 6 months: add amikacin liposome inhalation or IV amikacin",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "At least 4 drugs"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. kansasii",
+          "cells": [
+            {
+              "text": "Rifampicin, ethambutol plus azithromycin or isoniazid"
+            },
+            {
+              "text": "Daily or three times weekly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. xenopi",
+          "cells": [
+            {
+              "text": "Macrolide and/or moxifloxacin, rifampicin, ethambutol, amikacin"
+            },
+            {
+              "text": "Daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rapid growers (M. abscessus)",
+          "cells": [
+            {
+              "text": "Amikacin and macrolide-based regimens"
+            },
+            {
+              "text": "By susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternatives",
+          "cells": [
+            {
+              "text": "Intolerance or resistance"
+            },
+            {
+              "text": "Clofazimine, moxifloxacin, linezolid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Localised disease, infected lines or prostheses"
+            },
+            {
+              "text": "Resection or removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Host factors",
+          "cells": [
+            {
+              "text": "Advanced HIV, TNF inhibitors"
+            },
+            {
+              "text": "Optimise ART; reconsider TNF blockade"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Doses are in the guideline Table 3, which was not opened; dose per ID specialist."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nontuberculous_mycobacterial_infection-dx-mgmt",
+      "title": "Diagnosis and management of nontuberculous mycobacterial infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cough, fatigue, bronchiectasis or cavity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest CT; 3 sputum samples for AFB smear and culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Same NTM in 2 of 3 sputa, or positive BAL or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Colonisation or contamination; repeat cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Identify species; exclude TB",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "MAC?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Cavitary or extensive disease?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Daily macrolide, rifampicin, ethambutol plus amikacin",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Three-times-weekly macrolide, rifampicin, ethambutol",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Species-specific regimen by susceptibility",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Still culture positive at 6 months?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Refractory: add amikacin liposome inhalation",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Continue and monitor culture conversion and toxicity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

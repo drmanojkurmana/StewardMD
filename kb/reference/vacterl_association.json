@@ -1,176 +1,445 @@
 {
- "id": "vacterl_association",
- "name": "VACTERL association",
- "aliases": [
-  "VATER association",
-  "VACTERL/VATER spectrum",
-  "vertebral-anal-cardiac-tracheoesophageal-renal-limb association"
- ],
- "class": "non_infective",
- "system": "Genetics / Craniofacial",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-random co-occurrence of congenital defects; the acronym denotes Vertebral anomalies, Anal atresia, Cardiac defects, Tracheo-oesophageal fistula, Renal anomalies, and Limb (usually radial) defects",
-   "Diagnosis is clinical and conventionally requires at least three of the component features in the absence of an alternative unifying syndrome",
-   "It is an association rather than a syndrome, meaning the components occur together more often than by chance but without a single known cause",
-   "Tracheo-oesophageal fistula with oesophageal atresia often presents in the newborn with choking, drooling, and an inability to pass a feeding tube",
-   "Anorectal malformation may be evident at birth as an absent or abnormally placed anus",
-   "Limb involvement is typically preaxial or radial, such as a hypoplastic or absent thumb or radius",
-   "Intellect is usually normal, and its presence should prompt reconsideration of a specific syndromic diagnosis"
+  "id": "vacterl_association",
+  "name": "VACTERL association",
+  "aliases": [
+    "VATER association",
+    "VACTERL/VATER spectrum",
+    "vertebral-anal-cardiac-tracheoesophageal-renal-limb association"
   ],
-  "pathophysiology": "VACTERL association is understood as a pattern of defects affecting structures that develop during a shared early embryonic window, particularly disturbances of blastogenesis and midline mesodermal patterning. The components involve organs derived from or dependent on interactions between mesoderm and endoderm, and disruption of common developmental signalling pathways, including those governing left-right and cranio-caudal patterning, is thought to underlie the clustering. No single genetic cause explains most cases, and it remains a diagnosis of exclusion; recognisable single-gene disorders such as Fanconi anaemia and mitochondrial or ciliary conditions can produce an overlapping phenotype and must be considered before accepting the label.",
-  "additionalDifferentials": [
-   "Fanconi anaemia (radial defects with marrow failure)",
-   "CHARGE syndrome",
-   "Currarino syndrome (sacral, anorectal, presacral mass)",
-   "22q11.2 deletion syndrome",
-   "Feingold syndrome",
-   "Townes-Brocks syndrome",
-   "Baller-Gerold syndrome"
-  ],
-  "additionalInvestigations": [
-   "Spinal and skeletal radiographs to identify vertebral segmentation and rib anomalies",
-   "Echocardiography to characterise congenital heart disease",
-   "Contrast or endoscopic evaluation and attempts to pass a nasogastric tube for tracheo-oesophageal fistula",
-   "Renal and abdominal ultrasound to detect urinary tract malformation",
-   "Limb radiographs to define radial ray defects",
-   "Chromosome breakage studies to exclude Fanconi anaemia and targeted genetic testing"
-  ],
-  "redFlags": [
-   "Neonatal respiratory distress and aspiration from tracheo-oesophageal fistula requiring urgent surgery",
-   "High or complex anorectal malformation needing early surgical management",
-   "Ductal-dependent or complex cardiac lesion presenting with collapse",
-   "Bilateral renal anomalies threatening kidney function",
-   "Features suggesting Fanconi anaemia, which carries marrow failure and malignancy risk"
-  ],
-  "prognosis": "Prognosis reflects the number and severity of component defects; with modern neonatal surgery and multidisciplinary care many children survive with good function and normal cognition, though cardiac and renal severity are the main determinants of outcome.",
-  "pitfalls": [
-   "Accepting the label without excluding Fanconi anaemia and other definable syndromes",
-   "Missing a tracheo-oesophageal fistula in a newborn who chokes with feeds",
-   "Failing to complete systematic screening of all component systems once one defect is found",
-   "Assuming intellectual disability, which is not typical of the association",
-   "Overlooking occult vertebral or renal anomalies that alter management"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: VACTERL Association"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Staged surgical correction of individual anomalies, including repair of tracheo-oesophageal fistula and oesophageal atresia, anorectal malformation reconstruction, and cardiac surgery as needed",
-   "Neonatal stabilisation with airway protection, prevention of aspiration and safe feeding around the tracheo-oesophageal defect",
-   "Correction of radial ray and other limb defects with orthopaedic and hand surgery",
-   "Investigation and management of renal and urological anomalies to preserve renal function",
-   "Chromosome breakage testing to exclude Fanconi anaemia before accepting the diagnosis",
-   "Multidisciplinary coordination across neonatology, paediatric surgery, cardiology, urology, orthopaedics and clinical genetics",
-   "Long-term developmental follow-up and family support, with genetic counselling regarding the generally low recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vacterl_association-pathway",
-   "title": "VACTERL association: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-random co-occurrence of congenital defects; the acronym denotes Vertebral anomalies, Anal atresia, Cardiac defects, Tracheo-oesophageal fistula, Renal anomalies, and Limb (usually radial) defects",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal respiratory distress and aspiration from tracheo-oesophageal fistula requiring urgent surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Spinal and skeletal radiographs to identify vertebral segmentation and rib anomalies, Echocardiography to characterise congenital heart disease, Contrast or endoscopic evaluation and attempts to pass a nasogastric tube for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Staged surgical correction of individual anomalies, including repair of tracheo-oesophageal fistula and oesophageal atresia, anorectal malformation reconstruction, and cardiac surgery as needed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Accepting the label without excluding Fanconi anaemia and other definable syndromes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vacterl association."
-  }
- ],
- "tables": [
-  {
-   "id": "vacterl_association-matrix",
-   "title": "VACTERL association: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-random co-occurrence of congenital defects; the acronym denotes Vertebral anomalies, Anal atresia, Cardiac defects,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Craniofacial",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-random co-occurrence of congenital defects; the acronym denotes Vertebral anomalies, Anal atresia, Cardiac defects, Tracheo-oesophageal fistula, Renal anomalies, and Limb (usually radial) defects",
+      "Diagnosis is clinical and conventionally requires at least three of the component features in the absence of an alternative unifying syndrome",
+      "It is an association rather than a syndrome, meaning the components occur together more often than by chance but without a single known cause",
+      "Tracheo-oesophageal fistula with oesophageal atresia often presents in the newborn with choking, drooling, and an inability to pass a feeding tube",
+      "Anorectal malformation may be evident at birth as an absent or abnormally placed anus",
+      "Limb involvement is typically preaxial or radial, such as a hypoplastic or absent thumb or radius",
+      "Intellect is usually normal, and its presence should prompt reconsideration of a specific syndromic diagnosis"
     ],
-    [
-     "Key Investigations",
-     "Spinal and skeletal radiographs to identify vertebral segmentation and rib anomalies, Echocardiography to characterise congenital",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "VACTERL association is understood as a pattern of defects affecting structures that develop during a shared early embryonic window, particularly disturbances of blastogenesis and midline mesodermal patterning. The components involve organs derived from or dependent on interactions between mesoderm and endoderm, and disruption of common developmental signalling pathways, including those governing left-right and cranio-caudal patterning, is thought to underlie the clustering. No single genetic cause explains most cases, and it remains a diagnosis of exclusion; recognisable single-gene disorders such as Fanconi anaemia and mitochondrial or ciliary conditions can produce an overlapping phenotype and must be considered before accepting the label.",
+    "additionalDifferentials": [
+      "Fanconi anaemia (radial defects with marrow failure)",
+      "CHARGE syndrome",
+      "Currarino syndrome (sacral, anorectal, presacral mass)",
+      "22q11.2 deletion syndrome",
+      "Feingold syndrome",
+      "Townes-Brocks syndrome",
+      "Baller-Gerold syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Fanconi anaemia (radial defects with marrow failure), CHARGE syndrome, Currarino syndrome (sacral, anorectal, presacral mass)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Spinal and skeletal radiographs to identify vertebral segmentation and rib anomalies",
+      "Echocardiography to characterise congenital heart disease",
+      "Contrast or endoscopic evaluation and attempts to pass a nasogastric tube for tracheo-oesophageal fistula",
+      "Renal and abdominal ultrasound to detect urinary tract malformation",
+      "Limb radiographs to define radial ray defects",
+      "Chromosome breakage studies to exclude Fanconi anaemia and targeted genetic testing"
     ],
-    [
-     "Management Strategy",
-     "Staged surgical correction of individual anomalies, including repair of tracheo-oesophageal fistula and oesophageal atresia,",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal respiratory distress and aspiration from tracheo-oesophageal fistula requiring urgent surgery",
+      "High or complex anorectal malformation needing early surgical management",
+      "Ductal-dependent or complex cardiac lesion presenting with collapse",
+      "Bilateral renal anomalies threatening kidney function",
+      "Features suggesting Fanconi anaemia, which carries marrow failure and malignancy risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Accepting the label without excluding Fanconi anaemia and other definable syndromes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis reflects the number and severity of component defects; with modern neonatal surgery and multidisciplinary care many children survive with good function and normal cognition, though cardiac and renal severity are the main determinants of outcome.",
+    "pitfalls": [
+      "Accepting the label without excluding Fanconi anaemia and other definable syndromes",
+      "Missing a tracheo-oesophageal fistula in a newborn who chokes with feeds",
+      "Failing to complete systematic screening of all component systems once one defect is found",
+      "Assuming intellectual disability, which is not typical of the association",
+      "Overlooking occult vertebral or renal anomalies that alter management"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: VACTERL Association"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Staged surgical correction of individual anomalies, including repair of tracheo-oesophageal fistula and oesophageal atresia, anorectal malformation reconstruction, and cardiac surgery as needed",
+      "Neonatal stabilisation with airway protection, prevention of aspiration and safe feeding around the tracheo-oesophageal defect",
+      "Correction of radial ray and other limb defects with orthopaedic and hand surgery",
+      "Investigation and management of renal and urological anomalies to preserve renal function",
+      "Chromosome breakage testing to exclude Fanconi anaemia before accepting the diagnosis",
+      "Multidisciplinary coordination across neonatology, paediatric surgery, cardiology, urology, orthopaedics and clinical genetics",
+      "Long-term developmental follow-up and family support, with genetic counselling regarding the generally low recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for vacterl association."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vacterl-association-real-image",
-   "title": "VACTERL association: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vacterl_association-pathway",
+      "title": "VACTERL association: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-random co-occurrence of congenital defects; the acronym denotes Vertebral anomalies, Anal atresia, Cardiac defects, Tracheo-oesophageal fistula, Renal anomalies, and Limb (usually radial) defects",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal respiratory distress and aspiration from tracheo-oesophageal fistula requiring urgent surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Spinal and skeletal radiographs to identify vertebral segmentation and rib anomalies, Echocardiography to characterise congenital heart disease, Contrast or endoscopic evaluation and attempts to pass a nasogastric tube for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Staged surgical correction of individual anomalies, including repair of tracheo-oesophageal fistula and oesophageal atresia, anorectal malformation reconstruction, and cardiac surgery as needed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Accepting the label without excluding Fanconi anaemia and other definable syndromes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vacterl association."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vacterl_association-matrix",
+      "title": "VACTERL association: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-random co-occurrence of congenital defects; the acronym denotes Vertebral anomalies, Anal atresia, Cardiac defects,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Spinal and skeletal radiographs to identify vertebral segmentation and rib anomalies, Echocardiography to characterise congenital",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fanconi anaemia (radial defects with marrow failure), CHARGE syndrome, Currarino syndrome (sacral, anorectal, presacral mass)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Staged surgical correction of individual anomalies, including repair of tracheo-oesophageal fistula and oesophageal atresia,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Accepting the label without excluding Fanconi anaemia and other definable syndromes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vacterl association."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vacterl_association-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinal and skeletal radiographs",
+          "cells": [
+            {
+              "text": "Vertebral segmentation and rib anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast or endoscopic evaluation and nasogastric tube passage",
+          "cells": [
+            {
+              "text": "Tracheo-oesophageal fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Urinary tract malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb radiographs",
+          "cells": [
+            {
+              "text": "Radial ray defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosome breakage testing",
+          "cells": [
+            {
+              "text": "Excludes Fanconi anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vacterl_association-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fanconi anaemia",
+          "cells": [
+            {
+              "text": "Radial defects with marrow failure; chromosome breakage separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Currarino syndrome",
+          "cells": [
+            {
+              "text": "Sacral, anorectal and presacral mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHARGE syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vacterl_association-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal stabilisation",
+          "cells": [
+            {
+              "text": "Airway protection, prevention of aspiration and safe feeding around the fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged surgical correction",
+          "cells": [
+            {
+              "text": "Tracheo-oesophageal fistula, oesophageal atresia and anorectal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb surgery",
+          "cells": [
+            {
+              "text": "Radial ray and other limb defects with orthopaedic and hand surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and urological care",
+          "cells": [
+            {
+              "text": "Investigation and management of urinary tract malformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vacterl_association-dx-mgmt",
+      "title": "Diagnosis and management of VACTERL association",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected VACTERL association: at least three component anomalies in a newborn",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory distress, aspiration or complex cardiac lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent repair of tracheo-oesophageal fistula with airway protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Spinal, limb and renal imaging, echocardiography, fistula evaluation, chromosome breakage",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are three or more components present with no unifying syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fanconi anaemia, CHARGE or Currarino syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Neonatal airway protection and safe feeding around the fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Staged surgical correction of oesophageal, anorectal and cardiac anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic and hand surgery for radial ray and limb defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and urological investigation and management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on the number and severity of component anomalies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

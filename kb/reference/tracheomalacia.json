@@ -1,177 +1,466 @@
 {
- "id": "tracheomalacia",
- "name": "tracheomalacia",
- "aliases": [
-  "tracheobronchomalacia",
-  "expiratory central airway collapse"
- ],
- "class": "non_infective",
- "system": "respiratory",
- "specialty": "respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Murray and Nadel's Textbook of Respiratory Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by excessive expiratory collapse of the trachea (and often main bronchi) due to weakness of the cartilaginous rings, the posterior membranous wall, or both, producing a crescentic or 'frown-shaped' lumen on dynamic imaging.",
-   "Congenital forms associate with prematurity, tracheo-oesophageal fistula/oesophageal atresia, vascular rings and cartilage disorders; acquired forms follow prolonged intubation, tracheostomy, chronic inflammation (relapsing polychondritis), COPD or extrinsic compression.",
-   "The cardinal symptom is a harsh, barking or 'seal-like' cough, often with expiratory wheeze, exertional dyspnoea and difficulty clearing secretions leading to recurrent lower respiratory infection.",
-   "Symptoms characteristically worsen with any manoeuvre that raises intrathoracic pressure — coughing, forced expiration, crying in infants, or supine posture.",
-   "Dynamic (inspiratory-expiratory or cine) CT and awake flexible bronchoscopy with the patient breathing spontaneously are the reference investigations; static end-inspiratory imaging alone frequently misses the diagnosis.",
-   "Flow-volume loops may show expiratory flow oscillations or a characteristic notch, but normal spirometry does not exclude the condition.",
-   "Distinguish primary cartilage/membranous weakness (tracheomalacia) from dynamic excessive collapse driven by an over-compliant posterior membrane (excessive dynamic airway collapse), as management emphasis differs.",
-   "Continuous positive airway pressure can act as a pneumatic stent, relieving symptoms and guiding suitability for surgical stabilisation such as posterior tracheobronchopexy."
+  "id": "tracheomalacia",
+  "name": "tracheomalacia",
+  "aliases": [
+    "tracheobronchomalacia",
+    "expiratory central airway collapse"
   ],
-  "pathophysiology": "Tracheomalacia results from structural weakness of the tracheal wall so that it cannot maintain patency against the transmural pressure swings of respiration. Weakness may lie in deficient or soft cartilaginous rings (reducing the normal cartilage-to-membrane ratio) or in an excessively lax, redundant posterior membranous wall. During expiration and cough, positive intrathoracic pressure exceeds the airway's structural resistance, so the intrathoracic trachea collapses inward, dynamically narrowing the lumen; the extrathoracic trachea, by contrast, tends to collapse on inspiration. This flow limitation impairs secretion clearance, promotes air trapping and turbulent flow, and predisposes to mucus retention and recurrent infection. Congenital disease reflects intrinsic cartilage immaturity or maldevelopment (often with associated foregut or vascular anomalies), whereas acquired disease reflects cartilage destruction or degeneration from pressure necrosis, chronic inflammation, or long-standing extrinsic compression.",
-  "additionalDifferentials": [
-   "asthma with poorly reversible airflow obstruction",
-   "chronic obstructive pulmonary disease",
-   "fixed tracheal stenosis",
-   "vocal cord dysfunction / inducible laryngeal obstruction",
-   "extrinsic tracheal compression by mediastinal mass or vascular ring",
-   "excessive dynamic airway collapse from an over-compliant membranous wall",
-   "relapsing polychondritis affecting the airway"
-  ],
-  "additionalInvestigations": [
-   "dynamic inspiratory-expiratory (cine) CT of the central airways",
-   "awake flexible bronchoscopy during spontaneous and forced breathing",
-   "pulmonary function testing with flow-volume loop analysis",
-   "trial of continuous positive airway pressure as a diagnostic-therapeutic stent",
-   "echocardiography or CT angiography where vascular ring or compression is suspected",
-   "evaluation for relapsing polychondritis where cartilage inflammation is suspected",
-   "contrast oesophagram if tracheo-oesophageal fistula or vascular ring is possible"
-  ],
-  "redFlags": [
-   "recurrent 'dying spells', cyanotic or apparent life-threatening events in an infant",
-   "acute respiratory distress with inability to clear secretions",
-   "recurrent or non-resolving lower respiratory tract infection",
-   "syncope or near-syncope precipitated by cough (cough syncope)",
-   "rapidly progressive dyspnoea suggesting associated systemic cartilage disease"
-  ],
-  "prognosis": "Congenital tracheomalacia frequently improves as the airway cartilage matures over the first one to two years of life, whereas acquired and syndromic forms tend to be persistent and may progress; severe or diffuse disease carries appreciable morbidity but can respond well to positive-pressure support or surgical stabilisation in selected patients.",
-  "pitfalls": [
-   "Relying on static end-inspiratory imaging or a single bronchoscopic snapshot, which can miss dynamic expiratory collapse.",
-   "Misdiagnosing the barking cough and wheeze as refractory asthma and escalating bronchodilators or steroids without benefit.",
-   "Overlooking a treatable underlying cause such as a vascular ring, mediastinal mass or relapsing polychondritis.",
-   "Placing airway stents indiscriminately, as they carry substantial complications including granulation, migration and infection.",
-   "Failing to recognise associated gastro-oesophageal reflux or aspiration that perpetuates airway inflammation."
-  ],
-  "references": [
-   "Murray and Nadel's Textbook of Respiratory Medicine, current edition",
-   "European Respiratory Society statement on tracheobronchomalacia and excessive dynamic airway collapse",
-   "Fishman's Pulmonary Diseases and Disorders, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative, expectant management for congenital disease, since airway cartilage commonly matures and symptoms improve over the first year or two of life, supported by humidified air and physiotherapy",
-   "Continuous positive airway pressure as a pneumatic stent for severe or symptomatic collapse, aiding both patency and secretion clearance",
-   "Airway clearance and prompt antibiotics for the recurrent lower respiratory infections caused by impaired secretion clearance",
-   "Treat the underlying cause, with immunosuppression for relapsing polychondritis and surgical relief of a vascular ring or other extrinsic compression",
-   "Surgical options for severe disease including aortopexy for anterior compression, tracheobronchoplasty, or airway stenting in selected cases",
-   "Plan for acute events by avoiding manoeuvres that raise intrathoracic pressure, managing within a multidisciplinary airway team with dynamic bronchoscopic surveillance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tracheomalacia-pathway",
-   "title": "tracheomalacia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by excessive expiratory collapse of the trachea (and often main bronchi) due to weakness of the cartilaginous rings, the posterior membranous wall, or both, producing a crescentic or 'frown-shaped' lumen on dynamic imaging.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: recurrent 'dying spells', cyanotic or apparent life-threatening events in an infant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: dynamic inspiratory-expiratory (cine) CT of the central airways, awake flexible bronchoscopy during spontaneous and forced breathing, pulmonary function testing with flow-volume loop analysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative, expectant management for congenital disease, since airway cartilage commonly matures and symptoms improve over the first year or two of life, supported by humidified air and physiotherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on static end-inspiratory imaging or a single bronchoscopic snapshot, which can miss dynamic expiratory collapse."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tracheomalacia."
-  }
- ],
- "tables": [
-  {
-   "id": "tracheomalacia-matrix",
-   "title": "tracheomalacia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by excessive expiratory collapse of the trachea (and often main bronchi) due to weakness of the cartilaginous",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "respiratory",
+  "specialty": "respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Murray and Nadel's Textbook of Respiratory Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by excessive expiratory collapse of the trachea (and often main bronchi) due to weakness of the cartilaginous rings, the posterior membranous wall, or both, producing a crescentic or 'frown-shaped' lumen on dynamic imaging.",
+      "Congenital forms associate with prematurity, tracheo-oesophageal fistula/oesophageal atresia, vascular rings and cartilage disorders; acquired forms follow prolonged intubation, tracheostomy, chronic inflammation (relapsing polychondritis), COPD or extrinsic compression.",
+      "The cardinal symptom is a harsh, barking or 'seal-like' cough, often with expiratory wheeze, exertional dyspnoea and difficulty clearing secretions leading to recurrent lower respiratory infection.",
+      "Symptoms characteristically worsen with any manoeuvre that raises intrathoracic pressure — coughing, forced expiration, crying in infants, or supine posture.",
+      "Dynamic (inspiratory-expiratory or cine) CT and awake flexible bronchoscopy with the patient breathing spontaneously are the reference investigations; static end-inspiratory imaging alone frequently misses the diagnosis.",
+      "Flow-volume loops may show expiratory flow oscillations or a characteristic notch, but normal spirometry does not exclude the condition.",
+      "Distinguish primary cartilage/membranous weakness (tracheomalacia) from dynamic excessive collapse driven by an over-compliant posterior membrane (excessive dynamic airway collapse), as management emphasis differs.",
+      "Continuous positive airway pressure can act as a pneumatic stent, relieving symptoms and guiding suitability for surgical stabilisation such as posterior tracheobronchopexy."
     ],
-    [
-     "Key Investigations",
-     "dynamic inspiratory-expiratory (cine) CT of the central airways, awake flexible bronchoscopy during spontaneous and forced",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tracheomalacia results from structural weakness of the tracheal wall so that it cannot maintain patency against the transmural pressure swings of respiration. Weakness may lie in deficient or soft cartilaginous rings (reducing the normal cartilage-to-membrane ratio) or in an excessively lax, redundant posterior membranous wall. During expiration and cough, positive intrathoracic pressure exceeds the airway's structural resistance, so the intrathoracic trachea collapses inward, dynamically narrowing the lumen; the extrathoracic trachea, by contrast, tends to collapse on inspiration. This flow limitation impairs secretion clearance, promotes air trapping and turbulent flow, and predisposes to mucus retention and recurrent infection. Congenital disease reflects intrinsic cartilage immaturity or maldevelopment (often with associated foregut or vascular anomalies), whereas acquired disease reflects cartilage destruction or degeneration from pressure necrosis, chronic inflammation, or long-standing extrinsic compression.",
+    "additionalDifferentials": [
+      "asthma with poorly reversible airflow obstruction",
+      "chronic obstructive pulmonary disease",
+      "fixed tracheal stenosis",
+      "vocal cord dysfunction / inducible laryngeal obstruction",
+      "extrinsic tracheal compression by mediastinal mass or vascular ring",
+      "excessive dynamic airway collapse from an over-compliant membranous wall",
+      "relapsing polychondritis affecting the airway"
     ],
-    [
-     "Primary Differentials",
-     "asthma with poorly reversible airflow obstruction, chronic obstructive pulmonary disease, fixed tracheal stenosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "dynamic inspiratory-expiratory (cine) CT of the central airways",
+      "awake flexible bronchoscopy during spontaneous and forced breathing",
+      "pulmonary function testing with flow-volume loop analysis",
+      "trial of continuous positive airway pressure as a diagnostic-therapeutic stent",
+      "echocardiography or CT angiography where vascular ring or compression is suspected",
+      "evaluation for relapsing polychondritis where cartilage inflammation is suspected",
+      "contrast oesophagram if tracheo-oesophageal fistula or vascular ring is possible"
     ],
-    [
-     "Management Strategy",
-     "Conservative, expectant management for congenital disease, since airway cartilage commonly matures and symptoms improve over the",
-     "Core treatment modality"
+    "redFlags": [
+      "recurrent 'dying spells', cyanotic or apparent life-threatening events in an infant",
+      "acute respiratory distress with inability to clear secretions",
+      "recurrent or non-resolving lower respiratory tract infection",
+      "syncope or near-syncope precipitated by cough (cough syncope)",
+      "rapidly progressive dyspnoea suggesting associated systemic cartilage disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on static end-inspiratory imaging or a single bronchoscopic snapshot, which can miss dynamic expiratory collapse.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Congenital tracheomalacia frequently improves as the airway cartilage matures over the first one to two years of life, whereas acquired and syndromic forms tend to be persistent and may progress; severe or diffuse disease carries appreciable morbidity but can respond well to positive-pressure support or surgical stabilisation in selected patients.",
+    "pitfalls": [
+      "Relying on static end-inspiratory imaging or a single bronchoscopic snapshot, which can miss dynamic expiratory collapse.",
+      "Misdiagnosing the barking cough and wheeze as refractory asthma and escalating bronchodilators or steroids without benefit.",
+      "Overlooking a treatable underlying cause such as a vascular ring, mediastinal mass or relapsing polychondritis.",
+      "Placing airway stents indiscriminately, as they carry substantial complications including granulation, migration and infection.",
+      "Failing to recognise associated gastro-oesophageal reflux or aspiration that perpetuates airway inflammation."
+    ],
+    "references": [
+      "Murray and Nadel's Textbook of Respiratory Medicine, current edition",
+      "European Respiratory Society statement on tracheobronchomalacia and excessive dynamic airway collapse",
+      "Fishman's Pulmonary Diseases and Disorders, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative, expectant management for congenital disease, since airway cartilage commonly matures and symptoms improve over the first year or two of life, supported by humidified air and physiotherapy",
+      "Continuous positive airway pressure as a pneumatic stent for severe or symptomatic collapse, aiding both patency and secretion clearance",
+      "Airway clearance and prompt antibiotics for the recurrent lower respiratory infections caused by impaired secretion clearance",
+      "Treat the underlying cause, with immunosuppression for relapsing polychondritis and surgical relief of a vascular ring or other extrinsic compression",
+      "Surgical options for severe disease including aortopexy for anterior compression, tracheobronchoplasty, or airway stenting in selected cases",
+      "Plan for acute events by avoiding manoeuvres that raise intrathoracic pressure, managing within a multidisciplinary airway team with dynamic bronchoscopic surveillance"
     ]
-   ],
-   "caption": "Overview comparison matrix for tracheomalacia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tracheomalacia-real-image",
-   "title": "tracheomalacia: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "tracheomalacia-pathway",
+      "title": "tracheomalacia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by excessive expiratory collapse of the trachea (and often main bronchi) due to weakness of the cartilaginous rings, the posterior membranous wall, or both, producing a crescentic or 'frown-shaped' lumen on dynamic imaging.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: recurrent 'dying spells', cyanotic or apparent life-threatening events in an infant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: dynamic inspiratory-expiratory (cine) CT of the central airways, awake flexible bronchoscopy during spontaneous and forced breathing, pulmonary function testing with flow-volume loop analysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative, expectant management for congenital disease, since airway cartilage commonly matures and symptoms improve over the first year or two of life, supported by humidified air and physiotherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on static end-inspiratory imaging or a single bronchoscopic snapshot, which can miss dynamic expiratory collapse."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tracheomalacia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tracheomalacia-matrix",
+      "title": "tracheomalacia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by excessive expiratory collapse of the trachea (and often main bronchi) due to weakness of the cartilaginous",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "dynamic inspiratory-expiratory (cine) CT of the central airways, awake flexible bronchoscopy during spontaneous and forced",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "asthma with poorly reversible airflow obstruction, chronic obstructive pulmonary disease, fixed tracheal stenosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative, expectant management for congenital disease, since airway cartilage commonly matures and symptoms improve over the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on static end-inspiratory imaging or a single bronchoscopic snapshot, which can miss dynamic expiratory collapse.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tracheomalacia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray and Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tracheomalacia-dx-mgmt",
+      "title": "Diagnosis and management of tracheomalacia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tracheomalacia: harsh barking cough worse with crying or coughing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: dying spells, cough syncope, or respiratory distress with secretion retention?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway support with positive pressure for life-threatening events",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dynamic CT; awake bronchoscopy during breathing; flow-volume loops",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does dynamic imaging show excessive expiratory collapse of the trachea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider asthma, vocal cord dysfunction, fixed stenosis or vascular ring",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management for congenital disease with humidity and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous positive airway pressure as a pneumatic stent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway clearance and prompt antibiotics for infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat vascular ring or immunosuppress relapsing polychondritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgical stabilisation or stenting for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Congenital forms often improve with age; acquired and syndromic forms tend to persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tracheomalacia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dynamic inspiratory-expiratory CT",
+          "cells": [
+            {
+              "text": "Excessive expiratory collapse of central airways"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Awake flexible bronchoscopy during breathing",
+          "cells": [
+            {
+              "text": "Dynamic collapse on expiration and cough"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow-volume loops",
+          "cells": [
+            {
+              "text": "Expiratory flow oscillations or notch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of continuous positive airway pressure",
+          "cells": [
+            {
+              "text": "Symptomatic response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography or CT angiography",
+          "cells": [
+            {
+              "text": "Vascular ring or compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast oesophagram",
+          "cells": [
+            {
+              "text": "Tracheo-oesophageal fistula or vascular ring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tracheomalacia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Asthma with poorly reversible airflow obstruction",
+          "cells": [
+            {
+              "text": "Barking cough without response to bronchodilators; dynamic imaging separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vocal cord dysfunction",
+          "cells": [
+            {
+              "text": "Inducible laryngeal obstruction rather than tracheal collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrinsic compression by vascular ring or mediastinal mass",
+          "cells": [
+            {
+              "text": "Compression on imaging; treatable cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tracheomalacia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management of congenital disease",
+          "cells": [
+            {
+              "text": "Cartilage often matures over the first one to two years; humidified air and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous positive airway pressure",
+          "cells": [
+            {
+              "text": "Pneumatic stent for severe or symptomatic collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance and antibiotics",
+          "cells": [
+            {
+              "text": "Recurrent infection from impaired clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Immunosuppression for relapsing polychondritis; relief of vascular ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for severe disease",
+          "cells": [
+            {
+              "text": "Aortopexy, tracheobronchoplasty, or airway stenting in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

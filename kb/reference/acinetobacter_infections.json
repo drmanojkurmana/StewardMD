@@ -1,186 +1,561 @@
 {
- "id": "acinetobacter_infections",
- "name": "Acinetobacter Infections",
- "system": "Multisystem / Infectious Disease",
- "class": "infective",
- "chapter": 167,
- "page": 1294,
- "aliases": [
-  "Acinetobacter baumannii infection",
-  "A. baumannii infection",
-  "Acinetobacter calcoaceticus-baumannii complex infection",
-  "MDR Acinetobacter",
-  "Carbapenem-resistant Acinetobacter (CRAB)"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1294-1298",
-  "clinicalPearls": [
-   "Acinetobacter are gram-negative, oxidase-negative, nonmotile, nonfermenting coccobacilli readily grown on standard media; A. baumannii is the most clinically relevant species. Phenotypic differentiation between species is difficult, so molecular methods such as MALDI-TOF mass spectrometry or quantitative real-time PCR are often needed for accurate identification.",
-   "A. baumannii can survive environmental desiccation for weeks, allowing it to persist on hospital surfaces and equipment - a key reason it drives health care-associated outbreaks.",
-   "A. baumannii is a notorious cause of nosocomial pneumonia, especially with prolonged mechanical ventilation; onset tends to be later than with other gram-negative bacilli, and the usual clues are fever and increased sputum production.",
-   "Airway colonization with A. baumannii does not by itself confirm pneumonia, but it is a recognized risk factor for subsequent infection - distinguishing colonization from true infection is a recurring clinical challenge.",
-   "On a CSF Gram stain, Acinetobacter can mimic Neisseria meningitidis since both appear as gram-negative paired cocci; a petechial rash was described in up to 30% of one meningitis case series.",
-   "Bloodstream infection most often arises in ICU patients with a central venous catheter or as a secondary complication of ventilator-associated/hospital-acquired pneumonia; fever occurs in over 95% of cases and polymicrobial growth is reported in roughly 20-36% of bacteremia episodes.",
-   "In combat-trauma soft tissue infection, the described clinical evolution progresses from an edematous peau d'orange appearance to a sandpaper appearance with overlying vesicles, then to a necrotizing process with hemorrhagic bullae; necrotizing fasciitis has been reported.",
-   "Community-acquired Acinetobacter pneumonia is relatively rare but severe, with fever, prominent respiratory symptoms, multi-organ dysfunction, lobar consolidation on imaging, and mortality exceeding 50%.",
-   "A. baumannii is an important burn-unit pathogen; large burns provide ideal growth conditions, facilitate patient-to-patient transmission, and wound colonization is a risk factor for bloodstream infection.",
-   "Risk factors for health care-associated colonization/infection include nursing home residence, prolonged ICU stay, central venous catheterization, tracheostomy, mechanical ventilation, enteral feeding, and prior third-generation cephalosporins, fluoroquinolones, or carbapenems; carbapenem-resistant strains are most common after carbapenem exposure.",
-   "Urinary tract infection is infrequent and usually catheter-associated, reflecting biofilm formation on devices; rare community-acquired cases occur with nephrolithiasis or after renal transplantation.",
-   "Less common manifestations include contact lens-associated keratitis and native- or prosthetic-valve endocarditis."
+  "id": "acinetobacter_infections",
+  "name": "Acinetobacter Infections",
+  "system": "Multisystem / Infectious Disease",
+  "class": "infective",
+  "chapter": 167,
+  "page": 1294,
+  "aliases": [
+    "Acinetobacter baumannii infection",
+    "A. baumannii infection",
+    "Acinetobacter calcoaceticus-baumannii complex infection",
+    "MDR Acinetobacter",
+    "Carbapenem-resistant Acinetobacter (CRAB)"
   ],
-  "pathophysiology": "A. baumannii has greater virulence potential than other Acinetobacter species, partly through its ability to grow at 37 degrees C and resist macrophage uptake. Colonization is facilitated by adherence to surfaces and human cells and by biofilm formation, which is linked to exopolysaccharide production and pilus formation; a quorum-sensing molecule encoded by the abaI autoinducer synthase gene contributes to biofilm on abiotic surfaces. The organism modifies its lipid A structure to survive harsh environments, decreasing susceptibility to antibiotics and antimicrobial peptides and enhancing desiccation survival. An extracellular capsule protects against complement-mediated killing and can be upregulated in the presence of subinhibitory antibiotic levels, producing a hypervirulent phenotype. Phospholipase C and D act as cytotoxic virulence factors aiding epithelial invasion, and siderophore-based iron-acquisition systems permit growth despite host iron limitation. Multiple protein-secretion systems (type II with the LipA lipase substrate, type V trimeric autotransporter mediating biofilm and matrix adherence, and a type VI system secreting antibacterial toxins) plus outer-membrane vesicles carrying OmpA, proteases, and phospholipases contribute to pathogenesis and innate immune activation. Antimicrobial resistance arises from reduced porin expression, overexpressed efflux pumps (removing quinolones, tetracyclines, chloramphenicol, disinfectants, and tigecycline), and beta-lactamases including intrinsic AmpC cephalosporinases (upregulated when the ISAba1 insertion sequence is placed next to the AmpC gene) and acquired serine and metallo-beta-lactamases. Carbapenem resistance is mostly tied to Ambler class D oxacillinases (group 2d), some intrinsic/chromosomal (e.g., OXA-51-like) and others acquired (e.g., OXA-23-, 24-, 58-, 143-, 235-like). The small A. baumannii core genome with a large accessory genome confers high genomic plasticity and ready uptake of resistance genes by horizontal gene transfer.",
-  "additionalDifferentials": [
-   "Ventilator-associated/hospital-acquired pneumonia due to other nosocomial gram-negative bacilli (Pseudomonas aeruginosa, Klebsiella pneumoniae, Enterobacterales)",
-   "Stenotrophomonas maltophilia or Burkholderia infection in the ventilated/immunocompromised host",
-   "Catheter-related bloodstream infection from other nosocomial pathogens",
-   "Necrotizing fasciitis or other necrotizing soft tissue infection from streptococcal, clostridial, or polymicrobial causes following trauma",
-   "Bacterial meningitis due to Neisseria meningitidis (similar gram-negative paired cocci on CSF Gram stain)"
-  ],
-  "infectionMimics": [
-   "Neisseria meningitidis on CSF Gram stain (both appear as gram-negative diplococci/paired cocci)",
-   "Other nonfermenting gram-negative nosocomial pathogens such as Pseudomonas aeruginosa and Stenotrophomonas maltophilia"
-  ],
-  "nonInfectiousMimics": [
-   "Airway colonization without true pneumonia (positive respiratory culture not equating to active infection)",
-   "Wound colonization rather than soft tissue infection, particularly in burns and trauma"
-  ],
-  "additionalInvestigations": [
-   "MALDI-TOF mass spectrometry for species-level identification",
-   "Quantitative real-time PCR for identification of A. baumannii",
-   "Antimicrobial susceptibility testing to guide definitive therapy (given extensive and variable resistance)",
-   "Respiratory cultures interpreted in clinical context to distinguish colonization from pneumonia",
-   "Blood cultures (assessing for polymicrobial growth in suspected bacteremia)",
-   "Rectal surveillance cultures for outbreak detection and infection-control purposes",
-   "Molecular typing of isolates to differentiate outbreak from nonoutbreak strains"
-  ],
-  "redFlags": [
-   "Septic shock and disseminated intravascular coagulation, each reported in roughly 25-30% of bloodstream infection cases",
-   "Infection caused by carbapenem-resistant (extremely drug-resistant) isolates, where delayed adequate therapy drives poor outcomes",
-   "Evolving necrotizing soft tissue picture (hemorrhagic bullae, necrotizing fasciitis) after combat or disaster-related trauma",
-   "New A. baumannii in a long-term ventilated ICU patient with fever and rising sputum",
-   "Multi-organ dysfunction with severe community-acquired pneumonia"
-  ],
-  "prognosis": "Infections carry high mortality, driven largely by the severity of the patient's underlying illness and by drug resistance of the infecting strain. Crude mortality with nosocomial pneumonia has been reported as high as 65%, though attributable mortality is hard to establish because affected patients are typically debilitated. Community-acquired pneumonia mortality exceeds 50%. Crude bloodstream infection mortality reaches about 40% overall and as high as 70% with carbapenem-resistant isolates. Wound colonization/infection contributes to healing delays and graft loss in burn patients.",
-  "pitfalls": [
-   "Treating positive respiratory or wound cultures as proof of infection when they may represent colonization, leading to overtreatment.",
-   "Underestimating environmental persistence: failure to address desiccation-resistant contamination of surfaces and equipment perpetuates outbreaks.",
-   "Mistaking Acinetobacter for Neisseria meningitidis on CSF Gram stain.",
-   "Assuming susceptibility - intrinsic and acquired beta-lactamases (including OXA-type carbapenemases) make empirical choices unreliable without local epidemiology and susceptibility testing.",
-   "Overlooking Acinetobacter in the differential of soft tissue infection following exposure to tropical/subtropical environments or natural disasters."
-  ],
-  "severityClassification": "No formal disease-specific severity score is provided in the source. Severity is gauged clinically by site and host factors: presence of septic shock or DIC in bloodstream infection (~25-30%), need for prolonged mechanical ventilation in pneumonia, and carbapenem/extreme drug resistance, all of which predict markedly higher mortality.",
-  "references": [
-   "Harrison 22e p.1294-1298"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct antimicrobial therapy by susceptibility testing given extensive and variable resistance, using a carbapenem for susceptible strains and a polymyxin (colistin)-based combination, often with a sulbactam-containing agent, for carbapenem-resistant A. baumannii",
-   "Consider newer agents such as cefiderocol or sulbactam-durlobactam for multidrug-resistant isolates",
-   "Source control with removal or replacement of infected central venous catheters and other foreign material",
-   "Rigorous infection control with contact precautions, environmental cleaning and hand hygiene, given the organism's survival through desiccation and its outbreak potential",
-   "Distinguish colonisation from true infection, particularly in the respiratory tract, to avoid unnecessary treatment",
-   "Supportive care for sepsis with organ support in critically ill or ventilated patients",
-   "Rectal surveillance cultures and cohorting for outbreak detection and control",
-   "Infectious diseases and microbiology consultation to guide combination therapy"
-  ]
- },
- "algorithms": [
-  {
-   "id": "acinetobacter_infections-pathway",
-   "title": "Acinetobacter Infections: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Acinetobacter are gram-negative, oxidase-negative, nonmotile, nonfermenting coccobacilli readily grown on standard media; A. baumannii is the most clinically relevant species. Phenotypic differentiation between species is difficult, so",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Septic shock and disseminated intravascular coagulation, each reported in roughly 25-30% of bloodstream infection cases",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MALDI-TOF mass spectrometry for species-level identification, Quantitative real-time PCR for identification of A. baumannii, Antimicrobial susceptibility testing to guide definitive therapy (given extensive and variable"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct antimicrobial therapy by susceptibility testing given extensive and variable resistance, using a carbapenem for susceptible strains and a polymyxin (colistin)-based combination, often with a sulbactam-containing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating positive respiratory or wound cultures as proof of infection when they may represent colonization, leading to overtreatment."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acinetobacter infections."
-  }
- ],
- "tables": [
-  {
-   "id": "acinetobacter_infections-matrix",
-   "title": "Acinetobacter Infections: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Acinetobacter are gram-negative, oxidase-negative, nonmotile, nonfermenting coccobacilli readily grown on standard media; A.",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1294-1298",
+    "clinicalPearls": [
+      "Acinetobacter are gram-negative, oxidase-negative, nonmotile, nonfermenting coccobacilli readily grown on standard media; A. baumannii is the most clinically relevant species. Phenotypic differentiation between species is difficult, so molecular methods such as MALDI-TOF mass spectrometry or quantitative real-time PCR are often needed for accurate identification.",
+      "A. baumannii can survive environmental desiccation for weeks, allowing it to persist on hospital surfaces and equipment - a key reason it drives health care-associated outbreaks.",
+      "A. baumannii is a notorious cause of nosocomial pneumonia, especially with prolonged mechanical ventilation; onset tends to be later than with other gram-negative bacilli, and the usual clues are fever and increased sputum production.",
+      "Airway colonization with A. baumannii does not by itself confirm pneumonia, but it is a recognized risk factor for subsequent infection - distinguishing colonization from true infection is a recurring clinical challenge.",
+      "On a CSF Gram stain, Acinetobacter can mimic Neisseria meningitidis since both appear as gram-negative paired cocci; a petechial rash was described in up to 30% of one meningitis case series.",
+      "Bloodstream infection most often arises in ICU patients with a central venous catheter or as a secondary complication of ventilator-associated/hospital-acquired pneumonia; fever occurs in over 95% of cases and polymicrobial growth is reported in roughly 20-36% of bacteremia episodes.",
+      "In combat-trauma soft tissue infection, the described clinical evolution progresses from an edematous peau d'orange appearance to a sandpaper appearance with overlying vesicles, then to a necrotizing process with hemorrhagic bullae; necrotizing fasciitis has been reported.",
+      "Community-acquired Acinetobacter pneumonia is relatively rare but severe, with fever, prominent respiratory symptoms, multi-organ dysfunction, lobar consolidation on imaging, and mortality exceeding 50%.",
+      "A. baumannii is an important burn-unit pathogen; large burns provide ideal growth conditions, facilitate patient-to-patient transmission, and wound colonization is a risk factor for bloodstream infection.",
+      "Risk factors for health care-associated colonization/infection include nursing home residence, prolonged ICU stay, central venous catheterization, tracheostomy, mechanical ventilation, enteral feeding, and prior third-generation cephalosporins, fluoroquinolones, or carbapenems; carbapenem-resistant strains are most common after carbapenem exposure.",
+      "Urinary tract infection is infrequent and usually catheter-associated, reflecting biofilm formation on devices; rare community-acquired cases occur with nephrolithiasis or after renal transplantation.",
+      "Less common manifestations include contact lens-associated keratitis and native- or prosthetic-valve endocarditis."
     ],
-    [
-     "Key Investigations",
-     "MALDI-TOF mass spectrometry for species-level identification, Quantitative real-time PCR for identification of A. baumannii,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A. baumannii has greater virulence potential than other Acinetobacter species, partly through its ability to grow at 37 degrees C and resist macrophage uptake. Colonization is facilitated by adherence to surfaces and human cells and by biofilm formation, which is linked to exopolysaccharide production and pilus formation; a quorum-sensing molecule encoded by the abaI autoinducer synthase gene contributes to biofilm on abiotic surfaces. The organism modifies its lipid A structure to survive harsh environments, decreasing susceptibility to antibiotics and antimicrobial peptides and enhancing desiccation survival. An extracellular capsule protects against complement-mediated killing and can be upregulated in the presence of subinhibitory antibiotic levels, producing a hypervirulent phenotype. Phospholipase C and D act as cytotoxic virulence factors aiding epithelial invasion, and siderophore-based iron-acquisition systems permit growth despite host iron limitation. Multiple protein-secretion systems (type II with the LipA lipase substrate, type V trimeric autotransporter mediating biofilm and matrix adherence, and a type VI system secreting antibacterial toxins) plus outer-membrane vesicles carrying OmpA, proteases, and phospholipases contribute to pathogenesis and innate immune activation. Antimicrobial resistance arises from reduced porin expression, overexpressed efflux pumps (removing quinolones, tetracyclines, chloramphenicol, disinfectants, and tigecycline), and beta-lactamases including intrinsic AmpC cephalosporinases (upregulated when the ISAba1 insertion sequence is placed next to the AmpC gene) and acquired serine and metallo-beta-lactamases. Carbapenem resistance is mostly tied to Ambler class D oxacillinases (group 2d), some intrinsic/chromosomal (e.g., OXA-51-like) and others acquired (e.g., OXA-23-, 24-, 58-, 143-, 235-like). The small A. baumannii core genome with a large accessory genome confers high genomic plasticity and ready uptake of resistance genes by horizontal gene transfer.",
+    "additionalDifferentials": [
+      "Ventilator-associated/hospital-acquired pneumonia due to other nosocomial gram-negative bacilli (Pseudomonas aeruginosa, Klebsiella pneumoniae, Enterobacterales)",
+      "Stenotrophomonas maltophilia or Burkholderia infection in the ventilated/immunocompromised host",
+      "Catheter-related bloodstream infection from other nosocomial pathogens",
+      "Necrotizing fasciitis or other necrotizing soft tissue infection from streptococcal, clostridial, or polymicrobial causes following trauma",
+      "Bacterial meningitis due to Neisseria meningitidis (similar gram-negative paired cocci on CSF Gram stain)"
     ],
-    [
-     "Primary Differentials",
-     "Ventilator-associated/hospital-acquired pneumonia due to other nosocomial gram-negative bacilli (Pseudomonas aeruginosa,",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Neisseria meningitidis on CSF Gram stain (both appear as gram-negative diplococci/paired cocci)",
+      "Other nonfermenting gram-negative nosocomial pathogens such as Pseudomonas aeruginosa and Stenotrophomonas maltophilia"
     ],
-    [
-     "Management Strategy",
-     "Direct antimicrobial therapy by susceptibility testing given extensive and variable resistance, using a carbapenem for",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Airway colonization without true pneumonia (positive respiratory culture not equating to active infection)",
+      "Wound colonization rather than soft tissue infection, particularly in burns and trauma"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating positive respiratory or wound cultures as proof of infection when they may represent colonization, leading to",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "MALDI-TOF mass spectrometry for species-level identification",
+      "Quantitative real-time PCR for identification of A. baumannii",
+      "Antimicrobial susceptibility testing to guide definitive therapy (given extensive and variable resistance)",
+      "Respiratory cultures interpreted in clinical context to distinguish colonization from pneumonia",
+      "Blood cultures (assessing for polymicrobial growth in suspected bacteremia)",
+      "Rectal surveillance cultures for outbreak detection and infection-control purposes",
+      "Molecular typing of isolates to differentiate outbreak from nonoutbreak strains"
+    ],
+    "redFlags": [
+      "Septic shock and disseminated intravascular coagulation, each reported in roughly 25-30% of bloodstream infection cases",
+      "Infection caused by carbapenem-resistant (extremely drug-resistant) isolates, where delayed adequate therapy drives poor outcomes",
+      "Evolving necrotizing soft tissue picture (hemorrhagic bullae, necrotizing fasciitis) after combat or disaster-related trauma",
+      "New A. baumannii in a long-term ventilated ICU patient with fever and rising sputum",
+      "Multi-organ dysfunction with severe community-acquired pneumonia"
+    ],
+    "prognosis": "Infections carry high mortality, driven largely by the severity of the patient's underlying illness and by drug resistance of the infecting strain. Crude mortality with nosocomial pneumonia has been reported as high as 65%, though attributable mortality is hard to establish because affected patients are typically debilitated. Community-acquired pneumonia mortality exceeds 50%. Crude bloodstream infection mortality reaches about 40% overall and as high as 70% with carbapenem-resistant isolates. Wound colonization/infection contributes to healing delays and graft loss in burn patients.",
+    "pitfalls": [
+      "Treating positive respiratory or wound cultures as proof of infection when they may represent colonization, leading to overtreatment.",
+      "Underestimating environmental persistence: failure to address desiccation-resistant contamination of surfaces and equipment perpetuates outbreaks.",
+      "Mistaking Acinetobacter for Neisseria meningitidis on CSF Gram stain.",
+      "Assuming susceptibility - intrinsic and acquired beta-lactamases (including OXA-type carbapenemases) make empirical choices unreliable without local epidemiology and susceptibility testing.",
+      "Overlooking Acinetobacter in the differential of soft tissue infection following exposure to tropical/subtropical environments or natural disasters."
+    ],
+    "severityClassification": "No formal disease-specific severity score is provided in the source. Severity is gauged clinically by site and host factors: presence of septic shock or DIC in bloodstream infection (~25-30%), need for prolonged mechanical ventilation in pneumonia, and carbapenem/extreme drug resistance, all of which predict markedly higher mortality.",
+    "references": [
+      "Harrison 22e p.1294-1298"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct antimicrobial therapy by susceptibility testing given extensive and variable resistance, using a carbapenem for susceptible strains and a polymyxin (colistin)-based combination, often with a sulbactam-containing agent, for carbapenem-resistant A. baumannii",
+      "Consider newer agents such as cefiderocol or sulbactam-durlobactam for multidrug-resistant isolates",
+      "Source control with removal or replacement of infected central venous catheters and other foreign material",
+      "Rigorous infection control with contact precautions, environmental cleaning and hand hygiene, given the organism's survival through desiccation and its outbreak potential",
+      "Distinguish colonisation from true infection, particularly in the respiratory tract, to avoid unnecessary treatment",
+      "Supportive care for sepsis with organ support in critically ill or ventilated patients",
+      "Rectal surveillance cultures and cohorting for outbreak detection and control",
+      "Infectious diseases and microbiology consultation to guide combination therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for acinetobacter infections."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acinetobacter-infections-real-image",
-   "title": "Acinetobacter Infections: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "acinetobacter_infections-pathway",
+      "title": "Acinetobacter Infections: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Acinetobacter are gram-negative, oxidase-negative, nonmotile, nonfermenting coccobacilli readily grown on standard media; A. baumannii is the most clinically relevant species. Phenotypic differentiation between species is difficult, so",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Septic shock and disseminated intravascular coagulation, each reported in roughly 25-30% of bloodstream infection cases",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MALDI-TOF mass spectrometry for species-level identification, Quantitative real-time PCR for identification of A. baumannii, Antimicrobial susceptibility testing to guide definitive therapy (given extensive and variable"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct antimicrobial therapy by susceptibility testing given extensive and variable resistance, using a carbapenem for susceptible strains and a polymyxin (colistin)-based combination, often with a sulbactam-containing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating positive respiratory or wound cultures as proof of infection when they may represent colonization, leading to overtreatment."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acinetobacter infections."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acinetobacter_infections-matrix",
+      "title": "Acinetobacter Infections: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acinetobacter are gram-negative, oxidase-negative, nonmotile, nonfermenting coccobacilli readily grown on standard media; A.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MALDI-TOF mass spectrometry for species-level identification, Quantitative real-time PCR for identification of A. baumannii,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ventilator-associated/hospital-acquired pneumonia due to other nosocomial gram-negative bacilli (Pseudomonas aeruginosa,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct antimicrobial therapy by susceptibility testing given extensive and variable resistance, using a carbapenem for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating positive respiratory or wound cultures as proof of infection when they may represent colonization, leading to",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acinetobacter infections."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "IDSA Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections",
+      "url": "https://www.idsociety.org/practice-guideline/amr-guidance/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acinetobacter_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising Acinetobacter infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Organism",
+          "cells": [
+            {
+              "text": "Gram-negative oxidase-negative non-fermenting coccobacillus"
+            },
+            {
+              "text": "Can look like Neisseria on CSF Gram stain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identification",
+          "cells": [
+            {
+              "text": "MALDI-TOF or real-time PCR"
+            },
+            {
+              "text": "Phenotypic species separation is unreliable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typical setting",
+          "cells": [
+            {
+              "text": "Late ventilator-associated pneumonia, line infection, burns, combat or disaster wounds"
+            },
+            {
+              "text": "Survives desiccation on surfaces for weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory or wound culture",
+          "cells": [
+            {
+              "text": "{{hy:Positive culture may be colonisation only}}"
+            },
+            {
+              "text": "Treat invasive infection, not colonisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Susceptibility testing",
+          "cells": [
+            {
+              "text": "Essential; OXA-type carbapenemases common"
+            },
+            {
+              "text": "Empirical choices unreliable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloodstream infection severity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Septic shock or DIC in about 25 to 30",
+              "range": [
+                25,
+                30
+              ]
+            },
+            {
+              "text": "Crude mortality about 40%, up to 70% if carbapenem resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nosocomial pneumonia mortality",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Crude up to 65",
+              "op": "<=",
+              "value": 65
+            },
+            {
+              "text": "Reflects underlying illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acinetobacter_infections-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of Acinetobacter infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Colonisation of airway or wound",
+          "cells": [
+            {
+              "text": "{{hy:No clinical signs of infection despite positive culture}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudomonas, Klebsiella and other Enterobacterales pneumonia",
+          "cells": [
+            {
+              "text": "Separated by culture and identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stenotrophomonas or Burkholderia",
+          "cells": [
+            {
+              "text": "Other non-fermenters in ventilated or immunocompromised hosts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neisseria meningitidis meningitis",
+          "cells": [
+            {
+              "text": "Similar gram-negative paired cocci on CSF Gram stain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising soft tissue infection of other cause",
+          "cells": [
+            {
+              "text": "Streptococcal, clostridial or polymicrobial after trauma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acinetobacter_infections-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Acinetobacter infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbapenem",
+          "cells": [
+            {
+              "text": "Carbapenem-susceptible strain"
+            },
+            {
+              "text": "Guided by susceptibility testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sulbactam-durlobactam plus imipenem or meropenem",
+          "cells": [
+            {
+              "text": "{{hy:Preferred for invasive carbapenem-resistant A. baumannii (CRAB)}}"
+            },
+            {
+              "text": "Can start empirically while awaiting susceptibility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose ampicillin-sulbactam with another active agent",
+          "cells": [
+            {
+              "text": "Bridge until sulbactam-durlobactam available"
+            },
+            {
+              "text": "Total sulbactam 9 g/day, for example 9 g IV every 8 hours as prolonged infusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minocycline",
+          "cells": [
+            {
+              "text": "Partner agent or sulbactam-durlobactam resistance"
+            },
+            {
+              "text": "200 mg every 12 hours; under 50% of CRAB meet breakpoint"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cefiderocol or polymyxin B",
+          "cells": [
+            {
+              "text": "Resistance precludes sulbactam-durlobactam, or bridging"
+            },
+            {
+              "text": "Polymyxin: poor lung penetration, nephrotoxicity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nebulised antibiotics",
+          "cells": [
+            {
+              "text": "Not routine for CRAB pneumonia"
+            },
+            {
+              "text": "Selective use if poor response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Source control and infection control",
+          "cells": [
+            {
+              "text": "All infections"
+            },
+            {
+              "text": "Remove infected lines; contact precautions; environmental cleaning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acinetobacter_infections-dx-mgmt",
+      "title": "Diagnosis and management of Acinetobacter infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "A. baumannii isolated from an ICU, ventilated or trauma patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Clinical signs of invasive infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Colonisation: no antibiotics; infection control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood cultures, source search, susceptibility testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Carbapenem resistant?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Carbapenem guided by susceptibilities",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sulbactam-durlobactam plus imipenem or meropenem",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Sulbactam-durlobactam unavailable or resisted?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-dose ampicillin-sulbactam with minocycline, cefiderocol or polymyxin B",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Source control, remove lines, contact precautions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

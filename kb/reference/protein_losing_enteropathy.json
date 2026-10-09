@@ -1,173 +1,470 @@
 {
- "id": "protein_losing_enteropathy",
- "name": "Protein-Losing Enteropathy",
- "aliases": [
-  "PLE",
-  "intestinal protein loss",
-  "gut protein loss"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "This is a syndrome, not a single disease, in which excessive loss of plasma proteins into the gastrointestinal tract leads to hypoproteinaemia and oedema.",
-   "It should be suspected in a child with hypoalbuminaemia and oedema once liver disease, kidney protein loss, and inadequate intake have been excluded.",
-   "Underlying mechanisms fall into two broad groups: lymphatic obstruction or elevated lymphatic pressure, and mucosal disease with increased permeability or erosion.",
-   "Lymphatic causes include intestinal lymphangiectasia and elevated central venous pressure after cardiac surgery (notably the Fontan circulation), while mucosal causes include inflammatory, allergic, infectious, and infiltrative enteropathies.",
-   "Because losses are non-selective, other serum proteins such as immunoglobulins and clotting factors may also fall, sometimes causing lymphopenia and predisposing to infection.",
-   "A stool alpha-1-antitrypsin measurement is a useful non-invasive marker of enteric protein loss because it is not degraded in the gut.",
-   "Management is directed at the underlying cause together with nutritional support, and in lymphatic causes a low-fat diet enriched with medium-chain triglycerides can reduce lymphatic protein loss.",
-   "Peripheral oedema, ascites, or effusions in a child with unexplained low albumin should prompt evaluation of the gut as a source."
+  "id": "protein_losing_enteropathy",
+  "name": "Protein-Losing Enteropathy",
+  "aliases": [
+    "PLE",
+    "intestinal protein loss",
+    "gut protein loss"
   ],
-  "pathophysiology": "Plasma proteins normally enter the gut lumen only in small amounts. In protein-losing enteropathy this loss is markedly increased by one of two general processes. In lymphatic disorders, obstructed or high-pressure intestinal lymphatics (from congenital lymphangiectasia or raised systemic venous pressure, as after Fontan surgery) leak protein-rich lymph into the lumen. In mucosal disorders, inflammation, ulceration, or increased epithelial permeability from infectious, allergic, inflammatory, or infiltrative disease allows serum proteins to escape across the damaged barrier. Because the loss is non-selective, albumin, immunoglobulins, and other proteins are depleted, producing hypoalbuminaemia, oedema, and sometimes immune compromise.",
-  "additionalDifferentials": [
-   "Nephrotic syndrome",
-   "Chronic liver disease with impaired synthesis",
-   "Malnutrition or inadequate protein intake",
-   "Malabsorption syndromes",
-   "Congestive heart failure",
-   "Sepsis or capillary leak states"
-  ],
-  "additionalInvestigations": [
-   "Serum albumin and total protein",
-   "Stool alpha-1-antitrypsin (clearance)",
-   "Serum immunoglobulins and lymphocyte count",
-   "Urinalysis to exclude renal protein loss",
-   "Endoscopy with biopsy when mucosal disease is suspected",
-   "Imaging or echocardiography to assess lymphatics and cardiac status"
-  ],
-  "redFlags": [
-   "Severe hypoalbuminaemia with anasarca, ascites, or effusions",
-   "Signs of immunodeficiency or recurrent infection from immunoglobulin loss",
-   "Evidence of underlying serious cardiac or lymphatic disease",
-   "Growth failure",
-   "Features of an underlying inflammatory or malignant infiltrative process"
-  ],
-  "prognosis": "Outlook depends heavily on the underlying cause; some mucosal causes resolve when the primary disease is treated, whereas lymphangiectasia and Fontan-associated protein loss can be chronic and difficult to manage.",
-  "pitfalls": [
-   "Attributing hypoalbuminaemia and oedema to renal or hepatic causes without considering the gut",
-   "Overlooking accompanying immunoglobulin loss and infection risk",
-   "Failing to identify and treat the specific underlying disorder",
-   "Neglecting nutritional support and the role of a low-fat, medium-chain triglyceride diet in lymphatic loss"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying cause, for example immunosuppression for inflammatory bowel disease or an elimination diet for allergic enteropathy",
-   "For intestinal lymphangiectasia, institute a low-fat diet enriched with medium-chain triglycerides to reduce lymphatic protein loss, with dietitian support",
-   "In Fontan-associated protein-losing enteropathy, optimise the circulation and consider therapies such as heparin, budesonide, pulmonary vasodilators or Fontan revision",
-   "Provide nutritional support with adequate protein and energy, and use intravenous albumin and immunoglobulin replacement when clinically indicated",
-   "Monitor for infection resulting from immunoglobulin and lymphocyte loss, and manage oedema with attention to fluid balance",
-   "Coordinate multidisciplinary care across paediatric gastroenterology, cardiology, dietetics and immunology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "protein_losing_enteropathy-pathway",
-   "title": "Protein-Losing Enteropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "This is a syndrome, not a single disease, in which excessive loss of plasma proteins into the gastrointestinal tract leads to hypoproteinaemia and oedema.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypoalbuminaemia with anasarca, ascites, or effusions",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum albumin and total protein, Stool alpha-1-antitrypsin (clearance), Serum immunoglobulins and lymphocyte count"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying cause, for example immunosuppression for inflammatory bowel disease or an elimination diet for allergic enteropathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing hypoalbuminaemia and oedema to renal or hepatic causes without considering the gut"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of protein-losing enteropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "protein_losing_enteropathy-matrix",
-   "title": "Protein-Losing Enteropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "This is a syndrome, not a single disease, in which excessive loss of plasma proteins into the gastrointestinal tract leads to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "This is a syndrome, not a single disease, in which excessive loss of plasma proteins into the gastrointestinal tract leads to hypoproteinaemia and oedema.",
+      "It should be suspected in a child with hypoalbuminaemia and oedema once liver disease, kidney protein loss, and inadequate intake have been excluded.",
+      "Underlying mechanisms fall into two broad groups: lymphatic obstruction or elevated lymphatic pressure, and mucosal disease with increased permeability or erosion.",
+      "Lymphatic causes include intestinal lymphangiectasia and elevated central venous pressure after cardiac surgery (notably the Fontan circulation), while mucosal causes include inflammatory, allergic, infectious, and infiltrative enteropathies.",
+      "Because losses are non-selective, other serum proteins such as immunoglobulins and clotting factors may also fall, sometimes causing lymphopenia and predisposing to infection.",
+      "A stool alpha-1-antitrypsin measurement is a useful non-invasive marker of enteric protein loss because it is not degraded in the gut.",
+      "Management is directed at the underlying cause together with nutritional support, and in lymphatic causes a low-fat diet enriched with medium-chain triglycerides can reduce lymphatic protein loss.",
+      "Peripheral oedema, ascites, or effusions in a child with unexplained low albumin should prompt evaluation of the gut as a source."
     ],
-    [
-     "Key Investigations",
-     "Serum albumin and total protein, Stool alpha-1-antitrypsin (clearance), Serum immunoglobulins and lymphocyte count",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Plasma proteins normally enter the gut lumen only in small amounts. In protein-losing enteropathy this loss is markedly increased by one of two general processes. In lymphatic disorders, obstructed or high-pressure intestinal lymphatics (from congenital lymphangiectasia or raised systemic venous pressure, as after Fontan surgery) leak protein-rich lymph into the lumen. In mucosal disorders, inflammation, ulceration, or increased epithelial permeability from infectious, allergic, inflammatory, or infiltrative disease allows serum proteins to escape across the damaged barrier. Because the loss is non-selective, albumin, immunoglobulins, and other proteins are depleted, producing hypoalbuminaemia, oedema, and sometimes immune compromise.",
+    "additionalDifferentials": [
+      "Nephrotic syndrome",
+      "Chronic liver disease with impaired synthesis",
+      "Malnutrition or inadequate protein intake",
+      "Malabsorption syndromes",
+      "Congestive heart failure",
+      "Sepsis or capillary leak states"
     ],
-    [
-     "Primary Differentials",
-     "Nephrotic syndrome, Chronic liver disease with impaired synthesis, Malnutrition or inadequate protein intake",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum albumin and total protein",
+      "Stool alpha-1-antitrypsin (clearance)",
+      "Serum immunoglobulins and lymphocyte count",
+      "Urinalysis to exclude renal protein loss",
+      "Endoscopy with biopsy when mucosal disease is suspected",
+      "Imaging or echocardiography to assess lymphatics and cardiac status"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying cause, for example immunosuppression for inflammatory bowel disease or an elimination diet for",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypoalbuminaemia with anasarca, ascites, or effusions",
+      "Signs of immunodeficiency or recurrent infection from immunoglobulin loss",
+      "Evidence of underlying serious cardiac or lymphatic disease",
+      "Growth failure",
+      "Features of an underlying inflammatory or malignant infiltrative process"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing hypoalbuminaemia and oedema to renal or hepatic causes without considering the gut",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook depends heavily on the underlying cause; some mucosal causes resolve when the primary disease is treated, whereas lymphangiectasia and Fontan-associated protein loss can be chronic and difficult to manage.",
+    "pitfalls": [
+      "Attributing hypoalbuminaemia and oedema to renal or hepatic causes without considering the gut",
+      "Overlooking accompanying immunoglobulin loss and infection risk",
+      "Failing to identify and treat the specific underlying disorder",
+      "Neglecting nutritional support and the role of a low-fat, medium-chain triglyceride diet in lymphatic loss"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying cause, for example immunosuppression for inflammatory bowel disease or an elimination diet for allergic enteropathy",
+      "For intestinal lymphangiectasia, institute a low-fat diet enriched with medium-chain triglycerides to reduce lymphatic protein loss, with dietitian support",
+      "In Fontan-associated protein-losing enteropathy, optimise the circulation and consider therapies such as heparin, budesonide, pulmonary vasodilators or Fontan revision",
+      "Provide nutritional support with adequate protein and energy, and use intravenous albumin and immunoglobulin replacement when clinically indicated",
+      "Monitor for infection resulting from immunoglobulin and lymphocyte loss, and manage oedema with attention to fluid balance",
+      "Coordinate multidisciplinary care across paediatric gastroenterology, cardiology, dietetics and immunology"
     ]
-   ],
-   "caption": "Overview comparison matrix for protein-losing enteropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "protein-losing-enteropathy-real-image",
-   "title": "Protein-Losing Enteropathy: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "protein_losing_enteropathy-pathway",
+      "title": "Protein-Losing Enteropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "This is a syndrome, not a single disease, in which excessive loss of plasma proteins into the gastrointestinal tract leads to hypoproteinaemia and oedema.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypoalbuminaemia with anasarca, ascites, or effusions",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum albumin and total protein, Stool alpha-1-antitrypsin (clearance), Serum immunoglobulins and lymphocyte count"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying cause, for example immunosuppression for inflammatory bowel disease or an elimination diet for allergic enteropathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing hypoalbuminaemia and oedema to renal or hepatic causes without considering the gut"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of protein-losing enteropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "protein_losing_enteropathy-matrix",
+      "title": "Protein-Losing Enteropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "This is a syndrome, not a single disease, in which excessive loss of plasma proteins into the gastrointestinal tract leads to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum albumin and total protein, Stool alpha-1-antitrypsin (clearance), Serum immunoglobulins and lymphocyte count",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nephrotic syndrome, Chronic liver disease with impaired synthesis, Malnutrition or inadequate protein intake",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying cause, for example immunosuppression for inflammatory bowel disease or an elimination diet for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing hypoalbuminaemia and oedema to renal or hepatic causes without considering the gut",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for protein-losing enteropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "protein_losing_enteropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum albumin and total protein",
+          "cells": [
+            {
+              "text": "Hypoalbuminaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool alpha-1-antitrypsin clearance",
+          "cells": [
+            {
+              "text": "Protein loss into the gut"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins and lymphocyte count",
+          "cells": [
+            {
+              "text": "Immunoglobulin and lymphocyte loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Renal protein loss excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Mucosal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or echocardiography",
+          "cells": [
+            {
+              "text": "Lymphatic and cardiac status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "protein_losing_enteropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Nephrotic syndrome",
+          "cells": [
+            {
+              "text": "Urinary protein loss"
+            },
+            {
+              "text": "Urinalysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congestive heart failure",
+          "cells": [
+            {
+              "text": "Cardiac disease"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic liver disease with impaired synthesis",
+          "cells": [
+            {
+              "text": "Impaired synthesis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "protein_losing_enteropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Immunosuppression for inflammatory bowel disease, or elimination diet for allergic enteropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal lymphangiectasia",
+          "cells": [
+            {
+              "text": "Low-fat diet enriched with medium-chain triglycerides to reduce lymphatic protein loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fontan-associated protein-losing enteropathy",
+          "cells": [
+            {
+              "text": "Optimise the circulation; consider heparin, budesonide or pulmonary vasodilators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and replacement",
+          "cells": [
+            {
+              "text": "Adequate protein and energy; IV albumin and immunoglobulin when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and oedema",
+          "cells": [
+            {
+              "text": "Monitor for infection from immunoglobulin and lymphocyte loss; manage oedema and fluid balance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric gastroenterology, cardiology, dietetics and immunology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "protein_losing_enteropathy-dx-mgmt",
+      "title": "Diagnosis and management of Protein-Losing Enteropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected protein-losing enteropathy: hypoalbuminaemia with stool protein loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Anasarca, effusions, recurrent infection, serious cardiac disease, or growth failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for severe hypoalbuminaemia with effusions or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum albumin; stool A1AT; immunoglobulins; urinalysis; endoscopy with biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is stool protein loss confirmed with renal and cardiac causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nephrotic syndrome, liver disease or malnutrition; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause, such as immunosuppression for IBD",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-fat, MCT-enriched diet for intestinal lymphangiectasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optimise circulation in Fontan-associated protein-losing enteropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "IV albumin and immunoglobulin replacement when indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care in gastroenterology, cardiology, dietetics and immunology",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

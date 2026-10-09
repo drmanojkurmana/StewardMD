@@ -1,176 +1,492 @@
 {
- "id": "enchondroma",
- "name": "Enchondroma",
- "aliases": [
-  "Central chondroma",
-  "Solitary enchondroma"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Orthopaedics / Musculoskeletal radiology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Soft Tissue and Bone",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most common in the short tubular bones of the hand (phalanges, metacarpals), where it is frequently discovered incidentally or after a pathological fracture through the thinned cortex.",
-   "Classic radiographic appearance is a well-defined lucent medullary lesion with a lobulated margin and chondroid matrix mineralisation described as rings, arcs, stippling or a popcorn pattern.",
-   "Endosteal scalloping of less than roughly two-thirds of the cortical thickness favours a benign enchondroma; deep scalloping, cortical breach or periosteal reaction raise concern for chondrosarcoma.",
-   "In long bones (proximal femur, humerus) it is genuinely difficult to distinguish from low-grade (grade 1) chondrosarcoma, and clinical correlation with pain and lesion size is essential.",
-   "MRI shows a lobulated lesion of high T2 signal with peripheral and septal ring-and-arc enhancement, reflecting the avascular hyaline cartilage lobules.",
-   "Multiple lesions define an enchondromatosis: Ollier disease (multiple enchondromas) and Maffucci syndrome (enchondromas with soft-tissue and visceral haemangiomas), both carrying a substantially increased risk of malignant transformation.",
-   "Somatic mosaic IDH1 and IDH2 mutations underlie many sporadic enchondromas and the enchondromatoses.",
-   "Asymptomatic hand lesions are simply observed; symptomatic or fractured lesions are treated with curettage with or without bone grafting."
+  "id": "enchondroma",
+  "name": "Enchondroma",
+  "aliases": [
+    "Central chondroma",
+    "Solitary enchondroma"
   ],
-  "pathophysiology": "Enchondroma is a benign intramedullary neoplasm of mature hyaline cartilage that is thought to arise from displaced or retained rests of physeal (growth-plate) cartilage that fail to undergo normal endochondral ossification and instead persist and slowly enlarge within the medullary cavity. The lesion is composed of lobules of hypocellular hyaline cartilage separated by fibrovascular or bony septa, with mineralisation occurring by enchondral ossification and dystrophic calcification. Somatic mosaic gain-of-function mutations in the isocitrate dehydrogenase genes IDH1 and IDH2, producing the oncometabolite 2-hydroxyglutarate, are implicated in sporadic lesions and, when acquired early in development, in the multifocal enchondromatoses (Ollier disease and Maffucci syndrome), which explains their metaphyseal distribution and elevated risk of progression to chondrosarcoma.",
-  "additionalDifferentials": [
-   "Low-grade (grade 1) central chondrosarcoma",
-   "Bone infarct (medullary osteonecrosis)",
-   "Chondroblastoma",
-   "Fibrous dysplasia",
-   "Epidermoid inclusion cyst (distal phalanx)",
-   "Intraosseous ganglion",
-   "Chondromyxoid fibroma"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs in two orthogonal planes as the initial and often definitive study",
-   "MRI to characterise cartilage lobules, marrow involvement and any soft-tissue component",
-   "CT to define matrix mineralisation, endosteal scalloping and cortical integrity",
-   "Bone scintigraphy, noting that active enchondromas may show uptake and cannot alone exclude malignancy",
-   "Image-guided or open biopsy reserved for lesions with worrying features, accepting the risk of sampling error in heterogeneous cartilage tumours",
-   "Assessment for enchondromatosis and family history when multiple lesions are present"
-  ],
-  "redFlags": [
-   "New or increasing rest or night pain not attributable to fracture",
-   "Growth or change of a cartilage lesion in a skeletally mature adult",
-   "Cortical destruction, periosteal reaction or an associated soft-tissue mass",
-   "Deep endosteal scalloping exceeding two-thirds of cortical thickness or a lesion larger than about 5 to 6 cm in a long bone",
-   "Multiple lesions with clinical features of Ollier or Maffucci syndrome"
-  ],
-  "prognosis": "Solitary enchondromas have an excellent prognosis with low recurrence after curettage and a very low rate of malignant transformation. The risk of secondary chondrosarcoma is appreciably higher in the enchondromatoses, warranting long-term surveillance.",
-  "pitfalls": [
-   "Overcalling a benign enchondroma as chondrosarcoma, or the reverse, particularly for long-bone lesions where imaging overlap is marked",
-   "Relying on biopsy alone, since sampling error in heterogeneous cartilage tumours can under-grade a malignancy",
-   "Mistaking a mineralised bone infarct for an enchondroma or vice versa",
-   "Failing to arrange surveillance for long-bone lesions and for patients with enchondromatosis"
-  ],
-  "references": [
-   "WHO Classification of Tumours of Soft Tissue and Bone (current edition)",
-   "Greenspan, Orthopedic Imaging: A Practical Approach",
-   "Resnick, Diagnosis of Bone and Joint Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observation with serial radiographic surveillance for asymptomatic solitary lesions, given the excellent prognosis and very low malignant potential",
-   "Curettage and bone grafting for symptomatic lesions, those at risk of pathological fracture, or lesions in the short tubular bones of the hand",
-   "Fixation and treatment of pathological fractures, often allowing the fracture to heal before curettage",
-   "Careful distinction from low-grade chondrosarcoma using pain, lesion size, degree of endosteal scalloping and cortical integrity, with biopsy reserved for worrying features",
-   "Wide surgical resection where malignant transformation to chondrosarcoma is suspected",
-   "Long-term surveillance and assessment for enchondromatosis such as Ollier disease and Maffucci syndrome when multiple lesions are present, given their higher malignant-transformation risk",
-   "Referral to a specialist bone-tumour and orthopaedic-oncology multidisciplinary team for indeterminate or aggressive lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "enchondroma-pathway",
-   "title": "Enchondroma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most common in the short tubular bones of the hand (phalanges, metacarpals), where it is frequently discovered incidentally or after a pathological fracture through the thinned cortex.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or increasing rest or night pain not attributable to fracture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs in two orthogonal planes as the initial and often definitive study, MRI to characterise cartilage lobules, marrow involvement and any soft-tissue component, CT to define matrix mineralisation, endosteal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observation with serial radiographic surveillance for asymptomatic solitary lesions, given the excellent prognosis and very low malignant potential"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overcalling a benign enchondroma as chondrosarcoma, or the reverse, particularly for long-bone lesions where imaging overlap is marked"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of enchondroma."
-  }
- ],
- "tables": [
-  {
-   "id": "enchondroma-matrix",
-   "title": "Enchondroma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most common in the short tubular bones of the hand (phalanges, metacarpals), where it is frequently discovered incidentally or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Orthopaedics / Musculoskeletal radiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Soft Tissue and Bone",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most common in the short tubular bones of the hand (phalanges, metacarpals), where it is frequently discovered incidentally or after a pathological fracture through the thinned cortex.",
+      "Classic radiographic appearance is a well-defined lucent medullary lesion with a lobulated margin and chondroid matrix mineralisation described as rings, arcs, stippling or a popcorn pattern.",
+      "Endosteal scalloping of less than roughly two-thirds of the cortical thickness favours a benign enchondroma; deep scalloping, cortical breach or periosteal reaction raise concern for chondrosarcoma.",
+      "In long bones (proximal femur, humerus) it is genuinely difficult to distinguish from low-grade (grade 1) chondrosarcoma, and clinical correlation with pain and lesion size is essential.",
+      "MRI shows a lobulated lesion of high T2 signal with peripheral and septal ring-and-arc enhancement, reflecting the avascular hyaline cartilage lobules.",
+      "Multiple lesions define an enchondromatosis: Ollier disease (multiple enchondromas) and Maffucci syndrome (enchondromas with soft-tissue and visceral haemangiomas), both carrying a substantially increased risk of malignant transformation.",
+      "Somatic mosaic IDH1 and IDH2 mutations underlie many sporadic enchondromas and the enchondromatoses.",
+      "Asymptomatic hand lesions are simply observed; symptomatic or fractured lesions are treated with curettage with or without bone grafting."
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs in two orthogonal planes as the initial and often definitive study, MRI to characterise cartilage lobules,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Enchondroma is a benign intramedullary neoplasm of mature hyaline cartilage that is thought to arise from displaced or retained rests of physeal (growth-plate) cartilage that fail to undergo normal endochondral ossification and instead persist and slowly enlarge within the medullary cavity. The lesion is composed of lobules of hypocellular hyaline cartilage separated by fibrovascular or bony septa, with mineralisation occurring by enchondral ossification and dystrophic calcification. Somatic mosaic gain-of-function mutations in the isocitrate dehydrogenase genes IDH1 and IDH2, producing the oncometabolite 2-hydroxyglutarate, are implicated in sporadic lesions and, when acquired early in development, in the multifocal enchondromatoses (Ollier disease and Maffucci syndrome), which explains their metaphyseal distribution and elevated risk of progression to chondrosarcoma.",
+    "additionalDifferentials": [
+      "Low-grade (grade 1) central chondrosarcoma",
+      "Bone infarct (medullary osteonecrosis)",
+      "Chondroblastoma",
+      "Fibrous dysplasia",
+      "Epidermoid inclusion cyst (distal phalanx)",
+      "Intraosseous ganglion",
+      "Chondromyxoid fibroma"
     ],
-    [
-     "Primary Differentials",
-     "Low-grade (grade 1) central chondrosarcoma, Bone infarct (medullary osteonecrosis), Chondroblastoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs in two orthogonal planes as the initial and often definitive study",
+      "MRI to characterise cartilage lobules, marrow involvement and any soft-tissue component",
+      "CT to define matrix mineralisation, endosteal scalloping and cortical integrity",
+      "Bone scintigraphy, noting that active enchondromas may show uptake and cannot alone exclude malignancy",
+      "Image-guided or open biopsy reserved for lesions with worrying features, accepting the risk of sampling error in heterogeneous cartilage tumours",
+      "Assessment for enchondromatosis and family history when multiple lesions are present"
     ],
-    [
-     "Management Strategy",
-     "Observation with serial radiographic surveillance for asymptomatic solitary lesions, given the excellent prognosis and very low",
-     "Core treatment modality"
+    "redFlags": [
+      "New or increasing rest or night pain not attributable to fracture",
+      "Growth or change of a cartilage lesion in a skeletally mature adult",
+      "Cortical destruction, periosteal reaction or an associated soft-tissue mass",
+      "Deep endosteal scalloping exceeding two-thirds of cortical thickness or a lesion larger than about 5 to 6 cm in a long bone",
+      "Multiple lesions with clinical features of Ollier or Maffucci syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Overcalling a benign enchondroma as chondrosarcoma, or the reverse, particularly for long-bone lesions where imaging overlap is",
-     "Prevent diagnostic or management error"
+    "prognosis": "Solitary enchondromas have an excellent prognosis with low recurrence after curettage and a very low rate of malignant transformation. The risk of secondary chondrosarcoma is appreciably higher in the enchondromatoses, warranting long-term surveillance.",
+    "pitfalls": [
+      "Overcalling a benign enchondroma as chondrosarcoma, or the reverse, particularly for long-bone lesions where imaging overlap is marked",
+      "Relying on biopsy alone, since sampling error in heterogeneous cartilage tumours can under-grade a malignancy",
+      "Mistaking a mineralised bone infarct for an enchondroma or vice versa",
+      "Failing to arrange surveillance for long-bone lesions and for patients with enchondromatosis"
+    ],
+    "references": [
+      "WHO Classification of Tumours of Soft Tissue and Bone (current edition)",
+      "Greenspan, Orthopedic Imaging: A Practical Approach",
+      "Resnick, Diagnosis of Bone and Joint Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observation with serial radiographic surveillance for asymptomatic solitary lesions, given the excellent prognosis and very low malignant potential",
+      "Curettage and bone grafting for symptomatic lesions, those at risk of pathological fracture, or lesions in the short tubular bones of the hand",
+      "Fixation and treatment of pathological fractures, often allowing the fracture to heal before curettage",
+      "Careful distinction from low-grade chondrosarcoma using pain, lesion size, degree of endosteal scalloping and cortical integrity, with biopsy reserved for worrying features",
+      "Wide surgical resection where malignant transformation to chondrosarcoma is suspected",
+      "Long-term surveillance and assessment for enchondromatosis such as Ollier disease and Maffucci syndrome when multiple lesions are present, given their higher malignant-transformation risk",
+      "Referral to a specialist bone-tumour and orthopaedic-oncology multidisciplinary team for indeterminate or aggressive lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for enchondroma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "enchondroma-real-image",
-   "title": "Enchondroma: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "enchondroma-pathway",
+      "title": "Enchondroma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most common in the short tubular bones of the hand (phalanges, metacarpals), where it is frequently discovered incidentally or after a pathological fracture through the thinned cortex.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or increasing rest or night pain not attributable to fracture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs in two orthogonal planes as the initial and often definitive study, MRI to characterise cartilage lobules, marrow involvement and any soft-tissue component, CT to define matrix mineralisation, endosteal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observation with serial radiographic surveillance for asymptomatic solitary lesions, given the excellent prognosis and very low malignant potential"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overcalling a benign enchondroma as chondrosarcoma, or the reverse, particularly for long-bone lesions where imaging overlap is marked"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of enchondroma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "enchondroma-matrix",
+      "title": "Enchondroma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most common in the short tubular bones of the hand (phalanges, metacarpals), where it is frequently discovered incidentally or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs in two orthogonal planes as the initial and often definitive study, MRI to characterise cartilage lobules,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Low-grade (grade 1) central chondrosarcoma, Bone infarct (medullary osteonecrosis), Chondroblastoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observation with serial radiographic surveillance for asymptomatic solitary lesions, given the excellent prognosis and very low",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overcalling a benign enchondroma as chondrosarcoma, or the reverse, particularly for long-bone lesions where imaging overlap is",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for enchondroma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "enchondroma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs in two planes",
+          "cells": [
+            {
+              "text": "Initial and often definitive study"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Cartilage lobules, marrow and soft-tissue component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Matrix mineralisation, endosteal scalloping and cortex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy",
+          "cells": [
+            {
+              "text": "Uptake in active lesions; cannot exclude malignancy alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided or open biopsy",
+          "cells": [
+            {
+              "text": "Lesions with worrying features only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for enchondromatosis",
+          "cells": [
+            {
+              "text": "Multiple lesions and family history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enchondroma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-grade central chondrosarcoma",
+          "cells": [
+            {
+              "text": "Pain, growth or endosteal scalloping beyond two-thirds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone infarct",
+          "cells": [
+            {
+              "text": "Mineralised medullary osteonecrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondroblastoma",
+          "cells": [
+            {
+              "text": "Epiphyseal lesion in a younger patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrous dysplasia",
+          "cells": [
+            {
+              "text": "Ground-glass lesion with a different matrix"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondromyxoid fibroma",
+          "cells": [
+            {
+              "text": "Lytic lesion with a different histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enchondroma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic solitary lesions with serial radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Curettage and bone grafting",
+          "cells": [
+            {
+              "text": "Symptomatic lesions, fracture risk, or short tubular bones of the hand"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fracture fixation",
+          "cells": [
+            {
+              "text": "Pathological fractures, often allowed to heal before curettage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide resection",
+          "cells": [
+            {
+              "text": "Suspected malignant transformation to chondrosarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Enchondromatosis with higher transformation risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist bone tumour team",
+          "cells": [
+            {
+              "text": "Indeterminate or aggressive lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "enchondroma-dx-mgmt",
+      "title": "Diagnosis and management of Enchondroma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected enchondroma: incidental cartilage lesion in a long or short bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rest pain, cortical destruction, soft-tissue mass, adult growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent bone tumour team review for suspected malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs in two planes; MRI and CT for matrix and scalloping; biopsy if worrying",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are features benign: small lesion, no cortical breach, no progressive pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider low-grade chondrosarcoma, bone infarct, chondroblastoma or fibrous dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic solitary lesions with serial radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Curettage and bone grafting for symptomatic or fracture-risk lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fix pathological fractures, often before curettage",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wide resection where malignant transformation is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance and enchondromatosis assessment when lesions are multiple",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Solitary lesions have excellent prognosis and very low malignant potential",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

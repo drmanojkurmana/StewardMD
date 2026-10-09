@@ -1,175 +1,483 @@
 {
- "id": "orf_infection",
- "name": "Orf (ecthyma contagiosum)",
- "aliases": [
-  "orf virus",
-  "ecthyma contagiosum",
-  "contagious pustular dermatitis",
-  "scabby mouth",
-  "parapoxvirus infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A zoonotic parapoxvirus infection acquired by direct contact with infected sheep and goats or contaminated fomites, and an occupational hazard of farmers, shepherds, abattoir workers, and vets",
-   "Presents as one or a few solitary lesions, usually on the fingers or hands, evolving through recognised stages from a papule to a targetoid nodule and finally a regressing crust",
-   "The history of animal contact, particularly around lambing or after bottle-feeding lambs, is the key diagnostic clue",
-   "Regional lymphadenopathy and a low-grade constitutional upset may accompany the lesion; secondary bacterial infection can occur",
-   "It is usually a clinical diagnosis; confirmation is by electron microscopy, PCR, or biopsy when the presentation is atypical",
-   "The infection is self-limiting in immunocompetent people and resolves over several weeks without scarring, so treatment is largely supportive",
-   "Immunocompromised patients may develop large, persistent, or progressive giant orf lesions requiring intervention"
+  "id": "orf_infection",
+  "name": "Orf (ecthyma contagiosum)",
+  "aliases": [
+    "orf virus",
+    "ecthyma contagiosum",
+    "contagious pustular dermatitis",
+    "scabby mouth",
+    "parapoxvirus infection"
   ],
-  "pathophysiology": "Orf is caused by the orf virus, a parapoxvirus of the Poxviridae family that infects the epithelium of sheep and goats, producing crusted lesions around their mouths and udders. Humans are infected through breaks in the skin during handling of animals or contaminated material, and the virus replicates locally in keratinocytes. The lesion progresses through characteristic morphological stages as viral replication and the host inflammatory and immune responses evolve, producing a nodule with a distinctive targetoid appearance before regressing. The virus encodes immunomodulatory proteins, including a viral vascular endothelial growth factor homologue that drives the vascular, granulation-like histology. Immunity is incomplete, so reinfection is possible.",
-  "additionalDifferentials": [
-   "Milker's nodule (pseudocowpox, another parapoxvirus)",
-   "Cutaneous anthrax",
-   "Pyogenic granuloma",
-   "Atypical mycobacterial or sporotrichoid skin infection",
-   "Cutaneous tularaemia or other zoonotic ulcers",
-   "Squamous cell carcinoma or keratoacanthoma in persistent lesions"
-  ],
-  "additionalInvestigations": [
-   "Detailed occupational and animal-contact history",
-   "Polymerase chain reaction for parapoxvirus DNA from lesion material",
-   "Electron microscopy of lesion scrapings showing ovoid parapoxvirus particles",
-   "Skin biopsy for histology when malignancy or another diagnosis is suspected",
-   "Bacterial swab and culture if secondary infection is suspected",
-   "Assessment of immune status in atypical, giant, or persistent lesions"
-  ],
-  "redFlags": [
-   "Large, rapidly enlarging, or persistent giant lesions suggesting immunocompromise",
-   "Features of secondary bacterial infection or spreading cellulitis",
-   "A non-healing lesion raising concern for malignancy or an alternative diagnosis such as anthrax",
-   "Systemic upset out of proportion to a simple localised lesion"
-  ],
-  "prognosis": "In healthy people orf is self-limiting and resolves spontaneously over about six weeks with little or no scarring; immunocompromised patients may have prolonged or giant lesions that need specific therapy such as topical or destructive treatments.",
-  "pitfalls": [
-   "Mistaking orf for a bacterial abscess and performing unnecessary incision or prescribing antibiotics",
-   "Failing to elicit the animal-contact history and pursuing invasive investigations",
-   "Overlooking a persistent lesion that may actually be malignant or a different zoonosis",
-   "Not recognising that immunocompromised hosts can develop atypical giant orf needing active management"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "UpToDate: Orf virus infection (ecthyma contagiosum)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care as the infection is self-limiting: keep the lesion clean, covered with a dry dressing, and allow spontaneous resolution over several weeks",
-   "Treat secondary bacterial infection with antibiotics when present",
-   "For giant or persistent lesions in immunocompromised patients, use specific measures such as topical imiquimod, cidofovir, cryotherapy or surgical debulking",
-   "Avoid unnecessary incision or excision of the primary lesion",
-   "Reassure regarding uneventful healing without scarring in immunocompetent people",
-   "Advise occupational prevention with gloves and hand hygiene when handling sheep and goats, particularly around lambing",
-   "Biopsy atypical lesions to exclude malignancy or an alternative diagnosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "orf_infection-pathway",
-   "title": "Orf (ecthyma contagiosum): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A zoonotic parapoxvirus infection acquired by direct contact with infected sheep and goats or contaminated fomites, and an occupational hazard of farmers, shepherds, abattoir workers, and vets",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Large, rapidly enlarging, or persistent giant lesions suggesting immunocompromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed occupational and animal-contact history, Polymerase chain reaction for parapoxvirus DNA from lesion material, Electron microscopy of lesion scrapings showing ovoid parapoxvirus particles"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care as the infection is self-limiting: keep the lesion clean, covered with a dry dressing, and allow spontaneous resolution over several weeks"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking orf for a bacterial abscess and performing unnecessary incision or prescribing antibiotics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of orf (ecthyma contagiosum)."
-  }
- ],
- "tables": [
-  {
-   "id": "orf_infection-matrix",
-   "title": "Orf (ecthyma contagiosum): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A zoonotic parapoxvirus infection acquired by direct contact with infected sheep and goats or contaminated fomites, and an",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A zoonotic parapoxvirus infection acquired by direct contact with infected sheep and goats or contaminated fomites, and an occupational hazard of farmers, shepherds, abattoir workers, and vets",
+      "Presents as one or a few solitary lesions, usually on the fingers or hands, evolving through recognised stages from a papule to a targetoid nodule and finally a regressing crust",
+      "The history of animal contact, particularly around lambing or after bottle-feeding lambs, is the key diagnostic clue",
+      "Regional lymphadenopathy and a low-grade constitutional upset may accompany the lesion; secondary bacterial infection can occur",
+      "It is usually a clinical diagnosis; confirmation is by electron microscopy, PCR, or biopsy when the presentation is atypical",
+      "The infection is self-limiting in immunocompetent people and resolves over several weeks without scarring, so treatment is largely supportive",
+      "Immunocompromised patients may develop large, persistent, or progressive giant orf lesions requiring intervention"
     ],
-    [
-     "Key Investigations",
-     "Detailed occupational and animal-contact history, Polymerase chain reaction for parapoxvirus DNA from lesion material, Electron",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Orf is caused by the orf virus, a parapoxvirus of the Poxviridae family that infects the epithelium of sheep and goats, producing crusted lesions around their mouths and udders. Humans are infected through breaks in the skin during handling of animals or contaminated material, and the virus replicates locally in keratinocytes. The lesion progresses through characteristic morphological stages as viral replication and the host inflammatory and immune responses evolve, producing a nodule with a distinctive targetoid appearance before regressing. The virus encodes immunomodulatory proteins, including a viral vascular endothelial growth factor homologue that drives the vascular, granulation-like histology. Immunity is incomplete, so reinfection is possible.",
+    "additionalDifferentials": [
+      "Milker's nodule (pseudocowpox, another parapoxvirus)",
+      "Cutaneous anthrax",
+      "Pyogenic granuloma",
+      "Atypical mycobacterial or sporotrichoid skin infection",
+      "Cutaneous tularaemia or other zoonotic ulcers",
+      "Squamous cell carcinoma or keratoacanthoma in persistent lesions"
     ],
-    [
-     "Primary Differentials",
-     "Milker's nodule (pseudocowpox, another parapoxvirus), Cutaneous anthrax, Pyogenic granuloma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed occupational and animal-contact history",
+      "Polymerase chain reaction for parapoxvirus DNA from lesion material",
+      "Electron microscopy of lesion scrapings showing ovoid parapoxvirus particles",
+      "Skin biopsy for histology when malignancy or another diagnosis is suspected",
+      "Bacterial swab and culture if secondary infection is suspected",
+      "Assessment of immune status in atypical, giant, or persistent lesions"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care as the infection is self-limiting: keep the lesion clean, covered with a dry dressing, and allow",
-     "Core treatment modality"
+    "redFlags": [
+      "Large, rapidly enlarging, or persistent giant lesions suggesting immunocompromise",
+      "Features of secondary bacterial infection or spreading cellulitis",
+      "A non-healing lesion raising concern for malignancy or an alternative diagnosis such as anthrax",
+      "Systemic upset out of proportion to a simple localised lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking orf for a bacterial abscess and performing unnecessary incision or prescribing antibiotics",
-     "Prevent diagnostic or management error"
+    "prognosis": "In healthy people orf is self-limiting and resolves spontaneously over about six weeks with little or no scarring; immunocompromised patients may have prolonged or giant lesions that need specific therapy such as topical or destructive treatments.",
+    "pitfalls": [
+      "Mistaking orf for a bacterial abscess and performing unnecessary incision or prescribing antibiotics",
+      "Failing to elicit the animal-contact history and pursuing invasive investigations",
+      "Overlooking a persistent lesion that may actually be malignant or a different zoonosis",
+      "Not recognising that immunocompromised hosts can develop atypical giant orf needing active management"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "UpToDate: Orf virus infection (ecthyma contagiosum)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care as the infection is self-limiting: keep the lesion clean, covered with a dry dressing, and allow spontaneous resolution over several weeks",
+      "Treat secondary bacterial infection with antibiotics when present",
+      "For giant or persistent lesions in immunocompromised patients, use specific measures such as topical imiquimod, cidofovir, cryotherapy or surgical debulking",
+      "Avoid unnecessary incision or excision of the primary lesion",
+      "Reassure regarding uneventful healing without scarring in immunocompetent people",
+      "Advise occupational prevention with gloves and hand hygiene when handling sheep and goats, particularly around lambing",
+      "Biopsy atypical lesions to exclude malignancy or an alternative diagnosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for orf (ecthyma contagiosum)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "orf-infection-real-image",
-   "title": "Orf (ecthyma contagiosum): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "orf_infection-pathway",
+      "title": "Orf (ecthyma contagiosum): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A zoonotic parapoxvirus infection acquired by direct contact with infected sheep and goats or contaminated fomites, and an occupational hazard of farmers, shepherds, abattoir workers, and vets",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Large, rapidly enlarging, or persistent giant lesions suggesting immunocompromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed occupational and animal-contact history, Polymerase chain reaction for parapoxvirus DNA from lesion material, Electron microscopy of lesion scrapings showing ovoid parapoxvirus particles"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care as the infection is self-limiting: keep the lesion clean, covered with a dry dressing, and allow spontaneous resolution over several weeks"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking orf for a bacterial abscess and performing unnecessary incision or prescribing antibiotics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of orf (ecthyma contagiosum)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "orf_infection-matrix",
+      "title": "Orf (ecthyma contagiosum): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A zoonotic parapoxvirus infection acquired by direct contact with infected sheep and goats or contaminated fomites, and an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed occupational and animal-contact history, Polymerase chain reaction for parapoxvirus DNA from lesion material, Electron",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Milker's nodule (pseudocowpox, another parapoxvirus), Cutaneous anthrax, Pyogenic granuloma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care as the infection is self-limiting: keep the lesion clean, covered with a dry dressing, and allow",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking orf for a bacterial abscess and performing unnecessary incision or prescribing antibiotics",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for orf (ecthyma contagiosum)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orf_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Animal-contact history",
+          "cells": [
+            {
+              "text": "Contact with sheep or goats, especially around lambing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR for parapoxvirus DNA",
+          "cells": [
+            {
+              "text": "Confirms parapoxvirus from lesion material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electron microscopy of lesion scrapings",
+          "cells": [
+            {
+              "text": "Ovoid parapoxvirus particles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Excludes malignancy or another diagnosis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial swab and culture",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orf_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Milker's nodule (pseudocowpox)",
+          "cells": [
+            {
+              "text": "Another parapoxvirus, separated by animal history and specific testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous anthrax",
+          "cells": [
+            {
+              "text": "A non-healing lesion raises concern for this alternative diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Squamous cell carcinoma or keratoacanthoma",
+          "cells": [
+            {
+              "text": "A persistent lesion; biopsy excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orf_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Clean, dry dressing; spontaneous resolution over several weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for secondary infection",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Only when bacterial infection is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid incision or excision",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Of the primary lesion, which is unnecessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific measures for giant or persistent lesions",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Topical imiquimod, cidofovir, cryotherapy or surgical debulking in immunocompromised patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Uneventful healing without scarring in immunocompetent people"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational prevention",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Gloves and hand hygiene when handling sheep and goats, especially at lambing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orf_infection-dx-mgmt",
+      "title": "Diagnosis and management of Orf (ecthyma contagiosum)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hand lesion evolving from papule to nodule after contact with sheep or goats",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (giant or persistent lesion, spreading cellulitis or systemic upset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immune status review and specific treatment for giant or persistent lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Animal-contact history; PCR or electron microscopy; biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is parapoxvirus confirmed, with malignancy and anthrax excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anthrax, milker's nodule, pyogenic granuloma or malignancy; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care: clean, dry dressing, with spontaneous resolution over weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics only for secondary bacterial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid unnecessary incision or excision of the primary lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Imiquimod, cidofovir, cryotherapy or debulking for giant lesions in immunosuppressed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Gloves and hand hygiene when handling sheep and goats, especially at lambing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limiting in healthy people, with little scarring; immunosuppressed may need care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

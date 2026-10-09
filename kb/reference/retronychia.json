@@ -1,171 +1,449 @@
 {
- "id": "retronychia",
- "name": "Retronychia",
- "aliases": [
-  "proximal nail ingrowing",
-  "retronychia"
- ],
- "class": "non_infective",
- "system": "Dermatology / Nail",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Retronychia is proximal ingrowing of the nail, in which the plate is driven backwards into the proximal nail fold rather than into the lateral folds",
-   "It typically affects the great toenail and presents with proximal pain, swelling, redness, and chronic inflammation of the proximal fold",
-   "Recurrent granulation tissue and discharge from beneath the proximal fold are characteristic, and it is often misdiagnosed as simple chronic paronychia",
-   "A key sign is the arrest of normal distal nail growth, with newer nail plates stacking up behind the leading plate",
-   "It usually follows trauma or repetitive microtrauma that disrupts the normal attachment and forward growth of the plate",
-   "Onychoscopy and imaging such as ultrasound can support the diagnosis by demonstrating the embedded proximal plate and stacked nails",
-   "The definitive treatment is avulsion of the affected nail plate, which relieves the inflammation and allows a new, correctly aligned nail to grow"
+  "id": "retronychia",
+  "name": "Retronychia",
+  "aliases": [
+    "proximal nail ingrowing",
+    "retronychia"
   ],
-  "pathophysiology": "Retronychia arises when the longitudinal growth of the nail plate is interrupted, usually after trauma, so that the plate loses its normal forward advance and is instead pushed proximally into the tissue of the proximal nail fold. Continued matrix activity produces new plates behind the disconnected leading nail, and these become stacked one beneath another, embedding into the proximal fold. The buried plate acts as a foreign body, provoking persistent inflammation, granulation tissue, and discharge, which explains why the condition mimics and is frequently confused with chronic paronychia.",
-  "additionalDifferentials": [
-   "Chronic paronychia",
-   "Onychocryptosis (lateral ingrowing toenail)",
-   "Pyogenic granuloma of the nail fold",
-   "Acute bacterial paronychia or felon",
-   "Subungual or periungual tumour",
-   "Nail changes of psoriasis affecting the proximal fold"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment for proximal fold inflammation with arrested distal nail growth",
-   "Onychoscopy to detect stacked nail plates and proximal embedding",
-   "Ultrasound to demonstrate multiple overlapping plates when the diagnosis is unclear",
-   "Swab of any discharge if secondary bacterial infection is suspected",
-   "History of preceding trauma or repetitive microtrauma",
-   "Review for coexisting nail disease or predisposing footwear factors"
-  ],
-  "redFlags": [
-   "Persistent proximal fold inflammation unresponsive to treatment for presumed paronychia",
-   "Signs of spreading soft-tissue infection requiring prompt intervention",
-   "Atypical granulation or a mass suggesting an underlying tumour",
-   "Recurrent disease after treatment indicating incomplete removal or ongoing trauma"
-  ],
-  "prognosis": "Retronychia responds well to nail plate avulsion, after which inflammation settles and a normally growing nail usually returns, although recovery takes months and recurrence can occur if predisposing trauma continues.",
-  "pitfalls": [
-   "Repeatedly treating retronychia as chronic paronychia with antimicrobials or topical agents alone",
-   "Overlooking the diagnostic clue of arrested distal nail growth",
-   "Delaying avulsion, which prolongs the inflammation unnecessarily",
-   "Failing to address ongoing trauma or footwear factors, leading to recurrence"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Baran and Dawber's Diseases of the Nails and their Management"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform nail plate avulsion to remove the embedded, backwardly displaced plate, the definitive treatment",
-   "Apply topical or intralesional corticosteroids to settle proximal fold inflammation and granulation tissue",
-   "Trial conservative measures such as taping and potent topical corticosteroid in early or mild disease before resorting to avulsion",
-   "Swab and treat any secondary bacterial infection with appropriate antibiotics",
-   "Advise on protective footwear and avoidance of repetitive microtrauma to prevent recurrence",
-   "Counsel that regrowth of a normal nail takes months and arrange review to detect recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "retronychia-pathway",
-   "title": "Retronychia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Retronychia is proximal ingrowing of the nail, in which the plate is driven backwards into the proximal nail fold rather than into the lateral folds",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent proximal fold inflammation unresponsive to treatment for presumed paronychia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment for proximal fold inflammation with arrested distal nail growth, Onychoscopy to detect stacked nail plates and proximal embedding, Ultrasound to demonstrate multiple overlapping plates when the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform nail plate avulsion to remove the embedded, backwardly displaced plate, the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeatedly treating retronychia as chronic paronychia with antimicrobials or topical agents alone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of retronychia."
-  }
- ],
- "tables": [
-  {
-   "id": "retronychia-matrix",
-   "title": "Retronychia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Retronychia is proximal ingrowing of the nail, in which the plate is driven backwards into the proximal nail fold rather than",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Nail",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Retronychia is proximal ingrowing of the nail, in which the plate is driven backwards into the proximal nail fold rather than into the lateral folds",
+      "It typically affects the great toenail and presents with proximal pain, swelling, redness, and chronic inflammation of the proximal fold",
+      "Recurrent granulation tissue and discharge from beneath the proximal fold are characteristic, and it is often misdiagnosed as simple chronic paronychia",
+      "A key sign is the arrest of normal distal nail growth, with newer nail plates stacking up behind the leading plate",
+      "It usually follows trauma or repetitive microtrauma that disrupts the normal attachment and forward growth of the plate",
+      "Onychoscopy and imaging such as ultrasound can support the diagnosis by demonstrating the embedded proximal plate and stacked nails",
+      "The definitive treatment is avulsion of the affected nail plate, which relieves the inflammation and allows a new, correctly aligned nail to grow"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment for proximal fold inflammation with arrested distal nail growth, Onychoscopy to detect stacked nail plates",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Retronychia arises when the longitudinal growth of the nail plate is interrupted, usually after trauma, so that the plate loses its normal forward advance and is instead pushed proximally into the tissue of the proximal nail fold. Continued matrix activity produces new plates behind the disconnected leading nail, and these become stacked one beneath another, embedding into the proximal fold. The buried plate acts as a foreign body, provoking persistent inflammation, granulation tissue, and discharge, which explains why the condition mimics and is frequently confused with chronic paronychia.",
+    "additionalDifferentials": [
+      "Chronic paronychia",
+      "Onychocryptosis (lateral ingrowing toenail)",
+      "Pyogenic granuloma of the nail fold",
+      "Acute bacterial paronychia or felon",
+      "Subungual or periungual tumour",
+      "Nail changes of psoriasis affecting the proximal fold"
     ],
-    [
-     "Primary Differentials",
-     "Chronic paronychia, Onychocryptosis (lateral ingrowing toenail), Pyogenic granuloma of the nail fold",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment for proximal fold inflammation with arrested distal nail growth",
+      "Onychoscopy to detect stacked nail plates and proximal embedding",
+      "Ultrasound to demonstrate multiple overlapping plates when the diagnosis is unclear",
+      "Swab of any discharge if secondary bacterial infection is suspected",
+      "History of preceding trauma or repetitive microtrauma",
+      "Review for coexisting nail disease or predisposing footwear factors"
     ],
-    [
-     "Management Strategy",
-     "Perform nail plate avulsion to remove the embedded, backwardly displaced plate, the definitive treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent proximal fold inflammation unresponsive to treatment for presumed paronychia",
+      "Signs of spreading soft-tissue infection requiring prompt intervention",
+      "Atypical granulation or a mass suggesting an underlying tumour",
+      "Recurrent disease after treatment indicating incomplete removal or ongoing trauma"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeatedly treating retronychia as chronic paronychia with antimicrobials or topical agents alone",
-     "Prevent diagnostic or management error"
+    "prognosis": "Retronychia responds well to nail plate avulsion, after which inflammation settles and a normally growing nail usually returns, although recovery takes months and recurrence can occur if predisposing trauma continues.",
+    "pitfalls": [
+      "Repeatedly treating retronychia as chronic paronychia with antimicrobials or topical agents alone",
+      "Overlooking the diagnostic clue of arrested distal nail growth",
+      "Delaying avulsion, which prolongs the inflammation unnecessarily",
+      "Failing to address ongoing trauma or footwear factors, leading to recurrence"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Baran and Dawber's Diseases of the Nails and their Management"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform nail plate avulsion to remove the embedded, backwardly displaced plate, the definitive treatment",
+      "Apply topical or intralesional corticosteroids to settle proximal fold inflammation and granulation tissue",
+      "Trial conservative measures such as taping and potent topical corticosteroid in early or mild disease before resorting to avulsion",
+      "Swab and treat any secondary bacterial infection with appropriate antibiotics",
+      "Advise on protective footwear and avoidance of repetitive microtrauma to prevent recurrence",
+      "Counsel that regrowth of a normal nail takes months and arrange review to detect recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for retronychia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "retronychia-real-image",
-   "title": "Retronychia: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "retronychia-pathway",
+      "title": "Retronychia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Retronychia is proximal ingrowing of the nail, in which the plate is driven backwards into the proximal nail fold rather than into the lateral folds",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent proximal fold inflammation unresponsive to treatment for presumed paronychia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment for proximal fold inflammation with arrested distal nail growth, Onychoscopy to detect stacked nail plates and proximal embedding, Ultrasound to demonstrate multiple overlapping plates when the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform nail plate avulsion to remove the embedded, backwardly displaced plate, the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeatedly treating retronychia as chronic paronychia with antimicrobials or topical agents alone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of retronychia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "retronychia-matrix",
+      "title": "Retronychia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Retronychia is proximal ingrowing of the nail, in which the plate is driven backwards into the proximal nail fold rather than",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment for proximal fold inflammation with arrested distal nail growth, Onychoscopy to detect stacked nail plates",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic paronychia, Onychocryptosis (lateral ingrowing toenail), Pyogenic granuloma of the nail fold",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform nail plate avulsion to remove the embedded, backwardly displaced plate, the definitive treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeatedly treating retronychia as chronic paronychia with antimicrobials or topical agents alone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for retronychia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retronychia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of the proximal fold",
+          "cells": [
+            {
+              "text": "Proximal fold inflammation with arrested distal nail growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Onychoscopy",
+          "cells": [
+            {
+              "text": "Stacked nail plates and proximal embedding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Multiple overlapping plates when the diagnosis is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab of any discharge",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma history",
+          "cells": [
+            {
+              "text": "Preceding trauma or repetitive microtrauma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retronychia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic paronychia",
+          "cells": [
+            {
+              "text": "Arrested distal nail growth is the clue; treating it with antimicrobials alone is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Onychocryptosis (lateral ingrowing toenail)",
+          "cells": [
+            {
+              "text": "Plate is driven into the lateral folds, not the proximal fold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual or periungual tumour",
+          "cells": [
+            {
+              "text": "Atypical granulation or a mass is a red flag"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retronychia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nail plate avulsion",
+          "cells": [
+            {
+              "text": "Definitive treatment; removes the embedded, backwardly displaced plate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Topical or intralesional, to settle proximal fold inflammation and granulation tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative measures",
+          "cells": [
+            {
+              "text": "Taping and potent topical corticosteroid in early or mild disease, before avulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary infection",
+          "cells": [
+            {
+              "text": "Swab and treat any bacterial infection with antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Footwear and trauma",
+          "cells": [
+            {
+              "text": "Protective footwear and avoidance of repetitive microtrauma to prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling and review",
+          "cells": [
+            {
+              "text": "Regrowth of a normal nail takes months; review to detect recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retronychia-dx-mgmt",
+      "title": "Diagnosis and management of Retronychia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proximal nail fold pain, swelling and redness, usually of the great toenail",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (unresponsive fold, spreading infection, atypical granulation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer: spreading soft-tissue infection or suspected tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment, onychoscopy, swab if discharge, ultrasound if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a proximal embedded plate with arrested distal nail growth present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as chronic paronychia or onychocryptosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trial taping and potent topical corticosteroid in early or mild disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nail plate avulsion, the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat secondary infection; corticosteroids for granulation tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protective footwear and counselling on regrowth and recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Responds well to avulsion; normal nail regrowth takes months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

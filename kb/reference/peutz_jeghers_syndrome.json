@@ -1,174 +1,481 @@
 {
- "id": "peutz_jeghers_syndrome",
- "name": "Peutz-Jeghers syndrome",
- "aliases": [
-  "PJS",
-  "STK11",
-  "LKB1",
-  "periorificial lentiginosis with gastrointestinal polyposis"
- ],
- "class": "non_infective",
- "system": "Genetics / Oncology",
- "specialty": "Clinical Genetics / Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant syndrome caused by germline loss-of-function variants in the STK11 (LKB1) serine-threonine kinase tumour-suppressor gene",
-   "Characterised by multiple hamartomatous polyps throughout the gastrointestinal tract, predominantly in the small bowel",
-   "Mucocutaneous pigmented macules around the lips, oral mucosa, fingers and perianal region are a classic early sign that may fade with age",
-   "Small-bowel polyps commonly cause recurrent obstruction and intussusception, often in childhood or early adulthood",
-   "There is a substantially increased lifetime risk of gastrointestinal cancers (colorectal, small bowel, gastric, pancreatic) and extraintestinal cancers including breast",
-   "Distinctive tumours include ovarian sex cord tumours with annular tubules and testicular large-cell calcifying Sertoli cell tumours",
-   "Surveillance combines gastrointestinal endoscopy with small-bowel imaging (video capsule or MR enterography) and organ-specific cancer screening from set ages"
+  "id": "peutz_jeghers_syndrome",
+  "name": "Peutz-Jeghers syndrome",
+  "aliases": [
+    "PJS",
+    "STK11",
+    "LKB1",
+    "periorificial lentiginosis with gastrointestinal polyposis"
   ],
-  "pathophysiology": "Peutz-Jeghers syndrome is caused by germline inactivating variants in STK11, which encodes a serine-threonine kinase (also called LKB1) that regulates cellular energy metabolism, polarity and growth largely through the AMP-activated protein kinase and mTOR pathways. Loss of STK11 tumour-suppressor function, typically with a somatic second hit, disrupts these regulatory signals and drives the development of hamartomatous polyps and an elevated risk of multiple epithelial malignancies. The mucocutaneous pigmentation reflects abnormal melanocyte behaviour associated with the underlying genetic defect.",
-  "additionalDifferentials": [
-   "Juvenile polyposis syndrome (SMAD4/BMPR1A)",
-   "Familial adenomatous polyposis",
-   "PTEN hamartoma tumour syndrome (Cowden syndrome)",
-   "Laugier-Hunziker syndrome causing benign mucosal pigmentation without polyps",
-   "Carney complex with lentigines",
-   "Sporadic hamartomatous or hyperplastic polyps"
-  ],
-  "additionalInvestigations": [
-   "Germline molecular genetic testing of STK11 including deletion/duplication analysis",
-   "Upper gastrointestinal endoscopy and colonoscopy for polyp detection and removal",
-   "Small-bowel evaluation with video capsule endoscopy or MR enterography",
-   "Cross-sectional imaging or MRI for pancreatic surveillance",
-   "Breast imaging surveillance in women per guidelines",
-   "Pelvic and testicular ultrasound for characteristic gonadal tumours"
-  ],
-  "redFlags": [
-   "Acute abdominal pain with vomiting suggesting intussusception or small-bowel obstruction",
-   "Gastrointestinal bleeding or unexplained iron-deficiency anaemia from bleeding polyps",
-   "New breast, pancreatic or gastrointestinal symptoms in an affected adult raising concern for malignancy",
-   "Precocious puberty or gynaecomastia suggesting a hormonally active gonadal tumour"
-  ],
-  "prognosis": "The syndrome carries a high cumulative lifetime risk of malignancy across several organs, so long-term prognosis depends heavily on adherence to structured surveillance and early intervention. Polyp-related complications such as intussusception contribute significant morbidity, particularly in younger patients.",
-  "pitfalls": [
-   "Attributing periorificial pigmentation to benign freckling and missing the diagnosis, especially as macules fade in adults",
-   "Underestimating small-bowel polyp burden by relying on colonoscopy and gastroscopy alone",
-   "Failing to begin multi-organ cancer surveillance, including breast and pancreatic screening, at recommended ages",
-   "Not testing and counselling at-risk relatives"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "GeneReviews: Peutz-Jeghers Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Endoscopic polypectomy of significant gastrointestinal hamartomatous polyps to relieve symptoms and remove malignant potential",
-   "Structured lifelong cancer surveillance with upper gastrointestinal endoscopy, colonoscopy and small-bowel imaging by video capsule endoscopy or MR enterography at regular intervals",
-   "Elective removal of large small-bowel polyps to pre-empt intussusception and avoid repeated emergency resections and short-bowel syndrome",
-   "Pancreatic surveillance with cross-sectional imaging, breast screening by MRI and mammography in women, and gonadal ultrasound for sex-cord and Sertoli cell tumours",
-   "Prompt surgical management of acute intussusception or obstruction, with intra-operative enteroscopy and clearance of accessible polyps",
-   "Clinical genetics referral with germline STK11 testing and predictive testing and cascade screening of at-risk relatives",
-   "Coordinated multidisciplinary care across gastroenterology, surgery, clinical genetics and oncology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "peutz_jeghers_syndrome-pathway",
-   "title": "Peutz-Jeghers syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant syndrome caused by germline loss-of-function variants in the STK11 (LKB1) serine-threonine kinase tumour-suppressor gene",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute abdominal pain with vomiting suggesting intussusception or small-bowel obstruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Germline molecular genetic testing of STK11 including deletion/duplication analysis, Upper gastrointestinal endoscopy and colonoscopy for polyp detection and removal, Small-bowel evaluation with video capsule endoscopy or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Endoscopic polypectomy of significant gastrointestinal hamartomatous polyps to relieve symptoms and remove malignant potential"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing periorificial pigmentation to benign freckling and missing the diagnosis, especially as macules fade in adults"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of peutz-jeghers syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "peutz_jeghers_syndrome-matrix",
-   "title": "Peutz-Jeghers syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant syndrome caused by germline loss-of-function variants in the STK11 (LKB1) serine-threonine kinase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Oncology",
+  "specialty": "Clinical Genetics / Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant syndrome caused by germline loss-of-function variants in the STK11 (LKB1) serine-threonine kinase tumour-suppressor gene",
+      "Characterised by multiple hamartomatous polyps throughout the gastrointestinal tract, predominantly in the small bowel",
+      "Mucocutaneous pigmented macules around the lips, oral mucosa, fingers and perianal region are a classic early sign that may fade with age",
+      "Small-bowel polyps commonly cause recurrent obstruction and intussusception, often in childhood or early adulthood",
+      "There is a substantially increased lifetime risk of gastrointestinal cancers (colorectal, small bowel, gastric, pancreatic) and extraintestinal cancers including breast",
+      "Distinctive tumours include ovarian sex cord tumours with annular tubules and testicular large-cell calcifying Sertoli cell tumours",
+      "Surveillance combines gastrointestinal endoscopy with small-bowel imaging (video capsule or MR enterography) and organ-specific cancer screening from set ages"
     ],
-    [
-     "Key Investigations",
-     "Germline molecular genetic testing of STK11 including deletion/duplication analysis, Upper gastrointestinal endoscopy and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Peutz-Jeghers syndrome is caused by germline inactivating variants in STK11, which encodes a serine-threonine kinase (also called LKB1) that regulates cellular energy metabolism, polarity and growth largely through the AMP-activated protein kinase and mTOR pathways. Loss of STK11 tumour-suppressor function, typically with a somatic second hit, disrupts these regulatory signals and drives the development of hamartomatous polyps and an elevated risk of multiple epithelial malignancies. The mucocutaneous pigmentation reflects abnormal melanocyte behaviour associated with the underlying genetic defect.",
+    "additionalDifferentials": [
+      "Juvenile polyposis syndrome (SMAD4/BMPR1A)",
+      "Familial adenomatous polyposis",
+      "PTEN hamartoma tumour syndrome (Cowden syndrome)",
+      "Laugier-Hunziker syndrome causing benign mucosal pigmentation without polyps",
+      "Carney complex with lentigines",
+      "Sporadic hamartomatous or hyperplastic polyps"
     ],
-    [
-     "Primary Differentials",
-     "Juvenile polyposis syndrome (SMAD4/BMPR1A), Familial adenomatous polyposis, PTEN hamartoma tumour syndrome (Cowden syndrome)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Germline molecular genetic testing of STK11 including deletion/duplication analysis",
+      "Upper gastrointestinal endoscopy and colonoscopy for polyp detection and removal",
+      "Small-bowel evaluation with video capsule endoscopy or MR enterography",
+      "Cross-sectional imaging or MRI for pancreatic surveillance",
+      "Breast imaging surveillance in women per guidelines",
+      "Pelvic and testicular ultrasound for characteristic gonadal tumours"
     ],
-    [
-     "Management Strategy",
-     "Endoscopic polypectomy of significant gastrointestinal hamartomatous polyps to relieve symptoms and remove malignant potential",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute abdominal pain with vomiting suggesting intussusception or small-bowel obstruction",
+      "Gastrointestinal bleeding or unexplained iron-deficiency anaemia from bleeding polyps",
+      "New breast, pancreatic or gastrointestinal symptoms in an affected adult raising concern for malignancy",
+      "Precocious puberty or gynaecomastia suggesting a hormonally active gonadal tumour"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing periorificial pigmentation to benign freckling and missing the diagnosis, especially as macules fade in adults",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome carries a high cumulative lifetime risk of malignancy across several organs, so long-term prognosis depends heavily on adherence to structured surveillance and early intervention. Polyp-related complications such as intussusception contribute significant morbidity, particularly in younger patients.",
+    "pitfalls": [
+      "Attributing periorificial pigmentation to benign freckling and missing the diagnosis, especially as macules fade in adults",
+      "Underestimating small-bowel polyp burden by relying on colonoscopy and gastroscopy alone",
+      "Failing to begin multi-organ cancer surveillance, including breast and pancreatic screening, at recommended ages",
+      "Not testing and counselling at-risk relatives"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "GeneReviews: Peutz-Jeghers Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Endoscopic polypectomy of significant gastrointestinal hamartomatous polyps to relieve symptoms and remove malignant potential",
+      "Structured lifelong cancer surveillance with upper gastrointestinal endoscopy, colonoscopy and small-bowel imaging by video capsule endoscopy or MR enterography at regular intervals",
+      "Elective removal of large small-bowel polyps to pre-empt intussusception and avoid repeated emergency resections and short-bowel syndrome",
+      "Pancreatic surveillance with cross-sectional imaging, breast screening by MRI and mammography in women, and gonadal ultrasound for sex-cord and Sertoli cell tumours",
+      "Prompt surgical management of acute intussusception or obstruction, with intra-operative enteroscopy and clearance of accessible polyps",
+      "Clinical genetics referral with germline STK11 testing and predictive testing and cascade screening of at-risk relatives",
+      "Coordinated multidisciplinary care across gastroenterology, surgery, clinical genetics and oncology"
     ]
-   ],
-   "caption": "Overview comparison matrix for peutz-jeghers syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "peutz-jeghers-syndrome-real-image",
-   "title": "Peutz-Jeghers syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "peutz_jeghers_syndrome-pathway",
+      "title": "Peutz-Jeghers syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant syndrome caused by germline loss-of-function variants in the STK11 (LKB1) serine-threonine kinase tumour-suppressor gene",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute abdominal pain with vomiting suggesting intussusception or small-bowel obstruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Germline molecular genetic testing of STK11 including deletion/duplication analysis, Upper gastrointestinal endoscopy and colonoscopy for polyp detection and removal, Small-bowel evaluation with video capsule endoscopy or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Endoscopic polypectomy of significant gastrointestinal hamartomatous polyps to relieve symptoms and remove malignant potential"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing periorificial pigmentation to benign freckling and missing the diagnosis, especially as macules fade in adults"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of peutz-jeghers syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "peutz_jeghers_syndrome-matrix",
+      "title": "Peutz-Jeghers syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant syndrome caused by germline loss-of-function variants in the STK11 (LKB1) serine-threonine kinase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Germline molecular genetic testing of STK11 including deletion/duplication analysis, Upper gastrointestinal endoscopy and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Juvenile polyposis syndrome (SMAD4/BMPR1A), Familial adenomatous polyposis, PTEN hamartoma tumour syndrome (Cowden syndrome)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Endoscopic polypectomy of significant gastrointestinal hamartomatous polyps to relieve symptoms and remove malignant potential",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing periorificial pigmentation to benign freckling and missing the diagnosis, especially as macules fade in adults",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for peutz-jeghers syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peutz_jeghers_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline molecular genetic testing of STK11",
+          "cells": [
+            {
+              "text": "Confirms diagnosis, including deletion and duplication analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy and colonoscopy",
+          "cells": [
+            {
+              "text": "Polyp detection and removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video capsule endoscopy or MR enterography",
+          "cells": [
+            {
+              "text": "Small-bowel polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging or MRI",
+          "cells": [
+            {
+              "text": "Pancreatic surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast imaging surveillance in women",
+          "cells": [
+            {
+              "text": "Breast surveillance per guidelines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic and testicular ultrasound",
+          "cells": [
+            {
+              "text": "Characteristic gonadal tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peutz_jeghers_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Juvenile polyposis syndrome",
+          "cells": [
+            {
+              "text": "SMAD4 or BMPR1A involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex",
+          "cells": [
+            {
+              "text": "Lentigines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laugier-Hunziker syndrome",
+          "cells": [
+            {
+              "text": "Benign mucosal pigmentation without polyps"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peutz_jeghers_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Polypectomy",
+          "cells": [
+            {
+              "text": "Endoscopic removal of significant hamartomatous polyps to relieve symptoms and remove malignant potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong cancer surveillance",
+          "cells": [
+            {
+              "text": "Upper GI endoscopy, colonoscopy and small-bowel imaging by capsule endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective small-bowel polyp removal",
+          "cells": [
+            {
+              "text": "Large polyps removed to pre-empt intussusception and repeated emergency resections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ surveillance",
+          "cells": [
+            {
+              "text": "Pancreatic imaging, breast MRI and mammography in women, and gonadal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute complications",
+          "cells": [
+            {
+              "text": "Surgery for intussusception or obstruction, with intra-operative enteroscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Germline STK11 testing, predictive testing and cascade screening of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Gastroenterology, surgery, clinical genetics and oncology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peutz_jeghers_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Peutz-Jeghers syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Periorificial pigmentation with gastrointestinal hamartomatous polyps suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (intussusception, obstruction, GI bleeding, malignancy, precocious puberty)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgery for acute intussusception or small-bowel obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Germline STK11 testing; endoscopy and colonoscopy; small-bowel capsule or MR enterography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does germline STK11 testing confirm Peutz-Jeghers syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider juvenile polyposis, familial adenomatous polyposis or PTEN hamartoma syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic polypectomy of significant hamartomatous polyps",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong cancer surveillance with endoscopy, colonoscopy and small-bowel imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Elective removal of large small-bowel polyps to pre-empt intussusception",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pancreatic, breast and gonadal surveillance per guidelines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Germline STK11 counselling with cascade screening of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "High cumulative cancer risk across organs; prognosis depends on surveillance adherence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

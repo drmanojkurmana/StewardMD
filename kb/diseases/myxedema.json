@@ -200,27 +200,564 @@
       "caption": "Diagnostic and clinical overview matrix for myxoedema coma."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "myxedema-real-image",
-      "title": "Myxoedema coma: Diagnostic Endocrine Cross-Sectional Imaging",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hypothyroidism (myxedema coma)",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/hypothyroidism"
+    },
+    {
+      "id": "c3",
+      "label": "WikEM, Myxedema coma",
+      "kind": "web",
+      "url": "https://wikem.org/wiki/Myxedema_coma"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myxedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising myxoedema coma",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Gland Morphology",
-          "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+          "parameter": "Core picture",
+          "cells": [
+            {
+              "text": "Altered mental status, hypothermia and a precipitating event"
+            },
+            {
+              "text": "{{hy:Clinical diagnosis; treat before results return}}"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Focal Lesions",
-          "description": "Nodularity, adenoma attenuation, and washout dynamics."
+          "parameter": "Core temperature",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Hypothermia 24 to 32.2 deg C; can fall to about 23 deg C",
+              "range": [
+                24,
+                32.2
+              ]
+            },
+            {
+              "text": "Use a low-reading thermometer"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Surrounding Structures",
-          "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+          "parameter": "TSH",
+          "cells": [
+            {
+              "text": "Markedly raised in primary hypothyroidism"
+            },
+            {
+              "text": "Low or normal TSH with low free T4 suggests central disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Free T4",
+          "cells": [
+            {
+              "text": "Very low or undetectable"
+            },
+            {
+              "text": "Severity of T4 or TSH change does not predict outcome"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sodium",
+          "cells": [
+            {
+              "text": "Hyponatraemia in about 50%"
+            },
+            {
+              "text": "Dilutional; restrict free water"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Glucose",
+          "cells": [
+            {
+              "text": "Hypoglycaemia"
+            },
+            {
+              "text": "Check early and correct"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Arterial or venous gas",
+          "cells": [
+            {
+              "text": "Respiratory acidosis with hypercapnia and hypoxaemia"
+            },
+            {
+              "text": "Hypoventilation; consider ventilation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Random cortisol",
+          "cells": [
+            {
+              "text": "Draw before steroids"
+            },
+            {
+              "text": "Coexisting adrenal insufficiency cannot be excluded at first"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Bradycardia, low voltage, long QT, possible Osborn waves"
+            },
+            {
+              "text": "Low voltage may reflect pericardial effusion"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reflexes",
+          "cells": [
+            {
+              "text": "Delayed relaxation phase of tendon reflexes"
+            },
+            {
+              "text": "Bedside clue to hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mortality",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20 to 40% despite intensive care",
+              "range": [
+                20,
+                40
+              ]
+            },
+            {
+              "text": "WikEM quotes 30 to 60%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Mortality differs by source: Harrison 22e 20 to 40%, WikEM 30 to 60%. Lowest temperature: Harrison 23 deg C, Merck range 24 to 32.2 deg C."
+    },
+    {
+      "id": "myxedema-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic or accompany myxoedema coma",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sepsis",
+          "cells": [
+            {
+              "text": "Commonest precipitant and mimic; hypothermia masks fever and leukocytosis"
+            },
+            {
+              "text": "Blood and urine cultures, chest x-ray, lactate"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Adrenal crisis",
+          "cells": [
+            {
+              "text": "Hypotension, hyponatraemia; may coexist"
+            },
+            {
+              "text": "Cortisol before steroids"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Environmental hypothermia",
+          "cells": [
+            {
+              "text": "Cold exposure without hypothyroid features; IV thyroxine is hazardous if euthyroid"
+            },
+            {
+              "text": "TSH and free T4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick euthyroid syndrome",
+          "cells": [
+            {
+              "text": "Abnormal thyroid tests in any critical illness"
+            },
+            {
+              "text": "{{hy:TSH is not markedly raised}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sedative or opioid overdose",
+          "cells": [
+            {
+              "text": "Drug history; also a precipitant"
+            },
+            {
+              "text": "Toxicology history and response to antidote"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stroke or intracranial lesion",
+          "cells": [
+            {
+              "text": "Focal deficit"
+            },
+            {
+              "text": "CT brain"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Low glucose causing coma"
+            },
+            {
+              "text": "Capillary glucose"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hashimoto encephalopathy",
+          "cells": [
+            {
+              "text": "Steroid-responsive, myoclonus, EEG slowing, TPO antibodies"
+            },
+            {
+              "text": "TPO antibodies and EEG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myxedema-treatment",
+      "kind": "treatment",
+      "title": "Treating myxoedema coma",
+      "rowHeader": "Option",
+      "columns": [
+        "Regimen",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ICU admission and airway",
+          "cells": [
+            {
+              "text": "Intubate for respiratory failure or deep coma"
+            },
+            {
+              "text": "Monitor PaO2; ventilate if ventilation fails"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydrocortisone",
+          "cells": [
+            {
+              "text": "100 mg IV every 8 h, before or with thyroid hormone"
+            },
+            {
+              "text": "Stop once adrenal insufficiency is excluded"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV levothyroxine load",
+          "cells": [
+            {
+              "text": "{{hy:200 to 400 mcg IV (WikEM) or 300 to 500 mcg IV (Merck)}}"
+            },
+            {
+              "text": "Lower doses for elderly or cardiac patients"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV levothyroxine maintenance",
+          "cells": [
+            {
+              "text": "50 to 100 mcg IV daily (WikEM); 75 to 100 mcg daily (Merck)"
+            },
+            {
+              "text": "Switch to oral when stable"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV liothyronine (T3)",
+          "cells": [
+            {
+              "text": "Load 5 to 20 mcg then 2.5 to 10 mcg every 8 h (WikEM); Merck: load 25 to 50 mcg, then 10 to 20 mcg twice daily"
+            },
+            {
+              "text": "Faster onset; arrhythmia risk in elderly and cardiac patients"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rewarming",
+          "cells": [
+            {
+              "text": "Passive rewarming"
+            },
+            {
+              "text": "Avoid active external or rapid rewarming: hypotension and arrhythmia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluids and sodium",
+          "cells": [
+            {
+              "text": "Cautious normal saline for hypotension; restrict water for severe hyponatraemia"
+            },
+            {
+              "text": "Avoid hypotonic fluids"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Treat precipitant",
+          "cells": [
+            {
+              "text": "Antibiotics for infection; dextrose for hypoglycaemia"
+            },
+            {
+              "text": "Avoid sedatives and opioids; drugs clear slowly"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Thyroid hormone doses conflict: Merck gives T4 load 300 to 500 mcg and T3 load 25 to 50 mcg; WikEM gives T4 200 to 400 mcg (or 4 mcg/kg lean weight) and T3 5 to 20 mcg. Both kept for prescriber choice."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myxedema-dx-mgmt",
+      "title": "Diagnosis and management of myxoedema coma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Reduced consciousness with hypothermia in an older or hypothyroid patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Airway, gas, glucose, sodium, ECG, cultures",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Send TSH, free T4 and cortisol before treatment",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Respiratory failure or deep coma?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Intubate and ventilate in ICU",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Hydrocortisone 100 mg IV every 8 h",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV levothyroxine load, with or without IV T3",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Passive rewarming, cautious saline, correct glucose",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Find and treat precipitant such as infection",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Cortisol normal?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Stop hydrocortisone",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Continue steroids; assess pituitary-adrenal axis",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Daily IV T4, then oral levothyroxine when stable",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
         }
       ]
     }
+  ],
+  "aliases": [
+    "myxedema_coma",
+    "myxedema coma",
+    "myxoedema crisis",
+    "decompensated hypothyroidism",
+    "severe decompensated hypothyroidism"
   ]
 }

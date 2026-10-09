@@ -1,218 +1,709 @@
 {
- "id": "heat_related_illnesses",
- "name": "Heat-Related Illnesses",
- "system": "Environmental/Thermoregulatory",
- "class": "non_infective",
- "chapter": 478,
- "page": 3772,
- "aliases": [
-  "Heatstroke",
-  "Heat exhaustion",
-  "Heat cramps",
-  "Heat syncope",
-  "Heat edema",
-  "Hyperthermia (environmental)"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.3772",
-  "clinicalPearls": [
-   "Heat-related illnesses span a spectrum from minor syndromes (heat edema, prickly heat, heat syncope, heat cramps) through heat exhaustion to heatstroke, a true medical emergency.",
-   "Heatstroke is distinguished by the historical/physical triad of heat-stress exposure, CNS dysfunction, and a core temperature above 40.5C (104.9F); some patients with impending heatstroke may initially appear lucid.",
-   "In contrast to heatstroke, fever reflects intact thermoregulation, whereas heatstroke represents total loss of thermoregulatory control.",
-   "Heat exhaustion is characterized by preserved thermoregulatory control and CNS function with core temperature usually below 40.5C (105F); more profound CNS impairment should raise concern for heatstroke or another cause.",
-   "Two clinical forms of heatstroke exist: classic (epidemic) heatstroke (CHS) in older or chronically ill, often medicated, sedentary patients during heat waves (skin frequently hot and dry from ceased sweating), and exertional heatstroke (EHS) in young healthy exercising individuals who are often profusely diaphoretic despite dehydration.",
-   "Evaporation of skin moisture is the single most efficient mechanism of heat loss but becomes progressively ineffective once relative humidity exceeds 70%; conduction and convection fail once ambient temperature exceeds skin temperature.",
-   "Many patients are unaware that their medications impair heat tolerance: anticholinergics, phenothiazines, and heterocyclic antidepressants blunt sweating and central thermoregulation, while beta blockers, calcium channel blockers, and various stimulants reduce cutaneous perfusion or increase heat production.",
-   "Hepatocytes are highly heat sensitive: AST is routinely elevated on presentation in heatstroke, and both AST and ALT can eventually rise to over 100 times normal values.",
-   "Core-temperature elevation duration directly drives morbidity and mortality; peripheral (non-core) temperature measurement is unreliable, and continuous core monitoring is needed.",
-   "Heatstroke commonly produces a thermal cardiomyopathy with potentially elevated CVP despite dehydration, plus deceptive noncardiogenic pulmonary edema and basilar rales in a hypovolemic patient.",
-   "The wet-bulb globe temperature (WBGT) is a superior environmental heat-load index to the simple heat index because it incorporates radiant heat and wind speed in addition to air temperature and humidity.",
-   "Acclimatization to heat develops over one to several weeks (lowered sweat threshold, increased sweat volume with lower salt content, plasma volume expansion, lower heart rate with higher stroke volume) and dissipates rapidly within weeks after leaving the hot environment."
+  "id": "heat_related_illnesses",
+  "name": "Heat-Related Illnesses",
+  "system": "Environmental/Thermoregulatory",
+  "class": "non_infective",
+  "chapter": 478,
+  "page": 3772,
+  "aliases": [
+    "Heatstroke",
+    "Heat exhaustion",
+    "Heat cramps",
+    "Heat syncope",
+    "Heat edema",
+    "Hyperthermia (environmental)"
   ],
-  "pathophysiology": "The central thermostat in the preoptic nucleus of the anterior hypothalamus orchestrates heat dissipation via autonomic-driven cutaneous vasodilation and diaphoresis. Heat is lost through evaporation, radiation, conduction, and convection; skin blood flow can rise 25-30 fold with compensatory splanchnic and renal vasoconstriction. When heat load overwhelms dissipation, illness results. Heat cramps reflect relative intracellular deficiency of sodium, potassium, and fluid, compounded by copious hypotonic fluid replacement that produces hyponatremia and hypochloremia. Heat exhaustion arises from water depletion, sodium depletion, or both. Heatstroke begins when maintaining perfusion forces peripheral vasoconstriction, which halts cutaneous heat radiation and causes core temperature to rise sharply. Above 42C (107.6F) direct cellular injury occurs: thermosensitive enzymes fail, oxidative phosphorylation uncouples irreversibly, heat-shock proteins and cytokines drive a systemic inflammatory response, and endothelial damage activates the coagulation cascade. Splanchnic shunting causes gut ischemia with endotoxin release that further impairs thermoregulation, potentially progressing to hepatic dysfunction, renal failure, DIC, and fulminant multisystem organ failure.",
-  "additionalDifferentials": [
-   "Malignant hyperthermia (e.g., after general anesthesia)",
-   "Neuroleptic malignant syndrome",
-   "Serotonin syndrome",
-   "Thyroid storm",
-   "Pheochromocytoma",
-   "Diabetic ketoacidosis",
-   "Drug/toxin toxidromes (amphetamines, cocaine, sympathomimetics, salicylates, anticholinergics, strychnine, dietary supplements, hallucinogens)",
-   "Withdrawal syndromes (ethanol, hypnotics)",
-   "Stroke / cerebral hemorrhage and other CNS causes of altered thermoregulation",
-   "Cardiovascular, neurologic, and metabolic causes of syncope (for heat syncope)"
-  ],
-  "infectionMimics": [
-   "Sepsis syndrome / SIRS of infectious origin",
-   "Meningitis",
-   "Encephalitis",
-   "Cerebral abscess",
-   "Malaria",
-   "Typhoid",
-   "Tetanus"
-  ],
-  "nonInfectiousMimics": [
-   "Malignant hyperthermia",
-   "Neuroleptic malignant syndrome",
-   "Serotonin syndrome",
-   "Thyroid storm",
-   "Pheochromocytoma",
-   "Diabetic ketoacidosis",
-   "Systemic inflammatory response syndrome (noninfectious)",
-   "Toxicologic causes of hyperthermia (sympathomimetics, anticholinergic toxidrome, salicylates)"
-  ],
-  "additionalInvestigations": [
-   "Core (central) temperature monitoring; peripheral temperature is unreliable",
-   "Serum electrolytes (sodium, chloride, potassium) - hyponatremia/hypochloremia in salt-depletion states",
-   "Hepatic aminotransferases (AST, ALT) - markedly elevated in heatstroke, mildly elevated in heat exhaustion",
-   "Coagulation studies (platelets, fibrinogen, prothrombin) - decreased; assess for DIC",
-   "Creatine kinase and lactate dehydrogenase - elevated, suggesting EHS/rhabdomyolysis",
-   "Renal function and calcium/phosphate - evaluate for rhabdomyolysis complications (hypocalcemia, hyperphosphatemia)",
-   "Urinalysis - microscopic hematuria, myoglobinuria, granular or red cell casts",
-   "Blood glucose - hypoglycemia is frequent",
-   "Lactate - mild acidosis in CHS, marked lactic acidosis in EHS",
-   "Cardiac biomarkers and ECG - tachyarrhythmias, nonspecific ST-T changes, heat-related ischemia/infarction",
-   "Toxicologic screening, cranial CT, and CSF analysis if mental status does not improve with cooling"
-  ],
-  "redFlags": [
-   "Core temperature above 40.5C (104.9F) with CNS dysfunction in the setting of heat stress (heatstroke)",
-   "Persistent or worsening altered mental status, seizures, or failure to improve with cooling",
-   "Hot, dry, anhidrotic skin in a dehydrated patient (classic heatstroke)",
-   "Hypotension with widened pulse pressure, tachypnea, and tachyarrhythmia",
-   "Evidence of rhabdomyolysis (markedly elevated CK, myoglobinuria, oliguria)",
-   "Coagulopathy / disseminated intravascular coagulation",
-   "Markedly elevated transaminases indicating hepatic injury",
-   "Noncardiogenic pulmonary edema / ARDS, aspiration",
-   "Heat exhaustion that progresses to heatstroke even after removal from heat stress"
-  ],
-  "prognosis": "Minor heat syndromes (heat edema, prickly heat, heat syncope, hyperventilation tetany, heat cramps) and heat exhaustion generally resolve favorably with removal from heat, cooling, and fluid/electrolyte repletion; younger, previously healthy heat-exhaustion patients without major laboratory abnormalities often do well, while older patients with comorbidities frequently require inpatient management. Heatstroke prognosis is closely tied to the duration of core-temperature elevation: delayed cooling can lead to severe hepatic dysfunction, permanent renal failure, DIC, and fulminant multisystem organ failure. Heat-related cardiac biomarker elevations and thermal cardiomyopathy may be reversible. Heat waves substantially increase mortality, especially among the elderly and malnourished, and secondary vascular events (strokes, myocardial infarctions) occur at least ten times more often during extreme heat.",
-  "pitfalls": [
-   "Treating heat edema with diuretics, which are ineffective and predispose to volume depletion and more serious heat illness.",
-   "Failing to recognize that heat exhaustion can progress to heatstroke after the patient is removed from heat stress.",
-   "Relying on peripheral temperature measurements, which are unreliable in heatstroke.",
-   "Mistaking cold-induced tonic-clonic muscular rigidity during cooling for seizure activity.",
-   "Misinterpreting an elevated CVP as adequate volume status, since thermal cardiomyopathy and a hyperdynamic circulation can elevate CVP despite significant dehydration.",
-   "Assuming hemoconcentration is always present in heat exhaustion (it is not), and overlooking that most cases reflect mixed sodium and water depletion.",
-   "Correcting free water deficits too rapidly, risking an excessive fall in serum osmolality.",
-   "Overlooking medication and substance contributions (anticholinergics, antipsychotics, stimulants) to impaired thermoregulation.",
-   "Pursuing the broad infectious/toxic/endocrine differential without simultaneously initiating rapid cooling in suspected heatstroke."
-  ],
-  "severityClassification": "Severity ladder of heat-related illness: minor heat-emergency syndromes (heat edema, prickly heat/miliaria rubra, heat syncope, hyperventilation tetany) and heat cramps are mild and self-limited; heat exhaustion is intermediate with core temperature usually below 40.5C (105F) and preserved CNS function; heatstroke is the most severe with core temperature above 40.5C (104.9F), CNS dysfunction, and loss of thermoregulation. Heatstroke is further classified as classic (epidemic) heatstroke (CHS - older/chronically ill, sedentary, anhidrotic, milder coagulopathy and lactic acidosis, mild CK rise) versus exertional heatstroke (EHS - younger/healthy, exercising, diaphoretic, with rhabdomyolysis, marked lactic acidosis, acute renal failure, DIC, hypoglycemia/hypocalcemia, hyperkalemia, and hyponatremia).",
-  "references": [
-   "Harrison 22e p.3772",
-   "Harrison 22e p.3773",
-   "Harrison 22e p.3774",
-   "Harrison 22e p.3775",
-   "Harrison 22e p.3776"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Remove the patient from the heat and cool them, with fluid and electrolyte repletion for minor heat syndromes and heat exhaustion",
-   "Treat heat cramps with combined salt and fluid replacement rather than water alone",
-   "Institute immediate rapid cooling, ideally cold-water immersion, as the priority in heatstroke, taking precedence over investigation",
-   "Monitor a central or rectal core temperature, since peripheral measurement is unreliable",
-   "Manage the complications of heatstroke including rhabdomyolysis with fluids, disseminated intravascular coagulation, acute kidney injury, and hepatic and electrolyte derangement",
-   "Admit heatstroke to intensive care for organ support",
-   "Distinguish heatstroke from lesser syndromes by central nervous system status and core temperature and escalate accordingly, and address predisposing medications and comorbidity to prevent recurrence"
-  ]
- },
- "algorithms": [
-  {
-   "id": "heat_related_illnesses-pathway",
-   "title": "Heat-Related Illnesses: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Heat-related illnesses span a spectrum from minor syndromes (heat edema, prickly heat, heat syncope, heat cramps) through heat exhaustion to heatstroke, a true medical emergency.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Core temperature above 40.5C (104.9F) with CNS dysfunction in the setting of heat stress (heatstroke)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Core (central) temperature monitoring; peripheral temperature is unreliable, Serum electrolytes (sodium, chloride, potassium) - hyponatremia/hypochloremia in salt-depletion states, Hepatic aminotransferases (AST, ALT) -"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Remove the patient from the heat and cool them, with fluid and electrolyte repletion for minor heat syndromes and heat exhaustion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating heat edema with diuretics, which are ineffective and predispose to volume depletion and more serious heat illness."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of heat-related illnesses."
-  }
- ],
- "tables": [
-  {
-   "id": "heat_related_illnesses-matrix",
-   "title": "Heat-Related Illnesses: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Heat-related illnesses span a spectrum from minor syndromes (heat edema, prickly heat, heat syncope, heat cramps) through heat",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.3772",
+    "clinicalPearls": [
+      "Heat-related illnesses span a spectrum from minor syndromes (heat edema, prickly heat, heat syncope, heat cramps) through heat exhaustion to heatstroke, a true medical emergency.",
+      "Heatstroke is distinguished by the historical/physical triad of heat-stress exposure, CNS dysfunction, and a core temperature above 40.5C (104.9F); some patients with impending heatstroke may initially appear lucid.",
+      "In contrast to heatstroke, fever reflects intact thermoregulation, whereas heatstroke represents total loss of thermoregulatory control.",
+      "Heat exhaustion is characterized by preserved thermoregulatory control and CNS function with core temperature usually below 40.5C (105F); more profound CNS impairment should raise concern for heatstroke or another cause.",
+      "Two clinical forms of heatstroke exist: classic (epidemic) heatstroke (CHS) in older or chronically ill, often medicated, sedentary patients during heat waves (skin frequently hot and dry from ceased sweating), and exertional heatstroke (EHS) in young healthy exercising individuals who are often profusely diaphoretic despite dehydration.",
+      "Evaporation of skin moisture is the single most efficient mechanism of heat loss but becomes progressively ineffective once relative humidity exceeds 70%; conduction and convection fail once ambient temperature exceeds skin temperature.",
+      "Many patients are unaware that their medications impair heat tolerance: anticholinergics, phenothiazines, and heterocyclic antidepressants blunt sweating and central thermoregulation, while beta blockers, calcium channel blockers, and various stimulants reduce cutaneous perfusion or increase heat production.",
+      "Hepatocytes are highly heat sensitive: AST is routinely elevated on presentation in heatstroke, and both AST and ALT can eventually rise to over 100 times normal values.",
+      "Core-temperature elevation duration directly drives morbidity and mortality; peripheral (non-core) temperature measurement is unreliable, and continuous core monitoring is needed.",
+      "Heatstroke commonly produces a thermal cardiomyopathy with potentially elevated CVP despite dehydration, plus deceptive noncardiogenic pulmonary edema and basilar rales in a hypovolemic patient.",
+      "The wet-bulb globe temperature (WBGT) is a superior environmental heat-load index to the simple heat index because it incorporates radiant heat and wind speed in addition to air temperature and humidity.",
+      "Acclimatization to heat develops over one to several weeks (lowered sweat threshold, increased sweat volume with lower salt content, plasma volume expansion, lower heart rate with higher stroke volume) and dissipates rapidly within weeks after leaving the hot environment."
     ],
-    [
-     "Key Investigations",
-     "Core (central) temperature monitoring; peripheral temperature is unreliable, Serum electrolytes (sodium, chloride, potassium) -",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The central thermostat in the preoptic nucleus of the anterior hypothalamus orchestrates heat dissipation via autonomic-driven cutaneous vasodilation and diaphoresis. Heat is lost through evaporation, radiation, conduction, and convection; skin blood flow can rise 25-30 fold with compensatory splanchnic and renal vasoconstriction. When heat load overwhelms dissipation, illness results. Heat cramps reflect relative intracellular deficiency of sodium, potassium, and fluid, compounded by copious hypotonic fluid replacement that produces hyponatremia and hypochloremia. Heat exhaustion arises from water depletion, sodium depletion, or both. Heatstroke begins when maintaining perfusion forces peripheral vasoconstriction, which halts cutaneous heat radiation and causes core temperature to rise sharply. Above 42C (107.6F) direct cellular injury occurs: thermosensitive enzymes fail, oxidative phosphorylation uncouples irreversibly, heat-shock proteins and cytokines drive a systemic inflammatory response, and endothelial damage activates the coagulation cascade. Splanchnic shunting causes gut ischemia with endotoxin release that further impairs thermoregulation, potentially progressing to hepatic dysfunction, renal failure, DIC, and fulminant multisystem organ failure.",
+    "additionalDifferentials": [
+      "Malignant hyperthermia (e.g., after general anesthesia)",
+      "Neuroleptic malignant syndrome",
+      "Serotonin syndrome",
+      "Thyroid storm",
+      "Pheochromocytoma",
+      "Diabetic ketoacidosis",
+      "Drug/toxin toxidromes (amphetamines, cocaine, sympathomimetics, salicylates, anticholinergics, strychnine, dietary supplements, hallucinogens)",
+      "Withdrawal syndromes (ethanol, hypnotics)",
+      "Stroke / cerebral hemorrhage and other CNS causes of altered thermoregulation",
+      "Cardiovascular, neurologic, and metabolic causes of syncope (for heat syncope)"
     ],
-    [
-     "Primary Differentials",
-     "Malignant hyperthermia (e.g., after general anesthesia), Neuroleptic malignant syndrome, Serotonin syndrome",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Sepsis syndrome / SIRS of infectious origin",
+      "Meningitis",
+      "Encephalitis",
+      "Cerebral abscess",
+      "Malaria",
+      "Typhoid",
+      "Tetanus"
     ],
-    [
-     "Management Strategy",
-     "Remove the patient from the heat and cool them, with fluid and electrolyte repletion for minor heat syndromes and heat exhaustion",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Malignant hyperthermia",
+      "Neuroleptic malignant syndrome",
+      "Serotonin syndrome",
+      "Thyroid storm",
+      "Pheochromocytoma",
+      "Diabetic ketoacidosis",
+      "Systemic inflammatory response syndrome (noninfectious)",
+      "Toxicologic causes of hyperthermia (sympathomimetics, anticholinergic toxidrome, salicylates)"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating heat edema with diuretics, which are ineffective and predispose to volume depletion and more serious heat illness.",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Core (central) temperature monitoring; peripheral temperature is unreliable",
+      "Serum electrolytes (sodium, chloride, potassium) - hyponatremia/hypochloremia in salt-depletion states",
+      "Hepatic aminotransferases (AST, ALT) - markedly elevated in heatstroke, mildly elevated in heat exhaustion",
+      "Coagulation studies (platelets, fibrinogen, prothrombin) - decreased; assess for DIC",
+      "Creatine kinase and lactate dehydrogenase - elevated, suggesting EHS/rhabdomyolysis",
+      "Renal function and calcium/phosphate - evaluate for rhabdomyolysis complications (hypocalcemia, hyperphosphatemia)",
+      "Urinalysis - microscopic hematuria, myoglobinuria, granular or red cell casts",
+      "Blood glucose - hypoglycemia is frequent",
+      "Lactate - mild acidosis in CHS, marked lactic acidosis in EHS",
+      "Cardiac biomarkers and ECG - tachyarrhythmias, nonspecific ST-T changes, heat-related ischemia/infarction",
+      "Toxicologic screening, cranial CT, and CSF analysis if mental status does not improve with cooling"
+    ],
+    "redFlags": [
+      "Core temperature above 40.5C (104.9F) with CNS dysfunction in the setting of heat stress (heatstroke)",
+      "Persistent or worsening altered mental status, seizures, or failure to improve with cooling",
+      "Hot, dry, anhidrotic skin in a dehydrated patient (classic heatstroke)",
+      "Hypotension with widened pulse pressure, tachypnea, and tachyarrhythmia",
+      "Evidence of rhabdomyolysis (markedly elevated CK, myoglobinuria, oliguria)",
+      "Coagulopathy / disseminated intravascular coagulation",
+      "Markedly elevated transaminases indicating hepatic injury",
+      "Noncardiogenic pulmonary edema / ARDS, aspiration",
+      "Heat exhaustion that progresses to heatstroke even after removal from heat stress"
+    ],
+    "prognosis": "Minor heat syndromes (heat edema, prickly heat, heat syncope, hyperventilation tetany, heat cramps) and heat exhaustion generally resolve favorably with removal from heat, cooling, and fluid/electrolyte repletion; younger, previously healthy heat-exhaustion patients without major laboratory abnormalities often do well, while older patients with comorbidities frequently require inpatient management. Heatstroke prognosis is closely tied to the duration of core-temperature elevation: delayed cooling can lead to severe hepatic dysfunction, permanent renal failure, DIC, and fulminant multisystem organ failure. Heat-related cardiac biomarker elevations and thermal cardiomyopathy may be reversible. Heat waves substantially increase mortality, especially among the elderly and malnourished, and secondary vascular events (strokes, myocardial infarctions) occur at least ten times more often during extreme heat.",
+    "pitfalls": [
+      "Treating heat edema with diuretics, which are ineffective and predispose to volume depletion and more serious heat illness.",
+      "Failing to recognize that heat exhaustion can progress to heatstroke after the patient is removed from heat stress.",
+      "Relying on peripheral temperature measurements, which are unreliable in heatstroke.",
+      "Mistaking cold-induced tonic-clonic muscular rigidity during cooling for seizure activity.",
+      "Misinterpreting an elevated CVP as adequate volume status, since thermal cardiomyopathy and a hyperdynamic circulation can elevate CVP despite significant dehydration.",
+      "Assuming hemoconcentration is always present in heat exhaustion (it is not), and overlooking that most cases reflect mixed sodium and water depletion.",
+      "Correcting free water deficits too rapidly, risking an excessive fall in serum osmolality.",
+      "Overlooking medication and substance contributions (anticholinergics, antipsychotics, stimulants) to impaired thermoregulation.",
+      "Pursuing the broad infectious/toxic/endocrine differential without simultaneously initiating rapid cooling in suspected heatstroke."
+    ],
+    "severityClassification": "Severity ladder of heat-related illness: minor heat-emergency syndromes (heat edema, prickly heat/miliaria rubra, heat syncope, hyperventilation tetany) and heat cramps are mild and self-limited; heat exhaustion is intermediate with core temperature usually below 40.5C (105F) and preserved CNS function; heatstroke is the most severe with core temperature above 40.5C (104.9F), CNS dysfunction, and loss of thermoregulation. Heatstroke is further classified as classic (epidemic) heatstroke (CHS - older/chronically ill, sedentary, anhidrotic, milder coagulopathy and lactic acidosis, mild CK rise) versus exertional heatstroke (EHS - younger/healthy, exercising, diaphoretic, with rhabdomyolysis, marked lactic acidosis, acute renal failure, DIC, hypoglycemia/hypocalcemia, hyperkalemia, and hyponatremia).",
+    "references": [
+      "Harrison 22e p.3772",
+      "Harrison 22e p.3773",
+      "Harrison 22e p.3774",
+      "Harrison 22e p.3775",
+      "Harrison 22e p.3776"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Remove the patient from the heat and cool them, with fluid and electrolyte repletion for minor heat syndromes and heat exhaustion",
+      "Treat heat cramps with combined salt and fluid replacement rather than water alone",
+      "Institute immediate rapid cooling, ideally cold-water immersion, as the priority in heatstroke, taking precedence over investigation",
+      "Monitor a central or rectal core temperature, since peripheral measurement is unreliable",
+      "Manage the complications of heatstroke including rhabdomyolysis with fluids, disseminated intravascular coagulation, acute kidney injury, and hepatic and electrolyte derangement",
+      "Admit heatstroke to intensive care for organ support",
+      "Distinguish heatstroke from lesser syndromes by central nervous system status and core temperature and escalate accordingly, and address predisposing medications and comorbidity to prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for heat-related illnesses."
-  }
- ],
- "diagrams": [
-  {
-   "id": "heat-related-illnesses-real-image",
-   "title": "Heat-Related Illnesses: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "heat_related_illnesses-pathway",
+      "title": "Heat-Related Illnesses: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Heat-related illnesses span a spectrum from minor syndromes (heat edema, prickly heat, heat syncope, heat cramps) through heat exhaustion to heatstroke, a true medical emergency.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Core temperature above 40.5C (104.9F) with CNS dysfunction in the setting of heat stress (heatstroke)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Core (central) temperature monitoring; peripheral temperature is unreliable, Serum electrolytes (sodium, chloride, potassium) - hyponatremia/hypochloremia in salt-depletion states, Hepatic aminotransferases (AST, ALT) -"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Remove the patient from the heat and cool them, with fluid and electrolyte repletion for minor heat syndromes and heat exhaustion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating heat edema with diuretics, which are ineffective and predispose to volume depletion and more serious heat illness."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of heat-related illnesses."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "heat_related_illnesses-matrix",
+      "title": "Heat-Related Illnesses: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Heat-related illnesses span a spectrum from minor syndromes (heat edema, prickly heat, heat syncope, heat cramps) through heat",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Core (central) temperature monitoring; peripheral temperature is unreliable, Serum electrolytes (sodium, chloride, potassium) -",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Malignant hyperthermia (e.g., after general anesthesia), Neuroleptic malignant syndrome, Serotonin syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Remove the patient from the heat and cool them, with fluid and electrolyte repletion for minor heat syndromes and heat exhaustion",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating heat edema with diuretics, which are ineffective and predispose to volume depletion and more serious heat illness.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for heat-related illnesses."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Heatstroke",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/heat-illness/heatstroke"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Drug-Induced Hyperthermia (p3)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heat_related_illnesses-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading heat-related illness",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Core temperature or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Heatstroke",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Core temperature above 40.5 C (Harrison) or above 40 C (Merck) with CNS dysfunction",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "{{hy:CNS dysfunction separates heatstroke from heat exhaustion}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heat exhaustion",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Usually below 40.5 C, CNS intact",
+              "op": "<",
+              "value": 40.5
+            },
+            {
+              "text": "Thermoregulation preserved; can progress to heatstroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minor heat syndromes",
+          "cells": [
+            {
+              "text": "Heat oedema, prickly heat, heat syncope, heat cramps, tetany"
+            },
+            {
+              "text": "Self-limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic heatstroke",
+          "cells": [
+            {
+              "text": "Older, chronically ill, sedentary; hot dry skin"
+            },
+            {
+              "text": "Milder coagulopathy and lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exertional heatstroke",
+          "cells": [
+            {
+              "text": "Young, exercising, often sweating"
+            },
+            {
+              "text": "Rhabdomyolysis, marked lactic acidosis, AKI, DIC, hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transaminases",
+          "unit": "x normal",
+          "cells": [
+            {
+              "text": "AST and ALT can exceed 100 times normal",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "AST raised on arrival in heatstroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Humidity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Evaporation fails above 70% relative humidity",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "WBGT better than heat index"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temperature measurement",
+          "cells": [
+            {
+              "text": "Continuous core (rectal) monitoring"
+            },
+            {
+              "text": "Peripheral readings unreliable"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Heatstroke core threshold is 40.5 C in Harrison 22e and 40 C in Merck; both kept."
+    },
+    {
+      "id": "heat_related_illnesses-ddx",
+      "kind": "ddx",
+      "title": "Other causes of hyperthermia with altered mental state",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sepsis, meningitis, malaria",
+          "cells": [
+            {
+              "text": "Infection with intact thermoregulation (fever)"
+            },
+            {
+              "text": "Cultures, CSF, malaria smear"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuroleptic malignant syndrome",
+          "cells": [
+            {
+              "text": "Antipsychotic exposure, lead-pipe rigidity"
+            },
+            {
+              "text": "Drug history, CK"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serotonin syndrome",
+          "cells": [
+            {
+              "text": "Serotonergic drugs, clonus"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignant hyperthermia",
+          "cells": [
+            {
+              "text": "After volatile anaesthetic or suxamethonium"
+            },
+            {
+              "text": "Anaesthetic history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid storm",
+          "cells": [
+            {
+              "text": "Thyrotoxic features"
+            },
+            {
+              "text": "TSH and free T4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sympathomimetic or anticholinergic toxicity",
+          "cells": [
+            {
+              "text": "Stimulants, MDMA, cocaine; dry skin with anticholinergics"
+            },
+            {
+              "text": "Urine drug screen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stroke or status epilepticus",
+          "cells": [
+            {
+              "text": "Focal signs or seizures"
+            },
+            {
+              "text": "Cranial CT, EEG"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "heat_related_illnesses-treatment",
+      "kind": "treatment",
+      "title": "Treating heat-related illness",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cold or ice water immersion",
+          "cells": [
+            {
+              "text": "Heatstroke"
+            },
+            {
+              "text": "{{hy:Cool first, investigate later}}; lowest morbidity and mortality"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cooling target",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Core below 39 C within 30 min; stop at about 39 C",
+              "op": "<",
+              "value": 39
+            },
+            {
+              "text": "Avoid overcooling"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Evaporative cooling",
+          "cells": [
+            {
+              "text": "Immersion not available"
+            },
+            {
+              "text": "Tepid spray with fan; ice packs only as adjunct"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzodiazepine",
+          "cells": [
+            {
+              "text": "Shivering during cooling"
+            },
+            {
+              "text": "Paralysis and intubation if needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isotonic saline boluses",
+          "cells": [
+            {
+              "text": "Volume depletion"
+            },
+            {
+              "text": "Reassess BP, urine output; CVP can mislead"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid antipyretics and dantrolene",
+          "cells": [
+            {
+              "text": "Heatstroke"
+            },
+            {
+              "text": "Not effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICU organ support",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis, AKI, DIC, liver failure, ARDS"
+            },
+            {
+              "text": "Dialysis may be needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Salt and fluid replacement",
+          "cells": [
+            {
+              "text": "Heat cramps, heat exhaustion"
+            },
+            {
+              "text": "Water alone insufficient for cramps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No diuretics",
+          "cells": [
+            {
+              "text": "Heat oedema"
+            },
+            {
+              "text": "Predispose to volume depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Recovery"
+            },
+            {
+              "text": "Acclimatise over 1 to several weeks; review drugs impairing heat loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heat_related_illnesses-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs that cause hyperthermia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced hyperthermia",
+          "cells": [
+            {
+              "text": "amphetamines, cocaine, phencyclidine (PCP), MDMA (ecstasy), LSD, salicylates, lithium, anticholinergics, sympathomimetics"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heat_related_illnesses-dx-mgmt",
+      "title": "Diagnosis and management of heat-related illness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heat exposure with symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Measure core (rectal) temperature; assess mental state",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "CNS dysfunction with core temperature above 40 C?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Immediate cold water immersion; IV saline",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Core temperature reached 39 C?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop cooling; ICU, labs for CK, LFTs, clotting, glucose",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Mental state improving after cooling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Manage organ complications; review drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Seek other cause: CT, CSF, toxicology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Heat exhaustion or minor syndrome: cool, oral or IV salt and fluid",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n4",
+          "label": "No, continue"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

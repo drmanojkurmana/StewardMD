@@ -1,178 +1,465 @@
 {
- "id": "myositis_ossificans",
- "name": "Myositis ossificans traumatica",
- "aliases": [
-  "myositis ossificans",
-  "heterotopic ossification",
-  "pseudomalignant osseous tumour of soft tissue"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Oncology",
- "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign, self-limiting formation of heterotopic bone within skeletal muscle, usually following trauma in young active adults",
-   "Presents as a rapidly enlarging, firm, tender soft-tissue mass, often in the thigh, buttock or upper arm",
-   "The defining feature is zonal maturation, with a mineralising peripheral shell of mature bone surrounding a cellular, immature central zone",
-   "This zonal pattern is the reverse of osteosarcoma, in which the most immature and dense mineralisation tends to lie centrally",
-   "Radiographic ossification typically becomes visible several weeks after injury and matures peripherally over time",
-   "Early biopsy can be dangerously misleading, as the immature cellular centre mimics a sarcoma histologically",
-   "Management is usually conservative with observation, as the lesion matures and often partially regresses without excision"
+  "id": "myositis_ossificans",
+  "name": "Myositis ossificans traumatica",
+  "aliases": [
+    "myositis ossificans",
+    "heterotopic ossification",
+    "pseudomalignant osseous tumour of soft tissue"
   ],
-  "pathophysiology": "Myositis ossificans traumatica is a benign, reactive proliferation of fibroblasts, cartilage and bone within soft tissue, most often triggered by a single injury or repetitive microtrauma. Local tissue damage initiates a proliferative fibroblastic response that undergoes progressive metaplastic differentiation into cartilage and then bone. The lesion matures in a centripetal, zonal fashion, with the peripheral rim ossifying first and most completely, while the centre remains cellular and immature early in the course. Over weeks to months the whole lesion becomes better demarcated and ossified, and it may shrink.",
-  "additionalDifferentials": [
-   "Extraskeletal osteosarcoma",
-   "Parosteal or periosteal osteosarcoma",
-   "Soft-tissue sarcoma with metaplastic bone",
-   "Fibro-osseous pseudotumour of the digits",
-   "Tumoral calcinosis",
-   "Osteochondroma"
-  ],
-  "additionalInvestigations": [
-   "Serial plain radiography to demonstrate evolving peripheral ossification over time",
-   "CT to display the characteristic peripheral mineralised rim and central lucency",
-   "MRI to assess the soft-tissue mass, noting surrounding oedema in early lesions",
-   "Correlation of imaging with time since injury to recognise the maturation sequence",
-   "Biopsy only when imaging is atypical, ideally deferred until the lesion has matured"
-  ],
-  "redFlags": [
-   "A mass without peripheral maturation raising concern for extraskeletal osteosarcoma",
-   "Continued growth beyond the expected maturation window",
-   "Central rather than peripheral dense mineralisation on imaging",
-   "Absence of any traumatic history with atypical imaging features"
-  ],
-  "prognosis": "Myositis ossificans is benign and self-limiting, typically maturing and stabilising over several months, often with partial resorption. Excision, if required for symptoms, is best delayed until the lesion is mature to reduce recurrence, and the outlook is excellent.",
-  "pitfalls": [
-   "Misinterpreting the cellular immature centre on early biopsy as a sarcoma",
-   "Reversing the zonal reasoning and mistaking it for extraskeletal osteosarcoma",
-   "Excising a lesion prematurely before maturation, increasing recurrence risk",
-   "Imaging too early before diagnostic peripheral ossification has developed"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognize this as a benign, reactive fibro-osseous lesion, usually post-traumatic, and manage it around avoiding an unnecessary cancer work-up rather than around anticancer treatment",
-   "Do not rely on intrinsic calcification or a firm to hard consistency alone to exclude malignancy, since these features can also occur with extraskeletal osteosarcoma",
-   "Use plain film or MRI showing the characteristic zoning pattern, cellular center with peripheral calcification and ossification, to support the diagnosis without biopsy in most cases",
-   "Favor imaging-based diagnosis and defer biopsy when imaging is characteristic, since biopsy of these lesions is often accompanied by aggressive hemorrhage that can itself mimic a vascular neoplasm",
-   "If biopsy is needed for atypical imaging or diagnostic uncertainty, ensure adequate, well-fixed, well-stained tissue with prior communication between clinician and pathologist so material can be triaged for immunohistochemistry, cytogenetics, or molecular studies if sarcoma cannot be excluded",
-   "Default to observation once imaging is characteristic, with conservative management and no excision",
-   "Use serial imaging over weeks to months to confirm centripetal, peripheral-first maturation rather than a progressive or centrally-mineralizing pattern",
-   "Provide symptomatic control with rest, activity modification, and analgesia during the acute phase, with gentle return of motion as symptoms settle",
-   "Reserve surgical excision for a mature, still-symptomatic lesion despite conservative management, and delay surgery until the lesion has fully matured to reduce recurrence and avoid operating on a still-evolving process",
-   "Do not use radiotherapy, chemotherapy, or any systemic anticancer regimen, since the entity is benign",
-   "Continue monitoring with serial radiography or MRI to track the peripheral mineralized rim and resolution of soft-tissue change over time",
-   "Refer to orthopedic oncology or a soft-tissue tumor service when imaging is atypical, the zonal pattern is not clearly present, there is no clear preceding trauma, or the lesion keeps growing beyond the expected maturation window",
-   "Refer before any biopsy in an ambiguous case so biopsy planning can be coordinated with a pathologist experienced in soft-tissue tumors"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myositis_ossificans-pathway",
-   "title": "Myositis ossificans traumatica: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign, self-limiting formation of heterotopic bone within skeletal muscle, usually following trauma in young active adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A mass without peripheral maturation raising concern for extraskeletal osteosarcoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial plain radiography to demonstrate evolving peripheral ossification over time, CT to display the characteristic peripheral mineralised rim and central lucency, MRI to assess the soft-tissue mass, noting surrounding"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognize this as a benign, reactive fibro-osseous lesion, usually post-traumatic, and manage it around avoiding an unnecessary cancer work-up rather than around anticancer treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the cellular immature centre on early biopsy as a sarcoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myositis ossificans traumatica."
-  }
- ],
- "tables": [
-  {
-   "id": "myositis_ossificans-matrix",
-   "title": "Myositis ossificans traumatica: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign, self-limiting formation of heterotopic bone within skeletal muscle, usually following trauma in young active adults",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Oncology",
+  "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign, self-limiting formation of heterotopic bone within skeletal muscle, usually following trauma in young active adults",
+      "Presents as a rapidly enlarging, firm, tender soft-tissue mass, often in the thigh, buttock or upper arm",
+      "The defining feature is zonal maturation, with a mineralising peripheral shell of mature bone surrounding a cellular, immature central zone",
+      "This zonal pattern is the reverse of osteosarcoma, in which the most immature and dense mineralisation tends to lie centrally",
+      "Radiographic ossification typically becomes visible several weeks after injury and matures peripherally over time",
+      "Early biopsy can be dangerously misleading, as the immature cellular centre mimics a sarcoma histologically",
+      "Management is usually conservative with observation, as the lesion matures and often partially regresses without excision"
     ],
-    [
-     "Key Investigations",
-     "Serial plain radiography to demonstrate evolving peripheral ossification over time, CT to display the characteristic peripheral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Myositis ossificans traumatica is a benign, reactive proliferation of fibroblasts, cartilage and bone within soft tissue, most often triggered by a single injury or repetitive microtrauma. Local tissue damage initiates a proliferative fibroblastic response that undergoes progressive metaplastic differentiation into cartilage and then bone. The lesion matures in a centripetal, zonal fashion, with the peripheral rim ossifying first and most completely, while the centre remains cellular and immature early in the course. Over weeks to months the whole lesion becomes better demarcated and ossified, and it may shrink.",
+    "additionalDifferentials": [
+      "Extraskeletal osteosarcoma",
+      "Parosteal or periosteal osteosarcoma",
+      "Soft-tissue sarcoma with metaplastic bone",
+      "Fibro-osseous pseudotumour of the digits",
+      "Tumoral calcinosis",
+      "Osteochondroma"
     ],
-    [
-     "Primary Differentials",
-     "Extraskeletal osteosarcoma, Parosteal or periosteal osteosarcoma, Soft-tissue sarcoma with metaplastic bone",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial plain radiography to demonstrate evolving peripheral ossification over time",
+      "CT to display the characteristic peripheral mineralised rim and central lucency",
+      "MRI to assess the soft-tissue mass, noting surrounding oedema in early lesions",
+      "Correlation of imaging with time since injury to recognise the maturation sequence",
+      "Biopsy only when imaging is atypical, ideally deferred until the lesion has matured"
     ],
-    [
-     "Management Strategy",
-     "Recognize this as a benign, reactive fibro-osseous lesion, usually post-traumatic, and manage it around avoiding an unnecessary",
-     "Core treatment modality"
+    "redFlags": [
+      "A mass without peripheral maturation raising concern for extraskeletal osteosarcoma",
+      "Continued growth beyond the expected maturation window",
+      "Central rather than peripheral dense mineralisation on imaging",
+      "Absence of any traumatic history with atypical imaging features"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the cellular immature centre on early biopsy as a sarcoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Myositis ossificans is benign and self-limiting, typically maturing and stabilising over several months, often with partial resorption. Excision, if required for symptoms, is best delayed until the lesion is mature to reduce recurrence, and the outlook is excellent.",
+    "pitfalls": [
+      "Misinterpreting the cellular immature centre on early biopsy as a sarcoma",
+      "Reversing the zonal reasoning and mistaking it for extraskeletal osteosarcoma",
+      "Excising a lesion prematurely before maturation, increasing recurrence risk",
+      "Imaging too early before diagnostic peripheral ossification has developed"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognize this as a benign, reactive fibro-osseous lesion, usually post-traumatic, and manage it around avoiding an unnecessary cancer work-up rather than around anticancer treatment",
+      "Do not rely on intrinsic calcification or a firm to hard consistency alone to exclude malignancy, since these features can also occur with extraskeletal osteosarcoma",
+      "Use plain film or MRI showing the characteristic zoning pattern, cellular center with peripheral calcification and ossification, to support the diagnosis without biopsy in most cases",
+      "Favor imaging-based diagnosis and defer biopsy when imaging is characteristic, since biopsy of these lesions is often accompanied by aggressive hemorrhage that can itself mimic a vascular neoplasm",
+      "If biopsy is needed for atypical imaging or diagnostic uncertainty, ensure adequate, well-fixed, well-stained tissue with prior communication between clinician and pathologist so material can be triaged for immunohistochemistry, cytogenetics, or molecular studies if sarcoma cannot be excluded",
+      "Default to observation once imaging is characteristic, with conservative management and no excision",
+      "Use serial imaging over weeks to months to confirm centripetal, peripheral-first maturation rather than a progressive or centrally-mineralizing pattern",
+      "Provide symptomatic control with rest, activity modification, and analgesia during the acute phase, with gentle return of motion as symptoms settle",
+      "Reserve surgical excision for a mature, still-symptomatic lesion despite conservative management, and delay surgery until the lesion has fully matured to reduce recurrence and avoid operating on a still-evolving process",
+      "Do not use radiotherapy, chemotherapy, or any systemic anticancer regimen, since the entity is benign",
+      "Continue monitoring with serial radiography or MRI to track the peripheral mineralized rim and resolution of soft-tissue change over time",
+      "Refer to orthopedic oncology or a soft-tissue tumor service when imaging is atypical, the zonal pattern is not clearly present, there is no clear preceding trauma, or the lesion keeps growing beyond the expected maturation window",
+      "Refer before any biopsy in an ambiguous case so biopsy planning can be coordinated with a pathologist experienced in soft-tissue tumors"
     ]
-   ],
-   "caption": "Overview comparison matrix for myositis ossificans traumatica."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myositis-ossificans-real-image",
-   "title": "Myositis ossificans traumatica: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "myositis_ossificans-pathway",
+      "title": "Myositis ossificans traumatica: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign, self-limiting formation of heterotopic bone within skeletal muscle, usually following trauma in young active adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A mass without peripheral maturation raising concern for extraskeletal osteosarcoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial plain radiography to demonstrate evolving peripheral ossification over time, CT to display the characteristic peripheral mineralised rim and central lucency, MRI to assess the soft-tissue mass, noting surrounding"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognize this as a benign, reactive fibro-osseous lesion, usually post-traumatic, and manage it around avoiding an unnecessary cancer work-up rather than around anticancer treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the cellular immature centre on early biopsy as a sarcoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myositis ossificans traumatica."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myositis_ossificans-matrix",
+      "title": "Myositis ossificans traumatica: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign, self-limiting formation of heterotopic bone within skeletal muscle, usually following trauma in young active adults",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial plain radiography to demonstrate evolving peripheral ossification over time, CT to display the characteristic peripheral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Extraskeletal osteosarcoma, Parosteal or periosteal osteosarcoma, Soft-tissue sarcoma with metaplastic bone",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognize this as a benign, reactive fibro-osseous lesion, usually post-traumatic, and manage it around avoiding an unnecessary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the cellular immature centre on early biopsy as a sarcoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myositis ossificans traumatica."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myositis_ossificans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial plain radiography",
+          "cells": [
+            {
+              "text": "Evolving peripheral ossification over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Peripheral mineralised rim and central lucency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue mass; surrounding oedema in early lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging timed from injury",
+          "cells": [
+            {
+              "text": "Recognises the maturation sequence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy, only when imaging is atypical",
+          "cells": [
+            {
+              "text": "Immature cellular centre; ideally deferred until the lesion has matured"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myositis_ossificans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Extraskeletal osteosarcoma",
+          "cells": [
+            {
+              "text": "The zoning is reversed here; central dense mineralisation or no peripheral maturation points toward it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumoral calcinosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myositis_ossificans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign reactive lesion",
+          "cells": [
+            {
+              "text": "Recognise as post-traumatic; manage to avoid an unnecessary cancer work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging-based diagnosis",
+          "cells": [
+            {
+              "text": "Plain film or MRI showing zoning supports the diagnosis without biopsy in most cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative observation",
+          "cells": [
+            {
+              "text": "The default once imaging is characteristic; no excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic control",
+          "cells": [
+            {
+              "text": "Rest, activity modification and analgesia in the acute phase; gentle return of motion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Confirms peripheral-first maturation over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed surgery",
+          "cells": [
+            {
+              "text": "Reserved for a mature, still-symptomatic lesion; delayed to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No anticancer treatment",
+          "cells": [
+            {
+              "text": "No radiotherapy, chemotherapy or systemic regimen, as the entity is benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Orthopaedic oncology or soft-tissue service when imaging is atypical or the lesion keeps growing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myositis_ossificans-dx-mgmt",
+      "title": "Diagnosis and management of Myositis ossificans traumatica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly enlarging, firm, tender thigh or arm mass after trauma in a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (no peripheral maturation, growth beyond expected window)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to orthopaedic oncology or soft-tissue service before any biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial radiographs, CT for the peripheral rim, MRI, timed from injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Peripheral-first ossification with a central cellular zone on serial imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider extraskeletal osteosarcoma; plan any biopsy with a soft-tissue pathologist",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe; default to conservative care once imaging is characteristic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rest, activity modification and analgesia; gentle return of motion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial imaging to confirm peripheral-first maturation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Delay excision until the lesion is mature; no anticancer therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; usually matures and partly regresses over months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,482 @@
 {
- "id": "feingold_syndrome",
- "name": "Feingold syndrome (MYCN)",
- "aliases": [
-  "oculodigitoesophagoduodenal syndrome",
-  "Feingold syndrome type 1",
-  "MYCN-related syndrome",
-  "ODED syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant disorder caused by haploinsufficiency of MYCN, from either a loss-of-function variant or a deletion",
-   "Microcephaly is a consistent feature and is often the finding that prompts genetic evaluation",
-   "Characteristic digital anomalies include brachymesophalangy, clinodactyly of the fifth finger, and syndactyly of the toes",
-   "Gastrointestinal atresias, particularly oesophageal and duodenal atresia, are a hallmark and important surgical concern",
-   "Learning difficulties are common but many individuals have normal or only mildly reduced intellect",
-   "Short palpebral fissures and other subtle facial features may be present",
-   "The combination of microcephaly with digital and gastrointestinal anomalies should raise the diagnosis",
-   "Diagnosis is by identifying a MYCN variant or a deletion encompassing MYCN on microarray"
+  "id": "feingold_syndrome",
+  "name": "Feingold syndrome (MYCN)",
+  "aliases": [
+    "oculodigitoesophagoduodenal syndrome",
+    "Feingold syndrome type 1",
+    "MYCN-related syndrome",
+    "ODED syndrome"
   ],
-  "pathophysiology": "Feingold syndrome type 1 arises from haploinsufficiency of MYCN, a transcription factor of the MYC family that drives cell proliferation and is critical during embryonic development of the limbs, gut, brain, and other organs. Reduced MYCN dosage, whether from an intragenic loss-of-function variant or a deletion of the gene, impairs the proliferative programmes it normally coordinates, resulting in microcephaly, the characteristic hand and foot anomalies, and failure of normal luminal development in the gut that produces oesophageal and duodenal atresia. Because the mechanism is loss of one functional copy, the disorder is inherited in an autosomal dominant manner, with variable expression among affected individuals.",
-  "additionalDifferentials": [
-   "VACTERL association with overlapping gastrointestinal and limb anomalies",
-   "CHARGE syndrome with atresia and multiple congenital anomalies",
-   "Other syndromic causes of microcephaly with digital anomalies",
-   "Fanconi anaemia with limb anomalies and growth restriction",
-   "Isolated oesophageal or duodenal atresia of non-syndromic cause",
-   "Feingold syndrome type 2 due to a different genetic mechanism"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing of MYCN, together with microarray to detect a deletion",
-   "Imaging and surgical assessment of suspected oesophageal or duodenal atresia",
-   "Hand and foot radiography to characterise digital anomalies",
-   "Serial head circumference measurement and neuroimaging where indicated",
-   "Developmental and educational assessment",
-   "Renal and cardiac evaluation for associated anomalies"
-  ],
-  "redFlags": [
-   "Neonatal oesophageal atresia with aspiration risk requiring urgent surgery",
-   "Duodenal atresia presenting with bilious vomiting in the newborn",
-   "Feeding failure and faltering growth related to gastrointestinal anomaly",
-   "Significant associated cardiac or renal malformation"
-  ],
-  "prognosis": "With timely surgical correction of gastrointestinal atresias, the long-term outlook is generally good and lifespan is usually normal; most individuals have normal or mildly reduced intellect, and the microcephaly and digital anomalies are non-progressive, so the principal early risk relates to the neonatal management of the atresias.",
-  "pitfalls": [
-   "Managing an isolated oesophageal or duodenal atresia without recognising the underlying syndrome",
-   "Overlooking microcephaly as a diagnostic clue when digital anomalies are subtle",
-   "Relying on sequencing alone and missing a whole-gene deletion detectable on microarray",
-   "Assuming intellectual disability is invariable when many individuals have normal cognition"
-  ],
-  "references": [
-   "GeneReviews: Feingold syndrome",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Arrange prompt neonatal surgical correction of oesophageal or duodenal atresia, the principal early surgical concern",
-   "Provide developmental support with early educational and learning intervention for associated learning difficulties",
-   "Undertake serial head circumference monitoring and neuroimaging where clinically indicated given the consistent microcephaly",
-   "Evaluate for and manage associated renal and cardiac anomalies",
-   "Offer orthopaedic and hand assessment of digital anomalies such as brachymesophalangy and syndactyly, intervening only where function is limited",
-   "Coordinate multidisciplinary follow-up across clinical genetics, paediatric surgery and developmental services",
-   "Provide genetic counselling and offer family screening with molecular testing of relatives given the autosomal dominant MYCN haploinsufficiency"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "feingold_syndrome-pathway",
-   "title": "Feingold syndrome (MYCN): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant disorder caused by haploinsufficiency of MYCN, from either a loss-of-function variant or a deletion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal oesophageal atresia with aspiration risk requiring urgent surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing of MYCN, together with microarray to detect a deletion, Imaging and surgical assessment of suspected oesophageal or duodenal atresia, Hand and foot radiography to characterise digital anomalies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Arrange prompt neonatal surgical correction of oesophageal or duodenal atresia, the principal early surgical concern"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Managing an isolated oesophageal or duodenal atresia without recognising the underlying syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of feingold syndrome (mycn)."
-  }
- ],
- "tables": [
-  {
-   "id": "feingold_syndrome-matrix",
-   "title": "Feingold syndrome (MYCN): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant disorder caused by haploinsufficiency of MYCN, from either a loss-of-function variant or a deletion",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant disorder caused by haploinsufficiency of MYCN, from either a loss-of-function variant or a deletion",
+      "Microcephaly is a consistent feature and is often the finding that prompts genetic evaluation",
+      "Characteristic digital anomalies include brachymesophalangy, clinodactyly of the fifth finger, and syndactyly of the toes",
+      "Gastrointestinal atresias, particularly oesophageal and duodenal atresia, are a hallmark and important surgical concern",
+      "Learning difficulties are common but many individuals have normal or only mildly reduced intellect",
+      "Short palpebral fissures and other subtle facial features may be present",
+      "The combination of microcephaly with digital and gastrointestinal anomalies should raise the diagnosis",
+      "Diagnosis is by identifying a MYCN variant or a deletion encompassing MYCN on microarray"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing of MYCN, together with microarray to detect a deletion, Imaging and surgical assessment of suspected",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Feingold syndrome type 1 arises from haploinsufficiency of MYCN, a transcription factor of the MYC family that drives cell proliferation and is critical during embryonic development of the limbs, gut, brain, and other organs. Reduced MYCN dosage, whether from an intragenic loss-of-function variant or a deletion of the gene, impairs the proliferative programmes it normally coordinates, resulting in microcephaly, the characteristic hand and foot anomalies, and failure of normal luminal development in the gut that produces oesophageal and duodenal atresia. Because the mechanism is loss of one functional copy, the disorder is inherited in an autosomal dominant manner, with variable expression among affected individuals.",
+    "additionalDifferentials": [
+      "VACTERL association with overlapping gastrointestinal and limb anomalies",
+      "CHARGE syndrome with atresia and multiple congenital anomalies",
+      "Other syndromic causes of microcephaly with digital anomalies",
+      "Fanconi anaemia with limb anomalies and growth restriction",
+      "Isolated oesophageal or duodenal atresia of non-syndromic cause",
+      "Feingold syndrome type 2 due to a different genetic mechanism"
     ],
-    [
-     "Primary Differentials",
-     "VACTERL association with overlapping gastrointestinal and limb anomalies, CHARGE syndrome with atresia and multiple congenital",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing of MYCN, together with microarray to detect a deletion",
+      "Imaging and surgical assessment of suspected oesophageal or duodenal atresia",
+      "Hand and foot radiography to characterise digital anomalies",
+      "Serial head circumference measurement and neuroimaging where indicated",
+      "Developmental and educational assessment",
+      "Renal and cardiac evaluation for associated anomalies"
     ],
-    [
-     "Management Strategy",
-     "Arrange prompt neonatal surgical correction of oesophageal or duodenal atresia, the principal early surgical concern",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal oesophageal atresia with aspiration risk requiring urgent surgery",
+      "Duodenal atresia presenting with bilious vomiting in the newborn",
+      "Feeding failure and faltering growth related to gastrointestinal anomaly",
+      "Significant associated cardiac or renal malformation"
     ],
-    [
-     "Clinical Pitfall",
-     "Managing an isolated oesophageal or duodenal atresia without recognising the underlying syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely surgical correction of gastrointestinal atresias, the long-term outlook is generally good and lifespan is usually normal; most individuals have normal or mildly reduced intellect, and the microcephaly and digital anomalies are non-progressive, so the principal early risk relates to the neonatal management of the atresias.",
+    "pitfalls": [
+      "Managing an isolated oesophageal or duodenal atresia without recognising the underlying syndrome",
+      "Overlooking microcephaly as a diagnostic clue when digital anomalies are subtle",
+      "Relying on sequencing alone and missing a whole-gene deletion detectable on microarray",
+      "Assuming intellectual disability is invariable when many individuals have normal cognition"
+    ],
+    "references": [
+      "GeneReviews: Feingold syndrome",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Arrange prompt neonatal surgical correction of oesophageal or duodenal atresia, the principal early surgical concern",
+      "Provide developmental support with early educational and learning intervention for associated learning difficulties",
+      "Undertake serial head circumference monitoring and neuroimaging where clinically indicated given the consistent microcephaly",
+      "Evaluate for and manage associated renal and cardiac anomalies",
+      "Offer orthopaedic and hand assessment of digital anomalies such as brachymesophalangy and syndactyly, intervening only where function is limited",
+      "Coordinate multidisciplinary follow-up across clinical genetics, paediatric surgery and developmental services",
+      "Provide genetic counselling and offer family screening with molecular testing of relatives given the autosomal dominant MYCN haploinsufficiency"
     ]
-   ],
-   "caption": "Overview comparison matrix for feingold syndrome (mycn)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "feingold-syndrome-real-image",
-   "title": "Feingold syndrome (MYCN): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "feingold_syndrome-pathway",
+      "title": "Feingold syndrome (MYCN): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant disorder caused by haploinsufficiency of MYCN, from either a loss-of-function variant or a deletion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal oesophageal atresia with aspiration risk requiring urgent surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing of MYCN, together with microarray to detect a deletion, Imaging and surgical assessment of suspected oesophageal or duodenal atresia, Hand and foot radiography to characterise digital anomalies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Arrange prompt neonatal surgical correction of oesophageal or duodenal atresia, the principal early surgical concern"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Managing an isolated oesophageal or duodenal atresia without recognising the underlying syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of feingold syndrome (mycn)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "feingold_syndrome-matrix",
+      "title": "Feingold syndrome (MYCN): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant disorder caused by haploinsufficiency of MYCN, from either a loss-of-function variant or a deletion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing of MYCN, together with microarray to detect a deletion, Imaging and surgical assessment of suspected",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "VACTERL association with overlapping gastrointestinal and limb anomalies, CHARGE syndrome with atresia and multiple congenital",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Arrange prompt neonatal surgical correction of oesophageal or duodenal atresia, the principal early surgical concern",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Managing an isolated oesophageal or duodenal atresia without recognising the underlying syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for feingold syndrome (mycn)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "feingold_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MYCN molecular testing with microarray",
+          "cells": [
+            {
+              "text": "Sequence variant or deletion encompassing MYCN"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging and surgical assessment of oesophageal or duodenal atresia",
+          "cells": [
+            {
+              "text": "Gastrointestinal atresia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and foot radiography",
+          "cells": [
+            {
+              "text": "Digital anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial head circumference and neuroimaging",
+          "cells": [
+            {
+              "text": "Consistent microcephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and educational assessment",
+          "cells": [
+            {
+              "text": "Learning difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "feingold_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "VACTERL association",
+          "cells": [
+            {
+              "text": "Overlapping gastrointestinal and limb anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHARGE syndrome",
+          "cells": [
+            {
+              "text": "Atresia with multiple congenital anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi anaemia",
+          "cells": [
+            {
+              "text": "Limb anomalies and growth restriction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "feingold_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt neonatal surgical correction of atresia",
+          "cells": [
+            {
+              "text": "Oesophageal or duodenal atresia; principal early concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Early educational and learning intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial head circumference and neuroimaging",
+          "cells": [
+            {
+              "text": "Consistent microcephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac anomaly management",
+          "cells": [
+            {
+              "text": "Where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and hand assessment",
+          "cells": [
+            {
+              "text": "Digital anomalies; intervene only where function is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Clinical genetics, paediatric surgery and developmental services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal dominant MYCN haploinsufficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "feingold_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Feingold syndrome (MYCN)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Microcephaly with oesophageal or duodenal atresia and digital anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (aspiration, bilious vomiting, cardiac or renal malformation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal surgical correction of atresia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MYCN sequencing and microarray for deletion; hand radiography; head circumference",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MYCN variant or deletion confirmed on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider VACTERL, CHARGE or other syndromic atresia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt neonatal surgical correction of atresia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Developmental and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial head circumference monitoring and neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and cardiac anomaly evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With timely surgery, outlook is generally good and lifespan usually normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

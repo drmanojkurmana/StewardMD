@@ -1,177 +1,222 @@
 {
- "id": "cacna1e_encephalopathy",
- "name": "CACNA1E-related developmental and epileptic encephalopathy",
- "aliases": [
-  "CACNA1E encephalopathy",
-  "DEE69",
-  "Cav2.3 encephalopathy",
-  "R-type calcium channel encephalopathy"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Paediatric neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "Epilepsy genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by usually de novo gain-of-function variants in CACNA1E, encoding the pore-forming alpha-1E subunit of the R-type voltage-gated calcium channel (Cav2.3).",
-   "Presents as a severe developmental and epileptic encephalopathy (DEE69) with early-onset refractory seizures, profound hypotonia and severe global developmental impairment.",
-   "Distinctive features in the most severe cases include a hyperkinetic or dyskinetic movement disorder, contractures or arthrogryposis, macrocephaly and central hypoventilation.",
-   "Recurrent variants cluster in functionally critical channel regions and enhance calcium influx by slowing channel inactivation, a gain-of-function mechanism.",
-   "It belongs to the calcium channelopathy family and should be distinguished from CACNA1A, CACNA1C (Timothy syndrome), CACNA1D and CACNA1H disorders.",
-   "Neuroimaging may show atrophy or be nonspecific, so the diagnosis is genetic.",
-   "Seizures are frequently pharmacoresistant, and care is supportive and multidisciplinary."
+  "id": "cacna1e_encephalopathy",
+  "name": "CACNA1E-related developmental and epileptic encephalopathy",
+  "aliases": [
+    "CACNA1E encephalopathy",
+    "DEE69",
+    "Cav2.3 encephalopathy",
+    "R-type calcium channel encephalopathy"
   ],
-  "pathophysiology": "CACNA1E encodes the alpha-1E pore-forming subunit of Cav2.3, the R-type high-voltage-activated calcium channel enriched in neurons, where it contributes to calcium-dependent signalling, burst firing and neurotransmitter release. Recurrent de novo missense variants act through a gain-of-function mechanism, typically slowing channel inactivation and increasing calcium current, which drives neuronal hyperexcitability, epileptic encephalopathy and a movement disorder. The most severe outcomes, including contractures and central hypoventilation, are associated with the strongest functional effects on the channel. Inheritance is autosomal dominant and almost always de novo.",
-  "additionalDifferentials": [
-   "CACNA1A disorders (Cav2.1 — epileptic encephalopathy, episodic ataxia, hemiplegic migraine)",
-   "CACNA1C / Timothy syndrome (Cav1.2)",
-   "CACNA1D disorders (Cav1.3 — aldosteronism with seizures and neurodevelopmental disorder)",
-   "CACNA1H and CACNA1G channel variants",
-   "STXBP1, KCNQ2, SCN2A and SCN8A developmental and epileptic encephalopathies",
-   "GNAO1-related movement disorder with epilepsy",
-   "Other causes of arthrogryposis with neonatal encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Trio exome or genome sequencing, or an epilepsy gene panel",
-   "EEG, which may show multifocal discharges, burst-suppression or other severe patterns",
-   "Brain MRI showing atrophy or nonspecific findings",
-   "Assessment of respiratory drive or a sleep study where hypoventilation is suspected",
-   "Developmental and movement-disorder evaluation",
-   "Parental testing to confirm de novo occurrence"
-  ],
-  "redFlags": [
-   "Neonatal or early-infantile refractory seizures with profound hypotonia",
-   "Central hypoventilation or unexplained respiratory insufficiency",
-   "Progressive contractures or arthrogryposis with a movement disorder",
-   "Developmental stagnation without acquisition of milestones"
-  ],
-  "prognosis": "The gain-of-function end of the spectrum is severe, with refractory epilepsy, profound disability and a risk of early death, particularly where central hypoventilation occurs; milder phenotypes are described with lesser channel disturbance.",
-  "pitfalls": [
-   "Treating it as a generic developmental and epileptic encephalopathy without recognising the calcium-channel mechanism and its movement-disorder and respiratory features.",
-   "Confusing it with other CACNA1-family disorders, which differ in channel and phenotype.",
-   "Overlooking central hypoventilation as a cause of clinical deterioration.",
-   "Expecting a diagnostic MRI, as imaging is often nonspecific."
-  ],
-  "references": [
-   "Epilepsy genetics reference literature",
-   "Developmental and epileptic encephalopathy guidelines",
-   "Ion channelopathy review literature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control the refractory seizures with antiseizure medication guided by the EEG pattern and seizure semiology.",
-   "Provide supportive care for profound hypotonia, including feeding support and secretion management.",
-   "Manage the hyperkinetic or dyskinetic movement disorder with appropriate movement-disorder pharmacotherapy.",
-   "Assess and support respiratory drive, providing ventilatory support where central hypoventilation occurs.",
-   "Address contractures and arthrogryposis with physiotherapy and orthopaedic input.",
-   "Coordinate multidisciplinary developmental support through paediatric neurology.",
-   "Offer genetic counselling for autosomal dominant inheritance and confirm de novo occurrence by parental testing.",
-   "Escalate promptly during respiratory compromise, recognising the risk of early death."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cacna1e_encephalopathy-pathway",
-   "title": "CACNA1E-related developmental and epileptic encephalopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by usually de novo gain-of-function variants in CACNA1E, encoding the pore-forming alpha-1E subunit of the R-type voltage-gated calcium channel (Cav2.3).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal or early-infantile refractory seizures with profound hypotonia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Trio exome or genome sequencing, or an epilepsy gene panel, EEG, which may show multifocal discharges, burst-suppression or other severe patterns, Brain MRI showing atrophy or nonspecific findings"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control the refractory seizures with antiseizure medication guided by the EEG pattern and seizure semiology."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating it as a generic developmental and epileptic encephalopathy without recognising the calcium-channel mechanism and its movement-disorder and respiratory features."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cacna1e-related developmental and epileptic encephalopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "cacna1e_encephalopathy-matrix",
-   "title": "CACNA1E-related developmental and epileptic encephalopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by usually de novo gain-of-function variants in CACNA1E, encoding the pore-forming alpha-1E subunit of the R-type",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Paediatric neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Epilepsy genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by usually de novo gain-of-function variants in CACNA1E, encoding the pore-forming alpha-1E subunit of the R-type voltage-gated calcium channel (Cav2.3).",
+      "Presents as a severe developmental and epileptic encephalopathy (DEE69) with early-onset refractory seizures, profound hypotonia and severe global developmental impairment.",
+      "Distinctive features in the most severe cases include a hyperkinetic or dyskinetic movement disorder, contractures or arthrogryposis, macrocephaly and central hypoventilation.",
+      "Recurrent variants cluster in functionally critical channel regions and enhance calcium influx by slowing channel inactivation, a gain-of-function mechanism.",
+      "It belongs to the calcium channelopathy family and should be distinguished from CACNA1A, CACNA1C (Timothy syndrome), CACNA1D and CACNA1H disorders.",
+      "Neuroimaging may show atrophy or be nonspecific, so the diagnosis is genetic.",
+      "Seizures are frequently pharmacoresistant, and care is supportive and multidisciplinary."
     ],
-    [
-     "Key Investigations",
-     "Trio exome or genome sequencing, or an epilepsy gene panel, EEG, which may show multifocal discharges, burst-suppression or other",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CACNA1E encodes the alpha-1E pore-forming subunit of Cav2.3, the R-type high-voltage-activated calcium channel enriched in neurons, where it contributes to calcium-dependent signalling, burst firing and neurotransmitter release. Recurrent de novo missense variants act through a gain-of-function mechanism, typically slowing channel inactivation and increasing calcium current, which drives neuronal hyperexcitability, epileptic encephalopathy and a movement disorder. The most severe outcomes, including contractures and central hypoventilation, are associated with the strongest functional effects on the channel. Inheritance is autosomal dominant and almost always de novo.",
+    "additionalDifferentials": [
+      "CACNA1A disorders (Cav2.1 — epileptic encephalopathy, episodic ataxia, hemiplegic migraine)",
+      "CACNA1C / Timothy syndrome (Cav1.2)",
+      "CACNA1D disorders (Cav1.3 — aldosteronism with seizures and neurodevelopmental disorder)",
+      "CACNA1H and CACNA1G channel variants",
+      "STXBP1, KCNQ2, SCN2A and SCN8A developmental and epileptic encephalopathies",
+      "GNAO1-related movement disorder with epilepsy",
+      "Other causes of arthrogryposis with neonatal encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "CACNA1A disorders (Cav2.1 - epileptic encephalopathy, episodic ataxia, hemiplegic migraine), CACNA1C / Timothy syndrome (Cav1.2),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Trio exome or genome sequencing, or an epilepsy gene panel",
+      "EEG, which may show multifocal discharges, burst-suppression or other severe patterns",
+      "Brain MRI showing atrophy or nonspecific findings",
+      "Assessment of respiratory drive or a sleep study where hypoventilation is suspected",
+      "Developmental and movement-disorder evaluation",
+      "Parental testing to confirm de novo occurrence"
     ],
-    [
-     "Management Strategy",
-     "Control the refractory seizures with antiseizure medication guided by the EEG pattern and seizure semiology.",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal or early-infantile refractory seizures with profound hypotonia",
+      "Central hypoventilation or unexplained respiratory insufficiency",
+      "Progressive contractures or arthrogryposis with a movement disorder",
+      "Developmental stagnation without acquisition of milestones"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating it as a generic developmental and epileptic encephalopathy without recognising the calcium-channel mechanism and its",
-     "Prevent diagnostic or management error"
+    "prognosis": "The gain-of-function end of the spectrum is severe, with refractory epilepsy, profound disability and a risk of early death, particularly where central hypoventilation occurs; milder phenotypes are described with lesser channel disturbance.",
+    "pitfalls": [
+      "Treating it as a generic developmental and epileptic encephalopathy without recognising the calcium-channel mechanism and its movement-disorder and respiratory features.",
+      "Confusing it with other CACNA1-family disorders, which differ in channel and phenotype.",
+      "Overlooking central hypoventilation as a cause of clinical deterioration.",
+      "Expecting a diagnostic MRI, as imaging is often nonspecific."
+    ],
+    "references": [
+      "Epilepsy genetics reference literature",
+      "Developmental and epileptic encephalopathy guidelines",
+      "Ion channelopathy review literature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control the refractory seizures with antiseizure medication guided by the EEG pattern and seizure semiology.",
+      "Provide supportive care for profound hypotonia, including feeding support and secretion management.",
+      "Manage the hyperkinetic or dyskinetic movement disorder with appropriate movement-disorder pharmacotherapy.",
+      "Assess and support respiratory drive, providing ventilatory support where central hypoventilation occurs.",
+      "Address contractures and arthrogryposis with physiotherapy and orthopaedic input.",
+      "Coordinate multidisciplinary developmental support through paediatric neurology.",
+      "Offer genetic counselling for autosomal dominant inheritance and confirm de novo occurrence by parental testing.",
+      "Escalate promptly during respiratory compromise, recognising the risk of early death."
     ]
-   ],
-   "caption": "Overview comparison matrix for cacna1e-related developmental and epileptic encephalopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cacna1e-encephalopathy-real-image",
-   "title": "CACNA1E-related developmental and epileptic encephalopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cacna1e_encephalopathy-pathway",
+      "title": "CACNA1E-related developmental and epileptic encephalopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by usually de novo gain-of-function variants in CACNA1E, encoding the pore-forming alpha-1E subunit of the R-type voltage-gated calcium channel (Cav2.3).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal or early-infantile refractory seizures with profound hypotonia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Trio exome or genome sequencing, or an epilepsy gene panel, EEG, which may show multifocal discharges, burst-suppression or other severe patterns, Brain MRI showing atrophy or nonspecific findings"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control the refractory seizures with antiseizure medication guided by the EEG pattern and seizure semiology."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating it as a generic developmental and epileptic encephalopathy without recognising the calcium-channel mechanism and its movement-disorder and respiratory features."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cacna1e-related developmental and epileptic encephalopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cacna1e_encephalopathy-matrix",
+      "title": "CACNA1E-related developmental and epileptic encephalopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by usually de novo gain-of-function variants in CACNA1E, encoding the pore-forming alpha-1E subunit of the R-type",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Trio exome or genome sequencing, or an epilepsy gene panel, EEG, which may show multifocal discharges, burst-suppression or other",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CACNA1A disorders (Cav2.1 - epileptic encephalopathy, episodic ataxia, hemiplegic migraine), CACNA1C / Timothy syndrome (Cav1.2),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control the refractory seizures with antiseizure medication guided by the EEG pattern and seizure semiology.",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating it as a generic developmental and epileptic encephalopathy without recognising the calcium-channel mechanism and its",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cacna1e-related developmental and epileptic encephalopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Epilepsy genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cacna1e_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in CACNA1E-related developmental and epileptic encephalopathy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Trio exome or genome sequencing, or epilepsy gene panel", "cells": [{"text": "Recurrent de novo CACNA1E variant"}], "cite": "c1"},
+        {"parameter": "EEG", "cells": [{"text": "Multifocal discharges, burst-suppression or other severe patterns"}], "cite": "c1"},
+        {"parameter": "Brain MRI", "cells": [{"text": "Atrophy or nonspecific findings"}], "cite": "c1"},
+        {"parameter": "Respiratory drive assessment or sleep study", "cells": [{"text": "Suspected hypoventilation"}], "cite": "c1"},
+        {"parameter": "Developmental and movement-disorder evaluation", "cells": [{"text": "Hyperkinetic or dyskinetic movement disorder; contractures"}], "cite": "c1"},
+        {"parameter": "Parental testing", "cells": [{"text": "Confirms de novo occurrence"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "cacna1e_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options in CACNA1E-related developmental and epileptic encephalopathy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Refractory seizures", "cells": [{"text": "Antiseizure medication guided by EEG pattern and seizure semiology"}, {"text": "Frequently pharmacoresistant"}], "cite": "c1"},
+        {"parameter": "Supportive care for hypotonia", "cells": [{"text": "Feeding support and secretion management"}, {"text": "Profound hypotonia"}], "cite": "c1"},
+        {"parameter": "Movement disorder", "cells": [{"text": "Appropriate movement-disorder pharmacotherapy"}, {"text": "Hyperkinetic or dyskinetic"}], "cite": "c1"},
+        {"parameter": "Respiratory support", "cells": [{"text": "Assess and support respiratory drive; ventilatory support where central hypoventilation occurs"}, {"text": "Risk of early death"}], "cite": "c1"},
+        {"parameter": "Contractures", "cells": [{"text": "Physiotherapy and orthopaedic input"}, {"text": "Arthrogryposis"}], "cite": "c1"},
+        {"parameter": "Developmental support", "cells": [{"text": "Multidisciplinary support through paediatric neurology"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Autosomal dominant; parental testing to confirm de novo status"}, {"text": "Family"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cacna1e_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of CACNA1E-related developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Early-infantile refractory seizures with profound hypotonia and developmental stagnation", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: central hypoventilation or respiratory insufficiency?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent respiratory support and intensive care review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "EEG; brain MRI; exome or genome sequencing or epilepsy gene panel", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Recurrent de novo CACNA1E variant identified?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "EEG-guided antiseizure medication; movement-disorder treatment; supportive feeding; physiotherapy", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Assess for other CACNA1 or developmental and epileptic encephalopathy genes", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Severe refractory epilepsy and disability; early death risk with hypoventilation", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -1,172 +1,441 @@
 {
- "id": "fistula_in_ano",
- "name": "Fistula-in-ano",
- "aliases": [
-  "anal fistula",
-  "fistula in ano",
-  "perianal fistula"
- ],
- "class": "non_infective",
- "system": "GI / Anorectal / Surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with persistent or recurrent perianal discharge, irritation, and intermittent swelling or abscess, often following drainage of a previous anorectal abscess",
-   "A fistula is an abnormal epithelialised track connecting the anal canal or rectum (internal opening) to the perianal skin (external opening)",
-   "Goodsall's rule helps predict the internal opening: anterior external openings tend to track radially, while posterior ones tend to curve to the posterior midline",
-   "Fistulae are classified by their relationship to the sphincter complex (intersphincteric, transsphincteric, suprasphincteric, extrasphincteric) which determines treatment and continence risk",
-   "The primary treatment goal is to eradicate sepsis and close the track while preserving continence",
-   "Low, simple fistulae may be laid open (fistulotomy), whereas high or complex tracks require sphincter-sparing options such as seton drainage, advancement flaps, or LIFT procedures",
-   "Multiple, complex, or recurrent fistulae, especially with proctitis, should raise suspicion of Crohn's disease, tuberculosis, or malignancy",
-   "A draining (loose) seton controls sepsis and maintains drainage while definitive management is planned"
+  "id": "fistula_in_ano",
+  "name": "Fistula-in-ano",
+  "aliases": [
+    "anal fistula",
+    "fistula in ano",
+    "perianal fistula"
   ],
-  "pathophysiology": "Most anal fistulae are the chronic sequel of a cryptoglandular anorectal abscess. After the abscess drains, the primary infected anal gland at the dentate line persists and an epithelialised or granulation-lined track remains between the internal opening in the anal canal and the external opening on the skin. Ongoing low-grade infection prevents healing. The track's course through the sphincter complex determines its classification and the surgical risk to continence. Secondary causes include Crohn's disease, tuberculosis, radiation, trauma, and malignancy, which produce more complex and refractory fistulae.",
-  "additionalDifferentials": [
-   "Recurrent anorectal abscess",
-   "Pilonidal sinus",
-   "Hidradenitis suppurativa",
-   "Perianal Crohn's disease",
-   "Infected perianal sebaceous cyst",
-   "Anal or rectal carcinoma",
-   "Tuberculous or actinomycotic sinus"
-  ],
-  "additionalInvestigations": [
-   "Examination under anaesthesia to define internal and external openings and the track",
-   "MRI pelvis for complex, recurrent, or suspected Crohn's-related fistulae",
-   "Endoanal ultrasound, sometimes with hydrogen peroxide enhancement, to map the track",
-   "Endoscopy and biopsy when inflammatory bowel disease or malignancy is suspected"
-  ],
-  "redFlags": [
-   "Complex, branching, or recurrent fistulae suggesting Crohn's disease or malignancy",
-   "Associated undrained sepsis with systemic upset requiring urgent drainage",
-   "Rapidly progressive perianal sepsis suggesting necrotising infection",
-   "Induration or a mass raising concern for underlying carcinoma"
-  ],
-  "prognosis": "Simple low fistulae have high cure rates after fistulotomy with minimal continence impact. Complex, high, or Crohn's-related fistulae are prone to recurrence and require staged sphincter-preserving strategies, with a persistent risk of continence disturbance.",
-  "pitfalls": [
-   "Laying open a high transsphincteric or suprasphincteric fistula and causing incontinence",
-   "Failing to identify and address the internal opening, leading to recurrence",
-   "Overlooking Crohn's disease in complex or recurrent disease",
-   "Creating a false track by forceful probing"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical eradication of the track while preserving continence, with fistulotomy (laying open) for low, simple fistulae",
-   "Sphincter-sparing techniques for high or complex tracks, including seton drainage, ligation of the intersphincteric fistula tract and mucosal advancement flaps",
-   "Drainage of any associated anorectal abscess and control of active sepsis, often with a loose seton, before definitive repair",
-   "For Crohn's-related fistulae, combined medical therapy with anti-TNF agents such as infliximab alongside seton drainage",
-   "Examination under anaesthesia and MRI or endoanal ultrasound to map the track relative to the sphincter complex",
-   "Colorectal surgical referral, with biopsy where inflammatory bowel disease or malignancy is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fistula_in_ano-pathway",
-   "title": "Fistula-in-ano: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with persistent or recurrent perianal discharge, irritation, and intermittent swelling or abscess, often following drainage of a previous anorectal abscess",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Complex, branching, or recurrent fistulae suggesting Crohn's disease or malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination under anaesthesia to define internal and external openings and the track, MRI pelvis for complex, recurrent, or suspected Crohn's-related fistulae, Endoanal ultrasound, sometimes with hydrogen peroxide"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical eradication of the track while preserving continence, with fistulotomy (laying open) for low, simple fistulae"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Laying open a high transsphincteric or suprasphincteric fistula and causing incontinence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fistula-in-ano."
-  }
- ],
- "tables": [
-  {
-   "id": "fistula_in_ano-matrix",
-   "title": "Fistula-in-ano: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with persistent or recurrent perianal discharge, irritation, and intermittent swelling or abscess, often following",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "GI / Anorectal / Surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with persistent or recurrent perianal discharge, irritation, and intermittent swelling or abscess, often following drainage of a previous anorectal abscess",
+      "A fistula is an abnormal epithelialised track connecting the anal canal or rectum (internal opening) to the perianal skin (external opening)",
+      "Goodsall's rule helps predict the internal opening: anterior external openings tend to track radially, while posterior ones tend to curve to the posterior midline",
+      "Fistulae are classified by their relationship to the sphincter complex (intersphincteric, transsphincteric, suprasphincteric, extrasphincteric) which determines treatment and continence risk",
+      "The primary treatment goal is to eradicate sepsis and close the track while preserving continence",
+      "Low, simple fistulae may be laid open (fistulotomy), whereas high or complex tracks require sphincter-sparing options such as seton drainage, advancement flaps, or LIFT procedures",
+      "Multiple, complex, or recurrent fistulae, especially with proctitis, should raise suspicion of Crohn's disease, tuberculosis, or malignancy",
+      "A draining (loose) seton controls sepsis and maintains drainage while definitive management is planned"
     ],
-    [
-     "Key Investigations",
-     "Examination under anaesthesia to define internal and external openings and the track, MRI pelvis for complex, recurrent, or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Most anal fistulae are the chronic sequel of a cryptoglandular anorectal abscess. After the abscess drains, the primary infected anal gland at the dentate line persists and an epithelialised or granulation-lined track remains between the internal opening in the anal canal and the external opening on the skin. Ongoing low-grade infection prevents healing. The track's course through the sphincter complex determines its classification and the surgical risk to continence. Secondary causes include Crohn's disease, tuberculosis, radiation, trauma, and malignancy, which produce more complex and refractory fistulae.",
+    "additionalDifferentials": [
+      "Recurrent anorectal abscess",
+      "Pilonidal sinus",
+      "Hidradenitis suppurativa",
+      "Perianal Crohn's disease",
+      "Infected perianal sebaceous cyst",
+      "Anal or rectal carcinoma",
+      "Tuberculous or actinomycotic sinus"
     ],
-    [
-     "Primary Differentials",
-     "Recurrent anorectal abscess, Pilonidal sinus, Hidradenitis suppurativa",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination under anaesthesia to define internal and external openings and the track",
+      "MRI pelvis for complex, recurrent, or suspected Crohn's-related fistulae",
+      "Endoanal ultrasound, sometimes with hydrogen peroxide enhancement, to map the track",
+      "Endoscopy and biopsy when inflammatory bowel disease or malignancy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Surgical eradication of the track while preserving continence, with fistulotomy (laying open) for low, simple fistulae",
-     "Core treatment modality"
+    "redFlags": [
+      "Complex, branching, or recurrent fistulae suggesting Crohn's disease or malignancy",
+      "Associated undrained sepsis with systemic upset requiring urgent drainage",
+      "Rapidly progressive perianal sepsis suggesting necrotising infection",
+      "Induration or a mass raising concern for underlying carcinoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Laying open a high transsphincteric or suprasphincteric fistula and causing incontinence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Simple low fistulae have high cure rates after fistulotomy with minimal continence impact. Complex, high, or Crohn's-related fistulae are prone to recurrence and require staged sphincter-preserving strategies, with a persistent risk of continence disturbance.",
+    "pitfalls": [
+      "Laying open a high transsphincteric or suprasphincteric fistula and causing incontinence",
+      "Failing to identify and address the internal opening, leading to recurrence",
+      "Overlooking Crohn's disease in complex or recurrent disease",
+      "Creating a false track by forceful probing"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical eradication of the track while preserving continence, with fistulotomy (laying open) for low, simple fistulae",
+      "Sphincter-sparing techniques for high or complex tracks, including seton drainage, ligation of the intersphincteric fistula tract and mucosal advancement flaps",
+      "Drainage of any associated anorectal abscess and control of active sepsis, often with a loose seton, before definitive repair",
+      "For Crohn's-related fistulae, combined medical therapy with anti-TNF agents such as infliximab alongside seton drainage",
+      "Examination under anaesthesia and MRI or endoanal ultrasound to map the track relative to the sphincter complex",
+      "Colorectal surgical referral, with biopsy where inflammatory bowel disease or malignancy is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for fistula-in-ano."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fistula-in-ano-real-image",
-   "title": "Fistula-in-ano: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fistula_in_ano-pathway",
+      "title": "Fistula-in-ano: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with persistent or recurrent perianal discharge, irritation, and intermittent swelling or abscess, often following drainage of a previous anorectal abscess",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Complex, branching, or recurrent fistulae suggesting Crohn's disease or malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination under anaesthesia to define internal and external openings and the track, MRI pelvis for complex, recurrent, or suspected Crohn's-related fistulae, Endoanal ultrasound, sometimes with hydrogen peroxide"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical eradication of the track while preserving continence, with fistulotomy (laying open) for low, simple fistulae"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Laying open a high transsphincteric or suprasphincteric fistula and causing incontinence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fistula-in-ano."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fistula_in_ano-matrix",
+      "title": "Fistula-in-ano: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with persistent or recurrent perianal discharge, irritation, and intermittent swelling or abscess, often following",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination under anaesthesia to define internal and external openings and the track, MRI pelvis for complex, recurrent, or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Recurrent anorectal abscess, Pilonidal sinus, Hidradenitis suppurativa",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical eradication of the track while preserving continence, with fistulotomy (laying open) for low, simple fistulae",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Laying open a high transsphincteric or suprasphincteric fistula and causing incontinence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fistula-in-ano."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fistula_in_ano-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Internal and external openings and track"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI pelvis",
+          "cells": [
+            {
+              "text": "Complex, recurrent or Crohn's-related fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoanal ultrasound",
+          "cells": [
+            {
+              "text": "Track mapping relative to the sphincter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy and biopsy",
+          "cells": [
+            {
+              "text": "Inflammatory bowel disease or malignancy suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fistula_in_ano-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent anorectal abscess",
+          "cells": [
+            {
+              "text": "Recurrent perianal collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal Crohn's disease",
+          "cells": [
+            {
+              "text": "Complex, branching or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pilonidal sinus or hidradenitis suppurativa",
+          "cells": [
+            {
+              "text": "Other perianal sinus tracts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fistula_in_ano-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fistulotomy for low, simple fistulae",
+          "cells": [
+            {
+              "text": "Laying open the track"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sphincter-sparing techniques",
+          "cells": [
+            {
+              "text": "Seton drainage or ligation of intersphincteric fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage of abscess and control of sepsis",
+          "cells": [
+            {
+              "text": "Often with a loose seton before definitive repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-TNF agents with seton drainage",
+          "cells": [
+            {
+              "text": "Crohn's-related fistulae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mapping by examination and MRI or endoanal ultrasound",
+          "cells": [
+            {
+              "text": "Relation to sphincter complex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colorectal surgical referral",
+          "cells": [
+            {
+              "text": "Biopsy where inflammatory bowel disease or malignancy suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fistula_in_ano-dx-mgmt",
+      "title": "Diagnosis and management of Fistula-in-ano",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent or recurrent perianal discharge, with swelling or abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (complex or recurrent tracks, undrained sepsis, necrotising infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage of undrained sepsis; assess for necrotising infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia; MRI for complex disease; endoanal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Simple track with no Crohn's disease or malignancy on imaging and biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Crohn's disease, tuberculosis or malignancy; biopsy the track",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fistulotomy for low, simple fistulae",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Seton drainage and sphincter-sparing options for high tracks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drain abscess and control sepsis before definitive repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anti-TNF therapy with seton for Crohn's-related disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "High cure rates for simple low fistulae; complex or Crohn's tracks often recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

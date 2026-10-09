@@ -1,178 +1,456 @@
 {
- "id": "cystic_adventitial_disease",
- "name": "Cystic adventitial disease",
- "aliases": [
-  "Adventitial cystic disease",
-  "Cystic adventitial degeneration"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare non-atherosclerotic cause of claudication in which a mucin-containing cyst within the arterial adventitia compresses the lumen; the popliteal artery is by far the commonest site.",
-   "Characteristically affects relatively young or middle-aged men without conventional cardiovascular risk factors.",
-   "Produces intermittent, sometimes rapidly progressive, calf claudication, with symptoms that may vary with knee position.",
-   "Ishikawa's sign describes loss of a palpable distal pulse on knee flexion as the cyst compression increases.",
-   "Imaging shows smooth extrinsic narrowing, the 'scimitar' sign on angiography, or an eccentric well-defined cyst on ultrasound and MRI without atherosclerosis elsewhere.",
-   "MRI is particularly useful, demonstrating the cystic fluid collection within the vessel wall.",
-   "Treatment is surgical, by cyst evacuation or resection with bypass or interposition graft; simple aspiration has a high recurrence rate.",
-   "It should be considered in any young patient with claudication and otherwise normal, non-atherosclerotic arteries."
+  "id": "cystic_adventitial_disease",
+  "name": "Cystic adventitial disease",
+  "aliases": [
+    "Adventitial cystic disease",
+    "Cystic adventitial degeneration"
   ],
-  "pathophysiology": "A mucinous, gelatinous cyst resembling a ganglion develops within the adventitia of the artery and progressively encroaches on the lumen. Several origins are proposed: a developmental theory invoking embryonic mesenchymal rests, a degenerative ganglion-like process, and an articular theory in which a communication with the adjacent knee joint capsule allows synovial-type mucin to track along vascular branches into the adventitia. The cyst content is a mucopolysaccharide-rich fluid. Because the underlying problem is extrinsic compression of an otherwise healthy artery, symptoms depend on cyst volume and the position-dependent geometry of the vessel, and complete luminal thrombosis can occur.",
-  "additionalDifferentials": [
-   "Atherosclerotic peripheral arterial disease",
-   "Popliteal artery entrapment syndrome",
-   "Thrombosed popliteal artery aneurysm",
-   "Baker's cyst",
-   "Fibromuscular dysplasia",
-   "Thromboangiitis obliterans (Buerger's disease)",
-   "Extrinsic compression by a soft-tissue mass"
-  ],
-  "additionalInvestigations": [
-   "Ankle-brachial pressure index, which may fall with knee flexion or exercise",
-   "Duplex ultrasound showing an eccentric cystic wall lesion with a preserved distal artery",
-   "MRI or MR angiography, which best demonstrates the adventitial cyst and its content",
-   "CT angiography",
-   "Catheter angiography showing a smooth 'scimitar' or hourglass narrowing",
-   "Provocative positional testing of pulses and pressures",
-   "Histology of the resected cyst to confirm the diagnosis"
-  ],
-  "redFlags": [
-   "Acute limb ischaemia from complete arterial occlusion or thrombosis.",
-   "Rapidly worsening short-distance claudication or rest pain.",
-   "Loss of distal pulses, especially provoked by knee flexion.",
-   "New sensory or motor changes in the foot.",
-   "Recurrence of symptoms after previous treatment."
-  ],
-  "prognosis": "Outcomes after surgical treatment are generally good, with resolution of symptoms, although recurrence is well recognised, particularly after aspiration alone or when a joint communication is not addressed. Long-term patency is favourable when the diseased segment is resected and reconstructed.",
-  "pitfalls": [
-   "Misdiagnosing it as ordinary atherosclerotic claudication and missing the extrinsic cause in a young patient.",
-   "Relying on simple cyst aspiration, which is prone to recurrence.",
-   "Failing to recognise an associated communication with the knee joint.",
-   "Attempting angioplasty or stenting of an extrinsic compressive lesion, which tends to fail.",
-   "Confusing it with popliteal entrapment or a thrombosed aneurysm without dedicated cross-sectional imaging."
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "Oxford Textbook of Vascular Surgery",
-   "Vascular and Endovascular Surgery: A Comprehensive Review"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat definitively by surgical resection of the diseased arterial segment with vein interposition graft or bypass to remove the mucinous adventitial cyst and restore flow",
-   "Where the artery wall is preserved, evacuate the cyst with adventitiectomy, and identify and divide any communication with the adjacent joint capsule to prevent recurrence",
-   "Reserve image-guided percutaneous cyst aspiration for selected cases, recognising its higher recurrence than open surgery",
-   "Relieve claudication and preserve limb function pending intervention",
-   "Maintain duplex ultrasound surveillance after treatment to detect recurrence and confirm graft patency",
-   "Manage acute deterioration promptly, as complete luminal thrombosis can precipitate acute limb ischaemia requiring urgent revascularisation",
-   "Refer to vascular surgery for definitive assessment and reconstruction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cystic_adventitial_disease-pathway",
-   "title": "Cystic adventitial disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare non-atherosclerotic cause of claudication in which a mucin-containing cyst within the arterial adventitia compresses the lumen; the popliteal artery is by far the commonest site.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute limb ischaemia from complete arterial occlusion or thrombosis.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ankle-brachial pressure index, which may fall with knee flexion or exercise, Duplex ultrasound showing an eccentric cystic wall lesion with a preserved distal artery, MRI or MR angiography, which best demonstrates the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat definitively by surgical resection of the diseased arterial segment with vein interposition graft or bypass to remove the mucinous adventitial cyst and restore flow"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as ordinary atherosclerotic claudication and missing the extrinsic cause in a young patient."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cystic adventitial disease."
-  }
- ],
- "tables": [
-  {
-   "id": "cystic_adventitial_disease-matrix",
-   "title": "Cystic adventitial disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare non-atherosclerotic cause of claudication in which a mucin-containing cyst within the arterial adventitia compresses the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare non-atherosclerotic cause of claudication in which a mucin-containing cyst within the arterial adventitia compresses the lumen; the popliteal artery is by far the commonest site.",
+      "Characteristically affects relatively young or middle-aged men without conventional cardiovascular risk factors.",
+      "Produces intermittent, sometimes rapidly progressive, calf claudication, with symptoms that may vary with knee position.",
+      "Ishikawa's sign describes loss of a palpable distal pulse on knee flexion as the cyst compression increases.",
+      "Imaging shows smooth extrinsic narrowing, the 'scimitar' sign on angiography, or an eccentric well-defined cyst on ultrasound and MRI without atherosclerosis elsewhere.",
+      "MRI is particularly useful, demonstrating the cystic fluid collection within the vessel wall.",
+      "Treatment is surgical, by cyst evacuation or resection with bypass or interposition graft; simple aspiration has a high recurrence rate.",
+      "It should be considered in any young patient with claudication and otherwise normal, non-atherosclerotic arteries."
     ],
-    [
-     "Key Investigations",
-     "Ankle-brachial pressure index, which may fall with knee flexion or exercise, Duplex ultrasound showing an eccentric cystic wall",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A mucinous, gelatinous cyst resembling a ganglion develops within the adventitia of the artery and progressively encroaches on the lumen. Several origins are proposed: a developmental theory invoking embryonic mesenchymal rests, a degenerative ganglion-like process, and an articular theory in which a communication with the adjacent knee joint capsule allows synovial-type mucin to track along vascular branches into the adventitia. The cyst content is a mucopolysaccharide-rich fluid. Because the underlying problem is extrinsic compression of an otherwise healthy artery, symptoms depend on cyst volume and the position-dependent geometry of the vessel, and complete luminal thrombosis can occur.",
+    "additionalDifferentials": [
+      "Atherosclerotic peripheral arterial disease",
+      "Popliteal artery entrapment syndrome",
+      "Thrombosed popliteal artery aneurysm",
+      "Baker's cyst",
+      "Fibromuscular dysplasia",
+      "Thromboangiitis obliterans (Buerger's disease)",
+      "Extrinsic compression by a soft-tissue mass"
     ],
-    [
-     "Primary Differentials",
-     "Atherosclerotic peripheral arterial disease, Popliteal artery entrapment syndrome, Thrombosed popliteal artery aneurysm",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ankle-brachial pressure index, which may fall with knee flexion or exercise",
+      "Duplex ultrasound showing an eccentric cystic wall lesion with a preserved distal artery",
+      "MRI or MR angiography, which best demonstrates the adventitial cyst and its content",
+      "CT angiography",
+      "Catheter angiography showing a smooth 'scimitar' or hourglass narrowing",
+      "Provocative positional testing of pulses and pressures",
+      "Histology of the resected cyst to confirm the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Treat definitively by surgical resection of the diseased arterial segment with vein interposition graft or bypass to remove the",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute limb ischaemia from complete arterial occlusion or thrombosis.",
+      "Rapidly worsening short-distance claudication or rest pain.",
+      "Loss of distal pulses, especially provoked by knee flexion.",
+      "New sensory or motor changes in the foot.",
+      "Recurrence of symptoms after previous treatment."
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as ordinary atherosclerotic claudication and missing the extrinsic cause in a young patient.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes after surgical treatment are generally good, with resolution of symptoms, although recurrence is well recognised, particularly after aspiration alone or when a joint communication is not addressed. Long-term patency is favourable when the diseased segment is resected and reconstructed.",
+    "pitfalls": [
+      "Misdiagnosing it as ordinary atherosclerotic claudication and missing the extrinsic cause in a young patient.",
+      "Relying on simple cyst aspiration, which is prone to recurrence.",
+      "Failing to recognise an associated communication with the knee joint.",
+      "Attempting angioplasty or stenting of an extrinsic compressive lesion, which tends to fail.",
+      "Confusing it with popliteal entrapment or a thrombosed aneurysm without dedicated cross-sectional imaging."
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "Oxford Textbook of Vascular Surgery",
+      "Vascular and Endovascular Surgery: A Comprehensive Review"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat definitively by surgical resection of the diseased arterial segment with vein interposition graft or bypass to remove the mucinous adventitial cyst and restore flow",
+      "Where the artery wall is preserved, evacuate the cyst with adventitiectomy, and identify and divide any communication with the adjacent joint capsule to prevent recurrence",
+      "Reserve image-guided percutaneous cyst aspiration for selected cases, recognising its higher recurrence than open surgery",
+      "Relieve claudication and preserve limb function pending intervention",
+      "Maintain duplex ultrasound surveillance after treatment to detect recurrence and confirm graft patency",
+      "Manage acute deterioration promptly, as complete luminal thrombosis can precipitate acute limb ischaemia requiring urgent revascularisation",
+      "Refer to vascular surgery for definitive assessment and reconstruction"
     ]
-   ],
-   "caption": "Overview comparison matrix for cystic adventitial disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cystic-adventitial-disease-real-image",
-   "title": "Cystic adventitial disease: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "cystic_adventitial_disease-pathway",
+      "title": "Cystic adventitial disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare non-atherosclerotic cause of claudication in which a mucin-containing cyst within the arterial adventitia compresses the lumen; the popliteal artery is by far the commonest site.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute limb ischaemia from complete arterial occlusion or thrombosis.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ankle-brachial pressure index, which may fall with knee flexion or exercise, Duplex ultrasound showing an eccentric cystic wall lesion with a preserved distal artery, MRI or MR angiography, which best demonstrates the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat definitively by surgical resection of the diseased arterial segment with vein interposition graft or bypass to remove the mucinous adventitial cyst and restore flow"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as ordinary atherosclerotic claudication and missing the extrinsic cause in a young patient."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cystic adventitial disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cystic_adventitial_disease-matrix",
+      "title": "Cystic adventitial disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare non-atherosclerotic cause of claudication in which a mucin-containing cyst within the arterial adventitia compresses the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ankle-brachial pressure index, which may fall with knee flexion or exercise, Duplex ultrasound showing an eccentric cystic wall",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Atherosclerotic peripheral arterial disease, Popliteal artery entrapment syndrome, Thrombosed popliteal artery aneurysm",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat definitively by surgical resection of the diseased arterial segment with vein interposition graft or bypass to remove the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as ordinary atherosclerotic claudication and missing the extrinsic cause in a young patient.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cystic adventitial disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystic_adventitial_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankle-brachial pressure index",
+          "cells": [
+            {
+              "text": "May fall with knee flexion or exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound",
+          "cells": [
+            {
+              "text": "Eccentric cystic wall lesion with preserved distal artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or MR angiography",
+          "cells": [
+            {
+              "text": "Adventitial cyst and its content"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography",
+          "cells": [
+            {
+              "text": "Smooth scimitar or hourglass narrowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Provocative positional pulse testing",
+          "cells": [
+            {
+              "text": "Pulses lost with knee flexion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_adventitial_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atherosclerotic peripheral arterial disease",
+          "cells": [
+            {
+              "text": "Pitfall: young patient with extrinsic cause missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Popliteal artery entrapment syndrome",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baker's cyst",
+          "cells": [
+            {
+              "text": "Named look-alike popliteal swelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_adventitial_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection with vein graft or bypass",
+          "cells": [
+            {
+              "text": "Definitive treatment of the diseased segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adventitiectomy",
+          "cells": [
+            {
+              "text": "Where the artery wall is preserved; divide any joint communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percutaneous aspiration",
+          "cells": [
+            {
+              "text": "Selected cases only; higher recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Claudication relief",
+          "cells": [
+            {
+              "text": "Preserve limb function pending intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex surveillance",
+          "cells": [
+            {
+              "text": "Recurrence and graft patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent revascularisation",
+          "cells": [
+            {
+              "text": "Acute limb ischaemia from complete thrombosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystic_adventitial_disease-dx-mgmt",
+      "title": "Diagnosis and management of Cystic adventitial disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cystic adventitial disease: claudication in a young patient, popliteal cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (acute limb ischaemia, rapid claudication, lost distal pulses)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular surgery for acute limb ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ABPI; duplex ultrasound; MR angiography; catheter angiography; positional tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show an eccentric cystic lesion with arterial narrowing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atherosclerosis, popliteal entrapment or Baker cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection with vein interposition graft or bypass",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adventitiectomy where the wall is preserved",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Percutaneous aspiration only in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Duplex surveillance after treatment for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery generally gives good results; recurrence is recognised after aspiration",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,481 @@
 {
- "id": "oculocutaneous_albinism_type_3",
- "name": "Oculocutaneous albinism type 3",
- "aliases": [
-  "OCA3",
-  "TYRP1 albinism",
-  "Rufous albinism",
-  "Brown albinism"
- ],
- "class": "non_infective",
- "system": "Dermatology / Ophthalmology genetics",
- "specialty": "Clinical genetics / Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by biallelic variants in TYRP1 and classically produces 'rufous' (red) oculocutaneous albinism, best characterised in southern African populations.",
-   "Affected individuals typically have reddish-bronze or ginger-red skin and hair with blue-to-hazel irides, reflecting a shift away from brown-black eumelanin.",
-   "Ocular involvement is often milder than in OCA1 or OCA2, but nystagmus, foveal hypoplasia and reduced acuity can still occur.",
-   "TYRP1 acts downstream in eumelanin synthesis, so its loss reduces dark eumelanin while relatively preserving red-yellow phaeomelanin.",
-   "Because features can be subtle, OCA3 is easily under-recognised and may be mistaken for a constitutional red-haired phenotype.",
-   "Photoprotection and cutaneous malignancy surveillance remain important despite the comparatively mild appearance.",
-   "Inheritance is autosomal recessive; molecular confirmation and genetic counselling are advised."
+  "id": "oculocutaneous_albinism_type_3",
+  "name": "Oculocutaneous albinism type 3",
+  "aliases": [
+    "OCA3",
+    "TYRP1 albinism",
+    "Rufous albinism",
+    "Brown albinism"
   ],
-  "pathophysiology": "OCA3 arises from loss-of-function variants in TYRP1 on chromosome 9, encoding tyrosinase-related protein 1. TYRP1 functions within the melanosome to stabilise tyrosinase and to catalyse a step in the eumelanin (brown-black pigment) synthetic pathway. Deficient TYRP1 activity therefore selectively curtails eumelanin production while red-yellow phaeomelanin is relatively spared, generating the characteristic rufous colouring of skin and hair. Because some pigment is retained and the ocular pathway is less severely disrupted than in tyrosinase-negative albinism, ophthalmic features such as foveal hypoplasia, nystagmus and chiasmal misrouting are variable and sometimes mild.",
-  "additionalDifferentials": [
-   "Oculocutaneous albinism type 1 (TYR).",
-   "Oculocutaneous albinism type 2 (OCA2 gene) — pigment-permitting phenotype.",
-   "Oculocutaneous albinism type 4 (SLC45A2).",
-   "Constitutional red-hair phenotype due to MC1R variants without albinism.",
-   "Ocular albinism (GPR143).",
-   "Other OCA subtypes such as OCA6 and OCA7.",
-   "Syndromic albinism — Hermansky-Pudlak and Chediak-Higashi syndromes."
-  ],
-  "additionalInvestigations": [
-   "Ophthalmological assessment including acuity, nystagmus and iris transillumination.",
-   "Optical coherence tomography for foveal hypoplasia.",
-   "Visual evoked potentials for chiasmal misrouting.",
-   "Molecular genetic testing of TYRP1 within an oculocutaneous albinism panel.",
-   "Hair and skin pigment phenotyping.",
-   "Dermatological review and cutaneous malignancy surveillance.",
-   "Pedigree analysis and genetic counselling."
-  ],
-  "redFlags": [
-   "Suspicious, changing or non-healing cutaneous lesions indicating skin malignancy.",
-   "Unusually severe visual impairment prompting reassessment for another OCA subtype.",
-   "Systemic features such as a bleeding tendency or recurrent infections suggesting syndromic albinism."
-  ],
-  "prognosis": "The condition is generally mild, with a normal lifespan and often only modest visual impairment. As with all albinism, cumulative ultraviolet exposure raises the risk of skin cancer, mitigated by photoprotection and surveillance.",
-  "pitfalls": [
-   "Dismissing the phenotype as ordinary red hair rather than recognising albinism.",
-   "Assuming ocular features are always mild and omitting formal visual assessment.",
-   "Relying on appearance alone rather than confirming the subtype with TYRP1 testing.",
-   "Neglecting skin-cancer prevention because pigmentation looks relatively preserved."
-  ],
-  "references": [
-   "Standard clinical genetics reference texts",
-   "Dermatology reference texts",
-   "Ophthalmic genetics references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No curative treatment; lifelong photoprotection with broad-spectrum sunscreen, protective clothing and sun avoidance despite the comparatively mild rufous phenotype",
-   "Regular dermatological surveillance with dermoscopy for cutaneous malignancy",
-   "Optimisation of vision with refractive correction, tints for photophobia and low-vision aids where nystagmus and reduced acuity are present",
-   "Orthoptic assessment and management of nystagmus and strabismus when present",
-   "Genetic counselling for autosomal recessive TYRP1-related disease with testing of at-risk relatives",
-   "Educational and occupational low-vision support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oculocutaneous_albinism_type_3-pathway",
-   "title": "Oculocutaneous albinism type 3: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by biallelic variants in TYRP1 and classically produces 'rufous' (red) oculocutaneous albinism, best characterised in southern African populations.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Suspicious, changing or non-healing cutaneous lesions indicating skin malignancy.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ophthalmological assessment including acuity, nystagmus and iris transillumination., Optical coherence tomography for foveal hypoplasia., Visual evoked potentials for chiasmal misrouting."
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No curative treatment; lifelong photoprotection with broad-spectrum sunscreen, protective clothing and sun avoidance despite the comparatively mild rufous phenotype"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing the phenotype as ordinary red hair rather than recognising albinism."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oculocutaneous albinism type 3."
-  }
- ],
- "tables": [
-  {
-   "id": "oculocutaneous_albinism_type_3-matrix",
-   "title": "Oculocutaneous albinism type 3: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by biallelic variants in TYRP1 and classically produces 'rufous' (red) oculocutaneous albinism, best characterised in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Ophthalmology genetics",
+  "specialty": "Clinical genetics / Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by biallelic variants in TYRP1 and classically produces 'rufous' (red) oculocutaneous albinism, best characterised in southern African populations.",
+      "Affected individuals typically have reddish-bronze or ginger-red skin and hair with blue-to-hazel irides, reflecting a shift away from brown-black eumelanin.",
+      "Ocular involvement is often milder than in OCA1 or OCA2, but nystagmus, foveal hypoplasia and reduced acuity can still occur.",
+      "TYRP1 acts downstream in eumelanin synthesis, so its loss reduces dark eumelanin while relatively preserving red-yellow phaeomelanin.",
+      "Because features can be subtle, OCA3 is easily under-recognised and may be mistaken for a constitutional red-haired phenotype.",
+      "Photoprotection and cutaneous malignancy surveillance remain important despite the comparatively mild appearance.",
+      "Inheritance is autosomal recessive; molecular confirmation and genetic counselling are advised."
     ],
-    [
-     "Key Investigations",
-     "Ophthalmological assessment including acuity, nystagmus and iris transillumination., Optical coherence tomography for foveal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "OCA3 arises from loss-of-function variants in TYRP1 on chromosome 9, encoding tyrosinase-related protein 1. TYRP1 functions within the melanosome to stabilise tyrosinase and to catalyse a step in the eumelanin (brown-black pigment) synthetic pathway. Deficient TYRP1 activity therefore selectively curtails eumelanin production while red-yellow phaeomelanin is relatively spared, generating the characteristic rufous colouring of skin and hair. Because some pigment is retained and the ocular pathway is less severely disrupted than in tyrosinase-negative albinism, ophthalmic features such as foveal hypoplasia, nystagmus and chiasmal misrouting are variable and sometimes mild.",
+    "additionalDifferentials": [
+      "Oculocutaneous albinism type 1 (TYR).",
+      "Oculocutaneous albinism type 2 (OCA2 gene) — pigment-permitting phenotype.",
+      "Oculocutaneous albinism type 4 (SLC45A2).",
+      "Constitutional red-hair phenotype due to MC1R variants without albinism.",
+      "Ocular albinism (GPR143).",
+      "Other OCA subtypes such as OCA6 and OCA7.",
+      "Syndromic albinism — Hermansky-Pudlak and Chediak-Higashi syndromes."
     ],
-    [
-     "Primary Differentials",
-     "Oculocutaneous albinism type 1 (TYR)., Oculocutaneous albinism type 2 (OCA2 gene) - pigment-permitting phenotype., Oculocutaneous",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ophthalmological assessment including acuity, nystagmus and iris transillumination.",
+      "Optical coherence tomography for foveal hypoplasia.",
+      "Visual evoked potentials for chiasmal misrouting.",
+      "Molecular genetic testing of TYRP1 within an oculocutaneous albinism panel.",
+      "Hair and skin pigment phenotyping.",
+      "Dermatological review and cutaneous malignancy surveillance.",
+      "Pedigree analysis and genetic counselling."
     ],
-    [
-     "Management Strategy",
-     "No curative treatment; lifelong photoprotection with broad-spectrum sunscreen, protective clothing and sun avoidance despite the",
-     "Core treatment modality"
+    "redFlags": [
+      "Suspicious, changing or non-healing cutaneous lesions indicating skin malignancy.",
+      "Unusually severe visual impairment prompting reassessment for another OCA subtype.",
+      "Systemic features such as a bleeding tendency or recurrent infections suggesting syndromic albinism."
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing the phenotype as ordinary red hair rather than recognising albinism.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is generally mild, with a normal lifespan and often only modest visual impairment. As with all albinism, cumulative ultraviolet exposure raises the risk of skin cancer, mitigated by photoprotection and surveillance.",
+    "pitfalls": [
+      "Dismissing the phenotype as ordinary red hair rather than recognising albinism.",
+      "Assuming ocular features are always mild and omitting formal visual assessment.",
+      "Relying on appearance alone rather than confirming the subtype with TYRP1 testing.",
+      "Neglecting skin-cancer prevention because pigmentation looks relatively preserved."
+    ],
+    "references": [
+      "Standard clinical genetics reference texts",
+      "Dermatology reference texts",
+      "Ophthalmic genetics references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No curative treatment; lifelong photoprotection with broad-spectrum sunscreen, protective clothing and sun avoidance despite the comparatively mild rufous phenotype",
+      "Regular dermatological surveillance with dermoscopy for cutaneous malignancy",
+      "Optimisation of vision with refractive correction, tints for photophobia and low-vision aids where nystagmus and reduced acuity are present",
+      "Orthoptic assessment and management of nystagmus and strabismus when present",
+      "Genetic counselling for autosomal recessive TYRP1-related disease with testing of at-risk relatives",
+      "Educational and occupational low-vision support"
     ]
-   ],
-   "caption": "Overview comparison matrix for oculocutaneous albinism type 3."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oculocutaneous-albinism-type-3-real-image",
-   "title": "Oculocutaneous albinism type 3: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "oculocutaneous_albinism_type_3-pathway",
+      "title": "Oculocutaneous albinism type 3: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by biallelic variants in TYRP1 and classically produces 'rufous' (red) oculocutaneous albinism, best characterised in southern African populations.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Suspicious, changing or non-healing cutaneous lesions indicating skin malignancy.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ophthalmological assessment including acuity, nystagmus and iris transillumination., Optical coherence tomography for foveal hypoplasia., Visual evoked potentials for chiasmal misrouting."
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No curative treatment; lifelong photoprotection with broad-spectrum sunscreen, protective clothing and sun avoidance despite the comparatively mild rufous phenotype"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing the phenotype as ordinary red hair rather than recognising albinism."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oculocutaneous albinism type 3."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oculocutaneous_albinism_type_3-matrix",
+      "title": "Oculocutaneous albinism type 3: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by biallelic variants in TYRP1 and classically produces 'rufous' (red) oculocutaneous albinism, best characterised in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ophthalmological assessment including acuity, nystagmus and iris transillumination., Optical coherence tomography for foveal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oculocutaneous albinism type 1 (TYR)., Oculocutaneous albinism type 2 (OCA2 gene) - pigment-permitting phenotype., Oculocutaneous",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No curative treatment; lifelong photoprotection with broad-spectrum sunscreen, protective clothing and sun avoidance despite the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing the phenotype as ordinary red hair rather than recognising albinism.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oculocutaneous albinism type 3."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oculocutaneous_albinism_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Acuity, nystagmus and iris transillumination; ocular features often milder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Foveal hypoplasia, when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual evoked potentials",
+          "cells": [
+            {
+              "text": "Used to detect chiasmal misrouting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TYRP1 molecular testing",
+          "cells": [
+            {
+              "text": "Variants in TYRP1; confirms the subtype because features can be subtle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair and skin pigment phenotyping",
+          "cells": [
+            {
+              "text": "Reddish-bronze or ginger-red skin and hair, with blue-to-hazel irides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological review",
+          "cells": [
+            {
+              "text": "Cutaneous malignancy surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculocutaneous_albinism_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oculocutaneous albinism type 2",
+          "cells": [
+            {
+              "text": "Pigment-permitting phenotype, unlike the rufous presentation here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional red-hair phenotype (MC1R)",
+          "cells": [
+            {
+              "text": "Ordinary red hair without albinism; OCA3 is easily mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic albinism",
+          "cells": [
+            {
+              "text": "Bleeding tendency or recurrent infections point to Hermansky-Pudlak or Chediak-Higashi"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculocutaneous_albinism_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong photoprotection",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Broad-spectrum sunscreen, protective clothing and sun avoidance; no curative treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy surveillance",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "For cutaneous malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vision support",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Refractive correction, tints for photophobia and low-vision aids where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic management",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Nystagmus and strabismus, when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Autosomal recessive TYRP1-related disease; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational and occupational support",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Low-vision support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oculocutaneous_albinism_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Oculocutaneous albinism type 3",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Red or ginger skin and hair with nystagmus or reduced acuity; OCA3 suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (changing skin lesion, severe visual loss, bleeding or recurrent infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude syndromic albinism and assess for another OCA subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ophthalmic exam, OCT, VEP, TYRP1 testing and skin phenotyping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TYRP1 testing confirm OCA3 rather than ordinary red hair?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MC1R red-hair phenotype or another OCA subtype; review genetic results",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong photoprotection despite the milder phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dermoscopy surveillance for cutaneous malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Refractive correction, tints and low-vision aids; orthoptic care when present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive TYRP1 disease; test relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally mild; normal lifespan and modest visual impairment; skin cancer risk remains",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

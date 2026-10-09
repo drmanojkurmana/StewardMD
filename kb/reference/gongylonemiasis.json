@@ -1,171 +1,449 @@
 {
- "id": "gongylonemiasis",
- "name": "Gongylonemiasis",
- "aliases": [
-  "Gongylonema pulchrum",
-  "gullet worm infection",
-  "oral gongylonemiasis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Gongylonemiasis is caused by the spirurid nematode Gongylonema pulchrum, a parasite chiefly of grazing mammals that occasionally infects humans",
-   "Infection follows accidental ingestion of infected intermediate hosts, principally coprophagous beetles and cockroaches, or contaminated food and water",
-   "The worm characteristically migrates within the mucosa of the mouth, lips, tongue, gums or oesophagus",
-   "The hallmark is a sensation of a moving thread beneath the oral mucosa, often with local irritation, tingling or discomfort",
-   "The migrating worm may be visible as a serpiginous track and can sometimes be extracted from the mucosa",
-   "Diagnosis is made by identifying and removing the worm and confirming its morphology",
-   "Manual or surgical extraction of the worm is curative; antiparasitic drugs have been used but removal is the mainstay"
+  "id": "gongylonemiasis",
+  "name": "Gongylonemiasis",
+  "aliases": [
+    "Gongylonema pulchrum",
+    "gullet worm infection",
+    "oral gongylonemiasis"
   ],
-  "pathophysiology": "Humans acquire Gongylonema pulchrum by ingesting infected beetles or cockroaches, or food and water contaminated with them. Released larvae penetrate and then migrate within the superficial layers of the oral and oesophageal mucosa, where the thread-like adult worm tunnels through the epithelium. This migration mechanically irritates the mucosa and produces the characteristic crawling or moving sensation and localised inflammation. Because the parasite remains within the upper alimentary mucosa and does not typically disseminate, the illness is usually a benign, localised nuisance rather than a systemic disease.",
-  "additionalDifferentials": [
-   "Oral larva migrans from other nematodes",
-   "Aphthous ulceration or other oral mucosal lesions",
-   "Delusional parasitosis",
-   "Foreign body in the oral mucosa",
-   "Herpetic or other viral stomatitis",
-   "Burning mouth syndrome"
-  ],
-  "additionalInvestigations": [
-   "Careful oral and mucosal examination to locate the serpiginous track or worm",
-   "Extraction and morphological identification of the worm",
-   "Histological examination of excised mucosa if the worm fragments",
-   "Detailed exposure history for beetle, cockroach or contaminated food ingestion",
-   "Exclusion of other oral mucosal disease by clinical assessment",
-   "Photographic documentation of the migrating lesion to aid diagnosis"
-  ],
-  "redFlags": [
-   "Persistent oral lesions failing to resolve after apparent worm removal",
-   "Marked local inflammation or secondary infection",
-   "Diagnostic uncertainty raising concern for oral neoplasia",
-   "Recurrent symptoms suggesting incomplete extraction"
-  ],
-  "prognosis": "The prognosis is excellent; the infection is benign and self-limited, and removal of the worm results in prompt and lasting resolution of symptoms.",
-  "pitfalls": [
-   "Dismissing the crawling sensation as delusional parasitosis without examining the mucosa",
-   "Incomplete extraction leaving worm fragments and persistent symptoms",
-   "Failing to take an exposure history for insect ingestion",
-   "Over-investigating a benign condition once the worm is identified"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Mechanically extract the worm from the oral or oesophageal mucosa, which is both diagnostic and curative",
-   "Give anthelmintic therapy such as albendazole where the worm cannot be located or extracted, or for persistent symptoms",
-   "Reassure the patient given the benign, self-limited course once the worm is removed",
-   "Advise avoidance of ingesting beetles, cockroaches and food or water contaminated by them to prevent reinfection",
-   "Follow up to confirm resolution of symptoms and exclude a residual or additional worm"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gongylonemiasis-pathway",
-   "title": "Gongylonemiasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Gongylonemiasis is caused by the spirurid nematode Gongylonema pulchrum, a parasite chiefly of grazing mammals that occasionally infects humans",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent oral lesions failing to resolve after apparent worm removal",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful oral and mucosal examination to locate the serpiginous track or worm, Extraction and morphological identification of the worm, Histological examination of excised mucosa if the worm fragments"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Mechanically extract the worm from the oral or oesophageal mucosa, which is both diagnostic and curative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing the crawling sensation as delusional parasitosis without examining the mucosa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gongylonemiasis."
-  }
- ],
- "tables": [
-  {
-   "id": "gongylonemiasis-matrix",
-   "title": "Gongylonemiasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Gongylonemiasis is caused by the spirurid nematode Gongylonema pulchrum, a parasite chiefly of grazing mammals that occasionally",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Gongylonemiasis is caused by the spirurid nematode Gongylonema pulchrum, a parasite chiefly of grazing mammals that occasionally infects humans",
+      "Infection follows accidental ingestion of infected intermediate hosts, principally coprophagous beetles and cockroaches, or contaminated food and water",
+      "The worm characteristically migrates within the mucosa of the mouth, lips, tongue, gums or oesophagus",
+      "The hallmark is a sensation of a moving thread beneath the oral mucosa, often with local irritation, tingling or discomfort",
+      "The migrating worm may be visible as a serpiginous track and can sometimes be extracted from the mucosa",
+      "Diagnosis is made by identifying and removing the worm and confirming its morphology",
+      "Manual or surgical extraction of the worm is curative; antiparasitic drugs have been used but removal is the mainstay"
     ],
-    [
-     "Key Investigations",
-     "Careful oral and mucosal examination to locate the serpiginous track or worm, Extraction and morphological identification of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Humans acquire Gongylonema pulchrum by ingesting infected beetles or cockroaches, or food and water contaminated with them. Released larvae penetrate and then migrate within the superficial layers of the oral and oesophageal mucosa, where the thread-like adult worm tunnels through the epithelium. This migration mechanically irritates the mucosa and produces the characteristic crawling or moving sensation and localised inflammation. Because the parasite remains within the upper alimentary mucosa and does not typically disseminate, the illness is usually a benign, localised nuisance rather than a systemic disease.",
+    "additionalDifferentials": [
+      "Oral larva migrans from other nematodes",
+      "Aphthous ulceration or other oral mucosal lesions",
+      "Delusional parasitosis",
+      "Foreign body in the oral mucosa",
+      "Herpetic or other viral stomatitis",
+      "Burning mouth syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Oral larva migrans from other nematodes, Aphthous ulceration or other oral mucosal lesions, Delusional parasitosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful oral and mucosal examination to locate the serpiginous track or worm",
+      "Extraction and morphological identification of the worm",
+      "Histological examination of excised mucosa if the worm fragments",
+      "Detailed exposure history for beetle, cockroach or contaminated food ingestion",
+      "Exclusion of other oral mucosal disease by clinical assessment",
+      "Photographic documentation of the migrating lesion to aid diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Mechanically extract the worm from the oral or oesophageal mucosa, which is both diagnostic and curative",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent oral lesions failing to resolve after apparent worm removal",
+      "Marked local inflammation or secondary infection",
+      "Diagnostic uncertainty raising concern for oral neoplasia",
+      "Recurrent symptoms suggesting incomplete extraction"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing the crawling sensation as delusional parasitosis without examining the mucosa",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent; the infection is benign and self-limited, and removal of the worm results in prompt and lasting resolution of symptoms.",
+    "pitfalls": [
+      "Dismissing the crawling sensation as delusional parasitosis without examining the mucosa",
+      "Incomplete extraction leaving worm fragments and persistent symptoms",
+      "Failing to take an exposure history for insect ingestion",
+      "Over-investigating a benign condition once the worm is identified"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Mechanically extract the worm from the oral or oesophageal mucosa, which is both diagnostic and curative",
+      "Give anthelmintic therapy such as albendazole where the worm cannot be located or extracted, or for persistent symptoms",
+      "Reassure the patient given the benign, self-limited course once the worm is removed",
+      "Advise avoidance of ingesting beetles, cockroaches and food or water contaminated by them to prevent reinfection",
+      "Follow up to confirm resolution of symptoms and exclude a residual or additional worm"
     ]
-   ],
-   "caption": "Overview comparison matrix for gongylonemiasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gongylonemiasis-real-image",
-   "title": "Gongylonemiasis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "gongylonemiasis-pathway",
+      "title": "Gongylonemiasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Gongylonemiasis is caused by the spirurid nematode Gongylonema pulchrum, a parasite chiefly of grazing mammals that occasionally infects humans",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent oral lesions failing to resolve after apparent worm removal",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful oral and mucosal examination to locate the serpiginous track or worm, Extraction and morphological identification of the worm, Histological examination of excised mucosa if the worm fragments"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Mechanically extract the worm from the oral or oesophageal mucosa, which is both diagnostic and curative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing the crawling sensation as delusional parasitosis without examining the mucosa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gongylonemiasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gongylonemiasis-matrix",
+      "title": "Gongylonemiasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Gongylonemiasis is caused by the spirurid nematode Gongylonema pulchrum, a parasite chiefly of grazing mammals that occasionally",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful oral and mucosal examination to locate the serpiginous track or worm, Extraction and morphological identification of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oral larva migrans from other nematodes, Aphthous ulceration or other oral mucosal lesions, Delusional parasitosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Mechanically extract the worm from the oral or oesophageal mucosa, which is both diagnostic and curative",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing the crawling sensation as delusional parasitosis without examining the mucosa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gongylonemiasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gongylonemiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral and mucosal examination",
+          "cells": [
+            {
+              "text": "Serpiginous track or worm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extraction and identification of the worm",
+          "cells": [
+            {
+              "text": "Morphological identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of excised mucosa",
+          "cells": [
+            {
+              "text": "Where the worm fragments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure history",
+          "cells": [
+            {
+              "text": "Beetle, cockroach or contaminated food ingestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical exclusion of other mucosal disease",
+          "cells": [
+            {
+              "text": "Other oral mucosal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic documentation",
+          "cells": [
+            {
+              "text": "Migrating lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gongylonemiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral larva migrans from other nematodes",
+          "cells": [
+            {
+              "text": "Similar migrating track"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aphthous ulceration",
+          "cells": [
+            {
+              "text": "Oral ulcer without a migrating worm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delusional parasitosis",
+          "cells": [
+            {
+              "text": "Crawling sensation without a mucosal worm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gongylonemiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical extraction",
+          "cells": [
+            {
+              "text": "Worm removed from oral or oesophageal mucosa; diagnostic and curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anthelmintic therapy",
+          "cells": [
+            {
+              "text": "Albendazole where the worm cannot be located or extracted, or for persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limited course once the worm is removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid ingestion of carriers",
+          "cells": [
+            {
+              "text": "Beetles, cockroaches and food or water contaminated by them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Confirms resolution and excludes a residual or additional worm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gongylonemiasis-dx-mgmt",
+      "title": "Diagnosis and management of Gongylonemiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gongylonemiasis: migrating oral track or worm in the mucosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (persistent lesion, marked inflammation, diagnostic doubt)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for persistent oral lesions or suspected neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mucosal examination, worm extraction and identification, exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a worm extracted or identified from the oral mucosa?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider aphthous ulcer, oral larva migrans or delusional parasitosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mechanical extraction of the worm, which is diagnostic and curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Albendazole if the worm cannot be extracted or symptoms persist",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Advise avoiding beetles, cockroaches and contaminated food or water",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up to confirm resolution and exclude residual worm",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; benign and self-limited, with prompt resolution after worm removal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

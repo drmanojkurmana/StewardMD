@@ -1,196 +1,687 @@
 {
- "id": "gastrointestinal_endoscopy",
- "name": "Gastrointestinal Endoscopy",
- "system": "Gastrointestinal",
- "class": "non_infective",
- "chapter": 333,
- "page": 2464,
- "aliases": [
-  "GI endoscopy",
-  "EGD",
-  "esophagogastroduodenoscopy",
-  "colonoscopy",
-  "ERCP",
-  "endoscopic ultrasound",
-  "EUS"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2464",
-  "clinicalPearls": [
-   "Flexible endoscopes generate an electronic video image from a CCD or CMOS chip at the tip, with operator tip-deflection controls, light delivery, and working channels for washing, suction, and accessory passage (Harrison 22e p.2465).",
-   "Upper endoscopy (EGD) is the best method for examining the upper GI mucosa and is superior to a barium upper-GI series for detecting gastric ulcers and flat lesions such as Barrett's esophagus, while also permitting directed biopsy and therapy (Harrison 22e p.2465).",
-   "Colonoscopy is the gold standard for imaging the colonic mucosa, reaching the cecum in over 95% of cases, with greater sensitivity than barium enema for colitis, polyps, and cancer; CT colonography rivals it for many polyps and cancers but is less sensitive for flat serrated lesions (Harrison 22e p.2465).",
-   "For obscure small-bowel bleeding, capsule endoscopy visualizes mucosa beyond the reach of a conventional endoscope but is purely diagnostic; push and balloon-assisted enteroscopy allow deeper intubation with biopsy and therapy (Harrison 22e p.2465-2466).",
-   "EUS provides the most accurate preoperative local staging of esophageal, pancreatic, and rectal malignancies but does not detect distant metastases beyond its imaging range; it also enables fine-needle aspiration/biopsy and a growing range of therapeutic drainage procedures (Harrison 22e p.2468).",
-   "Endoscopic stigmata of a peptic ulcer carry prognostic value: a clean-based ulcer has a low (3-5%) rebleeding risk, flat pigmented spots ~10%, adherent clot ~20%, a visible vessel ~40%, and active spurting ~90% (Harrison 22e p.2478-2479).",
-   "Over 90% of patients with melena bleed proximal to the ligament of Treitz and ~85% with hematochezia bleed from the colon, but massive hematochezia can reflect a brisk upper-GI source with rapid transit, warranting urgent upper endoscopy (Harrison 22e p.2476).",
-   "Severity of the initial hemorrhage is the most important indicator for urgent endoscopy; falling hematocrit and hemoglobin lag behind the clinical course and are unreliable gauges of acute blood loss (Harrison 22e p.2476).",
-   "Acute esophageal obstruction from food impaction or a foreign body is an endoscopic emergency; untreated it can lead to esophageal ulceration, ischemia, and perforation, and an underlying web, ring, or stricture is often present (Harrison 22e p.2484-2485).",
-   "In acute colonic pseudoobstruction (Ogilvie's), the risk of cecal perforation rises when cecal diameter exceeds 12 cm, prompting decompression with intravenous neostigmine or colonoscopy (Harrison 22e p.2487).",
-   "Charcot's triad (jaundice, abdominal pain, fever) is present in ~70% of ascending cholangitis; the addition of shock and confusion (Reynolds's pentad) signals high mortality and warrants urgent biliary drainage, typically by ERCP (Harrison 22e p.2489).",
-   "Long-standing GERD confers a roughly sixfold increased risk of Barrett's esophagus versus reflux of under one year; screening EGD should be considered after a chronic (>=10-year) GERD history even when symptoms are mild (Harrison 22e p.2490-2491)."
+  "id": "gastrointestinal_endoscopy",
+  "name": "Gastrointestinal Endoscopy",
+  "system": "Gastrointestinal",
+  "class": "non_infective",
+  "chapter": 333,
+  "page": 2464,
+  "aliases": [
+    "GI endoscopy",
+    "EGD",
+    "esophagogastroduodenoscopy",
+    "colonoscopy",
+    "ERCP",
+    "endoscopic ultrasound",
+    "EUS"
   ],
-  "pathophysiology": "Gastrointestinal endoscopy is a diagnostic and therapeutic modality rather than a disease; it directly visualizes mucosal and luminal pathology and adjacent structures (via EUS) and provides access for tissue sampling and intervention. Many of the conditions it manages share a vascular or mechanical basis: peptic ulcers bleed when erosion exposes a submucosal vessel; a Dieulafoy's lesion is an abnormally large-caliber persistent artery running just beneath the epithelium that bleeds through a focal mucosal defect; a Mallory-Weiss tear is a mucosal rent at the gastroesophageal junction caused by retching/vomiting that can disrupt a submucosal arteriole; colonic diverticular bleeding arises from the nutrient artery at the base of a diverticulum; and vascular ectasias are flat mucosal vascular anomalies (e.g., GAVE/watermelon stomach) that cause slow blood loss. Variceal bleeding reflects portal hypertension. Obstructive syndromes (esophageal food impaction, gastric outlet obstruction, colonic obstruction/pseudoobstruction, biliary obstruction by stone) produce luminal blockage that endoscopy can relieve. Barrett's esophagus represents columnar metaplasia of distal esophageal squamous mucosa driven by chronic acid reflux and is a precursor to adenocarcinoma (Harrison 22e p.2464-2491).",
-  "additionalDifferentials": [
-   "Melena: distinguish proximal upper-GI bleeding from slow right-colon or small-bowel sources, especially in older patients with slow colonic transit",
-   "Hematochezia: colonic source vs brisk upper-GI bleed with rapid transit",
-   "Dyspepsia: gastroesophageal reflux vs peptic ulcer disease vs nonulcer (functional) dyspepsia vs uncommon gastric/esophageal malignancy",
-   "Colonic dilatation: mechanical obstruction (e.g., malignancy, sigmoid volvulus) vs acute colonic pseudoobstruction",
-   "Diverticular hematochezia: exclude vascular ectasias, colitis, and colon cancer before attributing bleeding to a diverticulum"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [],
-  "additionalInvestigations": [
-   "24-hour ambulatory pH and impedance monitoring as the most sensitive test for GERD, capturing nonerosive reflux disease that endoscopy may miss",
-   "MRCP and EUS for bile duct stones (>90% accurate), reserving ERCP for cases needing therapy or high pretest probability",
-   "Noninvasive H. pylori testing (serology for past/current infection; urea breath test and stool antigen for current infection) before or in lieu of endoscopy in younger patients without alarm features",
-   "Capsule endoscopy as the typical next test after negative upper and lower endoscopy in suspected small-bowel bleeding (diagnostic yield ~55%), with a patency capsule beforehand if stricture risk exists",
-   "Plain abdominal radiography (and water-soluble contrast enema or CT) to assess colonic dilatation and differentiate obstruction from pseudoobstruction; neck/chest radiographs before endoscopy for esophageal obstruction with fever, >=24-h impaction, or sharp object"
-  ],
-  "redFlags": [
-   "Resting hypotension, orthostatic vital-sign change, repeated hematemesis, bloody nasogastric aspirate not clearing with lavage, or transfusion requirement — consider urgent endoscopy within 12-24 h",
-   "Dyspepsia or reflux with alarm features (weight loss, obstructive symptoms, dysphagia, GI bleeding, iron-deficiency anemia) — perform endoscopy at the outset",
-   "Esophageal food/foreign-body impaction with hypersalivation and inability to swallow water — endoscopic emergency",
-   "Reynolds's pentad (Charcot's triad plus shock and confusion) in ascending cholangitis — urgent biliary drainage",
-   "Cecal diameter exceeding 12 cm in colonic pseudoobstruction — impending perforation",
-   "Age >70, cirrhosis, coagulopathy, or respiratory/renal failure with GI bleeding — higher rebleeding risk warranting prompt evaluation"
-  ],
-  "prognosis": "Outcomes depend on the underlying condition and endoscopic findings. Most GI bleeding stops spontaneously. Endoscopic therapy of high-risk peptic ulcer stigmata lowers rebleeding to about 5-10%. Endoscopic variceal ligation controls acute esophageal variceal hemorrhage in up to 90% of patients, though chronic eradication therapy prevents long-term rebleeding in only ~50%. A clean-based ulcer carries a low (3-5%) rebleeding risk, permitting early discharge of suitable patients. Post-ERCP pancreatitis is usually mild and self-limited but can be severe. Delayed biliary drainage in ascending cholangitis increases morbidity and mortality (Harrison 22e p.2464-2491).",
-  "pitfalls": [
-   "Relying on hematocrit/hemoglobin to gauge acute bleeding — these lag behind the clinical course",
-   "Assuming melena always means an upper-GI source or hematochezia always a colonic source — exceptions occur with transit-dependent presentations",
-   "Performing ERCP indiscriminately in gallstone pancreatitis — only ~20% retain an ampullary/common-bile-duct stone, and initial MRCP/EUS reduces unnecessary ERCP and its adverse events",
-   "Using endoscopy to diagnose nonerosive reflux disease — it will miss symptomatic reflux without esophagitis",
-   "Treating a Mallory-Weiss tear bearing a nonbleeding sentinel clot like a peptic ulcer — unlike ulcers, such tears rarely rebleed and need no endoscopic therapy",
-   "Relying on epinephrine injection alone for ulcer hemostasis — it slows bleeding but is not definitive monotherapy",
-   "Obtaining radiographic contrast studies before endoscopy in suspected esophageal obstruction — contrast interferes with the subsequent endoscopic procedure",
-   "Proceeding to endoscopy in marked coagulopathy or thrombocytopenia without correction — hemostatic techniques are limited and correction may itself resolve bleeding"
-  ],
-  "severityClassification": "Peptic ulcer rebleeding risk by endoscopic stigmata: clean base 3-5%; flat pigmented spots ~10%; adherent clot ~20%; nonbleeding visible vessel ~40%; active spurting ~90% (Harrison 22e p.2478-2479). Procedural adverse-event risk: bleeding/perforation under 1:1000 for diagnostic EGD, flexible sigmoidoscopy, and colonoscopy, rising to 0.5-5% with therapeutic maneuvers; ERCP carries ~5% pancreatitis risk (up to ~25% in young, anicteric patients with normal ducts) and ~1% post-sphincterotomy bleeding; PEG placement has a 10-15% adverse-event rate (Harrison 22e p.2473-2474).",
-  "references": [
-   "Harrison 22e p.2464",
-   "Harrison 22e p.2465",
-   "Harrison 22e p.2466",
-   "Harrison 22e p.2468",
-   "Harrison 22e p.2473",
-   "Harrison 22e p.2474",
-   "Harrison 22e p.2476",
-   "Harrison 22e p.2478",
-   "Harrison 22e p.2479",
-   "Harrison 22e p.2484",
-   "Harrison 22e p.2487",
-   "Harrison 22e p.2489",
-   "Harrison 22e p.2490",
-   "Harrison 22e p.2491"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Deliver endoscopic haemostasis for high-risk peptic ulcer stigmata such as a visible vessel, active spurting or adherent clot, using combination therapy with injection, thermal coagulation and clips",
-   "Perform endoscopic variceal band ligation to control acute oesophageal variceal haemorrhage",
-   "Ablate bleeding vascular ectasias endoscopically, typically with argon plasma coagulation",
-   "Undertake diagnostic and therapeutic tissue sampling, polypectomy and endoscopic mucosal resection at colonoscopy",
-   "Use capsule endoscopy and balloon-assisted enteroscopy for obscure small-bowel bleeding, preceded by a patency capsule where stricture risk exists",
-   "Employ endoscopic ultrasound for local staging of oesophageal, pancreatic and rectal tumours and for guided fine-needle aspiration and drainage",
-   "Attend to peri-procedural safety with sedation monitoring, review of antithrombotic therapy and correction of coagulopathy before intervention"
-  ]
- },
- "algorithms": [
-  {
-   "id": "gastrointestinal_endoscopy-pathway",
-   "title": "Gastrointestinal Endoscopy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Flexible endoscopes generate an electronic video image from a CCD or CMOS chip at the tip, with operator tip-deflection controls, light delivery, and working channels for washing, suction, and accessory passage (Harrison 22e p.2465).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Resting hypotension, orthostatic vital-sign change, repeated hematemesis, bloody nasogastric aspirate not clearing with lavage, or transfusion requirement - consider urgent endoscopy within 12-24 h",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 24-hour ambulatory pH and impedance monitoring as the most sensitive test for GERD, capturing nonerosive reflux disease that endoscopy may miss, MRCP and EUS for bile duct stones (>90% accurate), reserving ERCP for cases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deliver endoscopic haemostasis for high-risk peptic ulcer stigmata such as a visible vessel, active spurting or adherent clot, using combination therapy with injection, thermal coagulation and clips"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on hematocrit/hemoglobin to gauge acute bleeding - these lag behind the clinical course"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gastrointestinal endoscopy."
-  }
- ],
- "tables": [
-  {
-   "id": "gastrointestinal_endoscopy-matrix",
-   "title": "Gastrointestinal Endoscopy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Flexible endoscopes generate an electronic video image from a CCD or CMOS chip at the tip, with operator tip-deflection controls,",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2464",
+    "clinicalPearls": [
+      "Flexible endoscopes generate an electronic video image from a CCD or CMOS chip at the tip, with operator tip-deflection controls, light delivery, and working channels for washing, suction, and accessory passage (Harrison 22e p.2465).",
+      "Upper endoscopy (EGD) is the best method for examining the upper GI mucosa and is superior to a barium upper-GI series for detecting gastric ulcers and flat lesions such as Barrett's esophagus, while also permitting directed biopsy and therapy (Harrison 22e p.2465).",
+      "Colonoscopy is the gold standard for imaging the colonic mucosa, reaching the cecum in over 95% of cases, with greater sensitivity than barium enema for colitis, polyps, and cancer; CT colonography rivals it for many polyps and cancers but is less sensitive for flat serrated lesions (Harrison 22e p.2465).",
+      "For obscure small-bowel bleeding, capsule endoscopy visualizes mucosa beyond the reach of a conventional endoscope but is purely diagnostic; push and balloon-assisted enteroscopy allow deeper intubation with biopsy and therapy (Harrison 22e p.2465-2466).",
+      "EUS provides the most accurate preoperative local staging of esophageal, pancreatic, and rectal malignancies but does not detect distant metastases beyond its imaging range; it also enables fine-needle aspiration/biopsy and a growing range of therapeutic drainage procedures (Harrison 22e p.2468).",
+      "Endoscopic stigmata of a peptic ulcer carry prognostic value: a clean-based ulcer has a low (3-5%) rebleeding risk, flat pigmented spots ~10%, adherent clot ~20%, a visible vessel ~40%, and active spurting ~90% (Harrison 22e p.2478-2479).",
+      "Over 90% of patients with melena bleed proximal to the ligament of Treitz and ~85% with hematochezia bleed from the colon, but massive hematochezia can reflect a brisk upper-GI source with rapid transit, warranting urgent upper endoscopy (Harrison 22e p.2476).",
+      "Severity of the initial hemorrhage is the most important indicator for urgent endoscopy; falling hematocrit and hemoglobin lag behind the clinical course and are unreliable gauges of acute blood loss (Harrison 22e p.2476).",
+      "Acute esophageal obstruction from food impaction or a foreign body is an endoscopic emergency; untreated it can lead to esophageal ulceration, ischemia, and perforation, and an underlying web, ring, or stricture is often present (Harrison 22e p.2484-2485).",
+      "In acute colonic pseudoobstruction (Ogilvie's), the risk of cecal perforation rises when cecal diameter exceeds 12 cm, prompting decompression with intravenous neostigmine or colonoscopy (Harrison 22e p.2487).",
+      "Charcot's triad (jaundice, abdominal pain, fever) is present in ~70% of ascending cholangitis; the addition of shock and confusion (Reynolds's pentad) signals high mortality and warrants urgent biliary drainage, typically by ERCP (Harrison 22e p.2489).",
+      "Long-standing GERD confers a roughly sixfold increased risk of Barrett's esophagus versus reflux of under one year; screening EGD should be considered after a chronic (>=10-year) GERD history even when symptoms are mild (Harrison 22e p.2490-2491)."
     ],
-    [
-     "Key Investigations",
-     "24-hour ambulatory pH and impedance monitoring as the most sensitive test for GERD, capturing nonerosive reflux disease that",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gastrointestinal endoscopy is a diagnostic and therapeutic modality rather than a disease; it directly visualizes mucosal and luminal pathology and adjacent structures (via EUS) and provides access for tissue sampling and intervention. Many of the conditions it manages share a vascular or mechanical basis: peptic ulcers bleed when erosion exposes a submucosal vessel; a Dieulafoy's lesion is an abnormally large-caliber persistent artery running just beneath the epithelium that bleeds through a focal mucosal defect; a Mallory-Weiss tear is a mucosal rent at the gastroesophageal junction caused by retching/vomiting that can disrupt a submucosal arteriole; colonic diverticular bleeding arises from the nutrient artery at the base of a diverticulum; and vascular ectasias are flat mucosal vascular anomalies (e.g., GAVE/watermelon stomach) that cause slow blood loss. Variceal bleeding reflects portal hypertension. Obstructive syndromes (esophageal food impaction, gastric outlet obstruction, colonic obstruction/pseudoobstruction, biliary obstruction by stone) produce luminal blockage that endoscopy can relieve. Barrett's esophagus represents columnar metaplasia of distal esophageal squamous mucosa driven by chronic acid reflux and is a precursor to adenocarcinoma (Harrison 22e p.2464-2491).",
+    "additionalDifferentials": [
+      "Melena: distinguish proximal upper-GI bleeding from slow right-colon or small-bowel sources, especially in older patients with slow colonic transit",
+      "Hematochezia: colonic source vs brisk upper-GI bleed with rapid transit",
+      "Dyspepsia: gastroesophageal reflux vs peptic ulcer disease vs nonulcer (functional) dyspepsia vs uncommon gastric/esophageal malignancy",
+      "Colonic dilatation: mechanical obstruction (e.g., malignancy, sigmoid volvulus) vs acute colonic pseudoobstruction",
+      "Diverticular hematochezia: exclude vascular ectasias, colitis, and colon cancer before attributing bleeding to a diverticulum"
     ],
-    [
-     "Primary Differentials",
-     "Melena: distinguish proximal upper-GI bleeding from slow right-colon or small-bowel sources, especially in older patients with",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [],
+    "additionalInvestigations": [
+      "24-hour ambulatory pH and impedance monitoring as the most sensitive test for GERD, capturing nonerosive reflux disease that endoscopy may miss",
+      "MRCP and EUS for bile duct stones (>90% accurate), reserving ERCP for cases needing therapy or high pretest probability",
+      "Noninvasive H. pylori testing (serology for past/current infection; urea breath test and stool antigen for current infection) before or in lieu of endoscopy in younger patients without alarm features",
+      "Capsule endoscopy as the typical next test after negative upper and lower endoscopy in suspected small-bowel bleeding (diagnostic yield ~55%), with a patency capsule beforehand if stricture risk exists",
+      "Plain abdominal radiography (and water-soluble contrast enema or CT) to assess colonic dilatation and differentiate obstruction from pseudoobstruction; neck/chest radiographs before endoscopy for esophageal obstruction with fever, >=24-h impaction, or sharp object"
     ],
-    [
-     "Management Strategy",
-     "Deliver endoscopic haemostasis for high-risk peptic ulcer stigmata such as a visible vessel, active spurting or adherent clot,",
-     "Core treatment modality"
+    "redFlags": [
+      "Resting hypotension, orthostatic vital-sign change, repeated hematemesis, bloody nasogastric aspirate not clearing with lavage, or transfusion requirement — consider urgent endoscopy within 12-24 h",
+      "Dyspepsia or reflux with alarm features (weight loss, obstructive symptoms, dysphagia, GI bleeding, iron-deficiency anemia) — perform endoscopy at the outset",
+      "Esophageal food/foreign-body impaction with hypersalivation and inability to swallow water — endoscopic emergency",
+      "Reynolds's pentad (Charcot's triad plus shock and confusion) in ascending cholangitis — urgent biliary drainage",
+      "Cecal diameter exceeding 12 cm in colonic pseudoobstruction — impending perforation",
+      "Age >70, cirrhosis, coagulopathy, or respiratory/renal failure with GI bleeding — higher rebleeding risk warranting prompt evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on hematocrit/hemoglobin to gauge acute bleeding - these lag behind the clinical course",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes depend on the underlying condition and endoscopic findings. Most GI bleeding stops spontaneously. Endoscopic therapy of high-risk peptic ulcer stigmata lowers rebleeding to about 5-10%. Endoscopic variceal ligation controls acute esophageal variceal hemorrhage in up to 90% of patients, though chronic eradication therapy prevents long-term rebleeding in only ~50%. A clean-based ulcer carries a low (3-5%) rebleeding risk, permitting early discharge of suitable patients. Post-ERCP pancreatitis is usually mild and self-limited but can be severe. Delayed biliary drainage in ascending cholangitis increases morbidity and mortality (Harrison 22e p.2464-2491).",
+    "pitfalls": [
+      "Relying on hematocrit/hemoglobin to gauge acute bleeding — these lag behind the clinical course",
+      "Assuming melena always means an upper-GI source or hematochezia always a colonic source — exceptions occur with transit-dependent presentations",
+      "Performing ERCP indiscriminately in gallstone pancreatitis — only ~20% retain an ampullary/common-bile-duct stone, and initial MRCP/EUS reduces unnecessary ERCP and its adverse events",
+      "Using endoscopy to diagnose nonerosive reflux disease — it will miss symptomatic reflux without esophagitis",
+      "Treating a Mallory-Weiss tear bearing a nonbleeding sentinel clot like a peptic ulcer — unlike ulcers, such tears rarely rebleed and need no endoscopic therapy",
+      "Relying on epinephrine injection alone for ulcer hemostasis — it slows bleeding but is not definitive monotherapy",
+      "Obtaining radiographic contrast studies before endoscopy in suspected esophageal obstruction — contrast interferes with the subsequent endoscopic procedure",
+      "Proceeding to endoscopy in marked coagulopathy or thrombocytopenia without correction — hemostatic techniques are limited and correction may itself resolve bleeding"
+    ],
+    "severityClassification": "Peptic ulcer rebleeding risk by endoscopic stigmata: clean base 3-5%; flat pigmented spots ~10%; adherent clot ~20%; nonbleeding visible vessel ~40%; active spurting ~90% (Harrison 22e p.2478-2479). Procedural adverse-event risk: bleeding/perforation under 1:1000 for diagnostic EGD, flexible sigmoidoscopy, and colonoscopy, rising to 0.5-5% with therapeutic maneuvers; ERCP carries ~5% pancreatitis risk (up to ~25% in young, anicteric patients with normal ducts) and ~1% post-sphincterotomy bleeding; PEG placement has a 10-15% adverse-event rate (Harrison 22e p.2473-2474).",
+    "references": [
+      "Harrison 22e p.2464",
+      "Harrison 22e p.2465",
+      "Harrison 22e p.2466",
+      "Harrison 22e p.2468",
+      "Harrison 22e p.2473",
+      "Harrison 22e p.2474",
+      "Harrison 22e p.2476",
+      "Harrison 22e p.2478",
+      "Harrison 22e p.2479",
+      "Harrison 22e p.2484",
+      "Harrison 22e p.2487",
+      "Harrison 22e p.2489",
+      "Harrison 22e p.2490",
+      "Harrison 22e p.2491"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Deliver endoscopic haemostasis for high-risk peptic ulcer stigmata such as a visible vessel, active spurting or adherent clot, using combination therapy with injection, thermal coagulation and clips",
+      "Perform endoscopic variceal band ligation to control acute oesophageal variceal haemorrhage",
+      "Ablate bleeding vascular ectasias endoscopically, typically with argon plasma coagulation",
+      "Undertake diagnostic and therapeutic tissue sampling, polypectomy and endoscopic mucosal resection at colonoscopy",
+      "Use capsule endoscopy and balloon-assisted enteroscopy for obscure small-bowel bleeding, preceded by a patency capsule where stricture risk exists",
+      "Employ endoscopic ultrasound for local staging of oesophageal, pancreatic and rectal tumours and for guided fine-needle aspiration and drainage",
+      "Attend to peri-procedural safety with sedation monitoring, review of antithrombotic therapy and correction of coagulopathy before intervention"
     ]
-   ],
-   "caption": "Overview comparison matrix for gastrointestinal endoscopy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gastrointestinal-endoscopy-real-image",
-   "title": "Gastrointestinal Endoscopy: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "gastrointestinal_endoscopy-pathway",
+      "title": "Gastrointestinal Endoscopy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Flexible endoscopes generate an electronic video image from a CCD or CMOS chip at the tip, with operator tip-deflection controls, light delivery, and working channels for washing, suction, and accessory passage (Harrison 22e p.2465).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Resting hypotension, orthostatic vital-sign change, repeated hematemesis, bloody nasogastric aspirate not clearing with lavage, or transfusion requirement - consider urgent endoscopy within 12-24 h",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 24-hour ambulatory pH and impedance monitoring as the most sensitive test for GERD, capturing nonerosive reflux disease that endoscopy may miss, MRCP and EUS for bile duct stones (>90% accurate), reserving ERCP for cases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deliver endoscopic haemostasis for high-risk peptic ulcer stigmata such as a visible vessel, active spurting or adherent clot, using combination therapy with injection, thermal coagulation and clips"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on hematocrit/hemoglobin to gauge acute bleeding - these lag behind the clinical course"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gastrointestinal endoscopy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gastrointestinal_endoscopy-matrix",
+      "title": "Gastrointestinal Endoscopy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Flexible endoscopes generate an electronic video image from a CCD or CMOS chip at the tip, with operator tip-deflection controls,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "24-hour ambulatory pH and impedance monitoring as the most sensitive test for GERD, capturing nonerosive reflux disease that",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Melena: distinguish proximal upper-GI bleeding from slow right-colon or small-bowel sources, especially in older patients with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deliver endoscopic haemostasis for high-risk peptic ulcer stigmata such as a visible vessel, active spurting or adherent clot,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on hematocrit/hemoglobin to gauge acute bleeding - these lag behind the clinical course",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gastrointestinal endoscopy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ACG 2021 upper GI and ulcer bleeding guideline, HMP Global summary",
+      "url": "https://www.hmpgloballearningnetwork.com/site/gastro/news/acg-updates-guideline-low-risk-gi-bleeding",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastrointestinal_endoscopy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Endoscopic findings and thresholds that guide action",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Ulcer: clean base",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "3 to 5",
+              "range": [
+                3,
+                5
+              ]
+            },
+            {
+              "text": "No endoscopic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulcer: flat pigmented spot",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "About 10"
+            },
+            {
+              "text": "Low risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulcer: adherent clot",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "About 20"
+            },
+            {
+              "text": "Intermediate risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulcer: nonbleeding visible vessel",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "About 40"
+            },
+            {
+              "text": "Endoscopic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulcer: active spurting",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "{{hy:About 90}}"
+            },
+            {
+              "text": "Endoscopic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glasgow-Blatchford score for discharge",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "0 to 1",
+              "range": [
+                0,
+                1
+              ]
+            },
+            {
+              "text": "Very low risk; outpatient follow-up"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Caecal diameter in pseudo-obstruction",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">12",
+              "op": ">",
+              "value": 12
+            },
+            {
+              "text": "Perforation risk; neostigmine or decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capsule endoscopy yield",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 55 in small-bowel bleeding"
+            },
+            {
+              "text": "After negative upper and lower endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GERD duration before Barrett screening",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "10 or more",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Consider screening EGD"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_endoscopy-ddx",
+      "kind": "ddx",
+      "title": "Choosing the source and the test in GI bleeding and related problems",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI bleeding with melena",
+          "cells": [
+            {
+              "text": "Over 90% of melena arises above the ligament of Treitz"
+            },
+            {
+              "text": "EGD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brisk upper GI bleed presenting as haematochezia",
+          "cells": [
+            {
+              "text": "Haemodynamic instability with rapid transit"
+            },
+            {
+              "text": "Urgent EGD first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonic bleeding",
+          "cells": [
+            {
+              "text": "About 85% of haematochezia"
+            },
+            {
+              "text": "Colonoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel bleeding",
+          "cells": [
+            {
+              "text": "Negative upper and lower endoscopy"
+            },
+            {
+              "text": "Capsule endoscopy, then enteroscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonerosive reflux disease",
+          "cells": [
+            {
+              "text": "Symptoms with normal endoscopy"
+            },
+            {
+              "text": "24-h pH and impedance monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile duct stone vs no stone",
+          "cells": [
+            {
+              "text": "Gallstone pancreatitis; only about 20% retain a stone"
+            },
+            {
+              "text": "MRCP or EUS before ERCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical obstruction vs pseudo-obstruction",
+          "cells": [
+            {
+              "text": "Colonic dilatation"
+            },
+            {
+              "text": "Plain film, contrast enema or CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_endoscopy-treatment",
+      "kind": "treatment",
+      "title": "Endoscopic and supportive therapy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic haemostasis",
+          "cells": [
+            {
+              "text": "{{hy:Active spurting or oozing, nonbleeding visible vessel}}"
+            },
+            {
+              "text": "Bipolar electrocoagulation, heater probe, ethanol injection, clips"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid epinephrine monotherapy",
+          "cells": [
+            {
+              "text": "Ulcer haemostasis"
+            },
+            {
+              "text": "Combine with thermal or mechanical method"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose PPI after endoscopic therapy",
+          "cells": [
+            {
+              "text": "High-risk ulcer treated endoscopically"
+            },
+            {
+              "text": "Continuous or intermittent for 3 days, then oral twice daily for 2 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Red cell transfusion",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Haemoglobin threshold 7",
+              "op": "<",
+              "value": 7
+            },
+            {
+              "text": "Hospitalised upper GI bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Variceal band ligation",
+          "cells": [
+            {
+              "text": "Acute oesophageal variceal bleeding"
+            },
+            {
+              "text": "Controls bleeding in up to 90%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Argon plasma coagulation",
+          "cells": [
+            {
+              "text": "Bleeding vascular ectasias"
+            },
+            {
+              "text": "Endoscopic ablation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent ERCP drainage",
+          "cells": [
+            {
+              "text": "Cholangitis with Reynolds pentad"
+            },
+            {
+              "text": "High mortality without drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency endoscopic removal",
+          "cells": [
+            {
+              "text": "Oesophageal food or foreign-body impaction"
+            },
+            {
+              "text": "Avoid contrast study before endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct coagulopathy",
+          "cells": [
+            {
+              "text": "Marked coagulopathy or thrombocytopenia"
+            },
+            {
+              "text": "Correction may itself stop bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastrointestinal_endoscopy-dx-mgmt",
+      "title": "Endoscopic approach to acute upper GI bleeding",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematemesis or melena",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Resuscitate; Glasgow-Blatchford score; transfuse if Hb <7 g/dL",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Glasgow-Blatchford score 0 to 1?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Discharge with outpatient follow-up",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Correct coagulopathy; upper endoscopy within 12 to 24 h",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Varices bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Band ligation and variceal bleeding pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Spurting, oozing or visible vessel?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combination endoscopic haemostasis",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "High-dose PPI 3 days then oral twice daily 2 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-risk stigmata: no endoscopic therapy needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Rebleeding risk after therapy falls to about 5 to 10%",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

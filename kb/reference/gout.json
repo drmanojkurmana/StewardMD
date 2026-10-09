@@ -1,179 +1,547 @@
 {
- "id": "gout",
- "name": "Gout",
- "aliases": [
-  "gouty arthritis",
-  "monosodium urate crystal arthritis",
-  "podagra",
-  "urate arthropathy",
-  "acute gout"
- ],
- "class": "non_infective",
- "system": "Rheumatology",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Acute gout classically presents as an abrupt, exquisitely painful monoarthritis, most often of the first metatarsophalangeal joint (podagra), with redness, swelling, and warmth peaking within hours",
-   "It is caused by deposition of monosodium urate crystals in and around joints on a background of chronic hyperuricaemia and urate supersaturation",
-   "Definitive diagnosis is by joint aspiration and polarised light microscopy showing needle-shaped, strongly negatively birefringent monosodium urate crystals, often seen within phagocytes during an attack",
-   "Serum urate can be normal or even low during an acute flare, so a normal value does not exclude gout; the level is best measured or repeated once the attack has settled",
-   "Common triggers and associations include alcohol, purine-rich food and fructose, diuretics, chronic kidney disease, obesity, and the metabolic syndrome",
-   "Acute attacks are managed with anti-inflammatory therapy, choosing between a non-steroidal anti-inflammatory drug, colchicine, or a corticosteroid according to comorbidity",
-   "Urate-lowering therapy using a treat-to-target approach (lowering serum urate below the saturation threshold) is indicated for recurrent attacks, tophi, or urate arthropathy, with anti-inflammatory prophylaxis when it is introduced",
-   "Urate-lowering therapy should not be started or stopped during an acute attack, and any established urate-lowering therapy is continued through a flare rather than interrupted"
+  "id": "gout",
+  "name": "Gout",
+  "aliases": [
+    "gouty arthritis",
+    "monosodium urate crystal arthritis",
+    "podagra",
+    "urate arthropathy",
+    "acute gout"
   ],
-  "pathophysiology": "Sustained hyperuricaemia, arising more often from renal under-excretion than from urate overproduction, leads to supersaturation of extracellular fluid and precipitation of monosodium urate crystals within joints and soft tissues. The crystals are engulfed by resident phagocytes and activate the NLRP3 inflammasome, driving release of interleukin-1 beta and an intense neutrophil-rich inflammatory response that produces the acute attack. Repeated crystal deposition and low-grade chronic inflammation eventually generate tophi and cause structural joint damage.",
-  "additionalDifferentials": [
-   "Septic arthritis, which must be excluded and can coexist",
-   "Pseudogout (calcium pyrophosphate crystal arthritis)",
-   "Cellulitis",
-   "Reactive or psoriatic arthritis",
-   "Trauma or haemarthrosis",
-   "Acute flare of osteoarthritis",
-   "Rheumatoid arthritis in polyarticular presentations"
-  ],
-  "additionalInvestigations": [
-   "Joint aspiration with polarised microscopy for negatively birefringent needle-shaped urate crystals and to exclude infection",
-   "Synovial fluid Gram stain, culture, and cell count",
-   "Serum urate, interpreted with the timing caveat and repeated once the attack settles",
-   "Renal function and assessment of cardiovascular and metabolic comorbidity",
-   "Radiographs for chronic 'punched-out' erosions in longstanding disease",
-   "Dual-energy CT to detect and characterise urate deposits when the diagnosis is uncertain",
-   "Ultrasound for the 'double contour' sign of urate over articular cartilage"
-  ],
-  "redFlags": [
-   "Fever with a hot swollen joint that may represent septic arthritis rather than, or in addition to, gout",
-   "Rapid polyarticular presentation in a systemically unwell patient",
-   "Renal impairment or urolithiasis complicating management",
-   "A tophus with skin ulceration or secondary infection"
-  ],
-  "prognosis": "Gout is highly treatable: with effective urate-lowering therapy to target, crystals dissolve, attacks cease, and tophi regress over time; poor adherence or untreated hyperuricaemia, however, leads to recurrent attacks, chronic arthropathy, and progressive joint destruction.",
-  "pitfalls": [
-   "Excluding gout because the serum urate is normal during an acute attack",
-   "Starting or stopping urate-lowering therapy during an acute flare, which can prolong or precipitate attacks",
-   "Failing to exclude coexisting septic arthritis in a hot joint",
-   "Treating a target urate number without a structured treat-to-target strategy and prophylaxis at initiation",
-   "Overlooking associated cardiovascular, renal, and metabolic disease"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Oxford Textbook of Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Terminate the acute attack with an anti-inflammatory agent, choosing between a non-steroidal anti-inflammatory drug, colchicine or a corticosteroid according to comorbidity, and reserving an interleukin-1 inhibitor for refractory flares",
-   "Initiate urate-lowering therapy with a xanthine oxidase inhibitor (allopurinol first-line, febuxostat as alternative), treating to a target serum urate that dissolves crystals",
-   "Add a uricosuric agent where xanthine oxidase inhibition alone fails to reach target",
-   "Provide flare prophylaxis with low-dose colchicine or a non-steroidal anti-inflammatory drug when starting or up-titrating urate-lowering therapy",
-   "Advise reduction of alcohol, purine-rich food and fructose, weight loss and review of precipitating drugs such as diuretics",
-   "Manage associated chronic kidney disease, obesity and cardiovascular and metabolic risk",
-   "Monitor serum urate to target and follow tophus regression over the long term, reinforcing adherence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gout-pathway",
-   "title": "Gout: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Acute gout classically presents as an abrupt, exquisitely painful monoarthritis, most often of the first metatarsophalangeal joint (podagra), with redness, swelling, and warmth peaking within hours",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fever with a hot swollen joint that may represent septic arthritis rather than, or in addition to, gout",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Joint aspiration with polarised microscopy for negatively birefringent needle-shaped urate crystals and to exclude infection, Synovial fluid Gram stain, culture, and cell count, Serum urate, interpreted with the timing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Terminate the acute attack with an anti-inflammatory agent, choosing between a non-steroidal anti-inflammatory drug, colchicine or a corticosteroid according to comorbidity, and reserving an interleukin-1 inhibitor for"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding gout because the serum urate is normal during an acute attack"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gout."
-  }
- ],
- "tables": [
-  {
-   "id": "gout-matrix",
-   "title": "Gout: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Acute gout classically presents as an abrupt, exquisitely painful monoarthritis, most often of the first metatarsophalangeal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Acute gout classically presents as an abrupt, exquisitely painful monoarthritis, most often of the first metatarsophalangeal joint (podagra), with redness, swelling, and warmth peaking within hours",
+      "It is caused by deposition of monosodium urate crystals in and around joints on a background of chronic hyperuricaemia and urate supersaturation",
+      "Definitive diagnosis is by joint aspiration and polarised light microscopy showing needle-shaped, strongly negatively birefringent monosodium urate crystals, often seen within phagocytes during an attack",
+      "Serum urate can be normal or even low during an acute flare, so a normal value does not exclude gout; the level is best measured or repeated once the attack has settled",
+      "Common triggers and associations include alcohol, purine-rich food and fructose, diuretics, chronic kidney disease, obesity, and the metabolic syndrome",
+      "Acute attacks are managed with anti-inflammatory therapy, choosing between a non-steroidal anti-inflammatory drug, colchicine, or a corticosteroid according to comorbidity",
+      "Urate-lowering therapy using a treat-to-target approach (lowering serum urate below the saturation threshold) is indicated for recurrent attacks, tophi, or urate arthropathy, with anti-inflammatory prophylaxis when it is introduced",
+      "Urate-lowering therapy should not be started or stopped during an acute attack, and any established urate-lowering therapy is continued through a flare rather than interrupted"
     ],
-    [
-     "Key Investigations",
-     "Joint aspiration with polarised microscopy for negatively birefringent needle-shaped urate crystals and to exclude infection,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sustained hyperuricaemia, arising more often from renal under-excretion than from urate overproduction, leads to supersaturation of extracellular fluid and precipitation of monosodium urate crystals within joints and soft tissues. The crystals are engulfed by resident phagocytes and activate the NLRP3 inflammasome, driving release of interleukin-1 beta and an intense neutrophil-rich inflammatory response that produces the acute attack. Repeated crystal deposition and low-grade chronic inflammation eventually generate tophi and cause structural joint damage.",
+    "additionalDifferentials": [
+      "Septic arthritis, which must be excluded and can coexist",
+      "Pseudogout (calcium pyrophosphate crystal arthritis)",
+      "Cellulitis",
+      "Reactive or psoriatic arthritis",
+      "Trauma or haemarthrosis",
+      "Acute flare of osteoarthritis",
+      "Rheumatoid arthritis in polyarticular presentations"
     ],
-    [
-     "Primary Differentials",
-     "Septic arthritis, which must be excluded and can coexist, Pseudogout (calcium pyrophosphate crystal arthritis), Cellulitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Joint aspiration with polarised microscopy for negatively birefringent needle-shaped urate crystals and to exclude infection",
+      "Synovial fluid Gram stain, culture, and cell count",
+      "Serum urate, interpreted with the timing caveat and repeated once the attack settles",
+      "Renal function and assessment of cardiovascular and metabolic comorbidity",
+      "Radiographs for chronic 'punched-out' erosions in longstanding disease",
+      "Dual-energy CT to detect and characterise urate deposits when the diagnosis is uncertain",
+      "Ultrasound for the 'double contour' sign of urate over articular cartilage"
     ],
-    [
-     "Management Strategy",
-     "Terminate the acute attack with an anti-inflammatory agent, choosing between a non-steroidal anti-inflammatory drug, colchicine",
-     "Core treatment modality"
+    "redFlags": [
+      "Fever with a hot swollen joint that may represent septic arthritis rather than, or in addition to, gout",
+      "Rapid polyarticular presentation in a systemically unwell patient",
+      "Renal impairment or urolithiasis complicating management",
+      "A tophus with skin ulceration or secondary infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding gout because the serum urate is normal during an acute attack",
-     "Prevent diagnostic or management error"
+    "prognosis": "Gout is highly treatable: with effective urate-lowering therapy to target, crystals dissolve, attacks cease, and tophi regress over time; poor adherence or untreated hyperuricaemia, however, leads to recurrent attacks, chronic arthropathy, and progressive joint destruction.",
+    "pitfalls": [
+      "Excluding gout because the serum urate is normal during an acute attack",
+      "Starting or stopping urate-lowering therapy during an acute flare, which can prolong or precipitate attacks",
+      "Failing to exclude coexisting septic arthritis in a hot joint",
+      "Treating a target urate number without a structured treat-to-target strategy and prophylaxis at initiation",
+      "Overlooking associated cardiovascular, renal, and metabolic disease"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Oxford Textbook of Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Terminate the acute attack with an anti-inflammatory agent, choosing between a non-steroidal anti-inflammatory drug, colchicine or a corticosteroid according to comorbidity, and reserving an interleukin-1 inhibitor for refractory flares",
+      "Initiate urate-lowering therapy with a xanthine oxidase inhibitor (allopurinol first-line, febuxostat as alternative), treating to a target serum urate that dissolves crystals",
+      "Add a uricosuric agent where xanthine oxidase inhibition alone fails to reach target",
+      "Provide flare prophylaxis with low-dose colchicine or a non-steroidal anti-inflammatory drug when starting or up-titrating urate-lowering therapy",
+      "Advise reduction of alcohol, purine-rich food and fructose, weight loss and review of precipitating drugs such as diuretics",
+      "Manage associated chronic kidney disease, obesity and cardiovascular and metabolic risk",
+      "Monitor serum urate to target and follow tophus regression over the long term, reinforcing adherence"
     ]
-   ],
-   "caption": "Overview comparison matrix for gout."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gout-real-image",
-   "title": "Gout: Clinical Examination Photography (Tophaceous Gout)",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/gout-tophi.jpg?v=kbri3",
-   "caption": "Real clinical photograph displaying chalky white subcutaneous monosodium urate tophaceous deposits in chronic gout.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Subcutaneous Tophi",
-     "description": "Firm nodular deposits of monosodium urate crystals at articular margins."
-    },
-    {
-     "label": "Joint Erythema",
-     "description": "Overlying cutaneous erythema and cutaneous thinning from inflammatory micro-erosions."
-    },
-    {
-     "label": "1st MTP Involvement",
-     "description": "Classic podagra localization at the first metatarsophalangeal joint."
+      "id": "gout-pathway",
+      "title": "Gout: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Acute gout classically presents as an abrupt, exquisitely painful monoarthritis, most often of the first metatarsophalangeal joint (podagra), with redness, swelling, and warmth peaking within hours",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fever with a hot swollen joint that may represent septic arthritis rather than, or in addition to, gout",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Joint aspiration with polarised microscopy for negatively birefringent needle-shaped urate crystals and to exclude infection, Synovial fluid Gram stain, culture, and cell count, Serum urate, interpreted with the timing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Terminate the acute attack with an anti-inflammatory agent, choosing between a non-steroidal anti-inflammatory drug, colchicine or a corticosteroid according to comorbidity, and reserving an interleukin-1 inhibitor for"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding gout because the serum urate is normal during an acute attack"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gout."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gout-matrix",
+      "title": "Gout: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acute gout classically presents as an abrupt, exquisitely painful monoarthritis, most often of the first metatarsophalangeal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Joint aspiration with polarised microscopy for negatively birefringent needle-shaped urate crystals and to exclude infection,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Septic arthritis, which must be excluded and can coexist, Pseudogout (calcium pyrophosphate crystal arthritis), Cellulitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Terminate the acute attack with an anti-inflammatory agent, choosing between a non-steroidal anti-inflammatory drug, colchicine",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding gout because the serum urate is normal during an acute attack",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gout."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "gout-real-image",
+      "title": "Gout: Clinical Examination Photography (Tophaceous Gout)",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/gout-tophi.jpg?v=kbri3",
+      "caption": "Real clinical photograph displaying chalky white subcutaneous monosodium urate tophaceous deposits in chronic gout.",
+      "annotations": [
+        {
+          "label": "Subcutaneous Tophi",
+          "description": "Firm nodular deposits of monosodium urate crystals at articular margins."
+        },
+        {
+          "label": "Joint Erythema",
+          "description": "Overlying cutaneous erythema and cutaneous thinning from inflammatory micro-erosions."
+        },
+        {
+          "label": "1st MTP Involvement",
+          "description": "Classic podagra localization at the first metatarsophalangeal joint."
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 359-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gout-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Joint aspiration with polarised microscopy",
+          "cells": [
+            {
+              "text": "Negatively birefringent needle-shaped urate crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial fluid Gram stain, culture and cell count",
+          "cells": [
+            {
+              "text": "Excludes septic arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate, repeated once the attack settles",
+          "cells": [
+            {
+              "text": "Urate level; timing caveat during an attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and cardiovascular and metabolic review",
+          "cells": [
+            {
+              "text": "Comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Chronic punched-out erosions in longstanding disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dual-energy CT or ultrasound",
+          "cells": [
+            {
+              "text": "Urate deposits; double contour sign over cartilage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gout-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "Fever with a hot swollen joint; must be excluded and can coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudogout",
+          "cells": [
+            {
+              "text": "Calcium pyrophosphate crystal arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Overlying skin infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gout-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute attack",
+          "cells": [
+            {
+              "text": "Anti-inflammatory agent: NSAID, colchicine or another agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urate-lowering therapy",
+          "cells": [
+            {
+              "text": "Xanthine oxidase inhibitor, allopurinol first-line, febuxostat as alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uricosuric agent",
+          "cells": [
+            {
+              "text": "Where xanthine oxidase inhibition alone does not reach target"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flare prophylaxis",
+          "cells": [
+            {
+              "text": "Low-dose colchicine or NSAID when starting or up-titrating urate-lowering therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle and drug review",
+          "cells": [
+            {
+              "text": "Less alcohol, purine-rich food and fructose; weight loss; review diuretics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity management",
+          "cells": [
+            {
+              "text": "Chronic kidney disease, obesity and cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Serum urate to target; tophus regression; adherence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gout-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs that precipitate gout",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Gout",
+          "cells": [
+            {
+              "text": "diuretics, aspirin, cytotoxics, cyclosporine, alcohol, moonshine, ethambutol"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "gout-treatment-2",
+      "kind": "treatment",
+      "title": "Medications with uricosuric activity",
+      "rowHeader": "Option",
+      "columns": [
+        "Drugs"
+      ],
+      "rows": [
+        {
+          "parameter": "Medications with uricosuric activity",
+          "cells": [
+            {
+              "text": "Acetohexamide; ACTH; ascorbic acid; azauridine; benzbromarone; calcitonin; chlorprothixene; citrate; dicumarol; diflunisal; estrogens; fenofibrate; glucocorticoids; glyceryl guaiacolate; glycopyrrolate; halofenate; losartan; meclofenamate; phenolsulfonphthalein; phenylbutazone; probenecid; radiographic contrast agents; salicylates (above 2 g/d); sulfinpyrazone; tetracycline that is outdated; zoxazolamine"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gout-dx-mgmt",
+      "title": "Diagnosis and management of Gout",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gout: acutely painful, swollen joint with urate crystal risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever with hot joint, systemic upset, renal impairment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for fever with a hot joint to exclude septic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Joint aspiration with polarised microscopy, Gram stain, culture and cell count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are urate crystals seen on aspirate microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider septic arthritis, pseudogout, cellulitis or reactive arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acute attack: NSAID, colchicine or another anti-inflammatory agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allopurinol first-line urate-lowering therapy, with febuxostat as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Flare prophylaxis with low-dose colchicine when starting urate-lowering therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifestyle and drug review; manage kidney and cardiovascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Highly treatable; with urate at target, crystals dissolve and tophi regress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,470 @@
 {
- "id": "prothrombin_g20210a_mutation",
- "name": "Prothrombin G20210A mutation",
- "aliases": [
-  "F2 G20210A",
-  "factor II G20210A",
-  "prothrombin 20210A variant",
-  "prothrombin gene mutation"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common inherited thrombophilia, second in frequency to factor V Leiden among people of European ancestry, and rare in African and Asian populations",
-   "Heterozygotes carry a modestly increased risk of venous thromboembolism, while homozygotes and those who also carry factor V Leiden have a higher risk",
-   "The variant tends to present as first venous thrombosis in a young adult, often provoked by an added risk such as combined oral contraception, pregnancy, surgery, or immobility",
-   "Plasma prothrombin activity is typically raised, but the diagnosis rests on targeted DNA analysis of the F2 gene rather than a functional assay",
-   "Arterial disease association is weak and inconsistent; the variant is chiefly a venous thrombosis risk factor",
-   "Detection influences counselling on hormonal contraception, pregnancy, and perioperative thromboprophylaxis more than it dictates the intensity of acute treatment",
-   "Family screening is offered selectively, since a positive result in an asymptomatic relative rarely changes management on its own"
+  "id": "prothrombin_g20210a_mutation",
+  "name": "Prothrombin G20210A mutation",
+  "aliases": [
+    "F2 G20210A",
+    "factor II G20210A",
+    "prothrombin 20210A variant",
+    "prothrombin gene mutation"
   ],
-  "pathophysiology": "The G20210A change lies in the 3' untranslated region of the prothrombin (factor II) gene and acts as a gain-of-function variant that enhances messenger RNA processing and stability. This raises circulating prothrombin concentration, and the excess substrate shifts the coagulation balance towards greater thrombin generation. The resulting mild hypercoagulable state predisposes to venous thromboembolism, with risk amplified when the variant coincides with other inherited or acquired prothrombotic factors.",
-  "additionalDifferentials": [
-   "Factor V Leiden and activated protein C resistance",
-   "Antithrombin deficiency",
-   "Protein C deficiency",
-   "Protein S deficiency",
-   "Antiphospholipid syndrome",
-   "Acquired provoking states such as malignancy, pregnancy, or oestrogen therapy"
-  ],
-  "additionalInvestigations": [
-   "Targeted F2 gene analysis to confirm the G20210A variant and distinguish heterozygous from homozygous status",
-   "Plasma prothrombin activity, which may be elevated but is not diagnostic",
-   "Concurrent factor V Leiden testing to detect combined thrombophilia",
-   "Functional assays for antithrombin, protein C and protein S to exclude coexisting deficiencies",
-   "Antiphospholipid antibody screen when an acquired thrombophilia is suspected",
-   "Objective imaging to confirm and characterise a suspected venous thromboembolic event"
-  ],
-  "redFlags": [
-   "Extensive or life-threatening venous thromboembolism such as massive pulmonary embolism",
-   "Thrombosis at an unusual site such as cerebral, splanchnic, or hepatic veins",
-   "Recurrent venous thrombosis despite adequate anticoagulation",
-   "Thrombosis in pregnancy or the puerperium suggesting compounded risk"
-  ],
-  "prognosis": "Most heterozygous carriers remain asymptomatic throughout life, and thrombotic risk is meaningfully increased only in the presence of additional triggers or coexisting thrombophilia. Long-term outlook depends on the burden of provoking factors and the completeness of anticoagulation after any event.",
-  "pitfalls": [
-   "Interpreting a raised prothrombin level as diagnostic without confirmatory genetic testing",
-   "Over-testing asymptomatic relatives when the result will not alter management",
-   "Assuming a strong arterial thrombosis link, which the evidence does not support",
-   "Neglecting compounded risk when the variant coexists with factor V Leiden or oestrogen exposure"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Hoffman: Hematology - Basic Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat an acute venous thromboembolic event with standard anticoagulation — heparin followed by a DOAC or vitamin K antagonist — at the same intensity as in patients without thrombophilia",
-   "Individualise anticoagulation duration, considering extended therapy after unprovoked or recurrent thrombosis and in homozygotes or those who also carry factor V Leiden",
-   "Provide thromboprophylaxis during high-risk periods such as surgery, immobility and pregnancy, using low-molecular-weight heparin in pregnancy where indicated",
-   "Counsel against combined oestrogen-containing contraception and advise on modifiable thrombotic risk factors",
-   "Avoid anticoagulating asymptomatic carriers indefinitely, reserving treatment for thrombotic events and high-risk situations",
-   "Offer family testing and genetic counselling, recognising that detection mainly guides prophylaxis and counselling rather than acute treatment intensity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "prothrombin_g20210a_mutation-pathway",
-   "title": "Prothrombin G20210A mutation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common inherited thrombophilia, second in frequency to factor V Leiden among people of European ancestry, and rare in African and Asian populations",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive or life-threatening venous thromboembolism such as massive pulmonary embolism",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted F2 gene analysis to confirm the G20210A variant and distinguish heterozygous from homozygous status, Plasma prothrombin activity, which may be elevated but is not diagnostic, Concurrent factor V Leiden testing to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat an acute venous thromboembolic event with standard anticoagulation - heparin followed by a DOAC or vitamin K antagonist - at the same intensity as in patients without thrombophilia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting a raised prothrombin level as diagnostic without confirmatory genetic testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of prothrombin g20210a mutation."
-  }
- ],
- "tables": [
-  {
-   "id": "prothrombin_g20210a_mutation-matrix",
-   "title": "Prothrombin G20210A mutation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common inherited thrombophilia, second in frequency to factor V Leiden among people of European ancestry, and rare in African",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common inherited thrombophilia, second in frequency to factor V Leiden among people of European ancestry, and rare in African and Asian populations",
+      "Heterozygotes carry a modestly increased risk of venous thromboembolism, while homozygotes and those who also carry factor V Leiden have a higher risk",
+      "The variant tends to present as first venous thrombosis in a young adult, often provoked by an added risk such as combined oral contraception, pregnancy, surgery, or immobility",
+      "Plasma prothrombin activity is typically raised, but the diagnosis rests on targeted DNA analysis of the F2 gene rather than a functional assay",
+      "Arterial disease association is weak and inconsistent; the variant is chiefly a venous thrombosis risk factor",
+      "Detection influences counselling on hormonal contraception, pregnancy, and perioperative thromboprophylaxis more than it dictates the intensity of acute treatment",
+      "Family screening is offered selectively, since a positive result in an asymptomatic relative rarely changes management on its own"
     ],
-    [
-     "Key Investigations",
-     "Targeted F2 gene analysis to confirm the G20210A variant and distinguish heterozygous from homozygous status, Plasma prothrombin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The G20210A change lies in the 3' untranslated region of the prothrombin (factor II) gene and acts as a gain-of-function variant that enhances messenger RNA processing and stability. This raises circulating prothrombin concentration, and the excess substrate shifts the coagulation balance towards greater thrombin generation. The resulting mild hypercoagulable state predisposes to venous thromboembolism, with risk amplified when the variant coincides with other inherited or acquired prothrombotic factors.",
+    "additionalDifferentials": [
+      "Factor V Leiden and activated protein C resistance",
+      "Antithrombin deficiency",
+      "Protein C deficiency",
+      "Protein S deficiency",
+      "Antiphospholipid syndrome",
+      "Acquired provoking states such as malignancy, pregnancy, or oestrogen therapy"
     ],
-    [
-     "Primary Differentials",
-     "Factor V Leiden and activated protein C resistance, Antithrombin deficiency, Protein C deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted F2 gene analysis to confirm the G20210A variant and distinguish heterozygous from homozygous status",
+      "Plasma prothrombin activity, which may be elevated but is not diagnostic",
+      "Concurrent factor V Leiden testing to detect combined thrombophilia",
+      "Functional assays for antithrombin, protein C and protein S to exclude coexisting deficiencies",
+      "Antiphospholipid antibody screen when an acquired thrombophilia is suspected",
+      "Objective imaging to confirm and characterise a suspected venous thromboembolic event"
     ],
-    [
-     "Management Strategy",
-     "Treat an acute venous thromboembolic event with standard anticoagulation - heparin followed by a DOAC or vitamin K antagonist -",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive or life-threatening venous thromboembolism such as massive pulmonary embolism",
+      "Thrombosis at an unusual site such as cerebral, splanchnic, or hepatic veins",
+      "Recurrent venous thrombosis despite adequate anticoagulation",
+      "Thrombosis in pregnancy or the puerperium suggesting compounded risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting a raised prothrombin level as diagnostic without confirmatory genetic testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most heterozygous carriers remain asymptomatic throughout life, and thrombotic risk is meaningfully increased only in the presence of additional triggers or coexisting thrombophilia. Long-term outlook depends on the burden of provoking factors and the completeness of anticoagulation after any event.",
+    "pitfalls": [
+      "Interpreting a raised prothrombin level as diagnostic without confirmatory genetic testing",
+      "Over-testing asymptomatic relatives when the result will not alter management",
+      "Assuming a strong arterial thrombosis link, which the evidence does not support",
+      "Neglecting compounded risk when the variant coexists with factor V Leiden or oestrogen exposure"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Hoffman: Hematology - Basic Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat an acute venous thromboembolic event with standard anticoagulation — heparin followed by a DOAC or vitamin K antagonist — at the same intensity as in patients without thrombophilia",
+      "Individualise anticoagulation duration, considering extended therapy after unprovoked or recurrent thrombosis and in homozygotes or those who also carry factor V Leiden",
+      "Provide thromboprophylaxis during high-risk periods such as surgery, immobility and pregnancy, using low-molecular-weight heparin in pregnancy where indicated",
+      "Counsel against combined oestrogen-containing contraception and advise on modifiable thrombotic risk factors",
+      "Avoid anticoagulating asymptomatic carriers indefinitely, reserving treatment for thrombotic events and high-risk situations",
+      "Offer family testing and genetic counselling, recognising that detection mainly guides prophylaxis and counselling rather than acute treatment intensity"
     ]
-   ],
-   "caption": "Overview comparison matrix for prothrombin g20210a mutation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "prothrombin-g20210a-mutation-real-image",
-   "title": "Prothrombin G20210A mutation: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "prothrombin_g20210a_mutation-pathway",
+      "title": "Prothrombin G20210A mutation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common inherited thrombophilia, second in frequency to factor V Leiden among people of European ancestry, and rare in African and Asian populations",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive or life-threatening venous thromboembolism such as massive pulmonary embolism",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted F2 gene analysis to confirm the G20210A variant and distinguish heterozygous from homozygous status, Plasma prothrombin activity, which may be elevated but is not diagnostic, Concurrent factor V Leiden testing to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat an acute venous thromboembolic event with standard anticoagulation - heparin followed by a DOAC or vitamin K antagonist - at the same intensity as in patients without thrombophilia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting a raised prothrombin level as diagnostic without confirmatory genetic testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of prothrombin g20210a mutation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "prothrombin_g20210a_mutation-matrix",
+      "title": "Prothrombin G20210A mutation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common inherited thrombophilia, second in frequency to factor V Leiden among people of European ancestry, and rare in African",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted F2 gene analysis to confirm the G20210A variant and distinguish heterozygous from homozygous status, Plasma prothrombin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Factor V Leiden and activated protein C resistance, Antithrombin deficiency, Protein C deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat an acute venous thromboembolic event with standard anticoagulation - heparin followed by a DOAC or vitamin K antagonist -",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting a raised prothrombin level as diagnostic without confirmatory genetic testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for prothrombin g20210a mutation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prothrombin_g20210a_mutation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted F2 gene analysis for G20210A",
+          "cells": [
+            {
+              "text": "Heterozygous or homozygous status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma prothrombin activity",
+          "cells": [
+            {
+              "text": "May be elevated but not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Concurrent factor V Leiden testing",
+          "cells": [
+            {
+              "text": "Combined thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional antithrombin, protein C and protein S assays",
+          "cells": [
+            {
+              "text": "Coexisting deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibody screen",
+          "cells": [
+            {
+              "text": "Acquired thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Objective imaging for suspected VTE",
+          "cells": [
+            {
+              "text": "Confirms and characterises the event"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prothrombin_g20210a_mutation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Factor V Leiden and activated protein C resistance",
+          "cells": [
+            {
+              "text": "Combined thrombophilia"
+            },
+            {
+              "text": "Concurrent factor V Leiden testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombin deficiency",
+          "cells": [
+            {
+              "text": "Coexisting deficiency"
+            },
+            {
+              "text": "Functional antithrombin assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Antiphospholipid antibody screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prothrombin_g20210a_mutation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute VTE",
+          "cells": [
+            {
+              "text": "Standard anticoagulation: heparin followed by a DOAC or vitamin K antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Extended therapy after unprovoked or recurrent thrombosis, and in homozygotes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis",
+          "cells": [
+            {
+              "text": "Surgery, immobility and pregnancy; LMWH in pregnancy where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contraception and risk factors",
+          "cells": [
+            {
+              "text": "Avoid combined oestrogen-containing contraception; address modifiable risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic carriers",
+          "cells": [
+            {
+              "text": "Avoid indefinite anticoagulation; reserve treatment for thrombotic events and high-risk situations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family",
+          "cells": [
+            {
+              "text": "Family testing and genetic counselling; detection mainly guides prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prothrombin_g20210a_mutation-dx-mgmt",
+      "title": "Diagnosis and management of Prothrombin G20210A mutation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prothrombin G20210A thrombophilia: venous thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Massive PE, unusual-site thrombosis, recurrence on anticoagulation, or pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent anticoagulation for massive or life-threatening VTE",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Targeted F2 G20210A testing; factor V Leiden; antithrombin, protein C and S; APL screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is G20210A confirmed, with coexisting thrombophilia assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider factor V Leiden, antithrombin or antiphospholipid causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Heparin followed by a DOAC or vitamin K antagonist for acute VTE",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Extended therapy after unprovoked or recurrent thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thromboprophylaxis in surgery, immobility and pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid combined oestrogen contraception; no indefinite treatment of carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Family testing and genetic counselling to guide prophylaxis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

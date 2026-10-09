@@ -1,173 +1,501 @@
 {
- "id": "digoxin_toxicity",
- "name": "Digoxin toxicity",
- "aliases": [
-  "digoxin poisoning",
-  "digitalis toxicity",
-  "cardiac glycoside poisoning"
- ],
- "class": "non_infective",
- "system": "Toxicology / Environmental",
- "specialty": "Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with nausea, vomiting, anorexia, confusion, and characteristic visual disturbances such as blurred or yellow-green tinted vision (xanthopsia)",
-   "Digoxin can cause almost any arrhythmia; the combination of increased automaticity with atrioventricular block (for example atrial tachycardia with block, or bidirectional ventricular tachycardia) is highly suggestive",
-   "Chronic toxicity is often precipitated by renal impairment, hypokalaemia, hypomagnesaemia, hypercalcaemia, and interacting drugs, and occurs at lower levels than acute overdose",
-   "In acute overdose, hyperkalaemia results from poisoning of the sodium-potassium pump and is an important marker of severity and prognosis",
-   "Digoxin-specific antibody fragments (digoxin immune Fab) are the definitive antidote and are indicated for life-threatening arrhythmia, significant hyperkalaemia in acute poisoning, or haemodynamic instability",
-   "In acute toxicity, treat hyperkalaemia cautiously and avoid intravenous calcium, which is traditionally cautioned against for fear of worsening myocardial contracture",
-   "Correct hypokalaemia and hypomagnesaemia in chronic toxicity, as these potentiate glycoside effects and provoke arrhythmias",
-   "Bradyarrhythmias may respond to atropine and temporary pacing, but definitive treatment of serious toxicity is the specific antibody"
+  "id": "digoxin_toxicity",
+  "name": "Digoxin toxicity",
+  "aliases": [
+    "digoxin poisoning",
+    "digitalis toxicity",
+    "cardiac glycoside poisoning"
   ],
-  "pathophysiology": "Digoxin inhibits the myocardial sodium-potassium ATPase, raising intracellular sodium and, through sodium-calcium exchange, intracellular calcium, which increases contractility but also enhances automaticity and the tendency to arrhythmia. It also augments vagal tone, slowing sinoatrial and atrioventricular conduction. In acute overdose, widespread inhibition of the pump drives potassium out of cells, producing hyperkalaemia that reflects the degree of poisoning. Electrolyte disturbances (low potassium or magnesium, high calcium) and renal impairment increase myocardial sensitivity and reduce clearance, precipitating chronic toxicity at therapeutic or near-therapeutic levels.",
-  "additionalDifferentials": [
-   "Other causes of bradyarrhythmia or heart block",
-   "Hyperkalaemia from other causes",
-   "Beta-blocker or calcium-channel-blocker toxicity",
-   "Acute coronary syndrome",
-   "Gastroenteritis (for the GI symptoms) or other cause of delirium"
-  ],
-  "additionalInvestigations": [
-   "Serum digoxin level, interpreted with timing of ingestion and clinical picture",
-   "Serum potassium, magnesium, and calcium",
-   "Renal function tests",
-   "12-lead ECG and continuous cardiac monitoring for arrhythmia and conduction block",
-   "Review of interacting medications and precipitating factors"
-  ],
-  "redFlags": [
-   "Life-threatening ventricular arrhythmia or bidirectional ventricular tachycardia",
-   "High-grade atrioventricular block or symptomatic bradycardia",
-   "Significant hyperkalaemia in acute poisoning",
-   "Haemodynamic instability",
-   "Suggestive arrhythmia combining enhanced automaticity with conduction block"
-  ],
-  "prognosis": "With timely recognition, correction of electrolytes, and use of digoxin-specific antibody fragments for severe cases, most patients recover; untreated life-threatening arrhythmias and marked hyperkalaemia in acute overdose carry high mortality.",
-  "pitfalls": [
-   "Overlooking chronic toxicity because the digoxin level is only modestly raised",
-   "Failing to correct hypokalaemia and hypomagnesaemia that perpetuate arrhythmia in chronic toxicity",
-   "Giving intravenous calcium for hyperkalaemia in acute digoxin poisoning, traditionally avoided",
-   "Delaying digoxin-specific antibody in a patient with life-threatening arrhythmia or severe hyperkalaemia"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/national toxicology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Digoxin-specific antibody fragments (digoxin immune Fab) as the definitive antidote for life-threatening arrhythmia, significant hyperkalaemia in acute poisoning or haemodynamic instability",
-   "Immediate cessation of digoxin and review and withdrawal of interacting or precipitating drugs",
-   "Correct electrolytes, replacing potassium and magnesium in chronic toxicity with hypokalaemia or hypomagnesaemia, while treating acute hyperkalaemia cautiously and avoiding intravenous calcium",
-   "Activated charcoal for recent significant ingestion, with attention to airway protection",
-   "Manage bradyarrhythmias and conduction block with atropine and temporary pacing if needed, and treat ventricular arrhythmias including with magnesium",
-   "Continuous cardiac monitoring with serial digoxin levels, potassium and renal function",
-   "Early involvement of toxicology or the poisons information service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "digoxin_toxicity-pathway",
-   "title": "Digoxin toxicity: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with nausea, vomiting, anorexia, confusion, and characteristic visual disturbances such as blurred or yellow-green tinted vision (xanthopsia)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Life-threatening ventricular arrhythmia or bidirectional ventricular tachycardia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum digoxin level, interpreted with timing of ingestion and clinical picture, Serum potassium, magnesium, and calcium, Renal function tests"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Digoxin-specific antibody fragments (digoxin immune Fab) as the definitive antidote for life-threatening arrhythmia, significant hyperkalaemia in acute poisoning or haemodynamic instability"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking chronic toxicity because the digoxin level is only modestly raised"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of digoxin toxicity."
-  }
- ],
- "tables": [
-  {
-   "id": "digoxin_toxicity-matrix",
-   "title": "Digoxin toxicity: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with nausea, vomiting, anorexia, confusion, and characteristic visual disturbances such as blurred or yellow-green",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Environmental",
+  "specialty": "Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with nausea, vomiting, anorexia, confusion, and characteristic visual disturbances such as blurred or yellow-green tinted vision (xanthopsia)",
+      "Digoxin can cause almost any arrhythmia; the combination of increased automaticity with atrioventricular block (for example atrial tachycardia with block, or bidirectional ventricular tachycardia) is highly suggestive",
+      "Chronic toxicity is often precipitated by renal impairment, hypokalaemia, hypomagnesaemia, hypercalcaemia, and interacting drugs, and occurs at lower levels than acute overdose",
+      "In acute overdose, hyperkalaemia results from poisoning of the sodium-potassium pump and is an important marker of severity and prognosis",
+      "Digoxin-specific antibody fragments (digoxin immune Fab) are the definitive antidote and are indicated for life-threatening arrhythmia, significant hyperkalaemia in acute poisoning, or haemodynamic instability",
+      "In acute toxicity, treat hyperkalaemia cautiously and avoid intravenous calcium, which is traditionally cautioned against for fear of worsening myocardial contracture",
+      "Correct hypokalaemia and hypomagnesaemia in chronic toxicity, as these potentiate glycoside effects and provoke arrhythmias",
+      "Bradyarrhythmias may respond to atropine and temporary pacing, but definitive treatment of serious toxicity is the specific antibody"
     ],
-    [
-     "Key Investigations",
-     "Serum digoxin level, interpreted with timing of ingestion and clinical picture, Serum potassium, magnesium, and calcium, Renal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Digoxin inhibits the myocardial sodium-potassium ATPase, raising intracellular sodium and, through sodium-calcium exchange, intracellular calcium, which increases contractility but also enhances automaticity and the tendency to arrhythmia. It also augments vagal tone, slowing sinoatrial and atrioventricular conduction. In acute overdose, widespread inhibition of the pump drives potassium out of cells, producing hyperkalaemia that reflects the degree of poisoning. Electrolyte disturbances (low potassium or magnesium, high calcium) and renal impairment increase myocardial sensitivity and reduce clearance, precipitating chronic toxicity at therapeutic or near-therapeutic levels.",
+    "additionalDifferentials": [
+      "Other causes of bradyarrhythmia or heart block",
+      "Hyperkalaemia from other causes",
+      "Beta-blocker or calcium-channel-blocker toxicity",
+      "Acute coronary syndrome",
+      "Gastroenteritis (for the GI symptoms) or other cause of delirium"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of bradyarrhythmia or heart block, Hyperkalaemia from other causes, Beta-blocker or calcium-channel-blocker toxicity",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum digoxin level, interpreted with timing of ingestion and clinical picture",
+      "Serum potassium, magnesium, and calcium",
+      "Renal function tests",
+      "12-lead ECG and continuous cardiac monitoring for arrhythmia and conduction block",
+      "Review of interacting medications and precipitating factors"
     ],
-    [
-     "Management Strategy",
-     "Digoxin-specific antibody fragments (digoxin immune Fab) as the definitive antidote for life-threatening arrhythmia, significant",
-     "Core treatment modality"
+    "redFlags": [
+      "Life-threatening ventricular arrhythmia or bidirectional ventricular tachycardia",
+      "High-grade atrioventricular block or symptomatic bradycardia",
+      "Significant hyperkalaemia in acute poisoning",
+      "Haemodynamic instability",
+      "Suggestive arrhythmia combining enhanced automaticity with conduction block"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking chronic toxicity because the digoxin level is only modestly raised",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely recognition, correction of electrolytes, and use of digoxin-specific antibody fragments for severe cases, most patients recover; untreated life-threatening arrhythmias and marked hyperkalaemia in acute overdose carry high mortality.",
+    "pitfalls": [
+      "Overlooking chronic toxicity because the digoxin level is only modestly raised",
+      "Failing to correct hypokalaemia and hypomagnesaemia that perpetuate arrhythmia in chronic toxicity",
+      "Giving intravenous calcium for hyperkalaemia in acute digoxin poisoning, traditionally avoided",
+      "Delaying digoxin-specific antibody in a patient with life-threatening arrhythmia or severe hyperkalaemia"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/national toxicology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Digoxin-specific antibody fragments (digoxin immune Fab) as the definitive antidote for life-threatening arrhythmia, significant hyperkalaemia in acute poisoning or haemodynamic instability",
+      "Immediate cessation of digoxin and review and withdrawal of interacting or precipitating drugs",
+      "Correct electrolytes, replacing potassium and magnesium in chronic toxicity with hypokalaemia or hypomagnesaemia, while treating acute hyperkalaemia cautiously and avoiding intravenous calcium",
+      "Activated charcoal for recent significant ingestion, with attention to airway protection",
+      "Manage bradyarrhythmias and conduction block with atropine and temporary pacing if needed, and treat ventricular arrhythmias including with magnesium",
+      "Continuous cardiac monitoring with serial digoxin levels, potassium and renal function",
+      "Early involvement of toxicology or the poisons information service"
     ]
-   ],
-   "caption": "Overview comparison matrix for digoxin toxicity."
-  }
- ],
- "diagrams": [
-  {
-   "id": "digoxin-toxicity-real-image",
-   "title": "Digoxin toxicity: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "digoxin_toxicity-pathway",
+      "title": "Digoxin toxicity: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with nausea, vomiting, anorexia, confusion, and characteristic visual disturbances such as blurred or yellow-green tinted vision (xanthopsia)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Life-threatening ventricular arrhythmia or bidirectional ventricular tachycardia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum digoxin level, interpreted with timing of ingestion and clinical picture, Serum potassium, magnesium, and calcium, Renal function tests"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Digoxin-specific antibody fragments (digoxin immune Fab) as the definitive antidote for life-threatening arrhythmia, significant hyperkalaemia in acute poisoning or haemodynamic instability"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking chronic toxicity because the digoxin level is only modestly raised"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of digoxin toxicity."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "digoxin_toxicity-matrix",
+      "title": "Digoxin toxicity: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with nausea, vomiting, anorexia, confusion, and characteristic visual disturbances such as blurred or yellow-green",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum digoxin level, interpreted with timing of ingestion and clinical picture, Serum potassium, magnesium, and calcium, Renal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of bradyarrhythmia or heart block, Hyperkalaemia from other causes, Beta-blocker or calcium-channel-blocker toxicity",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Digoxin-specific antibody fragments (digoxin immune Fab) as the definitive antidote for life-threatening arrhythmia, significant",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking chronic toxicity because the digoxin level is only modestly raised",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for digoxin toxicity."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 233-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "digoxin_toxicity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum digoxin level interpreted with timing of ingestion",
+          "cells": [
+            {
+              "text": "Chronic toxicity can occur with a modestly raised level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium, magnesium and calcium",
+          "cells": [
+            {
+              "text": "Hyperkalaemia in acute poisoning; hypokalaemia or hypomagnesaemia in chronic toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG and continuous cardiac monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and conduction block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of interacting medications",
+          "cells": [
+            {
+              "text": "Precipitating factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "digoxin_toxicity-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common non-arrhythmic toxicity of antiarrhythmic drugs",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Common nonarrhythmic toxicity"
+      ],
+      "rows": [
+        {
+          "parameter": "Amiodarone",
+          "cells": [
+            {
+              "text": "Tremor, peripheral neuropathy, pulmonary inflammation, hypothyroidism and hyperthyroidism, photosensitivity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adenosine",
+          "cells": [
+            {
+              "text": "Cough, flushing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Digoxin",
+          "cells": [
+            {
+              "text": "Anorexia, nausea, vomiting, visual changes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disopyramide",
+          "cells": [
+            {
+              "text": "Anticholinergic effects, decreased myocardial contractility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dofetilide",
+          "cells": [
+            {
+              "text": "Nausea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dronedarone",
+          "cells": [
+            {
+              "text": "Gastrointestinal intolerance, exacerbation of heart failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Flecainide",
+          "cells": [
+            {
+              "text": "Dizziness, nausea, headache, decreased myocardial contractility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ibutilide",
+          "cells": [
+            {
+              "text": "Nausea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lidocaine",
+          "cells": [
+            {
+              "text": "Dizziness, confusion, delirium, seizures, coma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mexiletine",
+          "cells": [
+            {
+              "text": "Ataxia, tremor, gait disturbances, rash, nausea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moricizine",
+          "cells": [
+            {
+              "text": "Mood changes, tremor, loss of mental clarity, nausea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Procainamide",
+          "cells": [
+            {
+              "text": "Lupus erythematosus-like syndrome (more common in slow acetylators), anorexia, nausea, neutropenia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Propafenone",
+          "cells": [
+            {
+              "text": "Taste disturbance, dyspepsia, nausea, vomiting"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Quinidine",
+          "cells": [
+            {
+              "text": "Diarrhea, nausea, vomiting, cinchonism, thrombocytopenia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sotalol",
+          "cells": [
+            {
+              "text": "Hypotension, bronchospasm"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "digoxin_toxicity-dx-mgmt",
+      "title": "Diagnosis and management of Digoxin toxicity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected digoxin toxicity: arrhythmia or GI symptoms in a patient on digoxin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (life-threatening arrhythmia, high-grade block, instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent digoxin-specific Fab for life-threatening arrhythmia or instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum digoxin with timing; potassium, magnesium, calcium; 12-lead ECG; monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the digoxin level raised with a compatible ECG or electrolyte picture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider beta-blocker or calcium-channel blocker toxicity or other bradyarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop digoxin and withdraw interacting or precipitating drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Digoxin immune Fab for life-threatening arrhythmia or severe hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace potassium and magnesium in chronic toxicity; avoid IV calcium in acute",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Atropine and temporary pacing for bradyarrhythmia; magnesium for ventricular arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Continuous monitoring with serial digoxin, potassium and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover with electrolyte correction and antibody; untreated arrhythmia is fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

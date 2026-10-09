@@ -1,172 +1,457 @@
 {
- "id": "asteroid_hyalosis",
- "name": "Asteroid hyalosis",
- "aliases": [
-  "asteroid bodies",
-  "Benson bodies",
-  "asteroid hyalitis"
- ],
- "class": "non_infective",
- "system": "Special senses / Eye (vitreous)",
- "specialty": "Ophthalmology / Vitreoretinal",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Composed of calcium-containing phospholipid (calcium soap) spherules that are bound to and suspended within the vitreous collagen framework, so they swing with eye movement and recoil to their original position rather than settling",
-   "Usually unilateral and asymptomatic, most often discovered incidentally on fundoscopy or when the opacities obscure the examiner's view of the retina",
-   "Appears as numerous small, yellow-white, highly refractile spheres distributed throughout an otherwise formed vitreous gel",
-   "Key distinction from synchysis scintillans is that the vitreous is not liquefied and the particles do not sediment inferiorly with gravity when the eye is still",
-   "Associations with increasing age and diabetes mellitus have been reported but are inconsistent; it is generally regarded as a benign age-related change",
-   "Vision is characteristically preserved despite a dramatic fundus appearance because light passes between the particles; genuine symptomatic visual disturbance is rare",
-   "Can significantly hinder retinal examination and imaging and may mask underlying maculopathy or diabetic retinopathy, so B-scan or OCT is sometimes needed",
-   "Vitrectomy is only rarely indicated, reserved for troublesome symptoms or to allow visualisation and treatment of coexisting sight-threatening retinal disease"
+  "id": "asteroid_hyalosis",
+  "name": "Asteroid hyalosis",
+  "aliases": [
+    "asteroid bodies",
+    "Benson bodies",
+    "asteroid hyalitis"
   ],
-  "pathophysiology": "Asteroid bodies are aggregates of calcium and phospholipid, with a hydroxyapatite-like calcium soap composition, that form within and adhere to the collagen fibrils of the vitreous. Because the spherules are bound to an intact gel framework, the vitreous remains formed and the bodies oscillate with ocular movement and return to position, rather than sedimenting. The precise trigger is unknown; proposed contributors include local disturbance of calcium and phospholipid metabolism together with age-related vitreous change. This contrasts with synchysis scintillans, in which crystals move freely within a liquefied, previously diseased vitreous. Visual function is typically spared because incident light is transmitted through the gaps between particles.",
-  "additionalDifferentials": [
-   "Synchysis scintillans (cholesterol crystals within a liquefied vitreous that sediment inferiorly)",
-   "Vitreous haemorrhage or organised old blood",
-   "Vitritis or inflammatory cells from uveitis or endophthalmitis",
-   "Vitreous amyloidosis",
-   "Vitreous infiltration by intraocular lymphoma",
-   "Physiological floaters from vitreous syneresis and posterior vitreous detachment"
-  ],
-  "additionalInvestigations": [
-   "Dilated slit-lamp biomicroscopy and indirect fundoscopy to characterise the opacities and their movement",
-   "B-scan ultrasonography showing multiple highly reflective mobile echoes that settle when eye movement stops",
-   "OCT of the macula to assess for coexisting maculopathy where the direct view is limited",
-   "Fundus photography to document the appearance and monitor over time",
-   "Screening for diabetes mellitus where clinically appropriate given the reported association",
-   "Careful peripheral retinal examination to exclude coexisting pathology obscured by the opacities"
-  ],
-  "redFlags": [
-   "New floaters or flashes suggesting posterior vitreous detachment or a retinal break rather than stable asteroid bodies",
-   "Sudden reduction in vision indicating a separate pathology such as haemorrhage or maculopathy",
-   "Signs of intraocular inflammation pointing to an alternative cause of vitreous opacity",
-   "Inability to view the retina, potentially masking sight-threatening disease such as proliferative diabetic retinopathy"
-  ],
-  "prognosis": "Asteroid hyalosis is a benign, usually stable condition that rarely affects vision, and the great majority of patients require no intervention. The main clinical significance is its potential to obscure examination of underlying retinal disease.",
-  "pitfalls": [
-   "Mistaking the striking appearance for serious vitreous pathology and over-investigating a benign finding",
-   "Confusing it with synchysis scintillans, which sediments inferiorly and reflects a diseased, liquefied vitreous",
-   "Attributing visual symptoms to asteroid hyalosis without excluding maculopathy or other retinal disease behind the opacities",
-   "Assuming the retina is normal when dense opacities have prevented an adequate examination"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "Ryan's Retina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and observation, as the condition is benign and vision is characteristically preserved",
-   "Careful examination of the underlying retina, using B-scan ultrasonography or OCT where the direct view is obscured, to exclude coexisting pathology",
-   "Screening for and management of diabetes mellitus given the reported association",
-   "Pars plana vitrectomy reserved for the rare cases of genuine visual impairment or when the opacities prevent diagnosis or treatment of significant retinal disease",
-   "Routine ophthalmological follow-up to monitor the opacities and maintain surveillance of retinal health"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "asteroid_hyalosis-pathway",
-   "title": "Asteroid hyalosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Composed of calcium-containing phospholipid (calcium soap) spherules that are bound to and suspended within the vitreous collagen framework, so they swing with eye movement and recoil to their original position rather than settling",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New floaters or flashes suggesting posterior vitreous detachment or a retinal break rather than stable asteroid bodies",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated slit-lamp biomicroscopy and indirect fundoscopy to characterise the opacities and their movement, B-scan ultrasonography showing multiple highly reflective mobile echoes that settle when eye movement stops, OCT of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and observation, as the condition is benign and vision is characteristically preserved"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the striking appearance for serious vitreous pathology and over-investigating a benign finding"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of asteroid hyalosis."
-  }
- ],
- "tables": [
-  {
-   "id": "asteroid_hyalosis-matrix",
-   "title": "Asteroid hyalosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Composed of calcium-containing phospholipid (calcium soap) spherules that are bound to and suspended within the vitreous collagen",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Special senses / Eye (vitreous)",
+  "specialty": "Ophthalmology / Vitreoretinal",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Composed of calcium-containing phospholipid (calcium soap) spherules that are bound to and suspended within the vitreous collagen framework, so they swing with eye movement and recoil to their original position rather than settling",
+      "Usually unilateral and asymptomatic, most often discovered incidentally on fundoscopy or when the opacities obscure the examiner's view of the retina",
+      "Appears as numerous small, yellow-white, highly refractile spheres distributed throughout an otherwise formed vitreous gel",
+      "Key distinction from synchysis scintillans is that the vitreous is not liquefied and the particles do not sediment inferiorly with gravity when the eye is still",
+      "Associations with increasing age and diabetes mellitus have been reported but are inconsistent; it is generally regarded as a benign age-related change",
+      "Vision is characteristically preserved despite a dramatic fundus appearance because light passes between the particles; genuine symptomatic visual disturbance is rare",
+      "Can significantly hinder retinal examination and imaging and may mask underlying maculopathy or diabetic retinopathy, so B-scan or OCT is sometimes needed",
+      "Vitrectomy is only rarely indicated, reserved for troublesome symptoms or to allow visualisation and treatment of coexisting sight-threatening retinal disease"
     ],
-    [
-     "Key Investigations",
-     "Dilated slit-lamp biomicroscopy and indirect fundoscopy to characterise the opacities and their movement, B-scan ultrasonography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Asteroid bodies are aggregates of calcium and phospholipid, with a hydroxyapatite-like calcium soap composition, that form within and adhere to the collagen fibrils of the vitreous. Because the spherules are bound to an intact gel framework, the vitreous remains formed and the bodies oscillate with ocular movement and return to position, rather than sedimenting. The precise trigger is unknown; proposed contributors include local disturbance of calcium and phospholipid metabolism together with age-related vitreous change. This contrasts with synchysis scintillans, in which crystals move freely within a liquefied, previously diseased vitreous. Visual function is typically spared because incident light is transmitted through the gaps between particles.",
+    "additionalDifferentials": [
+      "Synchysis scintillans (cholesterol crystals within a liquefied vitreous that sediment inferiorly)",
+      "Vitreous haemorrhage or organised old blood",
+      "Vitritis or inflammatory cells from uveitis or endophthalmitis",
+      "Vitreous amyloidosis",
+      "Vitreous infiltration by intraocular lymphoma",
+      "Physiological floaters from vitreous syneresis and posterior vitreous detachment"
     ],
-    [
-     "Primary Differentials",
-     "Synchysis scintillans (cholesterol crystals within a liquefied vitreous that sediment inferiorly), Vitreous haemorrhage or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated slit-lamp biomicroscopy and indirect fundoscopy to characterise the opacities and their movement",
+      "B-scan ultrasonography showing multiple highly reflective mobile echoes that settle when eye movement stops",
+      "OCT of the macula to assess for coexisting maculopathy where the direct view is limited",
+      "Fundus photography to document the appearance and monitor over time",
+      "Screening for diabetes mellitus where clinically appropriate given the reported association",
+      "Careful peripheral retinal examination to exclude coexisting pathology obscured by the opacities"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and observation, as the condition is benign and vision is characteristically preserved",
-     "Core treatment modality"
+    "redFlags": [
+      "New floaters or flashes suggesting posterior vitreous detachment or a retinal break rather than stable asteroid bodies",
+      "Sudden reduction in vision indicating a separate pathology such as haemorrhage or maculopathy",
+      "Signs of intraocular inflammation pointing to an alternative cause of vitreous opacity",
+      "Inability to view the retina, potentially masking sight-threatening disease such as proliferative diabetic retinopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the striking appearance for serious vitreous pathology and over-investigating a benign finding",
-     "Prevent diagnostic or management error"
+    "prognosis": "Asteroid hyalosis is a benign, usually stable condition that rarely affects vision, and the great majority of patients require no intervention. The main clinical significance is its potential to obscure examination of underlying retinal disease.",
+    "pitfalls": [
+      "Mistaking the striking appearance for serious vitreous pathology and over-investigating a benign finding",
+      "Confusing it with synchysis scintillans, which sediments inferiorly and reflects a diseased, liquefied vitreous",
+      "Attributing visual symptoms to asteroid hyalosis without excluding maculopathy or other retinal disease behind the opacities",
+      "Assuming the retina is normal when dense opacities have prevented an adequate examination"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "Ryan's Retina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and observation, as the condition is benign and vision is characteristically preserved",
+      "Careful examination of the underlying retina, using B-scan ultrasonography or OCT where the direct view is obscured, to exclude coexisting pathology",
+      "Screening for and management of diabetes mellitus given the reported association",
+      "Pars plana vitrectomy reserved for the rare cases of genuine visual impairment or when the opacities prevent diagnosis or treatment of significant retinal disease",
+      "Routine ophthalmological follow-up to monitor the opacities and maintain surveillance of retinal health"
     ]
-   ],
-   "caption": "Overview comparison matrix for asteroid hyalosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "asteroid-hyalosis-real-image",
-   "title": "Asteroid hyalosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "asteroid_hyalosis-pathway",
+      "title": "Asteroid hyalosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Composed of calcium-containing phospholipid (calcium soap) spherules that are bound to and suspended within the vitreous collagen framework, so they swing with eye movement and recoil to their original position rather than settling",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New floaters or flashes suggesting posterior vitreous detachment or a retinal break rather than stable asteroid bodies",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated slit-lamp biomicroscopy and indirect fundoscopy to characterise the opacities and their movement, B-scan ultrasonography showing multiple highly reflective mobile echoes that settle when eye movement stops, OCT of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and observation, as the condition is benign and vision is characteristically preserved"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the striking appearance for serious vitreous pathology and over-investigating a benign finding"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of asteroid hyalosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "asteroid_hyalosis-matrix",
+      "title": "Asteroid hyalosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Composed of calcium-containing phospholipid (calcium soap) spherules that are bound to and suspended within the vitreous collagen",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated slit-lamp biomicroscopy and indirect fundoscopy to characterise the opacities and their movement, B-scan ultrasonography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Synchysis scintillans (cholesterol crystals within a liquefied vitreous that sediment inferiorly), Vitreous haemorrhage or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and observation, as the condition is benign and vision is characteristically preserved",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the striking appearance for serious vitreous pathology and over-investigating a benign finding",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for asteroid hyalosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "asteroid_hyalosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated slit-lamp biomicroscopy and indirect fundoscopy",
+          "cells": [
+            {
+              "text": "Characterises the opacities and their movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Multiple highly reflective mobile echoes that settle when eye movement stops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the macula",
+          "cells": [
+            {
+              "text": "Coexisting maculopathy where the direct view is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus photography",
+          "cells": [
+            {
+              "text": "Documents appearance and monitors over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for diabetes mellitus",
+          "cells": [
+            {
+              "text": "The reported association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Careful peripheral retinal examination",
+          "cells": [
+            {
+              "text": "Coexisting pathology obscured by the opacities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "asteroid_hyalosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Synchysis scintillans",
+          "cells": [
+            {
+              "text": "Cholesterol crystals within liquefied vitreous that sediment inferiorly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior vitreous detachment or retinal break",
+          "cells": [
+            {
+              "text": "New floaters or flashes; stable asteroid bodies do not behave this way"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "asteroid_hyalosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Benign condition"
+            },
+            {
+              "text": "Vision is characteristically preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal examination",
+          "cells": [
+            {
+              "text": "B-scan ultrasonography or OCT where the direct view is obscured"
+            },
+            {
+              "text": "Excludes coexisting pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes screening",
+          "cells": [
+            {
+              "text": "Screen for diabetes mellitus"
+            },
+            {
+              "text": "Reported association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pars plana vitrectomy",
+          "cells": [
+            {
+              "text": "Rare cases of genuine visual impairment or opacities preventing diagnosis"
+            },
+            {
+              "text": "Reserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine follow-up",
+          "cells": [
+            {
+              "text": "Monitor the opacities and retinal health"
+            },
+            {
+              "text": "Ophthalmological surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "asteroid_hyalosis-dx-mgmt",
+      "title": "Diagnosis and management of Asteroid hyalosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Floating opacities seen on slit-lamp examination, usually incidental",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? New floaters, flashes or sudden visual loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal review for detachment or retinal break",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit lamp, B-scan ultrasound, macular OCT, fundus photography, diabetes screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mobile highly reflective echoes on B-scan that settle when eye movement stops?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassurance and observation; vision is preserved",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for diabetes given the reported association",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Examine the peripheral retina for coexisting pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Vitrectomy only for genuine visual impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign course; routine ophthalmological follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

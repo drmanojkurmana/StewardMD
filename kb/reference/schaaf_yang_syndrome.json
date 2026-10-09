@@ -1,173 +1,451 @@
 {
- "id": "schaaf_yang_syndrome",
- "name": "Schaaf-Yang syndrome (MAGEL2)",
- "aliases": [
-  "MAGEL2-related syndrome",
-  "Prader-Willi-like syndrome due to MAGEL2",
-  "SHFYNG syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by truncating variants in MAGEL2, a paternally expressed imprinted gene within the Prader-Willi critical region on chromosome 15q11.2",
-   "Shares features with Prader-Willi syndrome including neonatal hypotonia and early feeding difficulty, but is distinguished by prominent joint contractures",
-   "Distal arthrogryposis, particularly of the fingers, is a characteristic finding that helps separate it from classical Prader-Willi syndrome",
-   "Autism spectrum disorder and intellectual disability are frequent and often more consistent than in Prader-Willi syndrome",
-   "Only paternally inherited or de novo paternal-allele variants cause disease because the maternal copy is normally silenced by imprinting",
-   "Sleep-disordered breathing, including central and obstructive apnoea, is common and warrants active screening",
-   "Some individuals develop the hyperphagia and obesity seen in Prader-Willi syndrome, but this is variable",
-   "Diagnosis is made by sequencing MAGEL2, with attention to the parent of origin of the variant"
+  "id": "schaaf_yang_syndrome",
+  "name": "Schaaf-Yang syndrome (MAGEL2)",
+  "aliases": [
+    "MAGEL2-related syndrome",
+    "Prader-Willi-like syndrome due to MAGEL2",
+    "SHFYNG syndrome"
   ],
-  "pathophysiology": "MAGEL2 lies within the imprinted Prader-Willi region of chromosome 15q11.2 and is expressed only from the paternally inherited allele, the maternal copy being silenced by methylation. Truncating variants on the active paternal allele abolish or reduce functional protein, which normally participates in hypothalamic development, circadian and autonomic regulation, and protein trafficking within neurones. Loss of this function disturbs hypothalamic-driven control of feeding, sleep, and endocrine signalling and contributes to abnormal neurodevelopment, while the accompanying joint contractures reflect reduced foetal movement during development. Because expression is imprinted, a variant on the maternally inherited allele is generally silent, so parent of origin critically determines whether disease results.",
-  "additionalDifferentials": [
-   "Prader-Willi syndrome from deletion, maternal uniparental disomy, or imprinting defect",
-   "Distal arthrogryposis syndromes of other genetic cause",
-   "Congenital myotonic dystrophy presenting with neonatal hypotonia",
-   "Other syndromic causes of neonatal hypotonia with feeding failure",
-   "Autism spectrum disorder with intellectual disability of alternative genetic origin",
-   "Chromosomal disorders identified on microarray"
-  ],
-  "additionalInvestigations": [
-   "Sequencing of MAGEL2 with determination of the parental origin of any variant",
-   "Methylation analysis of the 15q11.2 region to distinguish from classical Prader-Willi syndrome",
-   "Chromosomal microarray to exclude a contiguous deletion",
-   "Sleep study to detect central or obstructive apnoea",
-   "Developmental and autism-focused assessment",
-   "Endocrine evaluation for hypothalamic-pituitary dysfunction where clinically indicated"
-  ],
-  "redFlags": [
-   "Significant neonatal hypotonia with feeding failure requiring assisted nutrition",
-   "Central or obstructive sleep apnoea causing hypoxaemia",
-   "Severe contractures compromising limb function or airway",
-   "Emerging hyperphagia with rapid weight gain and its metabolic consequences"
-  ],
-  "prognosis": "The course is variable but generally involves lifelong intellectual disability and autism-related needs; early mortality can occur in severely affected infants with respiratory or feeding compromise, whereas milder cases stabilise with supportive care, and long-term issues centre on neurodevelopment, sleep-disordered breathing, contracture management, and, in some, obesity-related complications.",
-  "pitfalls": [
-   "Labelling the child as classical Prader-Willi syndrome and missing the contractures that point to MAGEL2",
-   "Assuming a normal methylation test excludes the diagnosis, since MAGEL2 sequencing is required",
-   "Overlooking the parent-of-origin rule and misjudging recurrence risk in counselling",
-   "Underestimating the burden of sleep-disordered breathing by not arranging a sleep study"
-  ],
-  "references": [
-   "GeneReviews: Schaaf-Yang syndrome (MAGEL2-related disorder)",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide feeding support in infancy, including nasogastric or gastrostomy feeding for hypotonia-related feeding difficulty",
-   "Screen for and treat sleep-disordered breathing, including central and obstructive apnoea, with measures such as positive airway pressure support",
-   "Manage distal arthrogryposis and contractures with physiotherapy, splinting, and orthopaedic input",
-   "Deliver early developmental intervention and autism-focused support with speech, occupational, and behavioural therapies",
-   "Evaluate and treat hypothalamic-pituitary endocrine dysfunction where identified",
-   "Coordinate multidisciplinary care and offer genetic counselling, explaining that only paternally inherited or de novo paternal-allele variants cause disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "schaaf_yang_syndrome-pathway",
-   "title": "Schaaf-Yang syndrome (MAGEL2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by truncating variants in MAGEL2, a paternally expressed imprinted gene within the Prader-Willi critical region on chromosome 15q11.2",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant neonatal hypotonia with feeding failure requiring assisted nutrition",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Sequencing of MAGEL2 with determination of the parental origin of any variant, Methylation analysis of the 15q11.2 region to distinguish from classical Prader-Willi syndrome, Chromosomal microarray to exclude a contiguous"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide feeding support in infancy, including nasogastric or gastrostomy feeding for hypotonia-related feeding difficulty"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the child as classical Prader-Willi syndrome and missing the contractures that point to MAGEL2"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of schaaf-yang syndrome (magel2)."
-  }
- ],
- "tables": [
-  {
-   "id": "schaaf_yang_syndrome-matrix",
-   "title": "Schaaf-Yang syndrome (MAGEL2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by truncating variants in MAGEL2, a paternally expressed imprinted gene within the Prader-Willi critical region on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by truncating variants in MAGEL2, a paternally expressed imprinted gene within the Prader-Willi critical region on chromosome 15q11.2",
+      "Shares features with Prader-Willi syndrome including neonatal hypotonia and early feeding difficulty, but is distinguished by prominent joint contractures",
+      "Distal arthrogryposis, particularly of the fingers, is a characteristic finding that helps separate it from classical Prader-Willi syndrome",
+      "Autism spectrum disorder and intellectual disability are frequent and often more consistent than in Prader-Willi syndrome",
+      "Only paternally inherited or de novo paternal-allele variants cause disease because the maternal copy is normally silenced by imprinting",
+      "Sleep-disordered breathing, including central and obstructive apnoea, is common and warrants active screening",
+      "Some individuals develop the hyperphagia and obesity seen in Prader-Willi syndrome, but this is variable",
+      "Diagnosis is made by sequencing MAGEL2, with attention to the parent of origin of the variant"
     ],
-    [
-     "Key Investigations",
-     "Sequencing of MAGEL2 with determination of the parental origin of any variant, Methylation analysis of the 15q11.2 region to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MAGEL2 lies within the imprinted Prader-Willi region of chromosome 15q11.2 and is expressed only from the paternally inherited allele, the maternal copy being silenced by methylation. Truncating variants on the active paternal allele abolish or reduce functional protein, which normally participates in hypothalamic development, circadian and autonomic regulation, and protein trafficking within neurones. Loss of this function disturbs hypothalamic-driven control of feeding, sleep, and endocrine signalling and contributes to abnormal neurodevelopment, while the accompanying joint contractures reflect reduced foetal movement during development. Because expression is imprinted, a variant on the maternally inherited allele is generally silent, so parent of origin critically determines whether disease results.",
+    "additionalDifferentials": [
+      "Prader-Willi syndrome from deletion, maternal uniparental disomy, or imprinting defect",
+      "Distal arthrogryposis syndromes of other genetic cause",
+      "Congenital myotonic dystrophy presenting with neonatal hypotonia",
+      "Other syndromic causes of neonatal hypotonia with feeding failure",
+      "Autism spectrum disorder with intellectual disability of alternative genetic origin",
+      "Chromosomal disorders identified on microarray"
     ],
-    [
-     "Primary Differentials",
-     "Prader-Willi syndrome from deletion, maternal uniparental disomy, or imprinting defect, Distal arthrogryposis syndromes of other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Sequencing of MAGEL2 with determination of the parental origin of any variant",
+      "Methylation analysis of the 15q11.2 region to distinguish from classical Prader-Willi syndrome",
+      "Chromosomal microarray to exclude a contiguous deletion",
+      "Sleep study to detect central or obstructive apnoea",
+      "Developmental and autism-focused assessment",
+      "Endocrine evaluation for hypothalamic-pituitary dysfunction where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Provide feeding support in infancy, including nasogastric or gastrostomy feeding for hypotonia-related feeding difficulty",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant neonatal hypotonia with feeding failure requiring assisted nutrition",
+      "Central or obstructive sleep apnoea causing hypoxaemia",
+      "Severe contractures compromising limb function or airway",
+      "Emerging hyperphagia with rapid weight gain and its metabolic consequences"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the child as classical Prader-Willi syndrome and missing the contractures that point to MAGEL2",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable but generally involves lifelong intellectual disability and autism-related needs; early mortality can occur in severely affected infants with respiratory or feeding compromise, whereas milder cases stabilise with supportive care, and long-term issues centre on neurodevelopment, sleep-disordered breathing, contracture management, and, in some, obesity-related complications.",
+    "pitfalls": [
+      "Labelling the child as classical Prader-Willi syndrome and missing the contractures that point to MAGEL2",
+      "Assuming a normal methylation test excludes the diagnosis, since MAGEL2 sequencing is required",
+      "Overlooking the parent-of-origin rule and misjudging recurrence risk in counselling",
+      "Underestimating the burden of sleep-disordered breathing by not arranging a sleep study"
+    ],
+    "references": [
+      "GeneReviews: Schaaf-Yang syndrome (MAGEL2-related disorder)",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide feeding support in infancy, including nasogastric or gastrostomy feeding for hypotonia-related feeding difficulty",
+      "Screen for and treat sleep-disordered breathing, including central and obstructive apnoea, with measures such as positive airway pressure support",
+      "Manage distal arthrogryposis and contractures with physiotherapy, splinting, and orthopaedic input",
+      "Deliver early developmental intervention and autism-focused support with speech, occupational, and behavioural therapies",
+      "Evaluate and treat hypothalamic-pituitary endocrine dysfunction where identified",
+      "Coordinate multidisciplinary care and offer genetic counselling, explaining that only paternally inherited or de novo paternal-allele variants cause disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for schaaf-yang syndrome (magel2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "schaaf-yang-syndrome-real-image",
-   "title": "Schaaf-Yang syndrome (MAGEL2): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "schaaf_yang_syndrome-pathway",
+      "title": "Schaaf-Yang syndrome (MAGEL2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by truncating variants in MAGEL2, a paternally expressed imprinted gene within the Prader-Willi critical region on chromosome 15q11.2",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant neonatal hypotonia with feeding failure requiring assisted nutrition",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Sequencing of MAGEL2 with determination of the parental origin of any variant, Methylation analysis of the 15q11.2 region to distinguish from classical Prader-Willi syndrome, Chromosomal microarray to exclude a contiguous"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide feeding support in infancy, including nasogastric or gastrostomy feeding for hypotonia-related feeding difficulty"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the child as classical Prader-Willi syndrome and missing the contractures that point to MAGEL2"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of schaaf-yang syndrome (magel2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "schaaf_yang_syndrome-matrix",
+      "title": "Schaaf-Yang syndrome (MAGEL2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by truncating variants in MAGEL2, a paternally expressed imprinted gene within the Prader-Willi critical region on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Sequencing of MAGEL2 with determination of the parental origin of any variant, Methylation analysis of the 15q11.2 region to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Prader-Willi syndrome from deletion, maternal uniparental disomy, or imprinting defect, Distal arthrogryposis syndromes of other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide feeding support in infancy, including nasogastric or gastrostomy feeding for hypotonia-related feeding difficulty",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the child as classical Prader-Willi syndrome and missing the contractures that point to MAGEL2",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for schaaf-yang syndrome (magel2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "schaaf_yang_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MAGEL2 sequencing with parental origin",
+          "cells": [
+            {
+              "text": "Pathogenic variant; only paternal-allele variants cause disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "15q11.2 methylation analysis",
+          "cells": [
+            {
+              "text": "Distinguishes from classical Prader-Willi; normal result does not exclude SYS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Excludes contiguous deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep study",
+          "cells": [
+            {
+              "text": "Central or obstructive apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism assessment",
+          "cells": [
+            {
+              "text": "Neurodevelopmental profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine evaluation",
+          "cells": [
+            {
+              "text": "Hypothalamic-pituitary dysfunction where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schaaf_yang_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classical Prader-Willi syndrome",
+          "cells": [
+            {
+              "text": "Contractures point to MAGEL2; methylation can be normal in Schaaf-Yang"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myotonic dystrophy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schaaf_yang_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Infant feeding support",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding for hypotonia-related difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep-disordered breathing",
+          "cells": [
+            {
+              "text": "Treat central and obstructive apnoea, such as with positive airway pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contractures",
+          "cells": [
+            {
+              "text": "Physiotherapy, splinting and orthopaedic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism support",
+          "cells": [
+            {
+              "text": "Speech, occupational and behavioural therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine care",
+          "cells": [
+            {
+              "text": "Treat hypothalamic-pituitary dysfunction where found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Coordinated multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "schaaf_yang_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Schaaf-Yang syndrome (MAGEL2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with hypotonia, feeding failure and joint contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Feeding failure needing tube, apnoea with hypoxaemia, airway-threatening contractures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assisted feeding and sleep study with airway support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MAGEL2 sequencing with parental origin, methylation test, microarray, sleep study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a paternal-allele MAGEL2 truncating variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider Prader-Willi, arthrogryposis syndromes, myotonic dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Feeding support including gastrostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat sleep apnoea, e.g. positive airway pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and splinting for contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental and autism therapy; endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong intellectual disability and autism needs; early mortality in severe cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

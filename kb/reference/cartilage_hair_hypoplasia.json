@@ -1,176 +1,447 @@
 {
- "id": "cartilage_hair_hypoplasia",
- "name": "Cartilage-hair hypoplasia",
- "aliases": [
-  "CHH",
-  "RMRP",
-  "metaphyseal chondrodysplasia McKusick type",
-  "anauxetic dysplasia spectrum"
- ],
- "class": "non_infective",
- "system": "Genetics / Immunology",
- "specialty": "Clinical Genetics / Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder caused by variants in the untranslated RMRP gene, encoding the RNA component of the ribonuclease MRP complex",
-   "Produces a metaphyseal chondrodysplasia with disproportionate short-limbed short stature and characteristically fine, sparse, light and brittle hair",
-   "Skeletal features include bowed legs, limited elbow extension, ligamentous laxity and a normal-sized skull with metaphyseal changes on radiographs",
-   "A variable combined immunodeficiency affects cellular immunity in particular, causing susceptibility to severe viral infections such as varicella",
-   "Hirschsprung disease, anaemia and impaired erythropoiesis are recognised associations",
-   "There is an increased risk of malignancy, notably lymphoma, other lymphoproliferative disease and skin cancers",
-   "It is more prevalent in the Amish and Finnish populations owing to founder variants",
-   "Diagnosis combines the skeletal and hair phenotype with immunological evaluation and molecular testing of RMRP"
+  "id": "cartilage_hair_hypoplasia",
+  "name": "Cartilage-hair hypoplasia",
+  "aliases": [
+    "CHH",
+    "RMRP",
+    "metaphyseal chondrodysplasia McKusick type",
+    "anauxetic dysplasia spectrum"
   ],
-  "pathophysiology": "Cartilage-hair hypoplasia is caused by biallelic variants in RMRP, which encodes the non-coding RNA subunit of the RNase MRP endoribonuclease. This complex participates in ribosomal RNA processing, cell-cycle-related messenger RNA cleavage and mitochondrial RNA processing. Impaired function disturbs chondrocyte proliferation (metaphyseal dysplasia and short stature), hair follicle growth, lymphocyte proliferation (immunodeficiency) and erythropoiesis, and contributes to the increased predisposition to malignancy.",
-  "additionalDifferentials": [
-   "Other metaphyseal chondrodysplasias such as the Schmid type",
-   "Shwachman-Diamond syndrome",
-   "Achondroplasia and other short-limbed skeletal dysplasias",
-   "Combined immunodeficiencies without skeletal features",
-   "Adenosine deaminase deficiency with skeletal changes",
-   "Cartilage-hair hypoplasia-anauxetic dysplasia spectrum severe variants"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating metaphyseal dysplasia",
-   "Molecular genetic testing of RMRP",
-   "Lymphocyte subsets and proliferation studies and immunoglobulin levels",
-   "Full blood count to detect anaemia and cytopenias",
-   "Evaluation for Hirschsprung disease when bowel symptoms are present",
-   "Age-appropriate malignancy surveillance with a low threshold to investigate lymphadenopathy"
-  ],
-  "redFlags": [
-   "Severe or disseminated viral infection such as varicella in an immunodeficient child",
-   "Persistent lymphadenopathy or systemic symptoms suggesting lymphoma",
-   "Signs of bowel obstruction from associated Hirschsprung disease",
-   "Progressive cytopenias or marrow failure"
-  ],
-  "prognosis": "Prognosis depends largely on the severity of the immunodeficiency and the lifelong increased risk of malignancy; those with severe combined immune impairment have a poorer outlook and may require haematopoietic stem cell transplantation, whereas milder cases can have near-normal survival with surveillance and infection prevention.",
-  "pitfalls": [
-   "Regarding it as a purely skeletal dysplasia and missing the immunodeficiency",
-   "Administering live vaccines before immune status is assessed",
-   "Underestimating the risk of severe varicella and other viral infections",
-   "Neglecting long-term malignancy surveillance, particularly for lymphoma"
-  ],
-  "references": [
-   "GeneReviews (NCBI): Cartilage-hair hypoplasia-anauxetic dysplasia spectrum",
-   "OMIM: Cartilage-hair hypoplasia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Management of the immunodeficiency with antimicrobial prophylaxis and immunoglobulin replacement, and haematopoietic stem cell transplantation for severe combined immune impairment",
-   "Avoidance of live vaccines and heightened vigilance for severe viral infection such as varicella, with prompt antiviral treatment",
-   "Lifelong malignancy surveillance, with a low threshold to investigate lymphadenopathy for lymphoma",
-   "Monitoring for and management of anaemia and other cytopenias, with transfusion or haematological support as needed",
-   "Surgical management of associated Hirschsprung disease where present",
-   "Orthopaedic monitoring of the metaphyseal chondrodysplasia and short stature, with growth assessment",
-   "Multidisciplinary care across immunology, haematology, clinical genetics and orthopaedics",
-   "Genetic counselling for autosomal recessive inheritance, with RMRP testing and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cartilage_hair_hypoplasia-pathway",
-   "title": "Cartilage-hair hypoplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder caused by variants in the untranslated RMRP gene, encoding the RNA component of the ribonuclease MRP complex",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or disseminated viral infection such as varicella in an immunodeficient child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating metaphyseal dysplasia, Molecular genetic testing of RMRP, Lymphocyte subsets and proliferation studies and immunoglobulin levels"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Management of the immunodeficiency with antimicrobial prophylaxis and immunoglobulin replacement, and haematopoietic stem cell transplantation for severe combined immune impairment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regarding it as a purely skeletal dysplasia and missing the immunodeficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cartilage-hair hypoplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "cartilage_hair_hypoplasia-matrix",
-   "title": "Cartilage-hair hypoplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder caused by variants in the untranslated RMRP gene, encoding the RNA component of the ribonuclease MRP",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Immunology",
+  "specialty": "Clinical Genetics / Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder caused by variants in the untranslated RMRP gene, encoding the RNA component of the ribonuclease MRP complex",
+      "Produces a metaphyseal chondrodysplasia with disproportionate short-limbed short stature and characteristically fine, sparse, light and brittle hair",
+      "Skeletal features include bowed legs, limited elbow extension, ligamentous laxity and a normal-sized skull with metaphyseal changes on radiographs",
+      "A variable combined immunodeficiency affects cellular immunity in particular, causing susceptibility to severe viral infections such as varicella",
+      "Hirschsprung disease, anaemia and impaired erythropoiesis are recognised associations",
+      "There is an increased risk of malignancy, notably lymphoma, other lymphoproliferative disease and skin cancers",
+      "It is more prevalent in the Amish and Finnish populations owing to founder variants",
+      "Diagnosis combines the skeletal and hair phenotype with immunological evaluation and molecular testing of RMRP"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating metaphyseal dysplasia, Molecular genetic testing of RMRP, Lymphocyte subsets and proliferation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cartilage-hair hypoplasia is caused by biallelic variants in RMRP, which encodes the non-coding RNA subunit of the RNase MRP endoribonuclease. This complex participates in ribosomal RNA processing, cell-cycle-related messenger RNA cleavage and mitochondrial RNA processing. Impaired function disturbs chondrocyte proliferation (metaphyseal dysplasia and short stature), hair follicle growth, lymphocyte proliferation (immunodeficiency) and erythropoiesis, and contributes to the increased predisposition to malignancy.",
+    "additionalDifferentials": [
+      "Other metaphyseal chondrodysplasias such as the Schmid type",
+      "Shwachman-Diamond syndrome",
+      "Achondroplasia and other short-limbed skeletal dysplasias",
+      "Combined immunodeficiencies without skeletal features",
+      "Adenosine deaminase deficiency with skeletal changes",
+      "Cartilage-hair hypoplasia-anauxetic dysplasia spectrum severe variants"
     ],
-    [
-     "Primary Differentials",
-     "Other metaphyseal chondrodysplasias such as the Schmid type, Shwachman-Diamond syndrome, Achondroplasia and other short-limbed",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating metaphyseal dysplasia",
+      "Molecular genetic testing of RMRP",
+      "Lymphocyte subsets and proliferation studies and immunoglobulin levels",
+      "Full blood count to detect anaemia and cytopenias",
+      "Evaluation for Hirschsprung disease when bowel symptoms are present",
+      "Age-appropriate malignancy surveillance with a low threshold to investigate lymphadenopathy"
     ],
-    [
-     "Management Strategy",
-     "Management of the immunodeficiency with antimicrobial prophylaxis and immunoglobulin replacement, and haematopoietic stem cell",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or disseminated viral infection such as varicella in an immunodeficient child",
+      "Persistent lymphadenopathy or systemic symptoms suggesting lymphoma",
+      "Signs of bowel obstruction from associated Hirschsprung disease",
+      "Progressive cytopenias or marrow failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Regarding it as a purely skeletal dysplasia and missing the immunodeficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends largely on the severity of the immunodeficiency and the lifelong increased risk of malignancy; those with severe combined immune impairment have a poorer outlook and may require haematopoietic stem cell transplantation, whereas milder cases can have near-normal survival with surveillance and infection prevention.",
+    "pitfalls": [
+      "Regarding it as a purely skeletal dysplasia and missing the immunodeficiency",
+      "Administering live vaccines before immune status is assessed",
+      "Underestimating the risk of severe varicella and other viral infections",
+      "Neglecting long-term malignancy surveillance, particularly for lymphoma"
+    ],
+    "references": [
+      "GeneReviews (NCBI): Cartilage-hair hypoplasia-anauxetic dysplasia spectrum",
+      "OMIM: Cartilage-hair hypoplasia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Management of the immunodeficiency with antimicrobial prophylaxis and immunoglobulin replacement, and haematopoietic stem cell transplantation for severe combined immune impairment",
+      "Avoidance of live vaccines and heightened vigilance for severe viral infection such as varicella, with prompt antiviral treatment",
+      "Lifelong malignancy surveillance, with a low threshold to investigate lymphadenopathy for lymphoma",
+      "Monitoring for and management of anaemia and other cytopenias, with transfusion or haematological support as needed",
+      "Surgical management of associated Hirschsprung disease where present",
+      "Orthopaedic monitoring of the metaphyseal chondrodysplasia and short stature, with growth assessment",
+      "Multidisciplinary care across immunology, haematology, clinical genetics and orthopaedics",
+      "Genetic counselling for autosomal recessive inheritance, with RMRP testing and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for cartilage-hair hypoplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cartilage-hair-hypoplasia-real-image",
-   "title": "Cartilage-hair hypoplasia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cartilage_hair_hypoplasia-pathway",
+      "title": "Cartilage-hair hypoplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder caused by variants in the untranslated RMRP gene, encoding the RNA component of the ribonuclease MRP complex",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or disseminated viral infection such as varicella in an immunodeficient child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating metaphyseal dysplasia, Molecular genetic testing of RMRP, Lymphocyte subsets and proliferation studies and immunoglobulin levels"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Management of the immunodeficiency with antimicrobial prophylaxis and immunoglobulin replacement, and haematopoietic stem cell transplantation for severe combined immune impairment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regarding it as a purely skeletal dysplasia and missing the immunodeficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cartilage-hair hypoplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cartilage_hair_hypoplasia-matrix",
+      "title": "Cartilage-hair hypoplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder caused by variants in the untranslated RMRP gene, encoding the RNA component of the ribonuclease MRP",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating metaphyseal dysplasia, Molecular genetic testing of RMRP, Lymphocyte subsets and proliferation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other metaphyseal chondrodysplasias such as the Schmid type, Shwachman-Diamond syndrome, Achondroplasia and other short-limbed",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Management of the immunodeficiency with antimicrobial prophylaxis and immunoglobulin replacement, and haematopoietic stem cell",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regarding it as a purely skeletal dysplasia and missing the immunodeficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cartilage-hair hypoplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cartilage_hair_hypoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Demonstrates metaphyseal dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of RMRP",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis with clinical and hair phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subsets, proliferation studies and immunoglobulin levels",
+          "cells": [
+            {
+              "text": "Immunodeficiency affecting cellular immunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia and cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Indicated when bowel symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cartilage_hair_hypoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunodeficiency management",
+          "cells": [
+            {
+              "text": "Antimicrobial prophylaxis and immunoglobulin replacement"
+            },
+            {
+              "text": "Haematopoietic stem cell transplantation for severe combined immune impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Live vaccines and viral infection",
+          "cells": [
+            {
+              "text": "Avoid live vaccines; prompt antiviral treatment for severe viral infection"
+            },
+            {
+              "text": "Heightened vigilance for varicella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Lifelong surveillance with low threshold to investigate lymphadenopathy"
+            },
+            {
+              "text": "Risk of lymphoma and skin cancers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia and cytopenias",
+          "cells": [
+            {
+              "text": "Transfusion or haematological support as needed"
+            },
+            {
+              "text": "Anaemia and impaired erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Surgical management where present"
+            },
+            {
+              "text": "Associated feature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and growth monitoring",
+          "cells": [
+            {
+              "text": "Monitor metaphyseal chondrodysplasia and short stature"
+            },
+            {
+              "text": "Growth assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "RMRP testing and family screening"
+            },
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cartilage_hair_hypoplasia-dx-mgmt",
+      "title": "Diagnosis and management of Cartilage-hair hypoplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cartilage-hair hypoplasia: short limbs with fine, sparse, brittle hair",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated viral infection, lymphadenopathy, progressive cytopenias)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: antiviral treatment for severe viral infection; assess for lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey for metaphyseal dysplasia; RMRP testing and immunology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Metaphyseal dysplasia with RMRP variants and immunodeficiency confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antimicrobial prophylaxis and immunoglobulin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Schmid dysplasia, Shwachman-Diamond and ADA deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid live vaccines; treat varicella promptly with antivirals",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong lymphoma and skin-cancer surveillance; check anaemia and cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical management of Hirschsprung disease where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on immunodeficiency severity; transplant for severe combined impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

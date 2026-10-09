@@ -1,174 +1,472 @@
 {
- "id": "total_anomalous_pulmonary_venous_return",
- "name": "Total anomalous pulmonary venous return",
- "aliases": [
-  "TAPVR",
-  "TAPVC",
-  "total anomalous pulmonary venous connection",
-  "anomalous pulmonary venous drainage"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "All pulmonary veins drain into the systemic venous circulation rather than the left atrium, so an atrial-level communication is obligatory for survival",
-   "Anatomical types are supracardiac, cardiac, infracardiac and mixed, classified by the site of anomalous drainage",
-   "Obstructed drainage, most typical of the infracardiac type, produces a critically cyanotic neonate with severe pulmonary oedema and respiratory distress",
-   "Unobstructed drainage presents more insidiously with mild cyanosis, tachypnoea, failure to thrive and heart failure from pulmonary overcirculation",
-   "Complete mixing means systemic saturation reflects the balance of pulmonary and systemic venous return across the atrial septum",
-   "The obstructed form is a true surgical emergency and is not relieved by prostaglandin, which is reserved for duct-dependent lesions",
-   "Repair anastomoses the pulmonary venous confluence to the left atrium, with pulmonary vein stenosis being the main late concern"
+  "id": "total_anomalous_pulmonary_venous_return",
+  "name": "Total anomalous pulmonary venous return",
+  "aliases": [
+    "TAPVR",
+    "TAPVC",
+    "total anomalous pulmonary venous connection",
+    "anomalous pulmonary venous drainage"
   ],
-  "pathophysiology": "In total anomalous pulmonary venous return the pulmonary veins fail to connect to the left atrium and instead drain into the systemic venous system, so oxygenated and deoxygenated blood mix within the right atrium. Survival depends on an obligatory right-to-left shunt through a patent foramen ovale or atrial septal defect to fill the left heart and systemic circulation. When the anomalous pathway is obstructed, as often occurs when an infracardiac vein passes through the diaphragm, pulmonary venous pressure rises steeply, causing pulmonary oedema, pulmonary hypertension and profound cyanosis. Unobstructed connections instead deliver a large volume of recirculated blood to the lungs, producing pulmonary overcirculation, right heart volume loading and congestive failure.",
-  "additionalDifferentials": [
-   "Persistent pulmonary hypertension of the newborn",
-   "Neonatal respiratory distress syndrome or pneumonia",
-   "Other cyanotic congenital heart disease such as transposition of the great arteries",
-   "Cor triatriatum",
-   "Hypoplastic left heart syndrome",
-   "Partial anomalous pulmonary venous return with large shunt"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography to identify the pulmonary venous confluence, drainage site and obstruction",
-   "CT or MR angiography to map the anomalous venous pathway when echo is inconclusive",
-   "Chest radiograph showing pulmonary oedema in obstructed disease or a snowman contour in the supracardiac type",
-   "Cardiac catheterisation in selected cases to define anatomy and pressures",
-   "Arterial blood gas and preductal and postductal saturations to assess cyanosis",
-   "Electrocardiogram for right ventricular hypertrophy"
-  ],
-  "redFlags": [
-   "Severe cyanosis with pulmonary oedema in a neonate indicating obstructed drainage",
-   "Rapidly worsening respiratory distress unresponsive to ventilation",
-   "Signs of low cardiac output and metabolic acidosis",
-   "A restrictive atrial communication limiting left heart filling"
-  ],
-  "prognosis": "With timely surgical repair the outlook is good, but obstructed neonatal presentations carry significant early risk, and postoperative pulmonary vein stenosis is a serious complication that can recur and worsen prognosis.",
-  "pitfalls": [
-   "Mistaking obstructed disease for primary lung disease or persistent pulmonary hypertension and delaying surgery",
-   "Expecting prostaglandin to help, when the lesion is not duct-dependent and prostaglandin may worsen pulmonary congestion",
-   "Overlooking a restrictive atrial septum that critically limits systemic output",
-   "Failing to monitor for recurrent pulmonary vein stenosis after repair"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical anastomosis of the pulmonary venous confluence to the left atrium is the definitive treatment, performed emergently in the obstructed infracardiac form",
-   "Preoperative stabilisation with mechanical ventilation, inotropic support, and correction of metabolic acidosis, escalating to extracorporeal membrane oxygenation in the critically obstructed neonate",
-   "Avoid relying on prostaglandin, which does not relieve pulmonary venous obstruction, and treat pulmonary overcirculation in unobstructed disease with diuretics and anti-failure measures",
-   "Maintain an adequate atrial-level communication to allow left heart filling until surgical repair",
-   "Postoperative surveillance for recurrent or de novo pulmonary vein stenosis, arrhythmia, and pulmonary hypertension",
-   "Coordinate care through a paediatric congenital cardiac surgical, cardiology, and intensive care multidisciplinary team",
-   "Long-term echocardiographic follow-up to detect late pulmonary vein stenosis and residual lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "total_anomalous_pulmonary_venous_return-pathway",
-   "title": "Total anomalous pulmonary venous return: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "All pulmonary veins drain into the systemic venous circulation rather than the left atrium, so an atrial-level communication is obligatory for survival",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe cyanosis with pulmonary oedema in a neonate indicating obstructed drainage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography to identify the pulmonary venous confluence, drainage site and obstruction, CT or MR angiography to map the anomalous venous pathway when echo is inconclusive, Chest radiograph showing pulmonary oedema in"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical anastomosis of the pulmonary venous confluence to the left atrium is the definitive treatment, performed emergently in the obstructed infracardiac form"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking obstructed disease for primary lung disease or persistent pulmonary hypertension and delaying surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of total anomalous pulmonary venous return."
-  }
- ],
- "tables": [
-  {
-   "id": "total_anomalous_pulmonary_venous_return-matrix",
-   "title": "Total anomalous pulmonary venous return: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "All pulmonary veins drain into the systemic venous circulation rather than the left atrium, so an atrial-level communication is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "All pulmonary veins drain into the systemic venous circulation rather than the left atrium, so an atrial-level communication is obligatory for survival",
+      "Anatomical types are supracardiac, cardiac, infracardiac and mixed, classified by the site of anomalous drainage",
+      "Obstructed drainage, most typical of the infracardiac type, produces a critically cyanotic neonate with severe pulmonary oedema and respiratory distress",
+      "Unobstructed drainage presents more insidiously with mild cyanosis, tachypnoea, failure to thrive and heart failure from pulmonary overcirculation",
+      "Complete mixing means systemic saturation reflects the balance of pulmonary and systemic venous return across the atrial septum",
+      "The obstructed form is a true surgical emergency and is not relieved by prostaglandin, which is reserved for duct-dependent lesions",
+      "Repair anastomoses the pulmonary venous confluence to the left atrium, with pulmonary vein stenosis being the main late concern"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography to identify the pulmonary venous confluence, drainage site and obstruction, CT or MR angiography to map the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In total anomalous pulmonary venous return the pulmonary veins fail to connect to the left atrium and instead drain into the systemic venous system, so oxygenated and deoxygenated blood mix within the right atrium. Survival depends on an obligatory right-to-left shunt through a patent foramen ovale or atrial septal defect to fill the left heart and systemic circulation. When the anomalous pathway is obstructed, as often occurs when an infracardiac vein passes through the diaphragm, pulmonary venous pressure rises steeply, causing pulmonary oedema, pulmonary hypertension and profound cyanosis. Unobstructed connections instead deliver a large volume of recirculated blood to the lungs, producing pulmonary overcirculation, right heart volume loading and congestive failure.",
+    "additionalDifferentials": [
+      "Persistent pulmonary hypertension of the newborn",
+      "Neonatal respiratory distress syndrome or pneumonia",
+      "Other cyanotic congenital heart disease such as transposition of the great arteries",
+      "Cor triatriatum",
+      "Hypoplastic left heart syndrome",
+      "Partial anomalous pulmonary venous return with large shunt"
     ],
-    [
-     "Primary Differentials",
-     "Persistent pulmonary hypertension of the newborn, Neonatal respiratory distress syndrome or pneumonia, Other cyanotic congenital",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography to identify the pulmonary venous confluence, drainage site and obstruction",
+      "CT or MR angiography to map the anomalous venous pathway when echo is inconclusive",
+      "Chest radiograph showing pulmonary oedema in obstructed disease or a snowman contour in the supracardiac type",
+      "Cardiac catheterisation in selected cases to define anatomy and pressures",
+      "Arterial blood gas and preductal and postductal saturations to assess cyanosis",
+      "Electrocardiogram for right ventricular hypertrophy"
     ],
-    [
-     "Management Strategy",
-     "Surgical anastomosis of the pulmonary venous confluence to the left atrium is the definitive treatment, performed emergently in",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe cyanosis with pulmonary oedema in a neonate indicating obstructed drainage",
+      "Rapidly worsening respiratory distress unresponsive to ventilation",
+      "Signs of low cardiac output and metabolic acidosis",
+      "A restrictive atrial communication limiting left heart filling"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking obstructed disease for primary lung disease or persistent pulmonary hypertension and delaying surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely surgical repair the outlook is good, but obstructed neonatal presentations carry significant early risk, and postoperative pulmonary vein stenosis is a serious complication that can recur and worsen prognosis.",
+    "pitfalls": [
+      "Mistaking obstructed disease for primary lung disease or persistent pulmonary hypertension and delaying surgery",
+      "Expecting prostaglandin to help, when the lesion is not duct-dependent and prostaglandin may worsen pulmonary congestion",
+      "Overlooking a restrictive atrial septum that critically limits systemic output",
+      "Failing to monitor for recurrent pulmonary vein stenosis after repair"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical anastomosis of the pulmonary venous confluence to the left atrium is the definitive treatment, performed emergently in the obstructed infracardiac form",
+      "Preoperative stabilisation with mechanical ventilation, inotropic support, and correction of metabolic acidosis, escalating to extracorporeal membrane oxygenation in the critically obstructed neonate",
+      "Avoid relying on prostaglandin, which does not relieve pulmonary venous obstruction, and treat pulmonary overcirculation in unobstructed disease with diuretics and anti-failure measures",
+      "Maintain an adequate atrial-level communication to allow left heart filling until surgical repair",
+      "Postoperative surveillance for recurrent or de novo pulmonary vein stenosis, arrhythmia, and pulmonary hypertension",
+      "Coordinate care through a paediatric congenital cardiac surgical, cardiology, and intensive care multidisciplinary team",
+      "Long-term echocardiographic follow-up to detect late pulmonary vein stenosis and residual lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for total anomalous pulmonary venous return."
-  }
- ],
- "diagrams": [
-  {
-   "id": "total-anomalous-pulmonary-venous-return-real-image",
-   "title": "Total anomalous pulmonary venous return: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "total_anomalous_pulmonary_venous_return-pathway",
+      "title": "Total anomalous pulmonary venous return: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "All pulmonary veins drain into the systemic venous circulation rather than the left atrium, so an atrial-level communication is obligatory for survival",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe cyanosis with pulmonary oedema in a neonate indicating obstructed drainage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography to identify the pulmonary venous confluence, drainage site and obstruction, CT or MR angiography to map the anomalous venous pathway when echo is inconclusive, Chest radiograph showing pulmonary oedema in"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical anastomosis of the pulmonary venous confluence to the left atrium is the definitive treatment, performed emergently in the obstructed infracardiac form"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking obstructed disease for primary lung disease or persistent pulmonary hypertension and delaying surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of total anomalous pulmonary venous return."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "total_anomalous_pulmonary_venous_return-matrix",
+      "title": "Total anomalous pulmonary venous return: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "All pulmonary veins drain into the systemic venous circulation rather than the left atrium, so an atrial-level communication is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography to identify the pulmonary venous confluence, drainage site and obstruction, CT or MR angiography to map the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Persistent pulmonary hypertension of the newborn, Neonatal respiratory distress syndrome or pneumonia, Other cyanotic congenital",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical anastomosis of the pulmonary venous confluence to the left atrium is the definitive treatment, performed emergently in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking obstructed disease for primary lung disease or persistent pulmonary hypertension and delaying surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for total anomalous pulmonary venous return."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "total_anomalous_pulmonary_venous_return-dx-mgmt",
+      "title": "Diagnosis and management of Total anomalous pulmonary venous return",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected anomalous pulmonary venous return: neonatal cyanosis and pulmonary oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: severe cyanosis with pulmonary oedema, or low output and acidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergent surgical repair for obstructed drainage; ECMO for critical neonates",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography for venous confluence and drainage; CT or MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show pulmonary veins draining to the systemic venous system?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider persistent pulmonary hypertension, RDS or hypoplastic left heart",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical anastomosis of the venous confluence to the left atrium",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stabilise with ventilation, inotropes and acidosis correction; ECMO if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid relying on prostaglandin for pulmonary venous obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diuretics for overcirculation in unobstructed disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Postoperative surveillance for pulmonary vein stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good with timely repair; obstructed neonatal disease carries early risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "total_anomalous_pulmonary_venous_return-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary venous confluence, drainage site and obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Anomalous venous pathway when echo is inconclusive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Pulmonary oedema in obstructed disease; snowman contour in supracardiac type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preductal and postductal saturations and blood gas",
+          "cells": [
+            {
+              "text": "Cyanosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Anatomy and pressures in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Right ventricular hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "total_anomalous_pulmonary_venous_return-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Persistent pulmonary hypertension of the newborn",
+          "cells": [
+            {
+              "text": "Obstructed drainage must be excluded; surgery is delayed if missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoplastic left heart syndrome",
+          "cells": [
+            {
+              "text": "Left heart hypoplasia rather than anomalous pulmonary venous drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cor triatriatum",
+          "cells": [
+            {
+              "text": "Membrane within the left atrium rather than venous drainage to the systemic veins"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "total_anomalous_pulmonary_venous_return-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical anastomosis of pulmonary venous confluence to left atrium",
+          "cells": [
+            {
+              "text": "Definitive; emergent in the obstructed infracardiac form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative stabilisation",
+          "cells": [
+            {
+              "text": "Ventilation, inotropes and acidosis correction; ECMO in the critically obstructed neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid prostaglandin reliance",
+          "cells": [
+            {
+              "text": "Does not relieve venous obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overcirculation treatment",
+          "cells": [
+            {
+              "text": "Diuretics and anti-failure measures in unobstructed disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial communication maintained",
+          "cells": [
+            {
+              "text": "Allows left heart filling until repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative surveillance",
+          "cells": [
+            {
+              "text": "Pulmonary vein stenosis, arrhythmia and pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,462 @@
 {
- "id": "mycosis_fungoides",
- "name": "Mycosis Fungoides",
- "aliases": [
-  "MF",
-  "cutaneous T-cell lymphoma",
-  "CTCL"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Mycosis fungoides is the commonest form of cutaneous T-cell lymphoma and usually runs an indolent course over years, evolving classically through patch, plaque, and tumour stages",
-   "Early patches are erythematous, finely scaly, and often persistent in sun-protected sites such as the buttocks and trunk (the bathing-trunk distribution), frequently mimicking eczema or psoriasis for years before diagnosis",
-   "A high index of suspicion is warranted for atypical, treatment-resistant, or variably shaped chronic dermatitis in an adult, particularly with poikilodermatous change",
-   "Diagnosis often requires multiple biopsies over time, since early histology can be subtle and non-specific; T-cell clonality studies and immunophenotyping support the diagnosis",
-   "Staging assesses skin (patch/plaque/tumour or erythroderma), lymph nodes, blood, and viscera, and drives both prognosis and treatment intensity",
-   "Skin-directed therapies (topical agents, phototherapy, radiotherapy) are used for early-stage disease, while advanced or transformed disease requires systemic and specialist haemato-oncological management",
-   "Sezary syndrome is the leukaemic, erythrodermic variant, characterised by widespread redness, circulating atypical (Sezary) cells, and lymphadenopathy, and carries a poorer prognosis",
-   "Large-cell transformation, tumour-stage disease, and extracutaneous spread mark a more aggressive course and warrant prompt reassessment"
+  "id": "mycosis_fungoides",
+  "name": "Mycosis Fungoides",
+  "aliases": [
+    "MF",
+    "cutaneous T-cell lymphoma",
+    "CTCL"
   ],
-  "pathophysiology": "Mycosis fungoides is a malignant proliferation of skin-homing mature memory T-helper lymphocytes, typically expressing a CD4-positive phenotype with characteristic loss of certain T-cell surface antigens. The neoplastic cells display epidermotropism, migrating into the epidermis and forming intraepidermal collections (Pautrier microabscesses), a histological hallmark. A clonal T-cell receptor rearrangement can often be demonstrated. Over time, accumulating genetic and epigenetic alterations, altered cytokine signalling, and impaired antitumour immunity allow progression from patches and plaques to tumours, large-cell transformation, and dissemination to blood, nodes, and organs, as seen in advanced disease and Sezary syndrome.",
-  "additionalDifferentials": [
-   "Chronic eczema or atopic dermatitis",
-   "Psoriasis and parapsoriasis",
-   "Drug eruptions and chronic contact dermatitis",
-   "Tinea corporis and other superficial dermatoses",
-   "Erythroderma of other causes (for the erythrodermic variant)",
-   "Other cutaneous lymphomas and lymphomatoid conditions"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy, often repeated, with immunohistochemistry and T-cell receptor gene rearrangement (clonality) studies",
-   "Peripheral blood examination including flow cytometry for circulating atypical (Sezary) cells",
-   "Full staging with lymph node assessment and imaging (such as CT or PET-CT) in advanced disease",
-   "Lactate dehydrogenase and other bloods to help gauge tumour burden",
-   "Lymph node biopsy where nodal involvement is suspected"
-  ],
-  "redFlags": [
-   "Cutaneous T-cell lymphoma is a malignancy: persistent, atypical, or treatment-resistant chronic dermatitis in an adult should prompt biopsy and specialist referral",
-   "Development of tumours, ulceration, or rapid progression suggesting large-cell transformation",
-   "Erythroderma with circulating atypical cells indicating Sezary syndrome",
-   "Lymphadenopathy, hepatosplenomegaly, or systemic symptoms suggesting extracutaneous spread",
-   "Signs of secondary infection or sepsis in extensively involved or eroded skin"
-  ],
-  "prognosis": "Early patch- and plaque-stage mycosis fungoides is often indolent with a life expectancy close to normal, but prognosis worsens markedly with tumour-stage disease, large-cell transformation, nodal or visceral involvement, and Sezary syndrome; ongoing surveillance is needed because progression can occur after years of stable disease.",
-  "pitfalls": [
-   "Labelling persistent atypical dermatitis as eczema or psoriasis for years and delaying biopsy",
-   "Relying on a single non-diagnostic biopsy to exclude the diagnosis",
-   "Overlooking Sezary syndrome as a cause of adult erythroderma",
-   "Undertreating early disease or, conversely, overtreating indolent disease with aggressive therapy",
-   "Missing large-cell transformation or extracutaneous progression during follow-up"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Match treatment intensity to stage, reserving skin-directed therapy for early patch and plaque disease and systemic therapy for advanced or transformed disease",
-   "For early-stage disease, use skin-directed measures such as topical corticosteroids, topical chlormethine (nitrogen mustard), topical retinoids or bexarotene, phototherapy with PUVA or narrowband UVB, and localised radiotherapy",
-   "For advanced, erythrodermic, or transformed disease, use systemic agents such as oral bexarotene, interferon, histone deacetylase inhibitors, brentuximab vedotin, mogamulizumab, or chemotherapy, with total skin electron beam therapy for extensive skin involvement",
-   "Treat Sezary syndrome with extracorporeal photopheresis, often combined with systemic therapy, and consider allogeneic stem-cell transplantation in selected younger patients",
-   "Provide symptomatic skin care with emollients, active management of pruritus, and treatment of secondary skin infection",
-   "Maintain surveillance with periodic restaging and monitoring for large-cell transformation, nodal or visceral progression, and lactate dehydrogenase as a marker of tumour burden",
-   "Manage through a multidisciplinary team spanning dermatology and haemato-oncology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mycosis_fungoides-pathway",
-   "title": "Mycosis Fungoides: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Mycosis fungoides is the commonest form of cutaneous T-cell lymphoma and usually runs an indolent course over years, evolving classically through patch, plaque, and tumour stages",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cutaneous T-cell lymphoma is a malignancy: persistent, atypical, or treatment-resistant chronic dermatitis in an adult should prompt biopsy and specialist referral",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy, often repeated, with immunohistochemistry and T-cell receptor gene rearrangement (clonality) studies, Peripheral blood examination including flow cytometry for circulating atypical (Sezary) cells, Full staging"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Match treatment intensity to stage, reserving skin-directed therapy for early patch and plaque disease and systemic therapy for advanced or transformed disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling persistent atypical dermatitis as eczema or psoriasis for years and delaying biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mycosis fungoides."
-  }
- ],
- "tables": [
-  {
-   "id": "mycosis_fungoides-matrix",
-   "title": "Mycosis Fungoides: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Mycosis fungoides is the commonest form of cutaneous T-cell lymphoma and usually runs an indolent course over years, evolving",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Mycosis fungoides is the commonest form of cutaneous T-cell lymphoma and usually runs an indolent course over years, evolving classically through patch, plaque, and tumour stages",
+      "Early patches are erythematous, finely scaly, and often persistent in sun-protected sites such as the buttocks and trunk (the bathing-trunk distribution), frequently mimicking eczema or psoriasis for years before diagnosis",
+      "A high index of suspicion is warranted for atypical, treatment-resistant, or variably shaped chronic dermatitis in an adult, particularly with poikilodermatous change",
+      "Diagnosis often requires multiple biopsies over time, since early histology can be subtle and non-specific; T-cell clonality studies and immunophenotyping support the diagnosis",
+      "Staging assesses skin (patch/plaque/tumour or erythroderma), lymph nodes, blood, and viscera, and drives both prognosis and treatment intensity",
+      "Skin-directed therapies (topical agents, phototherapy, radiotherapy) are used for early-stage disease, while advanced or transformed disease requires systemic and specialist haemato-oncological management",
+      "Sezary syndrome is the leukaemic, erythrodermic variant, characterised by widespread redness, circulating atypical (Sezary) cells, and lymphadenopathy, and carries a poorer prognosis",
+      "Large-cell transformation, tumour-stage disease, and extracutaneous spread mark a more aggressive course and warrant prompt reassessment"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy, often repeated, with immunohistochemistry and T-cell receptor gene rearrangement (clonality) studies, Peripheral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mycosis fungoides is a malignant proliferation of skin-homing mature memory T-helper lymphocytes, typically expressing a CD4-positive phenotype with characteristic loss of certain T-cell surface antigens. The neoplastic cells display epidermotropism, migrating into the epidermis and forming intraepidermal collections (Pautrier microabscesses), a histological hallmark. A clonal T-cell receptor rearrangement can often be demonstrated. Over time, accumulating genetic and epigenetic alterations, altered cytokine signalling, and impaired antitumour immunity allow progression from patches and plaques to tumours, large-cell transformation, and dissemination to blood, nodes, and organs, as seen in advanced disease and Sezary syndrome.",
+    "additionalDifferentials": [
+      "Chronic eczema or atopic dermatitis",
+      "Psoriasis and parapsoriasis",
+      "Drug eruptions and chronic contact dermatitis",
+      "Tinea corporis and other superficial dermatoses",
+      "Erythroderma of other causes (for the erythrodermic variant)",
+      "Other cutaneous lymphomas and lymphomatoid conditions"
     ],
-    [
-     "Primary Differentials",
-     "Chronic eczema or atopic dermatitis, Psoriasis and parapsoriasis, Drug eruptions and chronic contact dermatitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy, often repeated, with immunohistochemistry and T-cell receptor gene rearrangement (clonality) studies",
+      "Peripheral blood examination including flow cytometry for circulating atypical (Sezary) cells",
+      "Full staging with lymph node assessment and imaging (such as CT or PET-CT) in advanced disease",
+      "Lactate dehydrogenase and other bloods to help gauge tumour burden",
+      "Lymph node biopsy where nodal involvement is suspected"
     ],
-    [
-     "Management Strategy",
-     "Match treatment intensity to stage, reserving skin-directed therapy for early patch and plaque disease and systemic therapy for",
-     "Core treatment modality"
+    "redFlags": [
+      "Cutaneous T-cell lymphoma is a malignancy: persistent, atypical, or treatment-resistant chronic dermatitis in an adult should prompt biopsy and specialist referral",
+      "Development of tumours, ulceration, or rapid progression suggesting large-cell transformation",
+      "Erythroderma with circulating atypical cells indicating Sezary syndrome",
+      "Lymphadenopathy, hepatosplenomegaly, or systemic symptoms suggesting extracutaneous spread",
+      "Signs of secondary infection or sepsis in extensively involved or eroded skin"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling persistent atypical dermatitis as eczema or psoriasis for years and delaying biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early patch- and plaque-stage mycosis fungoides is often indolent with a life expectancy close to normal, but prognosis worsens markedly with tumour-stage disease, large-cell transformation, nodal or visceral involvement, and Sezary syndrome; ongoing surveillance is needed because progression can occur after years of stable disease.",
+    "pitfalls": [
+      "Labelling persistent atypical dermatitis as eczema or psoriasis for years and delaying biopsy",
+      "Relying on a single non-diagnostic biopsy to exclude the diagnosis",
+      "Overlooking Sezary syndrome as a cause of adult erythroderma",
+      "Undertreating early disease or, conversely, overtreating indolent disease with aggressive therapy",
+      "Missing large-cell transformation or extracutaneous progression during follow-up"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Match treatment intensity to stage, reserving skin-directed therapy for early patch and plaque disease and systemic therapy for advanced or transformed disease",
+      "For early-stage disease, use skin-directed measures such as topical corticosteroids, topical chlormethine (nitrogen mustard), topical retinoids or bexarotene, phototherapy with PUVA or narrowband UVB, and localised radiotherapy",
+      "For advanced, erythrodermic, or transformed disease, use systemic agents such as oral bexarotene, interferon, histone deacetylase inhibitors, brentuximab vedotin, mogamulizumab, or chemotherapy, with total skin electron beam therapy for extensive skin involvement",
+      "Treat Sezary syndrome with extracorporeal photopheresis, often combined with systemic therapy, and consider allogeneic stem-cell transplantation in selected younger patients",
+      "Provide symptomatic skin care with emollients, active management of pruritus, and treatment of secondary skin infection",
+      "Maintain surveillance with periodic restaging and monitoring for large-cell transformation, nodal or visceral progression, and lactate dehydrogenase as a marker of tumour burden",
+      "Manage through a multidisciplinary team spanning dermatology and haemato-oncology"
     ]
-   ],
-   "caption": "Overview comparison matrix for mycosis fungoides."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mycosis-fungoides-real-image",
-   "title": "Mycosis Fungoides: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "mycosis_fungoides-pathway",
+      "title": "Mycosis Fungoides: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Mycosis fungoides is the commonest form of cutaneous T-cell lymphoma and usually runs an indolent course over years, evolving classically through patch, plaque, and tumour stages",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cutaneous T-cell lymphoma is a malignancy: persistent, atypical, or treatment-resistant chronic dermatitis in an adult should prompt biopsy and specialist referral",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy, often repeated, with immunohistochemistry and T-cell receptor gene rearrangement (clonality) studies, Peripheral blood examination including flow cytometry for circulating atypical (Sezary) cells, Full staging"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Match treatment intensity to stage, reserving skin-directed therapy for early patch and plaque disease and systemic therapy for advanced or transformed disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling persistent atypical dermatitis as eczema or psoriasis for years and delaying biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mycosis fungoides."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mycosis_fungoides-matrix",
+      "title": "Mycosis Fungoides: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Mycosis fungoides is the commonest form of cutaneous T-cell lymphoma and usually runs an indolent course over years, evolving",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy, often repeated, with immunohistochemistry and T-cell receptor gene rearrangement (clonality) studies, Peripheral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic eczema or atopic dermatitis, Psoriasis and parapsoriasis, Drug eruptions and chronic contact dermatitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Match treatment intensity to stage, reserving skin-directed therapy for early patch and plaque disease and systemic therapy for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling persistent atypical dermatitis as eczema or psoriasis for years and delaying biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mycosis fungoides."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycosis_fungoides-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy, often repeated, with immunohistochemistry and T-cell clonality studies",
+          "cells": [
+            {
+              "text": "Early histology can be subtle; clonality supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood flow cytometry",
+          "cells": [
+            {
+              "text": "Circulating atypical (Sezary) cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full staging with lymph node assessment and CT or PET-CT",
+          "cells": [
+            {
+              "text": "Skin, nodes, blood and viscera; drives prognosis and treatment intensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactate dehydrogenase and other bloods",
+          "cells": [
+            {
+              "text": "Gauge tumour burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymph node biopsy",
+          "cells": [
+            {
+              "text": "Where nodal involvement is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycosis_fungoides-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic eczema or atopic dermatitis",
+          "cells": [
+            {
+              "text": "Early patches are persistent and can mimic eczema for years before diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriasis and parapsoriasis",
+          "cells": [
+            {
+              "text": "Early patches can mimic psoriasis for years before diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythroderma of other causes, including Sezary syndrome",
+          "cells": [
+            {
+              "text": "Sezary syndrome shows circulating atypical cells on blood examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycosis_fungoides-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Match treatment intensity to stage",
+          "cells": [
+            {
+              "text": "Skin-directed therapy for early patch and plaque disease; systemic therapy for advanced or transformed disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin-directed therapy for early disease",
+          "cells": [
+            {
+              "text": "Topical corticosteroids, topical chlormethine, topical retinoids or bexarotene, phototherapy with PUVA or narrowband UVB, localised radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy for advanced disease",
+          "cells": [
+            {
+              "text": "Oral bexarotene, interferon, histone deacetylase inhibitors, brentuximab vedotin, mogamulizumab or chemotherapy; total skin electron beam for extensive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sezary syndrome",
+          "cells": [
+            {
+              "text": "Extracorporeal photopheresis, often with systemic therapy; allogeneic stem-cell transplant in selected younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic skin care",
+          "cells": [
+            {
+              "text": "Emollients, pruritus management and treatment of secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Periodic restaging and monitoring for large-cell transformation, nodal or visceral progression, and lactate dehydrogenase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Dermatology and haemato-oncology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycosis_fungoides-dx-mgmt",
+      "title": "Diagnosis and management of Mycosis Fungoides",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent, atypical or treatment-resistant chronic dermatitis in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tumours, ulceration, erythroderma, lymphadenopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist haemato-oncology referral; restage for transformation or spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated skin biopsy with clonality, blood flow cytometry, staging imaging, LDH",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clonal T-cell population on biopsy, with atypical cells on blood assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat biopsy; a single non-diagnostic biopsy does not exclude the disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early patch and plaque: topical steroids, retinoids, chlormethine, phototherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Advanced or transformed disease: systemic agents such as bexarotene or interferon",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sezary syndrome: extracorporeal photopheresis, often with systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance restaging and LDH monitoring for progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early disease often indolent with near-normal life expectancy; tumour stage worsens it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

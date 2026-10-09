@@ -238,25 +238,739 @@
       "caption": "Diagnostic and clinical overview matrix for migraine."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "migraine-real-image",
-      "title": "Migraine: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Migraine",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/headache/migraine"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 366-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 11-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 347-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "migraine-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria and red flags for migraine",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Attack duration",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "4 to 72 h",
+              "range": [
+                4,
+                72
+              ]
+            },
+            {
+              "text": "Repeated attacks with normal examination and no other cause"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Pain features",
+          "cells": [
+            {
+              "text": "At least 2 of: unilateral, throbbing, worse with movement, moderate or severe"
+            },
+            {
+              "text": "Simplified diagnostic criterion"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Associated features",
+          "cells": [
+            {
+              "text": "At least 1 of: nausea or vomiting, or photophobia with phonophobia"
+            },
+            {
+              "text": "{{hy:Featureless headache points to tension-type instead}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aura",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 20 to 25% of patients",
+              "range": [
+                20,
+                25
+              ]
+            },
+            {
+              "text": "Lasts minutes to an hour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "One-year prevalence",
+          "cells": [
+            {
+              "text": "About 15% of women and 6% of men"
+            },
+            {
+              "text": "Leading neurologic cause of disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic migraine",
+          "unit": "days/month",
+          "cells": [
+            {
+              "text": "15 or more headache days per month, 8 or more migrainous",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "ICHD-3 definition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MIDAS disability grade",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "I 0 to 5; II 6 to 10; III 11 to 20; IV over 20"
+            },
+            {
+              "text": "Grades disability; guides prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red flags needing imaging",
+          "cells": [
+            {
+              "text": "Thunderclap or worst-ever headache, subacute worsening, cough or exertional trigger, systemic illness, fever, abnormal exam"
+            },
+            {
+              "text": "MRI and sometimes lumbar puncture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age at onset red flag",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "After 55 (Harrison) or after 50 (Merck)",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "New headache in older patient needs work-up"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Imaging without red flags",
+          "cells": [
+            {
+              "text": "Not needed"
+            },
+            {
+              "text": "Diagnosis is clinical"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source conflict on the age red flag: Harrison uses onset after 55, Merck after 50; the numeric value records the lower threshold."
+    },
+    {
+      "id": "migraine-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic migraine",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Tension-type headache",
+          "cells": [
+            {
+              "text": "Featureless: no nausea, photophobia, phonophobia, throbbing or movement aggravation"
+            },
+            {
+              "text": "Clinical history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cluster headache",
+          "cells": [
+            {
+              "text": "Trigeminal autonomic cephalalgia; strictly unilateral with autonomic signs"
+            },
+            {
+              "text": "Clinical pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinusitis",
+          "cells": [
+            {
+              "text": "Migraine can cause lacrimation and nasal congestion, leading to overdiagnosis of sinusitis"
+            },
+            {
+              "text": "Clinical history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningitis",
+          "cells": [
+            {
+              "text": "Fever and stiff neck with pounding headache and photophobia"
+            },
+            {
+              "text": "{{hy:Lumbar puncture}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "Thunderclap onset"
+            },
+            {
+              "text": "CT then lumbar puncture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TIA or stroke versus acephalgic aura",
+          "cells": [
+            {
+              "text": "Aura deficit migrates over minutes, stroke over seconds"
+            },
+            {
+              "text": "Brain imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant cell arteritis",
+          "cells": [
+            {
+              "text": "Older patient, temporal artery tenderness; both improve with prednisone"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-overuse headache",
+          "cells": [
+            {
+              "text": "Acute drugs over 2 days per week"
+            },
+            {
+              "text": "Medication history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine",
+          "cells": [
+            {
+              "text": "Channelopathy: FHM1 and FHM3"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "migraine-treatment",
+      "kind": "treatment",
+      "title": "Treatment of migraine",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAID or paracetamol (acetaminophen)",
+          "cells": [
+            {
+              "text": "Mild to moderate attacks"
+            },
+            {
+              "text": "First step; doses not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Triptan",
+          "cells": [
+            {
+              "text": "{{hy:Inadequate response to simple analgesia}}"
+            },
+            {
+              "text": "Avoid in coronary disease or uncontrolled hypertension"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metoclopramide or prochlorperazine",
+          "cells": [
+            {
+              "text": "Nausea, or alone for mild to moderate attacks"
+            },
+            {
+              "text": "Prochlorperazine 25 mg suppository or 10 mg tablet"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gepant (ubrogepant, rimegepant) or lasmiditan",
+          "cells": [
+            {
+              "text": "Triptan contraindicated for cardiovascular reasons"
+            },
+            {
+              "text": "Gepants do not cause medication overuse headache"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV dihydroergotamine plus dopamine antagonist, IV saline",
+          "cells": [
+            {
+              "text": "Severe persistent attack"
+            },
+            {
+              "text": "Saline for vomiting-related dehydration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opioids",
+          "cells": [
+            {
+              "text": "Last resort only"
+            },
+            {
+              "text": "Risk of overuse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Preventive therapy",
+          "cells": [
+            {
+              "text": "Frequent attacks disrupting life, or acute drugs over 2 days per week"
+            },
+            {
+              "text": "Choose by comorbidity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amitriptyline, beta-blocker, topiramate, valproate or venlafaxine",
+          "cells": [
+            {
+              "text": "First preventive options"
+            },
+            {
+              "text": "Amitriptyline for insomnia; beta-blocker for anxiety; topiramate if weight gain to avoid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CGRP antibodies or oral gepants (atogepant, rimegepant)",
+          "cells": [
+            {
+              "text": "When other preventives fail"
+            },
+            {
+              "text": "Erenumab, fremanezumab, galcanezumab"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "OnabotulinumtoxinA",
+          "cells": [
+            {
+              "text": "Chronic migraine"
+            },
+            {
+              "text": "PREEMPT protocol"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Withdraw overused analgesics",
+          "cells": [
+            {
+              "text": "Medication-overuse headache"
+            },
+            {
+              "text": "Start prevention alongside"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Oestrogen-containing contraceptives have been linked with stroke in migraine with aura (Merck)."
+    },
+    {
+      "id": "migraine-treatment-2",
+      "kind": "treatment",
+      "title": "Painful conditions that respond to tricyclic antidepressants",
+      "rowHeader": "Option",
+      "columns": [
+        "Condition"
+      ],
+      "rows": [
+        {
+          "parameter": "Responsive painful conditions",
+          "cells": [
+            {
+              "text": "Postherpetic neuralgia (a); diabetic neuropathy (a); tension headache (a); migraine headache (a); rheumatoid arthritis (a, b); chronic low back pain (b); cancer pain; central post-stroke pain"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Footnote texts a and b are not shown on the printed page. The last two items are printed run together."
+    },
+    {
+      "id": "migraine-treatment-3",
+      "kind": "treatment",
+      "title": "Oral contraceptives: contraindications and disease risk",
+      "rowHeader": "Option",
+      "columns": [
+        "Details"
+      ],
+      "rows": [
+        {
+          "parameter": "Absolute contraindications",
+          "cells": [
+            {
+              "text": "Previous thromboembolic event or stroke; history of estrogen-dependent tumor; active liver disease; pregnancy; undiagnosed abnormal uterine bleeding; hypertriglyceridemia; women over 35 who smoke heavily"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Relative contraindications",
+          "cells": [
+            {
+              "text": "Hypertension; women on anticonvulsant therapy; women after bariatric (malabsorptive) surgery"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Increased risk: coronary heart disease",
+          "cells": [
+            {
+              "text": "Increased in smokers over 35; no relation to progestin type"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Increased risk: hypertension",
+          "cells": [
+            {
+              "text": "Relative risk 1.8 in current users and 1.2 in previous users"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Increased risk: venous thrombosis",
+          "cells": [
+            {
+              "text": "Relative risk about 4; may be higher with third-generation progestin, drospirenone, and the patch; compounded by obesity (tenfold risk compared with nonobese non-users); markedly increased with factor V Leiden or prothrombin-gene mutations"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Increased risk: stroke",
+          "cells": [
+            {
+              "text": "Slight increase; relation to migraine headache unclear"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Increased risk: cerebral vein thrombosis",
+          "cells": [
+            {
+              "text": "Relative risk about 13 to 15; synergistic with prothrombin-gene mutation"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Increased risk: cervical cancer",
+          "cells": [
+            {
+              "text": "Relative risk 2 to 4"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Increased risk: breast cancer",
+          "cells": [
+            {
+              "text": "May increase risk in carriers of BRCA1 and possibly BRCA2"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Decreased risk: ovarian cancer",
+          "cells": [
+            {
+              "text": "50% reduction in risk"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Decreased risk: endometrial cancer",
+          "cells": [
+            {
+              "text": "40% reduction in risk"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Cervical and breast cancer are printed run together on one line."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "migraine-dx-mgmt",
+      "title": "Diagnosis and management of migraine",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Any red flag?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "MRI or CT, and lumbar puncture if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Meets migraine criteria with normal exam?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Consider tension-type, cluster or other headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "NSAID or paracetamol, with antiemetic if nauseated",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Adequate relief?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add triptan; gepant or lasmiditan if cardiovascular disease",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Frequent attacks or acute drugs over 2 days per week?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Start preventive chosen by comorbidity; stop overuse",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Prevention fails or chronic migraine?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "CGRP therapy or onabotulinumtoxinA",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Continue acute plan with headache diary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
         }
       ]
     }

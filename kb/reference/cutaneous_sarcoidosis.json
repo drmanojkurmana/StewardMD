@@ -1,175 +1,453 @@
 {
- "id": "cutaneous_sarcoidosis",
- "name": "Cutaneous sarcoidosis",
- "aliases": [
-  "skin sarcoidosis",
-  "sarcoidosis of the skin",
-  "lupus pernio",
-  "scar sarcoidosis"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sarcoidosis is a multisystem granulomatous disorder, and the skin is affected in roughly a quarter of patients, sometimes as the presenting feature",
-   "Known as one of the great imitators, its lesions range from red-brown papules and plaques to nodules, and diascopy classically reveals an apple-jelly colour",
-   "Lupus pernio describes indurated violaceous plaques on the nose, cheeks and ears and is strongly associated with chronic disease and upper respiratory tract or pulmonary involvement",
-   "Scar sarcoidosis is the appearance of granulomatous infiltration within old scars or tattoos and should always raise suspicion of systemic disease",
-   "Erythema nodosum is a reactive, non-specific eruption that, with hilar lymphadenopathy and arthralgia (Lofgren syndrome), carries a favourable prognosis",
-   "Histology shows non-caseating epithelioid granulomata with sparse surrounding lymphocytes (naked granulomas), but infection must always be excluded",
-   "Because cutaneous signs may herald internal organ disease, every patient needs assessment for pulmonary, ophthalmic, cardiac and other systemic involvement",
-   "Treatment is directed at the underlying disease and ranges from potent topical or intralesional corticosteroids for limited skin disease to systemic corticosteroids and steroid-sparing agents for extensive or organ-threatening disease"
+  "id": "cutaneous_sarcoidosis",
+  "name": "Cutaneous sarcoidosis",
+  "aliases": [
+    "skin sarcoidosis",
+    "sarcoidosis of the skin",
+    "lupus pernio",
+    "scar sarcoidosis"
   ],
-  "pathophysiology": "Sarcoidosis is characterised by the formation of non-caseating epithelioid granulomata in affected tissues, thought to represent an exaggerated cell-mediated immune response to an as-yet-unidentified antigen in a genetically susceptible host. Activated CD4 T-helper lymphocytes and macrophages accumulate and organise into compact granulomata, driven by a T-helper-1 cytokine profile. In the skin this produces the varied papules, plaques and nodules seen clinically, while similar granulomata elsewhere account for the multisystem nature of the disease. The granulomata may resolve spontaneously or progress to fibrosis, and their tendency to arise within scars and foreign material reflects a localised granulomatous response to tissue disruption.",
-  "additionalDifferentials": [
-   "Cutaneous tuberculosis and other mycobacterial infections",
-   "Granuloma annulare and other non-infective granulomatous dermatoses",
-   "Cutaneous lymphoma or leukaemia cutis",
-   "Granulomatous rosacea and lupus miliaris disseminatus faciei on the face",
-   "Necrobiosis lipoidica and foreign-body granuloma",
-   "Discoid lupus erythematosus and lupus vulgaris"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy demonstrating non-caseating granulomata, with stains and culture to exclude mycobacterial and fungal infection",
-   "Chest imaging to detect hilar lymphadenopathy and pulmonary infiltrates",
-   "Serum angiotensin-converting enzyme, calcium and inflammatory markers as adjunctive tests",
-   "Pulmonary function tests and, where indicated, cardiac assessment including electrocardiography",
-   "Ophthalmological review for uveitis and other ocular involvement",
-   "Serum and urinary calcium to detect dysregulated vitamin D metabolism"
-  ],
-  "redFlags": [
-   "Lupus pernio or extensive skin disease signalling chronic systemic sarcoidosis",
-   "Symptoms of cardiac involvement such as palpitations, syncope or conduction disturbance",
-   "Progressive breathlessness suggesting significant pulmonary disease",
-   "Visual disturbance from ocular sarcoidosis",
-   "Hypercalcaemia with renal impairment"
-  ],
-  "prognosis": "Outcome varies widely: acute presentations such as Lofgren syndrome and erythema nodosum often resolve spontaneously within months, whereas lupus pernio and infiltrative plaques tend to be chronic and may cause disfigurement, and prognosis ultimately depends on the extent and severity of internal organ involvement.",
-  "pitfalls": [
-   "Assuming skin disease is isolated and failing to screen for potentially serious internal organ involvement",
-   "Diagnosing sarcoidosis without excluding tuberculosis and other granulomatous infections",
-   "Overlooking granulomatous change within scars or tattoos as a clue to the diagnosis",
-   "Missing asymptomatic cardiac or ocular disease that requires urgent treatment"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Thoracic Society sarcoidosis guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical or intralesional corticosteroids, with topical calcineurin inhibitors, for localised cutaneous disease",
-   "Systemic corticosteroids with steroid-sparing agents such as hydroxychloroquine or methotrexate for widespread or disfiguring disease including lupus pernio",
-   "TNF-alpha inhibitors such as infliximab for refractory or severe disease",
-   "Symptomatic non-steroidal anti-inflammatory treatment for reactive erythema nodosum, which often resolves spontaneously as in Lofgren syndrome",
-   "Assess and manage systemic involvement, screening serum and urinary calcium and arranging ophthalmology review for uveitis",
-   "Multidisciplinary care with respiratory, cardiac and ophthalmology input, escalating for organ-threatening disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cutaneous_sarcoidosis-pathway",
-   "title": "Cutaneous sarcoidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sarcoidosis is a multisystem granulomatous disorder, and the skin is affected in roughly a quarter of patients, sometimes as the presenting feature",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Lupus pernio or extensive skin disease signalling chronic systemic sarcoidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy demonstrating non-caseating granulomata, with stains and culture to exclude mycobacterial and fungal infection, Chest imaging to detect hilar lymphadenopathy and pulmonary infiltrates, Serum"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical or intralesional corticosteroids, with topical calcineurin inhibitors, for localised cutaneous disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming skin disease is isolated and failing to screen for potentially serious internal organ involvement"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cutaneous sarcoidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cutaneous_sarcoidosis-matrix",
-   "title": "Cutaneous sarcoidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sarcoidosis is a multisystem granulomatous disorder, and the skin is affected in roughly a quarter of patients, sometimes as the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sarcoidosis is a multisystem granulomatous disorder, and the skin is affected in roughly a quarter of patients, sometimes as the presenting feature",
+      "Known as one of the great imitators, its lesions range from red-brown papules and plaques to nodules, and diascopy classically reveals an apple-jelly colour",
+      "Lupus pernio describes indurated violaceous plaques on the nose, cheeks and ears and is strongly associated with chronic disease and upper respiratory tract or pulmonary involvement",
+      "Scar sarcoidosis is the appearance of granulomatous infiltration within old scars or tattoos and should always raise suspicion of systemic disease",
+      "Erythema nodosum is a reactive, non-specific eruption that, with hilar lymphadenopathy and arthralgia (Lofgren syndrome), carries a favourable prognosis",
+      "Histology shows non-caseating epithelioid granulomata with sparse surrounding lymphocytes (naked granulomas), but infection must always be excluded",
+      "Because cutaneous signs may herald internal organ disease, every patient needs assessment for pulmonary, ophthalmic, cardiac and other systemic involvement",
+      "Treatment is directed at the underlying disease and ranges from potent topical or intralesional corticosteroids for limited skin disease to systemic corticosteroids and steroid-sparing agents for extensive or organ-threatening disease"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy demonstrating non-caseating granulomata, with stains and culture to exclude mycobacterial and fungal infection, Chest",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sarcoidosis is characterised by the formation of non-caseating epithelioid granulomata in affected tissues, thought to represent an exaggerated cell-mediated immune response to an as-yet-unidentified antigen in a genetically susceptible host. Activated CD4 T-helper lymphocytes and macrophages accumulate and organise into compact granulomata, driven by a T-helper-1 cytokine profile. In the skin this produces the varied papules, plaques and nodules seen clinically, while similar granulomata elsewhere account for the multisystem nature of the disease. The granulomata may resolve spontaneously or progress to fibrosis, and their tendency to arise within scars and foreign material reflects a localised granulomatous response to tissue disruption.",
+    "additionalDifferentials": [
+      "Cutaneous tuberculosis and other mycobacterial infections",
+      "Granuloma annulare and other non-infective granulomatous dermatoses",
+      "Cutaneous lymphoma or leukaemia cutis",
+      "Granulomatous rosacea and lupus miliaris disseminatus faciei on the face",
+      "Necrobiosis lipoidica and foreign-body granuloma",
+      "Discoid lupus erythematosus and lupus vulgaris"
     ],
-    [
-     "Primary Differentials",
-     "Cutaneous tuberculosis and other mycobacterial infections, Granuloma annulare and other non-infective granulomatous dermatoses,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy demonstrating non-caseating granulomata, with stains and culture to exclude mycobacterial and fungal infection",
+      "Chest imaging to detect hilar lymphadenopathy and pulmonary infiltrates",
+      "Serum angiotensin-converting enzyme, calcium and inflammatory markers as adjunctive tests",
+      "Pulmonary function tests and, where indicated, cardiac assessment including electrocardiography",
+      "Ophthalmological review for uveitis and other ocular involvement",
+      "Serum and urinary calcium to detect dysregulated vitamin D metabolism"
     ],
-    [
-     "Management Strategy",
-     "Topical or intralesional corticosteroids, with topical calcineurin inhibitors, for localised cutaneous disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Lupus pernio or extensive skin disease signalling chronic systemic sarcoidosis",
+      "Symptoms of cardiac involvement such as palpitations, syncope or conduction disturbance",
+      "Progressive breathlessness suggesting significant pulmonary disease",
+      "Visual disturbance from ocular sarcoidosis",
+      "Hypercalcaemia with renal impairment"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming skin disease is isolated and failing to screen for potentially serious internal organ involvement",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies widely: acute presentations such as Lofgren syndrome and erythema nodosum often resolve spontaneously within months, whereas lupus pernio and infiltrative plaques tend to be chronic and may cause disfigurement, and prognosis ultimately depends on the extent and severity of internal organ involvement.",
+    "pitfalls": [
+      "Assuming skin disease is isolated and failing to screen for potentially serious internal organ involvement",
+      "Diagnosing sarcoidosis without excluding tuberculosis and other granulomatous infections",
+      "Overlooking granulomatous change within scars or tattoos as a clue to the diagnosis",
+      "Missing asymptomatic cardiac or ocular disease that requires urgent treatment"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Thoracic Society sarcoidosis guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical or intralesional corticosteroids, with topical calcineurin inhibitors, for localised cutaneous disease",
+      "Systemic corticosteroids with steroid-sparing agents such as hydroxychloroquine or methotrexate for widespread or disfiguring disease including lupus pernio",
+      "TNF-alpha inhibitors such as infliximab for refractory or severe disease",
+      "Symptomatic non-steroidal anti-inflammatory treatment for reactive erythema nodosum, which often resolves spontaneously as in Lofgren syndrome",
+      "Assess and manage systemic involvement, screening serum and urinary calcium and arranging ophthalmology review for uveitis",
+      "Multidisciplinary care with respiratory, cardiac and ophthalmology input, escalating for organ-threatening disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for cutaneous sarcoidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cutaneous-sarcoidosis-real-image",
-   "title": "Cutaneous sarcoidosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "cutaneous_sarcoidosis-pathway",
+      "title": "Cutaneous sarcoidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sarcoidosis is a multisystem granulomatous disorder, and the skin is affected in roughly a quarter of patients, sometimes as the presenting feature",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Lupus pernio or extensive skin disease signalling chronic systemic sarcoidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy demonstrating non-caseating granulomata, with stains and culture to exclude mycobacterial and fungal infection, Chest imaging to detect hilar lymphadenopathy and pulmonary infiltrates, Serum"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical or intralesional corticosteroids, with topical calcineurin inhibitors, for localised cutaneous disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming skin disease is isolated and failing to screen for potentially serious internal organ involvement"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cutaneous sarcoidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cutaneous_sarcoidosis-matrix",
+      "title": "Cutaneous sarcoidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sarcoidosis is a multisystem granulomatous disorder, and the skin is affected in roughly a quarter of patients, sometimes as the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy demonstrating non-caseating granulomata, with stains and culture to exclude mycobacterial and fungal infection, Chest",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cutaneous tuberculosis and other mycobacterial infections, Granuloma annulare and other non-infective granulomatous dermatoses,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical or intralesional corticosteroids, with topical calcineurin inhibitors, for localised cutaneous disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming skin disease is isolated and failing to screen for potentially serious internal organ involvement",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cutaneous sarcoidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cutaneous_sarcoidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with stains and culture",
+          "cells": [
+            {
+              "text": "Non-caseating granulomata; infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Hilar lymphadenopathy and pulmonary infiltrates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum ACE, calcium and inflammatory markers",
+          "cells": [
+            {
+              "text": "Adjunctive markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests and ECG",
+          "cells": [
+            {
+              "text": "Pulmonary and cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Uveitis and ocular involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_sarcoidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous tuberculosis",
+          "cells": [
+            {
+              "text": "Named mycobacterial look-alike; stains and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granuloma annulare",
+          "cells": [
+            {
+              "text": "Named non-infective granulomatous look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lupus vulgaris",
+          "cells": [
+            {
+              "text": "Named mycobacterial look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_sarcoidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical or intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "Localised cutaneous disease, with topical calcineurin inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids with steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Hydroxychloroquine or methotrexate for widespread or disfiguring disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF-alpha inhibitors",
+          "cells": [
+            {
+              "text": "Infliximab for refractory or severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs for erythema nodosum",
+          "cells": [
+            {
+              "text": "Often resolves spontaneously as in Lofgren syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic screening",
+          "cells": [
+            {
+              "text": "Serum and urinary calcium; ophthalmology review for uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Respiratory, cardiac and ophthalmology input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cutaneous_sarcoidosis-dx-mgmt",
+      "title": "Diagnosis and management of Cutaneous sarcoidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cutaneous sarcoidosis: granulomatous skin plaques or lupus pernio",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (lupus pernio, cardiac symptoms, progressive breathlessness, uveitis)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac and ophthalmology screening for organ involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with infection stains and culture; chest imaging; ACE; PFTs; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show non-caseating granulomata with infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cutaneous tuberculosis, granuloma annulare or lupus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical or intralesional steroids for localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic steroids with hydroxychloroquine or methotrexate for widespread disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Infliximab for refractory or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen calcium; ophthalmology and multidisciplinary review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Erythema nodosum often resolves within months; lupus pernio can be chronic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

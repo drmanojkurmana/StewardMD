@@ -1,173 +1,220 @@
 {
- "id": "bicuspid_aortic_valve",
- "name": "Bicuspid aortic valve",
- "aliases": [
-  "BAV",
-  "bicuspid aortic valve disease",
-  "congenital bicuspid aortic valve"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest congenital cardiac anomaly, arising when two aortic cusps fail to separate, leaving a functionally two-leaflet valve that often carries a fibrous raphe",
-   "Frequently silent in early life but predisposes to accelerated leaflet calcification, so aortic stenosis or regurgitation tends to develop decades earlier than with a trileaflet valve",
-   "An ejection systolic click followed by a murmur in a younger adult should prompt evaluation for a bicuspid valve",
-   "Strongly associated with a bicuspid aortopathy: dilatation of the aortic root and ascending aorta that can progress independently of the valve lesion",
-   "Coexists with coarctation of the aorta, and any patient with coarctation should have the aortic valve assessed",
-   "Familial clustering is recognised, so echocardiographic screening of first-degree relatives is often advised",
-   "Management centres on surveillance echocardiography of both valve function and aortic dimensions, with valve repair or replacement once stenosis or regurgitation becomes severe"
+  "id": "bicuspid_aortic_valve",
+  "name": "Bicuspid aortic valve",
+  "aliases": [
+    "BAV",
+    "bicuspid aortic valve disease",
+    "congenital bicuspid aortic valve"
   ],
-  "pathophysiology": "A bicuspid aortic valve forms during valvulogenesis when adjacent cusps fail to separate, producing two functional leaflets that are frequently unequal in size and joined by a raphe. The abnormal geometry generates turbulent, eccentric flow and uneven mechanical stress across the leaflets, accelerating fibrosis and calcification so that stenosis or regurgitation typically appears earlier than with a normal trileaflet valve. The same genetic and developmental disturbance of the aortic wall matrix predisposes to dilatation of the root and ascending aorta, which can progress independently of valve dysfunction and carries a risk of aneurysm and dissection.",
-  "additionalDifferentials": [
-   "Unicuspid aortic valve",
-   "Degenerative calcific trileaflet aortic stenosis",
-   "Rheumatic aortic valve disease",
-   "Subvalvular or supravalvular aortic stenosis",
-   "Hypertrophic cardiomyopathy with outflow obstruction",
-   "Aortic root dilatation from Marfan or other connective tissue disease"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography to define leaflet morphology and quantify stenosis or regurgitation",
-   "Transoesophageal echocardiography for clearer leaflet and raphe definition when the anatomy is uncertain",
-   "Cardiac CT or MRI to measure the aortic root and ascending aorta and monitor progression",
-   "Exercise testing to clarify symptom status in apparently asymptomatic severe stenosis",
-   "Screening for coarctation and echocardiographic assessment of first-degree relatives"
-  ],
-  "redFlags": [
-   "Rapidly progressive aortic dilatation or a diameter approaching the surgical threshold, given the risk of dissection",
-   "Symptoms of severe aortic stenosis such as syncope, angina, or exertional breathlessness",
-   "Severe aortic regurgitation with left ventricular dilatation or declining function",
-   "New murmur, fever, or embolic events suggesting infective endocarditis",
-   "Associated coarctation presenting with resistant hypertension"
-  ],
-  "prognosis": "Many patients remain asymptomatic for decades, but the majority eventually require valve intervention, and the associated aortopathy adds a lifelong risk of aneurysm and dissection that mandates ongoing imaging surveillance.",
-  "pitfalls": [
-   "Attributing a young adult's aortic stenosis to degenerative disease and missing the bicuspid morphology",
-   "Monitoring the valve alone and neglecting serial imaging of the aortic root and ascending aorta",
-   "Failing to look for coexisting coarctation",
-   "Overlooking echocardiographic screening of first-degree relatives"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC/EACTS Guidelines for the management of valvular heart disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Regular transthoracic echocardiographic surveillance of leaflet function and aortic dimensions",
-   "Aortic valve intervention (surgical replacement or repair, or transcatheter replacement in selected patients) for severe symptomatic stenosis or regurgitation",
-   "Surgical replacement of the dilated aortic root or ascending aorta once it reaches the operative threshold to pre-empt dissection",
-   "Blood-pressure control and cardiovascular risk-factor management, with beta-blockers or angiotensin-receptor blockers to reduce aortic wall stress where aortopathy is present",
-   "Cross-sectional imaging with CT or MRI to monitor aneurysmal progression of the aorta",
-   "Screen for coexisting coarctation and offer echocardiographic screening of first-degree relatives",
-   "Advise on endocarditis prevention through dental and oral hygiene, prompt evaluation of new symptoms, and cardiology referral for intervention timing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bicuspid_aortic_valve-pathway",
-   "title": "Bicuspid aortic valve: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest congenital cardiac anomaly, arising when two aortic cusps fail to separate, leaving a functionally two-leaflet valve that often carries a fibrous raphe",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive aortic dilatation or a diameter approaching the surgical threshold, given the risk of dissection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography to define leaflet morphology and quantify stenosis or regurgitation, Transoesophageal echocardiography for clearer leaflet and raphe definition when the anatomy is uncertain, Cardiac CT or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Regular transthoracic echocardiographic surveillance of leaflet function and aortic dimensions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a young adult's aortic stenosis to degenerative disease and missing the bicuspid morphology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bicuspid aortic valve."
-  }
- ],
- "tables": [
-  {
-   "id": "bicuspid_aortic_valve-matrix",
-   "title": "Bicuspid aortic valve: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest congenital cardiac anomaly, arising when two aortic cusps fail to separate, leaving a functionally two-leaflet",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest congenital cardiac anomaly, arising when two aortic cusps fail to separate, leaving a functionally two-leaflet valve that often carries a fibrous raphe",
+      "Frequently silent in early life but predisposes to accelerated leaflet calcification, so aortic stenosis or regurgitation tends to develop decades earlier than with a trileaflet valve",
+      "An ejection systolic click followed by a murmur in a younger adult should prompt evaluation for a bicuspid valve",
+      "Strongly associated with a bicuspid aortopathy: dilatation of the aortic root and ascending aorta that can progress independently of the valve lesion",
+      "Coexists with coarctation of the aorta, and any patient with coarctation should have the aortic valve assessed",
+      "Familial clustering is recognised, so echocardiographic screening of first-degree relatives is often advised",
+      "Management centres on surveillance echocardiography of both valve function and aortic dimensions, with valve repair or replacement once stenosis or regurgitation becomes severe"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography to define leaflet morphology and quantify stenosis or regurgitation, Transoesophageal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A bicuspid aortic valve forms during valvulogenesis when adjacent cusps fail to separate, producing two functional leaflets that are frequently unequal in size and joined by a raphe. The abnormal geometry generates turbulent, eccentric flow and uneven mechanical stress across the leaflets, accelerating fibrosis and calcification so that stenosis or regurgitation typically appears earlier than with a normal trileaflet valve. The same genetic and developmental disturbance of the aortic wall matrix predisposes to dilatation of the root and ascending aorta, which can progress independently of valve dysfunction and carries a risk of aneurysm and dissection.",
+    "additionalDifferentials": [
+      "Unicuspid aortic valve",
+      "Degenerative calcific trileaflet aortic stenosis",
+      "Rheumatic aortic valve disease",
+      "Subvalvular or supravalvular aortic stenosis",
+      "Hypertrophic cardiomyopathy with outflow obstruction",
+      "Aortic root dilatation from Marfan or other connective tissue disease"
     ],
-    [
-     "Primary Differentials",
-     "Unicuspid aortic valve, Degenerative calcific trileaflet aortic stenosis, Rheumatic aortic valve disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography to define leaflet morphology and quantify stenosis or regurgitation",
+      "Transoesophageal echocardiography for clearer leaflet and raphe definition when the anatomy is uncertain",
+      "Cardiac CT or MRI to measure the aortic root and ascending aorta and monitor progression",
+      "Exercise testing to clarify symptom status in apparently asymptomatic severe stenosis",
+      "Screening for coarctation and echocardiographic assessment of first-degree relatives"
     ],
-    [
-     "Management Strategy",
-     "Regular transthoracic echocardiographic surveillance of leaflet function and aortic dimensions",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive aortic dilatation or a diameter approaching the surgical threshold, given the risk of dissection",
+      "Symptoms of severe aortic stenosis such as syncope, angina, or exertional breathlessness",
+      "Severe aortic regurgitation with left ventricular dilatation or declining function",
+      "New murmur, fever, or embolic events suggesting infective endocarditis",
+      "Associated coarctation presenting with resistant hypertension"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a young adult's aortic stenosis to degenerative disease and missing the bicuspid morphology",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients remain asymptomatic for decades, but the majority eventually require valve intervention, and the associated aortopathy adds a lifelong risk of aneurysm and dissection that mandates ongoing imaging surveillance.",
+    "pitfalls": [
+      "Attributing a young adult's aortic stenosis to degenerative disease and missing the bicuspid morphology",
+      "Monitoring the valve alone and neglecting serial imaging of the aortic root and ascending aorta",
+      "Failing to look for coexisting coarctation",
+      "Overlooking echocardiographic screening of first-degree relatives"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC/EACTS Guidelines for the management of valvular heart disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Regular transthoracic echocardiographic surveillance of leaflet function and aortic dimensions",
+      "Aortic valve intervention (surgical replacement or repair, or transcatheter replacement in selected patients) for severe symptomatic stenosis or regurgitation",
+      "Surgical replacement of the dilated aortic root or ascending aorta once it reaches the operative threshold to pre-empt dissection",
+      "Blood-pressure control and cardiovascular risk-factor management, with beta-blockers or angiotensin-receptor blockers to reduce aortic wall stress where aortopathy is present",
+      "Cross-sectional imaging with CT or MRI to monitor aneurysmal progression of the aorta",
+      "Screen for coexisting coarctation and offer echocardiographic screening of first-degree relatives",
+      "Advise on endocarditis prevention through dental and oral hygiene, prompt evaluation of new symptoms, and cardiology referral for intervention timing"
     ]
-   ],
-   "caption": "Overview comparison matrix for bicuspid aortic valve."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bicuspid-aortic-valve-real-image",
-   "title": "Bicuspid aortic valve: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "bicuspid_aortic_valve-pathway",
+      "title": "Bicuspid aortic valve: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest congenital cardiac anomaly, arising when two aortic cusps fail to separate, leaving a functionally two-leaflet valve that often carries a fibrous raphe",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive aortic dilatation or a diameter approaching the surgical threshold, given the risk of dissection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography to define leaflet morphology and quantify stenosis or regurgitation, Transoesophageal echocardiography for clearer leaflet and raphe definition when the anatomy is uncertain, Cardiac CT or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Regular transthoracic echocardiographic surveillance of leaflet function and aortic dimensions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a young adult's aortic stenosis to degenerative disease and missing the bicuspid morphology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bicuspid aortic valve."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bicuspid_aortic_valve-matrix",
+      "title": "Bicuspid aortic valve: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest congenital cardiac anomaly, arising when two aortic cusps fail to separate, leaving a functionally two-leaflet",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography to define leaflet morphology and quantify stenosis or regurgitation, Transoesophageal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Unicuspid aortic valve, Degenerative calcific trileaflet aortic stenosis, Rheumatic aortic valve disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Regular transthoracic echocardiographic surveillance of leaflet function and aortic dimensions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a young adult's aortic stenosis to degenerative disease and missing the bicuspid morphology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bicuspid aortic valve."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bicuspid_aortic_valve-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in bicuspid aortic valve",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Transthoracic echocardiography", "cells": [{"text": "Leaflet morphology and severity of stenosis or regurgitation"}], "cite": "c1"},
+        {"parameter": "Transoesophageal echocardiography", "cells": [{"text": "Leaflet and raphe definition when the anatomy is uncertain"}], "cite": "c1"},
+        {"parameter": "Cardiac CT or MRI", "cells": [{"text": "Aortic root and ascending aorta dimensions and their progression"}], "cite": "c1"},
+        {"parameter": "Exercise testing", "cells": [{"text": "Symptom status in apparently asymptomatic severe stenosis"}], "cite": "c1"},
+        {"parameter": "Coarctation screen and first-degree relatives", "cells": [{"text": "Coexisting coarctation; echocardiographic screening of relatives"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bicuspid_aortic_valve-treatment",
+      "kind": "treatment",
+      "title": "Management options in bicuspid aortic valve",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Surveillance echocardiography", "cells": [{"text": "Regular echocardiography of leaflet function and aortic dimensions"}, {"text": "Valve and aorta both followed"}], "cite": "c1"},
+        {"parameter": "Valve intervention", "cells": [{"text": "Surgical replacement or repair, or transcatheter replacement in selected patients"}, {"text": "For severe symptomatic stenosis or regurgitation"}], "cite": "c1"},
+        {"parameter": "Aortic root or ascending aorta surgery", "cells": [{"text": "Surgical replacement of the dilated segment once it reaches the operative threshold"}, {"text": "Pre-empts dissection"}], "cite": "c1"},
+        {"parameter": "Blood pressure and aortopathy", "cells": [{"text": "Blood-pressure control; beta-blockers or angiotensin-receptor blockers where aortopathy is present"}, {"text": "Reduces aortic wall stress"}], "cite": "c1"},
+        {"parameter": "Cross-sectional imaging", "cells": [{"text": "CT or MRI to monitor aneurysmal progression"}, {"text": "Aortic dimensions over time"}], "cite": "c1"},
+        {"parameter": "Screening", "cells": [{"text": "Screen for coarctation and offer echocardiography to first-degree relatives"}, {"text": "Familial clustering is recognised"}], "cite": "c1"},
+        {"parameter": "Endocarditis prevention and referral", "cells": [{"text": "Dental and oral hygiene, prompt review of new symptoms, and cardiology referral for timing of intervention"}, {"text": "Endocarditis prevention"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bicuspid_aortic_valve-dx-mgmt",
+      "title": "Diagnosis and management of bicuspid aortic valve",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Ejection click and murmur in a younger adult, or bicuspid valve found on echocardiography", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: syncope, angina, rapidly enlarging aorta, or severe regurgitation with LV dilatation?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent cardiology and cardiac surgery review of valve and aortic root", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Transthoracic echocardiography for leaflet morphology and stenosis or regurgitation", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "CT or MRI of root and ascending aorta; screen for coarctation and first-degree relatives", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Severe symptomatic valve disease, or aorta at operative threshold?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Valve replacement or repair; replace dilated root or ascending aorta", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Surveillance echocardiography and imaging; blood-pressure control, beta-blocker or ARB if aortopathy", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Many stay asymptomatic for decades; lifelong aortic imaging needed", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

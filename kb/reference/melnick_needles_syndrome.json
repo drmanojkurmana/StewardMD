@@ -1,178 +1,483 @@
 {
- "id": "melnick_needles_syndrome",
- "name": "Melnick-Needles syndrome (FLNA)",
- "aliases": [
-  "MNS",
-  "osteodysplasty",
-  "FLNA",
-  "Melnick-Needles osteodysplasty"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most severe of the X-linked FLNA otopalatodigital-spectrum disorders, caused by gain-of-function variants in filamin A",
-   "Distinctive facial appearance includes exophthalmos, full cheeks, micrognathia and a high forehead",
-   "Radiographs show characteristic ribbon-like (wavy) ribs, S-shaped bowing of the long bones, and irregular cortices",
-   "Marked X-linked sex difference: heterozygous females typically survive with the characteristic phenotype, whereas hemizygous males are usually severely affected and the condition is frequently lethal in males",
-   "Skeletal features include a small thorax, sclerosis of the skull base, delayed cranial ossification and joint problems",
-   "Extraskeletal complications such as airway narrowing, urinary tract obstruction and cardiac anomalies can occur and contribute to morbidity",
-   "Management is supportive and multidisciplinary, with respiratory and airway monitoring, orthopaedic care and hearing assessment, alongside genetic counselling"
+  "id": "melnick_needles_syndrome",
+  "name": "Melnick-Needles syndrome (FLNA)",
+  "aliases": [
+    "MNS",
+    "osteodysplasty",
+    "FLNA",
+    "Melnick-Needles osteodysplasty"
   ],
-  "pathophysiology": "Melnick-Needles syndrome results from gain-of-function variants in the X-linked FLNA gene encoding filamin A, a cytoskeletal actin-cross-linking protein integral to cell shape, migration and mechanical signalling in developing bone and connective tissue. Disordered filamin A activity yields grossly abnormal bone modelling, producing the wavy ribbon-like ribs, bowed long bones with irregular cortices and the characteristic facial gestalt. The strong sex bias reflects X-linked inheritance: heterozygous females survive with the full phenotype because of X-inactivation mosaicism, whereas hemizygous males, lacking a normal allele, generally have severe, often lethal disease. Involvement of the airway, urinary tract and heart underlies the extraskeletal complications that determine outcome.",
-  "additionalDifferentials": [
-   "Otopalatodigital syndrome (FLNA spectrum)",
-   "Frontometaphyseal dysplasia (FLNA spectrum)",
-   "Osteogenesis imperfecta with bowing and abnormal ribs",
-   "Serpentine fibula-polycystic kidney syndrome",
-   "Other skeletal dysplasias with wavy ribs and bowed long bones",
-   "Cleidocranial-type dysplasias with delayed cranial ossification"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating ribbon-like ribs, bowed long bones and irregular cortices",
-   "Chest imaging and respiratory assessment given the small thorax and airway risk",
-   "Renal tract imaging to detect urinary obstruction",
-   "Cardiac evaluation for associated anomalies",
-   "FLNA molecular genetic testing with X-linked segregation analysis",
-   "Audiometry and cranial imaging where hearing or foraminal concerns arise"
-  ],
-  "redFlags": [
-   "Respiratory compromise from a small thorax or airway narrowing, especially in neonates",
-   "Severe presentation in a male fetus or infant, which is often life-threatening",
-   "Urinary tract obstruction threatening renal function",
-   "Significant cardiac anomaly"
-  ],
-  "prognosis": "Prognosis differs sharply by sex: affected females usually survive into adulthood with the characteristic phenotype and variable morbidity, whereas affected males typically have severe disease that is frequently lethal in the perinatal period.",
-  "pitfalls": [
-   "Failing to place the disorder within the FLNA otopalatodigital spectrum and appreciate its X-linked inheritance",
-   "Underestimating the perinatal severity and lethality in affected males",
-   "Overlooking extraskeletal airway, renal or cardiac complications",
-   "Attributing the bowed bones and abnormal ribs to osteogenesis imperfecta without genetic confirmation"
-  ],
-  "references": [
-   "Resnick's Diagnosis of Bone and Joint Disorders",
-   "GeneReviews: FLNA-related otopalatodigital spectrum disorders"
-  ],
-  "crossLinks": [
-   "otopalatodigital_syndrome",
-   "frontometaphyseal_dysplasia"
-  ],
-  "management": [
-   "Recognise that management is supportive, directed at the skeletal and extraskeletal complications of this FLNA disorder",
-   "Assess and support the airway for narrowing and the small thorax, a key determinant of outcome in affected males",
-   "Image the renal tract and relieve urinary tract obstruction where present",
-   "Evaluate and manage associated cardiac anomalies",
-   "Provide orthopaedic care for long-bone bowing, joint problems and skeletal deformity",
-   "Undertake audiological and cranial assessment where hearing loss or foraminal narrowing arise",
-   "Offer genetic counselling for the X-linked inheritance, with severe often perinatally lethal disease in males and survival with the phenotype in females",
-   "Coordinate multidisciplinary clinical genetics, respiratory, orthopaedic and cardiology care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "melnick_needles_syndrome-pathway",
-   "title": "Melnick-Needles syndrome (FLNA): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most severe of the X-linked FLNA otopalatodigital-spectrum disorders, caused by gain-of-function variants in filamin A",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory compromise from a small thorax or airway narrowing, especially in neonates",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating ribbon-like ribs, bowed long bones and irregular cortices, Chest imaging and respiratory assessment given the small thorax and airway risk, Renal tract imaging to detect urinary obstruction"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise that management is supportive, directed at the skeletal and extraskeletal complications of this FLNA disorder"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to place the disorder within the FLNA otopalatodigital spectrum and appreciate its X-linked inheritance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of melnick-needles syndrome (flna)."
-  }
- ],
- "tables": [
-  {
-   "id": "melnick_needles_syndrome-matrix",
-   "title": "Melnick-Needles syndrome (FLNA): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most severe of the X-linked FLNA otopalatodigital-spectrum disorders, caused by gain-of-function variants in filamin A",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most severe of the X-linked FLNA otopalatodigital-spectrum disorders, caused by gain-of-function variants in filamin A",
+      "Distinctive facial appearance includes exophthalmos, full cheeks, micrognathia and a high forehead",
+      "Radiographs show characteristic ribbon-like (wavy) ribs, S-shaped bowing of the long bones, and irregular cortices",
+      "Marked X-linked sex difference: heterozygous females typically survive with the characteristic phenotype, whereas hemizygous males are usually severely affected and the condition is frequently lethal in males",
+      "Skeletal features include a small thorax, sclerosis of the skull base, delayed cranial ossification and joint problems",
+      "Extraskeletal complications such as airway narrowing, urinary tract obstruction and cardiac anomalies can occur and contribute to morbidity",
+      "Management is supportive and multidisciplinary, with respiratory and airway monitoring, orthopaedic care and hearing assessment, alongside genetic counselling"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating ribbon-like ribs, bowed long bones and irregular cortices, Chest imaging and respiratory assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Melnick-Needles syndrome results from gain-of-function variants in the X-linked FLNA gene encoding filamin A, a cytoskeletal actin-cross-linking protein integral to cell shape, migration and mechanical signalling in developing bone and connective tissue. Disordered filamin A activity yields grossly abnormal bone modelling, producing the wavy ribbon-like ribs, bowed long bones with irregular cortices and the characteristic facial gestalt. The strong sex bias reflects X-linked inheritance: heterozygous females survive with the full phenotype because of X-inactivation mosaicism, whereas hemizygous males, lacking a normal allele, generally have severe, often lethal disease. Involvement of the airway, urinary tract and heart underlies the extraskeletal complications that determine outcome.",
+    "additionalDifferentials": [
+      "Otopalatodigital syndrome (FLNA spectrum)",
+      "Frontometaphyseal dysplasia (FLNA spectrum)",
+      "Osteogenesis imperfecta with bowing and abnormal ribs",
+      "Serpentine fibula-polycystic kidney syndrome",
+      "Other skeletal dysplasias with wavy ribs and bowed long bones",
+      "Cleidocranial-type dysplasias with delayed cranial ossification"
     ],
-    [
-     "Primary Differentials",
-     "Otopalatodigital syndrome (FLNA spectrum), Frontometaphyseal dysplasia (FLNA spectrum), Osteogenesis imperfecta with bowing and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating ribbon-like ribs, bowed long bones and irregular cortices",
+      "Chest imaging and respiratory assessment given the small thorax and airway risk",
+      "Renal tract imaging to detect urinary obstruction",
+      "Cardiac evaluation for associated anomalies",
+      "FLNA molecular genetic testing with X-linked segregation analysis",
+      "Audiometry and cranial imaging where hearing or foraminal concerns arise"
     ],
-    [
-     "Management Strategy",
-     "Recognise that management is supportive, directed at the skeletal and extraskeletal complications of this FLNA disorder",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory compromise from a small thorax or airway narrowing, especially in neonates",
+      "Severe presentation in a male fetus or infant, which is often life-threatening",
+      "Urinary tract obstruction threatening renal function",
+      "Significant cardiac anomaly"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to place the disorder within the FLNA otopalatodigital spectrum and appreciate its X-linked inheritance",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis differs sharply by sex: affected females usually survive into adulthood with the characteristic phenotype and variable morbidity, whereas affected males typically have severe disease that is frequently lethal in the perinatal period.",
+    "pitfalls": [
+      "Failing to place the disorder within the FLNA otopalatodigital spectrum and appreciate its X-linked inheritance",
+      "Underestimating the perinatal severity and lethality in affected males",
+      "Overlooking extraskeletal airway, renal or cardiac complications",
+      "Attributing the bowed bones and abnormal ribs to osteogenesis imperfecta without genetic confirmation"
+    ],
+    "references": [
+      "Resnick's Diagnosis of Bone and Joint Disorders",
+      "GeneReviews: FLNA-related otopalatodigital spectrum disorders"
+    ],
+    "crossLinks": [
+      "otopalatodigital_syndrome",
+      "frontometaphyseal_dysplasia"
+    ],
+    "management": [
+      "Recognise that management is supportive, directed at the skeletal and extraskeletal complications of this FLNA disorder",
+      "Assess and support the airway for narrowing and the small thorax, a key determinant of outcome in affected males",
+      "Image the renal tract and relieve urinary tract obstruction where present",
+      "Evaluate and manage associated cardiac anomalies",
+      "Provide orthopaedic care for long-bone bowing, joint problems and skeletal deformity",
+      "Undertake audiological and cranial assessment where hearing loss or foraminal narrowing arise",
+      "Offer genetic counselling for the X-linked inheritance, with severe often perinatally lethal disease in males and survival with the phenotype in females",
+      "Coordinate multidisciplinary clinical genetics, respiratory, orthopaedic and cardiology care"
     ]
-   ],
-   "caption": "Overview comparison matrix for melnick-needles syndrome (flna)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "melnick-needles-syndrome-real-image",
-   "title": "Melnick-Needles syndrome (FLNA): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "melnick_needles_syndrome-pathway",
+      "title": "Melnick-Needles syndrome (FLNA): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most severe of the X-linked FLNA otopalatodigital-spectrum disorders, caused by gain-of-function variants in filamin A",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory compromise from a small thorax or airway narrowing, especially in neonates",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating ribbon-like ribs, bowed long bones and irregular cortices, Chest imaging and respiratory assessment given the small thorax and airway risk, Renal tract imaging to detect urinary obstruction"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise that management is supportive, directed at the skeletal and extraskeletal complications of this FLNA disorder"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to place the disorder within the FLNA otopalatodigital spectrum and appreciate its X-linked inheritance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of melnick-needles syndrome (flna)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "melnick_needles_syndrome-matrix",
+      "title": "Melnick-Needles syndrome (FLNA): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most severe of the X-linked FLNA otopalatodigital-spectrum disorders, caused by gain-of-function variants in filamin A",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating ribbon-like ribs, bowed long bones and irregular cortices, Chest imaging and respiratory assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Otopalatodigital syndrome (FLNA spectrum), Frontometaphyseal dysplasia (FLNA spectrum), Osteogenesis imperfecta with bowing and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise that management is supportive, directed at the skeletal and extraskeletal complications of this FLNA disorder",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to place the disorder within the FLNA otopalatodigital spectrum and appreciate its X-linked inheritance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for melnick-needles syndrome (flna)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "melnick_needles_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Ribbon-like ribs, bowed long bones and irregular cortices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and respiratory assessment",
+          "cells": [
+            {
+              "text": "Small thorax and airway risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging",
+          "cells": [
+            {
+              "text": "Urinary obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac evaluation",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FLNA molecular genetic testing with X-linked segregation analysis",
+          "cells": [
+            {
+              "text": "FLNA variant; X-linked segregation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and cranial imaging",
+          "cells": [
+            {
+              "text": "Hearing or foraminal narrowing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "melnick_needles_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteogenesis imperfecta with bowing and abnormal ribs",
+          "cells": [
+            {
+              "text": "Bowing and abnormal ribs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other skeletal dysplasias with wavy ribs and bowed long bones",
+          "cells": [
+            {
+              "text": "Wavy ribs and bowed long bones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cleidocranial-type dysplasias",
+          "cells": [
+            {
+              "text": "Delayed cranial ossification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "melnick_needles_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Directed at the skeletal and extraskeletal complications of the FLNA disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and small thorax",
+          "cells": [
+            {
+              "text": "Assess and support; a key determinant of outcome in affected males"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging and decompression",
+          "cells": [
+            {
+              "text": "Relieve urinary tract obstruction where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac anomalies",
+          "cells": [
+            {
+              "text": "Evaluate and manage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Long-bone bowing, joint problems and skeletal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology and cranial assessment",
+          "cells": [
+            {
+              "text": "Where hearing loss or foraminal narrowing arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked; severe, often perinatally lethal disease in males; phenotype survival in females"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Clinical genetics, respiratory, orthopaedic and cardiology teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "melnick_needles_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Melnick-Needles syndrome (FLNA)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate or infant with ribbon-like ribs, bowed long bones and a small thorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory compromise, urinary obstruction or significant cardiac anomaly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and respiratory support; relieve urinary obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, chest and renal tract imaging, cardiac evaluation, FLNA testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an FLNA variant confirmed with X-linked segregation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteogenesis imperfecta or other wavy-rib dysplasias; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care for skeletal and extraskeletal complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Assess and support the airway and small thorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Image the renal tract and relieve urinary obstruction where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic care for long-bone bowing and skeletal deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling for X-linked inheritance; severe, often lethal disease in males",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

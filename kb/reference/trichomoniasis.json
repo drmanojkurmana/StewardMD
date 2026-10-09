@@ -1,176 +1,474 @@
 {
- "id": "trichomoniasis",
- "name": "Trichomoniasis",
- "aliases": [
-  "trich",
-  "Trichomonas vaginalis infection",
-  "trichomonal vaginitis"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by the flagellated protozoan Trichomonas vaginalis and spread almost exclusively through sexual contact, so it should prompt screening for other sexually transmitted infections",
-   "Women often present with a malodorous, frothy yellow-green discharge, vulvovaginal itching and dysuria, though a large proportion are asymptomatic",
-   "The classic 'strawberry cervix' (punctate cervical haemorrhages) is highly suggestive but seen in only a minority of cases",
-   "Most infected men are asymptomatic carriers but may develop urethritis, making partner treatment essential to prevent reinfection",
-   "Diagnosis is traditionally by observing motile trophozoites on saline wet mount, but nucleic acid amplification testing is far more sensitive and is now preferred where available",
-   "Treatment is with an oral nitroimidazole (metronidazole or tinidazole); partners should be treated simultaneously and intercourse avoided until both complete therapy",
-   "Infection in pregnancy is associated with preterm birth and low birth weight, and it increases susceptibility to HIV acquisition and transmission"
+  "id": "trichomoniasis",
+  "name": "Trichomoniasis",
+  "aliases": [
+    "trich",
+    "Trichomonas vaginalis infection",
+    "trichomonal vaginitis"
   ],
-  "pathophysiology": "Trichomonas vaginalis is an anaerobic, flagellated protozoan that adheres to and damages squamous epithelium of the urogenital tract. Cytoadherence and release of proteinases and other virulence factors trigger a local inflammatory response with neutrophil infiltration, producing the characteristic discharge and mucosal microhaemorrhages. The resulting disruption of the epithelial barrier and mucosal inflammation facilitates acquisition and shedding of HIV and other pathogens. The organism cannot survive long outside a moist environment, which underlies its predominantly sexual mode of transmission.",
-  "additionalDifferentials": [
-   "Bacterial vaginosis",
-   "Vulvovaginal candidiasis",
-   "Gonococcal or chlamydial cervicitis",
-   "Atrophic vaginitis",
-   "Non-specific urethritis in men"
-  ],
-  "infectionMimics": [
-   "Bacterial vaginosis with malodorous discharge",
-   "Candida vulvovaginitis causing itch and discharge",
-   "Chlamydial or gonococcal cervicitis or urethritis",
-   "Mycoplasma genitalium urethritis"
-  ],
-  "additionalInvestigations": [
-   "Saline wet-mount microscopy for motile trophozoites and increased polymorphs",
-   "Nucleic acid amplification testing of vaginal or urethral specimens as the most sensitive method",
-   "Vaginal pH and whiff testing to help distinguish from bacterial vaginosis",
-   "Concurrent screening for HIV, syphilis, gonorrhoea and chlamydia",
-   "Culture in selective medium where molecular testing is unavailable"
-  ],
-  "redFlags": [
-   "Infection during pregnancy given the association with preterm delivery and low birth weight",
-   "Persistent symptoms after treatment suggesting reinfection or nitroimidazole resistance",
-   "Coexisting HIV infection or features suggesting other serious sexually transmitted disease",
-   "Signs of pelvic inflammatory disease indicating an alternative or additional pathogen"
-  ],
-  "prognosis": "With appropriate nitroimidazole therapy and simultaneous partner treatment the cure rate is high; recurrence usually reflects reinfection or non-adherence rather than true drug resistance, which is uncommon but increasingly recognised.",
-  "pitfalls": [
-   "Relying on wet-mount microscopy alone, which misses many infections because of its limited sensitivity",
-   "Treating the index patient without treating sexual partners, leading to reinfection",
-   "Overlooking asymptomatic infection, particularly in men, who sustain transmission",
-   "Failing to screen for coexisting sexually transmitted infections and HIV"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/NTEP guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with an oral nitroimidazole (metronidazole or tinidazole) as definitive antiprotozoal therapy, counselling on avoidance of alcohol during and shortly after treatment",
-   "Treat all recent sexual partners simultaneously and advise abstaining from intercourse until both partners have completed therapy, to prevent reinfection",
-   "Screen for and manage coexisting sexually transmitted infections including HIV, syphilis, gonorrhoea and chlamydia",
-   "Arrange retesting for cure given the high reinfection rate, and treat symptomatic pregnant women, involving obstetrics for regimen choice",
-   "For persistent infection after adherent treatment, use a prolonged or higher-intensity tinidazole-based regimen and seek specialist advice on the uncommon nitroimidazole resistance",
-   "Counsel on consistent condom use and safer-sex practices to reduce recurrence and onward transmission"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trichomoniasis-pathway",
-   "title": "Trichomoniasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by the flagellated protozoan Trichomonas vaginalis and spread almost exclusively through sexual contact, so it should prompt screening for other sexually transmitted infections",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Infection during pregnancy given the association with preterm delivery and low birth weight",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Saline wet-mount microscopy for motile trophozoites and increased polymorphs, Nucleic acid amplification testing of vaginal or urethral specimens as the most sensitive method, Vaginal pH and whiff testing to help"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with an oral nitroimidazole (metronidazole or tinidazole) as definitive antiprotozoal therapy, counselling on avoidance of alcohol during and shortly after treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on wet-mount microscopy alone, which misses many infections because of its limited sensitivity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trichomoniasis."
-  }
- ],
- "tables": [
-  {
-   "id": "trichomoniasis-matrix",
-   "title": "Trichomoniasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by the flagellated protozoan Trichomonas vaginalis and spread almost exclusively through sexual contact, so it should",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by the flagellated protozoan Trichomonas vaginalis and spread almost exclusively through sexual contact, so it should prompt screening for other sexually transmitted infections",
+      "Women often present with a malodorous, frothy yellow-green discharge, vulvovaginal itching and dysuria, though a large proportion are asymptomatic",
+      "The classic 'strawberry cervix' (punctate cervical haemorrhages) is highly suggestive but seen in only a minority of cases",
+      "Most infected men are asymptomatic carriers but may develop urethritis, making partner treatment essential to prevent reinfection",
+      "Diagnosis is traditionally by observing motile trophozoites on saline wet mount, but nucleic acid amplification testing is far more sensitive and is now preferred where available",
+      "Treatment is with an oral nitroimidazole (metronidazole or tinidazole); partners should be treated simultaneously and intercourse avoided until both complete therapy",
+      "Infection in pregnancy is associated with preterm birth and low birth weight, and it increases susceptibility to HIV acquisition and transmission"
     ],
-    [
-     "Key Investigations",
-     "Saline wet-mount microscopy for motile trophozoites and increased polymorphs, Nucleic acid amplification testing of vaginal or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trichomonas vaginalis is an anaerobic, flagellated protozoan that adheres to and damages squamous epithelium of the urogenital tract. Cytoadherence and release of proteinases and other virulence factors trigger a local inflammatory response with neutrophil infiltration, producing the characteristic discharge and mucosal microhaemorrhages. The resulting disruption of the epithelial barrier and mucosal inflammation facilitates acquisition and shedding of HIV and other pathogens. The organism cannot survive long outside a moist environment, which underlies its predominantly sexual mode of transmission.",
+    "additionalDifferentials": [
+      "Bacterial vaginosis",
+      "Vulvovaginal candidiasis",
+      "Gonococcal or chlamydial cervicitis",
+      "Atrophic vaginitis",
+      "Non-specific urethritis in men"
     ],
-    [
-     "Primary Differentials",
-     "Bacterial vaginosis, Vulvovaginal candidiasis, Gonococcal or chlamydial cervicitis",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Bacterial vaginosis with malodorous discharge",
+      "Candida vulvovaginitis causing itch and discharge",
+      "Chlamydial or gonococcal cervicitis or urethritis",
+      "Mycoplasma genitalium urethritis"
     ],
-    [
-     "Management Strategy",
-     "Treat with an oral nitroimidazole (metronidazole or tinidazole) as definitive antiprotozoal therapy, counselling on avoidance of",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Saline wet-mount microscopy for motile trophozoites and increased polymorphs",
+      "Nucleic acid amplification testing of vaginal or urethral specimens as the most sensitive method",
+      "Vaginal pH and whiff testing to help distinguish from bacterial vaginosis",
+      "Concurrent screening for HIV, syphilis, gonorrhoea and chlamydia",
+      "Culture in selective medium where molecular testing is unavailable"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on wet-mount microscopy alone, which misses many infections because of its limited sensitivity",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Infection during pregnancy given the association with preterm delivery and low birth weight",
+      "Persistent symptoms after treatment suggesting reinfection or nitroimidazole resistance",
+      "Coexisting HIV infection or features suggesting other serious sexually transmitted disease",
+      "Signs of pelvic inflammatory disease indicating an alternative or additional pathogen"
+    ],
+    "prognosis": "With appropriate nitroimidazole therapy and simultaneous partner treatment the cure rate is high; recurrence usually reflects reinfection or non-adherence rather than true drug resistance, which is uncommon but increasingly recognised.",
+    "pitfalls": [
+      "Relying on wet-mount microscopy alone, which misses many infections because of its limited sensitivity",
+      "Treating the index patient without treating sexual partners, leading to reinfection",
+      "Overlooking asymptomatic infection, particularly in men, who sustain transmission",
+      "Failing to screen for coexisting sexually transmitted infections and HIV"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/NTEP guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with an oral nitroimidazole (metronidazole or tinidazole) as definitive antiprotozoal therapy, counselling on avoidance of alcohol during and shortly after treatment",
+      "Treat all recent sexual partners simultaneously and advise abstaining from intercourse until both partners have completed therapy, to prevent reinfection",
+      "Screen for and manage coexisting sexually transmitted infections including HIV, syphilis, gonorrhoea and chlamydia",
+      "Arrange retesting for cure given the high reinfection rate, and treat symptomatic pregnant women, involving obstetrics for regimen choice",
+      "For persistent infection after adherent treatment, use a prolonged or higher-intensity tinidazole-based regimen and seek specialist advice on the uncommon nitroimidazole resistance",
+      "Counsel on consistent condom use and safer-sex practices to reduce recurrence and onward transmission"
     ]
-   ],
-   "caption": "Overview comparison matrix for trichomoniasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trichomoniasis-real-image",
-   "title": "Trichomoniasis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "trichomoniasis-pathway",
+      "title": "Trichomoniasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by the flagellated protozoan Trichomonas vaginalis and spread almost exclusively through sexual contact, so it should prompt screening for other sexually transmitted infections",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Infection during pregnancy given the association with preterm delivery and low birth weight",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Saline wet-mount microscopy for motile trophozoites and increased polymorphs, Nucleic acid amplification testing of vaginal or urethral specimens as the most sensitive method, Vaginal pH and whiff testing to help"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with an oral nitroimidazole (metronidazole or tinidazole) as definitive antiprotozoal therapy, counselling on avoidance of alcohol during and shortly after treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on wet-mount microscopy alone, which misses many infections because of its limited sensitivity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trichomoniasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trichomoniasis-matrix",
+      "title": "Trichomoniasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by the flagellated protozoan Trichomonas vaginalis and spread almost exclusively through sexual contact, so it should",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Saline wet-mount microscopy for motile trophozoites and increased polymorphs, Nucleic acid amplification testing of vaginal or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacterial vaginosis, Vulvovaginal candidiasis, Gonococcal or chlamydial cervicitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with an oral nitroimidazole (metronidazole or tinidazole) as definitive antiprotozoal therapy, counselling on avoidance of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on wet-mount microscopy alone, which misses many infections because of its limited sensitivity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trichomoniasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichomoniasis-dx-mgmt",
+      "title": "Diagnosis and management of Trichomoniasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichomoniasis: frothy yellow-green vaginal discharge with itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: infection in pregnancy, persistent symptoms, or HIV co-infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric and HIV review for pregnancy or co-infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nucleic acid amplification test; wet mount; pH and whiff; STI screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does amplification testing confirm Trichomonas vaginalis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bacterial vaginosis, candidiasis or chlamydial cervicitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral metronidazole or tinidazole, avoiding alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simultaneous treatment of sexual partners",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen and treat HIV, syphilis, gonorrhoea and chlamydia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Retest for cure given reinfection risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prolonged regimen for persistent infection after adherent treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "High cure rate with partner treatment; recurrence usually reflects reinfection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichomoniasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nucleic acid amplification testing",
+          "cells": [
+            {
+              "text": "Most sensitive method for Trichomonas vaginalis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saline wet-mount microscopy",
+          "cells": [
+            {
+              "text": "Motile trophozoites and increased polymorphs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaginal pH and whiff testing",
+          "cells": [
+            {
+              "text": "Separates from bacterial vaginosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV, syphilis, gonorrhoea and chlamydia screen",
+          "cells": [
+            {
+              "text": "Coexisting infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective medium culture",
+          "cells": [
+            {
+              "text": "Where molecular testing is unavailable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichomoniasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial vaginosis",
+          "cells": [
+            {
+              "text": "Fishy malodorous discharge with clue cells and whiff positivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vulvovaginal candidiasis",
+          "cells": [
+            {
+              "text": "Itch with thick white discharge; microscopy shows yeast"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chlamydial or gonococcal cervicitis",
+          "cells": [
+            {
+              "text": "Molecular testing for chlamydia and gonorrhoea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichomoniasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral nitroimidazole",
+          "cells": [
+            {
+              "text": "Metronidazole or tinidazole; avoid alcohol during and shortly after"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simultaneous partner treatment",
+          "cells": [
+            {
+              "text": "Avoid intercourse until both complete therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting infection screen",
+          "cells": [
+            {
+              "text": "HIV, syphilis, gonorrhoea and chlamydia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retesting for cure",
+          "cells": [
+            {
+              "text": "High reinfection rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy management",
+          "cells": [
+            {
+              "text": "Symptomatic pregnant women, with obstetric input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged or higher-intensity regimen",
+          "cells": [
+            {
+              "text": "Persistent infection after adherent treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safer-sex counselling",
+          "cells": [
+            {
+              "text": "Reduces recurrence and transmission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

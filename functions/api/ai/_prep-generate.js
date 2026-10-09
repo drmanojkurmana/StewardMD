@@ -49,7 +49,7 @@ import { ownerOK } from "../../_adminauth.js";
 import { getCredits, inrToMt, costCapOn } from "../../_credits.js";
 import {
   PREP_OPS, PREP_LIMITS, getProfile, cleanText, prepScrub, parseModelJson,
-  buildFactsPrompt, buildMcqPrompt, buildSolvePrompt, buildReviewPrompt, buildImageMcqPrompt, sanitizeImageMcq, gateImgSupport, imageStemOk, runCodeGates, sha12,
+  buildFactsPrompt, buildMcqPrompt, buildSolvePrompt, buildReviewPrompt, buildImageMcqPrompt, sanitizeImageMcq, gateImgSupport, imageStemOk, imageStemReads, IMG_FIGURES, runCodeGates, sha12,
   sanitizeFacts, sanitizeMcq, sanitizeSolve, sanitizeReview, finalizeFacts, reviewPass,
   gateBatch, mulberry32, seedFrom, keyPositions, shuffleOptions, solveMatches, toStoredItem,
 } from "../../_prep-core.js";
@@ -248,6 +248,7 @@ function finish(req, text, model) {
 function finishImage(req, raw, model) {
   const r = sanitizeImageMcq(raw, req.sents.map((s) => s.n));
   if (!r) return null;
+  if (r.kind && IMG_FIGURES.indexOf(r.kind) < 0) return { items: [], skipped: "not-figure" };
   if (!r.sure) return { items: [], skipped: "unsure" };
   if (!r.rq) return { items: [], skipped: "no-question" };
   if (!r.sn.length) return { items: [], skipped: "no-source" };
@@ -257,6 +258,7 @@ function finishImage(req, raw, model) {
   if (g) return { items: [], skipped: g };
   if (!gateImgSupport(r.rq, source)) return { items: [], skipped: "unsupported" };
   if (!imageStemOk(r.rq.st)) return { items: [], skipped: "no-image-ref" };
+  if (imageStemReads(r.rq.st) || imageStemReads(r.rq.key.ot)) return { items: [], skipped: "reads-image" };
   const rnd = mulberry32(seedFrom(req.deckId + ":" + req.idem));
   const fact = { fid: "f_" + sha12(req.deckId + ":img:" + req.img.data.length + ":" + r.sn.join(",") + ":" + req.img.data.slice(0, 64)), sn: r.sn, p: Array.from(new Set(cited.map((s) => s.p).filter((p) => p))), h: cited[0].h || "" };
   const it = toStoredItem(r.rq, shuffleOptions(r.rq, keyPositions(1, rnd)[0], rnd), { deckId: req.deckId, fact, prov: "USR", exam: req.exam, mv: model, src: req.src, t: req.t || undefined });

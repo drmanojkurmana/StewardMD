@@ -1,174 +1,468 @@
 {
- "id": "prurigo_nodularis",
- "name": "Prurigo nodularis",
- "aliases": [
-  "nodular prurigo",
-  "Hyde prurigo nodularis",
-  "chronic nodular prurigo",
-  "picker's nodules"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by multiple intensely pruritic, firm, hyperkeratotic nodules arising from a self-perpetuating itch-scratch cycle",
-   "Nodules are typically symmetrical on the extensor limbs and trunk, sparing the mid-back where the hand cannot reach ('butterfly sign')",
-   "Excoriation, crusting, and post-inflammatory hyper- or hypopigmentation commonly accompany the nodules",
-   "It is a reaction pattern rather than a single disease, so an underlying cause of chronic pruritus should be sought",
-   "Associated conditions include atopic dermatitis, chronic kidney disease, hepatobiliary disease, thyroid dysfunction, HIV, and, less commonly, lymphoma",
-   "Neural hyperplasia and upregulation of itch-related mediators contribute to the persistence and severity of the pruritus",
-   "Breaking the itch-scratch cycle is central to management, alongside treating any identified systemic driver"
+  "id": "prurigo_nodularis",
+  "name": "Prurigo nodularis",
+  "aliases": [
+    "nodular prurigo",
+    "Hyde prurigo nodularis",
+    "chronic nodular prurigo",
+    "picker's nodules"
   ],
-  "pathophysiology": "Prurigo nodularis develops when chronic, intense pruritus drives repetitive scratching and rubbing, producing hyperkeratotic, fibrotic nodules. Persistent mechanical trauma and neuroimmune activation lead to dermal fibrosis, epidermal hyperplasia, and proliferation of cutaneous nerve fibres, with increased expression of pruritogenic cytokines and neuropeptides that sensitise itch pathways. This establishes a self-sustaining itch-scratch cycle. The underlying pruritus may be dermatological, systemic (renal, hepatic, haematological, endocrine), neuropathic, or psychogenic, so the nodules represent a common end-point rather than a distinct primary disorder.",
-  "additionalDifferentials": [
-   "Hypertrophic lichen planus",
-   "Lichen simplex chronicus",
-   "Bullous pemphigoid (nodular/prurigo variant)",
-   "Multiple keratoacanthomas or squamous cell carcinomas",
-   "Pemphigoid nodularis",
-   "Perforating dermatoses (e.g. acquired reactive perforating collagenosis)"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy to confirm the diagnosis and exclude mimics, including bullous pemphigoid on immunofluorescence",
-   "Full blood count and renal and liver function tests to seek systemic causes of pruritus",
-   "Thyroid function tests",
-   "HIV and, where indicated, hepatitis serology",
-   "Screening for lymphoproliferative disease in refractory or atypical cases",
-   "Assessment of atopic and psychological contributors"
-  ],
-  "redFlags": [
-   "Systemic symptoms such as weight loss, night sweats, or lymphadenopathy suggesting lymphoma",
-   "Unexplained pruritus pointing to occult renal, hepatic, or haematological disease",
-   "Rapidly growing or ulcerated nodules raising concern for malignancy",
-   "Severe intractable itch with sleep disturbance and marked impairment of quality of life"
-  ],
-  "prognosis": "Prurigo nodularis is typically chronic and difficult to treat, with lesions persisting for months to years; outcome improves when an underlying cause is identified and treated and when the itch-scratch cycle can be interrupted.",
-  "pitfalls": [
-   "Treating the nodules symptomatically without investigating an underlying systemic cause of pruritus",
-   "Missing an underlying bullous pemphigoid presenting in a prurigo-like form",
-   "Underestimating the psychological impact and role of scratching behaviour",
-   "Overlooking malignancy in solitary, rapidly changing, or ulcerated lesions"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying driver of pruritus, whether dermatological, renal, hepatic, thyroid, HIV-related or haematological",
-   "Break the itch-scratch cycle with potent or superpotent topical corticosteroids, often under occlusion, and topical calcineurin inhibitors",
-   "Intralesional corticosteroid injection for individual resistant nodules",
-   "Antipruritic measures including emollients, topical menthol, sedating antihistamines and neuromodulators such as gabapentinoids",
-   "Phototherapy with narrowband ultraviolet B for widespread disease",
-   "Systemic or biologic therapy for refractory cases, notably dupilumab, or immunosuppressants such as methotrexate or ciclosporin",
-   "Psychological support to address scratching behaviour, with dermatology referral for resistant disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "prurigo_nodularis-pathway",
-   "title": "Prurigo nodularis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by multiple intensely pruritic, firm, hyperkeratotic nodules arising from a self-perpetuating itch-scratch cycle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Systemic symptoms such as weight loss, night sweats, or lymphadenopathy suggesting lymphoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy to confirm the diagnosis and exclude mimics, including bullous pemphigoid on immunofluorescence, Full blood count and renal and liver function tests to seek systemic causes of pruritus, Thyroid function tests"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying driver of pruritus, whether dermatological, renal, hepatic, thyroid, HIV-related or haematological"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the nodules symptomatically without investigating an underlying systemic cause of pruritus"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of prurigo nodularis."
-  }
- ],
- "tables": [
-  {
-   "id": "prurigo_nodularis-matrix",
-   "title": "Prurigo nodularis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by multiple intensely pruritic, firm, hyperkeratotic nodules arising from a self-perpetuating itch-scratch cycle",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by multiple intensely pruritic, firm, hyperkeratotic nodules arising from a self-perpetuating itch-scratch cycle",
+      "Nodules are typically symmetrical on the extensor limbs and trunk, sparing the mid-back where the hand cannot reach ('butterfly sign')",
+      "Excoriation, crusting, and post-inflammatory hyper- or hypopigmentation commonly accompany the nodules",
+      "It is a reaction pattern rather than a single disease, so an underlying cause of chronic pruritus should be sought",
+      "Associated conditions include atopic dermatitis, chronic kidney disease, hepatobiliary disease, thyroid dysfunction, HIV, and, less commonly, lymphoma",
+      "Neural hyperplasia and upregulation of itch-related mediators contribute to the persistence and severity of the pruritus",
+      "Breaking the itch-scratch cycle is central to management, alongside treating any identified systemic driver"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy to confirm the diagnosis and exclude mimics, including bullous pemphigoid on immunofluorescence, Full blood count and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Prurigo nodularis develops when chronic, intense pruritus drives repetitive scratching and rubbing, producing hyperkeratotic, fibrotic nodules. Persistent mechanical trauma and neuroimmune activation lead to dermal fibrosis, epidermal hyperplasia, and proliferation of cutaneous nerve fibres, with increased expression of pruritogenic cytokines and neuropeptides that sensitise itch pathways. This establishes a self-sustaining itch-scratch cycle. The underlying pruritus may be dermatological, systemic (renal, hepatic, haematological, endocrine), neuropathic, or psychogenic, so the nodules represent a common end-point rather than a distinct primary disorder.",
+    "additionalDifferentials": [
+      "Hypertrophic lichen planus",
+      "Lichen simplex chronicus",
+      "Bullous pemphigoid (nodular/prurigo variant)",
+      "Multiple keratoacanthomas or squamous cell carcinomas",
+      "Pemphigoid nodularis",
+      "Perforating dermatoses (e.g. acquired reactive perforating collagenosis)"
     ],
-    [
-     "Primary Differentials",
-     "Hypertrophic lichen planus, Lichen simplex chronicus, Bullous pemphigoid (nodular/prurigo variant)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy to confirm the diagnosis and exclude mimics, including bullous pemphigoid on immunofluorescence",
+      "Full blood count and renal and liver function tests to seek systemic causes of pruritus",
+      "Thyroid function tests",
+      "HIV and, where indicated, hepatitis serology",
+      "Screening for lymphoproliferative disease in refractory or atypical cases",
+      "Assessment of atopic and psychological contributors"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying driver of pruritus, whether dermatological, renal, hepatic, thyroid, HIV-related or",
-     "Core treatment modality"
+    "redFlags": [
+      "Systemic symptoms such as weight loss, night sweats, or lymphadenopathy suggesting lymphoma",
+      "Unexplained pruritus pointing to occult renal, hepatic, or haematological disease",
+      "Rapidly growing or ulcerated nodules raising concern for malignancy",
+      "Severe intractable itch with sleep disturbance and marked impairment of quality of life"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the nodules symptomatically without investigating an underlying systemic cause of pruritus",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prurigo nodularis is typically chronic and difficult to treat, with lesions persisting for months to years; outcome improves when an underlying cause is identified and treated and when the itch-scratch cycle can be interrupted.",
+    "pitfalls": [
+      "Treating the nodules symptomatically without investigating an underlying systemic cause of pruritus",
+      "Missing an underlying bullous pemphigoid presenting in a prurigo-like form",
+      "Underestimating the psychological impact and role of scratching behaviour",
+      "Overlooking malignancy in solitary, rapidly changing, or ulcerated lesions"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying driver of pruritus, whether dermatological, renal, hepatic, thyroid, HIV-related or haematological",
+      "Break the itch-scratch cycle with potent or superpotent topical corticosteroids, often under occlusion, and topical calcineurin inhibitors",
+      "Intralesional corticosteroid injection for individual resistant nodules",
+      "Antipruritic measures including emollients, topical menthol, sedating antihistamines and neuromodulators such as gabapentinoids",
+      "Phototherapy with narrowband ultraviolet B for widespread disease",
+      "Systemic or biologic therapy for refractory cases, notably dupilumab, or immunosuppressants such as methotrexate or ciclosporin",
+      "Psychological support to address scratching behaviour, with dermatology referral for resistant disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for prurigo nodularis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "prurigo-nodularis-real-image",
-   "title": "Prurigo nodularis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "prurigo_nodularis-pathway",
+      "title": "Prurigo nodularis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by multiple intensely pruritic, firm, hyperkeratotic nodules arising from a self-perpetuating itch-scratch cycle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Systemic symptoms such as weight loss, night sweats, or lymphadenopathy suggesting lymphoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy to confirm the diagnosis and exclude mimics, including bullous pemphigoid on immunofluorescence, Full blood count and renal and liver function tests to seek systemic causes of pruritus, Thyroid function tests"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying driver of pruritus, whether dermatological, renal, hepatic, thyroid, HIV-related or haematological"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the nodules symptomatically without investigating an underlying systemic cause of pruritus"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of prurigo nodularis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "prurigo_nodularis-matrix",
+      "title": "Prurigo nodularis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by multiple intensely pruritic, firm, hyperkeratotic nodules arising from a self-perpetuating itch-scratch cycle",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy to confirm the diagnosis and exclude mimics, including bullous pemphigoid on immunofluorescence, Full blood count and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypertrophic lichen planus, Lichen simplex chronicus, Bullous pemphigoid (nodular/prurigo variant)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying driver of pruritus, whether dermatological, renal, hepatic, thyroid, HIV-related or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the nodules symptomatically without investigating an underlying systemic cause of pruritus",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for prurigo nodularis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prurigo_nodularis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with immunofluorescence",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; excludes bullous pemphigoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, renal and liver function",
+          "cells": [
+            {
+              "text": "Systemic causes of pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Thyroid cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV and hepatitis serology",
+          "cells": [
+            {
+              "text": "HIV and hepatitis causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for lymphoproliferative disease",
+          "cells": [
+            {
+              "text": "Refractory or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of atopic and psychological contributors",
+          "cells": [
+            {
+              "text": "Contributing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prurigo_nodularis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bullous pemphigoid (nodular or prurigo variant)",
+          "cells": [
+            {
+              "text": "Nodular or prurigo variant"
+            },
+            {
+              "text": "Skin biopsy with immunofluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple keratoacanthomas or squamous cell carcinomas",
+          "cells": [
+            {
+              "text": "Rapidly growing or ulcerated nodules"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prurigo_nodularis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying driver",
+          "cells": [
+            {
+              "text": "Dermatological, renal, hepatic, thyroid, HIV-related or haematological cause of pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical steroids and calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Potent or superpotent corticosteroids, often under occlusion; topical calcineurin inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional steroid",
+          "cells": [
+            {
+              "text": "For individual resistant nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipruritics",
+          "cells": [
+            {
+              "text": "Emollients, topical menthol, sedating antihistamines and gabapentinoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "Narrowband UVB for widespread disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic or biologic therapy",
+          "cells": [
+            {
+              "text": "Refractory cases: dupilumab, methotrexate or ciclosporin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Scratching behaviour; dermatology referral for resistant disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prurigo_nodularis-dx-mgmt",
+      "title": "Diagnosis and management of Prurigo nodularis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prurigo nodularis: firm pruritic nodules from chronic scratching",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Lymphoma features, unexplained systemic pruritus, growing nodules, or intractable itch?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent work-up for lymphoma or malignancy in ulcerated or growing nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with immunofluorescence; FBC; renal and liver tests; thyroid; HIV; hepatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm prurigo nodularis with pemphigoid excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypertrophic lichen planus, lichen simplex chronicus or pemphigoid; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying systemic driver of pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potent topical corticosteroids under occlusion and topical calcineurin inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Narrowband UVB phototherapy for widespread disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dupilumab, methotrexate or ciclosporin for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Psychological support and dermatology referral for resistant disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

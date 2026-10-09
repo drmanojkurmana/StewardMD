@@ -1,168 +1,439 @@
 {
- "id": "discoid_meniscus",
- "name": "Discoid meniscus",
- "aliases": [
-  "discoid lateral meniscus",
-  "snapping knee syndrome (paediatric)",
-  "Wrisberg variant meniscus"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Sports & Trauma",
- "specialty": "Orthopaedics / Sports Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital variant in which the meniscus (almost always lateral) is abnormally thick and disc-shaped rather than semilunar",
-   "Classified (Watanabe) into complete, incomplete and Wrisberg types by coverage and peripheral attachment",
-   "Often asymptomatic, but the abnormal shape and sometimes deficient posterior attachment predispose to tears and mechanical symptoms",
-   "The classic presentation is a painless snapping or clunking knee in a child (the 'snapping knee syndrome')",
-   "Symptomatic tears cause pain, effusion, locking and loss of full extension",
-   "MRI shows a bow-tie sign on multiple contiguous sagittal slices and increased meniscal width on coronal images",
-   "Asymptomatic discoid menisci need no treatment; symptomatic ones are managed with arthroscopic saucerisation preserving a peripheral rim"
+  "id": "discoid_meniscus",
+  "name": "Discoid meniscus",
+  "aliases": [
+    "discoid lateral meniscus",
+    "snapping knee syndrome (paediatric)",
+    "Wrisberg variant meniscus"
   ],
-  "pathophysiology": "During development the lateral meniscus fails to attain its normal semilunar form, remaining a thickened disc that covers more of the tibial plateau. The thickened, sometimes hypermobile tissue (particularly the Wrisberg variant lacking a stable posterior attachment) is subject to abnormal shear, predisposing to tears and to snapping as it displaces during knee motion. Preserving a peripheral rim during saucerisation maintains meniscal load-sharing function.",
-  "additionalDifferentials": [
-   "Meniscal tear of a normal meniscus",
-   "Osteochondritis dissecans of the femoral condyle",
-   "Plica syndrome",
-   "Loose body",
-   "Patellofemoral instability"
-  ],
-  "additionalInvestigations": [
-   "MRI of the knee (bow-tie sign and increased meniscal width)",
-   "Weight-bearing radiographs to assess joint space and exclude other pathology",
-   "Arthroscopy for definitive assessment and treatment",
-   "Contralateral imaging as the variant can be bilateral"
-  ],
-  "redFlags": [
-   "A locked knee from a displaced discoid meniscal tear",
-   "Progressive effusion and pain limiting function in a child",
-   "Signs suggesting osteochondritis dissecans or loose body"
-  ],
-  "prognosis": "Asymptomatic discoid menisci have an excellent outlook; symptomatic tears do well after rim-preserving saucerisation, whereas extensive meniscectomy risks early lateral compartment osteoarthritis.",
-  "pitfalls": [
-   "Performing total meniscectomy rather than rim-preserving saucerisation",
-   "Missing the diagnosis in a child with painless knee snapping",
-   "Overlooking a Wrisberg variant with an unstable posterior horn",
-   "Attributing symptoms to the discoid meniscus when osteochondritis dissecans coexists"
-  ],
-  "references": [
-   "Miller's Review of Orthopaedics",
-   "Tachdjian's Pediatric Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observation without surgery for asymptomatic, incidentally discovered discoid menisci",
-   "Arthroscopic saucerisation, reshaping the disc to a near-normal contour while preserving a peripheral rim, for symptomatic tears or mechanical symptoms",
-   "Arthroscopic repair or stabilisation of a deficient posterior peripheral attachment, particularly in the Wrisberg variant",
-   "Avoid total meniscectomy because of the risk of early lateral compartment osteoarthritis",
-   "Structured post-operative physiotherapy and rehabilitation",
-   "Long-term follow-up for lateral compartment osteoarthritis, with assessment of the contralateral knee as the variant can be bilateral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "discoid_meniscus-pathway",
-   "title": "Discoid meniscus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital variant in which the meniscus (almost always lateral) is abnormally thick and disc-shaped rather than semilunar",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A locked knee from a displaced discoid meniscal tear",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the knee (bow-tie sign and increased meniscal width), Weight-bearing radiographs to assess joint space and exclude other pathology, Arthroscopy for definitive assessment and treatment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observation without surgery for asymptomatic, incidentally discovered discoid menisci"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing total meniscectomy rather than rim-preserving saucerisation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of discoid meniscus."
-  }
- ],
- "tables": [
-  {
-   "id": "discoid_meniscus-matrix",
-   "title": "Discoid meniscus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital variant in which the meniscus (almost always lateral) is abnormally thick and disc-shaped rather than semilunar",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Sports & Trauma",
+  "specialty": "Orthopaedics / Sports Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital variant in which the meniscus (almost always lateral) is abnormally thick and disc-shaped rather than semilunar",
+      "Classified (Watanabe) into complete, incomplete and Wrisberg types by coverage and peripheral attachment",
+      "Often asymptomatic, but the abnormal shape and sometimes deficient posterior attachment predispose to tears and mechanical symptoms",
+      "The classic presentation is a painless snapping or clunking knee in a child (the 'snapping knee syndrome')",
+      "Symptomatic tears cause pain, effusion, locking and loss of full extension",
+      "MRI shows a bow-tie sign on multiple contiguous sagittal slices and increased meniscal width on coronal images",
+      "Asymptomatic discoid menisci need no treatment; symptomatic ones are managed with arthroscopic saucerisation preserving a peripheral rim"
     ],
-    [
-     "Key Investigations",
-     "MRI of the knee (bow-tie sign and increased meniscal width), Weight-bearing radiographs to assess joint space and exclude other",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During development the lateral meniscus fails to attain its normal semilunar form, remaining a thickened disc that covers more of the tibial plateau. The thickened, sometimes hypermobile tissue (particularly the Wrisberg variant lacking a stable posterior attachment) is subject to abnormal shear, predisposing to tears and to snapping as it displaces during knee motion. Preserving a peripheral rim during saucerisation maintains meniscal load-sharing function.",
+    "additionalDifferentials": [
+      "Meniscal tear of a normal meniscus",
+      "Osteochondritis dissecans of the femoral condyle",
+      "Plica syndrome",
+      "Loose body",
+      "Patellofemoral instability"
     ],
-    [
-     "Primary Differentials",
-     "Meniscal tear of a normal meniscus, Osteochondritis dissecans of the femoral condyle, Plica syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the knee (bow-tie sign and increased meniscal width)",
+      "Weight-bearing radiographs to assess joint space and exclude other pathology",
+      "Arthroscopy for definitive assessment and treatment",
+      "Contralateral imaging as the variant can be bilateral"
     ],
-    [
-     "Management Strategy",
-     "Observation without surgery for asymptomatic, incidentally discovered discoid menisci",
-     "Core treatment modality"
+    "redFlags": [
+      "A locked knee from a displaced discoid meniscal tear",
+      "Progressive effusion and pain limiting function in a child",
+      "Signs suggesting osteochondritis dissecans or loose body"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing total meniscectomy rather than rim-preserving saucerisation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Asymptomatic discoid menisci have an excellent outlook; symptomatic tears do well after rim-preserving saucerisation, whereas extensive meniscectomy risks early lateral compartment osteoarthritis.",
+    "pitfalls": [
+      "Performing total meniscectomy rather than rim-preserving saucerisation",
+      "Missing the diagnosis in a child with painless knee snapping",
+      "Overlooking a Wrisberg variant with an unstable posterior horn",
+      "Attributing symptoms to the discoid meniscus when osteochondritis dissecans coexists"
+    ],
+    "references": [
+      "Miller's Review of Orthopaedics",
+      "Tachdjian's Pediatric Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observation without surgery for asymptomatic, incidentally discovered discoid menisci",
+      "Arthroscopic saucerisation, reshaping the disc to a near-normal contour while preserving a peripheral rim, for symptomatic tears or mechanical symptoms",
+      "Arthroscopic repair or stabilisation of a deficient posterior peripheral attachment, particularly in the Wrisberg variant",
+      "Avoid total meniscectomy because of the risk of early lateral compartment osteoarthritis",
+      "Structured post-operative physiotherapy and rehabilitation",
+      "Long-term follow-up for lateral compartment osteoarthritis, with assessment of the contralateral knee as the variant can be bilateral"
     ]
-   ],
-   "caption": "Overview comparison matrix for discoid meniscus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "discoid-meniscus-real-image",
-   "title": "Discoid meniscus: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "discoid_meniscus-pathway",
+      "title": "Discoid meniscus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital variant in which the meniscus (almost always lateral) is abnormally thick and disc-shaped rather than semilunar",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A locked knee from a displaced discoid meniscal tear",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the knee (bow-tie sign and increased meniscal width), Weight-bearing radiographs to assess joint space and exclude other pathology, Arthroscopy for definitive assessment and treatment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observation without surgery for asymptomatic, incidentally discovered discoid menisci"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing total meniscectomy rather than rim-preserving saucerisation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of discoid meniscus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "discoid_meniscus-matrix",
+      "title": "Discoid meniscus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital variant in which the meniscus (almost always lateral) is abnormally thick and disc-shaped rather than semilunar",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the knee (bow-tie sign and increased meniscal width), Weight-bearing radiographs to assess joint space and exclude other",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Meniscal tear of a normal meniscus, Osteochondritis dissecans of the femoral condyle, Plica syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observation without surgery for asymptomatic, incidentally discovered discoid menisci",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing total meniscectomy rather than rim-preserving saucerisation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for discoid meniscus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "discoid_meniscus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the knee",
+          "cells": [
+            {
+              "text": "Bow-tie sign and increased meniscal width"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing radiographs",
+          "cells": [
+            {
+              "text": "Joint space; excludes other pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopy",
+          "cells": [
+            {
+              "text": "Definitive assessment and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral imaging",
+          "cells": [
+            {
+              "text": "Bilateral variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "discoid_meniscus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteochondritis dissecans of the femoral condyle",
+          "cells": [
+            {
+              "text": "Can coexist; symptoms wrongly attributed to the meniscus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loose body",
+          "cells": [
+            {
+              "text": "Signs of loose body suggest a different cause of locking"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "discoid_meniscus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic, incidentally discovered discoid menisci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic saucerisation",
+          "cells": [
+            {
+              "text": "Reshapes to a near-normal contour, preserving a peripheral rim, for symptomatic tears"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repair or stabilisation",
+          "cells": [
+            {
+              "text": "Deficient posterior peripheral attachment, especially the Wrisberg variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid total meniscectomy",
+          "cells": [
+            {
+              "text": "Risk of early lateral compartment osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Structured post-operative physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Lateral osteoarthritis; contralateral knee, as the variant can be bilateral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "discoid_meniscus-dx-mgmt",
+      "title": "Diagnosis and management of Discoid meniscus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected discoid meniscus: knee snapping or locking in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (locked knee, progressive effusion, signs of osteochondritis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review for a locked knee from a displaced tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for bow-tie sign and meniscal width; weight-bearing radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show a bow-tie sign with increased meniscal width?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteochondritis dissecans, loose body, plica or patellofemoral instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic, incidentally found discoid menisci",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Arthroscopic saucerisation that preserves a peripheral rim for symptomatic tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair or stabilise a deficient posterior attachment, especially the Wrisberg variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid total meniscectomy to limit lateral osteoarthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Structured post-operative rehabilitation and long-term follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Asymptomatic menisci have an excellent outlook; rim-preserving saucerisation does well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

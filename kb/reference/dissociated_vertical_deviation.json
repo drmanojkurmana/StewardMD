@@ -1,176 +1,456 @@
 {
- "id": "dissociated_vertical_deviation",
- "name": "dissociated vertical deviation",
- "aliases": [
-  "DVD",
-  "dissociated vertical divergence",
-  "alternating sursumduction"
- ],
- "class": "non_infective",
- "system": "Visual system / Ophthalmology",
- "specialty": "Paediatric Ophthalmology / Strabismus",
- "referenceOnly": true,
- "reference": {
-  "source": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An anomalous eye movement in which the non-fixating or occluded eye drifts slowly upward, and often extorts, then returns downward when fixation is resumed; because it violates Hering's law it is not a true hypertropia",
-   "Strongly associated with early-onset (infantile) esotropia and frequently accompanied by latent nystagmus, inferior oblique overaction and an abnormal head posture",
-   "It is typically bilateral though often asymmetric: either eye elevates under cover, unlike a genuine unilateral hypertropia where covering either eye gives reciprocal movements consistent with Hering's law",
-   "The hallmark on cover testing is that the covered eye elevates and, on uncovering, re-fixates and moves down without any corresponding downward movement of the fellow eye",
-   "It frequently has no fixed measurement, being variable and dissociated, and may be brought out by fatigue or dissociation, with a Bielschowsky darkening phenomenon sometimes demonstrable",
-   "It is usually asymptomatic and well controlled, so treatment (superior rectus recession or inferior oblique anterior transposition) is reserved for manifest, cosmetically or functionally significant deviations",
-   "Distinguishing it from inferior oblique overaction is important: DVD elevates regardless of horizontal gaze and without a true contralateral hypotropia, whereas inferior oblique overaction elevates in adduction and obeys Hering's law",
-   "It commonly coexists with other features of the infantile strabismus complex, so latent nystagmus and horizontal motility anomalies should be sought"
+  "id": "dissociated_vertical_deviation",
+  "name": "dissociated vertical deviation",
+  "aliases": [
+    "DVD",
+    "dissociated vertical divergence",
+    "alternating sursumduction"
   ],
-  "pathophysiology": "Dissociated vertical deviation is an innervational anomaly that usually arises in the context of disrupted binocular development from early-onset strabismus. The upward drift of the covered or non-fixating eye does not obey Hering's law of equal innervation, indicating that it is not a simple vertical muscle imbalance but a dissociated, supranuclear innervational phenomenon. It has been linked to primitive dorsal light and righting reflexes and to the abnormal binocular development seen with infantile esotropia and latent nystagmus. The magnitude of the deviation is modulated by the degree of dissociation between the two eyes, for example under occlusion or with reduced visual input to one eye.",
-  "additionalDifferentials": [
-   "Inferior oblique overaction (key distinction, as it obeys Hering's law)",
-   "True hypertropia from a vertical muscle palsy",
-   "Superior oblique palsy with a compensatory head tilt",
-   "Skew deviation",
-   "Other causes of vertical strabismus and incomitance",
-   "Craniofacial or orbital causes of a vertical deviation"
-  ],
-  "additionalInvestigations": [
-   "Alternate cover testing, observing the covered eye elevate and the uncovered eye re-fixate downward",
-   "Assessment in all positions of gaze to separate DVD from inferior oblique overaction",
-   "Documentation of any associated latent nystagmus and abnormal head posture",
-   "Attempted prism measurement, recognising the inherent variability, and testing under different fixation conditions",
-   "Assessment of the associated horizontal deviation, usually an infantile esotropia",
-   "Fundus torsion assessment and full orthoptic evaluation"
-  ],
-  "redFlags": [
-   "An acquired vertical deviation with neurological symptoms, prompting reconsideration of a paretic or central cause",
-   "A constant large manifest deviation causing symptoms or poor cosmesis",
-   "Diplopia, which is unusual in DVD and warrants reassessment"
-  ],
-  "prognosis": "DVD is usually benign and often subclinical, controlled by the child without symptoms; when manifest and significant, surgery reduces the deviation although it may not abolish it and can recur or require further procedures. It does not itself threaten vision beyond the amblyopia associated with the underlying infantile strabismus.",
-  "pitfalls": [
-   "Misdiagnosing DVD as a simple hypertropia and planning inappropriate surgery",
-   "Confusing DVD with inferior oblique overaction by not testing adherence to Hering's law",
-   "Expecting a fixed, reproducible measurement when the deviation is inherently variable",
-   "Overlooking the associated latent nystagmus and infantile esotropia",
-   "Operating on asymptomatic, well-controlled deviations"
-  ],
-  "references": [
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-   "Kanski's Clinical Ophthalmology",
-   "von Noorden's Binocular Vision and Ocular Motility"
-  ],
-  "crossLinks": [
-   "intermittent_exotropia"
-  ],
-  "management": [
-   "Observe the many latent, well-controlled, asymptomatic cases without intervention",
-   "Treat associated amblyopia and correct refractive error to optimise fixation",
-   "Reserve surgery for manifest, cosmetically or functionally significant deviation, using superior rectus recession or inferior oblique anterior transposition",
-   "Address coexisting infantile esotropia and inferior oblique overaction at the same surgical setting",
-   "Manage associated latent nystagmus and abnormal head posture",
-   "Maintain orthoptic follow-up, recognising the inherent variability and the potential for recurrence or need for further surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dissociated_vertical_deviation-pathway",
-   "title": "dissociated vertical deviation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An anomalous eye movement in which the non-fixating or occluded eye drifts slowly upward, and often extorts, then returns downward when fixation is resumed; because it violates Hering's law it is not a true hypertropia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An acquired vertical deviation with neurological symptoms, prompting reconsideration of a paretic or central cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Alternate cover testing, observing the covered eye elevate and the uncovered eye re-fixate downward, Assessment in all positions of gaze to separate DVD from inferior oblique overaction, Documentation of any associated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe the many latent, well-controlled, asymptomatic cases without intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing DVD as a simple hypertropia and planning inappropriate surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dissociated vertical deviation."
-  }
- ],
- "tables": [
-  {
-   "id": "dissociated_vertical_deviation-matrix",
-   "title": "dissociated vertical deviation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An anomalous eye movement in which the non-fixating or occluded eye drifts slowly upward, and often extorts, then returns",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Visual system / Ophthalmology",
+  "specialty": "Paediatric Ophthalmology / Strabismus",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An anomalous eye movement in which the non-fixating or occluded eye drifts slowly upward, and often extorts, then returns downward when fixation is resumed; because it violates Hering's law it is not a true hypertropia",
+      "Strongly associated with early-onset (infantile) esotropia and frequently accompanied by latent nystagmus, inferior oblique overaction and an abnormal head posture",
+      "It is typically bilateral though often asymmetric: either eye elevates under cover, unlike a genuine unilateral hypertropia where covering either eye gives reciprocal movements consistent with Hering's law",
+      "The hallmark on cover testing is that the covered eye elevates and, on uncovering, re-fixates and moves down without any corresponding downward movement of the fellow eye",
+      "It frequently has no fixed measurement, being variable and dissociated, and may be brought out by fatigue or dissociation, with a Bielschowsky darkening phenomenon sometimes demonstrable",
+      "It is usually asymptomatic and well controlled, so treatment (superior rectus recession or inferior oblique anterior transposition) is reserved for manifest, cosmetically or functionally significant deviations",
+      "Distinguishing it from inferior oblique overaction is important: DVD elevates regardless of horizontal gaze and without a true contralateral hypotropia, whereas inferior oblique overaction elevates in adduction and obeys Hering's law",
+      "It commonly coexists with other features of the infantile strabismus complex, so latent nystagmus and horizontal motility anomalies should be sought"
     ],
-    [
-     "Key Investigations",
-     "Alternate cover testing, observing the covered eye elevate and the uncovered eye re-fixate downward, Assessment in all positions",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dissociated vertical deviation is an innervational anomaly that usually arises in the context of disrupted binocular development from early-onset strabismus. The upward drift of the covered or non-fixating eye does not obey Hering's law of equal innervation, indicating that it is not a simple vertical muscle imbalance but a dissociated, supranuclear innervational phenomenon. It has been linked to primitive dorsal light and righting reflexes and to the abnormal binocular development seen with infantile esotropia and latent nystagmus. The magnitude of the deviation is modulated by the degree of dissociation between the two eyes, for example under occlusion or with reduced visual input to one eye.",
+    "additionalDifferentials": [
+      "Inferior oblique overaction (key distinction, as it obeys Hering's law)",
+      "True hypertropia from a vertical muscle palsy",
+      "Superior oblique palsy with a compensatory head tilt",
+      "Skew deviation",
+      "Other causes of vertical strabismus and incomitance",
+      "Craniofacial or orbital causes of a vertical deviation"
     ],
-    [
-     "Primary Differentials",
-     "Inferior oblique overaction (key distinction, as it obeys Hering's law), True hypertropia from a vertical muscle palsy, Superior",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Alternate cover testing, observing the covered eye elevate and the uncovered eye re-fixate downward",
+      "Assessment in all positions of gaze to separate DVD from inferior oblique overaction",
+      "Documentation of any associated latent nystagmus and abnormal head posture",
+      "Attempted prism measurement, recognising the inherent variability, and testing under different fixation conditions",
+      "Assessment of the associated horizontal deviation, usually an infantile esotropia",
+      "Fundus torsion assessment and full orthoptic evaluation"
     ],
-    [
-     "Management Strategy",
-     "Observe the many latent, well-controlled, asymptomatic cases without intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "An acquired vertical deviation with neurological symptoms, prompting reconsideration of a paretic or central cause",
+      "A constant large manifest deviation causing symptoms or poor cosmesis",
+      "Diplopia, which is unusual in DVD and warrants reassessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing DVD as a simple hypertropia and planning inappropriate surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "DVD is usually benign and often subclinical, controlled by the child without symptoms; when manifest and significant, surgery reduces the deviation although it may not abolish it and can recur or require further procedures. It does not itself threaten vision beyond the amblyopia associated with the underlying infantile strabismus.",
+    "pitfalls": [
+      "Misdiagnosing DVD as a simple hypertropia and planning inappropriate surgery",
+      "Confusing DVD with inferior oblique overaction by not testing adherence to Hering's law",
+      "Expecting a fixed, reproducible measurement when the deviation is inherently variable",
+      "Overlooking the associated latent nystagmus and infantile esotropia",
+      "Operating on asymptomatic, well-controlled deviations"
+    ],
+    "references": [
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "Kanski's Clinical Ophthalmology",
+      "von Noorden's Binocular Vision and Ocular Motility"
+    ],
+    "crossLinks": [
+      "intermittent_exotropia"
+    ],
+    "management": [
+      "Observe the many latent, well-controlled, asymptomatic cases without intervention",
+      "Treat associated amblyopia and correct refractive error to optimise fixation",
+      "Reserve surgery for manifest, cosmetically or functionally significant deviation, using superior rectus recession or inferior oblique anterior transposition",
+      "Address coexisting infantile esotropia and inferior oblique overaction at the same surgical setting",
+      "Manage associated latent nystagmus and abnormal head posture",
+      "Maintain orthoptic follow-up, recognising the inherent variability and the potential for recurrence or need for further surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for dissociated vertical deviation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dissociated-vertical-deviation-real-image",
-   "title": "dissociated vertical deviation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dissociated_vertical_deviation-pathway",
+      "title": "dissociated vertical deviation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An anomalous eye movement in which the non-fixating or occluded eye drifts slowly upward, and often extorts, then returns downward when fixation is resumed; because it violates Hering's law it is not a true hypertropia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An acquired vertical deviation with neurological symptoms, prompting reconsideration of a paretic or central cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Alternate cover testing, observing the covered eye elevate and the uncovered eye re-fixate downward, Assessment in all positions of gaze to separate DVD from inferior oblique overaction, Documentation of any associated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe the many latent, well-controlled, asymptomatic cases without intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing DVD as a simple hypertropia and planning inappropriate surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dissociated vertical deviation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dissociated_vertical_deviation-matrix",
+      "title": "dissociated vertical deviation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An anomalous eye movement in which the non-fixating or occluded eye drifts slowly upward, and often extorts, then returns",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Alternate cover testing, observing the covered eye elevate and the uncovered eye re-fixate downward, Assessment in all positions",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inferior oblique overaction (key distinction, as it obeys Hering's law), True hypertropia from a vertical muscle palsy, Superior",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe the many latent, well-controlled, asymptomatic cases without intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing DVD as a simple hypertropia and planning inappropriate surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dissociated vertical deviation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dissociated_vertical_deviation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Alternate cover testing",
+          "cells": [
+            {
+              "text": "Covered eye elevates on cover testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment in all positions of gaze",
+          "cells": [
+            {
+              "text": "Separates DVD from inferior oblique overaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation of latent nystagmus and head posture",
+          "cells": [
+            {
+              "text": "Associated latent nystagmus and abnormal head posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prism measurement under different fixation conditions",
+          "cells": [
+            {
+              "text": "Variable; repeat measurement needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the associated horizontal deviation",
+          "cells": [
+            {
+              "text": "Usually infantile esotropia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dissociated_vertical_deviation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inferior oblique overaction",
+          "cells": [
+            {
+              "text": "Obeys Hering's law, unlike DVD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superior oblique palsy",
+          "cells": [
+            {
+              "text": "Compensatory head tilt"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dissociated_vertical_deviation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Latent, well-controlled and asymptomatic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia and refraction",
+          "cells": [
+            {
+              "text": "Treat amblyopia and correct refractive error to optimise fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Manifest, significant deviation: superior rectus recession or inferior oblique anterior transposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Same-setting surgery",
+          "cells": [
+            {
+              "text": "Coexisting infantile esotropia and inferior oblique overaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nystagmus and head posture",
+          "cells": [
+            {
+              "text": "Manage associated latent nystagmus and abnormal head posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic follow-up",
+          "cells": [
+            {
+              "text": "Variability; recurrence or further surgery possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dissociated_vertical_deviation-dx-mgmt",
+      "title": "Diagnosis and management of dissociated vertical deviation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dissociated vertical deviation: upward drift of one eye on cover testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acquired deviation with neurological signs, or diplopia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological review for an acquired or paretic vertical deviation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Alternate cover test; gaze positions; nystagmus and head posture; orthoptics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the deviation fit DVD rather than inferior oblique overaction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inferior oblique overaction, vertical palsy, superior oblique palsy or skew",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe latent, well-controlled and asymptomatic cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat amblyopia and correct refractive error to optimise fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reserve surgery for manifest, significant deviation: rectus recession or IO transposition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address coexisting infantile esotropia and oblique overaction in the same setting",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Maintain orthoptic follow-up given variability and recurrence risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually benign and often subclinical; surgery reduces but may not abolish the deviation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

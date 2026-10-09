@@ -1,175 +1,473 @@
 {
- "id": "dpm1_cdg",
- "name": "DPM1-CDG (congenital disorder of glycosylation type Ie)",
- "aliases": [
-  "DPM1-CDG",
-  "CDG-Ie",
-  "DPM1"
- ],
- "class": "non_infective",
- "system": "Metabolic / Congenital disorders of glycosylation",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurometabolic and glycosylation references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "DPM1 encodes the catalytic subunit of dolichol-phosphate mannosyltransferase (DPM synthase), which produces dolichol-phosphate-mannose (Dol-P-Man).",
-   "Dol-P-Man is the shared mannose donor for four pathways, N-glycosylation, protein O-mannosylation (notably of alpha-dystroglycan), C-mannosylation and GPI-anchor synthesis, so DPM1-CDG uniquely bridges the CDGs and the dystroglycanopathies.",
-   "Clinically it presents with severe developmental delay, early epileptic encephalopathy, central hypotonia and acquired microcephaly.",
-   "Because O-mannosylation of alpha-dystroglycan is impaired, patients show a muscular dystrophy phenotype with elevated creatine kinase, a clue that separates DPM1 from purely N-glycosylation CDGs.",
-   "Carbohydrate-deficient transferrin shows a type I pattern; assessment of alpha-dystroglycan glycosylation on muscle biopsy is complementary.",
-   "DPM synthase is a multi-subunit complex, so the allelic disorders DPM2-CDG and DPM3-CDG give overlapping CDG-dystroglycanopathy pictures.",
-   "Optic atrophy with visual failure is a recognised feature."
+  "id": "dpm1_cdg",
+  "name": "DPM1-CDG (congenital disorder of glycosylation type Ie)",
+  "aliases": [
+    "DPM1-CDG",
+    "CDG-Ie",
+    "DPM1"
   ],
-  "pathophysiology": "DPM1-CDG is an autosomal recessive disorder caused by biallelic variants in DPM1, the gene encoding the catalytic subunit of dolichol-phosphate mannosyltransferase (DPM synthase). This endoplasmic reticulum enzyme transfers mannose from GDP-mannose onto dolichol phosphate to generate dolichol-phosphate-mannose, the obligatory mannose donor for the luminal steps of N-linked glycan assembly, for protein O-mannosylation (notably of alpha-dystroglycan), for C-mannosylation of tryptophan residues and for glycosylphosphatidylinositol (GPI) anchor biosynthesis. Because a single defective donor cripples several glycosylation pathways at once, DPM1-CDG combines the multisystem features of a type I CDG with a secondary dystroglycanopathy; deficient alpha-dystroglycan glycosylation disrupts its binding to extracellular-matrix ligands, producing muscle membrane instability, a muscular dystrophy phenotype with raised creatine kinase, while the accompanying N-glycan and GPI-anchor deficits drive a severe neurodevelopmental disorder.",
-  "additionalDifferentials": [
-   "DPM2-CDG and DPM3-CDG, the other DPM synthase subunit defects and closest siblings",
-   "MPDU1-CDG and DOLK-CDG, disorders of Dol-P-Man utilisation with overlapping dystroglycanopathy features",
-   "Primary alpha-dystroglycanopathies (POMT1, POMT2, POMGNT1, FKTN, FKRP) across the muscle-eye-brain and Walker-Warburg spectrum",
-   "PMM2-CDG (CDG-Ia), the prototypic type I CDG",
-   "Other genetic early-infantile epileptic encephalopathies",
-   "Congenital muscular dystrophies presenting with raised creatine kinase"
-  ],
-  "additionalInvestigations": [
-   "Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern)",
-   "Serum creatine kinase, which is persistently elevated",
-   "Molecular testing or exome sequencing for biallelic DPM1 variants",
-   "Muscle biopsy with alpha-dystroglycan glycosylation immunostaining",
-   "EEG and MRI brain for structural, migrational and atrophic changes",
-   "Ophthalmological assessment for optic atrophy",
-   "Flow cytometry for GPI-anchored proteins, given the shared donor pathway"
-  ],
-  "redFlags": [
-   "Refractory epileptic encephalopathy",
-   "Rapidly progressive weakness with respiratory muscle involvement",
-   "Markedly elevated creatine kinase with cardiac involvement or cardiomyopathy",
-   "Feeding failure with failure to thrive"
-  ],
-  "prognosis": "The disorder is generally severe, with significant neurodevelopmental impairment and reduced survival, although severity varies with the degree of residual enzyme activity.",
-  "pitfalls": [
-   "Missing the dystroglycanopathy and muscle component and classifying it as a pure N-glycosylation CDG.",
-   "Attributing an elevated creatine kinase to seizures or trauma rather than primary muscle disease.",
-   "Being falsely reassured by a normal-appearing transferrin pattern, so that genotyping and muscle studies are still required.",
-   "Overlooking cardiac surveillance despite the dystroglycanopathy overlap."
-  ],
-  "references": [
-   "Standard inborn errors of metabolism reference texts",
-   "Peer-reviewed reviews of congenital disorders of glycosylation",
-   "Clinical genetics and neurometabolic disease references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific or curative therapy exists, so management is entirely supportive and multidisciplinary",
-   "Control the early epileptic encephalopathy with antiseizure medication and manage central hypotonia with physiotherapy and posture and seating support",
-   "Provide nutritional support with safe-feeding measures, using nasogastric or gastrostomy feeding where swallowing is unsafe",
-   "Offer developmental, occupational and speech therapy for the severe neurodevelopmental impairment and the associated muscular dystrophy phenotype",
-   "Monitor with serial EEG, creatine kinase and neuroimaging, and arrange ophthalmological surveillance for optic atrophy",
-   "Coordinate care across metabolic medicine, paediatric neurology, ophthalmology and rehabilitation",
-   "Provide genetic counselling for this autosomal recessive condition, with carrier testing and prenatal counselling for the family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dpm1_cdg-pathway",
-   "title": "DPM1-CDG (congenital disorder of glycosylation type Ie): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "DPM1 encodes the catalytic subunit of dolichol-phosphate mannosyltransferase (DPM synthase), which produces dolichol-phosphate-mannose (Dol-P-Man).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory epileptic encephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern), Serum creatine kinase, which is persistently elevated, Molecular testing or exome sequencing for biallelic DPM1 variants"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific or curative therapy exists, so management is entirely supportive and multidisciplinary"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the dystroglycanopathy and muscle component and classifying it as a pure N-glycosylation CDG."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dpm1-cdg (congenital disorder of glycosylation type ie)."
-  }
- ],
- "tables": [
-  {
-   "id": "dpm1_cdg-matrix",
-   "title": "DPM1-CDG (congenital disorder of glycosylation type Ie): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "DPM1 encodes the catalytic subunit of dolichol-phosphate mannosyltransferase (DPM synthase), which produces",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Congenital disorders of glycosylation",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurometabolic and glycosylation references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "DPM1 encodes the catalytic subunit of dolichol-phosphate mannosyltransferase (DPM synthase), which produces dolichol-phosphate-mannose (Dol-P-Man).",
+      "Dol-P-Man is the shared mannose donor for four pathways, N-glycosylation, protein O-mannosylation (notably of alpha-dystroglycan), C-mannosylation and GPI-anchor synthesis, so DPM1-CDG uniquely bridges the CDGs and the dystroglycanopathies.",
+      "Clinically it presents with severe developmental delay, early epileptic encephalopathy, central hypotonia and acquired microcephaly.",
+      "Because O-mannosylation of alpha-dystroglycan is impaired, patients show a muscular dystrophy phenotype with elevated creatine kinase, a clue that separates DPM1 from purely N-glycosylation CDGs.",
+      "Carbohydrate-deficient transferrin shows a type I pattern; assessment of alpha-dystroglycan glycosylation on muscle biopsy is complementary.",
+      "DPM synthase is a multi-subunit complex, so the allelic disorders DPM2-CDG and DPM3-CDG give overlapping CDG-dystroglycanopathy pictures.",
+      "Optic atrophy with visual failure is a recognised feature."
     ],
-    [
-     "Key Investigations",
-     "Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern), Serum creatine kinase, which is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "DPM1-CDG is an autosomal recessive disorder caused by biallelic variants in DPM1, the gene encoding the catalytic subunit of dolichol-phosphate mannosyltransferase (DPM synthase). This endoplasmic reticulum enzyme transfers mannose from GDP-mannose onto dolichol phosphate to generate dolichol-phosphate-mannose, the obligatory mannose donor for the luminal steps of N-linked glycan assembly, for protein O-mannosylation (notably of alpha-dystroglycan), for C-mannosylation of tryptophan residues and for glycosylphosphatidylinositol (GPI) anchor biosynthesis. Because a single defective donor cripples several glycosylation pathways at once, DPM1-CDG combines the multisystem features of a type I CDG with a secondary dystroglycanopathy; deficient alpha-dystroglycan glycosylation disrupts its binding to extracellular-matrix ligands, producing muscle membrane instability, a muscular dystrophy phenotype with raised creatine kinase, while the accompanying N-glycan and GPI-anchor deficits drive a severe neurodevelopmental disorder.",
+    "additionalDifferentials": [
+      "DPM2-CDG and DPM3-CDG, the other DPM synthase subunit defects and closest siblings",
+      "MPDU1-CDG and DOLK-CDG, disorders of Dol-P-Man utilisation with overlapping dystroglycanopathy features",
+      "Primary alpha-dystroglycanopathies (POMT1, POMT2, POMGNT1, FKTN, FKRP) across the muscle-eye-brain and Walker-Warburg spectrum",
+      "PMM2-CDG (CDG-Ia), the prototypic type I CDG",
+      "Other genetic early-infantile epileptic encephalopathies",
+      "Congenital muscular dystrophies presenting with raised creatine kinase"
     ],
-    [
-     "Primary Differentials",
-     "DPM2-CDG and DPM3-CDG, the other DPM synthase subunit defects and closest siblings, MPDU1-CDG and DOLK-CDG, disorders of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern)",
+      "Serum creatine kinase, which is persistently elevated",
+      "Molecular testing or exome sequencing for biallelic DPM1 variants",
+      "Muscle biopsy with alpha-dystroglycan glycosylation immunostaining",
+      "EEG and MRI brain for structural, migrational and atrophic changes",
+      "Ophthalmological assessment for optic atrophy",
+      "Flow cytometry for GPI-anchored proteins, given the shared donor pathway"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific or curative therapy exists, so management is entirely supportive and multidisciplinary",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory epileptic encephalopathy",
+      "Rapidly progressive weakness with respiratory muscle involvement",
+      "Markedly elevated creatine kinase with cardiac involvement or cardiomyopathy",
+      "Feeding failure with failure to thrive"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the dystroglycanopathy and muscle component and classifying it as a pure N-glycosylation CDG.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is generally severe, with significant neurodevelopmental impairment and reduced survival, although severity varies with the degree of residual enzyme activity.",
+    "pitfalls": [
+      "Missing the dystroglycanopathy and muscle component and classifying it as a pure N-glycosylation CDG.",
+      "Attributing an elevated creatine kinase to seizures or trauma rather than primary muscle disease.",
+      "Being falsely reassured by a normal-appearing transferrin pattern, so that genotyping and muscle studies are still required.",
+      "Overlooking cardiac surveillance despite the dystroglycanopathy overlap."
+    ],
+    "references": [
+      "Standard inborn errors of metabolism reference texts",
+      "Peer-reviewed reviews of congenital disorders of glycosylation",
+      "Clinical genetics and neurometabolic disease references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific or curative therapy exists, so management is entirely supportive and multidisciplinary",
+      "Control the early epileptic encephalopathy with antiseizure medication and manage central hypotonia with physiotherapy and posture and seating support",
+      "Provide nutritional support with safe-feeding measures, using nasogastric or gastrostomy feeding where swallowing is unsafe",
+      "Offer developmental, occupational and speech therapy for the severe neurodevelopmental impairment and the associated muscular dystrophy phenotype",
+      "Monitor with serial EEG, creatine kinase and neuroimaging, and arrange ophthalmological surveillance for optic atrophy",
+      "Coordinate care across metabolic medicine, paediatric neurology, ophthalmology and rehabilitation",
+      "Provide genetic counselling for this autosomal recessive condition, with carrier testing and prenatal counselling for the family"
     ]
-   ],
-   "caption": "Overview comparison matrix for dpm1-cdg (congenital disorder of glycosylation type ie)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dpm1-cdg-real-image",
-   "title": "DPM1-CDG (congenital disorder of glycosylation type Ie): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dpm1_cdg-pathway",
+      "title": "DPM1-CDG (congenital disorder of glycosylation type Ie): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "DPM1 encodes the catalytic subunit of dolichol-phosphate mannosyltransferase (DPM synthase), which produces dolichol-phosphate-mannose (Dol-P-Man).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory epileptic encephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern), Serum creatine kinase, which is persistently elevated, Molecular testing or exome sequencing for biallelic DPM1 variants"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific or curative therapy exists, so management is entirely supportive and multidisciplinary"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the dystroglycanopathy and muscle component and classifying it as a pure N-glycosylation CDG."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dpm1-cdg (congenital disorder of glycosylation type ie)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dpm1_cdg-matrix",
+      "title": "DPM1-CDG (congenital disorder of glycosylation type Ie): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "DPM1 encodes the catalytic subunit of dolichol-phosphate mannosyltransferase (DPM synthase), which produces",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern), Serum creatine kinase, which is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "DPM2-CDG and DPM3-CDG, the other DPM synthase subunit defects and closest siblings, MPDU1-CDG and DOLK-CDG, disorders of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific or curative therapy exists, so management is entirely supportive and multidisciplinary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the dystroglycanopathy and muscle component and classifying it as a pure N-glycosylation CDG.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dpm1-cdg (congenital disorder of glycosylation type ie)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurometabolic and glycosylation references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dpm1_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin isoelectric focusing or carbohydrate-deficient transferrin",
+          "cells": [
+            {
+              "text": "Type I pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Persistently elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing or exome sequencing for biallelic DPM1 variants",
+          "cells": [
+            {
+              "text": "Biallelic DPM1 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with alpha-dystroglycan immunostaining",
+          "cells": [
+            {
+              "text": "Alpha-dystroglycan glycosylation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and MRI brain",
+          "cells": [
+            {
+              "text": "Structural, migrational and atrophic changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dpm1_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "DPM2-CDG and DPM3-CDG",
+          "cells": [
+            {
+              "text": "Other DPM synthase subunit defects, the closest relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PMM2-CDG",
+          "cells": [
+            {
+              "text": "Prototypic type I CDG; muscle and dystroglycan involvement separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary alpha-dystroglycanopathies (POMT1, FKTN, FKRP)",
+          "cells": [
+            {
+              "text": "Muscle-eye-brain and Walker-Warburg spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dpm1_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For the early epileptic encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and seating",
+          "cells": [
+            {
+              "text": "Central hypotonia, with posture and seating support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safe-feeding measures",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding where swallowing is unsafe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and speech therapy",
+          "cells": [
+            {
+              "text": "Severe neurodevelopmental impairment and muscular dystrophy phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "EEG, creatine kinase, neuroimaging and optic atrophy surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Dystroglycanopathy overlap carries cardiac risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier and prenatal counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dpm1_cdg-dx-mgmt",
+      "title": "Diagnosis and management of DPM1-CDG (congenital disorder of glycosylation type Ie)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DPM1-CDG: refractory seizures and muscle weakness with raised creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory seizures, respiratory weakness, cardiomyopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support and cardiac review for weakness or cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin focusing; creatine kinase; DPM1 testing; muscle biopsy; EEG and MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic DPM1 variants found with a type I transferrin pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DPM2 or DPM3 CDG, other dystroglycanopathies or PMM2-CDG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication for the early epileptic encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, posture and seating support for central hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Safe-feeding measures; nasogastric or gastrostomy feeding if swallowing unsafe",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental, occupational and speech therapy for the muscular phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial EEG, creatine kinase, neuroimaging and cardiac surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally severe, with reduced survival; varies with residual enzyme activity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

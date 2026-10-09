@@ -1,177 +1,580 @@
 {
- "id": "c1_inhibitor_deficiency",
- "name": "C1 inhibitor deficiency (hereditary angioedema types I and II)",
- "aliases": [
-  "hereditary angioedema",
-  "HAE",
-  "C1-INH deficiency",
-  "SERPING1",
-  "C1 esterase inhibitor deficiency",
-  "HAE type I",
-  "HAE type II"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Middleton's Allergy: Principles and Practice / WAO-EAACI hereditary angioedema guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Causes recurrent non-pruritic, non-urticarial angio-oedema of the skin, gastrointestinal tract and upper airway, with attacks that are bradykinin-mediated",
-   "Type I (about 85 percent) has low antigenic and functional C1 inhibitor; type II has normal or high antigenic level but reduced C1-inhibitor function",
-   "A persistently low complement C4 is a useful screening clue between and during attacks",
-   "Attacks lack the wheals of histaminergic angio-oedema and characteristically do not respond to antihistamines, corticosteroids or adrenaline",
-   "Laryngeal oedema can be fatal, and unexplained abdominal attacks may mimic a surgical abdomen",
-   "Attacks are triggered by trauma, dental or surgical procedures, infection, oestrogens and ACE inhibitors",
-   "Management separates on-demand attack treatment, short-term procedural prophylaxis, and long-term prophylaxis using C1-inhibitor concentrate or bradykinin-pathway-directed agents rather than antihistamines/steroids"
+  "id": "c1_inhibitor_deficiency",
+  "name": "C1 inhibitor deficiency (hereditary angioedema types I and II)",
+  "aliases": [
+    "hereditary angioedema",
+    "HAE",
+    "C1-INH deficiency",
+    "SERPING1",
+    "C1 esterase inhibitor deficiency",
+    "HAE type I",
+    "HAE type II"
   ],
-  "pathophysiology": "Hereditary angioedema from C1 inhibitor deficiency is an autosomal dominant disorder caused by SERPING1 mutations that reduce the quantity (type I) or function (type II) of C1 inhibitor. C1 inhibitor is the principal brake on the contact (kallikrein-kinin) system as well as on the classical complement and fibrinolytic pathways. When it is deficient, unrestrained activation of plasma kallikrein cleaves high-molecular-weight kininogen to release bradykinin, a potent vasodilator that increases vascular permeability. The resulting fluid extravasation produces the localised, self-limiting but potentially life-threatening swelling, and the mechanism explains why the swelling is bradykinin-driven rather than histamine-driven and does not respond to antiallergic therapy.",
-  "additionalDifferentials": [
-   "Histaminergic (mast-cell/allergic) angio-oedema with or without urticaria",
-   "ACE-inhibitor-induced angio-oedema",
-   "Acquired C1 inhibitor deficiency associated with lymphoproliferative or autoimmune disease",
-   "Hereditary angioedema with normal C1 inhibitor (e.g. factor XII or plasminogen mutations)",
-   "Idiopathic recurrent angio-oedema",
-   "Gastrointestinal or surgical causes of recurrent abdominal pain"
-  ],
-  "additionalInvestigations": [
-   "Complement C4 level as an initial screen",
-   "C1-inhibitor antigenic (quantitative) level",
-   "C1-inhibitor functional assay to distinguish type II",
-   "C1q level to help separate hereditary from acquired deficiency",
-   "SERPING1 genetic testing when biochemistry is equivocal or for family studies",
-   "Investigation for underlying lymphoproliferative or autoimmune disease if acquired deficiency is suspected"
-  ],
-  "redFlags": [
-   "Laryngeal or tongue swelling with any voice change, stridor or difficulty swallowing",
-   "Rapidly progressive facial or neck oedema threatening the airway",
-   "Severe unexplained abdominal attacks that could be mistaken for an acute surgical abdomen",
-   "Attacks provoked or worsened by an ACE inhibitor or oestrogen therapy"
-  ],
-  "prognosis": "With accurate diagnosis and access to modern on-demand and prophylactic therapy the outlook is good and quality of life can be near normal, but untreated laryngeal attacks carry a real risk of asphyxiation, making airway attacks the principal cause of mortality.",
-  "pitfalls": [
-   "Treating bradykinin-mediated attacks as allergic and relying on antihistamines, corticosteroids or adrenaline, which do not work for hereditary angioedema attacks",
-   "Being falsely reassured by a normal C1-inhibitor antigenic level in type II, where function is the abnormal parameter",
-   "Continuing ACE inhibitors or oestrogen-containing therapy that provoke attacks",
-   "Overlooking short-term prophylaxis before dental or surgical procedures"
-  ],
-  "references": [
-   "WAO-EAACI Guideline for the Management of Hereditary Angioedema",
-   "Middleton's Allergy: Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acute attacks on demand with C1-inhibitor concentrate, the B2-receptor antagonist icatibant, or the kallikrein inhibitor ecallantide, targeting the bradykinin-driven mechanism",
-   "Recognise and treat laryngeal oedema as an airway emergency with a low threshold for airway protection",
-   "Provide long-term prophylaxis for frequent or severe attacks with C1-inhibitor replacement, lanadelumab or berotralstat, using attenuated androgens or tranexamic acid as alternatives",
-   "Give pre-procedural short-term prophylaxis before surgery, dental work and other high-risk interventions",
-   "Avoid known precipitants including ACE inhibitors and oestrogens, minimise trauma and treat intercurrent infection",
-   "Avoid antihistamines, corticosteroids and adrenaline, which are ineffective, and ensure patients follow the correct treatment pathway with a written action plan and self-administration training",
-   "Offer genetic counselling and family testing given autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "c1_inhibitor_deficiency-pathway",
-   "title": "C1 inhibitor deficiency (hereditary angioedema types I and II): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Causes recurrent non-pruritic, non-urticarial angio-oedema of the skin, gastrointestinal tract and upper airway, with attacks that are bradykinin-mediated",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Laryngeal or tongue swelling with any voice change, stridor or difficulty swallowing",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Complement C4 level as an initial screen, C1-inhibitor antigenic (quantitative) level, C1-inhibitor functional assay to distinguish type II"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acute attacks on demand with C1-inhibitor concentrate, the B2-receptor antagonist icatibant, or the kallikrein inhibitor ecallantide, targeting the bradykinin-driven mechanism"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating bradykinin-mediated attacks as allergic and relying on antihistamines, corticosteroids or adrenaline, which do not work for hereditary angioedema attacks"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of c1 inhibitor deficiency (hereditary angioedema types i and ii)."
-  }
- ],
- "tables": [
-  {
-   "id": "c1_inhibitor_deficiency-matrix",
-   "title": "C1 inhibitor deficiency (hereditary angioedema types I and II): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Causes recurrent non-pruritic, non-urticarial angio-oedema of the skin, gastrointestinal tract and upper airway, with attacks",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Middleton's Allergy: Principles and Practice / WAO-EAACI hereditary angioedema guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Causes recurrent non-pruritic, non-urticarial angio-oedema of the skin, gastrointestinal tract and upper airway, with attacks that are bradykinin-mediated",
+      "Type I (about 85 percent) has low antigenic and functional C1 inhibitor; type II has normal or high antigenic level but reduced C1-inhibitor function",
+      "A persistently low complement C4 is a useful screening clue between and during attacks",
+      "Attacks lack the wheals of histaminergic angio-oedema and characteristically do not respond to antihistamines, corticosteroids or adrenaline",
+      "Laryngeal oedema can be fatal, and unexplained abdominal attacks may mimic a surgical abdomen",
+      "Attacks are triggered by trauma, dental or surgical procedures, infection, oestrogens and ACE inhibitors",
+      "Management separates on-demand attack treatment, short-term procedural prophylaxis, and long-term prophylaxis using C1-inhibitor concentrate or bradykinin-pathway-directed agents rather than antihistamines/steroids"
     ],
-    [
-     "Key Investigations",
-     "Complement C4 level as an initial screen, C1-inhibitor antigenic (quantitative) level, C1-inhibitor functional assay to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary angioedema from C1 inhibitor deficiency is an autosomal dominant disorder caused by SERPING1 mutations that reduce the quantity (type I) or function (type II) of C1 inhibitor. C1 inhibitor is the principal brake on the contact (kallikrein-kinin) system as well as on the classical complement and fibrinolytic pathways. When it is deficient, unrestrained activation of plasma kallikrein cleaves high-molecular-weight kininogen to release bradykinin, a potent vasodilator that increases vascular permeability. The resulting fluid extravasation produces the localised, self-limiting but potentially life-threatening swelling, and the mechanism explains why the swelling is bradykinin-driven rather than histamine-driven and does not respond to antiallergic therapy.",
+    "additionalDifferentials": [
+      "Histaminergic (mast-cell/allergic) angio-oedema with or without urticaria",
+      "ACE-inhibitor-induced angio-oedema",
+      "Acquired C1 inhibitor deficiency associated with lymphoproliferative or autoimmune disease",
+      "Hereditary angioedema with normal C1 inhibitor (e.g. factor XII or plasminogen mutations)",
+      "Idiopathic recurrent angio-oedema",
+      "Gastrointestinal or surgical causes of recurrent abdominal pain"
     ],
-    [
-     "Primary Differentials",
-     "Histaminergic (mast-cell/allergic) angio-oedema with or without urticaria, ACE-inhibitor-induced angio-oedema, Acquired C1",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Complement C4 level as an initial screen",
+      "C1-inhibitor antigenic (quantitative) level",
+      "C1-inhibitor functional assay to distinguish type II",
+      "C1q level to help separate hereditary from acquired deficiency",
+      "SERPING1 genetic testing when biochemistry is equivocal or for family studies",
+      "Investigation for underlying lymphoproliferative or autoimmune disease if acquired deficiency is suspected"
     ],
-    [
-     "Management Strategy",
-     "Treat acute attacks on demand with C1-inhibitor concentrate, the B2-receptor antagonist icatibant, or the kallikrein inhibitor",
-     "Core treatment modality"
+    "redFlags": [
+      "Laryngeal or tongue swelling with any voice change, stridor or difficulty swallowing",
+      "Rapidly progressive facial or neck oedema threatening the airway",
+      "Severe unexplained abdominal attacks that could be mistaken for an acute surgical abdomen",
+      "Attacks provoked or worsened by an ACE inhibitor or oestrogen therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating bradykinin-mediated attacks as allergic and relying on antihistamines, corticosteroids or adrenaline, which do not work",
-     "Prevent diagnostic or management error"
+    "prognosis": "With accurate diagnosis and access to modern on-demand and prophylactic therapy the outlook is good and quality of life can be near normal, but untreated laryngeal attacks carry a real risk of asphyxiation, making airway attacks the principal cause of mortality.",
+    "pitfalls": [
+      "Treating bradykinin-mediated attacks as allergic and relying on antihistamines, corticosteroids or adrenaline, which do not work for hereditary angioedema attacks",
+      "Being falsely reassured by a normal C1-inhibitor antigenic level in type II, where function is the abnormal parameter",
+      "Continuing ACE inhibitors or oestrogen-containing therapy that provoke attacks",
+      "Overlooking short-term prophylaxis before dental or surgical procedures"
+    ],
+    "references": [
+      "WAO-EAACI Guideline for the Management of Hereditary Angioedema",
+      "Middleton's Allergy: Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acute attacks on demand with C1-inhibitor concentrate, the B2-receptor antagonist icatibant, or the kallikrein inhibitor ecallantide, targeting the bradykinin-driven mechanism",
+      "Recognise and treat laryngeal oedema as an airway emergency with a low threshold for airway protection",
+      "Provide long-term prophylaxis for frequent or severe attacks with C1-inhibitor replacement, lanadelumab or berotralstat, using attenuated androgens or tranexamic acid as alternatives",
+      "Give pre-procedural short-term prophylaxis before surgery, dental work and other high-risk interventions",
+      "Avoid known precipitants including ACE inhibitors and oestrogens, minimise trauma and treat intercurrent infection",
+      "Avoid antihistamines, corticosteroids and adrenaline, which are ineffective, and ensure patients follow the correct treatment pathway with a written action plan and self-administration training",
+      "Offer genetic counselling and family testing given autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for c1 inhibitor deficiency (hereditary angioedema types i and ii)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "c1-inhibitor-deficiency-real-image",
-   "title": "C1 inhibitor deficiency (hereditary angioedema types I and II): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "c1_inhibitor_deficiency-pathway",
+      "title": "C1 inhibitor deficiency (hereditary angioedema types I and II): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Causes recurrent non-pruritic, non-urticarial angio-oedema of the skin, gastrointestinal tract and upper airway, with attacks that are bradykinin-mediated",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Laryngeal or tongue swelling with any voice change, stridor or difficulty swallowing",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Complement C4 level as an initial screen, C1-inhibitor antigenic (quantitative) level, C1-inhibitor functional assay to distinguish type II"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acute attacks on demand with C1-inhibitor concentrate, the B2-receptor antagonist icatibant, or the kallikrein inhibitor ecallantide, targeting the bradykinin-driven mechanism"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating bradykinin-mediated attacks as allergic and relying on antihistamines, corticosteroids or adrenaline, which do not work for hereditary angioedema attacks"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of c1 inhibitor deficiency (hereditary angioedema types i and ii)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "c1_inhibitor_deficiency-matrix",
+      "title": "C1 inhibitor deficiency (hereditary angioedema types I and II): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Causes recurrent non-pruritic, non-urticarial angio-oedema of the skin, gastrointestinal tract and upper airway, with attacks",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Complement C4 level as an initial screen, C1-inhibitor antigenic (quantitative) level, C1-inhibitor functional assay to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Histaminergic (mast-cell/allergic) angio-oedema with or without urticaria, ACE-inhibitor-induced angio-oedema, Acquired C1",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acute attacks on demand with C1-inhibitor concentrate, the B2-receptor antagonist icatibant, or the kallikrein inhibitor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating bradykinin-mediated attacks as allergic and relying on antihistamines, corticosteroids or adrenaline, which do not work",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for c1 inhibitor deficiency (hereditary angioedema types i and ii)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Middleton's Allergy: Principles and Practice / WAO-EAACI hereditary angioedema guidance",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 314-17",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "c1_inhibitor_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in C1 inhibitor deficiency",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Complement C4",
+          "cells": [
+            {
+              "text": "Persistently low; screening clue between and during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1-inhibitor antigenic level",
+          "cells": [
+            {
+              "text": "Low in type I disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1-inhibitor functional assay",
+          "cells": [
+            {
+              "text": "Reduced function in type II disease with normal or high antigenic level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1q level",
+          "cells": [
+            {
+              "text": "Separates hereditary from acquired deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SERPING1 genetic testing",
+          "cells": [
+            {
+              "text": "Equivocal biochemistry and family studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for lymphoproliferative or autoimmune disease",
+          "cells": [
+            {
+              "text": "When acquired deficiency is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c1_inhibitor_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of angio-oedema",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Histaminergic angio-oedema with or without urticaria",
+          "cells": [
+            {
+              "text": "Mast-cell mediated; wheals present; responds to antihistamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE-inhibitor-induced angio-oedema",
+          "cells": [
+            {
+              "text": "Drug history of an ACE inhibitor; bradykinin-driven"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired C1 inhibitor deficiency",
+          "cells": [
+            {
+              "text": "Later onset; low C1q; underlying lymphoproliferative or autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c1_inhibitor_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options in C1 inhibitor deficiency",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "On-demand attack treatment",
+          "cells": [
+            {
+              "text": "C1-inhibitor concentrate, icatibant or ecallantide"
+            },
+            {
+              "text": "Targets the bradykinin-driven mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngeal oedema",
+          "cells": [
+            {
+              "text": "Airway emergency with a low threshold for airway protection"
+            },
+            {
+              "text": "Principal cause of mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term prophylaxis",
+          "cells": [
+            {
+              "text": "C1-inhibitor replacement, lanadelumab or berotralstat; attenuated androgens or tranexamic acid as alternatives"
+            },
+            {
+              "text": "Frequent or severe attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-procedural prophylaxis",
+          "cells": [
+            {
+              "text": "Short-term prophylaxis before surgery, dental work and other high-risk interventions"
+            },
+            {
+              "text": "Before procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Precipitant avoidance",
+          "cells": [
+            {
+              "text": "Avoid ACE inhibitors and oestrogens; minimise trauma; treat intercurrent infection"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid ineffective drugs",
+          "cells": [
+            {
+              "text": "Antihistamines, corticosteroids and adrenaline do not work for attacks"
+            },
+            {
+              "text": "Written action plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Self-administration training; genetic counselling and family testing for autosomal dominant inheritance"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c1_inhibitor_deficiency-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Complement component deficiencies and the diseases they cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated diseases"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic pathway: C1q, C1r, C1s, C4",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C2",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C1 inhibitor",
+          "cells": [
+            {
+              "text": "Rare immune-complex disease, few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: C3",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor D",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: properdin",
+          "cells": [
+            {
+              "text": "Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor I",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor H",
+          "cells": [
+            {
+              "text": "Hemolytic uremic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C5, C6, C7, C8",
+          "cells": [
+            {
+              "text": "Recurrent Neisseria infections, immune-complex disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C9",
+          "cells": [
+            {
+              "text": "Rare Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Immune-complex syndromes here include systemic lupus erythematosus and SLE-like syndromes, glomerulonephritis and vasculitis syndromes."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "c1_inhibitor_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of C1 inhibitor deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent non-pruritic, non-urticarial angio-oedema of skin, gut or upper airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: laryngeal or tongue swelling, stridor, voice change or difficulty swallowing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: on-demand C1-inhibitor concentrate or icatibant; airway protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum C4; C1-INH antigenic and functional assays; C1q",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low C4 with reduced C1-INH level or function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Low C1q or later onset: screen for lymphoproliferative or autoimmune disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylaxis for frequent attacks; avoid ACE inhibitors and oestrogens; procedural cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider histaminergic angio-oedema or ACE-inhibitor angio-oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Lifelong; near-normal quality of life with modern therapy; airway attacks most dangerous",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,180 +1,514 @@
 {
- "id": "long_qt_syndrome_type_3",
- "name": "Long QT syndrome type 3",
- "aliases": [
-  "LQT3",
-  "Romano-Ward syndrome type 3",
-  "SCN5A-related long QT syndrome"
- ],
- "class": "non_infective",
- "system": "Cardiac channelopathy",
- "specialty": "Cardiology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Inherited arrhythmia and cardiac electrophysiology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by gain-of-function variants in SCN5A (Nav1.5) that impair inactivation of the cardiac sodium channel, producing a persistent late inward sodium current (late INa).",
-   "Less common than LQT1 and LQT2 but tends to carry the highest lethality per cardiac event.",
-   "Events characteristically occur at rest, during sleep or with bradycardia rather than on exertion, the opposite trigger profile to LQT1.",
-   "The resting ECG classically shows a long, flat isoelectric ST segment with a late-appearing, often narrow or peaked T wave.",
-   "Because QT lengthens at slow heart rates (reverse rate dependence), bradycardia and pauses are proarrhythmic and can precipitate torsades de pointes.",
-   "Late-sodium-current blockers such as mexiletine (and flecainide for selected variants) can shorten the QT interval and are used as adjuncts, sometimes guided by an acute drug-response assessment.",
-   "Beta-blockers are used but are less consistently protective than in LQT1 and LQT2.",
-   "SCN5A is allelic with Brugada syndrome, progressive cardiac conduction disease and sinus node dysfunction, so overlapping or mixed sodium-channel phenotypes occur."
+  "id": "long_qt_syndrome_type_3",
+  "name": "Long QT syndrome type 3",
+  "aliases": [
+    "LQT3",
+    "Romano-Ward syndrome type 3",
+    "SCN5A-related long QT syndrome"
   ],
-  "pathophysiology": "LQT3 is caused by gain-of-function variants in SCN5A, encoding Nav1.5, the cardiac voltage-gated sodium channel responsible for the rapid phase-0 depolarisation of the action potential. The variants disrupt fast inactivation of the channel, so a small fraction of channels repeatedly reopen or fail to close during the plateau, generating a sustained late (persistent) sodium current. This inward current prolongs action potential duration and the QT interval, an effect that is exaggerated at slow heart rates (reverse rate dependence), thereby favouring early afterdepolarisations and torsades de pointes when the heart is slow, at rest or during sleep. This stands in contrast to loss-of-function SCN5A variants, which reduce sodium current and cause Brugada syndrome and conduction disease; because the same gene can produce opposing functional effects, overlap syndromes with mixed features are recognised. Inheritance is autosomal dominant, and the nocturnal, bradycardia-dependent event pattern is a direct consequence of the reverse-rate-dependent repolarisation delay.",
-  "additionalDifferentials": [
-   "Other congenital long QT subtypes, particularly LQT1 and LQT2",
-   "Brugada syndrome and other SCN5A overlap or conduction disorders",
-   "Acquired or drug-induced QT prolongation",
-   "Electrolyte disturbances affecting repolarisation",
-   "Sinus node dysfunction or bradyarrhythmia causing pause-dependent torsades",
-   "Sudden unexplained nocturnal death and sudden infant death",
-   "Structural heart disease with secondary repolarisation abnormality"
-  ],
-  "additionalInvestigations": [
-   "Twelve-lead ECG assessing ST-segment length and the late-appearing T-wave morphology",
-   "Ambulatory Holter monitoring to capture rest and night-time events and rate dependence",
-   "Genetic testing including SCN5A, with cascade family screening",
-   "Serum electrolytes",
-   "Evaluation for overlapping Brugada or conduction-system phenotype",
-   "Acute late-sodium-current-blocker (for example mexiletine) response testing for QT shortening",
-   "Exercise testing to demonstrate rate-dependent QT behaviour"
-  ],
-  "redFlags": [
-   "Syncope or cardiac arrest occurring at rest or during sleep",
-   "Extremely long QT with pause-dependent torsades de pointes",
-   "Family history of sudden nocturnal death or sudden infant death",
-   "Symptomatic marked bradycardia",
-   "Aborted cardiac arrest or documented torsades de pointes"
-  ],
-  "prognosis": "Per-event lethality is the highest of the classic subtypes. With late-sodium-current blockade, prevention of bradycardia and pauses (including pacing where indicated) and defibrillator therapy for high-risk individuals, outcomes improve, but the malignant nocturnal and rest-related event profile warrants sustained vigilance.",
-  "pitfalls": [
-   "Offering false reassurance from a negative exercise test, since events are rest and sleep related",
-   "Permitting bradycardia or long pauses, which are proarrhythmic in this subtype",
-   "Relying on beta-blockers alone for protection",
-   "Overlooking a Brugada or conduction overlap phenotype, especially before using sodium channel blockers",
-   "Assuming a borderline resting QT excludes disease"
-  ],
-  "references": [
-   "Cardiac electrophysiology reference texts",
-   "International inherited arrhythmia / long QT syndrome consensus guidelines",
-   "Clinical cardiovascular genetics references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use late-sodium-current blockade with mexiletine, or flecainide for selected variants, to shorten the QT interval, ideally guided by an acute drug-response assessment",
-   "Add beta-blockade as adjunctive therapy, recognising it is less protective than in the potassium-channel subtypes",
-   "Prevent bradycardia and pauses, which are proarrhythmic through reverse rate dependence, using cardiac pacing where indicated",
-   "Avoid QT-prolonging drugs and maintain normal electrolytes",
-   "Implant a cardioverter-defibrillator for high-risk individuals given the high per-event lethality and the malignant rest and nocturnal event profile",
-   "Treat acute torsades de pointes with intravenous magnesium and rate support, and defibrillate sustained polymorphic ventricular tachycardia or arrest",
-   "Offer SCN5A genetic testing with cascade family screening and evaluate for an overlapping Brugada or conduction-system phenotype",
-   "Manage through an inherited cardiac conditions service and escalate for syncope or documented arrhythmia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "long_qt_syndrome_type_3-pathway",
-   "title": "Long QT syndrome type 3: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by gain-of-function variants in SCN5A (Nav1.5) that impair inactivation of the cardiac sodium channel, producing a persistent late inward sodium current (late INa).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope or cardiac arrest occurring at rest or during sleep",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Twelve-lead ECG assessing ST-segment length and the late-appearing T-wave morphology, Ambulatory Holter monitoring to capture rest and night-time events and rate dependence, Genetic testing including SCN5A, with cascade"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use late-sodium-current blockade with mexiletine, or flecainide for selected variants, to shorten the QT interval, ideally guided by an acute drug-response assessment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Offering false reassurance from a negative exercise test, since events are rest and sleep related"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of long qt syndrome type 3."
-  }
- ],
- "tables": [
-  {
-   "id": "long_qt_syndrome_type_3-matrix",
-   "title": "Long QT syndrome type 3: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by gain-of-function variants in SCN5A (Nav1.5) that impair inactivation of the cardiac sodium channel, producing a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiac channelopathy",
+  "specialty": "Cardiology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Inherited arrhythmia and cardiac electrophysiology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by gain-of-function variants in SCN5A (Nav1.5) that impair inactivation of the cardiac sodium channel, producing a persistent late inward sodium current (late INa).",
+      "Less common than LQT1 and LQT2 but tends to carry the highest lethality per cardiac event.",
+      "Events characteristically occur at rest, during sleep or with bradycardia rather than on exertion, the opposite trigger profile to LQT1.",
+      "The resting ECG classically shows a long, flat isoelectric ST segment with a late-appearing, often narrow or peaked T wave.",
+      "Because QT lengthens at slow heart rates (reverse rate dependence), bradycardia and pauses are proarrhythmic and can precipitate torsades de pointes.",
+      "Late-sodium-current blockers such as mexiletine (and flecainide for selected variants) can shorten the QT interval and are used as adjuncts, sometimes guided by an acute drug-response assessment.",
+      "Beta-blockers are used but are less consistently protective than in LQT1 and LQT2.",
+      "SCN5A is allelic with Brugada syndrome, progressive cardiac conduction disease and sinus node dysfunction, so overlapping or mixed sodium-channel phenotypes occur."
     ],
-    [
-     "Key Investigations",
-     "Twelve-lead ECG assessing ST-segment length and the late-appearing T-wave morphology, Ambulatory Holter monitoring to capture",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "LQT3 is caused by gain-of-function variants in SCN5A, encoding Nav1.5, the cardiac voltage-gated sodium channel responsible for the rapid phase-0 depolarisation of the action potential. The variants disrupt fast inactivation of the channel, so a small fraction of channels repeatedly reopen or fail to close during the plateau, generating a sustained late (persistent) sodium current. This inward current prolongs action potential duration and the QT interval, an effect that is exaggerated at slow heart rates (reverse rate dependence), thereby favouring early afterdepolarisations and torsades de pointes when the heart is slow, at rest or during sleep. This stands in contrast to loss-of-function SCN5A variants, which reduce sodium current and cause Brugada syndrome and conduction disease; because the same gene can produce opposing functional effects, overlap syndromes with mixed features are recognised. Inheritance is autosomal dominant, and the nocturnal, bradycardia-dependent event pattern is a direct consequence of the reverse-rate-dependent repolarisation delay.",
+    "additionalDifferentials": [
+      "Other congenital long QT subtypes, particularly LQT1 and LQT2",
+      "Brugada syndrome and other SCN5A overlap or conduction disorders",
+      "Acquired or drug-induced QT prolongation",
+      "Electrolyte disturbances affecting repolarisation",
+      "Sinus node dysfunction or bradyarrhythmia causing pause-dependent torsades",
+      "Sudden unexplained nocturnal death and sudden infant death",
+      "Structural heart disease with secondary repolarisation abnormality"
     ],
-    [
-     "Primary Differentials",
-     "Other congenital long QT subtypes, particularly LQT1 and LQT2, Brugada syndrome and other SCN5A overlap or conduction disorders,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Twelve-lead ECG assessing ST-segment length and the late-appearing T-wave morphology",
+      "Ambulatory Holter monitoring to capture rest and night-time events and rate dependence",
+      "Genetic testing including SCN5A, with cascade family screening",
+      "Serum electrolytes",
+      "Evaluation for overlapping Brugada or conduction-system phenotype",
+      "Acute late-sodium-current-blocker (for example mexiletine) response testing for QT shortening",
+      "Exercise testing to demonstrate rate-dependent QT behaviour"
     ],
-    [
-     "Management Strategy",
-     "Use late-sodium-current blockade with mexiletine, or flecainide for selected variants, to shorten the QT interval, ideally guided",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope or cardiac arrest occurring at rest or during sleep",
+      "Extremely long QT with pause-dependent torsades de pointes",
+      "Family history of sudden nocturnal death or sudden infant death",
+      "Symptomatic marked bradycardia",
+      "Aborted cardiac arrest or documented torsades de pointes"
     ],
-    [
-     "Clinical Pitfall",
-     "Offering false reassurance from a negative exercise test, since events are rest and sleep related",
-     "Prevent diagnostic or management error"
+    "prognosis": "Per-event lethality is the highest of the classic subtypes. With late-sodium-current blockade, prevention of bradycardia and pauses (including pacing where indicated) and defibrillator therapy for high-risk individuals, outcomes improve, but the malignant nocturnal and rest-related event profile warrants sustained vigilance.",
+    "pitfalls": [
+      "Offering false reassurance from a negative exercise test, since events are rest and sleep related",
+      "Permitting bradycardia or long pauses, which are proarrhythmic in this subtype",
+      "Relying on beta-blockers alone for protection",
+      "Overlooking a Brugada or conduction overlap phenotype, especially before using sodium channel blockers",
+      "Assuming a borderline resting QT excludes disease"
+    ],
+    "references": [
+      "Cardiac electrophysiology reference texts",
+      "International inherited arrhythmia / long QT syndrome consensus guidelines",
+      "Clinical cardiovascular genetics references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use late-sodium-current blockade with mexiletine, or flecainide for selected variants, to shorten the QT interval, ideally guided by an acute drug-response assessment",
+      "Add beta-blockade as adjunctive therapy, recognising it is less protective than in the potassium-channel subtypes",
+      "Prevent bradycardia and pauses, which are proarrhythmic through reverse rate dependence, using cardiac pacing where indicated",
+      "Avoid QT-prolonging drugs and maintain normal electrolytes",
+      "Implant a cardioverter-defibrillator for high-risk individuals given the high per-event lethality and the malignant rest and nocturnal event profile",
+      "Treat acute torsades de pointes with intravenous magnesium and rate support, and defibrillate sustained polymorphic ventricular tachycardia or arrest",
+      "Offer SCN5A genetic testing with cascade family screening and evaluate for an overlapping Brugada or conduction-system phenotype",
+      "Manage through an inherited cardiac conditions service and escalate for syncope or documented arrhythmia"
     ]
-   ],
-   "caption": "Overview comparison matrix for long qt syndrome type 3."
-  }
- ],
- "diagrams": [
-  {
-   "id": "long-qt-syndrome-type-3-real-image",
-   "title": "Long QT syndrome type 3: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "long_qt_syndrome_type_3-pathway",
+      "title": "Long QT syndrome type 3: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by gain-of-function variants in SCN5A (Nav1.5) that impair inactivation of the cardiac sodium channel, producing a persistent late inward sodium current (late INa).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope or cardiac arrest occurring at rest or during sleep",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Twelve-lead ECG assessing ST-segment length and the late-appearing T-wave morphology, Ambulatory Holter monitoring to capture rest and night-time events and rate dependence, Genetic testing including SCN5A, with cascade"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use late-sodium-current blockade with mexiletine, or flecainide for selected variants, to shorten the QT interval, ideally guided by an acute drug-response assessment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Offering false reassurance from a negative exercise test, since events are rest and sleep related"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of long qt syndrome type 3."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "long_qt_syndrome_type_3-matrix",
+      "title": "Long QT syndrome type 3: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by gain-of-function variants in SCN5A (Nav1.5) that impair inactivation of the cardiac sodium channel, producing a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Twelve-lead ECG assessing ST-segment length and the late-appearing T-wave morphology, Ambulatory Holter monitoring to capture",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other congenital long QT subtypes, particularly LQT1 and LQT2, Brugada syndrome and other SCN5A overlap or conduction disorders,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use late-sodium-current blockade with mexiletine, or flecainide for selected variants, to shorten the QT interval, ideally guided",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Offering false reassurance from a negative exercise test, since events are rest and sleep related",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for long qt syndrome type 3."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited arrhythmia and cardiac electrophysiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "long_qt_syndrome_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Long, flat ST segment with a late-appearing, narrow or peaked T wave"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory Holter monitoring",
+          "cells": [
+            {
+              "text": "Rest and night-time events; rate dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN5A genetic testing with cascade screening",
+          "cells": [
+            {
+              "text": "Confirms the variant; relatives screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes",
+          "cells": [
+            {
+              "text": "Repolarisation factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for Brugada or conduction overlap",
+          "cells": [
+            {
+              "text": "Overlapping sodium-channel phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute late-sodium-current blocker response testing",
+          "cells": [
+            {
+              "text": "QT shortening with mexiletine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise testing",
+          "cells": [
+            {
+              "text": "Rate-dependent QT behaviour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "long_qt_syndrome_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brugada syndrome and other SCN5A overlap phenotypes",
+          "cells": [
+            {
+              "text": "Shared sodium-channel gene; overlap affects drug choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinus node dysfunction or bradyarrhythmia",
+          "cells": [
+            {
+              "text": "Pauses cause pause-dependent torsades"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sudden unexplained nocturnal death",
+          "cells": [
+            {
+              "text": "Nocturnal events; SCN5A testing is relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LQT1 and LQT2",
+          "cells": [
+            {
+              "text": "Other congenital subtypes; exertional or auditory triggers differ"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "long_qt_syndrome_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Late-sodium-current blockade",
+          "cells": [
+            {
+              "text": "Mexiletine, or flecainide for selected variants, guided by acute response testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Adjunct; less consistently protective than in LQT1 and LQT2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bradycardia and pauses",
+          "cells": [
+            {
+              "text": "Prevented, with pacing where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug and electrolyte safety",
+          "cells": [
+            {
+              "text": "Avoid QT-prolonging drugs; maintain normal electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "High-risk individuals, given high per-event lethality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute arrhythmia",
+          "cells": [
+            {
+              "text": "Intravenous magnesium and rate support for torsades; defibrillation for arrest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and family screening",
+          "cells": [
+            {
+              "text": "SCN5A testing; assess for overlapping Brugada phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist service",
+          "cells": [
+            {
+              "text": "Inherited cardiac conditions service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "long_qt_syndrome_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Long QT syndrome type 3",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Syncope or nocturnal collapse at rest or in sleep, with a long flat ST segment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (arrest at rest or in sleep, pause-dependent torsades, bradycardia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent pacing assessment and defibrillation for arrest or torsades",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG, Holter with night monitoring, SCN5A testing, electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic SCN5A gain-of-function variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider LQT1 or LQT2, Brugada syndrome or bradycardia-related torsades",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mexiletine or flecainide to shorten the QT, guided by acute testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Beta-blockade as adjunct only",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pacing to prevent bradycardia and pauses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid QT-prolonging drugs and maintain electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardioverter-defibrillator for high-risk individuals",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Highest per-event lethality; prevent pauses and use an ICD for high-risk patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

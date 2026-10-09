@@ -1,191 +1,709 @@
 {
- "id": "histoplasmosis",
- "name": "Histoplasmosis",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 218,
- "page": 1692,
- "aliases": [
-  "Histoplasma capsulatum infection"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1692-1696",
-  "clinicalPearls": [
-   "Caused by Histoplasma capsulatum, a thermal dimorphic fungus; H. capsulatum var. capsulatum predominates in North America, while var. duboisii in Africa produces larger yeasts and a clinically distinct disease with frequent skin and bone involvement (p.1692-1693, 1695).",
-   "Most prevalent endemic mycosis in North America, classically the Ohio and Mississippi river valleys, with foci in Mexico, Central/South America (Brazil), Africa and Asia; soil enriched with bird or bat droppings promotes growth, and disruption aerosolizes microconidia (p.1693).",
-   "High-exposure, high-attack-rate activities include spelunking (cave exposure), excavation, cleaning chicken coops, demolition/remodeling of old buildings and cutting dead trees (p.1693).",
-   "Clinical spectrum spans asymptomatic infection to life-threatening illness; severity depends on intensity of exposure, host immune status and underlying lung architecture (p.1693-1694).",
-   "Acute pulmonary disease appears 1-4 weeks after exposure as a flulike illness (fever, chills, sweats, headache, myalgia, anorexia, dry cough, dyspnea, chest pain), often with hilar/mediastinal adenopathy on chest radiograph (p.1694).",
-   "Arthralgia/arthritis with erythema nodosum occurs in 5-10% of acute cases and represents an inflammatory response, not extrapulmonary spread; pericarditis may also develop (p.1694).",
-   "Chronic cavitary pulmonary histoplasmosis occurs in smokers with structural lung disease (e.g., bullous emphysema), with productive cough, dyspnea, low-grade fever, night sweats, weight loss and upper-lobe cavitary infiltrates resembling tuberculosis (p.1694).",
-   "Progressive disseminated histoplasmosis (PDH) involves the reticuloendothelial system - lungs, bone marrow, spleen, liver, adrenal glands and mucocutaneous membranes; common findings are fever, weight loss, hepatosplenomegaly and thrombocytopenia, with possible meningitis, oral/GI ulceration and adrenal insufficiency (p.1694).",
-   "Fungal culture is the diagnostic gold standard but may take up to 1 month and is often negative in less severe cases; in PDH yield is highest from BAL fluid, bone marrow aspirate and blood (p.1694).",
-   "Detection of Histoplasma antigen in body fluids is extremely useful for PDH and acute diffuse pulmonary disease (sensitivity >95% in PDH, >80% in severe acute pulmonary disease when both urine and serum are tested); urine is often positive in disseminated disease (p.1694-1695, 1693).",
-   "Antigen levels correlate with severity in PDH, fall with effective therapy, and a stable or rising level predicts relapse or treatment failure (p.1695-1696).",
-   "Serology (immunodiffusion, complement fixation, IgG/IgM EIA) is especially useful in immunocompetent patients and for chronic pulmonary disease; IgM appears first and declines, IgG appears later and rises (p.1695)."
+  "id": "histoplasmosis",
+  "name": "Histoplasmosis",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 218,
+  "page": 1692,
+  "aliases": [
+    "Histoplasma capsulatum infection"
   ],
-  "pathophysiology": "Infection follows inhalation of microconidia, the naturally infectious mycelial form; particles 2-4 micrometers reach terminal bronchioles and alveoli where alveolar macrophages engulf them and they transform into small (2-5 micrometer) narrow-budding yeasts, a calcium- and iron-dependent process central to pathogenesis. Yeasts evade the immune system and multiply within resting macrophages, then translocate via phagosomes to draining lymph nodes and spread hematogenously throughout the reticuloendothelial system. Effective cellular immunity develops about 2 weeks after infection, with T-cell interferon-gamma helping macrophages kill the organism; IL-12 and TNF-alpha are essential to cellular immunity. In immunocompetent hosts, organized granulomas contain the organisms and typically fibrose and calcify (calcified lung nodules, mediastinal nodes, hepatosplenic calcifications), and infection confers protective immunity to reinfection. With impaired cellular immunity, infection is not contained and disseminates as progressive disseminated histoplasmosis. Structural lung disease such as emphysema impairs clearance and leads to chronic pulmonary disease with progressive inflammation, necrosis and fibrosis mimicking cavitary tuberculosis (p.1693-1694).",
-  "additionalDifferentials": [
-   "Tuberculosis (chronic cavitary disease)",
-   "Sarcoidosis",
-   "Lymphoma",
-   "Primary or metastatic lung cancer (asymptomatic pulmonary nodules)",
-   "Other endemic/dimorphic mycoses: blastomycosis, coccidioidomycosis, paracoccidioidomycosis, talaromycosis"
-  ],
-  "infectionMimics": [
-   "Cavitary tuberculosis (chronic pulmonary histoplasmosis mimics this radiographically and pathologically)",
-   "Blastomycosis",
-   "Coccidioidomycosis",
-   "Paracoccidioidomycosis",
-   "Talaromycosis"
-  ],
-  "nonInfectiousMimics": [
-   "Sarcoidosis",
-   "Lymphoma",
-   "Primary lung cancer (asymptomatic controlled nodules found on screening CT in smokers)",
-   "Metastatic cancer"
-  ],
-  "additionalInvestigations": [
-   "Histoplasma antigen detection in urine and serum (and BAL fluid; CSF for CNS disease)",
-   "Lateral flow antigen point-of-care testing for resource-limited settings",
-   "Histoplasma serology: immunodiffusion (ID), complement fixation (CF), IgG and IgM enzyme immunoassay (EIA)",
-   "Fungal culture (BAL fluid, sputum/bronchial washings, blood, bone marrow aspirate; positive in ~75% of PDH and chronic pulmonary disease)",
-   "Fungal stains/cytopathology or biopsy of affected organ (BAL fluid, bone marrow, liver, adrenal) showing small narrow-budding intracellular yeasts",
-   "Chest radiograph/CT (pneumonitis, hilar/mediastinal adenopathy, upper-lobe cavitation, calcified nodes)",
-   "Workup for rare genetic immunodeficiencies of the IFN-gamma and TNF-alpha pathways in healthy individuals presenting with PDH"
-  ],
-  "redFlags": [
-   "Progressive disseminated histoplasmosis (PDH), typically in immunocompromised hosts (~70% of cases), especially AIDS with CD4+ count <200/microliter",
-   "Acute rapidly fatal PDH with diffuse interstitial/reticulonodular infiltrates, respiratory failure, shock, coagulopathy and multiorgan failure",
-   "Onset of PDH while on anti-TNF-alpha therapy, methotrexate or other biologic/immunosuppressive agents, or post-transplant immunosuppression",
-   "CNS involvement: meningitis or focal brain lesions",
-   "Adrenal insufficiency from adrenal involvement",
-   "Fibrosing mediastinitis causing superior vena cava syndrome, pulmonary vessel obstruction or airway obstruction (fatal in up to one-third of cases)",
-   "Large mediastinal masses compressing great vessels, airways or esophagus, or rupturing to form fistulae (e.g., bronchoesophageal)"
-  ],
-  "prognosis": "Most immunocompetent individuals with low-level exposure are asymptomatic or have a mild, self-limited illness that resolves without therapy; up to 75% of adults in endemic areas have evidence of prior infection without clinical disease. Untreated chronic cavitary disease is slowly progressive. Progressive disseminated histoplasmosis ranges from an acute, rapidly fatal course to a subacute/chronic one and is a devastating illness requiring prompt recognition, particularly in AIDS or anti-TNF therapy. Fibrosing mediastinitis is fatal in up to one-third of cases. Antigen levels track severity and response, with stable or rising levels signaling treatment failure or relapse (p.1693-1696).",
-  "pitfalls": [
-   "Chronic cavitary histoplasmosis closely mimics cavitary tuberculosis radiographically (upper-lobe infiltrates, cavitation, pleural thickening) and may be misdiagnosed as TB, sarcoidosis, lymphoma or malignancy.",
-   "Asymptomatic calcified nodules from controlled prior infection may be mistaken for malignancy on screening CT in smokers from endemic areas.",
-   "Fungal stains may misidentify staining artifacts or other fungal elements as Histoplasma yeasts.",
-   "Persistent antibodies for several years after infection can cause a false misdiagnosis of active histoplasmosis in a patient with another disease process.",
-   "ID and CF serology are insensitive early in infection and have reduced sensitivity in immunosuppressed patients, especially organ transplant recipients.",
-   "Antigen testing cross-reacts with African histoplasmosis, blastomycosis, coccidioidomycosis, paracoccidioidomycosis, talaromycosis and rarely aspergillosis.",
-   "Fibrosing mediastinitis is a chronic fibrotic reaction to past infection, not active disease, and does NOT respond to antifungal therapy.",
-   "Unlike latent tuberculosis, inactive histoplasmosis does NOT reactivate."
-  ],
-  "severityClassification": "Clinical forms (Harrison Table 218-1): acute pulmonary, mild to moderate; acute pulmonary, severe with respiratory failure (ARDS); chronic/cavitary pulmonary; progressive disseminated (PDH); and central nervous system disease. Severity is graded by intensity of exposure, host immune status and underlying lung architecture (p.1693-1695).",
-  "references": [
-   "Harrison 22e p.1692-1696"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observation without antifungals for mild, self-limited acute pulmonary disease in immunocompetent hosts",
-   "Azole antifungal (itraconazole) for mild-to-moderate disease and as step-down consolidation therapy",
-   "Liposomal amphotericin B for severe or progressive disseminated disease, followed by itraconazole",
-   "Corticosteroids as an adjunct in severe respiratory compromise or inflammatory complications",
-   "In HIV and other immunocompromised patients, antiretroviral therapy, treatment of the acute infection, and prolonged azole suppression as secondary prophylaxis",
-   "Monitor serum and urine Histoplasma antigen to gauge treatment response and detect relapse",
-   "Manage complications such as pericarditis and fibrosing mediastinitis, and reduce high-risk environmental exposure"
-  ]
- },
- "algorithms": [
-  {
-   "id": "histoplasmosis-pathway",
-   "title": "Histoplasmosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Histoplasma capsulatum, a thermal dimorphic fungus; H. capsulatum var. capsulatum predominates in North America, while var. duboisii in Africa produces larger yeasts and a clinically distinct disease with frequent skin and bone",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive disseminated histoplasmosis (PDH), typically in immunocompromised hosts (~70% of cases), especially AIDS with CD4+ count <200/microliter",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Histoplasma antigen detection in urine and serum (and BAL fluid; CSF for CNS disease), Lateral flow antigen point-of-care testing for resource-limited settings, Histoplasma serology: immunodiffusion (ID), complement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observation without antifungals for mild, self-limited acute pulmonary disease in immunocompetent hosts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Chronic cavitary histoplasmosis closely mimics cavitary tuberculosis radiographically (upper-lobe infiltrates, cavitation, pleural thickening) and may be misdiagnosed as TB, sarcoidosis, lymphoma or malignancy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of histoplasmosis."
-  }
- ],
- "tables": [
-  {
-   "id": "histoplasmosis-matrix",
-   "title": "Histoplasmosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Histoplasma capsulatum, a thermal dimorphic fungus; H. capsulatum var. capsulatum predominates in North America, while",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1692-1696",
+    "clinicalPearls": [
+      "Caused by Histoplasma capsulatum, a thermal dimorphic fungus; H. capsulatum var. capsulatum predominates in North America, while var. duboisii in Africa produces larger yeasts and a clinically distinct disease with frequent skin and bone involvement (p.1692-1693, 1695).",
+      "Most prevalent endemic mycosis in North America, classically the Ohio and Mississippi river valleys, with foci in Mexico, Central/South America (Brazil), Africa and Asia; soil enriched with bird or bat droppings promotes growth, and disruption aerosolizes microconidia (p.1693).",
+      "High-exposure, high-attack-rate activities include spelunking (cave exposure), excavation, cleaning chicken coops, demolition/remodeling of old buildings and cutting dead trees (p.1693).",
+      "Clinical spectrum spans asymptomatic infection to life-threatening illness; severity depends on intensity of exposure, host immune status and underlying lung architecture (p.1693-1694).",
+      "Acute pulmonary disease appears 1-4 weeks after exposure as a flulike illness (fever, chills, sweats, headache, myalgia, anorexia, dry cough, dyspnea, chest pain), often with hilar/mediastinal adenopathy on chest radiograph (p.1694).",
+      "Arthralgia/arthritis with erythema nodosum occurs in 5-10% of acute cases and represents an inflammatory response, not extrapulmonary spread; pericarditis may also develop (p.1694).",
+      "Chronic cavitary pulmonary histoplasmosis occurs in smokers with structural lung disease (e.g., bullous emphysema), with productive cough, dyspnea, low-grade fever, night sweats, weight loss and upper-lobe cavitary infiltrates resembling tuberculosis (p.1694).",
+      "Progressive disseminated histoplasmosis (PDH) involves the reticuloendothelial system - lungs, bone marrow, spleen, liver, adrenal glands and mucocutaneous membranes; common findings are fever, weight loss, hepatosplenomegaly and thrombocytopenia, with possible meningitis, oral/GI ulceration and adrenal insufficiency (p.1694).",
+      "Fungal culture is the diagnostic gold standard but may take up to 1 month and is often negative in less severe cases; in PDH yield is highest from BAL fluid, bone marrow aspirate and blood (p.1694).",
+      "Detection of Histoplasma antigen in body fluids is extremely useful for PDH and acute diffuse pulmonary disease (sensitivity >95% in PDH, >80% in severe acute pulmonary disease when both urine and serum are tested); urine is often positive in disseminated disease (p.1694-1695, 1693).",
+      "Antigen levels correlate with severity in PDH, fall with effective therapy, and a stable or rising level predicts relapse or treatment failure (p.1695-1696).",
+      "Serology (immunodiffusion, complement fixation, IgG/IgM EIA) is especially useful in immunocompetent patients and for chronic pulmonary disease; IgM appears first and declines, IgG appears later and rises (p.1695)."
     ],
-    [
-     "Key Investigations",
-     "Histoplasma antigen detection in urine and serum (and BAL fluid; CSF for CNS disease), Lateral flow antigen point-of-care testing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infection follows inhalation of microconidia, the naturally infectious mycelial form; particles 2-4 micrometers reach terminal bronchioles and alveoli where alveolar macrophages engulf them and they transform into small (2-5 micrometer) narrow-budding yeasts, a calcium- and iron-dependent process central to pathogenesis. Yeasts evade the immune system and multiply within resting macrophages, then translocate via phagosomes to draining lymph nodes and spread hematogenously throughout the reticuloendothelial system. Effective cellular immunity develops about 2 weeks after infection, with T-cell interferon-gamma helping macrophages kill the organism; IL-12 and TNF-alpha are essential to cellular immunity. In immunocompetent hosts, organized granulomas contain the organisms and typically fibrose and calcify (calcified lung nodules, mediastinal nodes, hepatosplenic calcifications), and infection confers protective immunity to reinfection. With impaired cellular immunity, infection is not contained and disseminates as progressive disseminated histoplasmosis. Structural lung disease such as emphysema impairs clearance and leads to chronic pulmonary disease with progressive inflammation, necrosis and fibrosis mimicking cavitary tuberculosis (p.1693-1694).",
+    "additionalDifferentials": [
+      "Tuberculosis (chronic cavitary disease)",
+      "Sarcoidosis",
+      "Lymphoma",
+      "Primary or metastatic lung cancer (asymptomatic pulmonary nodules)",
+      "Other endemic/dimorphic mycoses: blastomycosis, coccidioidomycosis, paracoccidioidomycosis, talaromycosis"
     ],
-    [
-     "Primary Differentials",
-     "Tuberculosis (chronic cavitary disease), Sarcoidosis, Lymphoma",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Cavitary tuberculosis (chronic pulmonary histoplasmosis mimics this radiographically and pathologically)",
+      "Blastomycosis",
+      "Coccidioidomycosis",
+      "Paracoccidioidomycosis",
+      "Talaromycosis"
     ],
-    [
-     "Management Strategy",
-     "Observation without antifungals for mild, self-limited acute pulmonary disease in immunocompetent hosts",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Sarcoidosis",
+      "Lymphoma",
+      "Primary lung cancer (asymptomatic controlled nodules found on screening CT in smokers)",
+      "Metastatic cancer"
     ],
-    [
-     "Clinical Pitfall",
-     "Chronic cavitary histoplasmosis closely mimics cavitary tuberculosis radiographically (upper-lobe infiltrates, cavitation,",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Histoplasma antigen detection in urine and serum (and BAL fluid; CSF for CNS disease)",
+      "Lateral flow antigen point-of-care testing for resource-limited settings",
+      "Histoplasma serology: immunodiffusion (ID), complement fixation (CF), IgG and IgM enzyme immunoassay (EIA)",
+      "Fungal culture (BAL fluid, sputum/bronchial washings, blood, bone marrow aspirate; positive in ~75% of PDH and chronic pulmonary disease)",
+      "Fungal stains/cytopathology or biopsy of affected organ (BAL fluid, bone marrow, liver, adrenal) showing small narrow-budding intracellular yeasts",
+      "Chest radiograph/CT (pneumonitis, hilar/mediastinal adenopathy, upper-lobe cavitation, calcified nodes)",
+      "Workup for rare genetic immunodeficiencies of the IFN-gamma and TNF-alpha pathways in healthy individuals presenting with PDH"
+    ],
+    "redFlags": [
+      "Progressive disseminated histoplasmosis (PDH), typically in immunocompromised hosts (~70% of cases), especially AIDS with CD4+ count <200/microliter",
+      "Acute rapidly fatal PDH with diffuse interstitial/reticulonodular infiltrates, respiratory failure, shock, coagulopathy and multiorgan failure",
+      "Onset of PDH while on anti-TNF-alpha therapy, methotrexate or other biologic/immunosuppressive agents, or post-transplant immunosuppression",
+      "CNS involvement: meningitis or focal brain lesions",
+      "Adrenal insufficiency from adrenal involvement",
+      "Fibrosing mediastinitis causing superior vena cava syndrome, pulmonary vessel obstruction or airway obstruction (fatal in up to one-third of cases)",
+      "Large mediastinal masses compressing great vessels, airways or esophagus, or rupturing to form fistulae (e.g., bronchoesophageal)"
+    ],
+    "prognosis": "Most immunocompetent individuals with low-level exposure are asymptomatic or have a mild, self-limited illness that resolves without therapy; up to 75% of adults in endemic areas have evidence of prior infection without clinical disease. Untreated chronic cavitary disease is slowly progressive. Progressive disseminated histoplasmosis ranges from an acute, rapidly fatal course to a subacute/chronic one and is a devastating illness requiring prompt recognition, particularly in AIDS or anti-TNF therapy. Fibrosing mediastinitis is fatal in up to one-third of cases. Antigen levels track severity and response, with stable or rising levels signaling treatment failure or relapse (p.1693-1696).",
+    "pitfalls": [
+      "Chronic cavitary histoplasmosis closely mimics cavitary tuberculosis radiographically (upper-lobe infiltrates, cavitation, pleural thickening) and may be misdiagnosed as TB, sarcoidosis, lymphoma or malignancy.",
+      "Asymptomatic calcified nodules from controlled prior infection may be mistaken for malignancy on screening CT in smokers from endemic areas.",
+      "Fungal stains may misidentify staining artifacts or other fungal elements as Histoplasma yeasts.",
+      "Persistent antibodies for several years after infection can cause a false misdiagnosis of active histoplasmosis in a patient with another disease process.",
+      "ID and CF serology are insensitive early in infection and have reduced sensitivity in immunosuppressed patients, especially organ transplant recipients.",
+      "Antigen testing cross-reacts with African histoplasmosis, blastomycosis, coccidioidomycosis, paracoccidioidomycosis, talaromycosis and rarely aspergillosis.",
+      "Fibrosing mediastinitis is a chronic fibrotic reaction to past infection, not active disease, and does NOT respond to antifungal therapy.",
+      "Unlike latent tuberculosis, inactive histoplasmosis does NOT reactivate."
+    ],
+    "severityClassification": "Clinical forms (Harrison Table 218-1): acute pulmonary, mild to moderate; acute pulmonary, severe with respiratory failure (ARDS); chronic/cavitary pulmonary; progressive disseminated (PDH); and central nervous system disease. Severity is graded by intensity of exposure, host immune status and underlying lung architecture (p.1693-1695).",
+    "references": [
+      "Harrison 22e p.1692-1696"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observation without antifungals for mild, self-limited acute pulmonary disease in immunocompetent hosts",
+      "Azole antifungal (itraconazole) for mild-to-moderate disease and as step-down consolidation therapy",
+      "Liposomal amphotericin B for severe or progressive disseminated disease, followed by itraconazole",
+      "Corticosteroids as an adjunct in severe respiratory compromise or inflammatory complications",
+      "In HIV and other immunocompromised patients, antiretroviral therapy, treatment of the acute infection, and prolonged azole suppression as secondary prophylaxis",
+      "Monitor serum and urine Histoplasma antigen to gauge treatment response and detect relapse",
+      "Manage complications such as pericarditis and fibrosing mediastinitis, and reduce high-risk environmental exposure"
     ]
-   ],
-   "caption": "Overview comparison matrix for histoplasmosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "histoplasmosis-real-image",
-   "title": "Histoplasmosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "histoplasmosis-pathway",
+      "title": "Histoplasmosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Histoplasma capsulatum, a thermal dimorphic fungus; H. capsulatum var. capsulatum predominates in North America, while var. duboisii in Africa produces larger yeasts and a clinically distinct disease with frequent skin and bone",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive disseminated histoplasmosis (PDH), typically in immunocompromised hosts (~70% of cases), especially AIDS with CD4+ count <200/microliter",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Histoplasma antigen detection in urine and serum (and BAL fluid; CSF for CNS disease), Lateral flow antigen point-of-care testing for resource-limited settings, Histoplasma serology: immunodiffusion (ID), complement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observation without antifungals for mild, self-limited acute pulmonary disease in immunocompetent hosts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Chronic cavitary histoplasmosis closely mimics cavitary tuberculosis radiographically (upper-lobe infiltrates, cavitation, pleural thickening) and may be misdiagnosed as TB, sarcoidosis, lymphoma or malignancy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of histoplasmosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "histoplasmosis-matrix",
+      "title": "Histoplasmosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Histoplasma capsulatum, a thermal dimorphic fungus; H. capsulatum var. capsulatum predominates in North America, while",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Histoplasma antigen detection in urine and serum (and BAL fluid; CSF for CNS disease), Lateral flow antigen point-of-care testing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tuberculosis (chronic cavitary disease), Sarcoidosis, Lymphoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observation without antifungals for mild, self-limited acute pulmonary disease in immunocompetent hosts",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Chronic cavitary histoplasmosis closely mimics cavitary tuberculosis radiographically (upper-lobe infiltrates, cavitation,",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for histoplasmosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Histoplasmosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/histoplasmosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "histoplasmosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing histoplasmosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or test",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Exposure",
+          "cells": [
+            {
+              "text": "Ohio and Mississippi valleys; caves, bird or bat droppings, demolition"
+            },
+            {
+              "text": "Acute illness 1 to 4 weeks after exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine plus serum antigen",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "{{hy:Above 95% sensitive in disseminated disease}}",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Above 80% in severe acute pulmonary disease; levels track response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine antigen alone (disseminated)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 90% positive",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Serum antigen about 80%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antigen cross-reactivity",
+          "cells": [
+            {
+              "text": "Blastomyces, Coccidioides, Paracoccidioides, Talaromyces"
+            },
+            {
+              "text": "Interpret with clinical picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 75% of disseminated and chronic pulmonary disease",
+              "op": "=",
+              "value": 75
+            },
+            {
+              "text": "Gold standard but up to 1 month; BAL, marrow, blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology (ID, CF, EIA)",
+          "cells": [
+            {
+              "text": "Best in immunocompetent and chronic pulmonary disease"
+            },
+            {
+              "text": "Insensitive early and in transplant recipients; can persist for years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Small narrow-budding intracellular yeasts"
+            },
+            {
+              "text": "Blood smear yeasts in advanced HIV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-risk host",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "AIDS with CD4 below 200/uL, anti-TNF, transplant",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "About 70% of disseminated cases are immunocompromised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthritis with erythema nodosum",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "5 to 10% of acute cases",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "Inflammatory, not dissemination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "histoplasmosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic histoplasmosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cavitary tuberculosis",
+          "cells": [
+            {
+              "text": "Upper-lobe cavities like chronic histoplasmosis"
+            },
+            {
+              "text": "Sputum AFB smear, culture and NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Hilar adenopathy, erythema nodosum"
+            },
+            {
+              "text": "Negative antigen, non-caseating granulomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Mediastinal mass, fever, cytopenias"
+            },
+            {
+              "text": "Node biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Nodule in a smoker"
+            },
+            {
+              "text": "Calcified nodule favours old granuloma; biopsy if uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blastomycosis or coccidioidomycosis",
+          "cells": [
+            {
+              "text": "Other endemic mycoses, antigen cross-reacts"
+            },
+            {
+              "text": "Culture and species-specific serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "histoplasmosis-treatment",
+      "kind": "treatment",
+      "title": "Treating histoplasmosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild acute pulmonary disease, immunocompetent"
+            },
+            {
+              "text": "Treat only if symptoms last beyond about 1 month"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Itraconazole",
+          "cells": [
+            {
+              "text": "Mild-moderate acute disease not improving, or immunocompromised"
+            },
+            {
+              "text": "Three times daily for 3 days, then twice daily for 6 to 12 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Itraconazole, long course",
+          "cells": [
+            {
+              "text": "Chronic cavitary pulmonary disease"
+            },
+            {
+              "text": "12 to 24 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liposomal amphotericin B",
+          "cells": [
+            {
+              "text": "Severe or disseminated disease"
+            },
+            {
+              "text": "{{hy:IV daily for 2 weeks or until stable, then itraconazole for 12 months}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Itraconazole suppression in HIV",
+          "cells": [
+            {
+              "text": "Advanced HIV"
+            },
+            {
+              "text": "Continue until CD4 above 150/uL on ART"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Severe respiratory compromise or inflammatory complications"
+            },
+            {
+              "text": "Adjunct only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No antifungal",
+          "cells": [
+            {
+              "text": "Fibrosing mediastinitis"
+            },
+            {
+              "text": "Fibrotic reaction to past infection; does not respond"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "First trimester"
+            },
+            {
+              "text": "Avoid azoles"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Antigen sensitivity differs: Harrison gives above 95% for urine plus serum in disseminated disease; Merck gives over 90% urine and about 80% serum. Both kept. Azole and amphotericin doses are not given in the opened sources."
+    },
+    {
+      "id": "histoplasmosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Microbial pathogens causing cavitary lung infection",
+      "rowHeader": "Host setting",
+      "columns": [
+        "Pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration-prone host",
+          "cells": [
+            {
+              "text": "Anaerobic bacteria plus microaerophilic and/or anaerobic streptococci, Gemella spp."
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Embolic (endovascular) lesions",
+          "cells": [
+            {
+              "text": "Usually Staphylococcus aureus, Pseudomonas aeruginosa, Fusobacterium necrophorum"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Endemic fungi",
+          "cells": [
+            {
+              "text": "Histoplasma, Blastomyces, Coccidioides spp."
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mycobacteria",
+          "cells": [
+            {
+              "text": "M. tuberculosis, M. kansasii, M. avium"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Immunocompromised host",
+          "cells": [
+            {
+              "text": "M. tuberculosis, Nocardia asteroides, Rhodococcus equi, Legionella spp., P. aeruginosa, Enterobacteriaceae (especially Klebsiella pneumoniae), Aspergillus spp., Cryptococcus spp."
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Previously healthy host: bacteria",
+          "cells": [
+            {
+              "text": "S. aureus, S. milleri, K. pneumoniae, group A Streptococcus; Gemella, Legionella and Actinomyces spp."
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Previously healthy host: parasites",
+          "cells": [
+            {
+              "text": "Entamoeba histolytica, Paragonimus westermani, Strongyloides stercoralis"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "The source groups the first four rows as one block of mixed settings; source footnotes (a) and (b) are not legible."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "histoplasmosis-dx-mgmt",
+      "title": "Diagnosis and management of histoplasmosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Flu-like or cavitary lung illness after endemic exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest imaging, urine and serum antigen, serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Disseminated or severe disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cultures of BAL, marrow, blood; check HIV and immune status",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Liposomal amphotericin B until stable",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Step down to itraconazole for 12 months; monitor antigen",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Chronic cavitary disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Itraconazole 12 to 24 months; exclude tuberculosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Symptoms beyond 1 month or immunocompromised?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Itraconazole 6 to 12 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Observe; self-limited",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

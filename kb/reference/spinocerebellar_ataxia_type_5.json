@@ -1,179 +1,457 @@
 {
- "id": "spinocerebellar_ataxia_type_5",
- "name": "Spinocerebellar ataxia type 5 (SPTBN2)",
- "aliases": [
-  "SCA5",
-  "SPTBN2-related ataxia",
-  "beta-III spectrin ataxia",
-  "Lincoln ataxia"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant, slowly progressive and largely pure cerebellar ataxia caused by variants, often in-frame deletions or missense changes, in SPTBN2, which encodes beta-III spectrin",
-   "Historically termed 'Lincoln ataxia' after a large American kindred descended from the paternal grandparents of Abraham Lincoln",
-   "Onset ranges from childhood to mid-adulthood, progression is slow and life expectancy is usually near-normal",
-   "Clinical features are gait and limb ataxia, dysarthria and eye-movement abnormalities including downbeat and gaze-evoked nystagmus, with facial myokymia in some patients",
-   "Beta-III spectrin anchors the glutamate transporter EAAT4 and receptors at the Purkinje cell membrane, so its dysfunction impairs glutamate handling",
-   "Diagnosis is by gene sequencing, since repeat-expansion assays are normal",
-   "Brain MRI typically shows marked and relatively isolated cerebellar atrophy",
-   "Biallelic SPTBN2 variants cause a distinct severe infantile-onset recessive ataxia, in contrast to the dominant SCA5"
+  "id": "spinocerebellar_ataxia_type_5",
+  "name": "Spinocerebellar ataxia type 5 (SPTBN2)",
+  "aliases": [
+    "SCA5",
+    "SPTBN2-related ataxia",
+    "beta-III spectrin ataxia",
+    "Lincoln ataxia"
   ],
-  "pathophysiology": "SCA5 is caused by dominant variants in SPTBN2, which encodes beta-III spectrin, a cytoskeletal protein enriched in Purkinje cells that stabilises membrane proteins, including the glutamate transporter EAAT4, and helps organise the neuronal membrane skeleton. Mutant spectrin mislocalises or fails to anchor these proteins, so glutamate clearance and Purkinje cell membrane integrity are impaired. The resulting progressive Purkinje cell dysfunction and degeneration underlie the largely pure cerebellar ataxia and the associated eye-movement abnormalities.",
-  "additionalDifferentials": [
-   "Other pure autosomal dominant cerebellar ataxias (SCA6, SCA14, SCA28)",
-   "Ataxias with prominent downbeat nystagmus, such as episodic ataxia type 2 and FGF14-related ataxia",
-   "Sporadic adult-onset cerebellar ataxia",
-   "Multiple system atrophy, cerebellar type",
-   "Severe infantile recessive SPTBN2 ataxia in young children",
-   "Autoimmune or gluten-related cerebellar ataxia"
-  ],
-  "additionalInvestigations": [
-   "SPTBN2 sequencing within an ataxia gene panel or exome",
-   "Brain MRI to document the marked, relatively isolated cerebellar atrophy",
-   "Testing for common repeat-expansion SCAs to exclude commoner causes",
-   "Screening for acquired ataxia (thyroid function, vitamins B12 and E, coeliac serology)",
-   "Detailed family history to establish autosomal dominant transmission",
-   "Consideration of recessive SPTBN2 disease in infantile presentations"
-  ],
-  "redFlags": [
-   "Rapid progression or an atypical course suggesting an acquired or paraneoplastic cause",
-   "A structural lesion at the craniocervical junction as an alternative cause of downbeat nystagmus",
-   "A severe infantile presentation suggesting recessive SPTBN2 disease",
-   "Dysphagia with aspiration risk requiring swallow assessment"
-  ],
-  "prognosis": "SCA5 is slowly progressive over decades, with ambulation often preserved for prolonged periods and a near-normal lifespan typical; disability is driven by cumulative cerebellar dysfunction, and prognosis is generally more favourable than in many other spinocerebellar ataxias.",
-  "pitfalls": [
-   "Expecting a repeat expansion and missing the point mutation or in-frame deletion when common panels are negative",
-   "Confusing dominant SCA5 with the distinct severe infantile recessive SPTBN2 disorder",
-   "Attributing downbeat nystagmus to a structural lesion only, without considering a genetic ataxia",
-   "Not proceeding to sequencing after negative repeat panels",
-   "Failing to provide genetic counselling regarding dominant inheritance and variable expressivity"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [
-   "spinocerebellar_ataxia_type_14",
-   "spinocerebellar_ataxia_type_28"
-  ],
-  "management": [
-   "No disease-modifying therapy exists; care is symptomatic and supportive, centred on maintaining function and preventing falls",
-   "Physiotherapy with balance and gait rehabilitation, and occupational therapy for mobility aids and home adaptation",
-   "Speech and language therapy for dysarthria, with swallow assessment and dietary modification as dysphagia develops",
-   "Symptomatic treatment of downbeat or gaze-evoked nystagmus and oscillopsia with aminopyridine-class agents, and of troublesome facial myokymia",
-   "Periodic neurological review to monitor progression, falls risk and nutritional and swallowing status",
-   "Genetic counselling with predictive and cascade testing for at-risk relatives given autosomal dominant inheritance",
-   "Referral to specialist ataxia multidisciplinary services and patient support organisations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_5-pathway",
-   "title": "Spinocerebellar ataxia type 5 (SPTBN2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant, slowly progressive and largely pure cerebellar ataxia caused by variants, often in-frame deletions or missense changes, in SPTBN2, which encodes beta-III spectrin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid progression or an atypical course suggesting an acquired or paraneoplastic cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: SPTBN2 sequencing within an ataxia gene panel or exome, Brain MRI to document the marked, relatively isolated cerebellar atrophy, Testing for common repeat-expansion SCAs to exclude commoner causes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy exists; care is symptomatic and supportive, centred on maintaining function and preventing falls"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting a repeat expansion and missing the point mutation or in-frame deletion when common panels are negative"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 5 (sptbn2)."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_5-matrix",
-   "title": "Spinocerebellar ataxia type 5 (SPTBN2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant, slowly progressive and largely pure cerebellar ataxia caused by variants, often in-frame deletions or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant, slowly progressive and largely pure cerebellar ataxia caused by variants, often in-frame deletions or missense changes, in SPTBN2, which encodes beta-III spectrin",
+      "Historically termed 'Lincoln ataxia' after a large American kindred descended from the paternal grandparents of Abraham Lincoln",
+      "Onset ranges from childhood to mid-adulthood, progression is slow and life expectancy is usually near-normal",
+      "Clinical features are gait and limb ataxia, dysarthria and eye-movement abnormalities including downbeat and gaze-evoked nystagmus, with facial myokymia in some patients",
+      "Beta-III spectrin anchors the glutamate transporter EAAT4 and receptors at the Purkinje cell membrane, so its dysfunction impairs glutamate handling",
+      "Diagnosis is by gene sequencing, since repeat-expansion assays are normal",
+      "Brain MRI typically shows marked and relatively isolated cerebellar atrophy",
+      "Biallelic SPTBN2 variants cause a distinct severe infantile-onset recessive ataxia, in contrast to the dominant SCA5"
     ],
-    [
-     "Key Investigations",
-     "SPTBN2 sequencing within an ataxia gene panel or exome, Brain MRI to document the marked, relatively isolated cerebellar atrophy,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA5 is caused by dominant variants in SPTBN2, which encodes beta-III spectrin, a cytoskeletal protein enriched in Purkinje cells that stabilises membrane proteins, including the glutamate transporter EAAT4, and helps organise the neuronal membrane skeleton. Mutant spectrin mislocalises or fails to anchor these proteins, so glutamate clearance and Purkinje cell membrane integrity are impaired. The resulting progressive Purkinje cell dysfunction and degeneration underlie the largely pure cerebellar ataxia and the associated eye-movement abnormalities.",
+    "additionalDifferentials": [
+      "Other pure autosomal dominant cerebellar ataxias (SCA6, SCA14, SCA28)",
+      "Ataxias with prominent downbeat nystagmus, such as episodic ataxia type 2 and FGF14-related ataxia",
+      "Sporadic adult-onset cerebellar ataxia",
+      "Multiple system atrophy, cerebellar type",
+      "Severe infantile recessive SPTBN2 ataxia in young children",
+      "Autoimmune or gluten-related cerebellar ataxia"
     ],
-    [
-     "Primary Differentials",
-     "Other pure autosomal dominant cerebellar ataxias (SCA6, SCA14, SCA28), Ataxias with prominent downbeat nystagmus, such as",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "SPTBN2 sequencing within an ataxia gene panel or exome",
+      "Brain MRI to document the marked, relatively isolated cerebellar atrophy",
+      "Testing for common repeat-expansion SCAs to exclude commoner causes",
+      "Screening for acquired ataxia (thyroid function, vitamins B12 and E, coeliac serology)",
+      "Detailed family history to establish autosomal dominant transmission",
+      "Consideration of recessive SPTBN2 disease in infantile presentations"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy exists; care is symptomatic and supportive, centred on maintaining function and preventing falls",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid progression or an atypical course suggesting an acquired or paraneoplastic cause",
+      "A structural lesion at the craniocervical junction as an alternative cause of downbeat nystagmus",
+      "A severe infantile presentation suggesting recessive SPTBN2 disease",
+      "Dysphagia with aspiration risk requiring swallow assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting a repeat expansion and missing the point mutation or in-frame deletion when common panels are negative",
-     "Prevent diagnostic or management error"
+    "prognosis": "SCA5 is slowly progressive over decades, with ambulation often preserved for prolonged periods and a near-normal lifespan typical; disability is driven by cumulative cerebellar dysfunction, and prognosis is generally more favourable than in many other spinocerebellar ataxias.",
+    "pitfalls": [
+      "Expecting a repeat expansion and missing the point mutation or in-frame deletion when common panels are negative",
+      "Confusing dominant SCA5 with the distinct severe infantile recessive SPTBN2 disorder",
+      "Attributing downbeat nystagmus to a structural lesion only, without considering a genetic ataxia",
+      "Not proceeding to sequencing after negative repeat panels",
+      "Failing to provide genetic counselling regarding dominant inheritance and variable expressivity"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [
+      "spinocerebellar_ataxia_type_14",
+      "spinocerebellar_ataxia_type_28"
+    ],
+    "management": [
+      "No disease-modifying therapy exists; care is symptomatic and supportive, centred on maintaining function and preventing falls",
+      "Physiotherapy with balance and gait rehabilitation, and occupational therapy for mobility aids and home adaptation",
+      "Speech and language therapy for dysarthria, with swallow assessment and dietary modification as dysphagia develops",
+      "Symptomatic treatment of downbeat or gaze-evoked nystagmus and oscillopsia with aminopyridine-class agents, and of troublesome facial myokymia",
+      "Periodic neurological review to monitor progression, falls risk and nutritional and swallowing status",
+      "Genetic counselling with predictive and cascade testing for at-risk relatives given autosomal dominant inheritance",
+      "Referral to specialist ataxia multidisciplinary services and patient support organisations"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 5 (sptbn2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-5-real-image",
-   "title": "Spinocerebellar ataxia type 5 (SPTBN2): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia_type_5-pathway",
+      "title": "Spinocerebellar ataxia type 5 (SPTBN2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant, slowly progressive and largely pure cerebellar ataxia caused by variants, often in-frame deletions or missense changes, in SPTBN2, which encodes beta-III spectrin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid progression or an atypical course suggesting an acquired or paraneoplastic cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: SPTBN2 sequencing within an ataxia gene panel or exome, Brain MRI to document the marked, relatively isolated cerebellar atrophy, Testing for common repeat-expansion SCAs to exclude commoner causes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy exists; care is symptomatic and supportive, centred on maintaining function and preventing falls"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting a repeat expansion and missing the point mutation or in-frame deletion when common panels are negative"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 5 (sptbn2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_5-matrix",
+      "title": "Spinocerebellar ataxia type 5 (SPTBN2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant, slowly progressive and largely pure cerebellar ataxia caused by variants, often in-frame deletions or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "SPTBN2 sequencing within an ataxia gene panel or exome, Brain MRI to document the marked, relatively isolated cerebellar atrophy,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other pure autosomal dominant cerebellar ataxias (SCA6, SCA14, SCA28), Ataxias with prominent downbeat nystagmus, such as",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy exists; care is symptomatic and supportive, centred on maintaining function and preventing falls",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting a repeat expansion and missing the point mutation or in-frame deletion when common panels are negative",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 5 (sptbn2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_5-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SPTBN2 sequencing",
+          "cells": [
+            {
+              "text": "Point variant or in-frame deletion; repeat assays are normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Marked, relatively isolated cerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat-expansion SCA testing",
+          "cells": [
+            {
+              "text": "Excludes the commoner causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired ataxia screen",
+          "cells": [
+            {
+              "text": "Thyroid function, vitamins B12 and E, coeliac serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Autosomal dominant transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Consideration of recessive SPTBN2 disease",
+          "cells": [
+            {
+              "text": "Infantile presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_5-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinocerebellar ataxia type 6",
+          "cells": [
+            {
+              "text": "Also a pure dominant ataxia; gene testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe infantile recessive SPTBN2 ataxia",
+          "cells": [
+            {
+              "text": "Biallelic variants cause an infantile-onset form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_5-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic and supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy with balance and gait rehabilitation",
+          "cells": [
+            {
+              "text": "Occupational therapy for mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallow assessment",
+          "cells": [
+            {
+              "text": "Dysarthria; dietary modification as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aminopyridine",
+          "cells": [
+            {
+              "text": "Downbeat or gaze-evoked nystagmus and oscillopsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic review",
+          "cells": [
+            {
+              "text": "Progression, falls risk, nutrition and swallowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Predictive and cascade testing for at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_5-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 5 (SPTBN2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slow, largely pure cerebellar ataxia with eye signs: suspected SCA5",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid progression, craniocervical lesion, infantile onset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for infantile recessive SPTBN2 disease or acquired cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SPTBN2 sequencing; brain MRI; repeat-expansion exclusion; acquired screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an SPTBN2 variant confirmed with a dominant family history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SCA6, SCA14, SCA28 or acquired ataxia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic care with physiotherapy and balance training",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Speech and swallow assessment with diet modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aminopyridine for downbeat or gaze-evoked nystagmus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling with cascade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive course; no disease-modifying therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

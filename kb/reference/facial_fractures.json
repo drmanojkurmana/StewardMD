@@ -1,178 +1,465 @@
 {
- "id": "facial_fractures",
- "name": "Facial fractures",
- "aliases": [
-  "maxillofacial fractures",
-  "midface fracture",
-  "Le Fort fracture",
-  "zygomatic fracture",
-  "orbital fracture"
- ],
- "class": "non_infective",
- "system": "Plastic / Reconstructive",
- "specialty": "Plastic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Grabb & Smith's Plastic Surgery / standard references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Facial fractures often accompany high-energy trauma, so assessment follows trauma principles with airway, cervical spine, and associated head and neck injuries addressed first",
-   "Midface fractures are classically described by the Le Fort patterns (I, II, III) reflecting different levels of maxillary separation, and higher patterns can produce a mobile or displaced midface",
-   "Zygomaticomaxillary complex fractures may cause flattening of the cheek, trismus, altered infraorbital sensation, and a step at the orbital rim",
-   "Orbital floor (blowout) fractures can trap the inferior rectus and cause diplopia, restricted upgaze, enophthalmos, and infraorbital numbness",
-   "Cerebrospinal fluid rhinorrhoea, a nasoethmoidal injury, or telecanthus points to fractures extending toward the skull base and cribriform region",
-   "CT of the facial skeleton is the imaging standard for defining fracture patterns and planning reconstruction",
-   "Treatment principles are restoring facial height, width, and projection, re-establishing occlusion, and rigid fixation of key buttresses, with surgery timed once swelling allows",
-   "A dental and occlusal assessment is essential, as restoring the pre-injury bite guides reduction of maxillary and mandibular fractures"
+  "id": "facial_fractures",
+  "name": "Facial fractures",
+  "aliases": [
+    "maxillofacial fractures",
+    "midface fracture",
+    "Le Fort fracture",
+    "zygomatic fracture",
+    "orbital fracture"
   ],
-  "pathophysiology": "The facial skeleton is organised into vertical and horizontal buttresses that transmit and dissipate forces of mastication and absorb trauma. Fractures occur when applied force exceeds bone strength, and the pattern reflects the direction and energy of impact and the relative weakness of certain regions such as the orbital floor and the Le Fort lines. High-energy injuries can separate the midface from the skull base along these predictable planes. Associated soft tissue swelling, haemorrhage, and displaced bone fragments can compromise the airway, the orbit and globe, cranial nerves, and the lacrimal and paranasal sinus systems, and disruption near the cribriform plate can breach the dura and cause CSF leak.",
-  "additionalDifferentials": [
-   "Isolated nasal fracture",
-   "Isolated mandibular fracture",
-   "Dentoalveolar injury without facial skeleton fracture",
-   "Traumatic globe injury or retrobulbar haemorrhage",
-   "Temporal bone or skull base fracture",
-   "Soft tissue contusion and haematoma without fracture"
-  ],
-  "additionalInvestigations": [
-   "CT of the facial skeleton with fine cuts and three-dimensional reconstruction",
-   "Ophthalmological assessment including visual acuity and forced duction testing when orbital involvement is suspected",
-   "Assessment for CSF rhinorrhoea (e.g. beta-2 transferrin) with suspected skull base extension",
-   "Dental and occlusal evaluation, with panoramic imaging for the mandible",
-   "Cranial nerve and infraorbital sensory examination",
-   "Trauma workup including cervical spine imaging and evaluation for head injury"
-  ],
-  "redFlags": [
-   "Airway compromise from midface instability, haemorrhage, or swelling, particularly with high Le Fort injuries (emergency)",
-   "Visual loss, a tense proptotic orbit, or suspected retrobulbar haemorrhage requiring urgent decompression",
-   "Orbital fracture with a trapped muscle and the oculocardiac reflex (bradycardia, nausea) in children",
-   "CSF rhinorrhoea or other evidence of skull base and dural breach",
-   "Associated cervical spine or intracranial injury"
-  ],
-  "prognosis": "With accurate reduction and fixation most facial fractures heal with good functional and aesthetic results and restored occlusion. Outcomes are less favourable with delayed treatment, comminution, or associated orbital and skull base injury, where diplopia, enophthalmos, malunion, sensory disturbance, and asymmetry may persist and require secondary correction.",
-  "pitfalls": [
-   "Focusing on obvious facial injury while missing airway compromise or cervical spine injury",
-   "Overlooking an orbital floor fracture with entrapment, especially the white-eyed blowout in children",
-   "Failing to detect and manage CSF leak in fractures extending to the skull base",
-   "Neglecting occlusion, resulting in malocclusion after fixation",
-   "Operating before periorbital swelling settles, compromising assessment and fixation",
-   "Missing retrobulbar haemorrhage, which can cause preventable blindness"
-  ],
-  "references": [
-   "Grabb & Smith's Plastic Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Trauma primary survey first, securing the airway with cervical-spine protection, controlling haemorrhage and excluding concurrent head and neck injury",
-   "CT of the facial skeleton to define the fracture pattern and plan reconstruction",
-   "Open reduction and internal fixation of displaced fractures, restoring the facial buttresses and dental occlusion",
-   "Orbital floor reconstruction with release of an entrapped inferior rectus in blowout fractures causing diplopia or enophthalmos",
-   "Antibiotic prophylaxis for fractures communicating with the sinuses or oral cavity, tetanus cover, and neurosurgical input with management of CSF rhinorrhoea when the skull base is breached",
-   "Urgent ophthalmology assessment, with lateral canthotomy for orbital compartment syndrome or retrobulbar haemorrhage threatening the globe",
-   "Multidisciplinary reconstruction involving maxillofacial and plastic surgery, ophthalmology, ENT and dental rehabilitation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "facial_fractures-pathway",
-   "title": "Facial fractures: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Facial fractures often accompany high-energy trauma, so assessment follows trauma principles with airway, cervical spine, and associated head and neck injuries addressed first",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Airway compromise from midface instability, haemorrhage, or swelling, particularly with high Le Fort injuries (emergency)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT of the facial skeleton with fine cuts and three-dimensional reconstruction, Ophthalmological assessment including visual acuity and forced duction testing when orbital involvement is suspected, Assessment for CSF"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Trauma primary survey first, securing the airway with cervical-spine protection, controlling haemorrhage and excluding concurrent head and neck injury"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing on obvious facial injury while missing airway compromise or cervical spine injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of facial fractures."
-  }
- ],
- "tables": [
-  {
-   "id": "facial_fractures-matrix",
-   "title": "Facial fractures: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Facial fractures often accompany high-energy trauma, so assessment follows trauma principles with airway, cervical spine, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Plastic / Reconstructive",
+  "specialty": "Plastic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Grabb & Smith's Plastic Surgery / standard references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Facial fractures often accompany high-energy trauma, so assessment follows trauma principles with airway, cervical spine, and associated head and neck injuries addressed first",
+      "Midface fractures are classically described by the Le Fort patterns (I, II, III) reflecting different levels of maxillary separation, and higher patterns can produce a mobile or displaced midface",
+      "Zygomaticomaxillary complex fractures may cause flattening of the cheek, trismus, altered infraorbital sensation, and a step at the orbital rim",
+      "Orbital floor (blowout) fractures can trap the inferior rectus and cause diplopia, restricted upgaze, enophthalmos, and infraorbital numbness",
+      "Cerebrospinal fluid rhinorrhoea, a nasoethmoidal injury, or telecanthus points to fractures extending toward the skull base and cribriform region",
+      "CT of the facial skeleton is the imaging standard for defining fracture patterns and planning reconstruction",
+      "Treatment principles are restoring facial height, width, and projection, re-establishing occlusion, and rigid fixation of key buttresses, with surgery timed once swelling allows",
+      "A dental and occlusal assessment is essential, as restoring the pre-injury bite guides reduction of maxillary and mandibular fractures"
     ],
-    [
-     "Key Investigations",
-     "CT of the facial skeleton with fine cuts and three-dimensional reconstruction, Ophthalmological assessment including visual",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The facial skeleton is organised into vertical and horizontal buttresses that transmit and dissipate forces of mastication and absorb trauma. Fractures occur when applied force exceeds bone strength, and the pattern reflects the direction and energy of impact and the relative weakness of certain regions such as the orbital floor and the Le Fort lines. High-energy injuries can separate the midface from the skull base along these predictable planes. Associated soft tissue swelling, haemorrhage, and displaced bone fragments can compromise the airway, the orbit and globe, cranial nerves, and the lacrimal and paranasal sinus systems, and disruption near the cribriform plate can breach the dura and cause CSF leak.",
+    "additionalDifferentials": [
+      "Isolated nasal fracture",
+      "Isolated mandibular fracture",
+      "Dentoalveolar injury without facial skeleton fracture",
+      "Traumatic globe injury or retrobulbar haemorrhage",
+      "Temporal bone or skull base fracture",
+      "Soft tissue contusion and haematoma without fracture"
     ],
-    [
-     "Primary Differentials",
-     "Isolated nasal fracture, Isolated mandibular fracture, Dentoalveolar injury without facial skeleton fracture",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT of the facial skeleton with fine cuts and three-dimensional reconstruction",
+      "Ophthalmological assessment including visual acuity and forced duction testing when orbital involvement is suspected",
+      "Assessment for CSF rhinorrhoea (e.g. beta-2 transferrin) with suspected skull base extension",
+      "Dental and occlusal evaluation, with panoramic imaging for the mandible",
+      "Cranial nerve and infraorbital sensory examination",
+      "Trauma workup including cervical spine imaging and evaluation for head injury"
     ],
-    [
-     "Management Strategy",
-     "Trauma primary survey first, securing the airway with cervical-spine protection, controlling haemorrhage and excluding concurrent",
-     "Core treatment modality"
+    "redFlags": [
+      "Airway compromise from midface instability, haemorrhage, or swelling, particularly with high Le Fort injuries (emergency)",
+      "Visual loss, a tense proptotic orbit, or suspected retrobulbar haemorrhage requiring urgent decompression",
+      "Orbital fracture with a trapped muscle and the oculocardiac reflex (bradycardia, nausea) in children",
+      "CSF rhinorrhoea or other evidence of skull base and dural breach",
+      "Associated cervical spine or intracranial injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing on obvious facial injury while missing airway compromise or cervical spine injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "With accurate reduction and fixation most facial fractures heal with good functional and aesthetic results and restored occlusion. Outcomes are less favourable with delayed treatment, comminution, or associated orbital and skull base injury, where diplopia, enophthalmos, malunion, sensory disturbance, and asymmetry may persist and require secondary correction.",
+    "pitfalls": [
+      "Focusing on obvious facial injury while missing airway compromise or cervical spine injury",
+      "Overlooking an orbital floor fracture with entrapment, especially the white-eyed blowout in children",
+      "Failing to detect and manage CSF leak in fractures extending to the skull base",
+      "Neglecting occlusion, resulting in malocclusion after fixation",
+      "Operating before periorbital swelling settles, compromising assessment and fixation",
+      "Missing retrobulbar haemorrhage, which can cause preventable blindness"
+    ],
+    "references": [
+      "Grabb & Smith's Plastic Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Trauma primary survey first, securing the airway with cervical-spine protection, controlling haemorrhage and excluding concurrent head and neck injury",
+      "CT of the facial skeleton to define the fracture pattern and plan reconstruction",
+      "Open reduction and internal fixation of displaced fractures, restoring the facial buttresses and dental occlusion",
+      "Orbital floor reconstruction with release of an entrapped inferior rectus in blowout fractures causing diplopia or enophthalmos",
+      "Antibiotic prophylaxis for fractures communicating with the sinuses or oral cavity, tetanus cover, and neurosurgical input with management of CSF rhinorrhoea when the skull base is breached",
+      "Urgent ophthalmology assessment, with lateral canthotomy for orbital compartment syndrome or retrobulbar haemorrhage threatening the globe",
+      "Multidisciplinary reconstruction involving maxillofacial and plastic surgery, ophthalmology, ENT and dental rehabilitation"
     ]
-   ],
-   "caption": "Overview comparison matrix for facial fractures."
-  }
- ],
- "diagrams": [
-  {
-   "id": "facial-fractures-real-image",
-   "title": "Facial fractures: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "facial_fractures-pathway",
+      "title": "Facial fractures: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Facial fractures often accompany high-energy trauma, so assessment follows trauma principles with airway, cervical spine, and associated head and neck injuries addressed first",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Airway compromise from midface instability, haemorrhage, or swelling, particularly with high Le Fort injuries (emergency)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT of the facial skeleton with fine cuts and three-dimensional reconstruction, Ophthalmological assessment including visual acuity and forced duction testing when orbital involvement is suspected, Assessment for CSF"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Trauma primary survey first, securing the airway with cervical-spine protection, controlling haemorrhage and excluding concurrent head and neck injury"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing on obvious facial injury while missing airway compromise or cervical spine injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of facial fractures."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "facial_fractures-matrix",
+      "title": "Facial fractures: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Facial fractures often accompany high-energy trauma, so assessment follows trauma principles with airway, cervical spine, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT of the facial skeleton with fine cuts and three-dimensional reconstruction, Ophthalmological assessment including visual",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated nasal fracture, Isolated mandibular fracture, Dentoalveolar injury without facial skeleton fracture",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Trauma primary survey first, securing the airway with cervical-spine protection, controlling haemorrhage and excluding concurrent",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing on obvious facial injury while missing airway compromise or cervical spine injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for facial fractures."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grabb & Smith's Plastic Surgery / standard references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "facial_fractures-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of the facial skeleton with 3D reconstruction",
+          "cells": [
+            {
+              "text": "Fracture pattern and reconstruction planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment with forced duction testing",
+          "cells": [
+            {
+              "text": "Orbital involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-2 transferrin assessment",
+          "cells": [
+            {
+              "text": "CSF rhinorrhoea with skull base extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and occlusal evaluation with panoramic imaging",
+          "cells": [
+            {
+              "text": "Mandible and occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial nerve and infraorbital sensory examination",
+          "cells": [
+            {
+              "text": "Nerve injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma work-up with cervical spine and head injury assessment",
+          "cells": [
+            {
+              "text": "Associated injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "facial_fractures-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Traumatic globe injury or retrobulbar haemorrhage",
+          "cells": [
+            {
+              "text": "Visual loss or a tense proptotic orbit needs urgent decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal bone or skull base fracture",
+          "cells": [
+            {
+              "text": "CSF rhinorrhoea indicates a breach of the skull base"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "facial_fractures-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary survey, airway and cervical spine protection",
+          "cells": [
+            {
+              "text": "First priority; control haemorrhage; exclude head injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the facial skeleton",
+          "cells": [
+            {
+              "text": "Fracture pattern and reconstruction planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open reduction and internal fixation",
+          "cells": [
+            {
+              "text": "Displaced fractures; restores facial buttresses and dental occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital floor reconstruction",
+          "cells": [
+            {
+              "text": "Entrapped inferior rectus causing diplopia or enophthalmos"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic prophylaxis and tetanus cover",
+          "cells": [
+            {
+              "text": "Fractures communicating with the sinuses or oral cavity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent ophthalmology and lateral canthotomy",
+          "cells": [
+            {
+              "text": "Orbital compartment syndrome or retrobulbar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary reconstruction",
+          "cells": [
+            {
+              "text": "Maxillofacial, plastic, ophthalmic, ENT and dental teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "facial_fractures-dx-mgmt",
+      "title": "Diagnosis and management of Facial fractures",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Facial trauma with midface, orbital or mandibular injury, often high-energy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (airway compromise, visual loss, CSF leak, cervical spine or head injury)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Protect the airway and cervical spine; control haemorrhage; urgent ophthalmology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT of the facial skeleton with 3D reconstruction; ophthalmic and occlusal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Displaced fracture or orbital entrapment on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Conservative care with review; check for delayed diplopia or enophthalmos",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Open reduction and internal fixation of displaced fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orbital floor reconstruction for an entrapped inferior rectus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotic prophylaxis for sinus or oral communication; tetanus cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Restore the pre-injury bite during reduction and fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most heal with good function and appearance when reduced and fixed accurately",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,167 +1,458 @@
 {
- "id": "primary_cough_headache",
- "name": "Primary cough headache",
- "aliases": [
-  "benign cough headache",
-  "Valsalva-induced headache"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "International Classification of Headache Disorders (ICHD-3)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sudden headache precipitated by coughing, sneezing or other Valsalva manoeuvres, not by sustained physical exertion",
-   "Pain is typically bilateral and posterior, lasting seconds to a few minutes",
-   "It occurs mainly in older adults, in contrast to the younger age of primary exercise headache",
-   "A Chiari type I malformation or other posterior fossa lesion is the key secondary cause to exclude",
-   "Brain imaging with attention to the craniocervical junction is recommended in most cases",
-   "The primary form often responds to indometacin"
+  "id": "primary_cough_headache",
+  "name": "Primary cough headache",
+  "aliases": [
+    "benign cough headache",
+    "Valsalva-induced headache"
   ],
-  "pathophysiology": "Primary cough headache is attributed to a transient rise in intracranial pressure and venous distension provoked by the Valsalva manoeuvre, in the absence of a structural lesion. The same mechanical stress can unmask symptomatic cough headache when there is crowding at the foramen magnum, as in Chiari malformation, or a posterior fossa mass, which is why exclusion of these is essential before accepting a primary diagnosis.",
-  "additionalDifferentials": [
-   "Chiari type I malformation",
-   "Posterior fossa tumour or other mass lesion",
-   "Primary exercise headache",
-   "Spontaneous intracranial hypotension",
-   "Reversible cerebral vasoconstriction syndrome"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain including the craniocervical junction",
-   "Neurological examination for posterior fossa or long-tract signs",
-   "History clarifying Valsalva versus sustained-exertion triggers",
-   "Further vascular imaging if a secondary vascular cause is suspected"
-  ],
-  "redFlags": [
-   "Cerebellar or brainstem signs on examination",
-   "Occipital pain with features of tonsillar descent",
-   "First or worst headache suggesting a vascular event",
-   "Progressive or positional headache"
-  ],
-  "prognosis": "The primary form is benign and may remit over months to a few years; prognosis of symptomatic cough headache depends on the underlying structural cause.",
-  "pitfalls": [
-   "Diagnosing primary cough headache without imaging and missing a Chiari malformation",
-   "Confusing it with primary exercise headache",
-   "Overlooking a thunderclap presentation that needs urgent vascular workup",
-   "Assuming benignity in a young patient without exclusion of structural disease"
-  ],
-  "references": [
-   "International Classification of Headache Disorders (ICHD-3)",
-   "Bradley and Daroff Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer indometacin as first-line symptomatic and preventive treatment",
-   "Exclude a Chiari type I malformation or posterior fossa lesion with craniocervical-junction MRI before accepting the primary diagnosis",
-   "Treat any underlying chronic cough or respiratory condition to reduce the Valsalva trigger",
-   "Consider alternative preventives such as acetazolamide or topiramate if indometacin is not tolerated",
-   "Reassure the patient about the benign, often self-limiting course",
-   "Refer to neurology if features are atypical or a secondary cause is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_cough_headache-pathway",
-   "title": "Primary cough headache: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sudden headache precipitated by coughing, sneezing or other Valsalva manoeuvres, not by sustained physical exertion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cerebellar or brainstem signs on examination",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain including the craniocervical junction, Neurological examination for posterior fossa or long-tract signs, History clarifying Valsalva versus sustained-exertion triggers"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer indometacin as first-line symptomatic and preventive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing primary cough headache without imaging and missing a Chiari malformation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary cough headache."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_cough_headache-matrix",
-   "title": "Primary cough headache: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sudden headache precipitated by coughing, sneezing or other Valsalva manoeuvres, not by sustained physical exertion",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "International Classification of Headache Disorders (ICHD-3)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sudden headache precipitated by coughing, sneezing or other Valsalva manoeuvres, not by sustained physical exertion",
+      "Pain is typically bilateral and posterior, lasting seconds to a few minutes",
+      "It occurs mainly in older adults, in contrast to the younger age of primary exercise headache",
+      "A Chiari type I malformation or other posterior fossa lesion is the key secondary cause to exclude",
+      "Brain imaging with attention to the craniocervical junction is recommended in most cases",
+      "The primary form often responds to indometacin"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain including the craniocervical junction, Neurological examination for posterior fossa or long-tract signs, History",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary cough headache is attributed to a transient rise in intracranial pressure and venous distension provoked by the Valsalva manoeuvre, in the absence of a structural lesion. The same mechanical stress can unmask symptomatic cough headache when there is crowding at the foramen magnum, as in Chiari malformation, or a posterior fossa mass, which is why exclusion of these is essential before accepting a primary diagnosis.",
+    "additionalDifferentials": [
+      "Chiari type I malformation",
+      "Posterior fossa tumour or other mass lesion",
+      "Primary exercise headache",
+      "Spontaneous intracranial hypotension",
+      "Reversible cerebral vasoconstriction syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Chiari type I malformation, Posterior fossa tumour or other mass lesion, Primary exercise headache",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain including the craniocervical junction",
+      "Neurological examination for posterior fossa or long-tract signs",
+      "History clarifying Valsalva versus sustained-exertion triggers",
+      "Further vascular imaging if a secondary vascular cause is suspected"
     ],
-    [
-     "Management Strategy",
-     "Offer indometacin as first-line symptomatic and preventive treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Cerebellar or brainstem signs on examination",
+      "Occipital pain with features of tonsillar descent",
+      "First or worst headache suggesting a vascular event",
+      "Progressive or positional headache"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing primary cough headache without imaging and missing a Chiari malformation",
-     "Prevent diagnostic or management error"
+    "prognosis": "The primary form is benign and may remit over months to a few years; prognosis of symptomatic cough headache depends on the underlying structural cause.",
+    "pitfalls": [
+      "Diagnosing primary cough headache without imaging and missing a Chiari malformation",
+      "Confusing it with primary exercise headache",
+      "Overlooking a thunderclap presentation that needs urgent vascular workup",
+      "Assuming benignity in a young patient without exclusion of structural disease"
+    ],
+    "references": [
+      "International Classification of Headache Disorders (ICHD-3)",
+      "Bradley and Daroff Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer indometacin as first-line symptomatic and preventive treatment",
+      "Exclude a Chiari type I malformation or posterior fossa lesion with craniocervical-junction MRI before accepting the primary diagnosis",
+      "Treat any underlying chronic cough or respiratory condition to reduce the Valsalva trigger",
+      "Consider alternative preventives such as acetazolamide or topiramate if indometacin is not tolerated",
+      "Reassure the patient about the benign, often self-limiting course",
+      "Refer to neurology if features are atypical or a secondary cause is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary cough headache."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-cough-headache-real-image",
-   "title": "Primary cough headache: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "primary_cough_headache-pathway",
+      "title": "Primary cough headache: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sudden headache precipitated by coughing, sneezing or other Valsalva manoeuvres, not by sustained physical exertion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cerebellar or brainstem signs on examination",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain including the craniocervical junction, Neurological examination for posterior fossa or long-tract signs, History clarifying Valsalva versus sustained-exertion triggers"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer indometacin as first-line symptomatic and preventive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing primary cough headache without imaging and missing a Chiari malformation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary cough headache."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_cough_headache-matrix",
+      "title": "Primary cough headache: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sudden headache precipitated by coughing, sneezing or other Valsalva manoeuvres, not by sustained physical exertion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain including the craniocervical junction, Neurological examination for posterior fossa or long-tract signs, History",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chiari type I malformation, Posterior fossa tumour or other mass lesion, Primary exercise headache",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer indometacin as first-line symptomatic and preventive treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing primary cough headache without imaging and missing a Chiari malformation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary cough headache."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "International Classification of Headache Disorders (ICHD-3)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_cough_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain including the craniocervical junction",
+          "cells": [
+            {
+              "text": "Chiari type I malformation or posterior fossa lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Posterior fossa or long-tract signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of trigger",
+          "cells": [
+            {
+              "text": "Valsalva versus sustained-exertion trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further vascular imaging",
+          "cells": [
+            {
+              "text": "Secondary vascular cause, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cough_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chiari type I malformation",
+          "cells": [
+            {
+              "text": "Occipital pain with features of tonsillar descent"
+            },
+            {
+              "text": "Craniocervical junction MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior fossa tumour or other mass lesion",
+          "cells": [
+            {
+              "text": "Cerebellar or brainstem signs"
+            },
+            {
+              "text": "MRI of the brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary exercise headache",
+          "cells": [
+            {
+              "text": "Sustained-exertion rather than Valsalva trigger"
+            },
+            {
+              "text": "Trigger history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversible cerebral vasoconstriction syndrome",
+          "cells": [
+            {
+              "text": "First or worst headache suggesting a vascular event"
+            },
+            {
+              "text": "Vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cough_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Indometacin (first-line)",
+          "cells": [
+            {
+              "text": "Symptomatic and preventive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude structural cause first",
+          "cells": [
+            {
+              "text": "Craniocervical junction MRI before accepting the primary diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying cough or respiratory condition",
+          "cells": [
+            {
+              "text": "Treat to reduce the Valsalva trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative preventives",
+          "cells": [
+            {
+              "text": "Acetazolamide or topiramate if indometacin is not tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, often self-limiting course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral",
+          "cells": [
+            {
+              "text": "If features are atypical or a secondary cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_cough_headache-dx-mgmt",
+      "title": "Diagnosis and management of Primary cough headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary cough headache: headache triggered by coughing or Valsalva",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cerebellar signs, first or worst headache, progressive headache or tonsillar features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurology and urgent imaging for vascular or posterior fossa cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain with craniocervical junction; neurological exam; trigger history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a Chiari malformation or posterior fossa lesion excluded on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the structural lesion as a secondary headache; neurology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Indometacin as first-line symptomatic and preventive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat any underlying chronic cough or respiratory condition",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acetazolamide or topiramate if indometacin is not tolerated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure about a benign, often self-limiting course",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refer to neurology if features are atypical or a secondary cause is suspected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

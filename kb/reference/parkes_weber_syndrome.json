@@ -1,175 +1,460 @@
 {
- "id": "parkes_weber_syndrome",
- "name": "Parkes-Weber syndrome",
- "aliases": [
-  "PWS",
-  "Parkes Weber syndrome",
-  "capillary malformation with arteriovenous fistula and limb overgrowth"
- ],
- "class": "non_infective",
- "system": "Vascular anomalies / Dermatology",
- "specialty": "Vascular Anomalies",
- "referenceOnly": true,
- "reference": {
-  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A high-flow overgrowth syndrome characterised by a cutaneous capillary malformation over a limb combined with multiple arteriovenous fistulae and diffuse limb hypertrophy",
-   "It is a fast-flow condition, which fundamentally distinguishes it from the slow-flow Klippel-Trenaunay syndrome despite superficial resemblance",
-   "Many cases fall within the RASA1-related spectrum of capillary malformation-AVM syndrome",
-   "A palpable thrill, audible bruit and warmth over the affected limb point to significant arteriovenous shunting",
-   "High-output cardiac failure can develop when shunting is extensive, particularly in infancy",
-   "Chronic shunting causes venous hypertension, skin changes, ulceration and limb-length discrepancy",
-   "Doppler ultrasound and MRA are central to confirming fast flow and mapping the fistulae",
-   "Management is multidisciplinary, involving compression, orthopaedic care of leg-length discrepancy, and selective embolisation of symptomatic fistulae"
+  "id": "parkes_weber_syndrome",
+  "name": "Parkes-Weber syndrome",
+  "aliases": [
+    "PWS",
+    "Parkes Weber syndrome",
+    "capillary malformation with arteriovenous fistula and limb overgrowth"
   ],
-  "pathophysiology": "Parkes-Weber syndrome is a congenital fast-flow vascular anomaly in which a limb bears a capillary malformation together with numerous microscopic and macroscopic arteriovenous fistulae, causing direct arterial-to-venous shunting throughout the affected extremity. Many patients carry germline RASA1 variants within the capillary malformation-AVM spectrum, disrupting RAS-MAPK control of vascular differentiation. The persistent high-flow shunting drives limb overgrowth, venous hypertension and, when substantial, high-output cardiac strain; this fast-flow physiology is the key contrast with the slow-flow Klippel-Trenaunay syndrome.",
-  "additionalDifferentials": [
-   "Klippel-Trenaunay syndrome (slow-flow, no significant AV shunting)",
-   "Capillary malformation-AVM syndrome (RASA1)",
-   "Isolated arteriovenous malformation of a limb",
-   "CLOVES and other PIK3CA-related overgrowth syndromes",
-   "Isolated capillary (port-wine) malformation",
-   "Hereditary haemorrhagic telangiectasia with limb fistulae"
-  ],
-  "additionalInvestigations": [
-   "Doppler ultrasound to demonstrate fast flow and arteriovenous shunting",
-   "MRI/MRA to map fistulae, soft-tissue and bony overgrowth",
-   "Echocardiography to assess for high-output cardiac effects",
-   "Serial limb-length measurement and orthopaedic assessment",
-   "Catheter angiography when embolisation is planned",
-   "Genetic testing for RASA1 variants"
-  ],
-  "redFlags": [
-   "Signs of high-output cardiac failure",
-   "Rapidly progressive limb enlargement or worsening pain",
-   "Non-healing ulceration or significant bleeding from the limb",
-   "Distal ischaemia or steal phenomena from shunting",
-   "New neurological symptoms if associated central nervous system lesions are present"
-  ],
-  "prognosis": "Prognosis depends on the extent of arteriovenous shunting; limited disease may be managed conservatively, but extensive fistulae can cause progressive limb morbidity, ulceration and cardiac strain. High-flow lesions are difficult to cure and often require staged, palliative interventions with long-term follow-up.",
-  "pitfalls": [
-   "Confusing it with slow-flow Klippel-Trenaunay syndrome and missing the high-flow shunting",
-   "Overlooking high-output cardiac effects in an infant with extensive fistulae",
-   "Attempting complete surgical cure of diffuse fistulae rather than selective control",
-   "Neglecting orthopaedic management of limb-length discrepancy"
-  ],
-  "references": [
-   "ISSVA Classification of Vascular Anomalies",
-   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the arteriovenous fistulae with staged catheter embolisation, reserving surgical resection for selected lesions, as high-flow disease is difficult to cure",
-   "Use compression garments and diligent skin and wound care to manage venous hypertension, oedema and ulceration",
-   "Treat high-output cardiac failure medically and by reducing the shunt burden, particularly in infancy",
-   "Address limb-length discrepancy and soft-tissue overgrowth with orthopaedic input, including shoe raises and timed epiphysiodesis",
-   "Consider targeted MEK-pathway inhibition such as trametinib for extensive RASA1-related disease within specialist or trial settings",
-   "Offer RASA1 genetic testing and family counselling given the capillary malformation-arteriovenous malformation spectrum",
-   "Monitor with serial echocardiography and limb imaging, coordinating care through a vascular anomalies multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "parkes_weber_syndrome-pathway",
-   "title": "Parkes-Weber syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A high-flow overgrowth syndrome characterised by a cutaneous capillary malformation over a limb combined with multiple arteriovenous fistulae and diffuse limb hypertrophy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of high-output cardiac failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Doppler ultrasound to demonstrate fast flow and arteriovenous shunting, MRI/MRA to map fistulae, soft-tissue and bony overgrowth, Echocardiography to assess for high-output cardiac effects"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the arteriovenous fistulae with staged catheter embolisation, reserving surgical resection for selected lesions, as high-flow disease is difficult to cure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with slow-flow Klippel-Trenaunay syndrome and missing the high-flow shunting"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of parkes-weber syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "parkes_weber_syndrome-matrix",
-   "title": "Parkes-Weber syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A high-flow overgrowth syndrome characterised by a cutaneous capillary malformation over a limb combined with multiple",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular anomalies / Dermatology",
+  "specialty": "Vascular Anomalies",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A high-flow overgrowth syndrome characterised by a cutaneous capillary malformation over a limb combined with multiple arteriovenous fistulae and diffuse limb hypertrophy",
+      "It is a fast-flow condition, which fundamentally distinguishes it from the slow-flow Klippel-Trenaunay syndrome despite superficial resemblance",
+      "Many cases fall within the RASA1-related spectrum of capillary malformation-AVM syndrome",
+      "A palpable thrill, audible bruit and warmth over the affected limb point to significant arteriovenous shunting",
+      "High-output cardiac failure can develop when shunting is extensive, particularly in infancy",
+      "Chronic shunting causes venous hypertension, skin changes, ulceration and limb-length discrepancy",
+      "Doppler ultrasound and MRA are central to confirming fast flow and mapping the fistulae",
+      "Management is multidisciplinary, involving compression, orthopaedic care of leg-length discrepancy, and selective embolisation of symptomatic fistulae"
     ],
-    [
-     "Key Investigations",
-     "Doppler ultrasound to demonstrate fast flow and arteriovenous shunting, MRI/MRA to map fistulae, soft-tissue and bony overgrowth,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Parkes-Weber syndrome is a congenital fast-flow vascular anomaly in which a limb bears a capillary malformation together with numerous microscopic and macroscopic arteriovenous fistulae, causing direct arterial-to-venous shunting throughout the affected extremity. Many patients carry germline RASA1 variants within the capillary malformation-AVM spectrum, disrupting RAS-MAPK control of vascular differentiation. The persistent high-flow shunting drives limb overgrowth, venous hypertension and, when substantial, high-output cardiac strain; this fast-flow physiology is the key contrast with the slow-flow Klippel-Trenaunay syndrome.",
+    "additionalDifferentials": [
+      "Klippel-Trenaunay syndrome (slow-flow, no significant AV shunting)",
+      "Capillary malformation-AVM syndrome (RASA1)",
+      "Isolated arteriovenous malformation of a limb",
+      "CLOVES and other PIK3CA-related overgrowth syndromes",
+      "Isolated capillary (port-wine) malformation",
+      "Hereditary haemorrhagic telangiectasia with limb fistulae"
     ],
-    [
-     "Primary Differentials",
-     "Klippel-Trenaunay syndrome (slow-flow, no significant AV shunting), Capillary malformation-AVM syndrome (RASA1), Isolated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Doppler ultrasound to demonstrate fast flow and arteriovenous shunting",
+      "MRI/MRA to map fistulae, soft-tissue and bony overgrowth",
+      "Echocardiography to assess for high-output cardiac effects",
+      "Serial limb-length measurement and orthopaedic assessment",
+      "Catheter angiography when embolisation is planned",
+      "Genetic testing for RASA1 variants"
     ],
-    [
-     "Management Strategy",
-     "Manage the arteriovenous fistulae with staged catheter embolisation, reserving surgical resection for selected lesions, as",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of high-output cardiac failure",
+      "Rapidly progressive limb enlargement or worsening pain",
+      "Non-healing ulceration or significant bleeding from the limb",
+      "Distal ischaemia or steal phenomena from shunting",
+      "New neurological symptoms if associated central nervous system lesions are present"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with slow-flow Klippel-Trenaunay syndrome and missing the high-flow shunting",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the extent of arteriovenous shunting; limited disease may be managed conservatively, but extensive fistulae can cause progressive limb morbidity, ulceration and cardiac strain. High-flow lesions are difficult to cure and often require staged, palliative interventions with long-term follow-up.",
+    "pitfalls": [
+      "Confusing it with slow-flow Klippel-Trenaunay syndrome and missing the high-flow shunting",
+      "Overlooking high-output cardiac effects in an infant with extensive fistulae",
+      "Attempting complete surgical cure of diffuse fistulae rather than selective control",
+      "Neglecting orthopaedic management of limb-length discrepancy"
+    ],
+    "references": [
+      "ISSVA Classification of Vascular Anomalies",
+      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the arteriovenous fistulae with staged catheter embolisation, reserving surgical resection for selected lesions, as high-flow disease is difficult to cure",
+      "Use compression garments and diligent skin and wound care to manage venous hypertension, oedema and ulceration",
+      "Treat high-output cardiac failure medically and by reducing the shunt burden, particularly in infancy",
+      "Address limb-length discrepancy and soft-tissue overgrowth with orthopaedic input, including shoe raises and timed epiphysiodesis",
+      "Consider targeted MEK-pathway inhibition such as trametinib for extensive RASA1-related disease within specialist or trial settings",
+      "Offer RASA1 genetic testing and family counselling given the capillary malformation-arteriovenous malformation spectrum",
+      "Monitor with serial echocardiography and limb imaging, coordinating care through a vascular anomalies multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for parkes-weber syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "parkes-weber-syndrome-real-image",
-   "title": "Parkes-Weber syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "parkes_weber_syndrome-pathway",
+      "title": "Parkes-Weber syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A high-flow overgrowth syndrome characterised by a cutaneous capillary malformation over a limb combined with multiple arteriovenous fistulae and diffuse limb hypertrophy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of high-output cardiac failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Doppler ultrasound to demonstrate fast flow and arteriovenous shunting, MRI/MRA to map fistulae, soft-tissue and bony overgrowth, Echocardiography to assess for high-output cardiac effects"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the arteriovenous fistulae with staged catheter embolisation, reserving surgical resection for selected lesions, as high-flow disease is difficult to cure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with slow-flow Klippel-Trenaunay syndrome and missing the high-flow shunting"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of parkes-weber syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "parkes_weber_syndrome-matrix",
+      "title": "Parkes-Weber syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A high-flow overgrowth syndrome characterised by a cutaneous capillary malformation over a limb combined with multiple",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Doppler ultrasound to demonstrate fast flow and arteriovenous shunting, MRI/MRA to map fistulae, soft-tissue and bony overgrowth,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Klippel-Trenaunay syndrome (slow-flow, no significant AV shunting), Capillary malformation-AVM syndrome (RASA1), Isolated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the arteriovenous fistulae with staged catheter embolisation, reserving surgical resection for selected lesions, as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with slow-flow Klippel-Trenaunay syndrome and missing the high-flow shunting",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for parkes-weber syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parkes_weber_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Doppler ultrasound for fast flow",
+          "cells": [
+            {
+              "text": "Arteriovenous shunting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or MRA of fistulae and overgrowth",
+          "cells": [
+            {
+              "text": "Soft-tissue and bony overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "High-output cardiac effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial limb-length measurement",
+          "cells": [
+            {
+              "text": "Limb-length discrepancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography",
+          "cells": [
+            {
+              "text": "Before embolisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RASA1 genetic testing",
+          "cells": [
+            {
+              "text": "Capillary malformation-AVM spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parkes_weber_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Klippel-Trenaunay syndrome",
+          "cells": [
+            {
+              "text": "Slow flow without significant arteriovenous shunting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capillary malformation-AVM syndrome",
+          "cells": [
+            {
+              "text": "Overlapping RASA1 spectrum; genetic testing guides"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parkes_weber_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged embolisation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Catheter embolisation; surgery for selected lesions as high-flow disease is hard to cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compression and skin care",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Manages venous hypertension, oedema and ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac failure management",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Medical treatment and shunt reduction, especially in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic input",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Shoe raises or timed epiphysiodesis for limb-length discrepancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEK inhibition",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Trametinib for extensive RASA1-related disease in specialist or trial settings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parkes_weber_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Parkes-Weber syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Limb capillary malformation with overgrowth, warmth, thrill or bruit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (high-output heart failure, rapid limb enlargement or distal ischaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac review for high-output failure in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler for fast flow, MRI or MRA of fistulae, echo, limb lengths, RASA1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does Doppler or MRA show fast-flow arteriovenous shunting in the limb?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Klippel-Trenaunay syndrome, CM-AVM, isolated AVM or PIK3CA overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Staged catheter embolisation of fistulae, with surgery for selected lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Compression garments and skin care for venous hypertension and ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic input for limb-length discrepancy, shoe raises or epiphysiodesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac support and shunt reduction; consider MEK inhibition in specialist settings",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on shunt extent; high-flow lesions are hard to cure and need staged care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

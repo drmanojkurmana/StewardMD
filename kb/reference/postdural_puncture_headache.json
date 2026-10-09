@@ -1,173 +1,498 @@
 {
- "id": "postdural_puncture_headache",
- "name": "Postdural puncture headache",
- "aliases": [
-  "PDPH",
-  "post-lumbar puncture headache",
-  "low-pressure headache"
- ],
- "class": "non_infective",
- "system": "Anaesthesia / Perioperative",
- "specialty": "Anaesthesiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Miller's Anesthesia / standard perioperative references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few days of dural puncture",
-   "Typically frontal or occipital and may be accompanied by neck stiffness, photophobia, nausea, tinnitus, or hearing changes",
-   "Risk is higher with larger-gauge and cutting (rather than pencil-point) needles, younger age, female sex, and after accidental dural puncture during epidural placement",
-   "Diagnosis is largely clinical, but a headache lacking postural features or with neurological signs should prompt evaluation for other causes",
-   "Initial management is conservative with rest as needed, hydration, simple analgesia, and reassurance, as many cases resolve spontaneously",
-   "An epidural blood patch is the definitive treatment for severe or persistent headache and is generally highly effective",
-   "Caffeine and other pharmacological measures have limited and temporary benefit compared with a blood patch",
-   "Rare but serious complications of intracranial hypotension include subdural haematoma and cerebral venous sinus thrombosis, so atypical or worsening features require imaging"
+  "id": "postdural_puncture_headache",
+  "name": "Postdural puncture headache",
+  "aliases": [
+    "PDPH",
+    "post-lumbar puncture headache",
+    "low-pressure headache"
   ],
-  "pathophysiology": "A persistent hole in the dura allows cerebrospinal fluid to leak into the epidural space faster than it is produced, lowering cerebrospinal fluid volume and pressure. In the upright position, reduced buoyant support causes traction on pain-sensitive intracranial structures such as the meninges and bridging veins, and compensatory cerebral vasodilation may contribute, producing the postural headache. Larger dural defects leak more and cause more severe symptoms. An epidural blood patch works by sealing the defect and raising epidural and cerebrospinal fluid pressure.",
-  "additionalDifferentials": [
-   "Migraine or tension-type headache",
-   "Meningitis (infective) or chemical meningism",
-   "Cerebral venous sinus thrombosis",
-   "Subdural haematoma",
-   "Pre-eclampsia or eclampsia in the obstetric patient",
-   "Pneumocephalus or caffeine-withdrawal headache"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment focusing on the postural nature of the headache",
-   "Neurological examination to exclude focal signs",
-   "Brain imaging (CT or MRI) when features are atypical, worsening, or accompanied by neurological signs",
-   "Investigations for pre-eclampsia in the postpartum patient when relevant",
-   "Assessment for infection if fever or meningism is present"
-  ],
-  "redFlags": [
-   "Loss of the postural component or a headache that becomes constant, suggesting an alternative or serious cause",
-   "Focal neurological deficit, seizure, or reduced consciousness suggesting subdural haematoma or venous thrombosis",
-   "Fever, neck stiffness, or photophobia raising concern for meningitis",
-   "Sudden thunderclap onset or features suggesting subarachnoid haemorrhage"
-  ],
-  "prognosis": "Most postdural puncture headaches resolve within days to weeks with conservative care, and a blood patch relieves the majority of severe cases; rare progression to intracranial haemorrhage or venous thrombosis can cause serious morbidity.",
-  "pitfalls": [
-   "Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause",
-   "Delaying an effective blood patch in severe, disabling headache",
-   "Overlooking evolving neurological signs that indicate subdural haematoma or venous sinus thrombosis",
-   "Failing to consider pre-eclampsia in a postpartum woman with headache",
-   "Relying on caffeine or bed rest alone for persistent severe symptoms"
-  ],
-  "references": [
-   "Miller's Anesthesia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol and non-steroidal anti-inflammatory drugs",
-   "Add symptomatic measures including antiemetics for nausea and caffeine as an adjunct to counter compensatory cerebral vasodilatation",
-   "Reassure the patient that many cases settle spontaneously and adopt a stepwise approach before invasive treatment",
-   "Perform an autologous epidural blood patch as the definitive treatment for severe or persistent headache, sealing the dural defect and restoring cerebrospinal fluid pressure, and repeat if the first fails",
-   "Involve the anaesthetic or pain service early for blood patch and for management of accidental dural puncture",
-   "Monitor for atypical or red-flag features (loss of postural character, focal neurological signs, fever, seizures) that warrant brain imaging to exclude intracranial haemorrhage or cerebral venous thrombosis",
-   "In the postpartum patient, actively exclude pre-eclampsia and cortical vein thrombosis as alternative causes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "postdural_puncture_headache-pathway",
-   "title": "Postdural puncture headache: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few days of dural puncture",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Loss of the postural component or a headache that becomes constant, suggesting an alternative or serious cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment focusing on the postural nature of the headache, Neurological examination to exclude focal signs, Brain imaging (CT or MRI) when features are atypical, worsening, or accompanied by neurological signs"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol and non-steroidal anti-inflammatory drugs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of postdural puncture headache."
-  }
- ],
- "tables": [
-  {
-   "id": "postdural_puncture_headache-matrix",
-   "title": "Postdural puncture headache: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Anaesthesia / Perioperative",
+  "specialty": "Anaesthesiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Miller's Anesthesia / standard perioperative references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few days of dural puncture",
+      "Typically frontal or occipital and may be accompanied by neck stiffness, photophobia, nausea, tinnitus, or hearing changes",
+      "Risk is higher with larger-gauge and cutting (rather than pencil-point) needles, younger age, female sex, and after accidental dural puncture during epidural placement",
+      "Diagnosis is largely clinical, but a headache lacking postural features or with neurological signs should prompt evaluation for other causes",
+      "Initial management is conservative with rest as needed, hydration, simple analgesia, and reassurance, as many cases resolve spontaneously",
+      "An epidural blood patch is the definitive treatment for severe or persistent headache and is generally highly effective",
+      "Caffeine and other pharmacological measures have limited and temporary benefit compared with a blood patch",
+      "Rare but serious complications of intracranial hypotension include subdural haematoma and cerebral venous sinus thrombosis, so atypical or worsening features require imaging"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment focusing on the postural nature of the headache, Neurological examination to exclude focal signs, Brain",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A persistent hole in the dura allows cerebrospinal fluid to leak into the epidural space faster than it is produced, lowering cerebrospinal fluid volume and pressure. In the upright position, reduced buoyant support causes traction on pain-sensitive intracranial structures such as the meninges and bridging veins, and compensatory cerebral vasodilation may contribute, producing the postural headache. Larger dural defects leak more and cause more severe symptoms. An epidural blood patch works by sealing the defect and raising epidural and cerebrospinal fluid pressure.",
+    "additionalDifferentials": [
+      "Migraine or tension-type headache",
+      "Meningitis (infective) or chemical meningism",
+      "Cerebral venous sinus thrombosis",
+      "Subdural haematoma",
+      "Pre-eclampsia or eclampsia in the obstetric patient",
+      "Pneumocephalus or caffeine-withdrawal headache"
     ],
-    [
-     "Primary Differentials",
-     "Migraine or tension-type headache, Meningitis (infective) or chemical meningism, Cerebral venous sinus thrombosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment focusing on the postural nature of the headache",
+      "Neurological examination to exclude focal signs",
+      "Brain imaging (CT or MRI) when features are atypical, worsening, or accompanied by neurological signs",
+      "Investigations for pre-eclampsia in the postpartum patient when relevant",
+      "Assessment for infection if fever or meningism is present"
     ],
-    [
-     "Management Strategy",
-     "Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol",
-     "Core treatment modality"
+    "redFlags": [
+      "Loss of the postural component or a headache that becomes constant, suggesting an alternative or serious cause",
+      "Focal neurological deficit, seizure, or reduced consciousness suggesting subdural haematoma or venous thrombosis",
+      "Fever, neck stiffness, or photophobia raising concern for meningitis",
+      "Sudden thunderclap onset or features suggesting subarachnoid haemorrhage"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most postdural puncture headaches resolve within days to weeks with conservative care, and a blood patch relieves the majority of severe cases; rare progression to intracranial haemorrhage or venous thrombosis can cause serious morbidity.",
+    "pitfalls": [
+      "Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause",
+      "Delaying an effective blood patch in severe, disabling headache",
+      "Overlooking evolving neurological signs that indicate subdural haematoma or venous sinus thrombosis",
+      "Failing to consider pre-eclampsia in a postpartum woman with headache",
+      "Relying on caffeine or bed rest alone for persistent severe symptoms"
+    ],
+    "references": [
+      "Miller's Anesthesia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol and non-steroidal anti-inflammatory drugs",
+      "Add symptomatic measures including antiemetics for nausea and caffeine as an adjunct to counter compensatory cerebral vasodilatation",
+      "Reassure the patient that many cases settle spontaneously and adopt a stepwise approach before invasive treatment",
+      "Perform an autologous epidural blood patch as the definitive treatment for severe or persistent headache, sealing the dural defect and restoring cerebrospinal fluid pressure, and repeat if the first fails",
+      "Involve the anaesthetic or pain service early for blood patch and for management of accidental dural puncture",
+      "Monitor for atypical or red-flag features (loss of postural character, focal neurological signs, fever, seizures) that warrant brain imaging to exclude intracranial haemorrhage or cerebral venous thrombosis",
+      "In the postpartum patient, actively exclude pre-eclampsia and cortical vein thrombosis as alternative causes"
     ]
-   ],
-   "caption": "Overview comparison matrix for postdural puncture headache."
-  }
- ],
- "diagrams": [
-  {
-   "id": "postdural-puncture-headache-real-image",
-   "title": "Postdural puncture headache: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "postdural_puncture_headache-pathway",
+      "title": "Postdural puncture headache: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few days of dural puncture",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Loss of the postural component or a headache that becomes constant, suggesting an alternative or serious cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment focusing on the postural nature of the headache, Neurological examination to exclude focal signs, Brain imaging (CT or MRI) when features are atypical, worsening, or accompanied by neurological signs"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol and non-steroidal anti-inflammatory drugs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of postdural puncture headache."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "postdural_puncture_headache-matrix",
+      "title": "Postdural puncture headache: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment focusing on the postural nature of the headache, Neurological examination to exclude focal signs, Brain",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Migraine or tension-type headache, Meningitis (infective) or chemical meningism, Cerebral venous sinus thrombosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for postdural puncture headache."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "postdural_puncture_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of postural headache",
+          "cells": [
+            {
+              "text": "Postural nature confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Focal signs excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI brain",
+          "cells": [
+            {
+              "text": "Atypical, worsening or neurological features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-eclampsia investigations",
+          "cells": [
+            {
+              "text": "Postpartum patient where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection assessment",
+          "cells": [
+            {
+              "text": "Fever or meningism present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postdural_puncture_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Migraine or tension-type headache",
+          "cells": [
+            {
+              "text": "Not postural"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective meningitis or chemical meningism",
+          "cells": [
+            {
+              "text": "Fever or neck stiffness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral venous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Venous territory on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subdural haematoma",
+          "cells": [
+            {
+              "text": "Focal deficit or reduced consciousness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-eclampsia or eclampsia",
+          "cells": [
+            {
+              "text": "Postpartum hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumocephalus or caffeine withdrawal",
+          "cells": [
+            {
+              "text": "Other causes of headache"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postdural_puncture_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Rest, and oral or intravenous rehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic measures",
+          "cells": [
+            {
+              "text": "Antiemetics and caffeine as an adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Many cases settle spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural blood patch",
+          "cells": [
+            {
+              "text": "Definitive treatment for severe or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early anaesthetic input",
+          "cells": [
+            {
+              "text": "Blood patch and management of complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor for red flags",
+          "cells": [
+            {
+              "text": "Loss of postural character or focal neurology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum pre-eclampsia",
+          "cells": [
+            {
+              "text": "Actively exclude pre-eclampsia and cortical vein thrombosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "postdural_puncture_headache-dx-mgmt",
+      "title": "Diagnosis and management of Postdural puncture headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Headache worse on sitting or standing after dural puncture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (loss of postural pattern, focal deficit, fever, thunderclap onset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological imaging for focal deficit, seizure or reduced consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Postural history; neurological examination; CT or MRI if atypical; infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the headache postural and temporally linked to the dural puncture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider meningitis, subdural haematoma, cerebral venous thrombosis or migraine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care with rest, rehydration and symptomatic measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure the patient and adopt a stepwise approach",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Autologous epidural blood patch for severe or persistent symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Involve the anaesthetic or pain service early for blood patch",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Exclude pre-eclampsia and cortical vein thrombosis postpartum",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most resolve within days to weeks; a blood patch relieves most remaining cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

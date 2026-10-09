@@ -1,174 +1,479 @@
 {
- "id": "hurler_scheie_syndrome",
- "name": "Hurler-Scheie syndrome (MPS IH/S)",
- "aliases": [
-  "MPS IH/S",
-  "intermediate mucopolysaccharidosis type I",
-  "attenuated alpha-L-iduronidase deficiency (intermediate)",
-  "IDUA deficiency (intermediate form)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Occupies the intermediate position on the mucopolysaccharidosis type I continuum between severe Hurler and mild Scheie syndromes, reflecting intermediate residual alpha-L-iduronidase activity",
-   "Somatic features such as coarse facies, joint stiffness, and dysostosis multiplex are present but cognition is usually preserved or only mildly affected",
-   "Corneal clouding, cardiac valve disease, and hepatosplenomegaly develop progressively",
-   "Onset of symptoms is typically in mid-childhood, later than classic Hurler syndrome",
-   "Recurrent upper airway obstruction, hearing loss, and obstructive sleep apnoea are common management challenges",
-   "Diagnosis combines deficient alpha-L-iduronidase activity with elevated urinary dermatan and heparan sulfate",
-   "IDUA genotyping helps predict disease severity and guide therapy decisions"
+  "id": "hurler_scheie_syndrome",
+  "name": "Hurler-Scheie syndrome (MPS IH/S)",
+  "aliases": [
+    "MPS IH/S",
+    "intermediate mucopolysaccharidosis type I",
+    "attenuated alpha-L-iduronidase deficiency (intermediate)",
+    "IDUA deficiency (intermediate form)"
   ],
-  "pathophysiology": "Hurler-Scheie syndrome results from biallelic IDUA variants that leave an intermediate level of residual alpha-L-iduronidase activity, producing a phenotype between the severe and attenuated poles of mucopolysaccharidosis type I. Deficient enzyme activity impairs the stepwise degradation of dermatan sulfate and heparan sulfate, causing lysosomal accumulation of these glycosaminoglycans throughout connective tissue, cartilage, cornea, heart valves, meninges, and viscera. Progressive substrate storage produces the characteristic multisystem somatic disease, while the greater residual activity compared with Hurler syndrome largely spares the central nervous system. Excess glycosaminoglycan is excreted in the urine. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Hurler syndrome and Scheie syndrome at the extremes of the same spectrum",
-   "Hunter syndrome (MPS II)",
-   "Maroteaux-Lamy syndrome (MPS VI)",
-   "Mucolipidosis III (pseudo-Hurler polydystrophy)",
-   "Multiple sulfatase deficiency",
-   "Other storage disorders with coarse facies and organomegaly"
-  ],
-  "additionalInvestigations": [
-   "Leucocyte alpha-L-iduronidase enzyme assay",
-   "Quantitative and qualitative urinary glycosaminoglycan analysis",
-   "IDUA gene sequencing for genotype-phenotype correlation",
-   "Echocardiography for valvular and myocardial assessment",
-   "Skeletal survey to document dysostosis multiplex",
-   "Audiology, ophthalmology, and sleep studies for airway and sensory involvement"
-  ],
-  "redFlags": [
-   "Progressive airway obstruction or obstructive sleep apnoea",
-   "Cardiac valve dysfunction and cardiomyopathy",
-   "Cervical cord compression from atlantoaxial instability or dural thickening",
-   "Rapid corneal clouding threatening vision"
-  ],
-  "prognosis": "Survival into adulthood is common, but progressive cardiorespiratory, skeletal, and ocular disease causes significant disability. Enzyme replacement therapy can improve somatic manifestations, though it does not cross the blood-brain barrier or reverse established corneal and skeletal changes.",
-  "pitfalls": [
-   "Misclassifying the intermediate phenotype as classic Hurler or mild Scheie, altering prognostic counselling",
-   "Underestimating airway risk during anaesthesia in patients with a difficult airway",
-   "Failing to monitor for atlantoaxial instability before procedures",
-   "Assuming preserved intellect rules out a mucopolysaccharidosis"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Enzyme replacement therapy with recombinant laronidase infusions to reduce glycosaminoglycan storage and improve somatic disease, recognising it does not cross the blood-brain barrier or reverse established corneal and skeletal changes",
-   "Consider haematopoietic stem cell transplantation on an individualised basis where a more severe or neurological phenotype is emerging",
-   "Proactive airway management for obstructive sleep apnoea and upper airway obstruction, including adenotonsillectomy and non-invasive ventilatory support, with meticulous difficult-airway planning for any anaesthesia",
-   "Supportive physiotherapy and orthopaedic care for joint stiffness and dysostosis multiplex, with carpal tunnel decompression, hernia repair, and cardiac valve surgery as required",
-   "Structured surveillance with serial echocardiography for valvular disease, audiology, ophthalmology for corneal clouding, and sleep studies",
-   "Multidisciplinary coordination across metabolic medicine, cardiology, ENT, ophthalmology, and orthopaedics",
-   "Genetic counselling for autosomal recessive inheritance with carrier testing and screening of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hurler_scheie_syndrome-pathway",
-   "title": "Hurler-Scheie syndrome (MPS IH/S): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Occupies the intermediate position on the mucopolysaccharidosis type I continuum between severe Hurler and mild Scheie syndromes, reflecting intermediate residual alpha-L-iduronidase activity",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive airway obstruction or obstructive sleep apnoea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Leucocyte alpha-L-iduronidase enzyme assay, Quantitative and qualitative urinary glycosaminoglycan analysis, IDUA gene sequencing for genotype-phenotype correlation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Enzyme replacement therapy with recombinant laronidase infusions to reduce glycosaminoglycan storage and improve somatic disease, recognising it does not cross the blood-brain barrier or reverse established corneal and"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying the intermediate phenotype as classic Hurler or mild Scheie, altering prognostic counselling"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hurler-scheie syndrome (mps ih/s)."
-  }
- ],
- "tables": [
-  {
-   "id": "hurler_scheie_syndrome-matrix",
-   "title": "Hurler-Scheie syndrome (MPS IH/S): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Occupies the intermediate position on the mucopolysaccharidosis type I continuum between severe Hurler and mild Scheie syndromes,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Occupies the intermediate position on the mucopolysaccharidosis type I continuum between severe Hurler and mild Scheie syndromes, reflecting intermediate residual alpha-L-iduronidase activity",
+      "Somatic features such as coarse facies, joint stiffness, and dysostosis multiplex are present but cognition is usually preserved or only mildly affected",
+      "Corneal clouding, cardiac valve disease, and hepatosplenomegaly develop progressively",
+      "Onset of symptoms is typically in mid-childhood, later than classic Hurler syndrome",
+      "Recurrent upper airway obstruction, hearing loss, and obstructive sleep apnoea are common management challenges",
+      "Diagnosis combines deficient alpha-L-iduronidase activity with elevated urinary dermatan and heparan sulfate",
+      "IDUA genotyping helps predict disease severity and guide therapy decisions"
     ],
-    [
-     "Key Investigations",
-     "Leucocyte alpha-L-iduronidase enzyme assay, Quantitative and qualitative urinary glycosaminoglycan analysis, IDUA gene sequencing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hurler-Scheie syndrome results from biallelic IDUA variants that leave an intermediate level of residual alpha-L-iduronidase activity, producing a phenotype between the severe and attenuated poles of mucopolysaccharidosis type I. Deficient enzyme activity impairs the stepwise degradation of dermatan sulfate and heparan sulfate, causing lysosomal accumulation of these glycosaminoglycans throughout connective tissue, cartilage, cornea, heart valves, meninges, and viscera. Progressive substrate storage produces the characteristic multisystem somatic disease, while the greater residual activity compared with Hurler syndrome largely spares the central nervous system. Excess glycosaminoglycan is excreted in the urine. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Hurler syndrome and Scheie syndrome at the extremes of the same spectrum",
+      "Hunter syndrome (MPS II)",
+      "Maroteaux-Lamy syndrome (MPS VI)",
+      "Mucolipidosis III (pseudo-Hurler polydystrophy)",
+      "Multiple sulfatase deficiency",
+      "Other storage disorders with coarse facies and organomegaly"
     ],
-    [
-     "Primary Differentials",
-     "Hurler syndrome and Scheie syndrome at the extremes of the same spectrum, Hunter syndrome (MPS II), Maroteaux-Lamy syndrome (MPS",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Leucocyte alpha-L-iduronidase enzyme assay",
+      "Quantitative and qualitative urinary glycosaminoglycan analysis",
+      "IDUA gene sequencing for genotype-phenotype correlation",
+      "Echocardiography for valvular and myocardial assessment",
+      "Skeletal survey to document dysostosis multiplex",
+      "Audiology, ophthalmology, and sleep studies for airway and sensory involvement"
     ],
-    [
-     "Management Strategy",
-     "Enzyme replacement therapy with recombinant laronidase infusions to reduce glycosaminoglycan storage and improve somatic disease,",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive airway obstruction or obstructive sleep apnoea",
+      "Cardiac valve dysfunction and cardiomyopathy",
+      "Cervical cord compression from atlantoaxial instability or dural thickening",
+      "Rapid corneal clouding threatening vision"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying the intermediate phenotype as classic Hurler or mild Scheie, altering prognostic counselling",
-     "Prevent diagnostic or management error"
+    "prognosis": "Survival into adulthood is common, but progressive cardiorespiratory, skeletal, and ocular disease causes significant disability. Enzyme replacement therapy can improve somatic manifestations, though it does not cross the blood-brain barrier or reverse established corneal and skeletal changes.",
+    "pitfalls": [
+      "Misclassifying the intermediate phenotype as classic Hurler or mild Scheie, altering prognostic counselling",
+      "Underestimating airway risk during anaesthesia in patients with a difficult airway",
+      "Failing to monitor for atlantoaxial instability before procedures",
+      "Assuming preserved intellect rules out a mucopolysaccharidosis"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Enzyme replacement therapy with recombinant laronidase infusions to reduce glycosaminoglycan storage and improve somatic disease, recognising it does not cross the blood-brain barrier or reverse established corneal and skeletal changes",
+      "Consider haematopoietic stem cell transplantation on an individualised basis where a more severe or neurological phenotype is emerging",
+      "Proactive airway management for obstructive sleep apnoea and upper airway obstruction, including adenotonsillectomy and non-invasive ventilatory support, with meticulous difficult-airway planning for any anaesthesia",
+      "Supportive physiotherapy and orthopaedic care for joint stiffness and dysostosis multiplex, with carpal tunnel decompression, hernia repair, and cardiac valve surgery as required",
+      "Structured surveillance with serial echocardiography for valvular disease, audiology, ophthalmology for corneal clouding, and sleep studies",
+      "Multidisciplinary coordination across metabolic medicine, cardiology, ENT, ophthalmology, and orthopaedics",
+      "Genetic counselling for autosomal recessive inheritance with carrier testing and screening of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for hurler-scheie syndrome (mps ih/s)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hurler-scheie-syndrome-real-image",
-   "title": "Hurler-Scheie syndrome (MPS IH/S): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hurler_scheie_syndrome-pathway",
+      "title": "Hurler-Scheie syndrome (MPS IH/S): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Occupies the intermediate position on the mucopolysaccharidosis type I continuum between severe Hurler and mild Scheie syndromes, reflecting intermediate residual alpha-L-iduronidase activity",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive airway obstruction or obstructive sleep apnoea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Leucocyte alpha-L-iduronidase enzyme assay, Quantitative and qualitative urinary glycosaminoglycan analysis, IDUA gene sequencing for genotype-phenotype correlation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Enzyme replacement therapy with recombinant laronidase infusions to reduce glycosaminoglycan storage and improve somatic disease, recognising it does not cross the blood-brain barrier or reverse established corneal and"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying the intermediate phenotype as classic Hurler or mild Scheie, altering prognostic counselling"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hurler-scheie syndrome (mps ih/s)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hurler_scheie_syndrome-matrix",
+      "title": "Hurler-Scheie syndrome (MPS IH/S): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Occupies the intermediate position on the mucopolysaccharidosis type I continuum between severe Hurler and mild Scheie syndromes,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Leucocyte alpha-L-iduronidase enzyme assay, Quantitative and qualitative urinary glycosaminoglycan analysis, IDUA gene sequencing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hurler syndrome and Scheie syndrome at the extremes of the same spectrum, Hunter syndrome (MPS II), Maroteaux-Lamy syndrome (MPS",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Enzyme replacement therapy with recombinant laronidase infusions to reduce glycosaminoglycan storage and improve somatic disease,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying the intermediate phenotype as classic Hurler or mild Scheie, altering prognostic counselling",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hurler-scheie syndrome (mps ih/s)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hurler_scheie_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Leucocyte alpha-L-iduronidase enzyme assay",
+          "cells": [
+            {
+              "text": "Enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary glycosaminoglycan analysis",
+          "cells": [
+            {
+              "text": "Glycosaminoglycan excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IDUA gene sequencing",
+          "cells": [
+            {
+              "text": "Genotype-phenotype correlation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Valvular and myocardial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Dysostosis multiplex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology, ophthalmology and sleep studies",
+          "cells": [
+            {
+              "text": "Airway and sensory involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hurler_scheie_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hurler and Scheie syndromes",
+          "cells": [
+            {
+              "text": "Intermediate end of the Hurler spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hunter syndrome (MPS II)",
+          "cells": [
+            {
+              "text": "Different enzyme deficiency; enzyme assay separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maroteaux-Lamy syndrome (MPS VI)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucolipidosis III",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hurler_scheie_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement with laronidase",
+          "cells": [
+            {
+              "text": "Recombinant enzyme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Considered in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proactive airway management",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and orthopaedic care",
+          "cells": [
+            {
+              "text": "Joint involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured surveillance",
+          "cells": [
+            {
+              "text": "Serial echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Metabolic medicine and specialist teams"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hurler_scheie_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hurler-Scheie syndrome (MPS IH/S)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Coarse features, joint stiffness and airway or sleep problems in an intermediate MPS I",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway obstruction, valve disease, cord compression, or fast corneal clouding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway and spinal review for obstruction or cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Leucocyte alpha-L-iduronidase; urine GAG; IDUA sequencing; echo; skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is alpha-L-iduronidase deficient with IDUA variants found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Hurler, Hunter, Maroteaux-Lamy, mucolipidosis III or MSD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Enzyme replacement with laronidase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Haematopoietic stem cell transplantation in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Proactive airway management for sleep apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and orthopaedic care for joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Systemic disease managed; surveillance with echocardiography",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

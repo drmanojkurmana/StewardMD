@@ -1,181 +1,430 @@
 {
- "id": "fuchs_endothelial_corneal_dystrophy",
- "name": "Fuchs Endothelial Corneal Dystrophy",
- "aliases": [
-  "FECD",
-  "Fuchs dystrophy",
-  "Fuchs endothelial corneal dystrophy",
-  "Fuchs endothelial dystrophy",
-  "Fuchs' endothelial dystrophy",
-  "fuchs endothelial dystrophy"
- ],
- "class": "non_infective",
- "system": "Ophthalmology",
- "specialty": "Cornea and external eye",
- "referenceOnly": true,
- "reference": {
-  "source": "Ophthalmology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The hallmark sign is corneal guttae, focal excrescences of Descemet membrane that give the endothelium a beaten-metal appearance on slit-lamp retroillumination.",
-   "The corneal endothelium is a non-regenerating monolayer; progressive cell loss causes failure of the deturgescence pump with resulting stromal and epithelial oedema.",
-   "A classic symptom is blurred vision that is worst on waking and improves through the day as surface evaporation clears overnight oedema.",
-   "The disease is typically bilateral but asymmetric, shows a female predominance and usually becomes symptomatic in later decades.",
-   "A trinucleotide repeat expansion in the TCF4 gene is the strongest known genetic association, while COL8A2 variants underlie rarer early-onset forms.",
-   "Advanced disease progresses to bullous keratopathy, with painful epithelial bullae and eventual subepithelial scarring and vascularisation.",
-   "Endothelial keratoplasty (DMEK or DSAEK) has largely replaced penetrating keratoplasty and offers faster, more reliable visual recovery.",
-   "Intraocular surgery, particularly cataract extraction, can precipitate endothelial decompensation, so endothelial status must be assessed and counselled beforehand."
+  "id": "fuchs_endothelial_corneal_dystrophy",
+  "name": "Fuchs Endothelial Corneal Dystrophy",
+  "aliases": [
+    "FECD",
+    "Fuchs dystrophy",
+    "Fuchs endothelial corneal dystrophy",
+    "Fuchs endothelial dystrophy",
+    "Fuchs' endothelial dystrophy",
+    "fuchs endothelial dystrophy"
   ],
-  "pathophysiology": "The corneal endothelium is a terminally differentiated, essentially non-dividing monolayer that maintains corneal clarity by acting as both a barrier and an active metabolic pump, drawing fluid out of the stroma to keep it in a relatively dehydrated (deturgescent) state. In Fuchs endothelial corneal dystrophy, accelerated endothelial cell apoptosis, oxidative stress and abnormal extracellular matrix deposition produce guttae and a steady decline in endothelial cell density. The commonly implicated TCF4 trinucleotide repeat expansion is thought to generate toxic repeat-containing RNA that sequesters splicing regulators, an RNA-mediated mechanism analogous to that seen in myotonic dystrophy. Once endothelial density falls below a critical level the pump can no longer counter passive fluid influx; the stroma imbibes water and swells, oedema extends to the epithelium to form microcysts and bullae, and chronic decompensation leads to subepithelial fibrosis, scarring and vascularisation with progressive loss of vision.",
-  "additionalDifferentials": [
-   "Pseudophakic or aphakic bullous keratopathy",
-   "Posterior polymorphous corneal dystrophy",
-   "Congenital hereditary endothelial dystrophy",
-   "Iridocorneal endothelial syndrome",
-   "Herpetic disciform keratitis or endotheliitis",
-   "Corneal oedema from chronically raised intraocular pressure",
-   "Toxic or surgical endothelial injury"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp biomicroscopy to identify guttae, corneal oedema and bullae",
-   "Specular microscopy for endothelial cell density, pleomorphism and polymegathism",
-   "Corneal pachymetry and thickness mapping to quantify oedema",
-   "Scheimpflug tomography, including posterior corneal changes",
-   "In vivo confocal microscopy",
-   "Anterior segment optical coherence tomography",
-   "Genetic testing for TCF4 repeat expansion where indicated"
-  ],
-  "redFlags": [
-   "New ocular pain or foreign-body sensation suggesting ruptured epithelial bullae",
-   "Rapid corneal decompensation following intraocular surgery",
-   "An epithelial defect with infiltrate raising concern for microbial keratitis on bullous keratopathy",
-   "Sudden marked reduction in vision with dense corneal oedema"
-  ],
-  "prognosis": "The condition is slowly progressive over years; with timely endothelial keratoplasty visual outcomes are generally good, though graft survival, rejection and the need for repeat surgery remain long-term considerations.",
-  "pitfalls": [
-   "Failing to identify guttae and counsel or plan appropriately before cataract or refractive surgery, risking postoperative decompensation.",
-   "Attributing characteristic morning blurring to other causes and missing the diagnosis.",
-   "Relying on central pachymetry alone rather than assessing endothelial morphology and function.",
-   "Mistaking herpetic endotheliitis for primary dystrophic decompensation.",
-   "Underestimating the pain and functional impact of bullous keratopathy in advanced disease."
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology (standard reference)",
-   "Krachmer's Cornea (standard reference)",
-   "American Academy of Ophthalmology Basic and Clinical Science Course (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical hypertonic sodium chloride drops and ointment to draw fluid from the oedematous stroma and clear morning blurring",
-   "Warm-air evaporation on waking as a simple measure to reduce overnight epithelial oedema",
-   "Bandage contact lens, ocular lubricants and analgesia for painful epithelial bullae in bullous keratopathy",
-   "Endothelial keratoplasty (DMEK or DSAEK) as definitive treatment for visually significant corneal decompensation, with penetrating keratoplasty reserved for advanced scarring",
-   "Endothelial-protective cataract surgery, staged or combined with keratoplasty where the cornea is borderline",
-   "Monitor endothelial cell density and corneal thickness with specular microscopy and pachymetry",
-   "Long-term surveillance for graft rejection and failure after keratoplasty, with prophylactic topical corticosteroids"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fuchs_endothelial_corneal_dystrophy-pathway",
-   "title": "Fuchs Endothelial Corneal Dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The hallmark sign is corneal guttae, focal excrescences of Descemet membrane that give the endothelium a beaten-metal appearance on slit-lamp retroillumination.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New ocular pain or foreign-body sensation suggesting ruptured epithelial bullae",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp biomicroscopy to identify guttae, corneal oedema and bullae, Specular microscopy for endothelial cell density, pleomorphism and polymegathism, Corneal pachymetry and thickness mapping to quantify oedema"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical hypertonic sodium chloride drops and ointment to draw fluid from the oedematous stroma and clear morning blurring"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to identify guttae and counsel or plan appropriately before cataract or refractive surgery, risking postoperative decompensation."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fuchs endothelial corneal dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "fuchs_endothelial_corneal_dystrophy-matrix",
-   "title": "Fuchs Endothelial Corneal Dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The hallmark sign is corneal guttae, focal excrescences of Descemet membrane that give the endothelium a beaten-metal appearance",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmology",
+  "specialty": "Cornea and external eye",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ophthalmology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The hallmark sign is corneal guttae, focal excrescences of Descemet membrane that give the endothelium a beaten-metal appearance on slit-lamp retroillumination.",
+      "The corneal endothelium is a non-regenerating monolayer; progressive cell loss causes failure of the deturgescence pump with resulting stromal and epithelial oedema.",
+      "A classic symptom is blurred vision that is worst on waking and improves through the day as surface evaporation clears overnight oedema.",
+      "The disease is typically bilateral but asymmetric, shows a female predominance and usually becomes symptomatic in later decades.",
+      "A trinucleotide repeat expansion in the TCF4 gene is the strongest known genetic association, while COL8A2 variants underlie rarer early-onset forms.",
+      "Advanced disease progresses to bullous keratopathy, with painful epithelial bullae and eventual subepithelial scarring and vascularisation.",
+      "Endothelial keratoplasty (DMEK or DSAEK) has largely replaced penetrating keratoplasty and offers faster, more reliable visual recovery.",
+      "Intraocular surgery, particularly cataract extraction, can precipitate endothelial decompensation, so endothelial status must be assessed and counselled beforehand."
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp biomicroscopy to identify guttae, corneal oedema and bullae, Specular microscopy for endothelial cell density,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The corneal endothelium is a terminally differentiated, essentially non-dividing monolayer that maintains corneal clarity by acting as both a barrier and an active metabolic pump, drawing fluid out of the stroma to keep it in a relatively dehydrated (deturgescent) state. In Fuchs endothelial corneal dystrophy, accelerated endothelial cell apoptosis, oxidative stress and abnormal extracellular matrix deposition produce guttae and a steady decline in endothelial cell density. The commonly implicated TCF4 trinucleotide repeat expansion is thought to generate toxic repeat-containing RNA that sequesters splicing regulators, an RNA-mediated mechanism analogous to that seen in myotonic dystrophy. Once endothelial density falls below a critical level the pump can no longer counter passive fluid influx; the stroma imbibes water and swells, oedema extends to the epithelium to form microcysts and bullae, and chronic decompensation leads to subepithelial fibrosis, scarring and vascularisation with progressive loss of vision.",
+    "additionalDifferentials": [
+      "Pseudophakic or aphakic bullous keratopathy",
+      "Posterior polymorphous corneal dystrophy",
+      "Congenital hereditary endothelial dystrophy",
+      "Iridocorneal endothelial syndrome",
+      "Herpetic disciform keratitis or endotheliitis",
+      "Corneal oedema from chronically raised intraocular pressure",
+      "Toxic or surgical endothelial injury"
     ],
-    [
-     "Primary Differentials",
-     "Pseudophakic or aphakic bullous keratopathy, Posterior polymorphous corneal dystrophy, Congenital hereditary endothelial dystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp biomicroscopy to identify guttae, corneal oedema and bullae",
+      "Specular microscopy for endothelial cell density, pleomorphism and polymegathism",
+      "Corneal pachymetry and thickness mapping to quantify oedema",
+      "Scheimpflug tomography, including posterior corneal changes",
+      "In vivo confocal microscopy",
+      "Anterior segment optical coherence tomography",
+      "Genetic testing for TCF4 repeat expansion where indicated"
     ],
-    [
-     "Management Strategy",
-     "Topical hypertonic sodium chloride drops and ointment to draw fluid from the oedematous stroma and clear morning blurring",
-     "Core treatment modality"
+    "redFlags": [
+      "New ocular pain or foreign-body sensation suggesting ruptured epithelial bullae",
+      "Rapid corneal decompensation following intraocular surgery",
+      "An epithelial defect with infiltrate raising concern for microbial keratitis on bullous keratopathy",
+      "Sudden marked reduction in vision with dense corneal oedema"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to identify guttae and counsel or plan appropriately before cataract or refractive surgery, risking postoperative",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is slowly progressive over years; with timely endothelial keratoplasty visual outcomes are generally good, though graft survival, rejection and the need for repeat surgery remain long-term considerations.",
+    "pitfalls": [
+      "Failing to identify guttae and counsel or plan appropriately before cataract or refractive surgery, risking postoperative decompensation.",
+      "Attributing characteristic morning blurring to other causes and missing the diagnosis.",
+      "Relying on central pachymetry alone rather than assessing endothelial morphology and function.",
+      "Mistaking herpetic endotheliitis for primary dystrophic decompensation.",
+      "Underestimating the pain and functional impact of bullous keratopathy in advanced disease."
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology (standard reference)",
+      "Krachmer's Cornea (standard reference)",
+      "American Academy of Ophthalmology Basic and Clinical Science Course (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical hypertonic sodium chloride drops and ointment to draw fluid from the oedematous stroma and clear morning blurring",
+      "Warm-air evaporation on waking as a simple measure to reduce overnight epithelial oedema",
+      "Bandage contact lens, ocular lubricants and analgesia for painful epithelial bullae in bullous keratopathy",
+      "Endothelial keratoplasty (DMEK or DSAEK) as definitive treatment for visually significant corneal decompensation, with penetrating keratoplasty reserved for advanced scarring",
+      "Endothelial-protective cataract surgery, staged or combined with keratoplasty where the cornea is borderline",
+      "Monitor endothelial cell density and corneal thickness with specular microscopy and pachymetry",
+      "Long-term surveillance for graft rejection and failure after keratoplasty, with prophylactic topical corticosteroids"
     ]
-   ],
-   "caption": "Overview comparison matrix for fuchs endothelial corneal dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fuchs-endothelial-corneal-dystrophy-real-image",
-   "title": "Fuchs Endothelial Corneal Dystrophy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fuchs_endothelial_corneal_dystrophy-pathway",
+      "title": "Fuchs Endothelial Corneal Dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The hallmark sign is corneal guttae, focal excrescences of Descemet membrane that give the endothelium a beaten-metal appearance on slit-lamp retroillumination.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New ocular pain or foreign-body sensation suggesting ruptured epithelial bullae",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp biomicroscopy to identify guttae, corneal oedema and bullae, Specular microscopy for endothelial cell density, pleomorphism and polymegathism, Corneal pachymetry and thickness mapping to quantify oedema"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical hypertonic sodium chloride drops and ointment to draw fluid from the oedematous stroma and clear morning blurring"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to identify guttae and counsel or plan appropriately before cataract or refractive surgery, risking postoperative decompensation."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fuchs endothelial corneal dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fuchs_endothelial_corneal_dystrophy-matrix",
+      "title": "Fuchs Endothelial Corneal Dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The hallmark sign is corneal guttae, focal excrescences of Descemet membrane that give the endothelium a beaten-metal appearance",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp biomicroscopy to identify guttae, corneal oedema and bullae, Specular microscopy for endothelial cell density,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pseudophakic or aphakic bullous keratopathy, Posterior polymorphous corneal dystrophy, Congenital hereditary endothelial dystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical hypertonic sodium chloride drops and ointment to draw fluid from the oedematous stroma and clear morning blurring",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to identify guttae and counsel or plan appropriately before cataract or refractive surgery, risking postoperative",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fuchs endothelial corneal dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fuchs_endothelial_corneal_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp biomicroscopy",
+          "cells": [
+            {
+              "text": "Identifies guttae, corneal oedema and bullae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specular microscopy",
+          "cells": [
+            {
+              "text": "Endothelial cell density, pleomorphism and polymegathism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal pachymetry and thickness mapping",
+          "cells": [
+            {
+              "text": "Quantifies oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scheimpflug tomography",
+          "cells": [
+            {
+              "text": "Posterior corneal changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for TCF4 repeat expansion",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fuchs_endothelial_corneal_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical hypertonic sodium chloride",
+          "cells": [
+            {
+              "text": "Drops and ointment to draw fluid from the stroma and clear morning blurring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warm-air evaporation on waking",
+          "cells": [
+            {
+              "text": "Reduces overnight epithelial oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bandage contact lens and lubricants",
+          "cells": [
+            {
+              "text": "Analgesia for painful epithelial bullae in bullous keratopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endothelial keratoplasty (DMEK or DSAEK)",
+          "cells": [
+            {
+              "text": "Definitive treatment for visually significant decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endothelial-protective cataract surgery",
+          "cells": [
+            {
+              "text": "Staged or combined with keratoplasty where the cornea is borderline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Endothelial cell density and corneal thickness with specular microscopy and pachymetry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graft surveillance",
+          "cells": [
+            {
+              "text": "Rejection and failure after keratoplasty; prophylactic topical corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fuchs_endothelial_corneal_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Fuchs Endothelial Corneal Dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Fuchs endothelial corneal dystrophy: morning blurring with guttae",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ruptured bullae, rapid decompensation, sudden vision loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected microbial keratitis on a bullous cornea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, specular microscopy, pachymetry and Scheimpflug tomography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do guttae and endothelial cell loss on specular microscopy confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bullous keratopathy, posterior polymorphous dystrophy or endothelial injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical hypertonic sodium chloride and warm-air evaporation on waking",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bandage contact lens, lubricants and analgesia for painful bullae",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endothelial keratoplasty (DMEK or DSAEK) for visually significant decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor endothelial density and thickness; surveil for graft rejection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; with timely keratoplasty visual outcomes are generally good",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

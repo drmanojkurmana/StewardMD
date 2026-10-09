@@ -1,174 +1,443 @@
 {
- "id": "vascular_ring",
- "name": "Vascular ring",
- "aliases": [
-  "vascular ring and sling",
-  "aortic arch anomaly",
-  "double aortic arch",
-  "aberrant subclavian artery ring"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An abnormal arrangement of the aortic arch and its branches that encircles and compresses the trachea and oesophagus",
-   "Double aortic arch and right aortic arch with an aberrant left subclavian artery and left ligamentum are the commonest complete rings",
-   "Respiratory symptoms predominate, including stridor, a barking cough, wheeze and recurrent chest infections that may be mistaken for asthma",
-   "Oesophageal compression causes feeding difficulty, dysphagia and, in older children, dysphagia to solids",
-   "A pulmonary artery sling, in which the left pulmonary artery arises anomalously, compresses the trachea and is often associated with complete tracheal rings",
-   "Barium swallow showing posterior oesophageal indentation and cross-sectional angiography establish the diagnosis",
-   "Surgical division of the ring relieves compression, though tracheomalacia at the compressed segment may cause lingering symptoms"
+  "id": "vascular_ring",
+  "name": "Vascular ring",
+  "aliases": [
+    "vascular ring and sling",
+    "aortic arch anomaly",
+    "double aortic arch",
+    "aberrant subclavian artery ring"
   ],
-  "pathophysiology": "Vascular rings arise from abnormal regression or persistence of the paired embryonic aortic arches, producing vascular structures that completely or partially encircle the trachea and oesophagus. A double aortic arch forms a complete ring as both arches persist, while a right aortic arch with an aberrant left subclavian artery and a left arterial ligament completes a ring posteriorly. These structures exert extrinsic pressure on the airway and oesophagus, causing airflow obstruction, secondary tracheomalacia and impaired swallowing. A pulmonary artery sling, though strictly a partial ring, compresses the trachea as the anomalous left pulmonary artery courses between trachea and oesophagus and is frequently accompanied by complete cartilaginous tracheal rings that intrinsically narrow the airway.",
-  "additionalDifferentials": [
-   "Asthma or reactive airways disease",
-   "Tracheomalacia or laryngomalacia of other cause",
-   "Recurrent viral croup",
-   "Foreign body aspiration",
-   "Gastro-oesophageal reflux disease",
-   "Mediastinal mass compressing the airway"
-  ],
-  "additionalInvestigations": [
-   "Barium oesophagram showing characteristic posterior indentation",
-   "CT or MR angiography to define the arch anatomy and ring components",
-   "Bronchoscopy to assess airway compression and associated tracheomalacia or complete tracheal rings",
-   "Echocardiography to detect associated intracardiac defects",
-   "Chest radiograph for arch sidedness and airway narrowing",
-   "Assessment for a pulmonary artery sling when tracheal narrowing is present"
-  ],
-  "redFlags": [
-   "Severe stridor or acute airway obstruction",
-   "Recurrent aspiration or life-threatening apnoeic episodes",
-   "Failure to thrive from significant feeding difficulty",
-   "Complete tracheal rings with a pulmonary artery sling causing critical airway narrowing"
-  ],
-  "prognosis": "Surgical division of a symptomatic ring generally relieves compression with excellent long-term results, though residual tracheomalacia can cause persistent symptoms; associated complete tracheal rings carry higher risk.",
-  "pitfalls": [
-   "Treating persistent stridor and wheeze as asthma and delaying diagnosis",
-   "Overlooking oesophageal compression as a cause of feeding difficulty",
-   "Failing to recognise an associated pulmonary artery sling and complete tracheal rings",
-   "Assuming surgery immediately resolves all symptoms when tracheomalacia persists"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Divide symptomatic vascular rings surgically, dividing the lesser arch in a double aortic arch or the ligamentum arteriosum in a right arch with an aberrant left subclavian artery, to relieve tracheo-oesophageal compression",
-   "Reimplant the anomalous vessel for a pulmonary artery sling and address any coexisting complete tracheal rings with tracheoplasty",
-   "Observe asymptomatic rings found incidentally, with clinical follow-up",
-   "Support residual tracheomalacia and treat recurrent chest infections while the airway remodels",
-   "Define the anatomy preoperatively with CT or MR angiography, assess the airway with bronchoscopy and screen for associated cardiac defects by echocardiography",
-   "Manage through a multidisciplinary team of paediatric cardiothoracic surgery, airway or ENT specialists and cardiology",
-   "Follow up after repair for persistent airway symptoms arising from residual tracheomalacia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vascular_ring-pathway",
-   "title": "Vascular ring: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An abnormal arrangement of the aortic arch and its branches that encircles and compresses the trachea and oesophagus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe stridor or acute airway obstruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Barium oesophagram showing characteristic posterior indentation, CT or MR angiography to define the arch anatomy and ring components, Bronchoscopy to assess airway compression and associated tracheomalacia or complete"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Divide symptomatic vascular rings surgically, dividing the lesser arch in a double aortic arch or the ligamentum arteriosum in a right arch with an aberrant left subclavian artery, to relieve tracheo-oesophageal"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating persistent stridor and wheeze as asthma and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vascular ring."
-  }
- ],
- "tables": [
-  {
-   "id": "vascular_ring-matrix",
-   "title": "Vascular ring: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An abnormal arrangement of the aortic arch and its branches that encircles and compresses the trachea and oesophagus",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An abnormal arrangement of the aortic arch and its branches that encircles and compresses the trachea and oesophagus",
+      "Double aortic arch and right aortic arch with an aberrant left subclavian artery and left ligamentum are the commonest complete rings",
+      "Respiratory symptoms predominate, including stridor, a barking cough, wheeze and recurrent chest infections that may be mistaken for asthma",
+      "Oesophageal compression causes feeding difficulty, dysphagia and, in older children, dysphagia to solids",
+      "A pulmonary artery sling, in which the left pulmonary artery arises anomalously, compresses the trachea and is often associated with complete tracheal rings",
+      "Barium swallow showing posterior oesophageal indentation and cross-sectional angiography establish the diagnosis",
+      "Surgical division of the ring relieves compression, though tracheomalacia at the compressed segment may cause lingering symptoms"
     ],
-    [
-     "Key Investigations",
-     "Barium oesophagram showing characteristic posterior indentation, CT or MR angiography to define the arch anatomy and ring",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vascular rings arise from abnormal regression or persistence of the paired embryonic aortic arches, producing vascular structures that completely or partially encircle the trachea and oesophagus. A double aortic arch forms a complete ring as both arches persist, while a right aortic arch with an aberrant left subclavian artery and a left arterial ligament completes a ring posteriorly. These structures exert extrinsic pressure on the airway and oesophagus, causing airflow obstruction, secondary tracheomalacia and impaired swallowing. A pulmonary artery sling, though strictly a partial ring, compresses the trachea as the anomalous left pulmonary artery courses between trachea and oesophagus and is frequently accompanied by complete cartilaginous tracheal rings that intrinsically narrow the airway.",
+    "additionalDifferentials": [
+      "Asthma or reactive airways disease",
+      "Tracheomalacia or laryngomalacia of other cause",
+      "Recurrent viral croup",
+      "Foreign body aspiration",
+      "Gastro-oesophageal reflux disease",
+      "Mediastinal mass compressing the airway"
     ],
-    [
-     "Primary Differentials",
-     "Asthma or reactive airways disease, Tracheomalacia or laryngomalacia of other cause, Recurrent viral croup",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Barium oesophagram showing characteristic posterior indentation",
+      "CT or MR angiography to define the arch anatomy and ring components",
+      "Bronchoscopy to assess airway compression and associated tracheomalacia or complete tracheal rings",
+      "Echocardiography to detect associated intracardiac defects",
+      "Chest radiograph for arch sidedness and airway narrowing",
+      "Assessment for a pulmonary artery sling when tracheal narrowing is present"
     ],
-    [
-     "Management Strategy",
-     "Divide symptomatic vascular rings surgically, dividing the lesser arch in a double aortic arch or the ligamentum arteriosum in a",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe stridor or acute airway obstruction",
+      "Recurrent aspiration or life-threatening apnoeic episodes",
+      "Failure to thrive from significant feeding difficulty",
+      "Complete tracheal rings with a pulmonary artery sling causing critical airway narrowing"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating persistent stridor and wheeze as asthma and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical division of a symptomatic ring generally relieves compression with excellent long-term results, though residual tracheomalacia can cause persistent symptoms; associated complete tracheal rings carry higher risk.",
+    "pitfalls": [
+      "Treating persistent stridor and wheeze as asthma and delaying diagnosis",
+      "Overlooking oesophageal compression as a cause of feeding difficulty",
+      "Failing to recognise an associated pulmonary artery sling and complete tracheal rings",
+      "Assuming surgery immediately resolves all symptoms when tracheomalacia persists"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Divide symptomatic vascular rings surgically, dividing the lesser arch in a double aortic arch or the ligamentum arteriosum in a right arch with an aberrant left subclavian artery, to relieve tracheo-oesophageal compression",
+      "Reimplant the anomalous vessel for a pulmonary artery sling and address any coexisting complete tracheal rings with tracheoplasty",
+      "Observe asymptomatic rings found incidentally, with clinical follow-up",
+      "Support residual tracheomalacia and treat recurrent chest infections while the airway remodels",
+      "Define the anatomy preoperatively with CT or MR angiography, assess the airway with bronchoscopy and screen for associated cardiac defects by echocardiography",
+      "Manage through a multidisciplinary team of paediatric cardiothoracic surgery, airway or ENT specialists and cardiology",
+      "Follow up after repair for persistent airway symptoms arising from residual tracheomalacia"
     ]
-   ],
-   "caption": "Overview comparison matrix for vascular ring."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vascular-ring-real-image",
-   "title": "Vascular ring: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "vascular_ring-pathway",
+      "title": "Vascular ring: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An abnormal arrangement of the aortic arch and its branches that encircles and compresses the trachea and oesophagus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe stridor or acute airway obstruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Barium oesophagram showing characteristic posterior indentation, CT or MR angiography to define the arch anatomy and ring components, Bronchoscopy to assess airway compression and associated tracheomalacia or complete"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Divide symptomatic vascular rings surgically, dividing the lesser arch in a double aortic arch or the ligamentum arteriosum in a right arch with an aberrant left subclavian artery, to relieve tracheo-oesophageal"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating persistent stridor and wheeze as asthma and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vascular ring."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vascular_ring-matrix",
+      "title": "Vascular ring: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An abnormal arrangement of the aortic arch and its branches that encircles and compresses the trachea and oesophagus",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Barium oesophagram showing characteristic posterior indentation, CT or MR angiography to define the arch anatomy and ring",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Asthma or reactive airways disease, Tracheomalacia or laryngomalacia of other cause, Recurrent viral croup",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Divide symptomatic vascular rings surgically, dividing the lesser arch in a double aortic arch or the ligamentum arteriosum in a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating persistent stridor and wheeze as asthma and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vascular ring."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vascular_ring-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Barium oesophagram",
+          "cells": [
+            {
+              "text": "Characteristic posterior oesophageal indentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Arch anatomy and ring components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Airway compression, tracheomalacia or complete tracheal rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Associated intracardiac defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Arch and airway findings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vascular_ring-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Asthma or reactive airways disease",
+          "cells": [
+            {
+              "text": "Persistent stridor and wheeze can be mistaken for asthma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent viral croup",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign body aspiration",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vascular_ring-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical division of the ring",
+          "cells": [
+            {
+              "text": "Symptomatic rings; divides the lesser arch or the ligamentum arteriosum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reimplantation of anomalous vessel",
+          "cells": [
+            {
+              "text": "Pulmonary artery sling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tracheoplasty",
+          "cells": [
+            {
+              "text": "Coexisting complete tracheal rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic rings found incidentally, with clinical review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vascular_ring-dx-mgmt",
+      "title": "Diagnosis and management of Vascular ring",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vascular ring: stridor, barking cough or feeding difficulty in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe stridor, apnoea or failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment for severe stridor or acute airway obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Barium oesophagram, CT or MR angiography, bronchoscopy, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm a complete vascular ring compressing the airway?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider asthma, tracheomalacia or foreign body; reassess the airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical division of the symptomatic vascular ring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reimplantation of an anomalous vessel for pulmonary artery sling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tracheoplasty for coexisting complete tracheal rings",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Observation of incidental asymptomatic rings with clinical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptomatic rings need division; asymptomatic rings may be observed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

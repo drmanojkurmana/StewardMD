@@ -1,177 +1,446 @@
 {
- "id": "usher_syndrome_type_2",
- "name": "Usher syndrome type 2",
- "aliases": [
-  "USH2",
-  "Usher type II"
- ],
- "class": "non_infective",
- "system": "Hearing / Vision genetics",
- "specialty": "Clinical genetics / Audiology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical genetics and audiology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest Usher subtype: congenital, non-progressive or slowly progressive moderate-to-severe sensorineural hearing loss with preserved vestibular function.",
-   "The hearing loss is characteristically sloping, worse for higher frequencies, so speech is often acquired with hearing aids without needing cochlear implantation.",
-   "Normal vestibular function means motor milestones, including walking, are reached at the expected age, distinguishing it from type 1.",
-   "Retinitis pigmentosa typically presents later than in type 1, with night blindness often beginning around adolescence or early adulthood.",
-   "USH2A, encoding usherin, accounts for the majority of cases; other loci include ADGRV1 (GPR98) and WHRN (whirlin).",
-   "USH2A variants are also a frequent cause of non-syndromic autosomal recessive retinitis pigmentosa, so the same gene spans syndromic and isolated retinal disease.",
-   "Hearing aids and communication support usually suffice for auditory rehabilitation, with cochlear implantation reserved for those who progress.",
-   "Autosomal recessive inheritance warrants genetic counselling and consideration of retinal gene-specific therapeutic trials."
+  "id": "usher_syndrome_type_2",
+  "name": "Usher syndrome type 2",
+  "aliases": [
+    "USH2",
+    "Usher type II"
   ],
-  "pathophysiology": "Usher syndrome type 2 is an autosomal recessive condition most often caused by biallelic variants in USH2A, which encodes usherin, a very large transmembrane protein; other cases arise from variants in ADGRV1 (an adhesion G-protein-coupled receptor) and WHRN (whirlin). These proteins assemble at the ankle-link region of developing cochlear hair-cell stereocilia and at the periciliary membrane complex of photoreceptors, where they contribute to stereociliary cohesion and to the maintenance of the photoreceptor connecting cilium. Because the encoded proteins are more important for maintenance than for the profound early transduction machinery affected in type 1, cochlear hair-cell dysfunction is partial, giving moderate-to-severe rather than profound deafness, and vestibular hair cells are largely spared, preserving balance. In the retina, gradual failure of periciliary transport and outer-segment turnover produces a rod-predominant then cone degeneration that manifests as retinitis pigmentosa with a characteristically later onset than type 1. The residual function of these proteins therefore explains the milder, later-onset phenotype across both the auditory and visual systems.",
-  "additionalDifferentials": [
-   "Usher syndrome type 1 (profound congenital deafness with vestibular areflexia and earlier retinitis pigmentosa)",
-   "Usher syndrome type 3 (progressive postlingual hearing loss)",
-   "Non-syndromic autosomal recessive retinitis pigmentosa (including isolated USH2A disease)",
-   "Age-related or noise-induced high-frequency sensorineural loss with coincidental retinopathy",
-   "Cone-rod dystrophies with hearing impairment",
-   "Mitochondrial syndromes combining hearing loss and retinal degeneration",
-   "Bardet-Biedl and other ciliopathies with retinal and sensory features"
-  ],
-  "additionalInvestigations": [
-   "Pure-tone audiometry documenting the sloping high-frequency sensorineural loss",
-   "Vestibular assessment confirming preserved function",
-   "Electroretinography to detect rod-cone dysfunction",
-   "Optical coherence tomography and fundus autofluorescence for retinal monitoring",
-   "Visual field perimetry to track peripheral constriction",
-   "Molecular genetic testing prioritising USH2A, then ADGRV1 and WHRN",
-   "Assessment of speech and language development with hearing-aid benefit"
-  ],
-  "redFlags": [
-   "New night blindness or peripheral field loss in an adolescent with congenital hearing loss",
-   "Documented progression of hearing thresholds suggesting a more severe course",
-   "Rapidly constricting visual fields affecting mobility or driving",
-   "Family history of combined hearing and visual loss in siblings",
-   "Central visual acuity decline indicating macular involvement"
-  ],
-  "prognosis": "Hearing loss is generally stable and well managed with hearing aids, while retinitis pigmentosa progresses more slowly than in type 1; useful central vision is often retained into mid-adulthood before significant field loss. Overall visual and functional outlook is better than type 1.",
-  "pitfalls": [
-   "Labelling the retinopathy as non-syndromic and missing the associated hearing component (or vice versa)",
-   "Assuming the hearing loss is progressive and prematurely recommending cochlear implantation",
-   "Overlooking early retinitis pigmentosa because vision seems adequate in youth",
-   "Failing to test relatives given the shared USH2A basis of isolated retinitis pigmentosa",
-   "Confusing the later visual onset with a benign prognosis and omitting low-vision planning"
-  ],
-  "references": [
-   "Clinical genetics reference texts",
-   "Audiology and hearing rehabilitation guidelines",
-   "Inherited retinal disease reference sources"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Hearing aid fitting and aural rehabilitation as the mainstay, given moderate-to-severe sloping high-frequency loss that usually permits spoken language",
-   "Cochlear implantation considered if hearing loss progresses beyond useful benefit from amplification",
-   "Low-vision rehabilitation, orientation and mobility training, and visual aids as retinitis pigmentosa advances",
-   "Regular ophthalmic surveillance with electroretinography, optical coherence tomography, fundus autofluorescence and perimetry",
-   "Multidisciplinary coordination across audiology, ophthalmology, clinical genetics and psychological support",
-   "Autosomal recessive genetic counselling with USH2A-focused testing and cascade family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "usher_syndrome_type_2-pathway",
-   "title": "Usher syndrome type 2: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest Usher subtype: congenital, non-progressive or slowly progressive moderate-to-severe sensorineural hearing loss with preserved vestibular function.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New night blindness or peripheral field loss in an adolescent with congenital hearing loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pure-tone audiometry documenting the sloping high-frequency sensorineural loss, Vestibular assessment confirming preserved function, Electroretinography to detect rod-cone dysfunction"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Hearing aid fitting and aural rehabilitation as the mainstay, given moderate-to-severe sloping high-frequency loss that usually permits spoken language"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the retinopathy as non-syndromic and missing the associated hearing component (or vice versa)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of usher syndrome type 2."
-  }
- ],
- "tables": [
-  {
-   "id": "usher_syndrome_type_2-matrix",
-   "title": "Usher syndrome type 2: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest Usher subtype: congenital, non-progressive or slowly progressive moderate-to-severe sensorineural hearing loss with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hearing / Vision genetics",
+  "specialty": "Clinical genetics / Audiology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical genetics and audiology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest Usher subtype: congenital, non-progressive or slowly progressive moderate-to-severe sensorineural hearing loss with preserved vestibular function.",
+      "The hearing loss is characteristically sloping, worse for higher frequencies, so speech is often acquired with hearing aids without needing cochlear implantation.",
+      "Normal vestibular function means motor milestones, including walking, are reached at the expected age, distinguishing it from type 1.",
+      "Retinitis pigmentosa typically presents later than in type 1, with night blindness often beginning around adolescence or early adulthood.",
+      "USH2A, encoding usherin, accounts for the majority of cases; other loci include ADGRV1 (GPR98) and WHRN (whirlin).",
+      "USH2A variants are also a frequent cause of non-syndromic autosomal recessive retinitis pigmentosa, so the same gene spans syndromic and isolated retinal disease.",
+      "Hearing aids and communication support usually suffice for auditory rehabilitation, with cochlear implantation reserved for those who progress.",
+      "Autosomal recessive inheritance warrants genetic counselling and consideration of retinal gene-specific therapeutic trials."
     ],
-    [
-     "Key Investigations",
-     "Pure-tone audiometry documenting the sloping high-frequency sensorineural loss, Vestibular assessment confirming preserved",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Usher syndrome type 2 is an autosomal recessive condition most often caused by biallelic variants in USH2A, which encodes usherin, a very large transmembrane protein; other cases arise from variants in ADGRV1 (an adhesion G-protein-coupled receptor) and WHRN (whirlin). These proteins assemble at the ankle-link region of developing cochlear hair-cell stereocilia and at the periciliary membrane complex of photoreceptors, where they contribute to stereociliary cohesion and to the maintenance of the photoreceptor connecting cilium. Because the encoded proteins are more important for maintenance than for the profound early transduction machinery affected in type 1, cochlear hair-cell dysfunction is partial, giving moderate-to-severe rather than profound deafness, and vestibular hair cells are largely spared, preserving balance. In the retina, gradual failure of periciliary transport and outer-segment turnover produces a rod-predominant then cone degeneration that manifests as retinitis pigmentosa with a characteristically later onset than type 1. The residual function of these proteins therefore explains the milder, later-onset phenotype across both the auditory and visual systems.",
+    "additionalDifferentials": [
+      "Usher syndrome type 1 (profound congenital deafness with vestibular areflexia and earlier retinitis pigmentosa)",
+      "Usher syndrome type 3 (progressive postlingual hearing loss)",
+      "Non-syndromic autosomal recessive retinitis pigmentosa (including isolated USH2A disease)",
+      "Age-related or noise-induced high-frequency sensorineural loss with coincidental retinopathy",
+      "Cone-rod dystrophies with hearing impairment",
+      "Mitochondrial syndromes combining hearing loss and retinal degeneration",
+      "Bardet-Biedl and other ciliopathies with retinal and sensory features"
     ],
-    [
-     "Primary Differentials",
-     "Usher syndrome type 1 (profound congenital deafness with vestibular areflexia and earlier retinitis pigmentosa), Usher syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pure-tone audiometry documenting the sloping high-frequency sensorineural loss",
+      "Vestibular assessment confirming preserved function",
+      "Electroretinography to detect rod-cone dysfunction",
+      "Optical coherence tomography and fundus autofluorescence for retinal monitoring",
+      "Visual field perimetry to track peripheral constriction",
+      "Molecular genetic testing prioritising USH2A, then ADGRV1 and WHRN",
+      "Assessment of speech and language development with hearing-aid benefit"
     ],
-    [
-     "Management Strategy",
-     "Hearing aid fitting and aural rehabilitation as the mainstay, given moderate-to-severe sloping high-frequency loss that usually",
-     "Core treatment modality"
+    "redFlags": [
+      "New night blindness or peripheral field loss in an adolescent with congenital hearing loss",
+      "Documented progression of hearing thresholds suggesting a more severe course",
+      "Rapidly constricting visual fields affecting mobility or driving",
+      "Family history of combined hearing and visual loss in siblings",
+      "Central visual acuity decline indicating macular involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the retinopathy as non-syndromic and missing the associated hearing component (or vice versa)",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hearing loss is generally stable and well managed with hearing aids, while retinitis pigmentosa progresses more slowly than in type 1; useful central vision is often retained into mid-adulthood before significant field loss. Overall visual and functional outlook is better than type 1.",
+    "pitfalls": [
+      "Labelling the retinopathy as non-syndromic and missing the associated hearing component (or vice versa)",
+      "Assuming the hearing loss is progressive and prematurely recommending cochlear implantation",
+      "Overlooking early retinitis pigmentosa because vision seems adequate in youth",
+      "Failing to test relatives given the shared USH2A basis of isolated retinitis pigmentosa",
+      "Confusing the later visual onset with a benign prognosis and omitting low-vision planning"
+    ],
+    "references": [
+      "Clinical genetics reference texts",
+      "Audiology and hearing rehabilitation guidelines",
+      "Inherited retinal disease reference sources"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Hearing aid fitting and aural rehabilitation as the mainstay, given moderate-to-severe sloping high-frequency loss that usually permits spoken language",
+      "Cochlear implantation considered if hearing loss progresses beyond useful benefit from amplification",
+      "Low-vision rehabilitation, orientation and mobility training, and visual aids as retinitis pigmentosa advances",
+      "Regular ophthalmic surveillance with electroretinography, optical coherence tomography, fundus autofluorescence and perimetry",
+      "Multidisciplinary coordination across audiology, ophthalmology, clinical genetics and psychological support",
+      "Autosomal recessive genetic counselling with USH2A-focused testing and cascade family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for usher syndrome type 2."
-  }
- ],
- "diagrams": [
-  {
-   "id": "usher-syndrome-type-2-real-image",
-   "title": "Usher syndrome type 2: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "usher_syndrome_type_2-pathway",
+      "title": "Usher syndrome type 2: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest Usher subtype: congenital, non-progressive or slowly progressive moderate-to-severe sensorineural hearing loss with preserved vestibular function.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New night blindness or peripheral field loss in an adolescent with congenital hearing loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pure-tone audiometry documenting the sloping high-frequency sensorineural loss, Vestibular assessment confirming preserved function, Electroretinography to detect rod-cone dysfunction"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Hearing aid fitting and aural rehabilitation as the mainstay, given moderate-to-severe sloping high-frequency loss that usually permits spoken language"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the retinopathy as non-syndromic and missing the associated hearing component (or vice versa)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of usher syndrome type 2."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "usher_syndrome_type_2-matrix",
+      "title": "Usher syndrome type 2: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest Usher subtype: congenital, non-progressive or slowly progressive moderate-to-severe sensorineural hearing loss with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pure-tone audiometry documenting the sloping high-frequency sensorineural loss, Vestibular assessment confirming preserved",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Usher syndrome type 1 (profound congenital deafness with vestibular areflexia and earlier retinitis pigmentosa), Usher syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Hearing aid fitting and aural rehabilitation as the mainstay, given moderate-to-severe sloping high-frequency loss that usually",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the retinopathy as non-syndromic and missing the associated hearing component (or vice versa)",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for usher syndrome type 2."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and audiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "usher_syndrome_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Sloping high-frequency sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular assessment",
+          "cells": [
+            {
+              "text": "Preserved vestibular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Rod-cone dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT and fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Retinal monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field perimetry",
+          "cells": [
+            {
+              "text": "Peripheral constriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "Prioritises USH2A, then ADGRV1 and WHRN"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "usher_syndrome_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Usher syndrome type 1",
+          "cells": [
+            {
+              "text": "Profound congenital deafness with vestibular areflexia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Usher syndrome type 3",
+          "cells": [
+            {
+              "text": "Progressive postlingual hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-syndromic autosomal recessive retinitis pigmentosa",
+          "cells": [
+            {
+              "text": "Retinal disease without the hearing component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "usher_syndrome_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hearing aids and aural rehabilitation",
+          "cells": [
+            {
+              "text": "Mainstay for moderate-to-severe sloping high-frequency loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "If hearing loss progresses beyond useful benefit from amplification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Orientation and mobility training and visual aids as retinitis pigmentosa advances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic surveillance",
+          "cells": [
+            {
+              "text": "Electroretinography, OCT and fundus autofluorescence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "usher_syndrome_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Usher syndrome type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Usher type 2: congenital sloping hearing loss with normal walking",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (night blindness, progressive hearing loss or constricting fields)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmic review for rapidly constricting visual fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry, vestibular assessment, ERG, OCT, visual fields and USH2A testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm an Usher type 2 gene variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 1, type 3 or non-syndromic retinitis pigmentosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hearing aids and aural rehabilitation as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation if loss passes useful benefit from amplification",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision rehabilitation and orientation and mobility training",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular ophthalmic surveillance with ERG, OCT and fundus autofluorescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hearing is non-progressive or slowly progressive; retinal disease shapes function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

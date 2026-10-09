@@ -1,172 +1,469 @@
 {
- "id": "oral_leukoplakia",
- "name": "Oral leukoplakia",
- "aliases": [
-  "leukoplakia",
-  "oral white patch",
-  "potentially malignant white lesion"
- ],
- "class": "non_infective",
- "system": "Oral / Dental / Maxillofacial",
- "specialty": "Dentistry / OMFS",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard oral medicine & OMFS references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Leukoplakia is a clinical diagnosis of exclusion: a white patch that cannot be wiped off and cannot be attributed to any other definable lesion",
-   "It is regarded as an oral potentially malignant disorder, meaning it carries an increased risk of progression to squamous cell carcinoma",
-   "Tobacco use, including smokeless forms, areca nut, and alcohol are the principal risk factors",
-   "Homogeneous, uniformly white, flat lesions carry lower risk than non-homogeneous, nodular, or speckled (erythroleukoplakia) lesions",
-   "Speckled lesions with a red component and lesions on the floor of mouth or ventrolateral tongue have a higher malignant potential",
-   "Proliferative verrucous leukoplakia is a distinct, multifocal, treatment-resistant form with high transformation risk",
-   "Biopsy is essential to assess for and grade epithelial dysplasia, which is the key predictor of malignant change",
-   "Management combines removal of risk factors, treatment or surveillance of the lesion, and long-term monitoring for recurrence or transformation"
+  "id": "oral_leukoplakia",
+  "name": "Oral leukoplakia",
+  "aliases": [
+    "leukoplakia",
+    "oral white patch",
+    "potentially malignant white lesion"
   ],
-  "pathophysiology": "Leukoplakia reflects an alteration in the oral epithelium in which increased keratin production and epithelial thickening scatter light to produce a white appearance that does not rub off. Chronic exposure to carcinogens such as tobacco and areca nut drives genetic and epigenetic changes in basal keratinocytes, which may manifest histologically as hyperkeratosis with or without epithelial dysplasia. Dysplastic change represents disordered maturation and cellular atypia that can accumulate over time, and lesions with higher grades of dysplasia carry a greater likelihood of progressing to invasive squamous cell carcinoma.",
-  "additionalDifferentials": [
-   "Frictional or traumatic keratosis",
-   "Chronic hyperplastic candidiasis",
-   "Oral lichen planus",
-   "Leukoedema",
-   "White sponge naevus",
-   "Established oral squamous cell carcinoma"
-  ],
-  "additionalInvestigations": [
-   "Incisional or excisional biopsy for histological grading of dysplasia",
-   "Careful documentation of site, size, and clinical pattern",
-   "Removal of local irritants and reassessment to exclude frictional keratosis",
-   "Fungal investigation where hyperplastic candidiasis is suspected",
-   "Adjunctive imaging or referral when carcinoma is suspected"
-  ],
-  "redFlags": [
-   "Non-homogeneous, speckled, or verrucous lesions and any red component, indicating higher malignant potential",
-   "Ulceration, induration, or a developing mass suggesting transformation to carcinoma",
-   "High-risk sites such as the floor of mouth and ventrolateral tongue",
-   "Presence of moderate to severe epithelial dysplasia on biopsy"
-  ],
-  "prognosis": "Many lesions remain stable or regress after risk factors are removed, but a proportion undergo malignant transformation, and the risk rises with non-homogeneous appearance, high-risk sites, and higher grades of dysplasia, making long-term surveillance important.",
-  "pitfalls": [
-   "Labelling a white patch as benign without biopsy or follow-up",
-   "Assuming absence of symptoms means absence of risk",
-   "Sampling only a homogeneous area and missing dysplasia in a red or nodular component",
-   "Failing to address tobacco, areca nut, and alcohol use that perpetuate the lesion"
-  ],
-  "references": [
-   "Burket's Oral Medicine",
-   "Standard OMFS references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Achieve cessation of tobacco (including smokeless forms), areca nut and alcohol, and remove local mechanical irritants",
-   "Perform incisional biopsy to grade dysplasia and exclude invasive carcinoma, using excisional biopsy for small lesions",
-   "Excise high-grade dysplastic, non-homogeneous or high-risk-site lesions (floor of mouth, ventrolateral tongue) by surgery or laser",
-   "Maintain long-term clinical surveillance with photographic documentation and re-biopsy of changing lesions given the malignant-transformation risk",
-   "Treat proliferative verrucous leukoplakia aggressively with close follow-up owing to its high transformation rate",
-   "Refer to oral medicine or head and neck services when carcinoma is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oral_leukoplakia-pathway",
-   "title": "Oral leukoplakia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Leukoplakia is a clinical diagnosis of exclusion: a white patch that cannot be wiped off and cannot be attributed to any other definable lesion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Non-homogeneous, speckled, or verrucous lesions and any red component, indicating higher malignant potential",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Incisional or excisional biopsy for histological grading of dysplasia, Careful documentation of site, size, and clinical pattern, Removal of local irritants and reassessment to exclude frictional keratosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Achieve cessation of tobacco (including smokeless forms), areca nut and alcohol, and remove local mechanical irritants"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling a white patch as benign without biopsy or follow-up"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oral leukoplakia."
-  }
- ],
- "tables": [
-  {
-   "id": "oral_leukoplakia-matrix",
-   "title": "Oral leukoplakia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Leukoplakia is a clinical diagnosis of exclusion: a white patch that cannot be wiped off and cannot be attributed to any other",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oral / Dental / Maxillofacial",
+  "specialty": "Dentistry / OMFS",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard oral medicine & OMFS references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Leukoplakia is a clinical diagnosis of exclusion: a white patch that cannot be wiped off and cannot be attributed to any other definable lesion",
+      "It is regarded as an oral potentially malignant disorder, meaning it carries an increased risk of progression to squamous cell carcinoma",
+      "Tobacco use, including smokeless forms, areca nut, and alcohol are the principal risk factors",
+      "Homogeneous, uniformly white, flat lesions carry lower risk than non-homogeneous, nodular, or speckled (erythroleukoplakia) lesions",
+      "Speckled lesions with a red component and lesions on the floor of mouth or ventrolateral tongue have a higher malignant potential",
+      "Proliferative verrucous leukoplakia is a distinct, multifocal, treatment-resistant form with high transformation risk",
+      "Biopsy is essential to assess for and grade epithelial dysplasia, which is the key predictor of malignant change",
+      "Management combines removal of risk factors, treatment or surveillance of the lesion, and long-term monitoring for recurrence or transformation"
     ],
-    [
-     "Key Investigations",
-     "Incisional or excisional biopsy for histological grading of dysplasia, Careful documentation of site, size, and clinical pattern,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Leukoplakia reflects an alteration in the oral epithelium in which increased keratin production and epithelial thickening scatter light to produce a white appearance that does not rub off. Chronic exposure to carcinogens such as tobacco and areca nut drives genetic and epigenetic changes in basal keratinocytes, which may manifest histologically as hyperkeratosis with or without epithelial dysplasia. Dysplastic change represents disordered maturation and cellular atypia that can accumulate over time, and lesions with higher grades of dysplasia carry a greater likelihood of progressing to invasive squamous cell carcinoma.",
+    "additionalDifferentials": [
+      "Frictional or traumatic keratosis",
+      "Chronic hyperplastic candidiasis",
+      "Oral lichen planus",
+      "Leukoedema",
+      "White sponge naevus",
+      "Established oral squamous cell carcinoma"
     ],
-    [
-     "Primary Differentials",
-     "Frictional or traumatic keratosis, Chronic hyperplastic candidiasis, Oral lichen planus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Incisional or excisional biopsy for histological grading of dysplasia",
+      "Careful documentation of site, size, and clinical pattern",
+      "Removal of local irritants and reassessment to exclude frictional keratosis",
+      "Fungal investigation where hyperplastic candidiasis is suspected",
+      "Adjunctive imaging or referral when carcinoma is suspected"
     ],
-    [
-     "Management Strategy",
-     "Achieve cessation of tobacco (including smokeless forms), areca nut and alcohol, and remove local mechanical irritants",
-     "Core treatment modality"
+    "redFlags": [
+      "Non-homogeneous, speckled, or verrucous lesions and any red component, indicating higher malignant potential",
+      "Ulceration, induration, or a developing mass suggesting transformation to carcinoma",
+      "High-risk sites such as the floor of mouth and ventrolateral tongue",
+      "Presence of moderate to severe epithelial dysplasia on biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling a white patch as benign without biopsy or follow-up",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many lesions remain stable or regress after risk factors are removed, but a proportion undergo malignant transformation, and the risk rises with non-homogeneous appearance, high-risk sites, and higher grades of dysplasia, making long-term surveillance important.",
+    "pitfalls": [
+      "Labelling a white patch as benign without biopsy or follow-up",
+      "Assuming absence of symptoms means absence of risk",
+      "Sampling only a homogeneous area and missing dysplasia in a red or nodular component",
+      "Failing to address tobacco, areca nut, and alcohol use that perpetuate the lesion"
+    ],
+    "references": [
+      "Burket's Oral Medicine",
+      "Standard OMFS references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Achieve cessation of tobacco (including smokeless forms), areca nut and alcohol, and remove local mechanical irritants",
+      "Perform incisional biopsy to grade dysplasia and exclude invasive carcinoma, using excisional biopsy for small lesions",
+      "Excise high-grade dysplastic, non-homogeneous or high-risk-site lesions (floor of mouth, ventrolateral tongue) by surgery or laser",
+      "Maintain long-term clinical surveillance with photographic documentation and re-biopsy of changing lesions given the malignant-transformation risk",
+      "Treat proliferative verrucous leukoplakia aggressively with close follow-up owing to its high transformation rate",
+      "Refer to oral medicine or head and neck services when carcinoma is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for oral leukoplakia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oral-leukoplakia-real-image",
-   "title": "Oral leukoplakia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "oral_leukoplakia-pathway",
+      "title": "Oral leukoplakia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Leukoplakia is a clinical diagnosis of exclusion: a white patch that cannot be wiped off and cannot be attributed to any other definable lesion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Non-homogeneous, speckled, or verrucous lesions and any red component, indicating higher malignant potential",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Incisional or excisional biopsy for histological grading of dysplasia, Careful documentation of site, size, and clinical pattern, Removal of local irritants and reassessment to exclude frictional keratosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Achieve cessation of tobacco (including smokeless forms), areca nut and alcohol, and remove local mechanical irritants"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling a white patch as benign without biopsy or follow-up"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oral leukoplakia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oral_leukoplakia-matrix",
+      "title": "Oral leukoplakia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Leukoplakia is a clinical diagnosis of exclusion: a white patch that cannot be wiped off and cannot be attributed to any other",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Incisional or excisional biopsy for histological grading of dysplasia, Careful documentation of site, size, and clinical pattern,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Frictional or traumatic keratosis, Chronic hyperplastic candidiasis, Oral lichen planus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Achieve cessation of tobacco (including smokeless forms), areca nut and alcohol, and remove local mechanical irritants",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling a white patch as benign without biopsy or follow-up",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oral leukoplakia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oral_leukoplakia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Incisional or excisional biopsy",
+          "cells": [
+            {
+              "text": "Grades dysplasia and excludes invasive carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation of site, size and pattern",
+          "cells": [
+            {
+              "text": "Baseline record for follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Removal of irritants and reassessment",
+          "cells": [
+            {
+              "text": "Excludes frictional keratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal investigation",
+          "cells": [
+            {
+              "text": "Hyperplastic candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or referral",
+          "cells": [
+            {
+              "text": "When carcinoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_leukoplakia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Frictional or traumatic keratosis",
+          "cells": [
+            {
+              "text": "Resolves when local irritants are removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic hyperplastic candidiasis",
+          "cells": [
+            {
+              "text": "Fungal investigation separates it from an adherent leukoplakic patch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Established oral squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Ulceration, induration or a developing mass suggests transformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_leukoplakia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop tobacco, areca nut and alcohol",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Including smokeless forms; remove local mechanical irritants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy to grade dysplasia",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Incisional biopsy; excisional biopsy for small lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision of high-risk lesions",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "High-grade dysplasia, non-homogeneous lesions or high-risk sites such as floor of mouth and ventrolateral tongue, by surgery or laser"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Photographic documentation and re-biopsy of changing lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proliferative verrucous leukoplakia",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Treated aggressively with close follow-up, given its high transformation rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Oral medicine or head and neck services when carcinoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oral_leukoplakia-dx-mgmt",
+      "title": "Diagnosis and management of Oral leukoplakia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "White patch that cannot be wiped off, with no other definable cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (speckled or red component, induration, or moderate to severe dysplasia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent referral to oral medicine or head and neck services for carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Incisional or excisional biopsy for grading; irritant removal; fungal test if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is high-grade dysplasia or a high-risk site present on assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lower risk: stop tobacco, areca nut and alcohol; reassess at follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop tobacco, areca nut and alcohol, and remove local irritants",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excise high-grade or high-risk-site lesions by surgery or laser",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat proliferative verrucous leukoplakia aggressively with close follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term surveillance with photographs and re-biopsy of changing lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many stay stable after risk removal; transformation risk rises with grade and site",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

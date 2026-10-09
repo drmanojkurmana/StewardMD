@@ -1,175 +1,546 @@
 {
- "id": "bernard_soulier_syndrome",
- "name": "Bernard-Soulier syndrome (GP Ib-IX-V)",
- "aliases": [
-  "BSS",
-  "GP1BA",
-  "GP1BB",
-  "GP9",
-  "giant platelet syndrome"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive platelet disorder caused by deficiency or dysfunction of the glycoprotein Ib-IX-V complex, the platelet receptor for von Willebrand factor",
-   "It produces a mucocutaneous bleeding tendency together with mild thrombocytopenia and characteristically large (giant) platelets on the film",
-   "The triad of thrombocytopenia, giant platelets and a mucocutaneous bleeding history should prompt consideration of the diagnosis",
-   "The distinctive aggregometry pattern is absent agglutination to ristocetin that is not corrected by adding normal plasma, with preserved aggregation to other physiological agonists",
-   "This ristocetin pattern is the mirror image of Glanzmann thrombasthenia, where ristocetin response is preserved but other agonist responses are absent",
-   "Diagnosis is confirmed by reduced glycoprotein Ib-IX-V expression on flow cytometry and by GP1BA, GP1BB or GP9 genetic testing",
-   "Management uses local measures, antifibrinolytics, desmopressin in some settings and platelet transfusion for significant bleeding, mindful of alloimmunisation risk"
+  "id": "bernard_soulier_syndrome",
+  "name": "Bernard-Soulier syndrome (GP Ib-IX-V)",
+  "aliases": [
+    "BSS",
+    "GP1BA",
+    "GP1BB",
+    "GP9",
+    "giant platelet syndrome",
+    "Bernard-Soulier syndrome",
+    "bernard_soulier",
+    "glycoprotein Ib/IX/V deficiency"
   ],
-  "pathophysiology": "Bernard-Soulier syndrome is caused by biallelic mutations in GP1BA, GP1BB or GP9, which encode subunits of the platelet glycoprotein Ib-IX-V complex. This complex is the receptor through which platelets bind von Willebrand factor on exposed subendothelium, the first step of platelet adhesion under high shear. When the complex is deficient or defective, platelets cannot tether to the vessel wall, so primary haemostasis is impaired. The same molecular defect disturbs normal megakaryocyte and platelet development, producing mild thrombocytopenia and abnormally large platelets, and the combined adhesion failure and low platelet number underlie the bleeding phenotype.",
-  "additionalDifferentials": [
-   "Glanzmann thrombasthenia",
-   "Von Willebrand disease (including type 2B)",
-   "Immune thrombocytopenia",
-   "Other inherited macrothrombocytopenias (for example MYH9-related disease)",
-   "Platelet secretion or storage pool defects",
-   "Pseudothrombocytopenia from platelet clumping"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film showing thrombocytopenia with giant platelets",
-   "Platelet aggregometry demonstrating absent ristocetin-induced agglutination not corrected by normal plasma",
-   "Flow cytometry for glycoprotein Ib-IX-V expression",
-   "Von Willebrand studies to exclude von Willebrand disease",
-   "Review of the film to exclude pseudothrombocytopenia and other macrothrombocytopenias",
-   "Genetic testing of GP1BA, GP1BB and GP9"
-  ],
-  "redFlags": [
-   "Major haemorrhage such as gastrointestinal or intracranial bleeding",
-   "Severe menorrhagia or postpartum bleeding with haemodynamic compromise",
-   "Uncontrolled peri-operative or post-traumatic bleeding",
-   "Platelet refractoriness from alloimmunisation"
-  ],
-  "prognosis": "With appropriate supportive care and bleeding prophylaxis around procedures, most patients do well, although serious spontaneous or provoked bleeds can occur and repeated transfusion carries a risk of alloimmunisation.",
-  "pitfalls": [
-   "Misdiagnosing the low platelet count as immune thrombocytopenia and treating with immunosuppression",
-   "Automated analysers undercounting the giant platelets, exaggerating the apparent thrombocytopenia",
-   "Confusing the ristocetin defect with von Willebrand disease without a mixing (normal plasma) study",
-   "Overusing platelet transfusion and provoking alloimmunisation"
-  ],
-  "references": [
-   "Postgraduate Haematology",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use local pressure and antifibrinolytic agents such as tranexamic acid as first-line for mucocutaneous and menstrual bleeding",
-   "Trial desmopressin for minor bleeding where a response is documented, recognising it is less reliable than in some other platelet disorders",
-   "Transfuse platelets for major or refractory bleeding and surgical cover, favouring leucodepleted HLA-matched units to reduce alloimmunisation",
-   "Consider recombinant activated factor VII for bleeds unresponsive to platelets or in alloimmunised patients",
-   "Avoid aspirin and other antiplatelet and NSAID agents and correct iron-deficiency anaemia from chronic loss",
-   "Plan haematology review ahead of surgery, childbirth or invasive procedures with a defined haemostatic strategy",
-   "Provide genetic counselling for this autosomal recessive GP1BA, GP1BB or GP9 disorder and offer family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bernard_soulier_syndrome-pathway",
-   "title": "Bernard-Soulier syndrome (GP Ib-IX-V): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive platelet disorder caused by deficiency or dysfunction of the glycoprotein Ib-IX-V complex, the platelet receptor for von Willebrand factor",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Major haemorrhage such as gastrointestinal or intracranial bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film showing thrombocytopenia with giant platelets, Platelet aggregometry demonstrating absent ristocetin-induced agglutination not corrected by normal plasma, Flow cytometry for glycoprotein"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use local pressure and antifibrinolytic agents such as tranexamic acid as first-line for mucocutaneous and menstrual bleeding"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the low platelet count as immune thrombocytopenia and treating with immunosuppression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bernard-soulier syndrome (gp ib-ix-v)."
-  }
- ],
- "tables": [
-  {
-   "id": "bernard_soulier_syndrome-matrix",
-   "title": "Bernard-Soulier syndrome (GP Ib-IX-V): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive platelet disorder caused by deficiency or dysfunction of the glycoprotein Ib-IX-V complex, the platelet",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive platelet disorder caused by deficiency or dysfunction of the glycoprotein Ib-IX-V complex, the platelet receptor for von Willebrand factor",
+      "It produces a mucocutaneous bleeding tendency together with mild thrombocytopenia and characteristically large (giant) platelets on the film",
+      "The triad of thrombocytopenia, giant platelets and a mucocutaneous bleeding history should prompt consideration of the diagnosis",
+      "The distinctive aggregometry pattern is absent agglutination to ristocetin that is not corrected by adding normal plasma, with preserved aggregation to other physiological agonists",
+      "This ristocetin pattern is the mirror image of Glanzmann thrombasthenia, where ristocetin response is preserved but other agonist responses are absent",
+      "Diagnosis is confirmed by reduced glycoprotein Ib-IX-V expression on flow cytometry and by GP1BA, GP1BB or GP9 genetic testing",
+      "Management uses local measures, antifibrinolytics, desmopressin in some settings and platelet transfusion for significant bleeding, mindful of alloimmunisation risk"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film showing thrombocytopenia with giant platelets, Platelet aggregometry demonstrating absent",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bernard-Soulier syndrome is caused by biallelic mutations in GP1BA, GP1BB or GP9, which encode subunits of the platelet glycoprotein Ib-IX-V complex. This complex is the receptor through which platelets bind von Willebrand factor on exposed subendothelium, the first step of platelet adhesion under high shear. When the complex is deficient or defective, platelets cannot tether to the vessel wall, so primary haemostasis is impaired. The same molecular defect disturbs normal megakaryocyte and platelet development, producing mild thrombocytopenia and abnormally large platelets, and the combined adhesion failure and low platelet number underlie the bleeding phenotype.",
+    "additionalDifferentials": [
+      "Glanzmann thrombasthenia",
+      "Von Willebrand disease (including type 2B)",
+      "Immune thrombocytopenia",
+      "Other inherited macrothrombocytopenias (for example MYH9-related disease)",
+      "Platelet secretion or storage pool defects",
+      "Pseudothrombocytopenia from platelet clumping"
     ],
-    [
-     "Primary Differentials",
-     "Glanzmann thrombasthenia, Von Willebrand disease (including type 2B), Immune thrombocytopenia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film showing thrombocytopenia with giant platelets",
+      "Platelet aggregometry demonstrating absent ristocetin-induced agglutination not corrected by normal plasma",
+      "Flow cytometry for glycoprotein Ib-IX-V expression",
+      "Von Willebrand studies to exclude von Willebrand disease",
+      "Review of the film to exclude pseudothrombocytopenia and other macrothrombocytopenias",
+      "Genetic testing of GP1BA, GP1BB and GP9"
     ],
-    [
-     "Management Strategy",
-     "Use local pressure and antifibrinolytic agents such as tranexamic acid as first-line for mucocutaneous and menstrual bleeding",
-     "Core treatment modality"
+    "redFlags": [
+      "Major haemorrhage such as gastrointestinal or intracranial bleeding",
+      "Severe menorrhagia or postpartum bleeding with haemodynamic compromise",
+      "Uncontrolled peri-operative or post-traumatic bleeding",
+      "Platelet refractoriness from alloimmunisation"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the low platelet count as immune thrombocytopenia and treating with immunosuppression",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate supportive care and bleeding prophylaxis around procedures, most patients do well, although serious spontaneous or provoked bleeds can occur and repeated transfusion carries a risk of alloimmunisation.",
+    "pitfalls": [
+      "Misdiagnosing the low platelet count as immune thrombocytopenia and treating with immunosuppression",
+      "Automated analysers undercounting the giant platelets, exaggerating the apparent thrombocytopenia",
+      "Confusing the ristocetin defect with von Willebrand disease without a mixing (normal plasma) study",
+      "Overusing platelet transfusion and provoking alloimmunisation"
+    ],
+    "references": [
+      "Postgraduate Haematology",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use local pressure and antifibrinolytic agents such as tranexamic acid as first-line for mucocutaneous and menstrual bleeding",
+      "Trial desmopressin for minor bleeding where a response is documented, recognising it is less reliable than in some other platelet disorders",
+      "Transfuse platelets for major or refractory bleeding and surgical cover, favouring leucodepleted HLA-matched units to reduce alloimmunisation",
+      "Consider recombinant activated factor VII for bleeds unresponsive to platelets or in alloimmunised patients",
+      "Avoid aspirin and other antiplatelet and NSAID agents and correct iron-deficiency anaemia from chronic loss",
+      "Plan haematology review ahead of surgery, childbirth or invasive procedures with a defined haemostatic strategy",
+      "Provide genetic counselling for this autosomal recessive GP1BA, GP1BB or GP9 disorder and offer family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for bernard-soulier syndrome (gp ib-ix-v)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bernard-soulier-syndrome-real-image",
-   "title": "Bernard-Soulier syndrome (GP Ib-IX-V): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "bernard_soulier_syndrome-pathway",
+      "title": "Bernard-Soulier syndrome (GP Ib-IX-V): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive platelet disorder caused by deficiency or dysfunction of the glycoprotein Ib-IX-V complex, the platelet receptor for von Willebrand factor",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Major haemorrhage such as gastrointestinal or intracranial bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film showing thrombocytopenia with giant platelets, Platelet aggregometry demonstrating absent ristocetin-induced agglutination not corrected by normal plasma, Flow cytometry for glycoprotein"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use local pressure and antifibrinolytic agents such as tranexamic acid as first-line for mucocutaneous and menstrual bleeding"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the low platelet count as immune thrombocytopenia and treating with immunosuppression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bernard-soulier syndrome (gp ib-ix-v)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bernard_soulier_syndrome-matrix",
+      "title": "Bernard-Soulier syndrome (GP Ib-IX-V): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive platelet disorder caused by deficiency or dysfunction of the glycoprotein Ib-IX-V complex, the platelet",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film showing thrombocytopenia with giant platelets, Platelet aggregometry demonstrating absent",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glanzmann thrombasthenia, Von Willebrand disease (including type 2B), Immune thrombocytopenia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use local pressure and antifibrinolytic agents such as tranexamic acid as first-line for mucocutaneous and menstrual bleeding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the low platelet count as immune thrombocytopenia and treating with immunosuppression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bernard-soulier syndrome (gp ib-ix-v)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 58-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bernard_soulier_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in Bernard-Soulier syndrome",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Thrombocytopenia with giant platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregometry",
+          "cells": [
+            {
+              "text": "Absent ristocetin-induced agglutination, not corrected by normal plasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for glycoprotein Ib-IX-V",
+          "cells": [
+            {
+              "text": "Reduced expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand studies",
+          "cells": [
+            {
+              "text": "Excludes von Willebrand disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of the film",
+          "cells": [
+            {
+              "text": "Excludes pseudothrombocytopenia and other macrothrombocytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of GP1BA, GP1BB and GP9",
+          "cells": [
+            {
+              "text": "Pathogenic variants in these genes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bernard_soulier_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Bernard-Soulier syndrome",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glanzmann thrombasthenia",
+          "cells": [
+            {
+              "text": "Mirror image: ristocetin response preserved, but other agonist responses absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "A normal plasma mixing study is needed; this ristocetin defect is not corrected by it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Giant platelets and a mucocutaneous bleeding history point away from ITP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudothrombocytopenia from platelet clumping",
+          "cells": [
+            {
+              "text": "Excluded by review of the film"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bernard_soulier_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in Bernard-Soulier syndrome",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Local measures and antifibrinolytics",
+          "cells": [
+            {
+              "text": "Local pressure and antifibrinolytics such as tranexamic acid as first-line"
+            },
+            {
+              "text": "For mucocutaneous and menstrual bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Trial for minor bleeding where a response is documented"
+            },
+            {
+              "text": "Less reliable than in some other platelet disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet transfusion",
+          "cells": [
+            {
+              "text": "For major or refractory bleeding and surgical cover, using leucodepleted HLA-matched units"
+            },
+            {
+              "text": "Reduces alloimmunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant activated factor VII",
+          "cells": [
+            {
+              "text": "For bleeds unresponsive to platelets or in alloimmunised patients"
+            },
+            {
+              "text": "Considered for refractory bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet agents",
+          "cells": [
+            {
+              "text": "Avoid aspirin, antiplatelet and NSAID agents; correct iron deficiency from chronic loss"
+            },
+            {
+              "text": "These worsen bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procedure planning",
+          "cells": [
+            {
+              "text": "Haematology review and a defined haemostatic strategy before surgery, childbirth or procedures"
+            },
+            {
+              "text": "Planned in advance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Counselling for the autosomal recessive GP1BA, GP1BB or GP9 disorder"
+            },
+            {
+              "text": "Family testing offered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bernard_soulier_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Primary hemostatic (platelet plug) disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Disorders"
+      ],
+      "rows": [
+        {
+          "parameter": "Defects of platelet adhesion",
+          "cells": [
+            {
+              "text": "Von Willebrand disease; Bernard-Soulier syndrome (absence or dysfunction of GpIb-IX-V)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defects of platelet aggregation",
+          "cells": [
+            {
+              "text": "Glanzmann's thrombasthenia (absence or dysfunction of GpIIbIIIa); afibrinogenemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defects of platelet secretion",
+          "cells": [
+            {
+              "text": "Decreased cyclooxygenase activity (drug-induced: aspirin, nonsteroidal anti-inflammatory agents, thienopyridines; or inherited); granule storage pool defects (inherited or acquired); nonspecific inherited secretory defects; nonspecific drug effects; uremia; platelet coating (for example paraprotein, penicillin)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defect of platelet coagulant activity",
+          "cells": [
+            {
+              "text": "Scott's syndrome"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bernard_soulier_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Bernard-Soulier syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mucocutaneous bleeding, mild thrombocytopenia and giant platelets on the blood film",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: major haemorrhage, severe menorrhagia, uncontrolled bleeding or platelet refractoriness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: leucodepleted HLA-matched platelets; consider recombinant factor VIIa",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Check film for pseudothrombocytopenia; avoid aspirin and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Ristocetin aggregometry with normal plasma mixing; flow cytometry for GPIb-IX-V",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Ristocetin defect not corrected by normal plasma, with reduced GPIb?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Genetic testing of GP1BA, GP1BB and GP9; tranexamic acid as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider Glanzmann, von Willebrand disease, ITP or pseudothrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Defined haemostatic plan before procedures; counsel and offer family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Most do well with prophylaxis; serious bleeds and alloimmunisation remain risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

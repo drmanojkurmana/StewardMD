@@ -1,174 +1,502 @@
 {
- "id": "progressive_multifocal_leukoencephalopathy",
- "name": "Progressive multifocal leukoencephalopathy (JC virus)",
- "aliases": [
-  "PML",
-  "JC virus encephalopathy",
-  "JCV demyelinating disease",
-  "John Cunningham virus infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by reactivation of the ubiquitous JC polyomavirus, which lytically infects oligodendrocytes and produces progressive demyelination of the cerebral white matter",
-   "Occurs almost exclusively in the setting of impaired cell-mediated immunity, classically advanced HIV, haematological malignancy, transplantation, and natalizumab or other immunomodulatory therapy",
-   "Presents with subacute, steadily worsening focal deficits such as hemiparesis, visual field loss, cognitive decline, ataxia, and speech disturbance, usually without fever or headache",
-   "MRI typically shows multifocal, asymmetrical subcortical and periventricular white-matter lesions that are hyperintense on T2/FLAIR, do not enhance, and lack mass effect",
-   "Diagnosis rests on compatible clinical and imaging features plus detection of JC virus DNA in cerebrospinal fluid by PCR, or brain biopsy when the picture is atypical",
-   "There is no specific antiviral agent; the mainstay is restoration of immune function through immune reconstitution in HIV or withdrawal of the offending immunosuppressant",
-   "Immune reconstitution can precipitate PML-IRIS, in which recovering immunity produces paradoxical clinical worsening with new gadolinium enhancement and oedema on imaging"
+  "id": "progressive_multifocal_leukoencephalopathy",
+  "name": "Progressive multifocal leukoencephalopathy (JC virus)",
+  "aliases": [
+    "PML",
+    "JC virus encephalopathy",
+    "JCV demyelinating disease",
+    "John Cunningham virus infection"
   ],
-  "pathophysiology": "The disease results from reactivation of latent JC polyomavirus, a common childhood infection that persists silently in the kidney and lymphoid tissue. When cell-mediated immunity fails, rearranged neurotropic strains of the virus reach the central nervous system and lytically infect oligodendrocytes, destroying the myelin they maintain. The resulting confluent foci of demyelination enlarge and coalesce across the subcortical white matter, sparing axons relatively early but producing progressive neurological deficits. Astrocytes become bizarrely enlarged and oligodendrocyte nuclei acquire viral inclusions. Because inflammation is minimal while immunity is suppressed, lesions usually do not enhance until immune function recovers, when a brisk inflammatory response (immune reconstitution inflammatory syndrome) may develop.",
-  "additionalDifferentials": [
-   "HIV-associated dementia or HIV encephalopathy",
-   "Cerebral toxoplasmosis",
-   "Primary central nervous system lymphoma",
-   "Cytomegalovirus or other viral encephalitis",
-   "Acute disseminated encephalomyelitis or multiple sclerosis relapse",
-   "Posterior reversible encephalopathy syndrome"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain with and without gadolinium to characterise white-matter lesions and detect enhancement suggesting IRIS",
-   "Cerebrospinal fluid JC virus DNA PCR, ideally quantitative and from a sensitive laboratory",
-   "HIV testing with CD4 count and plasma viral load",
-   "Review of immunosuppressive and biological therapy history, including cumulative natalizumab exposure and anti-JCV antibody index",
-   "Brain biopsy with immunohistochemistry or in situ hybridisation for JC virus when CSF is negative but suspicion remains",
-   "Assessment of underlying haematological or transplant-related immune status"
-  ],
-  "redFlags": [
-   "Rapidly progressive focal neurological deficit in an immunocompromised patient",
-   "New enhancing lesions with oedema after immune reconstitution suggesting PML-IRIS",
-   "Deteriorating conscious level or brainstem involvement",
-   "Development of intractable seizures or profound cognitive collapse"
-  ],
-  "prognosis": "Historically often fatal within months, outcomes have improved where immune function can be restored, particularly in HIV with effective antiretroviral therapy; nonetheless many survivors are left with substantial neurological disability, and PML-IRIS carries a risk of further deterioration or death.",
-  "pitfalls": [
-   "Attributing progressive deficits to the underlying condition or to multiple sclerosis relapse rather than considering PML in a treated patient",
-   "Being falsely reassured by a single negative CSF JC virus PCR, since sensitivity is imperfect",
-   "Failing to recognise PML-IRIS when clinical worsening follows immune recovery",
-   "Overlooking natalizumab or other biological agents as a cause and delaying drug withdrawal"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "UpToDate: Progressive multifocal leukoencephalopathy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore cell-mediated immunity as the mainstay: start effective antiretroviral therapy in HIV, or withdraw the offending immunosuppressant such as natalizumab, using plasma exchange to accelerate its removal",
-   "No proven specific anti-JC-virus drug exists; avoid unnecessary additional immunosuppression",
-   "Anticipate and manage immune reconstitution inflammatory syndrome (PML-IRIS), using corticosteroids for symptomatic inflammatory deterioration",
-   "Supportive and rehabilitative care for neurological deficits with physiotherapy, occupational and speech therapy, and antiseizure treatment if seizures occur",
-   "Serial clinical and MRI monitoring for progression, new enhancement and IRIS, with cerebrospinal fluid JC virus DNA to confirm and follow the diagnosis",
-   "Treat the underlying condition (HIV, haematological malignancy or transplant immunosuppression) with the relevant specialists",
-   "Multidisciplinary neurology, infectious diseases and, where appropriate, palliative care involvement given the guarded prognosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_multifocal_leukoencephalopathy-pathway",
-   "title": "Progressive multifocal leukoencephalopathy (JC virus): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by reactivation of the ubiquitous JC polyomavirus, which lytically infects oligodendrocytes and produces progressive demyelination of the cerebral white matter",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive focal neurological deficit in an immunocompromised patient",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain with and without gadolinium to characterise white-matter lesions and detect enhancement suggesting IRIS, Cerebrospinal fluid JC virus DNA PCR, ideally quantitative and from a sensitive laboratory, HIV"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore cell-mediated immunity as the mainstay: start effective antiretroviral therapy in HIV, or withdraw the offending immunosuppressant such as natalizumab, using plasma exchange to accelerate its removal"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing progressive deficits to the underlying condition or to multiple sclerosis relapse rather than considering PML in a treated patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive multifocal leukoencephalopathy (jc virus)."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_multifocal_leukoencephalopathy-matrix",
-   "title": "Progressive multifocal leukoencephalopathy (JC virus): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by reactivation of the ubiquitous JC polyomavirus, which lytically infects oligodendrocytes and produces progressive",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by reactivation of the ubiquitous JC polyomavirus, which lytically infects oligodendrocytes and produces progressive demyelination of the cerebral white matter",
+      "Occurs almost exclusively in the setting of impaired cell-mediated immunity, classically advanced HIV, haematological malignancy, transplantation, and natalizumab or other immunomodulatory therapy",
+      "Presents with subacute, steadily worsening focal deficits such as hemiparesis, visual field loss, cognitive decline, ataxia, and speech disturbance, usually without fever or headache",
+      "MRI typically shows multifocal, asymmetrical subcortical and periventricular white-matter lesions that are hyperintense on T2/FLAIR, do not enhance, and lack mass effect",
+      "Diagnosis rests on compatible clinical and imaging features plus detection of JC virus DNA in cerebrospinal fluid by PCR, or brain biopsy when the picture is atypical",
+      "There is no specific antiviral agent; the mainstay is restoration of immune function through immune reconstitution in HIV or withdrawal of the offending immunosuppressant",
+      "Immune reconstitution can precipitate PML-IRIS, in which recovering immunity produces paradoxical clinical worsening with new gadolinium enhancement and oedema on imaging"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain with and without gadolinium to characterise white-matter lesions and detect enhancement suggesting IRIS,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The disease results from reactivation of latent JC polyomavirus, a common childhood infection that persists silently in the kidney and lymphoid tissue. When cell-mediated immunity fails, rearranged neurotropic strains of the virus reach the central nervous system and lytically infect oligodendrocytes, destroying the myelin they maintain. The resulting confluent foci of demyelination enlarge and coalesce across the subcortical white matter, sparing axons relatively early but producing progressive neurological deficits. Astrocytes become bizarrely enlarged and oligodendrocyte nuclei acquire viral inclusions. Because inflammation is minimal while immunity is suppressed, lesions usually do not enhance until immune function recovers, when a brisk inflammatory response (immune reconstitution inflammatory syndrome) may develop.",
+    "additionalDifferentials": [
+      "HIV-associated dementia or HIV encephalopathy",
+      "Cerebral toxoplasmosis",
+      "Primary central nervous system lymphoma",
+      "Cytomegalovirus or other viral encephalitis",
+      "Acute disseminated encephalomyelitis or multiple sclerosis relapse",
+      "Posterior reversible encephalopathy syndrome"
     ],
-    [
-     "Primary Differentials",
-     "HIV-associated dementia or HIV encephalopathy, Cerebral toxoplasmosis, Primary central nervous system lymphoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain with and without gadolinium to characterise white-matter lesions and detect enhancement suggesting IRIS",
+      "Cerebrospinal fluid JC virus DNA PCR, ideally quantitative and from a sensitive laboratory",
+      "HIV testing with CD4 count and plasma viral load",
+      "Review of immunosuppressive and biological therapy history, including cumulative natalizumab exposure and anti-JCV antibody index",
+      "Brain biopsy with immunohistochemistry or in situ hybridisation for JC virus when CSF is negative but suspicion remains",
+      "Assessment of underlying haematological or transplant-related immune status"
     ],
-    [
-     "Management Strategy",
-     "Restore cell-mediated immunity as the mainstay: start effective antiretroviral therapy in HIV, or withdraw the offending",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive focal neurological deficit in an immunocompromised patient",
+      "New enhancing lesions with oedema after immune reconstitution suggesting PML-IRIS",
+      "Deteriorating conscious level or brainstem involvement",
+      "Development of intractable seizures or profound cognitive collapse"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing progressive deficits to the underlying condition or to multiple sclerosis relapse rather than considering PML in a",
-     "Prevent diagnostic or management error"
+    "prognosis": "Historically often fatal within months, outcomes have improved where immune function can be restored, particularly in HIV with effective antiretroviral therapy; nonetheless many survivors are left with substantial neurological disability, and PML-IRIS carries a risk of further deterioration or death.",
+    "pitfalls": [
+      "Attributing progressive deficits to the underlying condition or to multiple sclerosis relapse rather than considering PML in a treated patient",
+      "Being falsely reassured by a single negative CSF JC virus PCR, since sensitivity is imperfect",
+      "Failing to recognise PML-IRIS when clinical worsening follows immune recovery",
+      "Overlooking natalizumab or other biological agents as a cause and delaying drug withdrawal"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "UpToDate: Progressive multifocal leukoencephalopathy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore cell-mediated immunity as the mainstay: start effective antiretroviral therapy in HIV, or withdraw the offending immunosuppressant such as natalizumab, using plasma exchange to accelerate its removal",
+      "No proven specific anti-JC-virus drug exists; avoid unnecessary additional immunosuppression",
+      "Anticipate and manage immune reconstitution inflammatory syndrome (PML-IRIS), using corticosteroids for symptomatic inflammatory deterioration",
+      "Supportive and rehabilitative care for neurological deficits with physiotherapy, occupational and speech therapy, and antiseizure treatment if seizures occur",
+      "Serial clinical and MRI monitoring for progression, new enhancement and IRIS, with cerebrospinal fluid JC virus DNA to confirm and follow the diagnosis",
+      "Treat the underlying condition (HIV, haematological malignancy or transplant immunosuppression) with the relevant specialists",
+      "Multidisciplinary neurology, infectious diseases and, where appropriate, palliative care involvement given the guarded prognosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive multifocal leukoencephalopathy (jc virus)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-multifocal-leukoencephalopathy-real-image",
-   "title": "Progressive multifocal leukoencephalopathy (JC virus): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "progressive_multifocal_leukoencephalopathy-pathway",
+      "title": "Progressive multifocal leukoencephalopathy (JC virus): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by reactivation of the ubiquitous JC polyomavirus, which lytically infects oligodendrocytes and produces progressive demyelination of the cerebral white matter",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive focal neurological deficit in an immunocompromised patient",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain with and without gadolinium to characterise white-matter lesions and detect enhancement suggesting IRIS, Cerebrospinal fluid JC virus DNA PCR, ideally quantitative and from a sensitive laboratory, HIV"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore cell-mediated immunity as the mainstay: start effective antiretroviral therapy in HIV, or withdraw the offending immunosuppressant such as natalizumab, using plasma exchange to accelerate its removal"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing progressive deficits to the underlying condition or to multiple sclerosis relapse rather than considering PML in a treated patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive multifocal leukoencephalopathy (jc virus)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_multifocal_leukoencephalopathy-matrix",
+      "title": "Progressive multifocal leukoencephalopathy (JC virus): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by reactivation of the ubiquitous JC polyomavirus, which lytically infects oligodendrocytes and produces progressive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain with and without gadolinium to characterise white-matter lesions and detect enhancement suggesting IRIS,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "HIV-associated dementia or HIV encephalopathy, Cerebral toxoplasmosis, Primary central nervous system lymphoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore cell-mediated immunity as the mainstay: start effective antiretroviral therapy in HIV, or withdraw the offending",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing progressive deficits to the underlying condition or to multiple sclerosis relapse rather than considering PML in a",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive multifocal leukoencephalopathy (jc virus)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 189-13",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_multifocal_leukoencephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain with and without gadolinium",
+          "cells": [
+            {
+              "text": "White-matter lesions and enhancement suggesting IRIS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF JC virus DNA PCR",
+          "cells": [
+            {
+              "text": "JC virus DNA, ideally quantitative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing with CD4 count and viral load",
+          "cells": [
+            {
+              "text": "HIV and immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of immunosuppressive and biological therapy",
+          "cells": [
+            {
+              "text": "Cumulative natalizumab exposure and anti-JCV antibody index"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy with JC virus immunohistochemistry",
+          "cells": [
+            {
+              "text": "JC virus when CSF is negative but suspicion remains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological or transplant immune status",
+          "cells": [
+            {
+              "text": "Underlying immune deficit"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_multifocal_leukoencephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Restore cell-mediated immunity",
+          "cells": [
+            {
+              "text": "Start antiretroviral therapy in HIV, or withdraw the offending immunosuppressant such as natalizumab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No specific anti-JC-virus drug",
+          "cells": [
+            {
+              "text": "Avoid unnecessary additional immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PML-IRIS",
+          "cells": [
+            {
+              "text": "Corticosteroids for symptomatic inflammatory deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy; antiseizure treatment if seizures occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Clinical and MRI review for progression and IRIS; CSF JC virus DNA to follow the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying condition",
+          "cells": [
+            {
+              "text": "HIV, haematological malignancy or transplant immunosuppression, with relevant specialists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, infectious diseases and palliative care given the guarded prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_multifocal_leukoencephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Neurologic diseases in HIV",
+      "rowHeader": "Condition",
+      "columns": [
+        "Examples"
+      ],
+      "rows": [
+        {
+          "parameter": "Opportunistic infections",
+          "cells": [
+            {
+              "text": "toxoplasmosis, cryptococcosis, progressive multifocal leukoencephalopathy, cytomegalovirus, syphilis, Mycobacterium tuberculosis, HTLV-I infection, amebiasis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neoplasms",
+          "cells": [
+            {
+              "text": "primary CNS lymphoma, Kaposi sarcoma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Result of HIV-1 infection",
+          "cells": [
+            {
+              "text": "aseptic meningitis; HIV-associated neurocognitive disorders including HIV encephalopathy and AIDS dementia complex"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myelopathy",
+          "cells": [
+            {
+              "text": "vacuolar myelopathy, pure sensory ataxia, paresthesia or dysesthesia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral neuropathy",
+          "cells": [
+            {
+              "text": "acute inflammatory demyelinating polyneuropathy (Guillain-Barre syndrome), CIDP, mononeuritis multiplex, distal symmetric polyneuropathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myopathy",
+          "cells": [
+            {
+              "text": "myopathy (no detail printed)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_multifocal_leukoencephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of Progressive multifocal leukoencephalopathy (JC virus)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PML: rapidly progressive focal deficit in an immunocompromised patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Brainstem signs, seizures, cognitive collapse, or enhancement after immune recovery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology and infectious diseases review; consider PML-IRIS",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with gadolinium; CSF JC virus DNA PCR; HIV, CD4 and viral load; drug history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is JC virus DNA detected in CSF, or is brain biopsy diagnostic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cerebral toxoplasmosis, CNS lymphoma or viral encephalitis; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restore immunity: start antiretroviral therapy or withdraw the immunosuppressant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "No proven anti-JC-virus drug; avoid unnecessary immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids for symptomatic PML-IRIS",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial clinical and MRI monitoring with CSF JC virus DNA",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary neurology, infectious diseases and palliative care involvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

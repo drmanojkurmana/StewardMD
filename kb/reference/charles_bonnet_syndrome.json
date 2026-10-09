@@ -1,173 +1,482 @@
 {
- "id": "charles_bonnet_syndrome",
- "name": "Charles Bonnet syndrome",
- "aliases": [
-  "CBS",
-  "visual release hallucinations"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by complex, formed visual hallucinations occurring in people with significant visual impairment who retain insight that the images are not real",
-   "It occurs in cognitively intact individuals without psychiatric illness and without hallucinations in other sensory modalities",
-   "Hallucinations range from simple patterns to detailed images of people, animals, faces, or scenes, sometimes with abnormal proportions",
-   "It is strongly associated with acquired vision loss, most often age-related macular degeneration, glaucoma, and diabetic retinopathy",
-   "The mechanism is thought to be release phenomena, with spontaneous activity in visually deafferented cortex generating the images",
-   "Reassurance and explanation are central to management, as many patients fear they are developing a mental illness",
-   "The retained insight distinguishes it from psychotic and delirium-related hallucinations"
+  "id": "charles_bonnet_syndrome",
+  "name": "Charles Bonnet syndrome",
+  "aliases": [
+    "CBS",
+    "visual release hallucinations"
   ],
-  "pathophysiology": "Charles Bonnet syndrome is understood as a visual release phenomenon: loss of normal visual input from ocular or anterior pathway disease leaves visual cortex deafferented, and spontaneous cortical activity in these regions is experienced as formed hallucinations, analogous to phantom sensations after limb loss. The hallucinations are purely visual, and insight is preserved because higher cognition is intact. The syndrome is most common in older people with reduced acuity from macular degeneration, glaucoma, diabetic retinopathy, or other causes of vision loss, and its prevalence rises with the severity of visual impairment.",
-  "additionalDifferentials": [
-   "Visual hallucinations of Lewy body dementia or Parkinson disease",
-   "Delirium with visual hallucinations",
-   "Psychotic disorder with hallucinations",
-   "Peduncular hallucinosis from midbrain lesions",
-   "Occipital seizures producing visual phenomena",
-   "Migraine with visual aura",
-   "Drug-induced or withdrawal hallucinations"
-  ],
-  "additionalInvestigations": [
-   "Comprehensive ophthalmic assessment to characterise the underlying visual loss",
-   "Cognitive screening to exclude dementia",
-   "Assessment for features of Parkinsonism or Lewy body disease",
-   "Medication review for hallucinogenic or deliriogenic drugs",
-   "Neuroimaging where atypical features or focal signs suggest a central cause",
-   "Consideration of electroencephalography if occipital seizures are suspected"
-  ],
-  "redFlags": [
-   "Hallucinations in other sensory modalities suggesting an alternative diagnosis",
-   "Loss of insight or delusional interpretation suggesting psychosis or delirium",
-   "Associated cognitive decline or parkinsonism suggesting a neurodegenerative disorder",
-   "Focal neurological signs suggesting a structural or epileptic cause"
-  ],
-  "prognosis": "The syndrome is benign and hallucinations often diminish over months to years, though they may persist; the main morbidity is distress, which is greatly reduced by reassurance, and prognosis otherwise follows the underlying eye disease.",
-  "pitfalls": [
-   "Misdiagnosing the hallucinations as psychosis or dementia and prescribing inappropriate antipsychotics",
-   "Failing to reassure the patient, who may otherwise fear mental illness",
-   "Overlooking a neurodegenerative or structural cause when atypical features are present",
-   "Not optimising the underlying visual impairment, which can worsen the hallucinations"
-  ],
-  "references": [
-   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and clear explanation that the hallucinations are a release phenomenon from visual loss and not a sign of mental illness or dementia is the central intervention",
-   "Optimise the underlying eye disease to improve residual vision, including treatment of macular degeneration, cataract surgery, low-vision aids and improved lighting",
-   "Teach simple coping strategies such as blinking, shifting gaze, altering lighting and increasing social and cognitive stimulation to interrupt episodes",
-   "Review and rationalise deliriogenic or hallucinogenic medications that may aggravate symptoms",
-   "Monitor cognition and watch for parkinsonism or Lewy body features that would suggest an alternative diagnosis",
-   "Cautious trial of pharmacotherapy reserved for severe, distressing and refractory hallucinations",
-   "Referral to low-vision rehabilitation services and psychological support where distress persists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "charles_bonnet_syndrome-pathway",
-   "title": "Charles Bonnet syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by complex, formed visual hallucinations occurring in people with significant visual impairment who retain insight that the images are not real",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hallucinations in other sensory modalities suggesting an alternative diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Comprehensive ophthalmic assessment to characterise the underlying visual loss, Cognitive screening to exclude dementia, Assessment for features of Parkinsonism or Lewy body disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and clear explanation that the hallucinations are a release phenomenon from visual loss and not a sign of mental illness or dementia is the central intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the hallucinations as psychosis or dementia and prescribing inappropriate antipsychotics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of charles bonnet syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "charles_bonnet_syndrome-matrix",
-   "title": "Charles Bonnet syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by complex, formed visual hallucinations occurring in people with significant visual impairment who retain insight",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by complex, formed visual hallucinations occurring in people with significant visual impairment who retain insight that the images are not real",
+      "It occurs in cognitively intact individuals without psychiatric illness and without hallucinations in other sensory modalities",
+      "Hallucinations range from simple patterns to detailed images of people, animals, faces, or scenes, sometimes with abnormal proportions",
+      "It is strongly associated with acquired vision loss, most often age-related macular degeneration, glaucoma, and diabetic retinopathy",
+      "The mechanism is thought to be release phenomena, with spontaneous activity in visually deafferented cortex generating the images",
+      "Reassurance and explanation are central to management, as many patients fear they are developing a mental illness",
+      "The retained insight distinguishes it from psychotic and delirium-related hallucinations"
     ],
-    [
-     "Key Investigations",
-     "Comprehensive ophthalmic assessment to characterise the underlying visual loss, Cognitive screening to exclude dementia,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Charles Bonnet syndrome is understood as a visual release phenomenon: loss of normal visual input from ocular or anterior pathway disease leaves visual cortex deafferented, and spontaneous cortical activity in these regions is experienced as formed hallucinations, analogous to phantom sensations after limb loss. The hallucinations are purely visual, and insight is preserved because higher cognition is intact. The syndrome is most common in older people with reduced acuity from macular degeneration, glaucoma, diabetic retinopathy, or other causes of vision loss, and its prevalence rises with the severity of visual impairment.",
+    "additionalDifferentials": [
+      "Visual hallucinations of Lewy body dementia or Parkinson disease",
+      "Delirium with visual hallucinations",
+      "Psychotic disorder with hallucinations",
+      "Peduncular hallucinosis from midbrain lesions",
+      "Occipital seizures producing visual phenomena",
+      "Migraine with visual aura",
+      "Drug-induced or withdrawal hallucinations"
     ],
-    [
-     "Primary Differentials",
-     "Visual hallucinations of Lewy body dementia or Parkinson disease, Delirium with visual hallucinations, Psychotic disorder with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Comprehensive ophthalmic assessment to characterise the underlying visual loss",
+      "Cognitive screening to exclude dementia",
+      "Assessment for features of Parkinsonism or Lewy body disease",
+      "Medication review for hallucinogenic or deliriogenic drugs",
+      "Neuroimaging where atypical features or focal signs suggest a central cause",
+      "Consideration of electroencephalography if occipital seizures are suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and clear explanation that the hallucinations are a release phenomenon from visual loss and not a sign of mental",
-     "Core treatment modality"
+    "redFlags": [
+      "Hallucinations in other sensory modalities suggesting an alternative diagnosis",
+      "Loss of insight or delusional interpretation suggesting psychosis or delirium",
+      "Associated cognitive decline or parkinsonism suggesting a neurodegenerative disorder",
+      "Focal neurological signs suggesting a structural or epileptic cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the hallucinations as psychosis or dementia and prescribing inappropriate antipsychotics",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome is benign and hallucinations often diminish over months to years, though they may persist; the main morbidity is distress, which is greatly reduced by reassurance, and prognosis otherwise follows the underlying eye disease.",
+    "pitfalls": [
+      "Misdiagnosing the hallucinations as psychosis or dementia and prescribing inappropriate antipsychotics",
+      "Failing to reassure the patient, who may otherwise fear mental illness",
+      "Overlooking a neurodegenerative or structural cause when atypical features are present",
+      "Not optimising the underlying visual impairment, which can worsen the hallucinations"
+    ],
+    "references": [
+      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and clear explanation that the hallucinations are a release phenomenon from visual loss and not a sign of mental illness or dementia is the central intervention",
+      "Optimise the underlying eye disease to improve residual vision, including treatment of macular degeneration, cataract surgery, low-vision aids and improved lighting",
+      "Teach simple coping strategies such as blinking, shifting gaze, altering lighting and increasing social and cognitive stimulation to interrupt episodes",
+      "Review and rationalise deliriogenic or hallucinogenic medications that may aggravate symptoms",
+      "Monitor cognition and watch for parkinsonism or Lewy body features that would suggest an alternative diagnosis",
+      "Cautious trial of pharmacotherapy reserved for severe, distressing and refractory hallucinations",
+      "Referral to low-vision rehabilitation services and psychological support where distress persists"
     ]
-   ],
-   "caption": "Overview comparison matrix for charles bonnet syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "charles-bonnet-syndrome-real-image",
-   "title": "Charles Bonnet syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "charles_bonnet_syndrome-pathway",
+      "title": "Charles Bonnet syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by complex, formed visual hallucinations occurring in people with significant visual impairment who retain insight that the images are not real",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hallucinations in other sensory modalities suggesting an alternative diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Comprehensive ophthalmic assessment to characterise the underlying visual loss, Cognitive screening to exclude dementia, Assessment for features of Parkinsonism or Lewy body disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and clear explanation that the hallucinations are a release phenomenon from visual loss and not a sign of mental illness or dementia is the central intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the hallucinations as psychosis or dementia and prescribing inappropriate antipsychotics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of charles bonnet syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "charles_bonnet_syndrome-matrix",
+      "title": "Charles Bonnet syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by complex, formed visual hallucinations occurring in people with significant visual impairment who retain insight",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Comprehensive ophthalmic assessment to characterise the underlying visual loss, Cognitive screening to exclude dementia,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Visual hallucinations of Lewy body dementia or Parkinson disease, Delirium with visual hallucinations, Psychotic disorder with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and clear explanation that the hallucinations are a release phenomenon from visual loss and not a sign of mental",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the hallucinations as psychosis or dementia and prescribing inappropriate antipsychotics",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for charles bonnet syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charles_bonnet_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Comprehensive ophthalmic assessment",
+          "cells": [
+            {
+              "text": "Characterises the underlying visual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive screening",
+          "cells": [
+            {
+              "text": "Excludes dementia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for parkinsonism or Lewy body features",
+          "cells": [
+            {
+              "text": "Identifies an alternative diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Hallucinogenic or deliriogenic drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Atypical features or focal signs suggesting a central cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charles_bonnet_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lewy body dementia or Parkinson disease",
+          "cells": [
+            {
+              "text": "Cognitive decline or parkinsonism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delirium or psychotic disorder",
+          "cells": [
+            {
+              "text": "Loss of insight or delusional interpretation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occipital seizures",
+          "cells": [
+            {
+              "text": "Focal neurological signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charles_bonnet_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and explanation",
+          "cells": [
+            {
+              "text": "Hallucinations are a release phenomenon from visual loss, not mental illness or dementia"
+            },
+            {
+              "text": "Central intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the eye disease",
+          "cells": [
+            {
+              "text": "Treat macular degeneration, cataract surgery, low-vision aids and lighting"
+            },
+            {
+              "text": "Improves residual vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coping strategies",
+          "cells": [
+            {
+              "text": "Blinking, shifting gaze, altering lighting, social and cognitive stimulation"
+            },
+            {
+              "text": "Interrupts episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Review deliriogenic or hallucinogenic medicines"
+            },
+            {
+              "text": "May aggravate symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive and parkinsonism monitoring",
+          "cells": [
+            {
+              "text": "Monitor cognition and Lewy body features"
+            },
+            {
+              "text": "Alternative diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacotherapy",
+          "cells": [
+            {
+              "text": "Cautious trial for severe, distressing, refractory hallucinations"
+            },
+            {
+              "text": "Reserved for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision and psychological support",
+          "cells": [
+            {
+              "text": "Low-vision rehabilitation and psychological support"
+            },
+            {
+              "text": "Where distress persists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charles_bonnet_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Charles Bonnet syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Charles Bonnet syndrome: formed visual hallucinations with retained insight",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (other sensory hallucinations, lost insight, cognitive decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: assess for psychosis, delirium, Lewy body disease or structural lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ophthalmic assessment, cognitive screening, medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Insight retained, visual loss present and alternative causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassure that hallucinations are a release phenomenon, not mental illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Lewy body disease, delirium, psychosis and occipital seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat underlying eye disease; cataract surgery and low-vision aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Teach coping strategies: blinking, shifting gaze, altering lighting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review and rationalise deliriogenic or hallucinogenic medicines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-vision rehabilitation and psychological support if distress persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

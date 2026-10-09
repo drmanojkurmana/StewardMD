@@ -1,177 +1,399 @@
 {
- "id": "vestibular_paroxysmia",
- "name": "vestibular paroxysmia",
- "aliases": [
-  "neurovascular cross-compression of the eighth nerve",
-  "disabling positional vertigo",
-  "microvascular compression syndrome of cranial nerve VIII"
- ],
- "class": "non_infective",
- "system": "nervous system",
- "specialty": "neuro-otology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bárány Society diagnostic criteria for vestibular paroxysmia",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The hallmark is short, recurrent, stereotyped spells of spinning or non-spinning vertigo lasting seconds to under a minute, which may occur many times a day.",
-   "It is attributed to pulsatile neurovascular cross-compression of the vestibulocochlear nerve, mechanistically analogous to trigeminal neuralgia and hemifacial spasm.",
-   "Attacks may arise spontaneously or be provoked by particular head positions or by hyperventilation, and may be accompanied by transient unilateral tinnitus or a change in hearing.",
-   "A clear response to low doses of a sodium-channel-blocking anticonvulsant (such as carbamazepine or oxcarbazepine) supports the diagnosis and is one of the formal diagnostic criteria.",
-   "High-resolution heavily T2-weighted MRI (CISS or FIESTA) may show a vessel, most often the anterior inferior cerebellar artery, looping onto the nerve, but such contact is frequent in asymptomatic people, so imaging is supportive rather than diagnostic.",
-   "Between attacks the examination is usually normal, although some patients develop a mild progressive vestibular or cochlear deficit over time.",
-   "Hyperventilation-induced nystagmus may be demonstrable and is a useful bedside clue.",
-   "The condition must be distinguished from benign paroxysmal positional vertigo, vestibular migraine, Menière's disease, and panic attacks before treatment is committed."
+  "id": "vestibular_paroxysmia",
+  "name": "vestibular paroxysmia",
+  "aliases": [
+    "neurovascular cross-compression of the eighth nerve",
+    "disabling positional vertigo",
+    "microvascular compression syndrome of cranial nerve VIII"
   ],
-  "pathophysiology": "Vestibular paroxysmia is caused by pulsatile compression of the vestibulocochlear nerve by an adjacent artery — most often the anterior inferior cerebellar artery — at or near the root entry zone, where central oligodendrocyte myelin transitions to peripheral Schwann-cell myelin and the nerve is especially vulnerable. Chronic mechanical irritation produces focal demyelination, which permits ephaptic (cross-talk) transmission between axons and generates paroxysmal ectopic and self-sustaining discharges. These brief bursts of abnormal afferent activity are perceived as short, stereotyped attacks of vertigo, exactly analogous to the paroxysms of trigeminal neuralgia and hemifacial spasm arising from compression of neighbouring cranial nerves. Membrane-stabilising, sodium-channel-blocking drugs suppress this ectopic firing, which accounts for their characteristic therapeutic effect.",
-  "additionalDifferentials": [
-   "benign paroxysmal positional vertigo",
-   "vestibular migraine",
-   "Menière's disease",
-   "episodic ataxia type 2",
-   "posterior circulation transient ischaemic attack",
-   "superior semicircular canal dehiscence or perilymph fistula",
-   "panic attacks with vestibular symptoms"
-  ],
-  "additionalInvestigations": [
-   "high-resolution heavily T2-weighted MRI (CISS/FIESTA) with MR angiography of the cerebellopontine angle",
-   "pure-tone audiometry to detect an associated cochlear deficit or exclude other causes",
-   "video head impulse testing, caloric testing, and vestibular evoked myogenic potentials",
-   "bedside hyperventilation testing for provoked nystagmus",
-   "positional testing to exclude benign paroxysmal positional vertigo",
-   "a monitored therapeutic trial of a sodium-channel-blocking anticonvulsant"
-  ],
-  "redFlags": [
-   "progressive unilateral sensorineural hearing loss suggesting a vestibular schwannoma or other cerebellopontine angle tumour",
-   "facial weakness, facial numbness, or additional cranial neuropathies",
-   "signs of brainstem ischaemia such as dysarthria, diplopia, or limb ataxia",
-   "papilloedema or other features of raised intracranial pressure",
-   "failure to respond to an adequate trial of a sodium-channel-blocking drug, prompting reconsideration of the diagnosis"
-  ],
-  "prognosis": "The disorder usually responds well to sodium-channel-blocking anticonvulsants, often at low doses, with a marked reduction in attack frequency; medically refractory cases may be considered for microvascular decompression, though some patients show slow progression of vestibulocochlear deficit.",
-  "pitfalls": [
-   "over-diagnosing the condition on the basis of incidental neurovascular contact seen on MRI in an asymptomatic person",
-   "confusing brief positional attacks with benign paroxysmal positional vertigo or with vestibular migraine",
-   "treating a therapeutic response as definitive proof, since other paroxysmal disorders may also respond",
-   "neglecting to exclude a cerebellopontine angle tumour before attributing symptoms to vascular compression",
-   "escalating medication without re-examining the diagnosis when attacks fail to remit"
-  ],
-  "references": [
-   "Bárány Society: diagnostic criteria for vestibular paroxysmia (Strupp et al)",
-   "Brandt and Dieterich, Vertigo and Dizziness: Common Complaints",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Low-dose sodium-channel-blocking anticonvulsants such as carbamazepine or oxcarbazepine as first-line therapy, which typically abolish or markedly reduce attacks",
-   "Alternative membrane-stabilising agents such as lamotrigine, phenytoin or gabapentin when carbamazepine is not tolerated",
-   "Monitor anticonvulsant tolerability and adverse effects, including hyponatraemia with carbamazepine and oxcarbazepine",
-   "Microvascular decompression of the vestibulocochlear nerve for medically refractory or drug-intolerant cases",
-   "Serial audiometry and vestibular function testing to detect progressive cochleovestibular deficit over time",
-   "Refer to neuro-otology for diagnostic confirmation, including a monitored therapeutic drug trial and high-resolution imaging"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vestibular_paroxysmia-pathway",
-   "title": "vestibular paroxysmia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The hallmark is short, recurrent, stereotyped spells of spinning or non-spinning vertigo lasting seconds to under a minute, which may occur many times a day.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: progressive unilateral sensorineural hearing loss suggesting a vestibular schwannoma or other cerebellopontine angle tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: high-resolution heavily T2-weighted MRI (CISS/FIESTA) with MR angiography of the cerebellopontine angle, pure-tone audiometry to detect an associated cochlear deficit or exclude other causes, video head impulse testing,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Low-dose sodium-channel-blocking anticonvulsants such as carbamazepine or oxcarbazepine as first-line therapy, which typically abolish or markedly reduce attacks"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: over-diagnosing the condition on the basis of incidental neurovascular contact seen on MRI in an asymptomatic person"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vestibular paroxysmia."
-  }
- ],
- "tables": [
-  {
-   "id": "vestibular_paroxysmia-matrix",
-   "title": "vestibular paroxysmia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The hallmark is short, recurrent, stereotyped spells of spinning or non-spinning vertigo lasting seconds to under a minute, which",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "nervous system",
+  "specialty": "neuro-otology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bárány Society diagnostic criteria for vestibular paroxysmia",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The hallmark is short, recurrent, stereotyped spells of spinning or non-spinning vertigo lasting seconds to under a minute, which may occur many times a day.",
+      "It is attributed to pulsatile neurovascular cross-compression of the vestibulocochlear nerve, mechanistically analogous to trigeminal neuralgia and hemifacial spasm.",
+      "Attacks may arise spontaneously or be provoked by particular head positions or by hyperventilation, and may be accompanied by transient unilateral tinnitus or a change in hearing.",
+      "A clear response to low doses of a sodium-channel-blocking anticonvulsant (such as carbamazepine or oxcarbazepine) supports the diagnosis and is one of the formal diagnostic criteria.",
+      "High-resolution heavily T2-weighted MRI (CISS or FIESTA) may show a vessel, most often the anterior inferior cerebellar artery, looping onto the nerve, but such contact is frequent in asymptomatic people, so imaging is supportive rather than diagnostic.",
+      "Between attacks the examination is usually normal, although some patients develop a mild progressive vestibular or cochlear deficit over time.",
+      "Hyperventilation-induced nystagmus may be demonstrable and is a useful bedside clue.",
+      "The condition must be distinguished from benign paroxysmal positional vertigo, vestibular migraine, Menière's disease, and panic attacks before treatment is committed."
     ],
-    [
-     "Key Investigations",
-     "high-resolution heavily T2-weighted MRI (CISS/FIESTA) with MR angiography of the cerebellopontine angle, pure-tone audiometry to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vestibular paroxysmia is caused by pulsatile compression of the vestibulocochlear nerve by an adjacent artery — most often the anterior inferior cerebellar artery — at or near the root entry zone, where central oligodendrocyte myelin transitions to peripheral Schwann-cell myelin and the nerve is especially vulnerable. Chronic mechanical irritation produces focal demyelination, which permits ephaptic (cross-talk) transmission between axons and generates paroxysmal ectopic and self-sustaining discharges. These brief bursts of abnormal afferent activity are perceived as short, stereotyped attacks of vertigo, exactly analogous to the paroxysms of trigeminal neuralgia and hemifacial spasm arising from compression of neighbouring cranial nerves. Membrane-stabilising, sodium-channel-blocking drugs suppress this ectopic firing, which accounts for their characteristic therapeutic effect.",
+    "additionalDifferentials": [
+      "benign paroxysmal positional vertigo",
+      "vestibular migraine",
+      "Menière's disease",
+      "episodic ataxia type 2",
+      "posterior circulation transient ischaemic attack",
+      "superior semicircular canal dehiscence or perilymph fistula",
+      "panic attacks with vestibular symptoms"
     ],
-    [
-     "Primary Differentials",
-     "benign paroxysmal positional vertigo, vestibular migraine, Menière's disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "high-resolution heavily T2-weighted MRI (CISS/FIESTA) with MR angiography of the cerebellopontine angle",
+      "pure-tone audiometry to detect an associated cochlear deficit or exclude other causes",
+      "video head impulse testing, caloric testing, and vestibular evoked myogenic potentials",
+      "bedside hyperventilation testing for provoked nystagmus",
+      "positional testing to exclude benign paroxysmal positional vertigo",
+      "a monitored therapeutic trial of a sodium-channel-blocking anticonvulsant"
     ],
-    [
-     "Management Strategy",
-     "Low-dose sodium-channel-blocking anticonvulsants such as carbamazepine or oxcarbazepine as first-line therapy, which typically",
-     "Core treatment modality"
+    "redFlags": [
+      "progressive unilateral sensorineural hearing loss suggesting a vestibular schwannoma or other cerebellopontine angle tumour",
+      "facial weakness, facial numbness, or additional cranial neuropathies",
+      "signs of brainstem ischaemia such as dysarthria, diplopia, or limb ataxia",
+      "papilloedema or other features of raised intracranial pressure",
+      "failure to respond to an adequate trial of a sodium-channel-blocking drug, prompting reconsideration of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "over-diagnosing the condition on the basis of incidental neurovascular contact seen on MRI in an asymptomatic person",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder usually responds well to sodium-channel-blocking anticonvulsants, often at low doses, with a marked reduction in attack frequency; medically refractory cases may be considered for microvascular decompression, though some patients show slow progression of vestibulocochlear deficit.",
+    "pitfalls": [
+      "over-diagnosing the condition on the basis of incidental neurovascular contact seen on MRI in an asymptomatic person",
+      "confusing brief positional attacks with benign paroxysmal positional vertigo or with vestibular migraine",
+      "treating a therapeutic response as definitive proof, since other paroxysmal disorders may also respond",
+      "neglecting to exclude a cerebellopontine angle tumour before attributing symptoms to vascular compression",
+      "escalating medication without re-examining the diagnosis when attacks fail to remit"
+    ],
+    "references": [
+      "Bárány Society: diagnostic criteria for vestibular paroxysmia (Strupp et al)",
+      "Brandt and Dieterich, Vertigo and Dizziness: Common Complaints",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Low-dose sodium-channel-blocking anticonvulsants such as carbamazepine or oxcarbazepine as first-line therapy, which typically abolish or markedly reduce attacks",
+      "Alternative membrane-stabilising agents such as lamotrigine, phenytoin or gabapentin when carbamazepine is not tolerated",
+      "Monitor anticonvulsant tolerability and adverse effects, including hyponatraemia with carbamazepine and oxcarbazepine",
+      "Microvascular decompression of the vestibulocochlear nerve for medically refractory or drug-intolerant cases",
+      "Serial audiometry and vestibular function testing to detect progressive cochleovestibular deficit over time",
+      "Refer to neuro-otology for diagnostic confirmation, including a monitored therapeutic drug trial and high-resolution imaging"
     ]
-   ],
-   "caption": "Overview comparison matrix for vestibular paroxysmia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vestibular-paroxysmia-real-image",
-   "title": "vestibular paroxysmia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vestibular_paroxysmia-pathway",
+      "title": "vestibular paroxysmia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The hallmark is short, recurrent, stereotyped spells of spinning or non-spinning vertigo lasting seconds to under a minute, which may occur many times a day.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: progressive unilateral sensorineural hearing loss suggesting a vestibular schwannoma or other cerebellopontine angle tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: high-resolution heavily T2-weighted MRI (CISS/FIESTA) with MR angiography of the cerebellopontine angle, pure-tone audiometry to detect an associated cochlear deficit or exclude other causes, video head impulse testing,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Low-dose sodium-channel-blocking anticonvulsants such as carbamazepine or oxcarbazepine as first-line therapy, which typically abolish or markedly reduce attacks"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: over-diagnosing the condition on the basis of incidental neurovascular contact seen on MRI in an asymptomatic person"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vestibular paroxysmia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vestibular_paroxysmia-matrix",
+      "title": "vestibular paroxysmia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The hallmark is short, recurrent, stereotyped spells of spinning or non-spinning vertigo lasting seconds to under a minute, which",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "high-resolution heavily T2-weighted MRI (CISS/FIESTA) with MR angiography of the cerebellopontine angle, pure-tone audiometry to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "benign paroxysmal positional vertigo, vestibular migraine, Menière's disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Low-dose sodium-channel-blocking anticonvulsants such as carbamazepine or oxcarbazepine as first-line therapy, which typically",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "over-diagnosing the condition on the basis of incidental neurovascular contact seen on MRI in an asymptomatic person",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vestibular paroxysmia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bárány Society diagnostic criteria for vestibular paroxysmia",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vestibular_paroxysmia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution T2 MRI with MR angiography of the cerebellopontine angle",
+          "cells": [
+            {
+              "text": "Neurovascular cross-compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Associated cochlear deficit or other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video head impulse and caloric testing",
+          "cells": [
+            {
+              "text": "Vestibular function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vestibular_paroxysmia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign paroxysmal positional vertigo",
+          "cells": [
+            {
+              "text": "Positional rather than brief spontaneous spells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular migraine",
+          "cells": [
+            {
+              "text": "Attacks with migraine features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Episodic ataxia type 2",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior circulation transient ischaemic attack",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vestibular_paroxysmia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbamazepine or oxcarbazepine",
+          "cells": [
+            {
+              "text": "Low-dose sodium-channel-blocking anticonvulsants, first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lamotrigine, phenytoin or gabapentin",
+          "cells": [
+            {
+              "text": "Alternatives when carbamazepine is not tolerated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vestibular_paroxysmia-dx-mgmt",
+      "title": "Diagnosis and management of vestibular paroxysmia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vestibular paroxysmia: brief recurrent spells of vertigo lasting seconds",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive hearing loss, facial weakness or brainstem signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for vestibular schwannoma or brainstem ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "High-resolution T2 MRI with angiography, audiometry, vestibular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are brief stereotyped spells confirmed with neurovascular contact on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider BPPV, vestibular migraine or Meniere disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose carbamazepine or oxcarbazepine as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lamotrigine, phenytoin or gabapentin if carbamazepine is not tolerated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid diagnosing from incidental neurovascular contact seen on MRI alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Spells typically respond to membrane-stabilising anticonvulsants",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

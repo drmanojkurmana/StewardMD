@@ -1,172 +1,642 @@
 {
- "id": "acute_tonsillitis",
- "name": "Acute tonsillitis",
- "aliases": [
-  "acute tonsillopharyngitis",
-  "acute sore throat",
-  "tonsillar infection"
- ],
- "class": "infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with sore throat, painful swallowing, fever, malaise and tender enlarged jugulodigastric lymph nodes",
-   "The follicular (spotted) form shows yellowish exudate at the tonsillar crypt openings, while the membranous form has a coalescent whitish membrane",
-   "Group A beta-haemolytic streptococcus is the most important bacterial cause because of its non-suppurative sequelae",
-   "Viral causes are common; features such as prominent cough, coryza and conjunctivitis point away from streptococcal infection",
-   "Consider infectious mononucleosis when there is marked tonsillar enlargement, membrane formation, generalised lymphadenopathy and splenomegaly",
-   "Management principles include adequate hydration, analgesia and antibiotics when streptococcal infection is likely, avoiding aminopenicillins if glandular fever is suspected because of the rash",
-   "Non-suppurative complications of streptococcal infection include rheumatic fever and acute glomerulonephritis, which justify appropriate antibiotic treatment",
-   "Recurrent tonsillitis meeting frequency criteria, or complications such as abscess, may warrant tonsillectomy"
+  "id": "acute_tonsillitis",
+  "name": "Acute tonsillitis",
+  "aliases": [
+    "acute tonsillopharyngitis",
+    "acute sore throat",
+    "tonsillar infection"
   ],
-  "pathophysiology": "Acute tonsillitis is acute inflammation of the palatine tonsils, usually from viral or bacterial infection of the tonsillar crypts and parenchyma. Pathogens invade the crypt epithelium, provoking an inflammatory response with hyperaemia, oedema and crypt exudate. Streptococcal infection can trigger immune-mediated sequelae elsewhere in the body. Local spread of infection beyond the tonsillar capsule can produce peritonsillar or deep neck space abscesses, and marked tonsillar and adenoid enlargement may compromise the airway.",
-  "additionalDifferentials": [
-   "Viral pharyngitis",
-   "Infectious mononucleosis",
-   "Peritonsillar abscess",
-   "Diphtheria",
-   "Candidal or other fungal pharyngitis",
-   "Agranulocytosis or leukaemic infiltration presenting with sore throat"
-  ],
-  "additionalInvestigations": [
-   "Throat examination to assess tonsillar size, exudate and membrane",
-   "Throat swab or rapid antigen test for group A streptococcus where indicated",
-   "Full blood count and monospot or heterophile antibody test when mononucleosis is suspected",
-   "Assessment for splenomegaly and generalised lymphadenopathy",
-   "Blood glucose and further workup if recurrent or atypical infection suggests immunosuppression"
-  ],
-  "redFlags": [
-   "Trismus, drooling, muffled voice or unilateral swelling suggesting peritonsillar or deep neck abscess",
-   "Stridor or respiratory difficulty from airway obstruction",
-   "A grey adherent membrane bleeding on removal, raising concern for diphtheria",
-   "Persistent unilateral tonsillar enlargement or ulceration suggesting malignancy"
-  ],
-  "prognosis": "Most episodes are self-limiting or resolve promptly with treatment; complications such as abscess formation and, in streptococcal disease, rheumatic and renal sequelae are largely preventable with appropriate management.",
-  "pitfalls": [
-   "Prescribing ampicillin-type antibiotics in undiagnosed glandular fever and precipitating a rash",
-   "Missing a developing peritonsillar abscess in a patient with worsening unilateral symptoms",
-   "Treating all sore throats as bacterial when many are viral",
-   "Overlooking a haematological cause in unusually severe or persistent cases"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prescribe phenoxymethylpenicillin when streptococcal infection is likely or confirmed, using a macrolide if penicillin-allergic and avoiding aminopenicillins where glandular fever is suspected because of the rash",
-   "Provide supportive care with adequate hydration and analgesia and antipyresis using paracetamol or an NSAID",
-   "Use a clinical scoring tool with rapid antigen testing or throat swab to target antibiotics and avoid unnecessary prescribing in viral disease",
-   "Drain a peritonsillar abscess and treat deep neck space infection, remaining vigilant for airway compromise from marked tonsillar enlargement",
-   "Manage suspected infectious mononucleosis supportively and advise temporary avoidance of contact sport where there is splenomegaly",
-   "Refer for consideration of tonsillectomy in recurrent or complicated disease",
-   "Escalate urgently for airway obstruction, inability to swallow fluids or signs of deep neck space spread"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_tonsillitis-pathway",
-   "title": "Acute tonsillitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with sore throat, painful swallowing, fever, malaise and tender enlarged jugulodigastric lymph nodes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Trismus, drooling, muffled voice or unilateral swelling suggesting peritonsillar or deep neck abscess",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Throat examination to assess tonsillar size, exudate and membrane, Throat swab or rapid antigen test for group A streptococcus where indicated, Full blood count and monospot or heterophile antibody test when mononucleosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prescribe phenoxymethylpenicillin when streptococcal infection is likely or confirmed, using a macrolide if penicillin-allergic and avoiding aminopenicillins where glandular fever is suspected because of the rash"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing ampicillin-type antibiotics in undiagnosed glandular fever and precipitating a rash"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute tonsillitis."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_tonsillitis-matrix",
-   "title": "Acute tonsillitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with sore throat, painful swallowing, fever, malaise and tender enlarged jugulodigastric lymph nodes",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with sore throat, painful swallowing, fever, malaise and tender enlarged jugulodigastric lymph nodes",
+      "The follicular (spotted) form shows yellowish exudate at the tonsillar crypt openings, while the membranous form has a coalescent whitish membrane",
+      "Group A beta-haemolytic streptococcus is the most important bacterial cause because of its non-suppurative sequelae",
+      "Viral causes are common; features such as prominent cough, coryza and conjunctivitis point away from streptococcal infection",
+      "Consider infectious mononucleosis when there is marked tonsillar enlargement, membrane formation, generalised lymphadenopathy and splenomegaly",
+      "Management principles include adequate hydration, analgesia and antibiotics when streptococcal infection is likely, avoiding aminopenicillins if glandular fever is suspected because of the rash",
+      "Non-suppurative complications of streptococcal infection include rheumatic fever and acute glomerulonephritis, which justify appropriate antibiotic treatment",
+      "Recurrent tonsillitis meeting frequency criteria, or complications such as abscess, may warrant tonsillectomy"
     ],
-    [
-     "Key Investigations",
-     "Throat examination to assess tonsillar size, exudate and membrane, Throat swab or rapid antigen test for group A streptococcus",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute tonsillitis is acute inflammation of the palatine tonsils, usually from viral or bacterial infection of the tonsillar crypts and parenchyma. Pathogens invade the crypt epithelium, provoking an inflammatory response with hyperaemia, oedema and crypt exudate. Streptococcal infection can trigger immune-mediated sequelae elsewhere in the body. Local spread of infection beyond the tonsillar capsule can produce peritonsillar or deep neck space abscesses, and marked tonsillar and adenoid enlargement may compromise the airway.",
+    "additionalDifferentials": [
+      "Viral pharyngitis",
+      "Infectious mononucleosis",
+      "Peritonsillar abscess",
+      "Diphtheria",
+      "Candidal or other fungal pharyngitis",
+      "Agranulocytosis or leukaemic infiltration presenting with sore throat"
     ],
-    [
-     "Primary Differentials",
-     "Viral pharyngitis, Infectious mononucleosis, Peritonsillar abscess",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Throat examination to assess tonsillar size, exudate and membrane",
+      "Throat swab or rapid antigen test for group A streptococcus where indicated",
+      "Full blood count and monospot or heterophile antibody test when mononucleosis is suspected",
+      "Assessment for splenomegaly and generalised lymphadenopathy",
+      "Blood glucose and further workup if recurrent or atypical infection suggests immunosuppression"
     ],
-    [
-     "Management Strategy",
-     "Prescribe phenoxymethylpenicillin when streptococcal infection is likely or confirmed, using a macrolide if penicillin-allergic",
-     "Core treatment modality"
+    "redFlags": [
+      "Trismus, drooling, muffled voice or unilateral swelling suggesting peritonsillar or deep neck abscess",
+      "Stridor or respiratory difficulty from airway obstruction",
+      "A grey adherent membrane bleeding on removal, raising concern for diphtheria",
+      "Persistent unilateral tonsillar enlargement or ulceration suggesting malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing ampicillin-type antibiotics in undiagnosed glandular fever and precipitating a rash",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most episodes are self-limiting or resolve promptly with treatment; complications such as abscess formation and, in streptococcal disease, rheumatic and renal sequelae are largely preventable with appropriate management.",
+    "pitfalls": [
+      "Prescribing ampicillin-type antibiotics in undiagnosed glandular fever and precipitating a rash",
+      "Missing a developing peritonsillar abscess in a patient with worsening unilateral symptoms",
+      "Treating all sore throats as bacterial when many are viral",
+      "Overlooking a haematological cause in unusually severe or persistent cases"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prescribe phenoxymethylpenicillin when streptococcal infection is likely or confirmed, using a macrolide if penicillin-allergic and avoiding aminopenicillins where glandular fever is suspected because of the rash",
+      "Provide supportive care with adequate hydration and analgesia and antipyresis using paracetamol or an NSAID",
+      "Use a clinical scoring tool with rapid antigen testing or throat swab to target antibiotics and avoid unnecessary prescribing in viral disease",
+      "Drain a peritonsillar abscess and treat deep neck space infection, remaining vigilant for airway compromise from marked tonsillar enlargement",
+      "Manage suspected infectious mononucleosis supportively and advise temporary avoidance of contact sport where there is splenomegaly",
+      "Refer for consideration of tonsillectomy in recurrent or complicated disease",
+      "Escalate urgently for airway obstruction, inability to swallow fluids or signs of deep neck space spread"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute tonsillitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-tonsillitis-real-image",
-   "title": "Acute tonsillitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acute_tonsillitis-pathway",
+      "title": "Acute tonsillitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with sore throat, painful swallowing, fever, malaise and tender enlarged jugulodigastric lymph nodes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Trismus, drooling, muffled voice or unilateral swelling suggesting peritonsillar or deep neck abscess",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Throat examination to assess tonsillar size, exudate and membrane, Throat swab or rapid antigen test for group A streptococcus where indicated, Full blood count and monospot or heterophile antibody test when mononucleosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prescribe phenoxymethylpenicillin when streptococcal infection is likely or confirmed, using a macrolide if penicillin-allergic and avoiding aminopenicillins where glandular fever is suspected because of the rash"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing ampicillin-type antibiotics in undiagnosed glandular fever and precipitating a rash"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute tonsillitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_tonsillitis-matrix",
+      "title": "Acute tonsillitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with sore throat, painful swallowing, fever, malaise and tender enlarged jugulodigastric lymph nodes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Throat examination to assess tonsillar size, exudate and membrane, Throat swab or rapid antigen test for group A streptococcus",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Viral pharyngitis, Infectious mononucleosis, Peritonsillar abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prescribe phenoxymethylpenicillin when streptococcal infection is likely or confirmed, using a macrolide if penicillin-allergic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing ampicillin-type antibiotics in undiagnosed glandular fever and precipitating a rash",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute tonsillitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 136-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_tonsillitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Throat examination",
+          "cells": [
+            {
+              "text": "Tonsillar size, exudate and membrane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Throat swab or rapid antigen test for group A streptococcus",
+          "cells": [
+            {
+              "text": "Streptococcal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with monospot or heterophile antibody test",
+          "cells": [
+            {
+              "text": "Mononucleosis when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for splenomegaly and generalised lymphadenopathy",
+          "cells": [
+            {
+              "text": "Glandular fever features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and workup of recurrent or atypical infection",
+          "cells": [
+            {
+              "text": "Possible immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_tonsillitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral pharyngitis",
+          "cells": [
+            {
+              "text": "Cough, coryza and conjunctivitis"
+            },
+            {
+              "text": "Throat swab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Splenomegaly and generalised lymphadenopathy"
+            },
+            {
+              "text": "Monospot or heterophile test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritonsillar abscess",
+          "cells": [
+            {
+              "text": "Trismus, drooling and unilateral swelling"
+            },
+            {
+              "text": "Throat examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diphtheria",
+          "cells": [
+            {
+              "text": "Grey adherent membrane"
+            },
+            {
+              "text": "Throat examination for membrane"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_tonsillitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phenoxymethylpenicillin when streptococcal infection is likely or confirmed",
+          "cells": [
+            {
+              "text": "First-line when group A streptococcus is likely"
+            },
+            {
+              "text": "Macrolide if penicillin-allergic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aminopenicillins where glandular fever is suspected",
+          "cells": [
+            {
+              "text": "Rash risk in glandular fever"
+            },
+            {
+              "text": "Rash from aminopenicillins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration, analgesia and antipyresis",
+          "cells": [
+            {
+              "text": "Supportive care"
+            },
+            {
+              "text": "Paracetamol or an NSAID"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical scoring with rapid testing to target antibiotics",
+          "cells": [
+            {
+              "text": "Avoid unnecessary prescribing in viral disease"
+            },
+            {
+              "text": "Targeted prescribing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage of peritonsillar abscess and treatment of deep neck infection",
+          "cells": [
+            {
+              "text": "Abscess and deep neck spread"
+            },
+            {
+              "text": "Watch for airway compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for suspected mononucleosis",
+          "cells": [
+            {
+              "text": "Glandular fever"
+            },
+            {
+              "text": "Avoid contact sport if splenomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tonsillectomy referral",
+          "cells": [
+            {
+              "text": "Recurrent or complicated disease"
+            },
+            {
+              "text": "Consideration of tonsillectomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_tonsillitis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Classification of streptococci",
+      "rowHeader": "Lancefield group",
+      "columns": [
+        "Representative species",
+        "Hemolytic pattern",
+        "Typical infections"
+      ],
+      "rows": [
+        {
+          "parameter": "A",
+          "cells": [
+            {
+              "text": "S. pyogenes"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Pharyngitis, impetigo, cellulitis, scarlet fever"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B",
+          "cells": [
+            {
+              "text": "S. agalactiae"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Neonatal sepsis and meningitis, puerperal infection, urinary tract infection, diabetic ulcer infection, endocarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C, G",
+          "cells": [
+            {
+              "text": "S. dysgalactiae subsp. equisimilis"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Cellulitis, bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "D: enterococci",
+          "cells": [
+            {
+              "text": "E. faecalis; E. faecium"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Urinary tract infection, nosocomial bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "D: nonenterococci",
+          "cells": [
+            {
+              "text": "S. bovis"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Variable or nongroupable: viridans streptococci",
+          "cells": [
+            {
+              "text": "S. sanguis; S. mitis"
+            },
+            {
+              "text": "Alpha"
+            },
+            {
+              "text": "Endocarditis, dental abscess, brain abscess"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Variable or nongroupable: intermedius or milleri group",
+          "cells": [
+            {
+              "text": "S. intermedius, S. anginosus, S. constellatus"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Brain abscess, visceral abscess"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Variable or nongroupable: anaerobic streptococci",
+          "cells": [
+            {
+              "text": "Peptostreptococcus magnus"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Sinusitis, pneumonia, empyema, brain abscess, liver abscess"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source footnotes (a) on enterococci and (b) on anaerobic streptococci are not legible in the transcription."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_tonsillitis-dx-mgmt",
+      "title": "Diagnosis and management of Acute tonsillitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sore throat, painful swallowing, fever and tender jugulodigastric nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Trismus, drooling, muffled voice or airway compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ENT review; drain abscess and protect the airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Throat examination; rapid antigen test or swab for group A streptococcus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Group A streptococcus likely or confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Phenoxymethylpenicillin; macrolide if penicillin-allergic",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; monospot if glandular fever is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hydration, paracetamol or NSAID for pain and fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid aminopenicillins if glandular fever is suspected because of rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Check for splenomegaly; advise against contact sport if enlarged",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most resolve; tonsillectomy considered for recurrent or complicated disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

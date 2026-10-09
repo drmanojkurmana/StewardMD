@@ -1,179 +1,450 @@
 {
- "id": "caustic_ingestion",
- "name": "Caustic (acid/alkali) ingestion",
- "aliases": [
-  "corrosive ingestion",
-  "caustic injury",
-  "alkali ingestion",
-  "acid ingestion",
-  "lye ingestion"
- ],
- "class": "non_infective",
- "system": "Toxicology",
- "specialty": "Clinical Toxicology / Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Alkalis cause liquefactive necrosis that penetrates deeply, while acids typically cause coagulative necrosis with an eschar that may limit depth, though both can be severe",
-   "The absence of visible oral burns does not exclude significant oesophageal or gastric injury, so symptoms guide assessment more than mouth findings",
-   "Drooling, stridor, dysphagia, odynophagia, chest or abdominal pain and vomiting suggest significant injury requiring urgent evaluation",
-   "Do not induce emesis, give neutralising agents or activated charcoal, and avoid blind nasogastric tube placement, as these can worsen injury or obscure endoscopy",
-   "Airway assessment takes priority, as laryngeal or supraglottic oedema can progress rapidly to obstruction",
-   "Upper gastrointestinal endoscopy within an appropriate early window grades injury and guides prognosis and feeding decisions",
-   "Signs of perforation or mediastinitis, such as severe chest pain, subcutaneous emphysema or peritonism, mandate urgent surgical involvement",
-   "Late oesophageal strictures and an increased long-term risk of oesophageal carcinoma warrant structured follow-up"
+  "id": "caustic_ingestion",
+  "name": "Caustic (acid/alkali) ingestion",
+  "aliases": [
+    "corrosive ingestion",
+    "caustic injury",
+    "alkali ingestion",
+    "acid ingestion",
+    "lye ingestion"
   ],
-  "pathophysiology": "Caustic agents injure tissue on contact according to their pH, concentration, volume and contact time. Strong alkalis produce liquefactive necrosis, saponifying fats and dissolving proteins so injury extends deeply into and potentially through the oesophageal wall. Strong acids cause coagulative necrosis, forming a superficial eschar that can limit but not prevent deep penetration, and often preferentially injure the stomach. Tissue damage evolves over days through inflammation, then granulation and fibrosis, which underlies later stricture formation, while full-thickness injury risks perforation, mediastinitis and peritonitis.",
-  "additionalDifferentials": [
-   "Thermal burn of the upper aerodigestive tract",
-   "Foreign body ingestion or impaction",
-   "Pill-induced (medication) oesophagitis",
-   "Infective or reflux oesophagitis",
-   "Spontaneous oesophageal perforation (Boerhaave syndrome)",
-   "Systemic toxicity from a co-ingested agent"
-  ],
-  "additionalInvestigations": [
-   "Early upper gastrointestinal endoscopy to grade mucosal injury",
-   "Erect chest and abdominal imaging, or contrast/computed tomography, to detect perforation and mediastinal or peritoneal air",
-   "Arterial blood gas and lactate to assess systemic acid-base disturbance and tissue injury",
-   "Full blood count, renal and liver function and coagulation",
-   "Blood group and crossmatch if surgical intervention is anticipated",
-   "Airway assessment with laryngoscopy where upper airway injury is suspected"
-  ],
-  "redFlags": [
-   "Stridor, hoarseness or drooling indicating airway compromise",
-   "Severe chest or abdominal pain, subcutaneous emphysema or peritonism suggesting perforation",
-   "Haematemesis or signs of significant gastrointestinal haemorrhage",
-   "Haemodynamic instability or systemic acidosis",
-   "High-grade circumferential or deep injury on endoscopy"
-  ],
-  "prognosis": "Minor mucosal injury usually heals without sequelae, but deep circumferential burns frequently lead to oesophageal strictures requiring dilatation, and severe transmural injury carries substantial morbidity and mortality; there is a lasting increased risk of oesophageal malignancy.",
-  "pitfalls": [
-   "Assuming a normal oral examination excludes serious distal injury",
-   "Attempting to neutralise the agent or induce vomiting, worsening tissue damage",
-   "Giving activated charcoal, which is ineffective and obscures endoscopic assessment",
-   "Delaying airway management until obstruction is established",
-   "Failing to arrange follow-up for stricture and malignancy surveillance"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "UpToDate: Caustic esophageal injury in adults"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise airway assessment and protection, with early intubation for laryngeal or supraglottic oedema and stridor",
-   "Avoid induced emesis, neutralising agents, activated charcoal and blind nasogastric tube placement, which worsen injury or obscure endoscopy",
-   "Keep nil by mouth with intravenous fluid resuscitation and analgesia",
-   "Early upper gastrointestinal endoscopy to grade mucosal injury and guide feeding and prognosis",
-   "Proton pump inhibitor acid suppression to support mucosal healing",
-   "Emergency surgical resection for transmural necrosis, perforation, mediastinitis or peritonitis",
-   "Endoscopic dilatation for subsequent stricture formation",
-   "Long-term surveillance endoscopy given the lasting increased risk of oesophageal malignancy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "caustic_ingestion-pathway",
-   "title": "Caustic (acid/alkali) ingestion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Alkalis cause liquefactive necrosis that penetrates deeply, while acids typically cause coagulative necrosis with an eschar that may limit depth, though both can be severe",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Stridor, hoarseness or drooling indicating airway compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Early upper gastrointestinal endoscopy to grade mucosal injury, Erect chest and abdominal imaging, or contrast/computed tomography, to detect perforation and mediastinal or peritoneal air, Arterial blood gas and lactate to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise airway assessment and protection, with early intubation for laryngeal or supraglottic oedema and stridor"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal oral examination excludes serious distal injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of caustic (acid/alkali) ingestion."
-  }
- ],
- "tables": [
-  {
-   "id": "caustic_ingestion-matrix",
-   "title": "Caustic (acid/alkali) ingestion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Alkalis cause liquefactive necrosis that penetrates deeply, while acids typically cause coagulative necrosis with an eschar that",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology",
+  "specialty": "Clinical Toxicology / Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Alkalis cause liquefactive necrosis that penetrates deeply, while acids typically cause coagulative necrosis with an eschar that may limit depth, though both can be severe",
+      "The absence of visible oral burns does not exclude significant oesophageal or gastric injury, so symptoms guide assessment more than mouth findings",
+      "Drooling, stridor, dysphagia, odynophagia, chest or abdominal pain and vomiting suggest significant injury requiring urgent evaluation",
+      "Do not induce emesis, give neutralising agents or activated charcoal, and avoid blind nasogastric tube placement, as these can worsen injury or obscure endoscopy",
+      "Airway assessment takes priority, as laryngeal or supraglottic oedema can progress rapidly to obstruction",
+      "Upper gastrointestinal endoscopy within an appropriate early window grades injury and guides prognosis and feeding decisions",
+      "Signs of perforation or mediastinitis, such as severe chest pain, subcutaneous emphysema or peritonism, mandate urgent surgical involvement",
+      "Late oesophageal strictures and an increased long-term risk of oesophageal carcinoma warrant structured follow-up"
     ],
-    [
-     "Key Investigations",
-     "Early upper gastrointestinal endoscopy to grade mucosal injury, Erect chest and abdominal imaging, or contrast/computed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Caustic agents injure tissue on contact according to their pH, concentration, volume and contact time. Strong alkalis produce liquefactive necrosis, saponifying fats and dissolving proteins so injury extends deeply into and potentially through the oesophageal wall. Strong acids cause coagulative necrosis, forming a superficial eschar that can limit but not prevent deep penetration, and often preferentially injure the stomach. Tissue damage evolves over days through inflammation, then granulation and fibrosis, which underlies later stricture formation, while full-thickness injury risks perforation, mediastinitis and peritonitis.",
+    "additionalDifferentials": [
+      "Thermal burn of the upper aerodigestive tract",
+      "Foreign body ingestion or impaction",
+      "Pill-induced (medication) oesophagitis",
+      "Infective or reflux oesophagitis",
+      "Spontaneous oesophageal perforation (Boerhaave syndrome)",
+      "Systemic toxicity from a co-ingested agent"
     ],
-    [
-     "Primary Differentials",
-     "Thermal burn of the upper aerodigestive tract, Foreign body ingestion or impaction, Pill-induced (medication) oesophagitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Early upper gastrointestinal endoscopy to grade mucosal injury",
+      "Erect chest and abdominal imaging, or contrast/computed tomography, to detect perforation and mediastinal or peritoneal air",
+      "Arterial blood gas and lactate to assess systemic acid-base disturbance and tissue injury",
+      "Full blood count, renal and liver function and coagulation",
+      "Blood group and crossmatch if surgical intervention is anticipated",
+      "Airway assessment with laryngoscopy where upper airway injury is suspected"
     ],
-    [
-     "Management Strategy",
-     "Prioritise airway assessment and protection, with early intubation for laryngeal or supraglottic oedema and stridor",
-     "Core treatment modality"
+    "redFlags": [
+      "Stridor, hoarseness or drooling indicating airway compromise",
+      "Severe chest or abdominal pain, subcutaneous emphysema or peritonism suggesting perforation",
+      "Haematemesis or signs of significant gastrointestinal haemorrhage",
+      "Haemodynamic instability or systemic acidosis",
+      "High-grade circumferential or deep injury on endoscopy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal oral examination excludes serious distal injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "Minor mucosal injury usually heals without sequelae, but deep circumferential burns frequently lead to oesophageal strictures requiring dilatation, and severe transmural injury carries substantial morbidity and mortality; there is a lasting increased risk of oesophageal malignancy.",
+    "pitfalls": [
+      "Assuming a normal oral examination excludes serious distal injury",
+      "Attempting to neutralise the agent or induce vomiting, worsening tissue damage",
+      "Giving activated charcoal, which is ineffective and obscures endoscopic assessment",
+      "Delaying airway management until obstruction is established",
+      "Failing to arrange follow-up for stricture and malignancy surveillance"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "UpToDate: Caustic esophageal injury in adults"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise airway assessment and protection, with early intubation for laryngeal or supraglottic oedema and stridor",
+      "Avoid induced emesis, neutralising agents, activated charcoal and blind nasogastric tube placement, which worsen injury or obscure endoscopy",
+      "Keep nil by mouth with intravenous fluid resuscitation and analgesia",
+      "Early upper gastrointestinal endoscopy to grade mucosal injury and guide feeding and prognosis",
+      "Proton pump inhibitor acid suppression to support mucosal healing",
+      "Emergency surgical resection for transmural necrosis, perforation, mediastinitis or peritonitis",
+      "Endoscopic dilatation for subsequent stricture formation",
+      "Long-term surveillance endoscopy given the lasting increased risk of oesophageal malignancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for caustic (acid/alkali) ingestion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "caustic-ingestion-real-image",
-   "title": "Caustic (acid/alkali) ingestion: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "caustic_ingestion-pathway",
+      "title": "Caustic (acid/alkali) ingestion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Alkalis cause liquefactive necrosis that penetrates deeply, while acids typically cause coagulative necrosis with an eschar that may limit depth, though both can be severe",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Stridor, hoarseness or drooling indicating airway compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Early upper gastrointestinal endoscopy to grade mucosal injury, Erect chest and abdominal imaging, or contrast/computed tomography, to detect perforation and mediastinal or peritoneal air, Arterial blood gas and lactate to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise airway assessment and protection, with early intubation for laryngeal or supraglottic oedema and stridor"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal oral examination excludes serious distal injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of caustic (acid/alkali) ingestion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "caustic_ingestion-matrix",
+      "title": "Caustic (acid/alkali) ingestion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Alkalis cause liquefactive necrosis that penetrates deeply, while acids typically cause coagulative necrosis with an eschar that",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Early upper gastrointestinal endoscopy to grade mucosal injury, Erect chest and abdominal imaging, or contrast/computed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thermal burn of the upper aerodigestive tract, Foreign body ingestion or impaction, Pill-induced (medication) oesophagitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise airway assessment and protection, with early intubation for laryngeal or supraglottic oedema and stridor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal oral examination excludes serious distal injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for caustic (acid/alkali) ingestion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "caustic_ingestion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Early upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Grades mucosal injury and guides prognosis and feeding decisions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect chest and abdominal imaging, or contrast CT",
+          "cells": [
+            {
+              "text": "Detects perforation and mediastinal or peritoneal air"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Assesses systemic acid-base disturbance and tissue injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Airway assessment where upper airway injury is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood group and crossmatch",
+          "cells": [
+            {
+              "text": "Needed if surgery is anticipated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "caustic_ingestion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway protection",
+          "cells": [
+            {
+              "text": "Airway assessment and early intubation for laryngeal or supraglottic oedema and stridor"
+            },
+            {
+              "text": "Oedema can progress rapidly to obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid harmful measures",
+          "cells": [
+            {
+              "text": "No induced emesis, neutralising agents, activated charcoal or blind nasogastric tube"
+            },
+            {
+              "text": "These worsen injury or obscure endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nil by mouth and resuscitation",
+          "cells": [
+            {
+              "text": "Nil by mouth with intravenous fluids and analgesia"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early endoscopy",
+          "cells": [
+            {
+              "text": "Upper gastrointestinal endoscopy to grade mucosal injury"
+            },
+            {
+              "text": "Guides feeding and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "Acid suppression to support mucosal healing"
+            },
+            {
+              "text": "Mucosal healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency surgery",
+          "cells": [
+            {
+              "text": "Resection for transmural necrosis, perforation, mediastinitis or peritonitis"
+            },
+            {
+              "text": "Surgical emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stricture and cancer surveillance",
+          "cells": [
+            {
+              "text": "Endoscopic dilatation for strictures; long-term surveillance endoscopy"
+            },
+            {
+              "text": "Lasting increased risk of oesophageal malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "caustic_ingestion-dx-mgmt",
+      "title": "Diagnosis and management of Caustic (acid/alkali) ingestion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected caustic ingestion: drooling, dysphagia, stridor or chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, perforation signs, haematemesis, instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: airway protection and urgent surgical review for perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Airway assessment and early upper GI endoscopy to grade mucosal injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Deep or circumferential injury on endoscopy with systemic signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nil by mouth, intravenous fluids and proton pump inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Boerhaave syndrome, thermal burn and pill-induced oesophagitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid emesis, neutralising agents, charcoal and blind nasogastric tubes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic dilatation for strictures that develop",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emergency surgery for transmural necrosis or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance endoscopy for lasting oesophageal cancer risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

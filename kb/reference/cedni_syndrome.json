@@ -1,173 +1,444 @@
 {
- "id": "cedni_syndrome",
- "name": "CEDNIK syndrome",
- "aliases": [
-  "cerebral dysgenesis, neuropathy, ichthyosis and keratoderma syndrome",
-  "SNAP29",
-  "SNAP29-related syndrome"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal recessive neurocutaneous syndrome whose acronym captures cerebral dysgenesis, neuropathy, ichthyosis and keratoderma",
-   "Caused by biallelic loss-of-function variants in SNAP29, a SNARE protein required for vesicle fusion, autophagy and lamellar-body secretion in keratinocytes",
-   "Cutaneous features include generalised ichthyosis with a palmoplantar keratoderma, reflecting defective epidermal barrier lipid delivery",
-   "Neurological involvement is prominent, with structural brain malformations such as agenesis or dysgenesis of the corpus callosum, polymicrogyria, developmental delay and peripheral neuropathy",
-   "Facial dysmorphism, feeding difficulties and failure to thrive are commonly reported",
-   "Diagnosis rests on the combination of ichthyosis and keratoderma with neuroimaging abnormalities, confirmed by SNAP29 molecular testing",
-   "Management is supportive and multidisciplinary, combining emollients and keratolytics with neurological, developmental and nutritional care"
+  "id": "cedni_syndrome",
+  "name": "CEDNIK syndrome",
+  "aliases": [
+    "cerebral dysgenesis, neuropathy, ichthyosis and keratoderma syndrome",
+    "SNAP29",
+    "SNAP29-related syndrome"
   ],
-  "pathophysiology": "CEDNIK syndrome results from loss of function of SNAP29, a soluble NSF attachment protein receptor (SNARE) that mediates fusion of intracellular vesicles and participates in autophagy. In the epidermis, SNAP29 is required for the secretion of lamellar bodies that deliver barrier lipids to the stratum corneum, so its deficiency disrupts keratinocyte maturation and produces ichthyosis and palmoplantar keratoderma. The same defect in vesicular trafficking during nervous system development underlies the cerebral dysgenesis and peripheral neuropathy that characterise the syndrome.",
-  "additionalDifferentials": [
-   "Sjögren-Larsson syndrome",
-   "Other congenital ichthyoses with neurological involvement",
-   "MEDNIK syndrome (AP1S1)",
-   "Neu-Laxova syndrome",
-   "Ichthyosis with prematurity syndrome",
-   "Keratitis-ichthyosis-deafness (KID) syndrome"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of SNAP29",
-   "Brain MRI for corpus callosum dysgenesis, cortical malformation and other structural anomalies",
-   "Nerve conduction studies for peripheral neuropathy",
-   "Skin biopsy with ultrastructural study of lamellar-body secretion",
-   "Developmental and neurodevelopmental assessment",
-   "Nutritional and feeding evaluation"
-  ],
-  "redFlags": [
-   "Seizures or neurological regression",
-   "Severe feeding difficulty with failure to thrive and aspiration risk",
-   "Recurrent skin or systemic infection compromising an impaired barrier",
-   "Progressive neurological deterioration"
-  ],
-  "prognosis": "Prognosis is guarded and dominated by the severity of the cerebral malformation and neurological impairment; many affected children have significant developmental disability, while the cutaneous features are chronic but manageable.",
-  "pitfalls": [
-   "Focusing on the ichthyosis and keratoderma without arranging neuroimaging",
-   "Mistaking the syndrome for an isolated congenital ichthyosis and missing the neurological diagnosis",
-   "Underestimating feeding and nutritional needs in an infant with neurological impairment",
-   "Failing to offer genetic counselling for this autosomal recessive condition"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Harper's Textbook of Paediatric Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy; care is supportive and multidisciplinary",
-   "Skin-directed care with emollients, keratolytics and topical retinoids for the ichthyosis and palmoplantar keratoderma",
-   "Nutritional support and management of feeding difficulties and failure to thrive, with gastrostomy where needed",
-   "Antiseizure treatment, physiotherapy and developmental support for the encephalopathy and peripheral neuropathy",
-   "Attention to secondary infection of fissured keratoderma with ongoing barrier care",
-   "Ophthalmology, orthopaedic and other specialist input as complications arise",
-   "Genetic counselling and family testing for the autosomal recessive SNAP29 variant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cedni_syndrome-pathway",
-   "title": "CEDNIK syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal recessive neurocutaneous syndrome whose acronym captures cerebral dysgenesis, neuropathy, ichthyosis and keratoderma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Seizures or neurological regression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of SNAP29, Brain MRI for corpus callosum dysgenesis, cortical malformation and other structural anomalies, Nerve conduction studies for peripheral neuropathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy; care is supportive and multidisciplinary"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing on the ichthyosis and keratoderma without arranging neuroimaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cednik syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cedni_syndrome-matrix",
-   "title": "CEDNIK syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal recessive neurocutaneous syndrome whose acronym captures cerebral dysgenesis, neuropathy, ichthyosis and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal recessive neurocutaneous syndrome whose acronym captures cerebral dysgenesis, neuropathy, ichthyosis and keratoderma",
+      "Caused by biallelic loss-of-function variants in SNAP29, a SNARE protein required for vesicle fusion, autophagy and lamellar-body secretion in keratinocytes",
+      "Cutaneous features include generalised ichthyosis with a palmoplantar keratoderma, reflecting defective epidermal barrier lipid delivery",
+      "Neurological involvement is prominent, with structural brain malformations such as agenesis or dysgenesis of the corpus callosum, polymicrogyria, developmental delay and peripheral neuropathy",
+      "Facial dysmorphism, feeding difficulties and failure to thrive are commonly reported",
+      "Diagnosis rests on the combination of ichthyosis and keratoderma with neuroimaging abnormalities, confirmed by SNAP29 molecular testing",
+      "Management is supportive and multidisciplinary, combining emollients and keratolytics with neurological, developmental and nutritional care"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of SNAP29, Brain MRI for corpus callosum dysgenesis, cortical malformation and other structural",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CEDNIK syndrome results from loss of function of SNAP29, a soluble NSF attachment protein receptor (SNARE) that mediates fusion of intracellular vesicles and participates in autophagy. In the epidermis, SNAP29 is required for the secretion of lamellar bodies that deliver barrier lipids to the stratum corneum, so its deficiency disrupts keratinocyte maturation and produces ichthyosis and palmoplantar keratoderma. The same defect in vesicular trafficking during nervous system development underlies the cerebral dysgenesis and peripheral neuropathy that characterise the syndrome.",
+    "additionalDifferentials": [
+      "Sjögren-Larsson syndrome",
+      "Other congenital ichthyoses with neurological involvement",
+      "MEDNIK syndrome (AP1S1)",
+      "Neu-Laxova syndrome",
+      "Ichthyosis with prematurity syndrome",
+      "Keratitis-ichthyosis-deafness (KID) syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Sjögren-Larsson syndrome, Other congenital ichthyoses with neurological involvement, MEDNIK syndrome (AP1S1)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of SNAP29",
+      "Brain MRI for corpus callosum dysgenesis, cortical malformation and other structural anomalies",
+      "Nerve conduction studies for peripheral neuropathy",
+      "Skin biopsy with ultrastructural study of lamellar-body secretion",
+      "Developmental and neurodevelopmental assessment",
+      "Nutritional and feeding evaluation"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy; care is supportive and multidisciplinary",
-     "Core treatment modality"
+    "redFlags": [
+      "Seizures or neurological regression",
+      "Severe feeding difficulty with failure to thrive and aspiration risk",
+      "Recurrent skin or systemic infection compromising an impaired barrier",
+      "Progressive neurological deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing on the ichthyosis and keratoderma without arranging neuroimaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is guarded and dominated by the severity of the cerebral malformation and neurological impairment; many affected children have significant developmental disability, while the cutaneous features are chronic but manageable.",
+    "pitfalls": [
+      "Focusing on the ichthyosis and keratoderma without arranging neuroimaging",
+      "Mistaking the syndrome for an isolated congenital ichthyosis and missing the neurological diagnosis",
+      "Underestimating feeding and nutritional needs in an infant with neurological impairment",
+      "Failing to offer genetic counselling for this autosomal recessive condition"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Harper's Textbook of Paediatric Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy; care is supportive and multidisciplinary",
+      "Skin-directed care with emollients, keratolytics and topical retinoids for the ichthyosis and palmoplantar keratoderma",
+      "Nutritional support and management of feeding difficulties and failure to thrive, with gastrostomy where needed",
+      "Antiseizure treatment, physiotherapy and developmental support for the encephalopathy and peripheral neuropathy",
+      "Attention to secondary infection of fissured keratoderma with ongoing barrier care",
+      "Ophthalmology, orthopaedic and other specialist input as complications arise",
+      "Genetic counselling and family testing for the autosomal recessive SNAP29 variant"
     ]
-   ],
-   "caption": "Overview comparison matrix for cednik syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cedni-syndrome-real-image",
-   "title": "CEDNIK syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "cedni_syndrome-pathway",
+      "title": "CEDNIK syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal recessive neurocutaneous syndrome whose acronym captures cerebral dysgenesis, neuropathy, ichthyosis and keratoderma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Seizures or neurological regression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of SNAP29, Brain MRI for corpus callosum dysgenesis, cortical malformation and other structural anomalies, Nerve conduction studies for peripheral neuropathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy; care is supportive and multidisciplinary"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing on the ichthyosis and keratoderma without arranging neuroimaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cednik syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cedni_syndrome-matrix",
+      "title": "CEDNIK syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal recessive neurocutaneous syndrome whose acronym captures cerebral dysgenesis, neuropathy, ichthyosis and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of SNAP29, Brain MRI for corpus callosum dysgenesis, cortical malformation and other structural",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sjögren-Larsson syndrome, Other congenital ichthyoses with neurological involvement, MEDNIK syndrome (AP1S1)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy; care is supportive and multidisciplinary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing on the ichthyosis and keratoderma without arranging neuroimaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cednik syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cedni_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of SNAP29",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Corpus callosum dysgenesis, cortical malformation and other structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with ultrastructural study",
+          "cells": [
+            {
+              "text": "Lamellar-body secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ichthyosis and keratoderma with neuroimaging abnormalities",
+          "cells": [
+            {
+              "text": "Diagnostic combination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cedni_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive multidisciplinary care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin-directed care",
+          "cells": [
+            {
+              "text": "Emollients, keratolytics and topical retinoids"
+            },
+            {
+              "text": "Ichthyosis and palmoplantar keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Manage feeding difficulties; gastrostomy where needed"
+            },
+            {
+              "text": "Failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and developmental care",
+          "cells": [
+            {
+              "text": "Antiseizure treatment, physiotherapy and developmental support"
+            },
+            {
+              "text": "Encephalopathy and peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection care",
+          "cells": [
+            {
+              "text": "Barrier care for secondary infection of fissured keratoderma"
+            },
+            {
+              "text": "Impaired barrier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Ophthalmology and orthopaedic input as complications arise"
+            },
+            {
+              "text": "As needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family testing for the autosomal recessive SNAP29 variant"
+            },
+            {
+              "text": "Autosomal recessive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cedni_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of CEDNIK syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CEDNIK syndrome: ichthyosis, keratoderma and neurological impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, regression, severe feeding difficulty, recurrent infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: seizure management and nutritional support for feeding failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SNAP29 testing, brain MRI for dysgenesis and nerve conduction studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SNAP29 variant with ichthyosis, keratoderma and neuroimaging abnormality?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive multidisciplinary care; no disease-specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Sjogren-Larsson syndrome, MEDNIK and other congenital ichthyoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients, keratolytics and topical retinoids for the skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional support; gastrostomy where feeding is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure treatment, physiotherapy and developmental support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Guarded prognosis set by cerebral malformation; skin disease is chronic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

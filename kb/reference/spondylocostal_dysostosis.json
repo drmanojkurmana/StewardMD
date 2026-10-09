@@ -1,177 +1,446 @@
 {
- "id": "spondylocostal_dysostosis",
- "name": "Spondylocostal dysostosis",
- "aliases": [
-  "Jarcho-Levin syndrome",
-  "DLL3",
-  "MESP2",
-  "LFNG",
-  "HES7",
-  "TBX6",
-  "SCDO"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of disorders of vertebral segmentation, historically termed Jarcho-Levin syndrome, most often autosomal recessive with variants in Notch-pathway genes (DLL3, MESP2, LFNG, HES7) or TBX6",
-   "Characterised by multiple vertebral segmentation defects (hemivertebrae, block and butterfly vertebrae) distributed along the spine",
-   "Rib anomalies (fusions, bifid or absent ribs) accompany the vertebral defects and shorten the thorax",
-   "The combination produces a short trunk with a short neck and short-trunk disproportionate stature, while the limbs are relatively normal",
-   "The dominant clinical threat is thoracic insufficiency: a small, poorly compliant thorax that cannot support normal lung growth and ventilation",
-   "In DLL3-related disease the spine may show a characteristic 'pebble beach' or generalised vertebral disorganisation on radiographs",
-   "Distinguish from spondylothoracic dysostosis, in which symmetric posterior rib fusion gives a 'crab-like' or fan-shaped thorax"
+  "id": "spondylocostal_dysostosis",
+  "name": "Spondylocostal dysostosis",
+  "aliases": [
+    "Jarcho-Levin syndrome",
+    "DLL3",
+    "MESP2",
+    "LFNG",
+    "HES7",
+    "TBX6",
+    "SCDO"
   ],
-  "pathophysiology": "Spondylocostal dysostosis results from disruption of the Notch signalling pathway that drives the segmentation clock during somitogenesis, most commonly through recessive variants in DLL3, MESP2, LFNG or HES7, or from TBX6-related mechanisms. Faulty oscillatory gene expression disturbs the orderly formation and boundary specification of somites, the embryonic precursors of vertebrae and their associated ribs. The result is multiple, often widespread vertebral segmentation and rib anomalies. Because the axial skeleton and thorax form abnormally, chest volume and compliance are reduced, producing thoracic insufficiency and restrictive respiratory disease.",
-  "additionalDifferentials": [
-   "Spondylothoracic dysostosis",
-   "VACTERL association",
-   "Klippel-Feil syndrome",
-   "Isolated congenital scoliosis with hemivertebrae",
-   "Jeune asphyxiating thoracic dystrophy",
-   "Cerebro-costo-mandibular syndrome"
-  ],
-  "additionalInvestigations": [
-   "Whole-spine and chest radiographs to characterise vertebral and rib segmentation defects",
-   "Molecular genetic testing of the segmentation-pathway genes (DLL3, MESP2, LFNG, HES7, TBX6)",
-   "Pulmonary function and thoracic dimension assessment for thoracic insufficiency",
-   "Cross-sectional imaging to plan any spinal or thoracic surgery",
-   "Screening for associated anomalies (renal, cardiac) given overlap with wider malformation associations"
-  ],
-  "redFlags": [
-   "Respiratory distress or failure from thoracic insufficiency, especially in infancy",
-   "Rapidly progressive scoliosis compromising lung development",
-   "Signs of spinal cord involvement or neurological deficit",
-   "Recurrent respiratory infections indicating restrictive lung disease"
-  ],
-  "prognosis": "Outcome depends chiefly on the severity of thoracic insufficiency: milder cases have good survival with orthopaedic management of the spine, whereas severe early respiratory compromise carries significant mortality. Multidisciplinary respiratory and orthopaedic care is central.",
-  "pitfalls": [
-   "Focusing on the scoliosis while underestimating the life-limiting thoracic insufficiency",
-   "Confusing spondylocostal with spondylothoracic dysostosis, which differ in rib pattern and prognosis",
-   "Missing associated visceral anomalies by not screening beyond the skeleton",
-   "Assuming dominant inheritance when most forms are autosomal recessive, giving incorrect counselling"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: Spondylocostal Dysostosis, Autosomal Recessive"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific drug therapy; management centres on respiratory support and orthopaedic care of the spine and thorax",
-   "Respiratory surveillance and support for thoracic insufficiency, including non-invasive ventilation as restrictive disease progresses",
-   "Expansion thoracoplasty or growth-friendly instrumentation such as vertical expandable prosthetic titanium rib-type devices to enlarge the thorax and permit lung growth in severe cases",
-   "Orthopaedic management of scoliosis and spinal deformity with bracing or corrective surgery as indicated",
-   "Prompt treatment of respiratory infections and immunisation to protect compromised lung function",
-   "Screen for associated renal and cardiac anomalies given overlap with wider malformation associations",
-   "Multidisciplinary paediatric respiratory, orthopaedic and clinical genetics care",
-   "Genetic counselling for the family given autosomal recessive inheritance in most subtypes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spondylocostal_dysostosis-pathway",
-   "title": "Spondylocostal dysostosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of disorders of vertebral segmentation, historically termed Jarcho-Levin syndrome, most often autosomal recessive with variants in Notch-pathway genes (DLL3, MESP2, LFNG, HES7) or TBX6",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory distress or failure from thoracic insufficiency, especially in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Whole-spine and chest radiographs to characterise vertebral and rib segmentation defects, Molecular genetic testing of the segmentation-pathway genes (DLL3, MESP2, LFNG, HES7, TBX6), Pulmonary function and thoracic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific drug therapy; management centres on respiratory support and orthopaedic care of the spine and thorax"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing on the scoliosis while underestimating the life-limiting thoracic insufficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spondylocostal dysostosis."
-  }
- ],
- "tables": [
-  {
-   "id": "spondylocostal_dysostosis-matrix",
-   "title": "Spondylocostal dysostosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of disorders of vertebral segmentation, historically termed Jarcho-Levin syndrome, most often autosomal recessive with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of disorders of vertebral segmentation, historically termed Jarcho-Levin syndrome, most often autosomal recessive with variants in Notch-pathway genes (DLL3, MESP2, LFNG, HES7) or TBX6",
+      "Characterised by multiple vertebral segmentation defects (hemivertebrae, block and butterfly vertebrae) distributed along the spine",
+      "Rib anomalies (fusions, bifid or absent ribs) accompany the vertebral defects and shorten the thorax",
+      "The combination produces a short trunk with a short neck and short-trunk disproportionate stature, while the limbs are relatively normal",
+      "The dominant clinical threat is thoracic insufficiency: a small, poorly compliant thorax that cannot support normal lung growth and ventilation",
+      "In DLL3-related disease the spine may show a characteristic 'pebble beach' or generalised vertebral disorganisation on radiographs",
+      "Distinguish from spondylothoracic dysostosis, in which symmetric posterior rib fusion gives a 'crab-like' or fan-shaped thorax"
     ],
-    [
-     "Key Investigations",
-     "Whole-spine and chest radiographs to characterise vertebral and rib segmentation defects, Molecular genetic testing of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spondylocostal dysostosis results from disruption of the Notch signalling pathway that drives the segmentation clock during somitogenesis, most commonly through recessive variants in DLL3, MESP2, LFNG or HES7, or from TBX6-related mechanisms. Faulty oscillatory gene expression disturbs the orderly formation and boundary specification of somites, the embryonic precursors of vertebrae and their associated ribs. The result is multiple, often widespread vertebral segmentation and rib anomalies. Because the axial skeleton and thorax form abnormally, chest volume and compliance are reduced, producing thoracic insufficiency and restrictive respiratory disease.",
+    "additionalDifferentials": [
+      "Spondylothoracic dysostosis",
+      "VACTERL association",
+      "Klippel-Feil syndrome",
+      "Isolated congenital scoliosis with hemivertebrae",
+      "Jeune asphyxiating thoracic dystrophy",
+      "Cerebro-costo-mandibular syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Spondylothoracic dysostosis, VACTERL association, Klippel-Feil syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Whole-spine and chest radiographs to characterise vertebral and rib segmentation defects",
+      "Molecular genetic testing of the segmentation-pathway genes (DLL3, MESP2, LFNG, HES7, TBX6)",
+      "Pulmonary function and thoracic dimension assessment for thoracic insufficiency",
+      "Cross-sectional imaging to plan any spinal or thoracic surgery",
+      "Screening for associated anomalies (renal, cardiac) given overlap with wider malformation associations"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific drug therapy; management centres on respiratory support and orthopaedic care of the spine and thorax",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory distress or failure from thoracic insufficiency, especially in infancy",
+      "Rapidly progressive scoliosis compromising lung development",
+      "Signs of spinal cord involvement or neurological deficit",
+      "Recurrent respiratory infections indicating restrictive lung disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing on the scoliosis while underestimating the life-limiting thoracic insufficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends chiefly on the severity of thoracic insufficiency: milder cases have good survival with orthopaedic management of the spine, whereas severe early respiratory compromise carries significant mortality. Multidisciplinary respiratory and orthopaedic care is central.",
+    "pitfalls": [
+      "Focusing on the scoliosis while underestimating the life-limiting thoracic insufficiency",
+      "Confusing spondylocostal with spondylothoracic dysostosis, which differ in rib pattern and prognosis",
+      "Missing associated visceral anomalies by not screening beyond the skeleton",
+      "Assuming dominant inheritance when most forms are autosomal recessive, giving incorrect counselling"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: Spondylocostal Dysostosis, Autosomal Recessive"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific drug therapy; management centres on respiratory support and orthopaedic care of the spine and thorax",
+      "Respiratory surveillance and support for thoracic insufficiency, including non-invasive ventilation as restrictive disease progresses",
+      "Expansion thoracoplasty or growth-friendly instrumentation such as vertical expandable prosthetic titanium rib-type devices to enlarge the thorax and permit lung growth in severe cases",
+      "Orthopaedic management of scoliosis and spinal deformity with bracing or corrective surgery as indicated",
+      "Prompt treatment of respiratory infections and immunisation to protect compromised lung function",
+      "Screen for associated renal and cardiac anomalies given overlap with wider malformation associations",
+      "Multidisciplinary paediatric respiratory, orthopaedic and clinical genetics care",
+      "Genetic counselling for the family given autosomal recessive inheritance in most subtypes"
     ]
-   ],
-   "caption": "Overview comparison matrix for spondylocostal dysostosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spondylocostal-dysostosis-real-image",
-   "title": "Spondylocostal dysostosis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "spondylocostal_dysostosis-pathway",
+      "title": "Spondylocostal dysostosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of disorders of vertebral segmentation, historically termed Jarcho-Levin syndrome, most often autosomal recessive with variants in Notch-pathway genes (DLL3, MESP2, LFNG, HES7) or TBX6",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory distress or failure from thoracic insufficiency, especially in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Whole-spine and chest radiographs to characterise vertebral and rib segmentation defects, Molecular genetic testing of the segmentation-pathway genes (DLL3, MESP2, LFNG, HES7, TBX6), Pulmonary function and thoracic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific drug therapy; management centres on respiratory support and orthopaedic care of the spine and thorax"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing on the scoliosis while underestimating the life-limiting thoracic insufficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spondylocostal dysostosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spondylocostal_dysostosis-matrix",
+      "title": "Spondylocostal dysostosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of disorders of vertebral segmentation, historically termed Jarcho-Levin syndrome, most often autosomal recessive with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Whole-spine and chest radiographs to characterise vertebral and rib segmentation defects, Molecular genetic testing of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Spondylothoracic dysostosis, VACTERL association, Klippel-Feil syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific drug therapy; management centres on respiratory support and orthopaedic care of the spine and thorax",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing on the scoliosis while underestimating the life-limiting thoracic insufficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spondylocostal dysostosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spondylocostal_dysostosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-spine and chest radiographs",
+          "cells": [
+            {
+              "text": "Vertebral and rib segmentation defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DLL3, MESP2, LFNG, HES7 gene testing",
+          "cells": [
+            {
+              "text": "Segmentation-pathway genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function and thoracic dimensions",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac screen",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondylocostal_dysostosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spondylothoracic dysostosis",
+          "cells": [
+            {
+              "text": "Symmetric posterior rib fusion, a different rib pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VACTERL association",
+          "cells": [
+            {
+              "text": "Shares vertebral anomalies; visceral screening separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondylocostal_dysostosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory surveillance and support",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency, with non-invasive ventilation as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expansion thoracoplasty or growth-friendly instrumentation",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency and scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management of scoliosis",
+          "cells": [
+            {
+              "text": "Bracing or corrective surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Prompt treatment of respiratory infection and immunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac screening",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Mostly autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spondylocostal_dysostosis-dx-mgmt",
+      "title": "Diagnosis and management of Spondylocostal dysostosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short trunk with vertebral and rib segmentation defects: suspected SCD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory distress, rapid scoliosis, neurological deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support for thoracic insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-spine and chest radiographs; segmentation gene testing; lung function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a segmentation-pathway gene variant found with the typical pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider spondylothoracic dysostosis or VACTERL; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Respiratory surveillance and non-invasive ventilation support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Expansion thoracoplasty or growth-friendly spinal instrumentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic management of scoliosis with bracing or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for renal and cardiac anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Thoracic insufficiency is the main life-limiting threat",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

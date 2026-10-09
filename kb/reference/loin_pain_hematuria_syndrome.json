@@ -1,177 +1,493 @@
 {
- "id": "loin_pain_hematuria_syndrome",
- "name": "Loin pain-haematuria syndrome",
- "aliases": [
-  "LPHS",
-  "Loin pain haematuria syndrome",
-  "loin pain haematuria",
-  "loin pain haematuria syndrome",
-  "loin pain hematuria",
-  "loin pain-hematuria syndrome"
- ],
- "class": "non_infective",
- "system": "Renal / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A diagnosis of exclusion characterised by severe, often disabling, unilateral or bilateral loin pain accompanied by haematuria in the absence of an identifiable structural, infective, or glomerular cause",
-   "Predominantly affects young to middle-aged women",
-   "Haematuria may be macroscopic or microscopic and is often intermittent; the pain is frequently out of proportion to objective findings",
-   "The condition is defined only after thorough exclusion of stones, tumour, infection, glomerular disease, clotting disorders, and vascular causes such as nutcracker syndrome",
-   "Renal biopsy may show non-specific findings such as C3 deposition or thickening of the glomerular basement membrane, but is mainly used to exclude other pathology",
-   "Management is challenging and centres on multidisciplinary chronic pain control; invasive and ablative procedures have unpredictable and often disappointing results",
-   "Careful psychological assessment and support are integral, without dismissing the pain as non-organic"
+  "id": "loin_pain_hematuria_syndrome",
+  "name": "Loin pain-haematuria syndrome",
+  "aliases": [
+    "LPHS",
+    "Loin pain haematuria syndrome",
+    "loin pain haematuria",
+    "loin pain haematuria syndrome",
+    "loin pain hematuria",
+    "loin pain-hematuria syndrome"
   ],
-  "pathophysiology": "The cause of loin pain-haematuria syndrome is poorly understood and probably heterogeneous. Proposed mechanisms include abnormalities of the glomerular basement membrane allowing red cells to escape into tubules, where they may form microcrystals or casts that provoke tubular obstruction and pain; intrarenal vascular or microvascular abnormalities; and abnormal pain processing or sensitisation. Because no single consistent lesion is found, the syndrome is best regarded as a clinical entity defined by its symptom complex once other renal and urological diseases have been rigorously excluded.",
-  "additionalDifferentials": [
-   "Urolithiasis or microlithiasis",
-   "Glomerulonephritis (e.g. IgA nephropathy)",
-   "Nutcracker syndrome (renal vein compression)",
-   "Urothelial or renal malignancy",
-   "Chronic or recurrent pyelonephritis",
-   "Ureteric obstruction or clot colic",
-   "Coagulopathy or anticoagulant-related bleeding"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis, microscopy for dysmorphic red cells and casts, and culture",
-   "CT urography and ultrasound to exclude stones, tumour, and obstruction",
-   "Cystoscopy and, where indicated, ureteroscopy to localise bleeding and exclude urothelial lesions",
-   "Doppler or cross-sectional venous imaging to exclude nutcracker phenomenon",
-   "Coagulation screen and renal function tests",
-   "Renal biopsy to exclude glomerular disease when clinically warranted"
-  ],
-  "redFlags": [
-   "Features suggesting malignancy, such as a mass, weight loss, or persistent unexplained macroscopic haematuria",
-   "Signs of obstruction, infection, or sepsis requiring urgent intervention",
-   "Escalating opioid requirements and dependence",
-   "New proteinuria or declining renal function pointing to an alternative diagnosis"
-  ],
-  "prognosis": "The natural history is variable; some patients improve or remit over time, but many experience a chronic relapsing course with substantial impact on quality of life, and durable relief from invasive interventions is inconsistent.",
-  "pitfalls": [
-   "Labelling a patient with the syndrome before adequately excluding treatable structural, glomerular, or vascular causes",
-   "Escalating to irreversible surgery such as nephrectomy or renal denervation with unpredictable benefit",
-   "Dismissing the pain as purely psychogenic and failing to provide multidisciplinary support",
-   "Overlooking nutcracker syndrome, which can mimic the presentation but is potentially treatable"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Comprehensive Clinical Nephrology (Feehally et al.)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish the diagnosis of exclusion after ruling out stones, tumour, infection, glomerular disease, coagulopathy and nutcracker phenomenon before committing to symptomatic treatment",
-   "Base management on multidisciplinary chronic-pain control with simple analgesia and neuropathic agents such as amitriptyline or gabapentinoids, limiting opioid escalation",
-   "Incorporate psychological support and pain-coping strategies given the central pain component and impaired quality of life",
-   "Consider interventional options such as nerve blocks or ureteric catheter analgesia in refractory pain, counselling that response is variable",
-   "Reserve ablative or surgical procedures such as renal denervation, ureterolysis, autotransplantation or nephrectomy for refractory disease, warning that durable relief is inconsistent and symptoms may recur or transfer to the other side",
-   "Monitor renal function and blood pressure and avoid repeated invasive investigation once the diagnosis is secure",
-   "Manage jointly through urology, nephrology and a specialist pain service, escalating for disabling pain or opioid dependence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "loin_pain_hematuria_syndrome-pathway",
-   "title": "Loin pain-haematuria syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A diagnosis of exclusion characterised by severe, often disabling, unilateral or bilateral loin pain accompanied by haematuria in the absence of an identifiable structural, infective, or glomerular cause",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting malignancy, such as a mass, weight loss, or persistent unexplained macroscopic haematuria",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis, microscopy for dysmorphic red cells and casts, and culture, CT urography and ultrasound to exclude stones, tumour, and obstruction, Cystoscopy and, where indicated, ureteroscopy to localise bleeding and exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish the diagnosis of exclusion after ruling out stones, tumour, infection, glomerular disease, coagulopathy and nutcracker phenomenon before committing to symptomatic treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling a patient with the syndrome before adequately excluding treatable structural, glomerular, or vascular causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of loin pain-haematuria syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "loin_pain_hematuria_syndrome-matrix",
-   "title": "Loin pain-haematuria syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A diagnosis of exclusion characterised by severe, often disabling, unilateral or bilateral loin pain accompanied by haematuria in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A diagnosis of exclusion characterised by severe, often disabling, unilateral or bilateral loin pain accompanied by haematuria in the absence of an identifiable structural, infective, or glomerular cause",
+      "Predominantly affects young to middle-aged women",
+      "Haematuria may be macroscopic or microscopic and is often intermittent; the pain is frequently out of proportion to objective findings",
+      "The condition is defined only after thorough exclusion of stones, tumour, infection, glomerular disease, clotting disorders, and vascular causes such as nutcracker syndrome",
+      "Renal biopsy may show non-specific findings such as C3 deposition or thickening of the glomerular basement membrane, but is mainly used to exclude other pathology",
+      "Management is challenging and centres on multidisciplinary chronic pain control; invasive and ablative procedures have unpredictable and often disappointing results",
+      "Careful psychological assessment and support are integral, without dismissing the pain as non-organic"
     ],
-    [
-     "Key Investigations",
-     "Urinalysis, microscopy for dysmorphic red cells and casts, and culture, CT urography and ultrasound to exclude stones, tumour,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The cause of loin pain-haematuria syndrome is poorly understood and probably heterogeneous. Proposed mechanisms include abnormalities of the glomerular basement membrane allowing red cells to escape into tubules, where they may form microcrystals or casts that provoke tubular obstruction and pain; intrarenal vascular or microvascular abnormalities; and abnormal pain processing or sensitisation. Because no single consistent lesion is found, the syndrome is best regarded as a clinical entity defined by its symptom complex once other renal and urological diseases have been rigorously excluded.",
+    "additionalDifferentials": [
+      "Urolithiasis or microlithiasis",
+      "Glomerulonephritis (e.g. IgA nephropathy)",
+      "Nutcracker syndrome (renal vein compression)",
+      "Urothelial or renal malignancy",
+      "Chronic or recurrent pyelonephritis",
+      "Ureteric obstruction or clot colic",
+      "Coagulopathy or anticoagulant-related bleeding"
     ],
-    [
-     "Primary Differentials",
-     "Urolithiasis or microlithiasis, Glomerulonephritis (e.g. IgA nephropathy), Nutcracker syndrome (renal vein compression)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis, microscopy for dysmorphic red cells and casts, and culture",
+      "CT urography and ultrasound to exclude stones, tumour, and obstruction",
+      "Cystoscopy and, where indicated, ureteroscopy to localise bleeding and exclude urothelial lesions",
+      "Doppler or cross-sectional venous imaging to exclude nutcracker phenomenon",
+      "Coagulation screen and renal function tests",
+      "Renal biopsy to exclude glomerular disease when clinically warranted"
     ],
-    [
-     "Management Strategy",
-     "Establish the diagnosis of exclusion after ruling out stones, tumour, infection, glomerular disease, coagulopathy and nutcracker",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting malignancy, such as a mass, weight loss, or persistent unexplained macroscopic haematuria",
+      "Signs of obstruction, infection, or sepsis requiring urgent intervention",
+      "Escalating opioid requirements and dependence",
+      "New proteinuria or declining renal function pointing to an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling a patient with the syndrome before adequately excluding treatable structural, glomerular, or vascular causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is variable; some patients improve or remit over time, but many experience a chronic relapsing course with substantial impact on quality of life, and durable relief from invasive interventions is inconsistent.",
+    "pitfalls": [
+      "Labelling a patient with the syndrome before adequately excluding treatable structural, glomerular, or vascular causes",
+      "Escalating to irreversible surgery such as nephrectomy or renal denervation with unpredictable benefit",
+      "Dismissing the pain as purely psychogenic and failing to provide multidisciplinary support",
+      "Overlooking nutcracker syndrome, which can mimic the presentation but is potentially treatable"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Comprehensive Clinical Nephrology (Feehally et al.)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish the diagnosis of exclusion after ruling out stones, tumour, infection, glomerular disease, coagulopathy and nutcracker phenomenon before committing to symptomatic treatment",
+      "Base management on multidisciplinary chronic-pain control with simple analgesia and neuropathic agents such as amitriptyline or gabapentinoids, limiting opioid escalation",
+      "Incorporate psychological support and pain-coping strategies given the central pain component and impaired quality of life",
+      "Consider interventional options such as nerve blocks or ureteric catheter analgesia in refractory pain, counselling that response is variable",
+      "Reserve ablative or surgical procedures such as renal denervation, ureterolysis, autotransplantation or nephrectomy for refractory disease, warning that durable relief is inconsistent and symptoms may recur or transfer to the other side",
+      "Monitor renal function and blood pressure and avoid repeated invasive investigation once the diagnosis is secure",
+      "Manage jointly through urology, nephrology and a specialist pain service, escalating for disabling pain or opioid dependence"
     ]
-   ],
-   "caption": "Overview comparison matrix for loin pain-haematuria syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "loin-pain-hematuria-syndrome-real-image",
-   "title": "Loin pain-haematuria syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "loin_pain_hematuria_syndrome-pathway",
+      "title": "Loin pain-haematuria syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A diagnosis of exclusion characterised by severe, often disabling, unilateral or bilateral loin pain accompanied by haematuria in the absence of an identifiable structural, infective, or glomerular cause",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting malignancy, such as a mass, weight loss, or persistent unexplained macroscopic haematuria",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis, microscopy for dysmorphic red cells and casts, and culture, CT urography and ultrasound to exclude stones, tumour, and obstruction, Cystoscopy and, where indicated, ureteroscopy to localise bleeding and exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish the diagnosis of exclusion after ruling out stones, tumour, infection, glomerular disease, coagulopathy and nutcracker phenomenon before committing to symptomatic treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling a patient with the syndrome before adequately excluding treatable structural, glomerular, or vascular causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of loin pain-haematuria syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "loin_pain_hematuria_syndrome-matrix",
+      "title": "Loin pain-haematuria syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A diagnosis of exclusion characterised by severe, often disabling, unilateral or bilateral loin pain accompanied by haematuria in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis, microscopy for dysmorphic red cells and casts, and culture, CT urography and ultrasound to exclude stones, tumour,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Urolithiasis or microlithiasis, Glomerulonephritis (e.g. IgA nephropathy), Nutcracker syndrome (renal vein compression)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish the diagnosis of exclusion after ruling out stones, tumour, infection, glomerular disease, coagulopathy and nutcracker",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling a patient with the syndrome before adequately excluding treatable structural, glomerular, or vascular causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for loin pain-haematuria syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "loin_pain_hematuria_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis with microscopy (dysmorphic red cells, casts) and culture",
+          "cells": [
+            {
+              "text": "Source of haematuria; infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT urography and ultrasound",
+          "cells": [
+            {
+              "text": "Stones, tumour and obstruction excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy and ureteroscopy",
+          "cells": [
+            {
+              "text": "Localise bleeding; exclude urothelial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler or cross-sectional venous imaging",
+          "cells": [
+            {
+              "text": "Nutcracker phenomenon excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen and renal function tests",
+          "cells": [
+            {
+              "text": "Clotting disorders and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy when clinically warranted",
+          "cells": [
+            {
+              "text": "Glomerular disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loin_pain_hematuria_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urolithiasis or microlithiasis",
+          "cells": [
+            {
+              "text": "Must be excluded before the diagnosis is made"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutcracker syndrome",
+          "cells": [
+            {
+              "text": "Renal vein compression; potentially treatable, so excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glomerulonephritis (e.g. IgA nephropathy)",
+          "cells": [
+            {
+              "text": "Glomerular disease; biopsy excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial or renal malignancy",
+          "cells": [
+            {
+              "text": "Excluded by CT urography and cystoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loin_pain_hematuria_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary chronic pain control",
+          "cells": [
+            {
+              "text": "Simple analgesia and neuropathic agents such as amitriptyline or gabapentinoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opioid limitation",
+          "cells": [
+            {
+              "text": "Limit opioid requirements and avoid dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Pain-coping strategies; pain is not dismissed as non-organic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interventional options",
+          "cells": [
+            {
+              "text": "Nerve blocks or ureteric catheter analgesia for refractory pain; response is variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablative or surgical procedures",
+          "cells": [
+            {
+              "text": "Renal denervation, ureterolysis, autotransplantation or nephrectomy for refractory disease only; benefit unpredictable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function and blood pressure; avoid repeated invasive investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Urology, nephrology and a specialist pain service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "loin_pain_hematuria_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Loin pain-haematuria syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe loin pain with intermittent haematuria in a young or middle-aged woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (mass, weight loss, persistent haematuria, sepsis, proteinuria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent urology review for malignancy, obstruction or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis and culture, CT urography, cystoscopy, venous imaging, coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are stones, tumour, infection, glomerular disease and nutcracker excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage the cause identified: stone, glomerular, vascular or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary chronic pain control with neuropathic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Limit opioid use and avoid dependence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychological support and pain-coping strategies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nerve blocks or ureteric catheter analgesia for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reserve ablative or surgical procedures for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable; many have chronic relapsing pain; invasive relief is unpredictable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

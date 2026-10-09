@@ -1,173 +1,435 @@
 {
- "id": "arteriovenous_malformation_brain",
- "name": "Cerebral arteriovenous malformation",
- "aliases": [
-  "AVM",
-  "brain AVM",
-  "cerebral AVM",
-  "intracranial arteriovenous malformation"
- ],
- "class": "non_infective",
- "system": "Neurosurgery / Neurology",
- "specialty": "Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A brain arteriovenous malformation is an abnormal tangle (nidus) of vessels where arteries connect directly to veins without an intervening capillary bed",
-   "The commonest serious presentation is intracranial haemorrhage, which may be intracerebral, intraventricular, or subarachnoid",
-   "Seizures are another frequent presentation, and some patients report chronic headache or progressive focal deficits",
-   "The high-flow shunt can cause a steal effect and venous hypertension, contributing to symptoms even without bleeding",
-   "Digital subtraction angiography is the reference standard for defining the feeding arteries, nidus, and draining veins, complementing CT and MRI",
-   "Grading systems that account for size, venous drainage pattern, and eloquence of adjacent brain help estimate surgical risk",
-   "Treatment options include microsurgical resection, endovascular embolisation, and stereotactic radiosurgery, used alone or in combination and individualised to the lesion",
-   "An associated flow-related aneurysm may coexist and can itself be a source of haemorrhage"
+  "id": "arteriovenous_malformation_brain",
+  "name": "Cerebral arteriovenous malformation",
+  "aliases": [
+    "AVM",
+    "brain AVM",
+    "cerebral AVM",
+    "intracranial arteriovenous malformation"
   ],
-  "pathophysiology": "A cerebral arteriovenous malformation is a congenital vascular anomaly in which feeding arteries drain directly into veins through a nidus of abnormal channels, bypassing the normal capillary network. The absence of intervening capillaries exposes the draining veins to high arterial pressures and flow, causing vessel wall changes and predisposing to rupture. Diversion of blood through the low-resistance shunt can reduce perfusion of surrounding brain (vascular steal), while venous hypertension and gliosis contribute to seizures and focal deficits. Haemorrhage results from rupture of the fragile nidus, draining veins, or associated aneurysms.",
-  "additionalDifferentials": [
-   "Cerebral aneurysm with subarachnoid haemorrhage",
-   "Hypertensive intracerebral haemorrhage",
-   "Cavernous malformation",
-   "Dural arteriovenous fistula",
-   "Neoplasm with haemorrhage",
-   "Primary seizure disorder"
-  ],
-  "additionalInvestigations": [
-   "CT and CT angiography to detect haemorrhage and vascular abnormality",
-   "MRI and MR angiography to localise the nidus and assess surrounding brain",
-   "Digital subtraction angiography to fully characterise angioarchitecture and any associated aneurysm",
-   "EEG when seizures are a prominent feature"
-  ],
-  "redFlags": [
-   "Acute intracranial haemorrhage with headache, focal deficit, or reduced consciousness",
-   "New or worsening seizures, especially with focal neurological signs",
-   "Evidence of an associated flow-related aneurysm raising rupture risk",
-   "Signs of raised intracranial pressure or rapid neurological deterioration"
-  ],
-  "prognosis": "Prognosis depends on whether the malformation has bled, its size and location, and its venous drainage; haemorrhage carries significant morbidity and a risk of recurrent bleeding, whereas complete obliteration by surgery, radiosurgery, or embolisation can substantially reduce future haemorrhage risk.",
-  "pitfalls": [
-   "Assuming all subarachnoid haemorrhage is aneurysmal and overlooking an underlying malformation",
-   "Underestimating the risk contributed by an associated aneurysm",
-   "Failing to fully characterise angioarchitecture before choosing treatment",
-   "Attributing new seizures or deficits to other causes without vascular imaging"
-  ],
-  "references": [
-   "Youmans & Winn Neurological Surgery",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive obliteration by microsurgical resection, stereotactic radiosurgery or endovascular embolisation, selected according to Spetzler-Martin grade",
-   "Multimodal treatment in complex lesions, using embolisation as an adjunct to surgery or radiosurgery",
-   "Acute haemorrhage management with intracranial pressure control, reversal of any coagulopathy and neurosurgical evacuation of significant haematoma",
-   "Antiepileptic drug therapy for seizures associated with the malformation",
-   "Blood-pressure control and symptomatic management of headache",
-   "Surveillance angiography to confirm complete obliteration and detect recurrence",
-   "Neurovascular multidisciplinary decision-making on whether to treat or observe, weighing intervention risk against natural bleeding risk in unruptured lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "arteriovenous_malformation_brain-pathway",
-   "title": "Cerebral arteriovenous malformation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A brain arteriovenous malformation is an abnormal tangle (nidus) of vessels where arteries connect directly to veins without an intervening capillary bed",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute intracranial haemorrhage with headache, focal deficit, or reduced consciousness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT and CT angiography to detect haemorrhage and vascular abnormality, MRI and MR angiography to localise the nidus and assess surrounding brain, Digital subtraction angiography to fully characterise angioarchitecture and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive obliteration by microsurgical resection, stereotactic radiosurgery or endovascular embolisation, selected according to Spetzler-Martin grade"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all subarachnoid haemorrhage is aneurysmal and overlooking an underlying malformation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cerebral arteriovenous malformation."
-  }
- ],
- "tables": [
-  {
-   "id": "arteriovenous_malformation_brain-matrix",
-   "title": "Cerebral arteriovenous malformation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A brain arteriovenous malformation is an abnormal tangle (nidus) of vessels where arteries connect directly to veins without an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurosurgery / Neurology",
+  "specialty": "Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A brain arteriovenous malformation is an abnormal tangle (nidus) of vessels where arteries connect directly to veins without an intervening capillary bed",
+      "The commonest serious presentation is intracranial haemorrhage, which may be intracerebral, intraventricular, or subarachnoid",
+      "Seizures are another frequent presentation, and some patients report chronic headache or progressive focal deficits",
+      "The high-flow shunt can cause a steal effect and venous hypertension, contributing to symptoms even without bleeding",
+      "Digital subtraction angiography is the reference standard for defining the feeding arteries, nidus, and draining veins, complementing CT and MRI",
+      "Grading systems that account for size, venous drainage pattern, and eloquence of adjacent brain help estimate surgical risk",
+      "Treatment options include microsurgical resection, endovascular embolisation, and stereotactic radiosurgery, used alone or in combination and individualised to the lesion",
+      "An associated flow-related aneurysm may coexist and can itself be a source of haemorrhage"
     ],
-    [
-     "Key Investigations",
-     "CT and CT angiography to detect haemorrhage and vascular abnormality, MRI and MR angiography to localise the nidus and assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A cerebral arteriovenous malformation is a congenital vascular anomaly in which feeding arteries drain directly into veins through a nidus of abnormal channels, bypassing the normal capillary network. The absence of intervening capillaries exposes the draining veins to high arterial pressures and flow, causing vessel wall changes and predisposing to rupture. Diversion of blood through the low-resistance shunt can reduce perfusion of surrounding brain (vascular steal), while venous hypertension and gliosis contribute to seizures and focal deficits. Haemorrhage results from rupture of the fragile nidus, draining veins, or associated aneurysms.",
+    "additionalDifferentials": [
+      "Cerebral aneurysm with subarachnoid haemorrhage",
+      "Hypertensive intracerebral haemorrhage",
+      "Cavernous malformation",
+      "Dural arteriovenous fistula",
+      "Neoplasm with haemorrhage",
+      "Primary seizure disorder"
     ],
-    [
-     "Primary Differentials",
-     "Cerebral aneurysm with subarachnoid haemorrhage, Hypertensive intracerebral haemorrhage, Cavernous malformation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT and CT angiography to detect haemorrhage and vascular abnormality",
+      "MRI and MR angiography to localise the nidus and assess surrounding brain",
+      "Digital subtraction angiography to fully characterise angioarchitecture and any associated aneurysm",
+      "EEG when seizures are a prominent feature"
     ],
-    [
-     "Management Strategy",
-     "Definitive obliteration by microsurgical resection, stereotactic radiosurgery or endovascular embolisation, selected according to",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute intracranial haemorrhage with headache, focal deficit, or reduced consciousness",
+      "New or worsening seizures, especially with focal neurological signs",
+      "Evidence of an associated flow-related aneurysm raising rupture risk",
+      "Signs of raised intracranial pressure or rapid neurological deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all subarachnoid haemorrhage is aneurysmal and overlooking an underlying malformation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on whether the malformation has bled, its size and location, and its venous drainage; haemorrhage carries significant morbidity and a risk of recurrent bleeding, whereas complete obliteration by surgery, radiosurgery, or embolisation can substantially reduce future haemorrhage risk.",
+    "pitfalls": [
+      "Assuming all subarachnoid haemorrhage is aneurysmal and overlooking an underlying malformation",
+      "Underestimating the risk contributed by an associated aneurysm",
+      "Failing to fully characterise angioarchitecture before choosing treatment",
+      "Attributing new seizures or deficits to other causes without vascular imaging"
+    ],
+    "references": [
+      "Youmans & Winn Neurological Surgery",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive obliteration by microsurgical resection, stereotactic radiosurgery or endovascular embolisation, selected according to Spetzler-Martin grade",
+      "Multimodal treatment in complex lesions, using embolisation as an adjunct to surgery or radiosurgery",
+      "Acute haemorrhage management with intracranial pressure control, reversal of any coagulopathy and neurosurgical evacuation of significant haematoma",
+      "Antiepileptic drug therapy for seizures associated with the malformation",
+      "Blood-pressure control and symptomatic management of headache",
+      "Surveillance angiography to confirm complete obliteration and detect recurrence",
+      "Neurovascular multidisciplinary decision-making on whether to treat or observe, weighing intervention risk against natural bleeding risk in unruptured lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for cerebral arteriovenous malformation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "arteriovenous-malformation-brain-real-image",
-   "title": "Cerebral arteriovenous malformation: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "arteriovenous_malformation_brain-pathway",
+      "title": "Cerebral arteriovenous malformation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A brain arteriovenous malformation is an abnormal tangle (nidus) of vessels where arteries connect directly to veins without an intervening capillary bed",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute intracranial haemorrhage with headache, focal deficit, or reduced consciousness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT and CT angiography to detect haemorrhage and vascular abnormality, MRI and MR angiography to localise the nidus and assess surrounding brain, Digital subtraction angiography to fully characterise angioarchitecture and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive obliteration by microsurgical resection, stereotactic radiosurgery or endovascular embolisation, selected according to Spetzler-Martin grade"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all subarachnoid haemorrhage is aneurysmal and overlooking an underlying malformation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cerebral arteriovenous malformation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "arteriovenous_malformation_brain-matrix",
+      "title": "Cerebral arteriovenous malformation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A brain arteriovenous malformation is an abnormal tangle (nidus) of vessels where arteries connect directly to veins without an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT and CT angiography to detect haemorrhage and vascular abnormality, MRI and MR angiography to localise the nidus and assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cerebral aneurysm with subarachnoid haemorrhage, Hypertensive intracerebral haemorrhage, Cavernous malformation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive obliteration by microsurgical resection, stereotactic radiosurgery or endovascular embolisation, selected according to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all subarachnoid haemorrhage is aneurysmal and overlooking an underlying malformation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cerebral arteriovenous malformation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arteriovenous_malformation_brain-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT and CT angiography",
+          "cells": [
+            {
+              "text": "Haemorrhage and vascular abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI and MR angiography",
+          "cells": [
+            {
+              "text": "Localises the nidus and assesses surrounding brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital subtraction angiography",
+          "cells": [
+            {
+              "text": "Angioarchitecture and any associated aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Where seizures are a prominent feature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arteriovenous_malformation_brain-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive obliteration",
+          "cells": [
+            {
+              "text": "Microsurgical resection, stereotactic radiosurgery or endovascular embolisation"
+            },
+            {
+              "text": "Selected by Spetzler-Martin grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multimodal treatment",
+          "cells": [
+            {
+              "text": "Embolisation as an adjunct to surgery or radiosurgery"
+            },
+            {
+              "text": "Complex lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemorrhage management",
+          "cells": [
+            {
+              "text": "Intracranial pressure control, reversal of coagulopathy, neurosurgical evacuation"
+            },
+            {
+              "text": "Significant haematoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptic drug therapy",
+          "cells": [
+            {
+              "text": "For seizures associated with the malformation"
+            },
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and headache",
+          "cells": [
+            {
+              "text": "Blood-pressure control and symptomatic headache treatment"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance angiography",
+          "cells": [
+            {
+              "text": "Confirms complete obliteration and detects recurrence"
+            },
+            {
+              "text": "After treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurovascular decision-making",
+          "cells": [
+            {
+              "text": "Treat or observe, weighing intervention risk against natural bleeding risk"
+            },
+            {
+              "text": "Unruptured lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arteriovenous_malformation_brain-dx-mgmt",
+      "title": "Diagnosis and management of Cerebral arteriovenous malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intracranial haemorrhage or seizures with a vascular malformation on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Acute haemorrhage, focal deficit or reduced consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical care; control intracranial pressure and coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT and CTA, MRI and MRA, digital subtraction angiography, EEG if seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Nidus characterised on DSA and graded by Spetzler-Martin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Definitive obliteration by resection, radiosurgery or embolisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Embolisation as adjunct to surgery or radiosurgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiepileptic drugs for malformation-related seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance angiography to confirm obliteration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurovascular team decides treat or observe for unruptured lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

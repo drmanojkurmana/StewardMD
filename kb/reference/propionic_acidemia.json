@@ -1,175 +1,433 @@
 {
- "id": "propionic_acidemia",
- "name": "Propionic acidemia",
- "aliases": [
-  "PA",
-  "propionic aciduria",
-  "propionyl-CoA carboxylase deficiency",
-  "ketotic hyperglycinemia (historical)"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An organic acidaemia caused by deficiency of the biotin-dependent enzyme propionyl-CoA carboxylase",
-   "Classic neonatal presentation is life-threatening metabolic decompensation with vomiting, lethargy, hypotonia, seizures and severe high-anion-gap metabolic acidosis with ketosis",
-   "Secondary hyperammonaemia is common and may dominate the picture, and hypoglycaemia and bone marrow suppression (neutropenia, thrombocytopenia) frequently occur",
-   "Elevated propionylcarnitine (C3) on acylcarnitine profile with characteristic urine organic acids (e.g. 3-hydroxypropionate, methylcitrate) supports the diagnosis, and MMA is not elevated (distinguishing it from methylmalonic acidemia)",
-   "Long-term complications include cardiomyopathy, prolonged QT and arrhythmia, pancreatitis, movement disorder from basal ganglia injury, and developmental delay",
-   "Chronic management principles include protein restriction limiting propiogenic amino acids, carnitine supplementation, and control of intercurrent catabolism, with metronidazole sometimes used to lower gut propionate",
-   "Unlike some organic acidaemias this disorder is generally not cofactor-responsive, though biotin is often trialled",
-   "Included in newborn screening via elevated C3 acylcarnitine, enabling early diagnosis"
+  "id": "propionic_acidemia",
+  "name": "Propionic acidemia",
+  "aliases": [
+    "PA",
+    "propionic aciduria",
+    "propionyl-CoA carboxylase deficiency",
+    "ketotic hyperglycinemia (historical)"
   ],
-  "pathophysiology": "Propionic acidemia arises from deficient propionyl-CoA carboxylase, a mitochondrial biotin-dependent enzyme that converts propionyl-CoA to methylmalonyl-CoA. This step is part of the catabolic pathway for the amino acids isoleucine, valine, methionine and threonine, as well as odd-chain fatty acids and cholesterol. Enzyme deficiency causes accumulation of propionyl-CoA and its derivatives (propionic acid, 3-hydroxypropionate, methylcitrate, propionylcarnitine). These organic acids produce severe metabolic acidosis, inhibit the urea cycle to cause hyperammonaemia, impair mitochondrial energy production, and are toxic to the myocardium, bone marrow, pancreas and basal ganglia.",
-  "additionalDifferentials": [
-   "Methylmalonic acidemia",
-   "Isovaleric acidemia and other organic acidaemias",
-   "Maple syrup urine disease",
-   "Urea cycle disorders",
-   "Neonatal sepsis and diabetic ketoacidosis",
-   "Multiple carboxylase deficiency"
-  ],
-  "additionalInvestigations": [
-   "Blood gas with anion gap, glucose, lactate and ammonia",
-   "Urine organic acids (methylcitrate, 3-hydroxypropionate) and plasma acylcarnitine (elevated C3)",
-   "Full blood count for cytopenias",
-   "Newborn screening acylcarnitine profile",
-   "Molecular testing of PCCA/PCCB genes",
-   "Cardiac evaluation with ECG and echocardiography for cardiomyopathy and QT prolongation"
-  ],
-  "redFlags": [
-   "Acute metabolic decompensation with severe acidosis and hyperammonaemia is a medical emergency",
-   "Encephalopathy from hyperammonaemia during crises",
-   "Cardiomyopathy or QT prolongation with risk of life-threatening arrhythmia",
-   "Rapid clinical deterioration during infection, fasting or catabolic stress"
-  ],
-  "prognosis": "Propionic acidemia is among the more severe organic acidaemias, with high risk of recurrent metabolic crises and long-term neurological and cardiac complications despite treatment; early detection and rigorous metabolic management improve survival, and selected patients are considered for liver transplantation.",
-  "pitfalls": [
-   "Confusing it with methylmalonic acidemia without checking that methylmalonic acid is not elevated",
-   "Overlooking cardiac surveillance, since cardiomyopathy and arrhythmia can be fatal even with good metabolic control",
-   "Attributing the acidotic neonate to sepsis and delaying specific therapy",
-   "Under-recognising secondary hyperammonaemia as a driver of encephalopathy"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute lifelong dietary protein restriction limiting the propiogenic amino acids isoleucine, valine, methionine and threonine, using specialised propiogenic-free medical formula under dietetic supervision",
-   "Supplement L-carnitine to replenish carnitine and promote excretion of propionyl esters, and give intermittent metronidazole to reduce gut bacterial propionate production",
-   "Provide an emergency regimen for intercurrent illness with cessation of natural protein and high-energy glucose intake to suppress catabolism, avoiding prolonged fasting",
-   "Manage acute decompensation with intravenous dextrose and insulin to reverse catabolism, ammonia-scavenging agents for hyperammonaemia, and haemofiltration or dialysis for severe hyperammonaemia or acidosis",
-   "Undertake surveillance for known complications including cardiomyopathy and QT prolongation with ECG and echocardiography, pancreatitis, cytopenias and neurodevelopmental delay",
-   "Consider liver transplantation in selected patients with recurrent crises or poor metabolic control",
-   "Manage through a metabolic multidisciplinary team and provide genetic counselling with family and newborn screening, given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "propionic_acidemia-pathway",
-   "title": "Propionic acidemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An organic acidaemia caused by deficiency of the biotin-dependent enzyme propionyl-CoA carboxylase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute metabolic decompensation with severe acidosis and hyperammonaemia is a medical emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood gas with anion gap, glucose, lactate and ammonia, Urine organic acids (methylcitrate, 3-hydroxypropionate) and plasma acylcarnitine (elevated C3), Full blood count for cytopenias"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute lifelong dietary protein restriction limiting the propiogenic amino acids isoleucine, valine, methionine and threonine, using specialised propiogenic-free medical formula under dietetic supervision"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with methylmalonic acidemia without checking that methylmalonic acid is not elevated"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of propionic acidemia."
-  }
- ],
- "tables": [
-  {
-   "id": "propionic_acidemia-matrix",
-   "title": "Propionic acidemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An organic acidaemia caused by deficiency of the biotin-dependent enzyme propionyl-CoA carboxylase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An organic acidaemia caused by deficiency of the biotin-dependent enzyme propionyl-CoA carboxylase",
+      "Classic neonatal presentation is life-threatening metabolic decompensation with vomiting, lethargy, hypotonia, seizures and severe high-anion-gap metabolic acidosis with ketosis",
+      "Secondary hyperammonaemia is common and may dominate the picture, and hypoglycaemia and bone marrow suppression (neutropenia, thrombocytopenia) frequently occur",
+      "Elevated propionylcarnitine (C3) on acylcarnitine profile with characteristic urine organic acids (e.g. 3-hydroxypropionate, methylcitrate) supports the diagnosis, and MMA is not elevated (distinguishing it from methylmalonic acidemia)",
+      "Long-term complications include cardiomyopathy, prolonged QT and arrhythmia, pancreatitis, movement disorder from basal ganglia injury, and developmental delay",
+      "Chronic management principles include protein restriction limiting propiogenic amino acids, carnitine supplementation, and control of intercurrent catabolism, with metronidazole sometimes used to lower gut propionate",
+      "Unlike some organic acidaemias this disorder is generally not cofactor-responsive, though biotin is often trialled",
+      "Included in newborn screening via elevated C3 acylcarnitine, enabling early diagnosis"
     ],
-    [
-     "Key Investigations",
-     "Blood gas with anion gap, glucose, lactate and ammonia, Urine organic acids (methylcitrate, 3-hydroxypropionate) and plasma",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Propionic acidemia arises from deficient propionyl-CoA carboxylase, a mitochondrial biotin-dependent enzyme that converts propionyl-CoA to methylmalonyl-CoA. This step is part of the catabolic pathway for the amino acids isoleucine, valine, methionine and threonine, as well as odd-chain fatty acids and cholesterol. Enzyme deficiency causes accumulation of propionyl-CoA and its derivatives (propionic acid, 3-hydroxypropionate, methylcitrate, propionylcarnitine). These organic acids produce severe metabolic acidosis, inhibit the urea cycle to cause hyperammonaemia, impair mitochondrial energy production, and are toxic to the myocardium, bone marrow, pancreas and basal ganglia.",
+    "additionalDifferentials": [
+      "Methylmalonic acidemia",
+      "Isovaleric acidemia and other organic acidaemias",
+      "Maple syrup urine disease",
+      "Urea cycle disorders",
+      "Neonatal sepsis and diabetic ketoacidosis",
+      "Multiple carboxylase deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Methylmalonic acidemia, Isovaleric acidemia and other organic acidaemias, Maple syrup urine disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood gas with anion gap, glucose, lactate and ammonia",
+      "Urine organic acids (methylcitrate, 3-hydroxypropionate) and plasma acylcarnitine (elevated C3)",
+      "Full blood count for cytopenias",
+      "Newborn screening acylcarnitine profile",
+      "Molecular testing of PCCA/PCCB genes",
+      "Cardiac evaluation with ECG and echocardiography for cardiomyopathy and QT prolongation"
     ],
-    [
-     "Management Strategy",
-     "Institute lifelong dietary protein restriction limiting the propiogenic amino acids isoleucine, valine, methionine and threonine,",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute metabolic decompensation with severe acidosis and hyperammonaemia is a medical emergency",
+      "Encephalopathy from hyperammonaemia during crises",
+      "Cardiomyopathy or QT prolongation with risk of life-threatening arrhythmia",
+      "Rapid clinical deterioration during infection, fasting or catabolic stress"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with methylmalonic acidemia without checking that methylmalonic acid is not elevated",
-     "Prevent diagnostic or management error"
+    "prognosis": "Propionic acidemia is among the more severe organic acidaemias, with high risk of recurrent metabolic crises and long-term neurological and cardiac complications despite treatment; early detection and rigorous metabolic management improve survival, and selected patients are considered for liver transplantation.",
+    "pitfalls": [
+      "Confusing it with methylmalonic acidemia without checking that methylmalonic acid is not elevated",
+      "Overlooking cardiac surveillance, since cardiomyopathy and arrhythmia can be fatal even with good metabolic control",
+      "Attributing the acidotic neonate to sepsis and delaying specific therapy",
+      "Under-recognising secondary hyperammonaemia as a driver of encephalopathy"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute lifelong dietary protein restriction limiting the propiogenic amino acids isoleucine, valine, methionine and threonine, using specialised propiogenic-free medical formula under dietetic supervision",
+      "Supplement L-carnitine to replenish carnitine and promote excretion of propionyl esters, and give intermittent metronidazole to reduce gut bacterial propionate production",
+      "Provide an emergency regimen for intercurrent illness with cessation of natural protein and high-energy glucose intake to suppress catabolism, avoiding prolonged fasting",
+      "Manage acute decompensation with intravenous dextrose and insulin to reverse catabolism, ammonia-scavenging agents for hyperammonaemia, and haemofiltration or dialysis for severe hyperammonaemia or acidosis",
+      "Undertake surveillance for known complications including cardiomyopathy and QT prolongation with ECG and echocardiography, pancreatitis, cytopenias and neurodevelopmental delay",
+      "Consider liver transplantation in selected patients with recurrent crises or poor metabolic control",
+      "Manage through a metabolic multidisciplinary team and provide genetic counselling with family and newborn screening, given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for propionic acidemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "propionic-acidemia-real-image",
-   "title": "Propionic acidemia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "propionic_acidemia-pathway",
+      "title": "Propionic acidemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An organic acidaemia caused by deficiency of the biotin-dependent enzyme propionyl-CoA carboxylase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute metabolic decompensation with severe acidosis and hyperammonaemia is a medical emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood gas with anion gap, glucose, lactate and ammonia, Urine organic acids (methylcitrate, 3-hydroxypropionate) and plasma acylcarnitine (elevated C3), Full blood count for cytopenias"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute lifelong dietary protein restriction limiting the propiogenic amino acids isoleucine, valine, methionine and threonine, using specialised propiogenic-free medical formula under dietetic supervision"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with methylmalonic acidemia without checking that methylmalonic acid is not elevated"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of propionic acidemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "propionic_acidemia-matrix",
+      "title": "Propionic acidemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An organic acidaemia caused by deficiency of the biotin-dependent enzyme propionyl-CoA carboxylase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood gas with anion gap, glucose, lactate and ammonia, Urine organic acids (methylcitrate, 3-hydroxypropionate) and plasma",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Methylmalonic acidemia, Isovaleric acidemia and other organic acidaemias, Maple syrup urine disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute lifelong dietary protein restriction limiting the propiogenic amino acids isoleucine, valine, methionine and threonine,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with methylmalonic acidemia without checking that methylmalonic acid is not elevated",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for propionic acidemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "propionic_acidemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood gas with anion gap, glucose, lactate and ammonia",
+          "cells": [
+            {
+              "text": "Acidosis and hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids and plasma acylcarnitine",
+          "cells": [
+            {
+              "text": "Methylcitrate, 3-hydroxypropionate and elevated C3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Early detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCCA and PCCB molecular testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography",
+          "cells": [
+            {
+              "text": "Cardiomyopathy and QT prolongation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "propionic_acidemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Protein restriction",
+          "cells": [
+            {
+              "text": "Lifelong limit on propiogenic amino acids (isoleucine, valine, methionine, threonine), with specialised protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L-carnitine and metronidazole",
+          "cells": [
+            {
+              "text": "L-carnitine to promote excretion of propionyl esters; intermittent metronidazole to reduce gut propionate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intercurrent illness",
+          "cells": [
+            {
+              "text": "Emergency regimen: stop natural protein and give high-energy glucose intake to suppress catabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute decompensation",
+          "cells": [
+            {
+              "text": "IV dextrose and insulin to reverse catabolism; ammonia-scavenging agents; haemofiltration as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "ECG and echocardiography for cardiomyopathy and QT prolongation; pancreatitis and cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Selected patients with recurrent crises or poor metabolic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family and newborn screening; metabolic multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "propionic_acidemia-dx-mgmt",
+      "title": "Diagnosis and management of Propionic acidemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected propionic acidaemia: acidosis with raised C3 acylcarnitine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Decompensation with hyperammonaemia, encephalopathy, cardiomyopathy or QT prolongation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency IV dextrose, insulin, ammonia control and haemofiltration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood gas, lactate, ammonia; urine organic acids; acylcarnitine C3; FBC; PCCA/PCCB",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do organic acids and C3 acylcarnitine confirm propionic acidaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider methylmalonic acidaemia or other organic acidaemias; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong low propiogenic amino acid diet with specialised protein",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "L-carnitine and intermittent metronidazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency regimen in illness: stop natural protein, high-energy glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac, pancreatic and cytopenia surveillance with ECG and echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Metabolic team care; liver transplant considered for recurrent crises or poor control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

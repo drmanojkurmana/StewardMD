@@ -1,177 +1,448 @@
 {
- "id": "chediak_higashi",
- "name": "Chediak-Higashi syndrome",
- "aliases": [
-  "CHS",
-  "CHS1",
-  "Chediak-Higashi disease",
-  "LYST",
-  "chediak higashi syndrome"
- ],
- "class": "non_infective",
- "system": "Immunology",
- "specialty": "Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / standard immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Chediak-Higashi syndrome is a rare autosomal recessive disorder of lysosomal trafficking caused by mutations in the LYST gene",
-   "The diagnostic morphological clue is giant cytoplasmic granules in neutrophils and other leucocytes seen on the blood film",
-   "Patients have partial oculocutaneous albinism with silvery hair and photophobia, reflecting abnormal melanosome function",
-   "Recurrent pyogenic infections, especially with Staphylococcus aureus and other bacteria, arise from impaired neutrophil chemotaxis, degranulation, and killing",
-   "Natural killer cell and cytotoxic T-cell function is defective, contributing to both infection risk and the tendency to develop an accelerated inflammatory phase",
-   "The dreaded 'accelerated phase' is a haemophagocytic lymphohistiocytosis-like syndrome with fever, hepatosplenomegaly, pancytopenia, and lymphohistiocytic infiltration, often triggered by viral infection such as EBV",
-   "A progressive neurological syndrome (peripheral neuropathy, ataxia, cognitive decline) may emerge in those who survive childhood",
-   "Haematopoietic stem cell transplantation can correct the immune and haematological disease but does not reverse the neurological degeneration; supportive care includes infection prophylaxis and treatment of the accelerated phase"
+  "id": "chediak_higashi",
+  "name": "Chediak-Higashi syndrome",
+  "aliases": [
+    "CHS",
+    "CHS1",
+    "Chediak-Higashi disease",
+    "LYST",
+    "chediak higashi syndrome"
   ],
-  "pathophysiology": "Chediak-Higashi syndrome is caused by biallelic mutations in LYST, which encodes a protein regulating the size and trafficking of lysosomes and related organelles. Defective vesicle fusion produces the characteristic giant granules and disrupts the function of cells that depend on regulated secretory lysosomes, including neutrophils (impaired chemotaxis and delayed bacterial killing), cytotoxic lymphocytes and natural killer cells (defective granule-mediated cytotoxicity), melanocytes (partial albinism), and neurons. The failure of cytotoxic cells to control activated immune cells underlies the life-threatening accelerated phase resembling haemophagocytic lymphohistiocytosis, while accumulation of abnormal lysosomal material contributes to the progressive neurodegeneration.",
-  "additionalDifferentials": [
-   "Griscelli syndrome",
-   "Hermansky-Pudlak syndrome",
-   "Other causes of haemophagocytic lymphohistiocytosis (familial HLH, EBV-driven HLH)",
-   "Leukocyte adhesion deficiency and other neutrophil disorders",
-   "Oculocutaneous albinism without immunodeficiency"
-  ],
-  "additionalInvestigations": [
-   "Peripheral blood film and bone marrow to identify giant granules in leucocytes",
-   "LYST genetic testing",
-   "Neutrophil function testing (chemotaxis and bactericidal activity)",
-   "Natural killer and cytotoxic T-cell function assays",
-   "Markers of haemophagocytic lymphohistiocytosis (ferritin, soluble IL-2 receptor, triglycerides, fibrinogen) when the accelerated phase is suspected",
-   "Neurological assessment including nerve conduction studies"
-  ],
-  "redFlags": [
-   "Features of the accelerated phase (fever, cytopenias, hepatosplenomegaly, hyperferritinaemia) requiring urgent HLH-directed treatment",
-   "Recurrent or severe pyogenic infection requiring prompt immunological evaluation",
-   "Live vaccines should be avoided given the cytotoxic immune defect",
-   "Irradiated, leucodepleted blood products are advisable, particularly around transplantation",
-   "Progressive neurological deterioration signalling advanced disease"
-  ],
-  "prognosis": "The prognosis is guarded: most patients enter the accelerated phase in childhood, which is frequently fatal without treatment, and haematopoietic stem cell transplantation, if performed before this phase, can restore immune and haematological function but does not prevent the later progressive neurological decline.",
-  "pitfalls": [
-   "Missing the giant leucocyte granules on the blood film and delaying diagnosis",
-   "Failing to recognise and aggressively treat the accelerated phase as an HLH-like emergency",
-   "Assuming transplantation will halt the neurodegeneration",
-   "Overlooking the albinism and hair colour clues that point to the diagnosis",
-   "Not screening for EBV or other viral triggers that can precipitate the accelerated phase"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Allogeneic haematopoietic stem cell transplantation is the definitive treatment and should be undertaken early, ideally before the accelerated phase, to restore immune and haematological function",
-   "Treat the accelerated haemophagocytic phase promptly with HLH-directed immunochemotherapy such as corticosteroids, etoposide and ciclosporin, bridging to transplantation",
-   "Prevent and aggressively treat pyogenic infections, particularly Staphylococcus aureus, with antimicrobials and consideration of antibiotic prophylaxis",
-   "Photoprotection for the partial oculocutaneous albinism, with sun avoidance, sunscreen and tinted lenses for photophobia",
-   "Surveillance for the accelerated phase with blood counts and ferritin, and prompt evaluation of viral triggers such as EBV",
-   "Long-term neurological monitoring, since transplantation does not halt the progressive neurodegeneration",
-   "Multidisciplinary immunology, haematology and transplantation care",
-   "Genetic counselling for autosomal recessive inheritance with testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chediak_higashi-pathway",
-   "title": "Chediak-Higashi syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Chediak-Higashi syndrome is a rare autosomal recessive disorder of lysosomal trafficking caused by mutations in the LYST gene",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of the accelerated phase (fever, cytopenias, hepatosplenomegaly, hyperferritinaemia) requiring urgent HLH-directed treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Peripheral blood film and bone marrow to identify giant granules in leucocytes, LYST genetic testing, Neutrophil function testing (chemotaxis and bactericidal activity)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Allogeneic haematopoietic stem cell transplantation is the definitive treatment and should be undertaken early, ideally before the accelerated phase, to restore immune and haematological function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the giant leucocyte granules on the blood film and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chediak-higashi syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "chediak_higashi-matrix",
-   "title": "Chediak-Higashi syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Chediak-Higashi syndrome is a rare autosomal recessive disorder of lysosomal trafficking caused by mutations in the LYST gene",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology",
+  "specialty": "Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / standard immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Chediak-Higashi syndrome is a rare autosomal recessive disorder of lysosomal trafficking caused by mutations in the LYST gene",
+      "The diagnostic morphological clue is giant cytoplasmic granules in neutrophils and other leucocytes seen on the blood film",
+      "Patients have partial oculocutaneous albinism with silvery hair and photophobia, reflecting abnormal melanosome function",
+      "Recurrent pyogenic infections, especially with Staphylococcus aureus and other bacteria, arise from impaired neutrophil chemotaxis, degranulation, and killing",
+      "Natural killer cell and cytotoxic T-cell function is defective, contributing to both infection risk and the tendency to develop an accelerated inflammatory phase",
+      "The dreaded 'accelerated phase' is a haemophagocytic lymphohistiocytosis-like syndrome with fever, hepatosplenomegaly, pancytopenia, and lymphohistiocytic infiltration, often triggered by viral infection such as EBV",
+      "A progressive neurological syndrome (peripheral neuropathy, ataxia, cognitive decline) may emerge in those who survive childhood",
+      "Haematopoietic stem cell transplantation can correct the immune and haematological disease but does not reverse the neurological degeneration; supportive care includes infection prophylaxis and treatment of the accelerated phase"
     ],
-    [
-     "Key Investigations",
-     "Peripheral blood film and bone marrow to identify giant granules in leucocytes, LYST genetic testing, Neutrophil function testing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chediak-Higashi syndrome is caused by biallelic mutations in LYST, which encodes a protein regulating the size and trafficking of lysosomes and related organelles. Defective vesicle fusion produces the characteristic giant granules and disrupts the function of cells that depend on regulated secretory lysosomes, including neutrophils (impaired chemotaxis and delayed bacterial killing), cytotoxic lymphocytes and natural killer cells (defective granule-mediated cytotoxicity), melanocytes (partial albinism), and neurons. The failure of cytotoxic cells to control activated immune cells underlies the life-threatening accelerated phase resembling haemophagocytic lymphohistiocytosis, while accumulation of abnormal lysosomal material contributes to the progressive neurodegeneration.",
+    "additionalDifferentials": [
+      "Griscelli syndrome",
+      "Hermansky-Pudlak syndrome",
+      "Other causes of haemophagocytic lymphohistiocytosis (familial HLH, EBV-driven HLH)",
+      "Leukocyte adhesion deficiency and other neutrophil disorders",
+      "Oculocutaneous albinism without immunodeficiency"
     ],
-    [
-     "Primary Differentials",
-     "Griscelli syndrome, Hermansky-Pudlak syndrome, Other causes of haemophagocytic lymphohistiocytosis (familial HLH, EBV-driven HLH)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Peripheral blood film and bone marrow to identify giant granules in leucocytes",
+      "LYST genetic testing",
+      "Neutrophil function testing (chemotaxis and bactericidal activity)",
+      "Natural killer and cytotoxic T-cell function assays",
+      "Markers of haemophagocytic lymphohistiocytosis (ferritin, soluble IL-2 receptor, triglycerides, fibrinogen) when the accelerated phase is suspected",
+      "Neurological assessment including nerve conduction studies"
     ],
-    [
-     "Management Strategy",
-     "Allogeneic haematopoietic stem cell transplantation is the definitive treatment and should be undertaken early, ideally before",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of the accelerated phase (fever, cytopenias, hepatosplenomegaly, hyperferritinaemia) requiring urgent HLH-directed treatment",
+      "Recurrent or severe pyogenic infection requiring prompt immunological evaluation",
+      "Live vaccines should be avoided given the cytotoxic immune defect",
+      "Irradiated, leucodepleted blood products are advisable, particularly around transplantation",
+      "Progressive neurological deterioration signalling advanced disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the giant leucocyte granules on the blood film and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is guarded: most patients enter the accelerated phase in childhood, which is frequently fatal without treatment, and haematopoietic stem cell transplantation, if performed before this phase, can restore immune and haematological function but does not prevent the later progressive neurological decline.",
+    "pitfalls": [
+      "Missing the giant leucocyte granules on the blood film and delaying diagnosis",
+      "Failing to recognise and aggressively treat the accelerated phase as an HLH-like emergency",
+      "Assuming transplantation will halt the neurodegeneration",
+      "Overlooking the albinism and hair colour clues that point to the diagnosis",
+      "Not screening for EBV or other viral triggers that can precipitate the accelerated phase"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Allogeneic haematopoietic stem cell transplantation is the definitive treatment and should be undertaken early, ideally before the accelerated phase, to restore immune and haematological function",
+      "Treat the accelerated haemophagocytic phase promptly with HLH-directed immunochemotherapy such as corticosteroids, etoposide and ciclosporin, bridging to transplantation",
+      "Prevent and aggressively treat pyogenic infections, particularly Staphylococcus aureus, with antimicrobials and consideration of antibiotic prophylaxis",
+      "Photoprotection for the partial oculocutaneous albinism, with sun avoidance, sunscreen and tinted lenses for photophobia",
+      "Surveillance for the accelerated phase with blood counts and ferritin, and prompt evaluation of viral triggers such as EBV",
+      "Long-term neurological monitoring, since transplantation does not halt the progressive neurodegeneration",
+      "Multidisciplinary immunology, haematology and transplantation care",
+      "Genetic counselling for autosomal recessive inheritance with testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for chediak-higashi syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chediak-higashi-real-image",
-   "title": "Chediak-Higashi syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "chediak_higashi-pathway",
+      "title": "Chediak-Higashi syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Chediak-Higashi syndrome is a rare autosomal recessive disorder of lysosomal trafficking caused by mutations in the LYST gene",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of the accelerated phase (fever, cytopenias, hepatosplenomegaly, hyperferritinaemia) requiring urgent HLH-directed treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Peripheral blood film and bone marrow to identify giant granules in leucocytes, LYST genetic testing, Neutrophil function testing (chemotaxis and bactericidal activity)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Allogeneic haematopoietic stem cell transplantation is the definitive treatment and should be undertaken early, ideally before the accelerated phase, to restore immune and haematological function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the giant leucocyte granules on the blood film and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chediak-higashi syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chediak_higashi-matrix",
+      "title": "Chediak-Higashi syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chediak-Higashi syndrome is a rare autosomal recessive disorder of lysosomal trafficking caused by mutations in the LYST gene",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Peripheral blood film and bone marrow to identify giant granules in leucocytes, LYST genetic testing, Neutrophil function testing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Griscelli syndrome, Hermansky-Pudlak syndrome, Other causes of haemophagocytic lymphohistiocytosis (familial HLH, EBV-driven HLH)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Allogeneic haematopoietic stem cell transplantation is the definitive treatment and should be undertaken early, ideally before",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the giant leucocyte granules on the blood film and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chediak-higashi syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chediak_higashi-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral blood film and bone marrow",
+          "cells": [
+            {
+              "text": "Giant cytoplasmic granules in neutrophils and other leucocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LYST genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the LYST mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutrophil function testing",
+          "cells": [
+            {
+              "text": "Chemotaxis and bactericidal activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Natural killer and cytotoxic T-cell function assays",
+          "cells": [
+            {
+              "text": "Defective cytotoxic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ferritin, soluble IL-2 receptor, triglycerides and fibrinogen",
+          "cells": [
+            {
+              "text": "Markers of the accelerated haemophagocytic phase"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chediak_higashi-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Allogeneic haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive treatment; undertake early, ideally before the accelerated phase"
+            },
+            {
+              "text": "Restores immune and haematological function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the accelerated phase",
+          "cells": [
+            {
+              "text": "HLH-directed immunochemotherapy such as corticosteroids, etoposide and ciclosporin, bridging to transplant"
+            },
+            {
+              "text": "Accelerated haemophagocytic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Prevent and aggressively treat pyogenic infection, particularly Staphylococcus aureus; consider prophylaxis"
+            },
+            {
+              "text": "Neutrophil defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Sun avoidance, sunscreen and tinted lenses"
+            },
+            {
+              "text": "Partial oculocutaneous albinism and photophobia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Blood counts, ferritin and evaluation of viral triggers such as EBV"
+            },
+            {
+              "text": "Accelerated phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological monitoring",
+          "cells": [
+            {
+              "text": "Long-term neurological monitoring"
+            },
+            {
+              "text": "Transplant does not reverse neurodegeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; testing of at-risk relatives"
+            },
+            {
+              "text": "Recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chediak_higashi-dx-mgmt",
+      "title": "Diagnosis and management of Chediak-Higashi syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Chediak-Higashi syndrome: giant leucocyte granules, albinism, infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, cytopenias, hepatosplenomegaly, hyperferritinaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent HLH-directed treatment for the accelerated phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film and marrow for giant granules; LYST testing; NK and neutrophil function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Giant granules with LYST variant or defective cytotoxicity confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Allogeneic haematopoietic stem cell transplantation, ideally early",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Griscelli syndrome, Hermansky-Pudlak and other causes of HLH",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat accelerated phase with corticosteroids, etoposide and ciclosporin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prevent and treat pyogenic infection, especially Staphylococcus aureus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Photoprotection with sun avoidance, sunscreen and tinted lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Transplant does not halt neurodegeneration; long-term neurological monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

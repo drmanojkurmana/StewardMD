@@ -1,176 +1,492 @@
 {
- "id": "kyrle_disease",
- "name": "kyrle disease",
- "aliases": [
-  "hyperkeratosis follicularis et parafollicularis in cutem penetrans",
-  "Kyrle's disease"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A perforating dermatosis characterised by large keratotic papules and nodules with a central horny plug, typically on the lower limbs, and often only mildly pruritic compared with other perforating disorders.",
-   "Classically described in adults with chronic kidney disease, diabetes mellitus or hepatic dysfunction, overlapping clinically with acquired perforating dermatosis.",
-   "Lesions may coalesce into verrucous plaques and characteristically follow a Koebner (isomorphic) distribution along scratch lines.",
-   "Histology shows a keratotic plug filling an epidermal invagination with a parakeratotic column and focal perforation through the epidermis, with basophilic connective-tissue debris in the plug.",
-   "In classic Kyrle disease the perforating channel is said not to specifically eliminate collagen or elastic fibres, distinguishing it from reactive perforating collagenosis and elastosis perforans serpiginosa, though overlap is common.",
-   "Diagnosis rests on correlating the clinical picture (keratotic plugged papules on legs of a patient with renal or metabolic disease) with the perforating histology.",
-   "Treatment mirrors other acquired perforating dermatoses: emollients, keratolytics, topical or oral retinoids, phototherapy, and control of the underlying systemic disease.",
-   "A rare familial form with childhood onset and no systemic association is described, but most cases are acquired in adulthood."
+  "id": "kyrle_disease",
+  "name": "kyrle disease",
+  "aliases": [
+    "hyperkeratosis follicularis et parafollicularis in cutem penetrans",
+    "Kyrle's disease"
   ],
-  "pathophysiology": "Kyrle disease is regarded by many authorities as a variant within the acquired perforating dermatosis spectrum. The primary abnormality is thought to be a focal disturbance of epidermal keratinisation producing a keratotic plug and a clone of abnormally differentiating keratinocytes that accelerates upward, breaching the basement membrane and perforating the epidermis. Basophilic degenerate connective-tissue debris accumulates within the plug and is eliminated transepidermally. In acquired cases, metabolic derangements of uraemia, diabetes and hepatic disease, together with microangiopathy and repetitive scratch-induced trauma (Koebnerisation), are believed to trigger the aberrant keratinisation and perforation.",
-  "additionalDifferentials": [
-   "reactive perforating collagenosis",
-   "perforating folliculitis",
-   "prurigo nodularis",
-   "hypertrophic lichen planus",
-   "keratosis pilaris and other follicular keratoses",
-   "multiple keratoacanthomas",
-   "perforating granuloma annulare"
-  ],
-  "additionalInvestigations": [
-   "skin biopsy of an intact keratotic papule to demonstrate the epidermal invagination, parakeratotic plug and perforation",
-   "renal function tests and estimated glomerular filtration rate",
-   "fasting glucose and glycated haemoglobin",
-   "liver function tests",
-   "serum calcium, phosphate and albumin",
-   "thyroid function tests",
-   "urinalysis for proteinuria"
-  ],
-  "redFlags": [
-   "presentation without recognised renal, hepatic or metabolic disease, warranting systemic evaluation",
-   "features suggesting secondary infection of excoriated lesions",
-   "rapid enlargement of a solitary nodule raising concern for keratoacanthoma or squamous cell carcinoma",
-   "intractable pruritus indicating uncontrolled uraemia or hyperglycaemia"
-  ],
-  "prognosis": "The course is chronic with a tendency to relapse; individual lesions may resolve leaving scars or hyperpigmentation, and overall activity generally parallels control of the underlying systemic disease.",
-  "pitfalls": [
-   "labelling any leg-predominant perforating eruption as Kyrle disease without histological correlation, given substantial overlap with other perforating dermatoses",
-   "overlooking the need to screen for chronic kidney disease, diabetes and hepatic dysfunction",
-   "mistaking a coalescent verrucous plaque for a viral wart or squamous neoplasm",
-   "sampling a superinfected or excoriated lesion, which distorts the characteristic histology"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "Andrews' Diseases of the Skin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Optimise treatment of the underlying systemic disorder - adequate dialysis and management of chronic kidney disease, tight glycaemic control in diabetes and treatment of hepatic disease - as skin activity parallels this",
-   "Apply topical keratolytics such as urea, salicylic acid or topical retinoids together with topical corticosteroids to individual lesions",
-   "Control pruritus with emollients and oral antihistamines to interrupt the itch-scratch cycle and reduce Koebnerisation",
-   "Consider narrowband ultraviolet B phototherapy for widespread disease",
-   "Use systemic retinoids as a second-line option for resistant, extensive lesions",
-   "Provide wound care and monitor lesions for secondary infection",
-   "Refer to dermatology and coordinate with nephrology or the relevant specialty managing the systemic disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kyrle_disease-pathway",
-   "title": "kyrle disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A perforating dermatosis characterised by large keratotic papules and nodules with a central horny plug, typically on the lower limbs, and often only mildly pruritic compared with other perforating disorders.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: presentation without recognised renal, hepatic or metabolic disease, warranting systemic evaluation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: skin biopsy of an intact keratotic papule to demonstrate the epidermal invagination, parakeratotic plug and perforation, renal function tests and estimated glomerular filtration rate, fasting glucose and glycated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Optimise treatment of the underlying systemic disorder - adequate dialysis and management of chronic kidney disease, tight glycaemic control in diabetes and treatment of hepatic disease - as skin activity parallels this"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: labelling any leg-predominant perforating eruption as Kyrle disease without histological correlation, given substantial overlap with other perforating dermatoses"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kyrle disease."
-  }
- ],
- "tables": [
-  {
-   "id": "kyrle_disease-matrix",
-   "title": "kyrle disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A perforating dermatosis characterised by large keratotic papules and nodules with a central horny plug, typically on the lower",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A perforating dermatosis characterised by large keratotic papules and nodules with a central horny plug, typically on the lower limbs, and often only mildly pruritic compared with other perforating disorders.",
+      "Classically described in adults with chronic kidney disease, diabetes mellitus or hepatic dysfunction, overlapping clinically with acquired perforating dermatosis.",
+      "Lesions may coalesce into verrucous plaques and characteristically follow a Koebner (isomorphic) distribution along scratch lines.",
+      "Histology shows a keratotic plug filling an epidermal invagination with a parakeratotic column and focal perforation through the epidermis, with basophilic connective-tissue debris in the plug.",
+      "In classic Kyrle disease the perforating channel is said not to specifically eliminate collagen or elastic fibres, distinguishing it from reactive perforating collagenosis and elastosis perforans serpiginosa, though overlap is common.",
+      "Diagnosis rests on correlating the clinical picture (keratotic plugged papules on legs of a patient with renal or metabolic disease) with the perforating histology.",
+      "Treatment mirrors other acquired perforating dermatoses: emollients, keratolytics, topical or oral retinoids, phototherapy, and control of the underlying systemic disease.",
+      "A rare familial form with childhood onset and no systemic association is described, but most cases are acquired in adulthood."
     ],
-    [
-     "Key Investigations",
-     "skin biopsy of an intact keratotic papule to demonstrate the epidermal invagination, parakeratotic plug and perforation, renal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kyrle disease is regarded by many authorities as a variant within the acquired perforating dermatosis spectrum. The primary abnormality is thought to be a focal disturbance of epidermal keratinisation producing a keratotic plug and a clone of abnormally differentiating keratinocytes that accelerates upward, breaching the basement membrane and perforating the epidermis. Basophilic degenerate connective-tissue debris accumulates within the plug and is eliminated transepidermally. In acquired cases, metabolic derangements of uraemia, diabetes and hepatic disease, together with microangiopathy and repetitive scratch-induced trauma (Koebnerisation), are believed to trigger the aberrant keratinisation and perforation.",
+    "additionalDifferentials": [
+      "reactive perforating collagenosis",
+      "perforating folliculitis",
+      "prurigo nodularis",
+      "hypertrophic lichen planus",
+      "keratosis pilaris and other follicular keratoses",
+      "multiple keratoacanthomas",
+      "perforating granuloma annulare"
     ],
-    [
-     "Primary Differentials",
-     "reactive perforating collagenosis, perforating folliculitis, prurigo nodularis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "skin biopsy of an intact keratotic papule to demonstrate the epidermal invagination, parakeratotic plug and perforation",
+      "renal function tests and estimated glomerular filtration rate",
+      "fasting glucose and glycated haemoglobin",
+      "liver function tests",
+      "serum calcium, phosphate and albumin",
+      "thyroid function tests",
+      "urinalysis for proteinuria"
     ],
-    [
-     "Management Strategy",
-     "Optimise treatment of the underlying systemic disorder - adequate dialysis and management of chronic kidney disease, tight",
-     "Core treatment modality"
+    "redFlags": [
+      "presentation without recognised renal, hepatic or metabolic disease, warranting systemic evaluation",
+      "features suggesting secondary infection of excoriated lesions",
+      "rapid enlargement of a solitary nodule raising concern for keratoacanthoma or squamous cell carcinoma",
+      "intractable pruritus indicating uncontrolled uraemia or hyperglycaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "labelling any leg-predominant perforating eruption as Kyrle disease without histological correlation, given substantial overlap",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is chronic with a tendency to relapse; individual lesions may resolve leaving scars or hyperpigmentation, and overall activity generally parallels control of the underlying systemic disease.",
+    "pitfalls": [
+      "labelling any leg-predominant perforating eruption as Kyrle disease without histological correlation, given substantial overlap with other perforating dermatoses",
+      "overlooking the need to screen for chronic kidney disease, diabetes and hepatic dysfunction",
+      "mistaking a coalescent verrucous plaque for a viral wart or squamous neoplasm",
+      "sampling a superinfected or excoriated lesion, which distorts the characteristic histology"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "Andrews' Diseases of the Skin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Optimise treatment of the underlying systemic disorder - adequate dialysis and management of chronic kidney disease, tight glycaemic control in diabetes and treatment of hepatic disease - as skin activity parallels this",
+      "Apply topical keratolytics such as urea, salicylic acid or topical retinoids together with topical corticosteroids to individual lesions",
+      "Control pruritus with emollients and oral antihistamines to interrupt the itch-scratch cycle and reduce Koebnerisation",
+      "Consider narrowband ultraviolet B phototherapy for widespread disease",
+      "Use systemic retinoids as a second-line option for resistant, extensive lesions",
+      "Provide wound care and monitor lesions for secondary infection",
+      "Refer to dermatology and coordinate with nephrology or the relevant specialty managing the systemic disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for kyrle disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kyrle-disease-real-image",
-   "title": "kyrle disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "kyrle_disease-pathway",
+      "title": "kyrle disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A perforating dermatosis characterised by large keratotic papules and nodules with a central horny plug, typically on the lower limbs, and often only mildly pruritic compared with other perforating disorders.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: presentation without recognised renal, hepatic or metabolic disease, warranting systemic evaluation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: skin biopsy of an intact keratotic papule to demonstrate the epidermal invagination, parakeratotic plug and perforation, renal function tests and estimated glomerular filtration rate, fasting glucose and glycated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Optimise treatment of the underlying systemic disorder - adequate dialysis and management of chronic kidney disease, tight glycaemic control in diabetes and treatment of hepatic disease - as skin activity parallels this"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: labelling any leg-predominant perforating eruption as Kyrle disease without histological correlation, given substantial overlap with other perforating dermatoses"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kyrle disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kyrle_disease-matrix",
+      "title": "kyrle disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A perforating dermatosis characterised by large keratotic papules and nodules with a central horny plug, typically on the lower",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "skin biopsy of an intact keratotic papule to demonstrate the epidermal invagination, parakeratotic plug and perforation, renal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "reactive perforating collagenosis, perforating folliculitis, prurigo nodularis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Optimise treatment of the underlying systemic disorder - adequate dialysis and management of chronic kidney disease, tight",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "labelling any leg-predominant perforating eruption as Kyrle disease without histological correlation, given substantial overlap",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kyrle disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kyrle_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy of an intact keratotic papule",
+          "cells": [
+            {
+              "text": "Epidermal invagination, parakeratotic plug and perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests and eGFR",
+          "cells": [
+            {
+              "text": "Chronic kidney disease, a classic association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and glycated haemoglobin",
+          "cells": [
+            {
+              "text": "Diabetes mellitus, a classic association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic dysfunction, a classic association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate and albumin",
+          "cells": [
+            {
+              "text": "Systemic disease screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Systemic disease screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for proteinuria",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kyrle_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Reactive perforating collagenosis",
+          "cells": [
+            {
+              "text": "Perforating channel eliminates collagen; classic Kyrle does not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple keratoacanthomas",
+          "cells": [
+            {
+              "text": "Rapid enlargement of a solitary nodule raises concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prurigo nodularis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kyrle_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying systemic disorder",
+          "cells": [
+            {
+              "text": "Dialysis and CKD care, tight glycaemic control, and treatment of hepatic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical keratolytics and corticosteroids",
+          "cells": [
+            {
+              "text": "Urea, salicylic acid or topical retinoids with topical corticosteroids for individual lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pruritus control",
+          "cells": [
+            {
+              "text": "Emollients and oral antihistamines to break the itch-scratch cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narrowband UVB phototherapy",
+          "cells": [
+            {
+              "text": "For widespread disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic retinoids",
+          "cells": [
+            {
+              "text": "Second-line for resistant, extensive lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Monitor lesions for secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Dermatology, with nephrology or the specialty managing the systemic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kyrle_disease-dx-mgmt",
+      "title": "Diagnosis and management of kyrle disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Keratotic papules and nodules on the legs with a central horny plug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (no systemic cause, infection, rapid nodule growth, pruritus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review of a rapidly enlarging nodule for squamous cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy of an intact papule; renal, liver, glucose and thyroid tests; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show an epidermal invagination with parakeratotic plug and perforation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider reactive perforating collagenosis, keratoacanthoma or prurigo nodularis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise the underlying systemic disorder: dialysis, glycaemic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical keratolytics and corticosteroids for individual lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emollients and antihistamines to control pruritus and reduce the Koebner response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Narrowband UVB for widespread disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Systemic retinoids as second-line for resistant lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic with relapses; activity parallels control of the systemic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

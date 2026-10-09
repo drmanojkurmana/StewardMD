@@ -1,178 +1,463 @@
 {
- "id": "coats_plus_syndrome",
- "name": "Coats plus syndrome",
- "aliases": [
-  "CRMCC",
-  "Cerebroretinal microangiopathy with calcifications and cysts",
-  "Coats plus disease"
- ],
- "class": "non_infective",
- "system": "Nervous system / multisystem",
- "specialty": "Medical genetics / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Telomere biology disorder and neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive telomere biology disorder, also known as cerebroretinal microangiopathy with calcifications and cysts (CRMCC).",
-   "Most cases result from biallelic CTC1 variants (a component of the CST/CTC1-STN1-TEN1 telomere-replication complex); some are due to STN1 (OBFC1), and a POT1-related phenocopy is recognised.",
-   "The ophthalmological hallmark is bilateral exudative (Coats disease-like) retinopathy with retinal telangiectasia and a risk of detachment.",
-   "Neurological features include intracranial calcification (basal ganglia, thalami and deep white matter), leucoencephalopathy and parenchymal brain cysts, causing seizures, spasticity, dystonia and cognitive decline.",
-   "Systemic vascular fragility manifests as gastrointestinal bleeding from vascular ectasia, portal hypertension, osteopenia with fractures and poor bone healing, and anaemia.",
-   "Intrauterine growth restriction and prenatal onset can occur.",
-   "It must be distinguished from Labrune syndrome (leukoencephalopathy with calcifications and cysts, due to SNORD118), which is confined to the central nervous system without retinal or systemic features."
+  "id": "coats_plus_syndrome",
+  "name": "Coats plus syndrome",
+  "aliases": [
+    "CRMCC",
+    "Cerebroretinal microangiopathy with calcifications and cysts",
+    "Coats plus disease"
   ],
-  "pathophysiology": "Coats plus (CRMCC) is a telomere biology disorder caused predominantly by biallelic loss-of-function variants in CTC1, which encodes conserved telomere capping component 1, a subunit of the CST complex (CTC1-STN1-TEN1). CST cooperates with DNA polymerase alpha-primase to complete replication of the telomeric C-strand and to restart stalled replication forks; impaired CST function leads to defective telomere replication, telomere shortening and fragility, and genomic instability. The clinical picture is dominated by a small-vessel angiopathy: retinal telangiectasia with exudation (a Coats-type retinopathy), a cerebral microangiopathy producing calcification, leucoencephalopathy and cyst formation, and systemic vascular ectasia causing gastrointestinal haemorrhage and portal hypertension, together with osteopenia. Rare cases arise from STN1 variants, and there is phenotypic overlap with POT1-related disease, placing the condition firmly within the telomeropathy spectrum and distinct from SNORD118-related Labrune syndrome, which lacks extraneurological involvement.",
-  "additionalDifferentials": [
-   "Labrune syndrome / leukoencephalopathy with calcifications and cysts (SNORD118) — central-nervous-system-limited",
-   "Coats disease (isolated, usually unilateral exudative retinopathy)",
-   "Revesz syndrome (TINF2) and other telomere biology disorders",
-   "Cerebral small-vessel diseases (including hereditary arteriopathies)",
-   "Congenital (TORCH) infections with intracranial calcification",
-   "Aicardi-Goutieres syndrome (intracranial calcification and leucoencephalopathy)",
-   "Band-like calcification with polymicrogyria (OCLN-related)"
-  ],
-  "additionalInvestigations": [
-   "CTC1 sequencing, with STN1 and POT1 or a broader telomere-gene panel if negative",
-   "Leucocyte telomere length by flow-FISH",
-   "Brain CT and MRI for calcification, leucoencephalopathy and cysts",
-   "Dilated fundoscopy and retinal imaging",
-   "Full blood count and iron studies with investigation of gastrointestinal bleeding (endoscopy)",
-   "Bone imaging and assessment for osteopenia and fractures",
-   "Liver imaging for portal hypertension"
-  ],
-  "redFlags": [
-   "Gastrointestinal haemorrhage from vascular ectasia",
-   "Enlarging intracranial cysts causing mass effect or raised intracranial pressure",
-   "Exudative retinal detachment threatening vision",
-   "Progressive cytopenias or a bleeding tendency",
-   "Pathological fractures or poor bone healing"
-  ],
-  "prognosis": "Progressive and variable; neurological deterioration, recurrent gastrointestinal bleeding and complications of brain cysts limit life expectancy, although some milder cases survive into adulthood.",
-  "pitfalls": [
-   "Confusing Coats plus with Labrune syndrome — the retinal, gastrointestinal and skeletal features and the CTC1 genotype distinguish it",
-   "Diagnosing isolated Coats disease and missing the multisystem CRMCC picture",
-   "Underestimating bleeding risk from gastrointestinal vascular ectasia before invasive procedures",
-   "Over-reliance on telomere length, which may not be uniformly short in all CST-related cases",
-   "Missing the autosomal recessive inheritance and the resulting sibling recurrence risk"
-  ],
-  "references": [
-   "Telomere biology disorder reviews",
-   "Neurogenetics and leucoencephalopathy references",
-   "Inherited bone marrow failure syndrome guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Ophthalmic treatment of the Coats-like exudative retinopathy with laser photocoagulation, cryotherapy or anti-VEGF injections to preserve vision.",
-   "Neurological management of seizures with antiseizure medication and of spasticity and dystonia, with neurosurgical intervention for symptomatic enlarging brain cysts.",
-   "Endoscopic treatment of gastrointestinal vascular ectasia, with iron replacement and transfusion for anaemia and management of portal hypertension.",
-   "Management of osteopenia and fragility fractures with attention to poor bone healing.",
-   "Nutritional and growth support given intrauterine growth restriction and failure to thrive.",
-   "Genetic counselling for this autosomal recessive telomere biology disorder, with testing of at-risk family members.",
-   "Multidisciplinary and palliative supportive care coordinating ophthalmology, neurology, gastroenterology and genetics given the progressive course."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "coats_plus_syndrome-pathway",
-   "title": "Coats plus syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive telomere biology disorder, also known as cerebroretinal microangiopathy with calcifications and cysts (CRMCC).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Gastrointestinal haemorrhage from vascular ectasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CTC1 sequencing, with STN1 and POT1 or a broader telomere-gene panel if negative, Leucocyte telomere length by flow-FISH, Brain CT and MRI for calcification, leucoencephalopathy and cysts"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Ophthalmic treatment of the Coats-like exudative retinopathy with laser photocoagulation, cryotherapy or anti-VEGF injections to preserve vision."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing Coats plus with Labrune syndrome - the retinal, gastrointestinal and skeletal features and the CTC1 genotype distinguish it"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coats plus syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "coats_plus_syndrome-matrix",
-   "title": "Coats plus syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive telomere biology disorder, also known as cerebroretinal microangiopathy with calcifications and cysts (CRMCC).",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / multisystem",
+  "specialty": "Medical genetics / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Telomere biology disorder and neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive telomere biology disorder, also known as cerebroretinal microangiopathy with calcifications and cysts (CRMCC).",
+      "Most cases result from biallelic CTC1 variants (a component of the CST/CTC1-STN1-TEN1 telomere-replication complex); some are due to STN1 (OBFC1), and a POT1-related phenocopy is recognised.",
+      "The ophthalmological hallmark is bilateral exudative (Coats disease-like) retinopathy with retinal telangiectasia and a risk of detachment.",
+      "Neurological features include intracranial calcification (basal ganglia, thalami and deep white matter), leucoencephalopathy and parenchymal brain cysts, causing seizures, spasticity, dystonia and cognitive decline.",
+      "Systemic vascular fragility manifests as gastrointestinal bleeding from vascular ectasia, portal hypertension, osteopenia with fractures and poor bone healing, and anaemia.",
+      "Intrauterine growth restriction and prenatal onset can occur.",
+      "It must be distinguished from Labrune syndrome (leukoencephalopathy with calcifications and cysts, due to SNORD118), which is confined to the central nervous system without retinal or systemic features."
     ],
-    [
-     "Key Investigations",
-     "CTC1 sequencing, with STN1 and POT1 or a broader telomere-gene panel if negative, Leucocyte telomere length by flow-FISH, Brain",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Coats plus (CRMCC) is a telomere biology disorder caused predominantly by biallelic loss-of-function variants in CTC1, which encodes conserved telomere capping component 1, a subunit of the CST complex (CTC1-STN1-TEN1). CST cooperates with DNA polymerase alpha-primase to complete replication of the telomeric C-strand and to restart stalled replication forks; impaired CST function leads to defective telomere replication, telomere shortening and fragility, and genomic instability. The clinical picture is dominated by a small-vessel angiopathy: retinal telangiectasia with exudation (a Coats-type retinopathy), a cerebral microangiopathy producing calcification, leucoencephalopathy and cyst formation, and systemic vascular ectasia causing gastrointestinal haemorrhage and portal hypertension, together with osteopenia. Rare cases arise from STN1 variants, and there is phenotypic overlap with POT1-related disease, placing the condition firmly within the telomeropathy spectrum and distinct from SNORD118-related Labrune syndrome, which lacks extraneurological involvement.",
+    "additionalDifferentials": [
+      "Labrune syndrome / leukoencephalopathy with calcifications and cysts (SNORD118) — central-nervous-system-limited",
+      "Coats disease (isolated, usually unilateral exudative retinopathy)",
+      "Revesz syndrome (TINF2) and other telomere biology disorders",
+      "Cerebral small-vessel diseases (including hereditary arteriopathies)",
+      "Congenital (TORCH) infections with intracranial calcification",
+      "Aicardi-Goutieres syndrome (intracranial calcification and leucoencephalopathy)",
+      "Band-like calcification with polymicrogyria (OCLN-related)"
     ],
-    [
-     "Primary Differentials",
-     "Labrune syndrome / leukoencephalopathy with calcifications and cysts (SNORD118) - central-nervous-system-limited, Coats disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CTC1 sequencing, with STN1 and POT1 or a broader telomere-gene panel if negative",
+      "Leucocyte telomere length by flow-FISH",
+      "Brain CT and MRI for calcification, leucoencephalopathy and cysts",
+      "Dilated fundoscopy and retinal imaging",
+      "Full blood count and iron studies with investigation of gastrointestinal bleeding (endoscopy)",
+      "Bone imaging and assessment for osteopenia and fractures",
+      "Liver imaging for portal hypertension"
     ],
-    [
-     "Management Strategy",
-     "Ophthalmic treatment of the Coats-like exudative retinopathy with laser photocoagulation, cryotherapy or anti-VEGF injections to",
-     "Core treatment modality"
+    "redFlags": [
+      "Gastrointestinal haemorrhage from vascular ectasia",
+      "Enlarging intracranial cysts causing mass effect or raised intracranial pressure",
+      "Exudative retinal detachment threatening vision",
+      "Progressive cytopenias or a bleeding tendency",
+      "Pathological fractures or poor bone healing"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing Coats plus with Labrune syndrome - the retinal, gastrointestinal and skeletal features and the CTC1 genotype",
-     "Prevent diagnostic or management error"
+    "prognosis": "Progressive and variable; neurological deterioration, recurrent gastrointestinal bleeding and complications of brain cysts limit life expectancy, although some milder cases survive into adulthood.",
+    "pitfalls": [
+      "Confusing Coats plus with Labrune syndrome — the retinal, gastrointestinal and skeletal features and the CTC1 genotype distinguish it",
+      "Diagnosing isolated Coats disease and missing the multisystem CRMCC picture",
+      "Underestimating bleeding risk from gastrointestinal vascular ectasia before invasive procedures",
+      "Over-reliance on telomere length, which may not be uniformly short in all CST-related cases",
+      "Missing the autosomal recessive inheritance and the resulting sibling recurrence risk"
+    ],
+    "references": [
+      "Telomere biology disorder reviews",
+      "Neurogenetics and leucoencephalopathy references",
+      "Inherited bone marrow failure syndrome guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Ophthalmic treatment of the Coats-like exudative retinopathy with laser photocoagulation, cryotherapy or anti-VEGF injections to preserve vision.",
+      "Neurological management of seizures with antiseizure medication and of spasticity and dystonia, with neurosurgical intervention for symptomatic enlarging brain cysts.",
+      "Endoscopic treatment of gastrointestinal vascular ectasia, with iron replacement and transfusion for anaemia and management of portal hypertension.",
+      "Management of osteopenia and fragility fractures with attention to poor bone healing.",
+      "Nutritional and growth support given intrauterine growth restriction and failure to thrive.",
+      "Genetic counselling for this autosomal recessive telomere biology disorder, with testing of at-risk family members.",
+      "Multidisciplinary and palliative supportive care coordinating ophthalmology, neurology, gastroenterology and genetics given the progressive course."
     ]
-   ],
-   "caption": "Overview comparison matrix for coats plus syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "coats-plus-syndrome-real-image",
-   "title": "Coats plus syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "coats_plus_syndrome-pathway",
+      "title": "Coats plus syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive telomere biology disorder, also known as cerebroretinal microangiopathy with calcifications and cysts (CRMCC).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Gastrointestinal haemorrhage from vascular ectasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CTC1 sequencing, with STN1 and POT1 or a broader telomere-gene panel if negative, Leucocyte telomere length by flow-FISH, Brain CT and MRI for calcification, leucoencephalopathy and cysts"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Ophthalmic treatment of the Coats-like exudative retinopathy with laser photocoagulation, cryotherapy or anti-VEGF injections to preserve vision."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing Coats plus with Labrune syndrome - the retinal, gastrointestinal and skeletal features and the CTC1 genotype distinguish it"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coats plus syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "coats_plus_syndrome-matrix",
+      "title": "Coats plus syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive telomere biology disorder, also known as cerebroretinal microangiopathy with calcifications and cysts (CRMCC).",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CTC1 sequencing, with STN1 and POT1 or a broader telomere-gene panel if negative, Leucocyte telomere length by flow-FISH, Brain",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Labrune syndrome / leukoencephalopathy with calcifications and cysts (SNORD118) - central-nervous-system-limited, Coats disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Ophthalmic treatment of the Coats-like exudative retinopathy with laser photocoagulation, cryotherapy or anti-VEGF injections to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing Coats plus with Labrune syndrome - the retinal, gastrointestinal and skeletal features and the CTC1 genotype",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coats plus syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Telomere biology disorder and neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coats_plus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CTC1 sequencing, with STN1 and POT1 testing if negative",
+          "cells": [
+            {
+              "text": "Telomere biology disorder genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leucocyte telomere length by flow-FISH",
+          "cells": [
+            {
+              "text": "Telomere length"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain CT and MRI",
+          "cells": [
+            {
+              "text": "Calcification, leucoencephalopathy and cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundoscopy and retinal imaging",
+          "cells": [
+            {
+              "text": "Exudative retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, iron studies and endoscopy",
+          "cells": [
+            {
+              "text": "Gastrointestinal bleeding source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coats_plus_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Labrune syndrome",
+          "cells": [
+            {
+              "text": "Central nervous system-limited leukoencephalopathy with calcifications and cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coats disease",
+          "cells": [
+            {
+              "text": "Isolated, usually unilateral exudative retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Revesz syndrome (TINF2)",
+          "cells": [
+            {
+              "text": "Telomere biology disorder with overlapping features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coats_plus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Laser, cryotherapy or anti-VEGF for exudative retinopathy",
+          "cells": [
+            {
+              "text": "Preserves vision"
+            },
+            {
+              "text": "Ophthalmic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication and neurosurgery",
+          "cells": [
+            {
+              "text": "Seizures, spasticity and dystonia; symptomatic enlarging cysts"
+            },
+            {
+              "text": "Neurological care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic treatment of vascular ectasia",
+          "cells": [
+            {
+              "text": "Iron replacement and transfusion for anaemia"
+            },
+            {
+              "text": "Gastrointestinal bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of osteopenia and fractures",
+          "cells": [
+            {
+              "text": "Attention to poor bone healing"
+            },
+            {
+              "text": "Bone fragility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder; testing of at-risk relatives"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coats_plus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Coats plus syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Coats plus syndrome: exudative retinopathy with intracranial calcification",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (GI bleeding, enlarging cyst, retinal detachment, fractures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for bleeding, raised ICP or retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CTC1 sequencing, telomere length, brain imaging and fundoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic CTC1 or related telomere gene variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Laser, cryotherapy or anti-VEGF to preserve vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Labrune syndrome, Coats disease and Revesz syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication for seizures, spasticity and dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic treatment of vascular ectasia with iron and transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of osteopenia, fractures and portal hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling for autosomal recessive disorder; multidisciplinary care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

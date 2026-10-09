@@ -1,173 +1,460 @@
 {
- "id": "hallermann_streiff_syndrome",
- "name": "Hallermann-Streiff syndrome",
- "aliases": [
-  "oculomandibulofacial syndrome",
-  "Francois dyscephalic syndrome",
-  "Hallermann-Streiff-Francois syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Recognised by a distinctive bird-like face with a thin, beaked nose, small pinched features, micrognathia and frontal bossing",
-   "Congenital cataracts are a cardinal feature, often bilateral, alongside microphthalmia and other ocular abnormalities",
-   "Hypotrichosis (sparse hair) including scanty scalp hair, eyebrows and eyelashes, plus skin atrophy, contributes to a progeroid appearance",
-   "Dental anomalies are prominent, including natal teeth, hypodontia, malformed teeth and malocclusion",
-   "Proportionate short stature is usual and most cases are sporadic, with the molecular basis still incompletely defined",
-   "The small mandible and narrow airway create a real risk of upper airway obstruction, especially in infancy and around anaesthesia",
-   "Management is supportive and multidisciplinary, focusing on ophthalmic care, airway safety and dental management"
+  "id": "hallermann_streiff_syndrome",
+  "name": "Hallermann-Streiff syndrome",
+  "aliases": [
+    "oculomandibulofacial syndrome",
+    "Francois dyscephalic syndrome",
+    "Hallermann-Streiff-Francois syndrome"
   ],
-  "pathophysiology": "Hallermann-Streiff syndrome is a congenital disorder of craniofacial and ectodermal development whose precise molecular cause is not fully established, with most cases occurring sporadically. Abnormal development of the first branchial arch derivatives and midline craniofacial structures produces the characteristic dyscephaly, beaked nose, micrognathia and dental anomalies, while disturbed ocular development gives congenital cataracts and microphthalmia. Involvement of ectodermal tissues accounts for the sparse hair and atrophic skin that lend the progeroid appearance.",
-  "additionalDifferentials": [
-   "Progeroid syndromes (including Hutchinson-Gilford progeria)",
-   "Oculodentodigital dysplasia",
-   "Treacher Collins syndrome (mandibulofacial dysostosis)",
-   "Congenital rubella (cataract and microcephaly)",
-   "Cockayne syndrome",
-   "Other oculomandibulofacial dysostoses"
-  ],
-  "additionalInvestigations": [
-   "Ophthalmic assessment for congenital cataract, microphthalmia and other ocular anomalies",
-   "Craniofacial imaging to characterise the mandible and skull",
-   "Airway evaluation, especially before anaesthesia or sedation",
-   "Dental assessment for natal teeth and other anomalies",
-   "Growth monitoring",
-   "Genetic evaluation to exclude defined progeroid and dysostosis syndromes"
-  ],
-  "redFlags": [
-   "Upper airway obstruction from micrognathia and a narrow airway, particularly in infancy",
-   "Difficult airway during anaesthesia or sedation",
-   "Visual deprivation from dense congenital cataracts requiring timely management",
-   "Feeding difficulty with faltering growth in early life"
-  ],
-  "prognosis": "Intelligence is usually normal and many individuals reach adulthood, but airway problems in infancy, feeding difficulties and visual impairment are important sources of morbidity that require proactive management.",
-  "pitfalls": [
-   "Underestimating the airway risk during anaesthesia because of the small mandible",
-   "Delaying cataract management and risking amblyopia in infancy",
-   "Confusing the progeroid features with a true progeria and giving inaccurate prognosis",
-   "Overlooking natal or malformed teeth that can compromise the airway or feeding"
-  ],
-  "references": [
-   "OMIM / GeneReviews: Hallermann-Streiff Syndrome",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Proactive airway management given micrognathia and a narrow airway, with careful multidisciplinary anaesthetic planning and treatment of obstructive sleep apnoea",
-   "Early ophthalmological assessment with cataract extraction and correction of refractive error to preserve vision",
-   "Nutritional support and feeding assistance for infantile feeding difficulties",
-   "Dental management of natal teeth and other anomalies with regular paediatric dental care",
-   "Growth monitoring and general paediatric surveillance",
-   "Coordinated multidisciplinary care across paediatrics, ophthalmology, ENT, anaesthesia and dentistry",
-   "Genetic evaluation and counselling to confirm the diagnosis and exclude other progeroid and dysostosis syndromes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hallermann_streiff_syndrome-pathway",
-   "title": "Hallermann-Streiff syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Recognised by a distinctive bird-like face with a thin, beaked nose, small pinched features, micrognathia and frontal bossing",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Upper airway obstruction from micrognathia and a narrow airway, particularly in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ophthalmic assessment for congenital cataract, microphthalmia and other ocular anomalies, Craniofacial imaging to characterise the mandible and skull, Airway evaluation, especially before anaesthesia or sedation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Proactive airway management given micrognathia and a narrow airway, with careful multidisciplinary anaesthetic planning and treatment of obstructive sleep apnoea"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating the airway risk during anaesthesia because of the small mandible"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hallermann-streiff syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "hallermann_streiff_syndrome-matrix",
-   "title": "Hallermann-Streiff syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Recognised by a distinctive bird-like face with a thin, beaked nose, small pinched features, micrognathia and frontal bossing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Recognised by a distinctive bird-like face with a thin, beaked nose, small pinched features, micrognathia and frontal bossing",
+      "Congenital cataracts are a cardinal feature, often bilateral, alongside microphthalmia and other ocular abnormalities",
+      "Hypotrichosis (sparse hair) including scanty scalp hair, eyebrows and eyelashes, plus skin atrophy, contributes to a progeroid appearance",
+      "Dental anomalies are prominent, including natal teeth, hypodontia, malformed teeth and malocclusion",
+      "Proportionate short stature is usual and most cases are sporadic, with the molecular basis still incompletely defined",
+      "The small mandible and narrow airway create a real risk of upper airway obstruction, especially in infancy and around anaesthesia",
+      "Management is supportive and multidisciplinary, focusing on ophthalmic care, airway safety and dental management"
     ],
-    [
-     "Key Investigations",
-     "Ophthalmic assessment for congenital cataract, microphthalmia and other ocular anomalies, Craniofacial imaging to characterise",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hallermann-Streiff syndrome is a congenital disorder of craniofacial and ectodermal development whose precise molecular cause is not fully established, with most cases occurring sporadically. Abnormal development of the first branchial arch derivatives and midline craniofacial structures produces the characteristic dyscephaly, beaked nose, micrognathia and dental anomalies, while disturbed ocular development gives congenital cataracts and microphthalmia. Involvement of ectodermal tissues accounts for the sparse hair and atrophic skin that lend the progeroid appearance.",
+    "additionalDifferentials": [
+      "Progeroid syndromes (including Hutchinson-Gilford progeria)",
+      "Oculodentodigital dysplasia",
+      "Treacher Collins syndrome (mandibulofacial dysostosis)",
+      "Congenital rubella (cataract and microcephaly)",
+      "Cockayne syndrome",
+      "Other oculomandibulofacial dysostoses"
     ],
-    [
-     "Primary Differentials",
-     "Progeroid syndromes (including Hutchinson-Gilford progeria), Oculodentodigital dysplasia, Treacher Collins syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ophthalmic assessment for congenital cataract, microphthalmia and other ocular anomalies",
+      "Craniofacial imaging to characterise the mandible and skull",
+      "Airway evaluation, especially before anaesthesia or sedation",
+      "Dental assessment for natal teeth and other anomalies",
+      "Growth monitoring",
+      "Genetic evaluation to exclude defined progeroid and dysostosis syndromes"
     ],
-    [
-     "Management Strategy",
-     "Proactive airway management given micrognathia and a narrow airway, with careful multidisciplinary anaesthetic planning and",
-     "Core treatment modality"
+    "redFlags": [
+      "Upper airway obstruction from micrognathia and a narrow airway, particularly in infancy",
+      "Difficult airway during anaesthesia or sedation",
+      "Visual deprivation from dense congenital cataracts requiring timely management",
+      "Feeding difficulty with faltering growth in early life"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating the airway risk during anaesthesia because of the small mandible",
-     "Prevent diagnostic or management error"
+    "prognosis": "Intelligence is usually normal and many individuals reach adulthood, but airway problems in infancy, feeding difficulties and visual impairment are important sources of morbidity that require proactive management.",
+    "pitfalls": [
+      "Underestimating the airway risk during anaesthesia because of the small mandible",
+      "Delaying cataract management and risking amblyopia in infancy",
+      "Confusing the progeroid features with a true progeria and giving inaccurate prognosis",
+      "Overlooking natal or malformed teeth that can compromise the airway or feeding"
+    ],
+    "references": [
+      "OMIM / GeneReviews: Hallermann-Streiff Syndrome",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Proactive airway management given micrognathia and a narrow airway, with careful multidisciplinary anaesthetic planning and treatment of obstructive sleep apnoea",
+      "Early ophthalmological assessment with cataract extraction and correction of refractive error to preserve vision",
+      "Nutritional support and feeding assistance for infantile feeding difficulties",
+      "Dental management of natal teeth and other anomalies with regular paediatric dental care",
+      "Growth monitoring and general paediatric surveillance",
+      "Coordinated multidisciplinary care across paediatrics, ophthalmology, ENT, anaesthesia and dentistry",
+      "Genetic evaluation and counselling to confirm the diagnosis and exclude other progeroid and dysostosis syndromes"
     ]
-   ],
-   "caption": "Overview comparison matrix for hallermann-streiff syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hallermann-streiff-syndrome-real-image",
-   "title": "Hallermann-Streiff syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hallermann_streiff_syndrome-pathway",
+      "title": "Hallermann-Streiff syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Recognised by a distinctive bird-like face with a thin, beaked nose, small pinched features, micrognathia and frontal bossing",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Upper airway obstruction from micrognathia and a narrow airway, particularly in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ophthalmic assessment for congenital cataract, microphthalmia and other ocular anomalies, Craniofacial imaging to characterise the mandible and skull, Airway evaluation, especially before anaesthesia or sedation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Proactive airway management given micrognathia and a narrow airway, with careful multidisciplinary anaesthetic planning and treatment of obstructive sleep apnoea"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating the airway risk during anaesthesia because of the small mandible"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hallermann-streiff syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hallermann_streiff_syndrome-matrix",
+      "title": "Hallermann-Streiff syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Recognised by a distinctive bird-like face with a thin, beaked nose, small pinched features, micrognathia and frontal bossing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ophthalmic assessment for congenital cataract, microphthalmia and other ocular anomalies, Craniofacial imaging to characterise",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Progeroid syndromes (including Hutchinson-Gilford progeria), Oculodentodigital dysplasia, Treacher Collins syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Proactive airway management given micrognathia and a narrow airway, with careful multidisciplinary anaesthetic planning and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating the airway risk during anaesthesia because of the small mandible",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hallermann-streiff syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hallermann_streiff_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmic assessment",
+          "cells": [
+            {
+              "text": "Congenital cataract and microphthalmia, cardinal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial imaging",
+          "cells": [
+            {
+              "text": "Characterises the mandible and skull"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway evaluation",
+          "cells": [
+            {
+              "text": "Micrognathia and a narrow airway, with upper airway obstruction risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental assessment",
+          "cells": [
+            {
+              "text": "Natal teeth, hypodontia, malformed teeth and malocclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Proportionate short stature is usual"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hallermann_streiff_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Progeroid syndromes (including Hutchinson-Gilford progeria)",
+          "cells": [
+            {
+              "text": "Progeroid appearance from sparse hair and skin atrophy; defined syndromes excluded genetically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital rubella",
+          "cells": [
+            {
+              "text": "Cataract and microcephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treacher Collins syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hallermann_streiff_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Proactive airway management",
+          "cells": [
+            {
+              "text": "Micrognathia and narrow airway, with careful multidisciplinary anaesthetic planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early ophthalmology",
+          "cells": [
+            {
+              "text": "Cataract extraction and refractive correction to preserve vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Feeding assistance for infantile feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental management",
+          "cells": [
+            {
+              "text": "Natal teeth and other anomalies with regular paediatric dental care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "General paediatric surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatrics, ophthalmology, ENT, anaesthesia and dentistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation and counselling",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and excludes other progeroid and dysostosis syndromes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hallermann_streiff_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hallermann-Streiff syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bird-like face, micrognathia and congenital cataract on examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway obstruction, dense cataract, feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: secure the airway with multidisciplinary anaesthetic planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ophthalmic, craniofacial, airway and dental assessment; growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the cardinal features present, with progeroid syndromes excluded genetically?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider progeroid syndromes, oculodentodigital dysplasia or Treacher Collins",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Proactive, multidisciplinary airway management",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early cataract extraction and refractive correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional support, dental care and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic evaluation and counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Airway and vision protected; supportive, multidisciplinary long-term care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

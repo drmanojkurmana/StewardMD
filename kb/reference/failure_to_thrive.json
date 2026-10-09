@@ -1,173 +1,471 @@
 {
- "id": "failure_to_thrive",
- "name": "Failure to Thrive",
- "aliases": [
-  "faltering growth",
-  "growth faltering",
-  "weight faltering"
- ],
- "class": "non_infective",
- "system": "Nutritional/Growth",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Failure to thrive describes inadequate physical growth in a young child, most often identified as weight gain that is poor for age or crosses downward through growth chart percentiles over time.",
-   "A single low measurement is less meaningful than the trajectory of serial measurements plotted on an appropriate growth chart.",
-   "The traditional split into organic and non-organic causes is artificial; many children have mixed contributors, and inadequate caloric intake is the final common pathway in most cases.",
-   "The three broad mechanisms are insufficient intake, inadequate absorption or increased losses, and increased energy requirements, and the history usually distinguishes among them.",
-   "A careful feeding, dietary, developmental, social, and psychosocial history plus observation of a feed often yields more than extensive laboratory testing.",
-   "Investigations should be guided by clues from the history and examination rather than performed as an indiscriminate panel.",
-   "Management prioritises adequate catch-up nutrition while addressing any medical, developmental, feeding, and psychosocial factors, often through a multidisciplinary approach.",
-   "Signs of neglect, abuse, or a threatening environment must be considered, but most children with faltering growth are not victims of maltreatment."
+  "id": "failure_to_thrive",
+  "name": "Failure to Thrive",
+  "aliases": [
+    "faltering growth",
+    "growth faltering",
+    "weight faltering"
   ],
-  "pathophysiology": "Growth requires that energy and nutrient intake exceed the demands of maintenance and activity. Faltering growth arises when this balance is disturbed: intake may be insufficient because of feeding difficulties, poor appetite, incorrect feed preparation, or limited food availability; nutrients may be inadequately absorbed or lost through malabsorption, chronic diarrhoea, or vomiting; or requirements may be raised by chronic illness such as cardiac, respiratory, renal, or inflammatory disease. Prolonged deficits deplete energy stores and, if sustained, can impair linear growth and, in severe or early cases, brain development. Psychosocial and caregiving factors frequently interact with these physiological mechanisms.",
-  "additionalDifferentials": [
-   "Constitutional growth patterns and familial short stature (not true failure to thrive)",
-   "Malabsorption (e.g., coeliac disease, cystic fibrosis)",
-   "Chronic cardiac, respiratory, renal, or gastrointestinal disease",
-   "Endocrine disorders",
-   "Chronic or recurrent infection",
-   "Neglect or psychosocial deprivation"
-  ],
-  "additionalInvestigations": [
-   "Detailed dietary and feeding assessment with observation of a feed",
-   "Plotting of serial weight, length/height, and head circumference",
-   "Targeted first-line tests (full blood count, electrolytes, urinalysis) guided by findings",
-   "Coeliac serology and stool studies when malabsorption is suspected",
-   "Further specific testing directed by history and examination"
-  ],
-  "redFlags": [
-   "Severe or rapidly progressive weight loss or wasting",
-   "Signs of dehydration or micronutrient deficiency",
-   "Developmental regression or neurological signs",
-   "Features suggesting abuse or neglect",
-   "Symptoms or signs pointing to serious underlying organic disease"
-  ],
-  "prognosis": "With timely recognition and adequate nutritional rehabilitation most children achieve catch-up growth and do well, but prolonged or severe undernutrition, especially in infancy, can be associated with lasting effects on growth and neurodevelopment.",
-  "pitfalls": [
-   "Diagnosing failure to thrive from a single measurement rather than the growth trend",
-   "Ordering broad laboratory panels instead of history-directed testing",
-   "Assuming an organic cause and overlooking feeding technique, caloric adequacy, or psychosocial factors",
-   "Mislabelling normal constitutional or genetically small children as failing to thrive"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Nutritional rehabilitation with increased caloric and nutrient intake using energy-dense feeds and a structured feeding plan aimed at catch-up growth",
-   "Dietitian-led feeding support with correction of feed preparation and technique and treatment of feeding difficulties",
-   "Identification and treatment of any underlying organic cause such as coeliac disease, cow's milk protein allergy, gastro-oesophageal reflux or chronic illness",
-   "Addressing psychosocial and caregiving contributors with health-visitor and social support",
-   "Monitoring of serial weight, length or height and head circumference on growth charts, with vigilance for refeeding problems in severe undernutrition",
-   "Multidisciplinary involvement of paediatrics, dietetics, speech and language therapy for feeding, and social care",
-   "Safeguarding assessment where neglect is suspected, and admission or escalation for severe faltering growth or failed community management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "failure_to_thrive-pathway",
-   "title": "Failure to Thrive: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Failure to thrive describes inadequate physical growth in a young child, most often identified as weight gain that is poor for age or crosses downward through growth chart percentiles over time.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or rapidly progressive weight loss or wasting",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed dietary and feeding assessment with observation of a feed, Plotting of serial weight, length/height, and head circumference, Targeted first-line tests (full blood count, electrolytes, urinalysis) guided by findings"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Nutritional rehabilitation with increased caloric and nutrient intake using energy-dense feeds and a structured feeding plan aimed at catch-up growth"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing failure to thrive from a single measurement rather than the growth trend"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of failure to thrive."
-  }
- ],
- "tables": [
-  {
-   "id": "failure_to_thrive-matrix",
-   "title": "Failure to Thrive: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Failure to thrive describes inadequate physical growth in a young child, most often identified as weight gain that is poor for",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutritional/Growth",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Failure to thrive describes inadequate physical growth in a young child, most often identified as weight gain that is poor for age or crosses downward through growth chart percentiles over time.",
+      "A single low measurement is less meaningful than the trajectory of serial measurements plotted on an appropriate growth chart.",
+      "The traditional split into organic and non-organic causes is artificial; many children have mixed contributors, and inadequate caloric intake is the final common pathway in most cases.",
+      "The three broad mechanisms are insufficient intake, inadequate absorption or increased losses, and increased energy requirements, and the history usually distinguishes among them.",
+      "A careful feeding, dietary, developmental, social, and psychosocial history plus observation of a feed often yields more than extensive laboratory testing.",
+      "Investigations should be guided by clues from the history and examination rather than performed as an indiscriminate panel.",
+      "Management prioritises adequate catch-up nutrition while addressing any medical, developmental, feeding, and psychosocial factors, often through a multidisciplinary approach.",
+      "Signs of neglect, abuse, or a threatening environment must be considered, but most children with faltering growth are not victims of maltreatment."
     ],
-    [
-     "Key Investigations",
-     "Detailed dietary and feeding assessment with observation of a feed, Plotting of serial weight, length/height, and head",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Growth requires that energy and nutrient intake exceed the demands of maintenance and activity. Faltering growth arises when this balance is disturbed: intake may be insufficient because of feeding difficulties, poor appetite, incorrect feed preparation, or limited food availability; nutrients may be inadequately absorbed or lost through malabsorption, chronic diarrhoea, or vomiting; or requirements may be raised by chronic illness such as cardiac, respiratory, renal, or inflammatory disease. Prolonged deficits deplete energy stores and, if sustained, can impair linear growth and, in severe or early cases, brain development. Psychosocial and caregiving factors frequently interact with these physiological mechanisms.",
+    "additionalDifferentials": [
+      "Constitutional growth patterns and familial short stature (not true failure to thrive)",
+      "Malabsorption (e.g., coeliac disease, cystic fibrosis)",
+      "Chronic cardiac, respiratory, renal, or gastrointestinal disease",
+      "Endocrine disorders",
+      "Chronic or recurrent infection",
+      "Neglect or psychosocial deprivation"
     ],
-    [
-     "Primary Differentials",
-     "Constitutional growth patterns and familial short stature (not true failure to thrive), Malabsorption (e.g., coeliac disease,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed dietary and feeding assessment with observation of a feed",
+      "Plotting of serial weight, length/height, and head circumference",
+      "Targeted first-line tests (full blood count, electrolytes, urinalysis) guided by findings",
+      "Coeliac serology and stool studies when malabsorption is suspected",
+      "Further specific testing directed by history and examination"
     ],
-    [
-     "Management Strategy",
-     "Nutritional rehabilitation with increased caloric and nutrient intake using energy-dense feeds and a structured feeding plan",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or rapidly progressive weight loss or wasting",
+      "Signs of dehydration or micronutrient deficiency",
+      "Developmental regression or neurological signs",
+      "Features suggesting abuse or neglect",
+      "Symptoms or signs pointing to serious underlying organic disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing failure to thrive from a single measurement rather than the growth trend",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely recognition and adequate nutritional rehabilitation most children achieve catch-up growth and do well, but prolonged or severe undernutrition, especially in infancy, can be associated with lasting effects on growth and neurodevelopment.",
+    "pitfalls": [
+      "Diagnosing failure to thrive from a single measurement rather than the growth trend",
+      "Ordering broad laboratory panels instead of history-directed testing",
+      "Assuming an organic cause and overlooking feeding technique, caloric adequacy, or psychosocial factors",
+      "Mislabelling normal constitutional or genetically small children as failing to thrive"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Nutritional rehabilitation with increased caloric and nutrient intake using energy-dense feeds and a structured feeding plan aimed at catch-up growth",
+      "Dietitian-led feeding support with correction of feed preparation and technique and treatment of feeding difficulties",
+      "Identification and treatment of any underlying organic cause such as coeliac disease, cow's milk protein allergy, gastro-oesophageal reflux or chronic illness",
+      "Addressing psychosocial and caregiving contributors with health-visitor and social support",
+      "Monitoring of serial weight, length or height and head circumference on growth charts, with vigilance for refeeding problems in severe undernutrition",
+      "Multidisciplinary involvement of paediatrics, dietetics, speech and language therapy for feeding, and social care",
+      "Safeguarding assessment where neglect is suspected, and admission or escalation for severe faltering growth or failed community management"
     ]
-   ],
-   "caption": "Overview comparison matrix for failure to thrive."
-  }
- ],
- "diagrams": [
-  {
-   "id": "failure-to-thrive-real-image",
-   "title": "Failure to Thrive: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "failure_to_thrive-pathway",
+      "title": "Failure to Thrive: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Failure to thrive describes inadequate physical growth in a young child, most often identified as weight gain that is poor for age or crosses downward through growth chart percentiles over time.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or rapidly progressive weight loss or wasting",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed dietary and feeding assessment with observation of a feed, Plotting of serial weight, length/height, and head circumference, Targeted first-line tests (full blood count, electrolytes, urinalysis) guided by findings"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Nutritional rehabilitation with increased caloric and nutrient intake using energy-dense feeds and a structured feeding plan aimed at catch-up growth"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing failure to thrive from a single measurement rather than the growth trend"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of failure to thrive."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "failure_to_thrive-matrix",
+      "title": "Failure to Thrive: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Failure to thrive describes inadequate physical growth in a young child, most often identified as weight gain that is poor for",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed dietary and feeding assessment with observation of a feed, Plotting of serial weight, length/height, and head",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Constitutional growth patterns and familial short stature (not true failure to thrive), Malabsorption (e.g., coeliac disease,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Nutritional rehabilitation with increased caloric and nutrient intake using energy-dense feeds and a structured feeding plan",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing failure to thrive from a single measurement rather than the growth trend",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for failure to thrive."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "failure_to_thrive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Feeding and dietary assessment with an observed feed",
+          "cells": [
+            {
+              "text": "Intake and feeding technique"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial weight, length or height and head circumference",
+          "cells": [
+            {
+              "text": "Growth trajectory on the chart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, electrolytes and urinalysis",
+          "cells": [
+            {
+              "text": "Targeted first-line tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and stool studies",
+          "cells": [
+            {
+              "text": "Where malabsorption is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further specific testing",
+          "cells": [
+            {
+              "text": "As directed by history and examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "failure_to_thrive-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Constitutional growth pattern or familial short stature",
+          "cells": [
+            {
+              "text": "Not true failure to thrive; genetically small children are not failing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malabsorption (coeliac disease, cystic fibrosis)",
+          "cells": [
+            {
+              "text": "Confirmed by coeliac serology and stool studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neglect or psychosocial deprivation",
+          "cells": [
+            {
+              "text": "A safeguarding assessment is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "failure_to_thrive-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Energy-dense feeds and a structured plan aimed at catch-up growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietitian-led feeding support",
+          "cells": [
+            {
+              "text": "Feed preparation, technique and feeding difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any underlying organic cause",
+          "cells": [
+            {
+              "text": "Coeliac disease, cow's milk protein allergy, reflux, chronic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial and caregiving support",
+          "cells": [
+            {
+              "text": "Health visitor and social support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Serial growth charts; refeeding vigilance in severe undernutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Paediatrics, dietetics, speech and language therapy and social care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding and escalation",
+          "cells": [
+            {
+              "text": "Where neglect is suspected or community management fails"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "failure_to_thrive-dx-mgmt",
+      "title": "Diagnosis and management of Failure to Thrive",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Poor weight gain across serial measurements in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe wasting, dehydration, developmental regression, abuse or neglect)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Admit or escalate for severe faltering growth; safeguarding assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Observed feed and diet history; growth charts; FBC, electrolytes, urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Inadequate intake, malabsorption or losses identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Targeted tests as history directs; review for a constitutional growth pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Energy-dense nutritional rehabilitation with a structured feeding plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietitian-led feeding support and technique correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat organic causes such as coeliac disease or reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychosocial and caregiving support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial growth monitoring with refeeding vigilance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most achieve catch-up with timely rehabilitation; prolonged undernutrition does worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

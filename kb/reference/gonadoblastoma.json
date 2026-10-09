@@ -1,173 +1,460 @@
 {
- "id": "gonadoblastoma",
- "name": "Gonadoblastoma",
- "aliases": [
-  "gonadoblastoma of dysgenetic gonad",
-  "dysgenetic gonadal tumour",
-  "in situ germ cell neoplasm of streak gonad"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive",
- "specialty": "Paediatric & Reproductive Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A tumour composed of both germ cells and sex cord-stromal elements that arises almost exclusively in dysgenetic gonads containing Y-chromosome material",
-   "Although the lesion itself is considered benign (an in situ germ cell neoplasm), it carries a substantial risk of progression to an invasive malignant germ cell tumour, most often a dysgerminoma",
-   "Classic at-risk settings include complete and partial gonadal dysgenesis with a 46,XY karyotype (Swyer syndrome), mixed gonadal dysgenesis, and Turner syndrome variants carrying Y-chromosome material",
-   "The malignant potential is linked to a locus on the Y chromosome (the gonadoblastoma-on-Y region containing TSPY)",
-   "The streak or dysgenetic gonad is typically non-functional, so patients often present with delayed puberty, primary amenorrhoea, or features of the underlying disorder of sex development",
-   "Because of the malignancy risk, prophylactic removal of dysgenetic Y-bearing gonads (gonadectomy) is recommended, with timing individualised to the specific diagnosis",
-   "Detection of Y-chromosome material on karyotype or molecular testing in a girl with gonadal dysgenesis is the key trigger for considering gonadectomy"
+  "id": "gonadoblastoma",
+  "name": "Gonadoblastoma",
+  "aliases": [
+    "gonadoblastoma of dysgenetic gonad",
+    "dysgenetic gonadal tumour",
+    "in situ germ cell neoplasm of streak gonad"
   ],
-  "pathophysiology": "Gonadoblastoma develops in gonads that have failed to differentiate normally (dysgenetic or streak gonads) when Y-chromosome material is present. Genes on the Y chromosome, particularly within the gonadoblastoma region that includes TSPY, are thought to promote survival and abnormal proliferation of germ cells within a disorganised stromal environment, producing a mixed germ-cell and sex cord-stromal lesion. The tumour is regarded as an in situ neoplasm, but the same germ cells can undergo malignant transformation to an invasive germ cell tumour such as dysgerminoma. The dysgenetic gonad itself produces little or no sex steroid, so affected individuals commonly show hypergonadotropic hypogonadism and the phenotype of their underlying disorder of sex development.",
-  "additionalDifferentials": [
-   "Dysgerminoma or other malignant germ cell tumour of the gonad",
-   "Sex cord-stromal tumour of the ovary or testis",
-   "Streak gonad without tumour in gonadal dysgenesis",
-   "Ovarian germ cell tumour in a phenotypic female",
-   "Other causes of primary amenorrhoea and hypergonadotropic hypogonadism",
-   "Teratoma or mixed germ cell tumour"
-  ],
-  "additionalInvestigations": [
-   "Karyotype and molecular testing for Y-chromosome material in gonadal dysgenesis or disorder of sex development",
-   "Serum LH and FSH (typically elevated) with sex-steroid levels (low)",
-   "Germ cell tumour markers (for example lactate dehydrogenase, alpha-fetoprotein, and beta-hCG) to assess for malignant transformation",
-   "Pelvic and abdominal imaging to localise gonads and detect a mass",
-   "Histological examination of removed gonadal tissue to confirm the diagnosis and exclude invasive tumour",
-   "Assessment for the wider features of the underlying disorder of sex development"
-  ],
-  "redFlags": [
-   "Identification of Y-chromosome material in a patient with a dysgenetic or streak gonad, indicating malignancy risk and the need to consider gonadectomy",
-   "A rapidly enlarging pelvic or abdominal mass suggesting invasive germ cell malignancy",
-   "Rising germ cell tumour markers",
-   "Signs of metastatic disease such as lymphadenopathy or systemic symptoms"
-  ],
-  "prognosis": "When dysgenetic Y-bearing gonads are removed before malignant transformation, the outlook is excellent and the risk of invasive germ cell tumour is essentially eliminated; if an invasive tumour has already developed, prognosis depends on tumour type and stage, though dysgerminoma is generally chemosensitive with favourable outcomes.",
-  "pitfalls": [
-   "Failing to karyotype patients with gonadal dysgenesis and therefore missing occult Y-chromosome material that mandates gonadectomy",
-   "Delaying prophylactic gonadectomy in a Y-bearing dysgenetic gonad and allowing malignant progression",
-   "Assuming a streak gonad carries no tumour risk irrespective of karyotype",
-   "Overlooking the diagnosis in a phenotypic female presenting only with primary amenorrhoea",
-   "Neglecting hormone replacement and the broader care needs of the underlying disorder of sex development after gonadectomy"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform prophylactic bilateral gonadectomy of dysgenetic Y-bearing gonads to prevent malignant transformation, with timing individualised to the underlying diagnosis",
-   "Where an invasive germ cell tumour such as dysgerminoma has developed, treat with oncological surgery and platinum-based chemotherapy according to type and stage",
-   "Provide oestrogen and progestogen hormone replacement to induce and maintain puberty and protect bone health after gonadectomy",
-   "Identify at-risk individuals with karyotyping and molecular testing for Y-chromosome material in gonadal dysgenesis or disorder of sex development",
-   "Undertake surveillance with germ cell tumour markers (lactate dehydrogenase, alpha-fetoprotein, beta-hCG) and imaging where gonads are retained or before surgery",
-   "Coordinate multidisciplinary disorder-of-sex-development, endocrine, gynaecology and oncology care with psychological support and genetic counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gonadoblastoma-pathway",
-   "title": "Gonadoblastoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A tumour composed of both germ cells and sex cord-stromal elements that arises almost exclusively in dysgenetic gonads containing Y-chromosome material",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Identification of Y-chromosome material in a patient with a dysgenetic or streak gonad, indicating malignancy risk and the need to consider gonadectomy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Karyotype and molecular testing for Y-chromosome material in gonadal dysgenesis or disorder of sex development, Serum LH and FSH (typically elevated) with sex-steroid levels (low), Germ cell tumour markers (for example"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform prophylactic bilateral gonadectomy of dysgenetic Y-bearing gonads to prevent malignant transformation, with timing individualised to the underlying diagnosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to karyotype patients with gonadal dysgenesis and therefore missing occult Y-chromosome material that mandates gonadectomy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gonadoblastoma."
-  }
- ],
- "tables": [
-  {
-   "id": "gonadoblastoma-matrix",
-   "title": "Gonadoblastoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A tumour composed of both germ cells and sex cord-stromal elements that arises almost exclusively in dysgenetic gonads containing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive",
+  "specialty": "Paediatric & Reproductive Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A tumour composed of both germ cells and sex cord-stromal elements that arises almost exclusively in dysgenetic gonads containing Y-chromosome material",
+      "Although the lesion itself is considered benign (an in situ germ cell neoplasm), it carries a substantial risk of progression to an invasive malignant germ cell tumour, most often a dysgerminoma",
+      "Classic at-risk settings include complete and partial gonadal dysgenesis with a 46,XY karyotype (Swyer syndrome), mixed gonadal dysgenesis, and Turner syndrome variants carrying Y-chromosome material",
+      "The malignant potential is linked to a locus on the Y chromosome (the gonadoblastoma-on-Y region containing TSPY)",
+      "The streak or dysgenetic gonad is typically non-functional, so patients often present with delayed puberty, primary amenorrhoea, or features of the underlying disorder of sex development",
+      "Because of the malignancy risk, prophylactic removal of dysgenetic Y-bearing gonads (gonadectomy) is recommended, with timing individualised to the specific diagnosis",
+      "Detection of Y-chromosome material on karyotype or molecular testing in a girl with gonadal dysgenesis is the key trigger for considering gonadectomy"
     ],
-    [
-     "Key Investigations",
-     "Karyotype and molecular testing for Y-chromosome material in gonadal dysgenesis or disorder of sex development, Serum LH and FSH",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gonadoblastoma develops in gonads that have failed to differentiate normally (dysgenetic or streak gonads) when Y-chromosome material is present. Genes on the Y chromosome, particularly within the gonadoblastoma region that includes TSPY, are thought to promote survival and abnormal proliferation of germ cells within a disorganised stromal environment, producing a mixed germ-cell and sex cord-stromal lesion. The tumour is regarded as an in situ neoplasm, but the same germ cells can undergo malignant transformation to an invasive germ cell tumour such as dysgerminoma. The dysgenetic gonad itself produces little or no sex steroid, so affected individuals commonly show hypergonadotropic hypogonadism and the phenotype of their underlying disorder of sex development.",
+    "additionalDifferentials": [
+      "Dysgerminoma or other malignant germ cell tumour of the gonad",
+      "Sex cord-stromal tumour of the ovary or testis",
+      "Streak gonad without tumour in gonadal dysgenesis",
+      "Ovarian germ cell tumour in a phenotypic female",
+      "Other causes of primary amenorrhoea and hypergonadotropic hypogonadism",
+      "Teratoma or mixed germ cell tumour"
     ],
-    [
-     "Primary Differentials",
-     "Dysgerminoma or other malignant germ cell tumour of the gonad, Sex cord-stromal tumour of the ovary or testis, Streak gonad",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Karyotype and molecular testing for Y-chromosome material in gonadal dysgenesis or disorder of sex development",
+      "Serum LH and FSH (typically elevated) with sex-steroid levels (low)",
+      "Germ cell tumour markers (for example lactate dehydrogenase, alpha-fetoprotein, and beta-hCG) to assess for malignant transformation",
+      "Pelvic and abdominal imaging to localise gonads and detect a mass",
+      "Histological examination of removed gonadal tissue to confirm the diagnosis and exclude invasive tumour",
+      "Assessment for the wider features of the underlying disorder of sex development"
     ],
-    [
-     "Management Strategy",
-     "Perform prophylactic bilateral gonadectomy of dysgenetic Y-bearing gonads to prevent malignant transformation, with timing",
-     "Core treatment modality"
+    "redFlags": [
+      "Identification of Y-chromosome material in a patient with a dysgenetic or streak gonad, indicating malignancy risk and the need to consider gonadectomy",
+      "A rapidly enlarging pelvic or abdominal mass suggesting invasive germ cell malignancy",
+      "Rising germ cell tumour markers",
+      "Signs of metastatic disease such as lymphadenopathy or systemic symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to karyotype patients with gonadal dysgenesis and therefore missing occult Y-chromosome material that mandates gonadectomy",
-     "Prevent diagnostic or management error"
+    "prognosis": "When dysgenetic Y-bearing gonads are removed before malignant transformation, the outlook is excellent and the risk of invasive germ cell tumour is essentially eliminated; if an invasive tumour has already developed, prognosis depends on tumour type and stage, though dysgerminoma is generally chemosensitive with favourable outcomes.",
+    "pitfalls": [
+      "Failing to karyotype patients with gonadal dysgenesis and therefore missing occult Y-chromosome material that mandates gonadectomy",
+      "Delaying prophylactic gonadectomy in a Y-bearing dysgenetic gonad and allowing malignant progression",
+      "Assuming a streak gonad carries no tumour risk irrespective of karyotype",
+      "Overlooking the diagnosis in a phenotypic female presenting only with primary amenorrhoea",
+      "Neglecting hormone replacement and the broader care needs of the underlying disorder of sex development after gonadectomy"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform prophylactic bilateral gonadectomy of dysgenetic Y-bearing gonads to prevent malignant transformation, with timing individualised to the underlying diagnosis",
+      "Where an invasive germ cell tumour such as dysgerminoma has developed, treat with oncological surgery and platinum-based chemotherapy according to type and stage",
+      "Provide oestrogen and progestogen hormone replacement to induce and maintain puberty and protect bone health after gonadectomy",
+      "Identify at-risk individuals with karyotyping and molecular testing for Y-chromosome material in gonadal dysgenesis or disorder of sex development",
+      "Undertake surveillance with germ cell tumour markers (lactate dehydrogenase, alpha-fetoprotein, beta-hCG) and imaging where gonads are retained or before surgery",
+      "Coordinate multidisciplinary disorder-of-sex-development, endocrine, gynaecology and oncology care with psychological support and genetic counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for gonadoblastoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gonadoblastoma-real-image",
-   "title": "Gonadoblastoma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "gonadoblastoma-pathway",
+      "title": "Gonadoblastoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A tumour composed of both germ cells and sex cord-stromal elements that arises almost exclusively in dysgenetic gonads containing Y-chromosome material",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Identification of Y-chromosome material in a patient with a dysgenetic or streak gonad, indicating malignancy risk and the need to consider gonadectomy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Karyotype and molecular testing for Y-chromosome material in gonadal dysgenesis or disorder of sex development, Serum LH and FSH (typically elevated) with sex-steroid levels (low), Germ cell tumour markers (for example"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform prophylactic bilateral gonadectomy of dysgenetic Y-bearing gonads to prevent malignant transformation, with timing individualised to the underlying diagnosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to karyotype patients with gonadal dysgenesis and therefore missing occult Y-chromosome material that mandates gonadectomy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gonadoblastoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gonadoblastoma-matrix",
+      "title": "Gonadoblastoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A tumour composed of both germ cells and sex cord-stromal elements that arises almost exclusively in dysgenetic gonads containing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Karyotype and molecular testing for Y-chromosome material in gonadal dysgenesis or disorder of sex development, Serum LH and FSH",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dysgerminoma or other malignant germ cell tumour of the gonad, Sex cord-stromal tumour of the ovary or testis, Streak gonad",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform prophylactic bilateral gonadectomy of dysgenetic Y-bearing gonads to prevent malignant transformation, with timing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to karyotype patients with gonadal dysgenesis and therefore missing occult Y-chromosome material that mandates gonadectomy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gonadoblastoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gonadoblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype and molecular testing for Y-chromosome material",
+          "cells": [
+            {
+              "text": "Y-chromosome material in gonadal dysgenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum LH and FSH with sex-steroid levels",
+          "cells": [
+            {
+              "text": "Typically elevated gonadotropins, low sex steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germ cell tumour markers: LDH, alpha-fetoprotein, beta-hCG",
+          "cells": [
+            {
+              "text": "Malignant germ cell features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic and abdominal imaging",
+          "cells": [
+            {
+              "text": "Localises gonads and detects a mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of removed gonadal tissue",
+          "cells": [
+            {
+              "text": "Confirms gonadoblastoma and excludes invasive tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for wider disorder of sex development features",
+          "cells": [
+            {
+              "text": "Associated features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gonadoblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dysgerminoma or other malignant germ cell tumour",
+          "cells": [
+            {
+              "text": "Invasive tumour that histology must exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Streak gonad without tumour",
+          "cells": [
+            {
+              "text": "Gonadal dysgenesis without neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Teratoma or mixed germ cell tumour",
+          "cells": [
+            {
+              "text": "Mixed germ cell elements on histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gonadoblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylactic bilateral gonadectomy",
+          "cells": [
+            {
+              "text": "Dysgenetic Y-bearing gonads, to prevent malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncological treatment if invasive tumour is found",
+          "cells": [
+            {
+              "text": "Surgery and platinum-based chemotherapy for dysgerminoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Oestrogen and progestogen to induce and maintain puberty and protect bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotyping",
+          "cells": [
+            {
+              "text": "Molecular testing for Y-chromosome material in gonadal dysgenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Germ cell tumour markers and imaging where gonads remain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Disorder of sex development, endocrine, gynaecology and oncology teams with psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gonadoblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Gonadoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gonadoblastoma: gonadal dysgenesis with Y-chromosome material",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Y material, rapidly enlarging mass, rising markers)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncological review for a rapidly enlarging pelvic mass or rising markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype with Y-chromosome testing, gonadotropins, germ cell markers and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology of removed gonadal tissue confirm gonadoblastoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider streak gonad, dysgerminoma or other germ cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic bilateral gonadectomy of Y-bearing dysgenetic gonads",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oncological surgery and chemotherapy if an invasive tumour is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oestrogen and progestogen replacement to induce puberty and protect bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Germ cell tumour marker and imaging surveillance where gonads remain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "When Y-bearing gonads are removed before malignant change, the outlook is excellent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

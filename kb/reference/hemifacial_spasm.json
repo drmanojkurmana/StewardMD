@@ -1,169 +1,427 @@
 {
- "id": "hemifacial_spasm",
- "name": "Hemifacial spasm",
- "aliases": [
-  "HFS",
-  "facial hemispasm"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A movement disorder of involuntary, unilateral, irregular twitching of muscles innervated by the facial nerve, usually beginning around the eye and spreading over time to the lower face",
-   "It is typically unilateral and, unlike many other facial movement disorders, can persist during sleep",
-   "The most common cause is vascular compression of the facial nerve at its root exit zone from the brainstem, often by an ectatic or aberrant artery",
-   "Secondary causes include tumours, vascular malformations, and demyelinating or other lesions affecting the facial nerve pathway, which imaging helps exclude",
-   "Contraction of the frontalis and platysma together, or elevation of the eyebrow with eye closure (the 'other Babinski' sign), supports the diagnosis",
-   "It should be distinguished from blepharospasm, which is bilateral and involves only eye closure, and from facial myokymia and tics",
-   "MRI, often with vascular sequences, is used to evaluate for a compressive vessel or structural lesion along the nerve",
-   "Treatment principles include botulinum toxin injections as first-line symptomatic therapy and microvascular decompression surgery for suitable candidates seeking a durable cure"
+  "id": "hemifacial_spasm",
+  "name": "Hemifacial spasm",
+  "aliases": [
+    "HFS",
+    "facial hemispasm"
   ],
-  "pathophysiology": "Hemifacial spasm is usually caused by pulsatile compression of the facial nerve at its root exit zone from the brainstem, most often by an aberrant or ectatic blood vessel. Chronic compression is thought to cause focal demyelination and ephaptic (cross) transmission between nerve fibres, together with hyperexcitability of the facial motor nucleus, generating spontaneous and spreading involuntary contractions. Secondary cases result from any lesion irritating the nerve along its course, and the pathophysiological common pathway is abnormal facial nerve excitability.",
-  "additionalDifferentials": [
-   "Blepharospasm and other focal dystonias",
-   "Facial myokymia",
-   "Facial tics and functional facial movements",
-   "Post-facial-palsy synkinesis",
-   "Partial motor seizures involving the face"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI with attention to the facial nerve root and vascular structures",
-   "Electrophysiological testing showing lateral spread response where diagnosis is uncertain",
-   "Evaluation for secondary structural or demyelinating causes when features are atypical",
-   "Clinical assessment to differentiate from blepharospasm and synkinesis"
-  ],
-  "redFlags": [
-   "Additional cranial nerve deficits or other neurological signs suggesting a structural posterior fossa lesion",
-   "Rapid progression or bilateral involvement warranting reassessment",
-   "Facial weakness or sensory change accompanying the spasm",
-   "Features suggesting a tumour or vascular malformation on imaging"
-  ],
-  "prognosis": "Hemifacial spasm is typically chronic and does not resolve spontaneously, but it is not life-threatening; symptoms are well controlled with repeated botulinum toxin injections, and microvascular decompression offers a lasting cure in appropriately selected patients.",
-  "pitfalls": [
-   "Confusing it with bilateral blepharospasm and choosing the wrong treatment approach",
-   "Failing to image for a compressive vessel or secondary lesion",
-   "Overlooking the diagnostic clue that spasms may persist during sleep",
-   "Not recognising post-palsy synkinesis, which can mimic hemifacial spasm"
-  ],
-  "references": [
-   "Bradley's Neurology in Clinical Practice",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line symptomatic control with repeated botulinum toxin injections into the affected facial muscles, which are effective and well tolerated",
-   "Offer microvascular decompression of the facial nerve root exit zone as a potentially curative procedure in appropriately selected, fit patients",
-   "Trial oral agents such as carbamazepine, baclofen or clonazepam where injections are declined or as an adjunct, though these are less effective",
-   "Image with MRI focused on the facial nerve and vascular structures to identify the offending vessel and exclude a secondary tumour or demyelinating lesion",
-   "Distinguish from blepharospasm, facial myokymia and tics, using electrophysiology showing the lateral-spread response where the diagnosis is uncertain",
-   "Refer to neurology and neurosurgery, and reassure the patient that the condition, though chronic, is not life-threatening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hemifacial_spasm-pathway",
-   "title": "Hemifacial spasm: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A movement disorder of involuntary, unilateral, irregular twitching of muscles innervated by the facial nerve, usually beginning around the eye and spreading over time to the lower face",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Additional cranial nerve deficits or other neurological signs suggesting a structural posterior fossa lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI with attention to the facial nerve root and vascular structures, Electrophysiological testing showing lateral spread response where diagnosis is uncertain, Evaluation for secondary structural or demyelinating"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line symptomatic control with repeated botulinum toxin injections into the affected facial muscles, which are effective and well tolerated"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with bilateral blepharospasm and choosing the wrong treatment approach"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hemifacial spasm."
-  }
- ],
- "tables": [
-  {
-   "id": "hemifacial_spasm-matrix",
-   "title": "Hemifacial spasm: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A movement disorder of involuntary, unilateral, irregular twitching of muscles innervated by the facial nerve, usually beginning",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A movement disorder of involuntary, unilateral, irregular twitching of muscles innervated by the facial nerve, usually beginning around the eye and spreading over time to the lower face",
+      "It is typically unilateral and, unlike many other facial movement disorders, can persist during sleep",
+      "The most common cause is vascular compression of the facial nerve at its root exit zone from the brainstem, often by an ectatic or aberrant artery",
+      "Secondary causes include tumours, vascular malformations, and demyelinating or other lesions affecting the facial nerve pathway, which imaging helps exclude",
+      "Contraction of the frontalis and platysma together, or elevation of the eyebrow with eye closure (the 'other Babinski' sign), supports the diagnosis",
+      "It should be distinguished from blepharospasm, which is bilateral and involves only eye closure, and from facial myokymia and tics",
+      "MRI, often with vascular sequences, is used to evaluate for a compressive vessel or structural lesion along the nerve",
+      "Treatment principles include botulinum toxin injections as first-line symptomatic therapy and microvascular decompression surgery for suitable candidates seeking a durable cure"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI with attention to the facial nerve root and vascular structures, Electrophysiological testing showing lateral spread",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hemifacial spasm is usually caused by pulsatile compression of the facial nerve at its root exit zone from the brainstem, most often by an aberrant or ectatic blood vessel. Chronic compression is thought to cause focal demyelination and ephaptic (cross) transmission between nerve fibres, together with hyperexcitability of the facial motor nucleus, generating spontaneous and spreading involuntary contractions. Secondary cases result from any lesion irritating the nerve along its course, and the pathophysiological common pathway is abnormal facial nerve excitability.",
+    "additionalDifferentials": [
+      "Blepharospasm and other focal dystonias",
+      "Facial myokymia",
+      "Facial tics and functional facial movements",
+      "Post-facial-palsy synkinesis",
+      "Partial motor seizures involving the face"
     ],
-    [
-     "Primary Differentials",
-     "Blepharospasm and other focal dystonias, Facial myokymia, Facial tics and functional facial movements",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI with attention to the facial nerve root and vascular structures",
+      "Electrophysiological testing showing lateral spread response where diagnosis is uncertain",
+      "Evaluation for secondary structural or demyelinating causes when features are atypical",
+      "Clinical assessment to differentiate from blepharospasm and synkinesis"
     ],
-    [
-     "Management Strategy",
-     "First-line symptomatic control with repeated botulinum toxin injections into the affected facial muscles, which are effective and",
-     "Core treatment modality"
+    "redFlags": [
+      "Additional cranial nerve deficits or other neurological signs suggesting a structural posterior fossa lesion",
+      "Rapid progression or bilateral involvement warranting reassessment",
+      "Facial weakness or sensory change accompanying the spasm",
+      "Features suggesting a tumour or vascular malformation on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with bilateral blepharospasm and choosing the wrong treatment approach",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hemifacial spasm is typically chronic and does not resolve spontaneously, but it is not life-threatening; symptoms are well controlled with repeated botulinum toxin injections, and microvascular decompression offers a lasting cure in appropriately selected patients.",
+    "pitfalls": [
+      "Confusing it with bilateral blepharospasm and choosing the wrong treatment approach",
+      "Failing to image for a compressive vessel or secondary lesion",
+      "Overlooking the diagnostic clue that spasms may persist during sleep",
+      "Not recognising post-palsy synkinesis, which can mimic hemifacial spasm"
+    ],
+    "references": [
+      "Bradley's Neurology in Clinical Practice",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line symptomatic control with repeated botulinum toxin injections into the affected facial muscles, which are effective and well tolerated",
+      "Offer microvascular decompression of the facial nerve root exit zone as a potentially curative procedure in appropriately selected, fit patients",
+      "Trial oral agents such as carbamazepine, baclofen or clonazepam where injections are declined or as an adjunct, though these are less effective",
+      "Image with MRI focused on the facial nerve and vascular structures to identify the offending vessel and exclude a secondary tumour or demyelinating lesion",
+      "Distinguish from blepharospasm, facial myokymia and tics, using electrophysiology showing the lateral-spread response where the diagnosis is uncertain",
+      "Refer to neurology and neurosurgery, and reassure the patient that the condition, though chronic, is not life-threatening"
     ]
-   ],
-   "caption": "Overview comparison matrix for hemifacial spasm."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hemifacial-spasm-real-image",
-   "title": "Hemifacial spasm: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hemifacial_spasm-pathway",
+      "title": "Hemifacial spasm: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A movement disorder of involuntary, unilateral, irregular twitching of muscles innervated by the facial nerve, usually beginning around the eye and spreading over time to the lower face",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Additional cranial nerve deficits or other neurological signs suggesting a structural posterior fossa lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI with attention to the facial nerve root and vascular structures, Electrophysiological testing showing lateral spread response where diagnosis is uncertain, Evaluation for secondary structural or demyelinating"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line symptomatic control with repeated botulinum toxin injections into the affected facial muscles, which are effective and well tolerated"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with bilateral blepharospasm and choosing the wrong treatment approach"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hemifacial spasm."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hemifacial_spasm-matrix",
+      "title": "Hemifacial spasm: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A movement disorder of involuntary, unilateral, irregular twitching of muscles innervated by the facial nerve, usually beginning",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI with attention to the facial nerve root and vascular structures, Electrophysiological testing showing lateral spread",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Blepharospasm and other focal dystonias, Facial myokymia, Facial tics and functional facial movements",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line symptomatic control with repeated botulinum toxin injections into the affected facial muscles, which are effective and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with bilateral blepharospasm and choosing the wrong treatment approach",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hemifacial spasm."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemifacial_spasm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI focused on the facial nerve and vascular structures",
+          "cells": [
+            {
+              "text": "Offending vessel at the root exit zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiology with lateral spread response",
+          "cells": [
+            {
+              "text": "Used where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for structural or demyelinating causes",
+          "cells": [
+            {
+              "text": "Used when features are atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment",
+          "cells": [
+            {
+              "text": "Differentiates from blepharospasm and synkinesis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemifacial_spasm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Blepharospasm",
+          "cells": [
+            {
+              "text": "Bilateral and involves only eye closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial myokymia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial tics or functional facial movements",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemifacial_spasm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin injections",
+          "cells": [
+            {
+              "text": "First-line symptomatic control, repeated into the affected facial muscles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular decompression",
+          "cells": [
+            {
+              "text": "Of the facial nerve root exit zone; potentially curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral agents",
+          "cells": [
+            {
+              "text": "Carbamazepine, baclofen or clonazepam, where injections are declined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the facial nerve",
+          "cells": [
+            {
+              "text": "Identifies the offending vessel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiology",
+          "cells": [
+            {
+              "text": "Lateral spread response, to distinguish from blepharospasm, myokymia and tics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and neurosurgery referral",
+          "cells": [
+            {
+              "text": "Reassure that the condition, though chronic, is benign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemifacial_spasm-dx-mgmt",
+      "title": "Diagnosis and management of Hemifacial spasm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Involuntary unilateral twitching of muscles supplied by the facial nerve",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Other cranial nerve deficits, rapid progression or bilateral involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: MRI for tumour or vascular malformation; neurosurgery referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI focused on the facial nerve; electrophysiology for the lateral spread response",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the spasm unilateral, and secondary causes excluded on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider blepharospasm, facial myokymia, tics or synkinesis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Repeated botulinum toxin injections as first-line symptomatic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral agents such as carbamazepine, baclofen or clonazepam if injections are declined",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Microvascular decompression of the facial nerve root exit zone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Symptoms controlled by injections; decompression can be curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,473 @@
 {
- "id": "epidermolysis_bullosa_simplex",
- "name": "Epidermolysis bullosa simplex",
- "aliases": [
-  "EBS",
-  "KRT5",
-  "KRT14",
-  "keratin 5/14 mutation",
-  "intraepidermal epidermolysis bullosa"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest and generally mildest form of inherited epidermolysis bullosa, most often autosomal dominant and caused by mutations in the basal keratins KRT5 and KRT14",
-   "Blistering occurs within the basal keratinocytes of the epidermis, so the cleavage plane is intraepidermal (above the basement membrane)",
-   "Because the split is superficial, blisters tend to heal without scarring or milia, unlike the dystrophic form",
-   "Trauma and friction, especially on the hands and feet, provoke blistering, and symptoms are often worse in warm weather",
-   "A localised variant affecting mainly the palms and soles and more widespread generalised variants are recognised, with severe forms showing clustered (herpetiform) blistering",
-   "Diagnosis is confirmed by immunofluorescence antigen mapping and electron microscopy locating the cleavage plane, with molecular genetic testing",
-   "Management is supportive, centred on protecting skin from friction and trauma, wound care, avoidance of overheating, and prevention of secondary infection"
+  "id": "epidermolysis_bullosa_simplex",
+  "name": "Epidermolysis bullosa simplex",
+  "aliases": [
+    "EBS",
+    "KRT5",
+    "KRT14",
+    "keratin 5/14 mutation",
+    "intraepidermal epidermolysis bullosa"
   ],
-  "pathophysiology": "Epidermolysis bullosa simplex is a disorder of the mechanical integrity of the basal layer of the epidermis. Keratins 5 and 14 assemble into the intermediate filament network that gives basal keratinocytes their structural resilience; pathogenic mutations, usually dominant-negative, produce a defective keratin cytoskeleton that cannot withstand mechanical stress. As a result, minor friction or trauma causes the basal cells to rupture and split, so blister formation occurs within the epidermis above the dermo-epidermal junction. Because the basement membrane and dermis remain intact, healing generally proceeds without the scarring characteristic of deeper cleavage-plane disease.",
-  "additionalDifferentials": [
-   "Junctional epidermolysis bullosa",
-   "Dystrophic epidermolysis bullosa",
-   "Bullous impetigo and staphylococcal scalded skin syndrome",
-   "Friction blisters and other mechanobullous conditions",
-   "Autoimmune blistering diseases such as bullous pemphigoid",
-   "Epidermolytic ichthyosis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with immunofluorescence antigen mapping to localise the cleavage plane",
-   "Transmission electron microscopy of a fresh blister edge",
-   "Molecular genetic testing of KRT5 and KRT14",
-   "Swabs of blisters or eroded skin when secondary infection is suspected",
-   "Family history assessment and genetic counselling",
-   "Assessment for extracutaneous involvement in severe subtypes"
-  ],
-  "redFlags": [
-   "Extensive blistering or erosions with signs of secondary infection or sepsis",
-   "Severe generalised involvement in a neonate, prompting reassessment of the subtype",
-   "Failure to thrive or feeding difficulty if mucosal involvement occurs in severe variants",
-   "Rapidly spreading skin loss suggesting an alternative severe blistering diagnosis"
-  ],
-  "prognosis": "Most forms, particularly the localised variant, are compatible with a normal life expectancy and improve after childhood, though severe generalised subtypes cause more troublesome blistering; because the cleavage plane is superficial, healing is usually without scarring.",
-  "pitfalls": [
-   "Assuming all epidermolysis bullosa scars, when the simplex form typically heals without scarring",
-   "Failing to distinguish it from junctional and dystrophic forms, which have a worse prognosis and deeper cleavage plane",
-   "Mistaking neonatal blistering for infection such as staphylococcal scalded skin syndrome",
-   "Neglecting measures to reduce friction and overheating that precipitate blistering",
-   "Overlooking secondary bacterial infection of eroded skin"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Minimise friction and trauma with soft cushioned footwear, protective padding and measures to stay cool, since heat and mechanical stress provoke blistering",
-   "Provide wound care by lancing and draining tense blisters and applying non-adherent dressings, with healing usually free of scarring given the superficial cleavage plane",
-   "Treat palmoplantar hyperkeratosis and hyperhidrosis with keratolytics, topical aluminium chloride antiperspirants or botulinum toxin",
-   "Control infection by swabbing eroded skin and treating secondary bacterial colonisation",
-   "Involve podiatry and foot care to reduce plantar blistering and callus",
-   "Offer genetic counselling for the autosomal dominant KRT5/KRT14 inheritance and confirm the subtype by antigen mapping and molecular testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "epidermolysis_bullosa_simplex-pathway",
-   "title": "Epidermolysis bullosa simplex: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest and generally mildest form of inherited epidermolysis bullosa, most often autosomal dominant and caused by mutations in the basal keratins KRT5 and KRT14",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive blistering or erosions with signs of secondary infection or sepsis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with immunofluorescence antigen mapping to localise the cleavage plane, Transmission electron microscopy of a fresh blister edge, Molecular genetic testing of KRT5 and KRT14"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Minimise friction and trauma with soft cushioned footwear, protective padding and measures to stay cool, since heat and mechanical stress provoke blistering"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all epidermolysis bullosa scars, when the simplex form typically heals without scarring"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of epidermolysis bullosa simplex."
-  }
- ],
- "tables": [
-  {
-   "id": "epidermolysis_bullosa_simplex-matrix",
-   "title": "Epidermolysis bullosa simplex: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest and generally mildest form of inherited epidermolysis bullosa, most often autosomal dominant and caused by",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest and generally mildest form of inherited epidermolysis bullosa, most often autosomal dominant and caused by mutations in the basal keratins KRT5 and KRT14",
+      "Blistering occurs within the basal keratinocytes of the epidermis, so the cleavage plane is intraepidermal (above the basement membrane)",
+      "Because the split is superficial, blisters tend to heal without scarring or milia, unlike the dystrophic form",
+      "Trauma and friction, especially on the hands and feet, provoke blistering, and symptoms are often worse in warm weather",
+      "A localised variant affecting mainly the palms and soles and more widespread generalised variants are recognised, with severe forms showing clustered (herpetiform) blistering",
+      "Diagnosis is confirmed by immunofluorescence antigen mapping and electron microscopy locating the cleavage plane, with molecular genetic testing",
+      "Management is supportive, centred on protecting skin from friction and trauma, wound care, avoidance of overheating, and prevention of secondary infection"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with immunofluorescence antigen mapping to localise the cleavage plane, Transmission electron microscopy of a fresh",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Epidermolysis bullosa simplex is a disorder of the mechanical integrity of the basal layer of the epidermis. Keratins 5 and 14 assemble into the intermediate filament network that gives basal keratinocytes their structural resilience; pathogenic mutations, usually dominant-negative, produce a defective keratin cytoskeleton that cannot withstand mechanical stress. As a result, minor friction or trauma causes the basal cells to rupture and split, so blister formation occurs within the epidermis above the dermo-epidermal junction. Because the basement membrane and dermis remain intact, healing generally proceeds without the scarring characteristic of deeper cleavage-plane disease.",
+    "additionalDifferentials": [
+      "Junctional epidermolysis bullosa",
+      "Dystrophic epidermolysis bullosa",
+      "Bullous impetigo and staphylococcal scalded skin syndrome",
+      "Friction blisters and other mechanobullous conditions",
+      "Autoimmune blistering diseases such as bullous pemphigoid",
+      "Epidermolytic ichthyosis"
     ],
-    [
-     "Primary Differentials",
-     "Junctional epidermolysis bullosa, Dystrophic epidermolysis bullosa, Bullous impetigo and staphylococcal scalded skin syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with immunofluorescence antigen mapping to localise the cleavage plane",
+      "Transmission electron microscopy of a fresh blister edge",
+      "Molecular genetic testing of KRT5 and KRT14",
+      "Swabs of blisters or eroded skin when secondary infection is suspected",
+      "Family history assessment and genetic counselling",
+      "Assessment for extracutaneous involvement in severe subtypes"
     ],
-    [
-     "Management Strategy",
-     "Minimise friction and trauma with soft cushioned footwear, protective padding and measures to stay cool, since heat and",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive blistering or erosions with signs of secondary infection or sepsis",
+      "Severe generalised involvement in a neonate, prompting reassessment of the subtype",
+      "Failure to thrive or feeding difficulty if mucosal involvement occurs in severe variants",
+      "Rapidly spreading skin loss suggesting an alternative severe blistering diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all epidermolysis bullosa scars, when the simplex form typically heals without scarring",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most forms, particularly the localised variant, are compatible with a normal life expectancy and improve after childhood, though severe generalised subtypes cause more troublesome blistering; because the cleavage plane is superficial, healing is usually without scarring.",
+    "pitfalls": [
+      "Assuming all epidermolysis bullosa scars, when the simplex form typically heals without scarring",
+      "Failing to distinguish it from junctional and dystrophic forms, which have a worse prognosis and deeper cleavage plane",
+      "Mistaking neonatal blistering for infection such as staphylococcal scalded skin syndrome",
+      "Neglecting measures to reduce friction and overheating that precipitate blistering",
+      "Overlooking secondary bacterial infection of eroded skin"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Minimise friction and trauma with soft cushioned footwear, protective padding and measures to stay cool, since heat and mechanical stress provoke blistering",
+      "Provide wound care by lancing and draining tense blisters and applying non-adherent dressings, with healing usually free of scarring given the superficial cleavage plane",
+      "Treat palmoplantar hyperkeratosis and hyperhidrosis with keratolytics, topical aluminium chloride antiperspirants or botulinum toxin",
+      "Control infection by swabbing eroded skin and treating secondary bacterial colonisation",
+      "Involve podiatry and foot care to reduce plantar blistering and callus",
+      "Offer genetic counselling for the autosomal dominant KRT5/KRT14 inheritance and confirm the subtype by antigen mapping and molecular testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for epidermolysis bullosa simplex."
-  }
- ],
- "diagrams": [
-  {
-   "id": "epidermolysis-bullosa-simplex-real-image",
-   "title": "Epidermolysis bullosa simplex: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "epidermolysis_bullosa_simplex-pathway",
+      "title": "Epidermolysis bullosa simplex: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest and generally mildest form of inherited epidermolysis bullosa, most often autosomal dominant and caused by mutations in the basal keratins KRT5 and KRT14",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive blistering or erosions with signs of secondary infection or sepsis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with immunofluorescence antigen mapping to localise the cleavage plane, Transmission electron microscopy of a fresh blister edge, Molecular genetic testing of KRT5 and KRT14"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Minimise friction and trauma with soft cushioned footwear, protective padding and measures to stay cool, since heat and mechanical stress provoke blistering"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all epidermolysis bullosa scars, when the simplex form typically heals without scarring"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of epidermolysis bullosa simplex."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "epidermolysis_bullosa_simplex-matrix",
+      "title": "Epidermolysis bullosa simplex: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest and generally mildest form of inherited epidermolysis bullosa, most often autosomal dominant and caused by",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with immunofluorescence antigen mapping to localise the cleavage plane, Transmission electron microscopy of a fresh",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Junctional epidermolysis bullosa, Dystrophic epidermolysis bullosa, Bullous impetigo and staphylococcal scalded skin syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Minimise friction and trauma with soft cushioned footwear, protective padding and measures to stay cool, since heat and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all epidermolysis bullosa scars, when the simplex form typically heals without scarring",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for epidermolysis bullosa simplex."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epidermolysis_bullosa_simplex-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with immunofluorescence antigen mapping",
+          "cells": [
+            {
+              "text": "Localises the cleavage plane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transmission electron microscopy of a fresh blister edge",
+          "cells": [
+            {
+              "text": "Ultrastructure of the cleavage plane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of KRT5 and KRT14",
+          "cells": [
+            {
+              "text": "KRT5 or KRT14 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swabs of blisters or eroded skin",
+          "cells": [
+            {
+              "text": "Secondary infection, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for extracutaneous involvement",
+          "cells": [
+            {
+              "text": "Severe subtypes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidermolysis_bullosa_simplex-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Junctional epidermolysis bullosa",
+          "cells": [
+            {
+              "text": "Deeper cleavage plane and worse prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystrophic epidermolysis bullosa",
+          "cells": [
+            {
+              "text": "Deeper cleavage; dystrophic forms scar, whereas simplex heals without scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidermolysis_bullosa_simplex-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Minimise friction and trauma",
+          "cells": [
+            {
+              "text": "Soft cushioned footwear and protective padding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid overheating",
+          "cells": [
+            {
+              "text": "Heat and mechanical stress provoke blistering; stay cool"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blister and wound care",
+          "cells": [
+            {
+              "text": "Lance and drain tense blisters; non-adherent dressings; healing usually without scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palmoplantar hyperkeratosis and hyperhidrosis",
+          "cells": [
+            {
+              "text": "Keratolytics, topical aluminium chloride antiperspirants, or botulinum toxin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Swab eroded skin and treat secondary bacterial colonisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Podiatry and foot care",
+          "cells": [
+            {
+              "text": "Reduces plantar blistering and callus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant KRT5/KRT14 inheritance; subtype by antigen mapping and molecular testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epidermolysis_bullosa_simplex-dx-mgmt",
+      "title": "Diagnosis and management of Epidermolysis bullosa simplex",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blisters with friction or heat, mainly on hands and feet, from infancy or childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (blistering with infection or sepsis, severe neonatal generalised disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat infection and sepsis; reassess the subtype in severe generalised neonatal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy antigen mapping, electron microscopy, KRT5 and KRT14 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Intraepidermal cleavage confirmed with a KRT5 or KRT14 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider junctional or dystrophic EB, or another blistering disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Minimise friction; soft footwear and protective padding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Keep cool; avoid overheating",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lance tense blisters and use non-adherent dressings",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat palmoplantar hyperkeratosis and hyperhidrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Localised form has near-normal life expectancy; severe generalised forms are worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

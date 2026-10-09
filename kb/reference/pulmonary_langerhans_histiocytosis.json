@@ -1,178 +1,472 @@
 {
- "id": "pulmonary_langerhans_histiocytosis",
- "name": "Pulmonary Langerhans cell histiocytosis",
- "aliases": [
-  "Langerhans cell granulomatosis of the lung",
-  "PLCH",
-  "Pulmonary eosinophilic granuloma",
-  "Pulmonary histiocytosis X",
-  "pulmonary eosinophilic granuloma",
-  "pulmonary histiocytosis X",
-  "pulmonary langerhans cell histiocytosis"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Murray & Nadel's Textbook of Respiratory Medicine / European Respiratory Monograph on rare lung disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Almost exclusively a disease of young to middle-aged current smokers, with a strong causal link to cigarette smoke",
-   "Presents with dry cough and breathlessness, and spontaneous pneumothorax is a common and sometimes recurrent presenting event",
-   "High-resolution CT shows a combination of nodules and bizarre, thick-walled and later thin-walled cysts, with striking upper- and mid-zone predominance and relative sparing of the costophrenic angles",
-   "Disease evolves over time from cellular nodules through cavitating nodules to cysts, reflecting bronchiolocentric Langerhans cell infiltration and destruction",
-   "Many cases carry activating BRAF V600E or other MAP-kinase pathway mutations, placing PLCH within the spectrum of clonal histiocytic neoplasms",
-   "Smoking cessation is the single most important intervention and can lead to stabilisation or regression",
-   "Extrapulmonary involvement such as diabetes insipidus, bone lesions, or skin disease should be sought as it changes management",
-   "Progressive disease may be treated with systemic therapy, and targeted therapy is considered when a driver mutation is present"
+  "id": "pulmonary_langerhans_histiocytosis",
+  "name": "Pulmonary Langerhans cell histiocytosis",
+  "aliases": [
+    "Langerhans cell granulomatosis of the lung",
+    "PLCH",
+    "Pulmonary eosinophilic granuloma",
+    "Pulmonary histiocytosis X",
+    "pulmonary eosinophilic granuloma",
+    "pulmonary histiocytosis X",
+    "pulmonary langerhans cell histiocytosis"
   ],
-  "pathophysiology": "Pulmonary Langerhans cell histiocytosis is driven by the accumulation of clonal, activated Langerhans-type dendritic cells around the small airways, almost always in response to cigarette smoke. These CD1a-positive, Langerin-positive cells, frequently harbouring activating mutations of the MAP-kinase pathway such as BRAF V600E, recruit eosinophils and other inflammatory cells to form bronchiolocentric nodules. Progressive inflammation destroys the distal bronchioles and adjacent alveoli, so the nodules cavitate and coalesce into cysts, producing the characteristic upper-zone cystic-nodular architecture and, over time, airflow obstruction and pulmonary hypertension.",
-  "additionalDifferentials": [
-   "Lymphangioleiomyomatosis",
-   "Emphysema (centrilobular, smoking related)",
-   "Birt-Hogg-Dube syndrome with pulmonary cysts",
-   "Lymphocytic interstitial pneumonia",
-   "Pneumocystis-related cystic lung disease",
-   "Metastatic cystic disease or other diffuse cystic lung disease"
-  ],
-  "additionalInvestigations": [
-   "High-resolution CT to identify the upper-zone nodular and cystic pattern with basal sparing",
-   "Careful smoking history and counselling as both diagnostic clue and therapeutic lever",
-   "Pulmonary function tests, often showing reduced diffusing capacity with obstructive or mixed defects",
-   "Bronchoalveolar lavage or lung biopsy demonstrating CD1a/Langerin-positive Langerhans cells when confirmation is needed",
-   "BRAF V600E and other MAP-kinase mutation testing on biopsy material",
-   "Assessment for extrapulmonary disease including pituitary imaging, skeletal survey, and skin examination"
-  ],
-  "redFlags": [
-   "Recurrent or bilateral spontaneous pneumothorax",
-   "Rapidly progressive breathlessness or hypoxaemia",
-   "Features of pulmonary hypertension complicating advanced cystic disease",
-   "New polyuria/polydipsia suggesting pituitary involvement with diabetes insipidus"
-  ],
-  "prognosis": "Outcome is highly variable; many patients stabilise or improve after stopping smoking, but some progress to extensive cystic destruction, respiratory failure, and pulmonary hypertension, and continued smoking is associated with worse outcomes.",
-  "pitfalls": [
-   "Failing to take a detailed smoking history and to make cessation the cornerstone of management",
-   "Misreading the cystic pattern as emphysema or lymphangioleiomyomatosis",
-   "Overlooking extrapulmonary manifestations such as diabetes insipidus or bone lesions",
-   "Not testing for a targetable driver mutation in progressive disease"
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "European Respiratory Society statement on pulmonary Langerhans cell histiocytosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise complete and sustained smoking cessation, which can lead to stabilisation or regression and is the cornerstone of care",
-   "Use corticosteroids for progressive or symptomatic nodular disease",
-   "Offer cladribine or other chemotherapy, and BRAF or MEK inhibitors where an activating MAP-kinase mutation is present, for progressive or multisystem disease",
-   "Treat recurrent spontaneous pneumothorax with drainage and pleurodesis",
-   "Provide supportive oxygen for hypoxaemia and pulmonary rehabilitation, and manage secondary pulmonary hypertension",
-   "Screen for extrapulmonary involvement and monitor with serial lung function and high-resolution CT",
-   "Refer end-stage disease with respiratory failure for lung transplantation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_langerhans_histiocytosis-pathway",
-   "title": "Pulmonary Langerhans cell histiocytosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Almost exclusively a disease of young to middle-aged current smokers, with a strong causal link to cigarette smoke",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or bilateral spontaneous pneumothorax",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: High-resolution CT to identify the upper-zone nodular and cystic pattern with basal sparing, Careful smoking history and counselling as both diagnostic clue and therapeutic lever, Pulmonary function tests, often showing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise complete and sustained smoking cessation, which can lead to stabilisation or regression and is the cornerstone of care"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to take a detailed smoking history and to make cessation the cornerstone of management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary langerhans cell histiocytosis."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_langerhans_histiocytosis-matrix",
-   "title": "Pulmonary Langerhans cell histiocytosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Almost exclusively a disease of young to middle-aged current smokers, with a strong causal link to cigarette smoke",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Murray & Nadel's Textbook of Respiratory Medicine / European Respiratory Monograph on rare lung disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Almost exclusively a disease of young to middle-aged current smokers, with a strong causal link to cigarette smoke",
+      "Presents with dry cough and breathlessness, and spontaneous pneumothorax is a common and sometimes recurrent presenting event",
+      "High-resolution CT shows a combination of nodules and bizarre, thick-walled and later thin-walled cysts, with striking upper- and mid-zone predominance and relative sparing of the costophrenic angles",
+      "Disease evolves over time from cellular nodules through cavitating nodules to cysts, reflecting bronchiolocentric Langerhans cell infiltration and destruction",
+      "Many cases carry activating BRAF V600E or other MAP-kinase pathway mutations, placing PLCH within the spectrum of clonal histiocytic neoplasms",
+      "Smoking cessation is the single most important intervention and can lead to stabilisation or regression",
+      "Extrapulmonary involvement such as diabetes insipidus, bone lesions, or skin disease should be sought as it changes management",
+      "Progressive disease may be treated with systemic therapy, and targeted therapy is considered when a driver mutation is present"
     ],
-    [
-     "Key Investigations",
-     "High-resolution CT to identify the upper-zone nodular and cystic pattern with basal sparing, Careful smoking history and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pulmonary Langerhans cell histiocytosis is driven by the accumulation of clonal, activated Langerhans-type dendritic cells around the small airways, almost always in response to cigarette smoke. These CD1a-positive, Langerin-positive cells, frequently harbouring activating mutations of the MAP-kinase pathway such as BRAF V600E, recruit eosinophils and other inflammatory cells to form bronchiolocentric nodules. Progressive inflammation destroys the distal bronchioles and adjacent alveoli, so the nodules cavitate and coalesce into cysts, producing the characteristic upper-zone cystic-nodular architecture and, over time, airflow obstruction and pulmonary hypertension.",
+    "additionalDifferentials": [
+      "Lymphangioleiomyomatosis",
+      "Emphysema (centrilobular, smoking related)",
+      "Birt-Hogg-Dube syndrome with pulmonary cysts",
+      "Lymphocytic interstitial pneumonia",
+      "Pneumocystis-related cystic lung disease",
+      "Metastatic cystic disease or other diffuse cystic lung disease"
     ],
-    [
-     "Primary Differentials",
-     "Lymphangioleiomyomatosis, Emphysema (centrilobular, smoking related), Birt-Hogg-Dube syndrome with pulmonary cysts",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "High-resolution CT to identify the upper-zone nodular and cystic pattern with basal sparing",
+      "Careful smoking history and counselling as both diagnostic clue and therapeutic lever",
+      "Pulmonary function tests, often showing reduced diffusing capacity with obstructive or mixed defects",
+      "Bronchoalveolar lavage or lung biopsy demonstrating CD1a/Langerin-positive Langerhans cells when confirmation is needed",
+      "BRAF V600E and other MAP-kinase mutation testing on biopsy material",
+      "Assessment for extrapulmonary disease including pituitary imaging, skeletal survey, and skin examination"
     ],
-    [
-     "Management Strategy",
-     "Prioritise complete and sustained smoking cessation, which can lead to stabilisation or regression and is the cornerstone of care",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or bilateral spontaneous pneumothorax",
+      "Rapidly progressive breathlessness or hypoxaemia",
+      "Features of pulmonary hypertension complicating advanced cystic disease",
+      "New polyuria/polydipsia suggesting pituitary involvement with diabetes insipidus"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to take a detailed smoking history and to make cessation the cornerstone of management",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is highly variable; many patients stabilise or improve after stopping smoking, but some progress to extensive cystic destruction, respiratory failure, and pulmonary hypertension, and continued smoking is associated with worse outcomes.",
+    "pitfalls": [
+      "Failing to take a detailed smoking history and to make cessation the cornerstone of management",
+      "Misreading the cystic pattern as emphysema or lymphangioleiomyomatosis",
+      "Overlooking extrapulmonary manifestations such as diabetes insipidus or bone lesions",
+      "Not testing for a targetable driver mutation in progressive disease"
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "European Respiratory Society statement on pulmonary Langerhans cell histiocytosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise complete and sustained smoking cessation, which can lead to stabilisation or regression and is the cornerstone of care",
+      "Use corticosteroids for progressive or symptomatic nodular disease",
+      "Offer cladribine or other chemotherapy, and BRAF or MEK inhibitors where an activating MAP-kinase mutation is present, for progressive or multisystem disease",
+      "Treat recurrent spontaneous pneumothorax with drainage and pleurodesis",
+      "Provide supportive oxygen for hypoxaemia and pulmonary rehabilitation, and manage secondary pulmonary hypertension",
+      "Screen for extrapulmonary involvement and monitor with serial lung function and high-resolution CT",
+      "Refer end-stage disease with respiratory failure for lung transplantation"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary langerhans cell histiocytosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-langerhans-histiocytosis-real-image",
-   "title": "Pulmonary Langerhans cell histiocytosis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pulmonary_langerhans_histiocytosis-pathway",
+      "title": "Pulmonary Langerhans cell histiocytosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Almost exclusively a disease of young to middle-aged current smokers, with a strong causal link to cigarette smoke",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or bilateral spontaneous pneumothorax",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: High-resolution CT to identify the upper-zone nodular and cystic pattern with basal sparing, Careful smoking history and counselling as both diagnostic clue and therapeutic lever, Pulmonary function tests, often showing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise complete and sustained smoking cessation, which can lead to stabilisation or regression and is the cornerstone of care"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to take a detailed smoking history and to make cessation the cornerstone of management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary langerhans cell histiocytosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_langerhans_histiocytosis-matrix",
+      "title": "Pulmonary Langerhans cell histiocytosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Almost exclusively a disease of young to middle-aged current smokers, with a strong causal link to cigarette smoke",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "High-resolution CT to identify the upper-zone nodular and cystic pattern with basal sparing, Careful smoking history and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lymphangioleiomyomatosis, Emphysema (centrilobular, smoking related), Birt-Hogg-Dube syndrome with pulmonary cysts",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise complete and sustained smoking cessation, which can lead to stabilisation or regression and is the cornerstone of care",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to take a detailed smoking history and to make cessation the cornerstone of management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary langerhans cell histiocytosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine / European Respiratory Monograph on rare lung disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_langerhans_histiocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Upper-zone nodular and cystic pattern with basal sparing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking history and counselling",
+          "cells": [
+            {
+              "text": "Diagnostic clue and therapeutic lever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Reduced DLCO and obstructive pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAL or lung biopsy with CD1a and langerin",
+          "cells": [
+            {
+              "text": "Langerhans cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E and MAP-kinase mutation testing",
+          "cells": [
+            {
+              "text": "Mutation status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrapulmonary screen (pituitary, skeletal survey)",
+          "cells": [
+            {
+              "text": "Extrapulmonary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_langerhans_histiocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking-related centrilobular emphysema",
+          "cells": [
+            {
+              "text": "Smoking-related centrilobular emphysema"
+            },
+            {
+              "text": "High-resolution CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Birt-Hogg-Dube syndrome with pulmonary cysts",
+          "cells": [
+            {
+              "text": "Pulmonary cysts"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_langerhans_histiocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Complete and sustained; can lead to stabilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "For progressive or symptomatic nodular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy or targeted therapy",
+          "cells": [
+            {
+              "text": "Cladribine or other chemotherapy; BRAF or MEK inhibitors where an activating mutation is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax",
+          "cells": [
+            {
+              "text": "Drainage and pleurodesis for recurrent spontaneous pneumothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and rehabilitation",
+          "cells": [
+            {
+              "text": "Supportive oxygen and pulmonary rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening",
+          "cells": [
+            {
+              "text": "Extrapulmonary involvement; serial lung function and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant",
+          "cells": [
+            {
+              "text": "End-stage disease with respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_langerhans_histiocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary Langerhans cell histiocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary Langerhans cell histiocytosis: upper-zone cysts and nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent pneumothorax, breathlessness, pulmonary hypertension, or diabetes insipidus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for respiratory failure or pituitary involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HRCT; PFTs with DLCO; BAL or biopsy for CD1a and langerin; BRAF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are CD1a and langerin positive cells confirmed on lavage or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider LAM, smoking-related emphysema or LIP; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete and sustained smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for progressive or symptomatic nodular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chemotherapy or BRAF or MEK inhibitors where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drainage and pleurodesis for recurrent pneumothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lung transplantation for end-stage disease with respiratory failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,172 +1,464 @@
 {
- "id": "methemoglobinemia",
- "name": "Methaemoglobinaemia",
- "aliases": [
-  "methemoglobinemia",
-  "MetHb",
-  "acquired methaemoglobinaemia",
-  "congenital methaemoglobinaemia"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion",
- "specialty": "Transfusion & Haemostasis Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Occurs when haemoglobin iron is oxidised from the ferrous to the ferric state, producing methaemoglobin that cannot bind oxygen and shifts the dissociation curve so remaining oxygen is released poorly",
-   "Classic clue is cyanosis, often with chocolate-brown blood, that does not improve with supplemental oxygen",
-   "A characteristic saturation gap exists, with pulse oximetry reading falsely and tending toward the mid-80s while arterial blood gas calculates a normal partial pressure of oxygen",
-   "Co-oximetry, not standard oximetry or blood gas calculation, is required to measure the methaemoglobin fraction directly",
-   "Acquired causes predominate and include oxidant drugs and chemicals such as topical and local anaesthetics, dapsone, nitrites and nitrates, and aniline compounds",
-   "Congenital forms arise from cytochrome b5 reductase deficiency or from haemoglobin M variants and are usually better tolerated because of chronic adaptation",
-   "First-line treatment of significant symptomatic acquired disease is methylene blue, which is ineffective and potentially harmful in glucose-6-phosphate dehydrogenase deficiency, where exchange transfusion or ascorbic acid may be considered"
+  "id": "methemoglobinemia",
+  "name": "Methaemoglobinaemia",
+  "aliases": [
+    "methemoglobinemia",
+    "MetHb",
+    "acquired methaemoglobinaemia",
+    "congenital methaemoglobinaemia"
   ],
-  "pathophysiology": "Haemoglobin normally keeps its iron in the reduced ferrous state, which binds oxygen; a small fraction is continually oxidised to the ferric methaemoglobin form and reduced again, mainly by the cytochrome b5 reductase (NADH-dependent) system. Methaemoglobinaemia develops when oxidative stress from drugs or chemicals overwhelms this reducing capacity, or when the reductase enzyme or the globin chain is congenitally abnormal. Ferric haem cannot carry oxygen, and its presence increases the oxygen affinity of the remaining ferrous haem, impairing oxygen delivery to tissues. The NADPH-dependent methaemoglobin reductase pathway becomes relevant therapeutically because methylene blue acts through it, which is why it fails when glucose-6-phosphate dehydrogenase is deficient.",
-  "additionalDifferentials": [
-   "Sulfhaemoglobinaemia",
-   "Carbon monoxide poisoning",
-   "Cyanotic congenital heart disease",
-   "Hypoxaemic respiratory failure",
-   "Shock or peripheral cyanosis from low cardiac output"
-  ],
-  "additionalInvestigations": [
-   "Co-oximetry to quantify the methaemoglobin fraction",
-   "Arterial blood gas alongside pulse oximetry to demonstrate the saturation gap",
-   "Glucose-6-phosphate dehydrogenase assay before or alongside methylene blue use",
-   "Review of drug, chemical, and occupational exposures",
-   "Enzyme assay or haemoglobin analysis when a congenital form is suspected"
-  ],
-  "redFlags": [
-   "Symptomatic hypoxia with high methaemoglobin levels causing altered consciousness, seizures, arrhythmia, or cardiovascular collapse, which is an emergency",
-   "Cyanosis unresponsive to high-flow oxygen",
-   "Suspected methaemoglobinaemia in a patient with glucose-6-phosphate dehydrogenase deficiency, where methylene blue is hazardous",
-   "Rapidly rising levels after a large oxidant exposure"
-  ],
-  "prognosis": "Acquired disease usually resolves well once the offending agent is removed and, where needed, methylene blue is given; congenital reductase deficiency is generally compatible with normal life, whereas very high acute levels can be fatal without prompt treatment.",
-  "pitfalls": [
-   "Trusting pulse oximetry or a calculated blood gas saturation instead of measuring methaemoglobin by co-oximetry",
-   "Persisting with oxygen alone when cyanosis fails to respond",
-   "Giving methylene blue in glucose-6-phosphate dehydrogenase deficiency, risking haemolysis and worsening",
-   "Failing to identify and stop the causative oxidant exposure"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "AABB Technical Manual"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For acquired disease, remove the offending oxidant agent and give methylthioninium chloride (methylene blue) for symptomatic elevation",
-   "Check glucose-6-phosphate dehydrogenase status before methylthioninium chloride and use ascorbic acid, exchange transfusion, or hyperbaric oxygen if deficient",
-   "Treat congenital cytochrome b5 reductase deficiency, when troublesome, with chronic oral methylthioninium chloride or ascorbic acid, though many need no treatment",
-   "Provide supplemental oxygen and monitor the methaemoglobin fraction with co-oximetry",
-   "Educate susceptible and congenital patients to avoid oxidant drugs and chemicals",
-   "Reserve exchange transfusion and critical care for severe or refractory acute elevations",
-   "Offer genetic counselling for congenital reductase deficiency and haemoglobin M variants, the latter usually requiring no therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "methemoglobinemia-pathway",
-   "title": "Methaemoglobinaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Occurs when haemoglobin iron is oxidised from the ferrous to the ferric state, producing methaemoglobin that cannot bind oxygen and shifts the dissociation curve so remaining oxygen is released poorly",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic hypoxia with high methaemoglobin levels causing altered consciousness, seizures, arrhythmia, or cardiovascular collapse, which is an emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Co-oximetry to quantify the methaemoglobin fraction, Arterial blood gas alongside pulse oximetry to demonstrate the saturation gap, Glucose-6-phosphate dehydrogenase assay before or alongside methylene blue use"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For acquired disease, remove the offending oxidant agent and give methylthioninium chloride (methylene blue) for symptomatic elevation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Trusting pulse oximetry or a calculated blood gas saturation instead of measuring methaemoglobin by co-oximetry"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of methaemoglobinaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "methemoglobinemia-matrix",
-   "title": "Methaemoglobinaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Occurs when haemoglobin iron is oxidised from the ferrous to the ferric state, producing methaemoglobin that cannot bind oxygen",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion",
+  "specialty": "Transfusion & Haemostasis Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Occurs when haemoglobin iron is oxidised from the ferrous to the ferric state, producing methaemoglobin that cannot bind oxygen and shifts the dissociation curve so remaining oxygen is released poorly",
+      "Classic clue is cyanosis, often with chocolate-brown blood, that does not improve with supplemental oxygen",
+      "A characteristic saturation gap exists, with pulse oximetry reading falsely and tending toward the mid-80s while arterial blood gas calculates a normal partial pressure of oxygen",
+      "Co-oximetry, not standard oximetry or blood gas calculation, is required to measure the methaemoglobin fraction directly",
+      "Acquired causes predominate and include oxidant drugs and chemicals such as topical and local anaesthetics, dapsone, nitrites and nitrates, and aniline compounds",
+      "Congenital forms arise from cytochrome b5 reductase deficiency or from haemoglobin M variants and are usually better tolerated because of chronic adaptation",
+      "First-line treatment of significant symptomatic acquired disease is methylene blue, which is ineffective and potentially harmful in glucose-6-phosphate dehydrogenase deficiency, where exchange transfusion or ascorbic acid may be considered"
     ],
-    [
-     "Key Investigations",
-     "Co-oximetry to quantify the methaemoglobin fraction, Arterial blood gas alongside pulse oximetry to demonstrate the saturation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Haemoglobin normally keeps its iron in the reduced ferrous state, which binds oxygen; a small fraction is continually oxidised to the ferric methaemoglobin form and reduced again, mainly by the cytochrome b5 reductase (NADH-dependent) system. Methaemoglobinaemia develops when oxidative stress from drugs or chemicals overwhelms this reducing capacity, or when the reductase enzyme or the globin chain is congenitally abnormal. Ferric haem cannot carry oxygen, and its presence increases the oxygen affinity of the remaining ferrous haem, impairing oxygen delivery to tissues. The NADPH-dependent methaemoglobin reductase pathway becomes relevant therapeutically because methylene blue acts through it, which is why it fails when glucose-6-phosphate dehydrogenase is deficient.",
+    "additionalDifferentials": [
+      "Sulfhaemoglobinaemia",
+      "Carbon monoxide poisoning",
+      "Cyanotic congenital heart disease",
+      "Hypoxaemic respiratory failure",
+      "Shock or peripheral cyanosis from low cardiac output"
     ],
-    [
-     "Primary Differentials",
-     "Sulfhaemoglobinaemia, Carbon monoxide poisoning, Cyanotic congenital heart disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Co-oximetry to quantify the methaemoglobin fraction",
+      "Arterial blood gas alongside pulse oximetry to demonstrate the saturation gap",
+      "Glucose-6-phosphate dehydrogenase assay before or alongside methylene blue use",
+      "Review of drug, chemical, and occupational exposures",
+      "Enzyme assay or haemoglobin analysis when a congenital form is suspected"
     ],
-    [
-     "Management Strategy",
-     "For acquired disease, remove the offending oxidant agent and give methylthioninium chloride (methylene blue) for symptomatic",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic hypoxia with high methaemoglobin levels causing altered consciousness, seizures, arrhythmia, or cardiovascular collapse, which is an emergency",
+      "Cyanosis unresponsive to high-flow oxygen",
+      "Suspected methaemoglobinaemia in a patient with glucose-6-phosphate dehydrogenase deficiency, where methylene blue is hazardous",
+      "Rapidly rising levels after a large oxidant exposure"
     ],
-    [
-     "Clinical Pitfall",
-     "Trusting pulse oximetry or a calculated blood gas saturation instead of measuring methaemoglobin by co-oximetry",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acquired disease usually resolves well once the offending agent is removed and, where needed, methylene blue is given; congenital reductase deficiency is generally compatible with normal life, whereas very high acute levels can be fatal without prompt treatment.",
+    "pitfalls": [
+      "Trusting pulse oximetry or a calculated blood gas saturation instead of measuring methaemoglobin by co-oximetry",
+      "Persisting with oxygen alone when cyanosis fails to respond",
+      "Giving methylene blue in glucose-6-phosphate dehydrogenase deficiency, risking haemolysis and worsening",
+      "Failing to identify and stop the causative oxidant exposure"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "AABB Technical Manual"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For acquired disease, remove the offending oxidant agent and give methylthioninium chloride (methylene blue) for symptomatic elevation",
+      "Check glucose-6-phosphate dehydrogenase status before methylthioninium chloride and use ascorbic acid, exchange transfusion, or hyperbaric oxygen if deficient",
+      "Treat congenital cytochrome b5 reductase deficiency, when troublesome, with chronic oral methylthioninium chloride or ascorbic acid, though many need no treatment",
+      "Provide supplemental oxygen and monitor the methaemoglobin fraction with co-oximetry",
+      "Educate susceptible and congenital patients to avoid oxidant drugs and chemicals",
+      "Reserve exchange transfusion and critical care for severe or refractory acute elevations",
+      "Offer genetic counselling for congenital reductase deficiency and haemoglobin M variants, the latter usually requiring no therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for methaemoglobinaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "methemoglobinemia-real-image",
-   "title": "Methaemoglobinaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "methemoglobinemia-pathway",
+      "title": "Methaemoglobinaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Occurs when haemoglobin iron is oxidised from the ferrous to the ferric state, producing methaemoglobin that cannot bind oxygen and shifts the dissociation curve so remaining oxygen is released poorly",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic hypoxia with high methaemoglobin levels causing altered consciousness, seizures, arrhythmia, or cardiovascular collapse, which is an emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Co-oximetry to quantify the methaemoglobin fraction, Arterial blood gas alongside pulse oximetry to demonstrate the saturation gap, Glucose-6-phosphate dehydrogenase assay before or alongside methylene blue use"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For acquired disease, remove the offending oxidant agent and give methylthioninium chloride (methylene blue) for symptomatic elevation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Trusting pulse oximetry or a calculated blood gas saturation instead of measuring methaemoglobin by co-oximetry"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of methaemoglobinaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "methemoglobinemia-matrix",
+      "title": "Methaemoglobinaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Occurs when haemoglobin iron is oxidised from the ferrous to the ferric state, producing methaemoglobin that cannot bind oxygen",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Co-oximetry to quantify the methaemoglobin fraction, Arterial blood gas alongside pulse oximetry to demonstrate the saturation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sulfhaemoglobinaemia, Carbon monoxide poisoning, Cyanotic congenital heart disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For acquired disease, remove the offending oxidant agent and give methylthioninium chloride (methylene blue) for symptomatic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Trusting pulse oximetry or a calculated blood gas saturation instead of measuring methaemoglobin by co-oximetry",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for methaemoglobinaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 35-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "methemoglobinemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Co-oximetry to quantify the methaemoglobin fraction",
+          "cells": [
+            {
+              "text": "Methaemoglobin fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas alongside pulse oximetry",
+          "cells": [
+            {
+              "text": "Saturation gap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose-6-phosphate dehydrogenase assay",
+          "cells": [
+            {
+              "text": "G6PD deficiency, before methylene blue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of drug, chemical and occupational exposures",
+          "cells": [
+            {
+              "text": "Oxidant exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme assay or haemoglobin analysis, when a congenital form is suspected",
+          "cells": [
+            {
+              "text": "Congenital form, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "methemoglobinemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the oxidant and give methylene blue",
+          "cells": [
+            {
+              "text": "For acquired disease, with symptomatic elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "G6PD check before methylene blue",
+          "cells": [
+            {
+              "text": "Ascorbic acid, exchange transfusion or hyperbaric oxygen if deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital reductase deficiency",
+          "cells": [
+            {
+              "text": "Chronic oral methylene blue or ascorbic acid when troublesome; many need no treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and co-oximetry",
+          "cells": [
+            {
+              "text": "Supplemental oxygen; monitor the methaemoglobin fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient education",
+          "cells": [
+            {
+              "text": "Avoid oxidant drugs and chemicals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe or refractory acute elevations",
+          "cells": [
+            {
+              "text": "Exchange transfusion and critical care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Reductase deficiency and haemoglobin M variants; M variants usually need no therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "methemoglobinemia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of cyanosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Central: decreased arterial oxygen saturation",
+          "cells": [
+            {
+              "text": "Decreased atmospheric pressure (high altitude); impaired pulmonary function (alveolar hypoventilation; uneven ventilation and perfusion with perfusion of hypoventilated alveoli; impaired oxygen diffusion); anatomic shunts (certain congenital heart disease, pulmonary arteriovenous fistulas, multiple small intrapulmonary shunts); hemoglobin with low oxygen affinity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Central: hemoglobin abnormalities",
+          "cells": [
+            {
+              "text": "Methemoglobinemia (hereditary, acquired); sulfhemoglobinemia (acquired); carboxyhemoglobinemia (not true cyanosis)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral cyanosis",
+          "cells": [
+            {
+              "text": "Reduced cardiac output; cold exposure; redistribution of blood flow from extremities; arterial obstruction; venous obstruction"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "methemoglobinemia-dx-mgmt",
+      "title": "Diagnosis and management of Methaemoglobinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cyanosis with a saturation gap after oxidant drug or chemical exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Altered consciousness, cyanosis unresponsive to oxygen, or a rapid rise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency: oxygen and critical care; G6PD status before methylene blue",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Co-oximetry; blood gas with pulse oximetry; G6PD assay; exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is methaemoglobin raised on co-oximetry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sulfhaemoglobinaemia, carbon monoxide poisoning or cyanotic heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove the offending oxidant; methylene blue for symptomatic elevation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "G6PD check first; if deficient, ascorbic acid, exchange transfusion or hyperbaric oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supplemental oxygen and co-oximetry monitoring of methaemoglobin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exchange transfusion and critical care for severe or refractory elevations",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Educate patients to avoid oxidant drugs and chemicals; genetic counselling if congenital",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

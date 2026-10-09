@@ -1,174 +1,452 @@
 {
- "id": "spinal_anaesthesia_complications",
- "name": "Spinal anaesthesia complications",
- "aliases": [
-  "subarachnoid block complications",
-  "intrathecal anaesthesia complications",
-  "high spinal",
-  "total spinal"
- ],
- "class": "non_infective",
- "system": "Anaesthesia / Perioperative",
- "specialty": "Anaesthesiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Miller's Anesthesia / standard perioperative references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hypotension and bradycardia are the most common early effects, caused by sympathetic blockade, and are managed with fluids, vasopressors, and positioning",
-   "Excessively high block can spread to thoracic and cervical levels, producing profound hypotension, difficulty breathing, and eventually a total spinal with apnoea and cardiovascular collapse requiring airway support and resuscitation",
-   "Postdural puncture headache is a frequent delayed complication, typically postural and related to needle size and design",
-   "Urinary retention is common and reflects blockade of sacral autonomic fibres, requiring monitoring of bladder volume",
-   "Serious neurological complications are rare but include epidural or spinal haematoma, abscess, arachnoiditis, cauda equina syndrome, and transient neurological symptoms",
-   "Neuraxial haematoma risk is increased by abnormal coagulation or anticoagulant therapy, and adherence to timing guidelines around anticoagulation is critical",
-   "New or progressive back pain, leg weakness, sensory change, or bladder or bowel dysfunction after neuraxial block demands urgent imaging and neurosurgical assessment",
-   "Meticulous asepsis reduces the risk of infective complications, and this reference entry addresses the non-infective mechanical and physiological complications"
+  "id": "spinal_anaesthesia_complications",
+  "name": "Spinal anaesthesia complications",
+  "aliases": [
+    "subarachnoid block complications",
+    "intrathecal anaesthesia complications",
+    "high spinal",
+    "total spinal"
   ],
-  "pathophysiology": "Injection of local anaesthetic into the subarachnoid space blocks nerve roots and the spinal cord, producing sensory, motor, and autonomic blockade. Sympathetic blockade causes vasodilation and, with higher blocks, loss of cardiac accelerator fibre activity, leading to hypotension and bradycardia. Excessive cephalad spread can impair respiratory muscles and brainstem perfusion. Dural puncture allows cerebrospinal fluid leakage, lowering intracranial pressure and producing a postural headache. Mechanical trauma, mass lesions such as haematoma or abscess, or neurotoxicity can compress or injure neural tissue, causing ischaemia and potentially permanent deficit if not decompressed promptly.",
-  "additionalDifferentials": [
-   "Local anaesthetic systemic toxicity from inadvertent vascular uptake",
-   "Vasovagal syncope",
-   "Haemorrhagic or septic shock unrelated to the block",
-   "Pre-existing neurological disease",
-   "Anaphylaxis to an injected agent",
-   "Positioning-related peripheral nerve injury"
-  ],
-  "additionalInvestigations": [
-   "Continuous blood pressure, heart rate, and oxygenation monitoring",
-   "Assessment of block height and progression",
-   "Urgent MRI of the spine if a compressive lesion (haematoma or abscess) is suspected",
-   "Coagulation studies when neuraxial bleeding is a concern",
-   "Bladder scan to detect urinary retention"
-  ],
-  "redFlags": [
-   "Rapidly ascending block with respiratory distress, hypotension, or loss of consciousness indicating a high or total spinal",
-   "Cardiovascular collapse or severe bradycardia requiring resuscitation",
-   "New progressive motor weakness, sensory loss, or bladder/bowel dysfunction suggesting cord or cauda equina compression",
-   "Severe or worsening back pain with neurological signs after neuraxial block"
-  ],
-  "prognosis": "Common physiological effects such as hypotension resolve with treatment and most postdural puncture headaches settle, but a missed compressive haematoma or abscess can cause permanent paralysis, so outcome depends on rapid recognition and decompression.",
-  "pitfalls": [
-   "Failing to anticipate and promptly treat sympathetic-blockade hypotension and bradycardia",
-   "Not recognising an ascending high spinal early enough to support ventilation",
-   "Overlooking neuraxial haematoma risk in anticoagulated patients",
-   "Attributing new neurological deficits to residual block and delaying urgent imaging",
-   "Missing urinary retention in the postoperative period"
-  ],
-  "references": [
-   "Miller's Anesthesia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat sympathetic-blockade hypotension and bradycardia with intravenous fluid loading, vasopressors (phenylephrine or ephedrine) and positioning, adding an anticholinergic such as atropine or glycopyrronium for bradycardia",
-   "Manage a high or total spinal by securing the airway with assisted ventilation or intubation, supporting the circulation with vasopressors and fluids, and delivering full cardiopulmonary resuscitation if collapse occurs",
-   "Treat postdural puncture headache conservatively with recumbency, hydration, simple analgesia and caffeine, escalating to an epidural blood patch for severe or refractory cases",
-   "Detect and relieve urinary retention from sacral autonomic blockade using bladder scanning and intermittent catheterisation",
-   "Investigate any unexpected or progressive neurological deficit with urgent whole-spine MRI and coagulation studies, arranging emergency neurosurgical decompression for an epidural haematoma or abscess",
-   "Prevent neuraxial haematoma by adhering to anticoagulant timing guidelines around the block and checking coagulation before neuraxial procedures",
-   "Continuously monitor blood pressure, heart rate, oxygenation and ascending block height, escalating to critical care for cardiovascular or respiratory compromise"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinal_anaesthesia_complications-pathway",
-   "title": "Spinal anaesthesia complications: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hypotension and bradycardia are the most common early effects, caused by sympathetic blockade, and are managed with fluids, vasopressors, and positioning",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly ascending block with respiratory distress, hypotension, or loss of consciousness indicating a high or total spinal",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Continuous blood pressure, heart rate, and oxygenation monitoring, Assessment of block height and progression, Urgent MRI of the spine if a compressive lesion (haematoma or abscess) is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat sympathetic-blockade hypotension and bradycardia with intravenous fluid loading, vasopressors (phenylephrine or ephedrine) and positioning, adding an anticholinergic such as atropine or glycopyrronium for"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to anticipate and promptly treat sympathetic-blockade hypotension and bradycardia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinal anaesthesia complications."
-  }
- ],
- "tables": [
-  {
-   "id": "spinal_anaesthesia_complications-matrix",
-   "title": "Spinal anaesthesia complications: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hypotension and bradycardia are the most common early effects, caused by sympathetic blockade, and are managed with fluids,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Anaesthesia / Perioperative",
+  "specialty": "Anaesthesiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Miller's Anesthesia / standard perioperative references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hypotension and bradycardia are the most common early effects, caused by sympathetic blockade, and are managed with fluids, vasopressors, and positioning",
+      "Excessively high block can spread to thoracic and cervical levels, producing profound hypotension, difficulty breathing, and eventually a total spinal with apnoea and cardiovascular collapse requiring airway support and resuscitation",
+      "Postdural puncture headache is a frequent delayed complication, typically postural and related to needle size and design",
+      "Urinary retention is common and reflects blockade of sacral autonomic fibres, requiring monitoring of bladder volume",
+      "Serious neurological complications are rare but include epidural or spinal haematoma, abscess, arachnoiditis, cauda equina syndrome, and transient neurological symptoms",
+      "Neuraxial haematoma risk is increased by abnormal coagulation or anticoagulant therapy, and adherence to timing guidelines around anticoagulation is critical",
+      "New or progressive back pain, leg weakness, sensory change, or bladder or bowel dysfunction after neuraxial block demands urgent imaging and neurosurgical assessment",
+      "Meticulous asepsis reduces the risk of infective complications, and this reference entry addresses the non-infective mechanical and physiological complications"
     ],
-    [
-     "Key Investigations",
-     "Continuous blood pressure, heart rate, and oxygenation monitoring, Assessment of block height and progression, Urgent MRI of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Injection of local anaesthetic into the subarachnoid space blocks nerve roots and the spinal cord, producing sensory, motor, and autonomic blockade. Sympathetic blockade causes vasodilation and, with higher blocks, loss of cardiac accelerator fibre activity, leading to hypotension and bradycardia. Excessive cephalad spread can impair respiratory muscles and brainstem perfusion. Dural puncture allows cerebrospinal fluid leakage, lowering intracranial pressure and producing a postural headache. Mechanical trauma, mass lesions such as haematoma or abscess, or neurotoxicity can compress or injure neural tissue, causing ischaemia and potentially permanent deficit if not decompressed promptly.",
+    "additionalDifferentials": [
+      "Local anaesthetic systemic toxicity from inadvertent vascular uptake",
+      "Vasovagal syncope",
+      "Haemorrhagic or septic shock unrelated to the block",
+      "Pre-existing neurological disease",
+      "Anaphylaxis to an injected agent",
+      "Positioning-related peripheral nerve injury"
     ],
-    [
-     "Primary Differentials",
-     "Local anaesthetic systemic toxicity from inadvertent vascular uptake, Vasovagal syncope, Haemorrhagic or septic shock unrelated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Continuous blood pressure, heart rate, and oxygenation monitoring",
+      "Assessment of block height and progression",
+      "Urgent MRI of the spine if a compressive lesion (haematoma or abscess) is suspected",
+      "Coagulation studies when neuraxial bleeding is a concern",
+      "Bladder scan to detect urinary retention"
     ],
-    [
-     "Management Strategy",
-     "Treat sympathetic-blockade hypotension and bradycardia with intravenous fluid loading, vasopressors (phenylephrine or ephedrine)",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly ascending block with respiratory distress, hypotension, or loss of consciousness indicating a high or total spinal",
+      "Cardiovascular collapse or severe bradycardia requiring resuscitation",
+      "New progressive motor weakness, sensory loss, or bladder/bowel dysfunction suggesting cord or cauda equina compression",
+      "Severe or worsening back pain with neurological signs after neuraxial block"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to anticipate and promptly treat sympathetic-blockade hypotension and bradycardia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Common physiological effects such as hypotension resolve with treatment and most postdural puncture headaches settle, but a missed compressive haematoma or abscess can cause permanent paralysis, so outcome depends on rapid recognition and decompression.",
+    "pitfalls": [
+      "Failing to anticipate and promptly treat sympathetic-blockade hypotension and bradycardia",
+      "Not recognising an ascending high spinal early enough to support ventilation",
+      "Overlooking neuraxial haematoma risk in anticoagulated patients",
+      "Attributing new neurological deficits to residual block and delaying urgent imaging",
+      "Missing urinary retention in the postoperative period"
+    ],
+    "references": [
+      "Miller's Anesthesia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat sympathetic-blockade hypotension and bradycardia with intravenous fluid loading, vasopressors (phenylephrine or ephedrine) and positioning, adding an anticholinergic such as atropine or glycopyrronium for bradycardia",
+      "Manage a high or total spinal by securing the airway with assisted ventilation or intubation, supporting the circulation with vasopressors and fluids, and delivering full cardiopulmonary resuscitation if collapse occurs",
+      "Treat postdural puncture headache conservatively with recumbency, hydration, simple analgesia and caffeine, escalating to an epidural blood patch for severe or refractory cases",
+      "Detect and relieve urinary retention from sacral autonomic blockade using bladder scanning and intermittent catheterisation",
+      "Investigate any unexpected or progressive neurological deficit with urgent whole-spine MRI and coagulation studies, arranging emergency neurosurgical decompression for an epidural haematoma or abscess",
+      "Prevent neuraxial haematoma by adhering to anticoagulant timing guidelines around the block and checking coagulation before neuraxial procedures",
+      "Continuously monitor blood pressure, heart rate, oxygenation and ascending block height, escalating to critical care for cardiovascular or respiratory compromise"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinal anaesthesia complications."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinal-anaesthesia-complications-real-image",
-   "title": "Spinal anaesthesia complications: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinal_anaesthesia_complications-pathway",
+      "title": "Spinal anaesthesia complications: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hypotension and bradycardia are the most common early effects, caused by sympathetic blockade, and are managed with fluids, vasopressors, and positioning",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly ascending block with respiratory distress, hypotension, or loss of consciousness indicating a high or total spinal",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Continuous blood pressure, heart rate, and oxygenation monitoring, Assessment of block height and progression, Urgent MRI of the spine if a compressive lesion (haematoma or abscess) is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat sympathetic-blockade hypotension and bradycardia with intravenous fluid loading, vasopressors (phenylephrine or ephedrine) and positioning, adding an anticholinergic such as atropine or glycopyrronium for"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to anticipate and promptly treat sympathetic-blockade hypotension and bradycardia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinal anaesthesia complications."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinal_anaesthesia_complications-matrix",
+      "title": "Spinal anaesthesia complications: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hypotension and bradycardia are the most common early effects, caused by sympathetic blockade, and are managed with fluids,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Continuous blood pressure, heart rate, and oxygenation monitoring, Assessment of block height and progression, Urgent MRI of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Local anaesthetic systemic toxicity from inadvertent vascular uptake, Vasovagal syncope, Haemorrhagic or septic shock unrelated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat sympathetic-blockade hypotension and bradycardia with intravenous fluid loading, vasopressors (phenylephrine or ephedrine)",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to anticipate and promptly treat sympathetic-blockade hypotension and bradycardia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinal anaesthesia complications."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_anaesthesia_complications-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous blood pressure, heart rate and oxygenation",
+          "cells": [
+            {
+              "text": "Sympathetic blockade hypotension and bradycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of block height and progression",
+          "cells": [
+            {
+              "text": "Ascending block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent MRI of the spine",
+          "cells": [
+            {
+              "text": "Haematoma or abscess, when a compressive lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies",
+          "cells": [
+            {
+              "text": "Neuraxial bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder scan",
+          "cells": [
+            {
+              "text": "Urinary retention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_anaesthesia_complications-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Local anaesthetic systemic toxicity",
+          "cells": [
+            {
+              "text": "Inadvertent vascular uptake of local anaesthetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhagic or septic shock unrelated to the block",
+          "cells": [
+            {
+              "text": "Hypotension with a cause other than the block must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_anaesthesia_complications-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluids and vasopressors",
+          "cells": [
+            {
+              "text": "Intravenous fluid loading and phenylephrine for sympathetic-blockade hypotension and bradycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High or total spinal management",
+          "cells": [
+            {
+              "text": "Assisted ventilation or intubation, and circulatory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postdural puncture headache",
+          "cells": [
+            {
+              "text": "Recumbency, hydration, simple analgesia and caffeine; escalate if persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary retention",
+          "cells": [
+            {
+              "text": "Bladder scanning and intermittent catheterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unexpected neurological deficit",
+          "cells": [
+            {
+              "text": "Urgent whole-spine MRI and coagulation studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematoma prevention",
+          "cells": [
+            {
+              "text": "Anticoagulant timing guidelines and coagulation checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and escalation",
+          "cells": [
+            {
+              "text": "Blood pressure, heart rate, oxygenation and block height; critical care if needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_anaesthesia_complications-dx-mgmt",
+      "title": "Diagnosis and management of Spinal anaesthesia complications",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypotension or bradycardia after neuraxial block: spinal anaesthesia complication",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid ascending block, collapse, progressive deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency airway and circulatory support for a high or total block",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous monitoring; block height; bladder scan; coagulation studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the deficit persist beyond the expected block recovery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Expected block recovery; continue monitoring and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fluids and phenylephrine for sympathetic hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recumbency, hydration and caffeine for headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bladder scanning and intermittent catheterisation for retention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent whole-spine MRI and anticoagulant timing review for suspected haematoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurological outcome depends on the deficit at intervention; early recognition matters",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

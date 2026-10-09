@@ -1,177 +1,477 @@
 {
- "id": "cerebrooculofacioskeletal_syndrome",
- "name": "Cerebro-oculo-facio-skeletal syndrome",
- "aliases": [
-  "COFS syndrome",
-  "Pena-Shokeir syndrome type 2",
-  "cerebrooculofacioskeletal syndrome",
-  "ERCC6",
-  "ERCC5",
-  "ERCC2",
-  "ERCC1"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A severe autosomal recessive DNA-repair disorder within the nucleotide-excision-repair spectrum, overlapping clinically with Cockayne syndrome",
-   "Characterised by microcephaly with brain malformation, congenital cataracts and/or microphthalmia, a characteristic facial appearance and multiple joint contractures (arthrogryposis)",
-   "Prenatal or early-onset growth failure and profound developmental impairment are typical",
-   "Progressive neurological deterioration, feeding difficulty and recurrent respiratory infection are common",
-   "Caused by variants in nucleotide-excision-repair genes such as ERCC1, ERCC2, ERCC5 and ERCC6, linking it to Cockayne syndrome and xeroderma pigmentosum",
-   "Historically labelled Pena-Shokeir syndrome type 2, but distinct from the akinesia-based Pena-Shokeir type 1",
-   "Management is supportive and palliative, with genetic counselling for the recessive inheritance"
+  "id": "cerebrooculofacioskeletal_syndrome",
+  "name": "Cerebro-oculo-facio-skeletal syndrome",
+  "aliases": [
+    "COFS syndrome",
+    "Pena-Shokeir syndrome type 2",
+    "cerebrooculofacioskeletal syndrome",
+    "ERCC6",
+    "ERCC5",
+    "ERCC2",
+    "ERCC1"
   ],
-  "pathophysiology": "Cerebro-oculo-facio-skeletal syndrome is caused by biallelic variants in genes of the nucleotide-excision-repair pathway (including ERCC1, ERCC2, ERCC5 and ERCC6), the same pathway disrupted in Cockayne syndrome and xeroderma pigmentosum. Defective repair of transcription-coupled DNA damage impairs the survival and function of neurons and other cells during development, producing microcephaly, brain malformation and progressive neurodegeneration. Associated foetal neurological impairment reduces movement in utero, leading to arthrogryposis, while abnormal development gives the ocular anomalies (cataract, microphthalmia) and the distinctive facial features. The disorder lies on a continuum with Cockayne syndrome, representing a severe, early-onset end of that spectrum.",
-  "additionalDifferentials": [
-   "Cockayne syndrome",
-   "Pena-Shokeir syndrome type 1 (foetal akinesia deformation sequence)",
-   "Congenital cytomegalovirus and other congenital infections",
-   "Neuronal migration disorders with contractures",
-   "Congenital muscular dystrophies with brain and eye involvement",
-   "Peroxisomal disorders such as Zellweger syndrome"
-  ],
-  "additionalInvestigations": [
-   "Neuroimaging showing microcephaly, calcification and structural brain malformation",
-   "Ophthalmological examination for cataract, microphthalmia and retinal changes",
-   "Molecular genetic testing for nucleotide-excision-repair genes (ERCC1/2/5/6 and related)",
-   "DNA-repair functional studies in cultured fibroblasts where genetics is inconclusive",
-   "Assessment of feeding, swallowing and respiratory function",
-   "Skeletal survey to characterise contractures and exclude other diagnoses"
-  ],
-  "redFlags": [
-   "Progressive neurological deterioration and intractable feeding difficulty",
-   "Recurrent aspiration and respiratory infection",
-   "Failure to thrive with severe growth failure",
-   "Recurrence risk in future pregnancies given autosomal recessive inheritance"
-  ],
-  "prognosis": "The prognosis is very poor, with most affected children dying in early childhood from neurological deterioration and respiratory complications; care is supportive and palliative, focused on comfort, feeding support and family counselling.",
-  "pitfalls": [
-   "Confusing the DNA-repair-based COFS syndrome with the akinesia-based Pena-Shokeir type 1 despite the shared eponym",
-   "Overlooking the link to Cockayne syndrome and the wider nucleotide-excision-repair spectrum",
-   "Missing congenital cataract or microphthalmia on examination",
-   "Failing to provide recurrence counselling for the recessive inheritance"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "Gorlin's Syndromes of the Head and Neck"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific or curative therapy exists, so care is supportive and palliative",
-   "Provide feeding and nutritional support, including gastrostomy for feeding difficulty",
-   "Deliver respiratory care with airway clearance and prompt treatment of recurrent respiratory infections",
-   "Control seizures with antiseizure medication and manage spasticity and contractures with physiotherapy",
-   "Refer to ophthalmology for cataract and microphthalmia and advise photoprotection given the DNA-repair and ultraviolet-sensitivity spectrum",
-   "Offer genetic counselling for autosomal recessive ERCC-gene inheritance, including reproductive and prenatal testing",
-   "Coordinate multidisciplinary palliative care focused on comfort and family support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cerebrooculofacioskeletal_syndrome-pathway",
-   "title": "Cerebro-oculo-facio-skeletal syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A severe autosomal recessive DNA-repair disorder within the nucleotide-excision-repair spectrum, overlapping clinically with Cockayne syndrome",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive neurological deterioration and intractable feeding difficulty",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Neuroimaging showing microcephaly, calcification and structural brain malformation, Ophthalmological examination for cataract, microphthalmia and retinal changes, Molecular genetic testing for nucleotide-excision-repair"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific or curative therapy exists, so care is supportive and palliative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the DNA-repair-based COFS syndrome with the akinesia-based Pena-Shokeir type 1 despite the shared eponym"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cerebro-oculo-facio-skeletal syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cerebrooculofacioskeletal_syndrome-matrix",
-   "title": "Cerebro-oculo-facio-skeletal syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A severe autosomal recessive DNA-repair disorder within the nucleotide-excision-repair spectrum, overlapping clinically with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A severe autosomal recessive DNA-repair disorder within the nucleotide-excision-repair spectrum, overlapping clinically with Cockayne syndrome",
+      "Characterised by microcephaly with brain malformation, congenital cataracts and/or microphthalmia, a characteristic facial appearance and multiple joint contractures (arthrogryposis)",
+      "Prenatal or early-onset growth failure and profound developmental impairment are typical",
+      "Progressive neurological deterioration, feeding difficulty and recurrent respiratory infection are common",
+      "Caused by variants in nucleotide-excision-repair genes such as ERCC1, ERCC2, ERCC5 and ERCC6, linking it to Cockayne syndrome and xeroderma pigmentosum",
+      "Historically labelled Pena-Shokeir syndrome type 2, but distinct from the akinesia-based Pena-Shokeir type 1",
+      "Management is supportive and palliative, with genetic counselling for the recessive inheritance"
     ],
-    [
-     "Key Investigations",
-     "Neuroimaging showing microcephaly, calcification and structural brain malformation, Ophthalmological examination for cataract,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cerebro-oculo-facio-skeletal syndrome is caused by biallelic variants in genes of the nucleotide-excision-repair pathway (including ERCC1, ERCC2, ERCC5 and ERCC6), the same pathway disrupted in Cockayne syndrome and xeroderma pigmentosum. Defective repair of transcription-coupled DNA damage impairs the survival and function of neurons and other cells during development, producing microcephaly, brain malformation and progressive neurodegeneration. Associated foetal neurological impairment reduces movement in utero, leading to arthrogryposis, while abnormal development gives the ocular anomalies (cataract, microphthalmia) and the distinctive facial features. The disorder lies on a continuum with Cockayne syndrome, representing a severe, early-onset end of that spectrum.",
+    "additionalDifferentials": [
+      "Cockayne syndrome",
+      "Pena-Shokeir syndrome type 1 (foetal akinesia deformation sequence)",
+      "Congenital cytomegalovirus and other congenital infections",
+      "Neuronal migration disorders with contractures",
+      "Congenital muscular dystrophies with brain and eye involvement",
+      "Peroxisomal disorders such as Zellweger syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Cockayne syndrome, Pena-Shokeir syndrome type 1 (foetal akinesia deformation sequence), Congenital cytomegalovirus and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Neuroimaging showing microcephaly, calcification and structural brain malformation",
+      "Ophthalmological examination for cataract, microphthalmia and retinal changes",
+      "Molecular genetic testing for nucleotide-excision-repair genes (ERCC1/2/5/6 and related)",
+      "DNA-repair functional studies in cultured fibroblasts where genetics is inconclusive",
+      "Assessment of feeding, swallowing and respiratory function",
+      "Skeletal survey to characterise contractures and exclude other diagnoses"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific or curative therapy exists, so care is supportive and palliative",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive neurological deterioration and intractable feeding difficulty",
+      "Recurrent aspiration and respiratory infection",
+      "Failure to thrive with severe growth failure",
+      "Recurrence risk in future pregnancies given autosomal recessive inheritance"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the DNA-repair-based COFS syndrome with the akinesia-based Pena-Shokeir type 1 despite the shared eponym",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is very poor, with most affected children dying in early childhood from neurological deterioration and respiratory complications; care is supportive and palliative, focused on comfort, feeding support and family counselling.",
+    "pitfalls": [
+      "Confusing the DNA-repair-based COFS syndrome with the akinesia-based Pena-Shokeir type 1 despite the shared eponym",
+      "Overlooking the link to Cockayne syndrome and the wider nucleotide-excision-repair spectrum",
+      "Missing congenital cataract or microphthalmia on examination",
+      "Failing to provide recurrence counselling for the recessive inheritance"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "Gorlin's Syndromes of the Head and Neck"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific or curative therapy exists, so care is supportive and palliative",
+      "Provide feeding and nutritional support, including gastrostomy for feeding difficulty",
+      "Deliver respiratory care with airway clearance and prompt treatment of recurrent respiratory infections",
+      "Control seizures with antiseizure medication and manage spasticity and contractures with physiotherapy",
+      "Refer to ophthalmology for cataract and microphthalmia and advise photoprotection given the DNA-repair and ultraviolet-sensitivity spectrum",
+      "Offer genetic counselling for autosomal recessive ERCC-gene inheritance, including reproductive and prenatal testing",
+      "Coordinate multidisciplinary palliative care focused on comfort and family support"
     ]
-   ],
-   "caption": "Overview comparison matrix for cerebro-oculo-facio-skeletal syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cerebrooculofacioskeletal-syndrome-real-image",
-   "title": "Cerebro-oculo-facio-skeletal syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cerebrooculofacioskeletal_syndrome-pathway",
+      "title": "Cerebro-oculo-facio-skeletal syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A severe autosomal recessive DNA-repair disorder within the nucleotide-excision-repair spectrum, overlapping clinically with Cockayne syndrome",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive neurological deterioration and intractable feeding difficulty",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Neuroimaging showing microcephaly, calcification and structural brain malformation, Ophthalmological examination for cataract, microphthalmia and retinal changes, Molecular genetic testing for nucleotide-excision-repair"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific or curative therapy exists, so care is supportive and palliative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the DNA-repair-based COFS syndrome with the akinesia-based Pena-Shokeir type 1 despite the shared eponym"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cerebro-oculo-facio-skeletal syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cerebrooculofacioskeletal_syndrome-matrix",
+      "title": "Cerebro-oculo-facio-skeletal syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A severe autosomal recessive DNA-repair disorder within the nucleotide-excision-repair spectrum, overlapping clinically with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Neuroimaging showing microcephaly, calcification and structural brain malformation, Ophthalmological examination for cataract,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cockayne syndrome, Pena-Shokeir syndrome type 1 (foetal akinesia deformation sequence), Congenital cytomegalovirus and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific or curative therapy exists, so care is supportive and palliative",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the DNA-repair-based COFS syndrome with the akinesia-based Pena-Shokeir type 1 despite the shared eponym",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cerebro-oculo-facio-skeletal syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cerebrooculofacioskeletal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Microcephaly, calcification and structural brain malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Cataract, microphthalmia and retinal changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of nucleotide-excision-repair genes",
+          "cells": [
+            {
+              "text": "ERCC1, ERCC2, ERCC5 and ERCC6 and related genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DNA-repair functional studies in cultured fibroblasts",
+          "cells": [
+            {
+              "text": "Used where genetics is inconclusive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Characterises contractures and excludes other diagnoses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebrooculofacioskeletal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pena-Shokeir syndrome type 1",
+          "cells": [
+            {
+              "text": "Akinesia-based (foetal akinesia deformation sequence)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cockayne syndrome",
+          "cells": [
+            {
+              "text": "Shares the nucleotide-excision-repair pathway defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebrooculofacioskeletal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "No disease-specific or curative therapy"
+            },
+            {
+              "text": "Supportive and palliative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Feeding and nutritional support, including gastrostomy"
+            },
+            {
+              "text": "Feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory care",
+          "cells": [
+            {
+              "text": "Airway clearance and prompt treatment of respiratory infections"
+            },
+            {
+              "text": "Recurrent aspiration and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures and contractures",
+          "cells": [
+            {
+              "text": "Antiseizure medication; physiotherapy for spasticity and contractures"
+            },
+            {
+              "text": "Seizures and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and photoprotection",
+          "cells": [
+            {
+              "text": "Ophthalmology for cataract and microphthalmia; photoprotection"
+            },
+            {
+              "text": "DNA-repair and ultraviolet sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ERCC-gene inheritance; reproductive and prenatal testing"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Multidisciplinary palliative care focused on comfort and family support"
+            },
+            {
+              "text": "Family support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cerebrooculofacioskeletal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cerebro-oculo-facio-skeletal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected COFS syndrome: microcephaly, cataract and contractures in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological deterioration, intractable feeding, recurrent aspiration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: respiratory and feeding support; palliative care referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neuroimaging, ophthalmology, ERCC gene testing and skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Nucleotide-excision-repair gene variant with microcephaly and cataract confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive and palliative care; no curative therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Pena-Shokeir type 1 and Cockayne syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gastrostomy and nutritional support for feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway clearance and prompt treatment of respiratory infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication and physiotherapy for contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Very poor prognosis; most affected children die in early childhood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

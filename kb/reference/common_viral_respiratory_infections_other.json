@@ -1,201 +1,690 @@
 {
- "id": "common_viral_respiratory_infections_other",
- "name": "Common Viral Respiratory Infections, Other Than COVID-19",
- "system": "Respiratory",
- "class": "infective",
- "chapter": 204,
- "page": 1531,
- "aliases": [
-  "Common cold",
-  "Viral upper respiratory tract infection",
-  "Non-COVID respiratory virus infection",
-  "Acute viral rhinosinusitis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1531",
-  "clinicalPearls": [
-   "Respiratory virus infections are the most frequent infections in humans; many agents (rhinovirus, RSV, hMPV, parainfluenza, adenovirus, influenza, non-COVID coronaviruses) produce overlapping syndromes, so epidemiology, season, age, and exposure history narrow the differential more reliably than symptoms alone (Harrison 22e p.1531-1532).",
-   "The vocal cords mark the boundary between upper and lower respiratory tract; syndrome correlates with the cell types a virus prefers, e.g. rhinitis/common cold, sinusitis, otitis media, pharyngitis and laryngitis above versus tracheitis, bronchitis, bronchiolitis and pneumonia below (Harrison 22e p.1532).",
-   "Rhinoviruses are the single most common cause of the common cold, account for at least half of cases, and exist as more than 100 serotypes; because most adults develop radiographic sinus changes during a cold that resolve spontaneously, the entity is better termed rhinosinusitis (Harrison 22e p.1534-1535).",
-   "RSV is among the most transmissible human viruses and a leading cause of severe lower respiratory tract illness and hospitalization in both infants and the frail elderly; it has a single serotype with two antigenic subgroups (A and B) that are only about 25 percent cross-related, partly explaining lifelong reinfection (Harrison 22e p.1533).",
-   "Human metapneumovirus resembles RSV but is roughly half as likely to cause severe lower-tract disease, attributed to its lack of the nonstructural interferon-antagonist genes RSV uses to blunt innate immunity (Harrison 22e p.1533-1534).",
-   "Measles is probably the most contagious respiratory virus, spreading by small-particle aerosol; the classic triad is the '3 Cs' (cough, coryza, conjunctivitis) with high fever, a maculopapular rash within days, and pathognomonic Koplik's spots in the setting of typical rash and fever (Harrison 22e p.1534).",
-   "Coxsackievirus pharyngitis presents as herpangina (palatal vesicles/ulcers with fever, odynophagia and throat pain), and enterovirus A71 outbreaks of hand-foot-and-mouth disease can be complicated by neurologic disease; enterovirus D68 is linked to wheezing and acute flaccid myelitis (Harrison 22e p.1535).",
-   "Adenovirus species B and C dominate respiratory disease, can establish persistent shedding from tonsils/adenoids for months to years, and classically cause pharyngoconjunctival fever; acute respiratory disease (ARD, types 4 and 7) historically devastated crowded military-recruit settings (Harrison 22e p.1535-1536).",
-   "Acute bronchitis is a cough of under 3 weeks without pneumonia signs or radiographic infiltrate and is predominantly viral, whereas bacteria figure more prominently in chronic bronchitis; antibiotics do not improve uncomplicated viral respiratory infection in healthy patients (Harrison 22e p.1537).",
-   "RT-PCR (including multiplex panels) is the most sensitive and specific diagnostic, but extreme sensitivity is a pitfall: prolonged genome persistence in secretions for weeks after recovery means a positive result may reflect a recently resolved rather than a currently active infection (Harrison 22e p.1537).",
-   "Primary infection is generally far more severe than reinfection for the acute respiratory viruses; most primary (and thus many severe) infections occur in the first years of life, yet severe disease rises again in the elderly due to immune senescence (Harrison 22e p.1536).",
-   "Contact and droplet precautions with rigorous hand hygiene suffice for most respiratory viruses; measles virus and varicella-zoster virus are notable exceptions that require airborne precautions because they spread by small-particle aerosol (Harrison 22e p.1537)."
+  "id": "common_viral_respiratory_infections_other",
+  "name": "Common Viral Respiratory Infections, Other Than COVID-19",
+  "system": "Respiratory",
+  "class": "infective",
+  "chapter": 204,
+  "page": 1531,
+  "aliases": [
+    "Common cold",
+    "Viral upper respiratory tract infection",
+    "Non-COVID respiratory virus infection",
+    "Acute viral rhinosinusitis"
   ],
-  "pathophysiology": "Respiratory viruses enter via the respiratory tract and replicate in epithelium whose cell type dictates the resulting syndrome. Purely respiratory viruses (e.g. rhinoviruses) replicate only in respiratory epithelium, whereas systemic viruses (e.g. measles, SARS-CoV) disseminate via the bloodstream and may also injure the airway. Wheezing arises from smooth-muscle contraction plus luminal obstruction by mucus and sloughed epithelium, predominantly at the narrow-caliber bronchioles (bronchiolitis); croup reflects inflammation of larynx, trachea and bronchi causing inspiratory difficulty. Because non-viremic respiratory viruses elicit incomplete or waning immunity, reinfection with the same virus and even the same strain is common across life. Each virus type harbors vast antigenic diversity (e.g. influenza drift/shift, >100 rhinovirus serotypes), limiting durable cross-protection. Influenza pneumonia is notable for a high rate of secondary staphylococcal and streptococcal bacterial superinfection (Harrison 22e p.1531-1534).",
-  "additionalDifferentials": [
-   "Bacterial pneumonia or secondary bacterial superinfection (notably staphylococcal/streptococcal after influenza)",
-   "Streptococcal pharyngitis versus viral pharyngitis",
-   "Bacterial sinusitis complicating viral rhinosinusitis",
-   "Asthma or COPD exacerbation triggered by viral infection",
-   "Allergic rhinitis mimicking the common cold"
-  ],
-  "infectionMimics": [
-   "Influenza",
-   "COVID-19 / SARS-CoV-2",
-   "Bacterial pharyngitis, sinusitis, otitis media",
-   "Bacterial or atypical pneumonia",
-   "Pertussis presenting as prolonged cough",
-   "EBV mononucleosis with exudative pharyngitis",
-   "Primary HIV infection with pharyngitis and lymphadenopathy"
-  ],
-  "nonInfectiousMimics": [
-   "Allergic rhinitis / vasomotor rhinitis",
-   "Asthma or reactive airway disease",
-   "COPD exacerbation from non-infectious triggers",
-   "Aspiration or chemical/pollutant airway irritation",
-   "Cardiac dyspnea masquerading as lower respiratory illness"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR molecular testing and multiplex respiratory panels (most sensitive/specific)",
-   "Rapid antigen detection for influenza and RSV in nasopharyngeal secretions",
-   "Viral culture in a reference laboratory (gold standard for isolation)",
-   "Direct/indirect fluorescent antibody detection in nasal secretions",
-   "Chest radiograph in all patients with suspected pneumonia",
-   "Pulse oximetry / oxygenation assessment in lower-tract disease"
-  ],
-  "redFlags": [
-   "Hypoxia or respiratory failure requiring oxygen or mechanical ventilation",
-   "Tachypnea, dyspnea, chest pain or hypoxemia indicating pneumonia",
-   "EBV tonsillar swelling severe enough to threaten airway occlusion",
-   "Severe disease in immunocompromised hosts (HSCT/solid-organ transplant, chemotherapy-induced leukopenia, advanced HIV)",
-   "Neurologic complications with enterovirus A71 or acute flaccid myelitis with enterovirus D68",
-   "Exposure history suggesting high-mortality zoonotic agents (avian influenza H5N1/H7N9, MERS-CoV)",
-   "Dehydration from fever, tachypnea or poor oral intake (esp. young children with primary HSV stomatitis)"
-  ],
-  "prognosis": "Most acute viral respiratory infections in immunocompetent hosts are self-limited, with reinfection generally milder than primary infection. Severe and sometimes fatal disease concentrates in infants, the frail/institutionalized elderly, those with underlying lung disease (especially COPD and oxygen-dependent disease) or cardiovascular disease, and immunocompromised patients, in whom conventional viruses may cause chronic and even fatal infection. Selected agents carry high lethality: the 2002-2003 SARS-CoV epidemic (>8000 cases) had mortality approaching 10 percent, and MERS-CoV mortality is approximately 35 percent. Measles, though often milder in immunocompetent children, causes high mortality in low-resource settings, especially with malnutrition (Harrison 22e p.1533-1536).",
-  "pitfalls": [
-   "Treating uncomplicated viral respiratory infection with antibiotics, which does not improve outcome in otherwise healthy patients",
-   "Over-interpreting RT-PCR positives, since viral genome can persist for weeks post-recovery and asymptomatic individuals (e.g. rhinovirus, bocavirus) frequently test positive",
-   "Applying rapid tests indiscriminately, lowering positive predictive value; testing is best targeted to high-risk exposures in the appropriate season",
-   "Laboratory PCR contamination from prior reactions producing false positives",
-   "Assuming rhinovirus is confined to the upper tract; it is now linked to wheezing, asthma exacerbations and (rhinovirus C) pneumonia/COPD exacerbation",
-   "Missing secondary bacterial pneumonia complicating influenza"
-  ],
-  "severityClassification": "No formal grading scheme; severity is stratified clinically by anatomic level (upper vs lower respiratory tract), presence of pneumonia or respiratory failure/hypoxia, and host risk (extremes of age, underlying lung/cardiac disease, COPD, obesity, immunocompromise). Accumulation of multiple risk factors markedly increases risk of severe lower respiratory tract disease (Harrison 22e p.1536).",
-  "references": [
-   "Harrison 22e p.1531",
-   "Harrison 22e p.1532",
-   "Harrison 22e p.1533",
-   "Harrison 22e p.1534",
-   "Harrison 22e p.1535",
-   "Harrison 22e p.1536",
-   "Harrison 22e p.1537"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care as the mainstay - antipyretics, adequate fluid intake and rest - since most infections in immunocompetent hosts are self-limiting",
-   "Use a neuraminidase inhibitor for influenza where indicated, and reserve specific antivirals such as ribavirin for severe disease in high-risk hosts",
-   "Give supplemental oxygen and escalate to respiratory support for hypoxaemic lower-tract disease such as bronchiolitis or viral pneumonia",
-   "Treat croup with corticosteroids and nebulised adrenaline when there is significant airway obstruction, and add vitamin A for measles while monitoring for complications",
-   "Avoid routine antibiotics, reserving them for evidence of bacterial superinfection such as secondary pneumonia or otitis media",
-   "Prevent transmission through hand hygiene, respiratory etiquette and isolation of infectious patients, particularly around infants and the frail elderly",
-   "Offer immunisation for prevention, including seasonal influenza vaccine, measles-containing vaccine, and RSV vaccination or monoclonal antibody prophylaxis in eligible groups",
-   "Identify and closely monitor high-risk groups - infants, the frail elderly and those with chronic lung disease - with a low threshold for hospital admission"
-  ]
- },
- "algorithms": [
-  {
-   "id": "common_viral_respiratory_infections_other-pathway",
-   "title": "Common Viral Respiratory Infections, Other Than COVID-19: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Respiratory virus infections are the most frequent infections in humans; many agents (rhinovirus, RSV, hMPV, parainfluenza, adenovirus, influenza, non-COVID coronaviruses) produce overlapping syndromes, so epidemiology, season, age, and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypoxia or respiratory failure requiring oxygen or mechanical ventilation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR molecular testing and multiplex respiratory panels (most sensitive/specific), Rapid antigen detection for influenza and RSV in nasopharyngeal secretions, Viral culture in a reference laboratory (gold standard for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care as the mainstay - antipyretics, adequate fluid intake and rest - since most infections in immunocompetent hosts are self-limiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating uncomplicated viral respiratory infection with antibiotics, which does not improve outcome in otherwise healthy patients"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of common viral respiratory infections, other than covid-19."
-  }
- ],
- "tables": [
-  {
-   "id": "common_viral_respiratory_infections_other-matrix",
-   "title": "Common Viral Respiratory Infections, Other Than COVID-19: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Respiratory virus infections are the most frequent infections in humans; many agents (rhinovirus, RSV, hMPV, parainfluenza,",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1531",
+    "clinicalPearls": [
+      "Respiratory virus infections are the most frequent infections in humans; many agents (rhinovirus, RSV, hMPV, parainfluenza, adenovirus, influenza, non-COVID coronaviruses) produce overlapping syndromes, so epidemiology, season, age, and exposure history narrow the differential more reliably than symptoms alone (Harrison 22e p.1531-1532).",
+      "The vocal cords mark the boundary between upper and lower respiratory tract; syndrome correlates with the cell types a virus prefers, e.g. rhinitis/common cold, sinusitis, otitis media, pharyngitis and laryngitis above versus tracheitis, bronchitis, bronchiolitis and pneumonia below (Harrison 22e p.1532).",
+      "Rhinoviruses are the single most common cause of the common cold, account for at least half of cases, and exist as more than 100 serotypes; because most adults develop radiographic sinus changes during a cold that resolve spontaneously, the entity is better termed rhinosinusitis (Harrison 22e p.1534-1535).",
+      "RSV is among the most transmissible human viruses and a leading cause of severe lower respiratory tract illness and hospitalization in both infants and the frail elderly; it has a single serotype with two antigenic subgroups (A and B) that are only about 25 percent cross-related, partly explaining lifelong reinfection (Harrison 22e p.1533).",
+      "Human metapneumovirus resembles RSV but is roughly half as likely to cause severe lower-tract disease, attributed to its lack of the nonstructural interferon-antagonist genes RSV uses to blunt innate immunity (Harrison 22e p.1533-1534).",
+      "Measles is probably the most contagious respiratory virus, spreading by small-particle aerosol; the classic triad is the '3 Cs' (cough, coryza, conjunctivitis) with high fever, a maculopapular rash within days, and pathognomonic Koplik's spots in the setting of typical rash and fever (Harrison 22e p.1534).",
+      "Coxsackievirus pharyngitis presents as herpangina (palatal vesicles/ulcers with fever, odynophagia and throat pain), and enterovirus A71 outbreaks of hand-foot-and-mouth disease can be complicated by neurologic disease; enterovirus D68 is linked to wheezing and acute flaccid myelitis (Harrison 22e p.1535).",
+      "Adenovirus species B and C dominate respiratory disease, can establish persistent shedding from tonsils/adenoids for months to years, and classically cause pharyngoconjunctival fever; acute respiratory disease (ARD, types 4 and 7) historically devastated crowded military-recruit settings (Harrison 22e p.1535-1536).",
+      "Acute bronchitis is a cough of under 3 weeks without pneumonia signs or radiographic infiltrate and is predominantly viral, whereas bacteria figure more prominently in chronic bronchitis; antibiotics do not improve uncomplicated viral respiratory infection in healthy patients (Harrison 22e p.1537).",
+      "RT-PCR (including multiplex panels) is the most sensitive and specific diagnostic, but extreme sensitivity is a pitfall: prolonged genome persistence in secretions for weeks after recovery means a positive result may reflect a recently resolved rather than a currently active infection (Harrison 22e p.1537).",
+      "Primary infection is generally far more severe than reinfection for the acute respiratory viruses; most primary (and thus many severe) infections occur in the first years of life, yet severe disease rises again in the elderly due to immune senescence (Harrison 22e p.1536).",
+      "Contact and droplet precautions with rigorous hand hygiene suffice for most respiratory viruses; measles virus and varicella-zoster virus are notable exceptions that require airborne precautions because they spread by small-particle aerosol (Harrison 22e p.1537)."
     ],
-    [
-     "Key Investigations",
-     "RT-PCR molecular testing and multiplex respiratory panels (most sensitive/specific), Rapid antigen detection for influenza and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Respiratory viruses enter via the respiratory tract and replicate in epithelium whose cell type dictates the resulting syndrome. Purely respiratory viruses (e.g. rhinoviruses) replicate only in respiratory epithelium, whereas systemic viruses (e.g. measles, SARS-CoV) disseminate via the bloodstream and may also injure the airway. Wheezing arises from smooth-muscle contraction plus luminal obstruction by mucus and sloughed epithelium, predominantly at the narrow-caliber bronchioles (bronchiolitis); croup reflects inflammation of larynx, trachea and bronchi causing inspiratory difficulty. Because non-viremic respiratory viruses elicit incomplete or waning immunity, reinfection with the same virus and even the same strain is common across life. Each virus type harbors vast antigenic diversity (e.g. influenza drift/shift, >100 rhinovirus serotypes), limiting durable cross-protection. Influenza pneumonia is notable for a high rate of secondary staphylococcal and streptococcal bacterial superinfection (Harrison 22e p.1531-1534).",
+    "additionalDifferentials": [
+      "Bacterial pneumonia or secondary bacterial superinfection (notably staphylococcal/streptococcal after influenza)",
+      "Streptococcal pharyngitis versus viral pharyngitis",
+      "Bacterial sinusitis complicating viral rhinosinusitis",
+      "Asthma or COPD exacerbation triggered by viral infection",
+      "Allergic rhinitis mimicking the common cold"
     ],
-    [
-     "Primary Differentials",
-     "Bacterial pneumonia or secondary bacterial superinfection (notably staphylococcal/streptococcal after influenza), Streptococcal",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Influenza",
+      "COVID-19 / SARS-CoV-2",
+      "Bacterial pharyngitis, sinusitis, otitis media",
+      "Bacterial or atypical pneumonia",
+      "Pertussis presenting as prolonged cough",
+      "EBV mononucleosis with exudative pharyngitis",
+      "Primary HIV infection with pharyngitis and lymphadenopathy"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care as the mainstay - antipyretics, adequate fluid intake and rest - since most infections in immunocompetent",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Allergic rhinitis / vasomotor rhinitis",
+      "Asthma or reactive airway disease",
+      "COPD exacerbation from non-infectious triggers",
+      "Aspiration or chemical/pollutant airway irritation",
+      "Cardiac dyspnea masquerading as lower respiratory illness"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating uncomplicated viral respiratory infection with antibiotics, which does not improve outcome in otherwise healthy patients",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "RT-PCR molecular testing and multiplex respiratory panels (most sensitive/specific)",
+      "Rapid antigen detection for influenza and RSV in nasopharyngeal secretions",
+      "Viral culture in a reference laboratory (gold standard for isolation)",
+      "Direct/indirect fluorescent antibody detection in nasal secretions",
+      "Chest radiograph in all patients with suspected pneumonia",
+      "Pulse oximetry / oxygenation assessment in lower-tract disease"
+    ],
+    "redFlags": [
+      "Hypoxia or respiratory failure requiring oxygen or mechanical ventilation",
+      "Tachypnea, dyspnea, chest pain or hypoxemia indicating pneumonia",
+      "EBV tonsillar swelling severe enough to threaten airway occlusion",
+      "Severe disease in immunocompromised hosts (HSCT/solid-organ transplant, chemotherapy-induced leukopenia, advanced HIV)",
+      "Neurologic complications with enterovirus A71 or acute flaccid myelitis with enterovirus D68",
+      "Exposure history suggesting high-mortality zoonotic agents (avian influenza H5N1/H7N9, MERS-CoV)",
+      "Dehydration from fever, tachypnea or poor oral intake (esp. young children with primary HSV stomatitis)"
+    ],
+    "prognosis": "Most acute viral respiratory infections in immunocompetent hosts are self-limited, with reinfection generally milder than primary infection. Severe and sometimes fatal disease concentrates in infants, the frail/institutionalized elderly, those with underlying lung disease (especially COPD and oxygen-dependent disease) or cardiovascular disease, and immunocompromised patients, in whom conventional viruses may cause chronic and even fatal infection. Selected agents carry high lethality: the 2002-2003 SARS-CoV epidemic (>8000 cases) had mortality approaching 10 percent, and MERS-CoV mortality is approximately 35 percent. Measles, though often milder in immunocompetent children, causes high mortality in low-resource settings, especially with malnutrition (Harrison 22e p.1533-1536).",
+    "pitfalls": [
+      "Treating uncomplicated viral respiratory infection with antibiotics, which does not improve outcome in otherwise healthy patients",
+      "Over-interpreting RT-PCR positives, since viral genome can persist for weeks post-recovery and asymptomatic individuals (e.g. rhinovirus, bocavirus) frequently test positive",
+      "Applying rapid tests indiscriminately, lowering positive predictive value; testing is best targeted to high-risk exposures in the appropriate season",
+      "Laboratory PCR contamination from prior reactions producing false positives",
+      "Assuming rhinovirus is confined to the upper tract; it is now linked to wheezing, asthma exacerbations and (rhinovirus C) pneumonia/COPD exacerbation",
+      "Missing secondary bacterial pneumonia complicating influenza"
+    ],
+    "severityClassification": "No formal grading scheme; severity is stratified clinically by anatomic level (upper vs lower respiratory tract), presence of pneumonia or respiratory failure/hypoxia, and host risk (extremes of age, underlying lung/cardiac disease, COPD, obesity, immunocompromise). Accumulation of multiple risk factors markedly increases risk of severe lower respiratory tract disease (Harrison 22e p.1536).",
+    "references": [
+      "Harrison 22e p.1531",
+      "Harrison 22e p.1532",
+      "Harrison 22e p.1533",
+      "Harrison 22e p.1534",
+      "Harrison 22e p.1535",
+      "Harrison 22e p.1536",
+      "Harrison 22e p.1537"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care as the mainstay - antipyretics, adequate fluid intake and rest - since most infections in immunocompetent hosts are self-limiting",
+      "Use a neuraminidase inhibitor for influenza where indicated, and reserve specific antivirals such as ribavirin for severe disease in high-risk hosts",
+      "Give supplemental oxygen and escalate to respiratory support for hypoxaemic lower-tract disease such as bronchiolitis or viral pneumonia",
+      "Treat croup with corticosteroids and nebulised adrenaline when there is significant airway obstruction, and add vitamin A for measles while monitoring for complications",
+      "Avoid routine antibiotics, reserving them for evidence of bacterial superinfection such as secondary pneumonia or otitis media",
+      "Prevent transmission through hand hygiene, respiratory etiquette and isolation of infectious patients, particularly around infants and the frail elderly",
+      "Offer immunisation for prevention, including seasonal influenza vaccine, measles-containing vaccine, and RSV vaccination or monoclonal antibody prophylaxis in eligible groups",
+      "Identify and closely monitor high-risk groups - infants, the frail elderly and those with chronic lung disease - with a low threshold for hospital admission"
     ]
-   ],
-   "caption": "Overview comparison matrix for common viral respiratory infections, other than covid-19."
-  }
- ],
- "diagrams": [
-  {
-   "id": "common-viral-respiratory-infections-other-real-image",
-   "title": "Common Viral Respiratory Infections, Other Than COVID-19: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "common_viral_respiratory_infections_other-pathway",
+      "title": "Common Viral Respiratory Infections, Other Than COVID-19: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Respiratory virus infections are the most frequent infections in humans; many agents (rhinovirus, RSV, hMPV, parainfluenza, adenovirus, influenza, non-COVID coronaviruses) produce overlapping syndromes, so epidemiology, season, age, and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypoxia or respiratory failure requiring oxygen or mechanical ventilation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR molecular testing and multiplex respiratory panels (most sensitive/specific), Rapid antigen detection for influenza and RSV in nasopharyngeal secretions, Viral culture in a reference laboratory (gold standard for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care as the mainstay - antipyretics, adequate fluid intake and rest - since most infections in immunocompetent hosts are self-limiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating uncomplicated viral respiratory infection with antibiotics, which does not improve outcome in otherwise healthy patients"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of common viral respiratory infections, other than covid-19."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "common_viral_respiratory_infections_other-matrix",
+      "title": "Common Viral Respiratory Infections, Other Than COVID-19: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Respiratory virus infections are the most frequent infections in humans; many agents (rhinovirus, RSV, hMPV, parainfluenza,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR molecular testing and multiplex respiratory panels (most sensitive/specific), Rapid antigen detection for influenza and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacterial pneumonia or secondary bacterial superinfection (notably staphylococcal/streptococcal after influenza), Streptococcal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care as the mainstay - antipyretics, adequate fluid intake and rest - since most infections in immunocompetent",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating uncomplicated viral respiratory infection with antibiotics, which does not improve outcome in otherwise healthy patients",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for common viral respiratory infections, other than covid-19."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Common Cold",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/respiratory-viruses/common-cold",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "common_viral_respiratory_infections_other-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic features of common respiratory virus infections",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Rhinovirus share of colds",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 50%"
+            },
+            {
+              "text": "Single most common cause"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Incubation of the common cold",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "24 to 72",
+              "range": [
+                24,
+                72
+              ]
+            },
+            {
+              "text": "Sore throat first, then rhinorrhoea and congestion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Symptom duration",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Most resolve within 10",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "Cough often lasts into the second week"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mucopurulent nasal discharge",
+          "cells": [
+            {
+              "text": "Common in later colds"
+            },
+            {
+              "text": "Does not by itself indicate bacterial superinfection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute bronchitis",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Cough under 3 weeks",
+              "op": "<",
+              "value": 3
+            },
+            {
+              "text": "No pneumonia signs or infiltrate; mostly viral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RT-PCR or multiplex panel",
+          "cells": [
+            {
+              "text": "{{hy:Most sensitive and specific test}}"
+            },
+            {
+              "text": "Genome persists for weeks; a positive may reflect resolved infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid antigen test (influenza, RSV)",
+          "cells": [
+            {
+              "text": "Nasopharyngeal secretions"
+            },
+            {
+              "text": "Target to high-risk exposure in season to keep predictive value"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph and pulse oximetry",
+          "cells": [
+            {
+              "text": "Suspected pneumonia or lower-tract disease"
+            },
+            {
+              "text": "Hypoxia or tachypnoea signals severity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Rhinovirus types: Harrison cites more than 100 serotypes, Merck more than 160 types."
+    },
+    {
+      "id": "common_viral_respiratory_infections_other-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of viral upper respiratory infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic rhinitis",
+          "cells": [
+            {
+              "text": "Most important cold mimic; recurrent, allergen-linked, no fever"
+            },
+            {
+              "text": "Clinical history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Influenza",
+          "cells": [
+            {
+              "text": "Can present as a cold; antivirals may apply"
+            },
+            {
+              "text": "Rapid antigen or PCR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "COVID-19",
+          "cells": [
+            {
+              "text": "Overlapping symptoms"
+            },
+            {
+              "text": "SARS-CoV-2 PCR or antigen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Streptococcal pharyngitis",
+          "cells": [
+            {
+              "text": "Bacterial cause of sore throat"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial sinusitis or otitis media",
+          "cells": [
+            {
+              "text": "Secondary infection after viral rhinosinusitis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial pneumonia after influenza",
+          "cells": [
+            {
+              "text": "{{hy:Staphylococcal or streptococcal superinfection}}"
+            },
+            {
+              "text": "Chest radiograph"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pertussis",
+          "cells": [
+            {
+              "text": "Prolonged cough"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EBV mononucleosis",
+          "cells": [
+            {
+              "text": "Exudative pharyngitis, tonsillar swelling"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "common_viral_respiratory_infections_other-treatment",
+      "kind": "treatment",
+      "title": "Management of common viral respiratory infections",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care: antipyretic, analgesic, fluids, rest",
+          "cells": [
+            {
+              "text": "{{hy:Mainstay for immunocompetent hosts}}"
+            },
+            {
+              "text": "Most infections are self-limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decongestants, first-generation antihistamines or NSAIDs",
+          "cells": [
+            {
+              "text": "Symptom relief in adults"
+            },
+            {
+              "text": "Limited benefit; topical decongestant over 3 to 5 days risks rebound congestion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intranasal ipratropium",
+          "cells": [
+            {
+              "text": "Rhinorrhoea"
+            },
+            {
+              "text": "2 sprays of 0.03% two or three times daily; minimal benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Honey",
+          "cells": [
+            {
+              "text": "Cough in children older than 1 year"
+            },
+            {
+              "text": "Avoid under 1 year (infant botulism)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuraminidase inhibitor",
+          "cells": [
+            {
+              "text": "Influenza where indicated"
+            },
+            {
+              "text": "Ribavirin reserved for severe disease in high-risk hosts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Only for clear secondary bacterial infection"
+            },
+            {
+              "text": "No benefit in uncomplicated viral infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oxygen and respiratory support",
+          "cells": [
+            {
+              "text": "Hypoxaemic bronchiolitis or viral pneumonia"
+            },
+            {
+              "text": "Low threshold to admit infants, frail elderly, chronic lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand hygiene, contact and droplet precautions, vaccination",
+          "cells": [
+            {
+              "text": "Prevention"
+            },
+            {
+              "text": "Measles and varicella need airborne precautions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Not recommended per Merck: intranasal zinc (anosmia risk), second-generation antihistamines, oral phenylephrine, intranasal glucocorticoids; antihistamines and decongestants not for children under 4."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "common_viral_respiratory_infections_other-dx-mgmt",
+      "title": "Diagnosis and management of common viral respiratory infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Coryza, sore throat, cough with or without fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypoxia, tachypnoea, chest pain or pneumonia signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Chest radiograph, oximetry, multiplex PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "High-risk host or influenza, COVID-19 or RSV suspected?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Targeted rapid antigen or PCR test",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive care; avoid antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Influenza confirmed or likely?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neuraminidase inhibitor where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Bacterial superinfection evident?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics for the secondary infection",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Oxygen and admission as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limited recovery; hand hygiene and vaccination",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

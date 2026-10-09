@@ -1,177 +1,455 @@
 {
- "id": "moesin_deficiency",
- "name": "Moesin (MSN) deficiency",
- "aliases": [
-  "moesin deficiency",
-  "MSN deficiency",
-  "X-linked moesin-associated immunodeficiency",
-  "MAID"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked combined immunodeficiency of males caused by mutations in MSN, which encodes moesin, a protein linking the plasma membrane to the actin cytoskeleton",
-   "The characteristic laboratory picture is profound lymphopenia affecting T cells, B cells, and natural killer cells",
-   "Presents with recurrent bacterial and viral infections, including varicella-zoster reactivation and other herpesvirus disease",
-   "Neutropenia may accompany the lymphopenia, broadening the infective susceptibility",
-   "Despite low lymphocyte numbers, some antibody production is retained, and the clinical severity is variable",
-   "Diagnosis rests on demonstrating the combined lymphopenia and impaired lymphocyte migration together with MSN sequencing",
-   "Management uses immunoglobulin replacement and antimicrobial prophylaxis, with some patients improving over time and haematopoietic stem cell transplantation reserved for severe disease"
+  "id": "moesin_deficiency",
+  "name": "Moesin (MSN) deficiency",
+  "aliases": [
+    "moesin deficiency",
+    "MSN deficiency",
+    "X-linked moesin-associated immunodeficiency",
+    "MAID"
   ],
-  "pathophysiology": "Moesin belongs to the ezrin-radixin-moesin family of proteins that tether the cortical actin cytoskeleton to the cell membrane and thereby govern cell shape, membrane dynamics, and movement. In lymphocytes this linkage is required for the cytoskeletal rearrangements underlying migration through tissues, adhesion, and the formation of the immunological synapse during activation. Loss of moesin impairs these processes, so lymphocytes migrate and proliferate poorly and fail to survive in normal numbers, producing a combined lymphopenia of T, B, and natural killer cells. The defective leucocyte trafficking and activation leave the host prone to recurrent bacterial and viral infections, with herpesvirus reactivation reflecting the weakened cellular immunity.",
-  "additionalDifferentials": [
-   "Typical severe combined immunodeficiency of other genetic causes",
-   "Other cytoskeletal immune defects such as DOCK2, DOCK8, and coronin-1A deficiency",
-   "Wiskott-Aldrich syndrome",
-   "Idiopathic CD4 lymphopenia",
-   "Leucocyte adhesion deficiency",
-   "Acquired lymphopenia including HIV"
-  ],
-  "additionalInvestigations": [
-   "Lymphocyte subset enumeration showing combined T, B, and natural killer cell lymphopenia",
-   "Full blood count to detect associated neutropenia",
-   "T-cell proliferation and lymphocyte migration or adhesion assays",
-   "Quantitative immunoglobulins and specific antibody responses",
-   "Genetic sequencing of MSN",
-   "Viral studies including varicella-zoster and other herpesviruses",
-   "Newborn screening T-cell receptor excision circle results where available"
-  ],
-  "redFlags": [
-   "Profound combined lymphopenia in a male infant or child",
-   "Severe or reactivated herpesvirus infection such as varicella-zoster",
-   "Recurrent bacterial infection with accompanying neutropenia",
-   "Failure to thrive with early recurrent infection",
-   "A maternal family history suggesting X-linked inheritance"
-  ],
-  "prognosis": "The prognosis is variable; some patients stabilise or improve on supportive treatment with immunoglobulin replacement and prophylaxis, while those with severe, persistent immunodeficiency may require haematopoietic stem cell transplantation.",
-  "pitfalls": [
-   "Assuming profound lymphopenia always denotes classic severe combined immunodeficiency",
-   "Overlooking associated neutropenia as a contributor to infection",
-   "Giving live vaccines before the immune defect is excluded",
-   "Failing to consider X-linked inheritance in an affected male",
-   "Underestimating the variability in severity between patients"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide immunoglobulin replacement therapy to compensate for impaired antibody responses",
-   "Give antibacterial prophylaxis and antiviral prophylaxis or treatment for herpesviruses such as varicella-zoster with aciclovir-class agents",
-   "Treat intercurrent bacterial and viral infections promptly and aggressively",
-   "Consider haematopoietic stem cell transplantation as the definitive option in severe, persistent combined immunodeficiency",
-   "Avoid live vaccines and use irradiated, leucodepleted blood products given the T-cell defect",
-   "Monitor lymphocyte subsets, neutrophil counts and for herpesvirus reactivation",
-   "Offer genetic counselling for X-linked inheritance and test at-risk male relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "moesin_deficiency-pathway",
-   "title": "Moesin (MSN) deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked combined immunodeficiency of males caused by mutations in MSN, which encodes moesin, a protein linking the plasma membrane to the actin cytoskeleton",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Profound combined lymphopenia in a male infant or child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lymphocyte subset enumeration showing combined T, B, and natural killer cell lymphopenia, Full blood count to detect associated neutropenia, T-cell proliferation and lymphocyte migration or adhesion assays"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide immunoglobulin replacement therapy to compensate for impaired antibody responses"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming profound lymphopenia always denotes classic severe combined immunodeficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of moesin (msn) deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "moesin_deficiency-matrix",
-   "title": "Moesin (MSN) deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked combined immunodeficiency of males caused by mutations in MSN, which encodes moesin, a protein linking the plasma",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked combined immunodeficiency of males caused by mutations in MSN, which encodes moesin, a protein linking the plasma membrane to the actin cytoskeleton",
+      "The characteristic laboratory picture is profound lymphopenia affecting T cells, B cells, and natural killer cells",
+      "Presents with recurrent bacterial and viral infections, including varicella-zoster reactivation and other herpesvirus disease",
+      "Neutropenia may accompany the lymphopenia, broadening the infective susceptibility",
+      "Despite low lymphocyte numbers, some antibody production is retained, and the clinical severity is variable",
+      "Diagnosis rests on demonstrating the combined lymphopenia and impaired lymphocyte migration together with MSN sequencing",
+      "Management uses immunoglobulin replacement and antimicrobial prophylaxis, with some patients improving over time and haematopoietic stem cell transplantation reserved for severe disease"
     ],
-    [
-     "Key Investigations",
-     "Lymphocyte subset enumeration showing combined T, B, and natural killer cell lymphopenia, Full blood count to detect associated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Moesin belongs to the ezrin-radixin-moesin family of proteins that tether the cortical actin cytoskeleton to the cell membrane and thereby govern cell shape, membrane dynamics, and movement. In lymphocytes this linkage is required for the cytoskeletal rearrangements underlying migration through tissues, adhesion, and the formation of the immunological synapse during activation. Loss of moesin impairs these processes, so lymphocytes migrate and proliferate poorly and fail to survive in normal numbers, producing a combined lymphopenia of T, B, and natural killer cells. The defective leucocyte trafficking and activation leave the host prone to recurrent bacterial and viral infections, with herpesvirus reactivation reflecting the weakened cellular immunity.",
+    "additionalDifferentials": [
+      "Typical severe combined immunodeficiency of other genetic causes",
+      "Other cytoskeletal immune defects such as DOCK2, DOCK8, and coronin-1A deficiency",
+      "Wiskott-Aldrich syndrome",
+      "Idiopathic CD4 lymphopenia",
+      "Leucocyte adhesion deficiency",
+      "Acquired lymphopenia including HIV"
     ],
-    [
-     "Primary Differentials",
-     "Typical severe combined immunodeficiency of other genetic causes, Other cytoskeletal immune defects such as DOCK2, DOCK8, and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lymphocyte subset enumeration showing combined T, B, and natural killer cell lymphopenia",
+      "Full blood count to detect associated neutropenia",
+      "T-cell proliferation and lymphocyte migration or adhesion assays",
+      "Quantitative immunoglobulins and specific antibody responses",
+      "Genetic sequencing of MSN",
+      "Viral studies including varicella-zoster and other herpesviruses",
+      "Newborn screening T-cell receptor excision circle results where available"
     ],
-    [
-     "Management Strategy",
-     "Provide immunoglobulin replacement therapy to compensate for impaired antibody responses",
-     "Core treatment modality"
+    "redFlags": [
+      "Profound combined lymphopenia in a male infant or child",
+      "Severe or reactivated herpesvirus infection such as varicella-zoster",
+      "Recurrent bacterial infection with accompanying neutropenia",
+      "Failure to thrive with early recurrent infection",
+      "A maternal family history suggesting X-linked inheritance"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming profound lymphopenia always denotes classic severe combined immunodeficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is variable; some patients stabilise or improve on supportive treatment with immunoglobulin replacement and prophylaxis, while those with severe, persistent immunodeficiency may require haematopoietic stem cell transplantation.",
+    "pitfalls": [
+      "Assuming profound lymphopenia always denotes classic severe combined immunodeficiency",
+      "Overlooking associated neutropenia as a contributor to infection",
+      "Giving live vaccines before the immune defect is excluded",
+      "Failing to consider X-linked inheritance in an affected male",
+      "Underestimating the variability in severity between patients"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide immunoglobulin replacement therapy to compensate for impaired antibody responses",
+      "Give antibacterial prophylaxis and antiviral prophylaxis or treatment for herpesviruses such as varicella-zoster with aciclovir-class agents",
+      "Treat intercurrent bacterial and viral infections promptly and aggressively",
+      "Consider haematopoietic stem cell transplantation as the definitive option in severe, persistent combined immunodeficiency",
+      "Avoid live vaccines and use irradiated, leucodepleted blood products given the T-cell defect",
+      "Monitor lymphocyte subsets, neutrophil counts and for herpesvirus reactivation",
+      "Offer genetic counselling for X-linked inheritance and test at-risk male relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for moesin (msn) deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "moesin-deficiency-real-image",
-   "title": "Moesin (MSN) deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "moesin_deficiency-pathway",
+      "title": "Moesin (MSN) deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked combined immunodeficiency of males caused by mutations in MSN, which encodes moesin, a protein linking the plasma membrane to the actin cytoskeleton",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Profound combined lymphopenia in a male infant or child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lymphocyte subset enumeration showing combined T, B, and natural killer cell lymphopenia, Full blood count to detect associated neutropenia, T-cell proliferation and lymphocyte migration or adhesion assays"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide immunoglobulin replacement therapy to compensate for impaired antibody responses"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming profound lymphopenia always denotes classic severe combined immunodeficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of moesin (msn) deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "moesin_deficiency-matrix",
+      "title": "Moesin (MSN) deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked combined immunodeficiency of males caused by mutations in MSN, which encodes moesin, a protein linking the plasma",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lymphocyte subset enumeration showing combined T, B, and natural killer cell lymphopenia, Full blood count to detect associated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Typical severe combined immunodeficiency of other genetic causes, Other cytoskeletal immune defects such as DOCK2, DOCK8, and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide immunoglobulin replacement therapy to compensate for impaired antibody responses",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming profound lymphopenia always denotes classic severe combined immunodeficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for moesin (msn) deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "moesin_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Combined T, B and natural killer cell lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Detects associated neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell proliferation and migration or adhesion assays",
+          "cells": [
+            {
+              "text": "Functional T-cell defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MSN sequencing",
+          "cells": [
+            {
+              "text": "Confirms the genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening TREC result",
+          "cells": [
+            {
+              "text": "Where available, flags T-cell lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "moesin_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Typical SCID of other genetic cause",
+          "cells": [
+            {
+              "text": "Profound lymphopenia is not unique to classic SCID"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wiskott-Aldrich syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired lymphopenia including HIV",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "moesin_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Compensates for impaired antibody responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibacterial and antiviral prophylaxis",
+          "cells": [
+            {
+              "text": "Aciclovir-class agents for herpesviruses such as varicella-zoster"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt treatment of infections",
+          "cells": [
+            {
+              "text": "Treat intercurrent bacterial and viral infections aggressively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive option in severe, persistent combined immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safe blood and vaccine practice",
+          "cells": [
+            {
+              "text": "No live vaccines; irradiated, leucodepleted blood products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance; test at-risk male relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "moesin_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Moesin (MSN) deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Male infant with combined lymphopenia and early recurrent infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (herpesvirus reactivation, neutropenia with bacterial infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review; antiviral treatment and infection control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphocyte subsets, FBC for neutropenia, T-cell function, MSN sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Combined T, B, NK lymphopenia with MSN variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other SCID genes, DOCK deficiencies, Wiskott-Aldrich, HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunoglobulin replacement plus antibacterial and antiviral prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid live vaccines; irradiated, leucodepleted blood products",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider stem cell transplantation if severe and persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling; test at-risk male relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable course; some stabilise on supportive care, severe cases need transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

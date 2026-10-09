@@ -1,175 +1,404 @@
 {
- "id": "pyruvate_dehydrogenase_deficiency",
- "name": "Pyruvate dehydrogenase deficiency",
- "aliases": [
-  "PDH deficiency",
-  "PDHC deficiency",
-  "pyruvate dehydrogenase complex deficiency",
-  "PDHA1 deficiency"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A major cause of primary (congenital) lactic acidosis, resulting from deficient activity of the pyruvate dehydrogenase complex that links glycolysis to the citric acid cycle",
-   "The most common form is due to X-linked mutations in the E1-alpha subunit (PDHA1), so both males and females can be affected",
-   "Presentations range from severe neonatal lactic acidosis to progressive neurological disease with developmental delay, hypotonia, seizures and episodic ataxia",
-   "A characteristic feature is that lactate rises rather than falls after carbohydrate intake, and the blood lactate-to-pyruvate ratio is typically normal (in contrast to respiratory chain defects where it is high)",
-   "Structural brain abnormalities such as corpus callosum agenesis, and a Leigh syndrome pattern of basal ganglia and brainstem lesions, may be present",
-   "Because glucose cannot be used efficiently, a ketogenic (high-fat, low-carbohydrate) diet is a central management principle, providing an alternative fuel that bypasses the block",
-   "Thiamine (a cofactor of the complex) is supplemented and may benefit thiamine-responsive variants; dichloroacetate has been used to lower lactate",
-   "Not a standard target of newborn screening, so diagnosis rests on recognising congenital lactic acidosis and neurological features and confirming enzymatically or genetically"
+  "id": "pyruvate_dehydrogenase_deficiency",
+  "name": "Pyruvate dehydrogenase deficiency",
+  "aliases": [
+    "PDH deficiency",
+    "PDHC deficiency",
+    "pyruvate dehydrogenase complex deficiency",
+    "PDHA1 deficiency"
   ],
-  "pathophysiology": "The pyruvate dehydrogenase complex converts pyruvate, the end product of glycolysis, into acetyl-CoA, linking carbohydrate metabolism to the citric acid cycle and oxidative energy production. When the complex is deficient, pyruvate cannot enter the cycle and is instead diverted to lactate and alanine, producing lactic acidosis with a normal lactate-to-pyruvate ratio. The brain, which depends heavily on glucose oxidation for energy, is particularly affected, resulting in structural malformations, neurodegeneration and a Leigh-like phenotype. Providing fat-derived ketones and acetyl-CoA through a ketogenic diet bypasses the enzymatic block and supplies the brain with usable fuel.",
-  "additionalDifferentials": [
-   "Mitochondrial respiratory chain disorders (high lactate-to-pyruvate ratio)",
-   "Pyruvate carboxylase deficiency",
-   "Organic acidaemias and other causes of lactic acidosis",
-   "Biotinidase and multiple carboxylase deficiency",
-   "Leigh syndrome of other genetic cause",
-   "Hypoxic-ischaemic or septic (secondary) lactic acidosis"
-  ],
-  "additionalInvestigations": [
-   "Blood and CSF lactate and pyruvate with a normal lactate-to-pyruvate ratio",
-   "Plasma amino acids (elevated alanine)",
-   "Neuroimaging for corpus callosum abnormalities and Leigh-pattern lesions",
-   "Enzyme assay of the pyruvate dehydrogenase complex in fibroblasts or leukocytes",
-   "Molecular testing including the X-linked PDHA1 gene",
-   "Assessment of the lactate response to a carbohydrate load"
-  ],
-  "redFlags": [
-   "Severe neonatal lactic acidosis with encephalopathy is a metabolic emergency",
-   "Acute worsening of lactic acidosis and neurological function after carbohydrate loading",
-   "Rapidly progressive encephalopathy or brainstem involvement in a Leigh-syndrome presentation",
-   "Intractable seizures or apnoea in the neonatal period"
-  ],
-  "prognosis": "Prognosis is generally guarded and correlates with the severity of residual enzyme activity; severe neonatal forms often have a poor outcome, whereas milder and thiamine-responsive variants and early ketogenic dietary treatment can improve neurological outcome, though the disorder is not curable.",
-  "pitfalls": [
-   "Loading a hypotonic, acidotic infant with intravenous glucose, which can worsen lactic acidosis",
-   "Confusing it with respiratory chain disease by not checking the lactate-to-pyruvate ratio",
-   "Overlooking treatable thiamine-responsive variants",
-   "Missing affected females because the common defect is X-linked"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute a ketogenic, high-fat, low-carbohydrate diet as a central therapy, supplying ketones that bypass the enzymatic block and fuel the brain",
-   "Trial thiamine, a cofactor of the complex, since some variants are thiamine-responsive",
-   "Avoid carbohydrate loading, which paradoxically worsens the lactic acidosis",
-   "In acute lactic acidosis provide supportive correction and consider dichloroacetate to lower lactate by inhibiting pyruvate dehydrogenase kinase",
-   "Provide anticonvulsants for seizures and developmental, physiotherapy and occupational support for the neurological impairment",
-   "Monitor blood lactate, growth and neurodevelopment through a metabolic and neurology team",
-   "Offer genetic counselling and family screening, noting the X-linked PDHA1 inheritance of the commonest form"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pyruvate_dehydrogenase_deficiency-pathway",
-   "title": "Pyruvate dehydrogenase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A major cause of primary (congenital) lactic acidosis, resulting from deficient activity of the pyruvate dehydrogenase complex that links glycolysis to the citric acid cycle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal lactic acidosis with encephalopathy is a metabolic emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood and CSF lactate and pyruvate with a normal lactate-to-pyruvate ratio, Plasma amino acids (elevated alanine), Neuroimaging for corpus callosum abnormalities and Leigh-pattern lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute a ketogenic, high-fat, low-carbohydrate diet as a central therapy, supplying ketones that bypass the enzymatic block and fuel the brain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Loading a hypotonic, acidotic infant with intravenous glucose, which can worsen lactic acidosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pyruvate dehydrogenase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "pyruvate_dehydrogenase_deficiency-matrix",
-   "title": "Pyruvate dehydrogenase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A major cause of primary (congenital) lactic acidosis, resulting from deficient activity of the pyruvate dehydrogenase complex",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A major cause of primary (congenital) lactic acidosis, resulting from deficient activity of the pyruvate dehydrogenase complex that links glycolysis to the citric acid cycle",
+      "The most common form is due to X-linked mutations in the E1-alpha subunit (PDHA1), so both males and females can be affected",
+      "Presentations range from severe neonatal lactic acidosis to progressive neurological disease with developmental delay, hypotonia, seizures and episodic ataxia",
+      "A characteristic feature is that lactate rises rather than falls after carbohydrate intake, and the blood lactate-to-pyruvate ratio is typically normal (in contrast to respiratory chain defects where it is high)",
+      "Structural brain abnormalities such as corpus callosum agenesis, and a Leigh syndrome pattern of basal ganglia and brainstem lesions, may be present",
+      "Because glucose cannot be used efficiently, a ketogenic (high-fat, low-carbohydrate) diet is a central management principle, providing an alternative fuel that bypasses the block",
+      "Thiamine (a cofactor of the complex) is supplemented and may benefit thiamine-responsive variants; dichloroacetate has been used to lower lactate",
+      "Not a standard target of newborn screening, so diagnosis rests on recognising congenital lactic acidosis and neurological features and confirming enzymatically or genetically"
     ],
-    [
-     "Key Investigations",
-     "Blood and CSF lactate and pyruvate with a normal lactate-to-pyruvate ratio, Plasma amino acids (elevated alanine), Neuroimaging",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The pyruvate dehydrogenase complex converts pyruvate, the end product of glycolysis, into acetyl-CoA, linking carbohydrate metabolism to the citric acid cycle and oxidative energy production. When the complex is deficient, pyruvate cannot enter the cycle and is instead diverted to lactate and alanine, producing lactic acidosis with a normal lactate-to-pyruvate ratio. The brain, which depends heavily on glucose oxidation for energy, is particularly affected, resulting in structural malformations, neurodegeneration and a Leigh-like phenotype. Providing fat-derived ketones and acetyl-CoA through a ketogenic diet bypasses the enzymatic block and supplies the brain with usable fuel.",
+    "additionalDifferentials": [
+      "Mitochondrial respiratory chain disorders (high lactate-to-pyruvate ratio)",
+      "Pyruvate carboxylase deficiency",
+      "Organic acidaemias and other causes of lactic acidosis",
+      "Biotinidase and multiple carboxylase deficiency",
+      "Leigh syndrome of other genetic cause",
+      "Hypoxic-ischaemic or septic (secondary) lactic acidosis"
     ],
-    [
-     "Primary Differentials",
-     "Mitochondrial respiratory chain disorders (high lactate-to-pyruvate ratio), Pyruvate carboxylase deficiency, Organic acidaemias",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood and CSF lactate and pyruvate with a normal lactate-to-pyruvate ratio",
+      "Plasma amino acids (elevated alanine)",
+      "Neuroimaging for corpus callosum abnormalities and Leigh-pattern lesions",
+      "Enzyme assay of the pyruvate dehydrogenase complex in fibroblasts or leukocytes",
+      "Molecular testing including the X-linked PDHA1 gene",
+      "Assessment of the lactate response to a carbohydrate load"
     ],
-    [
-     "Management Strategy",
-     "Institute a ketogenic, high-fat, low-carbohydrate diet as a central therapy, supplying ketones that bypass the enzymatic block",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal lactic acidosis with encephalopathy is a metabolic emergency",
+      "Acute worsening of lactic acidosis and neurological function after carbohydrate loading",
+      "Rapidly progressive encephalopathy or brainstem involvement in a Leigh-syndrome presentation",
+      "Intractable seizures or apnoea in the neonatal period"
     ],
-    [
-     "Clinical Pitfall",
-     "Loading a hypotonic, acidotic infant with intravenous glucose, which can worsen lactic acidosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally guarded and correlates with the severity of residual enzyme activity; severe neonatal forms often have a poor outcome, whereas milder and thiamine-responsive variants and early ketogenic dietary treatment can improve neurological outcome, though the disorder is not curable.",
+    "pitfalls": [
+      "Loading a hypotonic, acidotic infant with intravenous glucose, which can worsen lactic acidosis",
+      "Confusing it with respiratory chain disease by not checking the lactate-to-pyruvate ratio",
+      "Overlooking treatable thiamine-responsive variants",
+      "Missing affected females because the common defect is X-linked"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute a ketogenic, high-fat, low-carbohydrate diet as a central therapy, supplying ketones that bypass the enzymatic block and fuel the brain",
+      "Trial thiamine, a cofactor of the complex, since some variants are thiamine-responsive",
+      "Avoid carbohydrate loading, which paradoxically worsens the lactic acidosis",
+      "In acute lactic acidosis provide supportive correction and consider dichloroacetate to lower lactate by inhibiting pyruvate dehydrogenase kinase",
+      "Provide anticonvulsants for seizures and developmental, physiotherapy and occupational support for the neurological impairment",
+      "Monitor blood lactate, growth and neurodevelopment through a metabolic and neurology team",
+      "Offer genetic counselling and family screening, noting the X-linked PDHA1 inheritance of the commonest form"
     ]
-   ],
-   "caption": "Overview comparison matrix for pyruvate dehydrogenase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pyruvate-dehydrogenase-deficiency-real-image",
-   "title": "Pyruvate dehydrogenase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pyruvate_dehydrogenase_deficiency-pathway",
+      "title": "Pyruvate dehydrogenase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A major cause of primary (congenital) lactic acidosis, resulting from deficient activity of the pyruvate dehydrogenase complex that links glycolysis to the citric acid cycle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal lactic acidosis with encephalopathy is a metabolic emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood and CSF lactate and pyruvate with a normal lactate-to-pyruvate ratio, Plasma amino acids (elevated alanine), Neuroimaging for corpus callosum abnormalities and Leigh-pattern lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute a ketogenic, high-fat, low-carbohydrate diet as a central therapy, supplying ketones that bypass the enzymatic block and fuel the brain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Loading a hypotonic, acidotic infant with intravenous glucose, which can worsen lactic acidosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pyruvate dehydrogenase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pyruvate_dehydrogenase_deficiency-matrix",
+      "title": "Pyruvate dehydrogenase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A major cause of primary (congenital) lactic acidosis, resulting from deficient activity of the pyruvate dehydrogenase complex",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood and CSF lactate and pyruvate with a normal lactate-to-pyruvate ratio, Plasma amino acids (elevated alanine), Neuroimaging",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mitochondrial respiratory chain disorders (high lactate-to-pyruvate ratio), Pyruvate carboxylase deficiency, Organic acidaemias",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute a ketogenic, high-fat, low-carbohydrate diet as a central therapy, supplying ketones that bypass the enzymatic block",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Loading a hypotonic, acidotic infant with intravenous glucose, which can worsen lactic acidosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pyruvate dehydrogenase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyruvate_dehydrogenase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate and pyruvate",
+          "cells": [
+            {
+              "text": "Normal lactate-to-pyruvate ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Elevated alanine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Corpus callosum and Leigh-pattern lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PDH complex enzyme assay in fibroblasts",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_dehydrogenase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Mitochondrial respiratory chain disorders",
+          "cells": [
+            {
+              "text": "High lactate"
+            },
+            {
+              "text": "Lactate-to-pyruvate ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leigh syndrome of other genetic cause",
+          "cells": [
+            {
+              "text": "Leigh-pattern lesions"
+            },
+            {
+              "text": "Neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_dehydrogenase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "High-fat, low-carbohydrate diet under specialist supervision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiamine",
+          "cells": [
+            {
+              "text": "Trial, as some variants are thiamine-responsive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbohydrate loading",
+          "cells": [
+            {
+              "text": "Avoid, as it worsens lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyruvate_dehydrogenase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Pyruvate dehydrogenase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pyruvate dehydrogenase deficiency: neonatal lactic acidosis with encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe lactic acidosis, encephalopathy, worsening with carbohydrate, or brainstem signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent metabolic emergency management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and CSF lactate and pyruvate; alanine; neuroimaging; PDH fibroblast assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is PDH complex deficiency confirmed by enzyme assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider respiratory chain disorders or other Leigh causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ketogenic, high-fat, low-carbohydrate diet under specialist care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of thiamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid carbohydrate loading",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Specialist metabolic and neurology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

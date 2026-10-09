@@ -1,177 +1,426 @@
 {
- "id": "venous_leg_ulcer",
- "name": "Venous leg ulcer",
- "aliases": [
-  "venous stasis ulcer",
-  "varicose ulcer",
-  "gravitational ulcer"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular Surgery / Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery / NICE-SIGN venous guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Venous leg ulcers are the commonest type of chronic leg ulcer and result from chronic venous insufficiency with sustained ambulatory venous hypertension",
-   "They characteristically lie in the gaiter area of the lower leg, most often over or just proximal to the medial malleolus",
-   "Ulcers are usually shallow with irregular sloping edges and a granulating, exudative base, and are typically only moderately painful",
-   "The surrounding skin shows chronic venous changes such as haemosiderin pigmentation, varicose eczema, lipodermatosclerosis, atrophie blanche and oedema, sometimes producing an inverted champagne-bottle contour",
-   "Arterial disease must be excluded before compression, as the ankle-brachial index determines whether compression, the mainstay of treatment, can be applied safely",
-   "Graduated compression with multilayer bandaging or hosiery substantially improves healing, and endovenous or surgical treatment of superficial reflux reduces recurrence",
-   "A chronic or atypical non-healing ulcer warrants biopsy to exclude malignant transformation such as a Marjolin ulcer or another diagnosis",
-   "Recurrence is common, so long-term compression hosiery, leg elevation, calf-muscle exercise and correction of underlying reflux are central to prevention"
+  "id": "venous_leg_ulcer",
+  "name": "Venous leg ulcer",
+  "aliases": [
+    "venous stasis ulcer",
+    "varicose ulcer",
+    "gravitational ulcer"
   ],
-  "pathophysiology": "Venous valvular incompetence in the superficial, perforator or deep systems, venous outflow obstruction, or failure of the calf-muscle pump raises the ambulatory venous pressure transmitted to the lower leg. Persistent venous hypertension causes capillary distension and leakage of fibrinogen and macromolecules, forming pericapillary fibrin cuffs, and promotes leucocyte trapping with release of inflammatory mediators and proteases. The resulting chronic inflammation, dermal fibrosis and impaired tissue oxygenation render the gaiter skin fragile, so that minor trauma to this compromised tissue ulcerates and heals poorly.",
-  "additionalDifferentials": [
-   "Arterial (ischaemic) ulcer",
-   "Mixed arteriovenous ulcer",
-   "Neuropathic or diabetic foot ulcer",
-   "Vasculitic ulcer",
-   "Pyoderma gangrenosum",
-   "Marjolin ulcer (squamous cell carcinoma in a chronic ulcer)",
-   "Martorell hypertensive ischaemic ulcer"
-  ],
-  "additionalInvestigations": [
-   "Ankle-brachial index to exclude arterial disease and enable safe compression",
-   "Venous duplex ultrasound to map sites of reflux and obstruction",
-   "Wound swab or tissue culture where clinical infection is present",
-   "Biopsy of atypical or non-healing ulcers to exclude malignancy",
-   "Assessment for diabetes and anaemia that may impair healing",
-   "Patch testing where contact allergy to dressings or topical agents is suspected"
-  ],
-  "redFlags": [
-   "Features suggesting malignant transformation, such as rolled or everted edges, exuberant granulation or failure to heal despite adequate treatment",
-   "Signs of spreading infection or cellulitis, or systemic sepsis",
-   "A sudden increase in pain, which may indicate coexisting arterial disease, infection or malignancy",
-   "Rapid deterioration or enlargement of the ulcer"
-  ],
-  "prognosis": "Many venous ulcers heal with adequate compression and treatment of underlying reflux, although healing can be slow; recurrence is frequent unless compression is maintained and the underlying venous disease is corrected.",
-  "pitfalls": [
-   "Starting compression without checking the ankle-brachial index and excluding arterial disease",
-   "Attributing every leg ulcer to venous disease without reassessment",
-   "Failing to biopsy a chronic non-healing ulcer",
-   "Applying inadequate compression so the ulcer fails to heal",
-   "Neglecting varicose eczema and skin care, or leaving underlying superficial reflux untreated so the ulcer recurs"
-  ],
-  "references": [
-   "NICE and SIGN guidance on the management of venous leg ulcers",
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "European guidelines on chronic venous disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Apply graduated multilayer compression bandaging or hosiery as the mainstay of healing, only after excluding significant arterial disease with the ankle-brachial index",
-   "Provide wound care with cleansing, debridement of slough, simple non-adherent dressings and exudate management",
-   "Treat underlying superficial venous reflux with endovenous ablation to accelerate healing and reduce recurrence",
-   "Manage venous eczema of the surrounding skin with emollients and topical corticosteroids, reserving systemic antibiotics for clinical infection rather than colonisation",
-   "Encourage leg elevation, exercise and calf-muscle pump activity, and correct contributors to poor healing such as anaemia, diabetes and poor nutrition",
-   "Maintain long-term compression hosiery once healed to prevent recurrence",
-   "Biopsy atypical or non-healing ulcers to exclude malignancy and refer to tissue viability and vascular services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "venous_leg_ulcer-pathway",
-   "title": "Venous leg ulcer: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Venous leg ulcers are the commonest type of chronic leg ulcer and result from chronic venous insufficiency with sustained ambulatory venous hypertension",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting malignant transformation, such as rolled or everted edges, exuberant granulation or failure to heal despite adequate treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ankle-brachial index to exclude arterial disease and enable safe compression, Venous duplex ultrasound to map sites of reflux and obstruction, Wound swab or tissue culture where clinical infection is present"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Apply graduated multilayer compression bandaging or hosiery as the mainstay of healing, only after excluding significant arterial disease with the ankle-brachial index"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Starting compression without checking the ankle-brachial index and excluding arterial disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of venous leg ulcer."
-  }
- ],
- "tables": [
-  {
-   "id": "venous_leg_ulcer-matrix",
-   "title": "Venous leg ulcer: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Venous leg ulcers are the commonest type of chronic leg ulcer and result from chronic venous insufficiency with sustained",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular Surgery / Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery / NICE-SIGN venous guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Venous leg ulcers are the commonest type of chronic leg ulcer and result from chronic venous insufficiency with sustained ambulatory venous hypertension",
+      "They characteristically lie in the gaiter area of the lower leg, most often over or just proximal to the medial malleolus",
+      "Ulcers are usually shallow with irregular sloping edges and a granulating, exudative base, and are typically only moderately painful",
+      "The surrounding skin shows chronic venous changes such as haemosiderin pigmentation, varicose eczema, lipodermatosclerosis, atrophie blanche and oedema, sometimes producing an inverted champagne-bottle contour",
+      "Arterial disease must be excluded before compression, as the ankle-brachial index determines whether compression, the mainstay of treatment, can be applied safely",
+      "Graduated compression with multilayer bandaging or hosiery substantially improves healing, and endovenous or surgical treatment of superficial reflux reduces recurrence",
+      "A chronic or atypical non-healing ulcer warrants biopsy to exclude malignant transformation such as a Marjolin ulcer or another diagnosis",
+      "Recurrence is common, so long-term compression hosiery, leg elevation, calf-muscle exercise and correction of underlying reflux are central to prevention"
     ],
-    [
-     "Key Investigations",
-     "Ankle-brachial index to exclude arterial disease and enable safe compression, Venous duplex ultrasound to map sites of reflux and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Venous valvular incompetence in the superficial, perforator or deep systems, venous outflow obstruction, or failure of the calf-muscle pump raises the ambulatory venous pressure transmitted to the lower leg. Persistent venous hypertension causes capillary distension and leakage of fibrinogen and macromolecules, forming pericapillary fibrin cuffs, and promotes leucocyte trapping with release of inflammatory mediators and proteases. The resulting chronic inflammation, dermal fibrosis and impaired tissue oxygenation render the gaiter skin fragile, so that minor trauma to this compromised tissue ulcerates and heals poorly.",
+    "additionalDifferentials": [
+      "Arterial (ischaemic) ulcer",
+      "Mixed arteriovenous ulcer",
+      "Neuropathic or diabetic foot ulcer",
+      "Vasculitic ulcer",
+      "Pyoderma gangrenosum",
+      "Marjolin ulcer (squamous cell carcinoma in a chronic ulcer)",
+      "Martorell hypertensive ischaemic ulcer"
     ],
-    [
-     "Primary Differentials",
-     "Arterial (ischaemic) ulcer, Mixed arteriovenous ulcer, Neuropathic or diabetic foot ulcer",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ankle-brachial index to exclude arterial disease and enable safe compression",
+      "Venous duplex ultrasound to map sites of reflux and obstruction",
+      "Wound swab or tissue culture where clinical infection is present",
+      "Biopsy of atypical or non-healing ulcers to exclude malignancy",
+      "Assessment for diabetes and anaemia that may impair healing",
+      "Patch testing where contact allergy to dressings or topical agents is suspected"
     ],
-    [
-     "Management Strategy",
-     "Apply graduated multilayer compression bandaging or hosiery as the mainstay of healing, only after excluding significant arterial",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting malignant transformation, such as rolled or everted edges, exuberant granulation or failure to heal despite adequate treatment",
+      "Signs of spreading infection or cellulitis, or systemic sepsis",
+      "A sudden increase in pain, which may indicate coexisting arterial disease, infection or malignancy",
+      "Rapid deterioration or enlargement of the ulcer"
     ],
-    [
-     "Clinical Pitfall",
-     "Starting compression without checking the ankle-brachial index and excluding arterial disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many venous ulcers heal with adequate compression and treatment of underlying reflux, although healing can be slow; recurrence is frequent unless compression is maintained and the underlying venous disease is corrected.",
+    "pitfalls": [
+      "Starting compression without checking the ankle-brachial index and excluding arterial disease",
+      "Attributing every leg ulcer to venous disease without reassessment",
+      "Failing to biopsy a chronic non-healing ulcer",
+      "Applying inadequate compression so the ulcer fails to heal",
+      "Neglecting varicose eczema and skin care, or leaving underlying superficial reflux untreated so the ulcer recurs"
+    ],
+    "references": [
+      "NICE and SIGN guidance on the management of venous leg ulcers",
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "European guidelines on chronic venous disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Apply graduated multilayer compression bandaging or hosiery as the mainstay of healing, only after excluding significant arterial disease with the ankle-brachial index",
+      "Provide wound care with cleansing, debridement of slough, simple non-adherent dressings and exudate management",
+      "Treat underlying superficial venous reflux with endovenous ablation to accelerate healing and reduce recurrence",
+      "Manage venous eczema of the surrounding skin with emollients and topical corticosteroids, reserving systemic antibiotics for clinical infection rather than colonisation",
+      "Encourage leg elevation, exercise and calf-muscle pump activity, and correct contributors to poor healing such as anaemia, diabetes and poor nutrition",
+      "Maintain long-term compression hosiery once healed to prevent recurrence",
+      "Biopsy atypical or non-healing ulcers to exclude malignancy and refer to tissue viability and vascular services"
     ]
-   ],
-   "caption": "Overview comparison matrix for venous leg ulcer."
-  }
- ],
- "diagrams": [
-  {
-   "id": "venous-leg-ulcer-real-image",
-   "title": "Venous leg ulcer: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "venous_leg_ulcer-pathway",
+      "title": "Venous leg ulcer: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Venous leg ulcers are the commonest type of chronic leg ulcer and result from chronic venous insufficiency with sustained ambulatory venous hypertension",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting malignant transformation, such as rolled or everted edges, exuberant granulation or failure to heal despite adequate treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ankle-brachial index to exclude arterial disease and enable safe compression, Venous duplex ultrasound to map sites of reflux and obstruction, Wound swab or tissue culture where clinical infection is present"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Apply graduated multilayer compression bandaging or hosiery as the mainstay of healing, only after excluding significant arterial disease with the ankle-brachial index"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Starting compression without checking the ankle-brachial index and excluding arterial disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of venous leg ulcer."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "venous_leg_ulcer-matrix",
+      "title": "Venous leg ulcer: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Venous leg ulcers are the commonest type of chronic leg ulcer and result from chronic venous insufficiency with sustained",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ankle-brachial index to exclude arterial disease and enable safe compression, Venous duplex ultrasound to map sites of reflux and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Arterial (ischaemic) ulcer, Mixed arteriovenous ulcer, Neuropathic or diabetic foot ulcer",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Apply graduated multilayer compression bandaging or hosiery as the mainstay of healing, only after excluding significant arterial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Starting compression without checking the ankle-brachial index and excluding arterial disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for venous leg ulcer."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery / NICE-SIGN venous guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "venous_leg_ulcer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankle-brachial index",
+          "cells": [
+            {
+              "text": "Excludes arterial disease and makes compression safe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous duplex ultrasound",
+          "cells": [
+            {
+              "text": "Sites of reflux and obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound swab or tissue culture",
+          "cells": [
+            {
+              "text": "Clinical infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of atypical or non-healing ulcers",
+          "cells": [
+            {
+              "text": "Malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes and anaemia assessment",
+          "cells": [
+            {
+              "text": "Factors that impair healing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_leg_ulcer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial (ischaemic) ulcer",
+          "cells": [
+            {
+              "text": "Excluded by ankle-brachial index before compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic or diabetic foot ulcer",
+          "cells": [
+            {
+              "text": "Found in the foot rather than the gaiter area"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marjolin ulcer",
+          "cells": [
+            {
+              "text": "Squamous cell carcinoma in a chronic ulcer; rolled edges and exuberant granulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyoderma gangrenosum",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_leg_ulcer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Graduated multilayer compression",
+          "cells": [
+            {
+              "text": "Mainstay of healing, only after arterial disease is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Cleansing, debridement of slough, non-adherent dressings and exudate management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovenous ablation of superficial reflux",
+          "cells": [
+            {
+              "text": "Accelerates healing when superficial reflux is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "venous_leg_ulcer-dx-mgmt",
+      "title": "Diagnosis and management of Venous leg ulcer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected venous leg ulcer: shallow ulcer in the gaiter area above the medial malleolus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rolled edges, spreading infection or sudden pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for malignant change, cellulitis or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ankle-brachial index, venous duplex, wound swab, biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is arterial disease excluded by ankle-brachial index?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat arterial or other ulcer type; compression is unsafe until reassessed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Graduated multilayer compression once arterial disease is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wound cleansing, debridement and non-adherent dressings",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endovenous ablation of superficial reflux to accelerate healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Compression is the mainstay; reassess ulcers that fail to heal for malignancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

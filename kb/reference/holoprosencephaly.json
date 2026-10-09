@@ -1,180 +1,447 @@
 {
- "id": "holoprosencephaly",
- "name": "Holoprosencephaly",
- "aliases": [
-  "HPE",
-  "alobar holoprosencephaly",
-  "semilobar holoprosencephaly",
-  "lobar holoprosencephaly",
-  "SHH",
-  "ZIC2",
-  "SIX3",
-  "TGIF1"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A disorder of failed or incomplete cleavage of the embryonic forebrain (prosencephalon) into two hemispheres, graded as alobar, semilobar, lobar, and the middle interhemispheric variant",
-   "In alobar holoprosencephaly imaging shows a single midline monoventricle with fused thalami and absent interhemispheric fissure and corpus callosum",
-   "Because forebrain and midface arise together, the severity of brain malformation often parallels the facial anomaly, from cyclopia and proboscis to hypotelorism, single central incisor, and cleft lip or palate",
-   "Causes include chromosomal abnormalities, notably trisomy 13, single-gene variants in the sonic hedgehog pathway such as SHH, ZIC2, SIX3, and TGIF1, and environmental factors including maternal diabetes",
-   "Endocrine dysfunction is common because the hypothalamic-pituitary axis is midline, so diabetes insipidus and other pituitary deficiencies should be sought",
-   "Clinical features include developmental delay, epilepsy, hypotonia or spasticity, dysautonomia with temperature instability, and feeding difficulty",
-   "Diagnosis combines prenatal ultrasound and foetal or postnatal MRI with karyotype, microarray, and single-gene testing for counselling"
+  "id": "holoprosencephaly",
+  "name": "Holoprosencephaly",
+  "aliases": [
+    "HPE",
+    "alobar holoprosencephaly",
+    "semilobar holoprosencephaly",
+    "lobar holoprosencephaly",
+    "SHH",
+    "ZIC2",
+    "SIX3",
+    "TGIF1"
   ],
-  "pathophysiology": "Holoprosencephaly arises from failure of ventral induction and midline patterning of the developing forebrain in early gestation, when the prosencephalon should cleave into paired cerebral hemispheres and lateral ventricles. Disruption of the sonic hedgehog and related signalling pathways, whether from single-gene variants, chromosomal imbalance, or environmental insults such as maternal diabetes, prevents normal separation of midline structures. The result is a spectrum from complete non-cleavage with a monoventricle and fused deep grey nuclei to milder incomplete separation, with parallel disruption of midline facial development.",
-  "additionalDifferentials": [
-   "Hydranencephaly",
-   "Severe hydrocephalus with a dilated single-appearing ventricle",
-   "Septo-optic dysplasia",
-   "Agenesis of the corpus callosum with interhemispheric cyst",
-   "Dandy-Walker malformation",
-   "Arrhinencephaly as an isolated finding"
-  ],
-  "additionalInvestigations": [
-   "Prenatal ultrasound and foetal MRI to assess forebrain cleavage and facial structures",
-   "Postnatal brain MRI to grade the malformation and detect associated anomalies",
-   "Karyotype and chromosomal microarray to detect trisomy 13 and other imbalances",
-   "Single-gene or panel testing for SHH, ZIC2, SIX3, and TGIF1",
-   "Endocrine evaluation of the hypothalamic-pituitary axis including assessment for diabetes insipidus",
-   "Maternal evaluation including glycaemic status"
-  ],
-  "redFlags": [
-   "Diabetes insipidus with dangerous sodium and fluid disturbance",
-   "Temperature instability and dysautonomia in the neonatal period",
-   "Refractory seizures",
-   "Severe facial malformation with airway or feeding compromise"
-  ],
-  "prognosis": "Prognosis correlates with the severity of the malformation. Alobar holoprosencephaly usually results in death in utero or early infancy, whereas milder lobar forms may allow survival with variable degrees of developmental disability, epilepsy, and endocrine dysfunction.",
-  "pitfalls": [
-   "Assuming a normal karyotype excludes a genetic cause when single-gene pathway variants may be responsible",
-   "Missing hypothalamic-pituitary dysfunction, particularly diabetes insipidus, in the neonatal period",
-   "Mistaking severe hydrocephalus or hydranencephaly for alobar holoprosencephaly on imaging",
-   "Overlooking the maternal diabetes association during counselling and future pregnancy planning"
-  ],
-  "references": [
-   "Volpe's Neurology of the Newborn",
-   "Nelson Textbook of Paediatrics",
-   "GeneReviews: Holoprosencephaly Overview"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive and palliative care matched to severity, recognising that severe alobar forms are often lethal in early infancy",
-   "Diagnose and replace pituitary hormone deficiencies, notably desmopressin for diabetes insipidus and anterior pituitary hormone replacement",
-   "Control epilepsy with anticonvulsant therapy",
-   "Manage feeding difficulty and failure to thrive with nasogastric or gastrostomy feeding, and address temperature instability from dysautonomia",
-   "Treat spasticity, hypotonia and developmental delay with physiotherapy, occupational and speech therapy",
-   "Correct associated midline facial anomalies such as cleft lip and palate with a craniofacial surgical team",
-   "Refer to clinical genetics for karyotype, microarray and sonic hedgehog-pathway gene testing, with counselling on recurrence and maternal glycaemic control in future pregnancies",
-   "Coordinate multidisciplinary paediatric neurology, endocrinology and developmental care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "holoprosencephaly-pathway",
-   "title": "Holoprosencephaly: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A disorder of failed or incomplete cleavage of the embryonic forebrain (prosencephalon) into two hemispheres, graded as alobar, semilobar, lobar, and the middle interhemispheric variant",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Diabetes insipidus with dangerous sodium and fluid disturbance",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Prenatal ultrasound and foetal MRI to assess forebrain cleavage and facial structures, Postnatal brain MRI to grade the malformation and detect associated anomalies, Karyotype and chromosomal microarray to detect trisomy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive and palliative care matched to severity, recognising that severe alobar forms are often lethal in early infancy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal karyotype excludes a genetic cause when single-gene pathway variants may be responsible"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of holoprosencephaly."
-  }
- ],
- "tables": [
-  {
-   "id": "holoprosencephaly-matrix",
-   "title": "Holoprosencephaly: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A disorder of failed or incomplete cleavage of the embryonic forebrain (prosencephalon) into two hemispheres, graded as alobar,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A disorder of failed or incomplete cleavage of the embryonic forebrain (prosencephalon) into two hemispheres, graded as alobar, semilobar, lobar, and the middle interhemispheric variant",
+      "In alobar holoprosencephaly imaging shows a single midline monoventricle with fused thalami and absent interhemispheric fissure and corpus callosum",
+      "Because forebrain and midface arise together, the severity of brain malformation often parallels the facial anomaly, from cyclopia and proboscis to hypotelorism, single central incisor, and cleft lip or palate",
+      "Causes include chromosomal abnormalities, notably trisomy 13, single-gene variants in the sonic hedgehog pathway such as SHH, ZIC2, SIX3, and TGIF1, and environmental factors including maternal diabetes",
+      "Endocrine dysfunction is common because the hypothalamic-pituitary axis is midline, so diabetes insipidus and other pituitary deficiencies should be sought",
+      "Clinical features include developmental delay, epilepsy, hypotonia or spasticity, dysautonomia with temperature instability, and feeding difficulty",
+      "Diagnosis combines prenatal ultrasound and foetal or postnatal MRI with karyotype, microarray, and single-gene testing for counselling"
     ],
-    [
-     "Key Investigations",
-     "Prenatal ultrasound and foetal MRI to assess forebrain cleavage and facial structures, Postnatal brain MRI to grade the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Holoprosencephaly arises from failure of ventral induction and midline patterning of the developing forebrain in early gestation, when the prosencephalon should cleave into paired cerebral hemispheres and lateral ventricles. Disruption of the sonic hedgehog and related signalling pathways, whether from single-gene variants, chromosomal imbalance, or environmental insults such as maternal diabetes, prevents normal separation of midline structures. The result is a spectrum from complete non-cleavage with a monoventricle and fused deep grey nuclei to milder incomplete separation, with parallel disruption of midline facial development.",
+    "additionalDifferentials": [
+      "Hydranencephaly",
+      "Severe hydrocephalus with a dilated single-appearing ventricle",
+      "Septo-optic dysplasia",
+      "Agenesis of the corpus callosum with interhemispheric cyst",
+      "Dandy-Walker malformation",
+      "Arrhinencephaly as an isolated finding"
     ],
-    [
-     "Primary Differentials",
-     "Hydranencephaly, Severe hydrocephalus with a dilated single-appearing ventricle, Septo-optic dysplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Prenatal ultrasound and foetal MRI to assess forebrain cleavage and facial structures",
+      "Postnatal brain MRI to grade the malformation and detect associated anomalies",
+      "Karyotype and chromosomal microarray to detect trisomy 13 and other imbalances",
+      "Single-gene or panel testing for SHH, ZIC2, SIX3, and TGIF1",
+      "Endocrine evaluation of the hypothalamic-pituitary axis including assessment for diabetes insipidus",
+      "Maternal evaluation including glycaemic status"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive and palliative care matched to severity, recognising that severe alobar forms are often lethal in early infancy",
-     "Core treatment modality"
+    "redFlags": [
+      "Diabetes insipidus with dangerous sodium and fluid disturbance",
+      "Temperature instability and dysautonomia in the neonatal period",
+      "Refractory seizures",
+      "Severe facial malformation with airway or feeding compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal karyotype excludes a genetic cause when single-gene pathway variants may be responsible",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis correlates with the severity of the malformation. Alobar holoprosencephaly usually results in death in utero or early infancy, whereas milder lobar forms may allow survival with variable degrees of developmental disability, epilepsy, and endocrine dysfunction.",
+    "pitfalls": [
+      "Assuming a normal karyotype excludes a genetic cause when single-gene pathway variants may be responsible",
+      "Missing hypothalamic-pituitary dysfunction, particularly diabetes insipidus, in the neonatal period",
+      "Mistaking severe hydrocephalus or hydranencephaly for alobar holoprosencephaly on imaging",
+      "Overlooking the maternal diabetes association during counselling and future pregnancy planning"
+    ],
+    "references": [
+      "Volpe's Neurology of the Newborn",
+      "Nelson Textbook of Paediatrics",
+      "GeneReviews: Holoprosencephaly Overview"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive and palliative care matched to severity, recognising that severe alobar forms are often lethal in early infancy",
+      "Diagnose and replace pituitary hormone deficiencies, notably desmopressin for diabetes insipidus and anterior pituitary hormone replacement",
+      "Control epilepsy with anticonvulsant therapy",
+      "Manage feeding difficulty and failure to thrive with nasogastric or gastrostomy feeding, and address temperature instability from dysautonomia",
+      "Treat spasticity, hypotonia and developmental delay with physiotherapy, occupational and speech therapy",
+      "Correct associated midline facial anomalies such as cleft lip and palate with a craniofacial surgical team",
+      "Refer to clinical genetics for karyotype, microarray and sonic hedgehog-pathway gene testing, with counselling on recurrence and maternal glycaemic control in future pregnancies",
+      "Coordinate multidisciplinary paediatric neurology, endocrinology and developmental care"
     ]
-   ],
-   "caption": "Overview comparison matrix for holoprosencephaly."
-  }
- ],
- "diagrams": [
-  {
-   "id": "holoprosencephaly-real-image",
-   "title": "Holoprosencephaly: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "holoprosencephaly-pathway",
+      "title": "Holoprosencephaly: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A disorder of failed or incomplete cleavage of the embryonic forebrain (prosencephalon) into two hemispheres, graded as alobar, semilobar, lobar, and the middle interhemispheric variant",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Diabetes insipidus with dangerous sodium and fluid disturbance",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Prenatal ultrasound and foetal MRI to assess forebrain cleavage and facial structures, Postnatal brain MRI to grade the malformation and detect associated anomalies, Karyotype and chromosomal microarray to detect trisomy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive and palliative care matched to severity, recognising that severe alobar forms are often lethal in early infancy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal karyotype excludes a genetic cause when single-gene pathway variants may be responsible"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of holoprosencephaly."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "holoprosencephaly-matrix",
+      "title": "Holoprosencephaly: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A disorder of failed or incomplete cleavage of the embryonic forebrain (prosencephalon) into two hemispheres, graded as alobar,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Prenatal ultrasound and foetal MRI to assess forebrain cleavage and facial structures, Postnatal brain MRI to grade the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hydranencephaly, Severe hydrocephalus with a dilated single-appearing ventricle, Septo-optic dysplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive and palliative care matched to severity, recognising that severe alobar forms are often lethal in early infancy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal karyotype excludes a genetic cause when single-gene pathway variants may be responsible",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for holoprosencephaly."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "holoprosencephaly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prenatal ultrasound and foetal MRI",
+          "cells": [
+            {
+              "text": "Forebrain cleavage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postnatal brain MRI",
+          "cells": [
+            {
+              "text": "Grades the malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and chromosomal microarray",
+          "cells": [
+            {
+              "text": "Trisomy 13 and other chromosomal causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-gene or panel testing (SHH, ZIC2, SIX3, TGIF)",
+          "cells": [
+            {
+              "text": "Genetic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine evaluation of the hypothalamic-pituitary axis",
+          "cells": [
+            {
+              "text": "Pituitary hormone deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal glycaemic status",
+          "cells": [
+            {
+              "text": "Maternal diabetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "holoprosencephaly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "Matched to severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary hormone replacement",
+          "cells": [
+            {
+              "text": "Deficiencies diagnosed and replaced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "Epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasogastric feeding",
+          "cells": [
+            {
+              "text": "Feeding difficulty and failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity, hypotonia and developmental delay",
+          "cells": [
+            {
+              "text": "Therapy and support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial anomalies",
+          "cells": [
+            {
+              "text": "Midline anomalies such as cleft lip and palate, corrected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Karyotype, microarray and gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary paediatric care",
+          "cells": [
+            {
+              "text": "Neurology, endocrinology and genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "holoprosencephaly-dx-mgmt",
+      "title": "Diagnosis and management of Holoprosencephaly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Midline forebrain malformation with facial anomalies or pituitary deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Diabetes insipidus, sodium disturbance, refractory seizures, or airway or feeding risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent endocrine treatment for diabetes insipidus or sodium disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Foetal and postnatal MRI; karyotype and microarray; SHH, ZIC2, SIX3, TGIF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a holoprosencephaly gene variant or chromosomal cause confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hydranencephaly, septo-optic dysplasia, callosal agenesis or Dandy-Walker",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive and palliative care matched to severity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replacement of pituitary hormone deficiencies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticonvulsant therapy for epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nasogastric feeding for feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Care matched to severity; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

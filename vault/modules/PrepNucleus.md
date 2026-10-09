@@ -870,7 +870,47 @@ Owner request 2026-10-09 (with his answers). Layer C contract otherwise as [[pla
   (steps, 500-page picker, cap, 10 at a time to 50, deck screen, restore after IndexedDB is cleared; SHOTS at 390, 820,
   1180 dark and light; deletes its Chrome profile).
 
-## Interactive lessons + image-rich radiology lessons (2026-10-09, branch `feat/prep-interactive-lessons`, prep38)
+## Native feel, one image viewer, real figures only (2026-10-09, branch `fix/prep-native-feel`, prep38)
+Owner bug report (iPad screenshot): a deck question showed a whole page of notes as its "image" ("Based on the table
+provided in the image..."), tap to enlarge was stuck, and screens jumped up on every tap.
+
+**Shared image viewer: `prep-viewer.js` (`window.PREP_VIEWER`).** The one full-screen viewer for every enlarged image.
+Use it for any new image surface (interactive lessons included); do not write another zoom.
+- `PREP_VIEWER.open({ src, alt, caption, from, onClose })` opens it (mounted in `.pn-root`, else `document.body`).
+  `from` gets focus back on close; `onClose` runs once however it closes.
+- `PREP_VIEWER.close()` -> true when one was open. `prep.js back()` calls it first, so Escape and Android back close it.
+- `PREP_VIEWER.isOpen()`; `_state()` -> `{ s, x, y, dy }` and `_pure` (gesture maths) for tests.
+- Gestures: pinch 1x to 5x around the pinch point, pan with edge limits (rubber band past them), double tap 2.5x at the
+  tap / back to fit, swipe down at fit to close, trackpad pinch (ctrl + wheel), keys (Escape, + - 0, arrows), and 44 px
+  zoom out / level (fit) / zoom in buttons. All transform on the image; pointer coordinates are divided by the app's
+  html zoom (home.js text size), so maths is in the stage's CSS px. CSS: the `.pv-*` block at the end of `prep.css`.
+- Wired: PYQ / deck / explanation images (`prep-pyq.js zoomOpen`), lesson figures (prep.js `lessonZoomToViewer`: the
+  lesson's own `#pnZoom` paint is hidden and shown in the viewer; closing it presses the lesson's `l-unzoom`, so
+  `prep-lessons.js` needed no change). The radiology slice stack keeps its own enlarged mode (drag = slices).
+
+**App shell (prep.js `paint`).** Root cause of "pages go up on clicking": every paint replaced the overlay, so the body
+was new (scrollTop 0) and then `focus()` scrolled to the focused element. Now a repaint of the same screen keeps the
+scroll position (set before the frame), a push starts at the top, back restores the position kept per stack depth, a
+new question starts at the top, focus uses `preventScroll`, and a push or pop keeps the leaving body as `.pn-ghost` for
+a 200 ms cross-fade (no empty frame; ids stripped; prep-motion ignores it). A fresh answer glides just enough to show the
+verdict when it starts below the fold. `html.pn-open` (set on open) stops the document scrolling under the overlay;
+`.pn-body` is `overflow-x: hidden` (overflow-y auto alone made x scrollable too), bars are `touch-action: none`.
+
+**Deck images are figures only (`prep-source.js`).** An image covering 55% or more of its page is a page scan and never a
+candidate; `scanPages` + `figureRegions` look inside a scan for a picture-like region (dense blocks, then
+`classifyPixels` = picture) and find none on a page of text. Embedded images under more than 40 characters of the page's
+text layer (OCR'd scans) are out. Every cut is classified from its pixels (`classifyPixels`: picture / diagram / text /
+blank; text = lines in bands, a flat fill is text on a box) and only pictures and diagrams (scan regions: pictures) are
+kept. Server (`functions/_prep-core.js`): imcq schema now says `kind` first (`IMG_KINDS`); text, table, chart, other ->
+no question (`skipped: "not-figure"`); `imageStemReads` drops any stem or key that asks to read the image
+(`"reads-image"`); the prompt forbids it. Old deck items whose stem reads the image are left out when practised
+(`prep-create.js readsImage`). Fixtures: `test/fixtures/prep-figures/make-pdf.mjs`.
+Tests: `test/prep-figures.test.mjs`, `test/prep-viewer.test.mjs`, `test/prep-imcq.test.mjs`, headless
+`test/run-prep-feel-ui.mjs` (navigation scroll per frame, sideways overflow at 390/820/1180, viewer touch gestures via
+CDP `Input.dispatchTouchEvent`, deck crops on the six fixture pages).
+Real-device checks left: pinch and swipe-down feel in iOS WKWebView and Android WebView, rubber band of the overlay on
+iOS, keyboard over inputs.
+## Interactive lessons + image-rich radiology lessons (2026-10-09, branch `feat/prep-interactive-lessons`, prep39)
 Owner 2026-10-09: radiology lessons "don't have images as much as needed ... make it interesting, interactive and the
 best way of learning."
 - **Reader (`prep-lessons.js` + `prep-lx.css`, loader CSS list):** new optional parts, all drawn from data:

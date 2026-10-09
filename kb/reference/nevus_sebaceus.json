@@ -1,174 +1,443 @@
 {
- "id": "nevus_sebaceus",
- "name": "Naevus sebaceus of Jadassohn",
- "aliases": [
-  "nevus sebaceus",
-  "naevus sebaceus",
-  "sebaceous naevus",
-  "organoid naevus"
- ],
- "class": "non_infective",
- "system": "Dermatology / Neurocutaneous",
- "specialty": "Dermatology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital organoid hamartoma of the epidermis and adnexa, typically presenting as a hairless yellow-orange plaque on the scalp or face",
-   "It is a mosaic lesion caused by post-zygotic activating RAS-pathway variants, usually HRAS and less often KRAS",
-   "The lesion evolves with age, becoming smooth and flat in infancy, then verrucous and nodular around puberty under hormonal influence",
-   "The characteristic scalp lesion is associated with overlying alopecia because normal follicles are absent",
-   "It carries a lifelong risk of secondary tumours, most commonly benign trichoblastoma and syringocystadenoma papilliferum, with basal cell carcinoma the main malignant concern",
-   "Extensive lesions may be part of Schimmelpenning syndrome with cerebral, ocular and skeletal anomalies, so wide involvement prompts systemic assessment",
-   "Management is generic: observation with clinical surveillance, and consideration of complete excision where there is cosmetic concern or a suspicious secondary growth"
+  "id": "nevus_sebaceus",
+  "name": "Naevus sebaceus of Jadassohn",
+  "aliases": [
+    "nevus sebaceus",
+    "naevus sebaceus",
+    "sebaceous naevus",
+    "organoid naevus"
   ],
-  "pathophysiology": "Naevus sebaceus of Jadassohn is a mosaic organoid hamartoma resulting from a post-zygotic activating variant in the RAS-MAPK pathway, most often HRAS and occasionally KRAS, arising in an epidermal progenitor during development. The affected clone produces disordered overgrowth of the epidermis together with sebaceous glands, abortive hair follicles and apocrine structures, giving the lesion its organoid character and its distribution along the lines of Blaschko. Persistent RAS-pathway activation drives the pubertal thickening of the lesion and predisposes to the development of secondary benign and, less commonly, malignant appendageal tumours over the patient's lifetime.",
-  "additionalDifferentials": [
-   "Aplasia cutis congenita",
-   "Juvenile xanthogranuloma",
-   "Epidermal (keratinocytic) naevus",
-   "Solitary mastocytoma",
-   "Syringocystadenoma papilliferum arising de novo",
-   "Trichoblastoma or basal cell carcinoma"
-  ],
-  "additionalInvestigations": [
-   "Clinical and dermoscopic assessment of the plaque",
-   "Skin biopsy where diagnosis is uncertain or a secondary tumour is suspected",
-   "Histopathology of any excised lesion to identify secondary neoplasia",
-   "MRI of the brain where the naevus is extensive or neurological features suggest Schimmelpenning syndrome",
-   "Ophthalmological review in extensive head-and-neck disease",
-   "Molecular testing of lesional tissue for HRAS/KRAS variants where available"
-  ],
-  "redFlags": [
-   "New nodule, ulceration or bleeding within the plaque suggesting a secondary malignancy",
-   "Rapid change in a long-stable lesion",
-   "Extensive lesions with seizures or developmental delay indicating a neurocutaneous syndrome",
-   "Ocular or skeletal anomalies in association with a large naevus"
-  ],
-  "prognosis": "Isolated naevus sebaceus has an excellent prognosis; the main long-term consideration is the modest risk of secondary tumours, predominantly benign, so periodic surveillance or elective excision is reasonable, while extensive lesions require assessment for associated syndromic disease.",
-  "pitfalls": [
-   "Assuming any secondary growth is malignant when benign trichoblastoma is far more common",
-   "Failing to reassess a lesion that changes in adulthood",
-   "Not screening for systemic involvement when the naevus is extensive",
-   "Excising purely for a low malignancy risk without discussing that benign tumours predominate"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Happle R. Mosaicism in Human Skin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage isolated, asymptomatic lesions by periodic clinical and dermoscopic surveillance, counselling that the mosaic RAS-pathway lesion is benign but carries a lifelong risk of secondary appendageal tumours.",
-   "Offer elective full-thickness surgical excision for cosmetic concern, symptomatic lesions or where reliable surveillance is impractical, sending the specimen for histopathology.",
-   "Promptly biopsy or excise any new nodule, ulceration, bleeding or accelerated growth to exclude secondary neoplasia, commonly benign trichoblastoma or syringocystadenoma papilliferum and less often basal cell carcinoma.",
-   "Time excision with awareness of pubertal thickening, and counsel on the associated localised alopecia over scalp lesions and on scarring or reconstruction where relevant.",
-   "Assess extensive or multiple lesions for Schimmelpenning syndrome, arranging brain MRI and neurological review where cerebral involvement or seizures are suspected.",
-   "Arrange ophthalmological review for extensive head-and-neck disease and paediatric developmental assessment as part of syndromic evaluation.",
-   "Explain the post-zygotic mosaic aetiology when counselling families: the lesion is not inherited and recurrence risk in future pregnancies is not increased."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nevus_sebaceus-pathway",
-   "title": "Naevus sebaceus of Jadassohn: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital organoid hamartoma of the epidermis and adnexa, typically presenting as a hairless yellow-orange plaque on the scalp or face",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New nodule, ulceration or bleeding within the plaque suggesting a secondary malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical and dermoscopic assessment of the plaque, Skin biopsy where diagnosis is uncertain or a secondary tumour is suspected, Histopathology of any excised lesion to identify secondary neoplasia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage isolated, asymptomatic lesions by periodic clinical and dermoscopic surveillance, counselling that the mosaic RAS-pathway lesion is benign but carries a lifelong risk of secondary appendageal tumours."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming any secondary growth is malignant when benign trichoblastoma is far more common"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of naevus sebaceus of jadassohn."
-  }
- ],
- "tables": [
-  {
-   "id": "nevus_sebaceus-matrix",
-   "title": "Naevus sebaceus of Jadassohn: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital organoid hamartoma of the epidermis and adnexa, typically presenting as a hairless yellow-orange plaque on the scalp",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Neurocutaneous",
+  "specialty": "Dermatology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital organoid hamartoma of the epidermis and adnexa, typically presenting as a hairless yellow-orange plaque on the scalp or face",
+      "It is a mosaic lesion caused by post-zygotic activating RAS-pathway variants, usually HRAS and less often KRAS",
+      "The lesion evolves with age, becoming smooth and flat in infancy, then verrucous and nodular around puberty under hormonal influence",
+      "The characteristic scalp lesion is associated with overlying alopecia because normal follicles are absent",
+      "It carries a lifelong risk of secondary tumours, most commonly benign trichoblastoma and syringocystadenoma papilliferum, with basal cell carcinoma the main malignant concern",
+      "Extensive lesions may be part of Schimmelpenning syndrome with cerebral, ocular and skeletal anomalies, so wide involvement prompts systemic assessment",
+      "Management is generic: observation with clinical surveillance, and consideration of complete excision where there is cosmetic concern or a suspicious secondary growth"
     ],
-    [
-     "Key Investigations",
-     "Clinical and dermoscopic assessment of the plaque, Skin biopsy where diagnosis is uncertain or a secondary tumour is suspected,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Naevus sebaceus of Jadassohn is a mosaic organoid hamartoma resulting from a post-zygotic activating variant in the RAS-MAPK pathway, most often HRAS and occasionally KRAS, arising in an epidermal progenitor during development. The affected clone produces disordered overgrowth of the epidermis together with sebaceous glands, abortive hair follicles and apocrine structures, giving the lesion its organoid character and its distribution along the lines of Blaschko. Persistent RAS-pathway activation drives the pubertal thickening of the lesion and predisposes to the development of secondary benign and, less commonly, malignant appendageal tumours over the patient's lifetime.",
+    "additionalDifferentials": [
+      "Aplasia cutis congenita",
+      "Juvenile xanthogranuloma",
+      "Epidermal (keratinocytic) naevus",
+      "Solitary mastocytoma",
+      "Syringocystadenoma papilliferum arising de novo",
+      "Trichoblastoma or basal cell carcinoma"
     ],
-    [
-     "Primary Differentials",
-     "Aplasia cutis congenita, Juvenile xanthogranuloma, Epidermal (keratinocytic) naevus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical and dermoscopic assessment of the plaque",
+      "Skin biopsy where diagnosis is uncertain or a secondary tumour is suspected",
+      "Histopathology of any excised lesion to identify secondary neoplasia",
+      "MRI of the brain where the naevus is extensive or neurological features suggest Schimmelpenning syndrome",
+      "Ophthalmological review in extensive head-and-neck disease",
+      "Molecular testing of lesional tissue for HRAS/KRAS variants where available"
     ],
-    [
-     "Management Strategy",
-     "Manage isolated, asymptomatic lesions by periodic clinical and dermoscopic surveillance, counselling that the mosaic RAS-pathway",
-     "Core treatment modality"
+    "redFlags": [
+      "New nodule, ulceration or bleeding within the plaque suggesting a secondary malignancy",
+      "Rapid change in a long-stable lesion",
+      "Extensive lesions with seizures or developmental delay indicating a neurocutaneous syndrome",
+      "Ocular or skeletal anomalies in association with a large naevus"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming any secondary growth is malignant when benign trichoblastoma is far more common",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated naevus sebaceus has an excellent prognosis; the main long-term consideration is the modest risk of secondary tumours, predominantly benign, so periodic surveillance or elective excision is reasonable, while extensive lesions require assessment for associated syndromic disease.",
+    "pitfalls": [
+      "Assuming any secondary growth is malignant when benign trichoblastoma is far more common",
+      "Failing to reassess a lesion that changes in adulthood",
+      "Not screening for systemic involvement when the naevus is extensive",
+      "Excising purely for a low malignancy risk without discussing that benign tumours predominate"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Happle R. Mosaicism in Human Skin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage isolated, asymptomatic lesions by periodic clinical and dermoscopic surveillance, counselling that the mosaic RAS-pathway lesion is benign but carries a lifelong risk of secondary appendageal tumours.",
+      "Offer elective full-thickness surgical excision for cosmetic concern, symptomatic lesions or where reliable surveillance is impractical, sending the specimen for histopathology.",
+      "Promptly biopsy or excise any new nodule, ulceration, bleeding or accelerated growth to exclude secondary neoplasia, commonly benign trichoblastoma or syringocystadenoma papilliferum and less often basal cell carcinoma.",
+      "Time excision with awareness of pubertal thickening, and counsel on the associated localised alopecia over scalp lesions and on scarring or reconstruction where relevant.",
+      "Assess extensive or multiple lesions for Schimmelpenning syndrome, arranging brain MRI and neurological review where cerebral involvement or seizures are suspected.",
+      "Arrange ophthalmological review for extensive head-and-neck disease and paediatric developmental assessment as part of syndromic evaluation.",
+      "Explain the post-zygotic mosaic aetiology when counselling families: the lesion is not inherited and recurrence risk in future pregnancies is not increased."
     ]
-   ],
-   "caption": "Overview comparison matrix for naevus sebaceus of jadassohn."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nevus-sebaceus-real-image",
-   "title": "Naevus sebaceus of Jadassohn: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "nevus_sebaceus-pathway",
+      "title": "Naevus sebaceus of Jadassohn: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital organoid hamartoma of the epidermis and adnexa, typically presenting as a hairless yellow-orange plaque on the scalp or face",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New nodule, ulceration or bleeding within the plaque suggesting a secondary malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical and dermoscopic assessment of the plaque, Skin biopsy where diagnosis is uncertain or a secondary tumour is suspected, Histopathology of any excised lesion to identify secondary neoplasia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage isolated, asymptomatic lesions by periodic clinical and dermoscopic surveillance, counselling that the mosaic RAS-pathway lesion is benign but carries a lifelong risk of secondary appendageal tumours."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming any secondary growth is malignant when benign trichoblastoma is far more common"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of naevus sebaceus of jadassohn."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nevus_sebaceus-matrix",
+      "title": "Naevus sebaceus of Jadassohn: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital organoid hamartoma of the epidermis and adnexa, typically presenting as a hairless yellow-orange plaque on the scalp",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical and dermoscopic assessment of the plaque, Skin biopsy where diagnosis is uncertain or a secondary tumour is suspected,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Aplasia cutis congenita, Juvenile xanthogranuloma, Epidermal (keratinocytic) naevus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage isolated, asymptomatic lesions by periodic clinical and dermoscopic surveillance, counselling that the mosaic RAS-pathway",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any secondary growth is malignant when benign trichoblastoma is far more common",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for naevus sebaceus of jadassohn."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nevus_sebaceus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical and dermoscopic assessment of the plaque",
+          "cells": [
+            {
+              "text": "Hairless yellow-orange plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Diagnosis uncertain or secondary tumour suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of any excised lesion",
+          "cells": [
+            {
+              "text": "Identifies secondary neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Extensive lesions with seizures or developmental delay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_sebaceus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aplasia cutis congenita",
+          "cells": [
+            {
+              "text": "Congenital scalp defect without yellow plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile xanthogranuloma",
+          "cells": [
+            {
+              "text": "Yellow papules or nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary mastocytoma",
+          "cells": [
+            {
+              "text": "Brown lesion that urticates on rubbing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoblastoma or basal cell carcinoma",
+          "cells": [
+            {
+              "text": "Secondary tumours arising within the plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syringocystadenoma papilliferum",
+          "cells": [
+            {
+              "text": "Benign adnexal tumour within the plaque"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_sebaceus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Periodic surveillance",
+          "cells": [
+            {
+              "text": "Clinical and dermoscopic review of isolated, asymptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective full-thickness excision",
+          "cells": [
+            {
+              "text": "Offered for cosmetic reasons or to remove a secondary tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic screening",
+          "cells": [
+            {
+              "text": "Extensive lesions with neurological or ocular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Mosaic RAS-pathway lesion; modest lifelong tumour risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nevus_sebaceus-dx-mgmt",
+      "title": "Diagnosis and management of Naevus sebaceus of Jadassohn",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hairless yellow-orange plaque on the scalp or face present since birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new nodule, ulceration, bleeding, rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy of any suspicious nodule or ulcerated area",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy, biopsy where uncertain, histopathology of excised lesions, MRI if extensive",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organoid epidermal and adnexal hamartoma on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider aplasia cutis or juvenile xanthogranuloma; biopsy to confirm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Periodic clinical and dermoscopic surveillance for isolated lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Elective full-thickness excision for cosmetic reasons or secondary tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic screening for extensive or neurocutaneous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counselling about the modest lifelong tumour risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated lesion has excellent prognosis; secondary tumours are mostly benign",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

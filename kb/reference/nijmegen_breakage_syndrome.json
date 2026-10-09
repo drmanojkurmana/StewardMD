@@ -1,175 +1,444 @@
 {
- "id": "nijmegen_breakage_syndrome",
- "name": "Nijmegen breakage syndrome",
- "aliases": [
-  "NBS",
-  "NBN",
-  "nibrin",
-  "Seemanova syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Oncology",
- "specialty": "Clinical Genetics / Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in NBN, encoding nibrin, a component of the MRE11-RAD50-NBN complex involved in DNA double-strand break repair",
-   "Progressive microcephaly is present from birth or infancy and is a cardinal feature, accompanied by a characteristic bird-like facial appearance",
-   "Combined immunodeficiency causes recurrent respiratory and other infections, with low immunoglobulins and reduced lymphocyte subsets",
-   "There is a very high risk of malignancy in childhood, predominantly lymphomas and leukaemias, but also solid tumours",
-   "Growth restriction and, in females, hypergonadotropic hypogonadism with ovarian failure are common",
-   "Cells show increased chromosomal breakage and characteristic rearrangements involving chromosomes 7 and 14, with radiosensitivity",
-   "There is a founder variant common in Slavic populations, and marked radiosensitivity means ionising radiation should be avoided wherever possible"
+  "id": "nijmegen_breakage_syndrome",
+  "name": "Nijmegen breakage syndrome",
+  "aliases": [
+    "NBS",
+    "NBN",
+    "nibrin",
+    "Seemanova syndrome"
   ],
-  "pathophysiology": "Nijmegen breakage syndrome is caused by biallelic hypomorphic variants in NBN, encoding nibrin, a subunit of the MRE11-RAD50-NBN (MRN) complex that senses and initiates repair of DNA double-strand breaks and coordinates cell-cycle checkpoint signalling through the ATM pathway. Impaired nibrin function leaves cells unable to repair double-strand breaks efficiently, producing chromosomal instability, characteristic rearrangements and hypersensitivity to ionising radiation. This defect underlies the immunodeficiency (from impaired lymphocyte development requiring efficient DNA recombination), the microcephaly and the strong predisposition to lymphoid and other malignancies.",
-  "additionalDifferentials": [
-   "Ataxia-telangiectasia (ATM) and ataxia-telangiectasia-like disorder (MRE11)",
-   "Fanconi anaemia and Bloom syndrome",
-   "Other primary microcephaly syndromes",
-   "LIG4 syndrome and other DNA double-strand break repair defects",
-   "Combined immunodeficiencies of other cause",
-   "Cernunnos/XLF deficiency"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of NBN to confirm biallelic variants",
-   "Cytogenetic analysis showing chromosomal instability and rearrangements involving chromosomes 7 and 14",
-   "Radiosensitivity assays where diagnostically helpful",
-   "Immunological workup including immunoglobulin levels and lymphocyte subsets",
-   "Serial neuroimaging and growth monitoring for microcephaly and growth restriction",
-   "Symptom-directed cancer surveillance, favouring non-ionising imaging"
-  ],
-  "redFlags": [
-   "New lymphadenopathy, organomegaly or cytopenias suggesting lymphoma or leukaemia",
-   "Severe or recurrent infections indicating significant immunodeficiency",
-   "Unexpected severe toxicity after exposure to ionising radiation",
-   "Rapid neurological or developmental deterioration"
-  ],
-  "prognosis": "Prognosis is poor, driven principally by the very high childhood risk of lymphoid and other cancers and by complications of immunodeficiency. Radiosensitivity constrains both diagnostic imaging and cancer treatment, and management is largely supportive with infection prophylaxis and vigilant, radiation-sparing cancer monitoring.",
-  "pitfalls": [
-   "Exposing patients to avoidable ionising radiation for imaging or radiotherapy given their radiosensitivity",
-   "Ascribing microcephaly to a non-genetic cause and missing the diagnosis",
-   "Underestimating the degree of immunodeficiency and infection risk",
-   "Delaying investigation of possible lymphoma because symptoms overlap with infection"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "GeneReviews: Nijmegen Breakage Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the immunodeficiency with immunoglobulin replacement and antimicrobial prophylaxis, and treat infections promptly",
-   "Minimise ionising radiation because of profound radiosensitivity: avoid diagnostic X-rays and CT and favour non-ionising ultrasound and MRI",
-   "Undertake symptom-directed cancer surveillance focused on lymphoma and leukaemia, using non-ionising imaging",
-   "Modify oncological treatment when malignancy occurs, reducing radiotherapy and radiomimetic chemotherapy doses because of radiosensitivity",
-   "Provide hormone replacement for hypergonadotropic hypogonadism and ovarian failure in affected females",
-   "Monitor growth and neurodevelopment and provide developmental support for microcephaly and growth restriction",
-   "Consider haematopoietic stem cell transplantation in selected patients",
-   "Coordinate multidisciplinary care and offer genetic counselling and family screening given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nijmegen_breakage_syndrome-pathway",
-   "title": "Nijmegen breakage syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in NBN, encoding nibrin, a component of the MRE11-RAD50-NBN complex involved in DNA double-strand break repair",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New lymphadenopathy, organomegaly or cytopenias suggesting lymphoma or leukaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of NBN to confirm biallelic variants, Cytogenetic analysis showing chromosomal instability and rearrangements involving chromosomes 7 and 14, Radiosensitivity assays where diagnostically helpful"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the immunodeficiency with immunoglobulin replacement and antimicrobial prophylaxis, and treat infections promptly"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Exposing patients to avoidable ionising radiation for imaging or radiotherapy given their radiosensitivity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nijmegen breakage syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "nijmegen_breakage_syndrome-matrix",
-   "title": "Nijmegen breakage syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in NBN, encoding nibrin, a component of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Oncology",
+  "specialty": "Clinical Genetics / Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in NBN, encoding nibrin, a component of the MRE11-RAD50-NBN complex involved in DNA double-strand break repair",
+      "Progressive microcephaly is present from birth or infancy and is a cardinal feature, accompanied by a characteristic bird-like facial appearance",
+      "Combined immunodeficiency causes recurrent respiratory and other infections, with low immunoglobulins and reduced lymphocyte subsets",
+      "There is a very high risk of malignancy in childhood, predominantly lymphomas and leukaemias, but also solid tumours",
+      "Growth restriction and, in females, hypergonadotropic hypogonadism with ovarian failure are common",
+      "Cells show increased chromosomal breakage and characteristic rearrangements involving chromosomes 7 and 14, with radiosensitivity",
+      "There is a founder variant common in Slavic populations, and marked radiosensitivity means ionising radiation should be avoided wherever possible"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of NBN to confirm biallelic variants, Cytogenetic analysis showing chromosomal instability and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nijmegen breakage syndrome is caused by biallelic hypomorphic variants in NBN, encoding nibrin, a subunit of the MRE11-RAD50-NBN (MRN) complex that senses and initiates repair of DNA double-strand breaks and coordinates cell-cycle checkpoint signalling through the ATM pathway. Impaired nibrin function leaves cells unable to repair double-strand breaks efficiently, producing chromosomal instability, characteristic rearrangements and hypersensitivity to ionising radiation. This defect underlies the immunodeficiency (from impaired lymphocyte development requiring efficient DNA recombination), the microcephaly and the strong predisposition to lymphoid and other malignancies.",
+    "additionalDifferentials": [
+      "Ataxia-telangiectasia (ATM) and ataxia-telangiectasia-like disorder (MRE11)",
+      "Fanconi anaemia and Bloom syndrome",
+      "Other primary microcephaly syndromes",
+      "LIG4 syndrome and other DNA double-strand break repair defects",
+      "Combined immunodeficiencies of other cause",
+      "Cernunnos/XLF deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Ataxia-telangiectasia (ATM) and ataxia-telangiectasia-like disorder (MRE11), Fanconi anaemia and Bloom syndrome, Other primary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of NBN to confirm biallelic variants",
+      "Cytogenetic analysis showing chromosomal instability and rearrangements involving chromosomes 7 and 14",
+      "Radiosensitivity assays where diagnostically helpful",
+      "Immunological workup including immunoglobulin levels and lymphocyte subsets",
+      "Serial neuroimaging and growth monitoring for microcephaly and growth restriction",
+      "Symptom-directed cancer surveillance, favouring non-ionising imaging"
     ],
-    [
-     "Management Strategy",
-     "Manage the immunodeficiency with immunoglobulin replacement and antimicrobial prophylaxis, and treat infections promptly",
-     "Core treatment modality"
+    "redFlags": [
+      "New lymphadenopathy, organomegaly or cytopenias suggesting lymphoma or leukaemia",
+      "Severe or recurrent infections indicating significant immunodeficiency",
+      "Unexpected severe toxicity after exposure to ionising radiation",
+      "Rapid neurological or developmental deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Exposing patients to avoidable ionising radiation for imaging or radiotherapy given their radiosensitivity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is poor, driven principally by the very high childhood risk of lymphoid and other cancers and by complications of immunodeficiency. Radiosensitivity constrains both diagnostic imaging and cancer treatment, and management is largely supportive with infection prophylaxis and vigilant, radiation-sparing cancer monitoring.",
+    "pitfalls": [
+      "Exposing patients to avoidable ionising radiation for imaging or radiotherapy given their radiosensitivity",
+      "Ascribing microcephaly to a non-genetic cause and missing the diagnosis",
+      "Underestimating the degree of immunodeficiency and infection risk",
+      "Delaying investigation of possible lymphoma because symptoms overlap with infection"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "GeneReviews: Nijmegen Breakage Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the immunodeficiency with immunoglobulin replacement and antimicrobial prophylaxis, and treat infections promptly",
+      "Minimise ionising radiation because of profound radiosensitivity: avoid diagnostic X-rays and CT and favour non-ionising ultrasound and MRI",
+      "Undertake symptom-directed cancer surveillance focused on lymphoma and leukaemia, using non-ionising imaging",
+      "Modify oncological treatment when malignancy occurs, reducing radiotherapy and radiomimetic chemotherapy doses because of radiosensitivity",
+      "Provide hormone replacement for hypergonadotropic hypogonadism and ovarian failure in affected females",
+      "Monitor growth and neurodevelopment and provide developmental support for microcephaly and growth restriction",
+      "Consider haematopoietic stem cell transplantation in selected patients",
+      "Coordinate multidisciplinary care and offer genetic counselling and family screening given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for nijmegen breakage syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nijmegen-breakage-syndrome-real-image",
-   "title": "Nijmegen breakage syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "nijmegen_breakage_syndrome-pathway",
+      "title": "Nijmegen breakage syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in NBN, encoding nibrin, a component of the MRE11-RAD50-NBN complex involved in DNA double-strand break repair",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New lymphadenopathy, organomegaly or cytopenias suggesting lymphoma or leukaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of NBN to confirm biallelic variants, Cytogenetic analysis showing chromosomal instability and rearrangements involving chromosomes 7 and 14, Radiosensitivity assays where diagnostically helpful"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the immunodeficiency with immunoglobulin replacement and antimicrobial prophylaxis, and treat infections promptly"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Exposing patients to avoidable ionising radiation for imaging or radiotherapy given their radiosensitivity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nijmegen breakage syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nijmegen_breakage_syndrome-matrix",
+      "title": "Nijmegen breakage syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in NBN, encoding nibrin, a component of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of NBN to confirm biallelic variants, Cytogenetic analysis showing chromosomal instability and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ataxia-telangiectasia (ATM) and ataxia-telangiectasia-like disorder (MRE11), Fanconi anaemia and Bloom syndrome, Other primary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the immunodeficiency with immunoglobulin replacement and antimicrobial prophylaxis, and treat infections promptly",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Exposing patients to avoidable ionising radiation for imaging or radiotherapy given their radiosensitivity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nijmegen breakage syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nijmegen_breakage_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NBN molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetic analysis",
+          "cells": [
+            {
+              "text": "Chromosomal instability with rearrangements of chromosomes 7 and 14"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiosensitivity assays",
+          "cells": [
+            {
+              "text": "Where diagnostically available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin and lymphocyte assessment",
+          "cells": [
+            {
+              "text": "Immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nijmegen_breakage_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ataxia-telangiectasia",
+          "cells": [
+            {
+              "text": "ATM variant with ataxia and telangiectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ataxia-telangiectasia-like disorder",
+          "cells": [
+            {
+              "text": "MRE11 variant with ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi anaemia or Bloom syndrome",
+          "cells": [
+            {
+              "text": "Chromosomal instability with other features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary microcephaly syndromes",
+          "cells": [
+            {
+              "text": "Other causes of microcephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LIG4 syndrome",
+          "cells": [
+            {
+              "text": "DNA repair defect with immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nijmegen_breakage_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "For immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial prophylaxis",
+          "cells": [
+            {
+              "text": "Prompt treatment of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimise ionising radiation",
+          "cells": [
+            {
+              "text": "Avoid diagnostic X-rays and CT where possible; radiotherapy is high risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cancer surveillance",
+          "cells": [
+            {
+              "text": "High childhood risk of lymphoid malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nijmegen_breakage_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Nijmegen breakage syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive microcephaly from birth with recurrent infection and immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (lymphadenopathy, cytopenia, severe toxicity after radiation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review; avoid ionising radiation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NBN sequencing, chromosome instability studies, radiosensitivity, immunoglobulins",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic NBN variants with chromosomal instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ataxia-telangiectasia or other breakage syndrome; retest",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunoglobulin replacement and antimicrobial prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Minimise ionising radiation because of profound sensitivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for lymphoid and other cancers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Poor prognosis, driven by high childhood cancer risk and immunodeficiency",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

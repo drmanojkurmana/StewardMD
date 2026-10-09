@@ -1,175 +1,236 @@
 {
- "id": "body_dysmorphic_disorder",
- "name": "Body Dysmorphic Disorder",
- "aliases": [
-  "Dysmorphophobia",
-  "BDD"
- ],
- "class": "non_infective",
- "system": "Nervous system / Psychiatry",
- "specialty": "Psychiatry / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "New Oxford Textbook of Psychiatry",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Preoccupation with one or more perceived defects in appearance that are unobservable or appear only slight to others, causing marked distress or impairment.",
-   "Classified within the obsessive-compulsive and related disorders spectrum.",
-   "Repetitive behaviours such as mirror-checking or avoidance, grooming, skin-picking, reassurance-seeking, and comparing, or mental acts, occur in response to appearance concerns.",
-   "Common foci are the skin, hair, nose, and other facial features; muscle dysmorphia, a preoccupation with insufficient muscularity, is a recognised specifier.",
-   "High rates of depression and social anxiety accompany notably high suicidality, which is a leading clinical concern.",
-   "Frequently presents to dermatology, cosmetic, and maxillofacial or plastic surgery services rather than psychiatry, and cosmetic procedures rarely satisfy and may worsen the condition.",
-   "Insight is often poor and may reach delusional intensity as a specifier, yet the condition still responds to serotonergic and cognitive-behavioural treatment.",
-   "First-line management combines serotonin reuptake inhibitors, often requiring higher-range dosing and prolonged trials, with cognitive-behavioural therapy incorporating exposure and response prevention."
+  "id": "body_dysmorphic_disorder",
+  "name": "Body Dysmorphic Disorder",
+  "aliases": [
+    "Dysmorphophobia",
+    "BDD"
   ],
-  "pathophysiology": "Body dysmorphic disorder shares mechanisms with obsessive-compulsive disorder, involving fronto-striatal and limbic circuitry and serotonergic dysfunction. Patients show abnormal visual processing biased toward detailed, piecemeal analysis of appearance rather than global or holistic processing, with heightened activity in visual and orbitofrontal-striatal systems. Cognitive-behavioural models emphasise selective attention to perceived flaws, distorted self-image, maladaptive appearance-related beliefs, and safety and checking behaviours that maintain distress. Emotional processing biases, such as interpreting neutral facial expressions as contemptuous, reinforce social anxiety and avoidance.",
-  "additionalDifferentials": [
-   "Obsessive-compulsive disorder",
-   "Social anxiety disorder",
-   "Major depressive disorder",
-   "Eating disorders where the concern is weight or shape",
-   "Delusional disorder, somatic type",
-   "Gender dysphoria where distress concerns sex characteristics",
-   "Normal appearance concern or actual disfigurement"
-  ],
-  "additionalInvestigations": [
-   "Structured assessment such as the BDD-YBOCS and validated screening questions",
-   "Suicide risk assessment, which is essential",
-   "Screening for depression, social anxiety, obsessive-compulsive disorder, and eating disorder",
-   "Assessment of insight and delusionality",
-   "History of cosmetic or dermatological procedures sought or undergone",
-   "Substance use assessment",
-   "Collateral history regarding functioning and behaviours"
-  ],
-  "redFlags": [
-   "Active suicidal ideation or previous attempts, indicating high risk",
-   "Escalating pursuit of cosmetic surgery or self-performed procedures",
-   "Severe social isolation and functional collapse",
-   "Skin-picking causing tissue damage or infection"
-  ],
-  "prognosis": "Without treatment the disorder tends to be chronic; with adequate-dose serotonergic medication and cognitive-behavioural therapy many patients improve substantially, though relapse can occur if treatment is stopped prematurely.",
-  "pitfalls": [
-   "Missing the diagnosis behind depression, social anxiety, or repeated cosmetic requests",
-   "Underestimating suicide risk",
-   "Endorsing or facilitating cosmetic procedures that typically fail to help",
-   "Under-dosing or curtailing serotonergic trials and omitting exposure-based cognitive-behavioural therapy"
-  ],
-  "references": [
-   "New Oxford Textbook of Psychiatry",
-   "Kaplan and Sadock's Synopsis of Psychiatry",
-   "NICE guidance on obsessive-compulsive disorder and body dysmorphic disorder"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Serotonergic antidepressants (SSRIs), typically at the higher end of dosing and for an adequate duration, as first-line pharmacotherapy",
-   "Cognitive-behavioural therapy tailored to the disorder, incorporating exposure and response prevention and cognitive work on appearance-related beliefs",
-   "Structured suicide risk assessment with a crisis and safety plan, given the high suicidality",
-   "Counsel against cosmetic, dermatological and surgical procedures, which rarely satisfy and may worsen the condition",
-   "Identify and treat comorbid depression, social anxiety and substance use, augmenting with an antipsychotic in refractory or delusional cases",
-   "Psychiatric referral and consideration of more intensive or inpatient care when risk is high, with relapse prevention as medication is continued"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "body_dysmorphic_disorder-pathway",
-   "title": "Body Dysmorphic Disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Preoccupation with one or more perceived defects in appearance that are unobservable or appear only slight to others, causing marked distress or impairment.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Active suicidal ideation or previous attempts, indicating high risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Structured assessment such as the BDD-YBOCS and validated screening questions, Suicide risk assessment, which is essential, Screening for depression, social anxiety, obsessive-compulsive disorder, and eating disorder"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Serotonergic antidepressants (SSRIs), typically at the higher end of dosing and for an adequate duration, as first-line pharmacotherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis behind depression, social anxiety, or repeated cosmetic requests"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of body dysmorphic disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "body_dysmorphic_disorder-matrix",
-   "title": "Body Dysmorphic Disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Preoccupation with one or more perceived defects in appearance that are unobservable or appear only slight to others, causing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Psychiatry",
+  "specialty": "Psychiatry / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "New Oxford Textbook of Psychiatry",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Preoccupation with one or more perceived defects in appearance that are unobservable or appear only slight to others, causing marked distress or impairment.",
+      "Classified within the obsessive-compulsive and related disorders spectrum.",
+      "Repetitive behaviours such as mirror-checking or avoidance, grooming, skin-picking, reassurance-seeking, and comparing, or mental acts, occur in response to appearance concerns.",
+      "Common foci are the skin, hair, nose, and other facial features; muscle dysmorphia, a preoccupation with insufficient muscularity, is a recognised specifier.",
+      "High rates of depression and social anxiety accompany notably high suicidality, which is a leading clinical concern.",
+      "Frequently presents to dermatology, cosmetic, and maxillofacial or plastic surgery services rather than psychiatry, and cosmetic procedures rarely satisfy and may worsen the condition.",
+      "Insight is often poor and may reach delusional intensity as a specifier, yet the condition still responds to serotonergic and cognitive-behavioural treatment.",
+      "First-line management combines serotonin reuptake inhibitors, often requiring higher-range dosing and prolonged trials, with cognitive-behavioural therapy incorporating exposure and response prevention."
     ],
-    [
-     "Key Investigations",
-     "Structured assessment such as the BDD-YBOCS and validated screening questions, Suicide risk assessment, which is essential,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Body dysmorphic disorder shares mechanisms with obsessive-compulsive disorder, involving fronto-striatal and limbic circuitry and serotonergic dysfunction. Patients show abnormal visual processing biased toward detailed, piecemeal analysis of appearance rather than global or holistic processing, with heightened activity in visual and orbitofrontal-striatal systems. Cognitive-behavioural models emphasise selective attention to perceived flaws, distorted self-image, maladaptive appearance-related beliefs, and safety and checking behaviours that maintain distress. Emotional processing biases, such as interpreting neutral facial expressions as contemptuous, reinforce social anxiety and avoidance.",
+    "additionalDifferentials": [
+      "Obsessive-compulsive disorder",
+      "Social anxiety disorder",
+      "Major depressive disorder",
+      "Eating disorders where the concern is weight or shape",
+      "Delusional disorder, somatic type",
+      "Gender dysphoria where distress concerns sex characteristics",
+      "Normal appearance concern or actual disfigurement"
     ],
-    [
-     "Primary Differentials",
-     "Obsessive-compulsive disorder, Social anxiety disorder, Major depressive disorder",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Structured assessment such as the BDD-YBOCS and validated screening questions",
+      "Suicide risk assessment, which is essential",
+      "Screening for depression, social anxiety, obsessive-compulsive disorder, and eating disorder",
+      "Assessment of insight and delusionality",
+      "History of cosmetic or dermatological procedures sought or undergone",
+      "Substance use assessment",
+      "Collateral history regarding functioning and behaviours"
     ],
-    [
-     "Management Strategy",
-     "Serotonergic antidepressants (SSRIs), typically at the higher end of dosing and for an adequate duration, as first-line",
-     "Core treatment modality"
+    "redFlags": [
+      "Active suicidal ideation or previous attempts, indicating high risk",
+      "Escalating pursuit of cosmetic surgery or self-performed procedures",
+      "Severe social isolation and functional collapse",
+      "Skin-picking causing tissue damage or infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis behind depression, social anxiety, or repeated cosmetic requests",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without treatment the disorder tends to be chronic; with adequate-dose serotonergic medication and cognitive-behavioural therapy many patients improve substantially, though relapse can occur if treatment is stopped prematurely.",
+    "pitfalls": [
+      "Missing the diagnosis behind depression, social anxiety, or repeated cosmetic requests",
+      "Underestimating suicide risk",
+      "Endorsing or facilitating cosmetic procedures that typically fail to help",
+      "Under-dosing or curtailing serotonergic trials and omitting exposure-based cognitive-behavioural therapy"
+    ],
+    "references": [
+      "New Oxford Textbook of Psychiatry",
+      "Kaplan and Sadock's Synopsis of Psychiatry",
+      "NICE guidance on obsessive-compulsive disorder and body dysmorphic disorder"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Serotonergic antidepressants (SSRIs), typically at the higher end of dosing and for an adequate duration, as first-line pharmacotherapy",
+      "Cognitive-behavioural therapy tailored to the disorder, incorporating exposure and response prevention and cognitive work on appearance-related beliefs",
+      "Structured suicide risk assessment with a crisis and safety plan, given the high suicidality",
+      "Counsel against cosmetic, dermatological and surgical procedures, which rarely satisfy and may worsen the condition",
+      "Identify and treat comorbid depression, social anxiety and substance use, augmenting with an antipsychotic in refractory or delusional cases",
+      "Psychiatric referral and consideration of more intensive or inpatient care when risk is high, with relapse prevention as medication is continued"
     ]
-   ],
-   "caption": "Overview comparison matrix for body dysmorphic disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "body-dysmorphic-disorder-real-image",
-   "title": "Body Dysmorphic Disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "body_dysmorphic_disorder-pathway",
+      "title": "Body Dysmorphic Disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Preoccupation with one or more perceived defects in appearance that are unobservable or appear only slight to others, causing marked distress or impairment.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Active suicidal ideation or previous attempts, indicating high risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Structured assessment such as the BDD-YBOCS and validated screening questions, Suicide risk assessment, which is essential, Screening for depression, social anxiety, obsessive-compulsive disorder, and eating disorder"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Serotonergic antidepressants (SSRIs), typically at the higher end of dosing and for an adequate duration, as first-line pharmacotherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis behind depression, social anxiety, or repeated cosmetic requests"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of body dysmorphic disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "body_dysmorphic_disorder-matrix",
+      "title": "Body Dysmorphic Disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Preoccupation with one or more perceived defects in appearance that are unobservable or appear only slight to others, causing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Structured assessment such as the BDD-YBOCS and validated screening questions, Suicide risk assessment, which is essential,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Obsessive-compulsive disorder, Social anxiety disorder, Major depressive disorder",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Serotonergic antidepressants (SSRIs), typically at the higher end of dosing and for an adequate duration, as first-line",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis behind depression, social anxiety, or repeated cosmetic requests",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for body dysmorphic disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "New Oxford Textbook of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "body_dysmorphic_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessment elements in body dysmorphic disorder",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Structured assessment (BDD-YBOCS)", "cells": [{"text": "Severity of appearance preoccupation"}], "cite": "c1"},
+        {"parameter": "Suicide risk assessment", "cells": [{"text": "Essential; suicidality is high in this disorder"}], "cite": "c1"},
+        {"parameter": "Screening for depression, social anxiety, OCD and eating disorder", "cells": [{"text": "Co-occurring conditions"}], "cite": "c1"},
+        {"parameter": "Assessment of insight and delusionality", "cells": [{"text": "Insight is often poor and may be delusional in intensity"}], "cite": "c1"},
+        {"parameter": "History of cosmetic or dermatological procedures", "cells": [{"text": "Procedures sought or undergone"}], "cite": "c1"},
+        {"parameter": "Substance use and collateral history", "cells": [{"text": "Substance use and functioning"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "body_dysmorphic_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike psychiatric conditions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Obsessive-compulsive disorder", "cells": [{"text": "Shares fronto-striatal mechanisms; the concern here is focused on appearance"}], "cite": "c1"},
+        {"parameter": "Eating disorders", "cells": [{"text": "Concern in eating disorders is weight or shape; this disorder targets other appearance features"}], "cite": "c1"},
+        {"parameter": "Delusional disorder, somatic type", "cells": [{"text": "Insight can reach delusional intensity as a specifier; insight is assessed"}], "cite": "c1"},
+        {"parameter": "Gender dysphoria", "cells": [{"text": "Distress centres on sex characteristics"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "body_dysmorphic_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options in body dysmorphic disorder",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Serotonergic antidepressants", "cells": [{"text": "SSRIs at the higher end of dosing for an adequate duration"}, {"text": "First-line pharmacotherapy; prolonged trials often needed"}], "cite": "c1"},
+        {"parameter": "Cognitive-behavioural therapy", "cells": [{"text": "Exposure and response prevention with cognitive work on appearance beliefs"}, {"text": "Combined with SSRI treatment"}], "cite": "c1"},
+        {"parameter": "Suicide risk", "cells": [{"text": "Structured suicide risk assessment with a crisis and safety plan"}, {"text": "High suicidality"}], "cite": "c1"},
+        {"parameter": "Cosmetic procedures", "cells": [{"text": "Counsel against cosmetic, dermatological and surgical procedures"}, {"text": "Rarely satisfy and may worsen the disorder"}], "cite": "c1"},
+        {"parameter": "Comorbidities and augmentation", "cells": [{"text": "Treat comorbid depression, social anxiety and substance use; augment with an antipsychotic in refractory or delusional cases"}, {"text": "Refractory or delusional disease"}], "cite": "c1"},
+        {"parameter": "Referral and relapse prevention", "cells": [{"text": "Psychiatric referral; intensive or inpatient care when risk is high"}, {"text": "Continue medication to prevent relapse"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "body_dysmorphic_disorder-dx-mgmt",
+      "title": "Diagnosis and management of body dysmorphic disorder",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Preoccupation with a slight or imagined appearance flaw, with checking, grooming or cosmetic requests", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: active suicidal ideation, escalating self-procedures or severe isolation?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: suicide risk assessment with safety plan; consider inpatient care", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Structured assessment (BDD-YBOCS); screen for depression, social anxiety, OCD and eating disorder", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Assess insight and delusionality; history of cosmetic procedures; substance use", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Appearance preoccupation is primary, not OCD, eating or delusional disorder?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "SSRI at an adequate dose plus CBT with exposure and response prevention", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: treat the primary disorder such as OCD, eating disorder, delusional disorder or depression", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Counsel against cosmetic procedures; augment with an antipsychotic if refractory", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Chronic without treatment; often improves with sustained SSRI and CBT", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

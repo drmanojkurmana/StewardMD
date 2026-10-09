@@ -1,172 +1,423 @@
 {
- "id": "dieulafoy_lesion",
- "name": "Dieulafoy lesion",
- "aliases": [
-  "Dieulafoy's lesion",
-  "caliber-persistent artery",
-  "exulceratio simplex"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A large-calibre submucosal artery that fails to taper normally and erodes through a tiny mucosal defect, causing brisk arterial bleeding",
-   "Most commonly found in the proximal stomach along the lesser curve within a few centimetres of the gastro-oesophageal junction, but described throughout the gut",
-   "Classically presents as recurrent, obscure, or massive haematemesis and melaena out of proportion to the minimal surrounding mucosal abnormality",
-   "The lesion is easily missed because the surrounding mucosa is normal and bleeding is often intermittent, so a high index of suspicion and repeat endoscopy may be needed",
-   "Endoscopic haemostasis is first-line and often combines a mechanical method (clips or band ligation) with thermal or injection therapy",
-   "Marking the site with a tattoo or clip aids relocation if bleeding recurs or surgery is required",
-   "Angiographic embolisation or surgical wedge resection is reserved for endoscopic failure"
+  "id": "dieulafoy_lesion",
+  "name": "Dieulafoy lesion",
+  "aliases": [
+    "Dieulafoy's lesion",
+    "caliber-persistent artery",
+    "exulceratio simplex"
   ],
-  "pathophysiology": "A Dieulafoy lesion is an abnormally large, tortuous submucosal artery that retains a wide calibre as it approaches the mucosal surface instead of tapering into a capillary bed. Pulsatile pressure and possibly local mucosal thinning lead to erosion of a pinpoint mucosal defect overlying the vessel, exposing the artery and allowing sudden, often torrential arterial haemorrhage. Because the surrounding mucosa is otherwise normal and there is no ulcer or mass, the lesion can be extremely difficult to identify, particularly between bleeding episodes when it may not be actively spurting.",
-  "additionalDifferentials": [
-   "Bleeding peptic ulcer with a visible vessel",
-   "Gastric angiodysplasia or vascular ectasia",
-   "Mallory-Weiss tear",
-   "Gastric or oesophageal varices",
-   "Malignancy with a bleeding vessel",
-   "Aortoenteric fistula in the appropriate setting"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy, repeated if necessary, to identify active spurting or an adherent clot over normal mucosa",
-   "Endoscopic tattoo or clip placement to mark the lesion for future localisation",
-   "Computed tomography angiography or catheter angiography when endoscopy is unrevealing during active bleeding",
-   "Tagged red-cell scintigraphy for intermittent obscure bleeding",
-   "Full blood count, coagulation profile, and group-and-save or crossmatch",
-   "Capsule endoscopy or enteroscopy for lesions in the small bowel"
-  ],
-  "redFlags": [
-   "Massive haematemesis with haemodynamic instability requiring resuscitation",
-   "Recurrent obscure bleeding with negative initial endoscopy",
-   "Rebleeding after apparently successful endoscopic therapy",
-   "Ongoing transfusion requirement despite treatment"
-  ],
-  "prognosis": "With prompt endoscopic haemostasis the outlook is generally good and definitive control is achieved in most patients, though the lesion has a notable tendency to rebleed, and mortality rises when diagnosis is delayed or bleeding is massive.",
-  "pitfalls": [
-   "Dismissing normal-looking mucosa and overlooking the tiny bleeding point",
-   "Failing to mark the site, making relocation difficult if bleeding recurs",
-   "Relying on a single endoscopy when bleeding is intermittent",
-   "Delaying angiography or surgery after repeated endoscopic failure"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Resuscitate the bleeding patient with intravenous fluids and blood products, correct any coagulopathy, and send group-and-save or crossmatch",
-   "Achieve endoscopic haemostasis as first line, typically combining a mechanical method such as clips or band ligation with thermal or injection therapy",
-   "Mark the lesion with an endoscopic tattoo or clip to aid relocation should bleeding recur",
-   "Proceed to catheter angiography with transarterial embolisation for rebleeding or lesions inaccessible to endoscopy",
-   "Reserve surgical wedge resection for lesions refractory to endoscopic and radiological therapy",
-   "Monitor closely for rebleeding, to which the lesion has a notable tendency, and repeat endoscopy if suspicion persists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dieulafoy_lesion-pathway",
-   "title": "Dieulafoy lesion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A large-calibre submucosal artery that fails to taper normally and erodes through a tiny mucosal defect, causing brisk arterial bleeding",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Massive haematemesis with haemodynamic instability requiring resuscitation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy, repeated if necessary, to identify active spurting or an adherent clot over normal mucosa, Endoscopic tattoo or clip placement to mark the lesion for future localisation, Computed"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Resuscitate the bleeding patient with intravenous fluids and blood products, correct any coagulopathy, and send group-and-save or crossmatch"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing normal-looking mucosa and overlooking the tiny bleeding point"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dieulafoy lesion."
-  }
- ],
- "tables": [
-  {
-   "id": "dieulafoy_lesion-matrix",
-   "title": "Dieulafoy lesion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A large-calibre submucosal artery that fails to taper normally and erodes through a tiny mucosal defect, causing brisk arterial",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A large-calibre submucosal artery that fails to taper normally and erodes through a tiny mucosal defect, causing brisk arterial bleeding",
+      "Most commonly found in the proximal stomach along the lesser curve within a few centimetres of the gastro-oesophageal junction, but described throughout the gut",
+      "Classically presents as recurrent, obscure, or massive haematemesis and melaena out of proportion to the minimal surrounding mucosal abnormality",
+      "The lesion is easily missed because the surrounding mucosa is normal and bleeding is often intermittent, so a high index of suspicion and repeat endoscopy may be needed",
+      "Endoscopic haemostasis is first-line and often combines a mechanical method (clips or band ligation) with thermal or injection therapy",
+      "Marking the site with a tattoo or clip aids relocation if bleeding recurs or surgery is required",
+      "Angiographic embolisation or surgical wedge resection is reserved for endoscopic failure"
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy, repeated if necessary, to identify active spurting or an adherent clot over normal mucosa,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A Dieulafoy lesion is an abnormally large, tortuous submucosal artery that retains a wide calibre as it approaches the mucosal surface instead of tapering into a capillary bed. Pulsatile pressure and possibly local mucosal thinning lead to erosion of a pinpoint mucosal defect overlying the vessel, exposing the artery and allowing sudden, often torrential arterial haemorrhage. Because the surrounding mucosa is otherwise normal and there is no ulcer or mass, the lesion can be extremely difficult to identify, particularly between bleeding episodes when it may not be actively spurting.",
+    "additionalDifferentials": [
+      "Bleeding peptic ulcer with a visible vessel",
+      "Gastric angiodysplasia or vascular ectasia",
+      "Mallory-Weiss tear",
+      "Gastric or oesophageal varices",
+      "Malignancy with a bleeding vessel",
+      "Aortoenteric fistula in the appropriate setting"
     ],
-    [
-     "Primary Differentials",
-     "Bleeding peptic ulcer with a visible vessel, Gastric angiodysplasia or vascular ectasia, Mallory-Weiss tear",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy, repeated if necessary, to identify active spurting or an adherent clot over normal mucosa",
+      "Endoscopic tattoo or clip placement to mark the lesion for future localisation",
+      "Computed tomography angiography or catheter angiography when endoscopy is unrevealing during active bleeding",
+      "Tagged red-cell scintigraphy for intermittent obscure bleeding",
+      "Full blood count, coagulation profile, and group-and-save or crossmatch",
+      "Capsule endoscopy or enteroscopy for lesions in the small bowel"
     ],
-    [
-     "Management Strategy",
-     "Resuscitate the bleeding patient with intravenous fluids and blood products, correct any coagulopathy, and send group-and-save or",
-     "Core treatment modality"
+    "redFlags": [
+      "Massive haematemesis with haemodynamic instability requiring resuscitation",
+      "Recurrent obscure bleeding with negative initial endoscopy",
+      "Rebleeding after apparently successful endoscopic therapy",
+      "Ongoing transfusion requirement despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing normal-looking mucosa and overlooking the tiny bleeding point",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt endoscopic haemostasis the outlook is generally good and definitive control is achieved in most patients, though the lesion has a notable tendency to rebleed, and mortality rises when diagnosis is delayed or bleeding is massive.",
+    "pitfalls": [
+      "Dismissing normal-looking mucosa and overlooking the tiny bleeding point",
+      "Failing to mark the site, making relocation difficult if bleeding recurs",
+      "Relying on a single endoscopy when bleeding is intermittent",
+      "Delaying angiography or surgery after repeated endoscopic failure"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Resuscitate the bleeding patient with intravenous fluids and blood products, correct any coagulopathy, and send group-and-save or crossmatch",
+      "Achieve endoscopic haemostasis as first line, typically combining a mechanical method such as clips or band ligation with thermal or injection therapy",
+      "Mark the lesion with an endoscopic tattoo or clip to aid relocation should bleeding recur",
+      "Proceed to catheter angiography with transarterial embolisation for rebleeding or lesions inaccessible to endoscopy",
+      "Reserve surgical wedge resection for lesions refractory to endoscopic and radiological therapy",
+      "Monitor closely for rebleeding, to which the lesion has a notable tendency, and repeat endoscopy if suspicion persists"
     ]
-   ],
-   "caption": "Overview comparison matrix for dieulafoy lesion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dieulafoy-lesion-real-image",
-   "title": "Dieulafoy lesion: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "dieulafoy_lesion-pathway",
+      "title": "Dieulafoy lesion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A large-calibre submucosal artery that fails to taper normally and erodes through a tiny mucosal defect, causing brisk arterial bleeding",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Massive haematemesis with haemodynamic instability requiring resuscitation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy, repeated if necessary, to identify active spurting or an adherent clot over normal mucosa, Endoscopic tattoo or clip placement to mark the lesion for future localisation, Computed"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Resuscitate the bleeding patient with intravenous fluids and blood products, correct any coagulopathy, and send group-and-save or crossmatch"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing normal-looking mucosa and overlooking the tiny bleeding point"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dieulafoy lesion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dieulafoy_lesion-matrix",
+      "title": "Dieulafoy lesion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A large-calibre submucosal artery that fails to taper normally and erodes through a tiny mucosal defect, causing brisk arterial",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy, repeated if necessary, to identify active spurting or an adherent clot over normal mucosa,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bleeding peptic ulcer with a visible vessel, Gastric angiodysplasia or vascular ectasia, Mallory-Weiss tear",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Resuscitate the bleeding patient with intravenous fluids and blood products, correct any coagulopathy, and send group-and-save or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing normal-looking mucosa and overlooking the tiny bleeding point",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dieulafoy lesion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dieulafoy_lesion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Active spurting or adherent clot over normal mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic tattoo or clip",
+          "cells": [
+            {
+              "text": "Marks the lesion for relocation if bleeding recurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT angiography or catheter angiography",
+          "cells": [
+            {
+              "text": "Used when endoscopy is unrevealing during active bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tagged red-cell scintigraphy",
+          "cells": [
+            {
+              "text": "Intermittent obscure bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, coagulation profile and group-and-save",
+          "cells": [
+            {
+              "text": "Blood loss, coagulopathy and crossmatch needs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dieulafoy_lesion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "IV fluids and blood products; correct any coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic haemostasis, first line",
+          "cells": [
+            {
+              "text": "Clips or band ligation combined with thermal or injection therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic marking",
+          "cells": [
+            {
+              "text": "Tattoo or clip to aid relocation should bleeding recur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography with embolisation",
+          "cells": [
+            {
+              "text": "For rebleeding or lesions inaccessible to endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical wedge resection",
+          "cells": [
+            {
+              "text": "Only for lesions refractory to endoscopic and radiological therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for rebleeding",
+          "cells": [
+            {
+              "text": "The lesion has a notable tendency to rebleed; repeat endoscopy if suspicion persists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dieulafoy_lesion-dx-mgmt",
+      "title": "Diagnosis and management of Dieulafoy lesion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dieulafoy lesion: brisk upper GI bleeding from normal-looking mucosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (massive haematemesis, instability, rebleeding after therapy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate, correct coagulopathy and arrange urgent endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper GI endoscopy; CT or catheter angiography if unrevealing; FBC and crossmatch",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an active spurting point or adherent clot seen over normal mucosa?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bleeding ulcer, angiodysplasia, Mallory-Weiss tear or varices",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resuscitate with fluids and blood; correct coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endoscopic haemostasis with clips or band ligation plus thermal or injection therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mark the lesion with a tattoo or clip for relocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Transarterial embolisation for rebleeding or endoscopically inaccessible lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgical wedge resection only if endoscopic and radiological therapy fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Endoscopic haemostasis gives definitive control in most; rebleeding is notable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

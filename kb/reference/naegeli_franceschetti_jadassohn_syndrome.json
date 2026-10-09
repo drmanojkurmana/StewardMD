@@ -1,174 +1,470 @@
 {
- "id": "naegeli_franceschetti_jadassohn_syndrome",
- "name": "Naegeli-Franceschetti-Jadassohn syndrome",
- "aliases": [
-  "NFJS",
-  "KRT14",
-  "keratin 14",
-  "Naegeli syndrome"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An ectodermal dysplasia characterised by reticulate (net-like) hyperpigmentation that, unusually, is not preceded by an inflammatory or vesicular stage",
-   "Absent or markedly reduced dermatoglyphics (loss of fingerprints) is a distinctive and helpful sign",
-   "Diffuse palmoplantar keratoderma and reduced sweating (hypohidrosis) with consequent heat intolerance are typical",
-   "Dental anomalies, including yellow-brown discolouration and early tooth loss, and nail dystrophy are common",
-   "Autosomal dominant; caused by mutations in KRT14 encoding keratin 14",
-   "The reticulate pigmentation tends to fade with age, in contrast to some other pigmentary genodermatoses",
-   "Management is supportive with emollients/keratolytics, heat-avoidance measures for hypohidrosis, and dental care"
+  "id": "naegeli_franceschetti_jadassohn_syndrome",
+  "name": "Naegeli-Franceschetti-Jadassohn syndrome",
+  "aliases": [
+    "NFJS",
+    "KRT14",
+    "keratin 14",
+    "Naegeli syndrome"
   ],
-  "pathophysiology": "Naegeli-Franceschetti-Jadassohn syndrome is an autosomal dominant ectodermal dysplasia caused by mutations in KRT14, which encodes keratin 14, a basal keratinocyte intermediate-filament protein that pairs with keratin 5 to maintain the mechanical integrity of the basal epidermis. The disease-causing mutations affect the non-helical head domain of keratin 14 and are thought to disturb keratin-network function and increase basal keratinocyte apoptosis, with resultant transfer of melanin/pigment into the dermis producing the reticulate hyperpigmentation. The same defect disturbs the development of epidermal appendages, giving hypohidrosis (from reduced or abnormal sweat glands), palmoplantar keratoderma, nail dystrophy, dental abnormalities and the absence of dermatoglyphics. (Mutations in KRT14 that abolish the protein instead cause the allelic dermatopathia pigmentosa reticularis.)",
-  "additionalDifferentials": [
-   "Dermatopathia pigmentosa reticularis (allelic KRT14 disorder)",
-   "Incontinentia pigmenti (which has preceding inflammatory/vesicular stages)",
-   "Dyskeratosis congenita",
-   "Franceschetti-Jadassohn variants / other reticulate pigmentary disorders",
-   "Dowling-Degos disease",
-   "Other hypohidrotic ectodermal dysplasias"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of KRT14",
-   "Examination for absent dermatoglyphics (fingerprint loss)",
-   "Skin biopsy showing pigment incontinence without significant inflammation",
-   "Assessment of sweating and heat tolerance",
-   "Dental and nail evaluation",
-   "Family history and pedigree analysis"
-  ],
-  "redFlags": [
-   "Hyperthermia or heat intolerance from hypohidrosis, particularly in infancy",
-   "Severe early dental disease requiring intervention",
-   "Functionally limiting palmoplantar keratoderma",
-   "Features suggesting an alternative diagnosis with systemic risk (e.g. dyskeratosis congenita)"
-  ],
-  "prognosis": "The condition is compatible with a normal lifespan and general health; the reticulate pigmentation characteristically fades with age. The main ongoing issues are heat intolerance from hypohidrosis, keratoderma and dental problems, all of which are manageable with supportive measures.",
-  "pitfalls": [
-   "Confusing it with incontinentia pigmenti, which has vesicular and verrucous stages preceding pigmentation",
-   "Overlooking the diagnostically useful absence of fingerprints",
-   "Failing to warn about heat intolerance and to advise cooling measures",
-   "Not distinguishing it from the allelic dermatopathia pigmentosa reticularis"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Harper's Textbook of Paediatric Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage hypohidrosis and heat intolerance by avoiding overheating, using cooling measures and maintaining adequate hydration in hot conditions",
-   "Treat palmoplantar keratoderma with regular emollients and topical keratolytics such as urea- or salicylic-acid-based preparations",
-   "Provide comprehensive dental care with restorative and prosthetic management for enamel defects and early tooth loss",
-   "Address nail dystrophy and any secondary infection with supportive dermatological care",
-   "Reassure that the reticulate hyperpigmentation is benign and tends to fade with age, offering cosmetic camouflage if desired",
-   "Offer genetic counselling for autosomal dominant KRT14 disease with confirmatory molecular testing and family assessment",
-   "Coordinate multidisciplinary follow-up across dermatology, dentistry and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "naegeli_franceschetti_jadassohn_syndrome-pathway",
-   "title": "Naegeli-Franceschetti-Jadassohn syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An ectodermal dysplasia characterised by reticulate (net-like) hyperpigmentation that, unusually, is not preceded by an inflammatory or vesicular stage",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hyperthermia or heat intolerance from hypohidrosis, particularly in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of KRT14, Examination for absent dermatoglyphics (fingerprint loss), Skin biopsy showing pigment incontinence without significant inflammation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage hypohidrosis and heat intolerance by avoiding overheating, using cooling measures and maintaining adequate hydration in hot conditions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with incontinentia pigmenti, which has vesicular and verrucous stages preceding pigmentation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of naegeli-franceschetti-jadassohn syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "naegeli_franceschetti_jadassohn_syndrome-matrix",
-   "title": "Naegeli-Franceschetti-Jadassohn syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An ectodermal dysplasia characterised by reticulate (net-like) hyperpigmentation that, unusually, is not preceded by an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An ectodermal dysplasia characterised by reticulate (net-like) hyperpigmentation that, unusually, is not preceded by an inflammatory or vesicular stage",
+      "Absent or markedly reduced dermatoglyphics (loss of fingerprints) is a distinctive and helpful sign",
+      "Diffuse palmoplantar keratoderma and reduced sweating (hypohidrosis) with consequent heat intolerance are typical",
+      "Dental anomalies, including yellow-brown discolouration and early tooth loss, and nail dystrophy are common",
+      "Autosomal dominant; caused by mutations in KRT14 encoding keratin 14",
+      "The reticulate pigmentation tends to fade with age, in contrast to some other pigmentary genodermatoses",
+      "Management is supportive with emollients/keratolytics, heat-avoidance measures for hypohidrosis, and dental care"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of KRT14, Examination for absent dermatoglyphics (fingerprint loss), Skin biopsy showing pigment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Naegeli-Franceschetti-Jadassohn syndrome is an autosomal dominant ectodermal dysplasia caused by mutations in KRT14, which encodes keratin 14, a basal keratinocyte intermediate-filament protein that pairs with keratin 5 to maintain the mechanical integrity of the basal epidermis. The disease-causing mutations affect the non-helical head domain of keratin 14 and are thought to disturb keratin-network function and increase basal keratinocyte apoptosis, with resultant transfer of melanin/pigment into the dermis producing the reticulate hyperpigmentation. The same defect disturbs the development of epidermal appendages, giving hypohidrosis (from reduced or abnormal sweat glands), palmoplantar keratoderma, nail dystrophy, dental abnormalities and the absence of dermatoglyphics. (Mutations in KRT14 that abolish the protein instead cause the allelic dermatopathia pigmentosa reticularis.)",
+    "additionalDifferentials": [
+      "Dermatopathia pigmentosa reticularis (allelic KRT14 disorder)",
+      "Incontinentia pigmenti (which has preceding inflammatory/vesicular stages)",
+      "Dyskeratosis congenita",
+      "Franceschetti-Jadassohn variants / other reticulate pigmentary disorders",
+      "Dowling-Degos disease",
+      "Other hypohidrotic ectodermal dysplasias"
     ],
-    [
-     "Primary Differentials",
-     "Dermatopathia pigmentosa reticularis (allelic KRT14 disorder), Incontinentia pigmenti (which has preceding inflammatory/vesicular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of KRT14",
+      "Examination for absent dermatoglyphics (fingerprint loss)",
+      "Skin biopsy showing pigment incontinence without significant inflammation",
+      "Assessment of sweating and heat tolerance",
+      "Dental and nail evaluation",
+      "Family history and pedigree analysis"
     ],
-    [
-     "Management Strategy",
-     "Manage hypohidrosis and heat intolerance by avoiding overheating, using cooling measures and maintaining adequate hydration in",
-     "Core treatment modality"
+    "redFlags": [
+      "Hyperthermia or heat intolerance from hypohidrosis, particularly in infancy",
+      "Severe early dental disease requiring intervention",
+      "Functionally limiting palmoplantar keratoderma",
+      "Features suggesting an alternative diagnosis with systemic risk (e.g. dyskeratosis congenita)"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with incontinentia pigmenti, which has vesicular and verrucous stages preceding pigmentation",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is compatible with a normal lifespan and general health; the reticulate pigmentation characteristically fades with age. The main ongoing issues are heat intolerance from hypohidrosis, keratoderma and dental problems, all of which are manageable with supportive measures.",
+    "pitfalls": [
+      "Confusing it with incontinentia pigmenti, which has vesicular and verrucous stages preceding pigmentation",
+      "Overlooking the diagnostically useful absence of fingerprints",
+      "Failing to warn about heat intolerance and to advise cooling measures",
+      "Not distinguishing it from the allelic dermatopathia pigmentosa reticularis"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Harper's Textbook of Paediatric Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage hypohidrosis and heat intolerance by avoiding overheating, using cooling measures and maintaining adequate hydration in hot conditions",
+      "Treat palmoplantar keratoderma with regular emollients and topical keratolytics such as urea- or salicylic-acid-based preparations",
+      "Provide comprehensive dental care with restorative and prosthetic management for enamel defects and early tooth loss",
+      "Address nail dystrophy and any secondary infection with supportive dermatological care",
+      "Reassure that the reticulate hyperpigmentation is benign and tends to fade with age, offering cosmetic camouflage if desired",
+      "Offer genetic counselling for autosomal dominant KRT14 disease with confirmatory molecular testing and family assessment",
+      "Coordinate multidisciplinary follow-up across dermatology, dentistry and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for naegeli-franceschetti-jadassohn syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "naegeli-franceschetti-jadassohn-syndrome-real-image",
-   "title": "Naegeli-Franceschetti-Jadassohn syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "naegeli_franceschetti_jadassohn_syndrome-pathway",
+      "title": "Naegeli-Franceschetti-Jadassohn syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An ectodermal dysplasia characterised by reticulate (net-like) hyperpigmentation that, unusually, is not preceded by an inflammatory or vesicular stage",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hyperthermia or heat intolerance from hypohidrosis, particularly in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of KRT14, Examination for absent dermatoglyphics (fingerprint loss), Skin biopsy showing pigment incontinence without significant inflammation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage hypohidrosis and heat intolerance by avoiding overheating, using cooling measures and maintaining adequate hydration in hot conditions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with incontinentia pigmenti, which has vesicular and verrucous stages preceding pigmentation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of naegeli-franceschetti-jadassohn syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "naegeli_franceschetti_jadassohn_syndrome-matrix",
+      "title": "Naegeli-Franceschetti-Jadassohn syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An ectodermal dysplasia characterised by reticulate (net-like) hyperpigmentation that, unusually, is not preceded by an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of KRT14, Examination for absent dermatoglyphics (fingerprint loss), Skin biopsy showing pigment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dermatopathia pigmentosa reticularis (allelic KRT14 disorder), Incontinentia pigmenti (which has preceding inflammatory/vesicular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage hypohidrosis and heat intolerance by avoiding overheating, using cooling measures and maintaining adequate hydration in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with incontinentia pigmenti, which has vesicular and verrucous stages preceding pigmentation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for naegeli-franceschetti-jadassohn syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "naegeli_franceschetti_jadassohn_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of KRT14",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for absent dermatoglyphics",
+          "cells": [
+            {
+              "text": "Loss of fingerprints, a distinctive sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Pigment incontinence without significant inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweating and heat tolerance assessment",
+          "cells": [
+            {
+              "text": "Hypohidrosis and heat intolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and nail evaluation",
+          "cells": [
+            {
+              "text": "Dental anomalies and nail dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and pedigree analysis",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "naegeli_franceschetti_jadassohn_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermatopathia pigmentosa reticularis",
+          "cells": [
+            {
+              "text": "Allelic KRT14 disorder; variants that abolish the protein cause it instead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incontinentia pigmenti",
+          "cells": [
+            {
+              "text": "Has vesicular and verrucous stages before pigmentation; this syndrome does not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dyskeratosis congenita",
+          "cells": [
+            {
+              "text": "Carries systemic risk; suspected when features point away from this syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "naegeli_franceschetti_jadassohn_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid overheating",
+          "cells": [
+            {
+              "text": "Cooling measures and hydration in hot conditions for hypohidrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and keratolytics",
+          "cells": [
+            {
+              "text": "Urea- or salicylic-acid-based preparations for palmoplantar keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental care",
+          "cells": [
+            {
+              "text": "Restorative and prosthetic management of enamel defects and early tooth loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail care",
+          "cells": [
+            {
+              "text": "Supportive dermatological care and treatment of secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Pigmentation is benign and tends to fade with age; cosmetic camouflage if desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant KRT14 disease; family assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Dermatology, dentistry and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "naegeli_franceschetti_jadassohn_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Naegeli-Franceschetti-Jadassohn syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Net-like pigmentation without a preceding inflammatory stage, with absent fingerprints",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (heat intolerance, severe dental disease, disabling keratoderma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cooling advice for heat intolerance; dental and dermatology input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "KRT14 sequencing, dermatoglyphics, skin biopsy, sweating and dental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KRT14 variant confirmed with absent dermatoglyphics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dyskeratosis congenita or incontinentia pigmenti; repeat genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid overheating; cooling measures and hydration for hypohidrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and keratolytics for palmoplantar keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Comprehensive dental care for enamel defects and early tooth loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure: reticulate pigmentation is benign and tends to fade with age",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Normal lifespan; heat intolerance, keratoderma and dental problems are manageable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

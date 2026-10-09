@@ -278,25 +278,558 @@
       "caption": "Diagnostic and clinical overview matrix for rickettsial fever (spotted fever group)."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "rickettsial-fever-real-image",
-      "title": "Rickettsial Fever (Spotted Fever Group): Diagnostic Microbiological / Smear Examination",
-      "type": "diagram",
-      "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-      "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Rocky Mountain Spotted Fever Clinical Care, 2024",
+      "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "IAP Guidelines on Rickettsial Diseases in Children, Indian Pediatrics 2017",
+      "url": "https://www.indianpediatrics.net/mar2017/mar-223-229.htm",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 174-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 143-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "RICKETTSIAL_FEVER-diagnostic",
+      "kind": "diagnostic",
+      "title": "Case definitions and diagnostic clues for spotted fever rickettsiosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Pathogen Detection",
-          "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+          "parameter": "Undifferentiated fever",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "More than 5",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Compatible clinical feature for a suspected case, with suggestive exposure and no other definite diagnosis"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Inflammatory Response",
-          "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+          "parameter": "Early illness",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "First 5 days look alike: fever, headache, myalgia"
+            },
+            {
+              "text": "{{hy:Rash, eschar or organ involvement appear only later; treat on suspicion}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Diagnostic Confirmation",
-          "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+          "parameter": "Eschar",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Makes the case probable"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Defervescence on anti-rickettsial therapy",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Within 48",
+              "op": "<=",
+              "value": 48
+            },
+            {
+              "text": "Makes the case probable; persistent fever should prompt review for another diagnosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Weil-Felix titre (OX2, OX19 or OXK)",
+          "cells": [
+            {
+              "text": ">=1:80"
+            },
+            {
+              "text": "Supports a probable case; low specificity"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IgM ELISA optical density",
+          "cells": [
+            {
+              "text": ">0.5",
+              "op": ">",
+              "value": 0.5
+            },
+            {
+              "text": "Supports a probable case"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IFA IgG for spotted fever group",
+          "cells": [
+            {
+              "text": "Titre >=64; sensitivity 89% to 100%, specificity 99% to 100%"
+            },
+            {
+              "text": "Turns reactive only 7 to 10 days after onset, so negative early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation",
+          "cells": [
+            {
+              "text": "Rickettsial DNA in blood or tissue, or fourfold rise in paired IFA or IPA titres"
+            },
+            {
+              "text": "Confirmed case"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Laboratory clues",
+          "cells": [
+            {
+              "text": "Thrombocytopenia, hyponatraemia, hypoalbuminaemia, raised transaminases, ESR and CRP"
+            },
+            {
+              "text": "Suggestive features supporting a probable case"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rash in Rocky Mountain spotted fever",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "90",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "Eschar under 1%; incubation 2 to 14 days"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Rash in Mediterranean spotted fever",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "97",
+              "op": "=",
+              "value": 97
+            },
+            {
+              "text": "Eschar 50%; incubation 5 to 7 days"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Case definitions come from the Indian paediatric (IAP) guideline built on the DHR-ICMR 2015 guideline; the full DHR-ICMR document could not be opened. Weil-Felix and IgM ELISA support only a probable case."
+    },
+    {
+      "id": "RICKETTSIAL_FEVER-ddx",
+      "kind": "ddx",
+      "title": "Rickettsial and non-rickettsial look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrub typhus",
+          "cells": [
+            {
+              "text": "{{hy:Mite bite; eschar 35%, rash 50%, marked lymphadenopathy}}; Asia and Pacific"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Murine typhus",
+          "cells": [
+            {
+              "text": "Flea faeces exposure; rash 80%, no eschar"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Epidemic typhus",
+          "cells": [
+            {
+              "text": "Body louse exposure; rash 80%, no eschar"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Ehrlichiosis or anaplasmosis",
+          "cells": [
+            {
+              "text": "Rash 26% or rare, no eschar"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Q fever",
+          "cells": [
+            {
+              "text": "Animal birth products or milk; rash under 1%, no eschar"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Dengue or chikungunya",
+          "cells": [
+            {
+              "text": "Viral febrile illness with rash; consider in the same season"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Meningococcaemia",
+          "cells": [
+            {
+              "text": "Bacterial cause of fever with petechial rash"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Leptospirosis or typhoid",
+          "cells": [
+            {
+              "text": "Bacterial causes of undifferentiated fever"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "Protozoal cause of fever; exclude by smear or rapid test"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drug reaction or vasculitis",
+          "cells": [
+            {
+              "text": "Rash with fever without infective exposure"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Percentages are from the owner's tables PDF (Table 174-1). Sources give no single separating test per mimic, so that column was dropped."
+    },
+    {
+      "id": "RICKETTSIAL_FEVER-treatment",
+      "kind": "treatment",
+      "title": "Treatment of spotted fever rickettsiosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "{{hy:First line in all ages, including children under 8 and pregnancy; start on suspicion}}"
+            },
+            {
+              "text": "Adults 100 mg every 12 hours; children under 45 kg 2.2 mg/kg twice daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "All treated cases"
+            },
+            {
+              "text": "At least 3 days after fever settles; minimum 5 to 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Alternative in children"
+            },
+            {
+              "text": "10 mg/kg/day for 5 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chloramphenicol",
+          "cells": [
+            {
+              "text": "Only alternative for Rocky Mountain spotted fever"
+            },
+            {
+              "text": "Higher risk of death than tetracyclines; aplastic anaemia, grey baby syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hospital admission",
+          "cells": [
+            {
+              "text": "Organ dysfunction, severe thrombocytopenia, altered sensorium, cannot take oral drugs"
+            },
+            {
+              "text": "IV doxycycline and supportive care"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Agents to avoid",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Fluoroquinolones not advised; sulfonamides contraindicated"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Duration differs by source: CDC says at least 3 days after defervescence with a 5 to 7 day minimum; the IAP guideline says 3 days after defervescence or 7 days total, 10 days in severe cases."
+    },
+    {
+      "id": "RICKETTSIAL_FEVER-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common causes of petechial or purpuric rashes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral infections",
+          "cells": [
+            {
+              "text": "Enteroviruses; influenza and other respiratory viruses; measles virus; Epstein-Barr virus; cytomegalovirus; parvovirus"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Coagulation",
+          "cells": [
+            {
+              "text": "Deficiency of protein C or S (including postvaricella protein S deficiency)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Platelet disorders",
+          "cells": [
+            {
+              "text": "Idiopathic thrombocytopenic purpura, drug effects, bone marrow infiltration"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Other noninfective",
+          "cells": [
+            {
+              "text": "Henoch-Schonlein purpura; connective tissue disorders; trauma (including nonaccidental injury in children)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Bacterial sepsis",
+          "cells": [
+            {
+              "text": "Pneumococcal, streptococcal, staphylococcal, or gram-negative bacterial sepsis"
+            }
+          ],
+          "cite": "c5"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "RICKETTSIAL_FEVER-dx-mgmt",
+      "title": "Diagnosis and management of rickettsial fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with headache, myalgia, tick or mite exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Look for rash and eschar; check platelets, sodium, liver enzymes",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Exclude malaria, dengue and other obvious causes",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Start doxycycline empirically; do not wait for serology",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organ dysfunction, severe thrombocytopenia or altered sensorium?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Admit; IV doxycycline and supportive care",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral doxycycline as outpatient",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Fever settles within 48 hours?",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Continue to 3 days after fever settles; minimum 5 to 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Review for coinfection or another diagnosis",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
         }
       ]
     }

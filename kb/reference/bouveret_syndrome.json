@@ -1,172 +1,230 @@
 {
- "id": "bouveret_syndrome",
- "name": "Bouveret syndrome",
- "aliases": [
-  "gallstone gastric outlet obstruction",
-  "duodenal gallstone obstruction",
-  "proximal gallstone ileus"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatobiliary",
- "specialty": "Hepatobiliary / Pancreatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Gastric outlet obstruction caused by a large gallstone impacting in the duodenum or pyloric channel after passing through a biliary-enteric fistula",
-   "A rare proximal variant of gallstone ileus, typically affecting older patients, often women, with previous gallstone disease",
-   "Presents with vomiting, epigastric pain, early satiety, and features of gastric outlet obstruction rather than distal small bowel obstruction",
-   "Imaging may show the classic Rigler triad of pneumobilia, a bowel obstruction, and an ectopic gallstone, here in the proximal duodenum",
-   "CT is the most useful investigation to locate the stone, demonstrate the fistula, and assess the gallbladder",
-   "Endoscopy can confirm the diagnosis and, for suitable stones, allow attempts at retrieval or fragmentation",
-   "Definitive treatment is relief of the obstruction by stone extraction, with individualised decisions about whether to address the fistula and gallbladder"
+  "id": "bouveret_syndrome",
+  "name": "Bouveret syndrome",
+  "aliases": [
+    "gallstone gastric outlet obstruction",
+    "duodenal gallstone obstruction",
+    "proximal gallstone ileus"
   ],
-  "pathophysiology": "Recurrent gallbladder inflammation causes the gallbladder to adhere to and then erode into the adjacent duodenum or stomach, creating a cholecystoduodenal or cholecystogastric fistula. A large gallstone passes through this fistula directly into the proximal gastrointestinal tract and becomes impacted at the pylorus or duodenum, where the lumen is relatively narrow, producing gastric outlet obstruction. Because the stone lodges proximally rather than at the ileocaecal valve, the clinical picture is one of upper rather than lower gastrointestinal obstruction. The fistula also allows air to reflux into the biliary tree, giving the pneumobilia seen on imaging.",
-  "additionalDifferentials": [
-   "Gallstone ileus with distal small bowel impaction",
-   "Malignant gastric outlet obstruction from gastric or pancreatic carcinoma",
-   "Peptic ulcer disease with pyloric stenosis",
-   "Impacted food bolus or bezoar",
-   "Duodenal or periampullary tumour",
-   "Superior mesenteric artery syndrome"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the abdomen to localise the stone, fistula, and pneumobilia",
-   "Upper gastrointestinal endoscopy for diagnosis and possible stone retrieval",
-   "Abdominal radiograph, which may show the Rigler triad",
-   "Blood tests including electrolytes to assess dehydration from vomiting",
-   "Ultrasound to evaluate the gallbladder and biliary tree"
-  ],
-  "redFlags": [
-   "Persistent vomiting with dehydration and electrolyte disturbance",
-   "Signs of duodenal perforation or peritonitis",
-   "Gastrointestinal bleeding from mucosal pressure necrosis at the impaction site",
-   "Aspiration due to a high obstruction"
-  ],
-  "prognosis": "Prognosis is reasonable once the obstruction is relieved, but mortality is not negligible given the typically elderly, comorbid population, so a minimally invasive, staged approach that prioritises relieving the obstruction is often favoured.",
-  "pitfalls": [
-   "Failing to consider a gallstone cause of gastric outlet obstruction in an older patient",
-   "Overlooking pneumobilia or an ectopic stone on imaging",
-   "Undertaking extensive combined stone and fistula surgery in a frail patient when simple stone extraction would suffice",
-   "Attributing the presentation to malignancy or peptic disease and delaying appropriate treatment"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initial resuscitation with intravenous fluids and correction of the electrolyte disturbance caused by vomiting",
-   "Nasogastric decompression of the obstructed, distended stomach",
-   "Endoscopic stone retrieval or fragmentation by mechanical or laser lithotripsy as first-line, minimally invasive relief for accessible stones",
-   "Surgical enterolithotomy to extract the impacted gallstone when endoscopic clearance fails",
-   "A staged strategy that prioritises relieving the obstruction, with delayed or omitted cholecystectomy and fistula repair given the typically elderly, comorbid population",
-   "Perioperative optimisation of comorbidities with combined surgical and gastroenterology input",
-   "Monitoring for recurrent stone impaction and biliary complications after treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bouveret_syndrome-pathway",
-   "title": "Bouveret syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Gastric outlet obstruction caused by a large gallstone impacting in the duodenum or pyloric channel after passing through a biliary-enteric fistula",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent vomiting with dehydration and electrolyte disturbance",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the abdomen to localise the stone, fistula, and pneumobilia, Upper gastrointestinal endoscopy for diagnosis and possible stone retrieval, Abdominal radiograph, which may show the Rigler triad"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initial resuscitation with intravenous fluids and correction of the electrolyte disturbance caused by vomiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to consider a gallstone cause of gastric outlet obstruction in an older patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bouveret syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "bouveret_syndrome-matrix",
-   "title": "Bouveret syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Gastric outlet obstruction caused by a large gallstone impacting in the duodenum or pyloric channel after passing through a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatobiliary",
+  "specialty": "Hepatobiliary / Pancreatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Gastric outlet obstruction caused by a large gallstone impacting in the duodenum or pyloric channel after passing through a biliary-enteric fistula",
+      "A rare proximal variant of gallstone ileus, typically affecting older patients, often women, with previous gallstone disease",
+      "Presents with vomiting, epigastric pain, early satiety, and features of gastric outlet obstruction rather than distal small bowel obstruction",
+      "Imaging may show the classic Rigler triad of pneumobilia, a bowel obstruction, and an ectopic gallstone, here in the proximal duodenum",
+      "CT is the most useful investigation to locate the stone, demonstrate the fistula, and assess the gallbladder",
+      "Endoscopy can confirm the diagnosis and, for suitable stones, allow attempts at retrieval or fragmentation",
+      "Definitive treatment is relief of the obstruction by stone extraction, with individualised decisions about whether to address the fistula and gallbladder"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the abdomen to localise the stone, fistula, and pneumobilia, Upper gastrointestinal endoscopy for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Recurrent gallbladder inflammation causes the gallbladder to adhere to and then erode into the adjacent duodenum or stomach, creating a cholecystoduodenal or cholecystogastric fistula. A large gallstone passes through this fistula directly into the proximal gastrointestinal tract and becomes impacted at the pylorus or duodenum, where the lumen is relatively narrow, producing gastric outlet obstruction. Because the stone lodges proximally rather than at the ileocaecal valve, the clinical picture is one of upper rather than lower gastrointestinal obstruction. The fistula also allows air to reflux into the biliary tree, giving the pneumobilia seen on imaging.",
+    "additionalDifferentials": [
+      "Gallstone ileus with distal small bowel impaction",
+      "Malignant gastric outlet obstruction from gastric or pancreatic carcinoma",
+      "Peptic ulcer disease with pyloric stenosis",
+      "Impacted food bolus or bezoar",
+      "Duodenal or periampullary tumour",
+      "Superior mesenteric artery syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Gallstone ileus with distal small bowel impaction, Malignant gastric outlet obstruction from gastric or pancreatic carcinoma,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the abdomen to localise the stone, fistula, and pneumobilia",
+      "Upper gastrointestinal endoscopy for diagnosis and possible stone retrieval",
+      "Abdominal radiograph, which may show the Rigler triad",
+      "Blood tests including electrolytes to assess dehydration from vomiting",
+      "Ultrasound to evaluate the gallbladder and biliary tree"
     ],
-    [
-     "Management Strategy",
-     "Initial resuscitation with intravenous fluids and correction of the electrolyte disturbance caused by vomiting",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent vomiting with dehydration and electrolyte disturbance",
+      "Signs of duodenal perforation or peritonitis",
+      "Gastrointestinal bleeding from mucosal pressure necrosis at the impaction site",
+      "Aspiration due to a high obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to consider a gallstone cause of gastric outlet obstruction in an older patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is reasonable once the obstruction is relieved, but mortality is not negligible given the typically elderly, comorbid population, so a minimally invasive, staged approach that prioritises relieving the obstruction is often favoured.",
+    "pitfalls": [
+      "Failing to consider a gallstone cause of gastric outlet obstruction in an older patient",
+      "Overlooking pneumobilia or an ectopic stone on imaging",
+      "Undertaking extensive combined stone and fistula surgery in a frail patient when simple stone extraction would suffice",
+      "Attributing the presentation to malignancy or peptic disease and delaying appropriate treatment"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initial resuscitation with intravenous fluids and correction of the electrolyte disturbance caused by vomiting",
+      "Nasogastric decompression of the obstructed, distended stomach",
+      "Endoscopic stone retrieval or fragmentation by mechanical or laser lithotripsy as first-line, minimally invasive relief for accessible stones",
+      "Surgical enterolithotomy to extract the impacted gallstone when endoscopic clearance fails",
+      "A staged strategy that prioritises relieving the obstruction, with delayed or omitted cholecystectomy and fistula repair given the typically elderly, comorbid population",
+      "Perioperative optimisation of comorbidities with combined surgical and gastroenterology input",
+      "Monitoring for recurrent stone impaction and biliary complications after treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for bouveret syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bouveret-syndrome-real-image",
-   "title": "Bouveret syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "bouveret_syndrome-pathway",
+      "title": "Bouveret syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Gastric outlet obstruction caused by a large gallstone impacting in the duodenum or pyloric channel after passing through a biliary-enteric fistula",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent vomiting with dehydration and electrolyte disturbance",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the abdomen to localise the stone, fistula, and pneumobilia, Upper gastrointestinal endoscopy for diagnosis and possible stone retrieval, Abdominal radiograph, which may show the Rigler triad"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initial resuscitation with intravenous fluids and correction of the electrolyte disturbance caused by vomiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to consider a gallstone cause of gastric outlet obstruction in an older patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bouveret syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bouveret_syndrome-matrix",
+      "title": "Bouveret syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Gastric outlet obstruction caused by a large gallstone impacting in the duodenum or pyloric channel after passing through a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the abdomen to localise the stone, fistula, and pneumobilia, Upper gastrointestinal endoscopy for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gallstone ileus with distal small bowel impaction, Malignant gastric outlet obstruction from gastric or pancreatic carcinoma,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initial resuscitation with intravenous fluids and correction of the electrolyte disturbance caused by vomiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to consider a gallstone cause of gastric outlet obstruction in an older patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bouveret syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bouveret_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in Bouveret syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Contrast-enhanced CT of the abdomen", "cells": [{"text": "Stone, biliary-enteric fistula and pneumobilia; gallbladder assessment"}], "cite": "c1"},
+        {"parameter": "Abdominal radiograph", "cells": [{"text": "Rigler triad: pneumobilia, bowel obstruction and an ectopic gallstone"}], "cite": "c1"},
+        {"parameter": "Upper gastrointestinal endoscopy", "cells": [{"text": "Confirms the diagnosis; allows stone retrieval or fragmentation for suitable stones"}], "cite": "c1"},
+        {"parameter": "Electrolytes and blood tests", "cells": [{"text": "Dehydration from vomiting"}], "cite": "c1"},
+        {"parameter": "Ultrasound of the gallbladder and biliary tree", "cells": [{"text": "Gallbladder and biliary tree"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bouveret_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of gastric outlet obstruction",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Gallstone ileus with distal small bowel impaction", "cells": [{"text": "The stone lodges proximally at the pylorus or duodenum, not at the ileocaecal valve"}], "cite": "c1"},
+        {"parameter": "Malignant or peptic gastric outlet obstruction", "cells": [{"text": "Pneumobilia and an ectopic gallstone on imaging point to Bouveret syndrome"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bouveret_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in Bouveret syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Resuscitation", "cells": [{"text": "Intravenous fluids and correction of electrolyte disturbance"}, {"text": "Caused by vomiting"}], "cite": "c1"},
+        {"parameter": "Nasogastric decompression", "cells": [{"text": "Decompression of the obstructed, distended stomach"}, {"text": "Immediate supportive measure"}], "cite": "c1"},
+        {"parameter": "Endoscopic retrieval", "cells": [{"text": "Mechanical or laser lithotripsy to retrieve or fragment the stone"}, {"text": "First-line for accessible stones"}], "cite": "c1"},
+        {"parameter": "Surgical enterolithotomy", "cells": [{"text": "Extraction of the impacted gallstone"}, {"text": "When endoscopic clearance fails"}], "cite": "c1"},
+        {"parameter": "Staged strategy", "cells": [{"text": "Relieve the obstruction first; delay or omit cholecystectomy and fistula repair"}, {"text": "Typically elderly, comorbid patients"}], "cite": "c1"},
+        {"parameter": "Perioperative optimisation", "cells": [{"text": "Optimise comorbidities with combined surgical and gastroenterology input"}, {"text": "Multidisciplinary"}], "cite": "c1"},
+        {"parameter": "Follow-up", "cells": [{"text": "Monitor for recurrent impaction and biliary complications"}, {"text": "After treatment"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bouveret_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Bouveret syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Vomiting, epigastric pain and early satiety in an older patient with prior gallstone disease", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: dehydration or electrolyte disturbance, perforation or peritonitis, or bleeding?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: resuscitation, electrolyte correction and urgent surgical review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "CT abdomen for stone, fistula and pneumobilia; radiograph for Rigler triad", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Upper GI endoscopy for diagnosis; nasogastric decompression", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Endoscopic retrieval or fragmentation successful?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Relieve the obstruction; staged decision on gallbladder and fistula", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Surgical enterolithotomy to remove the impacted stone", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Good outcome once obstruction is relieved; mortality is not negligible in frail patients", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

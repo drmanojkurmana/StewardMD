@@ -1,173 +1,235 @@
 {
- "id": "breast_abscess",
- "name": "Breast abscess",
- "aliases": [
-  "lactational breast abscess",
-  "non-lactational breast abscess",
-  "puerperal abscess"
- ],
- "class": "infective",
- "system": "Breast / Surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as a painful, hot, tender, often fluctuant breast lump with overlying erythema and systemic features such as fever and malaise",
-   "Lactational abscesses typically follow mastitis with milk stasis and are most often due to Staphylococcus aureus, frequently entering through a cracked nipple",
-   "Non-lactational abscesses are strongly associated with smoking and periductal mastitis and tend to occur near the areola, often with mixed and anaerobic organisms",
-   "Established abscesses are best managed by ultrasound-guided needle aspiration, repeated if necessary, with incision and drainage reserved for large, multiloculated, or overlying-necrosis cases",
-   "Appropriate antibiotics active against the likely organisms are given alongside drainage; antibiotics alone rarely cure a collection",
-   "Breastfeeding or expression from the affected side should generally continue to relieve stasis in lactational cases",
-   "A non-lactational or non-resolving abscess, particularly in an older woman, requires exclusion of inflammatory breast cancer and other malignancy",
-   "Recurrent periareolar abscess with a mammary duct fistula may need duct excision once inflammation settles"
+  "id": "breast_abscess",
+  "name": "Breast abscess",
+  "aliases": [
+    "lactational breast abscess",
+    "non-lactational breast abscess",
+    "puerperal abscess"
   ],
-  "pathophysiology": "A breast abscess is a localised collection of pus within breast tissue. In lactating women, milk stasis and nipple trauma allow skin organisms, chiefly Staphylococcus aureus, to enter and proliferate, progressing from mastitis to a walled-off abscess. In non-lactating women, periductal mastitis, strongly linked to smoking, causes duct damage, squamous metaplasia, and duct obstruction, with secondary infection by mixed aerobic and anaerobic organisms producing periareolar collections and sometimes a mammary duct fistula. Untreated collections enlarge, may point to the skin, and can cause tissue necrosis.",
-  "additionalDifferentials": [
-   "Mastitis without abscess",
-   "Inflammatory breast carcinoma",
-   "Fat necrosis of the breast",
-   "Infected breast cyst",
-   "Duct ectasia with periductal mastitis",
-   "Tuberculous or granulomatous mastitis",
-   "Hidradenitis of the inframammary or axillary skin"
-  ],
-  "additionalInvestigations": [
-   "Breast ultrasound to confirm a collection and guide aspiration",
-   "Culture and sensitivity of aspirated pus or milk to direct antibiotic choice",
-   "Mammography and core biopsy where malignancy must be excluded, especially non-lactational or non-resolving cases",
-   "Assessment of smoking status and diabetes in recurrent non-lactational disease"
-  ],
-  "redFlags": [
-   "Non-resolving or recurrent inflammatory changes suggesting inflammatory breast cancer",
-   "Overlying skin necrosis or spreading cellulitis with systemic sepsis",
-   "Immunosuppression or diabetes with rapidly progressive infection",
-   "A persistent mass after treatment requiring triple assessment"
-  ],
-  "prognosis": "Most breast abscesses resolve fully with timely drainage and appropriate antibiotics. Non-lactational and smoking-related disease is prone to recurrence and mammary duct fistula, and outcome improves with smoking cessation and, when indicated, duct excision.",
-  "pitfalls": [
-   "Treating with antibiotics alone and failing to drain an established collection",
-   "Missing inflammatory breast cancer masquerading as a non-resolving abscess",
-   "Advising cessation of breastfeeding unnecessarily, worsening milk stasis",
-   "Not addressing smoking in recurrent non-lactational disease"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Drain the collection by ultrasound-guided needle aspiration, repeated as required, reserving incision and drainage for large, multiloculated, or overlying-necrosis cases",
-   "Give antibiotics active against the likely organisms alongside drainage, with anti-staphylococcal cover such as flucloxacillin for lactational disease and added anaerobic cover such as co-amoxiclav or metronidazole for periareolar non-lactational disease",
-   "Send aspirated pus or milk for culture and sensitivity to direct antibiotic choice",
-   "Continue breastfeeding or expression from the affected side in lactational cases to relieve milk stasis, with analgesia and warm compresses for symptom relief",
-   "Support smoking cessation in non-lactational periductal disease to reduce recurrence",
-   "Exclude malignancy with mammography and core biopsy in non-resolving or non-lactational cases",
-   "Consider duct excision for recurrent periductal disease or an established mammary duct fistula, and refer to a breast surgical service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "breast_abscess-pathway",
-   "title": "Breast abscess: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as a painful, hot, tender, often fluctuant breast lump with overlying erythema and systemic features such as fever and malaise",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Non-resolving or recurrent inflammatory changes suggesting inflammatory breast cancer",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Breast ultrasound to confirm a collection and guide aspiration, Culture and sensitivity of aspirated pus or milk to direct antibiotic choice, Mammography and core biopsy where malignancy must be excluded, especially"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Drain the collection by ultrasound-guided needle aspiration, repeated as required, reserving incision and drainage for large, multiloculated, or overlying-necrosis cases"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating with antibiotics alone and failing to drain an established collection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of breast abscess."
-  }
- ],
- "tables": [
-  {
-   "id": "breast_abscess-matrix",
-   "title": "Breast abscess: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as a painful, hot, tender, often fluctuant breast lump with overlying erythema and systemic features such as fever and",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Breast / Surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as a painful, hot, tender, often fluctuant breast lump with overlying erythema and systemic features such as fever and malaise",
+      "Lactational abscesses typically follow mastitis with milk stasis and are most often due to Staphylococcus aureus, frequently entering through a cracked nipple",
+      "Non-lactational abscesses are strongly associated with smoking and periductal mastitis and tend to occur near the areola, often with mixed and anaerobic organisms",
+      "Established abscesses are best managed by ultrasound-guided needle aspiration, repeated if necessary, with incision and drainage reserved for large, multiloculated, or overlying-necrosis cases",
+      "Appropriate antibiotics active against the likely organisms are given alongside drainage; antibiotics alone rarely cure a collection",
+      "Breastfeeding or expression from the affected side should generally continue to relieve stasis in lactational cases",
+      "A non-lactational or non-resolving abscess, particularly in an older woman, requires exclusion of inflammatory breast cancer and other malignancy",
+      "Recurrent periareolar abscess with a mammary duct fistula may need duct excision once inflammation settles"
     ],
-    [
-     "Key Investigations",
-     "Breast ultrasound to confirm a collection and guide aspiration, Culture and sensitivity of aspirated pus or milk to direct",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A breast abscess is a localised collection of pus within breast tissue. In lactating women, milk stasis and nipple trauma allow skin organisms, chiefly Staphylococcus aureus, to enter and proliferate, progressing from mastitis to a walled-off abscess. In non-lactating women, periductal mastitis, strongly linked to smoking, causes duct damage, squamous metaplasia, and duct obstruction, with secondary infection by mixed aerobic and anaerobic organisms producing periareolar collections and sometimes a mammary duct fistula. Untreated collections enlarge, may point to the skin, and can cause tissue necrosis.",
+    "additionalDifferentials": [
+      "Mastitis without abscess",
+      "Inflammatory breast carcinoma",
+      "Fat necrosis of the breast",
+      "Infected breast cyst",
+      "Duct ectasia with periductal mastitis",
+      "Tuberculous or granulomatous mastitis",
+      "Hidradenitis of the inframammary or axillary skin"
     ],
-    [
-     "Primary Differentials",
-     "Mastitis without abscess, Inflammatory breast carcinoma, Fat necrosis of the breast",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Breast ultrasound to confirm a collection and guide aspiration",
+      "Culture and sensitivity of aspirated pus or milk to direct antibiotic choice",
+      "Mammography and core biopsy where malignancy must be excluded, especially non-lactational or non-resolving cases",
+      "Assessment of smoking status and diabetes in recurrent non-lactational disease"
     ],
-    [
-     "Management Strategy",
-     "Drain the collection by ultrasound-guided needle aspiration, repeated as required, reserving incision and drainage for large,",
-     "Core treatment modality"
+    "redFlags": [
+      "Non-resolving or recurrent inflammatory changes suggesting inflammatory breast cancer",
+      "Overlying skin necrosis or spreading cellulitis with systemic sepsis",
+      "Immunosuppression or diabetes with rapidly progressive infection",
+      "A persistent mass after treatment requiring triple assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating with antibiotics alone and failing to drain an established collection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most breast abscesses resolve fully with timely drainage and appropriate antibiotics. Non-lactational and smoking-related disease is prone to recurrence and mammary duct fistula, and outcome improves with smoking cessation and, when indicated, duct excision.",
+    "pitfalls": [
+      "Treating with antibiotics alone and failing to drain an established collection",
+      "Missing inflammatory breast cancer masquerading as a non-resolving abscess",
+      "Advising cessation of breastfeeding unnecessarily, worsening milk stasis",
+      "Not addressing smoking in recurrent non-lactational disease"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Drain the collection by ultrasound-guided needle aspiration, repeated as required, reserving incision and drainage for large, multiloculated, or overlying-necrosis cases",
+      "Give antibiotics active against the likely organisms alongside drainage, with anti-staphylococcal cover such as flucloxacillin for lactational disease and added anaerobic cover such as co-amoxiclav or metronidazole for periareolar non-lactational disease",
+      "Send aspirated pus or milk for culture and sensitivity to direct antibiotic choice",
+      "Continue breastfeeding or expression from the affected side in lactational cases to relieve milk stasis, with analgesia and warm compresses for symptom relief",
+      "Support smoking cessation in non-lactational periductal disease to reduce recurrence",
+      "Exclude malignancy with mammography and core biopsy in non-resolving or non-lactational cases",
+      "Consider duct excision for recurrent periductal disease or an established mammary duct fistula, and refer to a breast surgical service"
     ]
-   ],
-   "caption": "Overview comparison matrix for breast abscess."
-  }
- ],
- "diagrams": [
-  {
-   "id": "breast-abscess-real-image",
-   "title": "Breast abscess: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "breast_abscess-pathway",
+      "title": "Breast abscess: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as a painful, hot, tender, often fluctuant breast lump with overlying erythema and systemic features such as fever and malaise",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Non-resolving or recurrent inflammatory changes suggesting inflammatory breast cancer",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Breast ultrasound to confirm a collection and guide aspiration, Culture and sensitivity of aspirated pus or milk to direct antibiotic choice, Mammography and core biopsy where malignancy must be excluded, especially"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Drain the collection by ultrasound-guided needle aspiration, repeated as required, reserving incision and drainage for large, multiloculated, or overlying-necrosis cases"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating with antibiotics alone and failing to drain an established collection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of breast abscess."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "breast_abscess-matrix",
+      "title": "Breast abscess: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as a painful, hot, tender, often fluctuant breast lump with overlying erythema and systemic features such as fever and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Breast ultrasound to confirm a collection and guide aspiration, Culture and sensitivity of aspirated pus or milk to direct",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mastitis without abscess, Inflammatory breast carcinoma, Fat necrosis of the breast",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Drain the collection by ultrasound-guided needle aspiration, repeated as required, reserving incision and drainage for large,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating with antibiotics alone and failing to drain an established collection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for breast abscess."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "breast_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in breast abscess",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Breast ultrasound", "cells": [{"text": "Confirms the collection and guides aspiration"}], "cite": "c1"},
+        {"parameter": "Culture and sensitivity of aspirated pus or milk", "cells": [{"text": "Organism and antibiotic choice"}], "cite": "c1"},
+        {"parameter": "Mammography and core biopsy", "cells": [{"text": "Malignancy excluded in non-lactational or non-resolving cases"}], "cite": "c1"},
+        {"parameter": "Smoking status and diabetes assessment", "cells": [{"text": "Risk factors in recurrent non-lactational disease"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "breast_abscess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike breast inflammation",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Inflammatory breast carcinoma", "cells": [{"text": "Non-resolving or recurrent inflammatory change in an older woman; requires biopsy"}], "cite": "c1"},
+        {"parameter": "Periductal mastitis", "cells": [{"text": "Strongly linked to smoking; periareolar, with mixed aerobic and anaerobic organisms and sometimes a mammary duct fistula"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "breast_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options in breast abscess",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Ultrasound-guided needle aspiration", "cells": [{"text": "Repeat as required for established abscess"}, {"text": "First-line drainage"}], "cite": "c1"},
+        {"parameter": "Incision and drainage", "cells": [{"text": "Large, multiloculated, or overlying-necrosis cases"}, {"text": "Reserved cases"}], "cite": "c1"},
+        {"parameter": "Antibiotics", "cells": [{"text": "Anti-staphylococcal cover for lactational disease; anaerobic cover for periareolar disease"}, {"text": "Given with drainage"}], "cite": "c1"},
+        {"parameter": "Culture-directed therapy", "cells": [{"text": "Culture and sensitivity of aspirated pus or milk"}, {"text": "Guides antibiotic choice"}], "cite": "c1"},
+        {"parameter": "Breastfeeding or expression", "cells": [{"text": "Continue from the affected side in lactational cases"}, {"text": "Relieves milk stasis"}], "cite": "c1"},
+        {"parameter": "Smoking cessation", "cells": [{"text": "Support in non-lactational periductal disease"}, {"text": "Reduces recurrence"}], "cite": "c1"},
+        {"parameter": "Malignancy exclusion", "cells": [{"text": "Mammography and core biopsy in non-resolving or non-lactational cases"}, {"text": "Diagnostic"}], "cite": "c1"},
+        {"parameter": "Duct excision", "cells": [{"text": "Recurrent periductal disease or established mammary duct fistula"}, {"text": "After inflammation settles"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "breast_abscess-dx-mgmt",
+      "title": "Diagnosis and management of breast abscess",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Painful, hot, tender breast lump with erythema, fever and malaise", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: skin necrosis, spreading cellulitis with sepsis, or immunosuppression or diabetes with rapid progression?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent antibiotics and surgical review for drainage", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Breast ultrasound to confirm collection; culture aspirate or milk", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Lactational disease?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Continue breastfeeding or expression; anti-staphylococcal antibiotics", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Anaerobic cover; smoking cessation; mammography and core biopsy", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Ultrasound-guided aspiration, repeated as needed; incision and drainage if large or multiloculated", "cite": "c1"},
+        {"id": "n9", "type": "decision", "text": "Non-resolving, recurrent, or inflammatory features persist?", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Exclude inflammatory breast cancer; duct excision if mammary duct fistula recurs", "cite": "c1"},
+        {"id": "n11", "type": "outcome", "text": "Most resolve fully with timely drainage and antibiotics", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Yes"},
+        {"from": "n9", "to": "n11", "label": "No"}
+      ]
+    }
+  ]
 }

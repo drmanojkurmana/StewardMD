@@ -1,176 +1,463 @@
 {
- "id": "gestational_trophoblastic_neoplasia",
- "name": "Gestational trophoblastic neoplasia",
- "aliases": [
-  "GTN",
-  "persistent trophoblastic disease",
-  "malignant gestational trophoblastic disease",
-  "invasive mole"
- ],
- "class": "non_infective",
- "system": "Obstetrics and Gynaecology",
- "specialty": "Obstetrics and Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / RCOG and FIGO gestational trophoblastic disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "GTN is the malignant end of the trophoblastic disease spectrum and includes invasive mole, choriocarcinoma, placental site trophoblastic tumour, and epithelioid trophoblastic tumour",
-   "It most often follows a hydatidiform mole but can arise after any pregnancy event",
-   "Diagnosis after molar pregnancy is usually made on beta-hCG criteria, such as a plateau or rise across defined measurements, rather than on histology",
-   "Beta-hCG is central to diagnosis, staging, monitoring treatment response, and detecting relapse for most subtypes",
-   "The FIGO anatomical stage and the modified WHO prognostic score together separate low-risk from high-risk disease and guide therapy",
-   "Low-risk disease is generally treated with single-agent methotrexate-based chemotherapy, while high-risk disease requires multi-agent regimens",
-   "Placental site and epithelioid trophoblastic tumours secrete relatively little hCG, are less chemosensitive, and are treated primarily with surgery",
-   "Care through a specialist trophoblastic centre with structured surveillance yields high cure rates"
+  "id": "gestational_trophoblastic_neoplasia",
+  "name": "Gestational trophoblastic neoplasia",
+  "aliases": [
+    "GTN",
+    "persistent trophoblastic disease",
+    "malignant gestational trophoblastic disease",
+    "invasive mole"
   ],
-  "pathophysiology": "Gestational trophoblastic neoplasia represents persistent or malignant proliferation of trophoblast following a molar or non-molar pregnancy. Invasive mole reflects molar villi penetrating the myometrium, whereas choriocarcinoma is frankly malignant trophoblast without villi that invades vasculature and metastasises early. Placental site and epithelioid trophoblastic tumours arise from intermediate trophoblast, grow more indolently, produce little beta-hCG, and are relatively chemoresistant. Most subtypes secrete beta-hCG in proportion to tumour burden, providing a sensitive marker, and the neoplastic tissue is often highly vascular with a tendency to haemorrhage and, for choriocarcinoma, to spread to lungs, brain, and liver.",
-  "additionalDifferentials": [
-   "Persistent or retained products of conception",
-   "New intrauterine or ectopic pregnancy",
-   "Non-gestational hCG-secreting tumour",
-   "Uterine arteriovenous malformation",
-   "Other gynaecological malignancy",
-   "Pituitary or heterophile sources of a false-positive hCG"
-  ],
-  "additionalInvestigations": [
-   "Serial quantitative serum beta-hCG",
-   "Pelvic ultrasound with Doppler for uterine disease and vascularity",
-   "Chest imaging for pulmonary metastases",
-   "Cross-sectional imaging of brain, abdomen, and pelvis for staging when indicated",
-   "Full blood count, renal and liver function before chemotherapy",
-   "Histology where surgical specimens are available, particularly for placental site and epithelioid tumours"
-  ],
-  "redFlags": [
-   "Beta-hCG plateau or rise, or new symptoms, after evacuation of a mole",
-   "Haemoptysis, breathlessness, or neurological features suggesting metastatic choriocarcinoma",
-   "Heavy uterine or intraperitoneal haemorrhage from vascular tumour",
-   "High-risk prognostic score requiring urgent multi-agent chemotherapy"
-  ],
-  "prognosis": "Most gestational trophoblastic neoplasia is curable, with low-risk disease approaching universal cure and high-risk disease achieving high survival through risk-adapted chemotherapy at specialist centres. Placental site and epithelioid tumours have a less favourable, more surgery-dependent course.",
-  "pitfalls": [
-   "Not following beta-hCG after molar pregnancy and missing early progression",
-   "Applying hCG-based monitoring uncritically to placental site tumours, which secrete little hCG",
-   "Treating high-risk disease with single-agent chemotherapy and inducing resistance",
-   "Biopsying a highly vascular uterine tumour and provoking major haemorrhage"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "RCOG guidance on gestational trophoblastic disease",
-   "FIGO staging and prognostic scoring for gestational trophoblastic neoplasia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Risk-stratify with the FIGO anatomical stage and modified WHO prognostic score to guide treatment intensity",
-   "Treat low-risk disease with single-agent methotrexate-based chemotherapy with folinic acid rescue",
-   "Treat high-risk disease with multi-agent chemotherapy such as the EMA/CO regimen",
-   "Consider surgery, including hysterectomy, for chemoresistant placental site or epithelioid tumours and for control of haemorrhage",
-   "Monitor treatment response and detect relapse with serial quantitative beta-hCG",
-   "Stage with chest, brain, and abdominopelvic imaging to direct risk-adapted therapy",
-   "Manage at a specialist trophoblastic centre and advise reliable contraception throughout follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gestational_trophoblastic_neoplasia-pathway",
-   "title": "Gestational trophoblastic neoplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "GTN is the malignant end of the trophoblastic disease spectrum and includes invasive mole, choriocarcinoma, placental site trophoblastic tumour, and epithelioid trophoblastic tumour",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Beta-hCG plateau or rise, or new symptoms, after evacuation of a mole",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial quantitative serum beta-hCG, Pelvic ultrasound with Doppler for uterine disease and vascularity, Chest imaging for pulmonary metastases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Risk-stratify with the FIGO anatomical stage and modified WHO prognostic score to guide treatment intensity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not following beta-hCG after molar pregnancy and missing early progression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gestational trophoblastic neoplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "gestational_trophoblastic_neoplasia-matrix",
-   "title": "Gestational trophoblastic neoplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "GTN is the malignant end of the trophoblastic disease spectrum and includes invasive mole, choriocarcinoma, placental site",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics and Gynaecology",
+  "specialty": "Obstetrics and Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / RCOG and FIGO gestational trophoblastic disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "GTN is the malignant end of the trophoblastic disease spectrum and includes invasive mole, choriocarcinoma, placental site trophoblastic tumour, and epithelioid trophoblastic tumour",
+      "It most often follows a hydatidiform mole but can arise after any pregnancy event",
+      "Diagnosis after molar pregnancy is usually made on beta-hCG criteria, such as a plateau or rise across defined measurements, rather than on histology",
+      "Beta-hCG is central to diagnosis, staging, monitoring treatment response, and detecting relapse for most subtypes",
+      "The FIGO anatomical stage and the modified WHO prognostic score together separate low-risk from high-risk disease and guide therapy",
+      "Low-risk disease is generally treated with single-agent methotrexate-based chemotherapy, while high-risk disease requires multi-agent regimens",
+      "Placental site and epithelioid trophoblastic tumours secrete relatively little hCG, are less chemosensitive, and are treated primarily with surgery",
+      "Care through a specialist trophoblastic centre with structured surveillance yields high cure rates"
     ],
-    [
-     "Key Investigations",
-     "Serial quantitative serum beta-hCG, Pelvic ultrasound with Doppler for uterine disease and vascularity, Chest imaging for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gestational trophoblastic neoplasia represents persistent or malignant proliferation of trophoblast following a molar or non-molar pregnancy. Invasive mole reflects molar villi penetrating the myometrium, whereas choriocarcinoma is frankly malignant trophoblast without villi that invades vasculature and metastasises early. Placental site and epithelioid trophoblastic tumours arise from intermediate trophoblast, grow more indolently, produce little beta-hCG, and are relatively chemoresistant. Most subtypes secrete beta-hCG in proportion to tumour burden, providing a sensitive marker, and the neoplastic tissue is often highly vascular with a tendency to haemorrhage and, for choriocarcinoma, to spread to lungs, brain, and liver.",
+    "additionalDifferentials": [
+      "Persistent or retained products of conception",
+      "New intrauterine or ectopic pregnancy",
+      "Non-gestational hCG-secreting tumour",
+      "Uterine arteriovenous malformation",
+      "Other gynaecological malignancy",
+      "Pituitary or heterophile sources of a false-positive hCG"
     ],
-    [
-     "Primary Differentials",
-     "Persistent or retained products of conception, New intrauterine or ectopic pregnancy, Non-gestational hCG-secreting tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial quantitative serum beta-hCG",
+      "Pelvic ultrasound with Doppler for uterine disease and vascularity",
+      "Chest imaging for pulmonary metastases",
+      "Cross-sectional imaging of brain, abdomen, and pelvis for staging when indicated",
+      "Full blood count, renal and liver function before chemotherapy",
+      "Histology where surgical specimens are available, particularly for placental site and epithelioid tumours"
     ],
-    [
-     "Management Strategy",
-     "Risk-stratify with the FIGO anatomical stage and modified WHO prognostic score to guide treatment intensity",
-     "Core treatment modality"
+    "redFlags": [
+      "Beta-hCG plateau or rise, or new symptoms, after evacuation of a mole",
+      "Haemoptysis, breathlessness, or neurological features suggesting metastatic choriocarcinoma",
+      "Heavy uterine or intraperitoneal haemorrhage from vascular tumour",
+      "High-risk prognostic score requiring urgent multi-agent chemotherapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Not following beta-hCG after molar pregnancy and missing early progression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most gestational trophoblastic neoplasia is curable, with low-risk disease approaching universal cure and high-risk disease achieving high survival through risk-adapted chemotherapy at specialist centres. Placental site and epithelioid tumours have a less favourable, more surgery-dependent course.",
+    "pitfalls": [
+      "Not following beta-hCG after molar pregnancy and missing early progression",
+      "Applying hCG-based monitoring uncritically to placental site tumours, which secrete little hCG",
+      "Treating high-risk disease with single-agent chemotherapy and inducing resistance",
+      "Biopsying a highly vascular uterine tumour and provoking major haemorrhage"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "RCOG guidance on gestational trophoblastic disease",
+      "FIGO staging and prognostic scoring for gestational trophoblastic neoplasia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Risk-stratify with the FIGO anatomical stage and modified WHO prognostic score to guide treatment intensity",
+      "Treat low-risk disease with single-agent methotrexate-based chemotherapy with folinic acid rescue",
+      "Treat high-risk disease with multi-agent chemotherapy such as the EMA/CO regimen",
+      "Consider surgery, including hysterectomy, for chemoresistant placental site or epithelioid tumours and for control of haemorrhage",
+      "Monitor treatment response and detect relapse with serial quantitative beta-hCG",
+      "Stage with chest, brain, and abdominopelvic imaging to direct risk-adapted therapy",
+      "Manage at a specialist trophoblastic centre and advise reliable contraception throughout follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for gestational trophoblastic neoplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gestational-trophoblastic-neoplasia-real-image",
-   "title": "Gestational trophoblastic neoplasia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "gestational_trophoblastic_neoplasia-pathway",
+      "title": "Gestational trophoblastic neoplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "GTN is the malignant end of the trophoblastic disease spectrum and includes invasive mole, choriocarcinoma, placental site trophoblastic tumour, and epithelioid trophoblastic tumour",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Beta-hCG plateau or rise, or new symptoms, after evacuation of a mole",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial quantitative serum beta-hCG, Pelvic ultrasound with Doppler for uterine disease and vascularity, Chest imaging for pulmonary metastases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Risk-stratify with the FIGO anatomical stage and modified WHO prognostic score to guide treatment intensity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not following beta-hCG after molar pregnancy and missing early progression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gestational trophoblastic neoplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gestational_trophoblastic_neoplasia-matrix",
+      "title": "Gestational trophoblastic neoplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "GTN is the malignant end of the trophoblastic disease spectrum and includes invasive mole, choriocarcinoma, placental site",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial quantitative serum beta-hCG, Pelvic ultrasound with Doppler for uterine disease and vascularity, Chest imaging for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Persistent or retained products of conception, New intrauterine or ectopic pregnancy, Non-gestational hCG-secreting tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Risk-stratify with the FIGO anatomical stage and modified WHO prognostic score to guide treatment intensity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not following beta-hCG after molar pregnancy and missing early progression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gestational trophoblastic neoplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / RCOG and FIGO gestational trophoblastic disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gestational_trophoblastic_neoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial quantitative serum beta-hCG",
+          "cells": [
+            {
+              "text": "Treatment response and relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Uterine disease and vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of brain, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Staging when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, renal and liver function",
+          "cells": [
+            {
+              "text": "Before chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of surgical specimens",
+          "cells": [
+            {
+              "text": "Placental site and epithelioid tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gestational_trophoblastic_neoplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-gestational hCG-secreting tumour",
+          "cells": [
+            {
+              "text": "A non-gestational source of hCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary or heterophile source of hCG",
+          "cells": [
+            {
+              "text": "Causes a false-positive hCG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gestational_trophoblastic_neoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "FIGO anatomical stage and modified WHO prognostic score guide treatment intensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-risk disease",
+          "cells": [
+            {
+              "text": "Single-agent methotrexate-based chemotherapy with folinic acid rescue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk disease",
+          "cells": [
+            {
+              "text": "Multi-agent chemotherapy such as EMA/CO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Hysterectomy for chemoresistant placental site or epithelioid tumours, or control of haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial beta-hCG monitoring",
+          "cells": [
+            {
+              "text": "Response to treatment and relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "Chest, brain and abdominopelvic imaging to direct risk-adapted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist centre and contraception",
+          "cells": [
+            {
+              "text": "Management at a trophoblastic centre; contraception throughout follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gestational_trophoblastic_neoplasia-dx-mgmt",
+      "title": "Diagnosis and management of Gestational trophoblastic neoplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gestational trophoblastic neoplasia: beta-hCG plateau or rise after evacuation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemoptysis, neurological signs, heavy bleeding, high-risk score)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent multi-agent chemotherapy for a high-risk prognostic score",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial beta-hCG, pelvic ultrasound with Doppler, chest imaging and brain staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the hCG pattern and histology confirm gestational trophoblastic neoplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-gestational hCG-secreting tumour or heterophile false-positive hCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Risk-stratify with FIGO stage and modified WHO prognostic score",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Single-agent methotrexate with folinic acid for low-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multi-agent chemotherapy such as EMA/CO for high-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hysterectomy for chemoresistant placental site or epithelioid tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most curable; low-risk disease approaches universal cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

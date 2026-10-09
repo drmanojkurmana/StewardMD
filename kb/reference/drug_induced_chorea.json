@@ -1,177 +1,536 @@
 {
- "id": "drug_induced_chorea",
- "name": "drug induced chorea",
- "aliases": [
-  "iatrogenic chorea",
-  "medication-induced chorea"
- ],
- "class": "non_infective",
- "system": "nervous system",
- "specialty": "neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Drug-induced chorea should be considered in any acquired chorea, as a careful medication and substance history is often more revealing than extensive investigation.",
-   "Levodopa and dopamine agonists are the commonest culprits, producing peak-dose or diphasic dyskinesia in treated Parkinson disease.",
-   "Chronic dopamine-receptor-blocking drugs (antipsychotics, metoclopramide) cause tardive dyskinesia, characteristically orobuccolingual and sometimes irreversible.",
-   "Other implicated agents include anticonvulsants (notably phenytoin toxicity), stimulants and cocaine ('crack dancing'), oral contraceptives, lithium and certain antihistamines.",
-   "Onset ranges from acute (stimulants, phenytoin toxicity, levodopa) to delayed after months or years of exposure (tardive dyskinesia).",
-   "A predisposing basal ganglia state (previous Sydenham chorea, pregnancy, hyperthyroidism, structural lesion) lowers the threshold for drug-induced chorea.",
-   "Management centres on identifying and withdrawing or reducing the offending agent, though tardive dyskinesia may persist or transiently worsen on withdrawal.",
-   "VMAT2 inhibitors are the evidence-based pharmacological treatment for persistent tardive dyskinesia when the causative drug cannot be stopped."
+  "id": "drug_induced_chorea",
+  "name": "drug induced chorea",
+  "aliases": [
+    "iatrogenic chorea",
+    "medication-induced chorea"
   ],
-  "pathophysiology": "Drug-induced chorea reflects pharmacological disturbance of dopaminergic and other neurotransmitter balance within the basal ganglia. Dopaminergic excess, as with levodopa and dopamine agonists, overstimulates striatal receptors and drives the indirect pathway toward disinhibited, choreic output, often superimposed on the maladaptive plasticity of chronic denervation. Conversely, chronic dopamine-receptor blockade induces post-synaptic receptor supersensitivity and compensatory changes that manifest as tardive dyskinesia. Stimulants and cocaine acutely increase synaptic dopamine, while anticonvulsant toxicity and other agents perturb striatal function through less well-defined mechanisms. In each case the final common pathway is dysregulation of striatal control over thalamocortical motor circuits.",
-  "additionalDifferentials": [
-   "Sydenham chorea and other autoimmune chorea",
-   "Huntington disease and phenocopies",
-   "Metabolic chorea (non-ketotic hyperglycaemia, thyrotoxicosis)",
-   "Vascular (post-stroke) chorea",
-   "Wilson disease",
-   "Chorea gravidarum and oestrogen-related chorea",
-   "Functional (psychogenic) movement disorder"
-  ],
-  "additionalInvestigations": [
-   "Detailed medication, over-the-counter and illicit substance history with timeline",
-   "Serum drug levels where relevant (e.g. phenytoin, lithium)",
-   "Urine toxicology screen for stimulants and cocaine",
-   "Metabolic screen including glucose and thyroid function",
-   "Full blood count and peripheral film if neuroacanthocytosis considered",
-   "MRI brain to exclude structural or vascular lesions",
-   "Genetic testing for Huntington disease if features persist after drug withdrawal"
-  ],
-  "redFlags": [
-   "Hyperpyrexia, rigidity and autonomic instability suggesting neuroleptic malignant syndrome or serotonin toxicity",
-   "Signs of severe anticonvulsant or lithium toxicity requiring urgent level measurement and management",
-   "Cardiovascular compromise with stimulant or cocaine intoxication",
-   "Severe generalised chorea causing rhabdomyolysis, hyperthermia or exhaustion",
-   "Persistent chorea after drug withdrawal, prompting a search for an alternative diagnosis"
-  ],
-  "prognosis": "Chorea from acute intoxication or dopaminergic overtreatment usually resolves promptly once the drug is withdrawn or the dose adjusted. Tardive dyskinesia has a more guarded prognosis, being persistent or irreversible in a substantial proportion, although VMAT2 inhibitors and early causative-drug withdrawal improve outcomes.",
-  "pitfalls": [
-   "Failing to take a thorough medication and substance history, including recently stopped drugs.",
-   "Abruptly withdrawing a neuroleptic and precipitating worsening (withdrawal-emergent) dyskinesia.",
-   "Mistaking tardive dyskinesia for a primary neurodegenerative chorea.",
-   "Attributing dyskinesia in Parkinson disease to disease progression rather than levodopa dosing.",
-   "Overlooking predisposing factors such as pregnancy or hyperthyroidism that unmask drug-induced chorea."
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "American Academy of Neurology guideline on tardive syndromes"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and withdraw or dose-reduce the offending agent, the single most effective step, for example lowering levodopa or dopamine-agonist dosing and stopping stimulants or the causative drug",
-   "For levodopa-induced peak-dose dyskinesia, fractionate and adjust the dopaminergic regimen and add amantadine to suppress dyskinesia",
-   "For tardive dyskinesia, withdraw or switch the dopamine-receptor-blocking drug where possible, for example to clozapine, and treat with a VMAT2 inhibitor such as tetrabenazine, valbenazine or deutetrabenazine",
-   "Correct any contributing metabolic or toxic factor and manage predisposing states such as hyperthyroidism",
-   "Provide symptomatic support and monitor for resolution over the months following drug withdrawal",
-   "Involve neurology where the movement disorder is severe or fails to settle, counselling that acute drug-induced chorea usually resolves promptly whereas tardive dyskinesia may be persistent"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "drug_induced_chorea-pathway",
-   "title": "drug induced chorea: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Drug-induced chorea should be considered in any acquired chorea, as a careful medication and substance history is often more revealing than extensive investigation.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hyperpyrexia, rigidity and autonomic instability suggesting neuroleptic malignant syndrome or serotonin toxicity",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed medication, over-the-counter and illicit substance history with timeline, Serum drug levels where relevant (e.g. phenytoin, lithium), Urine toxicology screen for stimulants and cocaine"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and withdraw or dose-reduce the offending agent, the single most effective step, for example lowering levodopa or dopamine-agonist dosing and stopping stimulants or the causative drug"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to take a thorough medication and substance history, including recently stopped drugs."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of drug induced chorea."
-  }
- ],
- "tables": [
-  {
-   "id": "drug_induced_chorea-matrix",
-   "title": "drug induced chorea: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Drug-induced chorea should be considered in any acquired chorea, as a careful medication and substance history is often more",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "nervous system",
+  "specialty": "neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Drug-induced chorea should be considered in any acquired chorea, as a careful medication and substance history is often more revealing than extensive investigation.",
+      "Levodopa and dopamine agonists are the commonest culprits, producing peak-dose or diphasic dyskinesia in treated Parkinson disease.",
+      "Chronic dopamine-receptor-blocking drugs (antipsychotics, metoclopramide) cause tardive dyskinesia, characteristically orobuccolingual and sometimes irreversible.",
+      "Other implicated agents include anticonvulsants (notably phenytoin toxicity), stimulants and cocaine ('crack dancing'), oral contraceptives, lithium and certain antihistamines.",
+      "Onset ranges from acute (stimulants, phenytoin toxicity, levodopa) to delayed after months or years of exposure (tardive dyskinesia).",
+      "A predisposing basal ganglia state (previous Sydenham chorea, pregnancy, hyperthyroidism, structural lesion) lowers the threshold for drug-induced chorea.",
+      "Management centres on identifying and withdrawing or reducing the offending agent, though tardive dyskinesia may persist or transiently worsen on withdrawal.",
+      "VMAT2 inhibitors are the evidence-based pharmacological treatment for persistent tardive dyskinesia when the causative drug cannot be stopped."
     ],
-    [
-     "Key Investigations",
-     "Detailed medication, over-the-counter and illicit substance history with timeline, Serum drug levels where relevant (e.g.",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Drug-induced chorea reflects pharmacological disturbance of dopaminergic and other neurotransmitter balance within the basal ganglia. Dopaminergic excess, as with levodopa and dopamine agonists, overstimulates striatal receptors and drives the indirect pathway toward disinhibited, choreic output, often superimposed on the maladaptive plasticity of chronic denervation. Conversely, chronic dopamine-receptor blockade induces post-synaptic receptor supersensitivity and compensatory changes that manifest as tardive dyskinesia. Stimulants and cocaine acutely increase synaptic dopamine, while anticonvulsant toxicity and other agents perturb striatal function through less well-defined mechanisms. In each case the final common pathway is dysregulation of striatal control over thalamocortical motor circuits.",
+    "additionalDifferentials": [
+      "Sydenham chorea and other autoimmune chorea",
+      "Huntington disease and phenocopies",
+      "Metabolic chorea (non-ketotic hyperglycaemia, thyrotoxicosis)",
+      "Vascular (post-stroke) chorea",
+      "Wilson disease",
+      "Chorea gravidarum and oestrogen-related chorea",
+      "Functional (psychogenic) movement disorder"
     ],
-    [
-     "Primary Differentials",
-     "Sydenham chorea and other autoimmune chorea, Huntington disease and phenocopies, Metabolic chorea (non-ketotic hyperglycaemia,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed medication, over-the-counter and illicit substance history with timeline",
+      "Serum drug levels where relevant (e.g. phenytoin, lithium)",
+      "Urine toxicology screen for stimulants and cocaine",
+      "Metabolic screen including glucose and thyroid function",
+      "Full blood count and peripheral film if neuroacanthocytosis considered",
+      "MRI brain to exclude structural or vascular lesions",
+      "Genetic testing for Huntington disease if features persist after drug withdrawal"
     ],
-    [
-     "Management Strategy",
-     "Identify and withdraw or dose-reduce the offending agent, the single most effective step, for example lowering levodopa or",
-     "Core treatment modality"
+    "redFlags": [
+      "Hyperpyrexia, rigidity and autonomic instability suggesting neuroleptic malignant syndrome or serotonin toxicity",
+      "Signs of severe anticonvulsant or lithium toxicity requiring urgent level measurement and management",
+      "Cardiovascular compromise with stimulant or cocaine intoxication",
+      "Severe generalised chorea causing rhabdomyolysis, hyperthermia or exhaustion",
+      "Persistent chorea after drug withdrawal, prompting a search for an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to take a thorough medication and substance history, including recently stopped drugs.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Chorea from acute intoxication or dopaminergic overtreatment usually resolves promptly once the drug is withdrawn or the dose adjusted. Tardive dyskinesia has a more guarded prognosis, being persistent or irreversible in a substantial proportion, although VMAT2 inhibitors and early causative-drug withdrawal improve outcomes.",
+    "pitfalls": [
+      "Failing to take a thorough medication and substance history, including recently stopped drugs.",
+      "Abruptly withdrawing a neuroleptic and precipitating worsening (withdrawal-emergent) dyskinesia.",
+      "Mistaking tardive dyskinesia for a primary neurodegenerative chorea.",
+      "Attributing dyskinesia in Parkinson disease to disease progression rather than levodopa dosing.",
+      "Overlooking predisposing factors such as pregnancy or hyperthyroidism that unmask drug-induced chorea."
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "American Academy of Neurology guideline on tardive syndromes"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and withdraw or dose-reduce the offending agent, the single most effective step, for example lowering levodopa or dopamine-agonist dosing and stopping stimulants or the causative drug",
+      "For levodopa-induced peak-dose dyskinesia, fractionate and adjust the dopaminergic regimen and add amantadine to suppress dyskinesia",
+      "For tardive dyskinesia, withdraw or switch the dopamine-receptor-blocking drug where possible, for example to clozapine, and treat with a VMAT2 inhibitor such as tetrabenazine, valbenazine or deutetrabenazine",
+      "Correct any contributing metabolic or toxic factor and manage predisposing states such as hyperthyroidism",
+      "Provide symptomatic support and monitor for resolution over the months following drug withdrawal",
+      "Involve neurology where the movement disorder is severe or fails to settle, counselling that acute drug-induced chorea usually resolves promptly whereas tardive dyskinesia may be persistent"
     ]
-   ],
-   "caption": "Overview comparison matrix for drug induced chorea."
-  }
- ],
- "diagrams": [
-  {
-   "id": "drug-induced-chorea-real-image",
-   "title": "drug induced chorea: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "drug_induced_chorea-pathway",
+      "title": "drug induced chorea: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Drug-induced chorea should be considered in any acquired chorea, as a careful medication and substance history is often more revealing than extensive investigation.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hyperpyrexia, rigidity and autonomic instability suggesting neuroleptic malignant syndrome or serotonin toxicity",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed medication, over-the-counter and illicit substance history with timeline, Serum drug levels where relevant (e.g. phenytoin, lithium), Urine toxicology screen for stimulants and cocaine"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and withdraw or dose-reduce the offending agent, the single most effective step, for example lowering levodopa or dopamine-agonist dosing and stopping stimulants or the causative drug"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to take a thorough medication and substance history, including recently stopped drugs."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of drug induced chorea."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "drug_induced_chorea-matrix",
+      "title": "drug induced chorea: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Drug-induced chorea should be considered in any acquired chorea, as a careful medication and substance history is often more",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed medication, over-the-counter and illicit substance history with timeline, Serum drug levels where relevant (e.g.",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sydenham chorea and other autoimmune chorea, Huntington disease and phenocopies, Metabolic chorea (non-ketotic hyperglycaemia,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and withdraw or dose-reduce the offending agent, the single most effective step, for example lowering levodopa or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to take a thorough medication and substance history, including recently stopped drugs.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for drug induced chorea."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 372-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_induced_chorea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed medication, over-the-counter and illicit substance history",
+          "cells": [
+            {
+              "text": "Timeline of drug exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum drug levels (for example phenytoin or lithium)",
+          "cells": [
+            {
+              "text": "Toxic drug levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine toxicology screen",
+          "cells": [
+            {
+              "text": "Stimulants and cocaine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen including glucose and thyroid function",
+          "cells": [
+            {
+              "text": "Metabolic and thyroid causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Structural or vascular lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_chorea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sydenham chorea and other autoimmune chorea",
+          "cells": [
+            {
+              "text": "Autoimmune cause; not drug-related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Huntington disease and phenocopies",
+          "cells": [
+            {
+              "text": "Persistent chorea after drug withdrawal points here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tardive syndromes",
+          "cells": [
+            {
+              "text": "Persistent after withdrawal; tardive dyskinesia is not a primary chorea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_chorea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw or dose-reduce the offending agent",
+          "cells": [
+            {
+              "text": "The single most effective step, including levodopa and dopamine agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa-induced peak-dose dyskinesia",
+          "cells": [
+            {
+              "text": "Fractionate and adjust the regimen; add amantadine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tardive dyskinesia",
+          "cells": [
+            {
+              "text": "Withdraw or switch the blocking drug, for example to clozapine; VMAT2 inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributing factors",
+          "cells": [
+            {
+              "text": "Correct metabolic or toxic factors such as hyperthyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring after withdrawal",
+          "cells": [
+            {
+              "text": "Watch for resolution over the months after stopping the drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral",
+          "cells": [
+            {
+              "text": "Where severe or not settling; acute chorea resolves, tardive dyskinesia may persist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_chorea-ddx-2",
+      "kind": "ddx",
+      "title": "Hyperkinetic movement disorders defined",
+      "rowHeader": "Condition",
+      "columns": [
+        "Definition"
+      ],
+      "rows": [
+        {
+          "parameter": "Tremor",
+          "cells": [
+            {
+              "text": "Rhythmic oscillation of a body part from intermittent muscle contractions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystonia",
+          "cells": [
+            {
+              "text": "Involuntary patterned, sustained or repeated muscle contractions, often twisting, with abnormal posture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Athetosis",
+          "cells": [
+            {
+              "text": "Slow, distal, writhing involuntary movements, tending to affect the arms and hands"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chorea",
+          "cells": [
+            {
+              "text": "Rapid, semipurposeful, graceful, dance-like nonpatterned involuntary movements of distal or proximal muscles"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myoclonus",
+          "cells": [
+            {
+              "text": "Sudden, brief (under 100 ms), jerk-like, arrhythmic muscle twitches"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tic",
+          "cells": [
+            {
+              "text": "Brief, repeated, stereotyped muscle contractions, often suppressible; simple (one muscle group) or complex (range of motor activities)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_induced_chorea-dx-mgmt",
+      "title": "Diagnosis and management of drug induced chorea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected drug-induced chorea: involuntary movements after a dopaminergic or other drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hyperpyrexia, rigidity, lithium or anticonvulsant toxicity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drug levels and management of toxicity or neuroleptic malignant syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug history with timeline; drug levels; urine toxicology; glucose; thyroid; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do chorea and drug timing fit, with toxicity and metabolic causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Persistent chorea after withdrawal: consider Huntington disease or other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw or dose-reduce the offending agent, the most effective step",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fractionate levodopa and add amantadine for peak-dose dyskinesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Switch the blocking drug and use a VMAT2 inhibitor for tardive dyskinesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct metabolic or toxic factors such as hyperthyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for resolution over months; involve neurology if not settling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute drug chorea usually resolves promptly; tardive dyskinesia may be persistent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

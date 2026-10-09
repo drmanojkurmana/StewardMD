@@ -1,172 +1,450 @@
 {
- "id": "scoliosis",
- "name": "Scoliosis",
- "aliases": [
-  "spinal curvature",
-  "adolescent idiopathic scoliosis",
-  "lateral curvature of the spine"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A three-dimensional deformity combining lateral curvature and vertebral rotation, most commonly adolescent idiopathic scoliosis in otherwise healthy children, predominantly girls",
-   "It is often painless and detected as asymmetry of the shoulders, waist, or scapulae; a rib hump on the forward-bending (Adam's) test reflects the rotational component",
-   "Curve magnitude is quantified by the Cobb angle on a standing radiograph, and skeletal maturity (e.g. Risser sign) helps predict the risk of progression",
-   "Significant back pain, a rapidly progressive curve, an atypical (e.g. left thoracic) curve, or neurological signs should prompt a search for an underlying cause and MRI",
-   "Scoliosis may be idiopathic, congenital (vertebral anomalies), or neuromuscular (e.g. cerebral palsy, muscular dystrophy), and management differs accordingly",
-   "Small curves are observed, moderate curves in a growing child may be braced to limit progression, and large or progressive curves are considered for surgical correction and fusion",
-   "The likelihood of progression is greatest during the adolescent growth spurt, so monitoring is intensified during rapid growth",
-   "Severe thoracic curves can restrict pulmonary function, an important consideration in early-onset and neuromuscular disease"
+  "id": "scoliosis",
+  "name": "Scoliosis",
+  "aliases": [
+    "spinal curvature",
+    "adolescent idiopathic scoliosis",
+    "lateral curvature of the spine"
   ],
-  "pathophysiology": "Scoliosis is a structural lateral deviation of the spine accompanied by rotation of the vertebrae, which produces the characteristic rib or paravertebral prominence. In adolescent idiopathic scoliosis the cause is unknown but multifactorial, with genetic, growth-related, and neuromuscular balance factors implicated, and the deformity tends to worsen during periods of rapid skeletal growth. Congenital scoliosis results from failures of vertebral formation or segmentation present from birth, while neuromuscular scoliosis arises from asymmetrical muscle forces acting on the growing spine in conditions such as cerebral palsy. Progressive rotation and wedging of vertebrae make the curve increasingly rigid, and large thoracic curves can distort the chest and compromise lung capacity.",
-  "additionalDifferentials": [
-   "Postural (non-structural) scoliosis that corrects on forward bending",
-   "Leg-length discrepancy causing compensatory curvature",
-   "Congenital vertebral anomalies",
-   "Neuromuscular scoliosis (cerebral palsy, muscular dystrophy, spinal muscular atrophy)",
-   "Syndromic scoliosis (e.g. neurofibromatosis, Marfan syndrome)",
-   "Intraspinal pathology (syrinx, tethered cord, tumour) causing an atypical or painful curve"
-  ],
-  "additionalInvestigations": [
-   "Standing posteroanterior and lateral spinal radiographs to measure the Cobb angle and assess balance",
-   "Assessment of skeletal maturity (e.g. Risser sign, hand/wrist bone age)",
-   "Forward-bending (Adam's) test with a scoliometer to gauge rotation",
-   "MRI of the whole spine for atypical, painful, rapidly progressive, or early-onset curves, or when there are neurological signs",
-   "Pulmonary function testing for large thoracic or neuromuscular curves"
-  ],
-  "redFlags": [
-   "Neurological signs or symptoms suggesting an intraspinal cause requiring MRI",
-   "Significant or persistent back pain, unusual for idiopathic scoliosis",
-   "Rapid curve progression or an atypical curve pattern (e.g. left thoracic)",
-   "Respiratory compromise from a severe thoracic curve"
-  ],
-  "prognosis": "Most mild adolescent idiopathic curves remain stable and require only monitoring, and bracing can prevent progression of moderate curves during growth; large or progressive curves may need surgical correction, and untreated severe curves can cause deformity, back pain, and in extreme thoracic cases cardiopulmonary compromise, while neuromuscular and congenital curves tend to be more progressive.",
-  "pitfalls": [
-   "Assuming all scoliosis is benign idiopathic disease and missing an underlying intraspinal or neuromuscular cause",
-   "Overlooking a painful or atypical curve that warrants MRI",
-   "Failing to monitor closely during the adolescent growth spurt when progression is most likely",
-   "Confusing a compensatory postural curve from leg-length discrepancy with structural scoliosis"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe small curves with periodic clinical and radiographic monitoring of the Cobb angle throughout growth",
-   "Fit a spinal orthosis (brace) for moderate curves in the skeletally immature to limit progression",
-   "Refer progressive or large curves for surgical correction and spinal fusion, or growth-friendly instrumentation in early-onset disease",
-   "Investigate atypical, painful, rapidly progressive, or neurological presentations with whole-spine MRI to identify an underlying cause",
-   "Manage the underlying condition in congenital vertebral-anomaly and neuromuscular scoliosis, tailoring treatment accordingly",
-   "Monitor and support respiratory function in large thoracic and neuromuscular curves",
-   "Provide physiotherapy and multidisciplinary orthopaedic care, with neuromuscular input where relevant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scoliosis-pathway",
-   "title": "Scoliosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A three-dimensional deformity combining lateral curvature and vertebral rotation, most commonly adolescent idiopathic scoliosis in otherwise healthy children, predominantly girls",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological signs or symptoms suggesting an intraspinal cause requiring MRI",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Standing posteroanterior and lateral spinal radiographs to measure the Cobb angle and assess balance, Assessment of skeletal maturity (e.g. Risser sign, hand/wrist bone age), Forward-bending (Adam's) test with a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe small curves with periodic clinical and radiographic monitoring of the Cobb angle throughout growth"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all scoliosis is benign idiopathic disease and missing an underlying intraspinal or neuromuscular cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scoliosis."
-  }
- ],
- "tables": [
-  {
-   "id": "scoliosis-matrix",
-   "title": "Scoliosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A three-dimensional deformity combining lateral curvature and vertebral rotation, most commonly adolescent idiopathic scoliosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A three-dimensional deformity combining lateral curvature and vertebral rotation, most commonly adolescent idiopathic scoliosis in otherwise healthy children, predominantly girls",
+      "It is often painless and detected as asymmetry of the shoulders, waist, or scapulae; a rib hump on the forward-bending (Adam's) test reflects the rotational component",
+      "Curve magnitude is quantified by the Cobb angle on a standing radiograph, and skeletal maturity (e.g. Risser sign) helps predict the risk of progression",
+      "Significant back pain, a rapidly progressive curve, an atypical (e.g. left thoracic) curve, or neurological signs should prompt a search for an underlying cause and MRI",
+      "Scoliosis may be idiopathic, congenital (vertebral anomalies), or neuromuscular (e.g. cerebral palsy, muscular dystrophy), and management differs accordingly",
+      "Small curves are observed, moderate curves in a growing child may be braced to limit progression, and large or progressive curves are considered for surgical correction and fusion",
+      "The likelihood of progression is greatest during the adolescent growth spurt, so monitoring is intensified during rapid growth",
+      "Severe thoracic curves can restrict pulmonary function, an important consideration in early-onset and neuromuscular disease"
     ],
-    [
-     "Key Investigations",
-     "Standing posteroanterior and lateral spinal radiographs to measure the Cobb angle and assess balance, Assessment of skeletal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scoliosis is a structural lateral deviation of the spine accompanied by rotation of the vertebrae, which produces the characteristic rib or paravertebral prominence. In adolescent idiopathic scoliosis the cause is unknown but multifactorial, with genetic, growth-related, and neuromuscular balance factors implicated, and the deformity tends to worsen during periods of rapid skeletal growth. Congenital scoliosis results from failures of vertebral formation or segmentation present from birth, while neuromuscular scoliosis arises from asymmetrical muscle forces acting on the growing spine in conditions such as cerebral palsy. Progressive rotation and wedging of vertebrae make the curve increasingly rigid, and large thoracic curves can distort the chest and compromise lung capacity.",
+    "additionalDifferentials": [
+      "Postural (non-structural) scoliosis that corrects on forward bending",
+      "Leg-length discrepancy causing compensatory curvature",
+      "Congenital vertebral anomalies",
+      "Neuromuscular scoliosis (cerebral palsy, muscular dystrophy, spinal muscular atrophy)",
+      "Syndromic scoliosis (e.g. neurofibromatosis, Marfan syndrome)",
+      "Intraspinal pathology (syrinx, tethered cord, tumour) causing an atypical or painful curve"
     ],
-    [
-     "Primary Differentials",
-     "Postural (non-structural) scoliosis that corrects on forward bending, Leg-length discrepancy causing compensatory curvature,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Standing posteroanterior and lateral spinal radiographs to measure the Cobb angle and assess balance",
+      "Assessment of skeletal maturity (e.g. Risser sign, hand/wrist bone age)",
+      "Forward-bending (Adam's) test with a scoliometer to gauge rotation",
+      "MRI of the whole spine for atypical, painful, rapidly progressive, or early-onset curves, or when there are neurological signs",
+      "Pulmonary function testing for large thoracic or neuromuscular curves"
     ],
-    [
-     "Management Strategy",
-     "Observe small curves with periodic clinical and radiographic monitoring of the Cobb angle throughout growth",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological signs or symptoms suggesting an intraspinal cause requiring MRI",
+      "Significant or persistent back pain, unusual for idiopathic scoliosis",
+      "Rapid curve progression or an atypical curve pattern (e.g. left thoracic)",
+      "Respiratory compromise from a severe thoracic curve"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all scoliosis is benign idiopathic disease and missing an underlying intraspinal or neuromuscular cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most mild adolescent idiopathic curves remain stable and require only monitoring, and bracing can prevent progression of moderate curves during growth; large or progressive curves may need surgical correction, and untreated severe curves can cause deformity, back pain, and in extreme thoracic cases cardiopulmonary compromise, while neuromuscular and congenital curves tend to be more progressive.",
+    "pitfalls": [
+      "Assuming all scoliosis is benign idiopathic disease and missing an underlying intraspinal or neuromuscular cause",
+      "Overlooking a painful or atypical curve that warrants MRI",
+      "Failing to monitor closely during the adolescent growth spurt when progression is most likely",
+      "Confusing a compensatory postural curve from leg-length discrepancy with structural scoliosis"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe small curves with periodic clinical and radiographic monitoring of the Cobb angle throughout growth",
+      "Fit a spinal orthosis (brace) for moderate curves in the skeletally immature to limit progression",
+      "Refer progressive or large curves for surgical correction and spinal fusion, or growth-friendly instrumentation in early-onset disease",
+      "Investigate atypical, painful, rapidly progressive, or neurological presentations with whole-spine MRI to identify an underlying cause",
+      "Manage the underlying condition in congenital vertebral-anomaly and neuromuscular scoliosis, tailoring treatment accordingly",
+      "Monitor and support respiratory function in large thoracic and neuromuscular curves",
+      "Provide physiotherapy and multidisciplinary orthopaedic care, with neuromuscular input where relevant"
     ]
-   ],
-   "caption": "Overview comparison matrix for scoliosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scoliosis-real-image",
-   "title": "Scoliosis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "scoliosis-pathway",
+      "title": "Scoliosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A three-dimensional deformity combining lateral curvature and vertebral rotation, most commonly adolescent idiopathic scoliosis in otherwise healthy children, predominantly girls",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological signs or symptoms suggesting an intraspinal cause requiring MRI",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Standing posteroanterior and lateral spinal radiographs to measure the Cobb angle and assess balance, Assessment of skeletal maturity (e.g. Risser sign, hand/wrist bone age), Forward-bending (Adam's) test with a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe small curves with periodic clinical and radiographic monitoring of the Cobb angle throughout growth"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all scoliosis is benign idiopathic disease and missing an underlying intraspinal or neuromuscular cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scoliosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scoliosis-matrix",
+      "title": "Scoliosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A three-dimensional deformity combining lateral curvature and vertebral rotation, most commonly adolescent idiopathic scoliosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Standing posteroanterior and lateral spinal radiographs to measure the Cobb angle and assess balance, Assessment of skeletal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Postural (non-structural) scoliosis that corrects on forward bending, Leg-length discrepancy causing compensatory curvature,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe small curves with periodic clinical and radiographic monitoring of the Cobb angle throughout growth",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all scoliosis is benign idiopathic disease and missing an underlying intraspinal or neuromuscular cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scoliosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scoliosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standing PA and lateral spine radiographs",
+          "cells": [
+            {
+              "text": "Cobb angle and balance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal maturity (Risser sign, hand/wrist bone age)",
+          "cells": [
+            {
+              "text": "Growth remaining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forward-bending test with scoliometer",
+          "cells": [
+            {
+              "text": "Rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-spine MRI",
+          "cells": [
+            {
+              "text": "Atypical, painful, rapidly progressive or early-onset curves, or neurological signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing",
+          "cells": [
+            {
+              "text": "Large thoracic or neuromuscular curves"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scoliosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Postural scoliosis",
+          "cells": [
+            {
+              "text": "Corrects on forward bending"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular scoliosis",
+          "cells": [
+            {
+              "text": "Cerebral palsy, muscular dystrophy or spinal muscular atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraspinal pathology",
+          "cells": [
+            {
+              "text": "Syrinx, tethered cord or tumour causing atypical or painful curve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scoliosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small curves with periodic clinical and radiographic Cobb monitoring through growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bracing",
+          "cells": [
+            {
+              "text": "Moderate curves in the skeletally immature to limit progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical correction and fusion",
+          "cells": [
+            {
+              "text": "Progressive or large curves; growth-friendly instrumentation in early-onset disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-spine MRI",
+          "cells": [
+            {
+              "text": "Atypical, painful, rapidly progressive or neurological presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying condition",
+          "cells": [
+            {
+              "text": "Congenital vertebral anomaly and neuromuscular scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Large thoracic and neuromuscular curves"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scoliosis-dx-mgmt",
+      "title": "Diagnosis and management of Scoliosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spinal asymmetry on forward bend: suspected scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological signs, unusual back pain, rapid progression or atypical left thoracic curve?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Whole-spine MRI for intraspinal cause; urgent spinal referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standing PA and lateral radiographs for Cobb angle; Risser sign",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the curve structural and progressive in a skeletally immature patient?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Postural or compensatory curve: treat the cause and observe",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe small curves with serial Cobb angle",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Brace moderate curves in the skeletally immature",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical fusion for progressive or large curves",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Support respiratory function in large thoracic curves",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most mild adolescent idiopathic curves stay stable; bracing prevents progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

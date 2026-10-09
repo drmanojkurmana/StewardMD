@@ -1,180 +1,732 @@
 {
- "id": "crimean_congo_hemorrhagic_fever",
- "name": "Crimean-Congo haemorrhagic fever",
- "aliases": [
-  "CCHF",
-  "Crimean-Congo hemorrhagic fever",
-  "viral haemorrhagic fever (CCHF)",
-  "VHF"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A tick-borne viral haemorrhagic fever caused by an orthonairovirus, transmitted mainly by Hyalomma ticks and by contact with blood or tissues of infected livestock",
-   "In India it is a recognised emerging threat, with documented outbreaks in Gujarat and neighbouring regions and cases among livestock handlers and healthcare workers",
-   "Onset is abrupt with fever, severe headache, myalgia, and prostration, progressing over days to a haemorrhagic phase with petechiae, ecchymoses, mucosal bleeding, and multi-organ involvement",
-   "Nosocomial and slaughterhouse transmission is well described, so a history of tick exposure, animal contact, or care of a bleeding patient is a critical clue",
-   "Laboratory features include thrombocytopenia, leukopenia, and rising transaminases, with deranged coagulation heralding severe disease",
-   "This is a medical emergency requiring strict infection-control and barrier precautions, patient isolation, and safe handling of body fluids and laboratory specimens",
-   "Management is chiefly supportive with careful correction of coagulopathy and organ support; suspected and confirmed cases must be promptly notified to public health authorities"
+  "id": "crimean_congo_hemorrhagic_fever",
+  "name": "Crimean-Congo haemorrhagic fever",
+  "aliases": [
+    "CCHF",
+    "Crimean-Congo hemorrhagic fever",
+    "viral haemorrhagic fever (CCHF)",
+    "VHF"
   ],
-  "pathophysiology": "CCHF virus is an enveloped RNA virus that, following tick bite or exposure to infected blood or tissues, replicates and disseminates widely. It infects endothelial cells and cells of the mononuclear phagocyte system, and a dysregulated inflammatory and cytokine response together with direct endothelial injury leads to increased vascular permeability, disseminated intravascular coagulation, and haemorrhage. Hepatic involvement and marrow suppression contribute to the coagulopathy and cytopenias, and severe cases progress to shock and multi-organ failure.",
-  "additionalDifferentials": [
-   "Other viral haemorrhagic fevers (Ebola, Lassa, hantavirus, Kyasanur Forest disease)",
-   "Severe dengue with haemorrhage",
-   "Severe leptospirosis (Weil's disease)",
-   "Meningococcaemia and other bacterial sepsis with DIC",
-   "Severe malaria",
-   "Rickettsial disease with haemorrhage"
-  ],
-  "infectionMimics": [
-   "Dengue haemorrhagic fever",
-   "Leptospirosis",
-   "Meningococcal sepsis",
-   "Severe malaria",
-   "Other viral haemorrhagic fevers"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR for CCHF viral RNA in early illness, performed in an appropriately biosafe laboratory",
-   "CCHF-specific IgM and IgG serology later in the course",
-   "Full blood count, coagulation profile, liver and renal function to gauge severity",
-   "Careful exclusion of dengue, malaria, and leptospirosis given overlapping presentations",
-   "All sampling and testing conducted under enhanced biosafety with prior laboratory notification"
-  ],
-  "redFlags": [
-   "Spontaneous mucosal or gastrointestinal bleeding, extensive ecchymoses, or evidence of disseminated intravascular coagulation",
-   "Rapidly falling platelet count with rising transaminases and deteriorating coagulation",
-   "Hypotension, shock, or signs of multi-organ failure",
-   "Any suspected case demands immediate isolation, barrier nursing, and public health notification because of nosocomial transmission risk"
-  ],
-  "prognosis": "Case fatality is high, especially with delayed recognition and severe coagulopathy or multi-organ failure; early supportive care and meticulous infection control improve outcomes, and survivors who pass the acute haemorrhagic phase generally recover.",
-  "pitfalls": [
-   "Failing to institute isolation and barrier precautions early, exposing staff and other patients to a highly transmissible pathogen",
-   "Anchoring on dengue or malaria and overlooking CCHF in someone with relevant tick or livestock exposure",
-   "Performing invasive procedures or unprotected phlebotomy that increase bleeding and transmission risk",
-   "Not notifying public health authorities and the receiving laboratory before sending specimens"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute strict barrier and infection-control precautions with patient isolation, safe handling of body fluids and laboratory specimens, and prior laboratory notification",
-   "Consider early antiviral therapy with the nucleoside analogue ribavirin, recognising that the evidence base is uncertain",
-   "Provide meticulous supportive care with intravenous fluid resuscitation and organ support in a critical care setting",
-   "Correct coagulopathy and cytopenias with blood products such as packed red cells, platelets and fresh frozen plasma as required",
-   "Avoid intramuscular injections, non-steroidal anti-inflammatory drugs and other agents that aggravate bleeding",
-   "Monitor full blood count, coagulation profile and liver and renal function to gauge and track severity",
-   "Notify public health authorities, trace contacts and healthcare workers with symptom surveillance, and consider ribavirin post-exposure prophylaxis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "crimean_congo_hemorrhagic_fever-pathway",
-   "title": "Crimean-Congo haemorrhagic fever: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A tick-borne viral haemorrhagic fever caused by an orthonairovirus, transmitted mainly by Hyalomma ticks and by contact with blood or tissues of infected livestock",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Spontaneous mucosal or gastrointestinal bleeding, extensive ecchymoses, or evidence of disseminated intravascular coagulation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR for CCHF viral RNA in early illness, performed in an appropriately biosafe laboratory, CCHF-specific IgM and IgG serology later in the course, Full blood count, coagulation profile, liver and renal function to gauge"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute strict barrier and infection-control precautions with patient isolation, safe handling of body fluids and laboratory specimens, and prior laboratory notification"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to institute isolation and barrier precautions early, exposing staff and other patients to a highly transmissible pathogen"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of crimean-congo haemorrhagic fever."
-  }
- ],
- "tables": [
-  {
-   "id": "crimean_congo_hemorrhagic_fever-matrix",
-   "title": "Crimean-Congo haemorrhagic fever: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A tick-borne viral haemorrhagic fever caused by an orthonairovirus, transmitted mainly by Hyalomma ticks and by contact with",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A tick-borne viral haemorrhagic fever caused by an orthonairovirus, transmitted mainly by Hyalomma ticks and by contact with blood or tissues of infected livestock",
+      "In India it is a recognised emerging threat, with documented outbreaks in Gujarat and neighbouring regions and cases among livestock handlers and healthcare workers",
+      "Onset is abrupt with fever, severe headache, myalgia, and prostration, progressing over days to a haemorrhagic phase with petechiae, ecchymoses, mucosal bleeding, and multi-organ involvement",
+      "Nosocomial and slaughterhouse transmission is well described, so a history of tick exposure, animal contact, or care of a bleeding patient is a critical clue",
+      "Laboratory features include thrombocytopenia, leukopenia, and rising transaminases, with deranged coagulation heralding severe disease",
+      "This is a medical emergency requiring strict infection-control and barrier precautions, patient isolation, and safe handling of body fluids and laboratory specimens",
+      "Management is chiefly supportive with careful correction of coagulopathy and organ support; suspected and confirmed cases must be promptly notified to public health authorities"
     ],
-    [
-     "Key Investigations",
-     "RT-PCR for CCHF viral RNA in early illness, performed in an appropriately biosafe laboratory, CCHF-specific IgM and IgG serology",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CCHF virus is an enveloped RNA virus that, following tick bite or exposure to infected blood or tissues, replicates and disseminates widely. It infects endothelial cells and cells of the mononuclear phagocyte system, and a dysregulated inflammatory and cytokine response together with direct endothelial injury leads to increased vascular permeability, disseminated intravascular coagulation, and haemorrhage. Hepatic involvement and marrow suppression contribute to the coagulopathy and cytopenias, and severe cases progress to shock and multi-organ failure.",
+    "additionalDifferentials": [
+      "Other viral haemorrhagic fevers (Ebola, Lassa, hantavirus, Kyasanur Forest disease)",
+      "Severe dengue with haemorrhage",
+      "Severe leptospirosis (Weil's disease)",
+      "Meningococcaemia and other bacterial sepsis with DIC",
+      "Severe malaria",
+      "Rickettsial disease with haemorrhage"
     ],
-    [
-     "Primary Differentials",
-     "Other viral haemorrhagic fevers (Ebola, Lassa, hantavirus, Kyasanur Forest disease), Severe dengue with haemorrhage, Severe",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Dengue haemorrhagic fever",
+      "Leptospirosis",
+      "Meningococcal sepsis",
+      "Severe malaria",
+      "Other viral haemorrhagic fevers"
     ],
-    [
-     "Management Strategy",
-     "Institute strict barrier and infection-control precautions with patient isolation, safe handling of body fluids and laboratory",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "RT-PCR for CCHF viral RNA in early illness, performed in an appropriately biosafe laboratory",
+      "CCHF-specific IgM and IgG serology later in the course",
+      "Full blood count, coagulation profile, liver and renal function to gauge severity",
+      "Careful exclusion of dengue, malaria, and leptospirosis given overlapping presentations",
+      "All sampling and testing conducted under enhanced biosafety with prior laboratory notification"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to institute isolation and barrier precautions early, exposing staff and other patients to a highly transmissible pathogen",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Spontaneous mucosal or gastrointestinal bleeding, extensive ecchymoses, or evidence of disseminated intravascular coagulation",
+      "Rapidly falling platelet count with rising transaminases and deteriorating coagulation",
+      "Hypotension, shock, or signs of multi-organ failure",
+      "Any suspected case demands immediate isolation, barrier nursing, and public health notification because of nosocomial transmission risk"
+    ],
+    "prognosis": "Case fatality is high, especially with delayed recognition and severe coagulopathy or multi-organ failure; early supportive care and meticulous infection control improve outcomes, and survivors who pass the acute haemorrhagic phase generally recover.",
+    "pitfalls": [
+      "Failing to institute isolation and barrier precautions early, exposing staff and other patients to a highly transmissible pathogen",
+      "Anchoring on dengue or malaria and overlooking CCHF in someone with relevant tick or livestock exposure",
+      "Performing invasive procedures or unprotected phlebotomy that increase bleeding and transmission risk",
+      "Not notifying public health authorities and the receiving laboratory before sending specimens"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute strict barrier and infection-control precautions with patient isolation, safe handling of body fluids and laboratory specimens, and prior laboratory notification",
+      "Consider early antiviral therapy with the nucleoside analogue ribavirin, recognising that the evidence base is uncertain",
+      "Provide meticulous supportive care with intravenous fluid resuscitation and organ support in a critical care setting",
+      "Correct coagulopathy and cytopenias with blood products such as packed red cells, platelets and fresh frozen plasma as required",
+      "Avoid intramuscular injections, non-steroidal anti-inflammatory drugs and other agents that aggravate bleeding",
+      "Monitor full blood count, coagulation profile and liver and renal function to gauge and track severity",
+      "Notify public health authorities, trace contacts and healthcare workers with symptom surveillance, and consider ribavirin post-exposure prophylaxis"
     ]
-   ],
-   "caption": "Overview comparison matrix for crimean-congo haemorrhagic fever."
-  }
- ],
- "diagrams": [
-  {
-   "id": "crimean-congo-hemorrhagic-fever-real-image",
-   "title": "Crimean-Congo haemorrhagic fever: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "crimean_congo_hemorrhagic_fever-pathway",
+      "title": "Crimean-Congo haemorrhagic fever: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A tick-borne viral haemorrhagic fever caused by an orthonairovirus, transmitted mainly by Hyalomma ticks and by contact with blood or tissues of infected livestock",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Spontaneous mucosal or gastrointestinal bleeding, extensive ecchymoses, or evidence of disseminated intravascular coagulation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR for CCHF viral RNA in early illness, performed in an appropriately biosafe laboratory, CCHF-specific IgM and IgG serology later in the course, Full blood count, coagulation profile, liver and renal function to gauge"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute strict barrier and infection-control precautions with patient isolation, safe handling of body fluids and laboratory specimens, and prior laboratory notification"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to institute isolation and barrier precautions early, exposing staff and other patients to a highly transmissible pathogen"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of crimean-congo haemorrhagic fever."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "crimean_congo_hemorrhagic_fever-matrix",
+      "title": "Crimean-Congo haemorrhagic fever: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A tick-borne viral haemorrhagic fever caused by an orthonairovirus, transmitted mainly by Hyalomma ticks and by contact with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR for CCHF viral RNA in early illness, performed in an appropriately biosafe laboratory, CCHF-specific IgM and IgG serology",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other viral haemorrhagic fevers (Ebola, Lassa, hantavirus, Kyasanur Forest disease), Severe dengue with haemorrhage, Severe",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute strict barrier and infection-control precautions with patient isolation, safe handling of body fluids and laboratory",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to institute isolation and barrier precautions early, exposing staff and other patients to a highly transmissible pathogen",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for crimean-congo haemorrhagic fever."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 196-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 221-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "crimean_congo_hemorrhagic_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR for CCHF viral RNA in early illness",
+          "cells": [
+            {
+              "text": "Viral RNA detected; biosafe laboratory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CCHF-specific IgM and IgG serology",
+          "cells": [
+            {
+              "text": "Later in the course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, coagulation, liver and renal function",
+          "cells": [
+            {
+              "text": "Severity gauged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for dengue, malaria and leptospirosis",
+          "cells": [
+            {
+              "text": "Overlapping presentations excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crimean_congo_hemorrhagic_fever-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dengue haemorrhagic fever",
+          "cells": [
+            {
+              "text": "Overlapping presentation; exclusion testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "Overlapping presentation; exclusion testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe malaria",
+          "cells": [
+            {
+              "text": "Anchoring on malaria is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crimean_congo_hemorrhagic_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Barrier and infection-control precautions",
+          "cells": [
+            {
+              "text": "Patient isolation, safe handling of fluids and specimens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ribavirin",
+          "cells": [
+            {
+              "text": "Early antiviral therapy considered; evidence base uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care supportive care",
+          "cells": [
+            {
+              "text": "IV fluid resuscitation and organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood product support",
+          "cells": [
+            {
+              "text": "Packed red cells, platelets and fresh frozen plasma for coagulopathy and cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug avoidance",
+          "cells": [
+            {
+              "text": "Intramuscular injections and NSAIDs that aggravate bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity monitoring",
+          "cells": [
+            {
+              "text": "FBC, coagulation, liver and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health",
+          "cells": [
+            {
+              "text": "Notification, contact tracing and symptom surveillance; ribavirin post-exposure prophylaxis considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crimean_congo_hemorrhagic_fever-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Viral hemorrhagic fever syndromes and their distribution",
+      "rowHeader": "Disease",
+      "columns": [
+        "Incubation period, days",
+        "Case-infection ratio",
+        "Case-fatality rate, %",
+        "Geographic range",
+        "Target population"
+      ],
+      "rows": [
+        {
+          "parameter": "Lassa fever",
+          "cells": [
+            {
+              "text": "5 to 16"
+            },
+            {
+              "text": "Mild infections probably common"
+            },
+            {
+              "text": "15"
+            },
+            {
+              "text": "West Africa"
+            },
+            {
+              "text": "All ages, both sexes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "South American HF",
+          "cells": [
+            {
+              "text": "7 to 14"
+            },
+            {
+              "text": "Most infections (more than half) result in disease"
+            },
+            {
+              "text": "15 to 30"
+            },
+            {
+              "text": "Selected rural areas of Bolivia, Argentina, Venezuela and Brazil"
+            },
+            {
+              "text": "Bolivia: men in the countryside; all ages and both sexes in villages. Argentina: all ages, both sexes; excess exposure and disease in men. Venezuela: all ages, both sexes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rift Valley fever",
+          "cells": [
+            {
+              "text": "2 to 5"
+            },
+            {
+              "text": "About 1:100"
+            },
+            {
+              "text": "About 50"
+            },
+            {
+              "text": "Sub-Saharan Africa, Madagascar, Egypt"
+            },
+            {
+              "text": "All ages, both sexes; more often diagnosed in men; preexisting liver disease may predispose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Crimean-Congo HF",
+          "cells": [
+            {
+              "text": "3 to 12"
+            },
+            {
+              "text": ">=1:5"
+            },
+            {
+              "text": "15 to 30"
+            },
+            {
+              "text": "Africa, Middle East, Turkey, Balkans, southern region of the former Soviet Union, western China"
+            },
+            {
+              "text": "All ages, both sexes; men more exposed in some settings"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HF with renal syndrome",
+          "cells": [
+            {
+              "text": "9 to 35"
+            },
+            {
+              "text": "Hantaan, >1:1.25; Puumala, 1:20"
+            },
+            {
+              "text": "Hantaan, 5 to 15; Puumala, <1"
+            },
+            {
+              "text": "Worldwide, depending on rodent reservoir"
+            },
+            {
+              "text": "Excess of male patients (partly from greater exposure); mainly adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hantavirus pulmonary syndrome",
+          "cells": [
+            {
+              "text": "About 7 to 28"
+            },
+            {
+              "text": "Very high"
+            },
+            {
+              "text": "40 to 50"
+            },
+            {
+              "text": "Americas"
+            },
+            {
+              "text": "Excess of male patients due to some occupational exposure; mainly adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Marburg or Ebola HF",
+          "cells": [
+            {
+              "text": "3 to 16"
+            },
+            {
+              "text": "High"
+            },
+            {
+              "text": "25 to 90"
+            },
+            {
+              "text": "Sub-Saharan Africa"
+            },
+            {
+              "text": "All ages, both sexes; children less exposed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Yellow fever",
+          "cells": [
+            {
+              "text": "3 to 6"
+            },
+            {
+              "text": "1:2 to 1:20"
+            },
+            {
+              "text": "20"
+            },
+            {
+              "text": "Africa, South America"
+            },
+            {
+              "text": "All ages, both sexes; adults more exposed in jungle setting; preexisting flavivirus immunity may cross-protect"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dengue HF/dengue shock syndrome",
+          "cells": [
+            {
+              "text": "2 to 7"
+            },
+            {
+              "text": "Nonimmune, 1:10,000; heterologous immune, 1:100"
+            },
+            {
+              "text": "<1 with supportive treatment"
+            },
+            {
+              "text": "Tropics and subtropics worldwide"
+            },
+            {
+              "text": "Predominantly children; previous heterologous dengue infection predisposes to HF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kyasanur Forest/Omsk HF",
+          "cells": [
+            {
+              "text": "3 to 8"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "0.5 to 10"
+            },
+            {
+              "text": "Mysore State, India / western Siberia"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source footnote (a) on the Rift Valley fever case-infection ratio is not shown."
+    },
+    {
+      "id": "crimean_congo_hemorrhagic_fever-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "CDC category A, B and C bioterrorism agents",
+      "rowHeader": "Category",
+      "columns": [
+        "Agents"
+      ],
+      "rows": [
+        {
+          "parameter": "Category A",
+          "cells": [
+            {
+              "text": "Anthrax (Bacillus anthracis); botulism (Clostridium botulinum toxin); plague (Yersinia pestis); smallpox (Variola major); tularemia (Francisella tularensis); viral hemorrhagic fevers: arenaviruses (Lassa, New World: Machupo, Junin, Guanarito and Sabia), Bunyaviridae (Crimean-Congo, Rift Valley), Filoviridae (Ebola, Marburg)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Category B",
+          "cells": [
+            {
+              "text": "Brucellosis (Brucella spp.); epsilon toxin of Clostridium perfringens; food safety threats (for example Salmonella spp., Escherichia coli O157:H7, Shigella); glanders (Burkholderia mallei); melioidosis (B. pseudomallei); psittacosis (Chlamydophila psittaci); Q fever (Coxiella burnetii); ricin toxin from Ricinus communis (castor beans); staphylococcal enterotoxin B; typhus fever (Rickettsia prowazekii); viral encephalitis [alphaviruses, for example Venezuelan, eastern and western equine encephalitis]; water safety threats (for example Vibrio cholerae, Cryptosporidium parvum)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Category C",
+          "cells": [
+            {
+              "text": "Emerging infectious disease threats such as Nipah, hantavirus, SARS coronavirus and pandemic influenza"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "crimean_congo_hemorrhagic_fever-dx-mgmt",
+      "title": "Diagnosis and management of Crimean-Congo haemorrhagic fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CCHF: fever with bleeding after tick or livestock exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (spontaneous bleeding, falling platelets, shock, multi-organ failure)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate isolation, barrier nursing and public health notification",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR for CCHF RNA; coagulation; FBC; liver and renal function; exclusion tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is CCHF RNA detected with dengue, malaria and leptospirosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dengue, leptospirosis, malaria or other viral haemorrhagic fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict barrier precautions and isolation from the first suspicion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ribavirin considered early; evidence uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Critical care with IV fluids and organ support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood products for coagulopathy; avoid IM injections and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Case fatality is high, especially with delayed recognition and severe coagulopathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

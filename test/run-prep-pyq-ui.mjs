@@ -125,13 +125,14 @@ try {
   ok(await overflow() === "", "image question fits 390 px");
   await shot("image");
   await click("#smdPrep [data-act=y-zoom]");
-  ok(await until(`return !!document.querySelector("#smdPrep #pnYqZoom");`, 2000), "tapping the image enlarges it");
-  ok(await ev(`return document.activeElement && document.activeElement.getAttribute("data-act")==="y-unzoom";`) === true, "focus moves to Close image");
-  await click("#smdPrep [data-act=y-zoom2]");
-  ok(await ev(`return document.querySelector("#smdPrep .pn-zoom-b").classList.contains("big");`) === true, "a second tap enlarges further");
+  // The shared viewer (prep-viewer.js; gestures are covered by test/run-prep-feel-ui.mjs).
+  ok(await until(`return !!document.querySelector(".pv") && PREP_VIEWER.isOpen();`, 2000), "tapping the image enlarges it in the shared viewer");
+  ok(await ev(`return document.activeElement && document.activeElement.classList.contains("pv-x");`) === true, "focus moves to Close image");
+  await click(".pv [data-pv=in]");
+  ok(await ev(`return PREP_VIEWER._state().s > 1.5;`) === true, "Zoom in enlarges further");
   await shot("zoom");
   await ev(`PREP.back(); return 1;`);
-  ok(await ev(`return !document.querySelector("#smdPrep #pnYqZoom") && /Synthetic PYQ two/.test(document.querySelector("#smdPrep .pn-q").textContent);`) === true, "back() closes the image first and stays on the question");
+  ok(await until(`return !document.querySelector(".pv");`, 1500) && /Synthetic PYQ two/.test(await text("#smdPrep .pn-q")), "back() closes the image first and stays on the question");
   await click(`#smdPrep [data-act=answer][data-k="1"]`);
   await click("#smdPrep [data-act=next]");
   ok(await until(`return /Synthetic PYQ three/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"");`, 3000) && await ev(`return !/Synthetic PYQ four/.test(document.body.textContent);`) === true, "the key-unclear question is never shown");

@@ -1,177 +1,455 @@
 {
- "id": "neurogenic_bladder",
- "name": "Neurogenic bladder",
- "aliases": [
-  "neuropathic bladder",
-  "neurogenic lower urinary tract dysfunction",
-  "NLUTD"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Neurogenic bladder describes bladder dysfunction due to disease or injury of the nervous system, with the pattern depending on the level of the neurological lesion",
-   "Suprapontine and suprasacral (upper motor neuron) lesions typically cause a spastic, overactive detrusor, often with detrusor-sphincter dyssynergia, whereas sacral or peripheral (lower motor neuron) lesions cause a flaccid, areflexic, poorly emptying bladder",
-   "Common causes include spinal cord injury, multiple sclerosis, spina bifida, diabetes mellitus, Parkinson's disease, stroke, and cauda equina lesions",
-   "The paramount goal of management is protection of the upper urinary tracts, because high storage pressures and detrusor-sphincter dyssynergia can cause hydronephrosis and renal failure",
-   "Video-urodynamics is central to characterising bladder behaviour, storage pressures, and sphincter coordination to guide safe management",
-   "Clean intermittent catheterisation is a cornerstone for bladders that do not empty adequately, reducing residual urine and infection risk while preserving the upper tracts",
-   "Management principles combine measures to lower storage pressure and improve emptying, such as antimuscarinics, intradetrusor botulinum toxin, catheterisation regimens, and, in selected cases, augmentation or diversion surgery",
-   "Patients are at risk of recurrent urinary infection, stones, and, in high spinal cord injuries, autonomic dysreflexia triggered by bladder distension"
+  "id": "neurogenic_bladder",
+  "name": "Neurogenic bladder",
+  "aliases": [
+    "neuropathic bladder",
+    "neurogenic lower urinary tract dysfunction",
+    "NLUTD"
   ],
-  "pathophysiology": "Normal micturition depends on coordinated control between the pontine micturition centre, spinal pathways, and sacral (S2-S4) reflexes governing the detrusor and urethral sphincter. Neurological lesions disrupt this coordination in patterns determined by lesion level. Upper motor neuron lesions above the sacral cord release the sacral reflex from higher inhibition, producing detrusor overactivity and often detrusor-sphincter dyssynergia, in which the sphincter contracts against a contracting bladder, generating dangerously high pressures. Lower motor neuron or peripheral lesions abolish the reflex arc, producing an acontractile, flaccid bladder with retention and overflow. Sustained high intravesical pressure and incomplete emptying threaten the upper tracts and predispose to infection and stones.",
-  "additionalDifferentials": [
-   "Detrusor overactivity from non-neurogenic causes (idiopathic overactive bladder)",
-   "Bladder outlet obstruction (BPH, stricture)",
-   "Diabetic cystopathy",
-   "Cauda equina syndrome",
-   "Multiple sclerosis or other demyelinating disease",
-   "Spinal cord injury or compression",
-   "Pelvic surgery-related denervation"
-  ],
-  "additionalInvestigations": [
-   "Video-urodynamic studies to assess detrusor pressure, compliance, and sphincter coordination",
-   "Renal function tests and upper tract imaging (ultrasound) to monitor for hydronephrosis",
-   "Post-void residual measurement",
-   "Urinalysis and culture for infection surveillance",
-   "Neurological evaluation and imaging directed at the underlying condition",
-   "Periodic surveillance for bladder stones and, where relevant, malignancy in long-term catheterised patients"
-  ],
-  "redFlags": [
-   "High detrusor storage pressures or detrusor-sphincter dyssynergia threatening the upper tracts and renal function",
-   "New or progressive hydronephrosis and rising creatinine",
-   "Autonomic dysreflexia in high spinal cord injury, a potentially life-threatening emergency triggered by bladder overdistension",
-   "Urosepsis in an obstructed or poorly draining neurogenic bladder",
-   "Acute cauda equina syndrome presenting with retention and neurological deficit"
-  ],
-  "prognosis": "With structured management focused on low-pressure storage, adequate emptying, and regular upper tract surveillance, many patients maintain renal function and continence; neglected high-pressure bladders carry a significant risk of progressive renal impairment and recurrent complications.",
-  "pitfalls": [
-   "Focusing on continence while neglecting upper tract protection and storage pressures",
-   "Failing to recognise and treat detrusor-sphincter dyssynergia",
-   "Not anticipating autonomic dysreflexia during bladder distension or instrumentation in high spinal injuries",
-   "Inadequate surveillance for renal deterioration, stones, and infection",
-   "Treating overactivity with antimuscarinics without ensuring adequate emptying"
-  ],
-  "references": [
-   "Smith & Tanagho's General Urology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "The overriding goal is protection of the upper urinary tracts by ensuring low-pressure storage and adequate bladder emptying, guided by video-urodynamics",
-   "Manage the poorly emptying or high-residual bladder with clean intermittent catheterisation as the cornerstone of drainage",
-   "Reduce detrusor overactivity and storage pressures with antimuscarinic agents or a beta-3 adrenoceptor agonist (mirabegron), and use intradetrusor botulinum toxin for refractory overactivity",
-   "Treat outlet and detrusor-sphincter dyssynergia problems with alpha-blockers or botulinum toxin to the sphincter as appropriate",
-   "Consider surgical options such as augmentation cystoplasty, sacral neuromodulation or urinary diversion when conservative measures fail",
-   "Undertake regular surveillance with renal function tests, upper tract ultrasound and post-void residual measurement, and manage urinary infections judiciously",
-   "Treat the underlying neurological condition and coordinate urology and rehabilitation care, with long-term monitoring for bladder stones and malignancy in catheterised patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neurogenic_bladder-pathway",
-   "title": "Neurogenic bladder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Neurogenic bladder describes bladder dysfunction due to disease or injury of the nervous system, with the pattern depending on the level of the neurological lesion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: High detrusor storage pressures or detrusor-sphincter dyssynergia threatening the upper tracts and renal function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Video-urodynamic studies to assess detrusor pressure, compliance, and sphincter coordination, Renal function tests and upper tract imaging (ultrasound) to monitor for hydronephrosis, Post-void residual measurement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: The overriding goal is protection of the upper urinary tracts by ensuring low-pressure storage and adequate bladder emptying, guided by video-urodynamics"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing on continence while neglecting upper tract protection and storage pressures"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neurogenic bladder."
-  }
- ],
- "tables": [
-  {
-   "id": "neurogenic_bladder-matrix",
-   "title": "Neurogenic bladder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Neurogenic bladder describes bladder dysfunction due to disease or injury of the nervous system, with the pattern depending on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Neurogenic bladder describes bladder dysfunction due to disease or injury of the nervous system, with the pattern depending on the level of the neurological lesion",
+      "Suprapontine and suprasacral (upper motor neuron) lesions typically cause a spastic, overactive detrusor, often with detrusor-sphincter dyssynergia, whereas sacral or peripheral (lower motor neuron) lesions cause a flaccid, areflexic, poorly emptying bladder",
+      "Common causes include spinal cord injury, multiple sclerosis, spina bifida, diabetes mellitus, Parkinson's disease, stroke, and cauda equina lesions",
+      "The paramount goal of management is protection of the upper urinary tracts, because high storage pressures and detrusor-sphincter dyssynergia can cause hydronephrosis and renal failure",
+      "Video-urodynamics is central to characterising bladder behaviour, storage pressures, and sphincter coordination to guide safe management",
+      "Clean intermittent catheterisation is a cornerstone for bladders that do not empty adequately, reducing residual urine and infection risk while preserving the upper tracts",
+      "Management principles combine measures to lower storage pressure and improve emptying, such as antimuscarinics, intradetrusor botulinum toxin, catheterisation regimens, and, in selected cases, augmentation or diversion surgery",
+      "Patients are at risk of recurrent urinary infection, stones, and, in high spinal cord injuries, autonomic dysreflexia triggered by bladder distension"
     ],
-    [
-     "Key Investigations",
-     "Video-urodynamic studies to assess detrusor pressure, compliance, and sphincter coordination, Renal function tests and upper",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Normal micturition depends on coordinated control between the pontine micturition centre, spinal pathways, and sacral (S2-S4) reflexes governing the detrusor and urethral sphincter. Neurological lesions disrupt this coordination in patterns determined by lesion level. Upper motor neuron lesions above the sacral cord release the sacral reflex from higher inhibition, producing detrusor overactivity and often detrusor-sphincter dyssynergia, in which the sphincter contracts against a contracting bladder, generating dangerously high pressures. Lower motor neuron or peripheral lesions abolish the reflex arc, producing an acontractile, flaccid bladder with retention and overflow. Sustained high intravesical pressure and incomplete emptying threaten the upper tracts and predispose to infection and stones.",
+    "additionalDifferentials": [
+      "Detrusor overactivity from non-neurogenic causes (idiopathic overactive bladder)",
+      "Bladder outlet obstruction (BPH, stricture)",
+      "Diabetic cystopathy",
+      "Cauda equina syndrome",
+      "Multiple sclerosis or other demyelinating disease",
+      "Spinal cord injury or compression",
+      "Pelvic surgery-related denervation"
     ],
-    [
-     "Primary Differentials",
-     "Detrusor overactivity from non-neurogenic causes (idiopathic overactive bladder), Bladder outlet obstruction (BPH, stricture),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Video-urodynamic studies to assess detrusor pressure, compliance, and sphincter coordination",
+      "Renal function tests and upper tract imaging (ultrasound) to monitor for hydronephrosis",
+      "Post-void residual measurement",
+      "Urinalysis and culture for infection surveillance",
+      "Neurological evaluation and imaging directed at the underlying condition",
+      "Periodic surveillance for bladder stones and, where relevant, malignancy in long-term catheterised patients"
     ],
-    [
-     "Management Strategy",
-     "The overriding goal is protection of the upper urinary tracts by ensuring low-pressure storage and adequate bladder emptying,",
-     "Core treatment modality"
+    "redFlags": [
+      "High detrusor storage pressures or detrusor-sphincter dyssynergia threatening the upper tracts and renal function",
+      "New or progressive hydronephrosis and rising creatinine",
+      "Autonomic dysreflexia in high spinal cord injury, a potentially life-threatening emergency triggered by bladder overdistension",
+      "Urosepsis in an obstructed or poorly draining neurogenic bladder",
+      "Acute cauda equina syndrome presenting with retention and neurological deficit"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing on continence while neglecting upper tract protection and storage pressures",
-     "Prevent diagnostic or management error"
+    "prognosis": "With structured management focused on low-pressure storage, adequate emptying, and regular upper tract surveillance, many patients maintain renal function and continence; neglected high-pressure bladders carry a significant risk of progressive renal impairment and recurrent complications.",
+    "pitfalls": [
+      "Focusing on continence while neglecting upper tract protection and storage pressures",
+      "Failing to recognise and treat detrusor-sphincter dyssynergia",
+      "Not anticipating autonomic dysreflexia during bladder distension or instrumentation in high spinal injuries",
+      "Inadequate surveillance for renal deterioration, stones, and infection",
+      "Treating overactivity with antimuscarinics without ensuring adequate emptying"
+    ],
+    "references": [
+      "Smith & Tanagho's General Urology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "The overriding goal is protection of the upper urinary tracts by ensuring low-pressure storage and adequate bladder emptying, guided by video-urodynamics",
+      "Manage the poorly emptying or high-residual bladder with clean intermittent catheterisation as the cornerstone of drainage",
+      "Reduce detrusor overactivity and storage pressures with antimuscarinic agents or a beta-3 adrenoceptor agonist (mirabegron), and use intradetrusor botulinum toxin for refractory overactivity",
+      "Treat outlet and detrusor-sphincter dyssynergia problems with alpha-blockers or botulinum toxin to the sphincter as appropriate",
+      "Consider surgical options such as augmentation cystoplasty, sacral neuromodulation or urinary diversion when conservative measures fail",
+      "Undertake regular surveillance with renal function tests, upper tract ultrasound and post-void residual measurement, and manage urinary infections judiciously",
+      "Treat the underlying neurological condition and coordinate urology and rehabilitation care, with long-term monitoring for bladder stones and malignancy in catheterised patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for neurogenic bladder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neurogenic-bladder-real-image",
-   "title": "Neurogenic bladder: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "neurogenic_bladder-pathway",
+      "title": "Neurogenic bladder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Neurogenic bladder describes bladder dysfunction due to disease or injury of the nervous system, with the pattern depending on the level of the neurological lesion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: High detrusor storage pressures or detrusor-sphincter dyssynergia threatening the upper tracts and renal function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Video-urodynamic studies to assess detrusor pressure, compliance, and sphincter coordination, Renal function tests and upper tract imaging (ultrasound) to monitor for hydronephrosis, Post-void residual measurement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: The overriding goal is protection of the upper urinary tracts by ensuring low-pressure storage and adequate bladder emptying, guided by video-urodynamics"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing on continence while neglecting upper tract protection and storage pressures"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neurogenic bladder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neurogenic_bladder-matrix",
+      "title": "Neurogenic bladder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Neurogenic bladder describes bladder dysfunction due to disease or injury of the nervous system, with the pattern depending on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Video-urodynamic studies to assess detrusor pressure, compliance, and sphincter coordination, Renal function tests and upper",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Detrusor overactivity from non-neurogenic causes (idiopathic overactive bladder), Bladder outlet obstruction (BPH, stricture),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "The overriding goal is protection of the upper urinary tracts by ensuring low-pressure storage and adequate bladder emptying,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing on continence while neglecting upper tract protection and storage pressures",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neurogenic bladder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neurogenic_bladder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-urodynamic studies",
+          "cells": [
+            {
+              "text": "Detrusor pressure, compliance and sphincter coordination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and upper tract ultrasound",
+          "cells": [
+            {
+              "text": "Hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-void residual measurement",
+          "cells": [
+            {
+              "text": "Emptying"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and culture",
+          "cells": [
+            {
+              "text": "Infection surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for stones or malignancy",
+          "cells": [
+            {
+              "text": "Long-term catheterised patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurogenic_bladder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic overactive bladder",
+          "cells": [
+            {
+              "text": "Detrusor overactivity without a neurological cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder outlet obstruction from BPH or stricture",
+          "cells": [
+            {
+              "text": "Urodynamics separates outlet obstruction from neurogenic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cauda equina syndrome",
+          "cells": [
+            {
+              "text": "Acute retention with neurological deficit is a red flag"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurogenic_bladder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-pressure storage and emptying",
+          "cells": [
+            {
+              "text": "The overriding goal, guided by video-urodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clean intermittent catheterisation",
+          "cells": [
+            {
+              "text": "Cornerstone for poorly emptying bladders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimuscarinics or mirabegron",
+          "cells": [
+            {
+              "text": "Reduce detrusor overactivity and storage pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intradetrusor botulinum toxin",
+          "cells": [
+            {
+              "text": "For refractory overactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-blockers or sphincter botulinum",
+          "cells": [
+            {
+              "text": "For detrusor-sphincter dyssynergia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Augmentation cystoplasty, sacral neuromodulation or diversion when conservative care fails"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neurogenic_bladder-dx-mgmt",
+      "title": "Diagnosis and management of Neurogenic bladder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bladder dysfunction in a patient with neurological disease or injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hydronephrosis, rising creatinine, autonomic dysreflexia, urosepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and renal assessment; treat dysreflexia or urosepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-urodynamics, post-void residual, renal function, upper tract ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "High storage pressures or dyssynergia on video-urodynamics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider overactive bladder or outlet obstruction; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clean intermittent catheterisation for poor emptying",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antimuscarinics or mirabegron; intradetrusor botulinum toxin for refractory overactivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alpha-blockers or sphincter botulinum for dyssynergia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Augmentation cystoplasty or sacral neuromodulation if conservative care fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-pressure management protects renal function; high-pressure bladders risk harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

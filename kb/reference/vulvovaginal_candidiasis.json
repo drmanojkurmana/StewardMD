@@ -1,176 +1,634 @@
 {
- "id": "vulvovaginal_candidiasis",
- "name": "Vulvovaginal Candidiasis",
- "aliases": [
-  "vaginal thrush",
-  "candidal vaginitis",
-  "yeast infection",
-  "monilial vaginitis"
- ],
- "class": "infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most infections are caused by Candida albicans, a commensal yeast that becomes symptomatic when the vaginal environment or host defences change",
-   "Typical features are intense vulval itching, soreness, and a thick, white, non-malodorous discharge often likened to cottage cheese, with vulval erythema and sometimes fissuring",
-   "The vaginal pH usually remains normal and acidic, which helps distinguish it from bacterial vaginosis and trichomoniasis",
-   "Predisposing factors include recent antibiotic use, pregnancy, diabetes, immunosuppression, and high oestrogen states",
-   "Diagnosis is clinical, supported by microscopy showing budding yeasts and pseudohyphae, and culture is useful in recurrent or treatment-resistant cases to identify non-albicans species",
-   "Uncomplicated disease responds well to topical or oral antifungal therapy, whereas recurrent disease often needs a longer induction and maintenance approach",
-   "Recurrent or resistant infection should prompt evaluation for diabetes, immunosuppression, and non-albicans species such as Candida glabrata, which are less responsive to standard azoles",
-   "It is not classed as a sexually transmitted infection, and routine treatment of asymptomatic male partners is not indicated"
+  "id": "vulvovaginal_candidiasis",
+  "name": "Vulvovaginal Candidiasis",
+  "aliases": [
+    "vaginal thrush",
+    "candidal vaginitis",
+    "yeast infection",
+    "monilial vaginitis"
   ],
-  "pathophysiology": "Candida species colonise the vagina asymptomatically in many women, kept in check by the resident lactobacillus-dominant flora and local immunity. Disturbance of this balance, for example by antibiotics, or increased glycogen availability from high oestrogen states and hyperglycaemia, allows the yeast to proliferate and transform into an invasive hyphal form. Adherence to and penetration of the vaginal epithelium triggers a brisk inflammatory response, producing the pruritus, erythema, and discharge characteristic of symptomatic infection.",
-  "additionalDifferentials": [
-   "Bacterial vaginosis",
-   "Trichomonas vaginalis infection",
-   "Contact or irritant vulvar dermatitis",
-   "Lichen sclerosus or lichen planus",
-   "Genital herpes",
-   "Physiological discharge"
-  ],
-  "additionalInvestigations": [
-   "Vaginal pH measurement, typically normal in candidiasis",
-   "Saline and potassium hydroxide wet-mount microscopy for yeasts and pseudohyphae",
-   "Fungal culture in recurrent, severe, or treatment-resistant cases to speciate",
-   "Blood glucose or HbA1c testing where recurrent infection suggests diabetes",
-   "Consideration of HIV or immunosuppression assessment in refractory disease"
-  ],
-  "redFlags": [
-   "Recurrent or refractory infection suggesting undiagnosed diabetes or immunosuppression",
-   "Severe vulval swelling, fissuring, or ulceration prompting reconsideration of the diagnosis",
-   "Systemic candidiasis in significantly immunocompromised patients",
-   "Failure to respond to standard azole therapy suggesting a non-albicans species",
-   "Coexisting symptoms pointing to another sexually transmitted infection"
-  ],
-  "prognosis": "Uncomplicated vulvovaginal candidiasis responds rapidly to antifungal treatment with an excellent outlook. A minority of women develop recurrent disease that is troublesome and requires prolonged maintenance therapy, and outcomes in these cases improve when underlying predisposing factors and non-albicans species are identified and addressed.",
-  "pitfalls": [
-   "Diagnosing thrush on symptoms alone and missing bacterial vaginosis or dermatoses",
-   "Repeatedly treating recurrent infection without investigating for diabetes or immunosuppression",
-   "Assuming all cases are Candida albicans and overlooking azole-resistant species",
-   "Unnecessarily treating asymptomatic partners",
-   "Attributing chronic vulval symptoms to candidiasis when a dermatological condition is responsible"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat uncomplicated infection with a topical or single-dose oral azole antifungal such as clotrimazole or fluconazole",
-   "For recurrent disease, use an induction course followed by a maintenance suppressive azole regimen",
-   "For non-albicans or azole-resistant species, switch to an alternative agent such as intravaginal boric acid or nystatin guided by culture",
-   "Address predisposing factors by optimising glycaemic control, reviewing antibiotic use and managing immunosuppression",
-   "In pregnancy, use topical azoles and avoid oral fluconazole",
-   "Provide symptomatic vulval care with a bland emollient and treat associated vulvitis",
-   "Investigate recurrent or refractory disease for underlying diabetes or immunosuppression including HIV, with patient education on trigger avoidance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vulvovaginal_candidiasis-pathway",
-   "title": "Vulvovaginal Candidiasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most infections are caused by Candida albicans, a commensal yeast that becomes symptomatic when the vaginal environment or host defences change",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or refractory infection suggesting undiagnosed diabetes or immunosuppression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Vaginal pH measurement, typically normal in candidiasis, Saline and potassium hydroxide wet-mount microscopy for yeasts and pseudohyphae, Fungal culture in recurrent, severe, or treatment-resistant cases to speciate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat uncomplicated infection with a topical or single-dose oral azole antifungal such as clotrimazole or fluconazole"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing thrush on symptoms alone and missing bacterial vaginosis or dermatoses"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vulvovaginal candidiasis."
-  }
- ],
- "tables": [
-  {
-   "id": "vulvovaginal_candidiasis-matrix",
-   "title": "Vulvovaginal Candidiasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most infections are caused by Candida albicans, a commensal yeast that becomes symptomatic when the vaginal environment or host",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most infections are caused by Candida albicans, a commensal yeast that becomes symptomatic when the vaginal environment or host defences change",
+      "Typical features are intense vulval itching, soreness, and a thick, white, non-malodorous discharge often likened to cottage cheese, with vulval erythema and sometimes fissuring",
+      "The vaginal pH usually remains normal and acidic, which helps distinguish it from bacterial vaginosis and trichomoniasis",
+      "Predisposing factors include recent antibiotic use, pregnancy, diabetes, immunosuppression, and high oestrogen states",
+      "Diagnosis is clinical, supported by microscopy showing budding yeasts and pseudohyphae, and culture is useful in recurrent or treatment-resistant cases to identify non-albicans species",
+      "Uncomplicated disease responds well to topical or oral antifungal therapy, whereas recurrent disease often needs a longer induction and maintenance approach",
+      "Recurrent or resistant infection should prompt evaluation for diabetes, immunosuppression, and non-albicans species such as Candida glabrata, which are less responsive to standard azoles",
+      "It is not classed as a sexually transmitted infection, and routine treatment of asymptomatic male partners is not indicated"
     ],
-    [
-     "Key Investigations",
-     "Vaginal pH measurement, typically normal in candidiasis, Saline and potassium hydroxide wet-mount microscopy for yeasts and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Candida species colonise the vagina asymptomatically in many women, kept in check by the resident lactobacillus-dominant flora and local immunity. Disturbance of this balance, for example by antibiotics, or increased glycogen availability from high oestrogen states and hyperglycaemia, allows the yeast to proliferate and transform into an invasive hyphal form. Adherence to and penetration of the vaginal epithelium triggers a brisk inflammatory response, producing the pruritus, erythema, and discharge characteristic of symptomatic infection.",
+    "additionalDifferentials": [
+      "Bacterial vaginosis",
+      "Trichomonas vaginalis infection",
+      "Contact or irritant vulvar dermatitis",
+      "Lichen sclerosus or lichen planus",
+      "Genital herpes",
+      "Physiological discharge"
     ],
-    [
-     "Primary Differentials",
-     "Bacterial vaginosis, Trichomonas vaginalis infection, Contact or irritant vulvar dermatitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Vaginal pH measurement, typically normal in candidiasis",
+      "Saline and potassium hydroxide wet-mount microscopy for yeasts and pseudohyphae",
+      "Fungal culture in recurrent, severe, or treatment-resistant cases to speciate",
+      "Blood glucose or HbA1c testing where recurrent infection suggests diabetes",
+      "Consideration of HIV or immunosuppression assessment in refractory disease"
     ],
-    [
-     "Management Strategy",
-     "Treat uncomplicated infection with a topical or single-dose oral azole antifungal such as clotrimazole or fluconazole",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or refractory infection suggesting undiagnosed diabetes or immunosuppression",
+      "Severe vulval swelling, fissuring, or ulceration prompting reconsideration of the diagnosis",
+      "Systemic candidiasis in significantly immunocompromised patients",
+      "Failure to respond to standard azole therapy suggesting a non-albicans species",
+      "Coexisting symptoms pointing to another sexually transmitted infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing thrush on symptoms alone and missing bacterial vaginosis or dermatoses",
-     "Prevent diagnostic or management error"
+    "prognosis": "Uncomplicated vulvovaginal candidiasis responds rapidly to antifungal treatment with an excellent outlook. A minority of women develop recurrent disease that is troublesome and requires prolonged maintenance therapy, and outcomes in these cases improve when underlying predisposing factors and non-albicans species are identified and addressed.",
+    "pitfalls": [
+      "Diagnosing thrush on symptoms alone and missing bacterial vaginosis or dermatoses",
+      "Repeatedly treating recurrent infection without investigating for diabetes or immunosuppression",
+      "Assuming all cases are Candida albicans and overlooking azole-resistant species",
+      "Unnecessarily treating asymptomatic partners",
+      "Attributing chronic vulval symptoms to candidiasis when a dermatological condition is responsible"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat uncomplicated infection with a topical or single-dose oral azole antifungal such as clotrimazole or fluconazole",
+      "For recurrent disease, use an induction course followed by a maintenance suppressive azole regimen",
+      "For non-albicans or azole-resistant species, switch to an alternative agent such as intravaginal boric acid or nystatin guided by culture",
+      "Address predisposing factors by optimising glycaemic control, reviewing antibiotic use and managing immunosuppression",
+      "In pregnancy, use topical azoles and avoid oral fluconazole",
+      "Provide symptomatic vulval care with a bland emollient and treat associated vulvitis",
+      "Investigate recurrent or refractory disease for underlying diabetes or immunosuppression including HIV, with patient education on trigger avoidance"
     ]
-   ],
-   "caption": "Overview comparison matrix for vulvovaginal candidiasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vulvovaginal-candidiasis-real-image",
-   "title": "Vulvovaginal Candidiasis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vulvovaginal_candidiasis-pathway",
+      "title": "Vulvovaginal Candidiasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most infections are caused by Candida albicans, a commensal yeast that becomes symptomatic when the vaginal environment or host defences change",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or refractory infection suggesting undiagnosed diabetes or immunosuppression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Vaginal pH measurement, typically normal in candidiasis, Saline and potassium hydroxide wet-mount microscopy for yeasts and pseudohyphae, Fungal culture in recurrent, severe, or treatment-resistant cases to speciate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat uncomplicated infection with a topical or single-dose oral azole antifungal such as clotrimazole or fluconazole"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing thrush on symptoms alone and missing bacterial vaginosis or dermatoses"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vulvovaginal candidiasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vulvovaginal_candidiasis-matrix",
+      "title": "Vulvovaginal Candidiasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most infections are caused by Candida albicans, a commensal yeast that becomes symptomatic when the vaginal environment or host",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Vaginal pH measurement, typically normal in candidiasis, Saline and potassium hydroxide wet-mount microscopy for yeasts and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacterial vaginosis, Trichomonas vaginalis infection, Contact or irritant vulvar dermatitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat uncomplicated infection with a topical or single-dose oral azole antifungal such as clotrimazole or fluconazole",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing thrush on symptoms alone and missing bacterial vaginosis or dermatoses",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vulvovaginal candidiasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 130-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vulvovaginal_candidiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Vaginal pH measurement",
+          "cells": [
+            {
+              "text": "Typically normal in candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saline and potassium hydroxide wet-mount microscopy",
+          "cells": [
+            {
+              "text": "Yeasts and pseudohyphae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture",
+          "cells": [
+            {
+              "text": "Recurrent or refractory infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vulvovaginal_candidiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial vaginosis",
+          "cells": [
+            {
+              "text": "Excluded by vaginal pH and microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichomonas vaginalis infection",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact or irritant vulvar dermatitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genital herpes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vulvovaginal_candidiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical or single-dose oral azole",
+          "cells": [
+            {
+              "text": "Clotrimazole or fluconazole for uncomplicated infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Longer azole course for recurrence",
+          "cells": [
+            {
+              "text": "Recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vulvovaginal_candidiasis-ddx-2",
+      "kind": "ddx",
+      "title": "Diagnostic features and management of vaginal infection",
+      "rowHeader": "Feature",
+      "columns": [
+        "Normal vaginal examination",
+        "Vulvovaginal candidiasis",
+        "Trichomonal vaginitis",
+        "Bacterial vaginosis"
+      ],
+      "rows": [
+        {
+          "parameter": "Etiology",
+          "cells": [
+            {
+              "text": "Uninfected; lactobacilli predominant"
+            },
+            {
+              "text": "Candida albicans"
+            },
+            {
+              "text": "Trichomonas vaginalis"
+            },
+            {
+              "text": "Associated with Gardnerella vaginalis, various anaerobic and/or noncultured bacteria, and mycoplasmas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Typical symptoms",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "Vulvar itching and/or irritation"
+            },
+            {
+              "text": "Profuse purulent discharge; vulvar itching"
+            },
+            {
+              "text": "Malodorous, slightly increased discharge"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Discharge amount",
+          "cells": [
+            {
+              "text": "Variable; usually scant"
+            },
+            {
+              "text": "Scant"
+            },
+            {
+              "text": "Often profuse"
+            },
+            {
+              "text": "Moderate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Discharge color",
+          "cells": [
+            {
+              "text": "Clear or translucent"
+            },
+            {
+              "text": "White"
+            },
+            {
+              "text": "White or yellow"
+            },
+            {
+              "text": "White or gray"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Discharge consistency",
+          "cells": [
+            {
+              "text": "Nonhomogeneous, floccular"
+            },
+            {
+              "text": "Clumped; adherent plaques"
+            },
+            {
+              "text": "Homogeneous"
+            },
+            {
+              "text": "Homogeneous, low viscosity; uniformly coats vaginal walls"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammation of vulvar or vaginal epithelium",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "Erythema of vaginal epithelium and introitus; vulvar dermatitis, fissures common"
+            },
+            {
+              "text": "Erythema of vaginal and vulvar epithelium; colpitis macularis"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "pH of vaginal fluid",
+          "cells": [
+            {
+              "text": "Usually <=4.5"
+            },
+            {
+              "text": "Usually <=4.5"
+            },
+            {
+              "text": "Usually >=5"
+            },
+            {
+              "text": "Usually >4.5"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amine (fishy) odor with 10% KOH",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Microscopy",
+          "cells": [
+            {
+              "text": "Normal epithelial cells; lactobacilli predominant"
+            },
+            {
+              "text": "Leukocytes, epithelial cells; mycelia or pseudomycelia in up to 80% of C. albicans culture-positive persons with typical symptoms"
+            },
+            {
+              "text": "Leukocytes; motile trichomonads seen in 80 to 90% of symptomatic patients, less often without symptoms"
+            },
+            {
+              "text": "Clue cells; few leukocytes; no lactobacilli or only a few outnumbered by profuse mixed microbiota, nearly always including G. vaginalis plus anaerobic species on Gram's stain (Nugent's score >=7)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other laboratory findings",
+          "cells": [
+            {
+              "text": "Not applicable"
+            },
+            {
+              "text": "Isolation of Candida spp."
+            },
+            {
+              "text": "Isolation of T. vaginalis or positive NAAT"
+            },
+            {
+              "text": "None listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Usual treatment",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "Azole cream, tablet or suppository, for example miconazole (100-mg vaginal suppository) or clotrimazole (100-mg vaginal tablet) once daily for 7 days; or fluconazole, 150 mg orally (single dose)"
+            },
+            {
+              "text": "Metronidazole or tinidazole, 2 g orally (single dose); or metronidazole, 500 mg PO bid for 7 days"
+            },
+            {
+              "text": "Metronidazole, 500 mg PO bid for 7 days; or metronidazole gel 0.75%, one applicator (5 g) intravaginally once daily for 5 days; or clindamycin 2% cream, one full applicator vaginally each night for 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Usual management of sexual partner",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "None; topical treatment if candidal dermatitis of the penis is detected"
+            },
+            {
+              "text": "Examination for STD; treatment with metronidazole, 2 g PO (single dose)"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source footnotes (a) to (d) on color, pH, microscopy and NAAT are not shown on the page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vulvovaginal_candidiasis-dx-mgmt",
+      "title": "Diagnosis and management of Vulvovaginal Candidiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vulvovaginal candidiasis: vulval itch with discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent infection, severe swelling or ulceration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected diabetes or immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Vaginal pH, wet-mount microscopy, fungal culture if recurrent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are yeasts or pseudohyphae seen on wet-mount with normal pH?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bacterial vaginosis, trichomoniasis or dermatitis; test further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical or single-dose oral azole for uncomplicated infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Longer azole course for recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Investigate for diabetes or immunosuppression in recurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Uncomplicated infection responds quickly; recurrence needs a cause search",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

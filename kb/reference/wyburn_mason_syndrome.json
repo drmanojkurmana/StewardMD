@@ -1,173 +1,377 @@
 {
- "id": "wyburn_mason_syndrome",
- "name": "Wyburn-Mason syndrome",
- "aliases": [
-  "Bonnet-Dechaume-Blanc syndrome",
-  "retinocephalic vascular malformation syndrome",
-  "congenital unilateral retinocephalic arteriovenous malformation"
- ],
- "class": "non_infective",
- "system": "Dermatology / Neurocutaneous",
- "specialty": "Dermatology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by unilateral arteriovenous malformations affecting the retina, optic pathway and midbrain, typically along a single embryonic axis",
-   "It is a sporadic, non-hereditary condition regarded as a somatic mosaic vascular malformation syndrome",
-   "Cutaneous vascular naevi may occur on the same side of the face, overlying the deeper malformations",
-   "The retinal arteriovenous malformation appears as dilated, tortuous vessels (racemose angioma) and can threaten vision",
-   "Intracranial arteriovenous malformations may present with headache, seizures, haemorrhage or neurological deficit",
-   "The size of the retinal lesion broadly correlates with the likelihood of intracranial involvement, so ocular findings prompt neuroimaging",
-   "Management is generic and specialist-led: neurosurgical or endovascular assessment of intracranial lesions and ophthalmological monitoring of the retinal malformation"
+  "id": "wyburn_mason_syndrome",
+  "name": "Wyburn-Mason syndrome",
+  "aliases": [
+    "Bonnet-Dechaume-Blanc syndrome",
+    "retinocephalic vascular malformation syndrome",
+    "congenital unilateral retinocephalic arteriovenous malformation"
   ],
-  "pathophysiology": "Wyburn-Mason syndrome is a sporadic vascular malformation disorder thought to arise from a post-zygotic somatic event affecting mesodermal vascular precursors along a single developmental axis, producing arteriovenous malformations that link the retina, optic pathway and midbrain on one side. These high-flow lesions consist of direct arterial-to-venous connections without an intervening capillary bed, leading to dilated tortuous vessels. In the retina this produces a racemose angioma that may compromise vision, while intracranial arteriovenous malformations carry a risk of haemorrhage, seizures and progressive neurological deficit. Overlying facial cutaneous vascular naevi reflect involvement of the same regional vascular field.",
-  "additionalDifferentials": [
-   "Sturge-Weber syndrome",
-   "Isolated retinal arteriovenous malformation (racemose angioma)",
-   "Hereditary haemorrhagic telangiectasia",
-   "Isolated intracranial arteriovenous malformation",
-   "Retinal capillary haemangioblastoma of von Hippel-Lindau disease",
-   "Cavernous malformation"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus examination and retinal imaging to characterise the arteriovenous malformation",
-   "MRI of the brain to detect intracranial arteriovenous malformations",
-   "MRA or catheter angiography to define the vascular anatomy",
-   "Ophthalmological assessment of visual acuity and fields",
-   "Neurological examination for cranial nerve and midbrain involvement",
-   "Fluorescein angiography of the retina where indicated"
-  ],
-  "redFlags": [
-   "Signs of intracranial haemorrhage such as sudden severe headache or acute neurological deficit",
-   "New seizures or progressive neurological signs",
-   "Acute visual loss",
-   "Symptoms suggesting raised intracranial pressure"
-  ],
-  "prognosis": "Prognosis depends on the extent and location of the arteriovenous malformations; small stable lesions may remain asymptomatic, but large intracranial malformations carry a risk of haemorrhage and neurological morbidity, and extensive retinal involvement can cause permanent visual loss.",
-  "pitfalls": [
-   "Treating a retinal arteriovenous malformation as isolated without neuroimaging for intracranial lesions",
-   "Overlooking a subtle facial vascular naevus that signals deeper malformation",
-   "Attempting intervention on high-flow lesions without full angiographic assessment",
-   "Confusing the retinal lesion with von Hippel-Lindau haemangioblastoma"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Multidisciplinary management of the high-flow arteriovenous malformations, with observation of small, stable asymptomatic lesions",
-   "Treatment of symptomatic or ruptured intracranial arteriovenous malformations by neurosurgical resection, endovascular embolisation or stereotactic radiosurgery",
-   "Ophthalmology monitoring of the retinal racemose angioma and visual function, with intervention where vision is threatened",
-   "Neuroimaging surveillance to track intracranial lesions, given that larger retinal malformations predict intracranial involvement",
-   "Antiepileptic drug therapy where the intracranial malformation causes seizures",
-   "Urgent escalation to neurosurgery for intracranial haemorrhage or a new neurological deficit",
-   "Reassurance that the condition is sporadic and mosaic rather than heritable, so routine family genetic screening is not required"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "wyburn_mason_syndrome-pathway",
-   "title": "Wyburn-Mason syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by unilateral arteriovenous malformations affecting the retina, optic pathway and midbrain, typically along a single embryonic axis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of intracranial haemorrhage such as sudden severe headache or acute neurological deficit",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus examination and retinal imaging to characterise the arteriovenous malformation, MRI of the brain to detect intracranial arteriovenous malformations, MRA or catheter angiography to define the vascular anatomy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Multidisciplinary management of the high-flow arteriovenous malformations, with observation of small, stable asymptomatic lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a retinal arteriovenous malformation as isolated without neuroimaging for intracranial lesions"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of wyburn-mason syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "wyburn_mason_syndrome-matrix",
-   "title": "Wyburn-Mason syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by unilateral arteriovenous malformations affecting the retina, optic pathway and midbrain, typically along a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Neurocutaneous",
+  "specialty": "Dermatology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by unilateral arteriovenous malformations affecting the retina, optic pathway and midbrain, typically along a single embryonic axis",
+      "It is a sporadic, non-hereditary condition regarded as a somatic mosaic vascular malformation syndrome",
+      "Cutaneous vascular naevi may occur on the same side of the face, overlying the deeper malformations",
+      "The retinal arteriovenous malformation appears as dilated, tortuous vessels (racemose angioma) and can threaten vision",
+      "Intracranial arteriovenous malformations may present with headache, seizures, haemorrhage or neurological deficit",
+      "The size of the retinal lesion broadly correlates with the likelihood of intracranial involvement, so ocular findings prompt neuroimaging",
+      "Management is generic and specialist-led: neurosurgical or endovascular assessment of intracranial lesions and ophthalmological monitoring of the retinal malformation"
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus examination and retinal imaging to characterise the arteriovenous malformation, MRI of the brain to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Wyburn-Mason syndrome is a sporadic vascular malformation disorder thought to arise from a post-zygotic somatic event affecting mesodermal vascular precursors along a single developmental axis, producing arteriovenous malformations that link the retina, optic pathway and midbrain on one side. These high-flow lesions consist of direct arterial-to-venous connections without an intervening capillary bed, leading to dilated tortuous vessels. In the retina this produces a racemose angioma that may compromise vision, while intracranial arteriovenous malformations carry a risk of haemorrhage, seizures and progressive neurological deficit. Overlying facial cutaneous vascular naevi reflect involvement of the same regional vascular field.",
+    "additionalDifferentials": [
+      "Sturge-Weber syndrome",
+      "Isolated retinal arteriovenous malformation (racemose angioma)",
+      "Hereditary haemorrhagic telangiectasia",
+      "Isolated intracranial arteriovenous malformation",
+      "Retinal capillary haemangioblastoma of von Hippel-Lindau disease",
+      "Cavernous malformation"
     ],
-    [
-     "Primary Differentials",
-     "Sturge-Weber syndrome, Isolated retinal arteriovenous malformation (racemose angioma), Hereditary haemorrhagic telangiectasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus examination and retinal imaging to characterise the arteriovenous malformation",
+      "MRI of the brain to detect intracranial arteriovenous malformations",
+      "MRA or catheter angiography to define the vascular anatomy",
+      "Ophthalmological assessment of visual acuity and fields",
+      "Neurological examination for cranial nerve and midbrain involvement",
+      "Fluorescein angiography of the retina where indicated"
     ],
-    [
-     "Management Strategy",
-     "Multidisciplinary management of the high-flow arteriovenous malformations, with observation of small, stable asymptomatic lesions",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of intracranial haemorrhage such as sudden severe headache or acute neurological deficit",
+      "New seizures or progressive neurological signs",
+      "Acute visual loss",
+      "Symptoms suggesting raised intracranial pressure"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a retinal arteriovenous malformation as isolated without neuroimaging for intracranial lesions",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the extent and location of the arteriovenous malformations; small stable lesions may remain asymptomatic, but large intracranial malformations carry a risk of haemorrhage and neurological morbidity, and extensive retinal involvement can cause permanent visual loss.",
+    "pitfalls": [
+      "Treating a retinal arteriovenous malformation as isolated without neuroimaging for intracranial lesions",
+      "Overlooking a subtle facial vascular naevus that signals deeper malformation",
+      "Attempting intervention on high-flow lesions without full angiographic assessment",
+      "Confusing the retinal lesion with von Hippel-Lindau haemangioblastoma"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Multidisciplinary management of the high-flow arteriovenous malformations, with observation of small, stable asymptomatic lesions",
+      "Treatment of symptomatic or ruptured intracranial arteriovenous malformations by neurosurgical resection, endovascular embolisation or stereotactic radiosurgery",
+      "Ophthalmology monitoring of the retinal racemose angioma and visual function, with intervention where vision is threatened",
+      "Neuroimaging surveillance to track intracranial lesions, given that larger retinal malformations predict intracranial involvement",
+      "Antiepileptic drug therapy where the intracranial malformation causes seizures",
+      "Urgent escalation to neurosurgery for intracranial haemorrhage or a new neurological deficit",
+      "Reassurance that the condition is sporadic and mosaic rather than heritable, so routine family genetic screening is not required"
     ]
-   ],
-   "caption": "Overview comparison matrix for wyburn-mason syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "wyburn-mason-syndrome-real-image",
-   "title": "Wyburn-Mason syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "wyburn_mason_syndrome-pathway",
+      "title": "Wyburn-Mason syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by unilateral arteriovenous malformations affecting the retina, optic pathway and midbrain, typically along a single embryonic axis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of intracranial haemorrhage such as sudden severe headache or acute neurological deficit",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus examination and retinal imaging to characterise the arteriovenous malformation, MRI of the brain to detect intracranial arteriovenous malformations, MRA or catheter angiography to define the vascular anatomy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Multidisciplinary management of the high-flow arteriovenous malformations, with observation of small, stable asymptomatic lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a retinal arteriovenous malformation as isolated without neuroimaging for intracranial lesions"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of wyburn-mason syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "wyburn_mason_syndrome-matrix",
+      "title": "Wyburn-Mason syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by unilateral arteriovenous malformations affecting the retina, optic pathway and midbrain, typically along a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus examination and retinal imaging to characterise the arteriovenous malformation, MRI of the brain to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sturge-Weber syndrome, Isolated retinal arteriovenous malformation (racemose angioma), Hereditary haemorrhagic telangiectasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Multidisciplinary management of the high-flow arteriovenous malformations, with observation of small, stable asymptomatic lesions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a retinal arteriovenous malformation as isolated without neuroimaging for intracranial lesions",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for wyburn-mason syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wyburn_mason_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination and retinal imaging",
+          "cells": [
+            {
+              "text": "Retinal arteriovenous malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Intracranial arteriovenous malformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wyburn_mason_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sturge-Weber syndrome",
+          "cells": [
+            {
+              "text": "Neurocutaneous disorder with different vascular lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated retinal arteriovenous malformation",
+          "cells": [
+            {
+              "text": "Racemose angioma without intracranial lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary haemorrhagic telangiectasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wyburn_mason_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary management of high-flow malformations",
+          "cells": [
+            {
+              "text": "Intervention for high-flow lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation of small, stable asymptomatic lesions",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wyburn_mason_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Wyburn-Mason syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Wyburn-Mason syndrome: unilateral retinal arteriovenous malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intracranial haemorrhage, severe headache or new seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for intracranial haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus examination, retinal imaging, MRI of the brain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show intracranial arteriovenous malformation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated retinal AVM or Sturge-Weber syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary management of high-flow malformations",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe small, stable asymptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not treat the retinal lesion as isolated without neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Intracranial lesions drive risk; retinal lesion alone is not the whole disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

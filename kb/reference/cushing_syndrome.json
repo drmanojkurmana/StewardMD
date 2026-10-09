@@ -1,176 +1,472 @@
 {
- "id": "cushing_syndrome",
- "name": "Cushing syndrome",
- "aliases": [
-  "hypercortisolism",
-  "Cushing's syndrome",
-  "cortisol excess",
-  "Cushing disease (pituitary-dependent)"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typical features include central weight gain, a rounded plethoric face, a dorsocervical fat pad, thin skin, and easy bruising",
-   "Wide purple abdominal striae, proximal muscle weakness, and unexplained osteoporosis are among the more discriminating clinical signs",
-   "Exogenous glucocorticoid use is by far the most common cause and should be excluded by careful drug history before pursuing endogenous disease",
-   "Diagnosis proceeds in two stages: first confirm cortisol excess, then determine whether it is ACTH-dependent or ACTH-independent",
-   "Screening rests on demonstrating loss of normal cortisol regulation using late-night salivary cortisol, 24-hour urinary free cortisol, or a low-dose dexamethasone suppression test",
-   "A suppressed ACTH points to an adrenal source, whereas a normal or elevated ACTH indicates a pituitary tumour or an ectopic source",
-   "Pituitary-dependent disease (Cushing disease) accounts for most endogenous ACTH-dependent cases, while ectopic ACTH is often from neuroendocrine tumours",
-   "Associated metabolic consequences include hypertension, glucose intolerance or diabetes, dyslipidaemia, and increased thrombotic and infection risk",
-   "Definitive management is directed at the underlying cause, most often surgical removal of the responsible tumour"
+  "id": "cushing_syndrome",
+  "name": "Cushing syndrome",
+  "aliases": [
+    "hypercortisolism",
+    "Cushing's syndrome",
+    "cortisol excess",
+    "Cushing disease (pituitary-dependent)"
   ],
-  "pathophysiology": "Cushing syndrome results from chronic exposure to excess glucocorticoid. This may be exogenous, from prescribed or surreptitious steroid use, or endogenous. Endogenous disease is divided into ACTH-dependent forms, in which a pituitary corticotroph adenoma or an ectopic ACTH-secreting tumour drives adrenal cortisol output, and ACTH-independent forms, in which an adrenal adenoma, carcinoma, or bilateral hyperplasia autonomously produces cortisol. Sustained cortisol excess disrupts the normal negative-feedback of the hypothalamic-pituitary-adrenal axis, abolishes the circadian rhythm of cortisol, and produces widespread catabolic, metabolic, immunosuppressive, and mineralocorticoid effects on multiple tissues.",
-  "additionalDifferentials": [
-   "Exogenous (iatrogenic) glucocorticoid effect",
-   "Pseudo-Cushing states from severe obesity, depression, or heavy alcohol use",
-   "Metabolic syndrome with central obesity",
-   "Polycystic ovary syndrome",
-   "Poorly controlled diabetes with weight gain",
-   "Ectopic ACTH from neuroendocrine malignancy"
-  ],
-  "additionalInvestigations": [
-   "Late-night salivary cortisol to detect loss of the normal evening nadir",
-   "24-hour urinary free cortisol, ideally on more than one collection",
-   "Low-dose (overnight or 48-hour) dexamethasone suppression testing",
-   "Plasma ACTH to separate ACTH-dependent from ACTH-independent disease",
-   "Pituitary MRI, adrenal CT, or cross-sectional imaging for ectopic sources as directed by biochemistry",
-   "Inferior petrosal sinus sampling to localise ACTH-dependent disease when imaging is equivocal"
-  ],
-  "redFlags": [
-   "Rapid onset with marked hypokalaemia and pigmentation suggesting aggressive ectopic ACTH secretion",
-   "New severe hypertension, hyperglycaemia, or thromboembolism from florid hypercortisolism",
-   "Features of adrenal carcinoma such as very high androgen or cortisol levels with a large adrenal mass",
-   "Severe proximal weakness, fractures, or psychosis reflecting advanced disease"
-  ],
-  "prognosis": "With successful treatment of the underlying cause many features regress over months, though hypertension, bone loss, and psychological effects may persist; untreated hypercortisolism carries substantial cardiovascular, metabolic, infective, and thrombotic mortality, and ectopic ACTH from malignancy has a poor outlook.",
-  "pitfalls": [
-   "Overlooking exogenous steroid exposure, including inhaled, topical, or injected preparations",
-   "Interpreting a single borderline test as diagnostic rather than repeating and combining screening tests",
-   "Confusing pseudo-Cushing states with true disease during acute illness, depression, or alcohol excess",
-   "Assuming a pituitary microadenoma on imaging proves the source without confirmatory biochemistry"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Endocrine Society guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause, tapering and withdrawing exogenous glucocorticoids where the disease is iatrogenic",
-   "Curative surgery directed at the source: adrenalectomy for an adrenal tumour, transsphenoidal surgery for a pituitary adenoma, or resection of an ectopic ACTH-secreting tumour",
-   "Medical control of hypercortisolism with steroidogenesis inhibitors such as metyrapone, ketoconazole or osilodrostat when surgery is delayed or not feasible",
-   "Glucocorticoid replacement after curative surgery to cover secondary adrenal insufficiency",
-   "Manage complications including hypertension, hyperglycaemia, hypokalaemia and osteoporosis, with venous thromboprophylaxis for the raised thrombotic risk",
-   "Long-term biochemical surveillance for recurrence",
-   "Refer to endocrinology and a multidisciplinary team, with oncology input for malignant ectopic sources"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cushing_syndrome-pathway",
-   "title": "Cushing syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typical features include central weight gain, a rounded plethoric face, a dorsocervical fat pad, thin skin, and easy bruising",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid onset with marked hypokalaemia and pigmentation suggesting aggressive ectopic ACTH secretion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Late-night salivary cortisol to detect loss of the normal evening nadir, 24-hour urinary free cortisol, ideally on more than one collection, Low-dose (overnight or 48-hour) dexamethasone suppression testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause, tapering and withdrawing exogenous glucocorticoids where the disease is iatrogenic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking exogenous steroid exposure, including inhaled, topical, or injected preparations"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cushing syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cushing_syndrome-matrix",
-   "title": "Cushing syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typical features include central weight gain, a rounded plethoric face, a dorsocervical fat pad, thin skin, and easy bruising",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typical features include central weight gain, a rounded plethoric face, a dorsocervical fat pad, thin skin, and easy bruising",
+      "Wide purple abdominal striae, proximal muscle weakness, and unexplained osteoporosis are among the more discriminating clinical signs",
+      "Exogenous glucocorticoid use is by far the most common cause and should be excluded by careful drug history before pursuing endogenous disease",
+      "Diagnosis proceeds in two stages: first confirm cortisol excess, then determine whether it is ACTH-dependent or ACTH-independent",
+      "Screening rests on demonstrating loss of normal cortisol regulation using late-night salivary cortisol, 24-hour urinary free cortisol, or a low-dose dexamethasone suppression test",
+      "A suppressed ACTH points to an adrenal source, whereas a normal or elevated ACTH indicates a pituitary tumour or an ectopic source",
+      "Pituitary-dependent disease (Cushing disease) accounts for most endogenous ACTH-dependent cases, while ectopic ACTH is often from neuroendocrine tumours",
+      "Associated metabolic consequences include hypertension, glucose intolerance or diabetes, dyslipidaemia, and increased thrombotic and infection risk",
+      "Definitive management is directed at the underlying cause, most often surgical removal of the responsible tumour"
     ],
-    [
-     "Key Investigations",
-     "Late-night salivary cortisol to detect loss of the normal evening nadir, 24-hour urinary free cortisol, ideally on more than one",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cushing syndrome results from chronic exposure to excess glucocorticoid. This may be exogenous, from prescribed or surreptitious steroid use, or endogenous. Endogenous disease is divided into ACTH-dependent forms, in which a pituitary corticotroph adenoma or an ectopic ACTH-secreting tumour drives adrenal cortisol output, and ACTH-independent forms, in which an adrenal adenoma, carcinoma, or bilateral hyperplasia autonomously produces cortisol. Sustained cortisol excess disrupts the normal negative-feedback of the hypothalamic-pituitary-adrenal axis, abolishes the circadian rhythm of cortisol, and produces widespread catabolic, metabolic, immunosuppressive, and mineralocorticoid effects on multiple tissues.",
+    "additionalDifferentials": [
+      "Exogenous (iatrogenic) glucocorticoid effect",
+      "Pseudo-Cushing states from severe obesity, depression, or heavy alcohol use",
+      "Metabolic syndrome with central obesity",
+      "Polycystic ovary syndrome",
+      "Poorly controlled diabetes with weight gain",
+      "Ectopic ACTH from neuroendocrine malignancy"
     ],
-    [
-     "Primary Differentials",
-     "Exogenous (iatrogenic) glucocorticoid effect, Pseudo-Cushing states from severe obesity, depression, or heavy alcohol use,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Late-night salivary cortisol to detect loss of the normal evening nadir",
+      "24-hour urinary free cortisol, ideally on more than one collection",
+      "Low-dose (overnight or 48-hour) dexamethasone suppression testing",
+      "Plasma ACTH to separate ACTH-dependent from ACTH-independent disease",
+      "Pituitary MRI, adrenal CT, or cross-sectional imaging for ectopic sources as directed by biochemistry",
+      "Inferior petrosal sinus sampling to localise ACTH-dependent disease when imaging is equivocal"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause, tapering and withdrawing exogenous glucocorticoids where the disease is iatrogenic",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid onset with marked hypokalaemia and pigmentation suggesting aggressive ectopic ACTH secretion",
+      "New severe hypertension, hyperglycaemia, or thromboembolism from florid hypercortisolism",
+      "Features of adrenal carcinoma such as very high androgen or cortisol levels with a large adrenal mass",
+      "Severe proximal weakness, fractures, or psychosis reflecting advanced disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking exogenous steroid exposure, including inhaled, topical, or injected preparations",
-     "Prevent diagnostic or management error"
+    "prognosis": "With successful treatment of the underlying cause many features regress over months, though hypertension, bone loss, and psychological effects may persist; untreated hypercortisolism carries substantial cardiovascular, metabolic, infective, and thrombotic mortality, and ectopic ACTH from malignancy has a poor outlook.",
+    "pitfalls": [
+      "Overlooking exogenous steroid exposure, including inhaled, topical, or injected preparations",
+      "Interpreting a single borderline test as diagnostic rather than repeating and combining screening tests",
+      "Confusing pseudo-Cushing states with true disease during acute illness, depression, or alcohol excess",
+      "Assuming a pituitary microadenoma on imaging proves the source without confirmatory biochemistry"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Endocrine Society guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause, tapering and withdrawing exogenous glucocorticoids where the disease is iatrogenic",
+      "Curative surgery directed at the source: adrenalectomy for an adrenal tumour, transsphenoidal surgery for a pituitary adenoma, or resection of an ectopic ACTH-secreting tumour",
+      "Medical control of hypercortisolism with steroidogenesis inhibitors such as metyrapone, ketoconazole or osilodrostat when surgery is delayed or not feasible",
+      "Glucocorticoid replacement after curative surgery to cover secondary adrenal insufficiency",
+      "Manage complications including hypertension, hyperglycaemia, hypokalaemia and osteoporosis, with venous thromboprophylaxis for the raised thrombotic risk",
+      "Long-term biochemical surveillance for recurrence",
+      "Refer to endocrinology and a multidisciplinary team, with oncology input for malignant ectopic sources"
     ]
-   ],
-   "caption": "Overview comparison matrix for cushing syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cushing-syndrome-real-image",
-   "title": "Cushing syndrome: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "cushing_syndrome-pathway",
+      "title": "Cushing syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typical features include central weight gain, a rounded plethoric face, a dorsocervical fat pad, thin skin, and easy bruising",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid onset with marked hypokalaemia and pigmentation suggesting aggressive ectopic ACTH secretion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Late-night salivary cortisol to detect loss of the normal evening nadir, 24-hour urinary free cortisol, ideally on more than one collection, Low-dose (overnight or 48-hour) dexamethasone suppression testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause, tapering and withdrawing exogenous glucocorticoids where the disease is iatrogenic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking exogenous steroid exposure, including inhaled, topical, or injected preparations"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cushing syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cushing_syndrome-matrix",
+      "title": "Cushing syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typical features include central weight gain, a rounded plethoric face, a dorsocervical fat pad, thin skin, and easy bruising",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Late-night salivary cortisol to detect loss of the normal evening nadir, 24-hour urinary free cortisol, ideally on more than one",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Exogenous (iatrogenic) glucocorticoid effect, Pseudo-Cushing states from severe obesity, depression, or heavy alcohol use,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause, tapering and withdrawing exogenous glucocorticoids where the disease is iatrogenic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking exogenous steroid exposure, including inhaled, topical, or injected preparations",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cushing syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cushing_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Late-night salivary cortisol",
+          "cells": [
+            {
+              "text": "Loss of the evening nadir"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urinary free cortisol",
+          "cells": [
+            {
+              "text": "More than one collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose dexamethasone suppression testing",
+          "cells": [
+            {
+              "text": "Non-suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ACTH",
+          "cells": [
+            {
+              "text": "ACTH-dependent versus ACTH-independent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI, adrenal CT or ectopic imaging",
+          "cells": [
+            {
+              "text": "Source identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inferior petrosal sinus sampling",
+          "cells": [
+            {
+              "text": "Source localised when imaging equivocal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cushing_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Exogenous glucocorticoid effect",
+          "cells": [
+            {
+              "text": "Inhaled, topical or injected steroids; taper and test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudo-Cushing states from obesity, depression or alcohol",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic ACTH from neuroendocrine malignancy",
+          "cells": [
+            {
+              "text": "ACTH-dependent with high cortisol"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cushing_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw exogenous glucocorticoids",
+          "cells": [
+            {
+              "text": "Where the disease is iatrogenic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Curative source surgery",
+          "cells": [
+            {
+              "text": "Adrenalectomy, transsphenoidal surgery or ectopic tumour resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroidogenesis inhibitors",
+          "cells": [
+            {
+              "text": "Metyrapone, ketoconazole or osilodrostat when surgery delayed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoid replacement",
+          "cells": [
+            {
+              "text": "After curative surgery for secondary insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication care",
+          "cells": [
+            {
+              "text": "Hypertension, hyperglycaemia, hypokalaemia and osteoporosis; thromboprophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Biochemical monitoring for recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Endocrinology with oncology for malignant sources"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cushing_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cushing syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cushing syndrome: weight gain, striae and hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (rapid onset with hypokalaemia, thromboembolism, adrenal carcinoma, psychosis)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent correction of hypokalaemia; thromboprophylaxis for thrombosis risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Late-night cortisol; urinary cortisol; dexamethasone test; ACTH; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biochemistry confirm hypercortisolism with a source on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pseudo-Cushing states or exogenous steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw exogenous steroids where iatrogenic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Curative surgery at the source once localised",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Metyrapone, ketoconazole or osilodrostat when surgery is delayed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Glucocorticoid replacement after surgery; manage complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many features regress over months after cure; hypertension and bone loss may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,167 +1,462 @@
 {
- "id": "aerophagia",
- "name": "Aerophagia",
- "aliases": [
-  "excessive air swallowing"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rome IV criteria / gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Repetitive excessive swallowing of air causing troublesome belching, bloating and abdominal distension",
-   "Observable or objectively measured air swallowing with increasing bowel gas distinguishes it from other belching disorders",
-   "It differs from supragastric belching, in which air is drawn into and expelled from the oesophagus without reaching the stomach",
-   "Associations include anxiety, rapid eating, gum chewing, fizzy drinks and non-invasive ventilation",
-   "Marked cases can produce visible abdominal distension that increases through the day",
-   "Management includes behavioural strategies, addressing anxiety and, where relevant, speech therapy techniques"
+  "id": "aerophagia",
+  "name": "Aerophagia",
+  "aliases": [
+    "excessive air swallowing"
   ],
-  "pathophysiology": "Aerophagia results from swallowing air in excess of the small amount normally ingested, so that gas accumulates in the stomach and passes into the intestine, producing belching, bloating and distension. The behaviour is often habitual and is reinforced by anxiety, eating habits and carbonated drinks, and it may be exacerbated by devices that deliver positive airway pressure. Unlike supragastric belching, the swallowed air genuinely enters the stomach and gut, which accounts for the associated bloating and distension.",
-  "additionalDifferentials": [
-   "Supragastric belching",
-   "Gastro-oesophageal reflux disease",
-   "Functional dyspepsia",
-   "Functional abdominal bloating and distension",
-   "Gastric outlet obstruction"
-  ],
-  "additionalInvestigations": [
-   "Clinical history of belching, bloating and air-swallowing behaviour",
-   "Observation of swallowing and, where needed, imaging showing increased bowel gas",
-   "Assessment for anxiety and dietary triggers",
-   "Exclusion of reflux and dyspepsia where features overlap",
-   "High-resolution manometry or impedance in specialist settings to distinguish belching types"
-  ],
-  "redFlags": [
-   "Distension with alarm features such as weight loss or vomiting suggesting obstruction",
-   "Progressive symptoms unresponsive to behavioural measures",
-   "Features suggesting an organic gastrointestinal disorder",
-   "Severe functional impairment"
-  ],
-  "prognosis": "The condition is benign and often improves with behavioural change and treatment of contributing factors, though it can be persistent, particularly when linked to anxiety or assisted ventilation.",
-  "pitfalls": [
-   "Confusing aerophagia with supragastric belching, which needs different behavioural therapy",
-   "Overlooking anxiety and dietary triggers",
-   "Missing an organic cause of distension",
-   "Attributing device-related aerophagia purely to habit"
-  ],
-  "references": [
-   "Rome IV diagnostic criteria",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide behavioural therapy to reduce air swallowing, including awareness training and slowed eating and drinking",
-   "Advise avoidance of triggers such as carbonated drinks, chewing gum, smoking and rapid eating",
-   "Identify and treat underlying anxiety with psychological therapy or relaxation techniques",
-   "Refer for speech and language therapy to teach diaphragmatic breathing and techniques that interrupt the swallowing pattern",
-   "Optimise positive-pressure ventilation settings where non-invasive ventilation is a contributing factor",
-   "Reassure regarding the benign nature and review to exclude overlapping reflux or dyspepsia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aerophagia-pathway",
-   "title": "Aerophagia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Repetitive excessive swallowing of air causing troublesome belching, bloating and abdominal distension",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Distension with alarm features such as weight loss or vomiting suggesting obstruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical history of belching, bloating and air-swallowing behaviour, Observation of swallowing and, where needed, imaging showing increased bowel gas, Assessment for anxiety and dietary triggers"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide behavioural therapy to reduce air swallowing, including awareness training and slowed eating and drinking"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing aerophagia with supragastric belching, which needs different behavioural therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aerophagia."
-  }
- ],
- "tables": [
-  {
-   "id": "aerophagia-matrix",
-   "title": "Aerophagia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Repetitive excessive swallowing of air causing troublesome belching, bloating and abdominal distension",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rome IV criteria / gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Repetitive excessive swallowing of air causing troublesome belching, bloating and abdominal distension",
+      "Observable or objectively measured air swallowing with increasing bowel gas distinguishes it from other belching disorders",
+      "It differs from supragastric belching, in which air is drawn into and expelled from the oesophagus without reaching the stomach",
+      "Associations include anxiety, rapid eating, gum chewing, fizzy drinks and non-invasive ventilation",
+      "Marked cases can produce visible abdominal distension that increases through the day",
+      "Management includes behavioural strategies, addressing anxiety and, where relevant, speech therapy techniques"
     ],
-    [
-     "Key Investigations",
-     "Clinical history of belching, bloating and air-swallowing behaviour, Observation of swallowing and, where needed, imaging showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Aerophagia results from swallowing air in excess of the small amount normally ingested, so that gas accumulates in the stomach and passes into the intestine, producing belching, bloating and distension. The behaviour is often habitual and is reinforced by anxiety, eating habits and carbonated drinks, and it may be exacerbated by devices that deliver positive airway pressure. Unlike supragastric belching, the swallowed air genuinely enters the stomach and gut, which accounts for the associated bloating and distension.",
+    "additionalDifferentials": [
+      "Supragastric belching",
+      "Gastro-oesophageal reflux disease",
+      "Functional dyspepsia",
+      "Functional abdominal bloating and distension",
+      "Gastric outlet obstruction"
     ],
-    [
-     "Primary Differentials",
-     "Supragastric belching, Gastro-oesophageal reflux disease, Functional dyspepsia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical history of belching, bloating and air-swallowing behaviour",
+      "Observation of swallowing and, where needed, imaging showing increased bowel gas",
+      "Assessment for anxiety and dietary triggers",
+      "Exclusion of reflux and dyspepsia where features overlap",
+      "High-resolution manometry or impedance in specialist settings to distinguish belching types"
     ],
-    [
-     "Management Strategy",
-     "Provide behavioural therapy to reduce air swallowing, including awareness training and slowed eating and drinking",
-     "Core treatment modality"
+    "redFlags": [
+      "Distension with alarm features such as weight loss or vomiting suggesting obstruction",
+      "Progressive symptoms unresponsive to behavioural measures",
+      "Features suggesting an organic gastrointestinal disorder",
+      "Severe functional impairment"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing aerophagia with supragastric belching, which needs different behavioural therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and often improves with behavioural change and treatment of contributing factors, though it can be persistent, particularly when linked to anxiety or assisted ventilation.",
+    "pitfalls": [
+      "Confusing aerophagia with supragastric belching, which needs different behavioural therapy",
+      "Overlooking anxiety and dietary triggers",
+      "Missing an organic cause of distension",
+      "Attributing device-related aerophagia purely to habit"
+    ],
+    "references": [
+      "Rome IV diagnostic criteria",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide behavioural therapy to reduce air swallowing, including awareness training and slowed eating and drinking",
+      "Advise avoidance of triggers such as carbonated drinks, chewing gum, smoking and rapid eating",
+      "Identify and treat underlying anxiety with psychological therapy or relaxation techniques",
+      "Refer for speech and language therapy to teach diaphragmatic breathing and techniques that interrupt the swallowing pattern",
+      "Optimise positive-pressure ventilation settings where non-invasive ventilation is a contributing factor",
+      "Reassure regarding the benign nature and review to exclude overlapping reflux or dyspepsia"
     ]
-   ],
-   "caption": "Overview comparison matrix for aerophagia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aerophagia-real-image",
-   "title": "Aerophagia: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "aerophagia-pathway",
+      "title": "Aerophagia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Repetitive excessive swallowing of air causing troublesome belching, bloating and abdominal distension",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Distension with alarm features such as weight loss or vomiting suggesting obstruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical history of belching, bloating and air-swallowing behaviour, Observation of swallowing and, where needed, imaging showing increased bowel gas, Assessment for anxiety and dietary triggers"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide behavioural therapy to reduce air swallowing, including awareness training and slowed eating and drinking"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing aerophagia with supragastric belching, which needs different behavioural therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aerophagia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aerophagia-matrix",
+      "title": "Aerophagia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Repetitive excessive swallowing of air causing troublesome belching, bloating and abdominal distension",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical history of belching, bloating and air-swallowing behaviour, Observation of swallowing and, where needed, imaging showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Supragastric belching, Gastro-oesophageal reflux disease, Functional dyspepsia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide behavioural therapy to reduce air swallowing, including awareness training and slowed eating and drinking",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing aerophagia with supragastric belching, which needs different behavioural therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aerophagia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aerophagia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history of belching, bloating and air-swallowing behaviour",
+          "cells": [
+            {
+              "text": "Repetitive air swallowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation of swallowing; imaging showing increased bowel gas where needed",
+          "cells": [
+            {
+              "text": "Increased bowel gas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for anxiety and dietary triggers",
+          "cells": [
+            {
+              "text": "Associated triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of reflux and dyspepsia where features overlap",
+          "cells": [
+            {
+              "text": "Overlapping conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution manometry or impedance in specialist settings",
+          "cells": [
+            {
+              "text": "Distinguishes belching types"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aerophagia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Supragastric belching",
+          "cells": [
+            {
+              "text": "Air drawn into and expelled from the oesophagus, not the stomach"
+            },
+            {
+              "text": "High-resolution manometry or impedance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "Overlapping reflux symptoms"
+            },
+            {
+              "text": "Exclusion of reflux"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aerophagia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural therapy with awareness training",
+          "cells": [
+            {
+              "text": "Reduces air swallowing"
+            },
+            {
+              "text": "Slowed eating and drinking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of triggers",
+          "cells": [
+            {
+              "text": "Carbonated drinks, chewing gum, smoking and rapid eating"
+            },
+            {
+              "text": "Trigger avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological therapy or relaxation techniques",
+          "cells": [
+            {
+              "text": "Underlying anxiety"
+            },
+            {
+              "text": "Treat anxiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy for diaphragmatic breathing",
+          "cells": [
+            {
+              "text": "Interrupts the swallowing pattern"
+            },
+            {
+              "text": "Breathing techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimisation of positive-pressure ventilation settings",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation as a contributor"
+            },
+            {
+              "text": "Where ventilation contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and review",
+          "cells": [
+            {
+              "text": "Benign condition; exclude overlap with reflux or dyspepsia"
+            },
+            {
+              "text": "Review for overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aerophagia-dx-mgmt",
+      "title": "Diagnosis and management of Aerophagia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Troublesome belching, bloating and distension from repeated air swallowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Weight loss, vomiting or other alarm features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent investigation for obstruction or organic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History of air swallowing; observe swallowing; assess anxiety and diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Air swallowing confirmed with reflux and dyspepsia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Behavioural therapy: awareness training and slowed eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review supragastric belching, reflux and dyspepsia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid carbonated drinks, chewing gum, smoking and rapid eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychological therapy or relaxation for underlying anxiety",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech and language therapy for diaphragmatic breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; improves with behaviour change, persistent if linked to anxiety",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

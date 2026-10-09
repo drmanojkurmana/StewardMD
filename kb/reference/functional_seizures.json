@@ -1,176 +1,472 @@
 {
- "id": "functional_seizures",
- "name": "Functional (dissociative) seizures",
- "aliases": [
-  "dissociative seizures",
-  "psychogenic non-epileptic seizures",
-  "PNES",
-  "non-epileptic attack disorder",
-  "NEAD"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Paroxysmal episodes resembling epileptic seizures but arising from a functional (dissociative) mechanism rather than abnormal cortical electrical discharge",
-   "Semiological clues favouring dissociative seizures include prolonged duration, a fluctuating or waxing-and-waning course, asynchronous or side-to-side movements, pelvic thrusting, and eyes tightly closed with resistance to opening",
-   "Ictal crying, memory of the event, and rapid recovery without post-ictal confusion may occur, and awareness can be partly retained during bilateral motor activity",
-   "Video-EEG capturing a typical event with no epileptiform correlate is the diagnostic gold standard",
-   "Serum prolactin does not rise significantly after dissociative seizures, unlike after many generalised tonic-clonic seizures, though its diagnostic use is limited",
-   "Epilepsy and dissociative seizures can coexist, complicating the diagnosis",
-   "Escalating antiepileptic drugs and emergency intubation should be avoided for prolonged 'status' that is actually dissociative",
-   "Management centres on a clear explanation of the diagnosis and psychological therapy such as CBT within a multidisciplinary framework"
+  "id": "functional_seizures",
+  "name": "Functional (dissociative) seizures",
+  "aliases": [
+    "dissociative seizures",
+    "psychogenic non-epileptic seizures",
+    "PNES",
+    "non-epileptic attack disorder",
+    "NEAD"
   ],
-  "pathophysiology": "Functional (dissociative) seizures are episodes of altered awareness, movement, or behaviour that superficially resemble epileptic seizures but occur without the abnormal, synchronised cortical electrical activity that defines epilepsy. They are understood as involuntary dissociative events in which there is a transient disruption of the normal integration of awareness, emotion, and motor control, often arising in response to internal or external triggers. As with other functional neurological symptoms, a biopsychosocial model applies, with predisposing vulnerabilities, precipitating stressors or trauma, and perpetuating factors; the events are genuine and not consciously feigned. Because cortical electrical activity remains normal, the interictal and ictal EEG shows no epileptiform discharge.",
-  "additionalDifferentials": [
-   "Epileptic seizures, focal or generalised",
-   "Convulsive syncope",
-   "Cardiac arrhythmia causing collapse",
-   "Panic attacks",
-   "Movement disorders such as paroxysmal dyskinesia",
-   "Parasomnias and other sleep disorders"
-  ],
-  "additionalInvestigations": [
-   "Video-EEG telemetry to capture a typical event and confirm the absence of an epileptiform correlate",
-   "A detailed eyewitness or home-video account of the episodes",
-   "Cardiac evaluation with ECG, ambulatory monitoring, and tilt testing where syncope is possible",
-   "Standard EEG and MRI to assess for coexisting epilepsy or structural disease",
-   "Serum prolactin interpreted with caution in selected cases",
-   "Psychological and psychiatric assessment for comorbidity and precipitants"
-  ],
-  "redFlags": [
-   "Features clearly suggesting epilepsy (lateral tongue biting, stereotyped events, post-ictal confusion) or coexisting epilepsy",
-   "Cardiac symptoms suggesting an arrhythmic cause of collapse",
-   "Injury, incontinence, or events arising from sleep requiring careful differentiation",
-   "Persistent diagnostic uncertainty warranting video-EEG at a specialist centre"
-  ],
-  "prognosis": "Outcome varies; a clear, supportive explanation of the diagnosis alone stops events in some patients, and psychological therapy helps many, but long duration, comorbid psychiatric illness, and coexisting epilepsy are associated with a more persistent course and ongoing disability.",
-  "pitfalls": [
-   "Treating prolonged dissociative seizures as refractory status epilepticus, risking iatrogenic harm from sedation and intubation",
-   "Diagnosing on semiology alone without video-EEG when the distinction is unclear",
-   "Overlooking coexisting epilepsy",
-   "Relying on prolactin as a definitive test"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Deliver a clear, supportive explanation of the diagnosis, which alone can reduce or stop events",
-   "Psychological therapy, particularly cognitive behavioural therapy, as the mainstay of treatment",
-   "Avoid and withdraw unnecessary antiepileptic drugs and emergency anticonvulsant treatment for events",
-   "Educate the patient and family to recognise and safely manage episodes without inappropriate escalation",
-   "Confirm the diagnosis with video-EEG capturing a typical event without an epileptiform correlate",
-   "Treat comorbid psychiatric illness, trauma and precipitating stressors",
-   "Recognise and manage coexisting epilepsy where both conditions are present"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "functional_seizures-pathway",
-   "title": "Functional (dissociative) seizures: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Paroxysmal episodes resembling epileptic seizures but arising from a functional (dissociative) mechanism rather than abnormal cortical electrical discharge",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features clearly suggesting epilepsy (lateral tongue biting, stereotyped events, post-ictal confusion) or coexisting epilepsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Video-EEG telemetry to capture a typical event and confirm the absence of an epileptiform correlate, A detailed eyewitness or home-video account of the episodes, Cardiac evaluation with ECG, ambulatory monitoring, and tilt"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deliver a clear, supportive explanation of the diagnosis, which alone can reduce or stop events"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating prolonged dissociative seizures as refractory status epilepticus, risking iatrogenic harm from sedation and intubation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of functional (dissociative) seizures."
-  }
- ],
- "tables": [
-  {
-   "id": "functional_seizures-matrix",
-   "title": "Functional (dissociative) seizures: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Paroxysmal episodes resembling epileptic seizures but arising from a functional (dissociative) mechanism rather than abnormal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Paroxysmal episodes resembling epileptic seizures but arising from a functional (dissociative) mechanism rather than abnormal cortical electrical discharge",
+      "Semiological clues favouring dissociative seizures include prolonged duration, a fluctuating or waxing-and-waning course, asynchronous or side-to-side movements, pelvic thrusting, and eyes tightly closed with resistance to opening",
+      "Ictal crying, memory of the event, and rapid recovery without post-ictal confusion may occur, and awareness can be partly retained during bilateral motor activity",
+      "Video-EEG capturing a typical event with no epileptiform correlate is the diagnostic gold standard",
+      "Serum prolactin does not rise significantly after dissociative seizures, unlike after many generalised tonic-clonic seizures, though its diagnostic use is limited",
+      "Epilepsy and dissociative seizures can coexist, complicating the diagnosis",
+      "Escalating antiepileptic drugs and emergency intubation should be avoided for prolonged 'status' that is actually dissociative",
+      "Management centres on a clear explanation of the diagnosis and psychological therapy such as CBT within a multidisciplinary framework"
     ],
-    [
-     "Key Investigations",
-     "Video-EEG telemetry to capture a typical event and confirm the absence of an epileptiform correlate, A detailed eyewitness or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Functional (dissociative) seizures are episodes of altered awareness, movement, or behaviour that superficially resemble epileptic seizures but occur without the abnormal, synchronised cortical electrical activity that defines epilepsy. They are understood as involuntary dissociative events in which there is a transient disruption of the normal integration of awareness, emotion, and motor control, often arising in response to internal or external triggers. As with other functional neurological symptoms, a biopsychosocial model applies, with predisposing vulnerabilities, precipitating stressors or trauma, and perpetuating factors; the events are genuine and not consciously feigned. Because cortical electrical activity remains normal, the interictal and ictal EEG shows no epileptiform discharge.",
+    "additionalDifferentials": [
+      "Epileptic seizures, focal or generalised",
+      "Convulsive syncope",
+      "Cardiac arrhythmia causing collapse",
+      "Panic attacks",
+      "Movement disorders such as paroxysmal dyskinesia",
+      "Parasomnias and other sleep disorders"
     ],
-    [
-     "Primary Differentials",
-     "Epileptic seizures, focal or generalised, Convulsive syncope, Cardiac arrhythmia causing collapse",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Video-EEG telemetry to capture a typical event and confirm the absence of an epileptiform correlate",
+      "A detailed eyewitness or home-video account of the episodes",
+      "Cardiac evaluation with ECG, ambulatory monitoring, and tilt testing where syncope is possible",
+      "Standard EEG and MRI to assess for coexisting epilepsy or structural disease",
+      "Serum prolactin interpreted with caution in selected cases",
+      "Psychological and psychiatric assessment for comorbidity and precipitants"
     ],
-    [
-     "Management Strategy",
-     "Deliver a clear, supportive explanation of the diagnosis, which alone can reduce or stop events",
-     "Core treatment modality"
+    "redFlags": [
+      "Features clearly suggesting epilepsy (lateral tongue biting, stereotyped events, post-ictal confusion) or coexisting epilepsy",
+      "Cardiac symptoms suggesting an arrhythmic cause of collapse",
+      "Injury, incontinence, or events arising from sleep requiring careful differentiation",
+      "Persistent diagnostic uncertainty warranting video-EEG at a specialist centre"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating prolonged dissociative seizures as refractory status epilepticus, risking iatrogenic harm from sedation and intubation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies; a clear, supportive explanation of the diagnosis alone stops events in some patients, and psychological therapy helps many, but long duration, comorbid psychiatric illness, and coexisting epilepsy are associated with a more persistent course and ongoing disability.",
+    "pitfalls": [
+      "Treating prolonged dissociative seizures as refractory status epilepticus, risking iatrogenic harm from sedation and intubation",
+      "Diagnosing on semiology alone without video-EEG when the distinction is unclear",
+      "Overlooking coexisting epilepsy",
+      "Relying on prolactin as a definitive test"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Deliver a clear, supportive explanation of the diagnosis, which alone can reduce or stop events",
+      "Psychological therapy, particularly cognitive behavioural therapy, as the mainstay of treatment",
+      "Avoid and withdraw unnecessary antiepileptic drugs and emergency anticonvulsant treatment for events",
+      "Educate the patient and family to recognise and safely manage episodes without inappropriate escalation",
+      "Confirm the diagnosis with video-EEG capturing a typical event without an epileptiform correlate",
+      "Treat comorbid psychiatric illness, trauma and precipitating stressors",
+      "Recognise and manage coexisting epilepsy where both conditions are present"
     ]
-   ],
-   "caption": "Overview comparison matrix for functional (dissociative) seizures."
-  }
- ],
- "diagrams": [
-  {
-   "id": "functional-seizures-real-image",
-   "title": "Functional (dissociative) seizures: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "functional_seizures-pathway",
+      "title": "Functional (dissociative) seizures: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Paroxysmal episodes resembling epileptic seizures but arising from a functional (dissociative) mechanism rather than abnormal cortical electrical discharge",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features clearly suggesting epilepsy (lateral tongue biting, stereotyped events, post-ictal confusion) or coexisting epilepsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Video-EEG telemetry to capture a typical event and confirm the absence of an epileptiform correlate, A detailed eyewitness or home-video account of the episodes, Cardiac evaluation with ECG, ambulatory monitoring, and tilt"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deliver a clear, supportive explanation of the diagnosis, which alone can reduce or stop events"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating prolonged dissociative seizures as refractory status epilepticus, risking iatrogenic harm from sedation and intubation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of functional (dissociative) seizures."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "functional_seizures-matrix",
+      "title": "Functional (dissociative) seizures: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Paroxysmal episodes resembling epileptic seizures but arising from a functional (dissociative) mechanism rather than abnormal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Video-EEG telemetry to capture a typical event and confirm the absence of an epileptiform correlate, A detailed eyewitness or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epileptic seizures, focal or generalised, Convulsive syncope, Cardiac arrhythmia causing collapse",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deliver a clear, supportive explanation of the diagnosis, which alone can reduce or stop events",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating prolonged dissociative seizures as refractory status epilepticus, risking iatrogenic harm from sedation and intubation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for functional (dissociative) seizures."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_seizures-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-EEG telemetry",
+          "cells": [
+            {
+              "text": "Captures a typical event without an epileptiform correlate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyewitness or home-video account",
+          "cells": [
+            {
+              "text": "Detailed account of the episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG, ambulatory monitoring and tilt testing",
+          "cells": [
+            {
+              "text": "Assesses cardiac and syncopal causes of collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard EEG and MRI",
+          "cells": [
+            {
+              "text": "Coexisting epilepsy or structural disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum prolactin",
+          "cells": [
+            {
+              "text": "Interpreted with caution in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological and psychiatric assessment",
+          "cells": [
+            {
+              "text": "Comorbidity and precipitants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_seizures-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epileptic seizures",
+          "cells": [
+            {
+              "text": "Lateral tongue biting, stereotyped events, post-ictal confusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Convulsive syncope",
+          "cells": [
+            {
+              "text": "Assessed by tilt testing where syncope is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrhythmia causing collapse",
+          "cells": [
+            {
+              "text": "Cardiac symptoms suggesting an arrhythmic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_seizures-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clear supportive explanation",
+          "cells": [
+            {
+              "text": "Alone can reduce or stop events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw unnecessary antiepileptic drugs",
+          "cells": [
+            {
+              "text": "Avoid emergency anticonvulsant treatment for events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient and family education",
+          "cells": [
+            {
+              "text": "Recognise and safely manage episodes without inappropriate escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG confirmation",
+          "cells": [
+            {
+              "text": "Typical event captured without an epileptiform correlate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid psychiatric illness",
+          "cells": [
+            {
+              "text": "Trauma and precipitating stressors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage coexisting epilepsy",
+          "cells": [
+            {
+              "text": "Where both conditions are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_seizures-dx-mgmt",
+      "title": "Diagnosis and management of Functional (dissociative) seizures",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional seizures: stereotyped episodes, pending video-EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (features of epilepsy, cardiac symptoms, injury, sleep events)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac assessment for symptoms suggesting arrhythmic collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-EEG telemetry, eyewitness account, ECG and standard EEG or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does video-EEG capture a typical event without an epileptiform correlate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epilepsy, convulsive syncope, panic attacks or parasomnia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clear, supportive explanation of the diagnosis, which alone can reduce events",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cognitive behavioural therapy as the mainstay of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw unnecessary antiepileptic drugs and avoid emergency anticonvulsants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Educate patient and family to manage episodes safely without escalation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies; explanation alone stops events in some, and psychological therapy helps many",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

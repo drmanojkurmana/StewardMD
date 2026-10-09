@@ -1,173 +1,469 @@
 {
- "id": "necrobiosis_lipoidica",
- "name": "Necrobiosis lipoidica",
- "aliases": [
-  "necrobiosis lipoidica diabeticorum",
-  "NLD",
-  "Oppenheim-Urbach disease"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic granulomatous dermatosis presenting as well-demarcated plaques with a yellow-brown, atrophic, waxy centre and a raised violaceous border",
-   "Most commonly affects the pretibial skin (shins), usually bilaterally, and is more frequent in women",
-   "Prominent telangiectasia and a shiny, atrophic surface through which underlying vessels are visible are characteristic",
-   "Classically associated with diabetes mellitus, though it occurs in non-diabetic individuals and its course does not track tightly with glycaemic control",
-   "Ulceration, often precipitated by minor trauma, is a common and troublesome complication",
-   "Histology shows layered ('palisaded') necrobiotic collagen degeneration with granulomatous inflammation throughout the dermis",
-   "Long-standing lesions carry a small risk of squamous cell carcinoma developing within them"
+  "id": "necrobiosis_lipoidica",
+  "name": "Necrobiosis lipoidica",
+  "aliases": [
+    "necrobiosis lipoidica diabeticorum",
+    "NLD",
+    "Oppenheim-Urbach disease"
   ],
-  "pathophysiology": "Necrobiosis lipoidica is a granulomatous disorder characterised by degeneration ('necrobiosis') of dermal collagen with surrounding palisaded granulomatous inflammation. Microangiopathy with vessel-wall thickening and altered collagen, plus immune-complex-mediated vascular injury, are thought to compromise dermal blood supply and connective-tissue integrity, producing the atrophic, telangiectatic plaques. Although strongly linked with diabetes mellitus and its microvascular disease, the association is not absolute and glycaemic control does not reliably alter the skin lesions, indicating that additional immune and vascular mechanisms contribute.",
-  "additionalDifferentials": [
-   "Granuloma annulare",
-   "Sarcoidosis (cutaneous)",
-   "Stasis dermatitis and lipodermatosclerosis",
-   "Diabetic dermopathy",
-   "Morphoea (localised scleroderma)",
-   "Cutaneous squamous cell carcinoma arising within a chronic plaque"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing palisaded necrobiotic granulomas (with caution given poor healing at biopsy sites)",
-   "Fasting glucose and HbA1c to screen for or monitor diabetes mellitus",
-   "Assessment for associated microvascular complications in diabetic patients",
-   "Wound assessment and swab if ulceration or secondary infection is suspected",
-   "Thyroid function and other autoimmune screening where clinically indicated",
-   "Biopsy of any non-healing or indurated area to exclude squamous cell carcinoma"
-  ],
-  "redFlags": [
-   "Chronic non-healing ulceration with signs of secondary infection",
-   "Nodular growth or induration within a long-standing plaque suggesting squamous cell carcinoma",
-   "Newly diagnosed diabetes mellitus uncovered during evaluation",
-   "Rapidly enlarging or atypical lesions requiring reassessment"
-  ],
-  "prognosis": "Necrobiosis lipoidica is chronic and often persistent; lesions may slowly enlarge and can ulcerate, treatment responses are variable, and only a minority resolve spontaneously, with squamous cell carcinoma a rare long-term complication.",
-  "pitfalls": [
-   "Assuming tight glycaemic control will clear the skin lesions",
-   "Biopsying pretibial lesions without anticipating poor wound healing and ulceration",
-   "Overlooking malignant transformation in a chronic non-healing plaque",
-   "Confusing it with granuloma annulare or stasis dermatitis and mismanaging accordingly"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line potent topical or intralesional corticosteroids applied to the active raised border, with topical calcineurin inhibitors as an alternative",
-   "Systemic agents for refractory or ulcerating disease, such as tetracyclines, antimalarials, pentoxifylline or TNF-alpha inhibitors",
-   "Optimisation of glycaemic control and cardiovascular risk factors, while recognising the skin lesions may not track with glucose control",
-   "Meticulous wound care for ulceration, protection of the shins from trauma and compression for associated oedema",
-   "Smoking cessation to improve dermal microvascular perfusion",
-   "Surveillance biopsy of any non-healing or indurated lesion to exclude squamous cell carcinoma",
-   "Dermatology referral for diagnosis and management of resistant disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "necrobiosis_lipoidica-pathway",
-   "title": "Necrobiosis lipoidica: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic granulomatous dermatosis presenting as well-demarcated plaques with a yellow-brown, atrophic, waxy centre and a raised violaceous border",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Chronic non-healing ulceration with signs of secondary infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing palisaded necrobiotic granulomas (with caution given poor healing at biopsy sites), Fasting glucose and HbA1c to screen for or monitor diabetes mellitus, Assessment for associated microvascular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line potent topical or intralesional corticosteroids applied to the active raised border, with topical calcineurin inhibitors as an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming tight glycaemic control will clear the skin lesions"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of necrobiosis lipoidica."
-  }
- ],
- "tables": [
-  {
-   "id": "necrobiosis_lipoidica-matrix",
-   "title": "Necrobiosis lipoidica: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic granulomatous dermatosis presenting as well-demarcated plaques with a yellow-brown, atrophic, waxy centre and a raised",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic granulomatous dermatosis presenting as well-demarcated plaques with a yellow-brown, atrophic, waxy centre and a raised violaceous border",
+      "Most commonly affects the pretibial skin (shins), usually bilaterally, and is more frequent in women",
+      "Prominent telangiectasia and a shiny, atrophic surface through which underlying vessels are visible are characteristic",
+      "Classically associated with diabetes mellitus, though it occurs in non-diabetic individuals and its course does not track tightly with glycaemic control",
+      "Ulceration, often precipitated by minor trauma, is a common and troublesome complication",
+      "Histology shows layered ('palisaded') necrobiotic collagen degeneration with granulomatous inflammation throughout the dermis",
+      "Long-standing lesions carry a small risk of squamous cell carcinoma developing within them"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing palisaded necrobiotic granulomas (with caution given poor healing at biopsy sites), Fasting glucose and HbA1c",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Necrobiosis lipoidica is a granulomatous disorder characterised by degeneration ('necrobiosis') of dermal collagen with surrounding palisaded granulomatous inflammation. Microangiopathy with vessel-wall thickening and altered collagen, plus immune-complex-mediated vascular injury, are thought to compromise dermal blood supply and connective-tissue integrity, producing the atrophic, telangiectatic plaques. Although strongly linked with diabetes mellitus and its microvascular disease, the association is not absolute and glycaemic control does not reliably alter the skin lesions, indicating that additional immune and vascular mechanisms contribute.",
+    "additionalDifferentials": [
+      "Granuloma annulare",
+      "Sarcoidosis (cutaneous)",
+      "Stasis dermatitis and lipodermatosclerosis",
+      "Diabetic dermopathy",
+      "Morphoea (localised scleroderma)",
+      "Cutaneous squamous cell carcinoma arising within a chronic plaque"
     ],
-    [
-     "Primary Differentials",
-     "Granuloma annulare, Sarcoidosis (cutaneous), Stasis dermatitis and lipodermatosclerosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing palisaded necrobiotic granulomas (with caution given poor healing at biopsy sites)",
+      "Fasting glucose and HbA1c to screen for or monitor diabetes mellitus",
+      "Assessment for associated microvascular complications in diabetic patients",
+      "Wound assessment and swab if ulceration or secondary infection is suspected",
+      "Thyroid function and other autoimmune screening where clinically indicated",
+      "Biopsy of any non-healing or indurated area to exclude squamous cell carcinoma"
     ],
-    [
-     "Management Strategy",
-     "First-line potent topical or intralesional corticosteroids applied to the active raised border, with topical calcineurin",
-     "Core treatment modality"
+    "redFlags": [
+      "Chronic non-healing ulceration with signs of secondary infection",
+      "Nodular growth or induration within a long-standing plaque suggesting squamous cell carcinoma",
+      "Newly diagnosed diabetes mellitus uncovered during evaluation",
+      "Rapidly enlarging or atypical lesions requiring reassessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming tight glycaemic control will clear the skin lesions",
-     "Prevent diagnostic or management error"
+    "prognosis": "Necrobiosis lipoidica is chronic and often persistent; lesions may slowly enlarge and can ulcerate, treatment responses are variable, and only a minority resolve spontaneously, with squamous cell carcinoma a rare long-term complication.",
+    "pitfalls": [
+      "Assuming tight glycaemic control will clear the skin lesions",
+      "Biopsying pretibial lesions without anticipating poor wound healing and ulceration",
+      "Overlooking malignant transformation in a chronic non-healing plaque",
+      "Confusing it with granuloma annulare or stasis dermatitis and mismanaging accordingly"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line potent topical or intralesional corticosteroids applied to the active raised border, with topical calcineurin inhibitors as an alternative",
+      "Systemic agents for refractory or ulcerating disease, such as tetracyclines, antimalarials, pentoxifylline or TNF-alpha inhibitors",
+      "Optimisation of glycaemic control and cardiovascular risk factors, while recognising the skin lesions may not track with glucose control",
+      "Meticulous wound care for ulceration, protection of the shins from trauma and compression for associated oedema",
+      "Smoking cessation to improve dermal microvascular perfusion",
+      "Surveillance biopsy of any non-healing or indurated lesion to exclude squamous cell carcinoma",
+      "Dermatology referral for diagnosis and management of resistant disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for necrobiosis lipoidica."
-  }
- ],
- "diagrams": [
-  {
-   "id": "necrobiosis-lipoidica-real-image",
-   "title": "Necrobiosis lipoidica: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "necrobiosis_lipoidica-pathway",
+      "title": "Necrobiosis lipoidica: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic granulomatous dermatosis presenting as well-demarcated plaques with a yellow-brown, atrophic, waxy centre and a raised violaceous border",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Chronic non-healing ulceration with signs of secondary infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing palisaded necrobiotic granulomas (with caution given poor healing at biopsy sites), Fasting glucose and HbA1c to screen for or monitor diabetes mellitus, Assessment for associated microvascular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line potent topical or intralesional corticosteroids applied to the active raised border, with topical calcineurin inhibitors as an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming tight glycaemic control will clear the skin lesions"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of necrobiosis lipoidica."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "necrobiosis_lipoidica-matrix",
+      "title": "Necrobiosis lipoidica: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic granulomatous dermatosis presenting as well-demarcated plaques with a yellow-brown, atrophic, waxy centre and a raised",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing palisaded necrobiotic granulomas (with caution given poor healing at biopsy sites), Fasting glucose and HbA1c",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Granuloma annulare, Sarcoidosis (cutaneous), Stasis dermatitis and lipodermatosclerosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line potent topical or intralesional corticosteroids applied to the active raised border, with topical calcineurin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming tight glycaemic control will clear the skin lesions",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for necrobiosis lipoidica."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "necrobiosis_lipoidica-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Palisaded necrobiotic granulomas; poor healing at the biopsy site is a caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Screens for or monitors diabetes mellitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for diabetic microvascular complications",
+          "cells": [
+            {
+              "text": "In diabetic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound assessment and swab",
+          "cells": [
+            {
+              "text": "Ulceration or secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and autoimmune screen",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of any non-healing or indurated area",
+          "cells": [
+            {
+              "text": "Excludes squamous cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "necrobiosis_lipoidica-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Granuloma annulare",
+          "cells": [
+            {
+              "text": "Confusion with this disorder is a pitfall; the yellow-brown atrophic centre with telangiectasia is characteristic here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stasis dermatitis and lipodermatosclerosis",
+          "cells": [
+            {
+              "text": "The raised violaceous border and atrophic centre define this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Can arise within a long-standing plaque; nodular growth or induration prompts biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "necrobiosis_lipoidica-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Potent topical or intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "First-line on the active raised border; topical calcineurin inhibitors as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic agents for refractory disease",
+          "cells": [
+            {
+              "text": "Tetracyclines, antimalarials, pentoxifylline or anti-TNF agents for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic and cardiovascular control",
+          "cells": [
+            {
+              "text": "Optimise, recognising that skin lesions may not track glucose control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Meticulous care for ulceration; protect the shins from trauma; compression for oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Improves dermal microvascular perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance biopsy",
+          "cells": [
+            {
+              "text": "Any non-healing or indurated lesion, to exclude squamous cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "For resistant disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "necrobiosis_lipoidica-dx-mgmt",
+      "title": "Diagnosis and management of Necrobiosis lipoidica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Well-demarcated pretibial plaque with yellow-brown atrophic centre and violaceous border",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (non-healing ulcer, nodular induration, new diabetes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Dermatology referral; biopsy any indurated or non-healing area",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, fasting glucose and HbA1c, wound swab if infected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Palisaded necrobiotic granulomas on biopsy, with squamous cell carcinoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider granuloma annulare or stasis dermatitis; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Potent topical or intralesional corticosteroids to the active raised border",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tetracyclines, antimalarials, pentoxifylline or anti-TNF agents if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Meticulous wound care and protection of the shins from trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance biopsy of any non-healing or indurated lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and often persistent; rare long-term squamous cell carcinoma risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

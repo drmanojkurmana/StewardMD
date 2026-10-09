@@ -1,174 +1,514 @@
 {
- "id": "adiaspiromycosis",
- "name": "Adiaspiromycosis (Emmonsia)",
- "aliases": [
-  "Emmonsia crescens infection",
-  "Emmonsia parva infection",
-  "adiaspirosis",
-  "pulmonary adiaspiromycosis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare pulmonary infection caused by the dimorphic soil fungi of the Emmonsia genus (notably Emmonsia crescens), which chiefly infect burrowing rodents",
-   "Humans acquire it by inhaling conidia from soil, an exposure linked to rural, agricultural, and excavation activities",
-   "The inhaled conidia do not replicate in the lung but enlarge enormously into thick-walled structures called adiaspores, which provoke a granulomatous reaction",
-   "Because the fungus does not multiply, disease severity depends on the number of spores inhaled: a small inoculum may be asymptomatic while a heavy exposure can cause diffuse illness",
-   "Clinical presentation ranges from an incidental pulmonary nodule to fever, cough, dyspnoea, and a diffuse reticulonodular or miliary pattern in heavy exposures",
-   "Diagnosis is histological, showing the characteristic large adiaspores with thick walls surrounded by granulomas, usually on lung biopsy",
-   "Localised disease is often self-limiting; extensive or symptomatic disease is treated with antifungal agents, sometimes with corticosteroids to dampen the granulomatous response"
+  "id": "adiaspiromycosis",
+  "name": "Adiaspiromycosis (Emmonsia)",
+  "aliases": [
+    "Emmonsia crescens infection",
+    "Emmonsia parva infection",
+    "adiaspirosis",
+    "pulmonary adiaspiromycosis"
   ],
-  "pathophysiology": "Emmonsia species are dimorphic fungi that live in soil and infect the lungs of small burrowing mammals. When a person inhales the airborne conidia, body temperature triggers conversion not into replicating yeast but into a unique enlarging spore, the adiaspore, which swells to a large thick-walled sphere without dividing or budding. The lack of replication means the organism cannot disseminate in the usual sense, and the burden of disease is set by the size of the inhaled inoculum. Each adiaspore acts as a persistent antigenic focus that stimulates a granulomatous inflammatory reaction in the surrounding lung. With a light exposure only scattered granulomas form, whereas a massive inhalation produces widespread granulomatous pneumonitis and impaired gas exchange. Note that some organisms formerly grouped with Emmonsia (such as Emergomyces) instead cause true disseminated dimorphic infection in the immunocompromised and are distinct from classical adiaspiromycosis.",
-  "additionalDifferentials": [
-   "Pulmonary tuberculosis and other mycobacterial disease",
-   "Histoplasmosis, coccidioidomycosis, and other endemic mycoses",
-   "Sarcoidosis",
-   "Hypersensitivity pneumonitis",
-   "Miliary or metastatic pulmonary nodular disease",
-   "Emergomycosis (disseminated dimorphic fungal infection in the immunocompromised)"
-  ],
-  "additionalInvestigations": [
-   "Lung biopsy with histopathology demonstrating large thick-walled adiaspores within granulomas",
-   "Chest imaging (radiograph and CT) to characterise nodular, reticulonodular, or miliary patterns",
-   "Fungal culture and molecular identification of Emmonsia species",
-   "Exposure history focusing on soil, rural, and excavation activities",
-   "Investigations to exclude tuberculosis and endemic mycoses",
-   "Assessment of immune status to distinguish classical adiaspiromycosis from disseminated dimorphic infection"
-  ],
-  "redFlags": [
-   "Diffuse bilateral pulmonary involvement with hypoxaemia after heavy spore exposure",
-   "Progressive dyspnoea or respiratory failure",
-   "Disseminated disease suggesting an alternative dimorphic fungus in an immunocompromised host",
-   "Failure to improve, prompting reconsideration of tuberculosis or malignancy"
-  ],
-  "prognosis": "Localised, low-inoculum disease is frequently self-limiting with an excellent outlook, whereas heavy-exposure diffuse pulmonary disease can cause significant respiratory compromise but usually responds to antifungal therapy and supportive care.",
-  "pitfalls": [
-   "Mistaking pulmonary nodules for tuberculosis or malignancy and missing the histological adiaspores",
-   "Assuming the organism disseminates like other dimorphic fungi, when classical adiaspiromycosis does not replicate in tissue",
-   "Confusing adiaspiromycosis with disseminated emergomycosis in immunocompromised patients",
-   "Over-treating incidental, asymptomatic solitary granulomas"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "UpToDate: Adiaspiromycosis and infections due to Emmonsia species"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat symptomatic or diffuse pulmonary disease with systemic antifungal therapy such as an azole (itraconazole) or amphotericin B for severe illness",
-   "Observe asymptomatic low-inoculum disease, such as an incidental solitary granuloma, without antifungal treatment",
-   "Provide supportive respiratory care including supplemental oxygen and ventilatory support in heavy-exposure granulomatous pneumonitis",
-   "Consider adjunctive corticosteroids to attenuate the granulomatous inflammatory response in severe diffuse disease",
-   "Monitor with serial chest imaging and respiratory function to track resolution or progression",
-   "Advise avoidance of further heavy soil and dust exposure through appropriate respiratory protection",
-   "Refer to infectious diseases and respiratory specialists and exclude tuberculosis and endemic mycoses"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adiaspiromycosis-pathway",
-   "title": "Adiaspiromycosis (Emmonsia): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare pulmonary infection caused by the dimorphic soil fungi of the Emmonsia genus (notably Emmonsia crescens), which chiefly infect burrowing rodents",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Diffuse bilateral pulmonary involvement with hypoxaemia after heavy spore exposure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lung biopsy with histopathology demonstrating large thick-walled adiaspores within granulomas, Chest imaging (radiograph and CT) to characterise nodular, reticulonodular, or miliary patterns, Fungal culture and molecular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat symptomatic or diffuse pulmonary disease with systemic antifungal therapy such as an azole (itraconazole) or amphotericin B for severe illness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking pulmonary nodules for tuberculosis or malignancy and missing the histological adiaspores"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of adiaspiromycosis (emmonsia)."
-  }
- ],
- "tables": [
-  {
-   "id": "adiaspiromycosis-matrix",
-   "title": "Adiaspiromycosis (Emmonsia): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare pulmonary infection caused by the dimorphic soil fungi of the Emmonsia genus (notably Emmonsia crescens), which chiefly",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare pulmonary infection caused by the dimorphic soil fungi of the Emmonsia genus (notably Emmonsia crescens), which chiefly infect burrowing rodents",
+      "Humans acquire it by inhaling conidia from soil, an exposure linked to rural, agricultural, and excavation activities",
+      "The inhaled conidia do not replicate in the lung but enlarge enormously into thick-walled structures called adiaspores, which provoke a granulomatous reaction",
+      "Because the fungus does not multiply, disease severity depends on the number of spores inhaled: a small inoculum may be asymptomatic while a heavy exposure can cause diffuse illness",
+      "Clinical presentation ranges from an incidental pulmonary nodule to fever, cough, dyspnoea, and a diffuse reticulonodular or miliary pattern in heavy exposures",
+      "Diagnosis is histological, showing the characteristic large adiaspores with thick walls surrounded by granulomas, usually on lung biopsy",
+      "Localised disease is often self-limiting; extensive or symptomatic disease is treated with antifungal agents, sometimes with corticosteroids to dampen the granulomatous response"
     ],
-    [
-     "Key Investigations",
-     "Lung biopsy with histopathology demonstrating large thick-walled adiaspores within granulomas, Chest imaging (radiograph and CT)",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Emmonsia species are dimorphic fungi that live in soil and infect the lungs of small burrowing mammals. When a person inhales the airborne conidia, body temperature triggers conversion not into replicating yeast but into a unique enlarging spore, the adiaspore, which swells to a large thick-walled sphere without dividing or budding. The lack of replication means the organism cannot disseminate in the usual sense, and the burden of disease is set by the size of the inhaled inoculum. Each adiaspore acts as a persistent antigenic focus that stimulates a granulomatous inflammatory reaction in the surrounding lung. With a light exposure only scattered granulomas form, whereas a massive inhalation produces widespread granulomatous pneumonitis and impaired gas exchange. Note that some organisms formerly grouped with Emmonsia (such as Emergomyces) instead cause true disseminated dimorphic infection in the immunocompromised and are distinct from classical adiaspiromycosis.",
+    "additionalDifferentials": [
+      "Pulmonary tuberculosis and other mycobacterial disease",
+      "Histoplasmosis, coccidioidomycosis, and other endemic mycoses",
+      "Sarcoidosis",
+      "Hypersensitivity pneumonitis",
+      "Miliary or metastatic pulmonary nodular disease",
+      "Emergomycosis (disseminated dimorphic fungal infection in the immunocompromised)"
     ],
-    [
-     "Primary Differentials",
-     "Pulmonary tuberculosis and other mycobacterial disease, Histoplasmosis, coccidioidomycosis, and other endemic mycoses, Sarcoidosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lung biopsy with histopathology demonstrating large thick-walled adiaspores within granulomas",
+      "Chest imaging (radiograph and CT) to characterise nodular, reticulonodular, or miliary patterns",
+      "Fungal culture and molecular identification of Emmonsia species",
+      "Exposure history focusing on soil, rural, and excavation activities",
+      "Investigations to exclude tuberculosis and endemic mycoses",
+      "Assessment of immune status to distinguish classical adiaspiromycosis from disseminated dimorphic infection"
     ],
-    [
-     "Management Strategy",
-     "Treat symptomatic or diffuse pulmonary disease with systemic antifungal therapy such as an azole (itraconazole) or amphotericin B",
-     "Core treatment modality"
+    "redFlags": [
+      "Diffuse bilateral pulmonary involvement with hypoxaemia after heavy spore exposure",
+      "Progressive dyspnoea or respiratory failure",
+      "Disseminated disease suggesting an alternative dimorphic fungus in an immunocompromised host",
+      "Failure to improve, prompting reconsideration of tuberculosis or malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking pulmonary nodules for tuberculosis or malignancy and missing the histological adiaspores",
-     "Prevent diagnostic or management error"
+    "prognosis": "Localised, low-inoculum disease is frequently self-limiting with an excellent outlook, whereas heavy-exposure diffuse pulmonary disease can cause significant respiratory compromise but usually responds to antifungal therapy and supportive care.",
+    "pitfalls": [
+      "Mistaking pulmonary nodules for tuberculosis or malignancy and missing the histological adiaspores",
+      "Assuming the organism disseminates like other dimorphic fungi, when classical adiaspiromycosis does not replicate in tissue",
+      "Confusing adiaspiromycosis with disseminated emergomycosis in immunocompromised patients",
+      "Over-treating incidental, asymptomatic solitary granulomas"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "UpToDate: Adiaspiromycosis and infections due to Emmonsia species"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat symptomatic or diffuse pulmonary disease with systemic antifungal therapy such as an azole (itraconazole) or amphotericin B for severe illness",
+      "Observe asymptomatic low-inoculum disease, such as an incidental solitary granuloma, without antifungal treatment",
+      "Provide supportive respiratory care including supplemental oxygen and ventilatory support in heavy-exposure granulomatous pneumonitis",
+      "Consider adjunctive corticosteroids to attenuate the granulomatous inflammatory response in severe diffuse disease",
+      "Monitor with serial chest imaging and respiratory function to track resolution or progression",
+      "Advise avoidance of further heavy soil and dust exposure through appropriate respiratory protection",
+      "Refer to infectious diseases and respiratory specialists and exclude tuberculosis and endemic mycoses"
     ]
-   ],
-   "caption": "Overview comparison matrix for adiaspiromycosis (emmonsia)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adiaspiromycosis-real-image",
-   "title": "Adiaspiromycosis (Emmonsia): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "adiaspiromycosis-pathway",
+      "title": "Adiaspiromycosis (Emmonsia): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare pulmonary infection caused by the dimorphic soil fungi of the Emmonsia genus (notably Emmonsia crescens), which chiefly infect burrowing rodents",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Diffuse bilateral pulmonary involvement with hypoxaemia after heavy spore exposure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lung biopsy with histopathology demonstrating large thick-walled adiaspores within granulomas, Chest imaging (radiograph and CT) to characterise nodular, reticulonodular, or miliary patterns, Fungal culture and molecular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat symptomatic or diffuse pulmonary disease with systemic antifungal therapy such as an azole (itraconazole) or amphotericin B for severe illness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking pulmonary nodules for tuberculosis or malignancy and missing the histological adiaspores"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of adiaspiromycosis (emmonsia)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adiaspiromycosis-matrix",
+      "title": "Adiaspiromycosis (Emmonsia): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare pulmonary infection caused by the dimorphic soil fungi of the Emmonsia genus (notably Emmonsia crescens), which chiefly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lung biopsy with histopathology demonstrating large thick-walled adiaspores within granulomas, Chest imaging (radiograph and CT)",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pulmonary tuberculosis and other mycobacterial disease, Histoplasmosis, coccidioidomycosis, and other endemic mycoses, Sarcoidosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat symptomatic or diffuse pulmonary disease with systemic antifungal therapy such as an azole (itraconazole) or amphotericin B",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking pulmonary nodules for tuberculosis or malignancy and missing the histological adiaspores",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for adiaspiromycosis (emmonsia)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adiaspiromycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lung biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Large thick-walled adiaspores within granulomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph and CT",
+          "cells": [
+            {
+              "text": "Nodular, reticulonodular or miliary patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture and molecular identification",
+          "cells": [
+            {
+              "text": "Emmonsia species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed exposure history",
+          "cells": [
+            {
+              "text": "Soil, rural and excavation activities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigations to exclude tuberculosis and endemic mycoses",
+          "cells": [
+            {
+              "text": "Excludes alternative causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of immune status",
+          "cells": [
+            {
+              "text": "Distinguishes classical from disseminated infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adiaspiromycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis and other mycobacterial disease",
+          "cells": [
+            {
+              "text": "Mycobacterial infection, excluded first"
+            },
+            {
+              "text": "Tests to exclude tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histoplasmosis and other endemic mycoses",
+          "cells": [
+            {
+              "text": "Endemic dimorphic mycosis"
+            },
+            {
+              "text": "Fungal culture and molecular identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Granulomas without adiaspores"
+            },
+            {
+              "text": "Lung biopsy histopathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergomycosis",
+          "cells": [
+            {
+              "text": "Disseminated dimorphic infection in the immunocompromised"
+            },
+            {
+              "text": "Immune status assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adiaspiromycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic azole (itraconazole) or amphotericin B",
+          "cells": [
+            {
+              "text": "Symptomatic or diffuse pulmonary disease"
+            },
+            {
+              "text": "Amphotericin B for severe illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation without antifungal therapy",
+          "cells": [
+            {
+              "text": "Asymptomatic low-inoculum disease"
+            },
+            {
+              "text": "Such as an incidental solitary granuloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplemental oxygen and ventilatory support",
+          "cells": [
+            {
+              "text": "Heavy-exposure granulomatous pneumonitis"
+            },
+            {
+              "text": "Supportive respiratory care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive corticosteroids",
+          "cells": [
+            {
+              "text": "Severe diffuse disease"
+            },
+            {
+              "text": "Attenuates granulomatous inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial chest imaging and respiratory function monitoring",
+          "cells": [
+            {
+              "text": "Resolution or progression"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of further heavy soil and dust exposure",
+          "cells": [
+            {
+              "text": "Prevents re-exposure"
+            },
+            {
+              "text": "Respiratory protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious diseases and respiratory referral",
+          "cells": [
+            {
+              "text": "Excludes tuberculosis and endemic mycoses"
+            },
+            {
+              "text": "Specialist review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adiaspiromycosis-dx-mgmt",
+      "title": "Diagnosis and management of Adiaspiromycosis (Emmonsia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Breathlessness after soil or excavation exposure with nodular lung changes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Diffuse bilateral disease with hypoxaemia after heavy exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory and infectious diseases review; oxygen and antifungal",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lung biopsy, chest CT, fungal culture and molecular identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thick-walled adiaspores within granulomas on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat with itraconazole or amphotericin B if symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude tuberculosis, histoplasmosis, sarcoidosis and emergomycosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe asymptomatic low-inoculum disease without antifungal therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supplemental oxygen and ventilatory support for severe pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjunctive corticosteroids in severe diffuse disease; serial chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Localised disease often self-limiting; diffuse disease usually responds",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

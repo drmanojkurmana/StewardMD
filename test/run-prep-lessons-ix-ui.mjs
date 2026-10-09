@@ -174,10 +174,9 @@ try {
   ok(await ev(`return !document.querySelector("#smdPrep .pn-qc");`) === true, "a malformed quick check is dropped, the step still shows");
   await shot("6-side");
   await click(`#smdPrep .pn-cmp-cell[data-z="b"]`);
-  ok(await until(`var z=document.querySelector("#pnZoom img"); return !!z && /rb-fx-ix-c\\.webp$/.test(z.getAttribute("src"));`, 3000), "compare: the second image enlarges on its own");
-  await click("#smdPrep [data-act=l-unzoom]");
-  ok(await until(`return !document.querySelector("#pnZoom") && document.activeElement && document.activeElement.getAttribute("data-z")==="b";`, 3000), "closing the enlarged image returns focus to its cell");
-
+  ok(await until(`var v=document.querySelector(".pv"); var z=v && v.querySelector("img"); return !!window.PREP_VIEWER && PREP_VIEWER.isOpen() && !!z && /rb-fx-ix-c\\.webp$/.test(z.getAttribute("src"));`, 3000), "compare: the second image opens on its own in the shared viewer (prep-viewer.js)");
+  await ev(`PREP_VIEWER.close(); return 1;`);
+  ok(await until(`return !PREP_VIEWER.isOpen() && document.activeElement && document.activeElement.getAttribute("data-z")==="b";`, 3000), "closing the viewer returns focus to the cell that opened it");
   // ---- table step, then the classic signs deck
   await click("#smdPrep [data-act=l-next]");
   ok(await until(`return !!document.querySelector("#smdPrep .pn-vtbl");`, 3000), "a table step reads as before");

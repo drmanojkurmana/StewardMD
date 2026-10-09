@@ -1,175 +1,462 @@
 {
- "id": "folie_a_deux",
- "name": "Folie à Deux",
- "aliases": [
-  "Shared psychotic disorder",
-  "Induced delusional disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Psychiatry",
- "specialty": "Psychiatry / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "New Oxford Textbook of Psychiatry",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Transfer of a delusional belief from a dominant, usually psychotic, primary individual to one or more previously well and closely associated people.",
-   "Classified in ICD as induced delusional disorder; DSM subsumes it within delusional and shared presentations.",
-   "Typically arises in socially isolated, emotionally close dyads such as spouses, siblings, or a parent and child.",
-   "The recipient or secondary case is often more suggestible, dependent, or of lower intellectual functioning.",
-   "Separation of the pair frequently leads to resolution of the delusion in the induced secondary person.",
-   "The primary individual usually has schizophrenia, delusional disorder, or a mood disorder with psychosis.",
-   "Recognised variants include folie imposée, folie simultanée, folie communiquée, and folie induite.",
-   "Shared content is commonly persecutory and is described in convergent detail by both parties."
+  "id": "folie_a_deux",
+  "name": "Folie à Deux",
+  "aliases": [
+    "Shared psychotic disorder",
+    "Induced delusional disorder"
   ],
-  "pathophysiology": "Folie à deux is understood less as a distinct biological disease than as a psychosocial phenomenon in which a genuine delusion held by a psychotic primary individual is adopted by an intimately associated, usually dependent and isolated, secondary individual. Prolonged close contact, isolation from external reality-testing, and a submissive or suggestible relationship dynamic permit the belief to be internalised. The secondary person typically lacks a primary psychotic illness, which is why physical separation from the inducer commonly extinguishes the shared belief, whereas the primary case requires treatment of the underlying disorder.",
-  "additionalDifferentials": [
-   "Independent coincident psychosis in both individuals",
-   "Shared cultural or religious beliefs that are not delusional",
-   "Coercive control or undue influence",
-   "Substance-induced psychosis",
-   "Cognitive impairment or intellectual disability contributing to suggestibility",
-   "Malingering or shared deception",
-   "Trauma-related shared beliefs"
-  ],
-  "additionalInvestigations": [
-   "Separate psychiatric assessment of each individual",
-   "Trial of separation with observation of the belief in the secondary case",
-   "Collateral history and assessment of relationship dynamics and isolation",
-   "Assessment of the primary case's underlying disorder",
-   "Cognitive assessment of the secondary individual",
-   "Safeguarding assessment for children and dependent adults",
-   "Organic screen where clinically indicated"
-  ],
-  "redFlags": [
-   "Children or dependent adults sharing the delusion, raising safeguarding concern",
-   "Delusions driving neglect, refusal of care, or risk to health",
-   "Persecutory content prompting aggression toward third parties",
-   "Risk of self-harm or harm arising from acting on the shared belief"
-  ],
-  "prognosis": "The induced secondary individual often improves, sometimes markedly, after separation from the primary case, whereas the primary individual's outcome depends on their underlying psychotic illness.",
-  "pitfalls": [
-   "Treating only the presenting individual and missing the primary inducer",
-   "Overlooking the safeguarding needs of children in the household",
-   "Mistaking a shared cultural or religious belief for a delusion",
-   "Failing to use separation as both a diagnostic and a therapeutic step"
-  ],
-  "references": [
-   "New Oxford Textbook of Psychiatry",
-   "Kaplan and Sadock's Synopsis of Psychiatry",
-   "Shorter Oxford Textbook of Psychiatry"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Separate the induced (secondary) individual from the primary inducer, which frequently leads to resolution of the shared delusion without drug treatment",
-   "Treat the primary individual's underlying psychotic disorder — schizophrenia, delusional disorder or psychotic mood disorder — with antipsychotic medication, adding a mood stabiliser or antidepressant where indicated",
-   "Reassess the secondary individual after separation and offer antipsychotic therapy only if delusional beliefs persist, alongside psychological support",
-   "Address the social isolation and dependent relationship dynamics through family and social intervention to reduce relapse risk",
-   "Undertake a safeguarding assessment where children or dependent adults are involved",
-   "Provide coordinated psychiatric follow-up for both individuals with attention to insight and treatment adherence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "folie_a_deux-pathway",
-   "title": "Folie à Deux: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Transfer of a delusional belief from a dominant, usually psychotic, primary individual to one or more previously well and closely associated people.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Children or dependent adults sharing the delusion, raising safeguarding concern",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Separate psychiatric assessment of each individual, Trial of separation with observation of the belief in the secondary case, Collateral history and assessment of relationship dynamics and isolation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Separate the induced (secondary) individual from the primary inducer, which frequently leads to resolution of the shared delusion without drug treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating only the presenting individual and missing the primary inducer"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of folie à deux."
-  }
- ],
- "tables": [
-  {
-   "id": "folie_a_deux-matrix",
-   "title": "Folie à Deux: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Transfer of a delusional belief from a dominant, usually psychotic, primary individual to one or more previously well and closely",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Psychiatry",
+  "specialty": "Psychiatry / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "New Oxford Textbook of Psychiatry",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Transfer of a delusional belief from a dominant, usually psychotic, primary individual to one or more previously well and closely associated people.",
+      "Classified in ICD as induced delusional disorder; DSM subsumes it within delusional and shared presentations.",
+      "Typically arises in socially isolated, emotionally close dyads such as spouses, siblings, or a parent and child.",
+      "The recipient or secondary case is often more suggestible, dependent, or of lower intellectual functioning.",
+      "Separation of the pair frequently leads to resolution of the delusion in the induced secondary person.",
+      "The primary individual usually has schizophrenia, delusional disorder, or a mood disorder with psychosis.",
+      "Recognised variants include folie imposée, folie simultanée, folie communiquée, and folie induite.",
+      "Shared content is commonly persecutory and is described in convergent detail by both parties."
     ],
-    [
-     "Key Investigations",
-     "Separate psychiatric assessment of each individual, Trial of separation with observation of the belief in the secondary case,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Folie à deux is understood less as a distinct biological disease than as a psychosocial phenomenon in which a genuine delusion held by a psychotic primary individual is adopted by an intimately associated, usually dependent and isolated, secondary individual. Prolonged close contact, isolation from external reality-testing, and a submissive or suggestible relationship dynamic permit the belief to be internalised. The secondary person typically lacks a primary psychotic illness, which is why physical separation from the inducer commonly extinguishes the shared belief, whereas the primary case requires treatment of the underlying disorder.",
+    "additionalDifferentials": [
+      "Independent coincident psychosis in both individuals",
+      "Shared cultural or religious beliefs that are not delusional",
+      "Coercive control or undue influence",
+      "Substance-induced psychosis",
+      "Cognitive impairment or intellectual disability contributing to suggestibility",
+      "Malingering or shared deception",
+      "Trauma-related shared beliefs"
     ],
-    [
-     "Primary Differentials",
-     "Independent coincident psychosis in both individuals, Shared cultural or religious beliefs that are not delusional, Coercive",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Separate psychiatric assessment of each individual",
+      "Trial of separation with observation of the belief in the secondary case",
+      "Collateral history and assessment of relationship dynamics and isolation",
+      "Assessment of the primary case's underlying disorder",
+      "Cognitive assessment of the secondary individual",
+      "Safeguarding assessment for children and dependent adults",
+      "Organic screen where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Separate the induced (secondary) individual from the primary inducer, which frequently leads to resolution of the shared delusion",
-     "Core treatment modality"
+    "redFlags": [
+      "Children or dependent adults sharing the delusion, raising safeguarding concern",
+      "Delusions driving neglect, refusal of care, or risk to health",
+      "Persecutory content prompting aggression toward third parties",
+      "Risk of self-harm or harm arising from acting on the shared belief"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating only the presenting individual and missing the primary inducer",
-     "Prevent diagnostic or management error"
+    "prognosis": "The induced secondary individual often improves, sometimes markedly, after separation from the primary case, whereas the primary individual's outcome depends on their underlying psychotic illness.",
+    "pitfalls": [
+      "Treating only the presenting individual and missing the primary inducer",
+      "Overlooking the safeguarding needs of children in the household",
+      "Mistaking a shared cultural or religious belief for a delusion",
+      "Failing to use separation as both a diagnostic and a therapeutic step"
+    ],
+    "references": [
+      "New Oxford Textbook of Psychiatry",
+      "Kaplan and Sadock's Synopsis of Psychiatry",
+      "Shorter Oxford Textbook of Psychiatry"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Separate the induced (secondary) individual from the primary inducer, which frequently leads to resolution of the shared delusion without drug treatment",
+      "Treat the primary individual's underlying psychotic disorder — schizophrenia, delusional disorder or psychotic mood disorder — with antipsychotic medication, adding a mood stabiliser or antidepressant where indicated",
+      "Reassess the secondary individual after separation and offer antipsychotic therapy only if delusional beliefs persist, alongside psychological support",
+      "Address the social isolation and dependent relationship dynamics through family and social intervention to reduce relapse risk",
+      "Undertake a safeguarding assessment where children or dependent adults are involved",
+      "Provide coordinated psychiatric follow-up for both individuals with attention to insight and treatment adherence"
     ]
-   ],
-   "caption": "Overview comparison matrix for folie à deux."
-  }
- ],
- "diagrams": [
-  {
-   "id": "folie-a-deux-real-image",
-   "title": "Folie à Deux: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "folie_a_deux-pathway",
+      "title": "Folie à Deux: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Transfer of a delusional belief from a dominant, usually psychotic, primary individual to one or more previously well and closely associated people.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Children or dependent adults sharing the delusion, raising safeguarding concern",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Separate psychiatric assessment of each individual, Trial of separation with observation of the belief in the secondary case, Collateral history and assessment of relationship dynamics and isolation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Separate the induced (secondary) individual from the primary inducer, which frequently leads to resolution of the shared delusion without drug treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating only the presenting individual and missing the primary inducer"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of folie à deux."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "folie_a_deux-matrix",
+      "title": "Folie à Deux: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Transfer of a delusional belief from a dominant, usually psychotic, primary individual to one or more previously well and closely",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Separate psychiatric assessment of each individual, Trial of separation with observation of the belief in the secondary case,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Independent coincident psychosis in both individuals, Shared cultural or religious beliefs that are not delusional, Coercive",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Separate the induced (secondary) individual from the primary inducer, which frequently leads to resolution of the shared delusion",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating only the presenting individual and missing the primary inducer",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for folie à deux."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "New Oxford Textbook of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "folie_a_deux-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Separate psychiatric assessment of each individual",
+          "cells": [
+            {
+              "text": "Independent assessment of both"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of separation with observation of the belief",
+          "cells": [
+            {
+              "text": "Belief resolves in the secondary case"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collateral history and relationship dynamics",
+          "cells": [
+            {
+              "text": "Isolation and dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the primary case's underlying disorder",
+          "cells": [
+            {
+              "text": "Schizophrenia, delusional disorder or psychotic mood disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive assessment of the secondary individual",
+          "cells": [
+            {
+              "text": "Suggestibility or lower intellectual function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding assessment",
+          "cells": [
+            {
+              "text": "Children or dependent adults involved"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "folie_a_deux-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Independent coincident psychosis in both individuals",
+          "cells": [
+            {
+              "text": "Both have their own illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shared cultural or religious belief",
+          "cells": [
+            {
+              "text": "Not delusional"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coercive control or undue influence",
+          "cells": [
+            {
+              "text": "Pressure rather than induced delusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "folie_a_deux-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Separate the secondary individual from the primary inducer",
+          "cells": [
+            {
+              "text": "Frequently resolves the shared delusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the primary individual's psychotic disorder",
+          "cells": [
+            {
+              "text": "Schizophrenia, delusional disorder or psychotic mood disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipsychotic therapy for secondary case if beliefs persist",
+          "cells": [
+            {
+              "text": "Only after separation and reassessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family and social intervention",
+          "cells": [
+            {
+              "text": "Reduce isolation and dependent dynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding assessment",
+          "cells": [
+            {
+              "text": "Where children or dependent adults are involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated psychiatric follow-up for both",
+          "cells": [
+            {
+              "text": "Insight and treatment adherence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "folie_a_deux-dx-mgmt",
+      "title": "Diagnosis and management of Folie à Deux",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Shared, usually persecutory, belief in two closely related, socially isolated people",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (children at risk, neglect or refusal of care, risk of harm)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent safeguarding and psychiatric review for children or risk of harm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Separate assessment of each person; collateral history; cognitive and safeguarding review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Belief transmitted from a psychotic primary case to a secondary person?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coincident psychosis, shared cultural belief or coercive control",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Separate the secondary person from the primary inducer",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the primary individual's psychotic disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antipsychotic only if secondary belief persists after separation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Safeguarding assessment and family or social support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Secondary person often improves after separation; primary follows own disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

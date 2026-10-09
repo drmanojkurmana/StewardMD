@@ -1,162 +1,648 @@
 {
- "id": "multiple_endocrine_neoplasia",
- "name": "Multiple Endocrine Neoplasia (MEN)",
- "system": "Endocrine",
- "class": "non_infective",
- "chapter": 400,
- "page": 3079,
- "aliases": [
-  "MEN1",
-  "MEN2",
-  "MEN syndromes"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.3079",
-  "clinicalPearls": [
-   "MEN1 is characterized primarily by the triad of parathyroid, pancreatic islet, and pituitary tumors (the '3 Ps'); it is an autosomal dominant syndrome (Harrison 22e p.3079, ch.392/ch.388).",
-   "MEN2 predisposes to medullary thyroid carcinoma (MTC), pheochromocytoma, and hyperparathyroidism (Harrison 22e p.3079).",
-   "There are three familial forms of MTC: MEN 2A, MEN 2B, and familial MTC without other features of MEN; MTC is more aggressive in MEN 2B than in MEN 2A, and familial MTC is more aggressive than sporadic MTC (Harrison 22e p.3079, ch.397).",
-   "MEN1 is caused by inactivating germline mutations of the MEN1 (menin) tumor-suppressor gene on chromosome 11q13; about half of affected patients develop prolactinomas, while acromegaly and Cushing's disease are less common (Harrison 22e p.3079, ch.392).",
-   "MEN2 is caused by activating point mutations of the RET protooncogene (a receptor tyrosine kinase) in a single allele, in contrast to the tumor-suppressor loss-of-function mechanism of MEN1 (Harrison 22e p.3079).",
-   "Early genetic screening for RET mutations identifies individuals at risk for MEN2 who may benefit from prophylactic thyroidectomy and biochemical screening for pheochromocytoma and hyperparathyroidism (Harrison 22e p.3079).",
-   "All patients with MTC should be tested for RET mutations, because genetic counseling and cascade testing of family members can then be offered to those who test positive (Harrison 22e p.3079, ch.397)."
+  "id": "multiple_endocrine_neoplasia",
+  "name": "Multiple Endocrine Neoplasia (MEN)",
+  "system": "Endocrine",
+  "class": "non_infective",
+  "chapter": 400,
+  "page": 3079,
+  "aliases": [
+    "MEN1",
+    "MEN2",
+    "MEN syndromes"
   ],
-  "pathophysiology": "MEN1 follows the two-hit tumor-suppressor paradigm: the affected individual inherits a mutant copy of the MEN1 gene (menin, chromosome 11q13), and tumorigenesis follows a somatic 'second hit' (deletion or point mutation) that inactivates the remaining normal allele. In contrast, MEN2 is caused by activating point mutations in a single allele of the RET protooncogene, encoding a receptor tyrosine kinase; constitutive RET activity leads to thyroid C-cell hyperplasia in childhood that precedes the development of medullary thyroid carcinoma (Harrison 22e p.3079, ch.388/ch.397).",
-  "additionalDifferentials": [],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Other familial pituitary tumor / endocrine neoplasia syndromes: MEN 4 (CDKN1B mutation; hyperparathyroidism and pituitary adenomas), Carney complex (PRKAR1A; spotty skin pigmentation, myxomas, endocrine tumors), McCune-Albright syndrome, and familial isolated pituitary adenomas (AIP) (Harrison 22e p.3079, ch.392).",
-   "Other inherited predispositions to pheochromocytoma that overlap with MEN2: von Hippel-Lindau disease, neurofibromatosis, and hereditary paraganglioma syndromes (Harrison 22e p.3079, ch.247)."
-  ],
-  "additionalInvestigations": [
-   "Germline RET mutation testing in all patients with medullary thyroid carcinoma, with cascade screening of relatives (Harrison 22e p.3079, ch.397).",
-   "MEN1 (menin) gene testing in patients with the parathyroid/pancreatic-islet/pituitary tumor pattern or relevant family history (Harrison 22e p.3079, ch.392/ch.376).",
-   "Biochemical screening for pheochromocytoma and hyperparathyroidism in RET-mutation carriers identified as at risk for MEN2 (Harrison 22e p.3079)."
-  ],
-  "redFlags": [
-   "Exclude pheochromocytoma BEFORE any surgery: prior to surgery, pheochromocytoma should be excluded in all patients with a RET mutation (failure to do so risks an intraoperative hypertensive crisis) (Harrison 22e p.3079, ch.397).",
-   "MTC in the context of MEN 2B carries a more aggressive course than MEN 2A and warrants early/prophylactic intervention (Harrison 22e p.3079, ch.397)."
-  ],
-  "prognosis": "Prognosis is driven by the component tumors and genotype. MTC is more aggressive in MEN 2B than in MEN 2A, and familial MTC is more aggressive than sporadic MTC; early genetic identification permits prophylactic thyroidectomy before malignant transformation, improving outcome (Harrison 22e p.3079, ch.397).",
-  "pitfalls": [
-   "Proceeding to surgery (e.g., thyroidectomy or parathyroid surgery) without first excluding an unsuspected pheochromocytoma in a RET-mutation carrier (Harrison 22e p.3079, ch.397).",
-   "Failing to perform RET testing in all MTC patients and thereby missing cascade screening opportunities for at-risk family members (Harrison 22e p.3079, ch.397)."
-  ],
-  "severityClassification": "",
-  "references": [
-   "Harrison 22e p.3079"
-  ],
-  "crossLinks": [
-   "pheo",
-   "thyroid_cancer"
-  ],
-  "management": [
-   "Genotype-directed prophylactic total thyroidectomy in RET-mutation carriers, with total thyroidectomy and central neck dissection for established medullary thyroid carcinoma and tyrosine-kinase inhibitors such as vandetanib or cabozantinib for advanced disease",
-   "Exclude and treat phaeochromocytoma before any surgery, using alpha- then beta-adrenergic blockade followed by adrenalectomy",
-   "In MEN1, parathyroidectomy for hyperparathyroidism, proton-pump inhibitors for gastrinoma-driven Zollinger-Ellison syndrome, and surgical or medical treatment of pancreatic neuroendocrine and pituitary tumours including dopamine agonists for prolactinoma",
-   "Germline RET or MEN1 mutation testing of the index case with cascade genetic screening of at-risk relatives",
-   "Lifelong biochemical and imaging surveillance for the syndrome's component tumours",
-   "Genetic counselling for these autosomal dominant conditions",
-   "Coordinated multidisciplinary endocrine, surgical and oncological care"
-  ]
- },
- "algorithms": [
-  {
-   "id": "multiple_endocrine_neoplasia-pathway",
-   "title": "Multiple Endocrine Neoplasia (MEN): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "MEN1 is characterized primarily by the triad of parathyroid, pancreatic islet, and pituitary tumors (the '3 Ps'); it is an autosomal dominant syndrome (Harrison 22e p.3079, ch.392/ch.388).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Exclude pheochromocytoma BEFORE any surgery: prior to surgery, pheochromocytoma should be excluded in all patients with a RET mutation (failure to do so risks an intraoperative hypertensive crisis) (Harrison",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Germline RET mutation testing in all patients with medullary thyroid carcinoma, with cascade screening of relatives (Harrison 22e p.3079, ch.397)., MEN1 (menin) gene testing in patients with the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Genotype-directed prophylactic total thyroidectomy in RET-mutation carriers, with total thyroidectomy and central neck dissection for established medullary thyroid carcinoma and tyrosine-kinase inhibitors such as"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Proceeding to surgery (e.g., thyroidectomy or parathyroid surgery) without first excluding an unsuspected pheochromocytoma in a RET-mutation carrier (Harrison 22e p.3079, ch.397)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of multiple endocrine neoplasia (men)."
-  }
- ],
- "tables": [
-  {
-   "id": "multiple_endocrine_neoplasia-matrix",
-   "title": "Multiple Endocrine Neoplasia (MEN): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "MEN1 is characterized primarily by the triad of parathyroid, pancreatic islet, and pituitary tumors (the '3 Ps'); it is an",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.3079",
+    "clinicalPearls": [
+      "MEN1 is characterized primarily by the triad of parathyroid, pancreatic islet, and pituitary tumors (the '3 Ps'); it is an autosomal dominant syndrome (Harrison 22e p.3079, ch.392/ch.388).",
+      "MEN2 predisposes to medullary thyroid carcinoma (MTC), pheochromocytoma, and hyperparathyroidism (Harrison 22e p.3079).",
+      "There are three familial forms of MTC: MEN 2A, MEN 2B, and familial MTC without other features of MEN; MTC is more aggressive in MEN 2B than in MEN 2A, and familial MTC is more aggressive than sporadic MTC (Harrison 22e p.3079, ch.397).",
+      "MEN1 is caused by inactivating germline mutations of the MEN1 (menin) tumor-suppressor gene on chromosome 11q13; about half of affected patients develop prolactinomas, while acromegaly and Cushing's disease are less common (Harrison 22e p.3079, ch.392).",
+      "MEN2 is caused by activating point mutations of the RET protooncogene (a receptor tyrosine kinase) in a single allele, in contrast to the tumor-suppressor loss-of-function mechanism of MEN1 (Harrison 22e p.3079).",
+      "Early genetic screening for RET mutations identifies individuals at risk for MEN2 who may benefit from prophylactic thyroidectomy and biochemical screening for pheochromocytoma and hyperparathyroidism (Harrison 22e p.3079).",
+      "All patients with MTC should be tested for RET mutations, because genetic counseling and cascade testing of family members can then be offered to those who test positive (Harrison 22e p.3079, ch.397)."
     ],
-    [
-     "Key Investigations",
-     "Germline RET mutation testing in all patients with medullary thyroid carcinoma, with cascade screening of relatives (Harrison 22e",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MEN1 follows the two-hit tumor-suppressor paradigm: the affected individual inherits a mutant copy of the MEN1 gene (menin, chromosome 11q13), and tumorigenesis follows a somatic 'second hit' (deletion or point mutation) that inactivates the remaining normal allele. In contrast, MEN2 is caused by activating point mutations in a single allele of the RET protooncogene, encoding a receptor tyrosine kinase; constitutive RET activity leads to thyroid C-cell hyperplasia in childhood that precedes the development of medullary thyroid carcinoma (Harrison 22e p.3079, ch.388/ch.397).",
+    "additionalDifferentials": [],
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Other familial pituitary tumor / endocrine neoplasia syndromes: MEN 4 (CDKN1B mutation; hyperparathyroidism and pituitary adenomas), Carney complex (PRKAR1A; spotty skin pigmentation, myxomas, endocrine tumors), McCune-Albright syndrome, and familial isolated pituitary adenomas (AIP) (Harrison 22e p.3079, ch.392).",
+      "Other inherited predispositions to pheochromocytoma that overlap with MEN2: von Hippel-Lindau disease, neurofibromatosis, and hereditary paraganglioma syndromes (Harrison 22e p.3079, ch.247)."
     ],
-    [
-     "Primary Differentials",
-     "Alternative etiologies and clinical mimics",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Germline RET mutation testing in all patients with medullary thyroid carcinoma, with cascade screening of relatives (Harrison 22e p.3079, ch.397).",
+      "MEN1 (menin) gene testing in patients with the parathyroid/pancreatic-islet/pituitary tumor pattern or relevant family history (Harrison 22e p.3079, ch.392/ch.376).",
+      "Biochemical screening for pheochromocytoma and hyperparathyroidism in RET-mutation carriers identified as at risk for MEN2 (Harrison 22e p.3079)."
     ],
-    [
-     "Management Strategy",
-     "Genotype-directed prophylactic total thyroidectomy in RET-mutation carriers, with total thyroidectomy and central neck dissection",
-     "Core treatment modality"
+    "redFlags": [
+      "Exclude pheochromocytoma BEFORE any surgery: prior to surgery, pheochromocytoma should be excluded in all patients with a RET mutation (failure to do so risks an intraoperative hypertensive crisis) (Harrison 22e p.3079, ch.397).",
+      "MTC in the context of MEN 2B carries a more aggressive course than MEN 2A and warrants early/prophylactic intervention (Harrison 22e p.3079, ch.397)."
     ],
-    [
-     "Clinical Pitfall",
-     "Proceeding to surgery (e.g., thyroidectomy or parathyroid surgery) without first excluding an unsuspected pheochromocytoma in a",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is driven by the component tumors and genotype. MTC is more aggressive in MEN 2B than in MEN 2A, and familial MTC is more aggressive than sporadic MTC; early genetic identification permits prophylactic thyroidectomy before malignant transformation, improving outcome (Harrison 22e p.3079, ch.397).",
+    "pitfalls": [
+      "Proceeding to surgery (e.g., thyroidectomy or parathyroid surgery) without first excluding an unsuspected pheochromocytoma in a RET-mutation carrier (Harrison 22e p.3079, ch.397).",
+      "Failing to perform RET testing in all MTC patients and thereby missing cascade screening opportunities for at-risk family members (Harrison 22e p.3079, ch.397)."
+    ],
+    "severityClassification": "",
+    "references": [
+      "Harrison 22e p.3079"
+    ],
+    "crossLinks": [
+      "pheo",
+      "thyroid_cancer"
+    ],
+    "management": [
+      "Genotype-directed prophylactic total thyroidectomy in RET-mutation carriers, with total thyroidectomy and central neck dissection for established medullary thyroid carcinoma and tyrosine-kinase inhibitors such as vandetanib or cabozantinib for advanced disease",
+      "Exclude and treat phaeochromocytoma before any surgery, using alpha- then beta-adrenergic blockade followed by adrenalectomy",
+      "In MEN1, parathyroidectomy for hyperparathyroidism, proton-pump inhibitors for gastrinoma-driven Zollinger-Ellison syndrome, and surgical or medical treatment of pancreatic neuroendocrine and pituitary tumours including dopamine agonists for prolactinoma",
+      "Germline RET or MEN1 mutation testing of the index case with cascade genetic screening of at-risk relatives",
+      "Lifelong biochemical and imaging surveillance for the syndrome's component tumours",
+      "Genetic counselling for these autosomal dominant conditions",
+      "Coordinated multidisciplinary endocrine, surgical and oncological care"
     ]
-   ],
-   "caption": "Overview comparison matrix for multiple endocrine neoplasia (men)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "multiple-endocrine-neoplasia-real-image",
-   "title": "Multiple Endocrine Neoplasia (MEN): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "multiple_endocrine_neoplasia-pathway",
+      "title": "Multiple Endocrine Neoplasia (MEN): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "MEN1 is characterized primarily by the triad of parathyroid, pancreatic islet, and pituitary tumors (the '3 Ps'); it is an autosomal dominant syndrome (Harrison 22e p.3079, ch.392/ch.388).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Exclude pheochromocytoma BEFORE any surgery: prior to surgery, pheochromocytoma should be excluded in all patients with a RET mutation (failure to do so risks an intraoperative hypertensive crisis) (Harrison",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Germline RET mutation testing in all patients with medullary thyroid carcinoma, with cascade screening of relatives (Harrison 22e p.3079, ch.397)., MEN1 (menin) gene testing in patients with the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Genotype-directed prophylactic total thyroidectomy in RET-mutation carriers, with total thyroidectomy and central neck dissection for established medullary thyroid carcinoma and tyrosine-kinase inhibitors such as"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Proceeding to surgery (e.g., thyroidectomy or parathyroid surgery) without first excluding an unsuspected pheochromocytoma in a RET-mutation carrier (Harrison 22e p.3079, ch.397)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of multiple endocrine neoplasia (men)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "multiple_endocrine_neoplasia-matrix",
+      "title": "Multiple Endocrine Neoplasia (MEN): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "MEN1 is characterized primarily by the triad of parathyroid, pancreatic islet, and pituitary tumors (the '3 Ps'); it is an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Germline RET mutation testing in all patients with medullary thyroid carcinoma, with cascade screening of relatives (Harrison 22e",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alternative etiologies and clinical mimics",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Genotype-directed prophylactic total thyroidectomy in RET-mutation carriers, with total thyroidectomy and central neck dissection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Proceeding to surgery (e.g., thyroidectomy or parathyroid surgery) without first excluding an unsuspected pheochromocytoma in a",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for multiple endocrine neoplasia (men)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Multiple Endocrine Neoplasia Type 2A (MEN 2A)",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/oncology/multiple-endocrine-neoplasia-men-syndromes/multiple-endocrine-neoplasia-type-2a-men-2a"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multiple_endocrine_neoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic features of MEN syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "MEN1 components",
+          "cells": [
+            {
+              "text": "Parathyroid, pancreatic islet and pituitary tumours (3 Ps)"
+            },
+            {
+              "text": "Autosomal dominant; MEN1 (menin) on 11q13"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEN1 pituitary",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Prolactinoma in about half",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Acromegaly and Cushing less common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEN2A: medullary thyroid carcinoma",
+          "cells": [
+            {
+              "text": "Almost all patients"
+            },
+            {
+              "text": "Serum calcitonin for diagnosis and follow-up"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MEN2A: phaeochromocytoma",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "40 to 50% of a kindred",
+              "range": [
+                40,
+                50
+              ]
+            },
+            {
+              "text": "Plasma free metanephrines; often bilateral"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MEN2A: hyperparathyroidism",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10 to 20%",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "Calcium, PTH, 24-h urine calcium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MEN2A: Hirschsprung disease",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "2 to 5%",
+              "range": [
+                2,
+                5
+              ]
+            },
+            {
+              "text": "Associated RET variant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RET testing",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in up to about 7% of apparently sporadic MTC",
+              "op": "=",
+              "value": 7
+            },
+            {
+              "text": "{{hy:Test every patient with MTC}}; cascade test relatives"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MEN2B",
+          "cells": [
+            {
+              "text": "MTC more aggressive than MEN2A"
+            },
+            {
+              "text": "Early prophylactic surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening start",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Age 11 for high-risk RET; 16 for moderate-risk",
+              "range": [
+                11,
+                16
+              ]
+            },
+            {
+              "text": "Annual calcium and phaeochromocytoma screen"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "multiple_endocrine_neoplasia-ddx",
+      "kind": "ddx",
+      "title": "Syndromes that overlap with MEN",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "MEN4",
+          "cells": [
+            {
+              "text": "Hyperparathyroidism and pituitary adenoma without menin mutation"
+            },
+            {
+              "text": "CDKN1B testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex",
+          "cells": [
+            {
+              "text": "Spotty pigmentation, myxomas, endocrine tumours"
+            },
+            {
+              "text": "PRKAR1A testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "McCune-Albright syndrome",
+          "cells": [
+            {
+              "text": "Cafe-au-lait spots, fibrous dysplasia, precocious puberty"
+            },
+            {
+              "text": "Clinical; GNAS testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial isolated pituitary adenoma",
+          "cells": [
+            {
+              "text": "Pituitary tumours only"
+            },
+            {
+              "text": "AIP testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Hippel-Lindau disease",
+          "cells": [
+            {
+              "text": "Phaeochromocytoma with haemangioblastoma, renal cancer"
+            },
+            {
+              "text": "VHL testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurofibromatosis type 1",
+          "cells": [
+            {
+              "text": "Phaeochromocytoma with neurofibromas, cafe-au-lait spots"
+            },
+            {
+              "text": "Clinical criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary paraganglioma",
+          "cells": [
+            {
+              "text": "Extra-adrenal paragangliomas"
+            },
+            {
+              "text": "SDH gene testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_endocrine_neoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management of MEN syndromes",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude phaeochromocytoma first",
+          "cells": [
+            {
+              "text": "{{hy:Every RET carrier before any surgery}}"
+            },
+            {
+              "text": "Remove it first, after alpha blockade (phenoxybenzamine, doxazosin or prazosin)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prophylactic thyroidectomy",
+          "cells": [
+            {
+              "text": "RET mutation carriers"
+            },
+            {
+              "text": "Timing by RET variant, as early as the first months of life"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total thyroidectomy with central neck dissection",
+          "cells": [
+            {
+              "text": "Established MTC"
+            },
+            {
+              "text": "TKI (vandetanib or cabozantinib) for advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroidectomy",
+          "cells": [
+            {
+              "text": "Hyperparathyroidism in MEN1 or MEN2A"
+            },
+            {
+              "text": "Calcium and PTH follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "Gastrinoma with Zollinger-Ellison in MEN1"
+            },
+            {
+              "text": "Surgery or medical therapy for other islet tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopamine agonist",
+          "cells": [
+            {
+              "text": "Prolactinoma"
+            },
+            {
+              "text": "Other pituitary tumours by type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade testing",
+          "cells": [
+            {
+              "text": "All index cases"
+            },
+            {
+              "text": "Genetic testing has largely replaced biochemical screening for MTC"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Carriers"
+            },
+            {
+              "text": "Annual calcium and metanephrine screening"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multiple_endocrine_neoplasia-dx-mgmt",
+      "title": "Diagnosis and management of multiple endocrine neoplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "MTC, phaeochromocytoma, or two of parathyroid, pituitary, islet tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "MTC or phaeochromocytoma present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Germline RET testing",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MEN1 gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "RET mutation found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Consider VHL, NF1, paraganglioma genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Plasma metanephrines before any operation",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Phaeochromocytoma present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alpha blockade then adrenalectomy first",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thyroidectomy; parathyroid surgery if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cascade testing and lifelong surveillance",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "MEN1: treat each tumour; screen family",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

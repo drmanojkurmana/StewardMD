@@ -1,180 +1,498 @@
 {
- "id": "autoimmune_pancreatitis",
- "name": "Autoimmune pancreatitis (type 1 IgG4 / type 2)",
- "aliases": [
-  "AIP",
-  "IgG4-related pancreatitis",
-  "lymphoplasmacytic sclerosing pancreatitis",
-  "idiopathic duct-centric pancreatitis"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatobiliary",
- "specialty": "Hepatobiliary / Pancreatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Often presents with painless obstructive jaundice and a diffusely enlarged, sausage-shaped gland, closely mimicking pancreatic carcinoma",
-   "Cross-sectional imaging classically shows diffuse parenchymal swelling with a hypoattenuating rim or capsule-like halo and loss of the normal lobulated contour",
-   "Type 1 is the pancreatic manifestation of systemic IgG4-related disease, with raised serum IgG4 and frequent involvement of the biliary tree, salivary glands, kidneys, and retroperitoneum",
-   "Type 2 (idiopathic duct-centric pancreatitis) shows granulocytic epithelial lesions on histology, has normal IgG4, affects younger patients, and is associated with inflammatory bowel disease",
-   "A dramatic response to a corticosteroid trial supports the diagnosis, but malignancy must be reasonably excluded before treating",
-   "Diagnosis integrates imaging, serology, other organ involvement, histology, and steroid response (as in the HISORt and international consensus criteria)",
-   "Type 1 disease relapses commonly, whereas type 2 tends to follow a more benign, non-relapsing course",
-   "Management centres on corticosteroid induction, with immunomodulators or rituximab considered for relapsing or refractory type 1 disease"
+  "id": "autoimmune_pancreatitis",
+  "name": "Autoimmune pancreatitis (type 1 IgG4 / type 2)",
+  "aliases": [
+    "AIP",
+    "IgG4-related pancreatitis",
+    "lymphoplasmacytic sclerosing pancreatitis",
+    "idiopathic duct-centric pancreatitis"
   ],
-  "pathophysiology": "Autoimmune pancreatitis is a corticosteroid-responsive fibroinflammatory disorder of the pancreas. In type 1 disease the pancreas is one target organ of systemic IgG4-related disease, in which an aberrant immune response drives infiltration by IgG4-positive plasma cells and lymphocytes, storiform fibrosis, and obliterative phlebitis, producing diffuse glandular swelling and a peripheral rim of oedema and fibrosis. Type 2 disease is confined to the pancreas and is characterised histologically by neutrophilic infiltration of the duct epithelium (granulocytic epithelial lesions) without the raised IgG4 or multi-organ features of type 1. Both forms compress the pancreatic and intrapancreatic bile ducts, causing strictures, obstructive jaundice, and secondary exocrine impairment, and both typically regress with immunosuppression.",
-  "additionalDifferentials": [
-   "Pancreatic ductal adenocarcinoma",
-   "Primary sclerosing cholangitis with a dominant stricture",
-   "Cholangiocarcinoma",
-   "Chronic alcohol-related or obstructive pancreatitis",
-   "Pancreatic lymphoma",
-   "Groove (paraduodenal) pancreatitis"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT or MRI with MRCP to assess parenchymal swelling, the capsule-like rim, and duct strictures",
-   "Serum IgG4 and total IgG with subclass analysis",
-   "Endoscopic ultrasound with core or fine-needle biopsy for histology when malignancy is a concern",
-   "Assessment for other organ involvement (biliary, salivary, renal, retroperitoneal)",
-   "Serum CA 19-9 to help weigh the likelihood of adenocarcinoma",
-   "Documentation of response to a defined corticosteroid trial",
-   "Faecal elastase to gauge exocrine insufficiency"
-  ],
-  "redFlags": [
-   "A discrete focal mass, upstream duct dilatation, or vascular encasement suggesting carcinoma rather than autoimmune pancreatitis",
-   "Markedly elevated CA 19-9 or progressive weight loss",
-   "Failure to respond to an adequate corticosteroid trial",
-   "New or worsening jaundice during treatment",
-   "Development of a dominant biliary stricture raising concern for cholangiocarcinoma"
-  ],
-  "prognosis": "Both subtypes usually respond promptly and completely to corticosteroids, with resolution of jaundice and normalisation of gland size; type 1 disease relapses in a substantial proportion of patients and may need maintenance immunosuppression, whereas type 2 rarely relapses. Long-standing or recurrent disease can lead to pancreatic atrophy with exocrine and endocrine insufficiency.",
-  "pitfalls": [
-   "Misdiagnosing a focal mass-forming case as adenocarcinoma, or vice versa, leading to unnecessary resection or delayed cancer treatment",
-   "Treating with steroids before reasonably excluding malignancy",
-   "Relying on a normal serum IgG4, which does not exclude the diagnosis and may be normal in type 2 disease",
-   "Overlooking associated biliary, renal, or salivary involvement that supports systemic IgG4-related disease",
-   "Failing to monitor type 1 patients for relapse after tapering therapy"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "International Consensus Diagnostic Criteria for Autoimmune Pancreatitis",
-   "Yao and Zen, IgG4-related disease reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Corticosteroid induction as the definitive therapy, to which both type 1 and type 2 disease usually respond promptly",
-   "For type 1 relapse or corticosteroid dependence, maintenance immunosuppression with rituximab or steroid-sparing agents such as azathioprine",
-   "Reasonably exclude pancreatic malignancy before committing to immunosuppression",
-   "Endoscopic biliary stenting to decompress obstructive jaundice from duct strictures",
-   "Manage secondary exocrine insufficiency with pancreatic enzyme replacement and treat pancreatogenic diabetes with insulin",
-   "Monitoring for relapse, especially in type 1 disease, with symptoms, serum IgG4 and imaging",
-   "Assess and treat other organ involvement in IgG4-related disease (type 1) and coexisting inflammatory bowel disease (type 2)",
-   "Multidisciplinary hepatobiliary, pancreatology and radiology care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "autoimmune_pancreatitis-pathway",
-   "title": "Autoimmune pancreatitis (type 1 IgG4 / type 2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Often presents with painless obstructive jaundice and a diffusely enlarged, sausage-shaped gland, closely mimicking pancreatic carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A discrete focal mass, upstream duct dilatation, or vascular encasement suggesting carcinoma rather than autoimmune pancreatitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT or MRI with MRCP to assess parenchymal swelling, the capsule-like rim, and duct strictures, Serum IgG4 and total IgG with subclass analysis, Endoscopic ultrasound with core or fine-needle biopsy for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Corticosteroid induction as the definitive therapy, to which both type 1 and type 2 disease usually respond promptly"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing a focal mass-forming case as adenocarcinoma, or vice versa, leading to unnecessary resection or delayed cancer treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autoimmune pancreatitis (type 1 igg4 / type 2)."
-  }
- ],
- "tables": [
-  {
-   "id": "autoimmune_pancreatitis-matrix",
-   "title": "Autoimmune pancreatitis (type 1 IgG4 / type 2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Often presents with painless obstructive jaundice and a diffusely enlarged, sausage-shaped gland, closely mimicking pancreatic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatobiliary",
+  "specialty": "Hepatobiliary / Pancreatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Often presents with painless obstructive jaundice and a diffusely enlarged, sausage-shaped gland, closely mimicking pancreatic carcinoma",
+      "Cross-sectional imaging classically shows diffuse parenchymal swelling with a hypoattenuating rim or capsule-like halo and loss of the normal lobulated contour",
+      "Type 1 is the pancreatic manifestation of systemic IgG4-related disease, with raised serum IgG4 and frequent involvement of the biliary tree, salivary glands, kidneys, and retroperitoneum",
+      "Type 2 (idiopathic duct-centric pancreatitis) shows granulocytic epithelial lesions on histology, has normal IgG4, affects younger patients, and is associated with inflammatory bowel disease",
+      "A dramatic response to a corticosteroid trial supports the diagnosis, but malignancy must be reasonably excluded before treating",
+      "Diagnosis integrates imaging, serology, other organ involvement, histology, and steroid response (as in the HISORt and international consensus criteria)",
+      "Type 1 disease relapses commonly, whereas type 2 tends to follow a more benign, non-relapsing course",
+      "Management centres on corticosteroid induction, with immunomodulators or rituximab considered for relapsing or refractory type 1 disease"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT or MRI with MRCP to assess parenchymal swelling, the capsule-like rim, and duct strictures, Serum IgG4 and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Autoimmune pancreatitis is a corticosteroid-responsive fibroinflammatory disorder of the pancreas. In type 1 disease the pancreas is one target organ of systemic IgG4-related disease, in which an aberrant immune response drives infiltration by IgG4-positive plasma cells and lymphocytes, storiform fibrosis, and obliterative phlebitis, producing diffuse glandular swelling and a peripheral rim of oedema and fibrosis. Type 2 disease is confined to the pancreas and is characterised histologically by neutrophilic infiltration of the duct epithelium (granulocytic epithelial lesions) without the raised IgG4 or multi-organ features of type 1. Both forms compress the pancreatic and intrapancreatic bile ducts, causing strictures, obstructive jaundice, and secondary exocrine impairment, and both typically regress with immunosuppression.",
+    "additionalDifferentials": [
+      "Pancreatic ductal adenocarcinoma",
+      "Primary sclerosing cholangitis with a dominant stricture",
+      "Cholangiocarcinoma",
+      "Chronic alcohol-related or obstructive pancreatitis",
+      "Pancreatic lymphoma",
+      "Groove (paraduodenal) pancreatitis"
     ],
-    [
-     "Primary Differentials",
-     "Pancreatic ductal adenocarcinoma, Primary sclerosing cholangitis with a dominant stricture, Cholangiocarcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT or MRI with MRCP to assess parenchymal swelling, the capsule-like rim, and duct strictures",
+      "Serum IgG4 and total IgG with subclass analysis",
+      "Endoscopic ultrasound with core or fine-needle biopsy for histology when malignancy is a concern",
+      "Assessment for other organ involvement (biliary, salivary, renal, retroperitoneal)",
+      "Serum CA 19-9 to help weigh the likelihood of adenocarcinoma",
+      "Documentation of response to a defined corticosteroid trial",
+      "Faecal elastase to gauge exocrine insufficiency"
     ],
-    [
-     "Management Strategy",
-     "Corticosteroid induction as the definitive therapy, to which both type 1 and type 2 disease usually respond promptly",
-     "Core treatment modality"
+    "redFlags": [
+      "A discrete focal mass, upstream duct dilatation, or vascular encasement suggesting carcinoma rather than autoimmune pancreatitis",
+      "Markedly elevated CA 19-9 or progressive weight loss",
+      "Failure to respond to an adequate corticosteroid trial",
+      "New or worsening jaundice during treatment",
+      "Development of a dominant biliary stricture raising concern for cholangiocarcinoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing a focal mass-forming case as adenocarcinoma, or vice versa, leading to unnecessary resection or delayed cancer",
-     "Prevent diagnostic or management error"
+    "prognosis": "Both subtypes usually respond promptly and completely to corticosteroids, with resolution of jaundice and normalisation of gland size; type 1 disease relapses in a substantial proportion of patients and may need maintenance immunosuppression, whereas type 2 rarely relapses. Long-standing or recurrent disease can lead to pancreatic atrophy with exocrine and endocrine insufficiency.",
+    "pitfalls": [
+      "Misdiagnosing a focal mass-forming case as adenocarcinoma, or vice versa, leading to unnecessary resection or delayed cancer treatment",
+      "Treating with steroids before reasonably excluding malignancy",
+      "Relying on a normal serum IgG4, which does not exclude the diagnosis and may be normal in type 2 disease",
+      "Overlooking associated biliary, renal, or salivary involvement that supports systemic IgG4-related disease",
+      "Failing to monitor type 1 patients for relapse after tapering therapy"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "International Consensus Diagnostic Criteria for Autoimmune Pancreatitis",
+      "Yao and Zen, IgG4-related disease reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Corticosteroid induction as the definitive therapy, to which both type 1 and type 2 disease usually respond promptly",
+      "For type 1 relapse or corticosteroid dependence, maintenance immunosuppression with rituximab or steroid-sparing agents such as azathioprine",
+      "Reasonably exclude pancreatic malignancy before committing to immunosuppression",
+      "Endoscopic biliary stenting to decompress obstructive jaundice from duct strictures",
+      "Manage secondary exocrine insufficiency with pancreatic enzyme replacement and treat pancreatogenic diabetes with insulin",
+      "Monitoring for relapse, especially in type 1 disease, with symptoms, serum IgG4 and imaging",
+      "Assess and treat other organ involvement in IgG4-related disease (type 1) and coexisting inflammatory bowel disease (type 2)",
+      "Multidisciplinary hepatobiliary, pancreatology and radiology care"
     ]
-   ],
-   "caption": "Overview comparison matrix for autoimmune pancreatitis (type 1 igg4 / type 2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "autoimmune-pancreatitis-real-image",
-   "title": "Autoimmune pancreatitis (type 1 IgG4 / type 2): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "autoimmune_pancreatitis-pathway",
+      "title": "Autoimmune pancreatitis (type 1 IgG4 / type 2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Often presents with painless obstructive jaundice and a diffusely enlarged, sausage-shaped gland, closely mimicking pancreatic carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A discrete focal mass, upstream duct dilatation, or vascular encasement suggesting carcinoma rather than autoimmune pancreatitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT or MRI with MRCP to assess parenchymal swelling, the capsule-like rim, and duct strictures, Serum IgG4 and total IgG with subclass analysis, Endoscopic ultrasound with core or fine-needle biopsy for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Corticosteroid induction as the definitive therapy, to which both type 1 and type 2 disease usually respond promptly"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing a focal mass-forming case as adenocarcinoma, or vice versa, leading to unnecessary resection or delayed cancer treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autoimmune pancreatitis (type 1 igg4 / type 2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "autoimmune_pancreatitis-matrix",
+      "title": "Autoimmune pancreatitis (type 1 IgG4 / type 2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Often presents with painless obstructive jaundice and a diffusely enlarged, sausage-shaped gland, closely mimicking pancreatic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT or MRI with MRCP to assess parenchymal swelling, the capsule-like rim, and duct strictures, Serum IgG4 and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pancreatic ductal adenocarcinoma, Primary sclerosing cholangitis with a dominant stricture, Cholangiocarcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Corticosteroid induction as the definitive therapy, to which both type 1 and type 2 disease usually respond promptly",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing a focal mass-forming case as adenocarcinoma, or vice versa, leading to unnecessary resection or delayed cancer",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autoimmune pancreatitis (type 1 igg4 / type 2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autoimmune_pancreatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT or MRI with MRCP",
+          "cells": [
+            {
+              "text": "Parenchymal swelling, capsule-like rim and duct strictures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgG4 and total IgG with subclass analysis",
+          "cells": [
+            {
+              "text": "IgG4 levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound with core or fine-needle biopsy",
+          "cells": [
+            {
+              "text": "Histology when malignancy is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for other organ involvement",
+          "cells": [
+            {
+              "text": "Biliary, salivary, renal and retroperitoneal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CA 19-9",
+          "cells": [
+            {
+              "text": "Weighs the likelihood of adenocarcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documented response to a defined corticosteroid trial",
+          "cells": [
+            {
+              "text": "Response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal elastase",
+          "cells": [
+            {
+              "text": "Exocrine insufficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_pancreatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pancreatic ductal adenocarcinoma",
+          "cells": [
+            {
+              "text": "A discrete focal mass or upstream duct dilatation suggests carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholangiocarcinoma",
+          "cells": [
+            {
+              "text": "Vascular encasement or a focal mass suggests carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_pancreatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroid induction",
+          "cells": [
+            {
+              "text": "Definitive therapy; type 1 and type 2 usually respond promptly"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance immunosuppression for type 1 relapse",
+          "cells": [
+            {
+              "text": "Rituximab or azathioprine"
+            },
+            {
+              "text": "Relapse or corticosteroid dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude pancreatic malignancy first",
+          "cells": [
+            {
+              "text": "Reasonably exclude malignancy before committing to immunosuppression"
+            },
+            {
+              "text": "Before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic biliary stenting",
+          "cells": [
+            {
+              "text": "Decompresses obstructive jaundice from duct strictures"
+            },
+            {
+              "text": "Obstructive jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exocrine and endocrine care",
+          "cells": [
+            {
+              "text": "Pancreatic enzyme replacement; insulin for pancreatogenic diabetes"
+            },
+            {
+              "text": "Secondary insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse monitoring",
+          "cells": [
+            {
+              "text": "Symptoms, serum IgG4 and imaging, especially in type 1 disease"
+            },
+            {
+              "text": "Relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other organ and bowel disease",
+          "cells": [
+            {
+              "text": "IgG4-related disease (type 1) and coexisting IBD (type 2)"
+            },
+            {
+              "text": "Associated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autoimmune_pancreatitis-dx-mgmt",
+      "title": "Diagnosis and management of Autoimmune pancreatitis (type 1 IgG4 / type 2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pancreatic swelling with duct strictures and possible obstructive jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Discrete mass, upstream duct dilatation or vascular encasement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent EUS-guided biopsy and exclusion of cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI with MRCP, IgG4, EUS biopsy, CA 19-9, faecal elastase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Histology or steroid response confirms autoimmune pancreatitis without carcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroid induction as definitive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and treat any malignancy found",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rituximab or azathioprine for type 1 relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic biliary stenting for obstructive jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pancreatic enzymes and insulin for secondary complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Relapse monitoring with IgG4, symptoms and imaging",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,754 @@
 {
- "id": "spinocerebellar_ataxia",
- "name": "Spinocerebellar ataxia",
- "aliases": [
-  "SCA",
-  "autosomal dominant cerebellar ataxia",
-  "ADCA"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A genetically heterogeneous group of dominantly inherited progressive ataxias, numbered by locus (for example SCA1, SCA2, SCA3, SCA6, SCA7)",
-   "Many of the common subtypes are caused by expanded CAG trinucleotide repeats encoding polyglutamine tracts, and repeat length often correlates inversely with age at onset",
-   "Anticipation, with earlier onset and greater severity in successive generations, is a feature of the repeat-expansion subtypes",
-   "Core features are progressive gait and limb ataxia, dysarthria, and abnormal eye movements, with additional signs varying by subtype",
-   "SCA3 (Machado-Joseph disease) is among the most common worldwide and can include parkinsonism, neuropathy, and prominent eye-movement abnormalities",
-   "SCA7 is distinctive for associated pigmentary retinopathy and progressive visual loss, and SCA6 tends to be a relatively pure, later-onset cerebellar syndrome",
-   "Diagnosis combines family history, clinical phenotype, and targeted or panel genetic testing for repeat expansions and other mutations",
-   "Management is largely supportive, addressing gait safety, speech and swallowing, and associated features, since disease-modifying therapy is limited"
+  "id": "spinocerebellar_ataxia",
+  "name": "Spinocerebellar ataxia",
+  "aliases": [
+    "SCA",
+    "autosomal dominant cerebellar ataxia",
+    "ADCA"
   ],
-  "pathophysiology": "The spinocerebellar ataxias comprise many distinct genetic disorders that share progressive degeneration of the cerebellum and its connections, often extending to the brainstem, spinal cord, and other structures. In the common polyglutamine subtypes, expanded CAG repeats produce abnormal proteins that misfold, aggregate, and cause neuronal dysfunction and loss, with a threshold repeat length determining disease and longer expansions producing earlier, more severe disease. Other subtypes arise from noncoding repeat expansions or conventional mutations affecting ion channels or other neuronal proteins, giving overlapping but distinguishable phenotypes.",
-  "additionalDifferentials": [
-   "Autosomal recessive ataxias including Friedreich ataxia",
-   "Acquired cerebellar ataxias (alcohol, paraneoplastic, immune-mediated, toxic)",
-   "Multiple system atrophy, cerebellar type",
-   "Episodic ataxias and other channelopathies",
-   "Fragile X-associated tremor/ataxia syndrome",
-   "Structural and vascular cerebellar lesions"
-  ],
-  "additionalInvestigations": [
-   "Targeted or panel genetic testing for repeat expansions and point mutations",
-   "Brain MRI to assess cerebellar and brainstem atrophy",
-   "Detailed family history and pedigree analysis",
-   "Ophthalmological review where retinopathy is suspected (as in SCA7)",
-   "Nerve conduction studies when peripheral neuropathy features are present",
-   "Exclusion of acquired and treatable causes of ataxia"
-  ],
-  "redFlags": [
-   "Rapid progression raising concern for an acquired or paraneoplastic cause rather than a hereditary ataxia",
-   "Progressive dysphagia with aspiration risk",
-   "Falls with injury from worsening gait ataxia",
-   "Visual loss suggesting retinal involvement in relevant subtypes"
-  ],
-  "prognosis": "Most subtypes are slowly progressive over years to decades with gradual loss of independent mobility and speech; life expectancy is often reduced in more severe subtypes, largely through complications such as aspiration, while relatively pure subtypes may follow a more benign course.",
-  "pitfalls": [
-   "Assuming all cerebellar ataxia is hereditary and overlooking treatable acquired causes",
-   "Not recognising anticipation and the significance of family history across generations",
-   "Missing subtype-specific features such as retinopathy in SCA7",
-   "Ordering untargeted testing without a clinical and pedigree-guided strategy"
-  ],
-  "references": [
-   "Bradley's Neurology in Clinical Practice",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide symptomatic and supportive care coordinated through a specialist ataxia service, as no disease-modifying therapy exists",
-   "Maximise function and safety with physiotherapy, occupational therapy, balance and gait training, and mobility aids to reduce falls",
-   "Offer speech and language therapy for dysarthria and swallow assessment with diet modification or gastrostomy where aspiration risk develops",
-   "Treat associated features symptomatically, including spasticity, tremor, parkinsonism, neuropathic pain and depression",
-   "Manage subtype-specific complications such as retinal surveillance in SCA7 and seizure control where relevant",
-   "Monitor progression with standardised ataxia rating scales and surveil for aspiration and respiratory complications",
-   "Offer genetic counselling for autosomal dominant inheritance, discussing anticipation and predictive or cascade testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia-pathway",
-   "title": "Spinocerebellar ataxia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A genetically heterogeneous group of dominantly inherited progressive ataxias, numbered by locus (for example SCA1, SCA2, SCA3, SCA6, SCA7)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid progression raising concern for an acquired or paraneoplastic cause rather than a hereditary ataxia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted or panel genetic testing for repeat expansions and point mutations, Brain MRI to assess cerebellar and brainstem atrophy, Detailed family history and pedigree analysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide symptomatic and supportive care coordinated through a specialist ataxia service, as no disease-modifying therapy exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all cerebellar ataxia is hereditary and overlooking treatable acquired causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia-matrix",
-   "title": "Spinocerebellar ataxia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A genetically heterogeneous group of dominantly inherited progressive ataxias, numbered by locus (for example SCA1, SCA2, SCA3,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A genetically heterogeneous group of dominantly inherited progressive ataxias, numbered by locus (for example SCA1, SCA2, SCA3, SCA6, SCA7)",
+      "Many of the common subtypes are caused by expanded CAG trinucleotide repeats encoding polyglutamine tracts, and repeat length often correlates inversely with age at onset",
+      "Anticipation, with earlier onset and greater severity in successive generations, is a feature of the repeat-expansion subtypes",
+      "Core features are progressive gait and limb ataxia, dysarthria, and abnormal eye movements, with additional signs varying by subtype",
+      "SCA3 (Machado-Joseph disease) is among the most common worldwide and can include parkinsonism, neuropathy, and prominent eye-movement abnormalities",
+      "SCA7 is distinctive for associated pigmentary retinopathy and progressive visual loss, and SCA6 tends to be a relatively pure, later-onset cerebellar syndrome",
+      "Diagnosis combines family history, clinical phenotype, and targeted or panel genetic testing for repeat expansions and other mutations",
+      "Management is largely supportive, addressing gait safety, speech and swallowing, and associated features, since disease-modifying therapy is limited"
     ],
-    [
-     "Key Investigations",
-     "Targeted or panel genetic testing for repeat expansions and point mutations, Brain MRI to assess cerebellar and brainstem",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The spinocerebellar ataxias comprise many distinct genetic disorders that share progressive degeneration of the cerebellum and its connections, often extending to the brainstem, spinal cord, and other structures. In the common polyglutamine subtypes, expanded CAG repeats produce abnormal proteins that misfold, aggregate, and cause neuronal dysfunction and loss, with a threshold repeat length determining disease and longer expansions producing earlier, more severe disease. Other subtypes arise from noncoding repeat expansions or conventional mutations affecting ion channels or other neuronal proteins, giving overlapping but distinguishable phenotypes.",
+    "additionalDifferentials": [
+      "Autosomal recessive ataxias including Friedreich ataxia",
+      "Acquired cerebellar ataxias (alcohol, paraneoplastic, immune-mediated, toxic)",
+      "Multiple system atrophy, cerebellar type",
+      "Episodic ataxias and other channelopathies",
+      "Fragile X-associated tremor/ataxia syndrome",
+      "Structural and vascular cerebellar lesions"
     ],
-    [
-     "Primary Differentials",
-     "Autosomal recessive ataxias including Friedreich ataxia, Acquired cerebellar ataxias (alcohol, paraneoplastic, immune-mediated,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted or panel genetic testing for repeat expansions and point mutations",
+      "Brain MRI to assess cerebellar and brainstem atrophy",
+      "Detailed family history and pedigree analysis",
+      "Ophthalmological review where retinopathy is suspected (as in SCA7)",
+      "Nerve conduction studies when peripheral neuropathy features are present",
+      "Exclusion of acquired and treatable causes of ataxia"
     ],
-    [
-     "Management Strategy",
-     "Provide symptomatic and supportive care coordinated through a specialist ataxia service, as no disease-modifying therapy exists",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid progression raising concern for an acquired or paraneoplastic cause rather than a hereditary ataxia",
+      "Progressive dysphagia with aspiration risk",
+      "Falls with injury from worsening gait ataxia",
+      "Visual loss suggesting retinal involvement in relevant subtypes"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all cerebellar ataxia is hereditary and overlooking treatable acquired causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most subtypes are slowly progressive over years to decades with gradual loss of independent mobility and speech; life expectancy is often reduced in more severe subtypes, largely through complications such as aspiration, while relatively pure subtypes may follow a more benign course.",
+    "pitfalls": [
+      "Assuming all cerebellar ataxia is hereditary and overlooking treatable acquired causes",
+      "Not recognising anticipation and the significance of family history across generations",
+      "Missing subtype-specific features such as retinopathy in SCA7",
+      "Ordering untargeted testing without a clinical and pedigree-guided strategy"
+    ],
+    "references": [
+      "Bradley's Neurology in Clinical Practice",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide symptomatic and supportive care coordinated through a specialist ataxia service, as no disease-modifying therapy exists",
+      "Maximise function and safety with physiotherapy, occupational therapy, balance and gait training, and mobility aids to reduce falls",
+      "Offer speech and language therapy for dysarthria and swallow assessment with diet modification or gastrostomy where aspiration risk develops",
+      "Treat associated features symptomatically, including spasticity, tremor, parkinsonism, neuropathic pain and depression",
+      "Manage subtype-specific complications such as retinal surveillance in SCA7 and seizure control where relevant",
+      "Monitor progression with standardised ataxia rating scales and surveil for aspiration and respiratory complications",
+      "Offer genetic counselling for autosomal dominant inheritance, discussing anticipation and predictive or cascade testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-real-image",
-   "title": "Spinocerebellar ataxia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia-pathway",
+      "title": "Spinocerebellar ataxia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A genetically heterogeneous group of dominantly inherited progressive ataxias, numbered by locus (for example SCA1, SCA2, SCA3, SCA6, SCA7)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid progression raising concern for an acquired or paraneoplastic cause rather than a hereditary ataxia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted or panel genetic testing for repeat expansions and point mutations, Brain MRI to assess cerebellar and brainstem atrophy, Detailed family history and pedigree analysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide symptomatic and supportive care coordinated through a specialist ataxia service, as no disease-modifying therapy exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all cerebellar ataxia is hereditary and overlooking treatable acquired causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia-matrix",
+      "title": "Spinocerebellar ataxia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A genetically heterogeneous group of dominantly inherited progressive ataxias, numbered by locus (for example SCA1, SCA2, SCA3,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted or panel genetic testing for repeat expansions and point mutations, Brain MRI to assess cerebellar and brainstem",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autosomal recessive ataxias including Friedreich ataxia, Acquired cerebellar ataxias (alcohol, paraneoplastic, immune-mediated,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide symptomatic and supportive care coordinated through a specialist ataxia service, as no disease-modifying therapy exists",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all cerebellar ataxia is hereditary and overlooking treatable acquired causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 61-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted or panel genetic testing",
+          "cells": [
+            {
+              "text": "Repeat expansions and point mutations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar and brainstem atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family pedigree analysis",
+          "cells": [
+            {
+              "text": "Dominant inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Retinopathy in SCA7"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of acquired causes",
+          "cells": [
+            {
+              "text": "Treatable mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired cerebellar ataxias (alcohol, paraneoplastic, immune-mediated)",
+          "cells": [
+            {
+              "text": "Treatable mimics; rapid progression favours an acquired cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple system atrophy, cerebellar type",
+          "cells": [
+            {
+              "text": "Autonomic failure, early falls and rapid decline suggest it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Specialist ataxia service; no disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and gait training",
+          "cells": [
+            {
+              "text": "Function, balance and safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallow assessment",
+          "cells": [
+            {
+              "text": "Diet modification or gastrostomy as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated features",
+          "cells": [
+            {
+              "text": "Spasticity, tremor, parkinsonism and neuropathic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subtype complications",
+          "cells": [
+            {
+              "text": "Retinal surveillance in SCA7; seizure control where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Standardised ataxia rating scales; aspiration surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance and anticipation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Selected trinucleotide repeat disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Locus",
+        "Repeat",
+        "Triplet length (normal/disease)",
+        "Inheritance",
+        "Gene product"
+      ],
+      "rows": [
+        {
+          "parameter": "X-chromosomal spinobulbar muscular atrophy (SBMA)",
+          "cells": [
+            {
+              "text": "Xq11-q12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "11-34/40-62"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "Androgen receptor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXA)",
+          "cells": [
+            {
+              "text": "Xq27.3"
+            },
+            {
+              "text": "CGG"
+            },
+            {
+              "text": "6-50/200-300"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-1 protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXE)",
+          "cells": [
+            {
+              "text": "Xq28"
+            },
+            {
+              "text": "GCC"
+            },
+            {
+              "text": "6-25/>200"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-2 protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystrophia myotonica (DM)",
+          "cells": [
+            {
+              "text": "19q13.2-q13.3"
+            },
+            {
+              "text": "CTG"
+            },
+            {
+              "text": "5-30/200-1000"
+            },
+            {
+              "text": "AD, variable penetrance"
+            },
+            {
+              "text": "Myotonin protein kinase"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Huntington's disease (HD)",
+          "cells": [
+            {
+              "text": "4p16.3"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-34/37-180"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Huntingtin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia type 1 (SCA1)",
+          "cells": [
+            {
+              "text": "6p21.3-21.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-39/40-88"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA2",
+          "cells": [
+            {
+              "text": "12q24.1"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "15-31/34-400"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA3; Machado-Joseph disease (MD)",
+          "cells": [
+            {
+              "text": "14q21"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "13-36/55-86"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA6 (CACNA1A)",
+          "cells": [
+            {
+              "text": "19p13.1-13.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-16/20-33"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Alpha 1A voltage-dependent L-type calcium channel"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA7",
+          "cells": [
+            {
+              "text": "3p21.1-p12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-19/37 to >300"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 7"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA12",
+          "cells": [
+            {
+              "text": "5q31"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-26/66-78"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Protein phosphatase 2A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dentorubral pallidoluysian atrophy (DRPLA)",
+          "cells": [
+            {
+              "text": "12p"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "7-23/49-75"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Atrophin 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Friedreich ataxia (FRDA1)",
+          "cells": [
+            {
+              "text": "9q13-21"
+            },
+            {
+              "text": "GAA"
+            },
+            {
+              "text": "7-22/200-900"
+            },
+            {
+              "text": "AR"
+            },
+            {
+              "text": "Frataxin"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive gait and limb ataxia with dysarthria: suspected spinocerebellar ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid progression, dysphagia, falls, visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for an acquired or paraneoplastic cause if progression is rapid",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Targeted or panel repeat-expansion testing; brain MRI; family pedigree",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a dominant repeat expansion or point mutation identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude acquired causes; consider MSA or Friedreich ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic care through a specialist ataxia service",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and gait training",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Speech and swallow assessment with diet modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Retinal surveillance in SCA7 and seizure control where relevant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-modifying therapy; care targets function and safety",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

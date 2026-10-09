@@ -1,171 +1,480 @@
 {
- "id": "surfactant_protein_c_deficiency",
- "name": "Surfactant protein C deficiency",
- "aliases": [
-  "SP-C deficiency",
-  "SFTPC-related interstitial lung disease"
- ],
- "class": "non_infective",
- "system": "Respiratory / Genetic interstitial lung disease",
- "specialty": "Respiratory / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Respiratory and genetic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by mutations in SFTPC and usually inherited in an autosomal dominant pattern, often with variable expression and de novo cases",
-   "Presentation ranges widely, from severe neonatal respiratory disease to childhood or adult-onset interstitial lung disease",
-   "A dominant-negative mechanism means that even a single abnormal allele can cause disease, unlike the recessive surfactant protein B deficiency",
-   "Imaging typically shows diffuse interstitial change, ground-glass opacity and, over time, cysts or fibrosis",
-   "The clinical course is highly variable within and between families carrying the same mutation",
-   "Diagnosis combines genetic testing with imaging and, where needed, lung biopsy",
-   "Management is supportive, sometimes with immunomodulatory therapy, and lung transplantation for advanced disease"
+  "id": "surfactant_protein_c_deficiency",
+  "name": "Surfactant protein C deficiency",
+  "aliases": [
+    "SP-C deficiency",
+    "SFTPC-related interstitial lung disease"
   ],
-  "pathophysiology": "Surfactant protein C is a hydrophobic protein that contributes to surfactant function and is produced by alveolar type II cells. Many SFTPC mutations lead to misfolding of the proprotein, which accumulates within type II cells and triggers endoplasmic reticulum stress, cellular injury and an abnormal repair response. This cellular toxicity, rather than simple loss of protein, drives progressive interstitial inflammation and fibrosis. The dominant-negative and gain-of-toxicity effects explain the autosomal dominant inheritance and the wide variability in age of onset and severity.",
-  "additionalDifferentials": [
-   "Surfactant protein B deficiency",
-   "ABCA3 deficiency",
-   "Idiopathic pulmonary fibrosis in adults",
-   "Hypersensitivity pneumonitis",
-   "Other childhood interstitial lung disease (chILD) entities",
-   "Connective tissue disease-associated interstitial lung disease"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for SFTPC mutations",
-   "High-resolution CT of the chest",
-   "Lung biopsy when the diagnosis is unclear",
-   "Pulmonary function testing in older children and adults",
-   "Family screening and assessment given dominant inheritance"
-  ],
-  "redFlags": [
-   "Rapidly progressive respiratory failure at any age",
-   "Severe neonatal presentation",
-   "Progressive fibrosis with declining lung function",
-   "Superimposed respiratory infection causing acute deterioration"
-  ],
-  "prognosis": "The prognosis is variable, ranging from severe fatal neonatal disease to a chronic course into adulthood; some patients stabilise while others progress to fibrosis requiring transplantation.",
-  "pitfalls": [
-   "Assuming an adult with interstitial lung disease cannot have a genetic surfactant disorder",
-   "Expecting a uniform course from a given mutation",
-   "Missing the diagnosis in a family labelled as having idiopathic fibrosis",
-   "Overlooking the need to screen relatives for dominant inheritance"
-  ],
-  "references": [
-   "Kendig's Disorders of the Respiratory Tract in Children (standard reference)",
-   "Interstitial lung disease guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Trial empirical anti-inflammatory therapy with systemic corticosteroids, sometimes combined with hydroxychloroquine, to modify the interstitial inflammation, though evidence is limited",
-   "Provide supplemental oxygen and other supportive care for chronic interstitial lung disease",
-   "Ensure routine, influenza and pneumococcal immunisation and treat respiratory infections promptly to limit exacerbations",
-   "Reserve lung transplantation for progressive end-stage fibrotic disease",
-   "Monitor disease with serial pulmonary function testing and high-resolution CT",
-   "Manage care through a paediatric or adult interstitial lung disease multidisciplinary team",
-   "Offer genetic counselling and family assessment given autosomal dominant inheritance with de novo cases and variable expression"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "surfactant_protein_c_deficiency-pathway",
-   "title": "Surfactant protein C deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by mutations in SFTPC and usually inherited in an autosomal dominant pattern, often with variable expression and de novo cases",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive respiratory failure at any age",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for SFTPC mutations, High-resolution CT of the chest, Lung biopsy when the diagnosis is unclear"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Trial empirical anti-inflammatory therapy with systemic corticosteroids, sometimes combined with hydroxychloroquine, to modify the interstitial inflammation, though evidence is limited"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an adult with interstitial lung disease cannot have a genetic surfactant disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of surfactant protein c deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "surfactant_protein_c_deficiency-matrix",
-   "title": "Surfactant protein C deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by mutations in SFTPC and usually inherited in an autosomal dominant pattern, often with variable expression and de novo",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Genetic interstitial lung disease",
+  "specialty": "Respiratory / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Respiratory and genetic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by mutations in SFTPC and usually inherited in an autosomal dominant pattern, often with variable expression and de novo cases",
+      "Presentation ranges widely, from severe neonatal respiratory disease to childhood or adult-onset interstitial lung disease",
+      "A dominant-negative mechanism means that even a single abnormal allele can cause disease, unlike the recessive surfactant protein B deficiency",
+      "Imaging typically shows diffuse interstitial change, ground-glass opacity and, over time, cysts or fibrosis",
+      "The clinical course is highly variable within and between families carrying the same mutation",
+      "Diagnosis combines genetic testing with imaging and, where needed, lung biopsy",
+      "Management is supportive, sometimes with immunomodulatory therapy, and lung transplantation for advanced disease"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for SFTPC mutations, High-resolution CT of the chest, Lung biopsy when the diagnosis is unclear",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Surfactant protein C is a hydrophobic protein that contributes to surfactant function and is produced by alveolar type II cells. Many SFTPC mutations lead to misfolding of the proprotein, which accumulates within type II cells and triggers endoplasmic reticulum stress, cellular injury and an abnormal repair response. This cellular toxicity, rather than simple loss of protein, drives progressive interstitial inflammation and fibrosis. The dominant-negative and gain-of-toxicity effects explain the autosomal dominant inheritance and the wide variability in age of onset and severity.",
+    "additionalDifferentials": [
+      "Surfactant protein B deficiency",
+      "ABCA3 deficiency",
+      "Idiopathic pulmonary fibrosis in adults",
+      "Hypersensitivity pneumonitis",
+      "Other childhood interstitial lung disease (chILD) entities",
+      "Connective tissue disease-associated interstitial lung disease"
     ],
-    [
-     "Primary Differentials",
-     "Surfactant protein B deficiency, ABCA3 deficiency, Idiopathic pulmonary fibrosis in adults",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for SFTPC mutations",
+      "High-resolution CT of the chest",
+      "Lung biopsy when the diagnosis is unclear",
+      "Pulmonary function testing in older children and adults",
+      "Family screening and assessment given dominant inheritance"
     ],
-    [
-     "Management Strategy",
-     "Trial empirical anti-inflammatory therapy with systemic corticosteroids, sometimes combined with hydroxychloroquine, to modify",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive respiratory failure at any age",
+      "Severe neonatal presentation",
+      "Progressive fibrosis with declining lung function",
+      "Superimposed respiratory infection causing acute deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an adult with interstitial lung disease cannot have a genetic surfactant disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is variable, ranging from severe fatal neonatal disease to a chronic course into adulthood; some patients stabilise while others progress to fibrosis requiring transplantation.",
+    "pitfalls": [
+      "Assuming an adult with interstitial lung disease cannot have a genetic surfactant disorder",
+      "Expecting a uniform course from a given mutation",
+      "Missing the diagnosis in a family labelled as having idiopathic fibrosis",
+      "Overlooking the need to screen relatives for dominant inheritance"
+    ],
+    "references": [
+      "Kendig's Disorders of the Respiratory Tract in Children (standard reference)",
+      "Interstitial lung disease guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Trial empirical anti-inflammatory therapy with systemic corticosteroids, sometimes combined with hydroxychloroquine, to modify the interstitial inflammation, though evidence is limited",
+      "Provide supplemental oxygen and other supportive care for chronic interstitial lung disease",
+      "Ensure routine, influenza and pneumococcal immunisation and treat respiratory infections promptly to limit exacerbations",
+      "Reserve lung transplantation for progressive end-stage fibrotic disease",
+      "Monitor disease with serial pulmonary function testing and high-resolution CT",
+      "Manage care through a paediatric or adult interstitial lung disease multidisciplinary team",
+      "Offer genetic counselling and family assessment given autosomal dominant inheritance with de novo cases and variable expression"
     ]
-   ],
-   "caption": "Overview comparison matrix for surfactant protein c deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "surfactant-protein-c-deficiency-real-image",
-   "title": "Surfactant protein C deficiency: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "surfactant_protein_c_deficiency-pathway",
+      "title": "Surfactant protein C deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by mutations in SFTPC and usually inherited in an autosomal dominant pattern, often with variable expression and de novo cases",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive respiratory failure at any age",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for SFTPC mutations, High-resolution CT of the chest, Lung biopsy when the diagnosis is unclear"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Trial empirical anti-inflammatory therapy with systemic corticosteroids, sometimes combined with hydroxychloroquine, to modify the interstitial inflammation, though evidence is limited"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an adult with interstitial lung disease cannot have a genetic surfactant disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of surfactant protein c deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "surfactant_protein_c_deficiency-matrix",
+      "title": "Surfactant protein C deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by mutations in SFTPC and usually inherited in an autosomal dominant pattern, often with variable expression and de novo",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for SFTPC mutations, High-resolution CT of the chest, Lung biopsy when the diagnosis is unclear",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Surfactant protein B deficiency, ABCA3 deficiency, Idiopathic pulmonary fibrosis in adults",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Trial empirical anti-inflammatory therapy with systemic corticosteroids, sometimes combined with hydroxychloroquine, to modify",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an adult with interstitial lung disease cannot have a genetic surfactant disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for surfactant protein c deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory and genetic references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "surfactant_protein_c_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Surfactant protein C deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SFTPC disease: interstitial lung disease at any age",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly progressive respiratory failure or severe neonatal disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist care for severe neonatal or rapidly progressive respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SFTPC genetic testing; high-resolution CT; lung biopsy if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SFTPC testing identify a pathogenic variant matching the imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other childhood or adult interstitial lung diseases; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trial corticosteroids, sometimes with hydroxychloroquine; evidence is limited",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oxygen and supportive care for chronic interstitial lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunisation and prompt treatment of respiratory infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial pulmonary function tests and high-resolution CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lung transplantation for progressive end-stage fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Family screening for dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Course is variable: some stabilise, others progress to fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "surfactant_protein_c_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for SFTPC mutations",
+          "cells": [
+            {
+              "text": "Pathogenic SFTPC variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the chest",
+          "cells": [
+            {
+              "text": "Diffuse interstitial change and ground-glass opacity; later cysts or fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung biopsy",
+          "cells": [
+            {
+              "text": "Diagnosis, when unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing",
+          "cells": [
+            {
+              "text": "Lung function in older children and adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "Relatives, given dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "surfactant_protein_c_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Surfactant protein B deficiency",
+          "cells": [
+            {
+              "text": "Recessive; SFTPC disease is dominant-negative, so one abnormal allele can cause it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adult idiopathic pulmonary fibrosis",
+          "cells": [
+            {
+              "text": "Adult interstitial lung disease can be a genetic surfactant disorder; do not assume it is not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family labelled as having idiopathic fibrosis",
+          "cells": [
+            {
+              "text": "Familial pattern may reflect an SFTPC mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "surfactant_protein_c_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical anti-inflammatory therapy",
+          "cells": [
+            {
+              "text": "Systemic corticosteroids, sometimes with hydroxychloroquine; evidence is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Supplemental oxygen for chronic interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Routine, influenza and pneumococcal immunisation; prompt treatment of respiratory infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial pulmonary function testing and high-resolution CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplantation",
+          "cells": [
+            {
+              "text": "Progressive end-stage fibrotic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric or adult interstitial lung disease service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family assessment",
+          "cells": [
+            {
+              "text": "Autosomal dominant with de novo cases and variable expression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

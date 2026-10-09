@@ -1,175 +1,462 @@
 {
- "id": "geniculate_neuralgia",
- "name": "Geniculate neuralgia",
- "aliases": [
-  "nervus intermedius neuralgia",
-  "Hunt neuralgia",
-  "facial nerve neuralgia",
-  "otalgic neuralgia"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Neurology",
- "specialty": "Otolaryngology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Produces brief, severe, lancinating pain felt deep within the ear (auditory canal and periauricular region)",
-   "Attacks may be provoked by touching a trigger zone in the external auditory canal, by swallowing, or by cold stimuli",
-   "It can be accompanied by autonomic and sensory phenomena such as altered taste, salivation, lacrimation, and tinnitus, reflecting the wider functions of the nervus intermedius",
-   "The nervus intermedius is the sensory and parasympathetic component of the facial nerve, and geniculate neuralgia is essentially neuralgia of this nerve",
-   "A viral (herpetic) aetiology is recognised, and it may follow Ramsay Hunt syndrome",
-   "Diagnosis requires exclusion of other causes of deep ear pain and overlaps clinically with glossopharyngeal and trigeminal neuralgia",
-   "Management is medical with anticonvulsants such as carbamazepine first; sectioning of the nervus intermedius or microvascular decompression is reserved for refractory cases"
+  "id": "geniculate_neuralgia",
+  "name": "Geniculate neuralgia",
+  "aliases": [
+    "nervus intermedius neuralgia",
+    "Hunt neuralgia",
+    "facial nerve neuralgia",
+    "otalgic neuralgia"
   ],
-  "pathophysiology": "Geniculate neuralgia is a paroxysmal neuralgia arising from the nervus intermedius, the sensory and parasympathetic division of the facial nerve, whose geniculate ganglion carries sensation from part of the external ear. Ectopic neural discharges, often attributed to vascular compression at the nerve root or to prior herpetic (varicella-zoster) inflammation of the geniculate ganglion, are thought to generate the intense deep-ear pain. Because the nervus intermedius also mediates taste, lacrimation, and salivation, attacks may be accompanied by disturbances of these functions, and its close relationship to the glossopharyngeal and trigeminal systems produces overlapping symptomatology.",
-  "additionalDifferentials": [
-   "Glossopharyngeal neuralgia",
-   "Trigeminal neuralgia",
-   "Ramsay Hunt syndrome (herpes zoster oticus)",
-   "Primary otological disease (otitis externa or media)",
-   "Temporomandibular joint dysfunction",
-   "Cerebellopontine angle or skull base tumour",
-   "Referred otalgia from oropharyngeal malignancy"
-  ],
-  "additionalInvestigations": [
-   "Otoscopy and microscopy to exclude middle and external ear disease",
-   "MRI of the internal auditory meatus and cerebellopontine angle with attention to the facial nerve",
-   "MR angiography to identify a compressive vascular loop",
-   "Assessment of the external auditory canal for a triggerable zone",
-   "Audiometry if hearing symptoms or tinnitus accompany the pain",
-   "Examination of the oropharynx to exclude referred otalgia from malignancy"
-  ],
-  "redFlags": [
-   "Vesicles in the ear canal or pinna with facial weakness suggesting Ramsay Hunt syndrome",
-   "Persistent unilateral otalgia with a normal ear, prompting a search for a head and neck primary",
-   "Progressive facial weakness or other cranial neuropathies",
-   "A cerebellopontine angle mass on imaging"
-  ],
-  "prognosis": "Geniculate neuralgia is benign but can be highly distressing; many patients respond to anticonvulsant therapy, and surgical sectioning of the nervus intermedius or microvascular decompression offers relief in selected refractory cases.",
-  "pitfalls": [
-   "Attributing deep ear pain to primary ear disease when the ear is normal",
-   "Failing to consider a herpetic (post-Ramsay Hunt) origin",
-   "Confusing it with glossopharyngeal neuralgia given the shared deep-ear pain",
-   "Not excluding referred otalgia from an oropharyngeal malignancy",
-   "Overlooking a treatable vascular loop or tumour on imaging"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line medical therapy with anticonvulsants such as carbamazepine or oxcarbazepine, with gabapentin or other neuropathic agents as alternatives",
-   "Consideration of antiviral therapy where a herpetic (varicella-zoster) aetiology or preceding Ramsay Hunt syndrome is implicated",
-   "Exclude other causes of deep ear pain with otoscopy, imaging of the internal auditory meatus and cerebellopontine angle, and examination for referred otalgia",
-   "Trigger-zone avoidance advice for provoking stimuli in the external auditory canal",
-   "Microvascular decompression of a compressive vascular loop or sectioning of the nervus intermedius and geniculate ganglion in refractory cases",
-   "Refer to neurology and skull-base neurosurgery or otolaryngology for drug-resistant or diagnostically uncertain disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "geniculate_neuralgia-pathway",
-   "title": "Geniculate neuralgia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Produces brief, severe, lancinating pain felt deep within the ear (auditory canal and periauricular region)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Vesicles in the ear canal or pinna with facial weakness suggesting Ramsay Hunt syndrome",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Otoscopy and microscopy to exclude middle and external ear disease, MRI of the internal auditory meatus and cerebellopontine angle with attention to the facial nerve, MR angiography to identify a compressive vascular loop"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line medical therapy with anticonvulsants such as carbamazepine or oxcarbazepine, with gabapentin or other neuropathic agents as alternatives"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing deep ear pain to primary ear disease when the ear is normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of geniculate neuralgia."
-  }
- ],
- "tables": [
-  {
-   "id": "geniculate_neuralgia-matrix",
-   "title": "Geniculate neuralgia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Produces brief, severe, lancinating pain felt deep within the ear (auditory canal and periauricular region)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Neurology",
+  "specialty": "Otolaryngology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Produces brief, severe, lancinating pain felt deep within the ear (auditory canal and periauricular region)",
+      "Attacks may be provoked by touching a trigger zone in the external auditory canal, by swallowing, or by cold stimuli",
+      "It can be accompanied by autonomic and sensory phenomena such as altered taste, salivation, lacrimation, and tinnitus, reflecting the wider functions of the nervus intermedius",
+      "The nervus intermedius is the sensory and parasympathetic component of the facial nerve, and geniculate neuralgia is essentially neuralgia of this nerve",
+      "A viral (herpetic) aetiology is recognised, and it may follow Ramsay Hunt syndrome",
+      "Diagnosis requires exclusion of other causes of deep ear pain and overlaps clinically with glossopharyngeal and trigeminal neuralgia",
+      "Management is medical with anticonvulsants such as carbamazepine first; sectioning of the nervus intermedius or microvascular decompression is reserved for refractory cases"
     ],
-    [
-     "Key Investigations",
-     "Otoscopy and microscopy to exclude middle and external ear disease, MRI of the internal auditory meatus and cerebellopontine",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Geniculate neuralgia is a paroxysmal neuralgia arising from the nervus intermedius, the sensory and parasympathetic division of the facial nerve, whose geniculate ganglion carries sensation from part of the external ear. Ectopic neural discharges, often attributed to vascular compression at the nerve root or to prior herpetic (varicella-zoster) inflammation of the geniculate ganglion, are thought to generate the intense deep-ear pain. Because the nervus intermedius also mediates taste, lacrimation, and salivation, attacks may be accompanied by disturbances of these functions, and its close relationship to the glossopharyngeal and trigeminal systems produces overlapping symptomatology.",
+    "additionalDifferentials": [
+      "Glossopharyngeal neuralgia",
+      "Trigeminal neuralgia",
+      "Ramsay Hunt syndrome (herpes zoster oticus)",
+      "Primary otological disease (otitis externa or media)",
+      "Temporomandibular joint dysfunction",
+      "Cerebellopontine angle or skull base tumour",
+      "Referred otalgia from oropharyngeal malignancy"
     ],
-    [
-     "Primary Differentials",
-     "Glossopharyngeal neuralgia, Trigeminal neuralgia, Ramsay Hunt syndrome (herpes zoster oticus)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Otoscopy and microscopy to exclude middle and external ear disease",
+      "MRI of the internal auditory meatus and cerebellopontine angle with attention to the facial nerve",
+      "MR angiography to identify a compressive vascular loop",
+      "Assessment of the external auditory canal for a triggerable zone",
+      "Audiometry if hearing symptoms or tinnitus accompany the pain",
+      "Examination of the oropharynx to exclude referred otalgia from malignancy"
     ],
-    [
-     "Management Strategy",
-     "First-line medical therapy with anticonvulsants such as carbamazepine or oxcarbazepine, with gabapentin or other neuropathic",
-     "Core treatment modality"
+    "redFlags": [
+      "Vesicles in the ear canal or pinna with facial weakness suggesting Ramsay Hunt syndrome",
+      "Persistent unilateral otalgia with a normal ear, prompting a search for a head and neck primary",
+      "Progressive facial weakness or other cranial neuropathies",
+      "A cerebellopontine angle mass on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing deep ear pain to primary ear disease when the ear is normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Geniculate neuralgia is benign but can be highly distressing; many patients respond to anticonvulsant therapy, and surgical sectioning of the nervus intermedius or microvascular decompression offers relief in selected refractory cases.",
+    "pitfalls": [
+      "Attributing deep ear pain to primary ear disease when the ear is normal",
+      "Failing to consider a herpetic (post-Ramsay Hunt) origin",
+      "Confusing it with glossopharyngeal neuralgia given the shared deep-ear pain",
+      "Not excluding referred otalgia from an oropharyngeal malignancy",
+      "Overlooking a treatable vascular loop or tumour on imaging"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line medical therapy with anticonvulsants such as carbamazepine or oxcarbazepine, with gabapentin or other neuropathic agents as alternatives",
+      "Consideration of antiviral therapy where a herpetic (varicella-zoster) aetiology or preceding Ramsay Hunt syndrome is implicated",
+      "Exclude other causes of deep ear pain with otoscopy, imaging of the internal auditory meatus and cerebellopontine angle, and examination for referred otalgia",
+      "Trigger-zone avoidance advice for provoking stimuli in the external auditory canal",
+      "Microvascular decompression of a compressive vascular loop or sectioning of the nervus intermedius and geniculate ganglion in refractory cases",
+      "Refer to neurology and skull-base neurosurgery or otolaryngology for drug-resistant or diagnostically uncertain disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for geniculate neuralgia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "geniculate-neuralgia-real-image",
-   "title": "Geniculate neuralgia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "geniculate_neuralgia-pathway",
+      "title": "Geniculate neuralgia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Produces brief, severe, lancinating pain felt deep within the ear (auditory canal and periauricular region)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Vesicles in the ear canal or pinna with facial weakness suggesting Ramsay Hunt syndrome",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Otoscopy and microscopy to exclude middle and external ear disease, MRI of the internal auditory meatus and cerebellopontine angle with attention to the facial nerve, MR angiography to identify a compressive vascular loop"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line medical therapy with anticonvulsants such as carbamazepine or oxcarbazepine, with gabapentin or other neuropathic agents as alternatives"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing deep ear pain to primary ear disease when the ear is normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of geniculate neuralgia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "geniculate_neuralgia-matrix",
+      "title": "Geniculate neuralgia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Produces brief, severe, lancinating pain felt deep within the ear (auditory canal and periauricular region)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Otoscopy and microscopy to exclude middle and external ear disease, MRI of the internal auditory meatus and cerebellopontine",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glossopharyngeal neuralgia, Trigeminal neuralgia, Ramsay Hunt syndrome (herpes zoster oticus)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line medical therapy with anticonvulsants such as carbamazepine or oxcarbazepine, with gabapentin or other neuropathic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing deep ear pain to primary ear disease when the ear is normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for geniculate neuralgia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "geniculate_neuralgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy and microscopy",
+          "cells": [
+            {
+              "text": "Excludes middle and external ear disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the internal auditory meatus and cerebellopontine angle",
+          "cells": [
+            {
+              "text": "Facial nerve and skull base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Identifies a compressive vascular loop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the external auditory canal",
+          "cells": [
+            {
+              "text": "Triggerable zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "If hearing symptoms or tinnitus accompany the pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oropharyngeal examination",
+          "cells": [
+            {
+              "text": "Excludes referred otalgia from malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "geniculate_neuralgia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ramsay Hunt syndrome (herpes zoster oticus)",
+          "cells": [
+            {
+              "text": "Vesicles in the ear canal or pinna with facial weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebellopontine angle or skull base tumour",
+          "cells": [
+            {
+              "text": "Cerebellopontine angle mass on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referred otalgia from oropharyngeal malignancy",
+          "cells": [
+            {
+              "text": "Persistent unilateral otalgia with a normal ear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "geniculate_neuralgia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticonvulsants",
+          "cells": [
+            {
+              "text": "Carbamazepine or oxcarbazepine first line, with gabapentin or other neuropathic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiviral therapy",
+          "cells": [
+            {
+              "text": "Where varicella-zoster or preceding Ramsay Hunt syndrome is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude other causes",
+          "cells": [
+            {
+              "text": "Otoscopy and imaging of the internal auditory meatus and cerebellopontine angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger-zone avoidance",
+          "cells": [
+            {
+              "text": "Advice on provoking stimuli in the external auditory canal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular decompression",
+          "cells": [
+            {
+              "text": "For a compressive vascular loop; sectioning of the nervus intermedius is an option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Neurology and skull-base neurosurgery for drug-resistant or uncertain disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "geniculate_neuralgia-dx-mgmt",
+      "title": "Diagnosis and management of Geniculate neuralgia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected geniculate neuralgia: deep ear pain with a normal ear",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ear vesicles with facial weakness, cranial neuropathy, CPA mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for Ramsay Hunt syndrome or a cerebellopontine angle mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, MRI of internal auditory meatus and cerebellopontine angle, MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI or MR angiography show a compressive vascular loop?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glossopharyngeal neuralgia, trigeminal neuralgia or referred malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anticonvulsants such as carbamazepine or oxcarbazepine, with gabapentin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiviral therapy where herpetic zoster is implicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trigger-zone avoidance advice in the external auditory canal",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Microvascular decompression for a compressive vascular loop",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but distressing; many respond to anticonvulsants, and surgery is an option",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

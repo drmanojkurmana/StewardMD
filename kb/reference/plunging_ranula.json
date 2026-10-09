@@ -1,174 +1,463 @@
 {
- "id": "plunging_ranula",
- "name": "Plunging (cervical) ranula",
- "aliases": [
-  "cervical ranula",
-  "diving ranula",
-  "plunging sublingual mucocoele",
-  "deep ranula"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Head and Neck",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology - Head and Neck Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A ranula that extends beyond the floor of mouth into the neck, presenting as a soft submandibular or upper cervical swelling",
-   "Occurs when extravasated saliva from the sublingual gland tracks around or through a dehiscence in the mylohyoid muscle into the neck",
-   "May present as a painless neck mass with or without an obvious oral floor-of-mouth component, sometimes fluctuating in size",
-   "Like the oral ranula, it is usually a pseudocyst lacking a true epithelial lining and formed by extravasated mucus",
-   "MRI or CT characterises the cystic lesion and its cervical extension, and a tail extending toward the sublingual space supports the diagnosis",
-   "Aspiration yields viscous, amylase- and protein-rich mucoid fluid, helping distinguish it from other cystic neck lesions",
-   "Definitive treatment addresses the source by excising the sublingual gland, which resolves the cervical component without needing separate neck dissection of the pseudocyst",
-   "Simple drainage or excision of the neck cyst alone is associated with high recurrence"
+  "id": "plunging_ranula",
+  "name": "Plunging (cervical) ranula",
+  "aliases": [
+    "cervical ranula",
+    "diving ranula",
+    "plunging sublingual mucocoele",
+    "deep ranula"
   ],
-  "pathophysiology": "A plunging ranula is a variant of the sublingual gland mucus extravasation lesion in which mucus escapes into the neck rather than remaining confined to the floor of the mouth. Saliva leaking from a disrupted sublingual gland tracks posteriorly and inferiorly around the free posterior edge of mylohyoid, or through a congenital or acquired dehiscence within the muscle, descending into the submandibular and upper cervical spaces. The collection is a pseudocyst without a true epithelial lining, and because the sublingual gland continues to secrete, definitive resolution depends on removing that gland to stop the flow of mucus.",
-  "additionalDifferentials": [
-   "Simple oral ranula",
-   "Lymphatic malformation (cystic hygroma)",
-   "Branchial cleft cyst",
-   "Thyroglossal duct cyst when near the midline",
-   "Salivary gland cyst or tumour",
-   "Dermoid cyst or abscess of the neck"
-  ],
-  "additionalInvestigations": [
-   "MRI or CT of the neck and floor of mouth to define the cyst and its sublingual connection",
-   "Ultrasound to characterise the cystic lesion and guide aspiration",
-   "Aspiration demonstrating viscous, amylase-rich mucoid fluid",
-   "Histological examination of the excised sublingual gland and any cyst wall",
-   "Assessment for an associated oral ranula component"
-  ],
-  "redFlags": [
-   "Large or rapidly enlarging neck swelling causing airway or swallowing concern",
-   "Features atypical for a pseudocyst suggesting a neoplastic or vascular lesion",
-   "Signs of secondary infection with pain, erythema and systemic upset",
-   "Recurrence after previous surgery indicating retained sublingual gland tissue"
-  ],
-  "prognosis": "Excision of the offending sublingual gland gives a high cure rate and resolves the cervical component. Procedures that drain or remove only the neck pseudocyst while leaving the gland in place commonly recur.",
-  "pitfalls": [
-   "Treating the visible neck cyst without removing the sublingual gland, leading to recurrence",
-   "Misdiagnosing the mass as another cystic neck lesion and pursuing inappropriate surgery",
-   "Failing to recognise the connection to the sublingual space on imaging",
-   "Injuring the lingual nerve or submandibular duct during sublingual gland excision"
-  ],
-  "references": [
-   "Cummings Otolaryngology - Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment is transoral excision of the offending sublingual gland to stop the mucus extravasation",
-   "Removal or marsupialisation of the cervical pseudocyst alone is inadequate and prone to recurrence, so gland excision is required",
-   "Aspiration or drainage may temporarily decompress a large collection but is not curative",
-   "Careful surgical technique to protect the lingual nerve, submandibular duct and gland during excision",
-   "Histological examination of the excised gland and cyst wall to confirm the diagnosis and exclude other cystic neck lesions",
-   "Otolaryngology and head-and-neck surgical referral for operative planning with imaging correlation",
-   "Postoperative monitoring for recurrence and for any residual oral floor-of-mouth ranula component"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "plunging_ranula-pathway",
-   "title": "Plunging (cervical) ranula: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A ranula that extends beyond the floor of mouth into the neck, presenting as a soft submandibular or upper cervical swelling",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Large or rapidly enlarging neck swelling causing airway or swallowing concern",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI or CT of the neck and floor of mouth to define the cyst and its sublingual connection, Ultrasound to characterise the cystic lesion and guide aspiration, Aspiration demonstrating viscous, amylase-rich mucoid fluid"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment is transoral excision of the offending sublingual gland to stop the mucus extravasation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the visible neck cyst without removing the sublingual gland, leading to recurrence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of plunging (cervical) ranula."
-  }
- ],
- "tables": [
-  {
-   "id": "plunging_ranula-matrix",
-   "title": "Plunging (cervical) ranula: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A ranula that extends beyond the floor of mouth into the neck, presenting as a soft submandibular or upper cervical swelling",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Head and Neck",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology - Head and Neck Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A ranula that extends beyond the floor of mouth into the neck, presenting as a soft submandibular or upper cervical swelling",
+      "Occurs when extravasated saliva from the sublingual gland tracks around or through a dehiscence in the mylohyoid muscle into the neck",
+      "May present as a painless neck mass with or without an obvious oral floor-of-mouth component, sometimes fluctuating in size",
+      "Like the oral ranula, it is usually a pseudocyst lacking a true epithelial lining and formed by extravasated mucus",
+      "MRI or CT characterises the cystic lesion and its cervical extension, and a tail extending toward the sublingual space supports the diagnosis",
+      "Aspiration yields viscous, amylase- and protein-rich mucoid fluid, helping distinguish it from other cystic neck lesions",
+      "Definitive treatment addresses the source by excising the sublingual gland, which resolves the cervical component without needing separate neck dissection of the pseudocyst",
+      "Simple drainage or excision of the neck cyst alone is associated with high recurrence"
     ],
-    [
-     "Key Investigations",
-     "MRI or CT of the neck and floor of mouth to define the cyst and its sublingual connection, Ultrasound to characterise the cystic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A plunging ranula is a variant of the sublingual gland mucus extravasation lesion in which mucus escapes into the neck rather than remaining confined to the floor of the mouth. Saliva leaking from a disrupted sublingual gland tracks posteriorly and inferiorly around the free posterior edge of mylohyoid, or through a congenital or acquired dehiscence within the muscle, descending into the submandibular and upper cervical spaces. The collection is a pseudocyst without a true epithelial lining, and because the sublingual gland continues to secrete, definitive resolution depends on removing that gland to stop the flow of mucus.",
+    "additionalDifferentials": [
+      "Simple oral ranula",
+      "Lymphatic malformation (cystic hygroma)",
+      "Branchial cleft cyst",
+      "Thyroglossal duct cyst when near the midline",
+      "Salivary gland cyst or tumour",
+      "Dermoid cyst or abscess of the neck"
     ],
-    [
-     "Primary Differentials",
-     "Simple oral ranula, Lymphatic malformation (cystic hygroma), Branchial cleft cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI or CT of the neck and floor of mouth to define the cyst and its sublingual connection",
+      "Ultrasound to characterise the cystic lesion and guide aspiration",
+      "Aspiration demonstrating viscous, amylase-rich mucoid fluid",
+      "Histological examination of the excised sublingual gland and any cyst wall",
+      "Assessment for an associated oral ranula component"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment is transoral excision of the offending sublingual gland to stop the mucus extravasation",
-     "Core treatment modality"
+    "redFlags": [
+      "Large or rapidly enlarging neck swelling causing airway or swallowing concern",
+      "Features atypical for a pseudocyst suggesting a neoplastic or vascular lesion",
+      "Signs of secondary infection with pain, erythema and systemic upset",
+      "Recurrence after previous surgery indicating retained sublingual gland tissue"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the visible neck cyst without removing the sublingual gland, leading to recurrence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excision of the offending sublingual gland gives a high cure rate and resolves the cervical component. Procedures that drain or remove only the neck pseudocyst while leaving the gland in place commonly recur.",
+    "pitfalls": [
+      "Treating the visible neck cyst without removing the sublingual gland, leading to recurrence",
+      "Misdiagnosing the mass as another cystic neck lesion and pursuing inappropriate surgery",
+      "Failing to recognise the connection to the sublingual space on imaging",
+      "Injuring the lingual nerve or submandibular duct during sublingual gland excision"
+    ],
+    "references": [
+      "Cummings Otolaryngology - Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment is transoral excision of the offending sublingual gland to stop the mucus extravasation",
+      "Removal or marsupialisation of the cervical pseudocyst alone is inadequate and prone to recurrence, so gland excision is required",
+      "Aspiration or drainage may temporarily decompress a large collection but is not curative",
+      "Careful surgical technique to protect the lingual nerve, submandibular duct and gland during excision",
+      "Histological examination of the excised gland and cyst wall to confirm the diagnosis and exclude other cystic neck lesions",
+      "Otolaryngology and head-and-neck surgical referral for operative planning with imaging correlation",
+      "Postoperative monitoring for recurrence and for any residual oral floor-of-mouth ranula component"
     ]
-   ],
-   "caption": "Overview comparison matrix for plunging (cervical) ranula."
-  }
- ],
- "diagrams": [
-  {
-   "id": "plunging-ranula-real-image",
-   "title": "Plunging (cervical) ranula: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "plunging_ranula-pathway",
+      "title": "Plunging (cervical) ranula: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A ranula that extends beyond the floor of mouth into the neck, presenting as a soft submandibular or upper cervical swelling",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Large or rapidly enlarging neck swelling causing airway or swallowing concern",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI or CT of the neck and floor of mouth to define the cyst and its sublingual connection, Ultrasound to characterise the cystic lesion and guide aspiration, Aspiration demonstrating viscous, amylase-rich mucoid fluid"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment is transoral excision of the offending sublingual gland to stop the mucus extravasation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the visible neck cyst without removing the sublingual gland, leading to recurrence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of plunging (cervical) ranula."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "plunging_ranula-matrix",
+      "title": "Plunging (cervical) ranula: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A ranula that extends beyond the floor of mouth into the neck, presenting as a soft submandibular or upper cervical swelling",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI or CT of the neck and floor of mouth to define the cyst and its sublingual connection, Ultrasound to characterise the cystic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Simple oral ranula, Lymphatic malformation (cystic hygroma), Branchial cleft cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment is transoral excision of the offending sublingual gland to stop the mucus extravasation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the visible neck cyst without removing the sublingual gland, leading to recurrence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for plunging (cervical) ranula."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "plunging_ranula-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI or CT of neck and floor of mouth",
+          "cells": [
+            {
+              "text": "Cyst and its sublingual connection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Cystic lesion; guides aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration",
+          "cells": [
+            {
+              "text": "Viscous, amylase-rich mucoid fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of excised gland and cyst wall",
+          "cells": [
+            {
+              "text": "Diagnosis confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for an oral ranula component",
+          "cells": [
+            {
+              "text": "Oral component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plunging_ranula-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphatic malformation (cystic hygroma)",
+          "cells": [
+            {
+              "text": "Vascular lesion suggested by atypical features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroglossal duct cyst",
+          "cells": [
+            {
+              "text": "Near the midline"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plunging_ranula-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transoral excision of the sublingual gland",
+          "cells": [
+            {
+              "text": "Definitive treatment; removes the gland feeding the cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst removal alone",
+          "cells": [
+            {
+              "text": "Inadequate and prone to recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration or drainage",
+          "cells": [
+            {
+              "text": "Temporary decompression of a large collection; not curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve and duct protection",
+          "cells": [
+            {
+              "text": "Protect the lingual nerve, submandibular duct and gland"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Excised gland and cyst wall to confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Otolaryngology and head and neck surgery for operative planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Recurrence and residual floor-of-mouth ranula"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "plunging_ranula-dx-mgmt",
+      "title": "Diagnosis and management of Plunging (cervical) ranula",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Submandibular neck swelling with a floor-of-mouth cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (airway or swallowing compromise, infection, atypical features, recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment for a large or rapidly enlarging neck swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI or CT of neck and floor of mouth; ultrasound; aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aspirate show viscous, amylase-rich mucoid fluid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphatic malformation, branchial cyst, thyroglossal cyst or salivary tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transoral excision of the offending sublingual gland for definitive cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cyst removal or marsupialisation alone is inadequate and prone to recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspiration may decompress a large collection but is not curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protect the lingual nerve, submandibular duct and gland during surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Histology of the excised gland and cyst wall to confirm diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excising the offending sublingual gland gives a high cure rate",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

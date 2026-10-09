@@ -1,180 +1,429 @@
 {
- "id": "hantavirus",
- "name": "Hantavirus infection",
- "aliases": [
-  "hantavirus pulmonary syndrome",
-  "HPS",
-  "haemorrhagic fever with renal syndrome",
-  "HFRS",
-  "VHF"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rodent-borne viruses acquired mainly by inhaling aerosolised excreta (urine, droppings, saliva) of infected rodents, with exposure often occurring in rural, agricultural, or rodent-infested settings",
-   "Two main clinical syndromes exist: hantavirus pulmonary (cardiopulmonary) syndrome, seen chiefly in the Americas, and haemorrhagic fever with renal syndrome, seen across Eurasia",
-   "The pulmonary syndrome begins with a febrile prodrome of fever and myalgia, then progresses rapidly to a cardiopulmonary phase with capillary leak, pulmonary oedema, and shock",
-   "Haemorrhagic fever with renal syndrome evolves through febrile, hypotensive, oliguric, and later polyuric phases, with bleeding tendency and acute kidney injury",
-   "Haemoconcentration, thrombocytopenia, and the presence of immunoblasts on the blood film are helpful early clues to the pulmonary syndrome",
-   "Because these are viral haemorrhagic fevers, suspected cases warrant infection-control caution, isolation, and safe specimen handling, though person-to-person spread is limited for most strains",
-   "Care is supportive with meticulous fluid and haemodynamic management and organ support; there is no widely available specific antiviral, so early recognition and referral to intensive care are vital"
+  "id": "hantavirus",
+  "name": "Hantavirus infection",
+  "aliases": [
+    "hantavirus pulmonary syndrome",
+    "HPS",
+    "haemorrhagic fever with renal syndrome",
+    "HFRS",
+    "VHF"
   ],
-  "pathophysiology": "Hantaviruses are enveloped RNA viruses that infect vascular endothelial cells, particularly in the lungs and kidneys, without causing marked direct cell destruction. Instead, the host immune and cytokine response increases capillary permeability. In the pulmonary syndrome this produces non-cardiogenic pulmonary oedema and cardiovascular collapse, whereas in haemorrhagic fever with renal syndrome the leaky vasculature and renal microvascular injury drive haemorrhage, hypotension, and acute kidney injury with the characteristic sequence of oliguric and polyuric phases.",
-  "additionalDifferentials": [
-   "Leptospirosis",
-   "Severe dengue",
-   "Other viral haemorrhagic fevers (CCHF, Lassa)",
-   "Bacterial sepsis with ARDS",
-   "Severe atypical or community-acquired pneumonia",
-   "Acute glomerulonephritis or other causes of acute kidney injury (for HFRS)"
-  ],
-  "infectionMimics": [
-   "Leptospirosis",
-   "Severe dengue",
-   "Bacterial sepsis / ARDS",
-   "Other viral haemorrhagic fevers"
-  ],
-  "additionalInvestigations": [
-   "Hantavirus-specific IgM and IgG serology, which is usually positive by the time of severe illness",
-   "RT-PCR for viral RNA in early disease and for genotyping",
-   "Full blood count (looking for haemoconcentration, thrombocytopenia, immunoblasts) and renal function",
-   "Chest imaging showing bilateral infiltrates and pulmonary oedema in the pulmonary syndrome",
-   "Exclusion of leptospirosis, dengue, and bacterial sepsis given overlap"
-  ],
-  "redFlags": [
-   "Rapid onset of dyspnoea, hypoxia, and pulmonary oedema signalling the cardiopulmonary phase",
-   "Hypotension or shock with rising haematocrit from capillary leak",
-   "Oliguria, rising creatinine, and bleeding indicating severe renal syndrome",
-   "Any suspected viral haemorrhagic fever requires isolation, barrier precautions, and public health notification"
-  ],
-  "prognosis": "Outcome depends on syndrome and speed of supportive care: the cardiopulmonary syndrome can be rapidly fatal despite intensive care, whereas most patients with haemorrhagic fever with renal syndrome recover renal function, though severe strains carry appreciable mortality.",
-  "pitfalls": [
-   "Aggressive fluid resuscitation worsening pulmonary oedema in the cardiopulmonary phase",
-   "Missing rodent-exposure history in an acutely breathless or febrile patient",
-   "Confusing the illness with community-acquired pneumonia and delaying intensive supportive care",
-   "Underestimating the polyuric recovery phase and precipitating dehydration or electrolyte disturbance in HFRS"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide intensive supportive care as the mainstay, as there is no licensed disease-specific antiviral, with ribavirin considered in haemorrhagic fever with renal syndrome in some settings",
-   "In the renal syndrome, manage fluid and electrolytes carefully through the oliguric and polyuric phases, with renal replacement therapy for acute kidney injury",
-   "In the pulmonary syndrome, give cautious fluids given the capillary leak, with oxygen and ventilatory support for non-cardiogenic pulmonary oedema and vasopressor support for shock",
-   "Institute isolation and safe specimen handling with viral-haemorrhagic-fever infection-control precautions",
-   "Monitor fluid balance, platelet count, renal function, and respiratory status closely for deterioration",
-   "Refer early to intensive care and consider extracorporeal membrane oxygenation for refractory shock or respiratory failure",
-   "Advise on rodent-exposure avoidance and safe cleaning of infested environments to prevent recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hantavirus-pathway",
-   "title": "Hantavirus infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rodent-borne viruses acquired mainly by inhaling aerosolised excreta (urine, droppings, saliva) of infected rodents, with exposure often occurring in rural, agricultural, or rodent-infested settings",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid onset of dyspnoea, hypoxia, and pulmonary oedema signalling the cardiopulmonary phase",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Hantavirus-specific IgM and IgG serology, which is usually positive by the time of severe illness, RT-PCR for viral RNA in early disease and for genotyping, Full blood count (looking for haemoconcentration,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide intensive supportive care as the mainstay, as there is no licensed disease-specific antiviral, with ribavirin considered in haemorrhagic fever with renal syndrome in some settings"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Aggressive fluid resuscitation worsening pulmonary oedema in the cardiopulmonary phase"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hantavirus infection."
-  }
- ],
- "tables": [
-  {
-   "id": "hantavirus-matrix",
-   "title": "Hantavirus infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rodent-borne viruses acquired mainly by inhaling aerosolised excreta (urine, droppings, saliva) of infected rodents, with",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rodent-borne viruses acquired mainly by inhaling aerosolised excreta (urine, droppings, saliva) of infected rodents, with exposure often occurring in rural, agricultural, or rodent-infested settings",
+      "Two main clinical syndromes exist: hantavirus pulmonary (cardiopulmonary) syndrome, seen chiefly in the Americas, and haemorrhagic fever with renal syndrome, seen across Eurasia",
+      "The pulmonary syndrome begins with a febrile prodrome of fever and myalgia, then progresses rapidly to a cardiopulmonary phase with capillary leak, pulmonary oedema, and shock",
+      "Haemorrhagic fever with renal syndrome evolves through febrile, hypotensive, oliguric, and later polyuric phases, with bleeding tendency and acute kidney injury",
+      "Haemoconcentration, thrombocytopenia, and the presence of immunoblasts on the blood film are helpful early clues to the pulmonary syndrome",
+      "Because these are viral haemorrhagic fevers, suspected cases warrant infection-control caution, isolation, and safe specimen handling, though person-to-person spread is limited for most strains",
+      "Care is supportive with meticulous fluid and haemodynamic management and organ support; there is no widely available specific antiviral, so early recognition and referral to intensive care are vital"
     ],
-    [
-     "Key Investigations",
-     "Hantavirus-specific IgM and IgG serology, which is usually positive by the time of severe illness, RT-PCR for viral RNA in early",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hantaviruses are enveloped RNA viruses that infect vascular endothelial cells, particularly in the lungs and kidneys, without causing marked direct cell destruction. Instead, the host immune and cytokine response increases capillary permeability. In the pulmonary syndrome this produces non-cardiogenic pulmonary oedema and cardiovascular collapse, whereas in haemorrhagic fever with renal syndrome the leaky vasculature and renal microvascular injury drive haemorrhage, hypotension, and acute kidney injury with the characteristic sequence of oliguric and polyuric phases.",
+    "additionalDifferentials": [
+      "Leptospirosis",
+      "Severe dengue",
+      "Other viral haemorrhagic fevers (CCHF, Lassa)",
+      "Bacterial sepsis with ARDS",
+      "Severe atypical or community-acquired pneumonia",
+      "Acute glomerulonephritis or other causes of acute kidney injury (for HFRS)"
     ],
-    [
-     "Primary Differentials",
-     "Leptospirosis, Severe dengue, Other viral haemorrhagic fevers (CCHF, Lassa)",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Leptospirosis",
+      "Severe dengue",
+      "Bacterial sepsis / ARDS",
+      "Other viral haemorrhagic fevers"
     ],
-    [
-     "Management Strategy",
-     "Provide intensive supportive care as the mainstay, as there is no licensed disease-specific antiviral, with ribavirin considered",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Hantavirus-specific IgM and IgG serology, which is usually positive by the time of severe illness",
+      "RT-PCR for viral RNA in early disease and for genotyping",
+      "Full blood count (looking for haemoconcentration, thrombocytopenia, immunoblasts) and renal function",
+      "Chest imaging showing bilateral infiltrates and pulmonary oedema in the pulmonary syndrome",
+      "Exclusion of leptospirosis, dengue, and bacterial sepsis given overlap"
     ],
-    [
-     "Clinical Pitfall",
-     "Aggressive fluid resuscitation worsening pulmonary oedema in the cardiopulmonary phase",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Rapid onset of dyspnoea, hypoxia, and pulmonary oedema signalling the cardiopulmonary phase",
+      "Hypotension or shock with rising haematocrit from capillary leak",
+      "Oliguria, rising creatinine, and bleeding indicating severe renal syndrome",
+      "Any suspected viral haemorrhagic fever requires isolation, barrier precautions, and public health notification"
+    ],
+    "prognosis": "Outcome depends on syndrome and speed of supportive care: the cardiopulmonary syndrome can be rapidly fatal despite intensive care, whereas most patients with haemorrhagic fever with renal syndrome recover renal function, though severe strains carry appreciable mortality.",
+    "pitfalls": [
+      "Aggressive fluid resuscitation worsening pulmonary oedema in the cardiopulmonary phase",
+      "Missing rodent-exposure history in an acutely breathless or febrile patient",
+      "Confusing the illness with community-acquired pneumonia and delaying intensive supportive care",
+      "Underestimating the polyuric recovery phase and precipitating dehydration or electrolyte disturbance in HFRS"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide intensive supportive care as the mainstay, as there is no licensed disease-specific antiviral, with ribavirin considered in haemorrhagic fever with renal syndrome in some settings",
+      "In the renal syndrome, manage fluid and electrolytes carefully through the oliguric and polyuric phases, with renal replacement therapy for acute kidney injury",
+      "In the pulmonary syndrome, give cautious fluids given the capillary leak, with oxygen and ventilatory support for non-cardiogenic pulmonary oedema and vasopressor support for shock",
+      "Institute isolation and safe specimen handling with viral-haemorrhagic-fever infection-control precautions",
+      "Monitor fluid balance, platelet count, renal function, and respiratory status closely for deterioration",
+      "Refer early to intensive care and consider extracorporeal membrane oxygenation for refractory shock or respiratory failure",
+      "Advise on rodent-exposure avoidance and safe cleaning of infested environments to prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for hantavirus infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hantavirus-real-image",
-   "title": "Hantavirus infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "hantavirus-pathway",
+      "title": "Hantavirus infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rodent-borne viruses acquired mainly by inhaling aerosolised excreta (urine, droppings, saliva) of infected rodents, with exposure often occurring in rural, agricultural, or rodent-infested settings",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid onset of dyspnoea, hypoxia, and pulmonary oedema signalling the cardiopulmonary phase",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Hantavirus-specific IgM and IgG serology, which is usually positive by the time of severe illness, RT-PCR for viral RNA in early disease and for genotyping, Full blood count (looking for haemoconcentration,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide intensive supportive care as the mainstay, as there is no licensed disease-specific antiviral, with ribavirin considered in haemorrhagic fever with renal syndrome in some settings"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Aggressive fluid resuscitation worsening pulmonary oedema in the cardiopulmonary phase"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hantavirus infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hantavirus-matrix",
+      "title": "Hantavirus infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rodent-borne viruses acquired mainly by inhaling aerosolised excreta (urine, droppings, saliva) of infected rodents, with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Hantavirus-specific IgM and IgG serology, which is usually positive by the time of severe illness, RT-PCR for viral RNA in early",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Leptospirosis, Severe dengue, Other viral haemorrhagic fevers (CCHF, Lassa)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide intensive supportive care as the mainstay, as there is no licensed disease-specific antiviral, with ribavirin considered",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Aggressive fluid resuscitation worsening pulmonary oedema in the cardiopulmonary phase",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hantavirus infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hantavirus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hantavirus-specific IgM and IgG serology",
+          "cells": [
+            {
+              "text": "Usually positive by the time of severe illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RT-PCR",
+          "cells": [
+            {
+              "text": "Viral RNA in early disease, and genotyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and renal function",
+          "cells": [
+            {
+              "text": "Haemoconcentration, thrombocytopenia and immunoblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Bilateral infiltrates and pulmonary oedema in the pulmonary syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of leptospirosis, dengue and bacterial sepsis",
+          "cells": [
+            {
+              "text": "Overlapping illnesses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hantavirus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Mainstay, as there is no licensed disease-specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal syndrome fluid management",
+          "cells": [
+            {
+              "text": "Careful fluids and electrolytes through the oliguric and polyuric phases; renal replacement if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary syndrome fluids",
+          "cells": [
+            {
+              "text": "Cautious fluids given the capillary leak; oxygen and ventilatory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation",
+          "cells": [
+            {
+              "text": "Viral haemorrhagic fever infection-control precautions; safe specimen handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Close monitoring",
+          "cells": [
+            {
+              "text": "Fluid balance, platelet count, renal function and respiratory status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early ICU referral",
+          "cells": [
+            {
+              "text": "Consider extracorporeal membrane oxygenation for refractory shock or respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rodent exposure avoidance",
+          "cells": [
+            {
+              "text": "Safe cleaning of infested environments to prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hantavirus-dx-mgmt",
+      "title": "Diagnosis and management of Hantavirus infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Febrile illness with myalgia after possible rodent exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid dyspnoea, hypotension, oliguria, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: ICU care, cautious fluids, and consider ECMO for refractory shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hantavirus IgM and IgG, RT-PCR, full blood count, renal function, chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is serology or PCR positive, with leptospirosis, dengue and sepsis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue exclusion of leptospirosis, dengue and bacterial sepsis; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care; no licensed disease-specific antiviral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Careful fluids and electrolytes through the renal phases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oxygen and ventilatory support; cautious fluids for capillary leak",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Isolation and public health notification",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery with supportive care; severe cases need ICU support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

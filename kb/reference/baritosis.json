@@ -1,177 +1,486 @@
 {
- "id": "baritosis",
- "name": "baritosis",
- "aliases": [
-  "barium pneumoconiosis",
-  "baryta pneumoconiosis"
- ],
- "class": "non_infective",
- "system": "respiratory",
- "specialty": "occupational medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Murray & Nadel's Textbook of Respiratory Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Baritosis is a benign inert-dust pneumoconiosis caused by inhalation of insoluble barium compounds, chiefly barium sulfate (baryte) and barium oxide/carbonate dusts.",
-   "Like stannosis, it produces striking radiographic shadowing with little or no symptoms or functional impairment, because barium is highly radiodense.",
-   "Chest radiographs show very dense, discrete, rounded nodular opacities distributed through both lungs, reflecting the high radio-opacity of barium rather than fibrosis.",
-   "Exposure occurs in barite mining and milling, and in industries using barium in glass, paint, rubber, ceramics and drilling muds.",
-   "A characteristic feature is partial regression of the radiographic opacities after exposure ceases, as inert dust is gradually cleared.",
-   "Lung function is typically preserved and there is no progression to fibrosis, tuberculosis or malignancy from the barium dust itself.",
-   "Soluble barium salts are systemically toxic (notably causing hypokalaemia and muscle effects), but baritosis specifically results from insoluble, non-toxic barium dust in the lung.",
-   "The clinical priority is to separate benign baritosis from silicosis or mixed-dust fibrosis, considering silica co-exposure in mined ore."
+  "id": "baritosis",
+  "name": "baritosis",
+  "aliases": [
+    "barium pneumoconiosis",
+    "baryta pneumoconiosis"
   ],
-  "pathophysiology": "Inhaled insoluble barium sulfate and related barium dusts deposit in the alveoli and are engulfed by alveolar macrophages. These compounds are biologically inert and non-fibrogenic, so they accumulate as dust-laden macrophage collections around bronchioles and vessels without provoking collagen deposition, granulomas or destruction of lung architecture. Gas exchange and lung mechanics are therefore preserved. The dense nodular shadowing on imaging results from the high atomic number and radio-opacity of barium, greatly overstating the trivial tissue reaction. Because the dust is inert and clearable, macrophage-mediated clearance over time can produce partial regression of the radiographic changes once exposure stops. Any fibrosis or functional decline should raise suspicion of concomitant silica or other fibrogenic dust exposure, and soluble barium compounds, in contrast to the insoluble dust, carry separate systemic toxicity that is not part of baritosis.",
-  "additionalDifferentials": [
-   "silicosis",
-   "stannosis and other benign inert-dust pneumoconioses",
-   "siderosis (iron oxide pneumoconiosis)",
-   "mixed-dust fibrosis",
-   "coal workers' pneumoconiosis",
-   "pulmonary sarcoidosis",
-   "miliary tuberculosis or metastatic nodular disease"
-  ],
-  "additionalInvestigations": [
-   "detailed occupational history of barite mining, milling or barium use",
-   "chest radiography showing dense discrete nodular opacities",
-   "high-resolution CT to characterise nodules and exclude fibrosis",
-   "pulmonary function tests to confirm preserved lung function",
-   "assessment for concomitant silica or other fibrogenic dust exposure",
-   "serial imaging to document regression after exposure ceases",
-   "workplace air sampling and mineralogical dust analysis"
-  ],
-  "redFlags": [
-   "true fibrosis or functional impairment suggesting concomitant silica exposure",
-   "progressive breathlessness or cough not explained by inert dust retention",
-   "atypical radiographic features such as masses, cavitation or effusion",
-   "constitutional symptoms prompting exclusion of infection or malignancy",
-   "features of systemic toxicity implying exposure to soluble barium salts"
-  ],
-  "prognosis": "Baritosis is benign, with preserved lung function and no progression to fibrosis or malignancy from the barium dust itself; radiographic opacities may partially regress after exposure ends. The outlook is excellent provided coexisting fibrogenic exposures are excluded.",
-  "pitfalls": [
-   "Mistaking the dense nodular radiograph for silicosis or metastatic disease.",
-   "Attributing coexisting fibrosis to barium rather than to concurrent silica exposure.",
-   "Confusing benign insoluble-barium lung disease with systemic soluble-barium toxicity.",
-   "Performing unnecessary invasive tests in an asymptomatic worker with a clear history.",
-   "Failing to obtain follow-up imaging that would demonstrate characteristic regression."
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine, current edition",
-   "Parkes' Occupational Lung Disorders, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cessation of further inhalation of barium dust as the primary intervention",
-   "Workplace dust control, respiratory protective equipment and occupational hygiene measures",
-   "Reassurance, as the condition is benign with preserved lung function and needs no specific drug therapy",
-   "Serial chest imaging to document the characteristic partial regression of opacities once exposure ends",
-   "Screening for and exclusion of concomitant fibrogenic dust exposure such as silica, and for tuberculosis",
-   "Smoking cessation support to limit additional respiratory risk",
-   "Occupational medicine review with consideration of workplace reassignment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "baritosis-pathway",
-   "title": "baritosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Baritosis is a benign inert-dust pneumoconiosis caused by inhalation of insoluble barium compounds, chiefly barium sulfate (baryte) and barium oxide/carbonate dusts.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: true fibrosis or functional impairment suggesting concomitant silica exposure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: detailed occupational history of barite mining, milling or barium use, chest radiography showing dense discrete nodular opacities, high-resolution CT to characterise nodules and exclude fibrosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cessation of further inhalation of barium dust as the primary intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the dense nodular radiograph for silicosis or metastatic disease."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of baritosis."
-  }
- ],
- "tables": [
-  {
-   "id": "baritosis-matrix",
-   "title": "baritosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Baritosis is a benign inert-dust pneumoconiosis caused by inhalation of insoluble barium compounds, chiefly barium sulfate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "respiratory",
+  "specialty": "occupational medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Murray & Nadel's Textbook of Respiratory Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Baritosis is a benign inert-dust pneumoconiosis caused by inhalation of insoluble barium compounds, chiefly barium sulfate (baryte) and barium oxide/carbonate dusts.",
+      "Like stannosis, it produces striking radiographic shadowing with little or no symptoms or functional impairment, because barium is highly radiodense.",
+      "Chest radiographs show very dense, discrete, rounded nodular opacities distributed through both lungs, reflecting the high radio-opacity of barium rather than fibrosis.",
+      "Exposure occurs in barite mining and milling, and in industries using barium in glass, paint, rubber, ceramics and drilling muds.",
+      "A characteristic feature is partial regression of the radiographic opacities after exposure ceases, as inert dust is gradually cleared.",
+      "Lung function is typically preserved and there is no progression to fibrosis, tuberculosis or malignancy from the barium dust itself.",
+      "Soluble barium salts are systemically toxic (notably causing hypokalaemia and muscle effects), but baritosis specifically results from insoluble, non-toxic barium dust in the lung.",
+      "The clinical priority is to separate benign baritosis from silicosis or mixed-dust fibrosis, considering silica co-exposure in mined ore."
     ],
-    [
-     "Key Investigations",
-     "detailed occupational history of barite mining, milling or barium use, chest radiography showing dense discrete nodular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Inhaled insoluble barium sulfate and related barium dusts deposit in the alveoli and are engulfed by alveolar macrophages. These compounds are biologically inert and non-fibrogenic, so they accumulate as dust-laden macrophage collections around bronchioles and vessels without provoking collagen deposition, granulomas or destruction of lung architecture. Gas exchange and lung mechanics are therefore preserved. The dense nodular shadowing on imaging results from the high atomic number and radio-opacity of barium, greatly overstating the trivial tissue reaction. Because the dust is inert and clearable, macrophage-mediated clearance over time can produce partial regression of the radiographic changes once exposure stops. Any fibrosis or functional decline should raise suspicion of concomitant silica or other fibrogenic dust exposure, and soluble barium compounds, in contrast to the insoluble dust, carry separate systemic toxicity that is not part of baritosis.",
+    "additionalDifferentials": [
+      "silicosis",
+      "stannosis and other benign inert-dust pneumoconioses",
+      "siderosis (iron oxide pneumoconiosis)",
+      "mixed-dust fibrosis",
+      "coal workers' pneumoconiosis",
+      "pulmonary sarcoidosis",
+      "miliary tuberculosis or metastatic nodular disease"
     ],
-    [
-     "Primary Differentials",
-     "silicosis, stannosis and other benign inert-dust pneumoconioses, siderosis (iron oxide pneumoconiosis)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "detailed occupational history of barite mining, milling or barium use",
+      "chest radiography showing dense discrete nodular opacities",
+      "high-resolution CT to characterise nodules and exclude fibrosis",
+      "pulmonary function tests to confirm preserved lung function",
+      "assessment for concomitant silica or other fibrogenic dust exposure",
+      "serial imaging to document regression after exposure ceases",
+      "workplace air sampling and mineralogical dust analysis"
     ],
-    [
-     "Management Strategy",
-     "Cessation of further inhalation of barium dust as the primary intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "true fibrosis or functional impairment suggesting concomitant silica exposure",
+      "progressive breathlessness or cough not explained by inert dust retention",
+      "atypical radiographic features such as masses, cavitation or effusion",
+      "constitutional symptoms prompting exclusion of infection or malignancy",
+      "features of systemic toxicity implying exposure to soluble barium salts"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the dense nodular radiograph for silicosis or metastatic disease.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Baritosis is benign, with preserved lung function and no progression to fibrosis or malignancy from the barium dust itself; radiographic opacities may partially regress after exposure ends. The outlook is excellent provided coexisting fibrogenic exposures are excluded.",
+    "pitfalls": [
+      "Mistaking the dense nodular radiograph for silicosis or metastatic disease.",
+      "Attributing coexisting fibrosis to barium rather than to concurrent silica exposure.",
+      "Confusing benign insoluble-barium lung disease with systemic soluble-barium toxicity.",
+      "Performing unnecessary invasive tests in an asymptomatic worker with a clear history.",
+      "Failing to obtain follow-up imaging that would demonstrate characteristic regression."
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine, current edition",
+      "Parkes' Occupational Lung Disorders, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cessation of further inhalation of barium dust as the primary intervention",
+      "Workplace dust control, respiratory protective equipment and occupational hygiene measures",
+      "Reassurance, as the condition is benign with preserved lung function and needs no specific drug therapy",
+      "Serial chest imaging to document the characteristic partial regression of opacities once exposure ends",
+      "Screening for and exclusion of concomitant fibrogenic dust exposure such as silica, and for tuberculosis",
+      "Smoking cessation support to limit additional respiratory risk",
+      "Occupational medicine review with consideration of workplace reassignment"
     ]
-   ],
-   "caption": "Overview comparison matrix for baritosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "baritosis-real-image",
-   "title": "baritosis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "baritosis-pathway",
+      "title": "baritosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Baritosis is a benign inert-dust pneumoconiosis caused by inhalation of insoluble barium compounds, chiefly barium sulfate (baryte) and barium oxide/carbonate dusts.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: true fibrosis or functional impairment suggesting concomitant silica exposure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: detailed occupational history of barite mining, milling or barium use, chest radiography showing dense discrete nodular opacities, high-resolution CT to characterise nodules and exclude fibrosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cessation of further inhalation of barium dust as the primary intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the dense nodular radiograph for silicosis or metastatic disease."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of baritosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "baritosis-matrix",
+      "title": "baritosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Baritosis is a benign inert-dust pneumoconiosis caused by inhalation of insoluble barium compounds, chiefly barium sulfate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "detailed occupational history of barite mining, milling or barium use, chest radiography showing dense discrete nodular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "silicosis, stannosis and other benign inert-dust pneumoconioses, siderosis (iron oxide pneumoconiosis)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cessation of further inhalation of barium dust as the primary intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the dense nodular radiograph for silicosis or metastatic disease.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for baritosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "baritosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed occupational history of barite mining, milling or barium use",
+          "cells": [
+            {
+              "text": "Exposure to barium dust"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Dense discrete nodular opacities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Nodule characterisation; excludes fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Preserved lung function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for silica or other fibrogenic dust exposure",
+          "cells": [
+            {
+              "text": "Concomitant fibrogenic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging after exposure ceases",
+          "cells": [
+            {
+              "text": "Partial regression of opacities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "baritosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Silicosis",
+          "cells": [
+            {
+              "text": "Separated by excluding silica exposure and by fibrosis on HRCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Siderosis and other benign inert-dust pneumoconioses",
+          "cells": [
+            {
+              "text": "Distinguished by occupational history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "baritosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop further barium dust inhalation",
+          "cells": [
+            {
+              "text": "Cessation of exposure is the primary intervention"
+            },
+            {
+              "text": "Ongoing exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Workplace dust control",
+          "cells": [
+            {
+              "text": "Dust control, respiratory protective equipment and occupational hygiene"
+            },
+            {
+              "text": "Continuing work with barium dust"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign condition with preserved lung function; no specific drug therapy"
+            },
+            {
+              "text": "Inert dust retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial chest imaging",
+          "cells": [
+            {
+              "text": "Document partial regression of opacities once exposure ends"
+            },
+            {
+              "text": "Follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude coexisting exposure",
+          "cells": [
+            {
+              "text": "Screen for silica and tuberculosis"
+            },
+            {
+              "text": "Concomitant exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Limits additional respiratory risk"
+            },
+            {
+              "text": "Smokers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational medicine review",
+          "cells": [
+            {
+              "text": "Consider workplace reassignment"
+            },
+            {
+              "text": "Ongoing exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "baritosis-dx-mgmt",
+      "title": "Diagnosis and management of baritosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dense nodular opacities on chest radiograph in a barite or barium worker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Fibrosis, progressive breathlessness or constitutional symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for progressive symptoms, masses or cavitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Occupational history, chest radiograph, HRCT, lung function, silica screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dense discrete nodules with preserved lung function and no fibrosis on HRCT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop barium exposure; reassurance and serial imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and screen for silica exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Workplace dust control and respiratory protective equipment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for tuberculosis and coexisting silica",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Smoking cessation support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial imaging to document regression after exposure ends",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

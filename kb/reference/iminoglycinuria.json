@@ -1,176 +1,463 @@
 {
- "id": "iminoglycinuria",
- "name": "Familial iminoglycinuria",
- "aliases": [
-  "iminoglycinuria",
-  "familial renal iminoglycinuria",
-  "hyperglycinuria with iminoaciduria",
-  "proline glycine hydroxyproline transporter defect",
-  "SLC36A2"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign inherited trait of impaired proximal renal tubular reabsorption of the imino acids proline and hydroxyproline together with glycine",
-   "The main gene is SLC36A2 (the PAT2 transporter), with SLC6A20, SLC6A19 and SLC6A18 acting as modifiers of the phenotype",
-   "Diagnosed by the characteristic urinary pattern of increased glycine, proline and hydroxyproline with normal plasma levels",
-   "Essentially asymptomatic and usually an incidental laboratory finding of no clinical consequence",
-   "Newborns physiologically excrete imino acids and glycine until tubular transporters mature at around six months, so the pattern is normal in early infancy",
-   "Older weak associations with conditions such as stones or neurological problems reflect ascertainment bias rather than causation",
-   "No treatment is needed; the key task is reassurance and avoiding overinvestigation",
-   "It should not be confused with hyperglycinaemia or with generalised aminoaciduria of Fanconi syndrome"
+  "id": "iminoglycinuria",
+  "name": "Familial iminoglycinuria",
+  "aliases": [
+    "iminoglycinuria",
+    "familial renal iminoglycinuria",
+    "hyperglycinuria with iminoaciduria",
+    "proline glycine hydroxyproline transporter defect",
+    "SLC36A2"
   ],
-  "pathophysiology": "Reabsorption of glycine and the imino acids proline and hydroxyproline from the glomerular filtrate depends on a set of proximal tubular transporters, chiefly the proton-coupled amino acid transporter PAT2 encoded by SLC36A2, with contributions from additional transporters that also handle these substrates. When transporter function is reduced, filtered glycine, proline and hydroxyproline are incompletely reabsorbed and appear in excess in the urine while remaining normal in plasma. Because these amino acids are non-essential and the losses are modest, there is no metabolic deficiency or tissue consequence, so the trait is clinically silent.",
-  "additionalDifferentials": [
-   "Physiological neonatal iminoglycinuria before transporter maturation",
-   "Isolated hyperglycinuria (a related partial transport defect)",
-   "Generalised aminoaciduria of renal Fanconi syndrome",
-   "Non-ketotic hyperglycinaemia (a plasma, not urinary transport, disorder)",
-   "Secondary aminoaciduria from tubular toxins or heavy metals",
-   "Hydroxyprolinaemia and other imino acid metabolic disorders"
-  ],
-  "additionalInvestigations": [
-   "Urine amino acid chromatography showing raised glycine, proline and hydroxyproline",
-   "Plasma amino acids to confirm normal circulating levels",
-   "Assessment of other tubular functions to exclude generalised Fanconi syndrome",
-   "Family studies, as the trait segregates in relatives",
-   "SLC36A2 (and modifier gene) sequencing where confirmation is desired",
-   "Repeat testing beyond infancy if the pattern was found in a young neonate"
-  ],
-  "redFlags": [
-   "Accompanying glycosuria, phosphaturia or proteinuria suggesting generalised tubular dysfunction rather than isolated iminoglycinuria",
-   "Raised plasma glycine indicating a systemic disorder such as non-ketotic hyperglycinaemia",
-   "Growth failure or acidosis pointing to a tubulopathy",
-   "Persistence attributed to disease when the finding is a benign trait"
-  ],
-  "prognosis": "The prognosis is excellent; iminoglycinuria is a lifelong but harmless trait with no impact on health, growth or life expectancy.",
-  "pitfalls": [
-   "Interpreting the neonatal physiological pattern as a pathological transport defect",
-   "Confusing urinary iminoglycinuria with plasma hyperglycinaemia and initiating inappropriate workup",
-   "Pursuing extensive investigation or treatment for a benign incidental finding",
-   "Overlooking a broader Fanconi syndrome when other solutes are also being lost"
-  ],
-  "references": [
-   "Scriver's OMMBID",
-   "Broer S et al. Iminoglycinuria and hyperglycinuria are transporter defects",
-   "Blau N. Physician's Guide to the Diagnosis, Treatment, and Follow-up of Inherited Metabolic Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No treatment is required, as this is a harmless inherited trait, so reassure the patient and family",
-   "Confirm the benign urinary pattern of raised glycine, proline and hydroxyproline with normal plasma levels",
-   "Exclude a generalised proximal tubulopathy such as Fanconi syndrome so the finding is not misattributed",
-   "Repeat testing beyond infancy if detected in a young neonate, since physiological iminoaciduria is normal until tubular transporters mature",
-   "Avoid unnecessary further investigation or treatment, explaining that previously reported associations reflect ascertainment bias rather than causation",
-   "Offer simple family explanation and counselling given the inherited, benign nature of the trait"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "iminoglycinuria-pathway",
-   "title": "Familial iminoglycinuria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign inherited trait of impaired proximal renal tubular reabsorption of the imino acids proline and hydroxyproline together with glycine",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Accompanying glycosuria, phosphaturia or proteinuria suggesting generalised tubular dysfunction rather than isolated iminoglycinuria",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine amino acid chromatography showing raised glycine, proline and hydroxyproline, Plasma amino acids to confirm normal circulating levels, Assessment of other tubular functions to exclude generalised Fanconi syndrome"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No treatment is required, as this is a harmless inherited trait, so reassure the patient and family"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting the neonatal physiological pattern as a pathological transport defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial iminoglycinuria."
-  }
- ],
- "tables": [
-  {
-   "id": "iminoglycinuria-matrix",
-   "title": "Familial iminoglycinuria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign inherited trait of impaired proximal renal tubular reabsorption of the imino acids proline and hydroxyproline together",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign inherited trait of impaired proximal renal tubular reabsorption of the imino acids proline and hydroxyproline together with glycine",
+      "The main gene is SLC36A2 (the PAT2 transporter), with SLC6A20, SLC6A19 and SLC6A18 acting as modifiers of the phenotype",
+      "Diagnosed by the characteristic urinary pattern of increased glycine, proline and hydroxyproline with normal plasma levels",
+      "Essentially asymptomatic and usually an incidental laboratory finding of no clinical consequence",
+      "Newborns physiologically excrete imino acids and glycine until tubular transporters mature at around six months, so the pattern is normal in early infancy",
+      "Older weak associations with conditions such as stones or neurological problems reflect ascertainment bias rather than causation",
+      "No treatment is needed; the key task is reassurance and avoiding overinvestigation",
+      "It should not be confused with hyperglycinaemia or with generalised aminoaciduria of Fanconi syndrome"
     ],
-    [
-     "Key Investigations",
-     "Urine amino acid chromatography showing raised glycine, proline and hydroxyproline, Plasma amino acids to confirm normal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Reabsorption of glycine and the imino acids proline and hydroxyproline from the glomerular filtrate depends on a set of proximal tubular transporters, chiefly the proton-coupled amino acid transporter PAT2 encoded by SLC36A2, with contributions from additional transporters that also handle these substrates. When transporter function is reduced, filtered glycine, proline and hydroxyproline are incompletely reabsorbed and appear in excess in the urine while remaining normal in plasma. Because these amino acids are non-essential and the losses are modest, there is no metabolic deficiency or tissue consequence, so the trait is clinically silent.",
+    "additionalDifferentials": [
+      "Physiological neonatal iminoglycinuria before transporter maturation",
+      "Isolated hyperglycinuria (a related partial transport defect)",
+      "Generalised aminoaciduria of renal Fanconi syndrome",
+      "Non-ketotic hyperglycinaemia (a plasma, not urinary transport, disorder)",
+      "Secondary aminoaciduria from tubular toxins or heavy metals",
+      "Hydroxyprolinaemia and other imino acid metabolic disorders"
     ],
-    [
-     "Primary Differentials",
-     "Physiological neonatal iminoglycinuria before transporter maturation, Isolated hyperglycinuria (a related partial transport",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine amino acid chromatography showing raised glycine, proline and hydroxyproline",
+      "Plasma amino acids to confirm normal circulating levels",
+      "Assessment of other tubular functions to exclude generalised Fanconi syndrome",
+      "Family studies, as the trait segregates in relatives",
+      "SLC36A2 (and modifier gene) sequencing where confirmation is desired",
+      "Repeat testing beyond infancy if the pattern was found in a young neonate"
     ],
-    [
-     "Management Strategy",
-     "No treatment is required, as this is a harmless inherited trait, so reassure the patient and family",
-     "Core treatment modality"
+    "redFlags": [
+      "Accompanying glycosuria, phosphaturia or proteinuria suggesting generalised tubular dysfunction rather than isolated iminoglycinuria",
+      "Raised plasma glycine indicating a systemic disorder such as non-ketotic hyperglycinaemia",
+      "Growth failure or acidosis pointing to a tubulopathy",
+      "Persistence attributed to disease when the finding is a benign trait"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting the neonatal physiological pattern as a pathological transport defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent; iminoglycinuria is a lifelong but harmless trait with no impact on health, growth or life expectancy.",
+    "pitfalls": [
+      "Interpreting the neonatal physiological pattern as a pathological transport defect",
+      "Confusing urinary iminoglycinuria with plasma hyperglycinaemia and initiating inappropriate workup",
+      "Pursuing extensive investigation or treatment for a benign incidental finding",
+      "Overlooking a broader Fanconi syndrome when other solutes are also being lost"
+    ],
+    "references": [
+      "Scriver's OMMBID",
+      "Broer S et al. Iminoglycinuria and hyperglycinuria are transporter defects",
+      "Blau N. Physician's Guide to the Diagnosis, Treatment, and Follow-up of Inherited Metabolic Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No treatment is required, as this is a harmless inherited trait, so reassure the patient and family",
+      "Confirm the benign urinary pattern of raised glycine, proline and hydroxyproline with normal plasma levels",
+      "Exclude a generalised proximal tubulopathy such as Fanconi syndrome so the finding is not misattributed",
+      "Repeat testing beyond infancy if detected in a young neonate, since physiological iminoaciduria is normal until tubular transporters mature",
+      "Avoid unnecessary further investigation or treatment, explaining that previously reported associations reflect ascertainment bias rather than causation",
+      "Offer simple family explanation and counselling given the inherited, benign nature of the trait"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial iminoglycinuria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "iminoglycinuria-real-image",
-   "title": "Familial iminoglycinuria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "iminoglycinuria-pathway",
+      "title": "Familial iminoglycinuria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign inherited trait of impaired proximal renal tubular reabsorption of the imino acids proline and hydroxyproline together with glycine",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Accompanying glycosuria, phosphaturia or proteinuria suggesting generalised tubular dysfunction rather than isolated iminoglycinuria",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine amino acid chromatography showing raised glycine, proline and hydroxyproline, Plasma amino acids to confirm normal circulating levels, Assessment of other tubular functions to exclude generalised Fanconi syndrome"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No treatment is required, as this is a harmless inherited trait, so reassure the patient and family"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting the neonatal physiological pattern as a pathological transport defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial iminoglycinuria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "iminoglycinuria-matrix",
+      "title": "Familial iminoglycinuria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign inherited trait of impaired proximal renal tubular reabsorption of the imino acids proline and hydroxyproline together",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine amino acid chromatography showing raised glycine, proline and hydroxyproline, Plasma amino acids to confirm normal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Physiological neonatal iminoglycinuria before transporter maturation, Isolated hyperglycinuria (a related partial transport",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No treatment is required, as this is a harmless inherited trait, so reassure the patient and family",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting the neonatal physiological pattern as a pathological transport defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial iminoglycinuria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iminoglycinuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine amino acid chromatography",
+          "cells": [
+            {
+              "text": "Raised glycine, proline and hydroxyproline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Normal circulating levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other tubular function tests",
+          "cells": [
+            {
+              "text": "Generalised Fanconi syndrome excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family studies",
+          "cells": [
+            {
+              "text": "Trait segregation in relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC36A2 sequencing",
+          "cells": [
+            {
+              "text": "Confirmation where desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat testing beyond infancy",
+          "cells": [
+            {
+              "text": "Needed if the pattern was found in a young neonate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iminoglycinuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological neonatal iminoglycinuria",
+          "cells": [
+            {
+              "text": "Normal until tubular transporters mature; repeat testing beyond infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised aminoaciduria of renal Fanconi syndrome",
+          "cells": [
+            {
+              "text": "Other solutes also lost"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-ketotic hyperglycinaemia",
+          "cells": [
+            {
+              "text": "A plasma disorder with raised plasma glycine, not urinary transport"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iminoglycinuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment",
+          "cells": [
+            {
+              "text": "Harmless inherited trait; reassure patient and family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm benign pattern",
+          "cells": [
+            {
+              "text": "Raised urinary glycine, proline and hydroxyproline with normal plasma levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude tubulopathy",
+          "cells": [
+            {
+              "text": "Fanconi syndrome must not be misattributed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal finding",
+          "cells": [
+            {
+              "text": "Repeat testing beyond infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid overinvestigation",
+          "cells": [
+            {
+              "text": "Previously reported associations reflect ascertainment bias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family counselling",
+          "cells": [
+            {
+              "text": "Simple explanation of the inherited, benign nature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iminoglycinuria-dx-mgmt",
+      "title": "Diagnosis and management of Familial iminoglycinuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised urinary glycine, proline and hydroxyproline with normal plasma levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Glycosuria, phosphaturia, proteinuria, acidosis or raised plasma glycine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for generalised tubulopathy or non-ketotic hyperglycinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine amino acid chromatography, plasma amino acids, other tubular function tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Isolated urinary pattern with normal plasma and tubular function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate tubulopathy or plasma disorder; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No treatment; reassure patient and family",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeat testing beyond infancy if found in a neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid unnecessary investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Family explanation and counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign inherited trait; no intervention needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

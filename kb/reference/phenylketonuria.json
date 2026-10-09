@@ -1,174 +1,443 @@
 {
- "id": "phenylketonuria",
- "name": "Phenylketonuria",
- "aliases": [
-  "PKU",
-  "phenylalanine hydroxylase deficiency",
-  "hyperphenylalaninaemia"
- ],
- "class": "non_infective",
- "system": "Metabolic",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive inborn error of amino acid metabolism caused most often by deficiency of the enzyme phenylalanine hydroxylase.",
-   "Untreated, accumulation of phenylalanine causes progressive and irreversible intellectual disability, seizures, and behavioural problems.",
-   "Affected infants are typically normal at birth, so detection relies on newborn screening rather than clinical signs.",
-   "Classic untreated features can include a musty or mousy body odour, eczema, and reduced pigmentation with fair hair and skin.",
-   "Early diagnosis through screening and prompt dietary treatment prevent the neurological damage almost entirely.",
-   "Treatment centres on a lifelong low-phenylalanine diet with a special protein substitute, guided by regular monitoring of blood phenylalanine levels.",
-   "A subset of patients respond to the cofactor tetrahydrobiopterin (sapropterin), and disorders of biopterin metabolism must be excluded as a separate cause of high phenylalanine.",
-   "Maternal PKU with poorly controlled phenylalanine during pregnancy can damage the fetus, causing microcephaly, congenital heart disease, and developmental delay, so strict control is essential before and during pregnancy.",
-   "Lifelong follow-up in a metabolic service supports adherence and long-term neurocognitive outcomes."
+  "id": "phenylketonuria",
+  "name": "Phenylketonuria",
+  "aliases": [
+    "PKU",
+    "phenylalanine hydroxylase deficiency",
+    "hyperphenylalaninaemia"
   ],
-  "pathophysiology": "Deficiency of phenylalanine hydroxylase (or, less commonly, of its tetrahydrobiopterin cofactor) blocks the conversion of phenylalanine to tyrosine. Phenylalanine therefore accumulates in blood and tissues and is diverted to alternative metabolites such as phenylketones. High phenylalanine levels are neurotoxic to the developing brain, interfering with amino acid transport across the blood-brain barrier, neurotransmitter synthesis, and myelination, producing the intellectual disability and neurological features of untreated disease. Reduced tyrosine availability also limits synthesis of melanin, contributing to hypopigmentation.",
-  "additionalDifferentials": [
-   "Tetrahydrobiopterin (cofactor) deficiency disorders",
-   "Transient hyperphenylalaninaemia of the newborn",
-   "Other inborn errors of metabolism presenting with developmental delay",
-   "Non-metabolic causes of intellectual disability and seizures",
-   "Tyrosinaemia"
-  ],
-  "additionalInvestigations": [
-   "Newborn bloodspot screening for elevated phenylalanine",
-   "Quantitative plasma amino acids (phenylalanine and tyrosine)",
-   "Tetrahydrobiopterin loading test and pterin studies to exclude cofactor defects",
-   "Dihydropteridine reductase activity measurement",
-   "Genetic analysis of the PAH gene",
-   "Serial blood phenylalanine monitoring to guide dietary treatment"
-  ],
-  "redFlags": [
-   "Markedly elevated phenylalanine levels requiring urgent dietary intervention",
-   "Seizures or neurological deterioration in an untreated infant",
-   "Poor metabolic control during pregnancy (maternal PKU) risking fetal harm",
-   "Failure of phenylalanine to fall despite dietary treatment, suggesting a cofactor defect",
-   "Signs of nutritional deficiency from an overly restricted diet"
-  ],
-  "prognosis": "With early diagnosis and consistent dietary control, cognitive development is normal or near-normal; delayed treatment or poor lifelong control leads to irreversible neurocognitive impairment, and maternal control critically affects offspring.",
-  "pitfalls": [
-   "Assuming a normal newborn appearance excludes the diagnosis",
-   "Failing to exclude tetrahydrobiopterin deficiency as a treatable alternative cause",
-   "Relaxing dietary control in older children and adults, risking cognitive and neuropsychiatric effects",
-   "Overlooking the need for strict preconception and pregnancy control in affected mothers"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong low-phenylalanine diet with a phenylalanine-free amino-acid protein substitute as the cornerstone of treatment",
-   "Regular monitoring of blood phenylalanine to keep levels within the target therapeutic range and guide dietary adjustment",
-   "Sapropterin, a tetrahydrobiopterin analogue, for cofactor-responsive patients to increase phenylalanine tolerance",
-   "Enzyme substitution therapy with pegvaliase for selected adults with inadequate dietary control",
-   "Ensuring nutritional adequacy of tyrosine, vitamin B12, iron and micronutrients with growth monitoring on the restricted diet",
-   "Preconception counselling for women to establish strict control before pregnancy and prevent maternal phenylketonuria embryopathy",
-   "Specialist metabolic team and dietitian follow-up, with genetic counselling for this autosomal recessive PAH disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phenylketonuria-pathway",
-   "title": "Phenylketonuria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive inborn error of amino acid metabolism caused most often by deficiency of the enzyme phenylalanine hydroxylase.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Markedly elevated phenylalanine levels requiring urgent dietary intervention",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Newborn bloodspot screening for elevated phenylalanine, Quantitative plasma amino acids (phenylalanine and tyrosine), Tetrahydrobiopterin loading test and pterin studies to exclude cofactor defects"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong low-phenylalanine diet with a phenylalanine-free amino-acid protein substitute as the cornerstone of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal newborn appearance excludes the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phenylketonuria."
-  }
- ],
- "tables": [
-  {
-   "id": "phenylketonuria-matrix",
-   "title": "Phenylketonuria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive inborn error of amino acid metabolism caused most often by deficiency of the enzyme phenylalanine",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive inborn error of amino acid metabolism caused most often by deficiency of the enzyme phenylalanine hydroxylase.",
+      "Untreated, accumulation of phenylalanine causes progressive and irreversible intellectual disability, seizures, and behavioural problems.",
+      "Affected infants are typically normal at birth, so detection relies on newborn screening rather than clinical signs.",
+      "Classic untreated features can include a musty or mousy body odour, eczema, and reduced pigmentation with fair hair and skin.",
+      "Early diagnosis through screening and prompt dietary treatment prevent the neurological damage almost entirely.",
+      "Treatment centres on a lifelong low-phenylalanine diet with a special protein substitute, guided by regular monitoring of blood phenylalanine levels.",
+      "A subset of patients respond to the cofactor tetrahydrobiopterin (sapropterin), and disorders of biopterin metabolism must be excluded as a separate cause of high phenylalanine.",
+      "Maternal PKU with poorly controlled phenylalanine during pregnancy can damage the fetus, causing microcephaly, congenital heart disease, and developmental delay, so strict control is essential before and during pregnancy.",
+      "Lifelong follow-up in a metabolic service supports adherence and long-term neurocognitive outcomes."
     ],
-    [
-     "Key Investigations",
-     "Newborn bloodspot screening for elevated phenylalanine, Quantitative plasma amino acids (phenylalanine and tyrosine),",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Deficiency of phenylalanine hydroxylase (or, less commonly, of its tetrahydrobiopterin cofactor) blocks the conversion of phenylalanine to tyrosine. Phenylalanine therefore accumulates in blood and tissues and is diverted to alternative metabolites such as phenylketones. High phenylalanine levels are neurotoxic to the developing brain, interfering with amino acid transport across the blood-brain barrier, neurotransmitter synthesis, and myelination, producing the intellectual disability and neurological features of untreated disease. Reduced tyrosine availability also limits synthesis of melanin, contributing to hypopigmentation.",
+    "additionalDifferentials": [
+      "Tetrahydrobiopterin (cofactor) deficiency disorders",
+      "Transient hyperphenylalaninaemia of the newborn",
+      "Other inborn errors of metabolism presenting with developmental delay",
+      "Non-metabolic causes of intellectual disability and seizures",
+      "Tyrosinaemia"
     ],
-    [
-     "Primary Differentials",
-     "Tetrahydrobiopterin (cofactor) deficiency disorders, Transient hyperphenylalaninaemia of the newborn, Other inborn errors of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Newborn bloodspot screening for elevated phenylalanine",
+      "Quantitative plasma amino acids (phenylalanine and tyrosine)",
+      "Tetrahydrobiopterin loading test and pterin studies to exclude cofactor defects",
+      "Dihydropteridine reductase activity measurement",
+      "Genetic analysis of the PAH gene",
+      "Serial blood phenylalanine monitoring to guide dietary treatment"
     ],
-    [
-     "Management Strategy",
-     "Lifelong low-phenylalanine diet with a phenylalanine-free amino-acid protein substitute as the cornerstone of treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Markedly elevated phenylalanine levels requiring urgent dietary intervention",
+      "Seizures or neurological deterioration in an untreated infant",
+      "Poor metabolic control during pregnancy (maternal PKU) risking fetal harm",
+      "Failure of phenylalanine to fall despite dietary treatment, suggesting a cofactor defect",
+      "Signs of nutritional deficiency from an overly restricted diet"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal newborn appearance excludes the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis and consistent dietary control, cognitive development is normal or near-normal; delayed treatment or poor lifelong control leads to irreversible neurocognitive impairment, and maternal control critically affects offspring.",
+    "pitfalls": [
+      "Assuming a normal newborn appearance excludes the diagnosis",
+      "Failing to exclude tetrahydrobiopterin deficiency as a treatable alternative cause",
+      "Relaxing dietary control in older children and adults, risking cognitive and neuropsychiatric effects",
+      "Overlooking the need for strict preconception and pregnancy control in affected mothers"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong low-phenylalanine diet with a phenylalanine-free amino-acid protein substitute as the cornerstone of treatment",
+      "Regular monitoring of blood phenylalanine to keep levels within the target therapeutic range and guide dietary adjustment",
+      "Sapropterin, a tetrahydrobiopterin analogue, for cofactor-responsive patients to increase phenylalanine tolerance",
+      "Enzyme substitution therapy with pegvaliase for selected adults with inadequate dietary control",
+      "Ensuring nutritional adequacy of tyrosine, vitamin B12, iron and micronutrients with growth monitoring on the restricted diet",
+      "Preconception counselling for women to establish strict control before pregnancy and prevent maternal phenylketonuria embryopathy",
+      "Specialist metabolic team and dietitian follow-up, with genetic counselling for this autosomal recessive PAH disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for phenylketonuria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phenylketonuria-real-image",
-   "title": "Phenylketonuria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "phenylketonuria-pathway",
+      "title": "Phenylketonuria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive inborn error of amino acid metabolism caused most often by deficiency of the enzyme phenylalanine hydroxylase.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Markedly elevated phenylalanine levels requiring urgent dietary intervention",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Newborn bloodspot screening for elevated phenylalanine, Quantitative plasma amino acids (phenylalanine and tyrosine), Tetrahydrobiopterin loading test and pterin studies to exclude cofactor defects"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong low-phenylalanine diet with a phenylalanine-free amino-acid protein substitute as the cornerstone of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal newborn appearance excludes the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phenylketonuria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phenylketonuria-matrix",
+      "title": "Phenylketonuria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive inborn error of amino acid metabolism caused most often by deficiency of the enzyme phenylalanine",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Newborn bloodspot screening for elevated phenylalanine, Quantitative plasma amino acids (phenylalanine and tyrosine),",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tetrahydrobiopterin (cofactor) deficiency disorders, Transient hyperphenylalaninaemia of the newborn, Other inborn errors of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong low-phenylalanine diet with a phenylalanine-free amino-acid protein substitute as the cornerstone of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal newborn appearance excludes the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phenylketonuria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phenylketonuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn bloodspot screening",
+          "cells": [
+            {
+              "text": "Elevated phenylalanine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative plasma amino acids",
+          "cells": [
+            {
+              "text": "Phenylalanine and tyrosine levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetrahydrobiopterin loading test and pterin studies",
+          "cells": [
+            {
+              "text": "Cofactor defects excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dihydropteridine reductase activity",
+          "cells": [
+            {
+              "text": "Enzyme activity, to exclude a cofactor defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PAH gene analysis",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial blood phenylalanine",
+          "cells": [
+            {
+              "text": "Guides dietary treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phenylketonuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-phenylalanine diet",
+          "cells": [
+            {
+              "text": "Lifelong, with a phenylalanine-free amino-acid protein substitute as the cornerstone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood phenylalanine monitoring",
+          "cells": [
+            {
+              "text": "Keep levels within the target range; guide dietary adjustment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sapropterin",
+          "cells": [
+            {
+              "text": "For cofactor-responsive patients, to increase phenylalanine tolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pegvaliase",
+          "cells": [
+            {
+              "text": "Enzyme substitution for selected adults with inadequate dietary control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional adequacy",
+          "cells": [
+            {
+              "text": "Tyrosine, vitamin B12, iron and micronutrients, with growth monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preconception counselling",
+          "cells": [
+            {
+              "text": "Strict control before pregnancy to prevent maternal phenylketonuria embryopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist team",
+          "cells": [
+            {
+              "text": "Metabolic team, dietitian and genetic counselling for this autosomal recessive disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phenylketonuria-dx-mgmt",
+      "title": "Diagnosis and management of Phenylketonuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Newborn with elevated phenylalanine on bloodspot screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (markedly raised phenylalanine, seizures, failure to fall on diet)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent dietary intervention; check for a cofactor defect if levels do not fall",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma amino acids; tetrahydrobiopterin loading test; pterin studies; PAH gene analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PAH gene analysis confirm classical PKU rather than a cofactor defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tetrahydrobiopterin deficiency, transient hyperphenylalaninaemia or tyrosinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong low-phenylalanine diet with amino-acid protein substitute",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regular blood phenylalanine monitoring to keep levels in the target range",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sapropterin for cofactor-responsive patients to increase phenylalanine tolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ensure nutritional adequacy of tyrosine, vitamin B12, iron and micronutrients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Preconception counselling to prevent maternal phenylketonuria embryopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early diagnosis and control give normal or near-normal cognition; delay causes impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

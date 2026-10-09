@@ -1,172 +1,490 @@
 {
- "id": "kwashiorkor",
- "name": "Kwashiorkor",
- "aliases": [
-  "oedematous malnutrition",
-  "protein-energy malnutrition (oedematous)",
-  "protein malnutrition"
- ],
- "class": "non_infective",
- "system": "Nutrition / Metabolic",
- "specialty": "Nutrition & Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The defining feature is bilateral pitting oedema, which can mask underlying wasting and lead to underestimation of the severity of malnutrition",
-   "Other signs include a distended abdomen with fatty liver, sparse depigmented hair, flaky-paint dermatosis, apathy, and irritability",
-   "It typically affects young children after weaning onto a starchy, protein-poor diet, often precipitated by an intercurrent infection",
-   "It remains relevant in parts of India and other low-income settings, particularly in food-insecure and displaced populations",
-   "Affected children are immunodeficient, so infection is common, frequently without fever, and is a leading cause of death",
-   "Feeding must follow a cautious, staged protocol because rapid refeeding risks fatal metabolic and cardiac complications",
-   "Hypoglycaemia, hypothermia, dehydration, and electrolyte disturbance must be actively sought and corrected"
+  "id": "kwashiorkor",
+  "name": "Kwashiorkor",
+  "aliases": [
+    "oedematous malnutrition",
+    "protein-energy malnutrition (oedematous)",
+    "protein malnutrition"
   ],
-  "pathophysiology": "Kwashiorkor is a form of severe acute malnutrition in which protein deficiency is relatively greater than energy deficiency. Reduced hepatic synthesis of albumin lowers plasma oncotic pressure, and this, together with increased capillary permeability, sodium retention, and oxidative stress, produces the characteristic oedema. Fatty infiltration of the liver reflects impaired lipoprotein export. Loss of immune competence, gut mucosal atrophy, and micronutrient deficiencies compound the picture, and metabolic adaptation to starvation makes the child vulnerable to hypoglycaemia, hypothermia, and dangerous fluid and electrolyte shifts during treatment.",
-  "additionalDifferentials": [
-   "Marasmus and marasmic-kwashiorkor",
-   "Nephrotic syndrome causing oedema and hypoalbuminaemia",
-   "Protein-losing enteropathy",
-   "Chronic liver disease with ascites and oedema",
-   "Congestive cardiac failure"
-  ],
-  "additionalInvestigations": [
-   "Anthropometry with weight-for-height and mid-upper-arm circumference, and assessment for oedema",
-   "Blood glucose to detect hypoglycaemia and temperature to detect hypothermia",
-   "Electrolytes including potassium, magnesium, and phosphate",
-   "Screening for infection, which is often occult",
-   "Assessment for micronutrient deficiencies and anaemia"
-  ],
-  "redFlags": [
-   "Hypoglycaemia and hypothermia, which are life-threatening in severe malnutrition",
-   "Signs of sepsis, which may present without fever",
-   "Circulatory or cardiac failure and danger of fluid overload with rehydration",
-   "Refeeding-related electrolyte shifts during early nutritional rehabilitation"
-  ],
-  "prognosis": "With careful staged nutritional rehabilitation and treatment of infection, recovery is possible, but mortality is high when complications such as sepsis, hypoglycaemia, or refeeding are not anticipated and managed.",
-  "pitfalls": [
-   "Underestimating malnutrition because oedema masks wasting",
-   "Refeeding too aggressively and precipitating cardiac failure or refeeding syndrome",
-   "Overzealous intravenous rehydration causing fluid overload",
-   "Missing occult infection because the usual signs of fever and inflammation are blunted"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO nutrition guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Follow a cautious, staged nutritional rehabilitation protocol, beginning with a low-protein, low-energy stabilisation formula before transitioning to catch-up feeding, to avoid fatal refeeding syndrome",
-   "Detect and correct hypoglycaemia and hypothermia promptly with frequent feeds and active warming",
-   "Restore electrolytes with potassium and magnesium and give cautious rehydration to avoid fluid overload and cardiac failure",
-   "Treat presumed infection empirically with broad-spectrum antibiotics because sepsis is often occult and afebrile",
-   "Provide micronutrient replacement including vitamin A, zinc and folate, deferring iron until the recovery phase",
-   "Attend to the flaky-paint dermatosis with gentle skin care and manage the oedema",
-   "Arrange multidisciplinary follow-up with caregiver education and measures to address the underlying food insecurity",
-   "Escalate to inpatient or high-dependency care for signs of shock, worsening oedema or feeding intolerance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kwashiorkor-pathway",
-   "title": "Kwashiorkor: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The defining feature is bilateral pitting oedema, which can mask underlying wasting and lead to underestimation of the severity of malnutrition",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypoglycaemia and hypothermia, which are life-threatening in severe malnutrition",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anthropometry with weight-for-height and mid-upper-arm circumference, and assessment for oedema, Blood glucose to detect hypoglycaemia and temperature to detect hypothermia, Electrolytes including potassium, magnesium, and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Follow a cautious, staged nutritional rehabilitation protocol, beginning with a low-protein, low-energy stabilisation formula before transitioning to catch-up feeding, to avoid fatal refeeding syndrome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating malnutrition because oedema masks wasting"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kwashiorkor."
-  }
- ],
- "tables": [
-  {
-   "id": "kwashiorkor-matrix",
-   "title": "Kwashiorkor: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The defining feature is bilateral pitting oedema, which can mask underlying wasting and lead to underestimation of the severity",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutrition / Metabolic",
+  "specialty": "Nutrition & Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The defining feature is bilateral pitting oedema, which can mask underlying wasting and lead to underestimation of the severity of malnutrition",
+      "Other signs include a distended abdomen with fatty liver, sparse depigmented hair, flaky-paint dermatosis, apathy, and irritability",
+      "It typically affects young children after weaning onto a starchy, protein-poor diet, often precipitated by an intercurrent infection",
+      "It remains relevant in parts of India and other low-income settings, particularly in food-insecure and displaced populations",
+      "Affected children are immunodeficient, so infection is common, frequently without fever, and is a leading cause of death",
+      "Feeding must follow a cautious, staged protocol because rapid refeeding risks fatal metabolic and cardiac complications",
+      "Hypoglycaemia, hypothermia, dehydration, and electrolyte disturbance must be actively sought and corrected"
     ],
-    [
-     "Key Investigations",
-     "Anthropometry with weight-for-height and mid-upper-arm circumference, and assessment for oedema, Blood glucose to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kwashiorkor is a form of severe acute malnutrition in which protein deficiency is relatively greater than energy deficiency. Reduced hepatic synthesis of albumin lowers plasma oncotic pressure, and this, together with increased capillary permeability, sodium retention, and oxidative stress, produces the characteristic oedema. Fatty infiltration of the liver reflects impaired lipoprotein export. Loss of immune competence, gut mucosal atrophy, and micronutrient deficiencies compound the picture, and metabolic adaptation to starvation makes the child vulnerable to hypoglycaemia, hypothermia, and dangerous fluid and electrolyte shifts during treatment.",
+    "additionalDifferentials": [
+      "Marasmus and marasmic-kwashiorkor",
+      "Nephrotic syndrome causing oedema and hypoalbuminaemia",
+      "Protein-losing enteropathy",
+      "Chronic liver disease with ascites and oedema",
+      "Congestive cardiac failure"
     ],
-    [
-     "Primary Differentials",
-     "Marasmus and marasmic-kwashiorkor, Nephrotic syndrome causing oedema and hypoalbuminaemia, Protein-losing enteropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anthropometry with weight-for-height and mid-upper-arm circumference, and assessment for oedema",
+      "Blood glucose to detect hypoglycaemia and temperature to detect hypothermia",
+      "Electrolytes including potassium, magnesium, and phosphate",
+      "Screening for infection, which is often occult",
+      "Assessment for micronutrient deficiencies and anaemia"
     ],
-    [
-     "Management Strategy",
-     "Follow a cautious, staged nutritional rehabilitation protocol, beginning with a low-protein, low-energy stabilisation formula",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypoglycaemia and hypothermia, which are life-threatening in severe malnutrition",
+      "Signs of sepsis, which may present without fever",
+      "Circulatory or cardiac failure and danger of fluid overload with rehydration",
+      "Refeeding-related electrolyte shifts during early nutritional rehabilitation"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating malnutrition because oedema masks wasting",
-     "Prevent diagnostic or management error"
+    "prognosis": "With careful staged nutritional rehabilitation and treatment of infection, recovery is possible, but mortality is high when complications such as sepsis, hypoglycaemia, or refeeding are not anticipated and managed.",
+    "pitfalls": [
+      "Underestimating malnutrition because oedema masks wasting",
+      "Refeeding too aggressively and precipitating cardiac failure or refeeding syndrome",
+      "Overzealous intravenous rehydration causing fluid overload",
+      "Missing occult infection because the usual signs of fever and inflammation are blunted"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO nutrition guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Follow a cautious, staged nutritional rehabilitation protocol, beginning with a low-protein, low-energy stabilisation formula before transitioning to catch-up feeding, to avoid fatal refeeding syndrome",
+      "Detect and correct hypoglycaemia and hypothermia promptly with frequent feeds and active warming",
+      "Restore electrolytes with potassium and magnesium and give cautious rehydration to avoid fluid overload and cardiac failure",
+      "Treat presumed infection empirically with broad-spectrum antibiotics because sepsis is often occult and afebrile",
+      "Provide micronutrient replacement including vitamin A, zinc and folate, deferring iron until the recovery phase",
+      "Attend to the flaky-paint dermatosis with gentle skin care and manage the oedema",
+      "Arrange multidisciplinary follow-up with caregiver education and measures to address the underlying food insecurity",
+      "Escalate to inpatient or high-dependency care for signs of shock, worsening oedema or feeding intolerance"
     ]
-   ],
-   "caption": "Overview comparison matrix for kwashiorkor."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kwashiorkor-real-image",
-   "title": "Kwashiorkor: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "kwashiorkor-pathway",
+      "title": "Kwashiorkor: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The defining feature is bilateral pitting oedema, which can mask underlying wasting and lead to underestimation of the severity of malnutrition",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypoglycaemia and hypothermia, which are life-threatening in severe malnutrition",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anthropometry with weight-for-height and mid-upper-arm circumference, and assessment for oedema, Blood glucose to detect hypoglycaemia and temperature to detect hypothermia, Electrolytes including potassium, magnesium, and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Follow a cautious, staged nutritional rehabilitation protocol, beginning with a low-protein, low-energy stabilisation formula before transitioning to catch-up feeding, to avoid fatal refeeding syndrome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating malnutrition because oedema masks wasting"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kwashiorkor."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kwashiorkor-matrix",
+      "title": "Kwashiorkor: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The defining feature is bilateral pitting oedema, which can mask underlying wasting and lead to underestimation of the severity",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anthropometry with weight-for-height and mid-upper-arm circumference, and assessment for oedema, Blood glucose to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Marasmus and marasmic-kwashiorkor, Nephrotic syndrome causing oedema and hypoalbuminaemia, Protein-losing enteropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Follow a cautious, staged nutritional rehabilitation protocol, beginning with a low-protein, low-energy stabilisation formula",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating malnutrition because oedema masks wasting",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kwashiorkor."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kwashiorkor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anthropometry and oedema assessment",
+          "cells": [
+            {
+              "text": "Oedema can mask underlying wasting, so severity is underestimated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and temperature",
+          "cells": [
+            {
+              "text": "Hypoglycaemia and hypothermia, both life-threatening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes (potassium, magnesium, phosphate)",
+          "cells": [
+            {
+              "text": "Electrolyte disturbance, including refeeding-related shifts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for infection",
+          "cells": [
+            {
+              "text": "Infection is often occult and may be afebrile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micronutrient and anaemia assessment",
+          "cells": [
+            {
+              "text": "Micronutrient deficiencies and anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kwashiorkor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Marasmus and marasmic-kwashiorkor",
+          "cells": [
+            {
+              "text": "Marasmus shows wasting without oedema; marasmic-kwashiorkor combines both"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic syndrome",
+          "cells": [
+            {
+              "text": "Oedema and hypoalbuminaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic liver disease",
+          "cells": [
+            {
+              "text": "Ascites and oedema; kwashiorkor has a distended abdomen with fatty liver"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kwashiorkor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged rehabilitation",
+          "cells": [
+            {
+              "text": "Low-protein, low-energy stabilisation formula before catch-up feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia and hypothermia",
+          "cells": [
+            {
+              "text": "Frequent feeds and active warming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and rehydration",
+          "cells": [
+            {
+              "text": "Potassium and magnesium; cautious rehydration to avoid overload and cardiac failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "Broad-spectrum for presumed infection, because sepsis is often occult"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micronutrient replacement",
+          "cells": [
+            {
+              "text": "Vitamin A, zinc and folate; iron deferred until recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and oedema care",
+          "cells": [
+            {
+              "text": "Gentle skin care for flaky-paint dermatosis; manage oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up and food security",
+          "cells": [
+            {
+              "text": "Multidisciplinary follow-up, caregiver education, address food insecurity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Inpatient or high-dependency care for shock, worsening oedema or feeding intolerance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kwashiorkor-dx-mgmt",
+      "title": "Diagnosis and management of Kwashiorkor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected kwashiorkor: bilateral pitting oedema in a young child on a poor diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypoglycaemia, hypothermia, sepsis signs, cardiac failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: inpatient or high-dependency care for shock or worsening oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anthropometry, glucose, temperature, electrolytes, infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is severe acute malnutrition confirmed by anthropometry and oedema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider marasmus, nephrotic syndrome or liver disease as the cause of oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Staged feeding: stabilisation formula before catch-up feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Frequent feeds and active warming for hypoglycaemia and hypothermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium and magnesium; cautious rehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Empirical broad-spectrum antibiotics for presumed occult sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Vitamin A, zinc and folate; defer iron until recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Multidisciplinary follow-up and caregiver education",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Recovery possible with staged rehabilitation; mortality high if complications missed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

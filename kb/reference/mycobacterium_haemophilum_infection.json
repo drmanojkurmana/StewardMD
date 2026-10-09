@@ -1,172 +1,459 @@
 {
- "id": "mycobacterium_haemophilum_infection",
- "name": "Mycobacterium haemophilum infection",
- "aliases": [
-  "M. haemophilum infection",
-  "Mycobacterium haemophilum skin infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A slow-growing mycobacterium with fastidious requirements: it needs iron-supplemented (haemin-containing) media and a lower incubation temperature of around 30 to 32 degrees Celsius",
-   "The laboratory must be alerted to the possibility, because routine media and standard temperatures fail to recover it",
-   "Causes skin lesions, characteristically papules, nodules, and ulcers over the cooler extremities and overlying joints, in immunosuppressed patients",
-   "Septic arthritis and osteomyelitis may accompany the skin disease, and disseminated infection occurs with severe immunosuppression",
-   "Recognised in transplant recipients, patients on tumour-necrosis-factor inhibitors, and people with advanced HIV",
-   "In otherwise healthy children it is a cause of cervical lymphadenitis",
-   "Management combines multidrug antimicrobial therapy with reduction of immunosuppression where possible and surgical excision for lymphadenitis"
+  "id": "mycobacterium_haemophilum_infection",
+  "name": "Mycobacterium haemophilum infection",
+  "aliases": [
+    "M. haemophilum infection",
+    "Mycobacterium haemophilum skin infection"
   ],
-  "pathophysiology": "Mycobacterium haemophilum is a slow-growing mycobacterium with a distinctive requirement for iron (haemin) and for lower incubation temperatures, reflecting its tropism for the cooler superficial tissues. The presumed environmental reservoir is water. Disease overwhelmingly affects hosts with impaired cell-mediated immunity, in whom the organism produces granulomatous skin nodules and ulcers over the limbs and joints, sometimes with underlying septic arthritis or osteomyelitis and, in the most immunosuppressed, dissemination. In immunocompetent children the same organism can localise to cervical lymph nodes. Its fastidious growth requirements mean infection is frequently missed unless specifically sought.",
-  "additionalDifferentials": [
-   "Other nontuberculous mycobacterial skin infection (M. marinum, M. chelonae)",
-   "Disseminated fungal infection with skin nodules",
-   "Bacterial septic arthritis or osteomyelitis",
-   "Cutaneous tuberculosis",
-   "Nocardiosis",
-   "Cutaneous lymphoma or vasculitis"
-  ],
-  "additionalInvestigations": [
-   "Skin or tissue biopsy for histology and mycobacterial culture",
-   "Culture on iron-supplemented media at a lower incubation temperature after alerting the laboratory",
-   "Molecular identification to species level, sometimes required when culture fails",
-   "MRI for suspected septic arthritis or osteomyelitis",
-   "Assessment and optimisation of immune status and immunosuppressive medication",
-   "Blood cultures and staging for dissemination in severely immunosuppressed patients"
-  ],
-  "redFlags": [
-   "Disseminated disease in a severely immunosuppressed host",
-   "Septic arthritis or osteomyelitis requiring surgical management",
-   "Rapid progression in transplant or anti-TNF-treated patients",
-   "Failure to grow the organism despite strong clinical suspicion, indicating the need for specialised media"
-  ],
-  "prognosis": "Outcome depends heavily on the degree of immunosuppression and how quickly it can be reversed. Localised lymphadenitis in children does well after excision, whereas disseminated disease in profoundly immunosuppressed patients can be difficult to control and carries a worse prognosis.",
-  "pitfalls": [
-   "Not alerting the laboratory, so appropriate media and incubation temperature are not used and cultures are falsely negative",
-   "Failing to reduce immunosuppression as part of treatment",
-   "Attributing skin nodules to another cause and delaying biopsy",
-   "Treating osteoarticular disease medically without surgical input"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Alert the laboratory to culture on iron- (haemin-) supplemented media at a lower incubation temperature, as routine conditions fail to recover the organism and delay treatment",
-   "Treat with prolonged multidrug antimycobacterial therapy, typically a macrolide such as clarithromycin combined with a rifamycin such as rifabutin and a fluoroquinolone such as ciprofloxacin",
-   "Reduce and optimise immunosuppression where possible, tapering tumour-necrosis-factor inhibitors or minimising transplant immunosuppression",
-   "Debride skin lesions surgically and manage accompanying septic arthritis or osteomyelitis with combined medical and surgical care",
-   "Treat childhood cervical lymphadenitis with complete surgical excision",
-   "Stage for dissemination with blood cultures and imaging in profoundly immunosuppressed patients and monitor treatment response",
-   "Refer to infectious diseases, recognising that outcome depends heavily on how quickly immunosuppression can be reversed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mycobacterium_haemophilum_infection-pathway",
-   "title": "Mycobacterium haemophilum infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A slow-growing mycobacterium with fastidious requirements: it needs iron-supplemented (haemin-containing) media and a lower incubation temperature of around 30 to 32 degrees Celsius",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disseminated disease in a severely immunosuppressed host",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin or tissue biopsy for histology and mycobacterial culture, Culture on iron-supplemented media at a lower incubation temperature after alerting the laboratory, Molecular identification to species level, sometimes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Alert the laboratory to culture on iron- (haemin-) supplemented media at a lower incubation temperature, as routine conditions fail to recover the organism and delay treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not alerting the laboratory, so appropriate media and incubation temperature are not used and cultures are falsely negative"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mycobacterium haemophilum infection."
-  }
- ],
- "tables": [
-  {
-   "id": "mycobacterium_haemophilum_infection-matrix",
-   "title": "Mycobacterium haemophilum infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A slow-growing mycobacterium with fastidious requirements: it needs iron-supplemented (haemin-containing) media and a lower",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A slow-growing mycobacterium with fastidious requirements: it needs iron-supplemented (haemin-containing) media and a lower incubation temperature of around 30 to 32 degrees Celsius",
+      "The laboratory must be alerted to the possibility, because routine media and standard temperatures fail to recover it",
+      "Causes skin lesions, characteristically papules, nodules, and ulcers over the cooler extremities and overlying joints, in immunosuppressed patients",
+      "Septic arthritis and osteomyelitis may accompany the skin disease, and disseminated infection occurs with severe immunosuppression",
+      "Recognised in transplant recipients, patients on tumour-necrosis-factor inhibitors, and people with advanced HIV",
+      "In otherwise healthy children it is a cause of cervical lymphadenitis",
+      "Management combines multidrug antimicrobial therapy with reduction of immunosuppression where possible and surgical excision for lymphadenitis"
     ],
-    [
-     "Key Investigations",
-     "Skin or tissue biopsy for histology and mycobacterial culture, Culture on iron-supplemented media at a lower incubation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mycobacterium haemophilum is a slow-growing mycobacterium with a distinctive requirement for iron (haemin) and for lower incubation temperatures, reflecting its tropism for the cooler superficial tissues. The presumed environmental reservoir is water. Disease overwhelmingly affects hosts with impaired cell-mediated immunity, in whom the organism produces granulomatous skin nodules and ulcers over the limbs and joints, sometimes with underlying septic arthritis or osteomyelitis and, in the most immunosuppressed, dissemination. In immunocompetent children the same organism can localise to cervical lymph nodes. Its fastidious growth requirements mean infection is frequently missed unless specifically sought.",
+    "additionalDifferentials": [
+      "Other nontuberculous mycobacterial skin infection (M. marinum, M. chelonae)",
+      "Disseminated fungal infection with skin nodules",
+      "Bacterial septic arthritis or osteomyelitis",
+      "Cutaneous tuberculosis",
+      "Nocardiosis",
+      "Cutaneous lymphoma or vasculitis"
     ],
-    [
-     "Primary Differentials",
-     "Other nontuberculous mycobacterial skin infection (M. marinum, M. chelonae), Disseminated fungal infection with skin nodules,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin or tissue biopsy for histology and mycobacterial culture",
+      "Culture on iron-supplemented media at a lower incubation temperature after alerting the laboratory",
+      "Molecular identification to species level, sometimes required when culture fails",
+      "MRI for suspected septic arthritis or osteomyelitis",
+      "Assessment and optimisation of immune status and immunosuppressive medication",
+      "Blood cultures and staging for dissemination in severely immunosuppressed patients"
     ],
-    [
-     "Management Strategy",
-     "Alert the laboratory to culture on iron- (haemin-) supplemented media at a lower incubation temperature, as routine conditions",
-     "Core treatment modality"
+    "redFlags": [
+      "Disseminated disease in a severely immunosuppressed host",
+      "Septic arthritis or osteomyelitis requiring surgical management",
+      "Rapid progression in transplant or anti-TNF-treated patients",
+      "Failure to grow the organism despite strong clinical suspicion, indicating the need for specialised media"
     ],
-    [
-     "Clinical Pitfall",
-     "Not alerting the laboratory, so appropriate media and incubation temperature are not used and cultures are falsely negative",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends heavily on the degree of immunosuppression and how quickly it can be reversed. Localised lymphadenitis in children does well after excision, whereas disseminated disease in profoundly immunosuppressed patients can be difficult to control and carries a worse prognosis.",
+    "pitfalls": [
+      "Not alerting the laboratory, so appropriate media and incubation temperature are not used and cultures are falsely negative",
+      "Failing to reduce immunosuppression as part of treatment",
+      "Attributing skin nodules to another cause and delaying biopsy",
+      "Treating osteoarticular disease medically without surgical input"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Alert the laboratory to culture on iron- (haemin-) supplemented media at a lower incubation temperature, as routine conditions fail to recover the organism and delay treatment",
+      "Treat with prolonged multidrug antimycobacterial therapy, typically a macrolide such as clarithromycin combined with a rifamycin such as rifabutin and a fluoroquinolone such as ciprofloxacin",
+      "Reduce and optimise immunosuppression where possible, tapering tumour-necrosis-factor inhibitors or minimising transplant immunosuppression",
+      "Debride skin lesions surgically and manage accompanying septic arthritis or osteomyelitis with combined medical and surgical care",
+      "Treat childhood cervical lymphadenitis with complete surgical excision",
+      "Stage for dissemination with blood cultures and imaging in profoundly immunosuppressed patients and monitor treatment response",
+      "Refer to infectious diseases, recognising that outcome depends heavily on how quickly immunosuppression can be reversed"
     ]
-   ],
-   "caption": "Overview comparison matrix for mycobacterium haemophilum infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mycobacterium-haemophilum-infection-real-image",
-   "title": "Mycobacterium haemophilum infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "mycobacterium_haemophilum_infection-pathway",
+      "title": "Mycobacterium haemophilum infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A slow-growing mycobacterium with fastidious requirements: it needs iron-supplemented (haemin-containing) media and a lower incubation temperature of around 30 to 32 degrees Celsius",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disseminated disease in a severely immunosuppressed host",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin or tissue biopsy for histology and mycobacterial culture, Culture on iron-supplemented media at a lower incubation temperature after alerting the laboratory, Molecular identification to species level, sometimes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Alert the laboratory to culture on iron- (haemin-) supplemented media at a lower incubation temperature, as routine conditions fail to recover the organism and delay treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not alerting the laboratory, so appropriate media and incubation temperature are not used and cultures are falsely negative"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mycobacterium haemophilum infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mycobacterium_haemophilum_infection-matrix",
+      "title": "Mycobacterium haemophilum infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A slow-growing mycobacterium with fastidious requirements: it needs iron-supplemented (haemin-containing) media and a lower",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin or tissue biopsy for histology and mycobacterial culture, Culture on iron-supplemented media at a lower incubation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other nontuberculous mycobacterial skin infection (M. marinum, M. chelonae), Disseminated fungal infection with skin nodules,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Alert the laboratory to culture on iron- (haemin-) supplemented media at a lower incubation temperature, as routine conditions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not alerting the laboratory, so appropriate media and incubation temperature are not used and cultures are falsely negative",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mycobacterium haemophilum infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_haemophilum_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin or tissue biopsy for histology and culture",
+          "cells": [
+            {
+              "text": "Mycobacterial culture and histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture on iron-supplemented media at lower temperature",
+          "cells": [
+            {
+              "text": "Needs a laboratory alert; routine media and temperature fail to recover it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification to species level",
+          "cells": [
+            {
+              "text": "Used when culture fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Suspected septic arthritis or osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status and immunosuppressive medication review",
+          "cells": [
+            {
+              "text": "Assessment and optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and staging for dissemination",
+          "cells": [
+            {
+              "text": "Severely immunosuppressed patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_haemophilum_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other nontuberculous mycobacterial skin infection, such as M. marinum or M. chelonae",
+          "cells": [
+            {
+              "text": "Requires haemin-supplemented media at a lower temperature to grow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial septic arthritis or osteomyelitis",
+          "cells": [
+            {
+              "text": "Can accompany the skin disease; MRI assesses for osteoarticular infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_haemophilum_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Alert the laboratory",
+          "cells": [
+            {
+              "text": "Culture on haemin-supplemented media at a lower incubation temperature; routine conditions delay treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged multidrug therapy",
+          "cells": [
+            {
+              "text": "Clarithromycin with rifabutin and ciprofloxacin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduce immunosuppression",
+          "cells": [
+            {
+              "text": "Taper TNF inhibitors or minimise transplant immunosuppression where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debridement and joint care",
+          "cells": [
+            {
+              "text": "Debride skin lesions; combined medical and surgical care for septic arthritis or osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Childhood cervical lymphadenitis",
+          "cells": [
+            {
+              "text": "Complete surgical excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dissemination staging",
+          "cells": [
+            {
+              "text": "Blood cultures and imaging in profoundly immunosuppressed patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious diseases referral",
+          "cells": [
+            {
+              "text": "Outcome depends on how quickly immunosuppression can be reversed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_haemophilum_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium haemophilum infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Papules, nodules or ulcers over cooler limbs or joints in an immunosuppressed patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated disease, septic arthritis, rapid progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical input for septic arthritis or osteomyelitis; stage for dissemination",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy culture on haemin media at low temperature, molecular identification, MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organism recovered on iron-supplemented media after a laboratory alert?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-alert the laboratory and repeat culture or molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged clarithromycin with rifabutin and ciprofloxacin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce immunosuppression where possible, such as tapering TNF inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical debridement of skin lesions and care of septic arthritis or osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Complete surgical excision for childhood cervical lymphadenitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on how quickly immunosuppression can be reversed; disseminated disease is harder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

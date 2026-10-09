@@ -1,176 +1,463 @@
 {
- "id": "sdhb_related_paraganglioma",
- "name": "SDHB-Related Paraganglioma–Phaeochromocytoma (PGL4)",
- "aliases": [
-  "PGL4",
-  "Familial paraganglioma type 4",
-  "SDHB-related PPGL"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Endocrine oncology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by germline loss-of-function variants in SDHB on chromosome 1p36, inherited in an autosomal dominant pattern with incomplete, age-related penetrance.",
-   "Unlike SDHD, the SDHB locus is not imprinted, so disease can arise regardless of which parent transmits the variant.",
-   "Carries the highest metastatic potential of all the SDHx genes, with a substantial proportion of tumours developing metastatic disease.",
-   "Tumours are predominantly extra-adrenal sympathetic paragangliomas of the retroperitoneum and abdomen, such as at the organ of Zuckerkandl, and are often solitary at presentation.",
-   "A noradrenergic and dopaminergic secretory profile is common; raised methoxytyramine is a marker of more aggressive and potentially metastatic behaviour.",
-   "Carriers are at increased risk of SDH-deficient renal cell carcinoma and, less commonly, gastrointestinal stromal tumour and pituitary adenoma.",
-   "Ga-DOTATATE PET is the preferred functional imaging modality, and loss of SDHB immunostaining confirms the SDH-deficient phenotype."
+  "id": "sdhb_related_paraganglioma",
+  "name": "SDHB-Related Paraganglioma–Phaeochromocytoma (PGL4)",
+  "aliases": [
+    "PGL4",
+    "Familial paraganglioma type 4",
+    "SDHB-related PPGL"
   ],
-  "pathophysiology": "SDHB encodes the iron–sulphur subunit of mitochondrial complex II. A germline inactivating variant combined with somatic loss of the remaining wild-type allele abolishes succinate dehydrogenase activity and destabilises the assembled complex, so SDHB protein is lost on immunohistochemistry. Accumulated succinate acts as an oncometabolite, inhibiting alpha-ketoglutarate–dependent prolyl hydroxylases, stabilising hypoxia-inducible factors and inducing a pseudohypoxic, pro-angiogenic and hypermethylator phenotype. SDHB-deficient cells appear particularly prone to acquiring an invasive, metastatic phenotype, which underlies the disproportionate malignancy risk of this subtype compared with the other SDHx genes. Tumours arise chiefly in sympathetic paraganglia, explaining the predominance of catecholamine-secreting extra-adrenal lesions rather than parasympathetic head and neck tumours.",
-  "additionalDifferentials": [
-   "SDHD-related paraganglioma (PGL1), more often multifocal in the head and neck",
-   "SDHC-related paraganglioma (PGL3)",
-   "Von Hippel–Lindau and MEN2-related phaeochromocytoma",
-   "Sporadic extra-adrenal paraganglioma",
-   "FH- or MAX-related hereditary phaeochromocytoma",
-   "Retroperitoneal soft tissue sarcoma or neuroblastoma in younger patients",
-   "Metastatic neuroendocrine tumour of unknown primary"
-  ],
-  "additionalInvestigations": [
-   "Plasma free metanephrines including methoxytyramine, the dopamine metabolite",
-   "Targeted SDHB germline testing and cascade screening of at-risk relatives",
-   "Whole-body MRI or CT given the frequently extra-adrenal and multifocal tumours",
-   "Ga-DOTATATE PET for staging and detection of metastatic deposits",
-   "SDHB immunohistochemistry on tumour tissue",
-   "Renal imaging surveillance for SDH-deficient renal cell carcinoma",
-   "A structured lifelong surveillance programme beginning in childhood"
-  ],
-  "redFlags": [
-   "Biochemical or imaging evidence of metastatic spread such as skeletal, nodal or hepatic deposits",
-   "Markedly raised methoxytyramine indicating a dopaminergic and potentially aggressive tumour",
-   "Catecholamine crisis with severe hypertension, arrhythmia or cardiomyopathy",
-   "A new paraganglioma detected on surveillance in a known carrier"
-  ],
-  "prognosis": "SDHB-related tumours carry the least favourable prognosis among the SDHx syndromes because of their high metastatic potential; completely resected localised tumours can do well, but metastatic disease significantly shortens survival and responds only partially to current systemic therapies.",
-  "pitfalls": [
-   "Assuming a normal adrenaline or metanephrine result excludes an active tumour when a dopamine-secreting lesion is present.",
-   "Limiting imaging to the abdomen and missing multifocal or metastatic disease elsewhere.",
-   "Deferring genetic testing in apparently sporadic, single extra-adrenal paragangliomas, many of which harbour germline SDHB variants.",
-   "Underestimating lifelong risk and discontinuing surveillance after apparently curative surgery."
-  ],
-  "references": [
-   "Endocrinology reference texts",
-   "Hereditary endocrine tumour clinical guidelines",
-   "Clinical genetics references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical resection of the paraganglioma or phaeochromocytoma is the definitive treatment",
-   "Precede resection of catecholamine-secreting tumours with alpha-adrenergic blockade, adding beta-blockade only once alpha-blockade is established",
-   "For metastatic disease, offer radionuclide therapy (I-MIBG or Lu-DOTATATE peptide receptor radionuclide therapy), cytotoxic chemotherapy, or external beam radiotherapy for painful bone deposits",
-   "Provide lifelong biochemical surveillance with plasma metanephrines including methoxytyramine, plus whole-body imaging given multifocal and metastatic risk",
-   "Include renal imaging surveillance for SDH-deficient renal cell carcinoma",
-   "Offer genetic counselling and cascade SDHB testing of at-risk relatives given autosomal dominant inheritance",
-   "Manage within an endocrine and clinical genetics multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sdhb_related_paraganglioma-pathway",
-   "title": "SDHB-Related Paraganglioma–Phaeochromocytoma (PGL4): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by germline loss-of-function variants in SDHB on chromosome 1p36, inherited in an autosomal dominant pattern with incomplete, age-related penetrance.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Biochemical or imaging evidence of metastatic spread such as skeletal, nodal or hepatic deposits",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma free metanephrines including methoxytyramine, the dopamine metabolite, Targeted SDHB germline testing and cascade screening of at-risk relatives, Whole-body MRI or CT given the frequently extra-adrenal and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical resection of the paraganglioma or phaeochromocytoma is the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal adrenaline or metanephrine result excludes an active tumour when a dopamine-secreting lesion is present."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sdhb-related paraganglioma–phaeochromocytoma (pgl4)."
-  }
- ],
- "tables": [
-  {
-   "id": "sdhb_related_paraganglioma-matrix",
-   "title": "SDHB-Related Paraganglioma–Phaeochromocytoma (PGL4): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by germline loss-of-function variants in SDHB on chromosome 1p36, inherited in an autosomal dominant pattern with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Endocrine oncology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by germline loss-of-function variants in SDHB on chromosome 1p36, inherited in an autosomal dominant pattern with incomplete, age-related penetrance.",
+      "Unlike SDHD, the SDHB locus is not imprinted, so disease can arise regardless of which parent transmits the variant.",
+      "Carries the highest metastatic potential of all the SDHx genes, with a substantial proportion of tumours developing metastatic disease.",
+      "Tumours are predominantly extra-adrenal sympathetic paragangliomas of the retroperitoneum and abdomen, such as at the organ of Zuckerkandl, and are often solitary at presentation.",
+      "A noradrenergic and dopaminergic secretory profile is common; raised methoxytyramine is a marker of more aggressive and potentially metastatic behaviour.",
+      "Carriers are at increased risk of SDH-deficient renal cell carcinoma and, less commonly, gastrointestinal stromal tumour and pituitary adenoma.",
+      "Ga-DOTATATE PET is the preferred functional imaging modality, and loss of SDHB immunostaining confirms the SDH-deficient phenotype."
     ],
-    [
-     "Key Investigations",
-     "Plasma free metanephrines including methoxytyramine, the dopamine metabolite, Targeted SDHB germline testing and cascade",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SDHB encodes the iron–sulphur subunit of mitochondrial complex II. A germline inactivating variant combined with somatic loss of the remaining wild-type allele abolishes succinate dehydrogenase activity and destabilises the assembled complex, so SDHB protein is lost on immunohistochemistry. Accumulated succinate acts as an oncometabolite, inhibiting alpha-ketoglutarate–dependent prolyl hydroxylases, stabilising hypoxia-inducible factors and inducing a pseudohypoxic, pro-angiogenic and hypermethylator phenotype. SDHB-deficient cells appear particularly prone to acquiring an invasive, metastatic phenotype, which underlies the disproportionate malignancy risk of this subtype compared with the other SDHx genes. Tumours arise chiefly in sympathetic paraganglia, explaining the predominance of catecholamine-secreting extra-adrenal lesions rather than parasympathetic head and neck tumours.",
+    "additionalDifferentials": [
+      "SDHD-related paraganglioma (PGL1), more often multifocal in the head and neck",
+      "SDHC-related paraganglioma (PGL3)",
+      "Von Hippel–Lindau and MEN2-related phaeochromocytoma",
+      "Sporadic extra-adrenal paraganglioma",
+      "FH- or MAX-related hereditary phaeochromocytoma",
+      "Retroperitoneal soft tissue sarcoma or neuroblastoma in younger patients",
+      "Metastatic neuroendocrine tumour of unknown primary"
     ],
-    [
-     "Primary Differentials",
-     "SDHD-related paraganglioma (PGL1), more often multifocal in the head and neck, SDHC-related paraganglioma (PGL3), Von Hippel to",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma free metanephrines including methoxytyramine, the dopamine metabolite",
+      "Targeted SDHB germline testing and cascade screening of at-risk relatives",
+      "Whole-body MRI or CT given the frequently extra-adrenal and multifocal tumours",
+      "Ga-DOTATATE PET for staging and detection of metastatic deposits",
+      "SDHB immunohistochemistry on tumour tissue",
+      "Renal imaging surveillance for SDH-deficient renal cell carcinoma",
+      "A structured lifelong surveillance programme beginning in childhood"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical resection of the paraganglioma or phaeochromocytoma is the definitive treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Biochemical or imaging evidence of metastatic spread such as skeletal, nodal or hepatic deposits",
+      "Markedly raised methoxytyramine indicating a dopaminergic and potentially aggressive tumour",
+      "Catecholamine crisis with severe hypertension, arrhythmia or cardiomyopathy",
+      "A new paraganglioma detected on surveillance in a known carrier"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal adrenaline or metanephrine result excludes an active tumour when a dopamine-secreting lesion is present.",
-     "Prevent diagnostic or management error"
+    "prognosis": "SDHB-related tumours carry the least favourable prognosis among the SDHx syndromes because of their high metastatic potential; completely resected localised tumours can do well, but metastatic disease significantly shortens survival and responds only partially to current systemic therapies.",
+    "pitfalls": [
+      "Assuming a normal adrenaline or metanephrine result excludes an active tumour when a dopamine-secreting lesion is present.",
+      "Limiting imaging to the abdomen and missing multifocal or metastatic disease elsewhere.",
+      "Deferring genetic testing in apparently sporadic, single extra-adrenal paragangliomas, many of which harbour germline SDHB variants.",
+      "Underestimating lifelong risk and discontinuing surveillance after apparently curative surgery."
+    ],
+    "references": [
+      "Endocrinology reference texts",
+      "Hereditary endocrine tumour clinical guidelines",
+      "Clinical genetics references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical resection of the paraganglioma or phaeochromocytoma is the definitive treatment",
+      "Precede resection of catecholamine-secreting tumours with alpha-adrenergic blockade, adding beta-blockade only once alpha-blockade is established",
+      "For metastatic disease, offer radionuclide therapy (I-MIBG or Lu-DOTATATE peptide receptor radionuclide therapy), cytotoxic chemotherapy, or external beam radiotherapy for painful bone deposits",
+      "Provide lifelong biochemical surveillance with plasma metanephrines including methoxytyramine, plus whole-body imaging given multifocal and metastatic risk",
+      "Include renal imaging surveillance for SDH-deficient renal cell carcinoma",
+      "Offer genetic counselling and cascade SDHB testing of at-risk relatives given autosomal dominant inheritance",
+      "Manage within an endocrine and clinical genetics multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for sdhb-related paraganglioma–phaeochromocytoma (pgl4)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sdhb-related-paraganglioma-real-image",
-   "title": "SDHB-Related Paraganglioma–Phaeochromocytoma (PGL4): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "sdhb_related_paraganglioma-pathway",
+      "title": "SDHB-Related Paraganglioma–Phaeochromocytoma (PGL4): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by germline loss-of-function variants in SDHB on chromosome 1p36, inherited in an autosomal dominant pattern with incomplete, age-related penetrance.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Biochemical or imaging evidence of metastatic spread such as skeletal, nodal or hepatic deposits",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma free metanephrines including methoxytyramine, the dopamine metabolite, Targeted SDHB germline testing and cascade screening of at-risk relatives, Whole-body MRI or CT given the frequently extra-adrenal and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical resection of the paraganglioma or phaeochromocytoma is the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal adrenaline or metanephrine result excludes an active tumour when a dopamine-secreting lesion is present."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sdhb-related paraganglioma–phaeochromocytoma (pgl4)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sdhb_related_paraganglioma-matrix",
+      "title": "SDHB-Related Paraganglioma–Phaeochromocytoma (PGL4): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by germline loss-of-function variants in SDHB on chromosome 1p36, inherited in an autosomal dominant pattern with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma free metanephrines including methoxytyramine, the dopamine metabolite, Targeted SDHB germline testing and cascade",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SDHD-related paraganglioma (PGL1), more often multifocal in the head and neck, SDHC-related paraganglioma (PGL3), Von Hippel to",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical resection of the paraganglioma or phaeochromocytoma is the definitive treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal adrenaline or metanephrine result excludes an active tumour when a dopamine-secreting lesion is present.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sdhb-related paraganglioma–phaeochromocytoma (pgl4)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrine oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sdhb_related_paraganglioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma free metanephrines with methoxytyramine",
+          "cells": [
+            {
+              "text": "Dopamine metabolite; marked elevation suggests aggressive tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SDHB germline testing",
+          "cells": [
+            {
+              "text": "Cascade screening of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body MRI or CT",
+          "cells": [
+            {
+              "text": "Frequently extra-adrenal and multifocal tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ga-DOTATATE PET",
+          "cells": [
+            {
+              "text": "Staging and metastatic deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SDHB immunohistochemistry on tumour",
+          "cells": [
+            {
+              "text": "Tissue confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging",
+          "cells": [
+            {
+              "text": "SDH-deficient renal cell carcinoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sdhb_related_paraganglioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SDHD-related paraganglioma (PGL1)",
+          "cells": [
+            {
+              "text": "More often multifocal in the head and neck"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Hippel-Lindau and MEN2 phaeochromocytoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sdhb_related_paraganglioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-adrenergic blockade first",
+          "cells": [
+            {
+              "text": "Before resecting catecholamine-secreting tumours; add beta-blockade only after alpha-blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic disease",
+          "cells": [
+            {
+              "text": "I-MIBG or Lu-DOTATATE radionuclide therapy, chemotherapy or external beam radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Plasma metanephrines with methoxytyramine and whole-body imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging",
+          "cells": [
+            {
+              "text": "Surveillance for SDH-deficient renal cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; cascade SDHB testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MDT management",
+          "cells": [
+            {
+              "text": "Endocrine and clinical genetics team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sdhb_related_paraganglioma-dx-mgmt",
+      "title": "Diagnosis and management of SDHB-Related Paraganglioma to Phaeochromocytoma (PGL4)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paraganglioma or phaeochromocytoma, often extra-adrenal, with SDHB suspicion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Metastases, raised methoxytyramine, catecholamine crisis or new surveillance tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Alpha-blockade, intensive control and urgent endocrine oncology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma metanephrines with methoxytyramine, SDHB test, whole-body MRI/CT, Ga-DOTATATE PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Germline SDHB variant or SDHB-negative tumour found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test other genes: SDHD, SDHC, VHL, RET, FH, MAX; consider sporadic tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Alpha-blockade, then resection of secreting tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radionuclide therapy or chemotherapy for metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong biochemical and whole-body imaging surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cascade SDHB testing of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Least favourable among SDHx syndromes owing to high metastatic potential",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

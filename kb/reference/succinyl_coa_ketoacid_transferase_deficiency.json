@@ -1,175 +1,471 @@
 {
- "id": "succinyl_coa_ketoacid_transferase_deficiency",
- "name": "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency",
- "aliases": [
-  "SCOT deficiency",
-  "OXCT1 deficiency",
-  "3-oxoacid CoA transferase deficiency",
-  "succinyl-CoA:3-oxoacid CoA transferase deficiency",
-  "ketolysis defect"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive deficiency of SCOT (OXCT1 gene), the enzyme that activates acetoacetate for peripheral utilisation, is the classic pure ketolysis defect",
-   "Presents with recurrent, often severe ketoacidotic crises, characteristically beginning in the neonatal period or infancy and precipitated by fasting or infection",
-   "A hallmark is persistent ketosis even between crises and in the fed state, because ketone bodies cannot be used by peripheral tissues",
-   "Unlike beta-ketothiolase deficiency, urine organic acids show only the ketone bodies (large amounts of acetoacetate and 3-hydroxybutyrate) without the abnormal isoleucine metabolites",
-   "The acylcarnitine profile is typically normal, so the diagnosis is easily overlooked on newborn screening",
-   "Acute treatment reverses catabolism with intravenous glucose and corrects acidosis; long-term management relies on strict avoidance of fasting with an emergency illness regimen",
-   "Confirmation is by OXCT1 molecular testing or enzyme assay in fibroblasts, as biochemical markers can be subtle"
+  "id": "succinyl_coa_ketoacid_transferase_deficiency",
+  "name": "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency",
+  "aliases": [
+    "SCOT deficiency",
+    "OXCT1 deficiency",
+    "3-oxoacid CoA transferase deficiency",
+    "succinyl-CoA:3-oxoacid CoA transferase deficiency",
+    "ketolysis defect"
   ],
-  "pathophysiology": "SCOT (succinyl-CoA:3-ketoacid CoA transferase) catalyses the rate-limiting first step of ketone-body utilisation in extrahepatic tissues, transferring coenzyme A from succinyl-CoA to acetoacetate to form acetoacetyl-CoA. When the enzyme is deficient, peripheral tissues cannot use ketone bodies for energy, so ketones accumulate and are not cleared even when glucose is available. This produces persistent ketosis and a tendency to severe, life-threatening ketoacidosis during any period of increased ketogenesis, such as fasting or intercurrent illness. Because only ketone bodies accumulate, the organic acid and acylcarnitine profiles lack the specific markers seen in the isoleucine-pathway ketolysis defect.",
-  "additionalDifferentials": [
-   "Beta-ketothiolase deficiency (T2/ACAT1)",
-   "Diabetic ketoacidosis",
-   "Ketotic hypoglycaemia and glycogen storage disorders",
-   "Organic acidaemias presenting with ketoacidosis",
-   "Sepsis with lactic and ketoacidosis",
-   "Salicylate poisoning"
-  ],
-  "additionalInvestigations": [
-   "Blood and urine ketone quantification demonstrating persistent ketosis in the fed state",
-   "Blood gas, glucose, electrolytes and anion gap during acute crises",
-   "Urine organic acids showing marked ketonuria without abnormal isoleucine metabolites",
-   "Plasma acylcarnitine profile (often normal, helping distinguish from other defects)",
-   "OXCT1 molecular genetic testing to confirm the diagnosis",
-   "SCOT enzyme activity assay in cultured fibroblasts where genetics are inconclusive"
-  ],
-  "redFlags": [
-   "Neonatal or infant presentation with severe high-anion-gap ketoacidosis",
-   "Persistent ketosis that does not resolve with feeding",
-   "Rapid deterioration with obtundation or cardiorespiratory compromise during a crisis",
-   "Recurrent unexplained severe ketoacidotic episodes"
-  ],
-  "prognosis": "With prompt recognition and rigorous avoidance of fasting, many individuals do well and crises become less frequent with age, but early or severe ketoacidotic episodes can be fatal or cause neurological injury before diagnosis.",
-  "pitfalls": [
-   "Overlooking the diagnosis because newborn screening and acylcarnitine profiles are typically normal",
-   "Interpreting persistent ketosis as dietary or presuming diabetes rather than a ketolysis defect",
-   "Allowing prolonged fasting for procedures without a protective glucose regimen",
-   "Assuming normal interictal biochemistry excludes the disorder when persistent low-grade ketosis is actually a clue"
-  ],
-  "references": [
-   "Scriver's OMMBID: Disorders of Ketone Body Metabolism",
-   "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acute ketoacidotic crises with intravenous glucose to switch off ketogenesis and reverse catabolism, correcting acidosis and electrolyte disturbance",
-   "Prevent crises by strictly avoiding fasting, ensuring regular carbohydrate-containing feeds and frequent meals",
-   "Institute an emergency illness regimen with additional oral or intravenous glucose during intercurrent illness or reduced intake",
-   "Monitor blood and urine ketones, blood gases and anion gap, particularly during illness",
-   "Provide a written emergency management plan and educate the family to seek early treatment when unwell",
-   "Offer genetic counselling and family testing for autosomal recessive OXCT1 variants",
-   "Coordinate care through a specialist metabolic medicine team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "succinyl_coa_ketoacid_transferase_deficiency-pathway",
-   "title": "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive deficiency of SCOT (OXCT1 gene), the enzyme that activates acetoacetate for peripheral utilisation, is the classic pure ketolysis defect",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal or infant presentation with severe high-anion-gap ketoacidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood and urine ketone quantification demonstrating persistent ketosis in the fed state, Blood gas, glucose, electrolytes and anion gap during acute crises, Urine organic acids showing marked ketonuria without abnormal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acute ketoacidotic crises with intravenous glucose to switch off ketogenesis and reverse catabolism, correcting acidosis and electrolyte disturbance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis because newborn screening and acylcarnitine profiles are typically normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of succinyl-coa:3-ketoacid coa transferase (scot) deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "succinyl_coa_ketoacid_transferase_deficiency-matrix",
-   "title": "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive deficiency of SCOT (OXCT1 gene), the enzyme that activates acetoacetate for peripheral utilisation, is the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive deficiency of SCOT (OXCT1 gene), the enzyme that activates acetoacetate for peripheral utilisation, is the classic pure ketolysis defect",
+      "Presents with recurrent, often severe ketoacidotic crises, characteristically beginning in the neonatal period or infancy and precipitated by fasting or infection",
+      "A hallmark is persistent ketosis even between crises and in the fed state, because ketone bodies cannot be used by peripheral tissues",
+      "Unlike beta-ketothiolase deficiency, urine organic acids show only the ketone bodies (large amounts of acetoacetate and 3-hydroxybutyrate) without the abnormal isoleucine metabolites",
+      "The acylcarnitine profile is typically normal, so the diagnosis is easily overlooked on newborn screening",
+      "Acute treatment reverses catabolism with intravenous glucose and corrects acidosis; long-term management relies on strict avoidance of fasting with an emergency illness regimen",
+      "Confirmation is by OXCT1 molecular testing or enzyme assay in fibroblasts, as biochemical markers can be subtle"
     ],
-    [
-     "Key Investigations",
-     "Blood and urine ketone quantification demonstrating persistent ketosis in the fed state, Blood gas, glucose, electrolytes and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCOT (succinyl-CoA:3-ketoacid CoA transferase) catalyses the rate-limiting first step of ketone-body utilisation in extrahepatic tissues, transferring coenzyme A from succinyl-CoA to acetoacetate to form acetoacetyl-CoA. When the enzyme is deficient, peripheral tissues cannot use ketone bodies for energy, so ketones accumulate and are not cleared even when glucose is available. This produces persistent ketosis and a tendency to severe, life-threatening ketoacidosis during any period of increased ketogenesis, such as fasting or intercurrent illness. Because only ketone bodies accumulate, the organic acid and acylcarnitine profiles lack the specific markers seen in the isoleucine-pathway ketolysis defect.",
+    "additionalDifferentials": [
+      "Beta-ketothiolase deficiency (T2/ACAT1)",
+      "Diabetic ketoacidosis",
+      "Ketotic hypoglycaemia and glycogen storage disorders",
+      "Organic acidaemias presenting with ketoacidosis",
+      "Sepsis with lactic and ketoacidosis",
+      "Salicylate poisoning"
     ],
-    [
-     "Primary Differentials",
-     "Beta-ketothiolase deficiency (T2/ACAT1), Diabetic ketoacidosis, Ketotic hypoglycaemia and glycogen storage disorders",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood and urine ketone quantification demonstrating persistent ketosis in the fed state",
+      "Blood gas, glucose, electrolytes and anion gap during acute crises",
+      "Urine organic acids showing marked ketonuria without abnormal isoleucine metabolites",
+      "Plasma acylcarnitine profile (often normal, helping distinguish from other defects)",
+      "OXCT1 molecular genetic testing to confirm the diagnosis",
+      "SCOT enzyme activity assay in cultured fibroblasts where genetics are inconclusive"
     ],
-    [
-     "Management Strategy",
-     "Treat acute ketoacidotic crises with intravenous glucose to switch off ketogenesis and reverse catabolism, correcting acidosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal or infant presentation with severe high-anion-gap ketoacidosis",
+      "Persistent ketosis that does not resolve with feeding",
+      "Rapid deterioration with obtundation or cardiorespiratory compromise during a crisis",
+      "Recurrent unexplained severe ketoacidotic episodes"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis because newborn screening and acylcarnitine profiles are typically normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt recognition and rigorous avoidance of fasting, many individuals do well and crises become less frequent with age, but early or severe ketoacidotic episodes can be fatal or cause neurological injury before diagnosis.",
+    "pitfalls": [
+      "Overlooking the diagnosis because newborn screening and acylcarnitine profiles are typically normal",
+      "Interpreting persistent ketosis as dietary or presuming diabetes rather than a ketolysis defect",
+      "Allowing prolonged fasting for procedures without a protective glucose regimen",
+      "Assuming normal interictal biochemistry excludes the disorder when persistent low-grade ketosis is actually a clue"
+    ],
+    "references": [
+      "Scriver's OMMBID: Disorders of Ketone Body Metabolism",
+      "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acute ketoacidotic crises with intravenous glucose to switch off ketogenesis and reverse catabolism, correcting acidosis and electrolyte disturbance",
+      "Prevent crises by strictly avoiding fasting, ensuring regular carbohydrate-containing feeds and frequent meals",
+      "Institute an emergency illness regimen with additional oral or intravenous glucose during intercurrent illness or reduced intake",
+      "Monitor blood and urine ketones, blood gases and anion gap, particularly during illness",
+      "Provide a written emergency management plan and educate the family to seek early treatment when unwell",
+      "Offer genetic counselling and family testing for autosomal recessive OXCT1 variants",
+      "Coordinate care through a specialist metabolic medicine team"
     ]
-   ],
-   "caption": "Overview comparison matrix for succinyl-coa:3-ketoacid coa transferase (scot) deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "succinyl-coa-ketoacid-transferase-deficiency-real-image",
-   "title": "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "succinyl_coa_ketoacid_transferase_deficiency-pathway",
+      "title": "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive deficiency of SCOT (OXCT1 gene), the enzyme that activates acetoacetate for peripheral utilisation, is the classic pure ketolysis defect",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal or infant presentation with severe high-anion-gap ketoacidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood and urine ketone quantification demonstrating persistent ketosis in the fed state, Blood gas, glucose, electrolytes and anion gap during acute crises, Urine organic acids showing marked ketonuria without abnormal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acute ketoacidotic crises with intravenous glucose to switch off ketogenesis and reverse catabolism, correcting acidosis and electrolyte disturbance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis because newborn screening and acylcarnitine profiles are typically normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of succinyl-coa:3-ketoacid coa transferase (scot) deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "succinyl_coa_ketoacid_transferase_deficiency-matrix",
+      "title": "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive deficiency of SCOT (OXCT1 gene), the enzyme that activates acetoacetate for peripheral utilisation, is the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood and urine ketone quantification demonstrating persistent ketosis in the fed state, Blood gas, glucose, electrolytes and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Beta-ketothiolase deficiency (T2/ACAT1), Diabetic ketoacidosis, Ketotic hypoglycaemia and glycogen storage disorders",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acute ketoacidotic crises with intravenous glucose to switch off ketogenesis and reverse catabolism, correcting acidosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis because newborn screening and acylcarnitine profiles are typically normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for succinyl-coa:3-ketoacid coa transferase (scot) deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "succinyl_coa_ketoacid_transferase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and urine ketone quantification",
+          "cells": [
+            {
+              "text": "Persistent ketosis in the fed state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas, glucose, electrolytes and anion gap",
+          "cells": [
+            {
+              "text": "Acute crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Marked ketonuria without isoleucine metabolites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Typically normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OXCT1 molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCOT enzyme assay in fibroblasts",
+          "cells": [
+            {
+              "text": "Where genetics are inconclusive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "succinyl_coa_ketoacid_transferase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-ketothiolase deficiency",
+          "cells": [
+            {
+              "text": "Isoleucine metabolites on urine organic acids separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic ketoacidosis",
+          "cells": [
+            {
+              "text": "Glucose and clinical context separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketotic hypoglycaemia and glycogen storage disorders",
+          "cells": [
+            {
+              "text": "Hypoglycaemia with ketosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "succinyl_coa_ketoacid_transferase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous glucose",
+          "cells": [
+            {
+              "text": "Acute ketoacidotic crisis; reverses catabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acidosis and electrolyte correction",
+          "cells": [
+            {
+              "text": "During crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of fasting",
+          "cells": [
+            {
+              "text": "Regular carbohydrate feeds and frequent meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency illness regimen",
+          "cells": [
+            {
+              "text": "Extra glucose during intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketone and blood gas monitoring",
+          "cells": [
+            {
+              "text": "Especially during illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Written emergency plan",
+          "cells": [
+            {
+              "text": "Family education to seek early treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive OXCT1 variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "succinyl_coa_ketoacid_transferase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent ketoacidosis with persistent fed-state ketosis: suspected SCOT deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal high-gap acidosis, obtundation, cardiorespiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intravenous glucose and acidosis correction during a crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ketones in blood and urine; blood gas and anion gap; urine organic acids; OXCT1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is persistent ketosis confirmed with normal acylcarnitines and no isoleucine metabolites?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider beta-ketothiolase deficiency, diabetes or hypoglycaemic ketosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous glucose to switch off ketogenesis in a crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict avoidance of fasting with regular carbohydrate feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency illness regimen with extra glucose during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Written emergency plan and family education",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Crises are preventable with feeding discipline; a normal newborn screen can mislead",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

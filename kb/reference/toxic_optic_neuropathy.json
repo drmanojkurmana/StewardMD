@@ -1,174 +1,472 @@
 {
- "id": "toxic_optic_neuropathy",
- "name": "toxic optic neuropathy",
- "aliases": [
-  "toxic optic neuritis",
-  "drug-induced optic neuropathy"
- ],
- "class": "non_infective",
- "system": "Ophthalmic",
- "specialty": "Neuro-ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically bilateral, symmetric, painless and progressive visual loss with a centrocaecal scotoma and dyschromatopsia, closely overlapping the nutritional form.",
-   "Frequent offenders include ethambutol, methanol, amiodarone, prolonged linezolid, isoniazid, disulfiram, tobacco and heavy metals such as lead and thallium.",
-   "Ethambutol toxicity is dose- and duration-dependent, is often reversible if detected early, and mandates baseline and periodic monitoring of acuity and colour vision.",
-   "Methanol poisoning causes acute severe loss with disc oedema and a high anion-gap metabolic acidosis and may be permanent or fatal.",
-   "The papillomacular bundle is preferentially affected, producing temporal disc pallor as atrophy develops.",
-   "A meticulous drug, occupational and social history is essential, and removal of the offending agent is the mainstay of management.",
-   "Pupillary responses are relatively spared and a relative afferent pupillary defect is minimal when the process is symmetric.",
-   "Coexisting nutritional deficiency frequently aggravates toxic injury and should be sought and corrected."
+  "id": "toxic_optic_neuropathy",
+  "name": "toxic optic neuropathy",
+  "aliases": [
+    "toxic optic neuritis",
+    "drug-induced optic neuropathy"
   ],
-  "pathophysiology": "Most toxins injure the optic nerve by impairing mitochondrial oxidative phosphorylation and generating oxidative stress within the metabolically demanding papillomacular bundle. Ethambutol chelates copper and iron and interferes with metal-dependent respiratory chain enzymes, while the methanol metabolite formic acid directly inhibits cytochrome c oxidase. The energy failure preferentially damages small central fibres, accounting for the characteristic central and centrocaecal field defects and eventual temporal atrophy.",
-  "additionalDifferentials": [
-   "Nutritional optic neuropathy",
-   "Leber hereditary optic neuropathy",
-   "Compressive or chiasmal lesion",
-   "Demyelinating optic neuritis",
-   "Maculopathy",
-   "Functional (non-organic) visual loss"
-  ],
-  "additionalInvestigations": [
-   "Detailed medication, occupational and toxin exposure history",
-   "Colour vision testing and automated perimetry",
-   "Optical coherence tomography of the retinal nerve fibre layer",
-   "Magnetic resonance imaging to exclude a compressive lesion",
-   "Serum or urine toxicology and heavy-metal levels where indicated",
-   "Arterial blood gas and osmolar gap in suspected methanol poisoning",
-   "Vitamin B12 and folate to exclude a coexisting nutritional cause"
-  ],
-  "redFlags": [
-   "Acute severe visual loss with metabolic acidosis indicating a methanol emergency",
-   "Rapidly progressive loss or systemic signs of toxicity",
-   "No recovery despite withdrawal of the suspected agent",
-   "Asymmetry or focal neurological signs suggesting an alternative diagnosis"
-  ],
-  "prognosis": "Many cases, particularly ethambutol-related, improve after early withdrawal of the offending agent, whereas methanol poisoning frequently causes permanent, severe loss. Chronic unrecognised exposure results in irreversible optic atrophy.",
-  "pitfalls": [
-   "Continuing the offending drug because of inadequate monitoring, as with ethambutol",
-   "Failing to recognise methanol toxicity as a treatable emergency",
-   "Ignoring a concurrent nutritional deficiency that worsens the injury",
-   "Omitting baseline visual assessment before commencing a known optic-toxic agent"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Kanski's Clinical Ophthalmology",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course, Neuro-Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt identification and withdrawal of the offending agent such as ethambutol, linezolid, or amiodarone is the mainstay",
-   "In methanol poisoning, urgent inhibition of alcohol dehydrogenase with fomepizole or ethanol, correction of acidosis with sodium bicarbonate, folinic acid, and haemodialysis to clear formate",
-   "Baseline and periodic monitoring of visual acuity and colour vision in patients on potentially toxic drugs such as ethambutol",
-   "Nutritional support with B-complex vitamins and folate where a coexisting nutritional deficiency contributes",
-   "Counsel on avoidance of contributory toxins including tobacco and alcohol",
-   "Refer to neuro-ophthalmology with low-vision rehabilitation for established visual loss"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "toxic_optic_neuropathy-pathway",
-   "title": "toxic optic neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically bilateral, symmetric, painless and progressive visual loss with a centrocaecal scotoma and dyschromatopsia, closely overlapping the nutritional form.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe visual loss with metabolic acidosis indicating a methanol emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed medication, occupational and toxin exposure history, Colour vision testing and automated perimetry, Optical coherence tomography of the retinal nerve fibre layer"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt identification and withdrawal of the offending agent such as ethambutol, linezolid, or amiodarone is the mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Continuing the offending drug because of inadequate monitoring, as with ethambutol"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of toxic optic neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "toxic_optic_neuropathy-matrix",
-   "title": "toxic optic neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically bilateral, symmetric, painless and progressive visual loss with a centrocaecal scotoma and dyschromatopsia, closely",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmic",
+  "specialty": "Neuro-ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically bilateral, symmetric, painless and progressive visual loss with a centrocaecal scotoma and dyschromatopsia, closely overlapping the nutritional form.",
+      "Frequent offenders include ethambutol, methanol, amiodarone, prolonged linezolid, isoniazid, disulfiram, tobacco and heavy metals such as lead and thallium.",
+      "Ethambutol toxicity is dose- and duration-dependent, is often reversible if detected early, and mandates baseline and periodic monitoring of acuity and colour vision.",
+      "Methanol poisoning causes acute severe loss with disc oedema and a high anion-gap metabolic acidosis and may be permanent or fatal.",
+      "The papillomacular bundle is preferentially affected, producing temporal disc pallor as atrophy develops.",
+      "A meticulous drug, occupational and social history is essential, and removal of the offending agent is the mainstay of management.",
+      "Pupillary responses are relatively spared and a relative afferent pupillary defect is minimal when the process is symmetric.",
+      "Coexisting nutritional deficiency frequently aggravates toxic injury and should be sought and corrected."
     ],
-    [
-     "Key Investigations",
-     "Detailed medication, occupational and toxin exposure history, Colour vision testing and automated perimetry, Optical coherence",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Most toxins injure the optic nerve by impairing mitochondrial oxidative phosphorylation and generating oxidative stress within the metabolically demanding papillomacular bundle. Ethambutol chelates copper and iron and interferes with metal-dependent respiratory chain enzymes, while the methanol metabolite formic acid directly inhibits cytochrome c oxidase. The energy failure preferentially damages small central fibres, accounting for the characteristic central and centrocaecal field defects and eventual temporal atrophy.",
+    "additionalDifferentials": [
+      "Nutritional optic neuropathy",
+      "Leber hereditary optic neuropathy",
+      "Compressive or chiasmal lesion",
+      "Demyelinating optic neuritis",
+      "Maculopathy",
+      "Functional (non-organic) visual loss"
     ],
-    [
-     "Primary Differentials",
-     "Nutritional optic neuropathy, Leber hereditary optic neuropathy, Compressive or chiasmal lesion",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed medication, occupational and toxin exposure history",
+      "Colour vision testing and automated perimetry",
+      "Optical coherence tomography of the retinal nerve fibre layer",
+      "Magnetic resonance imaging to exclude a compressive lesion",
+      "Serum or urine toxicology and heavy-metal levels where indicated",
+      "Arterial blood gas and osmolar gap in suspected methanol poisoning",
+      "Vitamin B12 and folate to exclude a coexisting nutritional cause"
     ],
-    [
-     "Management Strategy",
-     "Prompt identification and withdrawal of the offending agent such as ethambutol, linezolid, or amiodarone is the mainstay",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe visual loss with metabolic acidosis indicating a methanol emergency",
+      "Rapidly progressive loss or systemic signs of toxicity",
+      "No recovery despite withdrawal of the suspected agent",
+      "Asymmetry or focal neurological signs suggesting an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Continuing the offending drug because of inadequate monitoring, as with ethambutol",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many cases, particularly ethambutol-related, improve after early withdrawal of the offending agent, whereas methanol poisoning frequently causes permanent, severe loss. Chronic unrecognised exposure results in irreversible optic atrophy.",
+    "pitfalls": [
+      "Continuing the offending drug because of inadequate monitoring, as with ethambutol",
+      "Failing to recognise methanol toxicity as a treatable emergency",
+      "Ignoring a concurrent nutritional deficiency that worsens the injury",
+      "Omitting baseline visual assessment before commencing a known optic-toxic agent"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Kanski's Clinical Ophthalmology",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course, Neuro-Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt identification and withdrawal of the offending agent such as ethambutol, linezolid, or amiodarone is the mainstay",
+      "In methanol poisoning, urgent inhibition of alcohol dehydrogenase with fomepizole or ethanol, correction of acidosis with sodium bicarbonate, folinic acid, and haemodialysis to clear formate",
+      "Baseline and periodic monitoring of visual acuity and colour vision in patients on potentially toxic drugs such as ethambutol",
+      "Nutritional support with B-complex vitamins and folate where a coexisting nutritional deficiency contributes",
+      "Counsel on avoidance of contributory toxins including tobacco and alcohol",
+      "Refer to neuro-ophthalmology with low-vision rehabilitation for established visual loss"
     ]
-   ],
-   "caption": "Overview comparison matrix for toxic optic neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "toxic-optic-neuropathy-real-image",
-   "title": "toxic optic neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "toxic_optic_neuropathy-pathway",
+      "title": "toxic optic neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically bilateral, symmetric, painless and progressive visual loss with a centrocaecal scotoma and dyschromatopsia, closely overlapping the nutritional form.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe visual loss with metabolic acidosis indicating a methanol emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed medication, occupational and toxin exposure history, Colour vision testing and automated perimetry, Optical coherence tomography of the retinal nerve fibre layer"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt identification and withdrawal of the offending agent such as ethambutol, linezolid, or amiodarone is the mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Continuing the offending drug because of inadequate monitoring, as with ethambutol"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of toxic optic neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "toxic_optic_neuropathy-matrix",
+      "title": "toxic optic neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically bilateral, symmetric, painless and progressive visual loss with a centrocaecal scotoma and dyschromatopsia, closely",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed medication, occupational and toxin exposure history, Colour vision testing and automated perimetry, Optical coherence",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nutritional optic neuropathy, Leber hereditary optic neuropathy, Compressive or chiasmal lesion",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt identification and withdrawal of the offending agent such as ethambutol, linezolid, or amiodarone is the mainstay",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Continuing the offending drug because of inadequate monitoring, as with ethambutol",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for toxic optic neuropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toxic_optic_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of toxic optic neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected toxic optic neuropathy: bilateral painless visual loss with colour defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: acute severe visual loss with acidosis, or no recovery after withdrawal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent methanol poisoning treatment with fomepizole, bicarbonate and dialysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug and toxin history; colour vision and fields; OCT; blood gas if methanol suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does history implicate a toxic agent with a symmetric centrocaecal defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nutritional optic neuropathy, LHON or a compressive lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the offending agent, such as ethambutol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fomepizole or ethanol, bicarbonate and haemodialysis for methanol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Baseline and periodic visual and colour vision monitoring on toxic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct any coexisting nutritional deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neuro-ophthalmology and low-vision rehabilitation for established loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Ethambutol-related loss often improves after withdrawal; methanol loss is often permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toxic_optic_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Medication, occupational and toxin exposure history",
+          "cells": [
+            {
+              "text": "Offending agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour vision and automated perimetry",
+          "cells": [
+            {
+              "text": "Centrocaecal scotoma and dyschromatopsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer",
+          "cells": [
+            {
+              "text": "Optic nerve fibre loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Compressive or chiasmal lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and osmolar gap",
+          "cells": [
+            {
+              "text": "Methanol poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 and folate",
+          "cells": [
+            {
+              "text": "Coexisting nutritional cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxic_optic_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional optic neuropathy",
+          "cells": [
+            {
+              "text": "Coexisting deficiency aggravates toxic injury; B12 and folate testing separates the causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leber hereditary optic neuropathy",
+          "cells": [
+            {
+              "text": "Inherited mitochondrial disease; drug history is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive or chiasmal lesion",
+          "cells": [
+            {
+              "text": "MRI excludes a compressive cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxic_optic_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdrawal of offending agent",
+          "cells": [
+            {
+              "text": "Ethambutol, linezolid or amiodarone; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methanol poisoning treatment",
+          "cells": [
+            {
+              "text": "Fomepizole or ethanol to inhibit alcohol dehydrogenase; bicarbonate; folinic acid; haemodialysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual monitoring on toxic drugs",
+          "cells": [
+            {
+              "text": "Baseline and periodic acuity and colour vision, as for ethambutol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "B-complex vitamins and folate where a deficiency contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid contributory toxins",
+          "cells": [
+            {
+              "text": "Tobacco and alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-ophthalmology and low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Established visual loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

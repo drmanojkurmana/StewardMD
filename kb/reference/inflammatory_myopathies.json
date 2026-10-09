@@ -1,196 +1,978 @@
 {
- "id": "inflammatory_myopathies",
- "name": "Inflammatory Myopathies",
- "system": "Rheumatology / Neurology",
- "class": "non_infective",
- "chapter": 377,
- "page": 2909,
- "aliases": [
-  "polymyositis",
-  "dermatomyositis",
-  "inclusion body myositis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2909",
-  "clinicalPearls": [
-   "Major idiopathic inflammatory myopathies (IMs) are dermatomyositis (DM), polymyositis (PM), immune-mediated necrotizing myopathy (IMNM), antisynthetase syndrome (ASyS), and inclusion body myositis (IBM); idiopathic PM without an overlap syndrome is quite rare, while DM, ASyS, IBM, and IMNM occur in roughly similar frequencies (Harrison 22e p.2909).",
-   "Most IMs (DM, PM, IMNM, ASyS) present with symmetric proximal-greater-than-distal weakness; DM additionally has a characteristic rash and PM/IMNM/ASyS do not (DM rash, ASyS rash sometimes) (Harrison 22e p.2909-2910).",
-   "Serum creatine kinase (CK) is the most sensitive laboratory marker of muscle destruction; a markedly elevated CK (e.g. >2000 U/L) is almost always due to a myopathy, and CK is always elevated in uncontrolled PM and markedly elevated (usually >10x normal) in IMNM (Harrison 22e p.2910-2912).",
-   "DM rash includes the heliotrope rash (violaceous eyelid discoloration with periorbital edema), Gottron sign and Gottron papules over extensor joint surfaces, V-sign (anterior neck/chest), shawl sign (posterior neck/shoulders), nail-bed telangiectasias, and subcutaneous calcium deposits; a heliotrope rash with Gottron papules and dilated nailfold capillaries is diagnostic for DM (Harrison 22e p.2910-2911).",
-   "Myositis-specific antibodies (MSAs) help define subtypes: DM (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, anti-NXP-2, anti-SAE); IMNM (anti-HMGCR, anti-SRP); ASyS (antisynthetase antibodies, most commonly anti-Jo-1); IBM (anti-cN-1A) (Harrison 22e p.2909-2914).",
-   "EMG/nerve conduction studies help localize the lesion to muscle but are nonspecific for cause; muscle MRI shows edema, atrophy, or fatty replacement and can show subtype-specific patterns (e.g. IBM spares the rectus femoris while involving vastus medialis/lateralis) (Harrison 22e p.2910-2914).",
-   "A muscle biopsy is often required to distinguish myopathies when there is no characteristic DM rash or MSA, and should be performed in every case of suspected PM to exclude IBM and other causes; biopsy a clinically affected but not too-weak muscle (e.g. MRC grade 4/5) to avoid sampling only end-stage muscle (Harrison 22e p.2910-2911).",
-   "Patients with severe muscle pain, subjective weakness, and fatigue but normal strength/function on exam are not likely to have an IM; consider polymyalgia rheumatica in older patients with raised ESR/CRP but normal CK and EMG, and fibromyalgia when the lab workup is normal (Harrison 22e p.2911).",
-   "Overlap syndrome describes an IM associated with another connective tissue disease (scleroderma, MCTD, Sjogren syndrome, SLE, rheumatoid arthritis); overlap syndromes are usually responsive to immunotherapy, except Sjogren syndrome with coexisting IBM (Harrison 22e p.2912).",
-   "DM, PM, ASyS, and IMNM are typically responsive to immunotherapy with high-dose glucocorticoids as first-line; IBM does NOT typically respond to any known immunotherapy and is managed with physical/occupational and swallowing therapy (Harrison 22e p.2915-2916)."
+  "id": "inflammatory_myopathies",
+  "name": "Inflammatory Myopathies",
+  "system": "Rheumatology / Neurology",
+  "class": "non_infective",
+  "chapter": 377,
+  "page": 2909,
+  "aliases": [
+    "polymyositis",
+    "dermatomyositis",
+    "inclusion body myositis"
   ],
-  "pathophysiology": "The inflammatory myopathies are immune-mediated muscle diseases with distinct mechanisms by subtype. DM microvasculopathy and skin/muscle damage are increasingly attributed to type I interferon (IFN)-mediated toxicity, most likely IFN-beta, rather than the older model of antibody/complement-mediated capillary destruction with watershed ischemia; immunoglobulin deposition on endothelium is largely absent and complement deposition may be secondary, and there is increasing evidence MSAs are directly pathogenic (e.g. anti-Mi-2 entering myonuclei to inhibit the CHD4/NuRD complex). PM is heterogeneous with poorly understood pathogenesis; its infiltrate is predominantly CD8+ T cells and macrophages in endomysial, perimysial, and perivascular regions. IMNM shows multifocal necrotic and regenerating fibers with few inflammatory cells; it does not appear primarily complement-driven (complement inhibition failed in anti-HMGCR and anti-SRP disease), anti-HMGCR antibodies may bind sarcolemmal receptor causing acetyl-CoA and lipid accumulation, and anti-SRP antibodies appear directly causal. ASyS resembles DM histologically but with more perifascicular necrosis and HLA-DR (MHC-II) expression suggesting gamma-IFN rather than type I IFN drive. IBM combines adaptive immune attack (highly differentiated CD8+CD57+ KLRG1+ T cells invading non-necrotic MHC-I/II-expressing fibers, plus a relatively specific autoantibody) with degenerative features including rimmed vacuoles, beta-sheet amyloid inclusions, p62/LC3 aggregates and ER stress/autophagy, mitochondrial abnormality (ragged-red and COX-negative fibers), and extrusion of TDP-43 from myonuclei; whether damage is primarily immune or a secondary neurodegenerative process is unclear.",
-  "additionalDifferentials": [
-   "Inclusion body myositis (IBM) - must exclude in every suspected PM case",
-   "Polymyalgia rheumatica (older patient, raised ESR/CRP, normal CK and EMG)",
-   "Fibromyalgia (normal laboratory workup)",
-   "Limb-girdle muscular dystrophy (can be mimicked by anti-HMGCR myopathy or anti-SRP/seronegative IMNM)",
-   "Muscular dystrophies and metabolic myopathies (may show inflammatory infiltrate on biopsy)",
-   "Sporadic late-onset nemaline myopathy (SLONM)",
-   "Amyotrophic lateral sclerosis / neurogenic process (atrophy with fasciculations)",
-   "Myasthenia gravis / neuromuscular junction defect (fatigable weakness)",
-   "Spinal cord disorder or polyneuropathy (concomitant sensory symptoms)"
-  ],
-  "infectionMimics": [
-   "Infection-associated myositis (listed by Harrison among other inflammatory myopathies caused by infection)"
-  ],
-  "nonInfectiousMimics": [
-   "Toxic myopathies, including the more common toxic statin-associated myopathy which (unlike anti-HMGCR IMNM) improves on statin discontinuation",
-   "Checkpoint inhibitor-triggered myositis",
-   "Eosinophilic myositis",
-   "Granulomatous myositis (and sarcoidosis, associated with IBM)",
-   "Hereditary myopathies (muscular dystrophies, metabolic myopathies) with secondary inflammation",
-   "Pathogenic biallelic HMGCR gene variants causing proximal weakness, myalgia, high CK and dystrophic changes"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase (most sensitive marker of muscle destruction); serum aldolase if CK normal (raised in ~10% of normal-CK DM)",
-   "Myositis-specific and myositis-associated autoantibody panel (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, anti-NXP-2, anti-SAE; anti-HMGCR, anti-SRP; antisynthetase incl. anti-Jo-1; anti-cN-1A)",
-   "Antinuclear antibody (can be positive but nonspecific)",
-   "Electromyography and nerve conduction studies (localize to muscle; guide biopsy site)",
-   "Skeletal muscle MRI (STIR) for edema/inflammation, atrophy, fatty replacement, fasciitis and subtype-specific patterns",
-   "Muscle biopsy with experienced histopathology lab (perifascicular atrophy and MxA staining in DM; endomysial CD8/MHC-I in PM; necrotizing pattern in IMNM; perimysial fragmentation/alkaline phosphatase in ASyS; rimmed vacuoles, p62, COX-negative fibers and 15-21 nm tubulofilaments in IBM)",
-   "Skin biopsy in DM (cell-poor interface dermatitis)",
-   "Pulmonary function tests and spiral chest CT (honeycomb pattern) for interstitial lung disease",
-   "Flow cytometry for large granular lymphocytes and CD4/CD8 ratio in IBM",
-   "Malignancy workup (especially adult DM, anti-TIF1-gamma, anti-NXP-2, anti-SAE, anti-HMGCR myopathy)"
-  ],
-  "redFlags": [
-   "Dermatomyositis rash (heliotrope rash, Gottron sign/papules) - adult-onset DM carries ~15% malignancy risk within the first 2-3 years; enhanced cancer vigilance especially with anti-TIF1-gamma (89% specificity, 70% sensitivity for cancer-associated DM)",
-   "Anti-MDA5 antibodies - palmar rash, severe ischemic skin ulceration, and rapidly progressive interstitial lung disease (also frequent in amyopathic DM)",
-   "Dyspnea from ILD, bronchopneumonia, alveolitis, or ventilatory muscle weakness",
-   "Dysphagia and dysarthria (aspiration risk; common in IBM and seen in DM/IMNM)",
-   "Myocarditis / cardiac disease (poor prognostic feature)",
-   "Markedly elevated CK (e.g. >2000 U/L) - almost always indicates a myopathy"
-  ],
-  "prognosis": "In the absence of malignancy, DM prognosis is generally favorable with 5-year survival of 70-93%; poor prognostic features (DM and PM) are increased age, associated ILD, cardiac disease, and late or previously inadequate treatment. Most PM patients improve with immunotherapy but usually require lifelong treatment. IMNM varies by subtype: anti-HMGCR myopathy is often responsive to IVIG monotherapy, whereas anti-SRP and seronegative IMNM are much harder to treat and need aggressive immunotherapy; increased cancer incidence may exist in anti-HMGCR myopathy. ASyS patients mostly respond but disease can be difficult to treat (especially with ILD, where early rituximab is warranted) with no apparent increased malignancy risk. IBM is slowly progressive and not typically responsive to immunotherapy; most patients require a scooter or wheelchair within ~10-15 years of symptom onset, with no known increased malignancy risk.",
-  "pitfalls": [
-   "IBM is frequently misdiagnosed and is distinguished from PM by distal/asymmetric weakness with predilection for finger/wrist flexors and quadriceps in patients >50, normal or only mildly elevated CK, and being essentially steroid-refractory and unresponsive to any known immunotherapy - so a normal CK should alert clinicians to the possibility of IBM",
-   "Many older series of 'PM' likely actually included patients with IBM, IMNM, or muscular dystrophies with inflammation, biasing reported treatment response and cancer-risk data",
-   "Perifascicular atrophy (the classic DM biopsy finding) is present in perhaps only 50% of DM patients; MxA immunostaining is diagnostically more sensitive and highly specific",
-   "Rimmed vacuoles may be absent in up to 20-30% of IBM biopsies; mitochondrial abnormality (ragged-red/COX-negative fibers) and p62 inclusions help distinguish IBM from PM in such cases",
-   "Anti-HMGCR myopathy does NOT improve when statins are stopped (unlike common toxic statin myopathy) and can occur in statin-naive children/young adults, mimicking limb-girdle muscular dystrophy",
-   "IBM EMG can show large-amplitude long-duration motor units that may be misinterpreted as neurogenic but actually reflect chronicity of the myopathy",
-   "Muscle biopsy should sample a clinically affected but not too-weak muscle (e.g. MRC 4/5); biopsying an end-stage muscle yields non-diagnostic tissue"
-  ],
-  "severityClassification": "Harrison does not provide a formal numeric severity grading scale for the inflammatory myopathies. Disease is characterized instead by clinical subtype (DM, PM, IMNM, ASyS, IBM), pattern and degree of weakness (graded clinically, e.g. MRC strength), serum CK elevation, presence of organ involvement (ILD, myocarditis, dysphagia), associated malignancy, and responsiveness to immunotherapy. Treatment intensity (first-line high-dose glucocorticoids; early second-line agents for severe weakness, organ involvement such as myocarditis/ILD, steroid-complication risk, or IMNM) reflects severity stratification in practice.",
-  "references": [
-   "Harrison 22e p.2909"
-  ],
-  "crossLinks": [
-   "ild"
-  ],
-  "management": [
-   "Induce remission with corticosteroids as first-line therapy for dermatomyositis, polymyositis, immune-mediated necrotising myopathy and antisynthetase syndrome",
-   "Add steroid-sparing immunosuppression (azathioprine, methotrexate or mycophenolate) and use intravenous immunoglobulin or rituximab for refractory or necrotising disease",
-   "Treat associated interstitial lung disease, which drives prognosis, with intensified immunosuppression, and manage dermatomyositis skin disease with photoprotection and topical agents",
-   "Recognise that inclusion body myositis responds poorly to immunotherapy and is managed with physiotherapy, mobility aids and supportive care",
-   "Provide supportive care across subtypes: physiotherapy to preserve muscle function, dysphagia assessment and aspiration precautions, and respiratory support",
-   "Screen for occult malignancy, particularly in dermatomyositis with anti-TIF1-gamma, and monitor creatine kinase, pulmonary function and cardiac status",
-   "Manage through a multidisciplinary team of rheumatology, neurology and respiratory medicine"
-  ]
- },
- "algorithms": [
-  {
-   "id": "inflammatory_myopathies-pathway",
-   "title": "Inflammatory Myopathies: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Major idiopathic inflammatory myopathies (IMs) are dermatomyositis (DM), polymyositis (PM), immune-mediated necrotizing myopathy (IMNM), antisynthetase syndrome (ASyS), and inclusion body myositis (IBM); idiopathic PM without an overlap",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Dermatomyositis rash (heliotrope rash, Gottron sign/papules) - adult-onset DM carries ~15% malignancy risk within the first 2-3 years; enhanced cancer vigilance especially with anti-TIF1-gamma (89%",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase (most sensitive marker of muscle destruction); serum aldolase if CK normal (raised in ~10% of normal-CK DM), Myositis-specific and myositis-associated autoantibody panel (anti-Mi-2, anti-TIF1-gamma,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with corticosteroids as first-line therapy for dermatomyositis, polymyositis, immune-mediated necrotising myopathy and antisynthetase syndrome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: IBM is frequently misdiagnosed and is distinguished from PM by distal/asymmetric weakness with predilection for finger/wrist flexors and quadriceps in patients >50, normal or only mildly elevated CK, and being"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of inflammatory myopathies."
-  }
- ],
- "tables": [
-  {
-   "id": "inflammatory_myopathies-matrix",
-   "title": "Inflammatory Myopathies: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Major idiopathic inflammatory myopathies (IMs) are dermatomyositis (DM), polymyositis (PM), immune-mediated necrotizing myopathy",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2909",
+    "clinicalPearls": [
+      "Major idiopathic inflammatory myopathies (IMs) are dermatomyositis (DM), polymyositis (PM), immune-mediated necrotizing myopathy (IMNM), antisynthetase syndrome (ASyS), and inclusion body myositis (IBM); idiopathic PM without an overlap syndrome is quite rare, while DM, ASyS, IBM, and IMNM occur in roughly similar frequencies (Harrison 22e p.2909).",
+      "Most IMs (DM, PM, IMNM, ASyS) present with symmetric proximal-greater-than-distal weakness; DM additionally has a characteristic rash and PM/IMNM/ASyS do not (DM rash, ASyS rash sometimes) (Harrison 22e p.2909-2910).",
+      "Serum creatine kinase (CK) is the most sensitive laboratory marker of muscle destruction; a markedly elevated CK (e.g. >2000 U/L) is almost always due to a myopathy, and CK is always elevated in uncontrolled PM and markedly elevated (usually >10x normal) in IMNM (Harrison 22e p.2910-2912).",
+      "DM rash includes the heliotrope rash (violaceous eyelid discoloration with periorbital edema), Gottron sign and Gottron papules over extensor joint surfaces, V-sign (anterior neck/chest), shawl sign (posterior neck/shoulders), nail-bed telangiectasias, and subcutaneous calcium deposits; a heliotrope rash with Gottron papules and dilated nailfold capillaries is diagnostic for DM (Harrison 22e p.2910-2911).",
+      "Myositis-specific antibodies (MSAs) help define subtypes: DM (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, anti-NXP-2, anti-SAE); IMNM (anti-HMGCR, anti-SRP); ASyS (antisynthetase antibodies, most commonly anti-Jo-1); IBM (anti-cN-1A) (Harrison 22e p.2909-2914).",
+      "EMG/nerve conduction studies help localize the lesion to muscle but are nonspecific for cause; muscle MRI shows edema, atrophy, or fatty replacement and can show subtype-specific patterns (e.g. IBM spares the rectus femoris while involving vastus medialis/lateralis) (Harrison 22e p.2910-2914).",
+      "A muscle biopsy is often required to distinguish myopathies when there is no characteristic DM rash or MSA, and should be performed in every case of suspected PM to exclude IBM and other causes; biopsy a clinically affected but not too-weak muscle (e.g. MRC grade 4/5) to avoid sampling only end-stage muscle (Harrison 22e p.2910-2911).",
+      "Patients with severe muscle pain, subjective weakness, and fatigue but normal strength/function on exam are not likely to have an IM; consider polymyalgia rheumatica in older patients with raised ESR/CRP but normal CK and EMG, and fibromyalgia when the lab workup is normal (Harrison 22e p.2911).",
+      "Overlap syndrome describes an IM associated with another connective tissue disease (scleroderma, MCTD, Sjogren syndrome, SLE, rheumatoid arthritis); overlap syndromes are usually responsive to immunotherapy, except Sjogren syndrome with coexisting IBM (Harrison 22e p.2912).",
+      "DM, PM, ASyS, and IMNM are typically responsive to immunotherapy with high-dose glucocorticoids as first-line; IBM does NOT typically respond to any known immunotherapy and is managed with physical/occupational and swallowing therapy (Harrison 22e p.2915-2916)."
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase (most sensitive marker of muscle destruction); serum aldolase if CK normal (raised in ~10% of normal-CK",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The inflammatory myopathies are immune-mediated muscle diseases with distinct mechanisms by subtype. DM microvasculopathy and skin/muscle damage are increasingly attributed to type I interferon (IFN)-mediated toxicity, most likely IFN-beta, rather than the older model of antibody/complement-mediated capillary destruction with watershed ischemia; immunoglobulin deposition on endothelium is largely absent and complement deposition may be secondary, and there is increasing evidence MSAs are directly pathogenic (e.g. anti-Mi-2 entering myonuclei to inhibit the CHD4/NuRD complex). PM is heterogeneous with poorly understood pathogenesis; its infiltrate is predominantly CD8+ T cells and macrophages in endomysial, perimysial, and perivascular regions. IMNM shows multifocal necrotic and regenerating fibers with few inflammatory cells; it does not appear primarily complement-driven (complement inhibition failed in anti-HMGCR and anti-SRP disease), anti-HMGCR antibodies may bind sarcolemmal receptor causing acetyl-CoA and lipid accumulation, and anti-SRP antibodies appear directly causal. ASyS resembles DM histologically but with more perifascicular necrosis and HLA-DR (MHC-II) expression suggesting gamma-IFN rather than type I IFN drive. IBM combines adaptive immune attack (highly differentiated CD8+CD57+ KLRG1+ T cells invading non-necrotic MHC-I/II-expressing fibers, plus a relatively specific autoantibody) with degenerative features including rimmed vacuoles, beta-sheet amyloid inclusions, p62/LC3 aggregates and ER stress/autophagy, mitochondrial abnormality (ragged-red and COX-negative fibers), and extrusion of TDP-43 from myonuclei; whether damage is primarily immune or a secondary neurodegenerative process is unclear.",
+    "additionalDifferentials": [
+      "Inclusion body myositis (IBM) - must exclude in every suspected PM case",
+      "Polymyalgia rheumatica (older patient, raised ESR/CRP, normal CK and EMG)",
+      "Fibromyalgia (normal laboratory workup)",
+      "Limb-girdle muscular dystrophy (can be mimicked by anti-HMGCR myopathy or anti-SRP/seronegative IMNM)",
+      "Muscular dystrophies and metabolic myopathies (may show inflammatory infiltrate on biopsy)",
+      "Sporadic late-onset nemaline myopathy (SLONM)",
+      "Amyotrophic lateral sclerosis / neurogenic process (atrophy with fasciculations)",
+      "Myasthenia gravis / neuromuscular junction defect (fatigable weakness)",
+      "Spinal cord disorder or polyneuropathy (concomitant sensory symptoms)"
     ],
-    [
-     "Primary Differentials",
-     "Inclusion body myositis (IBM) - must exclude in every suspected PM case, Polymyalgia rheumatica (older patient, raised ESR/CRP,",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Infection-associated myositis (listed by Harrison among other inflammatory myopathies caused by infection)"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with corticosteroids as first-line therapy for dermatomyositis, polymyositis, immune-mediated necrotising",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Toxic myopathies, including the more common toxic statin-associated myopathy which (unlike anti-HMGCR IMNM) improves on statin discontinuation",
+      "Checkpoint inhibitor-triggered myositis",
+      "Eosinophilic myositis",
+      "Granulomatous myositis (and sarcoidosis, associated with IBM)",
+      "Hereditary myopathies (muscular dystrophies, metabolic myopathies) with secondary inflammation",
+      "Pathogenic biallelic HMGCR gene variants causing proximal weakness, myalgia, high CK and dystrophic changes"
     ],
-    [
-     "Clinical Pitfall",
-     "IBM is frequently misdiagnosed and is distinguished from PM by distal/asymmetric weakness with predilection for finger/wrist",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Serum creatine kinase (most sensitive marker of muscle destruction); serum aldolase if CK normal (raised in ~10% of normal-CK DM)",
+      "Myositis-specific and myositis-associated autoantibody panel (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, anti-NXP-2, anti-SAE; anti-HMGCR, anti-SRP; antisynthetase incl. anti-Jo-1; anti-cN-1A)",
+      "Antinuclear antibody (can be positive but nonspecific)",
+      "Electromyography and nerve conduction studies (localize to muscle; guide biopsy site)",
+      "Skeletal muscle MRI (STIR) for edema/inflammation, atrophy, fatty replacement, fasciitis and subtype-specific patterns",
+      "Muscle biopsy with experienced histopathology lab (perifascicular atrophy and MxA staining in DM; endomysial CD8/MHC-I in PM; necrotizing pattern in IMNM; perimysial fragmentation/alkaline phosphatase in ASyS; rimmed vacuoles, p62, COX-negative fibers and 15-21 nm tubulofilaments in IBM)",
+      "Skin biopsy in DM (cell-poor interface dermatitis)",
+      "Pulmonary function tests and spiral chest CT (honeycomb pattern) for interstitial lung disease",
+      "Flow cytometry for large granular lymphocytes and CD4/CD8 ratio in IBM",
+      "Malignancy workup (especially adult DM, anti-TIF1-gamma, anti-NXP-2, anti-SAE, anti-HMGCR myopathy)"
+    ],
+    "redFlags": [
+      "Dermatomyositis rash (heliotrope rash, Gottron sign/papules) - adult-onset DM carries ~15% malignancy risk within the first 2-3 years; enhanced cancer vigilance especially with anti-TIF1-gamma (89% specificity, 70% sensitivity for cancer-associated DM)",
+      "Anti-MDA5 antibodies - palmar rash, severe ischemic skin ulceration, and rapidly progressive interstitial lung disease (also frequent in amyopathic DM)",
+      "Dyspnea from ILD, bronchopneumonia, alveolitis, or ventilatory muscle weakness",
+      "Dysphagia and dysarthria (aspiration risk; common in IBM and seen in DM/IMNM)",
+      "Myocarditis / cardiac disease (poor prognostic feature)",
+      "Markedly elevated CK (e.g. >2000 U/L) - almost always indicates a myopathy"
+    ],
+    "prognosis": "In the absence of malignancy, DM prognosis is generally favorable with 5-year survival of 70-93%; poor prognostic features (DM and PM) are increased age, associated ILD, cardiac disease, and late or previously inadequate treatment. Most PM patients improve with immunotherapy but usually require lifelong treatment. IMNM varies by subtype: anti-HMGCR myopathy is often responsive to IVIG monotherapy, whereas anti-SRP and seronegative IMNM are much harder to treat and need aggressive immunotherapy; increased cancer incidence may exist in anti-HMGCR myopathy. ASyS patients mostly respond but disease can be difficult to treat (especially with ILD, where early rituximab is warranted) with no apparent increased malignancy risk. IBM is slowly progressive and not typically responsive to immunotherapy; most patients require a scooter or wheelchair within ~10-15 years of symptom onset, with no known increased malignancy risk.",
+    "pitfalls": [
+      "IBM is frequently misdiagnosed and is distinguished from PM by distal/asymmetric weakness with predilection for finger/wrist flexors and quadriceps in patients >50, normal or only mildly elevated CK, and being essentially steroid-refractory and unresponsive to any known immunotherapy - so a normal CK should alert clinicians to the possibility of IBM",
+      "Many older series of 'PM' likely actually included patients with IBM, IMNM, or muscular dystrophies with inflammation, biasing reported treatment response and cancer-risk data",
+      "Perifascicular atrophy (the classic DM biopsy finding) is present in perhaps only 50% of DM patients; MxA immunostaining is diagnostically more sensitive and highly specific",
+      "Rimmed vacuoles may be absent in up to 20-30% of IBM biopsies; mitochondrial abnormality (ragged-red/COX-negative fibers) and p62 inclusions help distinguish IBM from PM in such cases",
+      "Anti-HMGCR myopathy does NOT improve when statins are stopped (unlike common toxic statin myopathy) and can occur in statin-naive children/young adults, mimicking limb-girdle muscular dystrophy",
+      "IBM EMG can show large-amplitude long-duration motor units that may be misinterpreted as neurogenic but actually reflect chronicity of the myopathy",
+      "Muscle biopsy should sample a clinically affected but not too-weak muscle (e.g. MRC 4/5); biopsying an end-stage muscle yields non-diagnostic tissue"
+    ],
+    "severityClassification": "Harrison does not provide a formal numeric severity grading scale for the inflammatory myopathies. Disease is characterized instead by clinical subtype (DM, PM, IMNM, ASyS, IBM), pattern and degree of weakness (graded clinically, e.g. MRC strength), serum CK elevation, presence of organ involvement (ILD, myocarditis, dysphagia), associated malignancy, and responsiveness to immunotherapy. Treatment intensity (first-line high-dose glucocorticoids; early second-line agents for severe weakness, organ involvement such as myocarditis/ILD, steroid-complication risk, or IMNM) reflects severity stratification in practice.",
+    "references": [
+      "Harrison 22e p.2909"
+    ],
+    "crossLinks": [
+      "ild"
+    ],
+    "management": [
+      "Induce remission with corticosteroids as first-line therapy for dermatomyositis, polymyositis, immune-mediated necrotising myopathy and antisynthetase syndrome",
+      "Add steroid-sparing immunosuppression (azathioprine, methotrexate or mycophenolate) and use intravenous immunoglobulin or rituximab for refractory or necrotising disease",
+      "Treat associated interstitial lung disease, which drives prognosis, with intensified immunosuppression, and manage dermatomyositis skin disease with photoprotection and topical agents",
+      "Recognise that inclusion body myositis responds poorly to immunotherapy and is managed with physiotherapy, mobility aids and supportive care",
+      "Provide supportive care across subtypes: physiotherapy to preserve muscle function, dysphagia assessment and aspiration precautions, and respiratory support",
+      "Screen for occult malignancy, particularly in dermatomyositis with anti-TIF1-gamma, and monitor creatine kinase, pulmonary function and cardiac status",
+      "Manage through a multidisciplinary team of rheumatology, neurology and respiratory medicine"
     ]
-   ],
-   "caption": "Overview comparison matrix for inflammatory myopathies."
-  }
- ],
- "diagrams": [
-  {
-   "id": "inflammatory-myopathies-real-image",
-   "title": "Inflammatory Myopathies: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "inflammatory_myopathies-pathway",
+      "title": "Inflammatory Myopathies: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Major idiopathic inflammatory myopathies (IMs) are dermatomyositis (DM), polymyositis (PM), immune-mediated necrotizing myopathy (IMNM), antisynthetase syndrome (ASyS), and inclusion body myositis (IBM); idiopathic PM without an overlap",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Dermatomyositis rash (heliotrope rash, Gottron sign/papules) - adult-onset DM carries ~15% malignancy risk within the first 2-3 years; enhanced cancer vigilance especially with anti-TIF1-gamma (89%",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase (most sensitive marker of muscle destruction); serum aldolase if CK normal (raised in ~10% of normal-CK DM), Myositis-specific and myositis-associated autoantibody panel (anti-Mi-2, anti-TIF1-gamma,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with corticosteroids as first-line therapy for dermatomyositis, polymyositis, immune-mediated necrotising myopathy and antisynthetase syndrome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: IBM is frequently misdiagnosed and is distinguished from PM by distal/asymmetric weakness with predilection for finger/wrist flexors and quadriceps in patients >50, normal or only mildly elevated CK, and being"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of inflammatory myopathies."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "inflammatory_myopathies-matrix",
+      "title": "Inflammatory Myopathies: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Major idiopathic inflammatory myopathies (IMs) are dermatomyositis (DM), polymyositis (PM), immune-mediated necrotizing myopathy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase (most sensitive marker of muscle destruction); serum aldolase if CK normal (raised in ~10% of normal-CK",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inclusion body myositis (IBM) - must exclude in every suspected PM case, Polymyalgia rheumatica (older patient, raised ESR/CRP,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with corticosteroids as first-line therapy for dermatomyositis, polymyositis, immune-mediated necrotising",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "IBM is frequently misdiagnosed and is distinguished from PM by distal/asymmetric weakness with predilection for finger/wrist",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for inflammatory myopathies."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Autoimmune Myositis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/autoimmune-rheumatic-disorders/autoimmune-myositis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 387-11",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 388-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "inflammatory_myopathies-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing inflammatory myopathies",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Creatine kinase",
+          "unit": "U/L",
+          "cells": [
+            {
+              "text": "Markedly raised, for example above 2000 U/L",
+              "op": ">",
+              "value": 2000
+            },
+            {
+              "text": "Almost always myopathic; over 10 times normal in IMNM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal or mildly raised CK with distal asymmetric weakness",
+          "cells": [
+            {
+              "text": "Finger flexor and quadriceps weakness over age 50"
+            },
+            {
+              "text": "{{hy:Think inclusion body myositis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heliotrope rash plus Gottron papules plus nailfold capillary dilatation",
+          "cells": [
+            {
+              "text": "Diagnostic for dermatomyositis"
+            },
+            {
+              "text": "Biopsy not usually needed with characteristic skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myositis-specific antibodies",
+          "cells": [
+            {
+              "text": "DM: Mi-2, TIF1-gamma, MDA5, NXP-2, SAE; IMNM: HMGCR, SRP; ASyS: Jo-1; IBM: cN-1A"
+            },
+            {
+              "text": "Define subtype, cancer and lung risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANA",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in up to 80% of DM and PM",
+              "op": "<=",
+              "value": 80
+            },
+            {
+              "text": "Negative ANA does not exclude myositis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "EMG and muscle MRI (STIR)",
+          "cells": [
+            {
+              "text": "Localise to muscle, show oedema, guide biopsy"
+            },
+            {
+              "text": "IBM spares rectus femoris"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Affected but not end-stage muscle (MRC 4/5)"
+            },
+            {
+              "text": "Needed in every suspected PM to exclude IBM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-TIF1-gamma for cancer-associated DM",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Specificity 89%, sensitivity 70%",
+              "op": "=",
+              "value": 89
+            },
+            {
+              "text": "Adult DM carries about 15% cancer risk in first 2 to 3 years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-MDA5",
+          "cells": [
+            {
+              "text": "Palmar rash, skin ulcers"
+            },
+            {
+              "text": "Rapidly progressive interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_myopathies-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic inflammatory myopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "Distal asymmetric weakness, older age, steroid-refractory"
+            },
+            {
+              "text": "Biopsy: rimmed vacuoles, p62, COX-negative fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymyalgia rheumatica",
+          "cells": [
+            {
+              "text": "Older age, pain and stiffness, high ESR and CRP"
+            },
+            {
+              "text": "Normal CK and EMG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic or drug-induced myopathy",
+          "cells": [
+            {
+              "text": "Statins, fibrates, niacin, glucocorticoids, zidovudine, colchicine, amiodarone, chloroquine, hydroxychloroquine, d-penicillamine"
+            },
+            {
+              "text": "Improves when drug stopped (unlike anti-HMGCR myopathy)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Steroid myopathy during treatment",
+          "cells": [
+            {
+              "text": "Weakness with normal CK on high-dose steroids"
+            },
+            {
+              "text": "CK and MRI oedema absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Muscular dystrophy or metabolic myopathy",
+          "cells": [
+            {
+              "text": "Family history, chronic course; may show inflammation"
+            },
+            {
+              "text": "Genetic testing and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable weakness, ptosis"
+            },
+            {
+              "text": "Acetylcholine receptor antibodies, repetitive stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor neurone disease",
+          "cells": [
+            {
+              "text": "Atrophy with fasciculations"
+            },
+            {
+              "text": "EMG neurogenic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Pain and fatigue with normal strength"
+            },
+            {
+              "text": "Normal laboratory work-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_myopathies-treatment",
+      "kind": "treatment",
+      "title": "Treating inflammatory myopathies",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "{{hy:Oral prednisone}}",
+          "cells": [
+            {
+              "text": "First line for DM, PM, IMNM, ASyS"
+            },
+            {
+              "text": "About 1 mg/kg daily, maximum 80 mg; taper once strength normalises"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV methylprednisolone",
+          "cells": [
+            {
+              "text": "Severe disease, dysphagia or respiratory weakness"
+            },
+            {
+              "text": "0.5 to 1 g daily for 3 to 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Steroid-sparing agent",
+          "cells": [
+            {
+              "text": "Start with or soon after steroids"
+            },
+            {
+              "text": "Methotrexate, azathioprine or tacrolimus; prefer non-methotrexate agents with ILD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVIG",
+          "cells": [
+            {
+              "text": "Dysphagia, respiratory muscle weakness, poor steroid response, anti-HMGCR myopathy"
+            },
+            {
+              "text": "Often effective as monotherapy in anti-HMGCR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Refractory disease or ASyS with ILD"
+            },
+            {
+              "text": "Early use advised with ILD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclophosphamide and plasma exchange",
+          "cells": [
+            {
+              "text": "Anti-MDA5 rapidly progressive ILD"
+            },
+            {
+              "text": "Consider"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "IBM"
+            },
+            {
+              "text": "No effective immunotherapy; physiotherapy, occupational and swallowing therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cancer screening",
+          "cells": [
+            {
+              "text": "Adult DM, especially over 40 or with TIF1-gamma or NXP-2"
+            },
+            {
+              "text": "Age-appropriate screening; CT chest, abdomen, pelvis, ovarian ultrasound, colonoscopy in high risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitoring and prophylaxis",
+          "cells": [
+            {
+              "text": "All on immunosuppression"
+            },
+            {
+              "text": "Serial CK (normalises in 6 to 12 weeks), bone protection, Pneumocystis prophylaxis, vaccines"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_myopathies-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "ANA patterns, target antigens and clinical correlates",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antigen identified",
+        "Clinical correlate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse",
+          "cells": [
+            {
+              "text": "Deoxyribonucleoprotein, histones"
+            },
+            {
+              "text": "Nonspecific; drug-induced lupus, lupus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Peripheral (rim)",
+          "cells": [
+            {
+              "text": "ds-DNA"
+            },
+            {
+              "text": "50% of SLE (specific)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: U1-RNP",
+          "cells": [
+            {
+              "text": "U1-RNP"
+            },
+            {
+              "text": "Up to 90% of MCTD"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: Sm",
+          "cells": [
+            {
+              "text": "Sm"
+            },
+            {
+              "text": "30% of SLE (specific)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: Ro (SS-A)",
+          "cells": [
+            {
+              "text": "Ro (SS-A)"
+            },
+            {
+              "text": "Sjogren's 60%, subacute cutaneous lupus, neonatal lupus, ANA-negative lupus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: La (SS-B)",
+          "cells": [
+            {
+              "text": "La (SS-B)"
+            },
+            {
+              "text": "50% of Sjogren's, 15% of lupus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: Scl-70",
+          "cells": [
+            {
+              "text": "Scl-70"
+            },
+            {
+              "text": "40% of diffuse scleroderma"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: PM-1",
+          "cells": [
+            {
+              "text": "PM-1"
+            },
+            {
+              "text": "Polymyositis, dermatomyositis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: Jo-1",
+          "cells": [
+            {
+              "text": "Jo-1"
+            },
+            {
+              "text": "Polymyositis with pneumonitis and arthritis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Nucleolar",
+          "cells": [
+            {
+              "text": "RNA polymerase I, others"
+            },
+            {
+              "text": "40% of progressive systemic sclerosis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Centromere",
+          "cells": [
+            {
+              "text": "Kinetochore"
+            },
+            {
+              "text": "75% of CREST (limited scleroderma)"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_myopathies-ddx-2",
+      "kind": "ddx",
+      "title": "Polymyositis, dermatomyositis and inclusion body myositis compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Age at onset",
+        "Familial association",
+        "Extramuscular manifestations",
+        "Connective tissue diseases",
+        "Systemic autoimmune diseases",
+        "Malignancy",
+        "Viruses",
+        "Drugs",
+        "Parasites and bacteria"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymyositis",
+          "cells": [
+            {
+              "text": "Over 18 years"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes (footnote a)"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "Yes (footnote d)"
+            },
+            {
+              "text": "Yes (footnote e)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Dermatomyositis",
+          "cells": [
+            {
+              "text": "Adulthood and childhood"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Scleroderma and mixed connective tissue disease (overlap syndromes)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "Yes, in up to 15% of cases"
+            },
+            {
+              "text": "Unproven"
+            },
+            {
+              "text": "Yes, rarely (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "Over 50 years"
+            },
+            {
+              "text": "Yes, in some cases"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes, in up to 20% of cases (footnote a)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "No (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Footnote letters a to e (including b for systemic autoimmune diseases) appear in the source but their text is not printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "inflammatory_myopathies-dx-mgmt",
+      "title": "Diagnosis and management of inflammatory myopathies",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symmetric proximal weakness or myositis rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CK, myositis antibody panel, EMG and muscle MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "CK and EMG myopathic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider PMR, fibromyalgia, neuropathy or myasthenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Classic DM rash or defining antibody?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Muscle biopsy of affected, not end-stage, muscle",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Biopsy shows IBM?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Supportive therapy, swallowing and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen lungs, heart, swallowing and cancer",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prednisone 1 mg/kg plus steroid-sparing agent",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Severe, ILD or refractory?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "IV methylprednisolone, IVIG or rituximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Taper steroids guided by strength and CK",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

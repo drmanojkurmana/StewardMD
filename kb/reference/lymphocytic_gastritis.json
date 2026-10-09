@@ -1,169 +1,458 @@
 {
- "id": "lymphocytic_gastritis",
- "name": "Lymphocytic gastritis",
- "aliases": [
-  "varioliform gastritis"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined histologically by a marked increase in intraepithelial lymphocytes (predominantly CD8-positive T cells) within the surface and foveolar epithelium",
-   "Strongly associated with coeliac disease and with Helicobacter pylori infection, which together account for most cases",
-   "May appear endoscopically as varioliform gastritis, with nodularity, thickened folds, and aphthoid erosions typically in the gastric body",
-   "Many patients are asymptomatic or have non-specific dyspepsia, and the diagnosis is often made on biopsy performed for other reasons",
-   "Treatment is directed at the underlying cause, such as eradicating Helicobacter pylori or instituting a gluten-free diet for coeliac disease",
-   "The lymphocytosis and symptoms frequently resolve once the associated condition is treated",
-   "Rarely it is linked to protein loss producing a Menetrier-like picture or to lymphoma, warranting careful assessment"
+  "id": "lymphocytic_gastritis",
+  "name": "Lymphocytic gastritis",
+  "aliases": [
+    "varioliform gastritis"
   ],
-  "pathophysiology": "Lymphocytic gastritis is a histological pattern characterised by a striking accumulation of intraepithelial T lymphocytes within the gastric surface and pit epithelium, accompanied by a chronic mononuclear infiltrate in the lamina propria. It is regarded as an immune-mediated mucosal response rather than a distinct disease, most often triggered by gluten sensitivity in coeliac disease or by Helicobacter pylori infection, both of which drive an intraepithelial lymphocytic reaction analogous to that seen in the coeliac duodenum. The inflammatory response can distort the surface epithelium and produce the nodular, erosive (varioliform) appearance seen at endoscopy.",
-  "additionalDifferentials": [
-   "Coeliac disease with gastric involvement",
-   "Helicobacter pylori-associated chronic active gastritis",
-   "Collagenous gastritis",
-   "Menetrier disease and other hypertrophic gastropathies",
-   "Crohn disease involving the stomach",
-   "Gastric lymphoma"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy with gastric biopsies for histology and immunohistochemical quantification of intraepithelial lymphocytes",
-   "Helicobacter pylori testing by histology, urea breath test, stool antigen, or serology",
-   "Coeliac serology and duodenal biopsies to detect associated coeliac disease",
-   "Full blood count and iron studies to assess for anaemia",
-   "Serum albumin where a protein-losing, Menetrier-like picture is suspected",
-   "Repeat biopsy after treatment of the underlying cause to confirm resolution"
-  ],
-  "redFlags": [
-   "Marked protein loss with hypoalbuminaemia suggesting a hypertrophic, Menetrier-like variant",
-   "Persistent nodularity or a mass raising concern for lymphoma",
-   "Refractory symptoms or histology despite treating coeliac disease and Helicobacter pylori"
-  ],
-  "prognosis": "Prognosis is generally good, with the lymphocytic infiltrate and symptoms typically improving after eradication of Helicobacter pylori or introduction of a gluten-free diet, although the histological pattern may persist in a minority.",
-  "pitfalls": [
-   "Reporting the pattern without searching for the underlying coeliac disease or Helicobacter pylori",
-   "Missing coeliac disease by not taking duodenal biopsies or checking serology",
-   "Overlooking a rare protein-losing or lymphomatous complication",
-   "Assuming persistence of the histological pattern equates to treatment failure"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying cause, eradicating Helicobacter pylori with combination antibiotic and proton-pump-inhibitor therapy where present",
-   "Institute a gluten-free diet when associated coeliac disease is identified",
-   "Acid suppression with proton-pump inhibitors for dyspeptic symptoms",
-   "Correct iron-deficiency anaemia and replace iron where indicated",
-   "Repeat endoscopic biopsy after treatment to confirm resolution of the lymphocytic infiltrate",
-   "Refer to gastroenterology and investigate a protein-losing, Menetrier-like picture where albumin is low"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lymphocytic_gastritis-pathway",
-   "title": "Lymphocytic gastritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined histologically by a marked increase in intraepithelial lymphocytes (predominantly CD8-positive T cells) within the surface and foveolar epithelium",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked protein loss with hypoalbuminaemia suggesting a hypertrophic, Menetrier-like variant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy with gastric biopsies for histology and immunohistochemical quantification of intraepithelial lymphocytes, Helicobacter pylori testing by histology, urea breath test, stool antigen, or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying cause, eradicating Helicobacter pylori with combination antibiotic and proton-pump-inhibitor therapy where present"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reporting the pattern without searching for the underlying coeliac disease or Helicobacter pylori"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lymphocytic gastritis."
-  }
- ],
- "tables": [
-  {
-   "id": "lymphocytic_gastritis-matrix",
-   "title": "Lymphocytic gastritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined histologically by a marked increase in intraepithelial lymphocytes (predominantly CD8-positive T cells) within the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined histologically by a marked increase in intraepithelial lymphocytes (predominantly CD8-positive T cells) within the surface and foveolar epithelium",
+      "Strongly associated with coeliac disease and with Helicobacter pylori infection, which together account for most cases",
+      "May appear endoscopically as varioliform gastritis, with nodularity, thickened folds, and aphthoid erosions typically in the gastric body",
+      "Many patients are asymptomatic or have non-specific dyspepsia, and the diagnosis is often made on biopsy performed for other reasons",
+      "Treatment is directed at the underlying cause, such as eradicating Helicobacter pylori or instituting a gluten-free diet for coeliac disease",
+      "The lymphocytosis and symptoms frequently resolve once the associated condition is treated",
+      "Rarely it is linked to protein loss producing a Menetrier-like picture or to lymphoma, warranting careful assessment"
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy with gastric biopsies for histology and immunohistochemical quantification of intraepithelial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lymphocytic gastritis is a histological pattern characterised by a striking accumulation of intraepithelial T lymphocytes within the gastric surface and pit epithelium, accompanied by a chronic mononuclear infiltrate in the lamina propria. It is regarded as an immune-mediated mucosal response rather than a distinct disease, most often triggered by gluten sensitivity in coeliac disease or by Helicobacter pylori infection, both of which drive an intraepithelial lymphocytic reaction analogous to that seen in the coeliac duodenum. The inflammatory response can distort the surface epithelium and produce the nodular, erosive (varioliform) appearance seen at endoscopy.",
+    "additionalDifferentials": [
+      "Coeliac disease with gastric involvement",
+      "Helicobacter pylori-associated chronic active gastritis",
+      "Collagenous gastritis",
+      "Menetrier disease and other hypertrophic gastropathies",
+      "Crohn disease involving the stomach",
+      "Gastric lymphoma"
     ],
-    [
-     "Primary Differentials",
-     "Coeliac disease with gastric involvement, Helicobacter pylori-associated chronic active gastritis, Collagenous gastritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy with gastric biopsies for histology and immunohistochemical quantification of intraepithelial lymphocytes",
+      "Helicobacter pylori testing by histology, urea breath test, stool antigen, or serology",
+      "Coeliac serology and duodenal biopsies to detect associated coeliac disease",
+      "Full blood count and iron studies to assess for anaemia",
+      "Serum albumin where a protein-losing, Menetrier-like picture is suspected",
+      "Repeat biopsy after treatment of the underlying cause to confirm resolution"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying cause, eradicating Helicobacter pylori with combination antibiotic and proton-pump-inhibitor",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked protein loss with hypoalbuminaemia suggesting a hypertrophic, Menetrier-like variant",
+      "Persistent nodularity or a mass raising concern for lymphoma",
+      "Refractory symptoms or histology despite treating coeliac disease and Helicobacter pylori"
     ],
-    [
-     "Clinical Pitfall",
-     "Reporting the pattern without searching for the underlying coeliac disease or Helicobacter pylori",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally good, with the lymphocytic infiltrate and symptoms typically improving after eradication of Helicobacter pylori or introduction of a gluten-free diet, although the histological pattern may persist in a minority.",
+    "pitfalls": [
+      "Reporting the pattern without searching for the underlying coeliac disease or Helicobacter pylori",
+      "Missing coeliac disease by not taking duodenal biopsies or checking serology",
+      "Overlooking a rare protein-losing or lymphomatous complication",
+      "Assuming persistence of the histological pattern equates to treatment failure"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying cause, eradicating Helicobacter pylori with combination antibiotic and proton-pump-inhibitor therapy where present",
+      "Institute a gluten-free diet when associated coeliac disease is identified",
+      "Acid suppression with proton-pump inhibitors for dyspeptic symptoms",
+      "Correct iron-deficiency anaemia and replace iron where indicated",
+      "Repeat endoscopic biopsy after treatment to confirm resolution of the lymphocytic infiltrate",
+      "Refer to gastroenterology and investigate a protein-losing, Menetrier-like picture where albumin is low"
     ]
-   ],
-   "caption": "Overview comparison matrix for lymphocytic gastritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lymphocytic-gastritis-real-image",
-   "title": "Lymphocytic gastritis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "lymphocytic_gastritis-pathway",
+      "title": "Lymphocytic gastritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined histologically by a marked increase in intraepithelial lymphocytes (predominantly CD8-positive T cells) within the surface and foveolar epithelium",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked protein loss with hypoalbuminaemia suggesting a hypertrophic, Menetrier-like variant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy with gastric biopsies for histology and immunohistochemical quantification of intraepithelial lymphocytes, Helicobacter pylori testing by histology, urea breath test, stool antigen, or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying cause, eradicating Helicobacter pylori with combination antibiotic and proton-pump-inhibitor therapy where present"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reporting the pattern without searching for the underlying coeliac disease or Helicobacter pylori"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lymphocytic gastritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lymphocytic_gastritis-matrix",
+      "title": "Lymphocytic gastritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined histologically by a marked increase in intraepithelial lymphocytes (predominantly CD8-positive T cells) within the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy with gastric biopsies for histology and immunohistochemical quantification of intraepithelial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coeliac disease with gastric involvement, Helicobacter pylori-associated chronic active gastritis, Collagenous gastritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying cause, eradicating Helicobacter pylori with combination antibiotic and proton-pump-inhibitor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reporting the pattern without searching for the underlying coeliac disease or Helicobacter pylori",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lymphocytic gastritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphocytic_gastritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastric biopsies with lymphocyte quantification",
+          "cells": [
+            {
+              "text": "Raised intraepithelial CD8 T lymphocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Helicobacter pylori testing",
+          "cells": [
+            {
+              "text": "Infection present or eradicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and duodenal biopsies",
+          "cells": [
+            {
+              "text": "Associated coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin",
+          "cells": [
+            {
+              "text": "Protein-losing Menetrier-like picture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_gastritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease with gastric involvement",
+          "cells": [
+            {
+              "text": "Duodenal findings and serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Helicobacter pylori chronic active gastritis",
+          "cells": [
+            {
+              "text": "Infection on biopsy or testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menetrier disease",
+          "cells": [
+            {
+              "text": "Protein loss and hypertrophic folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric lymphoma",
+          "cells": [
+            {
+              "text": "Persistent nodularity or mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_gastritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Helicobacter pylori eradication",
+          "cells": [
+            {
+              "text": "Combination antibiotics with a proton-pump inhibitor where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gluten-free diet",
+          "cells": [
+            {
+              "text": "When associated coeliac disease is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid suppression",
+          "cells": [
+            {
+              "text": "Proton-pump inhibitors for dyspepsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Correct and replace iron where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat biopsy",
+          "cells": [
+            {
+              "text": "Confirms resolution after treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphocytic_gastritis-dx-mgmt",
+      "title": "Diagnosis and management of Lymphocytic gastritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dyspepsia or incidental gastric biopsy showing intraepithelial lymphocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (low albumin, persistent nodularity or refractory symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: gastroenterology review for protein loss or suspected lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gastric biopsies, Helicobacter pylori testing, coeliac serology and duodenal biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lymphocytosis confirmed with H. pylori or coeliac disease found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Menetrier disease, collagenous gastritis or gastric lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Eradicate Helicobacter pylori with combination therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gluten-free diet if coeliac disease is identified",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Proton-pump inhibitors for dyspeptic symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct iron deficiency anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Repeat endoscopic biopsy after treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good; infiltrate and symptoms often improve after the cause is treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

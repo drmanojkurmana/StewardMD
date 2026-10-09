@@ -1,170 +1,450 @@
 {
- "id": "photokeratitis",
- "name": "Photokeratitis",
- "aliases": [
-  "ultraviolet keratitis",
-  "snow blindness",
-  "welder's flash",
-  "arc eye"
- ],
- "class": "non_infective",
- "system": "Eye",
- "specialty": "Ophthalmology / Occupational medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Ophthalmology and occupational medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acute painful inflammation of the corneal epithelium caused by ultraviolet radiation exposure",
-   "Typical sources are welding arcs, reflection of sunlight off snow or water, and sunlamps",
-   "Symptoms are characteristically delayed by several hours after exposure and are bilateral",
-   "Patients have intense pain, foreign-body sensation, watering, redness, blepharospasm and photophobia",
-   "Examination shows diffuse punctate epithelial staining, and the condition is self-limiting",
-   "Management is supportive with lubrication and analgesia, and prevention through appropriate eye protection"
+  "id": "photokeratitis",
+  "name": "Photokeratitis",
+  "aliases": [
+    "ultraviolet keratitis",
+    "snow blindness",
+    "welder's flash",
+    "arc eye"
   ],
-  "pathophysiology": "Photokeratitis results from ultraviolet radiation damaging the corneal and conjunctival epithelium, causing death and shedding of surface epithelial cells. The injury behaves like a superficial burn, and because the epithelial damage and consequent nerve-ending exposure take hours to manifest, symptoms are characteristically delayed after the exposure. The corneal epithelium regenerates quickly, so the condition is painful but usually short-lived and heals without scarring.",
-  "additionalDifferentials": [
-   "Infective keratitis or corneal ulcer",
-   "Corneal abrasion or foreign body",
-   "Chemical eye injury",
-   "Acute anterior uveitis",
-   "Dry eye disease with keratopathy"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the exposure history and delayed bilateral symptoms",
-   "Slit-lamp examination with fluorescein showing punctate epithelial staining",
-   "Visual acuity assessment",
-   "Exclusion of a retained foreign body or infective keratitis",
-   "Assessment for occupational ultraviolet exposure"
-  ],
-  "redFlags": [
-   "Features suggesting infective keratitis such as a focal infiltrate",
-   "A retained foreign body or penetrating injury",
-   "Significant visual loss",
-   "Failure to improve within the expected short timeframe"
-  ],
-  "prognosis": "The condition is self-limiting and typically resolves within a day or two as the corneal epithelium heals, without long-term visual consequence.",
-  "pitfalls": [
-   "Missing an infective keratitis or foreign body mistaken for simple photokeratitis",
-   "Prescribing topical anaesthetics for ongoing use, which impairs healing",
-   "Overlooking the occupational source and failing to advise eye protection",
-   "Attributing delayed symptoms to another acute ocular condition"
-  ],
-  "references": [
-   "Ophthalmology reference texts (standard reference)",
-   "Occupational medicine references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care with copious ocular lubricants and artificial tears while the corneal epithelium heals",
-   "Relieve pain with oral analgesia and a cycloplegic agent to ease ciliary spasm, avoiding abuse of topical anaesthetics",
-   "Give topical antibiotic cover for the epithelial defect to prevent secondary infection",
-   "Advise rest in a darkened environment and cool compresses for symptomatic relief",
-   "Reassure that the condition is self-limiting and arrange review if symptoms do not resolve, to exclude infective keratitis or a retained foreign body",
-   "Prevent recurrence with appropriate ultraviolet eye protection for welding, snow and sunlamp exposure and give occupational advice"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "photokeratitis-pathway",
-   "title": "Photokeratitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acute painful inflammation of the corneal epithelium caused by ultraviolet radiation exposure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting infective keratitis such as a focal infiltrate",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the exposure history and delayed bilateral symptoms, Slit-lamp examination with fluorescein showing punctate epithelial staining, Visual acuity assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care with copious ocular lubricants and artificial tears while the corneal epithelium heals"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing an infective keratitis or foreign body mistaken for simple photokeratitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of photokeratitis."
-  }
- ],
- "tables": [
-  {
-   "id": "photokeratitis-matrix",
-   "title": "Photokeratitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acute painful inflammation of the corneal epithelium caused by ultraviolet radiation exposure",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye",
+  "specialty": "Ophthalmology / Occupational medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ophthalmology and occupational medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acute painful inflammation of the corneal epithelium caused by ultraviolet radiation exposure",
+      "Typical sources are welding arcs, reflection of sunlight off snow or water, and sunlamps",
+      "Symptoms are characteristically delayed by several hours after exposure and are bilateral",
+      "Patients have intense pain, foreign-body sensation, watering, redness, blepharospasm and photophobia",
+      "Examination shows diffuse punctate epithelial staining, and the condition is self-limiting",
+      "Management is supportive with lubrication and analgesia, and prevention through appropriate eye protection"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the exposure history and delayed bilateral symptoms, Slit-lamp examination with fluorescein showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Photokeratitis results from ultraviolet radiation damaging the corneal and conjunctival epithelium, causing death and shedding of surface epithelial cells. The injury behaves like a superficial burn, and because the epithelial damage and consequent nerve-ending exposure take hours to manifest, symptoms are characteristically delayed after the exposure. The corneal epithelium regenerates quickly, so the condition is painful but usually short-lived and heals without scarring.",
+    "additionalDifferentials": [
+      "Infective keratitis or corneal ulcer",
+      "Corneal abrasion or foreign body",
+      "Chemical eye injury",
+      "Acute anterior uveitis",
+      "Dry eye disease with keratopathy"
     ],
-    [
-     "Primary Differentials",
-     "Infective keratitis or corneal ulcer, Corneal abrasion or foreign body, Chemical eye injury",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the exposure history and delayed bilateral symptoms",
+      "Slit-lamp examination with fluorescein showing punctate epithelial staining",
+      "Visual acuity assessment",
+      "Exclusion of a retained foreign body or infective keratitis",
+      "Assessment for occupational ultraviolet exposure"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care with copious ocular lubricants and artificial tears while the corneal epithelium heals",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting infective keratitis such as a focal infiltrate",
+      "A retained foreign body or penetrating injury",
+      "Significant visual loss",
+      "Failure to improve within the expected short timeframe"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing an infective keratitis or foreign body mistaken for simple photokeratitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is self-limiting and typically resolves within a day or two as the corneal epithelium heals, without long-term visual consequence.",
+    "pitfalls": [
+      "Missing an infective keratitis or foreign body mistaken for simple photokeratitis",
+      "Prescribing topical anaesthetics for ongoing use, which impairs healing",
+      "Overlooking the occupational source and failing to advise eye protection",
+      "Attributing delayed symptoms to another acute ocular condition"
+    ],
+    "references": [
+      "Ophthalmology reference texts (standard reference)",
+      "Occupational medicine references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care with copious ocular lubricants and artificial tears while the corneal epithelium heals",
+      "Relieve pain with oral analgesia and a cycloplegic agent to ease ciliary spasm, avoiding abuse of topical anaesthetics",
+      "Give topical antibiotic cover for the epithelial defect to prevent secondary infection",
+      "Advise rest in a darkened environment and cool compresses for symptomatic relief",
+      "Reassure that the condition is self-limiting and arrange review if symptoms do not resolve, to exclude infective keratitis or a retained foreign body",
+      "Prevent recurrence with appropriate ultraviolet eye protection for welding, snow and sunlamp exposure and give occupational advice"
     ]
-   ],
-   "caption": "Overview comparison matrix for photokeratitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "photokeratitis-real-image",
-   "title": "Photokeratitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "photokeratitis-pathway",
+      "title": "Photokeratitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acute painful inflammation of the corneal epithelium caused by ultraviolet radiation exposure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting infective keratitis such as a focal infiltrate",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the exposure history and delayed bilateral symptoms, Slit-lamp examination with fluorescein showing punctate epithelial staining, Visual acuity assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care with copious ocular lubricants and artificial tears while the corneal epithelium heals"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing an infective keratitis or foreign body mistaken for simple photokeratitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of photokeratitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "photokeratitis-matrix",
+      "title": "Photokeratitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acute painful inflammation of the corneal epithelium caused by ultraviolet radiation exposure",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the exposure history and delayed bilateral symptoms, Slit-lamp examination with fluorescein showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Infective keratitis or corneal ulcer, Corneal abrasion or foreign body, Chemical eye injury",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care with copious ocular lubricants and artificial tears while the corneal epithelium heals",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing an infective keratitis or foreign body mistaken for simple photokeratitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for photokeratitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ophthalmology and occupational medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "photokeratitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from exposure history and delayed bilateral symptoms",
+          "cells": [
+            {
+              "text": "Delayed bilateral symptoms after exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination with fluorescein",
+          "cells": [
+            {
+              "text": "Punctate epithelial staining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity assessment",
+          "cells": [
+            {
+              "text": "Visual acuity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of retained foreign body or infective keratitis",
+          "cells": [
+            {
+              "text": "Foreign body or infective keratitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for occupational UV exposure",
+          "cells": [
+            {
+              "text": "Occupational UV exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "photokeratitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective keratitis or corneal ulcer",
+          "cells": [
+            {
+              "text": "Focal infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal abrasion or foreign body",
+          "cells": [
+            {
+              "text": "Retained foreign body"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "photokeratitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lubrication",
+          "cells": [
+            {
+              "text": "Copious ocular lubricants and artificial tears while the epithelium heals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain relief",
+          "cells": [
+            {
+              "text": "Oral analgesia and a cycloplegic agent to ease ciliary spasm; avoid topical anaesthetic abuse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic cover",
+          "cells": [
+            {
+              "text": "Topical antibiotic cover for the epithelial defect to prevent secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rest and comfort",
+          "cells": [
+            {
+              "text": "Darkened environment and cool compresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and review",
+          "cells": [
+            {
+              "text": "Self-limiting; review if symptoms persist to exclude infective keratitis or foreign body"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Ultraviolet eye protection for welding, snow and sunlamp exposure; occupational advice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "photokeratitis-dx-mgmt",
+      "title": "Diagnosis and management of Photokeratitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful, gritty, light-sensitive eyes with delayed bilateral symptoms after UV exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (focal infiltrate, retained foreign body, visual loss, no improvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review for infective keratitis or retained foreign body",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp with fluorescein for punctate staining; visual acuity; check for foreign body",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does fluorescein show punctate epithelial staining after clear UV exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider corneal abrasion, infective keratitis, chemical injury or uveitis; review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Copious ocular lubricants and artificial tears while the epithelium heals",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral analgesia and a cycloplegic agent to ease ciliary spasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical antibiotic cover for the epithelial defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure that it is self-limiting; review if symptoms do not resolve",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Ultraviolet eye protection for welding, snow and sunlamp exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limiting; typically resolves within a day or two without lasting visual effect",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

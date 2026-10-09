@@ -1,175 +1,502 @@
 {
- "id": "carpenter_syndrome",
- "name": "Carpenter syndrome",
- "aliases": [
-  "acrocephalopolysyndactyly type II",
-  "RAB23-related craniosynostosis",
-  "ACPS II"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused most often by biallelic mutations in RAB23 (and less commonly MEGF8), inherited in an autosomal recessive pattern",
-   "Combines craniosynostosis (frequently multisuture, sometimes producing a cloverleaf skull) with both polydactyly and syndactyly of the hands and feet",
-   "Preaxial polydactyly of the feet with soft-tissue syndactyly is a useful distinguishing feature from the FGFR-related syndromes",
-   "Congenital heart disease is common and should be actively sought at diagnosis",
-   "Obesity, short stature, hypogenitalism in males and variable intellectual disability are recognised associations",
-   "The MEGF8-related form is often associated with laterality defects such as situs abnormalities",
-   "Because inheritance is recessive, recurrence risk for siblings is significant and warrants formal genetic counselling",
-   "Management is multidisciplinary, combining craniofacial vault surgery, cardiac care and limb reconstruction"
+  "id": "carpenter_syndrome",
+  "name": "Carpenter syndrome",
+  "aliases": [
+    "acrocephalopolysyndactyly type II",
+    "RAB23-related craniosynostosis",
+    "ACPS II"
   ],
-  "pathophysiology": "Carpenter syndrome is a ciliopathy caused by loss of function of RAB23, a small GTPase that participates in vesicular trafficking and in the regulation of hedgehog signalling at the primary cilium. Disrupted hedgehog signalling during development perturbs cranial suture patterning, causing premature multisuture fusion, and disturbs limb patterning, producing the combination of polydactyly and syndactyly. The wide role of this pathway explains the associated cardiac, growth and genital anomalies; MEGF8 mutations affect a related pathway and add laterality defects.",
-  "additionalDifferentials": [
-   "Apert syndrome (FGFR2, complex syndactyly without polydactyly)",
-   "Pfeiffer syndrome (broad thumbs and toes)",
-   "Greig cephalopolysyndactyly (GLI3, polysyndactyly)",
-   "Bardet-Biedl syndrome (ciliopathy with polydactyly and obesity)",
-   "Pfeiffer type 2 cloverleaf skull",
-   "Saethre-Chotzen syndrome (TWIST1)"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing of RAB23 and MEGF8 to confirm the diagnosis",
-   "Three-dimensional cranial CT to characterise multisuture fusion",
-   "Echocardiography to detect congenital heart disease",
-   "Radiographs of the hands and feet to document polydactyly and syndactyly",
-   "MRI of the brain to assess structural anomalies and intracranial pressure concerns",
-   "Developmental assessment and, where MEGF8 is implicated, evaluation for laterality defects"
-  ],
-  "redFlags": [
-   "Unrecognised congenital heart disease causing haemodynamic compromise",
-   "Raised intracranial pressure from multisuture or cloverleaf skull fusion",
-   "Airway or feeding difficulty in the neonatal period",
-   "Laterality or situs anomalies in the MEGF8-related form"
-  ],
-  "prognosis": "Prognosis depends heavily on the severity of the craniosynostosis and any associated cardiac disease; with surgical correction and multidisciplinary support many children do well, though intellectual outcome is variable and some have significant learning difficulty.",
-  "pitfalls": [
-   "Confusing it with an FGFR-related syndrome and missing the recessive inheritance and recurrence risk",
-   "Failing to screen for congenital heart disease at presentation",
-   "Overlooking the diagnostic clue of combined polydactyly and syndactyly",
-   "Not arranging developmental support because intellectual outcome varies"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: RAB23-related Carpenter syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Staged surgical correction of the multisuture craniosynostosis, prioritising relief of raised intracranial pressure",
-   "Reconstructive hand and foot surgery to address the polydactyly and syndactyly",
-   "Active screening for and treatment of congenital heart disease at diagnosis",
-   "Assessment and management of associated features including obesity, short stature and male hypogenitalism",
-   "Evaluation for laterality and situs abnormalities where MEGF8 is implicated",
-   "Developmental and educational support tailored to the variable intellectual outcome",
-   "Multidisciplinary craniofacial, cardiac and clinical genetics care",
-   "Genetic counselling for autosomal recessive inheritance, with molecular confirmation and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "carpenter_syndrome-pathway",
-   "title": "Carpenter syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused most often by biallelic mutations in RAB23 (and less commonly MEGF8), inherited in an autosomal recessive pattern",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unrecognised congenital heart disease causing haemodynamic compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing of RAB23 and MEGF8 to confirm the diagnosis, Three-dimensional cranial CT to characterise multisuture fusion, Echocardiography to detect congenital heart disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Staged surgical correction of the multisuture craniosynostosis, prioritising relief of raised intracranial pressure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with an FGFR-related syndrome and missing the recessive inheritance and recurrence risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of carpenter syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "carpenter_syndrome-matrix",
-   "title": "Carpenter syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused most often by biallelic mutations in RAB23 (and less commonly MEGF8), inherited in an autosomal recessive pattern",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused most often by biallelic mutations in RAB23 (and less commonly MEGF8), inherited in an autosomal recessive pattern",
+      "Combines craniosynostosis (frequently multisuture, sometimes producing a cloverleaf skull) with both polydactyly and syndactyly of the hands and feet",
+      "Preaxial polydactyly of the feet with soft-tissue syndactyly is a useful distinguishing feature from the FGFR-related syndromes",
+      "Congenital heart disease is common and should be actively sought at diagnosis",
+      "Obesity, short stature, hypogenitalism in males and variable intellectual disability are recognised associations",
+      "The MEGF8-related form is often associated with laterality defects such as situs abnormalities",
+      "Because inheritance is recessive, recurrence risk for siblings is significant and warrants formal genetic counselling",
+      "Management is multidisciplinary, combining craniofacial vault surgery, cardiac care and limb reconstruction"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing of RAB23 and MEGF8 to confirm the diagnosis, Three-dimensional cranial CT to characterise multisuture fusion,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Carpenter syndrome is a ciliopathy caused by loss of function of RAB23, a small GTPase that participates in vesicular trafficking and in the regulation of hedgehog signalling at the primary cilium. Disrupted hedgehog signalling during development perturbs cranial suture patterning, causing premature multisuture fusion, and disturbs limb patterning, producing the combination of polydactyly and syndactyly. The wide role of this pathway explains the associated cardiac, growth and genital anomalies; MEGF8 mutations affect a related pathway and add laterality defects.",
+    "additionalDifferentials": [
+      "Apert syndrome (FGFR2, complex syndactyly without polydactyly)",
+      "Pfeiffer syndrome (broad thumbs and toes)",
+      "Greig cephalopolysyndactyly (GLI3, polysyndactyly)",
+      "Bardet-Biedl syndrome (ciliopathy with polydactyly and obesity)",
+      "Pfeiffer type 2 cloverleaf skull",
+      "Saethre-Chotzen syndrome (TWIST1)"
     ],
-    [
-     "Primary Differentials",
-     "Apert syndrome (FGFR2, complex syndactyly without polydactyly), Pfeiffer syndrome (broad thumbs and toes), Greig",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing of RAB23 and MEGF8 to confirm the diagnosis",
+      "Three-dimensional cranial CT to characterise multisuture fusion",
+      "Echocardiography to detect congenital heart disease",
+      "Radiographs of the hands and feet to document polydactyly and syndactyly",
+      "MRI of the brain to assess structural anomalies and intracranial pressure concerns",
+      "Developmental assessment and, where MEGF8 is implicated, evaluation for laterality defects"
     ],
-    [
-     "Management Strategy",
-     "Staged surgical correction of the multisuture craniosynostosis, prioritising relief of raised intracranial pressure",
-     "Core treatment modality"
+    "redFlags": [
+      "Unrecognised congenital heart disease causing haemodynamic compromise",
+      "Raised intracranial pressure from multisuture or cloverleaf skull fusion",
+      "Airway or feeding difficulty in the neonatal period",
+      "Laterality or situs anomalies in the MEGF8-related form"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with an FGFR-related syndrome and missing the recessive inheritance and recurrence risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends heavily on the severity of the craniosynostosis and any associated cardiac disease; with surgical correction and multidisciplinary support many children do well, though intellectual outcome is variable and some have significant learning difficulty.",
+    "pitfalls": [
+      "Confusing it with an FGFR-related syndrome and missing the recessive inheritance and recurrence risk",
+      "Failing to screen for congenital heart disease at presentation",
+      "Overlooking the diagnostic clue of combined polydactyly and syndactyly",
+      "Not arranging developmental support because intellectual outcome varies"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: RAB23-related Carpenter syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Staged surgical correction of the multisuture craniosynostosis, prioritising relief of raised intracranial pressure",
+      "Reconstructive hand and foot surgery to address the polydactyly and syndactyly",
+      "Active screening for and treatment of congenital heart disease at diagnosis",
+      "Assessment and management of associated features including obesity, short stature and male hypogenitalism",
+      "Evaluation for laterality and situs abnormalities where MEGF8 is implicated",
+      "Developmental and educational support tailored to the variable intellectual outcome",
+      "Multidisciplinary craniofacial, cardiac and clinical genetics care",
+      "Genetic counselling for autosomal recessive inheritance, with molecular confirmation and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for carpenter syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "carpenter-syndrome-real-image",
-   "title": "Carpenter syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "carpenter_syndrome-pathway",
+      "title": "Carpenter syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused most often by biallelic mutations in RAB23 (and less commonly MEGF8), inherited in an autosomal recessive pattern",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unrecognised congenital heart disease causing haemodynamic compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing of RAB23 and MEGF8 to confirm the diagnosis, Three-dimensional cranial CT to characterise multisuture fusion, Echocardiography to detect congenital heart disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Staged surgical correction of the multisuture craniosynostosis, prioritising relief of raised intracranial pressure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with an FGFR-related syndrome and missing the recessive inheritance and recurrence risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of carpenter syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "carpenter_syndrome-matrix",
+      "title": "Carpenter syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused most often by biallelic mutations in RAB23 (and less commonly MEGF8), inherited in an autosomal recessive pattern",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing of RAB23 and MEGF8 to confirm the diagnosis, Three-dimensional cranial CT to characterise multisuture fusion,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Apert syndrome (FGFR2, complex syndactyly without polydactyly), Pfeiffer syndrome (broad thumbs and toes), Greig",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Staged surgical correction of the multisuture craniosynostosis, prioritising relief of raised intracranial pressure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with an FGFR-related syndrome and missing the recessive inheritance and recurrence risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for carpenter syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carpenter_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing of RAB23 and MEGF8",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-dimensional cranial CT",
+          "cells": [
+            {
+              "text": "Characterises multisuture fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Detects congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of hands and feet",
+          "cells": [
+            {
+              "text": "Documents polydactyly and syndactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Assesses structural anomalies and intracranial pressure concerns"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "carpenter_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Apert syndrome",
+          "cells": [
+            {
+              "text": "Complex syndactyly without polydactyly (FGFR2)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pfeiffer syndrome",
+          "cells": [
+            {
+              "text": "Broad thumbs and toes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Greig cephalopolysyndactyly",
+          "cells": [
+            {
+              "text": "Polysyndactyly (GLI3)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bardet-Biedl syndrome",
+          "cells": [
+            {
+              "text": "Ciliopathy with polydactyly and obesity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saethre-Chotzen syndrome",
+          "cells": [
+            {
+              "text": "TWIST1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "carpenter_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged craniosynostosis surgery",
+          "cells": [
+            {
+              "text": "Staged surgical correction of multisuture craniosynostosis"
+            },
+            {
+              "text": "Priority is relief of raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and foot surgery",
+          "cells": [
+            {
+              "text": "Reconstructive surgery for polydactyly and syndactyly"
+            },
+            {
+              "text": "Limb reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac screening",
+          "cells": [
+            {
+              "text": "Active screening and treatment of congenital heart disease"
+            },
+            {
+              "text": "Screen at diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated features",
+          "cells": [
+            {
+              "text": "Assess and manage obesity, short stature and male hypogenitalism"
+            },
+            {
+              "text": "Associated features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laterality assessment",
+          "cells": [
+            {
+              "text": "Evaluate laterality and situs abnormalities where MEGF8 is implicated"
+            },
+            {
+              "text": "MEGF8-related form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Developmental and educational support"
+            },
+            {
+              "text": "Variable intellectual outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance and family screening"
+            },
+            {
+              "text": "Recurrence risk for siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carpenter_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Carpenter syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Carpenter syndrome: combined polydactyly and syndactyly with craniosynostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (unrecognised heart disease, raised intracranial pressure, airway)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac and neurosurgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Molecular testing of RAB23 and MEGF8, cranial CT, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "RAB23 or MEGF8 variants confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Staged surgical correction of multisuture craniosynostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Apert, Pfeiffer, Greig and Bardet-Biedl by their listed features",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Active screening and treatment of congenital heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reconstructive hand and foot surgery for polydactyly and syndactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess obesity, short stature and laterality where MEGF8 is implicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis depends on craniosynostosis and cardiac disease; intellect varies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

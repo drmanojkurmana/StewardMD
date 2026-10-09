@@ -1,172 +1,470 @@
 {
- "id": "thyroid_lymphoma",
- "name": "Primary thyroid lymphoma",
- "aliases": [
-  "primary thyroid lymphoma",
-  "thyroid non-Hodgkin lymphoma",
-  "thyroid MALT lymphoma"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology / Endocrine Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents as a rapidly enlarging goitre or neck mass, often with compressive symptoms, in an older patient with long-standing Hashimoto thyroiditis",
-   "Almost always a non-Hodgkin B-cell lymphoma, most commonly diffuse large B-cell lymphoma or a marginal-zone (MALT) lymphoma arising in the setting of autoimmune thyroiditis",
-   "Chronic autoimmune inflammation in Hashimoto thyroiditis provides the lymphoid tissue from which MALT lymphoma can develop, so a history of hypothyroidism and positive thyroid antibodies is common",
-   "Because treatment is chemotherapy and radiotherapy rather than surgery, obtaining an adequate tissue diagnosis is critical and often needs core or open biopsy with flow cytometry, as aspiration may not suffice",
-   "May clinically mimic anaplastic carcinoma, but immunophenotyping distinguishes lymphoid from epithelial malignancy and carries a far better prognosis",
-   "Compressive features such as stridor, dysphagia, or hoarseness can develop quickly and require prompt airway assessment",
-   "Staging and management follow lymphoma principles, so haematology-oncology involvement and systemic assessment are essential"
+  "id": "thyroid_lymphoma",
+  "name": "Primary thyroid lymphoma",
+  "aliases": [
+    "primary thyroid lymphoma",
+    "thyroid non-Hodgkin lymphoma",
+    "thyroid MALT lymphoma"
   ],
-  "pathophysiology": "Primary thyroid lymphoma is a non-Hodgkin B-cell malignancy arising within the thyroid, almost invariably against a background of chronic lymphocytic (Hashimoto) thyroiditis. Persistent autoimmune stimulation recruits and expands intrathyroidal lymphoid tissue, and acquired genetic changes in this population can give rise to a clonal marginal-zone (MALT) lymphoma or transform into an aggressive diffuse large B-cell lymphoma. The proliferating lymphoid cells rapidly efface and expand the gland, producing a fast-growing mass and compressive symptoms, but the disease responds to lymphoma-directed chemotherapy and radiotherapy rather than to thyroidectomy.",
-  "additionalDifferentials": [
-   "Anaplastic thyroid carcinoma",
-   "Poorly differentiated or medullary thyroid carcinoma",
-   "Hashimoto thyroiditis with diffuse goitre",
-   "Riedel invasive fibrous thyroiditis",
-   "Reactive lymphoid hyperplasia of the thyroid",
-   "Secondary or systemic lymphoma involving the thyroid"
-  ],
-  "additionalInvestigations": [
-   "Core needle or open biopsy with histology, immunohistochemistry, and flow cytometry for definitive diagnosis",
-   "Thyroid autoantibodies and thyroid function, given the strong association with Hashimoto thyroiditis",
-   "Neck ultrasound and cross-sectional imaging to define extent and compression",
-   "Systemic staging imaging such as CT and functional imaging per lymphoma protocols",
-   "Bone marrow assessment and lactate dehydrogenase as part of lymphoma staging",
-   "Airway assessment including laryngoscopy when compressive symptoms are present"
-  ],
-  "redFlags": [
-   "Rapidly enlarging mass with stridor or airway compromise requiring urgent assessment",
-   "New dysphagia or hoarseness from compression or invasion",
-   "Systemic B symptoms such as fever, night sweats, and weight loss indicating aggressive lymphoma",
-   "Superior vena cava obstruction from bulky mediastinal extension"
-  ],
-  "prognosis": "Prognosis is generally good and far better than for anaplastic carcinoma, particularly for localised MALT lymphoma; aggressive diffuse large B-cell histology, advanced stage, and extrathyroidal spread reduce response and survival.",
-  "pitfalls": [
-   "Misdiagnosing lymphoma as anaplastic carcinoma and thereby denying potentially curative lymphoma therapy",
-   "Relying on aspiration cytology alone, which may be insufficient to subtype lymphoma without flow cytometry or core biopsy",
-   "Proceeding to thyroidectomy for a disease that is treated medically",
-   "Overlooking an underlying Hashimoto thyroiditis that provides the diagnostic context"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "WHO Classification of Endocrine and Neuroendocrine Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat aggressive diffuse large B-cell histology with rituximab-based immunochemotherapy (an anthracycline-containing regimen) combined with involved-site radiotherapy rather than thyroidectomy",
-   "Treat localised marginal-zone (MALT) lymphoma with radiotherapy, with rituximab as an option, reserving surgery for diagnosis only",
-   "Secure an adequate tissue diagnosis by core or open biopsy with immunophenotyping and flow cytometry before starting treatment",
-   "Assess and protect the airway urgently when compressive stridor, dysphagia or hoarseness develops, using corticosteroids and airway support as needed",
-   "Replace thyroid hormone for the coexisting Hashimoto hypothyroidism and provide supportive care through chemotherapy",
-   "Stage and manage through a haemato-oncology multidisciplinary team, with post-treatment surveillance for relapse"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thyroid_lymphoma-pathway",
-   "title": "Primary thyroid lymphoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents as a rapidly enlarging goitre or neck mass, often with compressive symptoms, in an older patient with long-standing Hashimoto thyroiditis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging mass with stridor or airway compromise requiring urgent assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Core needle or open biopsy with histology, immunohistochemistry, and flow cytometry for definitive diagnosis, Thyroid autoantibodies and thyroid function, given the strong association with Hashimoto thyroiditis, Neck"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat aggressive diffuse large B-cell histology with rituximab-based immunochemotherapy (an anthracycline-containing regimen) combined with involved-site radiotherapy rather than thyroidectomy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing lymphoma as anaplastic carcinoma and thereby denying potentially curative lymphoma therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary thyroid lymphoma."
-  }
- ],
- "tables": [
-  {
-   "id": "thyroid_lymphoma-matrix",
-   "title": "Primary thyroid lymphoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents as a rapidly enlarging goitre or neck mass, often with compressive symptoms, in an older patient with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology / Endocrine Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents as a rapidly enlarging goitre or neck mass, often with compressive symptoms, in an older patient with long-standing Hashimoto thyroiditis",
+      "Almost always a non-Hodgkin B-cell lymphoma, most commonly diffuse large B-cell lymphoma or a marginal-zone (MALT) lymphoma arising in the setting of autoimmune thyroiditis",
+      "Chronic autoimmune inflammation in Hashimoto thyroiditis provides the lymphoid tissue from which MALT lymphoma can develop, so a history of hypothyroidism and positive thyroid antibodies is common",
+      "Because treatment is chemotherapy and radiotherapy rather than surgery, obtaining an adequate tissue diagnosis is critical and often needs core or open biopsy with flow cytometry, as aspiration may not suffice",
+      "May clinically mimic anaplastic carcinoma, but immunophenotyping distinguishes lymphoid from epithelial malignancy and carries a far better prognosis",
+      "Compressive features such as stridor, dysphagia, or hoarseness can develop quickly and require prompt airway assessment",
+      "Staging and management follow lymphoma principles, so haematology-oncology involvement and systemic assessment are essential"
     ],
-    [
-     "Key Investigations",
-     "Core needle or open biopsy with histology, immunohistochemistry, and flow cytometry for definitive diagnosis, Thyroid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary thyroid lymphoma is a non-Hodgkin B-cell malignancy arising within the thyroid, almost invariably against a background of chronic lymphocytic (Hashimoto) thyroiditis. Persistent autoimmune stimulation recruits and expands intrathyroidal lymphoid tissue, and acquired genetic changes in this population can give rise to a clonal marginal-zone (MALT) lymphoma or transform into an aggressive diffuse large B-cell lymphoma. The proliferating lymphoid cells rapidly efface and expand the gland, producing a fast-growing mass and compressive symptoms, but the disease responds to lymphoma-directed chemotherapy and radiotherapy rather than to thyroidectomy.",
+    "additionalDifferentials": [
+      "Anaplastic thyroid carcinoma",
+      "Poorly differentiated or medullary thyroid carcinoma",
+      "Hashimoto thyroiditis with diffuse goitre",
+      "Riedel invasive fibrous thyroiditis",
+      "Reactive lymphoid hyperplasia of the thyroid",
+      "Secondary or systemic lymphoma involving the thyroid"
     ],
-    [
-     "Primary Differentials",
-     "Anaplastic thyroid carcinoma, Poorly differentiated or medullary thyroid carcinoma, Hashimoto thyroiditis with diffuse goitre",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Core needle or open biopsy with histology, immunohistochemistry, and flow cytometry for definitive diagnosis",
+      "Thyroid autoantibodies and thyroid function, given the strong association with Hashimoto thyroiditis",
+      "Neck ultrasound and cross-sectional imaging to define extent and compression",
+      "Systemic staging imaging such as CT and functional imaging per lymphoma protocols",
+      "Bone marrow assessment and lactate dehydrogenase as part of lymphoma staging",
+      "Airway assessment including laryngoscopy when compressive symptoms are present"
     ],
-    [
-     "Management Strategy",
-     "Treat aggressive diffuse large B-cell histology with rituximab-based immunochemotherapy (an anthracycline-containing regimen)",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging mass with stridor or airway compromise requiring urgent assessment",
+      "New dysphagia or hoarseness from compression or invasion",
+      "Systemic B symptoms such as fever, night sweats, and weight loss indicating aggressive lymphoma",
+      "Superior vena cava obstruction from bulky mediastinal extension"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing lymphoma as anaplastic carcinoma and thereby denying potentially curative lymphoma therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally good and far better than for anaplastic carcinoma, particularly for localised MALT lymphoma; aggressive diffuse large B-cell histology, advanced stage, and extrathyroidal spread reduce response and survival.",
+    "pitfalls": [
+      "Misdiagnosing lymphoma as anaplastic carcinoma and thereby denying potentially curative lymphoma therapy",
+      "Relying on aspiration cytology alone, which may be insufficient to subtype lymphoma without flow cytometry or core biopsy",
+      "Proceeding to thyroidectomy for a disease that is treated medically",
+      "Overlooking an underlying Hashimoto thyroiditis that provides the diagnostic context"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "WHO Classification of Endocrine and Neuroendocrine Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat aggressive diffuse large B-cell histology with rituximab-based immunochemotherapy (an anthracycline-containing regimen) combined with involved-site radiotherapy rather than thyroidectomy",
+      "Treat localised marginal-zone (MALT) lymphoma with radiotherapy, with rituximab as an option, reserving surgery for diagnosis only",
+      "Secure an adequate tissue diagnosis by core or open biopsy with immunophenotyping and flow cytometry before starting treatment",
+      "Assess and protect the airway urgently when compressive stridor, dysphagia or hoarseness develops, using corticosteroids and airway support as needed",
+      "Replace thyroid hormone for the coexisting Hashimoto hypothyroidism and provide supportive care through chemotherapy",
+      "Stage and manage through a haemato-oncology multidisciplinary team, with post-treatment surveillance for relapse"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary thyroid lymphoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thyroid-lymphoma-real-image",
-   "title": "Primary thyroid lymphoma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "thyroid_lymphoma-pathway",
+      "title": "Primary thyroid lymphoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents as a rapidly enlarging goitre or neck mass, often with compressive symptoms, in an older patient with long-standing Hashimoto thyroiditis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging mass with stridor or airway compromise requiring urgent assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Core needle or open biopsy with histology, immunohistochemistry, and flow cytometry for definitive diagnosis, Thyroid autoantibodies and thyroid function, given the strong association with Hashimoto thyroiditis, Neck"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat aggressive diffuse large B-cell histology with rituximab-based immunochemotherapy (an anthracycline-containing regimen) combined with involved-site radiotherapy rather than thyroidectomy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing lymphoma as anaplastic carcinoma and thereby denying potentially curative lymphoma therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary thyroid lymphoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thyroid_lymphoma-matrix",
+      "title": "Primary thyroid lymphoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents as a rapidly enlarging goitre or neck mass, often with compressive symptoms, in an older patient with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Core needle or open biopsy with histology, immunohistochemistry, and flow cytometry for definitive diagnosis, Thyroid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anaplastic thyroid carcinoma, Poorly differentiated or medullary thyroid carcinoma, Hashimoto thyroiditis with diffuse goitre",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat aggressive diffuse large B-cell histology with rituximab-based immunochemotherapy (an anthracycline-containing regimen)",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing lymphoma as anaplastic carcinoma and thereby denying potentially curative lymphoma therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary thyroid lymphoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroid_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary thyroid lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary thyroid lymphoma: rapidly enlarging goitre in Hashimoto thyroiditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: stridor or airway compromise, or systemic B symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment and corticosteroids for compressive symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Core or open biopsy with flow cytometry; staging imaging; marrow and LDH",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy with flow cytometry show B-cell lymphoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anaplastic carcinoma, medullary carcinoma or Riedel thyroiditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rituximab and anthracycline immunochemotherapy plus involved-site radiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy for localised MALT lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Core or open biopsy before any treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent airway protection for compressive symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Thyroid hormone replacement for coexisting hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good, far better than anaplastic carcinoma; aggressive histology worsens it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroid_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Core needle or open biopsy with flow cytometry",
+          "cells": [
+            {
+              "text": "Definitive lymphoma subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid autoantibodies and thyroid function",
+          "cells": [
+            {
+              "text": "Hashimoto thyroiditis context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Extent and compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic staging CT and functional imaging",
+          "cells": [
+            {
+              "text": "Lymphoma staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow assessment and LDH",
+          "cells": [
+            {
+              "text": "Lymphoma staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Airway assessment when compression is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anaplastic thyroid carcinoma",
+          "cells": [
+            {
+              "text": "Immunophenotyping distinguishes lymphoid from epithelial malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hashimoto thyroiditis with diffuse goitre",
+          "cells": [
+            {
+              "text": "Lymphoma arises within chronic Hashimoto; biopsy confirms malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riedel invasive fibrous thyroiditis",
+          "cells": [
+            {
+              "text": "Fibrous rather than lymphoid tissue on histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rituximab-based immunochemotherapy",
+          "cells": [
+            {
+              "text": "Diffuse large B-cell histology, with an anthracycline regimen and involved-site radiotherapy; not thyroidectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy for MALT lymphoma",
+          "cells": [
+            {
+              "text": "Localised marginal-zone disease; rituximab an option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adequate biopsy before treatment",
+          "cells": [
+            {
+              "text": "Core or open biopsy with immunophenotyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway protection",
+          "cells": [
+            {
+              "text": "Stridor, dysphagia or hoarseness, with corticosteroids and airway support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid hormone replacement",
+          "cells": [
+            {
+              "text": "Coexisting Hashimoto hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemato-oncology management",
+          "cells": [
+            {
+              "text": "Staging, treatment and relapse surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

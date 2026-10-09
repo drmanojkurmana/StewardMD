@@ -1,172 +1,434 @@
 {
- "id": "actinic_keratosis",
- "name": "Actinic Keratosis",
- "aliases": [
-  "AK",
-  "solar keratosis",
-  "senile keratosis"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as rough, scaly, erythematous macules or thin papules on chronically sun-exposed skin such as the face, scalp of balding men, ears, forearms, and backs of hands",
-   "Lesions are often more easily felt than seen, giving a sandpaper-like texture to palpation",
-   "They are markers of cumulative ultraviolet damage and indicate field change, so surrounding skin often harbours further subclinical lesions",
-   "A minority progress to invasive squamous cell carcinoma, and the risk rises with the number of lesions and degree of sun damage",
-   "Features that raise concern for progression include thickening, tenderness, induration, rapid growth, bleeding, or ulceration",
-   "Management options span lesion-directed treatments such as cryotherapy and curettage and field-directed topical therapies, with photoprotection central to prevention",
-   "Immunosuppressed patients, particularly organ transplant recipients, develop more numerous and aggressive lesions and need closer surveillance",
-   "Sun-protection advice and regular skin self-examination reduce the development of new lesions and help detect malignant change early"
+  "id": "actinic_keratosis",
+  "name": "Actinic Keratosis",
+  "aliases": [
+    "AK",
+    "solar keratosis",
+    "senile keratosis"
   ],
-  "pathophysiology": "Actinic keratosis is an intraepidermal proliferation of atypical, dysplastic keratinocytes driven by cumulative ultraviolet radiation. UV exposure induces characteristic DNA mutations, including in the TP53 tumour-suppressor gene, that impair repair and apoptosis and allow clonal expansion of abnormal keratinocytes confined to the epidermis. The result is disordered maturation and hyperkeratosis producing the palpable scale. Because the whole photo-damaged area shares this mutational burden (field cancerisation), multiple lesions and recurrences are common, and continued genetic damage can lead to full-thickness dysplasia and invasion characteristic of squamous cell carcinoma.",
-  "additionalDifferentials": [
-   "Squamous cell carcinoma (invasive)",
-   "Bowen's disease (squamous cell carcinoma in situ)",
-   "Superficial basal cell carcinoma",
-   "Seborrhoeic keratosis",
-   "Discoid lupus erythematosus",
-   "Localised patch of eczema or psoriasis"
-  ],
-  "additionalInvestigations": [
-   "Largely a clinical and dermoscopic diagnosis",
-   "Skin biopsy when a lesion is thick, indurated, tender, or otherwise suspicious for squamous cell carcinoma",
-   "Full skin examination to assess overall field damage and detect other skin cancers",
-   "Closer surveillance protocols for immunosuppressed and transplant patients"
-  ],
-  "redFlags": [
-   "Rapid growth, induration, tenderness, ulceration, or bleeding suggesting progression to invasive squamous cell carcinoma",
-   "A lesion that recurs quickly or fails to respond to appropriate treatment",
-   "Numerous or aggressive lesions in an immunosuppressed or organ transplant patient",
-   "A hyperkeratotic horn-like lesion with a firm, tender base warranting histology"
-  ],
-  "prognosis": "Individual actinic keratoses are common and most remain stable or regress, but they mark significant sun damage and carry a small per-lesion risk of transforming into squamous cell carcinoma; with a high lesion burden the cumulative risk becomes clinically important, so treatment and long-term photoprotection and surveillance are worthwhile.",
-  "pitfalls": [
-   "Dismissing an indurated or growing lesion as a simple actinic keratosis when it is an invasive squamous cell carcinoma",
-   "Treating individual visible lesions while ignoring the wider field of sun damage",
-   "Underestimating risk and undertreating in immunosuppressed patients",
-   "Neglecting to reinforce sun protection and self-examination, allowing recurrent disease"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lesion-directed treatment of discrete lesions with cryotherapy, curettage or shave excision",
-   "Field-directed therapy for field cancerisation using topical fluorouracil, imiquimod, diclofenac or ingenol, or photodynamic therapy for larger areas",
-   "Strict photoprotection with broad-spectrum sunscreen and sun avoidance for prevention and to reduce recurrence",
-   "Biopsy of thickened, indurated, tender, bleeding or rapidly growing lesions to exclude invasive squamous cell carcinoma",
-   "Regular full-skin surveillance for new lesions and other skin cancers given the underlying field change",
-   "Intensified surveillance and a lower threshold for treatment in immunosuppressed and transplant patients",
-   "Dermatology referral for extensive field disease or diagnostic uncertainty"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "actinic_keratosis-pathway",
-   "title": "Actinic Keratosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as rough, scaly, erythematous macules or thin papules on chronically sun-exposed skin such as the face, scalp of balding men, ears, forearms, and backs of hands",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, induration, tenderness, ulceration, or bleeding suggesting progression to invasive squamous cell carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Largely a clinical and dermoscopic diagnosis, Skin biopsy when a lesion is thick, indurated, tender, or otherwise suspicious for squamous cell carcinoma, Full skin examination to assess overall field damage and detect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lesion-directed treatment of discrete lesions with cryotherapy, curettage or shave excision"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing an indurated or growing lesion as a simple actinic keratosis when it is an invasive squamous cell carcinoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of actinic keratosis."
-  }
- ],
- "tables": [
-  {
-   "id": "actinic_keratosis-matrix",
-   "title": "Actinic Keratosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as rough, scaly, erythematous macules or thin papules on chronically sun-exposed skin such as the face, scalp of balding",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as rough, scaly, erythematous macules or thin papules on chronically sun-exposed skin such as the face, scalp of balding men, ears, forearms, and backs of hands",
+      "Lesions are often more easily felt than seen, giving a sandpaper-like texture to palpation",
+      "They are markers of cumulative ultraviolet damage and indicate field change, so surrounding skin often harbours further subclinical lesions",
+      "A minority progress to invasive squamous cell carcinoma, and the risk rises with the number of lesions and degree of sun damage",
+      "Features that raise concern for progression include thickening, tenderness, induration, rapid growth, bleeding, or ulceration",
+      "Management options span lesion-directed treatments such as cryotherapy and curettage and field-directed topical therapies, with photoprotection central to prevention",
+      "Immunosuppressed patients, particularly organ transplant recipients, develop more numerous and aggressive lesions and need closer surveillance",
+      "Sun-protection advice and regular skin self-examination reduce the development of new lesions and help detect malignant change early"
     ],
-    [
-     "Key Investigations",
-     "Largely a clinical and dermoscopic diagnosis, Skin biopsy when a lesion is thick, indurated, tender, or otherwise suspicious for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Actinic keratosis is an intraepidermal proliferation of atypical, dysplastic keratinocytes driven by cumulative ultraviolet radiation. UV exposure induces characteristic DNA mutations, including in the TP53 tumour-suppressor gene, that impair repair and apoptosis and allow clonal expansion of abnormal keratinocytes confined to the epidermis. The result is disordered maturation and hyperkeratosis producing the palpable scale. Because the whole photo-damaged area shares this mutational burden (field cancerisation), multiple lesions and recurrences are common, and continued genetic damage can lead to full-thickness dysplasia and invasion characteristic of squamous cell carcinoma.",
+    "additionalDifferentials": [
+      "Squamous cell carcinoma (invasive)",
+      "Bowen's disease (squamous cell carcinoma in situ)",
+      "Superficial basal cell carcinoma",
+      "Seborrhoeic keratosis",
+      "Discoid lupus erythematosus",
+      "Localised patch of eczema or psoriasis"
     ],
-    [
-     "Primary Differentials",
-     "Squamous cell carcinoma (invasive), Bowen's disease (squamous cell carcinoma in situ), Superficial basal cell carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Largely a clinical and dermoscopic diagnosis",
+      "Skin biopsy when a lesion is thick, indurated, tender, or otherwise suspicious for squamous cell carcinoma",
+      "Full skin examination to assess overall field damage and detect other skin cancers",
+      "Closer surveillance protocols for immunosuppressed and transplant patients"
     ],
-    [
-     "Management Strategy",
-     "Lesion-directed treatment of discrete lesions with cryotherapy, curettage or shave excision",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, induration, tenderness, ulceration, or bleeding suggesting progression to invasive squamous cell carcinoma",
+      "A lesion that recurs quickly or fails to respond to appropriate treatment",
+      "Numerous or aggressive lesions in an immunosuppressed or organ transplant patient",
+      "A hyperkeratotic horn-like lesion with a firm, tender base warranting histology"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing an indurated or growing lesion as a simple actinic keratosis when it is an invasive squamous cell carcinoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Individual actinic keratoses are common and most remain stable or regress, but they mark significant sun damage and carry a small per-lesion risk of transforming into squamous cell carcinoma; with a high lesion burden the cumulative risk becomes clinically important, so treatment and long-term photoprotection and surveillance are worthwhile.",
+    "pitfalls": [
+      "Dismissing an indurated or growing lesion as a simple actinic keratosis when it is an invasive squamous cell carcinoma",
+      "Treating individual visible lesions while ignoring the wider field of sun damage",
+      "Underestimating risk and undertreating in immunosuppressed patients",
+      "Neglecting to reinforce sun protection and self-examination, allowing recurrent disease"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lesion-directed treatment of discrete lesions with cryotherapy, curettage or shave excision",
+      "Field-directed therapy for field cancerisation using topical fluorouracil, imiquimod, diclofenac or ingenol, or photodynamic therapy for larger areas",
+      "Strict photoprotection with broad-spectrum sunscreen and sun avoidance for prevention and to reduce recurrence",
+      "Biopsy of thickened, indurated, tender, bleeding or rapidly growing lesions to exclude invasive squamous cell carcinoma",
+      "Regular full-skin surveillance for new lesions and other skin cancers given the underlying field change",
+      "Intensified surveillance and a lower threshold for treatment in immunosuppressed and transplant patients",
+      "Dermatology referral for extensive field disease or diagnostic uncertainty"
     ]
-   ],
-   "caption": "Overview comparison matrix for actinic keratosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "actinic-keratosis-real-image",
-   "title": "Actinic Keratosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "actinic_keratosis-pathway",
+      "title": "Actinic Keratosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as rough, scaly, erythematous macules or thin papules on chronically sun-exposed skin such as the face, scalp of balding men, ears, forearms, and backs of hands",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, induration, tenderness, ulceration, or bleeding suggesting progression to invasive squamous cell carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Largely a clinical and dermoscopic diagnosis, Skin biopsy when a lesion is thick, indurated, tender, or otherwise suspicious for squamous cell carcinoma, Full skin examination to assess overall field damage and detect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lesion-directed treatment of discrete lesions with cryotherapy, curettage or shave excision"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing an indurated or growing lesion as a simple actinic keratosis when it is an invasive squamous cell carcinoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of actinic keratosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "actinic_keratosis-matrix",
+      "title": "Actinic Keratosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as rough, scaly, erythematous macules or thin papules on chronically sun-exposed skin such as the face, scalp of balding",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Largely a clinical and dermoscopic diagnosis, Skin biopsy when a lesion is thick, indurated, tender, or otherwise suspicious for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Squamous cell carcinoma (invasive), Bowen's disease (squamous cell carcinoma in situ), Superficial basal cell carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lesion-directed treatment of discrete lesions with cryotherapy, curettage or shave excision",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing an indurated or growing lesion as a simple actinic keratosis when it is an invasive squamous cell carcinoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for actinic keratosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "actinic_keratosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical and dermoscopic examination",
+          "cells": [
+            {
+              "text": "Largely a clinical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Thick, indurated or tender lesion suspicious for squamous cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full skin examination",
+          "cells": [
+            {
+              "text": "Overall field damage and other skin cancers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance protocols",
+          "cells": [
+            {
+              "text": "Closer surveillance in immunosuppressed and transplant patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "actinic_keratosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cryotherapy, curettage or shave excision",
+          "cells": [
+            {
+              "text": "Discrete lesions"
+            },
+            {
+              "text": "Lesion-directed treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical fluorouracil, imiquimod, diclofenac or ingenol; photodynamic therapy",
+          "cells": [
+            {
+              "text": "Field cancerisation over larger areas"
+            },
+            {
+              "text": "Field-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strict photoprotection",
+          "cells": [
+            {
+              "text": "Prevention and reduced recurrence"
+            },
+            {
+              "text": "Broad-spectrum sunscreen and sun avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of thickened, indurated, bleeding or rapidly growing lesions",
+          "cells": [
+            {
+              "text": "Excludes invasive squamous cell carcinoma"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular full-skin surveillance",
+          "cells": [
+            {
+              "text": "New lesions and other skin cancers"
+            },
+            {
+              "text": "Underlying field change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensified surveillance in immunosuppressed patients",
+          "cells": [
+            {
+              "text": "Lower threshold for treatment"
+            },
+            {
+              "text": "Transplant patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "Extensive field disease or diagnostic uncertainty"
+            },
+            {
+              "text": "Specialist review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "actinic_keratosis-dx-mgmt",
+      "title": "Diagnosis and management of Actinic Keratosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rough scaly macules or papules on chronically sun-exposed skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Induration, tenderness, bleeding or rapid growth present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy to exclude invasive squamous cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical and dermoscopic examination; full skin check for field damage",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lesion thick, indurated or suspicious for squamous cell carcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Skin biopsy to exclude invasive squamous cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat as actinic keratosis; review for other lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cryotherapy, curettage or shave excision for discrete lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Field therapy: topical fluorouracil, imiquimod, diclofenac or PDT",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Photoprotection with broad-spectrum sunscreen; surveillance in transplant patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Individual lesions often regress; high lesion burden raises SCC risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,179 +1,450 @@
 {
- "id": "vertebral_osteomyelitis",
- "name": "Vertebral osteomyelitis",
- "aliases": [
-  "spinal osteomyelitis",
-  "spondylodiscitis",
-  "discitis-osteomyelitis",
-  "pyogenic spondylitis"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / IDSA",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Usually arises from haematogenous seeding of the vertebral body, with the lumbar spine most commonly affected",
-   "New or worsening back pain, often unremitting and worse at night, with or without fever should prompt consideration, especially with a recent bacteraemia",
-   "Staphylococcus aureus is the most frequent pathogen; consider Gram-negatives with urinary sources and Mycobacterium tuberculosis (Pott's disease) in endemic or chronic presentations",
-   "Risk factors include diabetes, injecting drug use, indwelling vascular catheters, recent bacteraemia, endocarditis, and immunosuppression",
-   "MRI with contrast is the imaging investigation of choice for early and accurate diagnosis and for detecting epidural extension",
-   "Obtaining a microbiological diagnosis, by blood cultures or image-guided biopsy, before starting antibiotics is important unless the patient is septic",
-   "Management principles are prolonged targeted antibiotic therapy guided by culture, with surgery reserved for neurological compromise, instability, or failure of medical treatment",
-   "Screen for infective endocarditis and other seeding foci when S. aureus bacteraemia is present"
+  "id": "vertebral_osteomyelitis",
+  "name": "Vertebral osteomyelitis",
+  "aliases": [
+    "spinal osteomyelitis",
+    "spondylodiscitis",
+    "discitis-osteomyelitis",
+    "pyogenic spondylitis"
   ],
-  "pathophysiology": "Pyogenic vertebral osteomyelitis typically begins when bacteria lodge in the vascular end-plate region of a vertebral body via haematogenous spread from a distant focus. Infection then spreads across the relatively avascular intervertebral disc to involve the adjacent vertebra, producing the characteristic pattern of spondylodiscitis. Progressive infection can form paravertebral or epidural abscesses, erode bone leading to vertebral collapse and deformity, and compress neural structures. Less commonly infection reaches the spine by contiguous spread or direct inoculation from surgery or trauma.",
-  "additionalDifferentials": [
-   "Mechanical or degenerative back pain",
-   "Vertebral compression fracture",
-   "Metastatic or primary bone tumour",
-   "Tuberculous spondylitis (Pott's disease)",
-   "Modic degenerative end-plate changes"
-  ],
-  "infectionMimics": [
-   "Malignant infiltration of the vertebral body",
-   "Osteoporotic compression fracture",
-   "Erosive degenerative disc disease",
-   "Inflammatory spondyloarthropathy"
-  ],
-  "additionalInvestigations": [
-   "MRI of the spine with contrast as the primary imaging test",
-   "Blood cultures and inflammatory markers (ESR and CRP) which are useful for diagnosis and monitoring",
-   "Image-guided or open biopsy for microbiological and, where relevant, histological diagnosis",
-   "Echocardiography to exclude endocarditis when S. aureus or other typical organisms are isolated",
-   "Investigations for tuberculosis or brucellosis when the clinical picture is subacute or endemic"
-  ],
-  "redFlags": [
-   "New neurological deficit, radicular weakness, or bladder or bowel dysfunction suggesting epidural abscess with cord or cauda equina compression requiring emergency imaging and surgery",
-   "Signs of spinal instability or progressive vertebral collapse",
-   "Sepsis or endocarditis complicating the infection",
-   "Rapidly progressive, unremitting, or nocturnal back pain in an at-risk patient"
-  ],
-  "prognosis": "With early diagnosis and appropriate prolonged antibiotics most patients recover, but delayed treatment or epidural abscess with cord compression can leave permanent neurological deficits; relapse is more likely with inadequate therapy duration or unaddressed source.",
-  "pitfalls": [
-   "Starting antibiotics before securing a microbiological diagnosis in a stable patient, obscuring the causative organism",
-   "Attributing persistent back pain to mechanical causes and delaying MRI",
-   "Missing an associated epidural abscess or endocarditis",
-   "Treating for too short a duration and precipitating relapse"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "IDSA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Obtain a microbiological diagnosis by blood cultures and image-guided biopsy before starting antibiotics, unless the patient is septic",
-   "Give targeted prolonged antibiotic therapy with antistaphylococcal cover for Staphylococcus aureus, tailored cover for Gram-negative or brucella sources, and a multidrug antituberculous regimen for Pott's disease",
-   "Pursue source control, including excluding and treating endocarditis and removing infected vascular catheters",
-   "Refer for surgical decompression and stabilisation for neurological deficit, epidural abscess with cord compression, spinal instability or failure of medical therapy",
-   "Provide supportive care with analgesia, spinal bracing and graded mobilisation",
-   "Monitor response with serial inflammatory markers, clinical review and repeat imaging",
-   "Optimise predisposing factors such as glycaemic control in diabetes and support for injecting drug use"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vertebral_osteomyelitis-pathway",
-   "title": "Vertebral osteomyelitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Usually arises from haematogenous seeding of the vertebral body, with the lumbar spine most commonly affected",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New neurological deficit, radicular weakness, or bladder or bowel dysfunction suggesting epidural abscess with cord or cauda equina compression requiring emergency imaging and surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the spine with contrast as the primary imaging test, Blood cultures and inflammatory markers (ESR and CRP) which are useful for diagnosis and monitoring, Image-guided or open biopsy for microbiological and, where"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Obtain a microbiological diagnosis by blood cultures and image-guided biopsy before starting antibiotics, unless the patient is septic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Starting antibiotics before securing a microbiological diagnosis in a stable patient, obscuring the causative organism"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vertebral osteomyelitis."
-  }
- ],
- "tables": [
-  {
-   "id": "vertebral_osteomyelitis-matrix",
-   "title": "Vertebral osteomyelitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Usually arises from haematogenous seeding of the vertebral body, with the lumbar spine most commonly affected",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / IDSA",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Usually arises from haematogenous seeding of the vertebral body, with the lumbar spine most commonly affected",
+      "New or worsening back pain, often unremitting and worse at night, with or without fever should prompt consideration, especially with a recent bacteraemia",
+      "Staphylococcus aureus is the most frequent pathogen; consider Gram-negatives with urinary sources and Mycobacterium tuberculosis (Pott's disease) in endemic or chronic presentations",
+      "Risk factors include diabetes, injecting drug use, indwelling vascular catheters, recent bacteraemia, endocarditis, and immunosuppression",
+      "MRI with contrast is the imaging investigation of choice for early and accurate diagnosis and for detecting epidural extension",
+      "Obtaining a microbiological diagnosis, by blood cultures or image-guided biopsy, before starting antibiotics is important unless the patient is septic",
+      "Management principles are prolonged targeted antibiotic therapy guided by culture, with surgery reserved for neurological compromise, instability, or failure of medical treatment",
+      "Screen for infective endocarditis and other seeding foci when S. aureus bacteraemia is present"
     ],
-    [
-     "Key Investigations",
-     "MRI of the spine with contrast as the primary imaging test, Blood cultures and inflammatory markers (ESR and CRP) which are",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pyogenic vertebral osteomyelitis typically begins when bacteria lodge in the vascular end-plate region of a vertebral body via haematogenous spread from a distant focus. Infection then spreads across the relatively avascular intervertebral disc to involve the adjacent vertebra, producing the characteristic pattern of spondylodiscitis. Progressive infection can form paravertebral or epidural abscesses, erode bone leading to vertebral collapse and deformity, and compress neural structures. Less commonly infection reaches the spine by contiguous spread or direct inoculation from surgery or trauma.",
+    "additionalDifferentials": [
+      "Mechanical or degenerative back pain",
+      "Vertebral compression fracture",
+      "Metastatic or primary bone tumour",
+      "Tuberculous spondylitis (Pott's disease)",
+      "Modic degenerative end-plate changes"
     ],
-    [
-     "Primary Differentials",
-     "Mechanical or degenerative back pain, Vertebral compression fracture, Metastatic or primary bone tumour",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Malignant infiltration of the vertebral body",
+      "Osteoporotic compression fracture",
+      "Erosive degenerative disc disease",
+      "Inflammatory spondyloarthropathy"
     ],
-    [
-     "Management Strategy",
-     "Obtain a microbiological diagnosis by blood cultures and image-guided biopsy before starting antibiotics, unless the patient is",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "MRI of the spine with contrast as the primary imaging test",
+      "Blood cultures and inflammatory markers (ESR and CRP) which are useful for diagnosis and monitoring",
+      "Image-guided or open biopsy for microbiological and, where relevant, histological diagnosis",
+      "Echocardiography to exclude endocarditis when S. aureus or other typical organisms are isolated",
+      "Investigations for tuberculosis or brucellosis when the clinical picture is subacute or endemic"
     ],
-    [
-     "Clinical Pitfall",
-     "Starting antibiotics before securing a microbiological diagnosis in a stable patient, obscuring the causative organism",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "New neurological deficit, radicular weakness, or bladder or bowel dysfunction suggesting epidural abscess with cord or cauda equina compression requiring emergency imaging and surgery",
+      "Signs of spinal instability or progressive vertebral collapse",
+      "Sepsis or endocarditis complicating the infection",
+      "Rapidly progressive, unremitting, or nocturnal back pain in an at-risk patient"
+    ],
+    "prognosis": "With early diagnosis and appropriate prolonged antibiotics most patients recover, but delayed treatment or epidural abscess with cord compression can leave permanent neurological deficits; relapse is more likely with inadequate therapy duration or unaddressed source.",
+    "pitfalls": [
+      "Starting antibiotics before securing a microbiological diagnosis in a stable patient, obscuring the causative organism",
+      "Attributing persistent back pain to mechanical causes and delaying MRI",
+      "Missing an associated epidural abscess or endocarditis",
+      "Treating for too short a duration and precipitating relapse"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "IDSA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Obtain a microbiological diagnosis by blood cultures and image-guided biopsy before starting antibiotics, unless the patient is septic",
+      "Give targeted prolonged antibiotic therapy with antistaphylococcal cover for Staphylococcus aureus, tailored cover for Gram-negative or brucella sources, and a multidrug antituberculous regimen for Pott's disease",
+      "Pursue source control, including excluding and treating endocarditis and removing infected vascular catheters",
+      "Refer for surgical decompression and stabilisation for neurological deficit, epidural abscess with cord compression, spinal instability or failure of medical therapy",
+      "Provide supportive care with analgesia, spinal bracing and graded mobilisation",
+      "Monitor response with serial inflammatory markers, clinical review and repeat imaging",
+      "Optimise predisposing factors such as glycaemic control in diabetes and support for injecting drug use"
     ]
-   ],
-   "caption": "Overview comparison matrix for vertebral osteomyelitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vertebral-osteomyelitis-real-image",
-   "title": "Vertebral osteomyelitis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "vertebral_osteomyelitis-pathway",
+      "title": "Vertebral osteomyelitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Usually arises from haematogenous seeding of the vertebral body, with the lumbar spine most commonly affected",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New neurological deficit, radicular weakness, or bladder or bowel dysfunction suggesting epidural abscess with cord or cauda equina compression requiring emergency imaging and surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the spine with contrast as the primary imaging test, Blood cultures and inflammatory markers (ESR and CRP) which are useful for diagnosis and monitoring, Image-guided or open biopsy for microbiological and, where"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Obtain a microbiological diagnosis by blood cultures and image-guided biopsy before starting antibiotics, unless the patient is septic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Starting antibiotics before securing a microbiological diagnosis in a stable patient, obscuring the causative organism"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vertebral osteomyelitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vertebral_osteomyelitis-matrix",
+      "title": "Vertebral osteomyelitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Usually arises from haematogenous seeding of the vertebral body, with the lumbar spine most commonly affected",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the spine with contrast as the primary imaging test, Blood cultures and inflammatory markers (ESR and CRP) which are",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mechanical or degenerative back pain, Vertebral compression fracture, Metastatic or primary bone tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Obtain a microbiological diagnosis by blood cultures and image-guided biopsy before starting antibiotics, unless the patient is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Starting antibiotics before securing a microbiological diagnosis in a stable patient, obscuring the causative organism",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vertebral osteomyelitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "vertebral-osteomyelitis-real-image",
+      "title": "Vertebral osteomyelitis: Diagnostic Musculoskeletal Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+      "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+      "annotations": [
+        {
+          "label": "Cortical Margins",
+          "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+        },
+        {
+          "label": "Trabecular Architecture",
+          "description": "Medullary bone density, lucencies, and subchondral mineralization."
+        },
+        {
+          "label": "Joint Articulation",
+          "description": "Joint space width, alignment, and periarticular soft tissue contours."
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / IDSA",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vertebral_osteomyelitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the spine with contrast",
+          "cells": [
+            {
+              "text": "Primary imaging test for vertebral infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Microbiological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Useful for diagnosis and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided or open biopsy",
+          "cells": [
+            {
+              "text": "Microbiological and, where relevant, histological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Endocarditis as a source, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vertebral_osteomyelitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical or degenerative back pain",
+          "cells": [
+            {
+              "text": "Persistent back pain attributed to mechanics delays MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertebral compression fracture",
+          "cells": [
+            {
+              "text": "Osteoporotic collapse without infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic or primary bone tumour",
+          "cells": [
+            {
+              "text": "Malignant infiltration of the vertebral body"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous spondylitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vertebral_osteomyelitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Microbiological diagnosis first",
+          "cells": [
+            {
+              "text": "Blood cultures and image-guided biopsy before antibiotics, unless septic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged targeted antibiotics",
+          "cells": [
+            {
+              "text": "Antistaphylococcal cover for Staphylococcus aureus; tailored cover for Gram-negative organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical review",
+          "cells": [
+            {
+              "text": "Epidural abscess, instability or progressive collapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vertebral_osteomyelitis-dx-mgmt",
+      "title": "Diagnosis and management of Vertebral osteomyelitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vertebral osteomyelitis: unremitting back pain, often at night, with fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological deficit, bladder dysfunction or spinal instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal surgical review for epidural abscess or progressive collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with contrast, blood cultures, ESR and CRP, image-guided biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a causative organism identified on blood culture or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberculous spondylitis or tumour; repeat biopsy for culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Obtain microbiological diagnosis before antibiotics in a stable patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prolonged targeted antibiotics with staphylococcal cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor ESR and CRP to guide response and duration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Outcome depends on early diagnosis, organism and any neurological compromise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

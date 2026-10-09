@@ -1,177 +1,475 @@
 {
- "id": "diogenes_syndrome",
- "name": "Diogenes Syndrome",
- "aliases": [
-  "Senile squalor syndrome",
-  "Severe domestic self-neglect"
- ],
- "class": "non_infective",
- "system": "Nervous system / Psychiatry",
- "specialty": "Psychiatry / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Oxford Textbook of Old Age Psychiatry",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Syndrome of extreme self-neglect, domestic squalor, social withdrawal, and often hoarding (syllogomania), with a characteristic lack of shame or insight.",
-   "Typically affects older adults living alone and may occur with or without a diagnosable mental illness.",
-   "The eponym, drawn from the Greek philosopher Diogenes, is widely regarded as a misnomer.",
-   "Around half of cases have no primary psychiatric diagnosis; the remainder are associated with frontal-lobe dysfunction, dementia, alcohol misuse, or psychosis.",
-   "Frontal and executive dysfunction is a recurrent theme, with behaviour reflecting impaired judgement and self-regulation.",
-   "Frequently comes to attention through neighbours, environmental health, or crisis rather than self-referral.",
-   "Carries high morbidity and mortality, with presentations including malnutrition, hypothermia, infestation, or untreated medical illness.",
-   "Capacity assessment and multi-agency working with social care and environmental health are central to management."
+  "id": "diogenes_syndrome",
+  "name": "Diogenes Syndrome",
+  "aliases": [
+    "Senile squalor syndrome",
+    "Severe domestic self-neglect"
   ],
-  "pathophysiology": "Diogenes syndrome is a behavioural syndrome rather than a single disease, characterised by breakdown of self-care and of socially normative standards of cleanliness. A substantial proportion of cases are linked to frontal-lobe and executive dysfunction, whether from neurodegeneration, cerebrovascular disease, or alcohol-related damage, impairing planning, judgement, and insight. Premorbid personality traits such as aloofness, stubbornness, and suspiciousness, together with adverse life events, may precipitate decompensation in vulnerable older people. In others the picture is secondary to dementia, psychosis, depression, or obsessive hoarding, and the final common presentation is profound self-neglect with abnormal decision-making about the home environment.",
-  "additionalDifferentials": [
-   "Dementia, including frontotemporal dementia",
-   "Hoarding disorder",
-   "Obsessive-compulsive disorder",
-   "Depression with self-neglect",
-   "Chronic psychotic illness such as schizophrenia",
-   "Alcohol-related brain damage",
-   "Learning disability or longstanding personality difficulties"
-  ],
-  "additionalInvestigations": [
-   "Cognitive assessment and neuropsychological or executive-function testing",
-   "Neuroimaging (MRI or CT) for frontal and cerebrovascular pathology",
-   "Capacity assessment regarding care and residence",
-   "Nutritional and physical health screen (full blood count, metabolic panel, vitamins, thyroid function)",
-   "Home and environmental assessment via occupational therapy and environmental health",
-   "Alcohol use assessment",
-   "Screening for infection and infestation"
-  ],
-  "redFlags": [
-   "Malnutrition, dehydration, or hypothermia",
-   "Untreated serious physical illness or pressure injuries",
-   "Fire or public-health hazard arising from hoarding",
-   "Loss of capacity with inability to keep oneself safe",
-   "Rapid cognitive decline"
-  ],
-  "prognosis": "Mortality is high, particularly where physical complications are advanced, and recurrence of squalor after intervention is common; outcome improves with treatment of any underlying disorder and sustained multi-agency support.",
-  "pitfalls": [
-   "Assuming that self-neglect equates to lack of capacity, or the reverse, without formal assessment",
-   "Attributing the picture solely to eccentricity and missing dementia or depression",
-   "Neglecting assessment of frontal-lobe function",
-   "One-off clearance of the home without addressing the underlying cause, leading to relapse"
-  ],
-  "references": [
-   "Oxford Textbook of Old Age Psychiatry",
-   "Lishman's Organic Psychiatry",
-   "New Oxford Textbook of Psychiatry"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Diagnose and treat any underlying disorder, with antipsychotics for psychosis, antidepressants for depression and appropriate management of dementia or alcohol misuse",
-   "Coordinated multi-agency care spanning old-age psychiatry, geriatrics, social services, environmental health and occupational therapy",
-   "Formal mental capacity assessment regarding self-care and residence, invoking appropriate legal frameworks where capacity is lacking",
-   "Environmental intervention with supervised clearance of domestic squalor and structured support for hoarding",
-   "Nutritional and physical health optimisation, addressing the deficiencies common in profound self-neglect",
-   "Sustained follow-up and consideration of supported accommodation to prevent relapse into squalor",
-   "Ongoing safeguarding and risk assessment given the high mortality"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "diogenes_syndrome-pathway",
-   "title": "Diogenes Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Syndrome of extreme self-neglect, domestic squalor, social withdrawal, and often hoarding (syllogomania), with a characteristic lack of shame or insight.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Malnutrition, dehydration, or hypothermia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cognitive assessment and neuropsychological or executive-function testing, Neuroimaging (MRI or CT) for frontal and cerebrovascular pathology, Capacity assessment regarding care and residence"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Diagnose and treat any underlying disorder, with antipsychotics for psychosis, antidepressants for depression and appropriate management of dementia or alcohol misuse"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming that self-neglect equates to lack of capacity, or the reverse, without formal assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of diogenes syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "diogenes_syndrome-matrix",
-   "title": "Diogenes Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Syndrome of extreme self-neglect, domestic squalor, social withdrawal, and often hoarding (syllogomania), with a characteristic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Psychiatry",
+  "specialty": "Psychiatry / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oxford Textbook of Old Age Psychiatry",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Syndrome of extreme self-neglect, domestic squalor, social withdrawal, and often hoarding (syllogomania), with a characteristic lack of shame or insight.",
+      "Typically affects older adults living alone and may occur with or without a diagnosable mental illness.",
+      "The eponym, drawn from the Greek philosopher Diogenes, is widely regarded as a misnomer.",
+      "Around half of cases have no primary psychiatric diagnosis; the remainder are associated with frontal-lobe dysfunction, dementia, alcohol misuse, or psychosis.",
+      "Frontal and executive dysfunction is a recurrent theme, with behaviour reflecting impaired judgement and self-regulation.",
+      "Frequently comes to attention through neighbours, environmental health, or crisis rather than self-referral.",
+      "Carries high morbidity and mortality, with presentations including malnutrition, hypothermia, infestation, or untreated medical illness.",
+      "Capacity assessment and multi-agency working with social care and environmental health are central to management."
     ],
-    [
-     "Key Investigations",
-     "Cognitive assessment and neuropsychological or executive-function testing, Neuroimaging (MRI or CT) for frontal and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Diogenes syndrome is a behavioural syndrome rather than a single disease, characterised by breakdown of self-care and of socially normative standards of cleanliness. A substantial proportion of cases are linked to frontal-lobe and executive dysfunction, whether from neurodegeneration, cerebrovascular disease, or alcohol-related damage, impairing planning, judgement, and insight. Premorbid personality traits such as aloofness, stubbornness, and suspiciousness, together with adverse life events, may precipitate decompensation in vulnerable older people. In others the picture is secondary to dementia, psychosis, depression, or obsessive hoarding, and the final common presentation is profound self-neglect with abnormal decision-making about the home environment.",
+    "additionalDifferentials": [
+      "Dementia, including frontotemporal dementia",
+      "Hoarding disorder",
+      "Obsessive-compulsive disorder",
+      "Depression with self-neglect",
+      "Chronic psychotic illness such as schizophrenia",
+      "Alcohol-related brain damage",
+      "Learning disability or longstanding personality difficulties"
     ],
-    [
-     "Primary Differentials",
-     "Dementia, including frontotemporal dementia, Hoarding disorder, Obsessive-compulsive disorder",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cognitive assessment and neuropsychological or executive-function testing",
+      "Neuroimaging (MRI or CT) for frontal and cerebrovascular pathology",
+      "Capacity assessment regarding care and residence",
+      "Nutritional and physical health screen (full blood count, metabolic panel, vitamins, thyroid function)",
+      "Home and environmental assessment via occupational therapy and environmental health",
+      "Alcohol use assessment",
+      "Screening for infection and infestation"
     ],
-    [
-     "Management Strategy",
-     "Diagnose and treat any underlying disorder, with antipsychotics for psychosis, antidepressants for depression and appropriate",
-     "Core treatment modality"
+    "redFlags": [
+      "Malnutrition, dehydration, or hypothermia",
+      "Untreated serious physical illness or pressure injuries",
+      "Fire or public-health hazard arising from hoarding",
+      "Loss of capacity with inability to keep oneself safe",
+      "Rapid cognitive decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming that self-neglect equates to lack of capacity, or the reverse, without formal assessment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mortality is high, particularly where physical complications are advanced, and recurrence of squalor after intervention is common; outcome improves with treatment of any underlying disorder and sustained multi-agency support.",
+    "pitfalls": [
+      "Assuming that self-neglect equates to lack of capacity, or the reverse, without formal assessment",
+      "Attributing the picture solely to eccentricity and missing dementia or depression",
+      "Neglecting assessment of frontal-lobe function",
+      "One-off clearance of the home without addressing the underlying cause, leading to relapse"
+    ],
+    "references": [
+      "Oxford Textbook of Old Age Psychiatry",
+      "Lishman's Organic Psychiatry",
+      "New Oxford Textbook of Psychiatry"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Diagnose and treat any underlying disorder, with antipsychotics for psychosis, antidepressants for depression and appropriate management of dementia or alcohol misuse",
+      "Coordinated multi-agency care spanning old-age psychiatry, geriatrics, social services, environmental health and occupational therapy",
+      "Formal mental capacity assessment regarding self-care and residence, invoking appropriate legal frameworks where capacity is lacking",
+      "Environmental intervention with supervised clearance of domestic squalor and structured support for hoarding",
+      "Nutritional and physical health optimisation, addressing the deficiencies common in profound self-neglect",
+      "Sustained follow-up and consideration of supported accommodation to prevent relapse into squalor",
+      "Ongoing safeguarding and risk assessment given the high mortality"
     ]
-   ],
-   "caption": "Overview comparison matrix for diogenes syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "diogenes-syndrome-real-image",
-   "title": "Diogenes Syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "diogenes_syndrome-pathway",
+      "title": "Diogenes Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Syndrome of extreme self-neglect, domestic squalor, social withdrawal, and often hoarding (syllogomania), with a characteristic lack of shame or insight.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Malnutrition, dehydration, or hypothermia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cognitive assessment and neuropsychological or executive-function testing, Neuroimaging (MRI or CT) for frontal and cerebrovascular pathology, Capacity assessment regarding care and residence"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Diagnose and treat any underlying disorder, with antipsychotics for psychosis, antidepressants for depression and appropriate management of dementia or alcohol misuse"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming that self-neglect equates to lack of capacity, or the reverse, without formal assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of diogenes syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "diogenes_syndrome-matrix",
+      "title": "Diogenes Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Syndrome of extreme self-neglect, domestic squalor, social withdrawal, and often hoarding (syllogomania), with a characteristic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cognitive assessment and neuropsychological or executive-function testing, Neuroimaging (MRI or CT) for frontal and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dementia, including frontotemporal dementia, Hoarding disorder, Obsessive-compulsive disorder",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Diagnose and treat any underlying disorder, with antipsychotics for psychosis, antidepressants for depression and appropriate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming that self-neglect equates to lack of capacity, or the reverse, without formal assessment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for diogenes syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oxford Textbook of Old Age Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diogenes_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cognitive assessment and executive-function testing",
+          "cells": [
+            {
+              "text": "Frontal-lobe function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging with MRI or CT",
+          "cells": [
+            {
+              "text": "Frontal and cerebrovascular pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capacity assessment",
+          "cells": [
+            {
+              "text": "Capacity for self-care and residence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional and physical health screen",
+          "cells": [
+            {
+              "text": "Deficiencies common in profound self-neglect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Home assessment via occupational therapy and environmental health",
+          "cells": [
+            {
+              "text": "Hazard from domestic squalor and hoarding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diogenes_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dementia, including frontotemporal dementia",
+          "cells": [
+            {
+              "text": "Missed if the picture is put down to eccentricity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression with self-neglect",
+          "cells": [
+            {
+              "text": "Missed if the picture is put down to eccentricity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hoarding disorder",
+          "cells": [
+            {
+              "text": "Hoarding can drive the squalor; needs structured support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diogenes_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying disorder",
+          "cells": [
+            {
+              "text": "Antipsychotics for psychosis, antidepressants for depression, care for dementia or alcohol misuse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multi-agency care",
+          "cells": [
+            {
+              "text": "Old-age psychiatry, geriatrics, social services, environmental health and occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal capacity assessment",
+          "cells": [
+            {
+              "text": "For self-care and residence; legal frameworks where capacity is lacking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Environmental intervention",
+          "cells": [
+            {
+              "text": "Supervised clearance of squalor; structured support for hoarding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional and physical health",
+          "cells": [
+            {
+              "text": "Optimise, addressing the deficiencies common in profound self-neglect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sustained follow-up",
+          "cells": [
+            {
+              "text": "Consider supported accommodation to prevent relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding and risk assessment",
+          "cells": [
+            {
+              "text": "Ongoing, given the high mortality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diogenes_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Diogenes Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Diogenes syndrome: profound self-neglect with domestic squalor",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (malnutrition, hypothermia, fire hazard, loss of capacity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of malnutrition, dehydration or hypothermia; safeguarding referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cognitive and frontal testing; neuroimaging; capacity; nutrition and physical screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the self-neglect linked to a treatable disorder such as dementia or depression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess capacity and safety; consider hoarding disorder or chronic psychosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying disorder: antipsychotics, antidepressants or dementia care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multi-agency care across psychiatry, geriatrics, social services and environmental health",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Formal capacity assessment for self-care and residence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supervised clearance of squalor with structured support for hoarding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Supported accommodation and follow-up to prevent relapse into squalor",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mortality is high; recurrence after clearance is common; multi-agency support helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

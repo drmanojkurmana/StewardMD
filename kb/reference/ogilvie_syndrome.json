@@ -1,172 +1,483 @@
 {
- "id": "ogilvie_syndrome",
- "name": "Ogilvie syndrome (acute colonic pseudo-obstruction)",
- "aliases": [
-  "acute colonic pseudo-obstruction",
-  "ACPO",
-  "colonic ileus"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with massive colonic distension, abdominal pain and often reduced bowel sounds in the absence of a mechanical obstructing lesion",
-   "Typically occurs in hospitalised or postoperative patients and those with serious systemic illness, trauma or electrolyte disturbance",
-   "Imaging shows marked dilatation of the caecum and right colon, and the risk of ischaemia and perforation rises sharply as caecal diameter increases",
-   "A mechanical obstruction and toxic megacolon must be excluded before making the diagnosis, often with water-soluble contrast or CT",
-   "Initial management is supportive with correction of electrolytes, review of opioids and other contributing drugs, and bowel rest with decompression",
-   "Neostigmine or decompression for Ogilvie is used when conservative measures fail and there is no perforation or ischaemia, with colonoscopic decompression as an alternative",
-   "Serial abdominal examination and imaging are essential to detect impending caecal perforation early"
+  "id": "ogilvie_syndrome",
+  "name": "Ogilvie syndrome (acute colonic pseudo-obstruction)",
+  "aliases": [
+    "acute colonic pseudo-obstruction",
+    "ACPO",
+    "colonic ileus"
   ],
-  "pathophysiology": "Ogilvie syndrome is a massive dilatation of the colon without a mechanical cause, arising from an imbalance in autonomic innervation of the colon. Excess sympathetic tone and reduced parasympathetic (sacral) drive impair colonic motility, particularly in the distal colon, producing a functional obstruction and gross proximal dilatation that is most pronounced in the caecum and right colon. It is precipitated by severe illness, surgery, trauma, metabolic and electrolyte disturbances and drugs that impair motility such as opioids. As the caecum has the largest diameter and thinnest wall, rising wall tension there threatens ischaemia and perforation.",
-  "additionalDifferentials": [
-   "Mechanical colonic obstruction from tumour, stricture or volvulus",
-   "Toxic megacolon from severe colitis",
-   "Paralytic ileus involving the small bowel",
-   "Faecal impaction with proximal loading",
-   "Chronic intestinal pseudo-obstruction",
-   "Clostridioides difficile colitis"
-  ],
-  "additionalInvestigations": [
-   "Abdominal radiograph to assess colonic and caecal diameter",
-   "CT abdomen or water-soluble contrast enema to exclude mechanical obstruction",
-   "Electrolytes including potassium, magnesium, calcium and phosphate",
-   "Thyroid function and review of the drug chart for opioids and anticholinergics",
-   "Serial examination and imaging to monitor caecal diameter"
-  ],
-  "redFlags": [
-   "Progressive caecal dilatation approaching diameters associated with perforation",
-   "Peritonism, fever or rising inflammatory markers suggesting ischaemia or perforation",
-   "Marked tenderness localised to the right iliac fossa over the caecum",
-   "Haemodynamic instability or rising lactate"
-  ],
-  "prognosis": "With prompt recognition and treatment most cases resolve without surgery, but delayed diagnosis complicated by caecal ischaemia or perforation carries a high mortality.",
-  "pitfalls": [
-   "Assuming mechanical obstruction and failing to consider a functional cause, or vice versa",
-   "Giving neostigmine when perforation or ischaemia is present or unexcluded",
-   "Neglecting to correct electrolyte disturbances and reduce opioids",
-   "Underestimating caecal diameter and missing impending perforation"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "American Society for Gastrointestinal Endoscopy guidance on acute colonic pseudo-obstruction"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive first-line care with bowel rest, nil by mouth and nasogastric plus rectal-tube decompression",
-   "Correct precipitating electrolyte disturbances (potassium, magnesium, calcium, phosphate) and treat the underlying illness or sepsis",
-   "Review and minimise contributing drugs, especially opioids and anticholinergics, and mobilise the patient",
-   "Exclude mechanical obstruction, toxic megacolon, ischaemia and perforation with water-soluble contrast enema or CT before pharmacological treatment",
-   "Pharmacological decompression with intravenous neostigmine when conservative measures fail, under cardiac monitoring with atropine available for bradycardia",
-   "Colonoscopic decompression for refractory cases or marked caecal dilatation",
-   "Serial examination and imaging to track caecal diameter, escalating to surgery (caecostomy or colectomy) for ischaemia or perforation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ogilvie_syndrome-pathway",
-   "title": "Ogilvie syndrome (acute colonic pseudo-obstruction): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with massive colonic distension, abdominal pain and often reduced bowel sounds in the absence of a mechanical obstructing lesion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive caecal dilatation approaching diameters associated with perforation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Abdominal radiograph to assess colonic and caecal diameter, CT abdomen or water-soluble contrast enema to exclude mechanical obstruction, Electrolytes including potassium, magnesium, calcium and phosphate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive first-line care with bowel rest, nil by mouth and nasogastric plus rectal-tube decompression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming mechanical obstruction and failing to consider a functional cause, or vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ogilvie syndrome (acute colonic pseudo-obstruction)."
-  }
- ],
- "tables": [
-  {
-   "id": "ogilvie_syndrome-matrix",
-   "title": "Ogilvie syndrome (acute colonic pseudo-obstruction): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with massive colonic distension, abdominal pain and often reduced bowel sounds in the absence of a mechanical",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with massive colonic distension, abdominal pain and often reduced bowel sounds in the absence of a mechanical obstructing lesion",
+      "Typically occurs in hospitalised or postoperative patients and those with serious systemic illness, trauma or electrolyte disturbance",
+      "Imaging shows marked dilatation of the caecum and right colon, and the risk of ischaemia and perforation rises sharply as caecal diameter increases",
+      "A mechanical obstruction and toxic megacolon must be excluded before making the diagnosis, often with water-soluble contrast or CT",
+      "Initial management is supportive with correction of electrolytes, review of opioids and other contributing drugs, and bowel rest with decompression",
+      "Neostigmine or decompression for Ogilvie is used when conservative measures fail and there is no perforation or ischaemia, with colonoscopic decompression as an alternative",
+      "Serial abdominal examination and imaging are essential to detect impending caecal perforation early"
     ],
-    [
-     "Key Investigations",
-     "Abdominal radiograph to assess colonic and caecal diameter, CT abdomen or water-soluble contrast enema to exclude mechanical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ogilvie syndrome is a massive dilatation of the colon without a mechanical cause, arising from an imbalance in autonomic innervation of the colon. Excess sympathetic tone and reduced parasympathetic (sacral) drive impair colonic motility, particularly in the distal colon, producing a functional obstruction and gross proximal dilatation that is most pronounced in the caecum and right colon. It is precipitated by severe illness, surgery, trauma, metabolic and electrolyte disturbances and drugs that impair motility such as opioids. As the caecum has the largest diameter and thinnest wall, rising wall tension there threatens ischaemia and perforation.",
+    "additionalDifferentials": [
+      "Mechanical colonic obstruction from tumour, stricture or volvulus",
+      "Toxic megacolon from severe colitis",
+      "Paralytic ileus involving the small bowel",
+      "Faecal impaction with proximal loading",
+      "Chronic intestinal pseudo-obstruction",
+      "Clostridioides difficile colitis"
     ],
-    [
-     "Primary Differentials",
-     "Mechanical colonic obstruction from tumour, stricture or volvulus, Toxic megacolon from severe colitis, Paralytic ileus involving",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Abdominal radiograph to assess colonic and caecal diameter",
+      "CT abdomen or water-soluble contrast enema to exclude mechanical obstruction",
+      "Electrolytes including potassium, magnesium, calcium and phosphate",
+      "Thyroid function and review of the drug chart for opioids and anticholinergics",
+      "Serial examination and imaging to monitor caecal diameter"
     ],
-    [
-     "Management Strategy",
-     "Supportive first-line care with bowel rest, nil by mouth and nasogastric plus rectal-tube decompression",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive caecal dilatation approaching diameters associated with perforation",
+      "Peritonism, fever or rising inflammatory markers suggesting ischaemia or perforation",
+      "Marked tenderness localised to the right iliac fossa over the caecum",
+      "Haemodynamic instability or rising lactate"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming mechanical obstruction and failing to consider a functional cause, or vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt recognition and treatment most cases resolve without surgery, but delayed diagnosis complicated by caecal ischaemia or perforation carries a high mortality.",
+    "pitfalls": [
+      "Assuming mechanical obstruction and failing to consider a functional cause, or vice versa",
+      "Giving neostigmine when perforation or ischaemia is present or unexcluded",
+      "Neglecting to correct electrolyte disturbances and reduce opioids",
+      "Underestimating caecal diameter and missing impending perforation"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "American Society for Gastrointestinal Endoscopy guidance on acute colonic pseudo-obstruction"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive first-line care with bowel rest, nil by mouth and nasogastric plus rectal-tube decompression",
+      "Correct precipitating electrolyte disturbances (potassium, magnesium, calcium, phosphate) and treat the underlying illness or sepsis",
+      "Review and minimise contributing drugs, especially opioids and anticholinergics, and mobilise the patient",
+      "Exclude mechanical obstruction, toxic megacolon, ischaemia and perforation with water-soluble contrast enema or CT before pharmacological treatment",
+      "Pharmacological decompression with intravenous neostigmine when conservative measures fail, under cardiac monitoring with atropine available for bradycardia",
+      "Colonoscopic decompression for refractory cases or marked caecal dilatation",
+      "Serial examination and imaging to track caecal diameter, escalating to surgery (caecostomy or colectomy) for ischaemia or perforation"
     ]
-   ],
-   "caption": "Overview comparison matrix for ogilvie syndrome (acute colonic pseudo-obstruction)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ogilvie-syndrome-real-image",
-   "title": "Ogilvie syndrome (acute colonic pseudo-obstruction): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "ogilvie_syndrome-pathway",
+      "title": "Ogilvie syndrome (acute colonic pseudo-obstruction): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with massive colonic distension, abdominal pain and often reduced bowel sounds in the absence of a mechanical obstructing lesion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive caecal dilatation approaching diameters associated with perforation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Abdominal radiograph to assess colonic and caecal diameter, CT abdomen or water-soluble contrast enema to exclude mechanical obstruction, Electrolytes including potassium, magnesium, calcium and phosphate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive first-line care with bowel rest, nil by mouth and nasogastric plus rectal-tube decompression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming mechanical obstruction and failing to consider a functional cause, or vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ogilvie syndrome (acute colonic pseudo-obstruction)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ogilvie_syndrome-matrix",
+      "title": "Ogilvie syndrome (acute colonic pseudo-obstruction): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with massive colonic distension, abdominal pain and often reduced bowel sounds in the absence of a mechanical",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Abdominal radiograph to assess colonic and caecal diameter, CT abdomen or water-soluble contrast enema to exclude mechanical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mechanical colonic obstruction from tumour, stricture or volvulus, Toxic megacolon from severe colitis, Paralytic ileus involving",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive first-line care with bowel rest, nil by mouth and nasogastric plus rectal-tube decompression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming mechanical obstruction and failing to consider a functional cause, or vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ogilvie syndrome (acute colonic pseudo-obstruction)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ogilvie_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal radiograph",
+          "cells": [
+            {
+              "text": "Colonic and caecal diameter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT abdomen or water-soluble contrast enema",
+          "cells": [
+            {
+              "text": "Excludes mechanical obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes (potassium, magnesium, calcium, phosphate)",
+          "cells": [
+            {
+              "text": "Disturbances that precipitate the condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and drug chart review",
+          "cells": [
+            {
+              "text": "Thyroid dysfunction; opioids and anticholinergics as contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial examination and imaging",
+          "cells": [
+            {
+              "text": "Caecal diameter over time; the risk of ischaemia and perforation rises as it increases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ogilvie_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical colonic obstruction",
+          "cells": [
+            {
+              "text": "Tumour, stricture or volvulus; excluded by water-soluble contrast or CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic megacolon",
+          "cells": [
+            {
+              "text": "Severe colitis; excluded before the diagnosis is made"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ogilvie_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive decompression",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Bowel rest, nil by mouth, nasogastric and rectal-tube decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct electrolytes and treat the cause",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Potassium, magnesium, calcium and phosphate; treat the underlying illness or sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review contributing drugs",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Reduce opioids and anticholinergics; mobilise the patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mechanical, toxic and ischaemic causes",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Water-soluble contrast enema or CT before drug treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous neostigmine",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "When conservative measures fail; cardiac monitoring with atropine available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopic decompression",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "For refractory cases or marked caecal dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial review and surgery",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Caecostomy or colectomy for ischaemia or perforation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ogilvie_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Ogilvie syndrome (acute colonic pseudo-obstruction)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abdominal pain and colonic distension with no mechanical obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (caecal dilatation, peritonism, fever or rising lactate)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: surgical review for caecal ischaemia or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal radiograph for caecal diameter; electrolytes; contrast enema or CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do contrast enema or CT exclude mechanical obstruction and toxic megacolon?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tumour, volvulus, toxic megacolon or C difficile colitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bowel rest, nil by mouth, nasogastric and rectal-tube decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct potassium, magnesium, calcium and phosphate; treat sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stop or reduce opioids and anticholinergics; mobilise the patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "IV neostigmine if conservative measures fail, with cardiac monitoring and atropine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Colonoscopic decompression for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most resolve; ischaemia or perforation after delay carries high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

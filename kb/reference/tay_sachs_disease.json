@@ -1,171 +1,469 @@
 {
- "id": "tay_sachs_disease",
- "name": "Tay-Sachs disease",
- "aliases": [
-  "hexosaminidase A deficiency",
-  "GM2 gangliosidosis type 1",
-  "beta-hexosaminidase A deficiency"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive GM2 gangliosidosis caused by deficiency of the enzyme hexosaminidase A due to pathogenic variants in the HEXA gene",
-   "Carrier frequency is increased in the Ashkenazi Jewish population, making targeted carrier screening and prenatal diagnosis important",
-   "The classic infantile form presents around 3 to 6 months with loss of milestones, hypotonia progressing to spasticity, and an exaggerated startle response to sound",
-   "A cherry-red spot at the macula is a hallmark ophthalmological finding",
-   "Unlike many storage disorders, there is characteristically no hepatosplenomegaly, which helps distinguish it clinically",
-   "Progressive macrocephaly, seizures, blindness, and neurodegeneration follow, with death usually in early childhood",
-   "Juvenile and late-onset variants exist and can present with slower motor and psychiatric or cerebellar symptoms",
-   "No disease-modifying therapy is established, so management is supportive and genetic counselling is central"
+  "id": "tay_sachs_disease",
+  "name": "Tay-Sachs disease",
+  "aliases": [
+    "hexosaminidase A deficiency",
+    "GM2 gangliosidosis type 1",
+    "beta-hexosaminidase A deficiency"
   ],
-  "pathophysiology": "Tay-Sachs disease results from biallelic pathogenic variants in HEXA, which encodes the alpha subunit of the enzyme beta-hexosaminidase A. Deficient enzyme activity prevents degradation of GM2 ganglioside, which accumulates progressively within neuronal lysosomes of the central nervous system. Neuronal engorgement and dysfunction drive relentless neurodegeneration. Because storage is largely confined to neurons, visceral organomegaly is typically absent, distinguishing it from disorders such as Sandhoff disease, in which both hexosaminidase A and B are deficient.",
-  "additionalDifferentials": [
-   "Sandhoff disease",
-   "GM1 gangliosidosis",
-   "Niemann-Pick disease",
-   "Other causes of infantile neurodegeneration with cherry-red spot",
-   "Leukodystrophies presenting with developmental regression"
-  ],
-  "additionalInvestigations": [
-   "Assay of hexosaminidase A activity in serum or leukocytes",
-   "HEXA molecular genetic testing to confirm the diagnosis and enable carrier detection",
-   "Ophthalmological examination for the macular cherry-red spot",
-   "Neuroimaging to characterise neurodegeneration and exclude alternatives",
-   "Carrier screening and prenatal or preimplantation testing for at-risk families"
-  ],
-  "redFlags": [
-   "Rapid developmental regression with exaggerated startle in an infant",
-   "Emerging seizures or loss of vision",
-   "Progressive swallowing difficulty with aspiration risk",
-   "Family history in an at-risk population without prior carrier screening"
-  ],
-  "prognosis": "The infantile form is progressive and fatal, typically within the first few years of life. Juvenile-onset disease progresses more slowly with death in later childhood or adolescence, while late-onset forms have a more variable and protracted course. Management remains supportive.",
-  "pitfalls": [
-   "Overlooking the diagnosis because hepatosplenomegaly is absent",
-   "Failing to distinguish it from Sandhoff disease, which additionally involves visceral storage",
-   "Not offering carrier screening to at-risk populations before conception",
-   "Attributing the exaggerated startle to a benign cause and delaying evaluation"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no curative therapy, so care is supportive and palliative, centred on comfort and quality of life",
-   "Control seizures with anticonvulsant therapy",
-   "Manage feeding difficulty and aspiration risk with feeding support and gastrostomy where needed",
-   "Treat spasticity and manage respiratory secretions and recurrent chest infections",
-   "Involve paediatric palliative care early for symptom control and family support",
-   "Coordinate multidisciplinary care across metabolic medicine, neurology and allied health",
-   "Offer genetic counselling with carrier screening, particularly in Ashkenazi Jewish families, and prenatal or preimplantation diagnosis for at-risk families"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tay_sachs_disease-pathway",
-   "title": "Tay-Sachs disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive GM2 gangliosidosis caused by deficiency of the enzyme hexosaminidase A due to pathogenic variants in the HEXA gene",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid developmental regression with exaggerated startle in an infant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assay of hexosaminidase A activity in serum or leukocytes, HEXA molecular genetic testing to confirm the diagnosis and enable carrier detection, Ophthalmological examination for the macular cherry-red spot"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no curative therapy, so care is supportive and palliative, centred on comfort and quality of life"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis because hepatosplenomegaly is absent"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tay-sachs disease."
-  }
- ],
- "tables": [
-  {
-   "id": "tay_sachs_disease-matrix",
-   "title": "Tay-Sachs disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive GM2 gangliosidosis caused by deficiency of the enzyme hexosaminidase A due to pathogenic variants in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive GM2 gangliosidosis caused by deficiency of the enzyme hexosaminidase A due to pathogenic variants in the HEXA gene",
+      "Carrier frequency is increased in the Ashkenazi Jewish population, making targeted carrier screening and prenatal diagnosis important",
+      "The classic infantile form presents around 3 to 6 months with loss of milestones, hypotonia progressing to spasticity, and an exaggerated startle response to sound",
+      "A cherry-red spot at the macula is a hallmark ophthalmological finding",
+      "Unlike many storage disorders, there is characteristically no hepatosplenomegaly, which helps distinguish it clinically",
+      "Progressive macrocephaly, seizures, blindness, and neurodegeneration follow, with death usually in early childhood",
+      "Juvenile and late-onset variants exist and can present with slower motor and psychiatric or cerebellar symptoms",
+      "No disease-modifying therapy is established, so management is supportive and genetic counselling is central"
     ],
-    [
-     "Key Investigations",
-     "Assay of hexosaminidase A activity in serum or leukocytes, HEXA molecular genetic testing to confirm the diagnosis and enable",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tay-Sachs disease results from biallelic pathogenic variants in HEXA, which encodes the alpha subunit of the enzyme beta-hexosaminidase A. Deficient enzyme activity prevents degradation of GM2 ganglioside, which accumulates progressively within neuronal lysosomes of the central nervous system. Neuronal engorgement and dysfunction drive relentless neurodegeneration. Because storage is largely confined to neurons, visceral organomegaly is typically absent, distinguishing it from disorders such as Sandhoff disease, in which both hexosaminidase A and B are deficient.",
+    "additionalDifferentials": [
+      "Sandhoff disease",
+      "GM1 gangliosidosis",
+      "Niemann-Pick disease",
+      "Other causes of infantile neurodegeneration with cherry-red spot",
+      "Leukodystrophies presenting with developmental regression"
     ],
-    [
-     "Primary Differentials",
-     "Sandhoff disease, GM1 gangliosidosis, Niemann-Pick disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assay of hexosaminidase A activity in serum or leukocytes",
+      "HEXA molecular genetic testing to confirm the diagnosis and enable carrier detection",
+      "Ophthalmological examination for the macular cherry-red spot",
+      "Neuroimaging to characterise neurodegeneration and exclude alternatives",
+      "Carrier screening and prenatal or preimplantation testing for at-risk families"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no curative therapy, so care is supportive and palliative, centred on comfort and quality of life",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid developmental regression with exaggerated startle in an infant",
+      "Emerging seizures or loss of vision",
+      "Progressive swallowing difficulty with aspiration risk",
+      "Family history in an at-risk population without prior carrier screening"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis because hepatosplenomegaly is absent",
-     "Prevent diagnostic or management error"
+    "prognosis": "The infantile form is progressive and fatal, typically within the first few years of life. Juvenile-onset disease progresses more slowly with death in later childhood or adolescence, while late-onset forms have a more variable and protracted course. Management remains supportive.",
+    "pitfalls": [
+      "Overlooking the diagnosis because hepatosplenomegaly is absent",
+      "Failing to distinguish it from Sandhoff disease, which additionally involves visceral storage",
+      "Not offering carrier screening to at-risk populations before conception",
+      "Attributing the exaggerated startle to a benign cause and delaying evaluation"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no curative therapy, so care is supportive and palliative, centred on comfort and quality of life",
+      "Control seizures with anticonvulsant therapy",
+      "Manage feeding difficulty and aspiration risk with feeding support and gastrostomy where needed",
+      "Treat spasticity and manage respiratory secretions and recurrent chest infections",
+      "Involve paediatric palliative care early for symptom control and family support",
+      "Coordinate multidisciplinary care across metabolic medicine, neurology and allied health",
+      "Offer genetic counselling with carrier screening, particularly in Ashkenazi Jewish families, and prenatal or preimplantation diagnosis for at-risk families"
     ]
-   ],
-   "caption": "Overview comparison matrix for tay-sachs disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tay-sachs-disease-real-image",
-   "title": "Tay-Sachs disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "tay_sachs_disease-pathway",
+      "title": "Tay-Sachs disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive GM2 gangliosidosis caused by deficiency of the enzyme hexosaminidase A due to pathogenic variants in the HEXA gene",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid developmental regression with exaggerated startle in an infant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assay of hexosaminidase A activity in serum or leukocytes, HEXA molecular genetic testing to confirm the diagnosis and enable carrier detection, Ophthalmological examination for the macular cherry-red spot"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no curative therapy, so care is supportive and palliative, centred on comfort and quality of life"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis because hepatosplenomegaly is absent"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tay-sachs disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tay_sachs_disease-matrix",
+      "title": "Tay-Sachs disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive GM2 gangliosidosis caused by deficiency of the enzyme hexosaminidase A due to pathogenic variants in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assay of hexosaminidase A activity in serum or leukocytes, HEXA molecular genetic testing to confirm the diagnosis and enable",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sandhoff disease, GM1 gangliosidosis, Niemann-Pick disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no curative therapy, so care is supportive and palliative, centred on comfort and quality of life",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis because hepatosplenomegaly is absent",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tay-sachs disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tay_sachs_disease-dx-mgmt",
+      "title": "Diagnosis and management of Tay-Sachs disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tay-Sachs disease: infant regression, startle and cherry-red spot",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rapid regression, new seizures or vision loss, or swallowing difficulty?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent palliative, feeding and seizure support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hexosaminidase A assay; HEXA genetic testing; macular examination; neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does enzyme assay show deficient hexosaminidase A with HEXA variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sandhoff disease, GM1 gangliosidosis, Niemann-Pick or leukodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive and palliative care, centred on comfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsant therapy for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding support, with gastrostomy where aspiration risk is high",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of spasticity, secretions and chest infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with carrier screening and prenatal options",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Infantile form is progressive and usually fatal in early childhood; later forms vary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tay_sachs_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hexosaminidase A activity in serum or leukocytes",
+          "cells": [
+            {
+              "text": "Deficient enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HEXA molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and enables carrier detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Macular cherry-red spot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Neurodegeneration and exclusion of alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carrier screening and prenatal or preimplantation testing",
+          "cells": [
+            {
+              "text": "At-risk families"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tay_sachs_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sandhoff disease",
+          "cells": [
+            {
+              "text": "Visceral storage with organomegaly; Tay-Sachs has no hepatosplenomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GM1 gangliosidosis",
+          "cells": [
+            {
+              "text": "Shares the cherry-red spot and neurodegeneration; enzyme and gene testing separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Niemann-Pick disease",
+          "cells": [
+            {
+              "text": "Shares the cherry-red spot; enzyme and gene testing separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tay_sachs_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "No curative therapy; focus on comfort and quality of life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Gastrostomy where aspiration risk is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of spasticity and secretions",
+          "cells": [
+            {
+              "text": "Recurrent chest infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric palliative care",
+          "cells": [
+            {
+              "text": "Early involvement for symptom control and family support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine, neurology and allied health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier screening, especially in Ashkenazi Jewish families; prenatal or preimplantation diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

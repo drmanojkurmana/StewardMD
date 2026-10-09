@@ -1,173 +1,1221 @@
 {
- "id": "pemphigus_vulgaris",
- "name": "Pemphigus vulgaris",
- "aliases": [
-  "pemphigus",
-  "PV"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A potentially life-threatening autoimmune blistering disease that most often begins with painful, non-healing oral erosions before skin involvement appears",
-   "Blisters are flaccid and fragile because the split is within the epidermis, so intact bullae are rarely seen and the picture is dominated by raw erosions",
-   "Gentle lateral pressure on skin can extend a blister or shear the epidermis (positive Nikolsky sign), reflecting loss of keratinocyte adhesion",
-   "Any patient with persistent unexplained mucosal erosions, particularly in the mouth, should raise suspicion for pemphigus",
-   "Diagnosis rests on skin biopsy showing suprabasal acantholysis and direct immunofluorescence demonstrating intercellular IgG deposition in a fishnet pattern",
-   "Circulating antibodies to desmoglein 3 (with or without desmoglein 1) can be detected serologically and correlate with disease activity",
-   "Management relies on systemic immunosuppression, typically corticosteroids with steroid-sparing immunomodulators or B-cell-depleting therapy for extensive disease",
-   "Meticulous wound care, pain control, nutritional support, and vigilance for infection are essential given widespread skin barrier loss"
+  "id": "pemphigus_vulgaris",
+  "name": "Pemphigus vulgaris",
+  "aliases": [
+    "pemphigus",
+    "PV"
   ],
-  "pathophysiology": "Pemphigus vulgaris is an autoimmune disease in which IgG autoantibodies target desmoglein 3 (and desmoglein 1 in mucocutaneous disease), transmembrane desmosomal cadherins that mediate keratinocyte adhesion. Antibody binding disrupts desmosomal function and triggers intracellular signalling that causes loss of cell-to-cell adhesion (acantholysis). This produces a suprabasal split within the epidermis, giving rise to fragile flaccid blisters and erosions. Because desmoglein 3 is expressed strongly in mucosa, mucosal disease often predominates; involvement of both desmogleins produces combined mucosal and cutaneous lesions. Extensive erosions lead to fluid loss, protein depletion, and susceptibility to secondary infection and sepsis.",
-  "additionalDifferentials": [
-   "Bullous pemphigoid (tense blisters, subepidermal split, older patients)",
-   "Mucous membrane (cicatricial) pemphigoid",
-   "Paraneoplastic pemphigus",
-   "Stevens-Johnson syndrome and toxic epidermal necrolysis",
-   "Aphthous stomatitis or herpetic gingivostomatitis for oral-only disease",
-   "Erosive lichen planus"
-  ],
-  "additionalInvestigations": [
-   "Skin or mucosal biopsy for histology showing suprabasal acantholysis",
-   "Perilesional biopsy for direct immunofluorescence showing intercellular IgG and C3",
-   "Serum indirect immunofluorescence and desmoglein antibody assays to support diagnosis and monitor activity",
-   "Screening for underlying malignancy if paraneoplastic pemphigus is suspected",
-   "Baseline and monitoring investigations before and during immunosuppressive therapy, including infection screening"
-  ],
-  "redFlags": [
-   "Extensive skin and mucosal erosion with fluid and protein loss and risk of sepsis",
-   "Inability to eat or drink due to painful oropharyngeal involvement",
-   "Signs of secondary bacterial infection or systemic instability",
-   "Features suggesting paraneoplastic pemphigus, which mandates malignancy evaluation"
-  ],
-  "prognosis": "Once frequently fatal, pemphigus vulgaris now has a much better outlook with immunosuppressive and B-cell-depleting therapy; however, it remains a serious chronic disease and much of the residual mortality relates to treatment complications and infection.",
-  "pitfalls": [
-   "Dismissing chronic oral erosions and delaying diagnosis until skin disease is widespread",
-   "Confusing it with bullous pemphigoid and misjudging severity and treatment intensity",
-   "Under-appreciating infection risk from extensive barrier loss and immunosuppression",
-   "Tapering immunosuppression too rapidly and precipitating relapse"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with systemic corticosteroids combined with rituximab as first-line therapy",
-   "Use adjuvant immunosuppression such as azathioprine or mycophenolate mofetil to spare corticosteroids",
-   "Provide intravenous immunoglobulin or immunoadsorption for severe or refractory disease",
-   "Give supportive wound care with fluid and protein replacement for extensive erosions and treat secondary infection",
-   "Provide analgesia, oral care and a soft diet for painful oral erosions to maintain nutrition",
-   "Monitor disease activity with anti-desmoglein-3 and anti-desmoglein-1 titres and screen for treatment-related infection and bone loss",
-   "Exclude an underlying malignancy where paraneoplastic pemphigus is suspected",
-   "Escalate to inpatient specialist care for widespread erosions with fluid loss and sepsis risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pemphigus_vulgaris-pathway",
-   "title": "Pemphigus vulgaris: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A potentially life-threatening autoimmune blistering disease that most often begins with painful, non-healing oral erosions before skin involvement appears",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive skin and mucosal erosion with fluid and protein loss and risk of sepsis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin or mucosal biopsy for histology showing suprabasal acantholysis, Perilesional biopsy for direct immunofluorescence showing intercellular IgG and C3, Serum indirect immunofluorescence and desmoglein antibody assays to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with systemic corticosteroids combined with rituximab as first-line therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing chronic oral erosions and delaying diagnosis until skin disease is widespread"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pemphigus vulgaris."
-  }
- ],
- "tables": [
-  {
-   "id": "pemphigus_vulgaris-matrix",
-   "title": "Pemphigus vulgaris: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A potentially life-threatening autoimmune blistering disease that most often begins with painful, non-healing oral erosions",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A potentially life-threatening autoimmune blistering disease that most often begins with painful, non-healing oral erosions before skin involvement appears",
+      "Blisters are flaccid and fragile because the split is within the epidermis, so intact bullae are rarely seen and the picture is dominated by raw erosions",
+      "Gentle lateral pressure on skin can extend a blister or shear the epidermis (positive Nikolsky sign), reflecting loss of keratinocyte adhesion",
+      "Any patient with persistent unexplained mucosal erosions, particularly in the mouth, should raise suspicion for pemphigus",
+      "Diagnosis rests on skin biopsy showing suprabasal acantholysis and direct immunofluorescence demonstrating intercellular IgG deposition in a fishnet pattern",
+      "Circulating antibodies to desmoglein 3 (with or without desmoglein 1) can be detected serologically and correlate with disease activity",
+      "Management relies on systemic immunosuppression, typically corticosteroids with steroid-sparing immunomodulators or B-cell-depleting therapy for extensive disease",
+      "Meticulous wound care, pain control, nutritional support, and vigilance for infection are essential given widespread skin barrier loss"
     ],
-    [
-     "Key Investigations",
-     "Skin or mucosal biopsy for histology showing suprabasal acantholysis, Perilesional biopsy for direct immunofluorescence showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pemphigus vulgaris is an autoimmune disease in which IgG autoantibodies target desmoglein 3 (and desmoglein 1 in mucocutaneous disease), transmembrane desmosomal cadherins that mediate keratinocyte adhesion. Antibody binding disrupts desmosomal function and triggers intracellular signalling that causes loss of cell-to-cell adhesion (acantholysis). This produces a suprabasal split within the epidermis, giving rise to fragile flaccid blisters and erosions. Because desmoglein 3 is expressed strongly in mucosa, mucosal disease often predominates; involvement of both desmogleins produces combined mucosal and cutaneous lesions. Extensive erosions lead to fluid loss, protein depletion, and susceptibility to secondary infection and sepsis.",
+    "additionalDifferentials": [
+      "Bullous pemphigoid (tense blisters, subepidermal split, older patients)",
+      "Mucous membrane (cicatricial) pemphigoid",
+      "Paraneoplastic pemphigus",
+      "Stevens-Johnson syndrome and toxic epidermal necrolysis",
+      "Aphthous stomatitis or herpetic gingivostomatitis for oral-only disease",
+      "Erosive lichen planus"
     ],
-    [
-     "Primary Differentials",
-     "Bullous pemphigoid (tense blisters, subepidermal split, older patients), Mucous membrane (cicatricial) pemphigoid, Paraneoplastic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin or mucosal biopsy for histology showing suprabasal acantholysis",
+      "Perilesional biopsy for direct immunofluorescence showing intercellular IgG and C3",
+      "Serum indirect immunofluorescence and desmoglein antibody assays to support diagnosis and monitor activity",
+      "Screening for underlying malignancy if paraneoplastic pemphigus is suspected",
+      "Baseline and monitoring investigations before and during immunosuppressive therapy, including infection screening"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with systemic corticosteroids combined with rituximab as first-line therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive skin and mucosal erosion with fluid and protein loss and risk of sepsis",
+      "Inability to eat or drink due to painful oropharyngeal involvement",
+      "Signs of secondary bacterial infection or systemic instability",
+      "Features suggesting paraneoplastic pemphigus, which mandates malignancy evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing chronic oral erosions and delaying diagnosis until skin disease is widespread",
-     "Prevent diagnostic or management error"
+    "prognosis": "Once frequently fatal, pemphigus vulgaris now has a much better outlook with immunosuppressive and B-cell-depleting therapy; however, it remains a serious chronic disease and much of the residual mortality relates to treatment complications and infection.",
+    "pitfalls": [
+      "Dismissing chronic oral erosions and delaying diagnosis until skin disease is widespread",
+      "Confusing it with bullous pemphigoid and misjudging severity and treatment intensity",
+      "Under-appreciating infection risk from extensive barrier loss and immunosuppression",
+      "Tapering immunosuppression too rapidly and precipitating relapse"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with systemic corticosteroids combined with rituximab as first-line therapy",
+      "Use adjuvant immunosuppression such as azathioprine or mycophenolate mofetil to spare corticosteroids",
+      "Provide intravenous immunoglobulin or immunoadsorption for severe or refractory disease",
+      "Give supportive wound care with fluid and protein replacement for extensive erosions and treat secondary infection",
+      "Provide analgesia, oral care and a soft diet for painful oral erosions to maintain nutrition",
+      "Monitor disease activity with anti-desmoglein-3 and anti-desmoglein-1 titres and screen for treatment-related infection and bone loss",
+      "Exclude an underlying malignancy where paraneoplastic pemphigus is suspected",
+      "Escalate to inpatient specialist care for widespread erosions with fluid loss and sepsis risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for pemphigus vulgaris."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pemphigus-vulgaris-real-image",
-   "title": "Pemphigus vulgaris: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "pemphigus_vulgaris-pathway",
+      "title": "Pemphigus vulgaris: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A potentially life-threatening autoimmune blistering disease that most often begins with painful, non-healing oral erosions before skin involvement appears",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive skin and mucosal erosion with fluid and protein loss and risk of sepsis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin or mucosal biopsy for histology showing suprabasal acantholysis, Perilesional biopsy for direct immunofluorescence showing intercellular IgG and C3, Serum indirect immunofluorescence and desmoglein antibody assays to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with systemic corticosteroids combined with rituximab as first-line therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing chronic oral erosions and delaying diagnosis until skin disease is widespread"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pemphigus vulgaris."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pemphigus_vulgaris-matrix",
+      "title": "Pemphigus vulgaris: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A potentially life-threatening autoimmune blistering disease that most often begins with painful, non-healing oral erosions",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin or mucosal biopsy for histology showing suprabasal acantholysis, Perilesional biopsy for direct immunofluorescence showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bullous pemphigoid (tense blisters, subepidermal split, older patients), Mucous membrane (cicatricial) pemphigoid, Paraneoplastic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with systemic corticosteroids combined with rituximab as first-line therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing chronic oral erosions and delaying diagnosis until skin disease is widespread",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pemphigus vulgaris."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 54-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pemphigus_vulgaris-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin or mucosal biopsy for histology",
+          "cells": [
+            {
+              "text": "Suprabasal acantholysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perilesional biopsy for direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Intercellular IgG and C3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum indirect immunofluorescence and desmoglein antibody assays",
+          "cells": [
+            {
+              "text": "Supports diagnosis and monitors activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Underlying malignancy when paraneoplastic pemphigus is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline and monitoring infection screening",
+          "cells": [
+            {
+              "text": "Before and during immunosuppressive therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pemphigus_vulgaris-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bullous pemphigoid",
+          "cells": [
+            {
+              "text": "Tense blisters, subepidermal split, older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aphthous stomatitis or herpetic gingivostomatitis",
+          "cells": [
+            {
+              "text": "Oral-only disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Features suggesting it mandate malignancy evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pemphigus_vulgaris-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids with rituximab",
+          "cells": [
+            {
+              "text": "First-line therapy to induce remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant immunosuppression",
+          "cells": [
+            {
+              "text": "Azathioprine or mycophenolate mofetil to spare corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin or immunoadsorption",
+          "cells": [
+            {
+              "text": "For severe or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and fluid replacement",
+          "cells": [
+            {
+              "text": "Fluid and protein replacement for extensive erosions; treat secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral care",
+          "cells": [
+            {
+              "text": "Analgesia, oral care and a soft diet for painful oral erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Anti-desmoglein-3 and anti-desmoglein-1 titres; screen for treatment-related infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy evaluation",
+          "cells": [
+            {
+              "text": "Where paraneoplastic pemphigus is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Inpatient specialist care for widespread erosions with fluid loss and sepsis risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pemphigus_vulgaris-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    },
+    {
+      "id": "pemphigus_vulgaris-ddx-2",
+      "kind": "ddx",
+      "title": "Immunologically mediated blistering diseases compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Clinical",
+        "Histology",
+        "Immunopathology",
+        "Autoantigens"
+      ],
+      "rows": [
+        {
+          "parameter": "Pemphigus foliaceus",
+          "cells": [
+            {
+              "text": "Crusts and shallow erosions on scalp, central face, upper chest and back"
+            },
+            {
+              "text": "Acantholytic blister in the superficial epidermis"
+            },
+            {
+              "text": "Cell surface IgG deposits on keratinocytes"
+            },
+            {
+              "text": "Dsg1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "Flaccid blisters, denuded skin, oromucosal lesions"
+            },
+            {
+              "text": "Acantholytic blister in the suprabasal epidermis"
+            },
+            {
+              "text": "Cell surface IgG deposits on keratinocytes"
+            },
+            {
+              "text": "Dsg3 (plus Dsg1 in patients with skin involvement)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Painful stomatitis with papulosquamous or lichenoid eruptions progressing to blisters"
+            },
+            {
+              "text": "Acantholysis, keratinocyte necrosis and vacuolar interface dermatitis"
+            },
+            {
+              "text": "Cell surface IgG and C3 on keratinocytes and, variably, similar deposits in the epidermal basement membrane zone"
+            },
+            {
+              "text": "Plakin protein family members and desmosomal cadherins"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bullous pemphigoid",
+          "cells": [
+            {
+              "text": "Large tense blisters on flexor surfaces and trunk"
+            },
+            {
+              "text": "Subepidermal blister with eosinophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of IgG and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG1, BPAG2"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pemphigoid gestationis",
+          "cells": [
+            {
+              "text": "Pruritic urticarial plaques rimmed by vesicles and bullae on trunk and extremities"
+            },
+            {
+              "text": "Teardrop-shaped subepidermal blisters in dermal papillae; eosinophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2 (plus BPAG1 in some patients)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Linear IgA disease",
+          "cells": [
+            {
+              "text": "Pruritic small papules on extensor surfaces; occasionally larger arciform blisters"
+            },
+            {
+              "text": "Subepidermal blister with neutrophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of IgA in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cicatricial pemphigoid",
+          "cells": [
+            {
+              "text": "Erosive and/or blistering lesions of mucous membranes and possibly skin; scarring at some sites"
+            },
+            {
+              "text": "Subepidermal blister, leukocytic infiltrate may or may not be present"
+            },
+            {
+              "text": "Linear band of IgG, IgA and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2, laminin-332, or others"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Epidermolysis bullosa acquisita",
+          "cells": [
+            {
+              "text": "Blisters, erosions, scars and milia at trauma-exposed sites; widespread inflammatory tense blisters may be seen initially"
+            },
+            {
+              "text": "Subepidermal blister, leukocytic infiltrate may or may not be present"
+            },
+            {
+              "text": "Linear band of IgG and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "Type VII collagen"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "Extremely pruritic small papules and vesicles on elbows, knees, buttocks and posterior neck"
+            },
+            {
+              "text": "Subepidermal blister with neutrophils in dermal papillae"
+            },
+            {
+              "text": "Granular IgA deposits in dermal papillae"
+            },
+            {
+              "text": "Epidermal transglutaminase"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Dsg1, desmoglein 1; Dsg3, desmoglein 3; BPAG1, bullous pemphigoid antigen 1; BPAG2, bullous pemphigoid antigen 2."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pemphigus_vulgaris-dx-mgmt",
+      "title": "Diagnosis and management of Pemphigus vulgaris",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful skin and mucosal erosions with suspected pemphigus vulgaris",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (extensive erosions, cannot eat or drink, sepsis, paraneoplastic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to inpatient specialist care for fluid loss and sepsis risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin or mucosal biopsy for acantholysis; perilesional direct immunofluorescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do biopsy and immunofluorescence show acantholysis with intercellular IgG and C3?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bullous pemphigoid, mucous membrane pemphigoid or erosive lichen planus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Induce remission with systemic corticosteroids combined with rituximab",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add azathioprine or mycophenolate mofetil to spare corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Use immunoglobulin or immunoadsorption for severe or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Give wound care with fluid and protein replacement; treat secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Provide analgesia and oral care; monitor anti-desmoglein titres",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Much better outlook with modern therapy but remains a serious chronic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

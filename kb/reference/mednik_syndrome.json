@@ -1,176 +1,481 @@
 {
- "id": "mednik_syndrome",
- "name": "MEDNIK syndrome",
- "aliases": [
-  "mental retardation-enteropathy-deafness-neuropathy-ichthyosis-keratodermia syndrome",
-  "Kamouraska syndrome",
-  "AP1S1-related disorder",
-  "AP1S1"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The acronym summarises the core features: mental retardation, enteropathy, deafness, peripheral neuropathy, ichthyosis, and keratodermia",
-   "An autosomal recessive disorder caused by biallelic variants in AP1S1, encoding a subunit of the adaptor protein complex 1 (AP-1) that governs intracellular vesicular trafficking",
-   "Copper indices resemble those of Wilson disease and Menkes disease combined: low serum copper and caeruloplasmin alongside high hepatic copper, reflecting mislocalisation of the copper ATPases ATP7A and ATP7B",
-   "Congenital or infantile diarrhoea (enteropathy) may be severe and life-threatening in early life",
-   "Progressive sensorineural hearing loss and a length-dependent sensorimotor peripheral neuropathy develop over time",
-   "Skin findings include congenital ichthyosis and palmoplantar keratoderma reflecting disturbed epidermal trafficking",
-   "Cholestatic liver disease with copper accumulation can occur, and copper-modulating therapy has been explored",
-   "Diagnosis rests on the characteristic multisystem pattern confirmed by AP1S1 sequencing"
+  "id": "mednik_syndrome",
+  "name": "MEDNIK syndrome",
+  "aliases": [
+    "mental retardation-enteropathy-deafness-neuropathy-ichthyosis-keratodermia syndrome",
+    "Kamouraska syndrome",
+    "AP1S1-related disorder",
+    "AP1S1"
   ],
-  "pathophysiology": "MEDNIK syndrome results from loss-of-function variants in AP1S1, which encodes the sigma-1A subunit of the heterotetrameric adaptor protein complex 1. AP-1 mediates clathrin-dependent sorting of transmembrane cargo between the trans-Golgi network and endosomes. Disrupted AP-1 function impairs the correct trafficking and localisation of the copper-transporting ATPases ATP7A and ATP7B, producing a mixed copper-handling defect that biochemically overlaps both Menkes and Wilson disease. The same trafficking failure perturbs epidermal keratinocyte differentiation, enterocyte function, myelination, and neuronal development, generating the combined dermatological, gastrointestinal, auditory, neurological, and cognitive phenotype.",
-  "additionalDifferentials": [
-   "Wilson disease (hepatic copper accumulation)",
-   "Menkes disease and occipital horn syndrome (ATP7A defects)",
-   "Congenital ichthyosis syndromes (e.g. Netherton syndrome)",
-   "Congenital diarrhoeal and enteropathy syndromes",
-   "Peripheral neuropathies with deafness (e.g. some Charcot-Marie-Tooth variants)",
-   "Other congenital disorders of glycosylation and trafficking"
-  ],
-  "additionalInvestigations": [
-   "Serum copper and caeruloplasmin (typically low)",
-   "Hepatic copper quantification and liver function tests",
-   "AP1S1 molecular genetic testing",
-   "Audiometry for sensorineural hearing loss",
-   "Nerve conduction studies for peripheral neuropathy",
-   "Skin examination and, where needed, biopsy for ichthyosis and keratoderma"
-  ],
-  "redFlags": [
-   "Severe infantile enteropathy with dehydration and failure to thrive",
-   "Progressive cholestatic liver disease with copper overload",
-   "Rapidly progressive hearing loss or neuropathy",
-   "Sepsis complicating protracted diarrhoea in infancy"
-  ],
-  "prognosis": "A chronic multisystem disorder; early enteropathy can be life-threatening, while survivors face progressive hearing loss, neuropathy, and variable cognitive impairment, with liver involvement contributing to long-term morbidity.",
-  "pitfalls": [
-   "Interpreting the copper indices as isolated Wilson or Menkes disease and missing the trafficking diagnosis",
-   "Attributing infantile diarrhoea solely to infection or allergy",
-   "Overlooking the syndromic significance of combined skin, hearing, and nerve findings",
-   "Assuming copper chelation alone addresses the underlying multisystem defect"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "Journal of Inherited Metabolic Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Zinc acetate, with copper-modulating therapy as used in Wilson disease, to correct the disturbed copper handling and limit hepatic copper accumulation",
-   "Nutritional support for the enteropathy, including parenteral nutrition during severe infantile diarrhoea",
-   "Emollients, keratolytics and topical or systemic retinoids for ichthyosis and palmoplantar keratoderma",
-   "Hearing aids or cochlear implantation for progressive sensorineural hearing loss, with physiotherapy and supportive care for the peripheral neuropathy",
-   "Developmental, educational and communication support for cognitive impairment",
-   "Monitor liver function and hepatic copper, with periodic audiometry and nerve conduction studies",
-   "Offer genetic counselling for autosomal recessive inheritance and test at-risk family members",
-   "Coordinate care through a metabolic, dermatology, neurology and audiology multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mednik_syndrome-pathway",
-   "title": "MEDNIK syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The acronym summarises the core features: mental retardation, enteropathy, deafness, peripheral neuropathy, ichthyosis, and keratodermia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe infantile enteropathy with dehydration and failure to thrive",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum copper and caeruloplasmin (typically low), Hepatic copper quantification and liver function tests, AP1S1 molecular genetic testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Zinc acetate, with copper-modulating therapy as used in Wilson disease, to correct the disturbed copper handling and limit hepatic copper accumulation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting the copper indices as isolated Wilson or Menkes disease and missing the trafficking diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mednik syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "mednik_syndrome-matrix",
-   "title": "MEDNIK syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The acronym summarises the core features: mental retardation, enteropathy, deafness, peripheral neuropathy, ichthyosis, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The acronym summarises the core features: mental retardation, enteropathy, deafness, peripheral neuropathy, ichthyosis, and keratodermia",
+      "An autosomal recessive disorder caused by biallelic variants in AP1S1, encoding a subunit of the adaptor protein complex 1 (AP-1) that governs intracellular vesicular trafficking",
+      "Copper indices resemble those of Wilson disease and Menkes disease combined: low serum copper and caeruloplasmin alongside high hepatic copper, reflecting mislocalisation of the copper ATPases ATP7A and ATP7B",
+      "Congenital or infantile diarrhoea (enteropathy) may be severe and life-threatening in early life",
+      "Progressive sensorineural hearing loss and a length-dependent sensorimotor peripheral neuropathy develop over time",
+      "Skin findings include congenital ichthyosis and palmoplantar keratoderma reflecting disturbed epidermal trafficking",
+      "Cholestatic liver disease with copper accumulation can occur, and copper-modulating therapy has been explored",
+      "Diagnosis rests on the characteristic multisystem pattern confirmed by AP1S1 sequencing"
     ],
-    [
-     "Key Investigations",
-     "Serum copper and caeruloplasmin (typically low), Hepatic copper quantification and liver function tests, AP1S1 molecular genetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MEDNIK syndrome results from loss-of-function variants in AP1S1, which encodes the sigma-1A subunit of the heterotetrameric adaptor protein complex 1. AP-1 mediates clathrin-dependent sorting of transmembrane cargo between the trans-Golgi network and endosomes. Disrupted AP-1 function impairs the correct trafficking and localisation of the copper-transporting ATPases ATP7A and ATP7B, producing a mixed copper-handling defect that biochemically overlaps both Menkes and Wilson disease. The same trafficking failure perturbs epidermal keratinocyte differentiation, enterocyte function, myelination, and neuronal development, generating the combined dermatological, gastrointestinal, auditory, neurological, and cognitive phenotype.",
+    "additionalDifferentials": [
+      "Wilson disease (hepatic copper accumulation)",
+      "Menkes disease and occipital horn syndrome (ATP7A defects)",
+      "Congenital ichthyosis syndromes (e.g. Netherton syndrome)",
+      "Congenital diarrhoeal and enteropathy syndromes",
+      "Peripheral neuropathies with deafness (e.g. some Charcot-Marie-Tooth variants)",
+      "Other congenital disorders of glycosylation and trafficking"
     ],
-    [
-     "Primary Differentials",
-     "Wilson disease (hepatic copper accumulation), Menkes disease and occipital horn syndrome (ATP7A defects), Congenital ichthyosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum copper and caeruloplasmin (typically low)",
+      "Hepatic copper quantification and liver function tests",
+      "AP1S1 molecular genetic testing",
+      "Audiometry for sensorineural hearing loss",
+      "Nerve conduction studies for peripheral neuropathy",
+      "Skin examination and, where needed, biopsy for ichthyosis and keratoderma"
     ],
-    [
-     "Management Strategy",
-     "Zinc acetate, with copper-modulating therapy as used in Wilson disease, to correct the disturbed copper handling and limit",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe infantile enteropathy with dehydration and failure to thrive",
+      "Progressive cholestatic liver disease with copper overload",
+      "Rapidly progressive hearing loss or neuropathy",
+      "Sepsis complicating protracted diarrhoea in infancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting the copper indices as isolated Wilson or Menkes disease and missing the trafficking diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "A chronic multisystem disorder; early enteropathy can be life-threatening, while survivors face progressive hearing loss, neuropathy, and variable cognitive impairment, with liver involvement contributing to long-term morbidity.",
+    "pitfalls": [
+      "Interpreting the copper indices as isolated Wilson or Menkes disease and missing the trafficking diagnosis",
+      "Attributing infantile diarrhoea solely to infection or allergy",
+      "Overlooking the syndromic significance of combined skin, hearing, and nerve findings",
+      "Assuming copper chelation alone addresses the underlying multisystem defect"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "Journal of Inherited Metabolic Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Zinc acetate, with copper-modulating therapy as used in Wilson disease, to correct the disturbed copper handling and limit hepatic copper accumulation",
+      "Nutritional support for the enteropathy, including parenteral nutrition during severe infantile diarrhoea",
+      "Emollients, keratolytics and topical or systemic retinoids for ichthyosis and palmoplantar keratoderma",
+      "Hearing aids or cochlear implantation for progressive sensorineural hearing loss, with physiotherapy and supportive care for the peripheral neuropathy",
+      "Developmental, educational and communication support for cognitive impairment",
+      "Monitor liver function and hepatic copper, with periodic audiometry and nerve conduction studies",
+      "Offer genetic counselling for autosomal recessive inheritance and test at-risk family members",
+      "Coordinate care through a metabolic, dermatology, neurology and audiology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for mednik syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mednik-syndrome-real-image",
-   "title": "MEDNIK syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mednik_syndrome-pathway",
+      "title": "MEDNIK syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The acronym summarises the core features: mental retardation, enteropathy, deafness, peripheral neuropathy, ichthyosis, and keratodermia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe infantile enteropathy with dehydration and failure to thrive",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum copper and caeruloplasmin (typically low), Hepatic copper quantification and liver function tests, AP1S1 molecular genetic testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Zinc acetate, with copper-modulating therapy as used in Wilson disease, to correct the disturbed copper handling and limit hepatic copper accumulation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting the copper indices as isolated Wilson or Menkes disease and missing the trafficking diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mednik syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mednik_syndrome-matrix",
+      "title": "MEDNIK syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The acronym summarises the core features: mental retardation, enteropathy, deafness, peripheral neuropathy, ichthyosis, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum copper and caeruloplasmin (typically low), Hepatic copper quantification and liver function tests, AP1S1 molecular genetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Wilson disease (hepatic copper accumulation), Menkes disease and occipital horn syndrome (ATP7A defects), Congenital ichthyosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Zinc acetate, with copper-modulating therapy as used in Wilson disease, to correct the disturbed copper handling and limit",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting the copper indices as isolated Wilson or Menkes disease and missing the trafficking diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mednik syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mednik_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum copper and caeruloplasmin",
+          "cells": [
+            {
+              "text": "Typically low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic copper quantification and liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic copper and liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AP1S1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "AP1S1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination and biopsy, where needed",
+          "cells": [
+            {
+              "text": "Ichthyosis and keratoderma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mednik_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Hepatic copper accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menkes disease and occipital horn syndrome",
+          "cells": [
+            {
+              "text": "ATP7A defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital ichthyosis syndromes (e.g. Netherton syndrome)",
+          "cells": [
+            {
+              "text": "Congenital ichthyosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mednik_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Zinc acetate",
+          "cells": [
+            {
+              "text": "With copper-modulating therapy as in Wilson disease, to correct copper handling and limit hepatic copper accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "For the enteropathy, including parenteral nutrition in severe infantile diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "Emollients, keratolytics and topical or systemic retinoids for ichthyosis and keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and neuropathy",
+          "cells": [
+            {
+              "text": "Hearing aids or cochlear implantation; physiotherapy and supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Developmental, educational and communication support for cognitive impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Liver function, hepatic copper, audiometry and nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; test at-risk family members"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Metabolic, dermatology, neurology and audiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mednik_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of MEDNIK syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with severe enteropathy, diarrhoea and failure to thrive; suspected MEDNIK",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cholestatic liver disease, rapidly progressive hearing loss or sepsis present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nutritional support for severe diarrhoea; treat sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum copper and caeruloplasmin, hepatic copper, AP1S1 testing, audiometry, NCS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an AP1S1 variant confirmed on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Wilson disease, Menkes disease or Netherton syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Zinc acetate to correct copper handling and limit hepatic copper accumulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nutritional support for the enteropathy, including parenteral nutrition if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emollients, keratolytics and retinoids for ichthyosis and keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation for progressive sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver, copper, hearing and nerve monitoring; genetic counselling for family members",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

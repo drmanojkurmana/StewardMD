@@ -1,177 +1,484 @@
 {
- "id": "pityriasis_lichenoides",
- "name": "Pityriasis lichenoides (chronica/PLC spectrum)",
- "aliases": [
-  "pityriasis lichenoides chronica",
-  "PLC",
-  "guttate parapsoriasis",
-  "chronic pityriasis lichenoides"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Belongs to a spectrum of benign, self-limiting T-cell-driven papulosquamous eruptions that runs from the chronic pole (PLC) to the acute pole (PLEVA)",
-   "PLC produces recurrent crops of small red-brown papules capped by a characteristic adherent mica-like scale that can be lifted off in one piece",
-   "Lesions appear in successive crops so that different stages coexist, usually healing with transient post-inflammatory hyper- or hypopigmentation rather than scarring",
-   "Most common in children and young adults and typically follows a relapsing-remitting course over months to years",
-   "The trunk and the proximal aspects of the limbs are the sites most often involved",
-   "Usually asymptomatic or only mildly itchy, which helps separate it from more inflammatory dermatoses",
-   "Diagnosis is clinical but supported by biopsy showing a lymphocytic interface reaction; clonality studies may be needed to distinguish it from lymphomatoid papulosis",
-   "Management is generally conservative with emollients, topical corticosteroids, and phototherapy for extensive or persistent disease"
+  "id": "pityriasis_lichenoides",
+  "name": "Pityriasis lichenoides (chronica/PLC spectrum)",
+  "aliases": [
+    "pityriasis lichenoides chronica",
+    "PLC",
+    "guttate parapsoriasis",
+    "chronic pityriasis lichenoides"
   ],
-  "pathophysiology": "Pityriasis lichenoides is best regarded as a reactive, sometimes clonal, T-lymphocyte-driven process rather than a true malignancy. It is thought to represent an exaggerated hypersensitivity reaction, possibly to infectious antigens (viruses and Toxoplasma have been implicated) or to circulating immune complexes, producing a lymphocytic vasculitis with interface change at the dermo-epidermal junction. The chronic end of the spectrum shows a milder, more superficial infiltrate with parakeratotic scale, giving the persistent scaly papules of PLC, whereas the acute pole shows a denser cytotoxic response with keratinocyte necrosis. Post-inflammatory pigmentary change reflects melanin disturbance at the dermo-epidermal interface.",
-  "additionalDifferentials": [
-   "Lymphomatoid papulosis",
-   "Guttate psoriasis",
-   "Pityriasis rosea",
-   "Secondary syphilis",
-   "Papular urticaria / arthropod bite reactions",
-   "Small-plaque parapsoriasis (digitate dermatosis)"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with histopathology to confirm the interface dermatitis and characterise the infiltrate",
-   "Immunohistochemistry and T-cell receptor gene rearrangement studies to exclude lymphomatoid papulosis or cutaneous lymphoma",
-   "Serology for possible triggers such as Toxoplasma, Epstein-Barr virus, or HIV when clinically indicated",
-   "Full blood count and inflammatory markers in patients who are febrile or systemically unwell",
-   "Syphilis serology where secondary syphilis is a diagnostic consideration",
-   "Photographic documentation to track the evolution of successive crops"
-  ],
-  "redFlags": [
-   "Evolution of the acute pole into febrile ulceronecrotic Mucha-Habermann disease with systemic upset",
-   "Development of persistent, infiltrated, or ulcerating plaques raising concern for cutaneous lymphoma",
-   "Atypical or clonal lymphoid infiltrate on histology requiring formal clonality assessment",
-   "Failure to settle or progressive extension despite standard therapy"
-  ],
-  "prognosis": "Generally benign and self-limiting, although the chronic form may relapse over months or years; the great majority resolve without scarring, but rare progression to a lymphoproliferative disorder justifies long-term follow-up of atypical cases.",
-  "pitfalls": [
-   "Mistaking it for guttate psoriasis or pityriasis rosea and delaying diagnostic biopsy",
-   "Overlooking the overlap with lymphomatoid papulosis, which can be histologically very similar",
-   "Assuming a single self-limited episode when the relapsing, crop-by-crop pattern is characteristic",
-   "Failing to recognise the rare but potentially serious ulceronecrotic variant"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [
-   "pleva"
-  ],
-  "management": [
-   "Reassurance about the benign, relapsing but generally self-limiting course",
-   "Emollients and topical corticosteroids to relieve itch and inflammation",
-   "Oral macrolide or tetracycline antibiotics for their anti-inflammatory effect as first-line systemic therapy",
-   "Narrowband ultraviolet B or other phototherapy for widespread or persistent disease",
-   "Topical calcineurin inhibitors as a steroid-sparing adjunct",
-   "Low-dose methotrexate reserved for refractory or extensive disease",
-   "Long-term follow-up of atypical lesions with biopsy to detect rare lymphoproliferative progression"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pityriasis_lichenoides-pathway",
-   "title": "Pityriasis lichenoides (chronica/PLC spectrum): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Belongs to a spectrum of benign, self-limiting T-cell-driven papulosquamous eruptions that runs from the chronic pole (PLC) to the acute pole (PLEVA)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Evolution of the acute pole into febrile ulceronecrotic Mucha-Habermann disease with systemic upset",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with histopathology to confirm the interface dermatitis and characterise the infiltrate, Immunohistochemistry and T-cell receptor gene rearrangement studies to exclude lymphomatoid papulosis or cutaneous"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance about the benign, relapsing but generally self-limiting course"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for guttate psoriasis or pityriasis rosea and delaying diagnostic biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pityriasis lichenoides (chronica/plc spectrum)."
-  }
- ],
- "tables": [
-  {
-   "id": "pityriasis_lichenoides-matrix",
-   "title": "Pityriasis lichenoides (chronica/PLC spectrum): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Belongs to a spectrum of benign, self-limiting T-cell-driven papulosquamous eruptions that runs from the chronic pole (PLC) to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Belongs to a spectrum of benign, self-limiting T-cell-driven papulosquamous eruptions that runs from the chronic pole (PLC) to the acute pole (PLEVA)",
+      "PLC produces recurrent crops of small red-brown papules capped by a characteristic adherent mica-like scale that can be lifted off in one piece",
+      "Lesions appear in successive crops so that different stages coexist, usually healing with transient post-inflammatory hyper- or hypopigmentation rather than scarring",
+      "Most common in children and young adults and typically follows a relapsing-remitting course over months to years",
+      "The trunk and the proximal aspects of the limbs are the sites most often involved",
+      "Usually asymptomatic or only mildly itchy, which helps separate it from more inflammatory dermatoses",
+      "Diagnosis is clinical but supported by biopsy showing a lymphocytic interface reaction; clonality studies may be needed to distinguish it from lymphomatoid papulosis",
+      "Management is generally conservative with emollients, topical corticosteroids, and phototherapy for extensive or persistent disease"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with histopathology to confirm the interface dermatitis and characterise the infiltrate, Immunohistochemistry and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pityriasis lichenoides is best regarded as a reactive, sometimes clonal, T-lymphocyte-driven process rather than a true malignancy. It is thought to represent an exaggerated hypersensitivity reaction, possibly to infectious antigens (viruses and Toxoplasma have been implicated) or to circulating immune complexes, producing a lymphocytic vasculitis with interface change at the dermo-epidermal junction. The chronic end of the spectrum shows a milder, more superficial infiltrate with parakeratotic scale, giving the persistent scaly papules of PLC, whereas the acute pole shows a denser cytotoxic response with keratinocyte necrosis. Post-inflammatory pigmentary change reflects melanin disturbance at the dermo-epidermal interface.",
+    "additionalDifferentials": [
+      "Lymphomatoid papulosis",
+      "Guttate psoriasis",
+      "Pityriasis rosea",
+      "Secondary syphilis",
+      "Papular urticaria / arthropod bite reactions",
+      "Small-plaque parapsoriasis (digitate dermatosis)"
     ],
-    [
-     "Primary Differentials",
-     "Lymphomatoid papulosis, Guttate psoriasis, Pityriasis rosea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with histopathology to confirm the interface dermatitis and characterise the infiltrate",
+      "Immunohistochemistry and T-cell receptor gene rearrangement studies to exclude lymphomatoid papulosis or cutaneous lymphoma",
+      "Serology for possible triggers such as Toxoplasma, Epstein-Barr virus, or HIV when clinically indicated",
+      "Full blood count and inflammatory markers in patients who are febrile or systemically unwell",
+      "Syphilis serology where secondary syphilis is a diagnostic consideration",
+      "Photographic documentation to track the evolution of successive crops"
     ],
-    [
-     "Management Strategy",
-     "Reassurance about the benign, relapsing but generally self-limiting course",
-     "Core treatment modality"
+    "redFlags": [
+      "Evolution of the acute pole into febrile ulceronecrotic Mucha-Habermann disease with systemic upset",
+      "Development of persistent, infiltrated, or ulcerating plaques raising concern for cutaneous lymphoma",
+      "Atypical or clonal lymphoid infiltrate on histology requiring formal clonality assessment",
+      "Failure to settle or progressive extension despite standard therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for guttate psoriasis or pityriasis rosea and delaying diagnostic biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generally benign and self-limiting, although the chronic form may relapse over months or years; the great majority resolve without scarring, but rare progression to a lymphoproliferative disorder justifies long-term follow-up of atypical cases.",
+    "pitfalls": [
+      "Mistaking it for guttate psoriasis or pityriasis rosea and delaying diagnostic biopsy",
+      "Overlooking the overlap with lymphomatoid papulosis, which can be histologically very similar",
+      "Assuming a single self-limited episode when the relapsing, crop-by-crop pattern is characteristic",
+      "Failing to recognise the rare but potentially serious ulceronecrotic variant"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [
+      "pleva"
+    ],
+    "management": [
+      "Reassurance about the benign, relapsing but generally self-limiting course",
+      "Emollients and topical corticosteroids to relieve itch and inflammation",
+      "Oral macrolide or tetracycline antibiotics for their anti-inflammatory effect as first-line systemic therapy",
+      "Narrowband ultraviolet B or other phototherapy for widespread or persistent disease",
+      "Topical calcineurin inhibitors as a steroid-sparing adjunct",
+      "Low-dose methotrexate reserved for refractory or extensive disease",
+      "Long-term follow-up of atypical lesions with biopsy to detect rare lymphoproliferative progression"
     ]
-   ],
-   "caption": "Overview comparison matrix for pityriasis lichenoides (chronica/plc spectrum)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pityriasis-lichenoides-real-image",
-   "title": "Pityriasis lichenoides (chronica/PLC spectrum): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "pityriasis_lichenoides-pathway",
+      "title": "Pityriasis lichenoides (chronica/PLC spectrum): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Belongs to a spectrum of benign, self-limiting T-cell-driven papulosquamous eruptions that runs from the chronic pole (PLC) to the acute pole (PLEVA)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Evolution of the acute pole into febrile ulceronecrotic Mucha-Habermann disease with systemic upset",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with histopathology to confirm the interface dermatitis and characterise the infiltrate, Immunohistochemistry and T-cell receptor gene rearrangement studies to exclude lymphomatoid papulosis or cutaneous"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance about the benign, relapsing but generally self-limiting course"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for guttate psoriasis or pityriasis rosea and delaying diagnostic biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pityriasis lichenoides (chronica/plc spectrum)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pityriasis_lichenoides-matrix",
+      "title": "Pityriasis lichenoides (chronica/PLC spectrum): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Belongs to a spectrum of benign, self-limiting T-cell-driven papulosquamous eruptions that runs from the chronic pole (PLC) to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with histopathology to confirm the interface dermatitis and characterise the infiltrate, Immunohistochemistry and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lymphomatoid papulosis, Guttate psoriasis, Pityriasis rosea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance about the benign, relapsing but generally self-limiting course",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for guttate psoriasis or pityriasis rosea and delaying diagnostic biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pityriasis lichenoides (chronica/plc spectrum)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pityriasis_lichenoides-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Interface dermatitis and infiltrate characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry and T-cell receptor gene rearrangement",
+          "cells": [
+            {
+              "text": "Lymphomatoid papulosis or cutaneous lymphoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for triggers such as Toxoplasma, EBV or HIV",
+          "cells": [
+            {
+              "text": "Possible triggers, when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Febrile or systemically unwell patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis serology",
+          "cells": [
+            {
+              "text": "Secondary syphilis, when considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic documentation",
+          "cells": [
+            {
+              "text": "Evolution of successive crops"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pityriasis_lichenoides-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphomatoid papulosis",
+          "cells": [
+            {
+              "text": "Atypical or clonal lymphoid infiltrate needs clonality assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary syphilis",
+          "cells": [
+            {
+              "text": "Syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guttate psoriasis",
+          "cells": [
+            {
+              "text": "Diagnostic biopsy distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pityriasis_lichenoides-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, relapsing but generally self-limiting course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and topical corticosteroids",
+          "cells": [
+            {
+              "text": "Relieve itch and inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral macrolide or tetracycline",
+          "cells": [
+            {
+              "text": "First-line systemic therapy for its anti-inflammatory effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "Narrowband UVB for widespread or persistent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Steroid-sparing adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose methotrexate",
+          "cells": [
+            {
+              "text": "Refractory or extensive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Biopsy of atypical lesions to detect rare lymphoproliferative progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pityriasis_lichenoides-dx-mgmt",
+      "title": "Diagnosis and management of Pityriasis lichenoides (chronica/PLC spectrum)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Successive crops of papules evolving into scaly plaques; suspected pityriasis lichenoides",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (febrile ulceronecrotic disease, persistent plaques, clonal infiltrate)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for febrile ulceronecrotic Mucha-Habermann disease or lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with histopathology; immunohistochemistry and TCR rearrangement if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show interface dermatitis with a non-clonal infiltrate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphomatoid papulosis, guttate psoriasis, pityriasis rosea or syphilis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure about the benign, relapsing but generally self-limiting course",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and topical corticosteroids to relieve itch and inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral macrolide or tetracycline as first-line systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Narrowband UVB phototherapy for widespread or persistent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Low-dose methotrexate for refractory or extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally benign; most resolve without scarring; rare lymphoproliferative progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

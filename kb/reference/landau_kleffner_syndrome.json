@@ -1,172 +1,479 @@
 {
- "id": "landau_kleffner_syndrome",
- "name": "Landau-Kleffner syndrome",
- "aliases": [
-  "LKS",
-  "acquired epileptic aphasia",
-  "acquired aphasia with epilepsy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Epileptology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "ILAE classification / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acquired epileptic aphasia in which a previously normally developing child loses language, typically between three and eight years of age",
-   "The hallmark is acquired verbal auditory agnosia, so children may appear not to understand speech and can be mistaken for deaf",
-   "The EEG shows marked activation of epileptiform discharges during sleep, often reaching electrical status epilepticus in slow-wave sleep",
-   "Clinical seizures may be infrequent or absent, so the language regression and EEG findings are central to diagnosis",
-   "Behavioural disturbance and features overlapping with autism spectrum disorder commonly accompany the language loss",
-   "It lies on a continuum with the broader condition of epileptic encephalopathy with spike-wave activation in sleep",
-   "Treatment aims to suppress the sleep-activated discharges, using antiseizure medication and corticosteroid or immunomodulatory therapy in resistant cases"
+  "id": "landau_kleffner_syndrome",
+  "name": "Landau-Kleffner syndrome",
+  "aliases": [
+    "LKS",
+    "acquired epileptic aphasia",
+    "acquired aphasia with epilepsy"
   ],
-  "pathophysiology": "Landau-Kleffner syndrome is an epileptic encephalopathy in which intense epileptiform activity, markedly activated during non-REM sleep, disrupts the function of language-related cortical networks, particularly perisylvian regions. Continuous or near-continuous spike-wave discharges through slow-wave sleep are thought to interfere with the sleep-dependent consolidation and maturation of language and other higher functions, producing acquired aphasia and cognitive-behavioural regression even when overt seizures are few. The underlying cause is often unknown, with genetic and immune contributions implicated in some cases.",
-  "additionalDifferentials": [
-   "Autism spectrum disorder with language regression",
-   "Acquired hearing loss or auditory processing disorder",
-   "Developmental and epileptic encephalopathy with spike-wave activation in sleep (broader spectrum)",
-   "Other causes of acquired childhood aphasia (structural or inflammatory)",
-   "Selective mutism and psychiatric causes of language loss",
-   "Neurodegenerative or metabolic regression"
-  ],
-  "additionalInvestigations": [
-   "Sleep EEG or prolonged/overnight EEG to demonstrate electrical status epilepticus in slow-wave sleep",
-   "Formal audiological assessment to exclude deafness",
-   "Language, developmental and neuropsychological evaluation",
-   "Brain MRI to exclude a structural or inflammatory cause",
-   "Genetic and, where indicated, metabolic or autoimmune investigations"
-  ],
-  "redFlags": [
-   "Progressive loss of language and comprehension in a previously typical child",
-   "Electrical status epilepticus in slow-wave sleep on EEG",
-   "Marked behavioural or autistic regression accompanying language loss",
-   "Failure of language to recover despite apparent seizure control"
-  ],
-  "prognosis": "Seizures, when present, usually remit by adolescence, but language and cognitive outcomes are variable and a significant proportion of children have persistent language or learning difficulties. Earlier recognition and effective suppression of the sleep-activated discharges are associated with better language recovery.",
-  "pitfalls": [
-   "Misdiagnosing the child as deaf or as having primary autism and missing the EEG diagnosis",
-   "Relying on a routine awake EEG, which may miss the sleep-activated discharges",
-   "Judging treatment success by seizure control alone rather than language recovery",
-   "Delaying immunomodulatory or steroid therapy in resistant cases with ongoing regression"
-  ],
-  "references": [
-   "ILAE classification of the epilepsies",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress the sleep-activated epileptiform discharges with antiseizure medications such as valproate, levetiracetam, ethosuximide or benzodiazepines like clobazam",
-   "Use a course of corticosteroids or ACTH, or intravenous immunoglobulin, early and for a sustained period to try to reverse the language regression",
-   "Avoid antiseizure drugs that can aggravate the condition, such as carbamazepine and phenytoin",
-   "Provide intensive speech and language therapy with educational support and alternative or augmentative communication",
-   "Address the accompanying behavioural and autism-spectrum-like difficulties",
-   "Monitor with follow-up sleep EEG and serial language and neuropsychological assessment, coordinated through neurology, audiology and speech therapy",
-   "Consider epilepsy surgery such as multiple subpial transection in carefully selected refractory cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "landau_kleffner_syndrome-pathway",
-   "title": "Landau-Kleffner syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acquired epileptic aphasia in which a previously normally developing child loses language, typically between three and eight years of age",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive loss of language and comprehension in a previously typical child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Sleep EEG or prolonged/overnight EEG to demonstrate electrical status epilepticus in slow-wave sleep, Formal audiological assessment to exclude deafness, Language, developmental and neuropsychological evaluation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress the sleep-activated epileptiform discharges with antiseizure medications such as valproate, levetiracetam, ethosuximide or benzodiazepines like clobazam"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the child as deaf or as having primary autism and missing the EEG diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of landau-kleffner syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "landau_kleffner_syndrome-matrix",
-   "title": "Landau-Kleffner syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acquired epileptic aphasia in which a previously normally developing child loses language, typically between three and eight",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Epileptology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ILAE classification / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acquired epileptic aphasia in which a previously normally developing child loses language, typically between three and eight years of age",
+      "The hallmark is acquired verbal auditory agnosia, so children may appear not to understand speech and can be mistaken for deaf",
+      "The EEG shows marked activation of epileptiform discharges during sleep, often reaching electrical status epilepticus in slow-wave sleep",
+      "Clinical seizures may be infrequent or absent, so the language regression and EEG findings are central to diagnosis",
+      "Behavioural disturbance and features overlapping with autism spectrum disorder commonly accompany the language loss",
+      "It lies on a continuum with the broader condition of epileptic encephalopathy with spike-wave activation in sleep",
+      "Treatment aims to suppress the sleep-activated discharges, using antiseizure medication and corticosteroid or immunomodulatory therapy in resistant cases"
     ],
-    [
-     "Key Investigations",
-     "Sleep EEG or prolonged/overnight EEG to demonstrate electrical status epilepticus in slow-wave sleep, Formal audiological",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Landau-Kleffner syndrome is an epileptic encephalopathy in which intense epileptiform activity, markedly activated during non-REM sleep, disrupts the function of language-related cortical networks, particularly perisylvian regions. Continuous or near-continuous spike-wave discharges through slow-wave sleep are thought to interfere with the sleep-dependent consolidation and maturation of language and other higher functions, producing acquired aphasia and cognitive-behavioural regression even when overt seizures are few. The underlying cause is often unknown, with genetic and immune contributions implicated in some cases.",
+    "additionalDifferentials": [
+      "Autism spectrum disorder with language regression",
+      "Acquired hearing loss or auditory processing disorder",
+      "Developmental and epileptic encephalopathy with spike-wave activation in sleep (broader spectrum)",
+      "Other causes of acquired childhood aphasia (structural or inflammatory)",
+      "Selective mutism and psychiatric causes of language loss",
+      "Neurodegenerative or metabolic regression"
     ],
-    [
-     "Primary Differentials",
-     "Autism spectrum disorder with language regression, Acquired hearing loss or auditory processing disorder, Developmental and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Sleep EEG or prolonged/overnight EEG to demonstrate electrical status epilepticus in slow-wave sleep",
+      "Formal audiological assessment to exclude deafness",
+      "Language, developmental and neuropsychological evaluation",
+      "Brain MRI to exclude a structural or inflammatory cause",
+      "Genetic and, where indicated, metabolic or autoimmune investigations"
     ],
-    [
-     "Management Strategy",
-     "Suppress the sleep-activated epileptiform discharges with antiseizure medications such as valproate, levetiracetam, ethosuximide",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive loss of language and comprehension in a previously typical child",
+      "Electrical status epilepticus in slow-wave sleep on EEG",
+      "Marked behavioural or autistic regression accompanying language loss",
+      "Failure of language to recover despite apparent seizure control"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the child as deaf or as having primary autism and missing the EEG diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Seizures, when present, usually remit by adolescence, but language and cognitive outcomes are variable and a significant proportion of children have persistent language or learning difficulties. Earlier recognition and effective suppression of the sleep-activated discharges are associated with better language recovery.",
+    "pitfalls": [
+      "Misdiagnosing the child as deaf or as having primary autism and missing the EEG diagnosis",
+      "Relying on a routine awake EEG, which may miss the sleep-activated discharges",
+      "Judging treatment success by seizure control alone rather than language recovery",
+      "Delaying immunomodulatory or steroid therapy in resistant cases with ongoing regression"
+    ],
+    "references": [
+      "ILAE classification of the epilepsies",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress the sleep-activated epileptiform discharges with antiseizure medications such as valproate, levetiracetam, ethosuximide or benzodiazepines like clobazam",
+      "Use a course of corticosteroids or ACTH, or intravenous immunoglobulin, early and for a sustained period to try to reverse the language regression",
+      "Avoid antiseizure drugs that can aggravate the condition, such as carbamazepine and phenytoin",
+      "Provide intensive speech and language therapy with educational support and alternative or augmentative communication",
+      "Address the accompanying behavioural and autism-spectrum-like difficulties",
+      "Monitor with follow-up sleep EEG and serial language and neuropsychological assessment, coordinated through neurology, audiology and speech therapy",
+      "Consider epilepsy surgery such as multiple subpial transection in carefully selected refractory cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for landau-kleffner syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "landau-kleffner-syndrome-real-image",
-   "title": "Landau-Kleffner syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "landau_kleffner_syndrome-pathway",
+      "title": "Landau-Kleffner syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acquired epileptic aphasia in which a previously normally developing child loses language, typically between three and eight years of age",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive loss of language and comprehension in a previously typical child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Sleep EEG or prolonged/overnight EEG to demonstrate electrical status epilepticus in slow-wave sleep, Formal audiological assessment to exclude deafness, Language, developmental and neuropsychological evaluation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress the sleep-activated epileptiform discharges with antiseizure medications such as valproate, levetiracetam, ethosuximide or benzodiazepines like clobazam"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the child as deaf or as having primary autism and missing the EEG diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of landau-kleffner syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "landau_kleffner_syndrome-matrix",
+      "title": "Landau-Kleffner syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acquired epileptic aphasia in which a previously normally developing child loses language, typically between three and eight",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Sleep EEG or prolonged/overnight EEG to demonstrate electrical status epilepticus in slow-wave sleep, Formal audiological",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autism spectrum disorder with language regression, Acquired hearing loss or auditory processing disorder, Developmental and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress the sleep-activated epileptiform discharges with antiseizure medications such as valproate, levetiracetam, ethosuximide",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the child as deaf or as having primary autism and missing the EEG diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for landau-kleffner syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "landau_kleffner_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sleep EEG or prolonged overnight EEG",
+          "cells": [
+            {
+              "text": "Electrical status epilepticus in slow-wave sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal audiological assessment",
+          "cells": [
+            {
+              "text": "Excludes deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Language, developmental and neuropsychological evaluation",
+          "cells": [
+            {
+              "text": "Language regression and deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes a structural or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic, metabolic or autoimmune investigations",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "landau_kleffner_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autism spectrum disorder with language regression",
+          "cells": [
+            {
+              "text": "Overlapping behaviour; sleep-activated discharges on EEG favour Landau-Kleffner"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired hearing loss or auditory processing disorder",
+          "cells": [
+            {
+              "text": "Audiology excludes deafness; verbal auditory agnosia is the hallmark"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epileptic encephalopathy with spike-wave activation in sleep",
+          "cells": [
+            {
+              "text": "Broader condition on the same continuum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural or inflammatory causes of acquired aphasia",
+          "cells": [
+            {
+              "text": "Excluded by brain MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "landau_kleffner_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Valproate, levetiracetam, ethosuximide or benzodiazepines such as clobazam, to suppress sleep-activated discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids, ACTH or immunoglobulin",
+          "cells": [
+            {
+              "text": "Early, sustained course to try to reverse language regression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aggravating drugs",
+          "cells": [
+            {
+              "text": "Carbamazepine and phenytoin can worsen the condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Intensive therapy, educational support and augmentative communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural difficulties",
+          "cells": [
+            {
+              "text": "Address autism-spectrum-like features that accompany the language loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Sleep EEG and serial language and neuropsychological assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy surgery",
+          "cells": [
+            {
+              "text": "Multiple subpial transection in carefully selected refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "landau_kleffner_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Landau-Kleffner syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Previously normal child losing language, with auditory agnosia and sleep EEG change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (comprehension loss, sleep electrical status, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for sleep-activated electrical status",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sleep EEG, audiology, language assessment, brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is sleep-activated epileptiform activity confirmed with normal hearing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider autism with regression, acquired deafness or structural causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication to suppress sleep-activated discharges",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early steroids, ACTH or immunoglobulin for a sustained course",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid carbamazepine and phenytoin, which can aggravate the condition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intensive speech and language therapy with augmentative communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Follow-up sleep EEG and serial language assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Seizures usually remit by adolescence; language outcome is variable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

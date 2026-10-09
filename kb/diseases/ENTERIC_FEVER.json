@@ -274,25 +274,599 @@
       "caption": "Diagnostic and clinical overview matrix for enteric fever (typhoid)."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "enteric-fever-real-image",
-      "title": "Enteric Fever (Typhoid): Diagnostic Abdominal Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 153-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Typhoid and Paratyphoid Fever Clinical Guidance",
+      "url": "https://www.cdc.gov/typhoid-fever/hcp/clinical-guidance/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Merck Manual Professional, Typhoid Fever",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/typhoid-fever",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "CDC, Typhoid and Paratyphoid Fever Clinical Overview",
+      "url": "https://www.cdc.gov/typhoid-fever/hcp/clinical-overview/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 174-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ENTERIC_FEVER-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical clues and tests for enteric fever",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Solid Viscera",
-          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+          "parameter": "Incubation, typhoid",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "6 to 30",
+              "range": [
+                6,
+                30
+              ]
+            },
+            {
+              "text": "Paratyphoid is shorter, 1 to 10 days"
+            }
+          ],
+          "cite": "c5"
         },
         {
-          "label": "Gastrointestinal Tract",
-          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+          "parameter": "Fever pattern",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Step-wise rise, then plateau about 39.4 to 40 for 10 to 14 days",
+              "range": [
+                39.4,
+                40
+              ]
+            },
+            {
+              "text": "Often with relative bradycardia and prostration"
+            }
+          ],
+          "cite": "c4"
         },
         {
-          "label": "Mesentery & Peritoneum",
-          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+          "parameter": "Rose spots",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "5 to 30% in week 2, on chest and abdomen",
+              "range": [
+                5,
+                30
+              ]
+            },
+            {
+              "text": "Pink, blanching; fade in 2 to 5 days"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Routine labs",
+          "cells": [
+            {
+              "text": "Leukopenia, anaemia, abnormal liver tests, splenomegaly"
+            },
+            {
+              "text": "Leukocytosis in week 3 may signal perforation"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Blood culture",
+          "cells": [
+            {
+              "text": "{{hy:Mainstay of diagnosis}}; usually positive in first 2 weeks"
+            },
+            {
+              "text": "Several cultures often needed; not highly sensitive"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bone marrow culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 80% in some studies",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Can stay positive despite antibiotics; use when blood and stool cultures negative"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stool culture",
+          "cells": [
+            {
+              "text": "Usually positive in weeks 3 to 5"
+            },
+            {
+              "text": "Less often positive than blood"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Widal test",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 70% sensitive, poor specificity",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "Not recommended by CDC; high false-positive rate"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Complications",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Bleeding about 2%, perforation 1 to 2%, late week 3",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "Encephalopathy, GI bleed or perforation after 2 to 3 weeks"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "GI bleeding frequency differs: the entry (Harrison) gives about 6%, Merck about 2%. Widal sensitivity is from Merck; CDC advises against using Widal."
+    },
+    {
+      "id": "ENTERIC_FEVER-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic enteric fever",
+      "rowHeader": "Condition",
+      "columns": [
+        "Distinguishing clue"
+      ],
+      "rows": [
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Scrub typhus and other rickettsioses",
+          "cells": [
+            {
+              "text": "Eschar in about 35% and rash in about 50% of scrub typhus; mite exposure in Asia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Disseminated tuberculosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Infectious hepatitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Non-typhoidal Salmonella and other bacterial enteritis",
+          "cells": [
+            {
+              "text": "Cross-reacts on Widal; culture separates"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Brucellosis, tularaemia, psittacosis, Yersinia, lymphoma",
+          "cells": [
+            {
+              "text": "Listed mimics of prolonged fever; separate by culture and exposure"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Merck lists these mimics without distinguishing features; cells marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "ENTERIC_FEVER-treatment",
+      "kind": "treatment",
+      "title": "Antibiotic therapy for enteric fever in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and duration"
+      ],
+      "rows": [
+        {
+          "parameter": "Ceftriaxone",
+          "cells": [
+            {
+              "text": "Empirical treatment"
+            },
+            {
+              "text": "1 to 2 g/d IV for 7 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "{{hy:Empirical treatment, uncomplicated, incl. travel to Pakistan or Iraq}}"
+            },
+            {
+              "text": "1 g/d PO for 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carbapenem",
+          "cells": [
+            {
+              "text": "Complicated illness after travel to Pakistan or Iraq, or no travel"
+            },
+            {
+              "text": "Ceftriaxone resistance common in these travellers"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ciprofloxacin",
+          "cells": [
+            {
+              "text": "Fully susceptible or MDR strains"
+            },
+            {
+              "text": "500 mg bid PO or 400 mg q12h IV for 5 to 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose ciprofloxacin",
+          "cells": [
+            {
+              "text": "Nalidixic acid-resistant strains"
+            },
+            {
+              "text": "750 mg bid PO or 400 mg q8h IV for 10 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ceftriaxone, higher dose",
+          "cells": [
+            {
+              "text": "MDR or nalidixic acid-resistant strains"
+            },
+            {
+              "text": "2 to 3 g/d IV for 7 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amoxicillin",
+          "cells": [
+            {
+              "text": "Fully susceptible, second line"
+            },
+            {
+              "text": "1 g tid PO or 2 g q6h IV for 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chloramphenicol",
+          "cells": [
+            {
+              "text": "Fully susceptible"
+            },
+            {
+              "text": "25 mg/kg tid PO or IV for 14 to 21 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Trimethoprim-sulfamethoxazole",
+          "cells": [
+            {
+              "text": "Fully susceptible"
+            },
+            {
+              "text": "160/800 mg bid PO for 7 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dexamethasone",
+          "cells": [
+            {
+              "text": "Severe typhoid with marked delirium, coma or shock"
+            },
+            {
+              "text": "3 mg/kg IV, then 1 mg/kg IV q6h, 48 h total"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Surgery plus broad cover",
+          "cells": [
+            {
+              "text": "Intestinal perforation with peritonitis"
+            },
+            {
+              "text": "Gram-negative plus anti-Bacteroides fragilis cover"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Ciprofloxacin, prolonged",
+          "cells": [
+            {
+              "text": "Chronic carrier with normal biliary tract"
+            },
+            {
+              "text": "4 to 6 weeks; cure 80 to 90%"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Conflict: Tables PDF lists ciprofloxacin as first line for fully susceptible strains; CDC advises against fluoroquinolones for empirical treatment because most US cases are not susceptible. Use susceptibility results."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ENTERIC_FEVER-dx-mgmt",
+      "title": "Diagnosis and management of enteric fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged fever with abdominal symptoms, endemic exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood cultures (several), plus stool and urine culture",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Complications: encephalopathy, GI bleed, perforation or shock?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Travel to Pakistan or Iraq, or no travel?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Uncomplicated: azithromycin",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Uncomplicated: azithromycin or ceftriaxone",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Admit; carbapenem if Pakistan or Iraq travel, else ceftriaxone",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Perforation with peritonitis?",
+          "cite": "c4"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery with gram-negative and anaerobic cover",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dexamethasone if delirium, coma or shock",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Adjust to culture susceptibility",
+          "cite": "c4"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Cultures negative but suspicion high?",
+          "cite": "c4"
+        },
+        {
+          "id": "n13",
+          "type": "action",
+          "text": "Bone marrow culture",
+          "cite": "c3"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Complete course; watch for relapse at 1 to 3 weeks",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Next"
         }
       ]
     }

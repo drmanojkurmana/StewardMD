@@ -1,173 +1,610 @@
 {
- "id": "allergic_bronchopulmonary_aspergillosis",
- "name": "Allergic bronchopulmonary aspergillosis",
- "aliases": [
-  "ABPA",
-  "allergic bronchopulmonary aspergillosis",
-  "aspergillus hypersensitivity"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Pulmonology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "ABPA is a hypersensitivity reaction to Aspergillus fumigatus colonising the airways, occurring almost exclusively in patients with asthma or cystic fibrosis",
-   "Suspect it in poorly controlled asthma with recurrent exacerbations, fleeting pulmonary infiltrates, and expectoration of brownish mucus plugs",
-   "Markedly elevated total serum IgE and Aspergillus-specific IgE and IgG, with peripheral eosinophilia, support the diagnosis",
-   "A positive immediate skin test or specific IgE to Aspergillus reflects the underlying sensitisation",
-   "Imaging classically shows central bronchiectasis and mucoid impaction, sometimes with transient infiltrates",
-   "Treatment centres on suppressing the immune and inflammatory response with corticosteroids, with antifungal therapy used to reduce fungal burden in selected cases",
-   "The disease evolves through stages including acute presentation, remission, exacerbation, and, if untreated, fibrotic end-stage lung disease",
-   "It is a hypersensitivity phenomenon rather than tissue-invasive infection, distinguishing it from invasive aspergillosis and aspergilloma"
+  "id": "allergic_bronchopulmonary_aspergillosis",
+  "name": "Allergic bronchopulmonary aspergillosis",
+  "aliases": [
+    "ABPA",
+    "allergic bronchopulmonary aspergillosis",
+    "aspergillus hypersensitivity"
   ],
-  "pathophysiology": "In predisposed patients, inhaled Aspergillus fumigatus spores germinate and persist within the viscid airway mucus rather than being cleared. Fungal antigens provoke a vigorous combined type I (IgE-mediated) and type III (immune-complex) hypersensitivity response, with strong Th2 activation, eosinophil recruitment, and high IgE production. The resulting intense airway inflammation, mucus hypersecretion, and mucoid impaction damage the bronchial walls, leading to central bronchiectasis. Recurrent inflammatory episodes can ultimately produce fibrosis and irreversible loss of lung function.",
-  "additionalDifferentials": [
-   "Poorly controlled asthma without ABPA",
-   "Cystic fibrosis exacerbation",
-   "Eosinophilic pneumonia",
-   "Eosinophilic granulomatosis with polyangiitis (Churg-Strauss)",
-   "Bronchiectasis of other cause",
-   "Invasive or semi-invasive aspergillosis and aspergilloma"
-  ],
-  "additionalInvestigations": [
-   "Total serum IgE, which is characteristically very high and useful for monitoring",
-   "Aspergillus-specific IgE and IgG (precipitins) and skin testing for sensitisation",
-   "Peripheral blood eosinophil count",
-   "High-resolution CT to detect central bronchiectasis and mucoid impaction",
-   "Sputum examination for Aspergillus and eosinophils"
-  ],
-  "redFlags": [
-   "Progressive fixed airflow obstruction or fibrosis indicating advanced disease",
-   "Frequent severe asthma exacerbations unresponsive to standard therapy",
-   "Features suggesting invasive aspergillosis in an immunocompromised patient",
-   "Massive mucoid impaction causing lobar collapse"
-  ],
-  "prognosis": "With early recognition and appropriate immunosuppressive treatment, exacerbations can be controlled and lung damage limited; however, repeated undertreated flares lead to progressive bronchiectasis and fibrosis with permanent loss of lung function, so long-term monitoring of symptoms and IgE is important.",
-  "pitfalls": [
-   "Mistaking ABPA for ordinary difficult asthma and missing the diagnosis",
-   "Confusing this hypersensitivity condition with invasive aspergillosis and mismanaging treatment",
-   "Failing to monitor total IgE to gauge disease activity and treatment response",
-   "Overlooking ABPA as a treatable cause of bronchiectasis"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "GOLD/ATS guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Oral corticosteroids are the mainstay to suppress the immune and inflammatory response and to treat exacerbations",
-   "Add an antifungal azole such as itraconazole or voriconazole to reduce fungal burden and act as a corticosteroid-sparing agent in selected cases",
-   "Optimise the underlying asthma or cystic fibrosis with inhaled corticosteroids, bronchodilators and airway clearance for mucoid impaction",
-   "Monitor total serum IgE and symptoms to guide response and detect relapse",
-   "Consider biologic therapy such as omalizumab in relapsing or corticosteroid-dependent disease",
-   "Manage established central bronchiectasis with airway clearance and prompt treatment of infective exacerbations",
-   "Refer to respiratory specialists and monitor for corticosteroid and azole adverse effects and drug interactions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "allergic_bronchopulmonary_aspergillosis-pathway",
-   "title": "Allergic bronchopulmonary aspergillosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "ABPA is a hypersensitivity reaction to Aspergillus fumigatus colonising the airways, occurring almost exclusively in patients with asthma or cystic fibrosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive fixed airflow obstruction or fibrosis indicating advanced disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Total serum IgE, which is characteristically very high and useful for monitoring, Aspergillus-specific IgE and IgG (precipitins) and skin testing for sensitisation, Peripheral blood eosinophil count"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Oral corticosteroids are the mainstay to suppress the immune and inflammatory response and to treat exacerbations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking ABPA for ordinary difficult asthma and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of allergic bronchopulmonary aspergillosis."
-  }
- ],
- "tables": [
-  {
-   "id": "allergic_bronchopulmonary_aspergillosis-matrix",
-   "title": "Allergic bronchopulmonary aspergillosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "ABPA is a hypersensitivity reaction to Aspergillus fumigatus colonising the airways, occurring almost exclusively in patients",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Pulmonology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "ABPA is a hypersensitivity reaction to Aspergillus fumigatus colonising the airways, occurring almost exclusively in patients with asthma or cystic fibrosis",
+      "Suspect it in poorly controlled asthma with recurrent exacerbations, fleeting pulmonary infiltrates, and expectoration of brownish mucus plugs",
+      "Markedly elevated total serum IgE and Aspergillus-specific IgE and IgG, with peripheral eosinophilia, support the diagnosis",
+      "A positive immediate skin test or specific IgE to Aspergillus reflects the underlying sensitisation",
+      "Imaging classically shows central bronchiectasis and mucoid impaction, sometimes with transient infiltrates",
+      "Treatment centres on suppressing the immune and inflammatory response with corticosteroids, with antifungal therapy used to reduce fungal burden in selected cases",
+      "The disease evolves through stages including acute presentation, remission, exacerbation, and, if untreated, fibrotic end-stage lung disease",
+      "It is a hypersensitivity phenomenon rather than tissue-invasive infection, distinguishing it from invasive aspergillosis and aspergilloma"
     ],
-    [
-     "Key Investigations",
-     "Total serum IgE, which is characteristically very high and useful for monitoring, Aspergillus-specific IgE and IgG (precipitins)",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In predisposed patients, inhaled Aspergillus fumigatus spores germinate and persist within the viscid airway mucus rather than being cleared. Fungal antigens provoke a vigorous combined type I (IgE-mediated) and type III (immune-complex) hypersensitivity response, with strong Th2 activation, eosinophil recruitment, and high IgE production. The resulting intense airway inflammation, mucus hypersecretion, and mucoid impaction damage the bronchial walls, leading to central bronchiectasis. Recurrent inflammatory episodes can ultimately produce fibrosis and irreversible loss of lung function.",
+    "additionalDifferentials": [
+      "Poorly controlled asthma without ABPA",
+      "Cystic fibrosis exacerbation",
+      "Eosinophilic pneumonia",
+      "Eosinophilic granulomatosis with polyangiitis (Churg-Strauss)",
+      "Bronchiectasis of other cause",
+      "Invasive or semi-invasive aspergillosis and aspergilloma"
     ],
-    [
-     "Primary Differentials",
-     "Poorly controlled asthma without ABPA, Cystic fibrosis exacerbation, Eosinophilic pneumonia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Total serum IgE, which is characteristically very high and useful for monitoring",
+      "Aspergillus-specific IgE and IgG (precipitins) and skin testing for sensitisation",
+      "Peripheral blood eosinophil count",
+      "High-resolution CT to detect central bronchiectasis and mucoid impaction",
+      "Sputum examination for Aspergillus and eosinophils"
     ],
-    [
-     "Management Strategy",
-     "Oral corticosteroids are the mainstay to suppress the immune and inflammatory response and to treat exacerbations",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive fixed airflow obstruction or fibrosis indicating advanced disease",
+      "Frequent severe asthma exacerbations unresponsive to standard therapy",
+      "Features suggesting invasive aspergillosis in an immunocompromised patient",
+      "Massive mucoid impaction causing lobar collapse"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking ABPA for ordinary difficult asthma and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early recognition and appropriate immunosuppressive treatment, exacerbations can be controlled and lung damage limited; however, repeated undertreated flares lead to progressive bronchiectasis and fibrosis with permanent loss of lung function, so long-term monitoring of symptoms and IgE is important.",
+    "pitfalls": [
+      "Mistaking ABPA for ordinary difficult asthma and missing the diagnosis",
+      "Confusing this hypersensitivity condition with invasive aspergillosis and mismanaging treatment",
+      "Failing to monitor total IgE to gauge disease activity and treatment response",
+      "Overlooking ABPA as a treatable cause of bronchiectasis"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "GOLD/ATS guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Oral corticosteroids are the mainstay to suppress the immune and inflammatory response and to treat exacerbations",
+      "Add an antifungal azole such as itraconazole or voriconazole to reduce fungal burden and act as a corticosteroid-sparing agent in selected cases",
+      "Optimise the underlying asthma or cystic fibrosis with inhaled corticosteroids, bronchodilators and airway clearance for mucoid impaction",
+      "Monitor total serum IgE and symptoms to guide response and detect relapse",
+      "Consider biologic therapy such as omalizumab in relapsing or corticosteroid-dependent disease",
+      "Manage established central bronchiectasis with airway clearance and prompt treatment of infective exacerbations",
+      "Refer to respiratory specialists and monitor for corticosteroid and azole adverse effects and drug interactions"
     ]
-   ],
-   "caption": "Overview comparison matrix for allergic bronchopulmonary aspergillosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "allergic-bronchopulmonary-aspergillosis-real-image",
-   "title": "Allergic bronchopulmonary aspergillosis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "allergic_bronchopulmonary_aspergillosis-pathway",
+      "title": "Allergic bronchopulmonary aspergillosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "ABPA is a hypersensitivity reaction to Aspergillus fumigatus colonising the airways, occurring almost exclusively in patients with asthma or cystic fibrosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive fixed airflow obstruction or fibrosis indicating advanced disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Total serum IgE, which is characteristically very high and useful for monitoring, Aspergillus-specific IgE and IgG (precipitins) and skin testing for sensitisation, Peripheral blood eosinophil count"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Oral corticosteroids are the mainstay to suppress the immune and inflammatory response and to treat exacerbations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking ABPA for ordinary difficult asthma and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of allergic bronchopulmonary aspergillosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-matrix",
+      "title": "Allergic bronchopulmonary aspergillosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ABPA is a hypersensitivity reaction to Aspergillus fumigatus colonising the airways, occurring almost exclusively in patients",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Total serum IgE, which is characteristically very high and useful for monitoring, Aspergillus-specific IgE and IgG (precipitins)",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Poorly controlled asthma without ABPA, Cystic fibrosis exacerbation, Eosinophilic pneumonia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Oral corticosteroids are the mainstay to suppress the immune and inflammatory response and to treat exacerbations",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking ABPA for ordinary difficult asthma and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for allergic bronchopulmonary aspergillosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 255-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Total serum IgE",
+          "cells": [
+            {
+              "text": "Very high in ABPA and used to monitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspergillus-specific IgE and IgG (precipitins) and skin testing",
+          "cells": [
+            {
+              "text": "Sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood eosinophil count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT for central bronchiectasis and mucoid impaction",
+          "cells": [
+            {
+              "text": "Central bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum examination for Aspergillus and eosinophils",
+          "cells": [
+            {
+              "text": "Fungal burden and eosinophils"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Poorly controlled asthma without ABPA",
+          "cells": [
+            {
+              "text": "Asthma without fungal sensitisation"
+            },
+            {
+              "text": "Aspergillus-specific IgE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis exacerbation",
+          "cells": [
+            {
+              "text": "Exacerbation in cystic fibrosis"
+            },
+            {
+              "text": "Sputum and IgE testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Vasculitic features and asthma"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive or semi-invasive aspergillosis and aspergilloma",
+          "cells": [
+            {
+              "text": "Immunocompromise or cavitary disease"
+            },
+            {
+              "text": "CT and sputum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral corticosteroids",
+          "cells": [
+            {
+              "text": "Suppress immune and inflammatory response and treat exacerbations"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itraconazole or voriconazole",
+          "cells": [
+            {
+              "text": "Reduces fungal burden and spares corticosteroid"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled corticosteroids, bronchodilators and airway clearance",
+          "cells": [
+            {
+              "text": "Underlying asthma or cystic fibrosis and mucoid impaction"
+            },
+            {
+              "text": "Optimise underlying disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of total serum IgE and symptoms",
+          "cells": [
+            {
+              "text": "Response and relapse"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omalizumab",
+          "cells": [
+            {
+              "text": "Relapsing or corticosteroid-dependent disease"
+            },
+            {
+              "text": "Biologic option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance and prompt treatment of infective exacerbations",
+          "cells": [
+            {
+              "text": "Central bronchiectasis"
+            },
+            {
+              "text": "Ongoing management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of corticosteroid and azole adverse effects and interactions",
+          "cells": [
+            {
+              "text": "Treatment toxicity"
+            },
+            {
+              "text": "Specialist review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic features of ABPA",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Main criterion: asthma",
+          "cells": [
+            {
+              "text": "Bronchial asthma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Main criterion: infiltrates",
+          "cells": [
+            {
+              "text": "Pulmonary infiltrates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Main criterion: eosinophilia",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia above 1000/uL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Main criterion: skin test",
+          "cells": [
+            {
+              "text": "Immediate wheal-and-flare skin response to Aspergillus fumigatus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Main criterion: precipitins",
+          "cells": [
+            {
+              "text": "Serum precipitins to A. fumigatus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Main criterion: IgE",
+          "cells": [
+            {
+              "text": "Elevated serum IgE"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Main criterion: bronchiectasis",
+          "cells": [
+            {
+              "text": "Central bronchiectasis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other feature: sputum plugs",
+          "cells": [
+            {
+              "text": "History of brownish plugs in sputum"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other feature: sputum culture",
+          "cells": [
+            {
+              "text": "Culture of A. fumigatus from sputum"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other feature: specific antibodies",
+          "cells": [
+            {
+              "text": "Elevated IgE and IgG antibodies specific for A. fumigatus"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-dx-mgmt",
+      "title": "Diagnosis and management of Allergic bronchopulmonary aspergillosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Poorly controlled asthma or cystic fibrosis with mucus plugs and infiltrates",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fixed airflow obstruction, lobar collapse or immunocompromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory review; treat collapse and exacerbation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Total IgE; Aspergillus IgE and IgG; eosinophils; HRCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Very high IgE with central bronchiectasis and sensitisation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oral corticosteroids to suppress the immune response",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review asthma without ABPA, CF exacerbation and invasive aspergillosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add itraconazole or voriconazole in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optimise inhaled therapy and airway clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor IgE, symptoms and drug toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good control possible; repeated flares cause bronchiectasis and fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

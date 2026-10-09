@@ -1,172 +1,376 @@
 {
- "id": "zieve_syndrome",
- "name": "Zieve syndrome",
- "aliases": [
-  "Zieve's syndrome",
-  "alcoholic hyperlipaemia with haemolysis"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatology",
- "specialty": "Hepatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System / hepatology reference literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A self-limiting triad of haemolytic anaemia, transient hyperlipidaemia and jaundice occurring after heavy alcohol use, usually on a background of fatty liver or alcoholic hepatitis",
-   "Should be suspected when jaundice and anaemia in an alcohol-dependent patient are accompanied by an unexpectedly high lipid profile",
-   "The haemolysis is Coombs-negative, distinguishing it from autoimmune haemolytic anaemia",
-   "Abdominal pain and tender hepatomegaly are common, mimicking other acute hepatobiliary emergencies",
-   "Bilirubin is disproportionately elevated relative to the degree of hepatocellular injury because of the haemolytic contribution",
-   "The hyperlipidaemia and haemolysis typically resolve within weeks of alcohol cessation and supportive care",
-   "Recognition avoids unnecessary invasive haemolysis and biliary work-up, as the condition remits with abstinence"
+  "id": "zieve_syndrome",
+  "name": "Zieve syndrome",
+  "aliases": [
+    "Zieve's syndrome",
+    "alcoholic hyperlipaemia with haemolysis"
   ],
-  "pathophysiology": "Zieve syndrome develops in the setting of alcohol-related liver injury, where transient hyperlipidaemia and abnormal red-cell membrane lipid composition render erythrocytes fragile and prone to haemolysis. Pyruvate-kinase instability and altered red-cell membrane cholesterol and phospholipid content, together with the effects of acute alcohol excess, are thought to shorten red-cell survival. The combination of haemolysis-driven unconjugated hyperbilirubinaemia and coexisting cholestatic liver injury produces marked jaundice, while the associated hyperlipidaemia is characteristically transient and resolves with abstinence.",
-  "additionalDifferentials": [
-   "Autoimmune haemolytic anaemia",
-   "Alcoholic hepatitis without haemolysis",
-   "Biliary obstruction or choledocholithiasis",
-   "Acute pancreatitis with hypertriglyceridaemia",
-   "Spur-cell haemolytic anaemia of advanced liver disease",
-   "Haemolysis from another cause such as G6PD deficiency"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film assessing for haemolysis",
-   "Reticulocyte count, lactate dehydrogenase, haptoglobin and unconjugated bilirubin",
-   "Direct antiglobulin (Coombs) test, expected to be negative",
-   "Fasting lipid profile demonstrating transient hyperlipidaemia",
-   "Liver function tests and abdominal ultrasound to characterise the liver and exclude obstruction",
-   "Alcohol and dietary history"
-  ],
-  "redFlags": [
-   "Severe symptomatic anaemia requiring urgent transfusion",
-   "Features of decompensated alcoholic hepatitis or liver failure",
-   "Signs of biliary obstruction or cholangitis needing intervention",
-   "Very high triglycerides with associated pancreatitis"
-  ],
-  "prognosis": "The syndrome is self-limiting and carries a good prognosis with alcohol cessation and supportive care, though the underlying alcohol-related liver disease governs the longer-term outlook.",
-  "pitfalls": [
-   "Mislabelling the haemolysis as autoimmune and starting inappropriate immunosuppression",
-   "Attributing all the jaundice to hepatocellular disease and missing the haemolytic contribution",
-   "Undertaking extensive haemolysis or biliary investigations before considering the diagnosis",
-   "Overlooking the transient hyperlipidaemia, a key clue to the syndrome"
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "Hepatology reference literature on alcohol-related haemolysis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Alcohol cessation is the definitive treatment, as the haemolysis and hyperlipidaemia resolve with abstinence",
-   "Provide supportive care with transfusion for severe symptomatic anaemia and management of the underlying alcoholic liver disease",
-   "Give nutritional repletion with thiamine, folate and other B vitamins, and manage or prevent alcohol withdrawal",
-   "Avoid unnecessary immunosuppression, recognising the Coombs-negative haemolysis is not autoimmune, and confirm with a negative direct antiglobulin test",
-   "Monitor the haemolytic markers (reticulocytes, lactate dehydrogenase, haptoglobin and unconjugated bilirubin) and the lipid profile as they normalise",
-   "Refer to alcohol-dependence and hepatology services for relapse prevention and assessment of liver disease",
-   "Escalate for severe anaemia or decompensating liver disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "zieve_syndrome-pathway",
-   "title": "Zieve syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A self-limiting triad of haemolytic anaemia, transient hyperlipidaemia and jaundice occurring after heavy alcohol use, usually on a background of fatty liver or alcoholic hepatitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe symptomatic anaemia requiring urgent transfusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film assessing for haemolysis, Reticulocyte count, lactate dehydrogenase, haptoglobin and unconjugated bilirubin, Direct antiglobulin (Coombs) test, expected to be negative"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Alcohol cessation is the definitive treatment, as the haemolysis and hyperlipidaemia resolve with abstinence"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the haemolysis as autoimmune and starting inappropriate immunosuppression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of zieve syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "zieve_syndrome-matrix",
-   "title": "Zieve syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A self-limiting triad of haemolytic anaemia, transient hyperlipidaemia and jaundice occurring after heavy alcohol use, usually on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatology",
+  "specialty": "Hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System / hepatology reference literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A self-limiting triad of haemolytic anaemia, transient hyperlipidaemia and jaundice occurring after heavy alcohol use, usually on a background of fatty liver or alcoholic hepatitis",
+      "Should be suspected when jaundice and anaemia in an alcohol-dependent patient are accompanied by an unexpectedly high lipid profile",
+      "The haemolysis is Coombs-negative, distinguishing it from autoimmune haemolytic anaemia",
+      "Abdominal pain and tender hepatomegaly are common, mimicking other acute hepatobiliary emergencies",
+      "Bilirubin is disproportionately elevated relative to the degree of hepatocellular injury because of the haemolytic contribution",
+      "The hyperlipidaemia and haemolysis typically resolve within weeks of alcohol cessation and supportive care",
+      "Recognition avoids unnecessary invasive haemolysis and biliary work-up, as the condition remits with abstinence"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film assessing for haemolysis, Reticulocyte count, lactate dehydrogenase, haptoglobin and unconjugated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Zieve syndrome develops in the setting of alcohol-related liver injury, where transient hyperlipidaemia and abnormal red-cell membrane lipid composition render erythrocytes fragile and prone to haemolysis. Pyruvate-kinase instability and altered red-cell membrane cholesterol and phospholipid content, together with the effects of acute alcohol excess, are thought to shorten red-cell survival. The combination of haemolysis-driven unconjugated hyperbilirubinaemia and coexisting cholestatic liver injury produces marked jaundice, while the associated hyperlipidaemia is characteristically transient and resolves with abstinence.",
+    "additionalDifferentials": [
+      "Autoimmune haemolytic anaemia",
+      "Alcoholic hepatitis without haemolysis",
+      "Biliary obstruction or choledocholithiasis",
+      "Acute pancreatitis with hypertriglyceridaemia",
+      "Spur-cell haemolytic anaemia of advanced liver disease",
+      "Haemolysis from another cause such as G6PD deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Autoimmune haemolytic anaemia, Alcoholic hepatitis without haemolysis, Biliary obstruction or choledocholithiasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film assessing for haemolysis",
+      "Reticulocyte count, lactate dehydrogenase, haptoglobin and unconjugated bilirubin",
+      "Direct antiglobulin (Coombs) test, expected to be negative",
+      "Fasting lipid profile demonstrating transient hyperlipidaemia",
+      "Liver function tests and abdominal ultrasound to characterise the liver and exclude obstruction",
+      "Alcohol and dietary history"
     ],
-    [
-     "Management Strategy",
-     "Alcohol cessation is the definitive treatment, as the haemolysis and hyperlipidaemia resolve with abstinence",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe symptomatic anaemia requiring urgent transfusion",
+      "Features of decompensated alcoholic hepatitis or liver failure",
+      "Signs of biliary obstruction or cholangitis needing intervention",
+      "Very high triglycerides with associated pancreatitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the haemolysis as autoimmune and starting inappropriate immunosuppression",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome is self-limiting and carries a good prognosis with alcohol cessation and supportive care, though the underlying alcohol-related liver disease governs the longer-term outlook.",
+    "pitfalls": [
+      "Mislabelling the haemolysis as autoimmune and starting inappropriate immunosuppression",
+      "Attributing all the jaundice to hepatocellular disease and missing the haemolytic contribution",
+      "Undertaking extensive haemolysis or biliary investigations before considering the diagnosis",
+      "Overlooking the transient hyperlipidaemia, a key clue to the syndrome"
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "Hepatology reference literature on alcohol-related haemolysis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Alcohol cessation is the definitive treatment, as the haemolysis and hyperlipidaemia resolve with abstinence",
+      "Provide supportive care with transfusion for severe symptomatic anaemia and management of the underlying alcoholic liver disease",
+      "Give nutritional repletion with thiamine, folate and other B vitamins, and manage or prevent alcohol withdrawal",
+      "Avoid unnecessary immunosuppression, recognising the Coombs-negative haemolysis is not autoimmune, and confirm with a negative direct antiglobulin test",
+      "Monitor the haemolytic markers (reticulocytes, lactate dehydrogenase, haptoglobin and unconjugated bilirubin) and the lipid profile as they normalise",
+      "Refer to alcohol-dependence and hepatology services for relapse prevention and assessment of liver disease",
+      "Escalate for severe anaemia or decompensating liver disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for zieve syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "zieve-syndrome-real-image",
-   "title": "Zieve syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "zieve_syndrome-pathway",
+      "title": "Zieve syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A self-limiting triad of haemolytic anaemia, transient hyperlipidaemia and jaundice occurring after heavy alcohol use, usually on a background of fatty liver or alcoholic hepatitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe symptomatic anaemia requiring urgent transfusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film assessing for haemolysis, Reticulocyte count, lactate dehydrogenase, haptoglobin and unconjugated bilirubin, Direct antiglobulin (Coombs) test, expected to be negative"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Alcohol cessation is the definitive treatment, as the haemolysis and hyperlipidaemia resolve with abstinence"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the haemolysis as autoimmune and starting inappropriate immunosuppression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of zieve syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "zieve_syndrome-matrix",
+      "title": "Zieve syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A self-limiting triad of haemolytic anaemia, transient hyperlipidaemia and jaundice occurring after heavy alcohol use, usually on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film assessing for haemolysis, Reticulocyte count, lactate dehydrogenase, haptoglobin and unconjugated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autoimmune haemolytic anaemia, Alcoholic hepatitis without haemolysis, Biliary obstruction or choledocholithiasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Alcohol cessation is the definitive treatment, as the haemolysis and hyperlipidaemia resolve with abstinence",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the haemolysis as autoimmune and starting inappropriate immunosuppression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for zieve syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / hepatology reference literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "zieve_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reticulocyte count and lactate dehydrogenase",
+          "cells": [
+            {
+              "text": "Haemolytic markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zieve_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Mislabelled haemolysis leads to immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcoholic hepatitis without haemolysis",
+          "cells": [
+            {
+              "text": "Liver disease without the haemolytic triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary obstruction or cholestasis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zieve_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Alcohol cessation",
+          "cells": [
+            {
+              "text": "Definitive treatment; haemolysis and hyperlipidaemia resolve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion for severe anaemia",
+          "cells": [
+            {
+              "text": "Symptomatic anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "zieve_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Zieve syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Zieve syndrome: haemolysis, hyperlipidaemia and jaundice after alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe symptomatic anaemia or decompensated hepatitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent transfusion and hepatology review for decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film, reticulocytes, LDH, lipids, liver function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the triad occur after heavy alcohol intake with liver disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider autoimmune haemolysis or biliary obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Alcohol cessation as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transfusion for severe symptomatic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid immunosuppression for presumed autoimmune haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Self-limiting once alcohol stops; haemolysis and lipids resolve with abstinence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

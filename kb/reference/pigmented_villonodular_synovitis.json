@@ -1,174 +1,434 @@
 {
- "id": "pigmented_villonodular_synovitis",
- "name": "Pigmented villonodular synovitis (tenosynovial giant cell tumour)",
- "aliases": [
-  "PVNS",
-  "tenosynovial giant cell tumour",
-  "TGCT",
-  "diffuse-type giant cell tumour",
-  "giant cell tumour of the tendon sheath"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign but locally aggressive proliferative disorder of the synovium, now classified within the tenosynovial giant cell tumour family",
-   "Occurs in localised (nodular) and diffuse forms, with the diffuse type being more aggressive and prone to recurrence",
-   "Usually monoarticular, most often affecting the knee, and typically presents in young to middle-aged adults with pain, swelling and recurrent effusions",
-   "Aspiration classically yields serosanguineous or brown (haemosiderin-stained) joint fluid, reflecting recurrent haemarthrosis",
-   "MRI is the investigation of choice and shows haemosiderin-laden proliferative synovium with characteristic low signal and 'blooming' artefact on gradient-echo sequences",
-   "Driven in most cases by overexpression of colony-stimulating factor 1 (CSF1), providing the rationale for CSF1R-directed therapy in advanced or unresectable disease",
-   "Primary treatment is surgical synovectomy, with radiotherapy or CSF1R inhibition considered for diffuse, recurrent or inoperable disease"
+  "id": "pigmented_villonodular_synovitis",
+  "name": "Pigmented villonodular synovitis (tenosynovial giant cell tumour)",
+  "aliases": [
+    "PVNS",
+    "tenosynovial giant cell tumour",
+    "TGCT",
+    "diffuse-type giant cell tumour",
+    "giant cell tumour of the tendon sheath"
   ],
-  "pathophysiology": "Pigmented villonodular synovitis is a neoplastic proliferation of the synovial lining producing villous and nodular thickening with abundant haemosiderin-laden macrophages, multinucleated giant cells and foam cells. The majority of cases are driven by a translocation involving the colony-stimulating factor 1 (CSF1) gene, leading to overexpression of CSF1; a small population of neoplastic cells recruits large numbers of non-neoplastic CSF1-receptor-bearing inflammatory cells that make up the bulk of the lesion (a 'landscape' effect). Recurrent microhaemorrhage within the hypervascular synovium deposits haemosiderin, giving the tissue its pigmented appearance and the characteristic MRI blooming. The proliferative synovium erodes cartilage and subchondral bone, causing progressive joint destruction, particularly in the diffuse form.",
-  "additionalDifferentials": [
-   "Synovial chondromatosis",
-   "Haemophilic arthropathy",
-   "Rheumatoid or other chronic inflammatory synovitis",
-   "Synovial haemangioma",
-   "Synovial sarcoma or other malignant soft-tissue tumour",
-   "Amyloid or gouty synovial deposition"
-  ],
-  "additionalInvestigations": [
-   "MRI showing haemosiderin-laden synovium with low signal and blooming on gradient-echo sequences",
-   "Plain radiographs to assess soft-tissue swelling and juxta-articular bony erosions",
-   "Joint aspiration revealing serosanguineous or brown haemosiderin-stained fluid",
-   "Histological confirmation from synovial biopsy or resected tissue",
-   "Assessment of CSF1 overexpression where targeted therapy is being considered"
-  ],
-  "redFlags": [
-   "Rapid growth or atypical features raising concern for malignant transformation or sarcoma",
-   "Aggressive bony erosion and joint destruction in diffuse disease",
-   "Repeated recurrence after synovectomy indicating incomplete disease control",
-   "Neurovascular compromise from an expanding mass"
-  ],
-  "prognosis": "The localised form has a good outcome after complete excision, whereas the diffuse form recurs frequently and can cause progressive joint destruction; malignant transformation is rare, and CSF1R-directed therapy has improved options for advanced disease.",
-  "pitfalls": [
-   "Mistaking recurrent haemarthrosis for injury or a bleeding disorder and delaying diagnosis",
-   "Incomplete synovectomy in diffuse disease leading to recurrence",
-   "Overlooking the diagnosis when gradient-echo MRI sequences are not obtained",
-   "Confusing it with synovial chondromatosis or a malignant soft-tissue tumour"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "WHO Classification of Tumours: Soft Tissue and Bone"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake surgical synovectomy as the mainstay, with arthroscopic excision for localised nodular disease and open or combined complete synovectomy for the diffuse form",
-   "Consider CSF1R-directed systemic therapy such as pexidartinib for advanced, recurrent or unresectable diffuse disease, exploiting the underlying CSF1 overexpression",
-   "Use adjuvant radiosynovectomy or external-beam radiotherapy to reduce recurrence after incomplete resection of diffuse disease",
-   "Provide physiotherapy to restore range of motion and joint function postoperatively",
-   "Consider joint arthroplasty for end-stage cartilage and subchondral bone destruction",
-   "Monitor for local recurrence with serial MRI given the characteristic haemosiderin blooming, particularly in diffuse disease",
-   "Coordinate care across orthopaedic surgery, rheumatology and oncology for aggressive or recurrent tumours"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pigmented_villonodular_synovitis-pathway",
-   "title": "Pigmented villonodular synovitis (tenosynovial giant cell tumour): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign but locally aggressive proliferative disorder of the synovium, now classified within the tenosynovial giant cell tumour family",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth or atypical features raising concern for malignant transformation or sarcoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI showing haemosiderin-laden synovium with low signal and blooming on gradient-echo sequences, Plain radiographs to assess soft-tissue swelling and juxta-articular bony erosions, Joint aspiration revealing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake surgical synovectomy as the mainstay, with arthroscopic excision for localised nodular disease and open or combined complete synovectomy for the diffuse form"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking recurrent haemarthrosis for injury or a bleeding disorder and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pigmented villonodular synovitis (tenosynovial giant cell tumour)."
-  }
- ],
- "tables": [
-  {
-   "id": "pigmented_villonodular_synovitis-matrix",
-   "title": "Pigmented villonodular synovitis (tenosynovial giant cell tumour): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign but locally aggressive proliferative disorder of the synovium, now classified within the tenosynovial giant cell tumour",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign but locally aggressive proliferative disorder of the synovium, now classified within the tenosynovial giant cell tumour family",
+      "Occurs in localised (nodular) and diffuse forms, with the diffuse type being more aggressive and prone to recurrence",
+      "Usually monoarticular, most often affecting the knee, and typically presents in young to middle-aged adults with pain, swelling and recurrent effusions",
+      "Aspiration classically yields serosanguineous or brown (haemosiderin-stained) joint fluid, reflecting recurrent haemarthrosis",
+      "MRI is the investigation of choice and shows haemosiderin-laden proliferative synovium with characteristic low signal and 'blooming' artefact on gradient-echo sequences",
+      "Driven in most cases by overexpression of colony-stimulating factor 1 (CSF1), providing the rationale for CSF1R-directed therapy in advanced or unresectable disease",
+      "Primary treatment is surgical synovectomy, with radiotherapy or CSF1R inhibition considered for diffuse, recurrent or inoperable disease"
     ],
-    [
-     "Key Investigations",
-     "MRI showing haemosiderin-laden synovium with low signal and blooming on gradient-echo sequences, Plain radiographs to assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pigmented villonodular synovitis is a neoplastic proliferation of the synovial lining producing villous and nodular thickening with abundant haemosiderin-laden macrophages, multinucleated giant cells and foam cells. The majority of cases are driven by a translocation involving the colony-stimulating factor 1 (CSF1) gene, leading to overexpression of CSF1; a small population of neoplastic cells recruits large numbers of non-neoplastic CSF1-receptor-bearing inflammatory cells that make up the bulk of the lesion (a 'landscape' effect). Recurrent microhaemorrhage within the hypervascular synovium deposits haemosiderin, giving the tissue its pigmented appearance and the characteristic MRI blooming. The proliferative synovium erodes cartilage and subchondral bone, causing progressive joint destruction, particularly in the diffuse form.",
+    "additionalDifferentials": [
+      "Synovial chondromatosis",
+      "Haemophilic arthropathy",
+      "Rheumatoid or other chronic inflammatory synovitis",
+      "Synovial haemangioma",
+      "Synovial sarcoma or other malignant soft-tissue tumour",
+      "Amyloid or gouty synovial deposition"
     ],
-    [
-     "Primary Differentials",
-     "Synovial chondromatosis, Haemophilic arthropathy, Rheumatoid or other chronic inflammatory synovitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI showing haemosiderin-laden synovium with low signal and blooming on gradient-echo sequences",
+      "Plain radiographs to assess soft-tissue swelling and juxta-articular bony erosions",
+      "Joint aspiration revealing serosanguineous or brown haemosiderin-stained fluid",
+      "Histological confirmation from synovial biopsy or resected tissue",
+      "Assessment of CSF1 overexpression where targeted therapy is being considered"
     ],
-    [
-     "Management Strategy",
-     "Undertake surgical synovectomy as the mainstay, with arthroscopic excision for localised nodular disease and open or combined",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth or atypical features raising concern for malignant transformation or sarcoma",
+      "Aggressive bony erosion and joint destruction in diffuse disease",
+      "Repeated recurrence after synovectomy indicating incomplete disease control",
+      "Neurovascular compromise from an expanding mass"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking recurrent haemarthrosis for injury or a bleeding disorder and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The localised form has a good outcome after complete excision, whereas the diffuse form recurs frequently and can cause progressive joint destruction; malignant transformation is rare, and CSF1R-directed therapy has improved options for advanced disease.",
+    "pitfalls": [
+      "Mistaking recurrent haemarthrosis for injury or a bleeding disorder and delaying diagnosis",
+      "Incomplete synovectomy in diffuse disease leading to recurrence",
+      "Overlooking the diagnosis when gradient-echo MRI sequences are not obtained",
+      "Confusing it with synovial chondromatosis or a malignant soft-tissue tumour"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "WHO Classification of Tumours: Soft Tissue and Bone"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake surgical synovectomy as the mainstay, with arthroscopic excision for localised nodular disease and open or combined complete synovectomy for the diffuse form",
+      "Consider CSF1R-directed systemic therapy such as pexidartinib for advanced, recurrent or unresectable diffuse disease, exploiting the underlying CSF1 overexpression",
+      "Use adjuvant radiosynovectomy or external-beam radiotherapy to reduce recurrence after incomplete resection of diffuse disease",
+      "Provide physiotherapy to restore range of motion and joint function postoperatively",
+      "Consider joint arthroplasty for end-stage cartilage and subchondral bone destruction",
+      "Monitor for local recurrence with serial MRI given the characteristic haemosiderin blooming, particularly in diffuse disease",
+      "Coordinate care across orthopaedic surgery, rheumatology and oncology for aggressive or recurrent tumours"
     ]
-   ],
-   "caption": "Overview comparison matrix for pigmented villonodular synovitis (tenosynovial giant cell tumour)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pigmented-villonodular-synovitis-real-image",
-   "title": "Pigmented villonodular synovitis (tenosynovial giant cell tumour): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "pigmented_villonodular_synovitis-pathway",
+      "title": "Pigmented villonodular synovitis (tenosynovial giant cell tumour): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign but locally aggressive proliferative disorder of the synovium, now classified within the tenosynovial giant cell tumour family",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth or atypical features raising concern for malignant transformation or sarcoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI showing haemosiderin-laden synovium with low signal and blooming on gradient-echo sequences, Plain radiographs to assess soft-tissue swelling and juxta-articular bony erosions, Joint aspiration revealing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake surgical synovectomy as the mainstay, with arthroscopic excision for localised nodular disease and open or combined complete synovectomy for the diffuse form"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking recurrent haemarthrosis for injury or a bleeding disorder and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pigmented villonodular synovitis (tenosynovial giant cell tumour)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pigmented_villonodular_synovitis-matrix",
+      "title": "Pigmented villonodular synovitis (tenosynovial giant cell tumour): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign but locally aggressive proliferative disorder of the synovium, now classified within the tenosynovial giant cell tumour",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI showing haemosiderin-laden synovium with low signal and blooming on gradient-echo sequences, Plain radiographs to assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Synovial chondromatosis, Haemophilic arthropathy, Rheumatoid or other chronic inflammatory synovitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake surgical synovectomy as the mainstay, with arthroscopic excision for localised nodular disease and open or combined",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking recurrent haemarthrosis for injury or a bleeding disorder and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pigmented villonodular synovitis (tenosynovial giant cell tumour)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pigmented_villonodular_synovitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Haemosiderin-laden synovium with low signal and blooming on gradient-echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Soft-tissue swelling and juxta-articular bony erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint aspiration",
+          "cells": [
+            {
+              "text": "Serosanguineous or brown haemosiderin-stained fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology from synovial biopsy or resection",
+          "cells": [
+            {
+              "text": "Histological confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF1 overexpression assessment",
+          "cells": [
+            {
+              "text": "Where targeted therapy is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pigmented_villonodular_synovitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical synovectomy",
+          "cells": [
+            {
+              "text": "Mainstay of treatment; arthroscopic excision for localised nodular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF1R-directed therapy",
+          "cells": [
+            {
+              "text": "Pexidartinib for advanced, recurrent or unresectable diffuse disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiation",
+          "cells": [
+            {
+              "text": "Radiosynovectomy or radiotherapy to reduce recurrence after incomplete diffuse resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Restore range of motion and joint function after surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroplasty",
+          "cells": [
+            {
+              "text": "End-stage cartilage and subchondral bone destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial MRI for local recurrence, given characteristic haemosiderin blooming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Orthopaedic surgery, rheumatology and oncology for aggressive or recurrent tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pigmented_villonodular_synovitis-dx-mgmt",
+      "title": "Diagnosis and management of Pigmented villonodular synovitis (tenosynovial giant cell tumour)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent joint swelling with blood-stained effusion and haemosiderin on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid growth, bony erosion, recurrence, neurovascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncology review for suspected sarcoma or malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with gradient-echo blooming; radiographs; joint aspiration; synovial biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MRI and aspirate show haemosiderin-laden synovium?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemophilic arthropathy, synovial chondromatosis or inflammatory synovitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical synovectomy as the mainstay, with arthroscopic excision for localised nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pexidartinib for advanced, recurrent or unresectable diffuse disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radiosynovectomy or radiotherapy to reduce recurrence after incomplete diffuse resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy to restore range of motion after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial MRI to monitor for local recurrence, particularly in diffuse disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Localised form does well after excision; diffuse form recurs often and can destroy joints",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,484 @@
 {
- "id": "charcot_marie_tooth_disease_type_1c",
- "name": "Charcot-Marie-Tooth disease type 1C",
- "aliases": [
-  "CMT1C",
-  "LITAF",
-  "SIMPLE"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary neuropathy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant demyelinating neuropathy that is clinically indistinguishable from other CMT1 subtypes, so genetic testing is required to confirm the LITAF cause.",
-   "Presents as a length-dependent motor and sensory neuropathy with distal weakness, pes cavus, hammer toes, distal wasting and lost ankle reflexes.",
-   "Motor nerve conduction velocities are uniformly slowed into the demyelinating range across multiple nerves, mirroring CMT1A and CMT1B.",
-   "Onset is usually within the first two decades but later presentation occurs; progression is characteristically slow.",
-   "Caused by mutations in LITAF (also called SIMPLE), which disrupt endosomal-lysosomal protein handling within Schwann cells.",
-   "Sural nerve biopsy, when performed, shows demyelination with remyelination and onion-bulb formation.",
-   "Consider this subtype when PMP22 dosage and MPZ testing are negative in a dominant demyelinating pedigree."
+  "id": "charcot_marie_tooth_disease_type_1c",
+  "name": "Charcot-Marie-Tooth disease type 1C",
+  "aliases": [
+    "CMT1C",
+    "LITAF",
+    "SIMPLE"
   ],
-  "pathophysiology": "Charcot-Marie-Tooth disease type 1C is caused by heterozygous mutations in LITAF (lipopolysaccharide-induced tumour necrosis factor factor), whose product is also known as SIMPLE (small integral membrane protein of the lysosome and late endosome). The protein participates in endosomal protein sorting and degradation, interacting with the endosomal sorting complex required for transport machinery that regulates trafficking and turnover of membrane proteins. Disease-associated missense changes cluster in the conserved membrane-associated domain and promote protein misfolding and aggregation, impairing Schwann cell handling of myelin and receptor proteins. The resulting Schwann cell dysfunction produces a chronic demyelinating and remyelinating process with onion-bulb formation, secondary axonal loss and the uniform conduction slowing typical of the CMT1 group.",
-  "additionalDifferentials": [
-   "CMT1A (PMP22 duplication)",
-   "CMT1B (MPZ mutation)",
-   "CMT1D (EGR2 mutation)",
-   "CMT1E (PMP22 point mutation)",
-   "CMT1X (GJB1/connexin-32)",
-   "Chronic inflammatory demyelinating polyradiculoneuropathy",
-   "Dejerine-Sottas syndrome"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies and electromyography to confirm uniform demyelinating slowing",
-   "PMP22 dosage analysis (MLPA) to exclude CMT1A duplication",
-   "Next-generation sequencing hereditary neuropathy gene panel including LITAF",
-   "Family segregation and pedigree analysis",
-   "Sural nerve biopsy reserved for diagnostically unclear cases",
-   "Orthopaedic and podiatric assessment of foot deformity and gait"
-  ],
-  "redFlags": [
-   "Rapid progression or marked asymmetry suggesting an acquired inflammatory neuropathy",
-   "Prominent sensory ataxia out of keeping with the motor picture",
-   "Bulbar or respiratory involvement",
-   "Conduction block on studies favouring an acquired demyelinating process"
-  ],
-  "prognosis": "Charcot-Marie-Tooth disease type 1C is slowly progressive with a normal life expectancy, and independent ambulation is usually preserved into adulthood although foot deformity and distal weakness accrue over time.",
-  "pitfalls": [
-   "Misdiagnosing the demyelinating slowing as chronic inflammatory demyelinating polyradiculoneuropathy and giving unnecessary immunotherapy.",
-   "Assuming CMT1A without performing PMP22 dosage testing.",
-   "Overlooking a subtle dominant family history in an apparently isolated case.",
-   "Attributing foot deformity to an orthopaedic cause and missing the underlying neuropathy."
-  ],
-  "references": [
-   "Charcot-Marie-Tooth hereditary neuropathy overview (clinical genetics reference)",
-   "Peripheral neuropathy (Dyck and Thomas)",
-   "Adams and Victor's principles of neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage supportively with physiotherapy and occupational therapy, as no disease-modifying drug is available",
-   "Fit ankle-foot orthoses and provide podiatry, footwear and walking aids for foot drop and pes cavus",
-   "Offer orthopaedic foot surgery for fixed, disabling deformity and gait problems",
-   "Treat neuropathic pain and cramps symptomatically and avoid neurotoxic agents such as vincristine",
-   "Monitor the slow progression with periodic neurological and functional assessment, including screening for scoliosis",
-   "Offer genetic counselling for autosomal dominant inheritance and family segregation testing for the LITAF variant",
-   "Coordinate multidisciplinary neuromuscular, orthopaedic and rehabilitation care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "charcot_marie_tooth_disease_type_1c-pathway",
-   "title": "Charcot-Marie-Tooth disease type 1C: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant demyelinating neuropathy that is clinically indistinguishable from other CMT1 subtypes, so genetic testing is required to confirm the LITAF cause.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid progression or marked asymmetry suggesting an acquired inflammatory neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies and electromyography to confirm uniform demyelinating slowing, PMP22 dosage analysis (MLPA) to exclude CMT1A duplication, Next-generation sequencing hereditary neuropathy gene panel including LITAF"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage supportively with physiotherapy and occupational therapy, as no disease-modifying drug is available"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the demyelinating slowing as chronic inflammatory demyelinating polyradiculoneuropathy and giving unnecessary immunotherapy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 1c."
-  }
- ],
- "tables": [
-  {
-   "id": "charcot_marie_tooth_disease_type_1c-matrix",
-   "title": "Charcot-Marie-Tooth disease type 1C: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant demyelinating neuropathy that is clinically indistinguishable from other CMT1 subtypes, so genetic testing is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary neuropathy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant demyelinating neuropathy that is clinically indistinguishable from other CMT1 subtypes, so genetic testing is required to confirm the LITAF cause.",
+      "Presents as a length-dependent motor and sensory neuropathy with distal weakness, pes cavus, hammer toes, distal wasting and lost ankle reflexes.",
+      "Motor nerve conduction velocities are uniformly slowed into the demyelinating range across multiple nerves, mirroring CMT1A and CMT1B.",
+      "Onset is usually within the first two decades but later presentation occurs; progression is characteristically slow.",
+      "Caused by mutations in LITAF (also called SIMPLE), which disrupt endosomal-lysosomal protein handling within Schwann cells.",
+      "Sural nerve biopsy, when performed, shows demyelination with remyelination and onion-bulb formation.",
+      "Consider this subtype when PMP22 dosage and MPZ testing are negative in a dominant demyelinating pedigree."
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies and electromyography to confirm uniform demyelinating slowing, PMP22 dosage analysis (MLPA) to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Charcot-Marie-Tooth disease type 1C is caused by heterozygous mutations in LITAF (lipopolysaccharide-induced tumour necrosis factor factor), whose product is also known as SIMPLE (small integral membrane protein of the lysosome and late endosome). The protein participates in endosomal protein sorting and degradation, interacting with the endosomal sorting complex required for transport machinery that regulates trafficking and turnover of membrane proteins. Disease-associated missense changes cluster in the conserved membrane-associated domain and promote protein misfolding and aggregation, impairing Schwann cell handling of myelin and receptor proteins. The resulting Schwann cell dysfunction produces a chronic demyelinating and remyelinating process with onion-bulb formation, secondary axonal loss and the uniform conduction slowing typical of the CMT1 group.",
+    "additionalDifferentials": [
+      "CMT1A (PMP22 duplication)",
+      "CMT1B (MPZ mutation)",
+      "CMT1D (EGR2 mutation)",
+      "CMT1E (PMP22 point mutation)",
+      "CMT1X (GJB1/connexin-32)",
+      "Chronic inflammatory demyelinating polyradiculoneuropathy",
+      "Dejerine-Sottas syndrome"
     ],
-    [
-     "Primary Differentials",
-     "CMT1A (PMP22 duplication), CMT1B (MPZ mutation), CMT1D (EGR2 mutation)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies and electromyography to confirm uniform demyelinating slowing",
+      "PMP22 dosage analysis (MLPA) to exclude CMT1A duplication",
+      "Next-generation sequencing hereditary neuropathy gene panel including LITAF",
+      "Family segregation and pedigree analysis",
+      "Sural nerve biopsy reserved for diagnostically unclear cases",
+      "Orthopaedic and podiatric assessment of foot deformity and gait"
     ],
-    [
-     "Management Strategy",
-     "Manage supportively with physiotherapy and occupational therapy, as no disease-modifying drug is available",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid progression or marked asymmetry suggesting an acquired inflammatory neuropathy",
+      "Prominent sensory ataxia out of keeping with the motor picture",
+      "Bulbar or respiratory involvement",
+      "Conduction block on studies favouring an acquired demyelinating process"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the demyelinating slowing as chronic inflammatory demyelinating polyradiculoneuropathy and giving unnecessary",
-     "Prevent diagnostic or management error"
+    "prognosis": "Charcot-Marie-Tooth disease type 1C is slowly progressive with a normal life expectancy, and independent ambulation is usually preserved into adulthood although foot deformity and distal weakness accrue over time.",
+    "pitfalls": [
+      "Misdiagnosing the demyelinating slowing as chronic inflammatory demyelinating polyradiculoneuropathy and giving unnecessary immunotherapy.",
+      "Assuming CMT1A without performing PMP22 dosage testing.",
+      "Overlooking a subtle dominant family history in an apparently isolated case.",
+      "Attributing foot deformity to an orthopaedic cause and missing the underlying neuropathy."
+    ],
+    "references": [
+      "Charcot-Marie-Tooth hereditary neuropathy overview (clinical genetics reference)",
+      "Peripheral neuropathy (Dyck and Thomas)",
+      "Adams and Victor's principles of neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage supportively with physiotherapy and occupational therapy, as no disease-modifying drug is available",
+      "Fit ankle-foot orthoses and provide podiatry, footwear and walking aids for foot drop and pes cavus",
+      "Offer orthopaedic foot surgery for fixed, disabling deformity and gait problems",
+      "Treat neuropathic pain and cramps symptomatically and avoid neurotoxic agents such as vincristine",
+      "Monitor the slow progression with periodic neurological and functional assessment, including screening for scoliosis",
+      "Offer genetic counselling for autosomal dominant inheritance and family segregation testing for the LITAF variant",
+      "Coordinate multidisciplinary neuromuscular, orthopaedic and rehabilitation care"
     ]
-   ],
-   "caption": "Overview comparison matrix for charcot-marie-tooth disease type 1c."
-  }
- ],
- "diagrams": [
-  {
-   "id": "charcot-marie-tooth-disease-type-1c-real-image",
-   "title": "Charcot-Marie-Tooth disease type 1C: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "charcot_marie_tooth_disease_type_1c-pathway",
+      "title": "Charcot-Marie-Tooth disease type 1C: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant demyelinating neuropathy that is clinically indistinguishable from other CMT1 subtypes, so genetic testing is required to confirm the LITAF cause.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid progression or marked asymmetry suggesting an acquired inflammatory neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies and electromyography to confirm uniform demyelinating slowing, PMP22 dosage analysis (MLPA) to exclude CMT1A duplication, Next-generation sequencing hereditary neuropathy gene panel including LITAF"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage supportively with physiotherapy and occupational therapy, as no disease-modifying drug is available"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the demyelinating slowing as chronic inflammatory demyelinating polyradiculoneuropathy and giving unnecessary immunotherapy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 1c."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1c-matrix",
+      "title": "Charcot-Marie-Tooth disease type 1C: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant demyelinating neuropathy that is clinically indistinguishable from other CMT1 subtypes, so genetic testing is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies and electromyography to confirm uniform demyelinating slowing, PMP22 dosage analysis (MLPA) to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CMT1A (PMP22 duplication), CMT1B (MPZ mutation), CMT1D (EGR2 mutation)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage supportively with physiotherapy and occupational therapy, as no disease-modifying drug is available",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the demyelinating slowing as chronic inflammatory demyelinating polyradiculoneuropathy and giving unnecessary",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for charcot-marie-tooth disease type 1c."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1c-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Uniform demyelinating slowing across multiple nerves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PMP22 dosage analysis (MLPA)",
+          "cells": [
+            {
+              "text": "Excludes the CMT1A duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Next-generation sequencing neuropathy panel including LITAF",
+          "cells": [
+            {
+              "text": "Confirms a LITAF variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sural nerve biopsy",
+          "cells": [
+            {
+              "text": "Diagnostically unclear cases; demyelination with onion-bulb formation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and podiatric assessment",
+          "cells": [
+            {
+              "text": "Foot deformity and gait"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_1c-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CMT1A",
+          "cells": [
+            {
+              "text": "PMP22 duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMT1B",
+          "cells": [
+            {
+              "text": "MPZ mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMT1D",
+          "cells": [
+            {
+              "text": "EGR2 mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_1c-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy"
+            },
+            {
+              "text": "No disease-modifying drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and footwear",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses, podiatry, footwear and walking aids"
+            },
+            {
+              "text": "Foot drop and pes cavus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic foot surgery",
+          "cells": [
+            {
+              "text": "For fixed, disabling deformity and gait problems"
+            },
+            {
+              "text": "Disabling deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom control",
+          "cells": [
+            {
+              "text": "Treat neuropathic pain and cramps; avoid vincristine"
+            },
+            {
+              "text": "Neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression monitoring",
+          "cells": [
+            {
+              "text": "Periodic neurological and functional assessment, including scoliosis screening"
+            },
+            {
+              "text": "Slow progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; family segregation testing for the LITAF variant"
+            },
+            {
+              "text": "Relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neuromuscular, orthopaedic and rehabilitation care"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1c-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth disease type 1C",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 1C (LITAF): dominant demyelinating neuropathy with pes cavus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid progression, marked asymmetry, bulbar or respiratory signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for acquired inflammatory neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, PMP22 dosage and LITAF-including gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Uniform demyelinating slowing with PMP22 and MPZ negative; LITAF confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy; no disease-modifying drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CMT1A, CMT1B, CMT1D and chronic inflammatory neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses, podiatry and footwear for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic foot surgery for fixed, disabling deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid vincristine; treat pain and cramps; screen for scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; genetic counselling for dominant inheritance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

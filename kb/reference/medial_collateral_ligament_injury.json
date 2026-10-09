@@ -1,168 +1,437 @@
 {
- "id": "medial_collateral_ligament_injury",
- "name": "Medial collateral ligament injury",
- "aliases": [
-  "MCL sprain",
-  "medial collateral ligament tear",
-  "tibial collateral ligament injury"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Sports & Trauma",
- "specialty": "Orthopaedics / Sports Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
-   "Graded I-III by the degree of medial laxity on valgus stress at 30 degrees of flexion",
-   "Pain and tenderness localise along the medial joint line and femoral or tibial attachment",
-   "The great majority of isolated MCL injuries heal without surgery owing to the ligament's good blood supply",
-   "Valgus laxity in full extension implies a more severe injury with cruciate or capsular involvement",
-   "Part of the 'unhappy triad' alongside ACL and medial meniscus injury",
-   "A Pellegrini-Stieda lesion (calcification at the femoral origin) can follow chronic proximal MCL injury"
+  "id": "medial_collateral_ligament_injury",
+  "name": "Medial collateral ligament injury",
+  "aliases": [
+    "MCL sprain",
+    "medial collateral ligament tear",
+    "tibial collateral ligament injury"
   ],
-  "pathophysiology": "The superficial MCL is the primary restraint to valgus stress. A laterally directed blow or valgus load stretches or tears its fibres, most often at the femoral origin. Because the ligament is extra-articular with a rich blood supply, isolated tears typically heal with conservative management; combined injury to the cruciates or posteromedial corner produces greater instability and worse healing.",
-  "additionalDifferentials": [
-   "Medial meniscal tear",
-   "ACL injury (unhappy triad)",
-   "Pes anserine bursitis",
-   "Medial patellofemoral ligament injury after patellar dislocation",
-   "Physeal injury in skeletally immature patients"
-  ],
-  "additionalInvestigations": [
-   "Valgus stress testing at 0 and 30 degrees",
-   "MRI to grade the tear and detect associated injuries",
-   "Radiographs to exclude fracture and detect Pellegrini-Stieda calcification or physeal injury",
-   "Stress radiographs in skeletally immature patients to distinguish physeal fracture"
-  ],
-  "redFlags": [
-   "Valgus laxity in full extension indicating combined ligamentous injury",
-   "Multiligament injury or knee dislocation",
-   "Physeal fracture mimicking ligament injury in children"
-  ],
-  "prognosis": "Isolated MCL injuries of all grades usually recover well with bracing and rehabilitation; outcomes are less predictable when the injury is combined with cruciate or posteromedial corner damage.",
-  "pitfalls": [
-   "Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury",
-   "Missing a paediatric distal femoral physeal fracture that mimics MCL laxity",
-   "Overlooking a concurrent ACL or meniscal tear",
-   "Immobilising rigidly when early protected motion aids healing"
-  ],
-  "references": [
-   "Miller's Review of Orthopaedics",
-   "Brukner and Khan's Clinical Sports Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and analgesia",
-   "Progressive physiotherapy to restore range of motion, quadriceps and hamstring strength and proprioception",
-   "Graded, criteria-based return to sport once stability and strength are regained",
-   "Surgical repair or reconstruction reserved for combined cruciate or posteromedial-corner injuries or persistent high-grade valgus instability",
-   "Grade the injury and identify associated ligament or meniscal damage with valgus stress testing and MRI",
-   "In skeletally immature patients, distinguish and manage physeal injury with stress radiographs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "medial_collateral_ligament_injury-pathway",
-   "title": "Medial collateral ligament injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Valgus laxity in full extension indicating combined ligamentous injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Valgus stress testing at 0 and 30 degrees, MRI to grade the tear and detect associated injuries, Radiographs to exclude fracture and detect Pellegrini-Stieda calcification or physeal injury"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and analgesia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of medial collateral ligament injury."
-  }
- ],
- "tables": [
-  {
-   "id": "medial_collateral_ligament_injury-matrix",
-   "title": "Medial collateral ligament injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Sports & Trauma",
+  "specialty": "Orthopaedics / Sports Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
+      "Graded I-III by the degree of medial laxity on valgus stress at 30 degrees of flexion",
+      "Pain and tenderness localise along the medial joint line and femoral or tibial attachment",
+      "The great majority of isolated MCL injuries heal without surgery owing to the ligament's good blood supply",
+      "Valgus laxity in full extension implies a more severe injury with cruciate or capsular involvement",
+      "Part of the 'unhappy triad' alongside ACL and medial meniscus injury",
+      "A Pellegrini-Stieda lesion (calcification at the femoral origin) can follow chronic proximal MCL injury"
     ],
-    [
-     "Key Investigations",
-     "Valgus stress testing at 0 and 30 degrees, MRI to grade the tear and detect associated injuries, Radiographs to exclude fracture",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The superficial MCL is the primary restraint to valgus stress. A laterally directed blow or valgus load stretches or tears its fibres, most often at the femoral origin. Because the ligament is extra-articular with a rich blood supply, isolated tears typically heal with conservative management; combined injury to the cruciates or posteromedial corner produces greater instability and worse healing.",
+    "additionalDifferentials": [
+      "Medial meniscal tear",
+      "ACL injury (unhappy triad)",
+      "Pes anserine bursitis",
+      "Medial patellofemoral ligament injury after patellar dislocation",
+      "Physeal injury in skeletally immature patients"
     ],
-    [
-     "Primary Differentials",
-     "Medial meniscal tear, ACL injury (unhappy triad), Pes anserine bursitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Valgus stress testing at 0 and 30 degrees",
+      "MRI to grade the tear and detect associated injuries",
+      "Radiographs to exclude fracture and detect Pellegrini-Stieda calcification or physeal injury",
+      "Stress radiographs in skeletally immature patients to distinguish physeal fracture"
     ],
-    [
-     "Management Strategy",
-     "Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and",
-     "Core treatment modality"
+    "redFlags": [
+      "Valgus laxity in full extension indicating combined ligamentous injury",
+      "Multiligament injury or knee dislocation",
+      "Physeal fracture mimicking ligament injury in children"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated MCL injuries of all grades usually recover well with bracing and rehabilitation; outcomes are less predictable when the injury is combined with cruciate or posteromedial corner damage.",
+    "pitfalls": [
+      "Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury",
+      "Missing a paediatric distal femoral physeal fracture that mimics MCL laxity",
+      "Overlooking a concurrent ACL or meniscal tear",
+      "Immobilising rigidly when early protected motion aids healing"
+    ],
+    "references": [
+      "Miller's Review of Orthopaedics",
+      "Brukner and Khan's Clinical Sports Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and analgesia",
+      "Progressive physiotherapy to restore range of motion, quadriceps and hamstring strength and proprioception",
+      "Graded, criteria-based return to sport once stability and strength are regained",
+      "Surgical repair or reconstruction reserved for combined cruciate or posteromedial-corner injuries or persistent high-grade valgus instability",
+      "Grade the injury and identify associated ligament or meniscal damage with valgus stress testing and MRI",
+      "In skeletally immature patients, distinguish and manage physeal injury with stress radiographs"
     ]
-   ],
-   "caption": "Overview comparison matrix for medial collateral ligament injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "medial-collateral-ligament-injury-real-image",
-   "title": "Medial collateral ligament injury: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "medial_collateral_ligament_injury-pathway",
+      "title": "Medial collateral ligament injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Valgus laxity in full extension indicating combined ligamentous injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Valgus stress testing at 0 and 30 degrees, MRI to grade the tear and detect associated injuries, Radiographs to exclude fracture and detect Pellegrini-Stieda calcification or physeal injury"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and analgesia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of medial collateral ligament injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "medial_collateral_ligament_injury-matrix",
+      "title": "Medial collateral ligament injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Valgus stress testing at 0 and 30 degrees, MRI to grade the tear and detect associated injuries, Radiographs to exclude fracture",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Medial meniscal tear, ACL injury (unhappy triad), Pes anserine bursitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for medial collateral ligament injury."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "medial_collateral_ligament_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Valgus stress testing at 0 and 30 degrees",
+          "cells": [
+            {
+              "text": "Valgus laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Tear grade and associated injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Fracture, Pellegrini-Stieda calcification or physeal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress radiographs in skeletally immature patients",
+          "cells": [
+            {
+              "text": "Physeal fracture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medial_collateral_ligament_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ACL injury (unhappy triad)",
+          "cells": [
+            {
+              "text": "Forms the unhappy triad with MCL injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medial patellofemoral ligament injury",
+          "cells": [
+            {
+              "text": "After patellar dislocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physeal injury in skeletally immature patients",
+          "cells": [
+            {
+              "text": "Skeletally immature; stress radiographs distinguish physeal fracture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medial_collateral_ligament_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-operative management of isolated tears",
+          "cells": [
+            {
+              "text": "Hinged knee brace, early protected weight-bearing, rest, ice and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive physiotherapy",
+          "cells": [
+            {
+              "text": "Range of motion, quadriceps and hamstring strength, proprioception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded return to sport",
+          "cells": [
+            {
+              "text": "Criteria-based, once stability and strength are regained"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical repair or reconstruction",
+          "cells": [
+            {
+              "text": "Combined cruciate or posteromedial-corner injuries, or persistent high-grade valgus instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grading and associated injury",
+          "cells": [
+            {
+              "text": "Valgus stress testing and MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physeal injury in children",
+          "cells": [
+            {
+              "text": "Distinguished and managed with stress radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "medial_collateral_ligament_injury-dx-mgmt",
+      "title": "Diagnosis and management of Medial collateral ligament injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Medial knee pain after a valgus injury to the knee",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Valgus laxity in full extension, multiligament injury or physeal fracture in a child?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review for combined ligament injury or knee dislocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Valgus stress testing at 0 and 30 degrees; radiographs; MRI to grade the tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an isolated tear confirmed on valgus stress testing and MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ACL injury, MPFL injury or physeal injury; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Non-operative care for isolated tears: hinged brace, protected weight-bearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Progressive physiotherapy for range, strength and proprioception",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Graded, criteria-based return to sport",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for combined cruciate or posteromedial injury or persistent valgus instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Return to sport once stability and strength are regained",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

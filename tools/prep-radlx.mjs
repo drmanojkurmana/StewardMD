@@ -349,12 +349,72 @@ async function plan(D, args) {
 }
 
 // =====================================================================================================================
+// locate: the plan's own coordinates are unreliable (one request doing many jobs), so every spot and label set is
+// located again by a detection-only request per image (gemini-3.6-flash, the image and the names only).
+// =====================================================================================================================
+export const LOC_MODEL = "gemini-3.6-flash";
+/* parseList(text) -> the JSON list in a model reply (fenced or bare), or a list held in an object's first array field. */
+export function parseList(text) {
+  const t = String(text || "").trim().replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "");
+  const tryP = (x) => { try { return JSON.parse(x); } catch (e) { return undefined; } };
+  let o = tryP(t);
+  if (o === undefined) { const a = t.indexOf("["), b = t.lastIndexOf("]"); if (a >= 0 && b > a) o = tryP(t.slice(a, b + 1)); }
+  if (Array.isArray(o)) return o;
+  if (o && typeof o === "object") { const v = Object.values(o).find(Array.isArray); if (v) return v; }
+  return [];
+}
+export function locPrompt(names, hint) {
+  return `Detect ${names.length === 1 ? "this finding" : "each of these findings or structures"} on the image: ${names.map((n, i) => (names.length > 1 ? i + 1 + ". " : "") + n).join("; ")}.` +
+    (hint ? ` Context: ${hint}` : "") + ` Return a JSON list [{"box_2d":[ymin,xmin,ymax,xmax],"label":"<the name exactly as given>"}] with coordinates normalised to 0-1000 on the image as shown (left of the image is image left). If arrows or letters printed on the image point at it, box what they point at. Leave out any you cannot see clearly.`;
+}
+async function locate(D, args) {
+  const P = readJson(path.join(D.dir, "pool.json"), {}), lf = path.join(D.dir, "loc.json"), L = readJson(lf, {});
+  const project = process.env.PREP_VERTEX_PROJECT; if (!project) throw new Error("set PREP_VERTEX_PROJECT");
+  const jobs = [];
+  for (const f of fs.readdirSync(path.join(D.dir, "plan")).filter((x) => x.endsWith(".json"))) {
+    const id = f.slice(0, -5), pl = readJson(path.join(D.dir, "plan", f), {}).plan, p = P[id]; if (!pl || !p) continue;
+    const have = L[id] || (L[id] = {});
+    for (const sp of pl.spot || []) { const k = "s:" + sp.c; if (have[k] === undefined && p.cands.some((c) => c.cid === sp.c)) jobs.push({ id, k, c: sp.c, names: [cleanText(sp.label, 60)], hint: cleanText(sp.why, 200) }); }
+    for (const r of pl.reveal || []) { const k = "r:" + r.c, names = [...new Set((r.marks || []).map((m) => cleanText(m.label, 40)).filter(Boolean))].slice(0, 5); if (have[k] === undefined && names.length >= 2 && p.cands.some((c) => c.cid === r.c)) jobs.push({ id, k, c: r.c, names }); }
+  }
+  console.log(`locate: ${jobs.length} requests`);
+  if (args.flags.has("dry-run") || !jobs.length) return;
+  const tok = { v: token() }; let usd = 0, inT = 0, outT = 0, k = 0, n = 0;
+  await Promise.all(Array.from({ length: +(args.conc || 12) }, async () => {
+    while (k < jobs.length) {
+      const j = jobs[k++], c = P[j.id].cands.find((x) => x.cid === j.c);
+      const body = { contents: [{ role: "user", parts: [{ inlineData: { mimeType: "image/jpeg", data: fs.readFileSync(c.jpg).toString("base64") } }, { text: locPrompt(j.names, j.hint) }] }],
+        generationConfig: { temperature: 0, responseMimeType: "application/json" }, labels: { app: "prep", run: "radlx-loc" } };
+      const url = `https://aiplatform.googleapis.com/v1/projects/${project}/locations/global/publishers/google/models/${LOC_MODEL}:generateContent`;
+      try {
+        let jr = null;
+        for (let a = 0; a < 4 && !jr; a++) {
+          const r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + tok.v, "x-goog-user-project": project, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+          if (r.status === 401) { tok.v = token(); continue; }
+          if (r.status === 429 || r.status >= 500) { await sleep(2500 * (a + 1)); continue; }
+          jr = await r.json(); if (!r.ok) throw new Error(JSON.stringify(jr).slice(0, 200));
+        }
+        if (!jr) continue;
+        const u = jr.usageMetadata || {}; usd += costUsd({ inTok: u.promptTokenCount || 0, outTok: u.candidatesTokenCount || 0, thinkTok: u.thoughtsTokenCount || 0 }, LOC_MODEL); inT += u.promptTokenCount || 0; outT += (u.candidatesTokenCount || 0) + (u.thoughtsTokenCount || 0);
+        const out = parseList(((jr.candidates || [])[0] || { content: { parts: [] } }).content.parts.filter((x) => !x.thought).map((x) => x.text || "").join(""));
+        const list = (Array.isArray(out) ? out : []).filter((x) => x && Array.isArray(x.box_2d)).map((x) => ({ label: cleanText(x.label || "", 60), box: x.box_2d }));
+        L[j.id][j.k] = j.names.map((nm) => { const hit = list.find((x) => normText(x.label) === normText(nm)) || (j.names.length === 1 ? list[0] : null); return hit ? { label: nm, box: hit.box } : null; }).filter(Boolean);
+        if (++n % 25 === 0) { writeJson(lf, L); console.log(`  ${n} located, $${usd.toFixed(3)}`); }
+      } catch (e) { console.log("  fail", j.id, j.k, String(e.message).slice(0, 120)); }
+    }
+  }));
+  writeJson(lf, L);
+  fs.appendFileSync(logPath(D.book), [new Date().toISOString(), "radlx", "locate", n, inT, outT, usd.toFixed(4)].join("\t") + "\n");
+  console.log(`locate: ${n} done, $${usd.toFixed(3)}`);
+}
+
+// =====================================================================================================================
 // gate
 // =====================================================================================================================
 const capOk = (s, ground) => textOk(s, 5, 24, ground);
 /* gateLesson(les, pool, plan, ground) -> { g: gated plan, why: [dropped element reasons] }. Figures: each candidate at
  * most once, image steps only where there was no visual or the same image. */
-export function gateLesson(les, p, pl, ground) {
+export function gateLesson(les, p, pl, ground, loc) {
   const why = [], cid = new Set(p.cands.map((c) => c.cid)), useC = new Map();
   const g = { figs: {}, add: [], spot: [], reveal: [], pair: null, qc: [], cards: [], keys: [] };
   for (const f of pl.figs || []) {
@@ -376,7 +436,9 @@ export function gateLesson(les, p, pl, ground) {
   }
   const usedSet = new Set(useC.keys()), overlaid = new Set();
   for (const s of pl.spot || []) {
-    const box = boxOf(s.box), q = cleanText(s.q, 120), label = cleanText(s.label, 60), w = cleanText(s.why, 300);
+    const lb = loc && loc["s:" + s.c];
+    if (loc && !(lb && lb.length)) { why.push("spot: not located"); continue; }
+    const box = boxOf(lb ? lb[0].box : s.box), q = cleanText(s.q, 120), label = cleanText(s.label, 60), w = cleanText(s.why, 300);
     if (!usedSet.has(s.c) || overlaid.has(s.c) || !box) { why.push("spot: image or box"); continue; }
     const e = textOk(q, 3, 12, ground) || textOk(label, 1, 6, ground) || textOk(w, 10, 40, ground);
     if (e || !/^tap\b/i.test(q)) { why.push("spot: " + (e || "prompt")); continue; }
@@ -394,7 +456,10 @@ export function gateLesson(les, p, pl, ground) {
     g.pair = { a, b, la: cleanText(la, 40), lb: cleanText(lb, 40), why: cleanText(pr.why, 240) }; paired.add(a); paired.add(b);
   }
   for (const r of pl.reveal || []) {
-    const marks = marksOf(r.marks).filter((m) => !textOk(m.label, 1, 5, ground));
+    const lr = loc && loc["r:" + r.c];
+    if (loc && !(lr && lr.length >= 2)) { why.push("reveal: not located"); continue; }
+    const pts = lr ? lr.map((m) => ({ label: m.label, pt: [(m.box[0] + m.box[2]) / 2, (m.box[1] + m.box[3]) / 2] })) : r.marks;
+    const marks = marksOf(pts).filter((m) => !textOk(m.label, 1, 5, ground));
     if (!usedSet.has(r.c) || overlaid.has(r.c) || paired.has(r.c) || marks.length < 2) { why.push("reveal: image or marks"); continue; }
     g.reveal.push({ c: r.c, marks }); overlaid.add(r.c);
   }
@@ -414,13 +479,13 @@ export function gateLesson(les, p, pl, ground) {
   return { g, why };
 }
 function gate(D) {
-  const P = readJson(path.join(D.dir, "pool.json"), {}), out = {}, why = {};
+  const P = readJson(path.join(D.dir, "pool.json"), {}), out = {}, why = {}, LOC = readJson(path.join(D.dir, "loc.json"), {});
   const lessons = shipped(D.book);
   let n = 0;
   for (const les of lessons) {
     const f = readJson(path.join(D.dir, "plan", les.id + ".json"), null);
     if (!f || !P[les.id]) continue;
-    const r = gateLesson(les, P[les.id], f.plan, f.ground);
+    const r = gateLesson(les, P[les.id], f.plan, f.ground, LOC[les.id] || {});
     out[les.id] = r.g; why[les.id] = r.why; n++;
   }
   writeJson(path.join(D.dir, "gated.json"), out, true);
@@ -484,12 +549,15 @@ function votesPrep(D, args) {
     const text = { qc: g.qc.map((q, k) => ({ k, q: q.q, options: q.o, answer: q.o[q.a], why: q.why })), cards: g.cards.map((c, k) => ({ k, sign: c.f, meaning: c.b })), keys: g.keys.map((s, k) => ({ k, point: s })) };
     items.push({ lesson: les.id, title: les.title, source: readJson(path.join(D.dir, "plan", les.id + ".json"), {}).ground.slice(0, 9000), uses, text });
   }
-  const jf = path.join(vd, "draw.json"); writeJson(jf, draw);
+  const jf = path.join(vd, "draw.json"); writeJson(jf, draw.filter((d) => !fs.existsSync(d.out) || args.flags.has("redraw")));
   const pyf = path.join(os.tmpdir(), "lx-draw.py"); fs.writeFileSync(pyf, DRAW_PY);
   const r = spawnSync("python3", ["-P", pyf, jf], { stdio: "inherit" }); if (r.status) throw new Error("draw failed");
-  const per = +(args.per || 8);
-  for (const f of fs.readdirSync(vd).filter((x) => /^in-\d+\.json$/.test(x))) fs.rmSync(path.join(vd, f));
-  for (let i = 0; i < items.length; i += per) writeJson(path.join(vd, `in-${String(i / per).padStart(3, "0")}.json`), items.slice(i, i + per), true);
+  // waves: lessons already in a vote file keep it (their votes stand); new lessons go to new files after the last one
+  const per = +(args.per || 8), old = fs.readdirSync(vd).filter((x) => /^in-\d+\.json$/.test(x)).sort();
+  const had = new Set(old.flatMap((f) => readJson(path.join(vd, f), []).map((x) => x.lesson)));
+  const fresh = items.filter((x) => !had.has(x.lesson)), base = old.length ? +old[old.length - 1].slice(3, 6) + 1 : 0;
+  for (let i = 0; i < fresh.length; i += per) writeJson(path.join(vd, `in-${String(base + i / per).padStart(3, "0")}.json`), fresh.slice(i, i + per), true);
+  items.length = 0; items.push(...fresh);
   console.log(`${items.length} lessons, ${items.reduce((a, x) => a + x.uses.length, 0)} image uses, ${draw.length} pictures, ${Math.ceil(items.length / per)} vote files`);
 }
 /* agree(a, b) -> true only when both votes exist and both say yes. */
@@ -671,6 +739,7 @@ async function main() {
   fs.mkdirSync(D.dir, { recursive: true });
   if (cmd === "pool") return pool(D, args);
   if (cmd === "plan") return plan(D, args);
+  if (cmd === "locate") return locate(D, args);
   if (cmd === "gate") return gate(D);
   if (cmd === "votes-prep") return votesPrep(D, args);
   if (cmd === "votes-apply") return votesApply(D);

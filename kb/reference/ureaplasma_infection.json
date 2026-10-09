@@ -1,176 +1,445 @@
 {
- "id": "ureaplasma_infection",
- "name": "Ureaplasma urealyticum infection",
- "aliases": [
-  "Ureaplasma urealyticum",
-  "Ureaplasma",
-  "U. urealyticum",
-  "ureaplasma"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Genitourinary Medicine / Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell / BASHH-CDC STI guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Ureaplasma urealyticum is a cell-wall-deficient mollicute that colonises the lower genital tract of many sexually active adults, so its detection often reflects commensal carriage rather than disease",
-   "Its pathogenic role is debated; unlike Mycoplasma genitalium it is not consistently proven to cause urethritis, and routine testing or treatment of asymptomatic carriers is generally not advised",
-   "Ureaplasma urealyticum (as distinct from the usually commensal Ureaplasma parvum) has been implicated in some cases of non-chlamydial non-gonococcal urethritis",
-   "In pregnancy, ureaplasmas are associated with chorioamnionitis, preterm birth, and low birth weight, and they can be transmitted vertically to the neonate",
-   "In preterm and very-low-birth-weight infants, respiratory tract colonisation has been linked to neonatal pneumonia and to the development of bronchopulmonary dysplasia",
-   "Because it lacks a cell wall, it is invisible on Gram stain and inherently resistant to beta-lactams; diagnosis uses culture on specialised media or nucleic acid amplification testing",
-   "When treatment is genuinely indicated, macrolides such as azithromycin or a tetracycline such as doxycycline are typically used, though tetracycline resistance occurs",
-   "Interpreting a positive result requires clinical correlation, since a detection alone does not establish causation"
+  "id": "ureaplasma_infection",
+  "name": "Ureaplasma urealyticum infection",
+  "aliases": [
+    "Ureaplasma urealyticum",
+    "Ureaplasma",
+    "U. urealyticum",
+    "ureaplasma"
   ],
-  "pathophysiology": "Ureaplasma species are among the smallest free-living bacteria and, like other mollicutes, lack a cell wall; they are named for their capacity to hydrolyse urea as an energy source. They frequently colonise the urogenital mucosa as commensals, and the balance between harmless carriage and disease appears to depend on host factors, bacterial load, species and serovar, and the presence of co-pathogens. When pathogenic, urease-driven ammonia production and a local inflammatory response are thought to contribute to mucosal injury, and the same mechanisms are implicated in intra-amniotic infection when the organism ascends in pregnancy, provoking chorioamnionitis and inflammation that may precipitate preterm labour and injure the developing fetal lung. Neonatal colonisation, particularly in preterm infants, can be followed by respiratory disease and chronic lung injury.",
-  "additionalDifferentials": [
-   "Chlamydia trachomatis infection",
-   "Neisseria gonorrhoeae infection",
-   "Mycoplasma genitalium infection",
-   "Trichomonas vaginalis infection",
-   "Bacterial vaginosis",
-   "Urinary tract infection",
-   "Non-infective urethritis"
-  ],
-  "additionalInvestigations": [
-   "Nucleic acid amplification testing or specialised culture of genital or urine specimens, with species differentiation where available",
-   "Concurrent nucleic acid amplification testing for chlamydia and gonorrhoea to exclude established pathogens",
-   "Microscopy of genital smears to document urethritis or cervicitis",
-   "Testing for Mycoplasma genitalium and Trichomonas vaginalis in persistent urethritis",
-   "In relevant pregnancy or neonatal settings, placental histology or neonatal respiratory sampling as clinically indicated",
-   "Screening for other sexually transmitted infections when a sexually acquired cause is suspected"
-  ],
-  "redFlags": [
-   "Preterm labour, prelabour rupture of membranes, or clinical chorioamnionitis in pregnancy",
-   "Respiratory deterioration in a colonised preterm neonate suggesting pneumonia or evolving chronic lung disease",
-   "Persistent symptomatic urethritis despite treatment for established pathogens",
-   "Systemic or invasive infection in an immunocompromised host"
-  ],
-  "prognosis": "In most immunocompetent adults ureaplasma carriage is benign and needs no treatment; when genuine infection is treated the outlook is generally good, whereas perinatal infection carries a less favourable outlook because of its associations with preterm birth and neonatal respiratory morbidity.",
-  "pitfalls": [
-   "Treating an asymptomatic positive result and mistaking commensal colonisation for disease",
-   "Failing to exclude established pathogens such as chlamydia, gonorrhoea, and Mycoplasma genitalium before attributing symptoms to ureaplasma",
-   "Prescribing a beta-lactam, which is ineffective against a cell-wall-deficient organism",
-   "Overlooking the perinatal implications of ureaplasma in pregnant and preterm-neonatal populations"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "BASHH UK guidance on non-gonococcal urethritis and genital mollicutes",
-   "CDC Sexually Transmitted Infections Treatment Guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Do not test or treat asymptomatic urogenital carriage, which usually represents commensal colonisation rather than disease",
-   "Treat genuine symptomatic infection with a macrolide (azithromycin) or a tetracycline (doxycycline), reserving fluoroquinolones for treatment failure",
-   "Avoid beta-lactams, which are inherently ineffective because the organism lacks a cell wall",
-   "Test for and treat co-existing established pathogens (Chlamydia trachomatis, Neisseria gonorrhoeae and Mycoplasma genitalium) in non-gonococcal urethritis",
-   "Arrange partner notification, contact treatment and a full sexually transmitted infection screen when infection is sexually acquired",
-   "In pregnancy manage chorioamnionitis and preterm-labour risk, and treat colonised preterm or very-low-birth-weight neonates with pneumonia or evolving bronchopulmonary dysplasia using a macrolide, with obstetric and neonatal specialist input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ureaplasma_infection-pathway",
-   "title": "Ureaplasma urealyticum infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Ureaplasma urealyticum is a cell-wall-deficient mollicute that colonises the lower genital tract of many sexually active adults, so its detection often reflects commensal carriage rather than disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Preterm labour, prelabour rupture of membranes, or clinical chorioamnionitis in pregnancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nucleic acid amplification testing or specialised culture of genital or urine specimens, with species differentiation where available, Concurrent nucleic acid amplification testing for chlamydia and gonorrhoea to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Do not test or treat asymptomatic urogenital carriage, which usually represents commensal colonisation rather than disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating an asymptomatic positive result and mistaking commensal colonisation for disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ureaplasma urealyticum infection."
-  }
- ],
- "tables": [
-  {
-   "id": "ureaplasma_infection-matrix",
-   "title": "Ureaplasma urealyticum infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Ureaplasma urealyticum is a cell-wall-deficient mollicute that colonises the lower genital tract of many sexually active adults,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Genitourinary Medicine / Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell / BASHH-CDC STI guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Ureaplasma urealyticum is a cell-wall-deficient mollicute that colonises the lower genital tract of many sexually active adults, so its detection often reflects commensal carriage rather than disease",
+      "Its pathogenic role is debated; unlike Mycoplasma genitalium it is not consistently proven to cause urethritis, and routine testing or treatment of asymptomatic carriers is generally not advised",
+      "Ureaplasma urealyticum (as distinct from the usually commensal Ureaplasma parvum) has been implicated in some cases of non-chlamydial non-gonococcal urethritis",
+      "In pregnancy, ureaplasmas are associated with chorioamnionitis, preterm birth, and low birth weight, and they can be transmitted vertically to the neonate",
+      "In preterm and very-low-birth-weight infants, respiratory tract colonisation has been linked to neonatal pneumonia and to the development of bronchopulmonary dysplasia",
+      "Because it lacks a cell wall, it is invisible on Gram stain and inherently resistant to beta-lactams; diagnosis uses culture on specialised media or nucleic acid amplification testing",
+      "When treatment is genuinely indicated, macrolides such as azithromycin or a tetracycline such as doxycycline are typically used, though tetracycline resistance occurs",
+      "Interpreting a positive result requires clinical correlation, since a detection alone does not establish causation"
     ],
-    [
-     "Key Investigations",
-     "Nucleic acid amplification testing or specialised culture of genital or urine specimens, with species differentiation where",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ureaplasma species are among the smallest free-living bacteria and, like other mollicutes, lack a cell wall; they are named for their capacity to hydrolyse urea as an energy source. They frequently colonise the urogenital mucosa as commensals, and the balance between harmless carriage and disease appears to depend on host factors, bacterial load, species and serovar, and the presence of co-pathogens. When pathogenic, urease-driven ammonia production and a local inflammatory response are thought to contribute to mucosal injury, and the same mechanisms are implicated in intra-amniotic infection when the organism ascends in pregnancy, provoking chorioamnionitis and inflammation that may precipitate preterm labour and injure the developing fetal lung. Neonatal colonisation, particularly in preterm infants, can be followed by respiratory disease and chronic lung injury.",
+    "additionalDifferentials": [
+      "Chlamydia trachomatis infection",
+      "Neisseria gonorrhoeae infection",
+      "Mycoplasma genitalium infection",
+      "Trichomonas vaginalis infection",
+      "Bacterial vaginosis",
+      "Urinary tract infection",
+      "Non-infective urethritis"
     ],
-    [
-     "Primary Differentials",
-     "Chlamydia trachomatis infection, Neisseria gonorrhoeae infection, Mycoplasma genitalium infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nucleic acid amplification testing or specialised culture of genital or urine specimens, with species differentiation where available",
+      "Concurrent nucleic acid amplification testing for chlamydia and gonorrhoea to exclude established pathogens",
+      "Microscopy of genital smears to document urethritis or cervicitis",
+      "Testing for Mycoplasma genitalium and Trichomonas vaginalis in persistent urethritis",
+      "In relevant pregnancy or neonatal settings, placental histology or neonatal respiratory sampling as clinically indicated",
+      "Screening for other sexually transmitted infections when a sexually acquired cause is suspected"
     ],
-    [
-     "Management Strategy",
-     "Do not test or treat asymptomatic urogenital carriage, which usually represents commensal colonisation rather than disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Preterm labour, prelabour rupture of membranes, or clinical chorioamnionitis in pregnancy",
+      "Respiratory deterioration in a colonised preterm neonate suggesting pneumonia or evolving chronic lung disease",
+      "Persistent symptomatic urethritis despite treatment for established pathogens",
+      "Systemic or invasive infection in an immunocompromised host"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating an asymptomatic positive result and mistaking commensal colonisation for disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "In most immunocompetent adults ureaplasma carriage is benign and needs no treatment; when genuine infection is treated the outlook is generally good, whereas perinatal infection carries a less favourable outlook because of its associations with preterm birth and neonatal respiratory morbidity.",
+    "pitfalls": [
+      "Treating an asymptomatic positive result and mistaking commensal colonisation for disease",
+      "Failing to exclude established pathogens such as chlamydia, gonorrhoea, and Mycoplasma genitalium before attributing symptoms to ureaplasma",
+      "Prescribing a beta-lactam, which is ineffective against a cell-wall-deficient organism",
+      "Overlooking the perinatal implications of ureaplasma in pregnant and preterm-neonatal populations"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "BASHH UK guidance on non-gonococcal urethritis and genital mollicutes",
+      "CDC Sexually Transmitted Infections Treatment Guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Do not test or treat asymptomatic urogenital carriage, which usually represents commensal colonisation rather than disease",
+      "Treat genuine symptomatic infection with a macrolide (azithromycin) or a tetracycline (doxycycline), reserving fluoroquinolones for treatment failure",
+      "Avoid beta-lactams, which are inherently ineffective because the organism lacks a cell wall",
+      "Test for and treat co-existing established pathogens (Chlamydia trachomatis, Neisseria gonorrhoeae and Mycoplasma genitalium) in non-gonococcal urethritis",
+      "Arrange partner notification, contact treatment and a full sexually transmitted infection screen when infection is sexually acquired",
+      "In pregnancy manage chorioamnionitis and preterm-labour risk, and treat colonised preterm or very-low-birth-weight neonates with pneumonia or evolving bronchopulmonary dysplasia using a macrolide, with obstetric and neonatal specialist input"
     ]
-   ],
-   "caption": "Overview comparison matrix for ureaplasma urealyticum infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ureaplasma-infection-real-image",
-   "title": "Ureaplasma urealyticum infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "ureaplasma_infection-pathway",
+      "title": "Ureaplasma urealyticum infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Ureaplasma urealyticum is a cell-wall-deficient mollicute that colonises the lower genital tract of many sexually active adults, so its detection often reflects commensal carriage rather than disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Preterm labour, prelabour rupture of membranes, or clinical chorioamnionitis in pregnancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nucleic acid amplification testing or specialised culture of genital or urine specimens, with species differentiation where available, Concurrent nucleic acid amplification testing for chlamydia and gonorrhoea to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Do not test or treat asymptomatic urogenital carriage, which usually represents commensal colonisation rather than disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating an asymptomatic positive result and mistaking commensal colonisation for disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ureaplasma urealyticum infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ureaplasma_infection-matrix",
+      "title": "Ureaplasma urealyticum infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Ureaplasma urealyticum is a cell-wall-deficient mollicute that colonises the lower genital tract of many sexually active adults,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nucleic acid amplification testing or specialised culture of genital or urine specimens, with species differentiation where",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chlamydia trachomatis infection, Neisseria gonorrhoeae infection, Mycoplasma genitalium infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Do not test or treat asymptomatic urogenital carriage, which usually represents commensal colonisation rather than disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating an asymptomatic positive result and mistaking commensal colonisation for disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ureaplasma urealyticum infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell / BASHH-CDC STI guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ureaplasma_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NAAT or specialised culture of genital or urine specimens",
+          "cells": [
+            {
+              "text": "Species differentiation of Ureaplasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NAAT for chlamydia and gonorrhoea",
+          "cells": [
+            {
+              "text": "Excludes established pathogens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopy of genital smears",
+          "cells": [
+            {
+              "text": "Urethritis or cervicitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycoplasma genitalium and Trichomonas testing",
+          "cells": [
+            {
+              "text": "Tested for in persistent urethritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ureaplasma_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chlamydia trachomatis",
+          "cells": [
+            {
+              "text": "Excluded by NAAT before attributing urethritis to Ureaplasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycoplasma genitalium",
+          "cells": [
+            {
+              "text": "Tested for in persistent urethritis; not treated with beta-lactams"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichomonas vaginalis",
+          "cells": [
+            {
+              "text": "Tested for in persistent urethritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ureaplasma_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No testing or treatment of asymptomatic carriage",
+          "cells": [
+            {
+              "text": "Usually commensal colonisation rather than disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrolide or tetracycline",
+          "cells": [
+            {
+              "text": "Azithromycin or doxycycline for genuine symptomatic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid beta-lactams",
+          "cells": [
+            {
+              "text": "Ineffective because the organism lacks a cell wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat co-existing pathogens",
+          "cells": [
+            {
+              "text": "Chlamydia, gonorrhoea and Mycoplasma genitalium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partner management",
+          "cells": [
+            {
+              "text": "Partner notification, contact treatment and full STI screen when sexually acquired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy and neonates",
+          "cells": [
+            {
+              "text": "Chorioamnionitis and preterm-labour risk; treat colonised preterm or very-low-birth-weight neonates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ureaplasma_infection-dx-mgmt",
+      "title": "Diagnosis and management of Ureaplasma urealyticum infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Ureaplasma infection: symptomatic urethritis or cervicitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (preterm labour, chorioamnionitis or neonatal respiratory decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric or neonatal management of chorioamnionitis or pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Species-level NAAT or culture, chlamydia and gonorrhoea NAAT, microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are chlamydia, gonorrhoea and Mycoplasma genitalium excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the established pathogen found; do not treat asymptomatic carriage",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Azithromycin or doxycycline for symptomatic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid beta-lactams, which are ineffective without a cell wall",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Partner notification, contact treatment and full STI screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage chorioamnionitis or treat colonised preterm neonates as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Colonisation is common; treat genuine symptomatic infection and co-pathogens only",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,444 @@
 {
- "id": "aarskog_syndrome",
- "name": "Aarskog-Scott syndrome (FGD1)",
- "aliases": [
-  "FGD1",
-  "Aarskog syndrome",
-  "faciogenital dysplasia",
-  "Aarskog-Scott"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Clinical Genetics / Neurodevelopmental",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked disorder chiefly of males combining short stature with characteristic facial, limb and genital features",
-   "Facial features include hypertelorism, a broad forehead, a short nose with anteverted nares, and a widow's peak",
-   "The genital hallmark is a shawl scrotum, in which scrotal folds surround the base of the penis",
-   "Hand findings include short broad hands with brachydactyly, clinodactyly and characteristic interdigital webbing",
-   "Intellectual ability is often normal or only mildly affected, distinguishing it from many other X-linked syndromes",
-   "Caused by variants in FGD1, encoding a guanine-nucleotide exchange factor that activates the Rho-family GTPase Cdc42",
-   "Carrier females may show subtle features such as mild hypertelorism"
+  "id": "aarskog_syndrome",
+  "name": "Aarskog-Scott syndrome (FGD1)",
+  "aliases": [
+    "FGD1",
+    "Aarskog syndrome",
+    "faciogenital dysplasia",
+    "Aarskog-Scott"
   ],
-  "pathophysiology": "FGD1 encodes a guanine-nucleotide exchange factor that specifically activates the Rho-family small GTPase Cdc42, a key regulator of the actin cytoskeleton, cell shape and signalling during skeletal and craniofacial development. Loss-of-function variants impair Cdc42 activation, disturbing the cytoskeletal and signalling processes that guide bone growth and morphogenesis, producing the short stature and the facial, limb and genital anomalies. As an X-linked gene, males are predominantly affected while carrier females may show only mild features. Cognition is frequently spared because the developmental effect is weighted toward skeletal and connective-tissue patterning.",
-  "additionalDifferentials": [
-   "Noonan syndrome",
-   "Robinow syndrome",
-   "Pseudohypoparathyroidism (Albright hereditary osteodystrophy)",
-   "SHOX-related short stature",
-   "Teebi hypertelorism syndrome",
-   "Other short-stature syndromes with hypertelorism"
-  ],
-  "additionalInvestigations": [
-   "Growth assessment and, where indicated, evaluation of the growth axis",
-   "Skeletal and hand imaging for brachydactyly and vertebral anomalies",
-   "Ophthalmological review for associated eye findings",
-   "Developmental assessment when concerns arise",
-   "Targeted FGD1 sequencing or a gene panel or exome sequencing"
-  ],
-  "redFlags": [
-   "Cervical spine instability (odontoid anomaly) posing a risk during anaesthesia or trauma",
-   "Cryptorchidism requiring surgical assessment",
-   "Significant learning or behavioural difficulty",
-   "Visual impairment from ophthalmic complications"
-  ],
-  "prognosis": "Most individuals have a good outlook with generally normal or near-normal intellect and manageable skeletal and genital features; short stature persists but adult function is usually good. Care focuses on growth, orthopaedic and genital issues.",
-  "pitfalls": [
-   "Confusing the phenotype with Noonan syndrome and missing FGD1 testing",
-   "Overlooking possible cervical spine instability before anaesthesia",
-   "Assuming intellectual disability is invariable and mislabelling the child",
-   "Missing subtle features in carrier females"
-  ],
-  "references": [
-   "GeneReviews: Aarskog-Scott Syndrome",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Monitor growth longitudinally and evaluate the growth-hormone axis where short stature is marked, referring to paediatric endocrinology as indicated",
-   "Provide orthopaedic assessment and management of skeletal anomalies including brachydactyly, joint laxity and cervical-spine or vertebral anomalies",
-   "Arrange surgical correction of genital and inguinal anomalies such as cryptorchidism and inguinal hernia, with dental and orthodontic care for malocclusion",
-   "Undertake ophthalmological review for associated ocular features such as hypertelorism, strabismus and refractive error",
-   "Offer developmental and educational support where any learning or attention difficulty is identified, though intellect is usually normal",
-   "Provide genetic counselling for this X-linked FGD1 condition, including carrier assessment of the mother and family",
-   "Coordinate long-term care through clinical genetics and paediatric multidisciplinary services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aarskog_syndrome-pathway",
-   "title": "Aarskog-Scott syndrome (FGD1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked disorder chiefly of males combining short stature with characteristic facial, limb and genital features",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cervical spine instability (odontoid anomaly) posing a risk during anaesthesia or trauma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Growth assessment and, where indicated, evaluation of the growth axis, Skeletal and hand imaging for brachydactyly and vertebral anomalies, Ophthalmological review for associated eye findings"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Monitor growth longitudinally and evaluate the growth-hormone axis where short stature is marked, referring to paediatric endocrinology as indicated"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the phenotype with Noonan syndrome and missing FGD1 testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aarskog-scott syndrome (fgd1)."
-  }
- ],
- "tables": [
-  {
-   "id": "aarskog_syndrome-matrix",
-   "title": "Aarskog-Scott syndrome (FGD1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked disorder chiefly of males combining short stature with characteristic facial, limb and genital features",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Clinical Genetics / Neurodevelopmental",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked disorder chiefly of males combining short stature with characteristic facial, limb and genital features",
+      "Facial features include hypertelorism, a broad forehead, a short nose with anteverted nares, and a widow's peak",
+      "The genital hallmark is a shawl scrotum, in which scrotal folds surround the base of the penis",
+      "Hand findings include short broad hands with brachydactyly, clinodactyly and characteristic interdigital webbing",
+      "Intellectual ability is often normal or only mildly affected, distinguishing it from many other X-linked syndromes",
+      "Caused by variants in FGD1, encoding a guanine-nucleotide exchange factor that activates the Rho-family GTPase Cdc42",
+      "Carrier females may show subtle features such as mild hypertelorism"
     ],
-    [
-     "Key Investigations",
-     "Growth assessment and, where indicated, evaluation of the growth axis, Skeletal and hand imaging for brachydactyly and vertebral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "FGD1 encodes a guanine-nucleotide exchange factor that specifically activates the Rho-family small GTPase Cdc42, a key regulator of the actin cytoskeleton, cell shape and signalling during skeletal and craniofacial development. Loss-of-function variants impair Cdc42 activation, disturbing the cytoskeletal and signalling processes that guide bone growth and morphogenesis, producing the short stature and the facial, limb and genital anomalies. As an X-linked gene, males are predominantly affected while carrier females may show only mild features. Cognition is frequently spared because the developmental effect is weighted toward skeletal and connective-tissue patterning.",
+    "additionalDifferentials": [
+      "Noonan syndrome",
+      "Robinow syndrome",
+      "Pseudohypoparathyroidism (Albright hereditary osteodystrophy)",
+      "SHOX-related short stature",
+      "Teebi hypertelorism syndrome",
+      "Other short-stature syndromes with hypertelorism"
     ],
-    [
-     "Primary Differentials",
-     "Noonan syndrome, Robinow syndrome, Pseudohypoparathyroidism (Albright hereditary osteodystrophy)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Growth assessment and, where indicated, evaluation of the growth axis",
+      "Skeletal and hand imaging for brachydactyly and vertebral anomalies",
+      "Ophthalmological review for associated eye findings",
+      "Developmental assessment when concerns arise",
+      "Targeted FGD1 sequencing or a gene panel or exome sequencing"
     ],
-    [
-     "Management Strategy",
-     "Monitor growth longitudinally and evaluate the growth-hormone axis where short stature is marked, referring to paediatric",
-     "Core treatment modality"
+    "redFlags": [
+      "Cervical spine instability (odontoid anomaly) posing a risk during anaesthesia or trauma",
+      "Cryptorchidism requiring surgical assessment",
+      "Significant learning or behavioural difficulty",
+      "Visual impairment from ophthalmic complications"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the phenotype with Noonan syndrome and missing FGD1 testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most individuals have a good outlook with generally normal or near-normal intellect and manageable skeletal and genital features; short stature persists but adult function is usually good. Care focuses on growth, orthopaedic and genital issues.",
+    "pitfalls": [
+      "Confusing the phenotype with Noonan syndrome and missing FGD1 testing",
+      "Overlooking possible cervical spine instability before anaesthesia",
+      "Assuming intellectual disability is invariable and mislabelling the child",
+      "Missing subtle features in carrier females"
+    ],
+    "references": [
+      "GeneReviews: Aarskog-Scott Syndrome",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Monitor growth longitudinally and evaluate the growth-hormone axis where short stature is marked, referring to paediatric endocrinology as indicated",
+      "Provide orthopaedic assessment and management of skeletal anomalies including brachydactyly, joint laxity and cervical-spine or vertebral anomalies",
+      "Arrange surgical correction of genital and inguinal anomalies such as cryptorchidism and inguinal hernia, with dental and orthodontic care for malocclusion",
+      "Undertake ophthalmological review for associated ocular features such as hypertelorism, strabismus and refractive error",
+      "Offer developmental and educational support where any learning or attention difficulty is identified, though intellect is usually normal",
+      "Provide genetic counselling for this X-linked FGD1 condition, including carrier assessment of the mother and family",
+      "Coordinate long-term care through clinical genetics and paediatric multidisciplinary services"
     ]
-   ],
-   "caption": "Overview comparison matrix for aarskog-scott syndrome (fgd1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aarskog-syndrome-real-image",
-   "title": "Aarskog-Scott syndrome (FGD1): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "aarskog_syndrome-pathway",
+      "title": "Aarskog-Scott syndrome (FGD1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked disorder chiefly of males combining short stature with characteristic facial, limb and genital features",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cervical spine instability (odontoid anomaly) posing a risk during anaesthesia or trauma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Growth assessment and, where indicated, evaluation of the growth axis, Skeletal and hand imaging for brachydactyly and vertebral anomalies, Ophthalmological review for associated eye findings"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Monitor growth longitudinally and evaluate the growth-hormone axis where short stature is marked, referring to paediatric endocrinology as indicated"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the phenotype with Noonan syndrome and missing FGD1 testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aarskog-scott syndrome (fgd1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aarskog_syndrome-matrix",
+      "title": "Aarskog-Scott syndrome (FGD1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked disorder chiefly of males combining short stature with characteristic facial, limb and genital features",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Growth assessment and, where indicated, evaluation of the growth axis, Skeletal and hand imaging for brachydactyly and vertebral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Noonan syndrome, Robinow syndrome, Pseudohypoparathyroidism (Albright hereditary osteodystrophy)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Monitor growth longitudinally and evaluate the growth-hormone axis where short stature is marked, referring to paediatric",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the phenotype with Noonan syndrome and missing FGD1 testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aarskog-scott syndrome (fgd1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aarskog_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Growth assessment and growth axis evaluation",
+          "cells": [
+            {
+              "text": "Short stature where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and hand imaging",
+          "cells": [
+            {
+              "text": "Brachydactyly and vertebral anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Associated eye findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Learning or attention concerns when they arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FGD1 sequencing, gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "FGD1 variants, the cause of the disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aarskog_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Longitudinal growth monitoring",
+          "cells": [
+            {
+              "text": "Marked short stature"
+            },
+            {
+              "text": "Growth-hormone axis evaluation; paediatric endocrinology as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic assessment of skeletal anomalies",
+          "cells": [
+            {
+              "text": "Brachydactyly, joint laxity, cervical spine or vertebral anomalies"
+            },
+            {
+              "text": "Cervical-spine instability is a risk in anaesthesia or trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical correction of genital and inguinal anomalies",
+          "cells": [
+            {
+              "text": "Cryptorchidism and inguinal hernia"
+            },
+            {
+              "text": "Dental and orthodontic care for malocclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Hypertelorism, strabismus and refractive error"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and educational support",
+          "cells": [
+            {
+              "text": "Learning or attention difficulty"
+            },
+            {
+              "text": "Intellect is usually normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked FGD1 condition"
+            },
+            {
+              "text": "Carrier assessment of the mother and family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary genetics and paediatric care",
+          "cells": [
+            {
+              "text": "Long-term coordination"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aarskog_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Aarskog-Scott syndrome (FGD1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "X-linked male short stature with hypertelorism, shawl scrotum or brachydactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cervical spine instability (odontoid anomaly) or cryptorchidism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Spinal precautions for anaesthesia; surgical assessment of cryptorchidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Growth assessment, skeletal and hand imaging, ophthalmology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FGD1 variant found on sequencing or exome testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Genetic counselling, including carrier testing of the mother",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review Noonan, Robinow and SHOX-related short stature",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Longitudinal growth monitoring; growth-hormone axis if short stature is marked",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic review of brachydactyly, joint laxity and spine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for cryptorchidism or inguinal hernia; ophthalmic and dental care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually normal intellect and good adult function; short stature persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

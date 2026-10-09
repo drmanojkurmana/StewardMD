@@ -1,174 +1,463 @@
 {
- "id": "pneumoconiosis",
- "name": "Pneumoconiosis",
- "aliases": [
-  "occupational lung disease",
-  "coal workers' pneumoconiosis",
-  "CWP",
-  "dust lung disease"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Pulmonology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of parenchymal lung diseases caused by chronic inhalation of inorganic mineral dusts, most often occupational (coal, silica, asbestos, beryllium)",
-   "A detailed occupational and exposure history, including duration and intensity of dust contact and latency, is essential to diagnosis",
-   "Many patients are asymptomatic early, with disease detected on surveillance chest imaging before dyspnoea and cough develop",
-   "Chest radiography and CT typically show small rounded or irregular opacities, with characteristic patterns and distributions depending on the causative dust",
-   "Coal workers' pneumoconiosis ranges from simple disease with small nodules to progressive massive fibrosis with large conglomerate masses",
-   "There is no specific treatment to reverse the fibrosis; management centres on removal from exposure, supportive care, and prevention of complications",
-   "Asbestos exposure additionally raises the risk of pleural plaques, mesothelioma, and bronchogenic carcinoma, warranting long-term vigilance",
-   "Prevention through dust control, respiratory protection, and workplace exposure limits is the most effective strategy"
+  "id": "pneumoconiosis",
+  "name": "Pneumoconiosis",
+  "aliases": [
+    "occupational lung disease",
+    "coal workers' pneumoconiosis",
+    "CWP",
+    "dust lung disease"
   ],
-  "pathophysiology": "Inhaled mineral dust particles that reach the distal airways and alveoli are engulfed by alveolar macrophages. Depending on particle size, surface reactivity, and burden, the macrophages are activated or killed, releasing inflammatory mediators, cytokines, and reactive oxygen species. Sustained exposure drives chronic inflammation and fibroblast activation, leading to collagen deposition, nodule formation, and, in advanced disease, coalescence into large fibrotic masses that distort lung architecture and impair gas exchange. The specific pattern reflects the fibrogenic potential of the particular dust.",
-  "additionalDifferentials": [
-   "Idiopathic pulmonary fibrosis and other interstitial lung diseases",
-   "Sarcoidosis",
-   "Pulmonary tuberculosis (which may also complicate pneumoconiosis)",
-   "Metastatic or miliary pulmonary nodular disease",
-   "Hypersensitivity pneumonitis",
-   "Pulmonary manifestations of connective tissue disease"
-  ],
-  "additionalInvestigations": [
-   "Chest radiography, ideally read against standardised classification of pneumoconiosis opacities",
-   "High-resolution CT to characterise nodularity, fibrosis, and pleural disease",
-   "Pulmonary function testing to quantify restrictive, obstructive, or mixed impairment and gas transfer",
-   "Detailed occupational and environmental exposure documentation",
-   "Screening for complicating tuberculosis or, with asbestos, for malignancy where clinically indicated"
-  ],
-  "redFlags": [
-   "Rapidly enlarging masses or new nodules suggesting progressive massive fibrosis or malignancy",
-   "Constitutional symptoms or haemoptysis raising concern for tuberculosis or cancer",
-   "Rapid decline in lung function or new hypoxaemia",
-   "Pleural effusion or thickening in an asbestos-exposed patient suggesting mesothelioma"
-  ],
-  "prognosis": "Simple pneumoconiosis may remain stable and cause little functional impairment, whereas progressive massive fibrosis and asbestos-related disease can lead to progressive respiratory failure; asbestos exposure carries a long-term risk of mesothelioma and lung cancer, and outcomes improve when further exposure is halted early.",
-  "pitfalls": [
-   "Failing to take an adequate occupational history and therefore missing the diagnosis",
-   "Attributing all radiographic change to dust without excluding superimposed tuberculosis or malignancy",
-   "Assuming a short exposure excludes disease, given the often long latency",
-   "Overlooking the need to remove the worker from ongoing exposure"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "GOLD/ATS guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Remove the patient from further dust exposure, the single most important intervention, with workplace dust control and respiratory protection",
-   "Smoking cessation support given the amplified risk of functional impairment and malignancy",
-   "Supportive care with bronchodilators for coexisting airflow obstruction, pulmonary rehabilitation and long-term oxygen for chronic respiratory failure",
-   "Influenza and pneumococcal vaccination and prompt treatment of respiratory infections",
-   "Surveillance for and treatment of complicating tuberculosis, and vigilance for mesothelioma and lung cancer in asbestos-exposed patients",
-   "Serial chest imaging and pulmonary function testing to monitor progression",
-   "Occupational health involvement with compensation advice, and consideration of lung transplantation in end-stage disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pneumoconiosis-pathway",
-   "title": "Pneumoconiosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of parenchymal lung diseases caused by chronic inhalation of inorganic mineral dusts, most often occupational (coal, silica, asbestos, beryllium)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging masses or new nodules suggesting progressive massive fibrosis or malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiography, ideally read against standardised classification of pneumoconiosis opacities, High-resolution CT to characterise nodularity, fibrosis, and pleural disease, Pulmonary function testing to quantify"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Remove the patient from further dust exposure, the single most important intervention, with workplace dust control and respiratory protection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to take an adequate occupational history and therefore missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pneumoconiosis."
-  }
- ],
- "tables": [
-  {
-   "id": "pneumoconiosis-matrix",
-   "title": "Pneumoconiosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of parenchymal lung diseases caused by chronic inhalation of inorganic mineral dusts, most often occupational (coal,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Pulmonology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of parenchymal lung diseases caused by chronic inhalation of inorganic mineral dusts, most often occupational (coal, silica, asbestos, beryllium)",
+      "A detailed occupational and exposure history, including duration and intensity of dust contact and latency, is essential to diagnosis",
+      "Many patients are asymptomatic early, with disease detected on surveillance chest imaging before dyspnoea and cough develop",
+      "Chest radiography and CT typically show small rounded or irregular opacities, with characteristic patterns and distributions depending on the causative dust",
+      "Coal workers' pneumoconiosis ranges from simple disease with small nodules to progressive massive fibrosis with large conglomerate masses",
+      "There is no specific treatment to reverse the fibrosis; management centres on removal from exposure, supportive care, and prevention of complications",
+      "Asbestos exposure additionally raises the risk of pleural plaques, mesothelioma, and bronchogenic carcinoma, warranting long-term vigilance",
+      "Prevention through dust control, respiratory protection, and workplace exposure limits is the most effective strategy"
     ],
-    [
-     "Key Investigations",
-     "Chest radiography, ideally read against standardised classification of pneumoconiosis opacities, High-resolution CT to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Inhaled mineral dust particles that reach the distal airways and alveoli are engulfed by alveolar macrophages. Depending on particle size, surface reactivity, and burden, the macrophages are activated or killed, releasing inflammatory mediators, cytokines, and reactive oxygen species. Sustained exposure drives chronic inflammation and fibroblast activation, leading to collagen deposition, nodule formation, and, in advanced disease, coalescence into large fibrotic masses that distort lung architecture and impair gas exchange. The specific pattern reflects the fibrogenic potential of the particular dust.",
+    "additionalDifferentials": [
+      "Idiopathic pulmonary fibrosis and other interstitial lung diseases",
+      "Sarcoidosis",
+      "Pulmonary tuberculosis (which may also complicate pneumoconiosis)",
+      "Metastatic or miliary pulmonary nodular disease",
+      "Hypersensitivity pneumonitis",
+      "Pulmonary manifestations of connective tissue disease"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic pulmonary fibrosis and other interstitial lung diseases, Sarcoidosis, Pulmonary tuberculosis (which may also",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiography, ideally read against standardised classification of pneumoconiosis opacities",
+      "High-resolution CT to characterise nodularity, fibrosis, and pleural disease",
+      "Pulmonary function testing to quantify restrictive, obstructive, or mixed impairment and gas transfer",
+      "Detailed occupational and environmental exposure documentation",
+      "Screening for complicating tuberculosis or, with asbestos, for malignancy where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Remove the patient from further dust exposure, the single most important intervention, with workplace dust control and",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging masses or new nodules suggesting progressive massive fibrosis or malignancy",
+      "Constitutional symptoms or haemoptysis raising concern for tuberculosis or cancer",
+      "Rapid decline in lung function or new hypoxaemia",
+      "Pleural effusion or thickening in an asbestos-exposed patient suggesting mesothelioma"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to take an adequate occupational history and therefore missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Simple pneumoconiosis may remain stable and cause little functional impairment, whereas progressive massive fibrosis and asbestos-related disease can lead to progressive respiratory failure; asbestos exposure carries a long-term risk of mesothelioma and lung cancer, and outcomes improve when further exposure is halted early.",
+    "pitfalls": [
+      "Failing to take an adequate occupational history and therefore missing the diagnosis",
+      "Attributing all radiographic change to dust without excluding superimposed tuberculosis or malignancy",
+      "Assuming a short exposure excludes disease, given the often long latency",
+      "Overlooking the need to remove the worker from ongoing exposure"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "GOLD/ATS guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Remove the patient from further dust exposure, the single most important intervention, with workplace dust control and respiratory protection",
+      "Smoking cessation support given the amplified risk of functional impairment and malignancy",
+      "Supportive care with bronchodilators for coexisting airflow obstruction, pulmonary rehabilitation and long-term oxygen for chronic respiratory failure",
+      "Influenza and pneumococcal vaccination and prompt treatment of respiratory infections",
+      "Surveillance for and treatment of complicating tuberculosis, and vigilance for mesothelioma and lung cancer in asbestos-exposed patients",
+      "Serial chest imaging and pulmonary function testing to monitor progression",
+      "Occupational health involvement with compensation advice, and consideration of lung transplantation in end-stage disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for pneumoconiosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pneumoconiosis-real-image",
-   "title": "Pneumoconiosis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pneumoconiosis-pathway",
+      "title": "Pneumoconiosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of parenchymal lung diseases caused by chronic inhalation of inorganic mineral dusts, most often occupational (coal, silica, asbestos, beryllium)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging masses or new nodules suggesting progressive massive fibrosis or malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiography, ideally read against standardised classification of pneumoconiosis opacities, High-resolution CT to characterise nodularity, fibrosis, and pleural disease, Pulmonary function testing to quantify"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Remove the patient from further dust exposure, the single most important intervention, with workplace dust control and respiratory protection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to take an adequate occupational history and therefore missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pneumoconiosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pneumoconiosis-matrix",
+      "title": "Pneumoconiosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of parenchymal lung diseases caused by chronic inhalation of inorganic mineral dusts, most often occupational (coal,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiography, ideally read against standardised classification of pneumoconiosis opacities, High-resolution CT to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic pulmonary fibrosis and other interstitial lung diseases, Sarcoidosis, Pulmonary tuberculosis (which may also",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Remove the patient from further dust exposure, the single most important intervention, with workplace dust control and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to take an adequate occupational history and therefore missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pneumoconiosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pneumoconiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Pneumoconiosis opacities against a standardised classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HRCT",
+          "cells": [
+            {
+              "text": "Nodularity, fibrosis and pleural disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Restrictive, obstructive or mixed impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and environmental exposure history",
+          "cells": [
+            {
+              "text": "Exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for tuberculosis or malignancy",
+          "cells": [
+            {
+              "text": "Complicating TB; malignancy with asbestos"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumoconiosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Constitutional symptoms or haemoptysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant mesothelioma",
+          "cells": [
+            {
+              "text": "Pleural effusion or thickening in an asbestos-exposed patient"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumoconiosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exposure removal",
+          "cells": [
+            {
+              "text": "Removal from further dust exposure, the most important intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Reduces functional impairment and malignancy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchodilators",
+          "cells": [
+            {
+              "text": "For coexisting airflow obstruction; pulmonary rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination",
+          "cells": [
+            {
+              "text": "Influenza and pneumococcal; prompt treatment of infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis and mesothelioma",
+          "cells": [
+            {
+              "text": "Surveillance and treatment of complicating tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Chest imaging and lung function for progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health",
+          "cells": [
+            {
+              "text": "Compensation advice and consideration of lung transplantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pneumoconiosis-dx-mgmt",
+      "title": "Diagnosis and management of Pneumoconiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Occupational dust exposure with nodular opacities on chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (enlarging masses, constitutional symptoms, haemoptysis, lung function decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory review for suspected tuberculosis or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph with classification; HRCT; lung function; exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show pneumoconiosis with no tuberculosis or malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider IPF, sarcoidosis, tuberculosis, hypersensitivity pneumonitis or CTD-ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove the patient from further dust exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Smoking cessation support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bronchodilators and pulmonary rehabilitation for airflow obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Influenza and pneumococcal vaccination and prompt treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial chest imaging and lung function to monitor progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Simple pneumoconiosis may stay stable; progressive massive fibrosis impairs more",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

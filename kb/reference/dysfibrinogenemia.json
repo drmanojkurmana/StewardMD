@@ -1,174 +1,472 @@
 {
- "id": "dysfibrinogenemia",
- "name": "Dysfibrinogenaemia",
- "aliases": [
-  "congenital dysfibrinogenaemia",
-  "acquired dysfibrinogenaemia",
-  "FGA/FGB/FGG variants",
-  "qualitative fibrinogen disorder"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A qualitative fibrinogen defect in which a structurally abnormal molecule is produced, so functional fibrinogen is low while immunological (antigen) levels are near normal",
-   "The clinical picture is heterogeneous: many carriers are asymptomatic, some bleed, and a notable minority have a paradoxical tendency to thrombosis",
-   "The hallmark laboratory pattern is a discrepancy between a reduced Clauss (functional) fibrinogen and a normal or near-normal antigen level",
-   "Prolonged thrombin time and reptilase time are characteristic, reflecting defective fibrin polymerisation",
-   "Congenital forms arise from variants in the fibrinogen genes (FGA, FGB, FGG); acquired forms occur with liver disease and some malignancies",
-   "Certain variants are strongly linked to venous thrombosis, so a bleeding-only mindset can be misleading",
-   "Management is guided by the individual and family phenotype, using fibrinogen replacement for bleeding and anticoagulation for thrombotic presentations rather than a fixed protocol"
+  "id": "dysfibrinogenemia",
+  "name": "Dysfibrinogenaemia",
+  "aliases": [
+    "congenital dysfibrinogenaemia",
+    "acquired dysfibrinogenaemia",
+    "FGA/FGB/FGG variants",
+    "qualitative fibrinogen disorder"
   ],
-  "pathophysiology": "Dysfibrinogenaemia results from an amino-acid substitution or other structural abnormality in one of the fibrinogen chains, yielding a molecule that is synthesised and secreted but functions abnormally. Depending on the site of the defect, fibrin monomer polymerisation, fibrinopeptide release, cross-linking, or interaction with thrombin and plasmin is impaired. Some variants produce a fibrin clot that resists fibrinolysis or fails to bind thrombin normally, explaining the paradoxical thrombotic phenotype, while others yield a friable clot that bleeds. Acquired dysfibrinogenaemia typically reflects abnormal glycosylation of fibrinogen in hepatic disease.",
-  "additionalDifferentials": [
-   "Afibrinogenaemia and hypofibrinogenaemia (quantitative fibrinogen defects)",
-   "Liver disease causing acquired fibrinogen dysfunction",
-   "Disseminated intravascular coagulation",
-   "Direct thrombin inhibitor or heparin effect prolonging the thrombin time",
-   "Other inherited thrombophilias when thrombosis predominates",
-   "Factor XIII deficiency when clot instability is prominent"
-  ],
-  "additionalInvestigations": [
-   "Clauss functional fibrinogen assay compared with fibrinogen antigen to demonstrate a functional-to-antigen discrepancy",
-   "Thrombin time and reptilase time to detect impaired fibrin polymerisation",
-   "Prothrombin time and activated partial thromboplastin time as screening tests",
-   "Fibrinogen gene sequencing (FGA, FGB, FGG) to confirm a congenital variant",
-   "Liver function tests to identify an acquired hepatic cause",
-   "Thrombophilia workup and imaging when a thrombotic event has occurred"
-  ],
-  "redFlags": [
-   "Unexplained venous or arterial thrombosis in a patient labelled as having a bleeding disorder",
-   "Severe or postoperative bleeding out of proportion to the platelet count",
-   "Pregnancy loss or thrombotic complications during pregnancy",
-   "Rapidly falling fibrinogen suggesting acquired consumption or hepatic decompensation"
-  ],
-  "prognosis": "Outlook is variable and phenotype-dependent; many individuals live normally, whereas those with bleeding-prone or thrombosis-prone variants face event-related morbidity. Recognising the specific familial phenotype allows tailored prophylaxis and generally favourable long-term outcomes.",
-  "pitfalls": [
-   "Assuming a low fibrinogen means bleeding risk when the variant is actually prothrombotic",
-   "Measuring only antigen and missing the functional deficit",
-   "Overlooking acquired dysfibrinogenaemia in a patient with liver disease",
-   "Failing to relate the laboratory abnormality to the individual and family bleeding or thrombotic history"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Hoffman: Hematology - Basic Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Characterise the familial phenotype (asymptomatic, bleeding-prone or thrombosis-prone) and tailor prophylaxis to it rather than treating all carriers alike",
-   "Treat bleeding episodes and cover surgery or delivery with fibrinogen concentrate (or cryoprecipitate where concentrate is unavailable), guided by functional fibrinogen and clinical response",
-   "Use an antifibrinolytic such as tranexamic acid for mucosal or minor bleeding",
-   "Anticoagulate thrombosis-prone variants presenting with venous thromboembolism, and consider extended anticoagulation given the paradoxical prothrombotic tendency",
-   "In acquired dysfibrinogenaemia, treat the underlying hepatic disease or malignancy driving abnormal fibrinogen glycosylation",
-   "Offer genetic counselling and family testing for congenital FGA, FGB or FGG variants, and educate on signs of both bleeding and thrombosis",
-   "Escalate major bleeding or recurrent thrombosis to a specialist haemostasis centre for individualised management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dysfibrinogenemia-pathway",
-   "title": "Dysfibrinogenaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A qualitative fibrinogen defect in which a structurally abnormal molecule is produced, so functional fibrinogen is low while immunological (antigen) levels are near normal",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unexplained venous or arterial thrombosis in a patient labelled as having a bleeding disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clauss functional fibrinogen assay compared with fibrinogen antigen to demonstrate a functional-to-antigen discrepancy, Thrombin time and reptilase time to detect impaired fibrin polymerisation, Prothrombin time and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Characterise the familial phenotype (asymptomatic, bleeding-prone or thrombosis-prone) and tailor prophylaxis to it rather than treating all carriers alike"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a low fibrinogen means bleeding risk when the variant is actually prothrombotic"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dysfibrinogenaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "dysfibrinogenemia-matrix",
-   "title": "Dysfibrinogenaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A qualitative fibrinogen defect in which a structurally abnormal molecule is produced, so functional fibrinogen is low while",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A qualitative fibrinogen defect in which a structurally abnormal molecule is produced, so functional fibrinogen is low while immunological (antigen) levels are near normal",
+      "The clinical picture is heterogeneous: many carriers are asymptomatic, some bleed, and a notable minority have a paradoxical tendency to thrombosis",
+      "The hallmark laboratory pattern is a discrepancy between a reduced Clauss (functional) fibrinogen and a normal or near-normal antigen level",
+      "Prolonged thrombin time and reptilase time are characteristic, reflecting defective fibrin polymerisation",
+      "Congenital forms arise from variants in the fibrinogen genes (FGA, FGB, FGG); acquired forms occur with liver disease and some malignancies",
+      "Certain variants are strongly linked to venous thrombosis, so a bleeding-only mindset can be misleading",
+      "Management is guided by the individual and family phenotype, using fibrinogen replacement for bleeding and anticoagulation for thrombotic presentations rather than a fixed protocol"
     ],
-    [
-     "Key Investigations",
-     "Clauss functional fibrinogen assay compared with fibrinogen antigen to demonstrate a functional-to-antigen discrepancy, Thrombin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dysfibrinogenaemia results from an amino-acid substitution or other structural abnormality in one of the fibrinogen chains, yielding a molecule that is synthesised and secreted but functions abnormally. Depending on the site of the defect, fibrin monomer polymerisation, fibrinopeptide release, cross-linking, or interaction with thrombin and plasmin is impaired. Some variants produce a fibrin clot that resists fibrinolysis or fails to bind thrombin normally, explaining the paradoxical thrombotic phenotype, while others yield a friable clot that bleeds. Acquired dysfibrinogenaemia typically reflects abnormal glycosylation of fibrinogen in hepatic disease.",
+    "additionalDifferentials": [
+      "Afibrinogenaemia and hypofibrinogenaemia (quantitative fibrinogen defects)",
+      "Liver disease causing acquired fibrinogen dysfunction",
+      "Disseminated intravascular coagulation",
+      "Direct thrombin inhibitor or heparin effect prolonging the thrombin time",
+      "Other inherited thrombophilias when thrombosis predominates",
+      "Factor XIII deficiency when clot instability is prominent"
     ],
-    [
-     "Primary Differentials",
-     "Afibrinogenaemia and hypofibrinogenaemia (quantitative fibrinogen defects), Liver disease causing acquired fibrinogen",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clauss functional fibrinogen assay compared with fibrinogen antigen to demonstrate a functional-to-antigen discrepancy",
+      "Thrombin time and reptilase time to detect impaired fibrin polymerisation",
+      "Prothrombin time and activated partial thromboplastin time as screening tests",
+      "Fibrinogen gene sequencing (FGA, FGB, FGG) to confirm a congenital variant",
+      "Liver function tests to identify an acquired hepatic cause",
+      "Thrombophilia workup and imaging when a thrombotic event has occurred"
     ],
-    [
-     "Management Strategy",
-     "Characterise the familial phenotype (asymptomatic, bleeding-prone or thrombosis-prone) and tailor prophylaxis to it rather than",
-     "Core treatment modality"
+    "redFlags": [
+      "Unexplained venous or arterial thrombosis in a patient labelled as having a bleeding disorder",
+      "Severe or postoperative bleeding out of proportion to the platelet count",
+      "Pregnancy loss or thrombotic complications during pregnancy",
+      "Rapidly falling fibrinogen suggesting acquired consumption or hepatic decompensation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a low fibrinogen means bleeding risk when the variant is actually prothrombotic",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook is variable and phenotype-dependent; many individuals live normally, whereas those with bleeding-prone or thrombosis-prone variants face event-related morbidity. Recognising the specific familial phenotype allows tailored prophylaxis and generally favourable long-term outcomes.",
+    "pitfalls": [
+      "Assuming a low fibrinogen means bleeding risk when the variant is actually prothrombotic",
+      "Measuring only antigen and missing the functional deficit",
+      "Overlooking acquired dysfibrinogenaemia in a patient with liver disease",
+      "Failing to relate the laboratory abnormality to the individual and family bleeding or thrombotic history"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Hoffman: Hematology - Basic Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Characterise the familial phenotype (asymptomatic, bleeding-prone or thrombosis-prone) and tailor prophylaxis to it rather than treating all carriers alike",
+      "Treat bleeding episodes and cover surgery or delivery with fibrinogen concentrate (or cryoprecipitate where concentrate is unavailable), guided by functional fibrinogen and clinical response",
+      "Use an antifibrinolytic such as tranexamic acid for mucosal or minor bleeding",
+      "Anticoagulate thrombosis-prone variants presenting with venous thromboembolism, and consider extended anticoagulation given the paradoxical prothrombotic tendency",
+      "In acquired dysfibrinogenaemia, treat the underlying hepatic disease or malignancy driving abnormal fibrinogen glycosylation",
+      "Offer genetic counselling and family testing for congenital FGA, FGB or FGG variants, and educate on signs of both bleeding and thrombosis",
+      "Escalate major bleeding or recurrent thrombosis to a specialist haemostasis centre for individualised management"
     ]
-   ],
-   "caption": "Overview comparison matrix for dysfibrinogenaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dysfibrinogenemia-real-image",
-   "title": "Dysfibrinogenaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "dysfibrinogenemia-pathway",
+      "title": "Dysfibrinogenaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A qualitative fibrinogen defect in which a structurally abnormal molecule is produced, so functional fibrinogen is low while immunological (antigen) levels are near normal",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unexplained venous or arterial thrombosis in a patient labelled as having a bleeding disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clauss functional fibrinogen assay compared with fibrinogen antigen to demonstrate a functional-to-antigen discrepancy, Thrombin time and reptilase time to detect impaired fibrin polymerisation, Prothrombin time and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Characterise the familial phenotype (asymptomatic, bleeding-prone or thrombosis-prone) and tailor prophylaxis to it rather than treating all carriers alike"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a low fibrinogen means bleeding risk when the variant is actually prothrombotic"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dysfibrinogenaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dysfibrinogenemia-matrix",
+      "title": "Dysfibrinogenaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A qualitative fibrinogen defect in which a structurally abnormal molecule is produced, so functional fibrinogen is low while",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clauss functional fibrinogen assay compared with fibrinogen antigen to demonstrate a functional-to-antigen discrepancy, Thrombin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Afibrinogenaemia and hypofibrinogenaemia (quantitative fibrinogen defects), Liver disease causing acquired fibrinogen",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Characterise the familial phenotype (asymptomatic, bleeding-prone or thrombosis-prone) and tailor prophylaxis to it rather than",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a low fibrinogen means bleeding risk when the variant is actually prothrombotic",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dysfibrinogenaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dysfibrinogenemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clauss functional fibrinogen assay with fibrinogen antigen",
+          "cells": [
+            {
+              "text": "Functional-to-antigen discrepancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombin time and reptilase time",
+          "cells": [
+            {
+              "text": "Impaired fibrin polymerisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prothrombin time and activated partial thromboplastin time",
+          "cells": [
+            {
+              "text": "Screening abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrinogen gene sequencing (FGA, FGB, FGG)",
+          "cells": [
+            {
+              "text": "Congenital variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Acquired hepatic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysfibrinogenemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Afibrinogenaemia and hypofibrinogenaemia",
+          "cells": [
+            {
+              "text": "Quantitative defect rather than functional"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver disease causing acquired fibrinogen dysfunction",
+          "cells": [
+            {
+              "text": "Acquired dysfunction from liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Falling fibrinogen from consumption"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysfibrinogenemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phenotype-directed prophylaxis",
+          "cells": [
+            {
+              "text": "Asymptomatic, bleeding-prone or thrombosis-prone; tailored to the phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrinogen concentrate",
+          "cells": [
+            {
+              "text": "Bleeding and surgery or delivery, guided by functional fibrinogen; cryoprecipitate if unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "Mucosal or minor bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Thrombosis-prone variants with venous thromboembolism; consider extended therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired cause",
+          "cells": [
+            {
+              "text": "Treat the liver disease or malignancy driving abnormal glycosylation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family testing for FGA, FGB or FGG variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist escalation",
+          "cells": [
+            {
+              "text": "Major bleeding or recurrent thrombosis to a haemostasis centre"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dysfibrinogenemia-dx-mgmt",
+      "title": "Diagnosis and management of Dysfibrinogenaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dysfibrinogenaemia: abnormal clotting tests with bleeding or thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (unexplained thrombosis, severe bleeding, pregnancy loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist haemostasis review for major bleeding or recurrent thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clauss functional fibrinogen with antigen; thrombin and reptilase times; gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a functional-to-antigen fibrinogen discrepancy confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider afibrinogenaemia, liver disease, DIC or heparin effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tailor prophylaxis to the familial phenotype rather than treating all carriers alike",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fibrinogen concentrate for bleeding and surgery, guided by functional fibrinogen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tranexamic acid for mucosal or minor bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticoagulate thrombosis-prone variants presenting with venous thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the liver disease or malignancy in acquired dysfibrinogenaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable and phenotype-dependent; bleeding-prone or thrombosis-prone variants carry risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

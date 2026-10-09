@@ -1,171 +1,449 @@
 {
- "id": "myoclonus",
- "name": "Myoclonus",
- "aliases": [
-  "myoclonic jerks",
-  "myoclonic movements"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as sudden, brief, shock-like involuntary movements, which may be positive (muscle contraction) or negative (a lapse of tone, as in asterixis)",
-   "Classified clinically by distribution (focal, segmental, multifocal, or generalised) and by trigger, such as action or stimulus-sensitive myoclonus",
-   "Aetiologically grouped into physiological, essential, epileptic, and symptomatic (secondary) forms, the last being the most common in clinical practice",
-   "A crucial step is to identify secondary causes, particularly metabolic and toxic encephalopathies, since these are often reversible",
-   "Asterixis (negative myoclonus) is a classic sign of hepatic, renal, and other metabolic encephalopathies",
-   "Neurophysiological localisation into cortical, subcortical, spinal, or peripheral origin helps guide investigation and treatment",
-   "Post-hypoxic action myoclonus (Lance-Adams syndrome) can follow cardiac arrest and cerebral hypoxia",
-   "Treatment principles combine correcting any underlying cause with symptomatic antimyoclonic agents chosen according to the presumed generator"
+  "id": "myoclonus",
+  "name": "Myoclonus",
+  "aliases": [
+    "myoclonic jerks",
+    "myoclonic movements"
   ],
-  "pathophysiology": "Myoclonus results from abnormal, excessive neuronal discharge that can arise at several levels of the nervous system. Cortical myoclonus reflects hyperexcitability of the sensorimotor cortex and often coexists with epilepsy; subcortical and brainstem forms arise from deeper generators; and spinal and peripheral forms originate in the cord or nerve. Loss of normal inhibitory control, frequently involving impaired GABAergic and serotonergic mechanisms, allows brief synchronous muscle discharges. Underlying processes include metabolic derangement, drugs and toxins, neurodegeneration, hypoxia, and epilepsy.",
-  "additionalDifferentials": [
-   "Tremor",
-   "Tics",
-   "Chorea",
-   "Seizures and epileptic phenomena",
-   "Dystonic jerks and startle responses",
-   "Fasciculations and functional jerks"
-  ],
-  "additionalInvestigations": [
-   "Metabolic screen including renal, hepatic, glucose, electrolyte, and calcium studies to identify reversible causes",
-   "Review of medications and toxins that can provoke myoclonus",
-   "EEG, including back-averaging with EMG, to identify a cortical origin and epileptic activity",
-   "MRI of the brain and, where relevant, the spinal cord to seek structural or degenerative causes",
-   "Targeted testing for infective, autoimmune, paraneoplastic, or metabolic-genetic disorders when indicated"
-  ],
-  "redFlags": [
-   "Myoclonus with declining consciousness suggesting a serious metabolic, toxic, or hypoxic encephalopathy",
-   "Rapidly progressive myoclonus with cognitive decline raising concern for prion disease or an autoimmune encephalitis",
-   "Myoclonus following cardiac arrest, which may indicate severe hypoxic brain injury",
-   "Myoclonus as part of a status myoclonicus or in the context of status epilepticus requiring urgent treatment"
-  ],
-  "prognosis": "Prognosis is dictated by the underlying cause. Myoclonus due to reversible metabolic or drug causes typically resolves once the trigger is corrected, whereas myoclonus from neurodegenerative, prion, or severe hypoxic injury carries a poor outlook. Symptomatic treatment can meaningfully reduce disability in many chronic cases even when the cause cannot be cured.",
-  "pitfalls": [
-   "Failing to search for and correct a reversible metabolic or drug-induced cause",
-   "Misclassifying myoclonus as tremor, tics, or seizures and mismanaging it",
-   "Overlooking a serious progressive cause such as prion disease or autoimmune encephalitis",
-   "Not localising the myoclonus neurophysiologically, leading to poorly targeted therapy"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and correct the underlying cause, especially reversible metabolic derangements and offending drugs or toxins",
-   "Localise the generator neurophysiologically as cortical, subcortical, spinal or peripheral to guide drug selection",
-   "Treat cortical myoclonus with antiseizure agents such as levetiracetam, sodium valproate or clonazepam",
-   "Manage myoclonus of other origins with clonazepam alongside cause-directed therapy",
-   "Manage acute severe myoclonus, including post-hypoxic status myoclonus, with escalating antiseizure and anaesthetic therapy and supportive care",
-   "Investigate for structural, autoimmune, paraneoplastic or neurodegenerative causes and refer to neurology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myoclonus-pathway",
-   "title": "Myoclonus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as sudden, brief, shock-like involuntary movements, which may be positive (muscle contraction) or negative (a lapse of tone, as in asterixis)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Myoclonus with declining consciousness suggesting a serious metabolic, toxic, or hypoxic encephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Metabolic screen including renal, hepatic, glucose, electrolyte, and calcium studies to identify reversible causes, Review of medications and toxins that can provoke myoclonus, EEG, including back-averaging with EMG, to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and correct the underlying cause, especially reversible metabolic derangements and offending drugs or toxins"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to search for and correct a reversible metabolic or drug-induced cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myoclonus."
-  }
- ],
- "tables": [
-  {
-   "id": "myoclonus-matrix",
-   "title": "Myoclonus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as sudden, brief, shock-like involuntary movements, which may be positive (muscle contraction) or negative (a lapse of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as sudden, brief, shock-like involuntary movements, which may be positive (muscle contraction) or negative (a lapse of tone, as in asterixis)",
+      "Classified clinically by distribution (focal, segmental, multifocal, or generalised) and by trigger, such as action or stimulus-sensitive myoclonus",
+      "Aetiologically grouped into physiological, essential, epileptic, and symptomatic (secondary) forms, the last being the most common in clinical practice",
+      "A crucial step is to identify secondary causes, particularly metabolic and toxic encephalopathies, since these are often reversible",
+      "Asterixis (negative myoclonus) is a classic sign of hepatic, renal, and other metabolic encephalopathies",
+      "Neurophysiological localisation into cortical, subcortical, spinal, or peripheral origin helps guide investigation and treatment",
+      "Post-hypoxic action myoclonus (Lance-Adams syndrome) can follow cardiac arrest and cerebral hypoxia",
+      "Treatment principles combine correcting any underlying cause with symptomatic antimyoclonic agents chosen according to the presumed generator"
     ],
-    [
-     "Key Investigations",
-     "Metabolic screen including renal, hepatic, glucose, electrolyte, and calcium studies to identify reversible causes, Review of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Myoclonus results from abnormal, excessive neuronal discharge that can arise at several levels of the nervous system. Cortical myoclonus reflects hyperexcitability of the sensorimotor cortex and often coexists with epilepsy; subcortical and brainstem forms arise from deeper generators; and spinal and peripheral forms originate in the cord or nerve. Loss of normal inhibitory control, frequently involving impaired GABAergic and serotonergic mechanisms, allows brief synchronous muscle discharges. Underlying processes include metabolic derangement, drugs and toxins, neurodegeneration, hypoxia, and epilepsy.",
+    "additionalDifferentials": [
+      "Tremor",
+      "Tics",
+      "Chorea",
+      "Seizures and epileptic phenomena",
+      "Dystonic jerks and startle responses",
+      "Fasciculations and functional jerks"
     ],
-    [
-     "Primary Differentials",
-     "Tremor, Tics, Chorea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Metabolic screen including renal, hepatic, glucose, electrolyte, and calcium studies to identify reversible causes",
+      "Review of medications and toxins that can provoke myoclonus",
+      "EEG, including back-averaging with EMG, to identify a cortical origin and epileptic activity",
+      "MRI of the brain and, where relevant, the spinal cord to seek structural or degenerative causes",
+      "Targeted testing for infective, autoimmune, paraneoplastic, or metabolic-genetic disorders when indicated"
     ],
-    [
-     "Management Strategy",
-     "Identify and correct the underlying cause, especially reversible metabolic derangements and offending drugs or toxins",
-     "Core treatment modality"
+    "redFlags": [
+      "Myoclonus with declining consciousness suggesting a serious metabolic, toxic, or hypoxic encephalopathy",
+      "Rapidly progressive myoclonus with cognitive decline raising concern for prion disease or an autoimmune encephalitis",
+      "Myoclonus following cardiac arrest, which may indicate severe hypoxic brain injury",
+      "Myoclonus as part of a status myoclonicus or in the context of status epilepticus requiring urgent treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to search for and correct a reversible metabolic or drug-induced cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is dictated by the underlying cause. Myoclonus due to reversible metabolic or drug causes typically resolves once the trigger is corrected, whereas myoclonus from neurodegenerative, prion, or severe hypoxic injury carries a poor outlook. Symptomatic treatment can meaningfully reduce disability in many chronic cases even when the cause cannot be cured.",
+    "pitfalls": [
+      "Failing to search for and correct a reversible metabolic or drug-induced cause",
+      "Misclassifying myoclonus as tremor, tics, or seizures and mismanaging it",
+      "Overlooking a serious progressive cause such as prion disease or autoimmune encephalitis",
+      "Not localising the myoclonus neurophysiologically, leading to poorly targeted therapy"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and correct the underlying cause, especially reversible metabolic derangements and offending drugs or toxins",
+      "Localise the generator neurophysiologically as cortical, subcortical, spinal or peripheral to guide drug selection",
+      "Treat cortical myoclonus with antiseizure agents such as levetiracetam, sodium valproate or clonazepam",
+      "Manage myoclonus of other origins with clonazepam alongside cause-directed therapy",
+      "Manage acute severe myoclonus, including post-hypoxic status myoclonus, with escalating antiseizure and anaesthetic therapy and supportive care",
+      "Investigate for structural, autoimmune, paraneoplastic or neurodegenerative causes and refer to neurology"
     ]
-   ],
-   "caption": "Overview comparison matrix for myoclonus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myoclonus-real-image",
-   "title": "Myoclonus: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "myoclonus-pathway",
+      "title": "Myoclonus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as sudden, brief, shock-like involuntary movements, which may be positive (muscle contraction) or negative (a lapse of tone, as in asterixis)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Myoclonus with declining consciousness suggesting a serious metabolic, toxic, or hypoxic encephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Metabolic screen including renal, hepatic, glucose, electrolyte, and calcium studies to identify reversible causes, Review of medications and toxins that can provoke myoclonus, EEG, including back-averaging with EMG, to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and correct the underlying cause, especially reversible metabolic derangements and offending drugs or toxins"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to search for and correct a reversible metabolic or drug-induced cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myoclonus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myoclonus-matrix",
+      "title": "Myoclonus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as sudden, brief, shock-like involuntary movements, which may be positive (muscle contraction) or negative (a lapse of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Metabolic screen including renal, hepatic, glucose, electrolyte, and calcium studies to identify reversible causes, Review of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tremor, Tics, Chorea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and correct the underlying cause, especially reversible metabolic derangements and offending drugs or toxins",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to search for and correct a reversible metabolic or drug-induced cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myoclonus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myoclonus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Metabolic screen: renal, hepatic, glucose, electrolyte and calcium studies",
+          "cells": [
+            {
+              "text": "Reversible causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication and toxin review",
+          "cells": [
+            {
+              "text": "Drugs and toxins that provoke myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG with back-averaging EMG",
+          "cells": [
+            {
+              "text": "Cortical origin and epileptic activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain and, where relevant, spinal cord",
+          "cells": [
+            {
+              "text": "Structural or degenerative causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted infective, autoimmune, paraneoplastic or metabolic-genetic testing",
+          "cells": [
+            {
+              "text": "When indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myoclonus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tremor",
+          "cells": [
+            {
+              "text": "Brief, shock-like jerks distinguish myoclonus from rhythmic tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tics",
+          "cells": [
+            {
+              "text": "Misclassifying myoclonus as tics leads to mismanagement; neurophysiology localises the jerks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures and epileptic phenomena",
+          "cells": [
+            {
+              "text": "Cortical myoclonus often coexists with epilepsy; EEG shows epileptic activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myoclonus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct the underlying cause",
+          "cells": [
+            {
+              "text": "Especially reversible metabolic derangements and offending drugs or toxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localise the generator",
+          "cells": [
+            {
+              "text": "Cortical, subcortical, spinal or peripheral, to guide drug selection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure agents for cortical myoclonus",
+          "cells": [
+            {
+              "text": "Levetiracetam, sodium valproate or clonazepam"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clonazepam for other origins",
+          "cells": [
+            {
+              "text": "Alongside cause-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute severe myoclonus",
+          "cells": [
+            {
+              "text": "Escalating antiseizure and anaesthetic therapy with supportive care, including post-hypoxic status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation and neurology referral",
+          "cells": [
+            {
+              "text": "Structural, autoimmune, paraneoplastic or neurodegenerative causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myoclonus-dx-mgmt",
+      "title": "Diagnosis and management of Myoclonus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden brief shock-like jerks, often with encephalopathy or after hypoxic arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (declining consciousness, rapid cognitive decline, post-arrest)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for metabolic, toxic or hypoxic encephalopathy; treat status myoclonicus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Metabolic screen, drug review, EEG with back-averaging EMG, MRI of brain and spine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reversible metabolic or drug cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Localise the generator; consider autoimmune, paraneoplastic or neurodegenerative cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct the underlying cause, especially metabolic derangement or drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Localise the generator as cortical, subcortical, spinal or peripheral",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Levetiracetam, sodium valproate or clonazepam for cortical myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalating antiseizure and anaesthetic therapy for acute severe myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resolves once a reversible cause is corrected; hypoxic or prion causes are poor",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

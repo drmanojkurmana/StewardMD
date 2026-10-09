@@ -1,174 +1,461 @@
 {
- "id": "floppy_eyelid_syndrome",
- "name": "Floppy eyelid syndrome",
- "aliases": [
-  "FES",
-  "lax eyelid syndrome",
-  "floppy eyelid"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Strabismus & Oculoplastics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by abnormally lax, rubbery upper eyelids that evert with minimal traction, exposing a papillary conjunctivitis on the upper tarsus",
-   "Symptoms of irritation, redness, and discharge are typically worse on waking and often worse on the side the patient sleeps on",
-   "Strongly associated with obesity and obstructive sleep apnoea, which should be actively sought",
-   "Thought to result from loss of tarsal elastin, allowing spontaneous nocturnal eversion of the lid against the pillow",
-   "Often under-recognised because the everted lid returns to its normal position by the time of examination unless laxity is specifically tested",
-   "Conservative management includes nocturnal eye shielding or taping and ocular lubrication to protect the exposed surface",
-   "Treating coexisting obstructive sleep apnoea, for example with continuous positive airway pressure, is an important part of management",
-   "Surgical horizontal lid tightening is considered for symptoms refractory to conservative measures"
+  "id": "floppy_eyelid_syndrome",
+  "name": "Floppy eyelid syndrome",
+  "aliases": [
+    "FES",
+    "lax eyelid syndrome",
+    "floppy eyelid"
   ],
-  "pathophysiology": "The disorder involves a marked reduction in elastin and altered connective tissue within the tarsal plate, rendering the upper eyelid abnormally lax. During sleep the floppy lid everts spontaneously where it contacts the pillow, so the palpebral conjunctiva is exposed and mechanically rubbed through the night, producing a chronic papillary conjunctivitis and surface drying. Recurrent mechanical stress together with systemic factors such as obesity and obstructive sleep apnoea, with intermittent hypoxia and increased tissue matrix-metalloproteinase activity, is thought to drive the elastin degradation.",
-  "additionalDifferentials": [
-   "Chronic bacterial or allergic conjunctivitis",
-   "Giant papillary conjunctivitis, for example contact lens related",
-   "Blepharitis and meibomian gland dysfunction",
-   "Superior limbic keratoconjunctivitis",
-   "Involutional lid laxity with ectropion or entropion",
-   "Keratoconjunctivitis sicca (dry eye disease)",
-   "Ocular rosacea"
-  ],
-  "additionalInvestigations": [
-   "Clinical demonstration of eyelid laxity with easy eversion and distraction testing",
-   "Slit-lamp examination for papillary conjunctivitis, punctate keratopathy, and corneal changes including keratoconus",
-   "Fluorescein staining to assess ocular surface integrity",
-   "Screening questionnaire and referral for a sleep study to detect obstructive sleep apnoea",
-   "Assessment of body mass index and cardiovascular risk",
-   "Corneal topography where keratoconus is suspected"
-  ],
-  "redFlags": [
-   "Corneal ulceration, infiltrate, or thinning threatening vision",
-   "Undiagnosed obstructive sleep apnoea with daytime somnolence and cardiovascular risk",
-   "Progressive keratoconus or corneal ectasia",
-   "Persistent unilateral disease raising suspicion of an alternative cause"
-  ],
-  "prognosis": "Symptoms usually improve substantially with nocturnal lid protection and treatment of sleep apnoea; surgical lid tightening is effective for refractory cases, but the condition may recur and the associated systemic disease carries its own morbidity.",
-  "pitfalls": [
-   "Failing to test eyelid laxity, so the diagnosis is missed and the eye is treated as ordinary conjunctivitis",
-   "Not screening for obstructive sleep apnoea, leaving significant systemic disease undiagnosed",
-   "Overlooking associated keratoconus",
-   "Relying on topical treatment alone without protecting the lid at night"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "American Academy of Ophthalmology Basic and Clinical Science Course (Oculoplastics)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Nocturnal eyelid protection with shielding or taping to prevent spontaneous lid eversion against the pillow",
-   "Ocular surface lubrication with artificial tears and ointment to protect the exposed conjunctiva and cornea",
-   "Identification and treatment of obstructive sleep apnoea with continuous positive airway pressure, alongside weight reduction",
-   "Surgical horizontal eyelid tightening for refractory or severe laxity",
-   "Monitoring for and management of associated corneal disease including keratoconus and punctate keratopathy",
-   "Referral for a sleep study and ophthalmology or oculoplastics follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "floppy_eyelid_syndrome-pathway",
-   "title": "Floppy eyelid syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by abnormally lax, rubbery upper eyelids that evert with minimal traction, exposing a papillary conjunctivitis on the upper tarsus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Corneal ulceration, infiltrate, or thinning threatening vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical demonstration of eyelid laxity with easy eversion and distraction testing, Slit-lamp examination for papillary conjunctivitis, punctate keratopathy, and corneal changes including keratoconus, Fluorescein staining"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Nocturnal eyelid protection with shielding or taping to prevent spontaneous lid eversion against the pillow"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to test eyelid laxity, so the diagnosis is missed and the eye is treated as ordinary conjunctivitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of floppy eyelid syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "floppy_eyelid_syndrome-matrix",
-   "title": "Floppy eyelid syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by abnormally lax, rubbery upper eyelids that evert with minimal traction, exposing a papillary conjunctivitis on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Strabismus & Oculoplastics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by abnormally lax, rubbery upper eyelids that evert with minimal traction, exposing a papillary conjunctivitis on the upper tarsus",
+      "Symptoms of irritation, redness, and discharge are typically worse on waking and often worse on the side the patient sleeps on",
+      "Strongly associated with obesity and obstructive sleep apnoea, which should be actively sought",
+      "Thought to result from loss of tarsal elastin, allowing spontaneous nocturnal eversion of the lid against the pillow",
+      "Often under-recognised because the everted lid returns to its normal position by the time of examination unless laxity is specifically tested",
+      "Conservative management includes nocturnal eye shielding or taping and ocular lubrication to protect the exposed surface",
+      "Treating coexisting obstructive sleep apnoea, for example with continuous positive airway pressure, is an important part of management",
+      "Surgical horizontal lid tightening is considered for symptoms refractory to conservative measures"
     ],
-    [
-     "Key Investigations",
-     "Clinical demonstration of eyelid laxity with easy eversion and distraction testing, Slit-lamp examination for papillary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The disorder involves a marked reduction in elastin and altered connective tissue within the tarsal plate, rendering the upper eyelid abnormally lax. During sleep the floppy lid everts spontaneously where it contacts the pillow, so the palpebral conjunctiva is exposed and mechanically rubbed through the night, producing a chronic papillary conjunctivitis and surface drying. Recurrent mechanical stress together with systemic factors such as obesity and obstructive sleep apnoea, with intermittent hypoxia and increased tissue matrix-metalloproteinase activity, is thought to drive the elastin degradation.",
+    "additionalDifferentials": [
+      "Chronic bacterial or allergic conjunctivitis",
+      "Giant papillary conjunctivitis, for example contact lens related",
+      "Blepharitis and meibomian gland dysfunction",
+      "Superior limbic keratoconjunctivitis",
+      "Involutional lid laxity with ectropion or entropion",
+      "Keratoconjunctivitis sicca (dry eye disease)",
+      "Ocular rosacea"
     ],
-    [
-     "Primary Differentials",
-     "Chronic bacterial or allergic conjunctivitis, Giant papillary conjunctivitis, for example contact lens related, Blepharitis and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical demonstration of eyelid laxity with easy eversion and distraction testing",
+      "Slit-lamp examination for papillary conjunctivitis, punctate keratopathy, and corneal changes including keratoconus",
+      "Fluorescein staining to assess ocular surface integrity",
+      "Screening questionnaire and referral for a sleep study to detect obstructive sleep apnoea",
+      "Assessment of body mass index and cardiovascular risk",
+      "Corneal topography where keratoconus is suspected"
     ],
-    [
-     "Management Strategy",
-     "Nocturnal eyelid protection with shielding or taping to prevent spontaneous lid eversion against the pillow",
-     "Core treatment modality"
+    "redFlags": [
+      "Corneal ulceration, infiltrate, or thinning threatening vision",
+      "Undiagnosed obstructive sleep apnoea with daytime somnolence and cardiovascular risk",
+      "Progressive keratoconus or corneal ectasia",
+      "Persistent unilateral disease raising suspicion of an alternative cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to test eyelid laxity, so the diagnosis is missed and the eye is treated as ordinary conjunctivitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms usually improve substantially with nocturnal lid protection and treatment of sleep apnoea; surgical lid tightening is effective for refractory cases, but the condition may recur and the associated systemic disease carries its own morbidity.",
+    "pitfalls": [
+      "Failing to test eyelid laxity, so the diagnosis is missed and the eye is treated as ordinary conjunctivitis",
+      "Not screening for obstructive sleep apnoea, leaving significant systemic disease undiagnosed",
+      "Overlooking associated keratoconus",
+      "Relying on topical treatment alone without protecting the lid at night"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "American Academy of Ophthalmology Basic and Clinical Science Course (Oculoplastics)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Nocturnal eyelid protection with shielding or taping to prevent spontaneous lid eversion against the pillow",
+      "Ocular surface lubrication with artificial tears and ointment to protect the exposed conjunctiva and cornea",
+      "Identification and treatment of obstructive sleep apnoea with continuous positive airway pressure, alongside weight reduction",
+      "Surgical horizontal eyelid tightening for refractory or severe laxity",
+      "Monitoring for and management of associated corneal disease including keratoconus and punctate keratopathy",
+      "Referral for a sleep study and ophthalmology or oculoplastics follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for floppy eyelid syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "floppy-eyelid-syndrome-real-image",
-   "title": "Floppy eyelid syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "floppy_eyelid_syndrome-pathway",
+      "title": "Floppy eyelid syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by abnormally lax, rubbery upper eyelids that evert with minimal traction, exposing a papillary conjunctivitis on the upper tarsus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Corneal ulceration, infiltrate, or thinning threatening vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical demonstration of eyelid laxity with easy eversion and distraction testing, Slit-lamp examination for papillary conjunctivitis, punctate keratopathy, and corneal changes including keratoconus, Fluorescein staining"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Nocturnal eyelid protection with shielding or taping to prevent spontaneous lid eversion against the pillow"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to test eyelid laxity, so the diagnosis is missed and the eye is treated as ordinary conjunctivitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of floppy eyelid syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "floppy_eyelid_syndrome-matrix",
+      "title": "Floppy eyelid syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by abnormally lax, rubbery upper eyelids that evert with minimal traction, exposing a papillary conjunctivitis on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical demonstration of eyelid laxity with easy eversion and distraction testing, Slit-lamp examination for papillary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic bacterial or allergic conjunctivitis, Giant papillary conjunctivitis, for example contact lens related, Blepharitis and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Nocturnal eyelid protection with shielding or taping to prevent spontaneous lid eversion against the pillow",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to test eyelid laxity, so the diagnosis is missed and the eye is treated as ordinary conjunctivitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for floppy eyelid syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "floppy_eyelid_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Eyelid laxity with easy eversion and distraction test",
+          "cells": [
+            {
+              "text": "Lax, everting upper lids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Papillary conjunctivitis, keratopathy or keratoconus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein staining",
+          "cells": [
+            {
+              "text": "Ocular surface integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening questionnaire and sleep study",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Body mass index and cardiovascular risk",
+          "cells": [
+            {
+              "text": "Obesity and risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal topography",
+          "cells": [
+            {
+              "text": "Suspected keratoconus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "floppy_eyelid_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Giant papillary conjunctivitis or chronic allergic conjunctivitis",
+          "cells": [
+            {
+              "text": "Papillary conjunctivitis without lid laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blepharitis or meibomian gland dysfunction",
+          "cells": [
+            {
+              "text": "Lid margin disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratoconjunctivitis sicca",
+          "cells": [
+            {
+              "text": "Dry eye disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "floppy_eyelid_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nocturnal lid shielding or taping",
+          "cells": [
+            {
+              "text": "Prevents spontaneous eversion against the pillow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Artificial tears and ointment",
+          "cells": [
+            {
+              "text": "Protects exposed conjunctiva and cornea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous positive airway pressure",
+          "cells": [
+            {
+              "text": "Treats obstructive sleep apnoea; weight reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Horizontal eyelid tightening",
+          "cells": [
+            {
+              "text": "Refractory or severe laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor corneal disease",
+          "cells": [
+            {
+              "text": "Keratoconus and punctate keratopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep study and oculoplastic follow-up",
+          "cells": [
+            {
+              "text": "Referral pathway"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "floppy_eyelid_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Floppy eyelid syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lax, easily everting upper lids with morning irritation in an obese patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (corneal ulcer or thinning, daytime somnolence, progressive keratoconus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review for corneal ulceration or thinning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Eyelid laxity test; slit-lamp; fluorescein; sleep study; topography if keratoconus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lid laxity with papillary conjunctivitis and corneal change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider conjunctivitis, blepharitis or dry eye disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nocturnal eyelid shielding or taping",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Artificial tears and ointment for the ocular surface",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CPAP for obstructive sleep apnoea and weight reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical horizontal lid tightening for refractory laxity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually improves with lid protection and sleep apnoea treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

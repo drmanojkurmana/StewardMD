@@ -1,176 +1,463 @@
 {
- "id": "rh_isoimmunization",
- "name": "Rhesus Isoimmunisation",
- "aliases": [
-  "Rh isoimmunization",
-  "rhesus alloimmunisation",
-  "Rh(D) sensitisation",
-  "haemolytic disease of the fetus and newborn"
- ],
- "class": "non_infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rhesus isoimmunisation occurs when a Rh(D)-negative mother is exposed to Rh(D)-positive fetal red cells and develops anti-D antibodies that can cross the placenta in subsequent pregnancies",
-   "Sensitising events include delivery, miscarriage, termination, ectopic pregnancy, antepartum bleeding, abdominal trauma, and invasive procedures such as amniocentesis",
-   "Because sensitisation usually produces no maternal symptoms, prevention and surveillance depend on routine antenatal blood grouping and antibody screening",
-   "Prophylactic anti-D immunoglobulin given after sensitising events and routinely in the third trimester has dramatically reduced the incidence of the disease",
-   "Once a woman is sensitised, anti-D immunoglobulin is no longer protective, and management focuses on monitoring the fetus for anaemia",
-   "Fetal anaemia is assessed non-invasively by Doppler measurement of the middle cerebral artery peak systolic velocity, which rises as anaemia develops",
-   "Severe fetal anaemia can be treated by intrauterine transfusion, and timing of delivery is balanced against the severity of disease",
-   "Other red cell antibodies such as anti-Kell and anti-c can also cause severe haemolytic disease, so screening is not limited to the D antigen"
+  "id": "rh_isoimmunization",
+  "name": "Rhesus Isoimmunisation",
+  "aliases": [
+    "Rh isoimmunization",
+    "rhesus alloimmunisation",
+    "Rh(D) sensitisation",
+    "haemolytic disease of the fetus and newborn"
   ],
-  "pathophysiology": "When Rh(D)-positive fetal red cells enter the circulation of a Rh(D)-negative mother, her immune system mounts an antibody response, initially IgM and then IgG anti-D. In a later pregnancy with a Rh(D)-positive fetus, maternal IgG crosses the placenta, binds fetal red cells, and leads to their destruction in the fetal reticuloendothelial system. The resulting fetal anaemia drives extramedullary haematopoiesis and, when severe, high-output cardiac failure with generalised oedema known as hydrops fetalis, alongside accumulation of bilirubin that threatens the neonate after birth.",
-  "additionalDifferentials": [
-   "Haemolytic disease from non-D red cell antibodies such as anti-Kell or anti-c",
-   "ABO incompatibility causing neonatal haemolysis",
-   "Fetal anaemia from parvovirus B19 infection",
-   "Fetomaternal haemorrhage from other causes",
-   "Alpha thalassaemia causing hydrops",
-   "Non-immune hydrops fetalis from cardiac or structural causes"
-  ],
-  "additionalInvestigations": [
-   "Maternal blood group and antibody screen at booking and repeated during pregnancy",
-   "Quantification and titre of anti-D and other clinically significant antibodies",
-   "Paternal and, where available, fetal Rh(D) genotyping including cell-free fetal DNA testing",
-   "Serial middle cerebral artery Doppler peak systolic velocity to detect fetal anaemia",
-   "Ultrasound assessment for signs of hydrops",
-   "Kleihauer or flow cytometry to estimate the volume of fetomaternal haemorrhage"
-  ],
-  "redFlags": [
-   "Rising antibody titres or Doppler velocities indicating progressive fetal anaemia and risk of fetal compromise",
-   "Ultrasound evidence of hydrops fetalis signalling severe disease",
-   "A significant sensitising event without timely anti-D prophylaxis",
-   "Reduced fetal movements or non-reassuring fetal assessment in a sensitised pregnancy",
-   "Previous pregnancy affected by severe haemolytic disease, predicting earlier and more severe recurrence"
-  ],
-  "prognosis": "With routine antenatal screening, effective anti-D prophylaxis, non-invasive monitoring, and intrauterine transfusion, most affected pregnancies now achieve good outcomes. Prognosis worsens with early-onset severe anaemia and hydrops, and sensitised pregnancies tend to be affected earlier and more severely in successive gestations, making specialist surveillance essential.",
-  "pitfalls": [
-   "Omitting anti-D prophylaxis after a sensitising event or assuming it helps an already sensitised woman",
-   "Focusing only on anti-D and overlooking other antibodies such as anti-Kell",
-   "Relying on antibody titres alone without fetal Doppler surveillance in established sensitisation",
-   "Underestimating small but sensitising fetomaternal haemorrhages",
-   "Failing to quantify large fetomaternal haemorrhage so that the anti-D dose is inadequate"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prevent sensitisation with prophylactic anti-D immunoglobulin given routinely in the third trimester and after any sensitising event in Rh(D)-negative women",
-   "Determine foetal Rh(D) status by cell-free foetal DNA testing to identify pregnancies at risk",
-   "In sensitised pregnancies, monitor for foetal anaemia with serial middle cerebral artery peak systolic velocity Doppler and ultrasound for hydrops",
-   "Perform intrauterine intravascular foetal transfusion for significant foetal anaemia",
-   "Time delivery and prepare neonatal care, treating haemolytic jaundice with phototherapy and exchange transfusion as required",
-   "Coordinate care in a foetal medicine unit with serial maternal antibody titres"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rh_isoimmunization-pathway",
-   "title": "Rhesus Isoimmunisation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rhesus isoimmunisation occurs when a Rh(D)-negative mother is exposed to Rh(D)-positive fetal red cells and develops anti-D antibodies that can cross the placenta in subsequent pregnancies",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rising antibody titres or Doppler velocities indicating progressive fetal anaemia and risk of fetal compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Maternal blood group and antibody screen at booking and repeated during pregnancy, Quantification and titre of anti-D and other clinically significant antibodies, Paternal and, where available, fetal Rh(D) genotyping"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevent sensitisation with prophylactic anti-D immunoglobulin given routinely in the third trimester and after any sensitising event in Rh(D)-negative women"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Omitting anti-D prophylaxis after a sensitising event or assuming it helps an already sensitised woman"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rhesus isoimmunisation."
-  }
- ],
- "tables": [
-  {
-   "id": "rh_isoimmunization-matrix",
-   "title": "Rhesus Isoimmunisation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rhesus isoimmunisation occurs when a Rh(D)-negative mother is exposed to Rh(D)-positive fetal red cells and develops anti-D",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rhesus isoimmunisation occurs when a Rh(D)-negative mother is exposed to Rh(D)-positive fetal red cells and develops anti-D antibodies that can cross the placenta in subsequent pregnancies",
+      "Sensitising events include delivery, miscarriage, termination, ectopic pregnancy, antepartum bleeding, abdominal trauma, and invasive procedures such as amniocentesis",
+      "Because sensitisation usually produces no maternal symptoms, prevention and surveillance depend on routine antenatal blood grouping and antibody screening",
+      "Prophylactic anti-D immunoglobulin given after sensitising events and routinely in the third trimester has dramatically reduced the incidence of the disease",
+      "Once a woman is sensitised, anti-D immunoglobulin is no longer protective, and management focuses on monitoring the fetus for anaemia",
+      "Fetal anaemia is assessed non-invasively by Doppler measurement of the middle cerebral artery peak systolic velocity, which rises as anaemia develops",
+      "Severe fetal anaemia can be treated by intrauterine transfusion, and timing of delivery is balanced against the severity of disease",
+      "Other red cell antibodies such as anti-Kell and anti-c can also cause severe haemolytic disease, so screening is not limited to the D antigen"
     ],
-    [
-     "Key Investigations",
-     "Maternal blood group and antibody screen at booking and repeated during pregnancy, Quantification and titre of anti-D and other",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "When Rh(D)-positive fetal red cells enter the circulation of a Rh(D)-negative mother, her immune system mounts an antibody response, initially IgM and then IgG anti-D. In a later pregnancy with a Rh(D)-positive fetus, maternal IgG crosses the placenta, binds fetal red cells, and leads to their destruction in the fetal reticuloendothelial system. The resulting fetal anaemia drives extramedullary haematopoiesis and, when severe, high-output cardiac failure with generalised oedema known as hydrops fetalis, alongside accumulation of bilirubin that threatens the neonate after birth.",
+    "additionalDifferentials": [
+      "Haemolytic disease from non-D red cell antibodies such as anti-Kell or anti-c",
+      "ABO incompatibility causing neonatal haemolysis",
+      "Fetal anaemia from parvovirus B19 infection",
+      "Fetomaternal haemorrhage from other causes",
+      "Alpha thalassaemia causing hydrops",
+      "Non-immune hydrops fetalis from cardiac or structural causes"
     ],
-    [
-     "Primary Differentials",
-     "Haemolytic disease from non-D red cell antibodies such as anti-Kell or anti-c, ABO incompatibility causing neonatal haemolysis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Maternal blood group and antibody screen at booking and repeated during pregnancy",
+      "Quantification and titre of anti-D and other clinically significant antibodies",
+      "Paternal and, where available, fetal Rh(D) genotyping including cell-free fetal DNA testing",
+      "Serial middle cerebral artery Doppler peak systolic velocity to detect fetal anaemia",
+      "Ultrasound assessment for signs of hydrops",
+      "Kleihauer or flow cytometry to estimate the volume of fetomaternal haemorrhage"
     ],
-    [
-     "Management Strategy",
-     "Prevent sensitisation with prophylactic anti-D immunoglobulin given routinely in the third trimester and after any sensitising",
-     "Core treatment modality"
+    "redFlags": [
+      "Rising antibody titres or Doppler velocities indicating progressive fetal anaemia and risk of fetal compromise",
+      "Ultrasound evidence of hydrops fetalis signalling severe disease",
+      "A significant sensitising event without timely anti-D prophylaxis",
+      "Reduced fetal movements or non-reassuring fetal assessment in a sensitised pregnancy",
+      "Previous pregnancy affected by severe haemolytic disease, predicting earlier and more severe recurrence"
     ],
-    [
-     "Clinical Pitfall",
-     "Omitting anti-D prophylaxis after a sensitising event or assuming it helps an already sensitised woman",
-     "Prevent diagnostic or management error"
+    "prognosis": "With routine antenatal screening, effective anti-D prophylaxis, non-invasive monitoring, and intrauterine transfusion, most affected pregnancies now achieve good outcomes. Prognosis worsens with early-onset severe anaemia and hydrops, and sensitised pregnancies tend to be affected earlier and more severely in successive gestations, making specialist surveillance essential.",
+    "pitfalls": [
+      "Omitting anti-D prophylaxis after a sensitising event or assuming it helps an already sensitised woman",
+      "Focusing only on anti-D and overlooking other antibodies such as anti-Kell",
+      "Relying on antibody titres alone without fetal Doppler surveillance in established sensitisation",
+      "Underestimating small but sensitising fetomaternal haemorrhages",
+      "Failing to quantify large fetomaternal haemorrhage so that the anti-D dose is inadequate"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prevent sensitisation with prophylactic anti-D immunoglobulin given routinely in the third trimester and after any sensitising event in Rh(D)-negative women",
+      "Determine foetal Rh(D) status by cell-free foetal DNA testing to identify pregnancies at risk",
+      "In sensitised pregnancies, monitor for foetal anaemia with serial middle cerebral artery peak systolic velocity Doppler and ultrasound for hydrops",
+      "Perform intrauterine intravascular foetal transfusion for significant foetal anaemia",
+      "Time delivery and prepare neonatal care, treating haemolytic jaundice with phototherapy and exchange transfusion as required",
+      "Coordinate care in a foetal medicine unit with serial maternal antibody titres"
     ]
-   ],
-   "caption": "Overview comparison matrix for rhesus isoimmunisation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rh-isoimmunization-real-image",
-   "title": "Rhesus Isoimmunisation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "rh_isoimmunization-pathway",
+      "title": "Rhesus Isoimmunisation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rhesus isoimmunisation occurs when a Rh(D)-negative mother is exposed to Rh(D)-positive fetal red cells and develops anti-D antibodies that can cross the placenta in subsequent pregnancies",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rising antibody titres or Doppler velocities indicating progressive fetal anaemia and risk of fetal compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Maternal blood group and antibody screen at booking and repeated during pregnancy, Quantification and titre of anti-D and other clinically significant antibodies, Paternal and, where available, fetal Rh(D) genotyping"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevent sensitisation with prophylactic anti-D immunoglobulin given routinely in the third trimester and after any sensitising event in Rh(D)-negative women"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Omitting anti-D prophylaxis after a sensitising event or assuming it helps an already sensitised woman"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rhesus isoimmunisation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rh_isoimmunization-matrix",
+      "title": "Rhesus Isoimmunisation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rhesus isoimmunisation occurs when a Rh(D)-negative mother is exposed to Rh(D)-positive fetal red cells and develops anti-D",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Maternal blood group and antibody screen at booking and repeated during pregnancy, Quantification and titre of anti-D and other",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Haemolytic disease from non-D red cell antibodies such as anti-Kell or anti-c, ABO incompatibility causing neonatal haemolysis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevent sensitisation with prophylactic anti-D immunoglobulin given routinely in the third trimester and after any sensitising",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Omitting anti-D prophylaxis after a sensitising event or assuming it helps an already sensitised woman",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rhesus isoimmunisation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rh_isoimmunization-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Maternal blood group and antibody screen",
+          "cells": [
+            {
+              "text": "Antibodies at booking, repeated during pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibody quantification and titre",
+          "cells": [
+            {
+              "text": "Anti-D and other clinically significant antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal Rh(D) genotyping with cell-free fetal DNA",
+          "cells": [
+            {
+              "text": "Fetal Rh(D) status, to identify pregnancies at risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial middle cerebral artery Doppler peak systolic velocity",
+          "cells": [
+            {
+              "text": "Fetal anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound for hydrops",
+          "cells": [
+            {
+              "text": "Hydrops fetalis, a sign of severe disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rh_isoimmunization-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemolytic disease from anti-Kell or anti-c",
+          "cells": [
+            {
+              "text": "Non-D antibodies; pitfall to overlook them while focusing on anti-D"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABO incompatibility",
+          "cells": [
+            {
+              "text": "Neonatal haemolysis from ABO incompatibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal anaemia from parvovirus B19",
+          "cells": [
+            {
+              "text": "Infective cause of fetal anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-immune hydrops fetalis",
+          "cells": [
+            {
+              "text": "Cardiac or structural causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rh_isoimmunization-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Routine anti-D prophylaxis",
+          "cells": [
+            {
+              "text": "Given in the third trimester and after any sensitising event in Rh(D)-negative women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal Rh(D) status",
+          "cells": [
+            {
+              "text": "Cell-free fetal DNA testing to identify pregnancies at risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal anaemia surveillance",
+          "cells": [
+            {
+              "text": "Serial middle cerebral artery peak systolic velocity Doppler; ultrasound for hydrops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrauterine transfusion",
+          "cells": [
+            {
+              "text": "Intravascular fetal transfusion for significant fetal anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delivery and neonatal care",
+          "cells": [
+            {
+              "text": "Time delivery; treat haemolytic jaundice with phototherapy and exchange transfusion as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foetal medicine coordination",
+          "cells": [
+            {
+              "text": "Care in a foetal medicine unit with serial maternal antibody titres"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rh_isoimmunization-dx-mgmt",
+      "title": "Diagnosis and management of Rhesus Isoimmunisation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rh(D)-negative woman with a sensitising event or positive antibody screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising titres or Doppler, hydrops, no anti-D after an event)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent foetal medicine review; intrauterine transfusion if severe anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antibody titre, cell-free fetal DNA, middle cerebral artery Doppler, ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is significant fetal anaemia present on Doppler?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue titre and Doppler surveillance; review anti-D status",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic anti-D in the third trimester and after sensitising events",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial middle cerebral artery Doppler and hydrops surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravascular fetal transfusion for significant fetal anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Time delivery and treat neonatal haemolytic jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most affected pregnancies now do well; early severe anaemia and hydrops worsen prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

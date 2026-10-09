@@ -1,174 +1,423 @@
 {
- "id": "mody",
- "name": "Maturity-onset diabetes of the young",
- "aliases": [
-  "MODY",
-  "monogenic diabetes",
-  "familial young-onset diabetes"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of monogenic, autosomal dominant forms of diabetes caused by single-gene defects impairing beta-cell function rather than autoimmunity or insulin resistance",
-   "Suspect it in young, non-obese patients with diabetes across several generations and a strong family history consistent with dominant inheritance",
-   "Patients are typically negative for islet autoantibodies and retain measurable endogenous insulin (detectable C-peptide) beyond the honeymoon period",
-   "It is frequently misclassified as type 1 or type 2 diabetes, so a high index of suspicion and genetic testing are key to correct diagnosis",
-   "The specific gene determines the phenotype and treatment: some forms are mild and stable, others progressive",
-   "One common subtype often causes mild, stable, non-progressive fasting hyperglycaemia that may need no pharmacological treatment",
-   "Another common subtype is characteristically sensitive to sulfonylureas, so accurate genetic diagnosis can allow a change away from insulin",
-   "Correct diagnosis has implications for prognosis, treatment choice, family screening, and, in some subtypes, pregnancy management"
+  "id": "mody",
+  "name": "Maturity-onset diabetes of the young",
+  "aliases": [
+    "MODY",
+    "monogenic diabetes",
+    "familial young-onset diabetes"
   ],
-  "pathophysiology": "Maturity-onset diabetes of the young comprises several monogenic disorders in which a mutation in a single gene critical to pancreatic beta-cell development or function impairs insulin secretion. Inheritance is autosomal dominant, so an affected parent transmits the condition to roughly half of offspring, producing diabetes across successive generations at a young age. Unlike type 1 diabetes, there is no autoimmune beta-cell destruction, and unlike type 2 diabetes, obesity and insulin resistance are not central. Different causative genes give distinct clinical pictures, ranging from mild stable hyperglycaemia due to an altered glucose-sensing threshold, to progressive insulin secretory failure with risk of the usual diabetes complications.",
-  "additionalDifferentials": [
-   "Type 1 diabetes mellitus",
-   "Type 2 diabetes mellitus in the young",
-   "Latent autoimmune diabetes in adults",
-   "Neonatal diabetes and other monogenic beta-cell disorders",
-   "Secondary diabetes from pancreatic disease",
-   "Gestational diabetes when first detected in pregnancy"
-  ],
-  "additionalInvestigations": [
-   "Islet autoantibody panel to help exclude autoimmune diabetes",
-   "C-peptide to demonstrate preserved endogenous insulin secretion",
-   "Detailed multigenerational family history of diabetes",
-   "Genetic testing of the relevant MODY genes to confirm the subtype",
-   "Assessment for extra-pancreatic features associated with certain subtypes such as renal cysts",
-   "Cascade genetic screening of at-risk family members"
-  ],
-  "redFlags": [
-   "Presentation with ketoacidosis, which is atypical and suggests type 1 diabetes instead",
-   "Rapidly progressive hyperglycaemia inconsistent with a mild stable subtype",
-   "Associated renal or genitourinary abnormalities suggesting a specific syndromic subtype",
-   "Diagnostic uncertainty leading to inappropriate lifelong insulin in a sulfonylurea-responsive form"
-  ],
-  "prognosis": "Prognosis varies by subtype: the mild glucose-sensing form is typically stable with low complication risk and may need no treatment, whereas transcription-factor subtypes are progressive and can develop classic microvascular and macrovascular complications if hyperglycaemia is uncontrolled; accurate genetic diagnosis enables tailored, often simpler, management.",
-  "pitfalls": [
-   "Automatically labelling young-onset diabetes as type 1 and committing to lifelong insulin without considering monogenic causes",
-   "Overlooking the family history that suggests dominant inheritance",
-   "Failing to check autoantibodies and C-peptide before classification",
-   "Not offering genetic testing that could change treatment and enable family screening"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Endocrine Society guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the subtype by genetic testing, since it dictates treatment and avoids mislabelling as type 1 or type 2 diabetes",
-   "Tailor therapy to genotype, using low-dose sulfonylureas for the transcription-factor subtypes (HNF1A, HNF4A), often in place of insulin",
-   "Recognise the glucokinase (GCK) subtype needs no pharmacological treatment outside pregnancy, managed by lifestyle measures alone",
-   "Transition suitable insulin-treated patients to sulfonylureas once a responsive subtype is confirmed",
-   "Screen for and manage microvascular and macrovascular complications in the progressive transcription-factor subtypes",
-   "Provide genetic counselling and cascade testing of at-risk relatives given autosomal dominant inheritance",
-   "Refer to endocrinology and clinical genetics, with specialist input during pregnancy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mody-pathway",
-   "title": "Maturity-onset diabetes of the young: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of monogenic, autosomal dominant forms of diabetes caused by single-gene defects impairing beta-cell function rather than autoimmunity or insulin resistance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Presentation with ketoacidosis, which is atypical and suggests type 1 diabetes instead",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Islet autoantibody panel to help exclude autoimmune diabetes, C-peptide to demonstrate preserved endogenous insulin secretion, Detailed multigenerational family history of diabetes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the subtype by genetic testing, since it dictates treatment and avoids mislabelling as type 1 or type 2 diabetes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Automatically labelling young-onset diabetes as type 1 and committing to lifelong insulin without considering monogenic causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of maturity-onset diabetes of the young."
-  }
- ],
- "tables": [
-  {
-   "id": "mody-matrix",
-   "title": "Maturity-onset diabetes of the young: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of monogenic, autosomal dominant forms of diabetes caused by single-gene defects impairing beta-cell function rather than",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of monogenic, autosomal dominant forms of diabetes caused by single-gene defects impairing beta-cell function rather than autoimmunity or insulin resistance",
+      "Suspect it in young, non-obese patients with diabetes across several generations and a strong family history consistent with dominant inheritance",
+      "Patients are typically negative for islet autoantibodies and retain measurable endogenous insulin (detectable C-peptide) beyond the honeymoon period",
+      "It is frequently misclassified as type 1 or type 2 diabetes, so a high index of suspicion and genetic testing are key to correct diagnosis",
+      "The specific gene determines the phenotype and treatment: some forms are mild and stable, others progressive",
+      "One common subtype often causes mild, stable, non-progressive fasting hyperglycaemia that may need no pharmacological treatment",
+      "Another common subtype is characteristically sensitive to sulfonylureas, so accurate genetic diagnosis can allow a change away from insulin",
+      "Correct diagnosis has implications for prognosis, treatment choice, family screening, and, in some subtypes, pregnancy management"
     ],
-    [
-     "Key Investigations",
-     "Islet autoantibody panel to help exclude autoimmune diabetes, C-peptide to demonstrate preserved endogenous insulin secretion,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Maturity-onset diabetes of the young comprises several monogenic disorders in which a mutation in a single gene critical to pancreatic beta-cell development or function impairs insulin secretion. Inheritance is autosomal dominant, so an affected parent transmits the condition to roughly half of offspring, producing diabetes across successive generations at a young age. Unlike type 1 diabetes, there is no autoimmune beta-cell destruction, and unlike type 2 diabetes, obesity and insulin resistance are not central. Different causative genes give distinct clinical pictures, ranging from mild stable hyperglycaemia due to an altered glucose-sensing threshold, to progressive insulin secretory failure with risk of the usual diabetes complications.",
+    "additionalDifferentials": [
+      "Type 1 diabetes mellitus",
+      "Type 2 diabetes mellitus in the young",
+      "Latent autoimmune diabetes in adults",
+      "Neonatal diabetes and other monogenic beta-cell disorders",
+      "Secondary diabetes from pancreatic disease",
+      "Gestational diabetes when first detected in pregnancy"
     ],
-    [
-     "Primary Differentials",
-     "Type 1 diabetes mellitus, Type 2 diabetes mellitus in the young, Latent autoimmune diabetes in adults",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Islet autoantibody panel to help exclude autoimmune diabetes",
+      "C-peptide to demonstrate preserved endogenous insulin secretion",
+      "Detailed multigenerational family history of diabetes",
+      "Genetic testing of the relevant MODY genes to confirm the subtype",
+      "Assessment for extra-pancreatic features associated with certain subtypes such as renal cysts",
+      "Cascade genetic screening of at-risk family members"
     ],
-    [
-     "Management Strategy",
-     "Confirm the subtype by genetic testing, since it dictates treatment and avoids mislabelling as type 1 or type 2 diabetes",
-     "Core treatment modality"
+    "redFlags": [
+      "Presentation with ketoacidosis, which is atypical and suggests type 1 diabetes instead",
+      "Rapidly progressive hyperglycaemia inconsistent with a mild stable subtype",
+      "Associated renal or genitourinary abnormalities suggesting a specific syndromic subtype",
+      "Diagnostic uncertainty leading to inappropriate lifelong insulin in a sulfonylurea-responsive form"
     ],
-    [
-     "Clinical Pitfall",
-     "Automatically labelling young-onset diabetes as type 1 and committing to lifelong insulin without considering monogenic causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies by subtype: the mild glucose-sensing form is typically stable with low complication risk and may need no treatment, whereas transcription-factor subtypes are progressive and can develop classic microvascular and macrovascular complications if hyperglycaemia is uncontrolled; accurate genetic diagnosis enables tailored, often simpler, management.",
+    "pitfalls": [
+      "Automatically labelling young-onset diabetes as type 1 and committing to lifelong insulin without considering monogenic causes",
+      "Overlooking the family history that suggests dominant inheritance",
+      "Failing to check autoantibodies and C-peptide before classification",
+      "Not offering genetic testing that could change treatment and enable family screening"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Endocrine Society guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the subtype by genetic testing, since it dictates treatment and avoids mislabelling as type 1 or type 2 diabetes",
+      "Tailor therapy to genotype, using low-dose sulfonylureas for the transcription-factor subtypes (HNF1A, HNF4A), often in place of insulin",
+      "Recognise the glucokinase (GCK) subtype needs no pharmacological treatment outside pregnancy, managed by lifestyle measures alone",
+      "Transition suitable insulin-treated patients to sulfonylureas once a responsive subtype is confirmed",
+      "Screen for and manage microvascular and macrovascular complications in the progressive transcription-factor subtypes",
+      "Provide genetic counselling and cascade testing of at-risk relatives given autosomal dominant inheritance",
+      "Refer to endocrinology and clinical genetics, with specialist input during pregnancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for maturity-onset diabetes of the young."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mody-real-image",
-   "title": "Maturity-onset diabetes of the young: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "mody-pathway",
+      "title": "Maturity-onset diabetes of the young: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of monogenic, autosomal dominant forms of diabetes caused by single-gene defects impairing beta-cell function rather than autoimmunity or insulin resistance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Presentation with ketoacidosis, which is atypical and suggests type 1 diabetes instead",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Islet autoantibody panel to help exclude autoimmune diabetes, C-peptide to demonstrate preserved endogenous insulin secretion, Detailed multigenerational family history of diabetes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the subtype by genetic testing, since it dictates treatment and avoids mislabelling as type 1 or type 2 diabetes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Automatically labelling young-onset diabetes as type 1 and committing to lifelong insulin without considering monogenic causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of maturity-onset diabetes of the young."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mody-matrix",
+      "title": "Maturity-onset diabetes of the young: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of monogenic, autosomal dominant forms of diabetes caused by single-gene defects impairing beta-cell function rather than",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Islet autoantibody panel to help exclude autoimmune diabetes, C-peptide to demonstrate preserved endogenous insulin secretion,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Type 1 diabetes mellitus, Type 2 diabetes mellitus in the young, Latent autoimmune diabetes in adults",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the subtype by genetic testing, since it dictates treatment and avoids mislabelling as type 1 or type 2 diabetes",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Automatically labelling young-onset diabetes as type 1 and committing to lifelong insulin without considering monogenic causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for maturity-onset diabetes of the young."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mody-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Islet autoantibody panel",
+          "cells": [
+            {
+              "text": "Autoimmune diabetes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-peptide",
+          "cells": [
+            {
+              "text": "Preserved endogenous insulin secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed multigenerational family history",
+          "cells": [
+            {
+              "text": "Family pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of the relevant MODY genes",
+          "cells": [
+            {
+              "text": "Subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for extra-pancreatic features such as renal cysts",
+          "cells": [
+            {
+              "text": "Syndromic subtype features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Confirm the subtype by genetics",
+          "cells": [
+            {
+              "text": "Dictates treatment and avoids mislabelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genotype-guided therapy",
+          "cells": [
+            {
+              "text": "Low-dose sulfonylureas for HNF1A and HNF4A subtypes, often in place of insulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GCK subtype",
+          "cells": [
+            {
+              "text": "No pharmacological treatment outside pregnancy; lifestyle measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Switch to sulfonylureas",
+          "cells": [
+            {
+              "text": "Insulin-treated patients, once a responsive subtype is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication screening",
+          "cells": [
+            {
+              "text": "Progressive transcription-factor subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; cascade testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care",
+          "cells": [
+            {
+              "text": "Endocrinology and clinical genetics; specialist input in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mody-dx-mgmt",
+      "title": "Diagnosis and management of Maturity-onset diabetes of the young",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young-onset diabetes with a family history across generations",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ketoacidosis, rapidly progressive hyperglycaemia, renal abnormalities or pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine review for ketoacidosis; consider type 1 diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Islet autoantibodies; C-peptide; family pedigree; MODY gene testing; renal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a MODY gene variant confirmed with autoantibodies negative and C-peptide preserved?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 1 diabetes, type 2 diabetes or LADA; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Genetic confirmation of subtype to avoid mislabelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-dose sulfonylureas for HNF1A and HNF4A subtypes, often in place of insulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifestyle measures only for GCK subtype outside pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Switch suitable insulin-treated patients to sulfonylureas once confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complication screening in progressive subtypes; cascade testing of relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

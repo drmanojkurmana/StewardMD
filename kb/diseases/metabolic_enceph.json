@@ -233,25 +233,569 @@
       "caption": "Diagnostic and clinical overview matrix for metabolic encephalopathy."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "metabolic-enceph-real-image",
-      "title": "Metabolic encephalopathy: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Delirium",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/delirium-and-dementia/delirium"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "metabolic_enceph-diagnostic",
+      "kind": "diagnostic",
+      "title": "Bedside criteria and tests in metabolic encephalopathy (delirium)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Confusion Assessment Method",
+          "cells": [
+            {
+              "text": "Acute fluctuating course plus inattention, with disorganised thinking or altered consciousness"
+            },
+            {
+              "text": "{{hy:Positive CAM confirms delirium at the bedside}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Forward digit span",
+          "unit": "digits",
+          "cells": [
+            {
+              "text": "4 digits or fewer",
+              "op": "<=",
+              "value": 4
+            },
+            {
+              "text": "Attention deficit; healthy adults manage 5 to 7, many delirious patients 3 or fewer"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Motor signs",
+          "cells": [
+            {
+              "text": "Bilateral asterixis, multifocal myoclonus"
+            },
+            {
+              "text": "Point to toxic or metabolic cause rather than structural lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium, confusion",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Below 125 mmol/L, especially if acute",
+              "op": "<",
+              "value": 125
+            },
+            {
+              "text": "Can cause confusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium, coma",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Below 119 mmol/L acutely",
+              "op": "<",
+              "value": 119
+            },
+            {
+              "text": "Associated with coma and convulsions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rate of change",
+          "cells": [
+            {
+              "text": "Acute derangement"
+            },
+            {
+              "text": "A mildly abnormal value reached quickly can cause marked impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line tests",
+          "cells": [
+            {
+              "text": "Glucose, electrolytes with Mg and phosphate, BUN, creatinine, CBC, oximetry or ABG, cultures, urinalysis, chest x-ray, drug screen"
+            },
+            {
+              "text": "Find metabolic, infective and toxic causes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Second-line tests",
+          "cells": [
+            {
+              "text": "Liver tests, calcium, albumin, TSH, cortisol, B12, folate, thiamine, ESR or CRP, ammonia"
+            },
+            {
+              "text": "When first tests are unrevealing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Diffuse slowing; triphasic waves in hepatic coma"
+            },
+            {
+              "text": "Needed to detect nonconvulsive status epilepticus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging",
+          "cells": [
+            {
+              "text": "MRI with diffusion preferred; CT often first"
+            },
+            {
+              "text": "Often normal in pure metabolic delirium; excludes structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture",
+          "cells": [
+            {
+              "text": "After imaging"
+            },
+            {
+              "text": "Suspected meningitis, encephalitis, SAH or negative work-up"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "In-hospital mortality",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "25 to 33%",
+              "range": [
+                25,
+                33
+              ]
+            },
+            {
+              "text": "Merck: 30 to 50% of hospitalised patients die within 1 year"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metabolic_enceph-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic metabolic encephalopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Dementia",
+          "cells": [
+            {
+              "text": "Memory affected first, slow onset, little fluctuation; coexists in two-thirds of delirium"
+            },
+            {
+              "text": "Collateral history of cognitive baseline"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dementia with Lewy bodies",
+          "cells": [
+            {
+              "text": "Fluctuation, visual hallucinations, parkinsonism"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonconvulsive status epilepticus",
+          "cells": [
+            {
+              "text": "Subtle twitches, automatisms, fluctuating drowsiness"
+            },
+            {
+              "text": "{{hy:Urgent EEG}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural lesion (right parietal or thalamic stroke, tumour)",
+          "cells": [
+            {
+              "text": "Focal signs, papilloedema"
+            },
+            {
+              "text": "MRI brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS infection or autoimmune encephalitis",
+          "cells": [
+            {
+              "text": "Fever, meningism"
+            },
+            {
+              "text": "Lumbar puncture and autoimmune panels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertensive encephalopathy, PRES, eclampsia",
+          "cells": [
+            {
+              "text": "Severe hypertension or pregnancy"
+            },
+            {
+              "text": "MRI brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary psychiatric disorder or catatonia",
+          "cells": [
+            {
+              "text": "Rarely causes inattention or fluctuating consciousness; subacute onset"
+            },
+            {
+              "text": "Bedside attention testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug intoxication or withdrawal",
+          "cells": [
+            {
+              "text": "About one-third of delirium; anticholinergics, opioids, benzodiazepines"
+            },
+            {
+              "text": "Medication review and toxicology screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metabolic_enceph-treatment",
+      "kind": "treatment",
+      "title": "Management of metabolic encephalopathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "{{hy:Every patient}}"
+            },
+            {
+              "text": "Symptom control alone prolongs confusion and hides clues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop contributing drugs",
+          "cells": [
+            {
+              "text": "Anticholinergics, sedatives, opioids, antihistamines"
+            },
+            {
+              "text": "Most common precipitant with dehydration and infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluids, electrolytes, nutrition",
+          "cells": [
+            {
+              "text": "Dehydration or electrolyte disturbance"
+            },
+            {
+              "text": "Correct thiamine and B12 deficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-drug measures",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Quiet lit room, clocks, reorientation, glasses and hearing aids, sitters instead of restraints"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose haloperidol or second-generation antipsychotic",
+          "cells": [
+            {
+              "text": "Severe agitation risking harm"
+            },
+            {
+              "text": "Not routine; may prolong delirium; doses not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV benzodiazepine",
+          "cells": [
+            {
+              "text": "Alcohol or benzodiazepine withdrawal only"
+            },
+            {
+              "text": "Avoid for other causes; worsens confusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Restraints",
+          "cells": [
+            {
+              "text": "Last resort"
+            },
+            {
+              "text": "Trained staff, release at least every 2 h, stop early"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid lines and catheters",
+          "cells": [
+            {
+              "text": "Unnecessary IV lines or bladder catheters"
+            },
+            {
+              "text": "Reduce precipitants"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Outpatient cognitive follow-up",
+          "cells": [
+            {
+              "text": "Delirium after a minor insult"
+            },
+            {
+              "text": "May unmask an underlying neurodegenerative disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "metabolic_enceph-dx-mgmt",
+      "title": "Diagnosis and management of metabolic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute fluctuating confusion with inattention",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Confirm with CAM; get baseline from family",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Glucose, electrolytes, renal, oximetry or ABG, infection screen",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Focal signs, fever, meningism or papilloedema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Urgent CT or MRI, then lumbar puncture",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Metabolic, drug or infective cause found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct cause, stop offending drugs, hydrate",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Second-line labs: liver, ammonia, TSH, cortisol, B12, thiamine",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Still unexplained or fluctuating twitches?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "EEG for nonconvulsive status; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Non-drug measures; antipsychotic only for dangerous agitation",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Serial reassessment; cognitive follow-up after recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
         }
       ]
     }

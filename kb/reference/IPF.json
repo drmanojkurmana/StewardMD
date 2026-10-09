@@ -1,183 +1,598 @@
 {
- "id": "IPF",
- "name": "Idiopathic pulmonary fibrosis",
- "system": "Pulmonology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "Cryptogenic fibrosing alveolitis",
-  "IPF",
-  "Idiopathic UIP",
-  "UIP",
-  "cryptogenic fibrosing alveolitis",
-  "idiopathic UIP",
-  "idiopathic pulmonary fibrosis",
-  "usual interstitial pneumonia"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Consider IPF in an older adult (usually over age 60) with progressive exertional dyspnea and dry cough lasting months, especially with a smoking history.",
-   "Bibasilar, fine 'Velcro-like' end-inspiratory crackles are the classic auscultatory finding.",
-   "Digital clubbing is present in roughly half of patients and supports the diagnosis.",
-   "High-resolution CT showing a definite UIP pattern (subpleural, basal-predominant reticulation with honeycombing, traction bronchiectasis, absence of features suggesting an alternative diagnosis) can obviate the need for lung biopsy.",
-   "IPF is a diagnosis of exclusion — connective tissue disease, chronic hypersensitivity pneumonitis, drug toxicity, and occupational/environmental exposures must be ruled out first.",
-   "Course is highly variable: most patients decline gradually, but acute exacerbations with rapid, often fatal deterioration can occur unpredictably.",
-   "Antifibrotic therapy slows the rate of decline in lung function but does not reverse existing fibrosis, so early diagnosis and referral matter.",
-   "Early referral for lung transplant evaluation should be considered at diagnosis given the poor natural history."
+  "id": "IPF",
+  "name": "Idiopathic pulmonary fibrosis",
+  "system": "Pulmonology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "Cryptogenic fibrosing alveolitis",
+    "IPF",
+    "Idiopathic UIP",
+    "UIP",
+    "cryptogenic fibrosing alveolitis",
+    "idiopathic UIP",
+    "idiopathic pulmonary fibrosis",
+    "usual interstitial pneumonia"
   ],
-  "pathophysiology": "IPF is thought to result from repeated micro-injury to alveolar epithelium in a genetically susceptible, typically older individual, triggering an aberrant wound-healing response rather than a primarily inflammatory process. This dysregulated repair leads to fibroblast/myofibroblast proliferation and excessive extracellular matrix deposition, producing the patchy, temporally heterogeneous fibrosis and architectural distortion characteristic of the usual interstitial pneumonia pattern. Progressive scarring impairs gas exchange and lung compliance, culminating in restrictive physiology and hypoxemia.",
-  "additionalDifferentials": [
-   "Connective tissue disease-associated interstitial lung disease (e.g., rheumatoid arthritis, systemic sclerosis)",
-   "Chronic hypersensitivity pneumonitis",
-   "Nonspecific interstitial pneumonia",
-   "Drug-induced pulmonary toxicity",
-   "Asbestosis or other pneumoconiosis",
-   "Combined pulmonary fibrosis and emphysema"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Congestive heart failure with pulmonary edema",
-   "Sarcoidosis",
-   "Chronic hypersensitivity pneumonitis",
-   "Connective tissue disease-associated interstitial lung disease",
-   "Pulmonary drug toxicity"
-  ],
-  "additionalInvestigations": [
-   "High-resolution CT chest — identifies UIP pattern and excludes alternative diagnoses",
-   "Pulmonary function tests with DLCO — documents restrictive pattern and gas-transfer impairment, tracks progression",
-   "Serologic autoimmune panel (ANA, rheumatoid factor, myositis antibodies) — screens for occult connective tissue disease",
-   "Six-minute walk test with oximetry — assesses functional capacity and exertional desaturation",
-   "Surgical or transbronchial cryobiopsy — considered when HRCT is indeterminate and histopathology would change management",
-   "Echocardiogram — evaluates for pulmonary hypertension as a complication",
-   "Bronchoalveolar lavage — helps exclude infection or alternative diagnoses in select atypical presentations",
-   "Detailed exposure and medication history — identifies occupational, environmental, or drug-related causes of fibrosis"
-  ],
-  "redFlags": [
-   "Acute worsening of dyspnea over days to weeks (acute exacerbation), which carries high short-term mortality",
-   "Resting hypoxemia or significant desaturation on exertion",
-   "Rapidly declining forced vital capacity or DLCO on serial testing",
-   "Signs of cor pulmonale or pulmonary hypertension",
-   "Superimposed respiratory infection, which can precipitate acute decompensation"
-  ],
-  "pitfalls": [
-   "Attributing crackles and dyspnea to heart failure or COPD without pursuing HRCT, delaying diagnosis",
-   "Missing an underlying connective tissue disease or exposure history that would reclassify the disease and change management",
-   "Relying on chest x-ray alone, which is insensitive for early fibrotic change",
-   "Assuming a stable course; failing to monitor for acute exacerbations or gradual functional decline"
-  ],
-  "prognosis": "IPF carries a poor prognosis with median survival historically around 3-5 years from diagnosis, though the trajectory is heterogeneous and antifibrotic therapy has modestly slowed functional decline. Acute exacerbations and progression to respiratory failure are the major causes of death, and lung transplantation remains the only intervention altering long-term survival.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Interstitial Lung Diseases / Idiopathic Pulmonary Fibrosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start antifibrotic therapy — pirfenidone or nintedanib — to slow the decline in lung function",
-   "Provide supplemental oxygen for resting or exertional hypoxaemia and enrol the patient in pulmonary rehabilitation",
-   "Manage contributing comorbidities including gastro-oesophageal reflux and pulmonary hypertension, and ensure vaccination against respiratory pathogens",
-   "Palliate refractory cough and breathlessness, using opioids for dyspnoea, and integrate palliative care with advance care planning",
-   "Treat acute exacerbations supportively after excluding infection and heart failure, recognising corticosteroids are of uncertain benefit",
-   "Monitor with serial pulmonary function tests and oximetry and surveil for pulmonary hypertension and lung cancer",
-   "Refer suitable candidates early for lung transplantation assessment given the poor prognosis"
-  ]
- },
- "algorithms": [
-  {
-   "id": "ipf-pathway",
-   "title": "Idiopathic pulmonary fibrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Consider IPF in an older adult (usually over age 60) with progressive exertional dyspnea and dry cough lasting months, especially with a smoking history.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute worsening of dyspnea over days to weeks (acute exacerbation), which carries high short-term mortality",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: High-resolution CT chest - identifies UIP pattern and excludes alternative diagnoses, Pulmonary function tests with DLCO - documents restrictive pattern and gas-transfer impairment, tracks progression, Serologic autoimmune"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start antifibrotic therapy - pirfenidone or nintedanib - to slow the decline in lung function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing crackles and dyspnea to heart failure or COPD without pursuing HRCT, delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of idiopathic pulmonary fibrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "ipf-matrix",
-   "title": "Idiopathic pulmonary fibrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Consider IPF in an older adult (usually over age 60) with progressive exertional dyspnea and dry cough lasting months, especially",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Consider IPF in an older adult (usually over age 60) with progressive exertional dyspnea and dry cough lasting months, especially with a smoking history.",
+      "Bibasilar, fine 'Velcro-like' end-inspiratory crackles are the classic auscultatory finding.",
+      "Digital clubbing is present in roughly half of patients and supports the diagnosis.",
+      "High-resolution CT showing a definite UIP pattern (subpleural, basal-predominant reticulation with honeycombing, traction bronchiectasis, absence of features suggesting an alternative diagnosis) can obviate the need for lung biopsy.",
+      "IPF is a diagnosis of exclusion — connective tissue disease, chronic hypersensitivity pneumonitis, drug toxicity, and occupational/environmental exposures must be ruled out first.",
+      "Course is highly variable: most patients decline gradually, but acute exacerbations with rapid, often fatal deterioration can occur unpredictably.",
+      "Antifibrotic therapy slows the rate of decline in lung function but does not reverse existing fibrosis, so early diagnosis and referral matter.",
+      "Early referral for lung transplant evaluation should be considered at diagnosis given the poor natural history."
     ],
-    [
-     "Key Investigations",
-     "High-resolution CT chest - identifies UIP pattern and excludes alternative diagnoses, Pulmonary function tests with DLCO -",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "IPF is thought to result from repeated micro-injury to alveolar epithelium in a genetically susceptible, typically older individual, triggering an aberrant wound-healing response rather than a primarily inflammatory process. This dysregulated repair leads to fibroblast/myofibroblast proliferation and excessive extracellular matrix deposition, producing the patchy, temporally heterogeneous fibrosis and architectural distortion characteristic of the usual interstitial pneumonia pattern. Progressive scarring impairs gas exchange and lung compliance, culminating in restrictive physiology and hypoxemia.",
+    "additionalDifferentials": [
+      "Connective tissue disease-associated interstitial lung disease (e.g., rheumatoid arthritis, systemic sclerosis)",
+      "Chronic hypersensitivity pneumonitis",
+      "Nonspecific interstitial pneumonia",
+      "Drug-induced pulmonary toxicity",
+      "Asbestosis or other pneumoconiosis",
+      "Combined pulmonary fibrosis and emphysema"
     ],
-    [
-     "Primary Differentials",
-     "Connective tissue disease-associated interstitial lung disease (e.g., rheumatoid arthritis, systemic sclerosis), Chronic",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Congestive heart failure with pulmonary edema",
+      "Sarcoidosis",
+      "Chronic hypersensitivity pneumonitis",
+      "Connective tissue disease-associated interstitial lung disease",
+      "Pulmonary drug toxicity"
     ],
-    [
-     "Management Strategy",
-     "Start antifibrotic therapy - pirfenidone or nintedanib - to slow the decline in lung function",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "High-resolution CT chest — identifies UIP pattern and excludes alternative diagnoses",
+      "Pulmonary function tests with DLCO — documents restrictive pattern and gas-transfer impairment, tracks progression",
+      "Serologic autoimmune panel (ANA, rheumatoid factor, myositis antibodies) — screens for occult connective tissue disease",
+      "Six-minute walk test with oximetry — assesses functional capacity and exertional desaturation",
+      "Surgical or transbronchial cryobiopsy — considered when HRCT is indeterminate and histopathology would change management",
+      "Echocardiogram — evaluates for pulmonary hypertension as a complication",
+      "Bronchoalveolar lavage — helps exclude infection or alternative diagnoses in select atypical presentations",
+      "Detailed exposure and medication history — identifies occupational, environmental, or drug-related causes of fibrosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing crackles and dyspnea to heart failure or COPD without pursuing HRCT, delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Acute worsening of dyspnea over days to weeks (acute exacerbation), which carries high short-term mortality",
+      "Resting hypoxemia or significant desaturation on exertion",
+      "Rapidly declining forced vital capacity or DLCO on serial testing",
+      "Signs of cor pulmonale or pulmonary hypertension",
+      "Superimposed respiratory infection, which can precipitate acute decompensation"
+    ],
+    "pitfalls": [
+      "Attributing crackles and dyspnea to heart failure or COPD without pursuing HRCT, delaying diagnosis",
+      "Missing an underlying connective tissue disease or exposure history that would reclassify the disease and change management",
+      "Relying on chest x-ray alone, which is insensitive for early fibrotic change",
+      "Assuming a stable course; failing to monitor for acute exacerbations or gradual functional decline"
+    ],
+    "prognosis": "IPF carries a poor prognosis with median survival historically around 3-5 years from diagnosis, though the trajectory is heterogeneous and antifibrotic therapy has modestly slowed functional decline. Acute exacerbations and progression to respiratory failure are the major causes of death, and lung transplantation remains the only intervention altering long-term survival.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Interstitial Lung Diseases / Idiopathic Pulmonary Fibrosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start antifibrotic therapy — pirfenidone or nintedanib — to slow the decline in lung function",
+      "Provide supplemental oxygen for resting or exertional hypoxaemia and enrol the patient in pulmonary rehabilitation",
+      "Manage contributing comorbidities including gastro-oesophageal reflux and pulmonary hypertension, and ensure vaccination against respiratory pathogens",
+      "Palliate refractory cough and breathlessness, using opioids for dyspnoea, and integrate palliative care with advance care planning",
+      "Treat acute exacerbations supportively after excluding infection and heart failure, recognising corticosteroids are of uncertain benefit",
+      "Monitor with serial pulmonary function tests and oximetry and surveil for pulmonary hypertension and lung cancer",
+      "Refer suitable candidates early for lung transplantation assessment given the poor prognosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for idiopathic pulmonary fibrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ipf-real-image",
-   "title": "Idiopathic pulmonary fibrosis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "ipf-pathway",
+      "title": "Idiopathic pulmonary fibrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Consider IPF in an older adult (usually over age 60) with progressive exertional dyspnea and dry cough lasting months, especially with a smoking history.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute worsening of dyspnea over days to weeks (acute exacerbation), which carries high short-term mortality",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: High-resolution CT chest - identifies UIP pattern and excludes alternative diagnoses, Pulmonary function tests with DLCO - documents restrictive pattern and gas-transfer impairment, tracks progression, Serologic autoimmune"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start antifibrotic therapy - pirfenidone or nintedanib - to slow the decline in lung function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing crackles and dyspnea to heart failure or COPD without pursuing HRCT, delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of idiopathic pulmonary fibrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ipf-matrix",
+      "title": "Idiopathic pulmonary fibrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Consider IPF in an older adult (usually over age 60) with progressive exertional dyspnea and dry cough lasting months, especially",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "High-resolution CT chest - identifies UIP pattern and excludes alternative diagnoses, Pulmonary function tests with DLCO -",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Connective tissue disease-associated interstitial lung disease (e.g., rheumatoid arthritis, systemic sclerosis), Chronic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start antifibrotic therapy - pirfenidone or nintedanib - to slow the decline in lung function",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing crackles and dyspnea to heart failure or COPD without pursuing HRCT, delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for idiopathic pulmonary fibrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Idiopathic Pulmonary Fibrosis",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/interstitial-lung-diseases/idiopathic-pulmonary-fibrosis-ipf",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 323-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "IPF-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in idiopathic pulmonary fibrosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Patient profile",
+          "cells": [
+            {
+              "text": "Over 50 years, men twice as often, smokers"
+            },
+            {
+              "text": "MUC5B variants in about 30% to 35%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Symptoms and signs",
+          "cells": [
+            {
+              "text": "Exertional dyspnoea, dry cough, basal Velcro crackles"
+            },
+            {
+              "text": "Clubbing in about 50%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HRCT",
+          "cells": [
+            {
+              "text": "Subpleural basal reticulation, honeycombing, traction bronchiectasis"
+            },
+            {
+              "text": "{{hy:Diagnosis requires HRCT}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HRCT features against IPF",
+          "cells": [
+            {
+              "text": "Marked ground glass, nodules, mosaic attenuation or air trapping"
+            },
+            {
+              "text": "Suggest an alternative diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary function",
+          "cells": [
+            {
+              "text": "Restriction with low DLCO; exertional desaturation"
+            },
+            {
+              "text": "Low FVC and DLCO predict worse survival"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Laboratory tests",
+          "cells": [
+            {
+              "text": "Autoimmune serology"
+            },
+            {
+              "text": "Mainly to exclude connective tissue disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lung biopsy",
+          "cells": [
+            {
+              "text": "Usual interstitial pneumonia: fibroblast foci, heterogeneity"
+            },
+            {
+              "text": "Only if uncertainty remains"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Median survival",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "About 3 to 5 from diagnosis",
+              "range": [
+                3,
+                5
+              ]
+            },
+            {
+              "text": "Death usually from respiratory failure"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "IPF-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of IPF",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Connective tissue disease ILD",
+          "cells": [
+            {
+              "text": "{{hy:Positive serology and extrapulmonary features}}; fibrosis in 35% limited vs 65% diffuse systemic sclerosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic hypersensitivity pneumonitis",
+          "cells": [
+            {
+              "text": "Antigen exposure; mosaic attenuation and air trapping on HRCT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nonspecific interstitial pneumonia",
+          "cells": [
+            {
+              "text": "More ground glass, less honeycombing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced lung toxicity",
+          "cells": [
+            {
+              "text": "Exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asbestosis or pneumoconiosis",
+          "cells": [
+            {
+              "text": "Occupational exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined fibrosis and emphysema",
+          "cells": [
+            {
+              "text": "Upper-lobe emphysema with basal fibrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "IPF-treatment",
+      "kind": "treatment",
+      "title": "Treatment of IPF",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pirfenidone or nintedanib",
+          "cells": [
+            {
+              "text": "{{hy:Antifibrotic for confirmed IPF}}"
+            },
+            {
+              "text": "Neither proven better; monitor liver tests"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supplemental oxygen",
+          "cells": [
+            {
+              "text": "Resting or exertional hypoxaemia"
+            },
+            {
+              "text": "With pulmonary rehabilitation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lung transplant referral",
+          "cells": [
+            {
+              "text": "Otherwise healthy patients"
+            },
+            {
+              "text": "Evaluate at diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Not recommended for IPF"
+            },
+            {
+              "text": "Uncertain benefit even in exacerbations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity care",
+          "cells": [
+            {
+              "text": "Reflux, pulmonary hypertension, vaccination"
+            },
+            {
+              "text": "Surveil for lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Refractory breathlessness and cough"
+            },
+            {
+              "text": "Opioids for dyspnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute exacerbation",
+          "cells": [
+            {
+              "text": "Sudden worsening"
+            },
+            {
+              "text": "Exclude infection, PE, pneumothorax, heart failure"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "IPF-dx-mgmt",
+      "title": "Diagnosis and management of IPF",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive exertional dyspnoea with basal crackles, age over 50",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Exposure and drug history, autoimmune serology, PFTs",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Connective tissue disease, exposure or drug cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Manage as secondary ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "High-resolution CT",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Typical UIP pattern without alternative features?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary review; biopsy if uncertainty remains",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start pirfenidone or nintedanib",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oxygen, rehabilitation, transplant referral",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Acute deterioration?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Exclude infection, PE, pneumothorax, heart failure; supportive care",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Serial PFTs; palliative care as disease advances",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "UIP confirmed"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

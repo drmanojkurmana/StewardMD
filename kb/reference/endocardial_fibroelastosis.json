@@ -1,177 +1,493 @@
 {
- "id": "endocardial_fibroelastosis",
- "name": "Endocardial Fibroelastosis",
- "aliases": [
-  "EFE"
- ],
- "class": "non_infective",
- "system": "Cardiovascular system",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cardiology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A diffuse thickening of the ventricular endocardium by collagen and elastic fibres, most often affecting the left ventricle of infants and young children.",
-   "Presents with heart failure in infancy: breathlessness, poor feeding, failure to thrive, sweating, tachypnoea and recurrent chest infections.",
-   "Two classic forms are described, a dilated type with a large poorly contracting left ventricle and a rarer contracted (restrictive) type with a small cavity.",
-   "The primary form arises without another structural lesion, whereas the secondary form accompanies congenital defects such as hypoplastic left heart, aortic stenosis or coarctation.",
-   "Echocardiography shows a brightly echogenic, thickened endocardium with a dilated hypocontractile ventricle, mitral regurgitation and impaired systolic function.",
-   "It is a recognised outcome of intrauterine insults, notably maternal anti-Ro/anti-La antibodies and viral myocarditis, and rare inherited metabolic disorders.",
-   "Endocardial thickening restricts diastolic filling and impairs contraction, driving progressive congestive cardiac failure and mural thrombus formation.",
-   "Management centres on heart failure therapy and treating any underlying cause; refractory disease may require transplantation."
+  "id": "endocardial_fibroelastosis",
+  "name": "Endocardial Fibroelastosis",
+  "aliases": [
+    "EFE"
   ],
-  "pathophysiology": "Endocardial fibroelastosis is characterised by a diffuse, glistening, pearly-white thickening of the mural endocardium produced by a dense proliferation of collagen and elastic fibres, predominantly involving the left ventricle and often extending onto the mitral and aortic valve apparatus. The fibroelastic layer encases the ventricular wall, impairing both diastolic relaxation and systolic contraction and thereby generating heart failure. Rather than a single disease, it represents a final common endocardial response to a range of intrauterine and early-life myocardial insults. Proposed and established mechanisms include haemodynamic stress and subendocardial ischaemia in the setting of obstructive congenital lesions (the secondary form seen with hypoplastic left heart, critical aortic stenosis and coarctation), intrauterine viral myocarditis, and immune-mediated injury from transplacental passage of maternal anti-Ro and anti-La antibodies, the same antibodies implicated in congenital heart block. Lymphatic obstruction, endocardial hypoxia and abnormal wall stress have all been invoked to explain the reactive fibroelastic transformation. Certain inherited metabolic and mitochondrial disorders, as well as genetic mutations affecting the tafazzin gene and carnitine metabolism, can produce a similar phenotype. The thickened, poorly compliant endocardium promotes chamber dilatation or restriction depending on the subtype, predisposes to mural thrombus and systemic embolism, and, when the underlying process is progressive, culminates in intractable congestive failure.",
-  "additionalDifferentials": [
-   "Dilated cardiomyopathy of other aetiology",
-   "Viral or autoimmune myocarditis",
-   "Anomalous origin of the left coronary artery from the pulmonary artery",
-   "Glycogen storage and other metabolic cardiomyopathies (including Pompe disease)",
-   "Mitochondrial cardiomyopathy and Barth syndrome",
-   "Congenital obstructive left heart lesions with secondary changes",
-   "Restrictive cardiomyopathy and cardiac involvement in mucopolysaccharidoses"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography assessing endocardial echogenicity, chamber size and systolic function",
-   "Electrocardiography looking for left ventricular hypertrophy, strain and repolarisation change",
-   "Maternal and infant anti-Ro and anti-La antibody testing",
-   "Cardiac MRI for tissue characterisation and quantification of fibrosis",
-   "Metabolic and genetic screening including carnitine, organic acids and targeted gene panels",
-   "Viral studies and, where indicated, endomyocardial biopsy",
-   "Coronary imaging to exclude anomalous left coronary artery"
-  ],
-  "redFlags": [
-   "Rapidly progressive heart failure with cardiogenic shock in an infant",
-   "Systemic embolism suggesting mural thrombus",
-   "Malignant arrhythmia or complete heart block",
-   "Failure to thrive with recurrent respiratory decompensation",
-   "Signs of an untreated obstructive congenital lesion driving the process"
-  ],
-  "prognosis": "Outcome varies with subtype and cause; some children stabilise and improve with sustained heart failure therapy, while the contracted form and progressive cases carry a poor prognosis and may require transplantation. Early treatment of a reversible underlying cause improves survival.",
-  "pitfalls": [
-   "Labelling the condition primary without excluding obstructive congenital lesions or anomalous coronary anatomy",
-   "Overlooking maternal autoantibodies as a treatable and preventable cause",
-   "Missing an underlying metabolic or mitochondrial disorder amenable to specific therapy",
-   "Underestimating thromboembolic risk from the abnormal endocardium",
-   "Attributing all infantile heart failure to viral illness and delaying echocardiography"
-  ],
-  "references": [
-   "Braunwald's Heart Disease (standard reference)",
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents (standard reference)",
-   "Nadas' Pediatric Cardiology (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the resulting heart failure with diuretics, afterload reduction using ACE inhibitors and other guideline-directed anti-failure therapy, often sustained over years",
-   "Identify and treat a reversible underlying cause, including obstructive congenital lesions such as hypoplastic left heart, aortic stenosis or coarctation, and maternal anti-Ro/anti-La-associated disease",
-   "Screen for inherited metabolic disorders and provide appropriate substrate or cofactor replacement where a treatable cause such as carnitine deficiency is identified",
-   "Monitor ventricular function and mitral regurgitation with serial echocardiography and adjust therapy accordingly",
-   "Manage acute decompensation with inotropic support and intensive supportive care",
-   "Refer to paediatric cardiology and evaluate refractory or contracted-type disease for cardiac transplantation",
-   "Provide metabolic and genetic counselling where an inherited disorder is identified, and consider maternal autoantibody assessment in future pregnancies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "endocardial_fibroelastosis-pathway",
-   "title": "Endocardial Fibroelastosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A diffuse thickening of the ventricular endocardium by collagen and elastic fibres, most often affecting the left ventricle of infants and young children.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive heart failure with cardiogenic shock in an infant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography assessing endocardial echogenicity, chamber size and systolic function, Electrocardiography looking for left ventricular hypertrophy, strain and repolarisation change, Maternal and infant"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the resulting heart failure with diuretics, afterload reduction using ACE inhibitors and other guideline-directed anti-failure therapy, often sustained over years"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the condition primary without excluding obstructive congenital lesions or anomalous coronary anatomy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of endocardial fibroelastosis."
-  }
- ],
- "tables": [
-  {
-   "id": "endocardial_fibroelastosis-matrix",
-   "title": "Endocardial Fibroelastosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A diffuse thickening of the ventricular endocardium by collagen and elastic fibres, most often affecting the left ventricle of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular system",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cardiology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A diffuse thickening of the ventricular endocardium by collagen and elastic fibres, most often affecting the left ventricle of infants and young children.",
+      "Presents with heart failure in infancy: breathlessness, poor feeding, failure to thrive, sweating, tachypnoea and recurrent chest infections.",
+      "Two classic forms are described, a dilated type with a large poorly contracting left ventricle and a rarer contracted (restrictive) type with a small cavity.",
+      "The primary form arises without another structural lesion, whereas the secondary form accompanies congenital defects such as hypoplastic left heart, aortic stenosis or coarctation.",
+      "Echocardiography shows a brightly echogenic, thickened endocardium with a dilated hypocontractile ventricle, mitral regurgitation and impaired systolic function.",
+      "It is a recognised outcome of intrauterine insults, notably maternal anti-Ro/anti-La antibodies and viral myocarditis, and rare inherited metabolic disorders.",
+      "Endocardial thickening restricts diastolic filling and impairs contraction, driving progressive congestive cardiac failure and mural thrombus formation.",
+      "Management centres on heart failure therapy and treating any underlying cause; refractory disease may require transplantation."
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography assessing endocardial echogenicity, chamber size and systolic function, Electrocardiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Endocardial fibroelastosis is characterised by a diffuse, glistening, pearly-white thickening of the mural endocardium produced by a dense proliferation of collagen and elastic fibres, predominantly involving the left ventricle and often extending onto the mitral and aortic valve apparatus. The fibroelastic layer encases the ventricular wall, impairing both diastolic relaxation and systolic contraction and thereby generating heart failure. Rather than a single disease, it represents a final common endocardial response to a range of intrauterine and early-life myocardial insults. Proposed and established mechanisms include haemodynamic stress and subendocardial ischaemia in the setting of obstructive congenital lesions (the secondary form seen with hypoplastic left heart, critical aortic stenosis and coarctation), intrauterine viral myocarditis, and immune-mediated injury from transplacental passage of maternal anti-Ro and anti-La antibodies, the same antibodies implicated in congenital heart block. Lymphatic obstruction, endocardial hypoxia and abnormal wall stress have all been invoked to explain the reactive fibroelastic transformation. Certain inherited metabolic and mitochondrial disorders, as well as genetic mutations affecting the tafazzin gene and carnitine metabolism, can produce a similar phenotype. The thickened, poorly compliant endocardium promotes chamber dilatation or restriction depending on the subtype, predisposes to mural thrombus and systemic embolism, and, when the underlying process is progressive, culminates in intractable congestive failure.",
+    "additionalDifferentials": [
+      "Dilated cardiomyopathy of other aetiology",
+      "Viral or autoimmune myocarditis",
+      "Anomalous origin of the left coronary artery from the pulmonary artery",
+      "Glycogen storage and other metabolic cardiomyopathies (including Pompe disease)",
+      "Mitochondrial cardiomyopathy and Barth syndrome",
+      "Congenital obstructive left heart lesions with secondary changes",
+      "Restrictive cardiomyopathy and cardiac involvement in mucopolysaccharidoses"
     ],
-    [
-     "Primary Differentials",
-     "Dilated cardiomyopathy of other aetiology, Viral or autoimmune myocarditis, Anomalous origin of the left coronary artery from the",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography assessing endocardial echogenicity, chamber size and systolic function",
+      "Electrocardiography looking for left ventricular hypertrophy, strain and repolarisation change",
+      "Maternal and infant anti-Ro and anti-La antibody testing",
+      "Cardiac MRI for tissue characterisation and quantification of fibrosis",
+      "Metabolic and genetic screening including carnitine, organic acids and targeted gene panels",
+      "Viral studies and, where indicated, endomyocardial biopsy",
+      "Coronary imaging to exclude anomalous left coronary artery"
     ],
-    [
-     "Management Strategy",
-     "Treat the resulting heart failure with diuretics, afterload reduction using ACE inhibitors and other guideline-directed",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive heart failure with cardiogenic shock in an infant",
+      "Systemic embolism suggesting mural thrombus",
+      "Malignant arrhythmia or complete heart block",
+      "Failure to thrive with recurrent respiratory decompensation",
+      "Signs of an untreated obstructive congenital lesion driving the process"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the condition primary without excluding obstructive congenital lesions or anomalous coronary anatomy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies with subtype and cause; some children stabilise and improve with sustained heart failure therapy, while the contracted form and progressive cases carry a poor prognosis and may require transplantation. Early treatment of a reversible underlying cause improves survival.",
+    "pitfalls": [
+      "Labelling the condition primary without excluding obstructive congenital lesions or anomalous coronary anatomy",
+      "Overlooking maternal autoantibodies as a treatable and preventable cause",
+      "Missing an underlying metabolic or mitochondrial disorder amenable to specific therapy",
+      "Underestimating thromboembolic risk from the abnormal endocardium",
+      "Attributing all infantile heart failure to viral illness and delaying echocardiography"
+    ],
+    "references": [
+      "Braunwald's Heart Disease (standard reference)",
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents (standard reference)",
+      "Nadas' Pediatric Cardiology (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the resulting heart failure with diuretics, afterload reduction using ACE inhibitors and other guideline-directed anti-failure therapy, often sustained over years",
+      "Identify and treat a reversible underlying cause, including obstructive congenital lesions such as hypoplastic left heart, aortic stenosis or coarctation, and maternal anti-Ro/anti-La-associated disease",
+      "Screen for inherited metabolic disorders and provide appropriate substrate or cofactor replacement where a treatable cause such as carnitine deficiency is identified",
+      "Monitor ventricular function and mitral regurgitation with serial echocardiography and adjust therapy accordingly",
+      "Manage acute decompensation with inotropic support and intensive supportive care",
+      "Refer to paediatric cardiology and evaluate refractory or contracted-type disease for cardiac transplantation",
+      "Provide metabolic and genetic counselling where an inherited disorder is identified, and consider maternal autoantibody assessment in future pregnancies"
     ]
-   ],
-   "caption": "Overview comparison matrix for endocardial fibroelastosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "endocardial-fibroelastosis-real-image",
-   "title": "Endocardial Fibroelastosis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "endocardial_fibroelastosis-pathway",
+      "title": "Endocardial Fibroelastosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A diffuse thickening of the ventricular endocardium by collagen and elastic fibres, most often affecting the left ventricle of infants and young children.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive heart failure with cardiogenic shock in an infant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography assessing endocardial echogenicity, chamber size and systolic function, Electrocardiography looking for left ventricular hypertrophy, strain and repolarisation change, Maternal and infant"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the resulting heart failure with diuretics, afterload reduction using ACE inhibitors and other guideline-directed anti-failure therapy, often sustained over years"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the condition primary without excluding obstructive congenital lesions or anomalous coronary anatomy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of endocardial fibroelastosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "endocardial_fibroelastosis-matrix",
+      "title": "Endocardial Fibroelastosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A diffuse thickening of the ventricular endocardium by collagen and elastic fibres, most often affecting the left ventricle of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography assessing endocardial echogenicity, chamber size and systolic function, Electrocardiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dilated cardiomyopathy of other aetiology, Viral or autoimmune myocarditis, Anomalous origin of the left coronary artery from the",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the resulting heart failure with diuretics, afterload reduction using ACE inhibitors and other guideline-directed",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the condition primary without excluding obstructive congenital lesions or anomalous coronary anatomy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for endocardial fibroelastosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cardiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "endocardial_fibroelastosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Endocardial echogenicity, chamber size and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Hypertrophy, strain and repolarisation change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal and infant anti-Ro and anti-La testing",
+          "cells": [
+            {
+              "text": "Autoimmune cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Fibrosis quantification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carnitine, organic acids and gene panel",
+          "cells": [
+            {
+              "text": "Treatable metabolic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary imaging",
+          "cells": [
+            {
+              "text": "Anomalous left coronary artery excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endocardial_fibroelastosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral or autoimmune myocarditis",
+          "cells": [
+            {
+              "text": "Inflammatory cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anomalous left coronary artery from pulmonary artery",
+          "cells": [
+            {
+              "text": "Coronary origin abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pompe disease and other metabolic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Glycogen storage or metabolic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial cardiomyopathy or Barth syndrome",
+          "cells": [
+            {
+              "text": "Metabolic cardiomyopathy with fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive left heart lesion with secondary change",
+          "cells": [
+            {
+              "text": "Congenital obstruction driving fibroelastosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endocardial_fibroelastosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart-failure therapy",
+          "cells": [
+            {
+              "text": "Diuretics, ACE inhibitors and guideline-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat reversible cause",
+          "cells": [
+            {
+              "text": "Obstructive lesion repair or maternal anti-Ro or anti-La disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic replacement",
+          "cells": [
+            {
+              "text": "Carnitine or cofactor replacement where treatable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial echocardiography",
+          "cells": [
+            {
+              "text": "Ventricular function and mitral regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute support",
+          "cells": [
+            {
+              "text": "Inotropes and intensive care for decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant assessment",
+          "cells": [
+            {
+              "text": "Refractory or contracted-type disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "endocardial_fibroelastosis-dx-mgmt",
+      "title": "Diagnosis and management of Endocardial Fibroelastosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected endocardial fibroelastosis: infant heart failure with a thickened endocardium",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cardiogenic shock, embolism, heart block, failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent inotropic support and intensive care for cardiogenic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography; ECG; maternal anti-Ro and anti-La; carnitine and gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a treatable cause, such as metabolic disease or an obstructive lesion, found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider myocarditis, anomalous coronary origin, metabolic or mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Diuretics, ACE inhibitors and guideline-directed heart-failure therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repair of obstructive lesions and treatment of maternal autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Carnitine or cofactor replacement where a metabolic cause is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography of ventricular function and mitral regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Referral for transplant assessment in refractory or contracted disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Some improve with sustained therapy; contracted and progressive forms do poorly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

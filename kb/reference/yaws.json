@@ -1,177 +1,390 @@
 {
- "id": "yaws",
- "name": "Yaws",
- "aliases": [
-  "Treponema pallidum subspecies pertenue",
-  "framboesia tropica",
-  "pian",
-  "bouba"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Yaws is a chronic non-venereal (endemic) treponematosis caused by Treponema pallidum subspecies pertenue, affecting mainly children in warm, humid rural areas of West Africa, Southeast Asia and the Pacific",
-   "Transmission is by direct skin-to-skin contact with lesion exudate, not sexually, and is favoured by crowding, poor hygiene and minor skin trauma",
-   "The primary lesion ('mother yaw' or framboesioma) is a painless papilloma or raspberry-like papillomatous nodule at the inoculation site, often on the leg",
-   "Secondary yaws follows with multiple similar skin lesions, along with painful hyperkeratotic palmar/plantar lesions ('crab yaws') and osteoperiostitis of long bones and fingers (dactylitis)",
-   "Late (tertiary) yaws causes destructive gummatous lesions of skin and bone, including gangosa (destruction of nose and palate) and sabre tibia",
-   "Serological tests are the same non-treponemal and treponemal assays used for venereal syphilis and cannot distinguish the two; dark-field microscopy shows treponemes indistinguishable from T. pallidum",
-   "Treatment for the endemic treponematoses uses benzathine penicillin, with a macrolide alternative used in mass-treatment eradication campaigns"
+  "id": "yaws",
+  "name": "Yaws",
+  "aliases": [
+    "Treponema pallidum subspecies pertenue",
+    "framboesia tropica",
+    "pian",
+    "bouba"
   ],
-  "pathophysiology": "Treponema pallidum subspecies pertenue enters through breaks in the skin after contact with an infectious lesion. It multiplies locally to form the primary papillomatous lesion, then disseminates via blood and lymphatics to produce widespread secondary skin and bone lesions after weeks to months. A latent phase follows, during which relapsing secondary lesions may occur. In a minority, years later, destructive tertiary gummatous lesions develop in skin, bone and cartilage. Unlike venereal syphilis, yaws does not cause congenital infection or significant cardiovascular or neurological disease.",
-  "additionalDifferentials": [
-   "Venereal syphilis (serologically identical)",
-   "Other endemic treponematoses (bejel, pinta)",
-   "Cutaneous leishmaniasis",
-   "Impetigo and other pyodermas",
-   "Tropical ulcer",
-   "Verrucous fungal infection (e.g. chromoblastomycosis)",
-   "Warts or condylomata"
-  ],
-  "additionalInvestigations": [
-   "Dark-field microscopy of lesion exudate for spirochaetes",
-   "Non-treponemal serology (e.g. RPR/VDRL) for activity and treatment response",
-   "Treponemal serology (e.g. TPPA/TPHA) for confirmation",
-   "PCR of lesion material where available, which can help distinguish subspecies",
-   "Radiographs of affected bones for periostitis or destructive change",
-   "Clinical and epidemiological assessment of contacts in endemic communities"
-  ],
-  "redFlags": [
-   "Destructive facial lesions (gangosa) causing disfigurement",
-   "Extensive bone involvement with deformity or disability",
-   "Painful crab yaws impairing mobility",
-   "Uncertainty distinguishing from venereal syphilis where the latter has serious sequelae",
-   "Treatment failure or reappearance of lesions after therapy"
-  ],
-  "prognosis": "Early and secondary yaws heal completely with penicillin and carry an excellent prognosis, but untreated late disease can cause permanent, disfiguring destruction of skin, bone and cartilage; the disease is a target for global eradication.",
-  "pitfalls": [
-   "Assuming positive treponemal serology indicates venereal syphilis and mislabelling children accordingly",
-   "Failing to treat close contacts, allowing continued transmission",
-   "Overlooking early painless primary lesions and missing the diagnosis",
-   "Confusing yaws with pinta or bejel without regional and clinical context",
-   "Not recognising that mass treatment strategy differs from individual management"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cure with antibiotics: a single oral dose of azithromycin, or intramuscular benzathine benzylpenicillin as an alternative",
-   "Provide local wound care of skin lesions and manage the osteoperiostitis and dactylitis of bone involvement",
-   "Treat contacts and, in endemic communities, apply total community or mass treatment with azithromycin as part of the eradication strategy",
-   "Monitor cure and detect relapse or reinfection with serial non-treponemal (RPR or VDRL) titres",
-   "Manage late destructive gummatous lesions such as gangosa and sabre tibia with wound care and reconstructive or orthopaedic input",
-   "Undertake public health measures including case finding, contact tracing and hygiene promotion within the global eradication programme",
-   "Escalate in penicillin allergy or apparent treatment failure with alternative regimens and re-evaluation for reinfection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "yaws-pathway",
-   "title": "Yaws: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Yaws is a chronic non-venereal (endemic) treponematosis caused by Treponema pallidum subspecies pertenue, affecting mainly children in warm, humid rural areas of West Africa, Southeast Asia and the Pacific",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Destructive facial lesions (gangosa) causing disfigurement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dark-field microscopy of lesion exudate for spirochaetes, Non-treponemal serology (e.g. RPR/VDRL) for activity and treatment response, Treponemal serology (e.g. TPPA/TPHA) for confirmation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cure with antibiotics: a single oral dose of azithromycin, or intramuscular benzathine benzylpenicillin as an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming positive treponemal serology indicates venereal syphilis and mislabelling children accordingly"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of yaws."
-  }
- ],
- "tables": [
-  {
-   "id": "yaws-matrix",
-   "title": "Yaws: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Yaws is a chronic non-venereal (endemic) treponematosis caused by Treponema pallidum subspecies pertenue, affecting mainly",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Yaws is a chronic non-venereal (endemic) treponematosis caused by Treponema pallidum subspecies pertenue, affecting mainly children in warm, humid rural areas of West Africa, Southeast Asia and the Pacific",
+      "Transmission is by direct skin-to-skin contact with lesion exudate, not sexually, and is favoured by crowding, poor hygiene and minor skin trauma",
+      "The primary lesion ('mother yaw' or framboesioma) is a painless papilloma or raspberry-like papillomatous nodule at the inoculation site, often on the leg",
+      "Secondary yaws follows with multiple similar skin lesions, along with painful hyperkeratotic palmar/plantar lesions ('crab yaws') and osteoperiostitis of long bones and fingers (dactylitis)",
+      "Late (tertiary) yaws causes destructive gummatous lesions of skin and bone, including gangosa (destruction of nose and palate) and sabre tibia",
+      "Serological tests are the same non-treponemal and treponemal assays used for venereal syphilis and cannot distinguish the two; dark-field microscopy shows treponemes indistinguishable from T. pallidum",
+      "Treatment for the endemic treponematoses uses benzathine penicillin, with a macrolide alternative used in mass-treatment eradication campaigns"
     ],
-    [
-     "Key Investigations",
-     "Dark-field microscopy of lesion exudate for spirochaetes, Non-treponemal serology (e.g. RPR/VDRL) for activity and treatment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Treponema pallidum subspecies pertenue enters through breaks in the skin after contact with an infectious lesion. It multiplies locally to form the primary papillomatous lesion, then disseminates via blood and lymphatics to produce widespread secondary skin and bone lesions after weeks to months. A latent phase follows, during which relapsing secondary lesions may occur. In a minority, years later, destructive tertiary gummatous lesions develop in skin, bone and cartilage. Unlike venereal syphilis, yaws does not cause congenital infection or significant cardiovascular or neurological disease.",
+    "additionalDifferentials": [
+      "Venereal syphilis (serologically identical)",
+      "Other endemic treponematoses (bejel, pinta)",
+      "Cutaneous leishmaniasis",
+      "Impetigo and other pyodermas",
+      "Tropical ulcer",
+      "Verrucous fungal infection (e.g. chromoblastomycosis)",
+      "Warts or condylomata"
     ],
-    [
-     "Primary Differentials",
-     "Venereal syphilis (serologically identical), Other endemic treponematoses (bejel, pinta), Cutaneous leishmaniasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dark-field microscopy of lesion exudate for spirochaetes",
+      "Non-treponemal serology (e.g. RPR/VDRL) for activity and treatment response",
+      "Treponemal serology (e.g. TPPA/TPHA) for confirmation",
+      "PCR of lesion material where available, which can help distinguish subspecies",
+      "Radiographs of affected bones for periostitis or destructive change",
+      "Clinical and epidemiological assessment of contacts in endemic communities"
     ],
-    [
-     "Management Strategy",
-     "Cure with antibiotics: a single oral dose of azithromycin, or intramuscular benzathine benzylpenicillin as an alternative",
-     "Core treatment modality"
+    "redFlags": [
+      "Destructive facial lesions (gangosa) causing disfigurement",
+      "Extensive bone involvement with deformity or disability",
+      "Painful crab yaws impairing mobility",
+      "Uncertainty distinguishing from venereal syphilis where the latter has serious sequelae",
+      "Treatment failure or reappearance of lesions after therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming positive treponemal serology indicates venereal syphilis and mislabelling children accordingly",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early and secondary yaws heal completely with penicillin and carry an excellent prognosis, but untreated late disease can cause permanent, disfiguring destruction of skin, bone and cartilage; the disease is a target for global eradication.",
+    "pitfalls": [
+      "Assuming positive treponemal serology indicates venereal syphilis and mislabelling children accordingly",
+      "Failing to treat close contacts, allowing continued transmission",
+      "Overlooking early painless primary lesions and missing the diagnosis",
+      "Confusing yaws with pinta or bejel without regional and clinical context",
+      "Not recognising that mass treatment strategy differs from individual management"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cure with antibiotics: a single oral dose of azithromycin, or intramuscular benzathine benzylpenicillin as an alternative",
+      "Provide local wound care of skin lesions and manage the osteoperiostitis and dactylitis of bone involvement",
+      "Treat contacts and, in endemic communities, apply total community or mass treatment with azithromycin as part of the eradication strategy",
+      "Monitor cure and detect relapse or reinfection with serial non-treponemal (RPR or VDRL) titres",
+      "Manage late destructive gummatous lesions such as gangosa and sabre tibia with wound care and reconstructive or orthopaedic input",
+      "Undertake public health measures including case finding, contact tracing and hygiene promotion within the global eradication programme",
+      "Escalate in penicillin allergy or apparent treatment failure with alternative regimens and re-evaluation for reinfection"
     ]
-   ],
-   "caption": "Overview comparison matrix for yaws."
-  }
- ],
- "diagrams": [
-  {
-   "id": "yaws-real-image",
-   "title": "Yaws: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "yaws-pathway",
+      "title": "Yaws: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Yaws is a chronic non-venereal (endemic) treponematosis caused by Treponema pallidum subspecies pertenue, affecting mainly children in warm, humid rural areas of West Africa, Southeast Asia and the Pacific",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Destructive facial lesions (gangosa) causing disfigurement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dark-field microscopy of lesion exudate for spirochaetes, Non-treponemal serology (e.g. RPR/VDRL) for activity and treatment response, Treponemal serology (e.g. TPPA/TPHA) for confirmation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cure with antibiotics: a single oral dose of azithromycin, or intramuscular benzathine benzylpenicillin as an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming positive treponemal serology indicates venereal syphilis and mislabelling children accordingly"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of yaws."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "yaws-matrix",
+      "title": "Yaws: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Yaws is a chronic non-venereal (endemic) treponematosis caused by Treponema pallidum subspecies pertenue, affecting mainly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dark-field microscopy of lesion exudate for spirochaetes, Non-treponemal serology (e.g. RPR/VDRL) for activity and treatment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Venereal syphilis (serologically identical), Other endemic treponematoses (bejel, pinta), Cutaneous leishmaniasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cure with antibiotics: a single oral dose of azithromycin, or intramuscular benzathine benzylpenicillin as an alternative",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming positive treponemal serology indicates venereal syphilis and mislabelling children accordingly",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for yaws."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "yaws-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dark-field microscopy of lesion exudate",
+          "cells": [
+            {
+              "text": "Spirochaetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-treponemal serology (RPR or VDRL)",
+          "cells": [
+            {
+              "text": "Activity of infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yaws-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Venereal syphilis",
+          "cells": [
+            {
+              "text": "Serologically identical; distinguished by history and setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bejel or pinta",
+          "cells": [
+            {
+              "text": "Other endemic treponematoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous infection or other skin disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yaws-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Single oral azithromycin dose",
+          "cells": [
+            {
+              "text": "Cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intramuscular benzathine benzylpenicillin",
+          "cells": [
+            {
+              "text": "Alternative cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact treatment",
+          "cells": [
+            {
+              "text": "Community treatment for infection control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "yaws-dx-mgmt",
+      "title": "Diagnosis and management of Yaws",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected yaws: skin lesions with bone involvement in a child from an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (destructive facial lesions or extensive bone deformity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment and review for destructive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dark-field microscopy of exudate, non-treponemal serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does microscopy or serology confirm treponemal infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider venereal syphilis or other skin disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Single oral azithromycin dose or intramuscular benzathine penicillin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Do not mislabel children as venereal syphilis from positive serology alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Contact treatment in affected communities",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Curable with antibiotics; facial and bone destruction is irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

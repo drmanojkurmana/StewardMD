@@ -1,193 +1,696 @@
 {
- "id": "amyloidosis",
- "name": "Amyloidosis",
- "system": "Hematology / Multisystem",
- "class": "non_infective",
- "chapter": 117,
- "page": 895,
- "aliases": [
-  "AL amyloidosis",
-  "ATTR amyloidosis",
-  "AA amyloidosis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.895",
-  "clinicalPearls": [
-   "Amyloidosis is a group of protein-misfolding disorders defined by extracellular deposition of insoluble polymeric protein fibrils with a common antiparallel beta-pleated-sheet structure; nomenclature is AX, where A = amyloidosis and X = the fibril precursor protein (p.895).",
-   "AL amyloidosis (formerly primary systemic amyloidosis) is composed of monoclonal immunoglobulin light chains from a clonal B-cell/plasma-cell disorder and is the most common systemic type in North America; it can occur with myeloma, non-Hodgkin lymphoma, or Waldenstrom macroglobulinemia (p.895, p.897).",
-   "In AL amyloidosis the kidneys are involved in 60-70% (proteinuria, often nephrotic range, with hypoalbuminemia) and the heart in 70-80%; cardiac involvement is the leading cause of death (p.897).",
-   "Macroglossia and periorbital ('raccoon-eye') ecchymoses are pathognomonic signs of AL amyloidosis but each is seen in only about 10% of patients (p.897).",
-   "Easy bruising in AL amyloidosis is due to amyloid deposits in capillaries or to acquired factor X deficiency from binding of factor X to amyloid fibrils (p.897).",
-   "ATTR amyloidosis is the most prevalent hereditary amyloidosis and derives from wild-type or mutated transthyretin (TTR); it targets the peripheral and autonomic nerves and the heart (p.895, p.899).",
-   "The TTR variant V122I occurs in nearly 4% of African-American and Afro-Caribbean populations and causes late-onset cardiac amyloidosis; suspect it in African-American patients with concentric cardiac hypertrophy and diastolic heart failure, especially without hypertension or valvular disease (p.899).",
-   "Wild-type ATTR (ATTRwt, formerly senile systemic amyloidosis) is a disease of aging, not inheritance; it predominates in men from the seventh decade and is found at autopsy in 25% of hearts of men >=80 years, and is now the most prevalent and fastest-growing form of amyloidosis worldwide (p.899).",
-   "Carpal tunnel syndrome, tendinopathy, and spinal stenosis (soft-tissue disease) can precede ATTR nerve or heart disease by one to two decades, and ATTRwt patients frequently report bicipital, patellar, or Achilles tendon rupture (p.899).",
-   "AA amyloidosis arises from the acute-phase reactant serum amyloid A (SAA) in chronic inflammatory or infectious disease and typically begins in the kidneys; cardiomyopathy is a late manifestation in about 10-25% (p.895, p.899).",
-   "Abdominal subcutaneous fat aspiration is the most accessible diagnostic tissue, positive in >80% of systemic amyloidosis, avoiding surgical biopsy (p.895).",
-   "Amyloid deposits show characteristic apple-green birefringence under polarized light when stained with Congo red, whereas other regular protein structures such as collagen appear white (p.895)."
+  "id": "amyloidosis",
+  "name": "Amyloidosis",
+  "system": "Hematology / Multisystem",
+  "class": "non_infective",
+  "chapter": 117,
+  "page": 895,
+  "aliases": [
+    "AL amyloidosis",
+    "ATTR amyloidosis",
+    "AA amyloidosis"
   ],
-  "pathophysiology": "Genetic mutation, abnormal processing, or aging-related decline in protein quality control causes precursor proteins to undergo reversible unfolding/misfolding. Misfolded subunits adopt a common antiparallel beta-pleated-sheet conformation and assemble into oligomers, higher-order polymers, and ultimately 10-nm fibrils that deposit extracellularly in tissues/organs. Soluble oligomeric intermediates are thought to be the most toxic species (generating reactive oxygen species and stress signaling), while fibrillar deposits mechanically interfere with organ function. Fibrils co-deposit accessory molecules including serum amyloid P component, apolipoproteins E and A-IV, glycosaminoglycans, and metal ions. Precursors include monoclonal immunoglobulin light chains (AL; lambda subtypes predominate), transthyretin (ATTR; wild-type or >130 described mutations), and the hepatic acute-phase protein serum amyloid A (AA) (p.895, p.897, p.899).",
-  "additionalDifferentials": [
-   "Multiple myeloma and other plasma cell dyscrasias (AL arises from the same clonal disorder)",
-   "Monoclonal gammopathy of undetermined significance (MGUS) and smoldering myeloma",
-   "Hypertensive or hypertrophic cardiomyopathy (vs amyloid cardiomyopathy)",
-   "Other causes of nephrotic syndrome / proteinuric renal disease",
-   "Other causes of length-dependent peripheral and autonomic neuropathy"
-  ],
-  "infectionMimics": [
-   "AA amyloidosis is driven by chronic infections such as tuberculosis, osteomyelitis, or subacute bacterial endocarditis, which may be the presenting or underlying illness"
-  ],
-  "nonInfectiousMimics": [
-   "Hypertensive concentric left ventricular hypertrophy mimicking amyloid cardiomyopathy",
-   "Hereditary (AF) amyloidoses from variant fibrinogen, lysozyme, gelsolin, or apolipoproteins can clinically mimic AL disease",
-   "Idiopathic or other axonal/autonomic neuropathies mimicking ATTR neuropathy"
-  ],
-  "additionalInvestigations": [
-   "Congo red staining of aspirated abdominal subcutaneous fat (positive in >80%); if negative, biopsy of involved organ (kidney, heart, liver, tongue, GI tract)",
-   "Amyloid typing: laser-capture microdissection with tandem mass spectrometry is the diagnostic standard (sensitivity ~88%, specificity ~96%); immunoelectron microscopy more reliable than immunohistochemistry",
-   "Serum/urine immunofixation electrophoresis (SIFE/UIFE) and nephelometric serum free light chain assay with kappa/lambda ratio (>90% of AL patients have a detectable monoclonal light chain)",
-   "Bone marrow examination for clonal plasma cells (kappa/lambda clonality by flow cytometry, immunohistochemistry, or in situ hybridization)",
-   "Cardiac biomarkers NT-proBNP/BNP and troponin for staging, prognosis, and disease monitoring; ECG (low voltage, pseudo-infarct pattern) and echocardiography (concentric thickening, diastolic dysfunction, abnormal global longitudinal strain)",
-   "Cardiac MRI showing increased wall thickness and characteristic delayed subendocardial gadolinium enhancement",
-   "DNA/gene sequencing for hereditary (TTR and other AF) mutations",
-   "CT imaging plus serologic/microbiologic studies in AA disease to identify underlying tumor, inflammation, or infection",
-   "Electron microscopy of paraformaldehyde-fixed tissue to visualize 10-nm fibrils"
-  ],
-  "redFlags": [
-   "Macroglossia or periorbital ('raccoon-eye') ecchymoses (pathognomonic of AL)",
-   "Concentric ventricular hypertrophy with diastolic dysfunction plus low-voltage ECG (voltage-mass mismatch)",
-   "Easy bruising or bleeding diathesis from acquired factor X deficiency",
-   "Multisystem involvement (unexplained nephropathy, cardiomyopathy, neuropathy, enteropathy) in a patient with fatigue/weight loss",
-   "Serum albumin <2 g/dL with pedal edema or anasarca from nephrotic-range proteinuria",
-   "Atrial contractile dysfunction even in sinus rhythm, with risk of atrial thrombi and thromboembolism"
-  ],
-  "prognosis": "AL amyloidosis is often rapidly progressive; historically untreated median survival was only ~1-2 years, but outcomes have improved markedly over four decades with newer plasma-cell-directed therapy. Cardiac stage (Mayo system based on NT-proBNP and troponin) is the strongest determinant of management and survival; very low dFLC (<50 mg/L) predicts better outcome regardless of cardiac stage. High-risk patients (~15-20%) with advanced cardiac stage IIIb or NYHA III-IV heart failure are largely excluded from trials. ATTR cardiac disease is better tolerated than AL: untreated median survival from heart failure presentation is ~42-48 months for ATTR versus ~6 months for AL. Untreated ATTR survival after onset ranges 4-15 years depending on predominant cardiac versus neurologic involvement (p.897, p.899).",
-  "pitfalls": [
-   "Amyloid typing pitfall: commercial immunohistochemistry antibodies may be inaccurate and some AL deposits bind light-chain antibodies nonspecifically; accurate typing (mass spectrometry / immunoelectron microscopy / genetic testing) is essential because therapy differs by type (p.895, p.899).",
-   "Serum and urine protein electrophoresis are NOT useful screening tests for AL because the clonal light chain is often insufficient to produce a detectable M-spike; immunofixation and free light chain assays are required (p.897).",
-   "A monoclonal protein alone is not diagnostic of amyloidosis since MGUS is common in older patients; conversely, AF carriers may have a coincidental monoclonal gammopathy, so screen for BOTH plasma-cell disorder and protein mutations (p.897, p.899).",
-   "Renal insufficiency can falsely elevate cardiac biomarkers (NT-proBNP, troponin) and nonspecifically raise both free light chain isotypes, so the free light chain ratio (not just absolute level) must be examined (p.896, p.897).",
-   "In amyloid cardiomyopathy digitalis, calcium channel blockers, and beta blockers are relatively contraindicated because they interact with amyloid fibrils and can cause heart block and worsening heart failure (p.899).",
-   "Interstitial (rather than glomerular) renal amyloid can cause azotemia WITHOUT proteinuria (p.897).",
-   "Apparent sporadic ATTRv (no family history) often reflects incomplete penetrance rather than a true spontaneous case (p.899).",
-   "Mass spectrometry detects amino-acid sequence variation but does not definitively identify specific protein variants; DNA sequencing is the standard for hereditary (AF) mutations (p.899)."
-  ],
-  "severityClassification": "AL amyloidosis is staged primarily by the Mayo 2004 cardiac staging system (NT-proBNP and cardiac troponins), modified by European investigators to identify very-high-risk patients; the Mayo 2012 revision adds clonal burden via dFLC (difference between involved and uninvolved free light chains). A Boston University system uses BNP and troponin I. A separate renal staging system based on 24-h urine protein and eGFR predicts progression to dialysis at 2 years. ATTR cardiac involvement is graded by stage (e.g., advanced stage IIIb) and NYHA functional class (p.897).",
-  "references": [
-   "Harrison 22e p.895"
-  ],
-  "crossLinks": [
-   "myeloma",
-   "nephrotic",
-   "heart_failure"
-  ],
-  "management": [
-   "Type the fibril precursor accurately, as AL, ATTR and other forms have completely different therapies",
-   "Treat AL amyloidosis with plasma-cell-directed therapy such as bortezomib and daratumumab, with autologous stem-cell transplantation in eligible patients, to suppress the light-chain-producing clone",
-   "Treat hereditary and wild-type ATTR amyloidosis with a transthyretin stabiliser such as tafamidis or a gene-silencing agent such as patisiran or inotersen",
-   "Manage amyloid heart failure with cautious diuresis and careful avoidance of agents poorly tolerated by infiltrated myocardium",
-   "Correct the bleeding tendency from acquired factor X deficiency and manage autonomic and other organ complications",
-   "Monitor cardiac biomarkers and serum free light chains to stage disease and track treatment response",
-   "Refer to a specialist amyloidosis centre and offer genetic counselling and family screening in hereditary ATTR"
-  ]
- },
- "algorithms": [
-  {
-   "id": "amyloidosis-pathway",
-   "title": "Amyloidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Amyloidosis is a group of protein-misfolding disorders defined by extracellular deposition of insoluble polymeric protein fibrils with a common antiparallel beta-pleated-sheet structure; nomenclature is AX, where A = amyloidosis and X =",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Macroglossia or periorbital ('raccoon-eye') ecchymoses (pathognomonic of AL)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Congo red staining of aspirated abdominal subcutaneous fat (positive in >80%); if negative, biopsy of involved organ (kidney, heart, liver, tongue, GI tract), Amyloid typing: laser-capture microdissection with tandem mass"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Type the fibril precursor accurately, as AL, ATTR and other forms have completely different therapies"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Amyloid typing pitfall: commercial immunohistochemistry antibodies may be inaccurate and some AL deposits bind light-chain antibodies nonspecifically; accurate typing (mass spectrometry / immunoelectron microscopy /"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of amyloidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "amyloidosis-matrix",
-   "title": "Amyloidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Amyloidosis is a group of protein-misfolding disorders defined by extracellular deposition of insoluble polymeric protein fibrils",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.895",
+    "clinicalPearls": [
+      "Amyloidosis is a group of protein-misfolding disorders defined by extracellular deposition of insoluble polymeric protein fibrils with a common antiparallel beta-pleated-sheet structure; nomenclature is AX, where A = amyloidosis and X = the fibril precursor protein (p.895).",
+      "AL amyloidosis (formerly primary systemic amyloidosis) is composed of monoclonal immunoglobulin light chains from a clonal B-cell/plasma-cell disorder and is the most common systemic type in North America; it can occur with myeloma, non-Hodgkin lymphoma, or Waldenstrom macroglobulinemia (p.895, p.897).",
+      "In AL amyloidosis the kidneys are involved in 60-70% (proteinuria, often nephrotic range, with hypoalbuminemia) and the heart in 70-80%; cardiac involvement is the leading cause of death (p.897).",
+      "Macroglossia and periorbital ('raccoon-eye') ecchymoses are pathognomonic signs of AL amyloidosis but each is seen in only about 10% of patients (p.897).",
+      "Easy bruising in AL amyloidosis is due to amyloid deposits in capillaries or to acquired factor X deficiency from binding of factor X to amyloid fibrils (p.897).",
+      "ATTR amyloidosis is the most prevalent hereditary amyloidosis and derives from wild-type or mutated transthyretin (TTR); it targets the peripheral and autonomic nerves and the heart (p.895, p.899).",
+      "The TTR variant V122I occurs in nearly 4% of African-American and Afro-Caribbean populations and causes late-onset cardiac amyloidosis; suspect it in African-American patients with concentric cardiac hypertrophy and diastolic heart failure, especially without hypertension or valvular disease (p.899).",
+      "Wild-type ATTR (ATTRwt, formerly senile systemic amyloidosis) is a disease of aging, not inheritance; it predominates in men from the seventh decade and is found at autopsy in 25% of hearts of men >=80 years, and is now the most prevalent and fastest-growing form of amyloidosis worldwide (p.899).",
+      "Carpal tunnel syndrome, tendinopathy, and spinal stenosis (soft-tissue disease) can precede ATTR nerve or heart disease by one to two decades, and ATTRwt patients frequently report bicipital, patellar, or Achilles tendon rupture (p.899).",
+      "AA amyloidosis arises from the acute-phase reactant serum amyloid A (SAA) in chronic inflammatory or infectious disease and typically begins in the kidneys; cardiomyopathy is a late manifestation in about 10-25% (p.895, p.899).",
+      "Abdominal subcutaneous fat aspiration is the most accessible diagnostic tissue, positive in >80% of systemic amyloidosis, avoiding surgical biopsy (p.895).",
+      "Amyloid deposits show characteristic apple-green birefringence under polarized light when stained with Congo red, whereas other regular protein structures such as collagen appear white (p.895)."
     ],
-    [
-     "Key Investigations",
-     "Congo red staining of aspirated abdominal subcutaneous fat (positive in >80%); if negative, biopsy of involved organ (kidney,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Genetic mutation, abnormal processing, or aging-related decline in protein quality control causes precursor proteins to undergo reversible unfolding/misfolding. Misfolded subunits adopt a common antiparallel beta-pleated-sheet conformation and assemble into oligomers, higher-order polymers, and ultimately 10-nm fibrils that deposit extracellularly in tissues/organs. Soluble oligomeric intermediates are thought to be the most toxic species (generating reactive oxygen species and stress signaling), while fibrillar deposits mechanically interfere with organ function. Fibrils co-deposit accessory molecules including serum amyloid P component, apolipoproteins E and A-IV, glycosaminoglycans, and metal ions. Precursors include monoclonal immunoglobulin light chains (AL; lambda subtypes predominate), transthyretin (ATTR; wild-type or >130 described mutations), and the hepatic acute-phase protein serum amyloid A (AA) (p.895, p.897, p.899).",
+    "additionalDifferentials": [
+      "Multiple myeloma and other plasma cell dyscrasias (AL arises from the same clonal disorder)",
+      "Monoclonal gammopathy of undetermined significance (MGUS) and smoldering myeloma",
+      "Hypertensive or hypertrophic cardiomyopathy (vs amyloid cardiomyopathy)",
+      "Other causes of nephrotic syndrome / proteinuric renal disease",
+      "Other causes of length-dependent peripheral and autonomic neuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Multiple myeloma and other plasma cell dyscrasias (AL arises from the same clonal disorder), Monoclonal gammopathy of",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "AA amyloidosis is driven by chronic infections such as tuberculosis, osteomyelitis, or subacute bacterial endocarditis, which may be the presenting or underlying illness"
     ],
-    [
-     "Management Strategy",
-     "Type the fibril precursor accurately, as AL, ATTR and other forms have completely different therapies",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Hypertensive concentric left ventricular hypertrophy mimicking amyloid cardiomyopathy",
+      "Hereditary (AF) amyloidoses from variant fibrinogen, lysozyme, gelsolin, or apolipoproteins can clinically mimic AL disease",
+      "Idiopathic or other axonal/autonomic neuropathies mimicking ATTR neuropathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Amyloid typing pitfall: commercial immunohistochemistry antibodies may be inaccurate and some AL deposits bind light-chain",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Congo red staining of aspirated abdominal subcutaneous fat (positive in >80%); if negative, biopsy of involved organ (kidney, heart, liver, tongue, GI tract)",
+      "Amyloid typing: laser-capture microdissection with tandem mass spectrometry is the diagnostic standard (sensitivity ~88%, specificity ~96%); immunoelectron microscopy more reliable than immunohistochemistry",
+      "Serum/urine immunofixation electrophoresis (SIFE/UIFE) and nephelometric serum free light chain assay with kappa/lambda ratio (>90% of AL patients have a detectable monoclonal light chain)",
+      "Bone marrow examination for clonal plasma cells (kappa/lambda clonality by flow cytometry, immunohistochemistry, or in situ hybridization)",
+      "Cardiac biomarkers NT-proBNP/BNP and troponin for staging, prognosis, and disease monitoring; ECG (low voltage, pseudo-infarct pattern) and echocardiography (concentric thickening, diastolic dysfunction, abnormal global longitudinal strain)",
+      "Cardiac MRI showing increased wall thickness and characteristic delayed subendocardial gadolinium enhancement",
+      "DNA/gene sequencing for hereditary (TTR and other AF) mutations",
+      "CT imaging plus serologic/microbiologic studies in AA disease to identify underlying tumor, inflammation, or infection",
+      "Electron microscopy of paraformaldehyde-fixed tissue to visualize 10-nm fibrils"
+    ],
+    "redFlags": [
+      "Macroglossia or periorbital ('raccoon-eye') ecchymoses (pathognomonic of AL)",
+      "Concentric ventricular hypertrophy with diastolic dysfunction plus low-voltage ECG (voltage-mass mismatch)",
+      "Easy bruising or bleeding diathesis from acquired factor X deficiency",
+      "Multisystem involvement (unexplained nephropathy, cardiomyopathy, neuropathy, enteropathy) in a patient with fatigue/weight loss",
+      "Serum albumin <2 g/dL with pedal edema or anasarca from nephrotic-range proteinuria",
+      "Atrial contractile dysfunction even in sinus rhythm, with risk of atrial thrombi and thromboembolism"
+    ],
+    "prognosis": "AL amyloidosis is often rapidly progressive; historically untreated median survival was only ~1-2 years, but outcomes have improved markedly over four decades with newer plasma-cell-directed therapy. Cardiac stage (Mayo system based on NT-proBNP and troponin) is the strongest determinant of management and survival; very low dFLC (<50 mg/L) predicts better outcome regardless of cardiac stage. High-risk patients (~15-20%) with advanced cardiac stage IIIb or NYHA III-IV heart failure are largely excluded from trials. ATTR cardiac disease is better tolerated than AL: untreated median survival from heart failure presentation is ~42-48 months for ATTR versus ~6 months for AL. Untreated ATTR survival after onset ranges 4-15 years depending on predominant cardiac versus neurologic involvement (p.897, p.899).",
+    "pitfalls": [
+      "Amyloid typing pitfall: commercial immunohistochemistry antibodies may be inaccurate and some AL deposits bind light-chain antibodies nonspecifically; accurate typing (mass spectrometry / immunoelectron microscopy / genetic testing) is essential because therapy differs by type (p.895, p.899).",
+      "Serum and urine protein electrophoresis are NOT useful screening tests for AL because the clonal light chain is often insufficient to produce a detectable M-spike; immunofixation and free light chain assays are required (p.897).",
+      "A monoclonal protein alone is not diagnostic of amyloidosis since MGUS is common in older patients; conversely, AF carriers may have a coincidental monoclonal gammopathy, so screen for BOTH plasma-cell disorder and protein mutations (p.897, p.899).",
+      "Renal insufficiency can falsely elevate cardiac biomarkers (NT-proBNP, troponin) and nonspecifically raise both free light chain isotypes, so the free light chain ratio (not just absolute level) must be examined (p.896, p.897).",
+      "In amyloid cardiomyopathy digitalis, calcium channel blockers, and beta blockers are relatively contraindicated because they interact with amyloid fibrils and can cause heart block and worsening heart failure (p.899).",
+      "Interstitial (rather than glomerular) renal amyloid can cause azotemia WITHOUT proteinuria (p.897).",
+      "Apparent sporadic ATTRv (no family history) often reflects incomplete penetrance rather than a true spontaneous case (p.899).",
+      "Mass spectrometry detects amino-acid sequence variation but does not definitively identify specific protein variants; DNA sequencing is the standard for hereditary (AF) mutations (p.899)."
+    ],
+    "severityClassification": "AL amyloidosis is staged primarily by the Mayo 2004 cardiac staging system (NT-proBNP and cardiac troponins), modified by European investigators to identify very-high-risk patients; the Mayo 2012 revision adds clonal burden via dFLC (difference between involved and uninvolved free light chains). A Boston University system uses BNP and troponin I. A separate renal staging system based on 24-h urine protein and eGFR predicts progression to dialysis at 2 years. ATTR cardiac involvement is graded by stage (e.g., advanced stage IIIb) and NYHA functional class (p.897).",
+    "references": [
+      "Harrison 22e p.895"
+    ],
+    "crossLinks": [
+      "myeloma",
+      "nephrotic",
+      "heart_failure"
+    ],
+    "management": [
+      "Type the fibril precursor accurately, as AL, ATTR and other forms have completely different therapies",
+      "Treat AL amyloidosis with plasma-cell-directed therapy such as bortezomib and daratumumab, with autologous stem-cell transplantation in eligible patients, to suppress the light-chain-producing clone",
+      "Treat hereditary and wild-type ATTR amyloidosis with a transthyretin stabiliser such as tafamidis or a gene-silencing agent such as patisiran or inotersen",
+      "Manage amyloid heart failure with cautious diuresis and careful avoidance of agents poorly tolerated by infiltrated myocardium",
+      "Correct the bleeding tendency from acquired factor X deficiency and manage autonomic and other organ complications",
+      "Monitor cardiac biomarkers and serum free light chains to stage disease and track treatment response",
+      "Refer to a specialist amyloidosis centre and offer genetic counselling and family screening in hereditary ATTR"
     ]
-   ],
-   "caption": "Overview comparison matrix for amyloidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "amyloidosis-real-image",
-   "title": "Amyloidosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "amyloidosis-pathway",
+      "title": "Amyloidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Amyloidosis is a group of protein-misfolding disorders defined by extracellular deposition of insoluble polymeric protein fibrils with a common antiparallel beta-pleated-sheet structure; nomenclature is AX, where A = amyloidosis and X =",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Macroglossia or periorbital ('raccoon-eye') ecchymoses (pathognomonic of AL)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Congo red staining of aspirated abdominal subcutaneous fat (positive in >80%); if negative, biopsy of involved organ (kidney, heart, liver, tongue, GI tract), Amyloid typing: laser-capture microdissection with tandem mass"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Type the fibril precursor accurately, as AL, ATTR and other forms have completely different therapies"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Amyloid typing pitfall: commercial immunohistochemistry antibodies may be inaccurate and some AL deposits bind light-chain antibodies nonspecifically; accurate typing (mass spectrometry / immunoelectron microscopy /"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of amyloidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "amyloidosis-matrix",
+      "title": "Amyloidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Amyloidosis is a group of protein-misfolding disorders defined by extracellular deposition of insoluble polymeric protein fibrils",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Congo red staining of aspirated abdominal subcutaneous fat (positive in >80%); if negative, biopsy of involved organ (kidney,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Multiple myeloma and other plasma cell dyscrasias (AL arises from the same clonal disorder), Monoclonal gammopathy of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Type the fibril precursor accurately, as AL, ATTR and other forms have completely different therapies",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Amyloid typing pitfall: commercial immunohistochemistry antibodies may be inaccurate and some AL deposits bind light-chain",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for amyloidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Amyloidosis",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/amyloidosis/amyloidosis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 112-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in systemic amyloidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Congo red stain",
+          "cells": [
+            {
+              "text": "Apple-green birefringence under polarised light"
+            },
+            {
+              "text": "{{hy:Defines amyloid in tissue}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal fat aspirate",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 80% of AL; under 25% of ATTRwt",
+              "op": ">",
+              "value": 80
+            },
+            {
+              "text": "If negative, biopsy an involved organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney or heart biopsy",
+          "cells": [
+            {
+              "text": "Sensitivity nearly 100% when the organ is involved"
+            },
+            {
+              "text": "Use when fat aspirate is negative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mass spectrometry typing",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 88%, specificity about 96%",
+              "op": ">",
+              "value": 88
+            },
+            {
+              "text": "Diagnostic standard; therapy differs by type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine immunofixation plus free light chains",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Monoclonal light chain found in >90% of AL",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Protein electrophoresis alone is not an adequate screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow clonal plasma cells",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">10% prompts myeloma work-up",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Confirms a plasma-cell clone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG and echocardiography",
+          "cells": [
+            {
+              "text": "Low voltage with concentric thickening, abnormal longitudinal strain"
+            },
+            {
+              "text": "Voltage-mass mismatch suggests cardiac amyloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Diffuse subendocardial late gadolinium enhancement"
+            },
+            {
+              "text": "Characteristic in ambiguous cases"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bone-avid tracer scintigraphy",
+          "cells": [
+            {
+              "text": "Uptake in heart"
+            },
+            {
+              "text": "Diagnoses ATTR cardiomyopathy without biopsy only if AL excluded"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NT-proBNP and troponin",
+          "cells": [
+            {
+              "text": "Mayo cardiac staging in AL"
+            },
+            {
+              "text": "Renal failure can raise both falsely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin with nephrotic syndrome",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "<2 with oedema or anasarca",
+              "op": "<",
+              "value": 2
+            },
+            {
+              "text": "Renal AL; kidneys involved in 60 to 70%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TTR gene sequencing",
+          "cells": [
+            {
+              "text": "Hereditary variant such as V122I"
+            },
+            {
+              "text": "Standard for hereditary ATTR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Amyloid types and look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "AL amyloidosis",
+          "cells": [
+            {
+              "text": "Monoclonal light chain from a plasma-cell clone; may occur with myeloma"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "AA amyloidosis",
+          "cells": [
+            {
+              "text": "Secondary to chronic inflammation or infection; starts in the kidney"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ATTR, hereditary or wild-type",
+          "cells": [
+            {
+              "text": "Transthyretin; nerves and heart; wild-type in older men"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Abeta2M amyloidosis",
+          "cells": [
+            {
+              "text": "Long-term dialysis; synovium and bone"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other hereditary types (AApoAI, AApoAII, AGel, AFib, ALys, ALECT2)",
+          "cells": [
+            {
+              "text": "Can mimic AL; often renal; needs genetic testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Localised amyloid (Abeta, ACys, APrP, AIAPP, ACal, AANF)",
+          "cells": [
+            {
+              "text": "Single-organ deposits such as brain, pancreas, thyroid, atrium"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "MGUS without amyloid",
+          "cells": [
+            {
+              "text": "Monoclonal protein alone is common in older adults and is not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertensive or hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Thick wall with normal or high ECG voltage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of amyloidosis by type",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Daratumumab, cyclophosphamide, bortezomib, dexamethasone (Dara-CyBorD)",
+          "cells": [
+            {
+              "text": "{{hy:Initial therapy for AL}}"
+            },
+            {
+              "text": "ANDROMEDA excluded NYHA III to IV, NT-proBNP >8,500 pg/mL, eGFR <20"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose melphalan with autologous stem cell transplant",
+          "cells": [
+            {
+              "text": "Selected AL patients"
+            },
+            {
+              "text": "Eligibility limited by cardiac stage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lenalidomide-based regimens",
+          "cells": [
+            {
+              "text": "Relapsed or refractory AL"
+            },
+            {
+              "text": "No dose stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tafamidis or acoramidis (TTR stabilisers)",
+          "cells": [
+            {
+              "text": "ATTR cardiomyopathy"
+            },
+            {
+              "text": "Reduce death and cardiovascular admission"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Patisiran, vutrisiran or eplontersen (TTR silencers)",
+          "cells": [
+            {
+              "text": "ATTR polyneuropathy"
+            },
+            {
+              "text": "Patisiran and vutrisiran also studied in cardiomyopathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Hereditary ATTR early, without heart involvement"
+            },
+            {
+              "text": "Not effective for wild-type ATTR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colchicine",
+          "cells": [
+            {
+              "text": "AA amyloidosis from familial Mediterranean fever"
+            },
+            {
+              "text": "Treat underlying cause in other AA; anti-IL-1, IL-6 or TNF agents may help"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heart failure care",
+          "cells": [
+            {
+              "text": "Amyloid cardiomyopathy"
+            },
+            {
+              "text": "Cautious diuresis; digoxin, calcium channel blockers and beta blockers relatively contraindicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No drug doses were stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of amyloidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained nephrotic syndrome, cardiomyopathy, neuropathy or macroglossia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Serum and urine immunofixation, serum free light chains",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Fat pad aspirate with Congo red",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Amyloid in fat?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Biopsy a clinically involved organ",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Type the amyloid by mass spectrometry; TTR gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Fibril type?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "AL: cardiac staging, then Dara-CyBorD; transplant if eligible",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ATTR: tafamidis or acoramidis; silencer for neuropathy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "AA: treat the inflammatory or infective cause; colchicine in FMF",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor biomarkers and light chains; specialist centre",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Amyloid found"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "AL"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "ATTR"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "AA"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

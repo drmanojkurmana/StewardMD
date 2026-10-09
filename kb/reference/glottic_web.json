@@ -1,173 +1,451 @@
 {
- "id": "glottic_web",
- "name": "Glottic web",
- "aliases": [
-  "laryngeal web",
-  "anterior glottic web",
-  "vocal fold web",
-  "congenital laryngeal web"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Laryngology",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A membrane bridging the vocal folds anteriorly, most commonly at the anterior commissure, that may be congenital or acquired",
-   "Congenital webs present in infancy with a weak or abnormal cry, stridor, and variable airway obstruction",
-   "Acquired webs typically follow bilateral mucosal injury at the anterior commissure, such as after simultaneous surgery on both folds, trauma, or intubation",
-   "Symptoms depend on web thickness and extent, ranging from mild hoarseness to significant airway compromise",
-   "Congenital anterior webs are associated with 22q11.2 deletion, so consider assessment for associated anomalies",
-   "Diagnosis is by laryngoscopy, with the subglottic extent and thickness of the web guiding management",
-   "Management ranges from endoscopic division of thin webs to more complex reconstruction with keel placement or laryngofissure for thick webs"
+  "id": "glottic_web",
+  "name": "Glottic web",
+  "aliases": [
+    "laryngeal web",
+    "anterior glottic web",
+    "vocal fold web",
+    "congenital laryngeal web"
   ],
-  "pathophysiology": "A glottic web is a band of tissue joining the anterior portions of the vocal folds. Congenital webs arise from incomplete recanalisation of the primitive laryngeal lumen during embryonic development, when the transiently fused epithelial lamina fails to fully separate. Acquired webs form when opposing raw mucosal surfaces at the anterior commissure heal together, as occurs after bilateral vocal fold surgery, caustic or thermal injury, or repeated intubation trauma, so a fibrous adhesion bridges the folds. The web restricts independent vibration and, if bulky, narrows the glottic aperture, producing dysphonia and, in thicker or more extensive lesions, airway obstruction.",
-  "additionalDifferentials": [
-   "Bilateral vocal fold paralysis",
-   "Laryngomalacia",
-   "Subglottic stenosis",
-   "Laryngeal atresia (in the neonate)",
-   "Recurrent respiratory papillomatosis bridging the commissure",
-   "Anterior commissure scarring from prior surgery"
-  ],
-  "additionalInvestigations": [
-   "Flexible fibreoptic laryngoscopy to identify and characterise the web",
-   "Rigid endoscopy under anaesthesia to assess thickness and subglottic extension",
-   "Videostroboscopy to evaluate the effect on vocal fold vibration",
-   "Genetic evaluation for 22q11.2 deletion in congenital anterior webs",
-   "Imaging or bronchoscopy to define associated airway anomalies where suspected"
-  ],
-  "redFlags": [
-   "Stridor or respiratory distress from a thick or extensive web",
-   "A neonate with an abnormal or absent cry and airway compromise",
-   "Subglottic extension indicating a more complex reconstructive problem",
-   "Recurrent webbing after repair, suggesting inadequate mucosal resurfacing"
-  ],
-  "prognosis": "Thin anterior webs divided endoscopically generally do well with good voice and airway outcomes, whereas thick webs with subglottic extension are prone to recurrence and often need staged reconstruction with more guarded voice results.",
-  "pitfalls": [
-   "Simply dividing a web without measures to prevent re-adhesion of the raw surfaces",
-   "Underestimating subglottic extension and thickness, leading to inadequate surgery",
-   "Missing an associated 22q11.2 deletion in a congenital case",
-   "Performing simultaneous bilateral anterior commissure surgery, which itself creates acquired webs"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Endoscopic division of thin anterior webs, often with placement of a keel or mucosal flap to prevent the raw edges re-fusing",
-   "Staged open laryngotracheal reconstruction for thick webs with subglottic extension",
-   "Secure the airway in significant obstruction, with tracheostomy for severe congenital webs presenting with stridor in infancy",
-   "Voice and speech therapy after intervention to optimise the vocal outcome",
-   "Genetic evaluation for 22q11.2 deletion in congenital anterior webs, with assessment for associated anomalies",
-   "Surveillance laryngoscopy for restenosis or re-formation, which is common with thicker lesions",
-   "Manage through a laryngology and paediatric ENT multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glottic_web-pathway",
-   "title": "Glottic web: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A membrane bridging the vocal folds anteriorly, most commonly at the anterior commissure, that may be congenital or acquired",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Stridor or respiratory distress from a thick or extensive web",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flexible fibreoptic laryngoscopy to identify and characterise the web, Rigid endoscopy under anaesthesia to assess thickness and subglottic extension, Videostroboscopy to evaluate the effect on vocal fold vibration"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Endoscopic division of thin anterior webs, often with placement of a keel or mucosal flap to prevent the raw edges re-fusing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Simply dividing a web without measures to prevent re-adhesion of the raw surfaces"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glottic web."
-  }
- ],
- "tables": [
-  {
-   "id": "glottic_web-matrix",
-   "title": "Glottic web: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A membrane bridging the vocal folds anteriorly, most commonly at the anterior commissure, that may be congenital or acquired",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Laryngology",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A membrane bridging the vocal folds anteriorly, most commonly at the anterior commissure, that may be congenital or acquired",
+      "Congenital webs present in infancy with a weak or abnormal cry, stridor, and variable airway obstruction",
+      "Acquired webs typically follow bilateral mucosal injury at the anterior commissure, such as after simultaneous surgery on both folds, trauma, or intubation",
+      "Symptoms depend on web thickness and extent, ranging from mild hoarseness to significant airway compromise",
+      "Congenital anterior webs are associated with 22q11.2 deletion, so consider assessment for associated anomalies",
+      "Diagnosis is by laryngoscopy, with the subglottic extent and thickness of the web guiding management",
+      "Management ranges from endoscopic division of thin webs to more complex reconstruction with keel placement or laryngofissure for thick webs"
     ],
-    [
-     "Key Investigations",
-     "Flexible fibreoptic laryngoscopy to identify and characterise the web, Rigid endoscopy under anaesthesia to assess thickness and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A glottic web is a band of tissue joining the anterior portions of the vocal folds. Congenital webs arise from incomplete recanalisation of the primitive laryngeal lumen during embryonic development, when the transiently fused epithelial lamina fails to fully separate. Acquired webs form when opposing raw mucosal surfaces at the anterior commissure heal together, as occurs after bilateral vocal fold surgery, caustic or thermal injury, or repeated intubation trauma, so a fibrous adhesion bridges the folds. The web restricts independent vibration and, if bulky, narrows the glottic aperture, producing dysphonia and, in thicker or more extensive lesions, airway obstruction.",
+    "additionalDifferentials": [
+      "Bilateral vocal fold paralysis",
+      "Laryngomalacia",
+      "Subglottic stenosis",
+      "Laryngeal atresia (in the neonate)",
+      "Recurrent respiratory papillomatosis bridging the commissure",
+      "Anterior commissure scarring from prior surgery"
     ],
-    [
-     "Primary Differentials",
-     "Bilateral vocal fold paralysis, Laryngomalacia, Subglottic stenosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flexible fibreoptic laryngoscopy to identify and characterise the web",
+      "Rigid endoscopy under anaesthesia to assess thickness and subglottic extension",
+      "Videostroboscopy to evaluate the effect on vocal fold vibration",
+      "Genetic evaluation for 22q11.2 deletion in congenital anterior webs",
+      "Imaging or bronchoscopy to define associated airway anomalies where suspected"
     ],
-    [
-     "Management Strategy",
-     "Endoscopic division of thin anterior webs, often with placement of a keel or mucosal flap to prevent the raw edges re-fusing",
-     "Core treatment modality"
+    "redFlags": [
+      "Stridor or respiratory distress from a thick or extensive web",
+      "A neonate with an abnormal or absent cry and airway compromise",
+      "Subglottic extension indicating a more complex reconstructive problem",
+      "Recurrent webbing after repair, suggesting inadequate mucosal resurfacing"
     ],
-    [
-     "Clinical Pitfall",
-     "Simply dividing a web without measures to prevent re-adhesion of the raw surfaces",
-     "Prevent diagnostic or management error"
+    "prognosis": "Thin anterior webs divided endoscopically generally do well with good voice and airway outcomes, whereas thick webs with subglottic extension are prone to recurrence and often need staged reconstruction with more guarded voice results.",
+    "pitfalls": [
+      "Simply dividing a web without measures to prevent re-adhesion of the raw surfaces",
+      "Underestimating subglottic extension and thickness, leading to inadequate surgery",
+      "Missing an associated 22q11.2 deletion in a congenital case",
+      "Performing simultaneous bilateral anterior commissure surgery, which itself creates acquired webs"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Endoscopic division of thin anterior webs, often with placement of a keel or mucosal flap to prevent the raw edges re-fusing",
+      "Staged open laryngotracheal reconstruction for thick webs with subglottic extension",
+      "Secure the airway in significant obstruction, with tracheostomy for severe congenital webs presenting with stridor in infancy",
+      "Voice and speech therapy after intervention to optimise the vocal outcome",
+      "Genetic evaluation for 22q11.2 deletion in congenital anterior webs, with assessment for associated anomalies",
+      "Surveillance laryngoscopy for restenosis or re-formation, which is common with thicker lesions",
+      "Manage through a laryngology and paediatric ENT multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for glottic web."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glottic-web-real-image",
-   "title": "Glottic web: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "glottic_web-pathway",
+      "title": "Glottic web: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A membrane bridging the vocal folds anteriorly, most commonly at the anterior commissure, that may be congenital or acquired",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Stridor or respiratory distress from a thick or extensive web",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flexible fibreoptic laryngoscopy to identify and characterise the web, Rigid endoscopy under anaesthesia to assess thickness and subglottic extension, Videostroboscopy to evaluate the effect on vocal fold vibration"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Endoscopic division of thin anterior webs, often with placement of a keel or mucosal flap to prevent the raw edges re-fusing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Simply dividing a web without measures to prevent re-adhesion of the raw surfaces"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glottic web."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glottic_web-matrix",
+      "title": "Glottic web: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A membrane bridging the vocal folds anteriorly, most commonly at the anterior commissure, that may be congenital or acquired",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flexible fibreoptic laryngoscopy to identify and characterise the web, Rigid endoscopy under anaesthesia to assess thickness and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bilateral vocal fold paralysis, Laryngomalacia, Subglottic stenosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Endoscopic division of thin anterior webs, often with placement of a keel or mucosal flap to prevent the raw edges re-fusing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Simply dividing a web without measures to prevent re-adhesion of the raw surfaces",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glottic web."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glottic_web-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible fibreoptic laryngoscopy",
+          "cells": [
+            {
+              "text": "Identifies and characterises the web"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rigid endoscopy under anaesthesia",
+          "cells": [
+            {
+              "text": "Thickness and subglottic extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Videostroboscopy",
+          "cells": [
+            {
+              "text": "Effect on vocal fold vibration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation for 22q11.2 deletion",
+          "cells": [
+            {
+              "text": "Congenital anterior webs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or bronchoscopy",
+          "cells": [
+            {
+              "text": "Associated airway anomalies where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glottic_web-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent respiratory papillomatosis",
+          "cells": [
+            {
+              "text": "Bridges the commissure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior commissure scarring",
+          "cells": [
+            {
+              "text": "Follows prior surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glottic_web-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic division",
+          "cells": [
+            {
+              "text": "Thin anterior webs, with a keel or mucosal flap to prevent re-fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged open laryngotracheal reconstruction",
+          "cells": [
+            {
+              "text": "Thick webs with subglottic extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway securing",
+          "cells": [
+            {
+              "text": "Tracheostomy for severe congenital webs with stridor in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice and speech therapy",
+          "cells": [
+            {
+              "text": "After intervention, to optimise voice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "22q11.2 deletion in congenital anterior webs; associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance laryngoscopy",
+          "cells": [
+            {
+              "text": "Restenosis or re-formation, which is common with thicker lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Laryngology and paediatric ENT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glottic_web-dx-mgmt",
+      "title": "Diagnosis and management of Glottic web",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glottic web: anterior vocal fold web with airway or voice symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, neonatal airway compromise, subglottic extension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Secure the airway for significant obstruction or stridor in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Flexible laryngoscopy, rigid endoscopy under anaesthesia and videostroboscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does rigid endoscopy show web thickness and subglottic extension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider subglottic stenosis, laryngomalacia, vocal fold paralysis or papillomatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic division of thin anterior webs, with keel or mucosal flap",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Staged open laryngotracheal reconstruction for thick webs with subglottic extension",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tracheostomy for severe congenital webs presenting with infant stridor",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance laryngoscopy for restenosis, which is common with thicker lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Thin webs do well; thick webs with subglottic extension are prone to recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

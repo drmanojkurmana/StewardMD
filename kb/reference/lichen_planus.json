@@ -1,172 +1,479 @@
 {
- "id": "lichen_planus",
- "name": "Lichen planus",
- "aliases": [
-  "LP",
-  "lichen planus (cutaneous)"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Remember the classic six P's: pruritic, purple (violaceous), polygonal, planar (flat-topped) papules and plaques",
-   "Lesions favour the flexor wrists, forearms, and ankles, and fine white lacy lines on the surface (Wickham striae) are a helpful diagnostic clue",
-   "New lesions can appear along lines of trauma or scratching (Koebner phenomenon)",
-   "Oral lichen planus commonly presents as a white reticular lacy pattern on the buccal mucosa; erosive oral or genital disease is painful and warrants monitoring",
-   "Nail involvement can cause ridging and, if severe, scarring with pterygium formation, while scalp disease (lichen planopilaris) causes scarring alopecia",
-   "Consider a lichenoid drug eruption when a similar rash follows introduction of a new medication, and screen for hepatitis C where locally relevant",
-   "Treatment centres on topical corticosteroids for cutaneous and localised mucosal disease, with phototherapy or systemic immunomodulators for widespread or resistant cases",
-   "Long-standing erosive oral or genital lichen planus carries a small risk of malignant transformation and should be followed up"
+  "id": "lichen_planus",
+  "name": "Lichen planus",
+  "aliases": [
+    "LP",
+    "lichen planus (cutaneous)"
   ],
-  "pathophysiology": "Lichen planus is a T-cell-mediated inflammatory disorder in which cytotoxic CD8 T lymphocytes target basal keratinocytes, apparently in response to an altered self-antigen. The resulting band-like lymphocytic infiltrate at the dermo-epidermal junction produces the characteristic histological features of basal cell degeneration, a saw-tooth epidermal profile, hypergranulosis, and apoptotic keratinocytes (Civatte bodies). Pigment released from damaged basal cells accounts for the post-inflammatory hyperpigmentation often seen, particularly in darker skin. Triggers can include certain drugs (lichenoid reactions) and, in some populations, hepatitis C infection.",
-  "additionalDifferentials": [
-   "Lichenoid drug eruption",
-   "Psoriasis",
-   "Discoid lupus erythematosus (for scalp and mucosal disease)",
-   "Secondary syphilis",
-   "Leukoplakia or candidiasis for oral white lesions",
-   "Chronic graft-versus-host disease"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing a lichenoid interface dermatitis in uncertain cases",
-   "Direct immunofluorescence to help distinguish from lupus or immunobullous disease when needed",
-   "Hepatitis C testing where epidemiologically appropriate",
-   "Review of medication history to identify a lichenoid drug trigger",
-   "Biopsy of persistent erosive or indurated oral or genital lesions to exclude dysplasia or malignancy"
-  ],
-  "redFlags": [
-   "Erosive oral or genital disease with non-healing or indurated areas suggesting malignant change",
-   "Scarring alopecia or nail destruction indicating a need for prompt treatment to limit permanent damage",
-   "Rapidly extensive eruption suggesting a drug cause requiring medication review",
-   "Severe painful mucosal disease impairing eating or causing significant morbidity"
-  ],
-  "prognosis": "Cutaneous lichen planus is often self-limiting, frequently resolving within one to two years but leaving post-inflammatory pigmentation; mucosal, nail, and scalp forms tend to be chronic, and erosive mucosal disease requires long-term surveillance for malignant transformation.",
-  "pitfalls": [
-   "Overlooking a lichenoid drug reaction and continuing the causative medication",
-   "Failing to examine the mouth, genitalia, nails, and scalp for additional sites of involvement",
-   "Not monitoring erosive oral or genital disease for malignant change",
-   "Attributing scarring alopecia to non-scarring causes and delaying treatment"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prescribe potent topical corticosteroids as first-line treatment for cutaneous lesions, with antihistamines for pruritus",
-   "Use topical calcineurin inhibitors or corticosteroid gels and mouthwashes for oral and genital erosive disease",
-   "Offer phototherapy (narrowband UVB or PUVA) for widespread cutaneous involvement",
-   "Reserve systemic therapy — corticosteroids, acitretin, ciclosporin, methotrexate or mycophenolate mofetil — for severe or refractory disease",
-   "Review medications and withdraw a suspected lichenoid drug trigger, and screen for and treat hepatitis C where epidemiologically relevant",
-   "Maintain long-term surveillance of erosive oral and genital disease, with biopsy of persistent or indurated lesions to exclude malignant transformation",
-   "Refer nail and scalp (lichen planopilaris) involvement early to limit permanent scarring"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lichen_planus-pathway",
-   "title": "Lichen planus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Remember the classic six P's: pruritic, purple (violaceous), polygonal, planar (flat-topped) papules and plaques",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Erosive oral or genital disease with non-healing or indurated areas suggesting malignant change",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing a lichenoid interface dermatitis in uncertain cases, Direct immunofluorescence to help distinguish from lupus or immunobullous disease when needed, Hepatitis C testing where epidemiologically appropriate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prescribe potent topical corticosteroids as first-line treatment for cutaneous lesions, with antihistamines for pruritus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking a lichenoid drug reaction and continuing the causative medication"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lichen planus."
-  }
- ],
- "tables": [
-  {
-   "id": "lichen_planus-matrix",
-   "title": "Lichen planus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Remember the classic six P's: pruritic, purple (violaceous), polygonal, planar (flat-topped) papules and plaques",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Remember the classic six P's: pruritic, purple (violaceous), polygonal, planar (flat-topped) papules and plaques",
+      "Lesions favour the flexor wrists, forearms, and ankles, and fine white lacy lines on the surface (Wickham striae) are a helpful diagnostic clue",
+      "New lesions can appear along lines of trauma or scratching (Koebner phenomenon)",
+      "Oral lichen planus commonly presents as a white reticular lacy pattern on the buccal mucosa; erosive oral or genital disease is painful and warrants monitoring",
+      "Nail involvement can cause ridging and, if severe, scarring with pterygium formation, while scalp disease (lichen planopilaris) causes scarring alopecia",
+      "Consider a lichenoid drug eruption when a similar rash follows introduction of a new medication, and screen for hepatitis C where locally relevant",
+      "Treatment centres on topical corticosteroids for cutaneous and localised mucosal disease, with phototherapy or systemic immunomodulators for widespread or resistant cases",
+      "Long-standing erosive oral or genital lichen planus carries a small risk of malignant transformation and should be followed up"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing a lichenoid interface dermatitis in uncertain cases, Direct immunofluorescence to help distinguish from lupus",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lichen planus is a T-cell-mediated inflammatory disorder in which cytotoxic CD8 T lymphocytes target basal keratinocytes, apparently in response to an altered self-antigen. The resulting band-like lymphocytic infiltrate at the dermo-epidermal junction produces the characteristic histological features of basal cell degeneration, a saw-tooth epidermal profile, hypergranulosis, and apoptotic keratinocytes (Civatte bodies). Pigment released from damaged basal cells accounts for the post-inflammatory hyperpigmentation often seen, particularly in darker skin. Triggers can include certain drugs (lichenoid reactions) and, in some populations, hepatitis C infection.",
+    "additionalDifferentials": [
+      "Lichenoid drug eruption",
+      "Psoriasis",
+      "Discoid lupus erythematosus (for scalp and mucosal disease)",
+      "Secondary syphilis",
+      "Leukoplakia or candidiasis for oral white lesions",
+      "Chronic graft-versus-host disease"
     ],
-    [
-     "Primary Differentials",
-     "Lichenoid drug eruption, Psoriasis, Discoid lupus erythematosus (for scalp and mucosal disease)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing a lichenoid interface dermatitis in uncertain cases",
+      "Direct immunofluorescence to help distinguish from lupus or immunobullous disease when needed",
+      "Hepatitis C testing where epidemiologically appropriate",
+      "Review of medication history to identify a lichenoid drug trigger",
+      "Biopsy of persistent erosive or indurated oral or genital lesions to exclude dysplasia or malignancy"
     ],
-    [
-     "Management Strategy",
-     "Prescribe potent topical corticosteroids as first-line treatment for cutaneous lesions, with antihistamines for pruritus",
-     "Core treatment modality"
+    "redFlags": [
+      "Erosive oral or genital disease with non-healing or indurated areas suggesting malignant change",
+      "Scarring alopecia or nail destruction indicating a need for prompt treatment to limit permanent damage",
+      "Rapidly extensive eruption suggesting a drug cause requiring medication review",
+      "Severe painful mucosal disease impairing eating or causing significant morbidity"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking a lichenoid drug reaction and continuing the causative medication",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cutaneous lichen planus is often self-limiting, frequently resolving within one to two years but leaving post-inflammatory pigmentation; mucosal, nail, and scalp forms tend to be chronic, and erosive mucosal disease requires long-term surveillance for malignant transformation.",
+    "pitfalls": [
+      "Overlooking a lichenoid drug reaction and continuing the causative medication",
+      "Failing to examine the mouth, genitalia, nails, and scalp for additional sites of involvement",
+      "Not monitoring erosive oral or genital disease for malignant change",
+      "Attributing scarring alopecia to non-scarring causes and delaying treatment"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prescribe potent topical corticosteroids as first-line treatment for cutaneous lesions, with antihistamines for pruritus",
+      "Use topical calcineurin inhibitors or corticosteroid gels and mouthwashes for oral and genital erosive disease",
+      "Offer phototherapy (narrowband UVB or PUVA) for widespread cutaneous involvement",
+      "Reserve systemic therapy — corticosteroids, acitretin, ciclosporin, methotrexate or mycophenolate mofetil — for severe or refractory disease",
+      "Review medications and withdraw a suspected lichenoid drug trigger, and screen for and treat hepatitis C where epidemiologically relevant",
+      "Maintain long-term surveillance of erosive oral and genital disease, with biopsy of persistent or indurated lesions to exclude malignant transformation",
+      "Refer nail and scalp (lichen planopilaris) involvement early to limit permanent scarring"
     ]
-   ],
-   "caption": "Overview comparison matrix for lichen planus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lichen-planus-real-image",
-   "title": "Lichen planus: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "lichen_planus-pathway",
+      "title": "Lichen planus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Remember the classic six P's: pruritic, purple (violaceous), polygonal, planar (flat-topped) papules and plaques",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Erosive oral or genital disease with non-healing or indurated areas suggesting malignant change",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing a lichenoid interface dermatitis in uncertain cases, Direct immunofluorescence to help distinguish from lupus or immunobullous disease when needed, Hepatitis C testing where epidemiologically appropriate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prescribe potent topical corticosteroids as first-line treatment for cutaneous lesions, with antihistamines for pruritus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking a lichenoid drug reaction and continuing the causative medication"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lichen planus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lichen_planus-matrix",
+      "title": "Lichen planus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Remember the classic six P's: pruritic, purple (violaceous), polygonal, planar (flat-topped) papules and plaques",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing a lichenoid interface dermatitis in uncertain cases, Direct immunofluorescence to help distinguish from lupus",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lichenoid drug eruption, Psoriasis, Discoid lupus erythematosus (for scalp and mucosal disease)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prescribe potent topical corticosteroids as first-line treatment for cutaneous lesions, with antihistamines for pruritus",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking a lichenoid drug reaction and continuing the causative medication",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lichen planus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lichen_planus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Lichenoid interface dermatitis in uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Distinguishes from lupus or immunobullous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatitis C testing",
+          "cells": [
+            {
+              "text": "Where epidemiologically appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication history",
+          "cells": [
+            {
+              "text": "Identifies a lichenoid drug trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of persistent erosive or indurated lesions",
+          "cells": [
+            {
+              "text": "Excludes dysplasia or malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_planus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lichenoid drug eruption",
+          "cells": [
+            {
+              "text": "Follows a new medication; withdraw the suspected trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Discoid lupus erythematosus",
+          "cells": [
+            {
+              "text": "Scalp and mucosal disease can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukoplakia or candidiasis",
+          "cells": [
+            {
+              "text": "Oral white lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary syphilis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_planus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Potent topical corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for cutaneous lesions; antihistamines for pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral and genital disease",
+          "cells": [
+            {
+              "text": "Topical calcineurin inhibitors or corticosteroid gels and mouthwashes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "Narrowband UVB or PUVA for widespread involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, acitretin, ciclosporin, methotrexate or mycophenolate for severe or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger review",
+          "cells": [
+            {
+              "text": "Withdraw a suspected lichenoid drug; screen for and treat hepatitis C where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Erosive oral or genital disease; biopsy of persistent or indurated lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early referral",
+          "cells": [
+            {
+              "text": "Nail and scalp (lichen planopilaris) involvement, to limit scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lichen_planus-dx-mgmt",
+      "title": "Diagnosis and management of Lichen planus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pruritic purple, flat-topped papules on the wrists with white lacy lines",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (indurated erosive lesion, scarring alopecia, nail destruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: biopsy of indurated lesions to exclude dysplasia or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy in uncertain cases, drug history, hepatitis C testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a lichenoid interface dermatitis confirmed on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lichenoid drug eruption, discoid lupus or secondary syphilis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Potent topical corticosteroids as first line, with antihistamines",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical calcineurin inhibitors or steroid mouthwashes for mucosal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Narrowband UVB or PUVA for widespread involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic therapy for severe or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Withdraw suspected trigger drug; long-term surveillance of erosive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Cutaneous form often self-limiting within 1-2 years; mucosal and nail forms chronic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

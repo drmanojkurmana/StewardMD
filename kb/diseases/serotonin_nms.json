@@ -228,25 +228,512 @@
       "caption": "Diagnostic and clinical overview matrix for serotonin syndrome / nms."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "serotonin-nms-real-image",
-      "title": "Serotonin syndrome / NMS: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Serotonin Syndrome",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/heat-illness/serotonin-syndrome",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Neuroleptic Malignant Syndrome",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/heat-illness/neuroleptic-malignant-syndrome",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Drug-Induced Hyperthermia (p3)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "serotonin_nms-diagnostic",
+      "kind": "diagnostic",
+      "title": "Serotonin syndrome versus NMS: diagnostic features",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Serotonin syndrome",
+        "Neuroleptic malignant syndrome"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Trigger drug",
+          "cells": [
+            {
+              "text": "Serotonergic drug; commonest SSRI plus tramadol; linezolid is an MAOI"
+            },
+            {
+              "text": "Dopamine antagonist (antipsychotic, metoclopramide) or withdrawal of levodopa or dopamine agonist"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Onset",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Within 24 h, usually within 6 h of dose change",
+              "op": "<=",
+              "value": 24
+            },
+            {
+              "text": "Over days; mostly first 2 weeks of treatment"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Neuromuscular",
+          "cells": [
+            {
+              "text": "{{hy:Clonus, myoclonus, hyperreflexia}}, worse in legs"
+            },
+            {
+              "text": "{{hy:Lead-pipe rigidity with reduced reflexes}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Temperature",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Hyperthermia in severe cases, over 38 deg C in Hunter criteria",
+              "op": ">",
+              "value": 38
+            },
+            {
+              "text": "Usually over 38, often over 40 deg C",
+              "op": ">",
+              "value": 38
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hunter criteria (serotonin syndrome)",
+          "cells": [
+            {
+              "text": "Serotonergic drug plus spontaneous clonus; or tremor and hyperreflexia; or inducible or ocular clonus with agitation, diaphoresis, or hypertonia and temperature over 38 deg C"
+            },
+            {
+              "text": "Not applicable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hunter criteria accuracy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 85%, specificity over 95%"
+            },
+            {
+              "text": "Not applicable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "DSM-5-TR (NMS)",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Not applicable"
+            },
+            {
+              "text": "Dopamine antagonist or agonist withdrawal within 72 h, hyperthermia, diaphoresis",
+              "op": "<=",
+              "value": 72
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "GI symptoms",
+          "cells": [
+            {
+              "text": "Vomiting, diarrhoea"
+            },
+            {
+              "text": "Not typical"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Laboratory tests",
+          "cells": [
+            {
+              "text": "No confirmatory test; CK, renal, coagulation, urine myoglobin for complications"
+            },
+            {
+              "text": "No confirmatory test; CK raised or rhabdomyolysis; often imaging and CSF"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Resolution or outcome",
+          "cells": [
+            {
+              "text": "Usually within 24 h; longer with MAOIs or SSRIs"
+            },
+            {
+              "text": "Treated mortality about 5% at 30 days, 15% at 1 year"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "serotonin_nms-ddx",
+      "kind": "ddx",
+      "title": "Other causes of hyperthermia with altered mental status",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticholinergic toxicity",
+          "cells": [
+            {
+              "text": "Listed mimic; review drug history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sympathomimetic toxicity (cocaine, amphetamines)",
+          "cells": [
+            {
+              "text": "Stimulant exposure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignant hyperthermia",
+          "cells": [
+            {
+              "text": "Linked to anaesthesia; separated by history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Intrathecal baclofen withdrawal",
+          "cells": [
+            {
+              "text": "Pump history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sepsis or CNS infection",
+          "cells": [
+            {
+              "text": "No generalised motor abnormality expected; CSF and cultures"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nonconvulsive status epilepticus",
+          "cells": [
+            {
+              "text": "Obtain EEG"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lithium toxicity",
+          "cells": [
+            {
+              "text": "Tremor, hyperreflexia, myoclonus, encephalopathy; lithium level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol or sedative withdrawal",
+          "cells": [
+            {
+              "text": "History of recent cessation"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "serotonin_nms-treatment",
+      "kind": "treatment",
+      "title": "Management of serotonin syndrome and NMS",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop all serotonergic drugs or the dopamine antagonist",
+          "cells": [
+            {
+              "text": "{{hy:Always, first step}}"
+            },
+            {
+              "text": "Restart dopaminergic drug if NMS followed its withdrawal"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Supportive care, cooling, ICU for severe cases",
+          "cells": [
+            {
+              "text": "Hyperthermia, autonomic instability"
+            },
+            {
+              "text": "Fluids, electrolytes; sedation, paralysis and intubation if severe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzodiazepines",
+          "cells": [
+            {
+              "text": "Agitation, mild serotonin syndrome, mild NMS rigidity"
+            },
+            {
+              "text": "Dexmedetomidine if refractory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cyproheptadine (oral or crushed via NG tube)",
+          "cells": [
+            {
+              "text": "Serotonin syndrome persisting despite supportive care"
+            },
+            {
+              "text": "Low-quality evidence; dose not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Short-acting antihypertensives (nitroprusside, esmolol)",
+          "cells": [
+            {
+              "text": "Serotonin syndrome autonomic instability"
+            },
+            {
+              "text": "Clonidine or clevidipine used in NMS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dantrolene",
+          "cells": [
+            {
+              "text": "NMS with worsening or persistent rigidity and hyperthermia"
+            },
+            {
+              "text": "Dose not stated in source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bromocriptine or amantadine",
+          "cells": [
+            {
+              "text": "NMS, dopaminergic support"
+            },
+            {
+              "text": "Oral or NG; adjuncts unproven in trials"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Avoid adding neuroleptics",
+          "cells": [
+            {
+              "text": "Undifferentiated hyperthermic agitated patient"
+            },
+            {
+              "text": "Can cause or worsen NMS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Dantrolene: Merck lists it for worsening NMS rigidity and hyperthermia, while Harrison states dantrolene is ineffective for hyperthermia not due to malignant hyperthermia. Both views are kept; adjunctive drugs are unproven in trials."
+    },
+    {
+      "id": "serotonin_nms-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs that cause hyperthermia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced hyperthermia",
+          "cells": [
+            {
+              "text": "amphetamines, cocaine, phencyclidine (PCP), MDMA (ecstasy), LSD, salicylates, lithium, anticholinergics, sympathomimetics"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "serotonin_nms-dx-mgmt",
+      "title": "Diagnosis and management of serotonin syndrome and NMS",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, altered mental status, neuromuscular signs, autonomic instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Medication review, core temperature, CK, renal tests, coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Serotonergic drug, onset within 24 h, clonus or hyperreflexia?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stop serotonergic drugs; benzodiazepines; supportive care",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Persisting despite supportive care?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Cyproheptadine; ICU, cooling, paralysis if severe",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Dopamine antagonist or dopaminergic withdrawal, lead-pipe rigidity?",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop drug, rapid cooling, ICU supportive care, benzodiazepines",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Worsening: consider dantrolene, bromocriptine or amantadine",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Seek other cause: infection, NCSE, toxidromes",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Observe; usually resolves within 24 to 72 h",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
         }
       ]
     }

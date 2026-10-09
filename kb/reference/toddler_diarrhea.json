@@ -1,177 +1,475 @@
 {
- "id": "toddler_diarrhea",
- "name": "Toddler's diarrhoea (chronic nonspecific diarrhoea)",
- "aliases": [
-  "chronic nonspecific diarrhoea of childhood",
-  "toddler's diarrhoea",
-  "functional diarrhoea"
- ],
- "class": "non_infective",
- "system": "Paediatrics / Gastroenterology",
- "specialty": "Paediatric Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard paediatric gastroenterology reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common cause of chronic loose stools in an otherwise well, thriving pre-school child, typically between about one and five years of age",
-   "Stools are frequent and loose and may contain recognisable undigested food, giving the classic peas-and-carrots appearance",
-   "By definition the child grows well, is not dehydrated, and has no blood in the stool or systemic symptoms",
-   "It is often linked to dietary factors summarised as the four Fs: excessive fluid, fruit juice, low fat, and high fibre",
-   "It reflects rapid intestinal transit rather than malabsorption or infection",
-   "Diagnosis is clinical in a thriving child with a normal examination, and extensive investigation is unnecessary in the absence of red flags",
-   "Management is reassurance and dietary adjustment, normalising fluid intake, reducing fruit juice and sorbitol-containing drinks, ensuring adequate dietary fat, and avoiding excessive fibre",
-   "The condition is self-limiting and typically resolves by school age"
+  "id": "toddler_diarrhea",
+  "name": "Toddler's diarrhoea (chronic nonspecific diarrhoea)",
+  "aliases": [
+    "chronic nonspecific diarrhoea of childhood",
+    "toddler's diarrhoea",
+    "functional diarrhoea"
   ],
-  "pathophysiology": "Toddler's diarrhoea is a functional disorder of accelerated gastrointestinal transit rather than a disease of the gut mucosa. Excessive intake of fluids and of fructose- or sorbitol-containing drinks, together with a relatively low-fat diet, speeds transit and reduces the time available for water and nutrient reabsorption. The result is frequent loose stools containing undigested food residue, occurring in a child who is otherwise thriving with no evidence of malabsorption, inflammation, or infection.",
-  "additionalDifferentials": [
-   "Coeliac disease",
-   "Cow's milk protein allergy",
-   "Chronic giardiasis or other gut infection",
-   "Carbohydrate malabsorption such as lactose intolerance or excess fructose or sorbitol intake",
-   "Inflammatory bowel disease in the older child",
-   "Cystic fibrosis or other pancreatic insufficiency when there is failure to thrive",
-   "Overflow diarrhoea complicating constipation"
-  ],
-  "additionalInvestigations": [
-   "Careful growth monitoring and a detailed dietary history, which are the mainstay",
-   "Coeliac serology if there are any concerns about growth or symptoms",
-   "Stool microscopy, culture, and parasite testing if infection is suspected",
-   "Faecal elastase if pancreatic insufficiency is a concern",
-   "Full blood count and inflammatory markers if organic disease is suspected",
-   "Faecal calprotectin where inflammatory bowel disease is considered",
-   "Assessment of fluid and fruit-juice intake"
-  ],
-  "redFlags": [
-   "Faltering growth or weight loss",
-   "Blood or mucus in the stool",
-   "Nocturnal diarrhoea or systemic symptoms such as fever or vomiting",
-   "Signs of dehydration or malnutrition",
-   "Onset in early infancy or persistence beyond the expected age"
-  ],
-  "prognosis": "The outlook is excellent: this is a benign, self-limiting condition that resolves spontaneously, usually by around school age, without long-term consequences.",
-  "pitfalls": [
-   "Subjecting a thriving child to unnecessary invasive investigation",
-   "Over-restricting the diet and causing nutritional harm, particularly inappropriate fat or calorie restriction",
-   "Missing coeliac disease or another organic cause when growth is faltering",
-   "Reflexly excluding milk without supporting evidence",
-   "Failing to address excessive fruit juice and sugary-drink intake"
-  ],
-  "references": [
-   "Rome diagnostic criteria for paediatric functional gastrointestinal disorders",
-   "Standard paediatric gastroenterology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure parents that this is a benign, self-limiting functional disorder in a thriving child that requires no medication",
-   "Dietary modification targeting the four Fs: reduce excessive fluid and fruit-juice intake and cut fructose- and sorbitol-containing drinks",
-   "Normalise dietary fat and avoid an excessively low-fat, high-fibre toddler diet to slow intestinal transit",
-   "Maintain regular growth monitoring and plotting to confirm continued thriving",
-   "Avoid unnecessary investigation and restrictive elimination diets in the absence of red flags",
-   "Safety-net with review if faltering growth, blood in the stool, nocturnal symptoms, or systemic features emerge, prompting evaluation for organic disease such as coeliac disease or inflammatory bowel disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "toddler_diarrhea-pathway",
-   "title": "Toddler's diarrhoea (chronic nonspecific diarrhoea): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common cause of chronic loose stools in an otherwise well, thriving pre-school child, typically between about one and five years of age",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Faltering growth or weight loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful growth monitoring and a detailed dietary history, which are the mainstay, Coeliac serology if there are any concerns about growth or symptoms, Stool microscopy, culture, and parasite testing if infection is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure parents that this is a benign, self-limiting functional disorder in a thriving child that requires no medication"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Subjecting a thriving child to unnecessary invasive investigation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of toddler's diarrhoea (chronic nonspecific diarrhoea)."
-  }
- ],
- "tables": [
-  {
-   "id": "toddler_diarrhea-matrix",
-   "title": "Toddler's diarrhoea (chronic nonspecific diarrhoea): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common cause of chronic loose stools in an otherwise well, thriving pre-school child, typically between about one and five",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatrics / Gastroenterology",
+  "specialty": "Paediatric Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard paediatric gastroenterology reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common cause of chronic loose stools in an otherwise well, thriving pre-school child, typically between about one and five years of age",
+      "Stools are frequent and loose and may contain recognisable undigested food, giving the classic peas-and-carrots appearance",
+      "By definition the child grows well, is not dehydrated, and has no blood in the stool or systemic symptoms",
+      "It is often linked to dietary factors summarised as the four Fs: excessive fluid, fruit juice, low fat, and high fibre",
+      "It reflects rapid intestinal transit rather than malabsorption or infection",
+      "Diagnosis is clinical in a thriving child with a normal examination, and extensive investigation is unnecessary in the absence of red flags",
+      "Management is reassurance and dietary adjustment, normalising fluid intake, reducing fruit juice and sorbitol-containing drinks, ensuring adequate dietary fat, and avoiding excessive fibre",
+      "The condition is self-limiting and typically resolves by school age"
     ],
-    [
-     "Key Investigations",
-     "Careful growth monitoring and a detailed dietary history, which are the mainstay, Coeliac serology if there are any concerns",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Toddler's diarrhoea is a functional disorder of accelerated gastrointestinal transit rather than a disease of the gut mucosa. Excessive intake of fluids and of fructose- or sorbitol-containing drinks, together with a relatively low-fat diet, speeds transit and reduces the time available for water and nutrient reabsorption. The result is frequent loose stools containing undigested food residue, occurring in a child who is otherwise thriving with no evidence of malabsorption, inflammation, or infection.",
+    "additionalDifferentials": [
+      "Coeliac disease",
+      "Cow's milk protein allergy",
+      "Chronic giardiasis or other gut infection",
+      "Carbohydrate malabsorption such as lactose intolerance or excess fructose or sorbitol intake",
+      "Inflammatory bowel disease in the older child",
+      "Cystic fibrosis or other pancreatic insufficiency when there is failure to thrive",
+      "Overflow diarrhoea complicating constipation"
     ],
-    [
-     "Primary Differentials",
-     "Coeliac disease, Cow's milk protein allergy, Chronic giardiasis or other gut infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful growth monitoring and a detailed dietary history, which are the mainstay",
+      "Coeliac serology if there are any concerns about growth or symptoms",
+      "Stool microscopy, culture, and parasite testing if infection is suspected",
+      "Faecal elastase if pancreatic insufficiency is a concern",
+      "Full blood count and inflammatory markers if organic disease is suspected",
+      "Faecal calprotectin where inflammatory bowel disease is considered",
+      "Assessment of fluid and fruit-juice intake"
     ],
-    [
-     "Management Strategy",
-     "Reassure parents that this is a benign, self-limiting functional disorder in a thriving child that requires no medication",
-     "Core treatment modality"
+    "redFlags": [
+      "Faltering growth or weight loss",
+      "Blood or mucus in the stool",
+      "Nocturnal diarrhoea or systemic symptoms such as fever or vomiting",
+      "Signs of dehydration or malnutrition",
+      "Onset in early infancy or persistence beyond the expected age"
     ],
-    [
-     "Clinical Pitfall",
-     "Subjecting a thriving child to unnecessary invasive investigation",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is excellent: this is a benign, self-limiting condition that resolves spontaneously, usually by around school age, without long-term consequences.",
+    "pitfalls": [
+      "Subjecting a thriving child to unnecessary invasive investigation",
+      "Over-restricting the diet and causing nutritional harm, particularly inappropriate fat or calorie restriction",
+      "Missing coeliac disease or another organic cause when growth is faltering",
+      "Reflexly excluding milk without supporting evidence",
+      "Failing to address excessive fruit juice and sugary-drink intake"
+    ],
+    "references": [
+      "Rome diagnostic criteria for paediatric functional gastrointestinal disorders",
+      "Standard paediatric gastroenterology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure parents that this is a benign, self-limiting functional disorder in a thriving child that requires no medication",
+      "Dietary modification targeting the four Fs: reduce excessive fluid and fruit-juice intake and cut fructose- and sorbitol-containing drinks",
+      "Normalise dietary fat and avoid an excessively low-fat, high-fibre toddler diet to slow intestinal transit",
+      "Maintain regular growth monitoring and plotting to confirm continued thriving",
+      "Avoid unnecessary investigation and restrictive elimination diets in the absence of red flags",
+      "Safety-net with review if faltering growth, blood in the stool, nocturnal symptoms, or systemic features emerge, prompting evaluation for organic disease such as coeliac disease or inflammatory bowel disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for toddler's diarrhoea (chronic nonspecific diarrhoea)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "toddler-diarrhea-real-image",
-   "title": "Toddler's diarrhoea (chronic nonspecific diarrhoea): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "toddler_diarrhea-pathway",
+      "title": "Toddler's diarrhoea (chronic nonspecific diarrhoea): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common cause of chronic loose stools in an otherwise well, thriving pre-school child, typically between about one and five years of age",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Faltering growth or weight loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful growth monitoring and a detailed dietary history, which are the mainstay, Coeliac serology if there are any concerns about growth or symptoms, Stool microscopy, culture, and parasite testing if infection is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure parents that this is a benign, self-limiting functional disorder in a thriving child that requires no medication"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Subjecting a thriving child to unnecessary invasive investigation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of toddler's diarrhoea (chronic nonspecific diarrhoea)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "toddler_diarrhea-matrix",
+      "title": "Toddler's diarrhoea (chronic nonspecific diarrhoea): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common cause of chronic loose stools in an otherwise well, thriving pre-school child, typically between about one and five",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful growth monitoring and a detailed dietary history, which are the mainstay, Coeliac serology if there are any concerns",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coeliac disease, Cow's milk protein allergy, Chronic giardiasis or other gut infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure parents that this is a benign, self-limiting functional disorder in a thriving child that requires no medication",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Subjecting a thriving child to unnecessary invasive investigation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for toddler's diarrhoea (chronic nonspecific diarrhoea)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard paediatric gastroenterology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toddler_diarrhea-dx-mgmt",
+      "title": "Diagnosis and management of Toddler's diarrhoea (chronic nonspecific diarrhoea)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected toddler's diarrhoea: frequent loose stools in a thriving toddler",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: faltering growth, blood in stool, or nocturnal or systemic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for organic disease such as coeliac disease or inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Growth chart review; dietary history; coeliac serology if concerns",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the child growing well with a dietary pattern of excess fluid and juice?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coeliac disease, giardiasis or inflammatory bowel disease; investigate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure; benign functional disorder requiring no medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce fluid and fruit juice; limit fructose and sorbitol drinks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintain adequate dietary fat and moderate fibre",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial growth monitoring to confirm thriving",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid unnecessary investigation and restrictive diets",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent outlook; resolves spontaneously by school age without consequences",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toddler_diarrhea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Careful growth monitoring",
+          "cells": [
+            {
+              "text": "Thriving growth confirms the functional diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed dietary history",
+          "cells": [
+            {
+              "text": "Fluid, fruit juice, fat and fibre intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology",
+          "cells": [
+            {
+              "text": "Growth or symptom concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy, culture and parasite testing",
+          "cells": [
+            {
+              "text": "Infection, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal elastase",
+          "cells": [
+            {
+              "text": "Pancreatic insufficiency concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal calprotectin",
+          "cells": [
+            {
+              "text": "Inflammatory bowel disease consideration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toddler_diarrhea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Faltering growth is a red flag; coeliac serology tests for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardiasis or other chronic enteric infection",
+          "cells": [
+            {
+              "text": "Stool testing for parasites and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Blood or mucus in the stool; faecal calprotectin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toddler_diarrhea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign self-limiting functional disorder in a thriving child; no medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary modification (four Fs)",
+          "cells": [
+            {
+              "text": "Reduce excess fluid and fruit juice; limit fructose and sorbitol drinks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adequate dietary fat",
+          "cells": [
+            {
+              "text": "Avoid a low-fat, high-fibre diet that slows transit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Serial plotting to confirm continued thriving"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary investigation",
+          "cells": [
+            {
+              "text": "No restrictive diets without red flags"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety-net review",
+          "cells": [
+            {
+              "text": "Faltering growth, blood in stool, nocturnal or systemic symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

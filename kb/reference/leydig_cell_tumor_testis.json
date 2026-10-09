@@ -1,173 +1,480 @@
 {
- "id": "leydig_cell_tumor_testis",
- "name": "Leydig cell tumour of the testis",
- "aliases": [
-  "Leydig cell tumor",
-  "interstitial cell tumour of the testis",
-  "testicular Leydig cell tumour"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Leydig cell tumour is the commonest sex cord-stromal tumour of the testis and most are benign, though a minority behave malignantly, particularly in adults",
-   "It can be hormonally active, secreting testosterone or oestrogen, so presentation varies by age",
-   "In prepubertal boys androgen excess may cause isosexual precocious puberty, while oestrogen excess can cause gynaecomastia",
-   "In adults it may present as a painless testicular mass, with gynaecomastia, reduced libido, or infertility from hormonal effects",
-   "Germ cell tumour markers (AFP, beta-hCG) are normal, and hormone profiling (testosterone, oestradiol, and relevant pituitary hormones) helps characterise a functioning tumour",
-   "Small, clearly benign-appearing lesions may be amenable to testis-sparing surgery, whereas radical inguinal orchidectomy is used when malignancy is suspected or organ preservation is not feasible",
-   "Features suggesting malignant potential include larger size, vascular invasion, necrosis, increased mitoses, and infiltrative margins, prompting staging and closer follow-up"
+  "id": "leydig_cell_tumor_testis",
+  "name": "Leydig cell tumour of the testis",
+  "aliases": [
+    "Leydig cell tumor",
+    "interstitial cell tumour of the testis",
+    "testicular Leydig cell tumour"
   ],
-  "pathophysiology": "Leydig cell tumours arise from the interstitial Leydig cells that normally produce testosterone under luteinising hormone stimulation. Neoplastic Leydig cells may retain steroidogenic activity and secrete androgens or, through peripheral or intratumoral aromatisation, oestrogens, producing the endocrine syndromes seen clinically. Excess oestrogen can suppress the hypothalamic-pituitary-gonadal axis and impair spermatogenesis, contributing to gynaecomastia and infertility. Most tumours are benign, but a subset shows histological features associated with metastatic behaviour, chiefly in adults.",
-  "additionalDifferentials": [
-   "Germ cell tumour of the testis",
-   "Sertoli cell tumour",
-   "Leydig cell hyperplasia (non-neoplastic)",
-   "Testicular adrenal rest tumour in congenital adrenal hyperplasia",
-   "Testicular lymphoma",
-   "Other sex cord-stromal tumours"
-  ],
-  "additionalInvestigations": [
-   "Scrotal ultrasound to localise and characterise the intratesticular lesion",
-   "Serum AFP and beta-hCG (normal) to exclude a germ cell tumour",
-   "Hormonal profile including testosterone, oestradiol, LH, and FSH",
-   "Assessment to exclude testicular adrenal rest tumour when congenital adrenal hyperplasia is possible",
-   "CT of the chest, abdomen, and pelvis when malignancy is suspected",
-   "Histological review of resection margins and malignancy-associated features"
-  ],
-  "redFlags": [
-   "Large or rapidly growing tumour with features suggesting malignancy",
-   "Evidence of retroperitoneal or distant metastases on staging",
-   "Rapidly progressive precocious puberty in a boy",
-   "Marked hormonal disturbance with new gynaecomastia in an adult"
-  ],
-  "prognosis": "The majority of Leydig cell tumours are benign and cured by surgical excision, with resolution or improvement of hormonal effects; malignant Leydig cell tumours, more frequent in adults, respond poorly to chemotherapy and radiotherapy and carry a guarded prognosis once metastatic.",
-  "pitfalls": [
-   "Assuming a hormonally active mass is benign without assessing malignancy-associated histological features",
-   "Overlooking bilateral testicular adrenal rest tumours in congenital adrenal hyperplasia and mistaking them for neoplasm",
-   "Proceeding to orchidectomy for a small benign lesion where testis-sparing surgery was feasible",
-   "Failing to investigate gynaecomastia or precocious puberty as a clue to a functioning tumour"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "WHO Classification of Tumours: Urinary and Male Genital Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Testis-sparing surgery for small, benign-appearing lesions with intra-operative frozen-section assessment",
-   "Radical inguinal orchidectomy when malignancy is suspected or organ preservation is not feasible",
-   "Histological assessment of margins and malignancy-associated features to guide further treatment",
-   "Retroperitoneal lymph node dissection and staging when malignant behaviour is confirmed",
-   "Management of hormonal sequelae such as gynaecomastia and reduced libido, with fertility counselling and semen cryopreservation",
-   "Surveillance imaging of chest, abdomen and pelvis and clinical follow-up given metastatic potential in adults",
-   "Urology and oncology multidisciplinary care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "leydig_cell_tumor_testis-pathway",
-   "title": "Leydig cell tumour of the testis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Leydig cell tumour is the commonest sex cord-stromal tumour of the testis and most are benign, though a minority behave malignantly, particularly in adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Large or rapidly growing tumour with features suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Scrotal ultrasound to localise and characterise the intratesticular lesion, Serum AFP and beta-hCG (normal) to exclude a germ cell tumour, Hormonal profile including testosterone, oestradiol, LH, and FSH"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Testis-sparing surgery for small, benign-appearing lesions with intra-operative frozen-section assessment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a hormonally active mass is benign without assessing malignancy-associated histological features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of leydig cell tumour of the testis."
-  }
- ],
- "tables": [
-  {
-   "id": "leydig_cell_tumor_testis-matrix",
-   "title": "Leydig cell tumour of the testis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Leydig cell tumour is the commonest sex cord-stromal tumour of the testis and most are benign, though a minority behave",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Leydig cell tumour is the commonest sex cord-stromal tumour of the testis and most are benign, though a minority behave malignantly, particularly in adults",
+      "It can be hormonally active, secreting testosterone or oestrogen, so presentation varies by age",
+      "In prepubertal boys androgen excess may cause isosexual precocious puberty, while oestrogen excess can cause gynaecomastia",
+      "In adults it may present as a painless testicular mass, with gynaecomastia, reduced libido, or infertility from hormonal effects",
+      "Germ cell tumour markers (AFP, beta-hCG) are normal, and hormone profiling (testosterone, oestradiol, and relevant pituitary hormones) helps characterise a functioning tumour",
+      "Small, clearly benign-appearing lesions may be amenable to testis-sparing surgery, whereas radical inguinal orchidectomy is used when malignancy is suspected or organ preservation is not feasible",
+      "Features suggesting malignant potential include larger size, vascular invasion, necrosis, increased mitoses, and infiltrative margins, prompting staging and closer follow-up"
     ],
-    [
-     "Key Investigations",
-     "Scrotal ultrasound to localise and characterise the intratesticular lesion, Serum AFP and beta-hCG (normal) to exclude a germ",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Leydig cell tumours arise from the interstitial Leydig cells that normally produce testosterone under luteinising hormone stimulation. Neoplastic Leydig cells may retain steroidogenic activity and secrete androgens or, through peripheral or intratumoral aromatisation, oestrogens, producing the endocrine syndromes seen clinically. Excess oestrogen can suppress the hypothalamic-pituitary-gonadal axis and impair spermatogenesis, contributing to gynaecomastia and infertility. Most tumours are benign, but a subset shows histological features associated with metastatic behaviour, chiefly in adults.",
+    "additionalDifferentials": [
+      "Germ cell tumour of the testis",
+      "Sertoli cell tumour",
+      "Leydig cell hyperplasia (non-neoplastic)",
+      "Testicular adrenal rest tumour in congenital adrenal hyperplasia",
+      "Testicular lymphoma",
+      "Other sex cord-stromal tumours"
     ],
-    [
-     "Primary Differentials",
-     "Germ cell tumour of the testis, Sertoli cell tumour, Leydig cell hyperplasia (non-neoplastic)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Scrotal ultrasound to localise and characterise the intratesticular lesion",
+      "Serum AFP and beta-hCG (normal) to exclude a germ cell tumour",
+      "Hormonal profile including testosterone, oestradiol, LH, and FSH",
+      "Assessment to exclude testicular adrenal rest tumour when congenital adrenal hyperplasia is possible",
+      "CT of the chest, abdomen, and pelvis when malignancy is suspected",
+      "Histological review of resection margins and malignancy-associated features"
     ],
-    [
-     "Management Strategy",
-     "Testis-sparing surgery for small, benign-appearing lesions with intra-operative frozen-section assessment",
-     "Core treatment modality"
+    "redFlags": [
+      "Large or rapidly growing tumour with features suggesting malignancy",
+      "Evidence of retroperitoneal or distant metastases on staging",
+      "Rapidly progressive precocious puberty in a boy",
+      "Marked hormonal disturbance with new gynaecomastia in an adult"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a hormonally active mass is benign without assessing malignancy-associated histological features",
-     "Prevent diagnostic or management error"
+    "prognosis": "The majority of Leydig cell tumours are benign and cured by surgical excision, with resolution or improvement of hormonal effects; malignant Leydig cell tumours, more frequent in adults, respond poorly to chemotherapy and radiotherapy and carry a guarded prognosis once metastatic.",
+    "pitfalls": [
+      "Assuming a hormonally active mass is benign without assessing malignancy-associated histological features",
+      "Overlooking bilateral testicular adrenal rest tumours in congenital adrenal hyperplasia and mistaking them for neoplasm",
+      "Proceeding to orchidectomy for a small benign lesion where testis-sparing surgery was feasible",
+      "Failing to investigate gynaecomastia or precocious puberty as a clue to a functioning tumour"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "WHO Classification of Tumours: Urinary and Male Genital Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Testis-sparing surgery for small, benign-appearing lesions with intra-operative frozen-section assessment",
+      "Radical inguinal orchidectomy when malignancy is suspected or organ preservation is not feasible",
+      "Histological assessment of margins and malignancy-associated features to guide further treatment",
+      "Retroperitoneal lymph node dissection and staging when malignant behaviour is confirmed",
+      "Management of hormonal sequelae such as gynaecomastia and reduced libido, with fertility counselling and semen cryopreservation",
+      "Surveillance imaging of chest, abdomen and pelvis and clinical follow-up given metastatic potential in adults",
+      "Urology and oncology multidisciplinary care"
     ]
-   ],
-   "caption": "Overview comparison matrix for leydig cell tumour of the testis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "leydig-cell-tumor-testis-real-image",
-   "title": "Leydig cell tumour of the testis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "leydig_cell_tumor_testis-pathway",
+      "title": "Leydig cell tumour of the testis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Leydig cell tumour is the commonest sex cord-stromal tumour of the testis and most are benign, though a minority behave malignantly, particularly in adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Large or rapidly growing tumour with features suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Scrotal ultrasound to localise and characterise the intratesticular lesion, Serum AFP and beta-hCG (normal) to exclude a germ cell tumour, Hormonal profile including testosterone, oestradiol, LH, and FSH"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Testis-sparing surgery for small, benign-appearing lesions with intra-operative frozen-section assessment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a hormonally active mass is benign without assessing malignancy-associated histological features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of leydig cell tumour of the testis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "leydig_cell_tumor_testis-matrix",
+      "title": "Leydig cell tumour of the testis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Leydig cell tumour is the commonest sex cord-stromal tumour of the testis and most are benign, though a minority behave",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Scrotal ultrasound to localise and characterise the intratesticular lesion, Serum AFP and beta-hCG (normal) to exclude a germ",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Germ cell tumour of the testis, Sertoli cell tumour, Leydig cell hyperplasia (non-neoplastic)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Testis-sparing surgery for small, benign-appearing lesions with intra-operative frozen-section assessment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a hormonally active mass is benign without assessing malignancy-associated histological features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for leydig cell tumour of the testis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leydig_cell_tumor_testis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Localises and characterises the intratesticular lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum AFP and beta-hCG",
+          "cells": [
+            {
+              "text": "Normal; excludes a germ cell tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal profile (testosterone, oestradiol, LH, FSH)",
+          "cells": [
+            {
+              "text": "Hormonal activity of the tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for testicular adrenal rest tumour",
+          "cells": [
+            {
+              "text": "Where congenital adrenal hyperplasia is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Where malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological review",
+          "cells": [
+            {
+              "text": "Margins and malignancy-associated features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leydig_cell_tumor_testis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Germ cell tumour of the testis",
+          "cells": [
+            {
+              "text": "Excluded by normal AFP and beta-hCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular adrenal rest tumour in congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Can be bilateral and mistaken for neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sertoli cell tumour",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leydig_cell_tumor_testis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Testis-sparing surgery",
+          "cells": [
+            {
+              "text": "For small, benign-appearing lesions, with intra-operative frozen-section assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radical inguinal orchidectomy",
+          "cells": [
+            {
+              "text": "Where malignancy is suspected or organ preservation is not feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Margins and malignancy-associated features guide further treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retroperitoneal nodes",
+          "cells": [
+            {
+              "text": "Dissection and staging when malignant behaviour is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal sequelae",
+          "cells": [
+            {
+              "text": "Gynaecomastia and reduced libido; fertility counselling and semen cryopreservation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Chest, abdomen and pelvis imaging given metastatic potential in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Urology and oncology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leydig_cell_tumor_testis-dx-mgmt",
+      "title": "Diagnosis and management of Leydig cell tumour of the testis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless testicular mass with gynaecomastia, precocity or reduced libido",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (large or growing mass, metastases, rapid precocity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent staging and oncology review for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrotal ultrasound, AFP, beta-hCG, testosterone, oestradiol, LH and FSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a benign-appearing lesion confirmed, with germ cell markers normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider germ cell tumour, Sertoli cell tumour or testicular lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Testis-sparing surgery for small benign-appearing lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radical inguinal orchidectomy if malignancy is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histology of margins and malignancy features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Retroperitoneal lymph node dissection and staging if malignant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance imaging and follow-up given metastatic potential in adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most are benign and cured by excision; malignant tumours respond poorly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,461 @@
 {
- "id": "claude_syndrome",
- "name": "Claude syndrome",
- "aliases": [
-  "dorsal midbrain tegmental syndrome",
-  "inferior red nucleus syndrome",
-  "Claude's syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Cerebrovascular",
- "specialty": "Neurology / Stroke",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by a lesion of the dorsal midbrain tegmentum affecting the inferior red nucleus and adjacent superior cerebellar peduncle fibres",
-   "Combines an ipsilateral third nerve palsy with contralateral cerebellar ataxia",
-   "The cerebellar signs stem from involvement of the crossing dentatorubrothalamic tract rather than the corticospinal tract",
-   "It resembles Benedikt syndrome but is dominated by ataxia and dysmetria rather than a prominent rubral tremor",
-   "Weakness is usually absent because the ventral cerebral peduncle is comparatively spared",
-   "The ipsilateral third nerve palsy again produces ptosis, a dilated pupil, and an eye deviated down and out",
-   "It is supplied by paramedian perforators of the posterior cerebral and basilar arteries, like the other midbrain syndromes"
+  "id": "claude_syndrome",
+  "name": "Claude syndrome",
+  "aliases": [
+    "dorsal midbrain tegmental syndrome",
+    "inferior red nucleus syndrome",
+    "Claude's syndrome"
   ],
-  "pathophysiology": "Claude syndrome results from a paramedian dorsal midbrain tegmental lesion, typically ischaemic, in the territory of perforating branches of the posterior cerebral and basilar arteries. The infarct damages the oculomotor fascicles, giving an ipsilateral third nerve palsy, together with the inferior red nucleus and the crossing superior cerebellar peduncle (dentatorubrothalamic) fibres, giving contralateral cerebellar ataxia and dysmetria. Because the lesion spares the ventral corticospinal fibres, limb strength is generally preserved, and the movement disorder is one of incoordination rather than the coarse rubral tremor that characterises the more ventrally extending Benedikt syndrome.",
-  "additionalDifferentials": [
-   "Benedikt syndrome (with prominent tremor and possible weakness)",
-   "Weber syndrome (ventral midbrain with hemiparesis)",
-   "Superior cerebellar artery territory infarction",
-   "Midbrain demyelination or tumour",
-   "Posterior communicating artery aneurysm with third nerve compression",
-   "Cerebellar stroke causing ipsilateral ataxia"
-  ],
-  "additionalInvestigations": [
-   "Diffusion-weighted MRI of the dorsal midbrain to localise the tegmental infarct",
-   "MR or CT angiography of the posterior circulation and circle of Willis",
-   "Detailed cerebellar examination for dysmetria, dysdiadochokinesis, and gait ataxia",
-   "Assessment of pupillary function and ocular motility",
-   "Cardiovascular and stroke risk workup including ECG and metabolic profiling",
-   "Vessel wall imaging when basilar atherosclerosis or dissection is considered"
-  ],
-  "redFlags": [
-   "Pupil-involving third nerve palsy prompting exclusion of a compressive aneurysm",
-   "Declining consciousness suggesting extension towards the reticular formation",
-   "Bilateral tegmental signs implying a larger paramedian midbrain infarct",
-   "Rapid deterioration indicating evolving basilar occlusion"
-  ],
-  "prognosis": "The oculomotor palsy often improves partially over weeks to months, and the cerebellar ataxia frequently lessens with rehabilitation, giving a generally more favourable functional outcome than syndromes with added hemiparesis.",
-  "pitfalls": [
-   "Confusing Claude with Benedikt syndrome by failing to distinguish ataxia from rubral tremor",
-   "Attributing a pupil-involving third nerve palsy to microvascular disease without vascular imaging",
-   "Mistaking contralateral cerebellar signs for a primary cerebellar stroke",
-   "Overlooking the third nerve palsy when the ataxia dominates the presentation"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [
-   "weber_syndrome",
-   "benedikt_syndrome",
-   "top_of_the_basilar_syndrome"
-  ],
-  "management": [
-   "Acute ischaemic stroke treatment with intravenous thrombolysis or mechanical thrombectomy where the patient is eligible within the treatment window",
-   "Secondary prevention with antiplatelet therapy and a statin, and control of blood pressure and diabetes",
-   "Investigation and treatment of the underlying stroke mechanism, including posterior-circulation atherosclerosis or dissection",
-   "Neurorehabilitation with physiotherapy and occupational therapy targeting cerebellar ataxia and balance",
-   "Ophthalmological management of the third-nerve palsy and diplopia with prisms or occlusion, and later strabismus surgery for persistent deficit",
-   "Monitoring of neurological recovery and reinforcement of vascular risk-factor modification"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "claude_syndrome-pathway",
-   "title": "Claude syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by a lesion of the dorsal midbrain tegmentum affecting the inferior red nucleus and adjacent superior cerebellar peduncle fibres",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Pupil-involving third nerve palsy prompting exclusion of a compressive aneurysm",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diffusion-weighted MRI of the dorsal midbrain to localise the tegmental infarct, MR or CT angiography of the posterior circulation and circle of Willis, Detailed cerebellar examination for dysmetria, dysdiadochokinesis,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Acute ischaemic stroke treatment with intravenous thrombolysis or mechanical thrombectomy where the patient is eligible within the treatment window"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing Claude with Benedikt syndrome by failing to distinguish ataxia from rubral tremor"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of claude syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "claude_syndrome-matrix",
-   "title": "Claude syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by a lesion of the dorsal midbrain tegmentum affecting the inferior red nucleus and adjacent superior cerebellar peduncle",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Cerebrovascular",
+  "specialty": "Neurology / Stroke",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by a lesion of the dorsal midbrain tegmentum affecting the inferior red nucleus and adjacent superior cerebellar peduncle fibres",
+      "Combines an ipsilateral third nerve palsy with contralateral cerebellar ataxia",
+      "The cerebellar signs stem from involvement of the crossing dentatorubrothalamic tract rather than the corticospinal tract",
+      "It resembles Benedikt syndrome but is dominated by ataxia and dysmetria rather than a prominent rubral tremor",
+      "Weakness is usually absent because the ventral cerebral peduncle is comparatively spared",
+      "The ipsilateral third nerve palsy again produces ptosis, a dilated pupil, and an eye deviated down and out",
+      "It is supplied by paramedian perforators of the posterior cerebral and basilar arteries, like the other midbrain syndromes"
     ],
-    [
-     "Key Investigations",
-     "Diffusion-weighted MRI of the dorsal midbrain to localise the tegmental infarct, MR or CT angiography of the posterior",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Claude syndrome results from a paramedian dorsal midbrain tegmental lesion, typically ischaemic, in the territory of perforating branches of the posterior cerebral and basilar arteries. The infarct damages the oculomotor fascicles, giving an ipsilateral third nerve palsy, together with the inferior red nucleus and the crossing superior cerebellar peduncle (dentatorubrothalamic) fibres, giving contralateral cerebellar ataxia and dysmetria. Because the lesion spares the ventral corticospinal fibres, limb strength is generally preserved, and the movement disorder is one of incoordination rather than the coarse rubral tremor that characterises the more ventrally extending Benedikt syndrome.",
+    "additionalDifferentials": [
+      "Benedikt syndrome (with prominent tremor and possible weakness)",
+      "Weber syndrome (ventral midbrain with hemiparesis)",
+      "Superior cerebellar artery territory infarction",
+      "Midbrain demyelination or tumour",
+      "Posterior communicating artery aneurysm with third nerve compression",
+      "Cerebellar stroke causing ipsilateral ataxia"
     ],
-    [
-     "Primary Differentials",
-     "Benedikt syndrome (with prominent tremor and possible weakness), Weber syndrome (ventral midbrain with hemiparesis), Superior",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diffusion-weighted MRI of the dorsal midbrain to localise the tegmental infarct",
+      "MR or CT angiography of the posterior circulation and circle of Willis",
+      "Detailed cerebellar examination for dysmetria, dysdiadochokinesis, and gait ataxia",
+      "Assessment of pupillary function and ocular motility",
+      "Cardiovascular and stroke risk workup including ECG and metabolic profiling",
+      "Vessel wall imaging when basilar atherosclerosis or dissection is considered"
     ],
-    [
-     "Management Strategy",
-     "Acute ischaemic stroke treatment with intravenous thrombolysis or mechanical thrombectomy where the patient is eligible within",
-     "Core treatment modality"
+    "redFlags": [
+      "Pupil-involving third nerve palsy prompting exclusion of a compressive aneurysm",
+      "Declining consciousness suggesting extension towards the reticular formation",
+      "Bilateral tegmental signs implying a larger paramedian midbrain infarct",
+      "Rapid deterioration indicating evolving basilar occlusion"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing Claude with Benedikt syndrome by failing to distinguish ataxia from rubral tremor",
-     "Prevent diagnostic or management error"
+    "prognosis": "The oculomotor palsy often improves partially over weeks to months, and the cerebellar ataxia frequently lessens with rehabilitation, giving a generally more favourable functional outcome than syndromes with added hemiparesis.",
+    "pitfalls": [
+      "Confusing Claude with Benedikt syndrome by failing to distinguish ataxia from rubral tremor",
+      "Attributing a pupil-involving third nerve palsy to microvascular disease without vascular imaging",
+      "Mistaking contralateral cerebellar signs for a primary cerebellar stroke",
+      "Overlooking the third nerve palsy when the ataxia dominates the presentation"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [
+      "weber_syndrome",
+      "benedikt_syndrome",
+      "top_of_the_basilar_syndrome"
+    ],
+    "management": [
+      "Acute ischaemic stroke treatment with intravenous thrombolysis or mechanical thrombectomy where the patient is eligible within the treatment window",
+      "Secondary prevention with antiplatelet therapy and a statin, and control of blood pressure and diabetes",
+      "Investigation and treatment of the underlying stroke mechanism, including posterior-circulation atherosclerosis or dissection",
+      "Neurorehabilitation with physiotherapy and occupational therapy targeting cerebellar ataxia and balance",
+      "Ophthalmological management of the third-nerve palsy and diplopia with prisms or occlusion, and later strabismus surgery for persistent deficit",
+      "Monitoring of neurological recovery and reinforcement of vascular risk-factor modification"
     ]
-   ],
-   "caption": "Overview comparison matrix for claude syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "claude-syndrome-real-image",
-   "title": "Claude syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "claude_syndrome-pathway",
+      "title": "Claude syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by a lesion of the dorsal midbrain tegmentum affecting the inferior red nucleus and adjacent superior cerebellar peduncle fibres",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Pupil-involving third nerve palsy prompting exclusion of a compressive aneurysm",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diffusion-weighted MRI of the dorsal midbrain to localise the tegmental infarct, MR or CT angiography of the posterior circulation and circle of Willis, Detailed cerebellar examination for dysmetria, dysdiadochokinesis,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Acute ischaemic stroke treatment with intravenous thrombolysis or mechanical thrombectomy where the patient is eligible within the treatment window"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing Claude with Benedikt syndrome by failing to distinguish ataxia from rubral tremor"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of claude syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "claude_syndrome-matrix",
+      "title": "Claude syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by a lesion of the dorsal midbrain tegmentum affecting the inferior red nucleus and adjacent superior cerebellar peduncle",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diffusion-weighted MRI of the dorsal midbrain to localise the tegmental infarct, MR or CT angiography of the posterior",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Benedikt syndrome (with prominent tremor and possible weakness), Weber syndrome (ventral midbrain with hemiparesis), Superior",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Acute ischaemic stroke treatment with intravenous thrombolysis or mechanical thrombectomy where the patient is eligible within",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing Claude with Benedikt syndrome by failing to distinguish ataxia from rubral tremor",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for claude syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "claude_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted MRI of the dorsal midbrain",
+          "cells": [
+            {
+              "text": "Localises the tegmental infarct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography of the posterior circulation",
+          "cells": [
+            {
+              "text": "Basilar artery and circle of Willis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed cerebellar examination",
+          "cells": [
+            {
+              "text": "Dysmetria, dysdiadochokinesis and gait ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pupillary and ocular motility assessment",
+          "cells": [
+            {
+              "text": "Third nerve palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and metabolic stroke risk profiling",
+          "cells": [
+            {
+              "text": "Mechanism and vascular risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "claude_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benedikt syndrome",
+          "cells": [
+            {
+              "text": "Prominent tremor and possible weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weber syndrome",
+          "cells": [
+            {
+              "text": "Ventral midbrain lesion with hemiparesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior communicating artery aneurysm",
+          "cells": [
+            {
+              "text": "Third nerve compression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "claude_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thrombolysis or thrombectomy",
+          "cells": [
+            {
+              "text": "Acute ischaemic stroke within the treatment window"
+            },
+            {
+              "text": "Time-dependent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet therapy and statin",
+          "cells": [
+            {
+              "text": "Secondary prevention"
+            },
+            {
+              "text": "Vascular prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and diabetes control",
+          "cells": [
+            {
+              "text": "Vascular risk factor modification"
+            },
+            {
+              "text": "Risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Targets cerebellar ataxia and balance"
+            },
+            {
+              "text": "Neurorehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prisms, occlusion or strabismus surgery",
+          "cells": [
+            {
+              "text": "Third nerve palsy and diplopia"
+            },
+            {
+              "text": "Ophthalmological care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "claude_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Claude syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Claude syndrome: ipsilateral third nerve palsy with contralateral ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pupil-involving palsy, declining consciousness, bilateral signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent stroke pathway review and exclusion of compressive aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diffusion MRI of dorsal midbrain and posterior circulation angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dorsal midbrain tegmental infarct confirmed on diffusion-weighted MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Thrombolysis or thrombectomy within the treatment window",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Benedikt, Weber and posterior communicating aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiplatelet therapy and statin for secondary prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Control blood pressure and diabetes; investigate the stroke mechanism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for ataxia and balance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prisms or occlusion for diplopia; strabismus surgery if deficit persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

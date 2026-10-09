@@ -1,179 +1,448 @@
 {
- "id": "unicameral_bone_cyst",
- "name": "Unicameral (simple) bone cyst",
- "aliases": [
-  "simple bone cyst",
-  "solitary bone cyst",
-  "SBC",
-  "UBC"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Oncology",
- "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A fluid-filled solitary cavity that most often affects the proximal humerus and proximal femur in children and adolescents",
-   "Frequently asymptomatic and discovered incidentally or only after presenting with a pathological fracture",
-   "Radiographs show a centrally located, well-defined lucent lesion that does not expand beyond the width of the physis and thins the cortex",
-   "The fallen-fragment sign, a bone fragment settling into the dependent part of the fluid-filled cavity after fracture, is characteristic and confirms the lesion is hollow",
-   "Distinguished from aneurysmal bone cyst by its central position, single unilocular cavity and clear rather than blood-filled contents",
-   "Many lesions resolve or ossify with skeletal maturity, so observation is reasonable for asymptomatic cysts at low fracture risk",
-   "Treatment options for at-risk or symptomatic lesions include aspiration and injection, decompression, or curettage with bone grafting"
+  "id": "unicameral_bone_cyst",
+  "name": "Unicameral (simple) bone cyst",
+  "aliases": [
+    "simple bone cyst",
+    "solitary bone cyst",
+    "SBC",
+    "UBC"
   ],
-  "pathophysiology": "Unicameral bone cyst is a benign, likely non-neoplastic, fluid-filled cavity of bone lined by a thin fibrous membrane. Its origin is debated but is thought to involve a local disturbance of interstitial fluid drainage and venous outflow within the metaphysis, producing raised intracystic pressure that promotes bone resorption and cavity expansion. Active lesions abut the physis and tend to enlarge, whereas latent lesions migrate away from the growth plate with maturity and often ossify. Cortical thinning predisposes to pathological fracture, which is a common presenting event.",
-  "additionalDifferentials": [
-   "Aneurysmal bone cyst",
-   "Fibrous dysplasia",
-   "Non-ossifying fibroma",
-   "Intraosseous ganglion or geode",
-   "Langerhans cell histiocytosis",
-   "Enchondroma"
-  ],
-  "additionalInvestigations": [
-   "Plain radiography to assess location, cortical thinning and proximity to the physis",
-   "Recognition of the fallen-fragment sign on radiographs when a fracture is present",
-   "MRI or CT to confirm the fluid content and exclude aggressive features when imaging is atypical",
-   "Assessment of fracture risk based on cyst size and cortical involvement",
-   "Biopsy or aspiration in atypical lesions to confirm the diagnosis and exclude a mimic"
-  ],
-  "redFlags": [
-   "Aggressive or permeative margins that are atypical for a simple cyst",
-   "Impending or established pathological fracture in a weight-bearing bone",
-   "Rapid enlargement or an associated soft-tissue mass",
-   "Atypical location outside the usual metaphyseal long-bone sites"
-  ],
-  "prognosis": "The lesion is benign and often self-limiting, with many cysts healing spontaneously as the skeleton matures. Recurrence after minimally invasive treatment is not uncommon, and repeat procedures are sometimes required before durable healing.",
-  "pitfalls": [
-   "Confusing a simple bone cyst with an aneurysmal bone cyst, which is eccentric and blood-filled",
-   "Overtreating an asymptomatic latent cyst that would resolve with growth",
-   "Failing to appreciate fracture risk in a large cyst of a weight-bearing bone",
-   "Attributing all fluid-filled cystic lesions to a simple cyst without considering aggressive mimics"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Asymptomatic latent cysts at low fracture risk can be observed with periodic radiographic follow up since many heal or ossify as the skeleton matures",
-   "Symptomatic, enlarging, or active cysts near the growth plate favor intervention to reduce fracture risk",
-   "A pathological fracture is generally allowed to unite first, with definitive cyst treatment planned before or alongside fracture care",
-   "Atypical or aggressive appearing margins, rapid enlargement, or an associated soft tissue mass warrant biopsy or aspiration to exclude a mimic such as aneurysmal bone cyst, fibrous dysplasia, or malignancy",
-   "There is no role for cytotoxic systemic therapy or radiotherapy since this is a benign process managed with observation and local intralesional or surgical measures",
-   "First line treatment for symptomatic or at risk lesions is minimally invasive intralesional treatment such as corticosteroid injection, autologous bone marrow aspirate injection, or cyst decompression",
-   "Lesions refractory to intralesional measures or at high risk of recurrent fracture are treated with curettage and bone grafting",
-   "Recurrence after minimally invasive treatment is not uncommon and repeat procedures may be needed, which should be discussed as part of informed consent",
-   "Monitoring is with serial plain radiographs to track cyst activity, cortical thickening, and fracture risk, with imaging frequency guided by lesion activity and response",
-   "MRI or CT is reserved for atypical presentations where fluid content needs confirmation or aggressive features need to be excluded",
-   "Lesions with atypical, aggressive, or permeative margins, an associated soft tissue mass, or an unusual location should be referred for orthopaedic oncology assessment with biopsy or aspiration to confirm diagnosis and exclude a mimic",
-   "Impending or established pathological fracture in a weight bearing bone, or a large cyst with significant cortical thinning, should prompt referral for surgical planning rather than continued observation",
-   "Cysts that recur repeatedly after intralesional treatment or fail to heal warrant referral for consideration of curettage and bone grafting"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "unicameral_bone_cyst-pathway",
-   "title": "Unicameral (simple) bone cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A fluid-filled solitary cavity that most often affects the proximal humerus and proximal femur in children and adolescents",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aggressive or permeative margins that are atypical for a simple cyst",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiography to assess location, cortical thinning and proximity to the physis, Recognition of the fallen-fragment sign on radiographs when a fracture is present, MRI or CT to confirm the fluid content and exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Asymptomatic latent cysts at low fracture risk can be observed with periodic radiographic follow up since many heal or ossify as the skeleton matures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a simple bone cyst with an aneurysmal bone cyst, which is eccentric and blood-filled"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of unicameral (simple) bone cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "unicameral_bone_cyst-matrix",
-   "title": "Unicameral (simple) bone cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A fluid-filled solitary cavity that most often affects the proximal humerus and proximal femur in children and adolescents",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Oncology",
+  "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A fluid-filled solitary cavity that most often affects the proximal humerus and proximal femur in children and adolescents",
+      "Frequently asymptomatic and discovered incidentally or only after presenting with a pathological fracture",
+      "Radiographs show a centrally located, well-defined lucent lesion that does not expand beyond the width of the physis and thins the cortex",
+      "The fallen-fragment sign, a bone fragment settling into the dependent part of the fluid-filled cavity after fracture, is characteristic and confirms the lesion is hollow",
+      "Distinguished from aneurysmal bone cyst by its central position, single unilocular cavity and clear rather than blood-filled contents",
+      "Many lesions resolve or ossify with skeletal maturity, so observation is reasonable for asymptomatic cysts at low fracture risk",
+      "Treatment options for at-risk or symptomatic lesions include aspiration and injection, decompression, or curettage with bone grafting"
     ],
-    [
-     "Key Investigations",
-     "Plain radiography to assess location, cortical thinning and proximity to the physis, Recognition of the fallen-fragment sign on",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Unicameral bone cyst is a benign, likely non-neoplastic, fluid-filled cavity of bone lined by a thin fibrous membrane. Its origin is debated but is thought to involve a local disturbance of interstitial fluid drainage and venous outflow within the metaphysis, producing raised intracystic pressure that promotes bone resorption and cavity expansion. Active lesions abut the physis and tend to enlarge, whereas latent lesions migrate away from the growth plate with maturity and often ossify. Cortical thinning predisposes to pathological fracture, which is a common presenting event.",
+    "additionalDifferentials": [
+      "Aneurysmal bone cyst",
+      "Fibrous dysplasia",
+      "Non-ossifying fibroma",
+      "Intraosseous ganglion or geode",
+      "Langerhans cell histiocytosis",
+      "Enchondroma"
     ],
-    [
-     "Primary Differentials",
-     "Aneurysmal bone cyst, Fibrous dysplasia, Non-ossifying fibroma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiography to assess location, cortical thinning and proximity to the physis",
+      "Recognition of the fallen-fragment sign on radiographs when a fracture is present",
+      "MRI or CT to confirm the fluid content and exclude aggressive features when imaging is atypical",
+      "Assessment of fracture risk based on cyst size and cortical involvement",
+      "Biopsy or aspiration in atypical lesions to confirm the diagnosis and exclude a mimic"
     ],
-    [
-     "Management Strategy",
-     "Asymptomatic latent cysts at low fracture risk can be observed with periodic radiographic follow up since many heal or ossify as",
-     "Core treatment modality"
+    "redFlags": [
+      "Aggressive or permeative margins that are atypical for a simple cyst",
+      "Impending or established pathological fracture in a weight-bearing bone",
+      "Rapid enlargement or an associated soft-tissue mass",
+      "Atypical location outside the usual metaphyseal long-bone sites"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a simple bone cyst with an aneurysmal bone cyst, which is eccentric and blood-filled",
-     "Prevent diagnostic or management error"
+    "prognosis": "The lesion is benign and often self-limiting, with many cysts healing spontaneously as the skeleton matures. Recurrence after minimally invasive treatment is not uncommon, and repeat procedures are sometimes required before durable healing.",
+    "pitfalls": [
+      "Confusing a simple bone cyst with an aneurysmal bone cyst, which is eccentric and blood-filled",
+      "Overtreating an asymptomatic latent cyst that would resolve with growth",
+      "Failing to appreciate fracture risk in a large cyst of a weight-bearing bone",
+      "Attributing all fluid-filled cystic lesions to a simple cyst without considering aggressive mimics"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Asymptomatic latent cysts at low fracture risk can be observed with periodic radiographic follow up since many heal or ossify as the skeleton matures",
+      "Symptomatic, enlarging, or active cysts near the growth plate favor intervention to reduce fracture risk",
+      "A pathological fracture is generally allowed to unite first, with definitive cyst treatment planned before or alongside fracture care",
+      "Atypical or aggressive appearing margins, rapid enlargement, or an associated soft tissue mass warrant biopsy or aspiration to exclude a mimic such as aneurysmal bone cyst, fibrous dysplasia, or malignancy",
+      "There is no role for cytotoxic systemic therapy or radiotherapy since this is a benign process managed with observation and local intralesional or surgical measures",
+      "First line treatment for symptomatic or at risk lesions is minimally invasive intralesional treatment such as corticosteroid injection, autologous bone marrow aspirate injection, or cyst decompression",
+      "Lesions refractory to intralesional measures or at high risk of recurrent fracture are treated with curettage and bone grafting",
+      "Recurrence after minimally invasive treatment is not uncommon and repeat procedures may be needed, which should be discussed as part of informed consent",
+      "Monitoring is with serial plain radiographs to track cyst activity, cortical thickening, and fracture risk, with imaging frequency guided by lesion activity and response",
+      "MRI or CT is reserved for atypical presentations where fluid content needs confirmation or aggressive features need to be excluded",
+      "Lesions with atypical, aggressive, or permeative margins, an associated soft tissue mass, or an unusual location should be referred for orthopaedic oncology assessment with biopsy or aspiration to confirm diagnosis and exclude a mimic",
+      "Impending or established pathological fracture in a weight bearing bone, or a large cyst with significant cortical thinning, should prompt referral for surgical planning rather than continued observation",
+      "Cysts that recur repeatedly after intralesional treatment or fail to heal warrant referral for consideration of curettage and bone grafting"
     ]
-   ],
-   "caption": "Overview comparison matrix for unicameral (simple) bone cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "unicameral-bone-cyst-real-image",
-   "title": "Unicameral (simple) bone cyst: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "unicameral_bone_cyst-pathway",
+      "title": "Unicameral (simple) bone cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A fluid-filled solitary cavity that most often affects the proximal humerus and proximal femur in children and adolescents",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aggressive or permeative margins that are atypical for a simple cyst",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiography to assess location, cortical thinning and proximity to the physis, Recognition of the fallen-fragment sign on radiographs when a fracture is present, MRI or CT to confirm the fluid content and exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Asymptomatic latent cysts at low fracture risk can be observed with periodic radiographic follow up since many heal or ossify as the skeleton matures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a simple bone cyst with an aneurysmal bone cyst, which is eccentric and blood-filled"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of unicameral (simple) bone cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "unicameral_bone_cyst-matrix",
+      "title": "Unicameral (simple) bone cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A fluid-filled solitary cavity that most often affects the proximal humerus and proximal femur in children and adolescents",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiography to assess location, cortical thinning and proximity to the physis, Recognition of the fallen-fragment sign on",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Aneurysmal bone cyst, Fibrous dysplasia, Non-ossifying fibroma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Asymptomatic latent cysts at low fracture risk can be observed with periodic radiographic follow up since many heal or ossify as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a simple bone cyst with an aneurysmal bone cyst, which is eccentric and blood-filled",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for unicameral (simple) bone cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "unicameral_bone_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiography",
+          "cells": [
+            {
+              "text": "Central, well-defined lucent lesion with cortical thinning, near the physis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fallen-fragment sign on radiographs",
+          "cells": [
+            {
+              "text": "Characteristic when a fracture is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT",
+          "cells": [
+            {
+              "text": "Confirms fluid content; excludes aggressive features when imaging is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy or aspiration",
+          "cells": [
+            {
+              "text": "Atypical lesions, to exclude a mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unicameral_bone_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aneurysmal bone cyst",
+          "cells": [
+            {
+              "text": "Eccentric and blood-filled, unlike the simple cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraosseous ganglion or geode",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrous dysplasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unicameral_bone_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic latent cysts at low fracture risk; many heal or ossify"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional corticosteroid injection",
+          "cells": [
+            {
+              "text": "First-line minimally invasive treatment for symptomatic or at-risk lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathological fracture",
+          "cells": [
+            {
+              "text": "Allowed to unite first, with definitive cyst treatment planned before or alongside"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy or aspiration",
+          "cells": [
+            {
+              "text": "Atypical or aggressive margins, rapid enlargement or an associated soft-tissue mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intervention near the growth plate",
+          "cells": [
+            {
+              "text": "Symptomatic, enlarging or active cysts, to reduce fracture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No cytotoxic therapy or radiotherapy",
+          "cells": [
+            {
+              "text": "Benign process managed with observation and local treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "unicameral_bone_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Unicameral (simple) bone cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected unicameral bone cyst: solitary lucent lesion in proximal humerus or femur",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aggressive margins, impending fracture or soft-tissue mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy or aspiration to exclude an aggressive lesion or mimic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs for the fallen-fragment sign; MRI or CT for fluid content",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion a fluid-filled cyst without aggressive features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy or aspiration to exclude a mimic such as aneurysmal bone cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic latent cysts with periodic radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intralesional corticosteroid injection for symptomatic or at-risk lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Let a pathological fracture unite first; then plan definitive cyst treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "No cytotoxic or radiotherapy; treat locally as a benign process",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many cysts heal or ossify with growth; symptomatic cysts need local treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

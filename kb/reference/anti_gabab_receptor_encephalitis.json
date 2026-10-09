@@ -1,177 +1,474 @@
 {
- "id": "anti_gabab_receptor_encephalitis",
- "name": "Anti-GABA-B receptor encephalitis",
- "aliases": [
-  "GABA-B receptor antibody encephalitis",
-  "Anti-GABABR limbic encephalitis"
- ],
- "class": "non_infective",
- "system": "Neurology / Autoimmune encephalitis",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuro-immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Early, prominent and often refractory seizures are the hallmark, frequently out of proportion to other limbic features and sometimes progressing to status epilepticus.",
-   "It presents as a subacute limbic encephalitis with memory loss, confusion and behavioural change, usually in older adults.",
-   "There is a strong paraneoplastic association with small-cell lung carcinoma, so tumour screening is mandatory, particularly in smokers.",
-   "The receptor is a metabotropic (G-protein-coupled) inhibitory receptor, so antibody blockade removes inhibitory tone and drives hyperexcitability.",
-   "Co-existing antibodies may be present, and coexisting SOX1 antibodies further point to an underlying small-cell lung cancer.",
-   "Opsoclonus, cerebellar ataxia or brainstem features occasionally accompany the limbic syndrome.",
-   "Seizure control usually requires immunotherapy and, where present, treatment of the underlying tumour in addition to antiseizure drugs.",
-   "The combination of a smoker presenting with new severe seizures and amnesia should prompt urgent consideration of this diagnosis."
+  "id": "anti_gabab_receptor_encephalitis",
+  "name": "Anti-GABA-B receptor encephalitis",
+  "aliases": [
+    "GABA-B receptor antibody encephalitis",
+    "Anti-GABABR limbic encephalitis"
   ],
-  "pathophysiology": "The GABA-B receptor is a metabotropic, G-protein-coupled receptor formed by GABA-B1 and GABA-B2 subunits that mediates slow, sustained inhibitory neurotransmission by opening potassium channels and inhibiting calcium channels and adenylate cyclase. It is densely expressed in the hippocampus, thalamus and cerebellum. Autoantibodies, predominantly of IgG1 subclass, target chiefly the GABA-B1 subunit and impair receptor function without necessarily destroying neurons, reducing inhibitory tone in limbic circuits. The resulting loss of GABAergic inhibition produces the intense epileptogenicity and hippocampal dysfunction that characterise the syndrome. The frequent link to small-cell lung carcinoma reflects a paraneoplastic mechanism in which tumour expression of neuronal antigens breaks immune tolerance; the concurrent presence of onconeural markers such as SOX1 supports this. Because IgG1 can fix complement, an element of inflammatory injury may contribute, and outcome is heavily influenced by whether an underlying malignancy is identified and treated.",
-  "additionalDifferentials": [
-   "Anti-LGI1 and other antibody-mediated limbic encephalitides",
-   "Paraneoplastic encephalitis with classic onconeural antibodies (e.g. Hu)",
-   "Viral encephalitis including herpes simplex",
-   "New-onset refractory status epilepticus of other cause",
-   "Metabolic or toxic encephalopathy",
-   "Creutzfeldt-Jakob disease",
-   "Primary generalised or focal epilepsy of other aetiology"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid cell-based assay for GABA-B receptor IgG",
-   "Urgent chest imaging and whole-body cross-sectional imaging to seek small-cell lung carcinoma",
-   "Testing for coexisting antibodies including SOX1 and other onconeural markers",
-   "Brain MRI for medial temporal signal change",
-   "Electroencephalography to characterise seizures and detect subclinical status",
-   "Cerebrospinal fluid analysis with oligoclonal bands and infection exclusion",
-   "Functional imaging where structural imaging is unrevealing and malignancy is suspected"
-  ],
-  "redFlags": [
-   "Refractory seizures or status epilepticus at presentation",
-   "New severe seizures and amnesia in an older smoker",
-   "Evidence of small-cell lung carcinoma on imaging",
-   "Rapidly progressive encephalopathy with reduced consciousness",
-   "Brainstem or cerebellar signs suggesting wider paraneoplastic involvement"
-  ],
-  "prognosis": "Outcome depends heavily on detecting and treating any underlying small-cell lung carcinoma; with combined immunotherapy and oncological treatment neurological improvement is possible, but the presence of malignancy limits overall survival. Seizures often improve once immunotherapy is established.",
-  "pitfalls": [
-   "Treating seizures with antiseizure drugs alone while missing the autoimmune and paraneoplastic basis",
-   "Failing to pursue repeated or thorough malignancy screening for small-cell lung carcinoma",
-   "Overlooking coexisting antibodies that signal an occult tumour",
-   "Attributing the presentation to a primary epilepsy syndrome in an older adult",
-   "Delaying immunotherapy while awaiting antibody confirmation in a compatible clinical picture"
-  ],
-  "references": [
-   "Standard neurology and neuro-immunology textbooks",
-   "Autoimmune and paraneoplastic encephalitis consensus guidance",
-   "Peer-reviewed neuro-immunology reference reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Urgent detection and treatment of underlying small cell lung carcinoma, the key determinant of outcome",
-   "First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or cyclophosphamide",
-   "Aggressive seizure control with combination antiseizure medication given the refractory epilepsy",
-   "Prompt management of status epilepticus in a high-dependency or intensive-care setting",
-   "Test for coexisting SOX1 antibodies that reinforce the search for small cell lung cancer",
-   "Ongoing tumour surveillance and multidisciplinary neurology, oncology and respiratory follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anti_gabab_receptor_encephalitis-pathway",
-   "title": "Anti-GABA-B receptor encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Early, prominent and often refractory seizures are the hallmark, frequently out of proportion to other limbic features and sometimes progressing to status epilepticus.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory seizures or status epilepticus at presentation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid cell-based assay for GABA-B receptor IgG, Urgent chest imaging and whole-body cross-sectional imaging to seek small-cell lung carcinoma, Testing for coexisting antibodies including SOX1 and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Urgent detection and treatment of underlying small cell lung carcinoma, the key determinant of outcome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating seizures with antiseizure drugs alone while missing the autoimmune and paraneoplastic basis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anti-gaba-b receptor encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "anti_gabab_receptor_encephalitis-matrix",
-   "title": "Anti-GABA-B receptor encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Early, prominent and often refractory seizures are the hallmark, frequently out of proportion to other limbic features and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Autoimmune encephalitis",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuro-immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Early, prominent and often refractory seizures are the hallmark, frequently out of proportion to other limbic features and sometimes progressing to status epilepticus.",
+      "It presents as a subacute limbic encephalitis with memory loss, confusion and behavioural change, usually in older adults.",
+      "There is a strong paraneoplastic association with small-cell lung carcinoma, so tumour screening is mandatory, particularly in smokers.",
+      "The receptor is a metabotropic (G-protein-coupled) inhibitory receptor, so antibody blockade removes inhibitory tone and drives hyperexcitability.",
+      "Co-existing antibodies may be present, and coexisting SOX1 antibodies further point to an underlying small-cell lung cancer.",
+      "Opsoclonus, cerebellar ataxia or brainstem features occasionally accompany the limbic syndrome.",
+      "Seizure control usually requires immunotherapy and, where present, treatment of the underlying tumour in addition to antiseizure drugs.",
+      "The combination of a smoker presenting with new severe seizures and amnesia should prompt urgent consideration of this diagnosis."
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid cell-based assay for GABA-B receptor IgG, Urgent chest imaging and whole-body cross-sectional",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The GABA-B receptor is a metabotropic, G-protein-coupled receptor formed by GABA-B1 and GABA-B2 subunits that mediates slow, sustained inhibitory neurotransmission by opening potassium channels and inhibiting calcium channels and adenylate cyclase. It is densely expressed in the hippocampus, thalamus and cerebellum. Autoantibodies, predominantly of IgG1 subclass, target chiefly the GABA-B1 subunit and impair receptor function without necessarily destroying neurons, reducing inhibitory tone in limbic circuits. The resulting loss of GABAergic inhibition produces the intense epileptogenicity and hippocampal dysfunction that characterise the syndrome. The frequent link to small-cell lung carcinoma reflects a paraneoplastic mechanism in which tumour expression of neuronal antigens breaks immune tolerance; the concurrent presence of onconeural markers such as SOX1 supports this. Because IgG1 can fix complement, an element of inflammatory injury may contribute, and outcome is heavily influenced by whether an underlying malignancy is identified and treated.",
+    "additionalDifferentials": [
+      "Anti-LGI1 and other antibody-mediated limbic encephalitides",
+      "Paraneoplastic encephalitis with classic onconeural antibodies (e.g. Hu)",
+      "Viral encephalitis including herpes simplex",
+      "New-onset refractory status epilepticus of other cause",
+      "Metabolic or toxic encephalopathy",
+      "Creutzfeldt-Jakob disease",
+      "Primary generalised or focal epilepsy of other aetiology"
     ],
-    [
-     "Primary Differentials",
-     "Anti-LGI1 and other antibody-mediated limbic encephalitides, Paraneoplastic encephalitis with classic onconeural antibodies (e.g.",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid cell-based assay for GABA-B receptor IgG",
+      "Urgent chest imaging and whole-body cross-sectional imaging to seek small-cell lung carcinoma",
+      "Testing for coexisting antibodies including SOX1 and other onconeural markers",
+      "Brain MRI for medial temporal signal change",
+      "Electroencephalography to characterise seizures and detect subclinical status",
+      "Cerebrospinal fluid analysis with oligoclonal bands and infection exclusion",
+      "Functional imaging where structural imaging is unrevealing and malignancy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Urgent detection and treatment of underlying small cell lung carcinoma, the key determinant of outcome",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory seizures or status epilepticus at presentation",
+      "New severe seizures and amnesia in an older smoker",
+      "Evidence of small-cell lung carcinoma on imaging",
+      "Rapidly progressive encephalopathy with reduced consciousness",
+      "Brainstem or cerebellar signs suggesting wider paraneoplastic involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating seizures with antiseizure drugs alone while missing the autoimmune and paraneoplastic basis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends heavily on detecting and treating any underlying small-cell lung carcinoma; with combined immunotherapy and oncological treatment neurological improvement is possible, but the presence of malignancy limits overall survival. Seizures often improve once immunotherapy is established.",
+    "pitfalls": [
+      "Treating seizures with antiseizure drugs alone while missing the autoimmune and paraneoplastic basis",
+      "Failing to pursue repeated or thorough malignancy screening for small-cell lung carcinoma",
+      "Overlooking coexisting antibodies that signal an occult tumour",
+      "Attributing the presentation to a primary epilepsy syndrome in an older adult",
+      "Delaying immunotherapy while awaiting antibody confirmation in a compatible clinical picture"
+    ],
+    "references": [
+      "Standard neurology and neuro-immunology textbooks",
+      "Autoimmune and paraneoplastic encephalitis consensus guidance",
+      "Peer-reviewed neuro-immunology reference reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Urgent detection and treatment of underlying small cell lung carcinoma, the key determinant of outcome",
+      "First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or cyclophosphamide",
+      "Aggressive seizure control with combination antiseizure medication given the refractory epilepsy",
+      "Prompt management of status epilepticus in a high-dependency or intensive-care setting",
+      "Test for coexisting SOX1 antibodies that reinforce the search for small cell lung cancer",
+      "Ongoing tumour surveillance and multidisciplinary neurology, oncology and respiratory follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for anti-gaba-b receptor encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anti-gabab-receptor-encephalitis-real-image",
-   "title": "Anti-GABA-B receptor encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "anti_gabab_receptor_encephalitis-pathway",
+      "title": "Anti-GABA-B receptor encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Early, prominent and often refractory seizures are the hallmark, frequently out of proportion to other limbic features and sometimes progressing to status epilepticus.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory seizures or status epilepticus at presentation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid cell-based assay for GABA-B receptor IgG, Urgent chest imaging and whole-body cross-sectional imaging to seek small-cell lung carcinoma, Testing for coexisting antibodies including SOX1 and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Urgent detection and treatment of underlying small cell lung carcinoma, the key determinant of outcome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating seizures with antiseizure drugs alone while missing the autoimmune and paraneoplastic basis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anti-gaba-b receptor encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anti_gabab_receptor_encephalitis-matrix",
+      "title": "Anti-GABA-B receptor encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Early, prominent and often refractory seizures are the hallmark, frequently out of proportion to other limbic features and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid cell-based assay for GABA-B receptor IgG, Urgent chest imaging and whole-body cross-sectional",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anti-LGI1 and other antibody-mediated limbic encephalitides, Paraneoplastic encephalitis with classic onconeural antibodies (e.g.",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Urgent detection and treatment of underlying small cell lung carcinoma, the key determinant of outcome",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating seizures with antiseizure drugs alone while missing the autoimmune and paraneoplastic basis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anti-gaba-b receptor encephalitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_gabab_receptor_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "GABA-B receptor IgG assay in serum and CSF",
+          "cells": [
+            {
+              "text": "Antibody confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest and whole-body cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Seeks small-cell lung carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SOX1 and other onconeural antibody testing",
+          "cells": [
+            {
+              "text": "Coexisting antibodies that reinforce the cancer search"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Medial temporal signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Characterises seizures and detects subclinical status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional imaging",
+          "cells": [
+            {
+              "text": "Where structural imaging is unrevealing and malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_gabab_receptor_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-LGI1 and other antibody-mediated limbic encephalitides",
+          "cells": [
+            {
+              "text": "Separated by the GABA-B receptor IgG assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic encephalitis with onconeural antibodies such as Hu",
+          "cells": [
+            {
+              "text": "Separated by the GABA-B receptor IgG and onconeural panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_gabab_receptor_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour detection and treatment",
+          "cells": [
+            {
+              "text": "Urgent treatment of underlying small-cell lung carcinoma"
+            },
+            {
+              "text": "The key determinant of outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin or plasma exchange"
+            },
+            {
+              "text": "Escalate to rituximab or cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combination antiseizure medication",
+          "cells": [
+            {
+              "text": "Aggressive seizure control"
+            },
+            {
+              "text": "Refractory epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Status epilepticus management",
+          "cells": [
+            {
+              "text": "High-dependency or intensive-care setting"
+            },
+            {
+              "text": "Prompt management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SOX1 antibody testing",
+          "cells": [
+            {
+              "text": "Coexisting SOX1 antibodies"
+            },
+            {
+              "text": "Reinforces the search for small cell lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour surveillance",
+          "cells": [
+            {
+              "text": "Neurology, oncology and respiratory follow-up"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_gabab_receptor_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Anti-GABA-B receptor encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New severe seizures and amnesia in an older smoker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Refractory seizures or status epilepticus at presentation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent high-dependency care for status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GABA-B IgG assay, urgent chest imaging, SOX1 testing, MRI, EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "GABA-B receptor IgG confirmed on serum or CSF assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids, IVIG or plasma exchange as first-line immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat malignancy screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Detect and treat small-cell lung carcinoma urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combination antiseizure medication for refractory epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate to rituximab or cyclophosphamide if response is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome is determined mainly by treating the underlying cancer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,179 +1,468 @@
 {
- "id": "joubert_syndrome",
- "name": "Joubert syndrome",
- "aliases": [
-  "Joubert syndrome and related disorders",
-  "JSRD",
-  "molar tooth sign syndrome",
-  "AHI1",
-  "CEP290",
-  "NPHP1",
-  "TMEM67",
-  "CC2D2A"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A ciliopathy defined neuroradiologically by the molar tooth sign, produced by cerebellar vermis hypoplasia or aplasia together with thickened, horizontally oriented and elongated superior cerebellar peduncles and a deepened interpeduncular fossa",
-   "Classic neonatal picture combines episodic tachypnoea alternating with apnoea, abnormal eye movements including oculomotor apraxia and nystagmus, hypotonia evolving into ataxia, and developmental delay",
-   "Inheritance is usually autosomal recessive with marked genetic heterogeneity; more than thirty causative genes encode proteins of the primary cilium and basal body",
-   "Because it is a ciliopathy, extra-neurological involvement is common and defines subtypes, including retinal dystrophy, nephronophthisis or cystic renal disease, hepatic fibrosis, and polydactyly",
-   "The CEP290 and NPHP1 genotypes carry higher risk of renal disease, while TMEM67 is associated with hepatic fibrosis, guiding organ-directed surveillance",
-   "Cognitive outcome is variable and many children have moderate impairment, so early developmental support and multidisciplinary follow-up are important",
-   "Prenatal suspicion may arise from vermian abnormality on foetal imaging, and diagnosis is confirmed by the molar tooth sign on postnatal MRI plus molecular testing"
+  "id": "joubert_syndrome",
+  "name": "Joubert syndrome",
+  "aliases": [
+    "Joubert syndrome and related disorders",
+    "JSRD",
+    "molar tooth sign syndrome",
+    "AHI1",
+    "CEP290",
+    "NPHP1",
+    "TMEM67",
+    "CC2D2A"
   ],
-  "pathophysiology": "Joubert syndrome is a disorder of the primary cilium and basal body (a ciliopathy). Pathogenic variants in genes encoding ciliary transition-zone and axonemal proteins disrupt ciliary signalling that guides mid-hindbrain patterning and axonal decussation. The resulting failure of cerebellar vermis development and abnormal crossing of superior cerebellar peduncle and corticospinal fibres produce the characteristic mid-hindbrain malformation seen as the molar tooth sign. The same ciliary dysfunction in the retina, renal tubule, and biliary tract accounts for the frequently associated multi-organ features.",
-  "additionalDifferentials": [
-   "Dandy-Walker malformation and other posterior fossa cystic malformations",
-   "Cerebellar vermis hypoplasia from other causes such as congenital disorders of glycosylation",
-   "Rhombencephalosynapsis",
-   "Pontocerebellar hypoplasia",
-   "Other ciliopathies such as Meckel-Gruber and Bardet-Biedl syndrome",
-   "Isolated nephronophthisis or Senior-Loken syndrome"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to demonstrate the molar tooth sign and characterise vermian and brainstem anatomy",
-   "Molecular genetic testing, typically a ciliopathy gene panel or exome sequencing",
-   "Renal ultrasound and renal function testing to screen for nephronophthisis or cystic disease",
-   "Ophthalmological assessment with electroretinography for retinal dystrophy and oculomotor evaluation",
-   "Liver ultrasound and liver function tests to detect hepatic fibrosis",
-   "Developmental and neuropsychological assessment to guide support"
-  ],
-  "redFlags": [
-   "Neonatal apnoea and irregular breathing requiring respiratory monitoring",
-   "Progressive renal impairment from nephronophthisis leading to end-stage kidney disease",
-   "Deteriorating vision from retinal dystrophy",
-   "Signs of portal hypertension or hepatic decompensation from fibrosis"
-  ],
-  "prognosis": "Prognosis depends on the degree of neurological impairment and the extent of renal, hepatic, and retinal involvement. Many individuals survive into adulthood with variable cognitive and motor disability, but progressive kidney or liver disease can substantially affect life expectancy.",
-  "pitfalls": [
-   "Attributing neonatal apnoea and hypotonia to birth asphyxia and missing the underlying malformation",
-   "Failing to recognise the molar tooth sign on suboptimal or non-dedicated posterior fossa imaging",
-   "Not screening for renal, hepatic, and retinal disease that may present years after the neurological diagnosis",
-   "Assuming a uniform prognosis despite wide genotype and phenotype variability"
-  ],
-  "references": [
-   "Volpe's Neurology of the Newborn",
-   "Nelson Textbook of Paediatrics",
-   "GeneReviews: Joubert Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive neonatal care for the abnormal breathing pattern, monitoring and treating episodic apnoea and tachypnoea",
-   "Deliver early developmental support with physiotherapy, occupational and speech therapy for hypotonia, ataxia and delay",
-   "Treat associated seizures with antiseizure medication as required",
-   "Institute renal surveillance for nephronophthisis and cystic disease and manage progressive renal failure with dialysis or transplantation",
-   "Arrange ophthalmological care for retinal dystrophy and oculomotor apraxia, and monitor for hepatic fibrosis",
-   "Tailor organ-directed surveillance to genotype, intensifying renal monitoring in CEP290 and NPHP1 and hepatic monitoring in TMEM67",
-   "Coordinate multidisciplinary follow-up and provide autosomal recessive genetic counselling and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "joubert_syndrome-pathway",
-   "title": "Joubert syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A ciliopathy defined neuroradiologically by the molar tooth sign, produced by cerebellar vermis hypoplasia or aplasia together with thickened, horizontally oriented and elongated superior cerebellar peduncles and a deepened interpeduncular",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal apnoea and irregular breathing requiring respiratory monitoring",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to demonstrate the molar tooth sign and characterise vermian and brainstem anatomy, Molecular genetic testing, typically a ciliopathy gene panel or exome sequencing, Renal ultrasound and renal function testing to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive neonatal care for the abnormal breathing pattern, monitoring and treating episodic apnoea and tachypnoea"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing neonatal apnoea and hypotonia to birth asphyxia and missing the underlying malformation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of joubert syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "joubert_syndrome-matrix",
-   "title": "Joubert syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A ciliopathy defined neuroradiologically by the molar tooth sign, produced by cerebellar vermis hypoplasia or aplasia together",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A ciliopathy defined neuroradiologically by the molar tooth sign, produced by cerebellar vermis hypoplasia or aplasia together with thickened, horizontally oriented and elongated superior cerebellar peduncles and a deepened interpeduncular fossa",
+      "Classic neonatal picture combines episodic tachypnoea alternating with apnoea, abnormal eye movements including oculomotor apraxia and nystagmus, hypotonia evolving into ataxia, and developmental delay",
+      "Inheritance is usually autosomal recessive with marked genetic heterogeneity; more than thirty causative genes encode proteins of the primary cilium and basal body",
+      "Because it is a ciliopathy, extra-neurological involvement is common and defines subtypes, including retinal dystrophy, nephronophthisis or cystic renal disease, hepatic fibrosis, and polydactyly",
+      "The CEP290 and NPHP1 genotypes carry higher risk of renal disease, while TMEM67 is associated with hepatic fibrosis, guiding organ-directed surveillance",
+      "Cognitive outcome is variable and many children have moderate impairment, so early developmental support and multidisciplinary follow-up are important",
+      "Prenatal suspicion may arise from vermian abnormality on foetal imaging, and diagnosis is confirmed by the molar tooth sign on postnatal MRI plus molecular testing"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to demonstrate the molar tooth sign and characterise vermian and brainstem anatomy, Molecular genetic testing,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Joubert syndrome is a disorder of the primary cilium and basal body (a ciliopathy). Pathogenic variants in genes encoding ciliary transition-zone and axonemal proteins disrupt ciliary signalling that guides mid-hindbrain patterning and axonal decussation. The resulting failure of cerebellar vermis development and abnormal crossing of superior cerebellar peduncle and corticospinal fibres produce the characteristic mid-hindbrain malformation seen as the molar tooth sign. The same ciliary dysfunction in the retina, renal tubule, and biliary tract accounts for the frequently associated multi-organ features.",
+    "additionalDifferentials": [
+      "Dandy-Walker malformation and other posterior fossa cystic malformations",
+      "Cerebellar vermis hypoplasia from other causes such as congenital disorders of glycosylation",
+      "Rhombencephalosynapsis",
+      "Pontocerebellar hypoplasia",
+      "Other ciliopathies such as Meckel-Gruber and Bardet-Biedl syndrome",
+      "Isolated nephronophthisis or Senior-Loken syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Dandy-Walker malformation and other posterior fossa cystic malformations, Cerebellar vermis hypoplasia from other causes such as",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to demonstrate the molar tooth sign and characterise vermian and brainstem anatomy",
+      "Molecular genetic testing, typically a ciliopathy gene panel or exome sequencing",
+      "Renal ultrasound and renal function testing to screen for nephronophthisis or cystic disease",
+      "Ophthalmological assessment with electroretinography for retinal dystrophy and oculomotor evaluation",
+      "Liver ultrasound and liver function tests to detect hepatic fibrosis",
+      "Developmental and neuropsychological assessment to guide support"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive neonatal care for the abnormal breathing pattern, monitoring and treating episodic apnoea and tachypnoea",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal apnoea and irregular breathing requiring respiratory monitoring",
+      "Progressive renal impairment from nephronophthisis leading to end-stage kidney disease",
+      "Deteriorating vision from retinal dystrophy",
+      "Signs of portal hypertension or hepatic decompensation from fibrosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing neonatal apnoea and hypotonia to birth asphyxia and missing the underlying malformation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the degree of neurological impairment and the extent of renal, hepatic, and retinal involvement. Many individuals survive into adulthood with variable cognitive and motor disability, but progressive kidney or liver disease can substantially affect life expectancy.",
+    "pitfalls": [
+      "Attributing neonatal apnoea and hypotonia to birth asphyxia and missing the underlying malformation",
+      "Failing to recognise the molar tooth sign on suboptimal or non-dedicated posterior fossa imaging",
+      "Not screening for renal, hepatic, and retinal disease that may present years after the neurological diagnosis",
+      "Assuming a uniform prognosis despite wide genotype and phenotype variability"
+    ],
+    "references": [
+      "Volpe's Neurology of the Newborn",
+      "Nelson Textbook of Paediatrics",
+      "GeneReviews: Joubert Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive neonatal care for the abnormal breathing pattern, monitoring and treating episodic apnoea and tachypnoea",
+      "Deliver early developmental support with physiotherapy, occupational and speech therapy for hypotonia, ataxia and delay",
+      "Treat associated seizures with antiseizure medication as required",
+      "Institute renal surveillance for nephronophthisis and cystic disease and manage progressive renal failure with dialysis or transplantation",
+      "Arrange ophthalmological care for retinal dystrophy and oculomotor apraxia, and monitor for hepatic fibrosis",
+      "Tailor organ-directed surveillance to genotype, intensifying renal monitoring in CEP290 and NPHP1 and hepatic monitoring in TMEM67",
+      "Coordinate multidisciplinary follow-up and provide autosomal recessive genetic counselling and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for joubert syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "joubert-syndrome-real-image",
-   "title": "Joubert syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "joubert_syndrome-pathway",
+      "title": "Joubert syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A ciliopathy defined neuroradiologically by the molar tooth sign, produced by cerebellar vermis hypoplasia or aplasia together with thickened, horizontally oriented and elongated superior cerebellar peduncles and a deepened interpeduncular",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal apnoea and irregular breathing requiring respiratory monitoring",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to demonstrate the molar tooth sign and characterise vermian and brainstem anatomy, Molecular genetic testing, typically a ciliopathy gene panel or exome sequencing, Renal ultrasound and renal function testing to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive neonatal care for the abnormal breathing pattern, monitoring and treating episodic apnoea and tachypnoea"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing neonatal apnoea and hypotonia to birth asphyxia and missing the underlying malformation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of joubert syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "joubert_syndrome-matrix",
+      "title": "Joubert syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A ciliopathy defined neuroradiologically by the molar tooth sign, produced by cerebellar vermis hypoplasia or aplasia together",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to demonstrate the molar tooth sign and characterise vermian and brainstem anatomy, Molecular genetic testing,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dandy-Walker malformation and other posterior fossa cystic malformations, Cerebellar vermis hypoplasia from other causes such as",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive neonatal care for the abnormal breathing pattern, monitoring and treating episodic apnoea and tachypnoea",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing neonatal apnoea and hypotonia to birth asphyxia and missing the underlying malformation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for joubert syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "joubert_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Molar tooth sign; vermis, peduncles and interpeduncular fossa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciliopathy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Causal gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and renal function",
+          "cells": [
+            {
+              "text": "Nephronophthisis or cystic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and electroretinography",
+          "cells": [
+            {
+              "text": "Retinal dystrophy and oculomotor function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver ultrasound and liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Support planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "joubert_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dandy-Walker malformation",
+          "cells": [
+            {
+              "text": "Cystic posterior fossa rather than the molar tooth sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pontocerebellar hypoplasia",
+          "cells": [
+            {
+              "text": "Cerebellar and pontine hypoplasia rather than the molar tooth sign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "joubert_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal breathing",
+          "cells": [
+            {
+              "text": "Monitoring and treatment of episodic apnoea and tachypnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Development",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy for hypotonia, ataxia and delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures",
+          "cells": [
+            {
+              "text": "Antiseizure medication as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal disease",
+          "cells": [
+            {
+              "text": "Surveillance for nephronophthisis; dialysis or transplantation as it progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye and liver",
+          "cells": [
+            {
+              "text": "Ophthalmology care for retinal dystrophy and oculomotor apraxia; hepatic fibrosis monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genotype-guided care",
+          "cells": [
+            {
+              "text": "Intensify renal monitoring in CEP290 and NPHP1, hepatic in TMEM67; genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "joubert_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Joubert syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonatal episodic abnormal breathing, abnormal eye movements and hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Apnoea, renal failure signs, vision loss or hepatic decompensation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Respiratory monitoring; renal and hepatic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for molar tooth sign, ciliopathy panel or exome, renal ultrasound, ERG, liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Molar tooth sign with ciliopathy variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Dandy-Walker or pontocerebellar hypoplasia; repeat imaging and genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Respiratory monitoring and treatment of episodic apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early physiotherapy, occupational and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal surveillance with dialysis or transplant when needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Ophthalmology review and genotype-guided surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable course; organ surveillance continues into later life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

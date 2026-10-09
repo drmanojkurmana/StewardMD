@@ -1,172 +1,432 @@
 {
- "id": "nitrogen_narcosis",
- "name": "Nitrogen narcosis",
- "aliases": [
-  "inert gas narcosis",
-  "rapture of the deep",
-  "narcosis"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency & Wilderness Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An impairment of higher mental function caused by the anaesthetic effect of nitrogen breathed under increased pressure at depth",
-   "Onset and severity increase with depth; effects usually become noticeable at moderate depths and intensify progressively as the diver goes deeper",
-   "Symptoms resemble alcohol intoxication, with euphoria, impaired judgement and reasoning, slowed reactions, overconfidence, and reduced attention",
-   "The key feature is that it is fully and rapidly reversible on ascent to shallower depth, leaving no lasting deficit",
-   "The main danger is behavioural, as impaired judgement at depth can lead to fatal errors rather than direct physiological harm",
-   "Using helium-based breathing mixtures for deep dives reduces or avoids the narcotic effect",
-   "Prevention rests on limiting depth, careful dive planning, and adequate training and experience"
+  "id": "nitrogen_narcosis",
+  "name": "Nitrogen narcosis",
+  "aliases": [
+    "inert gas narcosis",
+    "rapture of the deep",
+    "narcosis"
   ],
-  "pathophysiology": "Nitrogen narcosis reflects the anaesthetic action of inert gases dissolved in nervous tissue at raised partial pressure. As a diver descends, the partial pressure of the nitrogen in the breathing gas rises in proportion to depth, and the increasing amount of dissolved nitrogen interferes with neuronal signalling in a manner analogous to inhaled anaesthetics, producing dose-dependent central nervous system depression. Because the effect depends on the gas partial pressure and no structural injury occurs, it resolves promptly and completely once the diver ascends and the partial pressure falls.",
-  "additionalDifferentials": [
-   "Oxygen toxicity (central nervous system effects)",
-   "Carbon dioxide retention (hypercapnia)",
-   "Hypoxia",
-   "Contaminated breathing gas (e.g. carbon monoxide)",
-   "Hypothermia impairing cognition",
-   "Early decompression illness affecting the nervous system"
-  ],
-  "additionalInvestigations": [
-   "Clinical recognition based on depth and the reversibility of symptoms on ascent",
-   "Review of the dive profile, depth reached, and breathing gas used",
-   "Assessment for other causes of impaired consciousness at depth (gas contamination, hypercapnia)",
-   "Analysis of the breathing gas mixture where contamination is suspected",
-   "Post-dive neurological assessment to confirm full recovery and exclude decompression illness"
-  ],
-  "redFlags": [
-   "Severe impairment at depth threatening safe diving behaviour",
-   "Failure of symptoms to resolve fully on ascent, suggesting an alternative diagnosis",
-   "Concurrent features of oxygen toxicity or gas contamination",
-   "Loss of consciousness or seizure while diving"
-  ],
-  "prognosis": "Nitrogen narcosis is entirely reversible and leaves no residual deficit once the diver ascends; its significance lies in the risk of impaired judgement causing accidents at depth rather than any lasting physiological harm.",
-  "pitfalls": [
-   "Underestimating impaired judgement and continuing to descend",
-   "Attributing narcosis symptoms to another cause and failing to ascend",
-   "Assuming tolerance develops, when susceptibility remains at depth",
-   "Overlooking coexisting hypercapnia or gas contamination that worsens narcosis"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Bove and Davis' Diving Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage acutely by controlled ascent to a shallower depth, which reverses symptoms fully and rapidly as the nitrogen partial pressure falls",
-   "Prevent recurrence by limiting maximum depth and planning conservative dive profiles",
-   "Use helium-based breathing mixtures (heliox or trimix) for deep dives to reduce or avoid the narcotic effect",
-   "Maintain a buddy system and dive supervision so that impaired judgement is recognised before it causes an accident",
-   "Exclude and assess other causes of impairment at depth, including breathing-gas contamination, hypercapnia and oxygen toxicity",
-   "Perform a post-dive neurological assessment to confirm full recovery and to exclude decompression illness",
-   "Reinforce diver training on the recognition and avoidance of narcosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nitrogen_narcosis-pathway",
-   "title": "Nitrogen narcosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An impairment of higher mental function caused by the anaesthetic effect of nitrogen breathed under increased pressure at depth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe impairment at depth threatening safe diving behaviour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical recognition based on depth and the reversibility of symptoms on ascent, Review of the dive profile, depth reached, and breathing gas used, Assessment for other causes of impaired consciousness at depth (gas"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage acutely by controlled ascent to a shallower depth, which reverses symptoms fully and rapidly as the nitrogen partial pressure falls"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating impaired judgement and continuing to descend"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nitrogen narcosis."
-  }
- ],
- "tables": [
-  {
-   "id": "nitrogen_narcosis-matrix",
-   "title": "Nitrogen narcosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An impairment of higher mental function caused by the anaesthetic effect of nitrogen breathed under increased pressure at depth",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency & Wilderness Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An impairment of higher mental function caused by the anaesthetic effect of nitrogen breathed under increased pressure at depth",
+      "Onset and severity increase with depth; effects usually become noticeable at moderate depths and intensify progressively as the diver goes deeper",
+      "Symptoms resemble alcohol intoxication, with euphoria, impaired judgement and reasoning, slowed reactions, overconfidence, and reduced attention",
+      "The key feature is that it is fully and rapidly reversible on ascent to shallower depth, leaving no lasting deficit",
+      "The main danger is behavioural, as impaired judgement at depth can lead to fatal errors rather than direct physiological harm",
+      "Using helium-based breathing mixtures for deep dives reduces or avoids the narcotic effect",
+      "Prevention rests on limiting depth, careful dive planning, and adequate training and experience"
     ],
-    [
-     "Key Investigations",
-     "Clinical recognition based on depth and the reversibility of symptoms on ascent, Review of the dive profile, depth reached, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nitrogen narcosis reflects the anaesthetic action of inert gases dissolved in nervous tissue at raised partial pressure. As a diver descends, the partial pressure of the nitrogen in the breathing gas rises in proportion to depth, and the increasing amount of dissolved nitrogen interferes with neuronal signalling in a manner analogous to inhaled anaesthetics, producing dose-dependent central nervous system depression. Because the effect depends on the gas partial pressure and no structural injury occurs, it resolves promptly and completely once the diver ascends and the partial pressure falls.",
+    "additionalDifferentials": [
+      "Oxygen toxicity (central nervous system effects)",
+      "Carbon dioxide retention (hypercapnia)",
+      "Hypoxia",
+      "Contaminated breathing gas (e.g. carbon monoxide)",
+      "Hypothermia impairing cognition",
+      "Early decompression illness affecting the nervous system"
     ],
-    [
-     "Primary Differentials",
-     "Oxygen toxicity (central nervous system effects), Carbon dioxide retention (hypercapnia), Hypoxia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical recognition based on depth and the reversibility of symptoms on ascent",
+      "Review of the dive profile, depth reached, and breathing gas used",
+      "Assessment for other causes of impaired consciousness at depth (gas contamination, hypercapnia)",
+      "Analysis of the breathing gas mixture where contamination is suspected",
+      "Post-dive neurological assessment to confirm full recovery and exclude decompression illness"
     ],
-    [
-     "Management Strategy",
-     "Manage acutely by controlled ascent to a shallower depth, which reverses symptoms fully and rapidly as the nitrogen partial",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe impairment at depth threatening safe diving behaviour",
+      "Failure of symptoms to resolve fully on ascent, suggesting an alternative diagnosis",
+      "Concurrent features of oxygen toxicity or gas contamination",
+      "Loss of consciousness or seizure while diving"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating impaired judgement and continuing to descend",
-     "Prevent diagnostic or management error"
+    "prognosis": "Nitrogen narcosis is entirely reversible and leaves no residual deficit once the diver ascends; its significance lies in the risk of impaired judgement causing accidents at depth rather than any lasting physiological harm.",
+    "pitfalls": [
+      "Underestimating impaired judgement and continuing to descend",
+      "Attributing narcosis symptoms to another cause and failing to ascend",
+      "Assuming tolerance develops, when susceptibility remains at depth",
+      "Overlooking coexisting hypercapnia or gas contamination that worsens narcosis"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Bove and Davis' Diving Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage acutely by controlled ascent to a shallower depth, which reverses symptoms fully and rapidly as the nitrogen partial pressure falls",
+      "Prevent recurrence by limiting maximum depth and planning conservative dive profiles",
+      "Use helium-based breathing mixtures (heliox or trimix) for deep dives to reduce or avoid the narcotic effect",
+      "Maintain a buddy system and dive supervision so that impaired judgement is recognised before it causes an accident",
+      "Exclude and assess other causes of impairment at depth, including breathing-gas contamination, hypercapnia and oxygen toxicity",
+      "Perform a post-dive neurological assessment to confirm full recovery and to exclude decompression illness",
+      "Reinforce diver training on the recognition and avoidance of narcosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for nitrogen narcosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nitrogen-narcosis-real-image",
-   "title": "Nitrogen narcosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "nitrogen_narcosis-pathway",
+      "title": "Nitrogen narcosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An impairment of higher mental function caused by the anaesthetic effect of nitrogen breathed under increased pressure at depth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe impairment at depth threatening safe diving behaviour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical recognition based on depth and the reversibility of symptoms on ascent, Review of the dive profile, depth reached, and breathing gas used, Assessment for other causes of impaired consciousness at depth (gas"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage acutely by controlled ascent to a shallower depth, which reverses symptoms fully and rapidly as the nitrogen partial pressure falls"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating impaired judgement and continuing to descend"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nitrogen narcosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nitrogen_narcosis-matrix",
+      "title": "Nitrogen narcosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An impairment of higher mental function caused by the anaesthetic effect of nitrogen breathed under increased pressure at depth",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical recognition based on depth and the reversibility of symptoms on ascent, Review of the dive profile, depth reached, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oxygen toxicity (central nervous system effects), Carbon dioxide retention (hypercapnia), Hypoxia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage acutely by controlled ascent to a shallower depth, which reverses symptoms fully and rapidly as the nitrogen partial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating impaired judgement and continuing to descend",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nitrogen narcosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nitrogen_narcosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dive profile review",
+          "cells": [
+            {
+              "text": "Depth reached and breathing gas used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recognition on ascent",
+          "cells": [
+            {
+              "text": "Symptoms resolve as depth decreases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for other causes of impaired consciousness",
+          "cells": [
+            {
+              "text": "Oxygen toxicity, hypercapnia, gas contamination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nitrogen_narcosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oxygen toxicity",
+          "cells": [
+            {
+              "text": "Central nervous system effects of oxygen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbon dioxide retention",
+          "cells": [
+            {
+              "text": "Hypercapnia from equipment or breathing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoxia",
+          "cells": [
+            {
+              "text": "Gas supply problem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contaminated breathing gas",
+          "cells": [
+            {
+              "text": "Carbon monoxide or similar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothermia",
+          "cells": [
+            {
+              "text": "Impairs cognition in cold water"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nitrogen_narcosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Controlled ascent",
+          "cells": [
+            {
+              "text": "Reverses symptoms as nitrogen partial pressure falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limit maximum depth",
+          "cells": [
+            {
+              "text": "Prevents recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative dive planning",
+          "cells": [
+            {
+              "text": "Reduces risk of impaired judgement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop descending when impaired",
+          "cells": [
+            {
+              "text": "Impaired judgement is the main danger"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nitrogen_narcosis-dx-mgmt",
+      "title": "Diagnosis and management of Nitrogen narcosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Impaired judgement or euphoria during a dive at depth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe impairment at depth, symptoms persisting after ascent)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Controlled ascent; treat as an alternative diagnosis if not resolving",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dive profile, depth and gas review, assessment for oxygen toxicity or gas contamination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Symptoms at depth that fully resolve on ascent?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider oxygen toxicity, hypercapnia or gas contamination; manage accordingly",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Controlled ascent to a shallower depth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Limit maximum depth and plan conservative dives",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not continue descending while impaired",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Evaluate persistent symptoms for another cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fully reversible on ascent; the danger lies in accidents from impaired judgement at depth",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

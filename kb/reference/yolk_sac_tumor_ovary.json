@@ -1,177 +1,381 @@
 {
- "id": "yolk_sac_tumor_ovary",
- "name": "Ovarian yolk sac tumour",
- "aliases": [
-  "endodermal sinus tumour",
-  "ovarian yolk sac tumor"
- ],
- "class": "non_infective",
- "system": "Gynaecology / Oncology",
- "specialty": "Gynaecological Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Female Genital Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An aggressive malignant germ-cell tumour of children and young women that characteristically secretes alpha-fetoprotein",
-   "Typically presents with a rapidly growing pelvic or abdominal mass and pain, sometimes with acute symptoms from torsion or rupture",
-   "Serum AFP is an invaluable tumour marker for diagnosis, monitoring treatment response, and detecting recurrence",
-   "The classic histological hallmark is the Schiller-Duval body, a glomeruloid structure with a central vessel, though many architectural patterns exist",
-   "Almost always unilateral, which supports fertility-sparing surgery in appropriately selected young patients",
-   "Highly chemosensitive, so platinum-based germ-cell chemotherapy is central to management and has transformed outcomes",
-   "May occur as part of a mixed germ-cell tumour, so thorough sampling and correlation with other markers are important"
+  "id": "yolk_sac_tumor_ovary",
+  "name": "Ovarian yolk sac tumour",
+  "aliases": [
+    "endodermal sinus tumour",
+    "ovarian yolk sac tumor"
   ],
-  "pathophysiology": "Ovarian yolk sac tumour is a malignant germ-cell neoplasm that differentiates towards extra-embryonic yolk sac and allantoic structures, recapitulating the endodermal sinus of the developing embryo. This differentiation explains the production of alpha-fetoprotein, a normal yolk sac product, which serves as a specific serum marker. Histologically the tumour displays diverse patterns, the most recognisable being the Schiller-Duval body, a papillary tuft with a central capillary that resembles a primitive glomerulus, together with intracellular and extracellular hyaline globules. The tumour grows rapidly and disseminates readily within the abdomen, but its germ-cell lineage confers marked sensitivity to chemotherapy, which underpins the possibility of cure even in advanced disease.",
-  "additionalDifferentials": [
-   "Other malignant germ-cell tumours (dysgerminoma, immature teratoma, embryonal carcinoma)",
-   "Clear cell carcinoma of the ovary",
-   "Mixed germ-cell tumour",
-   "Epithelial ovarian carcinoma in a young woman",
-   "Metastatic tumour",
-   "Sex cord-stromal tumour"
-  ],
-  "additionalInvestigations": [
-   "Serum AFP as the principal tumour marker, with beta-hCG and LDH to assess for a mixed germ-cell component",
-   "Transabdominal and transvaginal ultrasound of the mass",
-   "Cross-sectional imaging (CT or MRI) for staging",
-   "Histology with immunohistochemistry (e.g. AFP, glypican-3, SALL4)",
-   "Baseline assessment of the contralateral ovary and uterus for fertility planning",
-   "Renal and general organ function assessment before chemotherapy"
-  ],
-  "redFlags": [
-   "A rapidly enlarging pelvic mass with markedly raised AFP in a child or young woman",
-   "Acute abdomen from torsion or rupture of the tumour",
-   "Evidence of intra-abdominal dissemination or rising markers during follow-up",
-   "Features suggesting a mixed germ-cell tumour requiring broader treatment"
-  ],
-  "prognosis": "Historically dismal but now substantially improved by platinum-based chemotherapy; early-stage disease has a high cure rate, and even advanced tumours can be cured, with AFP trends guiding treatment.",
-  "pitfalls": [
-   "Delaying diagnosis of a rapidly growing ovarian mass in a young patient",
-   "Not measuring AFP, thereby losing a key diagnostic and monitoring tool",
-   "Failing to recognise a mixed germ-cell component that alters management",
-   "Choosing overly radical surgery when fertility-sparing treatment is appropriate"
-  ],
-  "references": [
-   "WHO Classification of Female Genital Tumours",
-   "Blaustein's Pathology of the Female Genital Tract"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Unilateral salpingo-oophorectomy with preservation of the uterus and contralateral ovary is the standard surgical approach, given the near-universal unilaterality of this tumour",
-   "Fertility-sparing surgery is appropriate even in the presence of metastatic disease, since this tumour class is exquisitely chemosensitive",
-   "Surgical staging of the abdomen and pelvis informs disease extent but does not override the need for adjuvant chemotherapy in this histology",
-   "Adjuvant combination chemotherapy with a platinum agent plus etoposide and bleomycin follows surgery for essentially all patients, since yolk sac tumour does not fall under the stage IA dysgerminoma or low-grade immature teratoma exceptions that allow observation alone",
-   "Observation after complete resection of a strictly confined stage IA tumour is sometimes considered at select low-volume centres with close marker and imaging follow-up, but this is a general oncology practice rather than a carve-out for this histology and should be approached cautiously",
-   "Advanced, recurrent, or metastatic disease is still treated with curative intent given the marked chemosensitivity of this tumour class",
-   "The treatment framework is extrapolated from the more extensively studied testicular germ cell tumour experience",
-   "Radiotherapy is not part of standard management for this histology",
-   "Serum alpha-fetoprotein is the key tumour marker and should be followed serially during and after treatment to assess response and detect recurrence",
-   "Long-term surveillance should attend to fertility and reproductive outcomes, since return of normal menstrual function is the rule and successful pregnancies are commonly documented in survivors",
-   "Management should involve a gynaecologic oncology and germ cell tumour multidisciplinary team from diagnosis given the rarity, young patient population, and fertility considerations",
-   "Suspicion of a mixed germ cell tumour component, rising markers on surveillance, or recurrent disease should prompt prompt referral back to the multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "yolk_sac_tumor_ovary-pathway",
-   "title": "Ovarian yolk sac tumour: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An aggressive malignant germ-cell tumour of children and young women that characteristically secretes alpha-fetoprotein",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A rapidly enlarging pelvic mass with markedly raised AFP in a child or young woman",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum AFP as the principal tumour marker, with beta-hCG and LDH to assess for a mixed germ-cell component, Transabdominal and transvaginal ultrasound of the mass, Cross-sectional imaging (CT or MRI) for staging"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Unilateral salpingo-oophorectomy with preservation of the uterus and contralateral ovary is the standard surgical approach, given the near-universal unilaterality of this tumour"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying diagnosis of a rapidly growing ovarian mass in a young patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ovarian yolk sac tumour."
-  }
- ],
- "tables": [
-  {
-   "id": "yolk_sac_tumor_ovary-matrix",
-   "title": "Ovarian yolk sac tumour: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An aggressive malignant germ-cell tumour of children and young women that characteristically secretes alpha-fetoprotein",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology / Oncology",
+  "specialty": "Gynaecological Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Female Genital Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An aggressive malignant germ-cell tumour of children and young women that characteristically secretes alpha-fetoprotein",
+      "Typically presents with a rapidly growing pelvic or abdominal mass and pain, sometimes with acute symptoms from torsion or rupture",
+      "Serum AFP is an invaluable tumour marker for diagnosis, monitoring treatment response, and detecting recurrence",
+      "The classic histological hallmark is the Schiller-Duval body, a glomeruloid structure with a central vessel, though many architectural patterns exist",
+      "Almost always unilateral, which supports fertility-sparing surgery in appropriately selected young patients",
+      "Highly chemosensitive, so platinum-based germ-cell chemotherapy is central to management and has transformed outcomes",
+      "May occur as part of a mixed germ-cell tumour, so thorough sampling and correlation with other markers are important"
     ],
-    [
-     "Key Investigations",
-     "Serum AFP as the principal tumour marker, with beta-hCG and LDH to assess for a mixed germ-cell component, Transabdominal and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ovarian yolk sac tumour is a malignant germ-cell neoplasm that differentiates towards extra-embryonic yolk sac and allantoic structures, recapitulating the endodermal sinus of the developing embryo. This differentiation explains the production of alpha-fetoprotein, a normal yolk sac product, which serves as a specific serum marker. Histologically the tumour displays diverse patterns, the most recognisable being the Schiller-Duval body, a papillary tuft with a central capillary that resembles a primitive glomerulus, together with intracellular and extracellular hyaline globules. The tumour grows rapidly and disseminates readily within the abdomen, but its germ-cell lineage confers marked sensitivity to chemotherapy, which underpins the possibility of cure even in advanced disease.",
+    "additionalDifferentials": [
+      "Other malignant germ-cell tumours (dysgerminoma, immature teratoma, embryonal carcinoma)",
+      "Clear cell carcinoma of the ovary",
+      "Mixed germ-cell tumour",
+      "Epithelial ovarian carcinoma in a young woman",
+      "Metastatic tumour",
+      "Sex cord-stromal tumour"
     ],
-    [
-     "Primary Differentials",
-     "Other malignant germ-cell tumours (dysgerminoma, immature teratoma, embryonal carcinoma), Clear cell carcinoma of the ovary,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum AFP as the principal tumour marker, with beta-hCG and LDH to assess for a mixed germ-cell component",
+      "Transabdominal and transvaginal ultrasound of the mass",
+      "Cross-sectional imaging (CT or MRI) for staging",
+      "Histology with immunohistochemistry (e.g. AFP, glypican-3, SALL4)",
+      "Baseline assessment of the contralateral ovary and uterus for fertility planning",
+      "Renal and general organ function assessment before chemotherapy"
     ],
-    [
-     "Management Strategy",
-     "Unilateral salpingo-oophorectomy with preservation of the uterus and contralateral ovary is the standard surgical approach, given",
-     "Core treatment modality"
+    "redFlags": [
+      "A rapidly enlarging pelvic mass with markedly raised AFP in a child or young woman",
+      "Acute abdomen from torsion or rupture of the tumour",
+      "Evidence of intra-abdominal dissemination or rising markers during follow-up",
+      "Features suggesting a mixed germ-cell tumour requiring broader treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying diagnosis of a rapidly growing ovarian mass in a young patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "Historically dismal but now substantially improved by platinum-based chemotherapy; early-stage disease has a high cure rate, and even advanced tumours can be cured, with AFP trends guiding treatment.",
+    "pitfalls": [
+      "Delaying diagnosis of a rapidly growing ovarian mass in a young patient",
+      "Not measuring AFP, thereby losing a key diagnostic and monitoring tool",
+      "Failing to recognise a mixed germ-cell component that alters management",
+      "Choosing overly radical surgery when fertility-sparing treatment is appropriate"
+    ],
+    "references": [
+      "WHO Classification of Female Genital Tumours",
+      "Blaustein's Pathology of the Female Genital Tract"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Unilateral salpingo-oophorectomy with preservation of the uterus and contralateral ovary is the standard surgical approach, given the near-universal unilaterality of this tumour",
+      "Fertility-sparing surgery is appropriate even in the presence of metastatic disease, since this tumour class is exquisitely chemosensitive",
+      "Surgical staging of the abdomen and pelvis informs disease extent but does not override the need for adjuvant chemotherapy in this histology",
+      "Adjuvant combination chemotherapy with a platinum agent plus etoposide and bleomycin follows surgery for essentially all patients, since yolk sac tumour does not fall under the stage IA dysgerminoma or low-grade immature teratoma exceptions that allow observation alone",
+      "Observation after complete resection of a strictly confined stage IA tumour is sometimes considered at select low-volume centres with close marker and imaging follow-up, but this is a general oncology practice rather than a carve-out for this histology and should be approached cautiously",
+      "Advanced, recurrent, or metastatic disease is still treated with curative intent given the marked chemosensitivity of this tumour class",
+      "The treatment framework is extrapolated from the more extensively studied testicular germ cell tumour experience",
+      "Radiotherapy is not part of standard management for this histology",
+      "Serum alpha-fetoprotein is the key tumour marker and should be followed serially during and after treatment to assess response and detect recurrence",
+      "Long-term surveillance should attend to fertility and reproductive outcomes, since return of normal menstrual function is the rule and successful pregnancies are commonly documented in survivors",
+      "Management should involve a gynaecologic oncology and germ cell tumour multidisciplinary team from diagnosis given the rarity, young patient population, and fertility considerations",
+      "Suspicion of a mixed germ cell tumour component, rising markers on surveillance, or recurrent disease should prompt prompt referral back to the multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for ovarian yolk sac tumour."
-  }
- ],
- "diagrams": [
-  {
-   "id": "yolk-sac-tumor-ovary-real-image",
-   "title": "Ovarian yolk sac tumour: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "yolk_sac_tumor_ovary-pathway",
+      "title": "Ovarian yolk sac tumour: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An aggressive malignant germ-cell tumour of children and young women that characteristically secretes alpha-fetoprotein",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A rapidly enlarging pelvic mass with markedly raised AFP in a child or young woman",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum AFP as the principal tumour marker, with beta-hCG and LDH to assess for a mixed germ-cell component, Transabdominal and transvaginal ultrasound of the mass, Cross-sectional imaging (CT or MRI) for staging"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Unilateral salpingo-oophorectomy with preservation of the uterus and contralateral ovary is the standard surgical approach, given the near-universal unilaterality of this tumour"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying diagnosis of a rapidly growing ovarian mass in a young patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ovarian yolk sac tumour."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "yolk_sac_tumor_ovary-matrix",
+      "title": "Ovarian yolk sac tumour: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An aggressive malignant germ-cell tumour of children and young women that characteristically secretes alpha-fetoprotein",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum AFP as the principal tumour marker, with beta-hCG and LDH to assess for a mixed germ-cell component, Transabdominal and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other malignant germ-cell tumours (dysgerminoma, immature teratoma, embryonal carcinoma), Clear cell carcinoma of the ovary,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Unilateral salpingo-oophorectomy with preservation of the uterus and contralateral ovary is the standard surgical approach, given",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying diagnosis of a rapidly growing ovarian mass in a young patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ovarian yolk sac tumour."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Female Genital Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "yolk_sac_tumor_ovary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum AFP",
+          "cells": [
+            {
+              "text": "Principal tumour marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-hCG and LDH",
+          "cells": [
+            {
+              "text": "Mixed germ-cell component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yolk_sac_tumor_ovary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dysgerminoma",
+          "cells": [
+            {
+              "text": "Other malignant germ-cell tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immature teratoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clear cell carcinoma of the ovary",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yolk_sac_tumor_ovary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Unilateral salpingo-oophorectomy",
+          "cells": [
+            {
+              "text": "Standard, preserving the uterus and contralateral ovary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "Following surgery for germ-cell disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "yolk_sac_tumor_ovary-dx-mgmt",
+      "title": "Diagnosis and management of Ovarian yolk sac tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ovarian yolk sac tumour: rapidly enlarging pelvic mass in a young woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid pelvic mass with markedly raised AFP, or acute abdomen)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical assessment for rapid mass or acute abdomen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum AFP, beta-hCG, LDH, pelvic imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is AFP markedly raised with a germ-cell mass on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other malignant germ-cell or ovarian tumour; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Unilateral salpingo-oophorectomy preserving the uterus and contralateral ovary",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant chemotherapy after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial AFP monitoring for response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Aggressive tumour; early diagnosis and fertility-sparing surgery improve outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

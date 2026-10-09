@@ -1,172 +1,419 @@
 {
- "id": "angiolipoma",
- "name": "Angiolipoma",
- "aliases": [
-  "Angiomyolipoma of soft tissue (historical misnomer to avoid)",
-  "Vascular lipoma"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Soft tissue",
- "specialty": "Soft tissue pathology / Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign subcutaneous tumour of mature fat and small vessels that characteristically presents as one of the painful soft tissue lumps",
-   "Typically appears in adolescents and young adults, often multiple, with the forearm and trunk being favoured sites",
-   "Lesions are small, firm, encapsulated subcutaneous nodules, and tenderness is frequently the presenting complaint",
-   "The histological hallmark is a mixture of mature adipocytes and a branching capillary network containing characteristic fibrin microthrombi",
-   "Unlike ordinary lipoma, most angiolipomas have a normal karyotype without the 12q rearrangements typical of lipoma",
-   "The rare infiltrating angiolipoma is non-encapsulated, extends into skeletal muscle, and has a greater tendency to recur locally",
-   "There is no malignant potential in the usual encapsulated form",
-   "Simple excision is curative for symptomatic or troublesome lesions, and asymptomatic nodules may simply be observed"
+  "id": "angiolipoma",
+  "name": "Angiolipoma",
+  "aliases": [
+    "Angiomyolipoma of soft tissue (historical misnomer to avoid)",
+    "Vascular lipoma"
   ],
-  "pathophysiology": "Angiolipoma is a benign neoplasm composed of mature adipose tissue admixed with a prominent proliferation of small, thin-walled vessels concentrated at the periphery of the lobules. The defining microscopic feature is the presence of fibrin thrombi within these capillaries, which helps distinguish it from a vascular-rich ordinary lipoma. The vascular component is thought to underlie the pain and tenderness that so often accompany the lesion. In contrast to conventional lipoma, the usual encapsulated angiolipoma typically shows a normal karyotype, indicating a distinct pathogenesis. The uncommon infiltrating variant lacks a capsule and permeates surrounding skeletal muscle and connective tissue, accounting for its higher local recurrence rate although it remains biologically benign.",
-  "additionalDifferentials": [
-   "Ordinary lipoma and spindle cell lipoma",
-   "Other painful subcutaneous tumours such as angioleiomyoma, glomus tumour, and neuroma",
-   "Haemangioma or vascular malformation",
-   "Kaposiform or other vascular soft tissue tumour",
-   "Epidermoid cyst",
-   "Nodular fasciitis"
-  ],
-  "additionalInvestigations": [
-   "Ultrasound to characterise the subcutaneous nodule and its vascularity",
-   "MRI showing a fatty lesion with a variable non-fatty vascular component when imaging is required",
-   "Excisional biopsy for definitive histological diagnosis",
-   "Histology to demonstrate mature fat with capillary proliferation and fibrin thrombi",
-   "Assessment for multiplicity and family history given the tendency to multiple lesions",
-   "Imaging of the muscle compartment if an infiltrating variant is suspected"
-  ],
-  "redFlags": [
-   "A deep or non-encapsulated lesion infiltrating muscle, suggesting the infiltrating variant",
-   "Recurrence after previous excision",
-   "Rapid enlargement or increasing pain",
-   "Extensive multiplicity with functional impairment"
-  ],
-  "prognosis": "The encapsulated angiolipoma is benign and cured by simple excision, with recurrence being unusual. The infiltrating variant may recur locally because of its permeative growth but does not metastasise or undergo malignant change.",
-  "pitfalls": [
-   "Attributing tenderness to another cause and overlooking angiolipoma in the differential of a painful subcutaneous lump",
-   "Failing to recognise the infiltrating variant, leading to incomplete excision and recurrence",
-   "Confusing the lesion with a vascular malformation on imaging",
-   "Using the term angiomyolipoma, which properly denotes a distinct renal and perivascular epithelioid tumour"
-  ],
-  "references": [
-   "WHO Classification of Soft Tissue and Bone Tumours",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Simple complete surgical excision, curative for the encapsulated tumour and relieving associated pain and tenderness",
-   "Histological confirmation showing mature fat with a capillary network and characteristic fibrin microthrombi",
-   "Wider excision and closer follow-up for the rare infiltrating variant given its permeative growth and higher local recurrence",
-   "Analgesia for tender lesions while awaiting removal",
-   "Assess for multiplicity and family history, as lesions are often multiple",
-   "Reassurance that the tumour is benign and does not undergo malignant change"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "angiolipoma-pathway",
-   "title": "Angiolipoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign subcutaneous tumour of mature fat and small vessels that characteristically presents as one of the painful soft tissue lumps",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A deep or non-encapsulated lesion infiltrating muscle, suggesting the infiltrating variant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ultrasound to characterise the subcutaneous nodule and its vascularity, MRI showing a fatty lesion with a variable non-fatty vascular component when imaging is required, Excisional biopsy for definitive histological"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Simple complete surgical excision, curative for the encapsulated tumour and relieving associated pain and tenderness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing tenderness to another cause and overlooking angiolipoma in the differential of a painful subcutaneous lump"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of angiolipoma."
-  }
- ],
- "tables": [
-  {
-   "id": "angiolipoma-matrix",
-   "title": "Angiolipoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign subcutaneous tumour of mature fat and small vessels that characteristically presents as one of the painful soft tissue",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Soft tissue",
+  "specialty": "Soft tissue pathology / Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign subcutaneous tumour of mature fat and small vessels that characteristically presents as one of the painful soft tissue lumps",
+      "Typically appears in adolescents and young adults, often multiple, with the forearm and trunk being favoured sites",
+      "Lesions are small, firm, encapsulated subcutaneous nodules, and tenderness is frequently the presenting complaint",
+      "The histological hallmark is a mixture of mature adipocytes and a branching capillary network containing characteristic fibrin microthrombi",
+      "Unlike ordinary lipoma, most angiolipomas have a normal karyotype without the 12q rearrangements typical of lipoma",
+      "The rare infiltrating angiolipoma is non-encapsulated, extends into skeletal muscle, and has a greater tendency to recur locally",
+      "There is no malignant potential in the usual encapsulated form",
+      "Simple excision is curative for symptomatic or troublesome lesions, and asymptomatic nodules may simply be observed"
     ],
-    [
-     "Key Investigations",
-     "Ultrasound to characterise the subcutaneous nodule and its vascularity, MRI showing a fatty lesion with a variable non-fatty",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Angiolipoma is a benign neoplasm composed of mature adipose tissue admixed with a prominent proliferation of small, thin-walled vessels concentrated at the periphery of the lobules. The defining microscopic feature is the presence of fibrin thrombi within these capillaries, which helps distinguish it from a vascular-rich ordinary lipoma. The vascular component is thought to underlie the pain and tenderness that so often accompany the lesion. In contrast to conventional lipoma, the usual encapsulated angiolipoma typically shows a normal karyotype, indicating a distinct pathogenesis. The uncommon infiltrating variant lacks a capsule and permeates surrounding skeletal muscle and connective tissue, accounting for its higher local recurrence rate although it remains biologically benign.",
+    "additionalDifferentials": [
+      "Ordinary lipoma and spindle cell lipoma",
+      "Other painful subcutaneous tumours such as angioleiomyoma, glomus tumour, and neuroma",
+      "Haemangioma or vascular malformation",
+      "Kaposiform or other vascular soft tissue tumour",
+      "Epidermoid cyst",
+      "Nodular fasciitis"
     ],
-    [
-     "Primary Differentials",
-     "Ordinary lipoma and spindle cell lipoma, Other painful subcutaneous tumours such as angioleiomyoma, glomus tumour, and neuroma,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ultrasound to characterise the subcutaneous nodule and its vascularity",
+      "MRI showing a fatty lesion with a variable non-fatty vascular component when imaging is required",
+      "Excisional biopsy for definitive histological diagnosis",
+      "Histology to demonstrate mature fat with capillary proliferation and fibrin thrombi",
+      "Assessment for multiplicity and family history given the tendency to multiple lesions",
+      "Imaging of the muscle compartment if an infiltrating variant is suspected"
     ],
-    [
-     "Management Strategy",
-     "Simple complete surgical excision, curative for the encapsulated tumour and relieving associated pain and tenderness",
-     "Core treatment modality"
+    "redFlags": [
+      "A deep or non-encapsulated lesion infiltrating muscle, suggesting the infiltrating variant",
+      "Recurrence after previous excision",
+      "Rapid enlargement or increasing pain",
+      "Extensive multiplicity with functional impairment"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing tenderness to another cause and overlooking angiolipoma in the differential of a painful subcutaneous lump",
-     "Prevent diagnostic or management error"
+    "prognosis": "The encapsulated angiolipoma is benign and cured by simple excision, with recurrence being unusual. The infiltrating variant may recur locally because of its permeative growth but does not metastasise or undergo malignant change.",
+    "pitfalls": [
+      "Attributing tenderness to another cause and overlooking angiolipoma in the differential of a painful subcutaneous lump",
+      "Failing to recognise the infiltrating variant, leading to incomplete excision and recurrence",
+      "Confusing the lesion with a vascular malformation on imaging",
+      "Using the term angiomyolipoma, which properly denotes a distinct renal and perivascular epithelioid tumour"
+    ],
+    "references": [
+      "WHO Classification of Soft Tissue and Bone Tumours",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Simple complete surgical excision, curative for the encapsulated tumour and relieving associated pain and tenderness",
+      "Histological confirmation showing mature fat with a capillary network and characteristic fibrin microthrombi",
+      "Wider excision and closer follow-up for the rare infiltrating variant given its permeative growth and higher local recurrence",
+      "Analgesia for tender lesions while awaiting removal",
+      "Assess for multiplicity and family history, as lesions are often multiple",
+      "Reassurance that the tumour is benign and does not undergo malignant change"
     ]
-   ],
-   "caption": "Overview comparison matrix for angiolipoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "angiolipoma-real-image",
-   "title": "Angiolipoma: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "angiolipoma-pathway",
+      "title": "Angiolipoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign subcutaneous tumour of mature fat and small vessels that characteristically presents as one of the painful soft tissue lumps",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A deep or non-encapsulated lesion infiltrating muscle, suggesting the infiltrating variant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ultrasound to characterise the subcutaneous nodule and its vascularity, MRI showing a fatty lesion with a variable non-fatty vascular component when imaging is required, Excisional biopsy for definitive histological"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Simple complete surgical excision, curative for the encapsulated tumour and relieving associated pain and tenderness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing tenderness to another cause and overlooking angiolipoma in the differential of a painful subcutaneous lump"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of angiolipoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "angiolipoma-matrix",
+      "title": "Angiolipoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign subcutaneous tumour of mature fat and small vessels that characteristically presents as one of the painful soft tissue",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ultrasound to characterise the subcutaneous nodule and its vascularity, MRI showing a fatty lesion with a variable non-fatty",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ordinary lipoma and spindle cell lipoma, Other painful subcutaneous tumours such as angioleiomyoma, glomus tumour, and neuroma,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Simple complete surgical excision, curative for the encapsulated tumour and relieving associated pain and tenderness",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing tenderness to another cause and overlooking angiolipoma in the differential of a painful subcutaneous lump",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for angiolipoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angiolipoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Characterises the subcutaneous nodule and its vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Fatty lesion with a variable non-fatty vascular component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional biopsy",
+          "cells": [
+            {
+              "text": "Definitive histological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Mature fat with capillary proliferation and fibrin thrombi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for multiplicity and family history",
+          "cells": [
+            {
+              "text": "Lesions are often multiple"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angiolipoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple complete surgical excision",
+          "cells": [
+            {
+              "text": "Curative for the encapsulated tumour"
+            },
+            {
+              "text": "Relieves associated pain and tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wider excision with closer follow-up",
+          "cells": [
+            {
+              "text": "Rare infiltrating variant"
+            },
+            {
+              "text": "Permeative growth and higher local recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Tender lesions while awaiting removal"
+            },
+            {
+              "text": "Lesions are often painful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assess multiplicity and family history",
+          "cells": [
+            {
+              "text": "Lesions are often multiple"
+            },
+            {
+              "text": "Tendency to multiple lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign tumour"
+            },
+            {
+              "text": "Does not undergo malignant change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angiolipoma-dx-mgmt",
+      "title": "Diagnosis and management of Angiolipoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful soft tissue lump of mature fat and small vessels, often multiple",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Deep, non-encapsulated lesion infiltrating muscle?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Image the muscle compartment; plan wider excision if infiltrating",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound, MRI, excisional biopsy, multiplicity and family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Histology shows mature fat with capillary network and fibrin microthrombi?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Simple complete surgical excision, curative for encapsulated tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia for tender lesions while awaiting removal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Wider excision and closer follow-up for the infiltrating variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess multiplicity and family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Encapsulated form cured by excision; infiltrating form may recur locally",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

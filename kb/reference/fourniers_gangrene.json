@@ -1,179 +1,428 @@
 {
- "id": "fourniers_gangrene",
- "name": "Fournier's gangrene",
- "aliases": [
-  "Fournier gangrene",
-  "necrotising fasciitis of the perineum",
-  "perineal necrotising soft-tissue infection",
-  "scrotal gangrene"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / IDSA",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A fulminant necrotising fasciitis of the perineal, genital, and perianal region that constitutes a surgical emergency",
-   "Usually polymicrobial, mixing aerobic and anaerobic organisms from the gut and skin flora, producing synergistic tissue destruction",
-   "Diabetes mellitus, obesity, alcohol excess, immunosuppression, and local trauma or anorectal or urogenital infection are major predisposing factors",
-   "Severe pain, systemic toxicity, and rapidly spreading swelling with skin discolouration, crepitus, or foul-smelling discharge should raise immediate suspicion",
-   "Diagnosis is clinical and surgical; imaging may show subcutaneous gas but must never delay operative exploration",
-   "Treatment principles are immediate wide surgical debridement of all necrotic tissue, broad-spectrum antibiotics covering Gram-positives, Gram-negatives, and anaerobes, and haemodynamic resuscitation",
-   "Repeat debridement is commonly required, and diversion of urine or faeces may be needed to protect the wound",
-   "Delay in surgery is the strongest driver of mortality, so early recognition and theatre are paramount"
+  "id": "fourniers_gangrene",
+  "name": "Fournier's gangrene",
+  "aliases": [
+    "Fournier gangrene",
+    "necrotising fasciitis of the perineum",
+    "perineal necrotising soft-tissue infection",
+    "scrotal gangrene"
   ],
-  "pathophysiology": "Fournier's gangrene is a necrotising infection of the fascial planes of the genitalia, perineum, and perianal area. Mixed aerobic and anaerobic organisms act synergistically, generating enzymes and toxins that thrombose subcutaneous vessels and cause progressive ischaemic necrosis of skin, subcutaneous tissue, and fascia. Bacterial gas production leads to crepitus, and infection tracks rapidly along fascial planes, often outpacing the overlying skin changes, culminating in systemic sepsis and multi-organ failure.",
-  "additionalDifferentials": [
-   "Perianal or ischiorectal abscess without necrosis",
-   "Scrotal or epididymo-orchitis",
-   "Simple cellulitis of the perineum",
-   "Strangulated inguinoscrotal hernia",
-   "Cutaneous or Bartholin abscess"
-  ],
-  "infectionMimics": [
-   "Testicular torsion presenting with acute scrotal pain",
-   "Severe contact or irritant dermatitis of the groin",
-   "Pyoderma gangrenosum of the perineum",
-   "Extensive hidradenitis suppurativa flare"
-  ],
-  "additionalInvestigations": [
-   "Blood cultures and cultures of operative tissue and any discharge",
-   "Full blood count, renal and liver function, glucose, lactate and coagulation to gauge sepsis severity",
-   "CT or plain imaging to define the extent of gas and tissue involvement when it will not delay surgery",
-   "Surgical exploration for definitive diagnosis and debridement",
-   "Glycaemic assessment and screening for underlying immunosuppression"
-  ],
-  "redFlags": [
-   "Rapidly spreading perineal swelling with crepitus or skin necrosis demanding immediate surgical debridement",
-   "Pain out of proportion to visible findings suggesting deep fascial necrosis",
-   "Systemic signs of septic shock requiring urgent resuscitation and critical care",
-   "Subcutaneous gas on examination or imaging indicating gas-forming necrotising infection"
-  ],
-  "prognosis": "Mortality is significant and rises steeply with delayed surgery, extensive disease, advanced age, and multi-organ dysfunction; timely aggressive debridement and organ support improve survival, though survivors often need multiple operations and reconstructive procedures.",
-  "pitfalls": [
-   "Mistaking early disease for a simple abscess or cellulitis and delaying theatre",
-   "Waiting for imaging before surgical exploration in a deteriorating patient",
-   "Underestimating the extent of necrosis and performing inadequate initial debridement",
-   "Neglecting planned re-exploration to remove ongoing necrotic tissue"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "IDSA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake emergency wide surgical debridement of all necrotic fascia and tissue, with planned repeat exploration and source control, as the definitive life-saving intervention",
-   "Give broad-spectrum empirical antibiotics covering Gram-positive, Gram-negative and anaerobic organisms, with clindamycin added for toxin suppression, then narrow according to tissue and blood cultures",
-   "Deliver haemodynamic resuscitation and sepsis care with intravenous fluids, vasopressors and multi-organ support in critical care",
-   "Control the predisposing condition — tighten glycaemic control in diabetes and address obesity, alcohol excess or immunosuppression",
-   "Consider faecal or urinary diversion with a colostomy or suprapubic catheter to protect the healing perineum",
-   "Support recovery with nutritional optimisation and adjunctive hyperbaric oxygen where accessible",
-   "Arrange staged reconstructive and plastic surgery after sepsis resolution through a multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fourniers_gangrene-pathway",
-   "title": "Fournier's gangrene: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A fulminant necrotising fasciitis of the perineal, genital, and perianal region that constitutes a surgical emergency",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly spreading perineal swelling with crepitus or skin necrosis demanding immediate surgical debridement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood cultures and cultures of operative tissue and any discharge, Full blood count, renal and liver function, glucose, lactate and coagulation to gauge sepsis severity, CT or plain imaging to define the extent of gas and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake emergency wide surgical debridement of all necrotic fascia and tissue, with planned repeat exploration and source control, as the definitive life-saving intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking early disease for a simple abscess or cellulitis and delaying theatre"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fournier's gangrene."
-  }
- ],
- "tables": [
-  {
-   "id": "fourniers_gangrene-matrix",
-   "title": "Fournier's gangrene: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A fulminant necrotising fasciitis of the perineal, genital, and perianal region that constitutes a surgical emergency",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / IDSA",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A fulminant necrotising fasciitis of the perineal, genital, and perianal region that constitutes a surgical emergency",
+      "Usually polymicrobial, mixing aerobic and anaerobic organisms from the gut and skin flora, producing synergistic tissue destruction",
+      "Diabetes mellitus, obesity, alcohol excess, immunosuppression, and local trauma or anorectal or urogenital infection are major predisposing factors",
+      "Severe pain, systemic toxicity, and rapidly spreading swelling with skin discolouration, crepitus, or foul-smelling discharge should raise immediate suspicion",
+      "Diagnosis is clinical and surgical; imaging may show subcutaneous gas but must never delay operative exploration",
+      "Treatment principles are immediate wide surgical debridement of all necrotic tissue, broad-spectrum antibiotics covering Gram-positives, Gram-negatives, and anaerobes, and haemodynamic resuscitation",
+      "Repeat debridement is commonly required, and diversion of urine or faeces may be needed to protect the wound",
+      "Delay in surgery is the strongest driver of mortality, so early recognition and theatre are paramount"
     ],
-    [
-     "Key Investigations",
-     "Blood cultures and cultures of operative tissue and any discharge, Full blood count, renal and liver function, glucose, lactate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fournier's gangrene is a necrotising infection of the fascial planes of the genitalia, perineum, and perianal area. Mixed aerobic and anaerobic organisms act synergistically, generating enzymes and toxins that thrombose subcutaneous vessels and cause progressive ischaemic necrosis of skin, subcutaneous tissue, and fascia. Bacterial gas production leads to crepitus, and infection tracks rapidly along fascial planes, often outpacing the overlying skin changes, culminating in systemic sepsis and multi-organ failure.",
+    "additionalDifferentials": [
+      "Perianal or ischiorectal abscess without necrosis",
+      "Scrotal or epididymo-orchitis",
+      "Simple cellulitis of the perineum",
+      "Strangulated inguinoscrotal hernia",
+      "Cutaneous or Bartholin abscess"
     ],
-    [
-     "Primary Differentials",
-     "Perianal or ischiorectal abscess without necrosis, Scrotal or epididymo-orchitis, Simple cellulitis of the perineum",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Testicular torsion presenting with acute scrotal pain",
+      "Severe contact or irritant dermatitis of the groin",
+      "Pyoderma gangrenosum of the perineum",
+      "Extensive hidradenitis suppurativa flare"
     ],
-    [
-     "Management Strategy",
-     "Undertake emergency wide surgical debridement of all necrotic fascia and tissue, with planned repeat exploration and source",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Blood cultures and cultures of operative tissue and any discharge",
+      "Full blood count, renal and liver function, glucose, lactate and coagulation to gauge sepsis severity",
+      "CT or plain imaging to define the extent of gas and tissue involvement when it will not delay surgery",
+      "Surgical exploration for definitive diagnosis and debridement",
+      "Glycaemic assessment and screening for underlying immunosuppression"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking early disease for a simple abscess or cellulitis and delaying theatre",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Rapidly spreading perineal swelling with crepitus or skin necrosis demanding immediate surgical debridement",
+      "Pain out of proportion to visible findings suggesting deep fascial necrosis",
+      "Systemic signs of septic shock requiring urgent resuscitation and critical care",
+      "Subcutaneous gas on examination or imaging indicating gas-forming necrotising infection"
+    ],
+    "prognosis": "Mortality is significant and rises steeply with delayed surgery, extensive disease, advanced age, and multi-organ dysfunction; timely aggressive debridement and organ support improve survival, though survivors often need multiple operations and reconstructive procedures.",
+    "pitfalls": [
+      "Mistaking early disease for a simple abscess or cellulitis and delaying theatre",
+      "Waiting for imaging before surgical exploration in a deteriorating patient",
+      "Underestimating the extent of necrosis and performing inadequate initial debridement",
+      "Neglecting planned re-exploration to remove ongoing necrotic tissue"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "IDSA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake emergency wide surgical debridement of all necrotic fascia and tissue, with planned repeat exploration and source control, as the definitive life-saving intervention",
+      "Give broad-spectrum empirical antibiotics covering Gram-positive, Gram-negative and anaerobic organisms, with clindamycin added for toxin suppression, then narrow according to tissue and blood cultures",
+      "Deliver haemodynamic resuscitation and sepsis care with intravenous fluids, vasopressors and multi-organ support in critical care",
+      "Control the predisposing condition — tighten glycaemic control in diabetes and address obesity, alcohol excess or immunosuppression",
+      "Consider faecal or urinary diversion with a colostomy or suprapubic catheter to protect the healing perineum",
+      "Support recovery with nutritional optimisation and adjunctive hyperbaric oxygen where accessible",
+      "Arrange staged reconstructive and plastic surgery after sepsis resolution through a multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for fournier's gangrene."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fourniers-gangrene-real-image",
-   "title": "Fournier's gangrene: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "fourniers_gangrene-pathway",
+      "title": "Fournier's gangrene: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A fulminant necrotising fasciitis of the perineal, genital, and perianal region that constitutes a surgical emergency",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly spreading perineal swelling with crepitus or skin necrosis demanding immediate surgical debridement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood cultures and cultures of operative tissue and any discharge, Full blood count, renal and liver function, glucose, lactate and coagulation to gauge sepsis severity, CT or plain imaging to define the extent of gas and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake emergency wide surgical debridement of all necrotic fascia and tissue, with planned repeat exploration and source control, as the definitive life-saving intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking early disease for a simple abscess or cellulitis and delaying theatre"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fournier's gangrene."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fourniers_gangrene-matrix",
+      "title": "Fournier's gangrene: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A fulminant necrotising fasciitis of the perineal, genital, and perianal region that constitutes a surgical emergency",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood cultures and cultures of operative tissue and any discharge, Full blood count, renal and liver function, glucose, lactate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Perianal or ischiorectal abscess without necrosis, Scrotal or epididymo-orchitis, Simple cellulitis of the perineum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake emergency wide surgical debridement of all necrotic fascia and tissue, with planned repeat exploration and source",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking early disease for a simple abscess or cellulitis and delaying theatre",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fournier's gangrene."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / IDSA",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fourniers_gangrene-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood cultures and operative tissue cultures",
+          "cells": [
+            {
+              "text": "Organisms from blood, operative tissue and any discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, renal and liver function, glucose, lactate, coagulation",
+          "cells": [
+            {
+              "text": "Gauges sepsis severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or plain imaging",
+          "cells": [
+            {
+              "text": "Defines extent of gas and tissue involvement, when it will not delay surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical exploration",
+          "cells": [
+            {
+              "text": "Definitive diagnosis and debridement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic assessment and immunosuppression screen",
+          "cells": [
+            {
+              "text": "Underlying immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fourniers_gangrene-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency wide surgical debridement",
+          "cells": [
+            {
+              "text": "All necrotic fascia and tissue, with planned repeat exploration and source control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad-spectrum empirical antibiotics",
+          "cells": [
+            {
+              "text": "Gram-positive, Gram-negative and anaerobic cover; clindamycin for toxin suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodynamic resuscitation",
+          "cells": [
+            {
+              "text": "IV fluids, vasopressors and multi-organ support in critical care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Control predisposing conditions",
+          "cells": [
+            {
+              "text": "Tighten glycaemic control; address obesity, alcohol excess or immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal or urinary diversion",
+          "cells": [
+            {
+              "text": "Colostomy or suprapubic catheter to protect the healing perineum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and hyperbaric oxygen",
+          "cells": [
+            {
+              "text": "Nutritional optimisation; adjunctive hyperbaric oxygen where accessible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged reconstruction",
+          "cells": [
+            {
+              "text": "Reconstructive and plastic surgery after sepsis resolves"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fourniers_gangrene-dx-mgmt",
+      "title": "Diagnosis and management of Fournier's gangrene",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Fournier gangrene: rapidly spreading perineal swelling with pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (crepitus, skin necrosis, septic shock, subcutaneous gas)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical debridement and critical care resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and operative cultures, lactate, coagulation, CT or plain imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does surgical exploration confirm necrotising infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider abscess, simple cellulitis, strangulated hernia or scrotal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emergency wide debridement of all necrotic tissue with planned re-exploration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum antibiotics with clindamycin for toxin suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Haemodynamic resuscitation and multi-organ support in critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Control predisposing conditions such as diabetes, obesity or immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mortality rises steeply with delayed surgery; early aggressive debridement is key",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

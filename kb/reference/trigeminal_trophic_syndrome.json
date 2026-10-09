@@ -1,175 +1,484 @@
 {
- "id": "trigeminal_trophic_syndrome",
- "name": "Trigeminal trophic syndrome",
- "aliases": [
-  "TTS",
-  "trigeminal trophic ulceration",
-  "trophic ulceration of the nasal ala"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Neurology",
- "specialty": "Otolaryngology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by a triad of trigeminal sensory loss, facial paraesthesia (often a crawling or itching dysaesthesia), and a self-induced ulcer, classically of the nasal ala",
-   "The crescentic ulcer typically spares the nasal tip because the tip is supplied by a different sensory branch, an important diagnostic clue",
-   "It follows damage to the trigeminal nerve or its ganglion, commonly after trigeminal ablative procedures for neuralgia, stroke, herpes zoster, or tumour",
-   "The ulceration is caused by repetitive self-manipulation (rubbing, picking, scratching) of anaesthetic and paraesthetic skin rather than by primary tissue breakdown",
-   "There may be a long latency, from months to years, between the nerve injury and the appearance of the ulcer",
-   "Diagnosis is clinical but requires biopsy and investigation to exclude malignancy, infection, and vasculitis, which can mimic it",
-   "Treatment centres on protecting the area and interrupting the itch-scratch cycle (barriers, behavioural measures, and neuropathic agents such as carbamazepine); surgical repair fails unless self-manipulation is stopped"
+  "id": "trigeminal_trophic_syndrome",
+  "name": "Trigeminal trophic syndrome",
+  "aliases": [
+    "TTS",
+    "trigeminal trophic ulceration",
+    "trophic ulceration of the nasal ala"
   ],
-  "pathophysiology": "Trigeminal trophic syndrome develops after injury to the trigeminal nerve, ganglion, or its central connections, producing sensory loss and abnormal paraesthetic sensations in the affected dermatome. The disordered sensation drives compulsive rubbing, picking, and scratching of the numb skin, and this repetitive self-inflicted trauma to tissue that lacks protective sensation produces a chronic, painless ulcer, most often on the ala of the nose. Impaired trophic and sensory function of the denervated skin contributes to poor healing, but the primary driver is mechanical self-manipulation rather than an intrinsic ischaemic or infective process. Characteristic sparing of the nasal tip reflects its innervation by a separate nerve branch.",
-  "additionalDifferentials": [
-   "Basal cell or squamous cell carcinoma of the nose",
-   "Cutaneous infection (including mucormycosis and atypical mycobacteria)",
-   "Granulomatosis with polyangiitis and other vasculitides",
-   "Pyoderma gangrenosum",
-   "Factitious dermatitis (dermatitis artefacta) elsewhere",
-   "Leprosy or other neuropathic ulceration",
-   "Cutaneous leishmaniasis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy of the ulcer edge to exclude malignancy and specific infection",
-   "Microbiological cultures including fungal and mycobacterial studies",
-   "MRI or CT of the brain and skull base to identify the underlying trigeminal lesion",
-   "Vasculitis screen including ANCA where relevant",
-   "Detailed sensory examination of the trigeminal territory",
-   "Review of prior trigeminal procedures, zoster, or stroke history"
-  ],
-  "redFlags": [
-   "An indurated or non-healing ulcer suggesting malignancy requiring biopsy",
-   "Rapidly progressive necrosis raising concern for invasive fungal infection",
-   "Systemic features suggesting vasculitis",
-   "A new intracranial lesion accounting for the trigeminal injury"
-  ],
-  "prognosis": "The ulcer is chronic and notoriously difficult to heal because it depends on stopping self-manipulation of insensate skin; with effective protection and behavioural interruption of the itch-scratch cycle healing can occur, but recurrence is common and reconstructive surgery fails if manipulation continues.",
-  "pitfalls": [
-   "Mistaking the ulcer for a skin malignancy or infection, or vice versa, without biopsy",
-   "Attempting surgical reconstruction without first controlling the self-manipulation",
-   "Failing to recognise nasal tip sparing as a diagnostic clue",
-   "Overlooking the often long latency between nerve injury and ulceration",
-   "Not addressing the underlying trigeminal lesion or the paraesthesia driving the behaviour"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Interrupt the self-manipulation that drives the ulcer, using behavioural modification, physical barriers, occlusive dressings and protective devices to break the itch-scratch-pick cycle in the anaesthetic skin",
-   "Provide meticulous wound care with dressings and treat secondary bacterial infection with appropriate antimicrobials",
-   "Control the neuropathic dysaesthesia with agents such as carbamazepine, gabapentin, pregabalin or amitriptyline, and consider an antipsychotic such as pimozide when a compulsive picking element predominates",
-   "Exclude and treat mimics by biopsy to rule out malignancy, deep infection and vasculitis before attributing the ulcer to the syndrome",
-   "Identify and address the underlying trigeminal lesion, whether post-ablative, post-herpetic, vascular or neoplastic",
-   "Defer reconstructive surgery until self-manipulation is reliably controlled, as flaps and grafts fail if picking continues, and consider innervated flaps when repair is undertaken",
-   "Manage jointly across dermatology, neurology, plastic surgery and psychology or psychiatry"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trigeminal_trophic_syndrome-pathway",
-   "title": "Trigeminal trophic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by a triad of trigeminal sensory loss, facial paraesthesia (often a crawling or itching dysaesthesia), and a self-induced ulcer, classically of the nasal ala",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An indurated or non-healing ulcer suggesting malignancy requiring biopsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy of the ulcer edge to exclude malignancy and specific infection, Microbiological cultures including fungal and mycobacterial studies, MRI or CT of the brain and skull base to identify the underlying trigeminal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Interrupt the self-manipulation that drives the ulcer, using behavioural modification, physical barriers, occlusive dressings and protective devices to break the itch-scratch-pick cycle in the anaesthetic skin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the ulcer for a skin malignancy or infection, or vice versa, without biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trigeminal trophic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "trigeminal_trophic_syndrome-matrix",
-   "title": "Trigeminal trophic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by a triad of trigeminal sensory loss, facial paraesthesia (often a crawling or itching dysaesthesia), and a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Neurology",
+  "specialty": "Otolaryngology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by a triad of trigeminal sensory loss, facial paraesthesia (often a crawling or itching dysaesthesia), and a self-induced ulcer, classically of the nasal ala",
+      "The crescentic ulcer typically spares the nasal tip because the tip is supplied by a different sensory branch, an important diagnostic clue",
+      "It follows damage to the trigeminal nerve or its ganglion, commonly after trigeminal ablative procedures for neuralgia, stroke, herpes zoster, or tumour",
+      "The ulceration is caused by repetitive self-manipulation (rubbing, picking, scratching) of anaesthetic and paraesthetic skin rather than by primary tissue breakdown",
+      "There may be a long latency, from months to years, between the nerve injury and the appearance of the ulcer",
+      "Diagnosis is clinical but requires biopsy and investigation to exclude malignancy, infection, and vasculitis, which can mimic it",
+      "Treatment centres on protecting the area and interrupting the itch-scratch cycle (barriers, behavioural measures, and neuropathic agents such as carbamazepine); surgical repair fails unless self-manipulation is stopped"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy of the ulcer edge to exclude malignancy and specific infection, Microbiological cultures including fungal and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trigeminal trophic syndrome develops after injury to the trigeminal nerve, ganglion, or its central connections, producing sensory loss and abnormal paraesthetic sensations in the affected dermatome. The disordered sensation drives compulsive rubbing, picking, and scratching of the numb skin, and this repetitive self-inflicted trauma to tissue that lacks protective sensation produces a chronic, painless ulcer, most often on the ala of the nose. Impaired trophic and sensory function of the denervated skin contributes to poor healing, but the primary driver is mechanical self-manipulation rather than an intrinsic ischaemic or infective process. Characteristic sparing of the nasal tip reflects its innervation by a separate nerve branch.",
+    "additionalDifferentials": [
+      "Basal cell or squamous cell carcinoma of the nose",
+      "Cutaneous infection (including mucormycosis and atypical mycobacteria)",
+      "Granulomatosis with polyangiitis and other vasculitides",
+      "Pyoderma gangrenosum",
+      "Factitious dermatitis (dermatitis artefacta) elsewhere",
+      "Leprosy or other neuropathic ulceration",
+      "Cutaneous leishmaniasis"
     ],
-    [
-     "Primary Differentials",
-     "Basal cell or squamous cell carcinoma of the nose, Cutaneous infection (including mucormycosis and atypical mycobacteria),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy of the ulcer edge to exclude malignancy and specific infection",
+      "Microbiological cultures including fungal and mycobacterial studies",
+      "MRI or CT of the brain and skull base to identify the underlying trigeminal lesion",
+      "Vasculitis screen including ANCA where relevant",
+      "Detailed sensory examination of the trigeminal territory",
+      "Review of prior trigeminal procedures, zoster, or stroke history"
     ],
-    [
-     "Management Strategy",
-     "Interrupt the self-manipulation that drives the ulcer, using behavioural modification, physical barriers, occlusive dressings and",
-     "Core treatment modality"
+    "redFlags": [
+      "An indurated or non-healing ulcer suggesting malignancy requiring biopsy",
+      "Rapidly progressive necrosis raising concern for invasive fungal infection",
+      "Systemic features suggesting vasculitis",
+      "A new intracranial lesion accounting for the trigeminal injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the ulcer for a skin malignancy or infection, or vice versa, without biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The ulcer is chronic and notoriously difficult to heal because it depends on stopping self-manipulation of insensate skin; with effective protection and behavioural interruption of the itch-scratch cycle healing can occur, but recurrence is common and reconstructive surgery fails if manipulation continues.",
+    "pitfalls": [
+      "Mistaking the ulcer for a skin malignancy or infection, or vice versa, without biopsy",
+      "Attempting surgical reconstruction without first controlling the self-manipulation",
+      "Failing to recognise nasal tip sparing as a diagnostic clue",
+      "Overlooking the often long latency between nerve injury and ulceration",
+      "Not addressing the underlying trigeminal lesion or the paraesthesia driving the behaviour"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Interrupt the self-manipulation that drives the ulcer, using behavioural modification, physical barriers, occlusive dressings and protective devices to break the itch-scratch-pick cycle in the anaesthetic skin",
+      "Provide meticulous wound care with dressings and treat secondary bacterial infection with appropriate antimicrobials",
+      "Control the neuropathic dysaesthesia with agents such as carbamazepine, gabapentin, pregabalin or amitriptyline, and consider an antipsychotic such as pimozide when a compulsive picking element predominates",
+      "Exclude and treat mimics by biopsy to rule out malignancy, deep infection and vasculitis before attributing the ulcer to the syndrome",
+      "Identify and address the underlying trigeminal lesion, whether post-ablative, post-herpetic, vascular or neoplastic",
+      "Defer reconstructive surgery until self-manipulation is reliably controlled, as flaps and grafts fail if picking continues, and consider innervated flaps when repair is undertaken",
+      "Manage jointly across dermatology, neurology, plastic surgery and psychology or psychiatry"
     ]
-   ],
-   "caption": "Overview comparison matrix for trigeminal trophic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trigeminal-trophic-syndrome-real-image",
-   "title": "Trigeminal trophic syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "trigeminal_trophic_syndrome-pathway",
+      "title": "Trigeminal trophic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by a triad of trigeminal sensory loss, facial paraesthesia (often a crawling or itching dysaesthesia), and a self-induced ulcer, classically of the nasal ala",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An indurated or non-healing ulcer suggesting malignancy requiring biopsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy of the ulcer edge to exclude malignancy and specific infection, Microbiological cultures including fungal and mycobacterial studies, MRI or CT of the brain and skull base to identify the underlying trigeminal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Interrupt the self-manipulation that drives the ulcer, using behavioural modification, physical barriers, occlusive dressings and protective devices to break the itch-scratch-pick cycle in the anaesthetic skin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the ulcer for a skin malignancy or infection, or vice versa, without biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trigeminal trophic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trigeminal_trophic_syndrome-matrix",
+      "title": "Trigeminal trophic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by a triad of trigeminal sensory loss, facial paraesthesia (often a crawling or itching dysaesthesia), and a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy of the ulcer edge to exclude malignancy and specific infection, Microbiological cultures including fungal and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Basal cell or squamous cell carcinoma of the nose, Cutaneous infection (including mucormycosis and atypical mycobacteria),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Interrupt the self-manipulation that drives the ulcer, using behavioural modification, physical barriers, occlusive dressings and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the ulcer for a skin malignancy or infection, or vice versa, without biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trigeminal trophic syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trigeminal_trophic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Trigeminal trophic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trigeminal trophic syndrome: numb, itching nasal ala with self-made ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: indurated non-healing ulcer or rapidly progressive necrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy and cultures for malignancy or invasive fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ulcer biopsy; fungal and mycobacterial cultures; MRI of brain and skull base",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy exclude malignancy, infection and vasculitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider carcinoma, mucormycosis, granulomatosis with polyangiitis or pyoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interrupt self-manipulation with barriers and occlusive dressings",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wound care and antimicrobials for secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neuropathic agents such as carbamazepine or gabapentin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biopsy to exclude mimics before attributing the ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the underlying trigeminal lesion where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Defer reconstruction until self-manipulation is controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Chronic and hard to heal; recurrence common unless self-manipulation stops",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trigeminal_trophic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy of ulcer edge",
+          "cells": [
+            {
+              "text": "Excludes malignancy and specific infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal and mycobacterial cultures",
+          "cells": [
+            {
+              "text": "Invasive or atypical infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT of brain and skull base",
+          "cells": [
+            {
+              "text": "Underlying trigeminal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA vasculitis screen",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed trigeminal sensory examination",
+          "cells": [
+            {
+              "text": "Territory of loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of prior procedures, zoster or stroke",
+          "cells": [
+            {
+              "text": "Cause of nerve injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigeminal_trophic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Basal or squamous cell carcinoma of the nose",
+          "cells": [
+            {
+              "text": "Indurated edge; biopsy distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous infection including mucormycosis",
+          "cells": [
+            {
+              "text": "Rapidly progressive necrosis; cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Systemic vasculitic features; ANCA testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigeminal_trophic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural measures, barriers and occlusive dressings",
+          "cells": [
+            {
+              "text": "Interrupt the itch-scratch-pick cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and antimicrobials",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbamazepine, gabapentin, pregabalin or amitriptyline",
+          "cells": [
+            {
+              "text": "Neuropathic dysaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pimozide",
+          "cells": [
+            {
+              "text": "Compulsive picking predominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Exclude malignancy, deep infection and vasculitis first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defer reconstruction",
+          "cells": [
+            {
+              "text": "Until self-manipulation is controlled; innervated flaps when repaired"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

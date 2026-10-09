@@ -1,174 +1,463 @@
 {
- "id": "dira_syndrome",
- "name": "DIRA (deficiency of the IL-1 receptor antagonist)",
- "aliases": [
-  "deficiency of the interleukin-1 receptor antagonist",
-  "IL1RN deficiency",
-  "IL1RN",
-  "neonatal-onset pustulosis with sterile multifocal osteomyelitis"
- ],
- "class": "non_infective",
- "system": "Immunology / Autoinflammatory",
- "specialty": "Clinical Immunology / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A recessively inherited monogenic autoinflammatory disease caused by loss-of-function mutations in IL1RN, which encodes the interleukin-1 receptor antagonist",
-   "Presents in the neonatal period with pustular skin eruption, painful bone swelling, and systemic inflammation, typically without high spiking fever",
-   "The hallmark is sterile multifocal osteomyelitis with periosteal reaction, often affecting the ribs and long bones, alongside widespread pustulosis",
-   "Radiographs may show balloon-like widening of anterior ribs, multifocal osteolytic lesions, and periosteal new bone formation",
-   "Inflammatory markers are markedly elevated but blood and bone cultures are sterile, reflecting an autoinflammatory rather than infective process",
-   "Responds strikingly to interleukin-1 blockade, which replaces the missing antagonist and rapidly controls skin and bone disease",
-   "Untreated disease can be fatal in infancy from systemic inflammatory complications, so early recognition is critical"
+  "id": "dira_syndrome",
+  "name": "DIRA (deficiency of the IL-1 receptor antagonist)",
+  "aliases": [
+    "deficiency of the interleukin-1 receptor antagonist",
+    "IL1RN deficiency",
+    "IL1RN",
+    "neonatal-onset pustulosis with sterile multifocal osteomyelitis"
   ],
-  "pathophysiology": "DIRA arises from biallelic loss-of-function mutations in IL1RN, the gene encoding the naturally occurring interleukin-1 receptor antagonist. Without this antagonist, interleukin-1 alpha and beta signal unopposed through the IL-1 receptor, driving unchecked activation of neutrophils and pro-inflammatory pathways. The resulting excess of IL-1 signalling produces sterile neutrophilic inflammation in skin and bone, manifesting as pustulosis and multifocal osteomyelitis with periosteal reaction. Because the defect lies in a soluble regulatory protein, pharmacological IL-1 blockade effectively substitutes for the missing brake and reverses the disease.",
-  "additionalDifferentials": [
-   "Neonatal sepsis with disseminated infection and osteomyelitis",
-   "Chronic recurrent multifocal osteomyelitis (CRMO)",
-   "DITRA and generalised pustular psoriasis",
-   "Majeed syndrome",
-   "Langerhans cell histiocytosis with bony involvement",
-   "Incontinentia pigmenti and other neonatal pustular dermatoses"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for biallelic IL1RN mutations to confirm the diagnosis",
-   "Acute-phase reactants (C-reactive protein, erythrocyte sedimentation rate) which are markedly raised",
-   "Skeletal survey or targeted radiographs for multifocal osteolytic lesions and periosteal reaction",
-   "Blood and bone cultures to demonstrate sterility and exclude infection",
-   "Skin biopsy showing neutrophilic pustular infiltrate",
-   "Bone biopsy where infection cannot otherwise be excluded"
-  ],
-  "redFlags": [
-   "Overwhelming systemic inflammation in a neonate with respiratory compromise",
-   "Extensive multifocal bone involvement causing pathological fracture or deformity",
-   "Failure to thrive with unremitting inflammation despite antibiotics",
-   "Life-threatening vasculitis or thrombosis complicating severe inflammation"
-  ],
-  "prognosis": "Untreated DIRA carries a high risk of death in infancy from systemic inflammation, but sustained interleukin-1 blockade generally induces durable remission of skin and bone disease with a good long-term outlook.",
-  "pitfalls": [
-   "Misdiagnosing the sterile bone and skin lesions as infective osteomyelitis and pursuing prolonged antibiotics",
-   "Delaying genetic testing and targeted IL-1 blockade while awaiting cultures",
-   "Underestimating disease severity because high spiking fever may be absent",
-   "Attributing the pustular rash to neonatal infection or common dermatoses"
-  ],
-  "references": [
-   "Textbook of Autoinflammation",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Interleukin-1 blockade with anakinra, a recombinant IL-1 receptor antagonist that replaces the missing protein, as the definitive therapy, with longer-acting agents such as canakinumab as alternatives",
-   "Early initiation to control neonatal pustulosis and multifocal sterile osteomyelitis and to prevent death from systemic inflammation",
-   "Supportive care with analgesia for bone pain and skin care for the pustular eruption",
-   "Exclude infection through sterile blood and bone cultures before and during immunomodulation, with ongoing vigilance for infection on biologic therapy",
-   "Monitor inflammatory markers, growth and treatment response, adjusting therapy to maintain remission",
-   "Genetic counselling and family screening given autosomal recessive IL1RN mutations",
-   "Long-term follow-up under clinical immunology or rheumatology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dira_syndrome-pathway",
-   "title": "DIRA (deficiency of the IL-1 receptor antagonist): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A recessively inherited monogenic autoinflammatory disease caused by loss-of-function mutations in IL1RN, which encodes the interleukin-1 receptor antagonist",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Overwhelming systemic inflammation in a neonate with respiratory compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for biallelic IL1RN mutations to confirm the diagnosis, Acute-phase reactants (C-reactive protein, erythrocyte sedimentation rate) which are markedly raised, Skeletal survey or targeted radiographs for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Interleukin-1 blockade with anakinra, a recombinant IL-1 receptor antagonist that replaces the missing protein, as the definitive therapy, with longer-acting agents such as canakinumab as alternatives"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the sterile bone and skin lesions as infective osteomyelitis and pursuing prolonged antibiotics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dira (deficiency of the il-1 receptor antagonist)."
-  }
- ],
- "tables": [
-  {
-   "id": "dira_syndrome-matrix",
-   "title": "DIRA (deficiency of the IL-1 receptor antagonist): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A recessively inherited monogenic autoinflammatory disease caused by loss-of-function mutations in IL1RN, which encodes the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Autoinflammatory",
+  "specialty": "Clinical Immunology / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A recessively inherited monogenic autoinflammatory disease caused by loss-of-function mutations in IL1RN, which encodes the interleukin-1 receptor antagonist",
+      "Presents in the neonatal period with pustular skin eruption, painful bone swelling, and systemic inflammation, typically without high spiking fever",
+      "The hallmark is sterile multifocal osteomyelitis with periosteal reaction, often affecting the ribs and long bones, alongside widespread pustulosis",
+      "Radiographs may show balloon-like widening of anterior ribs, multifocal osteolytic lesions, and periosteal new bone formation",
+      "Inflammatory markers are markedly elevated but blood and bone cultures are sterile, reflecting an autoinflammatory rather than infective process",
+      "Responds strikingly to interleukin-1 blockade, which replaces the missing antagonist and rapidly controls skin and bone disease",
+      "Untreated disease can be fatal in infancy from systemic inflammatory complications, so early recognition is critical"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for biallelic IL1RN mutations to confirm the diagnosis, Acute-phase reactants (C-reactive protein, erythrocyte",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "DIRA arises from biallelic loss-of-function mutations in IL1RN, the gene encoding the naturally occurring interleukin-1 receptor antagonist. Without this antagonist, interleukin-1 alpha and beta signal unopposed through the IL-1 receptor, driving unchecked activation of neutrophils and pro-inflammatory pathways. The resulting excess of IL-1 signalling produces sterile neutrophilic inflammation in skin and bone, manifesting as pustulosis and multifocal osteomyelitis with periosteal reaction. Because the defect lies in a soluble regulatory protein, pharmacological IL-1 blockade effectively substitutes for the missing brake and reverses the disease.",
+    "additionalDifferentials": [
+      "Neonatal sepsis with disseminated infection and osteomyelitis",
+      "Chronic recurrent multifocal osteomyelitis (CRMO)",
+      "DITRA and generalised pustular psoriasis",
+      "Majeed syndrome",
+      "Langerhans cell histiocytosis with bony involvement",
+      "Incontinentia pigmenti and other neonatal pustular dermatoses"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal sepsis with disseminated infection and osteomyelitis, Chronic recurrent multifocal osteomyelitis (CRMO), DITRA and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for biallelic IL1RN mutations to confirm the diagnosis",
+      "Acute-phase reactants (C-reactive protein, erythrocyte sedimentation rate) which are markedly raised",
+      "Skeletal survey or targeted radiographs for multifocal osteolytic lesions and periosteal reaction",
+      "Blood and bone cultures to demonstrate sterility and exclude infection",
+      "Skin biopsy showing neutrophilic pustular infiltrate",
+      "Bone biopsy where infection cannot otherwise be excluded"
     ],
-    [
-     "Management Strategy",
-     "Interleukin-1 blockade with anakinra, a recombinant IL-1 receptor antagonist that replaces the missing protein, as the definitive",
-     "Core treatment modality"
+    "redFlags": [
+      "Overwhelming systemic inflammation in a neonate with respiratory compromise",
+      "Extensive multifocal bone involvement causing pathological fracture or deformity",
+      "Failure to thrive with unremitting inflammation despite antibiotics",
+      "Life-threatening vasculitis or thrombosis complicating severe inflammation"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the sterile bone and skin lesions as infective osteomyelitis and pursuing prolonged antibiotics",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated DIRA carries a high risk of death in infancy from systemic inflammation, but sustained interleukin-1 blockade generally induces durable remission of skin and bone disease with a good long-term outlook.",
+    "pitfalls": [
+      "Misdiagnosing the sterile bone and skin lesions as infective osteomyelitis and pursuing prolonged antibiotics",
+      "Delaying genetic testing and targeted IL-1 blockade while awaiting cultures",
+      "Underestimating disease severity because high spiking fever may be absent",
+      "Attributing the pustular rash to neonatal infection or common dermatoses"
+    ],
+    "references": [
+      "Textbook of Autoinflammation",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Interleukin-1 blockade with anakinra, a recombinant IL-1 receptor antagonist that replaces the missing protein, as the definitive therapy, with longer-acting agents such as canakinumab as alternatives",
+      "Early initiation to control neonatal pustulosis and multifocal sterile osteomyelitis and to prevent death from systemic inflammation",
+      "Supportive care with analgesia for bone pain and skin care for the pustular eruption",
+      "Exclude infection through sterile blood and bone cultures before and during immunomodulation, with ongoing vigilance for infection on biologic therapy",
+      "Monitor inflammatory markers, growth and treatment response, adjusting therapy to maintain remission",
+      "Genetic counselling and family screening given autosomal recessive IL1RN mutations",
+      "Long-term follow-up under clinical immunology or rheumatology"
     ]
-   ],
-   "caption": "Overview comparison matrix for dira (deficiency of the il-1 receptor antagonist)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dira-syndrome-real-image",
-   "title": "DIRA (deficiency of the IL-1 receptor antagonist): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dira_syndrome-pathway",
+      "title": "DIRA (deficiency of the IL-1 receptor antagonist): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A recessively inherited monogenic autoinflammatory disease caused by loss-of-function mutations in IL1RN, which encodes the interleukin-1 receptor antagonist",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Overwhelming systemic inflammation in a neonate with respiratory compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for biallelic IL1RN mutations to confirm the diagnosis, Acute-phase reactants (C-reactive protein, erythrocyte sedimentation rate) which are markedly raised, Skeletal survey or targeted radiographs for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Interleukin-1 blockade with anakinra, a recombinant IL-1 receptor antagonist that replaces the missing protein, as the definitive therapy, with longer-acting agents such as canakinumab as alternatives"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the sterile bone and skin lesions as infective osteomyelitis and pursuing prolonged antibiotics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dira (deficiency of the il-1 receptor antagonist)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dira_syndrome-matrix",
+      "title": "DIRA (deficiency of the IL-1 receptor antagonist): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A recessively inherited monogenic autoinflammatory disease caused by loss-of-function mutations in IL1RN, which encodes the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for biallelic IL1RN mutations to confirm the diagnosis, Acute-phase reactants (C-reactive protein, erythrocyte",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal sepsis with disseminated infection and osteomyelitis, Chronic recurrent multifocal osteomyelitis (CRMO), DITRA and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Interleukin-1 blockade with anakinra, a recombinant IL-1 receptor antagonist that replaces the missing protein, as the definitive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the sterile bone and skin lesions as infective osteomyelitis and pursuing prolonged antibiotics",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dira (deficiency of the il-1 receptor antagonist)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dira_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for biallelic IL1RN mutations",
+          "cells": [
+            {
+              "text": "Biallelic IL1RN mutations confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants (CRP and ESR)",
+          "cells": [
+            {
+              "text": "Markedly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey or targeted radiographs",
+          "cells": [
+            {
+              "text": "Multifocal osteolytic lesions and periosteal reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and bone cultures",
+          "cells": [
+            {
+              "text": "Sterility, which excludes infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Neutrophilic pustular infiltrate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dira_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal sepsis with osteomyelitis",
+          "cells": [
+            {
+              "text": "Sterile cultures separate the sterile lesions from infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal pustular dermatoses",
+          "cells": [
+            {
+              "text": "Pustular rash wrongly attributed to infection or common dermatoses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dira_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anakinra",
+          "cells": [
+            {
+              "text": "Recombinant IL-1 receptor antagonist; definitive therapy that replaces the missing protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Canakinumab",
+          "cells": [
+            {
+              "text": "Longer-acting alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early initiation",
+          "cells": [
+            {
+              "text": "Controls pustulosis and sterile osteomyelitis; prevents death from systemic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia for bone pain and skin care for the pustular eruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection exclusion",
+          "cells": [
+            {
+              "text": "Sterile blood and bone cultures before and during immunomodulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Inflammatory markers, growth and treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and follow-up",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening; clinical immunology or rheumatology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dira_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of DIRA (deficiency of the IL-1 receptor antagonist)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DIRA: neonatal pustular rash with multifocal sterile bone involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal respiratory compromise, pathological fracture, vasculitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review; start IL-1 blockade with anakinra",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IL1RN testing; CRP and ESR; skeletal survey; sterile cultures; skin biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic IL1RN mutations found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neonatal sepsis, CRMO, DITRA or Majeed syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anakinra, a recombinant IL-1 receptor antagonist, as definitive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Canakinumab as a longer-acting alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early treatment to control pustulosis and sterile osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude infection with sterile cultures before and during immunomodulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening for autosomal recessive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated carries high infant death risk; sustained IL-1 blockade gives durable remission",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

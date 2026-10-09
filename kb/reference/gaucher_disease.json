@@ -1,172 +1,557 @@
 {
- "id": "gaucher_disease",
- "name": "Gaucher disease",
- "aliases": [
-  "glucocerebrosidase deficiency",
-  "acid beta-glucosidase deficiency",
-  "glucosylceramide lipidosis"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common lysosomal storage disorder, caused by deficient activity of the enzyme glucocerebrosidase (acid beta-glucosidase) and inherited in an autosomal recessive manner",
-   "Undegraded glucocerebroside accumulates within macrophages, producing the characteristic lipid-laden 'Gaucher cells' seen in marrow and other tissues",
-   "Type 1 is non-neuronopathic and dominates in adults and older children, with hepatosplenomegaly, cytopenias, and bone involvement but sparing of the central nervous system",
-   "Type 2 is the acute neuronopathic form of infancy with rapid neurological deterioration and a poor outlook, while type 3 shows slower, chronic neurological disease",
-   "Bone manifestations include marrow infiltration, painful crises, avascular necrosis, and the classic Erlenmeyer-flask deformity of the distal femur",
-   "Splenomegaly with thrombocytopenia and anaemia is a frequent presenting picture and can mimic a haematological malignancy",
-   "Enzyme replacement therapy is effective for the visceral and haematological features of type 1, and oral substrate reduction therapy is an alternative in selected patients",
-   "Disease-modifying therapy does not correct neurological disease because infused enzyme does not cross the blood-brain barrier",
-   "Increased susceptibility to Parkinsonism is recognised in patients and carriers with glucocerebrosidase gene variants"
+  "id": "gaucher_disease",
+  "name": "Gaucher disease",
+  "aliases": [
+    "glucocerebrosidase deficiency",
+    "acid beta-glucosidase deficiency",
+    "glucosylceramide lipidosis"
   ],
-  "pathophysiology": "Gaucher disease results from biallelic pathogenic variants in the GBA gene encoding lysosomal glucocerebrosidase (acid beta-glucosidase). Reduced enzyme activity impairs breakdown of glucocerebroside (glucosylceramide), which accumulates predominantly within the lysosomes of macrophages of the reticuloendothelial system. These engorged macrophages (Gaucher cells) infiltrate the spleen, liver, bone marrow, and, in neuronopathic forms, the nervous system, driving organomegaly, marrow replacement with cytopenias, and skeletal disease. The pattern and severity of residual enzyme activity, influenced by genotype, largely determine whether the phenotype is non-neuronopathic (type 1) or neuronopathic (types 2 and 3).",
-  "additionalDifferentials": [
-   "Niemann-Pick disease",
-   "Other lysosomal storage disorders with hepatosplenomegaly",
-   "Haematological malignancy such as leukaemia or lymphoma",
-   "Myelofibrosis or other causes of splenomegaly with cytopenia",
-   "Chronic liver disease with portal hypertension"
-  ],
-  "additionalInvestigations": [
-   "Assay of glucocerebrosidase enzyme activity in leukocytes or cultured fibroblasts",
-   "GBA molecular genetic testing to confirm the diagnosis and guide counselling",
-   "Full blood count to detect anaemia and thrombocytopenia",
-   "Plasma biomarkers such as chitotriosidase or glucosylsphingosine (lyso-Gb1) to support diagnosis and monitor disease",
-   "Skeletal imaging including MRI to assess marrow infiltration and bone complications"
-  ],
-  "redFlags": [
-   "Rapid neurological regression in infancy suggesting acute neuronopathic (type 2) disease",
-   "Severe thrombocytopenia with bleeding or profound anaemia",
-   "Acute bone pain crisis or evidence of avascular necrosis",
-   "Massive splenomegaly with risk of rupture or hypersplenism"
-  ],
-  "prognosis": "Type 1 disease generally has a good outlook, especially with enzyme replacement or substrate reduction therapy, which reverses much of the visceral and haematological burden. Type 2 carries a poor prognosis with early death, whereas type 3 has an intermediate course with progressive neurological involvement despite treatment of systemic features.",
-  "pitfalls": [
-   "Misdiagnosing splenomegaly with cytopenia as a primary haematological malignancy and pursuing unnecessary invasive workup",
-   "Assuming enzyme replacement therapy will halt neurological progression in neuronopathic forms",
-   "Overlooking bone disease, which can progress even when visceral parameters improve",
-   "Failing to offer genetic counselling and carrier testing to at-risk relatives"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Enzyme replacement therapy with recombinant glucocerebrosidase (imiglucerase, velaglucerase alfa or taliglucerase alfa) to reverse visceral and haematological disease in type 1 and type 3",
-   "Oral substrate reduction therapy (eliglustat or miglustat) as an alternative for suitable non-neuronopathic patients",
-   "Supportive care for bone disease with analgesia for painful crises and bisphosphonates for osteopenia, plus transfusion for severe cytopenias",
-   "For neuronopathic forms, symptomatic and palliative care since enzyme therapy does not cross the blood-brain barrier, including antiseizure treatment where needed",
-   "Periodic monitoring of disease activity with biomarkers such as glucosylsphingosine and chitotriosidase, full blood count and skeletal MRI",
-   "Avoid unnecessary splenectomy, which can worsen bone and hepatic involvement",
-   "Genetic counselling for autosomal recessive inheritance and family screening, coordinated through a specialist metabolic service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gaucher_disease-pathway",
-   "title": "Gaucher disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common lysosomal storage disorder, caused by deficient activity of the enzyme glucocerebrosidase (acid beta-glucosidase) and inherited in an autosomal recessive manner",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid neurological regression in infancy suggesting acute neuronopathic (type 2) disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assay of glucocerebrosidase enzyme activity in leukocytes or cultured fibroblasts, GBA molecular genetic testing to confirm the diagnosis and guide counselling, Full blood count to detect anaemia and thrombocytopenia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Enzyme replacement therapy with recombinant glucocerebrosidase (imiglucerase, velaglucerase alfa or taliglucerase alfa) to reverse visceral and haematological disease in type 1 and type 3"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing splenomegaly with cytopenia as a primary haematological malignancy and pursuing unnecessary invasive workup"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gaucher disease."
-  }
- ],
- "tables": [
-  {
-   "id": "gaucher_disease-matrix",
-   "title": "Gaucher disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common lysosomal storage disorder, caused by deficient activity of the enzyme glucocerebrosidase (acid beta-glucosidase)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common lysosomal storage disorder, caused by deficient activity of the enzyme glucocerebrosidase (acid beta-glucosidase) and inherited in an autosomal recessive manner",
+      "Undegraded glucocerebroside accumulates within macrophages, producing the characteristic lipid-laden 'Gaucher cells' seen in marrow and other tissues",
+      "Type 1 is non-neuronopathic and dominates in adults and older children, with hepatosplenomegaly, cytopenias, and bone involvement but sparing of the central nervous system",
+      "Type 2 is the acute neuronopathic form of infancy with rapid neurological deterioration and a poor outlook, while type 3 shows slower, chronic neurological disease",
+      "Bone manifestations include marrow infiltration, painful crises, avascular necrosis, and the classic Erlenmeyer-flask deformity of the distal femur",
+      "Splenomegaly with thrombocytopenia and anaemia is a frequent presenting picture and can mimic a haematological malignancy",
+      "Enzyme replacement therapy is effective for the visceral and haematological features of type 1, and oral substrate reduction therapy is an alternative in selected patients",
+      "Disease-modifying therapy does not correct neurological disease because infused enzyme does not cross the blood-brain barrier",
+      "Increased susceptibility to Parkinsonism is recognised in patients and carriers with glucocerebrosidase gene variants"
     ],
-    [
-     "Key Investigations",
-     "Assay of glucocerebrosidase enzyme activity in leukocytes or cultured fibroblasts, GBA molecular genetic testing to confirm the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gaucher disease results from biallelic pathogenic variants in the GBA gene encoding lysosomal glucocerebrosidase (acid beta-glucosidase). Reduced enzyme activity impairs breakdown of glucocerebroside (glucosylceramide), which accumulates predominantly within the lysosomes of macrophages of the reticuloendothelial system. These engorged macrophages (Gaucher cells) infiltrate the spleen, liver, bone marrow, and, in neuronopathic forms, the nervous system, driving organomegaly, marrow replacement with cytopenias, and skeletal disease. The pattern and severity of residual enzyme activity, influenced by genotype, largely determine whether the phenotype is non-neuronopathic (type 1) or neuronopathic (types 2 and 3).",
+    "additionalDifferentials": [
+      "Niemann-Pick disease",
+      "Other lysosomal storage disorders with hepatosplenomegaly",
+      "Haematological malignancy such as leukaemia or lymphoma",
+      "Myelofibrosis or other causes of splenomegaly with cytopenia",
+      "Chronic liver disease with portal hypertension"
     ],
-    [
-     "Primary Differentials",
-     "Niemann-Pick disease, Other lysosomal storage disorders with hepatosplenomegaly, Haematological malignancy such as leukaemia or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assay of glucocerebrosidase enzyme activity in leukocytes or cultured fibroblasts",
+      "GBA molecular genetic testing to confirm the diagnosis and guide counselling",
+      "Full blood count to detect anaemia and thrombocytopenia",
+      "Plasma biomarkers such as chitotriosidase or glucosylsphingosine (lyso-Gb1) to support diagnosis and monitor disease",
+      "Skeletal imaging including MRI to assess marrow infiltration and bone complications"
     ],
-    [
-     "Management Strategy",
-     "Enzyme replacement therapy with recombinant glucocerebrosidase (imiglucerase, velaglucerase alfa or taliglucerase alfa) to",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid neurological regression in infancy suggesting acute neuronopathic (type 2) disease",
+      "Severe thrombocytopenia with bleeding or profound anaemia",
+      "Acute bone pain crisis or evidence of avascular necrosis",
+      "Massive splenomegaly with risk of rupture or hypersplenism"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing splenomegaly with cytopenia as a primary haematological malignancy and pursuing unnecessary invasive workup",
-     "Prevent diagnostic or management error"
+    "prognosis": "Type 1 disease generally has a good outlook, especially with enzyme replacement or substrate reduction therapy, which reverses much of the visceral and haematological burden. Type 2 carries a poor prognosis with early death, whereas type 3 has an intermediate course with progressive neurological involvement despite treatment of systemic features.",
+    "pitfalls": [
+      "Misdiagnosing splenomegaly with cytopenia as a primary haematological malignancy and pursuing unnecessary invasive workup",
+      "Assuming enzyme replacement therapy will halt neurological progression in neuronopathic forms",
+      "Overlooking bone disease, which can progress even when visceral parameters improve",
+      "Failing to offer genetic counselling and carrier testing to at-risk relatives"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Enzyme replacement therapy with recombinant glucocerebrosidase (imiglucerase, velaglucerase alfa or taliglucerase alfa) to reverse visceral and haematological disease in type 1 and type 3",
+      "Oral substrate reduction therapy (eliglustat or miglustat) as an alternative for suitable non-neuronopathic patients",
+      "Supportive care for bone disease with analgesia for painful crises and bisphosphonates for osteopenia, plus transfusion for severe cytopenias",
+      "For neuronopathic forms, symptomatic and palliative care since enzyme therapy does not cross the blood-brain barrier, including antiseizure treatment where needed",
+      "Periodic monitoring of disease activity with biomarkers such as glucosylsphingosine and chitotriosidase, full blood count and skeletal MRI",
+      "Avoid unnecessary splenectomy, which can worsen bone and hepatic involvement",
+      "Genetic counselling for autosomal recessive inheritance and family screening, coordinated through a specialist metabolic service"
     ]
-   ],
-   "caption": "Overview comparison matrix for gaucher disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gaucher-disease-real-image",
-   "title": "Gaucher disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "gaucher_disease-pathway",
+      "title": "Gaucher disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common lysosomal storage disorder, caused by deficient activity of the enzyme glucocerebrosidase (acid beta-glucosidase) and inherited in an autosomal recessive manner",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid neurological regression in infancy suggesting acute neuronopathic (type 2) disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assay of glucocerebrosidase enzyme activity in leukocytes or cultured fibroblasts, GBA molecular genetic testing to confirm the diagnosis and guide counselling, Full blood count to detect anaemia and thrombocytopenia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Enzyme replacement therapy with recombinant glucocerebrosidase (imiglucerase, velaglucerase alfa or taliglucerase alfa) to reverse visceral and haematological disease in type 1 and type 3"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing splenomegaly with cytopenia as a primary haematological malignancy and pursuing unnecessary invasive workup"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gaucher disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gaucher_disease-matrix",
+      "title": "Gaucher disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common lysosomal storage disorder, caused by deficient activity of the enzyme glucocerebrosidase (acid beta-glucosidase)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assay of glucocerebrosidase enzyme activity in leukocytes or cultured fibroblasts, GBA molecular genetic testing to confirm the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Niemann-Pick disease, Other lysosomal storage disorders with hepatosplenomegaly, Haematological malignancy such as leukaemia or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Enzyme replacement therapy with recombinant glucocerebrosidase (imiglucerase, velaglucerase alfa or taliglucerase alfa) to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing splenomegaly with cytopenia as a primary haematological malignancy and pursuing unnecessary invasive workup",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gaucher disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 59-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gaucher_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocerebrosidase activity in leukocytes or fibroblasts",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GBA molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and guides counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma biomarkers chitotriosidase or glucosylsphingosine",
+          "cells": [
+            {
+              "text": "Supports diagnosis and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal imaging including MRI",
+          "cells": [
+            {
+              "text": "Marrow infiltration and bone complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gaucher_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myelofibrosis or other splenomegaly with cytopenia",
+          "cells": [
+            {
+              "text": "Can be mistaken for a haematological malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological malignancy such as leukaemia or lymphoma",
+          "cells": [
+            {
+              "text": "Splenomegaly with cytopenia can be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gaucher_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement therapy",
+          "cells": [
+            {
+              "text": "Recombinant glucocerebrosidase: imiglucerase, velaglucerase alfa or taliglucerase alfa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral substrate reduction therapy",
+          "cells": [
+            {
+              "text": "Eliglustat or miglustat for suitable non-neuronopathic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive bone care",
+          "cells": [
+            {
+              "text": "Analgesia for painful crises, bisphosphonates for osteopenia, transfusion for severe anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuronopathic forms",
+          "cells": [
+            {
+              "text": "Symptomatic and palliative care, since enzyme therapy does not cross the blood-brain barrier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic monitoring",
+          "cells": [
+            {
+              "text": "Biomarkers, full blood count and imaging of disease activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary splenectomy",
+          "cells": [
+            {
+              "text": "Can worsen bone and hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening within a specialist metabolic service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gaucher_disease-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diseases associated with massive splenomegaly",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Association"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic myeloid leukemia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphomas",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hairy cell leukemia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myelofibrosis with myeloid metaplasia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Polycythemia vera",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gaucher's disease",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic lymphocytic leukemia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autoimmune hemolytic anemia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diffuse splenic hemangiomatosis",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Massive splenomegaly means the spleen extends more than 8 cm below the left costal margin and/or weighs more than 1000 g."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gaucher_disease-dx-mgmt",
+      "title": "Diagnosis and management of Gaucher disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gaucher disease: hepatosplenomegaly with cytopenia and bone pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological regression, severe thrombocytopenia, bone crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for neurological regression or severe bleeding from thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glucocerebrosidase assay, GBA gene testing, FBC, chitotriosidase and MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does low glucocerebrosidase activity confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Niemann-Pick, myelofibrosis, haematological malignancy or liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Enzyme replacement therapy with recombinant glucocerebrosidase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral substrate reduction with eliglustat or miglustat if suitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bone care: analgesia, bisphosphonates for osteopenia, transfusion as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid unnecessary splenectomy, which can worsen bone and liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type 1 generally has a good outlook with enzyme replacement or substrate reduction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,463 @@
 {
- "id": "myotonia_congenita",
- "name": "Myotonia congenita",
- "aliases": [
-  "CLCN1",
-  "Thomsen disease",
-  "Becker myotonia",
-  "chloride channelopathy of muscle",
-  "autosomal dominant myotonia congenita",
-  "autosomal recessive generalised myotonia"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by painless muscle stiffness that is worst on initiating movement after rest and eases with repeated contraction, the classic warm-up phenomenon",
-   "Caused by mutations in the CLCN1 gene encoding the skeletal-muscle chloride channel, with a dominant form (Thomsen disease) and a generally more severe recessive form (Becker myotonia)",
-   "Becker myotonia often shows transient weakness at the start of forceful exercise that then resolves, and tends to have a later onset and more marked muscle hypertrophy",
-   "Affected individuals frequently have a well-developed, athletic muscular appearance despite the functional handicap of stiffness",
-   "Grip myotonia and percussion myotonia can be demonstrated at the bedside, and eyelid myotonia may follow sustained forced closure",
-   "Cold can accentuate stiffness but, unlike paramyotonia congenita, myotonia congenita characteristically improves rather than worsens with continued activity",
-   "Symptomatic relief is achieved with sodium-channel-blocking antimyotonic agents when stiffness is disabling"
+  "id": "myotonia_congenita",
+  "name": "Myotonia congenita",
+  "aliases": [
+    "CLCN1",
+    "Thomsen disease",
+    "Becker myotonia",
+    "chloride channelopathy of muscle",
+    "autosomal dominant myotonia congenita",
+    "autosomal recessive generalised myotonia"
   ],
-  "pathophysiology": "Myotonia congenita results from loss-of-function mutations in CLCN1, the gene encoding the skeletal-muscle voltage-gated chloride channel ClC-1. This channel carries most of the resting membrane conductance and normally stabilises the sarcolemma after an action potential. When chloride conductance is reduced, potassium that accumulates in the transverse tubules during activity depolarises the membrane more readily, producing runs of repetitive after-discharges experienced as delayed muscle relaxation, or myotonia. The autosomal dominant form reflects a dominant-negative effect on the dimeric channel, whereas the recessive form arises when both alleles are severely impaired, and the transient warm-up improvement reflects redistribution of ions with repeated activity.",
-  "additionalDifferentials": [
-   "Paramyotonia congenita",
-   "Myotonic dystrophy types 1 and 2",
-   "Sodium-channel (potassium-aggravated) myotonias",
-   "Schwartz-Jampel syndrome",
-   "Brody myopathy presenting with exercise-induced stiffness",
-   "Rippling muscle disease and other non-dystrophic causes of stiffness"
-  ],
-  "additionalInvestigations": [
-   "Electromyography demonstrating myotonic discharges with their characteristic waxing and waning pattern",
-   "Serum creatine kinase, which may be mildly elevated",
-   "Short exercise electromyography protocol, with and without cooling, to distinguish it from paramyotonia congenita",
-   "Targeted CLCN1 genetic testing",
-   "Assessment to exclude myotonic dystrophy, including examination for multisystem features",
-   "Muscle biopsy only where the diagnosis remains unclear"
-  ],
-  "redFlags": [
-   "Cardiac conduction disturbance or systemic features suggesting myotonic dystrophy rather than a pure channelopathy",
-   "Progressive fixed weakness, which is not expected and points to an alternative diagnosis",
-   "Severe stiffness compromising airway, swallowing or safe mobility",
-   "Adverse response to depolarising neuromuscular blockade during anaesthesia"
-  ],
-  "prognosis": "Myotonia congenita is a non-progressive, non-dystrophic disorder compatible with a normal lifespan, and although stiffness can be functionally limiting it often stabilises or improves in adulthood and usually responds to antimyotonic therapy.",
-  "pitfalls": [
-   "Mistaking it for myotonic dystrophy and missing the systemic surveillance the latter requires, or vice versa",
-   "Confusing the warm-up phenomenon of myotonia congenita with the paradoxical cold-worsened myotonia of paramyotonia congenita",
-   "Overlooking the transient exercise-induced weakness of Becker myotonia and labelling it a fixed myopathy",
-   "Not warning about depolarising muscle relaxants and other anaesthetic triggers of severe myotonia"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: Myotonia Congenita"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relieve disabling stiffness with antimyotonic sodium-channel-blocking agents such as mexiletine, with lamotrigine or carbamazepine as alternatives",
-   "Advise on the warm-up phenomenon and gradual initiation of activity to reduce stiffness",
-   "Advise avoidance of cold exposure, which can accentuate the stiffness",
-   "Take anaesthetic precautions, avoiding depolarising muscle relaxants such as suxamethonium that provoke myotonia",
-   "Confirm the diagnosis with CLCN1 genetic testing and distinguish the dominant Thomsen from the recessive Becker form",
-   "Offer genetic counselling appropriate to the inheritance pattern",
-   "Reassure regarding the non-progressive course and normal lifespan"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myotonia_congenita-pathway",
-   "title": "Myotonia congenita: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by painless muscle stiffness that is worst on initiating movement after rest and eases with repeated contraction, the classic warm-up phenomenon",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac conduction disturbance or systemic features suggesting myotonic dystrophy rather than a pure channelopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electromyography demonstrating myotonic discharges with their characteristic waxing and waning pattern, Serum creatine kinase, which may be mildly elevated, Short exercise electromyography protocol, with and without"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve disabling stiffness with antimyotonic sodium-channel-blocking agents such as mexiletine, with lamotrigine or carbamazepine as alternatives"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for myotonic dystrophy and missing the systemic surveillance the latter requires, or vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myotonia congenita."
-  }
- ],
- "tables": [
-  {
-   "id": "myotonia_congenita-matrix",
-   "title": "Myotonia congenita: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by painless muscle stiffness that is worst on initiating movement after rest and eases with repeated contraction,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by painless muscle stiffness that is worst on initiating movement after rest and eases with repeated contraction, the classic warm-up phenomenon",
+      "Caused by mutations in the CLCN1 gene encoding the skeletal-muscle chloride channel, with a dominant form (Thomsen disease) and a generally more severe recessive form (Becker myotonia)",
+      "Becker myotonia often shows transient weakness at the start of forceful exercise that then resolves, and tends to have a later onset and more marked muscle hypertrophy",
+      "Affected individuals frequently have a well-developed, athletic muscular appearance despite the functional handicap of stiffness",
+      "Grip myotonia and percussion myotonia can be demonstrated at the bedside, and eyelid myotonia may follow sustained forced closure",
+      "Cold can accentuate stiffness but, unlike paramyotonia congenita, myotonia congenita characteristically improves rather than worsens with continued activity",
+      "Symptomatic relief is achieved with sodium-channel-blocking antimyotonic agents when stiffness is disabling"
     ],
-    [
-     "Key Investigations",
-     "Electromyography demonstrating myotonic discharges with their characteristic waxing and waning pattern, Serum creatine kinase,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Myotonia congenita results from loss-of-function mutations in CLCN1, the gene encoding the skeletal-muscle voltage-gated chloride channel ClC-1. This channel carries most of the resting membrane conductance and normally stabilises the sarcolemma after an action potential. When chloride conductance is reduced, potassium that accumulates in the transverse tubules during activity depolarises the membrane more readily, producing runs of repetitive after-discharges experienced as delayed muscle relaxation, or myotonia. The autosomal dominant form reflects a dominant-negative effect on the dimeric channel, whereas the recessive form arises when both alleles are severely impaired, and the transient warm-up improvement reflects redistribution of ions with repeated activity.",
+    "additionalDifferentials": [
+      "Paramyotonia congenita",
+      "Myotonic dystrophy types 1 and 2",
+      "Sodium-channel (potassium-aggravated) myotonias",
+      "Schwartz-Jampel syndrome",
+      "Brody myopathy presenting with exercise-induced stiffness",
+      "Rippling muscle disease and other non-dystrophic causes of stiffness"
     ],
-    [
-     "Primary Differentials",
-     "Paramyotonia congenita, Myotonic dystrophy types 1 and 2, Sodium-channel (potassium-aggravated) myotonias",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electromyography demonstrating myotonic discharges with their characteristic waxing and waning pattern",
+      "Serum creatine kinase, which may be mildly elevated",
+      "Short exercise electromyography protocol, with and without cooling, to distinguish it from paramyotonia congenita",
+      "Targeted CLCN1 genetic testing",
+      "Assessment to exclude myotonic dystrophy, including examination for multisystem features",
+      "Muscle biopsy only where the diagnosis remains unclear"
     ],
-    [
-     "Management Strategy",
-     "Relieve disabling stiffness with antimyotonic sodium-channel-blocking agents such as mexiletine, with lamotrigine or",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac conduction disturbance or systemic features suggesting myotonic dystrophy rather than a pure channelopathy",
+      "Progressive fixed weakness, which is not expected and points to an alternative diagnosis",
+      "Severe stiffness compromising airway, swallowing or safe mobility",
+      "Adverse response to depolarising neuromuscular blockade during anaesthesia"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for myotonic dystrophy and missing the systemic surveillance the latter requires, or vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "Myotonia congenita is a non-progressive, non-dystrophic disorder compatible with a normal lifespan, and although stiffness can be functionally limiting it often stabilises or improves in adulthood and usually responds to antimyotonic therapy.",
+    "pitfalls": [
+      "Mistaking it for myotonic dystrophy and missing the systemic surveillance the latter requires, or vice versa",
+      "Confusing the warm-up phenomenon of myotonia congenita with the paradoxical cold-worsened myotonia of paramyotonia congenita",
+      "Overlooking the transient exercise-induced weakness of Becker myotonia and labelling it a fixed myopathy",
+      "Not warning about depolarising muscle relaxants and other anaesthetic triggers of severe myotonia"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: Myotonia Congenita"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relieve disabling stiffness with antimyotonic sodium-channel-blocking agents such as mexiletine, with lamotrigine or carbamazepine as alternatives",
+      "Advise on the warm-up phenomenon and gradual initiation of activity to reduce stiffness",
+      "Advise avoidance of cold exposure, which can accentuate the stiffness",
+      "Take anaesthetic precautions, avoiding depolarising muscle relaxants such as suxamethonium that provoke myotonia",
+      "Confirm the diagnosis with CLCN1 genetic testing and distinguish the dominant Thomsen from the recessive Becker form",
+      "Offer genetic counselling appropriate to the inheritance pattern",
+      "Reassure regarding the non-progressive course and normal lifespan"
     ]
-   ],
-   "caption": "Overview comparison matrix for myotonia congenita."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myotonia-congenita-real-image",
-   "title": "Myotonia congenita: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "myotonia_congenita-pathway",
+      "title": "Myotonia congenita: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by painless muscle stiffness that is worst on initiating movement after rest and eases with repeated contraction, the classic warm-up phenomenon",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac conduction disturbance or systemic features suggesting myotonic dystrophy rather than a pure channelopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electromyography demonstrating myotonic discharges with their characteristic waxing and waning pattern, Serum creatine kinase, which may be mildly elevated, Short exercise electromyography protocol, with and without"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve disabling stiffness with antimyotonic sodium-channel-blocking agents such as mexiletine, with lamotrigine or carbamazepine as alternatives"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for myotonic dystrophy and missing the systemic surveillance the latter requires, or vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myotonia congenita."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myotonia_congenita-matrix",
+      "title": "Myotonia congenita: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by painless muscle stiffness that is worst on initiating movement after rest and eases with repeated contraction,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electromyography demonstrating myotonic discharges with their characteristic waxing and waning pattern, Serum creatine kinase,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Paramyotonia congenita, Myotonic dystrophy types 1 and 2, Sodium-channel (potassium-aggravated) myotonias",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve disabling stiffness with antimyotonic sodium-channel-blocking agents such as mexiletine, with lamotrigine or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for myotonic dystrophy and missing the systemic surveillance the latter requires, or vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myotonia congenita."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myotonia_congenita-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myotonic discharges with a waxing and waning pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "May be mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short exercise EMG with and without cooling",
+          "cells": [
+            {
+              "text": "Distinguishes it from paramyotonia congenita"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CLCN1 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for multisystem features",
+          "cells": [
+            {
+              "text": "Excludes myotonic dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Only where the diagnosis remains unclear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myotonia_congenita-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Paramyotonia congenita",
+          "cells": [
+            {
+              "text": "Cold worsens stiffness there, whereas myotonia congenita improves with continued activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myotonic dystrophy types 1 and 2",
+          "cells": [
+            {
+              "text": "Multisystem features and cardiac conduction disease; not a pure channelopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myotonia_congenita-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antimyotonic sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Mexiletine for disabling stiffness; lamotrigine or carbamazepine as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warm-up and gradual activity",
+          "cells": [
+            {
+              "text": "Advise on the warm-up phenomenon and gradual initiation of activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid cold",
+          "cells": [
+            {
+              "text": "Cold can accentuate stiffness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaesthetic precautions",
+          "cells": [
+            {
+              "text": "Avoid depolarising relaxants such as suxamethonium, which provoke myotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation",
+          "cells": [
+            {
+              "text": "CLCN1 testing to distinguish dominant Thomsen from recessive Becker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Appropriate to the inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Non-progressive course with normal lifespan"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myotonia_congenita-dx-mgmt",
+      "title": "Diagnosis and management of Myotonia congenita",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless stiffness on starting movement after rest, easing with repeated contraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (conduction disease, progressive fixed weakness, airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for myotonic dystrophy; protect the airway; avoid depolarising relaxants",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EMG with myotonic discharges, short exercise EMG with cooling, CLCN1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Myotonic discharges and CLCN1 variant confirmed, with myotonic dystrophy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider myotonic dystrophy or paramyotonia; repeat cooling EMG and genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antimyotonic sodium-channel blockers such as mexiletine for disabling stiffness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Warm-up and gradual initiation of activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid cold exposure, which accentuates stiffness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid depolarising muscle relaxants such as suxamethonium at anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Non-progressive with normal lifespan; stiffness often stabilises or improves",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

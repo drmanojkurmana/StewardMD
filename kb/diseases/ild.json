@@ -245,25 +245,782 @@
       "caption": "Diagnostic and clinical overview matrix for interstitial lung disease."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "ild-real-image",
-      "title": "Interstitial lung disease: Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Idiopathic Pulmonary Fibrosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/interstitial-lung-diseases/idiopathic-pulmonary-fibrosis-ipf"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Overview of Interstitial Lung Disease",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/interstitial-lung-diseases/overview-of-interstitial-lung-disease"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 261-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ild-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in the work-up of interstitial lung disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Chest auscultation",
+          "cells": [
+            {
+              "text": "Fine end-inspiratory bibasal crackles (Velcro crackles)"
+            },
+            {
+              "text": "{{hy:Characteristic of fibrotic ILD such as IPF; may be an early sign}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "Age at presentation",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "IPF mostly over 60, rare under 50",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "Sarcoidosis, CTD-ILD, LAM and PLCH usually present at 20 to 40"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "Digital clubbing",
+          "cells": [
+            {
+              "text": "Present in about half of IPF patients"
+            },
+            {
+              "text": "Also a sign of advanced disease with cyanosis and cor pulmonale"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HRCT: subpleural basal reticulation, honeycombing, traction bronchiectasis",
+          "cells": [
+            {
+              "text": "Usual interstitial pneumonia (UIP) pattern"
+            },
+            {
+              "text": "{{hy:Virtually diagnostic of IPF when the clinical picture fits; biopsy can be spared}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HRCT: ground-glass, nodules, mosaic attenuation or air trapping",
+          "cells": [
+            {
+              "text": "Atypical for UIP"
+            },
+            {
+              "text": "Suggests an alternative diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HRCT: apical-predominant interstitial thickening",
+          "cells": [
+            {
+              "text": "Favours NSIP"
+            },
+            {
+              "text": "Basal subpleural predominance favours IPF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Restriction: reduced TLC with symmetric FEV1/FVC fall; reduced DLCO"
+            },
+            {
+              "text": "Low DLCO may precede volume loss and is present in nearly every IPF patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial FVC",
+          "cells": [
+            {
+              "text": "Declining FVC on repeat testing"
+            },
+            {
+              "text": "Tracks progression and predicts higher mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody serology",
+          "cells": [
+            {
+              "text": "Anti-CCP, anti-synthetase (anti-Jo-1, anti-PL-12)"
+            },
+            {
+              "text": "May reveal CTD-ILD even with no other CTD features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAL eosinophils",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Above 25%",
+              "op": ">",
+              "value": 25
+            },
+            {
+              "text": "Suggests chronic eosinophilic pneumonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAL lymphocytosis with CD4:CD8 ratio",
+          "cells": [
+            {
+              "text": "Ratio below 1",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Characteristic of hypersensitivity pneumonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAL serial aliquots",
+          "cells": [
+            {
+              "text": "Progressively bloody lavage"
+            },
+            {
+              "text": "Indicates diffuse alveolar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung biopsy (cryobiopsy or VATS)",
+          "cells": [
+            {
+              "text": "When uncertainty remains after clinical, serologic and HRCT review"
+            },
+            {
+              "text": "VATS carries up to about 5% short-term mortality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No single finding is diagnostic; a confident ILD diagnosis combines clinical, serologic, PFT, HRCT and, when obtained, histologic data in a multidisciplinary discussion."
+    },
+    {
+      "id": "ild-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate within and outside ILD",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic pulmonary fibrosis",
+          "cells": [
+            {
+              "text": "Age over 60, basal subpleural UIP with honeycombing"
+            },
+            {
+              "text": "{{hy:HRCT UIP pattern after excluding known causes}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonspecific interstitial pneumonia",
+          "cells": [
+            {
+              "text": "More uniform change, rare honeycombing, often CTD-linked; better prognosis"
+            },
+            {
+              "text": "HRCT pattern plus MDT review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypersensitivity pneumonitis",
+          "cells": [
+            {
+              "text": "Inhaled antigen exposure; loose peribronchiolar granulomas"
+            },
+            {
+              "text": "BAL lymphocytosis with CD4:CD8 below 1; precipitins supportive only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective tissue disease-associated ILD",
+          "cells": [
+            {
+              "text": "RA, systemic sclerosis, myositis, Sjogren or SLE; ILD may come first"
+            },
+            {
+              "text": "Autoantibody serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Age 20 to 40, hilar nodes, peribronchovascular nodularity, well-formed granulomas"
+            },
+            {
+              "text": "HRCT and tissue biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptogenic organizing pneumonia",
+          "cells": [
+            {
+              "text": "Subacute flu-like illness with migratory consolidations"
+            },
+            {
+              "text": "HRCT pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced ILD",
+          "cells": [
+            {
+              "text": "Amiodarone, nitrofurantoin, methotrexate, bleomycin, checkpoint inhibitors"
+            },
+            {
+              "text": "Medication history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lymphangioleiomyomatosis",
+          "cells": [
+            {
+              "text": "Young women, diffuse cysts, spontaneous pneumothorax"
+            },
+            {
+              "text": "HRCT showing diffuse cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffuse alveolar haemorrhage (GPA, Goodpasture)",
+          "cells": [
+            {
+              "text": "Haemoptysis with diffuse infiltrates"
+            },
+            {
+              "text": "BAL with progressively bloody aliquots"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure, bronchitis or asthma",
+          "cells": [
+            {
+              "text": "Overlapping dyspnoea and cough; IPF is often first mislabelled as these"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumonia, including Pneumocystis",
+          "cells": [
+            {
+              "text": "Egophony and bronchial breathing point to alveolar filling, not fibrosis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "A UIP pattern is not unique to IPF; it also occurs in CTD-ILD such as rheumatoid arthritis."
+    },
+    {
+      "id": "ild-treatment",
+      "kind": "treatment",
+      "title": "Management of interstitial lung disease (IPF focus)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pirfenidone or nintedanib",
+          "cells": [
+            {
+              "text": "{{hy:Confirmed IPF, to slow progression}}"
+            },
+            {
+              "text": "Neither agent is favoured; monitor liver tests periodically. Doses not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid immunosuppression in IPF",
+          "cells": [
+            {
+              "text": "Presumed or confirmed IPF"
+            },
+            {
+              "text": "Immunosuppression increased morbidity and mortality in IPF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplemental oxygen",
+          "cells": [
+            {
+              "text": "Exertional or resting hypoxaemia"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary rehabilitation and support groups",
+          "cells": [
+            {
+              "text": "All symptomatic patients"
+            },
+            {
+              "text": "Supportive; helps psychological stress"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lung transplant referral",
+          "cells": [
+            {
+              "text": "Otherwise healthy patients; evaluate at diagnosis"
+            },
+            {
+              "text": "Successful in selected patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clinical trial enrolment",
+          "cells": [
+            {
+              "text": "When appropriate"
+            },
+            {
+              "text": "Encouraged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute deterioration work-up",
+          "cells": [
+            {
+              "text": "Sudden worsening of known fibrosis"
+            },
+            {
+              "text": "Look for infection, DVT or PE, pneumothorax, heart failure, pulmonary hypertension"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Advance care planning",
+          "cells": [
+            {
+              "text": "Early in the course"
+            },
+            {
+              "text": "Median IPF survival is about 3 to 5 years; death usually from respiratory failure"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Treatment of non-IPF ILD (CTD-ILD, HP, COP, sarcoidosis) is disease-specific and set by the multidisciplinary diagnosis; not tabulated here."
+    },
+    {
+      "id": "ild-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic value of bronchoalveolar lavage in ILD",
+      "rowHeader": "Condition",
+      "columns": [
+        "BAL finding"
+      ],
+      "rows": [
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Lymphocytosis; CD4:CD8 ratio above 3.5 is most specific for diagnosis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hypersensitivity pneumonitis",
+          "cells": [
+            {
+              "text": "Marked lymphocytosis (above 50%)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Organizing pneumonia",
+          "cells": [
+            {
+              "text": "Foamy macrophages; mixed pattern of increased cells is characteristic; decreased CD4:CD8 ratio"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Eosinophilic lung disease",
+          "cells": [
+            {
+              "text": "Eosinophils above 25%"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Diffuse alveolar bleeding",
+          "cells": [
+            {
+              "text": "Hemosiderin-laden macrophages, red blood cells"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Diffuse alveolar damage, drug toxicity",
+          "cells": [
+            {
+              "text": "Atypical hyperplastic type II pneumocytes"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Opportunistic infections",
+          "cells": [
+            {
+              "text": "Pneumocystis carinii, fungi, cytomegalovirus-transformed cells"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Lymphangitic carcinomatosis, alveolar cell carcinoma, pulmonary lymphoma",
+          "cells": [
+            {
+              "text": "Malignant cells"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Alveolar proteinosis",
+          "cells": [
+            {
+              "text": "Milky effluent, foamy macrophages and lipoproteinaceous intraalveolar material (periodic acid-Schiff positive)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Lipoid pneumonia",
+          "cells": [
+            {
+              "text": "Fat globules in macrophages"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pulmonary Langerhans cell histiocytosis",
+          "cells": [
+            {
+              "text": "Increased CD1+ Langerhans cells; electron microscopy shows Birbeck granules in lavaged macrophages (expensive and difficult to perform)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Asbestos-related pulmonary disease",
+          "cells": [
+            {
+              "text": "Dust particles, ferruginous bodies"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Berylliosis",
+          "cells": [
+            {
+              "text": "Positive lymphocyte transformation test to beryllium"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Silicosis",
+          "cells": [
+            {
+              "text": "Dust particles by polarized light microscopy"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Lipoidosis",
+          "cells": [
+            {
+              "text": "Accumulation of specific lipopigment in alveolar macrophages"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ild-dx-mgmt",
+      "title": "Diagnosis and management of interstitial lung disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute dyspnoea, dry cough, bibasal Velcro crackles",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Take exposure, drug, CTD and family history; send autoantibody serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "HRCT chest and full PFTs with DLCO",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Acute onset under 30 days with hypoxaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Urgent admission; exclude infection, PE, pneumothorax, heart failure",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Known cause found: exposure, drug or CTD?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Cause-specific ILD care with MDT input",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "HRCT shows UIP pattern with a compatible clinical picture?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diagnose IPF without biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "MDT review; BAL, cryobiopsy or surgical biopsy if still uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "UIP confirmed and IPF agreed at MDT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Treat the specific non-IPF ILD per MDT diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "action",
+          "text": "Start pirfenidone or nintedanib; avoid immunosuppression",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "action",
+          "text": "Oxygen, rehabilitation, transplant referral, serial FVC",
+          "cite": "c2"
+        },
+        {
+          "id": "n15",
+          "type": "outcome",
+          "text": "Ongoing follow-up with early advance care planning",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Next"
+        },
+        {
+          "from": "n14",
+          "to": "n15",
+          "label": "Next"
         }
       ]
     }

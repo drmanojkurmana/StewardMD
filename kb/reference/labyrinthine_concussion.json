@@ -1,175 +1,491 @@
 {
- "id": "labyrinthine_concussion",
- "name": "Labyrinthine concussion",
- "aliases": [
-  "inner ear concussion",
-  "cochleovestibular concussion",
-  "post-traumatic labyrinthine dysfunction"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Otology",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology - Head and Neck Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Follows head trauma, often a temporal-bone or occipital impact, without a visible fracture of the otic capsule",
-   "Presents with sensorineural hearing loss, frequently in the higher frequencies, together with tinnitus and vertigo or imbalance beginning soon after the injury",
-   "Vertigo may be constant at first and then settle, or may present as positional vertigo if otoconia are dislodged (traumatic BPPV)",
-   "The mechanism is an energy or pressure wave transmitted through the skull to the membranous labyrinth and hair cells, causing microscopic damage without frank bony disruption",
-   "It is a diagnosis of exclusion - temporal-bone fracture, perilymph fistula, ossicular disruption, and central brain injury must be ruled out",
-   "Management is largely supportive, with vestibular rehabilitation for persistent imbalance and repositioning manoeuvres for traumatic BPPV, while hearing loss is often permanent",
-   "High-resolution CT of the temporal bone and audiometry are central to distinguishing it from fracture and conductive causes"
+  "id": "labyrinthine_concussion",
+  "name": "Labyrinthine concussion",
+  "aliases": [
+    "inner ear concussion",
+    "cochleovestibular concussion",
+    "post-traumatic labyrinthine dysfunction"
   ],
-  "pathophysiology": "A blow to the head transmits kinetic energy through the skull to the fluid-filled inner ear even when the bony otic capsule stays intact. The resulting pressure wave and shearing forces damage the delicate cochlear and vestibular hair cells and their supporting structures, and may dislodge utricular otoconia into the semicircular canals. Cochlear injury produces sensorineural hearing loss, classically affecting higher frequencies, together with tinnitus, while vestibular injury causes vertigo and disequilibrium. Because the damage is at the cellular level rather than a gross fracture, imaging is frequently normal, and the diagnosis rests on the temporal relationship to trauma and on exclusion of other injuries.",
-  "additionalDifferentials": [
-   "Temporal bone fracture, otic-capsule sparing or violating",
-   "Perilymph fistula",
-   "Traumatic benign paroxysmal positional vertigo",
-   "Ossicular chain disruption causing conductive loss",
-   "Post-concussion syndrome or central vestibular injury",
-   "Tympanic membrane perforation",
-   "Acoustic trauma from an associated blast"
-  ],
-  "additionalInvestigations": [
-   "Pure-tone audiometry to document the pattern and degree of hearing loss",
-   "High-resolution CT of the temporal bone to exclude fracture",
-   "Tympanometry to assess middle-ear and ossicular status",
-   "Videonystagmography with positional testing",
-   "Vestibular-evoked myogenic potentials",
-   "MRI of the brain if central injury is suspected"
-  ],
-  "redFlags": [
-   "Progressive or fluctuating hearing loss suggesting a perilymph fistula",
-   "Otorrhoea or clear fluid leak raising concern for a CSF fistula",
-   "Facial nerve weakness",
-   "Focal neurological deficit or deteriorating conscious level",
-   "Vertigo accompanied by severe or worsening headache"
-  ],
-  "prognosis": "Vertigo and imbalance often improve over weeks to months through central compensation and vestibular rehabilitation, but sensorineural hearing loss and tinnitus are frequently permanent.",
-  "pitfalls": [
-   "Attributing all post-traumatic dizziness to concussion and missing a perilymph fistula or temporal-bone fracture",
-   "Overlooking traumatic BPPV, which is readily treated with repositioning manoeuvres",
-   "Failing to obtain baseline audiometry, which is important both clinically and medicolegally after head injury",
-   "Missing a co-existing CSF leak or facial nerve injury"
-  ],
-  "references": [
-   "Cummings Otolaryngology - Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage supportively as there is no specific pharmacological cure, using vestibular suppressants such as prochlorperazine or an antihistamine only briefly for severe acute vertigo to avoid delaying central compensation",
-   "Refer for vestibular rehabilitation exercises to promote central compensation for persistent imbalance",
-   "Perform canalith repositioning manoeuvres such as the Epley if traumatic benign paroxysmal positional vertigo develops from dislodged otoconia",
-   "Provide audiological rehabilitation with hearing aids for persistent sensorineural hearing loss and offer tinnitus management strategies",
-   "Exclude and treat associated injuries such as temporal-bone fracture, perilymph fistula, ossicular disruption or central brain injury",
-   "Give falls-prevention and safety advice during the recovery period",
-   "Coordinate ENT, audiology and vestibular therapy follow-up to monitor recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "labyrinthine_concussion-pathway",
-   "title": "Labyrinthine concussion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Follows head trauma, often a temporal-bone or occipital impact, without a visible fracture of the otic capsule",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive or fluctuating hearing loss suggesting a perilymph fistula",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pure-tone audiometry to document the pattern and degree of hearing loss, High-resolution CT of the temporal bone to exclude fracture, Tympanometry to assess middle-ear and ossicular status"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage supportively as there is no specific pharmacological cure, using vestibular suppressants such as prochlorperazine or an antihistamine only briefly for severe acute vertigo to avoid delaying central compensation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all post-traumatic dizziness to concussion and missing a perilymph fistula or temporal-bone fracture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of labyrinthine concussion."
-  }
- ],
- "tables": [
-  {
-   "id": "labyrinthine_concussion-matrix",
-   "title": "Labyrinthine concussion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Follows head trauma, often a temporal-bone or occipital impact, without a visible fracture of the otic capsule",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Otology",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology - Head and Neck Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Follows head trauma, often a temporal-bone or occipital impact, without a visible fracture of the otic capsule",
+      "Presents with sensorineural hearing loss, frequently in the higher frequencies, together with tinnitus and vertigo or imbalance beginning soon after the injury",
+      "Vertigo may be constant at first and then settle, or may present as positional vertigo if otoconia are dislodged (traumatic BPPV)",
+      "The mechanism is an energy or pressure wave transmitted through the skull to the membranous labyrinth and hair cells, causing microscopic damage without frank bony disruption",
+      "It is a diagnosis of exclusion - temporal-bone fracture, perilymph fistula, ossicular disruption, and central brain injury must be ruled out",
+      "Management is largely supportive, with vestibular rehabilitation for persistent imbalance and repositioning manoeuvres for traumatic BPPV, while hearing loss is often permanent",
+      "High-resolution CT of the temporal bone and audiometry are central to distinguishing it from fracture and conductive causes"
     ],
-    [
-     "Key Investigations",
-     "Pure-tone audiometry to document the pattern and degree of hearing loss, High-resolution CT of the temporal bone to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A blow to the head transmits kinetic energy through the skull to the fluid-filled inner ear even when the bony otic capsule stays intact. The resulting pressure wave and shearing forces damage the delicate cochlear and vestibular hair cells and their supporting structures, and may dislodge utricular otoconia into the semicircular canals. Cochlear injury produces sensorineural hearing loss, classically affecting higher frequencies, together with tinnitus, while vestibular injury causes vertigo and disequilibrium. Because the damage is at the cellular level rather than a gross fracture, imaging is frequently normal, and the diagnosis rests on the temporal relationship to trauma and on exclusion of other injuries.",
+    "additionalDifferentials": [
+      "Temporal bone fracture, otic-capsule sparing or violating",
+      "Perilymph fistula",
+      "Traumatic benign paroxysmal positional vertigo",
+      "Ossicular chain disruption causing conductive loss",
+      "Post-concussion syndrome or central vestibular injury",
+      "Tympanic membrane perforation",
+      "Acoustic trauma from an associated blast"
     ],
-    [
-     "Primary Differentials",
-     "Temporal bone fracture, otic-capsule sparing or violating, Perilymph fistula, Traumatic benign paroxysmal positional vertigo",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pure-tone audiometry to document the pattern and degree of hearing loss",
+      "High-resolution CT of the temporal bone to exclude fracture",
+      "Tympanometry to assess middle-ear and ossicular status",
+      "Videonystagmography with positional testing",
+      "Vestibular-evoked myogenic potentials",
+      "MRI of the brain if central injury is suspected"
     ],
-    [
-     "Management Strategy",
-     "Manage supportively as there is no specific pharmacological cure, using vestibular suppressants such as prochlorperazine or an",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive or fluctuating hearing loss suggesting a perilymph fistula",
+      "Otorrhoea or clear fluid leak raising concern for a CSF fistula",
+      "Facial nerve weakness",
+      "Focal neurological deficit or deteriorating conscious level",
+      "Vertigo accompanied by severe or worsening headache"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all post-traumatic dizziness to concussion and missing a perilymph fistula or temporal-bone fracture",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vertigo and imbalance often improve over weeks to months through central compensation and vestibular rehabilitation, but sensorineural hearing loss and tinnitus are frequently permanent.",
+    "pitfalls": [
+      "Attributing all post-traumatic dizziness to concussion and missing a perilymph fistula or temporal-bone fracture",
+      "Overlooking traumatic BPPV, which is readily treated with repositioning manoeuvres",
+      "Failing to obtain baseline audiometry, which is important both clinically and medicolegally after head injury",
+      "Missing a co-existing CSF leak or facial nerve injury"
+    ],
+    "references": [
+      "Cummings Otolaryngology - Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage supportively as there is no specific pharmacological cure, using vestibular suppressants such as prochlorperazine or an antihistamine only briefly for severe acute vertigo to avoid delaying central compensation",
+      "Refer for vestibular rehabilitation exercises to promote central compensation for persistent imbalance",
+      "Perform canalith repositioning manoeuvres such as the Epley if traumatic benign paroxysmal positional vertigo develops from dislodged otoconia",
+      "Provide audiological rehabilitation with hearing aids for persistent sensorineural hearing loss and offer tinnitus management strategies",
+      "Exclude and treat associated injuries such as temporal-bone fracture, perilymph fistula, ossicular disruption or central brain injury",
+      "Give falls-prevention and safety advice during the recovery period",
+      "Coordinate ENT, audiology and vestibular therapy follow-up to monitor recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for labyrinthine concussion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "labyrinthine-concussion-real-image",
-   "title": "Labyrinthine concussion: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "labyrinthine_concussion-pathway",
+      "title": "Labyrinthine concussion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Follows head trauma, often a temporal-bone or occipital impact, without a visible fracture of the otic capsule",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive or fluctuating hearing loss suggesting a perilymph fistula",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pure-tone audiometry to document the pattern and degree of hearing loss, High-resolution CT of the temporal bone to exclude fracture, Tympanometry to assess middle-ear and ossicular status"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage supportively as there is no specific pharmacological cure, using vestibular suppressants such as prochlorperazine or an antihistamine only briefly for severe acute vertigo to avoid delaying central compensation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all post-traumatic dizziness to concussion and missing a perilymph fistula or temporal-bone fracture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of labyrinthine concussion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "labyrinthine_concussion-matrix",
+      "title": "Labyrinthine concussion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Follows head trauma, often a temporal-bone or occipital impact, without a visible fracture of the otic capsule",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pure-tone audiometry to document the pattern and degree of hearing loss, High-resolution CT of the temporal bone to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Temporal bone fracture, otic-capsule sparing or violating, Perilymph fistula, Traumatic benign paroxysmal positional vertigo",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage supportively as there is no specific pharmacological cure, using vestibular suppressants such as prochlorperazine or an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all post-traumatic dizziness to concussion and missing a perilymph fistula or temporal-bone fracture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for labyrinthine concussion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "labyrinthine_concussion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Pattern and degree of hearing loss, often higher frequencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the temporal bone",
+          "cells": [
+            {
+              "text": "Excludes temporal-bone fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry",
+          "cells": [
+            {
+              "text": "Middle-ear and ossicular status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Videonystagmography with positional testing",
+          "cells": [
+            {
+              "text": "Vestibular and positional function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular-evoked myogenic potentials",
+          "cells": [
+            {
+              "text": "Vestibular end-organ function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Central injury, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "labyrinthine_concussion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Temporal bone fracture",
+          "cells": [
+            {
+              "text": "Excluded by high-resolution temporal bone CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perilymph fistula",
+          "cells": [
+            {
+              "text": "Progressive or fluctuating hearing loss suggests it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic benign paroxysmal positional vertigo",
+          "cells": [
+            {
+              "text": "Positional vertigo from dislodged otoconia; repositioning treats it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ossicular chain disruption",
+          "cells": [
+            {
+              "text": "Conductive loss; assessed by tympanometry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "labyrinthine_concussion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No specific pharmacological cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular suppressants",
+          "cells": [
+            {
+              "text": "Prochlorperazine or an antihistamine, only briefly for severe symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular rehabilitation",
+          "cells": [
+            {
+              "text": "Promotes central compensation for persistent imbalance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repositioning manoeuvres",
+          "cells": [
+            {
+              "text": "Epley for traumatic BPPV from dislodged otoconia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids for persistent sensorineural loss; tinnitus management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude associated injury",
+          "cells": [
+            {
+              "text": "Temporal-bone fracture, perilymph fistula, ossicular disruption, central injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls-prevention and safety advice",
+          "cells": [
+            {
+              "text": "During the recovery period"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "labyrinthine_concussion-dx-mgmt",
+      "title": "Diagnosis and management of Labyrinthine concussion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Head trauma with sensorineural hearing loss, tinnitus and vertigo; no fracture seen",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fluctuating hearing, CSF leak, facial weakness, focal deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for perilymph or CSF fistula and central injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry, high-resolution temporal bone CT, tympanometry, VNG, MRI if central",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are temporal-bone fracture and fistula excluded on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the associated injury: fracture, fistula or ossicular disruption",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; brief vestibular suppressants only for severe symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vestibular rehabilitation for persistent imbalance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Epley repositioning for traumatic BPPV",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing aids and tinnitus management for sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Falls-prevention and safety advice during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Vertigo often improves over weeks to months; hearing loss and tinnitus often permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

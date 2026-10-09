@@ -1,175 +1,481 @@
 {
- "id": "pulmonary_tumor_thrombotic_microangiopathy",
- "name": "Pulmonary tumour thrombotic microangiopathy",
- "aliases": [
-  "PTTM",
-  "pulmonary tumour thrombotic microangiopathy",
-  "tumour microembolism-associated pulmonary hypertension"
- ],
- "class": "non_infective",
- "system": "Respiratory / Pulmonary vascular",
- "specialty": "Pulmonary Hypertension",
- "referenceOnly": true,
- "reference": {
-  "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Robbins and Cotran Pathologic Basis of Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, aggressive cause of pulmonary hypertension in which microscopic tumour emboli seed the small pulmonary vessels and trigger a fibrocellular intimal reaction",
-   "Most often associated with adenocarcinomas, particularly gastric and other gastrointestinal, breast, and lung primaries, and may be the presenting feature of an occult malignancy",
-   "Presents with rapidly progressive breathlessness, hypoxaemia, and cor pulmonale developing over days to weeks, frequently mistaken for pulmonary embolism or pneumonia",
-   "Often accompanied by a microangiopathic haemolytic anaemia with thrombocytopenia and raised D-dimer, reflecting widespread microvascular thrombosis",
-   "CT pulmonary angiography usually shows no large-vessel thrombus, and perfusion scans may show diffuse peripheral defects rather than segmental mismatches",
-   "Diagnosis is frequently made only at autopsy, though wedge or transbronchial cytology and rising tumour markers can support it antemortem",
-   "Management is directed at the underlying malignancy, as no targeted pulmonary vascular therapy reverses the process, and prognosis is dismal"
+  "id": "pulmonary_tumor_thrombotic_microangiopathy",
+  "name": "Pulmonary tumour thrombotic microangiopathy",
+  "aliases": [
+    "PTTM",
+    "pulmonary tumour thrombotic microangiopathy",
+    "tumour microembolism-associated pulmonary hypertension"
   ],
-  "pathophysiology": "Pulmonary tumour thrombotic microangiopathy occurs when malignant cells embolise into the small pulmonary arteries and arterioles and, rather than simply occluding them mechanically, provoke a local activation of coagulation and the release of growth factors. This stimulates a fibrocellular intimal proliferation and in situ thrombosis that progressively narrows and obstructs the microvasculature. The widespread microvascular obstruction rapidly raises pulmonary vascular resistance and imposes an acute pressure load on the right ventricle, producing rapidly progressive pulmonary hypertension and cor pulmonale. The same microvascular thrombotic process shears red cells and consumes platelets, generating the microangiopathic haemolytic anaemia and thrombocytopenia that often accompany the syndrome.",
-  "additionalDifferentials": [
-   "Acute or chronic thromboembolic pulmonary hypertension",
-   "Lymphangitic carcinomatosis",
-   "Pulmonary veno-occlusive disease or capillary haemangiomatosis",
-   "Idiopathic pulmonary arterial hypertension",
-   "Thrombotic thrombocytopenic purpura or other microangiopathy",
-   "Sepsis or pneumonia with acute respiratory deterioration",
-   "Fat or amniotic fluid embolism"
-  ],
-  "additionalInvestigations": [
-   "CT pulmonary angiography, typically without large-vessel thrombus, to help exclude classic embolism",
-   "Ventilation-perfusion or perfusion scan, which may show diffuse patchy peripheral defects",
-   "Right heart catheterisation to document pre-capillary pulmonary hypertension",
-   "Full blood count and blood film for microangiopathic haemolysis and thrombocytopenia",
-   "Tumour markers and cross-sectional imaging to identify an underlying malignancy",
-   "Pulmonary microvascular cytology from wedged catheter aspiration or lung biopsy where feasible"
-  ],
-  "redFlags": [
-   "Rapidly progressive breathlessness and hypoxaemia with acute right heart failure",
-   "Microangiopathic haemolytic anaemia with thrombocytopenia suggesting disseminated microvascular disease",
-   "Pulmonary hypertension in a patient with known or suspected adenocarcinoma",
-   "Deterioration despite treatment for presumed pulmonary embolism or infection"
-  ],
-  "prognosis": "The prognosis is extremely poor, with most patients deteriorating over days to weeks, and the diagnosis is frequently confirmed only post mortem. Occasionally, prompt recognition and treatment of the underlying malignancy can slow progression, but survival is generally measured in weeks.",
-  "pitfalls": [
-   "Excluding the diagnosis because CT pulmonary angiography shows no large-vessel clot",
-   "Attributing rapid deterioration solely to pneumonia or thromboembolism and missing an occult cancer",
-   "Overlooking the diagnostic clue of concurrent microangiopathic haemolytic anaemia",
-   "Expecting targeted pulmonary vasodilators to reverse a fundamentally malignant microvascular process",
-   "Delaying a search for the primary tumour that determines any therapeutic option"
-  ],
-  "references": [
-   "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
-   "Robbins and Cotran Pathologic Basis of Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying malignancy urgently with systemic chemotherapy directed at the primary adenocarcinoma, the only intervention that may slow progression",
-   "Provide supportive oxygen and manage acute right heart failure and cor pulmonale",
-   "Consider anticoagulation for the widespread in situ microvascular thrombosis",
-   "Use pulmonary vasodilator therapy cautiously as a bridging measure where appropriate",
-   "Search for and stage the occult primary tumour with cross-sectional imaging, endoscopy and tumour markers",
-   "Manage within an oncology-led multidisciplinary team and involve palliative care early given the extremely poor prognosis",
-   "Discuss ceilings of care and offer symptom-directed support in view of survival often measured in weeks"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_tumor_thrombotic_microangiopathy-pathway",
-   "title": "Pulmonary tumour thrombotic microangiopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, aggressive cause of pulmonary hypertension in which microscopic tumour emboli seed the small pulmonary vessels and trigger a fibrocellular intimal reaction",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive breathlessness and hypoxaemia with acute right heart failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT pulmonary angiography, typically without large-vessel thrombus, to help exclude classic embolism, Ventilation-perfusion or perfusion scan, which may show diffuse patchy peripheral defects, Right heart catheterisation to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying malignancy urgently with systemic chemotherapy directed at the primary adenocarcinoma, the only intervention that may slow progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis because CT pulmonary angiography shows no large-vessel clot"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary tumour thrombotic microangiopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_tumor_thrombotic_microangiopathy-matrix",
-   "title": "Pulmonary tumour thrombotic microangiopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, aggressive cause of pulmonary hypertension in which microscopic tumour emboli seed the small pulmonary vessels and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Pulmonary vascular",
+  "specialty": "Pulmonary Hypertension",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Robbins and Cotran Pathologic Basis of Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, aggressive cause of pulmonary hypertension in which microscopic tumour emboli seed the small pulmonary vessels and trigger a fibrocellular intimal reaction",
+      "Most often associated with adenocarcinomas, particularly gastric and other gastrointestinal, breast, and lung primaries, and may be the presenting feature of an occult malignancy",
+      "Presents with rapidly progressive breathlessness, hypoxaemia, and cor pulmonale developing over days to weeks, frequently mistaken for pulmonary embolism or pneumonia",
+      "Often accompanied by a microangiopathic haemolytic anaemia with thrombocytopenia and raised D-dimer, reflecting widespread microvascular thrombosis",
+      "CT pulmonary angiography usually shows no large-vessel thrombus, and perfusion scans may show diffuse peripheral defects rather than segmental mismatches",
+      "Diagnosis is frequently made only at autopsy, though wedge or transbronchial cytology and rising tumour markers can support it antemortem",
+      "Management is directed at the underlying malignancy, as no targeted pulmonary vascular therapy reverses the process, and prognosis is dismal"
     ],
-    [
-     "Key Investigations",
-     "CT pulmonary angiography, typically without large-vessel thrombus, to help exclude classic embolism, Ventilation-perfusion or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pulmonary tumour thrombotic microangiopathy occurs when malignant cells embolise into the small pulmonary arteries and arterioles and, rather than simply occluding them mechanically, provoke a local activation of coagulation and the release of growth factors. This stimulates a fibrocellular intimal proliferation and in situ thrombosis that progressively narrows and obstructs the microvasculature. The widespread microvascular obstruction rapidly raises pulmonary vascular resistance and imposes an acute pressure load on the right ventricle, producing rapidly progressive pulmonary hypertension and cor pulmonale. The same microvascular thrombotic process shears red cells and consumes platelets, generating the microangiopathic haemolytic anaemia and thrombocytopenia that often accompany the syndrome.",
+    "additionalDifferentials": [
+      "Acute or chronic thromboembolic pulmonary hypertension",
+      "Lymphangitic carcinomatosis",
+      "Pulmonary veno-occlusive disease or capillary haemangiomatosis",
+      "Idiopathic pulmonary arterial hypertension",
+      "Thrombotic thrombocytopenic purpura or other microangiopathy",
+      "Sepsis or pneumonia with acute respiratory deterioration",
+      "Fat or amniotic fluid embolism"
     ],
-    [
-     "Primary Differentials",
-     "Acute or chronic thromboembolic pulmonary hypertension, Lymphangitic carcinomatosis, Pulmonary veno-occlusive disease or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT pulmonary angiography, typically without large-vessel thrombus, to help exclude classic embolism",
+      "Ventilation-perfusion or perfusion scan, which may show diffuse patchy peripheral defects",
+      "Right heart catheterisation to document pre-capillary pulmonary hypertension",
+      "Full blood count and blood film for microangiopathic haemolysis and thrombocytopenia",
+      "Tumour markers and cross-sectional imaging to identify an underlying malignancy",
+      "Pulmonary microvascular cytology from wedged catheter aspiration or lung biopsy where feasible"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying malignancy urgently with systemic chemotherapy directed at the primary adenocarcinoma, the only",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive breathlessness and hypoxaemia with acute right heart failure",
+      "Microangiopathic haemolytic anaemia with thrombocytopenia suggesting disseminated microvascular disease",
+      "Pulmonary hypertension in a patient with known or suspected adenocarcinoma",
+      "Deterioration despite treatment for presumed pulmonary embolism or infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis because CT pulmonary angiography shows no large-vessel clot",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is extremely poor, with most patients deteriorating over days to weeks, and the diagnosis is frequently confirmed only post mortem. Occasionally, prompt recognition and treatment of the underlying malignancy can slow progression, but survival is generally measured in weeks.",
+    "pitfalls": [
+      "Excluding the diagnosis because CT pulmonary angiography shows no large-vessel clot",
+      "Attributing rapid deterioration solely to pneumonia or thromboembolism and missing an occult cancer",
+      "Overlooking the diagnostic clue of concurrent microangiopathic haemolytic anaemia",
+      "Expecting targeted pulmonary vasodilators to reverse a fundamentally malignant microvascular process",
+      "Delaying a search for the primary tumour that determines any therapeutic option"
+    ],
+    "references": [
+      "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
+      "Robbins and Cotran Pathologic Basis of Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying malignancy urgently with systemic chemotherapy directed at the primary adenocarcinoma, the only intervention that may slow progression",
+      "Provide supportive oxygen and manage acute right heart failure and cor pulmonale",
+      "Consider anticoagulation for the widespread in situ microvascular thrombosis",
+      "Use pulmonary vasodilator therapy cautiously as a bridging measure where appropriate",
+      "Search for and stage the occult primary tumour with cross-sectional imaging, endoscopy and tumour markers",
+      "Manage within an oncology-led multidisciplinary team and involve palliative care early given the extremely poor prognosis",
+      "Discuss ceilings of care and offer symptom-directed support in view of survival often measured in weeks"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary tumour thrombotic microangiopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-tumor-thrombotic-microangiopathy-real-image",
-   "title": "Pulmonary tumour thrombotic microangiopathy: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pulmonary_tumor_thrombotic_microangiopathy-pathway",
+      "title": "Pulmonary tumour thrombotic microangiopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, aggressive cause of pulmonary hypertension in which microscopic tumour emboli seed the small pulmonary vessels and trigger a fibrocellular intimal reaction",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive breathlessness and hypoxaemia with acute right heart failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT pulmonary angiography, typically without large-vessel thrombus, to help exclude classic embolism, Ventilation-perfusion or perfusion scan, which may show diffuse patchy peripheral defects, Right heart catheterisation to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying malignancy urgently with systemic chemotherapy directed at the primary adenocarcinoma, the only intervention that may slow progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis because CT pulmonary angiography shows no large-vessel clot"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary tumour thrombotic microangiopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_tumor_thrombotic_microangiopathy-matrix",
+      "title": "Pulmonary tumour thrombotic microangiopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, aggressive cause of pulmonary hypertension in which microscopic tumour emboli seed the small pulmonary vessels and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT pulmonary angiography, typically without large-vessel thrombus, to help exclude classic embolism, Ventilation-perfusion or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute or chronic thromboembolic pulmonary hypertension, Lymphangitic carcinomatosis, Pulmonary veno-occlusive disease or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying malignancy urgently with systemic chemotherapy directed at the primary adenocarcinoma, the only",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis because CT pulmonary angiography shows no large-vessel clot",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary tumour thrombotic microangiopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/ERS Guidelines for Pulmonary Hypertension / Robbins and Cotran Pathologic Basis of Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_tumor_thrombotic_microangiopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Absence of large-vessel thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation-perfusion or perfusion scan",
+          "cells": [
+            {
+              "text": "Diffuse patchy peripheral defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation",
+          "cells": [
+            {
+              "text": "Pre-capillary pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Microangiopathic haemolysis and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Underlying malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular cytology from wedge aspiration or biopsy",
+          "cells": [
+            {
+              "text": "Cytology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_tumor_thrombotic_microangiopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic thromboembolic pulmonary hypertension",
+          "cells": [
+            {
+              "text": "No large-vessel thrombus on CTPA"
+            },
+            {
+              "text": "CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphangitic carcinomatosis",
+          "cells": [
+            {
+              "text": "Malignancy"
+            },
+            {
+              "text": "Tumour markers and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombotic thrombocytopenic purpura",
+          "cells": [
+            {
+              "text": "Microangiopathic haemolysis with thrombocytopenia"
+            },
+            {
+              "text": "Full blood count and blood film"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_tumor_thrombotic_microangiopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Malignancy",
+          "cells": [
+            {
+              "text": "Urgent systemic chemotherapy directed at the underlying malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute right heart failure",
+          "cells": [
+            {
+              "text": "Oxygen and management of right heart failure and cor pulmonale"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Consider for widespread in situ microvascular thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasodilators",
+          "cells": [
+            {
+              "text": "Cautious use as a bridge where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occult primary",
+          "cells": [
+            {
+              "text": "Search and stage with cross-sectional imaging and endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Oncology-led team with early palliative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Goals of care",
+          "cells": [
+            {
+              "text": "Discuss ceilings of care and offer symptom-directed support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_tumor_thrombotic_microangiopathy-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary tumour thrombotic microangiopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tumour thrombotic microangiopathy: dyspnoea with pre-capillary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute right heart failure, haemolysis, adenocarcinoma, or decline despite PE treatment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent oncology review and oxygen for acute right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CTPA; perfusion scan; RHC; FBC and film; tumour markers; microvascular cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are pre-capillary PH, microangiopathy and an occult malignancy confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CTEPH, lymphangitic carcinomatosis or TTP; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and treat the underlying malignancy urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oxygen and management of acute right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider anticoagulation for microvascular thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stage the occult primary with imaging and endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Oncology-led multidisciplinary care with early palliative input",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

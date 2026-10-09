@@ -1,175 +1,433 @@
 {
- "id": "vein_of_galen_malformation",
- "name": "vein of galen malformation",
- "aliases": [
-  "vein of Galen aneurysmal malformation",
-  "VGAM"
- ],
- "class": "non_infective",
- "system": "cardiovascular",
- "specialty": "paediatric cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The vein of Galen aneurysmal malformation is a congenital arteriovenous fistula between choroidal or quadrigeminal arteries and the persistent embryonic median prosencephalic vein of Markowski, not a true aneurysm of the mature vein of Galen.",
-   "The neonatal form presents with high-output cardiac failure that is disproportionate to any structural cardiac lesion, driven by the massive intracranial left-to-right shunt.",
-   "A loud cranial bruit audible over the fontanelle or orbits in a neonate with heart failure is a valuable clue.",
-   "Because so much combined ventricular output is diverted to the low-resistance shunt, there may be retrograde diastolic flow in the aorta and compromised systemic and coronary perfusion.",
-   "Later infantile presentation is dominated by macrocephaly, hydrocephalus and developmental delay rather than cardiac failure.",
-   "The melting brain phenomenon reflects chronic cerebral venous hypertension and hypoperfusion causing progressive parenchymal loss.",
-   "Staged endovascular embolisation, timed to balance cardiac stability against neurological maturation, is the mainstay of treatment.",
-   "A validated neonatal scoring system incorporating cardiac, cerebral, respiratory, hepatic and renal function guides whether to intervene urgently or defer."
+  "id": "vein_of_galen_malformation",
+  "name": "vein of galen malformation",
+  "aliases": [
+    "vein of Galen aneurysmal malformation",
+    "VGAM"
   ],
-  "pathophysiology": "The malformation arises early in gestation from a persistent arteriovenous shunt draining into the median prosencephalic vein, the embryonic precursor that normally regresses as the internal cerebral veins form. Persistent high-flow shunting dilates this venous sac and diverts a large fraction of cardiac output through a low-resistance circuit. In the neonate this imposes a huge volume load, producing high-output biventricular failure, pulmonary hypertension and a diastolic steal that impairs systemic organ perfusion. Within the brain, impaired venous drainage raises cerebral venous pressure, causing hydrocephalus, impaired cerebrospinal fluid resorption, and chronic ischaemic injury with calcification and atrophy.",
-  "additionalDifferentials": [
-   "structural congenital heart disease causing neonatal heart failure",
-   "other cerebral or hepatic arteriovenous malformations",
-   "persistent pulmonary hypertension of the newborn",
-   "neonatal sepsis with cardiovascular collapse",
-   "congenital hydrocephalus of other cause",
-   "dural sinus malformation"
-  ],
-  "additionalInvestigations": [
-   "transfontanelle cranial ultrasound with Doppler",
-   "brain MRI and MR angiography/venography",
-   "catheter cerebral angiography to define feeding arteries and drainage",
-   "echocardiography for shunt burden and pulmonary pressure",
-   "B-type natriuretic peptide and cardiac biomarkers",
-   "renal and hepatic function panels for multi-organ effect"
-  ],
-  "redFlags": [
-   "neonatal high-output cardiac failure refractory to medical therapy",
-   "cranial bruit with rapidly increasing head circumference",
-   "signs of raised intracranial pressure or seizures",
-   "multi-organ dysfunction indicating systemic steal"
-  ],
-  "prognosis": "Outcome depends on the severity of cardiac failure and the degree of established brain injury at presentation; neonates with intractable heart failure or extensive parenchymal loss fare poorly, whereas selected infants treated by staged embolisation can achieve good neurodevelopmental outcomes.",
-  "pitfalls": [
-   "Attributing neonatal heart failure solely to a cardiac cause and omitting cranial imaging.",
-   "Emergency embolisation of a neonate with irreversible brain injury when comfort care is more appropriate.",
-   "Placing a ventriculoperitoneal shunt for hydrocephalus before addressing venous hypertension, which can worsen haemorrhage.",
-   "Underestimating pulmonary hypertension and its impact on peri-procedural stability.",
-   "Missing the diagnosis in an older infant presenting only with macrocephaly and delay."
-  ],
-  "references": [
-   "Nelson Textbook of Paediatrics, current edition",
-   "Lasjaunias classification and Bicetre neonatal evaluation score",
-   "Youmans and Winn Neurological Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Achieve definitive closure by staged transarterial endovascular embolisation of the arteriovenous shunt, timed to allow growth where the neonate can be stabilised medically",
-   "Stabilise high-output cardiac failure with diuretics, inotropic support and mechanical ventilation as required",
-   "Manage the associated pulmonary hypertension and optimise systemic and coronary perfusion compromised by diastolic steal",
-   "Treat hydrocephalus, preferably by reducing shunt flow through embolisation before considering cerebrospinal fluid diversion",
-   "Monitor head circumference and neurodevelopment with serial cranial imaging",
-   "Coordinate care across interventional neuroradiology, neonatology, paediatric cardiology and neurosurgery in a specialist centre",
-   "Use validated selection criteria to guide timing and candidacy, and involve palliative care where irreversible parenchymal brain injury is established"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vein_of_galen_malformation-pathway",
-   "title": "vein of galen malformation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The vein of Galen aneurysmal malformation is a congenital arteriovenous fistula between choroidal or quadrigeminal arteries and the persistent embryonic median prosencephalic vein of Markowski, not a true aneurysm of the mature vein of",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: neonatal high-output cardiac failure refractory to medical therapy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: transfontanelle cranial ultrasound with Doppler, brain MRI and MR angiography/venography, catheter cerebral angiography to define feeding arteries and drainage"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Achieve definitive closure by staged transarterial endovascular embolisation of the arteriovenous shunt, timed to allow growth where the neonate can be stabilised medically"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing neonatal heart failure solely to a cardiac cause and omitting cranial imaging."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vein of galen malformation."
-  }
- ],
- "tables": [
-  {
-   "id": "vein_of_galen_malformation-matrix",
-   "title": "vein of galen malformation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The vein of Galen aneurysmal malformation is a congenital arteriovenous fistula between choroidal or quadrigeminal arteries and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "cardiovascular",
+  "specialty": "paediatric cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The vein of Galen aneurysmal malformation is a congenital arteriovenous fistula between choroidal or quadrigeminal arteries and the persistent embryonic median prosencephalic vein of Markowski, not a true aneurysm of the mature vein of Galen.",
+      "The neonatal form presents with high-output cardiac failure that is disproportionate to any structural cardiac lesion, driven by the massive intracranial left-to-right shunt.",
+      "A loud cranial bruit audible over the fontanelle or orbits in a neonate with heart failure is a valuable clue.",
+      "Because so much combined ventricular output is diverted to the low-resistance shunt, there may be retrograde diastolic flow in the aorta and compromised systemic and coronary perfusion.",
+      "Later infantile presentation is dominated by macrocephaly, hydrocephalus and developmental delay rather than cardiac failure.",
+      "The melting brain phenomenon reflects chronic cerebral venous hypertension and hypoperfusion causing progressive parenchymal loss.",
+      "Staged endovascular embolisation, timed to balance cardiac stability against neurological maturation, is the mainstay of treatment.",
+      "A validated neonatal scoring system incorporating cardiac, cerebral, respiratory, hepatic and renal function guides whether to intervene urgently or defer."
     ],
-    [
-     "Key Investigations",
-     "transfontanelle cranial ultrasound with Doppler, brain MRI and MR angiography/venography, catheter cerebral angiography to define",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The malformation arises early in gestation from a persistent arteriovenous shunt draining into the median prosencephalic vein, the embryonic precursor that normally regresses as the internal cerebral veins form. Persistent high-flow shunting dilates this venous sac and diverts a large fraction of cardiac output through a low-resistance circuit. In the neonate this imposes a huge volume load, producing high-output biventricular failure, pulmonary hypertension and a diastolic steal that impairs systemic organ perfusion. Within the brain, impaired venous drainage raises cerebral venous pressure, causing hydrocephalus, impaired cerebrospinal fluid resorption, and chronic ischaemic injury with calcification and atrophy.",
+    "additionalDifferentials": [
+      "structural congenital heart disease causing neonatal heart failure",
+      "other cerebral or hepatic arteriovenous malformations",
+      "persistent pulmonary hypertension of the newborn",
+      "neonatal sepsis with cardiovascular collapse",
+      "congenital hydrocephalus of other cause",
+      "dural sinus malformation"
     ],
-    [
-     "Primary Differentials",
-     "structural congenital heart disease causing neonatal heart failure, other cerebral or hepatic arteriovenous malformations,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "transfontanelle cranial ultrasound with Doppler",
+      "brain MRI and MR angiography/venography",
+      "catheter cerebral angiography to define feeding arteries and drainage",
+      "echocardiography for shunt burden and pulmonary pressure",
+      "B-type natriuretic peptide and cardiac biomarkers",
+      "renal and hepatic function panels for multi-organ effect"
     ],
-    [
-     "Management Strategy",
-     "Achieve definitive closure by staged transarterial endovascular embolisation of the arteriovenous shunt, timed to allow growth",
-     "Core treatment modality"
+    "redFlags": [
+      "neonatal high-output cardiac failure refractory to medical therapy",
+      "cranial bruit with rapidly increasing head circumference",
+      "signs of raised intracranial pressure or seizures",
+      "multi-organ dysfunction indicating systemic steal"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing neonatal heart failure solely to a cardiac cause and omitting cranial imaging.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the severity of cardiac failure and the degree of established brain injury at presentation; neonates with intractable heart failure or extensive parenchymal loss fare poorly, whereas selected infants treated by staged embolisation can achieve good neurodevelopmental outcomes.",
+    "pitfalls": [
+      "Attributing neonatal heart failure solely to a cardiac cause and omitting cranial imaging.",
+      "Emergency embolisation of a neonate with irreversible brain injury when comfort care is more appropriate.",
+      "Placing a ventriculoperitoneal shunt for hydrocephalus before addressing venous hypertension, which can worsen haemorrhage.",
+      "Underestimating pulmonary hypertension and its impact on peri-procedural stability.",
+      "Missing the diagnosis in an older infant presenting only with macrocephaly and delay."
+    ],
+    "references": [
+      "Nelson Textbook of Paediatrics, current edition",
+      "Lasjaunias classification and Bicetre neonatal evaluation score",
+      "Youmans and Winn Neurological Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Achieve definitive closure by staged transarterial endovascular embolisation of the arteriovenous shunt, timed to allow growth where the neonate can be stabilised medically",
+      "Stabilise high-output cardiac failure with diuretics, inotropic support and mechanical ventilation as required",
+      "Manage the associated pulmonary hypertension and optimise systemic and coronary perfusion compromised by diastolic steal",
+      "Treat hydrocephalus, preferably by reducing shunt flow through embolisation before considering cerebrospinal fluid diversion",
+      "Monitor head circumference and neurodevelopment with serial cranial imaging",
+      "Coordinate care across interventional neuroradiology, neonatology, paediatric cardiology and neurosurgery in a specialist centre",
+      "Use validated selection criteria to guide timing and candidacy, and involve palliative care where irreversible parenchymal brain injury is established"
     ]
-   ],
-   "caption": "Overview comparison matrix for vein of galen malformation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vein-of-galen-malformation-real-image",
-   "title": "vein of galen malformation: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "vein_of_galen_malformation-pathway",
+      "title": "vein of galen malformation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The vein of Galen aneurysmal malformation is a congenital arteriovenous fistula between choroidal or quadrigeminal arteries and the persistent embryonic median prosencephalic vein of Markowski, not a true aneurysm of the mature vein of",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: neonatal high-output cardiac failure refractory to medical therapy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: transfontanelle cranial ultrasound with Doppler, brain MRI and MR angiography/venography, catheter cerebral angiography to define feeding arteries and drainage"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Achieve definitive closure by staged transarterial endovascular embolisation of the arteriovenous shunt, timed to allow growth where the neonate can be stabilised medically"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing neonatal heart failure solely to a cardiac cause and omitting cranial imaging."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vein of galen malformation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vein_of_galen_malformation-matrix",
+      "title": "vein of galen malformation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The vein of Galen aneurysmal malformation is a congenital arteriovenous fistula between choroidal or quadrigeminal arteries and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "transfontanelle cranial ultrasound with Doppler, brain MRI and MR angiography/venography, catheter cerebral angiography to define",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "structural congenital heart disease causing neonatal heart failure, other cerebral or hepatic arteriovenous malformations,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Achieve definitive closure by staged transarterial endovascular embolisation of the arteriovenous shunt, timed to allow growth",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing neonatal heart failure solely to a cardiac cause and omitting cranial imaging.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vein of galen malformation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vein_of_galen_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transfontanelle cranial ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Feeding arteries and shunt flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and MR angiography or venography",
+          "cells": [
+            {
+              "text": "Intracranial malformation and drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter cerebral angiography",
+          "cells": [
+            {
+              "text": "Feeding arteries and drainage routes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Shunt burden and pulmonary pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BNP and cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Cardiac strain from high-output failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and hepatic function panels",
+          "cells": [
+            {
+              "text": "Multi-organ effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vein_of_galen_malformation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Structural congenital heart disease",
+          "cells": [
+            {
+              "text": "Neonatal failure disproportionate to any cardiac lesion points to the malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent pulmonary hypertension of the newborn",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis with cardiovascular collapse",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dural sinus malformation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vein_of_galen_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged transarterial endovascular embolisation",
+          "cells": [
+            {
+              "text": "Definitive closure of the arteriovenous shunt, timed for growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure support",
+          "cells": [
+            {
+              "text": "Diuretics, inotropic support and mechanical ventilation as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension and organ support",
+          "cells": [
+            {
+              "text": "Manage pulmonary hypertension; optimise systemic and coronary perfusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vein_of_galen_malformation-dx-mgmt",
+      "title": "Diagnosis and management of vein of galen malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vein of Galen malformation: neonatal high-output heart failure with bruit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory failure, bruit with head growth or raised pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stabilisation of high-output cardiac failure and neuro-imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cranial ultrasound with Doppler, MRI and MR venography, angiography, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a choroidal or quadrigeminal arteriovenous shunt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider structural heart disease, pulmonary hypertension or sepsis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stabilise high-output cardiac failure with diuretics and inotropes as required",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage pulmonary hypertension and optimise systemic and coronary perfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staged endovascular embolisation of the arteriovenous shunt",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Outcome depends on brain injury; embolisation is avoided if injury is irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,179 +1,439 @@
 {
- "id": "deficiency_adenosine_deaminase2_vasculitis",
- "name": "ADA2 deficiency vasculitis (paediatric PAN-like)",
- "aliases": [
-  "DADA2",
-  "deficiency of adenosine deaminase 2",
-  "ADA2 deficiency",
-  "monogenic polyarteritis nodosa-like vasculopathy"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Paediatrics",
- "specialty": "Paediatric Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A monogenic autoinflammatory vasculopathy caused by biallelic loss-of-function variants in the ADA2 gene (formerly CECR1)",
-   "Presents in childhood with a polyarteritis-nodosa-like small- and medium-vessel vasculitis, livedo racemosa and recurrent fevers",
-   "Early-onset ischaemic and haemorrhagic strokes, often affecting the deep brain (lacunar strokes), are a hallmark and can be recurrent",
-   "A wide phenotype also includes immunodeficiency with recurrent infections and low immunoglobulins, and haematological features such as cytopenias, bone marrow failure or features resembling pure red cell aplasia",
-   "Diagnosis rests on genetic testing for ADA2 variants together with demonstration of low serum ADA2 enzyme activity",
-   "TNF inhibition is highly effective at preventing strokes and controlling vasculitis and is preferred over corticosteroids for long-term control",
-   "Antiplatelet or anticoagulant therapy is generally avoided because of the risk of haemorrhagic stroke, and haematopoietic stem cell transplantation is considered for severe haematological or immune disease"
+  "id": "deficiency_adenosine_deaminase2_vasculitis",
+  "name": "ADA2 deficiency vasculitis (paediatric PAN-like)",
+  "aliases": [
+    "DADA2",
+    "deficiency of adenosine deaminase 2",
+    "ADA2 deficiency",
+    "monogenic polyarteritis nodosa-like vasculopathy"
   ],
-  "pathophysiology": "Deficiency of adenosine deaminase 2 results from biallelic mutations in the ADA2 gene, reducing the activity of a secreted enzyme important for endothelial integrity and the differentiation of monocytes and macrophages. Loss of ADA2 skews monocytes towards a proinflammatory phenotype with excess tumour necrosis factor, causing endothelial damage and a systemic vasculopathy affecting small and medium vessels. This produces the polyarteritis-nodosa-like vasculitis, cutaneous livedo and, through injury to small cerebral arteries, the characteristic recurrent lacunar strokes, while impaired haematopoiesis and immune function account for cytopenias and immunodeficiency.",
-  "additionalDifferentials": [
-   "Childhood polyarteritis nodosa",
-   "Other systemic vasculitides",
-   "Primary central nervous system vasculitis and other causes of paediatric stroke",
-   "Other monogenic autoinflammatory syndromes",
-   "Primary immunodeficiency with autoimmune features",
-   "Bone marrow failure syndromes",
-   "Antiphospholipid syndrome"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for biallelic ADA2 variants",
-   "Serum ADA2 enzyme activity assay",
-   "Brain MRI and MR angiography to detect lacunar strokes and vasculopathy",
-   "Inflammatory markers and full blood count for cytopenias",
-   "Immunoglobulin levels and lymphocyte subsets to assess immunodeficiency",
-   "Skin biopsy of vasculitic or livedoid lesions where indicated",
-   "Bone marrow examination when marrow failure is suspected"
-  ],
-  "redFlags": [
-   "Acute focal neurological deficit indicating stroke",
-   "Recurrent strokes despite treatment",
-   "Severe cytopenias or bone marrow failure",
-   "Serious or recurrent infection reflecting immunodeficiency",
-   "Progressive systemic vasculitis with organ involvement"
-  ],
-  "prognosis": "Untreated disease carries substantial morbidity from recurrent strokes and vasculitis, but TNF inhibition markedly reduces stroke recurrence and controls inflammation. Prognosis is worse when severe haematological or immune involvement dominates, in which case stem cell transplantation may be curative.",
-  "pitfalls": [
-   "Diagnosing idiopathic polyarteritis nodosa without testing for ADA2 deficiency in a child",
-   "Using anticoagulation or antiplatelet agents that increase haemorrhagic stroke risk",
-   "Relying on corticosteroids alone rather than starting TNF inhibition for durable control",
-   "Missing the haematological and immunodeficiency components of the phenotype",
-   "Overlooking a family history of early strokes or unexplained vasculitis"
-  ],
-  "references": [
-   "Textbook of Pediatric Rheumatology",
-   "Consensus guidance on diagnosis and management of DADA2",
-   "PRINTO/PReS recommendations on monogenic autoinflammatory vasculitis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start tumour necrosis factor inhibition as first-line therapy to prevent strokes and control the polyarteritis-nodosa-like vasculitis",
-   "Avoid antiplatelet and anticoagulant drugs for stroke prevention because of the risk of haemorrhagic stroke, prioritising TNF blockade",
-   "Use corticosteroids to control acute flares while TNF inhibition takes effect",
-   "Provide immunoglobulin replacement and infection prophylaxis for immunodeficiency and hypogammaglobulinaemia",
-   "Monitor with brain MRI and MR angiography, blood counts and inflammatory markers for recurrent lacunar strokes and haematological involvement",
-   "Consider haematopoietic stem cell transplantation for severe bone marrow failure or refractory disease, which can be curative",
-   "Offer genetic counselling and cascade family testing for this autosomal recessive ADA2 disorder, managed through paediatric rheumatology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "deficiency_adenosine_deaminase2_vasculitis-pathway",
-   "title": "ADA2 deficiency vasculitis (paediatric PAN-like): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A monogenic autoinflammatory vasculopathy caused by biallelic loss-of-function variants in the ADA2 gene (formerly CECR1)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute focal neurological deficit indicating stroke",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for biallelic ADA2 variants, Serum ADA2 enzyme activity assay, Brain MRI and MR angiography to detect lacunar strokes and vasculopathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start tumour necrosis factor inhibition as first-line therapy to prevent strokes and control the polyarteritis-nodosa-like vasculitis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing idiopathic polyarteritis nodosa without testing for ADA2 deficiency in a child"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ada2 deficiency vasculitis (paediatric pan-like)."
-  }
- ],
- "tables": [
-  {
-   "id": "deficiency_adenosine_deaminase2_vasculitis-matrix",
-   "title": "ADA2 deficiency vasculitis (paediatric PAN-like): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A monogenic autoinflammatory vasculopathy caused by biallelic loss-of-function variants in the ADA2 gene (formerly CECR1)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Paediatrics",
+  "specialty": "Paediatric Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A monogenic autoinflammatory vasculopathy caused by biallelic loss-of-function variants in the ADA2 gene (formerly CECR1)",
+      "Presents in childhood with a polyarteritis-nodosa-like small- and medium-vessel vasculitis, livedo racemosa and recurrent fevers",
+      "Early-onset ischaemic and haemorrhagic strokes, often affecting the deep brain (lacunar strokes), are a hallmark and can be recurrent",
+      "A wide phenotype also includes immunodeficiency with recurrent infections and low immunoglobulins, and haematological features such as cytopenias, bone marrow failure or features resembling pure red cell aplasia",
+      "Diagnosis rests on genetic testing for ADA2 variants together with demonstration of low serum ADA2 enzyme activity",
+      "TNF inhibition is highly effective at preventing strokes and controlling vasculitis and is preferred over corticosteroids for long-term control",
+      "Antiplatelet or anticoagulant therapy is generally avoided because of the risk of haemorrhagic stroke, and haematopoietic stem cell transplantation is considered for severe haematological or immune disease"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for biallelic ADA2 variants, Serum ADA2 enzyme activity assay, Brain MRI and MR angiography to detect lacunar",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Deficiency of adenosine deaminase 2 results from biallelic mutations in the ADA2 gene, reducing the activity of a secreted enzyme important for endothelial integrity and the differentiation of monocytes and macrophages. Loss of ADA2 skews monocytes towards a proinflammatory phenotype with excess tumour necrosis factor, causing endothelial damage and a systemic vasculopathy affecting small and medium vessels. This produces the polyarteritis-nodosa-like vasculitis, cutaneous livedo and, through injury to small cerebral arteries, the characteristic recurrent lacunar strokes, while impaired haematopoiesis and immune function account for cytopenias and immunodeficiency.",
+    "additionalDifferentials": [
+      "Childhood polyarteritis nodosa",
+      "Other systemic vasculitides",
+      "Primary central nervous system vasculitis and other causes of paediatric stroke",
+      "Other monogenic autoinflammatory syndromes",
+      "Primary immunodeficiency with autoimmune features",
+      "Bone marrow failure syndromes",
+      "Antiphospholipid syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Childhood polyarteritis nodosa, Other systemic vasculitides, Primary central nervous system vasculitis and other causes of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for biallelic ADA2 variants",
+      "Serum ADA2 enzyme activity assay",
+      "Brain MRI and MR angiography to detect lacunar strokes and vasculopathy",
+      "Inflammatory markers and full blood count for cytopenias",
+      "Immunoglobulin levels and lymphocyte subsets to assess immunodeficiency",
+      "Skin biopsy of vasculitic or livedoid lesions where indicated",
+      "Bone marrow examination when marrow failure is suspected"
     ],
-    [
-     "Management Strategy",
-     "Start tumour necrosis factor inhibition as first-line therapy to prevent strokes and control the polyarteritis-nodosa-like",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute focal neurological deficit indicating stroke",
+      "Recurrent strokes despite treatment",
+      "Severe cytopenias or bone marrow failure",
+      "Serious or recurrent infection reflecting immunodeficiency",
+      "Progressive systemic vasculitis with organ involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing idiopathic polyarteritis nodosa without testing for ADA2 deficiency in a child",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disease carries substantial morbidity from recurrent strokes and vasculitis, but TNF inhibition markedly reduces stroke recurrence and controls inflammation. Prognosis is worse when severe haematological or immune involvement dominates, in which case stem cell transplantation may be curative.",
+    "pitfalls": [
+      "Diagnosing idiopathic polyarteritis nodosa without testing for ADA2 deficiency in a child",
+      "Using anticoagulation or antiplatelet agents that increase haemorrhagic stroke risk",
+      "Relying on corticosteroids alone rather than starting TNF inhibition for durable control",
+      "Missing the haematological and immunodeficiency components of the phenotype",
+      "Overlooking a family history of early strokes or unexplained vasculitis"
+    ],
+    "references": [
+      "Textbook of Pediatric Rheumatology",
+      "Consensus guidance on diagnosis and management of DADA2",
+      "PRINTO/PReS recommendations on monogenic autoinflammatory vasculitis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start tumour necrosis factor inhibition as first-line therapy to prevent strokes and control the polyarteritis-nodosa-like vasculitis",
+      "Avoid antiplatelet and anticoagulant drugs for stroke prevention because of the risk of haemorrhagic stroke, prioritising TNF blockade",
+      "Use corticosteroids to control acute flares while TNF inhibition takes effect",
+      "Provide immunoglobulin replacement and infection prophylaxis for immunodeficiency and hypogammaglobulinaemia",
+      "Monitor with brain MRI and MR angiography, blood counts and inflammatory markers for recurrent lacunar strokes and haematological involvement",
+      "Consider haematopoietic stem cell transplantation for severe bone marrow failure or refractory disease, which can be curative",
+      "Offer genetic counselling and cascade family testing for this autosomal recessive ADA2 disorder, managed through paediatric rheumatology"
     ]
-   ],
-   "caption": "Overview comparison matrix for ada2 deficiency vasculitis (paediatric pan-like)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "deficiency-adenosine-deaminase2-vasculitis-real-image",
-   "title": "ADA2 deficiency vasculitis (paediatric PAN-like): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "deficiency_adenosine_deaminase2_vasculitis-pathway",
+      "title": "ADA2 deficiency vasculitis (paediatric PAN-like): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A monogenic autoinflammatory vasculopathy caused by biallelic loss-of-function variants in the ADA2 gene (formerly CECR1)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute focal neurological deficit indicating stroke",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for biallelic ADA2 variants, Serum ADA2 enzyme activity assay, Brain MRI and MR angiography to detect lacunar strokes and vasculopathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start tumour necrosis factor inhibition as first-line therapy to prevent strokes and control the polyarteritis-nodosa-like vasculitis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing idiopathic polyarteritis nodosa without testing for ADA2 deficiency in a child"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ada2 deficiency vasculitis (paediatric pan-like)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "deficiency_adenosine_deaminase2_vasculitis-matrix",
+      "title": "ADA2 deficiency vasculitis (paediatric PAN-like): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A monogenic autoinflammatory vasculopathy caused by biallelic loss-of-function variants in the ADA2 gene (formerly CECR1)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for biallelic ADA2 variants, Serum ADA2 enzyme activity assay, Brain MRI and MR angiography to detect lacunar",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Childhood polyarteritis nodosa, Other systemic vasculitides, Primary central nervous system vasculitis and other causes of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start tumour necrosis factor inhibition as first-line therapy to prevent strokes and control the polyarteritis-nodosa-like",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing idiopathic polyarteritis nodosa without testing for ADA2 deficiency in a child",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ada2 deficiency vasculitis (paediatric pan-like)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "deficiency_adenosine_deaminase2_vasculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for biallelic ADA2 variants",
+          "cells": [
+            {
+              "text": "Biallelic ADA2 variants confirm the disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum ADA2 enzyme activity assay",
+          "cells": [
+            {
+              "text": "Reduced enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and MR angiography",
+          "cells": [
+            {
+              "text": "Lacunar strokes and vasculopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels and lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Immunodeficiency and hypogammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Cytopenias"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deficiency_adenosine_deaminase2_vasculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "TNF inhibition",
+          "cells": [
+            {
+              "text": "First-line to prevent strokes and control the vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet and anticoagulant drugs",
+          "cells": [
+            {
+              "text": "Haemorrhagic stroke risk; prioritise TNF blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids for flares",
+          "cells": [
+            {
+              "text": "Acute flares while TNF inhibition takes effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin and infection prophylaxis",
+          "cells": [
+            {
+              "text": "For immunodeficiency and hypogammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Brain MRI and MR angiography, blood counts and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stem cell transplantation",
+          "cells": [
+            {
+              "text": "For severe bone marrow failure or refractory disease; can be curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; cascade family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "deficiency_adenosine_deaminase2_vasculitis-dx-mgmt",
+      "title": "Diagnosis and management of ADA2 deficiency vasculitis (paediatric PAN-like)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ADA2 deficiency in a child: vasculitis with strokes or cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute focal deficit, recurrent stroke, cytopenias, serious infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: stroke care and start TNF inhibition; avoid antithrombotic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ADA2 enzyme activity and biallelic ADA2 gene testing; brain MRI and MRA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ADA2 activity reduced or are biallelic ADA2 variants found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider childhood PAN, other vasculitides or antiphospholipid syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start TNF inhibition as first-line to prevent strokes and control vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid antiplatelet and anticoagulant drugs because of haemorrhagic stroke risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids for acute flares while TNF blockade takes effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunoglobulin replacement, infection prophylaxis and haematology monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider stem cell transplantation for severe marrow failure; can be curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated: recurrent strokes; TNF inhibition reduces recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

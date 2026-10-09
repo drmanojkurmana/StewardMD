@@ -1,177 +1,464 @@
 {
- "id": "cushing_disease_pediatric",
- "name": "Paediatric Cushing disease",
- "aliases": [
-  "childhood Cushing disease",
-  "paediatric ACTH-secreting pituitary adenoma",
-  "corticotroph adenoma in children"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "In children an ACTH-secreting pituitary corticotroph adenoma is the commonest cause of endogenous Cushing syndrome beyond infancy",
-   "The hallmark is weight gain together with growth arrest, so a decelerating height velocity in a child who is gaining weight should prompt evaluation",
-   "Other features include facial rounding and plethora, striae, hypertension and fatigue, often more subtle than in adults",
-   "Delayed or arrested puberty and declining school performance may occur",
-   "The adenomas are usually small microadenomas that can be difficult to see on MRI",
-   "Diagnosis follows the standard hypercortisolism workup with late-night salivary or serum cortisol, 24-hour urinary free cortisol and low-dose dexamethasone suppression, then confirmation of ACTH dependence",
-   "Inferior petrosal sinus sampling is valuable to confirm a pituitary source and to lateralise when MRI is equivocal",
-   "First-line treatment is transsphenoidal selective adenomectomy, after which catch-up growth and recovery of the axis need monitoring"
+  "id": "cushing_disease_pediatric",
+  "name": "Paediatric Cushing disease",
+  "aliases": [
+    "childhood Cushing disease",
+    "paediatric ACTH-secreting pituitary adenoma",
+    "corticotroph adenoma in children"
   ],
-  "pathophysiology": "Paediatric Cushing disease is caused by a corticotroph adenoma of the anterior pituitary that autonomously secretes ACTH, driving bilateral adrenal cortisol overproduction. Chronic glucocorticoid excess suppresses the growth hormone and IGF-1 axis and directly inhibits growth-plate chondrocytes and bone formation, so linear growth slows or halts even as adiposity increases, giving the characteristic divergence of the height and weight curves in children. Cortisol excess also suppresses gonadotropin secretion and so delays puberty, raises blood pressure, impairs glucose tolerance and alters mood and immune function. The tumours are usually microadenomas, and the excess ACTH retains partial responsiveness to high-dose glucocorticoid feedback, which underlies the diagnostic testing.",
-  "additionalDifferentials": [
-   "Exogenous (iatrogenic) glucocorticoid exposure, by far the commonest cause of a Cushingoid appearance",
-   "Simple exogenous obesity, where growth velocity is usually normal or increased",
-   "Ectopic ACTH secretion, which is rare in children",
-   "Adrenal adenoma or carcinoma causing ACTH-independent Cushing syndrome",
-   "Primary pigmented nodular adrenocortical disease and Carney complex",
-   "McCune-Albright syndrome",
-   "Pseudo-Cushing states"
-  ],
-  "additionalInvestigations": [
-   "Documentation of the growth curve and height velocity alongside weight",
-   "Late-night salivary or midnight serum cortisol to demonstrate loss of the diurnal rhythm",
-   "24-hour urinary free cortisol",
-   "Low-dose dexamethasone suppression test",
-   "Plasma ACTH to establish ACTH dependence",
-   "Pituitary MRI, recognising that a microadenoma may be small or unseen",
-   "Inferior petrosal sinus sampling with CRH stimulation to confirm the pituitary source and lateralisation"
-  ],
-  "redFlags": [
-   "Progressive growth arrest with weight gain in a child",
-   "Severe hypertension or hypokalaemia",
-   "Very high cortisol or ACTH suggesting aggressive disease or an ectopic or adrenal malignancy",
-   "Vertebral fracture from osteoporosis, or significant psychiatric disturbance"
-  ],
-  "prognosis": "Transsphenoidal surgery by an experienced neurosurgeon achieves remission in most children; catch-up growth is often incomplete so final height may be reduced, and there is a risk of persistent or recurrent disease requiring further surgery, radiotherapy or medical therapy, along with temporary secondary adrenal insufficiency during axis recovery.",
-  "pitfalls": [
-   "Reassuring an obese child without checking the growth curve, since normal growth argues against Cushing disease and arrested growth is a red flag",
-   "Over-relying on a normal or equivocal MRI to exclude a microadenoma",
-   "Omitting inferior petrosal sinus sampling when imaging is negative but disease is ACTH-dependent",
-   "Failing to anticipate and treat postoperative adrenal insufficiency and to monitor for recurrence"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Sperling Pediatric Endocrinology",
-   "Endocrine Society Clinical Practice Guideline on Cushing Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Transsphenoidal selective adenomectomy by an experienced pituitary neurosurgeon as first-line treatment",
-   "Pituitary radiotherapy, or medical steroidogenesis inhibitors such as metyrapone or ketoconazole, as second-line or bridging therapy",
-   "Postoperative glucocorticoid replacement for the expected secondary adrenal insufficiency, with gradual withdrawal",
-   "Monitor growth and height velocity and support catch-up growth, with growth hormone therapy and pubertal induction where needed",
-   "Manage hypertension, glucose intolerance and reduced bone density",
-   "Long-term surveillance for persistent or recurrent hypercortisolism",
-   "Coordinate care through paediatric endocrinology and a pituitary multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cushing_disease_pediatric-pathway",
-   "title": "Paediatric Cushing disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "In children an ACTH-secreting pituitary corticotroph adenoma is the commonest cause of endogenous Cushing syndrome beyond infancy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive growth arrest with weight gain in a child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Documentation of the growth curve and height velocity alongside weight, Late-night salivary or midnight serum cortisol to demonstrate loss of the diurnal rhythm, 24-hour urinary free cortisol"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Transsphenoidal selective adenomectomy by an experienced pituitary neurosurgeon as first-line treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reassuring an obese child without checking the growth curve, since normal growth argues against Cushing disease and arrested growth is a red flag"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paediatric cushing disease."
-  }
- ],
- "tables": [
-  {
-   "id": "cushing_disease_pediatric-matrix",
-   "title": "Paediatric Cushing disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "In children an ACTH-secreting pituitary corticotroph adenoma is the commonest cause of endogenous Cushing syndrome beyond infancy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "In children an ACTH-secreting pituitary corticotroph adenoma is the commonest cause of endogenous Cushing syndrome beyond infancy",
+      "The hallmark is weight gain together with growth arrest, so a decelerating height velocity in a child who is gaining weight should prompt evaluation",
+      "Other features include facial rounding and plethora, striae, hypertension and fatigue, often more subtle than in adults",
+      "Delayed or arrested puberty and declining school performance may occur",
+      "The adenomas are usually small microadenomas that can be difficult to see on MRI",
+      "Diagnosis follows the standard hypercortisolism workup with late-night salivary or serum cortisol, 24-hour urinary free cortisol and low-dose dexamethasone suppression, then confirmation of ACTH dependence",
+      "Inferior petrosal sinus sampling is valuable to confirm a pituitary source and to lateralise when MRI is equivocal",
+      "First-line treatment is transsphenoidal selective adenomectomy, after which catch-up growth and recovery of the axis need monitoring"
     ],
-    [
-     "Key Investigations",
-     "Documentation of the growth curve and height velocity alongside weight, Late-night salivary or midnight serum cortisol to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Paediatric Cushing disease is caused by a corticotroph adenoma of the anterior pituitary that autonomously secretes ACTH, driving bilateral adrenal cortisol overproduction. Chronic glucocorticoid excess suppresses the growth hormone and IGF-1 axis and directly inhibits growth-plate chondrocytes and bone formation, so linear growth slows or halts even as adiposity increases, giving the characteristic divergence of the height and weight curves in children. Cortisol excess also suppresses gonadotropin secretion and so delays puberty, raises blood pressure, impairs glucose tolerance and alters mood and immune function. The tumours are usually microadenomas, and the excess ACTH retains partial responsiveness to high-dose glucocorticoid feedback, which underlies the diagnostic testing.",
+    "additionalDifferentials": [
+      "Exogenous (iatrogenic) glucocorticoid exposure, by far the commonest cause of a Cushingoid appearance",
+      "Simple exogenous obesity, where growth velocity is usually normal or increased",
+      "Ectopic ACTH secretion, which is rare in children",
+      "Adrenal adenoma or carcinoma causing ACTH-independent Cushing syndrome",
+      "Primary pigmented nodular adrenocortical disease and Carney complex",
+      "McCune-Albright syndrome",
+      "Pseudo-Cushing states"
     ],
-    [
-     "Primary Differentials",
-     "Exogenous (iatrogenic) glucocorticoid exposure, by far the commonest cause of a Cushingoid appearance, Simple exogenous obesity,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Documentation of the growth curve and height velocity alongside weight",
+      "Late-night salivary or midnight serum cortisol to demonstrate loss of the diurnal rhythm",
+      "24-hour urinary free cortisol",
+      "Low-dose dexamethasone suppression test",
+      "Plasma ACTH to establish ACTH dependence",
+      "Pituitary MRI, recognising that a microadenoma may be small or unseen",
+      "Inferior petrosal sinus sampling with CRH stimulation to confirm the pituitary source and lateralisation"
     ],
-    [
-     "Management Strategy",
-     "Transsphenoidal selective adenomectomy by an experienced pituitary neurosurgeon as first-line treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive growth arrest with weight gain in a child",
+      "Severe hypertension or hypokalaemia",
+      "Very high cortisol or ACTH suggesting aggressive disease or an ectopic or adrenal malignancy",
+      "Vertebral fracture from osteoporosis, or significant psychiatric disturbance"
     ],
-    [
-     "Clinical Pitfall",
-     "Reassuring an obese child without checking the growth curve, since normal growth argues against Cushing disease and arrested",
-     "Prevent diagnostic or management error"
+    "prognosis": "Transsphenoidal surgery by an experienced neurosurgeon achieves remission in most children; catch-up growth is often incomplete so final height may be reduced, and there is a risk of persistent or recurrent disease requiring further surgery, radiotherapy or medical therapy, along with temporary secondary adrenal insufficiency during axis recovery.",
+    "pitfalls": [
+      "Reassuring an obese child without checking the growth curve, since normal growth argues against Cushing disease and arrested growth is a red flag",
+      "Over-relying on a normal or equivocal MRI to exclude a microadenoma",
+      "Omitting inferior petrosal sinus sampling when imaging is negative but disease is ACTH-dependent",
+      "Failing to anticipate and treat postoperative adrenal insufficiency and to monitor for recurrence"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Sperling Pediatric Endocrinology",
+      "Endocrine Society Clinical Practice Guideline on Cushing Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Transsphenoidal selective adenomectomy by an experienced pituitary neurosurgeon as first-line treatment",
+      "Pituitary radiotherapy, or medical steroidogenesis inhibitors such as metyrapone or ketoconazole, as second-line or bridging therapy",
+      "Postoperative glucocorticoid replacement for the expected secondary adrenal insufficiency, with gradual withdrawal",
+      "Monitor growth and height velocity and support catch-up growth, with growth hormone therapy and pubertal induction where needed",
+      "Manage hypertension, glucose intolerance and reduced bone density",
+      "Long-term surveillance for persistent or recurrent hypercortisolism",
+      "Coordinate care through paediatric endocrinology and a pituitary multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for paediatric cushing disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cushing-disease-pediatric-real-image",
-   "title": "Paediatric Cushing disease: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "cushing_disease_pediatric-pathway",
+      "title": "Paediatric Cushing disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "In children an ACTH-secreting pituitary corticotroph adenoma is the commonest cause of endogenous Cushing syndrome beyond infancy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive growth arrest with weight gain in a child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Documentation of the growth curve and height velocity alongside weight, Late-night salivary or midnight serum cortisol to demonstrate loss of the diurnal rhythm, 24-hour urinary free cortisol"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Transsphenoidal selective adenomectomy by an experienced pituitary neurosurgeon as first-line treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reassuring an obese child without checking the growth curve, since normal growth argues against Cushing disease and arrested growth is a red flag"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paediatric cushing disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cushing_disease_pediatric-matrix",
+      "title": "Paediatric Cushing disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "In children an ACTH-secreting pituitary corticotroph adenoma is the commonest cause of endogenous Cushing syndrome beyond infancy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Documentation of the growth curve and height velocity alongside weight, Late-night salivary or midnight serum cortisol to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Exogenous (iatrogenic) glucocorticoid exposure, by far the commonest cause of a Cushingoid appearance, Simple exogenous obesity,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Transsphenoidal selective adenomectomy by an experienced pituitary neurosurgeon as first-line treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reassuring an obese child without checking the growth curve, since normal growth argues against Cushing disease and arrested",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paediatric cushing disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cushing_disease_pediatric-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Growth curve and height velocity",
+          "cells": [
+            {
+              "text": "Growth arrest with weight gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late-night cortisol or midnight serum cortisol",
+          "cells": [
+            {
+              "text": "Loss of diurnal rhythm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ACTH and low-dose dexamethasone suppression",
+          "cells": [
+            {
+              "text": "ACTH-dependent hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Microadenoma may be small or unseen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inferior petrosal sinus sampling with CRH",
+          "cells": [
+            {
+              "text": "Pituitary source and lateralisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cushing_disease_pediatric-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Exogenous glucocorticoid exposure",
+          "cells": [
+            {
+              "text": "Commonest cause in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple exogenous obesity",
+          "cells": [
+            {
+              "text": "Growth velocity usually normal or increased"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex or McCune-Albright syndrome",
+          "cells": [
+            {
+              "text": "Named syndromic look-alikes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cushing_disease_pediatric-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal selective adenomectomy",
+          "cells": [
+            {
+              "text": "First-line by an experienced pituitary neurosurgeon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy or steroidogenesis inhibitors",
+          "cells": [
+            {
+              "text": "Second-line or bridging therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative glucocorticoid replacement",
+          "cells": [
+            {
+              "text": "Expected secondary adrenal insufficiency; gradual withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth support",
+          "cells": [
+            {
+              "text": "Growth hormone and pubertal induction where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication care",
+          "cells": [
+            {
+              "text": "Hypertension, glucose intolerance and reduced bone density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Recurrent hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric endocrine team",
+          "cells": [
+            {
+              "text": "Pituitary multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cushing_disease_pediatric-dx-mgmt",
+      "title": "Diagnosis and management of Paediatric Cushing disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected paediatric Cushing disease: growth arrest with weight gain in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (severe hypertension, hypokalaemia, vertebral fracture, psychosis)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent control of hypertension or hypokalaemia; fracture and mood review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Growth curve; late-night cortisol; ACTH; dexamethasone test; MRI; petrosal sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ACTH-dependent cortisol excess localise to the pituitary?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider exogenous steroids, simple obesity or ACTH-independent causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal selective adenomectomy first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy or metyrapone or ketoconazole as second-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Glucocorticoid replacement after surgery with gradual withdrawal",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Growth monitoring with growth hormone and pubertal induction if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most children achieve remission; catch-up growth is often incomplete",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,453 @@
 {
- "id": "combined_factor_v_viii_deficiency",
- "name": "Combined factor V and VIII deficiency (LMAN1/MCFD2)",
- "aliases": [
-  "F5F8D",
-  "combined deficiency of factor V and factor VIII",
-  "LMAN1 deficiency",
-  "MCFD2 deficiency",
-  "ERGIC-53 deficiency"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal recessive disorder in which factor V and factor VIII are simultaneously reduced, usually to mild-to-moderate levels around 5 to 30 percent",
-   "It is a defect of intracellular protein transport, not of the coagulation factor genes themselves, so both factors are affected together",
-   "The bleeding tendency is generally mild to moderate, with mucosal bleeding, easy bruising, and bleeding after surgery, dental work, or childbirth",
-   "Both the prothrombin time and the activated partial thromboplastin time are prolonged, reflecting the combined deficiency",
-   "It is relatively more frequent in populations with consanguinity, such as those around the Mediterranean and Middle East",
-   "It must be distinguished from coincidental co-inheritance of separate factor V and factor VIII deficiencies and from acquired combined deficiencies",
-   "Bleeding episodes are managed with sources that replace both factors, using plasma for factor V and factor VIII replacement or antifibrinolytics for mucosal bleeding"
+  "id": "combined_factor_v_viii_deficiency",
+  "name": "Combined factor V and VIII deficiency (LMAN1/MCFD2)",
+  "aliases": [
+    "F5F8D",
+    "combined deficiency of factor V and factor VIII",
+    "LMAN1 deficiency",
+    "MCFD2 deficiency",
+    "ERGIC-53 deficiency"
   ],
-  "pathophysiology": "Combined factor V and factor VIII deficiency results from loss-of-function variants in LMAN1 (encoding ERGIC-53) or its cofactor MCFD2. Together these proteins form a cargo receptor that transports factor V and factor VIII from the endoplasmic reticulum through the ER-Golgi intermediate compartment for secretion. When this transport machinery fails, both factors are inefficiently secreted, so their plasma levels fall in parallel despite normal factor V and factor VIII genes. The shared secretory pathway explains why two functionally distinct factors are deficient at once.",
-  "additionalDifferentials": [
-   "Coincidental co-inheritance of separate factor V and factor VIII deficiencies",
-   "Acquired combined deficiency from liver disease",
-   "Disseminated intravascular coagulation",
-   "Vitamin K deficiency or warfarin effect (multiple factor reduction)",
-   "Isolated factor V deficiency",
-   "Haemophilia A (isolated factor VIII deficiency)"
-  ],
-  "additionalInvestigations": [
-   "Prothrombin time and activated partial thromboplastin time, both prolonged",
-   "Specific factor V and factor VIII activity assays confirming concurrent reduction",
-   "Von Willebrand factor studies to show factor VIII reduction is not due to von Willebrand disease",
-   "Liver function tests to exclude an acquired cause",
-   "LMAN1 and MCFD2 gene analysis to confirm the diagnosis",
-   "Family studies given the autosomal recessive inheritance and consanguinity"
-  ],
-  "redFlags": [
-   "Significant peripartum or postoperative haemorrhage",
-   "Bleeding after major trauma requiring dual-factor replacement",
-   "Menorrhagia causing anaemia",
-   "Unrecognised diagnosis before major surgery"
-  ],
-  "prognosis": "The disorder generally causes only mild to moderate bleeding, and with appropriate replacement around surgery and childbirth the long-term outlook is good. Spontaneous severe bleeding is uncommon.",
-  "pitfalls": [
-   "Treating only one factor and leaving the other uncorrected during bleeding",
-   "Assuming a low factor VIII reflects von Willebrand disease without checking factor V",
-   "Confusing the inherited transport defect with an acquired combined deficiency",
-   "Overlooking the diagnosis when both prolonged clotting times are attributed to liver disease"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Hoffman: Hematology - Basic Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Peri-operative and bleeding-episode replacement with fresh frozen plasma to raise factor V combined with factor VIII concentrate",
-   "Desmopressin to transiently boost factor VIII for minor procedures or mild bleeding",
-   "Antifibrinolytics such as tranexamic acid for mucosal bleeding and dental extractions",
-   "Advance planning of haemostatic cover before surgery, dental work and childbirth, with monitoring of factor V and factor VIII activity",
-   "Avoid antiplatelet agents and non-steroidal anti-inflammatory drugs",
-   "Genetic counselling and family studies given the autosomal recessive inheritance",
-   "Care coordinated through a haemophilia or haematology centre"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "combined_factor_v_viii_deficiency-pathway",
-   "title": "Combined factor V and VIII deficiency (LMAN1/MCFD2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal recessive disorder in which factor V and factor VIII are simultaneously reduced, usually to mild-to-moderate levels around 5 to 30 percent",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant peripartum or postoperative haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Prothrombin time and activated partial thromboplastin time, both prolonged, Specific factor V and factor VIII activity assays confirming concurrent reduction, Von Willebrand factor studies to show factor VIII reduction is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Peri-operative and bleeding-episode replacement with fresh frozen plasma to raise factor V combined with factor VIII concentrate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating only one factor and leaving the other uncorrected during bleeding"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of combined factor v and viii deficiency (lman1/mcfd2)."
-  }
- ],
- "tables": [
-  {
-   "id": "combined_factor_v_viii_deficiency-matrix",
-   "title": "Combined factor V and VIII deficiency (LMAN1/MCFD2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal recessive disorder in which factor V and factor VIII are simultaneously reduced, usually to mild-to-moderate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal recessive disorder in which factor V and factor VIII are simultaneously reduced, usually to mild-to-moderate levels around 5 to 30 percent",
+      "It is a defect of intracellular protein transport, not of the coagulation factor genes themselves, so both factors are affected together",
+      "The bleeding tendency is generally mild to moderate, with mucosal bleeding, easy bruising, and bleeding after surgery, dental work, or childbirth",
+      "Both the prothrombin time and the activated partial thromboplastin time are prolonged, reflecting the combined deficiency",
+      "It is relatively more frequent in populations with consanguinity, such as those around the Mediterranean and Middle East",
+      "It must be distinguished from coincidental co-inheritance of separate factor V and factor VIII deficiencies and from acquired combined deficiencies",
+      "Bleeding episodes are managed with sources that replace both factors, using plasma for factor V and factor VIII replacement or antifibrinolytics for mucosal bleeding"
     ],
-    [
-     "Key Investigations",
-     "Prothrombin time and activated partial thromboplastin time, both prolonged, Specific factor V and factor VIII activity assays",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Combined factor V and factor VIII deficiency results from loss-of-function variants in LMAN1 (encoding ERGIC-53) or its cofactor MCFD2. Together these proteins form a cargo receptor that transports factor V and factor VIII from the endoplasmic reticulum through the ER-Golgi intermediate compartment for secretion. When this transport machinery fails, both factors are inefficiently secreted, so their plasma levels fall in parallel despite normal factor V and factor VIII genes. The shared secretory pathway explains why two functionally distinct factors are deficient at once.",
+    "additionalDifferentials": [
+      "Coincidental co-inheritance of separate factor V and factor VIII deficiencies",
+      "Acquired combined deficiency from liver disease",
+      "Disseminated intravascular coagulation",
+      "Vitamin K deficiency or warfarin effect (multiple factor reduction)",
+      "Isolated factor V deficiency",
+      "Haemophilia A (isolated factor VIII deficiency)"
     ],
-    [
-     "Primary Differentials",
-     "Coincidental co-inheritance of separate factor V and factor VIII deficiencies, Acquired combined deficiency from liver disease,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Prothrombin time and activated partial thromboplastin time, both prolonged",
+      "Specific factor V and factor VIII activity assays confirming concurrent reduction",
+      "Von Willebrand factor studies to show factor VIII reduction is not due to von Willebrand disease",
+      "Liver function tests to exclude an acquired cause",
+      "LMAN1 and MCFD2 gene analysis to confirm the diagnosis",
+      "Family studies given the autosomal recessive inheritance and consanguinity"
     ],
-    [
-     "Management Strategy",
-     "Peri-operative and bleeding-episode replacement with fresh frozen plasma to raise factor V combined with factor VIII concentrate",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant peripartum or postoperative haemorrhage",
+      "Bleeding after major trauma requiring dual-factor replacement",
+      "Menorrhagia causing anaemia",
+      "Unrecognised diagnosis before major surgery"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating only one factor and leaving the other uncorrected during bleeding",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder generally causes only mild to moderate bleeding, and with appropriate replacement around surgery and childbirth the long-term outlook is good. Spontaneous severe bleeding is uncommon.",
+    "pitfalls": [
+      "Treating only one factor and leaving the other uncorrected during bleeding",
+      "Assuming a low factor VIII reflects von Willebrand disease without checking factor V",
+      "Confusing the inherited transport defect with an acquired combined deficiency",
+      "Overlooking the diagnosis when both prolonged clotting times are attributed to liver disease"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Hoffman: Hematology - Basic Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Peri-operative and bleeding-episode replacement with fresh frozen plasma to raise factor V combined with factor VIII concentrate",
+      "Desmopressin to transiently boost factor VIII for minor procedures or mild bleeding",
+      "Antifibrinolytics such as tranexamic acid for mucosal bleeding and dental extractions",
+      "Advance planning of haemostatic cover before surgery, dental work and childbirth, with monitoring of factor V and factor VIII activity",
+      "Avoid antiplatelet agents and non-steroidal anti-inflammatory drugs",
+      "Genetic counselling and family studies given the autosomal recessive inheritance",
+      "Care coordinated through a haemophilia or haematology centre"
     ]
-   ],
-   "caption": "Overview comparison matrix for combined factor v and viii deficiency (lman1/mcfd2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "combined-factor-v-viii-deficiency-real-image",
-   "title": "Combined factor V and VIII deficiency (LMAN1/MCFD2): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "combined_factor_v_viii_deficiency-pathway",
+      "title": "Combined factor V and VIII deficiency (LMAN1/MCFD2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal recessive disorder in which factor V and factor VIII are simultaneously reduced, usually to mild-to-moderate levels around 5 to 30 percent",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant peripartum or postoperative haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Prothrombin time and activated partial thromboplastin time, both prolonged, Specific factor V and factor VIII activity assays confirming concurrent reduction, Von Willebrand factor studies to show factor VIII reduction is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Peri-operative and bleeding-episode replacement with fresh frozen plasma to raise factor V combined with factor VIII concentrate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating only one factor and leaving the other uncorrected during bleeding"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of combined factor v and viii deficiency (lman1/mcfd2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "combined_factor_v_viii_deficiency-matrix",
+      "title": "Combined factor V and VIII deficiency (LMAN1/MCFD2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal recessive disorder in which factor V and factor VIII are simultaneously reduced, usually to mild-to-moderate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Prothrombin time and activated partial thromboplastin time, both prolonged, Specific factor V and factor VIII activity assays",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coincidental co-inheritance of separate factor V and factor VIII deficiencies, Acquired combined deficiency from liver disease,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Peri-operative and bleeding-episode replacement with fresh frozen plasma to raise factor V combined with factor VIII concentrate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating only one factor and leaving the other uncorrected during bleeding",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for combined factor v and viii deficiency (lman1/mcfd2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "combined_factor_v_viii_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prothrombin time and activated partial thromboplastin time",
+          "cells": [
+            {
+              "text": "Both prolonged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor V and factor VIII activity assays",
+          "cells": [
+            {
+              "text": "Concurrent reduction of both factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand factor studies",
+          "cells": [
+            {
+              "text": "Factor VIII reduction not due to von Willebrand disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Acquired cause excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "combined_factor_v_viii_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired combined deficiency from liver disease",
+          "cells": [
+            {
+              "text": "Liver function tests exclude an acquired cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "Low factor VIII assumed to be VWD without checking factor V"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophilia A",
+          "cells": [
+            {
+              "text": "Isolated factor VIII deficiency; factor V assay separates the two"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "combined_factor_v_viii_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Replacement for bleeding and surgery",
+          "cells": [
+            {
+              "text": "Fresh frozen plasma to raise factor V, with factor VIII concentrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Transiently boosts factor VIII for minor procedures or mild bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytics",
+          "cells": [
+            {
+              "text": "Tranexamic acid for mucosal bleeding and dental extraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advance haemostatic planning",
+          "cells": [
+            {
+              "text": "Before surgery, dental work and childbirth, with factor V and VIII monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet agents and NSAIDs",
+          "cells": [
+            {
+              "text": "Listed as drugs to avoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist coordination",
+          "cells": [
+            {
+              "text": "Haemophilia or haematology centre"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "combined_factor_v_viii_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Combined factor V and VIII deficiency (LMAN1/MCFD2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected combined factor V and VIII deficiency: prolonged PT and APTT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (major bleeding, trauma, menorrhagia, pre-surgery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: replace both factors with plasma and factor VIII concentrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Factor V and VIII activity assays; VWF studies; liver function; LMAN1 or MCFD2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are factor V and factor VIII both reduced, with VWD excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemophilia A, isolated factor V deficiency or acquired causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fresh frozen plasma with factor VIII concentrate for bleeding and surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Desmopressin for minor procedures or mild bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tranexamic acid for mucosal bleeding and dental extraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid antiplatelet agents and non-steroidal anti-inflammatory drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally mild to moderate bleeding; good outlook with replacement around surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

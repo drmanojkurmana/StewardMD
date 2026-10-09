@@ -1,196 +1,174 @@
 {
- "id": "neonatal-pericardiocentesis",
- "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium)",
- "subject": "paediatrics",
- "population": "Neonates",
- "basis": "international",
- "setting": "NICU, SNCU",
- "aliases": [
-  "pericardial tap",
-  "cardiac tamponade newborn",
-  "pericardial effusion neonate",
-  "pneumopericardium",
-  "PICC tamponade",
-  "UVC tamponade",
-  "subxiphoid pericardiocentesis",
-  "central line pericardial effusion"
- ],
- "summary": "Suspect tamponade in any neonate with a UVC or PICC who suddenly deteriorates. Confirm with bedside echo, remove or reposition the line, and if the heart is compressed drain by ultrasound-guided subxiphoid puncture with a 22G cannula aimed at the left shoulder, aspirating as you advance.",
- "sections": [
-  {
-   "kind": "recognise",
-   "title": "Suspect it",
-   "items": [
-    "Central catheters (UVC or PICC) can perforate the thin preterm myocardium or vessel wall; a tip in or against the right atrium is the main risk. Mechanical tip damage and hypertonic fluid are both implicated.",
-    "Signs are non-specific: sudden rise in oxygen need, tachycardia, poor perfusion, an enlarged cardiac silhouette, or cardiac arrest.",
-    "PICC tips move: up to 24% migrate within 24 hours, and perforation has occurred with tips outside the cardiac silhouette.",
-    "Symptomatic pneumopericardium in a ventilated baby can quickly become life-threatening and needs urgent drainage."
-   ]
-  },
-  {
-   "kind": "investigations",
-   "title": "Confirm",
-   "items": [
-    "Use bedside echo (POCUS): it shows the effusion, chamber compression and the catheter tip (subxiphoid and parasternal views).",
-    "Chest X-ray is poor at separating effusion from the heart shadow; ultrasound is preferred."
-   ]
-  },
-  {
-   "kind": "immediate",
-   "title": "Drain",
-   "items": [
-    "When echo shows chamber compression, restricted filling and low cardiac output, do pericardiocentesis promptly. The subxiphoid percutaneous approach is safer and more reliable.",
-    "Technique: insert a 22G peripheral cannula below the xiphoid, aim toward the left shoulder and aspirate as you advance, under ultrasound guidance. One preterm case used a 21-gauge needle on a 10 mL syringe and improved after 4 mL of air was aspirated.",
-    "Deal with the line: a malpositioned UVC was removed immediately in a POCUS case series; small effusions resolved after repositioning the tip. Draining the effusion through the PICC and pulling the tip back from the atrium have also been reported.",
-    "If the pericardium holds clot or the baby stays unstable, surgical subxiphoid pericardial drainage may be needed."
-   ]
-  },
-  {
-   "kind": "monitoring",
-   "title": "After drainage",
-   "items": [
-    "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17 mL of chylous fluid in one PICC case).",
-    "Repeat echo to watch for re-accumulation, and keep continuous ECG monitoring."
-   ]
-  },
-  {
-   "kind": "prevention",
-   "title": "Prevention",
-   "items": [
-    "Keep PICC tips in the vena cava outside the heart: about 1 cm beyond the cardiac silhouette in preterm and 2 cm in term infants. Check the tip by X-ray or ultrasound at least twice a week.",
-    "Aim UVC tips at the junction of the IVC and right atrium, and use POCUS to watch for migration."
-   ]
-  }
- ],
- "sources": [
-  {
-   "org": "Medicine (Baltimore) (Liu Y et al.)",
-   "title": "PICC-related pericardial effusion/cardiac tamponade in neonates: two cases and literature review",
-   "year": 2023,
-   "url": "https://doi.org/10.1097/md.0000000000035779"
-  },
-  {
-   "org": "Cureus (Gialamprinou D et al.)",
-   "title": "Pericardial effusion and cardiac tamponade in preterm neonates after UVC insertion: POCUS-guided case series",
-   "year": 2025,
-   "url": "https://doi.org/10.7759/cureus.99821"
-  },
-  {
-   "org": "POCUS J (Guzman PJC et al.)",
-   "title": "Utilizing POCUS for the identification and management of PICC line-associated cardiac tamponade",
-   "year": 2025,
-   "url": "https://doi.org/10.24908/pocusj.v10i02.18439"
-  },
-  {
-   "org": "Sisli Etfal Hastan Tip Bul (Akboga E et al.)",
-   "title": "Successful treatment of pneumopericardium with pericardiocentesis in a premature infant",
-   "year": 2026,
-   "url": "https://doi.org/10.14744/semb.2025.53900"
-  },
-  {
-   "org": "Case Rep Pediatr (Grandmougin D et al.)",
-   "title": "Iatrogenic cardiac tamponade following chest drain insertion for tension pneumothorax in a premature newborn",
-   "year": 2025,
-   "url": "https://doi.org/10.1155/crpe/7960753"
-  }
- ],
- "review": {
-  "status": "ai_drafted",
-  "compiled": "2026-09-30"
- },
- "algorithms": [
-  {
-   "id": "neonatal-pericardiocentesis-pathway",
-   "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium) Clinical Decision & Management Pathway",
-   "steps": [
+  "id": "neonatal-pericardiocentesis",
+  "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium)",
+  "subject": "paediatrics",
+  "population": "Neonates",
+  "basis": "international",
+  "setting": "NICU, SNCU",
+  "aliases": [
+    "pericardial tap",
+    "cardiac tamponade newborn",
+    "pericardial effusion neonate",
+    "pneumopericardium",
+    "PICC tamponade",
+    "UVC tamponade",
+    "subxiphoid pericardiocentesis",
+    "central line pericardial effusion"
+  ],
+  "summary": "Suspect tamponade in any neonate with a UVC or PICC who suddenly deteriorates. Confirm with bedside echo, remove or reposition the line, and if the heart is compressed drain by ultrasound-guided subxiphoid puncture with a 22G cannula aimed at the left shoulder, aspirating as you advance.",
+  "sections": [
     {
-     "step": "Triage & Clinical Presentation",
-     "action": "Central catheters (UVC or PICC) can perforate the thin preterm myocardium or vessel wall; a tip in or against the right atrium is the main risk. Mechanical tip damage and hypertonic fluid are both implicated.",
-     "critical": true
+      "kind": "recognise",
+      "title": "Suspect it",
+      "items": [
+        "Central catheters (UVC or PICC) can perforate the thin preterm myocardium or vessel wall; a tip in or against the right atrium is the main risk. Mechanical tip damage and hypertonic fluid are both implicated.",
+        "Signs are non-specific: sudden rise in oxygen need, tachycardia, poor perfusion, an enlarged cardiac silhouette, or cardiac arrest.",
+        "PICC tips move: up to 24% migrate within 24 hours, and perforation has occurred with tips outside the cardiac silhouette.",
+        "Symptomatic pneumopericardium in a ventilated baby can quickly become life-threatening and needs urgent drainage."
+      ]
     },
     {
-     "step": "Immediate Stabilization",
-     "branch": "Emergency Stabilization",
-     "action": "When echo shows chamber compression, restricted filling and low cardiac output, do pericardiocentesis promptly. The subxiphoid percutaneous approach is safer and more reliable.",
-     "critical": true
+      "kind": "investigations",
+      "title": "Confirm",
+      "items": [
+        "Use bedside echo (POCUS): it shows the effusion, chamber compression and the catheter tip (subxiphoid and parasternal views).",
+        "Chest X-ray is poor at separating effusion from the heart shadow; ultrasound is preferred."
+      ]
     },
     {
-     "step": "Diagnostic Workup & Risk Stratification",
-     "action": "Use bedside echo (POCUS): it shows the effusion, chamber compression and the catheter tip (subxiphoid and parasternal views)."
+      "kind": "immediate",
+      "title": "Drain",
+      "items": [
+        "When echo shows chamber compression, restricted filling and low cardiac output, do pericardiocentesis promptly. The subxiphoid percutaneous approach is safer and more reliable.",
+        "Technique: insert a 22G peripheral cannula below the xiphoid, aim toward the left shoulder and aspirate as you advance, under ultrasound guidance. One preterm case used a 21-gauge needle on a 10 mL syringe and improved after 4 mL of air was aspirated.",
+        "Deal with the line: a malpositioned UVC was removed immediately in a POCUS case series; small effusions resolved after repositioning the tip. Draining the effusion through the PICC and pulling the tip back from the atrium have also been reported.",
+        "If the pericardium holds clot or the baby stays unstable, surgical subxiphoid pericardial drainage may be needed."
+      ]
     },
     {
-     "step": "Definitive Medical Management",
-     "branch": "Targeted Therapy",
-     "action": "Technique: insert a 22G peripheral cannula below the xiphoid, aim toward the left shoulder and aspirate as you advance, under ultrasound guidance. One preterm case used a 21-gauge needle on a 10 mL syringe and improved after 4 mL of air"
+      "kind": "monitoring",
+      "title": "After drainage",
+      "items": [
+        "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17 mL of chylous fluid in one PICC case).",
+        "Repeat echo to watch for re-accumulation, and keep continuous ECG monitoring."
+      ]
     },
     {
-     "step": "Monitoring & Escalation Thresholds",
-     "action": "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17 mL of chylous fluid in one PICC case)."
+      "kind": "prevention",
+      "title": "Prevention",
+      "items": [
+        "Keep PICC tips in the vena cava outside the heart: about 1 cm beyond the cardiac silhouette in preterm and 2 cm in term infants. Check the tip by X-ray or ultrasound at least twice a week.",
+        "Aim UVC tips at the junction of the IVC and right atrium, and use POCUS to watch for migration."
+      ]
     }
-   ],
-   "caption": "Evidence-based clinical decision pathway for pericardiocentesis in neonates (tamponade, pneumopericardium)."
-  }
- ],
- "tables": [
-  {
-   "id": "neonatal-pericardiocentesis-summary-matrix",
-   "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium) Clinical Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Central catheters (UVC or PICC) can perforate the thin preterm myocardium or vessel wall; a tip in or against the right atrium is the main",
-     "Mandatory clinical criteria"
-    ],
-    [
-     "Immediate Priority",
-     "When echo shows chamber compression, restricted filling and low cardiac output, do pericardiocentesis promptly. The subxiphoid percutaneous",
-     "Time-critical initial resuscitation"
-    ],
-    [
-     "Key Investigations",
-     "Use bedside echo (POCUS): it shows the effusion, chamber compression and the catheter tip (subxiphoid and parasternal views).",
-     "Differentiates etiology and severity"
-    ],
-    [
-     "Targeted Treatment",
-     "Specialist consultation and organ support",
-     "Definitive care pathway"
-    ],
-    [
-     "Monitoring Goal",
-     "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17",
-     "Early detection of decompensation"
-    ]
-   ],
-   "caption": "Core clinical management matrix for pericardiocentesis in neonates (tamponade, pneumopericardium)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neonatal-pericardiocentesis-real-image",
-   "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium): 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  ],
+  "sources": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+      "org": "Medicine (Baltimore) (Liu Y et al.)",
+      "title": "PICC-related pericardial effusion/cardiac tamponade in neonates: two cases and literature review",
+      "year": 2023,
+      "url": "https://doi.org/10.1097/md.0000000000035779"
     },
     {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+      "org": "Cureus (Gialamprinou D et al.)",
+      "title": "Pericardial effusion and cardiac tamponade in preterm neonates after UVC insertion: POCUS-guided case series",
+      "year": 2025,
+      "url": "https://doi.org/10.7759/cureus.99821"
     },
     {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "org": "POCUS J (Guzman PJC et al.)",
+      "title": "Utilizing POCUS for the identification and management of PICC line-associated cardiac tamponade",
+      "year": 2025,
+      "url": "https://doi.org/10.24908/pocusj.v10i02.18439"
+    },
+    {
+      "org": "Sisli Etfal Hastan Tip Bul (Akboga E et al.)",
+      "title": "Successful treatment of pneumopericardium with pericardiocentesis in a premature infant",
+      "year": 2026,
+      "url": "https://doi.org/10.14744/semb.2025.53900"
+    },
+    {
+      "org": "Case Rep Pediatr (Grandmougin D et al.)",
+      "title": "Iatrogenic cardiac tamponade following chest drain insertion for tension pneumothorax in a premature newborn",
+      "year": 2025,
+      "url": "https://doi.org/10.1155/crpe/7960753"
     }
-   ]
-  }
- ]
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "compiled": "2026-09-30"
+  },
+  "algorithms": [
+    {
+      "id": "neonatal-pericardiocentesis-pathway",
+      "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium) Clinical Decision & Management Pathway",
+      "steps": [
+        {
+          "step": "Triage & Clinical Presentation",
+          "action": "Central catheters (UVC or PICC) can perforate the thin preterm myocardium or vessel wall; a tip in or against the right atrium is the main risk. Mechanical tip damage and hypertonic fluid are both implicated.",
+          "critical": true
+        },
+        {
+          "step": "Immediate Stabilization",
+          "branch": "Emergency Stabilization",
+          "action": "When echo shows chamber compression, restricted filling and low cardiac output, do pericardiocentesis promptly. The subxiphoid percutaneous approach is safer and more reliable.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Risk Stratification",
+          "action": "Use bedside echo (POCUS): it shows the effusion, chamber compression and the catheter tip (subxiphoid and parasternal views)."
+        },
+        {
+          "step": "Definitive Medical Management",
+          "branch": "Targeted Therapy",
+          "action": "Technique: insert a 22G peripheral cannula below the xiphoid, aim toward the left shoulder and aspirate as you advance, under ultrasound guidance. One preterm case used a 21-gauge needle on a 10 mL syringe and improved after 4 mL of air"
+        },
+        {
+          "step": "Monitoring & Escalation Thresholds",
+          "action": "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17 mL of chylous fluid in one PICC case)."
+        }
+      ],
+      "caption": "Evidence-based clinical decision pathway for pericardiocentesis in neonates (tamponade, pneumopericardium)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "neonatal-pericardiocentesis-summary-matrix",
+      "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium) Clinical Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Central catheters (UVC or PICC) can perforate the thin preterm myocardium or vessel wall; a tip in or against the right atrium is the main",
+          "Mandatory clinical criteria"
+        ],
+        [
+          "Immediate Priority",
+          "When echo shows chamber compression, restricted filling and low cardiac output, do pericardiocentesis promptly. The subxiphoid percutaneous",
+          "Time-critical initial resuscitation"
+        ],
+        [
+          "Key Investigations",
+          "Use bedside echo (POCUS): it shows the effusion, chamber compression and the catheter tip (subxiphoid and parasternal views).",
+          "Differentiates etiology and severity"
+        ],
+        [
+          "Targeted Treatment",
+          "Specialist consultation and organ support",
+          "Definitive care pathway"
+        ],
+        [
+          "Monitoring Goal",
+          "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17",
+          "Early detection of decompensation"
+        ]
+      ],
+      "caption": "Core clinical management matrix for pericardiocentesis in neonates (tamponade, pneumopericardium)."
+    }
+  ],
+  "diagrams": []
 }

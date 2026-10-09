@@ -1,182 +1,471 @@
 {
- "id": "infantile_hemangioma",
- "name": "Infantile Haemangioma",
- "aliases": [
-  "Infantile capillary haemangioma",
-  "Infantile haemangioma",
-  "Strawberry haemangioma",
-  "Strawberry naevus",
-  "infantile haemangioma",
-  "infantile hemangioma",
-  "strawberry haemangioma",
-  "strawberry naevus"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Infantile haemangiomas are the commonest benign tumours of infancy and follow a characteristic course: often absent or subtle at birth, they proliferate over the first months of life, then slowly involute over subsequent years",
-   "Superficial lesions are bright red and lobulated (the strawberry appearance), while deeper ones appear as bluish, soft, compressible swellings with little surface change",
-   "They are more frequent in premature and low-birth-weight infants and in girls, and most are uncomplicated and need only reassurance and monitoring",
-   "The key management question is whether a lesion is high-risk by virtue of its site, size, number, or growth, since early treatment can prevent lasting complications",
-   "Beta-blocker therapy has transformed treatment of problematic haemangiomas, with intervention prioritised during the proliferative phase when it is most effective",
-   "Periocular lesions can obstruct vision and cause amblyopia, and airway involvement (suggested by a beard-distribution facial lesion with stridor) can be life-threatening",
-   "Ulceration is the most frequent complication and is painful, prone to infection, and can scar, so it needs prompt wound care and pain control",
-   "Multiple cutaneous haemangiomas raise the possibility of visceral (especially hepatic) involvement and warrant imaging"
+  "id": "infantile_hemangioma",
+  "name": "Infantile Haemangioma",
+  "aliases": [
+    "Infantile capillary haemangioma",
+    "Infantile haemangioma",
+    "Strawberry haemangioma",
+    "Strawberry naevus",
+    "infantile haemangioma",
+    "infantile hemangioma",
+    "strawberry haemangioma",
+    "strawberry naevus"
   ],
-  "pathophysiology": "Infantile haemangiomas are proliferations of endothelial cells that uniformly express the marker GLUT1, distinguishing them from vascular malformations and other vascular tumours. During the proliferative phase there is rapid, disorganised angiogenesis with plump endothelial cells forming densely cellular masses; hypoxia-driven and angiogenic signalling pathways, including vascular endothelial growth factor mechanisms, are implicated. Over time the lesion enters an involuting phase in which the vascular channels are gradually replaced by fibrofatty tissue. The natural rise and fall in growth explains why timing of intervention matters and why many lesions ultimately regress spontaneously.",
-  "additionalDifferentials": [
-   "Vascular malformations (capillary, venous, or lymphatic), including port-wine stain",
-   "Congenital haemangiomas (rapidly involuting or non-involuting types)",
-   "Pyogenic granuloma",
-   "Kaposiform haemangioendothelioma and tufted angioma",
-   "Nasal glioma or encephalocele for midline facial lesions",
-   "Dermoid cyst or other soft-tissue tumours"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis in most cases based on characteristic appearance and evolution",
-   "Ultrasound with Doppler to characterise deep or ambiguous lesions",
-   "MRI to define extent of large, segmental, or deep lesions and detect associated anomalies",
-   "Abdominal imaging (liver ultrasound) when multiple cutaneous haemangiomas are present",
-   "Assessment for PHACE or LUMBAR/PELVIS-type associations with large segmental facial or lumbosacral lesions",
-   "Ophthalmology, ENT, or airway evaluation guided by lesion location"
-  ],
-  "redFlags": [
-   "Periocular lesions threatening the visual axis and risking amblyopia or astigmatism",
-   "Beard-distribution facial haemangioma with stridor or respiratory difficulty suggesting airway involvement",
-   "Large segmental facial lesions raising concern for PHACE association (cardiac, cerebrovascular, and ocular anomalies)",
-   "Lumbosacral or perineal lesions suggesting underlying spinal or urogenital anomalies",
-   "Painful ulceration, bleeding, or signs of infection, and multiple lesions suggesting visceral involvement"
-  ],
-  "prognosis": "The great majority of infantile haemangiomas are benign and resolve substantially over the first several years of life, often with little residual change; however, high-risk lesions can cause functional impairment, disfigurement, ulceration, or, rarely, life-threatening complications, and timely treatment improves these outcomes.",
-  "pitfalls": [
-   "Assuming a vascular birthmark is always an infantile haemangioma when a malformation or another vascular tumour is present",
-   "Adopting a wait-and-see approach for a high-risk lesion and missing the proliferative window for treatment",
-   "Overlooking amblyopia risk from a periocular lesion",
-   "Failing to image multiple cutaneous lesions for hepatic involvement",
-   "Underestimating the significance of a segmental facial or lumbosacral lesion as a marker of associated anomalies"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and monitor uncomplicated lesions, as the great majority regress substantially over the first years of life needing only observation",
-   "Initiate systemic beta-blocker (propranolol) for high-risk lesions defined by site, size, number or rapid growth, prioritising the proliferative phase when treatment is most effective",
-   "Apply topical beta-blocker (timolol) for small, superficial lesions",
-   "Undertake pre-treatment cardiovascular assessment and monitor for hypoglycaemia and bradycardia while on propranolol",
-   "Protect vision in periocular lesions with prompt treatment and ophthalmology review to prevent amblyopia",
-   "Secure the airway and obtain urgent ENT assessment for beard-distribution lesions with stridor suggesting subglottic involvement",
-   "Perform liver ultrasound when multiple cutaneous haemangiomas are present, and screen large segmental lesions for PHACE or LUMBAR/PELVIS associations",
-   "Refer complex, ulcerated or syndromic lesions to a multidisciplinary vascular anomalies team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "infantile_hemangioma-pathway",
-   "title": "Infantile Haemangioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Infantile haemangiomas are the commonest benign tumours of infancy and follow a characteristic course: often absent or subtle at birth, they proliferate over the first months of life, then slowly involute over subsequent years",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Periocular lesions threatening the visual axis and risking amblyopia or astigmatism",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis in most cases based on characteristic appearance and evolution, Ultrasound with Doppler to characterise deep or ambiguous lesions, MRI to define extent of large, segmental, or deep lesions and detect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and monitor uncomplicated lesions, as the great majority regress substantially over the first years of life needing only observation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a vascular birthmark is always an infantile haemangioma when a malformation or another vascular tumour is present"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of infantile haemangioma."
-  }
- ],
- "tables": [
-  {
-   "id": "infantile_hemangioma-matrix",
-   "title": "Infantile Haemangioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Infantile haemangiomas are the commonest benign tumours of infancy and follow a characteristic course: often absent or subtle at",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Infantile haemangiomas are the commonest benign tumours of infancy and follow a characteristic course: often absent or subtle at birth, they proliferate over the first months of life, then slowly involute over subsequent years",
+      "Superficial lesions are bright red and lobulated (the strawberry appearance), while deeper ones appear as bluish, soft, compressible swellings with little surface change",
+      "They are more frequent in premature and low-birth-weight infants and in girls, and most are uncomplicated and need only reassurance and monitoring",
+      "The key management question is whether a lesion is high-risk by virtue of its site, size, number, or growth, since early treatment can prevent lasting complications",
+      "Beta-blocker therapy has transformed treatment of problematic haemangiomas, with intervention prioritised during the proliferative phase when it is most effective",
+      "Periocular lesions can obstruct vision and cause amblyopia, and airway involvement (suggested by a beard-distribution facial lesion with stridor) can be life-threatening",
+      "Ulceration is the most frequent complication and is painful, prone to infection, and can scar, so it needs prompt wound care and pain control",
+      "Multiple cutaneous haemangiomas raise the possibility of visceral (especially hepatic) involvement and warrant imaging"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis in most cases based on characteristic appearance and evolution, Ultrasound with Doppler to characterise deep",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infantile haemangiomas are proliferations of endothelial cells that uniformly express the marker GLUT1, distinguishing them from vascular malformations and other vascular tumours. During the proliferative phase there is rapid, disorganised angiogenesis with plump endothelial cells forming densely cellular masses; hypoxia-driven and angiogenic signalling pathways, including vascular endothelial growth factor mechanisms, are implicated. Over time the lesion enters an involuting phase in which the vascular channels are gradually replaced by fibrofatty tissue. The natural rise and fall in growth explains why timing of intervention matters and why many lesions ultimately regress spontaneously.",
+    "additionalDifferentials": [
+      "Vascular malformations (capillary, venous, or lymphatic), including port-wine stain",
+      "Congenital haemangiomas (rapidly involuting or non-involuting types)",
+      "Pyogenic granuloma",
+      "Kaposiform haemangioendothelioma and tufted angioma",
+      "Nasal glioma or encephalocele for midline facial lesions",
+      "Dermoid cyst or other soft-tissue tumours"
     ],
-    [
-     "Primary Differentials",
-     "Vascular malformations (capillary, venous, or lymphatic), including port-wine stain, Congenital haemangiomas (rapidly involuting",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis in most cases based on characteristic appearance and evolution",
+      "Ultrasound with Doppler to characterise deep or ambiguous lesions",
+      "MRI to define extent of large, segmental, or deep lesions and detect associated anomalies",
+      "Abdominal imaging (liver ultrasound) when multiple cutaneous haemangiomas are present",
+      "Assessment for PHACE or LUMBAR/PELVIS-type associations with large segmental facial or lumbosacral lesions",
+      "Ophthalmology, ENT, or airway evaluation guided by lesion location"
     ],
-    [
-     "Management Strategy",
-     "Reassure and monitor uncomplicated lesions, as the great majority regress substantially over the first years of life needing only",
-     "Core treatment modality"
+    "redFlags": [
+      "Periocular lesions threatening the visual axis and risking amblyopia or astigmatism",
+      "Beard-distribution facial haemangioma with stridor or respiratory difficulty suggesting airway involvement",
+      "Large segmental facial lesions raising concern for PHACE association (cardiac, cerebrovascular, and ocular anomalies)",
+      "Lumbosacral or perineal lesions suggesting underlying spinal or urogenital anomalies",
+      "Painful ulceration, bleeding, or signs of infection, and multiple lesions suggesting visceral involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a vascular birthmark is always an infantile haemangioma when a malformation or another vascular tumour is present",
-     "Prevent diagnostic or management error"
+    "prognosis": "The great majority of infantile haemangiomas are benign and resolve substantially over the first several years of life, often with little residual change; however, high-risk lesions can cause functional impairment, disfigurement, ulceration, or, rarely, life-threatening complications, and timely treatment improves these outcomes.",
+    "pitfalls": [
+      "Assuming a vascular birthmark is always an infantile haemangioma when a malformation or another vascular tumour is present",
+      "Adopting a wait-and-see approach for a high-risk lesion and missing the proliferative window for treatment",
+      "Overlooking amblyopia risk from a periocular lesion",
+      "Failing to image multiple cutaneous lesions for hepatic involvement",
+      "Underestimating the significance of a segmental facial or lumbosacral lesion as a marker of associated anomalies"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and monitor uncomplicated lesions, as the great majority regress substantially over the first years of life needing only observation",
+      "Initiate systemic beta-blocker (propranolol) for high-risk lesions defined by site, size, number or rapid growth, prioritising the proliferative phase when treatment is most effective",
+      "Apply topical beta-blocker (timolol) for small, superficial lesions",
+      "Undertake pre-treatment cardiovascular assessment and monitor for hypoglycaemia and bradycardia while on propranolol",
+      "Protect vision in periocular lesions with prompt treatment and ophthalmology review to prevent amblyopia",
+      "Secure the airway and obtain urgent ENT assessment for beard-distribution lesions with stridor suggesting subglottic involvement",
+      "Perform liver ultrasound when multiple cutaneous haemangiomas are present, and screen large segmental lesions for PHACE or LUMBAR/PELVIS associations",
+      "Refer complex, ulcerated or syndromic lesions to a multidisciplinary vascular anomalies team"
     ]
-   ],
-   "caption": "Overview comparison matrix for infantile haemangioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "infantile-hemangioma-real-image",
-   "title": "Infantile Haemangioma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "infantile_hemangioma-pathway",
+      "title": "Infantile Haemangioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Infantile haemangiomas are the commonest benign tumours of infancy and follow a characteristic course: often absent or subtle at birth, they proliferate over the first months of life, then slowly involute over subsequent years",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Periocular lesions threatening the visual axis and risking amblyopia or astigmatism",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis in most cases based on characteristic appearance and evolution, Ultrasound with Doppler to characterise deep or ambiguous lesions, MRI to define extent of large, segmental, or deep lesions and detect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and monitor uncomplicated lesions, as the great majority regress substantially over the first years of life needing only observation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a vascular birthmark is always an infantile haemangioma when a malformation or another vascular tumour is present"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of infantile haemangioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "infantile_hemangioma-matrix",
+      "title": "Infantile Haemangioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Infantile haemangiomas are the commonest benign tumours of infancy and follow a characteristic course: often absent or subtle at",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis in most cases based on characteristic appearance and evolution, Ultrasound with Doppler to characterise deep",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vascular malformations (capillary, venous, or lymphatic), including port-wine stain, Congenital haemangiomas (rapidly involuting",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and monitor uncomplicated lesions, as the great majority regress substantially over the first years of life needing only",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a vascular birthmark is always an infantile haemangioma when a malformation or another vascular tumour is present",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for infantile haemangioma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_hemangioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical appearance and evolution",
+          "cells": [
+            {
+              "text": "Diagnosis in most cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Deep or ambiguous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Extent of large, segmental or deep lesions and associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver ultrasound",
+          "cells": [
+            {
+              "text": "When multiple cutaneous haemangiomas are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PHACE or LUMBAR screening",
+          "cells": [
+            {
+              "text": "Large segmental facial or lumbosacral lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology, ENT or airway evaluation",
+          "cells": [
+            {
+              "text": "Guided by lesion location"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_hemangioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vascular malformation (capillary, venous, lymphatic)",
+          "cells": [
+            {
+              "text": "Does not follow the proliferate-then-involute course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal glioma or encephalocele",
+          "cells": [
+            {
+              "text": "Midline facial lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_hemangioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and monitoring",
+          "cells": [
+            {
+              "text": "Uncomplicated lesions; most regress substantially over the first years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic propranolol",
+          "cells": [
+            {
+              "text": "High-risk lesions defined by site, size, number or rapid growth, treated in the proliferative phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical timolol",
+          "cells": [
+            {
+              "text": "Small, superficial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular safety",
+          "cells": [
+            {
+              "text": "Pre-treatment cardiovascular assessment; monitor for hypoglycaemia and bradycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periocular lesions",
+          "cells": [
+            {
+              "text": "Prompt treatment and ophthalmology review to prevent amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway",
+          "cells": [
+            {
+              "text": "Urgent ENT assessment for beard-distribution lesions with stridor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_hemangioma-dx-mgmt",
+      "title": "Diagnosis and management of Infantile Haemangioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infantile vascular lesion that proliferates in the early months of life",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Periocular lesion, stridor, large segmental facial or lumbosacral lesion, or ulceration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway, ENT or eye review; consider systemic propranolol",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Appearance, Doppler ultrasound, MRI for segmental lesions, liver ultrasound if multiple",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Uncomplicated lesion without high-risk features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat high-risk lesion with propranolol in proliferative phase; screen for PHACE",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and monitor; most regress over the early years",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic propranolol for high-risk lesions in the proliferative phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical timolol for small superficial lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for hypoglycaemia and bradycardia on propranolol",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Liver ultrasound when multiple cutaneous lesions are present",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most involute over the first years; treated lesions followed to end of proliferation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

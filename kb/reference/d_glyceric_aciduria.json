@@ -1,172 +1,450 @@
 {
- "id": "d_glyceric_aciduria",
- "name": "D-glyceric aciduria",
- "aliases": [
-  "D-glycerate kinase deficiency",
-  "GLYCTK deficiency",
-  "D-glyceric acidaemia"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare inborn error of serine and fructose metabolism caused by deficiency of D-glycerate kinase (GLYCTK)",
-   "The clinical spectrum is broad and variable, ranging from severe encephalopathy with seizures and developmental delay to essentially asymptomatic individuals",
-   "Reported features in symptomatic cases include hypotonia, microcephaly, seizures, metabolic acidosis and failure to thrive",
-   "The biochemical marker is markedly increased urinary D-glyceric acid on organic acid analysis",
-   "The variable phenotype means the metabolite finding does not reliably predict clinical severity",
-   "Management is supportive; no specific corrective therapy is established, and dietary measures are individualised through a metabolic service",
-   "Diagnosis rests on urine organic acids with confirmatory GLYCTK molecular testing"
+  "id": "d_glyceric_aciduria",
+  "name": "D-glyceric aciduria",
+  "aliases": [
+    "D-glycerate kinase deficiency",
+    "GLYCTK deficiency",
+    "D-glyceric acidaemia"
   ],
-  "pathophysiology": "D-glycerate kinase phosphorylates D-glycerate to 2-phosphoglycerate, linking the metabolism of serine and fructose to glycolytic intermediates. Enzyme deficiency causes accumulation and urinary excretion of D-glyceric acid. The mechanism by which the metabolite relates to the neurological features is not fully defined, and because some individuals with the biochemical defect remain well, the accumulated acid may not be directly and uniformly neurotoxic. The disorder is therefore biochemically defined but clinically heterogeneous.",
-  "additionalDifferentials": [
-   "Other organic acidaemias presenting with encephalopathy",
-   "L-glyceric aciduria (primary hyperoxaluria type 2), a biochemically distinct disorder",
-   "Serine biosynthesis defects",
-   "Mitochondrial disease with lactic acidosis",
-   "Other causes of infantile epileptic encephalopathy",
-   "Non-metabolic causes of developmental delay and hypotonia"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acids demonstrating increased D-glyceric acid",
-   "GLYCTK molecular genetic testing",
-   "Blood gas and lactate to assess metabolic acidosis",
-   "Neuroimaging and electroencephalography where symptomatic",
-   "Developmental and growth assessment",
-   "Exclusion of other organic acidaemias on the same organic acid profile"
-  ],
-  "redFlags": [
-   "Metabolic acidosis with acute encephalopathy",
-   "Drug-resistant seizures",
-   "Developmental regression",
-   "Failure to thrive with progressive neurological signs"
-  ],
-  "prognosis": "Prognosis is highly variable: some patients have severe neurological impairment while others are asymptomatic, so counselling must reflect this heterogeneity rather than the biochemical finding alone.",
-  "pitfalls": [
-   "Confusing D-glyceric aciduria with L-glyceric aciduria (primary hyperoxaluria type 2)",
-   "Assuming the metabolite level predicts clinical severity",
-   "Over-treating an incidentally detected, asymptomatic biochemical abnormality",
-   "Attributing all neurological findings to the disorder without excluding co-existing causes"
-  ],
-  "references": [
-   "Scriver's OMMBID, disorders of organic acid metabolism",
-   "Nelson Textbook of Paediatrics, organic acid disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage through a metabolic medicine service with supportive, symptom-directed care, as no specific corrective therapy is established",
-   "Individualise dietary measures, including consideration of fructose intake, under specialist metabolic dietetic supervision",
-   "Correct metabolic acidosis and provide fluid and buffering support during acute decompensation",
-   "Treat seizures with antiepileptic drugs where epilepsy is present",
-   "Provide developmental support and monitor growth for failure to thrive",
-   "Offer genetic counselling for this autosomal recessive GLYCTK disorder, stressing the wide phenotypic variability so that counselling is not based on the biochemical finding alone"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "d_glyceric_aciduria-pathway",
-   "title": "D-glyceric aciduria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare inborn error of serine and fructose metabolism caused by deficiency of D-glycerate kinase (GLYCTK)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Metabolic acidosis with acute encephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acids demonstrating increased D-glyceric acid, GLYCTK molecular genetic testing, Blood gas and lactate to assess metabolic acidosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage through a metabolic medicine service with supportive, symptom-directed care, as no specific corrective therapy is established"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing D-glyceric aciduria with L-glyceric aciduria (primary hyperoxaluria type 2)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of d-glyceric aciduria."
-  }
- ],
- "tables": [
-  {
-   "id": "d_glyceric_aciduria-matrix",
-   "title": "D-glyceric aciduria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare inborn error of serine and fructose metabolism caused by deficiency of D-glycerate kinase (GLYCTK)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare inborn error of serine and fructose metabolism caused by deficiency of D-glycerate kinase (GLYCTK)",
+      "The clinical spectrum is broad and variable, ranging from severe encephalopathy with seizures and developmental delay to essentially asymptomatic individuals",
+      "Reported features in symptomatic cases include hypotonia, microcephaly, seizures, metabolic acidosis and failure to thrive",
+      "The biochemical marker is markedly increased urinary D-glyceric acid on organic acid analysis",
+      "The variable phenotype means the metabolite finding does not reliably predict clinical severity",
+      "Management is supportive; no specific corrective therapy is established, and dietary measures are individualised through a metabolic service",
+      "Diagnosis rests on urine organic acids with confirmatory GLYCTK molecular testing"
     ],
-    [
-     "Key Investigations",
-     "Urine organic acids demonstrating increased D-glyceric acid, GLYCTK molecular genetic testing, Blood gas and lactate to assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "D-glycerate kinase phosphorylates D-glycerate to 2-phosphoglycerate, linking the metabolism of serine and fructose to glycolytic intermediates. Enzyme deficiency causes accumulation and urinary excretion of D-glyceric acid. The mechanism by which the metabolite relates to the neurological features is not fully defined, and because some individuals with the biochemical defect remain well, the accumulated acid may not be directly and uniformly neurotoxic. The disorder is therefore biochemically defined but clinically heterogeneous.",
+    "additionalDifferentials": [
+      "Other organic acidaemias presenting with encephalopathy",
+      "L-glyceric aciduria (primary hyperoxaluria type 2), a biochemically distinct disorder",
+      "Serine biosynthesis defects",
+      "Mitochondrial disease with lactic acidosis",
+      "Other causes of infantile epileptic encephalopathy",
+      "Non-metabolic causes of developmental delay and hypotonia"
     ],
-    [
-     "Primary Differentials",
-     "Other organic acidaemias presenting with encephalopathy, L-glyceric aciduria (primary hyperoxaluria type 2), a biochemically",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acids demonstrating increased D-glyceric acid",
+      "GLYCTK molecular genetic testing",
+      "Blood gas and lactate to assess metabolic acidosis",
+      "Neuroimaging and electroencephalography where symptomatic",
+      "Developmental and growth assessment",
+      "Exclusion of other organic acidaemias on the same organic acid profile"
     ],
-    [
-     "Management Strategy",
-     "Manage through a metabolic medicine service with supportive, symptom-directed care, as no specific corrective therapy is",
-     "Core treatment modality"
+    "redFlags": [
+      "Metabolic acidosis with acute encephalopathy",
+      "Drug-resistant seizures",
+      "Developmental regression",
+      "Failure to thrive with progressive neurological signs"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing D-glyceric aciduria with L-glyceric aciduria (primary hyperoxaluria type 2)",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is highly variable: some patients have severe neurological impairment while others are asymptomatic, so counselling must reflect this heterogeneity rather than the biochemical finding alone.",
+    "pitfalls": [
+      "Confusing D-glyceric aciduria with L-glyceric aciduria (primary hyperoxaluria type 2)",
+      "Assuming the metabolite level predicts clinical severity",
+      "Over-treating an incidentally detected, asymptomatic biochemical abnormality",
+      "Attributing all neurological findings to the disorder without excluding co-existing causes"
+    ],
+    "references": [
+      "Scriver's OMMBID, disorders of organic acid metabolism",
+      "Nelson Textbook of Paediatrics, organic acid disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage through a metabolic medicine service with supportive, symptom-directed care, as no specific corrective therapy is established",
+      "Individualise dietary measures, including consideration of fructose intake, under specialist metabolic dietetic supervision",
+      "Correct metabolic acidosis and provide fluid and buffering support during acute decompensation",
+      "Treat seizures with antiepileptic drugs where epilepsy is present",
+      "Provide developmental support and monitor growth for failure to thrive",
+      "Offer genetic counselling for this autosomal recessive GLYCTK disorder, stressing the wide phenotypic variability so that counselling is not based on the biochemical finding alone"
     ]
-   ],
-   "caption": "Overview comparison matrix for d-glyceric aciduria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "d-glyceric-aciduria-real-image",
-   "title": "D-glyceric aciduria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "d_glyceric_aciduria-pathway",
+      "title": "D-glyceric aciduria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare inborn error of serine and fructose metabolism caused by deficiency of D-glycerate kinase (GLYCTK)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Metabolic acidosis with acute encephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acids demonstrating increased D-glyceric acid, GLYCTK molecular genetic testing, Blood gas and lactate to assess metabolic acidosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage through a metabolic medicine service with supportive, symptom-directed care, as no specific corrective therapy is established"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing D-glyceric aciduria with L-glyceric aciduria (primary hyperoxaluria type 2)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of d-glyceric aciduria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "d_glyceric_aciduria-matrix",
+      "title": "D-glyceric aciduria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare inborn error of serine and fructose metabolism caused by deficiency of D-glycerate kinase (GLYCTK)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acids demonstrating increased D-glyceric acid, GLYCTK molecular genetic testing, Blood gas and lactate to assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other organic acidaemias presenting with encephalopathy, L-glyceric aciduria (primary hyperoxaluria type 2), a biochemically",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage through a metabolic medicine service with supportive, symptom-directed care, as no specific corrective therapy is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing D-glyceric aciduria with L-glyceric aciduria (primary hyperoxaluria type 2)",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for d-glyceric aciduria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "d_glyceric_aciduria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Increased D-glyceric acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLYCTK molecular testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas and lactate",
+          "cells": [
+            {
+              "text": "Metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging and EEG",
+          "cells": [
+            {
+              "text": "Symptomatic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of other organic acidaemias on the same profile",
+          "cells": [
+            {
+              "text": "Alternative diagnoses excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "d_glyceric_aciduria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "L-glyceric aciduria (primary hyperoxaluria type 2)",
+          "cells": [
+            {
+              "text": "Pitfall: biochemically distinct disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serine biosynthesis defects",
+          "cells": [
+            {
+              "text": "Named look-alike with neurological features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other organic acidaemias presenting with encephalopathy",
+          "cells": [
+            {
+              "text": "Named look-alikes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "d_glyceric_aciduria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive, symptom-directed care",
+          "cells": [
+            {
+              "text": "No established corrective therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary measures",
+          "cells": [
+            {
+              "text": "Including consideration of fructose intake, under metabolic dietetic supervision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acidosis correction",
+          "cells": [
+            {
+              "text": "Fluid and buffering support during decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure drugs",
+          "cells": [
+            {
+              "text": "Where epilepsy is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and growth support",
+          "cells": [
+            {
+              "text": "Failure to thrive monitored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive GLYCTK; wide phenotypic variability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "d_glyceric_aciduria-dx-mgmt",
+      "title": "Diagnosis and management of D-glyceric aciduria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected D-glyceric aciduria: acidosis and encephalopathy on urine organic acids",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (acute encephalopathy, drug-resistant seizures, regression)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent acidosis correction and seizure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids; GLYCTK testing; blood gas and lactate; neuroimaging; EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does urine profile show D-glyceric acid with GLYCTK variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider L-glyceric aciduria, serine defects or mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care through metabolic medicine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Individualised dietary measures under metabolic dietetic supervision",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct acidosis during decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure drugs and developmental support; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Highly variable; some have severe impairment while others are asymptomatic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,187 +1,692 @@
 {
- "id": "CASTLEMAN_DISEASE",
- "name": "Castleman disease",
- "system": "Hematology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "castleman",
-  "angiofollicular lymph node hyperplasia",
-  "castleman's disease",
-  "unicentric castleman disease",
-  "multicentric castleman disease",
-  "HHV-8 associated multicentric castleman disease",
-  "giant lymph node hyperplasia"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Consider Castleman disease when lymphadenopathy (localized or generalized) is accompanied by unexplained constitutional symptoms, cytopenias, or hypergammaglobulinemia.",
-   "Unicentric disease is usually indolent, presenting as a single enlarged lymph node mass, and is often curable with excision.",
-   "Multicentric disease is a systemic illness with fevers, weight loss, organomegaly, and multi-organ dysfunction driven by excess IL-6 signaling.",
-   "HHV-8 infection drives most multicentric cases in HIV-positive patients; idiopathic multicentric disease occurs without HHV-8 or HIV.",
-   "POEMS syndrome and TAFRO syndrome are important clinical variants/associations that change management and prognosis.",
-   "Excisional lymph node biopsy with expert hematopathology review is essential — needle biopsies are often non-diagnostic.",
-   "Multicentric disease carries an increased risk of progression to lymphoma and of concurrent Kaposi sarcoma in HHV-8-positive/HIV-positive patients."
+  "id": "CASTLEMAN_DISEASE",
+  "name": "Castleman disease",
+  "system": "Hematology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "castleman",
+    "angiofollicular lymph node hyperplasia",
+    "castleman's disease",
+    "unicentric castleman disease",
+    "multicentric castleman disease",
+    "HHV-8 associated multicentric castleman disease",
+    "giant lymph node hyperplasia"
   ],
-  "pathophysiology": "Castleman disease is a heterogeneous group of lymphoproliferative disorders characterized by distinctive lymph node architectural changes, most driven by dysregulated interleukin-6 (IL-6) signaling. In unicentric disease the process is localized and follicular/vascular changes predominate, while multicentric disease reflects a systemic cytokine-driven process, frequently linked to lytic HHV-8 infection in immunocompromised hosts, producing viral IL-6 and human IL-6 that fuel plasmablast proliferation and systemic inflammation. Idiopathic multicentric disease lacks HHV-8 but shares a similar IL-6-driven inflammatory phenotype, sometimes with an associated clonal or autoimmune-like process.",
-  "additionalDifferentials": [
-   "Lymphoma (Hodgkin and non-Hodgkin)",
-   "Autoimmune/rheumatologic disease with lymphadenopathy (e.g., systemic lupus erythematosus, rheumatoid arthritis)",
-   "IgG4-related disease",
-   "Reactive lymphadenopathy from chronic infection",
-   "POEMS syndrome",
-   "Kaposi sarcoma / HHV-8-associated disease"
-  ],
-  "infectionMimics": [
-   "Tuberculous lymphadenitis",
-   "HIV-associated persistent generalized lymphadenopathy",
-   "Infectious mononucleosis (EBV)",
-   "Cat-scratch disease"
-  ],
-  "nonInfectiousMimics": [
-   "Lymphoma",
-   "Sarcoidosis",
-   "IgG4-related disease",
-   "Autoimmune lymphoproliferative conditions",
-   "Plasma cell dyscrasias (e.g., POEMS-associated)"
-  ],
-  "additionalInvestigations": [
-   "Excisional lymph node biopsy — required for definitive histopathologic diagnosis and subtype classification",
-   "HIV serology and HHV-8 testing (blood PCR or tissue staining) — identifies virus-associated multicentric disease",
-   "Complete blood count — screens for anemia, thrombocytopenia, or thrombocytosis seen in multicentric/TAFRO variants",
-   "Serum IL-6 and inflammatory markers (CRP, ESR) — supports the systemic inflammatory phenotype",
-   "Serum protein electrophoresis and immunoglobulin levels — assesses hypergammaglobulinemia and screens for paraproteins/POEMS",
-   "Cross-sectional imaging (CT chest/abdomen/pelvis) — defines extent of nodal disease and organomegaly, distinguishes unicentric from multicentric involvement",
-   "Renal and liver function testing — evaluates end-organ involvement from systemic cytokine excess",
-   "Bone marrow examination — helps exclude lymphoma or plasma cell dyscrasia when systemic disease is suspected"
-  ],
-  "redFlags": [
-   "Rapidly progressive multi-organ failure (renal, hepatic) suggesting TAFRO syndrome",
-   "Severe cytopenias or bleeding diathesis",
-   "Concurrent Kaposi sarcoma or hemophagocytic lymphohistiocytosis-like picture",
-   "New neurologic findings or organomegaly suggesting POEMS syndrome",
-   "Rapid nodal growth or B symptoms raising concern for transformation to lymphoma"
-  ],
-  "pitfalls": [
-   "Attributing lymphadenopathy and systemic symptoms solely to infection or malignancy without considering Castleman disease, delaying diagnosis",
-   "Relying on core needle biopsy alone, which frequently yields non-diagnostic or misleading architecture compared to excisional biopsy",
-   "Failing to test for HIV and HHV-8 in patients with multicentric disease, missing a treatable driver",
-   "Overlooking associated syndromes (POEMS, TAFRO) that substantially alter prognosis and treatment approach"
-  ],
-  "prognosis": "Unicentric Castleman disease has an excellent prognosis after complete surgical excision, with cure in most cases. Multicentric disease, particularly HHV-8-associated or TAFRO-variant forms, follows a more relapsing and potentially life-threatening course, with outcomes improved by IL-6-pathway-targeted therapy but still carrying elevated risk of lymphoma and organ dysfunction.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Chapter on Peripheral Lymphadenopathy and Splenomegaly / Castleman Disease"
-  ],
-  "crossLinks": [
-   "POEMS_SYNDROME"
-  ],
-  "management": [
-   "Complete surgical excision for unicentric disease, which is usually curative.",
-   "Interleukin-6 pathway blockade with siltuximab, or tocilizumab, as first-line therapy for idiopathic multicentric disease.",
-   "Rituximab-based therapy, with antiretroviral therapy and consideration of antiviral treatment, for HHV-8-associated multicentric disease in HIV-positive patients.",
-   "Corticosteroids and, for aggressive or organ-threatening disease, cytotoxic chemotherapy.",
-   "Monitoring of inflammatory markers, blood counts and organ function, with attention to TAFRO and POEMS features.",
-   "Multidisciplinary haematology care with expert histopathology review, and escalation for cytokine-driven multi-organ failure."
-  ]
- },
- "algorithms": [
-  {
-   "id": "castleman_disease-pathway",
-   "title": "Castleman disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Consider Castleman disease when lymphadenopathy (localized or generalized) is accompanied by unexplained constitutional symptoms, cytopenias, or hypergammaglobulinemia.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive multi-organ failure (renal, hepatic) suggesting TAFRO syndrome",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Excisional lymph node biopsy - required for definitive histopathologic diagnosis and subtype classification, HIV serology and HHV-8 testing (blood PCR or tissue staining) - identifies virus-associated multicentric disease,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision for unicentric disease, which is usually curative."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing lymphadenopathy and systemic symptoms solely to infection or malignancy without considering Castleman disease, delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of castleman disease."
-  }
- ],
- "tables": [
-  {
-   "id": "castleman_disease-matrix",
-   "title": "Castleman disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Consider Castleman disease when lymphadenopathy (localized or generalized) is accompanied by unexplained constitutional symptoms,",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Consider Castleman disease when lymphadenopathy (localized or generalized) is accompanied by unexplained constitutional symptoms, cytopenias, or hypergammaglobulinemia.",
+      "Unicentric disease is usually indolent, presenting as a single enlarged lymph node mass, and is often curable with excision.",
+      "Multicentric disease is a systemic illness with fevers, weight loss, organomegaly, and multi-organ dysfunction driven by excess IL-6 signaling.",
+      "HHV-8 infection drives most multicentric cases in HIV-positive patients; idiopathic multicentric disease occurs without HHV-8 or HIV.",
+      "POEMS syndrome and TAFRO syndrome are important clinical variants/associations that change management and prognosis.",
+      "Excisional lymph node biopsy with expert hematopathology review is essential — needle biopsies are often non-diagnostic.",
+      "Multicentric disease carries an increased risk of progression to lymphoma and of concurrent Kaposi sarcoma in HHV-8-positive/HIV-positive patients."
     ],
-    [
-     "Key Investigations",
-     "Excisional lymph node biopsy - required for definitive histopathologic diagnosis and subtype classification, HIV serology and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Castleman disease is a heterogeneous group of lymphoproliferative disorders characterized by distinctive lymph node architectural changes, most driven by dysregulated interleukin-6 (IL-6) signaling. In unicentric disease the process is localized and follicular/vascular changes predominate, while multicentric disease reflects a systemic cytokine-driven process, frequently linked to lytic HHV-8 infection in immunocompromised hosts, producing viral IL-6 and human IL-6 that fuel plasmablast proliferation and systemic inflammation. Idiopathic multicentric disease lacks HHV-8 but shares a similar IL-6-driven inflammatory phenotype, sometimes with an associated clonal or autoimmune-like process.",
+    "additionalDifferentials": [
+      "Lymphoma (Hodgkin and non-Hodgkin)",
+      "Autoimmune/rheumatologic disease with lymphadenopathy (e.g., systemic lupus erythematosus, rheumatoid arthritis)",
+      "IgG4-related disease",
+      "Reactive lymphadenopathy from chronic infection",
+      "POEMS syndrome",
+      "Kaposi sarcoma / HHV-8-associated disease"
     ],
-    [
-     "Primary Differentials",
-     "Lymphoma (Hodgkin and non-Hodgkin), Autoimmune/rheumatologic disease with lymphadenopathy (e.g., systemic lupus erythematosus,",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Tuberculous lymphadenitis",
+      "HIV-associated persistent generalized lymphadenopathy",
+      "Infectious mononucleosis (EBV)",
+      "Cat-scratch disease"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision for unicentric disease, which is usually curative.",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Lymphoma",
+      "Sarcoidosis",
+      "IgG4-related disease",
+      "Autoimmune lymphoproliferative conditions",
+      "Plasma cell dyscrasias (e.g., POEMS-associated)"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing lymphadenopathy and systemic symptoms solely to infection or malignancy without considering Castleman disease,",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Excisional lymph node biopsy — required for definitive histopathologic diagnosis and subtype classification",
+      "HIV serology and HHV-8 testing (blood PCR or tissue staining) — identifies virus-associated multicentric disease",
+      "Complete blood count — screens for anemia, thrombocytopenia, or thrombocytosis seen in multicentric/TAFRO variants",
+      "Serum IL-6 and inflammatory markers (CRP, ESR) — supports the systemic inflammatory phenotype",
+      "Serum protein electrophoresis and immunoglobulin levels — assesses hypergammaglobulinemia and screens for paraproteins/POEMS",
+      "Cross-sectional imaging (CT chest/abdomen/pelvis) — defines extent of nodal disease and organomegaly, distinguishes unicentric from multicentric involvement",
+      "Renal and liver function testing — evaluates end-organ involvement from systemic cytokine excess",
+      "Bone marrow examination — helps exclude lymphoma or plasma cell dyscrasia when systemic disease is suspected"
+    ],
+    "redFlags": [
+      "Rapidly progressive multi-organ failure (renal, hepatic) suggesting TAFRO syndrome",
+      "Severe cytopenias or bleeding diathesis",
+      "Concurrent Kaposi sarcoma or hemophagocytic lymphohistiocytosis-like picture",
+      "New neurologic findings or organomegaly suggesting POEMS syndrome",
+      "Rapid nodal growth or B symptoms raising concern for transformation to lymphoma"
+    ],
+    "pitfalls": [
+      "Attributing lymphadenopathy and systemic symptoms solely to infection or malignancy without considering Castleman disease, delaying diagnosis",
+      "Relying on core needle biopsy alone, which frequently yields non-diagnostic or misleading architecture compared to excisional biopsy",
+      "Failing to test for HIV and HHV-8 in patients with multicentric disease, missing a treatable driver",
+      "Overlooking associated syndromes (POEMS, TAFRO) that substantially alter prognosis and treatment approach"
+    ],
+    "prognosis": "Unicentric Castleman disease has an excellent prognosis after complete surgical excision, with cure in most cases. Multicentric disease, particularly HHV-8-associated or TAFRO-variant forms, follows a more relapsing and potentially life-threatening course, with outcomes improved by IL-6-pathway-targeted therapy but still carrying elevated risk of lymphoma and organ dysfunction.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Chapter on Peripheral Lymphadenopathy and Splenomegaly / Castleman Disease"
+    ],
+    "crossLinks": [
+      "POEMS_SYNDROME"
+    ],
+    "management": [
+      "Complete surgical excision for unicentric disease, which is usually curative.",
+      "Interleukin-6 pathway blockade with siltuximab, or tocilizumab, as first-line therapy for idiopathic multicentric disease.",
+      "Rituximab-based therapy, with antiretroviral therapy and consideration of antiviral treatment, for HHV-8-associated multicentric disease in HIV-positive patients.",
+      "Corticosteroids and, for aggressive or organ-threatening disease, cytotoxic chemotherapy.",
+      "Monitoring of inflammatory markers, blood counts and organ function, with attention to TAFRO and POEMS features.",
+      "Multidisciplinary haematology care with expert histopathology review, and escalation for cytokine-driven multi-organ failure."
     ]
-   ],
-   "caption": "Overview comparison matrix for castleman disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "castleman-disease-real-image",
-   "title": "Castleman disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "castleman_disease-pathway",
+      "title": "Castleman disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Consider Castleman disease when lymphadenopathy (localized or generalized) is accompanied by unexplained constitutional symptoms, cytopenias, or hypergammaglobulinemia.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive multi-organ failure (renal, hepatic) suggesting TAFRO syndrome",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Excisional lymph node biopsy - required for definitive histopathologic diagnosis and subtype classification, HIV serology and HHV-8 testing (blood PCR or tissue staining) - identifies virus-associated multicentric disease,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision for unicentric disease, which is usually curative."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing lymphadenopathy and systemic symptoms solely to infection or malignancy without considering Castleman disease, delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of castleman disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "castleman_disease-matrix",
+      "title": "Castleman disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Consider Castleman disease when lymphadenopathy (localized or generalized) is accompanied by unexplained constitutional symptoms,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Excisional lymph node biopsy - required for definitive histopathologic diagnosis and subtype classification, HIV serology and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lymphoma (Hodgkin and non-Hodgkin), Autoimmune/rheumatologic disease with lymphadenopathy (e.g., systemic lupus erythematosus,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision for unicentric disease, which is usually curative.",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing lymphadenopathy and systemic symptoms solely to infection or malignancy without considering Castleman disease,",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for castleman disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Evolution and recent advances in diagnostic criteria for iMCD (review), 2025",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12516665/fullTextXML",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Australian clinical practice guideline for idiopathic multicentric Castleman disease",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13409200/fullTextXML",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CASTLEMAN_DISEASE-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for idiopathic multicentric Castleman disease (iMCD)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Role"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymph node enlargement",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "2 or more nodal stations, short axis over 10",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Major (all 3 majors required)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Node histology",
+          "cells": [
+            {
+              "text": "Grade 2 to 3 regressed follicles or plasmacytosis"
+            },
+            {
+              "text": "{{hy:Major; excisional biopsy needed}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HHV-8 LANA immunostain",
+          "cells": [
+            {
+              "text": "Negative"
+            },
+            {
+              "text": "Major; positive means HHV-8 MCD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haemoglobin",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Below 12.5 in men, below 11.5 in women",
+              "op": "<",
+              "value": 12.5
+            },
+            {
+              "text": "Minor, laboratory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets",
+          "unit": "k/uL",
+          "cells": [
+            {
+              "text": "Below 150 or above 400"
+            },
+            {
+              "text": "Minor, laboratory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CRP or ESR",
+          "cells": [
+            {
+              "text": "CRP above 1 mg/dL or ESR above 15 mm/h"
+            },
+            {
+              "text": "Minor, laboratory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney",
+          "unit": "mL/min/1.73 m2",
+          "cells": [
+            {
+              "text": "eGFR below 60 or proteinuria",
+              "op": "<",
+              "value": 60
+            },
+            {
+              "text": "Minor, laboratory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Polyclonal hypergammaglobulinaemia",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Total gamma globulin or IgG above 1700",
+              "op": ">",
+              "value": 1700
+            },
+            {
+              "text": "Minor, laboratory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clinical minor features",
+          "cells": [
+            {
+              "text": "B symptoms, hepatosplenomegaly, fluid accumulation, cherry haemangiomas, lymphocytic interstitial pneumonitis"
+            },
+            {
+              "text": "At least 2 minors needed, 1 or more laboratory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TAFRO variant",
+          "unit": "x10^4/uL",
+          "cells": [
+            {
+              "text": "Anasarca, platelets below 10, fever or CRP 2 mg/dL or more, organomegaly, marrow fibrosis or renal failure",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "All 5 required; nodes usually 10 mm or smaller"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe iMCD",
+          "cells": [
+            {
+              "text": "2 or more of: ECOG 2 or more, eGFR under 30, effusions or anasarca, Hb 80 g/L or less, pneumonitis with dyspnoea"
+            },
+            {
+              "text": "Changes first-line therapy"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "CASTLEMAN_DISEASE-ddx",
+      "kind": "ddx",
+      "title": "Exclusions before diagnosing iMCD",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "HHV-8 associated MCD",
+          "cells": [
+            {
+              "text": "{{hy:LANA positive; usually HIV positive}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "EBV, HIV, tuberculosis, CMV, toxoplasmosis",
+          "cells": [
+            {
+              "text": "Active infection on serology, PCR or culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Clonal population on node biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myeloma, plasmacytoma, POEMS syndrome",
+          "cells": [
+            {
+              "text": "Monoclonal protein; POEMS has neuropathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SLE, rheumatoid arthritis, Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Autoantibody profile and organ pattern"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adult-onset Still disease",
+          "cells": [
+            {
+              "text": "Evanescent rash, very high ferritin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IgG4-related disease",
+          "cells": [
+            {
+              "text": "IgG4 plasma cells, organ infiltration"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "CASTLEMAN_DISEASE-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Castleman disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "{{hy:Unicentric disease}}"
+            },
+            {
+              "text": "Usually curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Siltuximab",
+          "cells": [
+            {
+              "text": "First line for iMCD"
+            },
+            {
+              "text": "11 mg/kg every 3 weeks, continued indefinitely if at least partial response"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Siltuximab with high-dose steroids",
+          "cells": [
+            {
+              "text": "Severe iMCD"
+            },
+            {
+              "text": "Prednisone for short periods, 4 to 6 weeks"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tocilizumab",
+          "cells": [
+            {
+              "text": "IL-6 receptor blocker when siltuximab unavailable"
+            },
+            {
+              "text": "No dose stated in sources opened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab-based regimens",
+          "cells": [
+            {
+              "text": "Second line in iMCD; also HHV-8 MCD with antiretrovirals"
+            },
+            {
+              "text": "Regimen not stated in sources opened"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ciclosporin, sirolimus, anakinra, thalidomide",
+          "cells": [
+            {
+              "text": "Third line; ciclosporin especially for TAFRO"
+            },
+            {
+              "text": "Low-grade evidence"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chemotherapy (CHOP or etoposide)",
+          "cells": [
+            {
+              "text": "Severe refractory iMCD or TAFRO"
+            },
+            {
+              "text": "No regimen favoured"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CASTLEMAN_DISEASE-dx-mgmt",
+      "title": "Diagnosis and management of Castleman disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lymphadenopathy with constitutional symptoms, cytopenia or high CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Excisional node biopsy with expert review and HHV-8 LANA stain",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Single nodal station only?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Unicentric disease: complete surgical excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "HHV-8 LANA positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "HHV-8 MCD: rituximab-based therapy with antiretrovirals",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude infection, autoimmune disease and malignancy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "iMCD criteria met?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Pursue alternative diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Severe iMCD?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Siltuximab with high-dose steroids",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Siltuximab 11 mg/kg every 3 weeks",
+          "cite": "c3"
+        },
+        {
+          "id": "n13",
+          "type": "decision",
+          "text": "At least partial response?",
+          "cite": "c3"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Continue siltuximab indefinitely",
+          "cite": "c3"
+        },
+        {
+          "id": "n15",
+          "type": "outcome",
+          "text": "Rituximab, then ciclosporin, sirolimus or chemotherapy",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Yes"
+        },
+        {
+          "from": "n13",
+          "to": "n15",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

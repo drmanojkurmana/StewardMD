@@ -1,174 +1,481 @@
 {
- "id": "helix_syndrome",
- "name": "HELIX syndrome (CLDN10)",
- "aliases": [
-  "HELIX syndrome",
-  "hypohidrosis electrolyte imbalance lacrimal gland dysfunction ichthyosis xerostomia",
-  "CLDN10",
-  "claudin-10 deficiency"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive multisystem disorder caused by variants in CLDN10, encoding the tight-junction protein claudin-10 in the thick ascending limb and exocrine glands",
-   "The acronym captures the phenotype: Hypohidrosis, Electrolyte imbalance, Lacrimal gland dysfunction, Ichthyosis, and Xerostomia",
-   "Renal involvement produces a salt-losing tubulopathy with hypokalaemic alkalosis and hypermagnesaemia rather than the hypomagnesaemia seen in most other tubulopathies",
-   "Reduced sweating and impaired tear and saliva production reflect claudin-10 loss in exocrine gland epithelia",
-   "Affected individuals may present with heat intolerance, dry eyes and mouth, and scaly skin from early life",
-   "Management is supportive with electrolyte correction, attention to overheating and dehydration, ocular lubrication, and skin care",
-   "Consider HELIX in a child with a salt-wasting tubulopathy accompanied by dry eyes, dry mouth, and reduced sweating, and confirm with CLDN10 testing"
+  "id": "helix_syndrome",
+  "name": "HELIX syndrome (CLDN10)",
+  "aliases": [
+    "HELIX syndrome",
+    "hypohidrosis electrolyte imbalance lacrimal gland dysfunction ichthyosis xerostomia",
+    "CLDN10",
+    "claudin-10 deficiency"
   ],
-  "pathophysiology": "Claudin-10 is a tight-junction protein that governs paracellular ion permeability. The kidney-relevant isoform (claudin-10b) forms a paracellular sodium pathway in the thick ascending limb of the loop of Henle, and its loss shifts paracellular selectivity towards divalent cations. This impairs paracellular sodium reabsorption, causing renal salt wasting with hypokalaemic metabolic alkalosis, while enhanced paracellular magnesium and calcium transport leads to the characteristic hypermagnesaemia and reduced calcium excretion. In exocrine glands, defective claudin-10 disrupts fluid secretion, explaining hypohidrosis, reduced lacrimation, and xerostomia, and abnormal epidermal barrier function underlies the ichthyosis.",
-  "additionalDifferentials": [
-   "Gitelman syndrome",
-   "Bartter syndrome",
-   "EAST/SeSAME syndrome",
-   "Sjogren syndrome (for the sicca features)",
-   "Anhidrotic ectodermal dysplasia",
-   "Congenital ichthyoses"
-  ],
-  "additionalInvestigations": [
-   "Serum electrolytes showing hypokalaemia and unusually raised magnesium",
-   "Venous blood gas confirming metabolic alkalosis",
-   "Urinary electrolyte studies documenting renal salt wasting",
-   "Assessment of tear production (Schirmer test) and salivary flow",
-   "Sweat testing and dermatological evaluation of the skin barrier",
-   "CLDN10 gene sequencing for confirmation"
-  ],
-  "redFlags": [
-   "Hyperthermia and dehydration during heat exposure or febrile illness",
-   "Severe symptomatic hypokalaemia with arrhythmia risk",
-   "Corneal damage from chronic dry eyes",
-   "Failure to thrive from combined salt loss and reduced intake"
-  ],
-  "prognosis": "The tubulopathy and exocrine features are generally manageable with supportive care and long-term renal function is usually preserved, but chronic sicca symptoms, heat intolerance, and skin involvement require ongoing multidisciplinary attention.",
-  "pitfalls": [
-   "Expecting hypomagnesaemia and being misled by the hypermagnesaemia that distinguishes HELIX",
-   "Overlooking the extrarenal exocrine features when a tubulopathy dominates the presentation",
-   "Failing to counsel about heat intolerance and dehydration risk",
-   "Mistaking the sicca picture for an acquired autoimmune process"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "OMIM entry for HELIX syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the salt-losing tubulopathy with potassium replacement and sodium and fluid repletion to counter hypokalaemic metabolic alkalosis, avoiding magnesium supplementation given the characteristic hypermagnesaemia",
-   "Protect against heat intolerance and dehydration from hypohidrosis with cooling measures, adequate hydration and avoidance of overheating",
-   "Manage sicca features with regular ocular lubricants and artificial tears for lacrimal failure and saliva substitutes with meticulous dental care for xerostomia",
-   "Treat the ichthyosis with emollients and keratolytic skin care",
-   "Monitor serum electrolytes, magnesium and long-term renal function periodically",
-   "Coordinate multidisciplinary care across nephrology, ophthalmology, dermatology and clinical genetics",
-   "Offer genetic counselling and family screening given autosomal recessive CLDN10 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "helix_syndrome-pathway",
-   "title": "HELIX syndrome (CLDN10): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive multisystem disorder caused by variants in CLDN10, encoding the tight-junction protein claudin-10 in the thick ascending limb and exocrine glands",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hyperthermia and dehydration during heat exposure or febrile illness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum electrolytes showing hypokalaemia and unusually raised magnesium, Venous blood gas confirming metabolic alkalosis, Urinary electrolyte studies documenting renal salt wasting"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the salt-losing tubulopathy with potassium replacement and sodium and fluid repletion to counter hypokalaemic metabolic alkalosis, avoiding magnesium supplementation given the characteristic hypermagnesaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting hypomagnesaemia and being misled by the hypermagnesaemia that distinguishes HELIX"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of helix syndrome (cldn10)."
-  }
- ],
- "tables": [
-  {
-   "id": "helix_syndrome-matrix",
-   "title": "HELIX syndrome (CLDN10): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive multisystem disorder caused by variants in CLDN10, encoding the tight-junction protein claudin-10 in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive multisystem disorder caused by variants in CLDN10, encoding the tight-junction protein claudin-10 in the thick ascending limb and exocrine glands",
+      "The acronym captures the phenotype: Hypohidrosis, Electrolyte imbalance, Lacrimal gland dysfunction, Ichthyosis, and Xerostomia",
+      "Renal involvement produces a salt-losing tubulopathy with hypokalaemic alkalosis and hypermagnesaemia rather than the hypomagnesaemia seen in most other tubulopathies",
+      "Reduced sweating and impaired tear and saliva production reflect claudin-10 loss in exocrine gland epithelia",
+      "Affected individuals may present with heat intolerance, dry eyes and mouth, and scaly skin from early life",
+      "Management is supportive with electrolyte correction, attention to overheating and dehydration, ocular lubrication, and skin care",
+      "Consider HELIX in a child with a salt-wasting tubulopathy accompanied by dry eyes, dry mouth, and reduced sweating, and confirm with CLDN10 testing"
     ],
-    [
-     "Key Investigations",
-     "Serum electrolytes showing hypokalaemia and unusually raised magnesium, Venous blood gas confirming metabolic alkalosis, Urinary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Claudin-10 is a tight-junction protein that governs paracellular ion permeability. The kidney-relevant isoform (claudin-10b) forms a paracellular sodium pathway in the thick ascending limb of the loop of Henle, and its loss shifts paracellular selectivity towards divalent cations. This impairs paracellular sodium reabsorption, causing renal salt wasting with hypokalaemic metabolic alkalosis, while enhanced paracellular magnesium and calcium transport leads to the characteristic hypermagnesaemia and reduced calcium excretion. In exocrine glands, defective claudin-10 disrupts fluid secretion, explaining hypohidrosis, reduced lacrimation, and xerostomia, and abnormal epidermal barrier function underlies the ichthyosis.",
+    "additionalDifferentials": [
+      "Gitelman syndrome",
+      "Bartter syndrome",
+      "EAST/SeSAME syndrome",
+      "Sjogren syndrome (for the sicca features)",
+      "Anhidrotic ectodermal dysplasia",
+      "Congenital ichthyoses"
     ],
-    [
-     "Primary Differentials",
-     "Gitelman syndrome, Bartter syndrome, EAST/SeSAME syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum electrolytes showing hypokalaemia and unusually raised magnesium",
+      "Venous blood gas confirming metabolic alkalosis",
+      "Urinary electrolyte studies documenting renal salt wasting",
+      "Assessment of tear production (Schirmer test) and salivary flow",
+      "Sweat testing and dermatological evaluation of the skin barrier",
+      "CLDN10 gene sequencing for confirmation"
     ],
-    [
-     "Management Strategy",
-     "Correct the salt-losing tubulopathy with potassium replacement and sodium and fluid repletion to counter hypokalaemic metabolic",
-     "Core treatment modality"
+    "redFlags": [
+      "Hyperthermia and dehydration during heat exposure or febrile illness",
+      "Severe symptomatic hypokalaemia with arrhythmia risk",
+      "Corneal damage from chronic dry eyes",
+      "Failure to thrive from combined salt loss and reduced intake"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting hypomagnesaemia and being misled by the hypermagnesaemia that distinguishes HELIX",
-     "Prevent diagnostic or management error"
+    "prognosis": "The tubulopathy and exocrine features are generally manageable with supportive care and long-term renal function is usually preserved, but chronic sicca symptoms, heat intolerance, and skin involvement require ongoing multidisciplinary attention.",
+    "pitfalls": [
+      "Expecting hypomagnesaemia and being misled by the hypermagnesaemia that distinguishes HELIX",
+      "Overlooking the extrarenal exocrine features when a tubulopathy dominates the presentation",
+      "Failing to counsel about heat intolerance and dehydration risk",
+      "Mistaking the sicca picture for an acquired autoimmune process"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "OMIM entry for HELIX syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the salt-losing tubulopathy with potassium replacement and sodium and fluid repletion to counter hypokalaemic metabolic alkalosis, avoiding magnesium supplementation given the characteristic hypermagnesaemia",
+      "Protect against heat intolerance and dehydration from hypohidrosis with cooling measures, adequate hydration and avoidance of overheating",
+      "Manage sicca features with regular ocular lubricants and artificial tears for lacrimal failure and saliva substitutes with meticulous dental care for xerostomia",
+      "Treat the ichthyosis with emollients and keratolytic skin care",
+      "Monitor serum electrolytes, magnesium and long-term renal function periodically",
+      "Coordinate multidisciplinary care across nephrology, ophthalmology, dermatology and clinical genetics",
+      "Offer genetic counselling and family screening given autosomal recessive CLDN10 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for helix syndrome (cldn10)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "helix-syndrome-real-image",
-   "title": "HELIX syndrome (CLDN10): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "helix_syndrome-pathway",
+      "title": "HELIX syndrome (CLDN10): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive multisystem disorder caused by variants in CLDN10, encoding the tight-junction protein claudin-10 in the thick ascending limb and exocrine glands",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hyperthermia and dehydration during heat exposure or febrile illness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum electrolytes showing hypokalaemia and unusually raised magnesium, Venous blood gas confirming metabolic alkalosis, Urinary electrolyte studies documenting renal salt wasting"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the salt-losing tubulopathy with potassium replacement and sodium and fluid repletion to counter hypokalaemic metabolic alkalosis, avoiding magnesium supplementation given the characteristic hypermagnesaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting hypomagnesaemia and being misled by the hypermagnesaemia that distinguishes HELIX"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of helix syndrome (cldn10)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "helix_syndrome-matrix",
+      "title": "HELIX syndrome (CLDN10): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive multisystem disorder caused by variants in CLDN10, encoding the tight-junction protein claudin-10 in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum electrolytes showing hypokalaemia and unusually raised magnesium, Venous blood gas confirming metabolic alkalosis, Urinary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gitelman syndrome, Bartter syndrome, EAST/SeSAME syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the salt-losing tubulopathy with potassium replacement and sodium and fluid repletion to counter hypokalaemic metabolic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting hypomagnesaemia and being misled by the hypermagnesaemia that distinguishes HELIX",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for helix syndrome (cldn10)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "helix_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes",
+          "cells": [
+            {
+              "text": "Hypokalaemia and unusually raised magnesium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous blood gas",
+          "cells": [
+            {
+              "text": "Metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary electrolyte studies",
+          "cells": [
+            {
+              "text": "Renal salt wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schirmer test and salivary flow",
+          "cells": [
+            {
+              "text": "Tear and saliva production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweat testing and dermatological evaluation",
+          "cells": [
+            {
+              "text": "Hypohidrosis and the skin barrier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CLDN10 gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "helix_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Sicca features overlap; CLDN10 sequencing confirms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gitelman syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anhidrotic ectodermal dysplasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "helix_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Potassium replacement with sodium and fluid",
+          "cells": [
+            {
+              "text": "Corrects the salt-losing tubulopathy and hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cooling measures and hydration",
+          "cells": [
+            {
+              "text": "Protects against heat intolerance and dehydration from hypohidrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular lubricants and saliva substitutes",
+          "cells": [
+            {
+              "text": "Lacrimal failure and salivary dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and keratolytic skin care",
+          "cells": [
+            {
+              "text": "Ichthyosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic monitoring",
+          "cells": [
+            {
+              "text": "Serum electrolytes, magnesium and long-term renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Nephrology, ophthalmology, dermatology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive CLDN10 inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "helix_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of HELIX syndrome (CLDN10)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heat intolerance, dry eyes and scaly skin with salt-losing tubulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Overheating, severe hypokalaemia, corneal damage or poor growth present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: correct severe hypokalaemia and treat overheating or dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes, venous gas, urinary electrolytes, Schirmer test, sweat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CLDN10 variants confirmed, with Gitelman syndrome excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gitelman, Bartter, Sjogren or anhidrotic dysplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Potassium replacement with sodium and fluid repletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cooling measures and adequate hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Artificial tears and saliva substitutes for sicca features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emollients and keratolytic skin care for ichthyosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic monitoring of electrolytes, magnesium and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Electrolytes corrected and sicca and skin managed; lifelong monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

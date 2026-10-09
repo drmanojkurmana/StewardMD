@@ -1,175 +1,464 @@
 {
- "id": "duane_retraction_syndrome",
- "name": "Duane retraction syndrome",
- "aliases": [
-  "Duane syndrome",
-  "Duane's retraction syndrome",
-  "DRS",
-  "congenital cranial dysinnervation disorder",
-  "CHN1"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital eye movement disorder marked by limited abduction, globe retraction and narrowing of the palpebral fissure on attempted adduction",
-   "Caused by aberrant innervation in which the lateral rectus is supplied partly by a branch of the oculomotor nerve owing to absence or hypoplasia of the abducens nucleus and nerve",
-   "Co-contraction of the medial and lateral recti on adduction pulls the globe back into the orbit, narrowing the lid fissure, with widening on abduction",
-   "Traditionally classified into three types by the pattern of abduction and adduction limitation (Huber types)",
-   "More common in the left eye and in females, and usually unilateral",
-   "Many children maintain binocular vision by adopting a compensatory face turn; amblyopia is relatively uncommon",
-   "Surgery is reserved for a significant anomalous head posture, manifest deviation in primary position, or marked up- or down-shoots"
+  "id": "duane_retraction_syndrome",
+  "name": "Duane retraction syndrome",
+  "aliases": [
+    "Duane syndrome",
+    "Duane's retraction syndrome",
+    "DRS",
+    "congenital cranial dysinnervation disorder",
+    "CHN1"
   ],
-  "pathophysiology": "Duane retraction syndrome is a congenital cranial dysinnervation disorder arising from maldevelopment of the abducens nucleus and nerve. In the absence of normal sixth nerve supply, the lateral rectus receives anomalous branches from the oculomotor nerve. On attempted adduction, both horizontal recti contract simultaneously, retracting the globe and narrowing the palpebral fissure, while abduction is deficient because the lateral rectus is not properly innervated for that action. The condition is usually sporadic, though familial cases and the associated gene CHN1 implicate disordered axon guidance during brainstem development, and it can occur within broader syndromes such as Wildervanck.",
-  "additionalDifferentials": [
-   "Congenital or acquired sixth nerve palsy",
-   "Congenital fibrosis of the extraocular muscles",
-   "Möbius syndrome",
-   "Infantile esotropia with cross-fixation",
-   "Brown syndrome (for restricted elevation patterns)",
-   "Congenital third nerve palsy with aberrant regeneration"
-  ],
-  "additionalInvestigations": [
-   "Orthoptic assessment of ductions, palpebral fissure changes and head posture",
-   "Cover testing for deviation in primary position",
-   "Cycloplegic refraction and amblyopia assessment",
-   "Audiometry and systemic examination for associated anomalies (e.g. Wildervanck, Goldenhar)",
-   "Neuroimaging if the presentation is atypical or acquired features arise",
-   "Genetic evaluation in familial or syndromic cases"
-  ],
-  "redFlags": [
-   "Acquired abduction deficit that could represent a true sixth nerve palsy needing urgent workup",
-   "Associated hearing loss or vertebral anomalies suggesting a wider syndrome",
-   "Amblyopia developing in the affected eye",
-   "A large primary-position deviation or head posture affecting development"
-  ],
-  "prognosis": "Generally a stable, non-progressive condition with good functional outcome; many patients retain binocular vision via head posture, and surgery can improve alignment and posture though it cannot restore normal abduction.",
-  "pitfalls": [
-   "Confusing it with a sixth nerve palsy and pursuing unnecessary neurological investigation",
-   "Attempting to restore full abduction surgically, which is not achievable",
-   "Overlooking associated systemic anomalies",
-   "Neglecting amblyopia screening in unilateral cases"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe stable cases with good binocular vision, as this congenital, non-progressive disorder often needs no intervention",
-   "Correct refractive error with spectacles and treat any amblyopia with occlusion or refractive adaptation",
-   "Offer strabismus surgery for a significant primary-position deviation, a disfiguring or fatiguing compensatory face turn, or marked globe retraction and upshoot, using recession or transposition procedures",
-   "Counsel that surgery improves alignment and head posture but cannot restore normal abduction",
-   "Provide orthoptic follow-up of ductions, palpebral fissure changes and head posture",
-   "Evaluate for and manage associated anomalies (for example Wildervanck or Goldenhar) with audiometry and systemic examination",
-   "Arrange genetic evaluation in familial or syndromic cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "duane_retraction_syndrome-pathway",
-   "title": "Duane retraction syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital eye movement disorder marked by limited abduction, globe retraction and narrowing of the palpebral fissure on attempted adduction",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acquired abduction deficit that could represent a true sixth nerve palsy needing urgent workup",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Orthoptic assessment of ductions, palpebral fissure changes and head posture, Cover testing for deviation in primary position, Cycloplegic refraction and amblyopia assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe stable cases with good binocular vision, as this congenital, non-progressive disorder often needs no intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with a sixth nerve palsy and pursuing unnecessary neurological investigation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of duane retraction syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "duane_retraction_syndrome-matrix",
-   "title": "Duane retraction syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital eye movement disorder marked by limited abduction, globe retraction and narrowing of the palpebral fissure on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital eye movement disorder marked by limited abduction, globe retraction and narrowing of the palpebral fissure on attempted adduction",
+      "Caused by aberrant innervation in which the lateral rectus is supplied partly by a branch of the oculomotor nerve owing to absence or hypoplasia of the abducens nucleus and nerve",
+      "Co-contraction of the medial and lateral recti on adduction pulls the globe back into the orbit, narrowing the lid fissure, with widening on abduction",
+      "Traditionally classified into three types by the pattern of abduction and adduction limitation (Huber types)",
+      "More common in the left eye and in females, and usually unilateral",
+      "Many children maintain binocular vision by adopting a compensatory face turn; amblyopia is relatively uncommon",
+      "Surgery is reserved for a significant anomalous head posture, manifest deviation in primary position, or marked up- or down-shoots"
     ],
-    [
-     "Key Investigations",
-     "Orthoptic assessment of ductions, palpebral fissure changes and head posture, Cover testing for deviation in primary position,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Duane retraction syndrome is a congenital cranial dysinnervation disorder arising from maldevelopment of the abducens nucleus and nerve. In the absence of normal sixth nerve supply, the lateral rectus receives anomalous branches from the oculomotor nerve. On attempted adduction, both horizontal recti contract simultaneously, retracting the globe and narrowing the palpebral fissure, while abduction is deficient because the lateral rectus is not properly innervated for that action. The condition is usually sporadic, though familial cases and the associated gene CHN1 implicate disordered axon guidance during brainstem development, and it can occur within broader syndromes such as Wildervanck.",
+    "additionalDifferentials": [
+      "Congenital or acquired sixth nerve palsy",
+      "Congenital fibrosis of the extraocular muscles",
+      "Möbius syndrome",
+      "Infantile esotropia with cross-fixation",
+      "Brown syndrome (for restricted elevation patterns)",
+      "Congenital third nerve palsy with aberrant regeneration"
     ],
-    [
-     "Primary Differentials",
-     "Congenital or acquired sixth nerve palsy, Congenital fibrosis of the extraocular muscles, Möbius syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Orthoptic assessment of ductions, palpebral fissure changes and head posture",
+      "Cover testing for deviation in primary position",
+      "Cycloplegic refraction and amblyopia assessment",
+      "Audiometry and systemic examination for associated anomalies (e.g. Wildervanck, Goldenhar)",
+      "Neuroimaging if the presentation is atypical or acquired features arise",
+      "Genetic evaluation in familial or syndromic cases"
     ],
-    [
-     "Management Strategy",
-     "Observe stable cases with good binocular vision, as this congenital, non-progressive disorder often needs no intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "Acquired abduction deficit that could represent a true sixth nerve palsy needing urgent workup",
+      "Associated hearing loss or vertebral anomalies suggesting a wider syndrome",
+      "Amblyopia developing in the affected eye",
+      "A large primary-position deviation or head posture affecting development"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with a sixth nerve palsy and pursuing unnecessary neurological investigation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generally a stable, non-progressive condition with good functional outcome; many patients retain binocular vision via head posture, and surgery can improve alignment and posture though it cannot restore normal abduction.",
+    "pitfalls": [
+      "Confusing it with a sixth nerve palsy and pursuing unnecessary neurological investigation",
+      "Attempting to restore full abduction surgically, which is not achievable",
+      "Overlooking associated systemic anomalies",
+      "Neglecting amblyopia screening in unilateral cases"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe stable cases with good binocular vision, as this congenital, non-progressive disorder often needs no intervention",
+      "Correct refractive error with spectacles and treat any amblyopia with occlusion or refractive adaptation",
+      "Offer strabismus surgery for a significant primary-position deviation, a disfiguring or fatiguing compensatory face turn, or marked globe retraction and upshoot, using recession or transposition procedures",
+      "Counsel that surgery improves alignment and head posture but cannot restore normal abduction",
+      "Provide orthoptic follow-up of ductions, palpebral fissure changes and head posture",
+      "Evaluate for and manage associated anomalies (for example Wildervanck or Goldenhar) with audiometry and systemic examination",
+      "Arrange genetic evaluation in familial or syndromic cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for duane retraction syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "duane-retraction-syndrome-real-image",
-   "title": "Duane retraction syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "duane_retraction_syndrome-pathway",
+      "title": "Duane retraction syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital eye movement disorder marked by limited abduction, globe retraction and narrowing of the palpebral fissure on attempted adduction",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acquired abduction deficit that could represent a true sixth nerve palsy needing urgent workup",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Orthoptic assessment of ductions, palpebral fissure changes and head posture, Cover testing for deviation in primary position, Cycloplegic refraction and amblyopia assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe stable cases with good binocular vision, as this congenital, non-progressive disorder often needs no intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with a sixth nerve palsy and pursuing unnecessary neurological investigation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of duane retraction syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "duane_retraction_syndrome-matrix",
+      "title": "Duane retraction syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital eye movement disorder marked by limited abduction, globe retraction and narrowing of the palpebral fissure on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Orthoptic assessment of ductions, palpebral fissure changes and head posture, Cover testing for deviation in primary position,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital or acquired sixth nerve palsy, Congenital fibrosis of the extraocular muscles, Möbius syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe stable cases with good binocular vision, as this congenital, non-progressive disorder often needs no intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with a sixth nerve palsy and pursuing unnecessary neurological investigation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for duane retraction syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "duane_retraction_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthoptic assessment of ductions and head posture",
+          "cells": [
+            {
+              "text": "Ductions, palpebral fissure change and head posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cover testing in primary position",
+          "cells": [
+            {
+              "text": "Deviation in primary position"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction and amblyopia assessment",
+          "cells": [
+            {
+              "text": "Amblyopia in the affected eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and systemic examination",
+          "cells": [
+            {
+              "text": "Associated anomalies such as Wildervanck or Goldenhar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging when the presentation is atypical",
+          "cells": [
+            {
+              "text": "Acquired features needing exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "duane_retraction_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital or acquired sixth nerve palsy",
+          "cells": [
+            {
+              "text": "Acquired abduction deficit needs urgent work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mobius syndrome",
+          "cells": [
+            {
+              "text": "Wider cranial nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital fibrosis of the extraocular muscles",
+          "cells": [
+            {
+              "text": "Restricted movement from fibrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "duane_retraction_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Stable cases with good binocular vision often need no intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction and amblyopia treatment",
+          "cells": [
+            {
+              "text": "Spectacles; occlusion or refractive adaptation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus surgery",
+          "cells": [
+            {
+              "text": "Large primary deviation, face turn, or marked globe retraction and upshoot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Surgery improves alignment and posture but cannot restore abduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic follow-up",
+          "cells": [
+            {
+              "text": "Ductions, palpebral fissure and head posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated anomalies",
+          "cells": [
+            {
+              "text": "Audiometry and systemic examination; genetic evaluation in familial cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "duane_retraction_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Duane retraction syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Duane retraction syndrome: restricted abduction with globe retraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acquired abduction deficit, hearing loss, amblyopia progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology work-up for acquired sixth nerve palsy features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Orthoptic ductions and head posture; cover test; refraction; audiometry; MRI if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the abduction deficit with retraction present since early childhood?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sixth nerve palsy, Mobius syndrome or extraocular muscle fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe stable cases with good binocular vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Spectacles and treatment of amblyopia by occlusion or refractive adaptation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Strabismus surgery for large deviation, face turn or marked globe retraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel that surgery cannot restore normal abduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Orthoptic follow-up and evaluation of associated systemic anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally stable with good function; many retain binocular vision via head posture",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

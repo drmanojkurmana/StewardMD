@@ -1,175 +1,473 @@
 {
- "id": "dfna_autosomal_dominant_hearing_loss",
- "name": "Autosomal dominant non-syndromic hearing loss (DFNA)",
- "aliases": [
-  "DFNA",
-  "autosomal dominant deafness",
-  "progressive dominant SNHL",
-  "KCNQ4-related hearing loss",
-  "WFS1-related low-frequency hearing loss"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology",
- "specialty": "Otology / Audiovestibular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "DFNA loci account for most later-onset, progressive hereditary sensorineural hearing loss transmitted through successive generations",
-   "Onset is usually postlingual and the course progressive, contrasting with the congenital stable pattern typical of recessive DFNB1",
-   "The audiometric configuration often hints at the gene: KCNQ4 causes a high-frequency descending loss, whereas WFS1 classically causes a low-frequency ascending loss",
-   "A clear vertical family history across generations with variable severity supports dominant inheritance",
-   "Vestibular symptoms are usually absent, though certain loci feature associated balance or tinnitus features",
-   "Penetrance and expressivity vary, so relatives may be affected at different ages and to different degrees",
-   "Management centres on serial monitoring, hearing aids, and cochlear implantation when loss becomes severe"
+  "id": "dfna_autosomal_dominant_hearing_loss",
+  "name": "Autosomal dominant non-syndromic hearing loss (DFNA)",
+  "aliases": [
+    "DFNA",
+    "autosomal dominant deafness",
+    "progressive dominant SNHL",
+    "KCNQ4-related hearing loss",
+    "WFS1-related low-frequency hearing loss"
   ],
-  "pathophysiology": "The DFNA group comprises many distinct loci, each caused by a variant in a gene important to cochlear function, and most act through a dominant-negative or gain-of-function mechanism that disrupts a shared multimeric protein or ion channel. For example, KCNQ4 encodes a potassium channel in outer hair cells whose dysfunction causes progressive high-frequency loss, while WFS1 (wolframin) variants produce a characteristic low-frequency loss. Because a single altered allele can poison the assembled channel or structural complex, heterozygotes are affected, and the progressive nature reflects cumulative hair cell or supporting cell dysfunction over time rather than a fixed congenital lesion.",
-  "additionalDifferentials": [
-   "Presbyacusis and noise-induced hearing loss with a similar descending pattern",
-   "DFNB recessive non-syndromic hearing loss",
-   "Otosclerosis causing progressive mixed loss",
-   "Mitochondrial and syndromic progressive hearing loss",
-   "Autoimmune inner-ear disease",
-   "Enlarged vestibular aqueduct with progression"
-  ],
-  "additionalInvestigations": [
-   "Serial pure-tone audiometry to characterise configuration and rate of progression",
-   "Detailed multigenerational pedigree and audiometric assessment of relatives",
-   "Otoacoustic emissions and brainstem response to localise the lesion",
-   "Comprehensive deafness gene panel or exome sequencing to identify the DFNA locus",
-   "Speech audiometry to guide amplification and implant decisions",
-   "Vestibular testing where balance symptoms accompany the loss"
-  ],
-  "redFlags": [
-   "Unusually rapid progression prompting review for autoimmune or other treatable causes",
-   "Marked asymmetry suggesting a superimposed structural lesion",
-   "Emergence of systemic features that would reclassify the disorder as syndromic",
-   "Progression to severe loss limiting communication despite aiding"
-  ],
-  "prognosis": "Most forms progress gradually over decades, and while amplification maintains communication for many years, cochlear implantation offers reliable rehabilitation once hearing aids no longer provide adequate benefit.",
-  "pitfalls": [
-   "Dismissing a dominant familial pattern as ordinary age-related hearing loss",
-   "Not using the audiometric configuration to prioritise likely genes",
-   "Overlooking reversible causes of accelerated decline",
-   "Assuming uniform severity across a family despite variable penetrance"
-  ],
-  "references": [
-   "Cummings Otolaryngology",
-   "GeneReviews: Nonsyndromic Hearing Loss and Deafness, Genetic Overview"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Progressive amplification with appropriately fitted hearing aids as first-line rehabilitation",
-   "Cochlear implantation once hearing aids no longer provide adequate benefit",
-   "Serial pure-tone and speech audiometry to track the rate of progression and guide device changes",
-   "Auditory rehabilitation, communication support and management of tinnitus where present",
-   "Genetic testing to identify the DFNA locus, with counselling on dominant inheritance and cascade testing of relatives",
-   "Avoid additional ototoxic drug exposure and noise that could accelerate the loss",
-   "Refer to audiovestibular medicine or otology, with vestibular assessment where balance symptoms occur"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dfna_autosomal_dominant_hearing_loss-pathway",
-   "title": "Autosomal dominant non-syndromic hearing loss (DFNA): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "DFNA loci account for most later-onset, progressive hereditary sensorineural hearing loss transmitted through successive generations",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unusually rapid progression prompting review for autoimmune or other treatable causes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial pure-tone audiometry to characterise configuration and rate of progression, Detailed multigenerational pedigree and audiometric assessment of relatives, Otoacoustic emissions and brainstem response to localise the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Progressive amplification with appropriately fitted hearing aids as first-line rehabilitation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing a dominant familial pattern as ordinary age-related hearing loss"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autosomal dominant non-syndromic hearing loss (dfna)."
-  }
- ],
- "tables": [
-  {
-   "id": "dfna_autosomal_dominant_hearing_loss-matrix",
-   "title": "Autosomal dominant non-syndromic hearing loss (DFNA): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "DFNA loci account for most later-onset, progressive hereditary sensorineural hearing loss transmitted through successive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology",
+  "specialty": "Otology / Audiovestibular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "DFNA loci account for most later-onset, progressive hereditary sensorineural hearing loss transmitted through successive generations",
+      "Onset is usually postlingual and the course progressive, contrasting with the congenital stable pattern typical of recessive DFNB1",
+      "The audiometric configuration often hints at the gene: KCNQ4 causes a high-frequency descending loss, whereas WFS1 classically causes a low-frequency ascending loss",
+      "A clear vertical family history across generations with variable severity supports dominant inheritance",
+      "Vestibular symptoms are usually absent, though certain loci feature associated balance or tinnitus features",
+      "Penetrance and expressivity vary, so relatives may be affected at different ages and to different degrees",
+      "Management centres on serial monitoring, hearing aids, and cochlear implantation when loss becomes severe"
     ],
-    [
-     "Key Investigations",
-     "Serial pure-tone audiometry to characterise configuration and rate of progression, Detailed multigenerational pedigree and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The DFNA group comprises many distinct loci, each caused by a variant in a gene important to cochlear function, and most act through a dominant-negative or gain-of-function mechanism that disrupts a shared multimeric protein or ion channel. For example, KCNQ4 encodes a potassium channel in outer hair cells whose dysfunction causes progressive high-frequency loss, while WFS1 (wolframin) variants produce a characteristic low-frequency loss. Because a single altered allele can poison the assembled channel or structural complex, heterozygotes are affected, and the progressive nature reflects cumulative hair cell or supporting cell dysfunction over time rather than a fixed congenital lesion.",
+    "additionalDifferentials": [
+      "Presbyacusis and noise-induced hearing loss with a similar descending pattern",
+      "DFNB recessive non-syndromic hearing loss",
+      "Otosclerosis causing progressive mixed loss",
+      "Mitochondrial and syndromic progressive hearing loss",
+      "Autoimmune inner-ear disease",
+      "Enlarged vestibular aqueduct with progression"
     ],
-    [
-     "Primary Differentials",
-     "Presbyacusis and noise-induced hearing loss with a similar descending pattern, DFNB recessive non-syndromic hearing loss,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial pure-tone audiometry to characterise configuration and rate of progression",
+      "Detailed multigenerational pedigree and audiometric assessment of relatives",
+      "Otoacoustic emissions and brainstem response to localise the lesion",
+      "Comprehensive deafness gene panel or exome sequencing to identify the DFNA locus",
+      "Speech audiometry to guide amplification and implant decisions",
+      "Vestibular testing where balance symptoms accompany the loss"
     ],
-    [
-     "Management Strategy",
-     "Progressive amplification with appropriately fitted hearing aids as first-line rehabilitation",
-     "Core treatment modality"
+    "redFlags": [
+      "Unusually rapid progression prompting review for autoimmune or other treatable causes",
+      "Marked asymmetry suggesting a superimposed structural lesion",
+      "Emergence of systemic features that would reclassify the disorder as syndromic",
+      "Progression to severe loss limiting communication despite aiding"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing a dominant familial pattern as ordinary age-related hearing loss",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most forms progress gradually over decades, and while amplification maintains communication for many years, cochlear implantation offers reliable rehabilitation once hearing aids no longer provide adequate benefit.",
+    "pitfalls": [
+      "Dismissing a dominant familial pattern as ordinary age-related hearing loss",
+      "Not using the audiometric configuration to prioritise likely genes",
+      "Overlooking reversible causes of accelerated decline",
+      "Assuming uniform severity across a family despite variable penetrance"
+    ],
+    "references": [
+      "Cummings Otolaryngology",
+      "GeneReviews: Nonsyndromic Hearing Loss and Deafness, Genetic Overview"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Progressive amplification with appropriately fitted hearing aids as first-line rehabilitation",
+      "Cochlear implantation once hearing aids no longer provide adequate benefit",
+      "Serial pure-tone and speech audiometry to track the rate of progression and guide device changes",
+      "Auditory rehabilitation, communication support and management of tinnitus where present",
+      "Genetic testing to identify the DFNA locus, with counselling on dominant inheritance and cascade testing of relatives",
+      "Avoid additional ototoxic drug exposure and noise that could accelerate the loss",
+      "Refer to audiovestibular medicine or otology, with vestibular assessment where balance symptoms occur"
     ]
-   ],
-   "caption": "Overview comparison matrix for autosomal dominant non-syndromic hearing loss (dfna)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dfna-autosomal-dominant-hearing-loss-real-image",
-   "title": "Autosomal dominant non-syndromic hearing loss (DFNA): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dfna_autosomal_dominant_hearing_loss-pathway",
+      "title": "Autosomal dominant non-syndromic hearing loss (DFNA): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "DFNA loci account for most later-onset, progressive hereditary sensorineural hearing loss transmitted through successive generations",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unusually rapid progression prompting review for autoimmune or other treatable causes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial pure-tone audiometry to characterise configuration and rate of progression, Detailed multigenerational pedigree and audiometric assessment of relatives, Otoacoustic emissions and brainstem response to localise the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Progressive amplification with appropriately fitted hearing aids as first-line rehabilitation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing a dominant familial pattern as ordinary age-related hearing loss"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autosomal dominant non-syndromic hearing loss (dfna)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dfna_autosomal_dominant_hearing_loss-matrix",
+      "title": "Autosomal dominant non-syndromic hearing loss (DFNA): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "DFNA loci account for most later-onset, progressive hereditary sensorineural hearing loss transmitted through successive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial pure-tone audiometry to characterise configuration and rate of progression, Detailed multigenerational pedigree and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Presbyacusis and noise-induced hearing loss with a similar descending pattern, DFNB recessive non-syndromic hearing loss,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Progressive amplification with appropriately fitted hearing aids as first-line rehabilitation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing a dominant familial pattern as ordinary age-related hearing loss",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autosomal dominant non-syndromic hearing loss (dfna)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dfna_autosomal_dominant_hearing_loss-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Configuration and rate of progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multigenerational pedigree and audiometry of relatives",
+          "cells": [
+            {
+              "text": "Dominant pattern across generations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoacoustic emissions and brainstem response",
+          "cells": [
+            {
+              "text": "Localises the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deafness gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "DFNA locus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech audiometry",
+          "cells": [
+            {
+              "text": "Guides amplification and implant decisions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dfna_autosomal_dominant_hearing_loss-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Presbyacusis and noise-induced hearing loss",
+          "cells": [
+            {
+              "text": "Similar descending pattern; a dominant family pattern is not age-related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DFNB recessive hearing loss",
+          "cells": [
+            {
+              "text": "Recessive rather than dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otosclerosis",
+          "cells": [
+            {
+              "text": "Causes progressive mixed loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dfna_autosomal_dominant_hearing_loss-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hearing aids",
+          "cells": [
+            {
+              "text": "First-line rehabilitation, progressively adjusted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "When hearing aids no longer give adequate benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Tracks progression and guides device changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Auditory rehabilitation",
+          "cells": [
+            {
+              "text": "Communication support; tinnitus management where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and cascade testing",
+          "cells": [
+            {
+              "text": "DFNA locus; counselling on dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid ototoxic drugs and noise",
+          "cells": [
+            {
+              "text": "May accelerate the loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiovestibular referral",
+          "cells": [
+            {
+              "text": "Vestibular assessment where balance symptoms occur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dfna_autosomal_dominant_hearing_loss-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal dominant non-syndromic hearing loss (DFNA)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DFNA hearing loss: progressive sensorineural loss in a dominant family",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid progression, marked asymmetry, systemic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for autoimmune or other treatable causes of rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial audiometry; pedigree; OAE and ABR; deafness gene panel or exome",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a DFNA variant identified in the family?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider presbyacusis, DFNB, otosclerosis or syndromic progressive hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hearing aids as first-line rehabilitation, progressively adjusted",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation once aids no longer give adequate benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial pure-tone and speech audiometry to track progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling on dominant inheritance and cascade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid ototoxic drugs and noise that could accelerate the loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most forms progress over decades; implants give reliable rehabilitation when aids fail",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

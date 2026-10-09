@@ -1,168 +1,448 @@
 {
- "id": "trichorrhexis_nodosa",
- "name": "Trichorrhexis nodosa",
- "aliases": [
-  "TN",
-  "hair-shaft nodal defect"
- ],
- "class": "non_infective",
- "system": "Dermatology / Trichology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common hair-shaft abnormality in which small greyish-white nodes along the shaft represent sites of cortical fracture, giving hair that breaks easily",
-   "Under the microscope the nodes resemble the ends of two brushes or brooms pushed together at the fracture point, the classic paintbrush appearance",
-   "It may be proximal, distal or localised, and distal trichorrhexis nodosa from cumulative cosmetic and physical trauma such as heat, bleaching and brushing is the commonest form",
-   "Acquired forms follow physical or chemical trauma to otherwise normal or inherently weakened hair, whereas congenital forms accompany metabolic disorders such as argininosuccinic aciduria and other hair-shaft syndromes",
-   "Trichoscopy shows the nodes and transverse fractures with brush-like broken ends",
-   "Proximal trichorrhexis nodosa is more common in afro-textured hair and with certain metabolic conditions",
-   "Management focuses on eliminating traumatic hair practices and treating any underlying disorder, and hair usually recovers once trauma stops in acquired cases"
+  "id": "trichorrhexis_nodosa",
+  "name": "Trichorrhexis nodosa",
+  "aliases": [
+    "TN",
+    "hair-shaft nodal defect"
   ],
-  "pathophysiology": "Trichorrhexis nodosa arises when the protective cuticle is disrupted, exposing the cortex, whose fibres then splay apart to form the characteristic nodes and fracture transversely. It may reflect an inherent weakness of the shaft, as in inherited metabolic disorders affecting keratin sulphur content or amino-acid metabolism, or, more often, cumulative physical and chemical trauma from grooming, heat and cosmetic processing acting on normal or vulnerable hair. The result is localised structural failure and breakage.",
-  "additionalDifferentials": [
-   "Pili torti, with twisting but no nodes",
-   "Monilethrix, with regular beading",
-   "Trichoschisis and trichothiodystrophy",
-   "Weathering of the hair tip",
-   "Other causes of hair fragility and breakage"
-  ],
-  "additionalInvestigations": [
-   "Light microscopy of the shaft showing paired brush-like fracture ends at the nodes",
-   "Trichoscopy demonstrating nodes and transverse fractures",
-   "Detailed hair-care and cosmetic-processing history",
-   "Metabolic screening, for example for argininosuccinic aciduria, where a congenital cause is suspected",
-   "Assessment for associated hair-shaft syndromes or systemic disease"
-  ],
-  "redFlags": [
-   "Widespread congenital fragility suggesting an underlying metabolic or genetic disorder",
-   "Associated developmental or neurological features",
-   "Failure to improve despite stopping trauma, prompting a search for an inherent shaft defect"
-  ],
-  "prognosis": "Acquired distal trichorrhexis nodosa usually recovers once traumatic practices cease, whereas congenital or metabolic-associated forms depend on the underlying disorder and may be more persistent.",
-  "pitfalls": [
-   "Attributing breakage to hair loss rather than a shaft defect and so missing the true cause",
-   "Overlooking an underlying metabolic disorder in congenital cases",
-   "Not taking a full cosmetic and grooming history in acquired disease",
-   "Failing to examine the shaft microscopically to confirm the diagnosis"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Remove the causative mechanical and chemical trauma by stopping heat styling, bleaching, chemical relaxing and vigorous brushing, which is the mainstay for the common acquired distal form",
-   "Adopt gentle hair-care measures with mild shampoos, conditioners and low-tension styling to minimise cortical fracture and allow the shaft to recover",
-   "Investigate and treat an underlying metabolic disorder in congenital cases, such as dietary and substrate management of argininosuccinic aciduria under a metabolic team",
-   "Identify and correct associated systemic contributors such as iron deficiency and hypothyroidism",
-   "Monitor for regrowth of intact hair after harmful practices cease, which confirms the acquired mechanism",
-   "Refer to clinical genetics or metabolic medicine when a congenital hair-shaft or amino-acid disorder is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trichorrhexis_nodosa-pathway",
-   "title": "Trichorrhexis nodosa: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common hair-shaft abnormality in which small greyish-white nodes along the shaft represent sites of cortical fracture, giving hair that breaks easily",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Widespread congenital fragility suggesting an underlying metabolic or genetic disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Light microscopy of the shaft showing paired brush-like fracture ends at the nodes, Trichoscopy demonstrating nodes and transverse fractures, Detailed hair-care and cosmetic-processing history"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Remove the causative mechanical and chemical trauma by stopping heat styling, bleaching, chemical relaxing and vigorous brushing, which is the mainstay for the common acquired distal form"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing breakage to hair loss rather than a shaft defect and so missing the true cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trichorrhexis nodosa."
-  }
- ],
- "tables": [
-  {
-   "id": "trichorrhexis_nodosa-matrix",
-   "title": "Trichorrhexis nodosa: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common hair-shaft abnormality in which small greyish-white nodes along the shaft represent sites of cortical fracture, giving",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Trichology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common hair-shaft abnormality in which small greyish-white nodes along the shaft represent sites of cortical fracture, giving hair that breaks easily",
+      "Under the microscope the nodes resemble the ends of two brushes or brooms pushed together at the fracture point, the classic paintbrush appearance",
+      "It may be proximal, distal or localised, and distal trichorrhexis nodosa from cumulative cosmetic and physical trauma such as heat, bleaching and brushing is the commonest form",
+      "Acquired forms follow physical or chemical trauma to otherwise normal or inherently weakened hair, whereas congenital forms accompany metabolic disorders such as argininosuccinic aciduria and other hair-shaft syndromes",
+      "Trichoscopy shows the nodes and transverse fractures with brush-like broken ends",
+      "Proximal trichorrhexis nodosa is more common in afro-textured hair and with certain metabolic conditions",
+      "Management focuses on eliminating traumatic hair practices and treating any underlying disorder, and hair usually recovers once trauma stops in acquired cases"
     ],
-    [
-     "Key Investigations",
-     "Light microscopy of the shaft showing paired brush-like fracture ends at the nodes, Trichoscopy demonstrating nodes and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trichorrhexis nodosa arises when the protective cuticle is disrupted, exposing the cortex, whose fibres then splay apart to form the characteristic nodes and fracture transversely. It may reflect an inherent weakness of the shaft, as in inherited metabolic disorders affecting keratin sulphur content or amino-acid metabolism, or, more often, cumulative physical and chemical trauma from grooming, heat and cosmetic processing acting on normal or vulnerable hair. The result is localised structural failure and breakage.",
+    "additionalDifferentials": [
+      "Pili torti, with twisting but no nodes",
+      "Monilethrix, with regular beading",
+      "Trichoschisis and trichothiodystrophy",
+      "Weathering of the hair tip",
+      "Other causes of hair fragility and breakage"
     ],
-    [
-     "Primary Differentials",
-     "Pili torti, with twisting but no nodes, Monilethrix, with regular beading, Trichoschisis and trichothiodystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Light microscopy of the shaft showing paired brush-like fracture ends at the nodes",
+      "Trichoscopy demonstrating nodes and transverse fractures",
+      "Detailed hair-care and cosmetic-processing history",
+      "Metabolic screening, for example for argininosuccinic aciduria, where a congenital cause is suspected",
+      "Assessment for associated hair-shaft syndromes or systemic disease"
     ],
-    [
-     "Management Strategy",
-     "Remove the causative mechanical and chemical trauma by stopping heat styling, bleaching, chemical relaxing and vigorous brushing,",
-     "Core treatment modality"
+    "redFlags": [
+      "Widespread congenital fragility suggesting an underlying metabolic or genetic disorder",
+      "Associated developmental or neurological features",
+      "Failure to improve despite stopping trauma, prompting a search for an inherent shaft defect"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing breakage to hair loss rather than a shaft defect and so missing the true cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acquired distal trichorrhexis nodosa usually recovers once traumatic practices cease, whereas congenital or metabolic-associated forms depend on the underlying disorder and may be more persistent.",
+    "pitfalls": [
+      "Attributing breakage to hair loss rather than a shaft defect and so missing the true cause",
+      "Overlooking an underlying metabolic disorder in congenital cases",
+      "Not taking a full cosmetic and grooming history in acquired disease",
+      "Failing to examine the shaft microscopically to confirm the diagnosis"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Remove the causative mechanical and chemical trauma by stopping heat styling, bleaching, chemical relaxing and vigorous brushing, which is the mainstay for the common acquired distal form",
+      "Adopt gentle hair-care measures with mild shampoos, conditioners and low-tension styling to minimise cortical fracture and allow the shaft to recover",
+      "Investigate and treat an underlying metabolic disorder in congenital cases, such as dietary and substrate management of argininosuccinic aciduria under a metabolic team",
+      "Identify and correct associated systemic contributors such as iron deficiency and hypothyroidism",
+      "Monitor for regrowth of intact hair after harmful practices cease, which confirms the acquired mechanism",
+      "Refer to clinical genetics or metabolic medicine when a congenital hair-shaft or amino-acid disorder is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for trichorrhexis nodosa."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trichorrhexis-nodosa-real-image",
-   "title": "Trichorrhexis nodosa: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "trichorrhexis_nodosa-pathway",
+      "title": "Trichorrhexis nodosa: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common hair-shaft abnormality in which small greyish-white nodes along the shaft represent sites of cortical fracture, giving hair that breaks easily",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Widespread congenital fragility suggesting an underlying metabolic or genetic disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Light microscopy of the shaft showing paired brush-like fracture ends at the nodes, Trichoscopy demonstrating nodes and transverse fractures, Detailed hair-care and cosmetic-processing history"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Remove the causative mechanical and chemical trauma by stopping heat styling, bleaching, chemical relaxing and vigorous brushing, which is the mainstay for the common acquired distal form"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing breakage to hair loss rather than a shaft defect and so missing the true cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trichorrhexis nodosa."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trichorrhexis_nodosa-matrix",
+      "title": "Trichorrhexis nodosa: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common hair-shaft abnormality in which small greyish-white nodes along the shaft represent sites of cortical fracture, giving",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Light microscopy of the shaft showing paired brush-like fracture ends at the nodes, Trichoscopy demonstrating nodes and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pili torti, with twisting but no nodes, Monilethrix, with regular beading, Trichoschisis and trichothiodystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Remove the causative mechanical and chemical trauma by stopping heat styling, bleaching, chemical relaxing and vigorous brushing,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing breakage to hair loss rather than a shaft defect and so missing the true cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trichorrhexis nodosa."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichorrhexis_nodosa-dx-mgmt",
+      "title": "Diagnosis and management of Trichorrhexis nodosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichorrhexis nodosa: brittle hair with small nodes along the shaft",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: widespread congenital fragility, or developmental or neurological features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic review for congenital hair-shaft disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Light microscopy of shaft; trichoscopy; cosmetic history; metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does shaft microscopy show paired brush-like nodes at fracture points?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pili torti, monilethrix or trichothiodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop heat styling, bleaching, relaxing and vigorous brushing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gentle hair care with low-tension styling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Metabolic team management for congenital cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct iron deficiency and hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor regrowth of intact hair",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acquired distal form recovers once trauma stops; congenital forms vary by disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichorrhexis_nodosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Light microscopy of the hair shaft",
+          "cells": [
+            {
+              "text": "Paired brush-like fracture ends at the nodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Nodes and transverse fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair-care and cosmetic history",
+          "cells": [
+            {
+              "text": "Heat, bleaching, relaxing and brushing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Argininosuccinic aciduria in congenital cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for iron deficiency and hypothyroidism",
+          "cells": [
+            {
+              "text": "Systemic contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichorrhexis_nodosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pili torti",
+          "cells": [
+            {
+              "text": "Twisting of the shaft without nodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monilethrix",
+          "cells": [
+            {
+              "text": "Regular beading along the shaft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichothiodystrophy",
+          "cells": [
+            {
+              "text": "Tiger-tail banding and systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichorrhexis_nodosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop harmful practices",
+          "cells": [
+            {
+              "text": "Heat styling, bleaching, relaxing and vigorous brushing; the mainstay for acquired distal form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle hair care",
+          "cells": [
+            {
+              "text": "Mild shampoos, conditioners and low-tension styling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic management",
+          "cells": [
+            {
+              "text": "Congenital cases under a metabolic team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct systemic contributors",
+          "cells": [
+            {
+              "text": "Iron deficiency and hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regrowth monitoring",
+          "cells": [
+            {
+              "text": "Intact hair after harmful practices cease confirms the mechanism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

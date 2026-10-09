@@ -1,186 +1,636 @@
 {
- "id": "opioid_related_disorders",
- "name": "Opioid-Related Disorders",
- "system": "Neurologic/Psychiatric (substance use)",
- "class": "non_infective",
- "chapter": 467,
- "page": 3688,
- "aliases": [
-  "Opioid use disorder",
-  "Opioid addiction",
-  "Opioid dependence",
-  "Opioid intoxication",
-  "Opioid withdrawal",
-  "Opioid overdose"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.3688",
-  "clinicalPearls": [
-   "DSM-5 (2022) replaced the older terms dependence and addiction with opioid use disorder, opioid intoxication, and opioid withdrawal; the disorder is defined as repeated use over a 12-month period causing problems in two or more domains (tolerance, withdrawal, using larger amounts than intended, craving, and continued use despite adverse consequences) (Harrison 22e p.3688).",
-   "The mu receptor is the receptor most clinically relevant to opioid effects; mu actions include analgesia, euphoric reinforcement, cough and appetite suppression, decreased respiration, decreased GI motility, sedation, and hormonal changes, while kappa activation tends to produce dysphoria and psychotic symptoms (Harrison 22e p.3689).",
-   "An opioid 'high' occurs only when the rate of rise in dopamine is fast, so rapid routes such as smoking and intravenous injection produce a 'rush' whereas oral and transdermal routes give analgesia/sedation without the euphoric high (Harrison 22e p.3689).",
-   "Opioid overdose is recognized clinically by shallow, slow respirations, pupillary miosis (mydriasis appears only after significant brain anoxia), bradycardia, hypothermia, and stupor or coma; immediate management is based on clinical criteria rather than waiting for toxicology (Harrison 22e p.3690).",
-   "Fentanyl overdose may require roughly twice the reversal-agent dose needed for other opioids, and reversal antagonists are short-acting relative to most opioids, so re-sedation can occur after an initial response (Harrison 22e pp.3688, 3690).",
-   "Adding xylazine (a nonopioid veterinary sedative) to illicit fentanyl markedly worsens respiratory suppression and is associated with tissue necrosis and increased risk of limb amputation in people who inject (Harrison 22e p.3690).",
-   "Opioids generally do not cause seizures except in unusual situations: polydrug use with meperidine, high-dose tramadol, or the newborn (Harrison 22e p.3690).",
-   "Withdrawal risk has a strong genetic component (up to ~50% related to functional polymorphisms), including a mu-opioid receptor variant conferring threefold higher affinity for opioids and beta-endorphin; epigenetic methylation may compensate by reducing mu-receptor numbers (Harrison 22e p.3689).",
-   "Methadone can prolong the QT interval (rates reported as high as ~16% above non-methadone injecting patients) and has caused sudden death; QT monitoring is relevant during overdose and maintenance (Harrison 22e pp.3690, 3691).",
-   "Heroin users are frequently polydrug users (alcohol, sedatives, cannabinoids, stimulants); none substitute for opioids but they have additive effects, so concurrent alcohol or sedative withdrawal (which can be more dangerous) must be excluded before managing opioid withdrawal (Harrison 22e p.3690).",
-   "Buprenorphine's partial agonism means escalating doses shift toward antagonist activity, so primary buprenorphine overdose is nearly impossible, but high doses can precipitate withdrawal in patients on full agonists such as morphine or methadone (Harrison 22e pp.3690-3691).",
-   "Most opioid-using individuals meet more than three diagnostic criteria, so reducing the DSM threshold from three to two problem areas did not change measured disease rates (Harrison 22e p.3688)."
+  "id": "opioid_related_disorders",
+  "name": "Opioid-Related Disorders",
+  "system": "Neurologic/Psychiatric (substance use)",
+  "class": "non_infective",
+  "chapter": 467,
+  "page": 3688,
+  "aliases": [
+    "Opioid use disorder",
+    "Opioid addiction",
+    "Opioid dependence",
+    "Opioid intoxication",
+    "Opioid withdrawal",
+    "Opioid overdose"
   ],
-  "pathophysiology": "Opioid receptors (mu, kappa, delta, nociceptin/orphanin) are G protein-linked and coupled to the cyclic AMP (cAMP) second-messenger system and to G protein-coupled inwardly rectifying potassium channels (GIRKs); receptor binding increases potassium permeability, hyperpolarizes neurons, and inhibits action potentials, producing analgesia, sedation, and reinforcement. Reinforcing euphoria is mediated through the mesolimbic dopaminergic pathway from the ventral tegmental area to the nucleus accumbens, where opioids indirectly raise dopamine by inhibiting GABAergic interneurons; the subjective high requires a fast rate of dopamine change. Tolerance and withdrawal arise from adaptive upregulation of the cAMP-PKA-CREB cascade in locus coeruleus noradrenergic neurons after chronic mu-receptor inhibition: sustained inhibition triggers compensatory increases in cyclic AMP enzyme activity, so abrupt opioid cessation produces unopposed noradrenergic overactivity and withdrawal symptoms; this model underlies the use of alpha2-agonists to suppress that activation. PKA-driven phosphorylation of CREB also induces genes such as tyrosine hydroxylase and BDNF, the latter implicated in long-term neuroplastic changes (Harrison 22e pp.3689-3690).",
-  "additionalDifferentials": [
-   "Concurrent sedative-hypnotic (benzodiazepine) overdose or withdrawal, which may coexist and be more dangerous to manage",
-   "Alcohol intoxication or withdrawal in a polydrug user",
-   "Stimulant co-intoxication (cocaine/methamphetamine), including combined 'speedball' use",
-   "Other causes of coma with respiratory depression (CNS structural lesion, metabolic encephalopathy) before miosis-based diagnosis is confirmed"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Toxic megacolon from severe opioid-induced constipation mimicking primary abdominal catastrophe",
-   "MPTP-induced parkinsonism from contaminated illicitly synthesized meperidine, mimicking idiopathic Parkinson disease",
-   "Orthostatic hypotension from opioid-related histamine release mimicking other causes of hypotension"
-  ],
-  "additionalInvestigations": [
-   "Blood or urine toxicology to confirm a suspected opioid diagnosis (management must not wait for results)",
-   "ECG for QT-interval monitoring, particularly with methadone or in overdose",
-   "Arterial/clinical assessment of respiratory status and gag reflex (aspiration pneumonia risk in overdose)",
-   "Liver function tests when considering opioid-antagonist relapse-prevention therapy (most providers avoid it if LFTs exceed about three times normal)",
-   "Screening for blood-borne infection (hepatitis B, hepatitis C, HIV) in people who inject"
-  ],
-  "redFlags": [
-   "Shallow/slow respirations with pinpoint miosis, bradycardia, hypothermia, and stupor or coma indicating life-threatening overdose",
-   "Mydriasis in a suspected overdose suggesting significant brain anoxia has supervened",
-   "Limited or absent response to standard reversal dosing, prompting suspicion of fentanyl, high antagonist requirement, or concurrent benzodiazepine overdose",
-   "Loss of gag reflex with aspiration pneumonia risk",
-   "Skin necrosis or limb compromise suggesting xylazine-adulterated fentanyl use",
-   "Septic complications of injection use such as meningitis, osteomyelitis, or organ abscesses"
-  ],
-  "prognosis": "Opioid use disorder is a chronic, relapsing condition; most patients tend to relapse during or after detoxification, and stopping use is far easier than preventing relapse. Long-term relapse prevention requires combined pharmacologic and psychosocial approaches. Medication-free inpatient/outpatient programs have poor 1- to 5-year outcomes compared with pharmacotherapy, except for residential programs lasting roughly 6-18 months. Untreated potentially lethal overdose progresses to respiratory and cardiovascular collapse and death. Globally the World Drug Report attributes the greatest burden of drug-related morbidity and mortality to opioid misuse; in 2022 over 76,000 US overdose deaths involved opioids, with rates accelerating due to high-potency fentanyl derivatives and stimulant co-use (Harrison 22e pp.3688, 3691-3692).",
-  "pitfalls": [
-   "Administering so much antagonist that opioid withdrawal is precipitated, rather than targeting reversal of respiratory depression",
-   "Assuming a single antagonist dose is sufficient, since antagonists last only a few hours while most opioids persist longer, risking re-sedation (close monitoring/continuous antagonism often needed)",
-   "Overlooking concurrent benzodiazepine or alcohol/sedative involvement when reversal has only limited effect",
-   "Misjudging dose in naive or infrequent users because actual ingested potency is hard to estimate, especially with fentanyl derivatives",
-   "Forgetting that buprenorphine and methadone themselves can be misused and that buprenorphine can precipitate withdrawal in fentanyl- or high-dose-methadone-dependent patients"
-  ],
-  "severityClassification": "Withdrawal time course (heroin): symptoms begin ~8-10 h after the last dose, with early lacrimation, rhinorrhea, yawning, and sweating; later stages bring restless sleep, weakness, chills, piloerection ('cold turkey'), nausea/vomiting, muscle aches, involuntary movements, hyperpnea, hyperthermia, and hypertension. Acute withdrawal lasts ~7-10 days, followed by a protracted abstinence phase of ~26-30 weeks (hypotension, bradycardia, hypothermia, mydriasis, blunted respiratory CO2 responsiveness). Tolerance/withdrawal can develop within ~6-8 weeks of chronic daily use. Plasma half-lives vary widely: ~2.5-3 h for morphine, >22 h for methadone, minutes for fentanyl-related opioids, and longest for buprenorphine/metabolites (Harrison 22e pp.3689-3690).",
-  "references": [
-   "Harrison 22e p.3688",
-   "Harrison 22e p.3689",
-   "Harrison 22e p.3690",
-   "Harrison 22e p.3691",
-   "Harrison 22e p.3692"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In overdose, secure the airway and support ventilation while titrating the antagonist naloxone to restore adequate breathing, anticipating that potent synthetic opioids such as fentanyl may need larger or repeated doses",
-   "Anticipate re-sedation after naloxone because antagonists are short-acting relative to most opioids, and observe or use an infusion accordingly",
-   "Treat opioid use disorder with opioid agonist maintenance using methadone or buprenorphine as the evidence-based cornerstone that reduces illicit use and mortality",
-   "Offer antagonist relapse prevention with naltrexone to motivated, detoxified patients after checking liver function",
-   "Manage withdrawal with a tapering agonist or alpha-2 agonists such as clonidine or lofexidine for symptom relief",
-   "Combine pharmacotherapy with psychosocial support, counselling and contingency management, and provide harm reduction including take-home naloxone, needle exchange and blood-borne virus screening",
-   "Be alert to xylazine adulteration of illicit fentanyl, which worsens respiratory suppression and causes tissue necrosis with amputation risk"
-  ]
- },
- "algorithms": [
-  {
-   "id": "opioid_related_disorders-pathway",
-   "title": "Opioid-Related Disorders: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "DSM-5 (2022) replaced the older terms dependence and addiction with opioid use disorder, opioid intoxication, and opioid withdrawal; the disorder is defined as repeated use over a 12-month period causing problems in two or more domains",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Shallow/slow respirations with pinpoint miosis, bradycardia, hypothermia, and stupor or coma indicating life-threatening overdose",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood or urine toxicology to confirm a suspected opioid diagnosis (management must not wait for results), ECG for QT-interval monitoring, particularly with methadone or in overdose, Arterial/clinical assessment of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In overdose, secure the airway and support ventilation while titrating the antagonist naloxone to restore adequate breathing, anticipating that potent synthetic opioids such as fentanyl may need larger or repeated doses"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Administering so much antagonist that opioid withdrawal is precipitated, rather than targeting reversal of respiratory depression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of opioid-related disorders."
-  }
- ],
- "tables": [
-  {
-   "id": "opioid_related_disorders-matrix",
-   "title": "Opioid-Related Disorders: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "DSM-5 (2022) replaced the older terms dependence and addiction with opioid use disorder, opioid intoxication, and opioid",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.3688",
+    "clinicalPearls": [
+      "DSM-5 (2022) replaced the older terms dependence and addiction with opioid use disorder, opioid intoxication, and opioid withdrawal; the disorder is defined as repeated use over a 12-month period causing problems in two or more domains (tolerance, withdrawal, using larger amounts than intended, craving, and continued use despite adverse consequences) (Harrison 22e p.3688).",
+      "The mu receptor is the receptor most clinically relevant to opioid effects; mu actions include analgesia, euphoric reinforcement, cough and appetite suppression, decreased respiration, decreased GI motility, sedation, and hormonal changes, while kappa activation tends to produce dysphoria and psychotic symptoms (Harrison 22e p.3689).",
+      "An opioid 'high' occurs only when the rate of rise in dopamine is fast, so rapid routes such as smoking and intravenous injection produce a 'rush' whereas oral and transdermal routes give analgesia/sedation without the euphoric high (Harrison 22e p.3689).",
+      "Opioid overdose is recognized clinically by shallow, slow respirations, pupillary miosis (mydriasis appears only after significant brain anoxia), bradycardia, hypothermia, and stupor or coma; immediate management is based on clinical criteria rather than waiting for toxicology (Harrison 22e p.3690).",
+      "Fentanyl overdose may require roughly twice the reversal-agent dose needed for other opioids, and reversal antagonists are short-acting relative to most opioids, so re-sedation can occur after an initial response (Harrison 22e pp.3688, 3690).",
+      "Adding xylazine (a nonopioid veterinary sedative) to illicit fentanyl markedly worsens respiratory suppression and is associated with tissue necrosis and increased risk of limb amputation in people who inject (Harrison 22e p.3690).",
+      "Opioids generally do not cause seizures except in unusual situations: polydrug use with meperidine, high-dose tramadol, or the newborn (Harrison 22e p.3690).",
+      "Withdrawal risk has a strong genetic component (up to ~50% related to functional polymorphisms), including a mu-opioid receptor variant conferring threefold higher affinity for opioids and beta-endorphin; epigenetic methylation may compensate by reducing mu-receptor numbers (Harrison 22e p.3689).",
+      "Methadone can prolong the QT interval (rates reported as high as ~16% above non-methadone injecting patients) and has caused sudden death; QT monitoring is relevant during overdose and maintenance (Harrison 22e pp.3690, 3691).",
+      "Heroin users are frequently polydrug users (alcohol, sedatives, cannabinoids, stimulants); none substitute for opioids but they have additive effects, so concurrent alcohol or sedative withdrawal (which can be more dangerous) must be excluded before managing opioid withdrawal (Harrison 22e p.3690).",
+      "Buprenorphine's partial agonism means escalating doses shift toward antagonist activity, so primary buprenorphine overdose is nearly impossible, but high doses can precipitate withdrawal in patients on full agonists such as morphine or methadone (Harrison 22e pp.3690-3691).",
+      "Most opioid-using individuals meet more than three diagnostic criteria, so reducing the DSM threshold from three to two problem areas did not change measured disease rates (Harrison 22e p.3688)."
     ],
-    [
-     "Key Investigations",
-     "Blood or urine toxicology to confirm a suspected opioid diagnosis (management must not wait for results), ECG for QT-interval",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Opioid receptors (mu, kappa, delta, nociceptin/orphanin) are G protein-linked and coupled to the cyclic AMP (cAMP) second-messenger system and to G protein-coupled inwardly rectifying potassium channels (GIRKs); receptor binding increases potassium permeability, hyperpolarizes neurons, and inhibits action potentials, producing analgesia, sedation, and reinforcement. Reinforcing euphoria is mediated through the mesolimbic dopaminergic pathway from the ventral tegmental area to the nucleus accumbens, where opioids indirectly raise dopamine by inhibiting GABAergic interneurons; the subjective high requires a fast rate of dopamine change. Tolerance and withdrawal arise from adaptive upregulation of the cAMP-PKA-CREB cascade in locus coeruleus noradrenergic neurons after chronic mu-receptor inhibition: sustained inhibition triggers compensatory increases in cyclic AMP enzyme activity, so abrupt opioid cessation produces unopposed noradrenergic overactivity and withdrawal symptoms; this model underlies the use of alpha2-agonists to suppress that activation. PKA-driven phosphorylation of CREB also induces genes such as tyrosine hydroxylase and BDNF, the latter implicated in long-term neuroplastic changes (Harrison 22e pp.3689-3690).",
+    "additionalDifferentials": [
+      "Concurrent sedative-hypnotic (benzodiazepine) overdose or withdrawal, which may coexist and be more dangerous to manage",
+      "Alcohol intoxication or withdrawal in a polydrug user",
+      "Stimulant co-intoxication (cocaine/methamphetamine), including combined 'speedball' use",
+      "Other causes of coma with respiratory depression (CNS structural lesion, metabolic encephalopathy) before miosis-based diagnosis is confirmed"
     ],
-    [
-     "Primary Differentials",
-     "Concurrent sedative-hypnotic (benzodiazepine) overdose or withdrawal, which may coexist and be more dangerous to manage, Alcohol",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Toxic megacolon from severe opioid-induced constipation mimicking primary abdominal catastrophe",
+      "MPTP-induced parkinsonism from contaminated illicitly synthesized meperidine, mimicking idiopathic Parkinson disease",
+      "Orthostatic hypotension from opioid-related histamine release mimicking other causes of hypotension"
     ],
-    [
-     "Management Strategy",
-     "In overdose, secure the airway and support ventilation while titrating the antagonist naloxone to restore adequate breathing,",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Blood or urine toxicology to confirm a suspected opioid diagnosis (management must not wait for results)",
+      "ECG for QT-interval monitoring, particularly with methadone or in overdose",
+      "Arterial/clinical assessment of respiratory status and gag reflex (aspiration pneumonia risk in overdose)",
+      "Liver function tests when considering opioid-antagonist relapse-prevention therapy (most providers avoid it if LFTs exceed about three times normal)",
+      "Screening for blood-borne infection (hepatitis B, hepatitis C, HIV) in people who inject"
     ],
-    [
-     "Clinical Pitfall",
-     "Administering so much antagonist that opioid withdrawal is precipitated, rather than targeting reversal of respiratory depression",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Shallow/slow respirations with pinpoint miosis, bradycardia, hypothermia, and stupor or coma indicating life-threatening overdose",
+      "Mydriasis in a suspected overdose suggesting significant brain anoxia has supervened",
+      "Limited or absent response to standard reversal dosing, prompting suspicion of fentanyl, high antagonist requirement, or concurrent benzodiazepine overdose",
+      "Loss of gag reflex with aspiration pneumonia risk",
+      "Skin necrosis or limb compromise suggesting xylazine-adulterated fentanyl use",
+      "Septic complications of injection use such as meningitis, osteomyelitis, or organ abscesses"
+    ],
+    "prognosis": "Opioid use disorder is a chronic, relapsing condition; most patients tend to relapse during or after detoxification, and stopping use is far easier than preventing relapse. Long-term relapse prevention requires combined pharmacologic and psychosocial approaches. Medication-free inpatient/outpatient programs have poor 1- to 5-year outcomes compared with pharmacotherapy, except for residential programs lasting roughly 6-18 months. Untreated potentially lethal overdose progresses to respiratory and cardiovascular collapse and death. Globally the World Drug Report attributes the greatest burden of drug-related morbidity and mortality to opioid misuse; in 2022 over 76,000 US overdose deaths involved opioids, with rates accelerating due to high-potency fentanyl derivatives and stimulant co-use (Harrison 22e pp.3688, 3691-3692).",
+    "pitfalls": [
+      "Administering so much antagonist that opioid withdrawal is precipitated, rather than targeting reversal of respiratory depression",
+      "Assuming a single antagonist dose is sufficient, since antagonists last only a few hours while most opioids persist longer, risking re-sedation (close monitoring/continuous antagonism often needed)",
+      "Overlooking concurrent benzodiazepine or alcohol/sedative involvement when reversal has only limited effect",
+      "Misjudging dose in naive or infrequent users because actual ingested potency is hard to estimate, especially with fentanyl derivatives",
+      "Forgetting that buprenorphine and methadone themselves can be misused and that buprenorphine can precipitate withdrawal in fentanyl- or high-dose-methadone-dependent patients"
+    ],
+    "severityClassification": "Withdrawal time course (heroin): symptoms begin ~8-10 h after the last dose, with early lacrimation, rhinorrhea, yawning, and sweating; later stages bring restless sleep, weakness, chills, piloerection ('cold turkey'), nausea/vomiting, muscle aches, involuntary movements, hyperpnea, hyperthermia, and hypertension. Acute withdrawal lasts ~7-10 days, followed by a protracted abstinence phase of ~26-30 weeks (hypotension, bradycardia, hypothermia, mydriasis, blunted respiratory CO2 responsiveness). Tolerance/withdrawal can develop within ~6-8 weeks of chronic daily use. Plasma half-lives vary widely: ~2.5-3 h for morphine, >22 h for methadone, minutes for fentanyl-related opioids, and longest for buprenorphine/metabolites (Harrison 22e pp.3689-3690).",
+    "references": [
+      "Harrison 22e p.3688",
+      "Harrison 22e p.3689",
+      "Harrison 22e p.3690",
+      "Harrison 22e p.3691",
+      "Harrison 22e p.3692"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In overdose, secure the airway and support ventilation while titrating the antagonist naloxone to restore adequate breathing, anticipating that potent synthetic opioids such as fentanyl may need larger or repeated doses",
+      "Anticipate re-sedation after naloxone because antagonists are short-acting relative to most opioids, and observe or use an infusion accordingly",
+      "Treat opioid use disorder with opioid agonist maintenance using methadone or buprenorphine as the evidence-based cornerstone that reduces illicit use and mortality",
+      "Offer antagonist relapse prevention with naltrexone to motivated, detoxified patients after checking liver function",
+      "Manage withdrawal with a tapering agonist or alpha-2 agonists such as clonidine or lofexidine for symptom relief",
+      "Combine pharmacotherapy with psychosocial support, counselling and contingency management, and provide harm reduction including take-home naloxone, needle exchange and blood-borne virus screening",
+      "Be alert to xylazine adulteration of illicit fentanyl, which worsens respiratory suppression and causes tissue necrosis with amputation risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for opioid-related disorders."
-  }
- ],
- "diagrams": [
-  {
-   "id": "opioid-related-disorders-real-image",
-   "title": "Opioid-Related Disorders: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "opioid_related_disorders-pathway",
+      "title": "Opioid-Related Disorders: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "DSM-5 (2022) replaced the older terms dependence and addiction with opioid use disorder, opioid intoxication, and opioid withdrawal; the disorder is defined as repeated use over a 12-month period causing problems in two or more domains",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Shallow/slow respirations with pinpoint miosis, bradycardia, hypothermia, and stupor or coma indicating life-threatening overdose",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood or urine toxicology to confirm a suspected opioid diagnosis (management must not wait for results), ECG for QT-interval monitoring, particularly with methadone or in overdose, Arterial/clinical assessment of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In overdose, secure the airway and support ventilation while titrating the antagonist naloxone to restore adequate breathing, anticipating that potent synthetic opioids such as fentanyl may need larger or repeated doses"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Administering so much antagonist that opioid withdrawal is precipitated, rather than targeting reversal of respiratory depression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of opioid-related disorders."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "opioid_related_disorders-matrix",
+      "title": "Opioid-Related Disorders: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "DSM-5 (2022) replaced the older terms dependence and addiction with opioid use disorder, opioid intoxication, and opioid",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood or urine toxicology to confirm a suspected opioid diagnosis (management must not wait for results), ECG for QT-interval",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Concurrent sedative-hypnotic (benzodiazepine) overdose or withdrawal, which may coexist and be more dangerous to manage, Alcohol",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In overdose, secure the airway and support ventilation while titrating the antagonist naloxone to restore adequate breathing,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Administering so much antagonist that opioid withdrawal is precipitated, rather than targeting reversal of respiratory depression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for opioid-related disorders."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Opioid Use Disorder: Diagnosis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/overdose-prevention/hcp/clinical-care/opioid-use-disorder-diagnosis.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 393-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "opioid_related_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of opioid use disorder, intoxication and withdrawal",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "OUD (DSM-5)",
+          "unit": "criteria",
+          "cells": [
+            {
+              "text": "2 or more of 11 criteria within 12 months",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Control, craving, harms, hazardous use, tolerance, withdrawal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severity",
+          "unit": "criteria",
+          "cells": [
+            {
+              "text": "Mild 2 to 3; moderate 4 to 5; severe 6 or more",
+              "range": [
+                2,
+                6
+              ]
+            },
+            {
+              "text": "Count criteria met"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prescribed opioids",
+          "cells": [
+            {
+              "text": "Tolerance and withdrawal do not count under appropriate medical use"
+            },
+            {
+              "text": "Avoid over-diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Overdose",
+          "cells": [
+            {
+              "text": "Slow shallow breathing, miosis, bradycardia, hypothermia, stupor or coma"
+            },
+            {
+              "text": "{{hy:Treat on clinical grounds; do not wait for toxicology}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mydriasis in overdose",
+          "cells": [
+            {
+              "text": "Appears after significant brain anoxia"
+            },
+            {
+              "text": "Ominous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal onset (heroin)",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "About 8 to 10 h after last dose",
+              "range": [
+                8,
+                10
+              ]
+            },
+            {
+              "text": "Lacrimation, rhinorrhoea, yawning, sweating, then piloerection, vomiting, aches"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal duration",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Acute 7 to 10 days; protracted 26 to 30 weeks",
+              "range": [
+                7,
+                10
+              ]
+            },
+            {
+              "text": "Tolerance can develop in 6 to 8 weeks of daily use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mu receptor effects",
+          "cells": [
+            {
+              "text": "Analgesia, euphoria, cough and appetite suppression, respiratory depression, slowed gut, sedation"
+            },
+            {
+              "text": "Kappa: dysphoria, psychotic symptoms, diuresis; delta: hormone change"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Baseline tests",
+          "cells": [
+            {
+              "text": "ECG for QT (methadone), LFTs before naltrexone, HBV, HCV, HIV"
+            },
+            {
+              "text": "Avoid naltrexone if LFTs over about 3 x normal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_related_disorders-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic or complicate opioid toxicity",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzodiazepine or sedative overdose",
+          "cells": [
+            {
+              "text": "Poor response to naloxone, normal pupils"
+            },
+            {
+              "text": "Clinical; toxicology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol intoxication",
+          "cells": [
+            {
+              "text": "Alcohol odour, nystagmus"
+            },
+            {
+              "text": "Blood alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xylazine-adulterated fentanyl",
+          "cells": [
+            {
+              "text": "Persistent sedation, skin necrosis"
+            },
+            {
+              "text": "Clinical; drug checking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural brain lesion",
+          "cells": [
+            {
+              "text": "Focal signs, no response to antagonist"
+            },
+            {
+              "text": "CT head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Hypoglycaemia, hepatic or renal failure"
+            },
+            {
+              "text": "Glucose, chemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stimulant co-intoxication",
+          "cells": [
+            {
+              "text": "Tachycardia, hypertension after naloxone"
+            },
+            {
+              "text": "Toxicology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_related_disorders-treatment",
+      "kind": "treatment",
+      "title": "Treatment of opioid-related disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway, ventilation and naloxone",
+          "cells": [
+            {
+              "text": "{{hy:Overdose with respiratory depression}}"
+            },
+            {
+              "text": "Titrate to breathing, not full arousal; fentanyl may need about twice the dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observe or infuse naloxone",
+          "cells": [
+            {
+              "text": "After reversal"
+            },
+            {
+              "text": "Antagonist wears off before most opioids; re-sedation risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methadone or buprenorphine maintenance",
+          "cells": [
+            {
+              "text": "Opioid use disorder"
+            },
+            {
+              "text": "Cornerstone; reduces illicit use and death; check QT with methadone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Naltrexone",
+          "cells": [
+            {
+              "text": "Motivated, detoxified patients"
+            },
+            {
+              "text": "Check liver tests first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal management",
+          "cells": [
+            {
+              "text": "Planned detoxification"
+            },
+            {
+              "text": "Tapering agonist or clonidine or lofexidine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Buprenorphine induction caution",
+          "cells": [
+            {
+              "text": "Recent fentanyl or high-dose methadone"
+            },
+            {
+              "text": "Can precipitate withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Harm reduction",
+          "cells": [
+            {
+              "text": "All people who use opioids"
+            },
+            {
+              "text": "Take-home naloxone, needle exchange, BBV screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial support",
+          "cells": [
+            {
+              "text": "All patients with OUD"
+            },
+            {
+              "text": "Counselling and contingency management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No naloxone or maintenance doses are stated in the opened sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "opioid_related_disorders-dx-mgmt",
+      "title": "Diagnosis and management of opioid-related disorders",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected opioid toxicity or problematic opioid use",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Slow breathing, miosis and reduced consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Support ventilation; titrate naloxone to breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Breathing restored?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Consider benzodiazepines, xylazine, other causes; ventilate",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe for re-sedation; repeat dose or infusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Assess DSM-5 OUD criteria",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "2 or more criteria in 12 months?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Safer use advice, take-home naloxone, follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Start methadone or buprenorphine, psychosocial care, naloxone kit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

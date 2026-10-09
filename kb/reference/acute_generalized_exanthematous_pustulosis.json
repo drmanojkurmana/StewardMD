@@ -1,178 +1,494 @@
 {
- "id": "acute_generalized_exanthematous_pustulosis",
- "name": "Acute generalised exanthematous pustulosis",
- "aliases": [
-  "AGEP",
-  "acute generalised exanthematous pustulosis",
-  "acute generalized exanthematous pustulosis",
-  "pustular drug eruption",
-  "toxic pustuloderma"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A severe cutaneous adverse reaction characterised by the rapid eruption of numerous small, non-follicular sterile pustules on a background of oedematous erythema",
-   "The eruption begins in the flexures and on the face and spreads within hours, typically accompanied by high fever and a neutrophil leucocytosis",
-   "Onset is usually rapid, often within a couple of days of starting the responsible drug, most commonly certain antibiotics such as aminopenicillins and macrolides",
-   "The pustules are sterile, and swab cultures are negative, helping distinguish it from bacterial pustulosis",
-   "Resolution occurs quickly once the drug is withdrawn, characteristically followed by superficial desquamation of the affected skin",
-   "Histology shows subcorneal or intraepidermal spongiform pustules with dermal oedema and often eosinophils, aiding differentiation from pustular psoriasis",
-   "A key differential is generalised pustular psoriasis, which tends to run a more prolonged and recurrent course and may have a personal or family history of psoriasis",
-   "Management is prompt withdrawal of the culprit drug with supportive care, topical corticosteroids and monitoring for the uncommon systemic or organ involvement"
+  "id": "acute_generalized_exanthematous_pustulosis",
+  "name": "Acute generalised exanthematous pustulosis",
+  "aliases": [
+    "AGEP",
+    "acute generalised exanthematous pustulosis",
+    "acute generalized exanthematous pustulosis",
+    "pustular drug eruption",
+    "toxic pustuloderma"
   ],
-  "pathophysiology": "Acute generalised exanthematous pustulosis is a T-cell-mediated (type IV) drug hypersensitivity reaction with a strong neutrophilic component. Drug-specific T lymphocytes are activated and, through release of neutrophil-recruiting cytokines and chemokines including interleukin-8 (CXCL8), interleukin-17 and granulocyte-macrophage colony-stimulating factor, drive massive accumulation of neutrophils into the epidermis to form sterile spongiform pustules. Interleukin-36 signalling is also implicated, providing a mechanistic overlap with pustular psoriasis. The rapid onset after drug exposure and swift resolution after withdrawal reflect the reactivation of primed drug-specific T cells and the transient nature of the ensuing sterile inflammatory response.",
-  "additionalDifferentials": [
-   "Generalised pustular psoriasis",
-   "Subcorneal pustular dermatosis (Sneddon-Wilkinson disease)",
-   "Bacterial folliculitis or impetigo",
-   "Drug reaction with eosinophilia and systemic symptoms with pustular features",
-   "Pustular vasculitis",
-   "Staphylococcal scalded skin or other pustular infections"
-  ],
-  "additionalInvestigations": [
-   "Detailed drug timeline identifying agents introduced in the days before onset",
-   "Skin biopsy showing subcorneal or intraepidermal sterile spongiform pustules with dermal oedema",
-   "Full blood count demonstrating neutrophilia and pustule swab confirming sterility",
-   "Assessment of liver and renal function to detect uncommon systemic involvement",
-   "Patch testing after recovery to help confirm the culprit drug",
-   "Application of a validated diagnostic scoring system to support the diagnosis"
-  ],
-  "redFlags": [
-   "High fever with extensive erythema and rapidly spreading pustulation",
-   "Evidence of internal organ involvement such as hepatic or renal dysfunction",
-   "Features overlapping with other severe cutaneous adverse reactions",
-   "Haemodynamic instability or signs of secondary infection",
-   "Failure to resolve after drug withdrawal, suggesting pustular psoriasis instead"
-  ],
-  "prognosis": "The prognosis is generally favourable, with rapid clearance and desquamation within one to two weeks of stopping the culprit drug, although occasional cases with widespread disease, systemic involvement or in frail patients carry a higher risk of complications.",
-  "pitfalls": [
-   "Mistaking the sterile pustules for a bacterial infection and delaying drug withdrawal while giving unnecessary antibiotics",
-   "Confusing it with generalised pustular psoriasis and misjudging the course and treatment",
-   "Failing to identify and stop the culprit drug promptly",
-   "Overlooking uncommon systemic organ involvement"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Association of Dermatologists guidance on severe cutaneous adverse reactions"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate withdrawal of the culprit drug, commonly an aminopenicillin or macrolide, as the definitive intervention",
-   "Topical corticosteroids and emollients to settle the pustular eruption, with antipyretics for fever",
-   "Reserve systemic corticosteroids for extensive or systemically involved disease",
-   "Skin care through the desquamative phase with prevention of secondary bacterial infection",
-   "Maintain fluid and electrolyte balance where the eruption is widespread",
-   "Monitor full blood count and liver and renal function for uncommon systemic involvement",
-   "Document the drug reaction, arrange patch testing after recovery, and counsel lifelong avoidance of the culprit and related agents",
-   "Dermatology referral to confirm the diagnosis and guide management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_generalized_exanthematous_pustulosis-pathway",
-   "title": "Acute generalised exanthematous pustulosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A severe cutaneous adverse reaction characterised by the rapid eruption of numerous small, non-follicular sterile pustules on a background of oedematous erythema",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: High fever with extensive erythema and rapidly spreading pustulation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed drug timeline identifying agents introduced in the days before onset, Skin biopsy showing subcorneal or intraepidermal sterile spongiform pustules with dermal oedema, Full blood count demonstrating neutrophilia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate withdrawal of the culprit drug, commonly an aminopenicillin or macrolide, as the definitive intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the sterile pustules for a bacterial infection and delaying drug withdrawal while giving unnecessary antibiotics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute generalised exanthematous pustulosis."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_generalized_exanthematous_pustulosis-matrix",
-   "title": "Acute generalised exanthematous pustulosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A severe cutaneous adverse reaction characterised by the rapid eruption of numerous small, non-follicular sterile pustules on a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A severe cutaneous adverse reaction characterised by the rapid eruption of numerous small, non-follicular sterile pustules on a background of oedematous erythema",
+      "The eruption begins in the flexures and on the face and spreads within hours, typically accompanied by high fever and a neutrophil leucocytosis",
+      "Onset is usually rapid, often within a couple of days of starting the responsible drug, most commonly certain antibiotics such as aminopenicillins and macrolides",
+      "The pustules are sterile, and swab cultures are negative, helping distinguish it from bacterial pustulosis",
+      "Resolution occurs quickly once the drug is withdrawn, characteristically followed by superficial desquamation of the affected skin",
+      "Histology shows subcorneal or intraepidermal spongiform pustules with dermal oedema and often eosinophils, aiding differentiation from pustular psoriasis",
+      "A key differential is generalised pustular psoriasis, which tends to run a more prolonged and recurrent course and may have a personal or family history of psoriasis",
+      "Management is prompt withdrawal of the culprit drug with supportive care, topical corticosteroids and monitoring for the uncommon systemic or organ involvement"
     ],
-    [
-     "Key Investigations",
-     "Detailed drug timeline identifying agents introduced in the days before onset, Skin biopsy showing subcorneal or intraepidermal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute generalised exanthematous pustulosis is a T-cell-mediated (type IV) drug hypersensitivity reaction with a strong neutrophilic component. Drug-specific T lymphocytes are activated and, through release of neutrophil-recruiting cytokines and chemokines including interleukin-8 (CXCL8), interleukin-17 and granulocyte-macrophage colony-stimulating factor, drive massive accumulation of neutrophils into the epidermis to form sterile spongiform pustules. Interleukin-36 signalling is also implicated, providing a mechanistic overlap with pustular psoriasis. The rapid onset after drug exposure and swift resolution after withdrawal reflect the reactivation of primed drug-specific T cells and the transient nature of the ensuing sterile inflammatory response.",
+    "additionalDifferentials": [
+      "Generalised pustular psoriasis",
+      "Subcorneal pustular dermatosis (Sneddon-Wilkinson disease)",
+      "Bacterial folliculitis or impetigo",
+      "Drug reaction with eosinophilia and systemic symptoms with pustular features",
+      "Pustular vasculitis",
+      "Staphylococcal scalded skin or other pustular infections"
     ],
-    [
-     "Primary Differentials",
-     "Generalised pustular psoriasis, Subcorneal pustular dermatosis (Sneddon-Wilkinson disease), Bacterial folliculitis or impetigo",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed drug timeline identifying agents introduced in the days before onset",
+      "Skin biopsy showing subcorneal or intraepidermal sterile spongiform pustules with dermal oedema",
+      "Full blood count demonstrating neutrophilia and pustule swab confirming sterility",
+      "Assessment of liver and renal function to detect uncommon systemic involvement",
+      "Patch testing after recovery to help confirm the culprit drug",
+      "Application of a validated diagnostic scoring system to support the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Immediate withdrawal of the culprit drug, commonly an aminopenicillin or macrolide, as the definitive intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "High fever with extensive erythema and rapidly spreading pustulation",
+      "Evidence of internal organ involvement such as hepatic or renal dysfunction",
+      "Features overlapping with other severe cutaneous adverse reactions",
+      "Haemodynamic instability or signs of secondary infection",
+      "Failure to resolve after drug withdrawal, suggesting pustular psoriasis instead"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the sterile pustules for a bacterial infection and delaying drug withdrawal while giving unnecessary antibiotics",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally favourable, with rapid clearance and desquamation within one to two weeks of stopping the culprit drug, although occasional cases with widespread disease, systemic involvement or in frail patients carry a higher risk of complications.",
+    "pitfalls": [
+      "Mistaking the sterile pustules for a bacterial infection and delaying drug withdrawal while giving unnecessary antibiotics",
+      "Confusing it with generalised pustular psoriasis and misjudging the course and treatment",
+      "Failing to identify and stop the culprit drug promptly",
+      "Overlooking uncommon systemic organ involvement"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Association of Dermatologists guidance on severe cutaneous adverse reactions"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate withdrawal of the culprit drug, commonly an aminopenicillin or macrolide, as the definitive intervention",
+      "Topical corticosteroids and emollients to settle the pustular eruption, with antipyretics for fever",
+      "Reserve systemic corticosteroids for extensive or systemically involved disease",
+      "Skin care through the desquamative phase with prevention of secondary bacterial infection",
+      "Maintain fluid and electrolyte balance where the eruption is widespread",
+      "Monitor full blood count and liver and renal function for uncommon systemic involvement",
+      "Document the drug reaction, arrange patch testing after recovery, and counsel lifelong avoidance of the culprit and related agents",
+      "Dermatology referral to confirm the diagnosis and guide management"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute generalised exanthematous pustulosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-generalized-exanthematous-pustulosis-real-image",
-   "title": "Acute generalised exanthematous pustulosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "acute_generalized_exanthematous_pustulosis-pathway",
+      "title": "Acute generalised exanthematous pustulosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A severe cutaneous adverse reaction characterised by the rapid eruption of numerous small, non-follicular sterile pustules on a background of oedematous erythema",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: High fever with extensive erythema and rapidly spreading pustulation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed drug timeline identifying agents introduced in the days before onset, Skin biopsy showing subcorneal or intraepidermal sterile spongiform pustules with dermal oedema, Full blood count demonstrating neutrophilia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate withdrawal of the culprit drug, commonly an aminopenicillin or macrolide, as the definitive intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the sterile pustules for a bacterial infection and delaying drug withdrawal while giving unnecessary antibiotics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute generalised exanthematous pustulosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_generalized_exanthematous_pustulosis-matrix",
+      "title": "Acute generalised exanthematous pustulosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A severe cutaneous adverse reaction characterised by the rapid eruption of numerous small, non-follicular sterile pustules on a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed drug timeline identifying agents introduced in the days before onset, Skin biopsy showing subcorneal or intraepidermal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Generalised pustular psoriasis, Subcorneal pustular dermatosis (Sneddon-Wilkinson disease), Bacterial folliculitis or impetigo",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate withdrawal of the culprit drug, commonly an aminopenicillin or macrolide, as the definitive intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the sterile pustules for a bacterial infection and delaying drug withdrawal while giving unnecessary antibiotics",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute generalised exanthematous pustulosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_generalized_exanthematous_pustulosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed drug timeline",
+          "cells": [
+            {
+              "text": "Agents introduced in the days before onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Sterile spongiform pustules with dermal oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Neutrophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pustule swab culture",
+          "cells": [
+            {
+              "text": "Negative; sterile pustules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver and renal function tests",
+          "cells": [
+            {
+              "text": "Uncommon systemic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing after recovery",
+          "cells": [
+            {
+              "text": "Helps confirm the culprit drug"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_generalized_exanthematous_pustulosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Generalised pustular psoriasis",
+          "cells": [
+            {
+              "text": "Does not resolve on drug withdrawal"
+            },
+            {
+              "text": "Response to drug withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial folliculitis or impetigo",
+          "cells": [
+            {
+              "text": "Culture-positive; AGEP pustules are sterile"
+            },
+            {
+              "text": "Pustule swab culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_generalized_exanthematous_pustulosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate withdrawal of the culprit drug",
+          "cells": [
+            {
+              "text": "Definitive intervention"
+            },
+            {
+              "text": "Commonly an aminopenicillin or macrolide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and emollients, with antipyretics",
+          "cells": [
+            {
+              "text": "Settles the pustular eruption and fever"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Extensive or systemically involved disease"
+            },
+            {
+              "text": "Reserved for severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care through the desquamative phase",
+          "cells": [
+            {
+              "text": "Prevents secondary bacterial infection"
+            },
+            {
+              "text": "Skin protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and electrolyte balance",
+          "cells": [
+            {
+              "text": "Widespread eruption"
+            },
+            {
+              "text": "Where the eruption is widespread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of full blood count, liver and renal function",
+          "cells": [
+            {
+              "text": "Uncommon systemic involvement"
+            },
+            {
+              "text": "Serial checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Document the reaction and counsel lifelong avoidance",
+          "cells": [
+            {
+              "text": "Culprit and related agents"
+            },
+            {
+              "text": "Patch testing after recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_generalized_exanthematous_pustulosis-dx-mgmt",
+      "title": "Diagnosis and management of Acute generalised exanthematous pustulosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Numerous sterile non-follicular pustules on oedematous erythema within days of a drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "High fever with internal organ involvement or rapid spread?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent admission; organ support and dermatology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug timeline, skin biopsy, FBC with neutrophilia and sterile pustule swab",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sterile pustules that resolve after drug withdrawal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm AGEP; withdraw culprit (aminopenicillin or macrolide)",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider generalised pustular psoriasis or other pustular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids, emollients and antipyretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic corticosteroids only for extensive or systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor FBC, liver and renal function; prevent secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Clears within one to two weeks of stopping the drug",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

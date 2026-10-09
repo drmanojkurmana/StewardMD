@@ -1,178 +1,492 @@
 {
- "id": "hypermethioninemia",
- "name": "Isolated hypermethioninaemia",
- "aliases": [
-  "isolated hypermethioninaemia",
-  "isolated hypermethioninemia",
-  "persistent hypermethioninaemia",
-  "raised plasma methionine",
-  "MAT1A"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A biochemical finding of persistently raised plasma methionine without accompanying homocystinuria, rather than a single disease",
-   "The commonest inherited cause is methionine adenosyltransferase I/III (MAT1A) deficiency, which is usually benign",
-   "Other genetic causes include glycine N-methyltransferase deficiency, and the treatable methylation defects S-adenosylhomocysteine hydrolase and adenosine kinase deficiency",
-   "Secondary hypermethioninaemia occurs with liver disease, prematurity, high methionine or protein intake, and tyrosinaemia type 1",
-   "The key clinical distinction is separating the benign causes from the serious, treatable ones",
-   "A boiled-cabbage or sulphurous breath odour from dimethyl sulfide may accompany markedly raised methionine",
-   "Classical homocystinuria from cystathionine beta-synthase deficiency also raises methionine but is defined by the associated homocystinuria",
-   "Diagnostic approach uses plasma amino acids, total homocysteine, S-adenosylmethionine and S-adenosylhomocysteine, liver function and targeted genetics"
+  "id": "hypermethioninemia",
+  "name": "Isolated hypermethioninaemia",
+  "aliases": [
+    "isolated hypermethioninaemia",
+    "isolated hypermethioninemia",
+    "persistent hypermethioninaemia",
+    "raised plasma methionine",
+    "MAT1A"
   ],
-  "pathophysiology": "Methionine sits at the head of the transmethylation pathway, being activated to S-adenosylmethionine before serving as the universal methyl donor and then entering the transsulfuration and remethylation cycles. Plasma methionine rises whenever its onward metabolism is impeded or its supply is excessive. Reduced conversion to S-adenosylmethionine, as in MAT I/III deficiency, or a block further along the methylation cycle, as in AHCY, GNMT or adenosine kinase deficiency, causes methionine to accumulate; secondary elevations reflect impaired hepatic handling or high intake. The clinical significance therefore depends entirely on the underlying mechanism, ranging from a harmless finding to a marker of treatable neurological or hepatic disease.",
-  "additionalDifferentials": [
-   "Methionine adenosyltransferase I/III deficiency",
-   "Glycine N-methyltransferase deficiency",
-   "S-adenosylhomocysteine hydrolase deficiency",
-   "Adenosine kinase deficiency",
-   "Classical homocystinuria (cystathionine beta-synthase deficiency)",
-   "Hepatic dysfunction, prematurity, high-protein intake or tyrosinaemia type 1"
-  ],
-  "additionalInvestigations": [
-   "Plasma amino acids to confirm isolated methionine elevation",
-   "Plasma total homocysteine to exclude classical homocystinuria and remethylation defects",
-   "S-adenosylmethionine and S-adenosylhomocysteine to differentiate methylation-cycle disorders",
-   "Liver function tests to identify hepatic causes",
-   "Succinylacetone or relevant testing to exclude tyrosinaemia type 1",
-   "Targeted gene sequencing (for example MAT1A, GNMT, AHCY, ADK) guided by the metabolite pattern"
-  ],
-  "redFlags": [
-   "Neurological signs, developmental delay or regression suggesting a treatable methylation defect",
-   "Hepatic dysfunction or coagulopathy pointing to AHCY, adenosine kinase deficiency or liver disease",
-   "Raised homocysteine indicating homocystinuria rather than isolated hypermethioninaemia",
-   "Very high sustained methionine warranting prompt clarification of the cause"
-  ],
-  "prognosis": "Prognosis depends on the underlying cause; isolated MAT I/III or GNMT deficiency is generally benign, whereas AHCY and adenosine kinase deficiency and untreated secondary causes carry more serious implications that improve with appropriate treatment.",
-  "pitfalls": [
-   "Assuming all isolated hypermethioninaemia is benign and missing AHCY or adenosine kinase deficiency",
-   "Failing to measure homocysteine and so overlooking classical homocystinuria",
-   "Not checking S-adenosylmethionine and S-adenosylhomocysteine, which are needed to separate the genetic causes",
-   "Attributing the finding to diet or liver disease without excluding an inborn error",
-   "Over-restricting methionine in a benign case, risking essential amino acid deficiency"
-  ],
-  "references": [
-   "Scriver's OMMBID",
-   "Mudd SH. Hypermethioninemias of genetic and non-genetic origin",
-   "Blau N. Physician's Guide to the Diagnosis, Treatment, and Follow-up of Inherited Metabolic Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause, since management depends entirely on the specific mechanism",
-   "Institute a methionine-restricted diet where a treatable methylation defect such as S-adenosylhomocysteine hydrolase or adenosine kinase deficiency is confirmed",
-   "Generally observe without specific treatment in benign MAT I/III or GNMT deficiency, considering modest methionine reduction only when levels are very high with a risk of demyelination",
-   "Treat secondary causes such as tyrosinaemia type 1 and hepatic dysfunction on their own merits",
-   "Distinguish benign from serious causes using total homocysteine, S-adenosylmethionine and S-adenosylhomocysteine together with targeted genetic testing",
-   "Monitor plasma methionine and neurological status and adjust dietary methionine accordingly",
-   "Offer genetic counselling for the inherited recessive causes and manage through a metabolic service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypermethioninemia-pathway",
-   "title": "Isolated hypermethioninaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A biochemical finding of persistently raised plasma methionine without accompanying homocystinuria, rather than a single disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological signs, developmental delay or regression suggesting a treatable methylation defect",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma amino acids to confirm isolated methionine elevation, Plasma total homocysteine to exclude classical homocystinuria and remethylation defects, S-adenosylmethionine and S-adenosylhomocysteine to differentiate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause, since management depends entirely on the specific mechanism"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all isolated hypermethioninaemia is benign and missing AHCY or adenosine kinase deficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of isolated hypermethioninaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "hypermethioninemia-matrix",
-   "title": "Isolated hypermethioninaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A biochemical finding of persistently raised plasma methionine without accompanying homocystinuria, rather than a single disease",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A biochemical finding of persistently raised plasma methionine without accompanying homocystinuria, rather than a single disease",
+      "The commonest inherited cause is methionine adenosyltransferase I/III (MAT1A) deficiency, which is usually benign",
+      "Other genetic causes include glycine N-methyltransferase deficiency, and the treatable methylation defects S-adenosylhomocysteine hydrolase and adenosine kinase deficiency",
+      "Secondary hypermethioninaemia occurs with liver disease, prematurity, high methionine or protein intake, and tyrosinaemia type 1",
+      "The key clinical distinction is separating the benign causes from the serious, treatable ones",
+      "A boiled-cabbage or sulphurous breath odour from dimethyl sulfide may accompany markedly raised methionine",
+      "Classical homocystinuria from cystathionine beta-synthase deficiency also raises methionine but is defined by the associated homocystinuria",
+      "Diagnostic approach uses plasma amino acids, total homocysteine, S-adenosylmethionine and S-adenosylhomocysteine, liver function and targeted genetics"
     ],
-    [
-     "Key Investigations",
-     "Plasma amino acids to confirm isolated methionine elevation, Plasma total homocysteine to exclude classical homocystinuria and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Methionine sits at the head of the transmethylation pathway, being activated to S-adenosylmethionine before serving as the universal methyl donor and then entering the transsulfuration and remethylation cycles. Plasma methionine rises whenever its onward metabolism is impeded or its supply is excessive. Reduced conversion to S-adenosylmethionine, as in MAT I/III deficiency, or a block further along the methylation cycle, as in AHCY, GNMT or adenosine kinase deficiency, causes methionine to accumulate; secondary elevations reflect impaired hepatic handling or high intake. The clinical significance therefore depends entirely on the underlying mechanism, ranging from a harmless finding to a marker of treatable neurological or hepatic disease.",
+    "additionalDifferentials": [
+      "Methionine adenosyltransferase I/III deficiency",
+      "Glycine N-methyltransferase deficiency",
+      "S-adenosylhomocysteine hydrolase deficiency",
+      "Adenosine kinase deficiency",
+      "Classical homocystinuria (cystathionine beta-synthase deficiency)",
+      "Hepatic dysfunction, prematurity, high-protein intake or tyrosinaemia type 1"
     ],
-    [
-     "Primary Differentials",
-     "Methionine adenosyltransferase I/III deficiency, Glycine N-methyltransferase deficiency, S-adenosylhomocysteine hydrolase",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma amino acids to confirm isolated methionine elevation",
+      "Plasma total homocysteine to exclude classical homocystinuria and remethylation defects",
+      "S-adenosylmethionine and S-adenosylhomocysteine to differentiate methylation-cycle disorders",
+      "Liver function tests to identify hepatic causes",
+      "Succinylacetone or relevant testing to exclude tyrosinaemia type 1",
+      "Targeted gene sequencing (for example MAT1A, GNMT, AHCY, ADK) guided by the metabolite pattern"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause, since management depends entirely on the specific mechanism",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological signs, developmental delay or regression suggesting a treatable methylation defect",
+      "Hepatic dysfunction or coagulopathy pointing to AHCY, adenosine kinase deficiency or liver disease",
+      "Raised homocysteine indicating homocystinuria rather than isolated hypermethioninaemia",
+      "Very high sustained methionine warranting prompt clarification of the cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all isolated hypermethioninaemia is benign and missing AHCY or adenosine kinase deficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the underlying cause; isolated MAT I/III or GNMT deficiency is generally benign, whereas AHCY and adenosine kinase deficiency and untreated secondary causes carry more serious implications that improve with appropriate treatment.",
+    "pitfalls": [
+      "Assuming all isolated hypermethioninaemia is benign and missing AHCY or adenosine kinase deficiency",
+      "Failing to measure homocysteine and so overlooking classical homocystinuria",
+      "Not checking S-adenosylmethionine and S-adenosylhomocysteine, which are needed to separate the genetic causes",
+      "Attributing the finding to diet or liver disease without excluding an inborn error",
+      "Over-restricting methionine in a benign case, risking essential amino acid deficiency"
+    ],
+    "references": [
+      "Scriver's OMMBID",
+      "Mudd SH. Hypermethioninemias of genetic and non-genetic origin",
+      "Blau N. Physician's Guide to the Diagnosis, Treatment, and Follow-up of Inherited Metabolic Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause, since management depends entirely on the specific mechanism",
+      "Institute a methionine-restricted diet where a treatable methylation defect such as S-adenosylhomocysteine hydrolase or adenosine kinase deficiency is confirmed",
+      "Generally observe without specific treatment in benign MAT I/III or GNMT deficiency, considering modest methionine reduction only when levels are very high with a risk of demyelination",
+      "Treat secondary causes such as tyrosinaemia type 1 and hepatic dysfunction on their own merits",
+      "Distinguish benign from serious causes using total homocysteine, S-adenosylmethionine and S-adenosylhomocysteine together with targeted genetic testing",
+      "Monitor plasma methionine and neurological status and adjust dietary methionine accordingly",
+      "Offer genetic counselling for the inherited recessive causes and manage through a metabolic service"
     ]
-   ],
-   "caption": "Overview comparison matrix for isolated hypermethioninaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypermethioninemia-real-image",
-   "title": "Isolated hypermethioninaemia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hypermethioninemia-pathway",
+      "title": "Isolated hypermethioninaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A biochemical finding of persistently raised plasma methionine without accompanying homocystinuria, rather than a single disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological signs, developmental delay or regression suggesting a treatable methylation defect",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma amino acids to confirm isolated methionine elevation, Plasma total homocysteine to exclude classical homocystinuria and remethylation defects, S-adenosylmethionine and S-adenosylhomocysteine to differentiate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause, since management depends entirely on the specific mechanism"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all isolated hypermethioninaemia is benign and missing AHCY or adenosine kinase deficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of isolated hypermethioninaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypermethioninemia-matrix",
+      "title": "Isolated hypermethioninaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A biochemical finding of persistently raised plasma methionine without accompanying homocystinuria, rather than a single disease",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma amino acids to confirm isolated methionine elevation, Plasma total homocysteine to exclude classical homocystinuria and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Methionine adenosyltransferase I/III deficiency, Glycine N-methyltransferase deficiency, S-adenosylhomocysteine hydrolase",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause, since management depends entirely on the specific mechanism",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all isolated hypermethioninaemia is benign and missing AHCY or adenosine kinase deficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for isolated hypermethioninaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypermethioninemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Isolated methionine elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma total homocysteine",
+          "cells": [
+            {
+              "text": "Excludes classical homocystinuria and remethylation defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S-adenosylmethionine and S-adenosylhomocysteine",
+          "cells": [
+            {
+              "text": "Differentiates methylation-cycle disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Identifies hepatic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Succinylacetone or relevant testing",
+          "cells": [
+            {
+              "text": "Excludes tyrosinaemia type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted gene sequencing (MAT1A, GNMT, AHCY, ADK)",
+          "cells": [
+            {
+              "text": "Guided by the metabolite pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypermethioninemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Methionine adenosyltransferase I/III deficiency (MAT1A)",
+          "cells": [
+            {
+              "text": "Usually benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S-adenosylhomocysteine hydrolase deficiency (AHCY)",
+          "cells": [
+            {
+              "text": "Hepatic dysfunction or coagulopathy; neurological signs or developmental delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenosine kinase deficiency (ADK)",
+          "cells": [
+            {
+              "text": "Hepatic dysfunction or coagulopathy; treatable with methionine restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classical homocystinuria (cystathionine beta-synthase deficiency)",
+          "cells": [
+            {
+              "text": "Raised homocysteine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tyrosinaemia type 1 (secondary cause)",
+          "cells": [
+            {
+              "text": "Excluded with succinylacetone or relevant testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypermethioninemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat underlying cause",
+          "cells": [
+            {
+              "text": "Management depends on the specific mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methionine-restricted diet",
+          "cells": [
+            {
+              "text": "Where AHCY or adenosine kinase deficiency is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Generally no specific treatment in benign MAT I/III or GNMT deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat secondary causes",
+          "cells": [
+            {
+              "text": "Tyrosinaemia type 1 and hepatic dysfunction on their own merits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish benign from serious",
+          "cells": [
+            {
+              "text": "Total homocysteine, S-adenosylmethionine, S-adenosylhomocysteine and targeted genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Plasma methionine and neurological status; adjust dietary methionine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and metabolic service",
+          "cells": [
+            {
+              "text": "Recessive inherited causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypermethioninemia-dx-mgmt",
+      "title": "Diagnosis and management of Isolated hypermethioninaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistently raised plasma methionine without homocystinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological signs, developmental delay or hepatic dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for AHCY or adenosine kinase deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Homocysteine, SAM and SAH, liver tests, succinylacetone and targeted genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Treatable methylation defect confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude secondary causes: liver disease, prematurity, high intake, tyrosinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Methionine-restricted diet where AHCY or adenosine kinase deficiency is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observation for benign MAT I/III or GNMT deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat secondary causes on their own merits",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor plasma methionine and neurological status",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Management set by the underlying cause; benign causes need observation only",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

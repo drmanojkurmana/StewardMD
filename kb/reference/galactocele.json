@@ -1,173 +1,433 @@
 {
- "id": "galactocele",
- "name": "Galactocele",
- "aliases": [
-  "galactocele",
-  "milk retention cyst",
-  "lactocele"
- ],
- "class": "non_infective",
- "system": "Breast",
- "specialty": "Breast Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard breast surgery textbook and benign breast disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A galactocele is a milk-filled retention cyst and is the commonest benign breast lump associated with lactation",
-   "It typically presents during or shortly after breastfeeding, or on weaning, as a smooth, mobile, often non-tender swelling",
-   "The lump may fluctuate in size and can be firm if the retained milk becomes thick or inspissated over time",
-   "Ultrasound is the imaging of choice in this age group and may show a cystic lesion, sometimes with a characteristic fat-fluid level",
-   "Aspiration is both diagnostic and therapeutic, typically yielding milky fluid, which confirms the diagnosis and relieves the swelling",
-   "It is distinguished from a lactational abscess by the absence of the marked pain, erythema, and systemic upset of infection",
-   "Most galactoceles are managed conservatively or by simple aspiration, and breastfeeding can usually continue",
-   "A residual mass after aspiration, or bloodstained aspirate, warrants further assessment to exclude other pathology"
+  "id": "galactocele",
+  "name": "Galactocele",
+  "aliases": [
+    "galactocele",
+    "milk retention cyst",
+    "lactocele"
   ],
-  "pathophysiology": "A galactocele forms when a lactiferous duct becomes obstructed and milk is retained within a distended, cyst-like space. Obstruction commonly occurs when milk flow changes, such as at weaning or when feeding becomes irregular, allowing stasis and accumulation. Over time the water content of the trapped milk may be reabsorbed, leaving thicker, fatty, or inspissated contents that alter the consistency of the lump and its appearance on imaging. Because the fluid is sterile milk rather than pus, the lesion lacks the inflammatory features of an abscess unless secondary infection supervenes.",
-  "additionalDifferentials": [
-   "Lactational breast abscess",
-   "Simple breast cyst",
-   "Fibroadenoma or lactating adenoma",
-   "Fat necrosis",
-   "Breast carcinoma (uncommon in this setting but must be considered for atypical features)",
-   "Blocked duct without cyst formation"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination in the context of recent or current lactation",
-   "Ultrasound as first-line imaging, potentially showing a fat-fluid level",
-   "Diagnostic and therapeutic aspiration, typically yielding milk",
-   "Cytology or further imaging if the aspirate is atypical or a mass persists",
-   "Core biopsy of any residual solid lesion"
-  ],
-  "redFlags": [
-   "Marked pain, erythema, and systemic upset suggesting a lactational abscess",
-   "A solid residual mass after aspiration",
-   "Bloodstained aspirate",
-   "Atypical imaging features or a lump that does not resolve"
-  ],
-  "prognosis": "A galactocele is entirely benign with an excellent prognosis; it usually resolves after aspiration or with conservative management as lactation settles, and breastfeeding can typically continue without harm.",
-  "pitfalls": [
-   "Mistaking a galactocele for an abscess and undertaking unnecessary antibiotics or incision",
-   "Failing to reassess a mass that persists after aspiration",
-   "Overlooking the rare possibility of malignancy when features are atypical",
-   "Assuming any lactational lump is benign without appropriate imaging when uncertain",
-   "Discouraging breastfeeding unnecessarily"
-  ],
-  "references": [
-   "Standard breast surgery reference text on lactational breast conditions",
-   "Guidance on benign breast lumps"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance that it is a benign milk-filled retention cyst requiring no specific drug therapy",
-   "Diagnostic and therapeutic needle aspiration, which yields milky fluid, confirms the diagnosis and relieves the swelling",
-   "Conservative management with continued breastfeeding, which is safe and often allows spontaneous resolution as lactation settles",
-   "Repeat aspiration for recurrent or symptomatic collections",
-   "Further evaluation with cytology, core biopsy or repeat imaging if the aspirate is atypical or a solid mass persists, to exclude malignancy",
-   "Referral to breast surgery for persistent or diagnostically uncertain lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "galactocele-pathway",
-   "title": "Galactocele: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A galactocele is a milk-filled retention cyst and is the commonest benign breast lump associated with lactation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked pain, erythema, and systemic upset suggesting a lactational abscess",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination in the context of recent or current lactation, Ultrasound as first-line imaging, potentially showing a fat-fluid level, Diagnostic and therapeutic aspiration, typically yielding milk"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance that it is a benign milk-filled retention cyst requiring no specific drug therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a galactocele for an abscess and undertaking unnecessary antibiotics or incision"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of galactocele."
-  }
- ],
- "tables": [
-  {
-   "id": "galactocele-matrix",
-   "title": "Galactocele: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A galactocele is a milk-filled retention cyst and is the commonest benign breast lump associated with lactation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Breast",
+  "specialty": "Breast Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard breast surgery textbook and benign breast disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A galactocele is a milk-filled retention cyst and is the commonest benign breast lump associated with lactation",
+      "It typically presents during or shortly after breastfeeding, or on weaning, as a smooth, mobile, often non-tender swelling",
+      "The lump may fluctuate in size and can be firm if the retained milk becomes thick or inspissated over time",
+      "Ultrasound is the imaging of choice in this age group and may show a cystic lesion, sometimes with a characteristic fat-fluid level",
+      "Aspiration is both diagnostic and therapeutic, typically yielding milky fluid, which confirms the diagnosis and relieves the swelling",
+      "It is distinguished from a lactational abscess by the absence of the marked pain, erythema, and systemic upset of infection",
+      "Most galactoceles are managed conservatively or by simple aspiration, and breastfeeding can usually continue",
+      "A residual mass after aspiration, or bloodstained aspirate, warrants further assessment to exclude other pathology"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination in the context of recent or current lactation, Ultrasound as first-line imaging, potentially showing a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A galactocele forms when a lactiferous duct becomes obstructed and milk is retained within a distended, cyst-like space. Obstruction commonly occurs when milk flow changes, such as at weaning or when feeding becomes irregular, allowing stasis and accumulation. Over time the water content of the trapped milk may be reabsorbed, leaving thicker, fatty, or inspissated contents that alter the consistency of the lump and its appearance on imaging. Because the fluid is sterile milk rather than pus, the lesion lacks the inflammatory features of an abscess unless secondary infection supervenes.",
+    "additionalDifferentials": [
+      "Lactational breast abscess",
+      "Simple breast cyst",
+      "Fibroadenoma or lactating adenoma",
+      "Fat necrosis",
+      "Breast carcinoma (uncommon in this setting but must be considered for atypical features)",
+      "Blocked duct without cyst formation"
     ],
-    [
-     "Primary Differentials",
-     "Lactational breast abscess, Simple breast cyst, Fibroadenoma or lactating adenoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination in the context of recent or current lactation",
+      "Ultrasound as first-line imaging, potentially showing a fat-fluid level",
+      "Diagnostic and therapeutic aspiration, typically yielding milk",
+      "Cytology or further imaging if the aspirate is atypical or a mass persists",
+      "Core biopsy of any residual solid lesion"
     ],
-    [
-     "Management Strategy",
-     "Reassurance that it is a benign milk-filled retention cyst requiring no specific drug therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked pain, erythema, and systemic upset suggesting a lactational abscess",
+      "A solid residual mass after aspiration",
+      "Bloodstained aspirate",
+      "Atypical imaging features or a lump that does not resolve"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a galactocele for an abscess and undertaking unnecessary antibiotics or incision",
-     "Prevent diagnostic or management error"
+    "prognosis": "A galactocele is entirely benign with an excellent prognosis; it usually resolves after aspiration or with conservative management as lactation settles, and breastfeeding can typically continue without harm.",
+    "pitfalls": [
+      "Mistaking a galactocele for an abscess and undertaking unnecessary antibiotics or incision",
+      "Failing to reassess a mass that persists after aspiration",
+      "Overlooking the rare possibility of malignancy when features are atypical",
+      "Assuming any lactational lump is benign without appropriate imaging when uncertain",
+      "Discouraging breastfeeding unnecessarily"
+    ],
+    "references": [
+      "Standard breast surgery reference text on lactational breast conditions",
+      "Guidance on benign breast lumps"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance that it is a benign milk-filled retention cyst requiring no specific drug therapy",
+      "Diagnostic and therapeutic needle aspiration, which yields milky fluid, confirms the diagnosis and relieves the swelling",
+      "Conservative management with continued breastfeeding, which is safe and often allows spontaneous resolution as lactation settles",
+      "Repeat aspiration for recurrent or symptomatic collections",
+      "Further evaluation with cytology, core biopsy or repeat imaging if the aspirate is atypical or a solid mass persists, to exclude malignancy",
+      "Referral to breast surgery for persistent or diagnostically uncertain lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for galactocele."
-  }
- ],
- "diagrams": [
-  {
-   "id": "galactocele-real-image",
-   "title": "Galactocele: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "galactocele-pathway",
+      "title": "Galactocele: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A galactocele is a milk-filled retention cyst and is the commonest benign breast lump associated with lactation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked pain, erythema, and systemic upset suggesting a lactational abscess",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination in the context of recent or current lactation, Ultrasound as first-line imaging, potentially showing a fat-fluid level, Diagnostic and therapeutic aspiration, typically yielding milk"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance that it is a benign milk-filled retention cyst requiring no specific drug therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a galactocele for an abscess and undertaking unnecessary antibiotics or incision"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of galactocele."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "galactocele-matrix",
+      "title": "Galactocele: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A galactocele is a milk-filled retention cyst and is the commonest benign breast lump associated with lactation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination in the context of recent or current lactation, Ultrasound as first-line imaging, potentially showing a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lactational breast abscess, Simple breast cyst, Fibroadenoma or lactating adenoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance that it is a benign milk-filled retention cyst requiring no specific drug therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a galactocele for an abscess and undertaking unnecessary antibiotics or incision",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for galactocele."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard breast surgery textbook and benign breast disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "galactocele-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "First-line imaging; may show a fat-fluid level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic and therapeutic aspiration",
+          "cells": [
+            {
+              "text": "Typically yields milk, confirming the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytology or further imaging",
+          "cells": [
+            {
+              "text": "If the aspirate is atypical or a mass persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy",
+          "cells": [
+            {
+              "text": "Any residual solid lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "galactocele-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lactational breast abscess",
+          "cells": [
+            {
+              "text": "Marked pain, erythema and systemic upset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast carcinoma",
+          "cells": [
+            {
+              "text": "Atypical imaging features, or a lump that does not resolve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "galactocele-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign milk-filled retention cyst; no specific drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle aspiration",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic; yields milky fluid and relieves swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continued breastfeeding",
+          "cells": [
+            {
+              "text": "Safe, and often allows spontaneous resolution as lactation settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat aspiration",
+          "cells": [
+            {
+              "text": "For recurrent or symptomatic collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further evaluation",
+          "cells": [
+            {
+              "text": "Cytology, core biopsy or repeat imaging if the aspirate is atypical or a solid mass persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast surgery referral",
+          "cells": [
+            {
+              "text": "Persistent or diagnostically uncertain lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "galactocele-dx-mgmt",
+      "title": "Diagnosis and management of Galactocele",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected galactocele: milk-filled breast swelling during or after lactation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (marked pain, systemic upset, bloodstained aspirate, solid mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for a lactational abscess with systemic upset",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound and diagnostic aspiration; cytology or biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aspiration yield milky fluid with resolution of the swelling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lactational abscess, carcinoma or other cysts; biopsy as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance: a benign milk-filled retention cyst needing no drug therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Needle aspiration to confirm the diagnosis and relieve swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continued breastfeeding, which is safe and often resolves the cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Core biopsy or repeat imaging if the aspirate is atypical or a mass persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Entirely benign; usually resolves after aspiration or conservative care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

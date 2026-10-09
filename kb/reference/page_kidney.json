@@ -1,175 +1,492 @@
 {
- "id": "page_kidney",
- "name": "Page kidney",
- "aliases": [
-  "Page phenomenon",
-  "Perinephric compression hypertension"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Renin-mediated hypertension caused by external compression of the renal parenchyma, usually by a subcapsular or perinephric haematoma.",
-   "It is named after Irvine Page, who reproduced hypertension experimentally by wrapping animal kidneys in cellophane.",
-   "Common triggers include trauma (including sporting injury), renal biopsy, anticoagulation, extracorporeal shockwave lithotripsy, tumour and cysts.",
-   "Compression reduces intrarenal perfusion and activates the renin-angiotensin-aldosterone system in a mechanism analogous to Goldblatt hypertension.",
-   "It may present acutely after trauma or a procedure, or as unexplained or resistant hypertension months to years later.",
-   "Cross-sectional imaging with CT or MRI demonstrates the compressing collection and the compressed parenchyma.",
-   "Blockade of the renin-angiotensin-aldosterone system is a rational first-line therapy, while acute or refractory cases may need drainage, evacuation or rarely nephrectomy.",
-   "Small acute haematomas may resolve spontaneously with improvement in blood pressure."
+  "id": "page_kidney",
+  "name": "Page kidney",
+  "aliases": [
+    "Page phenomenon",
+    "Perinephric compression hypertension"
   ],
-  "pathophysiology": "Page kidney results from external compression of the kidney by a subcapsular or perinephric collection, most often a haematoma but sometimes a urinoma, tumour or cyst, which raises intraparenchymal pressure and compresses the renal microvasculature. The resulting reduction in renal blood flow is sensed as hypoperfusion and activates the renin-angiotensin-aldosterone system in a manner analogous to Goldblatt one-kidney hypertension. Angiotensin II-mediated vasoconstriction and aldosterone-driven sodium retention produce systemic hypertension, which can persist while the compressing lesion and secondary parenchymal ischaemia and fibrosis remain.",
-  "additionalDifferentials": [
-   "Renovascular hypertension from renal artery stenosis",
-   "Essential hypertension",
-   "Other secondary hypertension (phaeochromocytoma, primary aldosteronism)",
-   "Renal artery or vein thrombosis after trauma",
-   "Acute kidney injury of another cause after trauma or a procedure",
-   "Renal malignancy causing hypertension",
-   "Autosomal dominant polycystic kidney disease"
-  ],
-  "additionalInvestigations": [
-   "Contrast CT or MRI of the kidneys showing the compressing collection and compressed parenchyma",
-   "Renal ultrasound with Doppler",
-   "Plasma renin activity and aldosterone",
-   "Renal function and electrolytes",
-   "Blood pressure profiling or ambulatory monitoring",
-   "Coagulation screen if anticoagulated or with spontaneous haematoma",
-   "Isotope renography for differential function where intervention is considered"
-  ],
-  "redFlags": [
-   "Severe or accelerated hypertension with end-organ damage",
-   "Expanding haematoma with haemodynamic compromise",
-   "Deteriorating renal function",
-   "An underlying malignancy as the compressing lesion"
-  ],
-  "prognosis": "The outlook is often good, with hypertension resolving as an acute haematoma reabsorbs or after drainage or evacuation; chronic compression with established parenchymal fibrosis may cause persistent hypertension requiring long-term therapy or intervention.",
-  "pitfalls": [
-   "Overlooking Page kidney as a reversible cause of secondary or resistant hypertension after trauma, biopsy or lithotripsy",
-   "Attributing post-procedural hypertension to essential hypertension",
-   "Premature nephrectomy when drainage or medical therapy would suffice",
-   "Failing to recognise a malignant compressing lesion"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "Oxford Textbook of Medicine",
-   "Campbell-Walsh-Wein Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control the renin-angiotensin-driven hypertension pharmacologically, using an ACE inhibitor or angiotensin-receptor blocker to target the activated pathway",
-   "Manage an acute subcapsular haematoma conservatively where possible, allowing reabsorption with blood-pressure control and analgesia, and reverse or withhold anticoagulation",
-   "Evacuate or drain the compressing collection, or undertake surgical decompression or capsulectomy, when hypertension is severe or persistent",
-   "Reserve nephrectomy for a non-functioning kidney with refractory hypertension after other measures fail",
-   "Monitor blood pressure including ambulatory profiling, renal function, and the collection on serial cross-sectional imaging",
-   "Refer to nephrology and urology, escalating for uncontrolled or resistant hypertension or deteriorating renal function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "page_kidney-pathway",
-   "title": "Page kidney: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Renin-mediated hypertension caused by external compression of the renal parenchyma, usually by a subcapsular or perinephric haematoma.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or accelerated hypertension with end-organ damage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast CT or MRI of the kidneys showing the compressing collection and compressed parenchyma, Renal ultrasound with Doppler, Plasma renin activity and aldosterone"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control the renin-angiotensin-driven hypertension pharmacologically, using an ACE inhibitor or angiotensin-receptor blocker to target the activated pathway"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking Page kidney as a reversible cause of secondary or resistant hypertension after trauma, biopsy or lithotripsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of page kidney."
-  }
- ],
- "tables": [
-  {
-   "id": "page_kidney-matrix",
-   "title": "Page kidney: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Renin-mediated hypertension caused by external compression of the renal parenchyma, usually by a subcapsular or perinephric",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Renin-mediated hypertension caused by external compression of the renal parenchyma, usually by a subcapsular or perinephric haematoma.",
+      "It is named after Irvine Page, who reproduced hypertension experimentally by wrapping animal kidneys in cellophane.",
+      "Common triggers include trauma (including sporting injury), renal biopsy, anticoagulation, extracorporeal shockwave lithotripsy, tumour and cysts.",
+      "Compression reduces intrarenal perfusion and activates the renin-angiotensin-aldosterone system in a mechanism analogous to Goldblatt hypertension.",
+      "It may present acutely after trauma or a procedure, or as unexplained or resistant hypertension months to years later.",
+      "Cross-sectional imaging with CT or MRI demonstrates the compressing collection and the compressed parenchyma.",
+      "Blockade of the renin-angiotensin-aldosterone system is a rational first-line therapy, while acute or refractory cases may need drainage, evacuation or rarely nephrectomy.",
+      "Small acute haematomas may resolve spontaneously with improvement in blood pressure."
     ],
-    [
-     "Key Investigations",
-     "Contrast CT or MRI of the kidneys showing the compressing collection and compressed parenchyma, Renal ultrasound with Doppler,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Page kidney results from external compression of the kidney by a subcapsular or perinephric collection, most often a haematoma but sometimes a urinoma, tumour or cyst, which raises intraparenchymal pressure and compresses the renal microvasculature. The resulting reduction in renal blood flow is sensed as hypoperfusion and activates the renin-angiotensin-aldosterone system in a manner analogous to Goldblatt one-kidney hypertension. Angiotensin II-mediated vasoconstriction and aldosterone-driven sodium retention produce systemic hypertension, which can persist while the compressing lesion and secondary parenchymal ischaemia and fibrosis remain.",
+    "additionalDifferentials": [
+      "Renovascular hypertension from renal artery stenosis",
+      "Essential hypertension",
+      "Other secondary hypertension (phaeochromocytoma, primary aldosteronism)",
+      "Renal artery or vein thrombosis after trauma",
+      "Acute kidney injury of another cause after trauma or a procedure",
+      "Renal malignancy causing hypertension",
+      "Autosomal dominant polycystic kidney disease"
     ],
-    [
-     "Primary Differentials",
-     "Renovascular hypertension from renal artery stenosis, Essential hypertension, Other secondary hypertension (phaeochromocytoma,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast CT or MRI of the kidneys showing the compressing collection and compressed parenchyma",
+      "Renal ultrasound with Doppler",
+      "Plasma renin activity and aldosterone",
+      "Renal function and electrolytes",
+      "Blood pressure profiling or ambulatory monitoring",
+      "Coagulation screen if anticoagulated or with spontaneous haematoma",
+      "Isotope renography for differential function where intervention is considered"
     ],
-    [
-     "Management Strategy",
-     "Control the renin-angiotensin-driven hypertension pharmacologically, using an ACE inhibitor or angiotensin-receptor blocker to",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or accelerated hypertension with end-organ damage",
+      "Expanding haematoma with haemodynamic compromise",
+      "Deteriorating renal function",
+      "An underlying malignancy as the compressing lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking Page kidney as a reversible cause of secondary or resistant hypertension after trauma, biopsy or lithotripsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is often good, with hypertension resolving as an acute haematoma reabsorbs or after drainage or evacuation; chronic compression with established parenchymal fibrosis may cause persistent hypertension requiring long-term therapy or intervention.",
+    "pitfalls": [
+      "Overlooking Page kidney as a reversible cause of secondary or resistant hypertension after trauma, biopsy or lithotripsy",
+      "Attributing post-procedural hypertension to essential hypertension",
+      "Premature nephrectomy when drainage or medical therapy would suffice",
+      "Failing to recognise a malignant compressing lesion"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "Oxford Textbook of Medicine",
+      "Campbell-Walsh-Wein Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control the renin-angiotensin-driven hypertension pharmacologically, using an ACE inhibitor or angiotensin-receptor blocker to target the activated pathway",
+      "Manage an acute subcapsular haematoma conservatively where possible, allowing reabsorption with blood-pressure control and analgesia, and reverse or withhold anticoagulation",
+      "Evacuate or drain the compressing collection, or undertake surgical decompression or capsulectomy, when hypertension is severe or persistent",
+      "Reserve nephrectomy for a non-functioning kidney with refractory hypertension after other measures fail",
+      "Monitor blood pressure including ambulatory profiling, renal function, and the collection on serial cross-sectional imaging",
+      "Refer to nephrology and urology, escalating for uncontrolled or resistant hypertension or deteriorating renal function"
     ]
-   ],
-   "caption": "Overview comparison matrix for page kidney."
-  }
- ],
- "diagrams": [
-  {
-   "id": "page-kidney-real-image",
-   "title": "Page kidney: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "page_kidney-pathway",
+      "title": "Page kidney: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Renin-mediated hypertension caused by external compression of the renal parenchyma, usually by a subcapsular or perinephric haematoma.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or accelerated hypertension with end-organ damage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast CT or MRI of the kidneys showing the compressing collection and compressed parenchyma, Renal ultrasound with Doppler, Plasma renin activity and aldosterone"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control the renin-angiotensin-driven hypertension pharmacologically, using an ACE inhibitor or angiotensin-receptor blocker to target the activated pathway"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking Page kidney as a reversible cause of secondary or resistant hypertension after trauma, biopsy or lithotripsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of page kidney."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "page_kidney-matrix",
+      "title": "Page kidney: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Renin-mediated hypertension caused by external compression of the renal parenchyma, usually by a subcapsular or perinephric",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast CT or MRI of the kidneys showing the compressing collection and compressed parenchyma, Renal ultrasound with Doppler,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Renovascular hypertension from renal artery stenosis, Essential hypertension, Other secondary hypertension (phaeochromocytoma,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control the renin-angiotensin-driven hypertension pharmacologically, using an ACE inhibitor or angiotensin-receptor blocker to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking Page kidney as a reversible cause of secondary or resistant hypertension after trauma, biopsy or lithotripsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for page kidney."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "page_kidney-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MRI of the kidneys",
+          "cells": [
+            {
+              "text": "Compressing collection and compressed parenchyma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Renal perfusion and the collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin activity and aldosterone",
+          "cells": [
+            {
+              "text": "Renin-angiotensin activation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and electrolytes",
+          "cells": [
+            {
+              "text": "Renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure profiling",
+          "cells": [
+            {
+              "text": "Ambulatory monitoring of hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Anticoagulation or spontaneous haematoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "page_kidney-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Renovascular hypertension",
+          "cells": [
+            {
+              "text": "Arterial stenosis rather than external compression of the parenchyma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other secondary hypertension (phaeochromocytoma, primary aldosteronism)",
+          "cells": [
+            {
+              "text": "Endocrine causes; cross-sectional imaging shows compression here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal malignancy",
+          "cells": [
+            {
+              "text": "A malignant compressing lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "page_kidney-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pharmacological control",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "ACE inhibitor or angiotensin-receptor blocker to target the activated pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care of acute haematoma",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Reabsorption with blood pressure control and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Reverse or withhold where a haematoma is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage or decompression",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Evacuation, drainage or capsulectomy when hypertension is severe or persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrectomy",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Only for a non-functioning kidney with refractory hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Blood pressure, renal function and serial cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "page_kidney-dx-mgmt",
+      "title": "Diagnosis and management of Page kidney",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Resistant hypertension after trauma, biopsy or lithotripsy with a renal collection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (accelerated hypertension, expanding haematoma or falling renal function)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent drainage or decompression for an expanding haematoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI of kidneys, renal Doppler, renin and aldosterone, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the parenchyma compressed by a collection on cross-sectional imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider renovascular hypertension, endocrine hypertension or renal malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACE inhibitor or angiotensin-receptor blocker to target the renin-angiotensin pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Conservative care of acute subcapsular haematoma, with blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reverse or withhold anticoagulation where a haematoma is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drainage, evacuation or decapsulation when hypertension is severe or persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Nephrectomy only for a non-functioning kidney with refractory hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often good; hypertension resolves as haematoma reabsorbs or is drained",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

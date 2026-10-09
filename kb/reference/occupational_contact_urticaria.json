@@ -1,176 +1,482 @@
 {
- "id": "occupational_contact_urticaria",
- "name": "occupational contact urticaria",
- "aliases": [
-  "work-related contact urticaria",
-  "occupational immediate contact reaction"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "occupational medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Contact urticaria is an immediate (wheal-and-flare) reaction appearing within minutes of skin contact with a causative agent and usually resolving within hours, in contrast to the delayed course of allergic contact dermatitis.",
-   "It is classified into immunological (IgE-mediated, often with potential for systemic reactions) and non-immunological (direct mast-cell mediator release without prior sensitisation) forms.",
-   "Natural rubber latex is a classic immunological occupational cause, particularly in healthcare and laboratory workers wearing powdered gloves; foods are important in catering and food-handling trades.",
-   "The contact urticaria syndrome describes a spectrum from localised wheals through generalised urticaria to rhinoconjunctivitis, asthma and, at worst, anaphylaxis, so hands-first symptoms can herald systemic risk.",
-   "Common occupational triggers include latex, foodstuffs (fish, meat, flour, fruits, vegetables), animal proteins and dander, plants, ammonium persulfate in hairdressing, and some preservatives and fragrances.",
-   "Protein contact dermatitis is a related entity presenting as a chronic eczematous dermatitis with immediate flares on re-exposure, typically in food handlers.",
-   "Diagnosis relies on careful history plus open and closed application (use) tests, skin-prick testing and specific IgE where appropriate, performed with resuscitation facilities available for potent allergens.",
-   "Management is avoidance and substitution (for example switching to low-protein powder-free or non-latex gloves), barrier measures, and provision of emergency treatment for those at risk of systemic reactions."
+  "id": "occupational_contact_urticaria",
+  "name": "occupational contact urticaria",
+  "aliases": [
+    "work-related contact urticaria",
+    "occupational immediate contact reaction"
   ],
-  "pathophysiology": "In immunological contact urticaria, prior sensitisation generates allergen-specific IgE bound to cutaneous mast cells; on re-exposure the allergen cross-links IgE, triggering mast-cell degranulation with release of histamine and other mediators that cause the immediate wheal-and-flare response and, when absorption is sufficient, systemic mediator release and anaphylaxis. In non-immunological contact urticaria no prior sensitisation is required: agents such as certain preservatives, fragrances and plant substances act directly on cutaneous vessels and mast cells, sometimes via non-antibody mediators, producing localised wheals that rarely generalise. In protein contact dermatitis, repeated exposure to high-molecular-weight proteins produces a combined immediate hypersensitivity and eczematous reaction. A damaged or eczematous skin barrier enhances penetration of the offending agent and amplifies reactions.",
-  "additionalDifferentials": [
-   "allergic contact dermatitis",
-   "irritant contact dermatitis",
-   "protein contact dermatitis",
-   "physical urticarias such as cholinergic or pressure urticaria",
-   "chronic spontaneous urticaria unrelated to work",
-   "angio-oedema from other causes",
-   "contact reaction to airborne irritants"
-  ],
-  "additionalInvestigations": [
-   "detailed occupational history correlating symptoms with specific tasks and materials",
-   "open and closed (use) application testing on intact and lightly abraded skin",
-   "skin-prick testing to suspected allergens including latex and foods",
-   "specific serum IgE to latex, foods and relevant occupational proteins",
-   "patch testing to exclude concurrent allergic contact dermatitis",
-   "workplace assessment of materials, gloves and safety data sheets",
-   "peak-flow or spirometry if associated respiratory symptoms are reported"
-  ],
-  "redFlags": [
-   "history of generalised urticaria, angio-oedema or anaphylaxis after contact",
-   "associated rhinoconjunctivitis, wheeze or breathlessness suggesting systemic involvement",
-   "reactions to latex in a healthcare worker with potential for cross-reactive food allergy",
-   "rapidly spreading wheals beyond the contact site",
-   "symptoms during high-exposure tasks in workers with known potent-allergen contact"
-  ],
-  "prognosis": "Symptoms usually settle promptly once the causative agent is identified and avoided, and localised non-immunological reactions carry a good outlook. Immunological cases, especially latex allergy, may persist and carry an ongoing risk of systemic reactions if exposure continues.",
-  "pitfalls": [
-   "Overlooking the diagnosis because wheals have faded by the time of assessment.",
-   "Failing to recognise localised contact urticaria as a warning of potential anaphylaxis.",
-   "Performing provocation tests to potent allergens without resuscitation facilities.",
-   "Confusing protein contact dermatitis with ordinary irritant hand eczema.",
-   "Neglecting cross-reactivity, such as latex-fruit syndrome, when advising on avoidance."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Adams' Occupational Skin Disease, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identification and strict avoidance of the causative agent, including substitution of powdered latex gloves with latex-free alternatives and a latex-safe workplace",
-   "Oral H1-antihistamines to control urticarial wheals and pruritus",
-   "For immunological, especially latex, allergy with systemic-reaction risk, provision of an adrenaline auto-injector and a written anaphylaxis emergency plan",
-   "Skin protection with suitable gloves, barrier measures and emollients, with topical corticosteroids for associated protein contact dermatitis",
-   "Occupational health referral for workplace assessment, agent substitution and redeployment where avoidance is impossible",
-   "Reporting as an occupational disease and counselling on cross-reacting food allergens in latex-sensitised workers"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "occupational_contact_urticaria-pathway",
-   "title": "occupational contact urticaria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Contact urticaria is an immediate (wheal-and-flare) reaction appearing within minutes of skin contact with a causative agent and usually resolving within hours, in contrast to the delayed course of allergic contact dermatitis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: history of generalised urticaria, angio-oedema or anaphylaxis after contact",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: detailed occupational history correlating symptoms with specific tasks and materials, open and closed (use) application testing on intact and lightly abraded skin, skin-prick testing to suspected allergens including latex"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identification and strict avoidance of the causative agent, including substitution of powdered latex gloves with latex-free alternatives and a latex-safe workplace"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis because wheals have faded by the time of assessment."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of occupational contact urticaria."
-  }
- ],
- "tables": [
-  {
-   "id": "occupational_contact_urticaria-matrix",
-   "title": "occupational contact urticaria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Contact urticaria is an immediate (wheal-and-flare) reaction appearing within minutes of skin contact with a causative agent and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "occupational medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Contact urticaria is an immediate (wheal-and-flare) reaction appearing within minutes of skin contact with a causative agent and usually resolving within hours, in contrast to the delayed course of allergic contact dermatitis.",
+      "It is classified into immunological (IgE-mediated, often with potential for systemic reactions) and non-immunological (direct mast-cell mediator release without prior sensitisation) forms.",
+      "Natural rubber latex is a classic immunological occupational cause, particularly in healthcare and laboratory workers wearing powdered gloves; foods are important in catering and food-handling trades.",
+      "The contact urticaria syndrome describes a spectrum from localised wheals through generalised urticaria to rhinoconjunctivitis, asthma and, at worst, anaphylaxis, so hands-first symptoms can herald systemic risk.",
+      "Common occupational triggers include latex, foodstuffs (fish, meat, flour, fruits, vegetables), animal proteins and dander, plants, ammonium persulfate in hairdressing, and some preservatives and fragrances.",
+      "Protein contact dermatitis is a related entity presenting as a chronic eczematous dermatitis with immediate flares on re-exposure, typically in food handlers.",
+      "Diagnosis relies on careful history plus open and closed application (use) tests, skin-prick testing and specific IgE where appropriate, performed with resuscitation facilities available for potent allergens.",
+      "Management is avoidance and substitution (for example switching to low-protein powder-free or non-latex gloves), barrier measures, and provision of emergency treatment for those at risk of systemic reactions."
     ],
-    [
-     "Key Investigations",
-     "detailed occupational history correlating symptoms with specific tasks and materials, open and closed (use) application testing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In immunological contact urticaria, prior sensitisation generates allergen-specific IgE bound to cutaneous mast cells; on re-exposure the allergen cross-links IgE, triggering mast-cell degranulation with release of histamine and other mediators that cause the immediate wheal-and-flare response and, when absorption is sufficient, systemic mediator release and anaphylaxis. In non-immunological contact urticaria no prior sensitisation is required: agents such as certain preservatives, fragrances and plant substances act directly on cutaneous vessels and mast cells, sometimes via non-antibody mediators, producing localised wheals that rarely generalise. In protein contact dermatitis, repeated exposure to high-molecular-weight proteins produces a combined immediate hypersensitivity and eczematous reaction. A damaged or eczematous skin barrier enhances penetration of the offending agent and amplifies reactions.",
+    "additionalDifferentials": [
+      "allergic contact dermatitis",
+      "irritant contact dermatitis",
+      "protein contact dermatitis",
+      "physical urticarias such as cholinergic or pressure urticaria",
+      "chronic spontaneous urticaria unrelated to work",
+      "angio-oedema from other causes",
+      "contact reaction to airborne irritants"
     ],
-    [
-     "Primary Differentials",
-     "allergic contact dermatitis, irritant contact dermatitis, protein contact dermatitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "detailed occupational history correlating symptoms with specific tasks and materials",
+      "open and closed (use) application testing on intact and lightly abraded skin",
+      "skin-prick testing to suspected allergens including latex and foods",
+      "specific serum IgE to latex, foods and relevant occupational proteins",
+      "patch testing to exclude concurrent allergic contact dermatitis",
+      "workplace assessment of materials, gloves and safety data sheets",
+      "peak-flow or spirometry if associated respiratory symptoms are reported"
     ],
-    [
-     "Management Strategy",
-     "Identification and strict avoidance of the causative agent, including substitution of powdered latex gloves with latex-free",
-     "Core treatment modality"
+    "redFlags": [
+      "history of generalised urticaria, angio-oedema or anaphylaxis after contact",
+      "associated rhinoconjunctivitis, wheeze or breathlessness suggesting systemic involvement",
+      "reactions to latex in a healthcare worker with potential for cross-reactive food allergy",
+      "rapidly spreading wheals beyond the contact site",
+      "symptoms during high-exposure tasks in workers with known potent-allergen contact"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis because wheals have faded by the time of assessment.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms usually settle promptly once the causative agent is identified and avoided, and localised non-immunological reactions carry a good outlook. Immunological cases, especially latex allergy, may persist and carry an ongoing risk of systemic reactions if exposure continues.",
+    "pitfalls": [
+      "Overlooking the diagnosis because wheals have faded by the time of assessment.",
+      "Failing to recognise localised contact urticaria as a warning of potential anaphylaxis.",
+      "Performing provocation tests to potent allergens without resuscitation facilities.",
+      "Confusing protein contact dermatitis with ordinary irritant hand eczema.",
+      "Neglecting cross-reactivity, such as latex-fruit syndrome, when advising on avoidance."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Adams' Occupational Skin Disease, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identification and strict avoidance of the causative agent, including substitution of powdered latex gloves with latex-free alternatives and a latex-safe workplace",
+      "Oral H1-antihistamines to control urticarial wheals and pruritus",
+      "For immunological, especially latex, allergy with systemic-reaction risk, provision of an adrenaline auto-injector and a written anaphylaxis emergency plan",
+      "Skin protection with suitable gloves, barrier measures and emollients, with topical corticosteroids for associated protein contact dermatitis",
+      "Occupational health referral for workplace assessment, agent substitution and redeployment where avoidance is impossible",
+      "Reporting as an occupational disease and counselling on cross-reacting food allergens in latex-sensitised workers"
     ]
-   ],
-   "caption": "Overview comparison matrix for occupational contact urticaria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "occupational-contact-urticaria-real-image",
-   "title": "occupational contact urticaria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "occupational_contact_urticaria-pathway",
+      "title": "occupational contact urticaria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Contact urticaria is an immediate (wheal-and-flare) reaction appearing within minutes of skin contact with a causative agent and usually resolving within hours, in contrast to the delayed course of allergic contact dermatitis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: history of generalised urticaria, angio-oedema or anaphylaxis after contact",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: detailed occupational history correlating symptoms with specific tasks and materials, open and closed (use) application testing on intact and lightly abraded skin, skin-prick testing to suspected allergens including latex"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identification and strict avoidance of the causative agent, including substitution of powdered latex gloves with latex-free alternatives and a latex-safe workplace"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis because wheals have faded by the time of assessment."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of occupational contact urticaria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "occupational_contact_urticaria-matrix",
+      "title": "occupational contact urticaria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Contact urticaria is an immediate (wheal-and-flare) reaction appearing within minutes of skin contact with a causative agent and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "detailed occupational history correlating symptoms with specific tasks and materials, open and closed (use) application testing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "allergic contact dermatitis, irritant contact dermatitis, protein contact dermatitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identification and strict avoidance of the causative agent, including substitution of powdered latex gloves with latex-free",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis because wheals have faded by the time of assessment.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for occupational contact urticaria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "occupational_contact_urticaria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed occupational history",
+          "cells": [
+            {
+              "text": "Symptoms correlated with specific tasks and materials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open and closed use tests",
+          "cells": [
+            {
+              "text": "Immediate wheal-and-flare reaction to the suspected agent, on intact and lightly abraded skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin-prick testing",
+          "cells": [
+            {
+              "text": "Immediate sensitisation to suspected allergens such as latex and foods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific serum IgE",
+          "cells": [
+            {
+              "text": "Sensitisation to latex, foods and relevant occupational proteins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "Excludes concurrent allergic contact dermatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Workplace assessment of materials and gloves",
+          "cells": [
+            {
+              "text": "Materials, gloves and safety data sheets in use at work"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peak flow or spirometry",
+          "cells": [
+            {
+              "text": "Respiratory involvement, when associated symptoms are reported"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "occupational_contact_urticaria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic contact dermatitis",
+          "cells": [
+            {
+              "text": "Delayed course, unlike the immediate reaction within minutes of contact in contact urticaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein contact dermatitis",
+          "cells": [
+            {
+              "text": "Chronic eczematous dermatitis with immediate flares on re-exposure, typically in food handlers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "occupational_contact_urticaria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoidance and substitution",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Strict avoidance of the agent; latex-free gloves in place of powdered latex, in a latex-safe workplace"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral H1-antihistamines",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Control of urticarial wheals and pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenaline auto-injector and anaphylaxis plan",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For immunological, especially latex, allergy with risk of systemic reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin protection",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Suitable gloves, barrier measures and emollients; topical corticosteroids for associated protein contact dermatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health referral",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Workplace assessment, agent substitution and redeployment where avoidance is impossible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reporting and food-allergen counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Reportable occupational disease; counselling on cross-reacting food allergens in latex-sensitised workers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "occupational_contact_urticaria-dx-mgmt",
+      "title": "Diagnosis and management of occupational contact urticaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected occupational contact urticaria: wheals within minutes of a work agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (generalised urticaria, angio-oedema, anaphylaxis or breathlessness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency review for anaphylaxis or systemic reaction after contact",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Occupational history, open and closed use tests, skin-prick testing and specific IgE",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do use tests or specific IgE confirm an immunological contact reaction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider allergic or irritant contact dermatitis and other urticarias; patch test",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict avoidance; latex-free gloves and a latex-safe workplace",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral H1-antihistamines for wheals and pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adrenaline auto-injector and written anaphylaxis plan for latex allergy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occupational health referral for workplace assessment and redeployment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms settle once the agent is avoided; latex allergy may persist with systemic risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

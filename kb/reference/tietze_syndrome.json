@@ -1,171 +1,460 @@
 {
- "id": "tietze_syndrome",
- "name": "Tietze syndrome",
- "aliases": [
-  "Tietze's syndrome",
-  "costochondral junction syndrome",
-  "chondropathia tuberosa"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign inflammatory condition producing painful, non-suppurative swelling of the upper costal cartilages, most often the second or third",
-   "The presence of visible and palpable localised swelling distinguishes Tietze syndrome from costochondritis, which causes tenderness without swelling",
-   "Usually affects a single site and tends to occur in younger adults, in contrast to the more diffuse, multi-level costochondritis",
-   "Pain is reproduced by palpation of the affected costal cartilage and may be aggravated by coughing, deep breathing or movement",
-   "It is fundamentally a clinical diagnosis, made after excluding cardiac, pulmonary and other serious causes of chest pain",
-   "Imaging is used chiefly to exclude other pathology, though MRI or CT may show cartilage enlargement and oedema",
-   "Management is reassurance, activity modification, NSAIDs, and local corticosteroid injection for resistant cases"
+  "id": "tietze_syndrome",
+  "name": "Tietze syndrome",
+  "aliases": [
+    "Tietze's syndrome",
+    "costochondral junction syndrome",
+    "chondropathia tuberosa"
   ],
-  "pathophysiology": "Tietze syndrome is a localised, benign inflammation of the costochondral, costosternal or sternoclavicular cartilage of unknown precise cause. Repetitive minor trauma, coughing or physical strain is thought to trigger a self-limiting inflammatory and possibly reparative response within the costal cartilage, producing cartilage enlargement with surrounding soft-tissue oedema. Unlike infective or destructive processes there is no suppuration or bony erosion; the visible fusiform swelling reflects benign cartilage and perichondrial thickening rather than joint destruction, and the condition resolves once the inflammation settles although the swelling may persist for some time.",
-  "additionalDifferentials": [
-   "Costochondritis (tenderness without swelling)",
-   "Cardiac ischaemia or myocardial infarction",
-   "Rib fracture or costal cartilage injury",
-   "Anterior chest wall involvement of SAPHO syndrome or seronegative arthropathy",
-   "Chest wall tumour or metastasis",
-   "Sternoclavicular joint infection or arthritis"
-  ],
-  "additionalInvestigations": [
-   "ECG and cardiac assessment to exclude ischaemic chest pain",
-   "Chest radiograph to exclude pulmonary and rib pathology",
-   "MRI or CT of the chest wall to characterise cartilage swelling and exclude tumour or infection",
-   "Inflammatory markers (ESR, CRP) when an inflammatory or infective process is considered",
-   "Ultrasound of the affected costal cartilage to confirm localised swelling"
-  ],
-  "redFlags": [
-   "Chest pain with cardiac features (exertional, radiating, associated with breathlessness or diaphoresis)",
-   "Constitutional symptoms or a hard fixed mass suggesting malignancy",
-   "Fever and progressive swelling raising concern for infection",
-   "Pain unresponsive to conservative measures with atypical features"
-  ],
-  "prognosis": "Tietze syndrome is benign and usually self-limiting, with pain settling over weeks to months, although the palpable swelling can persist for a prolonged period; recurrence is possible but serious sequelae do not occur.",
-  "pitfalls": [
-   "Anchoring on a musculoskeletal cause and missing cardiac or pulmonary disease",
-   "Confusing it with costochondritis by overlooking the characteristic localised swelling",
-   "Ordering unnecessary invasive investigation for a benign self-limiting condition",
-   "Failing to consider SAPHO syndrome or malignancy when swelling is atypical or persistent"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Oxford Textbook of Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the patient after excluding cardiac, pulmonary and other serious causes, as the condition is benign and self-limiting",
-   "Relieve pain with simple analgesia and non-steroidal anti-inflammatory drugs, together with local heat and activity modification",
-   "Advise avoidance of aggravating movements, coughing strain and repetitive loading of the chest wall",
-   "Offer a local corticosteroid and anaesthetic injection into the affected cartilage for pain that does not settle",
-   "Explain that the palpable swelling may persist after the pain resolves and does not indicate serious disease",
-   "Re-evaluate if new or atypical features emerge that suggest an alternative diagnosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tietze_syndrome-pathway",
-   "title": "Tietze syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign inflammatory condition producing painful, non-suppurative swelling of the upper costal cartilages, most often the second or third",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Chest pain with cardiac features (exertional, radiating, associated with breathlessness or diaphoresis)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: ECG and cardiac assessment to exclude ischaemic chest pain, Chest radiograph to exclude pulmonary and rib pathology, MRI or CT of the chest wall to characterise cartilage swelling and exclude tumour or infection"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the patient after excluding cardiac, pulmonary and other serious causes, as the condition is benign and self-limiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Anchoring on a musculoskeletal cause and missing cardiac or pulmonary disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tietze syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "tietze_syndrome-matrix",
-   "title": "Tietze syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign inflammatory condition producing painful, non-suppurative swelling of the upper costal cartilages, most often the second",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign inflammatory condition producing painful, non-suppurative swelling of the upper costal cartilages, most often the second or third",
+      "The presence of visible and palpable localised swelling distinguishes Tietze syndrome from costochondritis, which causes tenderness without swelling",
+      "Usually affects a single site and tends to occur in younger adults, in contrast to the more diffuse, multi-level costochondritis",
+      "Pain is reproduced by palpation of the affected costal cartilage and may be aggravated by coughing, deep breathing or movement",
+      "It is fundamentally a clinical diagnosis, made after excluding cardiac, pulmonary and other serious causes of chest pain",
+      "Imaging is used chiefly to exclude other pathology, though MRI or CT may show cartilage enlargement and oedema",
+      "Management is reassurance, activity modification, NSAIDs, and local corticosteroid injection for resistant cases"
     ],
-    [
-     "Key Investigations",
-     "ECG and cardiac assessment to exclude ischaemic chest pain, Chest radiograph to exclude pulmonary and rib pathology, MRI or CT of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tietze syndrome is a localised, benign inflammation of the costochondral, costosternal or sternoclavicular cartilage of unknown precise cause. Repetitive minor trauma, coughing or physical strain is thought to trigger a self-limiting inflammatory and possibly reparative response within the costal cartilage, producing cartilage enlargement with surrounding soft-tissue oedema. Unlike infective or destructive processes there is no suppuration or bony erosion; the visible fusiform swelling reflects benign cartilage and perichondrial thickening rather than joint destruction, and the condition resolves once the inflammation settles although the swelling may persist for some time.",
+    "additionalDifferentials": [
+      "Costochondritis (tenderness without swelling)",
+      "Cardiac ischaemia or myocardial infarction",
+      "Rib fracture or costal cartilage injury",
+      "Anterior chest wall involvement of SAPHO syndrome or seronegative arthropathy",
+      "Chest wall tumour or metastasis",
+      "Sternoclavicular joint infection or arthritis"
     ],
-    [
-     "Primary Differentials",
-     "Costochondritis (tenderness without swelling), Cardiac ischaemia or myocardial infarction, Rib fracture or costal cartilage injury",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "ECG and cardiac assessment to exclude ischaemic chest pain",
+      "Chest radiograph to exclude pulmonary and rib pathology",
+      "MRI or CT of the chest wall to characterise cartilage swelling and exclude tumour or infection",
+      "Inflammatory markers (ESR, CRP) when an inflammatory or infective process is considered",
+      "Ultrasound of the affected costal cartilage to confirm localised swelling"
     ],
-    [
-     "Management Strategy",
-     "Reassure the patient after excluding cardiac, pulmonary and other serious causes, as the condition is benign and self-limiting",
-     "Core treatment modality"
+    "redFlags": [
+      "Chest pain with cardiac features (exertional, radiating, associated with breathlessness or diaphoresis)",
+      "Constitutional symptoms or a hard fixed mass suggesting malignancy",
+      "Fever and progressive swelling raising concern for infection",
+      "Pain unresponsive to conservative measures with atypical features"
     ],
-    [
-     "Clinical Pitfall",
-     "Anchoring on a musculoskeletal cause and missing cardiac or pulmonary disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Tietze syndrome is benign and usually self-limiting, with pain settling over weeks to months, although the palpable swelling can persist for a prolonged period; recurrence is possible but serious sequelae do not occur.",
+    "pitfalls": [
+      "Anchoring on a musculoskeletal cause and missing cardiac or pulmonary disease",
+      "Confusing it with costochondritis by overlooking the characteristic localised swelling",
+      "Ordering unnecessary invasive investigation for a benign self-limiting condition",
+      "Failing to consider SAPHO syndrome or malignancy when swelling is atypical or persistent"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Oxford Textbook of Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the patient after excluding cardiac, pulmonary and other serious causes, as the condition is benign and self-limiting",
+      "Relieve pain with simple analgesia and non-steroidal anti-inflammatory drugs, together with local heat and activity modification",
+      "Advise avoidance of aggravating movements, coughing strain and repetitive loading of the chest wall",
+      "Offer a local corticosteroid and anaesthetic injection into the affected cartilage for pain that does not settle",
+      "Explain that the palpable swelling may persist after the pain resolves and does not indicate serious disease",
+      "Re-evaluate if new or atypical features emerge that suggest an alternative diagnosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for tietze syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tietze-syndrome-real-image",
-   "title": "Tietze syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "tietze_syndrome-pathway",
+      "title": "Tietze syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign inflammatory condition producing painful, non-suppurative swelling of the upper costal cartilages, most often the second or third",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Chest pain with cardiac features (exertional, radiating, associated with breathlessness or diaphoresis)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: ECG and cardiac assessment to exclude ischaemic chest pain, Chest radiograph to exclude pulmonary and rib pathology, MRI or CT of the chest wall to characterise cartilage swelling and exclude tumour or infection"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the patient after excluding cardiac, pulmonary and other serious causes, as the condition is benign and self-limiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Anchoring on a musculoskeletal cause and missing cardiac or pulmonary disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tietze syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tietze_syndrome-matrix",
+      "title": "Tietze syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign inflammatory condition producing painful, non-suppurative swelling of the upper costal cartilages, most often the second",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "ECG and cardiac assessment to exclude ischaemic chest pain, Chest radiograph to exclude pulmonary and rib pathology, MRI or CT of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Costochondritis (tenderness without swelling), Cardiac ischaemia or myocardial infarction, Rib fracture or costal cartilage injury",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the patient after excluding cardiac, pulmonary and other serious causes, as the condition is benign and self-limiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Anchoring on a musculoskeletal cause and missing cardiac or pulmonary disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tietze syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tietze_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Tietze syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tietze syndrome: painful localised swelling of an upper costal cartilage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: cardiac-type chest pain, hard fixed mass, or fever with progressive swelling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac or infective assessment for alarm features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG; chest radiograph; ultrasound or MRI of the costal cartilage; ESR and CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is there localised, non-suppurative swelling with reproducible tenderness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider costochondritis, SAPHO, rib fracture or chest wall tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure after serious causes are excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, NSAIDs and local heat with activity modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid aggravating movements and repetitive chest wall loading",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Local corticosteroid and anaesthetic injection for persistent pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Explain that swelling can persist after pain resolves",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and self-limiting; pain settles over weeks to months, swelling may linger",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tietze_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ECG and cardiac assessment",
+          "cells": [
+            {
+              "text": "Ischaemic chest pain excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Pulmonary and rib pathology excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT of the chest wall",
+          "cells": [
+            {
+              "text": "Cartilage swelling; tumour or infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Inflammatory or infective process, when considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of the costal cartilage",
+          "cells": [
+            {
+              "text": "Localised swelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tietze_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Costochondritis",
+          "cells": [
+            {
+              "text": "Tenderness without visible swelling; Tietze has localised palpable swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac ischaemia or myocardial infarction",
+          "cells": [
+            {
+              "text": "Exertional, radiating chest pain with breathlessness or sweating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAPHO syndrome or seronegative arthropathy",
+          "cells": [
+            {
+              "text": "Atypical or persistent swelling; SAPHO should be considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tietze_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "After cardiac, pulmonary and other serious causes are excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and NSAIDs",
+          "cells": [
+            {
+              "text": "With local heat and activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aggravating movements",
+          "cells": [
+            {
+              "text": "Coughing strain and repetitive chest wall loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local corticosteroid and anaesthetic injection",
+          "cells": [
+            {
+              "text": "Pain that does not settle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Explanation of persistent swelling",
+          "cells": [
+            {
+              "text": "May persist after pain resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-evaluation",
+          "cells": [
+            {
+              "text": "New or atypical features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

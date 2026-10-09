@@ -1,179 +1,513 @@
 {
- "id": "tafro_syndrome",
- "name": "TAFRO syndrome",
- "aliases": [
-  "TAFRO",
-  "iMCD-TAFRO"
- ],
- "class": "non_infective",
- "system": "Multisystem / Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Haematology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "TAFRO is an acronym for Thrombocytopenia, Anasarca (oedema, ascites and effusions), Fever, Reticulin fibrosis of the marrow (with Renal dysfunction) and Organomegaly.",
-   "It is regarded as a distinct, aggressive clinical subtype within the spectrum of HHV-8-negative idiopathic multicentric Castleman disease (iMCD-TAFRO), although some cases do not fully meet Castleman criteria.",
-   "It is distinguished from other idiopathic multicentric Castleman disease by thrombocytopenia rather than thrombocytosis, severe anasarca, only mild lymphadenopathy and relatively preserved immunoglobulins instead of marked hypergammaglobulinaemia.",
-   "The clinical picture is driven by a cytokine storm, especially interleukin-6 and vascular endothelial growth factor, causing systemic inflammation and vascular hyperpermeability.",
-   "Lymph node histology resembles hyaline-vascular or mixed Castleman disease with atretic germinal centres, while the bone marrow shows megakaryocytic hyperplasia and reticulin fibrosis.",
-   "It is a diagnosis of exclusion — infection (HHV-8, HIV, EBV), malignancy (especially lymphoma), autoimmune disease and POEMS syndrome must be ruled out.",
-   "Presentation is often acute with rapidly progressive renal impairment and effusions, and the syndrome can be life-threatening.",
-   "Treatment mainstays include corticosteroids and anti-interleukin-6 therapy (for example tocilizumab or siltuximab), with rituximab, ciclosporin or intensive immunosuppression reserved for refractory or critically ill patients."
+  "id": "tafro_syndrome",
+  "name": "TAFRO syndrome",
+  "aliases": [
+    "TAFRO",
+    "iMCD-TAFRO"
   ],
-  "pathophysiology": "TAFRO syndrome is a systemic hyperinflammatory disorder thought to arise from dysregulated cytokine production, in which interleukin-6 and vascular endothelial growth factor play central roles. Excess interleukin-6 drives fever, an acute-phase response and reactive changes in lymphoid tissue and marrow, while vascular endothelial growth factor increases vascular permeability, producing the striking anasarca with ascites and pleural effusions that characterises the condition. Platelet consumption together with marrow megakaryocytic hyperplasia and reticulin fibrosis contributes to thrombocytopenia, and microvascular and immune-mediated injury underlie the frequent renal dysfunction. The initiating trigger is unknown, with autoimmune and antigenic or viral stimuli postulated, but by definition recognised causes such as HHV-8 infection are absent. The syndrome overlaps with idiopathic multicentric Castleman disease, sharing reactive lymph node histology with atretic germinal centres, yet it is set apart clinically by thrombocytopenia, severe fluid overload, comparatively small lymph nodes and the absence of marked hypergammaglobulinaemia.",
-  "additionalDifferentials": [
-   "Idiopathic multicentric Castleman disease, non-TAFRO/plasma cell type",
-   "HHV-8-associated multicentric Castleman disease",
-   "POEMS syndrome",
-   "Autoimmune disease (systemic lupus erythematosus, adult-onset Still's disease, ANCA-associated vasculitis)",
-   "Lymphoma and other malignancies",
-   "Haemophagocytic lymphohistiocytosis",
-   "IgG4-related disease"
-  ],
-  "additionalInvestigations": [
-   "Full blood count (thrombocytopenia, anaemia) with a blood film",
-   "Inflammatory markers (C-reactive protein) alongside interleukin-6 and vascular endothelial growth factor levels",
-   "Renal function testing and urinalysis",
-   "Cross-sectional imaging for effusions, ascites, organomegaly and lymphadenopathy",
-   "Excisional lymph node biopsy for histology",
-   "Bone marrow examination (megakaryocytic hyperplasia and reticulin fibrosis)",
-   "Exclusion work-up including HHV-8 and HIV testing, autoimmune serology, and serum immunoglobulins with free light chains to exclude POEMS"
-  ],
-  "redFlags": [
-   "Rapidly progressive renal failure requiring renal replacement therapy",
-   "Refractory anasarca with large effusions and respiratory compromise",
-   "Multi-organ dysfunction or critical illness",
-   "Severe thrombocytopenia with bleeding",
-   "Features suggesting overlapping haemophagocytic lymphohistiocytosis"
-  ],
-  "prognosis": "TAFRO syndrome is more acute and aggressive than classic idiopathic multicentric Castleman disease and can be fatal from multi-organ failure. Timely immunosuppression and anti-interleukin-6 therapy nonetheless induce remission in a substantial proportion of patients.",
-  "pitfalls": [
-   "Attributing isolated thrombocytopenia to immune thrombocytopenia and missing the wider systemic syndrome.",
-   "Delaying the lymph node or bone marrow biopsy needed to establish the diagnosis.",
-   "Failing to exclude HHV-8 and HIV, which would change classification and management.",
-   "Confusing it with POEMS syndrome or an autoimmune connective tissue disease.",
-   "Underestimating severity given the potential for rapid multi-organ deterioration."
-  ],
-  "references": [
-   "International consensus diagnostic and treatment guidelines for idiopathic multicentric Castleman disease",
-   "Castleman Disease Collaborative Network resources",
-   "Wintrobe's Clinical Hematology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "High-dose corticosteroids as first-line immunosuppression to dampen the cytokine storm",
-   "Anti-interleukin-6 therapy with tocilizumab or siltuximab targeting the central driver cytokine",
-   "Escalation to ciclosporin, rituximab or cytotoxic chemotherapy in corticosteroid-refractory or severe disease",
-   "Supportive care for anasarca, renal dysfunction including renal replacement therapy, and thrombocytopenia with platelet support as needed",
-   "Intensive organ support for multi-organ failure in critically ill patients",
-   "Rigorous exclusion of infection, lymphoma, autoimmune disease and POEMS syndrome, which is integral to the diagnosis",
-   "Monitoring of platelets, inflammatory markers, interleukin-6 and renal function to track response",
-   "Multidisciplinary haematology-led care with critical care support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tafro_syndrome-pathway",
-   "title": "TAFRO syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "TAFRO is an acronym for Thrombocytopenia, Anasarca (oedema, ascites and effusions), Fever, Reticulin fibrosis of the marrow (with Renal dysfunction) and Organomegaly.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive renal failure requiring renal replacement therapy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count (thrombocytopenia, anaemia) with a blood film, Inflammatory markers (C-reactive protein) alongside interleukin-6 and vascular endothelial growth factor levels, Renal function testing and urinalysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: High-dose corticosteroids as first-line immunosuppression to dampen the cytokine storm"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing isolated thrombocytopenia to immune thrombocytopenia and missing the wider systemic syndrome."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tafro syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "tafro_syndrome-matrix",
-   "title": "TAFRO syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "TAFRO is an acronym for Thrombocytopenia, Anasarca (oedema, ascites and effusions), Fever, Reticulin fibrosis of the marrow (with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem / Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Haematology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "TAFRO is an acronym for Thrombocytopenia, Anasarca (oedema, ascites and effusions), Fever, Reticulin fibrosis of the marrow (with Renal dysfunction) and Organomegaly.",
+      "It is regarded as a distinct, aggressive clinical subtype within the spectrum of HHV-8-negative idiopathic multicentric Castleman disease (iMCD-TAFRO), although some cases do not fully meet Castleman criteria.",
+      "It is distinguished from other idiopathic multicentric Castleman disease by thrombocytopenia rather than thrombocytosis, severe anasarca, only mild lymphadenopathy and relatively preserved immunoglobulins instead of marked hypergammaglobulinaemia.",
+      "The clinical picture is driven by a cytokine storm, especially interleukin-6 and vascular endothelial growth factor, causing systemic inflammation and vascular hyperpermeability.",
+      "Lymph node histology resembles hyaline-vascular or mixed Castleman disease with atretic germinal centres, while the bone marrow shows megakaryocytic hyperplasia and reticulin fibrosis.",
+      "It is a diagnosis of exclusion — infection (HHV-8, HIV, EBV), malignancy (especially lymphoma), autoimmune disease and POEMS syndrome must be ruled out.",
+      "Presentation is often acute with rapidly progressive renal impairment and effusions, and the syndrome can be life-threatening.",
+      "Treatment mainstays include corticosteroids and anti-interleukin-6 therapy (for example tocilizumab or siltuximab), with rituximab, ciclosporin or intensive immunosuppression reserved for refractory or critically ill patients."
     ],
-    [
-     "Key Investigations",
-     "Full blood count (thrombocytopenia, anaemia) with a blood film, Inflammatory markers (C-reactive protein) alongside interleukin-6",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "TAFRO syndrome is a systemic hyperinflammatory disorder thought to arise from dysregulated cytokine production, in which interleukin-6 and vascular endothelial growth factor play central roles. Excess interleukin-6 drives fever, an acute-phase response and reactive changes in lymphoid tissue and marrow, while vascular endothelial growth factor increases vascular permeability, producing the striking anasarca with ascites and pleural effusions that characterises the condition. Platelet consumption together with marrow megakaryocytic hyperplasia and reticulin fibrosis contributes to thrombocytopenia, and microvascular and immune-mediated injury underlie the frequent renal dysfunction. The initiating trigger is unknown, with autoimmune and antigenic or viral stimuli postulated, but by definition recognised causes such as HHV-8 infection are absent. The syndrome overlaps with idiopathic multicentric Castleman disease, sharing reactive lymph node histology with atretic germinal centres, yet it is set apart clinically by thrombocytopenia, severe fluid overload, comparatively small lymph nodes and the absence of marked hypergammaglobulinaemia.",
+    "additionalDifferentials": [
+      "Idiopathic multicentric Castleman disease, non-TAFRO/plasma cell type",
+      "HHV-8-associated multicentric Castleman disease",
+      "POEMS syndrome",
+      "Autoimmune disease (systemic lupus erythematosus, adult-onset Still's disease, ANCA-associated vasculitis)",
+      "Lymphoma and other malignancies",
+      "Haemophagocytic lymphohistiocytosis",
+      "IgG4-related disease"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic multicentric Castleman disease, non-TAFRO/plasma cell type, HHV-8-associated multicentric Castleman disease, POEMS",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count (thrombocytopenia, anaemia) with a blood film",
+      "Inflammatory markers (C-reactive protein) alongside interleukin-6 and vascular endothelial growth factor levels",
+      "Renal function testing and urinalysis",
+      "Cross-sectional imaging for effusions, ascites, organomegaly and lymphadenopathy",
+      "Excisional lymph node biopsy for histology",
+      "Bone marrow examination (megakaryocytic hyperplasia and reticulin fibrosis)",
+      "Exclusion work-up including HHV-8 and HIV testing, autoimmune serology, and serum immunoglobulins with free light chains to exclude POEMS"
     ],
-    [
-     "Management Strategy",
-     "High-dose corticosteroids as first-line immunosuppression to dampen the cytokine storm",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive renal failure requiring renal replacement therapy",
+      "Refractory anasarca with large effusions and respiratory compromise",
+      "Multi-organ dysfunction or critical illness",
+      "Severe thrombocytopenia with bleeding",
+      "Features suggesting overlapping haemophagocytic lymphohistiocytosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing isolated thrombocytopenia to immune thrombocytopenia and missing the wider systemic syndrome.",
-     "Prevent diagnostic or management error"
+    "prognosis": "TAFRO syndrome is more acute and aggressive than classic idiopathic multicentric Castleman disease and can be fatal from multi-organ failure. Timely immunosuppression and anti-interleukin-6 therapy nonetheless induce remission in a substantial proportion of patients.",
+    "pitfalls": [
+      "Attributing isolated thrombocytopenia to immune thrombocytopenia and missing the wider systemic syndrome.",
+      "Delaying the lymph node or bone marrow biopsy needed to establish the diagnosis.",
+      "Failing to exclude HHV-8 and HIV, which would change classification and management.",
+      "Confusing it with POEMS syndrome or an autoimmune connective tissue disease.",
+      "Underestimating severity given the potential for rapid multi-organ deterioration."
+    ],
+    "references": [
+      "International consensus diagnostic and treatment guidelines for idiopathic multicentric Castleman disease",
+      "Castleman Disease Collaborative Network resources",
+      "Wintrobe's Clinical Hematology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "High-dose corticosteroids as first-line immunosuppression to dampen the cytokine storm",
+      "Anti-interleukin-6 therapy with tocilizumab or siltuximab targeting the central driver cytokine",
+      "Escalation to ciclosporin, rituximab or cytotoxic chemotherapy in corticosteroid-refractory or severe disease",
+      "Supportive care for anasarca, renal dysfunction including renal replacement therapy, and thrombocytopenia with platelet support as needed",
+      "Intensive organ support for multi-organ failure in critically ill patients",
+      "Rigorous exclusion of infection, lymphoma, autoimmune disease and POEMS syndrome, which is integral to the diagnosis",
+      "Monitoring of platelets, inflammatory markers, interleukin-6 and renal function to track response",
+      "Multidisciplinary haematology-led care with critical care support"
     ]
-   ],
-   "caption": "Overview comparison matrix for tafro syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tafro-syndrome-real-image",
-   "title": "TAFRO syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "tafro_syndrome-pathway",
+      "title": "TAFRO syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "TAFRO is an acronym for Thrombocytopenia, Anasarca (oedema, ascites and effusions), Fever, Reticulin fibrosis of the marrow (with Renal dysfunction) and Organomegaly.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive renal failure requiring renal replacement therapy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count (thrombocytopenia, anaemia) with a blood film, Inflammatory markers (C-reactive protein) alongside interleukin-6 and vascular endothelial growth factor levels, Renal function testing and urinalysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: High-dose corticosteroids as first-line immunosuppression to dampen the cytokine storm"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing isolated thrombocytopenia to immune thrombocytopenia and missing the wider systemic syndrome."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tafro syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tafro_syndrome-matrix",
+      "title": "TAFRO syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "TAFRO is an acronym for Thrombocytopenia, Anasarca (oedema, ascites and effusions), Fever, Reticulin fibrosis of the marrow (with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count (thrombocytopenia, anaemia) with a blood film, Inflammatory markers (C-reactive protein) alongside interleukin-6",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic multicentric Castleman disease, non-TAFRO/plasma cell type, HHV-8-associated multicentric Castleman disease, POEMS",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "High-dose corticosteroids as first-line immunosuppression to dampen the cytokine storm",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing isolated thrombocytopenia to immune thrombocytopenia and missing the wider systemic syndrome.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tafro syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tafro_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of TAFRO syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TAFRO syndrome: thrombocytopenia, anasarca, fever and renal impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid renal failure, refractory anasarca, or multi-organ dysfunction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent critical care with anti-IL-6 therapy for multi-organ failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and blood film; CRP, IL-6 and VEGF; renal function; cross-sectional imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do biopsies fit TAFRO, with infection and POEMS excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HHV-8 Castleman disease, POEMS, autoimmune disease or lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose corticosteroids as first-line immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anti-IL-6 therapy with tocilizumab or siltuximab",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ciclosporin, rituximab or chemotherapy if corticosteroid-refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care for anasarca, renal dysfunction and thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Rigorous exclusion of infection, lymphoma, autoimmune disease and POEMS",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute and aggressive, can be fatal; timely treatment induces remission in many",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tafro_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Thrombocytopenia and anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP with interleukin-6 and VEGF levels",
+          "cells": [
+            {
+              "text": "Systemic inflammation and cytokine drive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Renal dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Effusions, ascites, organomegaly and lymphadenopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional lymph node biopsy",
+          "cells": [
+            {
+              "text": "Histology resembling hyaline-vascular or mixed Castleman disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Megakaryocytic hyperplasia and reticulin fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HHV-8, HIV, autoimmune serology, immunoglobulins and free light chains",
+          "cells": [
+            {
+              "text": "Infection, autoimmunity and POEMS excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tafro_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic multicentric Castleman disease (non-TAFRO)",
+          "cells": [
+            {
+              "text": "Thrombocytopenia rather than thrombocytosis, severe anasarca and only mild lymphadenopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "POEMS syndrome",
+          "cells": [
+            {
+              "text": "Excluded with free light chains and immunoglobulins; confused with TAFRO otherwise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HHV-8-associated multicentric Castleman disease",
+          "cells": [
+            {
+              "text": "HHV-8 testing separates it; a positive result changes classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune disease (SLE, adult-onset Still disease, ANCA vasculitis)",
+          "cells": [
+            {
+              "text": "Excluded by autoimmune serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tafro_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "First-line immunosuppression to dampen the cytokine storm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-IL-6 therapy",
+          "cells": [
+            {
+              "text": "Tocilizumab or siltuximab, targeting the central driver cytokine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for refractory or severe disease",
+          "cells": [
+            {
+              "text": "Ciclosporin, rituximab or cytotoxic chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Anasarca, renal dysfunction including renal replacement therapy, and platelet support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive organ support",
+          "cells": [
+            {
+              "text": "Multi-organ failure in critically ill patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion work-up",
+          "cells": [
+            {
+              "text": "Infection, lymphoma, autoimmune disease and POEMS; integral to the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Platelets, inflammatory markers, interleukin-6 and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology-led care",
+          "cells": [
+            {
+              "text": "Multidisciplinary, with critical care support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

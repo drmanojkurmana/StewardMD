@@ -1,187 +1,485 @@
 {
- "id": "interstitial_cystitis",
- "name": "Interstitial Cystitis / Bladder Pain Syndrome",
- "aliases": [
-  "Bladder pain syndrome",
-  "Hunner lesion cystitis",
-  "Hunner lesion disease",
-  "IC/BPS",
-  "Interstitial cystitis / bladder pain syndrome",
-  "Painful bladder syndrome",
-  "bladder pain syndrome",
-  "interstitial cystitis",
-  "interstitial cystitis bladder pain",
-  "interstitial cystitis bladder pain syndrome",
-  "painful bladder syndrome"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Interstitial cystitis / bladder pain syndrome is a chronic condition of bladder or pelvic pain perceived to relate to the bladder, accompanied by urinary urgency and frequency, in the absence of infection or other identifiable cause",
-   "Pain characteristically worsens as the bladder fills and is relieved by voiding, a pattern that helps distinguish it from overactive bladder",
-   "It is far more common in women and frequently coexists with other chronic pain and functional conditions such as irritable bowel syndrome, fibromyalgia, and chronic pelvic pain",
-   "Diagnosis is essentially clinical and one of exclusion, requiring that infection, malignancy, stones, and other bladder pathology be ruled out",
-   "Cystoscopy may be normal or may reveal Hunner lesions, whose presence defines a distinct phenotype that responds to lesion-directed treatment",
-   "Management is stepwise, beginning with education, dietary trigger avoidance, stress and pain management, and pelvic floor physical therapy",
-   "Oral and intravesical therapies form later steps, and Hunner lesions are specifically treated by fulguration or resection",
-   "Refractory disease may be considered for neuromodulation or, rarely, major reconstructive surgery, reserved for carefully selected severe cases",
-   "New haematuria, especially in older patients or smokers, must trigger evaluation for bladder cancer rather than being ascribed to the syndrome"
+  "id": "interstitial_cystitis",
+  "name": "Interstitial Cystitis / Bladder Pain Syndrome",
+  "aliases": [
+    "Bladder pain syndrome",
+    "Hunner lesion cystitis",
+    "Hunner lesion disease",
+    "IC/BPS",
+    "Interstitial cystitis / bladder pain syndrome",
+    "Painful bladder syndrome",
+    "bladder pain syndrome",
+    "interstitial cystitis",
+    "interstitial cystitis bladder pain",
+    "interstitial cystitis bladder pain syndrome",
+    "painful bladder syndrome"
   ],
-  "pathophysiology": "The mechanism is incompletely understood and probably multifactorial. A leading hypothesis is a defective bladder urothelial glycosaminoglycan (GAG) layer, which normally protects the underlying tissue; increased permeability allows urinary solutes such as potassium to penetrate the urothelium and irritate sensory nerves and detrusor muscle. Mast cell activation, neurogenic inflammation, and up-regulation of sensory pathways contribute to chronic pain and central sensitisation. In the Hunner lesion subtype there is a demonstrable inflammatory bladder wall change, whereas non-lesion disease is dominated by neuropathic and functional pain mechanisms, explaining the frequent overlap with other chronic pain disorders.",
-  "additionalDifferentials": [
-   "Urinary tract infection",
-   "Overactive bladder",
-   "Bladder carcinoma, including carcinoma in situ",
-   "Bladder or ureteric calculi",
-   "Endometriosis and other gynaecological pelvic pain",
-   "Chronic prostatitis / chronic pelvic pain syndrome in men",
-   "Radiation or chemical cystitis"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis and urine culture to exclude infection",
-   "Urine cytology and cystoscopy where malignancy is a concern, particularly with haematuria",
-   "Bladder diary documenting frequency, voided volumes, and symptom pattern",
-   "Validated symptom and pain questionnaires to assess severity and monitor response",
-   "Cystoscopy, with or without hydrodistension, to identify Hunner lesions",
-   "Imaging to exclude stones or other structural pathology when indicated"
-  ],
-  "redFlags": [
-   "Visible or microscopic haematuria requiring exclusion of bladder cancer",
-   "New or changing symptoms in an older patient or smoker",
-   "Persistent sterile pyuria warranting exclusion of tuberculosis or malignancy",
-   "Abnormal urine cytology",
-   "Rapidly worsening or atypical pain suggesting an alternative diagnosis"
-  ],
-  "prognosis": "The condition is chronic and typically follows a relapsing and remitting course; it is rarely progressive but can significantly impair quality of life. Many patients gain meaningful symptom control with a multimodal, stepwise approach, and the Hunner lesion subtype often responds well to lesion-directed therapy. A minority with severe refractory disease may ultimately require advanced interventions.",
-  "pitfalls": [
-   "Repeatedly treating for infection despite negative cultures",
-   "Missing bladder cancer by attributing haematuria to the syndrome",
-   "Failing to identify and treat Hunner lesions, which need specific therapy",
-   "Escalating to invasive surgery before conservative and behavioural measures are exhausted",
-   "Overlooking coexisting pelvic floor dysfunction and other chronic pain conditions"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin with conservative care: patient education, dietary trigger avoidance, fluid and stress management and bladder training",
-   "Refer for pelvic floor physical therapy directed at associated myofascial dysfunction, avoiding pelvic floor strengthening",
-   "Offer oral therapy such as amitriptyline, an antihistamine (hydroxyzine) or pentosan polysulfate alongside multimodal pain management",
-   "Escalate to intravesical instillations such as dimethyl sulfoxide, heparin or local anaesthetic for persistent symptoms",
-   "Perform cystoscopy with hydrodistension and treat Hunner lesions with fulguration, resection or intralesional corticosteroid",
-   "Reserve sacral neuromodulation and, in refractory disease, reconstructive surgery such as augmentation cystoplasty or urinary diversion",
-   "Manage flares and coexisting irritable bowel syndrome, fibromyalgia and chronic pelvic pain with multidisciplinary input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "interstitial_cystitis-pathway",
-   "title": "Interstitial Cystitis / Bladder Pain Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Interstitial cystitis / bladder pain syndrome is a chronic condition of bladder or pelvic pain perceived to relate to the bladder, accompanied by urinary urgency and frequency, in the absence of infection or other identifiable cause",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Visible or microscopic haematuria requiring exclusion of bladder cancer",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis and urine culture to exclude infection, Urine cytology and cystoscopy where malignancy is a concern, particularly with haematuria, Bladder diary documenting frequency, voided volumes, and symptom pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin with conservative care: patient education, dietary trigger avoidance, fluid and stress management and bladder training"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeatedly treating for infection despite negative cultures"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of interstitial cystitis / bladder pain syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "interstitial_cystitis-matrix",
-   "title": "Interstitial Cystitis / Bladder Pain Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Interstitial cystitis / bladder pain syndrome is a chronic condition of bladder or pelvic pain perceived to relate to the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Interstitial cystitis / bladder pain syndrome is a chronic condition of bladder or pelvic pain perceived to relate to the bladder, accompanied by urinary urgency and frequency, in the absence of infection or other identifiable cause",
+      "Pain characteristically worsens as the bladder fills and is relieved by voiding, a pattern that helps distinguish it from overactive bladder",
+      "It is far more common in women and frequently coexists with other chronic pain and functional conditions such as irritable bowel syndrome, fibromyalgia, and chronic pelvic pain",
+      "Diagnosis is essentially clinical and one of exclusion, requiring that infection, malignancy, stones, and other bladder pathology be ruled out",
+      "Cystoscopy may be normal or may reveal Hunner lesions, whose presence defines a distinct phenotype that responds to lesion-directed treatment",
+      "Management is stepwise, beginning with education, dietary trigger avoidance, stress and pain management, and pelvic floor physical therapy",
+      "Oral and intravesical therapies form later steps, and Hunner lesions are specifically treated by fulguration or resection",
+      "Refractory disease may be considered for neuromodulation or, rarely, major reconstructive surgery, reserved for carefully selected severe cases",
+      "New haematuria, especially in older patients or smokers, must trigger evaluation for bladder cancer rather than being ascribed to the syndrome"
     ],
-    [
-     "Key Investigations",
-     "Urinalysis and urine culture to exclude infection, Urine cytology and cystoscopy where malignancy is a concern, particularly with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The mechanism is incompletely understood and probably multifactorial. A leading hypothesis is a defective bladder urothelial glycosaminoglycan (GAG) layer, which normally protects the underlying tissue; increased permeability allows urinary solutes such as potassium to penetrate the urothelium and irritate sensory nerves and detrusor muscle. Mast cell activation, neurogenic inflammation, and up-regulation of sensory pathways contribute to chronic pain and central sensitisation. In the Hunner lesion subtype there is a demonstrable inflammatory bladder wall change, whereas non-lesion disease is dominated by neuropathic and functional pain mechanisms, explaining the frequent overlap with other chronic pain disorders.",
+    "additionalDifferentials": [
+      "Urinary tract infection",
+      "Overactive bladder",
+      "Bladder carcinoma, including carcinoma in situ",
+      "Bladder or ureteric calculi",
+      "Endometriosis and other gynaecological pelvic pain",
+      "Chronic prostatitis / chronic pelvic pain syndrome in men",
+      "Radiation or chemical cystitis"
     ],
-    [
-     "Primary Differentials",
-     "Urinary tract infection, Overactive bladder, Bladder carcinoma, including carcinoma in situ",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis and urine culture to exclude infection",
+      "Urine cytology and cystoscopy where malignancy is a concern, particularly with haematuria",
+      "Bladder diary documenting frequency, voided volumes, and symptom pattern",
+      "Validated symptom and pain questionnaires to assess severity and monitor response",
+      "Cystoscopy, with or without hydrodistension, to identify Hunner lesions",
+      "Imaging to exclude stones or other structural pathology when indicated"
     ],
-    [
-     "Management Strategy",
-     "Begin with conservative care: patient education, dietary trigger avoidance, fluid and stress management and bladder training",
-     "Core treatment modality"
+    "redFlags": [
+      "Visible or microscopic haematuria requiring exclusion of bladder cancer",
+      "New or changing symptoms in an older patient or smoker",
+      "Persistent sterile pyuria warranting exclusion of tuberculosis or malignancy",
+      "Abnormal urine cytology",
+      "Rapidly worsening or atypical pain suggesting an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeatedly treating for infection despite negative cultures",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is chronic and typically follows a relapsing and remitting course; it is rarely progressive but can significantly impair quality of life. Many patients gain meaningful symptom control with a multimodal, stepwise approach, and the Hunner lesion subtype often responds well to lesion-directed therapy. A minority with severe refractory disease may ultimately require advanced interventions.",
+    "pitfalls": [
+      "Repeatedly treating for infection despite negative cultures",
+      "Missing bladder cancer by attributing haematuria to the syndrome",
+      "Failing to identify and treat Hunner lesions, which need specific therapy",
+      "Escalating to invasive surgery before conservative and behavioural measures are exhausted",
+      "Overlooking coexisting pelvic floor dysfunction and other chronic pain conditions"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin with conservative care: patient education, dietary trigger avoidance, fluid and stress management and bladder training",
+      "Refer for pelvic floor physical therapy directed at associated myofascial dysfunction, avoiding pelvic floor strengthening",
+      "Offer oral therapy such as amitriptyline, an antihistamine (hydroxyzine) or pentosan polysulfate alongside multimodal pain management",
+      "Escalate to intravesical instillations such as dimethyl sulfoxide, heparin or local anaesthetic for persistent symptoms",
+      "Perform cystoscopy with hydrodistension and treat Hunner lesions with fulguration, resection or intralesional corticosteroid",
+      "Reserve sacral neuromodulation and, in refractory disease, reconstructive surgery such as augmentation cystoplasty or urinary diversion",
+      "Manage flares and coexisting irritable bowel syndrome, fibromyalgia and chronic pelvic pain with multidisciplinary input"
     ]
-   ],
-   "caption": "Overview comparison matrix for interstitial cystitis / bladder pain syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "interstitial-cystitis-real-image",
-   "title": "Interstitial Cystitis / Bladder Pain Syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "interstitial_cystitis-pathway",
+      "title": "Interstitial Cystitis / Bladder Pain Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Interstitial cystitis / bladder pain syndrome is a chronic condition of bladder or pelvic pain perceived to relate to the bladder, accompanied by urinary urgency and frequency, in the absence of infection or other identifiable cause",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Visible or microscopic haematuria requiring exclusion of bladder cancer",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis and urine culture to exclude infection, Urine cytology and cystoscopy where malignancy is a concern, particularly with haematuria, Bladder diary documenting frequency, voided volumes, and symptom pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin with conservative care: patient education, dietary trigger avoidance, fluid and stress management and bladder training"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeatedly treating for infection despite negative cultures"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of interstitial cystitis / bladder pain syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "interstitial_cystitis-matrix",
+      "title": "Interstitial Cystitis / Bladder Pain Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Interstitial cystitis / bladder pain syndrome is a chronic condition of bladder or pelvic pain perceived to relate to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis and urine culture to exclude infection, Urine cytology and cystoscopy where malignancy is a concern, particularly with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Urinary tract infection, Overactive bladder, Bladder carcinoma, including carcinoma in situ",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin with conservative care: patient education, dietary trigger avoidance, fluid and stress management and bladder training",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeatedly treating for infection despite negative cultures",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for interstitial cystitis / bladder pain syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "interstitial_cystitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and urine culture",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine cytology and cystoscopy",
+          "cells": [
+            {
+              "text": "Malignancy when haematuria is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder diary",
+          "cells": [
+            {
+              "text": "Frequency, voided volumes and symptom pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Validated symptom and pain questionnaires",
+          "cells": [
+            {
+              "text": "Severity and response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy with or without hydrodistension",
+          "cells": [
+            {
+              "text": "Hunner lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Stones or other structural pathology when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_cystitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary tract infection",
+          "cells": [
+            {
+              "text": "Negative cultures; repeated antibiotics are not the answer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder carcinoma",
+          "cells": [
+            {
+              "text": "Haematuria or abnormal urine cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overactive bladder",
+          "cells": [
+            {
+              "text": "Pain worsens as the bladder fills and is relieved by voiding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_cystitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Education, dietary trigger avoidance, fluid and stress management, bladder training"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic floor physiotherapy",
+          "cells": [
+            {
+              "text": "Treats myofascial dysfunction; avoid pelvic floor strengthening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral therapy",
+          "cells": [
+            {
+              "text": "Amitriptyline, hydroxyzine or pentosan polysulfate alongside pain management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravesical therapy",
+          "cells": [
+            {
+              "text": "Dimethyl sulfoxide, heparin or local anaesthetic for persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hunner lesions",
+          "cells": [
+            {
+              "text": "Fulguration, resection or intralesional corticosteroid after hydrodistension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced options",
+          "cells": [
+            {
+              "text": "Sacral neuromodulation; augmentation cystoplasty or urinary diversion in refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "interstitial_cystitis-dx-mgmt",
+      "title": "Diagnosis and management of Interstitial Cystitis / Bladder Pain Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bladder or pelvic pain that worsens as the bladder fills, with urgency and frequency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haematuria, abnormal cytology, sterile pyuria or atypical pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cystoscopy and cytology to exclude bladder cancer or tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis and culture, bladder diary, questionnaires, cystoscopy with hydrodistension",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection and malignancy excluded, with Hunner lesion status recorded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the identified cause; repeat cystoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Education, trigger avoidance, fluid and bladder training",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pelvic floor physiotherapy, avoiding strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral amitriptyline, hydroxyzine or pentosan polysulfate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravesical dimethyl sulfoxide, heparin or local anaesthetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat Hunner lesions by fulguration, resection or steroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic, relapsing condition; escalation after conservative care is exhausted",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

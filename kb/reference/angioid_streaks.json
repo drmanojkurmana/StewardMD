@@ -1,174 +1,443 @@
 {
- "id": "angioid_streaks",
- "name": "Angioid streaks",
- "aliases": [
-  "angioid streaks",
-  "Knapp streaks",
-  "breaks in Bruch membrane"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Irregular, reddish-brown to grey linear streaks radiating from the peripapillary area beneath the retinal vessels, representing crack-like breaks in a brittle, calcified Bruch membrane",
-   "Frequently associated with systemic disease, classically pseudoxanthoma elasticum, and also with Paget disease of bone, sickle cell and other haemoglobinopathies, and Ehlers-Danlos syndrome, though some cases are idiopathic",
-   "A characteristic peau d'orange mottling of the posterior pole may accompany the streaks, particularly in pseudoxanthoma elasticum",
-   "Often asymptomatic until complicated by choroidal neovascularisation, which is the main cause of central visual loss",
-   "The eyes are vulnerable to choroidal rupture and subretinal haemorrhage after even minor blunt trauma, so protective eyewear and avoidance of contact sports are advised",
-   "Fluorescein and indocyanine green angiography and optical coherence tomography help delineate the streaks and detect choroidal neovascular membranes",
-   "Fundus autofluorescence can highlight the streaks and associated retinal pigment epithelial changes",
-   "Management centres on treating secondary choroidal neovascularisation with anti-VEGF therapy and on investigating and managing the underlying systemic association"
+  "id": "angioid_streaks",
+  "name": "Angioid streaks",
+  "aliases": [
+    "angioid streaks",
+    "Knapp streaks",
+    "breaks in Bruch membrane"
   ],
-  "pathophysiology": "Angioid streaks are breaks in Bruch membrane, the elastic layer between the retinal pigment epithelium and choriocapillaris, which becomes abnormally thickened, calcified and brittle. In pseudoxanthoma elasticum and related disorders the underlying defect is degeneration and mineralisation of elastic tissue, which weakens Bruch membrane so that it cracks, producing the visible streaks. These breaks disrupt the barrier between the choroid and retina and predispose to ingrowth of choroidal neovascular membranes, which leak and bleed to cause macular scarring and central visual loss. The same brittleness makes the membrane liable to rupture with subretinal haemorrhage after minor ocular trauma.",
-  "additionalDifferentials": [
-   "Lacquer cracks of pathological myopia",
-   "Choroidal rupture from trauma",
-   "Choroidal neovascularisation from age-related macular degeneration",
-   "Presumed ocular histoplasmosis syndrome",
-   "Peripapillary atrophy and other peripapillary changes",
-   "Retinal vascular abnormalities mimicking streaks"
-  ],
-  "additionalInvestigations": [
-   "Fluorescein angiography to delineate streaks and detect choroidal neovascularisation",
-   "Indocyanine green angiography for choroidal detail and neovascular membranes",
-   "Optical coherence tomography to identify subretinal fluid, haemorrhage and neovascular membranes",
-   "Fundus autofluorescence to highlight the streaks and pigment epithelial changes",
-   "Systemic evaluation for pseudoxanthoma elasticum, including skin and cardiovascular assessment",
-   "Investigations for associated conditions such as Paget disease of bone and haemoglobinopathies where indicated"
-  ],
-  "redFlags": [
-   "New distortion, central scotoma or reduced acuity suggesting choroidal neovascularisation",
-   "Subretinal haemorrhage, particularly following ocular trauma",
-   "Bilateral macular involvement threatening both eyes",
-   "Systemic features indicating serious underlying disease such as Paget disease or a haemoglobinopathy"
-  ],
-  "prognosis": "The streaks themselves are usually asymptomatic, but the long-term visual prognosis is dictated by choroidal neovascularisation, which commonly affects both eyes over time and can cause substantial central visual loss despite treatment; the risk of trauma-related choroidal rupture persists lifelong.",
-  "pitfalls": [
-   "Diagnosing angioid streaks without investigating for an underlying systemic association",
-   "Missing early choroidal neovascularisation because the streaks were assumed to be benign",
-   "Failing to counsel patients about the risk of choroidal rupture from minor trauma and the need for eye protection",
-   "Confusing angioid streaks with myopic lacquer cracks or traumatic choroidal rupture",
-   "Under-monitoring the fellow eye, which is at high risk of neovascular complications"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intravitreal anti-VEGF therapy for choroidal neovascularisation, the main treatable threat to central vision",
-   "Protective polycarbonate eyewear and avoidance of contact sports to reduce the risk of choroidal rupture from minor trauma",
-   "Regular monitoring with optical coherence tomography and home Amsler grid testing for early detection of neovascular membranes",
-   "Prompt ophthalmic review of any new distortion or central visual change to enable early treatment",
-   "Evaluate and manage the underlying systemic disorder such as pseudoxanthoma elasticum or Paget disease of bone, including cardiovascular assessment",
-   "Low-vision rehabilitation and support for patients with established macular scarring"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "angioid_streaks-pathway",
-   "title": "Angioid streaks: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Irregular, reddish-brown to grey linear streaks radiating from the peripapillary area beneath the retinal vessels, representing crack-like breaks in a brittle, calcified Bruch membrane",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New distortion, central scotoma or reduced acuity suggesting choroidal neovascularisation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fluorescein angiography to delineate streaks and detect choroidal neovascularisation, Indocyanine green angiography for choroidal detail and neovascular membranes, Optical coherence tomography to identify subretinal fluid,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intravitreal anti-VEGF therapy for choroidal neovascularisation, the main treatable threat to central vision"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing angioid streaks without investigating for an underlying systemic association"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of angioid streaks."
-  }
- ],
- "tables": [
-  {
-   "id": "angioid_streaks-matrix",
-   "title": "Angioid streaks: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Irregular, reddish-brown to grey linear streaks radiating from the peripapillary area beneath the retinal vessels, representing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Irregular, reddish-brown to grey linear streaks radiating from the peripapillary area beneath the retinal vessels, representing crack-like breaks in a brittle, calcified Bruch membrane",
+      "Frequently associated with systemic disease, classically pseudoxanthoma elasticum, and also with Paget disease of bone, sickle cell and other haemoglobinopathies, and Ehlers-Danlos syndrome, though some cases are idiopathic",
+      "A characteristic peau d'orange mottling of the posterior pole may accompany the streaks, particularly in pseudoxanthoma elasticum",
+      "Often asymptomatic until complicated by choroidal neovascularisation, which is the main cause of central visual loss",
+      "The eyes are vulnerable to choroidal rupture and subretinal haemorrhage after even minor blunt trauma, so protective eyewear and avoidance of contact sports are advised",
+      "Fluorescein and indocyanine green angiography and optical coherence tomography help delineate the streaks and detect choroidal neovascular membranes",
+      "Fundus autofluorescence can highlight the streaks and associated retinal pigment epithelial changes",
+      "Management centres on treating secondary choroidal neovascularisation with anti-VEGF therapy and on investigating and managing the underlying systemic association"
     ],
-    [
-     "Key Investigations",
-     "Fluorescein angiography to delineate streaks and detect choroidal neovascularisation, Indocyanine green angiography for choroidal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Angioid streaks are breaks in Bruch membrane, the elastic layer between the retinal pigment epithelium and choriocapillaris, which becomes abnormally thickened, calcified and brittle. In pseudoxanthoma elasticum and related disorders the underlying defect is degeneration and mineralisation of elastic tissue, which weakens Bruch membrane so that it cracks, producing the visible streaks. These breaks disrupt the barrier between the choroid and retina and predispose to ingrowth of choroidal neovascular membranes, which leak and bleed to cause macular scarring and central visual loss. The same brittleness makes the membrane liable to rupture with subretinal haemorrhage after minor ocular trauma.",
+    "additionalDifferentials": [
+      "Lacquer cracks of pathological myopia",
+      "Choroidal rupture from trauma",
+      "Choroidal neovascularisation from age-related macular degeneration",
+      "Presumed ocular histoplasmosis syndrome",
+      "Peripapillary atrophy and other peripapillary changes",
+      "Retinal vascular abnormalities mimicking streaks"
     ],
-    [
-     "Primary Differentials",
-     "Lacquer cracks of pathological myopia, Choroidal rupture from trauma, Choroidal neovascularisation from age-related macular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fluorescein angiography to delineate streaks and detect choroidal neovascularisation",
+      "Indocyanine green angiography for choroidal detail and neovascular membranes",
+      "Optical coherence tomography to identify subretinal fluid, haemorrhage and neovascular membranes",
+      "Fundus autofluorescence to highlight the streaks and pigment epithelial changes",
+      "Systemic evaluation for pseudoxanthoma elasticum, including skin and cardiovascular assessment",
+      "Investigations for associated conditions such as Paget disease of bone and haemoglobinopathies where indicated"
     ],
-    [
-     "Management Strategy",
-     "Intravitreal anti-VEGF therapy for choroidal neovascularisation, the main treatable threat to central vision",
-     "Core treatment modality"
+    "redFlags": [
+      "New distortion, central scotoma or reduced acuity suggesting choroidal neovascularisation",
+      "Subretinal haemorrhage, particularly following ocular trauma",
+      "Bilateral macular involvement threatening both eyes",
+      "Systemic features indicating serious underlying disease such as Paget disease or a haemoglobinopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing angioid streaks without investigating for an underlying systemic association",
-     "Prevent diagnostic or management error"
+    "prognosis": "The streaks themselves are usually asymptomatic, but the long-term visual prognosis is dictated by choroidal neovascularisation, which commonly affects both eyes over time and can cause substantial central visual loss despite treatment; the risk of trauma-related choroidal rupture persists lifelong.",
+    "pitfalls": [
+      "Diagnosing angioid streaks without investigating for an underlying systemic association",
+      "Missing early choroidal neovascularisation because the streaks were assumed to be benign",
+      "Failing to counsel patients about the risk of choroidal rupture from minor trauma and the need for eye protection",
+      "Confusing angioid streaks with myopic lacquer cracks or traumatic choroidal rupture",
+      "Under-monitoring the fellow eye, which is at high risk of neovascular complications"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intravitreal anti-VEGF therapy for choroidal neovascularisation, the main treatable threat to central vision",
+      "Protective polycarbonate eyewear and avoidance of contact sports to reduce the risk of choroidal rupture from minor trauma",
+      "Regular monitoring with optical coherence tomography and home Amsler grid testing for early detection of neovascular membranes",
+      "Prompt ophthalmic review of any new distortion or central visual change to enable early treatment",
+      "Evaluate and manage the underlying systemic disorder such as pseudoxanthoma elasticum or Paget disease of bone, including cardiovascular assessment",
+      "Low-vision rehabilitation and support for patients with established macular scarring"
     ]
-   ],
-   "caption": "Overview comparison matrix for angioid streaks."
-  }
- ],
- "diagrams": [
-  {
-   "id": "angioid-streaks-real-image",
-   "title": "Angioid streaks: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "angioid_streaks-pathway",
+      "title": "Angioid streaks: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Irregular, reddish-brown to grey linear streaks radiating from the peripapillary area beneath the retinal vessels, representing crack-like breaks in a brittle, calcified Bruch membrane",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New distortion, central scotoma or reduced acuity suggesting choroidal neovascularisation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fluorescein angiography to delineate streaks and detect choroidal neovascularisation, Indocyanine green angiography for choroidal detail and neovascular membranes, Optical coherence tomography to identify subretinal fluid,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intravitreal anti-VEGF therapy for choroidal neovascularisation, the main treatable threat to central vision"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing angioid streaks without investigating for an underlying systemic association"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of angioid streaks."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "angioid_streaks-matrix",
+      "title": "Angioid streaks: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Irregular, reddish-brown to grey linear streaks radiating from the peripapillary area beneath the retinal vessels, representing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fluorescein angiography to delineate streaks and detect choroidal neovascularisation, Indocyanine green angiography for choroidal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lacquer cracks of pathological myopia, Choroidal rupture from trauma, Choroidal neovascularisation from age-related macular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intravitreal anti-VEGF therapy for choroidal neovascularisation, the main treatable threat to central vision",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing angioid streaks without investigating for an underlying systemic association",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for angioid streaks."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angioid_streaks-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Delineates streaks and detects choroidal neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indocyanine green angiography",
+          "cells": [
+            {
+              "text": "Choroidal detail and neovascular membranes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Subretinal fluid, haemorrhage and neovascular membranes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Highlights the streaks and pigment epithelial changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation for pseudoxanthoma elasticum",
+          "cells": [
+            {
+              "text": "Skin and cardiovascular assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigations for Paget disease of bone and haemoglobinopathies",
+          "cells": [
+            {
+              "text": "Associated conditions, where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "angioid_streaks-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravitreal anti-VEGF therapy",
+          "cells": [
+            {
+              "text": "For choroidal neovascularisation"
+            },
+            {
+              "text": "Main treatable threat to central vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective polycarbonate eyewear",
+          "cells": [
+            {
+              "text": "Avoid contact sports"
+            },
+            {
+              "text": "Reduces risk of choroidal rupture from minor trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT monitoring and home Amsler grid testing",
+          "cells": [
+            {
+              "text": "Early detection of neovascular membranes"
+            },
+            {
+              "text": "Regular monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt ophthalmic review",
+          "cells": [
+            {
+              "text": "Any new distortion or central visual change"
+            },
+            {
+              "text": "Enables early treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation",
+          "cells": [
+            {
+              "text": "Pseudoxanthoma elasticum or Paget disease of bone"
+            },
+            {
+              "text": "Includes cardiovascular assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Support for established macular scarring"
+            },
+            {
+              "text": "Patients with established scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angioid_streaks-dx-mgmt",
+      "title": "Diagnosis and management of Angioid streaks",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Reddish-brown linear streaks radiating from the peripapillary area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? New distortion, central scotoma or reduced acuity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for choroidal neovascularisation before central loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluorescein and ICG angiography, OCT, autofluorescence, systemic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic association such as pseudoxanthoma elasticum confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intravitreal anti-VEGF therapy for choroidal neovascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Protective eyewear; avoid contact sports to limit choroidal rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "OCT and Amsler grid monitoring for early neovascular membranes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Evaluate and manage systemic disease such as pseudoxanthoma elasticum",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-vision support where macular scarring has become established",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

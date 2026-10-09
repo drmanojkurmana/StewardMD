@@ -1,177 +1,634 @@
 {
- "id": "charcot_marie_tooth_type_4",
- "name": "CMT type 4 (autosomal recessive demyelinating)",
- "aliases": [
-  "Charcot-Marie-Tooth disease type 4",
-  "CMT4",
-  "autosomal recessive demyelinating CMT",
-  "GDAP1",
-  "SH3TC2"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley and Daroff Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Umbrella term for autosomal recessive demyelinating CMT, with subtypes defined by causative genes such as GDAP1, MTMR2, SBF2, SH3TC2, NDRG1, EGR2 and PRX",
-   "Tends to present in early childhood with severe, rapidly progressive weakness, delayed motor milestones and often loss of ambulation earlier than dominant CMT1",
-   "Recessive inheritance means parents are usually unaffected and consanguinity increases the risk, so a negative family history should not exclude the diagnosis",
-   "Nerve conduction studies show markedly slowed motor conduction velocities consistent with a diffuse demyelinating process",
-   "Subtype-specific features occur, including early scoliosis (SH3TC2), deafness and gait ataxia (NDRG1, Lom type), vocal cord and diaphragmatic weakness (GDAP1) and prominent sensory ataxia (PRX)",
-   "Sural nerve biopsy may show distinctive findings such as focally folded myelin (MTMR2/SBF2) that help subtype classification",
-   "Diagnosis relies on the recessive pattern, demyelinating electrophysiology and gene panel confirmation"
+  "id": "charcot_marie_tooth_type_4",
+  "name": "CMT type 4 (autosomal recessive demyelinating)",
+  "aliases": [
+    "Charcot-Marie-Tooth disease type 4",
+    "CMT4",
+    "autosomal recessive demyelinating CMT",
+    "GDAP1",
+    "SH3TC2"
   ],
-  "pathophysiology": "CMT4 comprises several autosomal recessive demyelinating neuropathies in which biallelic loss-of-function variants disrupt Schwann cell proteins essential for myelin formation and maintenance. The affected genes influence diverse pathways, including mitochondrial and membrane dynamics (GDAP1), endosomal phosphoinositide regulation (MTMR2, SBF2), Schwann cell signalling and myelin protein trafficking (SH3TC2), and myelin structural integrity (PRX, EGR2, NDRG1). Failure of these processes causes defective myelination, segmental demyelination and remyelination with onion-bulb formation, and eventual secondary axonal loss. Because myelination is broadly impaired, motor conduction velocities are uniformly and severely slowed.",
-  "additionalDifferentials": [
-   "CMT type 1 (dominant demyelinating forms)",
-   "Dejerine-Sottas disease",
-   "Congenital hypomyelinating neuropathy",
-   "Chronic inflammatory demyelinating polyradiculoneuropathy",
-   "Metachromatic leukodystrophy and other leukodystrophies with neuropathy",
-   "Refsum disease and other metabolic neuropathies"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies demonstrating severe uniform slowing",
-   "Autosomal recessive CMT gene panel or exome sequencing",
-   "Sural nerve biopsy in selected cases to identify subtype-specific myelin changes",
-   "Spinal imaging and orthopaedic review for early scoliosis",
-   "Audiometry where sensorineural deafness is suspected",
-   "Respiratory and vocal cord assessment in GDAP1-related disease"
-  ],
-  "redFlags": [
-   "Early respiratory or diaphragmatic weakness causing breathing difficulty",
-   "Rapidly progressive weakness with loss of ambulation in childhood",
-   "Vocal cord paralysis producing stridor",
-   "Progressive scoliosis compromising respiratory function",
-   "Superimposed subacute deterioration suggesting an acquired inflammatory neuropathy"
-  ],
-  "prognosis": "Generally more severe than dominant CMT, with many children losing independent walking by adolescence; however, severity varies by subtype and specific variant. Respiratory involvement in some forms can affect life expectancy.",
-  "pitfalls": [
-   "Excluding CMT because the family history is negative in a recessive disorder",
-   "Failing to screen for scoliosis, deafness or respiratory involvement associated with particular subtypes",
-   "Missing a treatable acquired demyelinating neuropathy in a child",
-   "Not offering genetic counselling and carrier testing to consanguineous families"
-  ],
-  "references": [
-   "GeneReviews: Charcot-Marie-Tooth Neuropathy Type 4",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying drug exists, so structured physiotherapy and occupational therapy to preserve strength, joint range and function, with stretching to prevent contractures, form the mainstay",
-   "Ankle-foot orthoses, orthopaedic footwear and mobility aids to support foot drop and maintain safe gait for as long as possible",
-   "Orthopaedic review with bracing or corrective surgery for progressive foot deformity and for early scoliosis, notably in SH3TC2-related disease",
-   "Respiratory surveillance with non-invasive ventilation, and vocal-cord assessment, in subtypes with diaphragmatic or laryngeal weakness such as GDAP1-related disease",
-   "Periodic audiometry for sensorineural deafness in NDRG1 (Lom) type and monitoring of ambulation and spinal alignment",
-   "Avoid neurotoxic drugs such as vincristine that can accelerate the neuropathy",
-   "Coordinated neuromuscular multidisciplinary care including podiatry, orthotics and rehabilitation medicine",
-   "Genetic counselling and family screening given autosomal recessive inheritance, with attention to consanguinity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "charcot_marie_tooth_type_4-pathway",
-   "title": "CMT type 4 (autosomal recessive demyelinating): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Umbrella term for autosomal recessive demyelinating CMT, with subtypes defined by causative genes such as GDAP1, MTMR2, SBF2, SH3TC2, NDRG1, EGR2 and PRX",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Early respiratory or diaphragmatic weakness causing breathing difficulty",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies demonstrating severe uniform slowing, Autosomal recessive CMT gene panel or exome sequencing, Sural nerve biopsy in selected cases to identify subtype-specific myelin changes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying drug exists, so structured physiotherapy and occupational therapy to preserve strength, joint range and function, with stretching to prevent contractures, form the mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding CMT because the family history is negative in a recessive disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cmt type 4 (autosomal recessive demyelinating)."
-  }
- ],
- "tables": [
-  {
-   "id": "charcot_marie_tooth_type_4-matrix",
-   "title": "CMT type 4 (autosomal recessive demyelinating): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Umbrella term for autosomal recessive demyelinating CMT, with subtypes defined by causative genes such as GDAP1, MTMR2, SBF2,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley and Daroff Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Umbrella term for autosomal recessive demyelinating CMT, with subtypes defined by causative genes such as GDAP1, MTMR2, SBF2, SH3TC2, NDRG1, EGR2 and PRX",
+      "Tends to present in early childhood with severe, rapidly progressive weakness, delayed motor milestones and often loss of ambulation earlier than dominant CMT1",
+      "Recessive inheritance means parents are usually unaffected and consanguinity increases the risk, so a negative family history should not exclude the diagnosis",
+      "Nerve conduction studies show markedly slowed motor conduction velocities consistent with a diffuse demyelinating process",
+      "Subtype-specific features occur, including early scoliosis (SH3TC2), deafness and gait ataxia (NDRG1, Lom type), vocal cord and diaphragmatic weakness (GDAP1) and prominent sensory ataxia (PRX)",
+      "Sural nerve biopsy may show distinctive findings such as focally folded myelin (MTMR2/SBF2) that help subtype classification",
+      "Diagnosis relies on the recessive pattern, demyelinating electrophysiology and gene panel confirmation"
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies demonstrating severe uniform slowing, Autosomal recessive CMT gene panel or exome sequencing, Sural",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CMT4 comprises several autosomal recessive demyelinating neuropathies in which biallelic loss-of-function variants disrupt Schwann cell proteins essential for myelin formation and maintenance. The affected genes influence diverse pathways, including mitochondrial and membrane dynamics (GDAP1), endosomal phosphoinositide regulation (MTMR2, SBF2), Schwann cell signalling and myelin protein trafficking (SH3TC2), and myelin structural integrity (PRX, EGR2, NDRG1). Failure of these processes causes defective myelination, segmental demyelination and remyelination with onion-bulb formation, and eventual secondary axonal loss. Because myelination is broadly impaired, motor conduction velocities are uniformly and severely slowed.",
+    "additionalDifferentials": [
+      "CMT type 1 (dominant demyelinating forms)",
+      "Dejerine-Sottas disease",
+      "Congenital hypomyelinating neuropathy",
+      "Chronic inflammatory demyelinating polyradiculoneuropathy",
+      "Metachromatic leukodystrophy and other leukodystrophies with neuropathy",
+      "Refsum disease and other metabolic neuropathies"
     ],
-    [
-     "Primary Differentials",
-     "CMT type 1 (dominant demyelinating forms), Dejerine-Sottas disease, Congenital hypomyelinating neuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies demonstrating severe uniform slowing",
+      "Autosomal recessive CMT gene panel or exome sequencing",
+      "Sural nerve biopsy in selected cases to identify subtype-specific myelin changes",
+      "Spinal imaging and orthopaedic review for early scoliosis",
+      "Audiometry where sensorineural deafness is suspected",
+      "Respiratory and vocal cord assessment in GDAP1-related disease"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying drug exists, so structured physiotherapy and occupational therapy to preserve strength, joint range and",
-     "Core treatment modality"
+    "redFlags": [
+      "Early respiratory or diaphragmatic weakness causing breathing difficulty",
+      "Rapidly progressive weakness with loss of ambulation in childhood",
+      "Vocal cord paralysis producing stridor",
+      "Progressive scoliosis compromising respiratory function",
+      "Superimposed subacute deterioration suggesting an acquired inflammatory neuropathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding CMT because the family history is negative in a recessive disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generally more severe than dominant CMT, with many children losing independent walking by adolescence; however, severity varies by subtype and specific variant. Respiratory involvement in some forms can affect life expectancy.",
+    "pitfalls": [
+      "Excluding CMT because the family history is negative in a recessive disorder",
+      "Failing to screen for scoliosis, deafness or respiratory involvement associated with particular subtypes",
+      "Missing a treatable acquired demyelinating neuropathy in a child",
+      "Not offering genetic counselling and carrier testing to consanguineous families"
+    ],
+    "references": [
+      "GeneReviews: Charcot-Marie-Tooth Neuropathy Type 4",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying drug exists, so structured physiotherapy and occupational therapy to preserve strength, joint range and function, with stretching to prevent contractures, form the mainstay",
+      "Ankle-foot orthoses, orthopaedic footwear and mobility aids to support foot drop and maintain safe gait for as long as possible",
+      "Orthopaedic review with bracing or corrective surgery for progressive foot deformity and for early scoliosis, notably in SH3TC2-related disease",
+      "Respiratory surveillance with non-invasive ventilation, and vocal-cord assessment, in subtypes with diaphragmatic or laryngeal weakness such as GDAP1-related disease",
+      "Periodic audiometry for sensorineural deafness in NDRG1 (Lom) type and monitoring of ambulation and spinal alignment",
+      "Avoid neurotoxic drugs such as vincristine that can accelerate the neuropathy",
+      "Coordinated neuromuscular multidisciplinary care including podiatry, orthotics and rehabilitation medicine",
+      "Genetic counselling and family screening given autosomal recessive inheritance, with attention to consanguinity"
     ]
-   ],
-   "caption": "Overview comparison matrix for cmt type 4 (autosomal recessive demyelinating)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "charcot-marie-tooth-type-4-real-image",
-   "title": "CMT type 4 (autosomal recessive demyelinating): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "charcot_marie_tooth_type_4-pathway",
+      "title": "CMT type 4 (autosomal recessive demyelinating): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Umbrella term for autosomal recessive demyelinating CMT, with subtypes defined by causative genes such as GDAP1, MTMR2, SBF2, SH3TC2, NDRG1, EGR2 and PRX",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Early respiratory or diaphragmatic weakness causing breathing difficulty",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies demonstrating severe uniform slowing, Autosomal recessive CMT gene panel or exome sequencing, Sural nerve biopsy in selected cases to identify subtype-specific myelin changes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying drug exists, so structured physiotherapy and occupational therapy to preserve strength, joint range and function, with stretching to prevent contractures, form the mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding CMT because the family history is negative in a recessive disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cmt type 4 (autosomal recessive demyelinating)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "charcot_marie_tooth_type_4-matrix",
+      "title": "CMT type 4 (autosomal recessive demyelinating): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Umbrella term for autosomal recessive demyelinating CMT, with subtypes defined by causative genes such as GDAP1, MTMR2, SBF2,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies demonstrating severe uniform slowing, Autosomal recessive CMT gene panel or exome sequencing, Sural",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CMT type 1 (dominant demyelinating forms), Dejerine-Sottas disease, Congenital hypomyelinating neuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying drug exists, so structured physiotherapy and occupational therapy to preserve strength, joint range and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding CMT because the family history is negative in a recessive disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cmt type 4 (autosomal recessive demyelinating)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley and Daroff Neurology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 384-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_type_4-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Severe, uniform slowing of motor conduction velocities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal recessive CMT gene panel or exome",
+          "cells": [
+            {
+              "text": "Confirms the causative gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sural nerve biopsy",
+          "cells": [
+            {
+              "text": "Subtype-specific myelin changes in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal imaging and orthopaedic review",
+          "cells": [
+            {
+              "text": "Early scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural deafness when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_type_4-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Preserve strength, joint range and function; stretching to prevent contractures"
+            },
+            {
+              "text": "Mainstay; no disease-modifying drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and mobility aids",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses, orthopaedic footwear and mobility aids for foot drop"
+            },
+            {
+              "text": "Safe gait for as long as possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic review",
+          "cells": [
+            {
+              "text": "Bracing or corrective surgery for progressive foot deformity and early scoliosis"
+            },
+            {
+              "text": "Progressive deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and vocal cord surveillance",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation and vocal cord assessment where weakness is present"
+            },
+            {
+              "text": "Diaphragmatic or laryngeal weakness, as in GDAP1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and ambulation monitoring",
+          "cells": [
+            {
+              "text": "Periodic audiometry; monitor ambulation and spinal alignment"
+            },
+            {
+              "text": "Deafness in the NDRG1 (Lom) type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug caution",
+          "cells": [
+            {
+              "text": "Avoid neurotoxic drugs such as vincristine"
+            },
+            {
+              "text": "Can accelerate the neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance with family screening; consider consanguinity"
+            },
+            {
+              "text": "Recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_type_4-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Axonal versus demyelinating electrophysiology",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Axonal degeneration",
+        "Segmental demyelination"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor: CMAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal (except with conduction block)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: conduction block",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: temporal dispersion",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: F wave",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: H reflex",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: SNAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle EMG: fibrillations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle EMG: fasciculations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor unit potentials: recruitment",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Decreased"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor unit potentials: morphology",
+          "cells": [
+            {
+              "text": "Long duration or polyphasic"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "CB in the source means conduction block."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_type_4-dx-mgmt",
+      "title": "Diagnosis and management of CMT type 4 (autosomal recessive demyelinating)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 4 (recessive demyelinating): early-onset severe weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory weakness, stridor, rapid ambulation loss, decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: airway and respiratory review; exclude acquired inflammatory neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies showing severe uniform slowing; recessive gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe demyelinating slowing with biallelic causative variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy with stretching; no disease-modifying drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check dominant CMT1, Dejerine-Sottas and CIDP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses, orthopaedic footwear and mobility aids for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic bracing or surgery for foot deformity and early scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Respiratory surveillance and vocal cord assessment where weakness is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Autosomal recessive counselling with family screening; consider consanguinity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

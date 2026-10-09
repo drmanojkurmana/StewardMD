@@ -1,176 +1,476 @@
 {
- "id": "bartholin_abscess",
- "name": "Bartholin's Abscess",
- "aliases": [
-  "bartholin abscess",
-  "bartholin gland abscess",
-  "bartholin cyst abscess",
-  "infected bartholin cyst"
- ],
- "class": "infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The Bartholin glands lie at the posterior aspect of the vaginal introitus and secrete mucus for lubrication; obstruction of their duct leads to cyst formation and secondary infection produces an abscess",
-   "An abscess typically presents as a painful, tender, fluctuant swelling in the posterolateral labium majus that can make sitting and walking difficult",
-   "Infection is usually polymicrobial with vaginal and enteric flora, though sexually transmitted organisms such as gonorrhoea and chlamydia should be considered",
-   "Definitive treatment relies on drainage rather than antibiotics alone, and simple incision and drainage alone has a high recurrence rate",
-   "Placement of a Word catheter or marsupialisation creates an epithelialised tract that allows continued drainage and reduces recurrence",
-   "Antibiotics are reserved for surrounding cellulitis, systemic features, immunocompromise, or high-risk sexually transmitted infection rather than routine drained abscesses",
-   "In women over the age of forty, and particularly postmenopausal women, a persistent or atypical Bartholin mass should raise concern for the rare Bartholin gland carcinoma and prompt biopsy",
-   "Sitz baths and analgesia support symptom relief and can encourage spontaneous drainage of small abscesses"
+  "id": "bartholin_abscess",
+  "name": "Bartholin's Abscess",
+  "aliases": [
+    "bartholin abscess",
+    "bartholin gland abscess",
+    "bartholin cyst abscess",
+    "infected bartholin cyst"
   ],
-  "pathophysiology": "Obstruction of the Bartholin duct, often following inflammation or inspissated secretions, causes retention of mucus and cystic dilatation of the gland. Stasis within the obstructed duct favours bacterial proliferation, and secondary infection with mixed vaginal, enteric, and occasionally sexually transmitted organisms produces a walled-off collection of pus. The resulting abscess generates local inflammation, oedema, and pain, and if untreated may point and rupture spontaneously or recur once the duct re-obstructs.",
-  "additionalDifferentials": [
-   "Uninfected Bartholin duct cyst",
-   "Vulvar epidermal inclusion or sebaceous cyst",
-   "Vulvar abscess from other skin flora or hidradenitis suppurativa",
-   "Skene gland cyst or abscess",
-   "Bartholin gland carcinoma in older women",
-   "Vulvar haematoma"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination to confirm location, fluctuance, and surrounding cellulitis",
-   "Swab of abscess fluid at drainage for culture and sensitivity",
-   "Testing for gonorrhoea and chlamydia including nucleic acid amplification where appropriate",
-   "Biopsy of the gland wall in women over forty or with atypical or recurrent masses",
-   "Consideration of glucose testing to identify undiagnosed diabetes in recurrent infection"
-  ],
-  "redFlags": [
-   "Spreading vulval cellulitis, systemic sepsis, or features suggesting necrotising infection",
-   "Rapidly enlarging or irregular mass, or one in a postmenopausal woman, raising suspicion of carcinoma",
-   "Recurrent abscesses that may indicate underlying diabetes or immunosuppression",
-   "Severe pain with induration extending beyond the gland",
-   "Failure to resolve after adequate drainage"
-  ],
-  "prognosis": "Most Bartholin abscesses resolve well after adequate drainage, and techniques that create a lasting drainage tract, such as catheter placement or marsupialisation, substantially lower recurrence. Recurrent disease may require repeat procedures or gland excision, and the outlook is excellent overall provided malignancy is excluded in older or atypical cases.",
-  "pitfalls": [
-   "Treating with antibiotics alone without adequate drainage",
-   "Relying on simple incision and drainage, which frequently recurs, instead of a definitive drainage procedure",
-   "Failing to test for sexually transmitted infections when relevant",
-   "Overlooking Bartholin carcinoma in an older woman with a persistent solid mass",
-   "Not investigating recurrent abscesses for underlying diabetes"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Incision and drainage with insertion of a Word catheter to create an epithelialised drainage tract",
-   "Marsupialisation for large or recurrent abscesses to reduce recurrence",
-   "Antibiotics reserved for surrounding cellulitis, systemic features, immunocompromise or high-risk sexually transmitted infection, covering polymicrobial vaginal and enteric flora",
-   "Testing and treatment for gonorrhoea and chlamydia where indicated, with partner notification",
-   "Sitz baths and analgesia for symptomatic relief",
-   "Gland excision for recurrent disease resistant to drainage procedures",
-   "Biopsy of the gland in women over forty or with atypical lesions to exclude carcinoma"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bartholin_abscess-pathway",
-   "title": "Bartholin's Abscess: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The Bartholin glands lie at the posterior aspect of the vaginal introitus and secrete mucus for lubrication; obstruction of their duct leads to cyst formation and secondary infection produces an abscess",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Spreading vulval cellulitis, systemic sepsis, or features suggesting necrotising infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination to confirm location, fluctuance, and surrounding cellulitis, Swab of abscess fluid at drainage for culture and sensitivity, Testing for gonorrhoea and chlamydia including nucleic acid amplification"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Incision and drainage with insertion of a Word catheter to create an epithelialised drainage tract"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating with antibiotics alone without adequate drainage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bartholin's abscess."
-  }
- ],
- "tables": [
-  {
-   "id": "bartholin_abscess-matrix",
-   "title": "Bartholin's Abscess: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The Bartholin glands lie at the posterior aspect of the vaginal introitus and secrete mucus for lubrication; obstruction of their",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The Bartholin glands lie at the posterior aspect of the vaginal introitus and secrete mucus for lubrication; obstruction of their duct leads to cyst formation and secondary infection produces an abscess",
+      "An abscess typically presents as a painful, tender, fluctuant swelling in the posterolateral labium majus that can make sitting and walking difficult",
+      "Infection is usually polymicrobial with vaginal and enteric flora, though sexually transmitted organisms such as gonorrhoea and chlamydia should be considered",
+      "Definitive treatment relies on drainage rather than antibiotics alone, and simple incision and drainage alone has a high recurrence rate",
+      "Placement of a Word catheter or marsupialisation creates an epithelialised tract that allows continued drainage and reduces recurrence",
+      "Antibiotics are reserved for surrounding cellulitis, systemic features, immunocompromise, or high-risk sexually transmitted infection rather than routine drained abscesses",
+      "In women over the age of forty, and particularly postmenopausal women, a persistent or atypical Bartholin mass should raise concern for the rare Bartholin gland carcinoma and prompt biopsy",
+      "Sitz baths and analgesia support symptom relief and can encourage spontaneous drainage of small abscesses"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination to confirm location, fluctuance, and surrounding cellulitis, Swab of abscess fluid at drainage for culture",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Obstruction of the Bartholin duct, often following inflammation or inspissated secretions, causes retention of mucus and cystic dilatation of the gland. Stasis within the obstructed duct favours bacterial proliferation, and secondary infection with mixed vaginal, enteric, and occasionally sexually transmitted organisms produces a walled-off collection of pus. The resulting abscess generates local inflammation, oedema, and pain, and if untreated may point and rupture spontaneously or recur once the duct re-obstructs.",
+    "additionalDifferentials": [
+      "Uninfected Bartholin duct cyst",
+      "Vulvar epidermal inclusion or sebaceous cyst",
+      "Vulvar abscess from other skin flora or hidradenitis suppurativa",
+      "Skene gland cyst or abscess",
+      "Bartholin gland carcinoma in older women",
+      "Vulvar haematoma"
     ],
-    [
-     "Primary Differentials",
-     "Uninfected Bartholin duct cyst, Vulvar epidermal inclusion or sebaceous cyst, Vulvar abscess from other skin flora or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination to confirm location, fluctuance, and surrounding cellulitis",
+      "Swab of abscess fluid at drainage for culture and sensitivity",
+      "Testing for gonorrhoea and chlamydia including nucleic acid amplification where appropriate",
+      "Biopsy of the gland wall in women over forty or with atypical or recurrent masses",
+      "Consideration of glucose testing to identify undiagnosed diabetes in recurrent infection"
     ],
-    [
-     "Management Strategy",
-     "Incision and drainage with insertion of a Word catheter to create an epithelialised drainage tract",
-     "Core treatment modality"
+    "redFlags": [
+      "Spreading vulval cellulitis, systemic sepsis, or features suggesting necrotising infection",
+      "Rapidly enlarging or irregular mass, or one in a postmenopausal woman, raising suspicion of carcinoma",
+      "Recurrent abscesses that may indicate underlying diabetes or immunosuppression",
+      "Severe pain with induration extending beyond the gland",
+      "Failure to resolve after adequate drainage"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating with antibiotics alone without adequate drainage",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most Bartholin abscesses resolve well after adequate drainage, and techniques that create a lasting drainage tract, such as catheter placement or marsupialisation, substantially lower recurrence. Recurrent disease may require repeat procedures or gland excision, and the outlook is excellent overall provided malignancy is excluded in older or atypical cases.",
+    "pitfalls": [
+      "Treating with antibiotics alone without adequate drainage",
+      "Relying on simple incision and drainage, which frequently recurs, instead of a definitive drainage procedure",
+      "Failing to test for sexually transmitted infections when relevant",
+      "Overlooking Bartholin carcinoma in an older woman with a persistent solid mass",
+      "Not investigating recurrent abscesses for underlying diabetes"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Incision and drainage with insertion of a Word catheter to create an epithelialised drainage tract",
+      "Marsupialisation for large or recurrent abscesses to reduce recurrence",
+      "Antibiotics reserved for surrounding cellulitis, systemic features, immunocompromise or high-risk sexually transmitted infection, covering polymicrobial vaginal and enteric flora",
+      "Testing and treatment for gonorrhoea and chlamydia where indicated, with partner notification",
+      "Sitz baths and analgesia for symptomatic relief",
+      "Gland excision for recurrent disease resistant to drainage procedures",
+      "Biopsy of the gland in women over forty or with atypical lesions to exclude carcinoma"
     ]
-   ],
-   "caption": "Overview comparison matrix for bartholin's abscess."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bartholin-abscess-real-image",
-   "title": "Bartholin's Abscess: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "bartholin_abscess-pathway",
+      "title": "Bartholin's Abscess: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The Bartholin glands lie at the posterior aspect of the vaginal introitus and secrete mucus for lubrication; obstruction of their duct leads to cyst formation and secondary infection produces an abscess",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Spreading vulval cellulitis, systemic sepsis, or features suggesting necrotising infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination to confirm location, fluctuance, and surrounding cellulitis, Swab of abscess fluid at drainage for culture and sensitivity, Testing for gonorrhoea and chlamydia including nucleic acid amplification"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Incision and drainage with insertion of a Word catheter to create an epithelialised drainage tract"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating with antibiotics alone without adequate drainage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bartholin's abscess."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bartholin_abscess-matrix",
+      "title": "Bartholin's Abscess: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The Bartholin glands lie at the posterior aspect of the vaginal introitus and secrete mucus for lubrication; obstruction of their",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination to confirm location, fluctuance, and surrounding cellulitis, Swab of abscess fluid at drainage for culture",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Uninfected Bartholin duct cyst, Vulvar epidermal inclusion or sebaceous cyst, Vulvar abscess from other skin flora or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Incision and drainage with insertion of a Word catheter to create an epithelialised drainage tract",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating with antibiotics alone without adequate drainage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bartholin's abscess."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bartholin_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination for location, fluctuance and surrounding cellulitis",
+          "cells": [
+            {
+              "text": "Abscess and cellulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab of abscess fluid for culture and sensitivity",
+          "cells": [
+            {
+              "text": "Organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonorrhoea and chlamydia nucleic acid amplification",
+          "cells": [
+            {
+              "text": "Sexually transmitted infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gland wall biopsy in women over forty or with atypical masses",
+          "cells": [
+            {
+              "text": "Excludes carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose testing in recurrent infection",
+          "cells": [
+            {
+              "text": "Undiagnosed diabetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartholin_abscess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Uninfected Bartholin duct cyst",
+          "cells": [
+            {
+              "text": "Absence of infection on examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bartholin gland carcinoma in older women",
+          "cells": [
+            {
+              "text": "Separated by gland wall biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartholin_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Incision and drainage with Word catheter",
+          "cells": [
+            {
+              "text": "Creates an epithelialised drainage tract"
+            },
+            {
+              "text": "Abscess drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marsupialisation",
+          "cells": [
+            {
+              "text": "For large or recurrent abscesses to reduce recurrence"
+            },
+            {
+              "text": "Large or recurrent abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for specific indications",
+          "cells": [
+            {
+              "text": "Surrounding cellulitis, systemic features, immunocompromise or high-risk STI"
+            },
+            {
+              "text": "Cellulitis or systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STI treatment with partner notification",
+          "cells": [
+            {
+              "text": "Gonorrhoea and chlamydia where indicated"
+            },
+            {
+              "text": "Sexually transmitted infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Sitz baths and analgesia"
+            },
+            {
+              "text": "Pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gland excision",
+          "cells": [
+            {
+              "text": "For recurrent disease resistant to drainage"
+            },
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gland biopsy",
+          "cells": [
+            {
+              "text": "Women over forty or with atypical lesions"
+            },
+            {
+              "text": "Malignancy exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bartholin_abscess-dx-mgmt",
+      "title": "Diagnosis and management of Bartholin's Abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender fluctuant swelling at the posterior introitus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Spreading cellulitis, sepsis or rapidly enlarging solid mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for spreading cellulitis or systemic sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination, abscess fluid swab, STI testing, gland biopsy if older or atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fluctuant abscess confirmed with carcinoma excluded where indicated?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Incision and drainage with Word catheter",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and biopsy the gland",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Marsupialisation for large or recurrent abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics only for cellulitis or systemic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gland excision for recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Biopsy gland in women over forty or with atypical masses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

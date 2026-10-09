@@ -213,25 +213,506 @@
       "caption": "Diagnostic and clinical overview matrix for subdural haematoma."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "subdural-real-image",
-      "title": "Subdural haematoma: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Case report and review citing Brain Trauma Foundation criteria for acute SDH, 2020",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7476468",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Traumatic Brain Injury",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subdural-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising subdural haematoma and judging its severity",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Non-contrast CT, acute",
+          "cells": [
+            {
+              "text": "Hyperdense crescent that crosses suture lines"
+            },
+            {
+              "text": "{{hy:Acute SDH; first-line test}}"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Non-contrast CT, subacute",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Isodense with brain at about 2 to 6 weeks",
+              "range": [
+                2,
+                6
+              ]
+            },
+            {
+              "text": "Easily missed, especially if bilateral; MRI is more sensitive"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Non-contrast CT, chronic",
+          "cells": [
+            {
+              "text": "Hypodense crescent over one or both convexities"
+            },
+            {
+              "text": "Chronic SDH, often frontotemporal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SDH thickness",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": ">10 mm",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Evacuate regardless of GCS (BTF)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Midline shift",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": ">5 mm",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Evacuate; emergent surgery suggested"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "GCS",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "<9 (coma)",
+              "op": "<",
+              "value": 9
+            },
+            {
+              "text": "ICP monitoring for all; surgery if GCS fell by 2 or more, pupils asymmetric or fixed, or ICP >20 mm Hg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TBI severity by GCS",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "Mild 13 to 15, moderate 9 to 12, severe 3 to 8"
+            },
+            {
+              "text": "Severe needs intubation and ICP monitoring"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pupil on side of clot",
+          "cells": [
+            {
+              "text": "Slightly enlarged, with unilateral headache"
+            },
+            {
+              "text": "Larger acute clot or uncal herniation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lucid interval",
+          "cells": [
+            {
+              "text": "Up to one-third of acute SDH"
+            },
+            {
+              "text": "Classic for epidural; most SDH are drowsy from injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic SDH picture",
+          "cells": [
+            {
+              "text": "Fluctuating headache, drowsiness, confusion more than focal signs"
+            },
+            {
+              "text": "Elderly, on antithrombotics, alcohol use; trauma may be forgotten"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "subdural-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic subdural haematoma",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidural haematoma",
+          "cells": [
+            {
+              "text": "Usually arterial (middle meningeal), temporal fracture, classic lucid interval, rapid decline"
+            },
+            {
+              "text": "{{hy:CT: lens-shaped clot that does not cross sutures}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cerebral contusion",
+          "cells": [
+            {
+              "text": "Focal deficit such as aphasia or mild hemiparesis"
+            },
+            {
+              "text": "CT showing parenchymal contusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dementia or delirium",
+          "cells": [
+            {
+              "text": "Chronic SDH can mimic early dementia with fluctuating confusion"
+            },
+            {
+              "text": "CT head, MRI if CT is equivocal"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Carotid or vertebral dissection",
+          "cells": [
+            {
+              "text": "Focal deficit after neck or head trauma"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-traumatic headache syndrome",
+          "cells": [
+            {
+              "text": "Headache after injury without a collection"
+            },
+            {
+              "text": "Imaging excludes chronic SDH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subdural-treatment",
+      "kind": "treatment",
+      "title": "Management of subdural haematoma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early neurosurgical consultation",
+          "cells": [
+            {
+              "text": "Any haematoma that may need evacuation"
+            },
+            {
+              "text": "Mandatory"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reverse anticoagulation",
+          "cells": [
+            {
+              "text": "Patient on anticoagulant or with coagulopathy"
+            },
+            {
+              "text": "Agents listed for this entry: prothrombin complex concentrate, vitamin K, idarucizumab; doses not stated by these sources"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniotomy evacuation",
+          "cells": [
+            {
+              "text": "Thickness >10 mm or shift >5 mm, or comatose with criteria met"
+            },
+            {
+              "text": "{{hy:As soon as possible once indicated}}; with or without bone flap removal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Burr-hole drainage",
+          "cells": [
+            {
+              "text": "Symptomatic chronic SDH"
+            },
+            {
+              "text": "Less urgent; postoperative drain improves success; membranes may need craniotomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation with serial imaging",
+          "cells": [
+            {
+              "text": "Small collection without mass effect"
+            },
+            {
+              "text": "Evacuate if it enlarges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICP measures",
+          "cells": [
+            {
+              "text": "Raised ICP or before surgery"
+            },
+            {
+              "text": "Head up 30 degrees; mannitol 20% 0.5 to 1 g/kg IV over 15 to 30 minutes; or hypertonic saline 2 to 3 mL/kg, sodium 155 mEq/L or less"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Seizure prophylaxis",
+          "cells": [
+            {
+              "text": "Significant haematoma or GCS <10"
+            },
+            {
+              "text": "Phenytoin 20 mg/kg IV load (max 50 mg/min) or levetiracetam; stop after 1 week if no seizures"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Decompressive craniectomy",
+          "cells": [
+            {
+              "text": "ICP refractory to other measures"
+            },
+            {
+              "text": "Trials show no clear mortality benefit over medical care"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "ICP thresholds differ: BTF surgical criterion uses ICP >20 mm Hg, the 2020 review cites BTF osmotic therapy at >22 mm Hg, and Merck targets ICP <25 mm Hg (sometimes 20 mm Hg). All kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subdural-dx-mgmt",
+      "title": "Diagnosis and management of subdural haematoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Head injury or unexplained confusion, headache or deficit, often elderly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ABC, GCS, pupils; non-contrast CT head",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Crescentic collection crossing sutures?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for other causes; MRI if isodense SDH still suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Check coagulation; reverse anticoagulation; call neurosurgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Acute clot over 10 mm thick or shift over 5 mm?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Urgent craniotomy evacuation",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "GCS under 9?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "GCS fell 2 or more, pupils abnormal, or ICP over 20?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "ICP monitoring and medical ICP care",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Chronic symptomatic collection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Burr-hole drainage with drain",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Observe with serial CT; evacuate if it enlarges",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
         }
       ]
     }

@@ -1,172 +1,585 @@
 {
- "id": "idiopathic_hypersomnia",
- "name": "Idiopathic hypersomnia",
- "aliases": [
-  "IH",
-  "idiopathic hypersomnolence"
- ],
- "class": "non_infective",
- "system": "Sleep medicine",
- "specialty": "Sleep Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / International Classification of Sleep Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by persistent excessive daytime sleepiness that is not explained by another sleep, medical or psychiatric disorder",
-   "Night-time sleep is often long yet unrefreshing, and daytime naps tend to be long and also fail to relieve the sleepiness",
-   "Severe sleep inertia, sometimes called sleep drunkenness, causes prolonged grogginess and difficulty waking",
-   "Unlike narcolepsy there is no cataplexy, and the multiple sleep latency test usually shows fewer than two sleep-onset REM periods",
-   "Total sleep time over 24 hours may be markedly increased in some patients",
-   "Diagnosis requires objective testing with polysomnography followed by a multiple sleep latency test, after excluding sleep deprivation and other causes",
-   "Wake-promoting agents such as modafinil are commonly used, and the sleep inertia can be particularly disabling and hard to treat"
+  "id": "idiopathic_hypersomnia",
+  "name": "Idiopathic hypersomnia",
+  "aliases": [
+    "IH",
+    "idiopathic hypersomnolence"
   ],
-  "pathophysiology": "The mechanism of idiopathic hypersomnia is unknown. Unlike narcolepsy type 1 it is not associated with loss of hypocretin (orexin) signalling. Proposed contributors include enhanced activity of endogenous substances that promote sleep or potentiate inhibitory GABA-A neurotransmission, together with disturbed regulation of the sleep-wake and circadian systems, which could explain the prolonged, deep and unrefreshing sleep with pronounced sleep inertia.",
-  "additionalDifferentials": [
-   "Narcolepsy, both type 1 and type 2",
-   "Insufficient sleep syndrome",
-   "Obstructive sleep apnoea and other sleep-related breathing disorders",
-   "Kleine-Levin syndrome (recurrent hypersomnia)",
-   "Hypersomnia due to a medical, psychiatric or medication cause",
-   "Circadian rhythm sleep-wake disorders"
-  ],
-  "additionalInvestigations": [
-   "Sleep diary and actigraphy over one to two weeks to exclude chronic sleep insufficiency",
-   "Overnight polysomnography to exclude other sleep disorders",
-   "Multiple sleep latency test showing a short mean sleep latency with few or no sleep-onset REM periods",
-   "Consideration of extended 24-hour sleep monitoring to document a long sleep time",
-   "Screening for depression, medication effects and other medical causes"
-  ],
-  "redFlags": [
-   "New severe hypersomnia with neurological signs suggesting a central lesion",
-   "Cataplexy or other features pointing to narcolepsy",
-   "Falling asleep in dangerous situations such as driving",
-   "Rapid onset or a fluctuating course suggesting a secondary cause"
-  ],
-  "prognosis": "The disorder is usually chronic and stable, though spontaneous improvement occurs in a minority; symptoms are often only partially controlled by wake-promoting medication, and residual sleepiness and sleep inertia can substantially affect function.",
-  "pitfalls": [
-   "Diagnosing before excluding chronic sleep deprivation or shift-related sleep loss",
-   "Confusing it with narcolepsy type 2 given the overlapping test findings",
-   "Underestimating the disabling impact of sleep inertia",
-   "Overlooking depression or medication as the true cause of hypersomnolence"
-  ],
-  "references": [
-   "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
-   "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
-  ],
-  "crossLinks": [
-   "kleine_levin_syndrome"
-  ],
-  "management": [
-   "Promote wakefulness with a first-line wake-promoting agent such as modafinil or armodafinil, escalating to stimulants (methylphenidate, amfetamines) or alerting agents (solriamfetol, pitolisant) where needed",
-   "For pronounced sleep inertia and long sleep time, consider agents such as sodium oxybate directed at the disabling sleep drunkenness",
-   "Reinforce good sleep hygiene and a regular sleep-wake schedule, counselling that scheduled naps are often unrefreshing unlike in narcolepsy",
-   "Confirm the diagnosis with polysomnography and a multiple sleep latency test, excluding chronic sleep insufficiency, medication effects and depression",
-   "Counsel on driving and occupational safety given persistent residual sleepiness",
-   "Provide ongoing follow-up within a sleep medicine service to titrate therapy and reassess, as a minority remit spontaneously"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "idiopathic_hypersomnia-pathway",
-   "title": "Idiopathic hypersomnia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by persistent excessive daytime sleepiness that is not explained by another sleep, medical or psychiatric disorder",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New severe hypersomnia with neurological signs suggesting a central lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Sleep diary and actigraphy over one to two weeks to exclude chronic sleep insufficiency, Overnight polysomnography to exclude other sleep disorders, Multiple sleep latency test showing a short mean sleep latency with few"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Promote wakefulness with a first-line wake-promoting agent such as modafinil or armodafinil, escalating to stimulants (methylphenidate, amfetamines) or alerting agents (solriamfetol, pitolisant) where needed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing before excluding chronic sleep deprivation or shift-related sleep loss"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of idiopathic hypersomnia."
-  }
- ],
- "tables": [
-  {
-   "id": "idiopathic_hypersomnia-matrix",
-   "title": "Idiopathic hypersomnia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by persistent excessive daytime sleepiness that is not explained by another sleep, medical or psychiatric disorder",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Sleep medicine",
+  "specialty": "Sleep Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / International Classification of Sleep Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by persistent excessive daytime sleepiness that is not explained by another sleep, medical or psychiatric disorder",
+      "Night-time sleep is often long yet unrefreshing, and daytime naps tend to be long and also fail to relieve the sleepiness",
+      "Severe sleep inertia, sometimes called sleep drunkenness, causes prolonged grogginess and difficulty waking",
+      "Unlike narcolepsy there is no cataplexy, and the multiple sleep latency test usually shows fewer than two sleep-onset REM periods",
+      "Total sleep time over 24 hours may be markedly increased in some patients",
+      "Diagnosis requires objective testing with polysomnography followed by a multiple sleep latency test, after excluding sleep deprivation and other causes",
+      "Wake-promoting agents such as modafinil are commonly used, and the sleep inertia can be particularly disabling and hard to treat"
     ],
-    [
-     "Key Investigations",
-     "Sleep diary and actigraphy over one to two weeks to exclude chronic sleep insufficiency, Overnight polysomnography to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The mechanism of idiopathic hypersomnia is unknown. Unlike narcolepsy type 1 it is not associated with loss of hypocretin (orexin) signalling. Proposed contributors include enhanced activity of endogenous substances that promote sleep or potentiate inhibitory GABA-A neurotransmission, together with disturbed regulation of the sleep-wake and circadian systems, which could explain the prolonged, deep and unrefreshing sleep with pronounced sleep inertia.",
+    "additionalDifferentials": [
+      "Narcolepsy, both type 1 and type 2",
+      "Insufficient sleep syndrome",
+      "Obstructive sleep apnoea and other sleep-related breathing disorders",
+      "Kleine-Levin syndrome (recurrent hypersomnia)",
+      "Hypersomnia due to a medical, psychiatric or medication cause",
+      "Circadian rhythm sleep-wake disorders"
     ],
-    [
-     "Primary Differentials",
-     "Narcolepsy, both type 1 and type 2, Insufficient sleep syndrome, Obstructive sleep apnoea and other sleep-related breathing",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Sleep diary and actigraphy over one to two weeks to exclude chronic sleep insufficiency",
+      "Overnight polysomnography to exclude other sleep disorders",
+      "Multiple sleep latency test showing a short mean sleep latency with few or no sleep-onset REM periods",
+      "Consideration of extended 24-hour sleep monitoring to document a long sleep time",
+      "Screening for depression, medication effects and other medical causes"
     ],
-    [
-     "Management Strategy",
-     "Promote wakefulness with a first-line wake-promoting agent such as modafinil or armodafinil, escalating to stimulants",
-     "Core treatment modality"
+    "redFlags": [
+      "New severe hypersomnia with neurological signs suggesting a central lesion",
+      "Cataplexy or other features pointing to narcolepsy",
+      "Falling asleep in dangerous situations such as driving",
+      "Rapid onset or a fluctuating course suggesting a secondary cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing before excluding chronic sleep deprivation or shift-related sleep loss",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is usually chronic and stable, though spontaneous improvement occurs in a minority; symptoms are often only partially controlled by wake-promoting medication, and residual sleepiness and sleep inertia can substantially affect function.",
+    "pitfalls": [
+      "Diagnosing before excluding chronic sleep deprivation or shift-related sleep loss",
+      "Confusing it with narcolepsy type 2 given the overlapping test findings",
+      "Underestimating the disabling impact of sleep inertia",
+      "Overlooking depression or medication as the true cause of hypersomnolence"
+    ],
+    "references": [
+      "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
+      "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
+    ],
+    "crossLinks": [
+      "kleine_levin_syndrome"
+    ],
+    "management": [
+      "Promote wakefulness with a first-line wake-promoting agent such as modafinil or armodafinil, escalating to stimulants (methylphenidate, amfetamines) or alerting agents (solriamfetol, pitolisant) where needed",
+      "For pronounced sleep inertia and long sleep time, consider agents such as sodium oxybate directed at the disabling sleep drunkenness",
+      "Reinforce good sleep hygiene and a regular sleep-wake schedule, counselling that scheduled naps are often unrefreshing unlike in narcolepsy",
+      "Confirm the diagnosis with polysomnography and a multiple sleep latency test, excluding chronic sleep insufficiency, medication effects and depression",
+      "Counsel on driving and occupational safety given persistent residual sleepiness",
+      "Provide ongoing follow-up within a sleep medicine service to titrate therapy and reassess, as a minority remit spontaneously"
     ]
-   ],
-   "caption": "Overview comparison matrix for idiopathic hypersomnia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "idiopathic-hypersomnia-real-image",
-   "title": "Idiopathic hypersomnia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "idiopathic_hypersomnia-pathway",
+      "title": "Idiopathic hypersomnia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by persistent excessive daytime sleepiness that is not explained by another sleep, medical or psychiatric disorder",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New severe hypersomnia with neurological signs suggesting a central lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Sleep diary and actigraphy over one to two weeks to exclude chronic sleep insufficiency, Overnight polysomnography to exclude other sleep disorders, Multiple sleep latency test showing a short mean sleep latency with few"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Promote wakefulness with a first-line wake-promoting agent such as modafinil or armodafinil, escalating to stimulants (methylphenidate, amfetamines) or alerting agents (solriamfetol, pitolisant) where needed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing before excluding chronic sleep deprivation or shift-related sleep loss"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of idiopathic hypersomnia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "idiopathic_hypersomnia-matrix",
+      "title": "Idiopathic hypersomnia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by persistent excessive daytime sleepiness that is not explained by another sleep, medical or psychiatric disorder",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Sleep diary and actigraphy over one to two weeks to exclude chronic sleep insufficiency, Overnight polysomnography to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Narcolepsy, both type 1 and type 2, Insufficient sleep syndrome, Obstructive sleep apnoea and other sleep-related breathing",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Promote wakefulness with a first-line wake-promoting agent such as modafinil or armodafinil, escalating to stimulants",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing before excluding chronic sleep deprivation or shift-related sleep loss",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for idiopathic hypersomnia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 265-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "idiopathic_hypersomnia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sleep diary and actigraphy over one to two weeks",
+          "cells": [
+            {
+              "text": "Excludes chronic sleep insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overnight polysomnography",
+          "cells": [
+            {
+              "text": "Excludes other sleep disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple sleep latency test",
+          "cells": [
+            {
+              "text": "Short mean sleep latency with few or no sleep-onset REM periods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour sleep monitoring (considered)",
+          "cells": [
+            {
+              "text": "Documents a long sleep time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for depression, medication and medical causes",
+          "cells": [
+            {
+              "text": "Excludes these as the cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_hypersomnia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Insufficient sleep syndrome",
+          "cells": [
+            {
+              "text": "Excluded by sleep diary and actigraphy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Excluded by polysomnography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narcolepsy type 2",
+          "cells": [
+            {
+              "text": "Overlapping test findings with idiopathic hypersomnia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_hypersomnia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line wake-promoting agent",
+          "cells": [
+            {
+              "text": "Modafinil or armodafinil"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Stimulants (methylphenidate, amfetamines), solriamfetol or pitolisant where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep inertia and long sleep",
+          "cells": [
+            {
+              "text": "Sodium oxybate for disabling sleep drunkenness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep hygiene",
+          "cells": [
+            {
+              "text": "Regular sleep-wake schedule; naps are often unrefreshing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnosis",
+          "cells": [
+            {
+              "text": "Polysomnography and multiple sleep latency test after excluding other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety and follow-up",
+          "cells": [
+            {
+              "text": "Driving and occupational counselling; sleep medicine follow-up to titrate therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_hypersomnia-ddx-2",
+      "kind": "ddx",
+      "title": "Clinical indicators in the sleepy patient",
+      "rowHeader": "Condition",
+      "columns": [
+        "Age of onset (years)",
+        "Cataplexy",
+        "Night sleep: duration",
+        "Night sleep: awakenings",
+        "Night sleep: snoring",
+        "Night sleep: morning drunkenness",
+        "Daytime naps: frequency",
+        "Daytime naps: time of day",
+        "Daytime naps: duration"
+      ],
+      "rows": [
+        {
+          "parameter": "OSAHS",
+          "cells": [
+            {
+              "text": "35-60"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Yes, loud"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Usually few"
+            },
+            {
+              "text": "Afternoon/evening"
+            },
+            {
+              "text": "<1 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "10-30"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Many"
+            },
+            {
+              "text": "Afternoon/evening"
+            },
+            {
+              "text": "<1 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IHS",
+          "cells": [
+            {
+              "text": "10-30"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Long"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Common"
+            },
+            {
+              "text": "Few"
+            },
+            {
+              "text": "Morning"
+            },
+            {
+              "text": ">1 h"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "OSAHS, obstructive sleep apnea/hypopnea syndrome; IHS, idiopathic hypersomnolence."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "idiopathic_hypersomnia-dx-mgmt",
+      "title": "Diagnosis and management of Idiopathic hypersomnia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent daytime sleepiness with long, unrefreshing sleep and sleep inertia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cataplexy, neurological signs, or sleepiness in dangerous situations?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for narcolepsy or central lesion; advise on driving",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sleep diary and actigraphy, polysomnography, multiple sleep latency test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Insufficient sleep, other sleep disorders and depression excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the secondary cause: sleep apnoea, medication or depression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "First-line wake-promoting agent: modafinil or armodafinil",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate to stimulants, solriamfetol or pitolisant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium oxybate for sleep inertia and long sleep time",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sleep hygiene and a regular sleep-wake schedule",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Driving and occupational safety counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Symptom control with sleep medicine follow-up; some remit spontaneously",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

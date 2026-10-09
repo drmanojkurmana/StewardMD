@@ -1,177 +1,696 @@
 {
- "id": "lymphogranuloma_venereum",
- "name": "Lymphogranuloma venereum",
- "aliases": [
-  "LGV",
-  "Durand-Nicolas-Favre disease",
-  "climatic bubo"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A sexually transmitted infection caused by the invasive L1-L3 serovars of Chlamydia trachomatis, distinct from the serovars causing ordinary genital chlamydia",
-   "Classically progresses through a primary transient painless genital ulcer or papule, a secondary stage of painful inguinal lymphadenopathy (buboes), and a late destructive fibrotic stage",
-   "The 'groove sign', where enlarged nodes straddle the inguinal ligament, is a characteristic secondary-stage finding",
-   "In men who have sex with men, LGV commonly presents as a severe haemorrhagic proctocolitis that can mimic inflammatory bowel disease",
-   "Untreated late disease causes lymphatic obstruction with genital elephantiasis, strictures and fistulae",
-   "Diagnosis rests on detecting Chlamydia trachomatis by nucleic acid amplification with genotyping to identify LGV serovars, alongside serology in some settings",
-   "Treatment is a prolonged course of doxycycline as the preferred agent, with buboes aspirated rather than incised, and partners evaluated and treated"
+  "id": "lymphogranuloma_venereum",
+  "name": "Lymphogranuloma venereum",
+  "aliases": [
+    "LGV",
+    "Durand-Nicolas-Favre disease",
+    "climatic bubo"
   ],
-  "pathophysiology": "The L-serovars of Chlamydia trachomatis are more invasive than the ocular and genital serovars and preferentially infect macrophages and lymphatic tissue. After inoculation at a mucosal site, the organism spreads to draining lymph nodes, provoking a granulomatous and suppurative lymphadenitis with stellate abscesses. Persistent inflammation leads to lymphatic obstruction, fibrosis and tissue destruction in the chronic stage. Rectal inoculation produces an intense proctocolitis with ulceration and, if untreated, strictures and fistulae.",
-  "additionalDifferentials": [
-   "Chancroid with suppurative buboes",
-   "Primary or secondary syphilis",
-   "Genital herpes",
-   "Inflammatory bowel disease (for LGV proctocolitis)",
-   "Tuberculous or reactive inguinal lymphadenopathy"
-  ],
-  "infectionMimics": [
-   "Chancroid",
-   "Tuberculous lymphadenitis of inguinal nodes",
-   "Cat-scratch disease lymphadenitis",
-   "Anorectal gonorrhoea or herpes proctitis"
-  ],
-  "additionalInvestigations": [
-   "Nucleic acid amplification testing for Chlamydia trachomatis from ulcer, rectal or bubo aspirate specimens",
-   "Genotyping to confirm LGV (L1-L3) serovars",
-   "Chlamydia serology as supportive evidence in some settings",
-   "Screening for HIV, syphilis and other sexually transmitted infections",
-   "Sigmoidoscopy with biopsy when proctocolitis mimics inflammatory bowel disease"
-  ],
-  "redFlags": [
-   "Severe proctocolitis with bleeding and pain, especially in HIV-positive men who have sex with men",
-   "Fluctuant buboes at risk of rupture requiring aspiration",
-   "Late fibrotic complications such as genital elephantiasis, strictures or fistulae",
-   "Coexisting HIV infection altering severity and management"
-  ],
-  "prognosis": "Early treatment gives complete recovery, but delayed diagnosis allows irreversible lymphatic damage with strictures, fistulae and genital lymphoedema; extended antibiotic courses may be needed in advanced or HIV-associated disease.",
-  "pitfalls": [
-   "Mistaking LGV proctocolitis for inflammatory bowel disease and delaying antibiotics",
-   "Using a standard short chlamydia course rather than the extended regimen LGV requires",
-   "Incising buboes instead of aspirating, risking chronic sinus formation",
-   "Failing to genotype and thus missing invasive LGV serovars"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/NTEP guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Extended-course oral doxycycline as first-line antimicrobial therapy, with erythromycin or azithromycin as alternatives (for example in pregnancy)",
-   "Aspiration of fluctuant buboes to relieve symptoms and prevent rupture, avoiding incision where possible",
-   "Prolonged antibiotic courses for late-stage or HIV-associated disease",
-   "Screen for and treat concurrent HIV, syphilis and other sexually transmitted infections",
-   "Notify, test and empirically treat recent sexual partners",
-   "Surgical management of late complications such as strictures, fistulae and genital lymphoedema",
-   "Refer to genitourinary or sexual health services for treatment and contact tracing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lymphogranuloma_venereum-pathway",
-   "title": "Lymphogranuloma venereum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A sexually transmitted infection caused by the invasive L1-L3 serovars of Chlamydia trachomatis, distinct from the serovars causing ordinary genital chlamydia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe proctocolitis with bleeding and pain, especially in HIV-positive men who have sex with men",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nucleic acid amplification testing for Chlamydia trachomatis from ulcer, rectal or bubo aspirate specimens, Genotyping to confirm LGV (L1-L3) serovars, Chlamydia serology as supportive evidence in some settings"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Extended-course oral doxycycline as first-line antimicrobial therapy, with erythromycin or azithromycin as alternatives (for example in pregnancy)"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking LGV proctocolitis for inflammatory bowel disease and delaying antibiotics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lymphogranuloma venereum."
-  }
- ],
- "tables": [
-  {
-   "id": "lymphogranuloma_venereum-matrix",
-   "title": "Lymphogranuloma venereum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A sexually transmitted infection caused by the invasive L1-L3 serovars of Chlamydia trachomatis, distinct from the serovars",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A sexually transmitted infection caused by the invasive L1-L3 serovars of Chlamydia trachomatis, distinct from the serovars causing ordinary genital chlamydia",
+      "Classically progresses through a primary transient painless genital ulcer or papule, a secondary stage of painful inguinal lymphadenopathy (buboes), and a late destructive fibrotic stage",
+      "The 'groove sign', where enlarged nodes straddle the inguinal ligament, is a characteristic secondary-stage finding",
+      "In men who have sex with men, LGV commonly presents as a severe haemorrhagic proctocolitis that can mimic inflammatory bowel disease",
+      "Untreated late disease causes lymphatic obstruction with genital elephantiasis, strictures and fistulae",
+      "Diagnosis rests on detecting Chlamydia trachomatis by nucleic acid amplification with genotyping to identify LGV serovars, alongside serology in some settings",
+      "Treatment is a prolonged course of doxycycline as the preferred agent, with buboes aspirated rather than incised, and partners evaluated and treated"
     ],
-    [
-     "Key Investigations",
-     "Nucleic acid amplification testing for Chlamydia trachomatis from ulcer, rectal or bubo aspirate specimens, Genotyping to confirm",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The L-serovars of Chlamydia trachomatis are more invasive than the ocular and genital serovars and preferentially infect macrophages and lymphatic tissue. After inoculation at a mucosal site, the organism spreads to draining lymph nodes, provoking a granulomatous and suppurative lymphadenitis with stellate abscesses. Persistent inflammation leads to lymphatic obstruction, fibrosis and tissue destruction in the chronic stage. Rectal inoculation produces an intense proctocolitis with ulceration and, if untreated, strictures and fistulae.",
+    "additionalDifferentials": [
+      "Chancroid with suppurative buboes",
+      "Primary or secondary syphilis",
+      "Genital herpes",
+      "Inflammatory bowel disease (for LGV proctocolitis)",
+      "Tuberculous or reactive inguinal lymphadenopathy"
     ],
-    [
-     "Primary Differentials",
-     "Chancroid with suppurative buboes, Primary or secondary syphilis, Genital herpes",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Chancroid",
+      "Tuberculous lymphadenitis of inguinal nodes",
+      "Cat-scratch disease lymphadenitis",
+      "Anorectal gonorrhoea or herpes proctitis"
     ],
-    [
-     "Management Strategy",
-     "Extended-course oral doxycycline as first-line antimicrobial therapy, with erythromycin or azithromycin as alternatives (for",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Nucleic acid amplification testing for Chlamydia trachomatis from ulcer, rectal or bubo aspirate specimens",
+      "Genotyping to confirm LGV (L1-L3) serovars",
+      "Chlamydia serology as supportive evidence in some settings",
+      "Screening for HIV, syphilis and other sexually transmitted infections",
+      "Sigmoidoscopy with biopsy when proctocolitis mimics inflammatory bowel disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking LGV proctocolitis for inflammatory bowel disease and delaying antibiotics",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Severe proctocolitis with bleeding and pain, especially in HIV-positive men who have sex with men",
+      "Fluctuant buboes at risk of rupture requiring aspiration",
+      "Late fibrotic complications such as genital elephantiasis, strictures or fistulae",
+      "Coexisting HIV infection altering severity and management"
+    ],
+    "prognosis": "Early treatment gives complete recovery, but delayed diagnosis allows irreversible lymphatic damage with strictures, fistulae and genital lymphoedema; extended antibiotic courses may be needed in advanced or HIV-associated disease.",
+    "pitfalls": [
+      "Mistaking LGV proctocolitis for inflammatory bowel disease and delaying antibiotics",
+      "Using a standard short chlamydia course rather than the extended regimen LGV requires",
+      "Incising buboes instead of aspirating, risking chronic sinus formation",
+      "Failing to genotype and thus missing invasive LGV serovars"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/NTEP guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Extended-course oral doxycycline as first-line antimicrobial therapy, with erythromycin or azithromycin as alternatives (for example in pregnancy)",
+      "Aspiration of fluctuant buboes to relieve symptoms and prevent rupture, avoiding incision where possible",
+      "Prolonged antibiotic courses for late-stage or HIV-associated disease",
+      "Screen for and treat concurrent HIV, syphilis and other sexually transmitted infections",
+      "Notify, test and empirically treat recent sexual partners",
+      "Surgical management of late complications such as strictures, fistulae and genital lymphoedema",
+      "Refer to genitourinary or sexual health services for treatment and contact tracing"
     ]
-   ],
-   "caption": "Overview comparison matrix for lymphogranuloma venereum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lymphogranuloma-venereum-real-image",
-   "title": "Lymphogranuloma venereum: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "lymphogranuloma_venereum-pathway",
+      "title": "Lymphogranuloma venereum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A sexually transmitted infection caused by the invasive L1-L3 serovars of Chlamydia trachomatis, distinct from the serovars causing ordinary genital chlamydia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe proctocolitis with bleeding and pain, especially in HIV-positive men who have sex with men",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nucleic acid amplification testing for Chlamydia trachomatis from ulcer, rectal or bubo aspirate specimens, Genotyping to confirm LGV (L1-L3) serovars, Chlamydia serology as supportive evidence in some settings"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Extended-course oral doxycycline as first-line antimicrobial therapy, with erythromycin or azithromycin as alternatives (for example in pregnancy)"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking LGV proctocolitis for inflammatory bowel disease and delaying antibiotics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lymphogranuloma venereum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lymphogranuloma_venereum-matrix",
+      "title": "Lymphogranuloma venereum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A sexually transmitted infection caused by the invasive L1-L3 serovars of Chlamydia trachomatis, distinct from the serovars",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nucleic acid amplification testing for Chlamydia trachomatis from ulcer, rectal or bubo aspirate specimens, Genotyping to confirm",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chancroid with suppurative buboes, Primary or secondary syphilis, Genital herpes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Extended-course oral doxycycline as first-line antimicrobial therapy, with erythromycin or azithromycin as alternatives (for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking LGV proctocolitis for inflammatory bowel disease and delaying antibiotics",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lymphogranuloma venereum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 130-7",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphogranuloma_venereum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nucleic acid amplification from ulcer, rectal or bubo aspirate",
+          "cells": [
+            {
+              "text": "Chlamydia trachomatis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genotyping for L1 to L3 serovars",
+          "cells": [
+            {
+              "text": "Invasive LGV serovars"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sigmoidoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Proctocolitis mimicking IBD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV, syphilis and other STI screen",
+          "cells": [
+            {
+              "text": "Coexisting infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chlamydia serology",
+          "cells": [
+            {
+              "text": "Supportive evidence in some settings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphogranuloma_venereum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chancroid with suppurative buboes",
+          "cells": [
+            {
+              "text": "Painful ulcer and purulent buboes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary or secondary syphilis",
+          "cells": [
+            {
+              "text": "Serology and dark-field testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Proctocolitis in men who have sex with men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous inguinal lymphadenopathy",
+          "cells": [
+            {
+              "text": "Reactive or tuberculous nodes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphogranuloma_venereum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Extended doxycycline",
+          "cells": [
+            {
+              "text": "First-line; erythromycin or azithromycin as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bubo aspiration",
+          "cells": [
+            {
+              "text": "Relieves symptoms and prevents rupture; avoid incision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late or HIV-associated disease",
+          "cells": [
+            {
+              "text": "Prolonged antibiotic courses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partner management",
+          "cells": [
+            {
+              "text": "Notify, test and empirically treat recent partners"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late complications",
+          "cells": [
+            {
+              "text": "Surgery for strictures, fistulae and lymphoedema"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphogranuloma_venereum-ddx-2",
+      "kind": "ddx",
+      "title": "Clinical features of genital ulcers",
+      "rowHeader": "Feature",
+      "columns": [
+        "Syphilis",
+        "Herpes",
+        "Chancroid",
+        "Lymphogranuloma venereum",
+        "Donovanosis"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation period",
+          "cells": [
+            {
+              "text": "9 to 90 days"
+            },
+            {
+              "text": "2 to 7 days"
+            },
+            {
+              "text": "1 to 14 days"
+            },
+            {
+              "text": "3 days to 6 weeks"
+            },
+            {
+              "text": "1 to 4 weeks (up to 6 months)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early primary lesions",
+          "cells": [
+            {
+              "text": "Papule"
+            },
+            {
+              "text": "Vesicle"
+            },
+            {
+              "text": "Pustule"
+            },
+            {
+              "text": "Papule, pustule or vesicle"
+            },
+            {
+              "text": "Papule"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Number of lesions",
+          "cells": [
+            {
+              "text": "Usually one"
+            },
+            {
+              "text": "Multiple"
+            },
+            {
+              "text": "Usually multiple, may coalesce"
+            },
+            {
+              "text": "Usually one; often not detected, despite lymphadenopathy"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diameter",
+          "cells": [
+            {
+              "text": "5 to 15 mm"
+            },
+            {
+              "text": "1 to 2 mm"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "2 to 10 mm"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Edges",
+          "cells": [
+            {
+              "text": "Sharply demarcated, elevated, round or oval"
+            },
+            {
+              "text": "Erythematous"
+            },
+            {
+              "text": "Undermined, ragged, irregular"
+            },
+            {
+              "text": "Elevated, round or oval"
+            },
+            {
+              "text": "Elevated, irregular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Depth",
+          "cells": [
+            {
+              "text": "Superficial or deep"
+            },
+            {
+              "text": "Superficial"
+            },
+            {
+              "text": "Excavated"
+            },
+            {
+              "text": "Superficial or deep"
+            },
+            {
+              "text": "Elevated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Base",
+          "cells": [
+            {
+              "text": "Smooth, nonpurulent, relatively nonvascular"
+            },
+            {
+              "text": "Serous, erythematous, nonvascular"
+            },
+            {
+              "text": "Purulent, bleeds easily"
+            },
+            {
+              "text": "Variable, nonvascular"
+            },
+            {
+              "text": "Red and velvety, bleeds readily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Induration",
+          "cells": [
+            {
+              "text": "Firm"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "Soft"
+            },
+            {
+              "text": "Occasionally firm"
+            },
+            {
+              "text": "Firm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pain",
+          "cells": [
+            {
+              "text": "Uncommon"
+            },
+            {
+              "text": "Frequently tender"
+            },
+            {
+              "text": "Usually very tender"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Uncommon"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphadenopathy",
+          "cells": [
+            {
+              "text": "Firm, nontender, bilateral"
+            },
+            {
+              "text": "Firm, tender, often bilateral with the initial episode"
+            },
+            {
+              "text": "Tender, may suppurate, loculated, usually unilateral"
+            },
+            {
+              "text": "Tender, may suppurate, loculated, usually unilateral"
+            },
+            {
+              "text": "None; pseudobuboes"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphogranuloma_venereum-dx-mgmt",
+      "title": "Diagnosis and management of Lymphogranuloma venereum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful inguinal buboes or proctocolitis in a sexually active adult after a genital ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe bleeding proctitis, fluctuant bubo or HIV co-infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent sexual health and surgical review for fluctuant bubo",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nucleic acid amplification with genotyping, HIV and syphilis screen, sigmoidoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Chlamydia trachomatis L1 to L3 serovar detected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chancroid, syphilis, herpes or inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Extended-course doxycycline as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspirate fluctuant buboes rather than incising",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat concurrent HIV, syphilis and other STIs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Notify and treat recent sexual partners",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgery for late strictures, fistulae or genital lymphoedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early treatment gives full recovery; delay causes irreversible lymphatic damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

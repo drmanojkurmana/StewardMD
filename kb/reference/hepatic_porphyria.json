@@ -1,174 +1,432 @@
 {
- "id": "hepatic_porphyria",
- "name": "Hepatic porphyria",
- "aliases": [
-  "acute intermittent porphyria",
-  "porphyria cutanea tarda",
-  "acute hepatic porphyrias"
- ],
- "class": "non_infective",
- "system": "GI / Hepatology",
- "specialty": "Hepatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / AASLD",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The hepatic porphyrias are inherited or acquired defects of haem biosynthesis in which pathway intermediates accumulate and cause acute neurovisceral attacks or cutaneous disease",
-   "Acute intermittent porphyria, the most common acute form, presents with severe unexplained abdominal pain, autonomic disturbance, hyponatraemia, and neuropsychiatric features, without skin involvement",
-   "Attacks are precipitated by many drugs, fasting or crash dieting, alcohol, infection, and hormonal fluctuations, so a careful trigger history is essential",
-   "During an acute attack the urine contains excess porphobilinogen and delta-aminolaevulinic acid and may darken on standing",
-   "Porphyria cutanea tarda, the most common porphyria overall, causes photosensitive skin fragility and blistering and is strongly linked with hepatitis C, alcohol, iron overload, and oestrogen use",
-   "The acute porphyrias carry an increased long-term risk of hepatocellular carcinoma, warranting surveillance in older patients",
-   "Management principles for acute attacks include removing precipitants, providing adequate carbohydrate, and giving haem therapy to suppress the overactive pathway, alongside symptom control",
-   "Porphyria cutanea tarda is managed by addressing iron overload and cofactors and by strict sun protection"
+  "id": "hepatic_porphyria",
+  "name": "Hepatic porphyria",
+  "aliases": [
+    "acute intermittent porphyria",
+    "porphyria cutanea tarda",
+    "acute hepatic porphyrias"
   ],
-  "pathophysiology": "Haem is synthesised through an eight-step enzymatic pathway; a partial deficiency of one of these enzymes, most relevant in the liver, causes a hepatic porphyria. In the acute porphyrias (such as acute intermittent porphyria from hydroxymethylbilane synthase deficiency), demand for haem induces the rate-controlling enzyme ALA synthase, and the downstream enzyme block leads to accumulation of the neurotoxic precursors delta-aminolaevulinic acid and porphobilinogen, producing neurovisceral attacks. Factors that increase hepatic haem demand, including many drugs metabolised by cytochrome P450, fasting, and steroid hormones, upregulate the pathway and precipitate attacks. In porphyria cutanea tarda, reduced hepatic uroporphyrinogen decarboxylase activity, exacerbated by iron, alcohol, oestrogens, and hepatitis C, causes accumulation of photoactive porphyrins that damage sun-exposed skin. Chronic hepatic involvement predisposes to hepatocellular carcinoma.",
-  "additionalDifferentials": [
-   "Acute abdomen from surgical causes",
-   "Lead poisoning",
-   "Guillain-Barre syndrome and other neuropathies",
-   "Systemic vasculitis",
-   "Other blistering photosensitive dermatoses",
-   "Hereditary tyrosinaemia and other metabolic disorders"
-  ],
-  "additionalInvestigations": [
-   "Spot urine porphobilinogen and delta-aminolaevulinic acid during symptomatic acute episodes",
-   "Plasma, urine, and faecal porphyrin profiling to classify the porphyria type",
-   "Enzyme activity assays and genetic testing to confirm the specific defect",
-   "Testing for hepatitis C, iron studies, and HFE genotyping in porphyria cutanea tarda",
-   "Electrolytes to detect hyponatraemia during acute attacks",
-   "Hepatic imaging and alpha-fetoprotein surveillance for hepatocellular carcinoma in acute porphyrias"
-  ],
-  "redFlags": [
-   "Acute attack with progressive motor weakness or bulbar and respiratory involvement threatening ventilatory failure",
-   "Severe hyponatraemia with seizures during an attack",
-   "Autonomic instability with marked hypertension and tachyarrhythmia",
-   "New hepatic mass suggesting hepatocellular carcinoma"
-  ],
-  "prognosis": "With prompt recognition, removal of triggers, and appropriate treatment, acute attacks usually resolve, though severe attacks can cause lasting neurological deficits or death; recurrent attacks and chronic disease carry an increased risk of hepatocellular carcinoma, while porphyria cutanea tarda generally responds well to treatment of underlying cofactors.",
-  "pitfalls": [
-   "Failing to consider porphyria in recurrent unexplained severe abdominal pain, delaying diagnosis",
-   "Administering porphyrinogenic drugs that precipitate or worsen an acute attack",
-   "Restricting carbohydrate and calories during illness, which aggravates attacks",
-   "Omitting hepatocellular carcinoma surveillance in older patients with acute porphyria"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "AASLD guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "During an acute attack, withdraw all precipitating drugs, treat intercurrent infection, and provide high carbohydrate intake, giving intravenous glucose if oral intake is not possible",
-   "Give intravenous haem (haem arginate) early in a significant acute attack to suppress ALA synthase and precursor overproduction",
-   "Control attack symptoms with porphyria-safe analgesics such as opioids, safe antiemetics, correction of hyponatraemia, and a beta-blocker for autonomic overactivity, using only drugs confirmed safe in porphyria",
-   "Prevent recurrent acute attacks by avoiding known triggers such as porphyrinogenic drugs, fasting, and alcohol, and consider the RNA-interference therapy givosiran, which lowers hepatic ALA synthase",
-   "In porphyria cutanea tarda, use regular venesection to reduce iron or low-dose hydroxychloroquine, treat hepatitis C, remove alcohol and oestrogen, and advise strict sun protection",
-   "Surveil for hepatocellular carcinoma with periodic imaging in older patients with acute porphyria",
-   "Provide genetic counselling and screen at-risk relatives, giving them a personalised list of safe and unsafe drugs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hepatic_porphyria-pathway",
-   "title": "Hepatic porphyria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The hepatic porphyrias are inherited or acquired defects of haem biosynthesis in which pathway intermediates accumulate and cause acute neurovisceral attacks or cutaneous disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute attack with progressive motor weakness or bulbar and respiratory involvement threatening ventilatory failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Spot urine porphobilinogen and delta-aminolaevulinic acid during symptomatic acute episodes, Plasma, urine, and faecal porphyrin profiling to classify the porphyria type, Enzyme activity assays and genetic testing to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: During an acute attack, withdraw all precipitating drugs, treat intercurrent infection, and provide high carbohydrate intake, giving intravenous glucose if oral intake is not possible"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to consider porphyria in recurrent unexplained severe abdominal pain, delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hepatic porphyria."
-  }
- ],
- "tables": [
-  {
-   "id": "hepatic_porphyria-matrix",
-   "title": "Hepatic porphyria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The hepatic porphyrias are inherited or acquired defects of haem biosynthesis in which pathway intermediates accumulate and cause",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "GI / Hepatology",
+  "specialty": "Hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / AASLD",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The hepatic porphyrias are inherited or acquired defects of haem biosynthesis in which pathway intermediates accumulate and cause acute neurovisceral attacks or cutaneous disease",
+      "Acute intermittent porphyria, the most common acute form, presents with severe unexplained abdominal pain, autonomic disturbance, hyponatraemia, and neuropsychiatric features, without skin involvement",
+      "Attacks are precipitated by many drugs, fasting or crash dieting, alcohol, infection, and hormonal fluctuations, so a careful trigger history is essential",
+      "During an acute attack the urine contains excess porphobilinogen and delta-aminolaevulinic acid and may darken on standing",
+      "Porphyria cutanea tarda, the most common porphyria overall, causes photosensitive skin fragility and blistering and is strongly linked with hepatitis C, alcohol, iron overload, and oestrogen use",
+      "The acute porphyrias carry an increased long-term risk of hepatocellular carcinoma, warranting surveillance in older patients",
+      "Management principles for acute attacks include removing precipitants, providing adequate carbohydrate, and giving haem therapy to suppress the overactive pathway, alongside symptom control",
+      "Porphyria cutanea tarda is managed by addressing iron overload and cofactors and by strict sun protection"
     ],
-    [
-     "Key Investigations",
-     "Spot urine porphobilinogen and delta-aminolaevulinic acid during symptomatic acute episodes, Plasma, urine, and faecal porphyrin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Haem is synthesised through an eight-step enzymatic pathway; a partial deficiency of one of these enzymes, most relevant in the liver, causes a hepatic porphyria. In the acute porphyrias (such as acute intermittent porphyria from hydroxymethylbilane synthase deficiency), demand for haem induces the rate-controlling enzyme ALA synthase, and the downstream enzyme block leads to accumulation of the neurotoxic precursors delta-aminolaevulinic acid and porphobilinogen, producing neurovisceral attacks. Factors that increase hepatic haem demand, including many drugs metabolised by cytochrome P450, fasting, and steroid hormones, upregulate the pathway and precipitate attacks. In porphyria cutanea tarda, reduced hepatic uroporphyrinogen decarboxylase activity, exacerbated by iron, alcohol, oestrogens, and hepatitis C, causes accumulation of photoactive porphyrins that damage sun-exposed skin. Chronic hepatic involvement predisposes to hepatocellular carcinoma.",
+    "additionalDifferentials": [
+      "Acute abdomen from surgical causes",
+      "Lead poisoning",
+      "Guillain-Barre syndrome and other neuropathies",
+      "Systemic vasculitis",
+      "Other blistering photosensitive dermatoses",
+      "Hereditary tyrosinaemia and other metabolic disorders"
     ],
-    [
-     "Primary Differentials",
-     "Acute abdomen from surgical causes, Lead poisoning, Guillain-Barre syndrome and other neuropathies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Spot urine porphobilinogen and delta-aminolaevulinic acid during symptomatic acute episodes",
+      "Plasma, urine, and faecal porphyrin profiling to classify the porphyria type",
+      "Enzyme activity assays and genetic testing to confirm the specific defect",
+      "Testing for hepatitis C, iron studies, and HFE genotyping in porphyria cutanea tarda",
+      "Electrolytes to detect hyponatraemia during acute attacks",
+      "Hepatic imaging and alpha-fetoprotein surveillance for hepatocellular carcinoma in acute porphyrias"
     ],
-    [
-     "Management Strategy",
-     "During an acute attack, withdraw all precipitating drugs, treat intercurrent infection, and provide high carbohydrate intake,",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute attack with progressive motor weakness or bulbar and respiratory involvement threatening ventilatory failure",
+      "Severe hyponatraemia with seizures during an attack",
+      "Autonomic instability with marked hypertension and tachyarrhythmia",
+      "New hepatic mass suggesting hepatocellular carcinoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to consider porphyria in recurrent unexplained severe abdominal pain, delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt recognition, removal of triggers, and appropriate treatment, acute attacks usually resolve, though severe attacks can cause lasting neurological deficits or death; recurrent attacks and chronic disease carry an increased risk of hepatocellular carcinoma, while porphyria cutanea tarda generally responds well to treatment of underlying cofactors.",
+    "pitfalls": [
+      "Failing to consider porphyria in recurrent unexplained severe abdominal pain, delaying diagnosis",
+      "Administering porphyrinogenic drugs that precipitate or worsen an acute attack",
+      "Restricting carbohydrate and calories during illness, which aggravates attacks",
+      "Omitting hepatocellular carcinoma surveillance in older patients with acute porphyria"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "AASLD guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "During an acute attack, withdraw all precipitating drugs, treat intercurrent infection, and provide high carbohydrate intake, giving intravenous glucose if oral intake is not possible",
+      "Give intravenous haem (haem arginate) early in a significant acute attack to suppress ALA synthase and precursor overproduction",
+      "Control attack symptoms with porphyria-safe analgesics such as opioids, safe antiemetics, correction of hyponatraemia, and a beta-blocker for autonomic overactivity, using only drugs confirmed safe in porphyria",
+      "Prevent recurrent acute attacks by avoiding known triggers such as porphyrinogenic drugs, fasting, and alcohol, and consider the RNA-interference therapy givosiran, which lowers hepatic ALA synthase",
+      "In porphyria cutanea tarda, use regular venesection to reduce iron or low-dose hydroxychloroquine, treat hepatitis C, remove alcohol and oestrogen, and advise strict sun protection",
+      "Surveil for hepatocellular carcinoma with periodic imaging in older patients with acute porphyria",
+      "Provide genetic counselling and screen at-risk relatives, giving them a personalised list of safe and unsafe drugs"
     ]
-   ],
-   "caption": "Overview comparison matrix for hepatic porphyria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hepatic-porphyria-real-image",
-   "title": "Hepatic porphyria: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "hepatic_porphyria-pathway",
+      "title": "Hepatic porphyria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The hepatic porphyrias are inherited or acquired defects of haem biosynthesis in which pathway intermediates accumulate and cause acute neurovisceral attacks or cutaneous disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute attack with progressive motor weakness or bulbar and respiratory involvement threatening ventilatory failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Spot urine porphobilinogen and delta-aminolaevulinic acid during symptomatic acute episodes, Plasma, urine, and faecal porphyrin profiling to classify the porphyria type, Enzyme activity assays and genetic testing to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: During an acute attack, withdraw all precipitating drugs, treat intercurrent infection, and provide high carbohydrate intake, giving intravenous glucose if oral intake is not possible"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to consider porphyria in recurrent unexplained severe abdominal pain, delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hepatic porphyria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hepatic_porphyria-matrix",
+      "title": "Hepatic porphyria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The hepatic porphyrias are inherited or acquired defects of haem biosynthesis in which pathway intermediates accumulate and cause",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Spot urine porphobilinogen and delta-aminolaevulinic acid during symptomatic acute episodes, Plasma, urine, and faecal porphyrin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute abdomen from surgical causes, Lead poisoning, Guillain-Barre syndrome and other neuropathies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "During an acute attack, withdraw all precipitating drugs, treat intercurrent infection, and provide high carbohydrate intake,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to consider porphyria in recurrent unexplained severe abdominal pain, delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hepatic porphyria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AASLD",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hepatic_porphyria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Spot urine porphobilinogen and delta-aminolaevulinic acid in an acute episode",
+          "cells": [
+            {
+              "text": "Excess porphobilinogen and ALA during an attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma, urine and faecal porphyrin profiling",
+          "cells": [
+            {
+              "text": "Classifies the porphyria type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme activity assays and genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the specific defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatitis C, iron studies and HFE genotyping (porphyria cutanea tarda)",
+          "cells": [
+            {
+              "text": "Associated causes of porphyria cutanea tarda"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes",
+          "cells": [
+            {
+              "text": "Hyponatraemia during acute attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic imaging and alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Hepatocellular carcinoma surveillance in acute porphyria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatic_porphyria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw precipitating drugs",
+          "cells": [
+            {
+              "text": "And treat intercurrent infection during an acute attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous haem arginate",
+          "cells": [
+            {
+              "text": "Given early in a significant attack, to suppress ALA synthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria-safe analgesics and antiemetics",
+          "cells": [
+            {
+              "text": "Opioids and safe antiemetics for attack symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid triggers",
+          "cells": [
+            {
+              "text": "Porphyrinogenic drugs, fasting or crash dieting, and alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria cutanea tarda treatment",
+          "cells": [
+            {
+              "text": "Regular venesection, or low-dose hydroxychloroquine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatocellular carcinoma surveillance",
+          "cells": [
+            {
+              "text": "Periodic imaging in older patients with acute porphyria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Screen at-risk relatives, with personalised drug-safety advice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hepatic_porphyria-dx-mgmt",
+      "title": "Diagnosis and management of Hepatic porphyria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute attack: severe abdominal pain, neuropathy or hyponatraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive weakness, bulbar or breathing involvement, seizures or autonomic instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent intravenous haem arginate and intensive care for a severe attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine porphobilinogen and ALA during the attack; porphyrin profiling; electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is porphobilinogen raised during the attack, confirming an acute porphyria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lead poisoning, neuropathy, a surgical abdomen or another porphyria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw precipitating drugs and treat intercurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early intravenous haem arginate in a significant attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Porphyria-safe analgesics and antiemetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid triggers: porphyrinogenic drugs, fasting and alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks controlled; long-term trigger avoidance and carcinoma surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

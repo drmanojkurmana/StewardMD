@@ -1,177 +1,493 @@
 {
- "id": "mullerian_duct_cyst",
- "name": "Mullerian duct cyst",
- "aliases": [
-  "mullerian duct cyst",
-  "paramesonephric duct cyst",
-  "midline prostatic cyst"
- ],
- "class": "non_infective",
- "system": "Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / EAU Guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A midline cystic remnant of the paramesonephric (mullerian) duct, situated in or above the prostate near the midline",
-   "It does not communicate with the urethra and does not contain spermatozoa, in contrast to a prostatic utricle cyst",
-   "Often asymptomatic and found incidentally; larger cysts may cause voiding symptoms, perineal pain, ejaculatory dysfunction, haematospermia or infertility",
-   "It typically presents in the third to fourth decades as the cyst enlarges, unlike utricle cysts, which more often present in childhood",
-   "Its midline position distinguishes it from laterally placed seminal vesicle cysts",
-   "MRI and transrectal ultrasound define the midline location and the relationship to the verumontanum",
-   "Small asymptomatic cysts are observed, whereas symptomatic cysts may be aspirated, marsupialised or excised"
+  "id": "mullerian_duct_cyst",
+  "name": "Mullerian duct cyst",
+  "aliases": [
+    "mullerian duct cyst",
+    "paramesonephric duct cyst",
+    "midline prostatic cyst"
   ],
-  "pathophysiology": "Mullerian duct cysts arise from incomplete regression of the paramesonephric ducts, which in males normally involute under the influence of anti-mullerian hormone, leaving only the prostatic utricle and the appendix testis. A retained segment can dilate into a midline cyst behind the prostate that lies above the verumontanum and, unlike the utricle, does not open into the prostatic urethra.",
-  "additionalDifferentials": [
-   "Prostatic utricle cyst, which is midline and communicates with the urethra",
-   "Seminal vesicle cyst, which is laterally placed",
-   "Ejaculatory duct cyst",
-   "Prostatic retention cyst",
-   "Cystic prostatic neoplasm",
-   "Zinner syndrome when renal agenesis is present"
-  ],
-  "additionalInvestigations": [
-   "Pelvic MRI to confirm the midline location and characterise the contents",
-   "Transrectal ultrasound for size and relationship to the prostate and ejaculatory ducts",
-   "Cyst fluid analysis, where absence of spermatozoa favours a mullerian rather than utricle or ejaculatory duct origin",
-   "Semen analysis if infertility is present",
-   "Cross-sectional imaging to exclude solid components or malignancy",
-   "Renal imaging to assess for associated anomalies"
-  ],
-  "redFlags": [
-   "Solid components or rapid growth suggesting rare malignant transformation",
-   "Infection or abscess formation",
-   "Obstructive voiding symptoms or infertility",
-   "Recurrent haematospermia"
-  ],
-  "prognosis": "Benign with a favourable outcome; most remain asymptomatic and symptomatic lesions respond well to drainage or excision, with only rare reports of malignancy arising within long-standing cysts.",
-  "pitfalls": [
-   "Confusing a mullerian duct cyst with a prostatic utricle cyst, when fluid spermatozoa and urethral communication help distinguish them",
-   "Mislabelling a midline cyst as a lateral seminal vesicle cyst",
-   "Overlooking rare malignant change in long-standing cysts",
-   "Attributing symptoms to benign prostatic enlargement"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "EAU Guidelines"
-  ],
-  "crossLinks": [
-   "utricle_cyst",
-   "seminal_vesicle_cyst",
-   "zinner_syndrome"
-  ],
-  "management": [
-   "Conservative observation for small, asymptomatic cysts",
-   "Surgical excision or deroofing by a transurethral, transrectal or laparoscopic/robotic approach for symptomatic or enlarging cysts",
-   "Aspiration or drainage as a less invasive option for symptomatic relief",
-   "Management of associated voiding symptoms, ejaculatory dysfunction or haematospermia",
-   "Fertility assessment and assisted reproductive input where infertility is present",
-   "Surveillance imaging for recurrence and for the rare development of malignancy within long-standing cysts",
-   "Referral to urology and evaluation for associated renal tract anomalies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mullerian_duct_cyst-pathway",
-   "title": "Mullerian duct cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A midline cystic remnant of the paramesonephric (mullerian) duct, situated in or above the prostate near the midline",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Solid components or rapid growth suggesting rare malignant transformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pelvic MRI to confirm the midline location and characterise the contents, Transrectal ultrasound for size and relationship to the prostate and ejaculatory ducts, Cyst fluid analysis, where absence of spermatozoa favours a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative observation for small, asymptomatic cysts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a mullerian duct cyst with a prostatic utricle cyst, when fluid spermatozoa and urethral communication help distinguish them"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mullerian duct cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "mullerian_duct_cyst-matrix",
-   "title": "Mullerian duct cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A midline cystic remnant of the paramesonephric (mullerian) duct, situated in or above the prostate near the midline",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / EAU Guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A midline cystic remnant of the paramesonephric (mullerian) duct, situated in or above the prostate near the midline",
+      "It does not communicate with the urethra and does not contain spermatozoa, in contrast to a prostatic utricle cyst",
+      "Often asymptomatic and found incidentally; larger cysts may cause voiding symptoms, perineal pain, ejaculatory dysfunction, haematospermia or infertility",
+      "It typically presents in the third to fourth decades as the cyst enlarges, unlike utricle cysts, which more often present in childhood",
+      "Its midline position distinguishes it from laterally placed seminal vesicle cysts",
+      "MRI and transrectal ultrasound define the midline location and the relationship to the verumontanum",
+      "Small asymptomatic cysts are observed, whereas symptomatic cysts may be aspirated, marsupialised or excised"
     ],
-    [
-     "Key Investigations",
-     "Pelvic MRI to confirm the midline location and characterise the contents, Transrectal ultrasound for size and relationship to the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mullerian duct cysts arise from incomplete regression of the paramesonephric ducts, which in males normally involute under the influence of anti-mullerian hormone, leaving only the prostatic utricle and the appendix testis. A retained segment can dilate into a midline cyst behind the prostate that lies above the verumontanum and, unlike the utricle, does not open into the prostatic urethra.",
+    "additionalDifferentials": [
+      "Prostatic utricle cyst, which is midline and communicates with the urethra",
+      "Seminal vesicle cyst, which is laterally placed",
+      "Ejaculatory duct cyst",
+      "Prostatic retention cyst",
+      "Cystic prostatic neoplasm",
+      "Zinner syndrome when renal agenesis is present"
     ],
-    [
-     "Primary Differentials",
-     "Prostatic utricle cyst, which is midline and communicates with the urethra, Seminal vesicle cyst, which is laterally placed,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pelvic MRI to confirm the midline location and characterise the contents",
+      "Transrectal ultrasound for size and relationship to the prostate and ejaculatory ducts",
+      "Cyst fluid analysis, where absence of spermatozoa favours a mullerian rather than utricle or ejaculatory duct origin",
+      "Semen analysis if infertility is present",
+      "Cross-sectional imaging to exclude solid components or malignancy",
+      "Renal imaging to assess for associated anomalies"
     ],
-    [
-     "Management Strategy",
-     "Conservative observation for small, asymptomatic cysts",
-     "Core treatment modality"
+    "redFlags": [
+      "Solid components or rapid growth suggesting rare malignant transformation",
+      "Infection or abscess formation",
+      "Obstructive voiding symptoms or infertility",
+      "Recurrent haematospermia"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a mullerian duct cyst with a prostatic utricle cyst, when fluid spermatozoa and urethral communication help distinguish",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign with a favourable outcome; most remain asymptomatic and symptomatic lesions respond well to drainage or excision, with only rare reports of malignancy arising within long-standing cysts.",
+    "pitfalls": [
+      "Confusing a mullerian duct cyst with a prostatic utricle cyst, when fluid spermatozoa and urethral communication help distinguish them",
+      "Mislabelling a midline cyst as a lateral seminal vesicle cyst",
+      "Overlooking rare malignant change in long-standing cysts",
+      "Attributing symptoms to benign prostatic enlargement"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "EAU Guidelines"
+    ],
+    "crossLinks": [
+      "utricle_cyst",
+      "seminal_vesicle_cyst",
+      "zinner_syndrome"
+    ],
+    "management": [
+      "Conservative observation for small, asymptomatic cysts",
+      "Surgical excision or deroofing by a transurethral, transrectal or laparoscopic/robotic approach for symptomatic or enlarging cysts",
+      "Aspiration or drainage as a less invasive option for symptomatic relief",
+      "Management of associated voiding symptoms, ejaculatory dysfunction or haematospermia",
+      "Fertility assessment and assisted reproductive input where infertility is present",
+      "Surveillance imaging for recurrence and for the rare development of malignancy within long-standing cysts",
+      "Referral to urology and evaluation for associated renal tract anomalies"
     ]
-   ],
-   "caption": "Overview comparison matrix for mullerian duct cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mullerian-duct-cyst-real-image",
-   "title": "Mullerian duct cyst: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mullerian_duct_cyst-pathway",
+      "title": "Mullerian duct cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A midline cystic remnant of the paramesonephric (mullerian) duct, situated in or above the prostate near the midline",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Solid components or rapid growth suggesting rare malignant transformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pelvic MRI to confirm the midline location and characterise the contents, Transrectal ultrasound for size and relationship to the prostate and ejaculatory ducts, Cyst fluid analysis, where absence of spermatozoa favours a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative observation for small, asymptomatic cysts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a mullerian duct cyst with a prostatic utricle cyst, when fluid spermatozoa and urethral communication help distinguish them"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mullerian duct cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mullerian_duct_cyst-matrix",
+      "title": "Mullerian duct cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A midline cystic remnant of the paramesonephric (mullerian) duct, situated in or above the prostate near the midline",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pelvic MRI to confirm the midline location and characterise the contents, Transrectal ultrasound for size and relationship to the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Prostatic utricle cyst, which is midline and communicates with the urethra, Seminal vesicle cyst, which is laterally placed,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative observation for small, asymptomatic cysts",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a mullerian duct cyst with a prostatic utricle cyst, when fluid spermatozoa and urethral communication help distinguish",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mullerian duct cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / EAU Guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mullerian_duct_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Confirms the midline location and characterises the contents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transrectal ultrasound",
+          "cells": [
+            {
+              "text": "Size and relationship to the prostate and ejaculatory ducts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst fluid analysis",
+          "cells": [
+            {
+              "text": "Absence of spermatozoa favours mullerian origin over utricle or ejaculatory duct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semen analysis",
+          "cells": [
+            {
+              "text": "Where infertility is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Excludes solid components or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mullerian_duct_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostatic utricle cyst",
+          "cells": [
+            {
+              "text": "Midline, but communicates with the urethra; the mullerian cyst does not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seminal vesicle cyst",
+          "cells": [
+            {
+              "text": "Laterally placed; the mullerian cyst is midline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ejaculatory duct cyst",
+          "cells": [
+            {
+              "text": "Fluid without spermatozoa favours mullerian origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zinner syndrome",
+          "cells": [
+            {
+              "text": "Occurs when renal agenesis is present; renal imaging assesses associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mullerian_duct_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative observation",
+          "cells": [
+            {
+              "text": "Small, asymptomatic cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration or drainage",
+          "cells": [
+            {
+              "text": "Less invasive option for symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision or deroofing",
+          "cells": [
+            {
+              "text": "Transurethral, transrectal or laparoscopic/robotic approach for symptomatic or enlarging cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom management",
+          "cells": [
+            {
+              "text": "Voiding symptoms, ejaculatory dysfunction or haematospermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility assessment",
+          "cells": [
+            {
+              "text": "Assisted reproductive input where infertility is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging",
+          "cells": [
+            {
+              "text": "Recurrence and the rare development of malignancy in long-standing cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urology referral",
+          "cells": [
+            {
+              "text": "Evaluation for associated renal tract anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mullerian_duct_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Mullerian duct cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental midline cyst behind the prostate, typically third to fourth decades",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (solid components, rapid growth, infection, haematospermia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for malignancy or abscess with cross-sectional imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pelvic MRI and transrectal ultrasound to confirm midline location and contents",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cyst fluid lacks spermatozoa, favouring mullerian over utricle origin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider utricle or ejaculatory duct cyst; reassess fluid and urethral link",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative observation for small, asymptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspiration or drainage for symptomatic relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excision or deroofing for symptomatic or enlarging cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Fertility assessment where infertility is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance imaging for recurrence and rare malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign; symptomatic lesions respond well to drainage or excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,171 +1,431 @@
 {
- "id": "riehl_melanosis",
- "name": "Riehl melanosis (pigmented contact dermatitis)",
- "aliases": [
-  "Riehl's melanosis",
-  "pigmented contact dermatitis",
-  "melanodermatitis toxica"
- ],
- "class": "non_infective",
- "system": "Dermatology / Pigmentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Acquired grey-brown, often reticulate, pigmentation of the face and neck, classically over the forehead, temples and cheeks",
-   "Regarded as a form of pigmented contact dermatitis triggered by allergens in cosmetics, fragrances and dyes",
-   "Pigmentation may be preceded by mild erythema or itch before the discoloration becomes established",
-   "Patch and photopatch testing can identify the responsible allergen and guide avoidance",
-   "Histology shows a lichenoid/interface reaction with pigment incontinence and dermal melanophages",
-   "Identifying and avoiding the culprit allergen is central, with topical lightening agents and laser as adjuncts",
-   "The dermal component means Wood-lamp accentuation is limited and clearance is slow"
+  "id": "riehl_melanosis",
+  "name": "Riehl melanosis (pigmented contact dermatitis)",
+  "aliases": [
+    "Riehl's melanosis",
+    "pigmented contact dermatitis",
+    "melanodermatitis toxica"
   ],
-  "pathophysiology": "Repeated low-grade allergic contact sensitisation to cosmetic ingredients provokes a lichenoid interface dermatitis at the dermoepidermal junction. Damage to the basal layer causes pigment incontinence, with melanin dropping into the papillary dermis where it is retained within melanophages. This dermal melanin produces the persistent grey-brown reticulate pigmentation that characterises the condition.",
-  "additionalDifferentials": [
-   "Melasma",
-   "Post-inflammatory hyperpigmentation",
-   "Ashy dermatosis (erythema dyschromicum perstans)",
-   "Lichen planus pigmentosus",
-   "Poikiloderma of Civatte",
-   "Drug-induced facial pigmentation",
-   "Exogenous ochronosis"
-  ],
-  "additionalInvestigations": [
-   "Patch and photopatch testing to identify the causative allergen",
-   "Detailed cosmetic, fragrance and hair-dye history",
-   "Wood-lamp examination to gauge pigment depth",
-   "Dermoscopy of affected areas",
-   "Skin biopsy where the diagnosis is uncertain"
-  ],
-  "redFlags": [
-   "Failure to improve despite thorough allergen avoidance, prompting reconsideration of the diagnosis",
-   "Features suggesting exogenous ochronosis from misuse of topical lightening agents",
-   "Widespread or systemic pigmentation pointing to a drug or internal cause"
-  ],
-  "prognosis": "With identification and avoidance of the responsible allergen the pigmentation slowly improves over months to years, though some residual dermal pigment may persist.",
-  "pitfalls": [
-   "Not undertaking patch testing and therefore missing the causative allergen",
-   "Confusing it with melasma and continuing the offending cosmetic",
-   "Allowing ongoing allergen exposure, which perpetuates the pigmentation",
-   "Expecting a rapid response from lightening agents against dermal pigment"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and avoid the culprit allergen through patch and photopatch testing, the central step in management",
-   "Discontinue the offending cosmetics, fragrances and hair dyes",
-   "Apply topical lightening agents such as hydroquinone or azelaic acid to fade the dermal pigment",
-   "Use Q-switched laser therapy as an adjunct for persistent pigmentation",
-   "Advise broad-spectrum photoprotection to limit further pigmentation",
-   "Reassure that pigmentation improves slowly over months to years once the allergen is removed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "riehl_melanosis-pathway",
-   "title": "Riehl melanosis (pigmented contact dermatitis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Acquired grey-brown, often reticulate, pigmentation of the face and neck, classically over the forehead, temples and cheeks",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Failure to improve despite thorough allergen avoidance, prompting reconsideration of the diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Patch and photopatch testing to identify the causative allergen, Detailed cosmetic, fragrance and hair-dye history, Wood-lamp examination to gauge pigment depth"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and avoid the culprit allergen through patch and photopatch testing, the central step in management"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not undertaking patch testing and therefore missing the causative allergen"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of riehl melanosis (pigmented contact dermatitis)."
-  }
- ],
- "tables": [
-  {
-   "id": "riehl_melanosis-matrix",
-   "title": "Riehl melanosis (pigmented contact dermatitis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Acquired grey-brown, often reticulate, pigmentation of the face and neck, classically over the forehead, temples and cheeks",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Pigmentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Acquired grey-brown, often reticulate, pigmentation of the face and neck, classically over the forehead, temples and cheeks",
+      "Regarded as a form of pigmented contact dermatitis triggered by allergens in cosmetics, fragrances and dyes",
+      "Pigmentation may be preceded by mild erythema or itch before the discoloration becomes established",
+      "Patch and photopatch testing can identify the responsible allergen and guide avoidance",
+      "Histology shows a lichenoid/interface reaction with pigment incontinence and dermal melanophages",
+      "Identifying and avoiding the culprit allergen is central, with topical lightening agents and laser as adjuncts",
+      "The dermal component means Wood-lamp accentuation is limited and clearance is slow"
     ],
-    [
-     "Key Investigations",
-     "Patch and photopatch testing to identify the causative allergen, Detailed cosmetic, fragrance and hair-dye history, Wood-lamp",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Repeated low-grade allergic contact sensitisation to cosmetic ingredients provokes a lichenoid interface dermatitis at the dermoepidermal junction. Damage to the basal layer causes pigment incontinence, with melanin dropping into the papillary dermis where it is retained within melanophages. This dermal melanin produces the persistent grey-brown reticulate pigmentation that characterises the condition.",
+    "additionalDifferentials": [
+      "Melasma",
+      "Post-inflammatory hyperpigmentation",
+      "Ashy dermatosis (erythema dyschromicum perstans)",
+      "Lichen planus pigmentosus",
+      "Poikiloderma of Civatte",
+      "Drug-induced facial pigmentation",
+      "Exogenous ochronosis"
     ],
-    [
-     "Primary Differentials",
-     "Melasma, Post-inflammatory hyperpigmentation, Ashy dermatosis (erythema dyschromicum perstans)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Patch and photopatch testing to identify the causative allergen",
+      "Detailed cosmetic, fragrance and hair-dye history",
+      "Wood-lamp examination to gauge pigment depth",
+      "Dermoscopy of affected areas",
+      "Skin biopsy where the diagnosis is uncertain"
     ],
-    [
-     "Management Strategy",
-     "Identify and avoid the culprit allergen through patch and photopatch testing, the central step in management",
-     "Core treatment modality"
+    "redFlags": [
+      "Failure to improve despite thorough allergen avoidance, prompting reconsideration of the diagnosis",
+      "Features suggesting exogenous ochronosis from misuse of topical lightening agents",
+      "Widespread or systemic pigmentation pointing to a drug or internal cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Not undertaking patch testing and therefore missing the causative allergen",
-     "Prevent diagnostic or management error"
+    "prognosis": "With identification and avoidance of the responsible allergen the pigmentation slowly improves over months to years, though some residual dermal pigment may persist.",
+    "pitfalls": [
+      "Not undertaking patch testing and therefore missing the causative allergen",
+      "Confusing it with melasma and continuing the offending cosmetic",
+      "Allowing ongoing allergen exposure, which perpetuates the pigmentation",
+      "Expecting a rapid response from lightening agents against dermal pigment"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and avoid the culprit allergen through patch and photopatch testing, the central step in management",
+      "Discontinue the offending cosmetics, fragrances and hair dyes",
+      "Apply topical lightening agents such as hydroquinone or azelaic acid to fade the dermal pigment",
+      "Use Q-switched laser therapy as an adjunct for persistent pigmentation",
+      "Advise broad-spectrum photoprotection to limit further pigmentation",
+      "Reassure that pigmentation improves slowly over months to years once the allergen is removed"
     ]
-   ],
-   "caption": "Overview comparison matrix for riehl melanosis (pigmented contact dermatitis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "riehl-melanosis-real-image",
-   "title": "Riehl melanosis (pigmented contact dermatitis): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "riehl_melanosis-pathway",
+      "title": "Riehl melanosis (pigmented contact dermatitis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Acquired grey-brown, often reticulate, pigmentation of the face and neck, classically over the forehead, temples and cheeks",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Failure to improve despite thorough allergen avoidance, prompting reconsideration of the diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Patch and photopatch testing to identify the causative allergen, Detailed cosmetic, fragrance and hair-dye history, Wood-lamp examination to gauge pigment depth"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and avoid the culprit allergen through patch and photopatch testing, the central step in management"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not undertaking patch testing and therefore missing the causative allergen"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of riehl melanosis (pigmented contact dermatitis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "riehl_melanosis-matrix",
+      "title": "Riehl melanosis (pigmented contact dermatitis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acquired grey-brown, often reticulate, pigmentation of the face and neck, classically over the forehead, temples and cheeks",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Patch and photopatch testing to identify the causative allergen, Detailed cosmetic, fragrance and hair-dye history, Wood-lamp",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Melasma, Post-inflammatory hyperpigmentation, Ashy dermatosis (erythema dyschromicum perstans)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and avoid the culprit allergen through patch and photopatch testing, the central step in management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not undertaking patch testing and therefore missing the causative allergen",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for riehl melanosis (pigmented contact dermatitis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "riehl_melanosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Patch and photopatch testing",
+          "cells": [
+            {
+              "text": "Causative allergen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic, fragrance and hair-dye history",
+          "cells": [
+            {
+              "text": "Exposure source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood-lamp examination",
+          "cells": [
+            {
+              "text": "Depth of pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "riehl_melanosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Exogenous ochronosis",
+          "cells": [
+            {
+              "text": "Features from misuse of topical lightening agents (red flag)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced facial pigmentation",
+          "cells": [
+            {
+              "text": "Widespread or systemic pigmentation suggests a drug cause (red flag)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "riehl_melanosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Culprit allergen",
+          "cells": [
+            {
+              "text": "Identify and avoid it through patch and photopatch testing; the central step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop cosmetics",
+          "cells": [
+            {
+              "text": "Discontinue offending cosmetics, fragrances and hair dyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical lightening",
+          "cells": [
+            {
+              "text": "Hydroquinone or azelaic acid to fade dermal pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser",
+          "cells": [
+            {
+              "text": "Q-switched laser as an adjunct for persistent pigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Broad-spectrum photoprotection to limit further pigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expectations",
+          "cells": [
+            {
+              "text": "Pigment improves slowly over months to years once the allergen is avoided"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "riehl_melanosis-dx-mgmt",
+      "title": "Diagnosis and management of Riehl melanosis (pigmented contact dermatitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pigmented facial dermatitis linked to cosmetic or fragrance exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (no improvement with avoidance, ochronosis, widespread pigment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reconsider the diagnosis: exogenous ochronosis, drug or systemic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Patch and photopatch testing, cosmetic history, Wood-lamp, dermoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a causative allergen identified on patch testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Skin biopsy and reconsider melasma or other pigmentary disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and avoid the culprit allergen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop offending cosmetics, fragrances and hair dyes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical hydroquinone or azelaic acid to fade pigment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Photoprotection; Q-switched laser for persistent pigment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pigmentation improves slowly over months to years once the allergen is avoided",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,508 @@
 {
- "id": "keratosis_pilaris_atrophicans",
- "name": "Keratosis pilaris atrophicans",
- "aliases": [
-  "keratosis pilaris atrophicans faciei",
-  "ulerythema ophryogenes",
-  "atrophoderma vermiculatum",
-  "keratosis follicularis spinulosa decalvans spectrum"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of related disorders in which follicular keratosis is accompanied by inflammation that heals with atrophic scarring, distinguishing it from ordinary keratosis pilaris",
-   "Ulerythema ophryogenes affects the eyebrows and lateral cheeks with follicular papules, erythema and later loss of the outer eyebrows",
-   "Atrophoderma vermiculatum causes a distinctive worm-eaten (honeycomb) pitted scarring of the cheeks, usually beginning in childhood",
-   "Keratosis follicularis spinulosa decalvans is the most severe variant, with widespread spiny follicular keratosis and scarring alopecia",
-   "Some cases occur in isolation while others are associated with syndromes such as Noonan and cardiofaciocutaneous syndromes or with MBTPS2-related disease",
-   "Diagnosis is clinical, supported by biopsy showing follicular hyperkeratosis, perifollicular inflammation and dermal fibrosis; genetic testing is guided by the phenotype",
-   "Management is supportive with emollients and keratolytics, anti-inflammatory measures for the erythema, and cosmetic treatment such as laser for residual redness once inflammation settles"
+  "id": "keratosis_pilaris_atrophicans",
+  "name": "Keratosis pilaris atrophicans",
+  "aliases": [
+    "keratosis pilaris atrophicans faciei",
+    "ulerythema ophryogenes",
+    "atrophoderma vermiculatum",
+    "keratosis follicularis spinulosa decalvans spectrum"
   ],
-  "pathophysiology": "Keratosis pilaris atrophicans encompasses several disorders sharing abnormal follicular keratinisation with a significant inflammatory component. Keratotic plugging of follicles is accompanied by perifollicular inflammation that, unlike simple keratosis pilaris, damages the follicle and surrounding dermis and heals with atrophy and scarring, hence the eyebrow loss, honeycomb facial atrophy or scarring alopecia depending on the variant. Genetic contributions vary, ranging from isolated dominant traits to association with RASopathies such as Noonan and cardiofaciocutaneous syndromes and with MBTPS2-related keratinisation disorders at the severe end of the spectrum.",
-  "additionalDifferentials": [
-   "Ordinary keratosis pilaris",
-   "Keratosis follicularis spinulosa decalvans and IFAP syndrome",
-   "Lichen spinulosus",
-   "Acne vulgaris (for the facial variants)",
-   "Discoid lupus erythematosus (for scarring facial lesions)",
-   "Folliculitis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing follicular hyperkeratosis, perifollicular inflammation and dermal fibrosis",
-   "Assessment for associated syndromes (Noonan, cardiofaciocutaneous) including cardiac and developmental review",
-   "Molecular genetic testing guided by phenotype (e.g. RASopathy genes, MBTPS2)",
-   "Trichoscopy and dermoscopy of affected areas",
-   "Family history and pedigree analysis",
-   "Clinical photography to monitor scarring and erythema"
-  ],
-  "redFlags": [
-   "Progressive scarring alopecia suggesting the severe decalvans variant",
-   "Dysmorphic, cardiac or developmental features indicating an associated RASopathy",
-   "Rapidly progressive facial scarring",
-   "Secondary infection of inflamed follicular lesions"
-  ],
-  "prognosis": "The inflammatory phase and follicular keratosis often improve after puberty, but any atrophic scarring, eyebrow loss or scarring alopecia is permanent; overall prognosis depends on whether an underlying syndrome is present.",
-  "pitfalls": [
-   "Dismissing early disease as ordinary keratosis pilaris and missing the scarring potential",
-   "Overlooking an associated RASopathy such as Noonan or cardiofaciocutaneous syndrome",
-   "Using ablative cosmetic treatments while active inflammation persists",
-   "Failing to recognise the continuum with keratosis follicularis spinulosa decalvans and IFAP syndrome"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Harper's Textbook of Paediatric Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Emollients and keratolytics to reduce the follicular hyperkeratosis",
-   "Anti-inflammatory therapy including topical corticosteroids, with topical or systemic retinoids, to dampen the inflammatory phase before scarring occurs",
-   "Pulsed-dye or vascular laser for facial erythema and telangiectasia in ulerythema ophryogenes",
-   "Early treatment aimed at minimising permanent atrophic scarring, eyebrow loss and scarring alopecia",
-   "Assessment for and management of associated syndromes such as Noonan and cardiofaciocutaneous syndromes, including cardiac review",
-   "Camouflage or cosmetic reconstruction for established atrophic scarring and eyebrow loss",
-   "Clinical genetics referral and counselling guided by phenotype, covering RASopathy and MBTPS2-related disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "keratosis_pilaris_atrophicans-pathway",
-   "title": "Keratosis pilaris atrophicans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of related disorders in which follicular keratosis is accompanied by inflammation that heals with atrophic scarring, distinguishing it from ordinary keratosis pilaris",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive scarring alopecia suggesting the severe decalvans variant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing follicular hyperkeratosis, perifollicular inflammation and dermal fibrosis, Assessment for associated syndromes (Noonan, cardiofaciocutaneous) including cardiac and developmental review, Molecular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Emollients and keratolytics to reduce the follicular hyperkeratosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing early disease as ordinary keratosis pilaris and missing the scarring potential"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of keratosis pilaris atrophicans."
-  }
- ],
- "tables": [
-  {
-   "id": "keratosis_pilaris_atrophicans-matrix",
-   "title": "Keratosis pilaris atrophicans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of related disorders in which follicular keratosis is accompanied by inflammation that heals with atrophic scarring,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of related disorders in which follicular keratosis is accompanied by inflammation that heals with atrophic scarring, distinguishing it from ordinary keratosis pilaris",
+      "Ulerythema ophryogenes affects the eyebrows and lateral cheeks with follicular papules, erythema and later loss of the outer eyebrows",
+      "Atrophoderma vermiculatum causes a distinctive worm-eaten (honeycomb) pitted scarring of the cheeks, usually beginning in childhood",
+      "Keratosis follicularis spinulosa decalvans is the most severe variant, with widespread spiny follicular keratosis and scarring alopecia",
+      "Some cases occur in isolation while others are associated with syndromes such as Noonan and cardiofaciocutaneous syndromes or with MBTPS2-related disease",
+      "Diagnosis is clinical, supported by biopsy showing follicular hyperkeratosis, perifollicular inflammation and dermal fibrosis; genetic testing is guided by the phenotype",
+      "Management is supportive with emollients and keratolytics, anti-inflammatory measures for the erythema, and cosmetic treatment such as laser for residual redness once inflammation settles"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing follicular hyperkeratosis, perifollicular inflammation and dermal fibrosis, Assessment for associated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Keratosis pilaris atrophicans encompasses several disorders sharing abnormal follicular keratinisation with a significant inflammatory component. Keratotic plugging of follicles is accompanied by perifollicular inflammation that, unlike simple keratosis pilaris, damages the follicle and surrounding dermis and heals with atrophy and scarring, hence the eyebrow loss, honeycomb facial atrophy or scarring alopecia depending on the variant. Genetic contributions vary, ranging from isolated dominant traits to association with RASopathies such as Noonan and cardiofaciocutaneous syndromes and with MBTPS2-related keratinisation disorders at the severe end of the spectrum.",
+    "additionalDifferentials": [
+      "Ordinary keratosis pilaris",
+      "Keratosis follicularis spinulosa decalvans and IFAP syndrome",
+      "Lichen spinulosus",
+      "Acne vulgaris (for the facial variants)",
+      "Discoid lupus erythematosus (for scarring facial lesions)",
+      "Folliculitis"
     ],
-    [
-     "Primary Differentials",
-     "Ordinary keratosis pilaris, Keratosis follicularis spinulosa decalvans and IFAP syndrome, Lichen spinulosus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing follicular hyperkeratosis, perifollicular inflammation and dermal fibrosis",
+      "Assessment for associated syndromes (Noonan, cardiofaciocutaneous) including cardiac and developmental review",
+      "Molecular genetic testing guided by phenotype (e.g. RASopathy genes, MBTPS2)",
+      "Trichoscopy and dermoscopy of affected areas",
+      "Family history and pedigree analysis",
+      "Clinical photography to monitor scarring and erythema"
     ],
-    [
-     "Management Strategy",
-     "Emollients and keratolytics to reduce the follicular hyperkeratosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive scarring alopecia suggesting the severe decalvans variant",
+      "Dysmorphic, cardiac or developmental features indicating an associated RASopathy",
+      "Rapidly progressive facial scarring",
+      "Secondary infection of inflamed follicular lesions"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing early disease as ordinary keratosis pilaris and missing the scarring potential",
-     "Prevent diagnostic or management error"
+    "prognosis": "The inflammatory phase and follicular keratosis often improve after puberty, but any atrophic scarring, eyebrow loss or scarring alopecia is permanent; overall prognosis depends on whether an underlying syndrome is present.",
+    "pitfalls": [
+      "Dismissing early disease as ordinary keratosis pilaris and missing the scarring potential",
+      "Overlooking an associated RASopathy such as Noonan or cardiofaciocutaneous syndrome",
+      "Using ablative cosmetic treatments while active inflammation persists",
+      "Failing to recognise the continuum with keratosis follicularis spinulosa decalvans and IFAP syndrome"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Harper's Textbook of Paediatric Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Emollients and keratolytics to reduce the follicular hyperkeratosis",
+      "Anti-inflammatory therapy including topical corticosteroids, with topical or systemic retinoids, to dampen the inflammatory phase before scarring occurs",
+      "Pulsed-dye or vascular laser for facial erythema and telangiectasia in ulerythema ophryogenes",
+      "Early treatment aimed at minimising permanent atrophic scarring, eyebrow loss and scarring alopecia",
+      "Assessment for and management of associated syndromes such as Noonan and cardiofaciocutaneous syndromes, including cardiac review",
+      "Camouflage or cosmetic reconstruction for established atrophic scarring and eyebrow loss",
+      "Clinical genetics referral and counselling guided by phenotype, covering RASopathy and MBTPS2-related disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for keratosis pilaris atrophicans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "keratosis-pilaris-atrophicans-real-image",
-   "title": "Keratosis pilaris atrophicans: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "keratosis_pilaris_atrophicans-pathway",
+      "title": "Keratosis pilaris atrophicans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of related disorders in which follicular keratosis is accompanied by inflammation that heals with atrophic scarring, distinguishing it from ordinary keratosis pilaris",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive scarring alopecia suggesting the severe decalvans variant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing follicular hyperkeratosis, perifollicular inflammation and dermal fibrosis, Assessment for associated syndromes (Noonan, cardiofaciocutaneous) including cardiac and developmental review, Molecular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Emollients and keratolytics to reduce the follicular hyperkeratosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing early disease as ordinary keratosis pilaris and missing the scarring potential"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of keratosis pilaris atrophicans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "keratosis_pilaris_atrophicans-matrix",
+      "title": "Keratosis pilaris atrophicans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of related disorders in which follicular keratosis is accompanied by inflammation that heals with atrophic scarring,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing follicular hyperkeratosis, perifollicular inflammation and dermal fibrosis, Assessment for associated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ordinary keratosis pilaris, Keratosis follicularis spinulosa decalvans and IFAP syndrome, Lichen spinulosus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Emollients and keratolytics to reduce the follicular hyperkeratosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing early disease as ordinary keratosis pilaris and missing the scarring potential",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for keratosis pilaris atrophicans."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "keratosis_pilaris_atrophicans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Follicular hyperkeratosis, inflammation, dermal fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and developmental review",
+          "cells": [
+            {
+              "text": "Associated RASopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing guided by phenotype",
+          "cells": [
+            {
+              "text": "RASopathy genes or MBTPS2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy and dermoscopy",
+          "cells": [
+            {
+              "text": "Affected areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and pedigree",
+          "cells": [
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical photography",
+          "cells": [
+            {
+              "text": "Scarring and erythema over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "keratosis_pilaris_atrophicans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ordinary keratosis pilaris",
+          "cells": [
+            {
+              "text": "No scarring or atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratosis follicularis spinulosa decalvans",
+          "cells": [
+            {
+              "text": "MBTPS2; scarring alopecia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen spinulosus",
+          "cells": [
+            {
+              "text": "Non-scarring spiny papules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acne vulgaris",
+          "cells": [
+            {
+              "text": "Facial variants; comedones and inflammatory lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Discoid lupus erythematosus",
+          "cells": [
+            {
+              "text": "Scarring facial lesions; histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folliculitis",
+          "cells": [
+            {
+              "text": "Infective pustules"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "keratosis_pilaris_atrophicans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Keratosis",
+          "cells": [
+            {
+              "text": "Emollients and keratolytics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Topical steroids with topical or systemic retinoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythema",
+          "cells": [
+            {
+              "text": "Pulsed-dye or vascular laser for ulerythema ophryogenes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early treatment",
+          "cells": [
+            {
+              "text": "Aim to minimise atrophic scarring and eyebrow loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromes",
+          "cells": [
+            {
+              "text": "Noonan or cardiofaciocutaneous review including cardiac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic",
+          "cells": [
+            {
+              "text": "Camouflage or reconstruction for established scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Counselling guided by phenotype: RASopathy or MBTPS2"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "keratosis_pilaris_atrophicans-dx-mgmt",
+      "title": "Diagnosis and management of Keratosis pilaris atrophicans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Follicular keratosis with inflammation and atrophic scarring of the face or scalp",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive scarring alopecia, dysmorphic or cardiac features, or rapid scarring?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiac and developmental review if RASopathy suspected; treat infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, phenotype-guided genetics, trichoscopy, cardiac and developmental review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Atrophic scarring with inflammatory follicular keratosis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ordinary keratosis pilaris, lupus or folliculitis; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emollients and keratolytics for follicular keratosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical steroids with retinoids to dampen inflammation early",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pulsed-dye or vascular laser for facial erythema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and manage Noonan or cardiofaciocutaneous syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Camouflage or reconstruction for established scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Scarring is permanent; early anti-inflammatory treatment limits damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

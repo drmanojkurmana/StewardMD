@@ -1,173 +1,473 @@
 {
- "id": "aphthous_stomatitis",
- "name": "Aphthous stomatitis",
- "aliases": [
-  "recurrent aphthous stomatitis",
-  "canker sores",
-  "aphthous ulcers",
-  "RAS"
- ],
- "class": "non_infective",
- "system": "Oral / Dental / Maxillofacial",
- "specialty": "Dentistry / OMFS",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard oral medicine & OMFS references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Recurrent aphthous stomatitis produces painful, recurrent, round or oval ulcers with a yellow-grey base and an erythematous halo",
-   "Ulcers characteristically affect non-keratinised, movable mucosa such as the labial and buccal mucosa, sparing the hard palate and attached gingiva",
-   "Minor aphthae are small and heal without scarring in one to two weeks, while major aphthae are larger, deeper, and can scar",
-   "Herpetiform ulcers are numerous tiny lesions that may coalesce, despite the name they are not caused by herpes virus",
-   "It is a clinical diagnosis of recurrent ulceration in an otherwise well patient, and lesions recur in the same tissue types",
-   "Precipitants include stress, local trauma, certain foods, hormonal changes, and cessation of smoking",
-   "Aphthous-like ulceration can be a marker of haematinic deficiency, coeliac disease, inflammatory bowel disease, or Behcet disease",
-   "Management is largely symptomatic with topical agents to relieve pain and inflammation, alongside correcting any deficiency"
+  "id": "aphthous_stomatitis",
+  "name": "Aphthous stomatitis",
+  "aliases": [
+    "recurrent aphthous stomatitis",
+    "canker sores",
+    "aphthous ulcers",
+    "RAS"
   ],
-  "pathophysiology": "The precise cause is not fully understood, but recurrent aphthous stomatitis is considered a T-cell mediated immune reaction directed at the oral epithelium, producing focal ulceration. A genetic predisposition is common, and episodes are triggered by factors such as local trauma, stress, hormonal fluctuation, and specific foods. Systemic contributors, including deficiencies of iron, folate, or vitamin B12, and gastrointestinal or systemic inflammatory conditions, can precipitate or worsen ulceration. The lesions represent localised epithelial destruction with a mixed inflammatory infiltrate that heals as the immune response subsides.",
-  "additionalDifferentials": [
-   "Primary or recurrent herpetic ulceration",
-   "Traumatic ulcer",
-   "Oral manifestations of Behcet disease",
-   "Ulceration from coeliac or inflammatory bowel disease",
-   "Erosive lichen planus or immunobullous disease",
-   "Oral squamous cell carcinoma presenting as a non-healing ulcer"
-  ],
-  "additionalInvestigations": [
-   "Clinical history focusing on frequency, pattern, and triggers",
-   "Haematinics (iron studies, folate, vitamin B12) and full blood count",
-   "Coeliac serology when gastrointestinal features or deficiency present",
-   "Assessment for systemic features suggesting Behcet or inflammatory bowel disease",
-   "Biopsy of any solitary ulcer that fails to heal to exclude malignancy"
-  ],
-  "redFlags": [
-   "A single ulcer persisting beyond two to three weeks, which must be investigated to exclude oral cancer",
-   "Ulceration with systemic features such as genital ulcers or ocular inflammation suggesting Behcet disease",
-   "Severe or atypical ulceration pointing to underlying systemic or immunodeficiency disease"
-  ],
-  "prognosis": "Most patients have self-limiting recurrent episodes that heal without scarring and can be controlled symptomatically, though major aphthae may scar and some cases reflect a treatable underlying systemic condition.",
-  "pitfalls": [
-   "Dismissing a persistent solitary ulcer as aphthous when it may be malignant",
-   "Failing to screen for haematinic deficiency or coeliac disease in severe or new-onset cases",
-   "Confusing herpetiform aphthae with herpes simplex infection",
-   "Overlooking systemic disease such as Behcet when extra-oral features are present"
-  ],
-  "references": [
-   "Burket's Oral Medicine",
-   "Standard OMFS references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use topical corticosteroids (such as a betamethasone mouthwash, triamcinolone in dental paste or hydrocortisone mucoadhesive pellets) as first-line treatment to shorten episodes",
-   "Provide symptomatic relief with topical local anaesthetic, chlorhexidine or antiseptic mouthwash, and barrier or coating agents",
-   "Advise trigger avoidance: minimise oral trauma, switch to a sodium lauryl sulphate-free toothpaste, and avoid identified precipitant foods",
-   "Correct any underlying haematinic deficiency of iron, folate or vitamin B12",
-   "For severe or refractory ulceration, escalate to systemic therapy such as colchicine or a short course of systemic corticosteroids",
-   "Investigate and treat an underlying systemic cause such as coeliac disease, inflammatory bowel disease or Behcet disease when features suggest it",
-   "Biopsy any solitary ulcer that fails to heal to exclude malignancy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aphthous_stomatitis-pathway",
-   "title": "Aphthous stomatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Recurrent aphthous stomatitis produces painful, recurrent, round or oval ulcers with a yellow-grey base and an erythematous halo",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A single ulcer persisting beyond two to three weeks, which must be investigated to exclude oral cancer",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical history focusing on frequency, pattern, and triggers, Haematinics (iron studies, folate, vitamin B12) and full blood count, Coeliac serology when gastrointestinal features or deficiency present"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use topical corticosteroids (such as a betamethasone mouthwash, triamcinolone in dental paste or hydrocortisone mucoadhesive pellets) as first-line treatment to shorten episodes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing a persistent solitary ulcer as aphthous when it may be malignant"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aphthous stomatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "aphthous_stomatitis-matrix",
-   "title": "Aphthous stomatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Recurrent aphthous stomatitis produces painful, recurrent, round or oval ulcers with a yellow-grey base and an erythematous halo",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oral / Dental / Maxillofacial",
+  "specialty": "Dentistry / OMFS",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard oral medicine & OMFS references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Recurrent aphthous stomatitis produces painful, recurrent, round or oval ulcers with a yellow-grey base and an erythematous halo",
+      "Ulcers characteristically affect non-keratinised, movable mucosa such as the labial and buccal mucosa, sparing the hard palate and attached gingiva",
+      "Minor aphthae are small and heal without scarring in one to two weeks, while major aphthae are larger, deeper, and can scar",
+      "Herpetiform ulcers are numerous tiny lesions that may coalesce, despite the name they are not caused by herpes virus",
+      "It is a clinical diagnosis of recurrent ulceration in an otherwise well patient, and lesions recur in the same tissue types",
+      "Precipitants include stress, local trauma, certain foods, hormonal changes, and cessation of smoking",
+      "Aphthous-like ulceration can be a marker of haematinic deficiency, coeliac disease, inflammatory bowel disease, or Behcet disease",
+      "Management is largely symptomatic with topical agents to relieve pain and inflammation, alongside correcting any deficiency"
     ],
-    [
-     "Key Investigations",
-     "Clinical history focusing on frequency, pattern, and triggers, Haematinics (iron studies, folate, vitamin B12) and full blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The precise cause is not fully understood, but recurrent aphthous stomatitis is considered a T-cell mediated immune reaction directed at the oral epithelium, producing focal ulceration. A genetic predisposition is common, and episodes are triggered by factors such as local trauma, stress, hormonal fluctuation, and specific foods. Systemic contributors, including deficiencies of iron, folate, or vitamin B12, and gastrointestinal or systemic inflammatory conditions, can precipitate or worsen ulceration. The lesions represent localised epithelial destruction with a mixed inflammatory infiltrate that heals as the immune response subsides.",
+    "additionalDifferentials": [
+      "Primary or recurrent herpetic ulceration",
+      "Traumatic ulcer",
+      "Oral manifestations of Behcet disease",
+      "Ulceration from coeliac or inflammatory bowel disease",
+      "Erosive lichen planus or immunobullous disease",
+      "Oral squamous cell carcinoma presenting as a non-healing ulcer"
     ],
-    [
-     "Primary Differentials",
-     "Primary or recurrent herpetic ulceration, Traumatic ulcer, Oral manifestations of Behcet disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical history focusing on frequency, pattern, and triggers",
+      "Haematinics (iron studies, folate, vitamin B12) and full blood count",
+      "Coeliac serology when gastrointestinal features or deficiency present",
+      "Assessment for systemic features suggesting Behcet or inflammatory bowel disease",
+      "Biopsy of any solitary ulcer that fails to heal to exclude malignancy"
     ],
-    [
-     "Management Strategy",
-     "Use topical corticosteroids (such as a betamethasone mouthwash, triamcinolone in dental paste or hydrocortisone mucoadhesive",
-     "Core treatment modality"
+    "redFlags": [
+      "A single ulcer persisting beyond two to three weeks, which must be investigated to exclude oral cancer",
+      "Ulceration with systemic features such as genital ulcers or ocular inflammation suggesting Behcet disease",
+      "Severe or atypical ulceration pointing to underlying systemic or immunodeficiency disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing a persistent solitary ulcer as aphthous when it may be malignant",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients have self-limiting recurrent episodes that heal without scarring and can be controlled symptomatically, though major aphthae may scar and some cases reflect a treatable underlying systemic condition.",
+    "pitfalls": [
+      "Dismissing a persistent solitary ulcer as aphthous when it may be malignant",
+      "Failing to screen for haematinic deficiency or coeliac disease in severe or new-onset cases",
+      "Confusing herpetiform aphthae with herpes simplex infection",
+      "Overlooking systemic disease such as Behcet when extra-oral features are present"
+    ],
+    "references": [
+      "Burket's Oral Medicine",
+      "Standard OMFS references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use topical corticosteroids (such as a betamethasone mouthwash, triamcinolone in dental paste or hydrocortisone mucoadhesive pellets) as first-line treatment to shorten episodes",
+      "Provide symptomatic relief with topical local anaesthetic, chlorhexidine or antiseptic mouthwash, and barrier or coating agents",
+      "Advise trigger avoidance: minimise oral trauma, switch to a sodium lauryl sulphate-free toothpaste, and avoid identified precipitant foods",
+      "Correct any underlying haematinic deficiency of iron, folate or vitamin B12",
+      "For severe or refractory ulceration, escalate to systemic therapy such as colchicine or a short course of systemic corticosteroids",
+      "Investigate and treat an underlying systemic cause such as coeliac disease, inflammatory bowel disease or Behcet disease when features suggest it",
+      "Biopsy any solitary ulcer that fails to heal to exclude malignancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for aphthous stomatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aphthous-stomatitis-real-image",
-   "title": "Aphthous stomatitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "aphthous_stomatitis-pathway",
+      "title": "Aphthous stomatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Recurrent aphthous stomatitis produces painful, recurrent, round or oval ulcers with a yellow-grey base and an erythematous halo",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A single ulcer persisting beyond two to three weeks, which must be investigated to exclude oral cancer",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical history focusing on frequency, pattern, and triggers, Haematinics (iron studies, folate, vitamin B12) and full blood count, Coeliac serology when gastrointestinal features or deficiency present"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use topical corticosteroids (such as a betamethasone mouthwash, triamcinolone in dental paste or hydrocortisone mucoadhesive pellets) as first-line treatment to shorten episodes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing a persistent solitary ulcer as aphthous when it may be malignant"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aphthous stomatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aphthous_stomatitis-matrix",
+      "title": "Aphthous stomatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Recurrent aphthous stomatitis produces painful, recurrent, round or oval ulcers with a yellow-grey base and an erythematous halo",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical history focusing on frequency, pattern, and triggers, Haematinics (iron studies, folate, vitamin B12) and full blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary or recurrent herpetic ulceration, Traumatic ulcer, Oral manifestations of Behcet disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use topical corticosteroids (such as a betamethasone mouthwash, triamcinolone in dental paste or hydrocortisone mucoadhesive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing a persistent solitary ulcer as aphthous when it may be malignant",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aphthous stomatitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aphthous_stomatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history of frequency, pattern and triggers",
+          "cells": [
+            {
+              "text": "Pattern and triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematinics (iron, folate, vitamin B12) and full blood count",
+          "cells": [
+            {
+              "text": "Underlying haematinic deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology",
+          "cells": [
+            {
+              "text": "When gastrointestinal features or deficiency are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for Behcet or inflammatory bowel disease features",
+          "cells": [
+            {
+              "text": "Systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of any solitary ulcer that fails to heal",
+          "cells": [
+            {
+              "text": "Excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aphthous_stomatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral manifestations of Behcet disease",
+          "cells": [
+            {
+              "text": "Systemic features suggest Behcet disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulceration from coeliac or inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Gastrointestinal features prompt coeliac serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aphthous_stomatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Betamethasone mouthwash, triamcinolone in dental paste, or hydrocortisone mucoadhesive pellets"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Topical local anaesthetic, chlorhexidine or antiseptic mouthwash, barrier agents"
+            },
+            {
+              "text": "Symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Minimise oral trauma; sodium lauryl sulphate-free toothpaste; avoid identified precipitant foods"
+            },
+            {
+              "text": "Identified triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematinic correction",
+          "cells": [
+            {
+              "text": "Iron, folate or vitamin B12"
+            },
+            {
+              "text": "Underlying deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Colchicine or a short course of systemic corticosteroids"
+            },
+            {
+              "text": "Severe or refractory ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying systemic cause",
+          "cells": [
+            {
+              "text": "Coeliac disease, inflammatory bowel disease or Behcet disease"
+            },
+            {
+              "text": "When features suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of non-healing solitary ulcer",
+          "cells": [
+            {
+              "text": "Excludes malignancy"
+            },
+            {
+              "text": "Fails to heal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aphthous_stomatitis-dx-mgmt",
+      "title": "Diagnosis and management of Aphthous stomatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent painful oral ulceration with a pattern and triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Solitary ulcer persisting beyond two to three weeks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy the solitary ulcer to exclude oral cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History, FBC, haematinics, coeliac serology, Behcet or IBD features",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Haematinic deficiency or systemic disease found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Correct haematinic deficiency and treat the systemic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table); biopsy if the ulcer persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic relief with local anaesthetic or chlorhexidine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Colchicine or systemic steroids for severe or refractory ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Biopsy any non-healing ulcer; trigger avoidance and symptomatic care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

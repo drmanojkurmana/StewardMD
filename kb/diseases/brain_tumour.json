@@ -226,25 +226,531 @@
       "caption": "Diagnostic and clinical overview matrix for brain tumour / mass lesion."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "brain-tumour-real-image",
-      "title": "Brain tumour / mass lesion: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Overview of Central Nervous System Tumors",
+      "url": "https://www.merckmanuals.com/professional/oncology/central-nervous-system-tumors/overview-of-central-nervous-system-tumors",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "brain_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical and imaging features of a brain tumour",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Headache",
+          "cells": [
+            {
+              "text": "Most common symptom; worse on waking, lying down or straining"
+            },
+            {
+              "text": "Classic morning pattern in only a minority"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Mental status change",
+          "cells": [
+            {
+              "text": "Second most common symptom"
+            },
+            {
+              "text": "Raised ICP or frontal involvement"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Papilloedema",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Present in 25% to 35%",
+              "range": [
+                25,
+                35
+              ]
+            },
+            {
+              "text": "Absence does not exclude raised ICP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Seizures",
+          "cells": [
+            {
+              "text": "Always focal in onset"
+            },
+            {
+              "text": "Generalised seizures more common with primary tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vomiting before headache",
+          "cells": [
+            {
+              "text": "Weeks of early-morning vomiting"
+            },
+            {
+              "text": "Posterior fossa tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with gadolinium",
+          "cells": [
+            {
+              "text": "{{hy:Study of choice}}"
+            },
+            {
+              "text": "CT with contrast if MRI not possible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Enhancement with necrosis and oedema",
+          "cells": [
+            {
+              "text": "Ring or irregular enhancement"
+            },
+            {
+              "text": "High-grade glioma or metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-enhancing FLAIR lesion",
+          "cells": [
+            {
+              "text": "Increased FLAIR signal"
+            },
+            {
+              "text": "Low-grade glioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dural-based enhancing mass with dural tail",
+          "cells": [
+            {
+              "text": "Extra-axial"
+            },
+            {
+              "text": "Meningioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple lesions",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 80% of brain metastases are multiple"
+            },
+            {
+              "text": "Look for primary; chest imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CSF cytology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 50% on first LP"
+            },
+            {
+              "text": "Leptomeningeal disease; repeat sampling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "When imaging inconclusive"
+            },
+            {
+              "text": "Withhold steroids before biopsy if lymphoma suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source difference: Harrison says metastases are about 3 times more common than primary brain tumours; Merck says about 10 times."
+    },
+    {
+      "id": "brain_tumour-ddx",
+      "kind": "ddx",
+      "title": "Lesions that mimic a brain tumour",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain abscess",
+          "cells": [
+            {
+              "text": "{{hy:Ring enhancement; fever or infective source}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral toxoplasmosis",
+          "cells": [
+            {
+              "text": "Multiple ring lesions in immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocysticercosis or granuloma",
+          "cells": [
+            {
+              "text": "Cystic or granulomatous lesions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Demyelinating lesion",
+          "cells": [
+            {
+              "text": "Can mimic metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiation necrosis",
+          "cells": [
+            {
+              "text": "Prior radiotherapy; PET or MR perfusion helps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke or haemorrhage",
+          "cells": [
+            {
+              "text": "Sudden onset, vascular territory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subdural haematoma",
+          "cells": [
+            {
+              "text": "Crescentic extra-axial collection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Idiopathic intracranial hypertension",
+          "cells": [
+            {
+              "text": "Normal imaging with raised opening pressure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Migraine",
+          "cells": [
+            {
+              "text": "Commoner cause of morning headache"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "brain_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management of a brain tumour",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral dexamethasone or prednisone",
+          "cells": [
+            {
+              "text": "{{hy:Raised ICP from vasogenic oedema without herniation}}"
+            },
+            {
+              "text": "Dose not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV mannitol or hypertonic saline plus IV dexamethasone",
+          "cells": [
+            {
+              "text": "Herniation"
+            },
+            {
+              "text": "Decompress surgically as soon as possible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Short hyperventilation",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "PCO2 26 to 30 mm Hg",
+              "range": [
+                26,
+                30
+              ]
+            },
+            {
+              "text": "Temporary emergency measure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intubation",
+          "cells": [
+            {
+              "text": "Coma or poor airway reflexes"
+            },
+            {
+              "text": "Airway protection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antiseizure medication (for example levetiracetam)",
+          "cells": [
+            {
+              "text": "Patients who have seizures"
+            },
+            {
+              "text": "Agent from entry drug list"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Diagnosis and relief; may cure benign tumours"
+            },
+            {
+              "text": "Excise single metastasis before radiation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stereotactic radiosurgery",
+          "cells": [
+            {
+              "text": "4 or fewer metastases (possibly up to 10)"
+            },
+            {
+              "text": "Whole-brain radiation for more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radiotherapy and systemic therapy",
+          "cells": [
+            {
+              "text": "Infiltrating tumours"
+            },
+            {
+              "text": "Multimodal treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hold steroids until biopsy",
+          "cells": [
+            {
+              "text": "Suspected primary CNS lymphoma"
+            },
+            {
+              "text": "Steroids can make tissue non-diagnostic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "brain_tumour-dx-mgmt",
+      "title": "Diagnosis and management of a suspected brain tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive headache, focal deficit, seizure or cognitive change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Signs of herniation or coma?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Intubate; mannitol or hypertonic saline; IV dexamethasone",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Urgent surgical decompression",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "MRI with gadolinium",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Mass lesion?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Consider IIH, migraine; LP if raised ICP suspected",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Lymphoma suspected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biopsy before steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dexamethasone for oedema; treat seizures",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neuro-oncology: surgery, radiation, systemic therapy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
         }
       ]
     }

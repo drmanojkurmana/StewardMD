@@ -1,176 +1,470 @@
 {
- "id": "progressive_familial_intrahepatic_cholestasis_type_3",
- "name": "Progressive Familial Intrahepatic Cholestasis Type 3",
- "aliases": [
-  "PFIC3",
-  "MDR3 deficiency",
-  "ABCB4 deficiency"
- ],
- "class": "non_infective",
- "system": "Hepatology / Inherited cholestasis",
- "specialty": "Hepatology / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Inherited cholestasis references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The defining laboratory feature is a raised GGT cholestasis, in sharp contrast with the low-GGT picture of PFIC1 and PFIC2; it is caused by autosomal recessive ABCB4 mutations encoding MDR3.",
-   "MDR3 is the canalicular phosphatidylcholine floppase; its deficiency yields phospholipid-poor bile that cannot buffer the detergent toxicity of bile salts, injuring canaliculi and bile ducts.",
-   "Onset is generally later and the severity spectrum broader than PFIC1 or PFIC2, ranging from infancy through childhood to adult presentation.",
-   "Cholesterol gallstones and intrahepatic lithiasis are common, and ABCB4 variants underlie the low phospholipid-associated cholelithiasis (LPAC) syndrome.",
-   "Histology can mimic large-duct obstruction, with ductular proliferation, portal inflammation, bile duct injury and progressive portal fibrosis.",
-   "Related milder phenotypes from ABCB4 variation include intrahepatic cholestasis of pregnancy and some drug-induced and transient cholestasis.",
-   "Ursodeoxycholic acid is often effective, particularly in patients who retain residual MDR3 function.",
-   "Untreated disease progresses to biliary cirrhosis and portal hypertension."
+  "id": "progressive_familial_intrahepatic_cholestasis_type_3",
+  "name": "Progressive Familial Intrahepatic Cholestasis Type 3",
+  "aliases": [
+    "PFIC3",
+    "MDR3 deficiency",
+    "ABCB4 deficiency"
   ],
-  "pathophysiology": "ABCB4 encodes MDR3, an ATP-binding cassette transporter that acts as a floppase translocating phosphatidylcholine across the canalicular membrane into bile. Biliary phospholipids form mixed micelles with bile salts and cholesterol, buffering the detergent toxicity of bile acids and keeping cholesterol in solution. When MDR3 is absent or reduced, bile becomes phospholipid-poor, so free bile salts damage the canalicular membrane and biliary epithelium, generate cholangitis-like bile duct injury and ductular reaction, and promote cholesterol crystallisation and gallstone formation. The resulting cholangiocyte injury explains the elevated GGT that distinguishes this subtype, while the degree of residual transporter activity correlates with later onset, milder disease and responsiveness to ursodeoxycholic acid.",
-  "additionalDifferentials": [
-   "Primary sclerosing cholangitis and autoimmune sclerosing cholangitis",
-   "Mechanical biliary obstruction or choledocholithiasis",
-   "Biliary atresia",
-   "Alagille syndrome",
-   "Other high-GGT inherited cholestasis",
-   "Cystic fibrosis-related liver disease",
-   "Low phospholipid-associated cholelithiasis (as part of the ABCB4 spectrum)"
-  ],
-  "additionalInvestigations": [
-   "Serum GGT (raised) with serum bile acids",
-   "Molecular genetic testing of ABCB4",
-   "Liver biopsy showing bile duct injury, ductular reaction and portal fibrosis",
-   "Magnetic resonance cholangiopancreatography to exclude mechanical obstruction or sclerosing cholangitis",
-   "Abdominal ultrasound for gallstones and intrahepatic lithiasis",
-   "Specialist analysis of biliary phospholipid content where available"
-  ],
-  "redFlags": [
-   "Features of portal hypertension such as varices and splenomegaly",
-   "Recurrent cholangitis",
-   "Obstructive jaundice suggesting a stone or stricture",
-   "Progressive fibrosis toward biliary cirrhosis"
-  ],
-  "prognosis": "The course is variable: ursodeoxycholic acid-responsive disease may remain stable for years, whereas others progress to biliary cirrhosis requiring transplantation. There is an increased burden of cholelithiasis and a recognised risk of biliary malignancy.",
-  "pitfalls": [
-   "Misdiagnosis as primary sclerosing cholangitis or mechanical obstruction, leading to unnecessary surgery",
-   "Overlooking ABCB4 disease in adults with idiopathic cholestasis, intrahepatic cholestasis of pregnancy or recurrent gallstones",
-   "Withholding a trial of ursodeoxycholic acid",
-   "Assuming all PFIC subtypes share a low GGT"
-  ],
-  "references": [
-   "Paediatric hepatology reference texts",
-   "Inherited cholestasis clinical guidelines",
-   "Clinical genetics of liver disease references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Ursodeoxycholic acid is first-line and often effective, replenishing hydrophilic bile acids and protecting the biliary epithelium, with response correlating with residual MDR3 transporter activity",
-   "Ileal bile acid transporter inhibitors and other antipruritic measures such as rifampicin and bile acid sequestrants for inadequately controlled pruritus",
-   "Management of cholesterol gallstones and intrahepatic lithiasis, including the low-phospholipid-associated cholelithiasis phenotype, with endoscopic or surgical treatment as needed",
-   "Fat-soluble vitamin supplementation and nutritional support where cholestasis is significant",
-   "Surveillance for progression to biliary cirrhosis and for biliary malignancy such as cholangiocarcinoma with imaging",
-   "Liver transplantation for those progressing to biliary cirrhosis despite therapy",
-   "Genetic counselling and family testing for this autosomal recessive ABCB4 disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_familial_intrahepatic_cholestasis_type_3-pathway",
-   "title": "Progressive Familial Intrahepatic Cholestasis Type 3: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The defining laboratory feature is a raised GGT cholestasis, in sharp contrast with the low-GGT picture of PFIC1 and PFIC2; it is caused by autosomal recessive ABCB4 mutations encoding MDR3.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of portal hypertension such as varices and splenomegaly",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum GGT (raised) with serum bile acids, Molecular genetic testing of ABCB4, Liver biopsy showing bile duct injury, ductular reaction and portal fibrosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Ursodeoxycholic acid is first-line and often effective, replenishing hydrophilic bile acids and protecting the biliary epithelium, with response correlating with residual MDR3 transporter activity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosis as primary sclerosing cholangitis or mechanical obstruction, leading to unnecessary surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive familial intrahepatic cholestasis type 3."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_familial_intrahepatic_cholestasis_type_3-matrix",
-   "title": "Progressive Familial Intrahepatic Cholestasis Type 3: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The defining laboratory feature is a raised GGT cholestasis, in sharp contrast with the low-GGT picture of PFIC1 and PFIC2; it is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatology / Inherited cholestasis",
+  "specialty": "Hepatology / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Inherited cholestasis references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The defining laboratory feature is a raised GGT cholestasis, in sharp contrast with the low-GGT picture of PFIC1 and PFIC2; it is caused by autosomal recessive ABCB4 mutations encoding MDR3.",
+      "MDR3 is the canalicular phosphatidylcholine floppase; its deficiency yields phospholipid-poor bile that cannot buffer the detergent toxicity of bile salts, injuring canaliculi and bile ducts.",
+      "Onset is generally later and the severity spectrum broader than PFIC1 or PFIC2, ranging from infancy through childhood to adult presentation.",
+      "Cholesterol gallstones and intrahepatic lithiasis are common, and ABCB4 variants underlie the low phospholipid-associated cholelithiasis (LPAC) syndrome.",
+      "Histology can mimic large-duct obstruction, with ductular proliferation, portal inflammation, bile duct injury and progressive portal fibrosis.",
+      "Related milder phenotypes from ABCB4 variation include intrahepatic cholestasis of pregnancy and some drug-induced and transient cholestasis.",
+      "Ursodeoxycholic acid is often effective, particularly in patients who retain residual MDR3 function.",
+      "Untreated disease progresses to biliary cirrhosis and portal hypertension."
     ],
-    [
-     "Key Investigations",
-     "Serum GGT (raised) with serum bile acids, Molecular genetic testing of ABCB4, Liver biopsy showing bile duct injury, ductular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ABCB4 encodes MDR3, an ATP-binding cassette transporter that acts as a floppase translocating phosphatidylcholine across the canalicular membrane into bile. Biliary phospholipids form mixed micelles with bile salts and cholesterol, buffering the detergent toxicity of bile acids and keeping cholesterol in solution. When MDR3 is absent or reduced, bile becomes phospholipid-poor, so free bile salts damage the canalicular membrane and biliary epithelium, generate cholangitis-like bile duct injury and ductular reaction, and promote cholesterol crystallisation and gallstone formation. The resulting cholangiocyte injury explains the elevated GGT that distinguishes this subtype, while the degree of residual transporter activity correlates with later onset, milder disease and responsiveness to ursodeoxycholic acid.",
+    "additionalDifferentials": [
+      "Primary sclerosing cholangitis and autoimmune sclerosing cholangitis",
+      "Mechanical biliary obstruction or choledocholithiasis",
+      "Biliary atresia",
+      "Alagille syndrome",
+      "Other high-GGT inherited cholestasis",
+      "Cystic fibrosis-related liver disease",
+      "Low phospholipid-associated cholelithiasis (as part of the ABCB4 spectrum)"
     ],
-    [
-     "Primary Differentials",
-     "Primary sclerosing cholangitis and autoimmune sclerosing cholangitis, Mechanical biliary obstruction or choledocholithiasis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum GGT (raised) with serum bile acids",
+      "Molecular genetic testing of ABCB4",
+      "Liver biopsy showing bile duct injury, ductular reaction and portal fibrosis",
+      "Magnetic resonance cholangiopancreatography to exclude mechanical obstruction or sclerosing cholangitis",
+      "Abdominal ultrasound for gallstones and intrahepatic lithiasis",
+      "Specialist analysis of biliary phospholipid content where available"
     ],
-    [
-     "Management Strategy",
-     "Ursodeoxycholic acid is first-line and often effective, replenishing hydrophilic bile acids and protecting the biliary",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of portal hypertension such as varices and splenomegaly",
+      "Recurrent cholangitis",
+      "Obstructive jaundice suggesting a stone or stricture",
+      "Progressive fibrosis toward biliary cirrhosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosis as primary sclerosing cholangitis or mechanical obstruction, leading to unnecessary surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable: ursodeoxycholic acid-responsive disease may remain stable for years, whereas others progress to biliary cirrhosis requiring transplantation. There is an increased burden of cholelithiasis and a recognised risk of biliary malignancy.",
+    "pitfalls": [
+      "Misdiagnosis as primary sclerosing cholangitis or mechanical obstruction, leading to unnecessary surgery",
+      "Overlooking ABCB4 disease in adults with idiopathic cholestasis, intrahepatic cholestasis of pregnancy or recurrent gallstones",
+      "Withholding a trial of ursodeoxycholic acid",
+      "Assuming all PFIC subtypes share a low GGT"
+    ],
+    "references": [
+      "Paediatric hepatology reference texts",
+      "Inherited cholestasis clinical guidelines",
+      "Clinical genetics of liver disease references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Ursodeoxycholic acid is first-line and often effective, replenishing hydrophilic bile acids and protecting the biliary epithelium, with response correlating with residual MDR3 transporter activity",
+      "Ileal bile acid transporter inhibitors and other antipruritic measures such as rifampicin and bile acid sequestrants for inadequately controlled pruritus",
+      "Management of cholesterol gallstones and intrahepatic lithiasis, including the low-phospholipid-associated cholelithiasis phenotype, with endoscopic or surgical treatment as needed",
+      "Fat-soluble vitamin supplementation and nutritional support where cholestasis is significant",
+      "Surveillance for progression to biliary cirrhosis and for biliary malignancy such as cholangiocarcinoma with imaging",
+      "Liver transplantation for those progressing to biliary cirrhosis despite therapy",
+      "Genetic counselling and family testing for this autosomal recessive ABCB4 disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis type 3."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-familial-intrahepatic-cholestasis-type-3-real-image",
-   "title": "Progressive Familial Intrahepatic Cholestasis Type 3: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "progressive_familial_intrahepatic_cholestasis_type_3-pathway",
+      "title": "Progressive Familial Intrahepatic Cholestasis Type 3: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The defining laboratory feature is a raised GGT cholestasis, in sharp contrast with the low-GGT picture of PFIC1 and PFIC2; it is caused by autosomal recessive ABCB4 mutations encoding MDR3.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of portal hypertension such as varices and splenomegaly",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum GGT (raised) with serum bile acids, Molecular genetic testing of ABCB4, Liver biopsy showing bile duct injury, ductular reaction and portal fibrosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Ursodeoxycholic acid is first-line and often effective, replenishing hydrophilic bile acids and protecting the biliary epithelium, with response correlating with residual MDR3 transporter activity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosis as primary sclerosing cholangitis or mechanical obstruction, leading to unnecessary surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive familial intrahepatic cholestasis type 3."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_3-matrix",
+      "title": "Progressive Familial Intrahepatic Cholestasis Type 3: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The defining laboratory feature is a raised GGT cholestasis, in sharp contrast with the low-GGT picture of PFIC1 and PFIC2; it is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum GGT (raised) with serum bile acids, Molecular genetic testing of ABCB4, Liver biopsy showing bile duct injury, ductular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary sclerosing cholangitis and autoimmune sclerosing cholangitis, Mechanical biliary obstruction or choledocholithiasis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Ursodeoxycholic acid is first-line and often effective, replenishing hydrophilic bile acids and protecting the biliary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosis as primary sclerosing cholangitis or mechanical obstruction, leading to unnecessary surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis type 3."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited cholestasis references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum GGT with serum bile acids",
+          "cells": [
+            {
+              "text": "Raised GGT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of ABCB4",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Bile duct injury, ductular reaction and portal fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnetic resonance cholangiopancreatography",
+          "cells": [
+            {
+              "text": "Mechanical obstruction or sclerosing cholangitis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Gallstones and intrahepatic lithiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary phospholipid analysis, where available",
+          "cells": [
+            {
+              "text": "Biliary phospholipid content"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary and autoimmune sclerosing cholangitis",
+          "cells": [
+            {
+              "text": "Sclerosing cholangitis"
+            },
+            {
+              "text": "MRCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical biliary obstruction or choledocholithiasis",
+          "cells": [
+            {
+              "text": "Obstructive jaundice from a stone or stricture"
+            },
+            {
+              "text": "Abdominal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ursodeoxycholic acid (first line)",
+          "cells": [
+            {
+              "text": "Replenishes hydrophilic bile acids and protects the biliary epithelium; often effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipruritic measures",
+          "cells": [
+            {
+              "text": "Ileal bile acid transporter inhibitors, rifampicin and bile acid sequestrants where pruritus is not controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gallstones and lithiasis",
+          "cells": [
+            {
+              "text": "Cholesterol gallstones and intrahepatic lithiasis, including low-phospholipid cholelithiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamin supplementation where cholestasis is significant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Progression to biliary cirrhosis and biliary malignancy such as cholangiocarcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Progression to biliary cirrhosis despite therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ABCB4 disorder; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Progressive Familial Intrahepatic Cholestasis Type 3",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PFIC type 3 (ABCB4): cholestasis with raised GGT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Portal hypertension, recurrent cholangitis, obstructive jaundice or progressive fibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for cholangitis or obstructive jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum GGT and bile acids; ABCB4 testing; biopsy; MRCP; abdominal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an ABCB4 defect confirmed with mechanical obstruction excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sclerosing cholangitis, stones or biliary atresia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ursodeoxycholic acid as first-line therapy, often effective",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ileal bile acid transporter inhibitors, rifampicin or sequestrants for pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Management of gallstones and intrahepatic lithiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for biliary cirrhosis and cholangiocarcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver transplantation for progression to biliary cirrhosis despite therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,431 @@
 {
- "id": "gabrb3_encephalopathy",
- "name": "GABRB3 encephalopathy",
- "aliases": [
-  "GABRB3",
-  "GABRB3-related epilepsy",
-  "GABA-A receptor beta3 encephalopathy",
-  "EIEE43"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / ILAE",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by variants in GABRB3, which encodes the beta3 subunit of the inhibitory GABA-A receptor, the principal fast inhibitory neurotransmitter receptor in the brain",
-   "Phenotypes span from milder genetic generalised epilepsies, including childhood absence and febrile seizures, to severe developmental and epileptic encephalopathy",
-   "Seizure onset is often in infancy or early childhood, with multiple seizure types including absences, myoclonic, tonic, and epileptic spasms",
-   "The electroencephalogram may show generalised spike-wave, multifocal discharges, or hypsarrhythmia depending on severity",
-   "Impaired GABA-A receptor function reduces inhibitory tone, so agents that enhance GABAergic transmission are often part of the therapeutic strategy",
-   "GABRB3 lies within the chromosome 15q11-q13 region, and the gene is also implicated in the neurodevelopmental overlap of that locus",
-   "Developmental impairment and autistic features are common in the encephalopathic end of the spectrum"
+  "id": "gabrb3_encephalopathy",
+  "name": "GABRB3 encephalopathy",
+  "aliases": [
+    "GABRB3",
+    "GABRB3-related epilepsy",
+    "GABA-A receptor beta3 encephalopathy",
+    "EIEE43"
   ],
-  "pathophysiology": "GABRB3 encodes the beta3 subunit of the GABA-A receptor, a ligand-gated chloride channel that mediates fast synaptic inhibition. Pathogenic variants impair receptor assembly, trafficking, or channel gating, reducing inhibitory chloride currents and shifting the cortical balance towards excitation. This loss of inhibitory tone lowers the seizure threshold and perturbs the developmental maturation of neural circuits, producing epilepsy that ranges from self-limited generalised syndromes to severe encephalopathy. Because the core deficit is reduced GABAergic inhibition, therapies that potentiate GABA-A receptor signalling are mechanistically rational.",
-  "additionalDifferentials": [
-   "GABRA1 and GABRG2 related epilepsies",
-   "SCN1A-related Dravet syndrome and GEFS+",
-   "STXBP1 encephalopathy",
-   "Idiopathic or genetic generalised epilepsy of other cause",
-   "Angelman syndrome and other 15q11-q13 disorders",
-   "CDKL5 deficiency disorder"
-  ],
-  "additionalInvestigations": [
-   "Epilepsy gene panel or whole-exome sequencing to confirm the GABRB3 variant",
-   "Electroencephalography to define generalised versus multifocal patterns",
-   "Brain magnetic resonance imaging to exclude structural causes",
-   "Developmental and autism-spectrum assessment",
-   "Chromosomal microarray if a 15q11-q13 copy number change is suspected",
-   "Neuropsychological evaluation to guide support"
-  ],
-  "redFlags": [
-   "Progression to epileptic spasms with hypsarrhythmia",
-   "Frequent drug-resistant seizures with developmental regression",
-   "Status epilepticus",
-   "Marked behavioural and communication deterioration"
-  ],
-  "prognosis": "Milder generalised phenotypes may be well controlled with a good developmental outcome, whereas the developmental and epileptic encephalopathy end carries drug-resistant seizures and significant intellectual disability.",
-  "pitfalls": [
-   "Assuming a uniformly severe course when the phenotype can be mild and self-limited",
-   "Neglecting GABA-enhancing strategies given the underlying inhibitory deficit",
-   "Overlooking coexisting autistic and behavioural features that need support",
-   "Failing to consider 15q11-q13 disorders in the differential"
-  ],
-  "references": [
-   "GeneReviews and OMIM resources on GABRB3-related epilepsy",
-   "ILAE resources on GABA-A receptor subunit epilepsies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Seizure control with antiseizure medications matched to the phenotype, favouring agents that enhance GABA-A receptor signalling given the underlying inhibitory deficit, such as valproate and benzodiazepines, with ethosuximide for absences",
-   "For epileptic spasms with hypsarrhythmia, hormonal therapy or vigabatrin, with the ketogenic diet considered in refractory disease",
-   "Developmental and autism-focused support with early-intervention therapies",
-   "Serial EEG and neurodevelopmental monitoring to track seizure control and progress",
-   "Genetic counselling with parental testing, and chromosomal microarray where a 15q11-q13 copy number change is suspected",
-   "Multidisciplinary care coordinated by paediatric neurology and epileptology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gabrb3_encephalopathy-pathway",
-   "title": "GABRB3 encephalopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by variants in GABRB3, which encodes the beta3 subunit of the inhibitory GABA-A receptor, the principal fast inhibitory neurotransmitter receptor in the brain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progression to epileptic spasms with hypsarrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to confirm the GABRB3 variant, Electroencephalography to define generalised versus multifocal patterns, Brain magnetic resonance imaging to exclude structural causes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Seizure control with antiseizure medications matched to the phenotype, favouring agents that enhance GABA-A receptor signalling given the underlying inhibitory deficit, such as valproate and benzodiazepines, with"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a uniformly severe course when the phenotype can be mild and self-limited"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gabrb3 encephalopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "gabrb3_encephalopathy-matrix",
-   "title": "GABRB3 encephalopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by variants in GABRB3, which encodes the beta3 subunit of the inhibitory GABA-A receptor, the principal fast inhibitory",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / ILAE",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by variants in GABRB3, which encodes the beta3 subunit of the inhibitory GABA-A receptor, the principal fast inhibitory neurotransmitter receptor in the brain",
+      "Phenotypes span from milder genetic generalised epilepsies, including childhood absence and febrile seizures, to severe developmental and epileptic encephalopathy",
+      "Seizure onset is often in infancy or early childhood, with multiple seizure types including absences, myoclonic, tonic, and epileptic spasms",
+      "The electroencephalogram may show generalised spike-wave, multifocal discharges, or hypsarrhythmia depending on severity",
+      "Impaired GABA-A receptor function reduces inhibitory tone, so agents that enhance GABAergic transmission are often part of the therapeutic strategy",
+      "GABRB3 lies within the chromosome 15q11-q13 region, and the gene is also implicated in the neurodevelopmental overlap of that locus",
+      "Developmental impairment and autistic features are common in the encephalopathic end of the spectrum"
     ],
-    [
-     "Key Investigations",
-     "Epilepsy gene panel or whole-exome sequencing to confirm the GABRB3 variant, Electroencephalography to define generalised versus",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "GABRB3 encodes the beta3 subunit of the GABA-A receptor, a ligand-gated chloride channel that mediates fast synaptic inhibition. Pathogenic variants impair receptor assembly, trafficking, or channel gating, reducing inhibitory chloride currents and shifting the cortical balance towards excitation. This loss of inhibitory tone lowers the seizure threshold and perturbs the developmental maturation of neural circuits, producing epilepsy that ranges from self-limited generalised syndromes to severe encephalopathy. Because the core deficit is reduced GABAergic inhibition, therapies that potentiate GABA-A receptor signalling are mechanistically rational.",
+    "additionalDifferentials": [
+      "GABRA1 and GABRG2 related epilepsies",
+      "SCN1A-related Dravet syndrome and GEFS+",
+      "STXBP1 encephalopathy",
+      "Idiopathic or genetic generalised epilepsy of other cause",
+      "Angelman syndrome and other 15q11-q13 disorders",
+      "CDKL5 deficiency disorder"
     ],
-    [
-     "Primary Differentials",
-     "GABRA1 and GABRG2 related epilepsies, SCN1A-related Dravet syndrome and GEFS+, STXBP1 encephalopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Epilepsy gene panel or whole-exome sequencing to confirm the GABRB3 variant",
+      "Electroencephalography to define generalised versus multifocal patterns",
+      "Brain magnetic resonance imaging to exclude structural causes",
+      "Developmental and autism-spectrum assessment",
+      "Chromosomal microarray if a 15q11-q13 copy number change is suspected",
+      "Neuropsychological evaluation to guide support"
     ],
-    [
-     "Management Strategy",
-     "Seizure control with antiseizure medications matched to the phenotype, favouring agents that enhance GABA-A receptor signalling",
-     "Core treatment modality"
+    "redFlags": [
+      "Progression to epileptic spasms with hypsarrhythmia",
+      "Frequent drug-resistant seizures with developmental regression",
+      "Status epilepticus",
+      "Marked behavioural and communication deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a uniformly severe course when the phenotype can be mild and self-limited",
-     "Prevent diagnostic or management error"
+    "prognosis": "Milder generalised phenotypes may be well controlled with a good developmental outcome, whereas the developmental and epileptic encephalopathy end carries drug-resistant seizures and significant intellectual disability.",
+    "pitfalls": [
+      "Assuming a uniformly severe course when the phenotype can be mild and self-limited",
+      "Neglecting GABA-enhancing strategies given the underlying inhibitory deficit",
+      "Overlooking coexisting autistic and behavioural features that need support",
+      "Failing to consider 15q11-q13 disorders in the differential"
+    ],
+    "references": [
+      "GeneReviews and OMIM resources on GABRB3-related epilepsy",
+      "ILAE resources on GABA-A receptor subunit epilepsies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Seizure control with antiseizure medications matched to the phenotype, favouring agents that enhance GABA-A receptor signalling given the underlying inhibitory deficit, such as valproate and benzodiazepines, with ethosuximide for absences",
+      "For epileptic spasms with hypsarrhythmia, hormonal therapy or vigabatrin, with the ketogenic diet considered in refractory disease",
+      "Developmental and autism-focused support with early-intervention therapies",
+      "Serial EEG and neurodevelopmental monitoring to track seizure control and progress",
+      "Genetic counselling with parental testing, and chromosomal microarray where a 15q11-q13 copy number change is suspected",
+      "Multidisciplinary care coordinated by paediatric neurology and epileptology"
     ]
-   ],
-   "caption": "Overview comparison matrix for gabrb3 encephalopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gabrb3-encephalopathy-real-image",
-   "title": "GABRB3 encephalopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "gabrb3_encephalopathy-pathway",
+      "title": "GABRB3 encephalopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by variants in GABRB3, which encodes the beta3 subunit of the inhibitory GABA-A receptor, the principal fast inhibitory neurotransmitter receptor in the brain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progression to epileptic spasms with hypsarrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to confirm the GABRB3 variant, Electroencephalography to define generalised versus multifocal patterns, Brain magnetic resonance imaging to exclude structural causes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Seizure control with antiseizure medications matched to the phenotype, favouring agents that enhance GABA-A receptor signalling given the underlying inhibitory deficit, such as valproate and benzodiazepines, with"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a uniformly severe course when the phenotype can be mild and self-limited"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gabrb3 encephalopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gabrb3_encephalopathy-matrix",
+      "title": "GABRB3 encephalopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by variants in GABRB3, which encodes the beta3 subunit of the inhibitory GABA-A receptor, the principal fast inhibitory",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Epilepsy gene panel or whole-exome sequencing to confirm the GABRB3 variant, Electroencephalography to define generalised versus",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "GABRA1 and GABRG2 related epilepsies, SCN1A-related Dravet syndrome and GEFS+, STXBP1 encephalopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Seizure control with antiseizure medications matched to the phenotype, favouring agents that enhance GABA-A receptor signalling",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a uniformly severe course when the phenotype can be mild and self-limited",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gabrb3 encephalopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gabrb3_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or whole-exome sequencing",
+          "cells": [
+            {
+              "text": "Confirms the GABRB3 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Generalised versus multifocal patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism-spectrum assessment",
+          "cells": [
+            {
+              "text": "Developmental and autism-spectrum profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "15q11-q13 copy number change, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological evaluation",
+          "cells": [
+            {
+              "text": "Guides support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gabrb3_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Seizure control",
+          "cells": [
+            {
+              "text": "Antiseizure medications matched to phenotype, favouring agents that enhance GABA-A signalling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epileptic spasms with hypsarrhythmia",
+          "cells": [
+            {
+              "text": "Hormonal therapy or vigabatrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Considered in refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism-focused support",
+          "cells": [
+            {
+              "text": "Early-intervention therapies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial EEG and neurodevelopmental monitoring",
+          "cells": [
+            {
+              "text": "Tracks seizure control and progress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental testing; chromosomal microarray where a 15q11-q13 change is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric neurology and epileptology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gabrb3_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of GABRB3 encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GABRB3 encephalopathy: seizures with developmental regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (epileptic spasms, drug-resistant seizures, status, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment for epileptic spasms with hypsarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Epilepsy gene panel or exome sequencing, EEG, MRI and microarray if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sequencing confirm a GABRB3 variant, with structural causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GABRA1, GABRG2, Dravet, STXBP1 or 15q11-q13 disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medications matched to phenotype, favouring GABA-A enhancing agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vigabatrin or hormonal therapy for epileptic spasms with hypsarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ketogenic diet considered in refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial EEG and neurodevelopmental monitoring; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Milder generalised forms may do well; encephalopathic forms carry a worse outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

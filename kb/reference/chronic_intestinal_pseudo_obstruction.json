@@ -1,172 +1,481 @@
 {
- "id": "chronic_intestinal_pseudo_obstruction",
- "name": "Chronic intestinal pseudo-obstruction",
- "aliases": [
-  "CIPO",
-  "chronic intestinal pseudoobstruction",
-  "intestinal pseudo-obstruction"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with recurrent episodes resembling mechanical bowel obstruction, with distension, pain, vomiting and altered bowel habit, but no obstructing lesion is found",
-   "Diagnosis requires imaging showing dilated bowel with air-fluid levels while excluding a mechanical cause, sometimes needing repeated investigation",
-   "It reflects a failure of effective propulsion from disease of the enteric nerves (neuropathic), smooth muscle (myopathic) or interstitial cells of Cajal",
-   "May be primary or secondary to systemic disorders such as systemic sclerosis, diabetes, amyloidosis, paraneoplastic syndromes or mitochondrial disease",
-   "Chronic stasis predisposes to small intestinal bacterial overgrowth, worsening malabsorption and diarrhoea",
-   "Many patients become dependent on nutritional support and are at risk of complications from long-term parenteral nutrition",
-   "Management is largely supportive with nutrition, prokinetics, treatment of bacterial overgrowth and avoidance of unnecessary surgery"
+  "id": "chronic_intestinal_pseudo_obstruction",
+  "name": "Chronic intestinal pseudo-obstruction",
+  "aliases": [
+    "CIPO",
+    "chronic intestinal pseudoobstruction",
+    "intestinal pseudo-obstruction"
   ],
-  "pathophysiology": "Chronic intestinal pseudo-obstruction is a severe motility disorder in which the bowel behaves as though obstructed despite the absence of any mechanical blockage. It arises from dysfunction of the neuromuscular apparatus that generates coordinated propulsion, and is classified as neuropathic when the enteric nervous system is affected, myopathic when the intestinal smooth muscle is abnormal, or mesenchymopathic when the interstitial cells of Cajal are deficient. It may be idiopathic or secondary to systemic diseases including connective-tissue disorders, endocrine and metabolic disease, amyloidosis, paraneoplastic processes and mitochondrial cytopathies. Ineffective peristalsis causes luminal stasis, bowel dilatation, bacterial overgrowth and malabsorption.",
-  "additionalDifferentials": [
-   "Mechanical bowel obstruction",
-   "Acute colonic pseudo-obstruction (Ogilvie syndrome)",
-   "Gastroparesis and other regional dysmotility",
-   "Small intestinal bacterial overgrowth from other causes",
-   "Coeliac disease and other malabsorptive disorders",
-   "Eating disorders and factitious presentations"
-  ],
-  "additionalInvestigations": [
-   "Cross-sectional imaging and contrast studies to exclude mechanical obstruction",
-   "Gastrointestinal transit and, where available, manometric studies to characterise dysmotility",
-   "Full-thickness biopsy in selected cases to define neuropathic versus myopathic disease",
-   "Screening for secondary causes such as connective-tissue disease, diabetes and amyloid",
-   "Breath testing or empirical assessment for small intestinal bacterial overgrowth"
-  ],
-  "redFlags": [
-   "Signs suggesting bowel ischaemia or perforation during an acute episode",
-   "Progressive malnutrition and dependence on parenteral nutrition",
-   "Line-related sepsis or thrombosis in patients on long-term parenteral nutrition",
-   "New or worsening symptoms suggesting an evolving mechanical cause"
-  ],
-  "prognosis": "The disorder is typically chronic and often progressive, with significant morbidity from malnutrition, recurrent hospital admissions and complications of nutritional support; prognosis depends on the extent of gut involvement and any underlying systemic disease.",
-  "pitfalls": [
-   "Subjecting patients to repeated futile surgery in search of a mechanical obstruction",
-   "Missing a treatable secondary cause",
-   "Overlooking bacterial overgrowth as a driver of symptoms",
-   "Underestimating nutritional requirements and delaying appropriate support"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Nutritional support as the priority, using enteral feeding where tolerated and escalating to parenteral nutrition when intestinal failure supervenes",
-   "Prokinetic agents to promote propulsion together with dietary modification using small, low-residue, low-fat meals",
-   "Cyclical antibiotics for small intestinal bacterial overgrowth to reduce malabsorption and diarrhoea",
-   "Bowel decompression with nasogastric tube or venting gastrostomy during acute episodes, avoiding unnecessary surgery that risks further dysmotility",
-   "Identification and treatment of secondary causes such as systemic sclerosis, diabetes, amyloidosis, paraneoplastic syndromes and mitochondrial disease",
-   "Monitoring for and management of complications of long-term parenteral nutrition such as catheter sepsis and liver disease, with referral to an intestinal failure or transplant centre in refractory cases",
-   "Multidisciplinary care with gastroenterology, nutrition and dietetics, and surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_intestinal_pseudo_obstruction-pathway",
-   "title": "Chronic intestinal pseudo-obstruction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with recurrent episodes resembling mechanical bowel obstruction, with distension, pain, vomiting and altered bowel habit, but no obstructing lesion is found",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs suggesting bowel ischaemia or perforation during an acute episode",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cross-sectional imaging and contrast studies to exclude mechanical obstruction, Gastrointestinal transit and, where available, manometric studies to characterise dysmotility, Full-thickness biopsy in selected cases to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Nutritional support as the priority, using enteral feeding where tolerated and escalating to parenteral nutrition when intestinal failure supervenes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Subjecting patients to repeated futile surgery in search of a mechanical obstruction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic intestinal pseudo-obstruction."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_intestinal_pseudo_obstruction-matrix",
-   "title": "Chronic intestinal pseudo-obstruction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with recurrent episodes resembling mechanical bowel obstruction, with distension, pain, vomiting and altered bowel",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with recurrent episodes resembling mechanical bowel obstruction, with distension, pain, vomiting and altered bowel habit, but no obstructing lesion is found",
+      "Diagnosis requires imaging showing dilated bowel with air-fluid levels while excluding a mechanical cause, sometimes needing repeated investigation",
+      "It reflects a failure of effective propulsion from disease of the enteric nerves (neuropathic), smooth muscle (myopathic) or interstitial cells of Cajal",
+      "May be primary or secondary to systemic disorders such as systemic sclerosis, diabetes, amyloidosis, paraneoplastic syndromes or mitochondrial disease",
+      "Chronic stasis predisposes to small intestinal bacterial overgrowth, worsening malabsorption and diarrhoea",
+      "Many patients become dependent on nutritional support and are at risk of complications from long-term parenteral nutrition",
+      "Management is largely supportive with nutrition, prokinetics, treatment of bacterial overgrowth and avoidance of unnecessary surgery"
     ],
-    [
-     "Key Investigations",
-     "Cross-sectional imaging and contrast studies to exclude mechanical obstruction, Gastrointestinal transit and, where available,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic intestinal pseudo-obstruction is a severe motility disorder in which the bowel behaves as though obstructed despite the absence of any mechanical blockage. It arises from dysfunction of the neuromuscular apparatus that generates coordinated propulsion, and is classified as neuropathic when the enteric nervous system is affected, myopathic when the intestinal smooth muscle is abnormal, or mesenchymopathic when the interstitial cells of Cajal are deficient. It may be idiopathic or secondary to systemic diseases including connective-tissue disorders, endocrine and metabolic disease, amyloidosis, paraneoplastic processes and mitochondrial cytopathies. Ineffective peristalsis causes luminal stasis, bowel dilatation, bacterial overgrowth and malabsorption.",
+    "additionalDifferentials": [
+      "Mechanical bowel obstruction",
+      "Acute colonic pseudo-obstruction (Ogilvie syndrome)",
+      "Gastroparesis and other regional dysmotility",
+      "Small intestinal bacterial overgrowth from other causes",
+      "Coeliac disease and other malabsorptive disorders",
+      "Eating disorders and factitious presentations"
     ],
-    [
-     "Primary Differentials",
-     "Mechanical bowel obstruction, Acute colonic pseudo-obstruction (Ogilvie syndrome), Gastroparesis and other regional dysmotility",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cross-sectional imaging and contrast studies to exclude mechanical obstruction",
+      "Gastrointestinal transit and, where available, manometric studies to characterise dysmotility",
+      "Full-thickness biopsy in selected cases to define neuropathic versus myopathic disease",
+      "Screening for secondary causes such as connective-tissue disease, diabetes and amyloid",
+      "Breath testing or empirical assessment for small intestinal bacterial overgrowth"
     ],
-    [
-     "Management Strategy",
-     "Nutritional support as the priority, using enteral feeding where tolerated and escalating to parenteral nutrition when intestinal",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs suggesting bowel ischaemia or perforation during an acute episode",
+      "Progressive malnutrition and dependence on parenteral nutrition",
+      "Line-related sepsis or thrombosis in patients on long-term parenteral nutrition",
+      "New or worsening symptoms suggesting an evolving mechanical cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Subjecting patients to repeated futile surgery in search of a mechanical obstruction",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is typically chronic and often progressive, with significant morbidity from malnutrition, recurrent hospital admissions and complications of nutritional support; prognosis depends on the extent of gut involvement and any underlying systemic disease.",
+    "pitfalls": [
+      "Subjecting patients to repeated futile surgery in search of a mechanical obstruction",
+      "Missing a treatable secondary cause",
+      "Overlooking bacterial overgrowth as a driver of symptoms",
+      "Underestimating nutritional requirements and delaying appropriate support"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Nutritional support as the priority, using enteral feeding where tolerated and escalating to parenteral nutrition when intestinal failure supervenes",
+      "Prokinetic agents to promote propulsion together with dietary modification using small, low-residue, low-fat meals",
+      "Cyclical antibiotics for small intestinal bacterial overgrowth to reduce malabsorption and diarrhoea",
+      "Bowel decompression with nasogastric tube or venting gastrostomy during acute episodes, avoiding unnecessary surgery that risks further dysmotility",
+      "Identification and treatment of secondary causes such as systemic sclerosis, diabetes, amyloidosis, paraneoplastic syndromes and mitochondrial disease",
+      "Monitoring for and management of complications of long-term parenteral nutrition such as catheter sepsis and liver disease, with referral to an intestinal failure or transplant centre in refractory cases",
+      "Multidisciplinary care with gastroenterology, nutrition and dietetics, and surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic intestinal pseudo-obstruction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-intestinal-pseudo-obstruction-real-image",
-   "title": "Chronic intestinal pseudo-obstruction: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "chronic_intestinal_pseudo_obstruction-pathway",
+      "title": "Chronic intestinal pseudo-obstruction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with recurrent episodes resembling mechanical bowel obstruction, with distension, pain, vomiting and altered bowel habit, but no obstructing lesion is found",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs suggesting bowel ischaemia or perforation during an acute episode",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cross-sectional imaging and contrast studies to exclude mechanical obstruction, Gastrointestinal transit and, where available, manometric studies to characterise dysmotility, Full-thickness biopsy in selected cases to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Nutritional support as the priority, using enteral feeding where tolerated and escalating to parenteral nutrition when intestinal failure supervenes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Subjecting patients to repeated futile surgery in search of a mechanical obstruction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic intestinal pseudo-obstruction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_intestinal_pseudo_obstruction-matrix",
+      "title": "Chronic intestinal pseudo-obstruction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with recurrent episodes resembling mechanical bowel obstruction, with distension, pain, vomiting and altered bowel",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cross-sectional imaging and contrast studies to exclude mechanical obstruction, Gastrointestinal transit and, where available,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mechanical bowel obstruction, Acute colonic pseudo-obstruction (Ogilvie syndrome), Gastroparesis and other regional dysmotility",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Nutritional support as the priority, using enteral feeding where tolerated and escalating to parenteral nutrition when intestinal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Subjecting patients to repeated futile surgery in search of a mechanical obstruction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic intestinal pseudo-obstruction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_intestinal_pseudo_obstruction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cross-sectional imaging and contrast studies",
+          "cells": [
+            {
+              "text": "Excludes mechanical obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal transit and manometric studies",
+          "cells": [
+            {
+              "text": "Characterises dysmotility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full-thickness biopsy in selected cases",
+          "cells": [
+            {
+              "text": "Neuropathic versus myopathic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for secondary causes",
+          "cells": [
+            {
+              "text": "Connective-tissue disease, diabetes and amyloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breath testing for bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Small intestinal bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_intestinal_pseudo_obstruction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical bowel obstruction",
+          "cells": [
+            {
+              "text": "Obstructing lesion present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute colonic pseudo-obstruction (Ogilvie syndrome)",
+          "cells": [
+            {
+              "text": "Acute, not chronic, course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroparesis",
+          "cells": [
+            {
+              "text": "Regional dysmotility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_intestinal_pseudo_obstruction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Enteral feeding where tolerated; parenteral nutrition when intestinal failure supervenes"
+            },
+            {
+              "text": "Priority of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prokinetics and diet",
+          "cells": [
+            {
+              "text": "Prokinetic agents with small, low-residue, low-fat meals"
+            },
+            {
+              "text": "Promotes propulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclical antibiotics",
+          "cells": [
+            {
+              "text": "For small intestinal bacterial overgrowth"
+            },
+            {
+              "text": "Malabsorption and diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompression",
+          "cells": [
+            {
+              "text": "Nasogastric tube or venting gastrostomy during acute episodes"
+            },
+            {
+              "text": "Avoid surgery that risks further dysmotility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary causes",
+          "cells": [
+            {
+              "text": "Treat systemic sclerosis, diabetes, amyloidosis, paraneoplastic and mitochondrial disease"
+            },
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition complications",
+          "cells": [
+            {
+              "text": "Monitor catheter sepsis and liver disease; intestinal failure or transplant centre"
+            },
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Gastroenterology, nutrition, dietetics and surgery"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_intestinal_pseudo_obstruction-dx-mgmt",
+      "title": "Diagnosis and management of Chronic intestinal pseudo-obstruction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic intestinal pseudo-obstruction: recurrent obstruction without a lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ischaemia or perforation, malnutrition, line sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for ischaemia or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cross-sectional imaging to exclude mechanical obstruction; transit studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dilated bowel without mechanical cause and secondary causes screened?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nutritional support, enteral first and parenteral when needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check mechanical obstruction, Ogilvie syndrome and gastroparesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prokinetic agents with small, low-residue, low-fat meals",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyclical antibiotics for small intestinal bacterial overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Decompression during acute episodes; avoid unnecessary surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor parenteral nutrition complications; refer to intestinal failure centre",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

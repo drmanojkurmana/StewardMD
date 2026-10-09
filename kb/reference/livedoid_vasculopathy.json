@@ -1,174 +1,490 @@
 {
- "id": "livedoid_vasculopathy",
- "name": "Livedoid vasculopathy",
- "aliases": [
-  "livedoid vasculitis",
-  "atrophie blanche",
-  "segmental hyalinizing vasculopathy",
-  "PURPLE (painful purpuric ulcers with reticular pattern of the lower extremities)"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic thrombo-occlusive disorder of dermal vessels presenting with painful purpuric macules and recurrent ulcers of the lower legs, ankles, and feet",
-   "Healing leaves characteristic atrophie blanche: smooth, porcelain-white stellate scars ringed by telangiectasia and pigmentation",
-   "Pain is often disproportionate to the visible lesions and is a prominent, disabling feature",
-   "It is primarily a vasculopathy driven by intravascular thrombosis, not a true inflammatory vasculitis, so histology shows hyaline thrombi and fibrin with little primary vessel-wall inflammation",
-   "Frequently associated with thrombophilic and prothrombotic states, and screening for these is important",
-   "Disease is typically chronic with a seasonal (summer) flare pattern in many patients",
-   "Management is directed at reducing thrombosis and improving blood flow, using antithrombotic and other vasoactive approaches alongside wound care"
+  "id": "livedoid_vasculopathy",
+  "name": "Livedoid vasculopathy",
+  "aliases": [
+    "livedoid vasculitis",
+    "atrophie blanche",
+    "segmental hyalinizing vasculopathy",
+    "PURPLE (painful purpuric ulcers with reticular pattern of the lower extremities)"
   ],
-  "pathophysiology": "Livedoid vasculopathy results from occlusion of dermal microvessels by fibrin thrombi rather than from primary inflammatory destruction of vessel walls. Hypercoagulable and prothrombotic tendencies promote intravascular thrombosis, causing localised ischaemia and infarction of the skin. The resulting tissue hypoxia produces the painful purpura and punched-out ulcers, and healing of these infarcts yields the sclerotic, avascular white scars of atrophie blanche surrounded by reactive telangiectasia. Because the process is occlusive, any inflammatory infiltrate is usually secondary, and identifying and treating underlying thrombophilia is central to control.",
-  "additionalDifferentials": [
-   "Cutaneous small-vessel (leukocytoclastic) vasculitis",
-   "Venous stasis ulceration and lipodermatosclerosis",
-   "Antiphospholipid syndrome",
-   "Cryoglobulinaemia",
-   "Polyarteritis nodosa (cutaneous)",
-   "Pyoderma gangrenosum"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing hyaline fibrin thrombi with minimal vessel-wall inflammation",
-   "Thrombophilia screen (including antiphospholipid antibodies and relevant clotting factor abnormalities)",
-   "Autoimmune and connective-tissue disease serology",
-   "Cryoglobulins and, where indicated, hepatitis serology",
-   "Assessment of venous insufficiency with duplex studies",
-   "Wound swab if secondary infection of ulcers is suspected"
-  ],
-  "redFlags": [
-   "Detection of an underlying thrombophilia or antiphospholipid syndrome requiring specialist management",
-   "Rapidly progressive or extensive ulceration with severe pain",
-   "Secondary infection of chronic ulcers",
-   "Features suggesting an alternative systemic vasculitis or connective-tissue disease"
-  ],
-  "prognosis": "Livedoid vasculopathy is a chronic, relapsing condition with recurrent painful ulceration and progressive atrophie blanche scarring; outcomes improve when an underlying prothrombotic state is identified and treated, though many patients experience persistent disease.",
-  "pitfalls": [
-   "Mislabelling it as an inflammatory vasculitis and relying on immunosuppression rather than antithrombotic therapy",
-   "Failing to screen for thrombophilia and antiphospholipid syndrome",
-   "Confusing atrophie blanche scarring with simple venous stasis change",
-   "Underestimating the severity of pain and its impact on function"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give antiplatelet and anticoagulant therapy (aspirin, dipyridamole, pentoxifylline or anticoagulation) to counter the fibrin-thrombus occlusion, the therapeutic mainstay",
-   "Screen for and treat any underlying thrombophilic or prothrombotic state",
-   "Provide effective analgesia for the disproportionate, disabling pain, including neuropathic agents",
-   "Deliver wound care and compression for lower-leg ulcers, treating secondary infection",
-   "Use intravenous immunoglobulin for refractory or severe disease",
-   "Advise smoking cessation and reduction of thrombotic risk factors",
-   "Arrange dermatology and haematology follow-up for the chronic, relapsing course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "livedoid_vasculopathy-pathway",
-   "title": "Livedoid vasculopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic thrombo-occlusive disorder of dermal vessels presenting with painful purpuric macules and recurrent ulcers of the lower legs, ankles, and feet",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Detection of an underlying thrombophilia or antiphospholipid syndrome requiring specialist management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing hyaline fibrin thrombi with minimal vessel-wall inflammation, Thrombophilia screen (including antiphospholipid antibodies and relevant clotting factor abnormalities), Autoimmune and connective-tissue"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give antiplatelet and anticoagulant therapy (aspirin, dipyridamole, pentoxifylline or anticoagulation) to counter the fibrin-thrombus occlusion, the therapeutic mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling it as an inflammatory vasculitis and relying on immunosuppression rather than antithrombotic therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of livedoid vasculopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "livedoid_vasculopathy-matrix",
-   "title": "Livedoid vasculopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic thrombo-occlusive disorder of dermal vessels presenting with painful purpuric macules and recurrent ulcers of the lower",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic thrombo-occlusive disorder of dermal vessels presenting with painful purpuric macules and recurrent ulcers of the lower legs, ankles, and feet",
+      "Healing leaves characteristic atrophie blanche: smooth, porcelain-white stellate scars ringed by telangiectasia and pigmentation",
+      "Pain is often disproportionate to the visible lesions and is a prominent, disabling feature",
+      "It is primarily a vasculopathy driven by intravascular thrombosis, not a true inflammatory vasculitis, so histology shows hyaline thrombi and fibrin with little primary vessel-wall inflammation",
+      "Frequently associated with thrombophilic and prothrombotic states, and screening for these is important",
+      "Disease is typically chronic with a seasonal (summer) flare pattern in many patients",
+      "Management is directed at reducing thrombosis and improving blood flow, using antithrombotic and other vasoactive approaches alongside wound care"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing hyaline fibrin thrombi with minimal vessel-wall inflammation, Thrombophilia screen (including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Livedoid vasculopathy results from occlusion of dermal microvessels by fibrin thrombi rather than from primary inflammatory destruction of vessel walls. Hypercoagulable and prothrombotic tendencies promote intravascular thrombosis, causing localised ischaemia and infarction of the skin. The resulting tissue hypoxia produces the painful purpura and punched-out ulcers, and healing of these infarcts yields the sclerotic, avascular white scars of atrophie blanche surrounded by reactive telangiectasia. Because the process is occlusive, any inflammatory infiltrate is usually secondary, and identifying and treating underlying thrombophilia is central to control.",
+    "additionalDifferentials": [
+      "Cutaneous small-vessel (leukocytoclastic) vasculitis",
+      "Venous stasis ulceration and lipodermatosclerosis",
+      "Antiphospholipid syndrome",
+      "Cryoglobulinaemia",
+      "Polyarteritis nodosa (cutaneous)",
+      "Pyoderma gangrenosum"
     ],
-    [
-     "Primary Differentials",
-     "Cutaneous small-vessel (leukocytoclastic) vasculitis, Venous stasis ulceration and lipodermatosclerosis, Antiphospholipid syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing hyaline fibrin thrombi with minimal vessel-wall inflammation",
+      "Thrombophilia screen (including antiphospholipid antibodies and relevant clotting factor abnormalities)",
+      "Autoimmune and connective-tissue disease serology",
+      "Cryoglobulins and, where indicated, hepatitis serology",
+      "Assessment of venous insufficiency with duplex studies",
+      "Wound swab if secondary infection of ulcers is suspected"
     ],
-    [
-     "Management Strategy",
-     "Give antiplatelet and anticoagulant therapy (aspirin, dipyridamole, pentoxifylline or anticoagulation) to counter the",
-     "Core treatment modality"
+    "redFlags": [
+      "Detection of an underlying thrombophilia or antiphospholipid syndrome requiring specialist management",
+      "Rapidly progressive or extensive ulceration with severe pain",
+      "Secondary infection of chronic ulcers",
+      "Features suggesting an alternative systemic vasculitis or connective-tissue disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling it as an inflammatory vasculitis and relying on immunosuppression rather than antithrombotic therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Livedoid vasculopathy is a chronic, relapsing condition with recurrent painful ulceration and progressive atrophie blanche scarring; outcomes improve when an underlying prothrombotic state is identified and treated, though many patients experience persistent disease.",
+    "pitfalls": [
+      "Mislabelling it as an inflammatory vasculitis and relying on immunosuppression rather than antithrombotic therapy",
+      "Failing to screen for thrombophilia and antiphospholipid syndrome",
+      "Confusing atrophie blanche scarring with simple venous stasis change",
+      "Underestimating the severity of pain and its impact on function"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give antiplatelet and anticoagulant therapy (aspirin, dipyridamole, pentoxifylline or anticoagulation) to counter the fibrin-thrombus occlusion, the therapeutic mainstay",
+      "Screen for and treat any underlying thrombophilic or prothrombotic state",
+      "Provide effective analgesia for the disproportionate, disabling pain, including neuropathic agents",
+      "Deliver wound care and compression for lower-leg ulcers, treating secondary infection",
+      "Use intravenous immunoglobulin for refractory or severe disease",
+      "Advise smoking cessation and reduction of thrombotic risk factors",
+      "Arrange dermatology and haematology follow-up for the chronic, relapsing course"
     ]
-   ],
-   "caption": "Overview comparison matrix for livedoid vasculopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "livedoid-vasculopathy-real-image",
-   "title": "Livedoid vasculopathy: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "livedoid_vasculopathy-pathway",
+      "title": "Livedoid vasculopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic thrombo-occlusive disorder of dermal vessels presenting with painful purpuric macules and recurrent ulcers of the lower legs, ankles, and feet",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Detection of an underlying thrombophilia or antiphospholipid syndrome requiring specialist management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing hyaline fibrin thrombi with minimal vessel-wall inflammation, Thrombophilia screen (including antiphospholipid antibodies and relevant clotting factor abnormalities), Autoimmune and connective-tissue"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give antiplatelet and anticoagulant therapy (aspirin, dipyridamole, pentoxifylline or anticoagulation) to counter the fibrin-thrombus occlusion, the therapeutic mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling it as an inflammatory vasculitis and relying on immunosuppression rather than antithrombotic therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of livedoid vasculopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "livedoid_vasculopathy-matrix",
+      "title": "Livedoid vasculopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic thrombo-occlusive disorder of dermal vessels presenting with painful purpuric macules and recurrent ulcers of the lower",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing hyaline fibrin thrombi with minimal vessel-wall inflammation, Thrombophilia screen (including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cutaneous small-vessel (leukocytoclastic) vasculitis, Venous stasis ulceration and lipodermatosclerosis, Antiphospholipid syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give antiplatelet and anticoagulant therapy (aspirin, dipyridamole, pentoxifylline or anticoagulation) to counter the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling it as an inflammatory vasculitis and relying on immunosuppression rather than antithrombotic therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for livedoid vasculopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "livedoid_vasculopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Hyaline fibrin thrombi with minimal vessel-wall inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia screen including antiphospholipid antibodies",
+          "cells": [
+            {
+              "text": "Prothrombotic states"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and connective-tissue serology",
+          "cells": [
+            {
+              "text": "Associated systemic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulins and hepatitis serology",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex studies",
+          "cells": [
+            {
+              "text": "Venous insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound swab",
+          "cells": [
+            {
+              "text": "Where secondary infection of ulcers is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "livedoid_vasculopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous small-vessel (leukocytoclastic) vasculitis",
+          "cells": [
+            {
+              "text": "Inflammatory vasculitis; this condition is thrombo-occlusive, and biopsy separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous stasis ulceration and lipodermatosclerosis",
+          "cells": [
+            {
+              "text": "Venous ulceration; atrophie blanche scarring is distinct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Associated thrombophilic state; screened for"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulinaemia",
+          "cells": [
+            {
+              "text": "Cryoglobulins; screened for"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "livedoid_vasculopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiplatelet and anticoagulant therapy",
+          "cells": [
+            {
+              "text": "Aspirin, dipyridamole, pentoxifylline or anticoagulation to counter fibrin-thrombus occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia",
+          "cells": [
+            {
+              "text": "Screen for and treat any prothrombotic state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Disproportionate, disabling pain; neuropathic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and compression",
+          "cells": [
+            {
+              "text": "Lower-leg ulcers; treat secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Refractory or severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle",
+          "cells": [
+            {
+              "text": "Smoking cessation; reduce thrombotic risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Dermatology and haematology for the chronic, relapsing course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "livedoid_vasculopathy-dx-mgmt",
+      "title": "Diagnosis and management of Livedoid vasculopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful purpuric macules and recurrent ulcers on the ankles, with atrophie blanche",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (thrombophilia or APS, extensive ulceration, infection, vasculitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: haematology review for thrombophilia and APS",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy (hyaline fibrin thrombi), thrombophilia and APS screen, autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are hyaline fibrin thrombi seen with minimal vessel-wall inflammation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider small-vessel vasculitis, venous ulceration or cryoglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiplatelet or anticoagulant therapy against fibrin-thrombus occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for and treat any thrombophilic or prothrombotic state",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Effective analgesia for disabling pain, including neuropathic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound care and compression for lower-leg ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Smoking cessation and reduction of thrombotic risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic, relapsing; ulceration and scarring progress; thrombophilia treatment helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,168 +1,466 @@
 {
- "id": "thiemann_disease",
- "name": "Thiemann disease",
- "aliases": [
-  "Thiemann epiphyseal osteochondrosis",
-  "osteochondrosis of the phalangeal epiphyses"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Orthopaedics / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Orthopaedic and rheumatology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare osteochondrosis affecting the epiphyses of the phalanges of the hands (and sometimes toes)",
-   "It typically presents in adolescence with painless or mildly painful swelling of the interphalangeal joints",
-   "There may be a familial (autosomal dominant) pattern in some cases",
-   "Radiographs show irregularity, fragmentation and flattening of the phalangeal epiphyses",
-   "It can be mistaken for juvenile inflammatory arthritis, but inflammatory markers are normal and there is no true synovitis",
-   "The course is usually benign, though residual joint deformity or early osteoarthritis may occur"
+  "id": "thiemann_disease",
+  "name": "Thiemann disease",
+  "aliases": [
+    "Thiemann epiphyseal osteochondrosis",
+    "osteochondrosis of the phalangeal epiphyses"
   ],
-  "pathophysiology": "Thiemann disease is an osteochondrosis in which the epiphyses of the phalanges undergo avascular change with disturbed endochondral ossification during growth. The affected epiphyses become fragmented and flattened before reconstituting, and the process is thought to reflect ischaemia of the growing epiphysis, sometimes with a hereditary predisposition. The result is enlargement and deformity of the interphalangeal joints, which can lead to residual deformity or secondary degenerative change.",
-  "additionalDifferentials": [
-   "Juvenile idiopathic arthritis",
-   "Other osteochondroses",
-   "Erosive or inflammatory arthritis",
-   "Skeletal dysplasia with epiphyseal involvement",
-   "Frostbite epiphyseal injury"
-  ],
-  "additionalInvestigations": [
-   "Radiographs of the hands showing epiphyseal changes",
-   "Inflammatory markers and autoantibodies (normal, to exclude arthritis)",
-   "Family history and, where relevant, assessment for a hereditary pattern",
-   "Clinical assessment of the interphalangeal joints",
-   "Exclusion of skeletal dysplasia if widespread"
-  ],
-  "redFlags": [
-   "Features suggesting true inflammatory arthritis",
-   "Widespread epiphyseal disease suggesting a dysplasia",
-   "Significant functional impairment or deformity",
-   "Atypical distribution"
-  ],
-  "prognosis": "The condition is generally benign and self-limiting with skeletal maturity, although some patients are left with digital deformity or early interphalangeal osteoarthritis.",
-  "pitfalls": [
-   "Misdiagnosing it as juvenile idiopathic arthritis and giving unnecessary treatment",
-   "Overlooking a hereditary pattern",
-   "Confusing it with skeletal dysplasia",
-   "Attributing normal-marker joint swelling to inflammation"
-  ],
-  "references": [
-   "Orthopaedic reference texts (standard reference)",
-   "Paediatric rheumatology references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and conservative management are the mainstay, as the osteochondrosis is generally benign and self-limiting at skeletal maturity",
-   "Provide symptomatic relief with simple analgesia or anti-inflammatories, activity modification and splinting during painful phases",
-   "Confirm normal inflammatory markers and autoantibodies to distinguish it from juvenile inflammatory arthritis and avoid unnecessary immunosuppression",
-   "Offer hand therapy and physiotherapy to maintain interphalangeal joint function",
-   "Monitor radiographically for residual digital deformity or early interphalangeal osteoarthritis",
-   "Refer to orthopaedics for persistent deformity, and consider genetic counselling where an autosomal dominant familial pattern is evident"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thiemann_disease-pathway",
-   "title": "Thiemann disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare osteochondrosis affecting the epiphyses of the phalanges of the hands (and sometimes toes)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting true inflammatory arthritis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Radiographs of the hands showing epiphyseal changes, Inflammatory markers and autoantibodies (normal, to exclude arthritis), Family history and, where relevant, assessment for a hereditary pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and conservative management are the mainstay, as the osteochondrosis is generally benign and self-limiting at skeletal maturity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as juvenile idiopathic arthritis and giving unnecessary treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thiemann disease."
-  }
- ],
- "tables": [
-  {
-   "id": "thiemann_disease-matrix",
-   "title": "Thiemann disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare osteochondrosis affecting the epiphyses of the phalanges of the hands (and sometimes toes)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Orthopaedics / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Orthopaedic and rheumatology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare osteochondrosis affecting the epiphyses of the phalanges of the hands (and sometimes toes)",
+      "It typically presents in adolescence with painless or mildly painful swelling of the interphalangeal joints",
+      "There may be a familial (autosomal dominant) pattern in some cases",
+      "Radiographs show irregularity, fragmentation and flattening of the phalangeal epiphyses",
+      "It can be mistaken for juvenile inflammatory arthritis, but inflammatory markers are normal and there is no true synovitis",
+      "The course is usually benign, though residual joint deformity or early osteoarthritis may occur"
     ],
-    [
-     "Key Investigations",
-     "Radiographs of the hands showing epiphyseal changes, Inflammatory markers and autoantibodies (normal, to exclude arthritis),",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Thiemann disease is an osteochondrosis in which the epiphyses of the phalanges undergo avascular change with disturbed endochondral ossification during growth. The affected epiphyses become fragmented and flattened before reconstituting, and the process is thought to reflect ischaemia of the growing epiphysis, sometimes with a hereditary predisposition. The result is enlargement and deformity of the interphalangeal joints, which can lead to residual deformity or secondary degenerative change.",
+    "additionalDifferentials": [
+      "Juvenile idiopathic arthritis",
+      "Other osteochondroses",
+      "Erosive or inflammatory arthritis",
+      "Skeletal dysplasia with epiphyseal involvement",
+      "Frostbite epiphyseal injury"
     ],
-    [
-     "Primary Differentials",
-     "Juvenile idiopathic arthritis, Other osteochondroses, Erosive or inflammatory arthritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Radiographs of the hands showing epiphyseal changes",
+      "Inflammatory markers and autoantibodies (normal, to exclude arthritis)",
+      "Family history and, where relevant, assessment for a hereditary pattern",
+      "Clinical assessment of the interphalangeal joints",
+      "Exclusion of skeletal dysplasia if widespread"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and conservative management are the mainstay, as the osteochondrosis is generally benign and self-limiting at",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting true inflammatory arthritis",
+      "Widespread epiphyseal disease suggesting a dysplasia",
+      "Significant functional impairment or deformity",
+      "Atypical distribution"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as juvenile idiopathic arthritis and giving unnecessary treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is generally benign and self-limiting with skeletal maturity, although some patients are left with digital deformity or early interphalangeal osteoarthritis.",
+    "pitfalls": [
+      "Misdiagnosing it as juvenile idiopathic arthritis and giving unnecessary treatment",
+      "Overlooking a hereditary pattern",
+      "Confusing it with skeletal dysplasia",
+      "Attributing normal-marker joint swelling to inflammation"
+    ],
+    "references": [
+      "Orthopaedic reference texts (standard reference)",
+      "Paediatric rheumatology references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and conservative management are the mainstay, as the osteochondrosis is generally benign and self-limiting at skeletal maturity",
+      "Provide symptomatic relief with simple analgesia or anti-inflammatories, activity modification and splinting during painful phases",
+      "Confirm normal inflammatory markers and autoantibodies to distinguish it from juvenile inflammatory arthritis and avoid unnecessary immunosuppression",
+      "Offer hand therapy and physiotherapy to maintain interphalangeal joint function",
+      "Monitor radiographically for residual digital deformity or early interphalangeal osteoarthritis",
+      "Refer to orthopaedics for persistent deformity, and consider genetic counselling where an autosomal dominant familial pattern is evident"
     ]
-   ],
-   "caption": "Overview comparison matrix for thiemann disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thiemann-disease-real-image",
-   "title": "Thiemann disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "thiemann_disease-pathway",
+      "title": "Thiemann disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare osteochondrosis affecting the epiphyses of the phalanges of the hands (and sometimes toes)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting true inflammatory arthritis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Radiographs of the hands showing epiphyseal changes, Inflammatory markers and autoantibodies (normal, to exclude arthritis), Family history and, where relevant, assessment for a hereditary pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and conservative management are the mainstay, as the osteochondrosis is generally benign and self-limiting at skeletal maturity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as juvenile idiopathic arthritis and giving unnecessary treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thiemann disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thiemann_disease-matrix",
+      "title": "Thiemann disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare osteochondrosis affecting the epiphyses of the phalanges of the hands (and sometimes toes)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Radiographs of the hands showing epiphyseal changes, Inflammatory markers and autoantibodies (normal, to exclude arthritis),",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Juvenile idiopathic arthritis, Other osteochondroses, Erosive or inflammatory arthritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and conservative management are the mainstay, as the osteochondrosis is generally benign and self-limiting at",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as juvenile idiopathic arthritis and giving unnecessary treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thiemann disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Orthopaedic and rheumatology references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thiemann_disease-dx-mgmt",
+      "title": "Diagnosis and management of Thiemann disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Thiemann disease: painless swelling of interphalangeal joints in adolescents",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: features of true inflammatory arthritis, or widespread epiphyseal disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rheumatology review for suspected inflammatory arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hand radiographs for epiphyseal change; inflammatory markers and autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are inflammatory markers normal, with phalangeal epiphyseal changes on X-ray?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider juvenile idiopathic arthritis or skeletal dysplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and conservative care, as the disease is self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia and splinting during painful phases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand therapy and physiotherapy for joint function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiographic monitoring for residual deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Orthopaedic referral for persistent deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally benign with skeletal maturity; some are left with deformity or osteoarthritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thiemann_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hand radiographs",
+          "cells": [
+            {
+              "text": "Irregularity, fragmentation and flattening of phalangeal epiphyses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and autoantibodies",
+          "cells": [
+            {
+              "text": "Normal; excludes arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Hereditary pattern, where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment of the interphalangeal joints",
+          "cells": [
+            {
+              "text": "Swelling and deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal dysplasia exclusion",
+          "cells": [
+            {
+              "text": "Widespread epiphyseal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thiemann_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Inflammatory markers are normal in Thiemann disease and there is no true synovitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal dysplasia with epiphyseal involvement",
+          "cells": [
+            {
+              "text": "Widespread epiphyseal disease suggests a dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frostbite epiphyseal injury",
+          "cells": [
+            {
+              "text": "Cold exposure history separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thiemann_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Generally benign and self-limiting at skeletal maturity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia, activity modification and splinting",
+          "cells": [
+            {
+              "text": "Painful phases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm normal markers and autoantibodies",
+          "cells": [
+            {
+              "text": "Avoids unnecessary immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy and physiotherapy",
+          "cells": [
+            {
+              "text": "Maintains interphalangeal joint function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographic monitoring",
+          "cells": [
+            {
+              "text": "Residual deformity or early osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic referral",
+          "cells": [
+            {
+              "text": "Persistent deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant familial pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

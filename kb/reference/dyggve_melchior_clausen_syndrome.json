@@ -1,173 +1,462 @@
 {
- "id": "dyggve_melchior_clausen_syndrome",
- "name": "Dyggve-Melchior-Clausen syndrome",
- "aliases": [
-  "DMC syndrome",
-  "DYM",
-  "dymeclin",
-  "spondyloepimetaphyseal dysplasia with intellectual disability"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive spondyloepimetaphyseal dysplasia caused by biallelic variants in DYM, encoding the Golgi protein dymeclin",
-   "Characterised by disproportionate short-trunk short stature, a barrel-shaped chest, protruding sternum and microcephaly",
-   "Intellectual disability is a defining feature that distinguishes classic DMC from the allelic Smith-McCort dysplasia, which has an identical skeleton but normal intellect",
-   "The most characteristic radiographic sign is a lacy or laced appearance of the iliac crests with irregular ossification",
-   "Platyspondyly with double-humped vertebral end plates and generalised epiphyseal and metaphyseal irregularity are seen",
-   "Odontoid hypoplasia predisposes to atlantoaxial instability and potential cervical cord compression",
-   "Presents in early childhood with progressive kyphoscoliosis, joint contractures, a waddling gait and restricted mobility"
+  "id": "dyggve_melchior_clausen_syndrome",
+  "name": "Dyggve-Melchior-Clausen syndrome",
+  "aliases": [
+    "DMC syndrome",
+    "DYM",
+    "dymeclin",
+    "spondyloepimetaphyseal dysplasia with intellectual disability"
   ],
-  "pathophysiology": "Dyggve-Melchior-Clausen syndrome is caused by loss-of-function variants in DYM, which encodes dymeclin, a protein required for normal Golgi apparatus organisation and intracellular trafficking. Impaired Golgi function disturbs the processing and secretion of extracellular matrix components in chondrocytes and, in neurones, contributes to the associated intellectual disability. The result is abnormal endochondral ossification affecting vertebrae, epiphyses and metaphyses, producing platyspondyly, the distinctive lacy iliac crest, and generalised skeletal dysplasia. The allelic disorder Smith-McCort dysplasia shares the skeletal phenotype without cognitive impairment.",
-  "additionalDifferentials": [
-   "Smith-McCort dysplasia (allelic, normal intellect)",
-   "Morquio syndrome (mucopolysaccharidosis IV)",
-   "Spondyloepiphyseal dysplasia congenita",
-   "Other mucopolysaccharidoses",
-   "Spondyloepimetaphyseal dysplasia of other cause",
-   "Pseudoachondroplasia"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey looking for the lacy iliac crest, platyspondyly and epimetaphyseal irregularity",
-   "DYM molecular genetic testing",
-   "Urinary glycosaminoglycan screen to exclude mucopolysaccharidoses",
-   "Cervical spine imaging including flexion-extension views for odontoid hypoplasia and instability",
-   "Developmental and cognitive assessment to distinguish DMC from Smith-McCort dysplasia"
-  ],
-  "redFlags": [
-   "Atlantoaxial instability with signs of cervical myelopathy",
-   "Progressive kyphoscoliosis with respiratory compromise",
-   "Neurological deterioration suggesting cord compression before anaesthesia or manipulation",
-   "New or worsening limb weakness or gait disturbance"
-  ],
-  "prognosis": "Life expectancy is often near normal, but morbidity from short stature, progressive spinal deformity, joint contractures and (in classic DMC) intellectual disability is significant; cervical instability requires vigilance to prevent cord injury.",
-  "pitfalls": [
-   "Confusing DMC with Morquio syndrome without a glycosaminoglycan screen",
-   "Failing to assess cervical instability before airway or spinal manipulation",
-   "Not distinguishing classic DMC from Smith-McCort dysplasia by cognitive assessment",
-   "Overlooking the lacy iliac crest, a specific diagnostic clue"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews / Orphanet: Dyggve-Melchior-Clausen Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage supportively, as there is no disease-specific therapy for this DYM-related spondyloepimetaphyseal dysplasia",
-   "Provide orthopaedic care for progressive spinal deformity, joint contractures and the consequences of short-trunk short stature, with physiotherapy and mobility aids",
-   "Maintain vigilance for atlantoaxial instability from odontoid hypoplasia, using flexion-extension cervical imaging and offering surgical stabilisation and anaesthetic precautions where instability threatens the cord",
-   "Offer developmental, educational and behavioural support for intellectual disability in classic disease",
-   "Distinguish it from the allelic Smith-McCort dysplasia through cognitive assessment, since the skeleton is identical but intellect is spared",
-   "Screen the urine for glycosaminoglycans to exclude a mucopolysaccharidosis mimicking the skeletal phenotype",
-   "Offer genetic counselling for this autosomal recessive disorder, with DYM testing and screening of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dyggve_melchior_clausen_syndrome-pathway",
-   "title": "Dyggve-Melchior-Clausen syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive spondyloepimetaphyseal dysplasia caused by biallelic variants in DYM, encoding the Golgi protein dymeclin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Atlantoaxial instability with signs of cervical myelopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey looking for the lacy iliac crest, platyspondyly and epimetaphyseal irregularity, DYM molecular genetic testing, Urinary glycosaminoglycan screen to exclude mucopolysaccharidoses"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage supportively, as there is no disease-specific therapy for this DYM-related spondyloepimetaphyseal dysplasia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing DMC with Morquio syndrome without a glycosaminoglycan screen"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dyggve-melchior-clausen syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "dyggve_melchior_clausen_syndrome-matrix",
-   "title": "Dyggve-Melchior-Clausen syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive spondyloepimetaphyseal dysplasia caused by biallelic variants in DYM, encoding the Golgi protein dymeclin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive spondyloepimetaphyseal dysplasia caused by biallelic variants in DYM, encoding the Golgi protein dymeclin",
+      "Characterised by disproportionate short-trunk short stature, a barrel-shaped chest, protruding sternum and microcephaly",
+      "Intellectual disability is a defining feature that distinguishes classic DMC from the allelic Smith-McCort dysplasia, which has an identical skeleton but normal intellect",
+      "The most characteristic radiographic sign is a lacy or laced appearance of the iliac crests with irregular ossification",
+      "Platyspondyly with double-humped vertebral end plates and generalised epiphyseal and metaphyseal irregularity are seen",
+      "Odontoid hypoplasia predisposes to atlantoaxial instability and potential cervical cord compression",
+      "Presents in early childhood with progressive kyphoscoliosis, joint contractures, a waddling gait and restricted mobility"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey looking for the lacy iliac crest, platyspondyly and epimetaphyseal irregularity, DYM molecular genetic testing,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dyggve-Melchior-Clausen syndrome is caused by loss-of-function variants in DYM, which encodes dymeclin, a protein required for normal Golgi apparatus organisation and intracellular trafficking. Impaired Golgi function disturbs the processing and secretion of extracellular matrix components in chondrocytes and, in neurones, contributes to the associated intellectual disability. The result is abnormal endochondral ossification affecting vertebrae, epiphyses and metaphyses, producing platyspondyly, the distinctive lacy iliac crest, and generalised skeletal dysplasia. The allelic disorder Smith-McCort dysplasia shares the skeletal phenotype without cognitive impairment.",
+    "additionalDifferentials": [
+      "Smith-McCort dysplasia (allelic, normal intellect)",
+      "Morquio syndrome (mucopolysaccharidosis IV)",
+      "Spondyloepiphyseal dysplasia congenita",
+      "Other mucopolysaccharidoses",
+      "Spondyloepimetaphyseal dysplasia of other cause",
+      "Pseudoachondroplasia"
     ],
-    [
-     "Primary Differentials",
-     "Smith-McCort dysplasia (allelic, normal intellect), Morquio syndrome (mucopolysaccharidosis IV), Spondyloepiphyseal dysplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey looking for the lacy iliac crest, platyspondyly and epimetaphyseal irregularity",
+      "DYM molecular genetic testing",
+      "Urinary glycosaminoglycan screen to exclude mucopolysaccharidoses",
+      "Cervical spine imaging including flexion-extension views for odontoid hypoplasia and instability",
+      "Developmental and cognitive assessment to distinguish DMC from Smith-McCort dysplasia"
     ],
-    [
-     "Management Strategy",
-     "Manage supportively, as there is no disease-specific therapy for this DYM-related spondyloepimetaphyseal dysplasia",
-     "Core treatment modality"
+    "redFlags": [
+      "Atlantoaxial instability with signs of cervical myelopathy",
+      "Progressive kyphoscoliosis with respiratory compromise",
+      "Neurological deterioration suggesting cord compression before anaesthesia or manipulation",
+      "New or worsening limb weakness or gait disturbance"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing DMC with Morquio syndrome without a glycosaminoglycan screen",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is often near normal, but morbidity from short stature, progressive spinal deformity, joint contractures and (in classic DMC) intellectual disability is significant; cervical instability requires vigilance to prevent cord injury.",
+    "pitfalls": [
+      "Confusing DMC with Morquio syndrome without a glycosaminoglycan screen",
+      "Failing to assess cervical instability before airway or spinal manipulation",
+      "Not distinguishing classic DMC from Smith-McCort dysplasia by cognitive assessment",
+      "Overlooking the lacy iliac crest, a specific diagnostic clue"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews / Orphanet: Dyggve-Melchior-Clausen Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage supportively, as there is no disease-specific therapy for this DYM-related spondyloepimetaphyseal dysplasia",
+      "Provide orthopaedic care for progressive spinal deformity, joint contractures and the consequences of short-trunk short stature, with physiotherapy and mobility aids",
+      "Maintain vigilance for atlantoaxial instability from odontoid hypoplasia, using flexion-extension cervical imaging and offering surgical stabilisation and anaesthetic precautions where instability threatens the cord",
+      "Offer developmental, educational and behavioural support for intellectual disability in classic disease",
+      "Distinguish it from the allelic Smith-McCort dysplasia through cognitive assessment, since the skeleton is identical but intellect is spared",
+      "Screen the urine for glycosaminoglycans to exclude a mucopolysaccharidosis mimicking the skeletal phenotype",
+      "Offer genetic counselling for this autosomal recessive disorder, with DYM testing and screening of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for dyggve-melchior-clausen syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dyggve-melchior-clausen-syndrome-real-image",
-   "title": "Dyggve-Melchior-Clausen syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "dyggve_melchior_clausen_syndrome-pathway",
+      "title": "Dyggve-Melchior-Clausen syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive spondyloepimetaphyseal dysplasia caused by biallelic variants in DYM, encoding the Golgi protein dymeclin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Atlantoaxial instability with signs of cervical myelopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey looking for the lacy iliac crest, platyspondyly and epimetaphyseal irregularity, DYM molecular genetic testing, Urinary glycosaminoglycan screen to exclude mucopolysaccharidoses"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage supportively, as there is no disease-specific therapy for this DYM-related spondyloepimetaphyseal dysplasia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing DMC with Morquio syndrome without a glycosaminoglycan screen"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dyggve-melchior-clausen syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dyggve_melchior_clausen_syndrome-matrix",
+      "title": "Dyggve-Melchior-Clausen syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive spondyloepimetaphyseal dysplasia caused by biallelic variants in DYM, encoding the Golgi protein dymeclin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey looking for the lacy iliac crest, platyspondyly and epimetaphyseal irregularity, DYM molecular genetic testing,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Smith-McCort dysplasia (allelic, normal intellect), Morquio syndrome (mucopolysaccharidosis IV), Spondyloepiphyseal dysplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage supportively, as there is no disease-specific therapy for this DYM-related spondyloepimetaphyseal dysplasia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing DMC with Morquio syndrome without a glycosaminoglycan screen",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dyggve-melchior-clausen syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dyggve_melchior_clausen_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey for lacy iliac crest, platyspondyly and epimetaphyseal change",
+          "cells": [
+            {
+              "text": "Lacy iliac crest and platyspondyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary glycosaminoglycan screen",
+          "cells": [
+            {
+              "text": "Excludes mucopolysaccharidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine imaging with flexion-extension views",
+          "cells": [
+            {
+              "text": "Odontoid hypoplasia and instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and cognitive assessment",
+          "cells": [
+            {
+              "text": "Separates classic DMC from Smith-McCort dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DYM molecular genetic testing",
+          "cells": [
+            {
+              "text": "DYM variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyggve_melchior_clausen_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Smith-McCort dysplasia",
+          "cells": [
+            {
+              "text": "Allelic disorder with the same skeleton but normal intellect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morquio syndrome (mucopolysaccharidosis IV)",
+          "cells": [
+            {
+              "text": "Glycosaminoglycanuria on urine screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudoachondroplasia",
+          "cells": [
+            {
+              "text": "Shared short-limbed skeletal features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyggve_melchior_clausen_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Progressive spinal deformity, contractures and short-trunk stature; physiotherapy and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical instability",
+          "cells": [
+            {
+              "text": "Flexion-extension imaging; surgical stabilisation and anaesthetic precautions when cord threatened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Educational and behavioural support for intellectual disability in classic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine glycosaminoglycan screen",
+          "cells": [
+            {
+              "text": "Excludes a mimicking mucopolysaccharidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; DYM testing and screening of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dyggve_melchior_clausen_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Dyggve-Melchior-Clausen syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dyggve-Melchior-Clausen syndrome: short trunk and spinal deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atlantoaxial instability with myelopathy, progressive kyphoscoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cervical spine imaging and cord protection before anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; urine GAGs; cervical flexion-extension imaging; DYM testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a DYM variant found with the characteristic skeletal survey?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Morquio syndrome, other mucopolysaccharidoses or pseudoachondroplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, mobility aids and orthopaedic care for spinal deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Flexion-extension cervical imaging; stabilisation where instability threatens the cord",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental and educational support for intellectual disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urine glycosaminoglycan screen to exclude a mimicking mucopolysaccharidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with DYM testing for autosomal recessive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Life expectancy often near normal; deformity and intellectual disability add morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

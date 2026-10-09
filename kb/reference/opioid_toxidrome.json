@@ -1,169 +1,523 @@
 {
- "id": "opioid_toxidrome",
- "name": "Opioid toxidrome",
- "aliases": [
-  "opioid toxicity",
-  "opioid overdose syndrome"
- ],
- "class": "non_infective",
- "system": "Multisystem / Toxicology",
- "specialty": "Emergency medicine / Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard toxicology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
-   "Respiratory depression is the immediate life threat and the target of resuscitation",
-   "Naloxone, an opioid antagonist, reverses toxicity and is titrated to restore adequate ventilation rather than full alertness",
-   "Miosis may be absent with certain agents or co-ingestants, so its absence does not exclude opioid toxicity",
-   "Long-acting or sustained-release opioids and potent synthetic opioids may need repeated doses or an infusion of antagonist",
-   "Non-cardiogenic pulmonary oedema and aspiration are recognised complications"
+  "id": "opioid_toxidrome",
+  "name": "Opioid toxidrome",
+  "aliases": [
+    "opioid toxicity",
+    "opioid overdose syndrome"
   ],
-  "pathophysiology": "The opioid toxidrome results from agonism at mu-opioid receptors in the central nervous system, depressing the brainstem respiratory drive and level of consciousness and causing pupillary constriction. Hypoventilation leads to hypercapnia and hypoxia, which are the principal causes of death. The duration and severity depend on the agent's potency and pharmacokinetics, so long-acting and highly potent synthetic opioids can outlast a single dose of antagonist and cause recurrent toxicity.",
-  "additionalDifferentials": [
-   "Sedative-hypnotic or alcohol intoxication",
-   "Clonidine or other central sympatholytic overdose",
-   "Pontine haemorrhage or other brainstem lesion (for pinpoint pupils)",
-   "Hypoglycaemia or other metabolic coma",
-   "CNS infection"
-  ],
-  "additionalInvestigations": [
-   "Clinical recognition and response to a trial of opioid antagonist",
-   "Oxygenation and ventilation assessment, including capnography where available",
-   "Blood glucose and basic metabolic screen to exclude mimics",
-   "Chest imaging if pulmonary oedema or aspiration is suspected",
-   "Consideration of co-ingestants such as paracetamol in combination products"
-  ],
-  "redFlags": [
-   "Inadequate ventilation or hypoxia",
-   "Recurrent toxicity after initial antagonist, suggesting a long-acting agent",
-   "Signs of aspiration or pulmonary oedema",
-   "Coma with an uncertain airway"
-  ],
-  "prognosis": "With timely airway and ventilatory support and opioid antagonist, recovery is usually rapid and complete; death results mainly from unrecognised respiratory failure or complications such as aspiration and hypoxic brain injury.",
-  "pitfalls": [
-   "Excluding opioid toxicity because pupils are not pinpoint",
-   "Giving a single antagonist dose for a long-acting opioid and missing recurrence",
-   "Overzealous antagonist dosing precipitating severe withdrawal",
-   "Overlooking co-ingested paracetamol in combination analgesics"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "Tintinalli's Emergency Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat",
-   "Give the opioid antagonist naloxone titrated to restore adequate ventilation rather than full alertness",
-   "Use repeated naloxone doses or a continuous infusion for long-acting, sustained-release or potent synthetic opioids that outlast a single antagonist dose",
-   "Observe for a prolonged period to detect recurrent toxicity after the initial response",
-   "Provide supportive care for complications such as non-cardiogenic pulmonary oedema and aspiration",
-   "Screen for co-ingestants, particularly paracetamol in combination products, and exclude metabolic mimics",
-   "Refer to addiction services and provide take-home naloxone on recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "opioid_toxidrome-pathway",
-   "title": "Opioid toxidrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Inadequate ventilation or hypoxia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical recognition and response to a trial of opioid antagonist, Oxygenation and ventilation assessment, including capnography where available, Blood glucose and basic metabolic screen to exclude mimics"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding opioid toxicity because pupils are not pinpoint"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of opioid toxidrome."
-  }
- ],
- "tables": [
-  {
-   "id": "opioid_toxidrome-matrix",
-   "title": "Opioid toxidrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem / Toxicology",
+  "specialty": "Emergency medicine / Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard toxicology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
+      "Respiratory depression is the immediate life threat and the target of resuscitation",
+      "Naloxone, an opioid antagonist, reverses toxicity and is titrated to restore adequate ventilation rather than full alertness",
+      "Miosis may be absent with certain agents or co-ingestants, so its absence does not exclude opioid toxicity",
+      "Long-acting or sustained-release opioids and potent synthetic opioids may need repeated doses or an infusion of antagonist",
+      "Non-cardiogenic pulmonary oedema and aspiration are recognised complications"
     ],
-    [
-     "Key Investigations",
-     "Clinical recognition and response to a trial of opioid antagonist, Oxygenation and ventilation assessment, including capnography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The opioid toxidrome results from agonism at mu-opioid receptors in the central nervous system, depressing the brainstem respiratory drive and level of consciousness and causing pupillary constriction. Hypoventilation leads to hypercapnia and hypoxia, which are the principal causes of death. The duration and severity depend on the agent's potency and pharmacokinetics, so long-acting and highly potent synthetic opioids can outlast a single dose of antagonist and cause recurrent toxicity.",
+    "additionalDifferentials": [
+      "Sedative-hypnotic or alcohol intoxication",
+      "Clonidine or other central sympatholytic overdose",
+      "Pontine haemorrhage or other brainstem lesion (for pinpoint pupils)",
+      "Hypoglycaemia or other metabolic coma",
+      "CNS infection"
     ],
-    [
-     "Primary Differentials",
-     "Sedative-hypnotic or alcohol intoxication, Clonidine or other central sympatholytic overdose, Pontine haemorrhage or other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical recognition and response to a trial of opioid antagonist",
+      "Oxygenation and ventilation assessment, including capnography where available",
+      "Blood glucose and basic metabolic screen to exclude mimics",
+      "Chest imaging if pulmonary oedema or aspiration is suspected",
+      "Consideration of co-ingestants such as paracetamol in combination products"
     ],
-    [
-     "Management Strategy",
-     "Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat",
-     "Core treatment modality"
+    "redFlags": [
+      "Inadequate ventilation or hypoxia",
+      "Recurrent toxicity after initial antagonist, suggesting a long-acting agent",
+      "Signs of aspiration or pulmonary oedema",
+      "Coma with an uncertain airway"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding opioid toxicity because pupils are not pinpoint",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely airway and ventilatory support and opioid antagonist, recovery is usually rapid and complete; death results mainly from unrecognised respiratory failure or complications such as aspiration and hypoxic brain injury.",
+    "pitfalls": [
+      "Excluding opioid toxicity because pupils are not pinpoint",
+      "Giving a single antagonist dose for a long-acting opioid and missing recurrence",
+      "Overzealous antagonist dosing precipitating severe withdrawal",
+      "Overlooking co-ingested paracetamol in combination analgesics"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "Tintinalli's Emergency Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat",
+      "Give the opioid antagonist naloxone titrated to restore adequate ventilation rather than full alertness",
+      "Use repeated naloxone doses or a continuous infusion for long-acting, sustained-release or potent synthetic opioids that outlast a single antagonist dose",
+      "Observe for a prolonged period to detect recurrent toxicity after the initial response",
+      "Provide supportive care for complications such as non-cardiogenic pulmonary oedema and aspiration",
+      "Screen for co-ingestants, particularly paracetamol in combination products, and exclude metabolic mimics",
+      "Refer to addiction services and provide take-home naloxone on recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for opioid toxidrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "opioid-toxidrome-real-image",
-   "title": "Opioid toxidrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "opioid_toxidrome-pathway",
+      "title": "Opioid toxidrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Inadequate ventilation or hypoxia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical recognition and response to a trial of opioid antagonist, Oxygenation and ventilation assessment, including capnography where available, Blood glucose and basic metabolic screen to exclude mimics"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding opioid toxicity because pupils are not pinpoint"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of opioid toxidrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "opioid_toxidrome-matrix",
+      "title": "Opioid toxidrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical recognition and response to a trial of opioid antagonist, Oxygenation and ventilation assessment, including capnography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sedative-hypnotic or alcohol intoxication, Clonidine or other central sympatholytic overdose, Pontine haemorrhage or other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding opioid toxicity because pupils are not pinpoint",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for opioid toxidrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard toxicology references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 393-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "opioid_toxidrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Response to a trial of opioid antagonist",
+          "cells": [
+            {
+              "text": "Recovery of ventilation supports opioid toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygenation and ventilation assessment, including capnography",
+          "cells": [
+            {
+              "text": "Hypoventilation, the principal life threat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and basic metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes metabolic mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary oedema or aspiration, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for co-ingestants",
+          "cells": [
+            {
+              "text": "Paracetamol in combination products"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_toxidrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pontine haemorrhage or brainstem lesion",
+          "cells": [
+            {
+              "text": "Can also cause pinpoint pupils; antagonist response supports opioid toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia or other metabolic coma",
+          "cells": [
+            {
+              "text": "Excluded by blood glucose testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_toxidrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway and ventilation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Immediate support; hypoventilation is the principal life threat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Titrated naloxone",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Restores adequate ventilation rather than full alertness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated doses or infusion",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For long-acting, sustained-release or potent synthetic opioids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged observation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "To detect recurrent toxicity after the initial response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Non-cardiogenic pulmonary oedema and aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-ingestant screen",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Paracetamol in combination products; exclude metabolic mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Addiction services and take-home naloxone",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Referral and take-home naloxone on recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_toxidrome-ddx-2",
+      "kind": "ddx",
+      "title": "Opioid receptor types and their actions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Actions"
+      ],
+      "rows": [
+        {
+          "parameter": "Mu (example: morphine)",
+          "cells": [
+            {
+              "text": "Analgesia, reinforcement and euphoria, cough and appetite suppression, decreased respiration, decreased GI motility, sedation, hormone changes, dopamine and acetylcholine release"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kappa (example: butorphanol)",
+          "cells": [
+            {
+              "text": "Dysphoria, decreased GI motility, decreased appetite, decreased respiration, psychotic symptoms, sedation, diuresis, analgesia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Delta (example: etorphine)",
+          "cells": [
+            {
+              "text": "Hormone changes, appetite suppression, dopamine release"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "opioid_toxidrome-dx-mgmt",
+      "title": "Diagnosis and management of Opioid toxidrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Depressed consciousness, slow breathing and pinpoint pupils after opioid exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hypoventilation or hypoxia, recurrent toxicity, aspiration or coma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: secure the airway, ventilate and give naloxone to restore ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oxygenation, glucose, chest imaging if needed, and co-ingestant screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does naloxone restore adequate ventilation, supporting opioid toxicity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sedative or alcohol overdose, clonidine, brainstem lesion or hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Titrated naloxone to restore adequate ventilation rather than full alertness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeated naloxone doses or infusion for long-acting or potent synthetic opioids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prolonged observation for recurrent toxicity after the initial response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care for pulmonary oedema and aspiration; screen for paracetamol",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Addiction services referral and take-home naloxone on recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually rapid recovery; death follows unrecognised respiratory failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

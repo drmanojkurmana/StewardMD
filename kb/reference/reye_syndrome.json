@@ -1,177 +1,464 @@
 {
- "id": "reye_syndrome",
- "name": "Reye Syndrome",
- "aliases": [
-  "Reye's syndrome",
-  "acute encephalopathy with fatty liver"
- ],
- "class": "non_infective",
- "system": "Neurological",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare but potentially fatal disorder marked by acute non-inflammatory encephalopathy occurring alongside fatty change in the liver and other organs.",
-   "Classically follows a viral illness, especially influenza or varicella, during the recovery phase.",
-   "Salicylate (aspirin) exposure during a preceding viral infection is a well-recognised association, and the sharp decline in incidence tracks with public advice to avoid aspirin in children.",
-   "Typical evolution is protracted vomiting followed by progressive neurological deterioration: irritability or lethargy advancing to confusion, delirium, seizures, and coma.",
-   "Liver dysfunction is present but jaundice is characteristically absent or minimal, which can be a useful discriminating clue.",
-   "Laboratory findings include raised transaminases, hyperammonaemia, prolonged prothrombin time, and often hypoglycaemia in younger children.",
-   "In any child presenting with this picture, an underlying inborn error of metabolism (particularly a fatty acid oxidation or urea cycle defect) must be excluded, as these mimic Reye syndrome.",
-   "Management is supportive with a focus on controlling raised intracranial pressure, correcting metabolic derangements, and protecting cerebral perfusion.",
-   "Prognosis correlates strongly with the depth of coma and the degree of hyperammonaemia at presentation."
+  "id": "reye_syndrome",
+  "name": "Reye Syndrome",
+  "aliases": [
+    "Reye's syndrome",
+    "acute encephalopathy with fatty liver"
   ],
-  "pathophysiology": "The core lesion is acute, generalised mitochondrial injury. Diffuse mitochondrial dysfunction in the liver impairs the urea cycle and fatty acid oxidation, producing microvesicular fatty infiltration of hepatocytes, hyperammonaemia, and disturbed intermediary metabolism. In the brain this mitochondrial failure, combined with hyperammonaemia, drives cytotoxic cerebral oedema and raised intracranial pressure, which underlie the encephalopathy. Salicylate metabolites are thought to potentiate mitochondrial injury in susceptible children following a viral trigger.",
-  "additionalDifferentials": [
-   "Inborn errors of metabolism (fatty acid oxidation defects, urea cycle disorders, organic acidaemias)",
-   "Toxic ingestion or drug-induced hepatotoxicity",
-   "Acute encephalitis or meningitis",
-   "Fulminant viral hepatitis",
-   "Diabetic ketoacidosis",
-   "Haemorrhagic shock and encephalopathy syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum ammonia",
-   "Liver transaminases, bilirubin, and coagulation profile",
-   "Blood glucose monitoring",
-   "Metabolic screen: plasma amino acids, urine organic acids, acylcarnitine profile",
-   "Neuroimaging to assess cerebral oedema and exclude other causes",
-   "Lumbar puncture only when safe and to exclude CNS infection",
-   "Liver biopsy in atypical or diagnostically uncertain cases"
-  ],
-  "redFlags": [
-   "Rapidly progressive encephalopathy or declining conscious level (EMERGENCY)",
-   "Signs of raised intracranial pressure: abnormal posturing, pupillary changes, bradycardia with hypertension",
-   "Marked or rising hyperammonaemia",
-   "Seizures or status epilepticus",
-   "Coagulopathy with bleeding",
-   "Progression to coma requiring airway protection and intensive care"
-  ],
-  "prognosis": "Outcome depends heavily on how advanced the encephalopathy is at presentation; children who remain in earlier stages often recover well, whereas deep coma and severe hyperammonaemia carry high risk of death or lasting neurological deficit. Early recognition and aggressive management of intracranial pressure improve survival.",
-  "pitfalls": [
-   "Attributing the illness to Reye syndrome without excluding an inborn error of metabolism, which is now a more common cause of this presentation",
-   "Being reassured by absent jaundice despite significant hepatic derangement",
-   "Delaying management of raised intracranial pressure while awaiting confirmatory tests",
-   "Overlooking hypoglycaemia, especially in infants and young children",
-   "Failing to elicit a history of aspirin or salicylate-containing product use"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid salicylates in children with viral illness, the key preventive measure",
-   "Manage in intensive care with aggressive control of raised intracranial pressure and cerebral oedema",
-   "Correct hypoglycaemia and metabolic derangement with intravenous dextrose-containing fluids",
-   "Correct coagulopathy with vitamin K and blood products as needed",
-   "Lower ammonia and support the failing liver with supportive measures",
-   "Exclude inherited metabolic mimics such as fatty acid oxidation and urea cycle defects with a metabolic screen",
-   "Monitor neurological status closely and escalate neuroprotective measures as the encephalopathy advances"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "reye_syndrome-pathway",
-   "title": "Reye Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare but potentially fatal disorder marked by acute non-inflammatory encephalopathy occurring alongside fatty change in the liver and other organs.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive encephalopathy or declining conscious level (EMERGENCY)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum ammonia, Liver transaminases, bilirubin, and coagulation profile, Blood glucose monitoring"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid salicylates in children with viral illness, the key preventive measure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the illness to Reye syndrome without excluding an inborn error of metabolism, which is now a more common cause of this presentation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of reye syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "reye_syndrome-matrix",
-   "title": "Reye Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare but potentially fatal disorder marked by acute non-inflammatory encephalopathy occurring alongside fatty change in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurological",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare but potentially fatal disorder marked by acute non-inflammatory encephalopathy occurring alongside fatty change in the liver and other organs.",
+      "Classically follows a viral illness, especially influenza or varicella, during the recovery phase.",
+      "Salicylate (aspirin) exposure during a preceding viral infection is a well-recognised association, and the sharp decline in incidence tracks with public advice to avoid aspirin in children.",
+      "Typical evolution is protracted vomiting followed by progressive neurological deterioration: irritability or lethargy advancing to confusion, delirium, seizures, and coma.",
+      "Liver dysfunction is present but jaundice is characteristically absent or minimal, which can be a useful discriminating clue.",
+      "Laboratory findings include raised transaminases, hyperammonaemia, prolonged prothrombin time, and often hypoglycaemia in younger children.",
+      "In any child presenting with this picture, an underlying inborn error of metabolism (particularly a fatty acid oxidation or urea cycle defect) must be excluded, as these mimic Reye syndrome.",
+      "Management is supportive with a focus on controlling raised intracranial pressure, correcting metabolic derangements, and protecting cerebral perfusion.",
+      "Prognosis correlates strongly with the depth of coma and the degree of hyperammonaemia at presentation."
     ],
-    [
-     "Key Investigations",
-     "Serum ammonia, Liver transaminases, bilirubin, and coagulation profile, Blood glucose monitoring",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The core lesion is acute, generalised mitochondrial injury. Diffuse mitochondrial dysfunction in the liver impairs the urea cycle and fatty acid oxidation, producing microvesicular fatty infiltration of hepatocytes, hyperammonaemia, and disturbed intermediary metabolism. In the brain this mitochondrial failure, combined with hyperammonaemia, drives cytotoxic cerebral oedema and raised intracranial pressure, which underlie the encephalopathy. Salicylate metabolites are thought to potentiate mitochondrial injury in susceptible children following a viral trigger.",
+    "additionalDifferentials": [
+      "Inborn errors of metabolism (fatty acid oxidation defects, urea cycle disorders, organic acidaemias)",
+      "Toxic ingestion or drug-induced hepatotoxicity",
+      "Acute encephalitis or meningitis",
+      "Fulminant viral hepatitis",
+      "Diabetic ketoacidosis",
+      "Haemorrhagic shock and encephalopathy syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Inborn errors of metabolism (fatty acid oxidation defects, urea cycle disorders, organic acidaemias), Toxic ingestion or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum ammonia",
+      "Liver transaminases, bilirubin, and coagulation profile",
+      "Blood glucose monitoring",
+      "Metabolic screen: plasma amino acids, urine organic acids, acylcarnitine profile",
+      "Neuroimaging to assess cerebral oedema and exclude other causes",
+      "Lumbar puncture only when safe and to exclude CNS infection",
+      "Liver biopsy in atypical or diagnostically uncertain cases"
     ],
-    [
-     "Management Strategy",
-     "Avoid salicylates in children with viral illness, the key preventive measure",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive encephalopathy or declining conscious level (EMERGENCY)",
+      "Signs of raised intracranial pressure: abnormal posturing, pupillary changes, bradycardia with hypertension",
+      "Marked or rising hyperammonaemia",
+      "Seizures or status epilepticus",
+      "Coagulopathy with bleeding",
+      "Progression to coma requiring airway protection and intensive care"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the illness to Reye syndrome without excluding an inborn error of metabolism, which is now a more common cause of",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends heavily on how advanced the encephalopathy is at presentation; children who remain in earlier stages often recover well, whereas deep coma and severe hyperammonaemia carry high risk of death or lasting neurological deficit. Early recognition and aggressive management of intracranial pressure improve survival.",
+    "pitfalls": [
+      "Attributing the illness to Reye syndrome without excluding an inborn error of metabolism, which is now a more common cause of this presentation",
+      "Being reassured by absent jaundice despite significant hepatic derangement",
+      "Delaying management of raised intracranial pressure while awaiting confirmatory tests",
+      "Overlooking hypoglycaemia, especially in infants and young children",
+      "Failing to elicit a history of aspirin or salicylate-containing product use"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid salicylates in children with viral illness, the key preventive measure",
+      "Manage in intensive care with aggressive control of raised intracranial pressure and cerebral oedema",
+      "Correct hypoglycaemia and metabolic derangement with intravenous dextrose-containing fluids",
+      "Correct coagulopathy with vitamin K and blood products as needed",
+      "Lower ammonia and support the failing liver with supportive measures",
+      "Exclude inherited metabolic mimics such as fatty acid oxidation and urea cycle defects with a metabolic screen",
+      "Monitor neurological status closely and escalate neuroprotective measures as the encephalopathy advances"
     ]
-   ],
-   "caption": "Overview comparison matrix for reye syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "reye-syndrome-real-image",
-   "title": "Reye Syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "reye_syndrome-pathway",
+      "title": "Reye Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare but potentially fatal disorder marked by acute non-inflammatory encephalopathy occurring alongside fatty change in the liver and other organs.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive encephalopathy or declining conscious level (EMERGENCY)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum ammonia, Liver transaminases, bilirubin, and coagulation profile, Blood glucose monitoring"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid salicylates in children with viral illness, the key preventive measure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the illness to Reye syndrome without excluding an inborn error of metabolism, which is now a more common cause of this presentation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of reye syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "reye_syndrome-matrix",
+      "title": "Reye Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare but potentially fatal disorder marked by acute non-inflammatory encephalopathy occurring alongside fatty change in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum ammonia, Liver transaminases, bilirubin, and coagulation profile, Blood glucose monitoring",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inborn errors of metabolism (fatty acid oxidation defects, urea cycle disorders, organic acidaemias), Toxic ingestion or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid salicylates in children with viral illness, the key preventive measure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the illness to Reye syndrome without excluding an inborn error of metabolism, which is now a more common cause of",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for reye syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "reye_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ammonia",
+          "cells": [
+            {
+              "text": "Hyperammonaemia; marked or rising levels are a red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transaminases, bilirubin and coagulation profile",
+          "cells": [
+            {
+              "text": "Hepatic derangement and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose monitoring",
+          "cells": [
+            {
+              "text": "Hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Inborn errors: plasma amino acids, urine organic acids, acylcarnitine profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Cerebral oedema and other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Atypical or diagnostically uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reye_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inborn errors of metabolism",
+          "cells": [
+            {
+              "text": "Fatty acid oxidation defects, urea cycle disorders and organic acidaemias; a more common cause now (pitfall)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute encephalitis or meningitis",
+          "cells": [
+            {
+              "text": "CNS infection, excluded by lumbar puncture when safe"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reye_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid salicylates",
+          "cells": [
+            {
+              "text": "In children with viral illness; the key preventive measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care",
+          "cells": [
+            {
+              "text": "Aggressive control of raised intracranial pressure and cerebral oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose",
+          "cells": [
+            {
+              "text": "Correct hypoglycaemia with intravenous dextrose-containing fluids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulopathy",
+          "cells": [
+            {
+              "text": "Vitamin K and blood products as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ammonia and liver",
+          "cells": [
+            {
+              "text": "Lower ammonia and support the failing liver with supportive measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Exclude fatty acid oxidation and urea cycle defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological monitoring",
+          "cells": [
+            {
+              "text": "Close monitoring; escalate neuroprotective measures as encephalopathy advances"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "reye_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Reye Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child after viral illness with progressive encephalopathy and liver derangement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid encephalopathy, raised ICP, hyperammonaemia, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency intensive care for raised intracranial pressure and cerebral oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ammonia, LFTs, coagulation, glucose, metabolic screen, neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an inborn error of metabolism excluded on the metabolic screen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as an inborn error of metabolism; specialist metabolic input",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid salicylates in children with viral illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensive care: control intracranial pressure and cerebral oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct hypoglycaemia with IV dextrose-containing fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct coagulopathy with vitamin K and blood products",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on encephalopathy stage; early recognition and ICP control improve survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

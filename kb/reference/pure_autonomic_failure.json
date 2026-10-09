@@ -1,174 +1,430 @@
 {
- "id": "pure_autonomic_failure",
- "name": "Pure autonomic failure",
- "aliases": [
-  "PAF",
-  "Bradbury-Eggleston syndrome",
-  "idiopathic orthostatic hypotension"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A sporadic, adult-onset, slowly progressive degenerative autonomic disorder presenting with orthostatic hypotension in the absence of central neurological deficits",
-   "Reflects peripheral (postganglionic) sympathetic denervation, with low supine plasma noradrenaline that fails to rise on standing",
-   "Characterised by pathological alpha-synuclein deposition in peripheral autonomic neurons, placing it within the synucleinopathies",
-   "Symptoms include light-headedness, fatigue, visual greying, and a suboccipital 'coat-hanger' ache on standing, all relieved by sitting or lying",
-   "Additional features include reduced sweating, bladder and bowel disturbance, and erectile dysfunction",
-   "A substantial minority phenoconvert over years to a central synucleinopathy such as Parkinson disease, dementia with Lewy bodies, or multiple system atrophy",
-   "Supine hypertension frequently coexists with orthostatic hypotension and complicates treatment",
-   "Management is non-pharmacological first: volume and salt expansion, compression garments, physical counter-manoeuvres, and head-up tilt of the bed overnight"
+  "id": "pure_autonomic_failure",
+  "name": "Pure autonomic failure",
+  "aliases": [
+    "PAF",
+    "Bradbury-Eggleston syndrome",
+    "idiopathic orthostatic hypotension"
   ],
-  "pathophysiology": "Pure autonomic failure is a neurodegenerative disorder confined largely to the peripheral autonomic nervous system. Misfolded alpha-synuclein accumulates within postganglionic sympathetic and parasympathetic neurons and causes their degeneration. Loss of postganglionic sympathetic fibres impairs noradrenaline release, so vasoconstriction fails on standing and blood pools in the lower body, producing orthostatic hypotension. Because supine noradrenaline is low and does not increase appropriately on standing, the lesion is localised distal to the ganglion. Denervation supersensitivity of vascular adrenoceptors and impaired baroreflex buffering contribute to the coexisting supine hypertension.",
-  "additionalDifferentials": [
-   "Multiple system atrophy",
-   "Parkinson disease with autonomic involvement",
-   "Diabetic or amyloid autonomic neuropathy",
-   "Dopamine beta-hydroxylase deficiency",
-   "Medication-induced orthostatic hypotension",
-   "Volume depletion or adrenal insufficiency"
-  ],
-  "additionalInvestigations": [
-   "Head-up tilt-table testing with beat-to-beat blood pressure recording",
-   "Supine and standing plasma catecholamines showing low, non-responsive noradrenaline",
-   "Cardiovascular autonomic reflex battery (Valsalva manoeuvre, deep breathing, sustained handgrip)",
-   "QSART and thermoregulatory sweat test for sudomotor involvement",
-   "Cardiac MIBG scintigraphy demonstrating reduced myocardial uptake",
-   "Serial neurological review to detect phenoconversion to a central synucleinopathy"
-  ],
-  "redFlags": [
-   "Emergence of parkinsonism, cerebellar signs, or early severe autonomic failure suggesting multiple system atrophy",
-   "Rapid progression or prominent bladder failure pointing to a central synucleinopathy",
-   "Severe supine hypertension threatening end-organ damage",
-   "Recurrent syncope with fall-related injury"
-  ],
-  "prognosis": "Pure autonomic failure generally progresses slowly and carries a better outlook than multiple system atrophy, but a meaningful proportion of patients phenoconvert to a central synucleinopathy over years, and disabling orthostatic symptoms with supine hypertension require ongoing management.",
-  "pitfalls": [
-   "Overlooking coexisting supine hypertension when treating orthostatic hypotension",
-   "Attributing symptoms to simple dehydration and missing the underlying degenerative disorder",
-   "Failing to monitor for phenoconversion to Parkinson disease, dementia with Lewy bodies, or multiple system atrophy",
-   "Overtreating orthostatic hypotension and worsening nocturnal supine hypertension"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage orthostatic hypotension first with non-drug measures: liberalised salt and fluid intake, waist-high compression garments, head-up sleeping and physical counter-pressure manoeuvres",
-   "Add pharmacotherapy where symptoms persist, using fludrocortisone, midodrine or droxidopa to raise standing blood pressure",
-   "Control coexisting supine hypertension by avoiding pressor agents at night, elevating the head of the bed and using a short-acting antihypertensive at bedtime if needed",
-   "Treat associated autonomic features including bladder and bowel dysfunction and erectile dysfunction",
-   "Educate on avoiding precipitants such as large meals, heat and rapid standing, and institute falls prevention",
-   "Review serially to detect phenoconversion to a central synucleinopathy such as Parkinson disease, dementia with Lewy bodies or multiple system atrophy",
-   "Manage within a specialist autonomic or neurology service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pure_autonomic_failure-pathway",
-   "title": "Pure autonomic failure: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A sporadic, adult-onset, slowly progressive degenerative autonomic disorder presenting with orthostatic hypotension in the absence of central neurological deficits",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emergence of parkinsonism, cerebellar signs, or early severe autonomic failure suggesting multiple system atrophy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Head-up tilt-table testing with beat-to-beat blood pressure recording, Supine and standing plasma catecholamines showing low, non-responsive noradrenaline, Cardiovascular autonomic reflex battery (Valsalva manoeuvre, deep"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage orthostatic hypotension first with non-drug measures: liberalised salt and fluid intake, waist-high compression garments, head-up sleeping and physical counter-pressure manoeuvres"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking coexisting supine hypertension when treating orthostatic hypotension"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pure autonomic failure."
-  }
- ],
- "tables": [
-  {
-   "id": "pure_autonomic_failure-matrix",
-   "title": "Pure autonomic failure: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A sporadic, adult-onset, slowly progressive degenerative autonomic disorder presenting with orthostatic hypotension in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A sporadic, adult-onset, slowly progressive degenerative autonomic disorder presenting with orthostatic hypotension in the absence of central neurological deficits",
+      "Reflects peripheral (postganglionic) sympathetic denervation, with low supine plasma noradrenaline that fails to rise on standing",
+      "Characterised by pathological alpha-synuclein deposition in peripheral autonomic neurons, placing it within the synucleinopathies",
+      "Symptoms include light-headedness, fatigue, visual greying, and a suboccipital 'coat-hanger' ache on standing, all relieved by sitting or lying",
+      "Additional features include reduced sweating, bladder and bowel disturbance, and erectile dysfunction",
+      "A substantial minority phenoconvert over years to a central synucleinopathy such as Parkinson disease, dementia with Lewy bodies, or multiple system atrophy",
+      "Supine hypertension frequently coexists with orthostatic hypotension and complicates treatment",
+      "Management is non-pharmacological first: volume and salt expansion, compression garments, physical counter-manoeuvres, and head-up tilt of the bed overnight"
     ],
-    [
-     "Key Investigations",
-     "Head-up tilt-table testing with beat-to-beat blood pressure recording, Supine and standing plasma catecholamines showing low,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pure autonomic failure is a neurodegenerative disorder confined largely to the peripheral autonomic nervous system. Misfolded alpha-synuclein accumulates within postganglionic sympathetic and parasympathetic neurons and causes their degeneration. Loss of postganglionic sympathetic fibres impairs noradrenaline release, so vasoconstriction fails on standing and blood pools in the lower body, producing orthostatic hypotension. Because supine noradrenaline is low and does not increase appropriately on standing, the lesion is localised distal to the ganglion. Denervation supersensitivity of vascular adrenoceptors and impaired baroreflex buffering contribute to the coexisting supine hypertension.",
+    "additionalDifferentials": [
+      "Multiple system atrophy",
+      "Parkinson disease with autonomic involvement",
+      "Diabetic or amyloid autonomic neuropathy",
+      "Dopamine beta-hydroxylase deficiency",
+      "Medication-induced orthostatic hypotension",
+      "Volume depletion or adrenal insufficiency"
     ],
-    [
-     "Primary Differentials",
-     "Multiple system atrophy, Parkinson disease with autonomic involvement, Diabetic or amyloid autonomic neuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Head-up tilt-table testing with beat-to-beat blood pressure recording",
+      "Supine and standing plasma catecholamines showing low, non-responsive noradrenaline",
+      "Cardiovascular autonomic reflex battery (Valsalva manoeuvre, deep breathing, sustained handgrip)",
+      "QSART and thermoregulatory sweat test for sudomotor involvement",
+      "Cardiac MIBG scintigraphy demonstrating reduced myocardial uptake",
+      "Serial neurological review to detect phenoconversion to a central synucleinopathy"
     ],
-    [
-     "Management Strategy",
-     "Manage orthostatic hypotension first with non-drug measures: liberalised salt and fluid intake, waist-high compression garments,",
-     "Core treatment modality"
+    "redFlags": [
+      "Emergence of parkinsonism, cerebellar signs, or early severe autonomic failure suggesting multiple system atrophy",
+      "Rapid progression or prominent bladder failure pointing to a central synucleinopathy",
+      "Severe supine hypertension threatening end-organ damage",
+      "Recurrent syncope with fall-related injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking coexisting supine hypertension when treating orthostatic hypotension",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pure autonomic failure generally progresses slowly and carries a better outlook than multiple system atrophy, but a meaningful proportion of patients phenoconvert to a central synucleinopathy over years, and disabling orthostatic symptoms with supine hypertension require ongoing management.",
+    "pitfalls": [
+      "Overlooking coexisting supine hypertension when treating orthostatic hypotension",
+      "Attributing symptoms to simple dehydration and missing the underlying degenerative disorder",
+      "Failing to monitor for phenoconversion to Parkinson disease, dementia with Lewy bodies, or multiple system atrophy",
+      "Overtreating orthostatic hypotension and worsening nocturnal supine hypertension"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage orthostatic hypotension first with non-drug measures: liberalised salt and fluid intake, waist-high compression garments, head-up sleeping and physical counter-pressure manoeuvres",
+      "Add pharmacotherapy where symptoms persist, using fludrocortisone, midodrine or droxidopa to raise standing blood pressure",
+      "Control coexisting supine hypertension by avoiding pressor agents at night, elevating the head of the bed and using a short-acting antihypertensive at bedtime if needed",
+      "Treat associated autonomic features including bladder and bowel dysfunction and erectile dysfunction",
+      "Educate on avoiding precipitants such as large meals, heat and rapid standing, and institute falls prevention",
+      "Review serially to detect phenoconversion to a central synucleinopathy such as Parkinson disease, dementia with Lewy bodies or multiple system atrophy",
+      "Manage within a specialist autonomic or neurology service"
     ]
-   ],
-   "caption": "Overview comparison matrix for pure autonomic failure."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pure-autonomic-failure-real-image",
-   "title": "Pure autonomic failure: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pure_autonomic_failure-pathway",
+      "title": "Pure autonomic failure: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A sporadic, adult-onset, slowly progressive degenerative autonomic disorder presenting with orthostatic hypotension in the absence of central neurological deficits",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emergence of parkinsonism, cerebellar signs, or early severe autonomic failure suggesting multiple system atrophy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Head-up tilt-table testing with beat-to-beat blood pressure recording, Supine and standing plasma catecholamines showing low, non-responsive noradrenaline, Cardiovascular autonomic reflex battery (Valsalva manoeuvre, deep"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage orthostatic hypotension first with non-drug measures: liberalised salt and fluid intake, waist-high compression garments, head-up sleeping and physical counter-pressure manoeuvres"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking coexisting supine hypertension when treating orthostatic hypotension"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pure autonomic failure."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pure_autonomic_failure-matrix",
+      "title": "Pure autonomic failure: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A sporadic, adult-onset, slowly progressive degenerative autonomic disorder presenting with orthostatic hypotension in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Head-up tilt-table testing with beat-to-beat blood pressure recording, Supine and standing plasma catecholamines showing low,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Multiple system atrophy, Parkinson disease with autonomic involvement, Diabetic or amyloid autonomic neuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage orthostatic hypotension first with non-drug measures: liberalised salt and fluid intake, waist-high compression garments,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking coexisting supine hypertension when treating orthostatic hypotension",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pure autonomic failure."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pure_autonomic_failure-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Head-up tilt-table testing",
+          "cells": [
+            {
+              "text": "Orthostatic hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supine and standing plasma catecholamines",
+          "cells": [
+            {
+              "text": "Low, non-responsive noradrenaline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular autonomic reflex battery",
+          "cells": [
+            {
+              "text": "Autonomic reflex function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "QSART and sweat test",
+          "cells": [
+            {
+              "text": "Sudomotor involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MIBG scintigraphy",
+          "cells": [
+            {
+              "text": "Reduced myocardial uptake"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pure_autonomic_failure-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple system atrophy",
+          "cells": [
+            {
+              "text": "Parkinsonism, cerebellar signs or prominent bladder failure"
+            },
+            {
+              "text": "Serial neurological review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic or amyloid autonomic neuropathy",
+          "cells": [
+            {
+              "text": "Diabetes or amyloid disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pure_autonomic_failure-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-drug measures",
+          "cells": [
+            {
+              "text": "Liberalised salt and fluid intake first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacotherapy",
+          "cells": [
+            {
+              "text": "Fludrocortisone, midodrine or droxidopa where symptoms persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supine hypertension",
+          "cells": [
+            {
+              "text": "Avoid pressor agents at night; elevate the head of the bed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated features",
+          "cells": [
+            {
+              "text": "Bladder and bowel dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education",
+          "cells": [
+            {
+              "text": "Avoid precipitating factors such as heat and large meals"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pure_autonomic_failure-dx-mgmt",
+      "title": "Diagnosis and management of Pure autonomic failure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pure autonomic failure: orthostatic hypotension with low noradrenaline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Parkinsonism, cerebellar signs, rapid progression, or severe supine hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for supine hypertension or injurious syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tilt-table test; plasma catecholamines; reflex battery; QSART; MIBG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is non-responsive noradrenaline with orthostatic hypotension confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MSA, diabetic or amyloid neuropathy, or volume depletion; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Non-drug measures first: salt, fluids, head-up sleeping",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fludrocortisone, midodrine or droxidopa if symptoms persist",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid pressor agents at night for supine hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Neurology follow-up for progression to a central synucleinopathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

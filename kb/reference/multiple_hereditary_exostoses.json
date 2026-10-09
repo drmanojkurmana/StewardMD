@@ -1,175 +1,471 @@
 {
- "id": "multiple_hereditary_exostoses",
- "name": "Multiple hereditary exostoses",
- "aliases": [
-  "EXT1",
-  "EXT2",
-  "hereditary multiple osteochondromas",
-  "diaphyseal aclasis",
-  "MHE",
-  "MO"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant disorder caused by loss-of-function variants in EXT1 or EXT2, encoding enzymes for heparan sulphate biosynthesis",
-   "Characterised by multiple osteochondromas (exostoses) arising from the metaphyses of long bones, ribs, scapulae and pelvis, typically capped by cartilage and pointing away from the joint",
-   "Lesions appear in childhood, enlarge during growth and characteristically stop growing after skeletal maturity",
-   "Common complications include limb-length discrepancy, forearm deformity (ulnar shortening/bowing with radial head dislocation), genu valgum and coxa valga",
-   "Osteochondromas can cause pain, mechanical restriction, bursitis or compression of adjacent nerves, vessels or tendons",
-   "The most important long-term risk is malignant transformation of an osteochondroma to secondary chondrosarcoma, more likely with axial/proximal lesions",
-   "New pain, growth of a lesion after skeletal maturity, or a thickened cartilage cap should prompt evaluation for malignant transformation"
+  "id": "multiple_hereditary_exostoses",
+  "name": "Multiple hereditary exostoses",
+  "aliases": [
+    "EXT1",
+    "EXT2",
+    "hereditary multiple osteochondromas",
+    "diaphyseal aclasis",
+    "MHE",
+    "MO"
   ],
-  "pathophysiology": "Multiple hereditary exostoses is caused by inactivating variants in EXT1 or EXT2, which encode glycosyltransferases that synthesise heparan sulphate. Heparan sulphate proteoglycans regulate the diffusion and signalling of morphogens such as Indian hedgehog in the growth plate. Deficient heparan sulphate disrupts the normal polarity and containment of proliferating chondrocytes at the perichondrium, so ectopic cartilage-capped bony outgrowths (osteochondromas) form at the metaphyses and grow by endochondral ossification. Malignant transformation reflects additional somatic events within the cartilage cap.",
-  "additionalDifferentials": [
-   "Solitary (sporadic) osteochondroma",
-   "Ollier disease (multiple enchondromas)",
-   "Maffucci syndrome",
-   "Metachondromatosis",
-   "Trevor disease (dysplasia epiphysealis hemimelica)",
-   "Secondary chondrosarcoma"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey to map the number, size and distribution of osteochondromas",
-   "EXT1/EXT2 molecular genetic testing",
-   "Cross-sectional imaging (MRI) to measure cartilage cap thickness when transformation is suspected",
-   "Targeted imaging of forearm, knees and hips to assess deformity and joint mechanics",
-   "Neurovascular assessment where a lesion compresses adjacent structures"
-  ],
-  "redFlags": [
-   "Growth of a lesion or new pain after skeletal maturity suggesting malignant transformation",
-   "A thickened cartilage cap on imaging concerning for secondary chondrosarcoma",
-   "Neurovascular compromise or spinal cord compression from an osteochondroma",
-   "Rapidly enlarging axial or pelvic lesions with the highest transformation risk"
-  ],
-  "prognosis": "Most people have a normal lifespan with orthopaedic morbidity from deformity and mechanical complications; the principal serious risk is secondary chondrosarcoma in a minority, making lifelong surveillance for malignant transformation important.",
-  "pitfalls": [
-   "Reassuring a patient about a lesion that has grown after skeletal maturity, when this is a warning sign",
-   "Failing to arrange surveillance for malignant transformation, especially of axial lesions",
-   "Overlooking forearm deformity and radial head dislocation that benefit from timely orthopaedic correction",
-   "Confusing the diagnosis with enchondromatosis, which involves intramedullary rather than surface cartilage lesions"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: Hereditary Multiple Osteochondromas"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No drug therapy alters osteochondroma formation; management is orthopaedic, with surgical excision of symptomatic lesions causing pain, mechanical restriction or neurovascular and tendon compression",
-   "Corrective surgery for forearm deformity, limb-length discrepancy and angular deformity such as genu valgum, using osteotomy, guided growth or limb reconstruction",
-   "Lifelong surveillance for malignant transformation to secondary chondrosarcoma, with particular attention to axial and proximal lesions",
-   "Cross-sectional MRI to measure cartilage-cap thickness, prompting excision when a lesion grows after skeletal maturity or becomes painful",
-   "Neurovascular assessment and decompression where an exostosis compresses adjacent nerves or vessels",
-   "Genetic counselling for autosomal dominant EXT1/EXT2 inheritance, with cascade testing and clinical assessment of relatives",
-   "Escalate to a specialist bone-tumour (sarcoma) service when malignant transformation is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "multiple_hereditary_exostoses-pathway",
-   "title": "Multiple hereditary exostoses: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant disorder caused by loss-of-function variants in EXT1 or EXT2, encoding enzymes for heparan sulphate biosynthesis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Growth of a lesion or new pain after skeletal maturity suggesting malignant transformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey to map the number, size and distribution of osteochondromas, EXT1/EXT2 molecular genetic testing, Cross-sectional imaging (MRI) to measure cartilage cap thickness when transformation is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No drug therapy alters osteochondroma formation; management is orthopaedic, with surgical excision of symptomatic lesions causing pain, mechanical restriction or neurovascular and tendon compression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reassuring a patient about a lesion that has grown after skeletal maturity, when this is a warning sign"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of multiple hereditary exostoses."
-  }
- ],
- "tables": [
-  {
-   "id": "multiple_hereditary_exostoses-matrix",
-   "title": "Multiple hereditary exostoses: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant disorder caused by loss-of-function variants in EXT1 or EXT2, encoding enzymes for heparan sulphate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant disorder caused by loss-of-function variants in EXT1 or EXT2, encoding enzymes for heparan sulphate biosynthesis",
+      "Characterised by multiple osteochondromas (exostoses) arising from the metaphyses of long bones, ribs, scapulae and pelvis, typically capped by cartilage and pointing away from the joint",
+      "Lesions appear in childhood, enlarge during growth and characteristically stop growing after skeletal maturity",
+      "Common complications include limb-length discrepancy, forearm deformity (ulnar shortening/bowing with radial head dislocation), genu valgum and coxa valga",
+      "Osteochondromas can cause pain, mechanical restriction, bursitis or compression of adjacent nerves, vessels or tendons",
+      "The most important long-term risk is malignant transformation of an osteochondroma to secondary chondrosarcoma, more likely with axial/proximal lesions",
+      "New pain, growth of a lesion after skeletal maturity, or a thickened cartilage cap should prompt evaluation for malignant transformation"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey to map the number, size and distribution of osteochondromas, EXT1/EXT2 molecular genetic testing, Cross-sectional",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Multiple hereditary exostoses is caused by inactivating variants in EXT1 or EXT2, which encode glycosyltransferases that synthesise heparan sulphate. Heparan sulphate proteoglycans regulate the diffusion and signalling of morphogens such as Indian hedgehog in the growth plate. Deficient heparan sulphate disrupts the normal polarity and containment of proliferating chondrocytes at the perichondrium, so ectopic cartilage-capped bony outgrowths (osteochondromas) form at the metaphyses and grow by endochondral ossification. Malignant transformation reflects additional somatic events within the cartilage cap.",
+    "additionalDifferentials": [
+      "Solitary (sporadic) osteochondroma",
+      "Ollier disease (multiple enchondromas)",
+      "Maffucci syndrome",
+      "Metachondromatosis",
+      "Trevor disease (dysplasia epiphysealis hemimelica)",
+      "Secondary chondrosarcoma"
     ],
-    [
-     "Primary Differentials",
-     "Solitary (sporadic) osteochondroma, Ollier disease (multiple enchondromas), Maffucci syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey to map the number, size and distribution of osteochondromas",
+      "EXT1/EXT2 molecular genetic testing",
+      "Cross-sectional imaging (MRI) to measure cartilage cap thickness when transformation is suspected",
+      "Targeted imaging of forearm, knees and hips to assess deformity and joint mechanics",
+      "Neurovascular assessment where a lesion compresses adjacent structures"
     ],
-    [
-     "Management Strategy",
-     "No drug therapy alters osteochondroma formation; management is orthopaedic, with surgical excision of symptomatic lesions causing",
-     "Core treatment modality"
+    "redFlags": [
+      "Growth of a lesion or new pain after skeletal maturity suggesting malignant transformation",
+      "A thickened cartilage cap on imaging concerning for secondary chondrosarcoma",
+      "Neurovascular compromise or spinal cord compression from an osteochondroma",
+      "Rapidly enlarging axial or pelvic lesions with the highest transformation risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Reassuring a patient about a lesion that has grown after skeletal maturity, when this is a warning sign",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most people have a normal lifespan with orthopaedic morbidity from deformity and mechanical complications; the principal serious risk is secondary chondrosarcoma in a minority, making lifelong surveillance for malignant transformation important.",
+    "pitfalls": [
+      "Reassuring a patient about a lesion that has grown after skeletal maturity, when this is a warning sign",
+      "Failing to arrange surveillance for malignant transformation, especially of axial lesions",
+      "Overlooking forearm deformity and radial head dislocation that benefit from timely orthopaedic correction",
+      "Confusing the diagnosis with enchondromatosis, which involves intramedullary rather than surface cartilage lesions"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: Hereditary Multiple Osteochondromas"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No drug therapy alters osteochondroma formation; management is orthopaedic, with surgical excision of symptomatic lesions causing pain, mechanical restriction or neurovascular and tendon compression",
+      "Corrective surgery for forearm deformity, limb-length discrepancy and angular deformity such as genu valgum, using osteotomy, guided growth or limb reconstruction",
+      "Lifelong surveillance for malignant transformation to secondary chondrosarcoma, with particular attention to axial and proximal lesions",
+      "Cross-sectional MRI to measure cartilage-cap thickness, prompting excision when a lesion grows after skeletal maturity or becomes painful",
+      "Neurovascular assessment and decompression where an exostosis compresses adjacent nerves or vessels",
+      "Genetic counselling for autosomal dominant EXT1/EXT2 inheritance, with cascade testing and clinical assessment of relatives",
+      "Escalate to a specialist bone-tumour (sarcoma) service when malignant transformation is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for multiple hereditary exostoses."
-  }
- ],
- "diagrams": [
-  {
-   "id": "multiple-hereditary-exostoses-real-image",
-   "title": "Multiple hereditary exostoses: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "multiple_hereditary_exostoses-pathway",
+      "title": "Multiple hereditary exostoses: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant disorder caused by loss-of-function variants in EXT1 or EXT2, encoding enzymes for heparan sulphate biosynthesis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Growth of a lesion or new pain after skeletal maturity suggesting malignant transformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey to map the number, size and distribution of osteochondromas, EXT1/EXT2 molecular genetic testing, Cross-sectional imaging (MRI) to measure cartilage cap thickness when transformation is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No drug therapy alters osteochondroma formation; management is orthopaedic, with surgical excision of symptomatic lesions causing pain, mechanical restriction or neurovascular and tendon compression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reassuring a patient about a lesion that has grown after skeletal maturity, when this is a warning sign"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of multiple hereditary exostoses."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "multiple_hereditary_exostoses-matrix",
+      "title": "Multiple hereditary exostoses: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant disorder caused by loss-of-function variants in EXT1 or EXT2, encoding enzymes for heparan sulphate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey to map the number, size and distribution of osteochondromas, EXT1/EXT2 molecular genetic testing, Cross-sectional",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Solitary (sporadic) osteochondroma, Ollier disease (multiple enchondromas), Maffucci syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No drug therapy alters osteochondroma formation; management is orthopaedic, with surgical excision of symptomatic lesions causing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reassuring a patient about a lesion that has grown after skeletal maturity, when this is a warning sign",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for multiple hereditary exostoses."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multiple_hereditary_exostoses-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Number, size and distribution of osteochondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EXT1 or EXT2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of cartilage cap",
+          "cells": [
+            {
+              "text": "Cartilage cap thickness when transformation is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted imaging of forearm, knees and hips",
+          "cells": [
+            {
+              "text": "Deformity and joint mechanics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurovascular assessment",
+          "cells": [
+            {
+              "text": "Lesions compressing adjacent structures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_hereditary_exostoses-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Solitary osteochondroma",
+          "cells": [
+            {
+              "text": "Here lesions are multiple and inherited through EXT1 or EXT2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ollier disease (multiple enchondromas)",
+          "cells": [
+            {
+              "text": "Enchondromas are intramedullary, not surface cartilage lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary chondrosarcoma",
+          "cells": [
+            {
+              "text": "Arises from an osteochondroma; growth after skeletal maturity or a thickened cap is the warning sign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_hereditary_exostoses-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No drug therapy",
+          "cells": [
+            {
+              "text": "Does not alter osteochondroma formation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Symptomatic lesions causing pain, mechanical restriction or neurovascular and tendon compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corrective surgery",
+          "cells": [
+            {
+              "text": "Forearm deformity, limb-length discrepancy and genu valgum, by osteotomy, guided growth or reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "For malignant transformation to secondary chondrosarcoma, especially axial and proximal lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI cartilage cap assessment",
+          "cells": [
+            {
+              "text": "Excision when a lesion grows after skeletal maturity or becomes painful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurovascular decompression",
+          "cells": [
+            {
+              "text": "Where an exostosis compresses adjacent nerves or vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant EXT1 or EXT2; cascade testing and assessment of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoma service referral",
+          "cells": [
+            {
+              "text": "When malignant transformation is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multiple_hereditary_exostoses-dx-mgmt",
+      "title": "Diagnosis and management of Multiple hereditary exostoses",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple bony outgrowths at long-bone metaphyses with limb deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (growth or new pain after maturity, thick cap, neurovascular signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to a bone-tumour (sarcoma) service for suspected malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, EXT1 or EXT2 testing, MRI for cartilage cap thickness",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Transformation excluded on MRI cartilage cap assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Plan excision of the lesion that is growing, and sarcoma specialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No drug therapy alters osteochondroma formation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excise symptomatic lesions causing pain or neurovascular compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corrective osteotomy or guided growth for forearm and angular deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong surveillance for secondary chondrosarcoma, especially axial lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Normal lifespan; secondary chondrosarcoma is the main serious risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

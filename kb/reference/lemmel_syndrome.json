@@ -1,176 +1,483 @@
 {
- "id": "lemmel_syndrome",
- "name": "Lemmel syndrome",
- "aliases": [
-  "juxtapapillary duodenal diverticulum syndrome",
-  "periampullary diverticulum-induced obstructive jaundice"
- ],
- "class": "non_infective",
- "system": "Hepatobiliary",
- "specialty": "Hepatology / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Lemmel syndrome describes obstructive jaundice or biliary obstruction caused by a juxtapapillary (periampullary) duodenal diverticulum compressing or distorting the distal common bile duct, in the absence of choledocholithiasis or tumour",
-   "A periampullary diverticulum arises within a short distance of the major papilla, typically along the medial duodenal wall where mesenteric vessels and the biliopancreatic ducts penetrate the muscular layer, an area of relative wall weakness",
-   "Presentation overlaps with classic biliary obstruction: right upper quadrant or epigastric pain, jaundice, and deranged liver biochemistry, sometimes with recurrent cholangitis or pancreatitis",
-   "The diverticulum is frequently missed on ultrasound and may masquerade as a periampullary mass, a pancreatic cystic lesion, or a gas-containing collection on cross-sectional imaging if not specifically considered",
-   "Diagnosis is one of exclusion, requiring demonstration of a periampullary diverticulum together with biliary dilatation and no obstructing stone or neoplasm",
-   "Cross-sectional imaging and MRCP characterise the diverticulum and the biliary tree, while endoscopy directly visualises the diverticulum and its relationship to the papilla",
-   "Management is individualised: many patients are managed conservatively or endoscopically, while surgery (diverticulectomy or biliary bypass) is reserved for refractory or complicated disease",
-   "The syndrome is more common in older adults, in whom periampullary diverticula are increasingly prevalent, and it may complicate or coexist with gallstone disease"
+  "id": "lemmel_syndrome",
+  "name": "Lemmel syndrome",
+  "aliases": [
+    "juxtapapillary duodenal diverticulum syndrome",
+    "periampullary diverticulum-induced obstructive jaundice"
   ],
-  "pathophysiology": "Periampullary duodenal diverticula are acquired outpouchings that herniate through a point of muscular weakness where vessels and the biliopancreatic ducts traverse the duodenal wall, becoming more frequent with advancing age as the wall loses elasticity. In Lemmel syndrome, such a diverticulum produces biliary obstruction through several overlapping mechanisms: direct mechanical compression of the intramural or distal common bile duct and papilla by a distended or food-filled diverticulum; distortion or angulation of the terminal bile duct and sphincter complex altering its anatomy and drainage; and chronic inflammation or fibrosis around the papilla (papillitis) impairing sphincter function and bile flow. Stasis within the diverticulum can also promote bactibilia and predispose to ascending cholangitis and to stone formation, while impaired pancreatic outflow may precipitate pancreatitis. The net effect is intermittent or progressive obstruction of bile drainage with proximal ductal dilatation and cholestasis, without an intrinsic ductal stone or tumour.",
-  "additionalDifferentials": [
-   "Choledocholithiasis with distal common bile duct stone",
-   "Periampullary or pancreatic head carcinoma",
-   "Ampullary adenoma or carcinoma",
-   "Benign biliary stricture or sphincter of Oddi dysfunction",
-   "Chronic pancreatitis with distal duct stenosis",
-   "Mirizzi syndrome from an impacted cystic duct stone",
-   "Duodenal or periampullary neuroendocrine tumour"
-  ],
-  "additionalInvestigations": [
-   "Liver biochemistry showing a cholestatic pattern with raised alkaline phosphatase and bilirubin",
-   "Abdominal ultrasound to assess biliary dilatation and exclude gallstones",
-   "Contrast-enhanced CT to characterise a periampullary diverticulum and exclude a mass",
-   "MRCP to delineate the biliary tree, the diverticulum, and the level of obstruction",
-   "Side-viewing endoscopy (duodenoscopy) to visualise the diverticulum and papilla directly",
-   "Endoscopic ultrasound to exclude a small periampullary or pancreatic tumour and assess the duct",
-   "ERCP where therapeutic intervention on the biliary tree is anticipated"
-  ],
-  "redFlags": [
-   "Features of acute cholangitis such as fever, rigors, jaundice, and haemodynamic instability",
-   "Progressive painless jaundice or weight loss raising concern for underlying malignancy",
-   "Signs of acute pancreatitis complicating the obstruction",
-   "Evidence of duodenal diverticular perforation such as peritonitis or retroperitoneal gas",
-   "Gastrointestinal haemorrhage from a bleeding diverticulum"
-  ],
-  "prognosis": "With accurate diagnosis and appropriate endoscopic, medical, or surgical management the outlook is generally good, and many patients are controlled conservatively; prognosis worsens where complications such as recurrent cholangitis, pancreatitis, or diverticular perforation supervene, or where an underlying malignancy is initially overlooked.",
-  "pitfalls": [
-   "Mistaking a gas- or debris-filled periampullary diverticulum for a pancreatic cystic lesion, abscess, or tumour on imaging",
-   "Attributing obstruction to the diverticulum without adequately excluding choledocholithiasis and periampullary malignancy",
-   "Overlooking a periampullary diverticulum on ultrasound and failing to pursue MRCP or endoscopy",
-   "Increased technical difficulty and higher complication risk of ERCP cannulation in the presence of a periampullary diverticulum",
-   "Failing to recognise the diverticulum as a source of recurrent cholangitis or pancreatitis in an older patient"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relieve biliary obstruction endoscopically, using ERCP with sphincterotomy, biliary drainage or stenting as required",
-   "Treat associated acute cholangitis with appropriate antibiotics and urgent biliary decompression",
-   "Manage milder or intermittent obstruction conservatively with analgesia and monitoring",
-   "Reserve surgery such as diverticulectomy or biliary diversion for refractory obstruction or complications like diverticular perforation",
-   "Monitor liver biochemistry and watch for recurrent cholangitis or pancreatitis",
-   "Refer to hepatobiliary and endoscopy specialists for coordinated management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lemmel_syndrome-pathway",
-   "title": "Lemmel syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Lemmel syndrome describes obstructive jaundice or biliary obstruction caused by a juxtapapillary (periampullary) duodenal diverticulum compressing or distorting the distal common bile duct, in the absence of choledocholithiasis or tumour",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of acute cholangitis such as fever, rigors, jaundice, and haemodynamic instability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Liver biochemistry showing a cholestatic pattern with raised alkaline phosphatase and bilirubin, Abdominal ultrasound to assess biliary dilatation and exclude gallstones, Contrast-enhanced CT to characterise a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve biliary obstruction endoscopically, using ERCP with sphincterotomy, biliary drainage or stenting as required"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a gas- or debris-filled periampullary diverticulum for a pancreatic cystic lesion, abscess, or tumour on imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lemmel syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "lemmel_syndrome-matrix",
-   "title": "Lemmel syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Lemmel syndrome describes obstructive jaundice or biliary obstruction caused by a juxtapapillary (periampullary) duodenal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatobiliary",
+  "specialty": "Hepatology / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Lemmel syndrome describes obstructive jaundice or biliary obstruction caused by a juxtapapillary (periampullary) duodenal diverticulum compressing or distorting the distal common bile duct, in the absence of choledocholithiasis or tumour",
+      "A periampullary diverticulum arises within a short distance of the major papilla, typically along the medial duodenal wall where mesenteric vessels and the biliopancreatic ducts penetrate the muscular layer, an area of relative wall weakness",
+      "Presentation overlaps with classic biliary obstruction: right upper quadrant or epigastric pain, jaundice, and deranged liver biochemistry, sometimes with recurrent cholangitis or pancreatitis",
+      "The diverticulum is frequently missed on ultrasound and may masquerade as a periampullary mass, a pancreatic cystic lesion, or a gas-containing collection on cross-sectional imaging if not specifically considered",
+      "Diagnosis is one of exclusion, requiring demonstration of a periampullary diverticulum together with biliary dilatation and no obstructing stone or neoplasm",
+      "Cross-sectional imaging and MRCP characterise the diverticulum and the biliary tree, while endoscopy directly visualises the diverticulum and its relationship to the papilla",
+      "Management is individualised: many patients are managed conservatively or endoscopically, while surgery (diverticulectomy or biliary bypass) is reserved for refractory or complicated disease",
+      "The syndrome is more common in older adults, in whom periampullary diverticula are increasingly prevalent, and it may complicate or coexist with gallstone disease"
     ],
-    [
-     "Key Investigations",
-     "Liver biochemistry showing a cholestatic pattern with raised alkaline phosphatase and bilirubin, Abdominal ultrasound to assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Periampullary duodenal diverticula are acquired outpouchings that herniate through a point of muscular weakness where vessels and the biliopancreatic ducts traverse the duodenal wall, becoming more frequent with advancing age as the wall loses elasticity. In Lemmel syndrome, such a diverticulum produces biliary obstruction through several overlapping mechanisms: direct mechanical compression of the intramural or distal common bile duct and papilla by a distended or food-filled diverticulum; distortion or angulation of the terminal bile duct and sphincter complex altering its anatomy and drainage; and chronic inflammation or fibrosis around the papilla (papillitis) impairing sphincter function and bile flow. Stasis within the diverticulum can also promote bactibilia and predispose to ascending cholangitis and to stone formation, while impaired pancreatic outflow may precipitate pancreatitis. The net effect is intermittent or progressive obstruction of bile drainage with proximal ductal dilatation and cholestasis, without an intrinsic ductal stone or tumour.",
+    "additionalDifferentials": [
+      "Choledocholithiasis with distal common bile duct stone",
+      "Periampullary or pancreatic head carcinoma",
+      "Ampullary adenoma or carcinoma",
+      "Benign biliary stricture or sphincter of Oddi dysfunction",
+      "Chronic pancreatitis with distal duct stenosis",
+      "Mirizzi syndrome from an impacted cystic duct stone",
+      "Duodenal or periampullary neuroendocrine tumour"
     ],
-    [
-     "Primary Differentials",
-     "Choledocholithiasis with distal common bile duct stone, Periampullary or pancreatic head carcinoma, Ampullary adenoma or carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Liver biochemistry showing a cholestatic pattern with raised alkaline phosphatase and bilirubin",
+      "Abdominal ultrasound to assess biliary dilatation and exclude gallstones",
+      "Contrast-enhanced CT to characterise a periampullary diverticulum and exclude a mass",
+      "MRCP to delineate the biliary tree, the diverticulum, and the level of obstruction",
+      "Side-viewing endoscopy (duodenoscopy) to visualise the diverticulum and papilla directly",
+      "Endoscopic ultrasound to exclude a small periampullary or pancreatic tumour and assess the duct",
+      "ERCP where therapeutic intervention on the biliary tree is anticipated"
     ],
-    [
-     "Management Strategy",
-     "Relieve biliary obstruction endoscopically, using ERCP with sphincterotomy, biliary drainage or stenting as required",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of acute cholangitis such as fever, rigors, jaundice, and haemodynamic instability",
+      "Progressive painless jaundice or weight loss raising concern for underlying malignancy",
+      "Signs of acute pancreatitis complicating the obstruction",
+      "Evidence of duodenal diverticular perforation such as peritonitis or retroperitoneal gas",
+      "Gastrointestinal haemorrhage from a bleeding diverticulum"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a gas- or debris-filled periampullary diverticulum for a pancreatic cystic lesion, abscess, or tumour on imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "With accurate diagnosis and appropriate endoscopic, medical, or surgical management the outlook is generally good, and many patients are controlled conservatively; prognosis worsens where complications such as recurrent cholangitis, pancreatitis, or diverticular perforation supervene, or where an underlying malignancy is initially overlooked.",
+    "pitfalls": [
+      "Mistaking a gas- or debris-filled periampullary diverticulum for a pancreatic cystic lesion, abscess, or tumour on imaging",
+      "Attributing obstruction to the diverticulum without adequately excluding choledocholithiasis and periampullary malignancy",
+      "Overlooking a periampullary diverticulum on ultrasound and failing to pursue MRCP or endoscopy",
+      "Increased technical difficulty and higher complication risk of ERCP cannulation in the presence of a periampullary diverticulum",
+      "Failing to recognise the diverticulum as a source of recurrent cholangitis or pancreatitis in an older patient"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relieve biliary obstruction endoscopically, using ERCP with sphincterotomy, biliary drainage or stenting as required",
+      "Treat associated acute cholangitis with appropriate antibiotics and urgent biliary decompression",
+      "Manage milder or intermittent obstruction conservatively with analgesia and monitoring",
+      "Reserve surgery such as diverticulectomy or biliary diversion for refractory obstruction or complications like diverticular perforation",
+      "Monitor liver biochemistry and watch for recurrent cholangitis or pancreatitis",
+      "Refer to hepatobiliary and endoscopy specialists for coordinated management"
     ]
-   ],
-   "caption": "Overview comparison matrix for lemmel syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lemmel-syndrome-real-image",
-   "title": "Lemmel syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "lemmel_syndrome-pathway",
+      "title": "Lemmel syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Lemmel syndrome describes obstructive jaundice or biliary obstruction caused by a juxtapapillary (periampullary) duodenal diverticulum compressing or distorting the distal common bile duct, in the absence of choledocholithiasis or tumour",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of acute cholangitis such as fever, rigors, jaundice, and haemodynamic instability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Liver biochemistry showing a cholestatic pattern with raised alkaline phosphatase and bilirubin, Abdominal ultrasound to assess biliary dilatation and exclude gallstones, Contrast-enhanced CT to characterise a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve biliary obstruction endoscopically, using ERCP with sphincterotomy, biliary drainage or stenting as required"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a gas- or debris-filled periampullary diverticulum for a pancreatic cystic lesion, abscess, or tumour on imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lemmel syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lemmel_syndrome-matrix",
+      "title": "Lemmel syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Lemmel syndrome describes obstructive jaundice or biliary obstruction caused by a juxtapapillary (periampullary) duodenal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Liver biochemistry showing a cholestatic pattern with raised alkaline phosphatase and bilirubin, Abdominal ultrasound to assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Choledocholithiasis with distal common bile duct stone, Periampullary or pancreatic head carcinoma, Ampullary adenoma or carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve biliary obstruction endoscopically, using ERCP with sphincterotomy, biliary drainage or stenting as required",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a gas- or debris-filled periampullary diverticulum for a pancreatic cystic lesion, abscess, or tumour on imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lemmel syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lemmel_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver biochemistry",
+          "cells": [
+            {
+              "text": "Cholestatic pattern: raised alkaline phosphatase and bilirubin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Biliary dilatation; excludes gallstones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Characterises the diverticulum; excludes a mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Biliary tree, diverticulum and level of obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Side-viewing duodenoscopy",
+          "cells": [
+            {
+              "text": "Diverticulum and papilla seen directly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Excludes a small periampullary or pancreatic tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lemmel_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Choledocholithiasis with distal duct stone",
+          "cells": [
+            {
+              "text": "Stone must be excluded before attributing obstruction to the diverticulum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periampullary or pancreatic head carcinoma",
+          "cells": [
+            {
+              "text": "Progressive painless jaundice or weight loss raises concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ampullary adenoma or carcinoma",
+          "cells": [
+            {
+              "text": "Ampullary lesion; excluded by endoscopy and endoscopic ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mirizzi syndrome",
+          "cells": [
+            {
+              "text": "Impacted cystic duct stone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lemmel_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic biliary relief",
+          "cells": [
+            {
+              "text": "ERCP with sphincterotomy, biliary drainage or stenting as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute cholangitis",
+          "cells": [
+            {
+              "text": "Appropriate antibiotics and urgent biliary decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milder or intermittent obstruction",
+          "cells": [
+            {
+              "text": "Conservative management with analgesia and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Diverticulectomy or biliary diversion for refractory obstruction or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Liver biochemistry; watch for recurrent cholangitis or pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Hepatobiliary and endoscopy specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lemmel_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Lemmel syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Obstructive jaundice or RUQ pain with biliary dilatation in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cholangitis, painless jaundice, pancreatitis, perforation, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biliary decompression for acute cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Liver tests, ultrasound, CT, MRCP, duodenoscopy, endoscopic ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a periampullary diverticulum shown with no stone or neoplasm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider choledocholithiasis, ampullary tumour or pancreatic head carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relieve obstruction endoscopically: ERCP with sphincterotomy or stent",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics and urgent decompression for cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conservative care with analgesia for milder obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reserve diverticulectomy or biliary bypass for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for recurrent cholangitis or pancreatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good with accurate diagnosis; complications worsen the prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

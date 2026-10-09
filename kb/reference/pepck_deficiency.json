@@ -1,176 +1,454 @@
 {
- "id": "pepck_deficiency",
- "name": "Phosphoenolpyruvate carboxykinase deficiency",
- "aliases": [
-  "PEPCK deficiency",
-  "PCK1 deficiency",
-  "PCK2 deficiency",
-  "cytosolic PEPCK deficiency",
-  "mitochondrial PEPCK deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Phosphoenolpyruvate carboxykinase catalyses an early committed step of gluconeogenesis, and deficiency (cytosolic PCK1 or mitochondrial PCK2 forms) impairs glucose synthesis from lactate and amino acids",
-   "Presents with fasting hypoglycaemia accompanied by lactic acidosis, often with hepatomegaly and evidence of liver dysfunction",
-   "Historically a difficult and controversial diagnosis, as many reported cases reflected secondary or mitochondrial dysfunction rather than a primary enzyme defect",
-   "Genetically confirmed PCK1 deficiency has been described with hypoglycaemia, lactic acidosis and a characteristic urinary organic acid pattern including tricarboxylic acid cycle intermediates",
-   "Metabolic crises are typically triggered by fasting or intercurrent illness, with well periods in between",
-   "Acute treatment corrects hypoglycaemia and lactic acidosis with intravenous glucose; long-term care focuses on avoidance of fasting and provision of frequent carbohydrate",
-   "Confirmation now relies on PCK1 or PCK2 molecular testing, since enzyme measurement can be confounded by secondary causes"
+  "id": "pepck_deficiency",
+  "name": "Phosphoenolpyruvate carboxykinase deficiency",
+  "aliases": [
+    "PEPCK deficiency",
+    "PCK1 deficiency",
+    "PCK2 deficiency",
+    "cytosolic PEPCK deficiency",
+    "mitochondrial PEPCK deficiency"
   ],
-  "pathophysiology": "Phosphoenolpyruvate carboxykinase converts oxaloacetate to phosphoenolpyruvate, a rate-controlling step channelling gluconeogenic precursors toward glucose. It exists in cytosolic (PCK1) and mitochondrial (PCK2) isoforms. Deficiency impairs gluconeogenesis so that, once glycogen reserves are depleted during fasting, hypoglycaemia develops and gluconeogenic precursors such as lactate accumulate, producing lactic acidosis. Disruption of anaplerosis and the connection between the tricarboxylic acid cycle and glucose output leads to a distinctive organic acid pattern with elevated cycle intermediates. Hepatic involvement reflects the liver's central role in gluconeogenesis.",
-  "additionalDifferentials": [
-   "Fructose-1,6-bisphosphatase deficiency",
-   "Pyruvate carboxylase deficiency",
-   "Glycogen storage disease type I",
-   "Mitochondrial respiratory chain disorders with lactic acidosis",
-   "Fatty-acid oxidation disorders with hypoglycaemia",
-   "Secondary gluconeogenic dysfunction from liver failure or toxins",
-   "Sepsis with lactic acidosis"
-  ],
-  "additionalInvestigations": [
-   "Blood glucose, blood gas and lactate during symptomatic fasting episodes",
-   "Urine organic acids looking for elevated tricarboxylic acid cycle intermediates",
-   "Plasma amino acids and ammonia to assess for related metabolic defects",
-   "Liver function tests to evaluate hepatic involvement",
-   "PCK1 and PCK2 molecular genetic testing to confirm the diagnosis",
-   "Assessment for secondary causes of PEPCK dysfunction before attributing a primary defect"
-  ],
-  "redFlags": [
-   "Fasting hypoglycaemia with severe lactic acidosis in an infant or young child",
-   "Hepatomegaly with liver dysfunction during crises",
-   "Reduced consciousness or seizures from hypoglycaemia",
-   "Recurrent metabolic decompensation triggered by fasting or illness"
-  ],
-  "prognosis": "Outcomes are variable and depend on the severity of crises and any coexisting mitochondrial dysfunction; with avoidance of fasting and prompt treatment of hypoglycaemia many children do reasonably well, but severe neonatal presentations carry a poorer prognosis.",
-  "pitfalls": [
-   "Diagnosing primary PEPCK deficiency without excluding secondary mitochondrial or hepatic causes",
-   "Relying on enzyme assays that can be confounded rather than confirming with molecular testing",
-   "Failing to capture lactate and organic acids during the acute hypoglycaemic episode",
-   "Permitting prolonged fasting for illness or procedures without protective glucose"
-  ],
-  "references": [
-   "Scriver's OMMBID: Disorders of Gluconeogenesis",
-   "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prevent metabolic crises by avoiding fasting and providing frequent carbohydrate feeds, including overnight complex carbohydrate",
-   "Treat acute hypoglycaemia and lactic acidosis with intravenous glucose",
-   "Institute an emergency regimen with intravenous dextrose during intercurrent illness or reduced oral intake",
-   "Provide dietetic support with a structured feeding plan and adequate carbohydrate intake",
-   "Monitor glucose, lactate, liver function and growth, and assess for coexisting mitochondrial dysfunction",
-   "Refer to a metabolic medicine team and clinical genetics",
-   "Offer genetic counselling and family testing for this heritable disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pepck_deficiency-pathway",
-   "title": "Phosphoenolpyruvate carboxykinase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Phosphoenolpyruvate carboxykinase catalyses an early committed step of gluconeogenesis, and deficiency (cytosolic PCK1 or mitochondrial PCK2 forms) impairs glucose synthesis from lactate and amino acids",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fasting hypoglycaemia with severe lactic acidosis in an infant or young child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood glucose, blood gas and lactate during symptomatic fasting episodes, Urine organic acids looking for elevated tricarboxylic acid cycle intermediates, Plasma amino acids and ammonia to assess for related metabolic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevent metabolic crises by avoiding fasting and providing frequent carbohydrate feeds, including overnight complex carbohydrate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing primary PEPCK deficiency without excluding secondary mitochondrial or hepatic causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phosphoenolpyruvate carboxykinase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "pepck_deficiency-matrix",
-   "title": "Phosphoenolpyruvate carboxykinase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Phosphoenolpyruvate carboxykinase catalyses an early committed step of gluconeogenesis, and deficiency (cytosolic PCK1 or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Phosphoenolpyruvate carboxykinase catalyses an early committed step of gluconeogenesis, and deficiency (cytosolic PCK1 or mitochondrial PCK2 forms) impairs glucose synthesis from lactate and amino acids",
+      "Presents with fasting hypoglycaemia accompanied by lactic acidosis, often with hepatomegaly and evidence of liver dysfunction",
+      "Historically a difficult and controversial diagnosis, as many reported cases reflected secondary or mitochondrial dysfunction rather than a primary enzyme defect",
+      "Genetically confirmed PCK1 deficiency has been described with hypoglycaemia, lactic acidosis and a characteristic urinary organic acid pattern including tricarboxylic acid cycle intermediates",
+      "Metabolic crises are typically triggered by fasting or intercurrent illness, with well periods in between",
+      "Acute treatment corrects hypoglycaemia and lactic acidosis with intravenous glucose; long-term care focuses on avoidance of fasting and provision of frequent carbohydrate",
+      "Confirmation now relies on PCK1 or PCK2 molecular testing, since enzyme measurement can be confounded by secondary causes"
     ],
-    [
-     "Key Investigations",
-     "Blood glucose, blood gas and lactate during symptomatic fasting episodes, Urine organic acids looking for elevated tricarboxylic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phosphoenolpyruvate carboxykinase converts oxaloacetate to phosphoenolpyruvate, a rate-controlling step channelling gluconeogenic precursors toward glucose. It exists in cytosolic (PCK1) and mitochondrial (PCK2) isoforms. Deficiency impairs gluconeogenesis so that, once glycogen reserves are depleted during fasting, hypoglycaemia develops and gluconeogenic precursors such as lactate accumulate, producing lactic acidosis. Disruption of anaplerosis and the connection between the tricarboxylic acid cycle and glucose output leads to a distinctive organic acid pattern with elevated cycle intermediates. Hepatic involvement reflects the liver's central role in gluconeogenesis.",
+    "additionalDifferentials": [
+      "Fructose-1,6-bisphosphatase deficiency",
+      "Pyruvate carboxylase deficiency",
+      "Glycogen storage disease type I",
+      "Mitochondrial respiratory chain disorders with lactic acidosis",
+      "Fatty-acid oxidation disorders with hypoglycaemia",
+      "Secondary gluconeogenic dysfunction from liver failure or toxins",
+      "Sepsis with lactic acidosis"
     ],
-    [
-     "Primary Differentials",
-     "Fructose-1,6-bisphosphatase deficiency, Pyruvate carboxylase deficiency, Glycogen storage disease type I",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood glucose, blood gas and lactate during symptomatic fasting episodes",
+      "Urine organic acids looking for elevated tricarboxylic acid cycle intermediates",
+      "Plasma amino acids and ammonia to assess for related metabolic defects",
+      "Liver function tests to evaluate hepatic involvement",
+      "PCK1 and PCK2 molecular genetic testing to confirm the diagnosis",
+      "Assessment for secondary causes of PEPCK dysfunction before attributing a primary defect"
     ],
-    [
-     "Management Strategy",
-     "Prevent metabolic crises by avoiding fasting and providing frequent carbohydrate feeds, including overnight complex carbohydrate",
-     "Core treatment modality"
+    "redFlags": [
+      "Fasting hypoglycaemia with severe lactic acidosis in an infant or young child",
+      "Hepatomegaly with liver dysfunction during crises",
+      "Reduced consciousness or seizures from hypoglycaemia",
+      "Recurrent metabolic decompensation triggered by fasting or illness"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing primary PEPCK deficiency without excluding secondary mitochondrial or hepatic causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes are variable and depend on the severity of crises and any coexisting mitochondrial dysfunction; with avoidance of fasting and prompt treatment of hypoglycaemia many children do reasonably well, but severe neonatal presentations carry a poorer prognosis.",
+    "pitfalls": [
+      "Diagnosing primary PEPCK deficiency without excluding secondary mitochondrial or hepatic causes",
+      "Relying on enzyme assays that can be confounded rather than confirming with molecular testing",
+      "Failing to capture lactate and organic acids during the acute hypoglycaemic episode",
+      "Permitting prolonged fasting for illness or procedures without protective glucose"
+    ],
+    "references": [
+      "Scriver's OMMBID: Disorders of Gluconeogenesis",
+      "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prevent metabolic crises by avoiding fasting and providing frequent carbohydrate feeds, including overnight complex carbohydrate",
+      "Treat acute hypoglycaemia and lactic acidosis with intravenous glucose",
+      "Institute an emergency regimen with intravenous dextrose during intercurrent illness or reduced oral intake",
+      "Provide dietetic support with a structured feeding plan and adequate carbohydrate intake",
+      "Monitor glucose, lactate, liver function and growth, and assess for coexisting mitochondrial dysfunction",
+      "Refer to a metabolic medicine team and clinical genetics",
+      "Offer genetic counselling and family testing for this heritable disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for phosphoenolpyruvate carboxykinase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pepck-deficiency-real-image",
-   "title": "Phosphoenolpyruvate carboxykinase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pepck_deficiency-pathway",
+      "title": "Phosphoenolpyruvate carboxykinase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Phosphoenolpyruvate carboxykinase catalyses an early committed step of gluconeogenesis, and deficiency (cytosolic PCK1 or mitochondrial PCK2 forms) impairs glucose synthesis from lactate and amino acids",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fasting hypoglycaemia with severe lactic acidosis in an infant or young child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood glucose, blood gas and lactate during symptomatic fasting episodes, Urine organic acids looking for elevated tricarboxylic acid cycle intermediates, Plasma amino acids and ammonia to assess for related metabolic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevent metabolic crises by avoiding fasting and providing frequent carbohydrate feeds, including overnight complex carbohydrate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing primary PEPCK deficiency without excluding secondary mitochondrial or hepatic causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phosphoenolpyruvate carboxykinase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pepck_deficiency-matrix",
+      "title": "Phosphoenolpyruvate carboxykinase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Phosphoenolpyruvate carboxykinase catalyses an early committed step of gluconeogenesis, and deficiency (cytosolic PCK1 or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood glucose, blood gas and lactate during symptomatic fasting episodes, Urine organic acids looking for elevated tricarboxylic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fructose-1,6-bisphosphatase deficiency, Pyruvate carboxylase deficiency, Glycogen storage disease type I",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevent metabolic crises by avoiding fasting and providing frequent carbohydrate feeds, including overnight complex carbohydrate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing primary PEPCK deficiency without excluding secondary mitochondrial or hepatic causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phosphoenolpyruvate carboxykinase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pepck_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood glucose, blood gas and lactate during symptomatic fasting",
+          "cells": [
+            {
+              "text": "Hypoglycaemia and lactic acidosis during fasting episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Elevated tricarboxylic acid cycle intermediates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and ammonia",
+          "cells": [
+            {
+              "text": "Related metabolic defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCK1 and PCK2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pepck_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary gluconeogenic dysfunction",
+          "cells": [
+            {
+              "text": "Liver failure or toxin exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial respiratory chain disorders",
+          "cells": [
+            {
+              "text": "Lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pepck_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid fasting",
+          "cells": [
+            {
+              "text": "Frequent carbohydrate feeds, including overnight complex carbohydrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute hypoglycaemia and lactic acidosis",
+          "cells": [
+            {
+              "text": "Intravenous glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency regimen",
+          "cells": [
+            {
+              "text": "Intravenous dextrose during intercurrent illness or reduced oral intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietetic support",
+          "cells": [
+            {
+              "text": "Structured feeding plan with adequate carbohydrate intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Glucose, lactate, liver function and growth; assess for coexisting mitochondrial dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Metabolic medicine team and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family testing for this heritable disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pepck_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Phosphoenolpyruvate carboxykinase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fasting hypoglycaemia with lactic acidosis in an infant or young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe lactic acidosis, hepatomegaly, reduced consciousness or seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency intravenous glucose and urgent metabolic review for severe crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glucose, blood gas, lactate in fasting episodes; urine organic acids; PCK1/2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do results confirm primary PEPCK deficiency after excluding secondary causes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Look for secondary causes (liver failure, toxins, mitochondrial or fatty-acid disorders)",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prevent crises by avoiding fasting and giving frequent carbohydrate feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat acute hypoglycaemia and lactic acidosis with intravenous glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Give intravenous dextrose during intercurrent illness or reduced oral intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor glucose, lactate, liver function and growth; refer to metabolic medicine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome varies with crisis severity and coexisting mitochondrial dysfunction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

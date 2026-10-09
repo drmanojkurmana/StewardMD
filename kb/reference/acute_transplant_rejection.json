@@ -1,180 +1,517 @@
 {
- "id": "acute_transplant_rejection",
- "name": "Acute transplant rejection",
- "aliases": [
-  "acute allograft rejection",
-  "acute cellular rejection",
-  "antibody-mediated rejection",
-  "acute rejection"
- ],
- "class": "non_infective",
- "system": "Immunology / Transplantation",
- "specialty": "Transplantation",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard solid-organ transplantation and transplant immunology reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Immune-mediated injury to a transplanted organ occurring over days to months, classically within the first few months but possible at any time, especially with inadequate immunosuppression or non-adherence",
-   "Two principal mechanisms operate: T-cell-mediated cellular rejection driven by recipient T lymphocytes, and antibody-mediated rejection driven by donor-specific antibodies against HLA",
-   "It is often clinically silent early and is detected as a rise in organ-specific markers, such as creatinine in the kidney or transaminases in the liver, or on protocol biopsy",
-   "Diagnosis rests on allograft biopsy with histological grading, supported by detection of donor-specific antibodies and complement split product C4d staining in antibody-mediated disease",
-   "Cell-mediated rejection shows mononuclear inflammatory infiltrates, whereas antibody-mediated rejection shows microvascular injury with C4d deposition",
-   "Risk factors include HLA mismatch, pre-existing sensitisation, previous transplants, and reduced or missed immunosuppression",
-   "First-line treatment of cellular rejection is high-dose corticosteroids, with lymphocyte-depleting or antibody therapy reserved for severe or steroid-resistant episodes",
-   "Antibody-mediated rejection is treated by removing or neutralising antibody, for example with plasma exchange and adjunctive agents, alongside optimised immunosuppression"
+  "id": "acute_transplant_rejection",
+  "name": "Acute transplant rejection",
+  "aliases": [
+    "acute allograft rejection",
+    "acute cellular rejection",
+    "antibody-mediated rejection",
+    "acute rejection"
   ],
-  "pathophysiology": "Recipient immune cells recognise donor HLA through direct and indirect pathways of allorecognition. In cellular rejection, activated T lymphocytes infiltrate the graft and injure tubular, parenchymal, or endothelial targets. In antibody-mediated rejection, B cells and plasma cells produce donor-specific antibodies that bind graft microvascular endothelium, activate complement with deposition of the split product C4d, and cause microvascular inflammation and injury. Both processes compromise graft perfusion and function and, if unchecked, predispose to chronic rejection.",
-  "additionalDifferentials": [
-   "Calcineurin-inhibitor toxicity",
-   "Infection of the allograft such as BK nephropathy or cytomegalovirus disease",
-   "Recurrence of the primary disease within the graft",
-   "Surgical or vascular complications such as thrombosis, stenosis, or obstruction",
-   "Ischaemia-reperfusion injury or delayed graft function early after transplantation",
-   "Drug-induced organ dysfunction",
-   "Dehydration or outflow obstruction causing functional decline"
-  ],
-  "additionalInvestigations": [
-   "Allograft biopsy with histological grading, which is the diagnostic standard",
-   "Donor-specific antibody testing through HLA antibody screening",
-   "C4d immunostaining on biopsy for antibody-mediated rejection",
-   "Organ-specific function tests with trend monitoring",
-   "Immunosuppressant drug levels and assessment of adherence",
-   "Doppler ultrasound or other imaging to exclude vascular or mechanical causes",
-   "Screening for graft infection such as BK virus or cytomegalovirus where relevant"
-  ],
-  "redFlags": [
-   "Rapid loss of graft function",
-   "Severe antibody-mediated rejection with widespread microvascular injury",
-   "Steroid-resistant rejection",
-   "Rejection from non-adherence or sensitisation with high donor-specific antibody levels",
-   "Concurrent infection complicating intensified immunosuppression"
-  ],
-  "prognosis": "Many cellular rejection episodes reverse with prompt treatment, whereas antibody-mediated and steroid-resistant rejection carry a higher risk of graft loss and predispose to chronic rejection; early detection and treatment improve graft survival.",
-  "pitfalls": [
-   "Attributing graft dysfunction to rejection without biopsy and missing infection or drug toxicity",
-   "Overlooking antibody-mediated rejection by not testing for donor-specific antibodies or C4d",
-   "Missing non-adherence as a cause, particularly in adolescents",
-   "Over-immunosuppressing and precipitating infection or malignancy",
-   "Failing to monitor for chronic rejection after an acute episode"
-  ],
-  "references": [
-   "Consensus histological classification of allograft rejection",
-   "Standard solid-organ transplantation reference texts",
-   "Transplant immunology reference literature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat T-cell-mediated cellular rejection with pulsed high-dose corticosteroids, escalating steroid-resistant episodes to lymphocyte-depleting antithymocyte globulin",
-   "Manage antibody-mediated rejection by removing donor-specific antibody with plasma exchange and intravenous immunoglobulin, adding B-cell-directed rituximab or complement- or proteasome-targeted agents in refractory cases",
-   "Optimise maintenance immunosuppression with a calcineurin inhibitor, an antiproliferative agent and corticosteroid, and actively address non-adherence",
-   "Confirm the diagnosis and grade severity with allograft biopsy, supported by donor-specific antibody testing and C4d staining, before committing to treatment",
-   "Add infection prophylaxis against Pneumocystis, cytomegalovirus and fungi during periods of augmented immunosuppression",
-   "Monitor organ-specific function trends and donor-specific antibody levels to detect and track rejection",
-   "Manage within a specialist transplant multidisciplinary team with structured adherence and drug-level support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_transplant_rejection-pathway",
-   "title": "Acute transplant rejection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Immune-mediated injury to a transplanted organ occurring over days to months, classically within the first few months but possible at any time, especially with inadequate immunosuppression or non-adherence",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid loss of graft function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Allograft biopsy with histological grading, which is the diagnostic standard, Donor-specific antibody testing through HLA antibody screening, C4d immunostaining on biopsy for antibody-mediated rejection"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat T-cell-mediated cellular rejection with pulsed high-dose corticosteroids, escalating steroid-resistant episodes to lymphocyte-depleting antithymocyte globulin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing graft dysfunction to rejection without biopsy and missing infection or drug toxicity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute transplant rejection."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_transplant_rejection-matrix",
-   "title": "Acute transplant rejection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Immune-mediated injury to a transplanted organ occurring over days to months, classically within the first few months but",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Transplantation",
+  "specialty": "Transplantation",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard solid-organ transplantation and transplant immunology reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Immune-mediated injury to a transplanted organ occurring over days to months, classically within the first few months but possible at any time, especially with inadequate immunosuppression or non-adherence",
+      "Two principal mechanisms operate: T-cell-mediated cellular rejection driven by recipient T lymphocytes, and antibody-mediated rejection driven by donor-specific antibodies against HLA",
+      "It is often clinically silent early and is detected as a rise in organ-specific markers, such as creatinine in the kidney or transaminases in the liver, or on protocol biopsy",
+      "Diagnosis rests on allograft biopsy with histological grading, supported by detection of donor-specific antibodies and complement split product C4d staining in antibody-mediated disease",
+      "Cell-mediated rejection shows mononuclear inflammatory infiltrates, whereas antibody-mediated rejection shows microvascular injury with C4d deposition",
+      "Risk factors include HLA mismatch, pre-existing sensitisation, previous transplants, and reduced or missed immunosuppression",
+      "First-line treatment of cellular rejection is high-dose corticosteroids, with lymphocyte-depleting or antibody therapy reserved for severe or steroid-resistant episodes",
+      "Antibody-mediated rejection is treated by removing or neutralising antibody, for example with plasma exchange and adjunctive agents, alongside optimised immunosuppression"
     ],
-    [
-     "Key Investigations",
-     "Allograft biopsy with histological grading, which is the diagnostic standard, Donor-specific antibody testing through HLA",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Recipient immune cells recognise donor HLA through direct and indirect pathways of allorecognition. In cellular rejection, activated T lymphocytes infiltrate the graft and injure tubular, parenchymal, or endothelial targets. In antibody-mediated rejection, B cells and plasma cells produce donor-specific antibodies that bind graft microvascular endothelium, activate complement with deposition of the split product C4d, and cause microvascular inflammation and injury. Both processes compromise graft perfusion and function and, if unchecked, predispose to chronic rejection.",
+    "additionalDifferentials": [
+      "Calcineurin-inhibitor toxicity",
+      "Infection of the allograft such as BK nephropathy or cytomegalovirus disease",
+      "Recurrence of the primary disease within the graft",
+      "Surgical or vascular complications such as thrombosis, stenosis, or obstruction",
+      "Ischaemia-reperfusion injury or delayed graft function early after transplantation",
+      "Drug-induced organ dysfunction",
+      "Dehydration or outflow obstruction causing functional decline"
     ],
-    [
-     "Primary Differentials",
-     "Calcineurin-inhibitor toxicity, Infection of the allograft such as BK nephropathy or cytomegalovirus disease, Recurrence of the",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Allograft biopsy with histological grading, which is the diagnostic standard",
+      "Donor-specific antibody testing through HLA antibody screening",
+      "C4d immunostaining on biopsy for antibody-mediated rejection",
+      "Organ-specific function tests with trend monitoring",
+      "Immunosuppressant drug levels and assessment of adherence",
+      "Doppler ultrasound or other imaging to exclude vascular or mechanical causes",
+      "Screening for graft infection such as BK virus or cytomegalovirus where relevant"
     ],
-    [
-     "Management Strategy",
-     "Treat T-cell-mediated cellular rejection with pulsed high-dose corticosteroids, escalating steroid-resistant episodes to",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid loss of graft function",
+      "Severe antibody-mediated rejection with widespread microvascular injury",
+      "Steroid-resistant rejection",
+      "Rejection from non-adherence or sensitisation with high donor-specific antibody levels",
+      "Concurrent infection complicating intensified immunosuppression"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing graft dysfunction to rejection without biopsy and missing infection or drug toxicity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many cellular rejection episodes reverse with prompt treatment, whereas antibody-mediated and steroid-resistant rejection carry a higher risk of graft loss and predispose to chronic rejection; early detection and treatment improve graft survival.",
+    "pitfalls": [
+      "Attributing graft dysfunction to rejection without biopsy and missing infection or drug toxicity",
+      "Overlooking antibody-mediated rejection by not testing for donor-specific antibodies or C4d",
+      "Missing non-adherence as a cause, particularly in adolescents",
+      "Over-immunosuppressing and precipitating infection or malignancy",
+      "Failing to monitor for chronic rejection after an acute episode"
+    ],
+    "references": [
+      "Consensus histological classification of allograft rejection",
+      "Standard solid-organ transplantation reference texts",
+      "Transplant immunology reference literature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat T-cell-mediated cellular rejection with pulsed high-dose corticosteroids, escalating steroid-resistant episodes to lymphocyte-depleting antithymocyte globulin",
+      "Manage antibody-mediated rejection by removing donor-specific antibody with plasma exchange and intravenous immunoglobulin, adding B-cell-directed rituximab or complement- or proteasome-targeted agents in refractory cases",
+      "Optimise maintenance immunosuppression with a calcineurin inhibitor, an antiproliferative agent and corticosteroid, and actively address non-adherence",
+      "Confirm the diagnosis and grade severity with allograft biopsy, supported by donor-specific antibody testing and C4d staining, before committing to treatment",
+      "Add infection prophylaxis against Pneumocystis, cytomegalovirus and fungi during periods of augmented immunosuppression",
+      "Monitor organ-specific function trends and donor-specific antibody levels to detect and track rejection",
+      "Manage within a specialist transplant multidisciplinary team with structured adherence and drug-level support"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute transplant rejection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-transplant-rejection-real-image",
-   "title": "Acute transplant rejection: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acute_transplant_rejection-pathway",
+      "title": "Acute transplant rejection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Immune-mediated injury to a transplanted organ occurring over days to months, classically within the first few months but possible at any time, especially with inadequate immunosuppression or non-adherence",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid loss of graft function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Allograft biopsy with histological grading, which is the diagnostic standard, Donor-specific antibody testing through HLA antibody screening, C4d immunostaining on biopsy for antibody-mediated rejection"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat T-cell-mediated cellular rejection with pulsed high-dose corticosteroids, escalating steroid-resistant episodes to lymphocyte-depleting antithymocyte globulin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing graft dysfunction to rejection without biopsy and missing infection or drug toxicity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute transplant rejection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_transplant_rejection-matrix",
+      "title": "Acute transplant rejection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Immune-mediated injury to a transplanted organ occurring over days to months, classically within the first few months but",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Allograft biopsy with histological grading, which is the diagnostic standard, Donor-specific antibody testing through HLA",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Calcineurin-inhibitor toxicity, Infection of the allograft such as BK nephropathy or cytomegalovirus disease, Recurrence of the",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat T-cell-mediated cellular rejection with pulsed high-dose corticosteroids, escalating steroid-resistant episodes to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing graft dysfunction to rejection without biopsy and missing infection or drug toxicity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute transplant rejection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard solid-organ transplantation and transplant immunology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_transplant_rejection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Allograft biopsy with histological grading",
+          "cells": [
+            {
+              "text": "Diagnostic standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Donor-specific antibody testing through HLA antibody screening",
+          "cells": [
+            {
+              "text": "Donor-specific antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C4d immunostaining on biopsy",
+          "cells": [
+            {
+              "text": "Antibody-mediated rejection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-specific function tests with trend monitoring",
+          "cells": [
+            {
+              "text": "Rising organ-specific markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppressant drug levels and adherence assessment",
+          "cells": [
+            {
+              "text": "Drug exposure and adherence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound or other imaging",
+          "cells": [
+            {
+              "text": "Vascular or mechanical causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for BK virus or cytomegalovirus",
+          "cells": [
+            {
+              "text": "Graft infection where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_transplant_rejection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcineurin-inhibitor toxicity",
+          "cells": [
+            {
+              "text": "Drug-induced graft injury"
+            },
+            {
+              "text": "Immunosuppressant drug levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BK nephropathy or cytomegalovirus disease",
+          "cells": [
+            {
+              "text": "Infection of the allograft"
+            },
+            {
+              "text": "BK virus or CMV screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombosis, stenosis or obstruction",
+          "cells": [
+            {
+              "text": "Vascular or mechanical complication"
+            },
+            {
+              "text": "Doppler ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_transplant_rejection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulsed high-dose corticosteroids",
+          "cells": [
+            {
+              "text": "Cellular rejection"
+            },
+            {
+              "text": "Escalate steroid-resistant episodes to antithymocyte globulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange and intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Removes donor-specific antibody in antibody-mediated rejection"
+            },
+            {
+              "text": "Antibody removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab or complement- or proteasome-targeted agents",
+          "cells": [
+            {
+              "text": "Refractory antibody-mediated rejection"
+            },
+            {
+              "text": "Refractory cases only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimise maintenance immunosuppression; address non-adherence",
+          "cells": [
+            {
+              "text": "Prevents rejection"
+            },
+            {
+              "text": "Calcineurin inhibitor, antiproliferative and steroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and antibody confirmation before treatment",
+          "cells": [
+            {
+              "text": "Confirms and grades severity"
+            },
+            {
+              "text": "Before committing to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis (Pneumocystis, CMV, fungi)",
+          "cells": [
+            {
+              "text": "Augmented immunosuppression"
+            },
+            {
+              "text": "During intensified treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist transplant multidisciplinary team",
+          "cells": [
+            {
+              "text": "Structured adherence and drug-level support"
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_transplant_rejection-dx-mgmt",
+      "title": "Diagnosis and management of Acute transplant rejection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Falling graft function over days to months after transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid graft loss or steroid-resistant rejection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent transplant team review; consider antibody-mediated rejection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Allograft biopsy with grading, DSA screen, C4d staining and drug levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rejection confirmed on biopsy, with infection and drug toxicity excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pulsed corticosteroids for cellular rejection; plasma exchange and IVIg for AMR",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review calcineurin toxicity, BK or CMV infection, vascular complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate steroid-resistant cellular rejection to antithymocyte globulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab or complement or proteasome agents for refractory AMR",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Optimise maintenance immunosuppression; address non-adherence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cellular rejection often reverses; AMR and steroid resistance risk graft loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

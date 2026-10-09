@@ -1,176 +1,436 @@
 {
- "id": "facet_joint_syndrome",
- "name": "Facet joint syndrome",
- "aliases": [
-  "facet arthropathy",
-  "zygapophysial joint pain",
-  "facet joint osteoarthritis",
-  "facet syndrome"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Spine",
- "specialty": "Spinal Surgery / Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rothman-Simeone and Herkowitz's The Spine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
-   "Pain is typically worse with extension, rotation, and standing, and often eased by flexion or sitting",
-   "Lumbar facet pain may refer to the buttock and posterior thigh but characteristically not below the knee",
-   "Localised paraspinal tenderness over the facets and pain on extension and rotation are suggestive but not specific",
-   "No clinical test reliably diagnoses facet-mediated pain, and imaging findings of facet hypertrophy and effusion correlate poorly with symptoms",
-   "Diagnostic medial branch blocks are the most specific way to implicate the facet joint",
-   "Management is conservative (physiotherapy, analgesia), and intra-articular or medial branch injections may help selected patients",
-   "Radiofrequency denervation of the medial branches can give medium-term relief when diagnostic blocks are positive"
+  "id": "facet_joint_syndrome",
+  "name": "Facet joint syndrome",
+  "aliases": [
+    "facet arthropathy",
+    "zygapophysial joint pain",
+    "facet joint osteoarthritis",
+    "facet syndrome"
   ],
-  "pathophysiology": "Facet joint syndrome refers to pain arising from the synovial zygapophysial joints of the spine. These joints, richly innervated by the medial branches of the dorsal rami, undergo osteoarthritic change (cartilage loss, capsular hypertrophy, osteophytosis, and effusion) as part of the degenerative cascade, frequently alongside disc degeneration. Mechanical loading in extension and rotation together with inflammation of the joint capsule stimulates nociceptors and produces axial pain. Facet hypertrophy can also contribute to lateral recess and foraminal narrowing.",
-  "additionalDifferentials": [
-   "Degenerative disc (discogenic) pain",
-   "Sacroiliac joint dysfunction",
-   "Lumbar spinal stenosis",
-   "Muscular or myofascial pain",
-   "Spondylolysis or spondylolisthesis",
-   "Inflammatory spondyloarthropathy"
-  ],
-  "additionalInvestigations": [
-   "MRI or CT showing facet arthropathy, hypertrophy, and effusions",
-   "Plain radiographs for alignment and degenerative change",
-   "Diagnostic medial branch blocks or intra-articular facet injection to confirm the pain source",
-   "SPECT/CT to identify metabolically active painful facets in selected cases",
-   "Inflammatory screen if spondyloarthropathy is a consideration"
-  ],
-  "redFlags": [
-   "New neurological deficit or radicular symptoms",
-   "Constitutional symptoms suggesting infection or malignancy",
-   "Features of inflammatory back pain such as morning stiffness, night pain, and young age"
-  ],
-  "prognosis": "Facet-mediated pain typically follows a fluctuating chronic course; many patients are managed conservatively, and those with confirmed facet pain often gain useful, though sometimes temporary, relief from injections or radiofrequency denervation.",
-  "pitfalls": [
-   "Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms",
-   "Neglecting a structured conservative programme before interventional procedures",
-   "Overlooking concurrent discogenic or sacroiliac pain sources"
-  ],
-  "references": [
-   "Rothman-Simeone and Herkowitz's The Spine",
-   "Bogduk: Clinical Anatomy of the Lumbar Spine and Sacrum"
-  ],
-  "crossLinks": [
-   "degenerative_disc_disease",
-   "sacroiliac_joint_dysfunction",
-   "lumbar_spinal_stenosis"
-  ],
-  "management": [
-   "First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification that avoids provocative extension and rotation",
-   "Simple analgesia with paracetamol and short courses of NSAIDs for symptomatic flares",
-   "Diagnostic medial branch blocks to confirm the facet joint as the pain source before intervention",
-   "Radiofrequency medial branch neurotomy for confirmed, recurrent facet-mediated pain",
-   "Intra-articular corticosteroid and local anaesthetic injection for symptomatic relief in selected cases",
-   "Weight management and correction of modifiable postural and occupational loading factors",
-   "Referral to a pain or spinal specialist for refractory pain, with escalation if red-flag or radicular neurological features emerge"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "facet_joint_syndrome-pathway",
-   "title": "Facet joint syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New neurological deficit or radicular symptoms",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI or CT showing facet arthropathy, hypertrophy, and effusions, Plain radiographs for alignment and degenerative change, Diagnostic medial branch blocks or intra-articular facet injection to confirm the pain source"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification that avoids provocative extension and rotation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of facet joint syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "facet_joint_syndrome-matrix",
-   "title": "Facet joint syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Spine",
+  "specialty": "Spinal Surgery / Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rothman-Simeone and Herkowitz's The Spine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
+      "Pain is typically worse with extension, rotation, and standing, and often eased by flexion or sitting",
+      "Lumbar facet pain may refer to the buttock and posterior thigh but characteristically not below the knee",
+      "Localised paraspinal tenderness over the facets and pain on extension and rotation are suggestive but not specific",
+      "No clinical test reliably diagnoses facet-mediated pain, and imaging findings of facet hypertrophy and effusion correlate poorly with symptoms",
+      "Diagnostic medial branch blocks are the most specific way to implicate the facet joint",
+      "Management is conservative (physiotherapy, analgesia), and intra-articular or medial branch injections may help selected patients",
+      "Radiofrequency denervation of the medial branches can give medium-term relief when diagnostic blocks are positive"
     ],
-    [
-     "Key Investigations",
-     "MRI or CT showing facet arthropathy, hypertrophy, and effusions, Plain radiographs for alignment and degenerative change,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Facet joint syndrome refers to pain arising from the synovial zygapophysial joints of the spine. These joints, richly innervated by the medial branches of the dorsal rami, undergo osteoarthritic change (cartilage loss, capsular hypertrophy, osteophytosis, and effusion) as part of the degenerative cascade, frequently alongside disc degeneration. Mechanical loading in extension and rotation together with inflammation of the joint capsule stimulates nociceptors and produces axial pain. Facet hypertrophy can also contribute to lateral recess and foraminal narrowing.",
+    "additionalDifferentials": [
+      "Degenerative disc (discogenic) pain",
+      "Sacroiliac joint dysfunction",
+      "Lumbar spinal stenosis",
+      "Muscular or myofascial pain",
+      "Spondylolysis or spondylolisthesis",
+      "Inflammatory spondyloarthropathy"
     ],
-    [
-     "Primary Differentials",
-     "Degenerative disc (discogenic) pain, Sacroiliac joint dysfunction, Lumbar spinal stenosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI or CT showing facet arthropathy, hypertrophy, and effusions",
+      "Plain radiographs for alignment and degenerative change",
+      "Diagnostic medial branch blocks or intra-articular facet injection to confirm the pain source",
+      "SPECT/CT to identify metabolically active painful facets in selected cases",
+      "Inflammatory screen if spondyloarthropathy is a consideration"
     ],
-    [
-     "Management Strategy",
-     "First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification",
-     "Core treatment modality"
+    "redFlags": [
+      "New neurological deficit or radicular symptoms",
+      "Constitutional symptoms suggesting infection or malignancy",
+      "Features of inflammatory back pain such as morning stiffness, night pain, and young age"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms",
-     "Prevent diagnostic or management error"
+    "prognosis": "Facet-mediated pain typically follows a fluctuating chronic course; many patients are managed conservatively, and those with confirmed facet pain often gain useful, though sometimes temporary, relief from injections or radiofrequency denervation.",
+    "pitfalls": [
+      "Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms",
+      "Neglecting a structured conservative programme before interventional procedures",
+      "Overlooking concurrent discogenic or sacroiliac pain sources"
+    ],
+    "references": [
+      "Rothman-Simeone and Herkowitz's The Spine",
+      "Bogduk: Clinical Anatomy of the Lumbar Spine and Sacrum"
+    ],
+    "crossLinks": [
+      "degenerative_disc_disease",
+      "sacroiliac_joint_dysfunction",
+      "lumbar_spinal_stenosis"
+    ],
+    "management": [
+      "First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification that avoids provocative extension and rotation",
+      "Simple analgesia with paracetamol and short courses of NSAIDs for symptomatic flares",
+      "Diagnostic medial branch blocks to confirm the facet joint as the pain source before intervention",
+      "Radiofrequency medial branch neurotomy for confirmed, recurrent facet-mediated pain",
+      "Intra-articular corticosteroid and local anaesthetic injection for symptomatic relief in selected cases",
+      "Weight management and correction of modifiable postural and occupational loading factors",
+      "Referral to a pain or spinal specialist for refractory pain, with escalation if red-flag or radicular neurological features emerge"
     ]
-   ],
-   "caption": "Overview comparison matrix for facet joint syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "facet-joint-syndrome-real-image",
-   "title": "Facet joint syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "facet_joint_syndrome-pathway",
+      "title": "Facet joint syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New neurological deficit or radicular symptoms",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI or CT showing facet arthropathy, hypertrophy, and effusions, Plain radiographs for alignment and degenerative change, Diagnostic medial branch blocks or intra-articular facet injection to confirm the pain source"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification that avoids provocative extension and rotation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of facet joint syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "facet_joint_syndrome-matrix",
+      "title": "Facet joint syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI or CT showing facet arthropathy, hypertrophy, and effusions, Plain radiographs for alignment and degenerative change,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Degenerative disc (discogenic) pain, Sacroiliac joint dysfunction, Lumbar spinal stenosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for facet joint syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rothman-Simeone and Herkowitz's The Spine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "facet_joint_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI or CT",
+          "cells": [
+            {
+              "text": "Facet arthropathy, hypertrophy and effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Alignment and degenerative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic medial branch blocks or intra-articular injection",
+          "cells": [
+            {
+              "text": "Confirms the pain source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPECT/CT",
+          "cells": [
+            {
+              "text": "Metabolically active painful facets, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory screen",
+          "cells": [
+            {
+              "text": "Where spondyloarthropathy is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "facet_joint_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Core and paraspinal strengthening; posture and activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paracetamol and short NSAID courses",
+          "cells": [
+            {
+              "text": "Symptomatic flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic medial branch blocks",
+          "cells": [
+            {
+              "text": "Confirm the facet joint before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiofrequency medial branch neurotomy",
+          "cells": [
+            {
+              "text": "Confirmed, recurrent facet-mediated pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular steroid and local anaesthetic injection",
+          "cells": [
+            {
+              "text": "Selected patients, for symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight management and loading factors",
+          "cells": [
+            {
+              "text": "Modifiable postural and occupational factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain or spinal specialist referral",
+          "cells": [
+            {
+              "text": "Refractory pain; escalate for red flags or radicular features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "facet_joint_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Facet joint syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Axial low back pain worse with extension and rotation, eased by flexion or sitting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (neurological deficit, radicular or constitutional symptoms, inflammatory pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for infection, malignancy or inflammatory back pain; spine specialist",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI or CT for facet change; radiographs; inflammatory screen if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pain relieved by a diagnostic medial branch block?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider discogenic, sacroiliac or stenotic pain; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Structured physiotherapy and posture or activity modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Paracetamol and short NSAID courses for flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radiofrequency medial branch neurotomy for recurrent facet pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intra-articular steroid injection in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Weight management and modifiable loading factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Fluctuating chronic course; many are managed conservatively",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

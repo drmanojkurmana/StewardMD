@@ -1,176 +1,463 @@
 {
- "id": "tumefactive_demyelination",
- "name": "Tumefactive demyelination",
- "aliases": [
-  "tumefactive multiple sclerosis",
-  "tumefactive demyelinating lesion",
-  "demyelinating pseudotumour",
-  "tumour-like demyelination"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuroimmunology",
- "specialty": "Neurology / Neuroimmunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A large (typically over 2 cm) demyelinating lesion that mimics a brain tumour clinically and radiologically",
-   "Presents with focal deficits, headache, cognitive change, or seizures depending on location and mass effect",
-   "Characteristic MRI features include an incomplete (open) ring of enhancement with the open edge facing the cortex or grey matter",
-   "Mass effect and surrounding oedema are usually less than expected for the lesion size, a helpful clue against neoplasm",
-   "May occur in isolation or as a presentation of multiple sclerosis, and can be triggered in the context of certain disease-modifying drugs",
-   "Corticosteroids are first-line, with plasma exchange for steroid-refractory disease",
-   "Biopsy is sometimes needed but carries the risk of misinterpretation, as active demyelination can resemble neoplasm histologically"
+  "id": "tumefactive_demyelination",
+  "name": "Tumefactive demyelination",
+  "aliases": [
+    "tumefactive multiple sclerosis",
+    "tumefactive demyelinating lesion",
+    "demyelinating pseudotumour",
+    "tumour-like demyelination"
   ],
-  "pathophysiology": "Tumefactive demyelination is a focal region of intense inflammatory demyelination large enough to produce a space-occupying appearance. Macrophage-rich inflammation strips myelin while relatively sparing axons, and the advancing inflammatory edge produces the characteristic open-ring pattern of contrast enhancement. Because the pathology is inflammatory rather than neoplastic, restricted diffusion at the rim, relative lack of mass effect for size, and the open-ring sign help distinguish it from tumour, although overlap with the multiple sclerosis spectrum and with Balo and Marburg variants exists.",
-  "additionalDifferentials": [
-   "High-grade glioma",
-   "Primary central nervous system lymphoma",
-   "Cerebral abscess",
-   "Metastasis",
-   "Balo concentric sclerosis",
-   "Progressive multifocal leukoencephalopathy",
-   "Neurosarcoidosis"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain with contrast, diffusion, perfusion, and spectroscopy to seek the open-ring sign and features favouring demyelination",
-   "MRI of the spinal cord and orbits to look for additional demyelinating lesions",
-   "Cerebrospinal fluid analysis including oligoclonal bands",
-   "Aquaporin-4 and MOG antibody testing",
-   "Brain biopsy in genuinely indeterminate cases",
-   "Serial imaging to demonstrate the expected evolution of a demyelinating lesion"
-  ],
-  "redFlags": [
-   "Progressive mass effect with raised intracranial pressure",
-   "Rapid neurological deterioration",
-   "Imaging that cannot confidently exclude malignancy or infection",
-   "Steroid-refractory progression requiring escalation"
-  ],
-  "prognosis": "Many patients recover well with corticosteroids, and lesions typically shrink over time; long-term outcome depends on whether the disorder declares itself as multiple sclerosis or remains a solitary event.",
-  "pitfalls": [
-   "Proceeding to resection or radiotherapy on the assumption of a tumour",
-   "Misreading a demyelinating biopsy as glioma",
-   "Overlooking associated demyelinating lesions elsewhere",
-   "Failing to consider a drug-associated trigger in treated multiple sclerosis"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Continuum: Multiple Sclerosis and Related Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "High-dose corticosteroids as first-line treatment of the acute demyelinating lesion",
-   "Plasma exchange for steroid-refractory disease",
-   "Careful exclusion of tumour and infection to avoid unnecessary resection, with brain biopsy reserved for genuinely indeterminate cases",
-   "Review of any disease-modifying drug that may have precipitated the lesion",
-   "Initiation of long-term disease-modifying therapy if the disorder declares itself as multiple sclerosis",
-   "Supportive management of mass effect and oedema, with symptomatic treatment of seizures or focal deficits and neurorehabilitation",
-   "Serial imaging follow-up to confirm the expected evolution, with neurology and neuroimmunology referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tumefactive_demyelination-pathway",
-   "title": "Tumefactive demyelination: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A large (typically over 2 cm) demyelinating lesion that mimics a brain tumour clinically and radiologically",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive mass effect with raised intracranial pressure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain with contrast, diffusion, perfusion, and spectroscopy to seek the open-ring sign and features favouring demyelination, MRI of the spinal cord and orbits to look for additional demyelinating lesions,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: High-dose corticosteroids as first-line treatment of the acute demyelinating lesion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Proceeding to resection or radiotherapy on the assumption of a tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tumefactive demyelination."
-  }
- ],
- "tables": [
-  {
-   "id": "tumefactive_demyelination-matrix",
-   "title": "Tumefactive demyelination: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A large (typically over 2 cm) demyelinating lesion that mimics a brain tumour clinically and radiologically",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuroimmunology",
+  "specialty": "Neurology / Neuroimmunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A large (typically over 2 cm) demyelinating lesion that mimics a brain tumour clinically and radiologically",
+      "Presents with focal deficits, headache, cognitive change, or seizures depending on location and mass effect",
+      "Characteristic MRI features include an incomplete (open) ring of enhancement with the open edge facing the cortex or grey matter",
+      "Mass effect and surrounding oedema are usually less than expected for the lesion size, a helpful clue against neoplasm",
+      "May occur in isolation or as a presentation of multiple sclerosis, and can be triggered in the context of certain disease-modifying drugs",
+      "Corticosteroids are first-line, with plasma exchange for steroid-refractory disease",
+      "Biopsy is sometimes needed but carries the risk of misinterpretation, as active demyelination can resemble neoplasm histologically"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain with contrast, diffusion, perfusion, and spectroscopy to seek the open-ring sign and features favouring",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tumefactive demyelination is a focal region of intense inflammatory demyelination large enough to produce a space-occupying appearance. Macrophage-rich inflammation strips myelin while relatively sparing axons, and the advancing inflammatory edge produces the characteristic open-ring pattern of contrast enhancement. Because the pathology is inflammatory rather than neoplastic, restricted diffusion at the rim, relative lack of mass effect for size, and the open-ring sign help distinguish it from tumour, although overlap with the multiple sclerosis spectrum and with Balo and Marburg variants exists.",
+    "additionalDifferentials": [
+      "High-grade glioma",
+      "Primary central nervous system lymphoma",
+      "Cerebral abscess",
+      "Metastasis",
+      "Balo concentric sclerosis",
+      "Progressive multifocal leukoencephalopathy",
+      "Neurosarcoidosis"
     ],
-    [
-     "Primary Differentials",
-     "High-grade glioma, Primary central nervous system lymphoma, Cerebral abscess",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain with contrast, diffusion, perfusion, and spectroscopy to seek the open-ring sign and features favouring demyelination",
+      "MRI of the spinal cord and orbits to look for additional demyelinating lesions",
+      "Cerebrospinal fluid analysis including oligoclonal bands",
+      "Aquaporin-4 and MOG antibody testing",
+      "Brain biopsy in genuinely indeterminate cases",
+      "Serial imaging to demonstrate the expected evolution of a demyelinating lesion"
     ],
-    [
-     "Management Strategy",
-     "High-dose corticosteroids as first-line treatment of the acute demyelinating lesion",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive mass effect with raised intracranial pressure",
+      "Rapid neurological deterioration",
+      "Imaging that cannot confidently exclude malignancy or infection",
+      "Steroid-refractory progression requiring escalation"
     ],
-    [
-     "Clinical Pitfall",
-     "Proceeding to resection or radiotherapy on the assumption of a tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients recover well with corticosteroids, and lesions typically shrink over time; long-term outcome depends on whether the disorder declares itself as multiple sclerosis or remains a solitary event.",
+    "pitfalls": [
+      "Proceeding to resection or radiotherapy on the assumption of a tumour",
+      "Misreading a demyelinating biopsy as glioma",
+      "Overlooking associated demyelinating lesions elsewhere",
+      "Failing to consider a drug-associated trigger in treated multiple sclerosis"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Continuum: Multiple Sclerosis and Related Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "High-dose corticosteroids as first-line treatment of the acute demyelinating lesion",
+      "Plasma exchange for steroid-refractory disease",
+      "Careful exclusion of tumour and infection to avoid unnecessary resection, with brain biopsy reserved for genuinely indeterminate cases",
+      "Review of any disease-modifying drug that may have precipitated the lesion",
+      "Initiation of long-term disease-modifying therapy if the disorder declares itself as multiple sclerosis",
+      "Supportive management of mass effect and oedema, with symptomatic treatment of seizures or focal deficits and neurorehabilitation",
+      "Serial imaging follow-up to confirm the expected evolution, with neurology and neuroimmunology referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for tumefactive demyelination."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tumefactive-demyelination-real-image",
-   "title": "Tumefactive demyelination: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "tumefactive_demyelination-pathway",
+      "title": "Tumefactive demyelination: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A large (typically over 2 cm) demyelinating lesion that mimics a brain tumour clinically and radiologically",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive mass effect with raised intracranial pressure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain with contrast, diffusion, perfusion, and spectroscopy to seek the open-ring sign and features favouring demyelination, MRI of the spinal cord and orbits to look for additional demyelinating lesions,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: High-dose corticosteroids as first-line treatment of the acute demyelinating lesion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Proceeding to resection or radiotherapy on the assumption of a tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tumefactive demyelination."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tumefactive_demyelination-matrix",
+      "title": "Tumefactive demyelination: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A large (typically over 2 cm) demyelinating lesion that mimics a brain tumour clinically and radiologically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain with contrast, diffusion, perfusion, and spectroscopy to seek the open-ring sign and features favouring",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "High-grade glioma, Primary central nervous system lymphoma, Cerebral abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "High-dose corticosteroids as first-line treatment of the acute demyelinating lesion",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Proceeding to resection or radiotherapy on the assumption of a tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tumefactive demyelination."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tumefactive_demyelination-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain with contrast, diffusion, perfusion and spectroscopy",
+          "cells": [
+            {
+              "text": "Incomplete (open) ring enhancement; mass effect less than the lesion size suggests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of spinal cord and orbits",
+          "cells": [
+            {
+              "text": "Additional demyelinating lesions elsewhere"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Oligoclonal bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy",
+          "cells": [
+            {
+              "text": "Used only in genuinely indeterminate cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Evolution expected of a demyelinating lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumefactive_demyelination-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "High-grade glioma",
+          "cells": [
+            {
+              "text": "Mass effect and oedema are less than expected for the lesion size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neoplasm on biopsy",
+          "cells": [
+            {
+              "text": "Active demyelination can resemble neoplasm histologically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary CNS lymphoma, cerebral abscess or metastasis",
+          "cells": [
+            {
+              "text": "Imaging that cannot confidently exclude malignancy or infection is a red flag"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumefactive_demyelination-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for the acute demyelinating lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Steroid-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude tumour and infection",
+          "cells": [
+            {
+              "text": "Avoid unnecessary resection; biopsy only when genuinely indeterminate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of implicated drugs",
+          "cells": [
+            {
+              "text": "Any disease-modifying drug that may have precipitated the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term disease-modifying therapy",
+          "cells": [
+            {
+              "text": "If the disorder declares itself as multiple sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Mass effect and oedema, seizures, focal deficits and neurorehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging and referral",
+          "cells": [
+            {
+              "text": "Confirm the expected evolution; neurology and neuroimmunology referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tumefactive_demyelination-dx-mgmt",
+      "title": "Diagnosis and management of Tumefactive demyelination",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tumefactive demyelination: lesion over 2 cm mimicking a brain tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive mass effect, rapid decline or steroid-refractory course)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of mass effect and raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI for the open-ring sign; spinal and orbital MRI; CSF oligoclonal bands",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show an open ring and features favouring demyelination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy only if genuinely indeterminate, to exclude tumour or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose corticosteroids as first-line treatment of the acute lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Plasma exchange for steroid-refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Review any disease-modifying drug that may have precipitated the lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term disease-modifying therapy if it declares itself as multiple sclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many recover well and lesions shrink; outcome depends on evolution to MS",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,178 +1,518 @@
 {
- "id": "acute_intermittent_porphyria",
- "name": "Acute intermittent porphyria",
- "aliases": [
-  "AIP",
-  "hydroxymethylbilane synthase deficiency",
-  "porphobilinogen deaminase deficiency",
-  "HMBS deficiency",
-  "PBGD deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant deficiency of hydroxymethylbilane synthase (porphobilinogen deaminase), the third enzyme of haem biosynthesis, with characteristically low clinical penetrance",
-   "Presents with acute neurovisceral attacks: severe poorly localised abdominal pain without peritonism, vomiting, constipation, tachycardia, hypertension and hyponatraemia",
-   "Neuropsychiatric features include peripheral (predominantly motor) neuropathy, seizures, agitation, confusion and, in severe cases, respiratory muscle weakness",
-   "This is an acute porphyria without photocutaneous involvement, since the accumulating substances are the non-photosensitising precursors rather than photoreactive porphyrins",
-   "The biochemical hallmark is markedly raised urinary aminolaevulinic acid (ALA) and porphobilinogen (PBG) during an attack, with PBG typically elevated more than in the hepatic coproporphyrias",
-   "Attacks are precipitated by porphyrinogenic drugs, fasting or reduced calorie intake, alcohol, infection, and hormonal fluctuations such as the luteal phase of the menstrual cycle",
-   "Management centres on removing triggers, high carbohydrate/glucose loading for mild attacks and intravenous haem for severe or progressive attacks, alongside supportive care and pain control with safe analgesics",
-   "Hyponatraemia during attacks is common and may reflect SIADH or gastrointestinal losses and requires careful correction"
+  "id": "acute_intermittent_porphyria",
+  "name": "Acute intermittent porphyria",
+  "aliases": [
+    "AIP",
+    "hydroxymethylbilane synthase deficiency",
+    "porphobilinogen deaminase deficiency",
+    "HMBS deficiency",
+    "PBGD deficiency"
   ],
-  "pathophysiology": "Acute intermittent porphyria results from partial deficiency of hydroxymethylbilane synthase, the third enzyme of the haem biosynthetic pathway, which condenses porphobilinogen molecules. When hepatic haem demand rises, the rate-limiting enzyme ALA synthase is induced; the downstream bottleneck causes accumulation of the early precursors ALA and PBG. These precursors, particularly ALA, are thought to be neurotoxic and underlie the neurovisceral manifestations. Because no photoreactive porphyrins accumulate, the skin is spared. Enzyme activity is typically around half of normal, so most carriers remain asymptomatic unless exposed to precipitating factors that upregulate hepatic haem synthesis.",
-  "additionalDifferentials": [
-   "Surgical acute abdomen (appendicitis, bowel obstruction, perforation)",
-   "Lead poisoning, which also raises ALA and causes neuropathy",
-   "Guillain-Barre syndrome and other acute peripheral neuropathies",
-   "Hereditary coproporphyria and variegate porphyria (other acute porphyrias)",
-   "Functional or psychiatric abdominal pain syndromes",
-   "Hyponatraemia of other cause with confusion or seizures"
-  ],
-  "additionalInvestigations": [
-   "Spot (fresh, light-protected) urinary porphobilinogen and ALA, ideally taken during symptoms",
-   "Quantitative urinary, faecal and plasma porphyrin profiling to distinguish from other acute porphyrias",
-   "Erythrocyte hydroxymethylbilane synthase (PBG deaminase) activity",
-   "Molecular genetic testing of the HMBS gene to confirm diagnosis and enable family screening",
-   "Serum sodium and renal function to detect and monitor hyponatraemia",
-   "Nerve conduction studies where motor neuropathy is suspected"
-  ],
-  "redFlags": [
-   "Progressive motor weakness or bulbar/respiratory involvement threatening ventilatory failure",
-   "Seizures, especially when compounded by hyponatraemia",
-   "Severe autonomic instability with dangerous hypertension or arrhythmia",
-   "Recurrent unexplained severe abdominal pain in a young adult, especially a woman, with a family history"
-  ],
-  "prognosis": "With prompt recognition, trigger avoidance and treatment most attacks resolve, though recovery from severe neuropathy can be slow and incomplete. Recurrent attacks, chronic pain, and long-term risks including hypertension, renal impairment and hepatocellular carcinoma may complicate the course.",
-  "pitfalls": [
-   "Attributing recurrent abdominal pain to a functional or psychiatric cause and missing the diagnosis",
-   "Administering porphyrinogenic drugs (many anticonvulsants, sulfonamides, and others) that precipitate or worsen attacks",
-   "Failing to collect and protect urine promptly, so a raised PBG level is missed",
-   "Overlooking that low penetrance means most gene carriers never have symptoms, complicating family counselling",
-   "Aggressive fasting for investigations or surgery without carbohydrate cover"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intravenous haem arginate to suppress ALA synthase and abort the acute attack",
-   "Carbohydrate loading with glucose for mild attacks and as adjunct during treatment",
-   "Immediate withdrawal of porphyrinogenic drugs and correction of precipitants such as fasting, alcohol, and infection",
-   "Symptom control with opioid analgesia, antiemetics, beta-blockers for tachycardia and hypertension, and safe anticonvulsants such as levetiracetam or gabapentin for seizures",
-   "Monitor and correct hyponatraemia and observe for respiratory muscle weakness requiring ventilatory support",
-   "Prophylaxis of recurrent attacks with givosiran or gonadotrophin-releasing hormone analogues for cyclical menstrual attacks",
-   "Genetic counselling with HMBS testing of relatives and a lifelong personalised list of safe and unsafe drugs",
-   "Referral to a specialist porphyria centre"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_intermittent_porphyria-pathway",
-   "title": "Acute intermittent porphyria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant deficiency of hydroxymethylbilane synthase (porphobilinogen deaminase), the third enzyme of haem biosynthesis, with characteristically low clinical penetrance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive motor weakness or bulbar/respiratory involvement threatening ventilatory failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Spot (fresh, light-protected) urinary porphobilinogen and ALA, ideally taken during symptoms, Quantitative urinary, faecal and plasma porphyrin profiling to distinguish from other acute porphyrias, Erythrocyte"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intravenous haem arginate to suppress ALA synthase and abort the acute attack"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing recurrent abdominal pain to a functional or psychiatric cause and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute intermittent porphyria."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_intermittent_porphyria-matrix",
-   "title": "Acute intermittent porphyria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant deficiency of hydroxymethylbilane synthase (porphobilinogen deaminase), the third enzyme of haem biosynthesis,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant deficiency of hydroxymethylbilane synthase (porphobilinogen deaminase), the third enzyme of haem biosynthesis, with characteristically low clinical penetrance",
+      "Presents with acute neurovisceral attacks: severe poorly localised abdominal pain without peritonism, vomiting, constipation, tachycardia, hypertension and hyponatraemia",
+      "Neuropsychiatric features include peripheral (predominantly motor) neuropathy, seizures, agitation, confusion and, in severe cases, respiratory muscle weakness",
+      "This is an acute porphyria without photocutaneous involvement, since the accumulating substances are the non-photosensitising precursors rather than photoreactive porphyrins",
+      "The biochemical hallmark is markedly raised urinary aminolaevulinic acid (ALA) and porphobilinogen (PBG) during an attack, with PBG typically elevated more than in the hepatic coproporphyrias",
+      "Attacks are precipitated by porphyrinogenic drugs, fasting or reduced calorie intake, alcohol, infection, and hormonal fluctuations such as the luteal phase of the menstrual cycle",
+      "Management centres on removing triggers, high carbohydrate/glucose loading for mild attacks and intravenous haem for severe or progressive attacks, alongside supportive care and pain control with safe analgesics",
+      "Hyponatraemia during attacks is common and may reflect SIADH or gastrointestinal losses and requires careful correction"
     ],
-    [
-     "Key Investigations",
-     "Spot (fresh, light-protected) urinary porphobilinogen and ALA, ideally taken during symptoms, Quantitative urinary, faecal and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute intermittent porphyria results from partial deficiency of hydroxymethylbilane synthase, the third enzyme of the haem biosynthetic pathway, which condenses porphobilinogen molecules. When hepatic haem demand rises, the rate-limiting enzyme ALA synthase is induced; the downstream bottleneck causes accumulation of the early precursors ALA and PBG. These precursors, particularly ALA, are thought to be neurotoxic and underlie the neurovisceral manifestations. Because no photoreactive porphyrins accumulate, the skin is spared. Enzyme activity is typically around half of normal, so most carriers remain asymptomatic unless exposed to precipitating factors that upregulate hepatic haem synthesis.",
+    "additionalDifferentials": [
+      "Surgical acute abdomen (appendicitis, bowel obstruction, perforation)",
+      "Lead poisoning, which also raises ALA and causes neuropathy",
+      "Guillain-Barre syndrome and other acute peripheral neuropathies",
+      "Hereditary coproporphyria and variegate porphyria (other acute porphyrias)",
+      "Functional or psychiatric abdominal pain syndromes",
+      "Hyponatraemia of other cause with confusion or seizures"
     ],
-    [
-     "Primary Differentials",
-     "Surgical acute abdomen (appendicitis, bowel obstruction, perforation), Lead poisoning, which also raises ALA and causes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Spot (fresh, light-protected) urinary porphobilinogen and ALA, ideally taken during symptoms",
+      "Quantitative urinary, faecal and plasma porphyrin profiling to distinguish from other acute porphyrias",
+      "Erythrocyte hydroxymethylbilane synthase (PBG deaminase) activity",
+      "Molecular genetic testing of the HMBS gene to confirm diagnosis and enable family screening",
+      "Serum sodium and renal function to detect and monitor hyponatraemia",
+      "Nerve conduction studies where motor neuropathy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Intravenous haem arginate to suppress ALA synthase and abort the acute attack",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive motor weakness or bulbar/respiratory involvement threatening ventilatory failure",
+      "Seizures, especially when compounded by hyponatraemia",
+      "Severe autonomic instability with dangerous hypertension or arrhythmia",
+      "Recurrent unexplained severe abdominal pain in a young adult, especially a woman, with a family history"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing recurrent abdominal pain to a functional or psychiatric cause and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt recognition, trigger avoidance and treatment most attacks resolve, though recovery from severe neuropathy can be slow and incomplete. Recurrent attacks, chronic pain, and long-term risks including hypertension, renal impairment and hepatocellular carcinoma may complicate the course.",
+    "pitfalls": [
+      "Attributing recurrent abdominal pain to a functional or psychiatric cause and missing the diagnosis",
+      "Administering porphyrinogenic drugs (many anticonvulsants, sulfonamides, and others) that precipitate or worsen attacks",
+      "Failing to collect and protect urine promptly, so a raised PBG level is missed",
+      "Overlooking that low penetrance means most gene carriers never have symptoms, complicating family counselling",
+      "Aggressive fasting for investigations or surgery without carbohydrate cover"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intravenous haem arginate to suppress ALA synthase and abort the acute attack",
+      "Carbohydrate loading with glucose for mild attacks and as adjunct during treatment",
+      "Immediate withdrawal of porphyrinogenic drugs and correction of precipitants such as fasting, alcohol, and infection",
+      "Symptom control with opioid analgesia, antiemetics, beta-blockers for tachycardia and hypertension, and safe anticonvulsants such as levetiracetam or gabapentin for seizures",
+      "Monitor and correct hyponatraemia and observe for respiratory muscle weakness requiring ventilatory support",
+      "Prophylaxis of recurrent attacks with givosiran or gonadotrophin-releasing hormone analogues for cyclical menstrual attacks",
+      "Genetic counselling with HMBS testing of relatives and a lifelong personalised list of safe and unsafe drugs",
+      "Referral to a specialist porphyria centre"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute intermittent porphyria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-intermittent-porphyria-real-image",
-   "title": "Acute intermittent porphyria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acute_intermittent_porphyria-pathway",
+      "title": "Acute intermittent porphyria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant deficiency of hydroxymethylbilane synthase (porphobilinogen deaminase), the third enzyme of haem biosynthesis, with characteristically low clinical penetrance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive motor weakness or bulbar/respiratory involvement threatening ventilatory failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Spot (fresh, light-protected) urinary porphobilinogen and ALA, ideally taken during symptoms, Quantitative urinary, faecal and plasma porphyrin profiling to distinguish from other acute porphyrias, Erythrocyte"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intravenous haem arginate to suppress ALA synthase and abort the acute attack"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing recurrent abdominal pain to a functional or psychiatric cause and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute intermittent porphyria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_intermittent_porphyria-matrix",
+      "title": "Acute intermittent porphyria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant deficiency of hydroxymethylbilane synthase (porphobilinogen deaminase), the third enzyme of haem biosynthesis,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Spot (fresh, light-protected) urinary porphobilinogen and ALA, ideally taken during symptoms, Quantitative urinary, faecal and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Surgical acute abdomen (appendicitis, bowel obstruction, perforation), Lead poisoning, which also raises ALA and causes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intravenous haem arginate to suppress ALA synthase and abort the acute attack",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing recurrent abdominal pain to a functional or psychiatric cause and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute intermittent porphyria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_intermittent_porphyria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Spot urinary porphobilinogen and ALA, fresh and light-protected",
+          "cells": [
+            {
+              "text": "Taken during symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative urinary, faecal and plasma porphyrin profiling",
+          "cells": [
+            {
+              "text": "Distinguishes from other acute porphyrias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrocyte hydroxymethylbilane synthase (PBG deaminase) activity",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HMBS gene testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and enables family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium and renal function",
+          "cells": [
+            {
+              "text": "Hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Motor neuropathy when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_intermittent_porphyria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Lead poisoning",
+          "cells": [
+            {
+              "text": "Also raises ALA and causes neuropathy"
+            },
+            {
+              "text": "Urinary PBG and ALA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome and other acute peripheral neuropathies",
+          "cells": [
+            {
+              "text": "Acute peripheral neuropathy"
+            },
+            {
+              "text": "Nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary coproporphyria and variegate porphyria",
+          "cells": [
+            {
+              "text": "Other acute porphyrias"
+            },
+            {
+              "text": "Porphyrin profiling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_intermittent_porphyria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous haem arginate",
+          "cells": [
+            {
+              "text": "Suppresses ALA synthase and aborts the attack"
+            },
+            {
+              "text": "Acute attack treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbohydrate loading with glucose",
+          "cells": [
+            {
+              "text": "Mild attacks and as an adjunct"
+            },
+            {
+              "text": "Adjunct during treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal of porphyrinogenic drugs and correction of precipitants",
+          "cells": [
+            {
+              "text": "Fasting, alcohol and infection"
+            },
+            {
+              "text": "Trigger avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opioid analgesia, antiemetics, beta-blockers; levetiracetam or gabapentin",
+          "cells": [
+            {
+              "text": "Pain, vomiting, tachycardia and seizures"
+            },
+            {
+              "text": "Safe anticonvulsants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of hyponatraemia; monitoring for respiratory weakness",
+          "cells": [
+            {
+              "text": "Hyponatraemia and ventilatory risk"
+            },
+            {
+              "text": "Ventilatory support if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Givosiran or GnRH analogues",
+          "cells": [
+            {
+              "text": "Prophylaxis of recurrent attacks"
+            },
+            {
+              "text": "GnRH analogues for cyclical menstrual attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and a personalised list of safe and unsafe drugs",
+          "cells": [
+            {
+              "text": "Family screening and drug safety"
+            },
+            {
+              "text": "Lifelong drug list"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral to a specialist porphyria centre",
+          "cells": [
+            {
+              "text": "Specialist management"
+            },
+            {
+              "text": "Specialist centre"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_intermittent_porphyria-dx-mgmt",
+      "title": "Diagnosis and management of Acute intermittent porphyria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe abdominal pain, vomiting and hyponatraemia in a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Motor weakness, bulbar or respiratory involvement, or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ventilatory and neurology review; seizure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Spot urinary PBG and ALA taken during symptoms; sodium and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised urinary PBG and ALA on a fresh sample?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm HMBS gene variant; stop porphyrinogenic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review surgical abdomen, lead poisoning, GBS and other porphyrias",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV haem arginate to suppress ALA synthase and abort the attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Glucose loading for mild attacks; opioid analgesia and antiemetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct hyponatraemia; givosiran or GnRH analogues to prevent attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most attacks resolve; slow and incomplete recovery from severe neuropathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,455 @@
 {
- "id": "stickler_syndrome",
- "name": "Stickler syndrome",
- "aliases": [
-  "hereditary progressive arthro-ophthalmopathy",
-  "COL2A1-related Stickler syndrome",
-  "COL11A1-related Stickler syndrome",
-  "COL11A2-related Stickler syndrome"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A collagenopathy usually caused by variants in COL2A1, COL11A1, or COL11A2, most types inherited in an autosomal dominant pattern",
-   "The classic combination is ocular, orofacial, auditory, and articular features, reflecting the wide distribution of types II and XI collagen",
-   "High myopia that is congenital and non-progressive, with vitreous abnormalities, is characteristic and confers a high lifetime risk of retinal detachment",
-   "Orofacial features include midface hypoplasia, a flat nasal bridge, and the Pierre Robin sequence (micrognathia, glossoptosis, and cleft palate)",
-   "Sensorineural or mixed hearing loss is common and warrants formal audiological assessment",
-   "Early-onset osteoarthritis and mild spondyloepiphyseal changes contribute to joint pain and stiffness",
-   "Retinal detachment prophylaxis and prompt ophthalmology review are central because detachment can cause preventable blindness",
-   "Diagnosis integrates the multisystem clinical picture with dilated eye examination, audiometry, and molecular genetic testing"
+  "id": "stickler_syndrome",
+  "name": "Stickler syndrome",
+  "aliases": [
+    "hereditary progressive arthro-ophthalmopathy",
+    "COL2A1-related Stickler syndrome",
+    "COL11A1-related Stickler syndrome",
+    "COL11A2-related Stickler syndrome"
   ],
-  "pathophysiology": "Stickler syndrome results from defects in the fibrillar collagens types II and XI, which are major structural components of the vitreous, cartilage, and inner ear. Variants in COL2A1 or the type XI collagen genes disrupt normal collagen fibril assembly, producing an abnormal vitreous gel that predisposes to retinal tears and detachment, cartilage that is prone to early degeneration and mild skeletal dysplasia, and inner-ear structures vulnerable to sensorineural hearing loss. The same collagen deficiency during craniofacial development underlies the midface and palatal anomalies, including the Pierre Robin sequence.",
-  "additionalDifferentials": [
-   "Marfan syndrome",
-   "Wagner vitreoretinopathy",
-   "Kniest dysplasia and other type II collagenopathies",
-   "Spondyloepiphyseal dysplasia congenita",
-   "Marshall syndrome",
-   "Non-syndromic high myopia with retinal detachment"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus and vitreous examination by an ophthalmologist",
-   "Refraction to characterise congenital high myopia",
-   "Pure-tone audiometry and audiological assessment",
-   "Molecular genetic testing of COL2A1, COL11A1, and COL11A2",
-   "Skeletal survey or targeted imaging for spondyloepiphyseal changes",
-   "Cleft palate and airway assessment in infants with the Pierre Robin sequence"
-  ],
-  "redFlags": [
-   "New floaters, flashing lights, or a visual field shadow suggesting retinal detachment",
-   "Neonatal airway compromise from the Pierre Robin sequence",
-   "Sudden or progressive hearing loss",
-   "Acute painful red eye or trauma in a highly myopic patient",
-   "Feeding or respiratory difficulty in an infant with a cleft palate"
-  ],
-  "prognosis": "Most patients have a normal lifespan, but vision is threatened by retinal detachment, which is the principal preventable cause of morbidity, and joint and hearing problems accumulate over time. Outcomes improve markedly with proactive ophthalmic surveillance and detachment prophylaxis.",
-  "pitfalls": [
-   "Missing the diagnosis in children presenting with isolated Pierre Robin sequence",
-   "Underestimating retinal detachment risk and failing to arrange ophthalmology surveillance",
-   "Overlooking hearing loss because ocular features dominate the picture",
-   "Assuming high myopia is simple refractive error rather than syndromic",
-   "Not offering genetic counselling and family screening given autosomal dominant inheritance"
-  ],
-  "references": [
-   "GeneReviews: Stickler syndrome",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prophylactic retinal treatment (laser or cryotherapy retinopexy) and urgent surgical repair of retinal tears or detachment",
-   "Lifelong ophthalmic surveillance with refractive correction of high myopia and detachment safety-netting",
-   "Audiological assessment and hearing amplification for sensorineural or mixed loss",
-   "Manage early-onset osteoarthritis with analgesia, physiotherapy and joint protection",
-   "Cleft palate repair and airway management for Pierre Robin sequence in infancy",
-   "Genetic counselling and family cascade screening for the autosomal dominant collagen variants",
-   "Multidisciplinary coordination across ophthalmology, audiology, orthopaedics and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "stickler_syndrome-pathway",
-   "title": "Stickler syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A collagenopathy usually caused by variants in COL2A1, COL11A1, or COL11A2, most types inherited in an autosomal dominant pattern",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New floaters, flashing lights, or a visual field shadow suggesting retinal detachment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus and vitreous examination by an ophthalmologist, Refraction to characterise congenital high myopia, Pure-tone audiometry and audiological assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prophylactic retinal treatment (laser or cryotherapy retinopexy) and urgent surgical repair of retinal tears or detachment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis in children presenting with isolated Pierre Robin sequence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of stickler syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "stickler_syndrome-matrix",
-   "title": "Stickler syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A collagenopathy usually caused by variants in COL2A1, COL11A1, or COL11A2, most types inherited in an autosomal dominant pattern",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A collagenopathy usually caused by variants in COL2A1, COL11A1, or COL11A2, most types inherited in an autosomal dominant pattern",
+      "The classic combination is ocular, orofacial, auditory, and articular features, reflecting the wide distribution of types II and XI collagen",
+      "High myopia that is congenital and non-progressive, with vitreous abnormalities, is characteristic and confers a high lifetime risk of retinal detachment",
+      "Orofacial features include midface hypoplasia, a flat nasal bridge, and the Pierre Robin sequence (micrognathia, glossoptosis, and cleft palate)",
+      "Sensorineural or mixed hearing loss is common and warrants formal audiological assessment",
+      "Early-onset osteoarthritis and mild spondyloepiphyseal changes contribute to joint pain and stiffness",
+      "Retinal detachment prophylaxis and prompt ophthalmology review are central because detachment can cause preventable blindness",
+      "Diagnosis integrates the multisystem clinical picture with dilated eye examination, audiometry, and molecular genetic testing"
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus and vitreous examination by an ophthalmologist, Refraction to characterise congenital high myopia, Pure-tone",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Stickler syndrome results from defects in the fibrillar collagens types II and XI, which are major structural components of the vitreous, cartilage, and inner ear. Variants in COL2A1 or the type XI collagen genes disrupt normal collagen fibril assembly, producing an abnormal vitreous gel that predisposes to retinal tears and detachment, cartilage that is prone to early degeneration and mild skeletal dysplasia, and inner-ear structures vulnerable to sensorineural hearing loss. The same collagen deficiency during craniofacial development underlies the midface and palatal anomalies, including the Pierre Robin sequence.",
+    "additionalDifferentials": [
+      "Marfan syndrome",
+      "Wagner vitreoretinopathy",
+      "Kniest dysplasia and other type II collagenopathies",
+      "Spondyloepiphyseal dysplasia congenita",
+      "Marshall syndrome",
+      "Non-syndromic high myopia with retinal detachment"
     ],
-    [
-     "Primary Differentials",
-     "Marfan syndrome, Wagner vitreoretinopathy, Kniest dysplasia and other type II collagenopathies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus and vitreous examination by an ophthalmologist",
+      "Refraction to characterise congenital high myopia",
+      "Pure-tone audiometry and audiological assessment",
+      "Molecular genetic testing of COL2A1, COL11A1, and COL11A2",
+      "Skeletal survey or targeted imaging for spondyloepiphyseal changes",
+      "Cleft palate and airway assessment in infants with the Pierre Robin sequence"
     ],
-    [
-     "Management Strategy",
-     "Prophylactic retinal treatment (laser or cryotherapy retinopexy) and urgent surgical repair of retinal tears or detachment",
-     "Core treatment modality"
+    "redFlags": [
+      "New floaters, flashing lights, or a visual field shadow suggesting retinal detachment",
+      "Neonatal airway compromise from the Pierre Robin sequence",
+      "Sudden or progressive hearing loss",
+      "Acute painful red eye or trauma in a highly myopic patient",
+      "Feeding or respiratory difficulty in an infant with a cleft palate"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis in children presenting with isolated Pierre Robin sequence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients have a normal lifespan, but vision is threatened by retinal detachment, which is the principal preventable cause of morbidity, and joint and hearing problems accumulate over time. Outcomes improve markedly with proactive ophthalmic surveillance and detachment prophylaxis.",
+    "pitfalls": [
+      "Missing the diagnosis in children presenting with isolated Pierre Robin sequence",
+      "Underestimating retinal detachment risk and failing to arrange ophthalmology surveillance",
+      "Overlooking hearing loss because ocular features dominate the picture",
+      "Assuming high myopia is simple refractive error rather than syndromic",
+      "Not offering genetic counselling and family screening given autosomal dominant inheritance"
+    ],
+    "references": [
+      "GeneReviews: Stickler syndrome",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prophylactic retinal treatment (laser or cryotherapy retinopexy) and urgent surgical repair of retinal tears or detachment",
+      "Lifelong ophthalmic surveillance with refractive correction of high myopia and detachment safety-netting",
+      "Audiological assessment and hearing amplification for sensorineural or mixed loss",
+      "Manage early-onset osteoarthritis with analgesia, physiotherapy and joint protection",
+      "Cleft palate repair and airway management for Pierre Robin sequence in infancy",
+      "Genetic counselling and family cascade screening for the autosomal dominant collagen variants",
+      "Multidisciplinary coordination across ophthalmology, audiology, orthopaedics and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for stickler syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "stickler-syndrome-real-image",
-   "title": "Stickler syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "stickler_syndrome-pathway",
+      "title": "Stickler syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A collagenopathy usually caused by variants in COL2A1, COL11A1, or COL11A2, most types inherited in an autosomal dominant pattern",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New floaters, flashing lights, or a visual field shadow suggesting retinal detachment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus and vitreous examination by an ophthalmologist, Refraction to characterise congenital high myopia, Pure-tone audiometry and audiological assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prophylactic retinal treatment (laser or cryotherapy retinopexy) and urgent surgical repair of retinal tears or detachment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis in children presenting with isolated Pierre Robin sequence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of stickler syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "stickler_syndrome-matrix",
+      "title": "Stickler syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A collagenopathy usually caused by variants in COL2A1, COL11A1, or COL11A2, most types inherited in an autosomal dominant pattern",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus and vitreous examination by an ophthalmologist, Refraction to characterise congenital high myopia, Pure-tone",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Marfan syndrome, Wagner vitreoretinopathy, Kniest dysplasia and other type II collagenopathies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prophylactic retinal treatment (laser or cryotherapy retinopexy) and urgent surgical repair of retinal tears or detachment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis in children presenting with isolated Pierre Robin sequence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for stickler syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stickler_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus and vitreous examination",
+          "cells": [
+            {
+              "text": "Vitreous abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction",
+          "cells": [
+            {
+              "text": "Congenital high myopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural or mixed loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of COL2A1, COL11A1 and COL11A2",
+          "cells": [
+            {
+              "text": "Subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Epiphyseal and spondyloepiphyseal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cleft palate and airway assessment",
+          "cells": [
+            {
+              "text": "Pierre Robin sequence in infancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stickler_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Marfan syndrome",
+          "cells": [
+            {
+              "text": "A connective tissue disorder with lens ectopia; gene testing separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kniest dysplasia and spondyloepiphyseal dysplasia congenita",
+          "cells": [
+            {
+              "text": "Type II collagenopathies with skeletal features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stickler_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylactic retinopexy",
+          "cells": [
+            {
+              "text": "Laser or cryotherapy; urgent surgery for detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong ophthalmic surveillance",
+          "cells": [
+            {
+              "text": "Refractive correction of high myopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing amplification",
+          "cells": [
+            {
+              "text": "Sensorineural or mixed loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia, physiotherapy and joint protection",
+          "cells": [
+            {
+              "text": "Early-onset osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cleft palate repair and airway management",
+          "cells": [
+            {
+              "text": "Pierre Robin sequence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stickler_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Stickler syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "High myopia, vitreous change and hearing loss: suspected Stickler syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (flashes, floaters, field shadow, infant airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review for retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus and vitreous examination; refraction; audiometry; gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a COL2A1, COL11A1 or COL11A2 variant found with the typical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Marfan syndrome, Wagner syndrome or isolated high myopia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic retinopexy and urgent repair of retinal tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong ophthalmic surveillance with refractive correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing amplification for sensorineural or mixed loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cleft palate repair and airway management for Pierre Robin sequence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Retinal detachment risk is lifelong; hearing and joints need ongoing care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,193 +1,696 @@
 {
- "id": "diverticular_disease",
- "name": "Diverticular Disease",
- "system": "Gastroenterology",
- "class": "non_infective",
- "chapter": 339,
- "page": 2578,
- "aliases": [
-  "diverticulitis",
-  "diverticulosis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2578-2581",
-  "clinicalPearls": [
-   "Diverticulosis is the most common cause of hematochezia (brisk lower-GI bleed) in patients >60 years; bleeding is abrupt in onset, usually painless, sometimes massive, and often from the right colon. Chronic or occult bleeding is NOT characteristic (Harrison 22e p.2496, 2579).",
-   "Only ~20% of patients with diverticulosis will ever have GI bleeding; most bleeds are self-limited and stop spontaneously with bowel rest (colonic diverticula stop bleeding spontaneously in >=90% of patients). Lifetime risk of rebleeding is ~25% (Harrison 22e p.2496, 2579).",
-   "Acute uncomplicated diverticulitis characteristically presents with fever, anorexia, left lower quadrant abdominal pain, and obstipation (Harrison 22e p.2579).",
-   "Diagnosis of diverticulitis is best made on a contrast-enhanced abdominal and pelvic CT showing sigmoid diverticula, thickened colonic wall >4 mm, and pericolic fat inflammation WITHOUT extravasation of contrast or fluid (Harrison 22e p.2579).",
-   "Diverticula commonly affect the left and sigmoid colon and the rectum is always spared; however in Asian populations 70% of diverticula are in the right colon and cecum (Harrison 22e p.2579).",
-   "The pseudodiverticulum (protrusion of mucosa and submucosa only, through the muscularis propria) is the most common type seen in the colon; a true diverticulum is herniation of the entire bowel wall (Harrison 22e p.2578).",
-   "Perforated diverticular disease is staged using the Hinchey classification (I: confined paracolic abscess; II: distant/pelvic abscess after spontaneous closure; III: noncommunicating perforation with purulent peritonitis; IV: free perforation with fecal peritonitis); modified to add stage Ia for phlegmon/early abscess (Harrison 22e p.2580).",
-   "Pneumaturia or passage of stool/air through the vagina or skin signals a fistula (colovesical, colovaginal, or colocutaneous); colovaginal fistulas are more common in women who have undergone hysterectomy (Harrison 22e p.2579).",
-   "Colonoscopy should be considered ~6 weeks AFTER resolution of a first episode, because colon cancer prevalence is low overall (<2%) but higher after complicated diverticulitis (6-8%) (Harrison 22e p.2580).",
-   "Routine antibiotics do NOT shorten time to symptom resolution or reduce complications/recurrence in immunocompetent patients with uncomplicated diverticular disease (AVOD and DIABOLO trials, plus meta-analysis) (Harrison 22e p.2580).",
-   "Diverticulosis affects about half the population aged >60 years and the majority remain asymptomatic; only ~5% develop acute diverticular disease (Harrison 22e p.2578)."
+  "id": "diverticular_disease",
+  "name": "Diverticular Disease",
+  "system": "Gastroenterology",
+  "class": "non_infective",
+  "chapter": 339,
+  "page": 2578,
+  "aliases": [
+    "diverticulitis",
+    "diverticulosis"
   ],
-  "pathophysiology": "Diverticula form where the nutrient artery (vasa recta) penetrates the muscularis propria, creating a point of weakness in the colonic wall; most arise in the sigmoid colon, likely reflecting its high-pressure zone where higher-amplitude contractions and firm/constipated stool act on a weak segment. Pathogenesis is now viewed as multifactorial rather than simply low-fiber diet: gut dysbiosis, chronic low-grade inflammation driving neuronal degeneration with resulting dysmotility and high intraluminal pressure, and abnormal collagen cross-linking causing loss of compliance all contribute. Genome-wide association studies (Iceland, Denmark, UK biobanks) link LAMB4 (extracellular-matrix laminin family) and TNFSF15 (TNF family, inflammation) variants to early-onset severe disease. Complications occur when the vasa recta is compressed or eroded (bleeding) or a diverticulum perforates (Harrison 22e p.2578-2579).",
-  "additionalDifferentials": [
-   "Colorectal cancer (parallel epidemiology and overlapping presentation; must exclude with colonoscopy after an episode)",
-   "Irritable bowel syndrome (SCAD can mimic it)",
-   "Crohn's disease (diverticulitis can be confused with CD clinically and radiographically)",
-   "Appendicitis",
-   "Ischemic colitis",
-   "Twisted ovarian cyst / gynecologic pathology"
-  ],
-  "infectionMimics": [
-   "Acute appendicitis",
-   "Infectious colitis",
-   "Pelvic inflammatory disease / tubo-ovarian abscess"
-  ],
-  "nonInfectiousMimics": [
-   "Colorectal cancer",
-   "Inflammatory bowel disease (Crohn's disease, ulcerative colitis)",
-   "Irritable bowel syndrome",
-   "Ischemic colitis",
-   "Giant sigmoid diverticulum (air-fluid level in LLQ on plain film)"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced abdominal/pelvic CT (diagnostic modality of choice for diverticulitis)",
-   "Multiplanar CT angiography for active diverticular bleeding localization",
-   "Nuclear medicine tagged red-cell scan for bleeding localization",
-   "Mesenteric angiography (allows superselective coil embolization if active bleeding is localized)",
-   "Colonoscopy ~6 weeks after resolution to exclude malignancy (avoid during the acute attack)",
-   "CRP and WBC count to gauge inflammation/disease progression risk"
-  ],
-  "redFlags": [
-   "Signs of peritonitis indicating diverticular perforation",
-   "Abscess formation (~16% of complicated disease) with abdominal distention and localized peritonitis",
-   "Free perforation with fecal peritonitis (Hinchey IV)",
-   "Fistula (colovesical with pneumaturia, colovaginal, colocutaneous)",
-   "Obstruction/stricture",
-   "Air-fluid level in LLQ on plain film suggesting giant sigmoid diverticulum (impending perforation)",
-   "Massive or refractory lower-GI hemorrhage, hemodynamic instability, or large-volume transfusion requirement",
-   "Immunocompromise, chronic renal failure, or collagen-vascular disease (fivefold greater perforation risk on recurrent attacks)"
-  ],
-  "prognosis": "Most patients with diverticulosis stay asymptomatic; only ~5% develop acute diverticular disease, and 10-25% of those with diverticular disease have recurrent symptoms with up to 10% requiring surgery. Diverticular bleeds are largely self-limited (spontaneous cessation in >=90%), with lifetime rebleeding risk ~25%. After complicated diverticulitis the risk of underlying colon cancer rises to 6-8% (vs <2% overall). Elective surgical resection for recurrent SUDD improved quality of life and was more cost-effective at 5 years (DIRECT trial) (Harrison 22e p.2578-2581).",
-  "pitfalls": [
-   "Do NOT perform colonoscopy during acute diverticulitis (risk of perforation); defer it ~6 weeks until the attack resolves.",
-   "Do not reflexively give antibiotics for uncomplicated diverticulitis in immunocompetent patients - trials show no benefit.",
-   "The historical advice to avoid nuts, corn, and popcorn rests on anecdotal data only and is not evidence-based; higher intake was actually associated with lower recurrence risk.",
-   "Mesalazine appears to help symptoms in SUDD but shows no benefit once objective inflammation (CRP, imaging) is considered.",
-   "A systematic review found no benefit to probiotics used alone.",
-   "Right-sided diverticula predominate in Asian populations, so a right-colon source should not be dismissed."
-  ],
-  "severityClassification": "Hinchey classification of perforated diverticulitis: Stage I - perforation with confined paracolic abscess (modified stage Ia = phlegmon/early abscess); Stage II - perforation that closed spontaneously with distant (pelvic) abscess; Stage III - noncommunicating perforation with purulent peritonitis (diverticular neck closed off); Stage IV - free perforation communicating with the peritoneum producing fecal peritonitis. Clinically, disease is divided into uncomplicated (~75%) and complicated (~25%: abscess 16%, perforation 10%, stricture 5%, fistula 2%) (Harrison 22e p.2579-2580).",
-  "references": [
-   "Harrison 22e p.2578-2581",
-   "Harrison 22e p.2496"
-  ],
-  "crossLinks": [
-   "colorectal_cancer",
-   "bowel_obstruction"
-  ],
-  "management": [
-   "High-fibre diet and adequate hydration to lower intraluminal pressure and reduce the risk of symptomatic and recurrent disease",
-   "Acute uncomplicated diverticulitis managed with bowel rest and, where indicated, antibiotics covering Gram-negative and anaerobic organisms, though selected mild cases may be treated without antibiotics",
-   "Percutaneous drainage of a diverticular abscess and surgical resection (sigmoid colectomy) for complicated disease with perforation, obstruction, fistula or recurrent attacks",
-   "Acute diverticular bleeding managed with resuscitation and transfusion; most stop spontaneously, with colonoscopic haemostasis, superselective mesenteric embolisation or surgery for refractory bleeding",
-   "Analgesia while avoiding agents that impair colonic motility where feasible, with reintroduction of oral intake as symptoms settle",
-   "Colonoscopy after an acute attack has resolved to exclude malignancy, avoiding endoscopy during the acute phase",
-   "Monitor inflammatory markers and clinical response, escalating for surgical review if peritonism or deterioration develops"
-  ]
- },
- "algorithms": [
-  {
-   "id": "diverticular_disease-pathway",
-   "title": "Diverticular Disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Diverticulosis is the most common cause of hematochezia (brisk lower-GI bleed) in patients >60 years; bleeding is abrupt in onset, usually painless, sometimes massive, and often from the right colon. Chronic or occult bleeding is NOT",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of peritonitis indicating diverticular perforation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced abdominal/pelvic CT (diagnostic modality of choice for diverticulitis), Multiplanar CT angiography for active diverticular bleeding localization, Nuclear medicine tagged red-cell scan for bleeding"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: High-fibre diet and adequate hydration to lower intraluminal pressure and reduce the risk of symptomatic and recurrent disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Do NOT perform colonoscopy during acute diverticulitis (risk of perforation); defer it ~6 weeks until the attack resolves."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of diverticular disease."
-  }
- ],
- "tables": [
-  {
-   "id": "diverticular_disease-matrix",
-   "title": "Diverticular Disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Diverticulosis is the most common cause of hematochezia (brisk lower-GI bleed) in patients >60 years; bleeding is abrupt in",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2578-2581",
+    "clinicalPearls": [
+      "Diverticulosis is the most common cause of hematochezia (brisk lower-GI bleed) in patients >60 years; bleeding is abrupt in onset, usually painless, sometimes massive, and often from the right colon. Chronic or occult bleeding is NOT characteristic (Harrison 22e p.2496, 2579).",
+      "Only ~20% of patients with diverticulosis will ever have GI bleeding; most bleeds are self-limited and stop spontaneously with bowel rest (colonic diverticula stop bleeding spontaneously in >=90% of patients). Lifetime risk of rebleeding is ~25% (Harrison 22e p.2496, 2579).",
+      "Acute uncomplicated diverticulitis characteristically presents with fever, anorexia, left lower quadrant abdominal pain, and obstipation (Harrison 22e p.2579).",
+      "Diagnosis of diverticulitis is best made on a contrast-enhanced abdominal and pelvic CT showing sigmoid diverticula, thickened colonic wall >4 mm, and pericolic fat inflammation WITHOUT extravasation of contrast or fluid (Harrison 22e p.2579).",
+      "Diverticula commonly affect the left and sigmoid colon and the rectum is always spared; however in Asian populations 70% of diverticula are in the right colon and cecum (Harrison 22e p.2579).",
+      "The pseudodiverticulum (protrusion of mucosa and submucosa only, through the muscularis propria) is the most common type seen in the colon; a true diverticulum is herniation of the entire bowel wall (Harrison 22e p.2578).",
+      "Perforated diverticular disease is staged using the Hinchey classification (I: confined paracolic abscess; II: distant/pelvic abscess after spontaneous closure; III: noncommunicating perforation with purulent peritonitis; IV: free perforation with fecal peritonitis); modified to add stage Ia for phlegmon/early abscess (Harrison 22e p.2580).",
+      "Pneumaturia or passage of stool/air through the vagina or skin signals a fistula (colovesical, colovaginal, or colocutaneous); colovaginal fistulas are more common in women who have undergone hysterectomy (Harrison 22e p.2579).",
+      "Colonoscopy should be considered ~6 weeks AFTER resolution of a first episode, because colon cancer prevalence is low overall (<2%) but higher after complicated diverticulitis (6-8%) (Harrison 22e p.2580).",
+      "Routine antibiotics do NOT shorten time to symptom resolution or reduce complications/recurrence in immunocompetent patients with uncomplicated diverticular disease (AVOD and DIABOLO trials, plus meta-analysis) (Harrison 22e p.2580).",
+      "Diverticulosis affects about half the population aged >60 years and the majority remain asymptomatic; only ~5% develop acute diverticular disease (Harrison 22e p.2578)."
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced abdominal/pelvic CT (diagnostic modality of choice for diverticulitis), Multiplanar CT angiography for active",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Diverticula form where the nutrient artery (vasa recta) penetrates the muscularis propria, creating a point of weakness in the colonic wall; most arise in the sigmoid colon, likely reflecting its high-pressure zone where higher-amplitude contractions and firm/constipated stool act on a weak segment. Pathogenesis is now viewed as multifactorial rather than simply low-fiber diet: gut dysbiosis, chronic low-grade inflammation driving neuronal degeneration with resulting dysmotility and high intraluminal pressure, and abnormal collagen cross-linking causing loss of compliance all contribute. Genome-wide association studies (Iceland, Denmark, UK biobanks) link LAMB4 (extracellular-matrix laminin family) and TNFSF15 (TNF family, inflammation) variants to early-onset severe disease. Complications occur when the vasa recta is compressed or eroded (bleeding) or a diverticulum perforates (Harrison 22e p.2578-2579).",
+    "additionalDifferentials": [
+      "Colorectal cancer (parallel epidemiology and overlapping presentation; must exclude with colonoscopy after an episode)",
+      "Irritable bowel syndrome (SCAD can mimic it)",
+      "Crohn's disease (diverticulitis can be confused with CD clinically and radiographically)",
+      "Appendicitis",
+      "Ischemic colitis",
+      "Twisted ovarian cyst / gynecologic pathology"
     ],
-    [
-     "Primary Differentials",
-     "Colorectal cancer (parallel epidemiology and overlapping presentation; must exclude with colonoscopy after an episode), Irritable",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Acute appendicitis",
+      "Infectious colitis",
+      "Pelvic inflammatory disease / tubo-ovarian abscess"
     ],
-    [
-     "Management Strategy",
-     "High-fibre diet and adequate hydration to lower intraluminal pressure and reduce the risk of symptomatic and recurrent disease",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Colorectal cancer",
+      "Inflammatory bowel disease (Crohn's disease, ulcerative colitis)",
+      "Irritable bowel syndrome",
+      "Ischemic colitis",
+      "Giant sigmoid diverticulum (air-fluid level in LLQ on plain film)"
     ],
-    [
-     "Clinical Pitfall",
-     "Do NOT perform colonoscopy during acute diverticulitis (risk of perforation); defer it ~6 weeks until the attack resolves.",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Contrast-enhanced abdominal/pelvic CT (diagnostic modality of choice for diverticulitis)",
+      "Multiplanar CT angiography for active diverticular bleeding localization",
+      "Nuclear medicine tagged red-cell scan for bleeding localization",
+      "Mesenteric angiography (allows superselective coil embolization if active bleeding is localized)",
+      "Colonoscopy ~6 weeks after resolution to exclude malignancy (avoid during the acute attack)",
+      "CRP and WBC count to gauge inflammation/disease progression risk"
+    ],
+    "redFlags": [
+      "Signs of peritonitis indicating diverticular perforation",
+      "Abscess formation (~16% of complicated disease) with abdominal distention and localized peritonitis",
+      "Free perforation with fecal peritonitis (Hinchey IV)",
+      "Fistula (colovesical with pneumaturia, colovaginal, colocutaneous)",
+      "Obstruction/stricture",
+      "Air-fluid level in LLQ on plain film suggesting giant sigmoid diverticulum (impending perforation)",
+      "Massive or refractory lower-GI hemorrhage, hemodynamic instability, or large-volume transfusion requirement",
+      "Immunocompromise, chronic renal failure, or collagen-vascular disease (fivefold greater perforation risk on recurrent attacks)"
+    ],
+    "prognosis": "Most patients with diverticulosis stay asymptomatic; only ~5% develop acute diverticular disease, and 10-25% of those with diverticular disease have recurrent symptoms with up to 10% requiring surgery. Diverticular bleeds are largely self-limited (spontaneous cessation in >=90%), with lifetime rebleeding risk ~25%. After complicated diverticulitis the risk of underlying colon cancer rises to 6-8% (vs <2% overall). Elective surgical resection for recurrent SUDD improved quality of life and was more cost-effective at 5 years (DIRECT trial) (Harrison 22e p.2578-2581).",
+    "pitfalls": [
+      "Do NOT perform colonoscopy during acute diverticulitis (risk of perforation); defer it ~6 weeks until the attack resolves.",
+      "Do not reflexively give antibiotics for uncomplicated diverticulitis in immunocompetent patients - trials show no benefit.",
+      "The historical advice to avoid nuts, corn, and popcorn rests on anecdotal data only and is not evidence-based; higher intake was actually associated with lower recurrence risk.",
+      "Mesalazine appears to help symptoms in SUDD but shows no benefit once objective inflammation (CRP, imaging) is considered.",
+      "A systematic review found no benefit to probiotics used alone.",
+      "Right-sided diverticula predominate in Asian populations, so a right-colon source should not be dismissed."
+    ],
+    "severityClassification": "Hinchey classification of perforated diverticulitis: Stage I - perforation with confined paracolic abscess (modified stage Ia = phlegmon/early abscess); Stage II - perforation that closed spontaneously with distant (pelvic) abscess; Stage III - noncommunicating perforation with purulent peritonitis (diverticular neck closed off); Stage IV - free perforation communicating with the peritoneum producing fecal peritonitis. Clinically, disease is divided into uncomplicated (~75%) and complicated (~25%: abscess 16%, perforation 10%, stricture 5%, fistula 2%) (Harrison 22e p.2579-2580).",
+    "references": [
+      "Harrison 22e p.2578-2581",
+      "Harrison 22e p.2496"
+    ],
+    "crossLinks": [
+      "colorectal_cancer",
+      "bowel_obstruction"
+    ],
+    "management": [
+      "High-fibre diet and adequate hydration to lower intraluminal pressure and reduce the risk of symptomatic and recurrent disease",
+      "Acute uncomplicated diverticulitis managed with bowel rest and, where indicated, antibiotics covering Gram-negative and anaerobic organisms, though selected mild cases may be treated without antibiotics",
+      "Percutaneous drainage of a diverticular abscess and surgical resection (sigmoid colectomy) for complicated disease with perforation, obstruction, fistula or recurrent attacks",
+      "Acute diverticular bleeding managed with resuscitation and transfusion; most stop spontaneously, with colonoscopic haemostasis, superselective mesenteric embolisation or surgery for refractory bleeding",
+      "Analgesia while avoiding agents that impair colonic motility where feasible, with reintroduction of oral intake as symptoms settle",
+      "Colonoscopy after an acute attack has resolved to exclude malignancy, avoiding endoscopy during the acute phase",
+      "Monitor inflammatory markers and clinical response, escalating for surgical review if peritonism or deterioration develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for diverticular disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "diverticular-disease-real-image",
-   "title": "Diverticular Disease: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "diverticular_disease-pathway",
+      "title": "Diverticular Disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Diverticulosis is the most common cause of hematochezia (brisk lower-GI bleed) in patients >60 years; bleeding is abrupt in onset, usually painless, sometimes massive, and often from the right colon. Chronic or occult bleeding is NOT",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of peritonitis indicating diverticular perforation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced abdominal/pelvic CT (diagnostic modality of choice for diverticulitis), Multiplanar CT angiography for active diverticular bleeding localization, Nuclear medicine tagged red-cell scan for bleeding"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: High-fibre diet and adequate hydration to lower intraluminal pressure and reduce the risk of symptomatic and recurrent disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Do NOT perform colonoscopy during acute diverticulitis (risk of perforation); defer it ~6 weeks until the attack resolves."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of diverticular disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "diverticular_disease-matrix",
+      "title": "Diverticular Disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diverticulosis is the most common cause of hematochezia (brisk lower-GI bleed) in patients >60 years; bleeding is abrupt in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced abdominal/pelvic CT (diagnostic modality of choice for diverticulitis), Multiplanar CT angiography for active",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Colorectal cancer (parallel epidemiology and overlapping presentation; must exclude with colonoscopy after an episode), Irritable",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "High-fibre diet and adequate hydration to lower intraluminal pressure and reduce the risk of symptomatic and recurrent disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do NOT perform colonoscopy during acute diverticulitis (risk of perforation); defer it ~6 weeks until the attack resolves.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for diverticular disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP, Diverticular Disease: Rapid Evidence Review, 2022",
+      "url": "https://www.aafp.org/pubs/afp/issues/2022/0800/diverticular-disease.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diverticular_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and staging of diverticulitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical triad",
+          "cells": [
+            {
+              "text": "LLQ pain, no vomiting, CRP >5 mg/dL"
+            },
+            {
+              "text": "LR+ 5.3 to 18; specificity 93 to 98%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CRP",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">20",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Suggests perforation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "WBC",
+          "cells": [
+            {
+              "text": "Normal in 45%"
+            },
+            {
+              "text": "Does not exclude diverticulitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Contrast CT",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 94, specificity 99"
+            },
+            {
+              "text": "{{hy:Test of choice}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT colonic wall thickness",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": ">4 with pericolic fat stranding",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "Sigmoid diverticula without extravasation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hinchey I (Ia phlegmon)",
+          "cells": [
+            {
+              "text": "Confined paracolic abscess"
+            },
+            {
+              "text": "Nonoperative first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hinchey II",
+          "cells": [
+            {
+              "text": "Distant pelvic abscess"
+            },
+            {
+              "text": "Nonoperative first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hinchey III",
+          "cells": [
+            {
+              "text": "Purulent peritonitis"
+            },
+            {
+              "text": "Surgical consultation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hinchey IV",
+          "cells": [
+            {
+              "text": "Faecal peritonitis, free perforation"
+            },
+            {
+              "text": "Surgical consultation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumaturia or stool per vagina",
+          "cells": [
+            {
+              "text": "Fistula"
+            },
+            {
+              "text": "Colovesical or colovaginal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diverticular bleeding",
+          "cells": [
+            {
+              "text": "Painless brisk haematochezia, often right colon"
+            },
+            {
+              "text": "Stops spontaneously in 90% or more; rebleed about 25%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diverticular_disease-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of diverticulitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Colorectal cancer",
+          "cells": [
+            {
+              "text": "{{hy:Same age group; risk higher after complicated attack}}"
+            },
+            {
+              "text": "Colonoscopy after resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Appendicitis",
+          "cells": [
+            {
+              "text": "Right-sided pain; right-sided diverticula common in Asians"
+            },
+            {
+              "text": "CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn's disease",
+          "cells": [
+            {
+              "text": "Can mimic clinically and radiologically"
+            },
+            {
+              "text": "Colonoscopy with biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic colitis",
+          "cells": [
+            {
+              "text": "Older, vascular risk, bloody diarrhoea"
+            },
+            {
+              "text": "CT, colonoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "Chronic symptoms without inflammation"
+            },
+            {
+              "text": "Normal CRP and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecological disease",
+          "cells": [
+            {
+              "text": "Ovarian torsion, PID, tubo-ovarian abscess"
+            },
+            {
+              "text": "Pelvic ultrasound, pregnancy test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious colitis",
+          "cells": [
+            {
+              "text": "Diarrhoea predominant"
+            },
+            {
+              "text": "Stool studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diverticular_disease-treatment",
+      "kind": "treatment",
+      "title": "Treatment of diverticular disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Outpatient care without routine antibiotics",
+          "cells": [
+            {
+              "text": "{{hy:Uncomplicated, immunocompetent}}, normal vitals, tolerating oral intake"
+            },
+            {
+              "text": "Review at 2 to 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amoxicillin-clavulanate 875/125 mg, or ciprofloxacin 500 mg twice daily plus metronidazole 500 mg three times daily",
+          "cells": [
+            {
+              "text": "Uncomplicated not improving after 48 to 72 h"
+            },
+            {
+              "text": "7 to 10 days; TMP-SMX plus metronidazole alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV piperacillin-tazobactam, ertapenem 1 g daily, or cephalosporin plus metronidazole",
+          "cells": [
+            {
+              "text": "Complicated diverticulitis, inpatient"
+            },
+            {
+              "text": "Switch to oral after 2 to 4 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV antibiotics and observation",
+          "cells": [
+            {
+              "text": "Abscess under 3 cm"
+            },
+            {
+              "text": "Drain or operate if worse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Percutaneous drainage",
+          "cells": [
+            {
+              "text": "Abscess 3 cm or more, stable"
+            },
+            {
+              "text": "Surgery if fails or worsening"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Hinchey III to IV, obstruction, fistula"
+            },
+            {
+              "text": "Elective colectomy not routine; consider after drained abscess"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resuscitation; colonoscopic haemostasis or embolisation",
+          "cells": [
+            {
+              "text": "Diverticular bleeding"
+            },
+            {
+              "text": "Most stop spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "6 to 8 weeks after complicated attack"
+            },
+            {
+              "text": "Avoid during acute attack"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fibre-rich diet, activity, avoid smoking and NSAIDs",
+          "cells": [
+            {
+              "text": "Prevention"
+            },
+            {
+              "text": "Nuts and seeds need not be avoided; no mesalamine"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison gives colon cancer prevalence under 2% overall and 6 to 8% after complicated diverticulitis; AAFP gives 1.3% and 7.9%. Harrison advises colonoscopy at about 6 weeks, AAFP at 6 to 8 weeks."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diverticular_disease-dx-mgmt",
+      "title": "Diagnosis and management of acute diverticulitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "LLQ pain, fever, suspected diverticulitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Contrast CT abdomen and pelvis, CRP, WBC",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Complicated: abscess, perforation, fistula, obstruction?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Stable vitals and tolerating oral intake?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Outpatient, no routine antibiotics; review at 2 to 3 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Admit; IV antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Peritonitis (Hinchey III to IV)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Emergency surgery",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Abscess 3 cm or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Percutaneous drainage",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Colonoscopy 6 to 8 weeks after resolution",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

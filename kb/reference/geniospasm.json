@@ -1,169 +1,429 @@
 {
- "id": "geniospasm",
- "name": "Hereditary geniospasm",
- "aliases": [
-  "hereditary chin trembling",
-  "familial geniospasm",
-  "hereditary essential chin myoclonus"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Episodic involuntary trembling of the chin and lower lip, caused by contraction of the mentalis muscle",
-   "It is inherited in an autosomal dominant pattern and usually begins in early childhood",
-   "Episodes are typically triggered by emotion, stress or concentration and last seconds to minutes",
-   "The movements can occasionally be intense enough to interfere with speech or, rarely, disrupt sleep",
-   "It is benign, and diagnosis is clinical, supported by a positive family history",
-   "Treatment is often unnecessary, though botulinum toxin to the mentalis muscle helps troublesome cases"
+  "id": "geniospasm",
+  "name": "Hereditary geniospasm",
+  "aliases": [
+    "hereditary chin trembling",
+    "familial geniospasm",
+    "hereditary essential chin myoclonus"
   ],
-  "pathophysiology": "Hereditary geniospasm is a benign familial movement disorder in which involuntary rhythmic or trembling contractions of the mentalis muscle produce chin and lower-lip quivering. It is inherited as an autosomal dominant trait with linkage reported to a locus on chromosome 9, and the movements are thought to reflect a central hyperexcitability affecting the facial motor control for the chin, provoked by emotional and cognitive arousal. The disorder is not associated with progressive neurological disease.",
-  "additionalDifferentials": [
-   "Facial tics",
-   "Focal facial dystonia",
-   "Facial myokymia",
-   "Functional facial movements",
-   "Essential tremor involving the face"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the characteristic chin trembling and family history",
-   "Examination localising the movement to the mentalis muscle",
-   "Exclusion of tics and dystonia on clinical grounds",
-   "Genetic counselling where a family history is present",
-   "Further investigation only if atypical features suggest another disorder"
-  ],
-  "redFlags": [
-   "Onset in adulthood without family history",
-   "Spread beyond the chin or additional neurological signs",
-   "Progressive course",
-   "Features suggesting a tic disorder or dystonia needing separate management"
-  ],
-  "prognosis": "The condition is benign and lifelong, tending to lessen with age; it does not shorten life or herald other neurological disease, and troublesome cases respond to botulinum toxin.",
-  "pitfalls": [
-   "Mistaking it for a tic or facial dystonia",
-   "Overlooking the autosomal dominant family history",
-   "Investigating a clearly benign familial condition excessively",
-   "Failing to offer botulinum toxin when episodes are socially disabling"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Movement Disorders textbook (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance about the benign, lifelong nature of the condition, since treatment is often unnecessary and symptoms tend to lessen with age",
-   "Botulinum toxin injection into the mentalis muscle for socially or functionally troublesome chin and lip quivering",
-   "Trial of an anticonvulsant or benzodiazepine reported to help severe episodes that disrupt speech or sleep",
-   "Advice on recognising and moderating emotional stress and concentration as provoking triggers",
-   "Genetic counselling for the autosomal dominant inheritance, supported by a positive family history",
-   "Reassess if atypical or progressive features emerge, to exclude tics, dystonia or other movement disorders"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "geniospasm-pathway",
-   "title": "Hereditary geniospasm: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Episodic involuntary trembling of the chin and lower lip, caused by contraction of the mentalis muscle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Onset in adulthood without family history",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the characteristic chin trembling and family history, Examination localising the movement to the mentalis muscle, Exclusion of tics and dystonia on clinical grounds"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance about the benign, lifelong nature of the condition, since treatment is often unnecessary and symptoms tend to lessen with age"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for a tic or facial dystonia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary geniospasm."
-  }
- ],
- "tables": [
-  {
-   "id": "geniospasm-matrix",
-   "title": "Hereditary geniospasm: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Episodic involuntary trembling of the chin and lower lip, caused by contraction of the mentalis muscle",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Episodic involuntary trembling of the chin and lower lip, caused by contraction of the mentalis muscle",
+      "It is inherited in an autosomal dominant pattern and usually begins in early childhood",
+      "Episodes are typically triggered by emotion, stress or concentration and last seconds to minutes",
+      "The movements can occasionally be intense enough to interfere with speech or, rarely, disrupt sleep",
+      "It is benign, and diagnosis is clinical, supported by a positive family history",
+      "Treatment is often unnecessary, though botulinum toxin to the mentalis muscle helps troublesome cases"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the characteristic chin trembling and family history, Examination localising the movement to the mentalis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary geniospasm is a benign familial movement disorder in which involuntary rhythmic or trembling contractions of the mentalis muscle produce chin and lower-lip quivering. It is inherited as an autosomal dominant trait with linkage reported to a locus on chromosome 9, and the movements are thought to reflect a central hyperexcitability affecting the facial motor control for the chin, provoked by emotional and cognitive arousal. The disorder is not associated with progressive neurological disease.",
+    "additionalDifferentials": [
+      "Facial tics",
+      "Focal facial dystonia",
+      "Facial myokymia",
+      "Functional facial movements",
+      "Essential tremor involving the face"
     ],
-    [
-     "Primary Differentials",
-     "Facial tics, Focal facial dystonia, Facial myokymia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the characteristic chin trembling and family history",
+      "Examination localising the movement to the mentalis muscle",
+      "Exclusion of tics and dystonia on clinical grounds",
+      "Genetic counselling where a family history is present",
+      "Further investigation only if atypical features suggest another disorder"
     ],
-    [
-     "Management Strategy",
-     "Reassurance about the benign, lifelong nature of the condition, since treatment is often unnecessary and symptoms tend to lessen",
-     "Core treatment modality"
+    "redFlags": [
+      "Onset in adulthood without family history",
+      "Spread beyond the chin or additional neurological signs",
+      "Progressive course",
+      "Features suggesting a tic disorder or dystonia needing separate management"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for a tic or facial dystonia",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and lifelong, tending to lessen with age; it does not shorten life or herald other neurological disease, and troublesome cases respond to botulinum toxin.",
+    "pitfalls": [
+      "Mistaking it for a tic or facial dystonia",
+      "Overlooking the autosomal dominant family history",
+      "Investigating a clearly benign familial condition excessively",
+      "Failing to offer botulinum toxin when episodes are socially disabling"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Movement Disorders textbook (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance about the benign, lifelong nature of the condition, since treatment is often unnecessary and symptoms tend to lessen with age",
+      "Botulinum toxin injection into the mentalis muscle for socially or functionally troublesome chin and lip quivering",
+      "Trial of an anticonvulsant or benzodiazepine reported to help severe episodes that disrupt speech or sleep",
+      "Advice on recognising and moderating emotional stress and concentration as provoking triggers",
+      "Genetic counselling for the autosomal dominant inheritance, supported by a positive family history",
+      "Reassess if atypical or progressive features emerge, to exclude tics, dystonia or other movement disorders"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary geniospasm."
-  }
- ],
- "diagrams": [
-  {
-   "id": "geniospasm-real-image",
-   "title": "Hereditary geniospasm: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "geniospasm-pathway",
+      "title": "Hereditary geniospasm: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Episodic involuntary trembling of the chin and lower lip, caused by contraction of the mentalis muscle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Onset in adulthood without family history",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the characteristic chin trembling and family history, Examination localising the movement to the mentalis muscle, Exclusion of tics and dystonia on clinical grounds"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance about the benign, lifelong nature of the condition, since treatment is often unnecessary and symptoms tend to lessen with age"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for a tic or facial dystonia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary geniospasm."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "geniospasm-matrix",
+      "title": "Hereditary geniospasm: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Episodic involuntary trembling of the chin and lower lip, caused by contraction of the mentalis muscle",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the characteristic chin trembling and family history, Examination localising the movement to the mentalis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Facial tics, Focal facial dystonia, Facial myokymia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance about the benign, lifelong nature of the condition, since treatment is often unnecessary and symptoms tend to lessen",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for a tic or facial dystonia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary geniospasm."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "geniospasm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from chin trembling and family history",
+          "cells": [
+            {
+              "text": "Characteristic chin trembling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination localising the movement",
+          "cells": [
+            {
+              "text": "Localised to the mentalis muscle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of tics and dystonia",
+          "cells": [
+            {
+              "text": "On clinical grounds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Where a family history is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "geniospasm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Facial tics",
+          "cells": [
+            {
+              "text": "Tic disorders need separate management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal facial dystonia",
+          "cells": [
+            {
+              "text": "Features suggesting dystonia need separate management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "geniospasm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and lifelong; treatment often unnecessary; symptoms tend to lessen with age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin to the mentalis muscle",
+          "cells": [
+            {
+              "text": "For socially or functionally troublesome chin and lip quivering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant or benzodiazepine trial",
+          "cells": [
+            {
+              "text": "Reported to help severe episodes that disrupt speech or sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger moderation",
+          "cells": [
+            {
+              "text": "Recognising emotional stress and concentration as provoking triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance, supported by a positive family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "If atypical or progressive features emerge, to exclude tics, dystonia or other disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "geniospasm-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary geniospasm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected hereditary geniospasm: chin trembling with a family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (adult onset, spread beyond the chin, progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist review for spread beyond the chin or additional neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis, mentalis localisation, exclusion of tics and dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the chin tremor localised to the mentalis with a positive family history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider facial tics, focal facial dystonia, facial myokymia or functional movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance that the condition is benign and lifelong; treatment often unnecessary",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Botulinum toxin into the mentalis muscle for troublesome chin and lip quivering",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticonvulsant or benzodiazepine trial for severe episodes disrupting speech or sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, lifelong and often lessening with age; does not shorten life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

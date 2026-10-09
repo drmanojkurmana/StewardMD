@@ -1,191 +1,942 @@
 {
- "id": "cryptococcosis",
- "name": "Cryptococcosis",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 221,
- "page": 1703,
- "aliases": [
-  "Cryptococcus neoformans infection",
-  "cryptococcal meningitis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1703-1706",
-  "clinicalPearls": [
-   "Caused by Cryptococcus, a genus of yeast-like fungi; WHO declared C. neoformans a critical priority pathogen in 2022 (p.1703).",
-   "C. neoformans and C. gattii are now regarded as species complexes; for clinical purposes both cause indistinguishable disease termed cryptococcosis (p.1703-1704).",
-   "High-risk hosts for C. neoformans: hematologic malignancy, solid-organ transplant, advanced liver disease, diabetes, glucocorticoid therapy, and advanced HIV with CD4+ counts <200/uL (p.1704).",
-   "C. gattii disease is NOT generally associated with specific immune deficits and often occurs in immunocompetent individuals; associated with autoantibodies to GM-CSF (p.1704).",
-   "Disease usually presents as pulmonary disease and/or chronic meningoencephalitis, but cryptococcosis can affect any tissue or organ (p.1704-1705).",
-   "Cryptococcal meningitis differs from bacterial meningitis: many patients present with symptoms of several weeks' duration and classic meningismus may be absent; indolent cases can present as subacute dementia or depression (p.1705).",
-   "In AIDS patients, cryptococcal meningitis is the initial AIDS-defining illness in ~2% and generally occurs with CD4+ counts <100/uL; about one-third also have pulmonary disease (p.1606).",
-   "Diagnosis requires demonstration of cryptococcal cells or antigen in normally sterile tissue; India ink of CSF shows encapsulated yeast and CRAg (serum/CSF) is both sensitive and specific with rapid point-of-care lateral flow assays (p.1705).",
-   "Increased intracranial pressure in cryptococcal meningoencephalitis is managed by repeated therapeutic lumbar punctures and shunt placement; mannitol and acetazolamide are NOT effective (p.1706).",
-   "Immune reconstitution inflammatory syndrome (IRIS) can occur after starting ART in HIV; recommended to start ART 4-6 weeks after initiating antifungal therapy (p.1706).",
-   "Serum CRAg screening is recommended for asymptomatic people with HIV and CD4+ counts <100-200/uL to identify those at high risk of cryptococcal disease (p.1705-1706)."
+  "id": "cryptococcosis",
+  "name": "Cryptococcosis",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 221,
+  "page": 1703,
+  "aliases": [
+    "Cryptococcus neoformans infection",
+    "cryptococcal meningitis"
   ],
-  "pathophysiology": "Cryptococcal infection is almost always acquired by inhalation of aerosolized particles (small desiccated yeast cells or basidiospores); occasionally by direct skin inoculation. C. neoformans is found in soils contaminated with avian (pigeon) excreta, whereas C. gattii inhabits arboreal species such as eucalyptus and is not found in bird feces. Infection is acquired in childhood and is common, but disease is rare in the absence of impaired immunity, indicating that intact pulmonary defenses effectively contain the fungus. Some infections lead to latency with viable organisms harbored in granulomas. Extrapulmonary dissemination to the CNS may occur via direct fungal migration across endothelium and via macrophage 'Trojan horse' carriage. Virulence factors include the antiphagocytic polysaccharide capsule, melanin production, and enzymes (phospholipase, urease). Copious release of capsular polysaccharide into tissues interferes with local immune responses, and infection may elicit little or no inflammatory response; capsular polysaccharide is the antigen measured diagnostically (p.1704).",
-  "additionalDifferentials": [
-   "Tuberculous (chronic) meningitis",
-   "Other fungal meningitides (e.g., Coccidioides, Histoplasma)",
-   "Subacute dementia or depression (indolent CNS cryptococcosis mimic)",
-   "Carcinomatous meningitis",
-   "Pulmonary malignancy or other causes of lung nodules/masses (pulmonary cryptococcosis found incidentally on chest radiograph)"
-  ],
-  "infectionMimics": [
-   "Tuberculosis (chronic meningitis and pulmonary disease)",
-   "Molluscum contagiosum (cutaneous cryptococcosis in highly immunosuppressed patients resembles its lesions)",
-   "Other disseminated/endemic fungal infections (histoplasmosis, coccidioidomycosis, blastomycosis)"
-  ],
-  "nonInfectiousMimics": [
-   "Carcinomatous (neoplastic) meningitis",
-   "Subacute dementia",
-   "Depression",
-   "Pulmonary malignancy (cryptococcoma/nodule mimicking neoplasm)"
-  ],
-  "additionalInvestigations": [
-   "CSF examination: opening pressure, protein, glucose, cell count, Gram stain, cultures",
-   "India ink stain of CSF for encapsulated yeast",
-   "Cryptococcal antigen (CRAg) assay in CSF and blood; point-of-care lateral flow assay",
-   "Fungal cultures of CSF and blood (blood cultures often positive)",
-   "Serum CRAg screening in HIV with low CD4+ counts",
-   "PCR (confirm positive or negative results with independent methods such as CRAg and culture)",
-   "Chest imaging for pulmonary disease (nodules, infiltrates, masses)",
-   "Biopsy for CNS cryptococcoma or to distinguish inadequately treated infection from immune reconstitution syndrome"
-  ],
-  "redFlags": [
-   "Raised intracranial pressure in cryptococcal meningoencephalitis requiring serial therapeutic lumbar puncture drainage (and possible shunt placement)",
-   "Sudden catastrophic vision loss from meningeal cryptococcosis",
-   "Cranial nerve paresis, vision and hearing loss",
-   "Altered mental status, headache, and blurred vision as clues to elevated ICP",
-   "Refractory cryptococcosis despite antifungal therapy (prompt susceptibility testing)"
-  ],
-  "prognosis": "Even with antifungal therapy, cryptococcosis carries high morbidity and mortality. The most important prognostic factors are the extent and duration of the underlying immunologic deficit. Disease is often curable in those with no apparent immune dysfunction, but in irreversible immunosuppression the goal is remission maintained by lifelong suppressive therapy. Before ART, median survival for AIDS patients with cryptococcosis was <1 year. Cryptococcosis with underlying neoplastic disease has a particularly poor prognosis. Poor prognostic markers for CNS disease: positive India ink on initial CSF exam (heavy fungal burden), high CSF pressure, low CSF glucose, low CSF pleocytosis (<2/uL), recovery of yeast from extraneural sites, absence of antibody to capsular polysaccharide, CSF or serum cryptococcal antigen level >=1:32, and concomitant glucocorticoid therapy or hematologic malignancy. Relapse is common even with relatively intact immunity (p.1706).",
-  "pitfalls": [
-   "India ink and Gram stain may be falsely negative with low fungal burden or misread as positive by inexperienced operators (p.1705).",
-   "CRAg is often negative in pulmonary cryptococcosis, so it is less useful for diagnosing pulmonary disease and of only limited use in monitoring response to therapy (p.1705).",
-   "Cryptococcal cells with negative cultures on CSF staining and persistently elevated CSF/blood cryptococcal antigen long after culture clearance do NOT indicate treatment failure (p.1705).",
-   "Categorizing cryptococcosis as 'extrapulmonary without CNS involvement' should be made only after CSF evaluation reveals no evidence of cryptococcal infection (p.1705).",
-   "Prophylactic dexamethasone in HIV-associated cryptococcosis is NOT recommended (associated with reduced fungal clearance and increased mortality); glucocorticoids are not helpful for raised ICP unless from a mass lesion with edema (p.1706).",
-   "Echinocandins are NOT effective against Cryptococcus species (p.1706).",
-   "IRIS can be difficult to distinguish from relapsing/refractory infection (p.1706)."
-  ],
-  "severityClassification": "Nonsevere disease limited to the lungs or other non-CNS sites is distinguished from severe disease or CNS involvement; severe/CNS cryptococcosis is treated with induction, consolidation, and maintenance phases (p.1705).",
-  "references": [
-   "Harrison 22e p.1703-1706",
-   "Harrison 22e p.1606-1607"
-  ],
-  "crossLinks": [
-   "MENINGITIS",
-   "ENCEPHALITIS"
-  ],
-  "management": [
-   "Treat meningoencephalitis and severe disease with induction antifungal therapy combining liposomal amphotericin B and flucytosine",
-   "Follow induction with consolidation and prolonged maintenance therapy using the azole fluconazole",
-   "Control raised intracranial pressure in meningitis with repeated therapeutic lumbar punctures and cerebrospinal fluid diversion where needed",
-   "Address the underlying immune deficit by starting or optimising antiretroviral therapy in HIV, timed to reduce immune reconstitution inflammatory syndrome, and by reducing immunosuppression where feasible",
-   "Screen for cryptococcal antigenaemia in advanced HIV and give pre-emptive fluconazole to those who are antigen-positive without meningitis",
-   "Monitor response with follow-up cerebrospinal fluid cultures and repeat pressure measurement",
-   "Coordinate care with infectious diseases specialists and, for large lesions or hydrocephalus, neurosurgery"
-  ]
- },
- "algorithms": [
-  {
-   "id": "cryptococcosis-pathway",
-   "title": "Cryptococcosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Cryptococcus, a genus of yeast-like fungi; WHO declared C. neoformans a critical priority pathogen in 2022 (p.1703).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Raised intracranial pressure in cryptococcal meningoencephalitis requiring serial therapeutic lumbar puncture drainage (and possible shunt placement)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CSF examination: opening pressure, protein, glucose, cell count, Gram stain, cultures, India ink stain of CSF for encapsulated yeast, Cryptococcal antigen (CRAg) assay in CSF and blood; point-of-care lateral flow assay"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat meningoencephalitis and severe disease with induction antifungal therapy combining liposomal amphotericin B and flucytosine"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: India ink and Gram stain may be falsely negative with low fungal burden or misread as positive by inexperienced operators (p.1705)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cryptococcosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cryptococcosis-matrix",
-   "title": "Cryptococcosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Cryptococcus, a genus of yeast-like fungi; WHO declared C. neoformans a critical priority pathogen in 2022 (p.1703).",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1703-1706",
+    "clinicalPearls": [
+      "Caused by Cryptococcus, a genus of yeast-like fungi; WHO declared C. neoformans a critical priority pathogen in 2022 (p.1703).",
+      "C. neoformans and C. gattii are now regarded as species complexes; for clinical purposes both cause indistinguishable disease termed cryptococcosis (p.1703-1704).",
+      "High-risk hosts for C. neoformans: hematologic malignancy, solid-organ transplant, advanced liver disease, diabetes, glucocorticoid therapy, and advanced HIV with CD4+ counts <200/uL (p.1704).",
+      "C. gattii disease is NOT generally associated with specific immune deficits and often occurs in immunocompetent individuals; associated with autoantibodies to GM-CSF (p.1704).",
+      "Disease usually presents as pulmonary disease and/or chronic meningoencephalitis, but cryptococcosis can affect any tissue or organ (p.1704-1705).",
+      "Cryptococcal meningitis differs from bacterial meningitis: many patients present with symptoms of several weeks' duration and classic meningismus may be absent; indolent cases can present as subacute dementia or depression (p.1705).",
+      "In AIDS patients, cryptococcal meningitis is the initial AIDS-defining illness in ~2% and generally occurs with CD4+ counts <100/uL; about one-third also have pulmonary disease (p.1606).",
+      "Diagnosis requires demonstration of cryptococcal cells or antigen in normally sterile tissue; India ink of CSF shows encapsulated yeast and CRAg (serum/CSF) is both sensitive and specific with rapid point-of-care lateral flow assays (p.1705).",
+      "Increased intracranial pressure in cryptococcal meningoencephalitis is managed by repeated therapeutic lumbar punctures and shunt placement; mannitol and acetazolamide are NOT effective (p.1706).",
+      "Immune reconstitution inflammatory syndrome (IRIS) can occur after starting ART in HIV; recommended to start ART 4-6 weeks after initiating antifungal therapy (p.1706).",
+      "Serum CRAg screening is recommended for asymptomatic people with HIV and CD4+ counts <100-200/uL to identify those at high risk of cryptococcal disease (p.1705-1706)."
     ],
-    [
-     "Key Investigations",
-     "CSF examination: opening pressure, protein, glucose, cell count, Gram stain, cultures, India ink stain of CSF for encapsulated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cryptococcal infection is almost always acquired by inhalation of aerosolized particles (small desiccated yeast cells or basidiospores); occasionally by direct skin inoculation. C. neoformans is found in soils contaminated with avian (pigeon) excreta, whereas C. gattii inhabits arboreal species such as eucalyptus and is not found in bird feces. Infection is acquired in childhood and is common, but disease is rare in the absence of impaired immunity, indicating that intact pulmonary defenses effectively contain the fungus. Some infections lead to latency with viable organisms harbored in granulomas. Extrapulmonary dissemination to the CNS may occur via direct fungal migration across endothelium and via macrophage 'Trojan horse' carriage. Virulence factors include the antiphagocytic polysaccharide capsule, melanin production, and enzymes (phospholipase, urease). Copious release of capsular polysaccharide into tissues interferes with local immune responses, and infection may elicit little or no inflammatory response; capsular polysaccharide is the antigen measured diagnostically (p.1704).",
+    "additionalDifferentials": [
+      "Tuberculous (chronic) meningitis",
+      "Other fungal meningitides (e.g., Coccidioides, Histoplasma)",
+      "Subacute dementia or depression (indolent CNS cryptococcosis mimic)",
+      "Carcinomatous meningitis",
+      "Pulmonary malignancy or other causes of lung nodules/masses (pulmonary cryptococcosis found incidentally on chest radiograph)"
     ],
-    [
-     "Primary Differentials",
-     "Tuberculous (chronic) meningitis, Other fungal meningitides (e.g., Coccidioides, Histoplasma), Subacute dementia or depression",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Tuberculosis (chronic meningitis and pulmonary disease)",
+      "Molluscum contagiosum (cutaneous cryptococcosis in highly immunosuppressed patients resembles its lesions)",
+      "Other disseminated/endemic fungal infections (histoplasmosis, coccidioidomycosis, blastomycosis)"
     ],
-    [
-     "Management Strategy",
-     "Treat meningoencephalitis and severe disease with induction antifungal therapy combining liposomal amphotericin B and flucytosine",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Carcinomatous (neoplastic) meningitis",
+      "Subacute dementia",
+      "Depression",
+      "Pulmonary malignancy (cryptococcoma/nodule mimicking neoplasm)"
     ],
-    [
-     "Clinical Pitfall",
-     "India ink and Gram stain may be falsely negative with low fungal burden or misread as positive by inexperienced operators",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "CSF examination: opening pressure, protein, glucose, cell count, Gram stain, cultures",
+      "India ink stain of CSF for encapsulated yeast",
+      "Cryptococcal antigen (CRAg) assay in CSF and blood; point-of-care lateral flow assay",
+      "Fungal cultures of CSF and blood (blood cultures often positive)",
+      "Serum CRAg screening in HIV with low CD4+ counts",
+      "PCR (confirm positive or negative results with independent methods such as CRAg and culture)",
+      "Chest imaging for pulmonary disease (nodules, infiltrates, masses)",
+      "Biopsy for CNS cryptococcoma or to distinguish inadequately treated infection from immune reconstitution syndrome"
+    ],
+    "redFlags": [
+      "Raised intracranial pressure in cryptococcal meningoencephalitis requiring serial therapeutic lumbar puncture drainage (and possible shunt placement)",
+      "Sudden catastrophic vision loss from meningeal cryptococcosis",
+      "Cranial nerve paresis, vision and hearing loss",
+      "Altered mental status, headache, and blurred vision as clues to elevated ICP",
+      "Refractory cryptococcosis despite antifungal therapy (prompt susceptibility testing)"
+    ],
+    "prognosis": "Even with antifungal therapy, cryptococcosis carries high morbidity and mortality. The most important prognostic factors are the extent and duration of the underlying immunologic deficit. Disease is often curable in those with no apparent immune dysfunction, but in irreversible immunosuppression the goal is remission maintained by lifelong suppressive therapy. Before ART, median survival for AIDS patients with cryptococcosis was <1 year. Cryptococcosis with underlying neoplastic disease has a particularly poor prognosis. Poor prognostic markers for CNS disease: positive India ink on initial CSF exam (heavy fungal burden), high CSF pressure, low CSF glucose, low CSF pleocytosis (<2/uL), recovery of yeast from extraneural sites, absence of antibody to capsular polysaccharide, CSF or serum cryptococcal antigen level >=1:32, and concomitant glucocorticoid therapy or hematologic malignancy. Relapse is common even with relatively intact immunity (p.1706).",
+    "pitfalls": [
+      "India ink and Gram stain may be falsely negative with low fungal burden or misread as positive by inexperienced operators (p.1705).",
+      "CRAg is often negative in pulmonary cryptococcosis, so it is less useful for diagnosing pulmonary disease and of only limited use in monitoring response to therapy (p.1705).",
+      "Cryptococcal cells with negative cultures on CSF staining and persistently elevated CSF/blood cryptococcal antigen long after culture clearance do NOT indicate treatment failure (p.1705).",
+      "Categorizing cryptococcosis as 'extrapulmonary without CNS involvement' should be made only after CSF evaluation reveals no evidence of cryptococcal infection (p.1705).",
+      "Prophylactic dexamethasone in HIV-associated cryptococcosis is NOT recommended (associated with reduced fungal clearance and increased mortality); glucocorticoids are not helpful for raised ICP unless from a mass lesion with edema (p.1706).",
+      "Echinocandins are NOT effective against Cryptococcus species (p.1706).",
+      "IRIS can be difficult to distinguish from relapsing/refractory infection (p.1706)."
+    ],
+    "severityClassification": "Nonsevere disease limited to the lungs or other non-CNS sites is distinguished from severe disease or CNS involvement; severe/CNS cryptococcosis is treated with induction, consolidation, and maintenance phases (p.1705).",
+    "references": [
+      "Harrison 22e p.1703-1706",
+      "Harrison 22e p.1606-1607"
+    ],
+    "crossLinks": [
+      "MENINGITIS",
+      "ENCEPHALITIS"
+    ],
+    "management": [
+      "Treat meningoencephalitis and severe disease with induction antifungal therapy combining liposomal amphotericin B and flucytosine",
+      "Follow induction with consolidation and prolonged maintenance therapy using the azole fluconazole",
+      "Control raised intracranial pressure in meningitis with repeated therapeutic lumbar punctures and cerebrospinal fluid diversion where needed",
+      "Address the underlying immune deficit by starting or optimising antiretroviral therapy in HIV, timed to reduce immune reconstitution inflammatory syndrome, and by reducing immunosuppression where feasible",
+      "Screen for cryptococcal antigenaemia in advanced HIV and give pre-emptive fluconazole to those who are antigen-positive without meningitis",
+      "Monitor response with follow-up cerebrospinal fluid cultures and repeat pressure measurement",
+      "Coordinate care with infectious diseases specialists and, for large lesions or hydrocephalus, neurosurgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for cryptococcosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cryptococcosis-real-image",
-   "title": "Cryptococcosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "cryptococcosis-pathway",
+      "title": "Cryptococcosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Cryptococcus, a genus of yeast-like fungi; WHO declared C. neoformans a critical priority pathogen in 2022 (p.1703).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Raised intracranial pressure in cryptococcal meningoencephalitis requiring serial therapeutic lumbar puncture drainage (and possible shunt placement)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CSF examination: opening pressure, protein, glucose, cell count, Gram stain, cultures, India ink stain of CSF for encapsulated yeast, Cryptococcal antigen (CRAg) assay in CSF and blood; point-of-care lateral flow assay"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat meningoencephalitis and severe disease with induction antifungal therapy combining liposomal amphotericin B and flucytosine"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: India ink and Gram stain may be falsely negative with low fungal burden or misread as positive by inexperienced operators (p.1705)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cryptococcosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cryptococcosis-matrix",
+      "title": "Cryptococcosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Cryptococcus, a genus of yeast-like fungi; WHO declared C. neoformans a critical priority pathogen in 2022 (p.1703).",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CSF examination: opening pressure, protein, glucose, cell count, Gram stain, cultures, India ink stain of CSF for encapsulated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tuberculous (chronic) meningitis, Other fungal meningitides (e.g., Coccidioides, Histoplasma), Subacute dementia or depression",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat meningoencephalitis and severe disease with induction antifungal therapy combining liposomal amphotericin B and flucytosine",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "India ink and Gram stain may be falsely negative with low fungal burden or misread as positive by inexperienced operators",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cryptococcosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Cryptococcosis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/cryptococcosis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "WHO, rapid advice on cryptococcal disease treatment, 2022",
+      "url": "https://www.who.int/news/item/20-04-2022-rapid-advice-new-guidelines-for-simpler-safer-treatment-for-cryptococcal-disease-in-plhiv",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 189-13",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 132-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cryptococcosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of cryptococcosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Test or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "CSF or serum cryptococcal antigen (lateral flow assay)",
+          "cells": [
+            {
+              "text": "{{hy:Preferred test; sensitivity and specificity over 99%}}"
+            },
+            {
+              "text": "Often negative in isolated pulmonary disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "India ink stain of CSF",
+          "cells": [
+            {
+              "text": "Encapsulated budding yeast"
+            },
+            {
+              "text": "Can be falsely negative with low burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF opening pressure",
+          "cells": [
+            {
+              "text": "Often raised"
+            },
+            {
+              "text": "Drives need for therapeutic lumbar punctures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF profile",
+          "cells": [
+            {
+              "text": "High protein, lymphocytic pleocytosis, low glucose"
+            },
+            {
+              "text": "Classic meningism may be absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fungal cultures of CSF, blood, urine, sputum",
+          "cells": [
+            {
+              "text": "Blood often positive in advanced HIV"
+            },
+            {
+              "text": "Urine often positive in disseminated disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CD4 count in HIV-associated meningitis",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Usually <100",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "High-risk hosts also include transplant, steroids, haematologic cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CRAg screening in HIV",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "CD4 <100 to 200",
+              "range": [
+                100,
+                200
+              ]
+            },
+            {
+              "text": "Identifies antigenaemia before meningitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture in any cryptococcal infection",
+          "cells": [
+            {
+              "text": "Required before calling disease non-CNS"
+            },
+            {
+              "text": "Defines treatment intensity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptococcosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of cryptococcal meningitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculous meningitis",
+          "cells": [
+            {
+              "text": "Subacute course, basal meningitis"
+            },
+            {
+              "text": "{{hy:CSF CRAg negative}}; TB tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other fungal meningitis (Coccidioides, Histoplasma)",
+          "cells": [
+            {
+              "text": "Endemic exposure"
+            },
+            {
+              "text": "Fungal antigen and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinomatous meningitis",
+          "cells": [
+            {
+              "text": "Known cancer"
+            },
+            {
+              "text": "CSF cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial meningitis",
+          "cells": [
+            {
+              "text": "Acute onset with classic meningism"
+            },
+            {
+              "text": "Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute dementia or depression",
+          "cells": [
+            {
+              "text": "Indolent CNS cryptococcosis can mimic"
+            },
+            {
+              "text": "Lumbar puncture with CRAg"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Nodule or mass on chest imaging"
+            },
+            {
+              "text": "Biopsy and culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptococcosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of cryptococcosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Duration and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Liposomal amphotericin B plus flucytosine (induction)",
+          "cells": [
+            {
+              "text": "{{hy:Meningitis or severe disease}}"
+            },
+            {
+              "text": "2 weeks in advanced HIV; 2 to 4 weeks without HIV; deoxycholate if lipid form unavailable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Single high-dose liposomal amphotericin B plus flucytosine and fluconazole",
+          "cells": [
+            {
+              "text": "WHO preferred induction in people with HIV"
+            },
+            {
+              "text": "Flucytosine and fluconazole for 2 weeks; less toxic, as effective as older standard"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fluconazole consolidation",
+          "cells": [
+            {
+              "text": "After induction"
+            },
+            {
+              "text": "8 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole maintenance",
+          "cells": [
+            {
+              "text": "After consolidation"
+            },
+            {
+              "text": "6 to 12 months without HIV; in HIV continue until CD4 >100 cells/uL on ART"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole alone",
+          "cells": [
+            {
+              "text": "Mild to moderate pulmonary disease with normal CSF"
+            },
+            {
+              "text": "6 to 12 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serial therapeutic lumbar punctures or shunt",
+          "cells": [
+            {
+              "text": "Raised intracranial pressure"
+            },
+            {
+              "text": "Mannitol and acetazolamide not effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Start ART",
+          "cells": [
+            {
+              "text": "HIV"
+            },
+            {
+              "text": "4 to 6 weeks after starting antifungals to limit IRIS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-emptive fluconazole",
+          "cells": [
+            {
+              "text": "CRAg-positive without meningitis on screening"
+            },
+            {
+              "text": "Dose not stated in opened sources"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Avoid echinocandins (inactive) and prophylactic dexamethasone in HIV-associated disease (higher mortality). Doses for amphotericin, flucytosine and fluconazole were not stated in the opened sources."
+    },
+    {
+      "id": "cryptococcosis-ddx-2",
+      "kind": "ddx",
+      "title": "Neurologic diseases in HIV",
+      "rowHeader": "Condition",
+      "columns": [
+        "Examples"
+      ],
+      "rows": [
+        {
+          "parameter": "Opportunistic infections",
+          "cells": [
+            {
+              "text": "toxoplasmosis, cryptococcosis, progressive multifocal leukoencephalopathy, cytomegalovirus, syphilis, Mycobacterium tuberculosis, HTLV-I infection, amebiasis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Neoplasms",
+          "cells": [
+            {
+              "text": "primary CNS lymphoma, Kaposi sarcoma"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Result of HIV-1 infection",
+          "cells": [
+            {
+              "text": "aseptic meningitis; HIV-associated neurocognitive disorders including HIV encephalopathy and AIDS dementia complex"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Myelopathy",
+          "cells": [
+            {
+              "text": "vacuolar myelopathy, pure sensory ataxia, paresthesia or dysesthesia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Peripheral neuropathy",
+          "cells": [
+            {
+              "text": "acute inflammatory demyelinating polyneuropathy (Guillain-Barre syndrome), CIDP, mononeuritis multiplex, distal symmetric polyneuropathy"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Myopathy",
+          "cells": [
+            {
+              "text": "myopathy (no detail printed)"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "cryptococcosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Microbial pathogens causing cavitary lung infection",
+      "rowHeader": "Host setting",
+      "columns": [
+        "Pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration-prone host",
+          "cells": [
+            {
+              "text": "Anaerobic bacteria plus microaerophilic and/or anaerobic streptococci, Gemella spp."
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Embolic (endovascular) lesions",
+          "cells": [
+            {
+              "text": "Usually Staphylococcus aureus, Pseudomonas aeruginosa, Fusobacterium necrophorum"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Endemic fungi",
+          "cells": [
+            {
+              "text": "Histoplasma, Blastomyces, Coccidioides spp."
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Mycobacteria",
+          "cells": [
+            {
+              "text": "M. tuberculosis, M. kansasii, M. avium"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Immunocompromised host",
+          "cells": [
+            {
+              "text": "M. tuberculosis, Nocardia asteroides, Rhodococcus equi, Legionella spp., P. aeruginosa, Enterobacteriaceae (especially Klebsiella pneumoniae), Aspergillus spp., Cryptococcus spp."
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Previously healthy host: bacteria",
+          "cells": [
+            {
+              "text": "S. aureus, S. milleri, K. pneumoniae, group A Streptococcus; Gemella, Legionella and Actinomyces spp."
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Previously healthy host: parasites",
+          "cells": [
+            {
+              "text": "Entamoeba histolytica, Paragonimus westermani, Strongyloides stercoralis"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "The source groups the first four rows as one block of mixed settings; source footnotes (a) and (b) are not legible."
+    },
+    {
+      "id": "cryptococcosis-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Common infections after solid organ transplantation by site",
+      "rowHeader": "Infected site",
+      "columns": [
+        "Early (<1 month)",
+        "Middle (1 to 4 months)",
+        "Late (>6 months)"
+      ],
+      "rows": [
+        {
+          "parameter": "Donor organ",
+          "cells": [
+            {
+              "text": "Bacterial and fungal infections of the graft, anastomotic site and surgical wound"
+            },
+            {
+              "text": "CMV infection"
+            },
+            {
+              "text": "EBV infection (may present in the allograft organ)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Systemic",
+          "cells": [
+            {
+              "text": "Bacteremia and candidemia (often from central venous catheter colonization)"
+            },
+            {
+              "text": "CMV infection (fever, bone marrow suppression)"
+            },
+            {
+              "text": "CMV infection, especially in patients given early posttransplantation prophylaxis; EBV proliferative syndromes (may occur in donor organs)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Lung",
+          "cells": [
+            {
+              "text": "Bacterial aspiration pneumonia with prevalent nosocomial organisms associated with intubation and sedation (highest risk in lung transplantation)"
+            },
+            {
+              "text": "Pneumocystis infection; CMV pneumonia (highest risk in lung transplantation); Aspergillus infection (highest risk in lung transplantation)"
+            },
+            {
+              "text": "Pneumocystis infection; granulomatous lung diseases (nocardiae, reactivated fungal and mycobacterial diseases)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Kidney",
+          "cells": [
+            {
+              "text": "Bacterial and fungal (Candida) infections (cystitis, pyelonephritis) associated with urinary tract catheters (highest risk in kidney transplantation)"
+            },
+            {
+              "text": "Renal transplantation: BK virus infection (associated with nephropathy); JC virus infection"
+            },
+            {
+              "text": "Renal transplantation: bacteria (late urinary tract infections, usually not associated with bacteremia); BK virus (nephropathy, graft failure, generalized vasculopathy)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Liver and biliary tract",
+          "cells": [
+            {
+              "text": "Cholangitis"
+            },
+            {
+              "text": "CMV hepatitis"
+            },
+            {
+              "text": "CMV hepatitis"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Heart",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Toxoplasma gondii infection (highest risk in heart transplantation)"
+            },
+            {
+              "text": "T. gondii (highest risk in heart transplantation)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Gastrointestinal tract",
+          "cells": [
+            {
+              "text": "Peritonitis, especially after liver transplantation"
+            },
+            {
+              "text": "Colitis secondary to Clostridium difficile infection (risk can persist)"
+            },
+            {
+              "text": "Colitis secondary to C. difficile infection (risk can persist)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Central nervous system",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Listeria (meningitis); T. gondii infection"
+            },
+            {
+              "text": "Listeria meningitis; Cryptococcus meningitis; Nocardia abscess; JC virus-associated PML"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "The source column headings leave a gap between 4 and 6 months."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cryptococcosis-dx-mgmt",
+      "title": "Diagnosis and management of cryptococcosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute headache, fever or lung lesion in an at-risk host",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Serum CRAg, blood cultures, chest imaging",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "CRAg or culture positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Seek other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Lumbar puncture: opening pressure, CRAg, India ink, culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "CNS involvement or severe disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Fluconazole 6 to 12 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Induction: liposomal amphotericin B plus flucytosine",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Raised intracranial pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial therapeutic lumbar punctures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Fluconazole consolidation 8 weeks then maintenance",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "In HIV, start ART 4 to 6 weeks after antifungals",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Stop maintenance when CD4 over 100 on ART",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

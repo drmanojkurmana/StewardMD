@@ -1,182 +1,498 @@
 {
- "id": "plasmablastic_lymphoma",
- "name": "Plasmablastic lymphoma",
- "aliases": [
-  "PBL",
-  "plasmablastic lymphoma of the oral cavity",
-  "HIV-associated plasmablastic lymphoma",
-  "EBV-associated plasmablastic lymphoma",
-  "CD20-/CD138+/MYC-rearranged large cell lymphoma"
- ],
- "class": "non_infective",
- "system": "Oncology / Haematologic malignancy",
- "specialty": "Haematology / Haemato-oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Haematolymphoid Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically presents as a rapidly growing mass in the oral cavity or jaw of an HIV-positive patient, but can arise at many extranodal sites including the gastrointestinal tract",
-   "Strongly linked to immunodeficiency (HIV infection, transplantation, older age) and frequently associated with Epstein-Barr virus",
-   "Tumour cells resemble plasmablasts or immunoblasts with a very high proliferation index",
-   "The immunophenotype straddles B-cell and plasma-cell differentiation: pan-B-cell markers such as CD20 and PAX5 are usually negative or weak while plasma-cell markers CD138, CD38, and MUM1/IRF4 are positive",
-   "MYC rearrangement is common and is associated with a more aggressive course",
-   "Overlap with plasmablastic plasma-cell myeloma requires correlation with clinical features, imaging, and any paraprotein",
-   "In situ hybridisation for EBV-encoded RNA is positive in many cases, especially those linked to immunodeficiency"
+  "id": "plasmablastic_lymphoma",
+  "name": "Plasmablastic lymphoma",
+  "aliases": [
+    "PBL",
+    "plasmablastic lymphoma of the oral cavity",
+    "HIV-associated plasmablastic lymphoma",
+    "EBV-associated plasmablastic lymphoma",
+    "CD20-/CD138+/MYC-rearranged large cell lymphoma"
   ],
-  "pathophysiology": "Plasmablastic lymphoma is an aggressive large B-cell neoplasm whose cells have differentiated to the plasmablast stage, losing mature B-cell antigens while acquiring a plasma-cell secretory phenotype. It arises predominantly in immunodeficient hosts, in whom impaired immune surveillance permits Epstein-Barr virus-driven proliferation of terminally differentiating B-cells. Frequent rearrangement of the MYC oncogene amplifies proliferative drive, producing the characteristic high growth fraction and rapidly enlarging masses. Because the neoplastic cells resemble plasma cells, the tumour lies at the interface between lymphoma and plasma-cell neoplasia.",
-  "additionalDifferentials": [
-   "Plasmablastic plasma-cell myeloma",
-   "Diffuse large B-cell lymphoma with plasmablastic features",
-   "Primary effusion lymphoma, extracavitary variant",
-   "HHV-8-positive diffuse large B-cell lymphoma",
-   "Burkitt lymphoma",
-   "Anaplastic plasmacytoma or extramedullary plasmacytoma"
-  ],
-  "additionalInvestigations": [
-   "Biopsy with immunohistochemistry showing CD138/CD38/MUM1 positivity and loss of CD20/PAX5",
-   "In situ hybridisation for EBV-encoded RNA",
-   "FISH for MYC rearrangement",
-   "HIV testing and assessment of immune status",
-   "Serum and urine protein electrophoresis to help distinguish from plasma-cell myeloma",
-   "PET-CT and bone marrow examination for staging"
-  ],
-  "redFlags": [
-   "Rapidly enlarging oral or facial mass causing airway or feeding compromise",
-   "Gastrointestinal bleeding or obstruction from mucosal disease",
-   "Bulky disease with tumour lysis risk given the high proliferation rate",
-   "Concurrent opportunistic infection in the immunocompromised host"
-  ],
-  "prognosis": "The disease is aggressive with generally short survival, though control of HIV with antiretroviral therapy and intensive combination chemotherapy can improve outcomes; MYC rearrangement and advanced stage predict worse results.",
-  "pitfalls": [
-   "Excluding lymphoma because CD20 is negative, when plasma-cell markers confirm the diagnosis",
-   "Confusing plasmablastic lymphoma with plasma-cell myeloma without integrating clinical and serological data",
-   "Overlooking underlying HIV infection at presentation",
-   "Failing to test for EBV and MYC, which inform diagnosis and prognosis"
-  ],
-  "references": [
-   "WHO Classification of Haematolymphoid Tumours",
-   "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm HIV status with baseline CD4 count and viral load, as this drives prognosis and treatment intensity",
-   "Stage with PET-CT and consider cerebrospinal fluid examination given the aggressive, extranodal-prone biology",
-   "Distinguish from plasma-cell myeloma by correlating morphology and immunophenotype before choosing therapy",
-   "Surgery has no curative role; treat primarily with systemic therapy, as biopsy is diagnostic only",
-   "Favor an intensified anthracycline-based, continuous-infusion regimen such as a dose-adjusted EPOCH-type approach over standard R-CHOP-type therapy, given the very high proliferation index",
-   "Add rituximab only if the tumor is CD20-positive, since many plasmablastic lymphomas are CD20-negative",
-   "Continue antiretroviral therapy through chemotherapy if tolerated",
-   "Provide prophylaxis against Pneumocystis jirovecii pneumonia, herpes zoster, and Candida during treatment",
-   "Assess and mitigate tumor lysis risk before and during the first cycle given the high proliferative rate and bulky disease",
-   "Individualize involved-site radiotherapy for palliation of a localized, symptomatic, or bulky mass",
-   "Consider standard salvage chemotherapy followed by consolidative autologous stem cell transplantation for relapsed or refractory disease in appropriate candidates",
-   "Assess treatment response with PET-CT using the Deauville scale, timed appropriately after chemotherapy or radiotherapy to avoid false-positive uptake",
-   "Continue serial CD4 count and HIV viral load monitoring alongside oncologic follow-up in HIV-associated cases",
-   "Refer promptly to hematology-oncology and, when HIV-associated, concurrently to infectious disease for coordinated care, with urgent referral for airway or feeding compromise or gastrointestinal bleeding or obstruction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "plasmablastic_lymphoma-pathway",
-   "title": "Plasmablastic lymphoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically presents as a rapidly growing mass in the oral cavity or jaw of an HIV-positive patient, but can arise at many extranodal sites including the gastrointestinal tract",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging oral or facial mass causing airway or feeding compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Biopsy with immunohistochemistry showing CD138/CD38/MUM1 positivity and loss of CD20/PAX5, In situ hybridisation for EBV-encoded RNA, FISH for MYC rearrangement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm HIV status with baseline CD4 count and viral load, as this drives prognosis and treatment intensity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding lymphoma because CD20 is negative, when plasma-cell markers confirm the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of plasmablastic lymphoma."
-  }
- ],
- "tables": [
-  {
-   "id": "plasmablastic_lymphoma-matrix",
-   "title": "Plasmablastic lymphoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically presents as a rapidly growing mass in the oral cavity or jaw of an HIV-positive patient, but can arise at many",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Haematologic malignancy",
+  "specialty": "Haematology / Haemato-oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Haematolymphoid Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically presents as a rapidly growing mass in the oral cavity or jaw of an HIV-positive patient, but can arise at many extranodal sites including the gastrointestinal tract",
+      "Strongly linked to immunodeficiency (HIV infection, transplantation, older age) and frequently associated with Epstein-Barr virus",
+      "Tumour cells resemble plasmablasts or immunoblasts with a very high proliferation index",
+      "The immunophenotype straddles B-cell and plasma-cell differentiation: pan-B-cell markers such as CD20 and PAX5 are usually negative or weak while plasma-cell markers CD138, CD38, and MUM1/IRF4 are positive",
+      "MYC rearrangement is common and is associated with a more aggressive course",
+      "Overlap with plasmablastic plasma-cell myeloma requires correlation with clinical features, imaging, and any paraprotein",
+      "In situ hybridisation for EBV-encoded RNA is positive in many cases, especially those linked to immunodeficiency"
     ],
-    [
-     "Key Investigations",
-     "Biopsy with immunohistochemistry showing CD138/CD38/MUM1 positivity and loss of CD20/PAX5, In situ hybridisation for EBV-encoded",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Plasmablastic lymphoma is an aggressive large B-cell neoplasm whose cells have differentiated to the plasmablast stage, losing mature B-cell antigens while acquiring a plasma-cell secretory phenotype. It arises predominantly in immunodeficient hosts, in whom impaired immune surveillance permits Epstein-Barr virus-driven proliferation of terminally differentiating B-cells. Frequent rearrangement of the MYC oncogene amplifies proliferative drive, producing the characteristic high growth fraction and rapidly enlarging masses. Because the neoplastic cells resemble plasma cells, the tumour lies at the interface between lymphoma and plasma-cell neoplasia.",
+    "additionalDifferentials": [
+      "Plasmablastic plasma-cell myeloma",
+      "Diffuse large B-cell lymphoma with plasmablastic features",
+      "Primary effusion lymphoma, extracavitary variant",
+      "HHV-8-positive diffuse large B-cell lymphoma",
+      "Burkitt lymphoma",
+      "Anaplastic plasmacytoma or extramedullary plasmacytoma"
     ],
-    [
-     "Primary Differentials",
-     "Plasmablastic plasma-cell myeloma, Diffuse large B-cell lymphoma with plasmablastic features, Primary effusion lymphoma,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Biopsy with immunohistochemistry showing CD138/CD38/MUM1 positivity and loss of CD20/PAX5",
+      "In situ hybridisation for EBV-encoded RNA",
+      "FISH for MYC rearrangement",
+      "HIV testing and assessment of immune status",
+      "Serum and urine protein electrophoresis to help distinguish from plasma-cell myeloma",
+      "PET-CT and bone marrow examination for staging"
     ],
-    [
-     "Management Strategy",
-     "Confirm HIV status with baseline CD4 count and viral load, as this drives prognosis and treatment intensity",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging oral or facial mass causing airway or feeding compromise",
+      "Gastrointestinal bleeding or obstruction from mucosal disease",
+      "Bulky disease with tumour lysis risk given the high proliferation rate",
+      "Concurrent opportunistic infection in the immunocompromised host"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding lymphoma because CD20 is negative, when plasma-cell markers confirm the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease is aggressive with generally short survival, though control of HIV with antiretroviral therapy and intensive combination chemotherapy can improve outcomes; MYC rearrangement and advanced stage predict worse results.",
+    "pitfalls": [
+      "Excluding lymphoma because CD20 is negative, when plasma-cell markers confirm the diagnosis",
+      "Confusing plasmablastic lymphoma with plasma-cell myeloma without integrating clinical and serological data",
+      "Overlooking underlying HIV infection at presentation",
+      "Failing to test for EBV and MYC, which inform diagnosis and prognosis"
+    ],
+    "references": [
+      "WHO Classification of Haematolymphoid Tumours",
+      "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm HIV status with baseline CD4 count and viral load, as this drives prognosis and treatment intensity",
+      "Stage with PET-CT and consider cerebrospinal fluid examination given the aggressive, extranodal-prone biology",
+      "Distinguish from plasma-cell myeloma by correlating morphology and immunophenotype before choosing therapy",
+      "Surgery has no curative role; treat primarily with systemic therapy, as biopsy is diagnostic only",
+      "Favor an intensified anthracycline-based, continuous-infusion regimen such as a dose-adjusted EPOCH-type approach over standard R-CHOP-type therapy, given the very high proliferation index",
+      "Add rituximab only if the tumor is CD20-positive, since many plasmablastic lymphomas are CD20-negative",
+      "Continue antiretroviral therapy through chemotherapy if tolerated",
+      "Provide prophylaxis against Pneumocystis jirovecii pneumonia, herpes zoster, and Candida during treatment",
+      "Assess and mitigate tumor lysis risk before and during the first cycle given the high proliferative rate and bulky disease",
+      "Individualize involved-site radiotherapy for palliation of a localized, symptomatic, or bulky mass",
+      "Consider standard salvage chemotherapy followed by consolidative autologous stem cell transplantation for relapsed or refractory disease in appropriate candidates",
+      "Assess treatment response with PET-CT using the Deauville scale, timed appropriately after chemotherapy or radiotherapy to avoid false-positive uptake",
+      "Continue serial CD4 count and HIV viral load monitoring alongside oncologic follow-up in HIV-associated cases",
+      "Refer promptly to hematology-oncology and, when HIV-associated, concurrently to infectious disease for coordinated care, with urgent referral for airway or feeding compromise or gastrointestinal bleeding or obstruction"
     ]
-   ],
-   "caption": "Overview comparison matrix for plasmablastic lymphoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "plasmablastic-lymphoma-real-image",
-   "title": "Plasmablastic lymphoma: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "plasmablastic_lymphoma-pathway",
+      "title": "Plasmablastic lymphoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically presents as a rapidly growing mass in the oral cavity or jaw of an HIV-positive patient, but can arise at many extranodal sites including the gastrointestinal tract",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging oral or facial mass causing airway or feeding compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Biopsy with immunohistochemistry showing CD138/CD38/MUM1 positivity and loss of CD20/PAX5, In situ hybridisation for EBV-encoded RNA, FISH for MYC rearrangement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm HIV status with baseline CD4 count and viral load, as this drives prognosis and treatment intensity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding lymphoma because CD20 is negative, when plasma-cell markers confirm the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of plasmablastic lymphoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "plasmablastic_lymphoma-matrix",
+      "title": "Plasmablastic lymphoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically presents as a rapidly growing mass in the oral cavity or jaw of an HIV-positive patient, but can arise at many",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Biopsy with immunohistochemistry showing CD138/CD38/MUM1 positivity and loss of CD20/PAX5, In situ hybridisation for EBV-encoded",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Plasmablastic plasma-cell myeloma, Diffuse large B-cell lymphoma with plasmablastic features, Primary effusion lymphoma,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm HIV status with baseline CD4 count and viral load, as this drives prognosis and treatment intensity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding lymphoma because CD20 is negative, when plasma-cell markers confirm the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for plasmablastic lymphoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "plasmablastic_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "CD138, CD38 and MUM1 positivity; loss of CD20 and PAX5"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "In situ hybridisation for EBV-encoded RNA",
+          "cells": [
+            {
+              "text": "EBV-encoded RNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH for MYC rearrangement",
+          "cells": [
+            {
+              "text": "MYC rearrangement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and immune status",
+          "cells": [
+            {
+              "text": "Immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine protein electrophoresis",
+          "cells": [
+            {
+              "text": "Distinction from plasma-cell myeloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET-CT and bone marrow examination",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plasmablastic_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasmablastic plasma-cell myeloma",
+          "cells": [
+            {
+              "text": "Distinguished by morphology and immunophenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HHV-8-positive diffuse large B-cell lymphoma",
+          "cells": [
+            {
+              "text": "HHV-8 positivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plasmablastic_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "HIV status",
+          "cells": [
+            {
+              "text": "Baseline CD4 count and viral load, which drive prognosis and treatment intensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging",
+          "cells": [
+            {
+              "text": "PET-CT and consideration of cerebrospinal fluid examination given aggressive, extranodal-prone biology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Primary treatment; surgery has no curative role and biopsy is diagnostic only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensified regimen",
+          "cells": [
+            {
+              "text": "Dose-adjusted EPOCH-type anthracycline-based, continuous-infusion regimen favoured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Added only if the tumour is CD20-positive, since many are CD20-negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Continued through chemotherapy if tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Pneumocystis, herpes zoster and Candida prophylaxis during treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour lysis",
+          "cells": [
+            {
+              "text": "Risk assessed and mitigated before and during the first cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse",
+          "cells": [
+            {
+              "text": "Salvage chemotherapy followed by consolidative autologous stem cell transplantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "plasmablastic_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Plasmablastic lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly enlarging oral or extranodal mass, often with HIV or immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (airway or feeding compromise, GI bleeding or obstruction, tumour lysis risk)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haemato-oncology referral for airway, feeding or GI compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CD138, CD38 and MUM1 immunohistochemistry; EBV RNA; MYC FISH; HIV testing; PET-CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does immunohistochemistry show CD138, CD38 and MUM1, with loss of CD20 and PAX5?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider plasma-cell myeloma, DLBCL with plasmablastic features or HHV-8 lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Confirm HIV status with baseline CD4 count and viral load",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stage with PET-CT and consider cerebrospinal fluid examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dose-adjusted EPOCH-type anthracycline-based regimen as systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Add rituximab only if the tumour is CD20-positive",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prophylaxis against Pneumocystis, herpes zoster and Candida during treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Aggressive with generally short survival; HIV control and intensive chemotherapy help",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

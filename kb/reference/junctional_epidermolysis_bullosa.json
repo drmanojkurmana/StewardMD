@@ -1,178 +1,476 @@
 {
- "id": "junctional_epidermolysis_bullosa",
- "name": "Junctional epidermolysis bullosa",
- "aliases": [
-  "JEB",
-  "laminin-332 deficiency",
-  "LAMA3",
-  "LAMB3",
-  "LAMC2",
-  "collagen XVII deficiency",
-  "COL17A1"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive form of epidermolysis bullosa caused by defects in components of the hemidesmosome anchoring complex, chiefly laminin-332 (LAMA3, LAMB3, LAMC2) and collagen XVII (COL17A1)",
-   "Blistering occurs within the lamina lucida of the basement membrane zone, giving a junctional level of cleavage",
-   "The severe generalised subtype presents in the neonate with widespread blistering and characteristic exuberant granulation tissue, often around the mouth, nose, and airway",
-   "Prominent perioral and perinasal granulation tissue is a helpful clinical clue to the junctional form",
-   "Dental enamel hypoplasia is a characteristic associated feature owing to the role of these proteins in enamel formation",
-   "Extracutaneous involvement of the respiratory, gastrointestinal, and genitourinary tracts contributes to significant morbidity",
-   "Diagnosis relies on immunofluorescence antigen mapping and electron microscopy to localise the split, with genetic confirmation; management is supportive with wound care and nutritional support"
+  "id": "junctional_epidermolysis_bullosa",
+  "name": "Junctional epidermolysis bullosa",
+  "aliases": [
+    "JEB",
+    "laminin-332 deficiency",
+    "LAMA3",
+    "LAMB3",
+    "LAMC2",
+    "collagen XVII deficiency",
+    "COL17A1"
   ],
-  "pathophysiology": "The dermo-epidermal junction is held together by hemidesmosomes and their associated anchoring filaments, which span the lamina lucida of the basement membrane and connect basal keratinocytes to the underlying lamina densa. Laminin-332 and collagen XVII (the bullous pemphigoid antigen 180) are key structural components of this adhesion complex. In junctional epidermolysis bullosa, biallelic mutations reduce or abolish these proteins, weakening adhesion so that the skin separates within the lamina lucida under minimal mechanical stress. The same proteins are important in mucosal epithelia and in tooth enamel formation, which explains the mucosal involvement and enamel defects. The most severe subtypes cause extensive skin and mucosal loss with a high risk of infection, fluid loss, and airway compromise in infancy.",
-  "additionalDifferentials": [
-   "Epidermolysis bullosa simplex",
-   "Dystrophic epidermolysis bullosa",
-   "Neonatal infective blistering such as staphylococcal scalded skin syndrome and herpes",
-   "Incontinentia pigmenti and other neonatal blistering disorders",
-   "Aplasia cutis congenita",
-   "Autoimmune blistering disease in older patients"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with immunofluorescence antigen mapping localising the split to the lamina lucida",
-   "Transmission electron microscopy showing hemidesmosomal abnormalities",
-   "Molecular genetic testing of LAMA3, LAMB3, LAMC2, and COL17A1",
-   "Nutritional and growth assessment with monitoring for anaemia and micronutrient deficiency",
-   "Airway, dental, and mucosal evaluation for extracutaneous involvement",
-   "Microbiological swabs when infection is suspected"
-  ],
-  "redFlags": [
-   "Airway involvement with stridor or respiratory compromise from laryngeal granulation tissue",
-   "Extensive skin loss with sepsis, fluid, and electrolyte disturbance in a neonate",
-   "Failure to thrive and severe anaemia from chronic wounds and poor intake",
-   "Rapid deterioration in the severe generalised subtype, which carries high infant mortality"
-  ],
-  "prognosis": "Outlook varies markedly by subtype: the severe generalised form carries high mortality in infancy from sepsis, respiratory involvement, and failure to thrive, whereas milder junctional variants are compatible with survival into adulthood with chronic blistering and extracutaneous complications.",
-  "pitfalls": [
-   "Failing to identify the severe generalised subtype early, delaying appropriate supportive and palliative planning",
-   "Overlooking airway involvement heralded by perioral and perinasal granulation tissue",
-   "Neglecting nutritional support, dental care, and anaemia management",
-   "Mistaking neonatal junctional disease for infection",
-   "Assuming a uniform prognosis rather than recognising the wide spectrum of severity"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide meticulous atraumatic wound care with non-adherent dressings, blister lancing and protection of fragile skin from shearing",
-   "Prevent and treat wound and systemic infection with surveillance swabs, topical antiseptics and culture-directed antibiotics",
-   "Give aggressive nutritional support and correct anaemia and micronutrient deficiencies to sustain growth and healing",
-   "Monitor and protect the airway for laryngeal and tracheal granulation tissue and involvement",
-   "Provide specialist dental care for enamel hypoplasia and manage gastrointestinal and genitourinary complications",
-   "Deliver proactive analgesia and coordinate care through a multidisciplinary epidermolysis bullosa team",
-   "Offer autosomal recessive genetic counselling with carrier and prenatal testing, and involve palliative care in the severe generalised subtype"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "junctional_epidermolysis_bullosa-pathway",
-   "title": "Junctional epidermolysis bullosa: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive form of epidermolysis bullosa caused by defects in components of the hemidesmosome anchoring complex, chiefly laminin-332 (LAMA3, LAMB3, LAMC2) and collagen XVII (COL17A1)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Airway involvement with stridor or respiratory compromise from laryngeal granulation tissue",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with immunofluorescence antigen mapping localising the split to the lamina lucida, Transmission electron microscopy showing hemidesmosomal abnormalities, Molecular genetic testing of LAMA3, LAMB3, LAMC2, and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide meticulous atraumatic wound care with non-adherent dressings, blister lancing and protection of fragile skin from shearing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to identify the severe generalised subtype early, delaying appropriate supportive and palliative planning"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of junctional epidermolysis bullosa."
-  }
- ],
- "tables": [
-  {
-   "id": "junctional_epidermolysis_bullosa-matrix",
-   "title": "Junctional epidermolysis bullosa: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive form of epidermolysis bullosa caused by defects in components of the hemidesmosome anchoring complex,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive form of epidermolysis bullosa caused by defects in components of the hemidesmosome anchoring complex, chiefly laminin-332 (LAMA3, LAMB3, LAMC2) and collagen XVII (COL17A1)",
+      "Blistering occurs within the lamina lucida of the basement membrane zone, giving a junctional level of cleavage",
+      "The severe generalised subtype presents in the neonate with widespread blistering and characteristic exuberant granulation tissue, often around the mouth, nose, and airway",
+      "Prominent perioral and perinasal granulation tissue is a helpful clinical clue to the junctional form",
+      "Dental enamel hypoplasia is a characteristic associated feature owing to the role of these proteins in enamel formation",
+      "Extracutaneous involvement of the respiratory, gastrointestinal, and genitourinary tracts contributes to significant morbidity",
+      "Diagnosis relies on immunofluorescence antigen mapping and electron microscopy to localise the split, with genetic confirmation; management is supportive with wound care and nutritional support"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with immunofluorescence antigen mapping localising the split to the lamina lucida, Transmission electron microscopy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The dermo-epidermal junction is held together by hemidesmosomes and their associated anchoring filaments, which span the lamina lucida of the basement membrane and connect basal keratinocytes to the underlying lamina densa. Laminin-332 and collagen XVII (the bullous pemphigoid antigen 180) are key structural components of this adhesion complex. In junctional epidermolysis bullosa, biallelic mutations reduce or abolish these proteins, weakening adhesion so that the skin separates within the lamina lucida under minimal mechanical stress. The same proteins are important in mucosal epithelia and in tooth enamel formation, which explains the mucosal involvement and enamel defects. The most severe subtypes cause extensive skin and mucosal loss with a high risk of infection, fluid loss, and airway compromise in infancy.",
+    "additionalDifferentials": [
+      "Epidermolysis bullosa simplex",
+      "Dystrophic epidermolysis bullosa",
+      "Neonatal infective blistering such as staphylococcal scalded skin syndrome and herpes",
+      "Incontinentia pigmenti and other neonatal blistering disorders",
+      "Aplasia cutis congenita",
+      "Autoimmune blistering disease in older patients"
     ],
-    [
-     "Primary Differentials",
-     "Epidermolysis bullosa simplex, Dystrophic epidermolysis bullosa, Neonatal infective blistering such as staphylococcal scalded",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with immunofluorescence antigen mapping localising the split to the lamina lucida",
+      "Transmission electron microscopy showing hemidesmosomal abnormalities",
+      "Molecular genetic testing of LAMA3, LAMB3, LAMC2, and COL17A1",
+      "Nutritional and growth assessment with monitoring for anaemia and micronutrient deficiency",
+      "Airway, dental, and mucosal evaluation for extracutaneous involvement",
+      "Microbiological swabs when infection is suspected"
     ],
-    [
-     "Management Strategy",
-     "Provide meticulous atraumatic wound care with non-adherent dressings, blister lancing and protection of fragile skin from shearing",
-     "Core treatment modality"
+    "redFlags": [
+      "Airway involvement with stridor or respiratory compromise from laryngeal granulation tissue",
+      "Extensive skin loss with sepsis, fluid, and electrolyte disturbance in a neonate",
+      "Failure to thrive and severe anaemia from chronic wounds and poor intake",
+      "Rapid deterioration in the severe generalised subtype, which carries high infant mortality"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to identify the severe generalised subtype early, delaying appropriate supportive and palliative planning",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook varies markedly by subtype: the severe generalised form carries high mortality in infancy from sepsis, respiratory involvement, and failure to thrive, whereas milder junctional variants are compatible with survival into adulthood with chronic blistering and extracutaneous complications.",
+    "pitfalls": [
+      "Failing to identify the severe generalised subtype early, delaying appropriate supportive and palliative planning",
+      "Overlooking airway involvement heralded by perioral and perinasal granulation tissue",
+      "Neglecting nutritional support, dental care, and anaemia management",
+      "Mistaking neonatal junctional disease for infection",
+      "Assuming a uniform prognosis rather than recognising the wide spectrum of severity"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide meticulous atraumatic wound care with non-adherent dressings, blister lancing and protection of fragile skin from shearing",
+      "Prevent and treat wound and systemic infection with surveillance swabs, topical antiseptics and culture-directed antibiotics",
+      "Give aggressive nutritional support and correct anaemia and micronutrient deficiencies to sustain growth and healing",
+      "Monitor and protect the airway for laryngeal and tracheal granulation tissue and involvement",
+      "Provide specialist dental care for enamel hypoplasia and manage gastrointestinal and genitourinary complications",
+      "Deliver proactive analgesia and coordinate care through a multidisciplinary epidermolysis bullosa team",
+      "Offer autosomal recessive genetic counselling with carrier and prenatal testing, and involve palliative care in the severe generalised subtype"
     ]
-   ],
-   "caption": "Overview comparison matrix for junctional epidermolysis bullosa."
-  }
- ],
- "diagrams": [
-  {
-   "id": "junctional-epidermolysis-bullosa-real-image",
-   "title": "Junctional epidermolysis bullosa: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "junctional_epidermolysis_bullosa-pathway",
+      "title": "Junctional epidermolysis bullosa: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive form of epidermolysis bullosa caused by defects in components of the hemidesmosome anchoring complex, chiefly laminin-332 (LAMA3, LAMB3, LAMC2) and collagen XVII (COL17A1)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Airway involvement with stridor or respiratory compromise from laryngeal granulation tissue",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with immunofluorescence antigen mapping localising the split to the lamina lucida, Transmission electron microscopy showing hemidesmosomal abnormalities, Molecular genetic testing of LAMA3, LAMB3, LAMC2, and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide meticulous atraumatic wound care with non-adherent dressings, blister lancing and protection of fragile skin from shearing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to identify the severe generalised subtype early, delaying appropriate supportive and palliative planning"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of junctional epidermolysis bullosa."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "junctional_epidermolysis_bullosa-matrix",
+      "title": "Junctional epidermolysis bullosa: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive form of epidermolysis bullosa caused by defects in components of the hemidesmosome anchoring complex,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with immunofluorescence antigen mapping localising the split to the lamina lucida, Transmission electron microscopy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epidermolysis bullosa simplex, Dystrophic epidermolysis bullosa, Neonatal infective blistering such as staphylococcal scalded",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide meticulous atraumatic wound care with non-adherent dressings, blister lancing and protection of fragile skin from shearing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to identify the severe generalised subtype early, delaying appropriate supportive and palliative planning",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for junctional epidermolysis bullosa."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "junctional_epidermolysis_bullosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with immunofluorescence antigen mapping",
+          "cells": [
+            {
+              "text": "Split within the lamina lucida"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transmission electron microscopy",
+          "cells": [
+            {
+              "text": "Hemidesmosomal abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LAMA3, LAMB3, LAMC2 and COL17A1 genetic testing",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional and growth assessment",
+          "cells": [
+            {
+              "text": "Anaemia and micronutrient deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway, dental and mucosal evaluation",
+          "cells": [
+            {
+              "text": "Extracutaneous involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological swabs",
+          "cells": [
+            {
+              "text": "Infection when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "junctional_epidermolysis_bullosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidermolysis bullosa simplex",
+          "cells": [
+            {
+              "text": "Split within the epidermis rather than at the junction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystrophic epidermolysis bullosa",
+          "cells": [
+            {
+              "text": "Split below the lamina densa, with scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal infective blistering (staphylococcal scalded skin syndrome)",
+          "cells": [
+            {
+              "text": "Separated by cultures and skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "junctional_epidermolysis_bullosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Atraumatic care with non-adherent dressings, blister lancing and protection from shearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Surveillance swabs, topical antiseptics and culture-directed antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Aggressive nutritional support; correction of anaemia and micronutrient deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway",
+          "cells": [
+            {
+              "text": "Monitoring for laryngeal and tracheal granulation tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and analgesia",
+          "cells": [
+            {
+              "text": "Specialist dental care and proactive analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling and palliation",
+          "cells": [
+            {
+              "text": "Autosomal recessive genetic counselling, prenatal testing; palliative care in severe subtype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "junctional_epidermolysis_bullosa-dx-mgmt",
+      "title": "Diagnosis and management of Junctional epidermolysis bullosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with widespread blistering and granulation tissue around the mouth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway granulation or stridor, sepsis, failure to thrive or severe anaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Airway protection and ENT review; sepsis management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with immunofluorescence, electron microscopy, LAMA3, LAMB3, LAMC2, COL17A1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Junctional split with a LAMA3, LAMB3, LAMC2 or COL17A1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epidermolysis bullosa simplex, dystrophic EB or infective blistering",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Atraumatic wound care with non-adherent dressings and blister lancing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surveillance swabs and culture-directed antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive nutrition; treat anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Airway monitoring for laryngeal granulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling, prenatal testing and palliative input in severe subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe generalised subtype carries high infant mortality; supportive care and palliation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

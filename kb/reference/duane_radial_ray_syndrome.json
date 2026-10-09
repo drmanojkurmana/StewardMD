@@ -1,175 +1,473 @@
 {
- "id": "duane_radial_ray_syndrome",
- "name": "Duane-radial ray syndrome (Okihiro, SALL4)",
- "aliases": [
-  "Okihiro syndrome",
-  "acro-renal-ocular syndrome",
-  "DRRS",
-  "SALL4-related disorder"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant disorder caused by heterozygous loss-of-function variants in SALL4",
-   "Duane retraction anomaly, with limited abduction and globe retraction on adduction, is the defining ocular feature",
-   "Radial ray malformations range from thumb hypoplasia or triphalangeal thumb to more extensive radial limb defects",
-   "Renal anomalies, including malformation or dysfunction, may be present, giving the acro-renal-ocular overlap",
-   "Sensorineural or conductive hearing loss occurs in some individuals",
-   "There is considerable phenotypic overlap with Holt-Oram and Townes-Brocks syndromes, which must be distinguished",
-   "Expressivity is highly variable even within a family, so mildly affected relatives may be overlooked",
-   "Diagnosis is confirmed by identifying a SALL4 variant, and deletion testing should be considered"
+  "id": "duane_radial_ray_syndrome",
+  "name": "Duane-radial ray syndrome (Okihiro, SALL4)",
+  "aliases": [
+    "Okihiro syndrome",
+    "acro-renal-ocular syndrome",
+    "DRRS",
+    "SALL4-related disorder"
   ],
-  "pathophysiology": "Duane-radial ray syndrome results from heterozygous loss-of-function variants in SALL4, a zinc-finger transcription factor of the spalt-like family that regulates gene expression during limb, eye, ear, kidney, and heart development. Haploinsufficiency of SALL4 disturbs these developmental programmes, and its role in the developing abducens motor system underlies the Duane retraction anomaly, while its function in limb patterning produces the radial ray defects. Because SALL4 interacts with other developmental regulators, including those in the TBX and SALL networks, the phenotype overlaps with related disorders such as Holt-Oram and Townes-Brocks syndromes. Inheritance is autosomal dominant with marked variability in expression.",
-  "additionalDifferentials": [
-   "Holt-Oram syndrome from TBX5 variants",
-   "Townes-Brocks syndrome from SALL1 variants",
-   "Thrombocytopenia-absent radius syndrome",
-   "Fanconi anaemia with radial ray and other anomalies",
-   "VACTERL association with overlapping limb and renal features",
-   "Isolated Duane retraction syndrome"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing of SALL4, including analysis for deletions",
-   "Neuro-ophthalmological assessment for Duane retraction anomaly",
-   "Limb radiography to characterise radial ray anomalies",
-   "Renal ultrasound and assessment of renal function",
-   "Audiological evaluation for hearing loss",
-   "Echocardiography and, where indicated, haematological screening to help distinguish overlapping syndromes"
-  ],
-  "redFlags": [
-   "Significant renal malformation with impaired function",
-   "Cardiac anomaly identified during evaluation of overlapping syndromes",
-   "Cytopenias raising concern for an alternative diagnosis such as Fanconi anaemia",
-   "Progressive hearing loss impairing communication"
-  ],
-  "prognosis": "Lifespan is usually normal, and the outlook is determined by the severity of limb, renal, and hearing involvement; the ocular motility limitation is stable and the limb anomalies are often amenable to surgical and rehabilitative management, so most individuals function well with appropriate multidisciplinary care.",
-  "pitfalls": [
-   "Confusing the condition with Holt-Oram or Townes-Brocks syndrome and testing the wrong gene",
-   "Missing mildly affected relatives because of the highly variable expression",
-   "Overlooking renal or hearing involvement by focusing on the limb and eye features",
-   "Failing to consider Fanconi anaemia when cytopenias accompany radial ray defects"
-  ],
-  "references": [
-   "GeneReviews: Duane-radial ray syndrome (Okihiro syndrome)",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage supportively, as there is no disease-specific drug therapy; care is directed at the individual limb, ocular, renal, cardiac and hearing manifestations",
-   "Correct significant strabismus, an anomalous head posture or globe retraction with strabismus surgery, and treat any amblyopia, recognising abduction cannot be restored",
-   "Refer radial ray and thumb anomalies for hand and orthopaedic reconstruction with occupational therapy and pollicisation or tendon transfer where indicated",
-   "Screen the kidneys with ultrasound and monitor renal function for associated urinary tract malformation or dysfunction",
-   "Assess hearing with audiology and provide hearing aids or other support for sensorineural or conductive loss",
-   "Arrange echocardiography and, where needed, haematological review to distinguish overlapping Holt-Oram and Townes-Brocks syndromes",
-   "Offer genetic counselling for this autosomal dominant SALL4 disorder with confirmatory molecular testing and screening of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "duane_radial_ray_syndrome-pathway",
-   "title": "Duane-radial ray syndrome (Okihiro, SALL4): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant disorder caused by heterozygous loss-of-function variants in SALL4",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant renal malformation with impaired function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing of SALL4, including analysis for deletions, Neuro-ophthalmological assessment for Duane retraction anomaly, Limb radiography to characterise radial ray anomalies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage supportively, as there is no disease-specific drug therapy; care is directed at the individual limb, ocular, renal, cardiac and hearing manifestations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the condition with Holt-Oram or Townes-Brocks syndrome and testing the wrong gene"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of duane-radial ray syndrome (okihiro, sall4)."
-  }
- ],
- "tables": [
-  {
-   "id": "duane_radial_ray_syndrome-matrix",
-   "title": "Duane-radial ray syndrome (Okihiro, SALL4): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant disorder caused by heterozygous loss-of-function variants in SALL4",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant disorder caused by heterozygous loss-of-function variants in SALL4",
+      "Duane retraction anomaly, with limited abduction and globe retraction on adduction, is the defining ocular feature",
+      "Radial ray malformations range from thumb hypoplasia or triphalangeal thumb to more extensive radial limb defects",
+      "Renal anomalies, including malformation or dysfunction, may be present, giving the acro-renal-ocular overlap",
+      "Sensorineural or conductive hearing loss occurs in some individuals",
+      "There is considerable phenotypic overlap with Holt-Oram and Townes-Brocks syndromes, which must be distinguished",
+      "Expressivity is highly variable even within a family, so mildly affected relatives may be overlooked",
+      "Diagnosis is confirmed by identifying a SALL4 variant, and deletion testing should be considered"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing of SALL4, including analysis for deletions, Neuro-ophthalmological assessment for Duane retraction anomaly,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Duane-radial ray syndrome results from heterozygous loss-of-function variants in SALL4, a zinc-finger transcription factor of the spalt-like family that regulates gene expression during limb, eye, ear, kidney, and heart development. Haploinsufficiency of SALL4 disturbs these developmental programmes, and its role in the developing abducens motor system underlies the Duane retraction anomaly, while its function in limb patterning produces the radial ray defects. Because SALL4 interacts with other developmental regulators, including those in the TBX and SALL networks, the phenotype overlaps with related disorders such as Holt-Oram and Townes-Brocks syndromes. Inheritance is autosomal dominant with marked variability in expression.",
+    "additionalDifferentials": [
+      "Holt-Oram syndrome from TBX5 variants",
+      "Townes-Brocks syndrome from SALL1 variants",
+      "Thrombocytopenia-absent radius syndrome",
+      "Fanconi anaemia with radial ray and other anomalies",
+      "VACTERL association with overlapping limb and renal features",
+      "Isolated Duane retraction syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Holt-Oram syndrome from TBX5 variants, Townes-Brocks syndrome from SALL1 variants, Thrombocytopenia-absent radius syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing of SALL4, including analysis for deletions",
+      "Neuro-ophthalmological assessment for Duane retraction anomaly",
+      "Limb radiography to characterise radial ray anomalies",
+      "Renal ultrasound and assessment of renal function",
+      "Audiological evaluation for hearing loss",
+      "Echocardiography and, where indicated, haematological screening to help distinguish overlapping syndromes"
     ],
-    [
-     "Management Strategy",
-     "Manage supportively, as there is no disease-specific drug therapy; care is directed at the individual limb, ocular, renal,",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant renal malformation with impaired function",
+      "Cardiac anomaly identified during evaluation of overlapping syndromes",
+      "Cytopenias raising concern for an alternative diagnosis such as Fanconi anaemia",
+      "Progressive hearing loss impairing communication"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the condition with Holt-Oram or Townes-Brocks syndrome and testing the wrong gene",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lifespan is usually normal, and the outlook is determined by the severity of limb, renal, and hearing involvement; the ocular motility limitation is stable and the limb anomalies are often amenable to surgical and rehabilitative management, so most individuals function well with appropriate multidisciplinary care.",
+    "pitfalls": [
+      "Confusing the condition with Holt-Oram or Townes-Brocks syndrome and testing the wrong gene",
+      "Missing mildly affected relatives because of the highly variable expression",
+      "Overlooking renal or hearing involvement by focusing on the limb and eye features",
+      "Failing to consider Fanconi anaemia when cytopenias accompany radial ray defects"
+    ],
+    "references": [
+      "GeneReviews: Duane-radial ray syndrome (Okihiro syndrome)",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage supportively, as there is no disease-specific drug therapy; care is directed at the individual limb, ocular, renal, cardiac and hearing manifestations",
+      "Correct significant strabismus, an anomalous head posture or globe retraction with strabismus surgery, and treat any amblyopia, recognising abduction cannot be restored",
+      "Refer radial ray and thumb anomalies for hand and orthopaedic reconstruction with occupational therapy and pollicisation or tendon transfer where indicated",
+      "Screen the kidneys with ultrasound and monitor renal function for associated urinary tract malformation or dysfunction",
+      "Assess hearing with audiology and provide hearing aids or other support for sensorineural or conductive loss",
+      "Arrange echocardiography and, where needed, haematological review to distinguish overlapping Holt-Oram and Townes-Brocks syndromes",
+      "Offer genetic counselling for this autosomal dominant SALL4 disorder with confirmatory molecular testing and screening of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for duane-radial ray syndrome (okihiro, sall4)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "duane-radial-ray-syndrome-real-image",
-   "title": "Duane-radial ray syndrome (Okihiro, SALL4): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "duane_radial_ray_syndrome-pathway",
+      "title": "Duane-radial ray syndrome (Okihiro, SALL4): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant disorder caused by heterozygous loss-of-function variants in SALL4",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant renal malformation with impaired function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing of SALL4, including analysis for deletions, Neuro-ophthalmological assessment for Duane retraction anomaly, Limb radiography to characterise radial ray anomalies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage supportively, as there is no disease-specific drug therapy; care is directed at the individual limb, ocular, renal, cardiac and hearing manifestations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the condition with Holt-Oram or Townes-Brocks syndrome and testing the wrong gene"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of duane-radial ray syndrome (okihiro, sall4)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "duane_radial_ray_syndrome-matrix",
+      "title": "Duane-radial ray syndrome (Okihiro, SALL4): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant disorder caused by heterozygous loss-of-function variants in SALL4",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing of SALL4, including analysis for deletions, Neuro-ophthalmological assessment for Duane retraction anomaly,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Holt-Oram syndrome from TBX5 variants, Townes-Brocks syndrome from SALL1 variants, Thrombocytopenia-absent radius syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage supportively, as there is no disease-specific drug therapy; care is directed at the individual limb, ocular, renal,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the condition with Holt-Oram or Townes-Brocks syndrome and testing the wrong gene",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for duane-radial ray syndrome (okihiro, sall4)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "duane_radial_ray_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing of SALL4, including deletion analysis",
+          "cells": [
+            {
+              "text": "SALL4 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Duane retraction anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb radiography",
+          "cells": [
+            {
+              "text": "Radial ray anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and renal function",
+          "cells": [
+            {
+              "text": "Renal malformation or dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological evaluation",
+          "cells": [
+            {
+              "text": "Hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "duane_radial_ray_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Holt-Oram syndrome (TBX5)",
+          "cells": [
+            {
+              "text": "Radial ray with cardiac anomaly; separated by TBX5 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Townes-Brocks syndrome (SALL1)",
+          "cells": [
+            {
+              "text": "Overlapping limb and renal features; separated by SALL1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi anaemia",
+          "cells": [
+            {
+              "text": "Cytopenias accompanying radial ray defects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "duane_radial_ray_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific drug; care for limb, eye, renal, cardiac and hearing features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus surgery",
+          "cells": [
+            {
+              "text": "Significant strabismus or head posture; abduction cannot be restored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand reconstruction",
+          "cells": [
+            {
+              "text": "Radial ray and thumb anomalies, with occupational therapy and tendon transfer or pollicisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal screening",
+          "cells": [
+            {
+              "text": "Ultrasound and renal function for urinary tract malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing support",
+          "cells": [
+            {
+              "text": "Audiology, with hearing aids for sensorineural or conductive loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and haematology",
+          "cells": [
+            {
+              "text": "Distinguish overlapping syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant SALL4; screen at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "duane_radial_ray_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Duane-radial ray syndrome (Okihiro, SALL4)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Duane-radial ray syndrome: eye retraction with radial limb defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (significant renal impairment, cytopenias, progressive hearing loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent renal and haematological review for impaired function or cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SALL4 testing with deletions; limb radiographs; renal ultrasound; audiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a SALL4 variant found with radial ray and Duane features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Holt-Oram, Townes-Brocks, Fanconi anaemia or isolated Duane syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care for limb, eye, renal, cardiac and hearing features",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strabismus surgery for significant deviation or head posture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand and orthopaedic reconstruction for radial ray and thumb anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal ultrasound and function monitoring; audiology with hearing support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant SALL4 and relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifespan usually normal; outcome set by limb, renal and hearing severity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

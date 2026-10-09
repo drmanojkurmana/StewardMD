@@ -1,180 +1,671 @@
 {
- "id": "dengue_hemorrhagic_fever",
- "name": "Dengue haemorrhagic fever",
- "aliases": [
-  "DHF",
-  "severe dengue",
-  "dengue shock syndrome",
-  "DSS"
- ],
- "class": "infective",
- "system": "Infectious / Tropical",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A severe form of dengue, a mosquito-borne flaviviral infection spread by Aedes aegypti, with recurrent large outbreaks across India",
-   "The defining features are plasma leakage (haemoconcentration, effusions, ascites), bleeding tendency and thrombocytopenia, which can progress to dengue shock syndrome",
-   "The critical, most dangerous period begins around the time of defervescence, when capillary leak peaks, so patients can deteriorate just as fever settles",
-   "WHO warning signs (abdominal pain, persistent vomiting, mucosal bleeding, lethargy, hepatomegaly, fluid accumulation and a rising haematocrit with falling platelets) flag patients at risk of severe disease",
-   "Secondary infection with a different dengue serotype increases the risk of severe disease through antibody-dependent enhancement",
-   "Management is meticulous fluid balance guided by haematocrit and clinical status; there is no specific antiviral, and both under- and over-resuscitation are harmful",
-   "Platelet transfusion is not indicated purely for a low count and should be reserved for significant bleeding",
-   "Diagnosis uses NS1 antigen early and IgM/IgG serology or PCR, with serial full blood counts to track haematocrit and platelets"
+  "id": "dengue_hemorrhagic_fever",
+  "name": "Dengue haemorrhagic fever",
+  "aliases": [
+    "DHF",
+    "severe dengue",
+    "dengue shock syndrome",
+    "DSS"
   ],
-  "pathophysiology": "Following an infective Aedes bite, dengue virus replicates and causes a systemic febrile illness. In severe dengue an intense host immune and cytokine response transiently increases vascular permeability, allowing plasma to leak from the intravascular compartment; this manifests as haemoconcentration, serous effusions and, if severe, hypovolaemic shock. Concurrent thrombocytopenia, platelet dysfunction, coagulopathy and vascular fragility produce the bleeding diathesis. Pre-existing heterotypic antibodies from a prior infection can enhance viral uptake into cells (antibody-dependent enhancement), heightening the risk of severe disease on secondary infection.",
-  "additionalDifferentials": [
-   "Other viral haemorrhagic fevers",
-   "Chikungunya and Zika co-circulating arboviral illness",
-   "Severe malaria",
-   "Leptospirosis",
-   "Enteric fever",
-   "Rickettsial infection (e.g. scrub typhus)"
-  ],
-  "infectionMimics": [
-   "Sepsis with disseminated intravascular coagulation",
-   "Acute leukaemia or other causes of thrombocytopenia with bleeding",
-   "Immune thrombocytopenia",
-   "Hantavirus or other capillary-leak syndromes"
-  ],
-  "additionalInvestigations": [
-   "NS1 antigen in early illness and dengue IgM/IgG serology or RT-PCR",
-   "Serial full blood counts monitoring haematocrit and platelet trends",
-   "Coagulation profile and liver enzymes to assess severity",
-   "Ultrasound to detect plasma leakage (ascites, pleural effusion, gallbladder wall oedema)",
-   "Blood grouping and cross-match if significant bleeding occurs"
-  ],
-  "redFlags": [
-   "WHO warning signs: severe abdominal pain, persistent vomiting, mucosal bleeding, restlessness or lethargy, and clinical fluid accumulation",
-   "Rising haematocrit with a rapidly falling platelet count indicating intensifying plasma leak",
-   "Signs of shock (narrow pulse pressure, cold clammy peripheries, tachycardia, hypotension) marking dengue shock syndrome",
-   "Deterioration around defervescence, the classic timing of the critical phase"
-  ],
-  "prognosis": "With early recognition and careful fluid management the great majority recover fully. Untreated or poorly managed severe dengue with prolonged shock or major haemorrhage carries significant mortality, but timely, judicious supportive care dramatically reduces death rates.",
-  "pitfalls": [
-   "Assuming a patient is improving when fever settles, missing the onset of the critical plasma-leak phase",
-   "Over-transfusing platelets based on the count alone rather than for clinical bleeding",
-   "Excessive intravenous fluids causing fluid overload and respiratory compromise, or inadequate fluids allowing shock",
-   "Giving NSAIDs or other agents that worsen bleeding and gastric irritation"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific antiviral exists; management centres on meticulous fluid balance with judicious isotonic crystalloid resuscitation guided by haematocrit and clinical status, avoiding both under- and over-resuscitation",
-   "Intensive monitoring during the critical defervescence period with serial haematocrit, platelet counts, vital signs and urine output to detect plasma leakage and shock early",
-   "Prompt, aggressive management of dengue shock syndrome with fluid resuscitation and, if refractory, colloids and critical-care support",
-   "Supportive symptomatic care with paracetamol for fever and pain, avoiding non-steroidal anti-inflammatory drugs and aspirin that worsen bleeding",
-   "Blood-product support with packed red cells, and platelets or fresh frozen plasma only for significant bleeding, with grouping and cross-match if haemorrhage occurs",
-   "Act on WHO warning signs — abdominal pain, persistent vomiting, mucosal bleeding, lethargy, and a rising haematocrit with falling platelets — to admit and escalate care",
-   "Vector-control and preventive advice with public-health notification given the outbreak potential"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dengue_hemorrhagic_fever-pathway",
-   "title": "Dengue haemorrhagic fever: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A severe form of dengue, a mosquito-borne flaviviral infection spread by Aedes aegypti, with recurrent large outbreaks across India",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: WHO warning signs: severe abdominal pain, persistent vomiting, mucosal bleeding, restlessness or lethargy, and clinical fluid accumulation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: NS1 antigen in early illness and dengue IgM/IgG serology or RT-PCR, Serial full blood counts monitoring haematocrit and platelet trends, Coagulation profile and liver enzymes to assess severity"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific antiviral exists; management centres on meticulous fluid balance with judicious isotonic crystalloid resuscitation guided by haematocrit and clinical status, avoiding both under- and over-resuscitation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a patient is improving when fever settles, missing the onset of the critical plasma-leak phase"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dengue haemorrhagic fever."
-  }
- ],
- "tables": [
-  {
-   "id": "dengue_hemorrhagic_fever-matrix",
-   "title": "Dengue haemorrhagic fever: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A severe form of dengue, a mosquito-borne flaviviral infection spread by Aedes aegypti, with recurrent large outbreaks across",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious / Tropical",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A severe form of dengue, a mosquito-borne flaviviral infection spread by Aedes aegypti, with recurrent large outbreaks across India",
+      "The defining features are plasma leakage (haemoconcentration, effusions, ascites), bleeding tendency and thrombocytopenia, which can progress to dengue shock syndrome",
+      "The critical, most dangerous period begins around the time of defervescence, when capillary leak peaks, so patients can deteriorate just as fever settles",
+      "WHO warning signs (abdominal pain, persistent vomiting, mucosal bleeding, lethargy, hepatomegaly, fluid accumulation and a rising haematocrit with falling platelets) flag patients at risk of severe disease",
+      "Secondary infection with a different dengue serotype increases the risk of severe disease through antibody-dependent enhancement",
+      "Management is meticulous fluid balance guided by haematocrit and clinical status; there is no specific antiviral, and both under- and over-resuscitation are harmful",
+      "Platelet transfusion is not indicated purely for a low count and should be reserved for significant bleeding",
+      "Diagnosis uses NS1 antigen early and IgM/IgG serology or PCR, with serial full blood counts to track haematocrit and platelets"
     ],
-    [
-     "Key Investigations",
-     "NS1 antigen in early illness and dengue IgM/IgG serology or RT-PCR, Serial full blood counts monitoring haematocrit and platelet",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Following an infective Aedes bite, dengue virus replicates and causes a systemic febrile illness. In severe dengue an intense host immune and cytokine response transiently increases vascular permeability, allowing plasma to leak from the intravascular compartment; this manifests as haemoconcentration, serous effusions and, if severe, hypovolaemic shock. Concurrent thrombocytopenia, platelet dysfunction, coagulopathy and vascular fragility produce the bleeding diathesis. Pre-existing heterotypic antibodies from a prior infection can enhance viral uptake into cells (antibody-dependent enhancement), heightening the risk of severe disease on secondary infection.",
+    "additionalDifferentials": [
+      "Other viral haemorrhagic fevers",
+      "Chikungunya and Zika co-circulating arboviral illness",
+      "Severe malaria",
+      "Leptospirosis",
+      "Enteric fever",
+      "Rickettsial infection (e.g. scrub typhus)"
     ],
-    [
-     "Primary Differentials",
-     "Other viral haemorrhagic fevers, Chikungunya and Zika co-circulating arboviral illness, Severe malaria",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Sepsis with disseminated intravascular coagulation",
+      "Acute leukaemia or other causes of thrombocytopenia with bleeding",
+      "Immune thrombocytopenia",
+      "Hantavirus or other capillary-leak syndromes"
     ],
-    [
-     "Management Strategy",
-     "No specific antiviral exists; management centres on meticulous fluid balance with judicious isotonic crystalloid resuscitation",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "NS1 antigen in early illness and dengue IgM/IgG serology or RT-PCR",
+      "Serial full blood counts monitoring haematocrit and platelet trends",
+      "Coagulation profile and liver enzymes to assess severity",
+      "Ultrasound to detect plasma leakage (ascites, pleural effusion, gallbladder wall oedema)",
+      "Blood grouping and cross-match if significant bleeding occurs"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a patient is improving when fever settles, missing the onset of the critical plasma-leak phase",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "WHO warning signs: severe abdominal pain, persistent vomiting, mucosal bleeding, restlessness or lethargy, and clinical fluid accumulation",
+      "Rising haematocrit with a rapidly falling platelet count indicating intensifying plasma leak",
+      "Signs of shock (narrow pulse pressure, cold clammy peripheries, tachycardia, hypotension) marking dengue shock syndrome",
+      "Deterioration around defervescence, the classic timing of the critical phase"
+    ],
+    "prognosis": "With early recognition and careful fluid management the great majority recover fully. Untreated or poorly managed severe dengue with prolonged shock or major haemorrhage carries significant mortality, but timely, judicious supportive care dramatically reduces death rates.",
+    "pitfalls": [
+      "Assuming a patient is improving when fever settles, missing the onset of the critical plasma-leak phase",
+      "Over-transfusing platelets based on the count alone rather than for clinical bleeding",
+      "Excessive intravenous fluids causing fluid overload and respiratory compromise, or inadequate fluids allowing shock",
+      "Giving NSAIDs or other agents that worsen bleeding and gastric irritation"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific antiviral exists; management centres on meticulous fluid balance with judicious isotonic crystalloid resuscitation guided by haematocrit and clinical status, avoiding both under- and over-resuscitation",
+      "Intensive monitoring during the critical defervescence period with serial haematocrit, platelet counts, vital signs and urine output to detect plasma leakage and shock early",
+      "Prompt, aggressive management of dengue shock syndrome with fluid resuscitation and, if refractory, colloids and critical-care support",
+      "Supportive symptomatic care with paracetamol for fever and pain, avoiding non-steroidal anti-inflammatory drugs and aspirin that worsen bleeding",
+      "Blood-product support with packed red cells, and platelets or fresh frozen plasma only for significant bleeding, with grouping and cross-match if haemorrhage occurs",
+      "Act on WHO warning signs — abdominal pain, persistent vomiting, mucosal bleeding, lethargy, and a rising haematocrit with falling platelets — to admit and escalate care",
+      "Vector-control and preventive advice with public-health notification given the outbreak potential"
     ]
-   ],
-   "caption": "Overview comparison matrix for dengue haemorrhagic fever."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dengue-hemorrhagic-fever-real-image",
-   "title": "Dengue haemorrhagic fever: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "dengue_hemorrhagic_fever-pathway",
+      "title": "Dengue haemorrhagic fever: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A severe form of dengue, a mosquito-borne flaviviral infection spread by Aedes aegypti, with recurrent large outbreaks across India",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: WHO warning signs: severe abdominal pain, persistent vomiting, mucosal bleeding, restlessness or lethargy, and clinical fluid accumulation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: NS1 antigen in early illness and dengue IgM/IgG serology or RT-PCR, Serial full blood counts monitoring haematocrit and platelet trends, Coagulation profile and liver enzymes to assess severity"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific antiviral exists; management centres on meticulous fluid balance with judicious isotonic crystalloid resuscitation guided by haematocrit and clinical status, avoiding both under- and over-resuscitation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a patient is improving when fever settles, missing the onset of the critical plasma-leak phase"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dengue haemorrhagic fever."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dengue_hemorrhagic_fever-matrix",
+      "title": "Dengue haemorrhagic fever: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A severe form of dengue, a mosquito-borne flaviviral infection spread by Aedes aegypti, with recurrent large outbreaks across",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "NS1 antigen in early illness and dengue IgM/IgG serology or RT-PCR, Serial full blood counts monitoring haematocrit and platelet",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other viral haemorrhagic fevers, Chikungunya and Zika co-circulating arboviral illness, Severe malaria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific antiviral exists; management centres on meticulous fluid balance with judicious isotonic crystalloid resuscitation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a patient is improving when fever settles, missing the onset of the critical plasma-leak phase",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dengue haemorrhagic fever."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 196-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dengue_hemorrhagic_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NS1 antigen in early illness; dengue IgM/IgG or RT-PCR",
+          "cells": [
+            {
+              "text": "Dengue virus infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial full blood counts",
+          "cells": [
+            {
+              "text": "Rising haematocrit with falling platelets signals intensifying plasma leak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile and liver enzymes",
+          "cells": [
+            {
+              "text": "Assesses severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Plasma leakage: ascites, pleural effusion, gallbladder wall oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood grouping and cross-match",
+          "cells": [
+            {
+              "text": "Only if significant bleeding occurs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dengue_hemorrhagic_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Judicious isotonic crystalloid",
+          "cells": [
+            {
+              "text": "Guided by haematocrit and clinical status; avoid under- and over-resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive monitoring in the critical phase",
+          "cells": [
+            {
+              "text": "Serial haematocrit, platelets, vital signs and urine output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dengue shock management",
+          "cells": [
+            {
+              "text": "Prompt fluid resuscitation; colloids and critical care if refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Paracetamol for fever and pain; avoid NSAIDs and aspirin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood-product support",
+          "cells": [
+            {
+              "text": "Packed red cells; platelets or fresh frozen plasma only for significant bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation on warning signs",
+          "cells": [
+            {
+              "text": "Abdominal pain, persistent vomiting, mucosal bleeding, lethargy, rising haematocrit with falling platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vector control and notification",
+          "cells": [
+            {
+              "text": "Preventive advice and public-health notification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dengue_hemorrhagic_fever-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Viral hemorrhagic fever syndromes and their distribution",
+      "rowHeader": "Disease",
+      "columns": [
+        "Incubation period, days",
+        "Case-infection ratio",
+        "Case-fatality rate, %",
+        "Geographic range",
+        "Target population"
+      ],
+      "rows": [
+        {
+          "parameter": "Lassa fever",
+          "cells": [
+            {
+              "text": "5 to 16"
+            },
+            {
+              "text": "Mild infections probably common"
+            },
+            {
+              "text": "15"
+            },
+            {
+              "text": "West Africa"
+            },
+            {
+              "text": "All ages, both sexes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "South American HF",
+          "cells": [
+            {
+              "text": "7 to 14"
+            },
+            {
+              "text": "Most infections (more than half) result in disease"
+            },
+            {
+              "text": "15 to 30"
+            },
+            {
+              "text": "Selected rural areas of Bolivia, Argentina, Venezuela and Brazil"
+            },
+            {
+              "text": "Bolivia: men in the countryside; all ages and both sexes in villages. Argentina: all ages, both sexes; excess exposure and disease in men. Venezuela: all ages, both sexes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rift Valley fever",
+          "cells": [
+            {
+              "text": "2 to 5"
+            },
+            {
+              "text": "About 1:100"
+            },
+            {
+              "text": "About 50"
+            },
+            {
+              "text": "Sub-Saharan Africa, Madagascar, Egypt"
+            },
+            {
+              "text": "All ages, both sexes; more often diagnosed in men; preexisting liver disease may predispose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Crimean-Congo HF",
+          "cells": [
+            {
+              "text": "3 to 12"
+            },
+            {
+              "text": ">=1:5"
+            },
+            {
+              "text": "15 to 30"
+            },
+            {
+              "text": "Africa, Middle East, Turkey, Balkans, southern region of the former Soviet Union, western China"
+            },
+            {
+              "text": "All ages, both sexes; men more exposed in some settings"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HF with renal syndrome",
+          "cells": [
+            {
+              "text": "9 to 35"
+            },
+            {
+              "text": "Hantaan, >1:1.25; Puumala, 1:20"
+            },
+            {
+              "text": "Hantaan, 5 to 15; Puumala, <1"
+            },
+            {
+              "text": "Worldwide, depending on rodent reservoir"
+            },
+            {
+              "text": "Excess of male patients (partly from greater exposure); mainly adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hantavirus pulmonary syndrome",
+          "cells": [
+            {
+              "text": "About 7 to 28"
+            },
+            {
+              "text": "Very high"
+            },
+            {
+              "text": "40 to 50"
+            },
+            {
+              "text": "Americas"
+            },
+            {
+              "text": "Excess of male patients due to some occupational exposure; mainly adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Marburg or Ebola HF",
+          "cells": [
+            {
+              "text": "3 to 16"
+            },
+            {
+              "text": "High"
+            },
+            {
+              "text": "25 to 90"
+            },
+            {
+              "text": "Sub-Saharan Africa"
+            },
+            {
+              "text": "All ages, both sexes; children less exposed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Yellow fever",
+          "cells": [
+            {
+              "text": "3 to 6"
+            },
+            {
+              "text": "1:2 to 1:20"
+            },
+            {
+              "text": "20"
+            },
+            {
+              "text": "Africa, South America"
+            },
+            {
+              "text": "All ages, both sexes; adults more exposed in jungle setting; preexisting flavivirus immunity may cross-protect"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dengue HF/dengue shock syndrome",
+          "cells": [
+            {
+              "text": "2 to 7"
+            },
+            {
+              "text": "Nonimmune, 1:10,000; heterologous immune, 1:100"
+            },
+            {
+              "text": "<1 with supportive treatment"
+            },
+            {
+              "text": "Tropics and subtropics worldwide"
+            },
+            {
+              "text": "Predominantly children; previous heterologous dengue infection predisposes to HF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kyasanur Forest/Omsk HF",
+          "cells": [
+            {
+              "text": "3 to 8"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "0.5 to 10"
+            },
+            {
+              "text": "Mysore State, India / western Siberia"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source footnote (a) on the Rift Valley fever case-infection ratio is not shown."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dengue_hemorrhagic_fever-dx-mgmt",
+      "title": "Diagnosis and management of Dengue haemorrhagic fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dengue haemorrhagic fever: fever with bleeding or warning signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (WHO warning signs, shock, or deterioration at defervescence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Admit and escalate: fluid resuscitation and critical care for dengue shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NS1 antigen or PCR, dengue IgM/IgG; serial haematocrit and platelets; ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does rising haematocrit with falling platelets show intensifying plasma leak?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other arboviral, malaria, leptospirosis, enteric fever or rickettsial illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Judicious isotonic crystalloid guided by haematocrit and clinical status",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial haematocrit, platelets, vital signs and urine output through defervescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive resuscitation and critical care for dengue shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Paracetamol for fever and pain; avoid NSAIDs and aspirin",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Packed red cells; platelets or fresh frozen plasma only for significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover fully with early recognition and careful fluid management",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,405 @@
 {
- "id": "colorado_tick_fever",
- "name": "Colorado tick fever",
- "aliases": [
-  "CTF",
-  "Colorado tick fever virus infection",
-  "mountain tick fever"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC Yellow Book",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by a coltivirus transmitted by the Rocky Mountain wood tick (Dermacentor andersoni) at higher altitudes in the western United States and western Canada",
-   "The illness is classically biphasic (saddleback fever), with fever, headache, myalgia, and photophobia that remit briefly and then recur after a few days",
-   "The virus infects erythroid precursors and persists inside red blood cells, so leucopenia and thrombocytopenia are common and viraemia may be prolonged",
-   "Because virus persists in erythrocytes for weeks, affected patients should be deferred from blood donation to avoid transfusion transmission",
-   "Rash is less prominent than in the rickettsial tick-borne diseases, and the absence of an eschar or petechial rash helps distinguish it clinically",
-   "Management is supportive with no licensed specific antiviral, and most patients recover fully though convalescent fatigue can be prolonged",
-   "Diagnosis uses RT-PCR or immunofluorescence on blood and paired serology, with the tick-exposure and mountain travel history being a key clue"
+  "id": "colorado_tick_fever",
+  "name": "Colorado tick fever",
+  "aliases": [
+    "CTF",
+    "Colorado tick fever virus infection",
+    "mountain tick fever"
   ],
-  "pathophysiology": "Colorado tick fever virus is introduced during the bite of an infected Dermacentor tick and infects haematopoietic progenitor cells in the bone marrow, including erythroid precursors. As infected cells mature, the virus remains sequestered within circulating erythrocytes, protecting it from immune clearance and producing prolonged viraemia. Marrow suppression accounts for the characteristic leucopenia and thrombocytopenia, and the biphasic fever pattern reflects waves of viral replication and host response. Rare severe manifestations include meningoencephalitis and haemorrhagic disease, particularly in children.",
-  "additionalDifferentials": [
-   "Rocky Mountain spotted fever and other rickettsial tick-borne infections",
-   "Tularaemia",
-   "Ehrlichiosis and anaplasmosis",
-   "Influenza and other nonspecific viral febrile illnesses",
-   "Relapsing fever from Borrelia species",
-   "Early Lyme disease"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR on blood for viral RNA during acute illness",
-   "Immunofluorescent detection of viral antigen in erythrocytes",
-   "Paired acute and convalescent serology",
-   "Full blood count showing leucopenia and thrombocytopenia",
-   "Investigations to exclude Rocky Mountain spotted fever given overlapping presentation",
-   "Cerebrospinal fluid analysis if meningoencephalitis is suspected"
-  ],
-  "redFlags": [
-   "Meningoencephalitis with altered mental status, especially in children",
-   "Haemorrhagic manifestations with marked thrombocytopenia",
-   "Persistent high fever failing to follow the expected self-limiting course",
-   "Signs suggesting an alternative treatable tick-borne infection such as Rocky Mountain spotted fever",
-   "Prolonged or severe cytopenias"
-  ],
-  "prognosis": "The illness is usually self-limiting with full recovery, although convalescent fatigue and weakness may persist for weeks; severe complications such as encephalitis or haemorrhage are rare and occur mainly in children.",
-  "pitfalls": [
-   "Withholding empirical treatment for Rocky Mountain spotted fever while awaiting confirmation, since that infection can be rapidly fatal",
-   "Not deferring blood donation despite prolonged erythrocyte-associated viraemia",
-   "Overlooking the mountain travel and tick-exposure history",
-   "Attributing prolonged cytopenias to another cause",
-   "Assuming a rash must be present to consider a tick-borne infection"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "CDC Yellow Book: Health Information for International Travel"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive care with antipyretics and analgesics, fluids and rest, as no licensed specific antiviral exists",
-   "Prompt removal of attached ticks and advice on bite prevention with repellents and protective clothing",
-   "Defer affected patients from blood donation for a prolonged period given persistent erythrocyte-bound viraemia",
-   "Monitor the full blood count for leucopenia and thrombocytopenia",
-   "Consider empirical doxycycline and investigation for Rocky Mountain spotted fever where that diagnosis cannot be excluded",
-   "Vigilance for and hospital management of severe complications such as meningoencephalitis or haemorrhage, particularly in children"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "colorado_tick_fever-pathway",
-   "title": "Colorado tick fever: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by a coltivirus transmitted by the Rocky Mountain wood tick (Dermacentor andersoni) at higher altitudes in the western United States and western Canada",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Meningoencephalitis with altered mental status, especially in children",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR on blood for viral RNA during acute illness, Immunofluorescent detection of viral antigen in erythrocytes, Paired acute and convalescent serology"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care with antipyretics and analgesics, fluids and rest, as no licensed specific antiviral exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Withholding empirical treatment for Rocky Mountain spotted fever while awaiting confirmation, since that infection can be rapidly fatal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of colorado tick fever."
-  }
- ],
- "tables": [
-  {
-   "id": "colorado_tick_fever-matrix",
-   "title": "Colorado tick fever: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by a coltivirus transmitted by the Rocky Mountain wood tick (Dermacentor andersoni) at higher altitudes in the western",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC Yellow Book",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by a coltivirus transmitted by the Rocky Mountain wood tick (Dermacentor andersoni) at higher altitudes in the western United States and western Canada",
+      "The illness is classically biphasic (saddleback fever), with fever, headache, myalgia, and photophobia that remit briefly and then recur after a few days",
+      "The virus infects erythroid precursors and persists inside red blood cells, so leucopenia and thrombocytopenia are common and viraemia may be prolonged",
+      "Because virus persists in erythrocytes for weeks, affected patients should be deferred from blood donation to avoid transfusion transmission",
+      "Rash is less prominent than in the rickettsial tick-borne diseases, and the absence of an eschar or petechial rash helps distinguish it clinically",
+      "Management is supportive with no licensed specific antiviral, and most patients recover fully though convalescent fatigue can be prolonged",
+      "Diagnosis uses RT-PCR or immunofluorescence on blood and paired serology, with the tick-exposure and mountain travel history being a key clue"
     ],
-    [
-     "Key Investigations",
-     "RT-PCR on blood for viral RNA during acute illness, Immunofluorescent detection of viral antigen in erythrocytes, Paired acute",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Colorado tick fever virus is introduced during the bite of an infected Dermacentor tick and infects haematopoietic progenitor cells in the bone marrow, including erythroid precursors. As infected cells mature, the virus remains sequestered within circulating erythrocytes, protecting it from immune clearance and producing prolonged viraemia. Marrow suppression accounts for the characteristic leucopenia and thrombocytopenia, and the biphasic fever pattern reflects waves of viral replication and host response. Rare severe manifestations include meningoencephalitis and haemorrhagic disease, particularly in children.",
+    "additionalDifferentials": [
+      "Rocky Mountain spotted fever and other rickettsial tick-borne infections",
+      "Tularaemia",
+      "Ehrlichiosis and anaplasmosis",
+      "Influenza and other nonspecific viral febrile illnesses",
+      "Relapsing fever from Borrelia species",
+      "Early Lyme disease"
     ],
-    [
-     "Primary Differentials",
-     "Rocky Mountain spotted fever and other rickettsial tick-borne infections, Tularaemia, Ehrlichiosis and anaplasmosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "RT-PCR on blood for viral RNA during acute illness",
+      "Immunofluorescent detection of viral antigen in erythrocytes",
+      "Paired acute and convalescent serology",
+      "Full blood count showing leucopenia and thrombocytopenia",
+      "Investigations to exclude Rocky Mountain spotted fever given overlapping presentation",
+      "Cerebrospinal fluid analysis if meningoencephalitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Supportive care with antipyretics and analgesics, fluids and rest, as no licensed specific antiviral exists",
-     "Core treatment modality"
+    "redFlags": [
+      "Meningoencephalitis with altered mental status, especially in children",
+      "Haemorrhagic manifestations with marked thrombocytopenia",
+      "Persistent high fever failing to follow the expected self-limiting course",
+      "Signs suggesting an alternative treatable tick-borne infection such as Rocky Mountain spotted fever",
+      "Prolonged or severe cytopenias"
     ],
-    [
-     "Clinical Pitfall",
-     "Withholding empirical treatment for Rocky Mountain spotted fever while awaiting confirmation, since that infection can be rapidly",
-     "Prevent diagnostic or management error"
+    "prognosis": "The illness is usually self-limiting with full recovery, although convalescent fatigue and weakness may persist for weeks; severe complications such as encephalitis or haemorrhage are rare and occur mainly in children.",
+    "pitfalls": [
+      "Withholding empirical treatment for Rocky Mountain spotted fever while awaiting confirmation, since that infection can be rapidly fatal",
+      "Not deferring blood donation despite prolonged erythrocyte-associated viraemia",
+      "Overlooking the mountain travel and tick-exposure history",
+      "Attributing prolonged cytopenias to another cause",
+      "Assuming a rash must be present to consider a tick-borne infection"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "CDC Yellow Book: Health Information for International Travel"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive care with antipyretics and analgesics, fluids and rest, as no licensed specific antiviral exists",
+      "Prompt removal of attached ticks and advice on bite prevention with repellents and protective clothing",
+      "Defer affected patients from blood donation for a prolonged period given persistent erythrocyte-bound viraemia",
+      "Monitor the full blood count for leucopenia and thrombocytopenia",
+      "Consider empirical doxycycline and investigation for Rocky Mountain spotted fever where that diagnosis cannot be excluded",
+      "Vigilance for and hospital management of severe complications such as meningoencephalitis or haemorrhage, particularly in children"
     ]
-   ],
-   "caption": "Overview comparison matrix for colorado tick fever."
-  }
- ],
- "diagrams": [
-  {
-   "id": "colorado-tick-fever-real-image",
-   "title": "Colorado tick fever: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "colorado_tick_fever-pathway",
+      "title": "Colorado tick fever: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by a coltivirus transmitted by the Rocky Mountain wood tick (Dermacentor andersoni) at higher altitudes in the western United States and western Canada",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Meningoencephalitis with altered mental status, especially in children",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR on blood for viral RNA during acute illness, Immunofluorescent detection of viral antigen in erythrocytes, Paired acute and convalescent serology"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care with antipyretics and analgesics, fluids and rest, as no licensed specific antiviral exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Withholding empirical treatment for Rocky Mountain spotted fever while awaiting confirmation, since that infection can be rapidly fatal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of colorado tick fever."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "colorado_tick_fever-matrix",
+      "title": "Colorado tick fever: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by a coltivirus transmitted by the Rocky Mountain wood tick (Dermacentor andersoni) at higher altitudes in the western",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR on blood for viral RNA during acute illness, Immunofluorescent detection of viral antigen in erythrocytes, Paired acute",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rocky Mountain spotted fever and other rickettsial tick-borne infections, Tularaemia, Ehrlichiosis and anaplasmosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care with antipyretics and analgesics, fluids and rest, as no licensed specific antiviral exists",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Withholding empirical treatment for Rocky Mountain spotted fever while awaiting confirmation, since that infection can be rapidly",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for colorado tick fever."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC Yellow Book",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "colorado_tick_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR on blood for viral RNA",
+          "cells": [
+            {
+              "text": "Viral RNA detected during acute illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunofluorescent detection of viral antigen",
+          "cells": [
+            {
+              "text": "Viral antigen within erythrocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired acute and convalescent serology",
+          "cells": [
+            {
+              "text": "Paired samples, acute and convalescent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Leucopenia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "colorado_tick_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics and analgesics, fluids and rest; no licensed specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tick removal and bite prevention",
+          "cells": [
+            {
+              "text": "Prompt removal of attached ticks; repellents and protective clothing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical doxycycline",
+          "cells": [
+            {
+              "text": "Considered where Rocky Mountain spotted fever cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood donation deferral",
+          "cells": [
+            {
+              "text": "Prolonged deferral given persistent erythrocyte-bound viraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Full blood count for leucopenia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe complications",
+          "cells": [
+            {
+              "text": "Hospital management of meningoencephalitis or haemorrhage, particularly in children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "colorado_tick_fever-dx-mgmt",
+      "title": "Diagnosis and management of Colorado tick fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Colorado tick fever: febrile tick-bite illness with cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (meningoencephalitis, haemorrhage, persistent high fever)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent admission and management of meningoencephalitis or haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR on blood; antigen in erythrocytes; paired serology; full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the virus confirmed by PCR, antigen or paired serology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude Rocky Mountain spotted fever; consider empirical doxycycline",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with antipyretics, fluids and rest; no licensed antiviral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt tick removal and bite prevention with repellents",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Defer from blood donation for a prolonged period",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor the full blood count for leucopenia and thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually self-limiting with full recovery; convalescent fatigue may persist for weeks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

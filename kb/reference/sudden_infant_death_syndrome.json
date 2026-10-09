@@ -1,175 +1,471 @@
 {
- "id": "sudden_infant_death_syndrome",
- "name": "Sudden Infant Death Syndrome",
- "aliases": [
-  "SIDS",
-  "cot death",
-  "crib death"
- ],
- "class": "non_infective",
- "system": "Respiratory / General",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as the sudden and unexpected death of an infant under one year that remains unexplained after a thorough death scene investigation, review of history, and complete postmortem examination.",
-   "It is a diagnosis of exclusion and forms part of the broader category of sudden unexpected infant death (SUID).",
-   "Incidence peaks between about 2 and 4 months of age, and most deaths occur during sleep.",
-   "Prone and side sleeping positions are major modifiable risk factors; supine sleep is strongly protective.",
-   "Additional risks include soft bedding, bed-sharing, overheating, maternal smoking during and after pregnancy, prematurity, and low birth weight.",
-   "Protective measures include breastfeeding, immunisation, pacifier use at sleep, and room-sharing without bed-sharing.",
-   "The prevailing model proposes a vulnerable infant meeting an exogenous stressor during a critical developmental period (the triple-risk hypothesis).",
-   "Safe-sleep counselling for every family is a core preventive intervention, and any death requires a compassionate, thorough investigation to exclude other causes."
+  "id": "sudden_infant_death_syndrome",
+  "name": "Sudden Infant Death Syndrome",
+  "aliases": [
+    "SIDS",
+    "cot death",
+    "crib death"
   ],
-  "pathophysiology": "SIDS is thought to arise when an underlying vulnerability, an environmental stressor, and a critical developmental window coincide (the triple-risk model). The vulnerability is believed to involve abnormalities in brainstem regions that regulate arousal, cardiorespiratory control, and responses to hypoxia and hypercarbia, including serotonergic network dysfunction. When such an infant encounters a stressor, for example a prone position, rebreathing of expired air, or overheating during sleep, an impaired protective arousal and autonomic response may fail to correct hypoxia, leading to death.",
-  "additionalDifferentials": [
-   "Accidental asphyxia or unsafe sleep-related suffocation",
-   "Undiagnosed infection or sepsis",
-   "Inborn errors of metabolism (e.g. fatty acid oxidation defects)",
-   "Cardiac channelopathy or arrhythmia (e.g. long QT syndrome)",
-   "Non-accidental injury or inflicted harm",
-   "Occult congenital or structural abnormality"
-  ],
-  "additionalInvestigations": [
-   "Full postmortem examination (autopsy)",
-   "Detailed death scene investigation and review of circumstances",
-   "Comprehensive clinical and family history review",
-   "Metabolic screening including postmortem samples where indicated",
-   "Genetic testing for cardiac channelopathies in selected cases",
-   "Microbiology and toxicology as part of the exclusion process"
-  ],
-  "redFlags": [
-   "Modifiable risk factors that mandate active safe-sleep counselling for prevention",
-   "Non-supine sleep position, soft bedding, or bed-sharing",
-   "Exposure to tobacco smoke before or after birth",
-   "History or scene findings suggesting suffocation or non-accidental injury",
-   "Recurrent unexplained infant deaths in a family, warranting careful evaluation",
-   "Prematurity or low birth weight increasing baseline risk"
-  ],
-  "prognosis": "SIDS is by definition fatal; the clinical focus is prevention through consistent safe-sleep practices, which have substantially reduced incidence, and supportive bereavement care for affected families.",
-  "pitfalls": [
-   "Assigning the label SIDS without a complete investigation that excludes other causes",
-   "Failing to deliver safe-sleep advice at every relevant contact",
-   "Overlooking an unsafe sleep environment as a contributing factor",
-   "Not considering metabolic or cardiac causes in apparently unexplained deaths",
-   "Neglecting sensitive support and follow-up for the bereaved family"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise prevention through safe-sleep advice: supine sleeping on a firm flat surface, avoiding soft bedding and overheating",
-   "Promote room-sharing without bed-sharing, breastfeeding, pacifier use at sleep and routine immunisation",
-   "Counsel against maternal smoking, alcohol and drug use during pregnancy and around the infant",
-   "Provide compassionate bereavement support and referral to specialist support organisations for the family",
-   "Complete a thorough investigation — autopsy, death-scene review and, in selected cases, genetic testing for cardiac channelopathies — to exclude other causes and inform family counselling",
-   "Offer enhanced support and reinforced safe-sleep guidance for subsequent infants, such as a care-of-next-infant programme"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sudden_infant_death_syndrome-pathway",
-   "title": "Sudden Infant Death Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as the sudden and unexpected death of an infant under one year that remains unexplained after a thorough death scene investigation, review of history, and complete postmortem examination.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Modifiable risk factors that mandate active safe-sleep counselling for prevention",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full postmortem examination (autopsy), Detailed death scene investigation and review of circumstances, Comprehensive clinical and family history review"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise prevention through safe-sleep advice: supine sleeping on a firm flat surface, avoiding soft bedding and overheating"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assigning the label SIDS without a complete investigation that excludes other causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sudden infant death syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "sudden_infant_death_syndrome-matrix",
-   "title": "Sudden Infant Death Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as the sudden and unexpected death of an infant under one year that remains unexplained after a thorough death scene",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / General",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as the sudden and unexpected death of an infant under one year that remains unexplained after a thorough death scene investigation, review of history, and complete postmortem examination.",
+      "It is a diagnosis of exclusion and forms part of the broader category of sudden unexpected infant death (SUID).",
+      "Incidence peaks between about 2 and 4 months of age, and most deaths occur during sleep.",
+      "Prone and side sleeping positions are major modifiable risk factors; supine sleep is strongly protective.",
+      "Additional risks include soft bedding, bed-sharing, overheating, maternal smoking during and after pregnancy, prematurity, and low birth weight.",
+      "Protective measures include breastfeeding, immunisation, pacifier use at sleep, and room-sharing without bed-sharing.",
+      "The prevailing model proposes a vulnerable infant meeting an exogenous stressor during a critical developmental period (the triple-risk hypothesis).",
+      "Safe-sleep counselling for every family is a core preventive intervention, and any death requires a compassionate, thorough investigation to exclude other causes."
     ],
-    [
-     "Key Investigations",
-     "Full postmortem examination (autopsy), Detailed death scene investigation and review of circumstances, Comprehensive clinical and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SIDS is thought to arise when an underlying vulnerability, an environmental stressor, and a critical developmental window coincide (the triple-risk model). The vulnerability is believed to involve abnormalities in brainstem regions that regulate arousal, cardiorespiratory control, and responses to hypoxia and hypercarbia, including serotonergic network dysfunction. When such an infant encounters a stressor, for example a prone position, rebreathing of expired air, or overheating during sleep, an impaired protective arousal and autonomic response may fail to correct hypoxia, leading to death.",
+    "additionalDifferentials": [
+      "Accidental asphyxia or unsafe sleep-related suffocation",
+      "Undiagnosed infection or sepsis",
+      "Inborn errors of metabolism (e.g. fatty acid oxidation defects)",
+      "Cardiac channelopathy or arrhythmia (e.g. long QT syndrome)",
+      "Non-accidental injury or inflicted harm",
+      "Occult congenital or structural abnormality"
     ],
-    [
-     "Primary Differentials",
-     "Accidental asphyxia or unsafe sleep-related suffocation, Undiagnosed infection or sepsis, Inborn errors of metabolism (e.g. fatty",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full postmortem examination (autopsy)",
+      "Detailed death scene investigation and review of circumstances",
+      "Comprehensive clinical and family history review",
+      "Metabolic screening including postmortem samples where indicated",
+      "Genetic testing for cardiac channelopathies in selected cases",
+      "Microbiology and toxicology as part of the exclusion process"
     ],
-    [
-     "Management Strategy",
-     "Prioritise prevention through safe-sleep advice: supine sleeping on a firm flat surface, avoiding soft bedding and overheating",
-     "Core treatment modality"
+    "redFlags": [
+      "Modifiable risk factors that mandate active safe-sleep counselling for prevention",
+      "Non-supine sleep position, soft bedding, or bed-sharing",
+      "Exposure to tobacco smoke before or after birth",
+      "History or scene findings suggesting suffocation or non-accidental injury",
+      "Recurrent unexplained infant deaths in a family, warranting careful evaluation",
+      "Prematurity or low birth weight increasing baseline risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Assigning the label SIDS without a complete investigation that excludes other causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "SIDS is by definition fatal; the clinical focus is prevention through consistent safe-sleep practices, which have substantially reduced incidence, and supportive bereavement care for affected families.",
+    "pitfalls": [
+      "Assigning the label SIDS without a complete investigation that excludes other causes",
+      "Failing to deliver safe-sleep advice at every relevant contact",
+      "Overlooking an unsafe sleep environment as a contributing factor",
+      "Not considering metabolic or cardiac causes in apparently unexplained deaths",
+      "Neglecting sensitive support and follow-up for the bereaved family"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise prevention through safe-sleep advice: supine sleeping on a firm flat surface, avoiding soft bedding and overheating",
+      "Promote room-sharing without bed-sharing, breastfeeding, pacifier use at sleep and routine immunisation",
+      "Counsel against maternal smoking, alcohol and drug use during pregnancy and around the infant",
+      "Provide compassionate bereavement support and referral to specialist support organisations for the family",
+      "Complete a thorough investigation — autopsy, death-scene review and, in selected cases, genetic testing for cardiac channelopathies — to exclude other causes and inform family counselling",
+      "Offer enhanced support and reinforced safe-sleep guidance for subsequent infants, such as a care-of-next-infant programme"
     ]
-   ],
-   "caption": "Overview comparison matrix for sudden infant death syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sudden-infant-death-syndrome-real-image",
-   "title": "Sudden Infant Death Syndrome: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "sudden_infant_death_syndrome-pathway",
+      "title": "Sudden Infant Death Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as the sudden and unexpected death of an infant under one year that remains unexplained after a thorough death scene investigation, review of history, and complete postmortem examination.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Modifiable risk factors that mandate active safe-sleep counselling for prevention",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full postmortem examination (autopsy), Detailed death scene investigation and review of circumstances, Comprehensive clinical and family history review"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise prevention through safe-sleep advice: supine sleeping on a firm flat surface, avoiding soft bedding and overheating"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assigning the label SIDS without a complete investigation that excludes other causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sudden infant death syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sudden_infant_death_syndrome-matrix",
+      "title": "Sudden Infant Death Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as the sudden and unexpected death of an infant under one year that remains unexplained after a thorough death scene",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full postmortem examination (autopsy), Detailed death scene investigation and review of circumstances, Comprehensive clinical and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Accidental asphyxia or unsafe sleep-related suffocation, Undiagnosed infection or sepsis, Inborn errors of metabolism (e.g. fatty",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise prevention through safe-sleep advice: supine sleeping on a firm flat surface, avoiding soft bedding and overheating",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assigning the label SIDS without a complete investigation that excludes other causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sudden infant death syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sudden_infant_death_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full postmortem examination",
+          "cells": [
+            {
+              "text": "Other causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed death scene investigation",
+          "cells": [
+            {
+              "text": "Circumstances of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comprehensive clinical and family history",
+          "cells": [
+            {
+              "text": "Prior illness and recurrent deaths"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening, including postmortem samples",
+          "cells": [
+            {
+              "text": "Inborn errors excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for cardiac channelopathies",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiology and toxicology",
+          "cells": [
+            {
+              "text": "Infection and toxic causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sudden_infant_death_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Accidental asphyxia or unsafe sleep suffocation",
+          "cells": [
+            {
+              "text": "Scene findings suggest mechanical cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Undiagnosed infection or sepsis",
+          "cells": [
+            {
+              "text": "Microbiology on postmortem samples"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac channelopathy or arrhythmia",
+          "cells": [
+            {
+              "text": "Long QT syndrome; genetic testing separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sudden_infant_death_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Safe-sleep advice",
+          "cells": [
+            {
+              "text": "Supine sleep on a firm flat surface; no soft bedding or overheating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Room-sharing without bed-sharing",
+          "cells": [
+            {
+              "text": "Preventive measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breastfeeding, immunisation and pacifier at sleep",
+          "cells": [
+            {
+              "text": "Protective measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking, alcohol and drug counselling",
+          "cells": [
+            {
+              "text": "Pregnancy and around the infant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bereavement support",
+          "cells": [
+            {
+              "text": "Compassionate care and specialist support referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thorough investigation",
+          "cells": [
+            {
+              "text": "Autopsy and death-scene review to exclude other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enhanced support for subsequent infants",
+          "cells": [
+            {
+              "text": "Reinforced safe-sleep guidance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sudden_infant_death_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sudden Infant Death Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexpected death of an infant under one year: suspected SIDS after investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (suffocation signs, non-accidental injury, recurrent family deaths)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent child protection and forensic review for possible non-accidental harm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full autopsy; death-scene review; history review; metabolic and genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does full investigation exclude other causes of the sudden unexpected death?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider suffocation, infection, metabolic or cardiac cause; reclassify the death",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Safe-sleep advice on every contact: supine, firm, no bed-sharing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Smoke-free environment before and after birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Compassionate bereavement support and specialist referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reinforced safe-sleep guidance for subsequent infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "A diagnosis of exclusion; prevention through safe sleep remains the core measure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

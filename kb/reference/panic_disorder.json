@@ -1,174 +1,470 @@
 {
- "id": "panic_disorder",
- "name": "Panic disorder",
- "aliases": [
-  "panic attacks disorder",
-  "episodic paroxysmal anxiety"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The core feature is recurrent, unexpected surges of intense fear or discomfort that peak within minutes, accompanied by prominent physical symptoms such as palpitations, chest tightness, breathlessness, sweating, trembling, dizziness, and a sense of impending doom",
-   "Diagnosis also requires persistent worry about further attacks or a maladaptive change in behaviour to avoid them, distinguishing the disorder from isolated panic attacks",
-   "Many patients present first to emergency or cardiology services convinced they are having a heart attack, so a compassionate explanation of the mind-body link is central to engagement",
-   "Exclude medical mimics before settling on the diagnosis, including arrhythmia, hyperthyroidism, hypoglycaemia, phaeochromocytoma, asthma, and caffeine or stimulant effects",
-   "Agoraphobic avoidance frequently develops as patients begin to avoid places or situations from which escape might feel difficult during an attack",
-   "First-line management combines cognitive behavioural therapy, including interoceptive exposure and breathing retraining, with SSRIs or SNRIs as pharmacological options",
-   "Benzodiazepines may give rapid relief but carry dependence and rebound risks, so they are generally reserved for short-term or adjunctive use rather than maintenance",
-   "Reassurance, psychoeducation about the self-limiting nature of attacks, and reduction of stimulants can markedly reduce anticipatory anxiety"
+  "id": "panic_disorder",
+  "name": "Panic disorder",
+  "aliases": [
+    "panic attacks disorder",
+    "episodic paroxysmal anxiety"
   ],
-  "pathophysiology": "Panic disorder is thought to arise from dysregulation of fear-processing circuits, particularly hypersensitivity of the amygdala and brainstem structures involved in the alarm and respiratory response, with contributions from serotonergic, noradrenergic, and GABAergic dysfunction. A heritable predisposition interacts with heightened sensitivity to internal bodily cues (interoceptive conditioning) and catastrophic misinterpretation of benign somatic sensations, which perpetuates the cycle of fear and physiological arousal.",
-  "additionalDifferentials": [
-   "Cardiac arrhythmia or acute coronary syndrome",
-   "Hyperthyroidism and other endocrine disturbances",
-   "Phaeochromocytoma",
-   "Hypoglycaemia",
-   "Substance intoxication or withdrawal, including caffeine, stimulants, and alcohol",
-   "Other anxiety disorders such as generalised anxiety disorder or social anxiety disorder",
-   "Vestibular or respiratory disorders presenting with dizziness or breathlessness"
-  ],
-  "additionalInvestigations": [
-   "Electrocardiogram to exclude arrhythmia in appropriate presentations",
-   "Thyroid function testing",
-   "Blood glucose measurement during symptomatic episodes",
-   "Substance and caffeine use screening",
-   "Standardised anxiety rating scales to gauge severity and monitor response"
-  ],
-  "redFlags": [
-   "Syncope, sustained chest pain, or objective signs suggesting a primary cardiac event",
-   "Emerging suicidal ideation, particularly with comorbid depression",
-   "Escalating benzodiazepine or alcohol use to self-manage symptoms",
-   "Severe agoraphobic avoidance causing housebound behaviour and functional collapse"
-  ],
-  "prognosis": "Panic disorder tends to run a chronic, fluctuating course, but a substantial proportion of patients achieve marked improvement or remission with adequate treatment. Prognosis is better with early intervention and engagement in cognitive behavioural therapy, and worse when agoraphobia, depression, or substance misuse is comorbid or when treatment is delayed.",
-  "pitfalls": [
-   "Repeated extensive medical investigations that reinforce illness beliefs rather than addressing the anxiety",
-   "Relying on long-term benzodiazepines and creating dependence",
-   "Missing comorbid depression and its associated suicide risk",
-   "Underdosing or prematurely stopping SSRIs before an adequate therapeutic trial",
-   "Overlooking caffeine, stimulants, or withdrawal states as drivers of attacks"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cognitive behavioural therapy including interoceptive exposure, cognitive restructuring and breathing retraining as first-line psychological treatment",
-   "Pharmacotherapy with an SSRI or SNRI as first-line drug treatment, started at a low dose and titrated upwards",
-   "Time-limited benzodiazepine use only for short-term or severe symptoms, avoiding long-term dependence",
-   "Psychoeducation on the mind-body basis of attacks and the benign nature of the physical symptoms",
-   "Exclude and address medical mimics such as arrhythmia, hyperthyroidism, hypoglycaemia and phaeochromocytoma, and reduce caffeine and stimulant use",
-   "Graded exposure to tackle agoraphobic avoidance",
-   "Monitor with standardised anxiety rating scales and screen for and treat comorbid depression"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "panic_disorder-pathway",
-   "title": "Panic disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The core feature is recurrent, unexpected surges of intense fear or discomfort that peak within minutes, accompanied by prominent physical symptoms such as palpitations, chest tightness, breathlessness, sweating, trembling, dizziness, and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope, sustained chest pain, or objective signs suggesting a primary cardiac event",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electrocardiogram to exclude arrhythmia in appropriate presentations, Thyroid function testing, Blood glucose measurement during symptomatic episodes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cognitive behavioural therapy including interoceptive exposure, cognitive restructuring and breathing retraining as first-line psychological treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeated extensive medical investigations that reinforce illness beliefs rather than addressing the anxiety"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of panic disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "panic_disorder-matrix",
-   "title": "Panic disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The core feature is recurrent, unexpected surges of intense fear or discomfort that peak within minutes, accompanied by prominent",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The core feature is recurrent, unexpected surges of intense fear or discomfort that peak within minutes, accompanied by prominent physical symptoms such as palpitations, chest tightness, breathlessness, sweating, trembling, dizziness, and a sense of impending doom",
+      "Diagnosis also requires persistent worry about further attacks or a maladaptive change in behaviour to avoid them, distinguishing the disorder from isolated panic attacks",
+      "Many patients present first to emergency or cardiology services convinced they are having a heart attack, so a compassionate explanation of the mind-body link is central to engagement",
+      "Exclude medical mimics before settling on the diagnosis, including arrhythmia, hyperthyroidism, hypoglycaemia, phaeochromocytoma, asthma, and caffeine or stimulant effects",
+      "Agoraphobic avoidance frequently develops as patients begin to avoid places or situations from which escape might feel difficult during an attack",
+      "First-line management combines cognitive behavioural therapy, including interoceptive exposure and breathing retraining, with SSRIs or SNRIs as pharmacological options",
+      "Benzodiazepines may give rapid relief but carry dependence and rebound risks, so they are generally reserved for short-term or adjunctive use rather than maintenance",
+      "Reassurance, psychoeducation about the self-limiting nature of attacks, and reduction of stimulants can markedly reduce anticipatory anxiety"
     ],
-    [
-     "Key Investigations",
-     "Electrocardiogram to exclude arrhythmia in appropriate presentations, Thyroid function testing, Blood glucose measurement during",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Panic disorder is thought to arise from dysregulation of fear-processing circuits, particularly hypersensitivity of the amygdala and brainstem structures involved in the alarm and respiratory response, with contributions from serotonergic, noradrenergic, and GABAergic dysfunction. A heritable predisposition interacts with heightened sensitivity to internal bodily cues (interoceptive conditioning) and catastrophic misinterpretation of benign somatic sensations, which perpetuates the cycle of fear and physiological arousal.",
+    "additionalDifferentials": [
+      "Cardiac arrhythmia or acute coronary syndrome",
+      "Hyperthyroidism and other endocrine disturbances",
+      "Phaeochromocytoma",
+      "Hypoglycaemia",
+      "Substance intoxication or withdrawal, including caffeine, stimulants, and alcohol",
+      "Other anxiety disorders such as generalised anxiety disorder or social anxiety disorder",
+      "Vestibular or respiratory disorders presenting with dizziness or breathlessness"
     ],
-    [
-     "Primary Differentials",
-     "Cardiac arrhythmia or acute coronary syndrome, Hyperthyroidism and other endocrine disturbances, Phaeochromocytoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electrocardiogram to exclude arrhythmia in appropriate presentations",
+      "Thyroid function testing",
+      "Blood glucose measurement during symptomatic episodes",
+      "Substance and caffeine use screening",
+      "Standardised anxiety rating scales to gauge severity and monitor response"
     ],
-    [
-     "Management Strategy",
-     "Cognitive behavioural therapy including interoceptive exposure, cognitive restructuring and breathing retraining as first-line",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope, sustained chest pain, or objective signs suggesting a primary cardiac event",
+      "Emerging suicidal ideation, particularly with comorbid depression",
+      "Escalating benzodiazepine or alcohol use to self-manage symptoms",
+      "Severe agoraphobic avoidance causing housebound behaviour and functional collapse"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeated extensive medical investigations that reinforce illness beliefs rather than addressing the anxiety",
-     "Prevent diagnostic or management error"
+    "prognosis": "Panic disorder tends to run a chronic, fluctuating course, but a substantial proportion of patients achieve marked improvement or remission with adequate treatment. Prognosis is better with early intervention and engagement in cognitive behavioural therapy, and worse when agoraphobia, depression, or substance misuse is comorbid or when treatment is delayed.",
+    "pitfalls": [
+      "Repeated extensive medical investigations that reinforce illness beliefs rather than addressing the anxiety",
+      "Relying on long-term benzodiazepines and creating dependence",
+      "Missing comorbid depression and its associated suicide risk",
+      "Underdosing or prematurely stopping SSRIs before an adequate therapeutic trial",
+      "Overlooking caffeine, stimulants, or withdrawal states as drivers of attacks"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cognitive behavioural therapy including interoceptive exposure, cognitive restructuring and breathing retraining as first-line psychological treatment",
+      "Pharmacotherapy with an SSRI or SNRI as first-line drug treatment, started at a low dose and titrated upwards",
+      "Time-limited benzodiazepine use only for short-term or severe symptoms, avoiding long-term dependence",
+      "Psychoeducation on the mind-body basis of attacks and the benign nature of the physical symptoms",
+      "Exclude and address medical mimics such as arrhythmia, hyperthyroidism, hypoglycaemia and phaeochromocytoma, and reduce caffeine and stimulant use",
+      "Graded exposure to tackle agoraphobic avoidance",
+      "Monitor with standardised anxiety rating scales and screen for and treat comorbid depression"
     ]
-   ],
-   "caption": "Overview comparison matrix for panic disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "panic-disorder-real-image",
-   "title": "Panic disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "panic_disorder-pathway",
+      "title": "Panic disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The core feature is recurrent, unexpected surges of intense fear or discomfort that peak within minutes, accompanied by prominent physical symptoms such as palpitations, chest tightness, breathlessness, sweating, trembling, dizziness, and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope, sustained chest pain, or objective signs suggesting a primary cardiac event",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electrocardiogram to exclude arrhythmia in appropriate presentations, Thyroid function testing, Blood glucose measurement during symptomatic episodes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cognitive behavioural therapy including interoceptive exposure, cognitive restructuring and breathing retraining as first-line psychological treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeated extensive medical investigations that reinforce illness beliefs rather than addressing the anxiety"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of panic disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "panic_disorder-matrix",
+      "title": "Panic disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The core feature is recurrent, unexpected surges of intense fear or discomfort that peak within minutes, accompanied by prominent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electrocardiogram to exclude arrhythmia in appropriate presentations, Thyroid function testing, Blood glucose measurement during",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cardiac arrhythmia or acute coronary syndrome, Hyperthyroidism and other endocrine disturbances, Phaeochromocytoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cognitive behavioural therapy including interoceptive exposure, cognitive restructuring and breathing retraining as first-line",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeated extensive medical investigations that reinforce illness beliefs rather than addressing the anxiety",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for panic disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "panic_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Arrhythmia excluded in appropriate presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Hyperthyroidism excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose during symptomatic episodes",
+          "cells": [
+            {
+              "text": "Hypoglycaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance and caffeine use screening",
+          "cells": [
+            {
+              "text": "Stimulant or withdrawal drivers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised anxiety rating scales",
+          "cells": [
+            {
+              "text": "Severity and response to treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panic_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac arrhythmia or acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Syncope or sustained chest pain points to a primary cardiac event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperthyroidism",
+          "cells": [
+            {
+              "text": "An endocrine mimic that thyroid testing excludes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caffeine, stimulant or withdrawal states",
+          "cells": [
+            {
+              "text": "Substance-driven attacks; reducing exposure is part of care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panic_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Interoceptive exposure, cognitive restructuring and breathing retraining; first-line psychological care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SSRI or SNRI",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "First-line drug treatment, started at a low dose and titrated upwards"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepines",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Time-limited, for short-term or severe symptoms only, avoiding dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychoeducation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "The mind-body basis of attacks and the benign nature of physical symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical mimics and substances",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Address arrhythmia, hyperthyroidism and hypoglycaemia; reduce caffeine and alcohol"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "panic_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Panic disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent sudden surges of fear with palpitations and breathlessness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (syncope, sustained chest pain, suicidal thoughts or escalating sedative use)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac review for syncope or sustained chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG, thyroid function, glucose during episodes, substance and caffeine screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are attacks recurrent and unexpected, with medical and substance causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider arrhythmia, hyperthyroidism, hypoglycaemia or substance effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "CBT with interoceptive exposure, cognitive restructuring and breathing retraining",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "SSRI or SNRI first-line, started low and titrated upwards",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Time-limited benzodiazepine only for short-term or severe symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychoeducation on the physical symptoms of attacks and their benign nature",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reduce caffeine, stimulants and alcohol; address medical mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and fluctuating; many improve markedly, more so with early CBT",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

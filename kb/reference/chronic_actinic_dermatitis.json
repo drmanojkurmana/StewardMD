@@ -1,173 +1,461 @@
 {
- "id": "chronic_actinic_dermatitis",
- "name": "Chronic actinic dermatitis",
- "aliases": [
-  "CAD",
-  "actinic reticuloid",
-  "photosensitivity dermatitis and actinic reticuloid syndrome",
-  "persistent light reaction"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology / Photodermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A persistent, eczematous photosensitivity seen predominantly in older men, in whom it can be severe and disabling",
-   "Chronic, itchy, lichenified and sometimes infiltrated plaques develop on sun-exposed skin, with a sharp cut-off at clothing lines and sparing of shaded areas such as behind the ears and under the chin",
-   "In its most florid form (actinic reticuloid) the skin becomes thickened and leonine, which can mimic cutaneous lymphoma both clinically and histologically",
-   "Phototesting characteristically shows a markedly reduced threshold to ultraviolet B, usually extending to ultraviolet A and sometimes into visible light",
-   "There is a frequent association with contact and photocontact allergy, for example to fragrances, plants (Compositae) and sunscreen chemicals, which should be sought by patch and photopatch testing",
-   "Rigorous photoprotection with clothing and broad-spectrum sunscreen is essential, alongside avoidance of identified contact allergens and treatment of the dermatitis",
-   "Topical and systemic immunosuppression is used for resistant disease, and low-dose desensitisation phototherapy may help selected patients"
+  "id": "chronic_actinic_dermatitis",
+  "name": "Chronic actinic dermatitis",
+  "aliases": [
+    "CAD",
+    "actinic reticuloid",
+    "photosensitivity dermatitis and actinic reticuloid syndrome",
+    "persistent light reaction"
   ],
-  "pathophysiology": "Chronic actinic dermatitis is thought to arise as a delayed-type hypersensitivity reaction in which ultraviolet radiation modifies an endogenous cutaneous protein to create a persistent photoantigen, driving an ongoing eczematous, T-cell mediated inflammatory response in light-exposed skin. Many patients have coexisting contact or photocontact allergies, and it is proposed that longstanding allergic contact dermatitis can evolve into a self-perpetuating photosensitive state. In the actinic reticuloid variant the dense dermal lymphocytic infiltrate can resemble cutaneous T-cell lymphoma histologically, although the process is benign and reactive.",
-  "additionalDifferentials": [
-   "Cutaneous T-cell lymphoma (mycosis fungoides / Sezary syndrome)",
-   "Airborne allergic contact dermatitis (for example to Compositae plants)",
-   "Photoallergic contact dermatitis or drug photosensitivity",
-   "Atopic or seborrhoeic dermatitis of the head and neck",
-   "Polymorphic light eruption",
-   "Systemic lupus erythematosus"
-  ],
-  "additionalInvestigations": [
-   "Phototesting demonstrating a reduced minimal erythema dose, usually to ultraviolet B and ultraviolet A",
-   "Patch and photopatch testing to identify contact and photocontact allergens",
-   "Skin biopsy to characterise the dermatitis and, in actinic reticuloid, to distinguish it from cutaneous lymphoma",
-   "Peripheral blood film and lymphocyte studies where lymphoma is a concern",
-   "Antinuclear antibody testing to exclude lupus erythematosus",
-   "Review of medications and topical products that may contribute to photosensitivity"
-  ],
-  "redFlags": [
-   "Leonine facies or erythroderma raising the possibility of underlying cutaneous lymphoma",
-   "Circulating atypical (Sezary) cells or lymphadenopathy requiring haematological evaluation",
-   "Severe, treatment-resistant disease with major impact on quality of life",
-   "New or worsening photosensitivity after starting a systemic drug"
-  ],
-  "prognosis": "Chronic actinic dermatitis tends to be persistent and can be markedly disabling, but with strict photoprotection, allergen avoidance and immunosuppressive therapy many patients improve, and slow resolution over years is possible; the actinic reticuloid variant is benign despite its lymphoma-like appearance, though it warrants careful follow-up.",
-  "pitfalls": [
-   "Misinterpreting the dense infiltrate of actinic reticuloid as cutaneous lymphoma and instituting inappropriate treatment",
-   "Failing to perform photopatch and patch testing and thereby missing treatable contact allergens",
-   "Underestimating the breadth of the action spectrum, so that ordinary sunscreens give inadequate protection",
-   "Overlooking a contributory photosensitising drug in an older patient on multiple medications"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Photodermatology Group guidance on the idiopathic photodermatoses"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Rigorous photoprotection with protective clothing, broad-spectrum sunscreen and avoidance of ultraviolet exposure as the cornerstone of control",
-   "Identification and strict avoidance of contact and photocontact allergens such as fragrances, Compositae plants and sunscreen chemicals, guided by patch and photopatch testing",
-   "Topical corticosteroids and calcineurin inhibitors with emollients to settle the eczematous inflammation",
-   "Systemic immunosuppression with oral corticosteroids, azathioprine, ciclosporin or mycophenolate for severe or disabling disease",
-   "Review and withdrawal of photosensitising medications and topical products",
-   "Dermatology and photodermatology follow-up with surveillance for the actinic reticuloid variant to distinguish it from cutaneous lymphoma"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_actinic_dermatitis-pathway",
-   "title": "Chronic actinic dermatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A persistent, eczematous photosensitivity seen predominantly in older men, in whom it can be severe and disabling",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Leonine facies or erythroderma raising the possibility of underlying cutaneous lymphoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Phototesting demonstrating a reduced minimal erythema dose, usually to ultraviolet B and ultraviolet A, Patch and photopatch testing to identify contact and photocontact allergens, Skin biopsy to characterise the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Rigorous photoprotection with protective clothing, broad-spectrum sunscreen and avoidance of ultraviolet exposure as the cornerstone of control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the dense infiltrate of actinic reticuloid as cutaneous lymphoma and instituting inappropriate treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic actinic dermatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_actinic_dermatitis-matrix",
-   "title": "Chronic actinic dermatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A persistent, eczematous photosensitivity seen predominantly in older men, in whom it can be severe and disabling",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology / Photodermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A persistent, eczematous photosensitivity seen predominantly in older men, in whom it can be severe and disabling",
+      "Chronic, itchy, lichenified and sometimes infiltrated plaques develop on sun-exposed skin, with a sharp cut-off at clothing lines and sparing of shaded areas such as behind the ears and under the chin",
+      "In its most florid form (actinic reticuloid) the skin becomes thickened and leonine, which can mimic cutaneous lymphoma both clinically and histologically",
+      "Phototesting characteristically shows a markedly reduced threshold to ultraviolet B, usually extending to ultraviolet A and sometimes into visible light",
+      "There is a frequent association with contact and photocontact allergy, for example to fragrances, plants (Compositae) and sunscreen chemicals, which should be sought by patch and photopatch testing",
+      "Rigorous photoprotection with clothing and broad-spectrum sunscreen is essential, alongside avoidance of identified contact allergens and treatment of the dermatitis",
+      "Topical and systemic immunosuppression is used for resistant disease, and low-dose desensitisation phototherapy may help selected patients"
     ],
-    [
-     "Key Investigations",
-     "Phototesting demonstrating a reduced minimal erythema dose, usually to ultraviolet B and ultraviolet A, Patch and photopatch",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic actinic dermatitis is thought to arise as a delayed-type hypersensitivity reaction in which ultraviolet radiation modifies an endogenous cutaneous protein to create a persistent photoantigen, driving an ongoing eczematous, T-cell mediated inflammatory response in light-exposed skin. Many patients have coexisting contact or photocontact allergies, and it is proposed that longstanding allergic contact dermatitis can evolve into a self-perpetuating photosensitive state. In the actinic reticuloid variant the dense dermal lymphocytic infiltrate can resemble cutaneous T-cell lymphoma histologically, although the process is benign and reactive.",
+    "additionalDifferentials": [
+      "Cutaneous T-cell lymphoma (mycosis fungoides / Sezary syndrome)",
+      "Airborne allergic contact dermatitis (for example to Compositae plants)",
+      "Photoallergic contact dermatitis or drug photosensitivity",
+      "Atopic or seborrhoeic dermatitis of the head and neck",
+      "Polymorphic light eruption",
+      "Systemic lupus erythematosus"
     ],
-    [
-     "Primary Differentials",
-     "Cutaneous T-cell lymphoma (mycosis fungoides / Sezary syndrome), Airborne allergic contact dermatitis (for example to Compositae",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Phototesting demonstrating a reduced minimal erythema dose, usually to ultraviolet B and ultraviolet A",
+      "Patch and photopatch testing to identify contact and photocontact allergens",
+      "Skin biopsy to characterise the dermatitis and, in actinic reticuloid, to distinguish it from cutaneous lymphoma",
+      "Peripheral blood film and lymphocyte studies where lymphoma is a concern",
+      "Antinuclear antibody testing to exclude lupus erythematosus",
+      "Review of medications and topical products that may contribute to photosensitivity"
     ],
-    [
-     "Management Strategy",
-     "Rigorous photoprotection with protective clothing, broad-spectrum sunscreen and avoidance of ultraviolet exposure as the",
-     "Core treatment modality"
+    "redFlags": [
+      "Leonine facies or erythroderma raising the possibility of underlying cutaneous lymphoma",
+      "Circulating atypical (Sezary) cells or lymphadenopathy requiring haematological evaluation",
+      "Severe, treatment-resistant disease with major impact on quality of life",
+      "New or worsening photosensitivity after starting a systemic drug"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the dense infiltrate of actinic reticuloid as cutaneous lymphoma and instituting inappropriate treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Chronic actinic dermatitis tends to be persistent and can be markedly disabling, but with strict photoprotection, allergen avoidance and immunosuppressive therapy many patients improve, and slow resolution over years is possible; the actinic reticuloid variant is benign despite its lymphoma-like appearance, though it warrants careful follow-up.",
+    "pitfalls": [
+      "Misinterpreting the dense infiltrate of actinic reticuloid as cutaneous lymphoma and instituting inappropriate treatment",
+      "Failing to perform photopatch and patch testing and thereby missing treatable contact allergens",
+      "Underestimating the breadth of the action spectrum, so that ordinary sunscreens give inadequate protection",
+      "Overlooking a contributory photosensitising drug in an older patient on multiple medications"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Photodermatology Group guidance on the idiopathic photodermatoses"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Rigorous photoprotection with protective clothing, broad-spectrum sunscreen and avoidance of ultraviolet exposure as the cornerstone of control",
+      "Identification and strict avoidance of contact and photocontact allergens such as fragrances, Compositae plants and sunscreen chemicals, guided by patch and photopatch testing",
+      "Topical corticosteroids and calcineurin inhibitors with emollients to settle the eczematous inflammation",
+      "Systemic immunosuppression with oral corticosteroids, azathioprine, ciclosporin or mycophenolate for severe or disabling disease",
+      "Review and withdrawal of photosensitising medications and topical products",
+      "Dermatology and photodermatology follow-up with surveillance for the actinic reticuloid variant to distinguish it from cutaneous lymphoma"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic actinic dermatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-actinic-dermatitis-real-image",
-   "title": "Chronic actinic dermatitis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "chronic_actinic_dermatitis-pathway",
+      "title": "Chronic actinic dermatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A persistent, eczematous photosensitivity seen predominantly in older men, in whom it can be severe and disabling",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Leonine facies or erythroderma raising the possibility of underlying cutaneous lymphoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Phototesting demonstrating a reduced minimal erythema dose, usually to ultraviolet B and ultraviolet A, Patch and photopatch testing to identify contact and photocontact allergens, Skin biopsy to characterise the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Rigorous photoprotection with protective clothing, broad-spectrum sunscreen and avoidance of ultraviolet exposure as the cornerstone of control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the dense infiltrate of actinic reticuloid as cutaneous lymphoma and instituting inappropriate treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic actinic dermatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_actinic_dermatitis-matrix",
+      "title": "Chronic actinic dermatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A persistent, eczematous photosensitivity seen predominantly in older men, in whom it can be severe and disabling",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Phototesting demonstrating a reduced minimal erythema dose, usually to ultraviolet B and ultraviolet A, Patch and photopatch",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cutaneous T-cell lymphoma (mycosis fungoides / Sezary syndrome), Airborne allergic contact dermatitis (for example to Compositae",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Rigorous photoprotection with protective clothing, broad-spectrum sunscreen and avoidance of ultraviolet exposure as the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the dense infiltrate of actinic reticuloid as cutaneous lymphoma and instituting inappropriate treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic actinic dermatitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_actinic_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Phototesting",
+          "cells": [
+            {
+              "text": "Reduced minimal erythema dose, usually to ultraviolet B and A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch and photopatch testing",
+          "cells": [
+            {
+              "text": "Identifies contact and photocontact allergens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Characterises the dermatitis; distinguishes actinic reticuloid from lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film and lymphocyte studies",
+          "cells": [
+            {
+              "text": "Where lymphoma is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibody testing",
+          "cells": [
+            {
+              "text": "Excludes lupus erythematosus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_actinic_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous T-cell lymphoma",
+          "cells": [
+            {
+              "text": "Leonine facies or erythroderma; mimics actinic reticuloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymorphic light eruption",
+          "cells": [
+            {
+              "text": "Photosensitivity without chronic plaques"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_actinic_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Protective clothing and broad-spectrum sunscreen; avoid ultraviolet exposure"
+            },
+            {
+              "text": "Cornerstone of control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergen avoidance",
+          "cells": [
+            {
+              "text": "Avoid fragrances, Compositae plants and sunscreen chemicals identified by testing"
+            },
+            {
+              "text": "Contact and photocontact allergy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Topical corticosteroids and calcineurin inhibitors with emollients"
+            },
+            {
+              "text": "Eczematous inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic immunosuppression",
+          "cells": [
+            {
+              "text": "Oral corticosteroids, azathioprine, ciclosporin or mycophenolate"
+            },
+            {
+              "text": "Severe or disabling disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug review",
+          "cells": [
+            {
+              "text": "Review and withdraw photosensitising medications and products"
+            },
+            {
+              "text": "Photosensitising agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photodermatology follow-up",
+          "cells": [
+            {
+              "text": "Surveillance for the actinic reticuloid variant to exclude lymphoma"
+            },
+            {
+              "text": "Lymphoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_actinic_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of Chronic actinic dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic actinic dermatitis: itchy lichenified plaques on sun-exposed skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (leonine facies, erythroderma, atypical cells, lymphadenopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: haematology review to exclude cutaneous lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Phototesting, patch and photopatch testing, skin biopsy and ANA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reduced UV threshold on phototesting with allergens identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Photoprotection with clothing and broad-spectrum sunscreen",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check cutaneous T-cell lymphoma, polymorphic light eruption and lupus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid identified contact and photocontact allergens",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids or calcineurin inhibitors with emollients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic immunosuppression for severe or disabling disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong photoprotection; surveillance for lymphoma in actinic reticuloid",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

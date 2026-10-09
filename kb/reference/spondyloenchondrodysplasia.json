@@ -1,177 +1,473 @@
 {
- "id": "spondyloenchondrodysplasia",
- "name": "Spondyloenchondrodysplasia",
- "aliases": [
-  "SPENCD",
-  "Spondyloenchondrodysplasia with immune dysregulation",
-  "ACP5 deficiency"
- ],
- "class": "non_infective",
- "system": "Immunology / Musculoskeletal",
- "specialty": "Clinical immunology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive immuno-osseous dysplasia caused by biallelic loss-of-function variants in ACP5, which encodes tartrate-resistant acid phosphatase (TRAP).",
-   "Also classified as a monogenic type I interferonopathy, which accounts for the prominent autoimmunity and intracranial calcification.",
-   "The skeletal hallmark is platyspondyly with metaphyseal and vertebral radiolucent lesions representing islands of ectopic cartilage, causing disproportionate short stature and spinal deformity.",
-   "Neurological features include spasticity, developmental delay, cognitive impairment and basal ganglia calcification.",
-   "Immune dysregulation is common, with systemic lupus erythematosus, autoimmune thrombocytopenia, haemolytic anaemia and thyroiditis, alongside variable susceptibility to infection.",
-   "Deficient TRAP activity leads to accumulation of phosphorylated osteopontin, mechanistically linking the bone and immune phenotypes.",
-   "A raised blood interferon signature supports the diagnosis.",
-   "The radiolucent skeletal lesions are not true enchondromas and should not be mistaken for Ollier disease."
+  "id": "spondyloenchondrodysplasia",
+  "name": "Spondyloenchondrodysplasia",
+  "aliases": [
+    "SPENCD",
+    "Spondyloenchondrodysplasia with immune dysregulation",
+    "ACP5 deficiency"
   ],
-  "pathophysiology": "Spondyloenchondrodysplasia results from biallelic loss-of-function variants in ACP5, encoding tartrate-resistant acid phosphatase (TRAP), an enzyme expressed in osteoclasts, dendritic cells and macrophages. TRAP normally dephosphorylates osteopontin, a phosphoprotein that regulates bone mineralisation and remodelling and modulates immune-cell activation. Loss of TRAP activity leads to accumulation of the highly phosphorylated form of osteopontin, disturbing the coordinated activity of osteoclasts and chondrocytes so that persistent islands of cartilage remain within the metaphyses and vertebrae, producing the enchondromatous, platyspondylic skeletal phenotype. In parallel, dysregulated osteopontin signalling and a dominant type I interferon response drive loss of self-tolerance, autoantibody production and intracranial calcification, accounting for the coexistent lupus-like autoimmunity, cytopenias and progressive neurological disease that characterise the disorder.",
-  "additionalDifferentials": [
-   "Ollier disease and Maffucci syndrome (true enchondromatosis)",
-   "Other metaphyseal chondrodysplasias",
-   "Schimke immuno-osseous dysplasia",
-   "Aicardi-Goutieres syndrome (intracranial calcification with interferon signature)",
-   "Systemic lupus erythematosus of other cause",
-   "Other spondylometaphyseal dysplasias",
-   "Metabolic bone disease with metaphyseal changes such as rickets"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating platyspondyly with metaphyseal and vertebral lucencies",
-   "Molecular genetic testing for ACP5 variants",
-   "Serum tartrate-resistant acid phosphatase activity",
-   "Neuroimaging for basal ganglia and other intracranial calcification",
-   "Autoantibody panel including ANA and anti-dsDNA with a direct antiglobulin test",
-   "Full blood count to detect autoimmune cytopenias",
-   "Blood interferon signature"
-  ],
-  "redFlags": [
-   "Severe autoimmune cytopenias such as thrombocytopenia or haemolytic anaemia",
-   "Lupus nephritis or other major organ autoimmunity",
-   "Progressive neurological deterioration or worsening spasticity",
-   "Serious or recurrent infection suggesting associated immunodeficiency"
-  ],
-  "prognosis": "Prognosis depends chiefly on the severity of autoimmune and neurological involvement. Skeletal disease causes short stature and spinal deformity, while lupus-like autoimmunity and progressive neurological impairment drive long-term morbidity.",
-  "pitfalls": [
-   "Misinterpreting the enchondroma-like lesions as Ollier disease.",
-   "Diagnosing isolated systemic lupus erythematosus and missing the underlying monogenic cause.",
-   "Overlooking intracranial calcification as an incidental finding.",
-   "Attributing the short stature to a non-syndromic skeletal dysplasia."
-  ],
-  "references": [
-   "Skeletal dysplasia and clinical genetics reference sources",
-   "Paediatric rheumatology and clinical immunology textbooks",
-   "Interferonopathy and inborn errors of immunity reference sources"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immunosuppression for the autoimmune manifestations, with corticosteroids and steroid-sparing agents for lupus-like disease and autoimmune cytopenias",
-   "JAK inhibition to target the type I interferon response underlying the interferonopathy",
-   "Treat autoimmune haemolytic anaemia and thrombocytopenia, including immunotherapy, and manage autoimmune thyroiditis with hormone replacement as needed",
-   "Orthopaedic management of platyspondyly, spinal deformity and disproportionate short stature",
-   "Neurological care for spasticity with antispasticity agents and developmental support, monitoring basal ganglia and intracranial calcification",
-   "Surveillance with autoantibody panels, blood counts and neuroimaging for progression of autoimmune and neurological disease, with immunisation and infection prevention given variable immunodeficiency",
-   "Genetic counselling and family screening given autosomal recessive ACP5 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spondyloenchondrodysplasia-pathway",
-   "title": "Spondyloenchondrodysplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive immuno-osseous dysplasia caused by biallelic loss-of-function variants in ACP5, which encodes tartrate-resistant acid phosphatase (TRAP).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe autoimmune cytopenias such as thrombocytopenia or haemolytic anaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating platyspondyly with metaphyseal and vertebral lucencies, Molecular genetic testing for ACP5 variants, Serum tartrate-resistant acid phosphatase activity"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immunosuppression for the autoimmune manifestations, with corticosteroids and steroid-sparing agents for lupus-like disease and autoimmune cytopenias"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the enchondroma-like lesions as Ollier disease."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spondyloenchondrodysplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "spondyloenchondrodysplasia-matrix",
-   "title": "Spondyloenchondrodysplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive immuno-osseous dysplasia caused by biallelic loss-of-function variants in ACP5, which encodes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Musculoskeletal",
+  "specialty": "Clinical immunology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive immuno-osseous dysplasia caused by biallelic loss-of-function variants in ACP5, which encodes tartrate-resistant acid phosphatase (TRAP).",
+      "Also classified as a monogenic type I interferonopathy, which accounts for the prominent autoimmunity and intracranial calcification.",
+      "The skeletal hallmark is platyspondyly with metaphyseal and vertebral radiolucent lesions representing islands of ectopic cartilage, causing disproportionate short stature and spinal deformity.",
+      "Neurological features include spasticity, developmental delay, cognitive impairment and basal ganglia calcification.",
+      "Immune dysregulation is common, with systemic lupus erythematosus, autoimmune thrombocytopenia, haemolytic anaemia and thyroiditis, alongside variable susceptibility to infection.",
+      "Deficient TRAP activity leads to accumulation of phosphorylated osteopontin, mechanistically linking the bone and immune phenotypes.",
+      "A raised blood interferon signature supports the diagnosis.",
+      "The radiolucent skeletal lesions are not true enchondromas and should not be mistaken for Ollier disease."
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating platyspondyly with metaphyseal and vertebral lucencies, Molecular genetic testing for ACP5",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spondyloenchondrodysplasia results from biallelic loss-of-function variants in ACP5, encoding tartrate-resistant acid phosphatase (TRAP), an enzyme expressed in osteoclasts, dendritic cells and macrophages. TRAP normally dephosphorylates osteopontin, a phosphoprotein that regulates bone mineralisation and remodelling and modulates immune-cell activation. Loss of TRAP activity leads to accumulation of the highly phosphorylated form of osteopontin, disturbing the coordinated activity of osteoclasts and chondrocytes so that persistent islands of cartilage remain within the metaphyses and vertebrae, producing the enchondromatous, platyspondylic skeletal phenotype. In parallel, dysregulated osteopontin signalling and a dominant type I interferon response drive loss of self-tolerance, autoantibody production and intracranial calcification, accounting for the coexistent lupus-like autoimmunity, cytopenias and progressive neurological disease that characterise the disorder.",
+    "additionalDifferentials": [
+      "Ollier disease and Maffucci syndrome (true enchondromatosis)",
+      "Other metaphyseal chondrodysplasias",
+      "Schimke immuno-osseous dysplasia",
+      "Aicardi-Goutieres syndrome (intracranial calcification with interferon signature)",
+      "Systemic lupus erythematosus of other cause",
+      "Other spondylometaphyseal dysplasias",
+      "Metabolic bone disease with metaphyseal changes such as rickets"
     ],
-    [
-     "Primary Differentials",
-     "Ollier disease and Maffucci syndrome (true enchondromatosis), Other metaphyseal chondrodysplasias, Schimke immuno-osseous",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating platyspondyly with metaphyseal and vertebral lucencies",
+      "Molecular genetic testing for ACP5 variants",
+      "Serum tartrate-resistant acid phosphatase activity",
+      "Neuroimaging for basal ganglia and other intracranial calcification",
+      "Autoantibody panel including ANA and anti-dsDNA with a direct antiglobulin test",
+      "Full blood count to detect autoimmune cytopenias",
+      "Blood interferon signature"
     ],
-    [
-     "Management Strategy",
-     "Immunosuppression for the autoimmune manifestations, with corticosteroids and steroid-sparing agents for lupus-like disease and",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe autoimmune cytopenias such as thrombocytopenia or haemolytic anaemia",
+      "Lupus nephritis or other major organ autoimmunity",
+      "Progressive neurological deterioration or worsening spasticity",
+      "Serious or recurrent infection suggesting associated immunodeficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the enchondroma-like lesions as Ollier disease.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends chiefly on the severity of autoimmune and neurological involvement. Skeletal disease causes short stature and spinal deformity, while lupus-like autoimmunity and progressive neurological impairment drive long-term morbidity.",
+    "pitfalls": [
+      "Misinterpreting the enchondroma-like lesions as Ollier disease.",
+      "Diagnosing isolated systemic lupus erythematosus and missing the underlying monogenic cause.",
+      "Overlooking intracranial calcification as an incidental finding.",
+      "Attributing the short stature to a non-syndromic skeletal dysplasia."
+    ],
+    "references": [
+      "Skeletal dysplasia and clinical genetics reference sources",
+      "Paediatric rheumatology and clinical immunology textbooks",
+      "Interferonopathy and inborn errors of immunity reference sources"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immunosuppression for the autoimmune manifestations, with corticosteroids and steroid-sparing agents for lupus-like disease and autoimmune cytopenias",
+      "JAK inhibition to target the type I interferon response underlying the interferonopathy",
+      "Treat autoimmune haemolytic anaemia and thrombocytopenia, including immunotherapy, and manage autoimmune thyroiditis with hormone replacement as needed",
+      "Orthopaedic management of platyspondyly, spinal deformity and disproportionate short stature",
+      "Neurological care for spasticity with antispasticity agents and developmental support, monitoring basal ganglia and intracranial calcification",
+      "Surveillance with autoantibody panels, blood counts and neuroimaging for progression of autoimmune and neurological disease, with immunisation and infection prevention given variable immunodeficiency",
+      "Genetic counselling and family screening given autosomal recessive ACP5 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for spondyloenchondrodysplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spondyloenchondrodysplasia-real-image",
-   "title": "Spondyloenchondrodysplasia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "spondyloenchondrodysplasia-pathway",
+      "title": "Spondyloenchondrodysplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive immuno-osseous dysplasia caused by biallelic loss-of-function variants in ACP5, which encodes tartrate-resistant acid phosphatase (TRAP).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe autoimmune cytopenias such as thrombocytopenia or haemolytic anaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating platyspondyly with metaphyseal and vertebral lucencies, Molecular genetic testing for ACP5 variants, Serum tartrate-resistant acid phosphatase activity"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immunosuppression for the autoimmune manifestations, with corticosteroids and steroid-sparing agents for lupus-like disease and autoimmune cytopenias"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the enchondroma-like lesions as Ollier disease."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spondyloenchondrodysplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spondyloenchondrodysplasia-matrix",
+      "title": "Spondyloenchondrodysplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive immuno-osseous dysplasia caused by biallelic loss-of-function variants in ACP5, which encodes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating platyspondyly with metaphyseal and vertebral lucencies, Molecular genetic testing for ACP5",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ollier disease and Maffucci syndrome (true enchondromatosis), Other metaphyseal chondrodysplasias, Schimke immuno-osseous",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immunosuppression for the autoimmune manifestations, with corticosteroids and steroid-sparing agents for lupus-like disease and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the enchondroma-like lesions as Ollier disease.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spondyloenchondrodysplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spondyloenchondrodysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Platyspondyly with metaphyseal and vertebral lucencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACP5 sequencing",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum tartrate-resistant acid phosphatase activity",
+          "cells": [
+            {
+              "text": "Deficient activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Basal ganglia and other intracranial calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANA, anti-dsDNA and direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Autoimmune cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood interferon signature",
+          "cells": [
+            {
+              "text": "Raised signature supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondyloenchondrodysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ollier disease and Maffucci syndrome",
+          "cells": [
+            {
+              "text": "The lesions look like enchondromas but are not true enchondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aicardi-Goutieres syndrome",
+          "cells": [
+            {
+              "text": "Intracranial calcification with an interferon signature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondyloenchondrodysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Corticosteroids with a steroid-sparing agent for autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "JAK inhibition",
+          "cells": [
+            {
+              "text": "Targets the type I interferon response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of autoimmune cytopenias",
+          "cells": [
+            {
+              "text": "Haemolytic anaemia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Platyspondyly, spinal deformity and short stature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological care",
+          "cells": [
+            {
+              "text": "Antispasticity agents and developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Autoantibody panels, blood counts and neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ACP5 inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spondyloenchondrodysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Spondyloenchondrodysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Platyspondyly with autoimmune cytopenias: suspected spondyloenchondrodysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe cytopenias, lupus nephritis, neurological decline, infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review for severe cytopenias or nephritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; ACP5 sequencing; TRAP activity; autoantibodies; neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is biallelic ACP5 variation found with low TRAP activity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Ollier disease, Aicardi-Goutieres syndrome or SLE; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunosuppression for autoimmune manifestations",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "JAK inhibition to target the type I interferon response",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat autoimmune haemolysis and thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic care for platyspondyly and antispasticity for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multisystem disease needs ongoing immune and neurological surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

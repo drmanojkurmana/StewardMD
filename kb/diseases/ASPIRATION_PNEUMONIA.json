@@ -301,25 +301,756 @@
       "caption": "Diagnostic and clinical overview matrix for aspiration pneumonia."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "aspiration-pneumonia-real-image",
-      "title": "Aspiration Pneumonia: Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Chemical Pneumonitis and Aspiration Pneumonia, 2026",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pneumonia/aspiration-pneumonitis-and-pneumonia",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 164-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ASPIRATION_PNEUMONIA-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic features of aspiration pneumonia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Setting",
+          "cells": [
+            {
+              "text": "Witnessed or suspected aspiration plus risk factors such as reduced consciousness or dysphagia"
+            },
+            {
+              "text": "Diagnosis rests on history, risk factors and compatible imaging"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "Onset",
+          "cells": [
+            {
+              "text": "Hours to a few days; anaerobic cases may be subacute"
+            },
+            {
+              "text": "Chemical pneumonitis starts within minutes to hours"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "Fever",
+          "cells": [
+            {
+              "text": "High-grade fever"
+            },
+            {
+              "text": "Favours bacterial pneumonia over chemical pneumonitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest x-ray, aspirated upright",
+          "cells": [
+            {
+              "text": "Basal segments of the lower lobes"
+            },
+            {
+              "text": "Dependent-segment infiltrate supports aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest x-ray, aspirated supine",
+          "cells": [
+            {
+              "text": "Posterior upper-lobe or superior lower-lobe segment"
+            },
+            {
+              "text": "{{hy:Dependent-segment infiltrate supports aspiration}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT",
+          "cells": [
+            {
+              "text": "More sensitive for abscess and necrosis"
+            },
+            {
+              "text": "Cannot separate pneumonitis from pneumonia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sputum Gram stain",
+          "cells": [
+            {
+              "text": "Mixed flora with many neutrophils"
+            },
+            {
+              "text": "Expectorated sputum is not valid for anaerobic culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum odour",
+          "cells": [
+            {
+              "text": "Usually not foul until about 1 week"
+            },
+            {
+              "text": "Malodour suggests a process ongoing for a week or more"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural fluid pH",
+          "cells": [
+            {
+              "text": "<7.2",
+              "op": "<",
+              "value": 7.2
+            },
+            {
+              "text": "Complicated effusion; drain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural fluid glucose",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "<2.2",
+              "op": "<",
+              "value": 2.2
+            },
+            {
+              "text": "Complicated effusion; drain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural fluid LDH",
+          "unit": "U/L",
+          "cells": [
+            {
+              "text": ">1000",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "Complicated effusion; drain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow study",
+          "cells": [
+            {
+              "text": "Modified barium swallow or similar"
+            },
+            {
+              "text": "Detects silent aspiration or a swallowing disorder"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "ASPIRATION_PNEUMONIA-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic aspiration pneumonia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chemical (acid) pneumonitis, Mendelson syndrome",
+          "cells": [
+            {
+              "text": "{{hy:Abrupt onset within hours; may settle in 24 to 48 hours}}"
+            },
+            {
+              "text": "Clinical course; imaging cannot separate them"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumococcal pneumonia",
+          "cells": [
+            {
+              "text": "More acute onset than indolent anaerobic aspiration"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung abscess",
+          "cells": [
+            {
+              "text": "Cavitary lesion; may evolve subacutely"
+            },
+            {
+              "text": "Contrast CT: round fluid-filled lesion or air-fluid level"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Empyema",
+          "cells": [
+            {
+              "text": "Complicated pleural effusion"
+            },
+            {
+              "text": "Pleural fluid pH, glucose, LDH and organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign body or food aspiration",
+          "cells": [
+            {
+              "text": "Airway obstruction with atelectasis; treated by removal"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipoid pneumonia (oil aspiration)",
+          "cells": [
+            {
+              "text": "Asymptomatic or slowly progressive"
+            },
+            {
+              "text": "CT showing fat attenuation"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Best-test cells marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "ASPIRATION_PNEUMONIA-treatment",
+      "kind": "treatment",
+      "title": "Treatment of aspiration pneumonia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Amoxicillin-clavulanate or ampicillin-sulbactam",
+          "cells": [
+            {
+              "text": "{{hy:Community-acquired aspiration pneumonia}}"
+            },
+            {
+              "text": "Beta-lactam with beta-lactamase inhibitor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moxifloxacin or clindamycin",
+          "cells": [
+            {
+              "text": "Penicillin allergy"
+            },
+            {
+              "text": "Alternatives to the beta-lactam"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Piperacillin-tazobactam or a carbapenem",
+          "cells": [
+            {
+              "text": "Hospital-acquired, or recent admission with IV antibiotics within 90 days"
+            },
+            {
+              "text": "Broader cover"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add vancomycin or linezolid",
+          "cells": [
+            {
+              "text": "MRSA risk: prior MRSA, local prevalence over 10 to 20%, recent IV antibiotics"
+            },
+            {
+              "text": "Added to the base regimen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Specific anaerobic cover",
+          "cells": [
+            {
+              "text": "Poor dentition, lung abscess, necrotizing pneumonia or empyema"
+            },
+            {
+              "text": "Not needed routinely for all aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Community and hospital aspiration pneumonia"
+            },
+            {
+              "text": "Usually 5 to 7 days; longer for abscess, necrosis or empyema"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drainage",
+          "cells": [
+            {
+              "text": "Lung abscess or empyema"
+            },
+            {
+              "text": "Percutaneous or surgical drainage sometimes needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care for chemical pneumonitis",
+          "cells": [
+            {
+              "text": "Gastric aspiration without infection"
+            },
+            {
+              "text": "Oxygen or ventilation; no routine steroids; antibiotics only if superinfection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Reduced consciousness or dysphagia"
+            },
+            {
+              "text": "Head of bed over 30 degrees, stop sedatives, swallow therapy, oral care"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doses were not stated in the sources opened."
+    },
+    {
+      "id": "ASPIRATION_PNEUMONIA-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Anaerobic human flora by anatomic site",
+      "rowHeader": "Anatomic site",
+      "columns": [
+        "Total bacteria",
+        "Anaerobic/aerobic ratio",
+        "Potential pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral cavity: saliva",
+          "cells": [
+            {
+              "text": "10^8 to 10^9"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Fusobacterium nucleatum, Prevotella melaninogenica, Prevotella oralis group, Bacteroides ureolyticus group, Peptostreptococcus spp. (listed for the oral cavity as a whole)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral cavity: tooth surface",
+          "cells": [
+            {
+              "text": "10^10 to 10^11"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral cavity: gingival crevices",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gastrointestinal tract: stomach",
+          "cells": [
+            {
+              "text": "0 to 10^5"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Bacteroides spp. (principally the B. fragilis group), Prevotella spp., Clostridium spp., Peptostreptococcus spp. (listed for the GI tract as a whole)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gastrointestinal tract: jejunum/ileum",
+          "cells": [
+            {
+              "text": "10^4 to 10^7"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gastrointestinal tract: terminal ileum and colon",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Female genital tract",
+          "cells": [
+            {
+              "text": "10^7 to 10^9"
+            },
+            {
+              "text": "10:1"
+            },
+            {
+              "text": "Peptostreptococcus spp., Bacteroides spp., Prevotella bivia"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Footnote (a) on total bacteria is not shown on the page."
+    },
+    {
+      "id": "ASPIRATION_PNEUMONIA-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Microbial pathogens causing cavitary lung infection",
+      "rowHeader": "Host setting",
+      "columns": [
+        "Pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration-prone host",
+          "cells": [
+            {
+              "text": "Anaerobic bacteria plus microaerophilic and/or anaerobic streptococci, Gemella spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Embolic (endovascular) lesions",
+          "cells": [
+            {
+              "text": "Usually Staphylococcus aureus, Pseudomonas aeruginosa, Fusobacterium necrophorum"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Endemic fungi",
+          "cells": [
+            {
+              "text": "Histoplasma, Blastomyces, Coccidioides spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Mycobacteria",
+          "cells": [
+            {
+              "text": "M. tuberculosis, M. kansasii, M. avium"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Immunocompromised host",
+          "cells": [
+            {
+              "text": "M. tuberculosis, Nocardia asteroides, Rhodococcus equi, Legionella spp., P. aeruginosa, Enterobacteriaceae (especially Klebsiella pneumoniae), Aspergillus spp., Cryptococcus spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Previously healthy host: bacteria",
+          "cells": [
+            {
+              "text": "S. aureus, S. milleri, K. pneumoniae, group A Streptococcus; Gemella, Legionella and Actinomyces spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Previously healthy host: parasites",
+          "cells": [
+            {
+              "text": "Entamoeba histolytica, Paragonimus westermani, Strongyloides stercoralis"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The source groups the first four rows as one block of mixed settings; source footnotes (a) and (b) are not legible."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ASPIRATION_PNEUMONIA-dx-mgmt",
+      "title": "Diagnosis and management of aspiration pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected aspiration, or new infiltrate with aspiration risk factors",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Abrupt onset within minutes to hours after gastric aspiration?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Likely chemical pneumonitis: oxygen and supportive care, no routine steroids",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Improving within 24 to 48 hours?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Observe; stop any empiric antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chest x-ray; contrast CT if abscess or necrosis suspected",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Hospital-acquired or IV antibiotics in the last 90 days?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Piperacillin-tazobactam or carbapenem; add MRSA cover if risk",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Amoxicillin-clavulanate or ampicillin-sulbactam",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Lung abscess, necrotizing pneumonia or empyema?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Longer course; drain empyema or abscess when needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Treat for 5 to 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Prevent recurrence: swallow assessment, head up over 30 degrees, oral care",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No, suspect infection"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
         }
       ]
     }

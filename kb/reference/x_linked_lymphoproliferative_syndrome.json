@@ -1,188 +1,383 @@
 {
- "id": "x_linked_lymphoproliferative_syndrome",
- "name": "X-Linked Lymphoproliferative Syndrome",
- "aliases": [
-  "BIRC4",
-  "Duncan disease",
-  "SAP deficiency",
-  "SH2D1A",
-  "SH2D1A/SAP deficiency",
-  "X-linked lymphoproliferative disease",
-  "XIAP",
-  "XIAP deficiency",
-  "XLP",
-  "XLP1",
-  "XLP2",
-  "x linked lymphoproliferative disease"
- ],
- "class": "non_infective",
- "system": "Immune",
- "specialty": "Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare X-linked primary immunodeficiency with a characteristic, often catastrophic, susceptibility to Epstein-Barr virus (EBV).",
-   "Two genetic subtypes exist: XLP1 from SH2D1A mutations (loss of the SAP protein) and XLP2 from XIAP (BIRC4) mutations (loss of the XIAP protein).",
-   "The classic XLP1 phenotype comprises fulminant infectious mononucleosis or EBV-driven haemophagocytic lymphohistiocytosis, dysgammaglobulinaemia, and lymphoma (usually B-cell and often extranodal or ileocaecal).",
-   "XIAP deficiency (XLP2) causes recurrent haemophagocytic lymphohistiocytosis and frequently a Crohn-like inflammatory bowel disease, but is not associated with increased lymphoma risk, a key distinction from XLP1.",
-   "Presentation is almost always in boys, and disease is frequently unmasked by primary EBV infection, although features can occur without documented EBV.",
-   "Haemophagocytic lymphohistiocytosis presents with prolonged fever, hepatosplenomegaly, cytopenias, hyperferritinaemia, hypertriglyceridaemia and coagulopathy, and is a medical emergency.",
-   "Diagnosis combines genetic testing with flow cytometry for absent SAP or XIAP protein expression; absent invariant natural killer T (NKT) cells support XLP1.",
-   "Allogeneic haematopoietic stem-cell transplantation is the only curative treatment, while immunoglobulin replacement and prompt therapy directed at haemophagocytic lymphohistiocytosis are important supportive measures."
+  "id": "x_linked_lymphoproliferative_syndrome",
+  "name": "X-Linked Lymphoproliferative Syndrome",
+  "aliases": [
+    "BIRC4",
+    "Duncan disease",
+    "SAP deficiency",
+    "SH2D1A",
+    "SH2D1A/SAP deficiency",
+    "X-linked lymphoproliferative disease",
+    "XIAP",
+    "XIAP deficiency",
+    "XLP",
+    "XLP1",
+    "XLP2",
+    "x linked lymphoproliferative disease"
   ],
-  "pathophysiology": "X-linked lymphoproliferative syndrome results from mutations on the X chromosome that impair immune regulation. In XLP1, mutations in SH2D1A at Xq25 abolish or impair SAP (SLAM-associated protein), a small SH2-domain adaptor that couples the SLAM family of receptors to downstream signalling through Fyn kinase in T cells, natural killer (NK) cells and NKT cells. Loss of SAP impairs cytotoxic T-cell and NK-cell killing of EBV-infected B cells, blocks development of invariant NKT cells, and disrupts T-follicular-helper-cell function and germinal-centre antibody responses, explaining the uncontrolled EBV-driven lymphoproliferation, defective humoral immunity and lymphoma predisposition. In XLP2, mutations in XIAP (BIRC4, also at Xq25) cause loss of the X-linked inhibitor of apoptosis protein, which normally restrains excessive programmed cell death and modulates inflammatory signalling through the NOD2/NF-kB pathway and the inflammasome; its loss leads to lymphocyte hypersensitivity to apoptosis, defective control of EBV, recurrent haemophagocytic lymphohistiocytosis and Crohn-like inflammatory bowel disease, but not the lymphoma risk seen in XLP1. In both subtypes, failure to contain EBV can precipitate a hyperinflammatory, macrophage-activating haemophagocytic syndrome.",
-  "additionalDifferentials": [
-   "Familial (primary) haemophagocytic lymphohistiocytosis (PRF1, UNC13D/Munc13-4, STX11, STXBP2)",
-   "Other EBV-susceptibility immunodeficiencies, such as MAGT1 (XMEN), CD27, CD70, ITK, CTPS1 and RASGRP1 deficiencies",
-   "Chediak-Higashi syndrome and Griscelli syndrome type 2 (pigmentary dilution with haemophagocytic lymphohistiocytosis)",
-   "Common variable immunodeficiency and other causes of hypogammaglobulinaemia",
-   "B-cell non-Hodgkin lymphoma from other causes",
-   "Severe or atypical infectious mononucleosis in an immunocompetent host",
-   "For XLP2, monogenic very-early-onset inflammatory bowel disease from other causes"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing of SH2D1A and XIAP (BIRC4)",
-   "Flow cytometry for intracellular SAP and XIAP protein expression",
-   "EBV serology and quantitative EBV viral load in blood",
-   "Enumeration of invariant NKT cells (absent in XLP1) and NK/T-cell cytotoxicity assays",
-   "Immunoglobulin levels and specific antibody/vaccine-response studies",
-   "Work-up for haemophagocytic lymphohistiocytosis: full blood count, ferritin, triglycerides, fibrinogen, liver function, soluble interleukin-2 receptor and bone-marrow examination for haemophagocytosis",
-   "Imaging and tissue biopsy where lymphoma or focal organ involvement is suspected"
-  ],
-  "redFlags": [
-   "Fulminant or unusually severe infectious mononucleosis, especially in a boy with a suggestive family history",
-   "Features of haemophagocytic lymphohistiocytosis (persistent fever, cytopenias, hepatosplenomegaly, very high ferritin, coagulopathy), which is life-threatening",
-   "New lymphadenopathy or an abdominal mass suggesting lymphoma",
-   "Progressive hypogammaglobulinaemia with recurrent infections",
-   "A maternal family history of males dying of EBV infection, haemophagocytic lymphohistiocytosis or lymphoma"
-  ],
-  "prognosis": "Untreated disease, particularly EBV-triggered haemophagocytic lymphohistiocytosis, historically carried a very high mortality. Outcomes have improved markedly with early recognition, therapy directed at haemophagocytic lymphohistiocytosis and curative allogeneic haematopoietic stem-cell transplantation, though the prognosis remains guarded once severe haemophagocytic lymphohistiocytosis or lymphoma is established.",
-  "pitfalls": [
-   "Dismissing severe infectious mononucleosis in a young boy as ordinary EBV infection and missing the underlying immunodeficiency.",
-   "Assuming that a normal EBV viral load or EBV-negative status excludes the diagnosis, as disease can occur without documented EBV.",
-   "Overlooking XIAP deficiency in boys presenting with recurrent haemophagocytic lymphohistiocytosis or early-onset inflammatory bowel disease.",
-   "Delaying assessment for definitive stem-cell transplantation while repeatedly treating recurrent episodes.",
-   "Not screening at-risk male relatives and female carriers within the family."
-  ],
-  "references": [
-   "Primary immunodeficiency reference texts and the IUIS classification of inborn errors of immunity",
-   "Reference reviews on haemophagocytic lymphohistiocytosis",
-   "Standard clinical immunology textbooks"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Emergency treatment of EBV-driven haemophagocytic lymphohistiocytosis with immunosuppressive and cytotoxic protocols using corticosteroids, etoposide and ciclosporin",
-   "Rituximab to lower the EBV-infected B-cell load in acute EBV disease",
-   "Regular immunoglobulin replacement for dysgammaglobulinaemia",
-   "Allogeneic haematopoietic stem cell transplantation as the only curative option, best undertaken once disease is in remission",
-   "Endoscopic and medical management of Crohn-like inflammatory bowel disease in XIAP deficiency",
-   "Surveillance for B-cell lymphoma in XLP1, with prompt evaluation of new lymphadenopathy",
-   "Genetic counselling and predictive testing of SH2D1A and XIAP within the kindred"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "x_linked_lymphoproliferative_syndrome-pathway",
-   "title": "X-Linked Lymphoproliferative Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare X-linked primary immunodeficiency with a characteristic, often catastrophic, susceptibility to Epstein-Barr virus (EBV).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fulminant or unusually severe infectious mononucleosis, especially in a boy with a suggestive family history",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing of SH2D1A and XIAP (BIRC4), Flow cytometry for intracellular SAP and XIAP protein expression, EBV serology and quantitative EBV viral load in blood"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Emergency treatment of EBV-driven haemophagocytic lymphohistiocytosis with immunosuppressive and cytotoxic protocols using corticosteroids, etoposide and ciclosporin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing severe infectious mononucleosis in a young boy as ordinary EBV infection and missing the underlying immunodeficiency."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of x-linked lymphoproliferative syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "x_linked_lymphoproliferative_syndrome-matrix",
-   "title": "X-Linked Lymphoproliferative Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare X-linked primary immunodeficiency with a characteristic, often catastrophic, susceptibility to Epstein-Barr virus (EBV).",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immune",
+  "specialty": "Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare X-linked primary immunodeficiency with a characteristic, often catastrophic, susceptibility to Epstein-Barr virus (EBV).",
+      "Two genetic subtypes exist: XLP1 from SH2D1A mutations (loss of the SAP protein) and XLP2 from XIAP (BIRC4) mutations (loss of the XIAP protein).",
+      "The classic XLP1 phenotype comprises fulminant infectious mononucleosis or EBV-driven haemophagocytic lymphohistiocytosis, dysgammaglobulinaemia, and lymphoma (usually B-cell and often extranodal or ileocaecal).",
+      "XIAP deficiency (XLP2) causes recurrent haemophagocytic lymphohistiocytosis and frequently a Crohn-like inflammatory bowel disease, but is not associated with increased lymphoma risk, a key distinction from XLP1.",
+      "Presentation is almost always in boys, and disease is frequently unmasked by primary EBV infection, although features can occur without documented EBV.",
+      "Haemophagocytic lymphohistiocytosis presents with prolonged fever, hepatosplenomegaly, cytopenias, hyperferritinaemia, hypertriglyceridaemia and coagulopathy, and is a medical emergency.",
+      "Diagnosis combines genetic testing with flow cytometry for absent SAP or XIAP protein expression; absent invariant natural killer T (NKT) cells support XLP1.",
+      "Allogeneic haematopoietic stem-cell transplantation is the only curative treatment, while immunoglobulin replacement and prompt therapy directed at haemophagocytic lymphohistiocytosis are important supportive measures."
     ],
-    [
-     "Key Investigations",
-     "Genetic testing of SH2D1A and XIAP (BIRC4), Flow cytometry for intracellular SAP and XIAP protein expression, EBV serology and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "X-linked lymphoproliferative syndrome results from mutations on the X chromosome that impair immune regulation. In XLP1, mutations in SH2D1A at Xq25 abolish or impair SAP (SLAM-associated protein), a small SH2-domain adaptor that couples the SLAM family of receptors to downstream signalling through Fyn kinase in T cells, natural killer (NK) cells and NKT cells. Loss of SAP impairs cytotoxic T-cell and NK-cell killing of EBV-infected B cells, blocks development of invariant NKT cells, and disrupts T-follicular-helper-cell function and germinal-centre antibody responses, explaining the uncontrolled EBV-driven lymphoproliferation, defective humoral immunity and lymphoma predisposition. In XLP2, mutations in XIAP (BIRC4, also at Xq25) cause loss of the X-linked inhibitor of apoptosis protein, which normally restrains excessive programmed cell death and modulates inflammatory signalling through the NOD2/NF-kB pathway and the inflammasome; its loss leads to lymphocyte hypersensitivity to apoptosis, defective control of EBV, recurrent haemophagocytic lymphohistiocytosis and Crohn-like inflammatory bowel disease, but not the lymphoma risk seen in XLP1. In both subtypes, failure to contain EBV can precipitate a hyperinflammatory, macrophage-activating haemophagocytic syndrome.",
+    "additionalDifferentials": [
+      "Familial (primary) haemophagocytic lymphohistiocytosis (PRF1, UNC13D/Munc13-4, STX11, STXBP2)",
+      "Other EBV-susceptibility immunodeficiencies, such as MAGT1 (XMEN), CD27, CD70, ITK, CTPS1 and RASGRP1 deficiencies",
+      "Chediak-Higashi syndrome and Griscelli syndrome type 2 (pigmentary dilution with haemophagocytic lymphohistiocytosis)",
+      "Common variable immunodeficiency and other causes of hypogammaglobulinaemia",
+      "B-cell non-Hodgkin lymphoma from other causes",
+      "Severe or atypical infectious mononucleosis in an immunocompetent host",
+      "For XLP2, monogenic very-early-onset inflammatory bowel disease from other causes"
     ],
-    [
-     "Primary Differentials",
-     "Familial (primary) haemophagocytic lymphohistiocytosis (PRF1, UNC13D/Munc13-4, STX11, STXBP2), Other EBV-susceptibility",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing of SH2D1A and XIAP (BIRC4)",
+      "Flow cytometry for intracellular SAP and XIAP protein expression",
+      "EBV serology and quantitative EBV viral load in blood",
+      "Enumeration of invariant NKT cells (absent in XLP1) and NK/T-cell cytotoxicity assays",
+      "Immunoglobulin levels and specific antibody/vaccine-response studies",
+      "Work-up for haemophagocytic lymphohistiocytosis: full blood count, ferritin, triglycerides, fibrinogen, liver function, soluble interleukin-2 receptor and bone-marrow examination for haemophagocytosis",
+      "Imaging and tissue biopsy where lymphoma or focal organ involvement is suspected"
     ],
-    [
-     "Management Strategy",
-     "Emergency treatment of EBV-driven haemophagocytic lymphohistiocytosis with immunosuppressive and cytotoxic protocols using",
-     "Core treatment modality"
+    "redFlags": [
+      "Fulminant or unusually severe infectious mononucleosis, especially in a boy with a suggestive family history",
+      "Features of haemophagocytic lymphohistiocytosis (persistent fever, cytopenias, hepatosplenomegaly, very high ferritin, coagulopathy), which is life-threatening",
+      "New lymphadenopathy or an abdominal mass suggesting lymphoma",
+      "Progressive hypogammaglobulinaemia with recurrent infections",
+      "A maternal family history of males dying of EBV infection, haemophagocytic lymphohistiocytosis or lymphoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing severe infectious mononucleosis in a young boy as ordinary EBV infection and missing the underlying immunodeficiency.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disease, particularly EBV-triggered haemophagocytic lymphohistiocytosis, historically carried a very high mortality. Outcomes have improved markedly with early recognition, therapy directed at haemophagocytic lymphohistiocytosis and curative allogeneic haematopoietic stem-cell transplantation, though the prognosis remains guarded once severe haemophagocytic lymphohistiocytosis or lymphoma is established.",
+    "pitfalls": [
+      "Dismissing severe infectious mononucleosis in a young boy as ordinary EBV infection and missing the underlying immunodeficiency.",
+      "Assuming that a normal EBV viral load or EBV-negative status excludes the diagnosis, as disease can occur without documented EBV.",
+      "Overlooking XIAP deficiency in boys presenting with recurrent haemophagocytic lymphohistiocytosis or early-onset inflammatory bowel disease.",
+      "Delaying assessment for definitive stem-cell transplantation while repeatedly treating recurrent episodes.",
+      "Not screening at-risk male relatives and female carriers within the family."
+    ],
+    "references": [
+      "Primary immunodeficiency reference texts and the IUIS classification of inborn errors of immunity",
+      "Reference reviews on haemophagocytic lymphohistiocytosis",
+      "Standard clinical immunology textbooks"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Emergency treatment of EBV-driven haemophagocytic lymphohistiocytosis with immunosuppressive and cytotoxic protocols using corticosteroids, etoposide and ciclosporin",
+      "Rituximab to lower the EBV-infected B-cell load in acute EBV disease",
+      "Regular immunoglobulin replacement for dysgammaglobulinaemia",
+      "Allogeneic haematopoietic stem cell transplantation as the only curative option, best undertaken once disease is in remission",
+      "Endoscopic and medical management of Crohn-like inflammatory bowel disease in XIAP deficiency",
+      "Surveillance for B-cell lymphoma in XLP1, with prompt evaluation of new lymphadenopathy",
+      "Genetic counselling and predictive testing of SH2D1A and XIAP within the kindred"
     ]
-   ],
-   "caption": "Overview comparison matrix for x-linked lymphoproliferative syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "x-linked-lymphoproliferative-syndrome-real-image",
-   "title": "X-Linked Lymphoproliferative Syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "x_linked_lymphoproliferative_syndrome-pathway",
+      "title": "X-Linked Lymphoproliferative Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare X-linked primary immunodeficiency with a characteristic, often catastrophic, susceptibility to Epstein-Barr virus (EBV).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fulminant or unusually severe infectious mononucleosis, especially in a boy with a suggestive family history",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing of SH2D1A and XIAP (BIRC4), Flow cytometry for intracellular SAP and XIAP protein expression, EBV serology and quantitative EBV viral load in blood"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Emergency treatment of EBV-driven haemophagocytic lymphohistiocytosis with immunosuppressive and cytotoxic protocols using corticosteroids, etoposide and ciclosporin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing severe infectious mononucleosis in a young boy as ordinary EBV infection and missing the underlying immunodeficiency."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of x-linked lymphoproliferative syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "x_linked_lymphoproliferative_syndrome-matrix",
+      "title": "X-Linked Lymphoproliferative Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare X-linked primary immunodeficiency with a characteristic, often catastrophic, susceptibility to Epstein-Barr virus (EBV).",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing of SH2D1A and XIAP (BIRC4), Flow cytometry for intracellular SAP and XIAP protein expression, EBV serology and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Familial (primary) haemophagocytic lymphohistiocytosis (PRF1, UNC13D/Munc13-4, STX11, STXBP2), Other EBV-susceptibility",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Emergency treatment of EBV-driven haemophagocytic lymphohistiocytosis with immunosuppressive and cytotoxic protocols using",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing severe infectious mononucleosis in a young boy as ordinary EBV infection and missing the underlying immunodeficiency.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for x-linked lymphoproliferative syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_lymphoproliferative_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing of SH2D1A and XIAP",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for SAP and XIAP expression",
+          "cells": [
+            {
+              "text": "Protein deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_lymphoproliferative_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "PRF1, UNC13D or related defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other EBV-susceptibility immunodeficiencies",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_lymphoproliferative_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency treatment of EBV-driven HLH",
+          "cells": [
+            {
+              "text": "Immunosuppressive and cytotoxic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_lymphoproliferative_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of X-Linked Lymphoproliferative Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked lymphoproliferative syndrome: severe infectious mononucleosis in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fulminant EBV infection or haemophagocytosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of EBV-driven haemophagocytic lymphohistiocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SH2D1A and XIAP testing, flow cytometry for SAP and XIAP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing or flow cytometry confirm SAP or XIAP deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider familial HLH or other EBV-susceptibility disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emergency immunosuppressive therapy for EBV-driven HLH",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Do not dismiss severe mononucleosis in a young boy as ordinary EBV",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Definitive transplantation planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Often catastrophic; early recognition of the immune defect matters",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

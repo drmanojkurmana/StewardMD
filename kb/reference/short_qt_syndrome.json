@@ -1,176 +1,472 @@
 {
- "id": "short_qt_syndrome",
- "name": "Short QT syndrome",
- "aliases": [
-  "SQTS",
-  "short QT interval syndrome",
-  "KCNH2-related short QT",
-  "familial short QT"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Genetics",
- "specialty": "Cardiology / Inherited Cardiac Conditions",
- "referenceOnly": true,
- "reference": {
-  "source": "ESC/AHA guidelines on ventricular arrhythmias and sudden cardiac death; Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare inherited channelopathy defined by an abnormally short QT interval and a high risk of atrial and ventricular arrhythmia and sudden death",
-   "May present with palpitations, syncope, atrial fibrillation at a young age, or aborted cardiac arrest, sometimes as the first event",
-   "The ECG shows a persistently short QT interval with tall, peaked, symmetrical T waves and often a short or absent ST segment",
-   "Most identified variants are gain-of-function changes in potassium channel genes (such as KCNH2, KCNQ1 and KCNJ2) that shorten repolarisation; some loss-of-function calcium channel variants overlap with a Brugada phenotype",
-   "Diagnosis rests on the corrected QT interval together with symptoms, family history and genetic findings, as the QT alone can overlap with normal variants",
-   "An implantable cardioverter defibrillator is the mainstay for those who survive cardiac arrest or are at high risk",
-   "Quinidine can prolong the QT interval and is used to reduce arrhythmic events, particularly when a defibrillator is unsuitable",
-   "Family screening is important because the first manifestation may be sudden death"
+  "id": "short_qt_syndrome",
+  "name": "Short QT syndrome",
+  "aliases": [
+    "SQTS",
+    "short QT interval syndrome",
+    "KCNH2-related short QT",
+    "familial short QT"
   ],
-  "pathophysiology": "Short QT syndrome is caused by ion channel dysfunction that accelerates cardiac repolarisation. Gain-of-function variants in potassium channel genes increase outward repolarising currents, shortening the action potential duration and thereby the QT interval; loss-of-function variants in calcium channel subunits can produce a similar phenotype. The abbreviated and heterogeneous repolarisation shortens refractory periods across the atria and ventricles, creating a substrate for re-entry that predisposes to atrial fibrillation and to polymorphic ventricular tachycardia or fibrillation, and hence sudden death, in a structurally normal heart.",
-  "additionalDifferentials": [
-   "Normal QT variant or measurement error",
-   "Hypercalcaemia causing QT shortening",
-   "Hyperkalaemia with peaked T waves",
-   "Effects of digoxin on the ST segment and QT",
-   "Early repolarisation syndrome",
-   "Brugada syndrome (with overlapping calcium channel variants)"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG with careful measurement of the corrected QT interval and T-wave morphology",
-   "Serial or repeat ECGs to confirm a persistently short QT",
-   "Ambulatory monitoring for atrial and ventricular arrhythmia",
-   "Correction and reassessment after excluding electrolyte and drug causes of QT shortening",
-   "Echocardiography to confirm a structurally normal heart",
-   "Genetic testing for potassium and calcium channel variants with family cascade screening"
-  ],
-  "redFlags": [
-   "Aborted cardiac arrest or documented ventricular fibrillation",
-   "Unexplained syncope in a young person with a short QT",
-   "Atrial fibrillation presenting at an unusually young age",
-   "Family history of sudden cardiac death"
-  ],
-  "prognosis": "The natural history is dominated by the risk of sudden arrhythmic death, which can occur across all ages including infancy; appropriate defibrillator therapy and, where used, QT-prolonging drug therapy substantially improve outcome for high-risk individuals.",
-  "pitfalls": [
-   "Overlooking a short QT interval because attention focuses on QT prolongation",
-   "Attributing a short QT to hypercalcaemia or digoxin without reassessing after correction",
-   "Relying on the QT value alone without integrating symptoms, family history and genetics",
-   "Failing to screen relatives given that sudden death can be the first event",
-   "Assuming a structurally normal heart excludes life-threatening arrhythmia"
-  ],
-  "references": [
-   "ESC Guidelines for the management of patients with ventricular arrhythmias and the prevention of sudden cardiac death",
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Implantable cardioverter defibrillator implantation as the mainstay for survivors of aborted cardiac arrest or those judged at high arrhythmic risk",
-   "Quinidine or another class Ia antiarrhythmic to prolong repolarisation and lengthen the QT interval, reducing ventricular arrhythmia, especially where a defibrillator is declined or unsuitable or as an adjunct to reduce shocks",
-   "Correction of electrolyte disturbances and avoidance of influences that further abbreviate repolarisation",
-   "Management of associated atrial fibrillation with rhythm or rate control and anticoagulation as indicated, exercising caution when suppressing conduction",
-   "Ambulatory and serial ECG surveillance for atrial and ventricular arrhythmia and device interrogation to guide therapy",
-   "Genetic counselling with cascade ECG and genetic screening of first-degree relatives",
-   "Prompt escalation to specialist inherited-arrhythmia review after syncope, palpitations or an appropriate device therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "short_qt_syndrome-pathway",
-   "title": "Short QT syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare inherited channelopathy defined by an abnormally short QT interval and a high risk of atrial and ventricular arrhythmia and sudden death",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aborted cardiac arrest or documented ventricular fibrillation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG with careful measurement of the corrected QT interval and T-wave morphology, Serial or repeat ECGs to confirm a persistently short QT, Ambulatory monitoring for atrial and ventricular arrhythmia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Implantable cardioverter defibrillator implantation as the mainstay for survivors of aborted cardiac arrest or those judged at high arrhythmic risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking a short QT interval because attention focuses on QT prolongation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of short qt syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "short_qt_syndrome-matrix",
-   "title": "Short QT syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare inherited channelopathy defined by an abnormally short QT interval and a high risk of atrial and ventricular arrhythmia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Genetics",
+  "specialty": "Cardiology / Inherited Cardiac Conditions",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ESC/AHA guidelines on ventricular arrhythmias and sudden cardiac death; Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare inherited channelopathy defined by an abnormally short QT interval and a high risk of atrial and ventricular arrhythmia and sudden death",
+      "May present with palpitations, syncope, atrial fibrillation at a young age, or aborted cardiac arrest, sometimes as the first event",
+      "The ECG shows a persistently short QT interval with tall, peaked, symmetrical T waves and often a short or absent ST segment",
+      "Most identified variants are gain-of-function changes in potassium channel genes (such as KCNH2, KCNQ1 and KCNJ2) that shorten repolarisation; some loss-of-function calcium channel variants overlap with a Brugada phenotype",
+      "Diagnosis rests on the corrected QT interval together with symptoms, family history and genetic findings, as the QT alone can overlap with normal variants",
+      "An implantable cardioverter defibrillator is the mainstay for those who survive cardiac arrest or are at high risk",
+      "Quinidine can prolong the QT interval and is used to reduce arrhythmic events, particularly when a defibrillator is unsuitable",
+      "Family screening is important because the first manifestation may be sudden death"
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG with careful measurement of the corrected QT interval and T-wave morphology, Serial or repeat ECGs to confirm a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Short QT syndrome is caused by ion channel dysfunction that accelerates cardiac repolarisation. Gain-of-function variants in potassium channel genes increase outward repolarising currents, shortening the action potential duration and thereby the QT interval; loss-of-function variants in calcium channel subunits can produce a similar phenotype. The abbreviated and heterogeneous repolarisation shortens refractory periods across the atria and ventricles, creating a substrate for re-entry that predisposes to atrial fibrillation and to polymorphic ventricular tachycardia or fibrillation, and hence sudden death, in a structurally normal heart.",
+    "additionalDifferentials": [
+      "Normal QT variant or measurement error",
+      "Hypercalcaemia causing QT shortening",
+      "Hyperkalaemia with peaked T waves",
+      "Effects of digoxin on the ST segment and QT",
+      "Early repolarisation syndrome",
+      "Brugada syndrome (with overlapping calcium channel variants)"
     ],
-    [
-     "Primary Differentials",
-     "Normal QT variant or measurement error, Hypercalcaemia causing QT shortening, Hyperkalaemia with peaked T waves",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG with careful measurement of the corrected QT interval and T-wave morphology",
+      "Serial or repeat ECGs to confirm a persistently short QT",
+      "Ambulatory monitoring for atrial and ventricular arrhythmia",
+      "Correction and reassessment after excluding electrolyte and drug causes of QT shortening",
+      "Echocardiography to confirm a structurally normal heart",
+      "Genetic testing for potassium and calcium channel variants with family cascade screening"
     ],
-    [
-     "Management Strategy",
-     "Implantable cardioverter defibrillator implantation as the mainstay for survivors of aborted cardiac arrest or those judged at",
-     "Core treatment modality"
+    "redFlags": [
+      "Aborted cardiac arrest or documented ventricular fibrillation",
+      "Unexplained syncope in a young person with a short QT",
+      "Atrial fibrillation presenting at an unusually young age",
+      "Family history of sudden cardiac death"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking a short QT interval because attention focuses on QT prolongation",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is dominated by the risk of sudden arrhythmic death, which can occur across all ages including infancy; appropriate defibrillator therapy and, where used, QT-prolonging drug therapy substantially improve outcome for high-risk individuals.",
+    "pitfalls": [
+      "Overlooking a short QT interval because attention focuses on QT prolongation",
+      "Attributing a short QT to hypercalcaemia or digoxin without reassessing after correction",
+      "Relying on the QT value alone without integrating symptoms, family history and genetics",
+      "Failing to screen relatives given that sudden death can be the first event",
+      "Assuming a structurally normal heart excludes life-threatening arrhythmia"
+    ],
+    "references": [
+      "ESC Guidelines for the management of patients with ventricular arrhythmias and the prevention of sudden cardiac death",
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Implantable cardioverter defibrillator implantation as the mainstay for survivors of aborted cardiac arrest or those judged at high arrhythmic risk",
+      "Quinidine or another class Ia antiarrhythmic to prolong repolarisation and lengthen the QT interval, reducing ventricular arrhythmia, especially where a defibrillator is declined or unsuitable or as an adjunct to reduce shocks",
+      "Correction of electrolyte disturbances and avoidance of influences that further abbreviate repolarisation",
+      "Management of associated atrial fibrillation with rhythm or rate control and anticoagulation as indicated, exercising caution when suppressing conduction",
+      "Ambulatory and serial ECG surveillance for atrial and ventricular arrhythmia and device interrogation to guide therapy",
+      "Genetic counselling with cascade ECG and genetic screening of first-degree relatives",
+      "Prompt escalation to specialist inherited-arrhythmia review after syncope, palpitations or an appropriate device therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for short qt syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "short-qt-syndrome-real-image",
-   "title": "Short QT syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "short_qt_syndrome-pathway",
+      "title": "Short QT syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare inherited channelopathy defined by an abnormally short QT interval and a high risk of atrial and ventricular arrhythmia and sudden death",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aborted cardiac arrest or documented ventricular fibrillation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG with careful measurement of the corrected QT interval and T-wave morphology, Serial or repeat ECGs to confirm a persistently short QT, Ambulatory monitoring for atrial and ventricular arrhythmia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Implantable cardioverter defibrillator implantation as the mainstay for survivors of aborted cardiac arrest or those judged at high arrhythmic risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking a short QT interval because attention focuses on QT prolongation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of short qt syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "short_qt_syndrome-matrix",
+      "title": "Short QT syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare inherited channelopathy defined by an abnormally short QT interval and a high risk of atrial and ventricular arrhythmia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG with careful measurement of the corrected QT interval and T-wave morphology, Serial or repeat ECGs to confirm a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Normal QT variant or measurement error, Hypercalcaemia causing QT shortening, Hyperkalaemia with peaked T waves",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Implantable cardioverter defibrillator implantation as the mainstay for survivors of aborted cardiac arrest or those judged at",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking a short QT interval because attention focuses on QT prolongation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for short qt syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/AHA guidelines on ventricular arrhythmias and sudden cardiac death; Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "short_qt_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Corrected QT interval and T-wave morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ECGs",
+          "cells": [
+            {
+              "text": "Confirms a persistently short QT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Atrial and ventricular arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and drug review",
+          "cells": [
+            {
+              "text": "Excludes causes of QT shortening, then reassess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Structurally normal heart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Potassium and calcium channel variants; cascade screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_qt_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypercalcaemia",
+          "cells": [
+            {
+              "text": "Shortens the QT; reassess after correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digoxin effect",
+          "cells": [
+            {
+              "text": "Affects ST segment and QT; reassess after withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brugada syndrome",
+          "cells": [
+            {
+              "text": "Overlapping calcium channel variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_qt_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Implantable cardioverter defibrillator",
+          "cells": [
+            {
+              "text": "Mainstay after aborted arrest or high arrhythmic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quinidine or class Ia agent",
+          "cells": [
+            {
+              "text": "Prolongs repolarisation and QT, reducing ventricular arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte correction",
+          "cells": [
+            {
+              "text": "Avoid influences that shorten repolarisation further"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial fibrillation care",
+          "cells": [
+            {
+              "text": "Rhythm or rate control and anticoagulation; caution with conduction suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG surveillance and device interrogation",
+          "cells": [
+            {
+              "text": "Guides therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade ECG and genetic screening of first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist review",
+          "cells": [
+            {
+              "text": "Inherited-arrhythmia team after syncope or palpitations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "short_qt_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Short QT syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short corrected QT interval on ECG with syncope, palpitations or family sudden death",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (aborted arrest, VF, unexplained syncope, young-onset AF)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency arrhythmia care; ICD assessment after aborted cardiac arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat ECGs, ambulatory monitor, echo, electrolytes, drug review, genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the short QT persistent after excluding electrolyte and drug causes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause (hypercalcaemia, digoxin) and repeat the ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ICD for aborted arrest survivors or high-risk patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Quinidine to lengthen the QT where an ICD is not suitable or arrhythmia recurs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage atrial fibrillation with rate or rhythm control and anticoagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cascade ECG and genetic screening; inherited-arrhythmia follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Risk of sudden arrhythmic death at any age; defibrillator protects high-risk patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

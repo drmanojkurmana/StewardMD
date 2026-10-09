@@ -1,176 +1,505 @@
 {
- "id": "othello_syndrome",
- "name": "Othello Syndrome",
- "aliases": [
-  "Delusional jealousy",
-  "Morbid jealousy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Psychiatry",
- "specialty": "Psychiatry / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "New Oxford Textbook of Psychiatry",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Delusional conviction of a partner's infidelity, held with pathological intensity on inadequate or absurd evidence.",
-   "The patient gathers proof by checking clothing, phones, or genitalia, following the partner, and demanding confessions.",
-   "Strongly associated with alcohol misuse and with neurological disease, including Parkinson's disease on dopaminergic therapy, stroke, and dementia.",
-   "Carries a high forensic risk and is a recognised antecedent of intimate-partner homicide.",
-   "May occur within delusional disorder, schizophrenia, mood disorders, or as an organic delusional syndrome.",
-   "Dopamine agonists and levodopa in Parkinson's disease are recognised precipitants.",
-   "Separation from the partner may not remove risk, which can transfer to a subsequent partner."
+  "id": "othello_syndrome",
+  "name": "Othello Syndrome",
+  "aliases": [
+    "Delusional jealousy",
+    "Morbid jealousy"
   ],
-  "pathophysiology": "Othello syndrome is a delusional preoccupation with partner infidelity that can arise as a primary delusional disorder or secondary to alcohol dependence, psychotic illness, mood disorder, or organic brain disease. Frontal and right-hemisphere dysfunction is implicated, consistent with cases following stroke and neurodegeneration, and with impaired belief evaluation and behavioural inhibition. Dopaminergic overactivity, whether from alcohol and stimulant effects or from dopamine-replacement therapy in Parkinson's disease, contributes through aberrant salience and reward-related processing that entrenches the jealous conviction.",
-  "additionalDifferentials": [
-   "Alcohol-related psychosis or dependence",
-   "Schizophrenia and delusional disorder",
-   "Parkinson's disease with dopaminergic therapy-related psychosis",
-   "Dementia, including frontotemporal dementia",
-   "Stroke or structural right-hemisphere lesion",
-   "Depressive or manic states with jealous ideation",
-   "Non-delusional reactive jealousy in the context of genuine infidelity"
-  ],
-  "additionalInvestigations": [
-   "Structured domestic-violence and homicide risk assessment",
-   "Collateral history from the partner, with attention to their safety",
-   "Alcohol and substance use assessment",
-   "Neuroimaging where the presentation is organic or of late onset",
-   "Medication review focusing on dopaminergic agents",
-   "Cognitive assessment",
-   "Organic screen bloods"
-  ],
-  "redFlags": [
-   "Threats or violence toward the partner or alleged lover",
-   "Access to weapons or previous violence",
-   "Stalking, checking, and escalating controlling behaviour",
-   "Recent separation or the partner's intention to leave, when homicide risk peaks",
-   "Intoxication or command hallucinations amplifying impulsivity"
-  ],
-  "prognosis": "Prognosis depends on the underlying cause and, where alcohol-related, on abstinence; the delusion can be persistent and carries a significant risk of serious violence even during treatment.",
-  "pitfalls": [
-   "Underestimating the substantial risk of intimate-partner homicide",
-   "Assuming that geographical separation eliminates risk",
-   "Missing alcohol misuse or dopaminergic medication as a driver",
-   "Failing to assess and safeguard the partner directly"
-  ],
-  "references": [
-   "New Oxford Textbook of Psychiatry",
-   "Lishman's Organic Psychiatry",
-   "Kaplan and Sadock's Synopsis of Psychiatry"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying disorder, whether delusional disorder, schizophrenia, mood disorder, alcohol dependence or organic brain disease",
-   "Antipsychotic medication to target the delusional conviction, adding an SSRI where an affective or obsessional component predominates",
-   "Reduce or rationalise dopaminergic therapy such as dopamine agonists or levodopa when Parkinson's disease treatment is the precipitant",
-   "Structured risk assessment for intimate-partner violence and homicide, prioritising the safety of the partner, who may need to be separated from the patient",
-   "Support alcohol abstinence and treat substance misuse, which strongly influences outcome",
-   "Psychiatric admission and escalation when violence risk is high or the delusion is refractory",
-   "Neuroimaging and cognitive assessment for late-onset or organic presentations, coordinated between psychiatry and neurology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "othello_syndrome-pathway",
-   "title": "Othello Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Delusional conviction of a partner's infidelity, held with pathological intensity on inadequate or absurd evidence.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Threats or violence toward the partner or alleged lover",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Structured domestic-violence and homicide risk assessment, Collateral history from the partner, with attention to their safety, Alcohol and substance use assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying disorder, whether delusional disorder, schizophrenia, mood disorder, alcohol dependence or organic brain disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating the substantial risk of intimate-partner homicide"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of othello syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "othello_syndrome-matrix",
-   "title": "Othello Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Delusional conviction of a partner's infidelity, held with pathological intensity on inadequate or absurd evidence.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Psychiatry",
+  "specialty": "Psychiatry / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "New Oxford Textbook of Psychiatry",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Delusional conviction of a partner's infidelity, held with pathological intensity on inadequate or absurd evidence.",
+      "The patient gathers proof by checking clothing, phones, or genitalia, following the partner, and demanding confessions.",
+      "Strongly associated with alcohol misuse and with neurological disease, including Parkinson's disease on dopaminergic therapy, stroke, and dementia.",
+      "Carries a high forensic risk and is a recognised antecedent of intimate-partner homicide.",
+      "May occur within delusional disorder, schizophrenia, mood disorders, or as an organic delusional syndrome.",
+      "Dopamine agonists and levodopa in Parkinson's disease are recognised precipitants.",
+      "Separation from the partner may not remove risk, which can transfer to a subsequent partner."
     ],
-    [
-     "Key Investigations",
-     "Structured domestic-violence and homicide risk assessment, Collateral history from the partner, with attention to their safety,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Othello syndrome is a delusional preoccupation with partner infidelity that can arise as a primary delusional disorder or secondary to alcohol dependence, psychotic illness, mood disorder, or organic brain disease. Frontal and right-hemisphere dysfunction is implicated, consistent with cases following stroke and neurodegeneration, and with impaired belief evaluation and behavioural inhibition. Dopaminergic overactivity, whether from alcohol and stimulant effects or from dopamine-replacement therapy in Parkinson's disease, contributes through aberrant salience and reward-related processing that entrenches the jealous conviction.",
+    "additionalDifferentials": [
+      "Alcohol-related psychosis or dependence",
+      "Schizophrenia and delusional disorder",
+      "Parkinson's disease with dopaminergic therapy-related psychosis",
+      "Dementia, including frontotemporal dementia",
+      "Stroke or structural right-hemisphere lesion",
+      "Depressive or manic states with jealous ideation",
+      "Non-delusional reactive jealousy in the context of genuine infidelity"
     ],
-    [
-     "Primary Differentials",
-     "Alcohol-related psychosis or dependence, Schizophrenia and delusional disorder, Parkinson's disease with dopaminergic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Structured domestic-violence and homicide risk assessment",
+      "Collateral history from the partner, with attention to their safety",
+      "Alcohol and substance use assessment",
+      "Neuroimaging where the presentation is organic or of late onset",
+      "Medication review focusing on dopaminergic agents",
+      "Cognitive assessment",
+      "Organic screen bloods"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying disorder, whether delusional disorder, schizophrenia, mood disorder, alcohol dependence or organic brain",
-     "Core treatment modality"
+    "redFlags": [
+      "Threats or violence toward the partner or alleged lover",
+      "Access to weapons or previous violence",
+      "Stalking, checking, and escalating controlling behaviour",
+      "Recent separation or the partner's intention to leave, when homicide risk peaks",
+      "Intoxication or command hallucinations amplifying impulsivity"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating the substantial risk of intimate-partner homicide",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the underlying cause and, where alcohol-related, on abstinence; the delusion can be persistent and carries a significant risk of serious violence even during treatment.",
+    "pitfalls": [
+      "Underestimating the substantial risk of intimate-partner homicide",
+      "Assuming that geographical separation eliminates risk",
+      "Missing alcohol misuse or dopaminergic medication as a driver",
+      "Failing to assess and safeguard the partner directly"
+    ],
+    "references": [
+      "New Oxford Textbook of Psychiatry",
+      "Lishman's Organic Psychiatry",
+      "Kaplan and Sadock's Synopsis of Psychiatry"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying disorder, whether delusional disorder, schizophrenia, mood disorder, alcohol dependence or organic brain disease",
+      "Antipsychotic medication to target the delusional conviction, adding an SSRI where an affective or obsessional component predominates",
+      "Reduce or rationalise dopaminergic therapy such as dopamine agonists or levodopa when Parkinson's disease treatment is the precipitant",
+      "Structured risk assessment for intimate-partner violence and homicide, prioritising the safety of the partner, who may need to be separated from the patient",
+      "Support alcohol abstinence and treat substance misuse, which strongly influences outcome",
+      "Psychiatric admission and escalation when violence risk is high or the delusion is refractory",
+      "Neuroimaging and cognitive assessment for late-onset or organic presentations, coordinated between psychiatry and neurology"
     ]
-   ],
-   "caption": "Overview comparison matrix for othello syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "othello-syndrome-real-image",
-   "title": "Othello Syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "othello_syndrome-pathway",
+      "title": "Othello Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Delusional conviction of a partner's infidelity, held with pathological intensity on inadequate or absurd evidence.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Threats or violence toward the partner or alleged lover",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Structured domestic-violence and homicide risk assessment, Collateral history from the partner, with attention to their safety, Alcohol and substance use assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying disorder, whether delusional disorder, schizophrenia, mood disorder, alcohol dependence or organic brain disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating the substantial risk of intimate-partner homicide"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of othello syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "othello_syndrome-matrix",
+      "title": "Othello Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Delusional conviction of a partner's infidelity, held with pathological intensity on inadequate or absurd evidence.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Structured domestic-violence and homicide risk assessment, Collateral history from the partner, with attention to their safety,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alcohol-related psychosis or dependence, Schizophrenia and delusional disorder, Parkinson's disease with dopaminergic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying disorder, whether delusional disorder, schizophrenia, mood disorder, alcohol dependence or organic brain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating the substantial risk of intimate-partner homicide",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for othello syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "New Oxford Textbook of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "othello_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured domestic-violence and homicide risk assessment",
+          "cells": [
+            {
+              "text": "Risk of violence toward the partner"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collateral history from the partner",
+          "cells": [
+            {
+              "text": "Partner safety and the pattern of behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol and substance use assessment",
+          "cells": [
+            {
+              "text": "Misuse, which strongly influences outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Organic or late-onset presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Dopaminergic agents as precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive assessment and organic screen bloods",
+          "cells": [
+            {
+              "text": "Organic contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "othello_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Alcohol-related psychosis or dependence",
+          "cells": [
+            {
+              "text": "Strongly associated with this syndrome; treat dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinson disease with dopaminergic therapy-related psychosis",
+          "cells": [
+            {
+              "text": "Dopamine agonists and levodopa are recognised precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delusional disorder or schizophrenia",
+          "cells": [
+            {
+              "text": "The delusion can sit within these illnesses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "othello_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying disorder",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Delusional disorder, schizophrenia, mood disorder, alcohol dependence or organic brain disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipsychotic medication",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Targets the delusional conviction; an SSRI is added if affective or obsessional features predominate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rationalise dopaminergic therapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Where Parkinson disease treatment is the precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured risk assessment",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Intimate-partner violence and homicide risk, prioritising the partner's safety and separation if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol abstinence",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Support and treatment of substance misuse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric admission",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "When violence risk is high or the delusion is refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging and cognitive assessment",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "For late-onset or organic presentations, coordinated with neurology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "othello_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Othello Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fixed belief in a partner's infidelity with checking and following behaviour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (threats or violence, weapons, stalking or recent separation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent risk assessment and partner safeguarding; admission if high risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Risk assessment, collateral history, alcohol screen, medication review, neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the delusion secondary to alcohol, dopaminergic drugs or organic disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary delusional disorder or schizophrenia; treat and review risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying disorder: delusional disorder, schizophrenia, mood or alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antipsychotic for the delusion; add an SSRI if affective or obsessional features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reduce dopamine agonists or levodopa where Parkinson disease is the trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Structured intimate-partner violence risk assessment, prioritising the partner's safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Alcohol abstinence support and psychiatric admission if violence risk is high",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on cause and abstinence; the delusion can persist with serious violence risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

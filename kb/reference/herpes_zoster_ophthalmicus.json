@@ -1,174 +1,483 @@
 {
- "id": "herpes_zoster_ophthalmicus",
- "name": "Herpes zoster ophthalmicus",
- "aliases": [
-  "HZO",
-  "ophthalmic shingles",
-  "ophthalmic zoster"
- ],
- "class": "infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from reactivation of varicella-zoster virus in the ophthalmic division of the trigeminal nerve, producing a painful vesicular rash respecting the midline",
-   "Hutchinson sign, vesicles at the tip or side of the nose (nasociliary nerve involvement), predicts a higher likelihood of ocular complications",
-   "Ocular manifestations are wide-ranging and include conjunctivitis, epithelial pseudodendrites, stromal and disciform keratitis, uveitis, scleritis, raised intraocular pressure, and, less commonly, retinitis and optic neuritis",
-   "Corneal sensation is frequently reduced, predisposing to neurotrophic keratopathy and persistent epithelial defects",
-   "Prompt systemic antiviral therapy, ideally started early in the rash, reduces the severity and frequency of ocular complications",
-   "Zoster pseudodendrites are raised mucous plaques without true end-bulbs, distinguishing them from the ulcerated dendrites of herpes simplex",
-   "Post-herpetic neuralgia is a common and debilitating sequela, and zoster in a young or immunocompromised patient should prompt evaluation for underlying immunosuppression"
+  "id": "herpes_zoster_ophthalmicus",
+  "name": "Herpes zoster ophthalmicus",
+  "aliases": [
+    "HZO",
+    "ophthalmic shingles",
+    "ophthalmic zoster"
   ],
-  "pathophysiology": "Herpes zoster ophthalmicus is caused by reactivation of latent varicella-zoster virus residing in the trigeminal ganglion after childhood chickenpox. Declining cell-mediated immunity, with age or immunosuppression, allows the virus to travel down the ophthalmic division, causing a dermatomal vesicular eruption and neuritis. Direct viral cytopathic effect, immune-mediated inflammation, and an occlusive vasculitis of ocular vessels together produce the diverse anterior and posterior segment complications. Sensory nerve damage leads to reduced corneal sensation, neurotrophic keratopathy, and chronic neuropathic pain (post-herpetic neuralgia).",
-  "additionalDifferentials": [
-   "Herpes simplex keratitis and dermatitis",
-   "Bacterial preseptal or orbital cellulitis",
-   "Contact or allergic dermatitis of the periocular skin",
-   "Impetigo",
-   "Other causes of acute anterior uveitis or keratitis"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination to identify keratitis, pseudodendrites, uveitis, and scleritis",
-   "Intraocular pressure measurement, as secondary pressure rise is common",
-   "Assessment of corneal sensation",
-   "Dilated fundus examination to exclude retinitis or optic nerve involvement",
-   "Evaluation for immunosuppression (including HIV) in young or atypical patients",
-   "Viral PCR of a lesion or ocular sample in uncertain cases"
-  ],
-  "redFlags": [
-   "Hutchinson sign indicating high risk of sight-threatening ocular involvement",
-   "Acute retinal necrosis or optic neuritis causing rapid visual loss",
-   "Neurotrophic keratopathy with a non-healing epithelial defect risking perforation",
-   "Uncontrolled raised intraocular pressure",
-   "Zoster in a young or immunocompromised patient requiring evaluation of immune status",
-   "Signs of orbital or intracranial extension"
-  ],
-  "prognosis": "Early antiviral treatment improves outcomes, but ocular involvement can become chronic and relapsing, with neurotrophic keratopathy, uveitis, glaucoma, and post-herpetic neuralgia causing long-term morbidity and potential visual loss.",
-  "pitfalls": [
-   "Delaying antiviral therapy and increasing the risk and severity of ocular complications",
-   "Failing to examine the eye in a patient with a periocular zoster rash",
-   "Mistaking zoster pseudodendrites for herpes simplex dendrites",
-   "Overlooking reduced corneal sensation and evolving neurotrophic disease",
-   "Not screening for underlying immunosuppression in young patients"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start systemic antiviral therapy with aciclovir, valaciclovir or famciclovir as early as possible in the rash to reduce the severity and frequency of ocular complications",
-   "Manage ocular inflammation with topical corticosteroids for keratitis and uveitis under specialist supervision, cycloplegics for comfort, and pressure-lowering agents for secondary ocular hypertension",
-   "Protect the neurotrophic cornea with intensive lubrication and, where needed, lid-closure procedures for persistent epithelial defects",
-   "Treat post-herpetic neuralgia with neuropathic agents such as tricyclic antidepressants or gabapentinoids, and provide skin care for the dermatomal rash",
-   "Evaluate for underlying immunosuppression including HIV in young or atypical patients, and advise zoster vaccination as prevention in eligible individuals",
-   "Refer to ophthalmology with dilated fundus examination to exclude retinitis and optic neuritis, escalating for posterior segment or sight-threatening disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "herpes_zoster_ophthalmicus-pathway",
-   "title": "Herpes zoster ophthalmicus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from reactivation of varicella-zoster virus in the ophthalmic division of the trigeminal nerve, producing a painful vesicular rash respecting the midline",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hutchinson sign indicating high risk of sight-threatening ocular involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination to identify keratitis, pseudodendrites, uveitis, and scleritis, Intraocular pressure measurement, as secondary pressure rise is common, Assessment of corneal sensation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start systemic antiviral therapy with aciclovir, valaciclovir or famciclovir as early as possible in the rash to reduce the severity and frequency of ocular complications"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying antiviral therapy and increasing the risk and severity of ocular complications"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of herpes zoster ophthalmicus."
-  }
- ],
- "tables": [
-  {
-   "id": "herpes_zoster_ophthalmicus-matrix",
-   "title": "Herpes zoster ophthalmicus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from reactivation of varicella-zoster virus in the ophthalmic division of the trigeminal nerve, producing a painful",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from reactivation of varicella-zoster virus in the ophthalmic division of the trigeminal nerve, producing a painful vesicular rash respecting the midline",
+      "Hutchinson sign, vesicles at the tip or side of the nose (nasociliary nerve involvement), predicts a higher likelihood of ocular complications",
+      "Ocular manifestations are wide-ranging and include conjunctivitis, epithelial pseudodendrites, stromal and disciform keratitis, uveitis, scleritis, raised intraocular pressure, and, less commonly, retinitis and optic neuritis",
+      "Corneal sensation is frequently reduced, predisposing to neurotrophic keratopathy and persistent epithelial defects",
+      "Prompt systemic antiviral therapy, ideally started early in the rash, reduces the severity and frequency of ocular complications",
+      "Zoster pseudodendrites are raised mucous plaques without true end-bulbs, distinguishing them from the ulcerated dendrites of herpes simplex",
+      "Post-herpetic neuralgia is a common and debilitating sequela, and zoster in a young or immunocompromised patient should prompt evaluation for underlying immunosuppression"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination to identify keratitis, pseudodendrites, uveitis, and scleritis, Intraocular pressure measurement, as",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Herpes zoster ophthalmicus is caused by reactivation of latent varicella-zoster virus residing in the trigeminal ganglion after childhood chickenpox. Declining cell-mediated immunity, with age or immunosuppression, allows the virus to travel down the ophthalmic division, causing a dermatomal vesicular eruption and neuritis. Direct viral cytopathic effect, immune-mediated inflammation, and an occlusive vasculitis of ocular vessels together produce the diverse anterior and posterior segment complications. Sensory nerve damage leads to reduced corneal sensation, neurotrophic keratopathy, and chronic neuropathic pain (post-herpetic neuralgia).",
+    "additionalDifferentials": [
+      "Herpes simplex keratitis and dermatitis",
+      "Bacterial preseptal or orbital cellulitis",
+      "Contact or allergic dermatitis of the periocular skin",
+      "Impetigo",
+      "Other causes of acute anterior uveitis or keratitis"
     ],
-    [
-     "Primary Differentials",
-     "Herpes simplex keratitis and dermatitis, Bacterial preseptal or orbital cellulitis, Contact or allergic dermatitis of the",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination to identify keratitis, pseudodendrites, uveitis, and scleritis",
+      "Intraocular pressure measurement, as secondary pressure rise is common",
+      "Assessment of corneal sensation",
+      "Dilated fundus examination to exclude retinitis or optic nerve involvement",
+      "Evaluation for immunosuppression (including HIV) in young or atypical patients",
+      "Viral PCR of a lesion or ocular sample in uncertain cases"
     ],
-    [
-     "Management Strategy",
-     "Start systemic antiviral therapy with aciclovir, valaciclovir or famciclovir as early as possible in the rash to reduce the",
-     "Core treatment modality"
+    "redFlags": [
+      "Hutchinson sign indicating high risk of sight-threatening ocular involvement",
+      "Acute retinal necrosis or optic neuritis causing rapid visual loss",
+      "Neurotrophic keratopathy with a non-healing epithelial defect risking perforation",
+      "Uncontrolled raised intraocular pressure",
+      "Zoster in a young or immunocompromised patient requiring evaluation of immune status",
+      "Signs of orbital or intracranial extension"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying antiviral therapy and increasing the risk and severity of ocular complications",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early antiviral treatment improves outcomes, but ocular involvement can become chronic and relapsing, with neurotrophic keratopathy, uveitis, glaucoma, and post-herpetic neuralgia causing long-term morbidity and potential visual loss.",
+    "pitfalls": [
+      "Delaying antiviral therapy and increasing the risk and severity of ocular complications",
+      "Failing to examine the eye in a patient with a periocular zoster rash",
+      "Mistaking zoster pseudodendrites for herpes simplex dendrites",
+      "Overlooking reduced corneal sensation and evolving neurotrophic disease",
+      "Not screening for underlying immunosuppression in young patients"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start systemic antiviral therapy with aciclovir, valaciclovir or famciclovir as early as possible in the rash to reduce the severity and frequency of ocular complications",
+      "Manage ocular inflammation with topical corticosteroids for keratitis and uveitis under specialist supervision, cycloplegics for comfort, and pressure-lowering agents for secondary ocular hypertension",
+      "Protect the neurotrophic cornea with intensive lubrication and, where needed, lid-closure procedures for persistent epithelial defects",
+      "Treat post-herpetic neuralgia with neuropathic agents such as tricyclic antidepressants or gabapentinoids, and provide skin care for the dermatomal rash",
+      "Evaluate for underlying immunosuppression including HIV in young or atypical patients, and advise zoster vaccination as prevention in eligible individuals",
+      "Refer to ophthalmology with dilated fundus examination to exclude retinitis and optic neuritis, escalating for posterior segment or sight-threatening disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for herpes zoster ophthalmicus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "herpes-zoster-ophthalmicus-real-image",
-   "title": "Herpes zoster ophthalmicus: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "herpes_zoster_ophthalmicus-pathway",
+      "title": "Herpes zoster ophthalmicus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from reactivation of varicella-zoster virus in the ophthalmic division of the trigeminal nerve, producing a painful vesicular rash respecting the midline",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hutchinson sign indicating high risk of sight-threatening ocular involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination to identify keratitis, pseudodendrites, uveitis, and scleritis, Intraocular pressure measurement, as secondary pressure rise is common, Assessment of corneal sensation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start systemic antiviral therapy with aciclovir, valaciclovir or famciclovir as early as possible in the rash to reduce the severity and frequency of ocular complications"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying antiviral therapy and increasing the risk and severity of ocular complications"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of herpes zoster ophthalmicus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "herpes_zoster_ophthalmicus-matrix",
+      "title": "Herpes zoster ophthalmicus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from reactivation of varicella-zoster virus in the ophthalmic division of the trigeminal nerve, producing a painful",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination to identify keratitis, pseudodendrites, uveitis, and scleritis, Intraocular pressure measurement, as",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpes simplex keratitis and dermatitis, Bacterial preseptal or orbital cellulitis, Contact or allergic dermatitis of the",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start systemic antiviral therapy with aciclovir, valaciclovir or famciclovir as early as possible in the rash to reduce the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying antiviral therapy and increasing the risk and severity of ocular complications",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for herpes zoster ophthalmicus."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "herpes-zoster-ophthalmicus-real-image",
+      "title": "Herpes zoster ophthalmicus: Clinical Cutaneous Dermatology Photograph",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+      "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+      "annotations": [
+        {
+          "label": "Primary Lesions",
+          "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+        },
+        {
+          "label": "Demarcation & Margins",
+          "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+        },
+        {
+          "label": "Anatomical Distribution",
+          "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "herpes_zoster_ophthalmicus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Keratitis and pseudodendrites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Secondary pressure rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of corneal sensation",
+          "cells": [
+            {
+              "text": "Neurotrophic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Retinitis or optic neuritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for immunosuppression, including HIV",
+          "cells": [
+            {
+              "text": "Young or immunocompromised patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral PCR of a lesion or ocular sample",
+          "cells": [
+            {
+              "text": "Uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "herpes_zoster_ophthalmicus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex keratitis and dermatitis",
+          "cells": [
+            {
+              "text": "Viral PCR of the lesion separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial preseptal or orbital cellulitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact or allergic dermatitis of the periocular skin",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "herpes_zoster_ophthalmicus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic antiviral therapy",
+          "cells": [
+            {
+              "text": "Aciclovir or valaciclovir"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Ocular inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive lubrication",
+          "cells": [
+            {
+              "text": "Protects the neurotrophic cornea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic agents",
+          "cells": [
+            {
+              "text": "Post-herpetic neuralgia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV and immunosuppression evaluation",
+          "cells": [
+            {
+              "text": "Young or immunocompromised patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology referral",
+          "cells": [
+            {
+              "text": "Dilated fundus examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "herpes_zoster_ophthalmicus-dx-mgmt",
+      "title": "Diagnosis and management of Herpes zoster ophthalmicus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Facial zoster rash with ocular inflammation or keratitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hutchinson sign, retinal necrosis, optic neuritis, or raised intraocular pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology for retinal necrosis, optic neuritis or raised pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp; intraocular pressure; corneal sensation; dilated fundus; HIV screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is zoster confirmed with keratitis or uveitis on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider herpes simplex keratitis, cellulitis, contact dermatitis or impetigo",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic antiviral therapy with aciclovir or valaciclovir",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids for ocular inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensive lubrication to protect the neurotrophic cornea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Evaluation for immunosuppression including HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Antiviral course completed; eye complications monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

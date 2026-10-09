@@ -1,201 +1,680 @@
 {
- "id": "pneumocystis_pneumonia",
- "name": "Pneumocystis Pneumonia (PCP)",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 227,
- "page": 1730,
- "aliases": [
-  "PCP",
-  "Pneumocystis jirovecii pneumonia",
-  "PJP"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1730-1734",
-  "clinicalPearls": [
-   "Caused by the fungus Pneumocystis jirovecii (formerly P. carinii); the organism cannot be cultured and is host-specific to humans, infecting only via other humans (Harrison 22e p.1730-1731).",
-   "An opportunistic pathogen of immunocompromised hosts: HIV infection, organ transplantation, haematologic malignancy, and those on high-dose glucocorticoids or certain immunosuppressive monoclonal antibodies (Harrison 22e p.1730).",
-   "Among people with HIV, PCP incidence is inversely related to CD4+ T-cell count: at least 80% of cases occur at counts <200/uL and most actually develop at counts <100/uL (Harrison 22e p.1731-1732).",
-   "Classic presentation is acute or subacute pneumonia, often beginning with a vague sense of dyspnoea alone, then progressing to fever, nonproductive cough, and progressive shortness of breath (Harrison 22e p.1731).",
-   "Decreased oxygen saturation at rest or with exertion is characteristic; untreated it progresses to severe hypoxaemia (Harrison 22e p.1731).",
-   "Serum lactate dehydrogenase (LDH) is often elevated from pulmonary damage (Harrison 22e p.1731).",
-   "Classic chest radiograph shows diffuse bilateral interstitial infiltrates that are perihilar and symmetric, which can progress to alveolar filling (Harrison 22e p.1731).",
-   "High-resolution chest CT shows diffuse ground-glass opacities in virtually all PCP patients, often before the plain chest radiograph becomes abnormal (Harrison 22e p.1731).",
-   "Bronchoalveolar lavage (BAL) is the most common sampling method; demonstration of organisms in BAL fluid is almost 100% sensitive and specific for PCP (Harrison 22e p.1733).",
-   "Since the organism cannot be cultured, diagnosis relies on staining of cyst or trophozoite forms in lung tissue/secretions with methenamine silver, toluidine blue O, Giemsa, or specific immunofluorescent antibody (Harrison 22e p.1733).",
-   "An induced sputum sample, when obtained and interpreted by an experienced provider, can be highly sensitive and specific, but sensitivity is widely variable (55-90%); expectorated sputum and throat swabs have very low sensitivity (Harrison 22e p.1733).",
-   "Adjunctive glucocorticoids improve survival in moderate-to-severe disease (initial room-air PaO2 <70 mmHg or alveolar-arterial gradient >=35 mmHg) by reducing the inflammation that follows organism die-off once specific therapy begins; they should be started when PCP therapy is initiated, even if the diagnosis is only suspected (Harrison 22e p.1734).",
-   "Prophylaxis is the cornerstone of prevention; for HIV, CD4+ counts <200/uL (or CD4 percentage <15) are an indication to start or continue chemoprophylaxis, alongside prior PCP, unexplained prolonged fever, or recent oropharyngeal candidiasis (Harrison 22e p.1734).",
-   "PCP now occurs more often from non-HIV-related immunosuppression than from HIV infection in many health care systems (Harrison 22e p.1731)."
+  "id": "pneumocystis_pneumonia",
+  "name": "Pneumocystis Pneumonia (PCP)",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 227,
+  "page": 1730,
+  "aliases": [
+    "PCP",
+    "Pneumocystis jirovecii pneumonia",
+    "PJP"
   ],
-  "pathophysiology": "Pneumocystis jirovecii is a fungus with unique tropism for the lung. Organisms are inhaled into the alveolar space, presumably after being exhaled by another human; most people are exposed and infected early in life. Disease may arise from primary infection, reinfection, or reactivation of latent infection. Clinically apparent pneumonia occurs only in immunocompromised hosts, where defects in cellular and/or humoral immunity (congenital, HIV-related, or drug-induced) permit proliferation. CD4+ T cells are critical for host defence. The organism proliferates in the lung provoking a mononuclear cell response; alveoli fill with proteinaceous material and alveolar-capillary injury with surfactant abnormalities develops. Stained sections show foamy, vacuolated alveolar exudates of viable and nonviable organisms, with interstitial oedema and fibrosis. Much of the clinical deterioration after starting specific therapy is attributed to enhanced inflammation from dying organisms, the rationale for adjunctive glucocorticoids (Harrison 22e p.1731-1734).",
-  "additionalDifferentials": [
-   "Bacterial pneumonia (including community-acquired pneumonia)",
-   "Pulmonary tuberculosis (especially with upper-lobe cavitary pattern seen after aerosolized pentamidine prophylaxis)",
-   "Cytomegalovirus and other viral pneumonias in the immunocompromised host",
-   "Other invasive fungal pneumonias (e.g., Aspergillus)",
-   "Congestive heart failure",
-   "Pulmonary embolism",
-   "Pulmonary hypertension",
-   "Drug toxicity",
-   "Neoplastic process involving the lung",
-   "Lymphoid interstitial pneumonitis (LIP) and nonspecific interstitial pneumonitis (NIP) in HIV"
-  ],
-  "infectionMimics": [
-   "Bacterial pneumonia",
-   "Pulmonary tuberculosis",
-   "Cytomegalovirus pneumonia",
-   "Invasive aspergillosis / other fungal pneumonia"
-  ],
-  "nonInfectiousMimics": [
-   "Congestive heart failure",
-   "Pulmonary embolism",
-   "Pulmonary hypertension",
-   "Drug-induced pulmonary toxicity",
-   "Pulmonary neoplasm",
-   "Lymphoid interstitial pneumonitis (LIP) / nonspecific interstitial pneumonitis (NIP)"
-  ],
-  "additionalInvestigations": [
-   "Pulse oximetry / oxygen saturation at rest and with exertion, and arterial blood gases (hypoxaemia with widened alveolar-arterial gradient; used for staging severity and directing treatment)",
-   "Serum lactate dehydrogenase (LDH) - often elevated but neither sensitive nor specific",
-   "High-resolution chest CT (diffuse ground-glass opacities; a normal chest CT essentially rules out PCP)",
-   "Bronchoalveolar lavage with methenamine silver, toluidine blue O, Giemsa, or immunofluorescent staining",
-   "Induced sputum examination (experienced-provider dependent)",
-   "PCR of respiratory specimens (more useful for ruling out PCP when negative than for confirming it when positive; cannot distinguish colonization from disease and is not standardized)",
-   "Serum (1->3)-beta-D-glucan (frequently elevated but neither perfectly sensitive nor highly specific)",
-   "Transbronchial or open-lung biopsy when less invasive sampling is non-diagnostic"
-  ],
-  "redFlags": [
-   "PaO2 <70 mmHg on room air (or alveolar-arterial oxygen gradient >=35 mmHg) marking moderate-to-severe disease that warrants adjunctive glucocorticoids",
-   "Profound or progressive hypoxaemia / progression to respiratory failure",
-   "Development of pneumothorax (pneumatoceles and pneumothoraces are characteristic, especially in HIV) - associated with higher mortality",
-   "Need for mechanical ventilation",
-   "Distributive shock due to PCP (rare)",
-   "Clinical deterioration after 3-4 days of therapy, or failure to improve by 7-10 days, prompting reevaluation for other or coexisting processes"
-  ],
-  "prognosis": "Untreated, PCP is invariably fatal. HIV-associated disease is often indolent, presenting early as mild exercise intolerance or chest tightness without fever or cough and a normal or near-normal chest radiograph, then progressing over days to months to fever, cough, diffuse alveolar infiltrates, and profound hypoxaemia; non-HIV immunosuppressed patients more often have acute disease progressing over days to respiratory failure. Mortality is influenced by age, degree of immunosuppression, preexisting lung disease, need for mechanical ventilation, and development of pneumothorax. With advances in critical care, prognosis for those requiring intubation has improved and depends largely on comorbidities and the underlying disease (Harrison 22e p.1733).",
-  "pitfalls": [
-   "A normal LDH does not rule out PCP, and an elevated LDH is not specific for PCP (Harrison 22e p.1731).",
-   "PCP can occur at CD4+ counts >200/uL in HIV (uncommon, especially at counts well above 200), and in non-HIV immunosuppression a CD4+ count >200/uL does not imply protection (Harrison 22e p.1731).",
-   "PCR is so sensitive that it cannot reliably distinguish colonization from true pneumonia; there is no validated PCR threshold, so a positive result does not definitively attribute disease to Pneumocystis (Harrison 22e p.1733).",
-   "Serum/BAL (1->3)-beta-D-glucan and serum PCR are not sufficiently sensitive or specific to establish or exclude PCP (Harrison 22e p.1733).",
-   "If treated with specific therapy but without corticosteroids, patients of any severity often deteriorate during the first few days from inflammation induced by dying organisms (Harrison 22e p.1733).",
-   "Initial chest radiograph may be normal in mild disease, and the classic dense perihilar infiltrate is unusual in AIDS; relying on plain film can delay diagnosis (Harrison 22e p.1730-1731).",
-   "Extrapulmonary pneumocystosis is rare and nonspecific; when present, the priority is to look for another concurrent infectious or neoplastic process (Harrison 22e p.1733)."
-  ],
-  "severityClassification": "Severity is staged largely by oxygenation. Moderate-to-severe disease is defined by an initial room-air PaO2 <70 mmHg or an alveolar-arterial oxygen gradient >=35 mmHg; this threshold identifies patients (with HIV, and probably other immunodeficiencies) who benefit from adjunctive glucocorticoids in addition to specific antimicrobial therapy. Arterial blood-gas measurement both aids diagnosis and directs treatment by staging severity (Harrison 22e p.1731, 1734).",
-  "references": [
-   "Harrison 22e p.1730-1734 (Ch.227, Pneumocystis Infections)",
-   "Harrison 22e p.1730 (Ch.208, HIV/AIDS clinical manifestations - PCP)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line therapy is high-dose co-trimoxazole for confirmed or strongly suspected infection",
-   "Adjunctive corticosteroids for moderate-to-severe disease with significant hypoxaemia to reduce respiratory deterioration and mortality",
-   "Alternative regimens for sulfa intolerance or treatment failure, such as clindamycin with primaquine, intravenous pentamidine, or atovaquone for milder disease",
-   "Supportive care with supplemental oxygen and ventilatory support for respiratory failure",
-   "Address the underlying immunosuppression with antiretroviral therapy in HIV and review of immunosuppressive or glucocorticoid regimens",
-   "Secondary prophylaxis with co-trimoxazole after treatment until immune reconstitution, and primary prophylaxis in at-risk immunocompromised hosts",
-   "Escalate to critical care for progressive hypoxaemia, and adjust immunosuppression in transplant recipients"
-  ]
- },
- "algorithms": [
-  {
-   "id": "pneumocystis_pneumonia-pathway",
-   "title": "Pneumocystis Pneumonia (PCP): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by the fungus Pneumocystis jirovecii (formerly P. carinii); the organism cannot be cultured and is host-specific to humans, infecting only via other humans (Harrison 22e p.1730-1731).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: PaO2 =35 mmHg) marking moderate-to-severe disease that warrants adjunctive glucocorticoids",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pulse oximetry / oxygen saturation at rest and with exertion, and arterial blood gases (hypoxaemia with widened alveolar-arterial gradient; used for staging severity and directing treatment), Serum lactate dehydrogenase"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line therapy is high-dose co-trimoxazole for confirmed or strongly suspected infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: A normal LDH does not rule out PCP, and an elevated LDH is not specific for PCP (Harrison 22e p.1731)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pneumocystis pneumonia (pcp)."
-  }
- ],
- "tables": [
-  {
-   "id": "pneumocystis_pneumonia-matrix",
-   "title": "Pneumocystis Pneumonia (PCP): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by the fungus Pneumocystis jirovecii (formerly P. carinii); the organism cannot be cultured and is host-specific to",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1730-1734",
+    "clinicalPearls": [
+      "Caused by the fungus Pneumocystis jirovecii (formerly P. carinii); the organism cannot be cultured and is host-specific to humans, infecting only via other humans (Harrison 22e p.1730-1731).",
+      "An opportunistic pathogen of immunocompromised hosts: HIV infection, organ transplantation, haematologic malignancy, and those on high-dose glucocorticoids or certain immunosuppressive monoclonal antibodies (Harrison 22e p.1730).",
+      "Among people with HIV, PCP incidence is inversely related to CD4+ T-cell count: at least 80% of cases occur at counts <200/uL and most actually develop at counts <100/uL (Harrison 22e p.1731-1732).",
+      "Classic presentation is acute or subacute pneumonia, often beginning with a vague sense of dyspnoea alone, then progressing to fever, nonproductive cough, and progressive shortness of breath (Harrison 22e p.1731).",
+      "Decreased oxygen saturation at rest or with exertion is characteristic; untreated it progresses to severe hypoxaemia (Harrison 22e p.1731).",
+      "Serum lactate dehydrogenase (LDH) is often elevated from pulmonary damage (Harrison 22e p.1731).",
+      "Classic chest radiograph shows diffuse bilateral interstitial infiltrates that are perihilar and symmetric, which can progress to alveolar filling (Harrison 22e p.1731).",
+      "High-resolution chest CT shows diffuse ground-glass opacities in virtually all PCP patients, often before the plain chest radiograph becomes abnormal (Harrison 22e p.1731).",
+      "Bronchoalveolar lavage (BAL) is the most common sampling method; demonstration of organisms in BAL fluid is almost 100% sensitive and specific for PCP (Harrison 22e p.1733).",
+      "Since the organism cannot be cultured, diagnosis relies on staining of cyst or trophozoite forms in lung tissue/secretions with methenamine silver, toluidine blue O, Giemsa, or specific immunofluorescent antibody (Harrison 22e p.1733).",
+      "An induced sputum sample, when obtained and interpreted by an experienced provider, can be highly sensitive and specific, but sensitivity is widely variable (55-90%); expectorated sputum and throat swabs have very low sensitivity (Harrison 22e p.1733).",
+      "Adjunctive glucocorticoids improve survival in moderate-to-severe disease (initial room-air PaO2 <70 mmHg or alveolar-arterial gradient >=35 mmHg) by reducing the inflammation that follows organism die-off once specific therapy begins; they should be started when PCP therapy is initiated, even if the diagnosis is only suspected (Harrison 22e p.1734).",
+      "Prophylaxis is the cornerstone of prevention; for HIV, CD4+ counts <200/uL (or CD4 percentage <15) are an indication to start or continue chemoprophylaxis, alongside prior PCP, unexplained prolonged fever, or recent oropharyngeal candidiasis (Harrison 22e p.1734).",
+      "PCP now occurs more often from non-HIV-related immunosuppression than from HIV infection in many health care systems (Harrison 22e p.1731)."
     ],
-    [
-     "Key Investigations",
-     "Pulse oximetry / oxygen saturation at rest and with exertion, and arterial blood gases (hypoxaemia with widened alveolar-arterial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pneumocystis jirovecii is a fungus with unique tropism for the lung. Organisms are inhaled into the alveolar space, presumably after being exhaled by another human; most people are exposed and infected early in life. Disease may arise from primary infection, reinfection, or reactivation of latent infection. Clinically apparent pneumonia occurs only in immunocompromised hosts, where defects in cellular and/or humoral immunity (congenital, HIV-related, or drug-induced) permit proliferation. CD4+ T cells are critical for host defence. The organism proliferates in the lung provoking a mononuclear cell response; alveoli fill with proteinaceous material and alveolar-capillary injury with surfactant abnormalities develops. Stained sections show foamy, vacuolated alveolar exudates of viable and nonviable organisms, with interstitial oedema and fibrosis. Much of the clinical deterioration after starting specific therapy is attributed to enhanced inflammation from dying organisms, the rationale for adjunctive glucocorticoids (Harrison 22e p.1731-1734).",
+    "additionalDifferentials": [
+      "Bacterial pneumonia (including community-acquired pneumonia)",
+      "Pulmonary tuberculosis (especially with upper-lobe cavitary pattern seen after aerosolized pentamidine prophylaxis)",
+      "Cytomegalovirus and other viral pneumonias in the immunocompromised host",
+      "Other invasive fungal pneumonias (e.g., Aspergillus)",
+      "Congestive heart failure",
+      "Pulmonary embolism",
+      "Pulmonary hypertension",
+      "Drug toxicity",
+      "Neoplastic process involving the lung",
+      "Lymphoid interstitial pneumonitis (LIP) and nonspecific interstitial pneumonitis (NIP) in HIV"
     ],
-    [
-     "Primary Differentials",
-     "Bacterial pneumonia (including community-acquired pneumonia), Pulmonary tuberculosis (especially with upper-lobe cavitary pattern",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Bacterial pneumonia",
+      "Pulmonary tuberculosis",
+      "Cytomegalovirus pneumonia",
+      "Invasive aspergillosis / other fungal pneumonia"
     ],
-    [
-     "Management Strategy",
-     "First-line therapy is high-dose co-trimoxazole for confirmed or strongly suspected infection",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Congestive heart failure",
+      "Pulmonary embolism",
+      "Pulmonary hypertension",
+      "Drug-induced pulmonary toxicity",
+      "Pulmonary neoplasm",
+      "Lymphoid interstitial pneumonitis (LIP) / nonspecific interstitial pneumonitis (NIP)"
     ],
-    [
-     "Clinical Pitfall",
-     "A normal LDH does not rule out PCP, and an elevated LDH is not specific for PCP (Harrison 22e p.1731).",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Pulse oximetry / oxygen saturation at rest and with exertion, and arterial blood gases (hypoxaemia with widened alveolar-arterial gradient; used for staging severity and directing treatment)",
+      "Serum lactate dehydrogenase (LDH) - often elevated but neither sensitive nor specific",
+      "High-resolution chest CT (diffuse ground-glass opacities; a normal chest CT essentially rules out PCP)",
+      "Bronchoalveolar lavage with methenamine silver, toluidine blue O, Giemsa, or immunofluorescent staining",
+      "Induced sputum examination (experienced-provider dependent)",
+      "PCR of respiratory specimens (more useful for ruling out PCP when negative than for confirming it when positive; cannot distinguish colonization from disease and is not standardized)",
+      "Serum (1->3)-beta-D-glucan (frequently elevated but neither perfectly sensitive nor highly specific)",
+      "Transbronchial or open-lung biopsy when less invasive sampling is non-diagnostic"
+    ],
+    "redFlags": [
+      "PaO2 <70 mmHg on room air (or alveolar-arterial oxygen gradient >=35 mmHg) marking moderate-to-severe disease that warrants adjunctive glucocorticoids",
+      "Profound or progressive hypoxaemia / progression to respiratory failure",
+      "Development of pneumothorax (pneumatoceles and pneumothoraces are characteristic, especially in HIV) - associated with higher mortality",
+      "Need for mechanical ventilation",
+      "Distributive shock due to PCP (rare)",
+      "Clinical deterioration after 3-4 days of therapy, or failure to improve by 7-10 days, prompting reevaluation for other or coexisting processes"
+    ],
+    "prognosis": "Untreated, PCP is invariably fatal. HIV-associated disease is often indolent, presenting early as mild exercise intolerance or chest tightness without fever or cough and a normal or near-normal chest radiograph, then progressing over days to months to fever, cough, diffuse alveolar infiltrates, and profound hypoxaemia; non-HIV immunosuppressed patients more often have acute disease progressing over days to respiratory failure. Mortality is influenced by age, degree of immunosuppression, preexisting lung disease, need for mechanical ventilation, and development of pneumothorax. With advances in critical care, prognosis for those requiring intubation has improved and depends largely on comorbidities and the underlying disease (Harrison 22e p.1733).",
+    "pitfalls": [
+      "A normal LDH does not rule out PCP, and an elevated LDH is not specific for PCP (Harrison 22e p.1731).",
+      "PCP can occur at CD4+ counts >200/uL in HIV (uncommon, especially at counts well above 200), and in non-HIV immunosuppression a CD4+ count >200/uL does not imply protection (Harrison 22e p.1731).",
+      "PCR is so sensitive that it cannot reliably distinguish colonization from true pneumonia; there is no validated PCR threshold, so a positive result does not definitively attribute disease to Pneumocystis (Harrison 22e p.1733).",
+      "Serum/BAL (1->3)-beta-D-glucan and serum PCR are not sufficiently sensitive or specific to establish or exclude PCP (Harrison 22e p.1733).",
+      "If treated with specific therapy but without corticosteroids, patients of any severity often deteriorate during the first few days from inflammation induced by dying organisms (Harrison 22e p.1733).",
+      "Initial chest radiograph may be normal in mild disease, and the classic dense perihilar infiltrate is unusual in AIDS; relying on plain film can delay diagnosis (Harrison 22e p.1730-1731).",
+      "Extrapulmonary pneumocystosis is rare and nonspecific; when present, the priority is to look for another concurrent infectious or neoplastic process (Harrison 22e p.1733)."
+    ],
+    "severityClassification": "Severity is staged largely by oxygenation. Moderate-to-severe disease is defined by an initial room-air PaO2 <70 mmHg or an alveolar-arterial oxygen gradient >=35 mmHg; this threshold identifies patients (with HIV, and probably other immunodeficiencies) who benefit from adjunctive glucocorticoids in addition to specific antimicrobial therapy. Arterial blood-gas measurement both aids diagnosis and directs treatment by staging severity (Harrison 22e p.1731, 1734).",
+    "references": [
+      "Harrison 22e p.1730-1734 (Ch.227, Pneumocystis Infections)",
+      "Harrison 22e p.1730 (Ch.208, HIV/AIDS clinical manifestations - PCP)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line therapy is high-dose co-trimoxazole for confirmed or strongly suspected infection",
+      "Adjunctive corticosteroids for moderate-to-severe disease with significant hypoxaemia to reduce respiratory deterioration and mortality",
+      "Alternative regimens for sulfa intolerance or treatment failure, such as clindamycin with primaquine, intravenous pentamidine, or atovaquone for milder disease",
+      "Supportive care with supplemental oxygen and ventilatory support for respiratory failure",
+      "Address the underlying immunosuppression with antiretroviral therapy in HIV and review of immunosuppressive or glucocorticoid regimens",
+      "Secondary prophylaxis with co-trimoxazole after treatment until immune reconstitution, and primary prophylaxis in at-risk immunocompromised hosts",
+      "Escalate to critical care for progressive hypoxaemia, and adjust immunosuppression in transplant recipients"
     ]
-   ],
-   "caption": "Overview comparison matrix for pneumocystis pneumonia (pcp)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pneumocystis-pneumonia-real-image",
-   "title": "Pneumocystis Pneumonia (PCP): Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pneumocystis_pneumonia-pathway",
+      "title": "Pneumocystis Pneumonia (PCP): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by the fungus Pneumocystis jirovecii (formerly P. carinii); the organism cannot be cultured and is host-specific to humans, infecting only via other humans (Harrison 22e p.1730-1731).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: PaO2 =35 mmHg) marking moderate-to-severe disease that warrants adjunctive glucocorticoids",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pulse oximetry / oxygen saturation at rest and with exertion, and arterial blood gases (hypoxaemia with widened alveolar-arterial gradient; used for staging severity and directing treatment), Serum lactate dehydrogenase"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line therapy is high-dose co-trimoxazole for confirmed or strongly suspected infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: A normal LDH does not rule out PCP, and an elevated LDH is not specific for PCP (Harrison 22e p.1731)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pneumocystis pneumonia (pcp)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pneumocystis_pneumonia-matrix",
+      "title": "Pneumocystis Pneumonia (PCP): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by the fungus Pneumocystis jirovecii (formerly P. carinii); the organism cannot be cultured and is host-specific to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pulse oximetry / oxygen saturation at rest and with exertion, and arterial blood gases (hypoxaemia with widened alveolar-arterial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacterial pneumonia (including community-acquired pneumonia), Pulmonary tuberculosis (especially with upper-lobe cavitary pattern",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line therapy is high-dose co-trimoxazole for confirmed or strongly suspected infection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "A normal LDH does not rule out PCP, and an elevated LDH is not specific for PCP (Harrison 22e p.1731).",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pneumocystis pneumonia (pcp)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pneumocystis jirovecii Pneumonia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pneumonia/pneumocystis-jirovecii-pneumonia"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 132-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pneumocystis_pneumonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging Pneumocystis pneumonia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "CD4 count in HIV",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "At least 80% of cases under 200/uL, most under 100/uL",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "Non-HIV hosts get PCP at any CD4 count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exertional desaturation",
+          "cells": [
+            {
+              "text": "Falls on exercise even with near-normal radiograph"
+            },
+            {
+              "text": "Early clue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate to severe disease",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "PaO2 under 70 mmHg on room air or A-a gradient 35 mmHg or more",
+              "op": "<",
+              "value": 70
+            },
+            {
+              "text": "{{hy:Add corticosteroids}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry threshold",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 92% on room air",
+              "op": "<",
+              "value": 92
+            },
+            {
+              "text": "Merck alternative steroid trigger"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Diffuse ground-glass opacities"
+            },
+            {
+              "text": "Normal CT essentially excludes PCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAL or induced sputum stains",
+          "cells": [
+            {
+              "text": "Silver, toluidine blue, Giemsa or immunofluorescence"
+            },
+            {
+              "text": "Confirms diagnosis; organism cannot be cultured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR",
+          "cells": [
+            {
+              "text": "Very sensitive"
+            },
+            {
+              "text": "Negative helps exclude; positive may be colonization"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LDH and beta-D-glucan",
+          "cells": [
+            {
+              "text": "Often raised"
+            },
+            {
+              "text": "Neither confirms nor excludes PCP"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumocystis_pneumonia-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Pneumocystis pneumonia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial pneumonia",
+          "cells": [
+            {
+              "text": "Acute, productive cough, lobar consolidation"
+            },
+            {
+              "text": "Sputum and blood cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Upper-lobe cavities, night sweats"
+            },
+            {
+              "text": "Sputum AFB and NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMV pneumonia",
+          "cells": [
+            {
+              "text": "Transplant recipients, viremia"
+            },
+            {
+              "text": "BAL CMV studies, blood PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive aspergillosis",
+          "cells": [
+            {
+              "text": "Neutropenia, nodules with halo"
+            },
+            {
+              "text": "Galactomannan, CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Edema, raised BNP, cardiomegaly"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced pneumonitis",
+          "cells": [
+            {
+              "text": "Exposure to a culprit drug"
+            },
+            {
+              "text": "Exclusion, BAL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LIP or NIP in HIV",
+          "cells": [
+            {
+              "text": "Chronic interstitial disease"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other post-transplant lung infections",
+          "cells": [
+            {
+              "text": "CMV and Aspergillus risk highest after lung transplant"
+            },
+            {
+              "text": "Timing after transplant, BAL"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "pneumocystis_pneumonia-treatment",
+      "kind": "treatment",
+      "title": "Treating and preventing Pneumocystis pneumonia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose TMP-SMX for 21 days",
+          "cells": [
+            {
+              "text": "First line, any severity"
+            },
+            {
+              "text": "Oral or IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral prednisone tapered over 21 days",
+          "cells": [
+            {
+              "text": "PaO2 under 70 mmHg or A-a gradient 35 mmHg or more"
+            },
+            {
+              "text": "Start with antimicrobial therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TMP plus dapsone, clindamycin plus primaquine, or atovaquone",
+          "cells": [
+            {
+              "text": "Sulfa intolerance; atovaquone for mild disease"
+            },
+            {
+              "text": "21-day courses; check G6PD before dapsone or primaquine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV pentamidine",
+          "cells": [
+            {
+              "text": "Severe disease when TMP-SMX fails or not tolerated"
+            },
+            {
+              "text": "Kidney injury, hypotension, hypoglycemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oxygen and ventilatory support",
+          "cells": [
+            {
+              "text": "Hypoxemia, respiratory failure"
+            },
+            {
+              "text": "Pneumothorax raises mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "HIV"
+            },
+            {
+              "text": "Restores immunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis with TMP-SMX",
+          "cells": [
+            {
+              "text": "Prior PCP; CD4 under 100/uL; CD4 100 to 200/uL with detectable viral load"
+            },
+            {
+              "text": "Dapsone or aerosolized pentamidine if intolerant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop prophylaxis",
+          "cells": [
+            {
+              "text": "CD4 200/uL or more for 3 months or more on ART"
+            },
+            {
+              "text": "Many non-HIV immunosuppressed hosts also need prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pneumocystis_pneumonia-dx-mgmt",
+      "title": "Diagnosis and management of Pneumocystis pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Immunocompromised host with dyspnea, dry cough, fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Oximetry at rest and exertion, ABG, chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Radiograph normal but suspicion high?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "High-resolution CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ground-glass opacities present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "PCP essentially excluded; seek other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Induced sputum or BAL; start TMP-SMX",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "PaO2 under 70 mmHg or A-a gradient 35 or more?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add prednisone taper",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Worse at 3 to 4 days or not better by 7 to 10 days?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reassess for other infection; switch regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Complete 21 days, then secondary prophylaxis and ART",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

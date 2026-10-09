@@ -1,169 +1,458 @@
 {
- "id": "trochlear_nerve_palsy",
- "name": "Fourth nerve palsy",
- "aliases": [
-  "trochlear palsy",
-  "superior oblique palsy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Weakness of the superior oblique produces vertical and torsional diplopia that is worse on looking down and in, as when reading or descending stairs",
-   "Patients typically adopt a compensatory head tilt away from the affected side to control the diplopia",
-   "The Parks-Bielschowsky three-step test localises the palsy and shows worsening hypertropia on head tilt toward the affected side",
-   "It is the commonest cause of vertical diplopia and, because the nerve is thin with a long course, is frequently caused by head trauma",
-   "Congenital fourth nerve palsy is common and may decompensate in adulthood; old photographs showing a long-standing head tilt support this",
-   "Bilateral palsies, often traumatic, cause alternating hypertropia and prominent torsion"
+  "id": "trochlear_nerve_palsy",
+  "name": "Fourth nerve palsy",
+  "aliases": [
+    "trochlear palsy",
+    "superior oblique palsy"
   ],
-  "pathophysiology": "The trochlear nerve supplies the superior oblique, which intorts, depresses and abducts the eye; its palsy leaves the eye relatively elevated and extorted with impaired depression in adduction. The nerve is uniquely long, thin and the only cranial nerve to exit dorsally after decussating, crossing the tentorial edge, which makes it especially susceptible to closed head injury. Microvascular ischaemia is another common cause, while congenital laxity or absence of the tendon can present later when fusional reserves that had compensated finally fail.",
-  "additionalDifferentials": [
-   "Skew deviation",
-   "Myasthenia gravis",
-   "Thyroid eye disease affecting the inferior rectus",
-   "Partial third nerve palsy",
-   "Orbital floor fracture with inferior rectus restriction",
-   "Ocular tilt reaction"
-  ],
-  "additionalInvestigations": [
-   "Orthoptic assessment with the three-step test and measurement of torsion",
-   "Comparison with old photographs for a long-standing head tilt",
-   "MRI of the brain and orbits when the palsy is not clearly traumatic or vasculopathic",
-   "Vasculopathic risk-factor evaluation",
-   "Acetylcholine-receptor antibody testing if myasthenia is possible"
-  ],
-  "redFlags": [
-   "Additional neurological signs or other cranial neuropathies",
-   "Bilateral palsy without a clear traumatic explanation",
-   "Progressive deviation or associated headache",
-   "Features suggesting skew deviation from posterior fossa disease"
-  ],
-  "prognosis": "Microvascular and many traumatic palsies improve over weeks to months; decompensated congenital and persistent palsies are well managed with prisms or superior oblique strengthening or other strabismus surgery.",
-  "pitfalls": [
-   "Confusing a decompensated congenital palsy with a new acquired lesion",
-   "Overlooking skew deviation as a mimic of vertical diplopia",
-   "Missing subtle torsion that helps localise the palsy",
-   "Attributing bilateral palsy to a unilateral cause"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Bradley and Daroff Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying cause, optimising vascular risk factors in microvascular palsy and managing any lesion identified on imaging",
-   "Observe microvascular and many traumatic palsies, which commonly recover over weeks to months",
-   "Relieve diplopia symptomatically with Fresnel or ground-in prisms, or temporary monocular occlusion",
-   "Refer for strabismus surgery such as superior oblique strengthening or inferior oblique weakening when the deviation is stable but persistent",
-   "Recognise and treat decompensated congenital palsy, supported by old photographs, with prisms or surgery",
-   "Coordinate orthoptic, ophthalmology and neurology follow-up to monitor recovery and re-image if the palsy progresses or fails to resolve"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trochlear_nerve_palsy-pathway",
-   "title": "Fourth nerve palsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Weakness of the superior oblique produces vertical and torsional diplopia that is worse on looking down and in, as when reading or descending stairs",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Additional neurological signs or other cranial neuropathies",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Orthoptic assessment with the three-step test and measurement of torsion, Comparison with old photographs for a long-standing head tilt, MRI of the brain and orbits when the palsy is not clearly traumatic or vasculopathic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying cause, optimising vascular risk factors in microvascular palsy and managing any lesion identified on imaging"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a decompensated congenital palsy with a new acquired lesion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fourth nerve palsy."
-  }
- ],
- "tables": [
-  {
-   "id": "trochlear_nerve_palsy-matrix",
-   "title": "Fourth nerve palsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Weakness of the superior oblique produces vertical and torsional diplopia that is worse on looking down and in, as when reading",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Weakness of the superior oblique produces vertical and torsional diplopia that is worse on looking down and in, as when reading or descending stairs",
+      "Patients typically adopt a compensatory head tilt away from the affected side to control the diplopia",
+      "The Parks-Bielschowsky three-step test localises the palsy and shows worsening hypertropia on head tilt toward the affected side",
+      "It is the commonest cause of vertical diplopia and, because the nerve is thin with a long course, is frequently caused by head trauma",
+      "Congenital fourth nerve palsy is common and may decompensate in adulthood; old photographs showing a long-standing head tilt support this",
+      "Bilateral palsies, often traumatic, cause alternating hypertropia and prominent torsion"
     ],
-    [
-     "Key Investigations",
-     "Orthoptic assessment with the three-step test and measurement of torsion, Comparison with old photographs for a long-standing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The trochlear nerve supplies the superior oblique, which intorts, depresses and abducts the eye; its palsy leaves the eye relatively elevated and extorted with impaired depression in adduction. The nerve is uniquely long, thin and the only cranial nerve to exit dorsally after decussating, crossing the tentorial edge, which makes it especially susceptible to closed head injury. Microvascular ischaemia is another common cause, while congenital laxity or absence of the tendon can present later when fusional reserves that had compensated finally fail.",
+    "additionalDifferentials": [
+      "Skew deviation",
+      "Myasthenia gravis",
+      "Thyroid eye disease affecting the inferior rectus",
+      "Partial third nerve palsy",
+      "Orbital floor fracture with inferior rectus restriction",
+      "Ocular tilt reaction"
     ],
-    [
-     "Primary Differentials",
-     "Skew deviation, Myasthenia gravis, Thyroid eye disease affecting the inferior rectus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Orthoptic assessment with the three-step test and measurement of torsion",
+      "Comparison with old photographs for a long-standing head tilt",
+      "MRI of the brain and orbits when the palsy is not clearly traumatic or vasculopathic",
+      "Vasculopathic risk-factor evaluation",
+      "Acetylcholine-receptor antibody testing if myasthenia is possible"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying cause, optimising vascular risk factors in microvascular palsy and managing any lesion identified on imaging",
-     "Core treatment modality"
+    "redFlags": [
+      "Additional neurological signs or other cranial neuropathies",
+      "Bilateral palsy without a clear traumatic explanation",
+      "Progressive deviation or associated headache",
+      "Features suggesting skew deviation from posterior fossa disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a decompensated congenital palsy with a new acquired lesion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Microvascular and many traumatic palsies improve over weeks to months; decompensated congenital and persistent palsies are well managed with prisms or superior oblique strengthening or other strabismus surgery.",
+    "pitfalls": [
+      "Confusing a decompensated congenital palsy with a new acquired lesion",
+      "Overlooking skew deviation as a mimic of vertical diplopia",
+      "Missing subtle torsion that helps localise the palsy",
+      "Attributing bilateral palsy to a unilateral cause"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Bradley and Daroff Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying cause, optimising vascular risk factors in microvascular palsy and managing any lesion identified on imaging",
+      "Observe microvascular and many traumatic palsies, which commonly recover over weeks to months",
+      "Relieve diplopia symptomatically with Fresnel or ground-in prisms, or temporary monocular occlusion",
+      "Refer for strabismus surgery such as superior oblique strengthening or inferior oblique weakening when the deviation is stable but persistent",
+      "Recognise and treat decompensated congenital palsy, supported by old photographs, with prisms or surgery",
+      "Coordinate orthoptic, ophthalmology and neurology follow-up to monitor recovery and re-image if the palsy progresses or fails to resolve"
     ]
-   ],
-   "caption": "Overview comparison matrix for fourth nerve palsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trochlear-nerve-palsy-real-image",
-   "title": "Fourth nerve palsy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "trochlear_nerve_palsy-pathway",
+      "title": "Fourth nerve palsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Weakness of the superior oblique produces vertical and torsional diplopia that is worse on looking down and in, as when reading or descending stairs",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Additional neurological signs or other cranial neuropathies",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Orthoptic assessment with the three-step test and measurement of torsion, Comparison with old photographs for a long-standing head tilt, MRI of the brain and orbits when the palsy is not clearly traumatic or vasculopathic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying cause, optimising vascular risk factors in microvascular palsy and managing any lesion identified on imaging"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a decompensated congenital palsy with a new acquired lesion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fourth nerve palsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trochlear_nerve_palsy-matrix",
+      "title": "Fourth nerve palsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Weakness of the superior oblique produces vertical and torsional diplopia that is worse on looking down and in, as when reading",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Orthoptic assessment with the three-step test and measurement of torsion, Comparison with old photographs for a long-standing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Skew deviation, Myasthenia gravis, Thyroid eye disease affecting the inferior rectus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying cause, optimising vascular risk factors in microvascular palsy and managing any lesion identified on imaging",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a decompensated congenital palsy with a new acquired lesion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fourth nerve palsy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trochlear_nerve_palsy-dx-mgmt",
+      "title": "Diagnosis and management of Fourth nerve palsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected fourth nerve palsy: vertical and torsional diplopia worse on descending",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: other neurological signs, bilateral palsy or progressive deviation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuro-imaging for bilateral or non-traumatic palsy with other signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Three-step test; torsion measurement; old photographs; MRI if not traumatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the three-step test show worse hypertropia on tilt toward the affected side?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider skew deviation, myasthenia, thyroid eye disease or partial third nerve palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause and vascular risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe microvascular and traumatic palsies for recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prisms or temporary monocular occlusion for diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Strabismus surgery when the deviation is stable but persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Orthoptic, ophthalmology and neurology follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Microvascular and traumatic palsies often recover in weeks to months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trochlear_nerve_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthoptic three-step test and torsion measurement",
+          "cells": [
+            {
+              "text": "Localises the palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with old photographs",
+          "cells": [
+            {
+              "text": "Long-standing head tilt suggests decompensated congenital palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain and orbits",
+          "cells": [
+            {
+              "text": "When palsy is not clearly traumatic or vasculopathic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculopathic risk-factor evaluation",
+          "cells": [
+            {
+              "text": "Microvascular palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetylcholine-receptor antibody testing",
+          "cells": [
+            {
+              "text": "If myasthenia is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trochlear_nerve_palsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Skew deviation",
+          "cells": [
+            {
+              "text": "Vertical misalignment from posterior fossa disease; not a superior oblique palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable, variable diplopia; acetylcholine-receptor antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid eye disease",
+          "cells": [
+            {
+              "text": "Inferior rectus restriction rather than superior oblique weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trochlear_nerve_palsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Optimise vascular risk factors in microvascular palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Microvascular and many traumatic palsies recover over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prisms or temporary monocular occlusion",
+          "cells": [
+            {
+              "text": "Symptomatic relief of diplopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus surgery",
+          "cells": [
+            {
+              "text": "Superior oblique strengthening or inferior oblique weakening when stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prisms or surgery for decompensated congenital palsy",
+          "cells": [
+            {
+              "text": "Supported by old photographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic, ophthalmology and neurology follow-up",
+          "cells": [
+            {
+              "text": "Re-image if progressive or not resolving"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

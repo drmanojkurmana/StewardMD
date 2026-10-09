@@ -1,178 +1,447 @@
 {
- "id": "urethral_prolapse",
- "name": "Urethral Prolapse",
- "aliases": [
-  "urethral prolapse",
-  "urethral prolapsus",
-  "prolapsed urethra",
-  "urethral mucosal prolapse"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Urethral prolapse is circumferential eversion of the distal urethral mucosa through the external meatus, forming a doughnut-shaped ring of tissue around the urethral opening",
-   "It has a characteristic bimodal distribution, occurring in prepubertal girls and in postmenopausal women, both low-oestrogen states",
-   "Typical presentations are painless vaginal or vulval bleeding or spotting, a visible periurethral mass, and sometimes dysuria or voiding difficulty",
-   "In young girls it is an important and benign cause of genital bleeding that can be mistaken for trauma or abuse, so recognition prevents misdirected concern",
-   "The key clinical feature is that the prolapsed mucosa surrounds the meatus symmetrically, distinguishing it from an eccentric caruncle or other periurethral lesion",
-   "It must be differentiated from a urethral caruncle, prolapsing ureterocele, periurethral cyst, and, importantly, urethral or other malignancy in older women",
-   "Uncomplicated cases are often managed conservatively with topical oestrogen, sitz baths, and treatment of any constipation or straining",
-   "Surgical excision of the prolapsed mucosa is reserved for strangulated, thrombosed, necrotic, or non-resolving cases, or when the diagnosis is uncertain and tissue is needed",
-   "A strangulated, thrombosed, or necrotic prolapse causing pain or urinary retention warrants prompt urological assessment"
+  "id": "urethral_prolapse",
+  "name": "Urethral Prolapse",
+  "aliases": [
+    "urethral prolapse",
+    "urethral prolapsus",
+    "prolapsed urethra",
+    "urethral mucosal prolapse"
   ],
-  "pathophysiology": "Urethral prolapse results from eversion of the distal urethral mucosa through the meatus. A relative deficiency of oestrogen, as in prepubertal girls and postmenopausal women, weakens the periurethral supporting tissues and the attachments between the inner longitudinal and outer circular smooth muscle layers of the urethra. Poor cohesion between these layers, combined with raised intra-abdominal pressure from straining, coughing, or constipation, allows the redundant mucosa to protrude and evert around the meatus. The exposed mucosa becomes congested, oedematous, and friable, and if venous drainage is compromised it may thrombose, strangulate, or necrose.",
-  "additionalDifferentials": [
-   "Urethral caruncle",
-   "Prolapsing ureterocele",
-   "Periurethral cyst or abscess (e.g. Skene gland)",
-   "Urethral or periurethral malignancy",
-   "Vaginal wall prolapse or cystocele",
-   "Condyloma or other periurethral lesion",
-   "Genital trauma (a key consideration in children)"
-  ],
-  "additionalInvestigations": [
-   "Careful clinical examination confirming circumferential eversion around the meatus",
-   "Confirmation that the mass surrounds the urethral opening, often by passing or visualising a catheter through the central lumen",
-   "Urinalysis and culture if infection or dysuria is present",
-   "Biopsy or excision histology where malignancy is suspected, particularly in older women",
-   "Examination under anaesthesia in children if the diagnosis is unclear or examination is difficult"
-  ],
-  "redFlags": [
-   "Strangulated, thrombosed, or necrotic prolapsed mucosa",
-   "Acute urinary retention from the prolapse",
-   "Suspicion of malignancy in a postmenopausal woman with an atypical or firm periurethral lesion",
-   "Uncertain diagnosis where abuse or trauma is being wrongly considered in a child, or genuine trauma is missed",
-   "Heavy or persistent bleeding"
-  ],
-  "prognosis": "Urethral prolapse is benign and generally responds well to conservative measures, particularly topical oestrogen, with a good prognosis and low recurrence when precipitating factors such as straining are addressed. Surgical excision is curative for complicated or refractory cases. Prompt recognition in children avoids unnecessary distress and investigation, while vigilance in older women ensures malignancy is not overlooked.",
-  "pitfalls": [
-   "Mistaking benign prolapse in a child for signs of trauma or abuse, or vice versa",
-   "Confusing it with a urethral caruncle or, in older women, with malignancy",
-   "Overlooking a strangulated or necrotic prolapse needing surgical intervention",
-   "Failing to address straining and constipation, allowing recurrence",
-   "Not obtaining histology when the lesion is atypical in a postmenopausal woman"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer first-line topical oestrogen cream to restore the atrophic periurethral tissues in prepubertal girls and postmenopausal women",
-   "Advise conservative measures including sitz baths, good hygiene and treatment of the local inflammation",
-   "Address precipitating raised intra-abdominal pressure by treating constipation, chronic cough and straining",
-   "Attempt gentle manual reduction, and manage a strangulated, thrombosed or necrotic prolapse as an acute problem",
-   "Reserve surgical excision of the redundant prolapsed mucosa for refractory, strangulated or necrotic tissue",
-   "Reassure that the condition is benign, and in young girls recognise it explicitly to avoid misattributing genital bleeding to trauma or abuse"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "urethral_prolapse-pathway",
-   "title": "Urethral Prolapse: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Urethral prolapse is circumferential eversion of the distal urethral mucosa through the external meatus, forming a doughnut-shaped ring of tissue around the urethral opening",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Strangulated, thrombosed, or necrotic prolapsed mucosa",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful clinical examination confirming circumferential eversion around the meatus, Confirmation that the mass surrounds the urethral opening, often by passing or visualising a catheter through the central lumen,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer first-line topical oestrogen cream to restore the atrophic periurethral tissues in prepubertal girls and postmenopausal women"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking benign prolapse in a child for signs of trauma or abuse, or vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of urethral prolapse."
-  }
- ],
- "tables": [
-  {
-   "id": "urethral_prolapse-matrix",
-   "title": "Urethral Prolapse: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Urethral prolapse is circumferential eversion of the distal urethral mucosa through the external meatus, forming a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Urethral prolapse is circumferential eversion of the distal urethral mucosa through the external meatus, forming a doughnut-shaped ring of tissue around the urethral opening",
+      "It has a characteristic bimodal distribution, occurring in prepubertal girls and in postmenopausal women, both low-oestrogen states",
+      "Typical presentations are painless vaginal or vulval bleeding or spotting, a visible periurethral mass, and sometimes dysuria or voiding difficulty",
+      "In young girls it is an important and benign cause of genital bleeding that can be mistaken for trauma or abuse, so recognition prevents misdirected concern",
+      "The key clinical feature is that the prolapsed mucosa surrounds the meatus symmetrically, distinguishing it from an eccentric caruncle or other periurethral lesion",
+      "It must be differentiated from a urethral caruncle, prolapsing ureterocele, periurethral cyst, and, importantly, urethral or other malignancy in older women",
+      "Uncomplicated cases are often managed conservatively with topical oestrogen, sitz baths, and treatment of any constipation or straining",
+      "Surgical excision of the prolapsed mucosa is reserved for strangulated, thrombosed, necrotic, or non-resolving cases, or when the diagnosis is uncertain and tissue is needed",
+      "A strangulated, thrombosed, or necrotic prolapse causing pain or urinary retention warrants prompt urological assessment"
     ],
-    [
-     "Key Investigations",
-     "Careful clinical examination confirming circumferential eversion around the meatus, Confirmation that the mass surrounds the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Urethral prolapse results from eversion of the distal urethral mucosa through the meatus. A relative deficiency of oestrogen, as in prepubertal girls and postmenopausal women, weakens the periurethral supporting tissues and the attachments between the inner longitudinal and outer circular smooth muscle layers of the urethra. Poor cohesion between these layers, combined with raised intra-abdominal pressure from straining, coughing, or constipation, allows the redundant mucosa to protrude and evert around the meatus. The exposed mucosa becomes congested, oedematous, and friable, and if venous drainage is compromised it may thrombose, strangulate, or necrose.",
+    "additionalDifferentials": [
+      "Urethral caruncle",
+      "Prolapsing ureterocele",
+      "Periurethral cyst or abscess (e.g. Skene gland)",
+      "Urethral or periurethral malignancy",
+      "Vaginal wall prolapse or cystocele",
+      "Condyloma or other periurethral lesion",
+      "Genital trauma (a key consideration in children)"
     ],
-    [
-     "Primary Differentials",
-     "Urethral caruncle, Prolapsing ureterocele, Periurethral cyst or abscess (e.g. Skene gland)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful clinical examination confirming circumferential eversion around the meatus",
+      "Confirmation that the mass surrounds the urethral opening, often by passing or visualising a catheter through the central lumen",
+      "Urinalysis and culture if infection or dysuria is present",
+      "Biopsy or excision histology where malignancy is suspected, particularly in older women",
+      "Examination under anaesthesia in children if the diagnosis is unclear or examination is difficult"
     ],
-    [
-     "Management Strategy",
-     "Offer first-line topical oestrogen cream to restore the atrophic periurethral tissues in prepubertal girls and postmenopausal",
-     "Core treatment modality"
+    "redFlags": [
+      "Strangulated, thrombosed, or necrotic prolapsed mucosa",
+      "Acute urinary retention from the prolapse",
+      "Suspicion of malignancy in a postmenopausal woman with an atypical or firm periurethral lesion",
+      "Uncertain diagnosis where abuse or trauma is being wrongly considered in a child, or genuine trauma is missed",
+      "Heavy or persistent bleeding"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking benign prolapse in a child for signs of trauma or abuse, or vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "Urethral prolapse is benign and generally responds well to conservative measures, particularly topical oestrogen, with a good prognosis and low recurrence when precipitating factors such as straining are addressed. Surgical excision is curative for complicated or refractory cases. Prompt recognition in children avoids unnecessary distress and investigation, while vigilance in older women ensures malignancy is not overlooked.",
+    "pitfalls": [
+      "Mistaking benign prolapse in a child for signs of trauma or abuse, or vice versa",
+      "Confusing it with a urethral caruncle or, in older women, with malignancy",
+      "Overlooking a strangulated or necrotic prolapse needing surgical intervention",
+      "Failing to address straining and constipation, allowing recurrence",
+      "Not obtaining histology when the lesion is atypical in a postmenopausal woman"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer first-line topical oestrogen cream to restore the atrophic periurethral tissues in prepubertal girls and postmenopausal women",
+      "Advise conservative measures including sitz baths, good hygiene and treatment of the local inflammation",
+      "Address precipitating raised intra-abdominal pressure by treating constipation, chronic cough and straining",
+      "Attempt gentle manual reduction, and manage a strangulated, thrombosed or necrotic prolapse as an acute problem",
+      "Reserve surgical excision of the redundant prolapsed mucosa for refractory, strangulated or necrotic tissue",
+      "Reassure that the condition is benign, and in young girls recognise it explicitly to avoid misattributing genital bleeding to trauma or abuse"
     ]
-   ],
-   "caption": "Overview comparison matrix for urethral prolapse."
-  }
- ],
- "diagrams": [
-  {
-   "id": "urethral-prolapse-real-image",
-   "title": "Urethral Prolapse: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "urethral_prolapse-pathway",
+      "title": "Urethral Prolapse: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Urethral prolapse is circumferential eversion of the distal urethral mucosa through the external meatus, forming a doughnut-shaped ring of tissue around the urethral opening",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Strangulated, thrombosed, or necrotic prolapsed mucosa",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful clinical examination confirming circumferential eversion around the meatus, Confirmation that the mass surrounds the urethral opening, often by passing or visualising a catheter through the central lumen,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer first-line topical oestrogen cream to restore the atrophic periurethral tissues in prepubertal girls and postmenopausal women"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking benign prolapse in a child for signs of trauma or abuse, or vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of urethral prolapse."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "urethral_prolapse-matrix",
+      "title": "Urethral Prolapse: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Urethral prolapse is circumferential eversion of the distal urethral mucosa through the external meatus, forming a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful clinical examination confirming circumferential eversion around the meatus, Confirmation that the mass surrounds the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Urethral caruncle, Prolapsing ureterocele, Periurethral cyst or abscess (e.g. Skene gland)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer first-line topical oestrogen cream to restore the atrophic periurethral tissues in prepubertal girls and postmenopausal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking benign prolapse in a child for signs of trauma or abuse, or vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for urethral prolapse."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urethral_prolapse-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Circumferential eversion of distal urethral mucosa around the meatus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter passed through the meatus",
+          "cells": [
+            {
+              "text": "Confirms the mass surrounds the urethral opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and culture",
+          "cells": [
+            {
+              "text": "Infection or dysuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy or excision histology",
+          "cells": [
+            {
+              "text": "Suspected malignancy, particularly in older women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Children, if the diagnosis is unclear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethral_prolapse-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urethral caruncle",
+          "cells": [
+            {
+              "text": "Focal lesion at the posterior meatus, not a circumferential ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genital trauma or abuse",
+          "cells": [
+            {
+              "text": "Benign prolapse in a child can be mistaken for trauma, and the reverse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral malignancy",
+          "cells": [
+            {
+              "text": "Firm or atypical periurethral lesion in an older woman"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethral_prolapse-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical oestrogen cream",
+          "cells": [
+            {
+              "text": "Restores atrophic periurethral tissue in prepubertal girls and postmenopausal women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative measures",
+          "cells": [
+            {
+              "text": "Sitz baths, hygiene and treatment of local inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduce raised intra-abdominal pressure",
+          "cells": [
+            {
+              "text": "Treat constipation, chronic cough and straining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle manual reduction",
+          "cells": [
+            {
+              "text": "Attempted; strangulated or necrotic prolapse managed as an acute problem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Refractory, strangulated or necrotic redundant mucosa"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urethral_prolapse-dx-mgmt",
+      "title": "Diagnosis and management of Urethral Prolapse",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected urethral prolapse: bleeding and periurethral ring in a girl or older woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (strangulated or necrotic prolapse, retention or suspected malignancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of strangulated or necrotic prolapse; biopsy if malignancy suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination for circumferential eversion; urinalysis; biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is circumferential eversion around the meatus confirmed on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider caruncle, periurethral cyst or malignancy; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical oestrogen cream to restore periurethral tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sitz baths, hygiene and treatment of local inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat constipation, chronic cough and straining to lower intra-abdominal pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gentle manual reduction; excise refractory, strangulated or necrotic tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Conservative care comes first; surgery is reserved for refractory or necrotic tissue",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

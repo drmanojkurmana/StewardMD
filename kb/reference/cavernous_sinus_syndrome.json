@@ -1,173 +1,491 @@
 {
- "id": "cavernous_sinus_syndrome",
- "name": "Cavernous sinus syndrome",
- "aliases": [
-  "cavernous sinus lesion",
-  "parasellar syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with a variable combination of third, fourth, and sixth cranial nerve palsies with sensory disturbance in the first and often second trigeminal divisions",
-   "A Horner syndrome may coexist with a sixth nerve palsy because the sympathetic fibres briefly travel with the abducens nerve within the sinus",
-   "The sixth nerve lies free within the sinus and is often affected early, while the other motor nerves run in the lateral wall",
-   "Vision is usually preserved unless the lesion extends anteriorly to the orbital apex to involve the optic nerve",
-   "Proptosis, chemosis, and an audible bruit suggest a carotid-cavernous fistula",
-   "Causes include tumour, aneurysm of the intracavernous carotid, thrombosis, fistula, and inflammatory or infective disease",
-   "Bilateral involvement can occur because the two cavernous sinuses communicate across the midline"
+  "id": "cavernous_sinus_syndrome",
+  "name": "Cavernous sinus syndrome",
+  "aliases": [
+    "cavernous sinus lesion",
+    "parasellar syndrome"
   ],
-  "pathophysiology": "The cavernous sinus is a venous channel flanking the sphenoid sinus and pituitary that transmits the intracavernous internal carotid artery and its surrounding sympathetic plexus, the abducens nerve within its lumen, and the oculomotor, trochlear, and ophthalmic (and often maxillary) trigeminal nerves in its lateral wall. Lesions here produce painful or painless ophthalmoplegia with trigeminal sensory loss, and the proximity of sympathetic fibres to the abducens nerve can yield a combined sixth nerve palsy and Horner syndrome. Responsible processes include neoplasm, intracavernous aneurysm, septic and aseptic thrombosis, carotid-cavernous fistula, and granulomatous inflammation.",
-  "additionalDifferentials": [
-   "Orbital apex syndrome with optic nerve involvement",
-   "Superior orbital fissure syndrome",
-   "Tolosa-Hunt granulomatous inflammation",
-   "Pituitary apoplexy with lateral extension",
-   "Carotid-cavernous fistula",
-   "Cavernous sinus thrombosis",
-   "Skull base metastasis or nasopharyngeal carcinoma"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and cavernous sinus with contrast",
-   "Magnetic resonance or CT angiography and venography to assess the carotid, aneurysm, fistula, or thrombosis",
-   "Inflammatory markers and infection screen",
-   "Endocrine assessment when a pituitary lesion is suspected",
-   "Screening for malignancy and nasopharyngeal disease",
-   "Catheter angiography where a fistula or aneurysm requires definition"
-  ],
-  "redFlags": [
-   "Features of cavernous sinus thrombosis such as fever, proptosis, and rapid bilateral progression",
-   "Proptosis with a bruit suggesting a high-flow carotid-cavernous fistula",
-   "Acute severe headache with visual loss suggesting pituitary apoplexy or aneurysm",
-   "Rapidly progressive multiple cranial neuropathies suggesting malignant infiltration"
-  ],
-  "prognosis": "Outcome is determined by the cause; thrombosis and fistulae can be managed with good results if treated promptly, while malignant infiltration carries a poorer prognosis, and residual ophthalmoplegia may persist after resolution.",
-  "pitfalls": [
-   "Overlooking a coexisting Horner syndrome that localises the lesion to the cavernous sinus",
-   "Missing a carotid-cavernous fistula by not examining for proptosis and bruit",
-   "Failing to exclude an intracavernous aneurysm before assuming inflammation",
-   "Not recognising the possibility of bilateral spread through the intercavernous connections"
-  ],
-  "references": [
-   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cause-directed therapy is the mainstay: tumour-directed surgery, radiotherapy or chemotherapy, and endovascular treatment of a carotid-cavernous fistula or intracavernous aneurysm",
-   "Broad-spectrum antibiotics with source control of contiguous sinusitis, and anticoagulation, for septic cavernous sinus thrombosis",
-   "Corticosteroids for granulomatous or idiopathic inflammatory (Tolosa-Hunt) disease",
-   "Analgesia and symptomatic care for painful ophthalmoplegia",
-   "Ocular protection with lubrication and treatment of exposure, plus prisms or occlusion for diplopia",
-   "Multidisciplinary care across neurology, ophthalmology, neurosurgery, interventional radiology, ENT and oncology",
-   "Serial neuro-ophthalmic monitoring of cranial nerve function and vision, escalating for anterior extension threatening the optic nerve"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cavernous_sinus_syndrome-pathway",
-   "title": "Cavernous sinus syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with a variable combination of third, fourth, and sixth cranial nerve palsies with sensory disturbance in the first and often second trigeminal divisions",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of cavernous sinus thrombosis such as fever, proptosis, and rapid bilateral progression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and cavernous sinus with contrast, Magnetic resonance or CT angiography and venography to assess the carotid, aneurysm, fistula, or thrombosis, Inflammatory markers and infection screen"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cause-directed therapy is the mainstay: tumour-directed surgery, radiotherapy or chemotherapy, and endovascular treatment of a carotid-cavernous fistula or intracavernous aneurysm"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking a coexisting Horner syndrome that localises the lesion to the cavernous sinus"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cavernous sinus syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cavernous_sinus_syndrome-matrix",
-   "title": "Cavernous sinus syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with a variable combination of third, fourth, and sixth cranial nerve palsies with sensory disturbance in the first and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with a variable combination of third, fourth, and sixth cranial nerve palsies with sensory disturbance in the first and often second trigeminal divisions",
+      "A Horner syndrome may coexist with a sixth nerve palsy because the sympathetic fibres briefly travel with the abducens nerve within the sinus",
+      "The sixth nerve lies free within the sinus and is often affected early, while the other motor nerves run in the lateral wall",
+      "Vision is usually preserved unless the lesion extends anteriorly to the orbital apex to involve the optic nerve",
+      "Proptosis, chemosis, and an audible bruit suggest a carotid-cavernous fistula",
+      "Causes include tumour, aneurysm of the intracavernous carotid, thrombosis, fistula, and inflammatory or infective disease",
+      "Bilateral involvement can occur because the two cavernous sinuses communicate across the midline"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and cavernous sinus with contrast, Magnetic resonance or CT angiography and venography to assess the carotid,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The cavernous sinus is a venous channel flanking the sphenoid sinus and pituitary that transmits the intracavernous internal carotid artery and its surrounding sympathetic plexus, the abducens nerve within its lumen, and the oculomotor, trochlear, and ophthalmic (and often maxillary) trigeminal nerves in its lateral wall. Lesions here produce painful or painless ophthalmoplegia with trigeminal sensory loss, and the proximity of sympathetic fibres to the abducens nerve can yield a combined sixth nerve palsy and Horner syndrome. Responsible processes include neoplasm, intracavernous aneurysm, septic and aseptic thrombosis, carotid-cavernous fistula, and granulomatous inflammation.",
+    "additionalDifferentials": [
+      "Orbital apex syndrome with optic nerve involvement",
+      "Superior orbital fissure syndrome",
+      "Tolosa-Hunt granulomatous inflammation",
+      "Pituitary apoplexy with lateral extension",
+      "Carotid-cavernous fistula",
+      "Cavernous sinus thrombosis",
+      "Skull base metastasis or nasopharyngeal carcinoma"
     ],
-    [
-     "Primary Differentials",
-     "Orbital apex syndrome with optic nerve involvement, Superior orbital fissure syndrome, Tolosa-Hunt granulomatous inflammation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and cavernous sinus with contrast",
+      "Magnetic resonance or CT angiography and venography to assess the carotid, aneurysm, fistula, or thrombosis",
+      "Inflammatory markers and infection screen",
+      "Endocrine assessment when a pituitary lesion is suspected",
+      "Screening for malignancy and nasopharyngeal disease",
+      "Catheter angiography where a fistula or aneurysm requires definition"
     ],
-    [
-     "Management Strategy",
-     "Cause-directed therapy is the mainstay: tumour-directed surgery, radiotherapy or chemotherapy, and endovascular treatment of a",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of cavernous sinus thrombosis such as fever, proptosis, and rapid bilateral progression",
+      "Proptosis with a bruit suggesting a high-flow carotid-cavernous fistula",
+      "Acute severe headache with visual loss suggesting pituitary apoplexy or aneurysm",
+      "Rapidly progressive multiple cranial neuropathies suggesting malignant infiltration"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking a coexisting Horner syndrome that localises the lesion to the cavernous sinus",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is determined by the cause; thrombosis and fistulae can be managed with good results if treated promptly, while malignant infiltration carries a poorer prognosis, and residual ophthalmoplegia may persist after resolution.",
+    "pitfalls": [
+      "Overlooking a coexisting Horner syndrome that localises the lesion to the cavernous sinus",
+      "Missing a carotid-cavernous fistula by not examining for proptosis and bruit",
+      "Failing to exclude an intracavernous aneurysm before assuming inflammation",
+      "Not recognising the possibility of bilateral spread through the intercavernous connections"
+    ],
+    "references": [
+      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cause-directed therapy is the mainstay: tumour-directed surgery, radiotherapy or chemotherapy, and endovascular treatment of a carotid-cavernous fistula or intracavernous aneurysm",
+      "Broad-spectrum antibiotics with source control of contiguous sinusitis, and anticoagulation, for septic cavernous sinus thrombosis",
+      "Corticosteroids for granulomatous or idiopathic inflammatory (Tolosa-Hunt) disease",
+      "Analgesia and symptomatic care for painful ophthalmoplegia",
+      "Ocular protection with lubrication and treatment of exposure, plus prisms or occlusion for diplopia",
+      "Multidisciplinary care across neurology, ophthalmology, neurosurgery, interventional radiology, ENT and oncology",
+      "Serial neuro-ophthalmic monitoring of cranial nerve function and vision, escalating for anterior extension threatening the optic nerve"
     ]
-   ],
-   "caption": "Overview comparison matrix for cavernous sinus syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cavernous-sinus-syndrome-real-image",
-   "title": "Cavernous sinus syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cavernous_sinus_syndrome-pathway",
+      "title": "Cavernous sinus syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with a variable combination of third, fourth, and sixth cranial nerve palsies with sensory disturbance in the first and often second trigeminal divisions",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of cavernous sinus thrombosis such as fever, proptosis, and rapid bilateral progression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and cavernous sinus with contrast, Magnetic resonance or CT angiography and venography to assess the carotid, aneurysm, fistula, or thrombosis, Inflammatory markers and infection screen"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cause-directed therapy is the mainstay: tumour-directed surgery, radiotherapy or chemotherapy, and endovascular treatment of a carotid-cavernous fistula or intracavernous aneurysm"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking a coexisting Horner syndrome that localises the lesion to the cavernous sinus"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cavernous sinus syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cavernous_sinus_syndrome-matrix",
+      "title": "Cavernous sinus syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with a variable combination of third, fourth, and sixth cranial nerve palsies with sensory disturbance in the first and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and cavernous sinus with contrast, Magnetic resonance or CT angiography and venography to assess the carotid,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Orbital apex syndrome with optic nerve involvement, Superior orbital fissure syndrome, Tolosa-Hunt granulomatous inflammation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cause-directed therapy is the mainstay: tumour-directed surgery, radiotherapy or chemotherapy, and endovascular treatment of a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking a coexisting Horner syndrome that localises the lesion to the cavernous sinus",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cavernous sinus syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cavernous_sinus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain and cavernous sinus with contrast",
+          "cells": [
+            {
+              "text": "Contrast-enhanced imaging of the cavernous sinus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography and venography",
+          "cells": [
+            {
+              "text": "Assesses the carotid, aneurysm, fistula or thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography",
+          "cells": [
+            {
+              "text": "Defines a fistula or aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and infection screen",
+          "cells": [
+            {
+              "text": "Part of the workup for infective and inflammatory causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine assessment",
+          "cells": [
+            {
+              "text": "When a pituitary lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cavernous_sinus_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital apex syndrome",
+          "cells": [
+            {
+              "text": "Optic nerve involvement; vision is usually preserved in cavernous sinus lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid-cavernous fistula",
+          "cells": [
+            {
+              "text": "Proptosis, chemosis and an audible bruit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cavernous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Fever, proptosis and rapid bilateral progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary apoplexy",
+          "cells": [
+            {
+              "text": "Acute severe headache with visual loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cavernous_sinus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cause-directed therapy",
+          "cells": [
+            {
+              "text": "Tumour-directed surgery, radiotherapy or chemotherapy; endovascular treatment of fistula or aneurysm"
+            },
+            {
+              "text": "Mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic cavernous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Broad-spectrum antibiotics with source control of sinusitis, and anticoagulation"
+            },
+            {
+              "text": "Septic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "For granulomatous or idiopathic inflammatory (Tolosa-Hunt) disease"
+            },
+            {
+              "text": "Inflammatory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Analgesia and symptomatic care"
+            },
+            {
+              "text": "Painful ophthalmoplegia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular protection",
+          "cells": [
+            {
+              "text": "Lubrication, treatment of exposure, prisms or occlusion for diplopia"
+            },
+            {
+              "text": "Exposure and diplopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, ophthalmology, neurosurgery, interventional radiology, ENT, oncology"
+            },
+            {
+              "text": "Several specialties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Neuro-ophthalmic monitoring; escalate for anterior extension threatening the optic nerve"
+            },
+            {
+              "text": "Optic nerve threat"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cavernous_sinus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cavernous sinus syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cavernous sinus syndrome: sixth nerve palsy with trigeminal sensory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, proptosis, bruit, headache with visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent imaging for thrombosis, fistula or apoplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of the cavernous sinus with angiography and venography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lesion or thrombosis found, with infection and inflammatory screen done?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cause-directed therapy: tumour surgery, radiotherapy or endovascular treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check orbital apex syndrome, Tolosa-Hunt disease and carotid-cavernous fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics with sinus source control, and anticoagulation for septic thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids for Tolosa-Hunt or granulomatous inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ocular protection; prisms or occlusion for diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good results if thrombosis or fistula is treated promptly; ophthalmoplegia may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

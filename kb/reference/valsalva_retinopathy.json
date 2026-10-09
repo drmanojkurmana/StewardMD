@@ -1,174 +1,434 @@
 {
- "id": "valsalva_retinopathy",
- "name": "Valsalva retinopathy",
- "aliases": [
-  "Valsalva haemorrhagic retinopathy",
-  "Valsalva maculopathy"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Retina",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with sudden, painless unilateral loss of vision, a central scotoma or floaters immediately after a Valsalva-type effort such as heavy lifting, coughing, vomiting, straining or childbirth",
-   "The characteristic finding is a well-circumscribed, dome-shaped pre-retinal haemorrhage at the macula lying beneath the internal limiting membrane or posterior hyaloid",
-   "The blood may develop a horizontal fluid level as it settles",
-   "Vision depends on whether the fovea is obscured by the haemorrhage",
-   "The affected eye is otherwise usually healthy, without retinal vascular disease",
-   "Optical coherence tomography helps localise the blood to the sub-internal limiting membrane or sub-hyaloid space",
-   "Most cases are managed by observation as the haemorrhage clears spontaneously, with Nd:YAG hyaloidotomy or vitrectomy reserved for dense or persistent bleeding"
+  "id": "valsalva_retinopathy",
+  "name": "Valsalva retinopathy",
+  "aliases": [
+    "Valsalva haemorrhagic retinopathy",
+    "Valsalva maculopathy"
   ],
-  "pathophysiology": "A sudden rise in intrathoracic or intra-abdominal pressure against a closed glottis is transmitted to the ocular venous system, producing an abrupt spike in retinal venous and capillary pressure. This ruptures fragile superficial perifoveal capillaries, and blood collects in the potential space beneath the internal limiting membrane or the posterior hyaloid face, typically pooling at the macula.",
-  "additionalDifferentials": [
-   "Posterior vitreous detachment with haemorrhage",
-   "Retinal arterial macroaneurysm",
-   "Proliferative diabetic retinopathy",
-   "Retinal tear or detachment",
-   "Terson syndrome",
-   "Haemorrhage from neovascular age-related macular degeneration",
-   "Bleeding related to a blood dyscrasia"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus examination to identify the dome-shaped pre-retinal haemorrhage",
-   "Optical coherence tomography to confirm the sub-internal limiting membrane or sub-hyaloid location",
-   "A clear history of a precipitating Valsalva manoeuvre",
-   "Full blood count and clotting studies if the event is spontaneous or recurrent",
-   "B-scan ultrasound when the haemorrhage obscures the fundus view",
-   "Blood pressure measurement"
-  ],
-  "redFlags": [
-   "Bilateral or spontaneous haemorrhage without a clear Valsalva trigger, prompting investigation for a bleeding disorder",
-   "Associated systemic bleeding or bruising",
-   "Dense vitreous haemorrhage obscuring underlying pathology",
-   "Features suggesting an underlying retinal vascular disease"
-  ],
-  "prognosis": "The outlook is generally excellent, with most haemorrhages clearing spontaneously over weeks to months and full recovery of vision.",
-  "pitfalls": [
-   "Causing unnecessary alarm or over-investigating a self-limiting condition",
-   "Missing an underlying bleeding disorder in atypical or recurrent cases",
-   "Assuming every pre-retinal haemorrhage is due to Valsalva",
-   "Intervening prematurely when observation would allow spontaneous clearance"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and conservative observation, as most pre-retinal haemorrhages clear spontaneously",
-   "Advice to avoid further Valsalva-type straining and heavy lifting during recovery",
-   "Upright posture to encourage settling of the macular haemorrhage",
-   "Nd:YAG or argon laser membranotomy to drain a persistent sub-hyaloid or sub-internal limiting membrane haemorrhage obscuring the fovea",
-   "Pars plana vitrectomy for non-clearing, dense or breakthrough vitreous haemorrhage",
-   "Investigation of an underlying bleeding tendency, anaemia or hypertension when the event is spontaneous or recurrent",
-   "Serial fundus examination and optical coherence tomography to monitor resolution"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "valsalva_retinopathy-pathway",
-   "title": "Valsalva retinopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with sudden, painless unilateral loss of vision, a central scotoma or floaters immediately after a Valsalva-type effort such as heavy lifting, coughing, vomiting, straining or childbirth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilateral or spontaneous haemorrhage without a clear Valsalva trigger, prompting investigation for a bleeding disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus examination to identify the dome-shaped pre-retinal haemorrhage, Optical coherence tomography to confirm the sub-internal limiting membrane or sub-hyaloid location, A clear history of a precipitating"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and conservative observation, as most pre-retinal haemorrhages clear spontaneously"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Causing unnecessary alarm or over-investigating a self-limiting condition"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of valsalva retinopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "valsalva_retinopathy-matrix",
-   "title": "Valsalva retinopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with sudden, painless unilateral loss of vision, a central scotoma or floaters immediately after a Valsalva-type effort",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Retina",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with sudden, painless unilateral loss of vision, a central scotoma or floaters immediately after a Valsalva-type effort such as heavy lifting, coughing, vomiting, straining or childbirth",
+      "The characteristic finding is a well-circumscribed, dome-shaped pre-retinal haemorrhage at the macula lying beneath the internal limiting membrane or posterior hyaloid",
+      "The blood may develop a horizontal fluid level as it settles",
+      "Vision depends on whether the fovea is obscured by the haemorrhage",
+      "The affected eye is otherwise usually healthy, without retinal vascular disease",
+      "Optical coherence tomography helps localise the blood to the sub-internal limiting membrane or sub-hyaloid space",
+      "Most cases are managed by observation as the haemorrhage clears spontaneously, with Nd:YAG hyaloidotomy or vitrectomy reserved for dense or persistent bleeding"
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus examination to identify the dome-shaped pre-retinal haemorrhage, Optical coherence tomography to confirm the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A sudden rise in intrathoracic or intra-abdominal pressure against a closed glottis is transmitted to the ocular venous system, producing an abrupt spike in retinal venous and capillary pressure. This ruptures fragile superficial perifoveal capillaries, and blood collects in the potential space beneath the internal limiting membrane or the posterior hyaloid face, typically pooling at the macula.",
+    "additionalDifferentials": [
+      "Posterior vitreous detachment with haemorrhage",
+      "Retinal arterial macroaneurysm",
+      "Proliferative diabetic retinopathy",
+      "Retinal tear or detachment",
+      "Terson syndrome",
+      "Haemorrhage from neovascular age-related macular degeneration",
+      "Bleeding related to a blood dyscrasia"
     ],
-    [
-     "Primary Differentials",
-     "Posterior vitreous detachment with haemorrhage, Retinal arterial macroaneurysm, Proliferative diabetic retinopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus examination to identify the dome-shaped pre-retinal haemorrhage",
+      "Optical coherence tomography to confirm the sub-internal limiting membrane or sub-hyaloid location",
+      "A clear history of a precipitating Valsalva manoeuvre",
+      "Full blood count and clotting studies if the event is spontaneous or recurrent",
+      "B-scan ultrasound when the haemorrhage obscures the fundus view",
+      "Blood pressure measurement"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and conservative observation, as most pre-retinal haemorrhages clear spontaneously",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilateral or spontaneous haemorrhage without a clear Valsalva trigger, prompting investigation for a bleeding disorder",
+      "Associated systemic bleeding or bruising",
+      "Dense vitreous haemorrhage obscuring underlying pathology",
+      "Features suggesting an underlying retinal vascular disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Causing unnecessary alarm or over-investigating a self-limiting condition",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is generally excellent, with most haemorrhages clearing spontaneously over weeks to months and full recovery of vision.",
+    "pitfalls": [
+      "Causing unnecessary alarm or over-investigating a self-limiting condition",
+      "Missing an underlying bleeding disorder in atypical or recurrent cases",
+      "Assuming every pre-retinal haemorrhage is due to Valsalva",
+      "Intervening prematurely when observation would allow spontaneous clearance"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and conservative observation, as most pre-retinal haemorrhages clear spontaneously",
+      "Advice to avoid further Valsalva-type straining and heavy lifting during recovery",
+      "Upright posture to encourage settling of the macular haemorrhage",
+      "Nd:YAG or argon laser membranotomy to drain a persistent sub-hyaloid or sub-internal limiting membrane haemorrhage obscuring the fovea",
+      "Pars plana vitrectomy for non-clearing, dense or breakthrough vitreous haemorrhage",
+      "Investigation of an underlying bleeding tendency, anaemia or hypertension when the event is spontaneous or recurrent",
+      "Serial fundus examination and optical coherence tomography to monitor resolution"
     ]
-   ],
-   "caption": "Overview comparison matrix for valsalva retinopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "valsalva-retinopathy-real-image",
-   "title": "Valsalva retinopathy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "valsalva_retinopathy-pathway",
+      "title": "Valsalva retinopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with sudden, painless unilateral loss of vision, a central scotoma or floaters immediately after a Valsalva-type effort such as heavy lifting, coughing, vomiting, straining or childbirth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilateral or spontaneous haemorrhage without a clear Valsalva trigger, prompting investigation for a bleeding disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus examination to identify the dome-shaped pre-retinal haemorrhage, Optical coherence tomography to confirm the sub-internal limiting membrane or sub-hyaloid location, A clear history of a precipitating"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and conservative observation, as most pre-retinal haemorrhages clear spontaneously"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Causing unnecessary alarm or over-investigating a self-limiting condition"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of valsalva retinopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "valsalva_retinopathy-matrix",
+      "title": "Valsalva retinopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with sudden, painless unilateral loss of vision, a central scotoma or floaters immediately after a Valsalva-type effort",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus examination to identify the dome-shaped pre-retinal haemorrhage, Optical coherence tomography to confirm the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Posterior vitreous detachment with haemorrhage, Retinal arterial macroaneurysm, Proliferative diabetic retinopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and conservative observation, as most pre-retinal haemorrhages clear spontaneously",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Causing unnecessary alarm or over-investigating a self-limiting condition",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for valsalva retinopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "valsalva_retinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Dome-shaped pre-retinal haemorrhage at the macula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Sub-internal limiting membrane or sub-hyaloid location"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and clotting studies",
+          "cells": [
+            {
+              "text": "Bleeding disorder, if the event is spontaneous or recurrent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasound",
+          "cells": [
+            {
+              "text": "Fundus view obscured by haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "valsalva_retinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bleeding related to a blood dyscrasia",
+          "cells": [
+            {
+              "text": "Suspected in atypical or recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal tear or detachment",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proliferative diabetic retinopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "valsalva_retinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Most pre-retinal haemorrhages clear spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid straining",
+          "cells": [
+            {
+              "text": "No further Valsalva-type effort or heavy lifting during recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upright posture",
+          "cells": [
+            {
+              "text": "Encourages settling of the macular haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser membranotomy",
+          "cells": [
+            {
+              "text": "Nd:YAG or argon laser to drain a persistent sub-hyaloid haemorrhage obscuring vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigate bleeding disorder",
+          "cells": [
+            {
+              "text": "Recurrent or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "valsalva_retinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Valsalva retinopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Valsalva retinopathy: painless sudden blur after heavy straining or lifting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bilateral or spontaneous bleed, bruising or dense haemorrhage)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent bleeding-disorder work-up or vitreoretinal review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus exam, OCT, FBC and clotting studies, B-scan if view is obscured",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does OCT confirm a sub-ILM or sub-hyaloid haemorrhage after a Valsalva trigger?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider posterior vitreous detachment, macroaneurysm or neovascular bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and observation, as most haemorrhages clear spontaneously",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid straining and heavy lifting; upright posture to aid settling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nd:YAG or argon laser membranotomy for persistent sub-hyaloid bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate a bleeding disorder in recurrent or atypical cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually self-limiting; vision recovers as the haemorrhage clears",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

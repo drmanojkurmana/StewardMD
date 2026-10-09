@@ -1,177 +1,493 @@
 {
- "id": "lipoid_proteinosis",
- "name": "lipoid proteinosis",
- "aliases": [
-  "Urbach-Wiethe disease",
-  "hyalinosis cutis et mucosae",
-  "lipoglycoproteinosis"
- ],
- "class": "non_infective",
- "system": "Skin / Integumentary",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal recessive disorder caused by loss-of-function variants in ECM1 (extracellular matrix protein 1), leading to deposition of hyaline material in skin, mucosae and viscera",
-   "A hoarse cry or weak, husky voice from early infancy, due to infiltration of the vocal cords, is often the earliest and most characteristic feature",
-   "Moniliform blepharosis, a row of beaded waxy papules along the eyelid margins, is a classic diagnostic clue",
-   "Skin lesions evolve from early blistering and pox-like scars to waxy yellow papules, plaques and verrucous, hyperkeratotic lesions over extensor and friction sites",
-   "Infiltration of the tongue produces a firm, woody organ with restricted protrusion, and the frenulum may become thickened and bound down",
-   "Bilateral bean- or sickle-shaped calcification in the medial temporal lobes (amygdala) is frequently seen on imaging and is associated with epilepsy and impaired recognition of fear",
-   "Diagnosis rests on the clinical picture with PAS-positive hyaline deposits on biopsy, confirmed by ECM1 sequencing; management is supportive as no specific therapy exists"
+  "id": "lipoid_proteinosis",
+  "name": "lipoid proteinosis",
+  "aliases": [
+    "Urbach-Wiethe disease",
+    "hyalinosis cutis et mucosae",
+    "lipoglycoproteinosis"
   ],
-  "pathophysiology": "Lipoid proteinosis is caused by biallelic loss-of-function variants in ECM1, which encodes extracellular matrix protein 1, a glycoprotein important in basement membrane structure, dermal homeostasis and regulation of growth factors and collagen organisation. ECM1 deficiency disrupts the dermo-epidermal junction and perivascular connective tissue, leading to progressive deposition of amorphous, periodic acid-Schiff-positive hyaline material composed of excess basement membrane components and disordered collagen around blood vessels, adnexa and at the epidermal-dermal interface. This infiltration thickens and stiffens the skin and mucosae, while similar deposition and dystrophic calcification within the brain, particularly the amygdala, account for the neurological and neuropsychiatric features.",
-  "additionalDifferentials": [
-   "Erythropoietic protoporphyria and other cutaneous porphyrias with photosensitivity and scarring",
-   "Amyloidosis with mucocutaneous deposition",
-   "Colloid milium",
-   "Xanthomatosis and other deposition disorders",
-   "Systemic sclerosis or other causes of a bound-down tongue and skin",
-   "Papular mucinosis"
-  ],
-  "additionalInvestigations": [
-   "Skin or mucosal biopsy showing PAS-positive, diastase-resistant hyaline deposits around vessels and at the dermo-epidermal junction",
-   "ECM1 gene sequencing to confirm the diagnosis",
-   "Brain CT or MRI to detect characteristic medial temporal lobe calcification",
-   "Laryngoscopy to assess vocal cord and upper airway infiltration",
-   "Electroencephalography if seizures are suspected",
-   "Neuropsychological and psychiatric assessment where cognitive or behavioural features are present"
-  ],
-  "redFlags": [
-   "Progressive airway compromise from laryngeal and pharyngeal infiltration",
-   "Seizures related to temporal lobe involvement",
-   "Feeding or swallowing difficulty from tongue and oropharyngeal deposition",
-   "Corneal or ocular involvement threatening vision"
-  ],
-  "prognosis": "Lipoid proteinosis generally follows a benign, slowly progressive course with a normal life expectancy, though hoarseness, cutaneous scarring and neurological features such as epilepsy may persist lifelong. Airway compromise is uncommon but can require intervention, and the overall outlook is determined largely by the extent of laryngeal and neurological involvement.",
-  "pitfalls": [
-   "Attributing lifelong hoarseness to recurrent laryngitis rather than recognising it as an early sign of the disease",
-   "Confusing the hyaline deposits with amyloid, which requires Congo red staining and clinicopathological correlation to distinguish",
-   "Overlooking the diagnosis in a child with unexplained scarring, beaded eyelid papules and a husky voice",
-   "Failing to image the brain and missing epilepsy-associated temporal lobe calcification",
-   "Not offering genetic counselling for this autosomal recessive condition"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "GeneReviews, University of Washington, Seattle"
-  ],
-  "crossLinks": [
-   "colloid_milium",
-   "primary_cutaneous_amyloidosis"
-  ],
-  "management": [
-   "No curative therapy exists; management is symptomatic, with oral dimethyl sulfoxide and oral retinoids such as acitretin tried for skin and mucosal deposits with variable benefit",
-   "Provide voice and airway care with laryngoscopic surveillance, and surgical removal of vocal-cord deposits by CO2 laser or microlaryngoscopy where hoarseness is severe or the airway is compromised",
-   "Treat cosmetically or functionally significant skin lesions with dermabrasion or laser",
-   "Control epilepsy related to medial temporal-lobe (amygdala) calcification with antiseizure medication",
-   "Offer neuropsychological and psychiatric support for cognitive and behavioural features",
-   "Coordinate multidisciplinary care across dermatology, ENT, neurology and clinical genetics",
-   "Provide genetic counselling and family screening given autosomal recessive inheritance of the ECM1 defect"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lipoid_proteinosis-pathway",
-   "title": "lipoid proteinosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal recessive disorder caused by loss-of-function variants in ECM1 (extracellular matrix protein 1), leading to deposition of hyaline material in skin, mucosae and viscera",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive airway compromise from laryngeal and pharyngeal infiltration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin or mucosal biopsy showing PAS-positive, diastase-resistant hyaline deposits around vessels and at the dermo-epidermal junction, ECM1 gene sequencing to confirm the diagnosis, Brain CT or MRI to detect characteristic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No curative therapy exists; management is symptomatic, with oral dimethyl sulfoxide and oral retinoids such as acitretin tried for skin and mucosal deposits with variable benefit"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing lifelong hoarseness to recurrent laryngitis rather than recognising it as an early sign of the disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lipoid proteinosis."
-  }
- ],
- "tables": [
-  {
-   "id": "lipoid_proteinosis-matrix",
-   "title": "lipoid proteinosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal recessive disorder caused by loss-of-function variants in ECM1 (extracellular matrix protein 1), leading to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Integumentary",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal recessive disorder caused by loss-of-function variants in ECM1 (extracellular matrix protein 1), leading to deposition of hyaline material in skin, mucosae and viscera",
+      "A hoarse cry or weak, husky voice from early infancy, due to infiltration of the vocal cords, is often the earliest and most characteristic feature",
+      "Moniliform blepharosis, a row of beaded waxy papules along the eyelid margins, is a classic diagnostic clue",
+      "Skin lesions evolve from early blistering and pox-like scars to waxy yellow papules, plaques and verrucous, hyperkeratotic lesions over extensor and friction sites",
+      "Infiltration of the tongue produces a firm, woody organ with restricted protrusion, and the frenulum may become thickened and bound down",
+      "Bilateral bean- or sickle-shaped calcification in the medial temporal lobes (amygdala) is frequently seen on imaging and is associated with epilepsy and impaired recognition of fear",
+      "Diagnosis rests on the clinical picture with PAS-positive hyaline deposits on biopsy, confirmed by ECM1 sequencing; management is supportive as no specific therapy exists"
     ],
-    [
-     "Key Investigations",
-     "Skin or mucosal biopsy showing PAS-positive, diastase-resistant hyaline deposits around vessels and at the dermo-epidermal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lipoid proteinosis is caused by biallelic loss-of-function variants in ECM1, which encodes extracellular matrix protein 1, a glycoprotein important in basement membrane structure, dermal homeostasis and regulation of growth factors and collagen organisation. ECM1 deficiency disrupts the dermo-epidermal junction and perivascular connective tissue, leading to progressive deposition of amorphous, periodic acid-Schiff-positive hyaline material composed of excess basement membrane components and disordered collagen around blood vessels, adnexa and at the epidermal-dermal interface. This infiltration thickens and stiffens the skin and mucosae, while similar deposition and dystrophic calcification within the brain, particularly the amygdala, account for the neurological and neuropsychiatric features.",
+    "additionalDifferentials": [
+      "Erythropoietic protoporphyria and other cutaneous porphyrias with photosensitivity and scarring",
+      "Amyloidosis with mucocutaneous deposition",
+      "Colloid milium",
+      "Xanthomatosis and other deposition disorders",
+      "Systemic sclerosis or other causes of a bound-down tongue and skin",
+      "Papular mucinosis"
     ],
-    [
-     "Primary Differentials",
-     "Erythropoietic protoporphyria and other cutaneous porphyrias with photosensitivity and scarring, Amyloidosis with mucocutaneous",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin or mucosal biopsy showing PAS-positive, diastase-resistant hyaline deposits around vessels and at the dermo-epidermal junction",
+      "ECM1 gene sequencing to confirm the diagnosis",
+      "Brain CT or MRI to detect characteristic medial temporal lobe calcification",
+      "Laryngoscopy to assess vocal cord and upper airway infiltration",
+      "Electroencephalography if seizures are suspected",
+      "Neuropsychological and psychiatric assessment where cognitive or behavioural features are present"
     ],
-    [
-     "Management Strategy",
-     "No curative therapy exists; management is symptomatic, with oral dimethyl sulfoxide and oral retinoids such as acitretin tried",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive airway compromise from laryngeal and pharyngeal infiltration",
+      "Seizures related to temporal lobe involvement",
+      "Feeding or swallowing difficulty from tongue and oropharyngeal deposition",
+      "Corneal or ocular involvement threatening vision"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing lifelong hoarseness to recurrent laryngitis rather than recognising it as an early sign of the disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lipoid proteinosis generally follows a benign, slowly progressive course with a normal life expectancy, though hoarseness, cutaneous scarring and neurological features such as epilepsy may persist lifelong. Airway compromise is uncommon but can require intervention, and the overall outlook is determined largely by the extent of laryngeal and neurological involvement.",
+    "pitfalls": [
+      "Attributing lifelong hoarseness to recurrent laryngitis rather than recognising it as an early sign of the disease",
+      "Confusing the hyaline deposits with amyloid, which requires Congo red staining and clinicopathological correlation to distinguish",
+      "Overlooking the diagnosis in a child with unexplained scarring, beaded eyelid papules and a husky voice",
+      "Failing to image the brain and missing epilepsy-associated temporal lobe calcification",
+      "Not offering genetic counselling for this autosomal recessive condition"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "GeneReviews, University of Washington, Seattle"
+    ],
+    "crossLinks": [
+      "colloid_milium",
+      "primary_cutaneous_amyloidosis"
+    ],
+    "management": [
+      "No curative therapy exists; management is symptomatic, with oral dimethyl sulfoxide and oral retinoids such as acitretin tried for skin and mucosal deposits with variable benefit",
+      "Provide voice and airway care with laryngoscopic surveillance, and surgical removal of vocal-cord deposits by CO2 laser or microlaryngoscopy where hoarseness is severe or the airway is compromised",
+      "Treat cosmetically or functionally significant skin lesions with dermabrasion or laser",
+      "Control epilepsy related to medial temporal-lobe (amygdala) calcification with antiseizure medication",
+      "Offer neuropsychological and psychiatric support for cognitive and behavioural features",
+      "Coordinate multidisciplinary care across dermatology, ENT, neurology and clinical genetics",
+      "Provide genetic counselling and family screening given autosomal recessive inheritance of the ECM1 defect"
     ]
-   ],
-   "caption": "Overview comparison matrix for lipoid proteinosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lipoid-proteinosis-real-image",
-   "title": "lipoid proteinosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "lipoid_proteinosis-pathway",
+      "title": "lipoid proteinosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal recessive disorder caused by loss-of-function variants in ECM1 (extracellular matrix protein 1), leading to deposition of hyaline material in skin, mucosae and viscera",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive airway compromise from laryngeal and pharyngeal infiltration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin or mucosal biopsy showing PAS-positive, diastase-resistant hyaline deposits around vessels and at the dermo-epidermal junction, ECM1 gene sequencing to confirm the diagnosis, Brain CT or MRI to detect characteristic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No curative therapy exists; management is symptomatic, with oral dimethyl sulfoxide and oral retinoids such as acitretin tried for skin and mucosal deposits with variable benefit"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing lifelong hoarseness to recurrent laryngitis rather than recognising it as an early sign of the disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lipoid proteinosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lipoid_proteinosis-matrix",
+      "title": "lipoid proteinosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal recessive disorder caused by loss-of-function variants in ECM1 (extracellular matrix protein 1), leading to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin or mucosal biopsy showing PAS-positive, diastase-resistant hyaline deposits around vessels and at the dermo-epidermal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Erythropoietic protoporphyria and other cutaneous porphyrias with photosensitivity and scarring, Amyloidosis with mucocutaneous",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No curative therapy exists; management is symptomatic, with oral dimethyl sulfoxide and oral retinoids such as acitretin tried",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing lifelong hoarseness to recurrent laryngitis rather than recognising it as an early sign of the disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lipoid proteinosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipoid_proteinosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy with PAS staining",
+          "cells": [
+            {
+              "text": "PAS-positive, diastase-resistant hyaline deposits around vessels and at the dermo-epidermal junction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECM1 sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain CT or MRI",
+          "cells": [
+            {
+              "text": "Medial temporal lobe calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Vocal cord and upper airway infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Where seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological and psychiatric assessment",
+          "cells": [
+            {
+              "text": "Cognitive or behavioural features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoid_proteinosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Amyloidosis with mucocutaneous deposition",
+          "cells": [
+            {
+              "text": "Congo red staining distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythropoietic protoporphyria and other cutaneous porphyrias",
+          "cells": [
+            {
+              "text": "Photosensitivity and scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colloid milium",
+          "cells": [
+            {
+              "text": "Hyaline dermal deposits; histology and ECM1 testing separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Papular mucinosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoid_proteinosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic skin therapy",
+          "cells": [
+            {
+              "text": "Oral dimethyl sulfoxide and oral retinoids such as acitretin for deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice and airway",
+          "cells": [
+            {
+              "text": "Laryngoscopic surveillance; CO2 laser or microlaryngoscopy for vocal-cord deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin lesions",
+          "cells": [
+            {
+              "text": "Dermabrasion or laser for cosmetic or functional lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy",
+          "cells": [
+            {
+              "text": "Antiseizure medication for seizures related to amygdala calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Neuropsychological and psychiatric support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Dermatology, ENT, neurology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ECM1 defect; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipoid_proteinosis-dx-mgmt",
+      "title": "Diagnosis and management of lipoid proteinosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with a husky or hoarse cry from infancy, beaded eyelid papules and scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway compromise, seizures, feeding difficulty, ocular involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ENT airway assessment and laryngoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PAS-stained biopsy for hyaline deposits, ECM1 sequencing, brain imaging, laryngoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a biallelic ECM1 variant confirmed with PAS-positive hyaline deposits?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider amyloidosis, porphyria or colloid milium",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic skin therapy with dimethyl sulfoxide or acitretin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laryngoscopic surveillance and laser removal of vocal-cord deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dermabrasion or laser for significant skin lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication for temporal lobe epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign, slowly progressive, normal life expectancy; hoarseness and scarring persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

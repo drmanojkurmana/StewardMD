@@ -153,3 +153,8 @@ test("generator: indexWith marks revised lessons r 2", () => {
   assert.deepEqual(ix.modules.a, { title: "A", steps: 5, minutes: 7, set: "radbook", r: 2 });
   assert.deepEqual(ix.modules.b, live.modules.b); assert.equal(ix.modules.zz, undefined);
 });
+test("generator: parseList reads the detection reply", () => {
+  assert.deepEqual(X.parseList('```json\n[{"box_2d":[1,2,3,4],"label":"x"}]\n```'), [{ box_2d: [1, 2, 3, 4], label: "x" }]);
+  assert.deepEqual(X.parseList('{"items":[{"label":"y"}]}'), [{ label: "y" }]);
+  assert.deepEqual(X.parseList("no json"), []);
+});

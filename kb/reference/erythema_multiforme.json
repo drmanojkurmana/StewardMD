@@ -1,172 +1,461 @@
 {
- "id": "erythema_multiforme",
- "name": "Erythema multiforme",
- "aliases": [
-  "EM",
-  "erythema multiforme minor",
-  "erythema multiforme major"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acute, usually self-limiting hypersensitivity reaction characterised by target (iris) lesions with three concentric zones",
-   "Lesions are typically symmetrical and acral, favouring the extensor surfaces of the hands, forearms, feet, and often the palms and soles",
-   "Herpes simplex virus is the commonest trigger, and Mycoplasma pneumoniae is an important cause, particularly in children",
-   "Erythema multiforme major involves significant mucosal disease (oral, ocular, or genital) in addition to skin lesions, whereas the minor form has little or no mucosal involvement",
-   "It is now regarded as distinct from Stevens-Johnson syndrome and toxic epidermal necrolysis, which have different triggers (mainly drugs), morphology, and far greater skin detachment and mortality",
-   "Management is largely supportive with removal or treatment of the trigger; recurrent herpes-associated disease may warrant suppressive antiviral therapy",
-   "Recurrent or persistent disease should prompt a search for an underlying herpes infection or other trigger"
+  "id": "erythema_multiforme",
+  "name": "Erythema multiforme",
+  "aliases": [
+    "EM",
+    "erythema multiforme minor",
+    "erythema multiforme major"
   ],
-  "pathophysiology": "Erythema multiforme is a cell-mediated immune reaction, most often provoked by infection, in which cytotoxic T lymphocytes target keratinocytes expressing antigens derived from the trigger. In herpes-associated disease, viral DNA fragments are transported to the skin and drive a T-cell response with interferon-gamma-mediated inflammation at the dermo-epidermal junction, producing the characteristic target lesions with central epidermal damage. This immunopathology and its infective triggers distinguish it from the drug-driven, tumour-necrosis-factor and granulysin-mediated widespread keratinocyte apoptosis of Stevens-Johnson syndrome and toxic epidermal necrolysis.",
-  "additionalDifferentials": [
-   "Stevens-Johnson syndrome and toxic epidermal necrolysis",
-   "Urticaria and urticarial vasculitis",
-   "Fixed drug eruption",
-   "Bullous or autoimmune blistering disease",
-   "Viral exanthem",
-   "Acute cutaneous lupus erythematosus"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis based on the characteristic target lesions and distribution",
-   "Testing for herpes simplex virus and Mycoplasma pneumoniae when a trigger is sought",
-   "Skin biopsy in atypical cases to distinguish from other reactions",
-   "Review of recent medications to help differentiate from drug-induced severe reactions",
-   "Assessment of mucosal and ocular involvement, with ophthalmology input where indicated"
-  ],
-  "redFlags": [
-   "Extensive skin detachment or a positive Nikolsky sign suggesting Stevens-Johnson syndrome or toxic epidermal necrolysis",
-   "Severe mucosal involvement impairing oral intake, vision, or urination",
-   "Systemic upset with fever and mucosal disease requiring urgent assessment",
-   "Ocular involvement threatening long-term visual complications"
-  ],
-  "prognosis": "Erythema multiforme minor is generally self-limiting and resolves over a few weeks without scarring; the herpes-associated form is prone to recurrence, and prognosis is far better than for the more severe drug-induced blistering syndromes it must be distinguished from.",
-  "pitfalls": [
-   "Confusing erythema multiforme with Stevens-Johnson syndrome or toxic epidermal necrolysis and mismanaging severity",
-   "Overlooking an underlying herpes simplex or Mycoplasma trigger, especially in recurrent disease",
-   "Failing to assess and manage mucosal and ocular involvement",
-   "Attributing a target-like drug eruption to infection and missing a culprit medication"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identification and treatment of the trigger, using aciclovir for herpes simplex-associated disease and an appropriate macrolide or other antibiotic for Mycoplasma pneumoniae infection",
-   "Withdrawal of any suspected culprit drug",
-   "Symptomatic skin care with topical corticosteroids, oral antihistamines and analgesia for the target lesions",
-   "Mucosal care with antiseptic and anaesthetic mouthwashes, with attention to hydration where oral involvement limits intake",
-   "Ophthalmology review and treatment for ocular mucosal involvement to prevent scarring",
-   "Continuous suppressive antiviral therapy for recurrent herpes-associated disease",
-   "Supportive care with monitoring to distinguish from and detect evolution toward the more severe drug-induced blistering syndromes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "erythema_multiforme-pathway",
-   "title": "Erythema multiforme: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acute, usually self-limiting hypersensitivity reaction characterised by target (iris) lesions with three concentric zones",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive skin detachment or a positive Nikolsky sign suggesting Stevens-Johnson syndrome or toxic epidermal necrolysis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis based on the characteristic target lesions and distribution, Testing for herpes simplex virus and Mycoplasma pneumoniae when a trigger is sought, Skin biopsy in atypical cases to distinguish from other"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identification and treatment of the trigger, using aciclovir for herpes simplex-associated disease and an appropriate macrolide or other antibiotic for Mycoplasma pneumoniae infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing erythema multiforme with Stevens-Johnson syndrome or toxic epidermal necrolysis and mismanaging severity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of erythema multiforme."
-  }
- ],
- "tables": [
-  {
-   "id": "erythema_multiforme-matrix",
-   "title": "Erythema multiforme: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acute, usually self-limiting hypersensitivity reaction characterised by target (iris) lesions with three concentric zones",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acute, usually self-limiting hypersensitivity reaction characterised by target (iris) lesions with three concentric zones",
+      "Lesions are typically symmetrical and acral, favouring the extensor surfaces of the hands, forearms, feet, and often the palms and soles",
+      "Herpes simplex virus is the commonest trigger, and Mycoplasma pneumoniae is an important cause, particularly in children",
+      "Erythema multiforme major involves significant mucosal disease (oral, ocular, or genital) in addition to skin lesions, whereas the minor form has little or no mucosal involvement",
+      "It is now regarded as distinct from Stevens-Johnson syndrome and toxic epidermal necrolysis, which have different triggers (mainly drugs), morphology, and far greater skin detachment and mortality",
+      "Management is largely supportive with removal or treatment of the trigger; recurrent herpes-associated disease may warrant suppressive antiviral therapy",
+      "Recurrent or persistent disease should prompt a search for an underlying herpes infection or other trigger"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis based on the characteristic target lesions and distribution, Testing for herpes simplex virus and Mycoplasma",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Erythema multiforme is a cell-mediated immune reaction, most often provoked by infection, in which cytotoxic T lymphocytes target keratinocytes expressing antigens derived from the trigger. In herpes-associated disease, viral DNA fragments are transported to the skin and drive a T-cell response with interferon-gamma-mediated inflammation at the dermo-epidermal junction, producing the characteristic target lesions with central epidermal damage. This immunopathology and its infective triggers distinguish it from the drug-driven, tumour-necrosis-factor and granulysin-mediated widespread keratinocyte apoptosis of Stevens-Johnson syndrome and toxic epidermal necrolysis.",
+    "additionalDifferentials": [
+      "Stevens-Johnson syndrome and toxic epidermal necrolysis",
+      "Urticaria and urticarial vasculitis",
+      "Fixed drug eruption",
+      "Bullous or autoimmune blistering disease",
+      "Viral exanthem",
+      "Acute cutaneous lupus erythematosus"
     ],
-    [
-     "Primary Differentials",
-     "Stevens-Johnson syndrome and toxic epidermal necrolysis, Urticaria and urticarial vasculitis, Fixed drug eruption",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis based on the characteristic target lesions and distribution",
+      "Testing for herpes simplex virus and Mycoplasma pneumoniae when a trigger is sought",
+      "Skin biopsy in atypical cases to distinguish from other reactions",
+      "Review of recent medications to help differentiate from drug-induced severe reactions",
+      "Assessment of mucosal and ocular involvement, with ophthalmology input where indicated"
     ],
-    [
-     "Management Strategy",
-     "Identification and treatment of the trigger, using aciclovir for herpes simplex-associated disease and an appropriate macrolide",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive skin detachment or a positive Nikolsky sign suggesting Stevens-Johnson syndrome or toxic epidermal necrolysis",
+      "Severe mucosal involvement impairing oral intake, vision, or urination",
+      "Systemic upset with fever and mucosal disease requiring urgent assessment",
+      "Ocular involvement threatening long-term visual complications"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing erythema multiforme with Stevens-Johnson syndrome or toxic epidermal necrolysis and mismanaging severity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Erythema multiforme minor is generally self-limiting and resolves over a few weeks without scarring; the herpes-associated form is prone to recurrence, and prognosis is far better than for the more severe drug-induced blistering syndromes it must be distinguished from.",
+    "pitfalls": [
+      "Confusing erythema multiforme with Stevens-Johnson syndrome or toxic epidermal necrolysis and mismanaging severity",
+      "Overlooking an underlying herpes simplex or Mycoplasma trigger, especially in recurrent disease",
+      "Failing to assess and manage mucosal and ocular involvement",
+      "Attributing a target-like drug eruption to infection and missing a culprit medication"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identification and treatment of the trigger, using aciclovir for herpes simplex-associated disease and an appropriate macrolide or other antibiotic for Mycoplasma pneumoniae infection",
+      "Withdrawal of any suspected culprit drug",
+      "Symptomatic skin care with topical corticosteroids, oral antihistamines and analgesia for the target lesions",
+      "Mucosal care with antiseptic and anaesthetic mouthwashes, with attention to hydration where oral involvement limits intake",
+      "Ophthalmology review and treatment for ocular mucosal involvement to prevent scarring",
+      "Continuous suppressive antiviral therapy for recurrent herpes-associated disease",
+      "Supportive care with monitoring to distinguish from and detect evolution toward the more severe drug-induced blistering syndromes"
     ]
-   ],
-   "caption": "Overview comparison matrix for erythema multiforme."
-  }
- ],
- "diagrams": [
-  {
-   "id": "erythema-multiforme-real-image",
-   "title": "Erythema multiforme: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "erythema_multiforme-pathway",
+      "title": "Erythema multiforme: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acute, usually self-limiting hypersensitivity reaction characterised by target (iris) lesions with three concentric zones",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive skin detachment or a positive Nikolsky sign suggesting Stevens-Johnson syndrome or toxic epidermal necrolysis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis based on the characteristic target lesions and distribution, Testing for herpes simplex virus and Mycoplasma pneumoniae when a trigger is sought, Skin biopsy in atypical cases to distinguish from other"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identification and treatment of the trigger, using aciclovir for herpes simplex-associated disease and an appropriate macrolide or other antibiotic for Mycoplasma pneumoniae infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing erythema multiforme with Stevens-Johnson syndrome or toxic epidermal necrolysis and mismanaging severity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of erythema multiforme."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "erythema_multiforme-matrix",
+      "title": "Erythema multiforme: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acute, usually self-limiting hypersensitivity reaction characterised by target (iris) lesions with three concentric zones",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis based on the characteristic target lesions and distribution, Testing for herpes simplex virus and Mycoplasma",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Stevens-Johnson syndrome and toxic epidermal necrolysis, Urticaria and urticarial vasculitis, Fixed drug eruption",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identification and treatment of the trigger, using aciclovir for herpes simplex-associated disease and an appropriate macrolide",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing erythema multiforme with Stevens-Johnson syndrome or toxic epidermal necrolysis and mismanaging severity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for erythema multiforme."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythema_multiforme-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Target lesions and their distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for herpes simplex virus and Mycoplasma pneumoniae",
+          "cells": [
+            {
+              "text": "Trigger identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical cases",
+          "cells": [
+            {
+              "text": "Distinguishes it from other reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of recent medications",
+          "cells": [
+            {
+              "text": "Differentiates from drug-induced severe reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of mucosal and ocular involvement",
+          "cells": [
+            {
+              "text": "Mucosal and ocular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_multiforme-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Stevens-Johnson syndrome and toxic epidermal necrolysis",
+          "cells": [
+            {
+              "text": "A positive Nikolsky sign or extensive skin detachment suggests these"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fixed drug eruption",
+          "cells": [
+            {
+              "text": "Target-like lesions after a drug; the culprit medication must be sought"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_multiforme-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger identification and treatment",
+          "cells": [
+            {
+              "text": "Aciclovir for herpes simplex-associated disease; a macrolide or other antibiotic for Mycoplasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw suspected culprit drug",
+          "cells": [
+            {
+              "text": "If a drug is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic skin care",
+          "cells": [
+            {
+              "text": "Topical corticosteroids, oral antihistamines and analgesia for target lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucosal care",
+          "cells": [
+            {
+              "text": "Antiseptic and anaesthetic mouthwashes; hydration where oral intake is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Treatment of ocular mucosal involvement to prevent scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous suppressive antiviral",
+          "cells": [
+            {
+              "text": "Recurrent herpes-associated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Distinguishes from, and detects evolution to, severe drug-induced blistering syndromes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythema_multiforme-dx-mgmt",
+      "title": "Diagnosis and management of Erythema multiforme",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acral target lesions with three concentric zones, often after herpes or Mycoplasma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (skin detachment, positive Nikolsky sign, severe mucosal or ocular disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent assessment for Stevens-Johnson syndrome or toxic epidermal necrolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical review; HSV and Mycoplasma testing; medication review; biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Trigger identified (herpes simplex, Mycoplasma or drug)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy in atypical cases; repeat the drug review and trigger search",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aciclovir for herpes simplex-associated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Macrolide or other antibiotic for Mycoplasma-associated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw any suspected culprit drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseptic and anaesthetic mouthwashes; hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Continuous suppressive antiviral for recurrent herpes-associated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Minor form self-limiting without scarring; herpes-associated form is prone to recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

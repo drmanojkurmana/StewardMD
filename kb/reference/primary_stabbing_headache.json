@@ -1,168 +1,435 @@
 {
- "id": "primary_stabbing_headache",
- "name": "Primary stabbing headache",
- "aliases": [
-  "ice-pick headache",
-  "jabs and jolts syndrome",
-  "idiopathic stabbing headache"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "International Classification of Headache Disorders (ICHD-3)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Transient ultra-brief stabs of head pain lasting seconds, occurring spontaneously without an identifiable trigger",
-   "Pains are felt in the distribution of the first division of the trigeminal nerve in most cases but may move between areas",
-   "There are no accompanying cranial autonomic features, which helps distinguish it from the trigeminal autonomic cephalalgias",
-   "Attacks may occur once or many times a day with an irregular pattern",
-   "It is more common in people who also have migraine",
-   "A subset responds to indometacin, though pains are often too brief to warrant treatment"
+  "id": "primary_stabbing_headache",
+  "name": "Primary stabbing headache",
+  "aliases": [
+    "ice-pick headache",
+    "jabs and jolts syndrome",
+    "idiopathic stabbing headache"
   ],
-  "pathophysiology": "Primary stabbing headache is an idiopathic disorder thought to arise from transient spontaneous discharges within trigeminal nociceptive pathways, without structural cause in the primary form. Its association with migraine and other primary headaches suggests shared central pain-modulating mechanisms. When stabs are consistently localised to one fixed site, an underlying structural lesion in that region should be considered.",
-  "additionalDifferentials": [
-   "Trigeminal neuralgia",
-   "Short-lasting unilateral neuralgiform headache attacks (SUNCT/SUNA)",
-   "Nummular headache",
-   "Occipital neuralgia",
-   "Secondary stabbing pain from a structural lesion"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis based on the characteristic brief stabs",
-   "Neurological examination to exclude focal signs",
-   "Neuroimaging if pains are strictly fixed in location or examination is abnormal",
-   "Review for coexisting migraine or other primary headache"
-  ],
-  "redFlags": [
-   "Stabs consistently confined to one fixed location",
-   "Abnormal neurological examination",
-   "New onset in an older patient with other concerning features",
-   "Progressive change in pattern or associated deficits"
-  ],
-  "prognosis": "The disorder is benign and often intermittent, with many patients needing no treatment and attacks tending to fluctuate over time.",
-  "pitfalls": [
-   "Assuming a fixed-site stab is primary without imaging",
-   "Confusing it with trigeminal neuralgia, which has cutaneous triggers",
-   "Overlooking coexisting migraine",
-   "Overtreating pains that are too brief to target"
-  ],
-  "references": [
-   "International Classification of Headache Disorders (ICHD-3)",
-   "Bradley and Daroff Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance with no pharmacological treatment for most patients, since attacks are usually too brief to treat",
-   "Preventive indometacin for frequent or troublesome stabs, to which a subset responds well",
-   "Gastric protection with a proton pump inhibitor when indometacin is used",
-   "Alternative preventives such as gabapentin, melatonin or a cyclo-oxygenase-2 inhibitor when indometacin is ineffective or not tolerated",
-   "Identification and treatment of coexisting migraine or other primary headache",
-   "Neuroimaging and specialist referral if stabs are strictly fixed in one location or neurological examination is abnormal"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_stabbing_headache-pathway",
-   "title": "Primary stabbing headache: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Transient ultra-brief stabs of head pain lasting seconds, occurring spontaneously without an identifiable trigger",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Stabs consistently confined to one fixed location",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis based on the characteristic brief stabs, Neurological examination to exclude focal signs, Neuroimaging if pains are strictly fixed in location or examination is abnormal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance with no pharmacological treatment for most patients, since attacks are usually too brief to treat"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a fixed-site stab is primary without imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary stabbing headache."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_stabbing_headache-matrix",
-   "title": "Primary stabbing headache: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Transient ultra-brief stabs of head pain lasting seconds, occurring spontaneously without an identifiable trigger",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "International Classification of Headache Disorders (ICHD-3)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Transient ultra-brief stabs of head pain lasting seconds, occurring spontaneously without an identifiable trigger",
+      "Pains are felt in the distribution of the first division of the trigeminal nerve in most cases but may move between areas",
+      "There are no accompanying cranial autonomic features, which helps distinguish it from the trigeminal autonomic cephalalgias",
+      "Attacks may occur once or many times a day with an irregular pattern",
+      "It is more common in people who also have migraine",
+      "A subset responds to indometacin, though pains are often too brief to warrant treatment"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis based on the characteristic brief stabs, Neurological examination to exclude focal signs, Neuroimaging if",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary stabbing headache is an idiopathic disorder thought to arise from transient spontaneous discharges within trigeminal nociceptive pathways, without structural cause in the primary form. Its association with migraine and other primary headaches suggests shared central pain-modulating mechanisms. When stabs are consistently localised to one fixed site, an underlying structural lesion in that region should be considered.",
+    "additionalDifferentials": [
+      "Trigeminal neuralgia",
+      "Short-lasting unilateral neuralgiform headache attacks (SUNCT/SUNA)",
+      "Nummular headache",
+      "Occipital neuralgia",
+      "Secondary stabbing pain from a structural lesion"
     ],
-    [
-     "Primary Differentials",
-     "Trigeminal neuralgia, Short-lasting unilateral neuralgiform headache attacks (SUNCT/SUNA), Nummular headache",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis based on the characteristic brief stabs",
+      "Neurological examination to exclude focal signs",
+      "Neuroimaging if pains are strictly fixed in location or examination is abnormal",
+      "Review for coexisting migraine or other primary headache"
     ],
-    [
-     "Management Strategy",
-     "Reassurance with no pharmacological treatment for most patients, since attacks are usually too brief to treat",
-     "Core treatment modality"
+    "redFlags": [
+      "Stabs consistently confined to one fixed location",
+      "Abnormal neurological examination",
+      "New onset in an older patient with other concerning features",
+      "Progressive change in pattern or associated deficits"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a fixed-site stab is primary without imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is benign and often intermittent, with many patients needing no treatment and attacks tending to fluctuate over time.",
+    "pitfalls": [
+      "Assuming a fixed-site stab is primary without imaging",
+      "Confusing it with trigeminal neuralgia, which has cutaneous triggers",
+      "Overlooking coexisting migraine",
+      "Overtreating pains that are too brief to target"
+    ],
+    "references": [
+      "International Classification of Headache Disorders (ICHD-3)",
+      "Bradley and Daroff Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance with no pharmacological treatment for most patients, since attacks are usually too brief to treat",
+      "Preventive indometacin for frequent or troublesome stabs, to which a subset responds well",
+      "Gastric protection with a proton pump inhibitor when indometacin is used",
+      "Alternative preventives such as gabapentin, melatonin or a cyclo-oxygenase-2 inhibitor when indometacin is ineffective or not tolerated",
+      "Identification and treatment of coexisting migraine or other primary headache",
+      "Neuroimaging and specialist referral if stabs are strictly fixed in one location or neurological examination is abnormal"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary stabbing headache."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-stabbing-headache-real-image",
-   "title": "Primary stabbing headache: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "primary_stabbing_headache-pathway",
+      "title": "Primary stabbing headache: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Transient ultra-brief stabs of head pain lasting seconds, occurring spontaneously without an identifiable trigger",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Stabs consistently confined to one fixed location",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis based on the characteristic brief stabs, Neurological examination to exclude focal signs, Neuroimaging if pains are strictly fixed in location or examination is abnormal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance with no pharmacological treatment for most patients, since attacks are usually too brief to treat"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a fixed-site stab is primary without imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary stabbing headache."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_stabbing_headache-matrix",
+      "title": "Primary stabbing headache: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Transient ultra-brief stabs of head pain lasting seconds, occurring spontaneously without an identifiable trigger",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis based on the characteristic brief stabs, Neurological examination to exclude focal signs, Neuroimaging if",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Trigeminal neuralgia, Short-lasting unilateral neuralgiform headache attacks (SUNCT/SUNA), Nummular headache",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance with no pharmacological treatment for most patients, since attacks are usually too brief to treat",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a fixed-site stab is primary without imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary stabbing headache."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "International Classification of Headache Disorders (ICHD-3)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_stabbing_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Characteristic brief stabs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Focal signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging, if pains are strictly fixed or examination is abnormal",
+          "cells": [
+            {
+              "text": "Structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for coexisting migraine or other primary headache",
+          "cells": [
+            {
+              "text": "Coexisting primary headache"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_stabbing_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary stabbing pain from a structural lesion",
+          "cells": [
+            {
+              "text": "Stabs strictly fixed in one location; abnormal neurological examination"
+            },
+            {
+              "text": "Neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-lasting unilateral neuralgiform headache attacks (SUNCT/SUNA)",
+          "cells": [
+            {
+              "text": "Short-lasting unilateral attacks"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_stabbing_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "No pharmacological treatment for most patients; attacks are usually too brief to treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive indometacin",
+          "cells": [
+            {
+              "text": "For frequent or troublesome stabs; a subset responds well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric protection",
+          "cells": [
+            {
+              "text": "Proton pump inhibitor when indometacin is used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative preventives",
+          "cells": [
+            {
+              "text": "Gabapentin, melatonin or a COX-2 inhibitor if indometacin is ineffective or not tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting primary headache",
+          "cells": [
+            {
+              "text": "Identify and treat coexisting migraine or other primary headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging and referral",
+          "cells": [
+            {
+              "text": "Neuroimaging and specialist referral if stabs are fixed or examination is abnormal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_stabbing_headache-dx-mgmt",
+      "title": "Diagnosis and management of Primary stabbing headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary stabbing headache: brief stabs of pain in the head",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stabs fixed in one location, abnormal examination, or new onset in an older patient?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neuroimaging and neurology referral for fixed or abnormal presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; neurological examination; neuroimaging if fixed or abnormal",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is this a typical primary stabbing headache with a normal examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider trigeminal neuralgia, SUNCT or structural lesion; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance; most patients need no drug treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preventive indometacin for frequent or troublesome stabs, with PPI cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gabapentin, melatonin or a COX-2 inhibitor if indometacin fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting migraine or other primary headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurology referral and neuroimaging if stabs are fixed or examination is abnormal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -300,25 +300,712 @@
       "caption": "Diagnostic and clinical overview matrix for necrotizing fasciitis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "necrotizing-fasciitis-real-image",
-      "title": "Necrotizing Fasciitis: Clinical Cutaneous Dermatology Photograph",
-      "type": "diagram",
-      "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-      "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "IDSA, Skin and Soft Tissue Infections Guideline, 2014",
+      "url": "https://academic.oup.com/cid/article/59/2/e10/2895845",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "US Pharmacist, Necrotizing Soft-Tissue Infection Overview, 2017",
+      "url": "https://www.uspharmacist.com/article/necrotizing-softtissue-infection-disease-overview-and-updated-treatment-strategies",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 136-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "NECROTIZING_FASCIITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising necrotizing fasciitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Primary Lesions",
-          "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+          "parameter": "Pain out of proportion to signs",
+          "cells": [
+            {
+              "text": "Severe pain and fever with only mild erythema or oedema"
+            },
+            {
+              "text": "{{hy:Classic early clue; separates it from cellulitis}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Demarcation & Margins",
-          "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+          "parameter": "Wooden-hard induration",
+          "cells": [
+            {
+              "text": "Fascial planes and muscle groups cannot be felt"
+            },
+            {
+              "text": "Suggests deep necrotizing infection"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Anatomical Distribution",
-          "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+          "parameter": "Oedema or tenderness beyond erythema",
+          "cells": [
+            {
+              "text": "Extends past the visible skin change"
+            },
+            {
+              "text": "Suggests necrotizing infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Late skin signs",
+          "cells": [
+            {
+              "text": "Violaceous induration, blue or purple bullae, ecchymosis, then black skin"
+            },
+            {
+              "text": "Extensive dermal vessel thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crepitus or tissue gas",
+          "cells": [
+            {
+              "text": "Gas in tissues"
+            },
+            {
+              "text": "Gas often absent in group A strep disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anaesthesia or falling pain",
+          "cells": [
+            {
+              "text": "Skin becomes numb over the lesion"
+            },
+            {
+              "text": "Ominous sign of nerve infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Failure of initial antibiotics, systemic toxicity",
+          "cells": [
+            {
+              "text": "Including altered mental state"
+            },
+            {
+              "text": "Prompt surgical consultation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type I",
+          "cells": [
+            {
+              "text": "Mixed aerobic and anaerobic; diabetes, vascular disease, surgery, perineum (Fournier gangrene)"
+            },
+            {
+              "text": "Needs broad cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type II",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Group A streptococcus, implicated in about 60% of cases; healthy hosts",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Penicillin plus clindamycin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Concurrent myositis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 20% to 50%; CPK raised",
+              "range": [
+                20,
+                50
+              ]
+            },
+            {
+              "text": "Check serum CPK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging (CT or MRI)",
+          "cells": [
+            {
+              "text": "Fascial oedema; accuracy poorly defined"
+            },
+            {
+              "text": "Must not delay surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Operative findings and deep tissue culture",
+          "cells": [
+            {
+              "text": "Appearance of fascia at operation; Gram stain and culture of deep tissue"
+            },
+            {
+              "text": "Definitive diagnosis; superficial swabs mislead"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clinical scoring systems",
+          "cells": [
+            {
+              "text": "Better for excluding than confirming"
+            },
+            {
+              "text": "Clinical judgment is key"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison and IDSA do not describe LRINEC thresholds, so none are given."
+    },
+    {
+      "id": "NECROTIZING_FASCIITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic necrotizing fasciitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cellulitis or erysipelas",
+          "cells": [
+            {
+              "text": "Skin looks worse but pain only mild to moderate; slower progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophlebitis",
+          "cells": [
+            {
+              "text": "Common early misdiagnosis of deep strep infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle strain or contusion",
+          "cells": [
+            {
+              "text": "Minor trauma can be the deep starting point of strep NF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clostridial myonecrosis (gas gangrene)",
+          "cells": [
+            {
+              "text": "Muscle involvement; separated from clostridial NF by muscle biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyomyositis",
+          "cells": [
+            {
+              "text": "Usually S. aureus, localised; shock uncommon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vibrio vulnificus or Aeromonas infection",
+          "cells": [
+            {
+              "text": "Seawater or freshwater exposure, raw seafood in cirrhosis; can be as fulminant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ecthyma gangrenosum",
+          "cells": [
+            {
+              "text": "Pseudomonas in neutropenic hosts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Surgical exploration is the separating step for deep infection; sources gave no other row-specific test."
+    },
+    {
+      "id": "NECROTIZING_FASCIITIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of necrotizing fasciitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Adult IV dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency surgical debridement",
+          "cells": [
+            {
+              "text": "{{hy:Any suspicion; nothing should delay it}}"
+            },
+            {
+              "text": "Return to theatre 24 to 36 h after first debridement, then daily until none needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vancomycin plus piperacillin-tazobactam",
+          "cells": [
+            {
+              "text": "Empirical, mixed or unknown cause"
+            },
+            {
+              "text": "Vancomycin 30 mg/kg/day in 2 doses; piperacillin-tazobactam 3.37 g every 6 to 8 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carbapenem alternative",
+          "cells": [
+            {
+              "text": "Mixed infection"
+            },
+            {
+              "text": "Imipenem 1 g every 6 to 8 h, meropenem 1 g every 8 h or ertapenem 1 g daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cefotaxime plus metronidazole or clindamycin",
+          "cells": [
+            {
+              "text": "Mixed infection"
+            },
+            {
+              "text": "Cefotaxime 2 g every 6 h; metronidazole 500 mg every 6 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Penicillin plus clindamycin",
+          "cells": [
+            {
+              "text": "Documented group A strep or Clostridium"
+            },
+            {
+              "text": "Penicillin 2 to 4 million units every 4 to 6 h; clindamycin 600 to 900 mg every 8 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nafcillin or cefazolin",
+          "cells": [
+            {
+              "text": "MSSA"
+            },
+            {
+              "text": "Nafcillin 1 to 2 g every 4 h; cefazolin 1 g every 8 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vancomycin, linezolid or daptomycin",
+          "cells": [
+            {
+              "text": "MRSA"
+            },
+            {
+              "text": "Vancomycin 30 mg/kg/day in 2 doses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Until no more debridement, clinical improvement and afebrile 48 to 72 h",
+              "range": [
+                48,
+                72
+              ]
+            },
+            {
+              "text": "No trial-defined duration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVIG",
+          "cells": [
+            {
+              "text": "Not recommended by IDSA"
+            },
+            {
+              "text": "Possible benefit in severe strep disease, unproven"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hyperbaric oxygen",
+          "cells": [
+            {
+              "text": "Not recommended by IDSA"
+            },
+            {
+              "text": "Role controversial"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Doses are IDSA 2014 Table 4 adult doses for normal renal function. Mortality reaches 30% to 70% in strep NF with hypotension and organ failure (US Pharmacist)."
+    },
+    {
+      "id": "NECROTIZING_FASCIITIS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Classification of streptococci",
+      "rowHeader": "Lancefield group",
+      "columns": [
+        "Representative species",
+        "Hemolytic pattern",
+        "Typical infections"
+      ],
+      "rows": [
+        {
+          "parameter": "A",
+          "cells": [
+            {
+              "text": "S. pyogenes"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Pharyngitis, impetigo, cellulitis, scarlet fever"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "B",
+          "cells": [
+            {
+              "text": "S. agalactiae"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Neonatal sepsis and meningitis, puerperal infection, urinary tract infection, diabetic ulcer infection, endocarditis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "C, G",
+          "cells": [
+            {
+              "text": "S. dysgalactiae subsp. equisimilis"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Cellulitis, bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "D: enterococci",
+          "cells": [
+            {
+              "text": "E. faecalis; E. faecium"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Urinary tract infection, nosocomial bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "D: nonenterococci",
+          "cells": [
+            {
+              "text": "S. bovis"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Variable or nongroupable: viridans streptococci",
+          "cells": [
+            {
+              "text": "S. sanguis; S. mitis"
+            },
+            {
+              "text": "Alpha"
+            },
+            {
+              "text": "Endocarditis, dental abscess, brain abscess"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Variable or nongroupable: intermedius or milleri group",
+          "cells": [
+            {
+              "text": "S. intermedius, S. anginosus, S. constellatus"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Brain abscess, visceral abscess"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Variable or nongroupable: anaerobic streptococci",
+          "cells": [
+            {
+              "text": "Peptostreptococcus magnus"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Sinusitis, pneumonia, empyema, brain abscess, liver abscess"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Source footnotes (a) on enterococci and (b) on anaerobic streptococci are not legible in the transcription."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "NECROTIZING_FASCIITIS-dx-mgmt",
+      "title": "Diagnosis and management of necrotizing fasciitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Soft-tissue infection with severe pain, fever or rapid spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pain out of proportion, hard induration, bullae, gas, anaesthesia or toxicity?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Treat as cellulitis; reassess often for spread",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Resuscitate; blood cultures; start broad antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Urgent surgical consultation and exploration",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Necrotic fascia at operation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Radical debridement; deep tissue Gram stain and culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Group A strep or Clostridium?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Penicillin plus clindamycin",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Narrow broad regimen to culture results",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Re-look surgery at 24 to 36 h, then daily",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Stop antibiotics when no debridement needed and afebrile 48 to 72 h",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Manage as non-necrotizing infection",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n2",
+          "label": "Worsens"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
         }
       ]
     }

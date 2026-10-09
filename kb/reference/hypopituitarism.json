@@ -1,186 +1,654 @@
 {
- "id": "hypopituitarism",
- "name": "Hypopituitarism",
- "system": "Endocrine",
- "class": "non_infective",
- "chapter": 391,
- "page": 2992,
- "aliases": [
-  "panhypopituitarism",
-  "Sheehan syndrome"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2992",
-  "clinicalPearls": [
-   "Deficient production of one or more anterior pituitary trophic hormones produces the clinical features of hypopituitarism; most adult cases are acquired (Harrison 22e p.2992).",
-   "With pituitary compression or destruction, trophic hormone failure usually occurs sequentially: GH first, then FSH, LH, TSH, and ACTH last; in children growth retardation is often the presenting feature, in adults hypogonadism is the earliest symptom (Harrison 22e p.2992).",
-   "Clinical manifestations depend on which hormones are lost and the degree of deficiency: GH deficiency causes growth disorders in children and abnormal body composition in adults; gonadotropin deficiency causes menstrual disorders/infertility/loss of secondary sexual characteristics; TSH deficiency causes hypothyroidism; ACTH deficiency causes secondary adrenal insufficiency; PRL deficiency causes failure of lactation (Harrison 22e p.2996).",
-   "Secondary adrenal insufficiency from ACTH deficiency causes hypocortisolism with relative preservation of mineralocorticoid production (unlike primary adrenal failure) (Harrison 22e p.2996).",
-   "Pituitary apoplexy is an endocrine emergency: acute intrapituitary hemorrhage/infarction presenting with severe headache, meningeal signs, bilateral visual changes, ophthalmoplegia, and in severe cases cardiovascular collapse and loss of consciousness (Harrison 22e p.2993).",
-   "Lymphocytic hypophysitis occurs most often in postpartum women, presents with hyperprolactinemia and an MRI mass resembling an adenoma, and may be transient or permanent; it should be considered before unnecessary surgery in a postpartum woman with a new pituitary mass (Harrison 22e p.2993).",
-   "Up to 20% of patients receiving CTLA-4 inhibitor immunotherapy (e.g., ipilimumab) develop hypophysitis; PD-1/PD-L1 inhibitors (pembrolizumab, nivolumab) can also cause it, sometimes with delayed presentation (Harrison 22e p.2993).",
-   "Patients on glucocorticoid replacement require careful dose escalation (stress dosing) during acute illness, dental procedures, trauma, and hospitalization (Harrison 22e p.2996)."
+  "id": "hypopituitarism",
+  "name": "Hypopituitarism",
+  "system": "Endocrine",
+  "class": "non_infective",
+  "chapter": 391,
+  "page": 2992,
+  "aliases": [
+    "panhypopituitarism",
+    "Sheehan syndrome"
   ],
-  "pathophysiology": "Impaired synthesis or secretion of one or more anterior pituitary trophic hormones (GH, FSH, LH, TSH, ACTH, PRL), and sometimes posterior pituitary AVP. Causes are developmental/genetic (transcription factor mutations such as PROP1, PIT-1, TPIT, midline defects) or, more commonly in adults, acquired from compressive mass effect of tumors or from local pituitary/hypothalamic traumatic, autoimmune, inflammatory, infiltrative, or vascular damage. The same processes may impair hypothalamic hormone production with secondary pituitary failure. With progressive compression/destruction, hormone loss is typically sequential (GH > FSH > LH > TSH > ACTH) (Harrison 22e p.2992).",
-  "additionalDifferentials": [
-   "Pituitary adenoma (mass on MRI may be indistinguishable from lymphocytic hypophysitis)",
-   "Craniopharyngioma, Rathke's cyst, meningioma, germinoma, glioma, ependymoma",
-   "Pituitary metastases (breast, lung, colon) and lymphoma/leukemia",
-   "Empty sella syndrome",
-   "Primary (target-organ) endocrine failure as opposed to central deficiency"
-  ],
-  "infectionMimics": [
-   "Tuberculosis involving the pituitary/hypothalamus",
-   "Fungal infection (histoplasmosis) and opportunistic fungal infection in AIDS",
-   "Parasitic infection (toxoplasmosis)",
-   "Pneumocystis jirovecii",
-   "Tertiary syphilis"
-  ],
-  "nonInfectiousMimics": [
-   "Lymphocytic and granulomatous hypophysitis",
-   "Sarcoidosis",
-   "Hemochromatosis",
-   "Histiocytosis X (Langerhans cell histiocytosis)",
-   "Amyloidosis",
-   "Checkpoint-inhibitor immunotherapy hypophysitis"
-  ],
-  "additionalInvestigations": [
-   "Low target-organ hormone with low or inappropriately normal trophic hormone (e.g., low free thyroxine with low/inappropriately normal TSH = secondary hypothyroidism; low testosterone without elevated gonadotropins = hypogonadotropic hypogonadism)",
-   "Dynamic/provocative testing of pituitary reserve",
-   "GH reserve: insulin-induced hypoglycemia, arginine, glucagon, l-dopa, GHRH, or macimorelin; AGHD defined by peak GH response to hypoglycemia <3 ug/L",
-   "ACTH/cortisol reserve: most reliably assessed during insulin-induced hypoglycemia; CRH stimulation and cosyntropin (synthetic ACTH) testing also used",
-   "Pituitary MRI or CT to identify mass, hemorrhage, stalk deviation, or empty sella; age-matched IGF-1 as an index of GH therapeutic response"
-  ],
-  "redFlags": [
-   "Pituitary apoplexy: an endocrine emergency that may cause severe hypoglycemia, hypotension/shock, CNS hemorrhage, and death; severe ophthalmoplegia or progressive visual loss indicates need for urgent surgical decompression",
-   "Secondary adrenal insufficiency / adrenal crisis: hypocortisolism that can precipitate life-threatening shock, especially during stress, illness, surgery, or trauma",
-   "Acute severe headache with meningeal signs, bilateral visual changes, or loss of consciousness in a patient with known/suspected pituitary mass"
-  ],
-  "prognosis": "Hormone replacement is usually safe and effective at maintaining homeostasis when it mimics physiologic secretion. However, long-standing pituitary damage carries an increased mortality rate, primarily from cardiovascular and cerebrovascular disease; adult hypopituitarism is associated with an approximately threefold increase in cardiovascular mortality versus age- and sex-matched controls. Prior head/neck irradiation is an additional determinant of increased mortality, especially from cerebrovascular disease. Lymphocytic hypophysitis may resolve with recovery of pituitary function after glucocorticoid treatment depending on extent of damage; hypopituitarism is common after apoplexy (Harrison 22e p.2996).",
-  "pitfalls": [
-   "Critical sequencing pitfall: in suspected combined deficiency, glucocorticoid replacement must be started BEFORE thyroid hormone, because giving thyroxine first can accelerate cortisol clearance and precipitate an adrenal crisis in a patient with unrecognized secondary adrenal insufficiency (Harrison 22e p.3133).",
-   "Insulin-induced hypoglycemia testing must be performed cautiously in suspected adrenal insufficiency (enhanced susceptibility to hypoglycemia/hypotension) and is contraindicated in active coronary artery disease or known seizure disorders (Harrison 22e p.2996).",
-   "Lymphocytic hypophysitis may be radiologically indistinguishable from a pituitary adenoma and should be considered in a postpartum woman with a new pituitary mass before surgery is undertaken (Harrison 22e p.2993).",
-   "Radiation-induced and brain-injury-related hypopituitarism develops insidiously over 5-15 years (and in 25-40% after brain injury), so long-term periodic endocrine follow-up is required even after apparently successful treatment (Harrison 22e p.2993).",
-   "Empty sella patients usually have normal pituitary function, but hypopituitarism may develop insidiously (Harrison 22e p.2994)."
-  ],
-  "severityClassification": "",
-  "references": [
-   "Harrison 22e p.2992",
-   "Harrison 22e p.2993",
-   "Harrison 22e p.2996",
-   "Harrison 22e p.3133"
-  ],
-  "crossLinks": [
-   "adrenal_crisis"
-  ],
-  "management": [
-   "Replace deficient anterior pituitary axes physiologically: glucocorticoid (hydrocortisone) for ACTH deficiency, levothyroxine for TSH deficiency, sex steroids for gonadotropin deficiency, and somatropin for growth hormone deficiency",
-   "Always begin glucocorticoid replacement before levothyroxine to avoid precipitating an adrenal crisis",
-   "Add desmopressin where posterior pituitary AVP deficiency produces cranial diabetes insipidus",
-   "Educate on sick-day glucocorticoid escalation and provide a steroid emergency card plus parenteral hydrocortisone for intercurrent illness, trauma or surgery",
-   "Treat pituitary apoplexy as an emergency with immediate parenteral glucocorticoid and urgent visual, neurosurgical and ophthalmological assessment for possible decompression",
-   "Monitor replacement with target-organ measures (free thyroxine, age-matched IGF-1, morning cortisol, sex steroids) and undertake serial pituitary imaging to track the underlying cause",
-   "Offer gonadotropin therapy for fertility when conception is desired, and refer to endocrinology with neurosurgery for compressive tumour"
-  ]
- },
- "algorithms": [
-  {
-   "id": "hypopituitarism-pathway",
-   "title": "Hypopituitarism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Deficient production of one or more anterior pituitary trophic hormones produces the clinical features of hypopituitarism; most adult cases are acquired (Harrison 22e p.2992).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Pituitary apoplexy: an endocrine emergency that may cause severe hypoglycemia, hypotension/shock, CNS hemorrhage, and death; severe ophthalmoplegia or progressive visual loss indicates need for urgent",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Low target-organ hormone with low or inappropriately normal trophic hormone (e.g., low free thyroxine with low/inappropriately normal TSH = secondary hypothyroidism; low testosterone without elevated gonadotropins ="
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replace deficient anterior pituitary axes physiologically: glucocorticoid (hydrocortisone) for ACTH deficiency, levothyroxine for TSH deficiency, sex steroids for gonadotropin deficiency, and somatropin for growth"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Critical sequencing pitfall: in suspected combined deficiency, glucocorticoid replacement must be started BEFORE thyroid hormone, because giving thyroxine first can accelerate cortisol clearance and precipitate an"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypopituitarism."
-  }
- ],
- "tables": [
-  {
-   "id": "hypopituitarism-matrix",
-   "title": "Hypopituitarism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Deficient production of one or more anterior pituitary trophic hormones produces the clinical features of hypopituitarism; most",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2992",
+    "clinicalPearls": [
+      "Deficient production of one or more anterior pituitary trophic hormones produces the clinical features of hypopituitarism; most adult cases are acquired (Harrison 22e p.2992).",
+      "With pituitary compression or destruction, trophic hormone failure usually occurs sequentially: GH first, then FSH, LH, TSH, and ACTH last; in children growth retardation is often the presenting feature, in adults hypogonadism is the earliest symptom (Harrison 22e p.2992).",
+      "Clinical manifestations depend on which hormones are lost and the degree of deficiency: GH deficiency causes growth disorders in children and abnormal body composition in adults; gonadotropin deficiency causes menstrual disorders/infertility/loss of secondary sexual characteristics; TSH deficiency causes hypothyroidism; ACTH deficiency causes secondary adrenal insufficiency; PRL deficiency causes failure of lactation (Harrison 22e p.2996).",
+      "Secondary adrenal insufficiency from ACTH deficiency causes hypocortisolism with relative preservation of mineralocorticoid production (unlike primary adrenal failure) (Harrison 22e p.2996).",
+      "Pituitary apoplexy is an endocrine emergency: acute intrapituitary hemorrhage/infarction presenting with severe headache, meningeal signs, bilateral visual changes, ophthalmoplegia, and in severe cases cardiovascular collapse and loss of consciousness (Harrison 22e p.2993).",
+      "Lymphocytic hypophysitis occurs most often in postpartum women, presents with hyperprolactinemia and an MRI mass resembling an adenoma, and may be transient or permanent; it should be considered before unnecessary surgery in a postpartum woman with a new pituitary mass (Harrison 22e p.2993).",
+      "Up to 20% of patients receiving CTLA-4 inhibitor immunotherapy (e.g., ipilimumab) develop hypophysitis; PD-1/PD-L1 inhibitors (pembrolizumab, nivolumab) can also cause it, sometimes with delayed presentation (Harrison 22e p.2993).",
+      "Patients on glucocorticoid replacement require careful dose escalation (stress dosing) during acute illness, dental procedures, trauma, and hospitalization (Harrison 22e p.2996)."
     ],
-    [
-     "Key Investigations",
-     "Low target-organ hormone with low or inappropriately normal trophic hormone (e.g., low free thyroxine with low/inappropriately",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Impaired synthesis or secretion of one or more anterior pituitary trophic hormones (GH, FSH, LH, TSH, ACTH, PRL), and sometimes posterior pituitary AVP. Causes are developmental/genetic (transcription factor mutations such as PROP1, PIT-1, TPIT, midline defects) or, more commonly in adults, acquired from compressive mass effect of tumors or from local pituitary/hypothalamic traumatic, autoimmune, inflammatory, infiltrative, or vascular damage. The same processes may impair hypothalamic hormone production with secondary pituitary failure. With progressive compression/destruction, hormone loss is typically sequential (GH > FSH > LH > TSH > ACTH) (Harrison 22e p.2992).",
+    "additionalDifferentials": [
+      "Pituitary adenoma (mass on MRI may be indistinguishable from lymphocytic hypophysitis)",
+      "Craniopharyngioma, Rathke's cyst, meningioma, germinoma, glioma, ependymoma",
+      "Pituitary metastases (breast, lung, colon) and lymphoma/leukemia",
+      "Empty sella syndrome",
+      "Primary (target-organ) endocrine failure as opposed to central deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Pituitary adenoma (mass on MRI may be indistinguishable from lymphocytic hypophysitis), Craniopharyngioma, Rathke's cyst,",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Tuberculosis involving the pituitary/hypothalamus",
+      "Fungal infection (histoplasmosis) and opportunistic fungal infection in AIDS",
+      "Parasitic infection (toxoplasmosis)",
+      "Pneumocystis jirovecii",
+      "Tertiary syphilis"
     ],
-    [
-     "Management Strategy",
-     "Replace deficient anterior pituitary axes physiologically: glucocorticoid (hydrocortisone) for ACTH deficiency, levothyroxine for",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Lymphocytic and granulomatous hypophysitis",
+      "Sarcoidosis",
+      "Hemochromatosis",
+      "Histiocytosis X (Langerhans cell histiocytosis)",
+      "Amyloidosis",
+      "Checkpoint-inhibitor immunotherapy hypophysitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Critical sequencing pitfall: in suspected combined deficiency, glucocorticoid replacement must be started BEFORE thyroid hormone,",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Low target-organ hormone with low or inappropriately normal trophic hormone (e.g., low free thyroxine with low/inappropriately normal TSH = secondary hypothyroidism; low testosterone without elevated gonadotropins = hypogonadotropic hypogonadism)",
+      "Dynamic/provocative testing of pituitary reserve",
+      "GH reserve: insulin-induced hypoglycemia, arginine, glucagon, l-dopa, GHRH, or macimorelin; AGHD defined by peak GH response to hypoglycemia <3 ug/L",
+      "ACTH/cortisol reserve: most reliably assessed during insulin-induced hypoglycemia; CRH stimulation and cosyntropin (synthetic ACTH) testing also used",
+      "Pituitary MRI or CT to identify mass, hemorrhage, stalk deviation, or empty sella; age-matched IGF-1 as an index of GH therapeutic response"
+    ],
+    "redFlags": [
+      "Pituitary apoplexy: an endocrine emergency that may cause severe hypoglycemia, hypotension/shock, CNS hemorrhage, and death; severe ophthalmoplegia or progressive visual loss indicates need for urgent surgical decompression",
+      "Secondary adrenal insufficiency / adrenal crisis: hypocortisolism that can precipitate life-threatening shock, especially during stress, illness, surgery, or trauma",
+      "Acute severe headache with meningeal signs, bilateral visual changes, or loss of consciousness in a patient with known/suspected pituitary mass"
+    ],
+    "prognosis": "Hormone replacement is usually safe and effective at maintaining homeostasis when it mimics physiologic secretion. However, long-standing pituitary damage carries an increased mortality rate, primarily from cardiovascular and cerebrovascular disease; adult hypopituitarism is associated with an approximately threefold increase in cardiovascular mortality versus age- and sex-matched controls. Prior head/neck irradiation is an additional determinant of increased mortality, especially from cerebrovascular disease. Lymphocytic hypophysitis may resolve with recovery of pituitary function after glucocorticoid treatment depending on extent of damage; hypopituitarism is common after apoplexy (Harrison 22e p.2996).",
+    "pitfalls": [
+      "Critical sequencing pitfall: in suspected combined deficiency, glucocorticoid replacement must be started BEFORE thyroid hormone, because giving thyroxine first can accelerate cortisol clearance and precipitate an adrenal crisis in a patient with unrecognized secondary adrenal insufficiency (Harrison 22e p.3133).",
+      "Insulin-induced hypoglycemia testing must be performed cautiously in suspected adrenal insufficiency (enhanced susceptibility to hypoglycemia/hypotension) and is contraindicated in active coronary artery disease or known seizure disorders (Harrison 22e p.2996).",
+      "Lymphocytic hypophysitis may be radiologically indistinguishable from a pituitary adenoma and should be considered in a postpartum woman with a new pituitary mass before surgery is undertaken (Harrison 22e p.2993).",
+      "Radiation-induced and brain-injury-related hypopituitarism develops insidiously over 5-15 years (and in 25-40% after brain injury), so long-term periodic endocrine follow-up is required even after apparently successful treatment (Harrison 22e p.2993).",
+      "Empty sella patients usually have normal pituitary function, but hypopituitarism may develop insidiously (Harrison 22e p.2994)."
+    ],
+    "severityClassification": "",
+    "references": [
+      "Harrison 22e p.2992",
+      "Harrison 22e p.2993",
+      "Harrison 22e p.2996",
+      "Harrison 22e p.3133"
+    ],
+    "crossLinks": [
+      "adrenal_crisis"
+    ],
+    "management": [
+      "Replace deficient anterior pituitary axes physiologically: glucocorticoid (hydrocortisone) for ACTH deficiency, levothyroxine for TSH deficiency, sex steroids for gonadotropin deficiency, and somatropin for growth hormone deficiency",
+      "Always begin glucocorticoid replacement before levothyroxine to avoid precipitating an adrenal crisis",
+      "Add desmopressin where posterior pituitary AVP deficiency produces cranial diabetes insipidus",
+      "Educate on sick-day glucocorticoid escalation and provide a steroid emergency card plus parenteral hydrocortisone for intercurrent illness, trauma or surgery",
+      "Treat pituitary apoplexy as an emergency with immediate parenteral glucocorticoid and urgent visual, neurosurgical and ophthalmological assessment for possible decompression",
+      "Monitor replacement with target-organ measures (free thyroxine, age-matched IGF-1, morning cortisol, sex steroids) and undertake serial pituitary imaging to track the underlying cause",
+      "Offer gonadotropin therapy for fertility when conception is desired, and refer to endocrinology with neurosurgery for compressive tumour"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypopituitarism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypopituitarism-real-image",
-   "title": "Hypopituitarism: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "hypopituitarism-pathway",
+      "title": "Hypopituitarism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Deficient production of one or more anterior pituitary trophic hormones produces the clinical features of hypopituitarism; most adult cases are acquired (Harrison 22e p.2992).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Pituitary apoplexy: an endocrine emergency that may cause severe hypoglycemia, hypotension/shock, CNS hemorrhage, and death; severe ophthalmoplegia or progressive visual loss indicates need for urgent",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Low target-organ hormone with low or inappropriately normal trophic hormone (e.g., low free thyroxine with low/inappropriately normal TSH = secondary hypothyroidism; low testosterone without elevated gonadotropins ="
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replace deficient anterior pituitary axes physiologically: glucocorticoid (hydrocortisone) for ACTH deficiency, levothyroxine for TSH deficiency, sex steroids for gonadotropin deficiency, and somatropin for growth"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Critical sequencing pitfall: in suspected combined deficiency, glucocorticoid replacement must be started BEFORE thyroid hormone, because giving thyroxine first can accelerate cortisol clearance and precipitate an"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypopituitarism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypopituitarism-matrix",
+      "title": "Hypopituitarism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Deficient production of one or more anterior pituitary trophic hormones produces the clinical features of hypopituitarism; most",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Low target-organ hormone with low or inappropriately normal trophic hormone (e.g., low free thyroxine with low/inappropriately",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pituitary adenoma (mass on MRI may be indistinguishable from lymphocytic hypophysitis), Craniopharyngioma, Rathke's cyst,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replace deficient anterior pituitary axes physiologically: glucocorticoid (hydrocortisone) for ACTH deficiency, levothyroxine for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Critical sequencing pitfall: in suspected combined deficiency, glucocorticoid replacement must be started BEFORE thyroid hormone,",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypopituitarism."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Generalized Hypopituitarism",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/generalized-hypopituitarism"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypopituitarism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Testing pituitary reserve",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Morning cortisol (7:30 to 9:00)",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Below 3.5 mcg/dL (96.6 nmol/L)",
+              "op": "<",
+              "value": 3.5
+            },
+            {
+              "text": "Strongly suggests cortisol deficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Morning cortisol, exclusion",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Above 18 mcg/dL polyclonal, or above 15 mcg/dL monoclonal or LC-MS/MS",
+              "op": ">",
+              "value": 18
+            },
+            {
+              "text": "Excludes adrenal insufficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Short ACTH (cosyntropin) test peak",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Below 18 mcg/dL (500 nmol/L) polyclonal is abnormal",
+              "op": "<",
+              "value": 18
+            },
+            {
+              "text": "{{hy:Falsely normal in the first 2 to 4 weeks of secondary deficiency}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Insulin tolerance test",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Cortisol rise above 7 mcg/dL or to above 18 mcg/dL when glucose below 40 mg/dL",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Contraindicated in coronary disease or epilepsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Central hypothyroidism",
+          "cells": [
+            {
+              "text": "Low free T4 with low or normal TSH"
+            },
+            {
+              "text": "TSH alone misses it"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypogonadotropic hypogonadism",
+          "cells": [
+            {
+              "text": "Low sex steroid without raised LH or FSH"
+            },
+            {
+              "text": "Postmenopausal LH and FSH should be above 30 IU/L"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adult GH deficiency",
+          "unit": "ug/L",
+          "cells": [
+            {
+              "text": "Peak GH below 3 ug/L on insulin hypoglycaemia",
+              "op": "<",
+              "value": 3
+            },
+            {
+              "text": "Near-certain with 3 or more other deficiencies plus low IGF-1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Up to 5 times normal from stalk compression",
+              "op": "<=",
+              "value": 5
+            },
+            {
+              "text": "Does not prove a prolactinoma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Mass, haemorrhage, stalk lesion or empty sella"
+            },
+            {
+              "text": "Lymphocytic hypophysitis can look like adenoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypopituitarism-ddx",
+      "kind": "ddx",
+      "title": "Causes and look-alikes of hypopituitarism",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary target-organ failure",
+          "cells": [
+            {
+              "text": "Trophic hormone high, not low"
+            },
+            {
+              "text": "TSH, LH and FSH, ACTH levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary adenoma",
+          "cells": [
+            {
+              "text": "Mass effect, gradual axis loss"
+            },
+            {
+              "text": "MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary apoplexy",
+          "cells": [
+            {
+              "text": "Sudden headache, visual loss, ophthalmoplegia"
+            },
+            {
+              "text": "Urgent MRI or CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sheehan syndrome",
+          "cells": [
+            {
+              "text": "Peripartum shock, failure of lactation"
+            },
+            {
+              "text": "Obstetric history plus axis tests"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphocytic hypophysitis",
+          "cells": [
+            {
+              "text": "Postpartum woman, high prolactin, new mass"
+            },
+            {
+              "text": "MRI and clinical context before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Checkpoint inhibitor hypophysitis",
+          "cells": [
+            {
+              "text": "Up to 20% on CTLA-4 inhibitors"
+            },
+            {
+              "text": "ACTH and cortisol, MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infiltrative disease (sarcoidosis, haemochromatosis, LCH)",
+          "cells": [
+            {
+              "text": "Systemic features, often diabetes insipidus"
+            },
+            {
+              "text": "Systemic work-up and MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypopituitarism-treatment",
+      "kind": "treatment",
+      "title": "Treating hypopituitarism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydrocortisone",
+          "cells": [
+            {
+              "text": "ACTH deficiency"
+            },
+            {
+              "text": "{{hy:Start before levothyroxine to avoid adrenal crisis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day rules and emergency hydrocortisone",
+          "cells": [
+            {
+              "text": "All on glucocorticoid replacement"
+            },
+            {
+              "text": "Escalate for illness, surgery, trauma, dental work"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "TSH deficiency"
+            },
+            {
+              "text": "Titrate to free T4, not TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex steroids",
+          "cells": [
+            {
+              "text": "Gonadotropin deficiency without fertility wish"
+            },
+            {
+              "text": "Gonadotropins when fertility desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": "Confirmed adult GH deficiency"
+            },
+            {
+              "text": "Start 0.3 mg SC daily in women, 0.2 mg in men, 0.1 mg in older people; titrate to mid-normal IGF-1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "AVP deficiency (diabetes insipidus)"
+            },
+            {
+              "text": "Posterior pituitary involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apoplexy decompression",
+          "cells": [
+            {
+              "text": "Sudden visual loss, oculomotor palsy or falling consciousness"
+            },
+            {
+              "text": "Transsphenoidal surgery plus high-dose glucocorticoid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-radiation surveillance",
+          "cells": [
+            {
+              "text": "After pituitary or cranial radiotherapy"
+            },
+            {
+              "text": "Hormones at 3 and 6 months, then yearly for at least 10 years"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypopituitarism-dx-mgmt",
+      "title": "Diagnosis and management of hypopituitarism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fatigue, hypogonadism, low sodium, pituitary mass or apoplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden headache, visual loss or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Apoplexy: IV hydrocortisone, urgent imaging, surgical review",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Test ACTH and TSH axes first: 8 am cortisol, free T4, TSH",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Morning cortisol equivocal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Short ACTH or insulin tolerance test",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Check LH, FSH, sex steroid, prolactin, IGF-1",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pituitary MRI to find the cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace hydrocortisone first, then levothyroxine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Add sex steroids, GH and desmopressin as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sick-day education and lifelong axis follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

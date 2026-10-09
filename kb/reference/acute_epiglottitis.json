@@ -1,174 +1,445 @@
 {
- "id": "acute_epiglottitis",
- "name": "Acute Epiglottitis",
- "aliases": [
-  "epiglottitis",
-  "supraglottitis",
-  "acute supraglottitis"
- ],
- "class": "infective",
- "system": "Respiratory",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A rapidly progressive, life-threatening bacterial infection of the epiglottis and supraglottic structures that can cause sudden complete airway obstruction.",
-   "Historically caused by Haemophilus influenzae type b; its incidence has fallen dramatically since Hib immunisation, so other organisms and unimmunised children now feature prominently.",
-   "Classic presentation is abrupt onset of high fever, severe sore throat, drooling, muffled 'hot potato' voice, and difficulty swallowing, usually without the barking cough of croup.",
-   "The child characteristically sits upright in a tripod position, leaning forward with the neck extended to maximise the airway.",
-   "This is an airway emergency: keep the child calm, avoid distressing procedures such as throat examination or venepuncture, and do not lay the child flat.",
-   "Definitive airway management is secured in a controlled setting, ideally the operating theatre with experienced anaesthetic and ENT support, before other interventions.",
-   "Once the airway is secure, broad-spectrum intravenous antibiotics targeting likely pathogens are given.",
-   "A lateral neck radiograph may show the classic 'thumbprint' sign, but imaging must never delay airway management and is unnecessary in an unstable child.",
-   "Direct visualisation of a cherry-red swollen epiglottis confirms the diagnosis but should only be performed where the airway can be immediately secured."
+  "id": "acute_epiglottitis",
+  "name": "Acute Epiglottitis",
+  "aliases": [
+    "epiglottitis",
+    "supraglottitis",
+    "acute supraglottitis"
   ],
-  "pathophysiology": "Bacterial invasion of the supraglottic tissues produces intense inflammation and oedema of the epiglottis, aryepiglottic folds, and surrounding structures. Because these tissues sit at the laryngeal inlet, swelling rapidly narrows the airway, and the loose submucosa allows oedema to accumulate quickly. Progressive obstruction, worsened by agitation and secretions, can culminate in acute total airway occlusion.",
-  "additionalDifferentials": [
-   "Croup (laryngotracheobronchitis)",
-   "Bacterial tracheitis",
-   "Retropharyngeal or peritonsillar abscess",
-   "Foreign body aspiration",
-   "Anaphylaxis with airway angioedema",
-   "Diphtheria (in unimmunised populations)"
-  ],
-  "additionalInvestigations": [
-   "Direct laryngoscopy under controlled conditions to confirm the diagnosis and secure the airway",
-   "Blood cultures and epiglottic surface cultures after the airway is protected",
-   "Lateral neck radiograph only if the child is stable and it will not delay care",
-   "Full blood count and inflammatory markers once safe to obtain",
-   "Hib and other relevant serological or PCR testing where indicated"
-  ],
-  "redFlags": [
-   "Stridor, drooling, and respiratory distress indicating imminent obstruction",
-   "Tripod positioning and refusal to lie flat",
-   "Cyanosis, exhaustion, or decreasing level of consciousness",
-   "Muffled voice with inability to swallow secretions",
-   "Rapid clinical deterioration"
-  ],
-  "prognosis": "With prompt airway control and antibiotics, recovery is usually rapid and complete; outcomes are poor if the airway obstructs before it is secured, making early recognition critical.",
-  "pitfalls": [
-   "Examining the throat or performing painful procedures that can precipitate obstruction",
-   "Laying the child supine or forcing separation from a caregiver",
-   "Delaying airway management to obtain imaging or bloods",
-   "Assuming the diagnosis is excluded in an immunised child, since non-Hib causes still occur"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Airway takes priority: keep the child calm and upright, avoid distressing procedures, and secure the airway in a controlled setting such as theatre with senior anaesthetic and ENT support",
-   "Prepare for intubation with immediate readiness for an emergency surgical airway (cricothyroidotomy or tracheostomy) should obstruction occur",
-   "Empirical intravenous antibiotics, typically a third-generation cephalosporin such as ceftriaxone or cefotaxime, after the airway is protected",
-   "Supplemental oxygen and supportive care, with blood and epiglottic surface cultures once the airway is secured",
-   "Consideration of corticosteroids as an adjunct to reduce supraglottic oedema",
-   "Rifampicin prophylaxis for close contacts where Haemophilus influenzae type b is confirmed",
-   "Intensive care monitoring, confirmation of immunisation status and public health notification"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_epiglottitis-pathway",
-   "title": "Acute Epiglottitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rapidly progressive, life-threatening bacterial infection of the epiglottis and supraglottic structures that can cause sudden complete airway obstruction.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Stridor, drooling, and respiratory distress indicating imminent obstruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Direct laryngoscopy under controlled conditions to confirm the diagnosis and secure the airway, Blood cultures and epiglottic surface cultures after the airway is protected, Lateral neck radiograph only if the child is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Airway takes priority: keep the child calm and upright, avoid distressing procedures, and secure the airway in a controlled setting such as theatre with senior anaesthetic and ENT support"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Examining the throat or performing painful procedures that can precipitate obstruction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute epiglottitis."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_epiglottitis-matrix",
-   "title": "Acute Epiglottitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rapidly progressive, life-threatening bacterial infection of the epiglottis and supraglottic structures that can cause sudden",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Respiratory",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A rapidly progressive, life-threatening bacterial infection of the epiglottis and supraglottic structures that can cause sudden complete airway obstruction.",
+      "Historically caused by Haemophilus influenzae type b; its incidence has fallen dramatically since Hib immunisation, so other organisms and unimmunised children now feature prominently.",
+      "Classic presentation is abrupt onset of high fever, severe sore throat, drooling, muffled 'hot potato' voice, and difficulty swallowing, usually without the barking cough of croup.",
+      "The child characteristically sits upright in a tripod position, leaning forward with the neck extended to maximise the airway.",
+      "This is an airway emergency: keep the child calm, avoid distressing procedures such as throat examination or venepuncture, and do not lay the child flat.",
+      "Definitive airway management is secured in a controlled setting, ideally the operating theatre with experienced anaesthetic and ENT support, before other interventions.",
+      "Once the airway is secure, broad-spectrum intravenous antibiotics targeting likely pathogens are given.",
+      "A lateral neck radiograph may show the classic 'thumbprint' sign, but imaging must never delay airway management and is unnecessary in an unstable child.",
+      "Direct visualisation of a cherry-red swollen epiglottis confirms the diagnosis but should only be performed where the airway can be immediately secured."
     ],
-    [
-     "Key Investigations",
-     "Direct laryngoscopy under controlled conditions to confirm the diagnosis and secure the airway, Blood cultures and epiglottic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bacterial invasion of the supraglottic tissues produces intense inflammation and oedema of the epiglottis, aryepiglottic folds, and surrounding structures. Because these tissues sit at the laryngeal inlet, swelling rapidly narrows the airway, and the loose submucosa allows oedema to accumulate quickly. Progressive obstruction, worsened by agitation and secretions, can culminate in acute total airway occlusion.",
+    "additionalDifferentials": [
+      "Croup (laryngotracheobronchitis)",
+      "Bacterial tracheitis",
+      "Retropharyngeal or peritonsillar abscess",
+      "Foreign body aspiration",
+      "Anaphylaxis with airway angioedema",
+      "Diphtheria (in unimmunised populations)"
     ],
-    [
-     "Primary Differentials",
-     "Croup (laryngotracheobronchitis), Bacterial tracheitis, Retropharyngeal or peritonsillar abscess",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Direct laryngoscopy under controlled conditions to confirm the diagnosis and secure the airway",
+      "Blood cultures and epiglottic surface cultures after the airway is protected",
+      "Lateral neck radiograph only if the child is stable and it will not delay care",
+      "Full blood count and inflammatory markers once safe to obtain",
+      "Hib and other relevant serological or PCR testing where indicated"
     ],
-    [
-     "Management Strategy",
-     "Airway takes priority: keep the child calm and upright, avoid distressing procedures, and secure the airway in a controlled",
-     "Core treatment modality"
+    "redFlags": [
+      "Stridor, drooling, and respiratory distress indicating imminent obstruction",
+      "Tripod positioning and refusal to lie flat",
+      "Cyanosis, exhaustion, or decreasing level of consciousness",
+      "Muffled voice with inability to swallow secretions",
+      "Rapid clinical deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Examining the throat or performing painful procedures that can precipitate obstruction",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt airway control and antibiotics, recovery is usually rapid and complete; outcomes are poor if the airway obstructs before it is secured, making early recognition critical.",
+    "pitfalls": [
+      "Examining the throat or performing painful procedures that can precipitate obstruction",
+      "Laying the child supine or forcing separation from a caregiver",
+      "Delaying airway management to obtain imaging or bloods",
+      "Assuming the diagnosis is excluded in an immunised child, since non-Hib causes still occur"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Airway takes priority: keep the child calm and upright, avoid distressing procedures, and secure the airway in a controlled setting such as theatre with senior anaesthetic and ENT support",
+      "Prepare for intubation with immediate readiness for an emergency surgical airway (cricothyroidotomy or tracheostomy) should obstruction occur",
+      "Empirical intravenous antibiotics, typically a third-generation cephalosporin such as ceftriaxone or cefotaxime, after the airway is protected",
+      "Supplemental oxygen and supportive care, with blood and epiglottic surface cultures once the airway is secured",
+      "Consideration of corticosteroids as an adjunct to reduce supraglottic oedema",
+      "Rifampicin prophylaxis for close contacts where Haemophilus influenzae type b is confirmed",
+      "Intensive care monitoring, confirmation of immunisation status and public health notification"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute epiglottitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-epiglottitis-real-image",
-   "title": "Acute Epiglottitis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "acute_epiglottitis-pathway",
+      "title": "Acute Epiglottitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rapidly progressive, life-threatening bacterial infection of the epiglottis and supraglottic structures that can cause sudden complete airway obstruction.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Stridor, drooling, and respiratory distress indicating imminent obstruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Direct laryngoscopy under controlled conditions to confirm the diagnosis and secure the airway, Blood cultures and epiglottic surface cultures after the airway is protected, Lateral neck radiograph only if the child is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Airway takes priority: keep the child calm and upright, avoid distressing procedures, and secure the airway in a controlled setting such as theatre with senior anaesthetic and ENT support"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Examining the throat or performing painful procedures that can precipitate obstruction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute epiglottitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_epiglottitis-matrix",
+      "title": "Acute Epiglottitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rapidly progressive, life-threatening bacterial infection of the epiglottis and supraglottic structures that can cause sudden",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Direct laryngoscopy under controlled conditions to confirm the diagnosis and secure the airway, Blood cultures and epiglottic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Croup (laryngotracheobronchitis), Bacterial tracheitis, Retropharyngeal or peritonsillar abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Airway takes priority: keep the child calm and upright, avoid distressing procedures, and secure the airway in a controlled",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Examining the throat or performing painful procedures that can precipitate obstruction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute epiglottitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_epiglottitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Direct laryngoscopy under controlled conditions",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and secures the airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and epiglottic surface cultures",
+          "cells": [
+            {
+              "text": "Organism, once the airway is protected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral neck radiograph",
+          "cells": [
+            {
+              "text": "Only if stable and it does not delay care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Inflammatory response once safe to obtain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophilus influenzae type b serology or PCR",
+          "cells": [
+            {
+              "text": "Hib infection where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_epiglottitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway priority: keep calm and upright; secure in a controlled setting",
+          "cells": [
+            {
+              "text": "Life-threatening obstruction"
+            },
+            {
+              "text": "Theatre with senior anaesthetic and ENT support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency airway readiness (cricothyroidotomy or tracheostomy)",
+          "cells": [
+            {
+              "text": "If obstruction occurs"
+            },
+            {
+              "text": "Prepare for intubation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV third-generation cephalosporin (ceftriaxone or cefotaxime)",
+          "cells": [
+            {
+              "text": "Empirical antibiotics after the airway is protected"
+            },
+            {
+              "text": "Given after airway control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and supportive care",
+          "cells": [
+            {
+              "text": "Supports the child"
+            },
+            {
+              "text": "Cultures once airway secured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids as an adjunct",
+          "cells": [
+            {
+              "text": "Reduces supraglottic oedema"
+            },
+            {
+              "text": "Adjunct only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rifampicin prophylaxis for close contacts",
+          "cells": [
+            {
+              "text": "Where Haemophilus influenzae type b is confirmed"
+            },
+            {
+              "text": "Close contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care monitoring and public health notification",
+          "cells": [
+            {
+              "text": "Ongoing care"
+            },
+            {
+              "text": "Confirm immunisation status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_epiglottitis-dx-mgmt",
+      "title": "Diagnosis and management of Acute Epiglottitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden high fever, sore throat, drooling and muffled voice in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stridor, tripod position or rising respiratory distress?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Secure the airway in theatre with senior anaesthetic and ENT support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Keep calm and upright; avoid throat examination until airway is secure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Epiglottitis confirmed on direct laryngoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cultures and IV third-generation cephalosporin after airway control",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review croup, tracheitis, abscess and foreign body",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids as adjunct to reduce supraglottic oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rifampicin prophylaxis for close contacts if Hib is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intensive care monitoring and public health notification",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rapid, complete recovery with prompt airway control; poor if obstructed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

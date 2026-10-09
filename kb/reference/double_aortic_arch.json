@@ -1,177 +1,475 @@
 {
- "id": "double_aortic_arch",
- "name": "double aortic arch",
- "aliases": [
-  "complete vascular ring",
-  "double arch"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Paediatric cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common complete vascular ring, in which both the right and left aortic arches persist and encircle the trachea and oesophagus.",
-   "The right (posterior) arch is dominant in the majority of cases, with the left arch smaller and occasionally atretic.",
-   "Symptoms arise from tracheo-oesophageal compression, including biphasic or expiratory stridor, a barking cough, recurrent respiratory infection and feeding difficulty with dysphagia.",
-   "Reflex apnoea or so-called dying spells, sometimes precipitated by feeding, can occur in infants.",
-   "CT or MR angiography defines the arch anatomy, the dominant arch and the airway compression, and is the mainstay of diagnosis.",
-   "A barium swallow classically shows bilateral indentations of the oesophagus with a prominent posterior compression.",
-   "Bronchoscopy demonstrates pulsatile external tracheal compression and helps assess associated tracheomalacia.",
-   "Treatment is surgical division of the ring, usually through division of the smaller (commonly left) arch, relieving the constriction around the airway and oesophagus."
+  "id": "double_aortic_arch",
+  "name": "double aortic arch",
+  "aliases": [
+    "complete vascular ring",
+    "double arch"
   ],
-  "pathophysiology": "A double aortic arch reflects failure of normal regression within the embryonic aortic arch system. Normally the right fourth arch and dorsal aorta regress distal to the right subclavian origin to leave a single left arch, but when both arches persist the ascending aorta divides into two limbs that pass on either side of the trachea and oesophagus and rejoin posteriorly to form the descending aorta. The two arches, together with the ligamentum arteriosum, create a complete ring that mechanically constricts the enclosed airway and oesophagus, and chronic pulsatile compression frequently produces secondary tracheomalacia.",
-  "additionalDifferentials": [
-   "Right aortic arch with aberrant left subclavian artery and a left ligamentum (another complete ring)",
-   "Pulmonary artery sling",
-   "Innominate artery compression syndrome",
-   "Laryngomalacia or primary tracheomalacia",
-   "Viral croup or recurrent bronchiolitis",
-   "Gastro-oesophageal reflux with aspiration",
-   "Mediastinal mass or lymphadenopathy"
-  ],
-  "additionalInvestigations": [
-   "CT angiography of the thorax",
-   "MR angiography as a radiation-free alternative",
-   "Transthoracic echocardiography for screening and associated cardiac lesions",
-   "Contrast oesophagogram (barium swallow)",
-   "Flexible or rigid bronchoscopy to assess airway compression and malacia",
-   "Chest radiograph noting the side of the aortic arch and tracheal deviation",
-   "Genetic testing including 22q11.2 microdeletion where indicated"
-  ],
-  "redFlags": [
-   "Acute life-threatening events or reflex apnoea during feeds",
-   "Severe stridor with respiratory distress or cyanosis",
-   "Failure to thrive from feeding-related airway compromise",
-   "Recurrent pneumonia suggesting significant airway obstruction"
-  ],
-  "prognosis": "Surgical division is curative with low operative mortality and excellent long-term outcomes, although residual tracheomalacia may cause symptoms that resolve gradually over months to years.",
-  "pitfalls": [
-   "Prolonged misdiagnosis as asthma, croup or reflux, delaying definitive imaging.",
-   "Relying on echocardiography alone, which may not fully delineate the ring or the airway.",
-   "Underestimating persistent tracheomalacia after division and expecting immediate symptom resolution.",
-   "Dividing the dominant rather than the smaller arch, compromising systemic perfusion.",
-   "Failing to identify an atretic segment that alters the surgical approach."
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical division of the vascular ring, dividing the non-dominant (usually minor left) arch together with the ligamentum arteriosum to free the encircled trachea and oesophagus, is the definitive and curative treatment",
-   "Reserve early operation for infants with stridor, recurrent respiratory infection, feeding difficulty or apnoeic spells, while a truly asymptomatic incidental ring may be observed",
-   "Provide supportive care with humidified respiratory support, prompt treatment of intercurrent chest infections and modified, unhurried feeding for dysphagia",
-   "Anticipate and manage persistent tracheomalacia after repair, which may need prolonged positive-pressure support and typically improves gradually over months to years",
-   "Recognise and urgently relieve reflex apnoea or acute airway obstruction (dying spells), which mandates expedited surgical decompression",
-   "Use bronchoscopic assessment of airway compression and malacia to guide timing of surgery and predict post-operative airway behaviour",
-   "Coordinate care across paediatric cardiology, cardiothoracic surgery, ENT and paediatric anaesthesia, with echocardiographic screening for associated cardiac lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "double_aortic_arch-pathway",
-   "title": "double aortic arch: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common complete vascular ring, in which both the right and left aortic arches persist and encircle the trachea and oesophagus.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute life-threatening events or reflex apnoea during feeds",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT angiography of the thorax, MR angiography as a radiation-free alternative, Transthoracic echocardiography for screening and associated cardiac lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical division of the vascular ring, dividing the non-dominant (usually minor left) arch together with the ligamentum arteriosum to free the encircled trachea and oesophagus, is the definitive and curative treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prolonged misdiagnosis as asthma, croup or reflux, delaying definitive imaging."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of double aortic arch."
-  }
- ],
- "tables": [
-  {
-   "id": "double_aortic_arch-matrix",
-   "title": "double aortic arch: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common complete vascular ring, in which both the right and left aortic arches persist and encircle the trachea and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Paediatric cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common complete vascular ring, in which both the right and left aortic arches persist and encircle the trachea and oesophagus.",
+      "The right (posterior) arch is dominant in the majority of cases, with the left arch smaller and occasionally atretic.",
+      "Symptoms arise from tracheo-oesophageal compression, including biphasic or expiratory stridor, a barking cough, recurrent respiratory infection and feeding difficulty with dysphagia.",
+      "Reflex apnoea or so-called dying spells, sometimes precipitated by feeding, can occur in infants.",
+      "CT or MR angiography defines the arch anatomy, the dominant arch and the airway compression, and is the mainstay of diagnosis.",
+      "A barium swallow classically shows bilateral indentations of the oesophagus with a prominent posterior compression.",
+      "Bronchoscopy demonstrates pulsatile external tracheal compression and helps assess associated tracheomalacia.",
+      "Treatment is surgical division of the ring, usually through division of the smaller (commonly left) arch, relieving the constriction around the airway and oesophagus."
     ],
-    [
-     "Key Investigations",
-     "CT angiography of the thorax, MR angiography as a radiation-free alternative, Transthoracic echocardiography for screening and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A double aortic arch reflects failure of normal regression within the embryonic aortic arch system. Normally the right fourth arch and dorsal aorta regress distal to the right subclavian origin to leave a single left arch, but when both arches persist the ascending aorta divides into two limbs that pass on either side of the trachea and oesophagus and rejoin posteriorly to form the descending aorta. The two arches, together with the ligamentum arteriosum, create a complete ring that mechanically constricts the enclosed airway and oesophagus, and chronic pulsatile compression frequently produces secondary tracheomalacia.",
+    "additionalDifferentials": [
+      "Right aortic arch with aberrant left subclavian artery and a left ligamentum (another complete ring)",
+      "Pulmonary artery sling",
+      "Innominate artery compression syndrome",
+      "Laryngomalacia or primary tracheomalacia",
+      "Viral croup or recurrent bronchiolitis",
+      "Gastro-oesophageal reflux with aspiration",
+      "Mediastinal mass or lymphadenopathy"
     ],
-    [
-     "Primary Differentials",
-     "Right aortic arch with aberrant left subclavian artery and a left ligamentum (another complete ring), Pulmonary artery sling,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT angiography of the thorax",
+      "MR angiography as a radiation-free alternative",
+      "Transthoracic echocardiography for screening and associated cardiac lesions",
+      "Contrast oesophagogram (barium swallow)",
+      "Flexible or rigid bronchoscopy to assess airway compression and malacia",
+      "Chest radiograph noting the side of the aortic arch and tracheal deviation",
+      "Genetic testing including 22q11.2 microdeletion where indicated"
     ],
-    [
-     "Management Strategy",
-     "Surgical division of the vascular ring, dividing the non-dominant (usually minor left) arch together with the ligamentum",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute life-threatening events or reflex apnoea during feeds",
+      "Severe stridor with respiratory distress or cyanosis",
+      "Failure to thrive from feeding-related airway compromise",
+      "Recurrent pneumonia suggesting significant airway obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Prolonged misdiagnosis as asthma, croup or reflux, delaying definitive imaging.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical division is curative with low operative mortality and excellent long-term outcomes, although residual tracheomalacia may cause symptoms that resolve gradually over months to years.",
+    "pitfalls": [
+      "Prolonged misdiagnosis as asthma, croup or reflux, delaying definitive imaging.",
+      "Relying on echocardiography alone, which may not fully delineate the ring or the airway.",
+      "Underestimating persistent tracheomalacia after division and expecting immediate symptom resolution.",
+      "Dividing the dominant rather than the smaller arch, compromising systemic perfusion.",
+      "Failing to identify an atretic segment that alters the surgical approach."
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical division of the vascular ring, dividing the non-dominant (usually minor left) arch together with the ligamentum arteriosum to free the encircled trachea and oesophagus, is the definitive and curative treatment",
+      "Reserve early operation for infants with stridor, recurrent respiratory infection, feeding difficulty or apnoeic spells, while a truly asymptomatic incidental ring may be observed",
+      "Provide supportive care with humidified respiratory support, prompt treatment of intercurrent chest infections and modified, unhurried feeding for dysphagia",
+      "Anticipate and manage persistent tracheomalacia after repair, which may need prolonged positive-pressure support and typically improves gradually over months to years",
+      "Recognise and urgently relieve reflex apnoea or acute airway obstruction (dying spells), which mandates expedited surgical decompression",
+      "Use bronchoscopic assessment of airway compression and malacia to guide timing of surgery and predict post-operative airway behaviour",
+      "Coordinate care across paediatric cardiology, cardiothoracic surgery, ENT and paediatric anaesthesia, with echocardiographic screening for associated cardiac lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for double aortic arch."
-  }
- ],
- "diagrams": [
-  {
-   "id": "double-aortic-arch-real-image",
-   "title": "double aortic arch: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "double_aortic_arch-pathway",
+      "title": "double aortic arch: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common complete vascular ring, in which both the right and left aortic arches persist and encircle the trachea and oesophagus.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute life-threatening events or reflex apnoea during feeds",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT angiography of the thorax, MR angiography as a radiation-free alternative, Transthoracic echocardiography for screening and associated cardiac lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical division of the vascular ring, dividing the non-dominant (usually minor left) arch together with the ligamentum arteriosum to free the encircled trachea and oesophagus, is the definitive and curative treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prolonged misdiagnosis as asthma, croup or reflux, delaying definitive imaging."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of double aortic arch."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "double_aortic_arch-matrix",
+      "title": "double aortic arch: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common complete vascular ring, in which both the right and left aortic arches persist and encircle the trachea and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT angiography of the thorax, MR angiography as a radiation-free alternative, Transthoracic echocardiography for screening and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Right aortic arch with aberrant left subclavian artery and a left ligamentum (another complete ring), Pulmonary artery sling,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical division of the vascular ring, dividing the non-dominant (usually minor left) arch together with the ligamentum",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prolonged misdiagnosis as asthma, croup or reflux, delaying definitive imaging.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for double aortic arch."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "double_aortic_arch-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT angiography of the thorax",
+          "cells": [
+            {
+              "text": "Two arches encircling the trachea and oesophagus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast oesophagogram",
+          "cells": [
+            {
+              "text": "Oesophageal compression by the ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Airway compression and malacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Side of the arch and tracheal deviation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Associated cardiac lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "double_aortic_arch-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Right aortic arch with aberrant left subclavian artery",
+          "cells": [
+            {
+              "text": "Another complete vascular ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngomalacia or primary tracheomalacia",
+          "cells": [
+            {
+              "text": "Airway malacia without a vascular ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral croup or recurrent bronchiolitis",
+          "cells": [
+            {
+              "text": "Misdiagnosed as croup or asthma, delaying imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "double_aortic_arch-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical division of the vascular ring",
+          "cells": [
+            {
+              "text": "Divides the non-dominant arch with the ligamentum arteriosum; definitive and curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early operation",
+          "cells": [
+            {
+              "text": "For stridor, recurrent infection, feeding difficulty or apnoeic spells; a silent ring may be observed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive respiratory care",
+          "cells": [
+            {
+              "text": "Humidified support, prompt treatment of chest infection, unhurried feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent tracheomalacia",
+          "cells": [
+            {
+              "text": "May need prolonged positive-pressure support; improves over months to years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent decompression",
+          "cells": [
+            {
+              "text": "Reflex apnoea or acute airway obstruction (dying spells)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopic assessment",
+          "cells": [
+            {
+              "text": "Guides timing of surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Cardiology, cardiothoracic surgery, ENT and paediatric anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "double_aortic_arch-dx-mgmt",
+      "title": "Diagnosis and management of double aortic arch",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected double aortic arch: stridor and feeding difficulty in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (apnoeic spells, severe stridor with cyanosis, recurrent pneumonia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent expedited surgical decompression for reflex apnoea or acute obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MR angiography of the thorax; bronchoscopy; contrast oesophagogram; echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does angiography show two arches encircling the trachea and oesophagus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider right arch with aberrant subclavian, pulmonary sling or laryngomalacia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical division of the non-dominant arch with ligamentum arteriosum; curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early operation for stridor, recurrent infection, feeding difficulty or apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Humidified respiratory support and prompt treatment of chest infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage persistent tracheomalacia, which improves over months to years",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Coordinate cardiology, cardiothoracic surgery, ENT and anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Surgical division is curative with low mortality; residual tracheomalacia resolves slowly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

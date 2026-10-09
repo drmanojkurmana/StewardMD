@@ -1,174 +1,490 @@
 {
- "id": "l_2_hydroxyglutaric_aciduria",
- "name": "L-2-hydroxyglutaric aciduria",
- "aliases": [
-  "L-2-HGA",
-  "L2HGDH deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / nervous system",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Metabolic medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive neurometabolic disorder caused by biallelic L2HGDH mutations, encoding the mitochondrial FAD-dependent L-2-hydroxyglutarate dehydrogenase.",
-   "Brain MRI is often diagnostic: a subcortical (peripheral-to-central) leukoencephalopathy with symmetrical involvement of the dentate nuclei, globus pallidus, putamen and caudate, plus cerebellar atrophy.",
-   "Slowly progressive childhood-onset disease with developmental delay, cerebellar ataxia, pyramidal and extrapyramidal signs, epilepsy, macrocephaly and cognitive decline.",
-   "There is a markedly increased lifetime risk of brain tumours (malignant gliomas, medulloblastoma, primitive neuroectodermal tumours), so surveillance imaging matters.",
-   "Urine organic acids show raised 2-hydroxyglutarate; chiral separation confirms the L-enantiomer and excludes the D and combined forms.",
-   "L-2-hydroxyglutarate is a metabolite-repair substrate that, when it accumulates, acts as an oncometabolite inhibiting alpha-ketoglutarate-dependent dioxygenases.",
-   "Riboflavin and FAD supplementation have been tried given the FAD-dependent enzyme, but benefit is unproven; genetic confirmation is by L2HGDH sequencing."
+  "id": "l_2_hydroxyglutaric_aciduria",
+  "name": "L-2-hydroxyglutaric aciduria",
+  "aliases": [
+    "L-2-HGA",
+    "L2HGDH deficiency"
   ],
-  "pathophysiology": "L-2-hydroxyglutaric aciduria is an autosomal recessive disorder caused by biallelic mutations in L2HGDH, which encodes L-2-hydroxyglutarate dehydrogenase, a mitochondrial FAD-linked enzyme that oxidises L-2-hydroxyglutarate back to 2-oxoglutarate (alpha-ketoglutarate). L-2-hydroxyglutarate arises as an error metabolite when malate dehydrogenase and related dehydrogenases act on alpha-ketoglutarate, and L2HGDH normally repairs this by reconverting it. Loss of the enzyme leads to accumulation of L-2-hydroxyglutarate in plasma, cerebrospinal fluid, urine and brain. Like its D-enantiomer, L-2-hydroxyglutarate competitively inhibits alpha-ketoglutarate-dependent dioxygenases, including histone and DNA demethylases and prolyl hydroxylases, disturbing epigenetic and metabolic regulation; this underlies the characteristic leukoencephalopathy and the predisposition to malignant brain tumours.",
-  "additionalDifferentials": [
-   "D-2-hydroxyglutaric aciduria",
-   "Combined D,L-2-hydroxyglutaric aciduria",
-   "Other leukoencephalopathies (e.g. Canavan disease, vanishing white matter disease)",
-   "Mitochondrial disorders including Kearns-Sayre spectrum",
-   "Glutaric aciduria type I (macrocephaly with basal ganglia change)",
-   "Other hereditary cerebellar ataxias"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acid analysis with chiral separation",
-   "Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification",
-   "Brain MRI focused on subcortical white matter, dentate nuclei and basal ganglia",
-   "L2HGDH molecular testing",
-   "Electroencephalography",
-   "Surveillance neuroimaging for brain tumour",
-   "Neuropsychometric assessment"
-  ],
-  "redFlags": [
-   "New focal neurological deficit or rapidly progressive symptoms suggesting a brain tumour",
-   "Signs of raised intracranial pressure",
-   "Status epilepticus",
-   "Rapid cognitive or motor regression"
-  ],
-  "prognosis": "The disorder is slowly progressive over years to decades with variable disability, and many patients survive into adulthood. The principal serious complication is the substantially increased risk of malignant brain tumours; no curative treatment is available.",
-  "pitfalls": [
-   "Not performing chiral separation, leading to misclassification of the enantiomer.",
-   "Missing the elevated brain-tumour risk and omitting surveillance imaging.",
-   "Mistaking the leukoencephalopathy for an acquired demyelinating disorder.",
-   "Attributing macrocephaly and basal ganglia signal change solely to glutaric aciduria type I."
-  ],
-  "references": [
-   "Inherited metabolic disease reference texts",
-   "Neurometabolic leukoencephalopathy references",
-   "Paediatric neurology references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer supportive symptomatic care as no curative treatment exists, with a trial of riboflavin given the FAD-dependent nature of the deficient enzyme",
-   "Control seizures with appropriate antiseizure medication",
-   "Manage cerebellar ataxia, spasticity and extrapyramidal features with physiotherapy, occupational therapy and antispasticity measures",
-   "Undertake regular surveillance neuroimaging because of the markedly increased lifetime risk of malignant brain tumours",
-   "Provide developmental, educational and multidisciplinary support for cognitive decline and disability",
-   "Offer genetic counselling and testing of at-risk relatives given autosomal recessive inheritance",
-   "Escalate to neuro-oncology promptly if surveillance imaging or new focal signs suggest tumour development"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "l_2_hydroxyglutaric_aciduria-pathway",
-   "title": "L-2-hydroxyglutaric aciduria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive neurometabolic disorder caused by biallelic L2HGDH mutations, encoding the mitochondrial FAD-dependent L-2-hydroxyglutarate dehydrogenase.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New focal neurological deficit or rapidly progressive symptoms suggesting a brain tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acid analysis with chiral separation, Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification, Brain MRI focused on subcortical white matter, dentate nuclei and basal ganglia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer supportive symptomatic care as no curative treatment exists, with a trial of riboflavin given the FAD-dependent nature of the deficient enzyme"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not performing chiral separation, leading to misclassification of the enantiomer."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of l-2-hydroxyglutaric aciduria."
-  }
- ],
- "tables": [
-  {
-   "id": "l_2_hydroxyglutaric_aciduria-matrix",
-   "title": "L-2-hydroxyglutaric aciduria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive neurometabolic disorder caused by biallelic L2HGDH mutations, encoding the mitochondrial FAD-dependent",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / nervous system",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Metabolic medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive neurometabolic disorder caused by biallelic L2HGDH mutations, encoding the mitochondrial FAD-dependent L-2-hydroxyglutarate dehydrogenase.",
+      "Brain MRI is often diagnostic: a subcortical (peripheral-to-central) leukoencephalopathy with symmetrical involvement of the dentate nuclei, globus pallidus, putamen and caudate, plus cerebellar atrophy.",
+      "Slowly progressive childhood-onset disease with developmental delay, cerebellar ataxia, pyramidal and extrapyramidal signs, epilepsy, macrocephaly and cognitive decline.",
+      "There is a markedly increased lifetime risk of brain tumours (malignant gliomas, medulloblastoma, primitive neuroectodermal tumours), so surveillance imaging matters.",
+      "Urine organic acids show raised 2-hydroxyglutarate; chiral separation confirms the L-enantiomer and excludes the D and combined forms.",
+      "L-2-hydroxyglutarate is a metabolite-repair substrate that, when it accumulates, acts as an oncometabolite inhibiting alpha-ketoglutarate-dependent dioxygenases.",
+      "Riboflavin and FAD supplementation have been tried given the FAD-dependent enzyme, but benefit is unproven; genetic confirmation is by L2HGDH sequencing."
     ],
-    [
-     "Key Investigations",
-     "Urine organic acid analysis with chiral separation, Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification, Brain MRI",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "L-2-hydroxyglutaric aciduria is an autosomal recessive disorder caused by biallelic mutations in L2HGDH, which encodes L-2-hydroxyglutarate dehydrogenase, a mitochondrial FAD-linked enzyme that oxidises L-2-hydroxyglutarate back to 2-oxoglutarate (alpha-ketoglutarate). L-2-hydroxyglutarate arises as an error metabolite when malate dehydrogenase and related dehydrogenases act on alpha-ketoglutarate, and L2HGDH normally repairs this by reconverting it. Loss of the enzyme leads to accumulation of L-2-hydroxyglutarate in plasma, cerebrospinal fluid, urine and brain. Like its D-enantiomer, L-2-hydroxyglutarate competitively inhibits alpha-ketoglutarate-dependent dioxygenases, including histone and DNA demethylases and prolyl hydroxylases, disturbing epigenetic and metabolic regulation; this underlies the characteristic leukoencephalopathy and the predisposition to malignant brain tumours.",
+    "additionalDifferentials": [
+      "D-2-hydroxyglutaric aciduria",
+      "Combined D,L-2-hydroxyglutaric aciduria",
+      "Other leukoencephalopathies (e.g. Canavan disease, vanishing white matter disease)",
+      "Mitochondrial disorders including Kearns-Sayre spectrum",
+      "Glutaric aciduria type I (macrocephaly with basal ganglia change)",
+      "Other hereditary cerebellar ataxias"
     ],
-    [
-     "Primary Differentials",
-     "D-2-hydroxyglutaric aciduria, Combined D,L-2-hydroxyglutaric aciduria, Other leukoencephalopathies (e.g. Canavan disease,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acid analysis with chiral separation",
+      "Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification",
+      "Brain MRI focused on subcortical white matter, dentate nuclei and basal ganglia",
+      "L2HGDH molecular testing",
+      "Electroencephalography",
+      "Surveillance neuroimaging for brain tumour",
+      "Neuropsychometric assessment"
     ],
-    [
-     "Management Strategy",
-     "Offer supportive symptomatic care as no curative treatment exists, with a trial of riboflavin given the FAD-dependent nature of",
-     "Core treatment modality"
+    "redFlags": [
+      "New focal neurological deficit or rapidly progressive symptoms suggesting a brain tumour",
+      "Signs of raised intracranial pressure",
+      "Status epilepticus",
+      "Rapid cognitive or motor regression"
     ],
-    [
-     "Clinical Pitfall",
-     "Not performing chiral separation, leading to misclassification of the enantiomer.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is slowly progressive over years to decades with variable disability, and many patients survive into adulthood. The principal serious complication is the substantially increased risk of malignant brain tumours; no curative treatment is available.",
+    "pitfalls": [
+      "Not performing chiral separation, leading to misclassification of the enantiomer.",
+      "Missing the elevated brain-tumour risk and omitting surveillance imaging.",
+      "Mistaking the leukoencephalopathy for an acquired demyelinating disorder.",
+      "Attributing macrocephaly and basal ganglia signal change solely to glutaric aciduria type I."
+    ],
+    "references": [
+      "Inherited metabolic disease reference texts",
+      "Neurometabolic leukoencephalopathy references",
+      "Paediatric neurology references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer supportive symptomatic care as no curative treatment exists, with a trial of riboflavin given the FAD-dependent nature of the deficient enzyme",
+      "Control seizures with appropriate antiseizure medication",
+      "Manage cerebellar ataxia, spasticity and extrapyramidal features with physiotherapy, occupational therapy and antispasticity measures",
+      "Undertake regular surveillance neuroimaging because of the markedly increased lifetime risk of malignant brain tumours",
+      "Provide developmental, educational and multidisciplinary support for cognitive decline and disability",
+      "Offer genetic counselling and testing of at-risk relatives given autosomal recessive inheritance",
+      "Escalate to neuro-oncology promptly if surveillance imaging or new focal signs suggest tumour development"
     ]
-   ],
-   "caption": "Overview comparison matrix for l-2-hydroxyglutaric aciduria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "l-2-hydroxyglutaric-aciduria-real-image",
-   "title": "L-2-hydroxyglutaric aciduria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "l_2_hydroxyglutaric_aciduria-pathway",
+      "title": "L-2-hydroxyglutaric aciduria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive neurometabolic disorder caused by biallelic L2HGDH mutations, encoding the mitochondrial FAD-dependent L-2-hydroxyglutarate dehydrogenase.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New focal neurological deficit or rapidly progressive symptoms suggesting a brain tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acid analysis with chiral separation, Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification, Brain MRI focused on subcortical white matter, dentate nuclei and basal ganglia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer supportive symptomatic care as no curative treatment exists, with a trial of riboflavin given the FAD-dependent nature of the deficient enzyme"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not performing chiral separation, leading to misclassification of the enantiomer."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of l-2-hydroxyglutaric aciduria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "l_2_hydroxyglutaric_aciduria-matrix",
+      "title": "L-2-hydroxyglutaric aciduria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive neurometabolic disorder caused by biallelic L2HGDH mutations, encoding the mitochondrial FAD-dependent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acid analysis with chiral separation, Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification, Brain MRI",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "D-2-hydroxyglutaric aciduria, Combined D,L-2-hydroxyglutaric aciduria, Other leukoencephalopathies (e.g. Canavan disease,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer supportive symptomatic care as no curative treatment exists, with a trial of riboflavin given the FAD-dependent nature of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not performing chiral separation, leading to misclassification of the enantiomer.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for l-2-hydroxyglutaric aciduria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "l_2_hydroxyglutaric_aciduria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids with chiral separation",
+          "cells": [
+            {
+              "text": "Raised 2-hydroxyglutarate; confirms the L-enantiomer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma and CSF 2-hydroxyglutarate",
+          "cells": [
+            {
+              "text": "Quantifies the metabolite"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI of subcortical white matter, dentate nuclei and basal ganglia",
+          "cells": [
+            {
+              "text": "Subcortical leukoencephalopathy with symmetrical involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L2HGDH molecular testing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Epilepsy assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance neuroimaging",
+          "cells": [
+            {
+              "text": "Development of brain tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "l_2_hydroxyglutaric_aciduria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "D-2-hydroxyglutaric aciduria",
+          "cells": [
+            {
+              "text": "Separated by chiral separation of the enantiomer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined D,L-2-hydroxyglutaric aciduria",
+          "cells": [
+            {
+              "text": "Combined forms excluded by chiral separation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glutaric aciduria type I",
+          "cells": [
+            {
+              "text": "Macrocephaly and basal ganglia change can wrongly point to it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "l_2_hydroxyglutaric_aciduria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive symptomatic care",
+          "cells": [
+            {
+              "text": "No curative treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riboflavin trial",
+          "cells": [
+            {
+              "text": "Given the FAD-dependent enzyme; benefit unproven"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ataxia and spasticity management",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and antispasticity measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance neuroimaging",
+          "cells": [
+            {
+              "text": "Markedly increased lifetime risk of malignant brain tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and educational support",
+          "cells": [
+            {
+              "text": "For cognitive decline and disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-oncology referral",
+          "cells": [
+            {
+              "text": "If surveillance imaging or new focal signs suggest a tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "l_2_hydroxyglutaric_aciduria-dx-mgmt",
+      "title": "Diagnosis and management of L-2-hydroxyglutaric aciduria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected L-2-hydroxyglutaric aciduria: childhood ataxia, epilepsy, leukoencephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (focal deficit, raised intracranial pressure, status, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neuro-oncology review for suspected brain tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids with chiral separation, metabolite levels, MRI, L2HGDH testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does chiral separation confirm the L-enantiomer, with L2HGDH variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider D or combined D,L-2-hydroxyglutaric aciduria, or glutaric aciduria type I",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive symptomatic care; riboflavin trial as benefit is unproven",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication and physiotherapy for ataxia and spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Regular surveillance neuroimaging for malignant brain tumour risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental and educational support for cognitive decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and testing of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive over years to decades; tumour risk is the main serious complication",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

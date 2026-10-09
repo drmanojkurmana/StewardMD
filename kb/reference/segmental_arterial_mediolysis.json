@@ -1,177 +1,500 @@
 {
- "id": "segmental_arterial_mediolysis",
- "name": "Segmental Arterial Mediolysis",
- "aliases": [
-  "SAM",
-  "Segmental mediolytic arteriopathy"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular medicine / Interventional radiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Vascular medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare non-inflammatory, non-atherosclerotic arteriopathy defined by lysis of the arterial media, characteristically the outer media adjacent to the adventitia.",
-   "It has a strong predilection for splanchnic arteries (coeliac, superior mesenteric, hepatic and splenic) and sometimes involves renal, coronary and intracranial vessels.",
-   "Typically presents in middle-aged and older adults with intra-abdominal haemorrhage ('abdominal apoplexy'), dissection, or ruptured aneurysm.",
-   "It is a diagnosis of exclusion, made only once vasculitis, fibromuscular dysplasia, connective tissue disease and infection have been excluded.",
-   "Inflammatory markers and vasculitis serology are characteristically normal, which helps distinguish it from an arteritis.",
-   "Angiography reveals a mixture of aneurysms, dissections, stenoses and occlusions, sometimes overlapping with the appearances of fibromuscular dysplasia.",
-   "Many authorities regard it as an acute lesion within, or a precursor to, the fibromuscular dysplasia spectrum.",
-   "If the patient survives the acute event, the medial lesion may stabilise and heal by reparative fibrosis, occasionally leaving residual stenosis."
+  "id": "segmental_arterial_mediolysis",
+  "name": "Segmental Arterial Mediolysis",
+  "aliases": [
+    "SAM",
+    "Segmental mediolytic arteriopathy"
   ],
-  "pathophysiology": "Segmental arterial mediolysis is characterised by vacuolar degeneration and lysis of the smooth muscle of the arterial media, predominantly affecting the outer media near the medioadventitial junction, in the absence of inflammation or atherosclerosis. Loss of this medial support weakens the wall and allows separation at the medioadventitial plane, producing gaps in the arterial wall, dissecting haematomas, pseudoaneurysms and true aneurysms that are prone to rupture and haemorrhage. Alternatively, reparative fibrosis of the damaged segment may cause stenosis or occlusion and downstream ischaemia. The aetiology is unknown, with proposed contributions from vasospasm and catecholamine-mediated arterial injury. There is a striking predilection for the splanchnic circulation, especially the coeliac, mesenteric, hepatic and splenic arteries, with less frequent renal, coronary and intracranial involvement. The condition is increasingly considered to lie on a pathological continuum with fibromuscular dysplasia, potentially representing its acute phase.",
-  "additionalDifferentials": [
-   "Polyarteritis nodosa and other systemic vasculitides",
-   "Fibromuscular dysplasia",
-   "Connective tissue disorders (vascular Ehlers-Danlos, Marfan and Loeys-Dietz syndromes)",
-   "Mycotic (infective) aneurysm",
-   "Atherosclerotic aneurysm",
-   "Traumatic arterial injury",
-   "Spontaneous coronary or visceral artery dissection"
-  ],
-  "additionalInvestigations": [
-   "CT angiography to demonstrate aneurysms, dissection and active haemorrhage",
-   "Catheter digital subtraction angiography for detailed vascular mapping and possible intervention",
-   "Inflammatory markers and an autoimmune and vasculitis screen to exclude an arteritis",
-   "Blood cultures to exclude a mycotic aneurysm",
-   "Genetic and connective tissue disorder evaluation where clinically suspected",
-   "Histopathology of a resected or biopsied vessel, where medial lysis without inflammation is definitive",
-   "Interval MR or CT angiography for surveillance of new or evolving lesions"
-  ],
-  "redFlags": [
-   "Haemodynamic instability or haemorrhagic shock from a ruptured aneurysm",
-   "Acute severe abdominal or flank pain",
-   "Features of bowel or solid-organ ischaemia",
-   "A rapidly enlarging aneurysm on serial imaging",
-   "Coronary or intracranial arterial involvement"
-  ],
-  "prognosis": "The course is variable and can be life-threatening when acute aneurysm rupture causes major haemorrhage, but the medial lesion may stabilise and heal if the patient survives the acute event. Recurrence and involvement of new arterial territories can occur, so imaging surveillance is advised.",
-  "pitfalls": [
-   "Misdiagnosing it as a vasculitis and giving inappropriate immunosuppression.",
-   "Failing to consider it in unexplained spontaneous intra-abdominal haemorrhage.",
-   "Overlooking an underlying connective tissue disorder or a mycotic aneurysm.",
-   "Assuming a solitary lesion when multifocal, multiterritory disease is common.",
-   "Under-recognising the need for ongoing surveillance after the acute presentation."
-  ],
-  "references": [
-   "Vascular medicine references",
-   "Vascular and interventional radiology references",
-   "Vascular pathology references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acute aneurysm rupture or active haemorrhage with endovascular intervention (coil embolisation or covered stent) or surgical repair, alongside haemodynamic resuscitation",
-   "Control blood pressure to reduce wall stress on affected arteries",
-   "Manage stable, unruptured lesions conservatively with close observation given the potential for spontaneous healing",
-   "Exclude vasculitis, fibromuscular dysplasia, connective tissue disease and infection before settling on the diagnosis",
-   "Involve vascular medicine and interventional radiology in a multidisciplinary approach",
-   "Undertake interval imaging surveillance for new aneurysms, dissection or involvement of further arterial territories"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "segmental_arterial_mediolysis-pathway",
-   "title": "Segmental Arterial Mediolysis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare non-inflammatory, non-atherosclerotic arteriopathy defined by lysis of the arterial media, characteristically the outer media adjacent to the adventitia.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haemodynamic instability or haemorrhagic shock from a ruptured aneurysm",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT angiography to demonstrate aneurysms, dissection and active haemorrhage, Catheter digital subtraction angiography for detailed vascular mapping and possible intervention, Inflammatory markers and an autoimmune and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acute aneurysm rupture or active haemorrhage with endovascular intervention (coil embolisation or covered stent) or surgical repair, alongside haemodynamic resuscitation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as a vasculitis and giving inappropriate immunosuppression."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of segmental arterial mediolysis."
-  }
- ],
- "tables": [
-  {
-   "id": "segmental_arterial_mediolysis-matrix",
-   "title": "Segmental Arterial Mediolysis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare non-inflammatory, non-atherosclerotic arteriopathy defined by lysis of the arterial media, characteristically the outer",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular medicine / Interventional radiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Vascular medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare non-inflammatory, non-atherosclerotic arteriopathy defined by lysis of the arterial media, characteristically the outer media adjacent to the adventitia.",
+      "It has a strong predilection for splanchnic arteries (coeliac, superior mesenteric, hepatic and splenic) and sometimes involves renal, coronary and intracranial vessels.",
+      "Typically presents in middle-aged and older adults with intra-abdominal haemorrhage ('abdominal apoplexy'), dissection, or ruptured aneurysm.",
+      "It is a diagnosis of exclusion, made only once vasculitis, fibromuscular dysplasia, connective tissue disease and infection have been excluded.",
+      "Inflammatory markers and vasculitis serology are characteristically normal, which helps distinguish it from an arteritis.",
+      "Angiography reveals a mixture of aneurysms, dissections, stenoses and occlusions, sometimes overlapping with the appearances of fibromuscular dysplasia.",
+      "Many authorities regard it as an acute lesion within, or a precursor to, the fibromuscular dysplasia spectrum.",
+      "If the patient survives the acute event, the medial lesion may stabilise and heal by reparative fibrosis, occasionally leaving residual stenosis."
     ],
-    [
-     "Key Investigations",
-     "CT angiography to demonstrate aneurysms, dissection and active haemorrhage, Catheter digital subtraction angiography for detailed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Segmental arterial mediolysis is characterised by vacuolar degeneration and lysis of the smooth muscle of the arterial media, predominantly affecting the outer media near the medioadventitial junction, in the absence of inflammation or atherosclerosis. Loss of this medial support weakens the wall and allows separation at the medioadventitial plane, producing gaps in the arterial wall, dissecting haematomas, pseudoaneurysms and true aneurysms that are prone to rupture and haemorrhage. Alternatively, reparative fibrosis of the damaged segment may cause stenosis or occlusion and downstream ischaemia. The aetiology is unknown, with proposed contributions from vasospasm and catecholamine-mediated arterial injury. There is a striking predilection for the splanchnic circulation, especially the coeliac, mesenteric, hepatic and splenic arteries, with less frequent renal, coronary and intracranial involvement. The condition is increasingly considered to lie on a pathological continuum with fibromuscular dysplasia, potentially representing its acute phase.",
+    "additionalDifferentials": [
+      "Polyarteritis nodosa and other systemic vasculitides",
+      "Fibromuscular dysplasia",
+      "Connective tissue disorders (vascular Ehlers-Danlos, Marfan and Loeys-Dietz syndromes)",
+      "Mycotic (infective) aneurysm",
+      "Atherosclerotic aneurysm",
+      "Traumatic arterial injury",
+      "Spontaneous coronary or visceral artery dissection"
     ],
-    [
-     "Primary Differentials",
-     "Polyarteritis nodosa and other systemic vasculitides, Fibromuscular dysplasia, Connective tissue disorders (vascular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT angiography to demonstrate aneurysms, dissection and active haemorrhage",
+      "Catheter digital subtraction angiography for detailed vascular mapping and possible intervention",
+      "Inflammatory markers and an autoimmune and vasculitis screen to exclude an arteritis",
+      "Blood cultures to exclude a mycotic aneurysm",
+      "Genetic and connective tissue disorder evaluation where clinically suspected",
+      "Histopathology of a resected or biopsied vessel, where medial lysis without inflammation is definitive",
+      "Interval MR or CT angiography for surveillance of new or evolving lesions"
     ],
-    [
-     "Management Strategy",
-     "Treat acute aneurysm rupture or active haemorrhage with endovascular intervention (coil embolisation or covered stent) or",
-     "Core treatment modality"
+    "redFlags": [
+      "Haemodynamic instability or haemorrhagic shock from a ruptured aneurysm",
+      "Acute severe abdominal or flank pain",
+      "Features of bowel or solid-organ ischaemia",
+      "A rapidly enlarging aneurysm on serial imaging",
+      "Coronary or intracranial arterial involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as a vasculitis and giving inappropriate immunosuppression.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable and can be life-threatening when acute aneurysm rupture causes major haemorrhage, but the medial lesion may stabilise and heal if the patient survives the acute event. Recurrence and involvement of new arterial territories can occur, so imaging surveillance is advised.",
+    "pitfalls": [
+      "Misdiagnosing it as a vasculitis and giving inappropriate immunosuppression.",
+      "Failing to consider it in unexplained spontaneous intra-abdominal haemorrhage.",
+      "Overlooking an underlying connective tissue disorder or a mycotic aneurysm.",
+      "Assuming a solitary lesion when multifocal, multiterritory disease is common.",
+      "Under-recognising the need for ongoing surveillance after the acute presentation."
+    ],
+    "references": [
+      "Vascular medicine references",
+      "Vascular and interventional radiology references",
+      "Vascular pathology references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acute aneurysm rupture or active haemorrhage with endovascular intervention (coil embolisation or covered stent) or surgical repair, alongside haemodynamic resuscitation",
+      "Control blood pressure to reduce wall stress on affected arteries",
+      "Manage stable, unruptured lesions conservatively with close observation given the potential for spontaneous healing",
+      "Exclude vasculitis, fibromuscular dysplasia, connective tissue disease and infection before settling on the diagnosis",
+      "Involve vascular medicine and interventional radiology in a multidisciplinary approach",
+      "Undertake interval imaging surveillance for new aneurysms, dissection or involvement of further arterial territories"
     ]
-   ],
-   "caption": "Overview comparison matrix for segmental arterial mediolysis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "segmental-arterial-mediolysis-real-image",
-   "title": "Segmental Arterial Mediolysis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "segmental_arterial_mediolysis-pathway",
+      "title": "Segmental Arterial Mediolysis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare non-inflammatory, non-atherosclerotic arteriopathy defined by lysis of the arterial media, characteristically the outer media adjacent to the adventitia.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haemodynamic instability or haemorrhagic shock from a ruptured aneurysm",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT angiography to demonstrate aneurysms, dissection and active haemorrhage, Catheter digital subtraction angiography for detailed vascular mapping and possible intervention, Inflammatory markers and an autoimmune and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acute aneurysm rupture or active haemorrhage with endovascular intervention (coil embolisation or covered stent) or surgical repair, alongside haemodynamic resuscitation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as a vasculitis and giving inappropriate immunosuppression."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of segmental arterial mediolysis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "segmental_arterial_mediolysis-matrix",
+      "title": "Segmental Arterial Mediolysis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare non-inflammatory, non-atherosclerotic arteriopathy defined by lysis of the arterial media, characteristically the outer",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT angiography to demonstrate aneurysms, dissection and active haemorrhage, Catheter digital subtraction angiography for detailed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Polyarteritis nodosa and other systemic vasculitides, Fibromuscular dysplasia, Connective tissue disorders (vascular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acute aneurysm rupture or active haemorrhage with endovascular intervention (coil embolisation or covered stent) or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as a vasculitis and giving inappropriate immunosuppression.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for segmental arterial mediolysis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Vascular medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "segmental_arterial_mediolysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT angiography",
+          "cells": [
+            {
+              "text": "Aneurysms, dissection and active haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter digital subtraction angiography",
+          "cells": [
+            {
+              "text": "Detailed vascular mapping; allows intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and vasculitis screen",
+          "cells": [
+            {
+              "text": "Characteristically normal, which argues against an arteritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Excludes a mycotic aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and connective tissue evaluation",
+          "cells": [
+            {
+              "text": "Done where clinically suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of resected or biopsied vessel",
+          "cells": [
+            {
+              "text": "Medial lysis without inflammation is definitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval MR or CT angiography",
+          "cells": [
+            {
+              "text": "Surveillance for new or evolving lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segmental_arterial_mediolysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Polyarteritis nodosa and other vasculitides",
+          "cells": [
+            {
+              "text": "Inflammatory markers and serology are raised; they are normal in SAM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromuscular dysplasia",
+          "cells": [
+            {
+              "text": "Angiographic appearances can overlap; SAM may be its acute phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular Ehlers-Danlos, Marfan, Loeys-Dietz",
+          "cells": [
+            {
+              "text": "Genetic and connective tissue evaluation where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycotic (infective) aneurysm",
+          "cells": [
+            {
+              "text": "Excluded by blood cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atherosclerotic aneurysm",
+          "cells": [
+            {
+              "text": "SAM is non-atherosclerotic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic arterial injury",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segmental_arterial_mediolysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute rupture or active haemorrhage",
+          "cells": [
+            {
+              "text": "Coil embolisation, covered stent or surgical repair, with haemodynamic resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Reduces wall stress on affected arteries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stable unruptured lesions",
+          "cells": [
+            {
+              "text": "Conservative with close observation, as spontaneous healing is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mimics before settling on diagnosis",
+          "cells": [
+            {
+              "text": "Vasculitis, fibromuscular dysplasia, connective tissue disease, infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Vascular medicine and interventional radiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging surveillance",
+          "cells": [
+            {
+              "text": "New aneurysms, dissection or further arterial territories"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "segmental_arterial_mediolysis-dx-mgmt",
+      "title": "Diagnosis and management of Segmental Arterial Mediolysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SAM: spontaneous intra-abdominal haemorrhage or visceral artery aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Shock, severe abdominal pain or bowel ischaemia from a ruptured aneurysm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate; coil embolisation, covered stent or surgical repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT angiography; vasculitis screen, blood cultures, connective tissue evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Vasculitis, FMD, connective tissue disease and infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the alternative diagnosis; avoid immunosuppression for presumed vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Control blood pressure to lower arterial wall stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe stable unruptured lesions, as medial lesions may heal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vascular medicine and interventional radiology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Interval MR or CT angiography for new lesions or territories",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable course; may stabilise after acute event, so surveillance continues",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

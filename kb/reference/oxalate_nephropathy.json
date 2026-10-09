@@ -1,175 +1,483 @@
 {
- "id": "oxalate_nephropathy",
- "name": "Oxalate nephropathy",
- "aliases": [
-  "oxalate nephropathy",
-  "calcium oxalate nephropathy",
-  "hyperoxaluric nephropathy",
-  "oxalosis (renal)"
- ],
- "class": "non_infective",
- "system": "Renal / Nephrology",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deposition of calcium oxalate crystals within the tubules and interstitium, producing acute or chronic kidney injury",
-   "Biopsy shows polarisable, birefringent, often fan-shaped calcium oxalate crystals in tubular lumina with surrounding tubular injury and interstitial inflammation",
-   "Secondary (enteric) hyperoxaluria from fat malabsorption is a common cause, notably after bariatric surgery, in inflammatory bowel disease or pancreatic insufficiency",
-   "Other causes include primary hyperoxaluria (inherited hepatic enzyme defects), excessive dietary oxalate or vitamin C, and ethylene glycol poisoning",
-   "Presentation ranges from unexplained acute kidney injury to progressive chronic kidney disease, sometimes with nephrolithiasis or nephrocalcinosis",
-   "Enteric hyperoxaluria arises because unabsorbed fatty acids bind calcium, leaving free oxalate to be absorbed in the colon",
-   "Management addresses the cause: drug withdrawal and supportive care in toxin-related cases, dietary oxalate restriction and calcium supplementation with bile-acid handling in enteric disease, and specific therapy for primary hyperoxaluria"
+  "id": "oxalate_nephropathy",
+  "name": "Oxalate nephropathy",
+  "aliases": [
+    "oxalate nephropathy",
+    "calcium oxalate nephropathy",
+    "hyperoxaluric nephropathy",
+    "oxalosis (renal)"
   ],
-  "pathophysiology": "Oxalate is an end-product of metabolism that is renally excreted, and when plasma and tubular oxalate rise, calcium oxalate supersaturates and precipitates as crystals within the tubular lumina. These birefringent crystals obstruct and directly injure tubular epithelial cells, triggering inflammasome activation, interstitial inflammation and fibrosis, which drive acute kidney injury and, with sustained exposure, progressive chronic damage and nephrocalcinosis. Hyperoxaluria may be primary, from inherited defects of hepatic glyoxylate metabolism causing endogenous overproduction, or secondary, from enhanced enteric absorption in fat malabsorption, high oxalate or ascorbic-acid intake, or acute overproduction as in ethylene glycol poisoning. Declining renal function further impairs oxalate clearance, creating a self-amplifying cycle of systemic oxalate accumulation.",
-  "additionalDifferentials": [
-   "Acute tubular injury or acute interstitial nephritis of other cause",
-   "Other crystalline nephropathies (urate, drug crystals)",
-   "Nephrocalcinosis from hypercalcaemia",
-   "Ethylene glycol poisoning",
-   "Cast nephropathy",
-   "Chronic tubulointerstitial nephritis"
-  ],
-  "additionalInvestigations": [
-   "Renal biopsy with polarised microscopy demonstrating birefringent calcium oxalate crystals",
-   "24-hour urinary oxalate excretion and plasma oxalate",
-   "Assessment for fat malabsorption and relevant gastrointestinal or bariatric history",
-   "Genetic testing for primary hyperoxaluria in appropriate cases",
-   "Dietary and supplement history including vitamin C intake",
-   "Renal imaging for nephrocalcinosis and stones"
-  ],
-  "redFlags": [
-   "Rapidly progressive or dialysis-requiring acute kidney injury with widespread crystal deposition",
-   "Systemic oxalosis with extrarenal crystal deposition in advanced disease",
-   "Suspected ethylene glycol poisoning with metabolic acidosis and an osmolar gap",
-   "Recurrent nephrolithiasis with declining renal function suggesting primary hyperoxaluria"
-  ],
-  "prognosis": "Outcome depends on the cause and the crystal and fibrosis burden at diagnosis; reversible or treatable causes may allow partial renal recovery, whereas heavy crystal deposition with interstitial fibrosis and untreated ongoing hyperoxaluria often progresses to end-stage kidney disease. Primary hyperoxaluria carries a particularly poor renal prognosis without disease-specific treatment, and dialysis alone poorly clears oxalate.",
-  "pitfalls": [
-   "Overlooking oxalate nephropathy as a cause of unexplained acute kidney injury",
-   "Failing to take a bariatric-surgery, malabsorption or supplement history",
-   "Missing primary hyperoxaluria in patients with recurrent stones and early renal failure",
-   "Not recognising ethylene glycol poisoning as an acute cause",
-   "Assuming standard dialysis adequately clears the systemic oxalate load"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "Brenner and Rector's The Kidney"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying cause: manage enteric hyperoxaluria by correcting fat malabsorption, and in ethylene glycol poisoning give fomepizole and haemodialysis to halt oxalate generation",
-   "Reduce oxalate burden with a low-oxalate diet, oral calcium taken with meals to bind intestinal oxalate, restriction of vitamin C, and a bile-acid sequestrant such as cholestyramine in fat malabsorption",
-   "In primary hyperoxaluria use high fluid intake, pyridoxine in responsive type 1 disease, oral citrate to inhibit crystallisation, and RNA-interference therapy such as lumasiran",
-   "Maintain generous hydration to reduce tubular calcium-oxalate supersaturation",
-   "Provide renal replacement therapy for severe acute kidney injury and manage progression toward chronic kidney disease",
-   "Monitor urinary and plasma oxalate, renal function, and nephrocalcinosis or stone burden on imaging",
-   "Refer to nephrology, consider combined liver-kidney transplantation for primary hyperoxaluria with advanced kidney failure, and offer genetic counselling in inherited disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oxalate_nephropathy-pathway",
-   "title": "Oxalate nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deposition of calcium oxalate crystals within the tubules and interstitium, producing acute or chronic kidney injury",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or dialysis-requiring acute kidney injury with widespread crystal deposition",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal biopsy with polarised microscopy demonstrating birefringent calcium oxalate crystals, 24-hour urinary oxalate excretion and plasma oxalate, Assessment for fat malabsorption and relevant gastrointestinal or bariatric"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying cause: manage enteric hyperoxaluria by correcting fat malabsorption, and in ethylene glycol poisoning give fomepizole and haemodialysis to halt oxalate generation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking oxalate nephropathy as a cause of unexplained acute kidney injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oxalate nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "oxalate_nephropathy-matrix",
-   "title": "Oxalate nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deposition of calcium oxalate crystals within the tubules and interstitium, producing acute or chronic kidney injury",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Nephrology",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deposition of calcium oxalate crystals within the tubules and interstitium, producing acute or chronic kidney injury",
+      "Biopsy shows polarisable, birefringent, often fan-shaped calcium oxalate crystals in tubular lumina with surrounding tubular injury and interstitial inflammation",
+      "Secondary (enteric) hyperoxaluria from fat malabsorption is a common cause, notably after bariatric surgery, in inflammatory bowel disease or pancreatic insufficiency",
+      "Other causes include primary hyperoxaluria (inherited hepatic enzyme defects), excessive dietary oxalate or vitamin C, and ethylene glycol poisoning",
+      "Presentation ranges from unexplained acute kidney injury to progressive chronic kidney disease, sometimes with nephrolithiasis or nephrocalcinosis",
+      "Enteric hyperoxaluria arises because unabsorbed fatty acids bind calcium, leaving free oxalate to be absorbed in the colon",
+      "Management addresses the cause: drug withdrawal and supportive care in toxin-related cases, dietary oxalate restriction and calcium supplementation with bile-acid handling in enteric disease, and specific therapy for primary hyperoxaluria"
     ],
-    [
-     "Key Investigations",
-     "Renal biopsy with polarised microscopy demonstrating birefringent calcium oxalate crystals, 24-hour urinary oxalate excretion and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oxalate is an end-product of metabolism that is renally excreted, and when plasma and tubular oxalate rise, calcium oxalate supersaturates and precipitates as crystals within the tubular lumina. These birefringent crystals obstruct and directly injure tubular epithelial cells, triggering inflammasome activation, interstitial inflammation and fibrosis, which drive acute kidney injury and, with sustained exposure, progressive chronic damage and nephrocalcinosis. Hyperoxaluria may be primary, from inherited defects of hepatic glyoxylate metabolism causing endogenous overproduction, or secondary, from enhanced enteric absorption in fat malabsorption, high oxalate or ascorbic-acid intake, or acute overproduction as in ethylene glycol poisoning. Declining renal function further impairs oxalate clearance, creating a self-amplifying cycle of systemic oxalate accumulation.",
+    "additionalDifferentials": [
+      "Acute tubular injury or acute interstitial nephritis of other cause",
+      "Other crystalline nephropathies (urate, drug crystals)",
+      "Nephrocalcinosis from hypercalcaemia",
+      "Ethylene glycol poisoning",
+      "Cast nephropathy",
+      "Chronic tubulointerstitial nephritis"
     ],
-    [
-     "Primary Differentials",
-     "Acute tubular injury or acute interstitial nephritis of other cause, Other crystalline nephropathies (urate, drug crystals),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal biopsy with polarised microscopy demonstrating birefringent calcium oxalate crystals",
+      "24-hour urinary oxalate excretion and plasma oxalate",
+      "Assessment for fat malabsorption and relevant gastrointestinal or bariatric history",
+      "Genetic testing for primary hyperoxaluria in appropriate cases",
+      "Dietary and supplement history including vitamin C intake",
+      "Renal imaging for nephrocalcinosis and stones"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying cause: manage enteric hyperoxaluria by correcting fat malabsorption, and in ethylene glycol poisoning give",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or dialysis-requiring acute kidney injury with widespread crystal deposition",
+      "Systemic oxalosis with extrarenal crystal deposition in advanced disease",
+      "Suspected ethylene glycol poisoning with metabolic acidosis and an osmolar gap",
+      "Recurrent nephrolithiasis with declining renal function suggesting primary hyperoxaluria"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking oxalate nephropathy as a cause of unexplained acute kidney injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the cause and the crystal and fibrosis burden at diagnosis; reversible or treatable causes may allow partial renal recovery, whereas heavy crystal deposition with interstitial fibrosis and untreated ongoing hyperoxaluria often progresses to end-stage kidney disease. Primary hyperoxaluria carries a particularly poor renal prognosis without disease-specific treatment, and dialysis alone poorly clears oxalate.",
+    "pitfalls": [
+      "Overlooking oxalate nephropathy as a cause of unexplained acute kidney injury",
+      "Failing to take a bariatric-surgery, malabsorption or supplement history",
+      "Missing primary hyperoxaluria in patients with recurrent stones and early renal failure",
+      "Not recognising ethylene glycol poisoning as an acute cause",
+      "Assuming standard dialysis adequately clears the systemic oxalate load"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "Brenner and Rector's The Kidney"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying cause: manage enteric hyperoxaluria by correcting fat malabsorption, and in ethylene glycol poisoning give fomepizole and haemodialysis to halt oxalate generation",
+      "Reduce oxalate burden with a low-oxalate diet, oral calcium taken with meals to bind intestinal oxalate, restriction of vitamin C, and a bile-acid sequestrant such as cholestyramine in fat malabsorption",
+      "In primary hyperoxaluria use high fluid intake, pyridoxine in responsive type 1 disease, oral citrate to inhibit crystallisation, and RNA-interference therapy such as lumasiran",
+      "Maintain generous hydration to reduce tubular calcium-oxalate supersaturation",
+      "Provide renal replacement therapy for severe acute kidney injury and manage progression toward chronic kidney disease",
+      "Monitor urinary and plasma oxalate, renal function, and nephrocalcinosis or stone burden on imaging",
+      "Refer to nephrology, consider combined liver-kidney transplantation for primary hyperoxaluria with advanced kidney failure, and offer genetic counselling in inherited disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for oxalate nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oxalate-nephropathy-real-image",
-   "title": "Oxalate nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "oxalate_nephropathy-pathway",
+      "title": "Oxalate nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deposition of calcium oxalate crystals within the tubules and interstitium, producing acute or chronic kidney injury",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or dialysis-requiring acute kidney injury with widespread crystal deposition",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal biopsy with polarised microscopy demonstrating birefringent calcium oxalate crystals, 24-hour urinary oxalate excretion and plasma oxalate, Assessment for fat malabsorption and relevant gastrointestinal or bariatric"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying cause: manage enteric hyperoxaluria by correcting fat malabsorption, and in ethylene glycol poisoning give fomepizole and haemodialysis to halt oxalate generation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking oxalate nephropathy as a cause of unexplained acute kidney injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oxalate nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oxalate_nephropathy-matrix",
+      "title": "Oxalate nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deposition of calcium oxalate crystals within the tubules and interstitium, producing acute or chronic kidney injury",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal biopsy with polarised microscopy demonstrating birefringent calcium oxalate crystals, 24-hour urinary oxalate excretion and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute tubular injury or acute interstitial nephritis of other cause, Other crystalline nephropathies (urate, drug crystals),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying cause: manage enteric hyperoxaluria by correcting fat malabsorption, and in ethylene glycol poisoning give",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking oxalate nephropathy as a cause of unexplained acute kidney injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oxalate nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oxalate_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy with polarised microscopy",
+          "cells": [
+            {
+              "text": "Birefringent calcium oxalate crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urinary and plasma oxalate",
+          "cells": [
+            {
+              "text": "Oxalate excretion and load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat malabsorption and bariatric history",
+          "cells": [
+            {
+              "text": "Enteric cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for primary hyperoxaluria",
+          "cells": [
+            {
+              "text": "Inherited cause, where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary and supplement history",
+          "cells": [
+            {
+              "text": "Vitamin C intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oxalate_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ethylene glycol poisoning",
+          "cells": [
+            {
+              "text": "Metabolic acidosis with an osmolar gap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other crystalline nephropathies (urate, drug crystals)",
+          "cells": [
+            {
+              "text": "Different crystals; polarised microscopy identifies calcium oxalate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oxalate_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the enteric cause",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Correct fat malabsorption; cholestyramine if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ethylene glycol poisoning",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Fomepizole and haemodialysis to halt oxalate generation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-oxalate diet",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Oral calcium with meals to bind intestinal oxalate; restrict vitamin C"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperoxaluria",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "High fluid intake, pyridoxine in responsive type 1, oral citrate and lumasiran"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Generous fluids to reduce tubular calcium oxalate supersaturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "For severe acute kidney injury and progression toward chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oxalate_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Oxalate nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained acute kidney injury or stones after bariatric surgery or malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (dialysis-needing AKI, ethylene glycol exposure or systemic oxalosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: fomepizole and haemodialysis for ethylene glycol poisoning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with polarised light, urinary oxalate, bowel and bariatric history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are birefringent calcium oxalate crystals seen on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider urate or drug crystal nephropathy, acute tubular injury or cast nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the enteric cause by correcting fat malabsorption; cholestyramine if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-oxalate diet and oral calcium with meals; restrict vitamin C",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Primary hyperoxaluria: high fluids, pyridoxine, oral citrate and lumasiran",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Generous hydration to reduce tubular calcium oxalate supersaturation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Renal replacement therapy for severe acute kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Reversible causes may allow partial recovery; heavy crystal deposition often progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

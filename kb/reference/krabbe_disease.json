@@ -1,173 +1,480 @@
 {
- "id": "krabbe_disease",
- "name": "Krabbe disease",
- "aliases": [
-  "globoid cell leukodystrophy",
-  "galactosylceramidase deficiency",
-  "galactocerebrosidase deficiency",
-  "GALC deficiency"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive leukodystrophy caused by deficiency of the enzyme galactocerebrosidase (galactosylceramidase), leading to demyelination and formation of characteristic multinucleated globoid cells",
-   "The classic early-infantile form presents in the first months with irritability, feeding difficulty, stiffness, and hyperirritability, followed by rapid neurodegeneration",
-   "Marked irritability, hypertonicity, and exaggerated startle to stimuli are prominent early features",
-   "Accumulation of the toxic metabolite psychosine (galactosylsphingosine) is central to the destruction of myelin-forming cells",
-   "Peripheral neuropathy with slowed nerve conduction and raised cerebrospinal fluid protein commonly accompany the central disease",
-   "Later-onset (late-infantile, juvenile, and adult) forms present with more insidious motor, visual, and cognitive decline",
-   "MRI shows white matter change, and globoid cells are a defining pathological hallmark",
-   "Haematopoietic stem cell transplantation in presymptomatic infants can alter the course, while symptomatic infantile disease responds poorly"
+  "id": "krabbe_disease",
+  "name": "Krabbe disease",
+  "aliases": [
+    "globoid cell leukodystrophy",
+    "galactosylceramidase deficiency",
+    "galactocerebrosidase deficiency",
+    "GALC deficiency"
   ],
-  "pathophysiology": "Krabbe disease is caused by biallelic pathogenic variants in GALC, encoding the lysosomal enzyme galactocerebrosidase. Deficient activity impairs degradation of galactolipids found in myelin, notably galactosylceramide, and leads to accumulation of the cytotoxic metabolite psychosine (galactosylsphingosine). Psychosine is toxic to oligodendrocytes and Schwann cells, causing widespread loss of myelin-forming cells and demyelination of the central and peripheral nervous system. The pathological response includes infiltration by characteristic multinucleated macrophages (globoid cells), giving the alternative name globoid cell leukodystrophy.",
-  "additionalDifferentials": [
-   "Metachromatic leukodystrophy",
-   "Other leukodystrophies including X-linked adrenoleukodystrophy",
-   "GM1 and GM2 gangliosidoses",
-   "Non-accidental injury or other causes of infantile irritability and hypertonia",
-   "Acquired encephalopathies of infancy"
-  ],
-  "additionalInvestigations": [
-   "Assay of galactocerebrosidase enzyme activity, including newborn screening in some programmes",
-   "GALC molecular genetic testing to confirm the diagnosis",
-   "Psychosine measurement to support diagnosis and assess severity",
-   "Brain MRI to characterise white matter involvement",
-   "Nerve conduction studies and cerebrospinal fluid protein assessment"
-  ],
-  "redFlags": [
-   "Extreme irritability with hypertonia and feeding failure in early infancy",
-   "Rapid neurodevelopmental regression",
-   "Emerging seizures or loss of vision",
-   "Bulbar dysfunction with aspiration risk"
-  ],
-  "prognosis": "The early-infantile form is rapidly progressive and usually fatal within the first few years of life. Later-onset forms progress more slowly and variably. Stem cell transplantation offers benefit mainly when performed in presymptomatic infants, and once symptoms are established the outlook remains poor.",
-  "pitfalls": [
-   "Mistaking early extreme irritability and stiffness for colic, reflux, or a behavioural problem",
-   "Confusing it with metachromatic leukodystrophy without appropriate enzyme testing",
-   "Missing the narrow presymptomatic window for transplantation",
-   "Overlooking peripheral neuropathy as a supportive diagnostic clue"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Haematopoietic stem cell transplantation as the only disease-modifying option, of benefit mainly in presymptomatic infants identified on newborn screening or in early later-onset disease",
-   "Antispasticity agents such as baclofen and measures to control the marked irritability",
-   "Antiseizure medication for seizures",
-   "Nutritional support and feeding management, including gastrostomy, for feeding difficulty",
-   "Respiratory care with secretion management and physiotherapy for tone and contractures",
-   "Occupational therapy and communication aids for slower later-onset forms",
-   "Genetic counselling and family testing, reflecting autosomal recessive GALC inheritance",
-   "Multidisciplinary palliative and supportive care given the progressive, often fatal course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "krabbe_disease-pathway",
-   "title": "Krabbe disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive leukodystrophy caused by deficiency of the enzyme galactocerebrosidase (galactosylceramidase), leading to demyelination and formation of characteristic multinucleated globoid cells",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extreme irritability with hypertonia and feeding failure in early infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assay of galactocerebrosidase enzyme activity, including newborn screening in some programmes, GALC molecular genetic testing to confirm the diagnosis, Psychosine measurement to support diagnosis and assess severity"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Haematopoietic stem cell transplantation as the only disease-modifying option, of benefit mainly in presymptomatic infants identified on newborn screening or in early later-onset disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking early extreme irritability and stiffness for colic, reflux, or a behavioural problem"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of krabbe disease."
-  }
- ],
- "tables": [
-  {
-   "id": "krabbe_disease-matrix",
-   "title": "Krabbe disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive leukodystrophy caused by deficiency of the enzyme galactocerebrosidase (galactosylceramidase), leading to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive leukodystrophy caused by deficiency of the enzyme galactocerebrosidase (galactosylceramidase), leading to demyelination and formation of characteristic multinucleated globoid cells",
+      "The classic early-infantile form presents in the first months with irritability, feeding difficulty, stiffness, and hyperirritability, followed by rapid neurodegeneration",
+      "Marked irritability, hypertonicity, and exaggerated startle to stimuli are prominent early features",
+      "Accumulation of the toxic metabolite psychosine (galactosylsphingosine) is central to the destruction of myelin-forming cells",
+      "Peripheral neuropathy with slowed nerve conduction and raised cerebrospinal fluid protein commonly accompany the central disease",
+      "Later-onset (late-infantile, juvenile, and adult) forms present with more insidious motor, visual, and cognitive decline",
+      "MRI shows white matter change, and globoid cells are a defining pathological hallmark",
+      "Haematopoietic stem cell transplantation in presymptomatic infants can alter the course, while symptomatic infantile disease responds poorly"
     ],
-    [
-     "Key Investigations",
-     "Assay of galactocerebrosidase enzyme activity, including newborn screening in some programmes, GALC molecular genetic testing to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Krabbe disease is caused by biallelic pathogenic variants in GALC, encoding the lysosomal enzyme galactocerebrosidase. Deficient activity impairs degradation of galactolipids found in myelin, notably galactosylceramide, and leads to accumulation of the cytotoxic metabolite psychosine (galactosylsphingosine). Psychosine is toxic to oligodendrocytes and Schwann cells, causing widespread loss of myelin-forming cells and demyelination of the central and peripheral nervous system. The pathological response includes infiltration by characteristic multinucleated macrophages (globoid cells), giving the alternative name globoid cell leukodystrophy.",
+    "additionalDifferentials": [
+      "Metachromatic leukodystrophy",
+      "Other leukodystrophies including X-linked adrenoleukodystrophy",
+      "GM1 and GM2 gangliosidoses",
+      "Non-accidental injury or other causes of infantile irritability and hypertonia",
+      "Acquired encephalopathies of infancy"
     ],
-    [
-     "Primary Differentials",
-     "Metachromatic leukodystrophy, Other leukodystrophies including X-linked adrenoleukodystrophy, GM1 and GM2 gangliosidoses",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assay of galactocerebrosidase enzyme activity, including newborn screening in some programmes",
+      "GALC molecular genetic testing to confirm the diagnosis",
+      "Psychosine measurement to support diagnosis and assess severity",
+      "Brain MRI to characterise white matter involvement",
+      "Nerve conduction studies and cerebrospinal fluid protein assessment"
     ],
-    [
-     "Management Strategy",
-     "Haematopoietic stem cell transplantation as the only disease-modifying option, of benefit mainly in presymptomatic infants",
-     "Core treatment modality"
+    "redFlags": [
+      "Extreme irritability with hypertonia and feeding failure in early infancy",
+      "Rapid neurodevelopmental regression",
+      "Emerging seizures or loss of vision",
+      "Bulbar dysfunction with aspiration risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking early extreme irritability and stiffness for colic, reflux, or a behavioural problem",
-     "Prevent diagnostic or management error"
+    "prognosis": "The early-infantile form is rapidly progressive and usually fatal within the first few years of life. Later-onset forms progress more slowly and variably. Stem cell transplantation offers benefit mainly when performed in presymptomatic infants, and once symptoms are established the outlook remains poor.",
+    "pitfalls": [
+      "Mistaking early extreme irritability and stiffness for colic, reflux, or a behavioural problem",
+      "Confusing it with metachromatic leukodystrophy without appropriate enzyme testing",
+      "Missing the narrow presymptomatic window for transplantation",
+      "Overlooking peripheral neuropathy as a supportive diagnostic clue"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Haematopoietic stem cell transplantation as the only disease-modifying option, of benefit mainly in presymptomatic infants identified on newborn screening or in early later-onset disease",
+      "Antispasticity agents such as baclofen and measures to control the marked irritability",
+      "Antiseizure medication for seizures",
+      "Nutritional support and feeding management, including gastrostomy, for feeding difficulty",
+      "Respiratory care with secretion management and physiotherapy for tone and contractures",
+      "Occupational therapy and communication aids for slower later-onset forms",
+      "Genetic counselling and family testing, reflecting autosomal recessive GALC inheritance",
+      "Multidisciplinary palliative and supportive care given the progressive, often fatal course"
     ]
-   ],
-   "caption": "Overview comparison matrix for krabbe disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "krabbe-disease-real-image",
-   "title": "Krabbe disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "krabbe_disease-pathway",
+      "title": "Krabbe disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive leukodystrophy caused by deficiency of the enzyme galactocerebrosidase (galactosylceramidase), leading to demyelination and formation of characteristic multinucleated globoid cells",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extreme irritability with hypertonia and feeding failure in early infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assay of galactocerebrosidase enzyme activity, including newborn screening in some programmes, GALC molecular genetic testing to confirm the diagnosis, Psychosine measurement to support diagnosis and assess severity"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Haematopoietic stem cell transplantation as the only disease-modifying option, of benefit mainly in presymptomatic infants identified on newborn screening or in early later-onset disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking early extreme irritability and stiffness for colic, reflux, or a behavioural problem"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of krabbe disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "krabbe_disease-matrix",
+      "title": "Krabbe disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive leukodystrophy caused by deficiency of the enzyme galactocerebrosidase (galactosylceramidase), leading to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assay of galactocerebrosidase enzyme activity, including newborn screening in some programmes, GALC molecular genetic testing to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Metachromatic leukodystrophy, Other leukodystrophies including X-linked adrenoleukodystrophy, GM1 and GM2 gangliosidoses",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Haematopoietic stem cell transplantation as the only disease-modifying option, of benefit mainly in presymptomatic infants",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking early extreme irritability and stiffness for colic, reflux, or a behavioural problem",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for krabbe disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "krabbe_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Galactocerebrosidase enzyme activity assay",
+          "cells": [
+            {
+              "text": "Deficient activity; included in some newborn screening programmes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GALC molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosine measurement",
+          "cells": [
+            {
+              "text": "Supports diagnosis and assesses severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "White matter involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and CSF protein",
+          "cells": [
+            {
+              "text": "Slowed nerve conduction and raised CSF protein"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "krabbe_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metachromatic leukodystrophy",
+          "cells": [
+            {
+              "text": "Separated by appropriate enzyme testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury or other causes of infantile irritability",
+          "cells": [
+            {
+              "text": "Extreme irritability and hypertonia; GALC testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GM1 and GM2 gangliosidoses",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "krabbe_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Only disease-modifying option; mainly for presymptomatic infants found on newborn screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity and irritability control",
+          "cells": [
+            {
+              "text": "Baclofen and measures for marked irritability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and feeding support",
+          "cells": [
+            {
+              "text": "Feeding management, including gastrostomy, for feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory care and physiotherapy",
+          "cells": [
+            {
+              "text": "Secretion management; tone and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and communication aids",
+          "cells": [
+            {
+              "text": "For slower later-onset forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive GALC inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative and supportive care",
+          "cells": [
+            {
+              "text": "Progressive, often fatal course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "krabbe_disease-dx-mgmt",
+      "title": "Diagnosis and management of Krabbe disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Krabbe: extreme irritability, stiffness and feeding failure in early infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (regression, seizures, vision loss, bulbar dysfunction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist referral for transplant assessment and aspiration risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GALC enzyme assay, GALC gene testing, psychosine, MRI, nerve studies, CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does enzyme or GALC gene testing confirm galactocerebrosidase deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metachromatic leukodystrophy and other leukodystrophies or gangliosidoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stem cell transplantation, mainly for presymptomatic infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Baclofen and measures to control marked irritability",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication and feeding support, including gastrostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Respiratory care, secretion management and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and palliative, supportive care for a progressive course",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early-infantile form is rapidly progressive and usually fatal in the first years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

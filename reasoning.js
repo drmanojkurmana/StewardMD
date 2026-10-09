@@ -3008,6 +3008,8 @@
     if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(stripCite(e.prognosis)) + '</p>';
     if (cp) sections.push({ ic: rIco("trend"), title: "Course & prognosis", html: cp });
 
+    // Schema v2 tables and flowchart (kb-v2-loader.js fills the slot; off unless SMD_KBV2_ON).
+    if (window.SMD_KBV2_ON) sections.push({ ic: rIco("table"), title: "Tables and flowchart", html: '<div class="kbv2-slot" data-kbv2-id="' + esc(id) + '"></div>' });
     if (e.algorithms && e.algorithms.length) {
       var algHtml = e.algorithms.map(function (a) {
         var steps = (a.steps || []).map(function (st, idx) {
@@ -4445,6 +4447,7 @@
     else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
     var visualSecs = "";
     if (H) {
+      if (window.SMD_KBV2_ON) visualSecs += '<section class="dx-reader-sec"><div class="kbv2-slot" data-kbv2-id="' + esc(id) + '"></div></section>';
       if (H.algorithms && H.algorithms.length) {
         var algHtml = H.algorithms.map(function (a) {
           var steps = (a.steps || []).map(function (st, idx) {

@@ -1,176 +1,232 @@
 {
- "id": "capillary_malformation_avm_syndrome",
- "name": "Capillary malformation-AVM syndrome",
- "aliases": [
-  "CM-AVM",
-  "CM-AVM1 (RASA1)",
-  "CM-AVM2 (EPHB4)",
-  "capillary malformation-arteriovenous malformation syndrome"
- ],
- "class": "non_infective",
- "system": "Vascular anomalies / Dermatology",
- "specialty": "Vascular Anomalies",
- "referenceOnly": true,
- "reference": {
-  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant disorder caused by loss-of-function variants in RASA1 (CM-AVM1) or EPHB4 (CM-AVM2)",
-   "The cutaneous hallmark is multiple small, round-to-oval, pink-red capillary malformations, often with a pale halo, scattered over the body",
-   "A minority of patients harbour fast-flow lesions, namely arteriovenous malformations or fistulae, which may involve the skin, muscle, bone or central nervous system",
-   "High-flow shunting through an AVM can cause pain, bleeding, tissue overgrowth or, when intracranial or spinal, serious neurological events",
-   "The multifocal small capillary stains differ from the single large segmental port-wine stain of Sturge-Weber syndrome",
-   "Parkes-Weber syndrome (a limb with capillary staining, overgrowth and high-flow AV shunting) lies within the RASA1-related spectrum",
-   "EPHB4-related disease may overlap phenotypically with hereditary haemorrhagic telangiectasia",
-   "Family screening and consideration of central nervous system imaging are important because AVMs may be clinically silent"
+  "id": "capillary_malformation_avm_syndrome",
+  "name": "Capillary malformation-AVM syndrome",
+  "aliases": [
+    "CM-AVM",
+    "CM-AVM1 (RASA1)",
+    "CM-AVM2 (EPHB4)",
+    "capillary malformation-arteriovenous malformation syndrome"
   ],
-  "pathophysiology": "Capillary malformation-AVM syndrome results from germline loss-of-function variants in RASA1 or EPHB4, genes that regulate RAS-MAPK signalling in vascular endothelium and thereby control the balance between arterial, venous and capillary differentiation. A second somatic hit in affected vessels is thought to precipitate individual lesions, explaining the multifocal and variable phenotype. Most lesions are the small multifocal capillary malformations, but the same signalling disturbance can produce fast-flow arteriovenous malformations and fistulae capable of significant shunting and their attendant complications.",
-  "additionalDifferentials": [
-   "Sturge-Weber syndrome (segmental port-wine capillary malformation)",
-   "Hereditary haemorrhagic telangiectasia (especially with EPHB4)",
-   "Parkes-Weber syndrome (considered part of the RASA1 spectrum)",
-   "Sporadic isolated arteriovenous malformation",
-   "Klippel-Trenaunay syndrome (slow-flow, with overgrowth)",
-   "Multiple isolated capillary malformations without a syndrome"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing for RASA1 and EPHB4 variants",
-   "Doppler ultrasound to identify fast-flow within cutaneous lesions",
-   "MRI/MRA to characterise and localise arteriovenous malformations",
-   "Brain and spine imaging to screen for central nervous system AVMs",
-   "Echocardiography if high-output cardiac effects are suspected",
-   "Family history review and cascade screening of relatives"
-  ],
-  "redFlags": [
-   "Neurological symptoms suggesting an intracranial or spinal arteriovenous malformation",
-   "High-output cardiac failure from large AV shunting",
-   "Bleeding or ulceration of a fast-flow lesion",
-   "Rapid limb enlargement or overgrowth (Parkes-Weber pattern)",
-   "New bruit or thrill over a previously stable lesion"
-  ],
-  "prognosis": "Most affected individuals have only benign multifocal capillary stains and a good prognosis, but the presence of a fast-flow arteriovenous malformation, particularly in the brain or spine, can lead to serious or life-threatening complications; lifelong awareness and targeted surveillance are advised for gene carriers.",
-  "pitfalls": [
-   "Dismissing multiple small capillary stains as trivial and missing the underlying diagnosis",
-   "Failing to screen for occult central nervous system arteriovenous malformations",
-   "Confusing the multifocal lesions with a single Sturge-Weber port-wine stain",
-   "Not offering genetic counselling and family screening for an autosomal dominant condition"
-  ],
-  "references": [
-   "ISSVA Classification of Vascular Anomalies",
-   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Molecular genetic testing for RASA1 and EPHB4 variants to establish the diagnosis",
-   "Brain and spine imaging to screen for central nervous system arteriovenous malformations because of the haemorrhage risk",
-   "Doppler ultrasound to detect fast-flow within cutaneous lesions, with MRI/MRA to localise arteriovenous malformations",
-   "Embolisation or surgical resection of symptomatic high-flow lesions through a vascular anomalies team",
-   "Pulsed dye laser for cosmetically significant capillary stains",
-   "Echocardiography and cardiac review if high-output effects from large shunts are suspected",
-   "Genetic counselling and cascade screening of at-risk relatives given autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "capillary_malformation_avm_syndrome-pathway",
-   "title": "Capillary malformation-AVM syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant disorder caused by loss-of-function variants in RASA1 (CM-AVM1) or EPHB4 (CM-AVM2)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological symptoms suggesting an intracranial or spinal arteriovenous malformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing for RASA1 and EPHB4 variants, Doppler ultrasound to identify fast-flow within cutaneous lesions, MRI/MRA to characterise and localise arteriovenous malformations"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Molecular genetic testing for RASA1 and EPHB4 variants to establish the diagnosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing multiple small capillary stains as trivial and missing the underlying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of capillary malformation-avm syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "capillary_malformation_avm_syndrome-matrix",
-   "title": "Capillary malformation-AVM syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant disorder caused by loss-of-function variants in RASA1 (CM-AVM1) or EPHB4 (CM-AVM2)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular anomalies / Dermatology",
+  "specialty": "Vascular Anomalies",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant disorder caused by loss-of-function variants in RASA1 (CM-AVM1) or EPHB4 (CM-AVM2)",
+      "The cutaneous hallmark is multiple small, round-to-oval, pink-red capillary malformations, often with a pale halo, scattered over the body",
+      "A minority of patients harbour fast-flow lesions, namely arteriovenous malformations or fistulae, which may involve the skin, muscle, bone or central nervous system",
+      "High-flow shunting through an AVM can cause pain, bleeding, tissue overgrowth or, when intracranial or spinal, serious neurological events",
+      "The multifocal small capillary stains differ from the single large segmental port-wine stain of Sturge-Weber syndrome",
+      "Parkes-Weber syndrome (a limb with capillary staining, overgrowth and high-flow AV shunting) lies within the RASA1-related spectrum",
+      "EPHB4-related disease may overlap phenotypically with hereditary haemorrhagic telangiectasia",
+      "Family screening and consideration of central nervous system imaging are important because AVMs may be clinically silent"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing for RASA1 and EPHB4 variants, Doppler ultrasound to identify fast-flow within cutaneous lesions,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Capillary malformation-AVM syndrome results from germline loss-of-function variants in RASA1 or EPHB4, genes that regulate RAS-MAPK signalling in vascular endothelium and thereby control the balance between arterial, venous and capillary differentiation. A second somatic hit in affected vessels is thought to precipitate individual lesions, explaining the multifocal and variable phenotype. Most lesions are the small multifocal capillary malformations, but the same signalling disturbance can produce fast-flow arteriovenous malformations and fistulae capable of significant shunting and their attendant complications.",
+    "additionalDifferentials": [
+      "Sturge-Weber syndrome (segmental port-wine capillary malformation)",
+      "Hereditary haemorrhagic telangiectasia (especially with EPHB4)",
+      "Parkes-Weber syndrome (considered part of the RASA1 spectrum)",
+      "Sporadic isolated arteriovenous malformation",
+      "Klippel-Trenaunay syndrome (slow-flow, with overgrowth)",
+      "Multiple isolated capillary malformations without a syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Sturge-Weber syndrome (segmental port-wine capillary malformation), Hereditary haemorrhagic telangiectasia (especially with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing for RASA1 and EPHB4 variants",
+      "Doppler ultrasound to identify fast-flow within cutaneous lesions",
+      "MRI/MRA to characterise and localise arteriovenous malformations",
+      "Brain and spine imaging to screen for central nervous system AVMs",
+      "Echocardiography if high-output cardiac effects are suspected",
+      "Family history review and cascade screening of relatives"
     ],
-    [
-     "Management Strategy",
-     "Molecular genetic testing for RASA1 and EPHB4 variants to establish the diagnosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological symptoms suggesting an intracranial or spinal arteriovenous malformation",
+      "High-output cardiac failure from large AV shunting",
+      "Bleeding or ulceration of a fast-flow lesion",
+      "Rapid limb enlargement or overgrowth (Parkes-Weber pattern)",
+      "New bruit or thrill over a previously stable lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing multiple small capillary stains as trivial and missing the underlying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most affected individuals have only benign multifocal capillary stains and a good prognosis, but the presence of a fast-flow arteriovenous malformation, particularly in the brain or spine, can lead to serious or life-threatening complications; lifelong awareness and targeted surveillance are advised for gene carriers.",
+    "pitfalls": [
+      "Dismissing multiple small capillary stains as trivial and missing the underlying diagnosis",
+      "Failing to screen for occult central nervous system arteriovenous malformations",
+      "Confusing the multifocal lesions with a single Sturge-Weber port-wine stain",
+      "Not offering genetic counselling and family screening for an autosomal dominant condition"
+    ],
+    "references": [
+      "ISSVA Classification of Vascular Anomalies",
+      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Molecular genetic testing for RASA1 and EPHB4 variants to establish the diagnosis",
+      "Brain and spine imaging to screen for central nervous system arteriovenous malformations because of the haemorrhage risk",
+      "Doppler ultrasound to detect fast-flow within cutaneous lesions, with MRI/MRA to localise arteriovenous malformations",
+      "Embolisation or surgical resection of symptomatic high-flow lesions through a vascular anomalies team",
+      "Pulsed dye laser for cosmetically significant capillary stains",
+      "Echocardiography and cardiac review if high-output effects from large shunts are suspected",
+      "Genetic counselling and cascade screening of at-risk relatives given autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for capillary malformation-avm syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "capillary-malformation-avm-syndrome-real-image",
-   "title": "Capillary malformation-AVM syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "capillary_malformation_avm_syndrome-pathway",
+      "title": "Capillary malformation-AVM syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant disorder caused by loss-of-function variants in RASA1 (CM-AVM1) or EPHB4 (CM-AVM2)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological symptoms suggesting an intracranial or spinal arteriovenous malformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing for RASA1 and EPHB4 variants, Doppler ultrasound to identify fast-flow within cutaneous lesions, MRI/MRA to characterise and localise arteriovenous malformations"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Molecular genetic testing for RASA1 and EPHB4 variants to establish the diagnosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing multiple small capillary stains as trivial and missing the underlying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of capillary malformation-avm syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "capillary_malformation_avm_syndrome-matrix",
+      "title": "Capillary malformation-AVM syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant disorder caused by loss-of-function variants in RASA1 (CM-AVM1) or EPHB4 (CM-AVM2)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing for RASA1 and EPHB4 variants, Doppler ultrasound to identify fast-flow within cutaneous lesions,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sturge-Weber syndrome (segmental port-wine capillary malformation), Hereditary haemorrhagic telangiectasia (especially with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Molecular genetic testing for RASA1 and EPHB4 variants to establish the diagnosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing multiple small capillary stains as trivial and missing the underlying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for capillary malformation-avm syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA Classification of Vascular Anomalies / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "capillary_malformation_avm_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in capillary malformation-AVM syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "RASA1 and EPHB4 molecular testing", "cells": [{"text": "Loss-of-function variant (CM-AVM1 or CM-AVM2)"}], "cite": "c1"},
+        {"parameter": "Doppler ultrasound of cutaneous lesions", "cells": [{"text": "Fast flow within lesions"}], "cite": "c1"},
+        {"parameter": "MRI or MRA", "cells": [{"text": "Localises arteriovenous malformations"}], "cite": "c1"},
+        {"parameter": "Brain and spine imaging", "cells": [{"text": "Central nervous system arteriovenous malformations, which may be clinically silent"}], "cite": "c1"},
+        {"parameter": "Echocardiography", "cells": [{"text": "High-output cardiac effects from large shunts"}], "cite": "c1"},
+        {"parameter": "Family history and cascade screening", "cells": [{"text": "Autosomal dominant inheritance"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "capillary_malformation_avm_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike vascular syndromes",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Sturge-Weber syndrome", "cells": [{"text": "A single large segmental port-wine stain rather than multiple small capillary stains"}], "cite": "c1"},
+        {"parameter": "Sporadic isolated arteriovenous malformation", "cells": [{"text": "Lacks the multifocal small capillary malformations and family history of the syndrome"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "capillary_malformation_avm_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in capillary malformation-AVM syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Genetic confirmation", "cells": [{"text": "RASA1 and EPHB4 testing"}, {"text": "Establishes the diagnosis"}], "cite": "c1"},
+        {"parameter": "Central nervous system screening", "cells": [{"text": "Brain and spine imaging for arteriovenous malformations given haemorrhage risk"}, {"text": "Screening"}], "cite": "c1"},
+        {"parameter": "Fast-flow localisation", "cells": [{"text": "Doppler ultrasound and MRI or MRA"}, {"text": "Diagnostic"}], "cite": "c1"},
+        {"parameter": "Symptomatic high-flow lesions", "cells": [{"text": "Embolisation or surgical resection by a vascular anomalies team"}, {"text": "Selected cases"}], "cite": "c1"},
+        {"parameter": "Pulsed dye laser", "cells": [{"text": "Cosmetically significant capillary stains"}, {"text": "Optional"}], "cite": "c1"},
+        {"parameter": "Cardiac review", "cells": [{"text": "Echocardiography if high-output effects from large shunts are suspected"}, {"text": "As indicated"}], "cite": "c1"},
+        {"parameter": "Family counselling", "cells": [{"text": "Cascade screening of at-risk relatives"}, {"text": "Autosomal dominant"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "capillary_malformation_avm_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of capillary malformation-AVM syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Multiple small capillary stains with pale halos, sometimes with a family history", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: neurological symptoms, high-output cardiac failure, bleeding, or new bruit or thrill?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent brain and spine imaging; vascular anomalies team; cardiac review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "RASA1 and EPHB4 testing; Doppler and MRI or MRA for fast-flow lesions", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Pathogenic RASA1 or EPHB4 variant confirmed?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Surveillance including central nervous system screening; treat symptomatic AVMs; family screening", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Consider Sturge-Weber syndrome, sporadic AVM or hereditary haemorrhagic telangiectasia", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Good prognosis with cutaneous lesions only; intracranial AVMs carry serious risk", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

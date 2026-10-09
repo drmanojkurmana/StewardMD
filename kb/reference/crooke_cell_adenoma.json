@@ -1,175 +1,462 @@
 {
- "id": "crooke_cell_adenoma",
- "name": "Crooke cell adenoma",
- "aliases": [
-  "Crooke cell adenoma",
-  "Crooke hyaline change adenoma",
-  "corticotroph adenoma with Crooke change"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A distinct and clinically aggressive variant of corticotroph pituitary adenoma defined histologically by Crooke hyaline change",
-   "Crooke change is the accumulation of a ring of hyaline keratin filaments in the cytoplasm of corticotrophs, displacing secretory granules and the nucleus",
-   "In non-neoplastic corticotrophs Crooke change is a physiological response to high cortisol, whereas a Crooke cell adenoma is a tumour composed predominantly of such cells",
-   "It may be functioning and cause Cushing disease, or clinically silent and present with mass effect",
-   "It is recognised as a high-risk aggressive pituitary tumour subtype with a tendency to invade, recur and resist treatment",
-   "Tumours are often macroadenomas at diagnosis with cavernous sinus invasion",
-   "Diagnosis is histopathological, with immunostaining for ACTH and low-molecular-weight cytokeratin showing the perinuclear ring pattern",
-   "Close long-term surveillance is required because of the high recurrence rate"
+  "id": "crooke_cell_adenoma",
+  "name": "Crooke cell adenoma",
+  "aliases": [
+    "Crooke cell adenoma",
+    "Crooke hyaline change adenoma",
+    "corticotroph adenoma with Crooke change"
   ],
-  "pathophysiology": "The Crooke cell adenoma is a corticotroph-lineage pituitary tumour in which the tumour cells display Crooke hyaline change, a dense perinuclear accumulation of cytokeratin intermediate filaments. In non-neoplastic corticotrophs this change is induced by glucocorticoid excess and reflects feedback; when it dominates a tumour it defines an aggressive adenoma subtype. These tumours arise from pro-opiomelanocortin-expressing corticotrophs and may oversecrete ACTH, producing Cushing disease, or be hormonally silent yet immunopositive for ACTH. The keratin accumulation is thought to accompany a more invasive, treatment-resistant biology, and the tumours frequently invade surrounding structures and recur after resection.",
-  "additionalDifferentials": [
-   "Ordinary corticotroph adenoma causing Cushing disease without Crooke change",
-   "Silent corticotroph adenoma",
-   "Non-functioning pituitary macroadenoma",
-   "Other aggressive pituitary tumours and pituitary carcinoma",
-   "Nelson syndrome corticotroph tumour",
-   "Sellar metastasis or other sellar mass"
-  ],
-  "additionalInvestigations": [
-   "Histopathology with haematoxylin and eosin showing perinuclear hyaline change",
-   "Immunohistochemistry for ACTH and low-molecular-weight cytokeratin demonstrating the perinuclear keratin ring",
-   "Proliferation markers such as Ki-67 and the mitotic count to gauge aggressiveness",
-   "Pituitary MRI to assess size and cavernous sinus or parasellar invasion",
-   "Biochemical assessment for ACTH-dependent hypercortisolism when the tumour is functioning",
-   "Visual field testing where there is chiasmal compression"
-  ],
-  "redFlags": [
-   "Radiological invasion of the cavernous sinus or rapid regrowth",
-   "Persistent or recurrent hypercortisolism after surgery",
-   "Rising proliferation indices suggesting aggressive behaviour or progression toward carcinoma",
-   "Visual deterioration from mass effect"
-  ],
-  "prognosis": "Crooke cell adenomas are aggressive, with high rates of recurrence and resistance to conventional therapy; multimodal treatment with surgery, radiotherapy and medical therapy is often required and long-term surveillance is essential, with a subset progressing despite treatment.",
-  "pitfalls": [
-   "Grading it as an ordinary adenoma and under-estimating the recurrence risk",
-   "Missing the diagnosis without cytokeratin immunostaining",
-   "Assuming a silent tumour is a benign non-functioning adenoma rather than an aggressive corticotroph variant",
-   "Providing inadequate long-term follow-up after apparently complete resection"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "WHO Classification of Pituitary Tumours",
-   "DeGroot's Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake transsphenoidal surgical resection as first-line treatment for this aggressive corticotroph tumour, aiming for maximal safe debulking of frequently invasive macroadenomas",
-   "Deliver adjuvant radiotherapy for residual, invasive or recurrent disease",
-   "For functioning tumours causing Cushing disease, control hypercortisolism with steroidogenesis inhibitors such as metyrapone or ketoconazole and pituitary-directed agents such as pasireotide or cabergoline",
-   "Consider temozolomide chemotherapy for aggressive or progressive tumours refractory to surgery and radiotherapy",
-   "Replace deficient anterior pituitary hormones and manage mass effect, with visual field monitoring where there is chiasmal compression",
-   "Undertake long-term surveillance with serial pituitary MRI and biochemical monitoring for recurrence",
-   "Manage through a specialist pituitary multidisciplinary team spanning neurosurgery, endocrinology and radiation oncology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "crooke_cell_adenoma-pathway",
-   "title": "Crooke cell adenoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A distinct and clinically aggressive variant of corticotroph pituitary adenoma defined histologically by Crooke hyaline change",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Radiological invasion of the cavernous sinus or rapid regrowth",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Histopathology with haematoxylin and eosin showing perinuclear hyaline change, Immunohistochemistry for ACTH and low-molecular-weight cytokeratin demonstrating the perinuclear keratin ring, Proliferation markers such as"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake transsphenoidal surgical resection as first-line treatment for this aggressive corticotroph tumour, aiming for maximal safe debulking of frequently invasive macroadenomas"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Grading it as an ordinary adenoma and under-estimating the recurrence risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of crooke cell adenoma."
-  }
- ],
- "tables": [
-  {
-   "id": "crooke_cell_adenoma-matrix",
-   "title": "Crooke cell adenoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A distinct and clinically aggressive variant of corticotroph pituitary adenoma defined histologically by Crooke hyaline change",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A distinct and clinically aggressive variant of corticotroph pituitary adenoma defined histologically by Crooke hyaline change",
+      "Crooke change is the accumulation of a ring of hyaline keratin filaments in the cytoplasm of corticotrophs, displacing secretory granules and the nucleus",
+      "In non-neoplastic corticotrophs Crooke change is a physiological response to high cortisol, whereas a Crooke cell adenoma is a tumour composed predominantly of such cells",
+      "It may be functioning and cause Cushing disease, or clinically silent and present with mass effect",
+      "It is recognised as a high-risk aggressive pituitary tumour subtype with a tendency to invade, recur and resist treatment",
+      "Tumours are often macroadenomas at diagnosis with cavernous sinus invasion",
+      "Diagnosis is histopathological, with immunostaining for ACTH and low-molecular-weight cytokeratin showing the perinuclear ring pattern",
+      "Close long-term surveillance is required because of the high recurrence rate"
     ],
-    [
-     "Key Investigations",
-     "Histopathology with haematoxylin and eosin showing perinuclear hyaline change, Immunohistochemistry for ACTH and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The Crooke cell adenoma is a corticotroph-lineage pituitary tumour in which the tumour cells display Crooke hyaline change, a dense perinuclear accumulation of cytokeratin intermediate filaments. In non-neoplastic corticotrophs this change is induced by glucocorticoid excess and reflects feedback; when it dominates a tumour it defines an aggressive adenoma subtype. These tumours arise from pro-opiomelanocortin-expressing corticotrophs and may oversecrete ACTH, producing Cushing disease, or be hormonally silent yet immunopositive for ACTH. The keratin accumulation is thought to accompany a more invasive, treatment-resistant biology, and the tumours frequently invade surrounding structures and recur after resection.",
+    "additionalDifferentials": [
+      "Ordinary corticotroph adenoma causing Cushing disease without Crooke change",
+      "Silent corticotroph adenoma",
+      "Non-functioning pituitary macroadenoma",
+      "Other aggressive pituitary tumours and pituitary carcinoma",
+      "Nelson syndrome corticotroph tumour",
+      "Sellar metastasis or other sellar mass"
     ],
-    [
-     "Primary Differentials",
-     "Ordinary corticotroph adenoma causing Cushing disease without Crooke change, Silent corticotroph adenoma, Non-functioning",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Histopathology with haematoxylin and eosin showing perinuclear hyaline change",
+      "Immunohistochemistry for ACTH and low-molecular-weight cytokeratin demonstrating the perinuclear keratin ring",
+      "Proliferation markers such as Ki-67 and the mitotic count to gauge aggressiveness",
+      "Pituitary MRI to assess size and cavernous sinus or parasellar invasion",
+      "Biochemical assessment for ACTH-dependent hypercortisolism when the tumour is functioning",
+      "Visual field testing where there is chiasmal compression"
     ],
-    [
-     "Management Strategy",
-     "Undertake transsphenoidal surgical resection as first-line treatment for this aggressive corticotroph tumour, aiming for maximal",
-     "Core treatment modality"
+    "redFlags": [
+      "Radiological invasion of the cavernous sinus or rapid regrowth",
+      "Persistent or recurrent hypercortisolism after surgery",
+      "Rising proliferation indices suggesting aggressive behaviour or progression toward carcinoma",
+      "Visual deterioration from mass effect"
     ],
-    [
-     "Clinical Pitfall",
-     "Grading it as an ordinary adenoma and under-estimating the recurrence risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Crooke cell adenomas are aggressive, with high rates of recurrence and resistance to conventional therapy; multimodal treatment with surgery, radiotherapy and medical therapy is often required and long-term surveillance is essential, with a subset progressing despite treatment.",
+    "pitfalls": [
+      "Grading it as an ordinary adenoma and under-estimating the recurrence risk",
+      "Missing the diagnosis without cytokeratin immunostaining",
+      "Assuming a silent tumour is a benign non-functioning adenoma rather than an aggressive corticotroph variant",
+      "Providing inadequate long-term follow-up after apparently complete resection"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "WHO Classification of Pituitary Tumours",
+      "DeGroot's Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake transsphenoidal surgical resection as first-line treatment for this aggressive corticotroph tumour, aiming for maximal safe debulking of frequently invasive macroadenomas",
+      "Deliver adjuvant radiotherapy for residual, invasive or recurrent disease",
+      "For functioning tumours causing Cushing disease, control hypercortisolism with steroidogenesis inhibitors such as metyrapone or ketoconazole and pituitary-directed agents such as pasireotide or cabergoline",
+      "Consider temozolomide chemotherapy for aggressive or progressive tumours refractory to surgery and radiotherapy",
+      "Replace deficient anterior pituitary hormones and manage mass effect, with visual field monitoring where there is chiasmal compression",
+      "Undertake long-term surveillance with serial pituitary MRI and biochemical monitoring for recurrence",
+      "Manage through a specialist pituitary multidisciplinary team spanning neurosurgery, endocrinology and radiation oncology"
     ]
-   ],
-   "caption": "Overview comparison matrix for crooke cell adenoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "crooke-cell-adenoma-real-image",
-   "title": "Crooke cell adenoma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "crooke_cell_adenoma-pathway",
+      "title": "Crooke cell adenoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A distinct and clinically aggressive variant of corticotroph pituitary adenoma defined histologically by Crooke hyaline change",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Radiological invasion of the cavernous sinus or rapid regrowth",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Histopathology with haematoxylin and eosin showing perinuclear hyaline change, Immunohistochemistry for ACTH and low-molecular-weight cytokeratin demonstrating the perinuclear keratin ring, Proliferation markers such as"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake transsphenoidal surgical resection as first-line treatment for this aggressive corticotroph tumour, aiming for maximal safe debulking of frequently invasive macroadenomas"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Grading it as an ordinary adenoma and under-estimating the recurrence risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of crooke cell adenoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "crooke_cell_adenoma-matrix",
+      "title": "Crooke cell adenoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A distinct and clinically aggressive variant of corticotroph pituitary adenoma defined histologically by Crooke hyaline change",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Histopathology with haematoxylin and eosin showing perinuclear hyaline change, Immunohistochemistry for ACTH and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ordinary corticotroph adenoma causing Cushing disease without Crooke change, Silent corticotroph adenoma, Non-functioning",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake transsphenoidal surgical resection as first-line treatment for this aggressive corticotroph tumour, aiming for maximal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Grading it as an ordinary adenoma and under-estimating the recurrence risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for crooke cell adenoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "crooke_cell_adenoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematoxylin and eosin histology",
+          "cells": [
+            {
+              "text": "Perinuclear hyaline change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for ACTH and cytokeratin",
+          "cells": [
+            {
+              "text": "Perinuclear keratin ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ki-67 and mitotic count",
+          "cells": [
+            {
+              "text": "Proliferation and aggressiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Size and cavernous sinus invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing",
+          "cells": [
+            {
+              "text": "Chiasmal compression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crooke_cell_adenoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ordinary corticotroph adenoma without Crooke change",
+          "cells": [
+            {
+              "text": "Histology separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silent corticotroph adenoma",
+          "cells": [
+            {
+              "text": "Non-functioning corticotroph tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nelson syndrome corticotroph tumour",
+          "cells": [
+            {
+              "text": "Named look-alike after adrenalectomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crooke_cell_adenoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal resection",
+          "cells": [
+            {
+              "text": "First-line; maximal safe debulking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "Residual, invasive or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroidogenesis inhibitors",
+          "cells": [
+            {
+              "text": "Metyrapone or ketoconazole for functioning tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temozolomide",
+          "cells": [
+            {
+              "text": "Aggressive or progressive tumours refractory to surgery and radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement and mass effect",
+          "cells": [
+            {
+              "text": "Visual field monitoring where chiasmal compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial pituitary MRI and biochemistry for recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist team",
+          "cells": [
+            {
+              "text": "Neurosurgery, endocrinology and radiation oncology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "crooke_cell_adenoma-dx-mgmt",
+      "title": "Diagnosis and management of Crooke cell adenoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Crooke cell adenoma: ACTH-secreting pituitary tumour with hypercortisolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (cavernous sinus invasion, recurrence, rising proliferation, visual decline)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pituitary team review for visual loss or invasion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "H and E and ACTH cytokeratin staining; Ki-67; pituitary MRI; visual fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does cytokeratin staining show a perinuclear keratin ring?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ordinary corticotroph adenoma or other sellar mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal resection as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for residual or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Metyrapone or ketoconazole for hypercortisolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Temozolomide for refractory aggressive tumours; serial MRI surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Aggressive, with high recurrence and resistance; multimodal treatment is needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

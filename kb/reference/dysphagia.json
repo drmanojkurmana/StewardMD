@@ -1,177 +1,475 @@
 {
- "id": "dysphagia",
- "name": "Dysphagia",
- "aliases": [
-  "swallowing difficulty",
-  "oropharyngeal dysphagia",
-  "esophageal dysphagia",
-  "impaired swallow"
- ],
- "class": "non_infective",
- "system": "Geriatrics / Palliative",
- "specialty": "Geriatrics & Palliative Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Dysphagia is broadly divided into oropharyngeal difficulty initiating a swallow and oesophageal difficulty with food passing lower down, and the history usually distinguishes the two",
-   "Oropharyngeal dysphagia commonly follows stroke and neurodegenerative disease and presents with coughing or choking on swallowing, nasal regurgitation, and a wet or gurgly voice",
-   "Silent aspiration, in which material enters the airway without an overt cough, is a particular danger in older and neurologically impaired patients",
-   "A bedside swallow screen helps identify at-risk patients, and speech and language therapy assessment guides diet texture and swallowing strategies",
-   "Instrumental evaluation with videofluoroscopy or fibreoptic endoscopic evaluation of swallowing characterises the mechanism and directs safe management",
-   "Progressive dysphagia for solids that later involves liquids, with weight loss, raises concern for oesophageal malignancy or stricture and warrants prompt endoscopy",
-   "Management includes texture-modified diets and thickened fluids, positioning and swallowing techniques, oral hygiene to reduce aspiration pneumonia risk, and treating the underlying cause",
-   "Decisions about feeding tubes should be individualised; in advanced dementia they do not reliably prevent aspiration or prolong life, so careful goals-of-care discussion is essential"
+  "id": "dysphagia",
+  "name": "Dysphagia",
+  "aliases": [
+    "swallowing difficulty",
+    "oropharyngeal dysphagia",
+    "esophageal dysphagia",
+    "impaired swallow"
   ],
-  "pathophysiology": "Normal swallowing requires precise coordination of oral, pharyngeal, and oesophageal phases under neural control, with timely airway protection by laryngeal elevation and epiglottic closure. Oropharyngeal dysphagia arises from neuromuscular disorders (stroke, Parkinson disease, motor neuron disease, dementia) or local structural lesions that disrupt this coordination, impairing bolus transfer and airway protection so that material may enter the larynx and lungs. Oesophageal dysphagia results from mechanical obstruction (stricture, tumour, ring) or motility disorders that impede transit through the oesophagus. Age-related changes in muscle strength and sensation lower reserve and predispose to aspiration.",
-  "additionalDifferentials": [
-   "Stroke and other neurological disease causing oropharyngeal dysphagia",
-   "Oesophageal carcinoma or peptic stricture",
-   "Oesophageal motility disorder such as achalasia",
-   "Eosinophilic oesophagitis",
-   "Extrinsic compression, for example by a goitre or mediastinal mass",
-   "Xerostomia or medication-related swallowing difficulty",
-   "Globus sensation without true dysphagia"
-  ],
-  "additionalInvestigations": [
-   "Bedside swallow screening and formal speech and language therapy swallowing assessment",
-   "Videofluoroscopic swallow study or fibreoptic endoscopic evaluation of swallowing",
-   "Upper gastrointestinal endoscopy when an oesophageal or structural cause is suspected",
-   "Nutritional assessment and monitoring of weight and hydration",
-   "Evaluation for the underlying neurological or structural cause including relevant imaging"
-  ],
-  "redFlags": [
-   "Aspiration with coughing, choking, or recurrent chest infections, and the risk of aspiration pneumonia",
-   "Silent aspiration in a neurologically impaired patient",
-   "Progressive dysphagia with weight loss suggesting oesophageal malignancy",
-   "Complete inability to swallow secretions or acute food bolus obstruction",
-   "Rapidly worsening dysphagia with new neurological signs"
-  ],
-  "prognosis": "Prognosis depends on the underlying cause. Post-stroke dysphagia often improves over weeks with rehabilitation, whereas dysphagia from progressive neurodegenerative disease tends to worsen and, in advanced dementia, signals a poor overall prognosis. Untreated dysphagia leads to aspiration pneumonia, malnutrition, dehydration, and reduced quality of life; timely assessment and tailored management reduce these complications.",
-  "pitfalls": [
-   "Assuming an intact cough reflex excludes aspiration and thereby missing silent aspiration",
-   "Neglecting oral hygiene, which strongly influences aspiration pneumonia risk",
-   "Delaying endoscopy in progressive solid-food dysphagia with weight loss",
-   "Defaulting to tube feeding in advanced dementia without a goals-of-care discussion",
-   "Overlooking medications and dry mouth as contributors to swallowing difficulty"
-  ],
-  "references": [
-   "Hazzard's Geriatric Medicine and Gerontology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Obtain a speech and language therapy assessment to guide modified diet and fluid textures and swallowing strategies such as postural techniques",
-   "Characterise the mechanism with instrumental evaluation using videofluoroscopy or fibreoptic endoscopic evaluation of swallowing to direct safe feeding",
-   "Treat the underlying cause, including swallowing rehabilitation after stroke, optimising Parkinson disease therapy, endoscopic dilatation of strictures, or oncological management of tumours",
-   "Reduce aspiration through oral hygiene, upright positioning, supervised feeding and vigilance for aspiration pneumonia",
-   "Support nutrition and hydration with dietitian input, considering nasogastric or gastrostomy feeding when oral intake is unsafe or inadequate",
-   "Undertake advance care planning and comfort-focused feeding decisions in advanced dementia or progressive neurodegenerative disease",
-   "Arrange prompt upper gastrointestinal endoscopy for progressive dysphagia for solids then liquids with weight loss to exclude oesophageal malignancy",
-   "Coordinate multidisciplinary care across speech and language therapy, dietetics, gastroenterology and geriatric or palliative medicine"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dysphagia-pathway",
-   "title": "Dysphagia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Dysphagia is broadly divided into oropharyngeal difficulty initiating a swallow and oesophageal difficulty with food passing lower down, and the history usually distinguishes the two",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aspiration with coughing, choking, or recurrent chest infections, and the risk of aspiration pneumonia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bedside swallow screening and formal speech and language therapy swallowing assessment, Videofluoroscopic swallow study or fibreoptic endoscopic evaluation of swallowing, Upper gastrointestinal endoscopy when an"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Obtain a speech and language therapy assessment to guide modified diet and fluid textures and swallowing strategies such as postural techniques"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an intact cough reflex excludes aspiration and thereby missing silent aspiration"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dysphagia."
-  }
- ],
- "tables": [
-  {
-   "id": "dysphagia-matrix",
-   "title": "Dysphagia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Dysphagia is broadly divided into oropharyngeal difficulty initiating a swallow and oesophageal difficulty with food passing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Geriatrics / Palliative",
+  "specialty": "Geriatrics & Palliative Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Dysphagia is broadly divided into oropharyngeal difficulty initiating a swallow and oesophageal difficulty with food passing lower down, and the history usually distinguishes the two",
+      "Oropharyngeal dysphagia commonly follows stroke and neurodegenerative disease and presents with coughing or choking on swallowing, nasal regurgitation, and a wet or gurgly voice",
+      "Silent aspiration, in which material enters the airway without an overt cough, is a particular danger in older and neurologically impaired patients",
+      "A bedside swallow screen helps identify at-risk patients, and speech and language therapy assessment guides diet texture and swallowing strategies",
+      "Instrumental evaluation with videofluoroscopy or fibreoptic endoscopic evaluation of swallowing characterises the mechanism and directs safe management",
+      "Progressive dysphagia for solids that later involves liquids, with weight loss, raises concern for oesophageal malignancy or stricture and warrants prompt endoscopy",
+      "Management includes texture-modified diets and thickened fluids, positioning and swallowing techniques, oral hygiene to reduce aspiration pneumonia risk, and treating the underlying cause",
+      "Decisions about feeding tubes should be individualised; in advanced dementia they do not reliably prevent aspiration or prolong life, so careful goals-of-care discussion is essential"
     ],
-    [
-     "Key Investigations",
-     "Bedside swallow screening and formal speech and language therapy swallowing assessment, Videofluoroscopic swallow study or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Normal swallowing requires precise coordination of oral, pharyngeal, and oesophageal phases under neural control, with timely airway protection by laryngeal elevation and epiglottic closure. Oropharyngeal dysphagia arises from neuromuscular disorders (stroke, Parkinson disease, motor neuron disease, dementia) or local structural lesions that disrupt this coordination, impairing bolus transfer and airway protection so that material may enter the larynx and lungs. Oesophageal dysphagia results from mechanical obstruction (stricture, tumour, ring) or motility disorders that impede transit through the oesophagus. Age-related changes in muscle strength and sensation lower reserve and predispose to aspiration.",
+    "additionalDifferentials": [
+      "Stroke and other neurological disease causing oropharyngeal dysphagia",
+      "Oesophageal carcinoma or peptic stricture",
+      "Oesophageal motility disorder such as achalasia",
+      "Eosinophilic oesophagitis",
+      "Extrinsic compression, for example by a goitre or mediastinal mass",
+      "Xerostomia or medication-related swallowing difficulty",
+      "Globus sensation without true dysphagia"
     ],
-    [
-     "Primary Differentials",
-     "Stroke and other neurological disease causing oropharyngeal dysphagia, Oesophageal carcinoma or peptic stricture, Oesophageal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bedside swallow screening and formal speech and language therapy swallowing assessment",
+      "Videofluoroscopic swallow study or fibreoptic endoscopic evaluation of swallowing",
+      "Upper gastrointestinal endoscopy when an oesophageal or structural cause is suspected",
+      "Nutritional assessment and monitoring of weight and hydration",
+      "Evaluation for the underlying neurological or structural cause including relevant imaging"
     ],
-    [
-     "Management Strategy",
-     "Obtain a speech and language therapy assessment to guide modified diet and fluid textures and swallowing strategies such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Aspiration with coughing, choking, or recurrent chest infections, and the risk of aspiration pneumonia",
+      "Silent aspiration in a neurologically impaired patient",
+      "Progressive dysphagia with weight loss suggesting oesophageal malignancy",
+      "Complete inability to swallow secretions or acute food bolus obstruction",
+      "Rapidly worsening dysphagia with new neurological signs"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an intact cough reflex excludes aspiration and thereby missing silent aspiration",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the underlying cause. Post-stroke dysphagia often improves over weeks with rehabilitation, whereas dysphagia from progressive neurodegenerative disease tends to worsen and, in advanced dementia, signals a poor overall prognosis. Untreated dysphagia leads to aspiration pneumonia, malnutrition, dehydration, and reduced quality of life; timely assessment and tailored management reduce these complications.",
+    "pitfalls": [
+      "Assuming an intact cough reflex excludes aspiration and thereby missing silent aspiration",
+      "Neglecting oral hygiene, which strongly influences aspiration pneumonia risk",
+      "Delaying endoscopy in progressive solid-food dysphagia with weight loss",
+      "Defaulting to tube feeding in advanced dementia without a goals-of-care discussion",
+      "Overlooking medications and dry mouth as contributors to swallowing difficulty"
+    ],
+    "references": [
+      "Hazzard's Geriatric Medicine and Gerontology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Obtain a speech and language therapy assessment to guide modified diet and fluid textures and swallowing strategies such as postural techniques",
+      "Characterise the mechanism with instrumental evaluation using videofluoroscopy or fibreoptic endoscopic evaluation of swallowing to direct safe feeding",
+      "Treat the underlying cause, including swallowing rehabilitation after stroke, optimising Parkinson disease therapy, endoscopic dilatation of strictures, or oncological management of tumours",
+      "Reduce aspiration through oral hygiene, upright positioning, supervised feeding and vigilance for aspiration pneumonia",
+      "Support nutrition and hydration with dietitian input, considering nasogastric or gastrostomy feeding when oral intake is unsafe or inadequate",
+      "Undertake advance care planning and comfort-focused feeding decisions in advanced dementia or progressive neurodegenerative disease",
+      "Arrange prompt upper gastrointestinal endoscopy for progressive dysphagia for solids then liquids with weight loss to exclude oesophageal malignancy",
+      "Coordinate multidisciplinary care across speech and language therapy, dietetics, gastroenterology and geriatric or palliative medicine"
     ]
-   ],
-   "caption": "Overview comparison matrix for dysphagia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dysphagia-real-image",
-   "title": "Dysphagia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dysphagia-pathway",
+      "title": "Dysphagia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Dysphagia is broadly divided into oropharyngeal difficulty initiating a swallow and oesophageal difficulty with food passing lower down, and the history usually distinguishes the two",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aspiration with coughing, choking, or recurrent chest infections, and the risk of aspiration pneumonia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bedside swallow screening and formal speech and language therapy swallowing assessment, Videofluoroscopic swallow study or fibreoptic endoscopic evaluation of swallowing, Upper gastrointestinal endoscopy when an"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Obtain a speech and language therapy assessment to guide modified diet and fluid textures and swallowing strategies such as postural techniques"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an intact cough reflex excludes aspiration and thereby missing silent aspiration"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dysphagia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dysphagia-matrix",
+      "title": "Dysphagia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Dysphagia is broadly divided into oropharyngeal difficulty initiating a swallow and oesophageal difficulty with food passing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bedside swallow screening and formal speech and language therapy swallowing assessment, Videofluoroscopic swallow study or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Stroke and other neurological disease causing oropharyngeal dysphagia, Oesophageal carcinoma or peptic stricture, Oesophageal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Obtain a speech and language therapy assessment to guide modified diet and fluid textures and swallowing strategies such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an intact cough reflex excludes aspiration and thereby missing silent aspiration",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dysphagia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dysphagia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bedside swallow screening and speech therapy assessment",
+          "cells": [
+            {
+              "text": "Swallowing safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Videofluoroscopic swallow study or fibreoptic endoscopic evaluation",
+          "cells": [
+            {
+              "text": "Mechanism of impaired swallowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Oesophageal or structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment and weight monitoring",
+          "cells": [
+            {
+              "text": "Nutrition and hydration status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for neurological or structural cause",
+          "cells": [
+            {
+              "text": "Underlying neurological or structural lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysphagia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oesophageal carcinoma or peptic stricture",
+          "cells": [
+            {
+              "text": "Progressive solid-food dysphagia with weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Achalasia",
+          "cells": [
+            {
+              "text": "Motility disorder of the oesophagus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Globus sensation without true dysphagia",
+          "cells": [
+            {
+              "text": "Sensation without impaired swallowing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysphagia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Modified diet and fluid textures; postural swallowing strategies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Instrumental evaluation",
+          "cells": [
+            {
+              "text": "Videofluoroscopy or fibreoptic endoscopy to direct safe feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Stroke swallowing rehabilitation, Parkinson therapy, stricture dilatation or tumour treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration prevention",
+          "cells": [
+            {
+              "text": "Oral hygiene, upright positioning and supervised feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and hydration",
+          "cells": [
+            {
+              "text": "Dietitian input; nasogastric or gastrostomy feeding if oral intake unsafe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advance care planning",
+          "cells": [
+            {
+              "text": "Comfort-focused feeding decisions in advanced dementia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt endoscopy",
+          "cells": [
+            {
+              "text": "For progressive solid dysphagia with weight loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dysphagia-dx-mgmt",
+      "title": "Diagnosis and management of Dysphagia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dysphagia: difficulty swallowing with cough, choking or weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aspiration, progressive dysphagia with weight loss, bolus obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of food bolus obstruction or aspiration pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bedside swallow screen; instrumental swallow study; endoscopy; nutrition review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does instrumental study confirm oropharyngeal or oesophageal impairment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider globus, medication-related or motility causes; repeat assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Speech and language therapy for modified diet and swallowing strategies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Instrumental evaluation to direct safe feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the underlying neurological, stricture or tumour cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral hygiene, upright positioning and supervised feeding to reduce aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dietitian input; tube feeding if oral intake is unsafe",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Post-stroke dysphagia often improves; neurodegenerative dysphagia tends to worsen",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

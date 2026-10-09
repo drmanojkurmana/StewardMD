@@ -1,174 +1,461 @@
 {
- "id": "generalized_thyroid_hormone_resistance",
- "name": "Resistance to thyroid hormone beta",
- "aliases": [
-  "resistance to thyroid hormone beta",
-  "RTHbeta",
-  "generalised thyroid hormone resistance",
-  "Refetoff syndrome",
-  "THRB"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Usually autosomal dominant, caused by variants in THRB encoding the beta isoform of the thyroid hormone receptor",
-   "The characteristic biochemistry is raised free thyroxine and free triiodothyronine with a non-suppressed (normal or mildly elevated) TSH",
-   "Most patients are clinically euthyroid because the reduced sensitivity is broadly compensated by higher hormone levels",
-   "Tissue-specific effects can occur: tachycardia and hyperactivity may reflect the intact beta receptor pathway in some tissues alongside resistance in others",
-   "Goitre, learning difficulties, and attention problems are recognised associations, particularly in children",
-   "The main differential is a TSH-secreting pituitary adenoma, which also causes high thyroid hormones with unsuppressed TSH",
-   "Most patients need no treatment; the priority is to avoid inappropriate antithyroid therapy or thyroidectomy for a misdiagnosis of hyperthyroidism"
+  "id": "generalized_thyroid_hormone_resistance",
+  "name": "Resistance to thyroid hormone beta",
+  "aliases": [
+    "resistance to thyroid hormone beta",
+    "RTHbeta",
+    "generalised thyroid hormone resistance",
+    "Refetoff syndrome",
+    "THRB"
   ],
-  "pathophysiology": "Thyroid hormone acts through nuclear receptors, of which the beta isoform predominates in the pituitary and liver and mediates negative feedback on TSH secretion. Dominant-negative variants in THRB produce a receptor that binds hormone or DNA poorly yet interferes with the normal receptor, so target tissues expressing the beta receptor are relatively resistant. Because pituitary feedback is blunted, TSH secretion is not suppressed despite high circulating thyroid hormones, and the raised hormone levels represent the compensation needed to achieve near-normal action in resistant tissues. Tissues that rely more on the alpha receptor, such as the heart, remain sensitive and may show features of hormone excess, giving the mixed clinical picture. The persistently non-suppressed TSH is the diagnostic clue that distinguishes the condition from primary hyperthyroidism.",
-  "additionalDifferentials": [
-   "TSH-secreting pituitary adenoma",
-   "Primary hyperthyroidism (Graves disease)",
-   "Assay interference or heterophile antibodies",
-   "Familial dysalbuminaemic hyperthyroxinaemia",
-   "Thyroid hormone cell-membrane transport defect (MCT8)",
-   "Thyroid hormone metabolism defect (SBP2)"
-  ],
-  "additionalInvestigations": [
-   "Free thyroxine and free triiodothyronine with a simultaneous non-suppressed TSH",
-   "Repeat and confirmatory thyroid function tests to exclude assay artefact",
-   "Alpha-subunit measurement and dynamic testing to distinguish from a TSH-secreting adenoma",
-   "Pituitary MRI where a TSH-secreting tumour cannot be excluded biochemically",
-   "Assessment of peripheral markers of thyroid hormone action such as sex hormone-binding globulin",
-   "THRB gene sequencing"
-  ],
-  "redFlags": [
-   "Symptomatic tachyarrhythmia such as atrial fibrillation",
-   "Growth or neurodevelopmental concerns in an affected child",
-   "Pituitary mass on imaging suggesting a TSH-secreting adenoma instead",
-   "Inadvertent thyroid ablation or antithyroid treatment for misdiagnosed hyperthyroidism"
-  ],
-  "prognosis": "Most individuals have a normal life expectancy and remain well without treatment; the principal risk is iatrogenic harm from misdiagnosis, while a minority have persistent cardiac or neurodevelopmental symptoms requiring targeted management.",
-  "pitfalls": [
-   "Treating the raised thyroid hormones as hyperthyroidism and giving antithyroid drugs or thyroidectomy",
-   "Failing to distinguish the condition from a TSH-secreting pituitary adenoma",
-   "Overlooking assay interference as a simpler explanation for discordant results",
-   "Not screening first-degree relatives for the dominant condition"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "OMIM entry for resistance to thyroid hormone beta"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Most patients are compensated and euthyroid and require no thyroid-directed treatment, so the priority is avoiding iatrogenic harm from inappropriate antithyroid drugs, radioiodine or thyroidectomy",
-   "Securely distinguish the condition from a TSH-secreting pituitary adenoma before any intervention, using dynamic testing, alpha-subunit measurement and pituitary imaging",
-   "Beta-adrenergic blockade to control tachycardia and adrenergic symptoms arising from tissues that remain hormone-sensitive",
-   "Recognise and support learning difficulties and attention problems, particularly in affected children",
-   "Periodic monitoring of goitre, cardiac status and peripheral markers of thyroid hormone action",
-   "Genetic counselling for autosomal dominant THRB disease with cascade family testing to prevent misdiagnosis in relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "generalized_thyroid_hormone_resistance-pathway",
-   "title": "Resistance to thyroid hormone beta: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Usually autosomal dominant, caused by variants in THRB encoding the beta isoform of the thyroid hormone receptor",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic tachyarrhythmia such as atrial fibrillation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Free thyroxine and free triiodothyronine with a simultaneous non-suppressed TSH, Repeat and confirmatory thyroid function tests to exclude assay artefact, Alpha-subunit measurement and dynamic testing to distinguish from a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Most patients are compensated and euthyroid and require no thyroid-directed treatment, so the priority is avoiding iatrogenic harm from inappropriate antithyroid drugs, radioiodine or thyroidectomy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the raised thyroid hormones as hyperthyroidism and giving antithyroid drugs or thyroidectomy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of resistance to thyroid hormone beta."
-  }
- ],
- "tables": [
-  {
-   "id": "generalized_thyroid_hormone_resistance-matrix",
-   "title": "Resistance to thyroid hormone beta: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Usually autosomal dominant, caused by variants in THRB encoding the beta isoform of the thyroid hormone receptor",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Usually autosomal dominant, caused by variants in THRB encoding the beta isoform of the thyroid hormone receptor",
+      "The characteristic biochemistry is raised free thyroxine and free triiodothyronine with a non-suppressed (normal or mildly elevated) TSH",
+      "Most patients are clinically euthyroid because the reduced sensitivity is broadly compensated by higher hormone levels",
+      "Tissue-specific effects can occur: tachycardia and hyperactivity may reflect the intact beta receptor pathway in some tissues alongside resistance in others",
+      "Goitre, learning difficulties, and attention problems are recognised associations, particularly in children",
+      "The main differential is a TSH-secreting pituitary adenoma, which also causes high thyroid hormones with unsuppressed TSH",
+      "Most patients need no treatment; the priority is to avoid inappropriate antithyroid therapy or thyroidectomy for a misdiagnosis of hyperthyroidism"
     ],
-    [
-     "Key Investigations",
-     "Free thyroxine and free triiodothyronine with a simultaneous non-suppressed TSH, Repeat and confirmatory thyroid function tests",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Thyroid hormone acts through nuclear receptors, of which the beta isoform predominates in the pituitary and liver and mediates negative feedback on TSH secretion. Dominant-negative variants in THRB produce a receptor that binds hormone or DNA poorly yet interferes with the normal receptor, so target tissues expressing the beta receptor are relatively resistant. Because pituitary feedback is blunted, TSH secretion is not suppressed despite high circulating thyroid hormones, and the raised hormone levels represent the compensation needed to achieve near-normal action in resistant tissues. Tissues that rely more on the alpha receptor, such as the heart, remain sensitive and may show features of hormone excess, giving the mixed clinical picture. The persistently non-suppressed TSH is the diagnostic clue that distinguishes the condition from primary hyperthyroidism.",
+    "additionalDifferentials": [
+      "TSH-secreting pituitary adenoma",
+      "Primary hyperthyroidism (Graves disease)",
+      "Assay interference or heterophile antibodies",
+      "Familial dysalbuminaemic hyperthyroxinaemia",
+      "Thyroid hormone cell-membrane transport defect (MCT8)",
+      "Thyroid hormone metabolism defect (SBP2)"
     ],
-    [
-     "Primary Differentials",
-     "TSH-secreting pituitary adenoma, Primary hyperthyroidism (Graves disease), Assay interference or heterophile antibodies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Free thyroxine and free triiodothyronine with a simultaneous non-suppressed TSH",
+      "Repeat and confirmatory thyroid function tests to exclude assay artefact",
+      "Alpha-subunit measurement and dynamic testing to distinguish from a TSH-secreting adenoma",
+      "Pituitary MRI where a TSH-secreting tumour cannot be excluded biochemically",
+      "Assessment of peripheral markers of thyroid hormone action such as sex hormone-binding globulin",
+      "THRB gene sequencing"
     ],
-    [
-     "Management Strategy",
-     "Most patients are compensated and euthyroid and require no thyroid-directed treatment, so the priority is avoiding iatrogenic",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic tachyarrhythmia such as atrial fibrillation",
+      "Growth or neurodevelopmental concerns in an affected child",
+      "Pituitary mass on imaging suggesting a TSH-secreting adenoma instead",
+      "Inadvertent thyroid ablation or antithyroid treatment for misdiagnosed hyperthyroidism"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the raised thyroid hormones as hyperthyroidism and giving antithyroid drugs or thyroidectomy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most individuals have a normal life expectancy and remain well without treatment; the principal risk is iatrogenic harm from misdiagnosis, while a minority have persistent cardiac or neurodevelopmental symptoms requiring targeted management.",
+    "pitfalls": [
+      "Treating the raised thyroid hormones as hyperthyroidism and giving antithyroid drugs or thyroidectomy",
+      "Failing to distinguish the condition from a TSH-secreting pituitary adenoma",
+      "Overlooking assay interference as a simpler explanation for discordant results",
+      "Not screening first-degree relatives for the dominant condition"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "OMIM entry for resistance to thyroid hormone beta"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Most patients are compensated and euthyroid and require no thyroid-directed treatment, so the priority is avoiding iatrogenic harm from inappropriate antithyroid drugs, radioiodine or thyroidectomy",
+      "Securely distinguish the condition from a TSH-secreting pituitary adenoma before any intervention, using dynamic testing, alpha-subunit measurement and pituitary imaging",
+      "Beta-adrenergic blockade to control tachycardia and adrenergic symptoms arising from tissues that remain hormone-sensitive",
+      "Recognise and support learning difficulties and attention problems, particularly in affected children",
+      "Periodic monitoring of goitre, cardiac status and peripheral markers of thyroid hormone action",
+      "Genetic counselling for autosomal dominant THRB disease with cascade family testing to prevent misdiagnosis in relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for resistance to thyroid hormone beta."
-  }
- ],
- "diagrams": [
-  {
-   "id": "generalized-thyroid-hormone-resistance-real-image",
-   "title": "Resistance to thyroid hormone beta: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "generalized_thyroid_hormone_resistance-pathway",
+      "title": "Resistance to thyroid hormone beta: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Usually autosomal dominant, caused by variants in THRB encoding the beta isoform of the thyroid hormone receptor",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic tachyarrhythmia such as atrial fibrillation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Free thyroxine and free triiodothyronine with a simultaneous non-suppressed TSH, Repeat and confirmatory thyroid function tests to exclude assay artefact, Alpha-subunit measurement and dynamic testing to distinguish from a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Most patients are compensated and euthyroid and require no thyroid-directed treatment, so the priority is avoiding iatrogenic harm from inappropriate antithyroid drugs, radioiodine or thyroidectomy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the raised thyroid hormones as hyperthyroidism and giving antithyroid drugs or thyroidectomy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of resistance to thyroid hormone beta."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "generalized_thyroid_hormone_resistance-matrix",
+      "title": "Resistance to thyroid hormone beta: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Usually autosomal dominant, caused by variants in THRB encoding the beta isoform of the thyroid hormone receptor",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Free thyroxine and free triiodothyronine with a simultaneous non-suppressed TSH, Repeat and confirmatory thyroid function tests",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "TSH-secreting pituitary adenoma, Primary hyperthyroidism (Graves disease), Assay interference or heterophile antibodies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Most patients are compensated and euthyroid and require no thyroid-directed treatment, so the priority is avoiding iatrogenic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the raised thyroid hormones as hyperthyroidism and giving antithyroid drugs or thyroidectomy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for resistance to thyroid hormone beta."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "generalized_thyroid_hormone_resistance-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Free T4 and free T3 with non-suppressed TSH",
+          "cells": [
+            {
+              "text": "Raised thyroid hormones with non-suppressed TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat and confirmatory thyroid function tests",
+          "cells": [
+            {
+              "text": "Excludes assay artefact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-subunit measurement and dynamic testing",
+          "cells": [
+            {
+              "text": "Distinguishes from TSH-secreting adenoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Where a TSH-secreting tumour cannot be excluded biochemically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral markers such as sex hormone-binding globulin",
+          "cells": [
+            {
+              "text": "Peripheral thyroid hormone action"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "THRB gene sequencing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_thyroid_hormone_resistance-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH-secreting pituitary adenoma",
+          "cells": [
+            {
+              "text": "Separated by alpha-subunit, dynamic testing and pituitary MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperthyroidism (Graves disease)",
+          "cells": [
+            {
+              "text": "Treating raised hormones as hyperthyroidism causes iatrogenic harm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assay interference or heterophile antibodies",
+          "cells": [
+            {
+              "text": "Excluded by repeat and confirmatory tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_thyroid_hormone_resistance-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No thyroid-directed treatment",
+          "cells": [
+            {
+              "text": "Most patients are compensated and euthyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish from TSH-secreting adenoma",
+          "cells": [
+            {
+              "text": "Dynamic testing, alpha-subunit and imaging before any intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-adrenergic blockade",
+          "cells": [
+            {
+              "text": "Controls tachycardia and adrenergic symptoms from hormone-sensitive tissues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Learning and attention support",
+          "cells": [
+            {
+              "text": "Particularly in affected children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic monitoring",
+          "cells": [
+            {
+              "text": "Goitre, cardiac status and peripheral markers of hormone action"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant THRB disease; cascade testing to prevent misdiagnosis in relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "generalized_thyroid_hormone_resistance-dx-mgmt",
+      "title": "Diagnosis and management of Resistance to thyroid hormone beta",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyroid hormone resistance: raised thyroid hormones with non-suppressed TSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atrial fibrillation, developmental concern, pituitary mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Pituitary imaging and endocrine review for suspected TSH-secreting adenoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Free T4 and T3 with TSH, alpha-subunit, dynamic testing and THRB sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does THRB sequencing or dynamic testing confirm the resistance pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider TSH-secreting adenoma, Graves disease or assay interference",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No thyroid-directed treatment for most compensated, euthyroid patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Distinguish from TSH-secreting adenoma before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blockade for tachycardia and adrenergic symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid antithyroid drugs or thyroidectomy after misdiagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most have normal life expectancy; the main risk is iatrogenic harm from misdiagnosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

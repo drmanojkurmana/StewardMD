@@ -1,175 +1,471 @@
 {
- "id": "sump_syndrome",
- "name": "Sump syndrome",
- "aliases": [
-  "post-choledochoduodenostomy sump syndrome",
-  "biliary sump syndrome"
- ],
- "class": "non_infective",
- "system": "Hepatobiliary",
- "specialty": "Hepatology / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sump syndrome is a late complication of side-to-side choledochoduodenostomy in which the segment of common bile duct distal to the anastomosis becomes a poorly drained blind pouch, or sump, that accumulates food debris, biliary sludge, and stones",
-   "The stagnant distal duct collects material that cannot clear through the papilla, leading to recurrent cholangitis, biliary obstruction, pain, and occasionally pancreatitis or hepatic abscess",
-   "It is chiefly of historical and residual relevance because side-to-side choledochoduodenostomy is now performed less often, having been largely superseded by Roux-en-Y hepaticojejunostomy and endoscopic therapy",
-   "Symptoms may appear months to years after the original biliary bypass, so a history of previous biliary-enteric anastomosis is a crucial diagnostic clue",
-   "ERCP is the mainstay of both diagnosis and treatment, allowing sphincterotomy and clearance of debris and stones from the distal duct sump",
-   "Cross-sectional imaging and MRCP demonstrate the anastomosis, the distal ductal reservoir, and any pneumobilia, stones, or abscess",
-   "Pneumobilia is expected after a biliary-enteric anastomosis and should not by itself be interpreted as infection or gas-forming pathology",
-   "Refractory or recurrent disease may require surgical revision, typically conversion to a Roux-en-Y hepaticojejunostomy with closure of the distal duct"
+  "id": "sump_syndrome",
+  "name": "Sump syndrome",
+  "aliases": [
+    "post-choledochoduodenostomy sump syndrome",
+    "biliary sump syndrome"
   ],
-  "pathophysiology": "A side-to-side choledochoduodenostomy joins the common bile duct to the duodenum above the papilla, leaving the segment of duct between the anastomosis and the sphincter of Oddi as a dependent cul-de-sac. Because bile preferentially drains through the more proximal, wider anastomosis, this distal segment is no longer flushed by normal bile flow and loses its physiological clearance. Reflux of enteric contents introduces food particles, vegetable matter, and bacteria into the poorly emptying pouch, where stasis promotes accumulation of debris and biliary sludge, precipitation of stones, and bacterial overgrowth. The trapped material intermittently obstructs the papilla or the anastomosis and provokes recurrent ascending cholangitis; persistent stasis and infection can extend to cause pancreatitis when the pancreatic orifice is involved, or seed hepatic abscesses. The clinical picture therefore reflects chronic stagnation and infection within an anatomically dependent, non-draining distal duct rather than a primary stone or stricture elsewhere.",
-  "additionalDifferentials": [
-   "Anastomotic stricture of the choledochoduodenostomy",
-   "Recurrent or retained choledocholithiasis",
-   "Cholangitis from another cause of biliary obstruction",
-   "Ascending cholangitis related to sphincter of Oddi dysfunction",
-   "Recurrent pyogenic cholangitis",
-   "Pancreatitis of biliary or other aetiology",
-   "Hepatic abscess of biliary origin"
-  ],
-  "additionalInvestigations": [
-   "Liver biochemistry showing a cholestatic pattern during symptomatic episodes",
-   "Blood cultures and inflammatory markers when cholangitis is suspected",
-   "Abdominal ultrasound to assess the biliary tree and detect stones or abscess",
-   "MRCP to delineate the anastomosis, the distal duct sump, and any retained debris or stones",
-   "Contrast-enhanced CT to identify complications such as hepatic abscess or pancreatitis",
-   "ERCP for direct visualisation, sump clearance, and therapeutic sphincterotomy"
-  ],
-  "redFlags": [
-   "Acute cholangitis with fever, rigors, jaundice, and haemodynamic compromise",
-   "Development of hepatic abscess or persistent sepsis despite antibiotics",
-   "Acute pancreatitis complicating the obstruction",
-   "Progressive jaundice suggesting anastomotic stricture or fixed obstruction",
-   "Recurrent severe episodes indicating need for surgical revision"
-  ],
-  "prognosis": "Endoscopic sphincterotomy with clearance of the sump is effective in most patients and relieves recurrent cholangitis, giving a good outlook; recurrent or refractory disease that requires surgical conversion to a Roux-en-Y hepaticojejunostomy also generally does well once the dependent distal segment is eliminated.",
-  "pitfalls": [
-   "Failing to elicit the history of a previous side-to-side choledochoduodenostomy and so missing the diagnosis",
-   "Misinterpreting expected post-anastomotic pneumobilia as evidence of infection or gas-forming disease",
-   "Attributing recurrent cholangitis to simple retained stones without recognising the underlying sump anatomy",
-   "Overlooking a hepatic abscess or pancreatitis as a complication of chronic biliary stasis",
-   "Persisting with repeated endoscopic clearance when definitive surgical revision is warranted"
-  ],
-  "references": [
-   "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform ERCP with endoscopic sphincterotomy and clearance of retained debris and stones from the distal duct sump as the mainstay of treatment",
-   "Treat episodes of ascending cholangitis promptly with broad-spectrum antibiotics covering enteric organisms alongside biliary drainage",
-   "Drain any complicating hepatic abscess and manage associated pancreatitis supportively",
-   "Reserve surgical conversion to a Roux-en-Y hepaticojejunostomy for recurrent or endoscopically refractory disease",
-   "Monitor liver biochemistry and inflammatory markers during symptomatic episodes and surveil for recurrence",
-   "Refer to hepatobiliary surgery and gastroenterology for combined endoscopic and surgical planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sump_syndrome-pathway",
-   "title": "Sump syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sump syndrome is a late complication of side-to-side choledochoduodenostomy in which the segment of common bile duct distal to the anastomosis becomes a poorly drained blind pouch, or sump, that accumulates food debris, biliary sludge, and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute cholangitis with fever, rigors, jaundice, and haemodynamic compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Liver biochemistry showing a cholestatic pattern during symptomatic episodes, Blood cultures and inflammatory markers when cholangitis is suspected, Abdominal ultrasound to assess the biliary tree and detect stones or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform ERCP with endoscopic sphincterotomy and clearance of retained debris and stones from the distal duct sump as the mainstay of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to elicit the history of a previous side-to-side choledochoduodenostomy and so missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sump syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "sump_syndrome-matrix",
-   "title": "Sump syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sump syndrome is a late complication of side-to-side choledochoduodenostomy in which the segment of common bile duct distal to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatobiliary",
+  "specialty": "Hepatology / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sump syndrome is a late complication of side-to-side choledochoduodenostomy in which the segment of common bile duct distal to the anastomosis becomes a poorly drained blind pouch, or sump, that accumulates food debris, biliary sludge, and stones",
+      "The stagnant distal duct collects material that cannot clear through the papilla, leading to recurrent cholangitis, biliary obstruction, pain, and occasionally pancreatitis or hepatic abscess",
+      "It is chiefly of historical and residual relevance because side-to-side choledochoduodenostomy is now performed less often, having been largely superseded by Roux-en-Y hepaticojejunostomy and endoscopic therapy",
+      "Symptoms may appear months to years after the original biliary bypass, so a history of previous biliary-enteric anastomosis is a crucial diagnostic clue",
+      "ERCP is the mainstay of both diagnosis and treatment, allowing sphincterotomy and clearance of debris and stones from the distal duct sump",
+      "Cross-sectional imaging and MRCP demonstrate the anastomosis, the distal ductal reservoir, and any pneumobilia, stones, or abscess",
+      "Pneumobilia is expected after a biliary-enteric anastomosis and should not by itself be interpreted as infection or gas-forming pathology",
+      "Refractory or recurrent disease may require surgical revision, typically conversion to a Roux-en-Y hepaticojejunostomy with closure of the distal duct"
     ],
-    [
-     "Key Investigations",
-     "Liver biochemistry showing a cholestatic pattern during symptomatic episodes, Blood cultures and inflammatory markers when",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A side-to-side choledochoduodenostomy joins the common bile duct to the duodenum above the papilla, leaving the segment of duct between the anastomosis and the sphincter of Oddi as a dependent cul-de-sac. Because bile preferentially drains through the more proximal, wider anastomosis, this distal segment is no longer flushed by normal bile flow and loses its physiological clearance. Reflux of enteric contents introduces food particles, vegetable matter, and bacteria into the poorly emptying pouch, where stasis promotes accumulation of debris and biliary sludge, precipitation of stones, and bacterial overgrowth. The trapped material intermittently obstructs the papilla or the anastomosis and provokes recurrent ascending cholangitis; persistent stasis and infection can extend to cause pancreatitis when the pancreatic orifice is involved, or seed hepatic abscesses. The clinical picture therefore reflects chronic stagnation and infection within an anatomically dependent, non-draining distal duct rather than a primary stone or stricture elsewhere.",
+    "additionalDifferentials": [
+      "Anastomotic stricture of the choledochoduodenostomy",
+      "Recurrent or retained choledocholithiasis",
+      "Cholangitis from another cause of biliary obstruction",
+      "Ascending cholangitis related to sphincter of Oddi dysfunction",
+      "Recurrent pyogenic cholangitis",
+      "Pancreatitis of biliary or other aetiology",
+      "Hepatic abscess of biliary origin"
     ],
-    [
-     "Primary Differentials",
-     "Anastomotic stricture of the choledochoduodenostomy, Recurrent or retained choledocholithiasis, Cholangitis from another cause of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Liver biochemistry showing a cholestatic pattern during symptomatic episodes",
+      "Blood cultures and inflammatory markers when cholangitis is suspected",
+      "Abdominal ultrasound to assess the biliary tree and detect stones or abscess",
+      "MRCP to delineate the anastomosis, the distal duct sump, and any retained debris or stones",
+      "Contrast-enhanced CT to identify complications such as hepatic abscess or pancreatitis",
+      "ERCP for direct visualisation, sump clearance, and therapeutic sphincterotomy"
     ],
-    [
-     "Management Strategy",
-     "Perform ERCP with endoscopic sphincterotomy and clearance of retained debris and stones from the distal duct sump as the mainstay",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute cholangitis with fever, rigors, jaundice, and haemodynamic compromise",
+      "Development of hepatic abscess or persistent sepsis despite antibiotics",
+      "Acute pancreatitis complicating the obstruction",
+      "Progressive jaundice suggesting anastomotic stricture or fixed obstruction",
+      "Recurrent severe episodes indicating need for surgical revision"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to elicit the history of a previous side-to-side choledochoduodenostomy and so missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Endoscopic sphincterotomy with clearance of the sump is effective in most patients and relieves recurrent cholangitis, giving a good outlook; recurrent or refractory disease that requires surgical conversion to a Roux-en-Y hepaticojejunostomy also generally does well once the dependent distal segment is eliminated.",
+    "pitfalls": [
+      "Failing to elicit the history of a previous side-to-side choledochoduodenostomy and so missing the diagnosis",
+      "Misinterpreting expected post-anastomotic pneumobilia as evidence of infection or gas-forming disease",
+      "Attributing recurrent cholangitis to simple retained stones without recognising the underlying sump anatomy",
+      "Overlooking a hepatic abscess or pancreatitis as a complication of chronic biliary stasis",
+      "Persisting with repeated endoscopic clearance when definitive surgical revision is warranted"
+    ],
+    "references": [
+      "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform ERCP with endoscopic sphincterotomy and clearance of retained debris and stones from the distal duct sump as the mainstay of treatment",
+      "Treat episodes of ascending cholangitis promptly with broad-spectrum antibiotics covering enteric organisms alongside biliary drainage",
+      "Drain any complicating hepatic abscess and manage associated pancreatitis supportively",
+      "Reserve surgical conversion to a Roux-en-Y hepaticojejunostomy for recurrent or endoscopically refractory disease",
+      "Monitor liver biochemistry and inflammatory markers during symptomatic episodes and surveil for recurrence",
+      "Refer to hepatobiliary surgery and gastroenterology for combined endoscopic and surgical planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for sump syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sump-syndrome-real-image",
-   "title": "Sump syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "sump_syndrome-pathway",
+      "title": "Sump syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sump syndrome is a late complication of side-to-side choledochoduodenostomy in which the segment of common bile duct distal to the anastomosis becomes a poorly drained blind pouch, or sump, that accumulates food debris, biliary sludge, and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute cholangitis with fever, rigors, jaundice, and haemodynamic compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Liver biochemistry showing a cholestatic pattern during symptomatic episodes, Blood cultures and inflammatory markers when cholangitis is suspected, Abdominal ultrasound to assess the biliary tree and detect stones or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform ERCP with endoscopic sphincterotomy and clearance of retained debris and stones from the distal duct sump as the mainstay of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to elicit the history of a previous side-to-side choledochoduodenostomy and so missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sump syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sump_syndrome-matrix",
+      "title": "Sump syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sump syndrome is a late complication of side-to-side choledochoduodenostomy in which the segment of common bile duct distal to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Liver biochemistry showing a cholestatic pattern during symptomatic episodes, Blood cultures and inflammatory markers when",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anastomotic stricture of the choledochoduodenostomy, Recurrent or retained choledocholithiasis, Cholangitis from another cause of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform ERCP with endoscopic sphincterotomy and clearance of retained debris and stones from the distal duct sump as the mainstay",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to elicit the history of a previous side-to-side choledochoduodenostomy and so missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sump syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sump_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver biochemistry",
+          "cells": [
+            {
+              "text": "Cholestatic pattern during episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Cholangitis suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of the biliary tree",
+          "cells": [
+            {
+              "text": "Stones or abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Anastomosis, distal duct sump and retained debris"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Hepatic abscess or pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ERCP",
+          "cells": [
+            {
+              "text": "Direct visualisation and sump clearance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sump_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anastomotic stricture of the choledochoduodenostomy",
+          "cells": [
+            {
+              "text": "Progressive jaundice with fixed obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent or retained choledocholithiasis",
+          "cells": [
+            {
+              "text": "Stones without the sump anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sphincter of Oddi dysfunction",
+          "cells": [
+            {
+              "text": "Cholangitis from functional obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sump_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ERCP with sphincterotomy",
+          "cells": [
+            {
+              "text": "Clearance of debris and stones from the sump; mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad-spectrum antibiotics and biliary drainage",
+          "cells": [
+            {
+              "text": "Ascending cholangitis episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage of hepatic abscess",
+          "cells": [
+            {
+              "text": "Complication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive pancreatitis care",
+          "cells": [
+            {
+              "text": "Complication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Roux-en-Y hepaticojejunostomy",
+          "cells": [
+            {
+              "text": "Recurrent or endoscopically refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biochemistry and inflammatory markers",
+          "cells": [
+            {
+              "text": "Monitoring during episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary surgery and gastroenterology referral",
+          "cells": [
+            {
+              "text": "Combined endoscopic and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sump_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sump syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent cholangitis after a prior choledochoduodenostomy: suspected sump syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (septic cholangitis, hepatic abscess, pancreatitis, jaundice)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antibiotics and biliary drainage for septic cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Liver tests; blood cultures; ultrasound; MRCP; contrast CT; ERCP as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a prior side-to-side choledochoduodenostomy with a distal duct sump shown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider choledocholithiasis, stricture or sphincter dysfunction; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ERCP with sphincterotomy and clearance of the distal duct sump",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum antibiotics with biliary drainage for cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drainage of any hepatic abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Roux-en-Y hepaticojejunostomy for recurrent or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgical revision is typically needed when endoscopic clearance keeps failing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

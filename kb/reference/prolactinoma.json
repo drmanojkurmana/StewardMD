@@ -1,174 +1,589 @@
 {
- "id": "prolactinoma",
- "name": "Prolactinoma",
- "aliases": [
-  "prolactin-secreting pituitary adenoma",
-  "lactotroph adenoma",
-  "hyperprolactinaemia (tumoural)"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest hormone-secreting pituitary tumour; presentation differs by sex, with menstrual disturbance and galactorrhoea in women and reduced libido or erectile dysfunction in men",
-   "Because men lack an early hormonal warning sign, they more often present late with large tumours causing mass effect",
-   "Hyperprolactinaemia suppresses gonadotrophin secretion, producing hypogonadism, infertility, and reduced bone density over time",
-   "Before diagnosing a prolactinoma, exclude other causes of raised prolactin such as pregnancy, hypothyroidism, renal failure, and dopamine-blocking drugs",
-   "Stalk compression by any large sellar mass can modestly raise prolactin; very high levels are more specific for a true prolactinoma",
-   "In large tumours with only mildly elevated prolactin, laboratory dilution may be needed to exclude the hook effect artefact",
-   "Unlike most pituitary tumours, prolactinomas are usually managed medically with dopamine agonists rather than surgery as first line",
-   "Dopamine agonist therapy typically lowers prolactin, restores gonadal function, and shrinks tumour volume"
+  "id": "prolactinoma",
+  "name": "Prolactinoma",
+  "aliases": [
+    "prolactin-secreting pituitary adenoma",
+    "lactotroph adenoma",
+    "hyperprolactinaemia (tumoural)"
   ],
-  "pathophysiology": "A prolactinoma is a benign lactotroph adenoma of the anterior pituitary that autonomously secretes prolactin. Prolactin is normally under tonic inhibitory control by hypothalamic dopamine, which is why dopamine agonists are effective and dopamine-blocking drugs raise prolactin. Excess prolactin inhibits pulsatile gonadotrophin-releasing hormone secretion, reducing LH and FSH and causing hypogonadism, galactorrhoea, and infertility. Larger tumours (macroadenomas) may compress the optic chiasm and adjacent pituitary tissue, producing visual field defects and hypopituitarism. Non-tumoural hyperprolactinaemia from stalk disconnection, drugs, or systemic disease must be distinguished from a true adenoma.",
-  "additionalDifferentials": [
-   "Physiological hyperprolactinaemia of pregnancy or lactation",
-   "Drug-induced hyperprolactinaemia (antipsychotics, antiemetics, some antidepressants)",
-   "Primary hypothyroidism raising prolactin via TRH",
-   "Chronic kidney disease reducing prolactin clearance",
-   "Stalk-effect hyperprolactinaemia from a non-lactotroph sellar mass",
-   "Macroprolactinaemia (biologically inactive complexed prolactin)"
-  ],
-  "additionalInvestigations": [
-   "Fasting serum prolactin, repeated if borderline, with sample dilution when a hook effect is suspected",
-   "Pregnancy test, thyroid function, and renal function to exclude secondary causes",
-   "Review of medications that raise prolactin",
-   "Pituitary MRI to characterise adenoma size and suprasellar extension",
-   "Assessment of macroprolactin when clinical picture and level are discordant",
-   "Visual fields and anterior pituitary hormone panel for macroadenomas"
-  ],
-  "redFlags": [
-   "Bitemporal visual field loss from chiasmal compression by a macroadenoma",
-   "Sudden severe headache with visual or cranial nerve signs suggesting apoplexy",
-   "Symptoms and signs of coexisting hypopituitarism, including adrenal insufficiency",
-   "Very large invasive tumours threatening vision or requiring urgent decompression"
-  ],
-  "prognosis": "Most microprolactinomas respond well to dopamine agonists with normalisation of prolactin, restoration of fertility, and often no significant growth; macroadenomas also usually shrink with medical therapy, and in selected patients treatment can eventually be tapered, though relapse of hyperprolactinaemia is possible.",
-  "pitfalls": [
-   "Diagnosing a prolactinoma without excluding drugs, hypothyroidism, renal failure, and pregnancy",
-   "Missing the hook effect and underestimating prolactin in a large tumour, leading to inappropriate surgery",
-   "Overlooking macroprolactin as a cause of asymptomatic elevation",
-   "Failing to counsel on bone health and fertility implications of chronic hypogonadism"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Endocrine Society guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start a dopamine agonist as first-line therapy, usually cabergoline, to normalise prolactin, restore gonadal function and fertility, and shrink the tumour",
-   "Reserve transsphenoidal surgery for dopamine-agonist resistance or intolerance, or for acute chiasmal compression or pituitary apoplexy",
-   "Monitor response with serial serum prolactin, pituitary MRI and, in macroadenomas, formal visual field testing",
-   "Screen for and replace coexisting anterior pituitary hormone deficiencies in macroadenomas, and address hypogonadism-related bone loss with sex steroid replacement",
-   "In pregnancy switch to bromocriptine or withdraw treatment as advised and monitor clinically for symptomatic tumour enlargement",
-   "Consider echocardiographic surveillance for valvulopathy during prolonged higher-dose cabergoline therapy",
-   "Escalate urgently for sudden headache, visual loss or apoplexy, and refer to a pituitary multidisciplinary team for resistant or aggressive tumours"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "prolactinoma-pathway",
-   "title": "Prolactinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest hormone-secreting pituitary tumour; presentation differs by sex, with menstrual disturbance and galactorrhoea in women and reduced libido or erectile dysfunction in men",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bitemporal visual field loss from chiasmal compression by a macroadenoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting serum prolactin, repeated if borderline, with sample dilution when a hook effect is suspected, Pregnancy test, thyroid function, and renal function to exclude secondary causes, Review of medications that raise"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start a dopamine agonist as first-line therapy, usually cabergoline, to normalise prolactin, restore gonadal function and fertility, and shrink the tumour"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing a prolactinoma without excluding drugs, hypothyroidism, renal failure, and pregnancy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of prolactinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "prolactinoma-matrix",
-   "title": "Prolactinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest hormone-secreting pituitary tumour; presentation differs by sex, with menstrual disturbance and galactorrhoea in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest hormone-secreting pituitary tumour; presentation differs by sex, with menstrual disturbance and galactorrhoea in women and reduced libido or erectile dysfunction in men",
+      "Because men lack an early hormonal warning sign, they more often present late with large tumours causing mass effect",
+      "Hyperprolactinaemia suppresses gonadotrophin secretion, producing hypogonadism, infertility, and reduced bone density over time",
+      "Before diagnosing a prolactinoma, exclude other causes of raised prolactin such as pregnancy, hypothyroidism, renal failure, and dopamine-blocking drugs",
+      "Stalk compression by any large sellar mass can modestly raise prolactin; very high levels are more specific for a true prolactinoma",
+      "In large tumours with only mildly elevated prolactin, laboratory dilution may be needed to exclude the hook effect artefact",
+      "Unlike most pituitary tumours, prolactinomas are usually managed medically with dopamine agonists rather than surgery as first line",
+      "Dopamine agonist therapy typically lowers prolactin, restores gonadal function, and shrinks tumour volume"
     ],
-    [
-     "Key Investigations",
-     "Fasting serum prolactin, repeated if borderline, with sample dilution when a hook effect is suspected, Pregnancy test, thyroid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A prolactinoma is a benign lactotroph adenoma of the anterior pituitary that autonomously secretes prolactin. Prolactin is normally under tonic inhibitory control by hypothalamic dopamine, which is why dopamine agonists are effective and dopamine-blocking drugs raise prolactin. Excess prolactin inhibits pulsatile gonadotrophin-releasing hormone secretion, reducing LH and FSH and causing hypogonadism, galactorrhoea, and infertility. Larger tumours (macroadenomas) may compress the optic chiasm and adjacent pituitary tissue, producing visual field defects and hypopituitarism. Non-tumoural hyperprolactinaemia from stalk disconnection, drugs, or systemic disease must be distinguished from a true adenoma.",
+    "additionalDifferentials": [
+      "Physiological hyperprolactinaemia of pregnancy or lactation",
+      "Drug-induced hyperprolactinaemia (antipsychotics, antiemetics, some antidepressants)",
+      "Primary hypothyroidism raising prolactin via TRH",
+      "Chronic kidney disease reducing prolactin clearance",
+      "Stalk-effect hyperprolactinaemia from a non-lactotroph sellar mass",
+      "Macroprolactinaemia (biologically inactive complexed prolactin)"
     ],
-    [
-     "Primary Differentials",
-     "Physiological hyperprolactinaemia of pregnancy or lactation, Drug-induced hyperprolactinaemia (antipsychotics, antiemetics, some",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting serum prolactin, repeated if borderline, with sample dilution when a hook effect is suspected",
+      "Pregnancy test, thyroid function, and renal function to exclude secondary causes",
+      "Review of medications that raise prolactin",
+      "Pituitary MRI to characterise adenoma size and suprasellar extension",
+      "Assessment of macroprolactin when clinical picture and level are discordant",
+      "Visual fields and anterior pituitary hormone panel for macroadenomas"
     ],
-    [
-     "Management Strategy",
-     "Start a dopamine agonist as first-line therapy, usually cabergoline, to normalise prolactin, restore gonadal function and",
-     "Core treatment modality"
+    "redFlags": [
+      "Bitemporal visual field loss from chiasmal compression by a macroadenoma",
+      "Sudden severe headache with visual or cranial nerve signs suggesting apoplexy",
+      "Symptoms and signs of coexisting hypopituitarism, including adrenal insufficiency",
+      "Very large invasive tumours threatening vision or requiring urgent decompression"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing a prolactinoma without excluding drugs, hypothyroidism, renal failure, and pregnancy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most microprolactinomas respond well to dopamine agonists with normalisation of prolactin, restoration of fertility, and often no significant growth; macroadenomas also usually shrink with medical therapy, and in selected patients treatment can eventually be tapered, though relapse of hyperprolactinaemia is possible.",
+    "pitfalls": [
+      "Diagnosing a prolactinoma without excluding drugs, hypothyroidism, renal failure, and pregnancy",
+      "Missing the hook effect and underestimating prolactin in a large tumour, leading to inappropriate surgery",
+      "Overlooking macroprolactin as a cause of asymptomatic elevation",
+      "Failing to counsel on bone health and fertility implications of chronic hypogonadism"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Endocrine Society guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start a dopamine agonist as first-line therapy, usually cabergoline, to normalise prolactin, restore gonadal function and fertility, and shrink the tumour",
+      "Reserve transsphenoidal surgery for dopamine-agonist resistance or intolerance, or for acute chiasmal compression or pituitary apoplexy",
+      "Monitor response with serial serum prolactin, pituitary MRI and, in macroadenomas, formal visual field testing",
+      "Screen for and replace coexisting anterior pituitary hormone deficiencies in macroadenomas, and address hypogonadism-related bone loss with sex steroid replacement",
+      "In pregnancy switch to bromocriptine or withdraw treatment as advised and monitor clinically for symptomatic tumour enlargement",
+      "Consider echocardiographic surveillance for valvulopathy during prolonged higher-dose cabergoline therapy",
+      "Escalate urgently for sudden headache, visual loss or apoplexy, and refer to a pituitary multidisciplinary team for resistant or aggressive tumours"
     ]
-   ],
-   "caption": "Overview comparison matrix for prolactinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "prolactinoma-real-image",
-   "title": "Prolactinoma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "prolactinoma-pathway",
+      "title": "Prolactinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest hormone-secreting pituitary tumour; presentation differs by sex, with menstrual disturbance and galactorrhoea in women and reduced libido or erectile dysfunction in men",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bitemporal visual field loss from chiasmal compression by a macroadenoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting serum prolactin, repeated if borderline, with sample dilution when a hook effect is suspected, Pregnancy test, thyroid function, and renal function to exclude secondary causes, Review of medications that raise"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start a dopamine agonist as first-line therapy, usually cabergoline, to normalise prolactin, restore gonadal function and fertility, and shrink the tumour"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing a prolactinoma without excluding drugs, hypothyroidism, renal failure, and pregnancy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of prolactinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "prolactinoma-matrix",
+      "title": "Prolactinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest hormone-secreting pituitary tumour; presentation differs by sex, with menstrual disturbance and galactorrhoea in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting serum prolactin, repeated if borderline, with sample dilution when a hook effect is suspected, Pregnancy test, thyroid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Physiological hyperprolactinaemia of pregnancy or lactation, Drug-induced hyperprolactinaemia (antipsychotics, antiemetics, some",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start a dopamine agonist as first-line therapy, usually cabergoline, to normalise prolactin, restore gonadal function and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing a prolactinoma without excluding drugs, hypothyroidism, renal failure, and pregnancy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for prolactinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Drug-induced hypersecretion of prolactin (p7)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prolactinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting serum prolactin, with sample dilution if hook effect suspected",
+          "cells": [
+            {
+              "text": "Hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy test, thyroid function and renal function",
+          "cells": [
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications that raise prolactin",
+          "cells": [
+            {
+              "text": "Drug-induced hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Adenoma size and suprasellar extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macroprolactin assessment",
+          "cells": [
+            {
+              "text": "Discordance between clinical picture and level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual fields and anterior pituitary hormone panel",
+          "cells": [
+            {
+              "text": "Macroadenomas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prolactinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological hyperprolactinaemia of pregnancy or lactation",
+          "cells": [
+            {
+              "text": "Pregnancy or lactation"
+            },
+            {
+              "text": "Pregnancy test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Antipsychotics, antiemetics or some antidepressants"
+            },
+            {
+              "text": "Medication review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hypothyroidism raising prolactin",
+          "cells": [
+            {
+              "text": "Primary hypothyroidism"
+            },
+            {
+              "text": "Thyroid function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macroprolactinaemia",
+          "cells": [
+            {
+              "text": "Biologically inactive complexed prolactin"
+            },
+            {
+              "text": "Macroprolactin assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prolactinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dopamine agonist (first line)",
+          "cells": [
+            {
+              "text": "Usually cabergoline, to normalise prolactin, restore gonadal function and shrink the tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transsphenoidal surgery",
+          "cells": [
+            {
+              "text": "For agonist resistance or intolerance, acute chiasmal compression or pituitary apoplexy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial serum prolactin, pituitary MRI and formal visual fields in macroadenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting deficiencies",
+          "cells": [
+            {
+              "text": "Screen for and replace anterior pituitary deficiencies in macroadenomas; sex steroids for hypogonadism-related bone loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Switch to bromocriptine or withdraw treatment as advised; monitor for tumour enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography for valvulopathy during prolonged higher-dose cabergoline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral",
+          "cells": [
+            {
+              "text": "Sudden headache, visual loss or apoplexy; pituitary team for resistant or aggressive tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prolactinoma-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs that raise prolactin",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs by mechanism"
+      ],
+      "rows": [
+        {
+          "parameter": "Dopamine receptor blockers",
+          "cells": [
+            {
+              "text": "atypical antipsychotics (risperidone); phenothiazines (chlorpromazine, perphenazine); butyrophenones (haloperidol); thioxanthenes; metoclopramide"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dopamine synthesis inhibitor",
+          "cells": [
+            {
+              "text": "alpha-methyldopa"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catecholamine depletor",
+          "cells": [
+            {
+              "text": "reserpine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opiates",
+          "cells": [
+            {
+              "text": "opiates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "H2 antagonists",
+          "cells": [
+            {
+              "text": "cimetidine, ranitidine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Imipramines",
+          "cells": [
+            {
+              "text": "amitriptyline, amoxapine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serotonin reuptake inhibitors",
+          "cells": [
+            {
+              "text": "fluoxetine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Calcium channel blockers",
+          "cells": [
+            {
+              "text": "verapamil"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other",
+          "cells": [
+            {
+              "text": "estrogens; TRH (indented under calcium channel blockers as printed)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prolactinoma-dx-mgmt",
+      "title": "Diagnosis and management of Prolactinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prolactinoma: persistently raised fasting serum prolactin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bitemporal field loss, sudden severe headache or apoplexy, or hypopituitarism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent decompression or pituitary team review for apoplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat fasting prolactin; pregnancy, thyroid and renal tests; drugs; pituitary MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the raise confirmed, not drug-induced, physiological or macroprolactin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause identified, such as drug withdrawal; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dopamine agonist first-line, usually cabergoline",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transsphenoidal surgery for agonist resistance, intolerance or apoplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial prolactin, pituitary MRI and visual fields in macroadenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Replace coexisting pituitary deficiencies in macroadenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pituitary team review for resistant or aggressive tumours",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

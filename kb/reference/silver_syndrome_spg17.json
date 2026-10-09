@@ -1,175 +1,491 @@
 {
- "id": "silver_syndrome_spg17",
- "name": "Silver syndrome (SPG17, BSCL2)",
- "aliases": [
-  "SPG17",
-  "Silver syndrome",
-  "BSCL2-related spastic paraplegia with amyotrophy",
-  "seipin-related motor neuronopathy",
-  "locus 11q12.3"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant complicated hereditary spastic paraplegia in which lower-limb spasticity is combined with amyotrophy of the small hand muscles",
-   "Caused by heterozygous variants in BSCL2, which encodes seipin, an endoplasmic reticulum protein involved in lipid-droplet biology",
-   "The wasting characteristically begins in the thenar eminence and first dorsal interosseous, giving prominent intrinsic-hand-muscle atrophy",
-   "Marked intrafamilial variability is typical, with some carriers showing predominantly spasticity and others predominantly distal wasting",
-   "BSCL2 is allelic with distal hereditary motor neuropathy type V and with Charcot-Marie-Tooth type 2, and different BSCL2 variants cause congenital generalised lipodystrophy",
-   "Nerve conduction studies and electromyography confirm a motor axonopathy affecting the hands and feet",
-   "Care is symptomatic, combining physiotherapy, spasticity control and hand-function support with occupational therapy"
+  "id": "silver_syndrome_spg17",
+  "name": "Silver syndrome (SPG17, BSCL2)",
+  "aliases": [
+    "SPG17",
+    "Silver syndrome",
+    "BSCL2-related spastic paraplegia with amyotrophy",
+    "seipin-related motor neuronopathy",
+    "locus 11q12.3"
   ],
-  "pathophysiology": "Silver syndrome results from dominant variants in BSCL2, the gene for seipin, an integral endoplasmic reticulum membrane protein important for lipid-droplet formation and endoplasmic reticulum homeostasis. The classical Silver syndrome variants (such as N88S and S90L) are thought to disturb glycosylation and cause misfolded seipin to accumulate, triggering endoplasmic reticulum stress and a toxic gain of function in motor neurons. This preferentially injures the longest corticospinal tracts and distal motor axons supplying the hands and feet, producing the distinctive combination of lower-limb spasticity with intrinsic-hand-muscle amyotrophy. Separate loss-of-function BSCL2 variants instead cause a lipodystrophy phenotype.",
-  "additionalDifferentials": [
-   "Distal hereditary motor neuropathy type V (allelic BSCL2 disease)",
-   "Charcot-Marie-Tooth disease type 2",
-   "Amyotrophic lateral sclerosis with mixed upper and lower motor neurone signs",
-   "SPG10 (KIF5A) complicated hereditary spastic paraplegia with amyotrophy",
-   "Cervical spondylotic myeloradiculopathy",
-   "Hirayama disease and other focal motor neuronopathies"
-  ],
-  "additionalInvestigations": [
-   "BSCL2 sequencing within a hereditary spastic paraplegia or inherited neuropathy panel",
-   "Nerve conduction studies and electromyography to define the motor axonopathy",
-   "MRI of brain and cervical spine to exclude compressive and demyelinating causes",
-   "Detailed family history given wide phenotypic variability",
-   "Assessment of hand function and grip for rehabilitation planning",
-   "Screening for metabolic features to distinguish lipodystrophy-associated BSCL2 variants"
-  ],
-  "redFlags": [
-   "Bulbar symptoms or brisk spread of weakness suggesting motor neurone disease",
-   "A cervical sensory level or radicular pain pointing to compressive myeloradiculopathy",
-   "Rapidly progressive respiratory or swallowing difficulty",
-   "Severe distal weakness threatening loss of independent hand function"
-  ],
-  "prognosis": "Progression is usually slow, and although hand-muscle wasting can cause meaningful disability, many affected people retain ambulation and useful function for prolonged periods; severity varies considerably even within a family.",
-  "pitfalls": [
-   "Attributing intrinsic-hand-muscle wasting to a local entrapment neuropathy rather than the underlying genetic disorder",
-   "Confusing the neuropathic BSCL2 phenotype with the unrelated lipodystrophy caused by different BSCL2 variants",
-   "Assuming a pure hereditary spastic paraplegia when subtle distal amyotrophy is present",
-   "Underestimating variability and reassuring at-risk relatives inappropriately"
-  ],
-  "references": [
-   "GeneReviews: BSCL2-Related Neurologic Disorders / Seipinopathy",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antispasticity therapy for the lower-limb spasticity with agents such as baclofen or tizanidine, and focal botulinum toxin injection for targeted muscle overactivity",
-   "Physiotherapy and stretching programmes to maintain gait and prevent contractures, with occupational therapy and adaptive aids for the intrinsic-hand-muscle wasting",
-   "Ankle-foot orthoses and mobility aids to preserve ambulation and independence",
-   "Foot care and orthopaedic management of secondary deformity",
-   "Nerve conduction studies, electromyography and functional assessments to characterise the motor axonopathy and monitor progression",
-   "Coordinated neurology and rehabilitation input including physiotherapy and occupational therapy",
-   "Genetic counselling for the autosomal dominant BSCL2 variant, noting marked intrafamilial variability and the allelic neuropathy and lipodystrophy phenotypes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "silver_syndrome_spg17-pathway",
-   "title": "Silver syndrome (SPG17, BSCL2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant complicated hereditary spastic paraplegia in which lower-limb spasticity is combined with amyotrophy of the small hand muscles",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bulbar symptoms or brisk spread of weakness suggesting motor neurone disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: BSCL2 sequencing within a hereditary spastic paraplegia or inherited neuropathy panel, Nerve conduction studies and electromyography to define the motor axonopathy, MRI of brain and cervical spine to exclude compressive"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antispasticity therapy for the lower-limb spasticity with agents such as baclofen or tizanidine, and focal botulinum toxin injection for targeted muscle overactivity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing intrinsic-hand-muscle wasting to a local entrapment neuropathy rather than the underlying genetic disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of silver syndrome (spg17, bscl2)."
-  }
- ],
- "tables": [
-  {
-   "id": "silver_syndrome_spg17-matrix",
-   "title": "Silver syndrome (SPG17, BSCL2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant complicated hereditary spastic paraplegia in which lower-limb spasticity is combined with amyotrophy of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant complicated hereditary spastic paraplegia in which lower-limb spasticity is combined with amyotrophy of the small hand muscles",
+      "Caused by heterozygous variants in BSCL2, which encodes seipin, an endoplasmic reticulum protein involved in lipid-droplet biology",
+      "The wasting characteristically begins in the thenar eminence and first dorsal interosseous, giving prominent intrinsic-hand-muscle atrophy",
+      "Marked intrafamilial variability is typical, with some carriers showing predominantly spasticity and others predominantly distal wasting",
+      "BSCL2 is allelic with distal hereditary motor neuropathy type V and with Charcot-Marie-Tooth type 2, and different BSCL2 variants cause congenital generalised lipodystrophy",
+      "Nerve conduction studies and electromyography confirm a motor axonopathy affecting the hands and feet",
+      "Care is symptomatic, combining physiotherapy, spasticity control and hand-function support with occupational therapy"
     ],
-    [
-     "Key Investigations",
-     "BSCL2 sequencing within a hereditary spastic paraplegia or inherited neuropathy panel, Nerve conduction studies and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Silver syndrome results from dominant variants in BSCL2, the gene for seipin, an integral endoplasmic reticulum membrane protein important for lipid-droplet formation and endoplasmic reticulum homeostasis. The classical Silver syndrome variants (such as N88S and S90L) are thought to disturb glycosylation and cause misfolded seipin to accumulate, triggering endoplasmic reticulum stress and a toxic gain of function in motor neurons. This preferentially injures the longest corticospinal tracts and distal motor axons supplying the hands and feet, producing the distinctive combination of lower-limb spasticity with intrinsic-hand-muscle amyotrophy. Separate loss-of-function BSCL2 variants instead cause a lipodystrophy phenotype.",
+    "additionalDifferentials": [
+      "Distal hereditary motor neuropathy type V (allelic BSCL2 disease)",
+      "Charcot-Marie-Tooth disease type 2",
+      "Amyotrophic lateral sclerosis with mixed upper and lower motor neurone signs",
+      "SPG10 (KIF5A) complicated hereditary spastic paraplegia with amyotrophy",
+      "Cervical spondylotic myeloradiculopathy",
+      "Hirayama disease and other focal motor neuronopathies"
     ],
-    [
-     "Primary Differentials",
-     "Distal hereditary motor neuropathy type V (allelic BSCL2 disease), Charcot-Marie-Tooth disease type 2, Amyotrophic lateral",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "BSCL2 sequencing within a hereditary spastic paraplegia or inherited neuropathy panel",
+      "Nerve conduction studies and electromyography to define the motor axonopathy",
+      "MRI of brain and cervical spine to exclude compressive and demyelinating causes",
+      "Detailed family history given wide phenotypic variability",
+      "Assessment of hand function and grip for rehabilitation planning",
+      "Screening for metabolic features to distinguish lipodystrophy-associated BSCL2 variants"
     ],
-    [
-     "Management Strategy",
-     "Antispasticity therapy for the lower-limb spasticity with agents such as baclofen or tizanidine, and focal botulinum toxin",
-     "Core treatment modality"
+    "redFlags": [
+      "Bulbar symptoms or brisk spread of weakness suggesting motor neurone disease",
+      "A cervical sensory level or radicular pain pointing to compressive myeloradiculopathy",
+      "Rapidly progressive respiratory or swallowing difficulty",
+      "Severe distal weakness threatening loss of independent hand function"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing intrinsic-hand-muscle wasting to a local entrapment neuropathy rather than the underlying genetic disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Progression is usually slow, and although hand-muscle wasting can cause meaningful disability, many affected people retain ambulation and useful function for prolonged periods; severity varies considerably even within a family.",
+    "pitfalls": [
+      "Attributing intrinsic-hand-muscle wasting to a local entrapment neuropathy rather than the underlying genetic disorder",
+      "Confusing the neuropathic BSCL2 phenotype with the unrelated lipodystrophy caused by different BSCL2 variants",
+      "Assuming a pure hereditary spastic paraplegia when subtle distal amyotrophy is present",
+      "Underestimating variability and reassuring at-risk relatives inappropriately"
+    ],
+    "references": [
+      "GeneReviews: BSCL2-Related Neurologic Disorders / Seipinopathy",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antispasticity therapy for the lower-limb spasticity with agents such as baclofen or tizanidine, and focal botulinum toxin injection for targeted muscle overactivity",
+      "Physiotherapy and stretching programmes to maintain gait and prevent contractures, with occupational therapy and adaptive aids for the intrinsic-hand-muscle wasting",
+      "Ankle-foot orthoses and mobility aids to preserve ambulation and independence",
+      "Foot care and orthopaedic management of secondary deformity",
+      "Nerve conduction studies, electromyography and functional assessments to characterise the motor axonopathy and monitor progression",
+      "Coordinated neurology and rehabilitation input including physiotherapy and occupational therapy",
+      "Genetic counselling for the autosomal dominant BSCL2 variant, noting marked intrafamilial variability and the allelic neuropathy and lipodystrophy phenotypes"
     ]
-   ],
-   "caption": "Overview comparison matrix for silver syndrome (spg17, bscl2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "silver-syndrome-spg17-real-image",
-   "title": "Silver syndrome (SPG17, BSCL2): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "silver_syndrome_spg17-pathway",
+      "title": "Silver syndrome (SPG17, BSCL2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant complicated hereditary spastic paraplegia in which lower-limb spasticity is combined with amyotrophy of the small hand muscles",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bulbar symptoms or brisk spread of weakness suggesting motor neurone disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: BSCL2 sequencing within a hereditary spastic paraplegia or inherited neuropathy panel, Nerve conduction studies and electromyography to define the motor axonopathy, MRI of brain and cervical spine to exclude compressive"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antispasticity therapy for the lower-limb spasticity with agents such as baclofen or tizanidine, and focal botulinum toxin injection for targeted muscle overactivity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing intrinsic-hand-muscle wasting to a local entrapment neuropathy rather than the underlying genetic disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of silver syndrome (spg17, bscl2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "silver_syndrome_spg17-matrix",
+      "title": "Silver syndrome (SPG17, BSCL2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant complicated hereditary spastic paraplegia in which lower-limb spasticity is combined with amyotrophy of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "BSCL2 sequencing within a hereditary spastic paraplegia or inherited neuropathy panel, Nerve conduction studies and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Distal hereditary motor neuropathy type V (allelic BSCL2 disease), Charcot-Marie-Tooth disease type 2, Amyotrophic lateral",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antispasticity therapy for the lower-limb spasticity with agents such as baclofen or tizanidine, and focal botulinum toxin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing intrinsic-hand-muscle wasting to a local entrapment neuropathy rather than the underlying genetic disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for silver syndrome (spg17, bscl2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "silver_syndrome_spg17-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "BSCL2 sequencing",
+          "cells": [
+            {
+              "text": "Heterozygous BSCL2 variant, within an HSP or neuropathy panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Motor axonopathy affecting the hands and feet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and cervical spine",
+          "cells": [
+            {
+              "text": "Excludes compressive and demyelinating causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Marked intrafamilial variability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand function and grip assessment",
+          "cells": [
+            {
+              "text": "Intrinsic-hand-muscle wasting, for rehabilitation planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening",
+          "cells": [
+            {
+              "text": "Separates lipodystrophy-associated BSCL2 variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "silver_syndrome_spg17-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Distal hereditary motor neuropathy type V",
+          "cells": [
+            {
+              "text": "Allelic BSCL2 disease with a neuropathic phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot-Marie-Tooth disease type 2",
+          "cells": [
+            {
+              "text": "Allelic with BSCL2 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyotrophic lateral sclerosis",
+          "cells": [
+            {
+              "text": "Mixed upper and lower motor neurone signs; bulbar symptoms suggest motor neurone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spondylotic myeloradiculopathy",
+          "cells": [
+            {
+              "text": "Cervical sensory level or radicular pain points to compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local entrapment neuropathy",
+          "cells": [
+            {
+              "text": "Hand wasting attributed to entrapment rather than the genetic disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "silver_syndrome_spg17-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antispasticity therapy",
+          "cells": [
+            {
+              "text": "Baclofen or tizanidine for lower-limb spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal botulinum toxin",
+          "cells": [
+            {
+              "text": "Targeted muscle overactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Maintains gait and prevents contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and adaptive aids",
+          "cells": [
+            {
+              "text": "For intrinsic-hand-muscle wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthoses and mobility aids",
+          "cells": [
+            {
+              "text": "Preserve ambulation and independence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; marked intrafamilial variability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "silver_syndrome_spg17-dx-mgmt",
+      "title": "Diagnosis and management of Silver syndrome (SPG17, BSCL2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lower-limb spasticity with small hand muscle wasting: suspected Silver syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bulbar signs, radicular pain, rapidly progressive respiratory decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for motor neurone disease or compressive myeloradiculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BSCL2 sequencing, nerve conduction studies and EMG, MRI of brain and cervical spine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does BSCL2 sequencing confirm a heterozygous variant with a motor axonopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CMT type 2, distal HMN or ALS; repeat neurophysiology and genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antispasticity therapy and focal botulinum toxin for targeted overactivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and stretching to maintain gait and prevent contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Occupational therapy and adaptive aids for intrinsic-hand-muscle wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ankle-foot orthoses and mobility aids to preserve ambulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for an autosomal dominant variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progression is usually slow; many keep ambulation for prolonged periods",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

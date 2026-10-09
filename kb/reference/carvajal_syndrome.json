@@ -1,174 +1,483 @@
 {
- "id": "carvajal_syndrome",
- "name": "Carvajal syndrome",
- "aliases": [
-  "DSP",
-  "desmoplakin",
-  "woolly hair, keratoderma and cardiomyopathy syndrome",
-  "Naxos-like syndrome"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
-   "The cardiomyopathy is classically a dilated / left-dominant arrhythmogenic cardiomyopathy, contrasting with the right-dominant pattern of Naxos disease",
-   "Woolly hair and keratoderma are typically evident from infancy, preceding recognition of cardiac disease",
-   "Caused by recessive mutations in DSP encoding desmoplakin, a key desmosomal plaque protein",
-   "Life-threatening ventricular arrhythmia, heart failure and sudden cardiac death are the principal dangers",
-   "Any child with woolly hair and palmoplantar keratoderma warrants cardiac evaluation",
-   "Management centres on cardiological surveillance and heart-failure/arrhythmia care, with emollients/keratolytics for the skin"
+  "id": "carvajal_syndrome",
+  "name": "Carvajal syndrome",
+  "aliases": [
+    "DSP",
+    "desmoplakin",
+    "woolly hair, keratoderma and cardiomyopathy syndrome",
+    "Naxos-like syndrome"
   ],
-  "pathophysiology": "Carvajal syndrome is usually an autosomal recessive disorder caused by mutations in DSP, which encodes desmoplakin, an obligate component of the desmosomal plaque that anchors intermediate filaments to the cell membrane. Desmosomes provide mechanical coupling between cells, and desmoplakin dysfunction weakens cell-cell adhesion in tissues subject to mechanical stress. In the epidermis this produces the keratoderma and, with hair-shaft involvement, woolly hair; in the myocardium impaired desmosomal integrity leads to myocyte detachment, fibrofatty replacement and an arrhythmogenic, dilated (frequently left-ventricular predominant) cardiomyopathy that predisposes to arrhythmia and sudden death.",
-  "additionalDifferentials": [
-   "Naxos disease (JUP/plakoglobin mutation, right-dominant arrhythmogenic cardiomyopathy)",
-   "Other arrhythmogenic cardiomyopathies without cutaneous features",
-   "Woolly hair naevus or isolated woolly hair",
-   "Striate palmoplantar keratoderma of other cause",
-   "Ectodermal dysplasia-skin fragility syndrome (PKP1)",
-   "Dilated cardiomyopathy of unrelated aetiology"
-  ],
-  "additionalInvestigations": [
-   "Electrocardiography and Holter monitoring for arrhythmia",
-   "Echocardiography and cardiac magnetic resonance imaging to characterise the cardiomyopathy and fibrofatty change",
-   "Molecular genetic testing of DSP",
-   "Hair microscopy demonstrating woolly hair-shaft abnormalities",
-   "Skin biopsy of keratoderma (may show epidermolytic change)",
-   "Family cardiac screening and genetic counselling"
-  ],
-  "redFlags": [
-   "Palpitations, syncope or documented ventricular arrhythmia",
-   "Symptoms or signs of heart failure",
-   "Family history of premature sudden cardiac death",
-   "Progressive left-ventricular dysfunction on imaging"
-  ],
-  "prognosis": "The cutaneous and hair features are benign, but prognosis is dictated by the cardiomyopathy, which can cause heart failure, life-threatening arrhythmia and sudden cardiac death, sometimes in childhood or adolescence. Early cardiac surveillance and intervention substantially influence outcome.",
-  "pitfalls": [
-   "Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment",
-   "Assuming the right-dominant Naxos pattern when Carvajal is typically left-dominant/dilated",
-   "Delaying cardiological referral until cardiac symptoms appear",
-   "Not screening at-risk family members for arrhythmogenic cardiomyopathy"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers, mineralocorticoid antagonists and diuretics",
-   "Arrhythmia management with an implantable cardioverter-defibrillator for those at high risk of life-threatening ventricular arrhythmia and sudden cardiac death",
-   "Restriction from competitive and high-intensity exercise to reduce arrhythmic risk",
-   "Topical treatment of the palmoplantar keratoderma with emollients and keratolytic agents",
-   "Regular cardiac surveillance with electrocardiography, Holter monitoring and imaging, given progression of the cardiomyopathy",
-   "Consideration of cardiac transplantation for end-stage heart failure",
-   "Genetic counselling for autosomal recessive DSP disease, with cardiac screening of relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "carvajal_syndrome-pathway",
-   "title": "Carvajal syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Palpitations, syncope or documented ventricular arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electrocardiography and Holter monitoring for arrhythmia, Echocardiography and cardiac magnetic resonance imaging to characterise the cardiomyopathy and fibrofatty change, Molecular genetic testing of DSP"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers, mineralocorticoid antagonists and diuretics"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of carvajal syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "carvajal_syndrome-matrix",
-   "title": "Carvajal syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
+      "The cardiomyopathy is classically a dilated / left-dominant arrhythmogenic cardiomyopathy, contrasting with the right-dominant pattern of Naxos disease",
+      "Woolly hair and keratoderma are typically evident from infancy, preceding recognition of cardiac disease",
+      "Caused by recessive mutations in DSP encoding desmoplakin, a key desmosomal plaque protein",
+      "Life-threatening ventricular arrhythmia, heart failure and sudden cardiac death are the principal dangers",
+      "Any child with woolly hair and palmoplantar keratoderma warrants cardiac evaluation",
+      "Management centres on cardiological surveillance and heart-failure/arrhythmia care, with emollients/keratolytics for the skin"
     ],
-    [
-     "Key Investigations",
-     "Electrocardiography and Holter monitoring for arrhythmia, Echocardiography and cardiac magnetic resonance imaging to characterise",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Carvajal syndrome is usually an autosomal recessive disorder caused by mutations in DSP, which encodes desmoplakin, an obligate component of the desmosomal plaque that anchors intermediate filaments to the cell membrane. Desmosomes provide mechanical coupling between cells, and desmoplakin dysfunction weakens cell-cell adhesion in tissues subject to mechanical stress. In the epidermis this produces the keratoderma and, with hair-shaft involvement, woolly hair; in the myocardium impaired desmosomal integrity leads to myocyte detachment, fibrofatty replacement and an arrhythmogenic, dilated (frequently left-ventricular predominant) cardiomyopathy that predisposes to arrhythmia and sudden death.",
+    "additionalDifferentials": [
+      "Naxos disease (JUP/plakoglobin mutation, right-dominant arrhythmogenic cardiomyopathy)",
+      "Other arrhythmogenic cardiomyopathies without cutaneous features",
+      "Woolly hair naevus or isolated woolly hair",
+      "Striate palmoplantar keratoderma of other cause",
+      "Ectodermal dysplasia-skin fragility syndrome (PKP1)",
+      "Dilated cardiomyopathy of unrelated aetiology"
     ],
-    [
-     "Primary Differentials",
-     "Naxos disease (JUP/plakoglobin mutation, right-dominant arrhythmogenic cardiomyopathy), Other arrhythmogenic cardiomyopathies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electrocardiography and Holter monitoring for arrhythmia",
+      "Echocardiography and cardiac magnetic resonance imaging to characterise the cardiomyopathy and fibrofatty change",
+      "Molecular genetic testing of DSP",
+      "Hair microscopy demonstrating woolly hair-shaft abnormalities",
+      "Skin biopsy of keratoderma (may show epidermolytic change)",
+      "Family cardiac screening and genetic counselling"
     ],
-    [
-     "Management Strategy",
-     "Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers,",
-     "Core treatment modality"
+    "redFlags": [
+      "Palpitations, syncope or documented ventricular arrhythmia",
+      "Symptoms or signs of heart failure",
+      "Family history of premature sudden cardiac death",
+      "Progressive left-ventricular dysfunction on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment",
-     "Prevent diagnostic or management error"
+    "prognosis": "The cutaneous and hair features are benign, but prognosis is dictated by the cardiomyopathy, which can cause heart failure, life-threatening arrhythmia and sudden cardiac death, sometimes in childhood or adolescence. Early cardiac surveillance and intervention substantially influence outcome.",
+    "pitfalls": [
+      "Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment",
+      "Assuming the right-dominant Naxos pattern when Carvajal is typically left-dominant/dilated",
+      "Delaying cardiological referral until cardiac symptoms appear",
+      "Not screening at-risk family members for arrhythmogenic cardiomyopathy"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers, mineralocorticoid antagonists and diuretics",
+      "Arrhythmia management with an implantable cardioverter-defibrillator for those at high risk of life-threatening ventricular arrhythmia and sudden cardiac death",
+      "Restriction from competitive and high-intensity exercise to reduce arrhythmic risk",
+      "Topical treatment of the palmoplantar keratoderma with emollients and keratolytic agents",
+      "Regular cardiac surveillance with electrocardiography, Holter monitoring and imaging, given progression of the cardiomyopathy",
+      "Consideration of cardiac transplantation for end-stage heart failure",
+      "Genetic counselling for autosomal recessive DSP disease, with cardiac screening of relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for carvajal syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "carvajal-syndrome-real-image",
-   "title": "Carvajal syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "carvajal_syndrome-pathway",
+      "title": "Carvajal syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Palpitations, syncope or documented ventricular arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electrocardiography and Holter monitoring for arrhythmia, Echocardiography and cardiac magnetic resonance imaging to characterise the cardiomyopathy and fibrofatty change, Molecular genetic testing of DSP"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers, mineralocorticoid antagonists and diuretics"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of carvajal syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "carvajal_syndrome-matrix",
+      "title": "Carvajal syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electrocardiography and Holter monitoring for arrhythmia, Echocardiography and cardiac magnetic resonance imaging to characterise",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Naxos disease (JUP/plakoglobin mutation, right-dominant arrhythmogenic cardiomyopathy), Other arrhythmogenic cardiomyopathies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for carvajal syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carvajal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrocardiography and Holter monitoring",
+          "cells": [
+            {
+              "text": "Detects arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Characterise the cardiomyopathy and fibrofatty change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of DSP",
+          "cells": [
+            {
+              "text": "Confirms DSP (desmoplakin) variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair microscopy",
+          "cells": [
+            {
+              "text": "Woolly hair-shaft abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy of keratoderma",
+          "cells": [
+            {
+              "text": "May show epidermolytic change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "carvajal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Naxos disease",
+          "cells": [
+            {
+              "text": "Right-dominant arrhythmogenic cardiomyopathy (JUP, plakoglobin)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other arrhythmogenic cardiomyopathies",
+          "cells": [
+            {
+              "text": "Without cutaneous features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectodermal dysplasia-skin fragility syndrome",
+          "cells": [
+            {
+              "text": "PKP1 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "carvajal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart-failure therapy",
+          "cells": [
+            {
+              "text": "ACE inhibitors or angiotensin receptor blockers, beta-blockers, mineralocorticoid antagonists, diuretics"
+            },
+            {
+              "text": "For the dilated cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Implant for those at high risk of ventricular arrhythmia"
+            },
+            {
+              "text": "Life-threatening ventricular arrhythmia and sudden cardiac death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise restriction",
+          "cells": [
+            {
+              "text": "Avoid competitive and high-intensity exercise"
+            },
+            {
+              "text": "Reduces arrhythmic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratoderma care",
+          "cells": [
+            {
+              "text": "Emollients and keratolytic agents"
+            },
+            {
+              "text": "Topical treatment of the palmoplantar keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "ECG, Holter monitoring and imaging"
+            },
+            {
+              "text": "Cardiomyopathy progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac transplantation",
+          "cells": [
+            {
+              "text": "Consider transplantation"
+            },
+            {
+              "text": "End-stage heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cardiac screening of relatives"
+            },
+            {
+              "text": "Autosomal recessive DSP disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carvajal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Carvajal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Carvajal syndrome: woolly hair, palmoplantar keratoderma, cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (palpitations, syncope, heart failure or family sudden death)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: ventricular arrhythmia or heart failure needs urgent cardiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG, Holter monitoring, echocardiography, cardiac MRI and DSP testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Arrhythmogenic left-dominant cardiomyopathy with DSP variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Heart-failure therapy with ACE inhibitors or ARBs, beta-blockers, diuretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Naxos disease and PKP1 syndrome by their stated features",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Implantable cardioverter-defibrillator for high-risk patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restrict competitive and high-intensity exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emollients and keratolytics for the palmoplantar keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong cardiac surveillance; transplantation considered in end-stage failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,489 @@
 {
- "id": "hemophilia_c",
- "name": "Haemophilia C (factor XI deficiency)",
- "aliases": [
-  "haemophilia C",
-  "factor XI deficiency",
-  "F11",
-  "Rosenthal syndrome",
-  "plasma thromboplastin antecedent deficiency"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A deficiency of coagulation factor XI from mutations in F11, inherited in an autosomal (not X-linked) manner and so affecting both sexes",
-   "It is notably more common in people of Ashkenazi Jewish ancestry than in the general population",
-   "Bleeding is typically milder and less predictable than in haemophilias A and B, and it correlates poorly with the measured factor XI level",
-   "Bleeding tends to be injury-related and is especially likely at sites of high fibrinolytic activity such as the mouth, nose and urinary tract, and after dental or surgical procedures",
-   "Spontaneous haemarthroses are uncommon, unlike in haemophilia A or B",
-   "The screening pattern is a prolonged activated partial thromboplastin time with a normal prothrombin time, and a specific factor XI assay confirms the diagnosis",
-   "Management is largely tailored to the bleeding history and procedure, using antifibrinolytics, factor XI replacement or plasma products, with individualised peri-operative planning"
+  "id": "hemophilia_c",
+  "name": "Haemophilia C (factor XI deficiency)",
+  "aliases": [
+    "haemophilia C",
+    "factor XI deficiency",
+    "F11",
+    "Rosenthal syndrome",
+    "plasma thromboplastin antecedent deficiency"
   ],
-  "pathophysiology": "Haemophilia C results from mutations in F11 that reduce the activity of coagulation factor XI, a component of the intrinsic pathway that, once activated, amplifies thrombin generation partly through activation of factor IX. Its role is chiefly in reinforcing and sustaining the clot rather than initiating haemostasis, which explains why bleeding is usually milder and less consistent than with factor VIII or IX deficiency. Because factor XI contributes to protecting clots against fibrinolysis, bleeding is particularly prone to occur at sites rich in local fibrinolytic activity, and the poor correlation between factor level and bleeding suggests additional modifying haemostatic factors.",
-  "additionalDifferentials": [
-   "Haemophilia A and haemophilia B",
-   "Von Willebrand disease",
-   "Other contact-factor deficiencies (factor XII, prekallikrein) that prolong the aPTT without bleeding",
-   "Platelet function disorders",
-   "Mild acquired coagulopathy or anticoagulant effect",
-   "Lupus anticoagulant prolonging the aPTT"
-  ],
-  "additionalInvestigations": [
-   "Activated partial thromboplastin time, prothrombin time and platelet count",
-   "Mixing study to distinguish deficiency from an inhibitor or lupus anticoagulant",
-   "Specific factor XI activity assay",
-   "Von Willebrand and platelet function testing where the picture is unclear",
-   "Bleeding history assessment to guide procedure planning",
-   "F11 genetic testing for confirmation and family or reproductive counselling"
-  ],
-  "redFlags": [
-   "Excessive bleeding after surgery or trauma at fibrinolytic-rich sites (oral, nasal, genitourinary)",
-   "Unexpected postpartum haemorrhage",
-   "Bleeding disproportionate to the measured factor level",
-   "Rare inhibitor development, particularly in severely deficient patients after replacement"
-  ],
-  "prognosis": "Prognosis is generally good, with many patients only bleeding in response to surgery or trauma, and careful individualised peri-procedural management usually prevents serious bleeding.",
-  "pitfalls": [
-   "Predicting bleeding risk from the factor XI level, which correlates poorly with clinical bleeding",
-   "Confusing an isolated prolonged aPTT with a non-bleeding contact-factor deficiency or a lupus anticoagulant",
-   "Over-transfusing plasma products and risking volume overload or unnecessary exposure",
-   "Failing to plan haemostatic cover before high-risk procedures at fibrinolytic sites"
-  ],
-  "references": [
-   "Postgraduate Haematology",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reserve treatment for bleeding episodes and cover for surgery or trauma rather than giving routine prophylaxis, since bleeding correlates poorly with factor level",
-   "Use antifibrinolytics such as tranexamic acid as first-line cover for dental and other procedures at fibrinolytic-rich mucosal sites",
-   "For major surgery or significant bleeding, replace factor XI with factor XI concentrate or fresh frozen plasma, mindful of the thrombotic risk of concentrate",
-   "Individualise peri-procedural plans on the basis of personal and family bleeding history",
-   "Avoid antiplatelet drugs and NSAIDs where possible and inform surgeons and anaesthetists of the diagnosis before procedures",
-   "Manage through a haematologist with haemostasis expertise",
-   "Offer genetic counselling for this autosomal condition and screen relatives, noting increased frequency in those of Ashkenazi Jewish ancestry"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hemophilia_c-pathway",
-   "title": "Haemophilia C (factor XI deficiency): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A deficiency of coagulation factor XI from mutations in F11, inherited in an autosomal (not X-linked) manner and so affecting both sexes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Excessive bleeding after surgery or trauma at fibrinolytic-rich sites (oral, nasal, genitourinary)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Activated partial thromboplastin time, prothrombin time and platelet count, Mixing study to distinguish deficiency from an inhibitor or lupus anticoagulant, Specific factor XI activity assay"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reserve treatment for bleeding episodes and cover for surgery or trauma rather than giving routine prophylaxis, since bleeding correlates poorly with factor level"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Predicting bleeding risk from the factor XI level, which correlates poorly with clinical bleeding"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of haemophilia c (factor xi deficiency)."
-  }
- ],
- "tables": [
-  {
-   "id": "hemophilia_c-matrix",
-   "title": "Haemophilia C (factor XI deficiency): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A deficiency of coagulation factor XI from mutations in F11, inherited in an autosomal (not X-linked) manner and so affecting",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A deficiency of coagulation factor XI from mutations in F11, inherited in an autosomal (not X-linked) manner and so affecting both sexes",
+      "It is notably more common in people of Ashkenazi Jewish ancestry than in the general population",
+      "Bleeding is typically milder and less predictable than in haemophilias A and B, and it correlates poorly with the measured factor XI level",
+      "Bleeding tends to be injury-related and is especially likely at sites of high fibrinolytic activity such as the mouth, nose and urinary tract, and after dental or surgical procedures",
+      "Spontaneous haemarthroses are uncommon, unlike in haemophilia A or B",
+      "The screening pattern is a prolonged activated partial thromboplastin time with a normal prothrombin time, and a specific factor XI assay confirms the diagnosis",
+      "Management is largely tailored to the bleeding history and procedure, using antifibrinolytics, factor XI replacement or plasma products, with individualised peri-operative planning"
     ],
-    [
-     "Key Investigations",
-     "Activated partial thromboplastin time, prothrombin time and platelet count, Mixing study to distinguish deficiency from an",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Haemophilia C results from mutations in F11 that reduce the activity of coagulation factor XI, a component of the intrinsic pathway that, once activated, amplifies thrombin generation partly through activation of factor IX. Its role is chiefly in reinforcing and sustaining the clot rather than initiating haemostasis, which explains why bleeding is usually milder and less consistent than with factor VIII or IX deficiency. Because factor XI contributes to protecting clots against fibrinolysis, bleeding is particularly prone to occur at sites rich in local fibrinolytic activity, and the poor correlation between factor level and bleeding suggests additional modifying haemostatic factors.",
+    "additionalDifferentials": [
+      "Haemophilia A and haemophilia B",
+      "Von Willebrand disease",
+      "Other contact-factor deficiencies (factor XII, prekallikrein) that prolong the aPTT without bleeding",
+      "Platelet function disorders",
+      "Mild acquired coagulopathy or anticoagulant effect",
+      "Lupus anticoagulant prolonging the aPTT"
     ],
-    [
-     "Primary Differentials",
-     "Haemophilia A and haemophilia B, Von Willebrand disease, Other contact-factor deficiencies (factor XII, prekallikrein) that",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Activated partial thromboplastin time, prothrombin time and platelet count",
+      "Mixing study to distinguish deficiency from an inhibitor or lupus anticoagulant",
+      "Specific factor XI activity assay",
+      "Von Willebrand and platelet function testing where the picture is unclear",
+      "Bleeding history assessment to guide procedure planning",
+      "F11 genetic testing for confirmation and family or reproductive counselling"
     ],
-    [
-     "Management Strategy",
-     "Reserve treatment for bleeding episodes and cover for surgery or trauma rather than giving routine prophylaxis, since bleeding",
-     "Core treatment modality"
+    "redFlags": [
+      "Excessive bleeding after surgery or trauma at fibrinolytic-rich sites (oral, nasal, genitourinary)",
+      "Unexpected postpartum haemorrhage",
+      "Bleeding disproportionate to the measured factor level",
+      "Rare inhibitor development, particularly in severely deficient patients after replacement"
     ],
-    [
-     "Clinical Pitfall",
-     "Predicting bleeding risk from the factor XI level, which correlates poorly with clinical bleeding",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally good, with many patients only bleeding in response to surgery or trauma, and careful individualised peri-procedural management usually prevents serious bleeding.",
+    "pitfalls": [
+      "Predicting bleeding risk from the factor XI level, which correlates poorly with clinical bleeding",
+      "Confusing an isolated prolonged aPTT with a non-bleeding contact-factor deficiency or a lupus anticoagulant",
+      "Over-transfusing plasma products and risking volume overload or unnecessary exposure",
+      "Failing to plan haemostatic cover before high-risk procedures at fibrinolytic sites"
+    ],
+    "references": [
+      "Postgraduate Haematology",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reserve treatment for bleeding episodes and cover for surgery or trauma rather than giving routine prophylaxis, since bleeding correlates poorly with factor level",
+      "Use antifibrinolytics such as tranexamic acid as first-line cover for dental and other procedures at fibrinolytic-rich mucosal sites",
+      "For major surgery or significant bleeding, replace factor XI with factor XI concentrate or fresh frozen plasma, mindful of the thrombotic risk of concentrate",
+      "Individualise peri-procedural plans on the basis of personal and family bleeding history",
+      "Avoid antiplatelet drugs and NSAIDs where possible and inform surgeons and anaesthetists of the diagnosis before procedures",
+      "Manage through a haematologist with haemostasis expertise",
+      "Offer genetic counselling for this autosomal condition and screen relatives, noting increased frequency in those of Ashkenazi Jewish ancestry"
     ]
-   ],
-   "caption": "Overview comparison matrix for haemophilia c (factor xi deficiency)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hemophilia-c-real-image",
-   "title": "Haemophilia C (factor XI deficiency): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "hemophilia_c-pathway",
+      "title": "Haemophilia C (factor XI deficiency): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A deficiency of coagulation factor XI from mutations in F11, inherited in an autosomal (not X-linked) manner and so affecting both sexes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Excessive bleeding after surgery or trauma at fibrinolytic-rich sites (oral, nasal, genitourinary)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Activated partial thromboplastin time, prothrombin time and platelet count, Mixing study to distinguish deficiency from an inhibitor or lupus anticoagulant, Specific factor XI activity assay"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reserve treatment for bleeding episodes and cover for surgery or trauma rather than giving routine prophylaxis, since bleeding correlates poorly with factor level"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Predicting bleeding risk from the factor XI level, which correlates poorly with clinical bleeding"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of haemophilia c (factor xi deficiency)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hemophilia_c-matrix",
+      "title": "Haemophilia C (factor XI deficiency): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A deficiency of coagulation factor XI from mutations in F11, inherited in an autosomal (not X-linked) manner and so affecting",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Activated partial thromboplastin time, prothrombin time and platelet count, Mixing study to distinguish deficiency from an",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Haemophilia A and haemophilia B, Von Willebrand disease, Other contact-factor deficiencies (factor XII, prekallikrein) that",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reserve treatment for bleeding episodes and cover for surgery or trauma rather than giving routine prophylaxis, since bleeding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Predicting bleeding risk from the factor XI level, which correlates poorly with clinical bleeding",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for haemophilia c (factor xi deficiency)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemophilia_c-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Activated partial thromboplastin time, prothrombin time and platelet count",
+          "cells": [
+            {
+              "text": "Prolonged aPTT with normal prothrombin time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study",
+          "cells": [
+            {
+              "text": "Separates deficiency from an inhibitor or lupus anticoagulant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific factor XI activity assay",
+          "cells": [
+            {
+              "text": "Confirms the deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand and platelet function testing",
+          "cells": [
+            {
+              "text": "Used where the picture is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding history assessment",
+          "cells": [
+            {
+              "text": "Guides procedure planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F11 genetic testing",
+          "cells": [
+            {
+              "text": "Confirmation, and family or reproductive counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemophilia_c-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemophilia A and haemophilia B",
+          "cells": [
+            {
+              "text": "Spontaneous haemarthroses are uncommon in factor XI deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other contact-factor deficiencies (factor XII, prekallikrein)",
+          "cells": [
+            {
+              "text": "Prolong the aPTT without bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lupus anticoagulant",
+          "cells": [
+            {
+              "text": "Mixing study distinguishes it from factor deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet function disorders",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemophilia_c-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat bleeds and cover surgery",
+          "cells": [
+            {
+              "text": "Reserved for bleeding episodes and procedures, rather than routine prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "First-line cover for dental and other procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XI replacement",
+          "cells": [
+            {
+              "text": "For major surgery or significant bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individualised peri-procedural plans",
+          "cells": [
+            {
+              "text": "Based on personal and family bleeding history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet drugs and NSAIDs",
+          "cells": [
+            {
+              "text": "Where possible; inform surgeons and anaesthetists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology review",
+          "cells": [
+            {
+              "text": "Managed by a haematologist with haemostasis expertise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal inheritance; screen relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemophilia_c-dx-mgmt",
+      "title": "Diagnosis and management of Haemophilia C (factor XI deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged aPTT with normal prothrombin time; bleeding mostly after injury or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Excessive bleeding after surgery or trauma, postpartum haemorrhage or an inhibitor?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: factor XI replacement and haematology input for significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "aPTT, PT, mixing study; specific factor XI activity assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is factor XI activity low, with an inhibitor or lupus anticoagulant excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemophilia A or B, von Willebrand disease or lupus anticoagulant",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat bleeds and cover surgery rather than giving routine prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tranexamic acid as first-line cover for dental procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Factor XI replacement for major surgery or significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Individualise peri-procedural plans; avoid antiplatelets and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Procedures covered with tailored plans; bleeding treated on demand",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

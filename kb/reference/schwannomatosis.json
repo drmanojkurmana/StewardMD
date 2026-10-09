@@ -1,174 +1,452 @@
 {
- "id": "schwannomatosis",
- "name": "Schwannomatosis",
- "aliases": [
-  "SMARCB1-related schwannomatosis",
-  "LZTR1-related schwannomatosis",
-  "neurilemmomatosis",
-  "non-NF2 schwannoma predisposition"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / WHO Classification of Tumours of the Central Nervous System",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The syndrome predisposes to multiple schwannomas along peripheral, spinal, and cranial nerves while characteristically sparing the vestibular nerves bilaterally, which distinguishes it from neurofibromatosis type 2",
-   "Chronic, often severe neuropathic pain is the dominant symptom and may be disproportionate to the size or number of tumours",
-   "The two principal genes are SMARCB1 and LZTR1, both located on chromosome 22 near the NF2 locus, and a proportion of patients have no identified variant",
-   "A single unilateral vestibular schwannoma or isolated meningiomas can occur, so careful imaging and phenotyping are needed to separate it from NF2",
-   "Tumours are histologically benign, and malignant transformation is rare, so surveillance and symptom control rather than aggressive resection guide management",
-   "Diagnosis rests on clinical criteria, imaging demonstrating multiple schwannomas, histological confirmation, and molecular genetic testing including tumour analysis",
-   "Care is multidisciplinary, combining neurosurgery or peripheral nerve surgery for symptomatic or enlarging lesions with dedicated chronic pain management"
+  "id": "schwannomatosis",
+  "name": "Schwannomatosis",
+  "aliases": [
+    "SMARCB1-related schwannomatosis",
+    "LZTR1-related schwannomatosis",
+    "neurilemmomatosis",
+    "non-NF2 schwannoma predisposition"
   ],
-  "pathophysiology": "Schwannomatosis is a tumour predisposition syndrome caused by germline variants in the tumour suppressor genes SMARCB1 or LZTR1, both situated on chromosome 22q close to NF2. Tumour development typically follows a multi-hit mechanism in which the germline variant is compounded by somatic loss of the region encompassing both the predisposing gene and NF2, so that the resulting schwannomas show combined inactivation. This shared chromosomal neighbourhood explains the clinical overlap with NF2 while the preservation of at least one functional NF2 allele in constitutional tissue accounts for the absence of the bilateral vestibular schwannomas that define NF2. Inheritance is autosomal dominant with incomplete penetrance, and many cases appear sporadic.",
-  "additionalDifferentials": [
-   "Neurofibromatosis type 2",
-   "Neurofibromatosis type 1 with multiple neurofibromas",
-   "Multiple sporadic schwannomas",
-   "Carney complex",
-   "Malignant peripheral nerve sheath tumour",
-   "Localised chronic pain syndromes without tumour"
-  ],
-  "additionalInvestigations": [
-   "Whole-neuraxis MRI (brain including internal auditory meati, and whole spine) to map tumours and exclude bilateral vestibular schwannomas",
-   "MRI of symptomatic peripheral nerves or plexuses",
-   "Histological confirmation of resected lesions as schwannomas",
-   "Molecular genetic testing of SMARCB1 and LZTR1, ideally including tumour tissue analysis",
-   "Audiological assessment if any vestibulocochlear symptoms are present",
-   "Structured chronic pain assessment"
-  ],
-  "redFlags": [
-   "Bilateral vestibular schwannomas, which point to NF2 rather than schwannomatosis",
-   "Rapid tumour growth, new neurological deficit, or features suggesting malignant transformation",
-   "Spinal cord or cauda equina compression from an enlarging intraspinal schwannoma",
-   "Intractable pain with functional decline requiring specialist intervention"
-  ],
-  "prognosis": "Life expectancy is generally normal because the tumours are benign and malignant change is uncommon. The principal burden is chronic pain and the cumulative morbidity of multiple tumours and their surgical treatment; quality of life depends heavily on effective pain control and judicious, function-preserving surgery.",
-  "pitfalls": [
-   "Diagnosing schwannomatosis without excluding bilateral vestibular schwannomas and thereby missing NF2",
-   "Assuming pain is proportional to tumour bulk and under-treating disabling neuropathic pain",
-   "Pursuing aggressive resection of all tumours rather than targeting symptomatic or growing lesions",
-   "Relying on blood testing alone, since tumour tissue analysis often clarifies the genetic diagnosis"
-  ],
-  "references": [
-   "GeneReviews (University of Washington)",
-   "WHO Classification of Tumours of the Central Nervous System"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise multimodal chronic neuropathic pain control with neuropathic agents such as gabapentinoids and tricyclic or SNRI antidepressants, physiotherapy and specialist pain-service input, as pain is the dominant burden",
-   "Resect individual schwannomas selectively for intractable pain, neurological compromise or growth, favouring function-preserving surgery over aggressive removal",
-   "Undertake whole-neuraxis MRI surveillance to map tumours and exclude the bilateral vestibular schwannomas that would indicate neurofibromatosis type 2",
-   "Confirm the diagnosis and distinguish it from NF2 with histology and molecular testing of SMARCB1 and LZTR1, including tumour tissue where possible",
-   "Assess hearing if vestibulocochlear symptoms arise",
-   "Coordinate care through neurology, neurosurgery, pain medicine and clinical genetics",
-   "Offer genetic counselling for autosomal dominant inheritance with incomplete penetrance, noting many cases appear sporadic"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "schwannomatosis-pathway",
-   "title": "Schwannomatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The syndrome predisposes to multiple schwannomas along peripheral, spinal, and cranial nerves while characteristically sparing the vestibular nerves bilaterally, which distinguishes it from neurofibromatosis type 2",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilateral vestibular schwannomas, which point to NF2 rather than schwannomatosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Whole-neuraxis MRI (brain including internal auditory meati, and whole spine) to map tumours and exclude bilateral vestibular schwannomas, MRI of symptomatic peripheral nerves or plexuses, Histological confirmation of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise multimodal chronic neuropathic pain control with neuropathic agents such as gabapentinoids and tricyclic or SNRI antidepressants, physiotherapy and specialist pain-service input, as pain is the dominant"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing schwannomatosis without excluding bilateral vestibular schwannomas and thereby missing NF2"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of schwannomatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "schwannomatosis-matrix",
-   "title": "Schwannomatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The syndrome predisposes to multiple schwannomas along peripheral, spinal, and cranial nerves while characteristically sparing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / WHO Classification of Tumours of the Central Nervous System",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The syndrome predisposes to multiple schwannomas along peripheral, spinal, and cranial nerves while characteristically sparing the vestibular nerves bilaterally, which distinguishes it from neurofibromatosis type 2",
+      "Chronic, often severe neuropathic pain is the dominant symptom and may be disproportionate to the size or number of tumours",
+      "The two principal genes are SMARCB1 and LZTR1, both located on chromosome 22 near the NF2 locus, and a proportion of patients have no identified variant",
+      "A single unilateral vestibular schwannoma or isolated meningiomas can occur, so careful imaging and phenotyping are needed to separate it from NF2",
+      "Tumours are histologically benign, and malignant transformation is rare, so surveillance and symptom control rather than aggressive resection guide management",
+      "Diagnosis rests on clinical criteria, imaging demonstrating multiple schwannomas, histological confirmation, and molecular genetic testing including tumour analysis",
+      "Care is multidisciplinary, combining neurosurgery or peripheral nerve surgery for symptomatic or enlarging lesions with dedicated chronic pain management"
     ],
-    [
-     "Key Investigations",
-     "Whole-neuraxis MRI (brain including internal auditory meati, and whole spine) to map tumours and exclude bilateral vestibular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Schwannomatosis is a tumour predisposition syndrome caused by germline variants in the tumour suppressor genes SMARCB1 or LZTR1, both situated on chromosome 22q close to NF2. Tumour development typically follows a multi-hit mechanism in which the germline variant is compounded by somatic loss of the region encompassing both the predisposing gene and NF2, so that the resulting schwannomas show combined inactivation. This shared chromosomal neighbourhood explains the clinical overlap with NF2 while the preservation of at least one functional NF2 allele in constitutional tissue accounts for the absence of the bilateral vestibular schwannomas that define NF2. Inheritance is autosomal dominant with incomplete penetrance, and many cases appear sporadic.",
+    "additionalDifferentials": [
+      "Neurofibromatosis type 2",
+      "Neurofibromatosis type 1 with multiple neurofibromas",
+      "Multiple sporadic schwannomas",
+      "Carney complex",
+      "Malignant peripheral nerve sheath tumour",
+      "Localised chronic pain syndromes without tumour"
     ],
-    [
-     "Primary Differentials",
-     "Neurofibromatosis type 2, Neurofibromatosis type 1 with multiple neurofibromas, Multiple sporadic schwannomas",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Whole-neuraxis MRI (brain including internal auditory meati, and whole spine) to map tumours and exclude bilateral vestibular schwannomas",
+      "MRI of symptomatic peripheral nerves or plexuses",
+      "Histological confirmation of resected lesions as schwannomas",
+      "Molecular genetic testing of SMARCB1 and LZTR1, ideally including tumour tissue analysis",
+      "Audiological assessment if any vestibulocochlear symptoms are present",
+      "Structured chronic pain assessment"
     ],
-    [
-     "Management Strategy",
-     "Prioritise multimodal chronic neuropathic pain control with neuropathic agents such as gabapentinoids and tricyclic or SNRI",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilateral vestibular schwannomas, which point to NF2 rather than schwannomatosis",
+      "Rapid tumour growth, new neurological deficit, or features suggesting malignant transformation",
+      "Spinal cord or cauda equina compression from an enlarging intraspinal schwannoma",
+      "Intractable pain with functional decline requiring specialist intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing schwannomatosis without excluding bilateral vestibular schwannomas and thereby missing NF2",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is generally normal because the tumours are benign and malignant change is uncommon. The principal burden is chronic pain and the cumulative morbidity of multiple tumours and their surgical treatment; quality of life depends heavily on effective pain control and judicious, function-preserving surgery.",
+    "pitfalls": [
+      "Diagnosing schwannomatosis without excluding bilateral vestibular schwannomas and thereby missing NF2",
+      "Assuming pain is proportional to tumour bulk and under-treating disabling neuropathic pain",
+      "Pursuing aggressive resection of all tumours rather than targeting symptomatic or growing lesions",
+      "Relying on blood testing alone, since tumour tissue analysis often clarifies the genetic diagnosis"
+    ],
+    "references": [
+      "GeneReviews (University of Washington)",
+      "WHO Classification of Tumours of the Central Nervous System"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise multimodal chronic neuropathic pain control with neuropathic agents such as gabapentinoids and tricyclic or SNRI antidepressants, physiotherapy and specialist pain-service input, as pain is the dominant burden",
+      "Resect individual schwannomas selectively for intractable pain, neurological compromise or growth, favouring function-preserving surgery over aggressive removal",
+      "Undertake whole-neuraxis MRI surveillance to map tumours and exclude the bilateral vestibular schwannomas that would indicate neurofibromatosis type 2",
+      "Confirm the diagnosis and distinguish it from NF2 with histology and molecular testing of SMARCB1 and LZTR1, including tumour tissue where possible",
+      "Assess hearing if vestibulocochlear symptoms arise",
+      "Coordinate care through neurology, neurosurgery, pain medicine and clinical genetics",
+      "Offer genetic counselling for autosomal dominant inheritance with incomplete penetrance, noting many cases appear sporadic"
     ]
-   ],
-   "caption": "Overview comparison matrix for schwannomatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "schwannomatosis-real-image",
-   "title": "Schwannomatosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "schwannomatosis-pathway",
+      "title": "Schwannomatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The syndrome predisposes to multiple schwannomas along peripheral, spinal, and cranial nerves while characteristically sparing the vestibular nerves bilaterally, which distinguishes it from neurofibromatosis type 2",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilateral vestibular schwannomas, which point to NF2 rather than schwannomatosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Whole-neuraxis MRI (brain including internal auditory meati, and whole spine) to map tumours and exclude bilateral vestibular schwannomas, MRI of symptomatic peripheral nerves or plexuses, Histological confirmation of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise multimodal chronic neuropathic pain control with neuropathic agents such as gabapentinoids and tricyclic or SNRI antidepressants, physiotherapy and specialist pain-service input, as pain is the dominant"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing schwannomatosis without excluding bilateral vestibular schwannomas and thereby missing NF2"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of schwannomatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "schwannomatosis-matrix",
+      "title": "Schwannomatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The syndrome predisposes to multiple schwannomas along peripheral, spinal, and cranial nerves while characteristically sparing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Whole-neuraxis MRI (brain including internal auditory meati, and whole spine) to map tumours and exclude bilateral vestibular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neurofibromatosis type 2, Neurofibromatosis type 1 with multiple neurofibromas, Multiple sporadic schwannomas",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise multimodal chronic neuropathic pain control with neuropathic agents such as gabapentinoids and tricyclic or SNRI",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing schwannomatosis without excluding bilateral vestibular schwannomas and thereby missing NF2",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for schwannomatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / WHO Classification of Tumours of the Central Nervous System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "schwannomatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-neuraxis MRI",
+          "cells": [
+            {
+              "text": "Maps tumours (brain with internal auditory meati, whole spine) and excludes bilateral vestibular schwannomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of symptomatic nerves or plexuses",
+          "cells": [
+            {
+              "text": "Painful peripheral nerve tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of resected lesions",
+          "cells": [
+            {
+              "text": "Confirms schwannoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SMARCB1 and LZTR1 testing",
+          "cells": [
+            {
+              "text": "Molecular diagnosis, ideally including tumour tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "If vestibulocochlear symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schwannomatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurofibromatosis type 2",
+          "cells": [
+            {
+              "text": "Bilateral vestibular schwannomas point to NF2 rather than schwannomatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurofibromatosis type 1",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schwannomatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multimodal pain control",
+          "cells": [
+            {
+              "text": "Neuropathic agents such as gabapentinoids, tricyclic or SNRI antidepressants, and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective resection",
+          "cells": [
+            {
+              "text": "For intractable pain, neurological compromise or growth; favour function-preserving surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-neuraxis MRI surveillance",
+          "cells": [
+            {
+              "text": "Maps tumours and excludes NF2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology and molecular testing",
+          "cells": [
+            {
+              "text": "SMARCB1 and LZTR1, including tumour tissue where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing assessment",
+          "cells": [
+            {
+              "text": "If vestibulocochlear symptoms arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, neurosurgery, pain medicine and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant with incomplete penetrance; many cases appear sporadic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "schwannomatosis-dx-mgmt",
+      "title": "Diagnosis and management of Schwannomatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple painful schwannomas: suspected schwannomatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bilateral vestibular schwannomas, rapid growth or cord compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat as NF2 or urgent decompression and malignancy review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-neuraxis MRI, histology, SMARCB1 and LZTR1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Schwannomas confirmed, no bilateral vestibular tumours, variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for NF2 or multiple sporadic schwannomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multimodal neuropathic pain control with physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Selective function-preserving resection for intractable pain or deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "MRI surveillance and audiology if hearing symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for dominant inheritance with incomplete penetrance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Normal life expectancy; chronic pain is the main burden",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

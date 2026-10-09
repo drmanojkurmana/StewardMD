@@ -1,172 +1,468 @@
 {
- "id": "mycobacterium_fortuitum_infection",
- "name": "Mycobacterium fortuitum infection",
- "aliases": [
-  "M. fortuitum infection",
-  "Mycobacterium fortuitum complex infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rapidly growing mycobacterium found in soil and water that most often causes localised skin, soft-tissue, and wound infection",
-   "Classically causes post-surgical wound infection, including sternal wounds after cardiac surgery and infection after breast augmentation, and catheter-related infection",
-   "A well-recognised cause of furunculosis of the lower legs and feet after nail-salon footbaths (pedicure-associated furunculosis)",
-   "Pulmonary disease is uncommon and, when it occurs, is often linked to oesophageal disorders and chronic aspiration",
-   "Although a macrolide may appear active in vitro, a functional inducible macrolide-resistance gene can emerge, so this should be tested for",
-   "Often susceptible to a broader range of oral agents than M. abscessus, including fluoroquinolones, tetracyclines, and sulfonamides, giving more treatment options",
-   "Management is with susceptibility-guided combination therapy together with surgical debridement and removal of infected foreign material"
+  "id": "mycobacterium_fortuitum_infection",
+  "name": "Mycobacterium fortuitum infection",
+  "aliases": [
+    "M. fortuitum infection",
+    "Mycobacterium fortuitum complex infection"
   ],
-  "pathophysiology": "Mycobacterium fortuitum is a ubiquitous rapidly growing mycobacterium of soil and water. Most infections follow inoculation through trauma, surgery, injection, catheters, or contaminated water, producing localised abscesses, wound infection, or furuncles; outbreaks have been traced to footbaths in nail salons. Pulmonary infection is unusual and is associated with conditions predisposing to aspiration, such as achalasia and gastro-oesophageal reflux. Although generally less virulent and more antibiotic-susceptible than M. abscessus, the organism can carry an inducible macrolide-resistance mechanism, and retained foreign material or undrained collections allow persistent infection.",
-  "additionalDifferentials": [
-   "Other rapidly growing mycobacteria (M. abscessus, M. chelonae)",
-   "Ordinary bacterial wound infection or abscess",
-   "Nocardiosis",
-   "Cutaneous fungal infection",
-   "Foreign-body or suture granuloma",
-   "Aspiration pneumonia from conventional pathogens"
-  ],
-  "additionalInvestigations": [
-   "Culture of wound, tissue, or sputum showing rapid mycobacterial growth",
-   "Molecular identification to species level",
-   "Drug-susceptibility testing including detection of inducible macrolide resistance",
-   "Imaging of the surgical site or affected area to define collections",
-   "Investigation for an oesophageal or aspiration disorder in pulmonary disease",
-   "Review for a common environmental or procedural source in clustered cases"
-  ],
-  "redFlags": [
-   "Sternal wound or mediastinal infection after cardiac surgery",
-   "Prosthesis- or catheter-related infection requiring device removal",
-   "Clustered post-procedural cases suggesting a contaminated source",
-   "Pulmonary disease with an underlying oesophageal or aspiration disorder"
-  ],
-  "prognosis": "Localised skin and wound infection generally has a good prognosis with combined antimicrobial and surgical treatment, aided by the organism's relatively broad susceptibility. Deep surgical-site, prosthesis-related, and pulmonary infections are more difficult and depend on adequate source control and management of predisposing conditions.",
-  "pitfalls": [
-   "Relying on apparent in vitro macrolide activity without testing for inducible resistance",
-   "Failing to achieve source control by removing infected material or draining collections",
-   "Overlooking an oesophageal or aspiration disorder in pulmonary cases",
-   "Missing a shared footbath or injection source in clustered furunculosis"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Exploit its relatively broad susceptibility with a susceptibility-guided oral combination drawn from fluoroquinolones, tetracyclines such as doxycycline or minocycline, and sulfonamides such as co-trimoxazole",
-   "Test specifically for inducible macrolide resistance before relying on a macrolide, since a functional resistance gene can emerge despite apparent in vitro activity",
-   "Achieve source control by debriding or draining infected surgical sites and removing infected catheters or prosthetic material such as breast implants",
-   "Investigate and manage an underlying oesophageal or aspiration disorder where pulmonary disease is present",
-   "Monitor treatment response and drug toxicity across the prolonged course, imaging affected sites to define collections",
-   "Investigate a common environmental or procedural source, such as nail-salon footbaths, in clustered cases",
-   "Refer to infectious diseases, recognising that deep, prosthesis-related, and pulmonary disease depend heavily on adequate source control"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mycobacterium_fortuitum_infection-pathway",
-   "title": "Mycobacterium fortuitum infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rapidly growing mycobacterium found in soil and water that most often causes localised skin, soft-tissue, and wound infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sternal wound or mediastinal infection after cardiac surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Culture of wound, tissue, or sputum showing rapid mycobacterial growth, Molecular identification to species level, Drug-susceptibility testing including detection of inducible macrolide resistance"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Exploit its relatively broad susceptibility with a susceptibility-guided oral combination drawn from fluoroquinolones, tetracyclines such as doxycycline or minocycline, and sulfonamides such as co-trimoxazole"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on apparent in vitro macrolide activity without testing for inducible resistance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mycobacterium fortuitum infection."
-  }
- ],
- "tables": [
-  {
-   "id": "mycobacterium_fortuitum_infection-matrix",
-   "title": "Mycobacterium fortuitum infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rapidly growing mycobacterium found in soil and water that most often causes localised skin, soft-tissue, and wound infection",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rapidly growing mycobacterium found in soil and water that most often causes localised skin, soft-tissue, and wound infection",
+      "Classically causes post-surgical wound infection, including sternal wounds after cardiac surgery and infection after breast augmentation, and catheter-related infection",
+      "A well-recognised cause of furunculosis of the lower legs and feet after nail-salon footbaths (pedicure-associated furunculosis)",
+      "Pulmonary disease is uncommon and, when it occurs, is often linked to oesophageal disorders and chronic aspiration",
+      "Although a macrolide may appear active in vitro, a functional inducible macrolide-resistance gene can emerge, so this should be tested for",
+      "Often susceptible to a broader range of oral agents than M. abscessus, including fluoroquinolones, tetracyclines, and sulfonamides, giving more treatment options",
+      "Management is with susceptibility-guided combination therapy together with surgical debridement and removal of infected foreign material"
     ],
-    [
-     "Key Investigations",
-     "Culture of wound, tissue, or sputum showing rapid mycobacterial growth, Molecular identification to species level,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mycobacterium fortuitum is a ubiquitous rapidly growing mycobacterium of soil and water. Most infections follow inoculation through trauma, surgery, injection, catheters, or contaminated water, producing localised abscesses, wound infection, or furuncles; outbreaks have been traced to footbaths in nail salons. Pulmonary infection is unusual and is associated with conditions predisposing to aspiration, such as achalasia and gastro-oesophageal reflux. Although generally less virulent and more antibiotic-susceptible than M. abscessus, the organism can carry an inducible macrolide-resistance mechanism, and retained foreign material or undrained collections allow persistent infection.",
+    "additionalDifferentials": [
+      "Other rapidly growing mycobacteria (M. abscessus, M. chelonae)",
+      "Ordinary bacterial wound infection or abscess",
+      "Nocardiosis",
+      "Cutaneous fungal infection",
+      "Foreign-body or suture granuloma",
+      "Aspiration pneumonia from conventional pathogens"
     ],
-    [
-     "Primary Differentials",
-     "Other rapidly growing mycobacteria (M. abscessus, M. chelonae), Ordinary bacterial wound infection or abscess, Nocardiosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Culture of wound, tissue, or sputum showing rapid mycobacterial growth",
+      "Molecular identification to species level",
+      "Drug-susceptibility testing including detection of inducible macrolide resistance",
+      "Imaging of the surgical site or affected area to define collections",
+      "Investigation for an oesophageal or aspiration disorder in pulmonary disease",
+      "Review for a common environmental or procedural source in clustered cases"
     ],
-    [
-     "Management Strategy",
-     "Exploit its relatively broad susceptibility with a susceptibility-guided oral combination drawn from fluoroquinolones,",
-     "Core treatment modality"
+    "redFlags": [
+      "Sternal wound or mediastinal infection after cardiac surgery",
+      "Prosthesis- or catheter-related infection requiring device removal",
+      "Clustered post-procedural cases suggesting a contaminated source",
+      "Pulmonary disease with an underlying oesophageal or aspiration disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on apparent in vitro macrolide activity without testing for inducible resistance",
-     "Prevent diagnostic or management error"
+    "prognosis": "Localised skin and wound infection generally has a good prognosis with combined antimicrobial and surgical treatment, aided by the organism's relatively broad susceptibility. Deep surgical-site, prosthesis-related, and pulmonary infections are more difficult and depend on adequate source control and management of predisposing conditions.",
+    "pitfalls": [
+      "Relying on apparent in vitro macrolide activity without testing for inducible resistance",
+      "Failing to achieve source control by removing infected material or draining collections",
+      "Overlooking an oesophageal or aspiration disorder in pulmonary cases",
+      "Missing a shared footbath or injection source in clustered furunculosis"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Exploit its relatively broad susceptibility with a susceptibility-guided oral combination drawn from fluoroquinolones, tetracyclines such as doxycycline or minocycline, and sulfonamides such as co-trimoxazole",
+      "Test specifically for inducible macrolide resistance before relying on a macrolide, since a functional resistance gene can emerge despite apparent in vitro activity",
+      "Achieve source control by debriding or draining infected surgical sites and removing infected catheters or prosthetic material such as breast implants",
+      "Investigate and manage an underlying oesophageal or aspiration disorder where pulmonary disease is present",
+      "Monitor treatment response and drug toxicity across the prolonged course, imaging affected sites to define collections",
+      "Investigate a common environmental or procedural source, such as nail-salon footbaths, in clustered cases",
+      "Refer to infectious diseases, recognising that deep, prosthesis-related, and pulmonary disease depend heavily on adequate source control"
     ]
-   ],
-   "caption": "Overview comparison matrix for mycobacterium fortuitum infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mycobacterium-fortuitum-infection-real-image",
-   "title": "Mycobacterium fortuitum infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "mycobacterium_fortuitum_infection-pathway",
+      "title": "Mycobacterium fortuitum infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rapidly growing mycobacterium found in soil and water that most often causes localised skin, soft-tissue, and wound infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sternal wound or mediastinal infection after cardiac surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Culture of wound, tissue, or sputum showing rapid mycobacterial growth, Molecular identification to species level, Drug-susceptibility testing including detection of inducible macrolide resistance"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Exploit its relatively broad susceptibility with a susceptibility-guided oral combination drawn from fluoroquinolones, tetracyclines such as doxycycline or minocycline, and sulfonamides such as co-trimoxazole"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on apparent in vitro macrolide activity without testing for inducible resistance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mycobacterium fortuitum infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mycobacterium_fortuitum_infection-matrix",
+      "title": "Mycobacterium fortuitum infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rapidly growing mycobacterium found in soil and water that most often causes localised skin, soft-tissue, and wound infection",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Culture of wound, tissue, or sputum showing rapid mycobacterial growth, Molecular identification to species level,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other rapidly growing mycobacteria (M. abscessus, M. chelonae), Ordinary bacterial wound infection or abscess, Nocardiosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Exploit its relatively broad susceptibility with a susceptibility-guided oral combination drawn from fluoroquinolones,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on apparent in vitro macrolide activity without testing for inducible resistance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mycobacterium fortuitum infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_fortuitum_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Culture of wound, tissue or sputum",
+          "cells": [
+            {
+              "text": "Rapid mycobacterial growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification to species level",
+          "cells": [
+            {
+              "text": "Species identity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-susceptibility testing",
+          "cells": [
+            {
+              "text": "Detects inducible macrolide resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the surgical site or affected area",
+          "cells": [
+            {
+              "text": "Defines collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for oesophageal or aspiration disorder",
+          "cells": [
+            {
+              "text": "In pulmonary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for common environmental or procedural source",
+          "cells": [
+            {
+              "text": "In clustered cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_fortuitum_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other rapidly growing mycobacteria, such as M. abscessus and M. chelonae",
+          "cells": [
+            {
+              "text": "Often susceptible to a broader range of oral agents than M. abscessus; inducible macrolide resistance must still be tested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign-body or suture granuloma",
+          "cells": [
+            {
+              "text": "Retained foreign material and undrained collections allow persistent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration pneumonia from conventional pathogens",
+          "cells": [
+            {
+              "text": "Pulmonary disease is linked to achalasia, reflux and chronic aspiration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_fortuitum_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Susceptibility-guided oral combination",
+          "cells": [
+            {
+              "text": "Fluoroquinolones, tetracyclines such as doxycycline or minocycline, and sulfonamides such as co-trimoxazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test for inducible macrolide resistance",
+          "cells": [
+            {
+              "text": "Before relying on a macrolide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Debride or drain infected surgical sites; remove infected catheters or prosthetic material such as breast implants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predisposing conditions",
+          "cells": [
+            {
+              "text": "Investigate and manage an oesophageal or aspiration disorder where pulmonary disease is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Response and drug toxicity across the prolonged course; imaging to define collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common source",
+          "cells": [
+            {
+              "text": "Investigate environmental or procedural sources, such as nail-salon footbaths, in clusters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious diseases referral",
+          "cells": [
+            {
+              "text": "Deep, prosthesis-related and pulmonary disease depend heavily on source control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_fortuitum_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium fortuitum infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Wound infection or leg furunculosis with rapid mycobacterial growth on culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sternal or mediastinal infection, device infection, clusters)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review; remove infected device or debride the sternal wound",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Culture for rapid growth, species identification, susceptibility with macrolide test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Species identified and inducible macrolide resistance excluded on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat susceptibility testing with prolonged incubation; reassess macrolide use",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Susceptibility-guided oral combination: fluoroquinolone, tetracycline or co-trimoxazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Test for inducible macrolide resistance before any macrolide",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Debride or drain infected sites; remove infected catheters or implants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate oesophageal or aspiration disorder in pulmonary disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Localised skin and wound disease has a good prognosis; deep disease needs source control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

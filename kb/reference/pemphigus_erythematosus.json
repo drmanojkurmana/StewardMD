@@ -1,177 +1,414 @@
 {
- "id": "pemphigus_erythematosus",
- "name": "Pemphigus erythematosus",
- "aliases": [
-  "Senear-Usher syndrome"
- ],
- "class": "non_infective",
- "system": "Skin",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Dermatology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A localised variant of pemphigus foliaceus that shows clinical and immunological overlap with lupus erythematosus; also known as Senear-Usher syndrome.",
-   "Presents with erythematous, scaly, crusted plaques and flaccid superficial blisters in a seborrhoeic and photodistributed pattern — malar 'butterfly' face, scalp and upper trunk.",
-   "The Nikolsky sign is typically positive, while mucosal involvement is characteristically absent (unlike pemphigus vulgaris).",
-   "Autoantibodies target desmoglein 1, producing superficial acantholysis in the granular/subcorneal layer identical to pemphigus foliaceus.",
-   "Direct immunofluorescence shows the hallmark dual pattern: intercellular ('chicken-wire') IgG and C3 within the epidermis PLUS granular IgG/C3 at the basement membrane zone.",
-   "Antinuclear antibodies are frequently positive, yet most patients do not fulfil criteria for true systemic lupus erythematosus.",
-   "Sunlight and thiol/sulfhydryl drugs (for example penicillamine or captopril) can precipitate or aggravate disease, so photoprotection matters.",
-   "Course is generally more benign and localised than pemphigus vulgaris, but it may occasionally evolve into generalised pemphigus foliaceus."
+  "id": "pemphigus_erythematosus",
+  "name": "Pemphigus erythematosus",
+  "aliases": [
+    "Senear-Usher syndrome"
   ],
-  "pathophysiology": "Pemphigus erythematosus is an autoimmune intraepidermal blistering disorder in which IgG autoantibodies are directed against desmoglein 1, a desmosomal cadherin expressed most abundantly in the superficial (granular) layer of the epidermis. Antibody binding disrupts desmosomal adhesion between keratinocytes, causing acantholysis high in the epidermis and the resulting fragile, superficial blisters and scaly crusted erosions. What distinguishes the entity from ordinary pemphigus foliaceus is a concurrent lupus-like immunological signature, including positive antinuclear antibodies and granular deposition of immunoglobulin and complement along the dermo-epidermal junction (a 'lupus band'), so it is regarded as an overlap of pemphigus foliaceus and cutaneous lupus erythematosus. Because desmoglein 1 predominates superficially and mucosae are protected by compensatory desmoglein 3, blistering is superficial and mucosal surfaces are typically spared. Ultraviolet light and thiol-containing or other implicated drugs can trigger or exacerbate the autoimmune response, and lesions favour sun-exposed, seborrhoeic sites.",
-  "additionalDifferentials": [
-   "Pemphigus foliaceus",
-   "Discoid and systemic lupus erythematosus",
-   "Seborrhoeic dermatitis",
-   "Subacute cutaneous lupus erythematosus",
-   "Impetigo (including bullous impetigo)",
-   "Paraneoplastic pemphigus",
-   "Rosacea or dermatomyositis (facial erythema mimics)"
-  ],
-  "additionalInvestigations": [
-   "Lesional skin biopsy showing superficial acantholysis in the granular layer",
-   "Direct immunofluorescence of perilesional skin demonstrating the combined intercellular and basement-membrane pattern",
-   "Indirect immunofluorescence for circulating intercellular (anti-desmoglein) antibodies",
-   "ELISA for anti-desmoglein 1 antibodies",
-   "Antinuclear antibodies with extended lupus serology (anti-dsDNA, extractable nuclear antigens) and complement",
-   "Careful drug history for thiol/sulfhydryl-containing agents",
-   "Assessment for systemic lupus features (renal and haematological screening)"
-  ],
-  "redFlags": [
-   "Rapid extension to widespread erosions with skin-barrier failure and associated fluid and thermoregulatory compromise",
-   "Secondary bacterial infection or sepsis of eroded skin",
-   "Emergence of systemic lupus features such as renal impairment, cytopenias or serositis",
-   "Transition to generalised pemphigus foliaceus"
-  ],
-  "prognosis": "Pemphigus erythematosus usually follows a chronic but comparatively benign and localised course, and generally responds to treatment. Relapses are common, and a minority progress to more generalised pemphigus foliaceus.",
-  "pitfalls": [
-   "Mislabelling the eruption as seborrhoeic dermatitis or lupus and delaying diagnostic immunofluorescence.",
-   "Failing to recognise the combined intercellular plus basement-membrane immunofluorescence pattern that defines the entity.",
-   "Interpreting antinuclear antibody positivity as proof of systemic lupus erythematosus.",
-   "Overlooking a drug trigger, particularly thiol/sulfhydryl agents.",
-   "Neglecting photoprotection advice, allowing ultraviolet-driven flares."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with systemic corticosteroids as the mainstay for active disease",
-   "Add steroid-sparing immunosuppression such as azathioprine or mycophenolate mofetil to reduce cumulative corticosteroid exposure",
-   "Consider rituximab B-cell depletion for widespread or treatment-refractory disease",
-   "Treat localised plaques with potent topical corticosteroids and enforce strict photoprotection given the photodistributed, lupus-overlap pattern",
-   "Review the drug history and withdraw any thiol- or sulfhydryl-containing agents that may trigger the disease",
-   "Monitor disease activity with anti-desmoglein-1 antibody titres and watch for progression to generalised pemphigus foliaceus",
-   "Screen for and manage complications of immunosuppression including infection, osteoporosis and hyperglycaemia",
-   "Refer to dermatology for co-ordinated care with rheumatology input given the lupus serological overlap"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pemphigus_erythematosus-pathway",
-   "title": "Pemphigus erythematosus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A localised variant of pemphigus foliaceus that shows clinical and immunological overlap with lupus erythematosus; also known as Senear-Usher syndrome.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid extension to widespread erosions with skin-barrier failure and associated fluid and thermoregulatory compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lesional skin biopsy showing superficial acantholysis in the granular layer, Direct immunofluorescence of perilesional skin demonstrating the combined intercellular and basement-membrane pattern, Indirect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with systemic corticosteroids as the mainstay for active disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the eruption as seborrhoeic dermatitis or lupus and delaying diagnostic immunofluorescence."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pemphigus erythematosus."
-  }
- ],
- "tables": [
-  {
-   "id": "pemphigus_erythematosus-matrix",
-   "title": "Pemphigus erythematosus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A localised variant of pemphigus foliaceus that shows clinical and immunological overlap with lupus erythematosus; also known as",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dermatology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A localised variant of pemphigus foliaceus that shows clinical and immunological overlap with lupus erythematosus; also known as Senear-Usher syndrome.",
+      "Presents with erythematous, scaly, crusted plaques and flaccid superficial blisters in a seborrhoeic and photodistributed pattern — malar 'butterfly' face, scalp and upper trunk.",
+      "The Nikolsky sign is typically positive, while mucosal involvement is characteristically absent (unlike pemphigus vulgaris).",
+      "Autoantibodies target desmoglein 1, producing superficial acantholysis in the granular/subcorneal layer identical to pemphigus foliaceus.",
+      "Direct immunofluorescence shows the hallmark dual pattern: intercellular ('chicken-wire') IgG and C3 within the epidermis PLUS granular IgG/C3 at the basement membrane zone.",
+      "Antinuclear antibodies are frequently positive, yet most patients do not fulfil criteria for true systemic lupus erythematosus.",
+      "Sunlight and thiol/sulfhydryl drugs (for example penicillamine or captopril) can precipitate or aggravate disease, so photoprotection matters.",
+      "Course is generally more benign and localised than pemphigus vulgaris, but it may occasionally evolve into generalised pemphigus foliaceus."
     ],
-    [
-     "Key Investigations",
-     "Lesional skin biopsy showing superficial acantholysis in the granular layer, Direct immunofluorescence of perilesional skin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pemphigus erythematosus is an autoimmune intraepidermal blistering disorder in which IgG autoantibodies are directed against desmoglein 1, a desmosomal cadherin expressed most abundantly in the superficial (granular) layer of the epidermis. Antibody binding disrupts desmosomal adhesion between keratinocytes, causing acantholysis high in the epidermis and the resulting fragile, superficial blisters and scaly crusted erosions. What distinguishes the entity from ordinary pemphigus foliaceus is a concurrent lupus-like immunological signature, including positive antinuclear antibodies and granular deposition of immunoglobulin and complement along the dermo-epidermal junction (a 'lupus band'), so it is regarded as an overlap of pemphigus foliaceus and cutaneous lupus erythematosus. Because desmoglein 1 predominates superficially and mucosae are protected by compensatory desmoglein 3, blistering is superficial and mucosal surfaces are typically spared. Ultraviolet light and thiol-containing or other implicated drugs can trigger or exacerbate the autoimmune response, and lesions favour sun-exposed, seborrhoeic sites.",
+    "additionalDifferentials": [
+      "Pemphigus foliaceus",
+      "Discoid and systemic lupus erythematosus",
+      "Seborrhoeic dermatitis",
+      "Subacute cutaneous lupus erythematosus",
+      "Impetigo (including bullous impetigo)",
+      "Paraneoplastic pemphigus",
+      "Rosacea or dermatomyositis (facial erythema mimics)"
     ],
-    [
-     "Primary Differentials",
-     "Pemphigus foliaceus, Discoid and systemic lupus erythematosus, Seborrhoeic dermatitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lesional skin biopsy showing superficial acantholysis in the granular layer",
+      "Direct immunofluorescence of perilesional skin demonstrating the combined intercellular and basement-membrane pattern",
+      "Indirect immunofluorescence for circulating intercellular (anti-desmoglein) antibodies",
+      "ELISA for anti-desmoglein 1 antibodies",
+      "Antinuclear antibodies with extended lupus serology (anti-dsDNA, extractable nuclear antigens) and complement",
+      "Careful drug history for thiol/sulfhydryl-containing agents",
+      "Assessment for systemic lupus features (renal and haematological screening)"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with systemic corticosteroids as the mainstay for active disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid extension to widespread erosions with skin-barrier failure and associated fluid and thermoregulatory compromise",
+      "Secondary bacterial infection or sepsis of eroded skin",
+      "Emergence of systemic lupus features such as renal impairment, cytopenias or serositis",
+      "Transition to generalised pemphigus foliaceus"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the eruption as seborrhoeic dermatitis or lupus and delaying diagnostic immunofluorescence.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pemphigus erythematosus usually follows a chronic but comparatively benign and localised course, and generally responds to treatment. Relapses are common, and a minority progress to more generalised pemphigus foliaceus.",
+    "pitfalls": [
+      "Mislabelling the eruption as seborrhoeic dermatitis or lupus and delaying diagnostic immunofluorescence.",
+      "Failing to recognise the combined intercellular plus basement-membrane immunofluorescence pattern that defines the entity.",
+      "Interpreting antinuclear antibody positivity as proof of systemic lupus erythematosus.",
+      "Overlooking a drug trigger, particularly thiol/sulfhydryl agents.",
+      "Neglecting photoprotection advice, allowing ultraviolet-driven flares."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with systemic corticosteroids as the mainstay for active disease",
+      "Add steroid-sparing immunosuppression such as azathioprine or mycophenolate mofetil to reduce cumulative corticosteroid exposure",
+      "Consider rituximab B-cell depletion for widespread or treatment-refractory disease",
+      "Treat localised plaques with potent topical corticosteroids and enforce strict photoprotection given the photodistributed, lupus-overlap pattern",
+      "Review the drug history and withdraw any thiol- or sulfhydryl-containing agents that may trigger the disease",
+      "Monitor disease activity with anti-desmoglein-1 antibody titres and watch for progression to generalised pemphigus foliaceus",
+      "Screen for and manage complications of immunosuppression including infection, osteoporosis and hyperglycaemia",
+      "Refer to dermatology for co-ordinated care with rheumatology input given the lupus serological overlap"
     ]
-   ],
-   "caption": "Overview comparison matrix for pemphigus erythematosus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pemphigus-erythematosus-real-image",
-   "title": "Pemphigus erythematosus: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "pemphigus_erythematosus-pathway",
+      "title": "Pemphigus erythematosus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A localised variant of pemphigus foliaceus that shows clinical and immunological overlap with lupus erythematosus; also known as Senear-Usher syndrome.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid extension to widespread erosions with skin-barrier failure and associated fluid and thermoregulatory compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lesional skin biopsy showing superficial acantholysis in the granular layer, Direct immunofluorescence of perilesional skin demonstrating the combined intercellular and basement-membrane pattern, Indirect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with systemic corticosteroids as the mainstay for active disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the eruption as seborrhoeic dermatitis or lupus and delaying diagnostic immunofluorescence."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pemphigus erythematosus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pemphigus_erythematosus-matrix",
+      "title": "Pemphigus erythematosus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A localised variant of pemphigus foliaceus that shows clinical and immunological overlap with lupus erythematosus; also known as",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lesional skin biopsy showing superficial acantholysis in the granular layer, Direct immunofluorescence of perilesional skin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pemphigus foliaceus, Discoid and systemic lupus erythematosus, Seborrhoeic dermatitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with systemic corticosteroids as the mainstay for active disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the eruption as seborrhoeic dermatitis or lupus and delaying diagnostic immunofluorescence.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pemphigus erythematosus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pemphigus_erythematosus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lesional skin biopsy",
+          "cells": [
+            {
+              "text": "Superficial acantholysis in the granular layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence of perilesional skin",
+          "cells": [
+            {
+              "text": "Combined intercellular and basement membrane pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pemphigus_erythematosus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pemphigus foliaceus",
+          "cells": [
+            {
+              "text": "Generalised superficial form; this is the localised variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Discoid or systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Overlapping features; immunofluorescence pattern distinguishes them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pemphigus_erythematosus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Mainstay for active disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Azathioprine or mycophenolate mofetil to limit corticosteroid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Considered for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse monitoring",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Relapses are common; a minority progress to generalised disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pemphigus_erythematosus-dx-mgmt",
+      "title": "Diagnosis and management of Pemphigus erythematosus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Scaly crusted plaques and flaccid superficial blisters with lupus-like features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid widespread erosions, secondary sepsis or emerging lupus features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for widespread erosions, sepsis or systemic lupus features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lesional biopsy, perilesional DIF, indirect immunofluorescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does immunofluorescence show the combined intercellular and basement membrane pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pemphigus foliaceus, lupus, seborrhoeic dermatitis or impetigo",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as the mainstay for active disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azathioprine or mycophenolate mofetil to limit corticosteroid exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab considered for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for relapse, which is common, and progression to generalised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic but comparatively benign and localised; relapses common, minority generalise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

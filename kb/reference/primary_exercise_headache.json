@@ -1,168 +1,471 @@
 {
- "id": "primary_exercise_headache",
- "name": "Primary exercise headache",
- "aliases": [
-  "primary exertional headache",
-  "benign exertional headache"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "International Classification of Headache Disorders (ICHD-3)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Pulsating headache brought on specifically by and occurring only during or after sustained strenuous exercise",
-   "Attacks last from minutes up to a couple of days and are often bilateral",
-   "It is more common in hot weather and at high altitude and tends to affect younger adults",
-   "On first presentation, subarachnoid haemorrhage and arterial dissection must be excluded",
-   "Cardiac cephalalgia, in which exertional headache reflects myocardial ischaemia, is an important mimic in those with vascular risk factors",
-   "Many patients respond to indometacin or to a warm-up before exercise"
+  "id": "primary_exercise_headache",
+  "name": "Primary exercise headache",
+  "aliases": [
+    "primary exertional headache",
+    "benign exertional headache"
   ],
-  "pathophysiology": "Primary exercise headache is thought to result from exertion-related venous or arterial distension and transient changes in intracranial pressure, without a structural lesion in the primary form. Sustained physical effort raising intrathoracic and intracranial pressure is the trigger, distinct from the brief Valsalva of cough headache. Because the same exertional stress can precipitate serious secondary events, vascular and cardiac causes must be excluded initially.",
-  "additionalDifferentials": [
-   "Subarachnoid haemorrhage",
-   "Cervical or intracranial arterial dissection",
-   "Cardiac cephalalgia (exertional angina-equivalent headache)",
-   "Reversible cerebral vasoconstriction syndrome",
-   "Primary cough headache",
-   "Phaeochromocytoma-related headache"
-  ],
-  "additionalInvestigations": [
-   "Brain imaging and vascular imaging on first presentation to exclude haemorrhage and dissection",
-   "Cardiac assessment where vascular risk factors suggest cardiac cephalalgia",
-   "History distinguishing sustained exertion from Valsalva triggers",
-   "Consideration of RCVS workup if recurrent thunderclap features"
-  ],
-  "redFlags": [
-   "Thunderclap onset suggesting subarachnoid haemorrhage",
-   "Neck pain or focal deficit suggesting dissection",
-   "Exertional headache relieved by rest in a patient with cardiac risk factors",
-   "Abnormal neurological or cardiovascular examination"
-  ],
-  "prognosis": "The primary form is benign and frequently self-limiting over months to a few years, often manageable with pre-exercise prophylaxis; prognosis of secondary causes depends on the specific diagnosis.",
-  "pitfalls": [
-   "Attributing a first exertional thunderclap headache to a benign cause without excluding haemorrhage",
-   "Missing cardiac cephalalgia in an older patient",
-   "Confusing it with primary cough headache",
-   "Failing to reconsider the diagnosis if the pattern changes"
-  ],
-  "references": [
-   "International Classification of Headache Disorders (ICHD-3)",
-   "Bradley and Daroff Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer indometacin as first-line treatment, either symptomatically or as pre-exercise prophylaxis",
-   "Advise a graded warm-up before exertion and moderation of intensity, particularly in heat and at altitude",
-   "Exclude subarachnoid haemorrhage and arterial dissection with brain and vascular imaging at first presentation",
-   "Exclude cardiac cephalalgia with cardiac assessment in patients with vascular risk factors",
-   "Consider alternative prophylaxis such as a beta-blocker if indometacin is unsuitable",
-   "Reassure about the benign, usually self-limiting course and refer to neurology if features are atypical"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_exercise_headache-pathway",
-   "title": "Primary exercise headache: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Pulsating headache brought on specifically by and occurring only during or after sustained strenuous exercise",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Thunderclap onset suggesting subarachnoid haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain imaging and vascular imaging on first presentation to exclude haemorrhage and dissection, Cardiac assessment where vascular risk factors suggest cardiac cephalalgia, History distinguishing sustained exertion from"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer indometacin as first-line treatment, either symptomatically or as pre-exercise prophylaxis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a first exertional thunderclap headache to a benign cause without excluding haemorrhage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary exercise headache."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_exercise_headache-matrix",
-   "title": "Primary exercise headache: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Pulsating headache brought on specifically by and occurring only during or after sustained strenuous exercise",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "International Classification of Headache Disorders (ICHD-3)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Pulsating headache brought on specifically by and occurring only during or after sustained strenuous exercise",
+      "Attacks last from minutes up to a couple of days and are often bilateral",
+      "It is more common in hot weather and at high altitude and tends to affect younger adults",
+      "On first presentation, subarachnoid haemorrhage and arterial dissection must be excluded",
+      "Cardiac cephalalgia, in which exertional headache reflects myocardial ischaemia, is an important mimic in those with vascular risk factors",
+      "Many patients respond to indometacin or to a warm-up before exercise"
     ],
-    [
-     "Key Investigations",
-     "Brain imaging and vascular imaging on first presentation to exclude haemorrhage and dissection, Cardiac assessment where vascular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary exercise headache is thought to result from exertion-related venous or arterial distension and transient changes in intracranial pressure, without a structural lesion in the primary form. Sustained physical effort raising intrathoracic and intracranial pressure is the trigger, distinct from the brief Valsalva of cough headache. Because the same exertional stress can precipitate serious secondary events, vascular and cardiac causes must be excluded initially.",
+    "additionalDifferentials": [
+      "Subarachnoid haemorrhage",
+      "Cervical or intracranial arterial dissection",
+      "Cardiac cephalalgia (exertional angina-equivalent headache)",
+      "Reversible cerebral vasoconstriction syndrome",
+      "Primary cough headache",
+      "Phaeochromocytoma-related headache"
     ],
-    [
-     "Primary Differentials",
-     "Subarachnoid haemorrhage, Cervical or intracranial arterial dissection, Cardiac cephalalgia (exertional angina-equivalent",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain imaging and vascular imaging on first presentation to exclude haemorrhage and dissection",
+      "Cardiac assessment where vascular risk factors suggest cardiac cephalalgia",
+      "History distinguishing sustained exertion from Valsalva triggers",
+      "Consideration of RCVS workup if recurrent thunderclap features"
     ],
-    [
-     "Management Strategy",
-     "Offer indometacin as first-line treatment, either symptomatically or as pre-exercise prophylaxis",
-     "Core treatment modality"
+    "redFlags": [
+      "Thunderclap onset suggesting subarachnoid haemorrhage",
+      "Neck pain or focal deficit suggesting dissection",
+      "Exertional headache relieved by rest in a patient with cardiac risk factors",
+      "Abnormal neurological or cardiovascular examination"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a first exertional thunderclap headache to a benign cause without excluding haemorrhage",
-     "Prevent diagnostic or management error"
+    "prognosis": "The primary form is benign and frequently self-limiting over months to a few years, often manageable with pre-exercise prophylaxis; prognosis of secondary causes depends on the specific diagnosis.",
+    "pitfalls": [
+      "Attributing a first exertional thunderclap headache to a benign cause without excluding haemorrhage",
+      "Missing cardiac cephalalgia in an older patient",
+      "Confusing it with primary cough headache",
+      "Failing to reconsider the diagnosis if the pattern changes"
+    ],
+    "references": [
+      "International Classification of Headache Disorders (ICHD-3)",
+      "Bradley and Daroff Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer indometacin as first-line treatment, either symptomatically or as pre-exercise prophylaxis",
+      "Advise a graded warm-up before exertion and moderation of intensity, particularly in heat and at altitude",
+      "Exclude subarachnoid haemorrhage and arterial dissection with brain and vascular imaging at first presentation",
+      "Exclude cardiac cephalalgia with cardiac assessment in patients with vascular risk factors",
+      "Consider alternative prophylaxis such as a beta-blocker if indometacin is unsuitable",
+      "Reassure about the benign, usually self-limiting course and refer to neurology if features are atypical"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary exercise headache."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-exercise-headache-real-image",
-   "title": "Primary exercise headache: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "primary_exercise_headache-pathway",
+      "title": "Primary exercise headache: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Pulsating headache brought on specifically by and occurring only during or after sustained strenuous exercise",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Thunderclap onset suggesting subarachnoid haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain imaging and vascular imaging on first presentation to exclude haemorrhage and dissection, Cardiac assessment where vascular risk factors suggest cardiac cephalalgia, History distinguishing sustained exertion from"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer indometacin as first-line treatment, either symptomatically or as pre-exercise prophylaxis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a first exertional thunderclap headache to a benign cause without excluding haemorrhage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary exercise headache."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_exercise_headache-matrix",
+      "title": "Primary exercise headache: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Pulsating headache brought on specifically by and occurring only during or after sustained strenuous exercise",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain imaging and vascular imaging on first presentation to exclude haemorrhage and dissection, Cardiac assessment where vascular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Subarachnoid haemorrhage, Cervical or intracranial arterial dissection, Cardiac cephalalgia (exertional angina-equivalent",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer indometacin as first-line treatment, either symptomatically or as pre-exercise prophylaxis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a first exertional thunderclap headache to a benign cause without excluding haemorrhage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary exercise headache."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "International Classification of Headache Disorders (ICHD-3)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_exercise_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain and vascular imaging at first presentation",
+          "cells": [
+            {
+              "text": "Haemorrhage and dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment where vascular risk factors suggest cardiac cephalalgia",
+          "cells": [
+            {
+              "text": "Cardiac cephalalgia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History distinguishing sustained exertion from Valsalva triggers",
+          "cells": [
+            {
+              "text": "Trigger type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RCVS workup if recurrent thunderclap features",
+          "cells": [
+            {
+              "text": "Reversible cerebral vasoconstriction syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_exercise_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "Thunderclap onset"
+            },
+            {
+              "text": "Brain imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical or intracranial arterial dissection",
+          "cells": [
+            {
+              "text": "Neck pain or focal deficit"
+            },
+            {
+              "text": "Vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac cephalalgia",
+          "cells": [
+            {
+              "text": "Exertional headache relieved by rest in a patient with cardiac risk factors"
+            },
+            {
+              "text": "Cardiac assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversible cerebral vasoconstriction syndrome",
+          "cells": [
+            {
+              "text": "Recurrent thunderclap features"
+            },
+            {
+              "text": "RCVS workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary cough headache",
+          "cells": [
+            {
+              "text": "Valsalva rather than sustained-exertion trigger"
+            },
+            {
+              "text": "Trigger history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_exercise_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Indometacin (first-line)",
+          "cells": [
+            {
+              "text": "Symptomatic treatment or pre-exercise prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warm-up and intensity",
+          "cells": [
+            {
+              "text": "Graded warm-up and moderation of intensity, especially in heat and at altitude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude haemorrhage and dissection",
+          "cells": [
+            {
+              "text": "Brain and vascular imaging at first presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude cardiac cephalalgia",
+          "cells": [
+            {
+              "text": "Cardiac assessment in patients with vascular risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative prophylaxis",
+          "cells": [
+            {
+              "text": "Beta-blocker if indometacin is unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, usually self-limiting course; neurology referral if atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_exercise_headache-dx-mgmt",
+      "title": "Diagnosis and management of Primary exercise headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary exercise headache: headache brought on by sustained exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Thunderclap onset, neck pain, focal deficit or cardiac risk factors?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent imaging to exclude subarachnoid haemorrhage or dissection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain and vascular imaging; cardiac assessment if risk factors; trigger history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are haemorrhage, dissection and cardiac causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate cardiac cephalalgia or RCVS as indicated; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Indometacin as first-line or pre-exercise prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Graded warm-up and moderation of intensity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blocker if indometacin is unsuitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure about the benign, usually self-limiting course",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refer to neurology if features are atypical",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

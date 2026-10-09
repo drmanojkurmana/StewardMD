@@ -1,174 +1,622 @@
 {
- "id": "chronic_eosinophilic_pneumonia",
- "name": "Chronic eosinophilic pneumonia",
- "aliases": [
-  "CEP",
-  "chronic eosinophilic pneumonitis",
-  "Carrington disease",
-  "idiopathic chronic eosinophilic pneumonia"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ATS/ERS statements on eosinophilic lung disease / Murray & Nadel's Textbook of Respiratory Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A subacute to chronic illness over weeks to months with cough, breathlessness, fever, night sweats, and weight loss, more common in middle-aged women and often in those with asthma or atopy",
-   "The classic radiographic hallmark is peripheral, upper-zone predominant consolidation described as the 'photographic negative of pulmonary oedema'",
-   "Marked peripheral blood eosinophilia is usual, and bronchoalveolar lavage shows prominent eosinophilia",
-   "Serum IgE is often elevated and inflammatory markers are raised",
-   "It responds rapidly to corticosteroids, frequently with improvement within days, but relapse on withdrawal or dose reduction is very common",
-   "Many patients require prolonged corticosteroid therapy, and asthma frequently coexists or emerges over the course",
-   "Consider eosinophilic granulomatosis with polyangiitis when there is asthma with extrapulmonary features such as neuropathy or vasculitis",
-   "Exclude drug reactions and parasitic infection as secondary causes of pulmonary eosinophilia"
+  "id": "chronic_eosinophilic_pneumonia",
+  "name": "Chronic eosinophilic pneumonia",
+  "aliases": [
+    "CEP",
+    "chronic eosinophilic pneumonitis",
+    "Carrington disease",
+    "idiopathic chronic eosinophilic pneumonia"
   ],
-  "pathophysiology": "Chronic eosinophilic pneumonia is characterised by sustained accumulation of eosinophils within the alveoli and interstitium, driven by eosinophil-active cytokines and chemokines in a background that is often atopic or asthmatic. Persistent eosinophil infiltration and release of cytotoxic granule proteins produce dense alveolar filling, predominantly in the peripheral and upper lung zones, giving the characteristic reverse-oedema distribution. The inflammation is corticosteroid sensitive but tends to recur, and prolonged uncontrolled disease can occasionally lead to fibrotic change.",
-  "additionalDifferentials": [
-   "Cryptogenic organising pneumonia",
-   "Eosinophilic granulomatosis with polyangiitis (Churg-Strauss)",
-   "Allergic bronchopulmonary aspergillosis",
-   "Drug-induced eosinophilic pneumonia",
-   "Parasitic pulmonary eosinophilia",
-   "Hypereosinophilic syndrome with pulmonary involvement"
-  ],
-  "additionalInvestigations": [
-   "High-resolution CT showing peripheral, upper-zone predominant consolidation and ground-glass opacity",
-   "Full blood count demonstrating peripheral eosinophilia and bronchoalveolar lavage confirming alveolar eosinophilia",
-   "Serum IgE and inflammatory markers",
-   "ANCA testing and assessment for extrapulmonary features to evaluate for eosinophilic granulomatosis with polyangiitis",
-   "Stool examination and serology for parasites, and review of drug history",
-   "Pulmonary function tests, which may show restrictive or obstructive patterns, and spirometry for coexisting asthma"
-  ],
-  "redFlags": [
-   "Extrapulmonary features such as mononeuritis multiplex, cardiac or renal involvement suggesting systemic vasculitis",
-   "Frequent relapse or steroid dependence requiring steroid-sparing therapy",
-   "Progressive breathlessness or hypoxaemia despite treatment",
-   "Very high eosinophil counts raising concern for hypereosinophilic syndrome"
-  ],
-  "prognosis": "The response to corticosteroids is usually excellent and rapid, but relapse is frequent when treatment is reduced or stopped, so many patients need prolonged therapy; long-term outcome is generally good provided disease is controlled.",
-  "pitfalls": [
-   "Failing to recognise the peripheral photographic-negative-of-oedema pattern on imaging",
-   "Stopping corticosteroids too early and provoking relapse",
-   "Missing an evolving eosinophilic granulomatosis with polyangiitis when systemic features appear",
-   "Not excluding drug and parasitic causes of pulmonary eosinophilia"
-  ],
-  "references": [
-   "ATS/ERS statements on the eosinophilic lung diseases",
-   "Murray & Nadel's Textbook of Respiratory Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Systemic corticosteroids as the mainstay, producing rapid symptomatic and radiographic improvement",
-   "A prolonged, slowly tapered corticosteroid course, because relapse on withdrawal or dose reduction is common",
-   "Inhaled corticosteroid and bronchodilator therapy for coexisting or emergent asthma",
-   "Steroid-sparing agents or anti-interleukin-5 eosinophil-directed biologics for relapsing or corticosteroid-dependent disease",
-   "Exclusion of mimics including parasitic infection, drug causes and eosinophilic granulomatosis with polyangiitis through ANCA testing and assessment for extrapulmonary features",
-   "Monitoring of symptoms, blood eosinophil count, chest imaging and lung function to detect relapse and any fibrotic change, with bone protection and other measures against long-term corticosteroid harm"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_eosinophilic_pneumonia-pathway",
-   "title": "Chronic eosinophilic pneumonia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A subacute to chronic illness over weeks to months with cough, breathlessness, fever, night sweats, and weight loss, more common in middle-aged women and often in those with asthma or atopy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extrapulmonary features such as mononeuritis multiplex, cardiac or renal involvement suggesting systemic vasculitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: High-resolution CT showing peripheral, upper-zone predominant consolidation and ground-glass opacity, Full blood count demonstrating peripheral eosinophilia and bronchoalveolar lavage confirming alveolar eosinophilia,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Systemic corticosteroids as the mainstay, producing rapid symptomatic and radiographic improvement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise the peripheral photographic-negative-of-oedema pattern on imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic eosinophilic pneumonia."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_eosinophilic_pneumonia-matrix",
-   "title": "Chronic eosinophilic pneumonia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A subacute to chronic illness over weeks to months with cough, breathlessness, fever, night sweats, and weight loss, more common",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ATS/ERS statements on eosinophilic lung disease / Murray & Nadel's Textbook of Respiratory Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A subacute to chronic illness over weeks to months with cough, breathlessness, fever, night sweats, and weight loss, more common in middle-aged women and often in those with asthma or atopy",
+      "The classic radiographic hallmark is peripheral, upper-zone predominant consolidation described as the 'photographic negative of pulmonary oedema'",
+      "Marked peripheral blood eosinophilia is usual, and bronchoalveolar lavage shows prominent eosinophilia",
+      "Serum IgE is often elevated and inflammatory markers are raised",
+      "It responds rapidly to corticosteroids, frequently with improvement within days, but relapse on withdrawal or dose reduction is very common",
+      "Many patients require prolonged corticosteroid therapy, and asthma frequently coexists or emerges over the course",
+      "Consider eosinophilic granulomatosis with polyangiitis when there is asthma with extrapulmonary features such as neuropathy or vasculitis",
+      "Exclude drug reactions and parasitic infection as secondary causes of pulmonary eosinophilia"
     ],
-    [
-     "Key Investigations",
-     "High-resolution CT showing peripheral, upper-zone predominant consolidation and ground-glass opacity, Full blood count",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic eosinophilic pneumonia is characterised by sustained accumulation of eosinophils within the alveoli and interstitium, driven by eosinophil-active cytokines and chemokines in a background that is often atopic or asthmatic. Persistent eosinophil infiltration and release of cytotoxic granule proteins produce dense alveolar filling, predominantly in the peripheral and upper lung zones, giving the characteristic reverse-oedema distribution. The inflammation is corticosteroid sensitive but tends to recur, and prolonged uncontrolled disease can occasionally lead to fibrotic change.",
+    "additionalDifferentials": [
+      "Cryptogenic organising pneumonia",
+      "Eosinophilic granulomatosis with polyangiitis (Churg-Strauss)",
+      "Allergic bronchopulmonary aspergillosis",
+      "Drug-induced eosinophilic pneumonia",
+      "Parasitic pulmonary eosinophilia",
+      "Hypereosinophilic syndrome with pulmonary involvement"
     ],
-    [
-     "Primary Differentials",
-     "Cryptogenic organising pneumonia, Eosinophilic granulomatosis with polyangiitis (Churg-Strauss), Allergic bronchopulmonary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "High-resolution CT showing peripheral, upper-zone predominant consolidation and ground-glass opacity",
+      "Full blood count demonstrating peripheral eosinophilia and bronchoalveolar lavage confirming alveolar eosinophilia",
+      "Serum IgE and inflammatory markers",
+      "ANCA testing and assessment for extrapulmonary features to evaluate for eosinophilic granulomatosis with polyangiitis",
+      "Stool examination and serology for parasites, and review of drug history",
+      "Pulmonary function tests, which may show restrictive or obstructive patterns, and spirometry for coexisting asthma"
     ],
-    [
-     "Management Strategy",
-     "Systemic corticosteroids as the mainstay, producing rapid symptomatic and radiographic improvement",
-     "Core treatment modality"
+    "redFlags": [
+      "Extrapulmonary features such as mononeuritis multiplex, cardiac or renal involvement suggesting systemic vasculitis",
+      "Frequent relapse or steroid dependence requiring steroid-sparing therapy",
+      "Progressive breathlessness or hypoxaemia despite treatment",
+      "Very high eosinophil counts raising concern for hypereosinophilic syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise the peripheral photographic-negative-of-oedema pattern on imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "The response to corticosteroids is usually excellent and rapid, but relapse is frequent when treatment is reduced or stopped, so many patients need prolonged therapy; long-term outcome is generally good provided disease is controlled.",
+    "pitfalls": [
+      "Failing to recognise the peripheral photographic-negative-of-oedema pattern on imaging",
+      "Stopping corticosteroids too early and provoking relapse",
+      "Missing an evolving eosinophilic granulomatosis with polyangiitis when systemic features appear",
+      "Not excluding drug and parasitic causes of pulmonary eosinophilia"
+    ],
+    "references": [
+      "ATS/ERS statements on the eosinophilic lung diseases",
+      "Murray & Nadel's Textbook of Respiratory Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Systemic corticosteroids as the mainstay, producing rapid symptomatic and radiographic improvement",
+      "A prolonged, slowly tapered corticosteroid course, because relapse on withdrawal or dose reduction is common",
+      "Inhaled corticosteroid and bronchodilator therapy for coexisting or emergent asthma",
+      "Steroid-sparing agents or anti-interleukin-5 eosinophil-directed biologics for relapsing or corticosteroid-dependent disease",
+      "Exclusion of mimics including parasitic infection, drug causes and eosinophilic granulomatosis with polyangiitis through ANCA testing and assessment for extrapulmonary features",
+      "Monitoring of symptoms, blood eosinophil count, chest imaging and lung function to detect relapse and any fibrotic change, with bone protection and other measures against long-term corticosteroid harm"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic eosinophilic pneumonia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-eosinophilic-pneumonia-real-image",
-   "title": "Chronic eosinophilic pneumonia: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "chronic_eosinophilic_pneumonia-pathway",
+      "title": "Chronic eosinophilic pneumonia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A subacute to chronic illness over weeks to months with cough, breathlessness, fever, night sweats, and weight loss, more common in middle-aged women and often in those with asthma or atopy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extrapulmonary features such as mononeuritis multiplex, cardiac or renal involvement suggesting systemic vasculitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: High-resolution CT showing peripheral, upper-zone predominant consolidation and ground-glass opacity, Full blood count demonstrating peripheral eosinophilia and bronchoalveolar lavage confirming alveolar eosinophilia,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Systemic corticosteroids as the mainstay, producing rapid symptomatic and radiographic improvement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise the peripheral photographic-negative-of-oedema pattern on imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic eosinophilic pneumonia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_eosinophilic_pneumonia-matrix",
+      "title": "Chronic eosinophilic pneumonia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A subacute to chronic illness over weeks to months with cough, breathlessness, fever, night sweats, and weight loss, more common",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "High-resolution CT showing peripheral, upper-zone predominant consolidation and ground-glass opacity, Full blood count",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cryptogenic organising pneumonia, Eosinophilic granulomatosis with polyangiitis (Churg-Strauss), Allergic bronchopulmonary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Systemic corticosteroids as the mainstay, producing rapid symptomatic and radiographic improvement",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise the peripheral photographic-negative-of-oedema pattern on imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic eosinophilic pneumonia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATS/ERS statements on eosinophilic lung disease / Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 261-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_eosinophilic_pneumonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Peripheral, upper-zone predominant consolidation and ground-glass opacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia and alveolar eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgE and inflammatory markers",
+          "cells": [
+            {
+              "text": "Typically elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA testing and extrapulmonary assessment",
+          "cells": [
+            {
+              "text": "Excludes eosinophilic granulomatosis with polyangiitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parasite serology and drug history",
+          "cells": [
+            {
+              "text": "Secondary causes of pulmonary eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_eosinophilic_pneumonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Eosinophilic granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Asthma with neuropathy or vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic bronchopulmonary aspergillosis",
+          "cells": [
+            {
+              "text": "Asthma with fungal sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptogenic organising pneumonia",
+          "cells": [
+            {
+              "text": "Consolidation without marked eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_eosinophilic_pneumonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay, with rapid symptomatic and radiographic improvement"
+            },
+            {
+              "text": "Rapid response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged tapering course",
+          "cells": [
+            {
+              "text": "Slowly tapered corticosteroid course"
+            },
+            {
+              "text": "Relapse on withdrawal is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled therapy",
+          "cells": [
+            {
+              "text": "Inhaled corticosteroid and bronchodilator for coexisting or emergent asthma"
+            },
+            {
+              "text": "Asthma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Steroid-sparing agents or anti-interleukin-5 biologics"
+            },
+            {
+              "text": "Relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mimics",
+          "cells": [
+            {
+              "text": "Exclude parasites, drug causes and eosinophilic granulomatosis with polyangiitis"
+            },
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Symptoms, blood eosinophils, chest imaging and lung function; bone protection"
+            },
+            {
+              "text": "Relapse and steroid harm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_eosinophilic_pneumonia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic value of bronchoalveolar lavage in ILD",
+      "rowHeader": "Condition",
+      "columns": [
+        "BAL finding"
+      ],
+      "rows": [
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Lymphocytosis; CD4:CD8 ratio above 3.5 is most specific for diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypersensitivity pneumonitis",
+          "cells": [
+            {
+              "text": "Marked lymphocytosis (above 50%)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Organizing pneumonia",
+          "cells": [
+            {
+              "text": "Foamy macrophages; mixed pattern of increased cells is characteristic; decreased CD4:CD8 ratio"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Eosinophilic lung disease",
+          "cells": [
+            {
+              "text": "Eosinophils above 25%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diffuse alveolar bleeding",
+          "cells": [
+            {
+              "text": "Hemosiderin-laden macrophages, red blood cells"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diffuse alveolar damage, drug toxicity",
+          "cells": [
+            {
+              "text": "Atypical hyperplastic type II pneumocytes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opportunistic infections",
+          "cells": [
+            {
+              "text": "Pneumocystis carinii, fungi, cytomegalovirus-transformed cells"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphangitic carcinomatosis, alveolar cell carcinoma, pulmonary lymphoma",
+          "cells": [
+            {
+              "text": "Malignant cells"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Alveolar proteinosis",
+          "cells": [
+            {
+              "text": "Milky effluent, foamy macrophages and lipoproteinaceous intraalveolar material (periodic acid-Schiff positive)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lipoid pneumonia",
+          "cells": [
+            {
+              "text": "Fat globules in macrophages"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary Langerhans cell histiocytosis",
+          "cells": [
+            {
+              "text": "Increased CD1+ Langerhans cells; electron microscopy shows Birbeck granules in lavaged macrophages (expensive and difficult to perform)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Asbestos-related pulmonary disease",
+          "cells": [
+            {
+              "text": "Dust particles, ferruginous bodies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Berylliosis",
+          "cells": [
+            {
+              "text": "Positive lymphocyte transformation test to beryllium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Silicosis",
+          "cells": [
+            {
+              "text": "Dust particles by polarized light microscopy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lipoidosis",
+          "cells": [
+            {
+              "text": "Accumulation of specific lipopigment in alveolar macrophages"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_eosinophilic_pneumonia-dx-mgmt",
+      "title": "Diagnosis and management of Chronic eosinophilic pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic eosinophilic pneumonia: subacute cough, breathlessness and fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (extrapulmonary vasculitis, steroid dependence, progressive hypoxaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: vasculitis review and urgent respiratory assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "High-resolution CT, bronchoalveolar lavage, eosinophils, IgE and ANCA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Peripheral upper-zone consolidation with alveolar eosinophilia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Systemic corticosteroids with rapid response",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check eosinophilic granulomatosis, allergic aspergillosis and organising pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prolonged slowly tapered corticosteroid course",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhaled therapy for coexisting asthma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Steroid-sparing agents or anti-IL-5 biologics for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor eosinophils, chest imaging and lung function; protect bone",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,483 @@
 {
- "id": "takenouchi_kosaki_syndrome",
- "name": "Takenouchi-Kosaki syndrome (CDC42 macrothrombocytopenia)",
- "aliases": [
-  "CDC42",
-  "Takenouchi-Kosaki syndrome",
-  "TKS",
-  "CDC42-related macrothrombocytopenia"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / Nathan and Oski",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal dominant multisystem disorder caused by heterozygous mutations in CDC42, presenting with macrothrombocytopenia alongside developmental and structural anomalies",
-   "Haematologically it produces mild-to-moderate thrombocytopenia with large platelets",
-   "Extra-haematological features include developmental delay, distinctive facial features, lymphoedema, and structural brain, cardiac, or skeletal anomalies",
-   "Some CDC42 variants cause an autoinflammatory phenotype with recurrent fevers and macrophage activation",
-   "The specific mutation influences whether the picture is predominantly developmental, autoinflammatory, or haematological",
-   "Bleeding tendency from the macrothrombocytopenia is usually mild",
-   "It sits within the expanding group of transcription-factor and cytoskeletal-regulator inherited thrombocytopenias",
-   "Diagnosis rests on CDC42 genetic testing supported by the platelet findings and syndromic features"
+  "id": "takenouchi_kosaki_syndrome",
+  "name": "Takenouchi-Kosaki syndrome (CDC42 macrothrombocytopenia)",
+  "aliases": [
+    "CDC42",
+    "Takenouchi-Kosaki syndrome",
+    "TKS",
+    "CDC42-related macrothrombocytopenia"
   ],
-  "pathophysiology": "CDC42 encodes a Rho-family small GTPase that governs actin cytoskeletal dynamics, cell polarity, and intracellular signalling across many tissues. Heterozygous mutations perturb these functions, and in megakaryocytes disrupted cytoskeletal regulation impairs proplatelet formation and platelet sizing, producing macrothrombocytopenia. Because CDC42 is critical in neural, lymphatic, and skeletal development and in immune regulation, the same mutations give rise to the developmental anomalies, lymphoedema, and, for certain variants, an autoinflammatory phenotype, explaining the multisystem nature of the syndrome.",
-  "additionalDifferentials": [
-   "MYH9-related disorder",
-   "Other syndromic inherited macrothrombocytopenias",
-   "Noonan syndrome and related RASopathies (for overlapping features)",
-   "Wiskott-Aldrich spectrum disorders",
-   "Autoinflammatory syndromes with cytopenias",
-   "Immune thrombocytopenia (acquired)"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and film confirming macrothrombocytopenia",
-   "CDC42 genetic testing",
-   "Developmental assessment and dysmorphology review",
-   "Neuroimaging, echocardiography, and skeletal evaluation for structural anomalies",
-   "Inflammatory markers and assessment for macrophage activation where an autoinflammatory phenotype is suspected",
-   "Platelet function testing where bleeding is disproportionate"
-  ],
-  "redFlags": [
-   "Features of macrophage activation syndrome or severe autoinflammation with certain CDC42 variants",
-   "Significant structural anomalies such as major cardiac or brain malformations",
-   "Bleeding disproportionate to the platelet count",
-   "Progressive neurological or growth concerns requiring multidisciplinary care"
-  ],
-  "prognosis": "Outlook varies with the specific variant and the severity of associated anomalies; the thrombocytopenia itself is usually mild, but developmental impairment and, in autoinflammatory variants, severe inflammation can dominate the clinical course.",
-  "pitfalls": [
-   "Attributing the isolated low platelet count to immune thrombocytopenia and overlooking the syndromic features",
-   "Failing to recognise the autoinflammatory phenotype in the relevant CDC42 variants",
-   "Not investigating for associated structural anomalies once the diagnosis is made",
-   "Assuming a purely haematological disorder rather than a multisystem condition"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the usually mild bleeding tendency conservatively, reserving platelet transfusion for significant haemorrhage or surgical cover",
-   "Treat the autoinflammatory phenotype of specific variants with interleukin-1 or interleukin-18 directed biologic therapy",
-   "Provide developmental support with early intervention, physiotherapy, occupational and speech therapy",
-   "Manage lymphoedema with skin care, compression and specialist lymphoedema therapy",
-   "Monitor for and manage structural cardiac, cerebral and skeletal anomalies with appropriate specialist follow-up",
-   "Watch for macrophage activation syndrome in autoinflammatory variants and escalate urgently with immunosuppression if it develops",
-   "Coordinate care through haematology, clinical genetics and relevant paediatric specialists",
-   "Offer genetic counselling for this autosomal dominant condition with testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "takenouchi_kosaki_syndrome-pathway",
-   "title": "Takenouchi-Kosaki syndrome (CDC42 macrothrombocytopenia): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal dominant multisystem disorder caused by heterozygous mutations in CDC42, presenting with macrothrombocytopenia alongside developmental and structural anomalies",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of macrophage activation syndrome or severe autoinflammation with certain CDC42 variants",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and film confirming macrothrombocytopenia, CDC42 genetic testing, Developmental assessment and dysmorphology review"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the usually mild bleeding tendency conservatively, reserving platelet transfusion for significant haemorrhage or surgical cover"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the isolated low platelet count to immune thrombocytopenia and overlooking the syndromic features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of takenouchi-kosaki syndrome (cdc42 macrothrombocytopenia)."
-  }
- ],
- "tables": [
-  {
-   "id": "takenouchi_kosaki_syndrome-matrix",
-   "title": "Takenouchi-Kosaki syndrome (CDC42 macrothrombocytopenia): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal dominant multisystem disorder caused by heterozygous mutations in CDC42, presenting with macrothrombocytopenia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / Nathan and Oski",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal dominant multisystem disorder caused by heterozygous mutations in CDC42, presenting with macrothrombocytopenia alongside developmental and structural anomalies",
+      "Haematologically it produces mild-to-moderate thrombocytopenia with large platelets",
+      "Extra-haematological features include developmental delay, distinctive facial features, lymphoedema, and structural brain, cardiac, or skeletal anomalies",
+      "Some CDC42 variants cause an autoinflammatory phenotype with recurrent fevers and macrophage activation",
+      "The specific mutation influences whether the picture is predominantly developmental, autoinflammatory, or haematological",
+      "Bleeding tendency from the macrothrombocytopenia is usually mild",
+      "It sits within the expanding group of transcription-factor and cytoskeletal-regulator inherited thrombocytopenias",
+      "Diagnosis rests on CDC42 genetic testing supported by the platelet findings and syndromic features"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and film confirming macrothrombocytopenia, CDC42 genetic testing, Developmental assessment and dysmorphology",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CDC42 encodes a Rho-family small GTPase that governs actin cytoskeletal dynamics, cell polarity, and intracellular signalling across many tissues. Heterozygous mutations perturb these functions, and in megakaryocytes disrupted cytoskeletal regulation impairs proplatelet formation and platelet sizing, producing macrothrombocytopenia. Because CDC42 is critical in neural, lymphatic, and skeletal development and in immune regulation, the same mutations give rise to the developmental anomalies, lymphoedema, and, for certain variants, an autoinflammatory phenotype, explaining the multisystem nature of the syndrome.",
+    "additionalDifferentials": [
+      "MYH9-related disorder",
+      "Other syndromic inherited macrothrombocytopenias",
+      "Noonan syndrome and related RASopathies (for overlapping features)",
+      "Wiskott-Aldrich spectrum disorders",
+      "Autoinflammatory syndromes with cytopenias",
+      "Immune thrombocytopenia (acquired)"
     ],
-    [
-     "Primary Differentials",
-     "MYH9-related disorder, Other syndromic inherited macrothrombocytopenias, Noonan syndrome and related RASopathies (for overlapping",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and film confirming macrothrombocytopenia",
+      "CDC42 genetic testing",
+      "Developmental assessment and dysmorphology review",
+      "Neuroimaging, echocardiography, and skeletal evaluation for structural anomalies",
+      "Inflammatory markers and assessment for macrophage activation where an autoinflammatory phenotype is suspected",
+      "Platelet function testing where bleeding is disproportionate"
     ],
-    [
-     "Management Strategy",
-     "Manage the usually mild bleeding tendency conservatively, reserving platelet transfusion for significant haemorrhage or surgical",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of macrophage activation syndrome or severe autoinflammation with certain CDC42 variants",
+      "Significant structural anomalies such as major cardiac or brain malformations",
+      "Bleeding disproportionate to the platelet count",
+      "Progressive neurological or growth concerns requiring multidisciplinary care"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the isolated low platelet count to immune thrombocytopenia and overlooking the syndromic features",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook varies with the specific variant and the severity of associated anomalies; the thrombocytopenia itself is usually mild, but developmental impairment and, in autoinflammatory variants, severe inflammation can dominate the clinical course.",
+    "pitfalls": [
+      "Attributing the isolated low platelet count to immune thrombocytopenia and overlooking the syndromic features",
+      "Failing to recognise the autoinflammatory phenotype in the relevant CDC42 variants",
+      "Not investigating for associated structural anomalies once the diagnosis is made",
+      "Assuming a purely haematological disorder rather than a multisystem condition"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the usually mild bleeding tendency conservatively, reserving platelet transfusion for significant haemorrhage or surgical cover",
+      "Treat the autoinflammatory phenotype of specific variants with interleukin-1 or interleukin-18 directed biologic therapy",
+      "Provide developmental support with early intervention, physiotherapy, occupational and speech therapy",
+      "Manage lymphoedema with skin care, compression and specialist lymphoedema therapy",
+      "Monitor for and manage structural cardiac, cerebral and skeletal anomalies with appropriate specialist follow-up",
+      "Watch for macrophage activation syndrome in autoinflammatory variants and escalate urgently with immunosuppression if it develops",
+      "Coordinate care through haematology, clinical genetics and relevant paediatric specialists",
+      "Offer genetic counselling for this autosomal dominant condition with testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for takenouchi-kosaki syndrome (cdc42 macrothrombocytopenia)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "takenouchi-kosaki-syndrome-real-image",
-   "title": "Takenouchi-Kosaki syndrome (CDC42 macrothrombocytopenia): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "takenouchi_kosaki_syndrome-pathway",
+      "title": "Takenouchi-Kosaki syndrome (CDC42 macrothrombocytopenia): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal dominant multisystem disorder caused by heterozygous mutations in CDC42, presenting with macrothrombocytopenia alongside developmental and structural anomalies",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of macrophage activation syndrome or severe autoinflammation with certain CDC42 variants",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and film confirming macrothrombocytopenia, CDC42 genetic testing, Developmental assessment and dysmorphology review"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the usually mild bleeding tendency conservatively, reserving platelet transfusion for significant haemorrhage or surgical cover"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the isolated low platelet count to immune thrombocytopenia and overlooking the syndromic features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of takenouchi-kosaki syndrome (cdc42 macrothrombocytopenia)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "takenouchi_kosaki_syndrome-matrix",
+      "title": "Takenouchi-Kosaki syndrome (CDC42 macrothrombocytopenia): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal dominant multisystem disorder caused by heterozygous mutations in CDC42, presenting with macrothrombocytopenia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and film confirming macrothrombocytopenia, CDC42 genetic testing, Developmental assessment and dysmorphology",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "MYH9-related disorder, Other syndromic inherited macrothrombocytopenias, Noonan syndrome and related RASopathies (for overlapping",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the usually mild bleeding tendency conservatively, reserving platelet transfusion for significant haemorrhage or surgical",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the isolated low platelet count to immune thrombocytopenia and overlooking the syndromic features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for takenouchi-kosaki syndrome (cdc42 macrothrombocytopenia)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "takenouchi_kosaki_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Takenouchi-Kosaki syndrome (CDC42 macrothrombocytopenia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CDC42 disorder: large-platelet thrombocytopenia with syndromic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: macrophage activation, major malformation, or bleeding out of proportion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunosuppression for macrophage activation syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film for macrothrombocytopenia; CDC42 testing; neuroimaging and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CDC42 testing confirm a pathogenic variant matching the platelet findings?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MYH9-related disorder, a RASopathy or acquired immune thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative management of mild bleeding; platelets for significant haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interleukin-1 or interleukin-18 blockade for autoinflammatory variants",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early developmental support with physiotherapy and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lymphoedema care with compression and specialist therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance for cardiac, cerebral and skeletal anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Thrombocytopenia is usually mild; developmental and autoinflammatory features dominate",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "takenouchi_kosaki_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Macrothrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDC42 genetic testing",
+          "cells": [
+            {
+              "text": "Pathogenic CDC42 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment and dysmorphology review",
+          "cells": [
+            {
+              "text": "Syndromic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging, echocardiography and skeletal evaluation",
+          "cells": [
+            {
+              "text": "Structural brain, cardiac or skeletal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Macrophage activation in the autoinflammatory phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet function testing",
+          "cells": [
+            {
+              "text": "Bleeding out of proportion to the platelet count"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "takenouchi_kosaki_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "MYH9-related disorder",
+          "cells": [
+            {
+              "text": "Another inherited macrothrombocytopenia; separated by CDC42 genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noonan syndrome and related RASopathies",
+          "cells": [
+            {
+              "text": "Overlapping syndromic features; platelet findings and CDC42 testing separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia (acquired)",
+          "cells": [
+            {
+              "text": "Isolated low platelets are wrongly attributed to it; syndromic features point to CDC42"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "takenouchi_kosaki_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative bleeding management",
+          "cells": [
+            {
+              "text": "Platelet transfusion reserved for significant haemorrhage or surgical cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interleukin-1 or interleukin-18 blockade",
+          "cells": [
+            {
+              "text": "Autoinflammatory variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Early intervention, physiotherapy, occupational and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoedema care",
+          "cells": [
+            {
+              "text": "Skin care, compression and specialist lymphoedema therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural anomaly surveillance",
+          "cells": [
+            {
+              "text": "Cardiac, cerebral and skeletal follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrophage activation vigilance",
+          "cells": [
+            {
+              "text": "Urgent immunosuppression if it develops in autoinflammatory variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -1,171 +1,449 @@
 {
- "id": "monteggia_fracture",
- "name": "Monteggia fracture-dislocation",
- "aliases": [
-  "proximal ulna fracture with radial head dislocation",
-  "Monteggia lesion",
-  "Bado fracture-dislocation"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Trauma",
- "specialty": "Orthopaedic Trauma",
- "referenceOnly": true,
- "reference": {
-  "source": "Rockwood and Green's Fractures in Adults",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A fracture of the proximal ulna combined with dislocation of the radial head",
-   "The radial head typically dislocates in the direction the apex of the ulnar fracture points, described by the Bado classification (anterior, posterior, lateral, or both-bone types)",
-   "A useful memory aid contrasts Monteggia (ulna fracture with radial head dislocation) against Galeazzi (radius fracture with distal radioulnar joint injury)",
-   "The radiocapitellar line should pass through the centre of the capitellum on every view; if it does not, the radial head is dislocated",
-   "In adults the ulna requires open reduction and internal fixation restoring its length and bow, which usually reduces the radial head",
-   "A missed radial head dislocation is a common and serious error, especially in children",
-   "Posterior interosseous nerve palsy may accompany the injury, particularly in lateral and posterior patterns"
+  "id": "monteggia_fracture",
+  "name": "Monteggia fracture-dislocation",
+  "aliases": [
+    "proximal ulna fracture with radial head dislocation",
+    "Monteggia lesion",
+    "Bado fracture-dislocation"
   ],
-  "pathophysiology": "A fracture of the proximal ulna alters the length and alignment of the bone. Because the radius and ulna are coupled proximally through the annular ligament and the proximal radioulnar joint, ulnar deformity displaces the radial head from its articulation with the capitellum. Restoring anatomical ulnar length and curvature is therefore essential, as residual ulnar malalignment leaves the radial head subluxed or dislocated. The dislocating radial head can also stretch or injure the posterior interosseous nerve as it passes around the radial neck.",
-  "additionalDifferentials": [
-   "Isolated proximal ulna fracture",
-   "Isolated traumatic radial head dislocation",
-   "Radial head or neck fracture",
-   "Both-bone forearm fracture",
-   "Elbow dislocation",
-   "Isolated (nightstick) ulnar shaft fracture"
-  ],
-  "additionalInvestigations": [
-   "Anteroposterior and lateral radiographs of the elbow and the entire forearm",
-   "Confirmation that the radiocapitellar line intersects the capitellum on all views",
-   "Contralateral comparison radiographs, particularly in children",
-   "CT for complex or comminuted proximal ulna fractures",
-   "Careful documentation of posterior interosseous nerve function"
-  ],
-  "redFlags": [
-   "Missed dislocation of the radial head",
-   "Posterior interosseous nerve palsy",
-   "Compartment syndrome after high-energy injury",
-   "Open fracture requiring urgent care"
-  ],
-  "prognosis": "Anatomical restoration of ulnar length and alignment usually re-establishes radiocapitellar congruity with a good outcome; missed dislocation, ulnar malreduction or nerve injury worsen the result.",
-  "pitfalls": [
-   "Failing to check the radiocapitellar line and thereby missing the radial head dislocation",
-   "Inadequate restoration of ulnar length and bow, leaving the radial head subluxed",
-   "Overlooking a posterior interosseous nerve palsy",
-   "Not imaging the full forearm including the elbow"
-  ],
-  "references": [
-   "Rockwood and Green's Fractures in Adults",
-   "AO Principles of Fracture Management"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In adults, open reduction and internal fixation of the proximal ulna restoring its anatomical length and bow, which usually reduces the dislocated radial head",
-   "In children, closed reduction with restoration of ulnar alignment and confirmation of radiocapitellar reduction, reserving surgery for unstable or irreducible injuries",
-   "Confirm radial head reduction using the radiocapitellar line intra-operatively and afterwards, with open reduction and annular ligament reconstruction if the radial head remains irreducible",
-   "Assess and document posterior interosseous nerve function, observing expectantly as most palsies are neurapraxias that recover spontaneously",
-   "Immobilisation followed by graded rehabilitation to restore elbow motion and forearm rotation",
-   "Follow-up radiographs to detect late radial head subluxation, malunion or nerve recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "monteggia_fracture-pathway",
-   "title": "Monteggia fracture-dislocation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A fracture of the proximal ulna combined with dislocation of the radial head",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Missed dislocation of the radial head",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anteroposterior and lateral radiographs of the elbow and the entire forearm, Confirmation that the radiocapitellar line intersects the capitellum on all views, Contralateral comparison radiographs, particularly in children"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In adults, open reduction and internal fixation of the proximal ulna restoring its anatomical length and bow, which usually reduces the dislocated radial head"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to check the radiocapitellar line and thereby missing the radial head dislocation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of monteggia fracture-dislocation."
-  }
- ],
- "tables": [
-  {
-   "id": "monteggia_fracture-matrix",
-   "title": "Monteggia fracture-dislocation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A fracture of the proximal ulna combined with dislocation of the radial head",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Trauma",
+  "specialty": "Orthopaedic Trauma",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rockwood and Green's Fractures in Adults",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A fracture of the proximal ulna combined with dislocation of the radial head",
+      "The radial head typically dislocates in the direction the apex of the ulnar fracture points, described by the Bado classification (anterior, posterior, lateral, or both-bone types)",
+      "A useful memory aid contrasts Monteggia (ulna fracture with radial head dislocation) against Galeazzi (radius fracture with distal radioulnar joint injury)",
+      "The radiocapitellar line should pass through the centre of the capitellum on every view; if it does not, the radial head is dislocated",
+      "In adults the ulna requires open reduction and internal fixation restoring its length and bow, which usually reduces the radial head",
+      "A missed radial head dislocation is a common and serious error, especially in children",
+      "Posterior interosseous nerve palsy may accompany the injury, particularly in lateral and posterior patterns"
     ],
-    [
-     "Key Investigations",
-     "Anteroposterior and lateral radiographs of the elbow and the entire forearm, Confirmation that the radiocapitellar line",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A fracture of the proximal ulna alters the length and alignment of the bone. Because the radius and ulna are coupled proximally through the annular ligament and the proximal radioulnar joint, ulnar deformity displaces the radial head from its articulation with the capitellum. Restoring anatomical ulnar length and curvature is therefore essential, as residual ulnar malalignment leaves the radial head subluxed or dislocated. The dislocating radial head can also stretch or injure the posterior interosseous nerve as it passes around the radial neck.",
+    "additionalDifferentials": [
+      "Isolated proximal ulna fracture",
+      "Isolated traumatic radial head dislocation",
+      "Radial head or neck fracture",
+      "Both-bone forearm fracture",
+      "Elbow dislocation",
+      "Isolated (nightstick) ulnar shaft fracture"
     ],
-    [
-     "Primary Differentials",
-     "Isolated proximal ulna fracture, Isolated traumatic radial head dislocation, Radial head or neck fracture",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anteroposterior and lateral radiographs of the elbow and the entire forearm",
+      "Confirmation that the radiocapitellar line intersects the capitellum on all views",
+      "Contralateral comparison radiographs, particularly in children",
+      "CT for complex or comminuted proximal ulna fractures",
+      "Careful documentation of posterior interosseous nerve function"
     ],
-    [
-     "Management Strategy",
-     "In adults, open reduction and internal fixation of the proximal ulna restoring its anatomical length and bow, which usually",
-     "Core treatment modality"
+    "redFlags": [
+      "Missed dislocation of the radial head",
+      "Posterior interosseous nerve palsy",
+      "Compartment syndrome after high-energy injury",
+      "Open fracture requiring urgent care"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to check the radiocapitellar line and thereby missing the radial head dislocation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Anatomical restoration of ulnar length and alignment usually re-establishes radiocapitellar congruity with a good outcome; missed dislocation, ulnar malreduction or nerve injury worsen the result.",
+    "pitfalls": [
+      "Failing to check the radiocapitellar line and thereby missing the radial head dislocation",
+      "Inadequate restoration of ulnar length and bow, leaving the radial head subluxed",
+      "Overlooking a posterior interosseous nerve palsy",
+      "Not imaging the full forearm including the elbow"
+    ],
+    "references": [
+      "Rockwood and Green's Fractures in Adults",
+      "AO Principles of Fracture Management"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In adults, open reduction and internal fixation of the proximal ulna restoring its anatomical length and bow, which usually reduces the dislocated radial head",
+      "In children, closed reduction with restoration of ulnar alignment and confirmation of radiocapitellar reduction, reserving surgery for unstable or irreducible injuries",
+      "Confirm radial head reduction using the radiocapitellar line intra-operatively and afterwards, with open reduction and annular ligament reconstruction if the radial head remains irreducible",
+      "Assess and document posterior interosseous nerve function, observing expectantly as most palsies are neurapraxias that recover spontaneously",
+      "Immobilisation followed by graded rehabilitation to restore elbow motion and forearm rotation",
+      "Follow-up radiographs to detect late radial head subluxation, malunion or nerve recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for monteggia fracture-dislocation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "monteggia-fracture-real-image",
-   "title": "Monteggia fracture-dislocation: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "monteggia_fracture-pathway",
+      "title": "Monteggia fracture-dislocation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A fracture of the proximal ulna combined with dislocation of the radial head",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Missed dislocation of the radial head",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anteroposterior and lateral radiographs of the elbow and the entire forearm, Confirmation that the radiocapitellar line intersects the capitellum on all views, Contralateral comparison radiographs, particularly in children"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In adults, open reduction and internal fixation of the proximal ulna restoring its anatomical length and bow, which usually reduces the dislocated radial head"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to check the radiocapitellar line and thereby missing the radial head dislocation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of monteggia fracture-dislocation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "monteggia_fracture-matrix",
+      "title": "Monteggia fracture-dislocation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A fracture of the proximal ulna combined with dislocation of the radial head",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anteroposterior and lateral radiographs of the elbow and the entire forearm, Confirmation that the radiocapitellar line",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated proximal ulna fracture, Isolated traumatic radial head dislocation, Radial head or neck fracture",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In adults, open reduction and internal fixation of the proximal ulna restoring its anatomical length and bow, which usually",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to check the radiocapitellar line and thereby missing the radial head dislocation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for monteggia fracture-dislocation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Green's Fractures in Adults",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "monteggia_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AP and lateral radiographs of elbow and entire forearm",
+          "cells": [
+            {
+              "text": "Proximal ulna fracture with radial head dislocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiocapitellar line on all views",
+          "cells": [
+            {
+              "text": "Must intersect the capitellum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral radiographs",
+          "cells": [
+            {
+              "text": "Comparison, particularly in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Complex or comminuted proximal ulna fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior interosseous nerve function",
+          "cells": [
+            {
+              "text": "Document before treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monteggia_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated proximal ulna fracture",
+          "cells": [
+            {
+              "text": "Radial head dislocation must still be checked via radiocapitellar line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated radial head dislocation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Both-bone forearm fracture",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monteggia_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Adult: ORIF of the proximal ulna",
+          "cells": [
+            {
+              "text": "Restore anatomical length and bow, which usually reduces the radial head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Child: closed reduction",
+          "cells": [
+            {
+              "text": "Restore ulnar alignment and confirm radiocapitellar reduction; surgery if unstable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm radial head reduction",
+          "cells": [
+            {
+              "text": "Radiocapitellar line during and after surgery; open reduction if irreducible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve assessment",
+          "cells": [
+            {
+              "text": "Most posterior interosseous palsies are neurapraxias and recover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immobilisation then rehabilitation",
+          "cells": [
+            {
+              "text": "Restore elbow motion and forearm rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up radiographs",
+          "cells": [
+            {
+              "text": "Late radial head subluxation, malunion, nerve recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "monteggia_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Monteggia fracture-dislocation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proximal ulna fracture after trauma, with suspected radial head dislocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Open fracture, compartment syndrome or posterior interosseous nerve palsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent debridement, fasciotomy or fixation; document nerve function",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Elbow and full forearm radiographs; check the radiocapitellar line on all views",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Radiocapitellar line broken, confirming radial head dislocation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for isolated ulna or radial head fracture; add contralateral views",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Adult: ORIF of proximal ulna restoring length and bow",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Child: closed reduction and alignment; surgery if unstable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Confirm radial head reduction on radiocapitellar line",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immobilise, then graded rehabilitation of elbow and rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good outcome if ulnar length restored; missed dislocation worsens it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -226,25 +226,494 @@
       "caption": "Diagnostic and clinical overview matrix for intracerebral hemorrhage."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "ich-real-image",
-      "title": "Intracerebral hemorrhage: Non-Contrast Head CT (Acute Intracranial Hemorrhage)",
-      "type": "ct",
-      "src": "/assets/kb-real-images/epidural-hematoma-ct.jpg?v=kbri3",
-      "caption": "Real non-contrast head computed tomography scan displaying hyperdense acute extravasated blood collection with mass effect.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Intracerebral Hemorrhage",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/stroke/intracerebral-hemorrhage",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ich-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing intracerebral haemorrhage and the ICH score",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Points or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Hyperdense Hematoma",
-          "description": "Dense attenuation (60-80 Hounsfield units) representing acute clotted blood."
+          "parameter": "Non-contrast CT head",
+          "cells": [
+            {
+              "text": "Acute blood"
+            },
+            {
+              "text": "{{hy:Imaging is the only way to separate from ischaemic stroke}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Perilesional Edema",
-          "description": "Hypodense rim of perihematomal vasogenic and cytotoxic edema."
+          "parameter": "CTA spot sign",
+          "cells": [
+            {
+              "text": "Contrast within the clot"
+            },
+            {
+              "text": "Ongoing bleeding, expansion, poor outcome"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Mass Effect",
-          "description": "Effacement of adjacent ipsilateral ventricles and subfalcine midline shift."
+          "parameter": "Bloods",
+          "cells": [
+            {
+              "text": "Glucose, CBC, platelets, PT, PTT, INR"
+            },
+            {
+              "text": "Find coagulopathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICH score: GCS",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "13 to 15 = 0; 5 to 12 = 1; 3 to 4 = 2"
+            },
+            {
+              "text": "Outcome stratification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICH score: volume",
+          "unit": "cc",
+          "cells": [
+            {
+              "text": ">=30 cc = 1 point",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "ICH score item"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICH score: intraventricular blood",
+          "cells": [
+            {
+              "text": "Present = 1 point"
+            },
+            {
+              "text": "ICH score item"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICH score: infratentorial origin",
+          "cells": [
+            {
+              "text": "Yes = 1 point"
+            },
+            {
+              "text": "ICH score item"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICH score: age",
+          "unit": "years",
+          "cells": [
+            {
+              "text": ">=80 = 1 point",
+              "op": ">=",
+              "value": 80
+            },
+            {
+              "text": "Total score 0 to 6"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematoma expansion",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About one-third expand within the first day"
+            },
+            {
+              "text": "Watch closely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiography (CTA, MRA, catheter)",
+          "cells": [
+            {
+              "text": "Young, non-hypertensive or lobar bleed"
+            },
+            {
+              "text": "Look for AVM, aneurysm, venous thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture",
+          "cells": [
+            {
+              "text": "Avoid in ICH"
+            },
+            {
+              "text": "Herniation risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ich-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic or cause intracerebral haemorrhage",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ischaemic stroke",
+          "cells": [
+            {
+              "text": "{{hy:Same deficits; CT shows no blood}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic haemorrhage",
+          "cells": [
+            {
+              "text": "Fall or injury; contusion, subdural or epidural"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral amyloid angiopathy",
+          "cells": [
+            {
+              "text": "Lobar bleed in the elderly; microbleeds on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding into a tumour",
+          "cells": [
+            {
+              "text": "Enhancing mass; known cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AVM or aneurysm",
+          "cells": [
+            {
+              "text": "Young patient; angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral venous thrombosis",
+          "cells": [
+            {
+              "text": "Venous infarct with haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sympathomimetic drug use",
+          "cells": [
+            {
+              "text": "Cocaine or amphetamine in under 45s"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhagic transformation of infarct",
+          "cells": [
+            {
+              "text": "Prior ischaemic stroke"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ich-treatment",
+      "kind": "treatment",
+      "title": "Acute management of intracerebral haemorrhage",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lower systolic BP to 140",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "SBP 150 to 220",
+              "range": [
+                150,
+                220
+              ]
+            },
+            {
+              "text": "{{hy:Avoid falls below about 130; sudden drop below 120 harms}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nicardipine infusion",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "SBP >220",
+              "op": ">",
+              "value": 220
+            },
+            {
+              "text": "Lower SBP by 10% to 15% with close monitoring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop antithrombotics and reverse",
+          "cells": [
+            {
+              "text": "Patient on anticoagulant or antiplatelet"
+            },
+            {
+              "text": "FFP, PCC, vitamin K or platelets as indicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Idarucizumab",
+          "cells": [
+            {
+              "text": "Dabigatran-associated ICH"
+            },
+            {
+              "text": "Specific antidote"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Andexanet alfa",
+          "cells": [
+            {
+              "text": "Apixaban- or rivaroxaban-associated ICH"
+            },
+            {
+              "text": "Specific antidote"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical evacuation",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Cerebellar haematoma >3 cm",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Often lifesaving; deep bleeds seldom operated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "External ventricular drain",
+          "cells": [
+            {
+              "text": "Hydrocephalus"
+            },
+            {
+              "text": "Rapidly lowers ICP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antiseizure drug",
+          "cells": [
+            {
+              "text": "Only after a seizure"
+            },
+            {
+              "text": "No routine prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Reversal agent doses are not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ich-dx-mgmt",
+      "title": "Diagnosis and management of intracerebral haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden focal deficit, headache, vomiting or reduced consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urgent non-contrast CT; glucose, platelets, INR, PTT",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Haemorrhage on CT?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Ischaemic stroke pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "On anticoagulant or coagulopathy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop drug; reverse with PCC, vitamin K or specific antidote",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lower SBP toward 140 mm Hg",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Cerebellar >3 cm, hydrocephalus or deterioration?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Neurosurgery: evacuation or ventricular drain",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Stroke unit care; CTA for cause if atypical",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
         }
       ]
     }

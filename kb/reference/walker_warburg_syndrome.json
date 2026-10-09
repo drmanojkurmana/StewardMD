@@ -1,178 +1,382 @@
 {
- "id": "walker_warburg_syndrome",
- "name": "Walker-Warburg syndrome",
- "aliases": [
-  "WWS",
-  "HARD syndrome (hydrocephalus, agyria, retinal dysplasia)",
-  "cobblestone lissencephaly (type II)",
-  "dystroglycanopathy",
-  "POMT1",
-  "POMT2",
-  "FKTN"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most severe congenital muscular dystrophy-dystroglycanopathy, defined by the triad of a brain malformation (cobblestone lissencephaly), eye anomalies, and congenital muscular dystrophy",
-   "Cobblestone (type II) lissencephaly results from over-migration of neurons beyond the pial surface, producing a bumpy, disorganised cortex distinct from classic lissencephaly",
-   "Neuroimaging typically shows cobblestone cortex, hydrocephalus, a kinked or hypoplastic brainstem (the Z-shaped brainstem), and cerebellar hypoplasia or cysts",
-   "Ocular malformations are prominent and may include microphthalmia, cataract, retinal dysplasia or detachment, persistent foetal vasculature, and anterior chamber anomalies",
-   "The congenital muscular dystrophy causes marked hypotonia and weakness from birth with a raised serum creatine kinase",
-   "It is autosomal recessive, caused by variants in genes for O-glycosylation of alpha-dystroglycan such as POMT1, POMT2, and FKTN, disrupting the dystroglycan-extracellular matrix link",
-   "Diagnosis integrates the characteristic MRI, ophthalmological findings, raised creatine kinase, and molecular testing of dystroglycanopathy genes"
+  "id": "walker_warburg_syndrome",
+  "name": "Walker-Warburg syndrome",
+  "aliases": [
+    "WWS",
+    "HARD syndrome (hydrocephalus, agyria, retinal dysplasia)",
+    "cobblestone lissencephaly (type II)",
+    "dystroglycanopathy",
+    "POMT1",
+    "POMT2",
+    "FKTN"
   ],
-  "pathophysiology": "Walker-Warburg syndrome is a dystroglycanopathy caused by biallelic variants in genes required for O-linked glycosylation of alpha-dystroglycan. Defective glycosylation prevents alpha-dystroglycan from binding extracellular matrix ligands such as laminin, disrupting the integrity of basement membranes. In the developing brain, breaches of the pial-glial limiting membrane allow neurons to over-migrate beyond the cortex, producing cobblestone lissencephaly, brainstem and cerebellar malformation, and hydrocephalus. The same defect impairs the muscle basement membrane, causing congenital muscular dystrophy, and disrupts ocular development, causing the retinal and anterior segment anomalies.",
-  "additionalDifferentials": [
-   "Muscle-eye-brain disease, a milder dystroglycanopathy on the same spectrum",
-   "Fukuyama congenital muscular dystrophy",
-   "Classic (type I) lissencephaly from LIS1 or DCX",
-   "Congenital hydrocephalus of other cause",
-   "Other congenital muscular dystrophies with brain involvement",
-   "Congenital infection causing brain and eye malformation"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI for cobblestone cortex, brainstem kinking, cerebellar anomaly, and hydrocephalus",
-   "Serum creatine kinase, which is characteristically elevated",
-   "Detailed ophthalmological examination for retinal dysplasia and anterior segment anomalies",
-   "Molecular genetic testing of dystroglycanopathy genes such as POMT1, POMT2, and FKTN",
-   "Muscle biopsy with alpha-dystroglycan glycosylation studies where genetics are inconclusive",
-   "Prenatal ultrasound and foetal MRI for hydrocephalus and brain malformation in at-risk pregnancies"
-  ],
-  "redFlags": [
-   "Progressive hydrocephalus requiring neurosurgical assessment",
-   "Severe respiratory and feeding difficulty from profound muscle weakness",
-   "Refractory seizures",
-   "Rapidly progressive visual loss from retinal detachment"
-  ],
-  "prognosis": "Walker-Warburg syndrome carries the worst prognosis of the dystroglycanopathies, with most affected children dying within the first years of life from neurological, respiratory, and feeding complications. Care is largely supportive alongside genetic counselling.",
-  "pitfalls": [
-   "Confusing cobblestone (type II) lissencephaly with classic (type I) lissencephaly, which has different genetics and no primary muscle or eye disease",
-   "Overlooking the raised creatine kinase and muscle involvement when focused on the brain malformation",
-   "Missing treatable ocular complications such as retinal detachment",
-   "Failing to place the child on the dystroglycanopathy spectrum, affecting prognosis and counselling"
-  ],
-  "references": [
-   "Volpe's Neurology of the Newborn",
-   "Nelson Textbook of Paediatrics",
-   "GeneReviews: Congenital Muscular Dystrophy Dystroglycanopathies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-modifying therapy and centre care on supportive and palliative management given the very poor prognosis",
-   "Treat hydrocephalus with ventriculoperitoneal shunting to relieve raised intracranial pressure",
-   "Support nutrition and airway protection with gastrostomy feeding for swallowing difficulty and recurrent aspiration",
-   "Control seizures with anticonvulsant therapy",
-   "Provide respiratory support and prompt treatment of intercurrent chest infections",
-   "Refer to ophthalmology for treatable ocular anomalies such as cataract and retinal detachment",
-   "Offer genetic counselling for autosomal recessive inheritance with prenatal diagnosis in at-risk pregnancies, and involve paediatric neurodisability and palliative care teams"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "walker_warburg_syndrome-pathway",
-   "title": "Walker-Warburg syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most severe congenital muscular dystrophy-dystroglycanopathy, defined by the triad of a brain malformation (cobblestone lissencephaly), eye anomalies, and congenital muscular dystrophy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive hydrocephalus requiring neurosurgical assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI for cobblestone cortex, brainstem kinking, cerebellar anomaly, and hydrocephalus, Serum creatine kinase, which is characteristically elevated, Detailed ophthalmological examination for retinal dysplasia and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-modifying therapy and centre care on supportive and palliative management given the very poor prognosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing cobblestone (type II) lissencephaly with classic (type I) lissencephaly, which has different genetics and no primary muscle or eye disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of walker-warburg syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "walker_warburg_syndrome-matrix",
-   "title": "Walker-Warburg syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most severe congenital muscular dystrophy-dystroglycanopathy, defined by the triad of a brain malformation (cobblestone",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most severe congenital muscular dystrophy-dystroglycanopathy, defined by the triad of a brain malformation (cobblestone lissencephaly), eye anomalies, and congenital muscular dystrophy",
+      "Cobblestone (type II) lissencephaly results from over-migration of neurons beyond the pial surface, producing a bumpy, disorganised cortex distinct from classic lissencephaly",
+      "Neuroimaging typically shows cobblestone cortex, hydrocephalus, a kinked or hypoplastic brainstem (the Z-shaped brainstem), and cerebellar hypoplasia or cysts",
+      "Ocular malformations are prominent and may include microphthalmia, cataract, retinal dysplasia or detachment, persistent foetal vasculature, and anterior chamber anomalies",
+      "The congenital muscular dystrophy causes marked hypotonia and weakness from birth with a raised serum creatine kinase",
+      "It is autosomal recessive, caused by variants in genes for O-glycosylation of alpha-dystroglycan such as POMT1, POMT2, and FKTN, disrupting the dystroglycan-extracellular matrix link",
+      "Diagnosis integrates the characteristic MRI, ophthalmological findings, raised creatine kinase, and molecular testing of dystroglycanopathy genes"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI for cobblestone cortex, brainstem kinking, cerebellar anomaly, and hydrocephalus, Serum creatine kinase, which is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Walker-Warburg syndrome is a dystroglycanopathy caused by biallelic variants in genes required for O-linked glycosylation of alpha-dystroglycan. Defective glycosylation prevents alpha-dystroglycan from binding extracellular matrix ligands such as laminin, disrupting the integrity of basement membranes. In the developing brain, breaches of the pial-glial limiting membrane allow neurons to over-migrate beyond the cortex, producing cobblestone lissencephaly, brainstem and cerebellar malformation, and hydrocephalus. The same defect impairs the muscle basement membrane, causing congenital muscular dystrophy, and disrupts ocular development, causing the retinal and anterior segment anomalies.",
+    "additionalDifferentials": [
+      "Muscle-eye-brain disease, a milder dystroglycanopathy on the same spectrum",
+      "Fukuyama congenital muscular dystrophy",
+      "Classic (type I) lissencephaly from LIS1 or DCX",
+      "Congenital hydrocephalus of other cause",
+      "Other congenital muscular dystrophies with brain involvement",
+      "Congenital infection causing brain and eye malformation"
     ],
-    [
-     "Primary Differentials",
-     "Muscle-eye-brain disease, a milder dystroglycanopathy on the same spectrum, Fukuyama congenital muscular dystrophy, Classic (type",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI for cobblestone cortex, brainstem kinking, cerebellar anomaly, and hydrocephalus",
+      "Serum creatine kinase, which is characteristically elevated",
+      "Detailed ophthalmological examination for retinal dysplasia and anterior segment anomalies",
+      "Molecular genetic testing of dystroglycanopathy genes such as POMT1, POMT2, and FKTN",
+      "Muscle biopsy with alpha-dystroglycan glycosylation studies where genetics are inconclusive",
+      "Prenatal ultrasound and foetal MRI for hydrocephalus and brain malformation in at-risk pregnancies"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-modifying therapy and centre care on supportive and palliative management given the very poor",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive hydrocephalus requiring neurosurgical assessment",
+      "Severe respiratory and feeding difficulty from profound muscle weakness",
+      "Refractory seizures",
+      "Rapidly progressive visual loss from retinal detachment"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing cobblestone (type II) lissencephaly with classic (type I) lissencephaly, which has different genetics and no primary",
-     "Prevent diagnostic or management error"
+    "prognosis": "Walker-Warburg syndrome carries the worst prognosis of the dystroglycanopathies, with most affected children dying within the first years of life from neurological, respiratory, and feeding complications. Care is largely supportive alongside genetic counselling.",
+    "pitfalls": [
+      "Confusing cobblestone (type II) lissencephaly with classic (type I) lissencephaly, which has different genetics and no primary muscle or eye disease",
+      "Overlooking the raised creatine kinase and muscle involvement when focused on the brain malformation",
+      "Missing treatable ocular complications such as retinal detachment",
+      "Failing to place the child on the dystroglycanopathy spectrum, affecting prognosis and counselling"
+    ],
+    "references": [
+      "Volpe's Neurology of the Newborn",
+      "Nelson Textbook of Paediatrics",
+      "GeneReviews: Congenital Muscular Dystrophy Dystroglycanopathies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-modifying therapy and centre care on supportive and palliative management given the very poor prognosis",
+      "Treat hydrocephalus with ventriculoperitoneal shunting to relieve raised intracranial pressure",
+      "Support nutrition and airway protection with gastrostomy feeding for swallowing difficulty and recurrent aspiration",
+      "Control seizures with anticonvulsant therapy",
+      "Provide respiratory support and prompt treatment of intercurrent chest infections",
+      "Refer to ophthalmology for treatable ocular anomalies such as cataract and retinal detachment",
+      "Offer genetic counselling for autosomal recessive inheritance with prenatal diagnosis in at-risk pregnancies, and involve paediatric neurodisability and palliative care teams"
     ]
-   ],
-   "caption": "Overview comparison matrix for walker-warburg syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "walker-warburg-syndrome-real-image",
-   "title": "Walker-Warburg syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "walker_warburg_syndrome-pathway",
+      "title": "Walker-Warburg syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most severe congenital muscular dystrophy-dystroglycanopathy, defined by the triad of a brain malformation (cobblestone lissencephaly), eye anomalies, and congenital muscular dystrophy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive hydrocephalus requiring neurosurgical assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI for cobblestone cortex, brainstem kinking, cerebellar anomaly, and hydrocephalus, Serum creatine kinase, which is characteristically elevated, Detailed ophthalmological examination for retinal dysplasia and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-modifying therapy and centre care on supportive and palliative management given the very poor prognosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing cobblestone (type II) lissencephaly with classic (type I) lissencephaly, which has different genetics and no primary muscle or eye disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of walker-warburg syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "walker_warburg_syndrome-matrix",
+      "title": "Walker-Warburg syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most severe congenital muscular dystrophy-dystroglycanopathy, defined by the triad of a brain malformation (cobblestone",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI for cobblestone cortex, brainstem kinking, cerebellar anomaly, and hydrocephalus, Serum creatine kinase, which is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Muscle-eye-brain disease, a milder dystroglycanopathy on the same spectrum, Fukuyama congenital muscular dystrophy, Classic (type",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-modifying therapy and centre care on supportive and palliative management given the very poor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing cobblestone (type II) lissencephaly with classic (type I) lissencephaly, which has different genetics and no primary",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for walker-warburg syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "walker_warburg_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cobblestone cortex, brainstem kinking, cerebellar anomaly and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Characteristically raised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "walker_warburg_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Muscle-eye-brain disease",
+          "cells": [
+            {
+              "text": "Milder dystroglycanopathy on the same spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fukuyama congenital muscular dystrophy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic (type I) lissencephaly",
+          "cells": [
+            {
+              "text": "Different genetic cause from cobblestone (type II) lissencephaly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "walker_warburg_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; very poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrocephalus treatment",
+          "cells": [
+            {
+              "text": "Neurosurgical assessment for progressive hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "walker_warburg_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Walker-Warburg syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Walker-Warburg syndrome: brain malformation with eye and muscle features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive hydrocephalus or respiratory and feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical assessment for progressive hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI for cobblestone cortex, creatine kinase, eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show cobblestone lissencephaly with eye abnormalities?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider muscle-eye-brain disease or Fukuyama dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive and palliative care; no disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neurosurgical treatment of hydrocephalus as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding and respiratory support for profound weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Very poor prognosis given the most severe dystroglycanopathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

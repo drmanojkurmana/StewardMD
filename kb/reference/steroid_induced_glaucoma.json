@@ -1,177 +1,464 @@
 {
- "id": "steroid_induced_glaucoma",
- "name": "steroid induced glaucoma",
- "aliases": [
-  "corticosteroid-induced glaucoma",
-  "steroid responder glaucoma"
- ],
- "class": "non_infective",
- "system": "ophthalmology",
- "specialty": "ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Any route of corticosteroid delivery can raise intraocular pressure, including topical eye drops, periocular and intravitreal injections, inhaled, nasal, dermatological and systemic preparations.",
-   "The angle is open and the clinical picture otherwise resembles primary open-angle glaucoma, so a medication history is essential.",
-   "Response usually develops within weeks of starting topical steroid, but potent intravitreal depots can cause a delayed and prolonged rise.",
-   "Around a third of the general population are moderate responders and a smaller proportion are high responders; primary open-angle glaucoma patients and their relatives respond more frequently and more strongly.",
-   "Children, particularly young ones, can respond rapidly and severely, sometimes within days.",
-   "Drop potency matters: more potent molecules cause larger rises, whereas weaker or ester-based steroids and some newer agents carry a lower risk.",
-   "The mainstay of management is stopping or reducing the steroid, or switching to a lower-potency agent, alongside pressure-lowering therapy.",
-   "Pressure usually normalises after topical steroid withdrawal, but an intravitreal depot may require surgical removal or filtration surgery if the effect persists."
+  "id": "steroid_induced_glaucoma",
+  "name": "steroid induced glaucoma",
+  "aliases": [
+    "corticosteroid-induced glaucoma",
+    "steroid responder glaucoma"
   ],
-  "pathophysiology": "Corticosteroids reduce aqueous outflow facility at the trabecular meshwork through several interacting mechanisms. They promote accumulation of extracellular matrix material, including glycosaminoglycans, fibronectin and cross-linked actin networks, within the juxtacanalicular meshwork, and they suppress the normal turnover of this matrix by reducing phagocytic activity and matrix metalloproteinase expression in trabecular cells. Changes in trabecular cell cytoskeleton and gene expression, including induction of myocilin, further stiffen the outflow pathway. The net effect is increased resistance to aqueous drainage through an anatomically open angle, raising intraocular pressure. Susceptibility is partly genetically determined, which parallels the shared predisposition seen in primary open-angle glaucoma.",
-  "additionalDifferentials": [
-   "primary open-angle glaucoma",
-   "uveitic glaucoma where the underlying inflammation also raises pressure",
-   "pigmentary glaucoma",
-   "pseudoexfoliation glaucoma",
-   "normal-tension glaucoma with incidental steroid use",
-   "traumatic or angle-recession glaucoma",
-   "ocular hypertension unrelated to steroids"
-  ],
-  "additionalInvestigations": [
-   "detailed corticosteroid exposure history across all routes",
-   "gonioscopy confirming an open angle",
-   "intraocular pressure measurement and comparison with pre-treatment baseline",
-   "optical coherence tomography of the retinal nerve fibre layer and ganglion cell complex",
-   "standard automated perimetry",
-   "optic disc examination and photography",
-   "review for a periocular or intravitreal steroid depot on examination or imaging"
-  ],
-  "redFlags": [
-   "markedly raised pressure in a child on corticosteroids",
-   "persistent high pressure after an intravitreal steroid depot",
-   "glaucomatous optic nerve damage discovered at first presentation",
-   "very high pressures threatening rapid field loss in a known high responder"
-  ],
-  "prognosis": "When recognised early and the steroid is withdrawn, intraocular pressure usually returns to normal without lasting damage; prolonged unrecognised elevation, or an inescapable long-acting depot, can produce permanent glaucomatous optic neuropathy.",
-  "pitfalls": [
-   "Failing to ask about non-ophthalmic steroids such as inhalers, nasal sprays and skin creams.",
-   "Continuing potent topical steroid for chronic conditions without monitoring pressure.",
-   "Assuming pressure will fall quickly after an intravitreal depot when the effect can persist for months.",
-   "Overlooking the heightened and rapid susceptibility of children.",
-   "Attributing the raised pressure solely to steroids in a uveitic eye where inflammation also contributes."
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Glaucoma",
-   "European Glaucoma Society Terminology and Guidelines for Glaucoma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Withdraw or reduce the offending corticosteroid, or switch to the least potent effective preparation such as loteprednol or fluorometholone",
-   "Where steroid is unavoidable, lower intraocular pressure with topical agents: prostaglandin analogues, beta-blockers, alpha-agonists and carbonic anhydrase inhibitors",
-   "Surgical removal of an intravitreal steroid depot when pressure remains uncontrolled",
-   "Laser trabeculoplasty or filtration/drainage surgery for refractory pressure elevation",
-   "Monitor intraocular pressure, optic disc, OCT nerve-fibre layer and visual fields for glaucomatous progression",
-   "Identify steroid responders and check baseline and serial pressures whenever corticosteroids of any route are prescribed",
-   "Educate the patient and prescribers to avoid inadvertent continued steroid exposure across all delivery routes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "steroid_induced_glaucoma-pathway",
-   "title": "steroid induced glaucoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Any route of corticosteroid delivery can raise intraocular pressure, including topical eye drops, periocular and intravitreal injections, inhaled, nasal, dermatological and systemic preparations.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: markedly raised pressure in a child on corticosteroids",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: detailed corticosteroid exposure history across all routes, gonioscopy confirming an open angle, intraocular pressure measurement and comparison with pre-treatment baseline"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Withdraw or reduce the offending corticosteroid, or switch to the least potent effective preparation such as loteprednol or fluorometholone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to ask about non-ophthalmic steroids such as inhalers, nasal sprays and skin creams."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of steroid induced glaucoma."
-  }
- ],
- "tables": [
-  {
-   "id": "steroid_induced_glaucoma-matrix",
-   "title": "steroid induced glaucoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Any route of corticosteroid delivery can raise intraocular pressure, including topical eye drops, periocular and intravitreal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ophthalmology",
+  "specialty": "ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Any route of corticosteroid delivery can raise intraocular pressure, including topical eye drops, periocular and intravitreal injections, inhaled, nasal, dermatological and systemic preparations.",
+      "The angle is open and the clinical picture otherwise resembles primary open-angle glaucoma, so a medication history is essential.",
+      "Response usually develops within weeks of starting topical steroid, but potent intravitreal depots can cause a delayed and prolonged rise.",
+      "Around a third of the general population are moderate responders and a smaller proportion are high responders; primary open-angle glaucoma patients and their relatives respond more frequently and more strongly.",
+      "Children, particularly young ones, can respond rapidly and severely, sometimes within days.",
+      "Drop potency matters: more potent molecules cause larger rises, whereas weaker or ester-based steroids and some newer agents carry a lower risk.",
+      "The mainstay of management is stopping or reducing the steroid, or switching to a lower-potency agent, alongside pressure-lowering therapy.",
+      "Pressure usually normalises after topical steroid withdrawal, but an intravitreal depot may require surgical removal or filtration surgery if the effect persists."
     ],
-    [
-     "Key Investigations",
-     "detailed corticosteroid exposure history across all routes, gonioscopy confirming an open angle, intraocular pressure measurement",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Corticosteroids reduce aqueous outflow facility at the trabecular meshwork through several interacting mechanisms. They promote accumulation of extracellular matrix material, including glycosaminoglycans, fibronectin and cross-linked actin networks, within the juxtacanalicular meshwork, and they suppress the normal turnover of this matrix by reducing phagocytic activity and matrix metalloproteinase expression in trabecular cells. Changes in trabecular cell cytoskeleton and gene expression, including induction of myocilin, further stiffen the outflow pathway. The net effect is increased resistance to aqueous drainage through an anatomically open angle, raising intraocular pressure. Susceptibility is partly genetically determined, which parallels the shared predisposition seen in primary open-angle glaucoma.",
+    "additionalDifferentials": [
+      "primary open-angle glaucoma",
+      "uveitic glaucoma where the underlying inflammation also raises pressure",
+      "pigmentary glaucoma",
+      "pseudoexfoliation glaucoma",
+      "normal-tension glaucoma with incidental steroid use",
+      "traumatic or angle-recession glaucoma",
+      "ocular hypertension unrelated to steroids"
     ],
-    [
-     "Primary Differentials",
-     "primary open-angle glaucoma, uveitic glaucoma where the underlying inflammation also raises pressure, pigmentary glaucoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "detailed corticosteroid exposure history across all routes",
+      "gonioscopy confirming an open angle",
+      "intraocular pressure measurement and comparison with pre-treatment baseline",
+      "optical coherence tomography of the retinal nerve fibre layer and ganglion cell complex",
+      "standard automated perimetry",
+      "optic disc examination and photography",
+      "review for a periocular or intravitreal steroid depot on examination or imaging"
     ],
-    [
-     "Management Strategy",
-     "Withdraw or reduce the offending corticosteroid, or switch to the least potent effective preparation such as loteprednol or",
-     "Core treatment modality"
+    "redFlags": [
+      "markedly raised pressure in a child on corticosteroids",
+      "persistent high pressure after an intravitreal steroid depot",
+      "glaucomatous optic nerve damage discovered at first presentation",
+      "very high pressures threatening rapid field loss in a known high responder"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to ask about non-ophthalmic steroids such as inhalers, nasal sprays and skin creams.",
-     "Prevent diagnostic or management error"
+    "prognosis": "When recognised early and the steroid is withdrawn, intraocular pressure usually returns to normal without lasting damage; prolonged unrecognised elevation, or an inescapable long-acting depot, can produce permanent glaucomatous optic neuropathy.",
+    "pitfalls": [
+      "Failing to ask about non-ophthalmic steroids such as inhalers, nasal sprays and skin creams.",
+      "Continuing potent topical steroid for chronic conditions without monitoring pressure.",
+      "Assuming pressure will fall quickly after an intravitreal depot when the effect can persist for months.",
+      "Overlooking the heightened and rapid susceptibility of children.",
+      "Attributing the raised pressure solely to steroids in a uveitic eye where inflammation also contributes."
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Glaucoma",
+      "European Glaucoma Society Terminology and Guidelines for Glaucoma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Withdraw or reduce the offending corticosteroid, or switch to the least potent effective preparation such as loteprednol or fluorometholone",
+      "Where steroid is unavoidable, lower intraocular pressure with topical agents: prostaglandin analogues, beta-blockers, alpha-agonists and carbonic anhydrase inhibitors",
+      "Surgical removal of an intravitreal steroid depot when pressure remains uncontrolled",
+      "Laser trabeculoplasty or filtration/drainage surgery for refractory pressure elevation",
+      "Monitor intraocular pressure, optic disc, OCT nerve-fibre layer and visual fields for glaucomatous progression",
+      "Identify steroid responders and check baseline and serial pressures whenever corticosteroids of any route are prescribed",
+      "Educate the patient and prescribers to avoid inadvertent continued steroid exposure across all delivery routes"
     ]
-   ],
-   "caption": "Overview comparison matrix for steroid induced glaucoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "steroid-induced-glaucoma-real-image",
-   "title": "steroid induced glaucoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "steroid_induced_glaucoma-pathway",
+      "title": "steroid induced glaucoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Any route of corticosteroid delivery can raise intraocular pressure, including topical eye drops, periocular and intravitreal injections, inhaled, nasal, dermatological and systemic preparations.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: markedly raised pressure in a child on corticosteroids",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: detailed corticosteroid exposure history across all routes, gonioscopy confirming an open angle, intraocular pressure measurement and comparison with pre-treatment baseline"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Withdraw or reduce the offending corticosteroid, or switch to the least potent effective preparation such as loteprednol or fluorometholone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to ask about non-ophthalmic steroids such as inhalers, nasal sprays and skin creams."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of steroid induced glaucoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "steroid_induced_glaucoma-matrix",
+      "title": "steroid induced glaucoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Any route of corticosteroid delivery can raise intraocular pressure, including topical eye drops, periocular and intravitreal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "detailed corticosteroid exposure history across all routes, gonioscopy confirming an open angle, intraocular pressure measurement",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "primary open-angle glaucoma, uveitic glaucoma where the underlying inflammation also raises pressure, pigmentary glaucoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Withdraw or reduce the offending corticosteroid, or switch to the least potent effective preparation such as loteprednol or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to ask about non-ophthalmic steroids such as inhalers, nasal sprays and skin creams.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for steroid induced glaucoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "steroid_induced_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroid exposure history",
+          "cells": [
+            {
+              "text": "All routes, including inhaled, nasal and topical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Confirms an open angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Compared with pre-treatment baseline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer",
+          "cells": [
+            {
+              "text": "Glaucomatous damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard automated perimetry",
+          "cells": [
+            {
+              "text": "Visual field loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc examination and photography",
+          "cells": [
+            {
+              "text": "Cupping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Search for a periocular or intravitreal depot",
+          "cells": [
+            {
+              "text": "Depot as a source of steroid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "steroid_induced_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary open-angle glaucoma",
+          "cells": [
+            {
+              "text": "Same open-angle appearance; the steroid history distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uveitic glaucoma",
+          "cells": [
+            {
+              "text": "Inflammation also raises pressure, confounding the steroid effect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "steroid_induced_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw or reduce the steroid",
+          "cells": [
+            {
+              "text": "Or switch to the least potent agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical intraocular pressure-lowering drugs",
+          "cells": [
+            {
+              "text": "Where steroid is unavoidable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical removal of an intravitreal depot",
+          "cells": [
+            {
+              "text": "If pressure stays uncontrolled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser trabeculoplasty or filtration surgery",
+          "cells": [
+            {
+              "text": "Refractory pressure elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Pressure, optic disc, OCT nerve fibre layer and visual fields"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identify steroid responders",
+          "cells": [
+            {
+              "text": "Baseline and serial pressures whenever corticosteroids are given"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "steroid_induced_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of steroid induced glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised pressure with open angle after steroid use: suspected steroid glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (very high pressure, child on steroids, persistent high pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pressure lowering for very high pressure or rapid field loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full steroid history across all routes; gonioscopy; pressure; OCT; fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is raised pressure with an open angle and steroid exposure confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary open-angle or uveitic glaucoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw or reduce the steroid, or switch to the least potent agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical pressure-lowering drugs where steroid is unavoidable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical removal of an intravitreal depot if pressure stays high",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laser trabeculoplasty or filtration surgery for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pressure usually normalises after withdrawal; intravitreal depots take longer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

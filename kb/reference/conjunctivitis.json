@@ -1,173 +1,451 @@
 {
- "id": "conjunctivitis",
- "name": "Conjunctivitis",
- "aliases": [
-  "pink eye",
-  "red eye",
-  "bacterial conjunctivitis",
-  "viral conjunctivitis",
-  "allergic conjunctivitis"
- ],
- "class": "infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with a red, gritty, or irritable eye with discharge, but crucially with normal vision, a clear cornea, normal pupil, and no significant pain — features that distinguish it from serious causes of the red eye",
-   "Bacterial conjunctivitis produces purulent, sticky discharge with lids stuck together in the morning; it is usually self-limiting",
-   "Viral (often adenoviral) conjunctivitis gives watery discharge, follicles, a preauricular node, and is highly contagious, frequently following an upper respiratory infection",
-   "Allergic conjunctivitis is bilateral and itchy with watery discharge, chemosis, and papillae, often with a personal history of atopy",
-   "Redness is diffuse and superficial, sparing the circumcorneal zone seen in keratitis and uveitis",
-   "Most cases are managed supportively with hygiene measures; topical antibiotics are used for bacterial cases and antihistamine/mast-cell stabiliser drops for allergic disease",
-   "Hyperacute, profuse purulent discharge suggests gonococcal infection and is an emergency because it can rapidly perforate the cornea"
+  "id": "conjunctivitis",
+  "name": "Conjunctivitis",
+  "aliases": [
+    "pink eye",
+    "red eye",
+    "bacterial conjunctivitis",
+    "viral conjunctivitis",
+    "allergic conjunctivitis"
   ],
-  "pathophysiology": "Conjunctivitis is inflammation of the conjunctiva, the mucous membrane lining the eyelids and covering the sclera. It arises from infection (bacterial or viral), allergy, or irritation. Inflammatory mediators dilate conjunctival vessels (causing redness) and increase vascular permeability (causing chemosis and discharge), while the cellular response produces follicles in viral and chlamydial disease or papillae in bacterial and allergic disease. Because the process is confined to the conjunctiva and spares the cornea, anterior chamber, and intraocular structures, vision and pupil responses remain normal in uncomplicated cases.",
-  "additionalDifferentials": [
-   "Acute anterior uveitis",
-   "Acute angle-closure glaucoma",
-   "Bacterial keratitis or corneal ulcer",
-   "Scleritis and episcleritis",
-   "Subconjunctival haemorrhage",
-   "Dry eye and blepharitis"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination assessing discharge type, follicles/papillae, and preauricular nodes",
-   "Visual acuity and fluorescein staining to exclude corneal involvement",
-   "Conjunctival swabs for culture in severe, hyperacute, neonatal, or non-resolving cases",
-   "Testing for chlamydia and gonorrhoea in suspected sexually transmitted or neonatal conjunctivitis",
-   "Slit-lamp examination to exclude keratitis, uveitis, and angle closure"
-  ],
-  "redFlags": [
-   "Reduced vision, significant pain, or photophobia — points away from simple conjunctivitis to a sight-threatening cause",
-   "Circumcorneal injection, a hazy cornea, or an abnormal pupil suggesting keratitis, uveitis, or angle closure",
-   "Hyperacute profuse purulent discharge (possible gonococcal infection) risking rapid corneal perforation",
-   "Neonatal conjunctivitis (ophthalmia neonatorum), which requires urgent evaluation for chlamydia and gonococcus"
-  ],
-  "prognosis": "Most bacterial, viral, and allergic conjunctivitis is self-limiting or responds readily to treatment with an excellent visual prognosis; serious outcomes occur mainly with gonococcal, chlamydial, or misdiagnosed sight-threatening mimics.",
-  "pitfalls": [
-   "Labelling any red eye as conjunctivitis and missing keratitis, uveitis, or angle-closure glaucoma",
-   "Prescribing topical steroids inappropriately and worsening an undiagnosed herpetic keratitis",
-   "Overlooking contact lens wear, which raises the risk of sight-threatening keratitis",
-   "Failing to recognise hyperacute gonococcal or neonatal conjunctivitis as emergencies"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage most cases supportively with lid hygiene, cold compresses, ocular lubricants and measures to limit contagious spread",
-   "Treat bacterial conjunctivitis with a topical antibiotic such as chloramphenicol or fusidic acid, recognising that most cases are self-limiting",
-   "Treat allergic conjunctivitis with topical antihistamine and mast-cell-stabiliser drops alongside allergen avoidance",
-   "Treat gonococcal or chlamydial conjunctivitis, including ophthalmia neonatorum, with systemic antibiotics and urgent specialist involvement",
-   "Reassess and refer urgently if there is reduced vision, significant pain, photophobia or corneal involvement suggesting a sight-threatening alternative diagnosis",
-   "Advise on hygiene and infection-control measures to reduce transmission of the highly contagious viral form"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "conjunctivitis-pathway",
-   "title": "Conjunctivitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with a red, gritty, or irritable eye with discharge, but crucially with normal vision, a clear cornea, normal pupil, and no significant pain - features that distinguish it from serious causes of the red eye",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Reduced vision, significant pain, or photophobia - points away from simple conjunctivitis to a sight-threatening cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination assessing discharge type, follicles/papillae, and preauricular nodes, Visual acuity and fluorescein staining to exclude corneal involvement, Conjunctival swabs for culture in severe, hyperacute,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage most cases supportively with lid hygiene, cold compresses, ocular lubricants and measures to limit contagious spread"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling any red eye as conjunctivitis and missing keratitis, uveitis, or angle-closure glaucoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of conjunctivitis."
-  }
- ],
- "tables": [
-  {
-   "id": "conjunctivitis-matrix",
-   "title": "Conjunctivitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with a red, gritty, or irritable eye with discharge, but crucially with normal vision, a clear cornea, normal pupil, and",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with a red, gritty, or irritable eye with discharge, but crucially with normal vision, a clear cornea, normal pupil, and no significant pain — features that distinguish it from serious causes of the red eye",
+      "Bacterial conjunctivitis produces purulent, sticky discharge with lids stuck together in the morning; it is usually self-limiting",
+      "Viral (often adenoviral) conjunctivitis gives watery discharge, follicles, a preauricular node, and is highly contagious, frequently following an upper respiratory infection",
+      "Allergic conjunctivitis is bilateral and itchy with watery discharge, chemosis, and papillae, often with a personal history of atopy",
+      "Redness is diffuse and superficial, sparing the circumcorneal zone seen in keratitis and uveitis",
+      "Most cases are managed supportively with hygiene measures; topical antibiotics are used for bacterial cases and antihistamine/mast-cell stabiliser drops for allergic disease",
+      "Hyperacute, profuse purulent discharge suggests gonococcal infection and is an emergency because it can rapidly perforate the cornea"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination assessing discharge type, follicles/papillae, and preauricular nodes, Visual acuity and fluorescein staining",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Conjunctivitis is inflammation of the conjunctiva, the mucous membrane lining the eyelids and covering the sclera. It arises from infection (bacterial or viral), allergy, or irritation. Inflammatory mediators dilate conjunctival vessels (causing redness) and increase vascular permeability (causing chemosis and discharge), while the cellular response produces follicles in viral and chlamydial disease or papillae in bacterial and allergic disease. Because the process is confined to the conjunctiva and spares the cornea, anterior chamber, and intraocular structures, vision and pupil responses remain normal in uncomplicated cases.",
+    "additionalDifferentials": [
+      "Acute anterior uveitis",
+      "Acute angle-closure glaucoma",
+      "Bacterial keratitis or corneal ulcer",
+      "Scleritis and episcleritis",
+      "Subconjunctival haemorrhage",
+      "Dry eye and blepharitis"
     ],
-    [
-     "Primary Differentials",
-     "Acute anterior uveitis, Acute angle-closure glaucoma, Bacterial keratitis or corneal ulcer",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination assessing discharge type, follicles/papillae, and preauricular nodes",
+      "Visual acuity and fluorescein staining to exclude corneal involvement",
+      "Conjunctival swabs for culture in severe, hyperacute, neonatal, or non-resolving cases",
+      "Testing for chlamydia and gonorrhoea in suspected sexually transmitted or neonatal conjunctivitis",
+      "Slit-lamp examination to exclude keratitis, uveitis, and angle closure"
     ],
-    [
-     "Management Strategy",
-     "Manage most cases supportively with lid hygiene, cold compresses, ocular lubricants and measures to limit contagious spread",
-     "Core treatment modality"
+    "redFlags": [
+      "Reduced vision, significant pain, or photophobia — points away from simple conjunctivitis to a sight-threatening cause",
+      "Circumcorneal injection, a hazy cornea, or an abnormal pupil suggesting keratitis, uveitis, or angle closure",
+      "Hyperacute profuse purulent discharge (possible gonococcal infection) risking rapid corneal perforation",
+      "Neonatal conjunctivitis (ophthalmia neonatorum), which requires urgent evaluation for chlamydia and gonococcus"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling any red eye as conjunctivitis and missing keratitis, uveitis, or angle-closure glaucoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most bacterial, viral, and allergic conjunctivitis is self-limiting or responds readily to treatment with an excellent visual prognosis; serious outcomes occur mainly with gonococcal, chlamydial, or misdiagnosed sight-threatening mimics.",
+    "pitfalls": [
+      "Labelling any red eye as conjunctivitis and missing keratitis, uveitis, or angle-closure glaucoma",
+      "Prescribing topical steroids inappropriately and worsening an undiagnosed herpetic keratitis",
+      "Overlooking contact lens wear, which raises the risk of sight-threatening keratitis",
+      "Failing to recognise hyperacute gonococcal or neonatal conjunctivitis as emergencies"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage most cases supportively with lid hygiene, cold compresses, ocular lubricants and measures to limit contagious spread",
+      "Treat bacterial conjunctivitis with a topical antibiotic such as chloramphenicol or fusidic acid, recognising that most cases are self-limiting",
+      "Treat allergic conjunctivitis with topical antihistamine and mast-cell-stabiliser drops alongside allergen avoidance",
+      "Treat gonococcal or chlamydial conjunctivitis, including ophthalmia neonatorum, with systemic antibiotics and urgent specialist involvement",
+      "Reassess and refer urgently if there is reduced vision, significant pain, photophobia or corneal involvement suggesting a sight-threatening alternative diagnosis",
+      "Advise on hygiene and infection-control measures to reduce transmission of the highly contagious viral form"
     ]
-   ],
-   "caption": "Overview comparison matrix for conjunctivitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "conjunctivitis-real-image",
-   "title": "Conjunctivitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "conjunctivitis-pathway",
+      "title": "Conjunctivitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with a red, gritty, or irritable eye with discharge, but crucially with normal vision, a clear cornea, normal pupil, and no significant pain - features that distinguish it from serious causes of the red eye",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Reduced vision, significant pain, or photophobia - points away from simple conjunctivitis to a sight-threatening cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination assessing discharge type, follicles/papillae, and preauricular nodes, Visual acuity and fluorescein staining to exclude corneal involvement, Conjunctival swabs for culture in severe, hyperacute,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage most cases supportively with lid hygiene, cold compresses, ocular lubricants and measures to limit contagious spread"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling any red eye as conjunctivitis and missing keratitis, uveitis, or angle-closure glaucoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of conjunctivitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "conjunctivitis-matrix",
+      "title": "Conjunctivitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with a red, gritty, or irritable eye with discharge, but crucially with normal vision, a clear cornea, normal pupil, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination assessing discharge type, follicles/papillae, and preauricular nodes, Visual acuity and fluorescein staining",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute anterior uveitis, Acute angle-closure glaucoma, Bacterial keratitis or corneal ulcer",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage most cases supportively with lid hygiene, cold compresses, ocular lubricants and measures to limit contagious spread",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling any red eye as conjunctivitis and missing keratitis, uveitis, or angle-closure glaucoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for conjunctivitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "conjunctivitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of discharge, follicles and preauricular nodes",
+          "cells": [
+            {
+              "text": "Discharge type characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein staining and visual acuity",
+          "cells": [
+            {
+              "text": "Corneal involvement excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conjunctival culture",
+          "cells": [
+            {
+              "text": "Severe, hyperacute, neonatal or non-resolving cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chlamydia and gonorrhoea testing",
+          "cells": [
+            {
+              "text": "Sexually transmitted or neonatal conjunctivitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Keratitis, uveitis and angle closure excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conjunctivitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "Sight-threatening; red eye with reduced vision or photophobia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute angle-closure glaucoma",
+          "cells": [
+            {
+              "text": "Abnormal pupil; hazy cornea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial keratitis or corneal ulcer",
+          "cells": [
+            {
+              "text": "Circumcorneal injection with hazy cornea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conjunctivitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Lid hygiene, cold compresses, ocular lubricants and infection control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antibiotic",
+          "cells": [
+            {
+              "text": "Chloramphenicol or fusidic acid for bacterial conjunctivitis; most are self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic conjunctivitis",
+          "cells": [
+            {
+              "text": "Topical antihistamine and mast-cell stabiliser with allergen avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonococcal or chlamydial disease",
+          "cells": [
+            {
+              "text": "Systemic antibiotics and urgent specialist involvement, including ophthalmia neonatorum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral",
+          "cells": [
+            {
+              "text": "Reduced vision, pain, photophobia or corneal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hygiene advice",
+          "cells": [
+            {
+              "text": "Reduce transmission of the contagious viral form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "conjunctivitis-dx-mgmt",
+      "title": "Diagnosis and management of Conjunctivitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected conjunctivitis: red eye with discharge and no visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (reduced vision, pain, photophobia, hazy cornea, neonate)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent eye review: exclude keratitis, uveitis or angle closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Discharge and follicle examination; fluorescein; culture or STI testing if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is corneal involvement excluded on fluorescein and slit-lamp examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider allergic, viral or bacterial conjunctivitis with supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lid hygiene, cold compresses and lubricants for most cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical chloramphenicol or fusidic acid for bacterial conjunctivitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antihistamine and mast-cell stabiliser for allergic conjunctivitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic antibiotics and specialist review for gonococcal or neonatal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most cases self-limit or respond to treatment with an excellent visual prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

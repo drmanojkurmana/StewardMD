@@ -1,169 +1,440 @@
 {
- "id": "cast_nephropathy",
- "name": "Cast nephropathy",
- "aliases": [
-  "myeloma kidney",
-  "myeloma cast nephropathy"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology / Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Nephrology and haematology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest cause of acute kidney injury in multiple myeloma, from precipitation of monoclonal free light chains in the tubules",
-   "It presents as acute or subacute kidney injury, often precipitated by dehydration, hypercalcaemia, infection or nephrotoxins",
-   "The urine dipstick is typically negative for protein because it detects albumin, not the light chains",
-   "Serum free light chain assay and serum/urine electrophoresis are key to diagnosis",
-   "Precipitating factors such as hypercalcaemia and nephrotoxic drugs should be corrected urgently",
-   "Rapid reduction of the offending light chains with anti-myeloma therapy offers the best chance of renal recovery"
+  "id": "cast_nephropathy",
+  "name": "Cast nephropathy",
+  "aliases": [
+    "myeloma kidney",
+    "myeloma cast nephropathy"
   ],
-  "pathophysiology": "In cast nephropathy, an excess of monoclonal free light chains produced by a plasma cell neoplasm is filtered and reaches the distal tubule, where they bind Tamm-Horsfall protein and precipitate to form obstructing tubular casts. The casts cause intratubular obstruction and a local inflammatory and toxic injury to tubular cells. Volume depletion, hypercalcaemia, loop diuretics and nephrotoxins promote cast formation, so these factors both precipitate and worsen the injury. Reducing the circulating light chain burden is central to reversing it.",
-  "additionalDifferentials": [
-   "Other myeloma-related renal disease (light chain deposition disease, AL amyloidosis)",
-   "Hypercalcaemic acute kidney injury",
-   "Contrast or drug-induced acute kidney injury",
-   "Acute tubular necrosis of other cause",
-   "Tumour lysis syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum free light chain assay and serum/urine protein electrophoresis with immunofixation",
-   "Renal function, calcium and urinalysis (often dipstick-negative for protein)",
-   "Full blood count and bone marrow assessment for myeloma",
-   "Renal biopsy in selected cases",
-   "Identification and correction of precipitating factors"
-  ],
-  "redFlags": [
-   "Severe or dialysis-requiring acute kidney injury",
-   "Hypercalcaemia with dehydration",
-   "Very high free light chain levels",
-   "Concurrent nephrotoxin exposure"
-  ],
-  "prognosis": "Renal recovery is possible if light chains are reduced rapidly and precipitants corrected early, but delayed treatment or prolonged injury can lead to dialysis dependence.",
-  "pitfalls": [
-   "Being falsely reassured by a negative urine dipstick for protein",
-   "Failing to check free light chains in unexplained acute kidney injury in older patients",
-   "Not correcting hypercalcaemia and volume depletion urgently",
-   "Continuing nephrotoxins that promote cast formation"
-  ],
-  "references": [
-   "Nephrology reference texts (standard reference)",
-   "Myeloma renal guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Rapid reduction of the circulating monoclonal free light chains with bortezomib-based anti-myeloma chemotherapy",
-   "Aggressive intravenous rehydration to reverse volume depletion and reduce intratubular cast formation",
-   "Correction of hypercalcaemia and withdrawal of nephrotoxins and loop diuretics",
-   "Renal replacement therapy for established severe acute kidney injury, with consideration of high cut-off haemodialysis to remove light chains",
-   "Monitoring of the serum free light chain response and renal function to gauge recovery",
-   "Avoidance of further precipitants including iodinated contrast and non-steroidal anti-inflammatory drugs",
-   "Joint nephrology and haematology management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cast_nephropathy-pathway",
-   "title": "Cast nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest cause of acute kidney injury in multiple myeloma, from precipitation of monoclonal free light chains in the tubules",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or dialysis-requiring acute kidney injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum free light chain assay and serum/urine protein electrophoresis with immunofixation, Renal function, calcium and urinalysis (often dipstick-negative for protein), Full blood count and bone marrow assessment for myeloma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Rapid reduction of the circulating monoclonal free light chains with bortezomib-based anti-myeloma chemotherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Being falsely reassured by a negative urine dipstick for protein"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cast nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "cast_nephropathy-matrix",
-   "title": "Cast nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest cause of acute kidney injury in multiple myeloma, from precipitation of monoclonal free light chains in the tubules",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology / Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nephrology and haematology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest cause of acute kidney injury in multiple myeloma, from precipitation of monoclonal free light chains in the tubules",
+      "It presents as acute or subacute kidney injury, often precipitated by dehydration, hypercalcaemia, infection or nephrotoxins",
+      "The urine dipstick is typically negative for protein because it detects albumin, not the light chains",
+      "Serum free light chain assay and serum/urine electrophoresis are key to diagnosis",
+      "Precipitating factors such as hypercalcaemia and nephrotoxic drugs should be corrected urgently",
+      "Rapid reduction of the offending light chains with anti-myeloma therapy offers the best chance of renal recovery"
     ],
-    [
-     "Key Investigations",
-     "Serum free light chain assay and serum/urine protein electrophoresis with immunofixation, Renal function, calcium and urinalysis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In cast nephropathy, an excess of monoclonal free light chains produced by a plasma cell neoplasm is filtered and reaches the distal tubule, where they bind Tamm-Horsfall protein and precipitate to form obstructing tubular casts. The casts cause intratubular obstruction and a local inflammatory and toxic injury to tubular cells. Volume depletion, hypercalcaemia, loop diuretics and nephrotoxins promote cast formation, so these factors both precipitate and worsen the injury. Reducing the circulating light chain burden is central to reversing it.",
+    "additionalDifferentials": [
+      "Other myeloma-related renal disease (light chain deposition disease, AL amyloidosis)",
+      "Hypercalcaemic acute kidney injury",
+      "Contrast or drug-induced acute kidney injury",
+      "Acute tubular necrosis of other cause",
+      "Tumour lysis syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Other myeloma-related renal disease (light chain deposition disease, AL amyloidosis), Hypercalcaemic acute kidney injury,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum free light chain assay and serum/urine protein electrophoresis with immunofixation",
+      "Renal function, calcium and urinalysis (often dipstick-negative for protein)",
+      "Full blood count and bone marrow assessment for myeloma",
+      "Renal biopsy in selected cases",
+      "Identification and correction of precipitating factors"
     ],
-    [
-     "Management Strategy",
-     "Rapid reduction of the circulating monoclonal free light chains with bortezomib-based anti-myeloma chemotherapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or dialysis-requiring acute kidney injury",
+      "Hypercalcaemia with dehydration",
+      "Very high free light chain levels",
+      "Concurrent nephrotoxin exposure"
     ],
-    [
-     "Clinical Pitfall",
-     "Being falsely reassured by a negative urine dipstick for protein",
-     "Prevent diagnostic or management error"
+    "prognosis": "Renal recovery is possible if light chains are reduced rapidly and precipitants corrected early, but delayed treatment or prolonged injury can lead to dialysis dependence.",
+    "pitfalls": [
+      "Being falsely reassured by a negative urine dipstick for protein",
+      "Failing to check free light chains in unexplained acute kidney injury in older patients",
+      "Not correcting hypercalcaemia and volume depletion urgently",
+      "Continuing nephrotoxins that promote cast formation"
+    ],
+    "references": [
+      "Nephrology reference texts (standard reference)",
+      "Myeloma renal guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Rapid reduction of the circulating monoclonal free light chains with bortezomib-based anti-myeloma chemotherapy",
+      "Aggressive intravenous rehydration to reverse volume depletion and reduce intratubular cast formation",
+      "Correction of hypercalcaemia and withdrawal of nephrotoxins and loop diuretics",
+      "Renal replacement therapy for established severe acute kidney injury, with consideration of high cut-off haemodialysis to remove light chains",
+      "Monitoring of the serum free light chain response and renal function to gauge recovery",
+      "Avoidance of further precipitants including iodinated contrast and non-steroidal anti-inflammatory drugs",
+      "Joint nephrology and haematology management"
     ]
-   ],
-   "caption": "Overview comparison matrix for cast nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cast-nephropathy-real-image",
-   "title": "Cast nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "cast_nephropathy-pathway",
+      "title": "Cast nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest cause of acute kidney injury in multiple myeloma, from precipitation of monoclonal free light chains in the tubules",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or dialysis-requiring acute kidney injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum free light chain assay and serum/urine protein electrophoresis with immunofixation, Renal function, calcium and urinalysis (often dipstick-negative for protein), Full blood count and bone marrow assessment for myeloma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Rapid reduction of the circulating monoclonal free light chains with bortezomib-based anti-myeloma chemotherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Being falsely reassured by a negative urine dipstick for protein"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cast nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cast_nephropathy-matrix",
+      "title": "Cast nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest cause of acute kidney injury in multiple myeloma, from precipitation of monoclonal free light chains in the tubules",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum free light chain assay and serum/urine protein electrophoresis with immunofixation, Renal function, calcium and urinalysis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other myeloma-related renal disease (light chain deposition disease, AL amyloidosis), Hypercalcaemic acute kidney injury,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Rapid reduction of the circulating monoclonal free light chains with bortezomib-based anti-myeloma chemotherapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Being falsely reassured by a negative urine dipstick for protein",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cast nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology and haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cast_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum free light chain assay",
+          "cells": [
+            {
+              "text": "Key test with serum and urine electrophoresis for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine protein electrophoresis with immunofixation",
+          "cells": [
+            {
+              "text": "Monoclonal free light chains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Dipstick typically negative for protein, because it detects albumin, not light chains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and calcium",
+          "cells": [
+            {
+              "text": "Identifies hypercalcaemia and kidney injury as precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and bone marrow assessment",
+          "cells": [
+            {
+              "text": "Myeloma assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cast_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-myeloma therapy",
+          "cells": [
+            {
+              "text": "Rapid reduction of circulating light chains with bortezomib-based chemotherapy"
+            },
+            {
+              "text": "Best chance of renal recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous rehydration",
+          "cells": [
+            {
+              "text": "Reverses volume depletion and reduces cast formation"
+            },
+            {
+              "text": "Volume depletion promotes casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct hypercalcaemia",
+          "cells": [
+            {
+              "text": "Withdraw nephrotoxins and loop diuretics"
+            },
+            {
+              "text": "Precipitating factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "For established severe injury; consider high cut-off haemodialysis"
+            },
+            {
+              "text": "Removes light chains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recovery monitoring",
+          "cells": [
+            {
+              "text": "Serum free light chain response and renal function"
+            },
+            {
+              "text": "Gauges recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "Avoid iodinated contrast and non-steroidal anti-inflammatory drugs"
+            },
+            {
+              "text": "Further precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Nephrology and haematology"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cast_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Cast nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cast nephropathy: acute kidney injury in multiple myeloma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dialysis-requiring injury, hypercalcaemia, dehydration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: renal replacement therapy for severe injury; correct hypercalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum free light chains; serum and urine electrophoresis with immunofixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Monoclonal free light chains confirmed, with dipstick negative for protein?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Anti-myeloma therapy with bortezomib-based chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check light chain deposition disease, AL amyloidosis and contrast injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous rehydration to reduce intratubular cast formation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct hypercalcaemia; stop nephrotoxins and loop diuretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid iodinated contrast and NSAIDs; high cut-off haemodialysis if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery possible if light chains fall early; delay risks dialysis dependence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

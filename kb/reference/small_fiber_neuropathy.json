@@ -1,174 +1,461 @@
 {
- "id": "small_fiber_neuropathy",
- "name": "Small fibre neuropathy",
- "aliases": [
-  "small fiber neuropathy",
-  "SFN",
-  "small-fibre sensory neuropathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Selectively affects thinly myelinated A-delta and unmyelinated C fibres, causing burning pain and tingling, often in a length-dependent (feet-first) distribution",
-   "Autonomic features are common, including dry eyes and mouth, altered sweating, orthostatic symptoms, and gastrointestinal or bladder disturbance",
-   "Standard nerve conduction studies are normal because they assess large fibres, so a normal study does not exclude the diagnosis",
-   "Skin punch biopsy showing reduced intraepidermal nerve fibre density is the principal confirmatory test",
-   "Quantitative sensory testing and QSART assess small-fibre sensory and sudomotor function",
-   "Common causes include diabetes and impaired glucose tolerance; others include Sjogren and other autoimmune disease, amyloidosis, sodium-channel gene variants, alcohol, and drugs, while a large proportion remain idiopathic",
-   "The pain is neuropathic in character and is often worse at night",
-   "Management: treat any underlying cause, use neuropathic-pain measures, address autonomic symptoms, and avoid neurotoxic exposures"
+  "id": "small_fiber_neuropathy",
+  "name": "Small fibre neuropathy",
+  "aliases": [
+    "small fiber neuropathy",
+    "SFN",
+    "small-fibre sensory neuropathy"
   ],
-  "pathophysiology": "Small fibre neuropathy is a disorder of the small-diameter peripheral nerve fibres, the thinly myelinated A-delta and unmyelinated C fibres, that carry pain and temperature sensation and mediate autonomic function. Damage to these fibres, which may be length-dependent (beginning in the feet) or non-length-dependent, produces spontaneous neuropathic pain and impaired thermal and pain sensation, together with autonomic disturbances of sweating, cardiovascular regulation, and visceral function. The underlying mechanisms are diverse, including metabolic injury from diabetes or impaired glucose tolerance, immune-mediated damage, amyloid deposition, toxic and drug exposures, and gain-of-function sodium-channel gene variants that render nociceptors hyperexcitable; in many patients no cause is found. Because large fibres are spared, routine nerve conduction studies are typically normal.",
-  "additionalDifferentials": [
-   "Large-fibre or mixed polyneuropathy",
-   "Radiculopathy or focal compressive neuropathy",
-   "Complex regional pain syndrome",
-   "Fibromyalgia",
-   "Erythromelalgia",
-   "Central pain syndromes"
-  ],
-  "additionalInvestigations": [
-   "Skin punch biopsy for intraepidermal nerve fibre density",
-   "Quantitative sensory testing of thermal thresholds",
-   "QSART and thermoregulatory sweat test for sudomotor involvement",
-   "Nerve conduction studies to confirm large fibres are spared and exclude a mixed neuropathy",
-   "Screening bloods including glucose and HbA1c with glucose tolerance testing, autoimmune and Sjogren serology, paraproteins, vitamin B12, and thyroid function",
-   "Cardiovascular autonomic reflex testing and, in selected cases, genetic testing for sodium-channel variants"
-  ],
-  "redFlags": [
-   "Rapidly progressive or profoundly disabling symptoms suggesting vasculitis or amyloidosis",
-   "Prominent autonomic failure suggesting a systemic or amyloid process",
-   "Systemic features such as weight loss or organ involvement pointing to a serious underlying cause",
-   "Motor weakness or large-fibre signs indicating a broader neuropathy"
-  ],
-  "prognosis": "Prognosis depends on the cause: where a treatable driver such as impaired glucose tolerance or an autoimmune disorder is identified and managed, symptoms may stabilise or improve, whereas idiopathic and amyloid-related forms tend to progress; pain and autonomic symptoms are often the main long-term burden.",
-  "pitfalls": [
-   "Excluding the diagnosis because nerve conduction studies are normal",
-   "Failing to search for treatable causes such as impaired glucose tolerance or Sjogren syndrome",
-   "Overlooking autonomic involvement",
-   "Attributing genuine neuropathic pain to a purely functional or psychological cause"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying driver, with glycaemic control in impaired glucose tolerance or diabetes, immunotherapy for Sjogren or other autoimmune causes, and disease-specific therapy for amyloidosis.",
-   "Neuropathic pain management with agents such as gabapentinoids, tricyclic antidepressants, serotonin-noradrenaline reuptake inhibitors, or topical lidocaine and capsaicin.",
-   "Manage autonomic features, treating orthostatic hypotension with volume expansion, fludrocortisone or midodrine and physical measures, alongside treatment of sicca, gastrointestinal and bladder symptoms.",
-   "Lifestyle measures including alcohol avoidance, foot care and metabolic optimisation.",
-   "Monitor for progression and periodically reassess for an emerging treatable cause in idiopathic cases.",
-   "Coordinate care across neurology, autonomic and pain services, with rheumatology involvement where autoimmune disease is found.",
-   "Consider genetic testing and counselling where a sodium-channel gain-of-function variant is suspected."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "small_fiber_neuropathy-pathway",
-   "title": "Small fibre neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Selectively affects thinly myelinated A-delta and unmyelinated C fibres, causing burning pain and tingling, often in a length-dependent (feet-first) distribution",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or profoundly disabling symptoms suggesting vasculitis or amyloidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin punch biopsy for intraepidermal nerve fibre density, Quantitative sensory testing of thermal thresholds, QSART and thermoregulatory sweat test for sudomotor involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying driver, with glycaemic control in impaired glucose tolerance or diabetes, immunotherapy for Sjogren or other autoimmune causes, and disease-specific therapy for amyloidosis."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis because nerve conduction studies are normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of small fibre neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "small_fiber_neuropathy-matrix",
-   "title": "Small fibre neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Selectively affects thinly myelinated A-delta and unmyelinated C fibres, causing burning pain and tingling, often in a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Selectively affects thinly myelinated A-delta and unmyelinated C fibres, causing burning pain and tingling, often in a length-dependent (feet-first) distribution",
+      "Autonomic features are common, including dry eyes and mouth, altered sweating, orthostatic symptoms, and gastrointestinal or bladder disturbance",
+      "Standard nerve conduction studies are normal because they assess large fibres, so a normal study does not exclude the diagnosis",
+      "Skin punch biopsy showing reduced intraepidermal nerve fibre density is the principal confirmatory test",
+      "Quantitative sensory testing and QSART assess small-fibre sensory and sudomotor function",
+      "Common causes include diabetes and impaired glucose tolerance; others include Sjogren and other autoimmune disease, amyloidosis, sodium-channel gene variants, alcohol, and drugs, while a large proportion remain idiopathic",
+      "The pain is neuropathic in character and is often worse at night",
+      "Management: treat any underlying cause, use neuropathic-pain measures, address autonomic symptoms, and avoid neurotoxic exposures"
     ],
-    [
-     "Key Investigations",
-     "Skin punch biopsy for intraepidermal nerve fibre density, Quantitative sensory testing of thermal thresholds, QSART and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Small fibre neuropathy is a disorder of the small-diameter peripheral nerve fibres, the thinly myelinated A-delta and unmyelinated C fibres, that carry pain and temperature sensation and mediate autonomic function. Damage to these fibres, which may be length-dependent (beginning in the feet) or non-length-dependent, produces spontaneous neuropathic pain and impaired thermal and pain sensation, together with autonomic disturbances of sweating, cardiovascular regulation, and visceral function. The underlying mechanisms are diverse, including metabolic injury from diabetes or impaired glucose tolerance, immune-mediated damage, amyloid deposition, toxic and drug exposures, and gain-of-function sodium-channel gene variants that render nociceptors hyperexcitable; in many patients no cause is found. Because large fibres are spared, routine nerve conduction studies are typically normal.",
+    "additionalDifferentials": [
+      "Large-fibre or mixed polyneuropathy",
+      "Radiculopathy or focal compressive neuropathy",
+      "Complex regional pain syndrome",
+      "Fibromyalgia",
+      "Erythromelalgia",
+      "Central pain syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Large-fibre or mixed polyneuropathy, Radiculopathy or focal compressive neuropathy, Complex regional pain syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin punch biopsy for intraepidermal nerve fibre density",
+      "Quantitative sensory testing of thermal thresholds",
+      "QSART and thermoregulatory sweat test for sudomotor involvement",
+      "Nerve conduction studies to confirm large fibres are spared and exclude a mixed neuropathy",
+      "Screening bloods including glucose and HbA1c with glucose tolerance testing, autoimmune and Sjogren serology, paraproteins, vitamin B12, and thyroid function",
+      "Cardiovascular autonomic reflex testing and, in selected cases, genetic testing for sodium-channel variants"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying driver, with glycaemic control in impaired glucose tolerance or diabetes, immunotherapy for",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or profoundly disabling symptoms suggesting vasculitis or amyloidosis",
+      "Prominent autonomic failure suggesting a systemic or amyloid process",
+      "Systemic features such as weight loss or organ involvement pointing to a serious underlying cause",
+      "Motor weakness or large-fibre signs indicating a broader neuropathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis because nerve conduction studies are normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the cause: where a treatable driver such as impaired glucose tolerance or an autoimmune disorder is identified and managed, symptoms may stabilise or improve, whereas idiopathic and amyloid-related forms tend to progress; pain and autonomic symptoms are often the main long-term burden.",
+    "pitfalls": [
+      "Excluding the diagnosis because nerve conduction studies are normal",
+      "Failing to search for treatable causes such as impaired glucose tolerance or Sjogren syndrome",
+      "Overlooking autonomic involvement",
+      "Attributing genuine neuropathic pain to a purely functional or psychological cause"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying driver, with glycaemic control in impaired glucose tolerance or diabetes, immunotherapy for Sjogren or other autoimmune causes, and disease-specific therapy for amyloidosis.",
+      "Neuropathic pain management with agents such as gabapentinoids, tricyclic antidepressants, serotonin-noradrenaline reuptake inhibitors, or topical lidocaine and capsaicin.",
+      "Manage autonomic features, treating orthostatic hypotension with volume expansion, fludrocortisone or midodrine and physical measures, alongside treatment of sicca, gastrointestinal and bladder symptoms.",
+      "Lifestyle measures including alcohol avoidance, foot care and metabolic optimisation.",
+      "Monitor for progression and periodically reassess for an emerging treatable cause in idiopathic cases.",
+      "Coordinate care across neurology, autonomic and pain services, with rheumatology involvement where autoimmune disease is found.",
+      "Consider genetic testing and counselling where a sodium-channel gain-of-function variant is suspected."
     ]
-   ],
-   "caption": "Overview comparison matrix for small fibre neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "small-fiber-neuropathy-real-image",
-   "title": "Small fibre neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "small_fiber_neuropathy-pathway",
+      "title": "Small fibre neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Selectively affects thinly myelinated A-delta and unmyelinated C fibres, causing burning pain and tingling, often in a length-dependent (feet-first) distribution",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or profoundly disabling symptoms suggesting vasculitis or amyloidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin punch biopsy for intraepidermal nerve fibre density, Quantitative sensory testing of thermal thresholds, QSART and thermoregulatory sweat test for sudomotor involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying driver, with glycaemic control in impaired glucose tolerance or diabetes, immunotherapy for Sjogren or other autoimmune causes, and disease-specific therapy for amyloidosis."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis because nerve conduction studies are normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of small fibre neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "small_fiber_neuropathy-matrix",
+      "title": "Small fibre neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Selectively affects thinly myelinated A-delta and unmyelinated C fibres, causing burning pain and tingling, often in a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin punch biopsy for intraepidermal nerve fibre density, Quantitative sensory testing of thermal thresholds, QSART and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Large-fibre or mixed polyneuropathy, Radiculopathy or focal compressive neuropathy, Complex regional pain syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying driver, with glycaemic control in impaired glucose tolerance or diabetes, immunotherapy for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis because nerve conduction studies are normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for small fibre neuropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "small_fiber_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin punch biopsy",
+          "cells": [
+            {
+              "text": "Reduced intraepidermal nerve fibre density, the principal confirmatory test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative sensory testing",
+          "cells": [
+            {
+              "text": "Small-fibre thermal and pain thresholds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "QSART and sweat testing",
+          "cells": [
+            {
+              "text": "Sudomotor function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Normal in small-fibre disease, which spares large fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening bloods",
+          "cells": [
+            {
+              "text": "Glucose and HbA1c, autoimmune and Sjogren serology, paraproteins, B12 and thyroid function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular autonomic reflex testing",
+          "cells": [
+            {
+              "text": "Autonomic involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "small_fiber_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Large-fibre or mixed polyneuropathy",
+          "cells": [
+            {
+              "text": "Nerve conduction studies show large-fibre involvement; small-fibre disease spares it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Genuine neuropathic pain should not be attributed to a functional or psychological cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "small_fiber_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying driver",
+          "cells": [
+            {
+              "text": "Glycaemic control in glucose intolerance; immunotherapy for Sjogren or autoimmune disease; disease-specific therapy for amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents",
+          "cells": [
+            {
+              "text": "Gabapentinoids, tricyclic antidepressants, serotonin-noradrenaline reuptake inhibitors, or topical lidocaine and capsaicin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic management",
+          "cells": [
+            {
+              "text": "Volume expansion, fludrocortisone or midodrine for orthostatic hypotension; treatment of sicca and bladder symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle measures",
+          "cells": [
+            {
+              "text": "Alcohol avoidance, foot care and metabolic optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Progression, and periodic reassessment for an emerging treatable cause in idiopathic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Neurology, autonomic and pain services; rheumatology where autoimmune disease is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Where a sodium-channel gain-of-function variant is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "small_fiber_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of Small fibre neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Burning pain and tingling with autonomic symptoms: suspected small fibre neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid progression, vasculitis or amyloid features, weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic work-up for vasculitis or amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin punch biopsy for nerve fibre density; QST and QSART; glucose and serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is intraepidermal nerve fibre density reduced, with normal large-fibre studies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider large-fibre neuropathy, radiculopathy or CRPS; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying driver, such as glucose control or immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neuropathic pain agents: gabapentinoids, tricyclics or SNRIs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat orthostatic hypotension with volume, fludrocortisone or midodrine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic reassessment for an emerging treatable cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on cause; treatable drivers may improve, idiopathic forms may progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

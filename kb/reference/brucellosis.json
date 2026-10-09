@@ -1,192 +1,634 @@
 {
- "id": "brucellosis",
- "name": "Brucellosis",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 174,
- "page": 1331,
- "aliases": [
-  "undulant fever",
-  "Malta fever"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1331-1335",
-  "clinicalPearls": [
-   "A bacterial zoonosis caused by Brucella species, transmitted directly or indirectly from infected animals, predominantly domesticated ruminants and swine; B. melitensis (sheep, goats, camels) is the most common cause of symptomatic human disease, with B. abortus (cattle/buffalo), B. suis (swine), and B. canis (dogs) also implicated (p.1331).",
-   "Human infection is usually associated with occupational or domestic animal exposure (farmers, shepherds, goatherds, veterinarians, slaughterhouse and meat-processing workers, laboratory staff); travelers and urban residents typically acquire it through contaminated food (p.1332).",
-   "Dairy products, especially soft cheeses, unpasteurized milk, and ice cream, are the most frequently implicated sources; acquisition may occur by ingestion, inhalation, or mucosal/percutaneous exposure (p.1332).",
-   "Almost invariably causes fever, which may be accompanied by profuse sweats, especially at night; untreated, the fever classically shows an undulating pattern persisting for weeks before an afebrile period that may be followed by relapse (p.1332-1333).",
-   "Fever is associated with musculoskeletal symptoms and signs in about half of patients; nonspecific features include apathy, fatigue, anorexia, weight loss, myalgia, headache, and chills (p.1333).",
-   "Presentation often fits one of three patterns: a typhoid-like febrile illness but less severe; fever with acute monoarthritis (typically hip or knee) in a young child; and long-lasting fever with misery and low-back or hip pain in an older person, especially men (p.1333).",
-   "Focal musculoskeletal involvement is the most common complication (~40%): osteomyelitis favors lumbar and low thoracic vertebrae, and septic arthritis most often affects knee, hip, sacroiliac, shoulder, and sternoclavicular joints, as monoarthritis or polyarthritis (p.1333).",
-   "Roughly one-quarter of patients have hepatosplenomegaly and 10-20% have significant lymphadenopathy; up to 10% of men develop acute epididymo-orchitis (p.1333).",
-   "Endocarditis occurs in about 1% of cases, most often affecting the aortic valve (native or prosthetic), and is the usual cause of death when the outcome is fatal (p.1333, p.1335).",
-   "Diagnosis rests on a history of potential exposure, a compatible presentation, and supporting laboratory findings, because the clinical picture is not distinctive (p.1333).",
-   "Isolation of brucellae from blood, CSF, bone marrow, joint fluid, or a tissue aspirate/biopsy is definitive and succeeds in about 50-70% of cases; modern automated blood culture systems (e.g., Bactec) usually turn positive within 7 days (p.1333).",
-   "Serology often provides the only positive laboratory finding; in endemic or occupationally exposed settings agglutinin titers of 1:320-1:640 or higher are considered diagnostic, while in nonendemic areas a titer of at least 1:160 is significant, with no single universal cutoff (p.1334)."
+  "id": "brucellosis",
+  "name": "Brucellosis",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 174,
+  "page": 1331,
+  "aliases": [
+    "undulant fever",
+    "Malta fever"
   ],
-  "pathophysiology": "Brucellae are small, gram-negative, unencapsulated, nonsporulating coccobacilli that behave as facultative intracellular parasites. Following entry by ingestion, inhalation, or mucosal/percutaneous exposure, initial replication is presumed to occur within cells of the lymph nodes draining the entry point, with subsequent hematogenous spread that can establish chronic localizing infection at almost any site, most often the reticuloendothelial system, musculoskeletal tissues, and genitourinary system. The macrophage is the key target cell; Brucella is a \"stealth\" pathogen that evades innate immunity and survives within monocytic cells by restricting fusion of type IV secretion system-dependent Brucella-containing vacuoles with lysosomes, inhibiting apoptosis of infected cells, and preventing dendritic cell maturation and T-cell activation. Smooth LPS has low endotoxin activity and contributes to pyrogenicity and resistance to phagocytosis and serum killing. Antibodies aid clearance of extracellular organisms but alone cannot eradicate infection; control depends on macrophage activation and IFN-gamma/TH1 responses. Tissue responses range from acute and chronic inflammation to granuloma formation, with or without necrosis and caseation, and abscesses may develop in chronic localized infection (p.1332).",
-  "additionalDifferentials": [
-   "Tuberculosis is the most important differential for vertebral osteomyelitis or septic arthritis; vertebral destruction or spinal cord impingement is rare in brucellosis and usually suggests tuberculosis (p.1333).",
-   "Typhoid fever and malaria as causes of fever in endemic areas (p.1333).",
-   "Glandular fever-like illness (EBV, Toxoplasma, cytomegalovirus, HIV, or Mycobacterium tuberculosis) when hepatosplenomegaly or lymphadenopathy is present (p.1333).",
-   "Mumps and surgical conditions such as testicular torsion when epididymo-orchitis occurs (p.1333).",
-   "Neurotuberculosis, atypical leptospirosis, and noninfectious conditions when lymphocytic meningoencephalitis develops (p.1333)."
-  ],
-  "infectionMimics": [
-   "Tuberculosis",
-   "Typhoid fever",
-   "Malaria",
-   "Leptospirosis",
-   "Epstein-Barr virus infection",
-   "Cytomegalovirus infection",
-   "Toxoplasmosis",
-   "HIV infection",
-   "Mumps"
-  ],
-  "nonInfectiousMimics": [
-   "Noninfectious causes of lymphocytic meningoencephalitis",
-   "Chronic fatigue syndromes (in the context of a suspected chronic brucellosis state)",
-   "Other causes of excessive sweating such as alcohol abuse and obesity"
-  ],
-  "additionalInvestigations": [
-   "Blood, CSF, bone marrow, joint fluid, or tissue aspirate/biopsy culture under containment conditions for dangerous pathogens; alert the laboratory when brucellosis is suspected (p.1333).",
-   "Standard tube/plate/microagglutination serology as the mainstay, with complement fixation, Coombs antiglobulin, and ELISA tests; repeat after 2-4 weeks to detect a rising titer (p.1334).",
-   "Peripheral blood PCR / nucleic acid amplification (e.g., targeting rrs-rrl spacer, outer-membrane protein genes, IS711, BCSP31) which is more sensitive and quicker than culture and avoids biohazard risk (p.1334).",
-   "MALDI-TOF mass spectrometry for identification in well-resourced laboratories, with the caveat that earlier implementations often failed to identify Brucella correctly (p.1333).",
-   "Isotope bone scanning, more sensitive than plain x-ray for bony disease (p.1333).",
-   "CSF/joint fluid analysis showing lymphocytosis and low glucose; tissue biopsy may show noncaseating granulomas without acid-fast bacilli (p.1333)."
-  ],
-  "redFlags": [
-   "Endocarditis, most often of the aortic valve (native or prosthetic), the leading cause of death in fatal cases (p.1333, p.1335).",
-   "Neurobrucellosis: lymphocytic meningoencephalitis mimicking neurotuberculosis, and rarely intracerebral abscess, cranial nerve deficits, or ruptured mycotic aneurysms (p.1333).",
-   "Vertebral osteomyelitis (spondylitis) and sacroiliitis (p.1333).",
-   "Disseminated intravascular coagulation with raised fibrinogen degradation products and thrombocytopenia (p.1333).",
-   "Increased fetal loss in infected pregnant women (though teratogenicity has not been described and abortion is much less pronounced in humans than in animals) (p.1333)."
-  ],
-  "prognosis": "Fewer than 1% of patients die of brucellosis; when fatal, death is usually due to cardiac involvement and, more rarely, severe neurologic disease. Despite low mortality, recovery is slow and the illness can cause prolonged inactivity. Relapse occurs in up to 30% of poorly compliant patients, so clinical follow-up for up to 2 years is recommended; relapse responds to a prolonged repeat course of the original therapy. General well-being and body weight are better guides to absence of relapse than serology, since IgG agglutination titers can stay in the diagnostic range for more than 2 years after cure. Immunity is not solid and reinfection can occur after repeated exposures (p.1335).",
-  "pitfalls": [
-   "The clinical picture is not distinctive and definitive diagnostic signs may be lacking, so exposure history and laboratory support are essential (p.1331, p.1333).",
-   "Routine biochemistry is usually normal; peripheral leukocyte counts are typically normal or low with relative lymphocytosis, so normal blood counts do not exclude the disease (p.1333).",
-   "Brucella may be misidentified by gallery strips as Agrobacterium, Ochrobactrum, or Psychrobacter (Moraxella) phenylpyruvicus; after taxonomic changes Ochrobactrum isolates may now be reported as a Brucella subspecies despite completely different management, so culture reports should be confirmed with the laboratory before therapeutic decisions (p.1333-1334).",
-   "Rough strains such as B. canis and B. ovis do not react in conventional serologic tests and will give false-negative results; consult the laboratory if B. canis is suspected (p.1334).",
-   "Serologic cross-reactions occur with other gram-negative bacteria including Yersinia enterocolitica O:9, E. coli O157, Francisella tularensis, Salmonella enterica group N, Stenotrophomonas maltophilia, and Vibrio cholerae (p.1334).",
-   "Live B. abortus vaccine strain RB51 does not elicit antibody in tests using smooth antigens, which must be considered when following accidental vaccine exposures (p.1334).",
-   "Elevated CSF adenosine deaminase cannot be used to distinguish tubercular meningitis, as it may also be raised in brucellosis (p.1333).",
-   "Existence of a prolonged chronic brucellosis state after successful treatment remains controversial; evaluation requires careful exclusion of malingering, chronic fatigue syndromes, and other causes of sweating such as alcohol abuse and obesity (p.1335)."
-  ],
-  "severityClassification": "Harrison distinguishes acute nonfocal brucellosis (duration under about 1-2 months) from complex or focal disease (e.g., spondylitis, neurobrucellosis, endocarditis), the latter requiring more prolonged and tailored therapy. Patterns by species are also noted: B. melitensis tends toward a more acute, aggressive presentation, B. suis toward focal abscess formation, and B. abortus toward a more insidious onset that is more likely to become chronic (p.1333-1334).",
-  "references": [
-   "Harrison 22e p.1331-1335"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give prolonged combination antimicrobial therapy, typically doxycycline (tetracycline class) with an aminoglycoside such as streptomycin or gentamicin, or with rifampicin, for an extended course to penetrate intracellular sites and prevent relapse",
-   "Escalate to triple-agent, longer-duration regimens for focal complicated disease such as spondylitis, sacroiliitis or deep abscess",
-   "Manage neurobrucellosis with a combination of agents that penetrate the central nervous system together with adjunctive corticosteroids, and treat endocarditis with prolonged combination therapy alongside valve surgery where indicated",
-   "Provide supportive care with antipyretics, analgesia and rest for the undulant fever and musculoskeletal symptoms",
-   "Monitor adherence and review for relapse with clinical reassessment and repeat serology, as relapse follows incomplete treatment",
-   "Alert the laboratory to the biohazard risk and apply public-health measures, including avoidance of unpasteurised dairy products and animal-exposure precautions for at-risk occupations",
-   "Refer to infectious diseases for regimen selection and management of complicated or relapsing disease"
-  ]
- },
- "algorithms": [
-  {
-   "id": "brucellosis-pathway",
-   "title": "Brucellosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A bacterial zoonosis caused by Brucella species, transmitted directly or indirectly from infected animals, predominantly domesticated ruminants and swine; B. melitensis (sheep, goats, camels) is the most common cause of symptomatic human",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Endocarditis, most often of the aortic valve (native or prosthetic), the leading cause of death in fatal cases (p.1333, p.1335).",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood, CSF, bone marrow, joint fluid, or tissue aspirate/biopsy culture under containment conditions for dangerous pathogens; alert the laboratory when brucellosis is suspected (p.1333)., Standard"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give prolonged combination antimicrobial therapy, typically doxycycline (tetracycline class) with an aminoglycoside such as streptomycin or gentamicin, or with rifampicin, for an extended course to penetrate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: The clinical picture is not distinctive and definitive diagnostic signs may be lacking, so exposure history and laboratory support are essential (p.1331, p.1333)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of brucellosis."
-  }
- ],
- "tables": [
-  {
-   "id": "brucellosis-matrix",
-   "title": "Brucellosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A bacterial zoonosis caused by Brucella species, transmitted directly or indirectly from infected animals, predominantly",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1331-1335",
+    "clinicalPearls": [
+      "A bacterial zoonosis caused by Brucella species, transmitted directly or indirectly from infected animals, predominantly domesticated ruminants and swine; B. melitensis (sheep, goats, camels) is the most common cause of symptomatic human disease, with B. abortus (cattle/buffalo), B. suis (swine), and B. canis (dogs) also implicated (p.1331).",
+      "Human infection is usually associated with occupational or domestic animal exposure (farmers, shepherds, goatherds, veterinarians, slaughterhouse and meat-processing workers, laboratory staff); travelers and urban residents typically acquire it through contaminated food (p.1332).",
+      "Dairy products, especially soft cheeses, unpasteurized milk, and ice cream, are the most frequently implicated sources; acquisition may occur by ingestion, inhalation, or mucosal/percutaneous exposure (p.1332).",
+      "Almost invariably causes fever, which may be accompanied by profuse sweats, especially at night; untreated, the fever classically shows an undulating pattern persisting for weeks before an afebrile period that may be followed by relapse (p.1332-1333).",
+      "Fever is associated with musculoskeletal symptoms and signs in about half of patients; nonspecific features include apathy, fatigue, anorexia, weight loss, myalgia, headache, and chills (p.1333).",
+      "Presentation often fits one of three patterns: a typhoid-like febrile illness but less severe; fever with acute monoarthritis (typically hip or knee) in a young child; and long-lasting fever with misery and low-back or hip pain in an older person, especially men (p.1333).",
+      "Focal musculoskeletal involvement is the most common complication (~40%): osteomyelitis favors lumbar and low thoracic vertebrae, and septic arthritis most often affects knee, hip, sacroiliac, shoulder, and sternoclavicular joints, as monoarthritis or polyarthritis (p.1333).",
+      "Roughly one-quarter of patients have hepatosplenomegaly and 10-20% have significant lymphadenopathy; up to 10% of men develop acute epididymo-orchitis (p.1333).",
+      "Endocarditis occurs in about 1% of cases, most often affecting the aortic valve (native or prosthetic), and is the usual cause of death when the outcome is fatal (p.1333, p.1335).",
+      "Diagnosis rests on a history of potential exposure, a compatible presentation, and supporting laboratory findings, because the clinical picture is not distinctive (p.1333).",
+      "Isolation of brucellae from blood, CSF, bone marrow, joint fluid, or a tissue aspirate/biopsy is definitive and succeeds in about 50-70% of cases; modern automated blood culture systems (e.g., Bactec) usually turn positive within 7 days (p.1333).",
+      "Serology often provides the only positive laboratory finding; in endemic or occupationally exposed settings agglutinin titers of 1:320-1:640 or higher are considered diagnostic, while in nonendemic areas a titer of at least 1:160 is significant, with no single universal cutoff (p.1334)."
     ],
-    [
-     "Key Investigations",
-     "Blood, CSF, bone marrow, joint fluid, or tissue aspirate/biopsy culture under containment conditions for dangerous pathogens;",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Brucellae are small, gram-negative, unencapsulated, nonsporulating coccobacilli that behave as facultative intracellular parasites. Following entry by ingestion, inhalation, or mucosal/percutaneous exposure, initial replication is presumed to occur within cells of the lymph nodes draining the entry point, with subsequent hematogenous spread that can establish chronic localizing infection at almost any site, most often the reticuloendothelial system, musculoskeletal tissues, and genitourinary system. The macrophage is the key target cell; Brucella is a \"stealth\" pathogen that evades innate immunity and survives within monocytic cells by restricting fusion of type IV secretion system-dependent Brucella-containing vacuoles with lysosomes, inhibiting apoptosis of infected cells, and preventing dendritic cell maturation and T-cell activation. Smooth LPS has low endotoxin activity and contributes to pyrogenicity and resistance to phagocytosis and serum killing. Antibodies aid clearance of extracellular organisms but alone cannot eradicate infection; control depends on macrophage activation and IFN-gamma/TH1 responses. Tissue responses range from acute and chronic inflammation to granuloma formation, with or without necrosis and caseation, and abscesses may develop in chronic localized infection (p.1332).",
+    "additionalDifferentials": [
+      "Tuberculosis is the most important differential for vertebral osteomyelitis or septic arthritis; vertebral destruction or spinal cord impingement is rare in brucellosis and usually suggests tuberculosis (p.1333).",
+      "Typhoid fever and malaria as causes of fever in endemic areas (p.1333).",
+      "Glandular fever-like illness (EBV, Toxoplasma, cytomegalovirus, HIV, or Mycobacterium tuberculosis) when hepatosplenomegaly or lymphadenopathy is present (p.1333).",
+      "Mumps and surgical conditions such as testicular torsion when epididymo-orchitis occurs (p.1333).",
+      "Neurotuberculosis, atypical leptospirosis, and noninfectious conditions when lymphocytic meningoencephalitis develops (p.1333)."
     ],
-    [
-     "Primary Differentials",
-     "Tuberculosis is the most important differential for vertebral osteomyelitis or septic arthritis; vertebral destruction or spinal",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Tuberculosis",
+      "Typhoid fever",
+      "Malaria",
+      "Leptospirosis",
+      "Epstein-Barr virus infection",
+      "Cytomegalovirus infection",
+      "Toxoplasmosis",
+      "HIV infection",
+      "Mumps"
     ],
-    [
-     "Management Strategy",
-     "Give prolonged combination antimicrobial therapy, typically doxycycline (tetracycline class) with an aminoglycoside such as",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Noninfectious causes of lymphocytic meningoencephalitis",
+      "Chronic fatigue syndromes (in the context of a suspected chronic brucellosis state)",
+      "Other causes of excessive sweating such as alcohol abuse and obesity"
     ],
-    [
-     "Clinical Pitfall",
-     "The clinical picture is not distinctive and definitive diagnostic signs may be lacking, so exposure history and laboratory",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Blood, CSF, bone marrow, joint fluid, or tissue aspirate/biopsy culture under containment conditions for dangerous pathogens; alert the laboratory when brucellosis is suspected (p.1333).",
+      "Standard tube/plate/microagglutination serology as the mainstay, with complement fixation, Coombs antiglobulin, and ELISA tests; repeat after 2-4 weeks to detect a rising titer (p.1334).",
+      "Peripheral blood PCR / nucleic acid amplification (e.g., targeting rrs-rrl spacer, outer-membrane protein genes, IS711, BCSP31) which is more sensitive and quicker than culture and avoids biohazard risk (p.1334).",
+      "MALDI-TOF mass spectrometry for identification in well-resourced laboratories, with the caveat that earlier implementations often failed to identify Brucella correctly (p.1333).",
+      "Isotope bone scanning, more sensitive than plain x-ray for bony disease (p.1333).",
+      "CSF/joint fluid analysis showing lymphocytosis and low glucose; tissue biopsy may show noncaseating granulomas without acid-fast bacilli (p.1333)."
+    ],
+    "redFlags": [
+      "Endocarditis, most often of the aortic valve (native or prosthetic), the leading cause of death in fatal cases (p.1333, p.1335).",
+      "Neurobrucellosis: lymphocytic meningoencephalitis mimicking neurotuberculosis, and rarely intracerebral abscess, cranial nerve deficits, or ruptured mycotic aneurysms (p.1333).",
+      "Vertebral osteomyelitis (spondylitis) and sacroiliitis (p.1333).",
+      "Disseminated intravascular coagulation with raised fibrinogen degradation products and thrombocytopenia (p.1333).",
+      "Increased fetal loss in infected pregnant women (though teratogenicity has not been described and abortion is much less pronounced in humans than in animals) (p.1333)."
+    ],
+    "prognosis": "Fewer than 1% of patients die of brucellosis; when fatal, death is usually due to cardiac involvement and, more rarely, severe neurologic disease. Despite low mortality, recovery is slow and the illness can cause prolonged inactivity. Relapse occurs in up to 30% of poorly compliant patients, so clinical follow-up for up to 2 years is recommended; relapse responds to a prolonged repeat course of the original therapy. General well-being and body weight are better guides to absence of relapse than serology, since IgG agglutination titers can stay in the diagnostic range for more than 2 years after cure. Immunity is not solid and reinfection can occur after repeated exposures (p.1335).",
+    "pitfalls": [
+      "The clinical picture is not distinctive and definitive diagnostic signs may be lacking, so exposure history and laboratory support are essential (p.1331, p.1333).",
+      "Routine biochemistry is usually normal; peripheral leukocyte counts are typically normal or low with relative lymphocytosis, so normal blood counts do not exclude the disease (p.1333).",
+      "Brucella may be misidentified by gallery strips as Agrobacterium, Ochrobactrum, or Psychrobacter (Moraxella) phenylpyruvicus; after taxonomic changes Ochrobactrum isolates may now be reported as a Brucella subspecies despite completely different management, so culture reports should be confirmed with the laboratory before therapeutic decisions (p.1333-1334).",
+      "Rough strains such as B. canis and B. ovis do not react in conventional serologic tests and will give false-negative results; consult the laboratory if B. canis is suspected (p.1334).",
+      "Serologic cross-reactions occur with other gram-negative bacteria including Yersinia enterocolitica O:9, E. coli O157, Francisella tularensis, Salmonella enterica group N, Stenotrophomonas maltophilia, and Vibrio cholerae (p.1334).",
+      "Live B. abortus vaccine strain RB51 does not elicit antibody in tests using smooth antigens, which must be considered when following accidental vaccine exposures (p.1334).",
+      "Elevated CSF adenosine deaminase cannot be used to distinguish tubercular meningitis, as it may also be raised in brucellosis (p.1333).",
+      "Existence of a prolonged chronic brucellosis state after successful treatment remains controversial; evaluation requires careful exclusion of malingering, chronic fatigue syndromes, and other causes of sweating such as alcohol abuse and obesity (p.1335)."
+    ],
+    "severityClassification": "Harrison distinguishes acute nonfocal brucellosis (duration under about 1-2 months) from complex or focal disease (e.g., spondylitis, neurobrucellosis, endocarditis), the latter requiring more prolonged and tailored therapy. Patterns by species are also noted: B. melitensis tends toward a more acute, aggressive presentation, B. suis toward focal abscess formation, and B. abortus toward a more insidious onset that is more likely to become chronic (p.1333-1334).",
+    "references": [
+      "Harrison 22e p.1331-1335"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give prolonged combination antimicrobial therapy, typically doxycycline (tetracycline class) with an aminoglycoside such as streptomycin or gentamicin, or with rifampicin, for an extended course to penetrate intracellular sites and prevent relapse",
+      "Escalate to triple-agent, longer-duration regimens for focal complicated disease such as spondylitis, sacroiliitis or deep abscess",
+      "Manage neurobrucellosis with a combination of agents that penetrate the central nervous system together with adjunctive corticosteroids, and treat endocarditis with prolonged combination therapy alongside valve surgery where indicated",
+      "Provide supportive care with antipyretics, analgesia and rest for the undulant fever and musculoskeletal symptoms",
+      "Monitor adherence and review for relapse with clinical reassessment and repeat serology, as relapse follows incomplete treatment",
+      "Alert the laboratory to the biohazard risk and apply public-health measures, including avoidance of unpasteurised dairy products and animal-exposure precautions for at-risk occupations",
+      "Refer to infectious diseases for regimen selection and management of complicated or relapsing disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for brucellosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "brucellosis-real-image",
-   "title": "Brucellosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "brucellosis-pathway",
+      "title": "Brucellosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A bacterial zoonosis caused by Brucella species, transmitted directly or indirectly from infected animals, predominantly domesticated ruminants and swine; B. melitensis (sheep, goats, camels) is the most common cause of symptomatic human",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Endocarditis, most often of the aortic valve (native or prosthetic), the leading cause of death in fatal cases (p.1333, p.1335).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood, CSF, bone marrow, joint fluid, or tissue aspirate/biopsy culture under containment conditions for dangerous pathogens; alert the laboratory when brucellosis is suspected (p.1333)., Standard"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give prolonged combination antimicrobial therapy, typically doxycycline (tetracycline class) with an aminoglycoside such as streptomycin or gentamicin, or with rifampicin, for an extended course to penetrate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: The clinical picture is not distinctive and definitive diagnostic signs may be lacking, so exposure history and laboratory support are essential (p.1331, p.1333)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of brucellosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "brucellosis-matrix",
+      "title": "Brucellosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A bacterial zoonosis caused by Brucella species, transmitted directly or indirectly from infected animals, predominantly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood, CSF, bone marrow, joint fluid, or tissue aspirate/biopsy culture under containment conditions for dangerous pathogens;",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tuberculosis is the most important differential for vertebral osteomyelitis or septic arthritis; vertebral destruction or spinal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give prolonged combination antimicrobial therapy, typically doxycycline (tetracycline class) with an aminoglycoside such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "The clinical picture is not distinctive and definitive diagnostic signs may be lacking, so exposure history and laboratory",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for brucellosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Brucellosis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/brucellosis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 221-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "brucellosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of brucellosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Exposure",
+          "cells": [
+            {
+              "text": "Livestock contact, unpasteurised dairy (soft cheese, milk, ice cream)"
+            },
+            {
+              "text": "Diagnosis needs exposure plus compatible illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever pattern",
+          "cells": [
+            {
+              "text": "Undulant fever with night sweats"
+            },
+            {
+              "text": "Musculoskeletal features in about half"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture (blood, marrow, CSF, joint, tissue)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 50 to 70%",
+              "range": [
+                50,
+                70
+              ]
+            },
+            {
+              "text": "{{hy:Warn the lab: biohazard}}; automated systems positive within 7 days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Agglutination titre, endemic or exposed",
+          "cells": [
+            {
+              "text": "1:320 to 1:640 or higher",
+              "op": ">=",
+              "value": 320
+            },
+            {
+              "text": "Diagnostic in endemic settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Agglutination titre, non-endemic",
+          "cells": [
+            {
+              "text": "At least 1:160",
+              "op": ">=",
+              "value": 160
+            },
+            {
+              "text": "Or fourfold rise over 3 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood PCR",
+          "cells": [
+            {
+              "text": "More sensitive and faster than culture"
+            },
+            {
+              "text": "Avoids biohazard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal osteoarticular disease",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 40%"
+            },
+            {
+              "text": "Lumbar spondylitis; knee, hip, sacroiliac arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymo-orchitis in men",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 10%",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "Hepatosplenomegaly in about one-quarter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 1%"
+            },
+            {
+              "text": "Aortic valve; usual cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scan",
+          "cells": [
+            {
+              "text": "More sensitive than plain films"
+            },
+            {
+              "text": "For spinal or joint disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Serology is unreliable for B. canis."
+    },
+    {
+      "id": "brucellosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of brucellosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "{{hy:Vertebral destruction or cord compression favours TB}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typhoid fever",
+          "cells": [
+            {
+              "text": "Similar febrile illness, usually more severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "Fever in endemic area; blood film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glandular fever-like illness (EBV, CMV, toxoplasma, HIV)",
+          "cells": [
+            {
+              "text": "Lymphadenopathy and splenomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mumps or testicular torsion",
+          "cells": [
+            {
+              "text": "When epididymo-orchitis is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurotuberculosis or leptospirosis",
+          "cells": [
+            {
+              "text": "Lymphocytic meningoencephalitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "brucellosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of brucellosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Duration and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline plus streptomycin or gentamicin",
+          "cells": [
+            {
+              "text": "{{hy:Preferred in adults and children over 8}}"
+            },
+            {
+              "text": "Doxycycline 6 weeks plus aminoglycoside 14 days; lower relapse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline plus rifampin",
+          "cells": [
+            {
+              "text": "Uncomplicated cases"
+            },
+            {
+              "text": "Both 6 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluoroquinolone plus rifampin or doxycycline",
+          "cells": [
+            {
+              "text": "Alternative, not preferred"
+            },
+            {
+              "text": "14 to 42 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TMP-SMX plus rifampin",
+          "cells": [
+            {
+              "text": "Children under 8"
+            },
+            {
+              "text": "4 to 6 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Three antibiotics, prolonged",
+          "cells": [
+            {
+              "text": "Neurobrucellosis or endocarditis"
+            },
+            {
+              "text": "Endocarditis often needs valve surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Follow-up",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Clinical and serology for 1 year"
+            },
+            {
+              "text": "Relapse 5 to 15% even when treated",
+              "range": [
+                5,
+                15
+              ]
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "No drug doses were stated in the sources opened. Monotherapy relapses often."
+    },
+    {
+      "id": "brucellosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "CDC category A, B and C bioterrorism agents",
+      "rowHeader": "Category",
+      "columns": [
+        "Agents"
+      ],
+      "rows": [
+        {
+          "parameter": "Category A",
+          "cells": [
+            {
+              "text": "Anthrax (Bacillus anthracis); botulism (Clostridium botulinum toxin); plague (Yersinia pestis); smallpox (Variola major); tularemia (Francisella tularensis); viral hemorrhagic fevers: arenaviruses (Lassa, New World: Machupo, Junin, Guanarito and Sabia), Bunyaviridae (Crimean-Congo, Rift Valley), Filoviridae (Ebola, Marburg)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Category B",
+          "cells": [
+            {
+              "text": "Brucellosis (Brucella spp.); epsilon toxin of Clostridium perfringens; food safety threats (for example Salmonella spp., Escherichia coli O157:H7, Shigella); glanders (Burkholderia mallei); melioidosis (B. pseudomallei); psittacosis (Chlamydophila psittaci); Q fever (Coxiella burnetii); ricin toxin from Ricinus communis (castor beans); staphylococcal enterotoxin B; typhus fever (Rickettsia prowazekii); viral encephalitis [alphaviruses, for example Venezuelan, eastern and western equine encephalitis]; water safety threats (for example Vibrio cholerae, Cryptosporidium parvum)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Category C",
+          "cells": [
+            {
+              "text": "Emerging infectious disease threats such as Nipah, hantavirus, SARS coronavirus and pandemic influenza"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "brucellosis-dx-mgmt",
+      "title": "Diagnosis and management of brucellosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged fever, sweats, joint or back pain with animal or raw dairy exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood cultures (alert lab), agglutination serology, PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Culture, PCR or diagnostic titre positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat serology in 2 to 4 weeks; consider TB, typhoid, malaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Focal disease: spine, CNS or endocarditis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Doxycycline 6 weeks plus aminoglycoside 14 days or rifampin",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged triple therapy; valve surgery for endocarditis",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Follow clinically and serologically for 1 year",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n3",
+          "label": "Repeat"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

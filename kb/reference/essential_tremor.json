@@ -1,172 +1,531 @@
 {
- "id": "essential_tremor",
- "name": "Essential tremor",
- "aliases": [
-  "ET",
-  "benign essential tremor",
-  "familial tremor"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The hallmark is a bilateral, largely symmetric postural and kinetic (action) tremor of the upper limbs, in contrast to the resting tremor of Parkinson disease",
-   "The head, voice, and jaw are often involved, and a titubating head tremor or quavering voice can be prominent",
-   "The tremor characteristically worsens with sustained posture and goal-directed movement and is absent at complete rest",
-   "A family history is common, and inheritance frequently appears autosomal dominant",
-   "Many patients report transient improvement of tremor after alcohol, a useful diagnostic clue",
-   "First-line pharmacological principles include a non-selective beta-blocker such as propranolol or the anticonvulsant primidone",
-   "Deep brain stimulation of the ventral intermediate thalamic nucleus can help severe, medication-refractory cases",
-   "Onset spans a wide age range, and prevalence and severity tend to increase with age"
+  "id": "essential_tremor",
+  "name": "Essential tremor",
+  "aliases": [
+    "ET",
+    "benign essential tremor",
+    "familial tremor"
   ],
-  "pathophysiology": "Essential tremor is a common movement disorder thought to arise from abnormal oscillatory activity within cerebello-thalamo-cortical circuits, with the inferior olive and cerebellum implicated as key nodes of a central oscillator. It is often familial with autosomal dominant inheritance and variable penetrance, though the precise genetic and neurodegenerative substrate remains incompletely defined, and some evidence points to cerebellar pathology.",
-  "additionalDifferentials": [
-   "Parkinson disease (resting tremor, bradykinesia, rigidity)",
-   "Enhanced physiological tremor (e.g. anxiety, caffeine, thyrotoxicosis, drugs)",
-   "Dystonic tremor",
-   "Cerebellar (intention) tremor",
-   "Drug-induced or withdrawal tremor",
-   "Wilson disease in younger patients"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment to distinguish action tremor from resting and cerebellar tremor",
-   "Thyroid function tests to exclude thyrotoxicosis as a cause of enhanced tremor",
-   "Serum copper and ceruloplasmin in younger patients to exclude Wilson disease",
-   "Review of medications and stimulant intake that may produce or amplify tremor",
-   "DaTscan or specialist assessment when distinguishing from Parkinson disease is difficult"
-  ],
-  "redFlags": [
-   "Strictly unilateral tremor, a resting component, or associated bradykinesia and rigidity suggesting Parkinson disease",
-   "Abrupt onset or rapid progression suggesting a structural, toxic, or metabolic cause",
-   "Young age of onset with Kayser-Fleischer rings or hepatic dysfunction suggesting Wilson disease",
-   "Accompanying cerebellar signs, ataxia, or other focal neurological deficits"
-  ],
-  "prognosis": "Essential tremor is typically slowly progressive over years. Although often labelled benign, it can become functionally and socially disabling, impairing writing, eating, and drinking; many patients gain useful relief from medication or, in refractory cases, from surgical neuromodulation.",
-  "pitfalls": [
-   "Confusing essential tremor with early Parkinson disease, which delays appropriate management",
-   "Overlooking a reversible cause such as thyrotoxicosis, medication, or excess caffeine",
-   "Missing Wilson disease in a young patient with tremor",
-   "Assuming the disorder is trivial and underestimating its impact on daily function and quality of life"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line pharmacotherapy with a non-selective beta-blocker (propranolol) or the anticonvulsant primidone",
-   "Second-line agents such as topiramate, gabapentin or a benzodiazepine where response is inadequate",
-   "Review and minimise exacerbating factors, including tremorogenic drugs, stimulants, caffeine and anxiety",
-   "Occupational therapy with weighted utensils and adaptive aids to maintain function in writing, eating and drinking",
-   "Botulinum toxin injection for disabling head or voice tremor",
-   "For refractory disabling tremor, refer for surgical neuromodulation with deep brain stimulation of the ventral intermediate thalamic nucleus or MRI-guided focused ultrasound thalamotomy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "essential_tremor-pathway",
-   "title": "Essential tremor: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The hallmark is a bilateral, largely symmetric postural and kinetic (action) tremor of the upper limbs, in contrast to the resting tremor of Parkinson disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Strictly unilateral tremor, a resting component, or associated bradykinesia and rigidity suggesting Parkinson disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment to distinguish action tremor from resting and cerebellar tremor, Thyroid function tests to exclude thyrotoxicosis as a cause of enhanced tremor, Serum copper and ceruloplasmin in younger patients to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line pharmacotherapy with a non-selective beta-blocker (propranolol) or the anticonvulsant primidone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing essential tremor with early Parkinson disease, which delays appropriate management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of essential tremor."
-  }
- ],
- "tables": [
-  {
-   "id": "essential_tremor-matrix",
-   "title": "Essential tremor: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The hallmark is a bilateral, largely symmetric postural and kinetic (action) tremor of the upper limbs, in contrast to the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The hallmark is a bilateral, largely symmetric postural and kinetic (action) tremor of the upper limbs, in contrast to the resting tremor of Parkinson disease",
+      "The head, voice, and jaw are often involved, and a titubating head tremor or quavering voice can be prominent",
+      "The tremor characteristically worsens with sustained posture and goal-directed movement and is absent at complete rest",
+      "A family history is common, and inheritance frequently appears autosomal dominant",
+      "Many patients report transient improvement of tremor after alcohol, a useful diagnostic clue",
+      "First-line pharmacological principles include a non-selective beta-blocker such as propranolol or the anticonvulsant primidone",
+      "Deep brain stimulation of the ventral intermediate thalamic nucleus can help severe, medication-refractory cases",
+      "Onset spans a wide age range, and prevalence and severity tend to increase with age"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment to distinguish action tremor from resting and cerebellar tremor, Thyroid function tests to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Essential tremor is a common movement disorder thought to arise from abnormal oscillatory activity within cerebello-thalamo-cortical circuits, with the inferior olive and cerebellum implicated as key nodes of a central oscillator. It is often familial with autosomal dominant inheritance and variable penetrance, though the precise genetic and neurodegenerative substrate remains incompletely defined, and some evidence points to cerebellar pathology.",
+    "additionalDifferentials": [
+      "Parkinson disease (resting tremor, bradykinesia, rigidity)",
+      "Enhanced physiological tremor (e.g. anxiety, caffeine, thyrotoxicosis, drugs)",
+      "Dystonic tremor",
+      "Cerebellar (intention) tremor",
+      "Drug-induced or withdrawal tremor",
+      "Wilson disease in younger patients"
     ],
-    [
-     "Primary Differentials",
-     "Parkinson disease (resting tremor, bradykinesia, rigidity), Enhanced physiological tremor (e.g. anxiety, caffeine,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment to distinguish action tremor from resting and cerebellar tremor",
+      "Thyroid function tests to exclude thyrotoxicosis as a cause of enhanced tremor",
+      "Serum copper and ceruloplasmin in younger patients to exclude Wilson disease",
+      "Review of medications and stimulant intake that may produce or amplify tremor",
+      "DaTscan or specialist assessment when distinguishing from Parkinson disease is difficult"
     ],
-    [
-     "Management Strategy",
-     "First-line pharmacotherapy with a non-selective beta-blocker (propranolol) or the anticonvulsant primidone",
-     "Core treatment modality"
+    "redFlags": [
+      "Strictly unilateral tremor, a resting component, or associated bradykinesia and rigidity suggesting Parkinson disease",
+      "Abrupt onset or rapid progression suggesting a structural, toxic, or metabolic cause",
+      "Young age of onset with Kayser-Fleischer rings or hepatic dysfunction suggesting Wilson disease",
+      "Accompanying cerebellar signs, ataxia, or other focal neurological deficits"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing essential tremor with early Parkinson disease, which delays appropriate management",
-     "Prevent diagnostic or management error"
+    "prognosis": "Essential tremor is typically slowly progressive over years. Although often labelled benign, it can become functionally and socially disabling, impairing writing, eating, and drinking; many patients gain useful relief from medication or, in refractory cases, from surgical neuromodulation.",
+    "pitfalls": [
+      "Confusing essential tremor with early Parkinson disease, which delays appropriate management",
+      "Overlooking a reversible cause such as thyrotoxicosis, medication, or excess caffeine",
+      "Missing Wilson disease in a young patient with tremor",
+      "Assuming the disorder is trivial and underestimating its impact on daily function and quality of life"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line pharmacotherapy with a non-selective beta-blocker (propranolol) or the anticonvulsant primidone",
+      "Second-line agents such as topiramate, gabapentin or a benzodiazepine where response is inadequate",
+      "Review and minimise exacerbating factors, including tremorogenic drugs, stimulants, caffeine and anxiety",
+      "Occupational therapy with weighted utensils and adaptive aids to maintain function in writing, eating and drinking",
+      "Botulinum toxin injection for disabling head or voice tremor",
+      "For refractory disabling tremor, refer for surgical neuromodulation with deep brain stimulation of the ventral intermediate thalamic nucleus or MRI-guided focused ultrasound thalamotomy"
     ]
-   ],
-   "caption": "Overview comparison matrix for essential tremor."
-  }
- ],
- "diagrams": [
-  {
-   "id": "essential-tremor-real-image",
-   "title": "Essential tremor: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "essential_tremor-pathway",
+      "title": "Essential tremor: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The hallmark is a bilateral, largely symmetric postural and kinetic (action) tremor of the upper limbs, in contrast to the resting tremor of Parkinson disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Strictly unilateral tremor, a resting component, or associated bradykinesia and rigidity suggesting Parkinson disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment to distinguish action tremor from resting and cerebellar tremor, Thyroid function tests to exclude thyrotoxicosis as a cause of enhanced tremor, Serum copper and ceruloplasmin in younger patients to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line pharmacotherapy with a non-selective beta-blocker (propranolol) or the anticonvulsant primidone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing essential tremor with early Parkinson disease, which delays appropriate management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of essential tremor."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "essential_tremor-matrix",
+      "title": "Essential tremor: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The hallmark is a bilateral, largely symmetric postural and kinetic (action) tremor of the upper limbs, in contrast to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment to distinguish action tremor from resting and cerebellar tremor, Thyroid function tests to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Parkinson disease (resting tremor, bradykinesia, rigidity), Enhanced physiological tremor (e.g. anxiety, caffeine,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line pharmacotherapy with a non-selective beta-blocker (propranolol) or the anticonvulsant primidone",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing essential tremor with early Parkinson disease, which delays appropriate management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for essential tremor."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 372-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "essential_tremor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of action, resting and cerebellar tremor",
+          "cells": [
+            {
+              "text": "Action (postural and kinetic) tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Thyrotoxicosis as a cause of enhanced tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum copper and ceruloplasmin",
+          "cells": [
+            {
+              "text": "Wilson disease in younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication and stimulant review",
+          "cells": [
+            {
+              "text": "Tremorogenic drugs, caffeine and stimulants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DaTscan or specialist assessment",
+          "cells": [
+            {
+              "text": "Distinguishing from Parkinson disease when difficult"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "essential_tremor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parkinson disease",
+          "cells": [
+            {
+              "text": "Resting tremor, bradykinesia and rigidity point to Parkinson disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enhanced physiological tremor (anxiety, caffeine, thyrotoxicosis, drugs)",
+          "cells": [
+            {
+              "text": "Reversible triggers; reviewed before diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Young onset with Kayser-Fleischer rings or hepatic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "essential_tremor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Propranolol or primidone",
+          "cells": [
+            {
+              "text": "First-line: a non-selective beta-blocker or an anticonvulsant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topiramate, gabapentin or a benzodiazepine",
+          "cells": [
+            {
+              "text": "Second-line where response is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimise exacerbating factors",
+          "cells": [
+            {
+              "text": "Tremorogenic drugs, stimulants, caffeine and anxiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy",
+          "cells": [
+            {
+              "text": "Weighted utensils and adaptive aids for writing, eating and drinking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Disabling head or voice tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation",
+          "cells": [
+            {
+              "text": "Ventral intermediate thalamic nucleus, for refractory disabling tremor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "essential_tremor-ddx-2",
+      "kind": "ddx",
+      "title": "Hyperkinetic movement disorders defined",
+      "rowHeader": "Condition",
+      "columns": [
+        "Definition"
+      ],
+      "rows": [
+        {
+          "parameter": "Tremor",
+          "cells": [
+            {
+              "text": "Rhythmic oscillation of a body part from intermittent muscle contractions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystonia",
+          "cells": [
+            {
+              "text": "Involuntary patterned, sustained or repeated muscle contractions, often twisting, with abnormal posture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Athetosis",
+          "cells": [
+            {
+              "text": "Slow, distal, writhing involuntary movements, tending to affect the arms and hands"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chorea",
+          "cells": [
+            {
+              "text": "Rapid, semipurposeful, graceful, dance-like nonpatterned involuntary movements of distal or proximal muscles"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myoclonus",
+          "cells": [
+            {
+              "text": "Sudden, brief (under 100 ms), jerk-like, arrhythmic muscle twitches"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tic",
+          "cells": [
+            {
+              "text": "Brief, repeated, stereotyped muscle contractions, often suppressible; simple (one muscle group) or complex (range of motor activities)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "essential_tremor-dx-mgmt",
+      "title": "Diagnosis and management of Essential tremor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral postural and action tremor, often with head or voice involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (resting or unilateral tremor, rigidity, young onset, cerebellar signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurology review; Wilson screen if young; DaTscan if Parkinson unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Action versus resting tremor; thyroid tests; copper and ceruloplasmin; drug review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Action tremor without resting or cerebellar signs and secondary causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Parkinson disease, Wilson disease or drug-induced tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Propranolol or primidone as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topiramate, gabapentin or benzodiazepine if inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Remove caffeine, stimulants and tremorogenic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occupational therapy with weighted utensils",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Botulinum toxin for disabling head or voice tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive over years; can become functionally disabling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

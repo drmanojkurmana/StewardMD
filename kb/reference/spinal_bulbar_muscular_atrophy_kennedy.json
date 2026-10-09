@@ -1,175 +1,746 @@
 {
- "id": "spinal_bulbar_muscular_atrophy_kennedy",
- "name": "Spinal and bulbar muscular atrophy (Kennedy disease)",
- "aliases": [
-  "SBMA",
-  "Kennedy disease",
-  "Kennedy's disease",
-  "X-linked bulbospinal neuronopathy",
-  "AR CAG repeat disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuromuscular Disorders reference texts / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked recessive lower motor neuron disorder affecting adult men, caused by an expanded CAG trinucleotide repeat in the androgen receptor gene (AR)",
-   "Presents in mid-adult life with slowly progressive proximal limb weakness, cramps, and prominent bulbar involvement including dysarthria, dysphagia and tongue atrophy",
-   "Perioral and chin fasciculations and a characteristic postural or action tremor are useful clinical clues",
-   "Partial androgen insensitivity produces gynaecomastia, testicular atrophy and reduced fertility",
-   "The disorder is a polyglutamine disease; longer CAG expansions tend to correlate with earlier onset",
-   "Sensory involvement is frequently detectable on nerve conduction studies even when clinically silent, reflecting a sensory neuronopathy component",
-   "It must be distinguished from amyotrophic lateral sclerosis, which it can mimic but from which it differs by its slower course, absence of upper motor neuron signs, and androgen features"
+  "id": "spinal_bulbar_muscular_atrophy_kennedy",
+  "name": "Spinal and bulbar muscular atrophy (Kennedy disease)",
+  "aliases": [
+    "SBMA",
+    "Kennedy disease",
+    "Kennedy's disease",
+    "X-linked bulbospinal neuronopathy",
+    "AR CAG repeat disorder"
   ],
-  "pathophysiology": "Spinal and bulbar muscular atrophy is caused by an expanded CAG trinucleotide repeat encoding a polyglutamine tract in the androgen receptor. The expanded, ligand-activated receptor misfolds and accumulates, exerting a toxic gain of function that preferentially damages lower motor neurons in the brainstem and spinal cord, together with dorsal root ganglion sensory neurons. Because the toxicity is androgen-dependent, disease is largely confined to men, while the same receptor dysfunction produces partial androgen insensitivity with gynaecomastia and reduced fertility. Progressive motor neuron degeneration leads to bulbar and proximal limb weakness and muscle atrophy.",
-  "additionalDifferentials": [
-   "Amyotrophic lateral sclerosis / motor neuron disease",
-   "Adult-onset (type 4) spinal muscular atrophy (SMN1 related)",
-   "Chronic inflammatory demyelinating polyneuropathy",
-   "Myasthenia gravis with bulbar features",
-   "Inclusion body myositis",
-   "Limb-girdle muscular dystrophy"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for the androgen receptor CAG repeat expansion, which is diagnostic",
-   "Electromyography and nerve conduction studies showing chronic neurogenic changes with reduced sensory action potentials",
-   "Serum creatine kinase, often moderately elevated",
-   "Endocrine assessment including testosterone, gonadotrophins and lipids/glucose given metabolic associations",
-   "Swallowing assessment to quantify aspiration risk",
-   "Family history and genetic counselling regarding X-linked inheritance"
-  ],
-  "redFlags": [
-   "Significant dysphagia with aspiration and weight loss",
-   "Recurrent aspiration pneumonia",
-   "Choking episodes or nocturnal respiratory symptoms",
-   "Rapid deterioration suggesting an alternative motor neuron disease"
-  ],
-  "prognosis": "The condition progresses slowly over decades and life expectancy may be near normal or only modestly reduced, with morbidity and mortality driven mainly by bulbar dysfunction, aspiration and falls. Most affected men remain ambulant for many years before requiring aids.",
-  "pitfalls": [
-   "Misdiagnosing the condition as amyotrophic lateral sclerosis and giving an inappropriately grave prognosis",
-   "Overlooking the androgen features (gynaecomastia, subfertility) that point to the diagnosis",
-   "Failing to recognise the subclinical sensory neuronopathy on nerve conduction studies",
-   "Not counselling about X-linked inheritance and carrier status in female relatives"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "OMIM: Spinal and bulbar muscular atrophy (AR)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive, symptom-directed care coordinated through a specialist neuromuscular clinic, as no disease-modifying therapy is established for the androgen-receptor CAG expansion",
-   "Maintain mobility and prevent contractures with physiotherapy, occupational therapy and appropriate aids, and treat dysarthria with speech and language therapy",
-   "Manage bulbar dysfunction with regular swallow assessment, diet-texture modification and consideration of gastrostomy feeding when aspiration risk is high",
-   "Monitor and treat the metabolic and endocrine complications of partial androgen insensitivity, including gynaecomastia, dyslipidaemia and impaired glucose tolerance",
-   "Surveil respiratory function and aspiration risk, treating chest infections promptly and instituting airway-clearance measures",
-   "Reduce falls through home assessment, mobility aids and provision of psychological support",
-   "Offer genetic counselling for X-linked recessive inheritance, with carrier testing for female relatives and reproductive counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinal_bulbar_muscular_atrophy_kennedy-pathway",
-   "title": "Spinal and bulbar muscular atrophy (Kennedy disease): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked recessive lower motor neuron disorder affecting adult men, caused by an expanded CAG trinucleotide repeat in the androgen receptor gene (AR)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant dysphagia with aspiration and weight loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for the androgen receptor CAG repeat expansion, which is diagnostic, Electromyography and nerve conduction studies showing chronic neurogenic changes with reduced sensory action potentials, Serum creatine"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive, symptom-directed care coordinated through a specialist neuromuscular clinic, as no disease-modifying therapy is established for the androgen-receptor CAG expansion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the condition as amyotrophic lateral sclerosis and giving an inappropriately grave prognosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinal and bulbar muscular atrophy (kennedy disease)."
-  }
- ],
- "tables": [
-  {
-   "id": "spinal_bulbar_muscular_atrophy_kennedy-matrix",
-   "title": "Spinal and bulbar muscular atrophy (Kennedy disease): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked recessive lower motor neuron disorder affecting adult men, caused by an expanded CAG trinucleotide repeat in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuromuscular Disorders reference texts / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked recessive lower motor neuron disorder affecting adult men, caused by an expanded CAG trinucleotide repeat in the androgen receptor gene (AR)",
+      "Presents in mid-adult life with slowly progressive proximal limb weakness, cramps, and prominent bulbar involvement including dysarthria, dysphagia and tongue atrophy",
+      "Perioral and chin fasciculations and a characteristic postural or action tremor are useful clinical clues",
+      "Partial androgen insensitivity produces gynaecomastia, testicular atrophy and reduced fertility",
+      "The disorder is a polyglutamine disease; longer CAG expansions tend to correlate with earlier onset",
+      "Sensory involvement is frequently detectable on nerve conduction studies even when clinically silent, reflecting a sensory neuronopathy component",
+      "It must be distinguished from amyotrophic lateral sclerosis, which it can mimic but from which it differs by its slower course, absence of upper motor neuron signs, and androgen features"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for the androgen receptor CAG repeat expansion, which is diagnostic, Electromyography and nerve conduction",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spinal and bulbar muscular atrophy is caused by an expanded CAG trinucleotide repeat encoding a polyglutamine tract in the androgen receptor. The expanded, ligand-activated receptor misfolds and accumulates, exerting a toxic gain of function that preferentially damages lower motor neurons in the brainstem and spinal cord, together with dorsal root ganglion sensory neurons. Because the toxicity is androgen-dependent, disease is largely confined to men, while the same receptor dysfunction produces partial androgen insensitivity with gynaecomastia and reduced fertility. Progressive motor neuron degeneration leads to bulbar and proximal limb weakness and muscle atrophy.",
+    "additionalDifferentials": [
+      "Amyotrophic lateral sclerosis / motor neuron disease",
+      "Adult-onset (type 4) spinal muscular atrophy (SMN1 related)",
+      "Chronic inflammatory demyelinating polyneuropathy",
+      "Myasthenia gravis with bulbar features",
+      "Inclusion body myositis",
+      "Limb-girdle muscular dystrophy"
     ],
-    [
-     "Primary Differentials",
-     "Amyotrophic lateral sclerosis / motor neuron disease, Adult-onset (type 4) spinal muscular atrophy (SMN1 related), Chronic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for the androgen receptor CAG repeat expansion, which is diagnostic",
+      "Electromyography and nerve conduction studies showing chronic neurogenic changes with reduced sensory action potentials",
+      "Serum creatine kinase, often moderately elevated",
+      "Endocrine assessment including testosterone, gonadotrophins and lipids/glucose given metabolic associations",
+      "Swallowing assessment to quantify aspiration risk",
+      "Family history and genetic counselling regarding X-linked inheritance"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive, symptom-directed care coordinated through a specialist neuromuscular clinic, as no disease-modifying therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant dysphagia with aspiration and weight loss",
+      "Recurrent aspiration pneumonia",
+      "Choking episodes or nocturnal respiratory symptoms",
+      "Rapid deterioration suggesting an alternative motor neuron disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the condition as amyotrophic lateral sclerosis and giving an inappropriately grave prognosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition progresses slowly over decades and life expectancy may be near normal or only modestly reduced, with morbidity and mortality driven mainly by bulbar dysfunction, aspiration and falls. Most affected men remain ambulant for many years before requiring aids.",
+    "pitfalls": [
+      "Misdiagnosing the condition as amyotrophic lateral sclerosis and giving an inappropriately grave prognosis",
+      "Overlooking the androgen features (gynaecomastia, subfertility) that point to the diagnosis",
+      "Failing to recognise the subclinical sensory neuronopathy on nerve conduction studies",
+      "Not counselling about X-linked inheritance and carrier status in female relatives"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "OMIM: Spinal and bulbar muscular atrophy (AR)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive, symptom-directed care coordinated through a specialist neuromuscular clinic, as no disease-modifying therapy is established for the androgen-receptor CAG expansion",
+      "Maintain mobility and prevent contractures with physiotherapy, occupational therapy and appropriate aids, and treat dysarthria with speech and language therapy",
+      "Manage bulbar dysfunction with regular swallow assessment, diet-texture modification and consideration of gastrostomy feeding when aspiration risk is high",
+      "Monitor and treat the metabolic and endocrine complications of partial androgen insensitivity, including gynaecomastia, dyslipidaemia and impaired glucose tolerance",
+      "Surveil respiratory function and aspiration risk, treating chest infections promptly and instituting airway-clearance measures",
+      "Reduce falls through home assessment, mobility aids and provision of psychological support",
+      "Offer genetic counselling for X-linked recessive inheritance, with carrier testing for female relatives and reproductive counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinal and bulbar muscular atrophy (kennedy disease)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinal-bulbar-muscular-atrophy-kennedy-real-image",
-   "title": "Spinal and bulbar muscular atrophy (Kennedy disease): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinal_bulbar_muscular_atrophy_kennedy-pathway",
+      "title": "Spinal and bulbar muscular atrophy (Kennedy disease): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked recessive lower motor neuron disorder affecting adult men, caused by an expanded CAG trinucleotide repeat in the androgen receptor gene (AR)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant dysphagia with aspiration and weight loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for the androgen receptor CAG repeat expansion, which is diagnostic, Electromyography and nerve conduction studies showing chronic neurogenic changes with reduced sensory action potentials, Serum creatine"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive, symptom-directed care coordinated through a specialist neuromuscular clinic, as no disease-modifying therapy is established for the androgen-receptor CAG expansion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the condition as amyotrophic lateral sclerosis and giving an inappropriately grave prognosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinal and bulbar muscular atrophy (kennedy disease)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinal_bulbar_muscular_atrophy_kennedy-matrix",
+      "title": "Spinal and bulbar muscular atrophy (Kennedy disease): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked recessive lower motor neuron disorder affecting adult men, caused by an expanded CAG trinucleotide repeat in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for the androgen receptor CAG repeat expansion, which is diagnostic, Electromyography and nerve conduction",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Amyotrophic lateral sclerosis / motor neuron disease, Adult-onset (type 4) spinal muscular atrophy (SMN1 related), Chronic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive, symptom-directed care coordinated through a specialist neuromuscular clinic, as no disease-modifying therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the condition as amyotrophic lateral sclerosis and giving an inappropriately grave prognosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinal and bulbar muscular atrophy (kennedy disease)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular Disorders reference texts / OMIM",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 61-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_bulbar_muscular_atrophy_kennedy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Androgen receptor CAG repeat testing",
+          "cells": [
+            {
+              "text": "Expanded CAG repeat, which is diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EMG and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Chronic neurogenic change and reduced sensory action potentials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Moderately elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine assessment",
+          "cells": [
+            {
+              "text": "Testosterone, gonadotrophins, lipids and glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing assessment",
+          "cells": [
+            {
+              "text": "Aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_bulbar_muscular_atrophy_kennedy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Amyotrophic lateral sclerosis",
+          "cells": [
+            {
+              "text": "Can mimic it, but this disorder progresses more slowly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_bulbar_muscular_atrophy_kennedy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom-directed care",
+          "cells": [
+            {
+              "text": "Specialist neuromuscular clinic; no disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Mobility, contracture prevention and aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bulbar management",
+          "cells": [
+            {
+              "text": "Regular swallow assessment, diet texture modification and gastrostomy consideration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen-related complications",
+          "cells": [
+            {
+              "text": "Gynaecomastia, testicular atrophy and subfertility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory care",
+          "cells": [
+            {
+              "text": "Prompt treatment of chest infection and airway clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention",
+          "cells": [
+            {
+              "text": "Home assessment, mobility aids and psychological support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked recessive; carrier testing for female relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_bulbar_muscular_atrophy_kennedy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Selected trinucleotide repeat disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Locus",
+        "Repeat",
+        "Triplet length (normal/disease)",
+        "Inheritance",
+        "Gene product"
+      ],
+      "rows": [
+        {
+          "parameter": "X-chromosomal spinobulbar muscular atrophy (SBMA)",
+          "cells": [
+            {
+              "text": "Xq11-q12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "11-34/40-62"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "Androgen receptor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXA)",
+          "cells": [
+            {
+              "text": "Xq27.3"
+            },
+            {
+              "text": "CGG"
+            },
+            {
+              "text": "6-50/200-300"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-1 protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXE)",
+          "cells": [
+            {
+              "text": "Xq28"
+            },
+            {
+              "text": "GCC"
+            },
+            {
+              "text": "6-25/>200"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-2 protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystrophia myotonica (DM)",
+          "cells": [
+            {
+              "text": "19q13.2-q13.3"
+            },
+            {
+              "text": "CTG"
+            },
+            {
+              "text": "5-30/200-1000"
+            },
+            {
+              "text": "AD, variable penetrance"
+            },
+            {
+              "text": "Myotonin protein kinase"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Huntington's disease (HD)",
+          "cells": [
+            {
+              "text": "4p16.3"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-34/37-180"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Huntingtin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia type 1 (SCA1)",
+          "cells": [
+            {
+              "text": "6p21.3-21.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-39/40-88"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA2",
+          "cells": [
+            {
+              "text": "12q24.1"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "15-31/34-400"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA3; Machado-Joseph disease (MD)",
+          "cells": [
+            {
+              "text": "14q21"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "13-36/55-86"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA6 (CACNA1A)",
+          "cells": [
+            {
+              "text": "19p13.1-13.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-16/20-33"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Alpha 1A voltage-dependent L-type calcium channel"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA7",
+          "cells": [
+            {
+              "text": "3p21.1-p12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-19/37 to >300"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 7"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA12",
+          "cells": [
+            {
+              "text": "5q31"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-26/66-78"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Protein phosphatase 2A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dentorubral pallidoluysian atrophy (DRPLA)",
+          "cells": [
+            {
+              "text": "12p"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "7-23/49-75"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Atrophin 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Friedreich ataxia (FRDA1)",
+          "cells": [
+            {
+              "text": "9q13-21"
+            },
+            {
+              "text": "GAA"
+            },
+            {
+              "text": "7-22/200-900"
+            },
+            {
+              "text": "AR"
+            },
+            {
+              "text": "Frataxin"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_bulbar_muscular_atrophy_kennedy-dx-mgmt",
+      "title": "Diagnosis and management of Spinal and bulbar muscular atrophy (Kennedy disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult man with proximal weakness and bulbar signs: suspected SBMA",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aspiration, weight loss, choking, rapid decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallow and respiratory assessment for aspiration risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AR CAG repeat testing; EMG and nerve conduction; CK; endocrine screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the androgen receptor CAG repeat expansion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ALS or another motor neuron disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptom-directed care through a neuromuscular clinic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to maintain mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Regular swallow assessment, diet modification and gastrostomy consideration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor androgen complications; treat chest infections promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-modifying treatment; care focuses on function and bulbar safety",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

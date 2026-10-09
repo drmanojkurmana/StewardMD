@@ -1,178 +1,478 @@
 {
- "id": "arc_syndrome",
- "name": "ARC Syndrome (Arthrogryposis–Renal Dysfunction–Cholestasis Syndrome)",
- "aliases": [
-  "ARC syndrome",
-  "VPS33B deficiency",
-  "VIPAS39 deficiency"
- ],
- "class": "non_infective",
- "system": "Hepatology / Inherited cholestasis",
- "specialty": "Paediatrics / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Inherited cholestasis references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by a classic triad of arthrogryposis multiplex congenita, renal tubular dysfunction of Fanconi type, and low-GGT cholestasis.",
-   "Autosomal recessive, caused by biallelic mutations in VPS33B or, less commonly, VIPAS39 (VPS16B), which disrupt intracellular vesicular trafficking and polarised apical protein sorting.",
-   "Platelet dysfunction with abnormal or absent alpha-granules produces a bleeding tendency, so liver biopsy and other invasive procedures carry a high haemorrhage risk and are often avoided.",
-   "Cholestasis occurs with a low or normal GGT, resembling PFIC1 and PFIC2 rather than the high-GGT causes.",
-   "Renal involvement includes renal tubular acidosis, glycosuria, aminoaciduria, phosphaturia and a urinary concentrating defect, and nephrogenic diabetes insipidus may occur.",
-   "Additional features include ichthyosis, marked failure to thrive, recurrent infections, sensorineural deafness, central nervous system malformation and dysmorphism.",
-   "Diagnosis rests on the clinical phenotype with molecular confirmation; abnormal platelet CD63 distribution and giant-cell change on histology are supportive.",
-   "Milder or incomplete phenotypes are recognised, particularly with VIPAS39 mutations or hypomorphic VPS33B variants, and not every child shows the full triad."
+  "id": "arc_syndrome",
+  "name": "ARC Syndrome (Arthrogryposis–Renal Dysfunction–Cholestasis Syndrome)",
+  "aliases": [
+    "ARC syndrome",
+    "VPS33B deficiency",
+    "VIPAS39 deficiency"
   ],
-  "pathophysiology": "VPS33B and VIPAS39 encode interacting proteins of the class C core vacuole and endosome tethering machinery that governs membrane fusion, vesicular trafficking and the correct polarised delivery of apical membrane proteins in epithelial cells. Their loss disrupts apico-basal polarity and mislocalises apical transporters, including canalicular bile salt export machinery, so bile secretion fails and low-GGT cholestasis develops; the same trafficking defect impairs renal tubular transporter delivery to produce a generalised proximal tubulopathy, and disturbs platelet alpha-granule biogenesis to cause a bleeding diathesis. Wider expression of this trafficking pathway accounts for the multisystem picture, with neurogenic arthrogryposis attributed to anterior horn cell involvement and additional effects on skin, hearing and the central nervous system.",
-  "additionalDifferentials": [
-   "PFIC type 1 and PFIC type 2 (low-GGT cholestasis without the renal and joint features)",
-   "Lowe (oculocerebrorenal) syndrome",
-   "Mitochondrial hepatopathies with renal tubulopathy",
-   "Tyrosinaemia type 1 and galactosaemia",
-   "Peroxisomal biogenesis disorders (Zellweger spectrum)",
-   "Congenital disorders of glycosylation",
-   "GRACILE syndrome"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of VPS33B and VIPAS39",
-   "Renal tubular assessment: urine electrolytes, acidification, glucose, amino acids and phosphate handling",
-   "Serum GGT and bile acids to confirm low-GGT cholestasis",
-   "Platelet studies including aggregation and electron microscopy of alpha-granules with CD63 distribution",
-   "Skin examination for ichthyosis and hearing assessment",
-   "Brain imaging for structural malformation"
-  ],
-  "redFlags": [
-   "Bleeding or haemorrhage after venepuncture or procedures, mandating caution before liver biopsy",
-   "Severe failure to thrive",
-   "Recurrent or overwhelming infection and sepsis",
-   "Dehydration and acidosis from tubulopathy or nephrogenic diabetes insipidus",
-   "Intracranial haemorrhage"
-  ],
-  "prognosis": "The prognosis is generally poor, with most affected infants dying within the first year from infection, dehydration, acidosis or haemorrhage, although milder and longer-surviving phenotypes are increasingly recognised.",
-  "pitfalls": [
-   "Proceeding to liver biopsy without recognising the platelet-related bleeding risk",
-   "Classifying the disorder as isolated PFIC and missing the renal, joint and platelet clues",
-   "Attributing failure to thrive solely to cholestasis rather than the tubulopathy",
-   "Overlooking mild or atypical presentations that lack the complete triad",
-   "Expecting an elevated GGT and discounting the diagnosis when it is low"
-  ],
-  "references": [
-   "Paediatric hepatology reference texts",
-   "Inherited cholestasis clinical guidelines",
-   "Clinical genetics of liver disease references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no curative therapy, so care is largely supportive and palliative given the poor prognosis",
-   "Avoid invasive procedures such as liver biopsy and surgery where possible because of alpha-granule platelet dysfunction and high haemorrhage risk, using platelet-transfusion cover if unavoidable",
-   "Manage low-GGT cholestasis and pruritus with ursodeoxycholic acid, fat-soluble vitamin supplementation and nutritional support with medium-chain-triglyceride-enriched feeds",
-   "Correct renal tubular losses with bicarbonate for renal tubular acidosis, electrolyte and phosphate replacement and attention to the concentrating defect and free-water balance",
-   "Treat failure to thrive aggressively with high-calorie nutrition and manage intercurrent infection and dehydration promptly",
-   "Provide skin care for ichthyosis and hearing assessment and support",
-   "Coordinate multidisciplinary paediatric hepatology, nephrology, genetics and palliative-care input, and offer genetic counselling and family screening given autosomal recessive VPS33B or VIPAS39 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "arc_syndrome-pathway",
-   "title": "ARC Syndrome (Arthrogryposis–Renal Dysfunction–Cholestasis Syndrome): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by a classic triad of arthrogryposis multiplex congenita, renal tubular dysfunction of Fanconi type, and low-GGT cholestasis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bleeding or haemorrhage after venepuncture or procedures, mandating caution before liver biopsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of VPS33B and VIPAS39, Renal tubular assessment: urine electrolytes, acidification, glucose, amino acids and phosphate handling, Serum GGT and bile acids to confirm low-GGT cholestasis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no curative therapy, so care is largely supportive and palliative given the poor prognosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Proceeding to liver biopsy without recognising the platelet-related bleeding risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of arc syndrome (arthrogryposis–renal dysfunction–cholestasis syndrome)."
-  }
- ],
- "tables": [
-  {
-   "id": "arc_syndrome-matrix",
-   "title": "ARC Syndrome (Arthrogryposis–Renal Dysfunction–Cholestasis Syndrome): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by a classic triad of arthrogryposis multiplex congenita, renal tubular dysfunction of Fanconi type, and low-GGT",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatology / Inherited cholestasis",
+  "specialty": "Paediatrics / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Inherited cholestasis references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by a classic triad of arthrogryposis multiplex congenita, renal tubular dysfunction of Fanconi type, and low-GGT cholestasis.",
+      "Autosomal recessive, caused by biallelic mutations in VPS33B or, less commonly, VIPAS39 (VPS16B), which disrupt intracellular vesicular trafficking and polarised apical protein sorting.",
+      "Platelet dysfunction with abnormal or absent alpha-granules produces a bleeding tendency, so liver biopsy and other invasive procedures carry a high haemorrhage risk and are often avoided.",
+      "Cholestasis occurs with a low or normal GGT, resembling PFIC1 and PFIC2 rather than the high-GGT causes.",
+      "Renal involvement includes renal tubular acidosis, glycosuria, aminoaciduria, phosphaturia and a urinary concentrating defect, and nephrogenic diabetes insipidus may occur.",
+      "Additional features include ichthyosis, marked failure to thrive, recurrent infections, sensorineural deafness, central nervous system malformation and dysmorphism.",
+      "Diagnosis rests on the clinical phenotype with molecular confirmation; abnormal platelet CD63 distribution and giant-cell change on histology are supportive.",
+      "Milder or incomplete phenotypes are recognised, particularly with VIPAS39 mutations or hypomorphic VPS33B variants, and not every child shows the full triad."
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of VPS33B and VIPAS39, Renal tubular assessment: urine electrolytes, acidification, glucose, amino",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "VPS33B and VIPAS39 encode interacting proteins of the class C core vacuole and endosome tethering machinery that governs membrane fusion, vesicular trafficking and the correct polarised delivery of apical membrane proteins in epithelial cells. Their loss disrupts apico-basal polarity and mislocalises apical transporters, including canalicular bile salt export machinery, so bile secretion fails and low-GGT cholestasis develops; the same trafficking defect impairs renal tubular transporter delivery to produce a generalised proximal tubulopathy, and disturbs platelet alpha-granule biogenesis to cause a bleeding diathesis. Wider expression of this trafficking pathway accounts for the multisystem picture, with neurogenic arthrogryposis attributed to anterior horn cell involvement and additional effects on skin, hearing and the central nervous system.",
+    "additionalDifferentials": [
+      "PFIC type 1 and PFIC type 2 (low-GGT cholestasis without the renal and joint features)",
+      "Lowe (oculocerebrorenal) syndrome",
+      "Mitochondrial hepatopathies with renal tubulopathy",
+      "Tyrosinaemia type 1 and galactosaemia",
+      "Peroxisomal biogenesis disorders (Zellweger spectrum)",
+      "Congenital disorders of glycosylation",
+      "GRACILE syndrome"
     ],
-    [
-     "Primary Differentials",
-     "PFIC type 1 and PFIC type 2 (low-GGT cholestasis without the renal and joint features), Lowe (oculocerebrorenal) syndrome,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of VPS33B and VIPAS39",
+      "Renal tubular assessment: urine electrolytes, acidification, glucose, amino acids and phosphate handling",
+      "Serum GGT and bile acids to confirm low-GGT cholestasis",
+      "Platelet studies including aggregation and electron microscopy of alpha-granules with CD63 distribution",
+      "Skin examination for ichthyosis and hearing assessment",
+      "Brain imaging for structural malformation"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no curative therapy, so care is largely supportive and palliative given the poor prognosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Bleeding or haemorrhage after venepuncture or procedures, mandating caution before liver biopsy",
+      "Severe failure to thrive",
+      "Recurrent or overwhelming infection and sepsis",
+      "Dehydration and acidosis from tubulopathy or nephrogenic diabetes insipidus",
+      "Intracranial haemorrhage"
     ],
-    [
-     "Clinical Pitfall",
-     "Proceeding to liver biopsy without recognising the platelet-related bleeding risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally poor, with most affected infants dying within the first year from infection, dehydration, acidosis or haemorrhage, although milder and longer-surviving phenotypes are increasingly recognised.",
+    "pitfalls": [
+      "Proceeding to liver biopsy without recognising the platelet-related bleeding risk",
+      "Classifying the disorder as isolated PFIC and missing the renal, joint and platelet clues",
+      "Attributing failure to thrive solely to cholestasis rather than the tubulopathy",
+      "Overlooking mild or atypical presentations that lack the complete triad",
+      "Expecting an elevated GGT and discounting the diagnosis when it is low"
+    ],
+    "references": [
+      "Paediatric hepatology reference texts",
+      "Inherited cholestasis clinical guidelines",
+      "Clinical genetics of liver disease references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no curative therapy, so care is largely supportive and palliative given the poor prognosis",
+      "Avoid invasive procedures such as liver biopsy and surgery where possible because of alpha-granule platelet dysfunction and high haemorrhage risk, using platelet-transfusion cover if unavoidable",
+      "Manage low-GGT cholestasis and pruritus with ursodeoxycholic acid, fat-soluble vitamin supplementation and nutritional support with medium-chain-triglyceride-enriched feeds",
+      "Correct renal tubular losses with bicarbonate for renal tubular acidosis, electrolyte and phosphate replacement and attention to the concentrating defect and free-water balance",
+      "Treat failure to thrive aggressively with high-calorie nutrition and manage intercurrent infection and dehydration promptly",
+      "Provide skin care for ichthyosis and hearing assessment and support",
+      "Coordinate multidisciplinary paediatric hepatology, nephrology, genetics and palliative-care input, and offer genetic counselling and family screening given autosomal recessive VPS33B or VIPAS39 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for arc syndrome (arthrogryposis–renal dysfunction–cholestasis syndrome)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "arc-syndrome-real-image",
-   "title": "ARC Syndrome (Arthrogryposis–Renal Dysfunction–Cholestasis Syndrome): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "arc_syndrome-pathway",
+      "title": "ARC Syndrome (Arthrogryposis–Renal Dysfunction–Cholestasis Syndrome): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by a classic triad of arthrogryposis multiplex congenita, renal tubular dysfunction of Fanconi type, and low-GGT cholestasis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bleeding or haemorrhage after venepuncture or procedures, mandating caution before liver biopsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of VPS33B and VIPAS39, Renal tubular assessment: urine electrolytes, acidification, glucose, amino acids and phosphate handling, Serum GGT and bile acids to confirm low-GGT cholestasis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no curative therapy, so care is largely supportive and palliative given the poor prognosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Proceeding to liver biopsy without recognising the platelet-related bleeding risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of arc syndrome (arthrogryposis–renal dysfunction–cholestasis syndrome)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "arc_syndrome-matrix",
+      "title": "ARC Syndrome (Arthrogryposis–Renal Dysfunction–Cholestasis Syndrome): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by a classic triad of arthrogryposis multiplex congenita, renal tubular dysfunction of Fanconi type, and low-GGT",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of VPS33B and VIPAS39, Renal tubular assessment: urine electrolytes, acidification, glucose, amino",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "PFIC type 1 and PFIC type 2 (low-GGT cholestasis without the renal and joint features), Lowe (oculocerebrorenal) syndrome,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no curative therapy, so care is largely supportive and palliative given the poor prognosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Proceeding to liver biopsy without recognising the platelet-related bleeding risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for arc syndrome (arthrogryposis–renal dysfunction–cholestasis syndrome)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited cholestasis references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arc_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of VPS33B and VIPAS39",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular assessment",
+          "cells": [
+            {
+              "text": "Urine electrolytes, acidification, glucose, amino acids and phosphate handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum GGT and bile acids",
+          "cells": [
+            {
+              "text": "Low-GGT cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregation and alpha-granule electron microscopy",
+          "cells": [
+            {
+              "text": "Alpha-granule platelet dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination and hearing assessment",
+          "cells": [
+            {
+              "text": "Ichthyosis and hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging",
+          "cells": [
+            {
+              "text": "Structural malformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arc_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "PFIC type 1 and type 2",
+          "cells": [
+            {
+              "text": "Low-GGT cholestasis without the renal and joint features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arc_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "No curative therapy"
+            },
+            {
+              "text": "Poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid invasive procedures",
+          "cells": [
+            {
+              "text": "Liver biopsy and surgery where possible"
+            },
+            {
+              "text": "Alpha-granule platelet dysfunction and high haemorrhage risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ursodeoxycholic acid and vitamins",
+          "cells": [
+            {
+              "text": "For low-GGT cholestasis and pruritus; fat-soluble vitamins; medium-chain triglycerides"
+            },
+            {
+              "text": "Nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular correction",
+          "cells": [
+            {
+              "text": "Bicarbonate for renal tubular acidosis; electrolyte and phosphate replacement"
+            },
+            {
+              "text": "Concentrating defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition for failure to thrive",
+          "cells": [
+            {
+              "text": "High-calorie nutrition; prompt management of infection and dehydration"
+            },
+            {
+              "text": "Severe failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and hearing care",
+          "cells": [
+            {
+              "text": "Ichthyosis skin care; hearing support"
+            },
+            {
+              "text": "Associated features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary and genetic care",
+          "cells": [
+            {
+              "text": "Hepatology, nephrology, genetics and palliative care; family screening"
+            },
+            {
+              "text": "Genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arc_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of ARC Syndrome (Arthrogryposis-Renal Dysfunction-Cholestasis Syndrome)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arthrogryposis, renal tubular disease and low-GGT cholestasis in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Bleeding risk, severe failure to thrive or recurrent infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Avoid liver biopsy; check bleeding risk and treat dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "VPS33B and VIPAS39 testing, tubular studies, GGT and bile acids, platelet studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "VPS33B or VIPAS39 variant confirms ARC syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive care with ursodeoxycholic acid and fat-soluble vitamins",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bicarbonate for renal tubular acidosis; electrolyte and phosphate replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-calorie nutrition for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Skin care and hearing support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Palliative and multidisciplinary care; genetic counselling for families",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

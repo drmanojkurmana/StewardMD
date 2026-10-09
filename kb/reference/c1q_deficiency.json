@@ -1,179 +1,565 @@
 {
- "id": "c1q_deficiency",
- "name": "C1q deficiency",
- "aliases": [
-  "C1q deficiency",
-  "Complement C1q deficiency",
-  "Hereditary C1q deficiency"
- ],
- "class": "non_infective",
- "system": "Immune system",
- "specialty": "Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Middleton's Allergy: Principles and Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "C1q deficiency is the complement defect most strongly associated with early-onset systemic lupus erythematosus, often with prominent cutaneous and central nervous system disease.",
-   "It is inherited in an autosomal recessive manner and usually presents in childhood.",
-   "Impaired clearance of apoptotic cells and immune complexes is the key mechanism linking the deficiency to lupus-like autoimmunity.",
-   "There is also increased susceptibility to encapsulated and pyogenic infections owing to defective classical-pathway activation.",
-   "The CH50 (total classical-pathway haemolytic complement) is markedly reduced or absent, while the alternative-pathway assay (AH50) is preserved.",
-   "Specific C1q antigenic and functional assays confirm the diagnosis after an absent CH50 is found.",
-   "Some patients have functionally defective C1q with normal antigen levels, so functional testing matters.",
-   "Management centres on treating the autoimmune disease, vaccination against encapsulated organisms and prompt treatment of infection."
+  "id": "c1q_deficiency",
+  "name": "C1q deficiency",
+  "aliases": [
+    "C1q deficiency",
+    "Complement C1q deficiency",
+    "Hereditary C1q deficiency"
   ],
-  "pathophysiology": "C1q is the recognition subunit of the first component of the classical complement pathway, binding immune complexes and the surfaces of apoptotic cells. In C1q deficiency the classical pathway cannot be activated, so opsonisation and lysis of certain pathogens are impaired, predisposing to pyogenic infection. Critically, C1q also tethers apoptotic cell debris for clearance by phagocytes; without it, dying cells and nuclear antigens accumulate, are inadequately removed and provoke a break in self-tolerance. This drives the strong association with systemic lupus erythematosus, in which autoantibodies form against these persisting nuclear self-antigens. Defective clearance of circulating immune complexes further contributes to tissue deposition and inflammation.",
-  "additionalDifferentials": [
-   "Idiopathic systemic lupus erythematosus without complement deficiency",
-   "Other early-component complement deficiencies (C1r/C1s, C4, C2)",
-   "Hypocomplementaemic urticarial vasculitis",
-   "Other primary immunodeficiencies with autoimmunity",
-   "Familial chilblain lupus and type I interferonopathies",
-   "Acquired hypocomplementaemia from active immune-complex disease"
-  ],
-  "additionalInvestigations": [
-   "CH50 classical-pathway haemolytic assay (markedly low or absent)",
-   "AH50 alternative-pathway assay (typically preserved)",
-   "C1q antigenic level and functional activity",
-   "Genetic testing of the C1q genes",
-   "Autoimmune serology including ANA and anti-dsDNA",
-   "Renal function and urinalysis for lupus nephritis",
-   "Documentation of vaccination status and infection history"
-  ],
-  "redFlags": [
-   "Invasive infection with encapsulated organisms or signs of meningitis or sepsis",
-   "Rapidly progressive glomerulonephritis",
-   "Neuropsychiatric features suggesting CNS lupus",
-   "Severe cytopenias",
-   "Early-onset severe photosensitive or ulcerating skin disease"
-  ],
-  "prognosis": "Outcome is largely determined by the severity of associated lupus and the frequency of serious infections; the majority of individuals with complete deficiency develop lupus-like disease. Vigilant management of autoimmunity and infection prophylaxis improve outcomes.",
-  "pitfalls": [
-   "Overlooking an inherited complement defect in a child presenting with early, severe lupus.",
-   "Stopping at an absent CH50 without measuring individual components to localise the defect.",
-   "Missing functionally defective C1q when only the antigen level is checked.",
-   "Neglecting vaccination and infection prophylaxis against encapsulated organisms.",
-   "Attributing persistently low complement solely to disease activity rather than a primary deficiency."
-  ],
-  "references": [
-   "Middleton's Allergy: Principles and Practice, current edition",
-   "Oxford Textbook of Medicine, current edition",
-   "Reviews on complement deficiencies and systemic lupus erythematosus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the associated systemic lupus erythematosus with standard immunosuppression, using hydroxychloroquine, corticosteroids and agents such as mycophenolate, azathioprine or rituximab according to organ involvement",
-   "Prevent infection by vaccinating against encapsulated organisms including pneumococcus, meningococcus and Haemophilus influenzae type b, and treat pyogenic infection promptly, with antibiotic prophylaxis where indicated",
-   "Treat and monitor lupus manifestations, particularly the prominent cutaneous, central nervous system and renal (lupus nephritis) disease",
-   "Advise photoprotection and skin care for cutaneous lupus",
-   "Monitor renal function and urinalysis, autoantibodies, disease activity and, in children, growth",
-   "Consider fresh frozen plasma as a source of C1q in selected severe cases, with haematopoietic stem cell transplantation reported for refractory disease",
-   "Coordinate multidisciplinary care across paediatric rheumatology, immunology and nephrology",
-   "Offer genetic counselling and family screening given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "c1q_deficiency-pathway",
-   "title": "C1q deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "C1q deficiency is the complement defect most strongly associated with early-onset systemic lupus erythematosus, often with prominent cutaneous and central nervous system disease.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Invasive infection with encapsulated organisms or signs of meningitis or sepsis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CH50 classical-pathway haemolytic assay (markedly low or absent), AH50 alternative-pathway assay (typically preserved), C1q antigenic level and functional activity"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the associated systemic lupus erythematosus with standard immunosuppression, using hydroxychloroquine, corticosteroids and agents such as mycophenolate, azathioprine or rituximab according to organ involvement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking an inherited complement defect in a child presenting with early, severe lupus."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of c1q deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "c1q_deficiency-matrix",
-   "title": "C1q deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "C1q deficiency is the complement defect most strongly associated with early-onset systemic lupus erythematosus, often with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immune system",
+  "specialty": "Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Middleton's Allergy: Principles and Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "C1q deficiency is the complement defect most strongly associated with early-onset systemic lupus erythematosus, often with prominent cutaneous and central nervous system disease.",
+      "It is inherited in an autosomal recessive manner and usually presents in childhood.",
+      "Impaired clearance of apoptotic cells and immune complexes is the key mechanism linking the deficiency to lupus-like autoimmunity.",
+      "There is also increased susceptibility to encapsulated and pyogenic infections owing to defective classical-pathway activation.",
+      "The CH50 (total classical-pathway haemolytic complement) is markedly reduced or absent, while the alternative-pathway assay (AH50) is preserved.",
+      "Specific C1q antigenic and functional assays confirm the diagnosis after an absent CH50 is found.",
+      "Some patients have functionally defective C1q with normal antigen levels, so functional testing matters.",
+      "Management centres on treating the autoimmune disease, vaccination against encapsulated organisms and prompt treatment of infection."
     ],
-    [
-     "Key Investigations",
-     "CH50 classical-pathway haemolytic assay (markedly low or absent), AH50 alternative-pathway assay (typically preserved), C1q",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "C1q is the recognition subunit of the first component of the classical complement pathway, binding immune complexes and the surfaces of apoptotic cells. In C1q deficiency the classical pathway cannot be activated, so opsonisation and lysis of certain pathogens are impaired, predisposing to pyogenic infection. Critically, C1q also tethers apoptotic cell debris for clearance by phagocytes; without it, dying cells and nuclear antigens accumulate, are inadequately removed and provoke a break in self-tolerance. This drives the strong association with systemic lupus erythematosus, in which autoantibodies form against these persisting nuclear self-antigens. Defective clearance of circulating immune complexes further contributes to tissue deposition and inflammation.",
+    "additionalDifferentials": [
+      "Idiopathic systemic lupus erythematosus without complement deficiency",
+      "Other early-component complement deficiencies (C1r/C1s, C4, C2)",
+      "Hypocomplementaemic urticarial vasculitis",
+      "Other primary immunodeficiencies with autoimmunity",
+      "Familial chilblain lupus and type I interferonopathies",
+      "Acquired hypocomplementaemia from active immune-complex disease"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic systemic lupus erythematosus without complement deficiency, Other early-component complement deficiencies (C1r/C1s,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CH50 classical-pathway haemolytic assay (markedly low or absent)",
+      "AH50 alternative-pathway assay (typically preserved)",
+      "C1q antigenic level and functional activity",
+      "Genetic testing of the C1q genes",
+      "Autoimmune serology including ANA and anti-dsDNA",
+      "Renal function and urinalysis for lupus nephritis",
+      "Documentation of vaccination status and infection history"
     ],
-    [
-     "Management Strategy",
-     "Manage the associated systemic lupus erythematosus with standard immunosuppression, using hydroxychloroquine, corticosteroids and",
-     "Core treatment modality"
+    "redFlags": [
+      "Invasive infection with encapsulated organisms or signs of meningitis or sepsis",
+      "Rapidly progressive glomerulonephritis",
+      "Neuropsychiatric features suggesting CNS lupus",
+      "Severe cytopenias",
+      "Early-onset severe photosensitive or ulcerating skin disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking an inherited complement defect in a child presenting with early, severe lupus.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is largely determined by the severity of associated lupus and the frequency of serious infections; the majority of individuals with complete deficiency develop lupus-like disease. Vigilant management of autoimmunity and infection prophylaxis improve outcomes.",
+    "pitfalls": [
+      "Overlooking an inherited complement defect in a child presenting with early, severe lupus.",
+      "Stopping at an absent CH50 without measuring individual components to localise the defect.",
+      "Missing functionally defective C1q when only the antigen level is checked.",
+      "Neglecting vaccination and infection prophylaxis against encapsulated organisms.",
+      "Attributing persistently low complement solely to disease activity rather than a primary deficiency."
+    ],
+    "references": [
+      "Middleton's Allergy: Principles and Practice, current edition",
+      "Oxford Textbook of Medicine, current edition",
+      "Reviews on complement deficiencies and systemic lupus erythematosus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the associated systemic lupus erythematosus with standard immunosuppression, using hydroxychloroquine, corticosteroids and agents such as mycophenolate, azathioprine or rituximab according to organ involvement",
+      "Prevent infection by vaccinating against encapsulated organisms including pneumococcus, meningococcus and Haemophilus influenzae type b, and treat pyogenic infection promptly, with antibiotic prophylaxis where indicated",
+      "Treat and monitor lupus manifestations, particularly the prominent cutaneous, central nervous system and renal (lupus nephritis) disease",
+      "Advise photoprotection and skin care for cutaneous lupus",
+      "Monitor renal function and urinalysis, autoantibodies, disease activity and, in children, growth",
+      "Consider fresh frozen plasma as a source of C1q in selected severe cases, with haematopoietic stem cell transplantation reported for refractory disease",
+      "Coordinate multidisciplinary care across paediatric rheumatology, immunology and nephrology",
+      "Offer genetic counselling and family screening given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for c1q deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "c1q-deficiency-real-image",
-   "title": "C1q deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "c1q_deficiency-pathway",
+      "title": "C1q deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "C1q deficiency is the complement defect most strongly associated with early-onset systemic lupus erythematosus, often with prominent cutaneous and central nervous system disease.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Invasive infection with encapsulated organisms or signs of meningitis or sepsis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CH50 classical-pathway haemolytic assay (markedly low or absent), AH50 alternative-pathway assay (typically preserved), C1q antigenic level and functional activity"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the associated systemic lupus erythematosus with standard immunosuppression, using hydroxychloroquine, corticosteroids and agents such as mycophenolate, azathioprine or rituximab according to organ involvement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking an inherited complement defect in a child presenting with early, severe lupus."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of c1q deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "c1q_deficiency-matrix",
+      "title": "C1q deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "C1q deficiency is the complement defect most strongly associated with early-onset systemic lupus erythematosus, often with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CH50 classical-pathway haemolytic assay (markedly low or absent), AH50 alternative-pathway assay (typically preserved), C1q",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic systemic lupus erythematosus without complement deficiency, Other early-component complement deficiencies (C1r/C1s,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the associated systemic lupus erythematosus with standard immunosuppression, using hydroxychloroquine, corticosteroids and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking an inherited complement defect in a child presenting with early, severe lupus.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for c1q deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Middleton's Allergy: Principles and Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 314-17",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "c1q_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in C1q deficiency",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CH50 classical-pathway haemolytic assay",
+          "cells": [
+            {
+              "text": "Markedly reduced or absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AH50 alternative-pathway assay",
+          "cells": [
+            {
+              "text": "Typically preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1q antigenic level and functional activity",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis; functional defect may occur with normal antigen level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1q gene testing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANA and anti-dsDNA",
+          "cells": [
+            {
+              "text": "Autoimmune serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Lupus nephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination and infection history",
+          "cells": [
+            {
+              "text": "Encapsulated and pyogenic infection risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c1q_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options in C1q deficiency",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lupus treatment",
+          "cells": [
+            {
+              "text": "Hydroxychloroquine, corticosteroids, and mycophenolate, azathioprine or rituximab according to organ involvement"
+            },
+            {
+              "text": "Standard immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Vaccinate against pneumococcus, meningococcus and Haemophilus influenzae type b; antibiotic prophylaxis where indicated"
+            },
+            {
+              "text": "Encapsulated organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyogenic infection",
+          "cells": [
+            {
+              "text": "Prompt treatment"
+            },
+            {
+              "text": "Acute"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-specific lupus care",
+          "cells": [
+            {
+              "text": "Cutaneous, central nervous system and renal (lupus nephritis) disease monitored and treated"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Photoprotection and skin care for cutaneous lupus"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, urinalysis, autoantibodies, disease activity and growth in children"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selected severe cases",
+          "cells": [
+            {
+              "text": "Fresh frozen plasma as a C1q source; haematopoietic stem cell transplantation reported for refractory disease"
+            },
+            {
+              "text": "Specialist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening for autosomal recessive inheritance"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c1q_deficiency-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Complement component deficiencies and the diseases they cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated diseases"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic pathway: C1q, C1r, C1s, C4",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C2",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C1 inhibitor",
+          "cells": [
+            {
+              "text": "Rare immune-complex disease, few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: C3",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor D",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: properdin",
+          "cells": [
+            {
+              "text": "Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor I",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor H",
+          "cells": [
+            {
+              "text": "Hemolytic uremic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C5, C6, C7, C8",
+          "cells": [
+            {
+              "text": "Recurrent Neisseria infections, immune-complex disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C9",
+          "cells": [
+            {
+              "text": "Rare Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Immune-complex syndromes here include systemic lupus erythematosus and SLE-like syndromes, glomerulonephritis and vasculitis syndromes."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "c1q_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of C1q deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early-onset systemic lupus erythematosus, often cutaneous and central nervous system, in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: invasive encapsulated infection, rapidly progressive glomerulonephritis, or severe cytopenias?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent antibiotics and renal or haematology input; treat lupus flare",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CH50 and AH50; C1q antigenic and functional levels; autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CH50 markedly low or absent with C1q defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "C1q gene testing; vaccination against encapsulated organisms",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lupus immunosuppression; photoprotection; organ monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider idiopathic SLE or other early complement deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Outlook set by lupus severity and infection rate; vigilant care improves outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

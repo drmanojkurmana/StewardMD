@@ -1,175 +1,453 @@
 {
- "id": "cowden_syndrome",
- "name": "Cowden syndrome",
- "aliases": [
-  "PTEN hamartoma tumour syndrome",
-  "PHTS",
-  "PTEN",
-  "multiple hamartoma syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Oncology",
- "specialty": "Clinical Genetics / Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant condition within the PTEN hamartoma tumour syndrome spectrum, caused by germline loss-of-function variants in the PTEN tumour-suppressor gene",
-   "Characterised by multiple hamartomas across skin, mucosa, breast, thyroid, endometrium and gastrointestinal tract",
-   "Mucocutaneous features include trichilemmomas, oral papillomas (cobblestone mucosa) and acral/palmoplantar keratoses",
-   "Macrocephaly is a common and clinically useful clue, and dysplastic cerebellar gangliocytoma (Lhermitte-Duclos disease) is a characteristic association",
-   "There is a markedly increased lifetime risk of breast, thyroid (usually follicular or papillary), endometrial and renal cancers",
-   "PTEN is a key negative regulator of the PI3K/AKT/mTOR pathway, so its loss drives excessive cell growth and survival",
-   "Management centres on intensified organ-specific cancer surveillance beginning in early adulthood, and earlier for thyroid assessment"
+  "id": "cowden_syndrome",
+  "name": "Cowden syndrome",
+  "aliases": [
+    "PTEN hamartoma tumour syndrome",
+    "PHTS",
+    "PTEN",
+    "multiple hamartoma syndrome"
   ],
-  "pathophysiology": "Cowden syndrome is caused by germline inactivating variants in PTEN, a tumour-suppressor gene encoding a phosphatase that dephosphorylates PIP3 and thereby restrains the phosphatidylinositol 3-kinase (PI3K)/AKT/mTOR signalling axis. Loss of PTEN function removes this brake, leading to constitutive pathway activation that promotes cell growth, proliferation and survival. This drives the widespread hamartomatous overgrowth and elevated cancer risk across multiple organs. The syndrome sits within the broader PTEN hamartoma tumour syndrome spectrum, which also includes Bannayan-Riley-Ruvalcaba syndrome and related phenotypes.",
-  "additionalDifferentials": [
-   "Peutz-Jeghers syndrome and juvenile polyposis with gastrointestinal hamartomas",
-   "Bannayan-Riley-Ruvalcaba syndrome (allelic PTEN condition)",
-   "Birt-Hogg-Dube syndrome with cutaneous papules",
-   "Multiple endocrine neoplasia with thyroid involvement",
-   "Proteus and Proteus-like overgrowth syndromes",
-   "Familial breast or thyroid cancer without a hamartoma syndrome"
-  ],
-  "additionalInvestigations": [
-   "Germline molecular genetic testing of PTEN including deletion/duplication analysis",
-   "Breast imaging surveillance in women per guidelines",
-   "Thyroid ultrasound and clinical thyroid assessment from a young age",
-   "Endometrial surveillance and prompt evaluation of abnormal uterine bleeding",
-   "Colonoscopy for gastrointestinal polyps and renal imaging for renal cancer",
-   "Brain MRI when Lhermitte-Duclos disease or neurological symptoms are suspected"
-  ],
-  "redFlags": [
-   "New breast lump or abnormal breast imaging in an affected individual",
-   "Thyroid nodule with suspicious features suggesting carcinoma",
-   "Postmenopausal or abnormal uterine bleeding raising concern for endometrial cancer",
-   "Progressive headache, ataxia or raised intracranial pressure suggesting Lhermitte-Duclos disease"
-  ],
-  "prognosis": "With adherence to intensified surveillance many cancers can be detected early, but the substantial cumulative lifetime risk of breast, thyroid and endometrial malignancy means long-term outcome depends on sustained monitoring. Benign hamartomas contribute to symptom burden but are rarely life-threatening.",
-  "pitfalls": [
-   "Overlooking macrocephaly and mucocutaneous features that should prompt PTEN testing",
-   "Failing to start thyroid surveillance in childhood when indicated",
-   "Attributing gastrointestinal polyps or skin lesions to unrelated common conditions",
-   "Not extending cancer surveillance and genetic testing to at-risk relatives"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "GeneReviews: PTEN Hamartoma Tumor Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intensified lifelong cancer surveillance across affected organs, as there is no specific drug therapy for the underlying PTEN loss",
-   "Breast surveillance with clinical examination and imaging including MRI in women, with consideration of risk-reducing mastectomy",
-   "Thyroid ultrasound surveillance from a young age, with thyroidectomy for malignancy",
-   "Endometrial surveillance and prompt evaluation of abnormal uterine bleeding, with consideration of risk-reducing hysterectomy",
-   "Colonoscopic surveillance for gastrointestinal polyps and renal imaging for renal cell carcinoma",
-   "Excision or topical treatment of symptomatic mucocutaneous hamartomas, and brain MRI for suspected Lhermitte-Duclos disease",
-   "Consider mTOR pathway inhibition such as sirolimus for troublesome overgrowth manifestations under specialist or trial settings",
-   "Genetic counselling with PTEN testing and cascade screening of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cowden_syndrome-pathway",
-   "title": "Cowden syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant condition within the PTEN hamartoma tumour syndrome spectrum, caused by germline loss-of-function variants in the PTEN tumour-suppressor gene",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New breast lump or abnormal breast imaging in an affected individual",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Germline molecular genetic testing of PTEN including deletion/duplication analysis, Breast imaging surveillance in women per guidelines, Thyroid ultrasound and clinical thyroid assessment from a young age"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intensified lifelong cancer surveillance across affected organs, as there is no specific drug therapy for the underlying PTEN loss"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking macrocephaly and mucocutaneous features that should prompt PTEN testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cowden syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cowden_syndrome-matrix",
-   "title": "Cowden syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant condition within the PTEN hamartoma tumour syndrome spectrum, caused by germline loss-of-function variants in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Oncology",
+  "specialty": "Clinical Genetics / Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant condition within the PTEN hamartoma tumour syndrome spectrum, caused by germline loss-of-function variants in the PTEN tumour-suppressor gene",
+      "Characterised by multiple hamartomas across skin, mucosa, breast, thyroid, endometrium and gastrointestinal tract",
+      "Mucocutaneous features include trichilemmomas, oral papillomas (cobblestone mucosa) and acral/palmoplantar keratoses",
+      "Macrocephaly is a common and clinically useful clue, and dysplastic cerebellar gangliocytoma (Lhermitte-Duclos disease) is a characteristic association",
+      "There is a markedly increased lifetime risk of breast, thyroid (usually follicular or papillary), endometrial and renal cancers",
+      "PTEN is a key negative regulator of the PI3K/AKT/mTOR pathway, so its loss drives excessive cell growth and survival",
+      "Management centres on intensified organ-specific cancer surveillance beginning in early adulthood, and earlier for thyroid assessment"
     ],
-    [
-     "Key Investigations",
-     "Germline molecular genetic testing of PTEN including deletion/duplication analysis, Breast imaging surveillance in women per",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cowden syndrome is caused by germline inactivating variants in PTEN, a tumour-suppressor gene encoding a phosphatase that dephosphorylates PIP3 and thereby restrains the phosphatidylinositol 3-kinase (PI3K)/AKT/mTOR signalling axis. Loss of PTEN function removes this brake, leading to constitutive pathway activation that promotes cell growth, proliferation and survival. This drives the widespread hamartomatous overgrowth and elevated cancer risk across multiple organs. The syndrome sits within the broader PTEN hamartoma tumour syndrome spectrum, which also includes Bannayan-Riley-Ruvalcaba syndrome and related phenotypes.",
+    "additionalDifferentials": [
+      "Peutz-Jeghers syndrome and juvenile polyposis with gastrointestinal hamartomas",
+      "Bannayan-Riley-Ruvalcaba syndrome (allelic PTEN condition)",
+      "Birt-Hogg-Dube syndrome with cutaneous papules",
+      "Multiple endocrine neoplasia with thyroid involvement",
+      "Proteus and Proteus-like overgrowth syndromes",
+      "Familial breast or thyroid cancer without a hamartoma syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Peutz-Jeghers syndrome and juvenile polyposis with gastrointestinal hamartomas, Bannayan-Riley-Ruvalcaba syndrome (allelic PTEN",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Germline molecular genetic testing of PTEN including deletion/duplication analysis",
+      "Breast imaging surveillance in women per guidelines",
+      "Thyroid ultrasound and clinical thyroid assessment from a young age",
+      "Endometrial surveillance and prompt evaluation of abnormal uterine bleeding",
+      "Colonoscopy for gastrointestinal polyps and renal imaging for renal cancer",
+      "Brain MRI when Lhermitte-Duclos disease or neurological symptoms are suspected"
     ],
-    [
-     "Management Strategy",
-     "Intensified lifelong cancer surveillance across affected organs, as there is no specific drug therapy for the underlying PTEN loss",
-     "Core treatment modality"
+    "redFlags": [
+      "New breast lump or abnormal breast imaging in an affected individual",
+      "Thyroid nodule with suspicious features suggesting carcinoma",
+      "Postmenopausal or abnormal uterine bleeding raising concern for endometrial cancer",
+      "Progressive headache, ataxia or raised intracranial pressure suggesting Lhermitte-Duclos disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking macrocephaly and mucocutaneous features that should prompt PTEN testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "With adherence to intensified surveillance many cancers can be detected early, but the substantial cumulative lifetime risk of breast, thyroid and endometrial malignancy means long-term outcome depends on sustained monitoring. Benign hamartomas contribute to symptom burden but are rarely life-threatening.",
+    "pitfalls": [
+      "Overlooking macrocephaly and mucocutaneous features that should prompt PTEN testing",
+      "Failing to start thyroid surveillance in childhood when indicated",
+      "Attributing gastrointestinal polyps or skin lesions to unrelated common conditions",
+      "Not extending cancer surveillance and genetic testing to at-risk relatives"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "GeneReviews: PTEN Hamartoma Tumor Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intensified lifelong cancer surveillance across affected organs, as there is no specific drug therapy for the underlying PTEN loss",
+      "Breast surveillance with clinical examination and imaging including MRI in women, with consideration of risk-reducing mastectomy",
+      "Thyroid ultrasound surveillance from a young age, with thyroidectomy for malignancy",
+      "Endometrial surveillance and prompt evaluation of abnormal uterine bleeding, with consideration of risk-reducing hysterectomy",
+      "Colonoscopic surveillance for gastrointestinal polyps and renal imaging for renal cell carcinoma",
+      "Excision or topical treatment of symptomatic mucocutaneous hamartomas, and brain MRI for suspected Lhermitte-Duclos disease",
+      "Consider mTOR pathway inhibition such as sirolimus for troublesome overgrowth manifestations under specialist or trial settings",
+      "Genetic counselling with PTEN testing and cascade screening of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for cowden syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cowden-syndrome-real-image",
-   "title": "Cowden syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cowden_syndrome-pathway",
+      "title": "Cowden syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant condition within the PTEN hamartoma tumour syndrome spectrum, caused by germline loss-of-function variants in the PTEN tumour-suppressor gene",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New breast lump or abnormal breast imaging in an affected individual",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Germline molecular genetic testing of PTEN including deletion/duplication analysis, Breast imaging surveillance in women per guidelines, Thyroid ultrasound and clinical thyroid assessment from a young age"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intensified lifelong cancer surveillance across affected organs, as there is no specific drug therapy for the underlying PTEN loss"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking macrocephaly and mucocutaneous features that should prompt PTEN testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cowden syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cowden_syndrome-matrix",
+      "title": "Cowden syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant condition within the PTEN hamartoma tumour syndrome spectrum, caused by germline loss-of-function variants in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Germline molecular genetic testing of PTEN including deletion/duplication analysis, Breast imaging surveillance in women per",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peutz-Jeghers syndrome and juvenile polyposis with gastrointestinal hamartomas, Bannayan-Riley-Ruvalcaba syndrome (allelic PTEN",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intensified lifelong cancer surveillance across affected organs, as there is no specific drug therapy for the underlying PTEN loss",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking macrocephaly and mucocutaneous features that should prompt PTEN testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cowden syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cowden_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline PTEN testing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid ultrasound and clinical thyroid assessment",
+          "cells": [
+            {
+              "text": "From a young age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy and renal imaging",
+          "cells": [
+            {
+              "text": "Polyps and renal cancer screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Lhermitte-Duclos disease when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cowden_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peutz-Jeghers syndrome and juvenile polyposis",
+          "cells": [
+            {
+              "text": "Gastrointestinal hamartomas; PTEN testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bannayan-Riley-Ruvalcaba syndrome",
+          "cells": [
+            {
+              "text": "Allelic PTEN condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Birt-Hogg-Dube syndrome",
+          "cells": [
+            {
+              "text": "Cutaneous papules"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cowden_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensified cancer surveillance",
+          "cells": [
+            {
+              "text": "Across affected organs; no specific drug therapy for PTEN loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast surveillance",
+          "cells": [
+            {
+              "text": "Clinical examination and MRI; consider risk-reducing mastectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid surveillance",
+          "cells": [
+            {
+              "text": "Ultrasound from a young age; thyroidectomy for malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial surveillance",
+          "cells": [
+            {
+              "text": "Evaluate abnormal bleeding; consider risk-reducing hysterectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucocutaneous and neurological care",
+          "cells": [
+            {
+              "text": "Excision or topical treatment; brain MRI for Lhermitte-Duclos"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "mTOR inhibition",
+          "cells": [
+            {
+              "text": "Sirolimus for troublesome overgrowth under specialist or trial settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "PTEN testing and cascade screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cowden_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cowden syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cowden syndrome: macrocephaly with mucocutaneous hamartomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (breast lump, thyroid nodule suspicious, abnormal bleeding, headache)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent breast, thyroid or endometrial evaluation for suspicious findings",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Germline PTEN testing; thyroid ultrasound; colonoscopy; renal imaging; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does germline PTEN testing confirm a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Peutz-Jeghers, juvenile polyposis or BRRS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensified lifelong surveillance across affected organs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Breast MRI surveillance; consider risk-reducing surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thyroid ultrasound from childhood; endometrial surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Colonoscopy and renal imaging; genetic counselling and cascade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early detection improves outcome; cumulative lifetime cancer risk remains substantial",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,805 @@
 {
- "id": "restrictive_cardiomyopathy",
- "name": "Restrictive cardiomyopathy",
- "aliases": [
-  "RCM",
-  "restrictive heart disease",
-  "infiltrative cardiomyopathy"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Restrictive cardiomyopathy is characterised by stiff, non-compliant ventricles causing impaired diastolic filling with preserved or near-preserved systolic function and normal or reduced ventricular cavity size early on",
-   "The dominant physiology is diastolic dysfunction with raised filling pressures, so patients present with signs of both right- and left-sided heart failure, prominent among them systemic venous congestion",
-   "Causes include infiltrative diseases such as amyloidosis, storage disorders, endomyocardial fibrosis, and post-radiation or idiopathic fibrosis; amyloidosis is a leading cause to actively exclude",
-   "A key clinical challenge is distinguishing restrictive cardiomyopathy from constrictive pericarditis, because the latter is potentially curable with surgery",
-   "Atrial enlargement is characteristic because the atria bear the burden of filling stiff ventricles, predisposing to atrial fibrillation",
-   "Multimodality imaging including echocardiography and cardiac MRI, sometimes with biopsy or specific tests for amyloid, is used to establish the cause",
-   "Management is largely directed at the underlying cause and at cautious control of congestion, since these patients are sensitive to changes in filling",
-   "Because the ventricles depend on adequate preload, excessive diuresis or loss of atrial contribution can precipitate a marked fall in output"
+  "id": "restrictive_cardiomyopathy",
+  "name": "Restrictive cardiomyopathy",
+  "aliases": [
+    "RCM",
+    "restrictive heart disease",
+    "infiltrative cardiomyopathy"
   ],
-  "pathophysiology": "In restrictive cardiomyopathy the ventricular myocardium or endocardium becomes abnormally stiff, either from infiltration by abnormal material (as in amyloidosis or storage disease), fibrosis (as in endomyocardial fibrosis or after radiation), or idiopathic processes. The stiff ventricle resists filling, so filling pressures rise sharply for only small increases in volume and most filling occurs rapidly in early diastole. This raises atrial and venous pressures, dilates the atria, and produces pulmonary and systemic congestion while systolic ejection is initially preserved. As disease advances, systolic function and conduction may also be affected, and the physiology can closely mimic constrictive pericarditis.",
-  "additionalDifferentials": [
-   "Constrictive pericarditis",
-   "Cardiac amyloidosis and other infiltrative diseases",
-   "Hypertrophic cardiomyopathy in a non-dilated phase",
-   "Hypertensive heart disease with severe diastolic dysfunction",
-   "Right heart failure from other causes",
-   "Pericardial effusion with tamponade physiology"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography demonstrating restrictive filling with biatrial enlargement and preserved cavity size",
-   "Cardiac MRI for tissue characterisation and to help identify infiltration",
-   "Specific evaluation for amyloidosis, including relevant imaging, laboratory testing, and sometimes biopsy",
-   "Invasive haemodynamic study when distinguishing restriction from constriction is difficult",
-   "12-lead ECG, which may show low voltages or conduction disease in infiltrative disease",
-   "Endomyocardial biopsy in selected cases to establish the underlying cause"
-  ],
-  "redFlags": [
-   "Progressive heart failure refractory to therapy indicating advanced disease",
-   "Haemodynamic deterioration after aggressive diuresis due to preload dependence",
-   "Conduction disease or arrhythmia, particularly with infiltrative causes such as amyloidosis, raising the risk of syncope or sudden death",
-   "Features suggesting cardiac amyloidosis, which carries specific prognostic and treatment implications"
-  ],
-  "prognosis": "Prognosis is largely determined by the underlying cause; idiopathic and infiltrative forms, especially advanced cardiac amyloidosis, often carry a poor outlook, whereas identifying a treatable cause or distinguishing curable constrictive pericarditis can markedly change the trajectory.",
-  "pitfalls": [
-   "Failing to distinguish restrictive cardiomyopathy from potentially curable constrictive pericarditis",
-   "Missing cardiac amyloidosis as an underlying cause",
-   "Over-diuresing a preload-dependent ventricle and precipitating a fall in output",
-   "Attributing raised filling pressures to systolic failure when systolic function is preserved"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ESC/ACC-AHA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause: tafamidis for transthyretin cardiac amyloidosis, plasma-cell-directed chemotherapy for AL amyloidosis, iron chelation or venesection for haemochromatosis, and corticosteroids for cardiac sarcoidosis or eosinophilic disease",
-   "Relieve systemic and pulmonary congestion with cautious diuretics, avoiding excessive preload reduction in these filling-dependent ventricles",
-   "Anticoagulate and control rate in atrial fibrillation, which is poorly tolerated given atrial-dependent ventricular filling",
-   "Actively exclude constrictive pericarditis, which is potentially curable by pericardiectomy",
-   "Manage progressive heart failure and refer for device therapy or cardiac transplantation in advanced disease",
-   "Offer genetic testing and family screening for hereditary transthyretin amyloidosis and familial forms",
-   "Coordinate care with cardiology and, where relevant, haematology or specialist amyloidosis services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "restrictive_cardiomyopathy-pathway",
-   "title": "Restrictive cardiomyopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Restrictive cardiomyopathy is characterised by stiff, non-compliant ventricles causing impaired diastolic filling with preserved or near-preserved systolic function and normal or reduced ventricular cavity size early on",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive heart failure refractory to therapy indicating advanced disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography demonstrating restrictive filling with biatrial enlargement and preserved cavity size, Cardiac MRI for tissue characterisation and to help identify infiltration, Specific evaluation for amyloidosis,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause: tafamidis for transthyretin cardiac amyloidosis, plasma-cell-directed chemotherapy for AL amyloidosis, iron chelation or venesection for haemochromatosis, and corticosteroids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish restrictive cardiomyopathy from potentially curable constrictive pericarditis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of restrictive cardiomyopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "restrictive_cardiomyopathy-matrix",
-   "title": "Restrictive cardiomyopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Restrictive cardiomyopathy is characterised by stiff, non-compliant ventricles causing impaired diastolic filling with preserved",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Restrictive cardiomyopathy is characterised by stiff, non-compliant ventricles causing impaired diastolic filling with preserved or near-preserved systolic function and normal or reduced ventricular cavity size early on",
+      "The dominant physiology is diastolic dysfunction with raised filling pressures, so patients present with signs of both right- and left-sided heart failure, prominent among them systemic venous congestion",
+      "Causes include infiltrative diseases such as amyloidosis, storage disorders, endomyocardial fibrosis, and post-radiation or idiopathic fibrosis; amyloidosis is a leading cause to actively exclude",
+      "A key clinical challenge is distinguishing restrictive cardiomyopathy from constrictive pericarditis, because the latter is potentially curable with surgery",
+      "Atrial enlargement is characteristic because the atria bear the burden of filling stiff ventricles, predisposing to atrial fibrillation",
+      "Multimodality imaging including echocardiography and cardiac MRI, sometimes with biopsy or specific tests for amyloid, is used to establish the cause",
+      "Management is largely directed at the underlying cause and at cautious control of congestion, since these patients are sensitive to changes in filling",
+      "Because the ventricles depend on adequate preload, excessive diuresis or loss of atrial contribution can precipitate a marked fall in output"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography demonstrating restrictive filling with biatrial enlargement and preserved cavity size, Cardiac MRI for tissue",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In restrictive cardiomyopathy the ventricular myocardium or endocardium becomes abnormally stiff, either from infiltration by abnormal material (as in amyloidosis or storage disease), fibrosis (as in endomyocardial fibrosis or after radiation), or idiopathic processes. The stiff ventricle resists filling, so filling pressures rise sharply for only small increases in volume and most filling occurs rapidly in early diastole. This raises atrial and venous pressures, dilates the atria, and produces pulmonary and systemic congestion while systolic ejection is initially preserved. As disease advances, systolic function and conduction may also be affected, and the physiology can closely mimic constrictive pericarditis.",
+    "additionalDifferentials": [
+      "Constrictive pericarditis",
+      "Cardiac amyloidosis and other infiltrative diseases",
+      "Hypertrophic cardiomyopathy in a non-dilated phase",
+      "Hypertensive heart disease with severe diastolic dysfunction",
+      "Right heart failure from other causes",
+      "Pericardial effusion with tamponade physiology"
     ],
-    [
-     "Primary Differentials",
-     "Constrictive pericarditis, Cardiac amyloidosis and other infiltrative diseases, Hypertrophic cardiomyopathy in a non-dilated phase",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography demonstrating restrictive filling with biatrial enlargement and preserved cavity size",
+      "Cardiac MRI for tissue characterisation and to help identify infiltration",
+      "Specific evaluation for amyloidosis, including relevant imaging, laboratory testing, and sometimes biopsy",
+      "Invasive haemodynamic study when distinguishing restriction from constriction is difficult",
+      "12-lead ECG, which may show low voltages or conduction disease in infiltrative disease",
+      "Endomyocardial biopsy in selected cases to establish the underlying cause"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause: tafamidis for transthyretin cardiac amyloidosis, plasma-cell-directed chemotherapy for",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive heart failure refractory to therapy indicating advanced disease",
+      "Haemodynamic deterioration after aggressive diuresis due to preload dependence",
+      "Conduction disease or arrhythmia, particularly with infiltrative causes such as amyloidosis, raising the risk of syncope or sudden death",
+      "Features suggesting cardiac amyloidosis, which carries specific prognostic and treatment implications"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish restrictive cardiomyopathy from potentially curable constrictive pericarditis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is largely determined by the underlying cause; idiopathic and infiltrative forms, especially advanced cardiac amyloidosis, often carry a poor outlook, whereas identifying a treatable cause or distinguishing curable constrictive pericarditis can markedly change the trajectory.",
+    "pitfalls": [
+      "Failing to distinguish restrictive cardiomyopathy from potentially curable constrictive pericarditis",
+      "Missing cardiac amyloidosis as an underlying cause",
+      "Over-diuresing a preload-dependent ventricle and precipitating a fall in output",
+      "Attributing raised filling pressures to systolic failure when systolic function is preserved"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ESC/ACC-AHA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause: tafamidis for transthyretin cardiac amyloidosis, plasma-cell-directed chemotherapy for AL amyloidosis, iron chelation or venesection for haemochromatosis, and corticosteroids for cardiac sarcoidosis or eosinophilic disease",
+      "Relieve systemic and pulmonary congestion with cautious diuretics, avoiding excessive preload reduction in these filling-dependent ventricles",
+      "Anticoagulate and control rate in atrial fibrillation, which is poorly tolerated given atrial-dependent ventricular filling",
+      "Actively exclude constrictive pericarditis, which is potentially curable by pericardiectomy",
+      "Manage progressive heart failure and refer for device therapy or cardiac transplantation in advanced disease",
+      "Offer genetic testing and family screening for hereditary transthyretin amyloidosis and familial forms",
+      "Coordinate care with cardiology and, where relevant, haematology or specialist amyloidosis services"
     ]
-   ],
-   "caption": "Overview comparison matrix for restrictive cardiomyopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "restrictive-cardiomyopathy-real-image",
-   "title": "Restrictive cardiomyopathy: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "restrictive_cardiomyopathy-pathway",
+      "title": "Restrictive cardiomyopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Restrictive cardiomyopathy is characterised by stiff, non-compliant ventricles causing impaired diastolic filling with preserved or near-preserved systolic function and normal or reduced ventricular cavity size early on",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive heart failure refractory to therapy indicating advanced disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography demonstrating restrictive filling with biatrial enlargement and preserved cavity size, Cardiac MRI for tissue characterisation and to help identify infiltration, Specific evaluation for amyloidosis,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause: tafamidis for transthyretin cardiac amyloidosis, plasma-cell-directed chemotherapy for AL amyloidosis, iron chelation or venesection for haemochromatosis, and corticosteroids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish restrictive cardiomyopathy from potentially curable constrictive pericarditis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of restrictive cardiomyopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "restrictive_cardiomyopathy-matrix",
+      "title": "Restrictive cardiomyopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Restrictive cardiomyopathy is characterised by stiff, non-compliant ventricles causing impaired diastolic filling with preserved",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography demonstrating restrictive filling with biatrial enlargement and preserved cavity size, Cardiac MRI for tissue",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Constrictive pericarditis, Cardiac amyloidosis and other infiltrative diseases, Hypertrophic cardiomyopathy in a non-dilated phase",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause: tafamidis for transthyretin cardiac amyloidosis, plasma-cell-directed chemotherapy for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish restrictive cardiomyopathy from potentially curable constrictive pericarditis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for restrictive cardiomyopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 239-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "restrictive_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Restrictive filling with biatrial enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Tissue characterisation and infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid evaluation (imaging, laboratory testing)",
+          "cells": [
+            {
+              "text": "Cardiac amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive haemodynamic study",
+          "cells": [
+            {
+              "text": "Restriction versus constriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Low voltages or conduction abnormality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "restrictive_cardiomyopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Restriction versus constriction"
+            },
+            {
+              "text": "Invasive haemodynamic study"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac amyloidosis and infiltrative disease",
+          "cells": [
+            {
+              "text": "Infiltrative disease"
+            },
+            {
+              "text": "Cardiac MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic cardiomyopathy in a non-dilated phase",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "restrictive_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Underlying cause",
+          "cells": [
+            {
+              "text": "Tafamidis for transthyretin cardiac amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congestion",
+          "cells": [
+            {
+              "text": "Cautious diuretics, avoiding excessive preload reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial fibrillation",
+          "cells": [
+            {
+              "text": "Anticoagulation and rate control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Exclude; potentially curable by pericardiectomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "restrictive_cardiomyopathy-ddx-2",
+      "kind": "ddx",
+      "title": "Tamponade versus constrictive pericarditis, restrictive cardiomyopathy and RV infarction",
+      "rowHeader": "Condition",
+      "columns": [
+        "Tamponade",
+        "Constrictive pericarditis",
+        "Restrictive cardiomyopathy",
+        "RVMI"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical: pulsus paradoxus",
+          "cells": [
+            {
+              "text": "Common"
+            },
+            {
+              "text": "Usually absent"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Jugular veins: prominent y descent",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Usually present"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Jugular veins: prominent x descent",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Usually present"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kussmaul sign",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Third heart sound",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "May be present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pericardial knock",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Often present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG: low voltage",
+          "cells": [
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG: electrical alternans",
+          "cells": [
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: thickened pericardium",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: pericardial calcification",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Often present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: pericardial effusion",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: RV size",
+          "cells": [
+            {
+              "text": "Usually small"
+            },
+            {
+              "text": "Usually normal"
+            },
+            {
+              "text": "Usually normal"
+            },
+            {
+              "text": "Enlarged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: myocardial thickness",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Usually increased"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: right atrial collapse and RVDC",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: increased early filling, increased mitral flow velocity",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "May be present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: exaggerated respiratory variation in flow velocity",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT/MRI: thickened or calcific pericardium",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac catheterization: equalization of diastolic pressures",
+          "cells": [
+            {
+              "text": "Usually present"
+            },
+            {
+              "text": "Usually present"
+            },
+            {
+              "text": "Usually absent"
+            },
+            {
+              "text": "Absent or present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac biopsy helpful",
+          "cells": [
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Sometimes"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "restrictive_cardiomyopathy-dx-mgmt",
+      "title": "Diagnosis and management of Restrictive cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected restrictive cardiomyopathy: heart failure with restrictive filling on echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Refractory heart failure, collapse after diuresis, conduction disease, or amyloid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology review for haemodynamic deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo; cardiac MRI; amyloid evaluation; invasive haemodynamics if needed; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is restriction confirmed with constrictive pericarditis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constrictive pericarditis or hypertrophic cardiomyopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and treat the underlying cause, including tafamidis for ATTR amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cautious diuretics to relieve congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulate and control rate in atrial fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude constrictive pericarditis, potentially curable by pericardiectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist heart failure follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,463 @@
 {
- "id": "nephrogenic_systemic_fibrosis",
- "name": "nephrogenic systemic fibrosis",
- "aliases": [
-  "nephrogenic fibrosing dermopathy",
-  "NSF"
- ],
- "class": "non_infective",
- "system": "Skin / Integumentary",
- "specialty": "Dermatology / Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acquired fibrosing disorder of skin and internal organs occurring almost exclusively in patients with severe renal impairment exposed to gadolinium-based contrast agents",
-   "Presents with symmetrical, progressive woody induration of the skin, most often on the lower limbs and forearms, with brawny hyperpigmentation and a cobblestoned, peau d'orange surface",
-   "Fibrosis leads to painful joint contractures and marked loss of mobility, and yellow scleral plaques may be seen in younger patients",
-   "Characteristically the face is spared, an important clue distinguishing it from scleroderma and scleromyxoedema",
-   "Risk is greatest with high-risk (linear, less stable) gadolinium agents, higher doses and repeated exposures in patients with an eGFR below about thirty or on dialysis, including those with acute kidney injury",
-   "Diagnosis combines the clinical picture with a deep skin biopsy showing spindle-cell proliferation with CD34-positive fibrocytes and thickened collagen, correlated with clinicoradiological criteria",
-   "Prevention is paramount: avoid or minimise high-risk contrast agents in advanced renal disease and prefer more stable macrocyclic agents; established disease is difficult to treat and may improve if renal function is restored"
+  "id": "nephrogenic_systemic_fibrosis",
+  "name": "nephrogenic systemic fibrosis",
+  "aliases": [
+    "nephrogenic fibrosing dermopathy",
+    "NSF"
   ],
-  "pathophysiology": "Nephrogenic systemic fibrosis is triggered by exposure to gadolinium-based contrast agents in the setting of markedly reduced renal clearance, which prolongs circulation of gadolinium and permits dissociation of the metal from its chelate (transmetallation), particularly with less stable linear agents. Retained gadolinium deposits in tissues and, together with uraemia and possibly other cofactors, is thought to recruit circulating CD34-positive, procollagen-positive bone-marrow-derived fibrocytes into the skin and other organs. These cells, driven by profibrotic cytokines such as transforming growth factor-beta, proliferate and deposit excess collagen and mucin, producing progressive dermal and systemic fibrosis that can involve muscle, lungs, heart and diaphragm.",
-  "additionalDifferentials": [
-   "Systemic sclerosis and morphoea",
-   "Scleromyxoedema",
-   "Scleroedema",
-   "Eosinophilic fasciitis",
-   "Chronic graft-versus-host disease with sclerodermatous features",
-   "Lipodermatosclerosis of chronic venous disease"
-  ],
-  "additionalInvestigations": [
-   "Deep incisional (including fascia) skin biopsy showing fibrocyte proliferation, thickened collagen bundles and mucin",
-   "Renal function including eGFR to confirm and stage kidney impairment",
-   "Review of gadolinium contrast exposure history, agent type and dose",
-   "Immunohistochemistry for CD34 highlighting spindle-cell fibrocytes",
-   "Autoimmune serology to help exclude systemic sclerosis and related disorders",
-   "Serum protein electrophoresis to exclude a paraproteinaemia mimicking scleromyxoedema"
-  ],
-  "redFlags": [
-   "Rapidly progressive skin thickening with developing joint contractures",
-   "Systemic fibrosis causing restrictive lung disease or cardiac involvement",
-   "Diaphragmatic involvement leading to respiratory compromise",
-   "Profound loss of mobility with dependency and risk of complications of immobility"
-  ],
-  "prognosis": "The course is typically chronic and progressive with substantial disability from contractures and immobility, and systemic fibrosis contributes to mortality in severe cases. Some patients stabilise or improve when renal function recovers, for example after successful transplantation, but established fibrosis often persists.",
-  "pitfalls": [
-   "Administering high-risk gadolinium agents to patients with advanced renal disease without recognising the risk",
-   "Mistaking the condition for systemic sclerosis and overlooking the characteristic sparing of the face",
-   "Taking too superficial a biopsy and missing the diagnostic deep dermal and fascial fibrosis",
-   "Failing to obtain a contrast exposure history in a dialysis patient with new skin induration",
-   "Assuming a single, low-dose exposure carries no risk in severe renal impairment"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia, Dermatology"
-  ],
-  "crossLinks": [
-   "scleromyxoedema",
-   "scleroedema"
-  ],
-  "management": [
-   "Prevention is the mainstay: avoid gadolinium-based contrast in severe renal impairment, and where imaging is essential use the lowest dose of a stable macrocyclic agent or an alternative modality",
-   "Optimise renal clearance after unavoidable exposure, including prompt haemodialysis in dialysis-dependent patients, and pursue restoration of renal function, as recovery or successful kidney transplantation may arrest or improve the fibrosis",
-   "Preserve mobility with intensive physiotherapy and occupational therapy to maintain range of movement and prevent joint contractures",
-   "Symptomatic care with analgesia for pain and skin-directed measures such as emollients for the indurated skin",
-   "Trial of reported disease-modifying options such as extracorporeal photopheresis or other immunomodulatory approaches in progressive disease, recognising the evidence is limited",
-   "Surveillance for systemic fibrosis involving muscle, lungs, heart and diaphragm that may compromise function",
-   "Deliver coordinated dermatology and nephrology multidisciplinary care with early specialist referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nephrogenic_systemic_fibrosis-pathway",
-   "title": "nephrogenic systemic fibrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acquired fibrosing disorder of skin and internal organs occurring almost exclusively in patients with severe renal impairment exposed to gadolinium-based contrast agents",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive skin thickening with developing joint contractures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Deep incisional (including fascia) skin biopsy showing fibrocyte proliferation, thickened collagen bundles and mucin, Renal function including eGFR to confirm and stage kidney impairment, Review of gadolinium contrast"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevention is the mainstay: avoid gadolinium-based contrast in severe renal impairment, and where imaging is essential use the lowest dose of a stable macrocyclic agent or an alternative modality"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Administering high-risk gadolinium agents to patients with advanced renal disease without recognising the risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nephrogenic systemic fibrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "nephrogenic_systemic_fibrosis-matrix",
-   "title": "nephrogenic systemic fibrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acquired fibrosing disorder of skin and internal organs occurring almost exclusively in patients with severe renal impairment",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Integumentary",
+  "specialty": "Dermatology / Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acquired fibrosing disorder of skin and internal organs occurring almost exclusively in patients with severe renal impairment exposed to gadolinium-based contrast agents",
+      "Presents with symmetrical, progressive woody induration of the skin, most often on the lower limbs and forearms, with brawny hyperpigmentation and a cobblestoned, peau d'orange surface",
+      "Fibrosis leads to painful joint contractures and marked loss of mobility, and yellow scleral plaques may be seen in younger patients",
+      "Characteristically the face is spared, an important clue distinguishing it from scleroderma and scleromyxoedema",
+      "Risk is greatest with high-risk (linear, less stable) gadolinium agents, higher doses and repeated exposures in patients with an eGFR below about thirty or on dialysis, including those with acute kidney injury",
+      "Diagnosis combines the clinical picture with a deep skin biopsy showing spindle-cell proliferation with CD34-positive fibrocytes and thickened collagen, correlated with clinicoradiological criteria",
+      "Prevention is paramount: avoid or minimise high-risk contrast agents in advanced renal disease and prefer more stable macrocyclic agents; established disease is difficult to treat and may improve if renal function is restored"
     ],
-    [
-     "Key Investigations",
-     "Deep incisional (including fascia) skin biopsy showing fibrocyte proliferation, thickened collagen bundles and mucin, Renal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nephrogenic systemic fibrosis is triggered by exposure to gadolinium-based contrast agents in the setting of markedly reduced renal clearance, which prolongs circulation of gadolinium and permits dissociation of the metal from its chelate (transmetallation), particularly with less stable linear agents. Retained gadolinium deposits in tissues and, together with uraemia and possibly other cofactors, is thought to recruit circulating CD34-positive, procollagen-positive bone-marrow-derived fibrocytes into the skin and other organs. These cells, driven by profibrotic cytokines such as transforming growth factor-beta, proliferate and deposit excess collagen and mucin, producing progressive dermal and systemic fibrosis that can involve muscle, lungs, heart and diaphragm.",
+    "additionalDifferentials": [
+      "Systemic sclerosis and morphoea",
+      "Scleromyxoedema",
+      "Scleroedema",
+      "Eosinophilic fasciitis",
+      "Chronic graft-versus-host disease with sclerodermatous features",
+      "Lipodermatosclerosis of chronic venous disease"
     ],
-    [
-     "Primary Differentials",
-     "Systemic sclerosis and morphoea, Scleromyxoedema, Scleroedema",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Deep incisional (including fascia) skin biopsy showing fibrocyte proliferation, thickened collagen bundles and mucin",
+      "Renal function including eGFR to confirm and stage kidney impairment",
+      "Review of gadolinium contrast exposure history, agent type and dose",
+      "Immunohistochemistry for CD34 highlighting spindle-cell fibrocytes",
+      "Autoimmune serology to help exclude systemic sclerosis and related disorders",
+      "Serum protein electrophoresis to exclude a paraproteinaemia mimicking scleromyxoedema"
     ],
-    [
-     "Management Strategy",
-     "Prevention is the mainstay: avoid gadolinium-based contrast in severe renal impairment, and where imaging is essential use the",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive skin thickening with developing joint contractures",
+      "Systemic fibrosis causing restrictive lung disease or cardiac involvement",
+      "Diaphragmatic involvement leading to respiratory compromise",
+      "Profound loss of mobility with dependency and risk of complications of immobility"
     ],
-    [
-     "Clinical Pitfall",
-     "Administering high-risk gadolinium agents to patients with advanced renal disease without recognising the risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is typically chronic and progressive with substantial disability from contractures and immobility, and systemic fibrosis contributes to mortality in severe cases. Some patients stabilise or improve when renal function recovers, for example after successful transplantation, but established fibrosis often persists.",
+    "pitfalls": [
+      "Administering high-risk gadolinium agents to patients with advanced renal disease without recognising the risk",
+      "Mistaking the condition for systemic sclerosis and overlooking the characteristic sparing of the face",
+      "Taking too superficial a biopsy and missing the diagnostic deep dermal and fascial fibrosis",
+      "Failing to obtain a contrast exposure history in a dialysis patient with new skin induration",
+      "Assuming a single, low-dose exposure carries no risk in severe renal impairment"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia, Dermatology"
+    ],
+    "crossLinks": [
+      "scleromyxoedema",
+      "scleroedema"
+    ],
+    "management": [
+      "Prevention is the mainstay: avoid gadolinium-based contrast in severe renal impairment, and where imaging is essential use the lowest dose of a stable macrocyclic agent or an alternative modality",
+      "Optimise renal clearance after unavoidable exposure, including prompt haemodialysis in dialysis-dependent patients, and pursue restoration of renal function, as recovery or successful kidney transplantation may arrest or improve the fibrosis",
+      "Preserve mobility with intensive physiotherapy and occupational therapy to maintain range of movement and prevent joint contractures",
+      "Symptomatic care with analgesia for pain and skin-directed measures such as emollients for the indurated skin",
+      "Trial of reported disease-modifying options such as extracorporeal photopheresis or other immunomodulatory approaches in progressive disease, recognising the evidence is limited",
+      "Surveillance for systemic fibrosis involving muscle, lungs, heart and diaphragm that may compromise function",
+      "Deliver coordinated dermatology and nephrology multidisciplinary care with early specialist referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for nephrogenic systemic fibrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nephrogenic-systemic-fibrosis-real-image",
-   "title": "nephrogenic systemic fibrosis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "nephrogenic_systemic_fibrosis-pathway",
+      "title": "nephrogenic systemic fibrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acquired fibrosing disorder of skin and internal organs occurring almost exclusively in patients with severe renal impairment exposed to gadolinium-based contrast agents",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive skin thickening with developing joint contractures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Deep incisional (including fascia) skin biopsy showing fibrocyte proliferation, thickened collagen bundles and mucin, Renal function including eGFR to confirm and stage kidney impairment, Review of gadolinium contrast"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevention is the mainstay: avoid gadolinium-based contrast in severe renal impairment, and where imaging is essential use the lowest dose of a stable macrocyclic agent or an alternative modality"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Administering high-risk gadolinium agents to patients with advanced renal disease without recognising the risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nephrogenic systemic fibrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nephrogenic_systemic_fibrosis-matrix",
+      "title": "nephrogenic systemic fibrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acquired fibrosing disorder of skin and internal organs occurring almost exclusively in patients with severe renal impairment",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Deep incisional (including fascia) skin biopsy showing fibrocyte proliferation, thickened collagen bundles and mucin, Renal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic sclerosis and morphoea, Scleromyxoedema, Scleroedema",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevention is the mainstay: avoid gadolinium-based contrast in severe renal impairment, and where imaging is essential use the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Administering high-risk gadolinium agents to patients with advanced renal disease without recognising the risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nephrogenic systemic fibrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nephrogenic_systemic_fibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep incisional skin biopsy including fascia",
+          "cells": [
+            {
+              "text": "Fibrocyte proliferation and thickened collagen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD34 immunohistochemistry",
+          "cells": [
+            {
+              "text": "Highlights spindle-cell fibrocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "eGFR",
+          "cells": [
+            {
+              "text": "Confirms and stages kidney impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gadolinium contrast exposure history",
+          "cells": [
+            {
+              "text": "Agent type and dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology",
+          "cells": [
+            {
+              "text": "Helps exclude systemic sclerosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nephrogenic_systemic_fibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic sclerosis or morphoea",
+          "cells": [
+            {
+              "text": "Sparing of the face favours this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleromyxoedema or scleroedema",
+          "cells": [
+            {
+              "text": "Mucin deposition without renal trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic fasciitis",
+          "cells": [
+            {
+              "text": "Fascial involvement with eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic graft-versus-host disease",
+          "cells": [
+            {
+              "text": "Sclerodermatous features after transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipodermatosclerosis",
+          "cells": [
+            {
+              "text": "Chronic venous disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nephrogenic_systemic_fibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid gadolinium in severe renal impairment",
+          "cells": [
+            {
+              "text": "The mainstay is prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lowest dose of a stable macrocyclic agent",
+          "cells": [
+            {
+              "text": "Where imaging is essential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt haemodialysis after exposure",
+          "cells": [
+            {
+              "text": "Optimises renal clearance of gadolinium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restore renal function",
+          "cells": [
+            {
+              "text": "Transplantation may stabilise or improve the disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Preserves mobility and limits contractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nephrogenic_systemic_fibrosis-dx-mgmt",
+      "title": "Diagnosis and management of nephrogenic systemic fibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symmetric woody skin induration in a patient with severe renal impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid thickening, contractures, respiratory or cardiac involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of gadolinium exposure; prompt dialysis if dialysis-dependent",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep skin biopsy with CD34, eGFR, contrast history, autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Deep fibrosis with gadolinium exposure in severe renal impairment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider systemic sclerosis or scleromyxoedema; biopsy again if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid gadolinium contrast in severe renal impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt haemodialysis after unavoidable exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restore renal function where possible, including transplantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intensive physiotherapy to preserve mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and progressive; contractures and immobility cause major disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

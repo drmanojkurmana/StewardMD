@@ -1,173 +1,431 @@
 {
- "id": "pseudoachondroplasia",
- "name": "Pseudoachondroplasia",
- "aliases": [
-  "COMP",
-  "PSACH",
-  "pseudoachondroplastic dysplasia"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with disproportionate short-limbed short stature that is usually not apparent at birth but emerges as growth slows in the second year of life",
-   "Caused by autosomal dominant variants in COMP encoding cartilage oligomeric matrix protein, which accumulates abnormally within chondrocytes",
-   "The head and face are normal, distinguishing it clinically from achondroplasia, but there is marked ligamentous laxity and early progressive joint pain",
-   "Radiographs show generalised epiphyseal and metaphyseal irregularity, small irregular epiphyses, flared metaphyses, and platyspondyly with anterior beaking of the vertebral bodies",
-   "Windswept lower-limb deformities, genu varum or valgum, and early osteoarthritis are characteristic complications",
-   "Cervical spine instability due to odontoid hypoplasia and ligamentous laxity is an important consideration before anaesthesia and physical activity",
-   "Diagnosis rests on the radiographic pattern and COMP molecular testing, as the overlap with multiple epiphyseal dysplasia is recognised"
+  "id": "pseudoachondroplasia",
+  "name": "Pseudoachondroplasia",
+  "aliases": [
+    "COMP",
+    "PSACH",
+    "pseudoachondroplastic dysplasia"
   ],
-  "pathophysiology": "Pseudoachondroplasia is caused by dominant variants in COMP, a glycoprotein of the cartilage extracellular matrix. Mutant protein is retained within the endoplasmic reticulum of chondrocytes rather than being secreted, forming characteristic inclusions and provoking cellular stress that impairs chondrocyte function and premature cell death. Disrupted cartilage matrix in the growth plates and articular surfaces causes disproportionate short stature, epiphyseal and metaphyseal abnormalities, joint laxity, and premature degenerative joint disease.",
-  "additionalDifferentials": [
-   "Achondroplasia",
-   "Multiple epiphyseal dysplasia (also COMP-related)",
-   "Spondyloepiphyseal dysplasia",
-   "Metaphyseal chondrodysplasia",
-   "Morquio and other mucopolysaccharidoses",
-   "Hypochondroplasia"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey documenting epiphyseal and metaphyseal changes and vertebral beaking",
-   "COMP molecular genetic testing to confirm the diagnosis",
-   "Flexion-extension cervical spine imaging to assess odontoid hypoplasia and atlantoaxial instability",
-   "Lower-limb alignment assessment for windswept and angular deformities",
-   "Serial growth and body-proportion charting",
-   "Orthopaedic and physiotherapy review for joint pain and mobility"
-  ],
-  "redFlags": [
-   "Signs of cervical myelopathy from atlantoaxial instability, especially before anaesthesia",
-   "Rapidly progressive lower-limb malalignment impairing walking",
-   "Severe early-onset joint pain limiting function",
-   "Neurological deficit suggesting spinal cord compression"
-  ],
-  "prognosis": "Lifespan and intelligence are normal, but adult stature is significantly reduced and premature osteoarthritis, particularly of the hips and knees, frequently necessitates joint replacement in adulthood. Cervical instability requires vigilance to prevent neurological injury.",
-  "pitfalls": [
-   "Expecting features at birth and dismissing the diagnosis in a normal-appearing neonate",
-   "Confusing it with achondroplasia despite the normal facial appearance",
-   "Overlooking atlantoaxial instability before anaesthesia or sport",
-   "Failing to anticipate and manage early degenerative joint disease"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive skeletal-dysplasia care, as there is no disease-specific drug therapy for the underlying COMP defect",
-   "Assess the cervical spine with flexion-extension imaging for odontoid hypoplasia and atlantoaxial instability, with precautions before anaesthesia and contact activity and surgical stabilisation if unstable",
-   "Orthopaedic correction of windswept and angular lower-limb deformities by guided growth or osteotomy",
-   "Physiotherapy and analgesia for joint pain and ligamentous laxity, with joint replacement for premature osteoarthritis",
-   "Serial growth and body-proportion monitoring",
-   "Genetic counselling for this autosomal dominant COMP-related condition",
-   "Referral to a skeletal-dysplasia multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pseudoachondroplasia-pathway",
-   "title": "Pseudoachondroplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with disproportionate short-limbed short stature that is usually not apparent at birth but emerges as growth slows in the second year of life",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of cervical myelopathy from atlantoaxial instability, especially before anaesthesia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey documenting epiphyseal and metaphyseal changes and vertebral beaking, COMP molecular genetic testing to confirm the diagnosis, Flexion-extension cervical spine imaging to assess odontoid hypoplasia and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive skeletal-dysplasia care, as there is no disease-specific drug therapy for the underlying COMP defect"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting features at birth and dismissing the diagnosis in a normal-appearing neonate"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pseudoachondroplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "pseudoachondroplasia-matrix",
-   "title": "Pseudoachondroplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with disproportionate short-limbed short stature that is usually not apparent at birth but emerges as growth slows in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with disproportionate short-limbed short stature that is usually not apparent at birth but emerges as growth slows in the second year of life",
+      "Caused by autosomal dominant variants in COMP encoding cartilage oligomeric matrix protein, which accumulates abnormally within chondrocytes",
+      "The head and face are normal, distinguishing it clinically from achondroplasia, but there is marked ligamentous laxity and early progressive joint pain",
+      "Radiographs show generalised epiphyseal and metaphyseal irregularity, small irregular epiphyses, flared metaphyses, and platyspondyly with anterior beaking of the vertebral bodies",
+      "Windswept lower-limb deformities, genu varum or valgum, and early osteoarthritis are characteristic complications",
+      "Cervical spine instability due to odontoid hypoplasia and ligamentous laxity is an important consideration before anaesthesia and physical activity",
+      "Diagnosis rests on the radiographic pattern and COMP molecular testing, as the overlap with multiple epiphyseal dysplasia is recognised"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey documenting epiphyseal and metaphyseal changes and vertebral beaking, COMP molecular genetic testing to confirm",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pseudoachondroplasia is caused by dominant variants in COMP, a glycoprotein of the cartilage extracellular matrix. Mutant protein is retained within the endoplasmic reticulum of chondrocytes rather than being secreted, forming characteristic inclusions and provoking cellular stress that impairs chondrocyte function and premature cell death. Disrupted cartilage matrix in the growth plates and articular surfaces causes disproportionate short stature, epiphyseal and metaphyseal abnormalities, joint laxity, and premature degenerative joint disease.",
+    "additionalDifferentials": [
+      "Achondroplasia",
+      "Multiple epiphyseal dysplasia (also COMP-related)",
+      "Spondyloepiphyseal dysplasia",
+      "Metaphyseal chondrodysplasia",
+      "Morquio and other mucopolysaccharidoses",
+      "Hypochondroplasia"
     ],
-    [
-     "Primary Differentials",
-     "Achondroplasia, Multiple epiphyseal dysplasia (also COMP-related), Spondyloepiphyseal dysplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey documenting epiphyseal and metaphyseal changes and vertebral beaking",
+      "COMP molecular genetic testing to confirm the diagnosis",
+      "Flexion-extension cervical spine imaging to assess odontoid hypoplasia and atlantoaxial instability",
+      "Lower-limb alignment assessment for windswept and angular deformities",
+      "Serial growth and body-proportion charting",
+      "Orthopaedic and physiotherapy review for joint pain and mobility"
     ],
-    [
-     "Management Strategy",
-     "Supportive skeletal-dysplasia care, as there is no disease-specific drug therapy for the underlying COMP defect",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of cervical myelopathy from atlantoaxial instability, especially before anaesthesia",
+      "Rapidly progressive lower-limb malalignment impairing walking",
+      "Severe early-onset joint pain limiting function",
+      "Neurological deficit suggesting spinal cord compression"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting features at birth and dismissing the diagnosis in a normal-appearing neonate",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lifespan and intelligence are normal, but adult stature is significantly reduced and premature osteoarthritis, particularly of the hips and knees, frequently necessitates joint replacement in adulthood. Cervical instability requires vigilance to prevent neurological injury.",
+    "pitfalls": [
+      "Expecting features at birth and dismissing the diagnosis in a normal-appearing neonate",
+      "Confusing it with achondroplasia despite the normal facial appearance",
+      "Overlooking atlantoaxial instability before anaesthesia or sport",
+      "Failing to anticipate and manage early degenerative joint disease"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive skeletal-dysplasia care, as there is no disease-specific drug therapy for the underlying COMP defect",
+      "Assess the cervical spine with flexion-extension imaging for odontoid hypoplasia and atlantoaxial instability, with precautions before anaesthesia and contact activity and surgical stabilisation if unstable",
+      "Orthopaedic correction of windswept and angular lower-limb deformities by guided growth or osteotomy",
+      "Physiotherapy and analgesia for joint pain and ligamentous laxity, with joint replacement for premature osteoarthritis",
+      "Serial growth and body-proportion monitoring",
+      "Genetic counselling for this autosomal dominant COMP-related condition",
+      "Referral to a skeletal-dysplasia multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for pseudoachondroplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pseudoachondroplasia-real-image",
-   "title": "Pseudoachondroplasia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "pseudoachondroplasia-pathway",
+      "title": "Pseudoachondroplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with disproportionate short-limbed short stature that is usually not apparent at birth but emerges as growth slows in the second year of life",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of cervical myelopathy from atlantoaxial instability, especially before anaesthesia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey documenting epiphyseal and metaphyseal changes and vertebral beaking, COMP molecular genetic testing to confirm the diagnosis, Flexion-extension cervical spine imaging to assess odontoid hypoplasia and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive skeletal-dysplasia care, as there is no disease-specific drug therapy for the underlying COMP defect"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting features at birth and dismissing the diagnosis in a normal-appearing neonate"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pseudoachondroplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pseudoachondroplasia-matrix",
+      "title": "Pseudoachondroplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with disproportionate short-limbed short stature that is usually not apparent at birth but emerges as growth slows in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey documenting epiphyseal and metaphyseal changes and vertebral beaking, COMP molecular genetic testing to confirm",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Achondroplasia, Multiple epiphyseal dysplasia (also COMP-related), Spondyloepiphyseal dysplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive skeletal-dysplasia care, as there is no disease-specific drug therapy for the underlying COMP defect",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting features at birth and dismissing the diagnosis in a normal-appearing neonate",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pseudoachondroplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudoachondroplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Epiphyseal and metaphyseal changes; vertebral beaking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COMP molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexion-extension cervical spine imaging",
+          "cells": [
+            {
+              "text": "Odontoid hypoplasia and atlantoaxial instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lower-limb alignment assessment",
+          "cells": [
+            {
+              "text": "Windswept and angular deformities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial growth and body-proportion charting",
+          "cells": [
+            {
+              "text": "Growth pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and physiotherapy review",
+          "cells": [
+            {
+              "text": "Joint pain and mobility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudoachondroplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive skeletal-dysplasia care",
+          "cells": [
+            {
+              "text": "No disease-specific drug therapy for the COMP defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine precautions",
+          "cells": [
+            {
+              "text": "Flexion-extension imaging; precautions before anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic correction",
+          "cells": [
+            {
+              "text": "Windswept and angular lower-limb deformities by guided growth or osteotomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain and joints",
+          "cells": [
+            {
+              "text": "Physiotherapy and analgesia; joint replacement for premature osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Serial growth and body-proportion monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant COMP-related condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Skeletal-dysplasia multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudoachondroplasia-dx-mgmt",
+      "title": "Diagnosis and management of Pseudoachondroplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pseudoachondroplasia: skeletal dysplasia with early-onset joint pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cervical myelopathy, rapid limb malalignment, severe joint pain, or cord compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent spinal review for myelopathy or cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; COMP testing; flexion-extension cervical spine; limb alignment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a COMP variant found, with cervical instability assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider achondroplasia, multiple epiphyseal dysplasia or other dysplasias; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive skeletal-dysplasia care; no drug therapy for COMP defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cervical flexion-extension imaging; precautions before anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Guided growth or osteotomy for windswept and angular deformities",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and analgesia; joint replacement for premature osteoarthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial growth monitoring and skeletal-dysplasia team follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

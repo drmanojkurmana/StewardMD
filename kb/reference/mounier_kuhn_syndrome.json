@@ -1,175 +1,453 @@
 {
- "id": "mounier_kuhn_syndrome",
- "name": "Mounier-Kuhn syndrome",
- "aliases": [
-  "Mounier-Kuhn disease",
-  "congenital tracheobronchomegaly",
-  "mounier kuhn",
-  "tracheobronchomalacia with megatrachea",
-  "tracheobronchomegaly"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory Medicine / Occupational Lung Disease",
- "referenceOnly": true,
- "reference": {
-  "source": "Respiratory Medicine and Bronchoscopy reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare condition of marked dilatation of the trachea and main bronchi (tracheobronchomegaly) due to atrophy or deficiency of elastic and smooth-muscle tissue in the airway wall",
-   "Redundant airway mucosa herniates between cartilage rings, producing characteristic tracheal diverticulosis and a corrugated appearance",
-   "Presents typically in middle-aged men with chronic productive cough, recurrent lower respiratory infections, and bronchiectasis",
-   "The enlarged, flaccid airways collapse on expiration and impair secretion clearance, predisposing to infection and bronchiectasis",
-   "Diagnosis rests on measuring tracheal and bronchial diameters on CT above defined thresholds, alongside the typical clinical picture",
-   "Bronchoscopy shows a widened, flaccid airway with mucosal outpouchings between cartilaginous rings",
-   "Management is supportive, centred on airway clearance, treatment of infections, and management of associated bronchiectasis"
+  "id": "mounier_kuhn_syndrome",
+  "name": "Mounier-Kuhn syndrome",
+  "aliases": [
+    "Mounier-Kuhn disease",
+    "congenital tracheobronchomegaly",
+    "mounier kuhn",
+    "tracheobronchomalacia with megatrachea",
+    "tracheobronchomegaly"
   ],
-  "pathophysiology": "Mounier-Kuhn syndrome is characterised by atrophy or congenital deficiency of the elastic fibres and smooth muscle of the tracheal and bronchial walls, which causes progressive dilatation of these large airways. The weakened wall allows the mucous membrane to bulge outward between the cartilage rings, forming diverticula and giving a scalloped contour, and the flaccid airway collapses excessively during expiration and coughing. This dynamic collapse and enlargement impair the effectiveness of cough and mucociliary clearance, leading to retained secretions, recurrent infection, and secondary bronchiectasis. Most cases are considered congenital, and associations with connective tissue disorders have been described.",
-  "additionalDifferentials": [
-   "Bronchiectasis of other aetiology",
-   "Tracheobronchomalacia without megatrachea",
-   "Cystic fibrosis",
-   "Chronic obstructive pulmonary disease",
-   "Tracheal dilatation from traction by pulmonary fibrosis",
-   "Ehlers-Danlos or other connective tissue disorders affecting the airway"
-  ],
-  "additionalInvestigations": [
-   "CT of the thorax measuring tracheal and main bronchial diameters and demonstrating diverticulosis",
-   "Dynamic expiratory imaging or bronchoscopy to assess airway collapse",
-   "Bronchoscopy showing the widened flaccid airway and mucosal outpouchings",
-   "Pulmonary function tests including flow-volume loops",
-   "Sputum microbiology in recurrent infection",
-   "Assessment for associated bronchiectasis and connective tissue disease"
-  ],
-  "redFlags": [
-   "Recurrent severe pneumonia or respiratory failure from secretion retention",
-   "Massive or extensive bronchiectasis with declining lung function",
-   "Life-threatening dynamic airway collapse",
-   "Haemoptysis requiring evaluation in the context of bronchiectasis"
-  ],
-  "prognosis": "The course is variable; some patients remain relatively stable with airway clearance and prompt treatment of infections, while others develop progressive bronchiectasis and respiratory impairment, and prognosis is largely determined by the extent of secondary lung damage.",
-  "pitfalls": [
-   "Overlooking the diagnosis and attributing recurrent infection to ordinary bronchiectasis without noting the megatrachea",
-   "Failing to measure airway diameters on CT",
-   "Missing the diagnostic clue of tracheal diverticulosis and a corrugated airway",
-   "Not addressing dynamic airway collapse contributing to poor secretion clearance"
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "Flexible Bronchoscopy (Wang, Mehta, Turner)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise airway clearance with chest physiotherapy, postural drainage and mucolytics or nebulised hypertonic saline to overcome poor cough and secretion retention",
-   "Give targeted antibiotics for recurrent lower respiratory infections, directed by sputum culture",
-   "Immunise against influenza and pneumococcal disease and support smoking cessation",
-   "Treat associated bronchiectasis and use bronchodilators alongside pulmonary rehabilitation",
-   "Trial continuous positive airway pressure to splint the collapsing large airways, reserving tracheobronchial stenting or reconstructive surgery for selected refractory cases",
-   "Screen for and manage any associated connective tissue disorder",
-   "Monitor pulmonary function and escalate to non-invasive ventilation, considering lung transplantation in end-stage respiratory failure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mounier_kuhn_syndrome-pathway",
-   "title": "Mounier-Kuhn syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare condition of marked dilatation of the trachea and main bronchi (tracheobronchomegaly) due to atrophy or deficiency of elastic and smooth-muscle tissue in the airway wall",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent severe pneumonia or respiratory failure from secretion retention",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT of the thorax measuring tracheal and main bronchial diameters and demonstrating diverticulosis, Dynamic expiratory imaging or bronchoscopy to assess airway collapse, Bronchoscopy showing the widened flaccid airway and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise airway clearance with chest physiotherapy, postural drainage and mucolytics or nebulised hypertonic saline to overcome poor cough and secretion retention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis and attributing recurrent infection to ordinary bronchiectasis without noting the megatrachea"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mounier-kuhn syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "mounier_kuhn_syndrome-matrix",
-   "title": "Mounier-Kuhn syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare condition of marked dilatation of the trachea and main bronchi (tracheobronchomegaly) due to atrophy or deficiency of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory Medicine / Occupational Lung Disease",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Respiratory Medicine and Bronchoscopy reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare condition of marked dilatation of the trachea and main bronchi (tracheobronchomegaly) due to atrophy or deficiency of elastic and smooth-muscle tissue in the airway wall",
+      "Redundant airway mucosa herniates between cartilage rings, producing characteristic tracheal diverticulosis and a corrugated appearance",
+      "Presents typically in middle-aged men with chronic productive cough, recurrent lower respiratory infections, and bronchiectasis",
+      "The enlarged, flaccid airways collapse on expiration and impair secretion clearance, predisposing to infection and bronchiectasis",
+      "Diagnosis rests on measuring tracheal and bronchial diameters on CT above defined thresholds, alongside the typical clinical picture",
+      "Bronchoscopy shows a widened, flaccid airway with mucosal outpouchings between cartilaginous rings",
+      "Management is supportive, centred on airway clearance, treatment of infections, and management of associated bronchiectasis"
     ],
-    [
-     "Key Investigations",
-     "CT of the thorax measuring tracheal and main bronchial diameters and demonstrating diverticulosis, Dynamic expiratory imaging or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mounier-Kuhn syndrome is characterised by atrophy or congenital deficiency of the elastic fibres and smooth muscle of the tracheal and bronchial walls, which causes progressive dilatation of these large airways. The weakened wall allows the mucous membrane to bulge outward between the cartilage rings, forming diverticula and giving a scalloped contour, and the flaccid airway collapses excessively during expiration and coughing. This dynamic collapse and enlargement impair the effectiveness of cough and mucociliary clearance, leading to retained secretions, recurrent infection, and secondary bronchiectasis. Most cases are considered congenital, and associations with connective tissue disorders have been described.",
+    "additionalDifferentials": [
+      "Bronchiectasis of other aetiology",
+      "Tracheobronchomalacia without megatrachea",
+      "Cystic fibrosis",
+      "Chronic obstructive pulmonary disease",
+      "Tracheal dilatation from traction by pulmonary fibrosis",
+      "Ehlers-Danlos or other connective tissue disorders affecting the airway"
     ],
-    [
-     "Primary Differentials",
-     "Bronchiectasis of other aetiology, Tracheobronchomalacia without megatrachea, Cystic fibrosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT of the thorax measuring tracheal and main bronchial diameters and demonstrating diverticulosis",
+      "Dynamic expiratory imaging or bronchoscopy to assess airway collapse",
+      "Bronchoscopy showing the widened flaccid airway and mucosal outpouchings",
+      "Pulmonary function tests including flow-volume loops",
+      "Sputum microbiology in recurrent infection",
+      "Assessment for associated bronchiectasis and connective tissue disease"
     ],
-    [
-     "Management Strategy",
-     "Prioritise airway clearance with chest physiotherapy, postural drainage and mucolytics or nebulised hypertonic saline to overcome",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent severe pneumonia or respiratory failure from secretion retention",
+      "Massive or extensive bronchiectasis with declining lung function",
+      "Life-threatening dynamic airway collapse",
+      "Haemoptysis requiring evaluation in the context of bronchiectasis"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis and attributing recurrent infection to ordinary bronchiectasis without noting the megatrachea",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable; some patients remain relatively stable with airway clearance and prompt treatment of infections, while others develop progressive bronchiectasis and respiratory impairment, and prognosis is largely determined by the extent of secondary lung damage.",
+    "pitfalls": [
+      "Overlooking the diagnosis and attributing recurrent infection to ordinary bronchiectasis without noting the megatrachea",
+      "Failing to measure airway diameters on CT",
+      "Missing the diagnostic clue of tracheal diverticulosis and a corrugated airway",
+      "Not addressing dynamic airway collapse contributing to poor secretion clearance"
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "Flexible Bronchoscopy (Wang, Mehta, Turner)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise airway clearance with chest physiotherapy, postural drainage and mucolytics or nebulised hypertonic saline to overcome poor cough and secretion retention",
+      "Give targeted antibiotics for recurrent lower respiratory infections, directed by sputum culture",
+      "Immunise against influenza and pneumococcal disease and support smoking cessation",
+      "Treat associated bronchiectasis and use bronchodilators alongside pulmonary rehabilitation",
+      "Trial continuous positive airway pressure to splint the collapsing large airways, reserving tracheobronchial stenting or reconstructive surgery for selected refractory cases",
+      "Screen for and manage any associated connective tissue disorder",
+      "Monitor pulmonary function and escalate to non-invasive ventilation, considering lung transplantation in end-stage respiratory failure"
     ]
-   ],
-   "caption": "Overview comparison matrix for mounier-kuhn syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mounier-kuhn-syndrome-real-image",
-   "title": "Mounier-Kuhn syndrome: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "mounier_kuhn_syndrome-pathway",
+      "title": "Mounier-Kuhn syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare condition of marked dilatation of the trachea and main bronchi (tracheobronchomegaly) due to atrophy or deficiency of elastic and smooth-muscle tissue in the airway wall",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent severe pneumonia or respiratory failure from secretion retention",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT of the thorax measuring tracheal and main bronchial diameters and demonstrating diverticulosis, Dynamic expiratory imaging or bronchoscopy to assess airway collapse, Bronchoscopy showing the widened flaccid airway and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise airway clearance with chest physiotherapy, postural drainage and mucolytics or nebulised hypertonic saline to overcome poor cough and secretion retention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis and attributing recurrent infection to ordinary bronchiectasis without noting the megatrachea"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mounier-kuhn syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mounier_kuhn_syndrome-matrix",
+      "title": "Mounier-Kuhn syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare condition of marked dilatation of the trachea and main bronchi (tracheobronchomegaly) due to atrophy or deficiency of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT of the thorax measuring tracheal and main bronchial diameters and demonstrating diverticulosis, Dynamic expiratory imaging or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bronchiectasis of other aetiology, Tracheobronchomalacia without megatrachea, Cystic fibrosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise airway clearance with chest physiotherapy, postural drainage and mucolytics or nebulised hypertonic saline to overcome",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis and attributing recurrent infection to ordinary bronchiectasis without noting the megatrachea",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mounier-kuhn syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory Medicine and Bronchoscopy reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mounier_kuhn_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT thorax",
+          "cells": [
+            {
+              "text": "Tracheal and main bronchial diameters and diverticulosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic expiratory imaging or bronchoscopy",
+          "cells": [
+            {
+              "text": "Airway collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Widened flaccid airway and mucosal outpouchings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Flow-volume loops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum microbiology",
+          "cells": [
+            {
+              "text": "In recurrent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mounier_kuhn_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchiectasis of other aetiology",
+          "cells": [
+            {
+              "text": "Megatrachea on CT measurement separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tracheobronchomalacia without megatrachea",
+          "cells": [
+            {
+              "text": "Airway diameter is not enlarged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ehlers-Danlos and other connective tissue disorders",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mounier_kuhn_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway clearance",
+          "cells": [
+            {
+              "text": "Chest physiotherapy, postural drainage, mucolytics or nebulised hypertonic saline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted antibiotics",
+          "cells": [
+            {
+              "text": "For recurrent lower respiratory infections, guided by sputum culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination and smoking cessation",
+          "cells": [
+            {
+              "text": "Influenza and pneumococcal immunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchiectasis and COPD-type care",
+          "cells": [
+            {
+              "text": "Bronchodilators and pulmonary rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CPAP trial",
+          "cells": [
+            {
+              "text": "To splint collapsing large airways; stenting or surgery reserved for severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced respiratory support",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation; lung transplant considered in end-stage failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mounier_kuhn_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Mounier-Kuhn syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent chest infections with poor cough and widened trachea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe pneumonia, respiratory failure, haemoptysis or airway collapse?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent admission, airway clearance and respiratory support; bronchoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT with tracheal and bronchial diameters, dynamic imaging, bronchoscopy, sputum culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Megatrachea with diverticulosis and airway collapse?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other bronchiectasis, tracheobronchomalacia, cystic fibrosis, COPD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Chest physiotherapy, mucolytics and hypertonic saline",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Culture-directed antibiotics; influenza and pneumococcal vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CPAP trial; stent or surgery in severe cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor lung function; NIV or transplant in end-stage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; some stable with airway clearance, others progress to respiratory failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

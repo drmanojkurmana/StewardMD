@@ -1,175 +1,690 @@
 {
- "id": "amiodarone_induced_thyrotoxicosis",
- "name": "Amiodarone-induced thyrotoxicosis",
- "aliases": [
-  "AIT",
-  "amiodarone-induced thyrotoxicosis",
-  "amiodarone thyrotoxicosis"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / thyroid society guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Amiodarone is iodine-rich and lipophilic with a long half-life, so thyrotoxicosis can arise during treatment or months after the drug is stopped",
-   "Distinguishing type-1 from type-2 amiodarone thyrotoxicosis is central because it determines whether antithyroid-drug or glucocorticoid therapy is used",
-   "Type 1 is iodine-induced excess hormone synthesis in an abnormal gland (nodular goitre or latent Graves) and is treated with antithyroid drugs",
-   "Type 2 is a destructive thyroiditis releasing preformed hormone from a normal gland and responds to glucocorticoids",
-   "Mixed forms occur, and when the type is uncertain combined therapy is often used",
-   "Colour-flow Doppler helps discriminate the types, showing increased vascularity in type 1 and reduced or absent flow in type 2",
-   "New or worsening tachyarrhythmia or unexplained clinical deterioration in an amiodarone-treated patient should prompt urgent thyroid function testing"
+  "id": "amiodarone_induced_thyrotoxicosis",
+  "name": "Amiodarone-induced thyrotoxicosis",
+  "aliases": [
+    "AIT",
+    "amiodarone-induced thyrotoxicosis",
+    "amiodarone thyrotoxicosis"
   ],
-  "pathophysiology": "Amiodarone contains a large iodine load and is structurally similar to thyroid hormone, allowing it to disrupt thyroid function by several mechanisms. In type 1 disease, the iodine excess drives unregulated hormone synthesis in a gland with underlying autonomy, such as a multinodular goitre or subclinical Graves disease (the Jod-Basedow phenomenon). In type 2 disease, direct drug and iodine toxicity causes a destructive thyroiditis that releases stored thyroid hormone from an otherwise normal gland. Because these mechanisms differ fundamentally, they demand different treatments, and the two processes can coexist as a mixed form.",
-  "additionalDifferentials": [
-   "Graves disease unrelated to amiodarone",
-   "Toxic multinodular goitre or toxic adenoma",
-   "Subacute (de Quervain) thyroiditis",
-   "Other drug- or iodine-induced thyrotoxicosis",
-   "Factitious thyrotoxicosis",
-   "Non-thyroidal illness with abnormal thyroid tests"
-  ],
-  "additionalInvestigations": [
-   "Thyroid function tests (TSH, free thyroxine and free triiodothyronine)",
-   "Colour-flow Doppler ultrasound to assess gland vascularity",
-   "TSH-receptor and thyroid peroxidase antibodies",
-   "Radioiodine uptake where feasible, typically low in type 2",
-   "Inflammatory markers and interleukin-6 as adjuncts in some settings",
-   "Cardiac assessment given the underlying indication for amiodarone"
-  ],
-  "redFlags": [
-   "Thyrotoxic exacerbation of the underlying arrhythmia or heart failure",
-   "Features of thyroid storm",
-   "Rapid clinical deterioration in an amiodarone-treated patient",
-   "Refractory thyrotoxicosis where the type cannot be determined and disease progresses"
-  ],
-  "prognosis": "Type 2 disease often remits over weeks to months with glucocorticoids, whereas type 1 usually requires antithyroid drugs and sometimes definitive treatment; overall outcome is influenced by the underlying cardiac disease and whether amiodarone can be discontinued.",
-  "pitfalls": [
-   "Treating all cases as one entity and choosing the wrong drug for the type",
-   "Assuming stopping amiodarone alone will resolve thyrotoxicosis, given its long half-life",
-   "Overlooking a mixed form that needs combined therapy",
-   "Failing to recognise thyrotoxicosis as the cause of worsening arrhythmia",
-   "Discontinuing amiodarone abruptly without cardiology input when it is essential for arrhythmia control"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Thyroid society guidance on amiodarone and thyroid dysfunction"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Distinguish type 1 from type 2 disease using colour-flow Doppler and clinical features, as this determines therapy",
-   "Treat type 1 iodine-induced excess synthesis with antithyroid drugs such as carbimazole, sometimes with potassium perchlorate to block further iodine uptake",
-   "Treat type 2 destructive thyroiditis with oral glucocorticoids such as prednisolone",
-   "Use combined antithyroid drug and glucocorticoid therapy for mixed or indeterminate cases",
-   "Control adrenergic symptoms with a beta-blocker where not contraindicated by the underlying cardiac disease",
-   "Decide jointly with cardiology whether amiodarone can be withdrawn, weighing the arrhythmia indication",
-   "Consider total thyroidectomy for refractory thyrotoxicosis or when rapid control is needed in unstable cardiac disease, and offer radioiodine to type 1 once uptake recovers",
-   "Monitor thyroid function throughout treatment and remain alert for recurrence months after the drug is stopped"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "amiodarone_induced_thyrotoxicosis-pathway",
-   "title": "Amiodarone-induced thyrotoxicosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Amiodarone is iodine-rich and lipophilic with a long half-life, so thyrotoxicosis can arise during treatment or months after the drug is stopped",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Thyrotoxic exacerbation of the underlying arrhythmia or heart failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thyroid function tests (TSH, free thyroxine and free triiodothyronine), Colour-flow Doppler ultrasound to assess gland vascularity, TSH-receptor and thyroid peroxidase antibodies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Distinguish type 1 from type 2 disease using colour-flow Doppler and clinical features, as this determines therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating all cases as one entity and choosing the wrong drug for the type"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of amiodarone-induced thyrotoxicosis."
-  }
- ],
- "tables": [
-  {
-   "id": "amiodarone_induced_thyrotoxicosis-matrix",
-   "title": "Amiodarone-induced thyrotoxicosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Amiodarone is iodine-rich and lipophilic with a long half-life, so thyrotoxicosis can arise during treatment or months after the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / thyroid society guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Amiodarone is iodine-rich and lipophilic with a long half-life, so thyrotoxicosis can arise during treatment or months after the drug is stopped",
+      "Distinguishing type-1 from type-2 amiodarone thyrotoxicosis is central because it determines whether antithyroid-drug or glucocorticoid therapy is used",
+      "Type 1 is iodine-induced excess hormone synthesis in an abnormal gland (nodular goitre or latent Graves) and is treated with antithyroid drugs",
+      "Type 2 is a destructive thyroiditis releasing preformed hormone from a normal gland and responds to glucocorticoids",
+      "Mixed forms occur, and when the type is uncertain combined therapy is often used",
+      "Colour-flow Doppler helps discriminate the types, showing increased vascularity in type 1 and reduced or absent flow in type 2",
+      "New or worsening tachyarrhythmia or unexplained clinical deterioration in an amiodarone-treated patient should prompt urgent thyroid function testing"
     ],
-    [
-     "Key Investigations",
-     "Thyroid function tests (TSH, free thyroxine and free triiodothyronine), Colour-flow Doppler ultrasound to assess gland",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Amiodarone contains a large iodine load and is structurally similar to thyroid hormone, allowing it to disrupt thyroid function by several mechanisms. In type 1 disease, the iodine excess drives unregulated hormone synthesis in a gland with underlying autonomy, such as a multinodular goitre or subclinical Graves disease (the Jod-Basedow phenomenon). In type 2 disease, direct drug and iodine toxicity causes a destructive thyroiditis that releases stored thyroid hormone from an otherwise normal gland. Because these mechanisms differ fundamentally, they demand different treatments, and the two processes can coexist as a mixed form.",
+    "additionalDifferentials": [
+      "Graves disease unrelated to amiodarone",
+      "Toxic multinodular goitre or toxic adenoma",
+      "Subacute (de Quervain) thyroiditis",
+      "Other drug- or iodine-induced thyrotoxicosis",
+      "Factitious thyrotoxicosis",
+      "Non-thyroidal illness with abnormal thyroid tests"
     ],
-    [
-     "Primary Differentials",
-     "Graves disease unrelated to amiodarone, Toxic multinodular goitre or toxic adenoma, Subacute (de Quervain) thyroiditis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thyroid function tests (TSH, free thyroxine and free triiodothyronine)",
+      "Colour-flow Doppler ultrasound to assess gland vascularity",
+      "TSH-receptor and thyroid peroxidase antibodies",
+      "Radioiodine uptake where feasible, typically low in type 2",
+      "Inflammatory markers and interleukin-6 as adjuncts in some settings",
+      "Cardiac assessment given the underlying indication for amiodarone"
     ],
-    [
-     "Management Strategy",
-     "Distinguish type 1 from type 2 disease using colour-flow Doppler and clinical features, as this determines therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Thyrotoxic exacerbation of the underlying arrhythmia or heart failure",
+      "Features of thyroid storm",
+      "Rapid clinical deterioration in an amiodarone-treated patient",
+      "Refractory thyrotoxicosis where the type cannot be determined and disease progresses"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating all cases as one entity and choosing the wrong drug for the type",
-     "Prevent diagnostic or management error"
+    "prognosis": "Type 2 disease often remits over weeks to months with glucocorticoids, whereas type 1 usually requires antithyroid drugs and sometimes definitive treatment; overall outcome is influenced by the underlying cardiac disease and whether amiodarone can be discontinued.",
+    "pitfalls": [
+      "Treating all cases as one entity and choosing the wrong drug for the type",
+      "Assuming stopping amiodarone alone will resolve thyrotoxicosis, given its long half-life",
+      "Overlooking a mixed form that needs combined therapy",
+      "Failing to recognise thyrotoxicosis as the cause of worsening arrhythmia",
+      "Discontinuing amiodarone abruptly without cardiology input when it is essential for arrhythmia control"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Thyroid society guidance on amiodarone and thyroid dysfunction"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Distinguish type 1 from type 2 disease using colour-flow Doppler and clinical features, as this determines therapy",
+      "Treat type 1 iodine-induced excess synthesis with antithyroid drugs such as carbimazole, sometimes with potassium perchlorate to block further iodine uptake",
+      "Treat type 2 destructive thyroiditis with oral glucocorticoids such as prednisolone",
+      "Use combined antithyroid drug and glucocorticoid therapy for mixed or indeterminate cases",
+      "Control adrenergic symptoms with a beta-blocker where not contraindicated by the underlying cardiac disease",
+      "Decide jointly with cardiology whether amiodarone can be withdrawn, weighing the arrhythmia indication",
+      "Consider total thyroidectomy for refractory thyrotoxicosis or when rapid control is needed in unstable cardiac disease, and offer radioiodine to type 1 once uptake recovers",
+      "Monitor thyroid function throughout treatment and remain alert for recurrence months after the drug is stopped"
     ]
-   ],
-   "caption": "Overview comparison matrix for amiodarone-induced thyrotoxicosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "amiodarone-induced-thyrotoxicosis-real-image",
-   "title": "Amiodarone-induced thyrotoxicosis: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "amiodarone_induced_thyrotoxicosis-pathway",
+      "title": "Amiodarone-induced thyrotoxicosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Amiodarone is iodine-rich and lipophilic with a long half-life, so thyrotoxicosis can arise during treatment or months after the drug is stopped",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Thyrotoxic exacerbation of the underlying arrhythmia or heart failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thyroid function tests (TSH, free thyroxine and free triiodothyronine), Colour-flow Doppler ultrasound to assess gland vascularity, TSH-receptor and thyroid peroxidase antibodies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Distinguish type 1 from type 2 disease using colour-flow Doppler and clinical features, as this determines therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating all cases as one entity and choosing the wrong drug for the type"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of amiodarone-induced thyrotoxicosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "amiodarone_induced_thyrotoxicosis-matrix",
+      "title": "Amiodarone-induced thyrotoxicosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Amiodarone is iodine-rich and lipophilic with a long half-life, so thyrotoxicosis can arise during treatment or months after the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thyroid function tests (TSH, free thyroxine and free triiodothyronine), Colour-flow Doppler ultrasound to assess gland",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Graves disease unrelated to amiodarone, Toxic multinodular goitre or toxic adenoma, Subacute (de Quervain) thyroiditis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Distinguish type 1 from type 2 disease using colour-flow Doppler and clinical features, as this determines therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating all cases as one entity and choosing the wrong drug for the type",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for amiodarone-induced thyrotoxicosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / thyroid society guidance",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 233-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "amiodarone_induced_thyrotoxicosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid function tests (TSH, free T4 and free T3)",
+          "cells": [
+            {
+              "text": "Thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour-flow Doppler ultrasound of the gland",
+          "cells": [
+            {
+              "text": "Vascularity: high in type 1, low in type 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSH-receptor and thyroid peroxidase antibodies",
+          "cells": [
+            {
+              "text": "Autoimmune background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioiodine uptake where feasible",
+          "cells": [
+            {
+              "text": "Typically low in type 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and interleukin-6 in some settings",
+          "cells": [
+            {
+              "text": "Destructive thyroiditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "Underlying indication for amiodarone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amiodarone_induced_thyrotoxicosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Graves disease unrelated to amiodarone",
+          "cells": [
+            {
+              "text": "Autoimmune thyrotoxicosis"
+            },
+            {
+              "text": "Antibodies and Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic multinodular goitre or toxic adenoma",
+          "cells": [
+            {
+              "text": "Autonomous nodules"
+            },
+            {
+              "text": "Radioiodine uptake scan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute (de Quervain) thyroiditis",
+          "cells": [
+            {
+              "text": "Painful tender gland"
+            },
+            {
+              "text": "Inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitious thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Exogenous thyroid hormone"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-thyroidal illness with abnormal thyroid tests",
+          "cells": [
+            {
+              "text": "Sick euthyroid pattern"
+            },
+            {
+              "text": "Clinical context"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amiodarone_induced_thyrotoxicosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antithyroid drugs such as carbimazole for type 1",
+          "cells": [
+            {
+              "text": "Iodine-induced excess synthesis"
+            },
+            {
+              "text": "Type 1 therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium perchlorate to block iodine uptake",
+          "cells": [
+            {
+              "text": "Type 1 adjunct"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral prednisolone for type 2",
+          "cells": [
+            {
+              "text": "Destructive thyroiditis"
+            },
+            {
+              "text": "Type 2 therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined antithyroid drug and glucocorticoid therapy",
+          "cells": [
+            {
+              "text": "Mixed or indeterminate cases"
+            },
+            {
+              "text": "When type unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blocker for adrenergic symptoms",
+          "cells": [
+            {
+              "text": "Adrenergic symptoms"
+            },
+            {
+              "text": "Where not contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint cardiology decision on amiodarone withdrawal",
+          "cells": [
+            {
+              "text": "Arrhythmia indication"
+            },
+            {
+              "text": "Weigh benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total thyroidectomy or radioiodine for refractory disease",
+          "cells": [
+            {
+              "text": "Refractory thyrotoxicosis"
+            },
+            {
+              "text": "Definitive options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid monitoring after the drug is stopped",
+          "cells": [
+            {
+              "text": "Recurrence months later"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amiodarone_induced_thyrotoxicosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common non-arrhythmic toxicity of antiarrhythmic drugs",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Common nonarrhythmic toxicity"
+      ],
+      "rows": [
+        {
+          "parameter": "Amiodarone",
+          "cells": [
+            {
+              "text": "Tremor, peripheral neuropathy, pulmonary inflammation, hypothyroidism and hyperthyroidism, photosensitivity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adenosine",
+          "cells": [
+            {
+              "text": "Cough, flushing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Digoxin",
+          "cells": [
+            {
+              "text": "Anorexia, nausea, vomiting, visual changes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disopyramide",
+          "cells": [
+            {
+              "text": "Anticholinergic effects, decreased myocardial contractility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dofetilide",
+          "cells": [
+            {
+              "text": "Nausea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dronedarone",
+          "cells": [
+            {
+              "text": "Gastrointestinal intolerance, exacerbation of heart failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Flecainide",
+          "cells": [
+            {
+              "text": "Dizziness, nausea, headache, decreased myocardial contractility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ibutilide",
+          "cells": [
+            {
+              "text": "Nausea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lidocaine",
+          "cells": [
+            {
+              "text": "Dizziness, confusion, delirium, seizures, coma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mexiletine",
+          "cells": [
+            {
+              "text": "Ataxia, tremor, gait disturbances, rash, nausea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moricizine",
+          "cells": [
+            {
+              "text": "Mood changes, tremor, loss of mental clarity, nausea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Procainamide",
+          "cells": [
+            {
+              "text": "Lupus erythematosus-like syndrome (more common in slow acetylators), anorexia, nausea, neutropenia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Propafenone",
+          "cells": [
+            {
+              "text": "Taste disturbance, dyspepsia, nausea, vomiting"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Quinidine",
+          "cells": [
+            {
+              "text": "Diarrhea, nausea, vomiting, cinchonism, thrombocytopenia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sotalol",
+          "cells": [
+            {
+              "text": "Hypotension, bronchospasm"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "amiodarone_induced_thyrotoxicosis-dx-mgmt",
+      "title": "Diagnosis and management of Amiodarone-induced thyrotoxicosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thyrotoxicosis during or months after amiodarone treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Arrhythmia or heart failure worsening, or features of thyroid storm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology and endocrine review; treat storm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TFTs; colour Doppler; TRAb and TPO antibodies; uptake if feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gland vascularity high (type 1) or low (type 2)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Carbimazole for type 1; prednisolone for type 2",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review Graves, toxic nodules, de Quervain and factitious thyrotoxicosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Beta-blocker where not contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiology decision on continuing amiodarone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thyroidectomy or radioiodine for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type 2 often remits over weeks to months with glucocorticoids",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

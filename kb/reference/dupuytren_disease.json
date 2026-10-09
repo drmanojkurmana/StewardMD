@@ -1,176 +1,474 @@
 {
- "id": "dupuytren_disease",
- "name": "Dupuytren disease",
- "aliases": [
-  "Dupuytren contracture",
-  "palmar fibromatosis"
- ],
- "class": "non_infective",
- "system": "musculoskeletal",
- "specialty": "hand and plastic surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Benign fibroproliferative disorder of the palmar and digital fascia producing nodules, cords and progressive flexion contracture, most often of the ring and little fingers.",
-   "Strong association with northern European ancestry, positive family history, male sex and increasing age; alcohol misuse, diabetes mellitus, smoking and antiepileptic therapy are recognised associations.",
-   "The pathological cord contracts the metacarpophalangeal and proximal interphalangeal joints; MCP contracture is more readily corrected than PIP contracture, which tends to be more resistant and prone to recurrence.",
-   "A positive Hueston tabletop test (inability to lay the palm flat on a flat surface) is a useful clinical indicator that intervention should be considered.",
-   "Dupuytren diathesis (early onset, bilateral disease, strong family history, ectopic lesions) predicts aggressive behaviour and higher recurrence.",
-   "Ectopic disease includes knuckle pads (Garrod nodes), plantar fibromatosis (Ledderhose disease) and penile fibromatosis (Peyronie disease).",
-   "Treatment options include limited fasciectomy, percutaneous needle fasciotomy and collagenase clostridial injection; choice balances contracture severity, joint involved, patient fitness and recurrence risk.",
-   "Recurrence is common regardless of technique, and the condition is controlled rather than cured; realistic counselling about recurrence and the aim of function is essential."
+  "id": "dupuytren_disease",
+  "name": "Dupuytren disease",
+  "aliases": [
+    "Dupuytren contracture",
+    "palmar fibromatosis"
   ],
-  "pathophysiology": "Dupuytren disease is a fibroproliferative condition in which myofibroblasts within the longitudinal palmar and digital fascia proliferate and deposit disorganised type III collagen. Progression classically passes through a proliferative nodular phase rich in contractile myofibroblasts, an involutional phase in which cords align along lines of tension, and a residual phase of relatively acellular collagenous cord. Dysregulated cytokine signalling, particularly transforming growth factor beta and platelet-derived growth factor, together with local oxidative stress and a genetic predisposition involving Wnt signalling pathway variants, drives contraction of the diseased fascia and secondary joint contracture.",
-  "additionalDifferentials": [
-   "Stenosing tenosynovitis (trigger finger) with a palpable nodule",
-   "Camptodactyly",
-   "Post-traumatic or burn scar contracture",
-   "Ulnar nerve palsy causing clawing",
-   "Soft-tissue sarcoma or other palmar mass",
-   "Diabetic cheiroarthropathy (limited joint mobility syndrome)",
-   "Epithelioid sarcoma of the hand"
-  ],
-  "additionalInvestigations": [
-   "Diagnosis is clinical; imaging is rarely required",
-   "Serial goniometric measurement of MCP and PIP contracture angles",
-   "Hueston tabletop test documentation",
-   "Ultrasound to characterise an atypical palmar mass when the diagnosis is uncertain",
-   "MRI reserved for suspected sarcoma or atypical rapidly enlarging lesions",
-   "Screening for associated diabetes mellitus where clinically indicated",
-   "Photographic record for monitoring progression"
-  ],
-  "redFlags": [
-   "Rapidly enlarging, painful or firm fixed mass suggesting sarcoma rather than benign fibromatosis",
-   "Progressive fixed PIP flexion contracture threatening hand function",
-   "Skin ulceration, maceration or fixed web-space contracture impairing hygiene",
-   "Sensory or vascular compromise of a digit from severe contracture"
-  ],
-  "prognosis": "A benign but chronic and progressive condition that is controlled rather than cured, with recurrence common after any intervention, particularly in patients with a strong diathesis. Function is generally well preserved with appropriate timing of treatment, though established PIP contractures respond less predictably.",
-  "pitfalls": [
-   "Mistaking a Dupuytren nodule for a trigger finger nodule or a ganglion and mismanaging it",
-   "Operating too early on a soft palmar nodule without contracture, exposing the patient to surgical risk for little functional gain",
-   "Underestimating the difficulty and recurrence rate of correcting fixed PIP contractures",
-   "Failing to recognise digital neurovascular bundle displacement by spiral cords, risking iatrogenic injury during fasciectomy",
-   "Overlooking diathesis features that should temper prognostic expectations"
-  ],
-  "references": [
-   "Green's Operative Hand Surgery",
-   "British Society for Surgery of the Hand guidance on Dupuytren disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Monitor nodular or non-disabling disease, intervening when a functionally significant contracture develops or the Hueston tabletop test becomes positive",
-   "Treat a defined cord with minimally invasive options such as percutaneous needle fasciotomy or collagenase clostridium histolyticum injection followed by cord manipulation",
-   "Perform limited fasciectomy for significant joint contracture, counselling that proximal interphalangeal contractures are more resistant and recurrence-prone than metacarpophalangeal ones",
-   "Reserve dermofasciectomy with full-thickness skin grafting for recurrent disease or those with a marked diathesis",
-   "Deliver structured hand therapy with night extension splinting after intervention and take care to protect the neurovascular bundle displaced by a spiral cord",
-   "Optimise associated conditions including diabetes mellitus and hazardous alcohol and tobacco use",
-   "Counsel that the condition is controlled rather than cured and follow up for recurrence, especially with an aggressive diathesis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dupuytren_disease-pathway",
-   "title": "Dupuytren disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Benign fibroproliferative disorder of the palmar and digital fascia producing nodules, cords and progressive flexion contracture, most often of the ring and little fingers.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging, painful or firm fixed mass suggesting sarcoma rather than benign fibromatosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diagnosis is clinical; imaging is rarely required, Serial goniometric measurement of MCP and PIP contracture angles, Hueston tabletop test documentation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Monitor nodular or non-disabling disease, intervening when a functionally significant contracture develops or the Hueston tabletop test becomes positive"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a Dupuytren nodule for a trigger finger nodule or a ganglion and mismanaging it"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dupuytren disease."
-  }
- ],
- "tables": [
-  {
-   "id": "dupuytren_disease-matrix",
-   "title": "Dupuytren disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Benign fibroproliferative disorder of the palmar and digital fascia producing nodules, cords and progressive flexion contracture,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "musculoskeletal",
+  "specialty": "hand and plastic surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Benign fibroproliferative disorder of the palmar and digital fascia producing nodules, cords and progressive flexion contracture, most often of the ring and little fingers.",
+      "Strong association with northern European ancestry, positive family history, male sex and increasing age; alcohol misuse, diabetes mellitus, smoking and antiepileptic therapy are recognised associations.",
+      "The pathological cord contracts the metacarpophalangeal and proximal interphalangeal joints; MCP contracture is more readily corrected than PIP contracture, which tends to be more resistant and prone to recurrence.",
+      "A positive Hueston tabletop test (inability to lay the palm flat on a flat surface) is a useful clinical indicator that intervention should be considered.",
+      "Dupuytren diathesis (early onset, bilateral disease, strong family history, ectopic lesions) predicts aggressive behaviour and higher recurrence.",
+      "Ectopic disease includes knuckle pads (Garrod nodes), plantar fibromatosis (Ledderhose disease) and penile fibromatosis (Peyronie disease).",
+      "Treatment options include limited fasciectomy, percutaneous needle fasciotomy and collagenase clostridial injection; choice balances contracture severity, joint involved, patient fitness and recurrence risk.",
+      "Recurrence is common regardless of technique, and the condition is controlled rather than cured; realistic counselling about recurrence and the aim of function is essential."
     ],
-    [
-     "Key Investigations",
-     "Diagnosis is clinical; imaging is rarely required, Serial goniometric measurement of MCP and PIP contracture angles, Hueston",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dupuytren disease is a fibroproliferative condition in which myofibroblasts within the longitudinal palmar and digital fascia proliferate and deposit disorganised type III collagen. Progression classically passes through a proliferative nodular phase rich in contractile myofibroblasts, an involutional phase in which cords align along lines of tension, and a residual phase of relatively acellular collagenous cord. Dysregulated cytokine signalling, particularly transforming growth factor beta and platelet-derived growth factor, together with local oxidative stress and a genetic predisposition involving Wnt signalling pathway variants, drives contraction of the diseased fascia and secondary joint contracture.",
+    "additionalDifferentials": [
+      "Stenosing tenosynovitis (trigger finger) with a palpable nodule",
+      "Camptodactyly",
+      "Post-traumatic or burn scar contracture",
+      "Ulnar nerve palsy causing clawing",
+      "Soft-tissue sarcoma or other palmar mass",
+      "Diabetic cheiroarthropathy (limited joint mobility syndrome)",
+      "Epithelioid sarcoma of the hand"
     ],
-    [
-     "Primary Differentials",
-     "Stenosing tenosynovitis (trigger finger) with a palpable nodule, Camptodactyly, Post-traumatic or burn scar contracture",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diagnosis is clinical; imaging is rarely required",
+      "Serial goniometric measurement of MCP and PIP contracture angles",
+      "Hueston tabletop test documentation",
+      "Ultrasound to characterise an atypical palmar mass when the diagnosis is uncertain",
+      "MRI reserved for suspected sarcoma or atypical rapidly enlarging lesions",
+      "Screening for associated diabetes mellitus where clinically indicated",
+      "Photographic record for monitoring progression"
     ],
-    [
-     "Management Strategy",
-     "Monitor nodular or non-disabling disease, intervening when a functionally significant contracture develops or the Hueston",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging, painful or firm fixed mass suggesting sarcoma rather than benign fibromatosis",
+      "Progressive fixed PIP flexion contracture threatening hand function",
+      "Skin ulceration, maceration or fixed web-space contracture impairing hygiene",
+      "Sensory or vascular compromise of a digit from severe contracture"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a Dupuytren nodule for a trigger finger nodule or a ganglion and mismanaging it",
-     "Prevent diagnostic or management error"
+    "prognosis": "A benign but chronic and progressive condition that is controlled rather than cured, with recurrence common after any intervention, particularly in patients with a strong diathesis. Function is generally well preserved with appropriate timing of treatment, though established PIP contractures respond less predictably.",
+    "pitfalls": [
+      "Mistaking a Dupuytren nodule for a trigger finger nodule or a ganglion and mismanaging it",
+      "Operating too early on a soft palmar nodule without contracture, exposing the patient to surgical risk for little functional gain",
+      "Underestimating the difficulty and recurrence rate of correcting fixed PIP contractures",
+      "Failing to recognise digital neurovascular bundle displacement by spiral cords, risking iatrogenic injury during fasciectomy",
+      "Overlooking diathesis features that should temper prognostic expectations"
+    ],
+    "references": [
+      "Green's Operative Hand Surgery",
+      "British Society for Surgery of the Hand guidance on Dupuytren disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Monitor nodular or non-disabling disease, intervening when a functionally significant contracture develops or the Hueston tabletop test becomes positive",
+      "Treat a defined cord with minimally invasive options such as percutaneous needle fasciotomy or collagenase clostridium histolyticum injection followed by cord manipulation",
+      "Perform limited fasciectomy for significant joint contracture, counselling that proximal interphalangeal contractures are more resistant and recurrence-prone than metacarpophalangeal ones",
+      "Reserve dermofasciectomy with full-thickness skin grafting for recurrent disease or those with a marked diathesis",
+      "Deliver structured hand therapy with night extension splinting after intervention and take care to protect the neurovascular bundle displaced by a spiral cord",
+      "Optimise associated conditions including diabetes mellitus and hazardous alcohol and tobacco use",
+      "Counsel that the condition is controlled rather than cured and follow up for recurrence, especially with an aggressive diathesis"
     ]
-   ],
-   "caption": "Overview comparison matrix for dupuytren disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dupuytren-disease-real-image",
-   "title": "Dupuytren disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "dupuytren_disease-pathway",
+      "title": "Dupuytren disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Benign fibroproliferative disorder of the palmar and digital fascia producing nodules, cords and progressive flexion contracture, most often of the ring and little fingers.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging, painful or firm fixed mass suggesting sarcoma rather than benign fibromatosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diagnosis is clinical; imaging is rarely required, Serial goniometric measurement of MCP and PIP contracture angles, Hueston tabletop test documentation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Monitor nodular or non-disabling disease, intervening when a functionally significant contracture develops or the Hueston tabletop test becomes positive"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a Dupuytren nodule for a trigger finger nodule or a ganglion and mismanaging it"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dupuytren disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dupuytren_disease-matrix",
+      "title": "Dupuytren disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Benign fibroproliferative disorder of the palmar and digital fascia producing nodules, cords and progressive flexion contracture,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diagnosis is clinical; imaging is rarely required, Serial goniometric measurement of MCP and PIP contracture angles, Hueston",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Stenosing tenosynovitis (trigger finger) with a palpable nodule, Camptodactyly, Post-traumatic or burn scar contracture",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Monitor nodular or non-disabling disease, intervening when a functionally significant contracture develops or the Hueston",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a Dupuytren nodule for a trigger finger nodule or a ganglion and mismanaging it",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dupuytren disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dupuytren_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Diagnosis is clinical; imaging rarely required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial goniometric measurement of MCP and PIP angles",
+          "cells": [
+            {
+              "text": "Contracture progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hueston tabletop test documentation",
+          "cells": [
+            {
+              "text": "Functional significance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound for atypical palmar mass",
+          "cells": [
+            {
+              "text": "Atypical palmar mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI for suspected sarcoma",
+          "cells": [
+            {
+              "text": "Atypical rapidly enlarging lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dupuytren_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Stenosing tenosynovitis (trigger finger)",
+          "cells": [
+            {
+              "text": "Palpable nodule that can be mismanaged as Dupuytren"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar nerve palsy causing clawing",
+          "cells": [
+            {
+              "text": "Clawing from nerve palsy rather than cords"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epithelioid sarcoma of the hand",
+          "cells": [
+            {
+              "text": "Palmar mass that is not Dupuytren tissue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dupuytren_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Nodular or non-disabling disease; intervene when contracture is significant or tabletop test positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimally invasive treatment",
+          "cells": [
+            {
+              "text": "Percutaneous needle fasciotomy or collagenase injection followed by cord manipulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limited fasciectomy",
+          "cells": [
+            {
+              "text": "Significant joint contracture; PIP contractures are more resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermofasciectomy",
+          "cells": [
+            {
+              "text": "Recurrent disease or marked diathesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured hand therapy",
+          "cells": [
+            {
+              "text": "Night extension splinting after intervention; protect the neurovascular bundle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "Diabetes, alcohol and tobacco optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Controlled rather than cured; follow up for recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dupuytren_disease-dx-mgmt",
+      "title": "Diagnosis and management of Dupuytren disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dupuytren disease: palmar nodule with progressive fixed PIP flexion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly enlarging painful mass, digital neurovascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for a rapidly enlarging mass; MRI to exclude sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; serial goniometry; Hueston tabletop test; ultrasound if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the contracture functionally significant on serial measurement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe; consider trigger finger, ulnar nerve palsy or a palmar tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Monitor non-disabling disease; intervene when contracture becomes significant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Needle fasciotomy or collagenase injection for a defined cord",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Limited fasciectomy for joint contracture; PIP is recurrence-prone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reserve dermofasciectomy for recurrent or marked diathesis disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Structured hand therapy with night splinting after intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign, chronic and progressive; function generally preserved with appropriate treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

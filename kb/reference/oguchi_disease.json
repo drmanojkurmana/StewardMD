@@ -1,174 +1,459 @@
 {
- "id": "oguchi_disease",
- "name": "Oguchi disease",
- "aliases": [
-  "Oguchi's disease",
-  "SAG",
-  "GRK1",
-  "arrestin deficiency",
-  "congenital stationary night blindness with Mizuo-Nakamura phenomenon"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal recessive form of congenital stationary night blindness caused by mutations in SAG (arrestin) or GRK1 (rhodopsin kinase), genes needed to deactivate rhodopsin after light exposure",
-   "The pathognomonic sign is the Mizuo-Nakamura phenomenon: a golden-yellow or metallic sheen of the fundus in the light-adapted state that reverts to a normal colour after prolonged dark adaptation",
-   "Patients report lifelong, non-progressive night blindness with normal daytime acuity and colour vision",
-   "Dark adaptometry shows a characteristic profile in which rod sensitivity recovers only after a very prolonged period of dark adaptation",
-   "The electroretinogram typically shows an absent or markedly reduced rod b-wave under standard conditions, which can partially recover after extended dark adaptation",
-   "It should be distinguished from progressive rod-cone dystrophies, as Oguchi disease is stationary with preserved acuity",
-   "Management is supportive with reassurance about the stationary course, advice regarding night vision, and genetic counselling"
+  "id": "oguchi_disease",
+  "name": "Oguchi disease",
+  "aliases": [
+    "Oguchi's disease",
+    "SAG",
+    "GRK1",
+    "arrestin deficiency",
+    "congenital stationary night blindness with Mizuo-Nakamura phenomenon"
   ],
-  "pathophysiology": "Oguchi disease arises from recessive mutations in SAG (S-antigen/arrestin) or GRK1 (rhodopsin kinase), proteins that normally quench activated rhodopsin so that rods can recover after light exposure. Defective deactivation leaves rods persistently desensitised following illumination, producing profound but non-progressive night blindness and abnormally slow dark adaptation. The abnormal state of the rod photoreceptors and their outer segments underlies the Mizuo-Nakamura phenomenon, in which the light-adapted retina takes on a golden sheen that disappears after prolonged darkness.",
-  "additionalDifferentials": [
-   "Other forms of congenital stationary night blindness",
-   "Fundus albipunctatus",
-   "Retinitis pigmentosa and progressive rod-cone dystrophies",
-   "Vitamin A deficiency retinopathy",
-   "Retinitis punctata albescens",
-   "Enhanced S-cone syndrome"
-  ],
-  "additionalInvestigations": [
-   "Fundus examination in light- and dark-adapted states to demonstrate the Mizuo-Nakamura phenomenon",
-   "Prolonged dark adaptometry showing delayed rod recovery",
-   "Full-field electroretinography before and after extended dark adaptation",
-   "Fundus autofluorescence and optical coherence tomography to exclude degeneration",
-   "Molecular genetic testing for SAG and GRK1 mutations",
-   "Visual field testing to confirm preservation"
-  ],
-  "redFlags": [
-   "Documented progression of field loss or acuity decline, which is inconsistent with the diagnosis and suggests a degenerative disorder",
-   "Pigmentary retinopathy or bone-spicule change indicating retinitis pigmentosa instead",
-   "Onset of night blindness in adulthood pointing to an acquired cause",
-   "Affected siblings warranting screening given recessive inheritance"
-  ],
-  "prognosis": "The condition is stationary and non-progressive; daytime vision remains normal throughout life and only night vision is impaired, so the overall visual prognosis is good.",
-  "pitfalls": [
-   "Overlooking the Mizuo-Nakamura phenomenon by examining the fundus only in the light-adapted state",
-   "Misdiagnosing the disorder as progressive retinitis pigmentosa",
-   "Interpreting the reduced rod electroretinogram without repeating it after prolonged dark adaptation",
-   "Confusing it with fundus albipunctatus, which shows white dots and a different mechanism"
-  ],
-  "references": [
-   "Ryan's Retina",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific therapy exists and none is required for the retinal defect, as the condition is stationary with preserved daytime vision; reassurance is central",
-   "Counsel on lifelong non-progressive night blindness and slow dark adaptation, with practical adaptation for low-light environments and driving safety",
-   "Confirm and document the diagnosis through the Mizuo-Nakamura phenomenon, dark adaptometry and electroretinography, distinguishing it from progressive rod-cone dystrophies",
-   "Periodic ophthalmological review with optical coherence tomography and fundus autofluorescence to confirm stability and exclude co-existing degeneration",
-   "Molecular confirmation of the SAG or GRK1 mutation",
-   "Genetic counselling for this autosomal recessive disorder, including carrier and family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oguchi_disease-pathway",
-   "title": "Oguchi disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal recessive form of congenital stationary night blindness caused by mutations in SAG (arrestin) or GRK1 (rhodopsin kinase), genes needed to deactivate rhodopsin after light exposure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Documented progression of field loss or acuity decline, which is inconsistent with the diagnosis and suggests a degenerative disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fundus examination in light- and dark-adapted states to demonstrate the Mizuo-Nakamura phenomenon, Prolonged dark adaptometry showing delayed rod recovery, Full-field electroretinography before and after extended dark"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific therapy exists and none is required for the retinal defect, as the condition is stationary with preserved daytime vision; reassurance is central"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the Mizuo-Nakamura phenomenon by examining the fundus only in the light-adapted state"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oguchi disease."
-  }
- ],
- "tables": [
-  {
-   "id": "oguchi_disease-matrix",
-   "title": "Oguchi disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal recessive form of congenital stationary night blindness caused by mutations in SAG (arrestin) or GRK1 (rhodopsin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal recessive form of congenital stationary night blindness caused by mutations in SAG (arrestin) or GRK1 (rhodopsin kinase), genes needed to deactivate rhodopsin after light exposure",
+      "The pathognomonic sign is the Mizuo-Nakamura phenomenon: a golden-yellow or metallic sheen of the fundus in the light-adapted state that reverts to a normal colour after prolonged dark adaptation",
+      "Patients report lifelong, non-progressive night blindness with normal daytime acuity and colour vision",
+      "Dark adaptometry shows a characteristic profile in which rod sensitivity recovers only after a very prolonged period of dark adaptation",
+      "The electroretinogram typically shows an absent or markedly reduced rod b-wave under standard conditions, which can partially recover after extended dark adaptation",
+      "It should be distinguished from progressive rod-cone dystrophies, as Oguchi disease is stationary with preserved acuity",
+      "Management is supportive with reassurance about the stationary course, advice regarding night vision, and genetic counselling"
     ],
-    [
-     "Key Investigations",
-     "Fundus examination in light- and dark-adapted states to demonstrate the Mizuo-Nakamura phenomenon, Prolonged dark adaptometry",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oguchi disease arises from recessive mutations in SAG (S-antigen/arrestin) or GRK1 (rhodopsin kinase), proteins that normally quench activated rhodopsin so that rods can recover after light exposure. Defective deactivation leaves rods persistently desensitised following illumination, producing profound but non-progressive night blindness and abnormally slow dark adaptation. The abnormal state of the rod photoreceptors and their outer segments underlies the Mizuo-Nakamura phenomenon, in which the light-adapted retina takes on a golden sheen that disappears after prolonged darkness.",
+    "additionalDifferentials": [
+      "Other forms of congenital stationary night blindness",
+      "Fundus albipunctatus",
+      "Retinitis pigmentosa and progressive rod-cone dystrophies",
+      "Vitamin A deficiency retinopathy",
+      "Retinitis punctata albescens",
+      "Enhanced S-cone syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Other forms of congenital stationary night blindness, Fundus albipunctatus, Retinitis pigmentosa and progressive rod-cone",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fundus examination in light- and dark-adapted states to demonstrate the Mizuo-Nakamura phenomenon",
+      "Prolonged dark adaptometry showing delayed rod recovery",
+      "Full-field electroretinography before and after extended dark adaptation",
+      "Fundus autofluorescence and optical coherence tomography to exclude degeneration",
+      "Molecular genetic testing for SAG and GRK1 mutations",
+      "Visual field testing to confirm preservation"
     ],
-    [
-     "Management Strategy",
-     "No specific therapy exists and none is required for the retinal defect, as the condition is stationary with preserved daytime",
-     "Core treatment modality"
+    "redFlags": [
+      "Documented progression of field loss or acuity decline, which is inconsistent with the diagnosis and suggests a degenerative disorder",
+      "Pigmentary retinopathy or bone-spicule change indicating retinitis pigmentosa instead",
+      "Onset of night blindness in adulthood pointing to an acquired cause",
+      "Affected siblings warranting screening given recessive inheritance"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the Mizuo-Nakamura phenomenon by examining the fundus only in the light-adapted state",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is stationary and non-progressive; daytime vision remains normal throughout life and only night vision is impaired, so the overall visual prognosis is good.",
+    "pitfalls": [
+      "Overlooking the Mizuo-Nakamura phenomenon by examining the fundus only in the light-adapted state",
+      "Misdiagnosing the disorder as progressive retinitis pigmentosa",
+      "Interpreting the reduced rod electroretinogram without repeating it after prolonged dark adaptation",
+      "Confusing it with fundus albipunctatus, which shows white dots and a different mechanism"
+    ],
+    "references": [
+      "Ryan's Retina",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific therapy exists and none is required for the retinal defect, as the condition is stationary with preserved daytime vision; reassurance is central",
+      "Counsel on lifelong non-progressive night blindness and slow dark adaptation, with practical adaptation for low-light environments and driving safety",
+      "Confirm and document the diagnosis through the Mizuo-Nakamura phenomenon, dark adaptometry and electroretinography, distinguishing it from progressive rod-cone dystrophies",
+      "Periodic ophthalmological review with optical coherence tomography and fundus autofluorescence to confirm stability and exclude co-existing degeneration",
+      "Molecular confirmation of the SAG or GRK1 mutation",
+      "Genetic counselling for this autosomal recessive disorder, including carrier and family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for oguchi disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oguchi-disease-real-image",
-   "title": "Oguchi disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "oguchi_disease-pathway",
+      "title": "Oguchi disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal recessive form of congenital stationary night blindness caused by mutations in SAG (arrestin) or GRK1 (rhodopsin kinase), genes needed to deactivate rhodopsin after light exposure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Documented progression of field loss or acuity decline, which is inconsistent with the diagnosis and suggests a degenerative disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fundus examination in light- and dark-adapted states to demonstrate the Mizuo-Nakamura phenomenon, Prolonged dark adaptometry showing delayed rod recovery, Full-field electroretinography before and after extended dark"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific therapy exists and none is required for the retinal defect, as the condition is stationary with preserved daytime vision; reassurance is central"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the Mizuo-Nakamura phenomenon by examining the fundus only in the light-adapted state"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oguchi disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oguchi_disease-matrix",
+      "title": "Oguchi disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal recessive form of congenital stationary night blindness caused by mutations in SAG (arrestin) or GRK1 (rhodopsin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fundus examination in light- and dark-adapted states to demonstrate the Mizuo-Nakamura phenomenon, Prolonged dark adaptometry",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other forms of congenital stationary night blindness, Fundus albipunctatus, Retinitis pigmentosa and progressive rod-cone",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific therapy exists and none is required for the retinal defect, as the condition is stationary with preserved daytime",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the Mizuo-Nakamura phenomenon by examining the fundus only in the light-adapted state",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oguchi disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oguchi_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fundus examination in light and dark adaptation",
+          "cells": [
+            {
+              "text": "Mizuo-Nakamura phenomenon: golden-yellow sheen that reverts after dark adaptation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged dark adaptometry",
+          "cells": [
+            {
+              "text": "Delayed rod recovery, with rod sensitivity recovering only after a very long period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full-field electroretinography before and after extended dark adaptation",
+          "cells": [
+            {
+              "text": "Reduced or absent rod b-wave, which can partly recover after dark adaptation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence and OCT",
+          "cells": [
+            {
+              "text": "Excludes degeneration; confirms a stationary course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of SAG and GRK1",
+          "cells": [
+            {
+              "text": "Pathogenic variants in SAG or GRK1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing",
+          "cells": [
+            {
+              "text": "Preserved fields in a stationary course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oguchi_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinitis pigmentosa and progressive rod-cone dystrophies",
+          "cells": [
+            {
+              "text": "Progressive course, with pigmentary retinopathy or bone-spicule change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus albipunctatus",
+          "cells": [
+            {
+              "text": "White dots and a different mechanism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oguchi_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The retinal defect is stationary and needs no specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on night vision",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Lifelong, non-progressive night blindness; advice on low light and driving safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the diagnosis",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Mizuo-Nakamura phenomenon, dark adaptometry and electroretinography; distinguish progressive dystrophies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic review",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "OCT and fundus autofluorescence to confirm stability and exclude coexisting degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular confirmation and genetic counselling",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "SAG or GRK1 variant; autosomal recessive, with carrier and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oguchi_disease-dx-mgmt",
+      "title": "Diagnosis and management of Oguchi disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lifelong night blindness with normal daytime vision; Oguchi disease suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive loss, pigmentary change or adult-onset night blindness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: evaluate for a progressive rod-cone dystrophy or retinitis pigmentosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundus examination in light and dark adaptation; dark adaptometry; full-field ERG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the Mizuo-Nakamura phenomenon and prolonged rod recovery confirm it?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fundus albipunctatus, other night blindness or vitamin A deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance: the retinal defect is stationary and needs no specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Counsel on lifelong night blindness; advise on low light and driving safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "OCT and fundus autofluorescence to confirm stability at periodic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Molecular confirmation of a SAG or GRK1 variant; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stationary, with normal daytime vision throughout life; visual prognosis good",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

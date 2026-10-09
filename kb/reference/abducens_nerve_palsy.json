@@ -1,169 +1,454 @@
 {
- "id": "abducens_nerve_palsy",
- "name": "Sixth nerve palsy",
- "aliases": [
-  "abducens palsy",
-  "lateral rectus palsy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Weakness of the lateral rectus causes horizontal binocular diplopia worse at distance and on gaze toward the affected side",
-   "The affected eye is esotropic and fails to abduct fully beyond the midline in a complete palsy",
-   "Because the sixth nerve has a long intracranial course it is a poor localiser and can be a false-localising sign of raised intracranial pressure",
-   "Common causes include microvascular ischaemia, raised intracranial pressure, tumour, trauma and cavernous sinus disease",
-   "In children, a post-viral benign sixth nerve palsy occurs but a posterior fossa tumour must be excluded",
-   "Bilateral or progressive palsies and any additional neurological signs mandate neuroimaging"
+  "id": "abducens_nerve_palsy",
+  "name": "Sixth nerve palsy",
+  "aliases": [
+    "abducens palsy",
+    "lateral rectus palsy"
   ],
-  "pathophysiology": "The abducens nerve supplies the lateral rectus, so its dysfunction impairs abduction and leaves the eye deviated inward by the unopposed medial rectus. Its long course from the pons, up the clivus, over the petrous apex and through the cavernous sinus makes it vulnerable along many segments; stretching from raised intracranial pressure explains its false-localising behaviour. Microvascular ischaemia of the nerve, as in diabetes and hypertension, is a frequent self-limiting cause, whereas compressive, inflammatory or infiltrative lesions produce more persistent or progressive palsies.",
-  "additionalDifferentials": [
-   "Thyroid eye disease with restricted medial rectus",
-   "Medial orbital wall fracture with muscle entrapment",
-   "Myasthenia gravis",
-   "Duane retraction syndrome",
-   "Convergence spasm or divergence insufficiency",
-   "Internuclear ophthalmoplegia"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and orbits, including the cavernous sinus and skull base",
-   "Assessment for papilloedema and features of raised intracranial pressure",
-   "Vasculopathic risk-factor evaluation",
-   "Acetylcholine-receptor antibody testing if myasthenia is suspected",
-   "Lumbar puncture with opening pressure when intracranial hypertension is suspected"
-  ],
-  "redFlags": [
-   "Papilloedema or other signs of raised intracranial pressure",
-   "Additional cranial neuropathies or long-tract signs",
-   "Progressive, bilateral or paediatric palsy",
-   "Associated severe headache or systemic features"
-  ],
-  "prognosis": "Isolated microvascular palsies usually recover within weeks to a few months; other causes depend on the underlying pathology, and persistent deviation may need prism or strabismus surgery.",
-  "pitfalls": [
-   "Assuming a microvascular cause and missing raised intracranial pressure",
-   "Overlooking a posterior fossa tumour in a child",
-   "Mistaking restrictive or myasthenic limitation for a neurogenic palsy",
-   "Failing to re-image a palsy that does not recover as expected"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Bradley and Daroff Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause, optimising vascular risk factors such as diabetes and hypertension for a microvascular palsy and addressing raised intracranial pressure, tumour, inflammation or cavernous-sinus pathology directly",
-   "Relieve troublesome binocular diplopia symptomatically with monocular occlusion or patching, or a Fresnel prism, during recovery",
-   "Observe presumed microvascular palsies, which typically recover spontaneously over weeks to a few months",
-   "Investigate promptly with neuroimaging and refer any bilateral, progressive, paediatric or non-isolated palsy, or one failing to recover, to exclude serious intracranial pathology",
-   "Treat raised intracranial pressure on its merits, for example acetazolamide and weight management in idiopathic intracranial hypertension or neurosurgical intervention, when it is the cause",
-   "Consider botulinum toxin to the antagonist medial rectus, or strabismus surgery, for persistent deviation that does not resolve"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "abducens_nerve_palsy-pathway",
-   "title": "Sixth nerve palsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Weakness of the lateral rectus causes horizontal binocular diplopia worse at distance and on gaze toward the affected side",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Papilloedema or other signs of raised intracranial pressure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and orbits, including the cavernous sinus and skull base, Assessment for papilloedema and features of raised intracranial pressure, Vasculopathic risk-factor evaluation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause, optimising vascular risk factors such as diabetes and hypertension for a microvascular palsy and addressing raised intracranial pressure, tumour, inflammation or cavernous-sinus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a microvascular cause and missing raised intracranial pressure"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sixth nerve palsy."
-  }
- ],
- "tables": [
-  {
-   "id": "abducens_nerve_palsy-matrix",
-   "title": "Sixth nerve palsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Weakness of the lateral rectus causes horizontal binocular diplopia worse at distance and on gaze toward the affected side",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Weakness of the lateral rectus causes horizontal binocular diplopia worse at distance and on gaze toward the affected side",
+      "The affected eye is esotropic and fails to abduct fully beyond the midline in a complete palsy",
+      "Because the sixth nerve has a long intracranial course it is a poor localiser and can be a false-localising sign of raised intracranial pressure",
+      "Common causes include microvascular ischaemia, raised intracranial pressure, tumour, trauma and cavernous sinus disease",
+      "In children, a post-viral benign sixth nerve palsy occurs but a posterior fossa tumour must be excluded",
+      "Bilateral or progressive palsies and any additional neurological signs mandate neuroimaging"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and orbits, including the cavernous sinus and skull base, Assessment for papilloedema and features of raised",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The abducens nerve supplies the lateral rectus, so its dysfunction impairs abduction and leaves the eye deviated inward by the unopposed medial rectus. Its long course from the pons, up the clivus, over the petrous apex and through the cavernous sinus makes it vulnerable along many segments; stretching from raised intracranial pressure explains its false-localising behaviour. Microvascular ischaemia of the nerve, as in diabetes and hypertension, is a frequent self-limiting cause, whereas compressive, inflammatory or infiltrative lesions produce more persistent or progressive palsies.",
+    "additionalDifferentials": [
+      "Thyroid eye disease with restricted medial rectus",
+      "Medial orbital wall fracture with muscle entrapment",
+      "Myasthenia gravis",
+      "Duane retraction syndrome",
+      "Convergence spasm or divergence insufficiency",
+      "Internuclear ophthalmoplegia"
     ],
-    [
-     "Primary Differentials",
-     "Thyroid eye disease with restricted medial rectus, Medial orbital wall fracture with muscle entrapment, Myasthenia gravis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and orbits, including the cavernous sinus and skull base",
+      "Assessment for papilloedema and features of raised intracranial pressure",
+      "Vasculopathic risk-factor evaluation",
+      "Acetylcholine-receptor antibody testing if myasthenia is suspected",
+      "Lumbar puncture with opening pressure when intracranial hypertension is suspected"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause, optimising vascular risk factors such as diabetes and hypertension for a microvascular",
-     "Core treatment modality"
+    "redFlags": [
+      "Papilloedema or other signs of raised intracranial pressure",
+      "Additional cranial neuropathies or long-tract signs",
+      "Progressive, bilateral or paediatric palsy",
+      "Associated severe headache or systemic features"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a microvascular cause and missing raised intracranial pressure",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated microvascular palsies usually recover within weeks to a few months; other causes depend on the underlying pathology, and persistent deviation may need prism or strabismus surgery.",
+    "pitfalls": [
+      "Assuming a microvascular cause and missing raised intracranial pressure",
+      "Overlooking a posterior fossa tumour in a child",
+      "Mistaking restrictive or myasthenic limitation for a neurogenic palsy",
+      "Failing to re-image a palsy that does not recover as expected"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Bradley and Daroff Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause, optimising vascular risk factors such as diabetes and hypertension for a microvascular palsy and addressing raised intracranial pressure, tumour, inflammation or cavernous-sinus pathology directly",
+      "Relieve troublesome binocular diplopia symptomatically with monocular occlusion or patching, or a Fresnel prism, during recovery",
+      "Observe presumed microvascular palsies, which typically recover spontaneously over weeks to a few months",
+      "Investigate promptly with neuroimaging and refer any bilateral, progressive, paediatric or non-isolated palsy, or one failing to recover, to exclude serious intracranial pathology",
+      "Treat raised intracranial pressure on its merits, for example acetazolamide and weight management in idiopathic intracranial hypertension or neurosurgical intervention, when it is the cause",
+      "Consider botulinum toxin to the antagonist medial rectus, or strabismus surgery, for persistent deviation that does not resolve"
     ]
-   ],
-   "caption": "Overview comparison matrix for sixth nerve palsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "abducens-nerve-palsy-real-image",
-   "title": "Sixth nerve palsy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "abducens_nerve_palsy-pathway",
+      "title": "Sixth nerve palsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Weakness of the lateral rectus causes horizontal binocular diplopia worse at distance and on gaze toward the affected side",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Papilloedema or other signs of raised intracranial pressure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and orbits, including the cavernous sinus and skull base, Assessment for papilloedema and features of raised intracranial pressure, Vasculopathic risk-factor evaluation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause, optimising vascular risk factors such as diabetes and hypertension for a microvascular palsy and addressing raised intracranial pressure, tumour, inflammation or cavernous-sinus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a microvascular cause and missing raised intracranial pressure"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sixth nerve palsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "abducens_nerve_palsy-matrix",
+      "title": "Sixth nerve palsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Weakness of the lateral rectus causes horizontal binocular diplopia worse at distance and on gaze toward the affected side",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and orbits, including the cavernous sinus and skull base, Assessment for papilloedema and features of raised",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thyroid eye disease with restricted medial rectus, Medial orbital wall fracture with muscle entrapment, Myasthenia gravis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause, optimising vascular risk factors such as diabetes and hypertension for a microvascular",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a microvascular cause and missing raised intracranial pressure",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sixth nerve palsy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "abducens_nerve_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain and orbits, including cavernous sinus and skull base",
+          "cells": [
+            {
+              "text": "Structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for papilloedema",
+          "cells": [
+            {
+              "text": "Raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculopathic risk-factor evaluation",
+          "cells": [
+            {
+              "text": "Microvascular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetylcholine-receptor antibody testing",
+          "cells": [
+            {
+              "text": "Used when myasthenia is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture with opening pressure",
+          "cells": [
+            {
+              "text": "Used when intracranial hypertension is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abducens_nerve_palsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid eye disease",
+          "cells": [
+            {
+              "text": "Restricted medial rectus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medial orbital wall fracture",
+          "cells": [
+            {
+              "text": "Muscle entrapment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abducens_nerve_palsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Vascular risk factors (diabetes, hypertension) for microvascular palsy; raised pressure, tumour, inflammation or cavernous sinus disease"
+            },
+            {
+              "text": "Acetazolamide and weight management for idiopathic intracranial hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monocular occlusion, patching or Fresnel prism",
+          "cells": [
+            {
+              "text": "Relieves troublesome diplopia"
+            },
+            {
+              "text": "During recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation of presumed microvascular palsy",
+          "cells": [
+            {
+              "text": "Usually recovers over weeks to a few months"
+            },
+            {
+              "text": "Refer if bilateral, progressive, paediatric or not recovering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt neuroimaging and referral",
+          "cells": [
+            {
+              "text": "Excludes serious intracranial pathology"
+            },
+            {
+              "text": "Bilateral, progressive, paediatric, non-isolated or failing to recover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin to the antagonist medial rectus, or strabismus surgery",
+          "cells": [
+            {
+              "text": "Persistent deviation"
+            },
+            {
+              "text": "For deviation that does not resolve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "abducens_nerve_palsy-dx-mgmt",
+      "title": "Diagnosis and management of Sixth nerve palsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Horizontal binocular diplopia with inward eye deviation (lateral rectus weakness)",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Papilloedema or other signs of raised intracranial pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroimaging and intracranial pressure management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and orbits including cavernous sinus; check for papilloedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Structural cause or raised pressure found on MRI or lumbar puncture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause: raised pressure, tumour, inflammation or cavernous sinus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Assess vascular risk; review thyroid eye disease and myasthenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Optimise diabetes and hypertension for a microvascular palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monocular occlusion, patching or Fresnel prism during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Observe; microvascular palsies usually recover over weeks to months",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Persistent deviation may need prism or strabismus surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,473 @@
 {
- "id": "portal_cavernoma",
- "name": "portal cavernoma",
- "aliases": [
-  "cavernous transformation of the portal vein",
-  "portal vein cavernoma"
- ],
- "class": "non_infective",
- "system": "hepatobiliary",
- "specialty": "hepatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A portal cavernoma is the network of hepatopetal collateral veins that develops around a chronically obstructed or thrombosed portal vein, a process termed cavernous transformation.",
-   "It is the hallmark of chronic extrahepatic portal vein obstruction, and in the absence of cirrhosis liver synthetic function is typically well preserved.",
-   "In children it commonly follows neonatal umbilical vein catheterisation, omphalitis or sepsis, whereas in adults prothrombotic states, myeloproliferative neoplasms, cirrhosis, abdominal sepsis and malignancy predominate.",
-   "The dominant clinical problem is portal hypertension with gastro-oesophageal varices, splenomegaly and hypersplenism.",
-   "Variceal bleeding is often surprisingly well tolerated because hepatic function is preserved.",
-   "The collaterals can compress the biliary tree to produce portal cavernoma cholangiopathy, also called portal biliopathy.",
-   "Doppler ultrasound shows the serpiginous collaterals replacing the normal portal vein, and CT or MR portography maps the anatomy for intervention.",
-   "The Meso-Rex bypass, which restores physiological portal inflow, is the preferred operation in suitable children."
+  "id": "portal_cavernoma",
+  "name": "portal cavernoma",
+  "aliases": [
+    "cavernous transformation of the portal vein",
+    "portal vein cavernoma"
   ],
-  "pathophysiology": "When the main portal vein is obstructed by thrombosis, extrinsic compression or malformation, the portal circulation seeks alternative routes to reach the liver. Over weeks to months the pre-existing tiny peribiliary and paracholedochal veins in the porta hepatis dilate and proliferate into a leash of tortuous hepatopetal collaterals, the cavernoma, which partially bypasses the occluded segment. Because these collaterals cannot fully substitute for the calibre of the native vein, portal pressure rises and drives the formation of portosystemic collaterals including gastro-oesophageal varices, together with splenomegaly and hypersplenism. In extrahepatic obstruction the intrahepatic parenchyma and its arterial supply remain intact, so hepatic synthetic function is generally preserved and bleeding is better tolerated than in cirrhotic portal hypertension. The engorged periductal collaterals may in turn compress and distort the bile ducts, producing cholangiopathy.",
-  "additionalDifferentials": [
-   "Cirrhotic portal hypertension",
-   "Non-cirrhotic portal fibrosis or idiopathic portal hypertension",
-   "Budd-Chiari syndrome",
-   "Portal vein tumour thrombus from hepatocellular carcinoma",
-   "Congenital hepatic fibrosis",
-   "Arterioportal fistula",
-   "Hepatic schistosomiasis"
-  ],
-  "additionalInvestigations": [
-   "Doppler ultrasound of the portal system",
-   "CT or MR portography",
-   "Upper gastrointestinal endoscopy for varices",
-   "Thrombophilia and myeloproliferative neoplasm screen including JAK2 mutation testing",
-   "Full blood count to assess hypersplenism",
-   "Liver function and synthetic tests to confirm preserved function",
-   "MRCP if biliopathy is suspected"
-  ],
-  "redFlags": [
-   "Acute variceal haemorrhage with haematemesis or melaena",
-   "Ascending cholangitis from associated biliopathy",
-   "Extension of thrombosis into the mesenteric veins with bowel ischaemia",
-   "Rapid splenic enlargement with severe cytopenias"
-  ],
-  "prognosis": "With preserved hepatic function the long-term outlook is generally good once varices are controlled, though recurrent bleeding, hypersplenism and biliopathy contribute to morbidity, and extension of thrombosis to the mesenteric veins is a serious threat.",
-  "pitfalls": [
-   "Assuming portal hypertension implies cirrhosis and overlooking a non-cirrhotic cavernoma with preserved liver function.",
-   "Failing to screen for and treat an underlying prothrombotic or myeloproliferative disorder.",
-   "Missing associated portal biliopathy as a cause of cholestasis.",
-   "Delaying recognition of mesenteric extension causing intestinal ischaemia."
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "Baveno consensus on portal hypertension",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anticoagulation directed by the underlying prothrombotic state, balanced against variceal bleeding risk after endoscopic assessment",
-   "Prevention and treatment of gastro-oesophageal variceal bleeding with endoscopic band ligation and non-selective beta-blockade, and surveillance endoscopy",
-   "Meso-Rex bypass, restoring physiological portal flow, or a portosystemic shunt for refractory variceal bleeding or symptomatic portal hypertension, particularly in children",
-   "Management of hypersplenism and its cytopenias, with attention to bleeding risk",
-   "Treatment of coexisting portal cavernoma cholangiopathy when biliary obstruction develops",
-   "Haematology referral to identify and treat an underlying myeloproliferative neoplasm or thrombophilia, with monitoring for extension of thrombosis into the mesenteric veins"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "portal_cavernoma-pathway",
-   "title": "portal cavernoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A portal cavernoma is the network of hepatopetal collateral veins that develops around a chronically obstructed or thrombosed portal vein, a process termed cavernous transformation.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute variceal haemorrhage with haematemesis or melaena",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Doppler ultrasound of the portal system, CT or MR portography, Upper gastrointestinal endoscopy for varices"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anticoagulation directed by the underlying prothrombotic state, balanced against variceal bleeding risk after endoscopic assessment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming portal hypertension implies cirrhosis and overlooking a non-cirrhotic cavernoma with preserved liver function."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of portal cavernoma."
-  }
- ],
- "tables": [
-  {
-   "id": "portal_cavernoma-matrix",
-   "title": "portal cavernoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A portal cavernoma is the network of hepatopetal collateral veins that develops around a chronically obstructed or thrombosed",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "hepatobiliary",
+  "specialty": "hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A portal cavernoma is the network of hepatopetal collateral veins that develops around a chronically obstructed or thrombosed portal vein, a process termed cavernous transformation.",
+      "It is the hallmark of chronic extrahepatic portal vein obstruction, and in the absence of cirrhosis liver synthetic function is typically well preserved.",
+      "In children it commonly follows neonatal umbilical vein catheterisation, omphalitis or sepsis, whereas in adults prothrombotic states, myeloproliferative neoplasms, cirrhosis, abdominal sepsis and malignancy predominate.",
+      "The dominant clinical problem is portal hypertension with gastro-oesophageal varices, splenomegaly and hypersplenism.",
+      "Variceal bleeding is often surprisingly well tolerated because hepatic function is preserved.",
+      "The collaterals can compress the biliary tree to produce portal cavernoma cholangiopathy, also called portal biliopathy.",
+      "Doppler ultrasound shows the serpiginous collaterals replacing the normal portal vein, and CT or MR portography maps the anatomy for intervention.",
+      "The Meso-Rex bypass, which restores physiological portal inflow, is the preferred operation in suitable children."
     ],
-    [
-     "Key Investigations",
-     "Doppler ultrasound of the portal system, CT or MR portography, Upper gastrointestinal endoscopy for varices",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "When the main portal vein is obstructed by thrombosis, extrinsic compression or malformation, the portal circulation seeks alternative routes to reach the liver. Over weeks to months the pre-existing tiny peribiliary and paracholedochal veins in the porta hepatis dilate and proliferate into a leash of tortuous hepatopetal collaterals, the cavernoma, which partially bypasses the occluded segment. Because these collaterals cannot fully substitute for the calibre of the native vein, portal pressure rises and drives the formation of portosystemic collaterals including gastro-oesophageal varices, together with splenomegaly and hypersplenism. In extrahepatic obstruction the intrahepatic parenchyma and its arterial supply remain intact, so hepatic synthetic function is generally preserved and bleeding is better tolerated than in cirrhotic portal hypertension. The engorged periductal collaterals may in turn compress and distort the bile ducts, producing cholangiopathy.",
+    "additionalDifferentials": [
+      "Cirrhotic portal hypertension",
+      "Non-cirrhotic portal fibrosis or idiopathic portal hypertension",
+      "Budd-Chiari syndrome",
+      "Portal vein tumour thrombus from hepatocellular carcinoma",
+      "Congenital hepatic fibrosis",
+      "Arterioportal fistula",
+      "Hepatic schistosomiasis"
     ],
-    [
-     "Primary Differentials",
-     "Cirrhotic portal hypertension, Non-cirrhotic portal fibrosis or idiopathic portal hypertension, Budd-Chiari syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Doppler ultrasound of the portal system",
+      "CT or MR portography",
+      "Upper gastrointestinal endoscopy for varices",
+      "Thrombophilia and myeloproliferative neoplasm screen including JAK2 mutation testing",
+      "Full blood count to assess hypersplenism",
+      "Liver function and synthetic tests to confirm preserved function",
+      "MRCP if biliopathy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Anticoagulation directed by the underlying prothrombotic state, balanced against variceal bleeding risk after endoscopic",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute variceal haemorrhage with haematemesis or melaena",
+      "Ascending cholangitis from associated biliopathy",
+      "Extension of thrombosis into the mesenteric veins with bowel ischaemia",
+      "Rapid splenic enlargement with severe cytopenias"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming portal hypertension implies cirrhosis and overlooking a non-cirrhotic cavernoma with preserved liver function.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With preserved hepatic function the long-term outlook is generally good once varices are controlled, though recurrent bleeding, hypersplenism and biliopathy contribute to morbidity, and extension of thrombosis to the mesenteric veins is a serious threat.",
+    "pitfalls": [
+      "Assuming portal hypertension implies cirrhosis and overlooking a non-cirrhotic cavernoma with preserved liver function.",
+      "Failing to screen for and treat an underlying prothrombotic or myeloproliferative disorder.",
+      "Missing associated portal biliopathy as a cause of cholestasis.",
+      "Delaying recognition of mesenteric extension causing intestinal ischaemia."
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "Baveno consensus on portal hypertension",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anticoagulation directed by the underlying prothrombotic state, balanced against variceal bleeding risk after endoscopic assessment",
+      "Prevention and treatment of gastro-oesophageal variceal bleeding with endoscopic band ligation and non-selective beta-blockade, and surveillance endoscopy",
+      "Meso-Rex bypass, restoring physiological portal flow, or a portosystemic shunt for refractory variceal bleeding or symptomatic portal hypertension, particularly in children",
+      "Management of hypersplenism and its cytopenias, with attention to bleeding risk",
+      "Treatment of coexisting portal cavernoma cholangiopathy when biliary obstruction develops",
+      "Haematology referral to identify and treat an underlying myeloproliferative neoplasm or thrombophilia, with monitoring for extension of thrombosis into the mesenteric veins"
     ]
-   ],
-   "caption": "Overview comparison matrix for portal cavernoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "portal-cavernoma-real-image",
-   "title": "portal cavernoma: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "portal_cavernoma-pathway",
+      "title": "portal cavernoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A portal cavernoma is the network of hepatopetal collateral veins that develops around a chronically obstructed or thrombosed portal vein, a process termed cavernous transformation.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute variceal haemorrhage with haematemesis or melaena",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Doppler ultrasound of the portal system, CT or MR portography, Upper gastrointestinal endoscopy for varices"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anticoagulation directed by the underlying prothrombotic state, balanced against variceal bleeding risk after endoscopic assessment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming portal hypertension implies cirrhosis and overlooking a non-cirrhotic cavernoma with preserved liver function."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of portal cavernoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "portal_cavernoma-matrix",
+      "title": "portal cavernoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A portal cavernoma is the network of hepatopetal collateral veins that develops around a chronically obstructed or thrombosed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Doppler ultrasound of the portal system, CT or MR portography, Upper gastrointestinal endoscopy for varices",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cirrhotic portal hypertension, Non-cirrhotic portal fibrosis or idiopathic portal hypertension, Budd-Chiari syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anticoagulation directed by the underlying prothrombotic state, balanced against variceal bleeding risk after endoscopic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming portal hypertension implies cirrhosis and overlooking a non-cirrhotic cavernoma with preserved liver function.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for portal cavernoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "portal_cavernoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Doppler ultrasound of the portal system",
+          "cells": [
+            {
+              "text": "Portal vein patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR portography",
+          "cells": [
+            {
+              "text": "Cavernous transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Varices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia and MPN screen with JAK2",
+          "cells": [
+            {
+              "text": "Prothrombotic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Hypersplenism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and synthetic tests",
+          "cells": [
+            {
+              "text": "Preserved function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Biliopathy, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_cavernoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Portal vein tumour thrombus",
+          "cells": [
+            {
+              "text": "Tumour within the thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Budd-Chiari syndrome",
+          "cells": [
+            {
+              "text": "Hepatic venous outflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_cavernoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Directed by the prothrombotic state, balanced against variceal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Variceal bleeding",
+          "cells": [
+            {
+              "text": "Endoscopic band ligation for prevention and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical shunt",
+          "cells": [
+            {
+              "text": "Meso-Rex bypass or portosystemic shunt for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypersplenism",
+          "cells": [
+            {
+              "text": "Management of cytopenias with attention to bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliopathy",
+          "cells": [
+            {
+              "text": "Treatment when biliary obstruction develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology",
+          "cells": [
+            {
+              "text": "Identify and treat an underlying myeloproliferative neoplasm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "portal_cavernoma-dx-mgmt",
+      "title": "Diagnosis and management of portal cavernoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Portal vein thrombosis with collaterals, varices or hypersplenism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (variceal haemorrhage, cholangitis, mesenteric extension, rapid cytopenia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endoscopic band ligation for variceal bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler; CT or MR portography; endoscopy; thrombophilia and JAK2; blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does portography show cavernous transformation of a thrombosed portal vein?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cirrhotic portal hypertension, Budd-Chiari, tumour thrombus or portal fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anticoagulation directed by the prothrombotic state",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prevention and treatment of variceal bleeding with band ligation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Meso-Rex bypass or portosystemic shunt for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of hypersplenism and cytopenias with bleeding risk in mind",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Haematology referral to identify and treat an underlying MPN",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With preserved liver function and controlled varices, outlook is generally good",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

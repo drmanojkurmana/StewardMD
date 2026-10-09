@@ -1,176 +1,463 @@
 {
- "id": "cutaneous_calcinosis",
- "name": "cutaneous calcinosis",
- "aliases": [
-  "calcinosis cutis",
-  "cutaneous calcification"
- ],
- "class": "non_infective",
- "system": "Skin / Integumentary",
- "specialty": "Dermatology / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Deposition of insoluble calcium salts in the skin and subcutis, presenting as firm white or yellow papules, nodules or plaques that may ulcerate and extrude chalky, toothpaste-like material",
-   "Classified into four main types: dystrophic (much the commonest), metastatic, idiopathic and iatrogenic, with calciphylaxis considered a distinct and dangerous vascular variant",
-   "Dystrophic calcinosis occurs in damaged tissue with normal serum calcium and phosphate, classically complicating connective tissue disease such as juvenile dermatomyositis and systemic sclerosis (the C of CREST)",
-   "Metastatic calcinosis reflects a deranged calcium-phosphate product, seen in chronic kidney disease, hyperparathyroidism, hypervitaminosis D, sarcoidosis and milk-alkali syndrome",
-   "Idiopathic forms include idiopathic scrotal calcinosis, subepidermal calcified nodules and tumoral calcinosis, while iatrogenic disease follows extravasation of calcium- or phosphate-containing infusions",
-   "Investigation is directed at the calcium-phosphate axis and any underlying connective tissue disease, with radiographs delineating the extent and distribution of deposits",
-   "Treatment is difficult and evidence is limited; options include correcting metabolic drivers, medical therapies such as sodium thiosulfate, warfarin, bisphosphonates, minocycline and diltiazem, and surgical excision of symptomatic deposits"
+  "id": "cutaneous_calcinosis",
+  "name": "cutaneous calcinosis",
+  "aliases": [
+    "calcinosis cutis",
+    "cutaneous calcification"
   ],
-  "pathophysiology": "Cutaneous calcinosis results from precipitation of calcium phosphate (hydroxyapatite) or amorphous calcium salts within the dermis or subcutaneous tissue. In dystrophic disease, local tissue injury, inflammation and mitochondrial calcium overload in damaged cells provide a nidus for mineralisation despite normal circulating calcium and phosphate; release of phosphate-binding proteins and denatured collagen and elastin favour crystal nucleation. In metastatic disease, a raised calcium-phosphate product drives deposition in otherwise normal tissue, particularly where local pH or tissue conditions promote precipitation. Idiopathic and iatrogenic forms reflect, respectively, unexplained local deposition and direct introduction of calcium salts, while calciphylaxis involves medial calcification and thrombosis of small dermal and subcutaneous vessels causing ischaemic necrosis.",
-  "additionalDifferentials": [
-   "Calciphylaxis (calcific uraemic arteriolopathy) when painful ischaemic ulceration predominates",
-   "Cutaneous ossification (osteoma cutis) and osteoma cutis of Albright hereditary osteodystrophy",
-   "Gouty tophi and other crystal deposition",
-   "Subcutaneous nodules of rheumatoid disease or rheumatic fever",
-   "Epidermoid or pilar cysts and other adnexal tumours",
-   "Gouty or xanthomatous nodules",
-   "Foreign-body granuloma"
-  ],
-  "additionalInvestigations": [
-   "Serum calcium, phosphate, parathyroid hormone, vitamin D and alkaline phosphatase to define the metabolic type",
-   "Renal function tests to identify chronic kidney disease",
-   "Plain radiography (and where needed CT) to map the distribution and burden of calcification",
-   "Skin biopsy with von Kossa or alizarin red staining to confirm calcium deposition",
-   "Autoimmune serology including antinuclear and myositis-specific antibodies when connective tissue disease is suspected",
-   "Screening for sarcoidosis or occult malignancy where metastatic calcification is unexplained"
-  ],
-  "redFlags": [
-   "Rapidly enlarging, exquisitely painful retiform ulceration suggesting calciphylaxis",
-   "Secondary infection or systemic sepsis arising from ulcerated deposits",
-   "Widespread metastatic calcification indicating severe metabolic derangement",
-   "Functional loss from periarticular deposits causing contracture or nerve compression"
-  ],
-  "prognosis": "Prognosis depends on the type and underlying cause: idiopathic and iatrogenic deposits may resolve or remain stable, whereas dystrophic calcinosis of connective tissue disease is often chronic, recurrent and resistant to therapy. Metastatic calcinosis improves when the calcium-phosphate disturbance is corrected, while calciphylaxis carries high morbidity and mortality.",
-  "pitfalls": [
-   "Assuming normal serum calcium excludes significant disease, when most cutaneous calcinosis is dystrophic with a normal calcium-phosphate axis",
-   "Overlooking an underlying connective tissue disease, particularly juvenile dermatomyositis or systemic sclerosis",
-   "Missing calciphylaxis, which requires urgent recognition and differs fundamentally in management and prognosis",
-   "Aggressive surgery precipitating poor wound healing, recurrence at operative sites and new dystrophic deposits",
-   "Failing to review medications and infusions as an iatrogenic source of calcium loading"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia, Dermatology"
-  ],
-  "crossLinks": [
-   "primary_cutaneous_amyloidosis"
-  ],
-  "management": [
-   "Correct the underlying calcium-phosphate disturbance in metastatic disease using phosphate binders, treatment of hyperparathyroidism and withdrawal of excess vitamin D",
-   "Treat the underlying connective tissue disease with immunosuppression in dystrophic calcinosis of dermatomyositis or systemic sclerosis",
-   "Trial of medical therapies such as the calcium-channel blocker diltiazem, sodium thiosulfate, bisphosphonates or colchicine for symptomatic deposits",
-   "Surgical excision of painful, ulcerating or functionally limiting calcified deposits",
-   "Urgent management of calciphylaxis with sodium thiosulfate, wound care and correction of mineral metabolism",
-   "Wound care and treatment of secondary infection when deposits ulcerate and extrude chalky material",
-   "Refer to dermatology with rheumatology or nephrology input according to the underlying cause"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cutaneous_calcinosis-pathway",
-   "title": "cutaneous calcinosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Deposition of insoluble calcium salts in the skin and subcutis, presenting as firm white or yellow papules, nodules or plaques that may ulcerate and extrude chalky, toothpaste-like material",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging, exquisitely painful retiform ulceration suggesting calciphylaxis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum calcium, phosphate, parathyroid hormone, vitamin D and alkaline phosphatase to define the metabolic type, Renal function tests to identify chronic kidney disease, Plain radiography (and where needed CT) to map the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the underlying calcium-phosphate disturbance in metastatic disease using phosphate binders, treatment of hyperparathyroidism and withdrawal of excess vitamin D"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming normal serum calcium excludes significant disease, when most cutaneous calcinosis is dystrophic with a normal calcium-phosphate axis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cutaneous calcinosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cutaneous_calcinosis-matrix",
-   "title": "cutaneous calcinosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Deposition of insoluble calcium salts in the skin and subcutis, presenting as firm white or yellow papules, nodules or plaques",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Integumentary",
+  "specialty": "Dermatology / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Deposition of insoluble calcium salts in the skin and subcutis, presenting as firm white or yellow papules, nodules or plaques that may ulcerate and extrude chalky, toothpaste-like material",
+      "Classified into four main types: dystrophic (much the commonest), metastatic, idiopathic and iatrogenic, with calciphylaxis considered a distinct and dangerous vascular variant",
+      "Dystrophic calcinosis occurs in damaged tissue with normal serum calcium and phosphate, classically complicating connective tissue disease such as juvenile dermatomyositis and systemic sclerosis (the C of CREST)",
+      "Metastatic calcinosis reflects a deranged calcium-phosphate product, seen in chronic kidney disease, hyperparathyroidism, hypervitaminosis D, sarcoidosis and milk-alkali syndrome",
+      "Idiopathic forms include idiopathic scrotal calcinosis, subepidermal calcified nodules and tumoral calcinosis, while iatrogenic disease follows extravasation of calcium- or phosphate-containing infusions",
+      "Investigation is directed at the calcium-phosphate axis and any underlying connective tissue disease, with radiographs delineating the extent and distribution of deposits",
+      "Treatment is difficult and evidence is limited; options include correcting metabolic drivers, medical therapies such as sodium thiosulfate, warfarin, bisphosphonates, minocycline and diltiazem, and surgical excision of symptomatic deposits"
     ],
-    [
-     "Key Investigations",
-     "Serum calcium, phosphate, parathyroid hormone, vitamin D and alkaline phosphatase to define the metabolic type, Renal function",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cutaneous calcinosis results from precipitation of calcium phosphate (hydroxyapatite) or amorphous calcium salts within the dermis or subcutaneous tissue. In dystrophic disease, local tissue injury, inflammation and mitochondrial calcium overload in damaged cells provide a nidus for mineralisation despite normal circulating calcium and phosphate; release of phosphate-binding proteins and denatured collagen and elastin favour crystal nucleation. In metastatic disease, a raised calcium-phosphate product drives deposition in otherwise normal tissue, particularly where local pH or tissue conditions promote precipitation. Idiopathic and iatrogenic forms reflect, respectively, unexplained local deposition and direct introduction of calcium salts, while calciphylaxis involves medial calcification and thrombosis of small dermal and subcutaneous vessels causing ischaemic necrosis.",
+    "additionalDifferentials": [
+      "Calciphylaxis (calcific uraemic arteriolopathy) when painful ischaemic ulceration predominates",
+      "Cutaneous ossification (osteoma cutis) and osteoma cutis of Albright hereditary osteodystrophy",
+      "Gouty tophi and other crystal deposition",
+      "Subcutaneous nodules of rheumatoid disease or rheumatic fever",
+      "Epidermoid or pilar cysts and other adnexal tumours",
+      "Gouty or xanthomatous nodules",
+      "Foreign-body granuloma"
     ],
-    [
-     "Primary Differentials",
-     "Calciphylaxis (calcific uraemic arteriolopathy) when painful ischaemic ulceration predominates, Cutaneous ossification (osteoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum calcium, phosphate, parathyroid hormone, vitamin D and alkaline phosphatase to define the metabolic type",
+      "Renal function tests to identify chronic kidney disease",
+      "Plain radiography (and where needed CT) to map the distribution and burden of calcification",
+      "Skin biopsy with von Kossa or alizarin red staining to confirm calcium deposition",
+      "Autoimmune serology including antinuclear and myositis-specific antibodies when connective tissue disease is suspected",
+      "Screening for sarcoidosis or occult malignancy where metastatic calcification is unexplained"
     ],
-    [
-     "Management Strategy",
-     "Correct the underlying calcium-phosphate disturbance in metastatic disease using phosphate binders, treatment of",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging, exquisitely painful retiform ulceration suggesting calciphylaxis",
+      "Secondary infection or systemic sepsis arising from ulcerated deposits",
+      "Widespread metastatic calcification indicating severe metabolic derangement",
+      "Functional loss from periarticular deposits causing contracture or nerve compression"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming normal serum calcium excludes significant disease, when most cutaneous calcinosis is dystrophic with a normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the type and underlying cause: idiopathic and iatrogenic deposits may resolve or remain stable, whereas dystrophic calcinosis of connective tissue disease is often chronic, recurrent and resistant to therapy. Metastatic calcinosis improves when the calcium-phosphate disturbance is corrected, while calciphylaxis carries high morbidity and mortality.",
+    "pitfalls": [
+      "Assuming normal serum calcium excludes significant disease, when most cutaneous calcinosis is dystrophic with a normal calcium-phosphate axis",
+      "Overlooking an underlying connective tissue disease, particularly juvenile dermatomyositis or systemic sclerosis",
+      "Missing calciphylaxis, which requires urgent recognition and differs fundamentally in management and prognosis",
+      "Aggressive surgery precipitating poor wound healing, recurrence at operative sites and new dystrophic deposits",
+      "Failing to review medications and infusions as an iatrogenic source of calcium loading"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia, Dermatology"
+    ],
+    "crossLinks": [
+      "primary_cutaneous_amyloidosis"
+    ],
+    "management": [
+      "Correct the underlying calcium-phosphate disturbance in metastatic disease using phosphate binders, treatment of hyperparathyroidism and withdrawal of excess vitamin D",
+      "Treat the underlying connective tissue disease with immunosuppression in dystrophic calcinosis of dermatomyositis or systemic sclerosis",
+      "Trial of medical therapies such as the calcium-channel blocker diltiazem, sodium thiosulfate, bisphosphonates or colchicine for symptomatic deposits",
+      "Surgical excision of painful, ulcerating or functionally limiting calcified deposits",
+      "Urgent management of calciphylaxis with sodium thiosulfate, wound care and correction of mineral metabolism",
+      "Wound care and treatment of secondary infection when deposits ulcerate and extrude chalky material",
+      "Refer to dermatology with rheumatology or nephrology input according to the underlying cause"
     ]
-   ],
-   "caption": "Overview comparison matrix for cutaneous calcinosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cutaneous-calcinosis-real-image",
-   "title": "cutaneous calcinosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "cutaneous_calcinosis-pathway",
+      "title": "cutaneous calcinosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Deposition of insoluble calcium salts in the skin and subcutis, presenting as firm white or yellow papules, nodules or plaques that may ulcerate and extrude chalky, toothpaste-like material",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging, exquisitely painful retiform ulceration suggesting calciphylaxis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum calcium, phosphate, parathyroid hormone, vitamin D and alkaline phosphatase to define the metabolic type, Renal function tests to identify chronic kidney disease, Plain radiography (and where needed CT) to map the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the underlying calcium-phosphate disturbance in metastatic disease using phosphate binders, treatment of hyperparathyroidism and withdrawal of excess vitamin D"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming normal serum calcium excludes significant disease, when most cutaneous calcinosis is dystrophic with a normal calcium-phosphate axis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cutaneous calcinosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cutaneous_calcinosis-matrix",
+      "title": "cutaneous calcinosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Deposition of insoluble calcium salts in the skin and subcutis, presenting as firm white or yellow papules, nodules or plaques",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum calcium, phosphate, parathyroid hormone, vitamin D and alkaline phosphatase to define the metabolic type, Renal function",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Calciphylaxis (calcific uraemic arteriolopathy) when painful ischaemic ulceration predominates, Cutaneous ossification (osteoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the underlying calcium-phosphate disturbance in metastatic disease using phosphate binders, treatment of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming normal serum calcium excludes significant disease, when most cutaneous calcinosis is dystrophic with a normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cutaneous calcinosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cutaneous_calcinosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate, PTH, vitamin D and alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Metabolic type defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests",
+          "cells": [
+            {
+              "text": "Chronic kidney disease identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiography or CT",
+          "cells": [
+            {
+              "text": "Distribution and burden of calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with von Kossa or alizarin red",
+          "cells": [
+            {
+              "text": "Calcium deposition confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear and myositis-specific antibodies",
+          "cells": [
+            {
+              "text": "Connective tissue disease when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_calcinosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calciphylaxis",
+          "cells": [
+            {
+              "text": "Painful retiform ulceration; urgent treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoma cutis",
+          "cells": [
+            {
+              "text": "Cutaneous ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gouty tophi",
+          "cells": [
+            {
+              "text": "Crystal deposition rather than calcium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_calcinosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct calcium-phosphate disturbance",
+          "cells": [
+            {
+              "text": "Phosphate binders, treatment of hyperparathyroidism; stop calcium or vitamin D if implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression for dystrophic calcinosis",
+          "cells": [
+            {
+              "text": "Dermatomyositis or systemic sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical trial",
+          "cells": [
+            {
+              "text": "Diltiazem, sodium thiosulfate, bisphosphonates or colchicine for symptomatic deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Painful, ulcerating or functionally limiting deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent calciphylaxis care",
+          "cells": [
+            {
+              "text": "Sodium thiosulfate, wound care and mineral correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and infection care",
+          "cells": [
+            {
+              "text": "Ulcerated deposits with chalky extrusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Dermatology with rheumatology or nephrology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cutaneous_calcinosis-dx-mgmt",
+      "title": "Diagnosis and management of cutaneous calcinosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cutaneous calcinosis: firm calcific nodules in skin or subcutis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (painful retiform ulceration, sepsis, widespread metastatic calcification)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent calciphylaxis treatment with sodium thiosulfate and wound care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, PTH, vitamin D; renal tests; imaging; biopsy with von Kossa",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show calcium deposition with metabolic type defined?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider gouty tophi, osteoma cutis or foreign-body granuloma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct calcium-phosphate disturbance with phosphate binders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunosuppression for dystrophic calcinosis of dermatomyositis or systemic sclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Medical trial of diltiazem, sodium thiosulfate or bisphosphonates",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excision of painful or ulcerating deposits; wound care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on type; idiopathic deposits may stay stable, dystrophic disease varies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

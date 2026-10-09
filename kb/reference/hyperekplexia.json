@@ -1,178 +1,483 @@
 {
- "id": "hyperekplexia",
- "name": "Hyperekplexia",
- "aliases": [
-  "Startle disease",
-  "Stiff baby syndrome",
-  "Hereditary hyperekplexia",
-  "Familial startle disease"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology / Neonatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical neurology and genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hyperekplexia, or startle disease, is defined by an exaggerated, non-habituating startle response to unexpected stimuli together with generalised stiffness.",
-   "Neonates present as stiff babies with marked hypertonia that characteristically disappears during sleep, alongside the exaggerated startle.",
-   "Tapping the tip of the nose or the glabella provokes a reproducible non-habituating startle, a useful bedside sign.",
-   "The major gene is GLRA1, encoding the glycine receptor alpha-1 subunit; GLRB, SLC6A5 (the glycine transporter GlyT2), GPHN and ARHGEF9 are also implicated.",
-   "Prolonged tonic stiffness in neonates can cause apnoea and sudden death, which is the principal life-threatening risk.",
-   "The Vigevano manoeuvre, forced flexion of the head and limbs towards the trunk, can abort a life-threatening tonic spasm and should be taught to carers.",
-   "Clonazepam, which enhances GABAergic inhibition, is the mainstay of treatment and is usually highly effective.",
-   "Consciousness is preserved during attacks and the interictal EEG is normal, distinguishing hyperekplexia from epileptic seizures."
+  "id": "hyperekplexia",
+  "name": "Hyperekplexia",
+  "aliases": [
+    "Startle disease",
+    "Stiff baby syndrome",
+    "Hereditary hyperekplexia",
+    "Familial startle disease"
   ],
-  "pathophysiology": "Hereditary hyperekplexia is a disorder of glycinergic neurotransmission, the principal inhibitory system of the brainstem and spinal cord. Most cases result from mutations in GLRA1, encoding the alpha-1 subunit of the postsynaptic glycine receptor, with further genes affecting the beta subunit (GLRB), the presynaptic glycine transporter GlyT2 (SLC6A5) and the postsynaptic clustering proteins gephyrin (GPHN) and collybistin (ARHGEF9). Impaired glycine receptor function or reduced glycine reuptake diminishes inhibitory postsynaptic currents onto motor neurons and interneurons, so a normally well-modulated startle circuit becomes disinhibited; minor unexpected auditory or tactile stimuli then evoke an exaggerated, non-habituating startle followed by sustained tonic muscle contraction. In neonates this disinhibition can produce dangerous generalised stiffness with impaired ventilation and apnoea. Inheritance is most often autosomal dominant through GLRA1, but autosomal recessive and other patterns occur, and an acquired antibody-mediated form should be considered when onset is in later life.",
-  "additionalDifferentials": [
-   "Neonatal or epileptic seizures, including startle-provoked epilepsy",
-   "Benign neonatal sleep myoclonus",
-   "Neonatal tetanus with trismus, risus sardonicus and a relevant cord-infection history",
-   "Stiff person syndrome and the related PERM (progressive encephalomyelitis with rigidity and myoclonus) in older patients",
-   "Jitteriness of the newborn",
-   "Tetany from hypocalcaemia or hypomagnesaemia",
-   "Symptomatic hyperekplexia from a structural brainstem lesion"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of a panel including GLRA1, GLRB, SLC6A5, GPHN and ARHGEF9",
-   "Clinical elicitation of the non-habituating startle using the nose-tap or glabellar tap sign",
-   "EEG, which is typically normal during attacks and helps distinguish the disorder from epilepsy, ideally with video-EEG capture of an event",
-   "MRI of the brain, usually normal, to exclude a structural or brainstem lesion",
-   "Metabolic and septic screen in a stiff neonate to exclude mimics such as tetanus and sepsis",
-   "Anti-glycine receptor and anti-GAD antibodies where an acquired or adult-onset form is suspected"
-  ],
-  "redFlags": [
-   "Apnoea, cyanosis or bradycardia during prolonged tonic stiffness in a neonate, indicating the risk of sudden death",
-   "Recurrent unexplained falls with injury, falling stiffly like a statue without protective reflexes",
-   "Feeding difficulty or aspiration resulting from sustained stiffness",
-   "Progressive course with brainstem signs or autonomic instability suggesting acquired PERM rather than the hereditary form"
-  ],
-  "prognosis": "Neonatal stiffness and the associated apnoea risk usually improve markedly over the first years of life and respond well to clonazepam. Most affected children have normal cognition and a good long-term outlook, although an excessive startle response and occasional falls may persist into adulthood.",
-  "pitfalls": [
-   "Misdiagnosing the disorder as epilepsy and starting inappropriate antiepileptic drugs.",
-   "Failing to teach carers the Vigevano flexion manoeuvre to abort life-threatening spasms.",
-   "Overlooking the risk of apnoea and sudden death in affected neonates.",
-   "Confusing the stiff neonate with neonatal tetanus or sepsis.",
-   "Not distinguishing hereditary hyperekplexia from an acquired antibody-mediated form when onset is later in life."
-  ],
-  "references": [
-   "Paediatric neurology reference texts",
-   "Standard neonatology reference texts",
-   "Principles and practice of medical genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use clonazepam as first-line therapy to reduce startle and stiffness by enhancing residual inhibitory neurotransmission",
-   "Teach carers the Vigevano manoeuvre, forced flexion of the head and limbs towards the trunk, to abort life-threatening tonic spasm and apnoea",
-   "Institute apnoea monitoring and a resuscitation plan for affected neonates because prolonged tonic stiffness risks sudden death",
-   "Consider alternative anticonvulsant or antispastic agents where clonazepam is insufficient, and avoid unnecessary sedatives",
-   "Provide physiotherapy and injury-prevention advice for falls arising from persistent excessive startle",
-   "Offer genetic counselling and family testing, as most forms are inherited through GLRA1 and related glycinergic genes",
-   "Coordinate care through neurology and neonatology and consider an immune-mediated cause where onset is acquired or adult-onset"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hyperekplexia-pathway",
-   "title": "Hyperekplexia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hyperekplexia, or startle disease, is defined by an exaggerated, non-habituating startle response to unexpected stimuli together with generalised stiffness.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Apnoea, cyanosis or bradycardia during prolonged tonic stiffness in a neonate, indicating the risk of sudden death",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of a panel including GLRA1, GLRB, SLC6A5, GPHN and ARHGEF9, Clinical elicitation of the non-habituating startle using the nose-tap or glabellar tap sign, EEG, which is typically normal during"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use clonazepam as first-line therapy to reduce startle and stiffness by enhancing residual inhibitory neurotransmission"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the disorder as epilepsy and starting inappropriate antiepileptic drugs."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hyperekplexia."
-  }
- ],
- "tables": [
-  {
-   "id": "hyperekplexia-matrix",
-   "title": "Hyperekplexia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hyperekplexia, or startle disease, is defined by an exaggerated, non-habituating startle response to unexpected stimuli together",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology / Neonatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical neurology and genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hyperekplexia, or startle disease, is defined by an exaggerated, non-habituating startle response to unexpected stimuli together with generalised stiffness.",
+      "Neonates present as stiff babies with marked hypertonia that characteristically disappears during sleep, alongside the exaggerated startle.",
+      "Tapping the tip of the nose or the glabella provokes a reproducible non-habituating startle, a useful bedside sign.",
+      "The major gene is GLRA1, encoding the glycine receptor alpha-1 subunit; GLRB, SLC6A5 (the glycine transporter GlyT2), GPHN and ARHGEF9 are also implicated.",
+      "Prolonged tonic stiffness in neonates can cause apnoea and sudden death, which is the principal life-threatening risk.",
+      "The Vigevano manoeuvre, forced flexion of the head and limbs towards the trunk, can abort a life-threatening tonic spasm and should be taught to carers.",
+      "Clonazepam, which enhances GABAergic inhibition, is the mainstay of treatment and is usually highly effective.",
+      "Consciousness is preserved during attacks and the interictal EEG is normal, distinguishing hyperekplexia from epileptic seizures."
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of a panel including GLRA1, GLRB, SLC6A5, GPHN and ARHGEF9, Clinical elicitation of the non-habituating",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary hyperekplexia is a disorder of glycinergic neurotransmission, the principal inhibitory system of the brainstem and spinal cord. Most cases result from mutations in GLRA1, encoding the alpha-1 subunit of the postsynaptic glycine receptor, with further genes affecting the beta subunit (GLRB), the presynaptic glycine transporter GlyT2 (SLC6A5) and the postsynaptic clustering proteins gephyrin (GPHN) and collybistin (ARHGEF9). Impaired glycine receptor function or reduced glycine reuptake diminishes inhibitory postsynaptic currents onto motor neurons and interneurons, so a normally well-modulated startle circuit becomes disinhibited; minor unexpected auditory or tactile stimuli then evoke an exaggerated, non-habituating startle followed by sustained tonic muscle contraction. In neonates this disinhibition can produce dangerous generalised stiffness with impaired ventilation and apnoea. Inheritance is most often autosomal dominant through GLRA1, but autosomal recessive and other patterns occur, and an acquired antibody-mediated form should be considered when onset is in later life.",
+    "additionalDifferentials": [
+      "Neonatal or epileptic seizures, including startle-provoked epilepsy",
+      "Benign neonatal sleep myoclonus",
+      "Neonatal tetanus with trismus, risus sardonicus and a relevant cord-infection history",
+      "Stiff person syndrome and the related PERM (progressive encephalomyelitis with rigidity and myoclonus) in older patients",
+      "Jitteriness of the newborn",
+      "Tetany from hypocalcaemia or hypomagnesaemia",
+      "Symptomatic hyperekplexia from a structural brainstem lesion"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal or epileptic seizures, including startle-provoked epilepsy, Benign neonatal sleep myoclonus, Neonatal tetanus with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of a panel including GLRA1, GLRB, SLC6A5, GPHN and ARHGEF9",
+      "Clinical elicitation of the non-habituating startle using the nose-tap or glabellar tap sign",
+      "EEG, which is typically normal during attacks and helps distinguish the disorder from epilepsy, ideally with video-EEG capture of an event",
+      "MRI of the brain, usually normal, to exclude a structural or brainstem lesion",
+      "Metabolic and septic screen in a stiff neonate to exclude mimics such as tetanus and sepsis",
+      "Anti-glycine receptor and anti-GAD antibodies where an acquired or adult-onset form is suspected"
     ],
-    [
-     "Management Strategy",
-     "Use clonazepam as first-line therapy to reduce startle and stiffness by enhancing residual inhibitory neurotransmission",
-     "Core treatment modality"
+    "redFlags": [
+      "Apnoea, cyanosis or bradycardia during prolonged tonic stiffness in a neonate, indicating the risk of sudden death",
+      "Recurrent unexplained falls with injury, falling stiffly like a statue without protective reflexes",
+      "Feeding difficulty or aspiration resulting from sustained stiffness",
+      "Progressive course with brainstem signs or autonomic instability suggesting acquired PERM rather than the hereditary form"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the disorder as epilepsy and starting inappropriate antiepileptic drugs.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Neonatal stiffness and the associated apnoea risk usually improve markedly over the first years of life and respond well to clonazepam. Most affected children have normal cognition and a good long-term outlook, although an excessive startle response and occasional falls may persist into adulthood.",
+    "pitfalls": [
+      "Misdiagnosing the disorder as epilepsy and starting inappropriate antiepileptic drugs.",
+      "Failing to teach carers the Vigevano flexion manoeuvre to abort life-threatening spasms.",
+      "Overlooking the risk of apnoea and sudden death in affected neonates.",
+      "Confusing the stiff neonate with neonatal tetanus or sepsis.",
+      "Not distinguishing hereditary hyperekplexia from an acquired antibody-mediated form when onset is later in life."
+    ],
+    "references": [
+      "Paediatric neurology reference texts",
+      "Standard neonatology reference texts",
+      "Principles and practice of medical genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use clonazepam as first-line therapy to reduce startle and stiffness by enhancing residual inhibitory neurotransmission",
+      "Teach carers the Vigevano manoeuvre, forced flexion of the head and limbs towards the trunk, to abort life-threatening tonic spasm and apnoea",
+      "Institute apnoea monitoring and a resuscitation plan for affected neonates because prolonged tonic stiffness risks sudden death",
+      "Consider alternative anticonvulsant or antispastic agents where clonazepam is insufficient, and avoid unnecessary sedatives",
+      "Provide physiotherapy and injury-prevention advice for falls arising from persistent excessive startle",
+      "Offer genetic counselling and family testing, as most forms are inherited through GLRA1 and related glycinergic genes",
+      "Coordinate care through neurology and neonatology and consider an immune-mediated cause where onset is acquired or adult-onset"
     ]
-   ],
-   "caption": "Overview comparison matrix for hyperekplexia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hyperekplexia-real-image",
-   "title": "Hyperekplexia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hyperekplexia-pathway",
+      "title": "Hyperekplexia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hyperekplexia, or startle disease, is defined by an exaggerated, non-habituating startle response to unexpected stimuli together with generalised stiffness.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Apnoea, cyanosis or bradycardia during prolonged tonic stiffness in a neonate, indicating the risk of sudden death",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of a panel including GLRA1, GLRB, SLC6A5, GPHN and ARHGEF9, Clinical elicitation of the non-habituating startle using the nose-tap or glabellar tap sign, EEG, which is typically normal during"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use clonazepam as first-line therapy to reduce startle and stiffness by enhancing residual inhibitory neurotransmission"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the disorder as epilepsy and starting inappropriate antiepileptic drugs."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hyperekplexia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hyperekplexia-matrix",
+      "title": "Hyperekplexia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hyperekplexia, or startle disease, is defined by an exaggerated, non-habituating startle response to unexpected stimuli together",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of a panel including GLRA1, GLRB, SLC6A5, GPHN and ARHGEF9, Clinical elicitation of the non-habituating",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal or epileptic seizures, including startle-provoked epilepsy, Benign neonatal sleep myoclonus, Neonatal tetanus with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use clonazepam as first-line therapy to reduce startle and stiffness by enhancing residual inhibitory neurotransmission",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the disorder as epilepsy and starting inappropriate antiepileptic drugs.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hyperekplexia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical neurology and genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperekplexia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of a GLRA1 and related gene panel",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical elicitation of the non-habituating startle",
+          "cells": [
+            {
+              "text": "Exaggerated startle with stiffness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Normal during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Usually normal; excludes a structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and septic screen in a stiff neonate",
+          "cells": [
+            {
+              "text": "Alternative causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-glycine receptor and anti-GAD antibodies",
+          "cells": [
+            {
+              "text": "Where an autoimmune cause is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperekplexia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal or epileptic seizures",
+          "cells": [
+            {
+              "text": "Normal EEG during hyperekplexia attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal tetanus",
+          "cells": [
+            {
+              "text": "Trismus and risus sardonicus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stiff person syndrome and PERM",
+          "cells": [
+            {
+              "text": "Autoimmune; GAD antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign neonatal sleep myoclonus",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperekplexia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clonazepam",
+          "cells": [
+            {
+              "text": "First-line therapy to reduce stiffness and startle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vigevano manoeuvre",
+          "cells": [
+            {
+              "text": "Forced flexion of head and limbs, taught to carers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apnoea monitoring",
+          "cells": [
+            {
+              "text": "Resuscitation plan for stiffness episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative anticonvulsant or antispastic agents",
+          "cells": [
+            {
+              "text": "When clonazepam is unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and injury prevention",
+          "cells": [
+            {
+              "text": "Startle-induced falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and neonatology coordination",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperekplexia-dx-mgmt",
+      "title": "Diagnosis and management of Hyperekplexia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exaggerated startle with stiffness and falls, often from the newborn period",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Apnoea or cyanosis during stiffness, injurious falls, or feeding failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: apnoea monitoring and prompt resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Genetic panel; clinical startle testing; EEG; MRI; metabolic and septic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a GLRA1 or related variant found, with epilepsy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neonatal seizures, tetanus, stiff person syndrome or sleep myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clonazepam as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vigevano manoeuvre taught to carers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Apnoea monitoring and a resuscitation plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and injury-prevention advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms improve with age; carers trained; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

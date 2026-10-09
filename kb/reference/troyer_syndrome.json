@@ -1,172 +1,461 @@
 {
- "id": "troyer_syndrome",
- "name": "Troyer syndrome (SPG20, SPART)",
- "aliases": [
-  "SPG20",
-  "SPART-related HSP",
-  "spartin deficiency",
-  "Troyer syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Troyer syndrome (SPG20) is an autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss-of-function variants in SPART, encoding spartin",
-   "It was first described in an Old Order Amish population and follows recessive inheritance, so a consanguineous or founder-population background may be a clue",
-   "The phenotype combines childhood-onset spastic paraparesis with dysarthria, distal muscle wasting, and short stature",
-   "Developmental delay, cognitive impairment, and emotional lability are frequently part of the picture",
-   "Skeletal features and a characteristic slowly progressive gait disorder help distinguish it from pure HSP",
-   "Diagnosis rests on the clinical pattern supported by molecular confirmation of SPART variants",
-   "Management is symptomatic and multidisciplinary, targeting spasticity, mobility, speech, and developmental support"
+  "id": "troyer_syndrome",
+  "name": "Troyer syndrome (SPG20, SPART)",
+  "aliases": [
+    "SPG20",
+    "SPART-related HSP",
+    "spartin deficiency",
+    "Troyer syndrome"
   ],
-  "pathophysiology": "Troyer syndrome shares the core hereditary spastic paraplegia mechanism of length-dependent degeneration of the longest corticospinal axons, producing lower-limb-predominant spasticity. SPART encodes spartin, a protein implicated in endosomal trafficking, epidermal growth factor receptor turnover, mitochondrial function, and lipid droplet regulation. Loss of spartin disrupts these processes within neurones, and the extensive functions of the protein are thought to underlie the additional developmental, cognitive, and somatic features that make this a complicated rather than pure form of HSP.",
-  "additionalDifferentials": [
-   "Other complicated recessive hereditary spastic paraplegias (e.g. SPG11, SPG15)",
-   "Cerebral palsy with spastic diplegia",
-   "Metabolic or lysosomal storage disorders with spasticity and developmental delay",
-   "Mitochondrial encephalomyopathy",
-   "Dopa-responsive dystonia",
-   "Distal hereditary motor neuropathy when wasting predominates"
-  ],
-  "additionalInvestigations": [
-   "Brain and spine MRI to exclude structural causes and characterise any white-matter change",
-   "Molecular genetic testing of SPART, particularly in founder or consanguineous populations",
-   "Nerve conduction studies and EMG to assess distal wasting",
-   "Neuropsychological and developmental assessment",
-   "Metabolic screen to exclude treatable mimics presenting with spasticity and delay"
-  ],
-  "redFlags": [
-   "Regression of previously acquired skills suggesting a progressive metabolic or storage disorder",
-   "Rapid neurological deterioration inconsistent with the usually slow course",
-   "New seizures or focal deficits prompting reassessment",
-   "Feeding or respiratory difficulty from bulbar involvement in advanced disease"
-  ],
-  "prognosis": "Troyer syndrome progresses slowly; many affected individuals remain ambulant into adulthood, though gait, speech, and cognition decline gradually and disability increases with age.",
-  "pitfalls": [
-   "Misdiagnosing static cerebral palsy in a child with a slowly progressive genetic disorder",
-   "Not recognising the founder-population context that raises the pre-test probability",
-   "Attributing short stature and developmental features to unrelated causes rather than the syndrome",
-   "Overlooking the need for coordinated developmental and rehabilitation support"
-  ],
-  "references": [
-   "GeneReviews: Troyer Syndrome (SPG20)",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage lower-limb spasticity with antispasticity agents such as baclofen or tizanidine, and focal botulinum toxin injections where appropriate",
-   "Provide physiotherapy, gait training, mobility aids and occupational therapy to preserve ambulation and function",
-   "Offer speech and language therapy for dysarthria and swallow assessment as bulbar features progress",
-   "Support cognition and address emotional lability with appropriate psychological and psychiatric input",
-   "Manage distal wasting, contractures and skeletal features with orthopaedic and rehabilitation input",
-   "Offer genetic counselling and family screening for the autosomal recessive SPART variant, especially in founder or consanguineous populations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "troyer_syndrome-pathway",
-   "title": "Troyer syndrome (SPG20, SPART): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Troyer syndrome (SPG20) is an autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss-of-function variants in SPART, encoding spartin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Regression of previously acquired skills suggesting a progressive metabolic or storage disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain and spine MRI to exclude structural causes and characterise any white-matter change, Molecular genetic testing of SPART, particularly in founder or consanguineous populations, Nerve conduction studies and EMG to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage lower-limb spasticity with antispasticity agents such as baclofen or tizanidine, and focal botulinum toxin injections where appropriate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing static cerebral palsy in a child with a slowly progressive genetic disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of troyer syndrome (spg20, spart)."
-  }
- ],
- "tables": [
-  {
-   "id": "troyer_syndrome-matrix",
-   "title": "Troyer syndrome (SPG20, SPART): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Troyer syndrome (SPG20) is an autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss-of-function",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Troyer syndrome (SPG20) is an autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss-of-function variants in SPART, encoding spartin",
+      "It was first described in an Old Order Amish population and follows recessive inheritance, so a consanguineous or founder-population background may be a clue",
+      "The phenotype combines childhood-onset spastic paraparesis with dysarthria, distal muscle wasting, and short stature",
+      "Developmental delay, cognitive impairment, and emotional lability are frequently part of the picture",
+      "Skeletal features and a characteristic slowly progressive gait disorder help distinguish it from pure HSP",
+      "Diagnosis rests on the clinical pattern supported by molecular confirmation of SPART variants",
+      "Management is symptomatic and multidisciplinary, targeting spasticity, mobility, speech, and developmental support"
     ],
-    [
-     "Key Investigations",
-     "Brain and spine MRI to exclude structural causes and characterise any white-matter change, Molecular genetic testing of SPART,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Troyer syndrome shares the core hereditary spastic paraplegia mechanism of length-dependent degeneration of the longest corticospinal axons, producing lower-limb-predominant spasticity. SPART encodes spartin, a protein implicated in endosomal trafficking, epidermal growth factor receptor turnover, mitochondrial function, and lipid droplet regulation. Loss of spartin disrupts these processes within neurones, and the extensive functions of the protein are thought to underlie the additional developmental, cognitive, and somatic features that make this a complicated rather than pure form of HSP.",
+    "additionalDifferentials": [
+      "Other complicated recessive hereditary spastic paraplegias (e.g. SPG11, SPG15)",
+      "Cerebral palsy with spastic diplegia",
+      "Metabolic or lysosomal storage disorders with spasticity and developmental delay",
+      "Mitochondrial encephalomyopathy",
+      "Dopa-responsive dystonia",
+      "Distal hereditary motor neuropathy when wasting predominates"
     ],
-    [
-     "Primary Differentials",
-     "Other complicated recessive hereditary spastic paraplegias (e.g. SPG11, SPG15), Cerebral palsy with spastic diplegia, Metabolic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain and spine MRI to exclude structural causes and characterise any white-matter change",
+      "Molecular genetic testing of SPART, particularly in founder or consanguineous populations",
+      "Nerve conduction studies and EMG to assess distal wasting",
+      "Neuropsychological and developmental assessment",
+      "Metabolic screen to exclude treatable mimics presenting with spasticity and delay"
     ],
-    [
-     "Management Strategy",
-     "Manage lower-limb spasticity with antispasticity agents such as baclofen or tizanidine, and focal botulinum toxin injections",
-     "Core treatment modality"
+    "redFlags": [
+      "Regression of previously acquired skills suggesting a progressive metabolic or storage disorder",
+      "Rapid neurological deterioration inconsistent with the usually slow course",
+      "New seizures or focal deficits prompting reassessment",
+      "Feeding or respiratory difficulty from bulbar involvement in advanced disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing static cerebral palsy in a child with a slowly progressive genetic disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Troyer syndrome progresses slowly; many affected individuals remain ambulant into adulthood, though gait, speech, and cognition decline gradually and disability increases with age.",
+    "pitfalls": [
+      "Misdiagnosing static cerebral palsy in a child with a slowly progressive genetic disorder",
+      "Not recognising the founder-population context that raises the pre-test probability",
+      "Attributing short stature and developmental features to unrelated causes rather than the syndrome",
+      "Overlooking the need for coordinated developmental and rehabilitation support"
+    ],
+    "references": [
+      "GeneReviews: Troyer Syndrome (SPG20)",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage lower-limb spasticity with antispasticity agents such as baclofen or tizanidine, and focal botulinum toxin injections where appropriate",
+      "Provide physiotherapy, gait training, mobility aids and occupational therapy to preserve ambulation and function",
+      "Offer speech and language therapy for dysarthria and swallow assessment as bulbar features progress",
+      "Support cognition and address emotional lability with appropriate psychological and psychiatric input",
+      "Manage distal wasting, contractures and skeletal features with orthopaedic and rehabilitation input",
+      "Offer genetic counselling and family screening for the autosomal recessive SPART variant, especially in founder or consanguineous populations"
     ]
-   ],
-   "caption": "Overview comparison matrix for troyer syndrome (spg20, spart)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "troyer-syndrome-real-image",
-   "title": "Troyer syndrome (SPG20, SPART): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "troyer_syndrome-pathway",
+      "title": "Troyer syndrome (SPG20, SPART): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Troyer syndrome (SPG20) is an autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss-of-function variants in SPART, encoding spartin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Regression of previously acquired skills suggesting a progressive metabolic or storage disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain and spine MRI to exclude structural causes and characterise any white-matter change, Molecular genetic testing of SPART, particularly in founder or consanguineous populations, Nerve conduction studies and EMG to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage lower-limb spasticity with antispasticity agents such as baclofen or tizanidine, and focal botulinum toxin injections where appropriate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing static cerebral palsy in a child with a slowly progressive genetic disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of troyer syndrome (spg20, spart)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "troyer_syndrome-matrix",
+      "title": "Troyer syndrome (SPG20, SPART): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Troyer syndrome (SPG20) is an autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss-of-function",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain and spine MRI to exclude structural causes and characterise any white-matter change, Molecular genetic testing of SPART,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other complicated recessive hereditary spastic paraplegias (e.g. SPG11, SPG15), Cerebral palsy with spastic diplegia, Metabolic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage lower-limb spasticity with antispasticity agents such as baclofen or tizanidine, and focal botulinum toxin injections",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing static cerebral palsy in a child with a slowly progressive genetic disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for troyer syndrome (spg20, spart)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "troyer_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Troyer syndrome (SPG20, SPART)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Troyer syndrome: childhood spastic paraparesis with dysarthria and wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: regression of skills, rapid deterioration or new seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic review for skill regression or rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spine; SPART testing; nerve studies; metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SPART testing show biallelic variants fitting the clinical pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other complicated HSP, cerebral palsy or lysosomal storage disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Baclofen or tizanidine and focal botulinum toxin for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, gait training and mobility aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Speech and language therapy with swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychological and psychiatric support for cognition and lability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening for SPART",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive; many remain ambulant into adulthood; disability rises with age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "troyer_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain and spine MRI",
+          "cells": [
+            {
+              "text": "Structural cause and white-matter change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPART molecular testing",
+          "cells": [
+            {
+              "text": "Especially in founder or consanguineous families"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Distal wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological and developmental assessment",
+          "cells": [
+            {
+              "text": "Cognition and developmental features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Exclude treatable mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "troyer_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other complicated recessive HSP",
+          "cells": [
+            {
+              "text": "Other genes such as SPG11 or SPG15; genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral palsy with spastic diplegia",
+          "cells": [
+            {
+              "text": "Static course rather than slow progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic or lysosomal storage disorders",
+          "cells": [
+            {
+              "text": "Skill regression; metabolic screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "troyer_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Baclofen or tizanidine",
+          "cells": [
+            {
+              "text": "Lower-limb spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal botulinum toxin",
+          "cells": [
+            {
+              "text": "Where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, gait training and occupational therapy",
+          "cells": [
+            {
+              "text": "Preserve ambulation and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy and swallow assessment",
+          "cells": [
+            {
+              "text": "Dysarthria; bulbar progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological and psychiatric input",
+          "cells": [
+            {
+              "text": "Cognition and emotional lability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and rehabilitation input",
+          "cells": [
+            {
+              "text": "Distal wasting, contractures and skeletal features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

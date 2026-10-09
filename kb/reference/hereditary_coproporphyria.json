@@ -1,175 +1,480 @@
 {
- "id": "hereditary_coproporphyria",
- "name": "Hereditary coproporphyria",
- "aliases": [
-  "HCP",
-  "coproporphyrinogen oxidase deficiency",
-  "CPOX deficiency",
-  "harderoporphyria (biallelic variant)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant deficiency of coproporphyrinogen oxidase, the sixth enzyme of haem biosynthesis, one of the three hepatic acute porphyrias",
-   "Presents predominantly with acute neurovisceral attacks similar to acute intermittent porphyria, and less commonly with photocutaneous skin fragility, so it is also a mixed porphyria",
-   "Skin blistering, when present, resembles porphyria cutanea tarda but is generally milder and less frequent than in variegate porphyria",
-   "The biochemical hallmark is a marked, isolated increase in faecal and urinary coproporphyrin (predominantly the isomer III), with raised urinary ALA and PBG during attacks",
-   "Acute attacks are precipitated by the same factors as other acute porphyrias: porphyrinogenic drugs, fasting, alcohol, infection and hormonal changes",
-   "A rare biallelic (harderoporphyria) variant presents in the neonatal period with haemolytic anaemia and marked faecal harderoporphyrin excretion",
-   "Acute attacks are managed with trigger removal, carbohydrate/glucose loading and intravenous haem, as for other acute porphyrias"
+  "id": "hereditary_coproporphyria",
+  "name": "Hereditary coproporphyria",
+  "aliases": [
+    "HCP",
+    "coproporphyrinogen oxidase deficiency",
+    "CPOX deficiency",
+    "harderoporphyria (biallelic variant)"
   ],
-  "pathophysiology": "Hereditary coproporphyria is caused by partial deficiency of coproporphyrinogen oxidase, the sixth enzyme of haem biosynthesis, which converts coproporphyrinogen III to protoporphyrinogen IX. The block leads to accumulation and excretion of coproporphyrin III and, during metabolic demand, back-up of the neurotoxic precursors ALA and PBG through induction of hepatic ALA synthase. The neurotoxic precursors drive acute neurovisceral attacks, while occasional accumulation of photoreactive coproporphyrin in the skin produces a blistering photosensitivity. Homozygous or compound heterozygous defects affecting a specific enzyme step cause the more severe harderoporphyria phenotype.",
-  "additionalDifferentials": [
-   "Acute intermittent porphyria and variegate porphyria",
-   "Lead poisoning with raised precursors",
-   "Surgical acute abdomen during an attack",
-   "Porphyria cutanea tarda when skin blistering predominates",
-   "Guillain-Barre syndrome for the acute neuropathy",
-   "Secondary coproporphyrinuria from liver disease or other systemic illness"
-  ],
-  "additionalInvestigations": [
-   "Faecal porphyrin analysis showing predominant coproporphyrin III",
-   "Urinary ALA, PBG and coproporphyrin during symptomatic episodes",
-   "Plasma fluorescence scanning to help distinguish from variegate porphyria",
-   "Molecular genetic testing of the CPOX gene for confirmation and family screening",
-   "Serum sodium and renal function during attacks",
-   "Nerve conduction studies where motor neuropathy is suspected"
-  ],
-  "redFlags": [
-   "Progressive motor weakness or respiratory failure during an attack",
-   "Seizures with hyponatraemia",
-   "Neonatal haemolytic anaemia suggesting the harderoporphyria variant",
-   "Administration of a porphyrinogenic drug in a symptomatic patient"
-  ],
-  "prognosis": "Prognosis is generally good with trigger avoidance and prompt treatment of attacks; cutaneous involvement is usually mild, though severe neurovisceral attacks carry risks comparable to other acute porphyrias.",
-  "pitfalls": [
-   "Failing to distinguish it biochemically from variegate porphyria, which alters counselling",
-   "Prescribing porphyrinogenic drugs that trigger attacks",
-   "Attributing isolated coproporphyrinuria to porphyria when it is secondary to liver disease or other illness",
-   "Missing the rare severe neonatal harderoporphyria presentation",
-   "Overlooking the diagnosis between attacks when biochemistry can normalise"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acute neurovisceral attacks with intravenous human haemin together with carbohydrate and glucose loading to suppress hepatic ALA synthase",
-   "Immediately withdraw porphyrinogenic drugs and correct precipitants such as fasting, infection and hormonal triggers",
-   "Supportive care during attacks: safe analgesia, antiemetics, correction of hyponatraemia and fluid balance, and treatment of seizures with porphyria-safe anticonvulsants",
-   "Manage cutaneous photosensitivity with visible-light photoprotection and gentle care of fragile, blistering skin",
-   "For recurrent attacks, consider the ALA synthase-directed RNA-interference agent givosiran or prophylactic haemin, with hormonal manipulation for menstrually related attacks",
-   "Monitor serum sodium, renal function and neurological status through each attack",
-   "Genetic counselling, CPOX testing and family screening, providing a safe-drug list and alert documentation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_coproporphyria-pathway",
-   "title": "Hereditary coproporphyria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant deficiency of coproporphyrinogen oxidase, the sixth enzyme of haem biosynthesis, one of the three hepatic acute porphyrias",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive motor weakness or respiratory failure during an attack",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Faecal porphyrin analysis showing predominant coproporphyrin III, Urinary ALA, PBG and coproporphyrin during symptomatic episodes, Plasma fluorescence scanning to help distinguish from variegate porphyria"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acute neurovisceral attacks with intravenous human haemin together with carbohydrate and glucose loading to suppress hepatic ALA synthase"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish it biochemically from variegate porphyria, which alters counselling"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary coproporphyria."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_coproporphyria-matrix",
-   "title": "Hereditary coproporphyria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant deficiency of coproporphyrinogen oxidase, the sixth enzyme of haem biosynthesis, one of the three hepatic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant deficiency of coproporphyrinogen oxidase, the sixth enzyme of haem biosynthesis, one of the three hepatic acute porphyrias",
+      "Presents predominantly with acute neurovisceral attacks similar to acute intermittent porphyria, and less commonly with photocutaneous skin fragility, so it is also a mixed porphyria",
+      "Skin blistering, when present, resembles porphyria cutanea tarda but is generally milder and less frequent than in variegate porphyria",
+      "The biochemical hallmark is a marked, isolated increase in faecal and urinary coproporphyrin (predominantly the isomer III), with raised urinary ALA and PBG during attacks",
+      "Acute attacks are precipitated by the same factors as other acute porphyrias: porphyrinogenic drugs, fasting, alcohol, infection and hormonal changes",
+      "A rare biallelic (harderoporphyria) variant presents in the neonatal period with haemolytic anaemia and marked faecal harderoporphyrin excretion",
+      "Acute attacks are managed with trigger removal, carbohydrate/glucose loading and intravenous haem, as for other acute porphyrias"
     ],
-    [
-     "Key Investigations",
-     "Faecal porphyrin analysis showing predominant coproporphyrin III, Urinary ALA, PBG and coproporphyrin during symptomatic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary coproporphyria is caused by partial deficiency of coproporphyrinogen oxidase, the sixth enzyme of haem biosynthesis, which converts coproporphyrinogen III to protoporphyrinogen IX. The block leads to accumulation and excretion of coproporphyrin III and, during metabolic demand, back-up of the neurotoxic precursors ALA and PBG through induction of hepatic ALA synthase. The neurotoxic precursors drive acute neurovisceral attacks, while occasional accumulation of photoreactive coproporphyrin in the skin produces a blistering photosensitivity. Homozygous or compound heterozygous defects affecting a specific enzyme step cause the more severe harderoporphyria phenotype.",
+    "additionalDifferentials": [
+      "Acute intermittent porphyria and variegate porphyria",
+      "Lead poisoning with raised precursors",
+      "Surgical acute abdomen during an attack",
+      "Porphyria cutanea tarda when skin blistering predominates",
+      "Guillain-Barre syndrome for the acute neuropathy",
+      "Secondary coproporphyrinuria from liver disease or other systemic illness"
     ],
-    [
-     "Primary Differentials",
-     "Acute intermittent porphyria and variegate porphyria, Lead poisoning with raised precursors, Surgical acute abdomen during an",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Faecal porphyrin analysis showing predominant coproporphyrin III",
+      "Urinary ALA, PBG and coproporphyrin during symptomatic episodes",
+      "Plasma fluorescence scanning to help distinguish from variegate porphyria",
+      "Molecular genetic testing of the CPOX gene for confirmation and family screening",
+      "Serum sodium and renal function during attacks",
+      "Nerve conduction studies where motor neuropathy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Treat acute neurovisceral attacks with intravenous human haemin together with carbohydrate and glucose loading to suppress",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive motor weakness or respiratory failure during an attack",
+      "Seizures with hyponatraemia",
+      "Neonatal haemolytic anaemia suggesting the harderoporphyria variant",
+      "Administration of a porphyrinogenic drug in a symptomatic patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish it biochemically from variegate porphyria, which alters counselling",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally good with trigger avoidance and prompt treatment of attacks; cutaneous involvement is usually mild, though severe neurovisceral attacks carry risks comparable to other acute porphyrias.",
+    "pitfalls": [
+      "Failing to distinguish it biochemically from variegate porphyria, which alters counselling",
+      "Prescribing porphyrinogenic drugs that trigger attacks",
+      "Attributing isolated coproporphyrinuria to porphyria when it is secondary to liver disease or other illness",
+      "Missing the rare severe neonatal harderoporphyria presentation",
+      "Overlooking the diagnosis between attacks when biochemistry can normalise"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acute neurovisceral attacks with intravenous human haemin together with carbohydrate and glucose loading to suppress hepatic ALA synthase",
+      "Immediately withdraw porphyrinogenic drugs and correct precipitants such as fasting, infection and hormonal triggers",
+      "Supportive care during attacks: safe analgesia, antiemetics, correction of hyponatraemia and fluid balance, and treatment of seizures with porphyria-safe anticonvulsants",
+      "Manage cutaneous photosensitivity with visible-light photoprotection and gentle care of fragile, blistering skin",
+      "For recurrent attacks, consider the ALA synthase-directed RNA-interference agent givosiran or prophylactic haemin, with hormonal manipulation for menstrually related attacks",
+      "Monitor serum sodium, renal function and neurological status through each attack",
+      "Genetic counselling, CPOX testing and family screening, providing a safe-drug list and alert documentation"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary coproporphyria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-coproporphyria-real-image",
-   "title": "Hereditary coproporphyria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hereditary_coproporphyria-pathway",
+      "title": "Hereditary coproporphyria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant deficiency of coproporphyrinogen oxidase, the sixth enzyme of haem biosynthesis, one of the three hepatic acute porphyrias",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive motor weakness or respiratory failure during an attack",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Faecal porphyrin analysis showing predominant coproporphyrin III, Urinary ALA, PBG and coproporphyrin during symptomatic episodes, Plasma fluorescence scanning to help distinguish from variegate porphyria"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acute neurovisceral attacks with intravenous human haemin together with carbohydrate and glucose loading to suppress hepatic ALA synthase"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish it biochemically from variegate porphyria, which alters counselling"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary coproporphyria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_coproporphyria-matrix",
+      "title": "Hereditary coproporphyria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant deficiency of coproporphyrinogen oxidase, the sixth enzyme of haem biosynthesis, one of the three hepatic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Faecal porphyrin analysis showing predominant coproporphyrin III, Urinary ALA, PBG and coproporphyrin during symptomatic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute intermittent porphyria and variegate porphyria, Lead poisoning with raised precursors, Surgical acute abdomen during an",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acute neurovisceral attacks with intravenous human haemin together with carbohydrate and glucose loading to suppress",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish it biochemically from variegate porphyria, which alters counselling",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary coproporphyria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_coproporphyria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Faecal porphyrin analysis",
+          "cells": [
+            {
+              "text": "Predominant coproporphyrin III"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary ALA, PBG and coproporphyrin during attacks",
+          "cells": [
+            {
+              "text": "Attack markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma fluorescence scanning",
+          "cells": [
+            {
+              "text": "Helps distinguish from variegate porphyria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CPOX molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirmation and family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium and renal function during attacks",
+          "cells": [
+            {
+              "text": "Hyponatraemia and renal status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Used where motor neuropathy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_coproporphyria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute intermittent porphyria and variegate porphyria",
+          "cells": [
+            {
+              "text": "Plasma fluorescence scanning helps separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria cutanea tarda",
+          "cells": [
+            {
+              "text": "Skin blistering predominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lead poisoning with raised precursors",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_coproporphyria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous haemin for acute attacks",
+          "cells": [
+            {
+              "text": "Human haemin with carbohydrate loading, for acute neurovisceral attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw porphyrinogenic drugs",
+          "cells": [
+            {
+              "text": "Correct precipitants such as fasting and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Safe analgesia, antiemetics, and correction of hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous photoprotection",
+          "cells": [
+            {
+              "text": "Visible-light protection and gentle care of fragile skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Givosiran",
+          "cells": [
+            {
+              "text": "ALA synthase-directed RNA interference agent for recurrent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serum sodium, renal function and neurological status through each attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "CPOX testing, family screening and a safe-drug list"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_coproporphyria-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary coproporphyria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute neurovisceral attack with abdominal pain, weakness or hyponatraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive motor weakness, respiratory failure, seizures or neonatal haemolysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent intravenous haemin and respiratory support for progressive weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Faecal porphyrins (coproporphyrin III); urinary ALA and PBG; CPOX gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is raised coproporphyrin III confirmed, with a CPOX variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acute intermittent or variegate porphyria, lead poisoning or Guillain-Barre",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous human haemin with carbohydrate loading for acute attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw porphyrinogenic drugs and correct fasting or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care: safe analgesia, antiemetics and sodium correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Givosiran for recurrent attacks, an ALA synthase-directed agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks treated early; recurrent attacks reduced; family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

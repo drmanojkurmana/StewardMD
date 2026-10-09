@@ -1,173 +1,377 @@
 {
- "id": "rotator_cuff_tear",
- "name": "Rotator cuff tear",
- "aliases": [
-  "rotator cuff rupture",
-  "supraspinatus tear",
-  "cuff tear",
-  "rotator cuff injury"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with shoulder pain, weakness on elevation and abduction, and difficulty with overhead activities; supraspinatus is the most commonly torn tendon",
-   "Tears may be degenerative (attritional, in older patients) or traumatic (e.g. after a fall or dislocation, especially in those over 40)",
-   "A painful mid-range arc of abduction and positive cuff tests (e.g. weakness of resisted abduction or external rotation, drop-arm sign) support the diagnosis",
-   "Ultrasound and MRI are the key investigations, distinguishing partial from full-thickness tears and assessing tendon retraction and muscle atrophy",
-   "Many degenerative partial or small full-thickness tears are managed conservatively with physiotherapy, activity modification, and analgesia",
-   "Acute traumatic tears in younger, active patients and large tears with functional loss are generally considered for surgical repair, ideally before significant retraction and fatty muscle degeneration",
-   "Chronic massive, irreparable tears may lead to cuff-tear arthropathy, sometimes treated with reverse shoulder arthroplasty",
-   "New weakness after shoulder dislocation in an older patient should prompt assessment for an acute cuff tear, not just presumed axillary nerve injury"
+  "id": "rotator_cuff_tear",
+  "name": "Rotator cuff tear",
+  "aliases": [
+    "rotator cuff rupture",
+    "supraspinatus tear",
+    "cuff tear",
+    "rotator cuff injury"
   ],
-  "pathophysiology": "The rotator cuff (supraspinatus, infraspinatus, teres minor, and subscapularis) stabilises the humeral head in the glenoid and enables elevation and rotation. Tendon integrity is compromised by age-related degeneration, hypovascularity near the supraspinatus insertion, and mechanical impingement beneath the coracoacromial arch, making tears increasingly common with age. Repetitive overhead loading and acute trauma superimpose on this degeneration. Once a tear occurs, the tendon tends to retract and the corresponding muscle undergoes atrophy and fatty infiltration over time, reducing repairability and allowing superior migration of the humeral head, which can eventually produce cuff-tear arthropathy.",
-  "additionalDifferentials": [
-   "Subacromial impingement or bursitis without tear",
-   "Frozen shoulder (adhesive capsulitis)",
-   "Calcific tendinitis",
-   "Glenohumeral or acromioclavicular osteoarthritis",
-   "Cervical radiculopathy",
-   "Axillary or suprascapular nerve injury",
-   "Biceps tendon pathology"
-  ],
-  "additionalInvestigations": [
-   "Ultrasound of the shoulder to assess cuff integrity dynamically",
-   "MRI to characterise tear size, retraction, and muscle quality (fatty atrophy)",
-   "Plain radiographs to assess acromial morphology, humeral head position, and arthropathy",
-   "Clinical cuff-specific strength tests (e.g. empty-can, external rotation, lift-off, drop-arm)",
-   "MR arthrography where partial or labral lesions are suspected"
-  ],
-  "redFlags": [
-   "Acute loss of active shoulder movement after trauma or dislocation suggesting an acute repairable tear",
-   "Weakness that could reflect nerve injury (axillary or suprascapular) requiring differentiation from cuff rupture",
-   "Signs of infection in a hot, swollen, systemically unwell shoulder",
-   "Progressive functional loss and pseudoparalysis indicating a large or massive tear"
-  ],
-  "prognosis": "Many small and degenerative tears remain functionally acceptable with rehabilitation, but larger or acute traumatic tears repaired promptly generally do better than chronic retracted tears with fatty muscle degeneration; untreated massive tears can progress to cuff-tear arthropathy with persistent weakness and pain.",
-  "pitfalls": [
-   "Assuming all post-dislocation weakness in older patients is axillary nerve palsy and missing an acute cuff tear",
-   "Delaying repair of an acute traumatic tear until retraction and fatty atrophy make it irreparable",
-   "Relying on radiographs alone, which do not show the tendon",
-   "Confusing frozen shoulder with a cuff tear by not distinguishing passive from active range restriction"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Structured physiotherapy with rotator cuff and scapular strengthening for small or degenerative tears",
-   "Activity modification and analgesia with NSAIDs, considering a subacromial corticosteroid injection for pain relief",
-   "Early surgical repair for acute traumatic tears and large symptomatic tears in active patients, before tendon retraction and fatty muscle degeneration develop",
-   "Tendon transfer or superior capsular reconstruction for irreparable tears, and reverse total shoulder arthroplasty for established cuff-tear arthropathy",
-   "Postoperative rehabilitation to restore range of movement and strength",
-   "Orthopaedic referral guided by tear size, retraction, muscle quality and the patient's functional demand"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rotator_cuff_tear-pathway",
-   "title": "Rotator cuff tear: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with shoulder pain, weakness on elevation and abduction, and difficulty with overhead activities; supraspinatus is the most commonly torn tendon",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute loss of active shoulder movement after trauma or dislocation suggesting an acute repairable tear",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ultrasound of the shoulder to assess cuff integrity dynamically, MRI to characterise tear size, retraction, and muscle quality (fatty atrophy), Plain radiographs to assess acromial morphology, humeral head position, and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Structured physiotherapy with rotator cuff and scapular strengthening for small or degenerative tears"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all post-dislocation weakness in older patients is axillary nerve palsy and missing an acute cuff tear"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rotator cuff tear."
-  }
- ],
- "tables": [
-  {
-   "id": "rotator_cuff_tear-matrix",
-   "title": "Rotator cuff tear: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with shoulder pain, weakness on elevation and abduction, and difficulty with overhead activities; supraspinatus is the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with shoulder pain, weakness on elevation and abduction, and difficulty with overhead activities; supraspinatus is the most commonly torn tendon",
+      "Tears may be degenerative (attritional, in older patients) or traumatic (e.g. after a fall or dislocation, especially in those over 40)",
+      "A painful mid-range arc of abduction and positive cuff tests (e.g. weakness of resisted abduction or external rotation, drop-arm sign) support the diagnosis",
+      "Ultrasound and MRI are the key investigations, distinguishing partial from full-thickness tears and assessing tendon retraction and muscle atrophy",
+      "Many degenerative partial or small full-thickness tears are managed conservatively with physiotherapy, activity modification, and analgesia",
+      "Acute traumatic tears in younger, active patients and large tears with functional loss are generally considered for surgical repair, ideally before significant retraction and fatty muscle degeneration",
+      "Chronic massive, irreparable tears may lead to cuff-tear arthropathy, sometimes treated with reverse shoulder arthroplasty",
+      "New weakness after shoulder dislocation in an older patient should prompt assessment for an acute cuff tear, not just presumed axillary nerve injury"
     ],
-    [
-     "Key Investigations",
-     "Ultrasound of the shoulder to assess cuff integrity dynamically, MRI to characterise tear size, retraction, and muscle quality",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The rotator cuff (supraspinatus, infraspinatus, teres minor, and subscapularis) stabilises the humeral head in the glenoid and enables elevation and rotation. Tendon integrity is compromised by age-related degeneration, hypovascularity near the supraspinatus insertion, and mechanical impingement beneath the coracoacromial arch, making tears increasingly common with age. Repetitive overhead loading and acute trauma superimpose on this degeneration. Once a tear occurs, the tendon tends to retract and the corresponding muscle undergoes atrophy and fatty infiltration over time, reducing repairability and allowing superior migration of the humeral head, which can eventually produce cuff-tear arthropathy.",
+    "additionalDifferentials": [
+      "Subacromial impingement or bursitis without tear",
+      "Frozen shoulder (adhesive capsulitis)",
+      "Calcific tendinitis",
+      "Glenohumeral or acromioclavicular osteoarthritis",
+      "Cervical radiculopathy",
+      "Axillary or suprascapular nerve injury",
+      "Biceps tendon pathology"
     ],
-    [
-     "Primary Differentials",
-     "Subacromial impingement or bursitis without tear, Frozen shoulder (adhesive capsulitis), Calcific tendinitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ultrasound of the shoulder to assess cuff integrity dynamically",
+      "MRI to characterise tear size, retraction, and muscle quality (fatty atrophy)",
+      "Plain radiographs to assess acromial morphology, humeral head position, and arthropathy",
+      "Clinical cuff-specific strength tests (e.g. empty-can, external rotation, lift-off, drop-arm)",
+      "MR arthrography where partial or labral lesions are suspected"
     ],
-    [
-     "Management Strategy",
-     "Structured physiotherapy with rotator cuff and scapular strengthening for small or degenerative tears",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute loss of active shoulder movement after trauma or dislocation suggesting an acute repairable tear",
+      "Weakness that could reflect nerve injury (axillary or suprascapular) requiring differentiation from cuff rupture",
+      "Signs of infection in a hot, swollen, systemically unwell shoulder",
+      "Progressive functional loss and pseudoparalysis indicating a large or massive tear"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all post-dislocation weakness in older patients is axillary nerve palsy and missing an acute cuff tear",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many small and degenerative tears remain functionally acceptable with rehabilitation, but larger or acute traumatic tears repaired promptly generally do better than chronic retracted tears with fatty muscle degeneration; untreated massive tears can progress to cuff-tear arthropathy with persistent weakness and pain.",
+    "pitfalls": [
+      "Assuming all post-dislocation weakness in older patients is axillary nerve palsy and missing an acute cuff tear",
+      "Delaying repair of an acute traumatic tear until retraction and fatty atrophy make it irreparable",
+      "Relying on radiographs alone, which do not show the tendon",
+      "Confusing frozen shoulder with a cuff tear by not distinguishing passive from active range restriction"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Structured physiotherapy with rotator cuff and scapular strengthening for small or degenerative tears",
+      "Activity modification and analgesia with NSAIDs, considering a subacromial corticosteroid injection for pain relief",
+      "Early surgical repair for acute traumatic tears and large symptomatic tears in active patients, before tendon retraction and fatty muscle degeneration develop",
+      "Tendon transfer or superior capsular reconstruction for irreparable tears, and reverse total shoulder arthroplasty for established cuff-tear arthropathy",
+      "Postoperative rehabilitation to restore range of movement and strength",
+      "Orthopaedic referral guided by tear size, retraction, muscle quality and the patient's functional demand"
     ]
-   ],
-   "caption": "Overview comparison matrix for rotator cuff tear."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rotator-cuff-tear-real-image",
-   "title": "Rotator cuff tear: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "rotator_cuff_tear-pathway",
+      "title": "Rotator cuff tear: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with shoulder pain, weakness on elevation and abduction, and difficulty with overhead activities; supraspinatus is the most commonly torn tendon",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute loss of active shoulder movement after trauma or dislocation suggesting an acute repairable tear",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ultrasound of the shoulder to assess cuff integrity dynamically, MRI to characterise tear size, retraction, and muscle quality (fatty atrophy), Plain radiographs to assess acromial morphology, humeral head position, and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Structured physiotherapy with rotator cuff and scapular strengthening for small or degenerative tears"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all post-dislocation weakness in older patients is axillary nerve palsy and missing an acute cuff tear"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rotator cuff tear."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rotator_cuff_tear-matrix",
+      "title": "Rotator cuff tear: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with shoulder pain, weakness on elevation and abduction, and difficulty with overhead activities; supraspinatus is the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ultrasound of the shoulder to assess cuff integrity dynamically, MRI to characterise tear size, retraction, and muscle quality",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Subacromial impingement or bursitis without tear, Frozen shoulder (adhesive capsulitis), Calcific tendinitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Structured physiotherapy with rotator cuff and scapular strengthening for small or degenerative tears",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all post-dislocation weakness in older patients is axillary nerve palsy and missing an acute cuff tear",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rotator cuff tear."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rotator_cuff_tear-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound of the shoulder",
+          "cells": [
+            {
+              "text": "Cuff integrity assessed dynamically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Tear size, retraction and muscle quality (fatty atrophy)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Acromial morphology, humeral head position and arthropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rotator_cuff_tear-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured physiotherapy",
+          "cells": [
+            {
+              "text": "Cuff and scapular strengthening for small or degenerative tears"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and NSAIDs",
+          "cells": [
+            {
+              "text": "Activity modification; consider subacromial corticosteroid injection for pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early surgical repair",
+          "cells": [
+            {
+              "text": "Acute traumatic and large symptomatic tears, before retraction and fatty degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tendon transfer or superior capsular reconstruction",
+          "cells": [
+            {
+              "text": "Irreparable tears; reverse total shoulder arthroplasty is an option"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rotator_cuff_tear-dx-mgmt",
+      "title": "Diagnosis and management of Rotator cuff tear",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Shoulder pain and weakness with suspected rotator cuff tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute loss of active movement after trauma, signs of infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent assessment for acute repairable tear or septic joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound and MRI of the cuff, radiographs of the acromion and humeral head",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a full or partial cuff tear confirmed on ultrasound or MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider subacromial impingement, frozen shoulder or cervical radiculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy with cuff and scapular strengthening for small tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, NSAIDs and possible subacromial corticosteroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early surgical repair for acute or large symptomatic tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tendon transfer, capsular reconstruction or reverse arthroplasty if irreparable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery favoured before retraction and fatty muscle degeneration develop",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

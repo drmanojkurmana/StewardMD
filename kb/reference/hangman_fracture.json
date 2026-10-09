@@ -1,172 +1,410 @@
 {
- "id": "hangman_fracture",
- "name": "Hangman fracture (C2 traumatic spondylolisthesis)",
- "aliases": [
-  "traumatic spondylolisthesis of the axis",
-  "bilateral C2 pars interarticularis fracture",
-  "axis pedicle fracture"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Trauma",
- "specialty": "Orthopaedic Trauma",
- "referenceOnly": true,
- "reference": {
-  "source": "Rockwood and Green's Fractures in Adults",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A bilateral fracture through the pars interarticularis or pedicles of the axis (C2), producing a traumatic spondylolisthesis of C2 on C3",
-   "The modern mechanism is usually hyperextension with axial loading (road traffic collisions, diving), differing from the hyperextension-distraction of judicial hanging",
-   "The Levine-Edwards classification grades the injury by translation, angulation and the presence of facet dislocation, which guides treatment",
-   "The relatively capacious spinal canal at this level means neurological injury is often absent despite the fracture",
-   "Stable, minimally displaced injuries are treated in a rigid collar or orthosis, while displaced or unstable patterns require reduction, halo immobilisation or surgical fixation",
-   "Assess for an associated vertebral artery injury and for other cervical fractures",
-   "Anterior translation of C2 with disc and ligament disruption at C2-3 indicates a more unstable injury"
+  "id": "hangman_fracture",
+  "name": "Hangman fracture (C2 traumatic spondylolisthesis)",
+  "aliases": [
+    "traumatic spondylolisthesis of the axis",
+    "bilateral C2 pars interarticularis fracture",
+    "axis pedicle fracture"
   ],
-  "pathophysiology": "Hyperextension combined with axial compression fractures the pars interarticularis of the axis bilaterally, separating the vertebral body and pedicles from the posterior arch. In more severe injuries a superimposed flexion-distraction force disrupts the C2-3 intervertebral disc and its ligaments, allowing anterior translation and angulation of C2 on C3. Because the canal is wide at this level and the fracture effectively decompresses the neural elements, the spinal cord is often spared, but the adjacent vertebral artery may be injured as it courses through the transverse foramina.",
-  "additionalDifferentials": [
-   "Odontoid (dens) fracture",
-   "Jefferson (C1 burst) fracture",
-   "Fracture of the C2 body",
-   "Atlantoaxial rotatory subluxation",
-   "Cervical facet dislocation",
-   "Congenital os odontoideum"
-  ],
-  "additionalInvestigations": [
-   "Lateral and anteroposterior cervical radiographs demonstrating C2 translation and angulation",
-   "CT of the cervical spine to define the fracture pattern and support classification",
-   "MRI to evaluate disco-ligamentous injury and the spinal cord",
-   "CT or MR angiography to assess for vertebral artery injury",
-   "Imaging of the whole spine for associated injuries"
-  ],
-  "redFlags": [
-   "Vertebral artery injury",
-   "Significant translation or angulation indicating an unstable pattern",
-   "Associated cervical fractures or spinal cord injury",
-   "Facet dislocation accompanying the fracture"
-  ],
-  "prognosis": "Neurological outcome is often favourable owing to the wide canal; most minimally displaced injuries heal with immobilisation, while unstable patterns need reduction or fixation to achieve union.",
-  "pitfalls": [
-   "Assuming the absence of a neurological deficit means the injury is stable",
-   "Missing an associated vertebral artery or other cervical injury",
-   "Inadequate classification leading to inappropriate treatment",
-   "Overlooking disco-ligamentous disruption at C2-3"
-  ],
-  "references": [
-   "Rockwood and Green's Fractures in Adults",
-   "The Spine (Rothman-Simeone)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immobilise stable, minimally displaced injuries in a rigid cervical collar or orthosis until union",
-   "Closed reduction followed by halo-vest immobilisation for displaced or angulated patterns",
-   "Surgical stabilisation (anterior C2-3 fusion or posterior fixation) for unstable injuries with disco-ligamentous disruption or facet dislocation",
-   "Assess for and manage associated vertebral artery injury, considering antithrombotic therapy where indicated",
-   "Screen the whole spine and cervical column for concomitant fractures and maintain spinal precautions until cleared",
-   "Use the Levine-Edwards classification to guide treatment with early spinal surgery input",
-   "Follow up with serial imaging to confirm bony union and escalate to fixation for non-union or progressive displacement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hangman_fracture-pathway",
-   "title": "Hangman fracture (C2 traumatic spondylolisthesis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A bilateral fracture through the pars interarticularis or pedicles of the axis (C2), producing a traumatic spondylolisthesis of C2 on C3",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Vertebral artery injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lateral and anteroposterior cervical radiographs demonstrating C2 translation and angulation, CT of the cervical spine to define the fracture pattern and support classification, MRI to evaluate disco-ligamentous injury and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immobilise stable, minimally displaced injuries in a rigid cervical collar or orthosis until union"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming the absence of a neurological deficit means the injury is stable"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hangman fracture (c2 traumatic spondylolisthesis)."
-  }
- ],
- "tables": [
-  {
-   "id": "hangman_fracture-matrix",
-   "title": "Hangman fracture (C2 traumatic spondylolisthesis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A bilateral fracture through the pars interarticularis or pedicles of the axis (C2), producing a traumatic spondylolisthesis of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Trauma",
+  "specialty": "Orthopaedic Trauma",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rockwood and Green's Fractures in Adults",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A bilateral fracture through the pars interarticularis or pedicles of the axis (C2), producing a traumatic spondylolisthesis of C2 on C3",
+      "The modern mechanism is usually hyperextension with axial loading (road traffic collisions, diving), differing from the hyperextension-distraction of judicial hanging",
+      "The Levine-Edwards classification grades the injury by translation, angulation and the presence of facet dislocation, which guides treatment",
+      "The relatively capacious spinal canal at this level means neurological injury is often absent despite the fracture",
+      "Stable, minimally displaced injuries are treated in a rigid collar or orthosis, while displaced or unstable patterns require reduction, halo immobilisation or surgical fixation",
+      "Assess for an associated vertebral artery injury and for other cervical fractures",
+      "Anterior translation of C2 with disc and ligament disruption at C2-3 indicates a more unstable injury"
     ],
-    [
-     "Key Investigations",
-     "Lateral and anteroposterior cervical radiographs demonstrating C2 translation and angulation, CT of the cervical spine to define",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hyperextension combined with axial compression fractures the pars interarticularis of the axis bilaterally, separating the vertebral body and pedicles from the posterior arch. In more severe injuries a superimposed flexion-distraction force disrupts the C2-3 intervertebral disc and its ligaments, allowing anterior translation and angulation of C2 on C3. Because the canal is wide at this level and the fracture effectively decompresses the neural elements, the spinal cord is often spared, but the adjacent vertebral artery may be injured as it courses through the transverse foramina.",
+    "additionalDifferentials": [
+      "Odontoid (dens) fracture",
+      "Jefferson (C1 burst) fracture",
+      "Fracture of the C2 body",
+      "Atlantoaxial rotatory subluxation",
+      "Cervical facet dislocation",
+      "Congenital os odontoideum"
     ],
-    [
-     "Primary Differentials",
-     "Odontoid (dens) fracture, Jefferson (C1 burst) fracture, Fracture of the C2 body",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lateral and anteroposterior cervical radiographs demonstrating C2 translation and angulation",
+      "CT of the cervical spine to define the fracture pattern and support classification",
+      "MRI to evaluate disco-ligamentous injury and the spinal cord",
+      "CT or MR angiography to assess for vertebral artery injury",
+      "Imaging of the whole spine for associated injuries"
     ],
-    [
-     "Management Strategy",
-     "Immobilise stable, minimally displaced injuries in a rigid cervical collar or orthosis until union",
-     "Core treatment modality"
+    "redFlags": [
+      "Vertebral artery injury",
+      "Significant translation or angulation indicating an unstable pattern",
+      "Associated cervical fractures or spinal cord injury",
+      "Facet dislocation accompanying the fracture"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming the absence of a neurological deficit means the injury is stable",
-     "Prevent diagnostic or management error"
+    "prognosis": "Neurological outcome is often favourable owing to the wide canal; most minimally displaced injuries heal with immobilisation, while unstable patterns need reduction or fixation to achieve union.",
+    "pitfalls": [
+      "Assuming the absence of a neurological deficit means the injury is stable",
+      "Missing an associated vertebral artery or other cervical injury",
+      "Inadequate classification leading to inappropriate treatment",
+      "Overlooking disco-ligamentous disruption at C2-3"
+    ],
+    "references": [
+      "Rockwood and Green's Fractures in Adults",
+      "The Spine (Rothman-Simeone)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immobilise stable, minimally displaced injuries in a rigid cervical collar or orthosis until union",
+      "Closed reduction followed by halo-vest immobilisation for displaced or angulated patterns",
+      "Surgical stabilisation (anterior C2-3 fusion or posterior fixation) for unstable injuries with disco-ligamentous disruption or facet dislocation",
+      "Assess for and manage associated vertebral artery injury, considering antithrombotic therapy where indicated",
+      "Screen the whole spine and cervical column for concomitant fractures and maintain spinal precautions until cleared",
+      "Use the Levine-Edwards classification to guide treatment with early spinal surgery input",
+      "Follow up with serial imaging to confirm bony union and escalate to fixation for non-union or progressive displacement"
     ]
-   ],
-   "caption": "Overview comparison matrix for hangman fracture (c2 traumatic spondylolisthesis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hangman-fracture-real-image",
-   "title": "Hangman fracture (C2 traumatic spondylolisthesis): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "hangman_fracture-pathway",
+      "title": "Hangman fracture (C2 traumatic spondylolisthesis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A bilateral fracture through the pars interarticularis or pedicles of the axis (C2), producing a traumatic spondylolisthesis of C2 on C3",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Vertebral artery injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lateral and anteroposterior cervical radiographs demonstrating C2 translation and angulation, CT of the cervical spine to define the fracture pattern and support classification, MRI to evaluate disco-ligamentous injury and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immobilise stable, minimally displaced injuries in a rigid cervical collar or orthosis until union"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming the absence of a neurological deficit means the injury is stable"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hangman fracture (c2 traumatic spondylolisthesis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hangman_fracture-matrix",
+      "title": "Hangman fracture (C2 traumatic spondylolisthesis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A bilateral fracture through the pars interarticularis or pedicles of the axis (C2), producing a traumatic spondylolisthesis of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lateral and anteroposterior cervical radiographs demonstrating C2 translation and angulation, CT of the cervical spine to define",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Odontoid (dens) fracture, Jefferson (C1 burst) fracture, Fracture of the C2 body",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immobilise stable, minimally displaced injuries in a rigid cervical collar or orthosis until union",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming the absence of a neurological deficit means the injury is stable",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hangman fracture (c2 traumatic spondylolisthesis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Green's Fractures in Adults",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hangman_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lateral and anteroposterior cervical radiographs",
+          "cells": [
+            {
+              "text": "C2 translation and angulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the cervical spine",
+          "cells": [
+            {
+              "text": "Defines the fracture pattern and supports classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Disco-ligamentous injury and the spinal cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Vertebral artery injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the whole spine",
+          "cells": [
+            {
+              "text": "Associated injuries"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hangman_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rigid collar or orthosis",
+          "cells": [
+            {
+              "text": "Stable, minimally displaced injuries, until union"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closed reduction and halo-vest",
+          "cells": [
+            {
+              "text": "Displaced or angulated patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical stabilisation",
+          "cells": [
+            {
+              "text": "Unstable injuries, with anterior C2-3 fusion or posterior fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertebral artery injury",
+          "cells": [
+            {
+              "text": "Assess and manage; consider antithrombotic therapy where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-spine screening",
+          "cells": [
+            {
+              "text": "Concomitant fractures; spinal precautions until cleared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levine-Edwards classification",
+          "cells": [
+            {
+              "text": "Guides treatment, with early spinal surgery input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Confirms union; fixation for non-union or progressive displacement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hangman_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Hangman fracture (C2 traumatic spondylolisthesis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neck pain after trauma with a C2 fracture on cervical radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (vertebral artery injury, unstable translation, facet dislocation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: manage vertebral artery injury and obtain urgent spinal surgery input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT cervical spine; MRI for disco-ligamentous injury; CT or MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the injury stable, with minimal translation or angulation (Levine-Edwards)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Displaced or unstable: closed reduction with halo-vest, or surgical stabilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rigid collar or orthosis for stable, minimally displaced injuries",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Whole-spine screening and spinal precautions until cleared",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial imaging to confirm union; fixation for non-union",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Bony union; fixation if unstable or non-union",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

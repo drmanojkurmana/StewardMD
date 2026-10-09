@@ -1,175 +1,462 @@
 {
- "id": "eosinophilic_pneumonia",
- "name": "Eosinophilic pneumonia",
- "aliases": [
-  "acute eosinophilic pneumonia",
-  "AEP",
-  "chronic eosinophilic pneumonia",
-  "CEP",
-  "pulmonary eosinophilia"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Pulmonology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ATS-ERS",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by accumulation of eosinophils in the lung, diagnosed by peripheral eosinophilia, elevated eosinophils on bronchoalveolar lavage, or eosinophilic infiltration on biopsy",
-   "Acute eosinophilic pneumonia presents over days with fever, breathlessness, and hypoxaemia that can mimic acute respiratory distress syndrome, and is strongly linked to recent onset of cigarette smoking or new inhalational exposures",
-   "Notably, the peripheral blood eosinophil count is often normal early in acute disease, so lavage is key to diagnosis",
-   "Chronic eosinophilic pneumonia develops over weeks to months with cough, breathlessness, weight loss, and prominent blood eosinophilia, frequently in patients with asthma",
-   "Chronic disease classically shows peripheral (photographic-negative of pulmonary oedema) upper-zone consolidation on imaging",
-   "Always exclude secondary causes such as parasitic infection, drug reactions, allergic bronchopulmonary aspergillosis, and eosinophilic granulomatosis with polyangiitis before labelling disease idiopathic",
-   "Both forms respond briskly to systemic corticosteroids, often with dramatic clinical and radiographic improvement",
-   "Chronic eosinophilic pneumonia tends to relapse when steroids are tapered, sometimes requiring prolonged treatment"
+  "id": "eosinophilic_pneumonia",
+  "name": "Eosinophilic pneumonia",
+  "aliases": [
+    "acute eosinophilic pneumonia",
+    "AEP",
+    "chronic eosinophilic pneumonia",
+    "CEP",
+    "pulmonary eosinophilia"
   ],
-  "pathophysiology": "Eosinophilic pneumonias are defined by recruitment and activation of eosinophils within the lung, driven by Th2 cytokines such as IL-5 that promote eosinophil production, survival, and tissue infiltration. Degranulation releases cytotoxic granule proteins that injure the alveolar-capillary unit, producing alveolar and interstitial inflammation with oedema. In acute disease a new antigenic or toxic inhalational stimulus (often newly started smoking) appears to trigger an intense hypersensitivity response, whereas chronic disease reflects sustained eosinophilic inflammation, commonly in an atopic or asthmatic host. Secondary forms arise from parasites, drugs, fungi, or systemic vasculitis.",
-  "additionalDifferentials": [
-   "Community-acquired pneumonia and acute respiratory distress syndrome",
-   "Cryptogenic organizing pneumonia",
-   "Allergic bronchopulmonary aspergillosis",
-   "Eosinophilic granulomatosis with polyangiitis (Churg-Strauss)",
-   "Parasitic (e.g. Loffler) and drug-induced pulmonary eosinophilia",
-   "Hypereosinophilic syndrome"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with differential for peripheral eosinophilia",
-   "Bronchoalveolar lavage to demonstrate a raised eosinophil proportion",
-   "High-resolution CT of the chest",
-   "Drug, travel, and exposure history plus stool and serology for parasites",
-   "Serum IgE and aspergillus testing, and ANCA to assess for vasculitis",
-   "Lung biopsy in atypical or diagnostically uncertain cases"
-  ],
-  "redFlags": [
-   "Acute eosinophilic pneumonia progressing to severe hypoxaemic respiratory failure requiring ventilatory support",
-   "Systemic features (mononeuritis, cardiac or renal involvement) suggesting eosinophilic granulomatosis with polyangiitis",
-   "Very high eosinophil counts with end-organ damage indicating hypereosinophilic syndrome",
-   "Rapid clinical deterioration despite treatment"
-  ],
-  "prognosis": "Acute eosinophilic pneumonia generally resolves completely with corticosteroids and, once the trigger is avoided, seldom recurs; chronic eosinophilic pneumonia also responds well but frequently relapses during steroid withdrawal and may need prolonged therapy.",
-  "pitfalls": [
-   "Excluding acute eosinophilic pneumonia because the blood eosinophil count is normal",
-   "Missing a drug, parasitic, or fungal cause by not taking a thorough exposure history",
-   "Overlooking evolving systemic vasculitis in apparent isolated lung eosinophilia",
-   "Tapering steroids too quickly in chronic disease and precipitating relapse"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ATS/ERS guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Systemic corticosteroids as the mainstay, with a rapid clinical response typical in both acute and chronic forms",
-   "Identify and remove triggers, especially recently started cigarette smoking and new inhalational exposures in acute disease",
-   "Supportive care with supplemental oxygen and ventilatory support for hypoxaemic acute disease mimicking acute respiratory distress syndrome",
-   "Exclude and treat secondary causes such as parasites, drugs, allergic bronchopulmonary aspergillosis and eosinophilic granulomatosis with polyangiitis before labelling disease idiopathic, with empirical Strongyloides cover where parasitic infection is possible",
-   "Prolonged, slowly tapered corticosteroids for chronic disease, which frequently relapses during withdrawal",
-   "Respiratory referral with follow-up using serial imaging and eosinophil counts"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eosinophilic_pneumonia-pathway",
-   "title": "Eosinophilic pneumonia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by accumulation of eosinophils in the lung, diagnosed by peripheral eosinophilia, elevated eosinophils on bronchoalveolar lavage, or eosinophilic infiltration on biopsy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute eosinophilic pneumonia progressing to severe hypoxaemic respiratory failure requiring ventilatory support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with differential for peripheral eosinophilia, Bronchoalveolar lavage to demonstrate a raised eosinophil proportion, High-resolution CT of the chest"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Systemic corticosteroids as the mainstay, with a rapid clinical response typical in both acute and chronic forms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding acute eosinophilic pneumonia because the blood eosinophil count is normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eosinophilic pneumonia."
-  }
- ],
- "tables": [
-  {
-   "id": "eosinophilic_pneumonia-matrix",
-   "title": "Eosinophilic pneumonia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by accumulation of eosinophils in the lung, diagnosed by peripheral eosinophilia, elevated eosinophils on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Pulmonology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ATS-ERS",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by accumulation of eosinophils in the lung, diagnosed by peripheral eosinophilia, elevated eosinophils on bronchoalveolar lavage, or eosinophilic infiltration on biopsy",
+      "Acute eosinophilic pneumonia presents over days with fever, breathlessness, and hypoxaemia that can mimic acute respiratory distress syndrome, and is strongly linked to recent onset of cigarette smoking or new inhalational exposures",
+      "Notably, the peripheral blood eosinophil count is often normal early in acute disease, so lavage is key to diagnosis",
+      "Chronic eosinophilic pneumonia develops over weeks to months with cough, breathlessness, weight loss, and prominent blood eosinophilia, frequently in patients with asthma",
+      "Chronic disease classically shows peripheral (photographic-negative of pulmonary oedema) upper-zone consolidation on imaging",
+      "Always exclude secondary causes such as parasitic infection, drug reactions, allergic bronchopulmonary aspergillosis, and eosinophilic granulomatosis with polyangiitis before labelling disease idiopathic",
+      "Both forms respond briskly to systemic corticosteroids, often with dramatic clinical and radiographic improvement",
+      "Chronic eosinophilic pneumonia tends to relapse when steroids are tapered, sometimes requiring prolonged treatment"
     ],
-    [
-     "Key Investigations",
-     "Full blood count with differential for peripheral eosinophilia, Bronchoalveolar lavage to demonstrate a raised eosinophil",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Eosinophilic pneumonias are defined by recruitment and activation of eosinophils within the lung, driven by Th2 cytokines such as IL-5 that promote eosinophil production, survival, and tissue infiltration. Degranulation releases cytotoxic granule proteins that injure the alveolar-capillary unit, producing alveolar and interstitial inflammation with oedema. In acute disease a new antigenic or toxic inhalational stimulus (often newly started smoking) appears to trigger an intense hypersensitivity response, whereas chronic disease reflects sustained eosinophilic inflammation, commonly in an atopic or asthmatic host. Secondary forms arise from parasites, drugs, fungi, or systemic vasculitis.",
+    "additionalDifferentials": [
+      "Community-acquired pneumonia and acute respiratory distress syndrome",
+      "Cryptogenic organizing pneumonia",
+      "Allergic bronchopulmonary aspergillosis",
+      "Eosinophilic granulomatosis with polyangiitis (Churg-Strauss)",
+      "Parasitic (e.g. Loffler) and drug-induced pulmonary eosinophilia",
+      "Hypereosinophilic syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Community-acquired pneumonia and acute respiratory distress syndrome, Cryptogenic organizing pneumonia, Allergic bronchopulmonary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with differential for peripheral eosinophilia",
+      "Bronchoalveolar lavage to demonstrate a raised eosinophil proportion",
+      "High-resolution CT of the chest",
+      "Drug, travel, and exposure history plus stool and serology for parasites",
+      "Serum IgE and aspergillus testing, and ANCA to assess for vasculitis",
+      "Lung biopsy in atypical or diagnostically uncertain cases"
     ],
-    [
-     "Management Strategy",
-     "Systemic corticosteroids as the mainstay, with a rapid clinical response typical in both acute and chronic forms",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute eosinophilic pneumonia progressing to severe hypoxaemic respiratory failure requiring ventilatory support",
+      "Systemic features (mononeuritis, cardiac or renal involvement) suggesting eosinophilic granulomatosis with polyangiitis",
+      "Very high eosinophil counts with end-organ damage indicating hypereosinophilic syndrome",
+      "Rapid clinical deterioration despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding acute eosinophilic pneumonia because the blood eosinophil count is normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute eosinophilic pneumonia generally resolves completely with corticosteroids and, once the trigger is avoided, seldom recurs; chronic eosinophilic pneumonia also responds well but frequently relapses during steroid withdrawal and may need prolonged therapy.",
+    "pitfalls": [
+      "Excluding acute eosinophilic pneumonia because the blood eosinophil count is normal",
+      "Missing a drug, parasitic, or fungal cause by not taking a thorough exposure history",
+      "Overlooking evolving systemic vasculitis in apparent isolated lung eosinophilia",
+      "Tapering steroids too quickly in chronic disease and precipitating relapse"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ATS/ERS guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Systemic corticosteroids as the mainstay, with a rapid clinical response typical in both acute and chronic forms",
+      "Identify and remove triggers, especially recently started cigarette smoking and new inhalational exposures in acute disease",
+      "Supportive care with supplemental oxygen and ventilatory support for hypoxaemic acute disease mimicking acute respiratory distress syndrome",
+      "Exclude and treat secondary causes such as parasites, drugs, allergic bronchopulmonary aspergillosis and eosinophilic granulomatosis with polyangiitis before labelling disease idiopathic, with empirical Strongyloides cover where parasitic infection is possible",
+      "Prolonged, slowly tapered corticosteroids for chronic disease, which frequently relapses during withdrawal",
+      "Respiratory referral with follow-up using serial imaging and eosinophil counts"
     ]
-   ],
-   "caption": "Overview comparison matrix for eosinophilic pneumonia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eosinophilic-pneumonia-real-image",
-   "title": "Eosinophilic pneumonia: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "eosinophilic_pneumonia-pathway",
+      "title": "Eosinophilic pneumonia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by accumulation of eosinophils in the lung, diagnosed by peripheral eosinophilia, elevated eosinophils on bronchoalveolar lavage, or eosinophilic infiltration on biopsy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute eosinophilic pneumonia progressing to severe hypoxaemic respiratory failure requiring ventilatory support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with differential for peripheral eosinophilia, Bronchoalveolar lavage to demonstrate a raised eosinophil proportion, High-resolution CT of the chest"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Systemic corticosteroids as the mainstay, with a rapid clinical response typical in both acute and chronic forms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding acute eosinophilic pneumonia because the blood eosinophil count is normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eosinophilic pneumonia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eosinophilic_pneumonia-matrix",
+      "title": "Eosinophilic pneumonia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by accumulation of eosinophils in the lung, diagnosed by peripheral eosinophilia, elevated eosinophils on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with differential for peripheral eosinophilia, Bronchoalveolar lavage to demonstrate a raised eosinophil",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Community-acquired pneumonia and acute respiratory distress syndrome, Cryptogenic organizing pneumonia, Allergic bronchopulmonary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Systemic corticosteroids as the mainstay, with a rapid clinical response typical in both acute and chronic forms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding acute eosinophilic pneumonia because the blood eosinophil count is normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eosinophilic pneumonia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ATS-ERS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilic_pneumonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia; often normal early in acute disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Raised eosinophil proportion; key to diagnosis in acute disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the chest",
+          "cells": [
+            {
+              "text": "Upper-zone consolidation in chronic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug, travel and exposure history with stool and serology",
+          "cells": [
+            {
+              "text": "Drug, parasitic and other triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgE, Aspergillus testing and ANCA",
+          "cells": [
+            {
+              "text": "Allergic bronchopulmonary aspergillosis and vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung biopsy",
+          "cells": [
+            {
+              "text": "Atypical or diagnostically uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_pneumonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Community-acquired pneumonia or acute respiratory distress syndrome",
+          "cells": [
+            {
+              "text": "Acute disease over days with fever and hypoxaemia can mimic these"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic bronchopulmonary aspergillosis",
+          "cells": [
+            {
+              "text": "Excluded by Aspergillus testing and serum IgE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Mononeuritis, cardiac or renal involvement suggests it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_pneumonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay; rapid clinical response in both acute and chronic forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove triggers",
+          "cells": [
+            {
+              "text": "Recently started cigarette smoking and new inhalational exposures in acute disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Supplemental oxygen and ventilatory support for hypoxaemic acute disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude secondary causes",
+          "cells": [
+            {
+              "text": "Parasites, drugs, allergic bronchopulmonary aspergillosis and eosinophilic granulomatosis with polyangiitis before labelling idiopathic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged, slowly tapered corticosteroids",
+          "cells": [
+            {
+              "text": "Chronic disease, which frequently relapses during withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory follow-up",
+          "cells": [
+            {
+              "text": "Serial imaging and eosinophil counts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilic_pneumonia-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilic pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever and hypoxaemia over days, or weeks of cough, breathlessness and weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe hypoxaemic respiratory failure, systemic vasculitis features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Supportive care with oxygen and ventilatory support; assess for vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bronchoalveolar lavage eosinophilia, high-resolution CT, exposure history, parasite tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary causes (parasite, drug, aspergillosis, vasculitis) excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the identified cause; reassess the eosinophilic lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as mainstay, with brisk response",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Remove triggers such as new smoking or inhalational exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Slowly tapered corticosteroids for chronic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial imaging and eosinophil counts for follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acute form resolves completely and seldom recurs; chronic form may relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -111,7 +111,8 @@ test("imcq: the image is one inline_data part with the page text, in a Vertex ca
   assert.match(parts[0].text, /The image is attached\./);
   assert.deepEqual(parts[1], { inline_data: { mime_type: "image/jpeg", data: IMG } });
   assert.match(calls[0].body.systemInstruction.parts[0].text, /image-based single-best-answer MCQ/);
-  assert.equal(calls[0].body.generationConfig.responseSchema.required.join(), "sure,q");
+  assert.equal(calls[0].body.generationConfig.responseSchema.required.join(), "sure,kind,q", "kind is said before the question");
+  assert.match(calls[0].body.systemInstruction.parts[0].text, /never be answerable by reading words/);
   assert.deepEqual(calls[0].body.labels, { app: "prep" });
   assert.equal(r.json.skipped, null);
   assert.equal(r.json.items.length, 1);
@@ -154,6 +155,11 @@ test("imcq gates: unsure, a key the page text does not state, a number not in it
     [{ sure: true, q: [Object.assign({}, Q, { key: { ot: "Pneumothorax type 3", wr: "Shift." } })] }, "g9b"],
     [{ sure: true, q: [Object.assign({}, Q, { st: "What is the diagnosis in a breathless man after a road accident?" })] }, "no-image-ref"],
     [{ sure: true, q: [Object.assign({}, Q, { sn: [99] })] }, "no-source"],
+    // Owner bug 2026-10-09: a page of notes cut out whole became "Based on the table provided in the image...".
+    [{ sure: true, kind: "table", q: [Q] }, "not-figure"],
+    [{ sure: true, kind: "text", q: [Q] }, "not-figure"],
+    [{ sure: true, kind: "radiograph", q: [Object.assign({}, Q, { st: "Based on the table provided in the image, which finding needs a needle first?" })] }, "reads-image"],
+    [{ sure: true, kind: "radiograph", q: [Object.assign({}, Q, { st: "According to the text in the image shown, what is the next step?" })] }, "reads-image"],
   ];
   for (const [rep, why] of cases) {
     reply = () => JSON.stringify(rep);
@@ -174,4 +180,19 @@ test("imcq core: sanitizeImageMcq keeps only sent sentence numbers; gateImgSuppo
   assert.equal(C.imageStemOk("The ECG shown was recorded in casualty."), true);
   assert.equal(C.imageStemOk("Which drug is first line?"), false);
   assert.ok(C.PREP_OPS.indexOf("imcq") >= 0);
+});
+
+test("imcq core: kind before the question; a stem that asks to read the image is never kept", () => {
+  assert.equal(C.sanitizeImageMcq({ sure: true, kind: "table", q: [Q] }, [7]).sure, false, "a table is not a figure");
+  assert.equal(C.sanitizeImageMcq({ sure: true, kind: "radiograph", q: [Q] }, [7]).kind, "radiograph");
+  assert.equal(C.sanitizeImageMcq({ sure: true, q: [Q] }, [7]).sure, true, "an older reply without kind still reads");
+  for (const st of ["Based on the table provided in the image, which lymphoma is most common?", "The table shown lists the stages; which is stage IIB?",
+    "According to the notes in the image, what is the drug of choice?", "As listed in the image above, which feature is typical?", "Using the information in the slide shown, pick the answer."])
+    assert.equal(C.imageStemReads(st), true, st);
+  for (const st of ["The chest X-ray shown is of a man after a road accident. What is the diagnosis?", "The image shows a skin lesion on the forearm. What is it?",
+    "The ECG shown was recorded in casualty. What is the rhythm?", "The micrograph shows a lymph node biopsy. What is the diagnosis?"])
+    assert.equal(C.imageStemReads(st), false, st);
+  const p = C.buildImageMcqPrompt({ sents: [{ n: 1, tx: "Figure 1 is a chest X-ray." }] });
+  assert.match(p.system, /when kind is text, table, chart or other, set sure to false/);
+  assert.deepEqual(C.IMG_FIGURES, ["radiograph", "ct-mri", "ultrasound", "photo", "micrograph", "ecg", "diagram"]);
 });

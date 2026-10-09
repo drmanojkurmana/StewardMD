@@ -1,175 +1,435 @@
 {
- "id": "neuronal_intranuclear_inclusion_disease",
- "name": "Neuronal intranuclear inclusion disease (NOTCH2NLC)",
- "aliases": [
-  "NIID",
-  "neuronal intranuclear hyaline inclusion disease",
-  "NOTCH2NLC GGC repeat expansion disorder",
-  "NOTCH2NLC"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Cognitive & Movement",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A highly variable adult-onset disorder that can present with dementia, episodic encephalopathy, parkinsonism, tremor, autonomic dysfunction or a peripheral neuropathy",
-   "Caused by a GGC trinucleotide repeat expansion in the NOTCH2NLC gene, with a growing spectrum of recognised phenotypes",
-   "The most characteristic imaging clue is a ribbon of high signal along the corticomedullary junction on diffusion-weighted imaging, corresponding to the subcortical U-fibres",
-   "Leukoencephalopathy and progressive white matter change are common as the disease advances",
-   "Skin biopsy showing eosinophilic, ubiquitin- and p62-positive intranuclear inclusions can support the diagnosis less invasively than brain biopsy",
-   "Episodes of encephalopathy with headache, altered consciousness or focal deficits may mimic stroke or encephalitis",
-   "Genetic testing for the NOTCH2NLC repeat expansion provides definitive confirmation"
+  "id": "neuronal_intranuclear_inclusion_disease",
+  "name": "Neuronal intranuclear inclusion disease (NOTCH2NLC)",
+  "aliases": [
+    "NIID",
+    "neuronal intranuclear hyaline inclusion disease",
+    "NOTCH2NLC GGC repeat expansion disorder",
+    "NOTCH2NLC"
   ],
-  "pathophysiology": "Neuronal intranuclear inclusion disease is a slowly progressive neurodegenerative disorder defined pathologically by eosinophilic hyaline intranuclear inclusions within neurones, glia and cells of many other tissues, including the skin. It is caused by an abnormal GGC repeat expansion in the NOTCH2NLC gene, which is thought to produce toxic effects through repeat-associated translation and sequestration of nuclear proteins into the inclusions. Widespread deposition affects the cerebral white matter, cortex, autonomic and peripheral nervous systems, accounting for the diverse clinical picture that ranges from dementia and encephalopathic episodes to neuropathy and autonomic failure.",
-  "additionalDifferentials": [
-   "Fragile X-associated tremor/ataxia syndrome",
-   "Leukoencephalopathies of other genetic or metabolic causes",
-   "Behavioural variant frontotemporal dementia or Alzheimer disease",
-   "Recurrent stroke or transient ischaemic attacks",
-   "Autoimmune or infective encephalitis during encephalopathic episodes",
-   "Mitochondrial encephalopathy",
-   "CADASIL and other small-vessel disorders"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain with diffusion-weighted imaging to detect the corticomedullary junction (U-fibre) ribbon",
-   "Skin biopsy to demonstrate p62- and ubiquitin-positive intranuclear inclusions",
-   "Genetic testing for the NOTCH2NLC GGC repeat expansion",
-   "Nerve conduction studies to characterise an associated peripheral neuropathy",
-   "Autonomic function testing where dysautonomia is prominent",
-   "Cerebrospinal fluid analysis to help exclude inflammatory and infective causes during encephalopathic episodes"
-  ],
-  "redFlags": [
-   "Acute encephalopathic episodes with reduced consciousness that may be mistaken for stroke or encephalitis",
-   "Progressive autonomic failure causing syncope or gastrointestinal and bladder dysfunction",
-   "Rapidly worsening cognition or recurrent seizures",
-   "New focal neurological deficits requiring exclusion of alternative acute pathology"
-  ],
-  "prognosis": "The disorder is generally slowly progressive over years, though the course and rate vary widely between individuals; episodic encephalopathy, accumulating cognitive decline and autonomic involvement contribute to disability, and management is supportive.",
-  "pitfalls": [
-   "Overlooking the diagnosis because the phenotype is so variable and may mimic many other disorders",
-   "Failing to review diffusion-weighted imaging for the characteristic subcortical ribbon",
-   "Not pursuing skin biopsy or NOTCH2NLC testing when the imaging pattern is suggestive",
-   "Attributing encephalopathic episodes solely to stroke or infection without considering NIID"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy exists, so management is supportive and tailored to the individual's dominant manifestations",
-   "Manage encephalopathic episodes supportively with hydration and symptomatic care while excluding the stroke and encephalitis they may mimic",
-   "Treat parkinsonism with a trial of levodopa and manage tremor with appropriate agents where these features dominate",
-   "Manage dysautonomia, treating orthostatic hypotension, neurogenic bladder and gastrointestinal dysmotility",
-   "Provide neuropathic-pain treatment and rehabilitation for the associated peripheral neuropathy",
-   "Offer cognitive assessment, dementia support and caregiver input for progressive cognitive decline",
-   "Offer genetic counselling for the NOTCH2NLC GGC repeat expansion and consider family assessment given autosomal dominant inheritance in familial cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neuronal_intranuclear_inclusion_disease-pathway",
-   "title": "Neuronal intranuclear inclusion disease (NOTCH2NLC): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A highly variable adult-onset disorder that can present with dementia, episodic encephalopathy, parkinsonism, tremor, autonomic dysfunction or a peripheral neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute encephalopathic episodes with reduced consciousness that may be mistaken for stroke or encephalitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain with diffusion-weighted imaging to detect the corticomedullary junction (U-fibre) ribbon, Skin biopsy to demonstrate p62- and ubiquitin-positive intranuclear inclusions, Genetic testing for the NOTCH2NLC"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy exists, so management is supportive and tailored to the individual's dominant manifestations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis because the phenotype is so variable and may mimic many other disorders"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neuronal intranuclear inclusion disease (notch2nlc)."
-  }
- ],
- "tables": [
-  {
-   "id": "neuronal_intranuclear_inclusion_disease-matrix",
-   "title": "Neuronal intranuclear inclusion disease (NOTCH2NLC): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A highly variable adult-onset disorder that can present with dementia, episodic encephalopathy, parkinsonism, tremor, autonomic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Cognitive & Movement",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A highly variable adult-onset disorder that can present with dementia, episodic encephalopathy, parkinsonism, tremor, autonomic dysfunction or a peripheral neuropathy",
+      "Caused by a GGC trinucleotide repeat expansion in the NOTCH2NLC gene, with a growing spectrum of recognised phenotypes",
+      "The most characteristic imaging clue is a ribbon of high signal along the corticomedullary junction on diffusion-weighted imaging, corresponding to the subcortical U-fibres",
+      "Leukoencephalopathy and progressive white matter change are common as the disease advances",
+      "Skin biopsy showing eosinophilic, ubiquitin- and p62-positive intranuclear inclusions can support the diagnosis less invasively than brain biopsy",
+      "Episodes of encephalopathy with headache, altered consciousness or focal deficits may mimic stroke or encephalitis",
+      "Genetic testing for the NOTCH2NLC repeat expansion provides definitive confirmation"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain with diffusion-weighted imaging to detect the corticomedullary junction (U-fibre) ribbon, Skin biopsy to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Neuronal intranuclear inclusion disease is a slowly progressive neurodegenerative disorder defined pathologically by eosinophilic hyaline intranuclear inclusions within neurones, glia and cells of many other tissues, including the skin. It is caused by an abnormal GGC repeat expansion in the NOTCH2NLC gene, which is thought to produce toxic effects through repeat-associated translation and sequestration of nuclear proteins into the inclusions. Widespread deposition affects the cerebral white matter, cortex, autonomic and peripheral nervous systems, accounting for the diverse clinical picture that ranges from dementia and encephalopathic episodes to neuropathy and autonomic failure.",
+    "additionalDifferentials": [
+      "Fragile X-associated tremor/ataxia syndrome",
+      "Leukoencephalopathies of other genetic or metabolic causes",
+      "Behavioural variant frontotemporal dementia or Alzheimer disease",
+      "Recurrent stroke or transient ischaemic attacks",
+      "Autoimmune or infective encephalitis during encephalopathic episodes",
+      "Mitochondrial encephalopathy",
+      "CADASIL and other small-vessel disorders"
     ],
-    [
-     "Primary Differentials",
-     "Fragile X-associated tremor/ataxia syndrome, Leukoencephalopathies of other genetic or metabolic causes, Behavioural variant",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain with diffusion-weighted imaging to detect the corticomedullary junction (U-fibre) ribbon",
+      "Skin biopsy to demonstrate p62- and ubiquitin-positive intranuclear inclusions",
+      "Genetic testing for the NOTCH2NLC GGC repeat expansion",
+      "Nerve conduction studies to characterise an associated peripheral neuropathy",
+      "Autonomic function testing where dysautonomia is prominent",
+      "Cerebrospinal fluid analysis to help exclude inflammatory and infective causes during encephalopathic episodes"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy exists, so management is supportive and tailored to the individual's dominant manifestations",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute encephalopathic episodes with reduced consciousness that may be mistaken for stroke or encephalitis",
+      "Progressive autonomic failure causing syncope or gastrointestinal and bladder dysfunction",
+      "Rapidly worsening cognition or recurrent seizures",
+      "New focal neurological deficits requiring exclusion of alternative acute pathology"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis because the phenotype is so variable and may mimic many other disorders",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is generally slowly progressive over years, though the course and rate vary widely between individuals; episodic encephalopathy, accumulating cognitive decline and autonomic involvement contribute to disability, and management is supportive.",
+    "pitfalls": [
+      "Overlooking the diagnosis because the phenotype is so variable and may mimic many other disorders",
+      "Failing to review diffusion-weighted imaging for the characteristic subcortical ribbon",
+      "Not pursuing skin biopsy or NOTCH2NLC testing when the imaging pattern is suggestive",
+      "Attributing encephalopathic episodes solely to stroke or infection without considering NIID"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy exists, so management is supportive and tailored to the individual's dominant manifestations",
+      "Manage encephalopathic episodes supportively with hydration and symptomatic care while excluding the stroke and encephalitis they may mimic",
+      "Treat parkinsonism with a trial of levodopa and manage tremor with appropriate agents where these features dominate",
+      "Manage dysautonomia, treating orthostatic hypotension, neurogenic bladder and gastrointestinal dysmotility",
+      "Provide neuropathic-pain treatment and rehabilitation for the associated peripheral neuropathy",
+      "Offer cognitive assessment, dementia support and caregiver input for progressive cognitive decline",
+      "Offer genetic counselling for the NOTCH2NLC GGC repeat expansion and consider family assessment given autosomal dominant inheritance in familial cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for neuronal intranuclear inclusion disease (notch2nlc)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neuronal-intranuclear-inclusion-disease-real-image",
-   "title": "Neuronal intranuclear inclusion disease (NOTCH2NLC): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "neuronal_intranuclear_inclusion_disease-pathway",
+      "title": "Neuronal intranuclear inclusion disease (NOTCH2NLC): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A highly variable adult-onset disorder that can present with dementia, episodic encephalopathy, parkinsonism, tremor, autonomic dysfunction or a peripheral neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute encephalopathic episodes with reduced consciousness that may be mistaken for stroke or encephalitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain with diffusion-weighted imaging to detect the corticomedullary junction (U-fibre) ribbon, Skin biopsy to demonstrate p62- and ubiquitin-positive intranuclear inclusions, Genetic testing for the NOTCH2NLC"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy exists, so management is supportive and tailored to the individual's dominant manifestations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis because the phenotype is so variable and may mimic many other disorders"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neuronal intranuclear inclusion disease (notch2nlc)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neuronal_intranuclear_inclusion_disease-matrix",
+      "title": "Neuronal intranuclear inclusion disease (NOTCH2NLC): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A highly variable adult-onset disorder that can present with dementia, episodic encephalopathy, parkinsonism, tremor, autonomic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain with diffusion-weighted imaging to detect the corticomedullary junction (U-fibre) ribbon, Skin biopsy to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fragile X-associated tremor/ataxia syndrome, Leukoencephalopathies of other genetic or metabolic causes, Behavioural variant",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy exists, so management is supportive and tailored to the individual's dominant manifestations",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis because the phenotype is so variable and may mimic many other disorders",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neuronal intranuclear inclusion disease (notch2nlc)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neuronal_intranuclear_inclusion_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain with diffusion-weighted imaging",
+          "cells": [
+            {
+              "text": "Corticomedullary junction ribbon sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "p62- and ubiquitin-positive intranuclear inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NOTCH2NLC GGC repeat expansion testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy when present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuronal_intranuclear_inclusion_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fragile X-associated tremor/ataxia syndrome",
+          "cells": [
+            {
+              "text": "Tremor and ataxia in older adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural variant frontotemporal dementia or Alzheimer disease",
+          "cells": [
+            {
+              "text": "Dementia phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent stroke or transient ischaemic attacks",
+          "cells": [
+            {
+              "text": "Episodic encephalopathy mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune or infective encephalitis",
+          "cells": [
+            {
+              "text": "Encephalopathic episodes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuronal_intranuclear_inclusion_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-modifying therapy",
+          "cells": [
+            {
+              "text": "Management is supportive and tailored to dominant features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for encephalopathic episodes",
+          "cells": [
+            {
+              "text": "Hydration; exclude stroke and encephalitis first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinsonism treatment",
+          "cells": [
+            {
+              "text": "Symptomatic therapy as for other parkinsonian disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic management",
+          "cells": [
+            {
+              "text": "Treatment of syncope, gut and bladder dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neuronal_intranuclear_inclusion_disease-dx-mgmt",
+      "title": "Diagnosis and management of Neuronal intranuclear inclusion disease (NOTCH2NLC)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult with episodic encephalopathy, dementia, parkinsonism or autonomic failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (reduced consciousness, rapid cognitive decline, seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude stroke and encephalitis first; supportive care for episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diffusion MRI, skin biopsy for inclusions, NOTCH2NLC repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Characteristic diffusion MRI with NOTCH2NLC repeat expansion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider frontotemporal dementia, stroke or encephalitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care tailored to the dominant manifestation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive care for encephalopathic episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic treatment of parkinsonism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of autonomic failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive over years; disability from cognition and autonomic failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

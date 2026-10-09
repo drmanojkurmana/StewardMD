@@ -1,181 +1,466 @@
 {
- "id": "ganglioglioma",
- "name": "Ganglioglioma",
- "aliases": [
-  "ganglioglioma",
-  "glioneuronal tumour",
-  "WHO grade 1 ganglioglioma",
-  "BRAF V600E-mutant ganglioglioma"
- ],
- "class": "non_infective",
- "system": "Oncology / Neuro-oncology",
- "specialty": "Neuro-oncology / Neuropathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours of the CNS",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A well-differentiated glioneuronal tumour (usually CNS WHO grade 1) and a common cause of chronic drug-resistant focal epilepsy in children and young adults",
-   "Composed of both dysplastic neurons (ganglion cells) and a neoplastic glial component",
-   "Most often cortical and temporal, correlating with its strong association with focal seizures",
-   "MRI typically shows a circumscribed, often cystic lesion with a mural nodule, variable enhancement and frequent calcification",
-   "BRAF V600E mutation is common and can be exploited diagnostically and, in selected higher-grade cases, therapeutically",
-   "Diagnosis rests on recognising the abnormal ganglion cells; a well-formed glial component distinguishes it from lesions of pure neuronal or glial type",
-   "Complete surgical resection is usually curative and offers a high chance of seizure freedom"
+  "id": "ganglioglioma",
+  "name": "Ganglioglioma",
+  "aliases": [
+    "ganglioglioma",
+    "glioneuronal tumour",
+    "WHO grade 1 ganglioglioma",
+    "BRAF V600E-mutant ganglioglioma"
   ],
-  "pathophysiology": "Ganglioglioma is a benign glioneuronal tumour containing a mixture of dysplastic, neoplastic ganglion (neuronal) cells and a neoplastic glial component, usually astrocytic. It commonly arises in the cerebral cortex, most often the temporal lobe, and grows slowly, frequently forming a cyst with a solid mural nodule. Activation of the MAP kinase signalling pathway, most characteristically through the BRAF V600E mutation, is a recurrent molecular event. The disorganised neuronal and glial architecture disrupts cortical circuitry and produces the chronic focal epilepsy that dominates presentation. Rarely the glial component progresses, giving an anaplastic ganglioglioma with more aggressive behaviour.",
-  "additionalDifferentials": [
-   "Dysembryoplastic neuroepithelial tumour",
-   "Pilocytic astrocytoma",
-   "Pleomorphic xanthoastrocytoma",
-   "Diffuse low-grade glioma",
-   "Focal cortical dysplasia",
-   "Gangliocytoma"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI with epilepsy protocol to characterise the cystic and solid components",
-   "Video-EEG to confirm and localise the seizure focus",
-   "Histopathology demonstrating dysplastic ganglion cells and a glial component",
-   "BRAF V600E immunohistochemistry or molecular testing",
-   "CD34 immunostaining, which is frequently positive in glioneuronal tumours",
-   "Ki-67/MIB-1 index and grading assessment to detect anaplastic change"
-  ],
-  "redFlags": [
-   "Drug-resistant seizures with significant impact on quality of life",
-   "Features of anaplastic transformation such as rapid growth, marked enhancement or oedema",
-   "New focal neurological deficits suggesting progression",
-   "Atypical location (e.g. brainstem) complicating resection"
-  ],
-  "prognosis": "Prognosis is excellent for the typical grade 1 tumour, with complete resection often curative and high rates of long-term seizure freedom. Anaplastic gangliogliomas are uncommon but behave more aggressively and may require adjuvant treatment; BRAF-targeted therapy is an option in selected higher-grade or unresectable cases.",
-  "pitfalls": [
-   "Failing to identify the neuronal (ganglion cell) component and misclassifying the tumour as a pure glioma",
-   "Incomplete resection resulting in continued seizures",
-   "Overlooking anaplastic change in a previously indolent lesion",
-   "Not testing for BRAF V600E, which carries diagnostic and therapeutic relevance"
-  ],
-  "references": [
-   "WHO Classification of Tumours of the Central Nervous System",
-   "Louis DN et al. The 2021 WHO Classification of Tumors of the Central Nervous System"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical resection of the contrast-enhancing tumor is the mainstay of treatment and is usually curative when gross total resection is achieved.",
-   "Most patients need no further therapy after a complete resection; the degree of anaplasia on histology determines prognosis.",
-   "Eloquent-region tumors remain resectable but are technically harder, aided by intraoperative microscope, computer-assisted navigation, and functional mapping.",
-   "Adjuvant radiotherapy is not required after gross total resection but is considered after subtotal resection, especially in eloquent locations.",
-   "Higher-grade histology generally warrants higher-intensity radiotherapy, particularly after subtotal resection.",
-   "Close imaging surveillance is a reasonable alternative to immediate postoperative radiotherapy after subtotal resection, reserving treatment for radiologic progression, particularly for lower-grade tumors.",
-   "Highly conformal radiotherapy techniques are preferred to limit long-term CNS toxicity given the young age of many patients.",
-   "Stereotactic radiosurgery is a reasonable option for limited recurrence after resection or at relapse.",
-   "Chemotherapy is not first-line; it is used mainly in children with subtotal resection and progression, and in adults as salvage after surgery and radiotherapy fail. No optimal regimen is established, and disease stabilization is considered a successful outcome.",
-   "In selected BRAF V600E-mutant tumors that are higher-grade or unresectable, BRAF-targeted therapy (a BRAF inhibitor with or without a MEK inhibitor) is a guideline-consistent option per NCCN, separate from DeVita's core recommendations.",
-   "Seizure control is a parallel treatment goal; patients with drug-resistant focal seizures should be evaluated through a dedicated epilepsy-surgery pathway with video-EEG localization, using antiepileptic drugs pending and after resection.",
-   "Follow-up centers on surveillance brain MRI to detect residual tumor, recurrence, or transformation to a higher-grade lesion, with re-grading if the tumor recurs or changes.",
-   "Any new diagnosis warrants referral to a neuro-oncology multidisciplinary team including neurosurgery and neuropathology.",
-   "Subtotal resection, eloquent location, higher-grade histology, or recurrence should prompt multidisciplinary discussion with radiation oncology."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ganglioglioma-pathway",
-   "title": "Ganglioglioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A well-differentiated glioneuronal tumour (usually CNS WHO grade 1) and a common cause of chronic drug-resistant focal epilepsy in children and young adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Drug-resistant seizures with significant impact on quality of life",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI with epilepsy protocol to characterise the cystic and solid components, Video-EEG to confirm and localise the seizure focus, Histopathology demonstrating dysplastic ganglion cells and a glial component"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical resection of the contrast-enhancing tumor is the mainstay of treatment and is usually curative when gross total resection is achieved."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to identify the neuronal (ganglion cell) component and misclassifying the tumour as a pure glioma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ganglioglioma."
-  }
- ],
- "tables": [
-  {
-   "id": "ganglioglioma-matrix",
-   "title": "Ganglioglioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A well-differentiated glioneuronal tumour (usually CNS WHO grade 1) and a common cause of chronic drug-resistant focal epilepsy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Neuro-oncology",
+  "specialty": "Neuro-oncology / Neuropathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours of the CNS",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A well-differentiated glioneuronal tumour (usually CNS WHO grade 1) and a common cause of chronic drug-resistant focal epilepsy in children and young adults",
+      "Composed of both dysplastic neurons (ganglion cells) and a neoplastic glial component",
+      "Most often cortical and temporal, correlating with its strong association with focal seizures",
+      "MRI typically shows a circumscribed, often cystic lesion with a mural nodule, variable enhancement and frequent calcification",
+      "BRAF V600E mutation is common and can be exploited diagnostically and, in selected higher-grade cases, therapeutically",
+      "Diagnosis rests on recognising the abnormal ganglion cells; a well-formed glial component distinguishes it from lesions of pure neuronal or glial type",
+      "Complete surgical resection is usually curative and offers a high chance of seizure freedom"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI with epilepsy protocol to characterise the cystic and solid components, Video-EEG to confirm and localise the seizure",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ganglioglioma is a benign glioneuronal tumour containing a mixture of dysplastic, neoplastic ganglion (neuronal) cells and a neoplastic glial component, usually astrocytic. It commonly arises in the cerebral cortex, most often the temporal lobe, and grows slowly, frequently forming a cyst with a solid mural nodule. Activation of the MAP kinase signalling pathway, most characteristically through the BRAF V600E mutation, is a recurrent molecular event. The disorganised neuronal and glial architecture disrupts cortical circuitry and produces the chronic focal epilepsy that dominates presentation. Rarely the glial component progresses, giving an anaplastic ganglioglioma with more aggressive behaviour.",
+    "additionalDifferentials": [
+      "Dysembryoplastic neuroepithelial tumour",
+      "Pilocytic astrocytoma",
+      "Pleomorphic xanthoastrocytoma",
+      "Diffuse low-grade glioma",
+      "Focal cortical dysplasia",
+      "Gangliocytoma"
     ],
-    [
-     "Primary Differentials",
-     "Dysembryoplastic neuroepithelial tumour, Pilocytic astrocytoma, Pleomorphic xanthoastrocytoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI with epilepsy protocol to characterise the cystic and solid components",
+      "Video-EEG to confirm and localise the seizure focus",
+      "Histopathology demonstrating dysplastic ganglion cells and a glial component",
+      "BRAF V600E immunohistochemistry or molecular testing",
+      "CD34 immunostaining, which is frequently positive in glioneuronal tumours",
+      "Ki-67/MIB-1 index and grading assessment to detect anaplastic change"
     ],
-    [
-     "Management Strategy",
-     "Surgical resection of the contrast-enhancing tumor is the mainstay of treatment and is usually curative when gross total",
-     "Core treatment modality"
+    "redFlags": [
+      "Drug-resistant seizures with significant impact on quality of life",
+      "Features of anaplastic transformation such as rapid growth, marked enhancement or oedema",
+      "New focal neurological deficits suggesting progression",
+      "Atypical location (e.g. brainstem) complicating resection"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to identify the neuronal (ganglion cell) component and misclassifying the tumour as a pure glioma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent for the typical grade 1 tumour, with complete resection often curative and high rates of long-term seizure freedom. Anaplastic gangliogliomas are uncommon but behave more aggressively and may require adjuvant treatment; BRAF-targeted therapy is an option in selected higher-grade or unresectable cases.",
+    "pitfalls": [
+      "Failing to identify the neuronal (ganglion cell) component and misclassifying the tumour as a pure glioma",
+      "Incomplete resection resulting in continued seizures",
+      "Overlooking anaplastic change in a previously indolent lesion",
+      "Not testing for BRAF V600E, which carries diagnostic and therapeutic relevance"
+    ],
+    "references": [
+      "WHO Classification of Tumours of the Central Nervous System",
+      "Louis DN et al. The 2021 WHO Classification of Tumors of the Central Nervous System"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical resection of the contrast-enhancing tumor is the mainstay of treatment and is usually curative when gross total resection is achieved.",
+      "Most patients need no further therapy after a complete resection; the degree of anaplasia on histology determines prognosis.",
+      "Eloquent-region tumors remain resectable but are technically harder, aided by intraoperative microscope, computer-assisted navigation, and functional mapping.",
+      "Adjuvant radiotherapy is not required after gross total resection but is considered after subtotal resection, especially in eloquent locations.",
+      "Higher-grade histology generally warrants higher-intensity radiotherapy, particularly after subtotal resection.",
+      "Close imaging surveillance is a reasonable alternative to immediate postoperative radiotherapy after subtotal resection, reserving treatment for radiologic progression, particularly for lower-grade tumors.",
+      "Highly conformal radiotherapy techniques are preferred to limit long-term CNS toxicity given the young age of many patients.",
+      "Stereotactic radiosurgery is a reasonable option for limited recurrence after resection or at relapse.",
+      "Chemotherapy is not first-line; it is used mainly in children with subtotal resection and progression, and in adults as salvage after surgery and radiotherapy fail. No optimal regimen is established, and disease stabilization is considered a successful outcome.",
+      "In selected BRAF V600E-mutant tumors that are higher-grade or unresectable, BRAF-targeted therapy (a BRAF inhibitor with or without a MEK inhibitor) is a guideline-consistent option per NCCN, separate from DeVita's core recommendations.",
+      "Seizure control is a parallel treatment goal; patients with drug-resistant focal seizures should be evaluated through a dedicated epilepsy-surgery pathway with video-EEG localization, using antiepileptic drugs pending and after resection.",
+      "Follow-up centers on surveillance brain MRI to detect residual tumor, recurrence, or transformation to a higher-grade lesion, with re-grading if the tumor recurs or changes.",
+      "Any new diagnosis warrants referral to a neuro-oncology multidisciplinary team including neurosurgery and neuropathology.",
+      "Subtotal resection, eloquent location, higher-grade histology, or recurrence should prompt multidisciplinary discussion with radiation oncology."
     ]
-   ],
-   "caption": "Overview comparison matrix for ganglioglioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ganglioglioma-real-image",
-   "title": "Ganglioglioma: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "ganglioglioma-pathway",
+      "title": "Ganglioglioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A well-differentiated glioneuronal tumour (usually CNS WHO grade 1) and a common cause of chronic drug-resistant focal epilepsy in children and young adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Drug-resistant seizures with significant impact on quality of life",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI with epilepsy protocol to characterise the cystic and solid components, Video-EEG to confirm and localise the seizure focus, Histopathology demonstrating dysplastic ganglion cells and a glial component"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical resection of the contrast-enhancing tumor is the mainstay of treatment and is usually curative when gross total resection is achieved."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to identify the neuronal (ganglion cell) component and misclassifying the tumour as a pure glioma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ganglioglioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ganglioglioma-matrix",
+      "title": "Ganglioglioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A well-differentiated glioneuronal tumour (usually CNS WHO grade 1) and a common cause of chronic drug-resistant focal epilepsy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI with epilepsy protocol to characterise the cystic and solid components, Video-EEG to confirm and localise the seizure",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dysembryoplastic neuroepithelial tumour, Pilocytic astrocytoma, Pleomorphic xanthoastrocytoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical resection of the contrast-enhancing tumor is the mainstay of treatment and is usually curative when gross total",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to identify the neuronal (ganglion cell) component and misclassifying the tumour as a pure glioma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ganglioglioma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ganglioglioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI with epilepsy protocol",
+          "cells": [
+            {
+              "text": "Cystic and solid components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG",
+          "cells": [
+            {
+              "text": "Confirms and localises the seizure focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Dysplastic ganglion cells and a glial component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E immunohistochemistry or molecular testing",
+          "cells": [
+            {
+              "text": "BRAF V600E status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD34 immunostaining",
+          "cells": [
+            {
+              "text": "Frequently positive in glioneuronal tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ki-67 index and grading",
+          "cells": [
+            {
+              "text": "Detects anaplastic change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglioglioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Mainstay; usually curative when gross total resection is achieved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation after complete resection",
+          "cells": [
+            {
+              "text": "Most need no further therapy; histological anaplasia determines prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eloquent-region resection",
+          "cells": [
+            {
+              "text": "Technically harder; aided by intraoperative microscope and navigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "Considered after subtotal resection; not required after gross total resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conformal radiotherapy",
+          "cells": [
+            {
+              "text": "Preferred to limit CNS toxicity in young patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereotactic radiosurgery",
+          "cells": [
+            {
+              "text": "Option for limited recurrence after resection or at relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy",
+          "cells": [
+            {
+              "text": "Not first-line; mainly in children with subtotal resection and progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF-targeted therapy",
+          "cells": [
+            {
+              "text": "Higher-grade or unresectable BRAF V600E-mutant tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance MRI",
+          "cells": [
+            {
+              "text": "Residual tumour, recurrence or transformation to higher grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-oncology referral",
+          "cells": [
+            {
+              "text": "Multidisciplinary team with neurosurgery and neuropathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ganglioglioma-dx-mgmt",
+      "title": "Diagnosis and management of Ganglioglioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ganglioglioma: drug-resistant focal seizures from a mixed neuronal-glial lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (anaplastic features, progressive deficits, brainstem location)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neuro-oncology review for rapid growth, marked enhancement or oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Epilepsy-protocol MRI, video-EEG, histology, BRAF V600E and CD34 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show dysplastic ganglion cells alongside a glial component?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dysembryoplastic tumour, pilocytic astrocytoma or focal cortical dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of the contrast-enhancing tumour, aiming for gross total resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant radiotherapy considered after subtotal resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "BRAF-targeted therapy for higher-grade or unresectable BRAF V600E tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance MRI, with seizure control through a dedicated epilepsy service",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent for typical grade 1 tumour; complete resection is often curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

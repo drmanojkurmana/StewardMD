@@ -1,177 +1,640 @@
 {
- "id": "colorectal_cancer",
- "name": "Colorectal Cancer",
- "system": "Oncology",
- "class": "non_infective",
- "chapter": 86,
- "page": 653,
- "aliases": [
-  "colon cancer",
-  "rectal cancer",
-  "bowel cancer"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.653",
-  "clinicalPearls": [
-   "Symptoms vary by tumor location. Right-sided cancers (cecum, ascending colon) can grow large without obstruction because stool is still liquid, and they tend to ulcerate, causing chronic insidious blood loss and presenting as iron-deficiency anemia (Harrison 22e p.656).",
-   "Unexplained iron-deficiency anemia in any adult mandates a thorough endoscopic and/or radiographic visualization of the entire large bowel; the possible exception is a premenopausal, multiparous woman (Harrison 22e p.656).",
-   "Left-sided (transverse/descending colon) tumors impede passage of more formed stool, producing abdominal cramping, occasional obstruction, and even perforation, classically the annular constricting 'apple-core' lesion on imaging (Harrison 22e p.656).",
-   "Rectosigmoid cancers cause hematochezia, tenesmus, and narrowing of stool caliber; these may be mistaken for hemorrhoids, but rectal bleeding and/or altered bowel habits demand prompt digital rectal exam and sigmoidoscopy (Harrison 22e p.656).",
-   "Most colorectal cancers arise from adenomatous polyps (not hyperplastic, hamartomatous, or serrated polyps); only a minority of adenomas progress, with risk tied to polyp size and histology, and villous adenomas becoming cancer about threefold more often than tubular adenomas (Harrison 22e p.653).",
-   "Universal testing of colorectal tumors for MMR defects is recommended, by immunohistochemistry for MMR proteins or microsatellite instability testing; MSI-high tumors are dramatically sensitive to immune checkpoint inhibition and less sensitive to chemotherapy (Harrison 22e p.653-654, 656).",
-   "Serum CEA is used for staging workup and follow-up; some authorities measure plasma CEA at 3-month intervals after curative resection because of its sensitivity as a marker for otherwise undetectable recurrence (Harrison 22e p.656-658).",
-   "Liver is the most frequent visceral metastatic site, being the initial site of distant spread in about one-third of recurring cancers and involved in over two-thirds of patients at death; complete resection of metastases isolated to one site (liver, lung, peritoneum) is considered curative (Harrison 22e p.657-658)."
+  "id": "colorectal_cancer",
+  "name": "Colorectal Cancer",
+  "system": "Oncology",
+  "class": "non_infective",
+  "chapter": 86,
+  "page": 653,
+  "aliases": [
+    "colon cancer",
+    "rectal cancer",
+    "bowel cancer"
   ],
-  "pathophysiology": "The majority of colorectal cancers develop through the adenoma-to-carcinoma sequence, in which adenomatous polyps accumulate sequential genetic and epigenetic events involving tumor suppressor genes and oncogenes. Three major sporadic molecular pathways exist: the chromosomal instability (CIN) pathway (the most common), characterized by early loss of the APC tumor suppressor gene followed by sequential MAP-kinase oncogene mutations such as KRAS and BRAF, with loss of p53 as a common final step; the mismatch repair (MMR) pathway, often caused by hypermethylation of MMR gene promoters, producing a microsatellite-instability-high (MSI-high) phenotype; and the CpG island methylator phenotype (CIMP), with tumors that are often right-sided and associated with MLH1 methylation. These pathways are not mutually exclusive and can overlap in individual cancers (Harrison 22e p.653-654).",
-  "additionalDifferentials": [
-   "Hemorrhoids or benign anorectal disease as a cause of rectal bleeding (rectal bleeding and altered bowel habits still demand DRE and sigmoidoscopy) (Harrison 22e p.656)",
-   "Other causes of iron-deficiency anemia from chronic occult GI blood loss (Harrison 22e p.656)",
-   "Inflammatory bowel disease (both a risk factor and a differential for altered bowel habit and bleeding) (Harrison 22e p.655)"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [],
-  "additionalInvestigations": [
-   "Colonoscopy of the entire large bowel (gold standard for detecting cancer and synchronous neoplasms/polyps) (Harrison 22e p.656)",
-   "Flexible sigmoidoscopy as a screening modality (Harrison 22e p.655-656)",
-   "Stool-based tests: fecal occult blood test, fecal immunochemical test (FIT), and fecal DNA testing (Harrison 22e p.655-656)",
-   "Serum carcinoembryonic antigen (CEA) (Harrison 22e p.656)",
-   "Complete blood count and comprehensive metabolic panel (Harrison 22e p.656)",
-   "Chest, abdomen, and pelvic CT scan; MRI and PET as dictated by CT findings (Harrison 22e p.656)",
-   "Pelvic MRI for rectal cancer to assess mesorectal margin and nodal status (Harrison 22e p.658)",
-   "Tumor MMR/microsatellite instability testing (IHC or MSI) and germline genetic testing where indicated (Harrison 22e p.654, 656)",
-   "Investigational: plasma circulating tumor DNA as a biomarker for residual/recurrent disease (Harrison 22e p.658)"
-  ],
-  "redFlags": [
-   "Unexplained iron-deficiency anemia in any adult (mandates evaluation of the entire large bowel)",
-   "Change in bowel habit / altered bowel habits",
-   "Rectal bleeding (hematochezia) or guaiac-positive stool",
-   "Tenesmus and narrowing of the caliber of the stool (rectosigmoid lesions)",
-   "Abdominal cramping or obstruction (left-sided lesions)",
-   "Strong family history or known hereditary syndrome (FAP, MUTYH-associated polyposis, Lynch syndrome)"
-  ],
-  "prognosis": "Prognosis is stage-related and depends on depth of tumor penetration into the bowel wall, regional lymph node involvement, and distant metastases (TNM). Stage I (T1-2N0M0) confers a high cure rate (>90-95% 5-year survival); 5-year survival declines through stage II (T3-4N0M0), stage III (node-positive), and stage IV (distant metastasis, <5% in colon). Stage I patients are considered cured after complete resection. A minimum of 12 sampled lymph nodes is considered necessary to accurately define stage. Poor-prognosis features include penetration through the bowel wall into pericolic fat, poorly differentiated histology, perforation and/or adherence to adjacent organs, venous invasion, preoperative CEA >5 ng/mL, BRAF mutation, and right-sided primary location. Tumors with MSI/MMR defects have an improved prognosis (enhanced immune response), and left-colon tumors fare better than right-colon tumors. Notably, primary tumor size does not influence prognosis once adjusted for nodal involvement and differentiation. Most recurrences occur within the first 5 years (Harrison 22e p.656-658).",
-  "pitfalls": [
-   "Attributing rectal bleeding to hemorrhoids and not pursuing DRE and sigmoidoscopy (Harrison 22e p.656)",
-   "Relying on fecal occult blood testing alone: about 50% of patients with documented colorectal cancer have a negative FOBT due to intermittent bleeding, and a colorectal neoplasm is NOT found in most asymptomatic individuals with a positive test (Harrison 22e p.655-656)",
-   "Sigmoidoscopy alone misses proximal lesions: about 1.5% of individuals with a normal sigmoidoscopy harbor a high-risk polyp or adenocarcinoma in the proximal colon (Harrison 22e p.656)",
-   "Lynch syndrome may not be associated with multiple polyps and is therefore often unrecognized (Harrison 22e p.654)",
-   "Disease stage cannot be determined accurately before surgical resection and pathologic analysis unless gross metastatic disease is present (Harrison 22e p.656)",
-   "Initial treatment should be delayed until MMR/microsatellite status is known when possible, since MSI-high rectal cancers may be cured with checkpoint inhibitors (PD-1 antibodies) without surgery, radiation, or chemotherapy (Harrison 22e p.656)"
-  ],
-  "severityClassification": "TNM classification (American Joint Committee on Cancer / Union for International Cancer Control): T = depth of tumor penetration (T1 submucosa, T2 muscularis, T3 through muscularis, T4 adjacent structures), N = regional lymph node involvement (N1 = 1-3 nodes, N2 = >=4 nodes), M = distant metastasis. Stage I = T1-2N0M0; Stage II = T3-4N0M0; Stage III = any T, N1-2, M0; Stage IV = any T, any N, M1. The older Dukes classification was historically used for colorectal cancer (Harrison 22e p.656).",
-  "references": [
-   "Harrison 22e p.653"
-  ],
-  "crossLinks": [
-   "ibd_flare"
-  ],
-  "management": [
-   "Surgical resection with regional lymphadenectomy as the curative mainstay for localised colon and rectal cancer",
-   "Neoadjuvant chemoradiotherapy for locally advanced rectal cancer to downstage before surgery",
-   "Adjuvant oxaliplatin-based chemotherapy such as FOLFOX or CAPOX for node-positive and high-risk node-negative disease",
-   "Systemic therapy for metastatic disease combining cytotoxic chemotherapy with targeted agents - anti-EGFR antibodies in RAS wild-type tumours and the anti-VEGF antibody bevacizumab",
-   "Immune checkpoint inhibition for mismatch-repair-deficient, microsatellite-instability-high tumours, guided by universal MMR and MSI testing",
-   "Post-treatment surveillance with serial carcinoembryonic antigen, colonoscopy and cross-sectional imaging",
-   "Management through a colorectal multidisciplinary team, with genetic counselling and family screening where a hereditary syndrome such as Lynch is identified"
-  ]
- },
- "algorithms": [
-  {
-   "id": "colorectal_cancer-pathway",
-   "title": "Colorectal Cancer: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Symptoms vary by tumor location. Right-sided cancers (cecum, ascending colon) can grow large without obstruction because stool is still liquid, and they tend to ulcerate, causing chronic insidious blood loss and presenting as",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unexplained iron-deficiency anemia in any adult (mandates evaluation of the entire large bowel)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Colonoscopy of the entire large bowel (gold standard for detecting cancer and synchronous neoplasms/polyps) (Harrison 22e p.656), Flexible sigmoidoscopy as a screening modality (Harrison 22e p.655-656), Stool-based tests:"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical resection with regional lymphadenectomy as the curative mainstay for localised colon and rectal cancer"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing rectal bleeding to hemorrhoids and not pursuing DRE and sigmoidoscopy (Harrison 22e p.656)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of colorectal cancer."
-  }
- ],
- "tables": [
-  {
-   "id": "colorectal_cancer-matrix",
-   "title": "Colorectal Cancer: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Symptoms vary by tumor location. Right-sided cancers (cecum, ascending colon) can grow large without obstruction because stool is",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.653",
+    "clinicalPearls": [
+      "Symptoms vary by tumor location. Right-sided cancers (cecum, ascending colon) can grow large without obstruction because stool is still liquid, and they tend to ulcerate, causing chronic insidious blood loss and presenting as iron-deficiency anemia (Harrison 22e p.656).",
+      "Unexplained iron-deficiency anemia in any adult mandates a thorough endoscopic and/or radiographic visualization of the entire large bowel; the possible exception is a premenopausal, multiparous woman (Harrison 22e p.656).",
+      "Left-sided (transverse/descending colon) tumors impede passage of more formed stool, producing abdominal cramping, occasional obstruction, and even perforation, classically the annular constricting 'apple-core' lesion on imaging (Harrison 22e p.656).",
+      "Rectosigmoid cancers cause hematochezia, tenesmus, and narrowing of stool caliber; these may be mistaken for hemorrhoids, but rectal bleeding and/or altered bowel habits demand prompt digital rectal exam and sigmoidoscopy (Harrison 22e p.656).",
+      "Most colorectal cancers arise from adenomatous polyps (not hyperplastic, hamartomatous, or serrated polyps); only a minority of adenomas progress, with risk tied to polyp size and histology, and villous adenomas becoming cancer about threefold more often than tubular adenomas (Harrison 22e p.653).",
+      "Universal testing of colorectal tumors for MMR defects is recommended, by immunohistochemistry for MMR proteins or microsatellite instability testing; MSI-high tumors are dramatically sensitive to immune checkpoint inhibition and less sensitive to chemotherapy (Harrison 22e p.653-654, 656).",
+      "Serum CEA is used for staging workup and follow-up; some authorities measure plasma CEA at 3-month intervals after curative resection because of its sensitivity as a marker for otherwise undetectable recurrence (Harrison 22e p.656-658).",
+      "Liver is the most frequent visceral metastatic site, being the initial site of distant spread in about one-third of recurring cancers and involved in over two-thirds of patients at death; complete resection of metastases isolated to one site (liver, lung, peritoneum) is considered curative (Harrison 22e p.657-658)."
     ],
-    [
-     "Key Investigations",
-     "Colonoscopy of the entire large bowel (gold standard for detecting cancer and synchronous neoplasms/polyps) (Harrison 22e p.656),",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The majority of colorectal cancers develop through the adenoma-to-carcinoma sequence, in which adenomatous polyps accumulate sequential genetic and epigenetic events involving tumor suppressor genes and oncogenes. Three major sporadic molecular pathways exist: the chromosomal instability (CIN) pathway (the most common), characterized by early loss of the APC tumor suppressor gene followed by sequential MAP-kinase oncogene mutations such as KRAS and BRAF, with loss of p53 as a common final step; the mismatch repair (MMR) pathway, often caused by hypermethylation of MMR gene promoters, producing a microsatellite-instability-high (MSI-high) phenotype; and the CpG island methylator phenotype (CIMP), with tumors that are often right-sided and associated with MLH1 methylation. These pathways are not mutually exclusive and can overlap in individual cancers (Harrison 22e p.653-654).",
+    "additionalDifferentials": [
+      "Hemorrhoids or benign anorectal disease as a cause of rectal bleeding (rectal bleeding and altered bowel habits still demand DRE and sigmoidoscopy) (Harrison 22e p.656)",
+      "Other causes of iron-deficiency anemia from chronic occult GI blood loss (Harrison 22e p.656)",
+      "Inflammatory bowel disease (both a risk factor and a differential for altered bowel habit and bleeding) (Harrison 22e p.655)"
     ],
-    [
-     "Primary Differentials",
-     "Hemorrhoids or benign anorectal disease as a cause of rectal bleeding (rectal bleeding and altered bowel habits still demand DRE",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [],
+    "additionalInvestigations": [
+      "Colonoscopy of the entire large bowel (gold standard for detecting cancer and synchronous neoplasms/polyps) (Harrison 22e p.656)",
+      "Flexible sigmoidoscopy as a screening modality (Harrison 22e p.655-656)",
+      "Stool-based tests: fecal occult blood test, fecal immunochemical test (FIT), and fecal DNA testing (Harrison 22e p.655-656)",
+      "Serum carcinoembryonic antigen (CEA) (Harrison 22e p.656)",
+      "Complete blood count and comprehensive metabolic panel (Harrison 22e p.656)",
+      "Chest, abdomen, and pelvic CT scan; MRI and PET as dictated by CT findings (Harrison 22e p.656)",
+      "Pelvic MRI for rectal cancer to assess mesorectal margin and nodal status (Harrison 22e p.658)",
+      "Tumor MMR/microsatellite instability testing (IHC or MSI) and germline genetic testing where indicated (Harrison 22e p.654, 656)",
+      "Investigational: plasma circulating tumor DNA as a biomarker for residual/recurrent disease (Harrison 22e p.658)"
     ],
-    [
-     "Management Strategy",
-     "Surgical resection with regional lymphadenectomy as the curative mainstay for localised colon and rectal cancer",
-     "Core treatment modality"
+    "redFlags": [
+      "Unexplained iron-deficiency anemia in any adult (mandates evaluation of the entire large bowel)",
+      "Change in bowel habit / altered bowel habits",
+      "Rectal bleeding (hematochezia) or guaiac-positive stool",
+      "Tenesmus and narrowing of the caliber of the stool (rectosigmoid lesions)",
+      "Abdominal cramping or obstruction (left-sided lesions)",
+      "Strong family history or known hereditary syndrome (FAP, MUTYH-associated polyposis, Lynch syndrome)"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing rectal bleeding to hemorrhoids and not pursuing DRE and sigmoidoscopy (Harrison 22e p.656)",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is stage-related and depends on depth of tumor penetration into the bowel wall, regional lymph node involvement, and distant metastases (TNM). Stage I (T1-2N0M0) confers a high cure rate (>90-95% 5-year survival); 5-year survival declines through stage II (T3-4N0M0), stage III (node-positive), and stage IV (distant metastasis, <5% in colon). Stage I patients are considered cured after complete resection. A minimum of 12 sampled lymph nodes is considered necessary to accurately define stage. Poor-prognosis features include penetration through the bowel wall into pericolic fat, poorly differentiated histology, perforation and/or adherence to adjacent organs, venous invasion, preoperative CEA >5 ng/mL, BRAF mutation, and right-sided primary location. Tumors with MSI/MMR defects have an improved prognosis (enhanced immune response), and left-colon tumors fare better than right-colon tumors. Notably, primary tumor size does not influence prognosis once adjusted for nodal involvement and differentiation. Most recurrences occur within the first 5 years (Harrison 22e p.656-658).",
+    "pitfalls": [
+      "Attributing rectal bleeding to hemorrhoids and not pursuing DRE and sigmoidoscopy (Harrison 22e p.656)",
+      "Relying on fecal occult blood testing alone: about 50% of patients with documented colorectal cancer have a negative FOBT due to intermittent bleeding, and a colorectal neoplasm is NOT found in most asymptomatic individuals with a positive test (Harrison 22e p.655-656)",
+      "Sigmoidoscopy alone misses proximal lesions: about 1.5% of individuals with a normal sigmoidoscopy harbor a high-risk polyp or adenocarcinoma in the proximal colon (Harrison 22e p.656)",
+      "Lynch syndrome may not be associated with multiple polyps and is therefore often unrecognized (Harrison 22e p.654)",
+      "Disease stage cannot be determined accurately before surgical resection and pathologic analysis unless gross metastatic disease is present (Harrison 22e p.656)",
+      "Initial treatment should be delayed until MMR/microsatellite status is known when possible, since MSI-high rectal cancers may be cured with checkpoint inhibitors (PD-1 antibodies) without surgery, radiation, or chemotherapy (Harrison 22e p.656)"
+    ],
+    "severityClassification": "TNM classification (American Joint Committee on Cancer / Union for International Cancer Control): T = depth of tumor penetration (T1 submucosa, T2 muscularis, T3 through muscularis, T4 adjacent structures), N = regional lymph node involvement (N1 = 1-3 nodes, N2 = >=4 nodes), M = distant metastasis. Stage I = T1-2N0M0; Stage II = T3-4N0M0; Stage III = any T, N1-2, M0; Stage IV = any T, any N, M1. The older Dukes classification was historically used for colorectal cancer (Harrison 22e p.656).",
+    "references": [
+      "Harrison 22e p.653"
+    ],
+    "crossLinks": [
+      "ibd_flare"
+    ],
+    "management": [
+      "Surgical resection with regional lymphadenectomy as the curative mainstay for localised colon and rectal cancer",
+      "Neoadjuvant chemoradiotherapy for locally advanced rectal cancer to downstage before surgery",
+      "Adjuvant oxaliplatin-based chemotherapy such as FOLFOX or CAPOX for node-positive and high-risk node-negative disease",
+      "Systemic therapy for metastatic disease combining cytotoxic chemotherapy with targeted agents - anti-EGFR antibodies in RAS wild-type tumours and the anti-VEGF antibody bevacizumab",
+      "Immune checkpoint inhibition for mismatch-repair-deficient, microsatellite-instability-high tumours, guided by universal MMR and MSI testing",
+      "Post-treatment surveillance with serial carcinoembryonic antigen, colonoscopy and cross-sectional imaging",
+      "Management through a colorectal multidisciplinary team, with genetic counselling and family screening where a hereditary syndrome such as Lynch is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for colorectal cancer."
-  }
- ],
- "diagrams": [
-  {
-   "id": "colorectal-cancer-real-image",
-   "title": "Colorectal Cancer: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "colorectal_cancer-pathway",
+      "title": "Colorectal Cancer: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Symptoms vary by tumor location. Right-sided cancers (cecum, ascending colon) can grow large without obstruction because stool is still liquid, and they tend to ulcerate, causing chronic insidious blood loss and presenting as",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unexplained iron-deficiency anemia in any adult (mandates evaluation of the entire large bowel)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Colonoscopy of the entire large bowel (gold standard for detecting cancer and synchronous neoplasms/polyps) (Harrison 22e p.656), Flexible sigmoidoscopy as a screening modality (Harrison 22e p.655-656), Stool-based tests:"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical resection with regional lymphadenectomy as the curative mainstay for localised colon and rectal cancer"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing rectal bleeding to hemorrhoids and not pursuing DRE and sigmoidoscopy (Harrison 22e p.656)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of colorectal cancer."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "colorectal_cancer-matrix",
+      "title": "Colorectal Cancer: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Symptoms vary by tumor location. Right-sided cancers (cecum, ascending colon) can grow large without obstruction because stool is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Colonoscopy of the entire large bowel (gold standard for detecting cancer and synchronous neoplasms/polyps) (Harrison 22e p.656),",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hemorrhoids or benign anorectal disease as a cause of rectal bleeding (rectal bleeding and altered bowel habits still demand DRE",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical resection with regional lymphadenectomy as the curative mainstay for localised colon and rectal cancer",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing rectal bleeding to hemorrhoids and not pursuing DRE and sigmoidoscopy (Harrison 22e p.656)",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for colorectal cancer."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Colorectal Cancer",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/tumors-of-the-gastrointestinal-tract/colorectal-cancer",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "colorectal_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and staging of colorectal cancer",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or test",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Colonoscopy with biopsy",
+          "cells": [
+            {
+              "text": "{{hy:Examine the whole large bowel}}"
+            },
+            {
+              "text": "Gold standard; also finds synchronous polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unexplained iron-deficiency anaemia",
+          "cells": [
+            {
+              "text": "Any adult"
+            },
+            {
+              "text": "Mandates full colonic evaluation (possible exception: premenopausal multiparous woman)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal occult blood test",
+          "cells": [
+            {
+              "text": "Negative in about half of proven cancers"
+            },
+            {
+              "text": "A negative test does not exclude cancer; positive needs colonoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Staging for distant spread"
+            },
+            {
+              "text": "MRI or PET as CT findings dictate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Rectal cancer"
+            },
+            {
+              "text": "Defines mesorectal margin and nodal status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CEA",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Baseline for staging and follow-up"
+            },
+            {
+              "text": "Preoperative >5 predicts poorer prognosis",
+              "op": ">",
+              "value": 5
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MMR immunohistochemistry or MSI testing",
+          "cells": [
+            {
+              "text": "Universal on all tumours"
+            },
+            {
+              "text": "MSI-high tumours respond to checkpoint inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymph nodes sampled",
+          "cells": [
+            {
+              "text": "At least 12",
+              "op": ">=",
+              "value": 12
+            },
+            {
+              "text": "Needed to define stage accurately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNM stage I to IV",
+          "cells": [
+            {
+              "text": "I: T1-2N0M0; II: T3-4N0M0; III: N1-2M0; IV: M1"
+            },
+            {
+              "text": "5-year survival about 90% localised, 73 to 74% regional, 13 to 18% distant"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "colorectal_cancer-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of colorectal cancer",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemorrhoids",
+          "cells": [
+            {
+              "text": "Bright rectal bleeding; may coexist with cancer"
+            },
+            {
+              "text": "{{hy:Digital rectal exam and sigmoidoscopy}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diverticular disease",
+          "cells": [
+            {
+              "text": "Bleeding or left-sided pain; cancer must still be excluded"
+            },
+            {
+              "text": "Colonoscopy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Chronic diarrhoea and bleeding; also a cancer risk factor"
+            },
+            {
+              "text": "Colonoscopy with biopsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of GI blood loss anaemia",
+          "cells": [
+            {
+              "text": "Iron deficiency from upper GI or small bowel source"
+            },
+            {
+              "text": "Upper endoscopy plus colonoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign adenomatous polyp",
+          "cells": [
+            {
+              "text": "No invasion; villous adenomas carry about threefold higher cancer risk than tubular"
+            },
+            {
+              "text": "Complete excision and histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "colorectal_cancer-treatment",
+      "kind": "treatment",
+      "title": "Treatment of colorectal cancer by setting",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resection with regional lymphadenectomy",
+          "cells": [
+            {
+              "text": "Localised colon cancer"
+            },
+            {
+              "text": "Plan about 5 cm margin; any negative margin acceptable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adjuvant oxaliplatin-based chemotherapy (FOLFOX or CAPOX)",
+          "cells": [
+            {
+              "text": "Stage III and high-risk stage II"
+            },
+            {
+              "text": "High-risk stage II includes lymphovascular invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total neoadjuvant therapy",
+          "cells": [
+            {
+              "text": "Locally advanced rectal cancer (T3, T4 or node-positive)"
+            },
+            {
+              "text": "Chemotherapy and chemoradiation before surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low anterior resection or abdominoperineal resection",
+          "cells": [
+            {
+              "text": "Rectal cancer"
+            },
+            {
+              "text": "Sphincter-sparing when the sphincter complex is not involved"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PD-1 checkpoint inhibitor",
+          "cells": [
+            {
+              "text": "{{hy:MSI-high or MMR-deficient tumours}}"
+            },
+            {
+              "text": "MSI-high rectal cancer may be cured without surgery; know MMR status before starting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resection of isolated metastases",
+          "cells": [
+            {
+              "text": "Liver, lung or peritoneum confined to one site"
+            },
+            {
+              "text": "Considered curative; multidisciplinary decision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic chemotherapy plus targeted antibody",
+          "cells": [
+            {
+              "text": "Metastatic disease"
+            },
+            {
+              "text": "Anti-EGFR only if RAS wild type; bevacizumab anti-VEGF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "After curative resection"
+            },
+            {
+              "text": "CEA every 3 months for 2 years then 6-monthly to 5 years; colonoscopy at 1 year then 3 then every 5 years"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck adds CT or MRI every 6 to 12 months for 5 years in stage II to III, and colonoscopy alone for stage I."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "colorectal_cancer-dx-mgmt",
+      "title": "Diagnosis and management of colorectal cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rectal bleeding, altered bowel habit, iron deficiency or positive stool test",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Colonoscopy of whole colon with biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Adenocarcinoma confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat other cause; remove polyps; surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CT chest, abdomen, pelvis; CEA; MMR or MSI testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Distant metastases?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Rectal primary?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pelvic MRI; total neoadjuvant therapy if T3, T4 or node-positive",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Resection with regional lymphadenectomy (12 or more nodes)",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Stage III or high-risk stage II?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Adjuvant oxaliplatin-based chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "MDT: resect isolated metastases or systemic therapy by RAS and MSI",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Surveillance with CEA, imaging and colonoscopy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

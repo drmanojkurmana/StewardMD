@@ -1,178 +1,465 @@
 {
- "id": "mobius_syndrome",
- "name": "Mobius syndrome",
- "aliases": [
-  "Moebius syndrome",
-  "congenital facial diplegia with abducens palsy",
-  "Mobius sequence"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Paediatric Ophthalmology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital, non-progressive disorder defined by bilateral (often asymmetric) facial (VII) and abducens (VI) nerve palsies, producing a characteristic mask-like, expressionless face with impaired horizontal gaze and abduction",
-   "Presents in the neonate with poor feeding, incomplete eye closure (lagophthalmos), inability to smile and lack of facial expression; drooling and poor lip seal are common",
-   "Additional cranial nerve involvement is frequent, especially hypoglossal (XII) causing tongue hypoplasia or fasciculation, and lower bulbar nerves (IX, X) producing dysphagia and aspiration risk",
-   "Orofacial and limb anomalies co-occur, including micrognathia, high-arched or cleft palate, talipes equinovarus and terminal transverse limb reduction, with overlap of Poland anomaly and arthrogryposis",
-   "Esotropia is common and the horizontal gaze palsy means the eyes cannot abduct past the midline, although convergence and vertical movements are relatively spared",
-   "Lagophthalmos with a variably protective Bell's phenomenon places the cornea at risk of exposure keratopathy, so ocular surface lubrication is essential",
-   "Now classified within the congenital cranial dysinnervation disorders, reflecting maldevelopment or agenesis of brainstem motor nuclei rather than a primary muscle disease",
-   "Cognition is usually normal, but a subset show neurodevelopmental problems including autism spectrum features"
+  "id": "mobius_syndrome",
+  "name": "Mobius syndrome",
+  "aliases": [
+    "Moebius syndrome",
+    "congenital facial diplegia with abducens palsy",
+    "Mobius sequence"
   ],
-  "pathophysiology": "Mobius syndrome is a congenital cranial dysinnervation disorder resulting from maldevelopment or hypoplasia of the sixth and seventh cranial nerve nuclei in the brainstem, with variable involvement of adjacent nuclei (notably XII, IX and X). Both disruptive/vascular and genetic mechanisms are implicated: proposed hypoxic-ischaemic interruption of the developing rhombencephalic vascular supply (associated with misoprostol exposure and, historically, chorionic villus sampling) and, less commonly, defined genetic causes. The end result is absent or deficient innervation of the muscles of facial expression and the lateral recti, on a background of rhombencephalic maldevelopment. Most cases are sporadic.",
-  "additionalDifferentials": [
-   "Congenital fibrosis of the extraocular muscles and other congenital cranial dysinnervation disorders",
-   "Neonatal (transient) myasthenia and congenital myasthenic syndromes",
-   "Congenital myotonic dystrophy and other congenital myopathies",
-   "Birth-trauma facial nerve palsy (usually unilateral)",
-   "Hereditary congenital facial paresis without an abduction deficit",
-   "Bilateral Duane retraction syndrome",
-   "CHARGE syndrome and other syndromic cranial neuropathies"
-  ],
-  "additionalInvestigations": [
-   "Thin-section brain MRI to assess the brainstem, cranial nerve nuclei and cerebellum",
-   "Orthoptic assessment of ocular alignment, ductions and horizontal gaze",
-   "Corneal and ocular surface examination for exposure keratopathy",
-   "Feeding and swallowing evaluation, including videofluoroscopy, for aspiration risk",
-   "Genetic evaluation and counselling, with chromosomal or exome testing if syndromic",
-   "Audiology and neurodevelopmental assessment",
-   "Polysomnography if central hypoventilation or sleep-disordered breathing is suspected"
-  ],
-  "redFlags": [
-   "Aspiration and recurrent chest infections from bulbar dysfunction",
-   "Central apnoea or hypoventilation and failure to thrive in the neonatal period",
-   "Corneal ulceration from exposure keratopathy",
-   "Severe feeding difficulty with poor weight gain"
-  ],
-  "prognosis": "The disorder is non-progressive and life expectancy is usually normal once feeding and airway issues are managed, with many patients functioning well given multidisciplinary support. Facial diplegia is permanent, but smile-reanimation surgery (such as gracilis free-muscle transfer) and strabismus surgery can improve function and appearance.",
-  "pitfalls": [
-   "Attributing the expressionless face to intellectual disability rather than to facial palsy",
-   "Missing corneal exposure because an intact Bell's phenomenon masks the lagophthalmos",
-   "Overlooking aspiration risk and airway compromise in the neonate",
-   "Assuming a purely muscular problem and forgetting the brainstem dysinnervation basis",
-   "Failing to screen for associated limb, orofacial and neurodevelopmental anomalies"
-  ],
-  "references": [
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-   "Kanski's Clinical Ophthalmology",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Protect the cornea from exposure keratopathy with intensive ocular surface lubrication and, where needed, eyelid surgery",
-   "Secure feeding and airway safety with modified feeding and formal swallowing assessment, using nasogastric or gastrostomy support and addressing aspiration risk",
-   "Correct esotropia and improve ocular alignment with strabismus surgery",
-   "Restore a voluntary smile and oral competence with facial reanimation surgery such as gracilis free-muscle transfer",
-   "Provide speech and language therapy and orthodontic or craniofacial care for palatal and jaw anomalies",
-   "Manage associated limb anomalies such as talipes and reduction defects orthopaedically",
-   "Follow up through a multidisciplinary team with audiology, neurodevelopmental support and genetic counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mobius_syndrome-pathway",
-   "title": "Mobius syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital, non-progressive disorder defined by bilateral (often asymmetric) facial (VII) and abducens (VI) nerve palsies, producing a characteristic mask-like, expressionless face with impaired horizontal gaze and abduction",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aspiration and recurrent chest infections from bulbar dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thin-section brain MRI to assess the brainstem, cranial nerve nuclei and cerebellum, Orthoptic assessment of ocular alignment, ductions and horizontal gaze, Corneal and ocular surface examination for exposure keratopathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Protect the cornea from exposure keratopathy with intensive ocular surface lubrication and, where needed, eyelid surgery"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the expressionless face to intellectual disability rather than to facial palsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mobius syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "mobius_syndrome-matrix",
-   "title": "Mobius syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital, non-progressive disorder defined by bilateral (often asymmetric) facial (VII) and abducens (VI) nerve palsies,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Paediatric Ophthalmology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital, non-progressive disorder defined by bilateral (often asymmetric) facial (VII) and abducens (VI) nerve palsies, producing a characteristic mask-like, expressionless face with impaired horizontal gaze and abduction",
+      "Presents in the neonate with poor feeding, incomplete eye closure (lagophthalmos), inability to smile and lack of facial expression; drooling and poor lip seal are common",
+      "Additional cranial nerve involvement is frequent, especially hypoglossal (XII) causing tongue hypoplasia or fasciculation, and lower bulbar nerves (IX, X) producing dysphagia and aspiration risk",
+      "Orofacial and limb anomalies co-occur, including micrognathia, high-arched or cleft palate, talipes equinovarus and terminal transverse limb reduction, with overlap of Poland anomaly and arthrogryposis",
+      "Esotropia is common and the horizontal gaze palsy means the eyes cannot abduct past the midline, although convergence and vertical movements are relatively spared",
+      "Lagophthalmos with a variably protective Bell's phenomenon places the cornea at risk of exposure keratopathy, so ocular surface lubrication is essential",
+      "Now classified within the congenital cranial dysinnervation disorders, reflecting maldevelopment or agenesis of brainstem motor nuclei rather than a primary muscle disease",
+      "Cognition is usually normal, but a subset show neurodevelopmental problems including autism spectrum features"
     ],
-    [
-     "Key Investigations",
-     "Thin-section brain MRI to assess the brainstem, cranial nerve nuclei and cerebellum, Orthoptic assessment of ocular alignment,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mobius syndrome is a congenital cranial dysinnervation disorder resulting from maldevelopment or hypoplasia of the sixth and seventh cranial nerve nuclei in the brainstem, with variable involvement of adjacent nuclei (notably XII, IX and X). Both disruptive/vascular and genetic mechanisms are implicated: proposed hypoxic-ischaemic interruption of the developing rhombencephalic vascular supply (associated with misoprostol exposure and, historically, chorionic villus sampling) and, less commonly, defined genetic causes. The end result is absent or deficient innervation of the muscles of facial expression and the lateral recti, on a background of rhombencephalic maldevelopment. Most cases are sporadic.",
+    "additionalDifferentials": [
+      "Congenital fibrosis of the extraocular muscles and other congenital cranial dysinnervation disorders",
+      "Neonatal (transient) myasthenia and congenital myasthenic syndromes",
+      "Congenital myotonic dystrophy and other congenital myopathies",
+      "Birth-trauma facial nerve palsy (usually unilateral)",
+      "Hereditary congenital facial paresis without an abduction deficit",
+      "Bilateral Duane retraction syndrome",
+      "CHARGE syndrome and other syndromic cranial neuropathies"
     ],
-    [
-     "Primary Differentials",
-     "Congenital fibrosis of the extraocular muscles and other congenital cranial dysinnervation disorders, Neonatal (transient)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thin-section brain MRI to assess the brainstem, cranial nerve nuclei and cerebellum",
+      "Orthoptic assessment of ocular alignment, ductions and horizontal gaze",
+      "Corneal and ocular surface examination for exposure keratopathy",
+      "Feeding and swallowing evaluation, including videofluoroscopy, for aspiration risk",
+      "Genetic evaluation and counselling, with chromosomal or exome testing if syndromic",
+      "Audiology and neurodevelopmental assessment",
+      "Polysomnography if central hypoventilation or sleep-disordered breathing is suspected"
     ],
-    [
-     "Management Strategy",
-     "Protect the cornea from exposure keratopathy with intensive ocular surface lubrication and, where needed, eyelid surgery",
-     "Core treatment modality"
+    "redFlags": [
+      "Aspiration and recurrent chest infections from bulbar dysfunction",
+      "Central apnoea or hypoventilation and failure to thrive in the neonatal period",
+      "Corneal ulceration from exposure keratopathy",
+      "Severe feeding difficulty with poor weight gain"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the expressionless face to intellectual disability rather than to facial palsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is non-progressive and life expectancy is usually normal once feeding and airway issues are managed, with many patients functioning well given multidisciplinary support. Facial diplegia is permanent, but smile-reanimation surgery (such as gracilis free-muscle transfer) and strabismus surgery can improve function and appearance.",
+    "pitfalls": [
+      "Attributing the expressionless face to intellectual disability rather than to facial palsy",
+      "Missing corneal exposure because an intact Bell's phenomenon masks the lagophthalmos",
+      "Overlooking aspiration risk and airway compromise in the neonate",
+      "Assuming a purely muscular problem and forgetting the brainstem dysinnervation basis",
+      "Failing to screen for associated limb, orofacial and neurodevelopmental anomalies"
+    ],
+    "references": [
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "Kanski's Clinical Ophthalmology",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Protect the cornea from exposure keratopathy with intensive ocular surface lubrication and, where needed, eyelid surgery",
+      "Secure feeding and airway safety with modified feeding and formal swallowing assessment, using nasogastric or gastrostomy support and addressing aspiration risk",
+      "Correct esotropia and improve ocular alignment with strabismus surgery",
+      "Restore a voluntary smile and oral competence with facial reanimation surgery such as gracilis free-muscle transfer",
+      "Provide speech and language therapy and orthodontic or craniofacial care for palatal and jaw anomalies",
+      "Manage associated limb anomalies such as talipes and reduction defects orthopaedically",
+      "Follow up through a multidisciplinary team with audiology, neurodevelopmental support and genetic counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for mobius syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mobius-syndrome-real-image",
-   "title": "Mobius syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "mobius_syndrome-pathway",
+      "title": "Mobius syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital, non-progressive disorder defined by bilateral (often asymmetric) facial (VII) and abducens (VI) nerve palsies, producing a characteristic mask-like, expressionless face with impaired horizontal gaze and abduction",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aspiration and recurrent chest infections from bulbar dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thin-section brain MRI to assess the brainstem, cranial nerve nuclei and cerebellum, Orthoptic assessment of ocular alignment, ductions and horizontal gaze, Corneal and ocular surface examination for exposure keratopathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Protect the cornea from exposure keratopathy with intensive ocular surface lubrication and, where needed, eyelid surgery"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the expressionless face to intellectual disability rather than to facial palsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mobius syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mobius_syndrome-matrix",
+      "title": "Mobius syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital, non-progressive disorder defined by bilateral (often asymmetric) facial (VII) and abducens (VI) nerve palsies,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thin-section brain MRI to assess the brainstem, cranial nerve nuclei and cerebellum, Orthoptic assessment of ocular alignment,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital fibrosis of the extraocular muscles and other congenital cranial dysinnervation disorders, Neonatal (transient)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Protect the cornea from exposure keratopathy with intensive ocular surface lubrication and, where needed, eyelid surgery",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the expressionless face to intellectual disability rather than to facial palsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mobius syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mobius_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thin-section brain MRI",
+          "cells": [
+            {
+              "text": "Brainstem and cranial nerve nuclei"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic assessment",
+          "cells": [
+            {
+              "text": "Alignment, ductions and horizontal gaze"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal and ocular surface examination",
+          "cells": [
+            {
+              "text": "Exposure keratopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and swallowing evaluation, including videofluoroscopy",
+          "cells": [
+            {
+              "text": "Aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation, with chromosomal or exome testing if syndromic",
+          "cells": [
+            {
+              "text": "Syndromic association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology and neurodevelopmental assessment",
+          "cells": [
+            {
+              "text": "Hearing and development"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mobius_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Birth-trauma facial nerve palsy",
+          "cells": [
+            {
+              "text": "Usually unilateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHARGE syndrome and other syndromic cranial neuropathies",
+          "cells": [
+            {
+              "text": "Syndromic features; genetic evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mobius_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ocular surface protection",
+          "cells": [
+            {
+              "text": "Intensive lubrication and eyelid surgery where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and airway safety",
+          "cells": [
+            {
+              "text": "Modified feeding and formal swallowing assessment; nasogastric or gastrostomy support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus surgery",
+          "cells": [
+            {
+              "text": "Corrects esotropia and improves alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial reanimation",
+          "cells": [
+            {
+              "text": "Voluntary smile and oral competence, for example gracilis free-muscle transfer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and craniofacial care",
+          "cells": [
+            {
+              "text": "Speech therapy; orthodontic or craniofacial care for palatal and jaw anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb anomalies",
+          "cells": [
+            {
+              "text": "Orthopaedic management of talipes and reduction defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Audiology, neurodevelopmental support and genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mobius_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Mobius syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with bilateral facial weakness and ocular abduction deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Aspiration, neonatal apnoea, corneal ulceration or severe feeding difficulty?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Secure feeding and airway; urgent review for apnoea or hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI; orthoptic assessment; corneal examination; swallow study; genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a congenital cranial dysinnervation pattern confirmed on examination and MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CHARGE, congenital myopathy or neonatal myasthenia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive ocular surface lubrication and eyelid surgery to protect the cornea",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Modified feeding and formal swallowing assessment; nasogastric or gastrostomy support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Strabismus surgery to correct esotropia and improve alignment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Facial reanimation such as gracilis free-muscle transfer for a voluntary smile",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary team with audiology, neurodevelopmental support and genetics",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

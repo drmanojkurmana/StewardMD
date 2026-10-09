@@ -1,172 +1,459 @@
 {
- "id": "sudden_sensorineural_hearing_loss",
- "name": "Sudden sensorineural hearing loss",
- "aliases": [
-  "SSNHL",
-  "sudden deafness",
-  "idiopathic sudden sensorineural hearing loss"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as a rapid-onset sensorineural hearing loss developing over hours to a few days, most often unilateral",
-   "It is an otological emergency where prompt evaluation and treatment offer the best chance of hearing recovery",
-   "Patients often report a blocked ear, tinnitus and sometimes vertigo, and may notice the loss on waking",
-   "Tuning fork tests help confirm a sensorineural pattern: Weber lateralises to the better-hearing ear and Rinne remains positive",
-   "The majority of cases are idiopathic, but identifiable causes include infection, vascular events, trauma, ototoxic drugs and, importantly, vestibular schwannoma",
-   "Management principles centre on early corticosteroid therapy, given systemically or intratympanically, after excluding a conductive cause",
-   "MRI of the internal auditory meatus is important to exclude a retrocochlear lesion such as acoustic neuroma",
-   "Delay in diagnosis and treatment reduces the likelihood of hearing recovery, so urgent referral is essential"
+  "id": "sudden_sensorineural_hearing_loss",
+  "name": "Sudden sensorineural hearing loss",
+  "aliases": [
+    "SSNHL",
+    "sudden deafness",
+    "idiopathic sudden sensorineural hearing loss"
   ],
-  "pathophysiology": "Sudden sensorineural hearing loss reflects acute dysfunction of the cochlea or auditory nerve. Although often idiopathic, proposed mechanisms include viral infection or inflammation of the labyrinth, microvascular compromise of the cochlear blood supply, rupture of intracochlear membranes, and autoimmune injury. These processes damage the delicate hair cells and neural elements or disturb the cochlear ionic and metabolic environment, producing abrupt hearing loss. A minority result from identifiable structural causes such as a vestibular schwannoma compressing the cochlear nerve, which is why imaging is required.",
-  "additionalDifferentials": [
-   "Impacted cerumen or other conductive causes (must be excluded)",
-   "Vestibular schwannoma (acoustic neuroma)",
-   "Meniere's disease",
-   "Perilymph fistula",
-   "Ototoxicity from drugs",
-   "Central causes such as stroke affecting auditory pathways"
-  ],
-  "additionalInvestigations": [
-   "Otoscopy and tuning fork tests to distinguish sensorineural from conductive loss",
-   "Pure tone audiometry to confirm and quantify the sensorineural loss",
-   "MRI of the internal auditory meatus and posterior fossa to exclude retrocochlear pathology",
-   "Blood tests for infective, inflammatory or autoimmune causes as indicated",
-   "Vestibular assessment when vertigo accompanies the hearing loss"
-  ],
-  "redFlags": [
-   "Sudden unilateral hearing loss itself, which is an emergency requiring urgent assessment and treatment",
-   "Accompanying neurological signs or severe vertigo suggesting a central or serious cause",
-   "Progressive or fluctuating loss with tinnitus indicating possible vestibular schwannoma",
-   "Bilateral sudden loss suggesting a systemic, autoimmune or ototoxic process"
-  ],
-  "prognosis": "Outcome is variable; a substantial proportion recover partially or fully, particularly with early treatment, but severe loss, delayed presentation, vertigo and poor initial audiometry are associated with worse recovery.",
-  "pitfalls": [
-   "Dismissing sudden hearing loss as wax or a benign blocked ear and delaying treatment",
-   "Failing to distinguish sensorineural from conductive loss with tuning fork tests",
-   "Not arranging MRI to exclude a vestibular schwannoma",
-   "Missing the narrow window in which corticosteroid therapy is most effective"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Commence early systemic corticosteroid therapy once a conductive cause is excluded, as the mainstay to maximise the chance of hearing recovery",
-   "Offer intratympanic corticosteroid injection as primary treatment where systemic steroids are contraindicated, or as salvage after an incomplete response",
-   "Consider adjunctive hyperbaric oxygen therapy in selected patients presenting early",
-   "Withdraw any ototoxic drugs and treat identifiable causes, using antiviral therapy for infection and immunosuppression for suspected autoimmune inner-ear disease",
-   "Arrange MRI of the internal auditory meatus to exclude vestibular schwannoma and other retrocochlear pathology",
-   "Track recovery with serial pure-tone audiometry and provide vestibular rehabilitation where vertigo is present",
-   "Refer to ENT and audiology for hearing rehabilitation with hearing aids or cochlear implantation if loss persists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sudden_sensorineural_hearing_loss-pathway",
-   "title": "Sudden sensorineural hearing loss: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as a rapid-onset sensorineural hearing loss developing over hours to a few days, most often unilateral",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden unilateral hearing loss itself, which is an emergency requiring urgent assessment and treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Otoscopy and tuning fork tests to distinguish sensorineural from conductive loss, Pure tone audiometry to confirm and quantify the sensorineural loss, MRI of the internal auditory meatus and posterior fossa to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Commence early systemic corticosteroid therapy once a conductive cause is excluded, as the mainstay to maximise the chance of hearing recovery"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing sudden hearing loss as wax or a benign blocked ear and delaying treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sudden sensorineural hearing loss."
-  }
- ],
- "tables": [
-  {
-   "id": "sudden_sensorineural_hearing_loss-matrix",
-   "title": "Sudden sensorineural hearing loss: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as a rapid-onset sensorineural hearing loss developing over hours to a few days, most often unilateral",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as a rapid-onset sensorineural hearing loss developing over hours to a few days, most often unilateral",
+      "It is an otological emergency where prompt evaluation and treatment offer the best chance of hearing recovery",
+      "Patients often report a blocked ear, tinnitus and sometimes vertigo, and may notice the loss on waking",
+      "Tuning fork tests help confirm a sensorineural pattern: Weber lateralises to the better-hearing ear and Rinne remains positive",
+      "The majority of cases are idiopathic, but identifiable causes include infection, vascular events, trauma, ototoxic drugs and, importantly, vestibular schwannoma",
+      "Management principles centre on early corticosteroid therapy, given systemically or intratympanically, after excluding a conductive cause",
+      "MRI of the internal auditory meatus is important to exclude a retrocochlear lesion such as acoustic neuroma",
+      "Delay in diagnosis and treatment reduces the likelihood of hearing recovery, so urgent referral is essential"
     ],
-    [
-     "Key Investigations",
-     "Otoscopy and tuning fork tests to distinguish sensorineural from conductive loss, Pure tone audiometry to confirm and quantify",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sudden sensorineural hearing loss reflects acute dysfunction of the cochlea or auditory nerve. Although often idiopathic, proposed mechanisms include viral infection or inflammation of the labyrinth, microvascular compromise of the cochlear blood supply, rupture of intracochlear membranes, and autoimmune injury. These processes damage the delicate hair cells and neural elements or disturb the cochlear ionic and metabolic environment, producing abrupt hearing loss. A minority result from identifiable structural causes such as a vestibular schwannoma compressing the cochlear nerve, which is why imaging is required.",
+    "additionalDifferentials": [
+      "Impacted cerumen or other conductive causes (must be excluded)",
+      "Vestibular schwannoma (acoustic neuroma)",
+      "Meniere's disease",
+      "Perilymph fistula",
+      "Ototoxicity from drugs",
+      "Central causes such as stroke affecting auditory pathways"
     ],
-    [
-     "Primary Differentials",
-     "Impacted cerumen or other conductive causes (must be excluded), Vestibular schwannoma (acoustic neuroma), Meniere's disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Otoscopy and tuning fork tests to distinguish sensorineural from conductive loss",
+      "Pure tone audiometry to confirm and quantify the sensorineural loss",
+      "MRI of the internal auditory meatus and posterior fossa to exclude retrocochlear pathology",
+      "Blood tests for infective, inflammatory or autoimmune causes as indicated",
+      "Vestibular assessment when vertigo accompanies the hearing loss"
     ],
-    [
-     "Management Strategy",
-     "Commence early systemic corticosteroid therapy once a conductive cause is excluded, as the mainstay to maximise the chance of",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden unilateral hearing loss itself, which is an emergency requiring urgent assessment and treatment",
+      "Accompanying neurological signs or severe vertigo suggesting a central or serious cause",
+      "Progressive or fluctuating loss with tinnitus indicating possible vestibular schwannoma",
+      "Bilateral sudden loss suggesting a systemic, autoimmune or ototoxic process"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing sudden hearing loss as wax or a benign blocked ear and delaying treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable; a substantial proportion recover partially or fully, particularly with early treatment, but severe loss, delayed presentation, vertigo and poor initial audiometry are associated with worse recovery.",
+    "pitfalls": [
+      "Dismissing sudden hearing loss as wax or a benign blocked ear and delaying treatment",
+      "Failing to distinguish sensorineural from conductive loss with tuning fork tests",
+      "Not arranging MRI to exclude a vestibular schwannoma",
+      "Missing the narrow window in which corticosteroid therapy is most effective"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Commence early systemic corticosteroid therapy once a conductive cause is excluded, as the mainstay to maximise the chance of hearing recovery",
+      "Offer intratympanic corticosteroid injection as primary treatment where systemic steroids are contraindicated, or as salvage after an incomplete response",
+      "Consider adjunctive hyperbaric oxygen therapy in selected patients presenting early",
+      "Withdraw any ototoxic drugs and treat identifiable causes, using antiviral therapy for infection and immunosuppression for suspected autoimmune inner-ear disease",
+      "Arrange MRI of the internal auditory meatus to exclude vestibular schwannoma and other retrocochlear pathology",
+      "Track recovery with serial pure-tone audiometry and provide vestibular rehabilitation where vertigo is present",
+      "Refer to ENT and audiology for hearing rehabilitation with hearing aids or cochlear implantation if loss persists"
     ]
-   ],
-   "caption": "Overview comparison matrix for sudden sensorineural hearing loss."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sudden-sensorineural-hearing-loss-real-image",
-   "title": "Sudden sensorineural hearing loss: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sudden_sensorineural_hearing_loss-pathway",
+      "title": "Sudden sensorineural hearing loss: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as a rapid-onset sensorineural hearing loss developing over hours to a few days, most often unilateral",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden unilateral hearing loss itself, which is an emergency requiring urgent assessment and treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Otoscopy and tuning fork tests to distinguish sensorineural from conductive loss, Pure tone audiometry to confirm and quantify the sensorineural loss, MRI of the internal auditory meatus and posterior fossa to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Commence early systemic corticosteroid therapy once a conductive cause is excluded, as the mainstay to maximise the chance of hearing recovery"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing sudden hearing loss as wax or a benign blocked ear and delaying treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sudden sensorineural hearing loss."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sudden_sensorineural_hearing_loss-matrix",
+      "title": "Sudden sensorineural hearing loss: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as a rapid-onset sensorineural hearing loss developing over hours to a few days, most often unilateral",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Otoscopy and tuning fork tests to distinguish sensorineural from conductive loss, Pure tone audiometry to confirm and quantify",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Impacted cerumen or other conductive causes (must be excluded), Vestibular schwannoma (acoustic neuroma), Meniere's disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Commence early systemic corticosteroid therapy once a conductive cause is excluded, as the mainstay to maximise the chance of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing sudden hearing loss as wax or a benign blocked ear and delaying treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sudden sensorineural hearing loss."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sudden_sensorineural_hearing_loss-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy and tuning fork tests",
+          "cells": [
+            {
+              "text": "Sensorineural rather than conductive pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure tone audiometry",
+          "cells": [
+            {
+              "text": "Confirms and quantifies the loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of internal auditory meatus and posterior fossa",
+          "cells": [
+            {
+              "text": "Retrocochlear pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests for infective, inflammatory or autoimmune causes",
+          "cells": [
+            {
+              "text": "As indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular assessment",
+          "cells": [
+            {
+              "text": "When vertigo accompanies the loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sudden_sensorineural_hearing_loss-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Impacted cerumen or other conductive cause",
+          "cells": [
+            {
+              "text": "Must be excluded first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular schwannoma",
+          "cells": [
+            {
+              "text": "Progressive or fluctuating loss with tinnitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meniere's disease",
+          "cells": [
+            {
+              "text": "Fluctuating loss with vertigo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sudden_sensorineural_hearing_loss-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early systemic corticosteroid therapy",
+          "cells": [
+            {
+              "text": "Mainstay once a conductive cause is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intratympanic corticosteroid injection",
+          "cells": [
+            {
+              "text": "Primary where systemic steroids are contraindicated, or salvage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive hyperbaric oxygen",
+          "cells": [
+            {
+              "text": "Selected patients presenting early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal of ototoxic drugs",
+          "cells": [
+            {
+              "text": "Antiviral or immunosuppressive treatment of identified causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of internal auditory meatus",
+          "cells": [
+            {
+              "text": "Exclude vestibular schwannoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Tracks recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT and audiology referral",
+          "cells": [
+            {
+              "text": "Hearing aids or cochlear implantation if loss persists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sudden_sensorineural_hearing_loss-dx-mgmt",
+      "title": "Diagnosis and management of Sudden sensorineural hearing loss",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden unilateral hearing loss over hours to days: suspected sudden SNHL",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological signs, severe vertigo, bilateral loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ENT and audiology review for sudden hearing loss; treat without delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy; tuning fork tests; pure tone audiometry; MRI of internal auditory meatus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a sensorineural loss confirmed with no conductive cause on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cerumen, vestibular schwannoma or Meniere's disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early systemic corticosteroids once a conductive cause is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intratympanic steroid if systemic steroids are contraindicated or incomplete",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdrawal of ototoxic drugs and treatment of identified causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "MRI of the internal auditory meatus to exclude vestibular schwannoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery depends on treatment speed; delay lowers the chance of hearing recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

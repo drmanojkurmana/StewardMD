@@ -1,174 +1,425 @@
 {
- "id": "nlrp12_autoinflammatory_syndrome",
- "name": "NLRP12 autoinflammatory syndrome",
- "aliases": [
-  "familial cold autoinflammatory syndrome type 2",
-  "FCAS2",
-  "NLRP12-associated periodic fever",
-  "NLRP12"
- ],
- "class": "non_infective",
- "system": "Immunology / Autoinflammatory",
- "specialty": "Clinical Immunology / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A hereditary periodic fever syndrome caused by mutations in NLRP12, a regulator of inflammatory signalling",
-   "Also termed familial cold autoinflammatory syndrome type 2, reflecting cold-triggered attacks in many patients",
-   "Recurrent episodes feature fever, urticaria-like rash, arthralgia or myalgia, and headache",
-   "Cold exposure is a common but not universal trigger of flares",
-   "Some patients report sensorineural hearing loss and aphthous ulcers alongside the periodic features",
-   "Diagnosis combines a compatible clinical picture, family history, and NLRP12 genetic testing after excluding cryopyrin-associated periodic syndromes",
-   "Anti-inflammatory therapy, including interleukin-1 directed treatment in selected cases, can reduce the frequency and severity of attacks"
+  "id": "nlrp12_autoinflammatory_syndrome",
+  "name": "NLRP12 autoinflammatory syndrome",
+  "aliases": [
+    "familial cold autoinflammatory syndrome type 2",
+    "FCAS2",
+    "NLRP12-associated periodic fever",
+    "NLRP12"
   ],
-  "pathophysiology": "NLRP12 autoinflammatory syndrome is caused by mutations in NLRP12, a NOD-like receptor family member that normally acts as a negative regulator of inflammatory signalling pathways such as nuclear factor kappa B. Loss of this regulatory function permits excessive inflammatory signalling and cytokine production, producing recurrent systemic inflammation. Cold exposure can precipitate attacks, giving rise to the familial cold autoinflammatory phenotype. The episodic fevers, rash, and musculoskeletal symptoms reflect this intermittent innate immune activation, and interleukin-1 pathway involvement underlies the benefit seen with IL-1 directed therapy in some patients.",
-  "additionalDifferentials": [
-   "Cryopyrin-associated periodic syndromes (NLRP3, including familial cold autoinflammatory syndrome type 1)",
-   "Familial Mediterranean fever",
-   "TNF receptor-associated periodic syndrome (TRAPS)",
-   "Acquired cold urticaria",
-   "Systemic-onset juvenile idiopathic arthritis",
-   "PLAID with cold-triggered urticaria"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for NLRP12 mutations",
-   "Acute-phase reactants during febrile episodes",
-   "Cold provocation history and, where appropriate, controlled cold challenge",
-   "Audiometry if hearing loss is suspected",
-   "Skin biopsy of the rash in uncertain cases",
-   "Screening to exclude NLRP3-related cryopyrin-associated periodic syndromes"
-  ],
-  "redFlags": [
-   "Progressive sensorineural hearing loss",
-   "Features suggesting systemic amyloidosis from chronic inflammation",
-   "Severe or frequent disabling attacks despite treatment",
-   "Neurological symptoms warranting evaluation for alternative diagnoses"
-  ],
-  "prognosis": "NLRP12 autoinflammatory syndrome generally has a favourable prognosis with a relapsing course; attacks are often milder than in some cryopyrinopathies and can be reduced with anti-inflammatory therapy.",
-  "pitfalls": [
-   "Labelling all cold-triggered periodic fevers as NLRP3-related cryopyrinopathy",
-   "Overlooking NLRP12 when NLRP3 testing is negative in a cold-sensitive patient",
-   "Attributing episodic urticaria to chronic spontaneous urticaria alone",
-   "Failing to monitor for hearing loss and amyloidosis over time"
-  ],
-  "references": [
-   "Textbook of Autoinflammation",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Counsel on avoidance of cold exposure, the common precipitant of attacks",
-   "Treat flares symptomatically with non-steroidal anti-inflammatory drugs and short courses of corticosteroids",
-   "Use interleukin-1-targeted therapy (anakinra or canakinumab) for frequent or refractory attacks given interleukin-1 pathway involvement",
-   "Manage the urticaria-like rash, arthralgia and headache of individual episodes",
-   "Undertake audiometry to detect and monitor sensorineural hearing loss",
-   "Coordinate care through clinical immunology and rheumatology",
-   "Provide genetic counselling and family screening given autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nlrp12_autoinflammatory_syndrome-pathway",
-   "title": "NLRP12 autoinflammatory syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A hereditary periodic fever syndrome caused by mutations in NLRP12, a regulator of inflammatory signalling",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive sensorineural hearing loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for NLRP12 mutations, Acute-phase reactants during febrile episodes, Cold provocation history and, where appropriate, controlled cold challenge"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Counsel on avoidance of cold exposure, the common precipitant of attacks"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling all cold-triggered periodic fevers as NLRP3-related cryopyrinopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nlrp12 autoinflammatory syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "nlrp12_autoinflammatory_syndrome-matrix",
-   "title": "NLRP12 autoinflammatory syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A hereditary periodic fever syndrome caused by mutations in NLRP12, a regulator of inflammatory signalling",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Autoinflammatory",
+  "specialty": "Clinical Immunology / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A hereditary periodic fever syndrome caused by mutations in NLRP12, a regulator of inflammatory signalling",
+      "Also termed familial cold autoinflammatory syndrome type 2, reflecting cold-triggered attacks in many patients",
+      "Recurrent episodes feature fever, urticaria-like rash, arthralgia or myalgia, and headache",
+      "Cold exposure is a common but not universal trigger of flares",
+      "Some patients report sensorineural hearing loss and aphthous ulcers alongside the periodic features",
+      "Diagnosis combines a compatible clinical picture, family history, and NLRP12 genetic testing after excluding cryopyrin-associated periodic syndromes",
+      "Anti-inflammatory therapy, including interleukin-1 directed treatment in selected cases, can reduce the frequency and severity of attacks"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for NLRP12 mutations, Acute-phase reactants during febrile episodes, Cold provocation history and, where",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "NLRP12 autoinflammatory syndrome is caused by mutations in NLRP12, a NOD-like receptor family member that normally acts as a negative regulator of inflammatory signalling pathways such as nuclear factor kappa B. Loss of this regulatory function permits excessive inflammatory signalling and cytokine production, producing recurrent systemic inflammation. Cold exposure can precipitate attacks, giving rise to the familial cold autoinflammatory phenotype. The episodic fevers, rash, and musculoskeletal symptoms reflect this intermittent innate immune activation, and interleukin-1 pathway involvement underlies the benefit seen with IL-1 directed therapy in some patients.",
+    "additionalDifferentials": [
+      "Cryopyrin-associated periodic syndromes (NLRP3, including familial cold autoinflammatory syndrome type 1)",
+      "Familial Mediterranean fever",
+      "TNF receptor-associated periodic syndrome (TRAPS)",
+      "Acquired cold urticaria",
+      "Systemic-onset juvenile idiopathic arthritis",
+      "PLAID with cold-triggered urticaria"
     ],
-    [
-     "Primary Differentials",
-     "Cryopyrin-associated periodic syndromes (NLRP3, including familial cold autoinflammatory syndrome type 1), Familial Mediterranean",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for NLRP12 mutations",
+      "Acute-phase reactants during febrile episodes",
+      "Cold provocation history and, where appropriate, controlled cold challenge",
+      "Audiometry if hearing loss is suspected",
+      "Skin biopsy of the rash in uncertain cases",
+      "Screening to exclude NLRP3-related cryopyrin-associated periodic syndromes"
     ],
-    [
-     "Management Strategy",
-     "Counsel on avoidance of cold exposure, the common precipitant of attacks",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive sensorineural hearing loss",
+      "Features suggesting systemic amyloidosis from chronic inflammation",
+      "Severe or frequent disabling attacks despite treatment",
+      "Neurological symptoms warranting evaluation for alternative diagnoses"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling all cold-triggered periodic fevers as NLRP3-related cryopyrinopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "NLRP12 autoinflammatory syndrome generally has a favourable prognosis with a relapsing course; attacks are often milder than in some cryopyrinopathies and can be reduced with anti-inflammatory therapy.",
+    "pitfalls": [
+      "Labelling all cold-triggered periodic fevers as NLRP3-related cryopyrinopathy",
+      "Overlooking NLRP12 when NLRP3 testing is negative in a cold-sensitive patient",
+      "Attributing episodic urticaria to chronic spontaneous urticaria alone",
+      "Failing to monitor for hearing loss and amyloidosis over time"
+    ],
+    "references": [
+      "Textbook of Autoinflammation",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Counsel on avoidance of cold exposure, the common precipitant of attacks",
+      "Treat flares symptomatically with non-steroidal anti-inflammatory drugs and short courses of corticosteroids",
+      "Use interleukin-1-targeted therapy (anakinra or canakinumab) for frequent or refractory attacks given interleukin-1 pathway involvement",
+      "Manage the urticaria-like rash, arthralgia and headache of individual episodes",
+      "Undertake audiometry to detect and monitor sensorineural hearing loss",
+      "Coordinate care through clinical immunology and rheumatology",
+      "Provide genetic counselling and family screening given autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for nlrp12 autoinflammatory syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nlrp12-autoinflammatory-syndrome-real-image",
-   "title": "NLRP12 autoinflammatory syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "nlrp12_autoinflammatory_syndrome-pathway",
+      "title": "NLRP12 autoinflammatory syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A hereditary periodic fever syndrome caused by mutations in NLRP12, a regulator of inflammatory signalling",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive sensorineural hearing loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for NLRP12 mutations, Acute-phase reactants during febrile episodes, Cold provocation history and, where appropriate, controlled cold challenge"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Counsel on avoidance of cold exposure, the common precipitant of attacks"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling all cold-triggered periodic fevers as NLRP3-related cryopyrinopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nlrp12 autoinflammatory syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nlrp12_autoinflammatory_syndrome-matrix",
+      "title": "NLRP12 autoinflammatory syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A hereditary periodic fever syndrome caused by mutations in NLRP12, a regulator of inflammatory signalling",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for NLRP12 mutations, Acute-phase reactants during febrile episodes, Cold provocation history and, where",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cryopyrin-associated periodic syndromes (NLRP3, including familial cold autoinflammatory syndrome type 1), Familial Mediterranean",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Counsel on avoidance of cold exposure, the common precipitant of attacks",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling all cold-triggered periodic fevers as NLRP3-related cryopyrinopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nlrp12 autoinflammatory syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nlrp12_autoinflammatory_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NLRP12 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants during febrile episodes",
+          "cells": [
+            {
+              "text": "Inflammatory activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold provocation history and controlled cold challenge",
+          "cells": [
+            {
+              "text": "Cold-triggered attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nlrp12_autoinflammatory_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cryopyrin-associated periodic syndromes",
+          "cells": [
+            {
+              "text": "NLRP3 disease, including familial cold autoinflammatory syndrome type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial Mediterranean fever",
+          "cells": [
+            {
+              "text": "Attacks with abdominal and joint features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF receptor-associated periodic syndrome",
+          "cells": [
+            {
+              "text": "Longer attacks with a different gene"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nlrp12_autoinflammatory_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cold avoidance",
+          "cells": [
+            {
+              "text": "Cold exposure is the common trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs for flares",
+          "cells": [
+            {
+              "text": "Symptomatic treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short courses of corticosteroids",
+          "cells": [
+            {
+              "text": "For flares that do not respond to NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory therapy",
+          "cells": [
+            {
+              "text": "Can reduce attacks in disabling disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nlrp12_autoinflammatory_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of NLRP12 autoinflammatory syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cold-triggered periodic fever and urticaria in a child with a family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive hearing loss, amyloid features, disabling attacks)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate anti-inflammatory therapy for disabling attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NLRP12 testing, acute-phase reactants, cold challenge, audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "NLRP12 variant with cold-triggered periodic fever?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider NLRP3 disease or FMF; test further genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Advise cold avoidance as the main measure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs and short corticosteroid courses for flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Escalate anti-inflammatory therapy for disabling attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor hearing and for amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Favourable, relapsing course; attacks are often milder than cryopyrinopathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

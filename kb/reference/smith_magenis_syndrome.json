@@ -1,174 +1,452 @@
 {
- "id": "smith_magenis_syndrome",
- "name": "Smith-Magenis syndrome",
- "aliases": [
-  "SMS",
-  "RAI1",
-  "17p11.2 deletion syndrome",
-  "retinoic acid-induced 1 gene disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical genetics and neurodevelopmental textbooks with peer-reviewed reviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Neurodevelopmental disorder caused by a recurrent interstitial deletion of chromosome 17p11.2 encompassing RAI1, or by a pathogenic variant within RAI1 itself",
-   "Cardinal feature is a severely disrupted circadian sleep-wake rhythm with an inverted melatonin cycle (melatonin secreted during the day rather than at night), causing daytime sleepiness and marked night-time waking",
-   "Characteristic behavioural phenotype includes self-injurious behaviours (notably nail-yanking and inserting objects into body orifices) and self-hugging or hand-squeezing stereotypies",
-   "Intellectual disability, developmental delay, and expressive speech difficulties are typical, alongside a generally sociable but impulsive temperament",
-   "Recognisable dysmorphic features include a broad, square face, brachycephaly, midface hypoplasia, and a tented upper lip, evolving with age",
-   "Associated medical issues include hearing loss, ophthalmological problems, scoliosis, and features that may mimic other neurodevelopmental syndromes",
-   "Management of the sleep disturbance addresses the abnormal melatonin rhythm and sleep hygiene, and behavioural and developmental support is central to care",
-   "Diagnosis is established by chromosomal microarray to detect the 17p11.2 deletion, or by RAI1 sequencing when a deletion is not found"
+  "id": "smith_magenis_syndrome",
+  "name": "Smith-Magenis syndrome",
+  "aliases": [
+    "SMS",
+    "RAI1",
+    "17p11.2 deletion syndrome",
+    "retinoic acid-induced 1 gene disorder"
   ],
-  "pathophysiology": "Smith-Magenis syndrome results from haploinsufficiency of RAI1 (retinoic acid-induced 1), whether through the common 17p11.2 microdeletion or a point variant within the gene. RAI1 is a transcriptional regulator with widespread roles in neurodevelopment and, importantly, in the control of circadian gene expression. Reduced RAI1 dosage disrupts the molecular circadian clock, producing the hallmark inversion of the melatonin secretion rhythm and the resulting sleep-wake disturbance, while its broader transcriptional effects account for the cognitive, behavioural, craniofacial, and multisystem features of the syndrome.",
-  "additionalDifferentials": [
-   "Potocki-Lupski syndrome (reciprocal 17p11.2 duplication)",
-   "Down syndrome and other chromosomal microdeletion/duplication syndromes",
-   "Fragile X syndrome",
-   "Autism spectrum disorder with sleep disturbance",
-   "Prader-Willi and Angelman syndromes",
-   "Other syndromic intellectual disability with self-injurious behaviour"
-  ],
-  "additionalInvestigations": [
-   "Chromosomal microarray to detect the 17p11.2 deletion",
-   "RAI1 sequencing when microarray is normal but the phenotype is suggestive",
-   "Assessment of the circadian rhythm and melatonin profile where sleep disturbance is prominent",
-   "Audiological and ophthalmological evaluation for associated sensory deficits",
-   "Skeletal assessment for scoliosis and developmental/behavioural evaluation"
-  ],
-  "redFlags": [
-   "Severe self-injurious behaviour causing significant tissue damage",
-   "Profound sleep deprivation affecting safety and daytime functioning",
-   "New or worsening scoliosis with respiratory or neurological compromise",
-   "Acute behavioural crisis posing risk to the patient or others"
-  ],
-  "prognosis": "Smith-Magenis syndrome is a lifelong condition; intellectual disability and behavioural and sleep difficulties persist, but life expectancy is generally not markedly reduced and structured behavioural, sleep, and developmental interventions can meaningfully improve quality of life.",
-  "pitfalls": [
-   "Attributing the sleep disturbance to primary behavioural insomnia and missing the underlying inverted melatonin rhythm",
-   "Overlooking the diagnosis in a child labelled with non-syndromic autism or intellectual disability",
-   "Failing to recognise the characteristic self-injurious and self-hugging behaviours as diagnostic clues",
-   "Not arranging chromosomal microarray, or stopping at a normal microarray without considering RAI1 sequencing"
-  ],
-  "references": [
-   "GeneReviews: Smith-Magenis Syndrome",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Target the inverted circadian rhythm with evening melatonin and daytime beta-adrenergic blockade using acebutolol to suppress aberrant daytime melatonin, alongside structured sleep hygiene.",
-   "Behavioural management of self-injurious and stereotypic behaviours with structured behavioural intervention and, where needed, psychotropic agents.",
-   "Early developmental support with speech and language therapy, occupational therapy and individualised education for intellectual disability.",
-   "Surveillance for associated problems including hearing loss, ophthalmological disease, scoliosis, and thyroid, lipid and renal abnormalities.",
-   "Coordinate care across clinical genetics, developmental paediatrics or neurology, psychiatry and relevant sensory specialists.",
-   "Family and educational support with consistent routines and behavioural strategies to improve quality of life.",
-   "Genetic counselling explaining the usually de novo chromosome 17p11.2 deletion or RAI1 variant and the correspondingly low recurrence risk."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "smith_magenis_syndrome-pathway",
-   "title": "Smith-Magenis syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Neurodevelopmental disorder caused by a recurrent interstitial deletion of chromosome 17p11.2 encompassing RAI1, or by a pathogenic variant within RAI1 itself",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe self-injurious behaviour causing significant tissue damage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chromosomal microarray to detect the 17p11.2 deletion, RAI1 sequencing when microarray is normal but the phenotype is suggestive, Assessment of the circadian rhythm and melatonin profile where sleep disturbance is prominent"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Target the inverted circadian rhythm with evening melatonin and daytime beta-adrenergic blockade using acebutolol to suppress aberrant daytime melatonin, alongside structured sleep hygiene."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the sleep disturbance to primary behavioural insomnia and missing the underlying inverted melatonin rhythm"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of smith-magenis syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "smith_magenis_syndrome-matrix",
-   "title": "Smith-Magenis syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Neurodevelopmental disorder caused by a recurrent interstitial deletion of chromosome 17p11.2 encompassing RAI1, or by a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical genetics and neurodevelopmental textbooks with peer-reviewed reviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Neurodevelopmental disorder caused by a recurrent interstitial deletion of chromosome 17p11.2 encompassing RAI1, or by a pathogenic variant within RAI1 itself",
+      "Cardinal feature is a severely disrupted circadian sleep-wake rhythm with an inverted melatonin cycle (melatonin secreted during the day rather than at night), causing daytime sleepiness and marked night-time waking",
+      "Characteristic behavioural phenotype includes self-injurious behaviours (notably nail-yanking and inserting objects into body orifices) and self-hugging or hand-squeezing stereotypies",
+      "Intellectual disability, developmental delay, and expressive speech difficulties are typical, alongside a generally sociable but impulsive temperament",
+      "Recognisable dysmorphic features include a broad, square face, brachycephaly, midface hypoplasia, and a tented upper lip, evolving with age",
+      "Associated medical issues include hearing loss, ophthalmological problems, scoliosis, and features that may mimic other neurodevelopmental syndromes",
+      "Management of the sleep disturbance addresses the abnormal melatonin rhythm and sleep hygiene, and behavioural and developmental support is central to care",
+      "Diagnosis is established by chromosomal microarray to detect the 17p11.2 deletion, or by RAI1 sequencing when a deletion is not found"
     ],
-    [
-     "Key Investigations",
-     "Chromosomal microarray to detect the 17p11.2 deletion, RAI1 sequencing when microarray is normal but the phenotype is suggestive,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Smith-Magenis syndrome results from haploinsufficiency of RAI1 (retinoic acid-induced 1), whether through the common 17p11.2 microdeletion or a point variant within the gene. RAI1 is a transcriptional regulator with widespread roles in neurodevelopment and, importantly, in the control of circadian gene expression. Reduced RAI1 dosage disrupts the molecular circadian clock, producing the hallmark inversion of the melatonin secretion rhythm and the resulting sleep-wake disturbance, while its broader transcriptional effects account for the cognitive, behavioural, craniofacial, and multisystem features of the syndrome.",
+    "additionalDifferentials": [
+      "Potocki-Lupski syndrome (reciprocal 17p11.2 duplication)",
+      "Down syndrome and other chromosomal microdeletion/duplication syndromes",
+      "Fragile X syndrome",
+      "Autism spectrum disorder with sleep disturbance",
+      "Prader-Willi and Angelman syndromes",
+      "Other syndromic intellectual disability with self-injurious behaviour"
     ],
-    [
-     "Primary Differentials",
-     "Potocki-Lupski syndrome (reciprocal 17p11.2 duplication), Down syndrome and other chromosomal microdeletion/duplication",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chromosomal microarray to detect the 17p11.2 deletion",
+      "RAI1 sequencing when microarray is normal but the phenotype is suggestive",
+      "Assessment of the circadian rhythm and melatonin profile where sleep disturbance is prominent",
+      "Audiological and ophthalmological evaluation for associated sensory deficits",
+      "Skeletal assessment for scoliosis and developmental/behavioural evaluation"
     ],
-    [
-     "Management Strategy",
-     "Target the inverted circadian rhythm with evening melatonin and daytime beta-adrenergic blockade using acebutolol to suppress",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe self-injurious behaviour causing significant tissue damage",
+      "Profound sleep deprivation affecting safety and daytime functioning",
+      "New or worsening scoliosis with respiratory or neurological compromise",
+      "Acute behavioural crisis posing risk to the patient or others"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the sleep disturbance to primary behavioural insomnia and missing the underlying inverted melatonin rhythm",
-     "Prevent diagnostic or management error"
+    "prognosis": "Smith-Magenis syndrome is a lifelong condition; intellectual disability and behavioural and sleep difficulties persist, but life expectancy is generally not markedly reduced and structured behavioural, sleep, and developmental interventions can meaningfully improve quality of life.",
+    "pitfalls": [
+      "Attributing the sleep disturbance to primary behavioural insomnia and missing the underlying inverted melatonin rhythm",
+      "Overlooking the diagnosis in a child labelled with non-syndromic autism or intellectual disability",
+      "Failing to recognise the characteristic self-injurious and self-hugging behaviours as diagnostic clues",
+      "Not arranging chromosomal microarray, or stopping at a normal microarray without considering RAI1 sequencing"
+    ],
+    "references": [
+      "GeneReviews: Smith-Magenis Syndrome",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Target the inverted circadian rhythm with evening melatonin and daytime beta-adrenergic blockade using acebutolol to suppress aberrant daytime melatonin, alongside structured sleep hygiene.",
+      "Behavioural management of self-injurious and stereotypic behaviours with structured behavioural intervention and, where needed, psychotropic agents.",
+      "Early developmental support with speech and language therapy, occupational therapy and individualised education for intellectual disability.",
+      "Surveillance for associated problems including hearing loss, ophthalmological disease, scoliosis, and thyroid, lipid and renal abnormalities.",
+      "Coordinate care across clinical genetics, developmental paediatrics or neurology, psychiatry and relevant sensory specialists.",
+      "Family and educational support with consistent routines and behavioural strategies to improve quality of life.",
+      "Genetic counselling explaining the usually de novo chromosome 17p11.2 deletion or RAI1 variant and the correspondingly low recurrence risk."
     ]
-   ],
-   "caption": "Overview comparison matrix for smith-magenis syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "smith-magenis-syndrome-real-image",
-   "title": "Smith-Magenis syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "smith_magenis_syndrome-pathway",
+      "title": "Smith-Magenis syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Neurodevelopmental disorder caused by a recurrent interstitial deletion of chromosome 17p11.2 encompassing RAI1, or by a pathogenic variant within RAI1 itself",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe self-injurious behaviour causing significant tissue damage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chromosomal microarray to detect the 17p11.2 deletion, RAI1 sequencing when microarray is normal but the phenotype is suggestive, Assessment of the circadian rhythm and melatonin profile where sleep disturbance is prominent"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Target the inverted circadian rhythm with evening melatonin and daytime beta-adrenergic blockade using acebutolol to suppress aberrant daytime melatonin, alongside structured sleep hygiene."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the sleep disturbance to primary behavioural insomnia and missing the underlying inverted melatonin rhythm"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of smith-magenis syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "smith_magenis_syndrome-matrix",
+      "title": "Smith-Magenis syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Neurodevelopmental disorder caused by a recurrent interstitial deletion of chromosome 17p11.2 encompassing RAI1, or by a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chromosomal microarray to detect the 17p11.2 deletion, RAI1 sequencing when microarray is normal but the phenotype is suggestive,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Potocki-Lupski syndrome (reciprocal 17p11.2 duplication), Down syndrome and other chromosomal microdeletion/duplication",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Target the inverted circadian rhythm with evening melatonin and daytime beta-adrenergic blockade using acebutolol to suppress",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the sleep disturbance to primary behavioural insomnia and missing the underlying inverted melatonin rhythm",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for smith-magenis syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and neurodevelopmental textbooks with peer-reviewed reviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "smith_magenis_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "17p11.2 deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RAI1 sequencing",
+          "cells": [
+            {
+              "text": "RAI1 variant when microarray is normal but the phenotype is suggestive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circadian rhythm and melatonin profile",
+          "cells": [
+            {
+              "text": "Inverted melatonin rhythm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological and ophthalmological evaluation",
+          "cells": [
+            {
+              "text": "Associated sensory deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal assessment",
+          "cells": [
+            {
+              "text": "Scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and behavioural evaluation",
+          "cells": [
+            {
+              "text": "Self-injurious and stereotypic behaviour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "smith_magenis_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Potocki-Lupski syndrome",
+          "cells": [
+            {
+              "text": "Reciprocal 17p11.2 duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autism spectrum disorder with sleep disturbance",
+          "cells": [
+            {
+              "text": "Sleep disturbance is wrongly labelled as behavioural insomnia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "smith_magenis_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Evening melatonin with daytime acebutolol",
+          "cells": [
+            {
+              "text": "Corrects the inverted rhythm; acebutolol suppresses daytime melatonin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep hygiene",
+          "cells": [
+            {
+              "text": "Structured sleep routines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural management",
+          "cells": [
+            {
+              "text": "Structured intervention for self-injury; psychotropic agents where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Speech and language therapy, occupational therapy and individualised education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Hearing, eye disease, scoliosis, and thyroid, lipid and renal abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually de novo deletion or RAI1 variant; low recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "smith_magenis_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Smith-Magenis syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Disrupted sleep-wake rhythm with self-injury and dysmorphism: suspected SMS",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe self-injury, profound sleep loss, worsening scoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent behavioural and safety review for severe self-injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chromosomal microarray for 17p11.2; RAI1 sequencing if normal; melatonin profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a 17p11.2 deletion or RAI1 variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Potocki-Lupski or other syndromic intellectual disability; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Evening melatonin with daytime acebutolol to correct the inverted rhythm",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Structured behavioural intervention for self-injury; psychotropics if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Speech, occupational therapy and individualised education",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for hearing, eye disease, scoliosis and thyroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sleep and behaviour dominate the burden; routine and support are central",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

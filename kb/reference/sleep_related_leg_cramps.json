@@ -1,168 +1,464 @@
 {
- "id": "sleep_related_leg_cramps",
- "name": "Sleep-related leg cramps",
- "aliases": [
-  "nocturnal leg cramps"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology / Sleep medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "American Academy of Sleep Medicine ICSD-3",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sudden painful involuntary contractions, usually of the calf or small foot muscles, occurring during the sleep period",
-   "The cramp produces a palpably hard, tight muscle and is relieved by forceful stretching or massage of the affected muscle",
-   "Unlike restless legs syndrome, the problem is frank painful muscle contraction rather than an urge to move with relief on movement",
-   "Prevalence rises with age and cramps are common in pregnancy",
-   "Secondary contributors include dehydration, electrolyte disturbance, peripheral vascular or neurological disease and certain drugs",
-   "Management emphasises stretching, addressing reversible contributors and reviewing culprit medications"
+  "id": "sleep_related_leg_cramps",
+  "name": "Sleep-related leg cramps",
+  "aliases": [
+    "nocturnal leg cramps"
   ],
-  "pathophysiology": "Sleep-related leg cramps arise from sustained involuntary hyperexcitable motor-unit discharge in a muscle, producing a sudden painful contraction; the tendency is increased by muscle shortening during sleep and by factors that alter neuromuscular excitability. Ageing, pregnancy, fluid and electrolyte shifts, and peripheral nerve or vascular disease can lower the threshold for these discharges. In many people the cramps are idiopathic, reflecting benign motor-neuron hyperexcitability rather than a defined underlying disease.",
-  "additionalDifferentials": [
-   "Restless legs syndrome",
-   "Periodic limb movement disorder",
-   "Peripheral neuropathy or radiculopathy",
-   "Peripheral arterial disease with claudication",
-   "Dystonia or myopathy with cramps",
-   "Electrolyte disturbance (for example low potassium, calcium or magnesium)"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the description and relief by stretching",
-   "Review for dehydration, electrolyte disturbance and culprit medications",
-   "Assessment for peripheral vascular and neurological disease when frequent",
-   "Targeted blood tests where a secondary cause is suspected",
-   "Further neurological evaluation if cramps are severe, generalised or progressive"
-  ],
-  "redFlags": [
-   "Cramps with progressive weakness, wasting or sensory loss",
-   "Features of significant peripheral arterial disease",
-   "Widespread or daytime cramps suggesting a systemic or neuromuscular disorder",
-   "Marked electrolyte abnormalities"
-  ],
-  "prognosis": "The cramps are benign though disruptive to sleep; many respond to stretching and correction of reversible contributors, and idiopathic cases often fluctuate over time.",
-  "pitfalls": [
-   "Confusing leg cramps with restless legs syndrome and mismanaging them",
-   "Overlooking peripheral vascular or neurological disease when cramps are frequent",
-   "Not reviewing medications that can provoke cramps",
-   "Missing correctable dehydration or electrolyte disturbance"
-  ],
-  "references": [
-   "American Academy of Sleep Medicine ICSD-3",
-   "Principles and Practice of Sleep Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relieve the acute cramp by forceful passive stretching and massage of the affected calf or foot muscle",
-   "Recommend regular stretching of the calf and foot muscles before sleep as the first-line preventive measure",
-   "Identify and correct reversible contributors such as dehydration, electrolyte disturbance and peripheral vascular or neurological disease",
-   "Review and rationalise culprit medications",
-   "Consider magnesium for pregnancy-associated cramps and reserve quinine only for severe refractory cases given its toxicity, with careful risk counselling",
-   "Reassure about the benign nature and arrange further neurological evaluation if cramps are severe, generalised or progressive"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sleep_related_leg_cramps-pathway",
-   "title": "Sleep-related leg cramps: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sudden painful involuntary contractions, usually of the calf or small foot muscles, occurring during the sleep period",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cramps with progressive weakness, wasting or sensory loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the description and relief by stretching, Review for dehydration, electrolyte disturbance and culprit medications, Assessment for peripheral vascular and neurological disease when frequent"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve the acute cramp by forceful passive stretching and massage of the affected calf or foot muscle"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing leg cramps with restless legs syndrome and mismanaging them"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sleep-related leg cramps."
-  }
- ],
- "tables": [
-  {
-   "id": "sleep_related_leg_cramps-matrix",
-   "title": "Sleep-related leg cramps: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sudden painful involuntary contractions, usually of the calf or small foot muscles, occurring during the sleep period",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology / Sleep medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "American Academy of Sleep Medicine ICSD-3",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sudden painful involuntary contractions, usually of the calf or small foot muscles, occurring during the sleep period",
+      "The cramp produces a palpably hard, tight muscle and is relieved by forceful stretching or massage of the affected muscle",
+      "Unlike restless legs syndrome, the problem is frank painful muscle contraction rather than an urge to move with relief on movement",
+      "Prevalence rises with age and cramps are common in pregnancy",
+      "Secondary contributors include dehydration, electrolyte disturbance, peripheral vascular or neurological disease and certain drugs",
+      "Management emphasises stretching, addressing reversible contributors and reviewing culprit medications"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the description and relief by stretching, Review for dehydration, electrolyte disturbance and culprit",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sleep-related leg cramps arise from sustained involuntary hyperexcitable motor-unit discharge in a muscle, producing a sudden painful contraction; the tendency is increased by muscle shortening during sleep and by factors that alter neuromuscular excitability. Ageing, pregnancy, fluid and electrolyte shifts, and peripheral nerve or vascular disease can lower the threshold for these discharges. In many people the cramps are idiopathic, reflecting benign motor-neuron hyperexcitability rather than a defined underlying disease.",
+    "additionalDifferentials": [
+      "Restless legs syndrome",
+      "Periodic limb movement disorder",
+      "Peripheral neuropathy or radiculopathy",
+      "Peripheral arterial disease with claudication",
+      "Dystonia or myopathy with cramps",
+      "Electrolyte disturbance (for example low potassium, calcium or magnesium)"
     ],
-    [
-     "Primary Differentials",
-     "Restless legs syndrome, Periodic limb movement disorder, Peripheral neuropathy or radiculopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the description and relief by stretching",
+      "Review for dehydration, electrolyte disturbance and culprit medications",
+      "Assessment for peripheral vascular and neurological disease when frequent",
+      "Targeted blood tests where a secondary cause is suspected",
+      "Further neurological evaluation if cramps are severe, generalised or progressive"
     ],
-    [
-     "Management Strategy",
-     "Relieve the acute cramp by forceful passive stretching and massage of the affected calf or foot muscle",
-     "Core treatment modality"
+    "redFlags": [
+      "Cramps with progressive weakness, wasting or sensory loss",
+      "Features of significant peripheral arterial disease",
+      "Widespread or daytime cramps suggesting a systemic or neuromuscular disorder",
+      "Marked electrolyte abnormalities"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing leg cramps with restless legs syndrome and mismanaging them",
-     "Prevent diagnostic or management error"
+    "prognosis": "The cramps are benign though disruptive to sleep; many respond to stretching and correction of reversible contributors, and idiopathic cases often fluctuate over time.",
+    "pitfalls": [
+      "Confusing leg cramps with restless legs syndrome and mismanaging them",
+      "Overlooking peripheral vascular or neurological disease when cramps are frequent",
+      "Not reviewing medications that can provoke cramps",
+      "Missing correctable dehydration or electrolyte disturbance"
+    ],
+    "references": [
+      "American Academy of Sleep Medicine ICSD-3",
+      "Principles and Practice of Sleep Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relieve the acute cramp by forceful passive stretching and massage of the affected calf or foot muscle",
+      "Recommend regular stretching of the calf and foot muscles before sleep as the first-line preventive measure",
+      "Identify and correct reversible contributors such as dehydration, electrolyte disturbance and peripheral vascular or neurological disease",
+      "Review and rationalise culprit medications",
+      "Consider magnesium for pregnancy-associated cramps and reserve quinine only for severe refractory cases given its toxicity, with careful risk counselling",
+      "Reassure about the benign nature and arrange further neurological evaluation if cramps are severe, generalised or progressive"
     ]
-   ],
-   "caption": "Overview comparison matrix for sleep-related leg cramps."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sleep-related-leg-cramps-real-image",
-   "title": "Sleep-related leg cramps: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sleep_related_leg_cramps-pathway",
+      "title": "Sleep-related leg cramps: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sudden painful involuntary contractions, usually of the calf or small foot muscles, occurring during the sleep period",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cramps with progressive weakness, wasting or sensory loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the description and relief by stretching, Review for dehydration, electrolyte disturbance and culprit medications, Assessment for peripheral vascular and neurological disease when frequent"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve the acute cramp by forceful passive stretching and massage of the affected calf or foot muscle"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing leg cramps with restless legs syndrome and mismanaging them"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sleep-related leg cramps."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sleep_related_leg_cramps-matrix",
+      "title": "Sleep-related leg cramps: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sudden painful involuntary contractions, usually of the calf or small foot muscles, occurring during the sleep period",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the description and relief by stretching, Review for dehydration, electrolyte disturbance and culprit",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Restless legs syndrome, Periodic limb movement disorder, Peripheral neuropathy or radiculopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve the acute cramp by forceful passive stretching and massage of the affected calf or foot muscle",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing leg cramps with restless legs syndrome and mismanaging them",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sleep-related leg cramps."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "American Academy of Sleep Medicine ICSD-3",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sleep_related_leg_cramps-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from the description",
+          "cells": [
+            {
+              "text": "Relief by forceful stretching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for dehydration, electrolytes and culprit medicines",
+          "cells": [
+            {
+              "text": "Reversible contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular and neurological assessment",
+          "cells": [
+            {
+              "text": "When cramps are frequent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted blood tests",
+          "cells": [
+            {
+              "text": "When a secondary cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological evaluation",
+          "cells": [
+            {
+              "text": "When cramps are severe, generalised or progressive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sleep_related_leg_cramps-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Restless legs syndrome",
+          "cells": [
+            {
+              "text": "An urge to move with relief on movement, unlike a frank painful contraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral arterial disease with claudication",
+          "cells": [
+            {
+              "text": "Frequent cramps with features of significant arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte disturbance (low potassium, calcium or magnesium)",
+          "cells": [
+            {
+              "text": "A correctable, reversible contributor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral neuropathy or radiculopathy",
+          "cells": [
+            {
+              "text": "Progressive weakness, wasting or sensory loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sleep_related_leg_cramps-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Forceful passive stretching and massage",
+          "cells": [
+            {
+              "text": "Relieves the acute cramp"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calf and foot stretching before sleep",
+          "cells": [
+            {
+              "text": "First-line preventive measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct reversible contributors",
+          "cells": [
+            {
+              "text": "Dehydration, electrolyte disturbance, vascular or neurological disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review culprit medicines",
+          "cells": [
+            {
+              "text": "Rationalise drugs that provoke cramps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium",
+          "cells": [
+            {
+              "text": "Considered for pregnancy-associated cramps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quinine",
+          "cells": [
+            {
+              "text": "Reserved for severe refractory cases, given its toxicity, with careful risk counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign course; further neurological evaluation if severe, generalised or progressive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sleep_related_leg_cramps-dx-mgmt",
+      "title": "Diagnosis and management of Sleep-related leg cramps",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden painful calf cramps during sleep, relieved by stretching: suspected leg cramps",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive weakness, wasting, sensory loss, arterial disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological or vascular evaluation for progressive or arterial features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical history; check hydration, electrolytes and medicines; vascular and neuro review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a reversible cause found, such as dehydration, electrolytes or a drug?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider restless legs, neuropathy or myopathy; arrange neurological evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Forceful stretching and massage to relieve the acute cramp",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Calf and foot stretching before sleep as first-line prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct dehydration and electrolyte disturbance; review culprit medicines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Magnesium for pregnancy; quinine only for severe refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign though disruptive; many respond to stretching and correcting reversible causes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

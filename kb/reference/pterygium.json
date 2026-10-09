@@ -1,170 +1,446 @@
 {
- "id": "pterygium",
- "name": "Pterygium",
- "aliases": [
-  "surfer's eye",
-  "pterygia"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A pterygium is a wing-shaped fibrovascular growth of conjunctival tissue that encroaches onto the cornea, most commonly on the nasal side",
-   "Strongly associated with chronic exposure to ultraviolet light, wind, and dust, and therefore more common in people living in sunny, outdoor environments near the equator",
-   "It is distinguished from a pinguecula, which is a similar degenerative conjunctival lesion that does not cross onto the cornea",
-   "Symptoms range from a cosmetic concern and irritation or redness to visual disturbance when it induces astigmatism or approaches the visual axis",
-   "A leading edge (Stocker's line of iron deposition) and a fibrovascular head advancing over the cornea are characteristic",
-   "Management is conservative with lubricants and UV protection for mild lesions; surgical excision is indicated for visual axis threat, marked astigmatism, discomfort, or cosmesis",
-   "Recurrence after excision is common, and adjuncts such as conjunctival autografting reduce this risk compared with bare-scleral excision",
-   "Atypical or rapidly growing lesions should be evaluated to exclude ocular surface squamous neoplasia"
+  "id": "pterygium",
+  "name": "Pterygium",
+  "aliases": [
+    "surfer's eye",
+    "pterygia"
   ],
-  "pathophysiology": "A pterygium is a degenerative and proliferative condition of the bulbar conjunctiva in which chronic ultraviolet and environmental exposure causes elastotic degeneration of subepithelial collagen along with fibrovascular proliferation. The abnormal tissue invades the superficial cornea, disrupting Bowman's layer and the corneal architecture at its advancing head. Progressive growth can flatten the cornea and induce astigmatism, and encroachment onto the visual axis reduces vision.",
-  "additionalDifferentials": [
-   "Pinguecula",
-   "Pseudopterygium (from prior injury or inflammation)",
-   "Ocular surface squamous neoplasia (conjunctival intraepithelial neoplasia)",
-   "Conjunctival naevus or other pigmented lesion",
-   "Limbal dermoid"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination to document size, vascularity, and encroachment onto the cornea",
-   "Refraction and corneal topography to assess induced astigmatism",
-   "Serial photography to monitor progression",
-   "Excision biopsy with histology when ocular surface neoplasia is suspected"
-  ],
-  "redFlags": [
-   "Rapid growth, marked thickening, or leukoplakic change suggesting ocular surface squamous neoplasia",
-   "Encroachment onto or across the visual axis threatening vision",
-   "Significant induced astigmatism degrading acuity",
-   "Restricted ocular motility from a large or recurrent lesion with scarring"
-  ],
-  "prognosis": "Most pterygia are benign and slowly progressive with a good prognosis; surgery is effective for symptomatic or vision-threatening lesions, though recurrence is a recognised problem, particularly with bare-scleral techniques and in younger patients.",
-  "pitfalls": [
-   "Assuming all fleshy conjunctival lesions are benign pterygia and missing ocular surface neoplasia",
-   "Operating too early on quiescent lesions given the risk of recurrence",
-   "Using bare-scleral excision alone, which has a high recurrence rate compared with grafting",
-   "Neglecting UV protection advice, allowing progression or recurrence"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Ocular lubricants and, for inflamed lesions, short courses of topical corticosteroids or decongestants to relieve irritation and redness",
-   "Ultraviolet protection with sunglasses and brimmed hats and avoidance of wind and dust exposure to slow progression",
-   "Surgical excision for lesions threatening the visual axis, inducing marked astigmatism, or causing troublesome symptoms or cosmetic concern",
-   "Conjunctival autograft rather than a bare-scleral technique, or adjunctive mitomycin C, to reduce recurrence after excision",
-   "Refraction and corneal topography to quantify induced astigmatism, with serial slit-lamp examination and photography to monitor growth",
-   "Histological examination of excised tissue to exclude ocular surface squamous neoplasia in atypical lesions",
-   "Ophthalmology referral for symptomatic or progressive lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pterygium-pathway",
-   "title": "Pterygium: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A pterygium is a wing-shaped fibrovascular growth of conjunctival tissue that encroaches onto the cornea, most commonly on the nasal side",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, marked thickening, or leukoplakic change suggesting ocular surface squamous neoplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination to document size, vascularity, and encroachment onto the cornea, Refraction and corneal topography to assess induced astigmatism, Serial photography to monitor progression"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Ocular lubricants and, for inflamed lesions, short courses of topical corticosteroids or decongestants to relieve irritation and redness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all fleshy conjunctival lesions are benign pterygia and missing ocular surface neoplasia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pterygium."
-  }
- ],
- "tables": [
-  {
-   "id": "pterygium-matrix",
-   "title": "Pterygium: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A pterygium is a wing-shaped fibrovascular growth of conjunctival tissue that encroaches onto the cornea, most commonly on the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A pterygium is a wing-shaped fibrovascular growth of conjunctival tissue that encroaches onto the cornea, most commonly on the nasal side",
+      "Strongly associated with chronic exposure to ultraviolet light, wind, and dust, and therefore more common in people living in sunny, outdoor environments near the equator",
+      "It is distinguished from a pinguecula, which is a similar degenerative conjunctival lesion that does not cross onto the cornea",
+      "Symptoms range from a cosmetic concern and irritation or redness to visual disturbance when it induces astigmatism or approaches the visual axis",
+      "A leading edge (Stocker's line of iron deposition) and a fibrovascular head advancing over the cornea are characteristic",
+      "Management is conservative with lubricants and UV protection for mild lesions; surgical excision is indicated for visual axis threat, marked astigmatism, discomfort, or cosmesis",
+      "Recurrence after excision is common, and adjuncts such as conjunctival autografting reduce this risk compared with bare-scleral excision",
+      "Atypical or rapidly growing lesions should be evaluated to exclude ocular surface squamous neoplasia"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination to document size, vascularity, and encroachment onto the cornea, Refraction and corneal topography to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A pterygium is a degenerative and proliferative condition of the bulbar conjunctiva in which chronic ultraviolet and environmental exposure causes elastotic degeneration of subepithelial collagen along with fibrovascular proliferation. The abnormal tissue invades the superficial cornea, disrupting Bowman's layer and the corneal architecture at its advancing head. Progressive growth can flatten the cornea and induce astigmatism, and encroachment onto the visual axis reduces vision.",
+    "additionalDifferentials": [
+      "Pinguecula",
+      "Pseudopterygium (from prior injury or inflammation)",
+      "Ocular surface squamous neoplasia (conjunctival intraepithelial neoplasia)",
+      "Conjunctival naevus or other pigmented lesion",
+      "Limbal dermoid"
     ],
-    [
-     "Primary Differentials",
-     "Pinguecula, Pseudopterygium (from prior injury or inflammation), Ocular surface squamous neoplasia (conjunctival intraepithelial",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination to document size, vascularity, and encroachment onto the cornea",
+      "Refraction and corneal topography to assess induced astigmatism",
+      "Serial photography to monitor progression",
+      "Excision biopsy with histology when ocular surface neoplasia is suspected"
     ],
-    [
-     "Management Strategy",
-     "Ocular lubricants and, for inflamed lesions, short courses of topical corticosteroids or decongestants to relieve irritation and",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, marked thickening, or leukoplakic change suggesting ocular surface squamous neoplasia",
+      "Encroachment onto or across the visual axis threatening vision",
+      "Significant induced astigmatism degrading acuity",
+      "Restricted ocular motility from a large or recurrent lesion with scarring"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all fleshy conjunctival lesions are benign pterygia and missing ocular surface neoplasia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most pterygia are benign and slowly progressive with a good prognosis; surgery is effective for symptomatic or vision-threatening lesions, though recurrence is a recognised problem, particularly with bare-scleral techniques and in younger patients.",
+    "pitfalls": [
+      "Assuming all fleshy conjunctival lesions are benign pterygia and missing ocular surface neoplasia",
+      "Operating too early on quiescent lesions given the risk of recurrence",
+      "Using bare-scleral excision alone, which has a high recurrence rate compared with grafting",
+      "Neglecting UV protection advice, allowing progression or recurrence"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Ocular lubricants and, for inflamed lesions, short courses of topical corticosteroids or decongestants to relieve irritation and redness",
+      "Ultraviolet protection with sunglasses and brimmed hats and avoidance of wind and dust exposure to slow progression",
+      "Surgical excision for lesions threatening the visual axis, inducing marked astigmatism, or causing troublesome symptoms or cosmetic concern",
+      "Conjunctival autograft rather than a bare-scleral technique, or adjunctive mitomycin C, to reduce recurrence after excision",
+      "Refraction and corneal topography to quantify induced astigmatism, with serial slit-lamp examination and photography to monitor growth",
+      "Histological examination of excised tissue to exclude ocular surface squamous neoplasia in atypical lesions",
+      "Ophthalmology referral for symptomatic or progressive lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for pterygium."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pterygium-real-image",
-   "title": "Pterygium: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pterygium-pathway",
+      "title": "Pterygium: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A pterygium is a wing-shaped fibrovascular growth of conjunctival tissue that encroaches onto the cornea, most commonly on the nasal side",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, marked thickening, or leukoplakic change suggesting ocular surface squamous neoplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination to document size, vascularity, and encroachment onto the cornea, Refraction and corneal topography to assess induced astigmatism, Serial photography to monitor progression"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Ocular lubricants and, for inflamed lesions, short courses of topical corticosteroids or decongestants to relieve irritation and redness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all fleshy conjunctival lesions are benign pterygia and missing ocular surface neoplasia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pterygium."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pterygium-matrix",
+      "title": "Pterygium: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A pterygium is a wing-shaped fibrovascular growth of conjunctival tissue that encroaches onto the cornea, most commonly on the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination to document size, vascularity, and encroachment onto the cornea, Refraction and corneal topography to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pinguecula, Pseudopterygium (from prior injury or inflammation), Ocular surface squamous neoplasia (conjunctival intraepithelial",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Ocular lubricants and, for inflamed lesions, short courses of topical corticosteroids or decongestants to relieve irritation and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all fleshy conjunctival lesions are benign pterygia and missing ocular surface neoplasia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pterygium."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pterygium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Size, vascularity and corneal encroachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction and corneal topography",
+          "cells": [
+            {
+              "text": "Induced astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial photography",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision biopsy with histology, when neoplasia is suspected",
+          "cells": [
+            {
+              "text": "Ocular surface neoplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pterygium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudopterygium",
+          "cells": [
+            {
+              "text": "Prior injury or inflammation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface squamous neoplasia",
+          "cells": [
+            {
+              "text": "Rapid growth, thickening or leukoplakic change"
+            },
+            {
+              "text": "Excision biopsy with histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pterygium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lubricants and steroids",
+          "cells": [
+            {
+              "text": "Ocular lubricants; short topical corticosteroid courses for inflamed lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UV protection",
+          "cells": [
+            {
+              "text": "Sunglasses and brimmed hats; avoidance of wind and dust"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "For lesions threatening the visual axis or inducing marked astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conjunctival autograft",
+          "cells": [
+            {
+              "text": "Rather than bare sclera, or adjunctive mitomycin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Astigmatism",
+          "cells": [
+            {
+              "text": "Refraction and corneal topography to quantify induced astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Excised tissue examined to exclude ocular surface squamous neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Ophthalmology for symptomatic or progressive lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pterygium-dx-mgmt",
+      "title": "Diagnosis and management of Pterygium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pterygium: fleshy conjunctival growth encroaching onto the cornea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid growth, thickening or leukoplakia, visual axis encroachment, or marked astigmatism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for suspected ocular surface neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp; refraction and topography; serial photography; excision biopsy if suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion a pterygium on slit-lamp, without neoplasia features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Excise and send for histology to exclude neoplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ocular lubricants and short courses of topical steroids for inflamed lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "UV protection with sunglasses and brimmed hats",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical excision with conjunctival autograft for visual-axis or astigmatism threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Histological examination of excised tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ophthalmology follow-up for symptomatic or progressive lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

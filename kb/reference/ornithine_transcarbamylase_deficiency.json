@@ -1,175 +1,515 @@
 {
- "id": "ornithine_transcarbamylase_deficiency",
- "name": "Ornithine transcarbamylase deficiency",
- "aliases": [
-  "OTC deficiency",
-  "OTCD",
-  "ornithine carbamoyltransferase deficiency",
-  "X-linked urea cycle disorder"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common urea cycle disorder and the only one that is X-linked, so severe disease predominantly affects hemizygous males",
-   "Affected male neonates classically appear well then develop lethargy, poor feeding, vomiting and encephalopathy with severe hyperammonaemia in the first days of life",
-   "Heterozygous females have a variable phenotype depending on X-inactivation and may present later with episodic hyperammonaemic crises, protein intolerance, migraine-like symptoms or psychiatric disturbance",
-   "The biochemical signature is hyperammonaemia with low or normal citrulline, elevated urine orotic acid, and typically a respiratory alkalosis without metabolic acidosis",
-   "Elevated orotic acid distinguishes OTC deficiency from carbamoyl phosphate synthetase 1 and N-acetylglutamate synthase deficiencies, in which orotic acid is not raised",
-   "Acute crises can be precipitated by infection, fasting, high protein load, surgery, or the postpartum period",
-   "Acute management follows urea cycle disorder principles: halt protein, reverse catabolism with glucose and lipid, give nitrogen scavengers and arginine, and use haemodialysis for severe hyperammonaemia",
-   "Because inheritance is X-linked rather than reflected by a single metabolite, standard newborn screening may miss cases, so a high index of suspicion and family testing are important"
+  "id": "ornithine_transcarbamylase_deficiency",
+  "name": "Ornithine transcarbamylase deficiency",
+  "aliases": [
+    "OTC deficiency",
+    "OTCD",
+    "ornithine carbamoyltransferase deficiency",
+    "X-linked urea cycle disorder"
   ],
-  "pathophysiology": "Ornithine transcarbamylase is a mitochondrial enzyme that combines carbamoyl phosphate with ornithine to form citrulline, the second step of the urea cycle. Its deficiency, caused by mutations in the X-linked OTC gene, blocks ureagenesis and causes waste nitrogen to accumulate as ammonia. Because the block is proximal, carbamoyl phosphate builds up and is diverted into the pyrimidine synthesis pathway, generating excess orotic acid excreted in urine. Ammonia is neurotoxic, producing glutamine accumulation, astrocyte swelling and cerebral oedema. Females show a spectrum of severity determined by the pattern of X-chromosome inactivation in hepatocytes.",
-  "additionalDifferentials": [
-   "Other urea cycle disorders (CPS1, NAGS, citrullinemia, argininosuccinic aciduria)",
-   "Organic acidaemias with secondary hyperammonaemia",
-   "Fatty acid oxidation disorders",
-   "Neonatal sepsis",
-   "Reye-like syndrome and other causes of acute encephalopathy",
-   "Postpartum or valproate-associated hyperammonaemic encephalopathy in carrier females"
-  ],
-  "additionalInvestigations": [
-   "Urgent plasma ammonia and arterial blood gas (respiratory alkalosis)",
-   "Plasma amino acids (low citrulline, low arginine) and urine orotic acid (elevated)",
-   "Allopurinol loading or protein challenge to unmask carriers, used cautiously in specialist settings",
-   "Molecular testing of the OTC gene and enzyme assay on liver tissue where needed",
-   "Family screening and genetic counselling given X-linked inheritance",
-   "Neuroimaging in severe or prolonged hyperammonaemia"
-  ],
-  "redFlags": [
-   "Severe hyperammonaemic encephalopathy is a metabolic emergency mandating immediate ammonia lowering and often dialysis",
-   "Deteriorating consciousness, seizures or signs of cerebral oedema and raised intracranial pressure",
-   "A previously well neonatal boy collapsing after the first feeds, easily mistaken for sepsis",
-   "Carrier female with unexplained encephalopathy postpartum, after surgery, or on valproate"
-  ],
-  "prognosis": "Neonatal-onset disease in boys is severe and, without rapid control of hyperammonaemia, carries a high risk of death or lasting neurodevelopmental impairment; later-onset and carrier presentations vary widely, and outcome depends on prompt recognition and management of crises, with liver transplantation offering definitive correction in selected patients.",
-  "pitfalls": [
-   "Assuming females who are carriers are unaffected and overlooking symptomatic heterozygotes",
-   "Missing the diagnosis because newborn screening is insensitive for OTC deficiency",
-   "Delaying ammonia measurement in an encephalopathic patient and attributing illness to sepsis",
-   "Giving valproate or a high protein load to an undiagnosed carrier and precipitating a crisis"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In an acute hyperammonaemic crisis, stop protein intake, give high-calorie glucose and lipid to suppress catabolism, and start intravenous nitrogen-scavenging agents (sodium benzoate and sodium phenylacetate) with intravenous arginine",
-   "Use haemodialysis or haemofiltration to clear ammonia rapidly in severe hyperammonaemia",
-   "Provide chronic management with a protein-restricted diet supplemented with essential amino acids, plus citrulline or arginine to support the urea cycle",
-   "Give long-term oral nitrogen scavengers (sodium phenylbutyrate or glycerol phenylbutyrate) to provide alternative routes for nitrogen excretion",
-   "Avoid known precipitants such as fasting, catabolic stress, high protein loads and sodium valproate, and supply a written emergency sick-day regimen",
-   "Offer liver transplantation as definitive treatment for severe or poorly controlled disease",
-   "Monitor plasma ammonia, amino acids and neurodevelopment within a metabolic multidisciplinary team, with genetic counselling and family screening given X-linked inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ornithine_transcarbamylase_deficiency-pathway",
-   "title": "Ornithine transcarbamylase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common urea cycle disorder and the only one that is X-linked, so severe disease predominantly affects hemizygous males",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hyperammonaemic encephalopathy is a metabolic emergency mandating immediate ammonia lowering and often dialysis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urgent plasma ammonia and arterial blood gas (respiratory alkalosis), Plasma amino acids (low citrulline, low arginine) and urine orotic acid (elevated), Allopurinol loading or protein challenge to unmask carriers, used"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In an acute hyperammonaemic crisis, stop protein intake, give high-calorie glucose and lipid to suppress catabolism, and start intravenous nitrogen-scavenging agents (sodium benzoate and sodium phenylacetate) with"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming females who are carriers are unaffected and overlooking symptomatic heterozygotes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ornithine transcarbamylase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "ornithine_transcarbamylase_deficiency-matrix",
-   "title": "Ornithine transcarbamylase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common urea cycle disorder and the only one that is X-linked, so severe disease predominantly affects hemizygous males",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common urea cycle disorder and the only one that is X-linked, so severe disease predominantly affects hemizygous males",
+      "Affected male neonates classically appear well then develop lethargy, poor feeding, vomiting and encephalopathy with severe hyperammonaemia in the first days of life",
+      "Heterozygous females have a variable phenotype depending on X-inactivation and may present later with episodic hyperammonaemic crises, protein intolerance, migraine-like symptoms or psychiatric disturbance",
+      "The biochemical signature is hyperammonaemia with low or normal citrulline, elevated urine orotic acid, and typically a respiratory alkalosis without metabolic acidosis",
+      "Elevated orotic acid distinguishes OTC deficiency from carbamoyl phosphate synthetase 1 and N-acetylglutamate synthase deficiencies, in which orotic acid is not raised",
+      "Acute crises can be precipitated by infection, fasting, high protein load, surgery, or the postpartum period",
+      "Acute management follows urea cycle disorder principles: halt protein, reverse catabolism with glucose and lipid, give nitrogen scavengers and arginine, and use haemodialysis for severe hyperammonaemia",
+      "Because inheritance is X-linked rather than reflected by a single metabolite, standard newborn screening may miss cases, so a high index of suspicion and family testing are important"
     ],
-    [
-     "Key Investigations",
-     "Urgent plasma ammonia and arterial blood gas (respiratory alkalosis), Plasma amino acids (low citrulline, low arginine) and urine",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ornithine transcarbamylase is a mitochondrial enzyme that combines carbamoyl phosphate with ornithine to form citrulline, the second step of the urea cycle. Its deficiency, caused by mutations in the X-linked OTC gene, blocks ureagenesis and causes waste nitrogen to accumulate as ammonia. Because the block is proximal, carbamoyl phosphate builds up and is diverted into the pyrimidine synthesis pathway, generating excess orotic acid excreted in urine. Ammonia is neurotoxic, producing glutamine accumulation, astrocyte swelling and cerebral oedema. Females show a spectrum of severity determined by the pattern of X-chromosome inactivation in hepatocytes.",
+    "additionalDifferentials": [
+      "Other urea cycle disorders (CPS1, NAGS, citrullinemia, argininosuccinic aciduria)",
+      "Organic acidaemias with secondary hyperammonaemia",
+      "Fatty acid oxidation disorders",
+      "Neonatal sepsis",
+      "Reye-like syndrome and other causes of acute encephalopathy",
+      "Postpartum or valproate-associated hyperammonaemic encephalopathy in carrier females"
     ],
-    [
-     "Primary Differentials",
-     "Other urea cycle disorders (CPS1, NAGS, citrullinemia, argininosuccinic aciduria), Organic acidaemias with secondary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urgent plasma ammonia and arterial blood gas (respiratory alkalosis)",
+      "Plasma amino acids (low citrulline, low arginine) and urine orotic acid (elevated)",
+      "Allopurinol loading or protein challenge to unmask carriers, used cautiously in specialist settings",
+      "Molecular testing of the OTC gene and enzyme assay on liver tissue where needed",
+      "Family screening and genetic counselling given X-linked inheritance",
+      "Neuroimaging in severe or prolonged hyperammonaemia"
     ],
-    [
-     "Management Strategy",
-     "In an acute hyperammonaemic crisis, stop protein intake, give high-calorie glucose and lipid to suppress catabolism, and start",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hyperammonaemic encephalopathy is a metabolic emergency mandating immediate ammonia lowering and often dialysis",
+      "Deteriorating consciousness, seizures or signs of cerebral oedema and raised intracranial pressure",
+      "A previously well neonatal boy collapsing after the first feeds, easily mistaken for sepsis",
+      "Carrier female with unexplained encephalopathy postpartum, after surgery, or on valproate"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming females who are carriers are unaffected and overlooking symptomatic heterozygotes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Neonatal-onset disease in boys is severe and, without rapid control of hyperammonaemia, carries a high risk of death or lasting neurodevelopmental impairment; later-onset and carrier presentations vary widely, and outcome depends on prompt recognition and management of crises, with liver transplantation offering definitive correction in selected patients.",
+    "pitfalls": [
+      "Assuming females who are carriers are unaffected and overlooking symptomatic heterozygotes",
+      "Missing the diagnosis because newborn screening is insensitive for OTC deficiency",
+      "Delaying ammonia measurement in an encephalopathic patient and attributing illness to sepsis",
+      "Giving valproate or a high protein load to an undiagnosed carrier and precipitating a crisis"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In an acute hyperammonaemic crisis, stop protein intake, give high-calorie glucose and lipid to suppress catabolism, and start intravenous nitrogen-scavenging agents (sodium benzoate and sodium phenylacetate) with intravenous arginine",
+      "Use haemodialysis or haemofiltration to clear ammonia rapidly in severe hyperammonaemia",
+      "Provide chronic management with a protein-restricted diet supplemented with essential amino acids, plus citrulline or arginine to support the urea cycle",
+      "Give long-term oral nitrogen scavengers (sodium phenylbutyrate or glycerol phenylbutyrate) to provide alternative routes for nitrogen excretion",
+      "Avoid known precipitants such as fasting, catabolic stress, high protein loads and sodium valproate, and supply a written emergency sick-day regimen",
+      "Offer liver transplantation as definitive treatment for severe or poorly controlled disease",
+      "Monitor plasma ammonia, amino acids and neurodevelopment within a metabolic multidisciplinary team, with genetic counselling and family screening given X-linked inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for ornithine transcarbamylase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ornithine-transcarbamylase-deficiency-real-image",
-   "title": "Ornithine transcarbamylase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ornithine_transcarbamylase_deficiency-pathway",
+      "title": "Ornithine transcarbamylase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common urea cycle disorder and the only one that is X-linked, so severe disease predominantly affects hemizygous males",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hyperammonaemic encephalopathy is a metabolic emergency mandating immediate ammonia lowering and often dialysis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urgent plasma ammonia and arterial blood gas (respiratory alkalosis), Plasma amino acids (low citrulline, low arginine) and urine orotic acid (elevated), Allopurinol loading or protein challenge to unmask carriers, used"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In an acute hyperammonaemic crisis, stop protein intake, give high-calorie glucose and lipid to suppress catabolism, and start intravenous nitrogen-scavenging agents (sodium benzoate and sodium phenylacetate) with"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming females who are carriers are unaffected and overlooking symptomatic heterozygotes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ornithine transcarbamylase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ornithine_transcarbamylase_deficiency-matrix",
+      "title": "Ornithine transcarbamylase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common urea cycle disorder and the only one that is X-linked, so severe disease predominantly affects hemizygous males",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urgent plasma ammonia and arterial blood gas (respiratory alkalosis), Plasma amino acids (low citrulline, low arginine) and urine",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other urea cycle disorders (CPS1, NAGS, citrullinemia, argininosuccinic aciduria), Organic acidaemias with secondary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In an acute hyperammonaemic crisis, stop protein intake, give high-calorie glucose and lipid to suppress catabolism, and start",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming females who are carriers are unaffected and overlooking symptomatic heterozygotes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ornithine transcarbamylase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ornithine_transcarbamylase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma ammonia and arterial blood gas",
+          "cells": [
+            {
+              "text": "Hyperammonaemia with respiratory alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and urine orotic acid",
+          "cells": [
+            {
+              "text": "Low citrulline and arginine; elevated urine orotic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allopurinol loading or protein challenge",
+          "cells": [
+            {
+              "text": "Unmasks carriers; used cautiously in specialist settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OTC gene testing and liver enzyme assay",
+          "cells": [
+            {
+              "text": "Causative variant or enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Encephalopathy in severe or prolonged hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "Carrier status in relatives, given X-linked inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ornithine_transcarbamylase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbamoyl phosphate synthetase 1 or N-acetylglutamate synthase deficiency",
+          "cells": [
+            {
+              "text": "Orotic acid is not raised in these disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperammonaemia in carrier females",
+          "cells": [
+            {
+              "text": "Valproate, postpartum or surgery can precipitate a crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis",
+          "cells": [
+            {
+              "text": "A well neonatal boy collapsing after the first feeds is easily mistaken for sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ornithine_transcarbamylase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute crisis: stop protein, give energy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Glucose and lipid to suppress catabolism; IV sodium benzoate, sodium phenylacetate and arginine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dialysis for severe hyperammonaemia",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Haemodialysis or haemofiltration to clear ammonia rapidly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein-restricted diet",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Essential amino acids, with citrulline or arginine to support the urea cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term nitrogen scavengers",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Oral sodium phenylbutyrate or glycerol phenylbutyrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Fasting, catabolic stress, high protein loads and sodium valproate; written sick-day regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Definitive treatment for severe or poorly controlled disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and counselling",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Ammonia, amino acids and neurodevelopment; genetic counselling and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ornithine_transcarbamylase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Ornithine transcarbamylase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Well neonatal boy with lethargy, vomiting and encephalopathy after first feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (falling consciousness, seizures, cerebral oedema or carrier crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate ammonia lowering, with dialysis for severe hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ammonia, blood gas, plasma amino acids, urine orotic acid, OTC gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is orotic acid raised with low citrulline and arginine, confirming OTC deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CPS1 or NAGS deficiency, organic acidaemia, sepsis or Reye-like illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop protein; glucose and lipid; IV sodium benzoate, sodium phenylacetate, arginine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Haemodialysis or haemofiltration to clear ammonia rapidly in severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Protein-restricted diet with essential amino acids; citrulline or arginine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral sodium phenylbutyrate or glycerol phenylbutyrate as nitrogen scavengers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid fasting, high protein and valproate; written sick-day regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Liver transplantation for severe or poorly controlled disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Severe neonatal disease carries high risk of death or impairment without rapid control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,471 @@
 {
- "id": "sick_sinus_syndrome",
- "name": "Sick sinus syndrome",
- "aliases": [
-  "SSS",
-  "sinus node dysfunction",
-  "sinoatrial node disease",
-  "tachy-brady syndrome"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sick sinus syndrome is a spectrum of sinoatrial node dysfunction producing inappropriate bradycardia, sinus pauses or arrest, sinoatrial exit block, and chronotropic incompetence",
-   "A common variant is the tachy-brady syndrome, in which paroxysms of atrial tachyarrhythmia (often atrial fibrillation) alternate with symptomatic bradycardia or pauses, especially on termination of the tachyarrhythmia",
-   "Symptoms are often intermittent and non-specific, including fatigue, dizziness, presyncope, syncope, and exertional breathlessness from failure of the rate to rise",
-   "Because symptoms are paroxysmal, prolonged or ambulatory monitoring is frequently required to correlate them with rhythm disturbances",
-   "It is predominantly a disease of older adults from degenerative fibrosis of the sinus node, but drugs, ischaemia, and infiltrative disease can contribute",
-   "Reversible contributors such as rate-slowing drugs, hypothyroidism, and electrolyte disturbance should be excluded before attributing symptoms to intrinsic node disease",
-   "Permanent pacing is the main treatment for symptomatic bradycardia, and the tachy-brady form often needs both pacing and rhythm or rate control of the tachyarrhythmia",
-   "Anticoagulation should be considered when atrial fibrillation coexists, based on thromboembolic risk"
+  "id": "sick_sinus_syndrome",
+  "name": "Sick sinus syndrome",
+  "aliases": [
+    "SSS",
+    "sinus node dysfunction",
+    "sinoatrial node disease",
+    "tachy-brady syndrome"
   ],
-  "pathophysiology": "Sick sinus syndrome results from failure of normal impulse generation in the sinoatrial node or failure of conduction from the node to the surrounding atrium. The most common cause is idiopathic degenerative fibrosis of the node and perinodal tissue with ageing. Ischaemia, infiltrative and inflammatory diseases, prior cardiac surgery, and autonomic influences also contribute, and many drugs suppress node function. In the tachy-brady syndrome, atrial remodelling supports tachyarrhythmias, while the diseased node produces prolonged pauses when the tachyarrhythmia stops because of overdrive suppression of an already impaired pacemaker.",
-  "additionalDifferentials": [
-   "Physiological sinus bradycardia (for example in athletes)",
-   "Drug-induced bradycardia from rate-slowing agents",
-   "AV block and other conduction disturbances",
-   "Hypothyroidism and other metabolic causes of bradycardia",
-   "Neurocardiogenic (vasovagal) syncope",
-   "Carotid sinus hypersensitivity"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG and prolonged or ambulatory monitoring to correlate symptoms with rhythm",
-   "Implantable loop recorder when symptoms are infrequent",
-   "Review of rate-slowing medications and thyroid function testing",
-   "Electrolyte assessment and evaluation for ischaemia when relevant",
-   "Exercise testing to assess chronotropic competence",
-   "Echocardiography to evaluate structural heart disease"
-  ],
-  "redFlags": [
-   "Syncope or recurrent presyncope from prolonged sinus pauses or arrest",
-   "Very long pauses, particularly following termination of a tachyarrhythmia in tachy-brady syndrome",
-   "Haemodynamic compromise from severe bradycardia",
-   "Coexisting atrial fibrillation raising thromboembolic and stroke risk"
-  ],
-  "prognosis": "Sick sinus syndrome is rarely immediately life-threatening but causes considerable morbidity from recurrent symptoms; pacing effectively relieves bradycardic symptoms, and overall outcome is largely determined by associated atrial fibrillation and thromboembolic risk and by underlying cardiac disease.",
-  "pitfalls": [
-   "Attributing symptoms to intrinsic node disease without excluding reversible drug or metabolic causes",
-   "Failing to capture the arrhythmia because monitoring was too brief for paroxysmal symptoms",
-   "Overlooking the need for anticoagulation when atrial fibrillation coexists",
-   "Treating bradycardia with pacing while ignoring the tachyarrhythmia component of tachy-brady syndrome"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ESC/ACC-AHA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Permanent pacemaker implantation, with atrial-based or dual-chamber pacing preferred, as the definitive treatment for symptomatic bradycardia, sinus pauses or chronotropic incompetence",
-   "Exclusion and reversal of contributors first, withdrawing rate-slowing drugs, treating hypothyroidism and correcting electrolyte disturbance",
-   "Management of the tachy-brady variant with rate or rhythm control of atrial fibrillation, often feasible only once pacing protects against bradycardia",
-   "Anticoagulation for thromboembolic risk in associated atrial fibrillation",
-   "Ambulatory monitoring or an implantable loop recorder to correlate symptoms with rhythm before committing to device therapy",
-   "Treatment of underlying structural or ischaemic heart disease",
-   "Escalation to device implantation for recurrent syncope or presyncope attributable to node dysfunction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sick_sinus_syndrome-pathway",
-   "title": "Sick sinus syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sick sinus syndrome is a spectrum of sinoatrial node dysfunction producing inappropriate bradycardia, sinus pauses or arrest, sinoatrial exit block, and chronotropic incompetence",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope or recurrent presyncope from prolonged sinus pauses or arrest",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG and prolonged or ambulatory monitoring to correlate symptoms with rhythm, Implantable loop recorder when symptoms are infrequent, Review of rate-slowing medications and thyroid function testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Permanent pacemaker implantation, with atrial-based or dual-chamber pacing preferred, as the definitive treatment for symptomatic bradycardia, sinus pauses or chronotropic incompetence"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing symptoms to intrinsic node disease without excluding reversible drug or metabolic causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sick sinus syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "sick_sinus_syndrome-matrix",
-   "title": "Sick sinus syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sick sinus syndrome is a spectrum of sinoatrial node dysfunction producing inappropriate bradycardia, sinus pauses or arrest,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sick sinus syndrome is a spectrum of sinoatrial node dysfunction producing inappropriate bradycardia, sinus pauses or arrest, sinoatrial exit block, and chronotropic incompetence",
+      "A common variant is the tachy-brady syndrome, in which paroxysms of atrial tachyarrhythmia (often atrial fibrillation) alternate with symptomatic bradycardia or pauses, especially on termination of the tachyarrhythmia",
+      "Symptoms are often intermittent and non-specific, including fatigue, dizziness, presyncope, syncope, and exertional breathlessness from failure of the rate to rise",
+      "Because symptoms are paroxysmal, prolonged or ambulatory monitoring is frequently required to correlate them with rhythm disturbances",
+      "It is predominantly a disease of older adults from degenerative fibrosis of the sinus node, but drugs, ischaemia, and infiltrative disease can contribute",
+      "Reversible contributors such as rate-slowing drugs, hypothyroidism, and electrolyte disturbance should be excluded before attributing symptoms to intrinsic node disease",
+      "Permanent pacing is the main treatment for symptomatic bradycardia, and the tachy-brady form often needs both pacing and rhythm or rate control of the tachyarrhythmia",
+      "Anticoagulation should be considered when atrial fibrillation coexists, based on thromboembolic risk"
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG and prolonged or ambulatory monitoring to correlate symptoms with rhythm, Implantable loop recorder when symptoms are",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sick sinus syndrome results from failure of normal impulse generation in the sinoatrial node or failure of conduction from the node to the surrounding atrium. The most common cause is idiopathic degenerative fibrosis of the node and perinodal tissue with ageing. Ischaemia, infiltrative and inflammatory diseases, prior cardiac surgery, and autonomic influences also contribute, and many drugs suppress node function. In the tachy-brady syndrome, atrial remodelling supports tachyarrhythmias, while the diseased node produces prolonged pauses when the tachyarrhythmia stops because of overdrive suppression of an already impaired pacemaker.",
+    "additionalDifferentials": [
+      "Physiological sinus bradycardia (for example in athletes)",
+      "Drug-induced bradycardia from rate-slowing agents",
+      "AV block and other conduction disturbances",
+      "Hypothyroidism and other metabolic causes of bradycardia",
+      "Neurocardiogenic (vasovagal) syncope",
+      "Carotid sinus hypersensitivity"
     ],
-    [
-     "Primary Differentials",
-     "Physiological sinus bradycardia (for example in athletes), Drug-induced bradycardia from rate-slowing agents, AV block and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG and prolonged or ambulatory monitoring to correlate symptoms with rhythm",
+      "Implantable loop recorder when symptoms are infrequent",
+      "Review of rate-slowing medications and thyroid function testing",
+      "Electrolyte assessment and evaluation for ischaemia when relevant",
+      "Exercise testing to assess chronotropic competence",
+      "Echocardiography to evaluate structural heart disease"
     ],
-    [
-     "Management Strategy",
-     "Permanent pacemaker implantation, with atrial-based or dual-chamber pacing preferred, as the definitive treatment for symptomatic",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope or recurrent presyncope from prolonged sinus pauses or arrest",
+      "Very long pauses, particularly following termination of a tachyarrhythmia in tachy-brady syndrome",
+      "Haemodynamic compromise from severe bradycardia",
+      "Coexisting atrial fibrillation raising thromboembolic and stroke risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing symptoms to intrinsic node disease without excluding reversible drug or metabolic causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Sick sinus syndrome is rarely immediately life-threatening but causes considerable morbidity from recurrent symptoms; pacing effectively relieves bradycardic symptoms, and overall outcome is largely determined by associated atrial fibrillation and thromboembolic risk and by underlying cardiac disease.",
+    "pitfalls": [
+      "Attributing symptoms to intrinsic node disease without excluding reversible drug or metabolic causes",
+      "Failing to capture the arrhythmia because monitoring was too brief for paroxysmal symptoms",
+      "Overlooking the need for anticoagulation when atrial fibrillation coexists",
+      "Treating bradycardia with pacing while ignoring the tachyarrhythmia component of tachy-brady syndrome"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ESC/ACC-AHA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Permanent pacemaker implantation, with atrial-based or dual-chamber pacing preferred, as the definitive treatment for symptomatic bradycardia, sinus pauses or chronotropic incompetence",
+      "Exclusion and reversal of contributors first, withdrawing rate-slowing drugs, treating hypothyroidism and correcting electrolyte disturbance",
+      "Management of the tachy-brady variant with rate or rhythm control of atrial fibrillation, often feasible only once pacing protects against bradycardia",
+      "Anticoagulation for thromboembolic risk in associated atrial fibrillation",
+      "Ambulatory monitoring or an implantable loop recorder to correlate symptoms with rhythm before committing to device therapy",
+      "Treatment of underlying structural or ischaemic heart disease",
+      "Escalation to device implantation for recurrent syncope or presyncope attributable to node dysfunction"
     ]
-   ],
-   "caption": "Overview comparison matrix for sick sinus syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sick-sinus-syndrome-real-image",
-   "title": "Sick sinus syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "sick_sinus_syndrome-pathway",
+      "title": "Sick sinus syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sick sinus syndrome is a spectrum of sinoatrial node dysfunction producing inappropriate bradycardia, sinus pauses or arrest, sinoatrial exit block, and chronotropic incompetence",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope or recurrent presyncope from prolonged sinus pauses or arrest",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG and prolonged or ambulatory monitoring to correlate symptoms with rhythm, Implantable loop recorder when symptoms are infrequent, Review of rate-slowing medications and thyroid function testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Permanent pacemaker implantation, with atrial-based or dual-chamber pacing preferred, as the definitive treatment for symptomatic bradycardia, sinus pauses or chronotropic incompetence"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing symptoms to intrinsic node disease without excluding reversible drug or metabolic causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sick sinus syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sick_sinus_syndrome-matrix",
+      "title": "Sick sinus syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sick sinus syndrome is a spectrum of sinoatrial node dysfunction producing inappropriate bradycardia, sinus pauses or arrest,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG and prolonged or ambulatory monitoring to correlate symptoms with rhythm, Implantable loop recorder when symptoms are",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Physiological sinus bradycardia (for example in athletes), Drug-induced bradycardia from rate-slowing agents, AV block and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Permanent pacemaker implantation, with atrial-based or dual-chamber pacing preferred, as the definitive treatment for symptomatic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing symptoms to intrinsic node disease without excluding reversible drug or metabolic causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sick sinus syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sick_sinus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG with ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Correlates symptoms with rhythm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable loop recorder",
+          "cells": [
+            {
+              "text": "When symptoms are infrequent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug review and thyroid function",
+          "cells": [
+            {
+              "text": "Rate-slowing medications and hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and ischaemia evaluation",
+          "cells": [
+            {
+              "text": "When relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise testing",
+          "cells": [
+            {
+              "text": "Chronotropic competence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sick_sinus_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological bradycardia (athletes)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced bradycardia",
+          "cells": [
+            {
+              "text": "Reversible; withdraw rate-slowing agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Reversible metabolic cause; treat first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocardiogenic syncope",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sick_sinus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude reversible causes",
+          "cells": [
+            {
+              "text": "Withdraw rate-slowing drugs, treat hypothyroidism, correct electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitor or loop recorder",
+          "cells": [
+            {
+              "text": "Correlate symptoms before device therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Permanent pacemaker",
+          "cells": [
+            {
+              "text": "Atrial-based or dual-chamber pacing preferred for symptomatic bradycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tachy-brady variant",
+          "cells": [
+            {
+              "text": "Rate or rhythm control of atrial fibrillation, often feasible once pacing protects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "For thromboembolic risk with associated atrial fibrillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat structural or ischaemic disease",
+          "cells": [
+            {
+              "text": "Underlying heart disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sick_sinus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sick sinus syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Syncope, presyncope or fatigue with sinus bradycardia, pauses or tachy-brady",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (syncope from long pauses, haemodynamic compromise, AF with stroke risk)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pacing assessment and anticoagulation review for associated AF",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG, ambulatory monitor or loop recorder, drug review, thyroid, electrolytes, echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do symptoms correlate with sinus node dysfunction after reversible causes are excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the reversible cause and keep monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw rate-slowing drugs; treat hypothyroidism and electrolyte disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Permanent atrial-based or dual-chamber pacemaker for symptomatic bradycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Control tachy-brady atrial fibrillation once pacing is in place",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticoagulate for associated atrial fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rarely immediately life-threatening; pacing relieves bradycardic symptoms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

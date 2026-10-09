@@ -1,170 +1,410 @@
 {
- "id": "vitamin_k_deficiency",
- "name": "Vitamin K deficiency",
- "aliases": [
-  "hypovitaminosis K",
-  "vitamin K deficiency bleeding",
-  "haemorrhagic disease of the newborn"
- ],
- "class": "non_infective",
- "system": "Nutrition / Metabolic",
- "specialty": "Nutrition & Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Deficiency causes a bleeding tendency with a prolonged prothrombin time, and in more severe cases a prolonged activated partial thromboplastin time",
-   "Newborns are especially vulnerable because of low placental transfer, immature gut flora, and low vitamin K content of breast milk, causing vitamin K deficiency bleeding",
-   "Routine neonatal vitamin K prophylaxis prevents haemorrhagic disease of the newborn, including its dangerous late intracranial form",
-   "In adults it results from fat malabsorption, biliary obstruction, prolonged antibiotic use, or poor intake, since much vitamin K also comes from gut bacteria",
-   "Warfarin acts by antagonising vitamin K, and its effect can be reversed by vitamin K when correction is needed",
-   "The coagulopathy corrects with vitamin K repletion, and rapid correction confirms the diagnosis",
-   "Because it is fat soluble, deficiency clusters with deficiencies of vitamins A, D, and E in malabsorptive states"
+  "id": "vitamin_k_deficiency",
+  "name": "Vitamin K deficiency",
+  "aliases": [
+    "hypovitaminosis K",
+    "vitamin K deficiency bleeding",
+    "haemorrhagic disease of the newborn"
   ],
-  "pathophysiology": "Vitamin K is a cofactor for the gamma-carboxylation of glutamate residues on clotting factors II, VII, IX, and X and on the anticoagulant proteins C and S, a modification required for their activity. Deficiency leaves these factors undercarboxylated and functionally inactive, impairing coagulation and producing bleeding. The vitamin is fat soluble and derives from dietary green vegetables and from synthesis by intestinal bacteria, so inadequate intake, fat malabsorption, absence of bile, and suppression of gut flora all reduce availability. Neonates start with low stores and sterile guts, explaining their particular susceptibility.",
-  "additionalDifferentials": [
-   "Liver disease causing impaired synthesis of clotting factors",
-   "Disseminated intravascular coagulation",
-   "Inherited coagulation factor deficiencies",
-   "Warfarin or other anticoagulant effect",
-   "Other bleeding disorders such as thrombocytopenia or platelet dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Prothrombin time and activated partial thromboplastin time",
-   "Assessment of liver function to distinguish hepatic synthetic failure",
-   "Response of coagulation parameters to vitamin K repletion",
-   "Evaluation for fat malabsorption and biliary obstruction in adults",
-   "Consideration of coexisting fat-soluble vitamin deficiencies"
-  ],
-  "redFlags": [
-   "Active or severe bleeding, including gastrointestinal haemorrhage",
-   "Intracranial haemorrhage, especially late vitamin K deficiency bleeding in an infant",
-   "Coagulopathy in a patient requiring urgent surgery or intervention",
-   "Bleeding in the context of significant liver disease requiring broader management"
-  ],
-  "prognosis": "Deficiency-related coagulopathy corrects reliably and rapidly with vitamin K when there is no severe liver disease; neonatal prophylaxis largely prevents the life-threatening bleeding of infancy.",
-  "pitfalls": [
-   "Assuming a prolonged prothrombin time reflects liver disease when it is correctable vitamin K deficiency, or vice versa",
-   "Overlooking fat malabsorption or biliary obstruction as the underlying cause",
-   "Failing to ensure neonatal vitamin K prophylaxis",
-   "Not recognising coexisting deficiency of other fat-soluble vitamins"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO nutrition guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Repletion with vitamin K (phytomenadione), given orally in mild cases and parenterally when bleeding is significant",
-   "Fresh frozen plasma or prothrombin complex concentrate for active severe or life-threatening haemorrhage, giving immediate but temporary correction",
-   "Routine neonatal vitamin K prophylaxis at birth to prevent vitamin K deficiency bleeding, including its late intracranial form",
-   "Treat the underlying cause such as fat malabsorption or biliary obstruction, and review prolonged antibiotic use",
-   "For warfarin-related over-anticoagulation with bleeding, reverse with vitamin K",
-   "Monitor prothrombin time and activated partial thromboplastin time to confirm the rapid response that also verifies the diagnosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vitamin_k_deficiency-pathway",
-   "title": "Vitamin K deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Deficiency causes a bleeding tendency with a prolonged prothrombin time, and in more severe cases a prolonged activated partial thromboplastin time",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Active or severe bleeding, including gastrointestinal haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Prothrombin time and activated partial thromboplastin time, Assessment of liver function to distinguish hepatic synthetic failure, Response of coagulation parameters to vitamin K repletion"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Repletion with vitamin K (phytomenadione), given orally in mild cases and parenterally when bleeding is significant"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a prolonged prothrombin time reflects liver disease when it is correctable vitamin K deficiency, or vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vitamin k deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "vitamin_k_deficiency-matrix",
-   "title": "Vitamin K deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Deficiency causes a bleeding tendency with a prolonged prothrombin time, and in more severe cases a prolonged activated partial",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutrition / Metabolic",
+  "specialty": "Nutrition & Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Deficiency causes a bleeding tendency with a prolonged prothrombin time, and in more severe cases a prolonged activated partial thromboplastin time",
+      "Newborns are especially vulnerable because of low placental transfer, immature gut flora, and low vitamin K content of breast milk, causing vitamin K deficiency bleeding",
+      "Routine neonatal vitamin K prophylaxis prevents haemorrhagic disease of the newborn, including its dangerous late intracranial form",
+      "In adults it results from fat malabsorption, biliary obstruction, prolonged antibiotic use, or poor intake, since much vitamin K also comes from gut bacteria",
+      "Warfarin acts by antagonising vitamin K, and its effect can be reversed by vitamin K when correction is needed",
+      "The coagulopathy corrects with vitamin K repletion, and rapid correction confirms the diagnosis",
+      "Because it is fat soluble, deficiency clusters with deficiencies of vitamins A, D, and E in malabsorptive states"
     ],
-    [
-     "Key Investigations",
-     "Prothrombin time and activated partial thromboplastin time, Assessment of liver function to distinguish hepatic synthetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vitamin K is a cofactor for the gamma-carboxylation of glutamate residues on clotting factors II, VII, IX, and X and on the anticoagulant proteins C and S, a modification required for their activity. Deficiency leaves these factors undercarboxylated and functionally inactive, impairing coagulation and producing bleeding. The vitamin is fat soluble and derives from dietary green vegetables and from synthesis by intestinal bacteria, so inadequate intake, fat malabsorption, absence of bile, and suppression of gut flora all reduce availability. Neonates start with low stores and sterile guts, explaining their particular susceptibility.",
+    "additionalDifferentials": [
+      "Liver disease causing impaired synthesis of clotting factors",
+      "Disseminated intravascular coagulation",
+      "Inherited coagulation factor deficiencies",
+      "Warfarin or other anticoagulant effect",
+      "Other bleeding disorders such as thrombocytopenia or platelet dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "Liver disease causing impaired synthesis of clotting factors, Disseminated intravascular coagulation, Inherited coagulation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Prothrombin time and activated partial thromboplastin time",
+      "Assessment of liver function to distinguish hepatic synthetic failure",
+      "Response of coagulation parameters to vitamin K repletion",
+      "Evaluation for fat malabsorption and biliary obstruction in adults",
+      "Consideration of coexisting fat-soluble vitamin deficiencies"
     ],
-    [
-     "Management Strategy",
-     "Repletion with vitamin K (phytomenadione), given orally in mild cases and parenterally when bleeding is significant",
-     "Core treatment modality"
+    "redFlags": [
+      "Active or severe bleeding, including gastrointestinal haemorrhage",
+      "Intracranial haemorrhage, especially late vitamin K deficiency bleeding in an infant",
+      "Coagulopathy in a patient requiring urgent surgery or intervention",
+      "Bleeding in the context of significant liver disease requiring broader management"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a prolonged prothrombin time reflects liver disease when it is correctable vitamin K deficiency, or vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "Deficiency-related coagulopathy corrects reliably and rapidly with vitamin K when there is no severe liver disease; neonatal prophylaxis largely prevents the life-threatening bleeding of infancy.",
+    "pitfalls": [
+      "Assuming a prolonged prothrombin time reflects liver disease when it is correctable vitamin K deficiency, or vice versa",
+      "Overlooking fat malabsorption or biliary obstruction as the underlying cause",
+      "Failing to ensure neonatal vitamin K prophylaxis",
+      "Not recognising coexisting deficiency of other fat-soluble vitamins"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO nutrition guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Repletion with vitamin K (phytomenadione), given orally in mild cases and parenterally when bleeding is significant",
+      "Fresh frozen plasma or prothrombin complex concentrate for active severe or life-threatening haemorrhage, giving immediate but temporary correction",
+      "Routine neonatal vitamin K prophylaxis at birth to prevent vitamin K deficiency bleeding, including its late intracranial form",
+      "Treat the underlying cause such as fat malabsorption or biliary obstruction, and review prolonged antibiotic use",
+      "For warfarin-related over-anticoagulation with bleeding, reverse with vitamin K",
+      "Monitor prothrombin time and activated partial thromboplastin time to confirm the rapid response that also verifies the diagnosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for vitamin k deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vitamin-k-deficiency-real-image",
-   "title": "Vitamin K deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vitamin_k_deficiency-pathway",
+      "title": "Vitamin K deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Deficiency causes a bleeding tendency with a prolonged prothrombin time, and in more severe cases a prolonged activated partial thromboplastin time",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Active or severe bleeding, including gastrointestinal haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Prothrombin time and activated partial thromboplastin time, Assessment of liver function to distinguish hepatic synthetic failure, Response of coagulation parameters to vitamin K repletion"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Repletion with vitamin K (phytomenadione), given orally in mild cases and parenterally when bleeding is significant"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a prolonged prothrombin time reflects liver disease when it is correctable vitamin K deficiency, or vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vitamin k deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vitamin_k_deficiency-matrix",
+      "title": "Vitamin K deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Deficiency causes a bleeding tendency with a prolonged prothrombin time, and in more severe cases a prolonged activated partial",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Prothrombin time and activated partial thromboplastin time, Assessment of liver function to distinguish hepatic synthetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Liver disease causing impaired synthesis of clotting factors, Disseminated intravascular coagulation, Inherited coagulation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Repletion with vitamin K (phytomenadione), given orally in mild cases and parenterally when bleeding is significant",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a prolonged prothrombin time reflects liver disease when it is correctable vitamin K deficiency, or vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vitamin k deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitamin_k_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prothrombin time and activated partial thromboplastin time",
+          "cells": [
+            {
+              "text": "Prolonged in deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function assessment",
+          "cells": [
+            {
+              "text": "Hepatic synthetic failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation response to vitamin K repletion",
+          "cells": [
+            {
+              "text": "Correctable deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for fat malabsorption",
+          "cells": [
+            {
+              "text": "Cause of deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_k_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver disease impairing clotting factor synthesis",
+          "cells": [
+            {
+              "text": "Does not correct fully with vitamin K"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warfarin or other anticoagulant effect",
+          "cells": [
+            {
+              "text": "Anticoagulant history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited coagulation factor deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_k_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral phytomenadione",
+          "cells": [
+            {
+              "text": "Mild cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral phytomenadione",
+          "cells": [
+            {
+              "text": "Significant bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fresh frozen plasma or prothrombin complex concentrate",
+          "cells": [
+            {
+              "text": "Active severe or life-threatening haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitamin_k_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Vitamin K deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitamin K deficiency: bleeding tendency with prolonged prothrombin time",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe bleeding, intracranial haemorrhage or urgent surgery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent reversal of coagulopathy for life-threatening bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Prothrombin time, APTT, liver function, response to vitamin K",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does prothrombin time correct after vitamin K?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider liver disease, DIC or inherited factor deficiency; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral phytomenadione in mild cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Parenteral phytomenadione when bleeding is significant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fresh frozen plasma or prothrombin complex concentrate for severe haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Correctable deficiency; newborn late bleeding is serious and needs prophylaxis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,495 @@
 {
- "id": "arboleda_tham_syndrome",
- "name": "Arboleda-Tham syndrome",
- "aliases": [
-  "ARTHS",
-  "KAT6A syndrome",
-  "KAT6A-related intellectual disability",
-  "MYST3-related syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nature Reviews chromatinopathy literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by de novo variants in KAT6A (also called MYST3 or MOZ), a histone acetyltransferase that acetylates lysine residues on histone H3 to promote an open, transcriptionally permissive chromatin state",
-   "Markedly delayed or absent speech is a striking and near-universal feature, often out of proportion to other abilities",
-   "Global developmental delay, intellectual disability and infantile hypotonia with feeding difficulties are consistently present",
-   "Congenital heart defects, particularly septal defects and patent ductus arteriosus, are common and warrant cardiac assessment",
-   "Recurrent infections, gastrointestinal problems and a characteristic facial appearance with a broad nasal tip and small ears support the diagnosis",
-   "The genotype influences severity, with truncating variants in certain exons tending to produce a more severe phenotype",
-   "As a disorder of a histone acetyltransferase it sits alongside KAT6B-related conditions within the acetyltransferase group of chromatinopathies"
+  "id": "arboleda_tham_syndrome",
+  "name": "Arboleda-Tham syndrome",
+  "aliases": [
+    "ARTHS",
+    "KAT6A syndrome",
+    "KAT6A-related intellectual disability",
+    "MYST3-related syndrome"
   ],
-  "pathophysiology": "KAT6A encodes a lysine acetyltransferase of the MYST family that transfers acetyl groups onto histone H3, a modification that loosens chromatin structure and facilitates transcription of target genes. Pathogenic variants reduce or distort this acetyltransferase activity, disturbing the acetylation-dependent control of developmental gene expression, including programmes important for neuronal maturation and for cardiac and craniofacial development. The resulting epigenetic dysregulation manifests as intellectual disability with a distinctive speech deficit, hypotonia, congenital heart disease and dysmorphism, and the position and nature of the variant within the gene help explain the observed variation in severity.",
-  "additionalDifferentials": [
-   "KAT6B-related disorders (genitopatellar syndrome and SBBYSS)",
-   "Rubinstein-Taybi syndrome (CREBBP, EP300)",
-   "Coffin-Siris syndrome (BAF/SWI-SNF genes)",
-   "Kabuki syndrome (KMT2D, KDM6A)",
-   "Cornelia de Lange syndrome",
-   "Other non-specific syndromic intellectual disability with absent speech",
-   "Pitt-Hopkins syndrome (TCF4)"
-  ],
-  "additionalInvestigations": [
-   "Exome or genome sequencing to identify KAT6A variants",
-   "Echocardiography to detect congenital heart defects",
-   "Neurodevelopmental assessment with emphasis on expressive language and augmentative communication",
-   "Evaluation of feeding and swallowing in infancy",
-   "Brain MRI where structural anomalies or seizures are suspected",
-   "Ophthalmological and audiological review",
-   "Immunological assessment if infections are recurrent"
-  ],
-  "redFlags": [
-   "Significant congenital heart disease requiring cardiological management",
-   "Severe feeding difficulty with faltering growth in infancy",
-   "Recurrent serious infections suggesting immune vulnerability",
-   "New seizures warranting neurological review"
-  ],
-  "prognosis": "Life expectancy is not clearly reduced in most, but intellectual disability is typically moderate to severe and expressive speech may remain very limited, so early augmentative and alternative communication and coordinated developmental support are central; cardiac and feeding issues largely determine morbidity in infancy.",
-  "pitfalls": [
-   "Attributing the profound speech delay to isolated language disorder rather than pursuing a genetic diagnosis",
-   "Failing to screen for congenital heart disease at diagnosis",
-   "Confusing the condition with allelic KAT6B disorders without careful phenotyping and sequencing",
-   "Delaying introduction of alternative communication strategies while awaiting speech"
-  ],
-  "references": [
-   "GeneReviews — KAT6A Syndrome (Arboleda-Tham Syndrome)",
-   "Nature Reviews — histone acetyltransferases in development and disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-specific therapy, so management is supportive and developmental",
-   "Introduce early augmentative and alternative communication and speech-language therapy given the near-universal expressive-speech deficit",
-   "Provide multidisciplinary developmental support with physiotherapy and occupational therapy for hypotonia and educational support for intellectual disability",
-   "Assess for and manage congenital heart defects such as septal defects and patent ductus arteriosus with cardiology input",
-   "Address feeding and swallowing difficulties in infancy with feeding therapy and nutritional support",
-   "Monitor for and treat recurrent infections and gastrointestinal problems",
-   "Arrange ophthalmological and audiological review with treatment of identified deficits",
-   "Offer genetic counselling with recurrence-risk advice, as pathogenic KAT6A variants are typically de novo"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "arboleda_tham_syndrome-pathway",
-   "title": "Arboleda-Tham syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by de novo variants in KAT6A (also called MYST3 or MOZ), a histone acetyltransferase that acetylates lysine residues on histone H3 to promote an open, transcriptionally permissive chromatin state",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant congenital heart disease requiring cardiological management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Exome or genome sequencing to identify KAT6A variants, Echocardiography to detect congenital heart defects, Neurodevelopmental assessment with emphasis on expressive language and augmentative communication"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-specific therapy, so management is supportive and developmental"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the profound speech delay to isolated language disorder rather than pursuing a genetic diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of arboleda-tham syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "arboleda_tham_syndrome-matrix",
-   "title": "Arboleda-Tham syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by de novo variants in KAT6A (also called MYST3 or MOZ), a histone acetyltransferase that acetylates lysine residues on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nature Reviews chromatinopathy literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by de novo variants in KAT6A (also called MYST3 or MOZ), a histone acetyltransferase that acetylates lysine residues on histone H3 to promote an open, transcriptionally permissive chromatin state",
+      "Markedly delayed or absent speech is a striking and near-universal feature, often out of proportion to other abilities",
+      "Global developmental delay, intellectual disability and infantile hypotonia with feeding difficulties are consistently present",
+      "Congenital heart defects, particularly septal defects and patent ductus arteriosus, are common and warrant cardiac assessment",
+      "Recurrent infections, gastrointestinal problems and a characteristic facial appearance with a broad nasal tip and small ears support the diagnosis",
+      "The genotype influences severity, with truncating variants in certain exons tending to produce a more severe phenotype",
+      "As a disorder of a histone acetyltransferase it sits alongside KAT6B-related conditions within the acetyltransferase group of chromatinopathies"
     ],
-    [
-     "Key Investigations",
-     "Exome or genome sequencing to identify KAT6A variants, Echocardiography to detect congenital heart defects, Neurodevelopmental",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "KAT6A encodes a lysine acetyltransferase of the MYST family that transfers acetyl groups onto histone H3, a modification that loosens chromatin structure and facilitates transcription of target genes. Pathogenic variants reduce or distort this acetyltransferase activity, disturbing the acetylation-dependent control of developmental gene expression, including programmes important for neuronal maturation and for cardiac and craniofacial development. The resulting epigenetic dysregulation manifests as intellectual disability with a distinctive speech deficit, hypotonia, congenital heart disease and dysmorphism, and the position and nature of the variant within the gene help explain the observed variation in severity.",
+    "additionalDifferentials": [
+      "KAT6B-related disorders (genitopatellar syndrome and SBBYSS)",
+      "Rubinstein-Taybi syndrome (CREBBP, EP300)",
+      "Coffin-Siris syndrome (BAF/SWI-SNF genes)",
+      "Kabuki syndrome (KMT2D, KDM6A)",
+      "Cornelia de Lange syndrome",
+      "Other non-specific syndromic intellectual disability with absent speech",
+      "Pitt-Hopkins syndrome (TCF4)"
     ],
-    [
-     "Primary Differentials",
-     "KAT6B-related disorders (genitopatellar syndrome and SBBYSS), Rubinstein-Taybi syndrome (CREBBP, EP300), Coffin-Siris syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Exome or genome sequencing to identify KAT6A variants",
+      "Echocardiography to detect congenital heart defects",
+      "Neurodevelopmental assessment with emphasis on expressive language and augmentative communication",
+      "Evaluation of feeding and swallowing in infancy",
+      "Brain MRI where structural anomalies or seizures are suspected",
+      "Ophthalmological and audiological review",
+      "Immunological assessment if infections are recurrent"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-specific therapy, so management is supportive and developmental",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant congenital heart disease requiring cardiological management",
+      "Severe feeding difficulty with faltering growth in infancy",
+      "Recurrent serious infections suggesting immune vulnerability",
+      "New seizures warranting neurological review"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the profound speech delay to isolated language disorder rather than pursuing a genetic diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is not clearly reduced in most, but intellectual disability is typically moderate to severe and expressive speech may remain very limited, so early augmentative and alternative communication and coordinated developmental support are central; cardiac and feeding issues largely determine morbidity in infancy.",
+    "pitfalls": [
+      "Attributing the profound speech delay to isolated language disorder rather than pursuing a genetic diagnosis",
+      "Failing to screen for congenital heart disease at diagnosis",
+      "Confusing the condition with allelic KAT6B disorders without careful phenotyping and sequencing",
+      "Delaying introduction of alternative communication strategies while awaiting speech"
+    ],
+    "references": [
+      "GeneReviews — KAT6A Syndrome (Arboleda-Tham Syndrome)",
+      "Nature Reviews — histone acetyltransferases in development and disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-specific therapy, so management is supportive and developmental",
+      "Introduce early augmentative and alternative communication and speech-language therapy given the near-universal expressive-speech deficit",
+      "Provide multidisciplinary developmental support with physiotherapy and occupational therapy for hypotonia and educational support for intellectual disability",
+      "Assess for and manage congenital heart defects such as septal defects and patent ductus arteriosus with cardiology input",
+      "Address feeding and swallowing difficulties in infancy with feeding therapy and nutritional support",
+      "Monitor for and treat recurrent infections and gastrointestinal problems",
+      "Arrange ophthalmological and audiological review with treatment of identified deficits",
+      "Offer genetic counselling with recurrence-risk advice, as pathogenic KAT6A variants are typically de novo"
     ]
-   ],
-   "caption": "Overview comparison matrix for arboleda-tham syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "arboleda-tham-syndrome-real-image",
-   "title": "Arboleda-Tham syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "arboleda_tham_syndrome-pathway",
+      "title": "Arboleda-Tham syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by de novo variants in KAT6A (also called MYST3 or MOZ), a histone acetyltransferase that acetylates lysine residues on histone H3 to promote an open, transcriptionally permissive chromatin state",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant congenital heart disease requiring cardiological management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Exome or genome sequencing to identify KAT6A variants, Echocardiography to detect congenital heart defects, Neurodevelopmental assessment with emphasis on expressive language and augmentative communication"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-specific therapy, so management is supportive and developmental"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the profound speech delay to isolated language disorder rather than pursuing a genetic diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of arboleda-tham syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "arboleda_tham_syndrome-matrix",
+      "title": "Arboleda-Tham syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by de novo variants in KAT6A (also called MYST3 or MOZ), a histone acetyltransferase that acetylates lysine residues on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Exome or genome sequencing to identify KAT6A variants, Echocardiography to detect congenital heart defects, Neurodevelopmental",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "KAT6B-related disorders (genitopatellar syndrome and SBBYSS), Rubinstein-Taybi syndrome (CREBBP, EP300), Coffin-Siris syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-specific therapy, so management is supportive and developmental",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the profound speech delay to isolated language disorder rather than pursuing a genetic diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for arboleda-tham syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nature Reviews chromatinopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arboleda_tham_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome or genome sequencing",
+          "cells": [
+            {
+              "text": "KAT6A variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental assessment",
+          "cells": [
+            {
+              "text": "Expressive language and augmentative communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation of feeding and swallowing",
+          "cells": [
+            {
+              "text": "In infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Where structural anomalies or seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and audiological review",
+          "cells": [
+            {
+              "text": "Vision and hearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunological assessment",
+          "cells": [
+            {
+              "text": "Where infections are recurrent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arboleda_tham_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "KAT6B-related disorders",
+          "cells": [
+            {
+              "text": "Separated by KAT6A variant testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rubinstein-Taybi syndrome",
+          "cells": [
+            {
+              "text": "CREBBP or EP300 variants rather than KAT6A"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arboleda_tham_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive, developmental care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy"
+            },
+            {
+              "text": "Management is supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early augmentative communication",
+          "cells": [
+            {
+              "text": "Augmentative and alternative communication; speech-language therapy"
+            },
+            {
+              "text": "Near-universal expressive-speech deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Hypotonia; educational support for intellectual disability"
+            },
+            {
+              "text": "Multidisciplinary developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac management",
+          "cells": [
+            {
+              "text": "Septal defects and patent ductus arteriosus with cardiology input"
+            },
+            {
+              "text": "Congenital heart defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and swallowing support",
+          "cells": [
+            {
+              "text": "Feeding therapy and nutritional support"
+            },
+            {
+              "text": "Infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and gastrointestinal surveillance",
+          "cells": [
+            {
+              "text": "Monitor and treat recurrent infections and gastrointestinal problems"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Recurrence-risk advice"
+            },
+            {
+              "text": "KAT6A variants are typically de novo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arboleda_tham_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Arboleda-Tham syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Profound speech delay with hypotonia and feeding difficulty in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Significant congenital heart disease or severe feeding failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiology review for congenital heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exome or genome sequencing for KAT6A, echo, developmental and feeding review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KAT6A variant identified on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Early augmentative communication and speech-language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding therapy and nutritional support in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for recurrent infection and gastrointestinal problems",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling; KAT6A variants are typically de novo",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

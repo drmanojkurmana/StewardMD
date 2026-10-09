@@ -1,176 +1,472 @@
 {
- "id": "ganglion_wrist",
- "name": "Ganglion wrist",
- "aliases": [
-  "wrist ganglion cyst",
-  "synovial ganglion"
- ],
- "class": "non_infective",
- "system": "musculoskeletal",
- "specialty": "hand and plastic surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Ganglia are the commonest soft-tissue swellings of the wrist and hand, consisting of a mucin-filled cyst arising from a joint capsule or tendon sheath and connected by a pedicle with a one-way valve mechanism.",
-   "The dorsal wrist ganglion classically arises from the scapholunate interval and may be occult, becoming apparent only on wrist flexion or presenting as unexplained dorsal wrist pain before it is palpable.",
-   "The volar wrist ganglion typically arises near the radiocarpal or scaphotrapezial joint and lies close to the radial artery, an important consideration before aspiration or excision.",
-   "Cysts transilluminate, are usually mobile and may fluctuate in size, often enlarging with activity and regressing with rest.",
-   "A significant proportion resolve spontaneously, so reassurance and observation are entirely appropriate for asymptomatic lesions once the diagnosis is confident.",
-   "Aspiration is simple but carries a high recurrence rate; surgical excision including the capsular pedicle and stalk offers the lowest recurrence but is not recurrence-free.",
-   "Allen test assessment of the radial and ulnar arterial supply is prudent before intervention on a volar ganglion adjacent to the radial artery.",
-   "A firm mass that does not transilluminate, is fixed, or lies in an atypical site warrants imaging to exclude other pathology before it is dismissed as a ganglion."
+  "id": "ganglion_wrist",
+  "name": "Ganglion wrist",
+  "aliases": [
+    "wrist ganglion cyst",
+    "synovial ganglion"
   ],
-  "pathophysiology": "A ganglion is not a true cyst as it lacks an epithelial lining; instead it is a pseudocyst with a fibrous wall containing viscous mucin rich in hyaluronic acid and other glycosaminoglycans. It is thought to arise from mucoid degeneration of periarticular connective tissue and from capsular or tendon-sheath microtrauma, with a pedicle connecting the cyst to the underlying joint. A hypothesised one-way valve at the stalk allows joint fluid to pass into the cyst but not back, explaining fluctuation in size and the tendency to recur if the stalk is not addressed.",
-  "additionalDifferentials": [
-   "Extensor or flexor tenosynovitis with associated swelling",
-   "Giant cell tumour of the tendon sheath",
-   "Lipoma or other benign soft-tissue tumour",
-   "Carpal boss (osteoarthritic exostosis)",
-   "Scapholunate instability causing dorsal wrist pain",
-   "Radial artery aneurysm mimicking a volar ganglion",
-   "Soft-tissue sarcoma in atypical or rapidly enlarging lesions"
-  ],
-  "additionalInvestigations": [
-   "Diagnosis is usually clinical with transillumination of the cyst",
-   "Ultrasound to confirm a cystic anechoic lesion and define its relationship to the radial artery",
-   "MRI for occult dorsal ganglia presenting as unexplained wrist pain or for atypical solid-feeling masses",
-   "Plain radiographs to assess a carpal boss or associated degenerative change",
-   "Aspiration demonstrating characteristic clear viscous mucin supports the diagnosis",
-   "Allen test to document arterial patency before volar intervention",
-   "Histological examination of any excised atypical lesion"
-  ],
-  "redFlags": [
-   "Solid, fixed or non-transilluminating mass suggesting neoplasm rather than ganglion",
-   "Rapid painless enlargement or deep infiltration on imaging",
-   "Pulsatile volar swelling raising the possibility of a radial artery aneurysm",
-   "Neurological deficit from compression of an adjacent nerve, such as a wrist ganglion involving Guyon canal"
-  ],
-  "prognosis": "Benign with an excellent outlook; many resolve without treatment, and although aspiration is frequently followed by recurrence, meticulous surgical excision of the cyst and its stalk achieves durable control in most patients.",
-  "pitfalls": [
-   "Injuring the radial artery during aspiration or excision of a volar wrist ganglion",
-   "Incompletely excising the capsular stalk, leading to recurrence",
-   "Labelling an occult dorsal ganglion as functional wrist pain and missing the diagnosis",
-   "Assuming every wrist swelling is a ganglion and overlooking a soft-tissue sarcoma or arterial aneurysm",
-   "Failing to counsel patients that recurrence and spontaneous resolution are both common"
-  ],
-  "references": [
-   "Green's Operative Hand Surgery",
-   "British Society for Surgery of the Hand guidance on ganglia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe, as many wrist ganglia resolve without treatment once the diagnosis is confident",
-   "Relieve activity-related discomfort with splinting, activity modification and simple analgesia",
-   "Offer aspiration for symptomatic dorsal ganglia, warning of frequent recurrence",
-   "Undertake open or arthroscopic excision including the capsular pedicle and stalk for persistent or recurrent cysts, giving the most durable control",
-   "Document radial artery patency with an Allen test and ultrasound before excising a volar ganglion lying close to the artery",
-   "Investigate occult dorsal ganglia presenting as unexplained wrist pain with ultrasound or MRI before intervention",
-   "Counsel that recurrence can still occur despite meticulous surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ganglion_wrist-pathway",
-   "title": "Ganglion wrist: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Ganglia are the commonest soft-tissue swellings of the wrist and hand, consisting of a mucin-filled cyst arising from a joint capsule or tendon sheath and connected by a pedicle with a one-way valve mechanism.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Solid, fixed or non-transilluminating mass suggesting neoplasm rather than ganglion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diagnosis is usually clinical with transillumination of the cyst, Ultrasound to confirm a cystic anechoic lesion and define its relationship to the radial artery, MRI for occult dorsal ganglia presenting as unexplained"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe, as many wrist ganglia resolve without treatment once the diagnosis is confident"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Injuring the radial artery during aspiration or excision of a volar wrist ganglion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ganglion wrist."
-  }
- ],
- "tables": [
-  {
-   "id": "ganglion_wrist-matrix",
-   "title": "Ganglion wrist: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Ganglia are the commonest soft-tissue swellings of the wrist and hand, consisting of a mucin-filled cyst arising from a joint",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "musculoskeletal",
+  "specialty": "hand and plastic surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Ganglia are the commonest soft-tissue swellings of the wrist and hand, consisting of a mucin-filled cyst arising from a joint capsule or tendon sheath and connected by a pedicle with a one-way valve mechanism.",
+      "The dorsal wrist ganglion classically arises from the scapholunate interval and may be occult, becoming apparent only on wrist flexion or presenting as unexplained dorsal wrist pain before it is palpable.",
+      "The volar wrist ganglion typically arises near the radiocarpal or scaphotrapezial joint and lies close to the radial artery, an important consideration before aspiration or excision.",
+      "Cysts transilluminate, are usually mobile and may fluctuate in size, often enlarging with activity and regressing with rest.",
+      "A significant proportion resolve spontaneously, so reassurance and observation are entirely appropriate for asymptomatic lesions once the diagnosis is confident.",
+      "Aspiration is simple but carries a high recurrence rate; surgical excision including the capsular pedicle and stalk offers the lowest recurrence but is not recurrence-free.",
+      "Allen test assessment of the radial and ulnar arterial supply is prudent before intervention on a volar ganglion adjacent to the radial artery.",
+      "A firm mass that does not transilluminate, is fixed, or lies in an atypical site warrants imaging to exclude other pathology before it is dismissed as a ganglion."
     ],
-    [
-     "Key Investigations",
-     "Diagnosis is usually clinical with transillumination of the cyst, Ultrasound to confirm a cystic anechoic lesion and define its",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A ganglion is not a true cyst as it lacks an epithelial lining; instead it is a pseudocyst with a fibrous wall containing viscous mucin rich in hyaluronic acid and other glycosaminoglycans. It is thought to arise from mucoid degeneration of periarticular connective tissue and from capsular or tendon-sheath microtrauma, with a pedicle connecting the cyst to the underlying joint. A hypothesised one-way valve at the stalk allows joint fluid to pass into the cyst but not back, explaining fluctuation in size and the tendency to recur if the stalk is not addressed.",
+    "additionalDifferentials": [
+      "Extensor or flexor tenosynovitis with associated swelling",
+      "Giant cell tumour of the tendon sheath",
+      "Lipoma or other benign soft-tissue tumour",
+      "Carpal boss (osteoarthritic exostosis)",
+      "Scapholunate instability causing dorsal wrist pain",
+      "Radial artery aneurysm mimicking a volar ganglion",
+      "Soft-tissue sarcoma in atypical or rapidly enlarging lesions"
     ],
-    [
-     "Primary Differentials",
-     "Extensor or flexor tenosynovitis with associated swelling, Giant cell tumour of the tendon sheath, Lipoma or other benign",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diagnosis is usually clinical with transillumination of the cyst",
+      "Ultrasound to confirm a cystic anechoic lesion and define its relationship to the radial artery",
+      "MRI for occult dorsal ganglia presenting as unexplained wrist pain or for atypical solid-feeling masses",
+      "Plain radiographs to assess a carpal boss or associated degenerative change",
+      "Aspiration demonstrating characteristic clear viscous mucin supports the diagnosis",
+      "Allen test to document arterial patency before volar intervention",
+      "Histological examination of any excised atypical lesion"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe, as many wrist ganglia resolve without treatment once the diagnosis is confident",
-     "Core treatment modality"
+    "redFlags": [
+      "Solid, fixed or non-transilluminating mass suggesting neoplasm rather than ganglion",
+      "Rapid painless enlargement or deep infiltration on imaging",
+      "Pulsatile volar swelling raising the possibility of a radial artery aneurysm",
+      "Neurological deficit from compression of an adjacent nerve, such as a wrist ganglion involving Guyon canal"
     ],
-    [
-     "Clinical Pitfall",
-     "Injuring the radial artery during aspiration or excision of a volar wrist ganglion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign with an excellent outlook; many resolve without treatment, and although aspiration is frequently followed by recurrence, meticulous surgical excision of the cyst and its stalk achieves durable control in most patients.",
+    "pitfalls": [
+      "Injuring the radial artery during aspiration or excision of a volar wrist ganglion",
+      "Incompletely excising the capsular stalk, leading to recurrence",
+      "Labelling an occult dorsal ganglion as functional wrist pain and missing the diagnosis",
+      "Assuming every wrist swelling is a ganglion and overlooking a soft-tissue sarcoma or arterial aneurysm",
+      "Failing to counsel patients that recurrence and spontaneous resolution are both common"
+    ],
+    "references": [
+      "Green's Operative Hand Surgery",
+      "British Society for Surgery of the Hand guidance on ganglia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe, as many wrist ganglia resolve without treatment once the diagnosis is confident",
+      "Relieve activity-related discomfort with splinting, activity modification and simple analgesia",
+      "Offer aspiration for symptomatic dorsal ganglia, warning of frequent recurrence",
+      "Undertake open or arthroscopic excision including the capsular pedicle and stalk for persistent or recurrent cysts, giving the most durable control",
+      "Document radial artery patency with an Allen test and ultrasound before excising a volar ganglion lying close to the artery",
+      "Investigate occult dorsal ganglia presenting as unexplained wrist pain with ultrasound or MRI before intervention",
+      "Counsel that recurrence can still occur despite meticulous surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for ganglion wrist."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ganglion-wrist-real-image",
-   "title": "Ganglion wrist: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "ganglion_wrist-pathway",
+      "title": "Ganglion wrist: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Ganglia are the commonest soft-tissue swellings of the wrist and hand, consisting of a mucin-filled cyst arising from a joint capsule or tendon sheath and connected by a pedicle with a one-way valve mechanism.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Solid, fixed or non-transilluminating mass suggesting neoplasm rather than ganglion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diagnosis is usually clinical with transillumination of the cyst, Ultrasound to confirm a cystic anechoic lesion and define its relationship to the radial artery, MRI for occult dorsal ganglia presenting as unexplained"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe, as many wrist ganglia resolve without treatment once the diagnosis is confident"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Injuring the radial artery during aspiration or excision of a volar wrist ganglion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ganglion wrist."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ganglion_wrist-matrix",
+      "title": "Ganglion wrist: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Ganglia are the commonest soft-tissue swellings of the wrist and hand, consisting of a mucin-filled cyst arising from a joint",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diagnosis is usually clinical with transillumination of the cyst, Ultrasound to confirm a cystic anechoic lesion and define its",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Extensor or flexor tenosynovitis with associated swelling, Giant cell tumour of the tendon sheath, Lipoma or other benign",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe, as many wrist ganglia resolve without treatment once the diagnosis is confident",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Injuring the radial artery during aspiration or excision of a volar wrist ganglion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ganglion wrist."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ganglion_wrist-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis with transillumination",
+          "cells": [
+            {
+              "text": "Clinical features, aided by transillumination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms a cystic anechoic lesion; relation to the radial artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Occult dorsal ganglia or atypical solid-feeling masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Carpal boss or associated degenerative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration",
+          "cells": [
+            {
+              "text": "Clear viscous mucin supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allen test",
+          "cells": [
+            {
+              "text": "Documents arterial patency before volar intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglion_wrist-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Radial artery aneurysm",
+          "cells": [
+            {
+              "text": "Pulsatile volar swelling mimicking a volar ganglion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scapholunate instability",
+          "cells": [
+            {
+              "text": "Causes dorsal wrist pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carpal boss",
+          "cells": [
+            {
+              "text": "Osteoarthritic exostosis seen on radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglion_wrist-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Many ganglia resolve without treatment once the diagnosis is confident"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splinting, activity modification and analgesia",
+          "cells": [
+            {
+              "text": "For activity-related discomfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration for dorsal ganglia",
+          "cells": [
+            {
+              "text": "For symptomatic lesions; frequent recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open or arthroscopic excision",
+          "cells": [
+            {
+              "text": "Persistent or recurrent cysts, including the capsular pedicle and stalk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radial artery check before volar excision",
+          "cells": [
+            {
+              "text": "Allen test and ultrasound for a ganglion near the artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for occult dorsal ganglia",
+          "cells": [
+            {
+              "text": "Ultrasound or MRI for unexplained wrist pain, before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on recurrence",
+          "cells": [
+            {
+              "text": "Recurrence possible despite meticulous surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ganglion_wrist-dx-mgmt",
+      "title": "Diagnosis and management of Ganglion wrist",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected wrist ganglion: cystic swelling, usually dorsal, often clinically diagnosed",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (solid mass, pulsatile volar swelling, nerve deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Check arterial patency before any volar intervention; image for aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transillumination, ultrasound, MRI for occult ganglia, radiographs and aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aspiration of clear viscous mucin support the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider radial artery aneurysm, tenosynovitis, lipoma or soft-tissue sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe; many ganglia resolve once the diagnosis is confident",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Splinting, activity modification and analgesia for discomfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspiration for symptomatic dorsal ganglia, with warning of recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Open or arthroscopic excision including the capsular stalk for persistent cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, excellent outlook; aspiration often recurs, meticulous excision less so",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

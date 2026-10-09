@@ -1,179 +1,468 @@
 {
- "id": "argininosuccinic_aciduria",
- "name": "Argininosuccinic aciduria",
- "aliases": [
-  "argininosuccinate lyase deficiency",
-  "ASL deficiency",
-  "argininosuccinic aciduria (ASA)",
-  "citrullinaemia type not applicable"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Second most common urea cycle disorder, caused by biallelic ASL variants (argininosuccinate lyase deficiency)",
-   "Neonatal-onset form presents with hyperammonaemic encephalopathy: poor feeding, vomiting, tachypnoea, lethargy and coma in the first days of life",
-   "Biochemical hallmark is markedly raised plasma and urine argininosuccinic acid, with raised citrulline and low arginine",
-   "Late-onset disease may present with episodic hyperammonaemia, developmental delay, learning difficulties or chronic liver involvement",
-   "Distinctive features include trichorrhexis nodosa (brittle, fragile hair) and a tendency to hepatomegaly and hepatic fibrosis",
-   "Systemic hypertension and neurocognitive impairment can occur even with good ammonia control, reflecting nitric oxide deficiency",
-   "Confirm with plasma amino acids, urine orotic acid, enzyme assay in fibroblasts/red cells and ASL sequencing",
-   "Management combines protein restriction, arginine supplementation and nitrogen scavengers (sodium benzoate/phenylbutyrate), with haemodialysis for severe hyperammonaemia"
+  "id": "argininosuccinic_aciduria",
+  "name": "Argininosuccinic aciduria",
+  "aliases": [
+    "argininosuccinate lyase deficiency",
+    "ASL deficiency",
+    "argininosuccinic aciduria (ASA)",
+    "citrullinaemia type not applicable"
   ],
-  "pathophysiology": "Argininosuccinic aciduria is caused by deficiency of argininosuccinate lyase, the urea cycle enzyme that cleaves argininosuccinate into arginine and fumarate. The block prevents completion of ureagenesis, so waste nitrogen cannot be efficiently converted to urea and ammonia accumulates. Argininosuccinate itself builds up to high levels in blood, urine and cerebrospinal fluid, while arginine (a downstream product) becomes deficient. Because arginine is also the substrate for nitric oxide synthesis, chronic arginine deficiency and argininosuccinate accumulation are thought to contribute to the hypertension, hepatic disease and neurocognitive problems that can persist despite adequate ammonia control, distinguishing this disorder from other urea cycle defects. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Other urea cycle disorders (OTC deficiency, citrullinaemia type 1, CPS1 and NAGS deficiency)",
-   "Organic acidaemias causing secondary hyperammonaemia",
-   "Fatty acid oxidation disorders with hyperammonaemia",
-   "Transient hyperammonaemia of the newborn",
-   "Neonatal sepsis or hypoxic-ischaemic encephalopathy",
-   "Liver failure of other cause"
-  ],
-  "additionalInvestigations": [
-   "Plasma ammonia (urgent) during suspected crises",
-   "Plasma amino acids showing raised argininosuccinate and citrulline with low arginine",
-   "Urine orotic acid (typically raised)",
-   "Blood gas to assess for respiratory alkalosis of hyperammonaemia",
-   "ASL gene sequencing or enzyme assay in erythrocytes/fibroblasts",
-   "Liver function tests and hepatic imaging/elastography for fibrosis",
-   "Blood pressure monitoring for systemic hypertension"
-  ],
-  "redFlags": [
-   "Neonatal hyperammonaemic coma requiring emergency ammonia removal",
-   "Rapidly rising ammonia with encephalopathy at any age",
-   "Cerebral oedema complicating severe hyperammonaemia",
-   "Progressive hepatic dysfunction or fibrosis",
-   "Uncontrolled systemic hypertension"
-  ],
-  "prognosis": "Early recognition and prompt control of hyperammonaemia improve survival, but neurocognitive impairment, hypertension and hepatic disease may develop even with satisfactory metabolic control, so outcome is more variable than in some other urea cycle disorders.",
-  "pitfalls": [
-   "Delaying ammonia measurement and treatment in an encephalopathic neonate",
-   "Assuming normal ammonia control prevents all complications, missing hypertension and liver disease",
-   "Overlooking argininosuccinate on amino acid analysis and misclassifying the urea cycle defect",
-   "Neglecting arginine supplementation, which is required to correct the downstream deficiency",
-   "Failing to prepare an emergency regimen for catabolic illness or surgery"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics",
-   "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute a protein-restricted diet with arginine supplementation, as the enzyme block leaves arginine deficient, to support residual ureagenesis",
-   "Give nitrogen-scavenger therapy with sodium benzoate or sodium phenylbutyrate to remove waste nitrogen",
-   "Manage hyperammonaemic crises by stopping protein, giving high-calorie glucose and lipid to halt catabolism, intravenous arginine and scavengers, and haemodialysis or haemofiltration for severe or refractory hyperammonaemia",
-   "Monitor and manage complications that persist despite ammonia control, particularly systemic hypertension and hepatic fibrosis with liver function tests and elastography",
-   "Undertake regular biochemical monitoring of ammonia, plasma amino acids and nutritional status with neurodevelopmental follow-up",
-   "Coordinate care with a metabolic dietitian and specialist metabolic team and consider liver transplantation in severe disease",
-   "Offer genetic counselling and family screening given autosomal recessive ASL inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "argininosuccinic_aciduria-pathway",
-   "title": "Argininosuccinic aciduria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Second most common urea cycle disorder, caused by biallelic ASL variants (argininosuccinate lyase deficiency)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal hyperammonaemic coma requiring emergency ammonia removal",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma ammonia (urgent) during suspected crises, Plasma amino acids showing raised argininosuccinate and citrulline with low arginine, Urine orotic acid (typically raised)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute a protein-restricted diet with arginine supplementation, as the enzyme block leaves arginine deficient, to support residual ureagenesis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying ammonia measurement and treatment in an encephalopathic neonate"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of argininosuccinic aciduria."
-  }
- ],
- "tables": [
-  {
-   "id": "argininosuccinic_aciduria-matrix",
-   "title": "Argininosuccinic aciduria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Second most common urea cycle disorder, caused by biallelic ASL variants (argininosuccinate lyase deficiency)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Second most common urea cycle disorder, caused by biallelic ASL variants (argininosuccinate lyase deficiency)",
+      "Neonatal-onset form presents with hyperammonaemic encephalopathy: poor feeding, vomiting, tachypnoea, lethargy and coma in the first days of life",
+      "Biochemical hallmark is markedly raised plasma and urine argininosuccinic acid, with raised citrulline and low arginine",
+      "Late-onset disease may present with episodic hyperammonaemia, developmental delay, learning difficulties or chronic liver involvement",
+      "Distinctive features include trichorrhexis nodosa (brittle, fragile hair) and a tendency to hepatomegaly and hepatic fibrosis",
+      "Systemic hypertension and neurocognitive impairment can occur even with good ammonia control, reflecting nitric oxide deficiency",
+      "Confirm with plasma amino acids, urine orotic acid, enzyme assay in fibroblasts/red cells and ASL sequencing",
+      "Management combines protein restriction, arginine supplementation and nitrogen scavengers (sodium benzoate/phenylbutyrate), with haemodialysis for severe hyperammonaemia"
     ],
-    [
-     "Key Investigations",
-     "Plasma ammonia (urgent) during suspected crises, Plasma amino acids showing raised argininosuccinate and citrulline with low",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Argininosuccinic aciduria is caused by deficiency of argininosuccinate lyase, the urea cycle enzyme that cleaves argininosuccinate into arginine and fumarate. The block prevents completion of ureagenesis, so waste nitrogen cannot be efficiently converted to urea and ammonia accumulates. Argininosuccinate itself builds up to high levels in blood, urine and cerebrospinal fluid, while arginine (a downstream product) becomes deficient. Because arginine is also the substrate for nitric oxide synthesis, chronic arginine deficiency and argininosuccinate accumulation are thought to contribute to the hypertension, hepatic disease and neurocognitive problems that can persist despite adequate ammonia control, distinguishing this disorder from other urea cycle defects. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Other urea cycle disorders (OTC deficiency, citrullinaemia type 1, CPS1 and NAGS deficiency)",
+      "Organic acidaemias causing secondary hyperammonaemia",
+      "Fatty acid oxidation disorders with hyperammonaemia",
+      "Transient hyperammonaemia of the newborn",
+      "Neonatal sepsis or hypoxic-ischaemic encephalopathy",
+      "Liver failure of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Other urea cycle disorders (OTC deficiency, citrullinaemia type 1, CPS1 and NAGS deficiency), Organic acidaemias causing",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma ammonia (urgent) during suspected crises",
+      "Plasma amino acids showing raised argininosuccinate and citrulline with low arginine",
+      "Urine orotic acid (typically raised)",
+      "Blood gas to assess for respiratory alkalosis of hyperammonaemia",
+      "ASL gene sequencing or enzyme assay in erythrocytes/fibroblasts",
+      "Liver function tests and hepatic imaging/elastography for fibrosis",
+      "Blood pressure monitoring for systemic hypertension"
     ],
-    [
-     "Management Strategy",
-     "Institute a protein-restricted diet with arginine supplementation, as the enzyme block leaves arginine deficient, to support",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal hyperammonaemic coma requiring emergency ammonia removal",
+      "Rapidly rising ammonia with encephalopathy at any age",
+      "Cerebral oedema complicating severe hyperammonaemia",
+      "Progressive hepatic dysfunction or fibrosis",
+      "Uncontrolled systemic hypertension"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying ammonia measurement and treatment in an encephalopathic neonate",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early recognition and prompt control of hyperammonaemia improve survival, but neurocognitive impairment, hypertension and hepatic disease may develop even with satisfactory metabolic control, so outcome is more variable than in some other urea cycle disorders.",
+    "pitfalls": [
+      "Delaying ammonia measurement and treatment in an encephalopathic neonate",
+      "Assuming normal ammonia control prevents all complications, missing hypertension and liver disease",
+      "Overlooking argininosuccinate on amino acid analysis and misclassifying the urea cycle defect",
+      "Neglecting arginine supplementation, which is required to correct the downstream deficiency",
+      "Failing to prepare an emergency regimen for catabolic illness or surgery"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics",
+      "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute a protein-restricted diet with arginine supplementation, as the enzyme block leaves arginine deficient, to support residual ureagenesis",
+      "Give nitrogen-scavenger therapy with sodium benzoate or sodium phenylbutyrate to remove waste nitrogen",
+      "Manage hyperammonaemic crises by stopping protein, giving high-calorie glucose and lipid to halt catabolism, intravenous arginine and scavengers, and haemodialysis or haemofiltration for severe or refractory hyperammonaemia",
+      "Monitor and manage complications that persist despite ammonia control, particularly systemic hypertension and hepatic fibrosis with liver function tests and elastography",
+      "Undertake regular biochemical monitoring of ammonia, plasma amino acids and nutritional status with neurodevelopmental follow-up",
+      "Coordinate care with a metabolic dietitian and specialist metabolic team and consider liver transplantation in severe disease",
+      "Offer genetic counselling and family screening given autosomal recessive ASL inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for argininosuccinic aciduria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "argininosuccinic-aciduria-real-image",
-   "title": "Argininosuccinic aciduria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "argininosuccinic_aciduria-pathway",
+      "title": "Argininosuccinic aciduria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Second most common urea cycle disorder, caused by biallelic ASL variants (argininosuccinate lyase deficiency)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal hyperammonaemic coma requiring emergency ammonia removal",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma ammonia (urgent) during suspected crises, Plasma amino acids showing raised argininosuccinate and citrulline with low arginine, Urine orotic acid (typically raised)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute a protein-restricted diet with arginine supplementation, as the enzyme block leaves arginine deficient, to support residual ureagenesis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying ammonia measurement and treatment in an encephalopathic neonate"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of argininosuccinic aciduria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "argininosuccinic_aciduria-matrix",
+      "title": "Argininosuccinic aciduria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Second most common urea cycle disorder, caused by biallelic ASL variants (argininosuccinate lyase deficiency)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma ammonia (urgent) during suspected crises, Plasma amino acids showing raised argininosuccinate and citrulline with low",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other urea cycle disorders (OTC deficiency, citrullinaemia type 1, CPS1 and NAGS deficiency), Organic acidaemias causing",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute a protein-restricted diet with arginine supplementation, as the enzyme block leaves arginine deficient, to support",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying ammonia measurement and treatment in an encephalopathic neonate",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for argininosuccinic aciduria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "argininosuccinic_aciduria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma ammonia during suspected crises",
+          "cells": [
+            {
+              "text": "Urgent measurement in crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Raised argininosuccinate and citrulline with low arginine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine orotic acid",
+          "cells": [
+            {
+              "text": "Typically raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas",
+          "cells": [
+            {
+              "text": "Respiratory alkalosis of hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ASL gene sequencing or enzyme assay",
+          "cells": [
+            {
+              "text": "Erythrocyte or fibroblast enzyme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and elastography",
+          "cells": [
+            {
+              "text": "Hepatic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure monitoring",
+          "cells": [
+            {
+              "text": "Systemic hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "argininosuccinic_aciduria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Protein restriction with arginine supplementation",
+          "cells": [
+            {
+              "text": "Supports residual ureagenesis"
+            },
+            {
+              "text": "Arginine is deficient because of the enzyme block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nitrogen scavengers",
+          "cells": [
+            {
+              "text": "Sodium benzoate or sodium phenylbutyrate"
+            },
+            {
+              "text": "Removes waste nitrogen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperammonaemic crisis management",
+          "cells": [
+            {
+              "text": "Stop protein; high-calorie glucose and lipid; IV arginine and scavengers"
+            },
+            {
+              "text": "Halts catabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication monitoring",
+          "cells": [
+            {
+              "text": "Systemic hypertension and hepatic fibrosis"
+            },
+            {
+              "text": "Persist despite ammonia control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical and neurodevelopmental monitoring",
+          "cells": [
+            {
+              "text": "Ammonia, plasma amino acids and nutritional status"
+            },
+            {
+              "text": "Regular follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist metabolic team and transplant",
+          "cells": [
+            {
+              "text": "Metabolic dietitian; liver transplantation in severe disease"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ASL inheritance"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "argininosuccinic_aciduria-dx-mgmt",
+      "title": "Diagnosis and management of Argininosuccinic aciduria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperammonaemic encephalopathy, neonatal or later onset",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Neonatal coma or rapidly rising ammonia with encephalopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency ammonia removal; urgent plasma ammonia and treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ammonia, amino acids, urine orotic acid, blood gas, ASL testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised argininosuccinate and citrulline with low arginine confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Protein restriction with arginine supplementation and scavengers",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat amino acid analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sodium benzoate or phenylbutyrate to remove waste nitrogen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor systemic hypertension and hepatic fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular ammonia, amino acid and neurodevelopmental monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver transplantation considered in severe disease; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

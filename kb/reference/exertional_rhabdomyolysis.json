@@ -1,173 +1,559 @@
 {
- "id": "exertional_rhabdomyolysis",
- "name": "Exertional rhabdomyolysis",
- "aliases": [
-  "exercise-induced rhabdomyolysis",
-  "exertional muscle breakdown",
-  "effort rhabdomyolysis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Emergency",
- "specialty": "Sports & Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Tintinalli's Emergency Medicine / ACSM guidance on exertional rhabdomyolysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic triad is muscle pain, weakness, and dark (tea- or cola-coloured) urine following intense or unaccustomed exertion, though not all three are always present",
-   "The diagnosis rests on a markedly elevated serum creatine kinase, typically many times the upper limit of normal",
-   "The most serious systemic complication is myoglobinuric acute kidney injury, in which released myoglobin causes pigment nephropathy",
-   "Dangerous electrolyte derangements include hyperkalaemia, hyperphosphataemia, and hypocalcaemia, and hyperkalaemia can precipitate life-threatening arrhythmia",
-   "Acute compartment syndrome may develop in affected limbs and, conversely, established compartment syndrome can itself cause rhabdomyolysis",
-   "Contributing factors include heat, dehydration, certain drugs and supplements, sickle cell trait, and recurrent episodes should prompt evaluation for an underlying metabolic myopathy or malignant hyperthermia susceptibility",
-   "The cornerstone of management is early and aggressive intravenous fluid resuscitation to protect the kidneys, alongside correction of electrolyte disturbance and vigilance for compartment syndrome"
+  "id": "exertional_rhabdomyolysis",
+  "name": "Exertional rhabdomyolysis",
+  "aliases": [
+    "exercise-induced rhabdomyolysis",
+    "exertional muscle breakdown",
+    "effort rhabdomyolysis"
   ],
-  "pathophysiology": "Exertional rhabdomyolysis occurs when strenuous or unaccustomed muscular activity, often compounded by heat, dehydration, or an underlying metabolic susceptibility, exceeds the energy supply of skeletal muscle and causes myocyte membrane injury. Breakdown of muscle cells releases intracellular contents, including creatine kinase, myoglobin, potassium, and phosphate, into the circulation. Myoglobin filtered by the kidney contributes to acute kidney injury through tubular obstruction, direct tubular toxicity, and renal vasoconstriction, an effect worsened by hypovolaemia. Efflux of potassium and phosphate with sequestration of calcium into damaged muscle produces the characteristic electrolyte pattern, while swelling within fascial compartments can raise pressure enough to cause compartment syndrome and further ischaemic muscle injury.",
-  "additionalDifferentials": [
-   "Acute compartment syndrome",
-   "Exertional heat stroke",
-   "Crush injury from other causes",
-   "Inflammatory or infective myositis",
-   "Inherited metabolic myopathy (e.g. disorders of glycogen or fatty acid metabolism)",
-   "Myoglobinuria from drug or toxin exposure"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase, with serial measurement to track the course",
-   "Renal function and serum electrolytes including potassium, phosphate, and calcium",
-   "Urinalysis showing a positive dipstick for blood without red cells, indicating myoglobinuria",
-   "Electrocardiography to detect changes of hyperkalaemia",
-   "Assessment of hydration status and, where relevant, core temperature for concurrent heat illness",
-   "Compartment pressure measurement if compartment syndrome is suspected, and workup for an underlying myopathy in recurrent cases"
-  ],
-  "redFlags": [
-   "Reduced urine output or rising creatinine indicating acute kidney injury",
-   "Hyperkalaemia with electrocardiographic changes threatening arrhythmia",
-   "A tense, painful limb with pain on passive stretch suggesting compartment syndrome",
-   "Concurrent hyperthermia and altered mental state suggesting exertional heat stroke"
-  ],
-  "prognosis": "With prompt recognition and aggressive fluid resuscitation, most patients recover fully and renal function usually normalises. Prognosis worsens with severe acute kidney injury, delayed treatment, or compartment syndrome, and recurrent episodes suggest an underlying predisposition that alters long-term counselling and return-to-activity advice.",
-  "pitfalls": [
-   "Under-resuscitating with fluids and allowing preventable myoglobinuric acute kidney injury",
-   "Interpreting a urine dipstick positive for blood as haematuria when it reflects myoglobinuria",
-   "Missing evolving compartment syndrome because pain seems in keeping with muscle soreness",
-   "Failing to investigate recurrent episodes for a metabolic myopathy or malignant hyperthermia susceptibility"
-  ],
-  "references": [
-   "Tintinalli's Emergency Medicine: A Comprehensive Study Guide",
-   "American College of Sports Medicine guidance on exertional rhabdomyolysis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early, aggressive intravenous crystalloid fluid resuscitation to maintain urine output and prevent myoglobinuric pigment nephropathy",
-   "Serial monitoring of creatine kinase, renal function and electrolytes to track the course",
-   "Urgent treatment of hyperkalaemia (calcium, insulin-dextrose) with ECG monitoring for arrhythmia, and management of accompanying hyperphosphataemia and hypocalcaemia",
-   "Renal replacement therapy for refractory acute kidney injury or life-threatening electrolyte disturbance",
-   "Emergency fasciotomy for acute compartment syndrome in the affected limb",
-   "Remove precipitants: stop offending drugs and supplements and cool the patient if there is concurrent heat illness",
-   "Evaluate for an underlying metabolic myopathy or malignant hyperthermia susceptibility in recurrent episodes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "exertional_rhabdomyolysis-pathway",
-   "title": "Exertional rhabdomyolysis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic triad is muscle pain, weakness, and dark (tea- or cola-coloured) urine following intense or unaccustomed exertion, though not all three are always present",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Reduced urine output or rising creatinine indicating acute kidney injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase, with serial measurement to track the course, Renal function and serum electrolytes including potassium, phosphate, and calcium, Urinalysis showing a positive dipstick for blood without red cells,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early, aggressive intravenous crystalloid fluid resuscitation to maintain urine output and prevent myoglobinuric pigment nephropathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Under-resuscitating with fluids and allowing preventable myoglobinuric acute kidney injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of exertional rhabdomyolysis."
-  }
- ],
- "tables": [
-  {
-   "id": "exertional_rhabdomyolysis-matrix",
-   "title": "Exertional rhabdomyolysis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic triad is muscle pain, weakness, and dark (tea- or cola-coloured) urine following intense or unaccustomed exertion,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Emergency",
+  "specialty": "Sports & Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tintinalli's Emergency Medicine / ACSM guidance on exertional rhabdomyolysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic triad is muscle pain, weakness, and dark (tea- or cola-coloured) urine following intense or unaccustomed exertion, though not all three are always present",
+      "The diagnosis rests on a markedly elevated serum creatine kinase, typically many times the upper limit of normal",
+      "The most serious systemic complication is myoglobinuric acute kidney injury, in which released myoglobin causes pigment nephropathy",
+      "Dangerous electrolyte derangements include hyperkalaemia, hyperphosphataemia, and hypocalcaemia, and hyperkalaemia can precipitate life-threatening arrhythmia",
+      "Acute compartment syndrome may develop in affected limbs and, conversely, established compartment syndrome can itself cause rhabdomyolysis",
+      "Contributing factors include heat, dehydration, certain drugs and supplements, sickle cell trait, and recurrent episodes should prompt evaluation for an underlying metabolic myopathy or malignant hyperthermia susceptibility",
+      "The cornerstone of management is early and aggressive intravenous fluid resuscitation to protect the kidneys, alongside correction of electrolyte disturbance and vigilance for compartment syndrome"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase, with serial measurement to track the course, Renal function and serum electrolytes including potassium,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Exertional rhabdomyolysis occurs when strenuous or unaccustomed muscular activity, often compounded by heat, dehydration, or an underlying metabolic susceptibility, exceeds the energy supply of skeletal muscle and causes myocyte membrane injury. Breakdown of muscle cells releases intracellular contents, including creatine kinase, myoglobin, potassium, and phosphate, into the circulation. Myoglobin filtered by the kidney contributes to acute kidney injury through tubular obstruction, direct tubular toxicity, and renal vasoconstriction, an effect worsened by hypovolaemia. Efflux of potassium and phosphate with sequestration of calcium into damaged muscle produces the characteristic electrolyte pattern, while swelling within fascial compartments can raise pressure enough to cause compartment syndrome and further ischaemic muscle injury.",
+    "additionalDifferentials": [
+      "Acute compartment syndrome",
+      "Exertional heat stroke",
+      "Crush injury from other causes",
+      "Inflammatory or infective myositis",
+      "Inherited metabolic myopathy (e.g. disorders of glycogen or fatty acid metabolism)",
+      "Myoglobinuria from drug or toxin exposure"
     ],
-    [
-     "Primary Differentials",
-     "Acute compartment syndrome, Exertional heat stroke, Crush injury from other causes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase, with serial measurement to track the course",
+      "Renal function and serum electrolytes including potassium, phosphate, and calcium",
+      "Urinalysis showing a positive dipstick for blood without red cells, indicating myoglobinuria",
+      "Electrocardiography to detect changes of hyperkalaemia",
+      "Assessment of hydration status and, where relevant, core temperature for concurrent heat illness",
+      "Compartment pressure measurement if compartment syndrome is suspected, and workup for an underlying myopathy in recurrent cases"
     ],
-    [
-     "Management Strategy",
-     "Early, aggressive intravenous crystalloid fluid resuscitation to maintain urine output and prevent myoglobinuric pigment",
-     "Core treatment modality"
+    "redFlags": [
+      "Reduced urine output or rising creatinine indicating acute kidney injury",
+      "Hyperkalaemia with electrocardiographic changes threatening arrhythmia",
+      "A tense, painful limb with pain on passive stretch suggesting compartment syndrome",
+      "Concurrent hyperthermia and altered mental state suggesting exertional heat stroke"
     ],
-    [
-     "Clinical Pitfall",
-     "Under-resuscitating with fluids and allowing preventable myoglobinuric acute kidney injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt recognition and aggressive fluid resuscitation, most patients recover fully and renal function usually normalises. Prognosis worsens with severe acute kidney injury, delayed treatment, or compartment syndrome, and recurrent episodes suggest an underlying predisposition that alters long-term counselling and return-to-activity advice.",
+    "pitfalls": [
+      "Under-resuscitating with fluids and allowing preventable myoglobinuric acute kidney injury",
+      "Interpreting a urine dipstick positive for blood as haematuria when it reflects myoglobinuria",
+      "Missing evolving compartment syndrome because pain seems in keeping with muscle soreness",
+      "Failing to investigate recurrent episodes for a metabolic myopathy or malignant hyperthermia susceptibility"
+    ],
+    "references": [
+      "Tintinalli's Emergency Medicine: A Comprehensive Study Guide",
+      "American College of Sports Medicine guidance on exertional rhabdomyolysis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early, aggressive intravenous crystalloid fluid resuscitation to maintain urine output and prevent myoglobinuric pigment nephropathy",
+      "Serial monitoring of creatine kinase, renal function and electrolytes to track the course",
+      "Urgent treatment of hyperkalaemia (calcium, insulin-dextrose) with ECG monitoring for arrhythmia, and management of accompanying hyperphosphataemia and hypocalcaemia",
+      "Renal replacement therapy for refractory acute kidney injury or life-threatening electrolyte disturbance",
+      "Emergency fasciotomy for acute compartment syndrome in the affected limb",
+      "Remove precipitants: stop offending drugs and supplements and cool the patient if there is concurrent heat illness",
+      "Evaluate for an underlying metabolic myopathy or malignant hyperthermia susceptibility in recurrent episodes"
     ]
-   ],
-   "caption": "Overview comparison matrix for exertional rhabdomyolysis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "exertional-rhabdomyolysis-real-image",
-   "title": "Exertional rhabdomyolysis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "exertional_rhabdomyolysis-pathway",
+      "title": "Exertional rhabdomyolysis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic triad is muscle pain, weakness, and dark (tea- or cola-coloured) urine following intense or unaccustomed exertion, though not all three are always present",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Reduced urine output or rising creatinine indicating acute kidney injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase, with serial measurement to track the course, Renal function and serum electrolytes including potassium, phosphate, and calcium, Urinalysis showing a positive dipstick for blood without red cells,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early, aggressive intravenous crystalloid fluid resuscitation to maintain urine output and prevent myoglobinuric pigment nephropathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Under-resuscitating with fluids and allowing preventable myoglobinuric acute kidney injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of exertional rhabdomyolysis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "exertional_rhabdomyolysis-matrix",
+      "title": "Exertional rhabdomyolysis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad is muscle pain, weakness, and dark (tea- or cola-coloured) urine following intense or unaccustomed exertion,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase, with serial measurement to track the course, Renal function and serum electrolytes including potassium,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute compartment syndrome, Exertional heat stroke, Crush injury from other causes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early, aggressive intravenous crystalloid fluid resuscitation to maintain urine output and prevent myoglobinuric pigment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Under-resuscitating with fluids and allowing preventable myoglobinuric acute kidney injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for exertional rhabdomyolysis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tintinalli's Emergency Medicine / ACSM guidance on exertional rhabdomyolysis",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 387-11",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "exertional_rhabdomyolysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase, serially",
+          "cells": [
+            {
+              "text": "Course of the disease; markedly raised CK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and electrolytes",
+          "cells": [
+            {
+              "text": "Potassium, phosphate and calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis dipstick",
+          "cells": [
+            {
+              "text": "Blood on dipstick without red cells indicates myoglobinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography",
+          "cells": [
+            {
+              "text": "Changes of hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration status and core temperature",
+          "cells": [
+            {
+              "text": "Concurrent heat illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment pressure measurement",
+          "cells": [
+            {
+              "text": "Where compartment syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exertional_rhabdomyolysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute compartment syndrome",
+          "cells": [
+            {
+              "text": "A tense, painful limb with pain on passive stretch; pain can be mistaken for soreness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exertional heat stroke",
+          "cells": [
+            {
+              "text": "Concurrent hyperthermia and altered mental state"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exertional_rhabdomyolysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aggressive intravenous crystalloid",
+          "cells": [
+            {
+              "text": "Maintains urine output and prevents pigment nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Creatine kinase, renal function and electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment of hyperkalaemia",
+          "cells": [
+            {
+              "text": "Calcium and insulin-dextrose with ECG monitoring; management of phosphate and calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Refractory acute kidney injury or life-threatening electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency fasciotomy",
+          "cells": [
+            {
+              "text": "Acute compartment syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove precipitants",
+          "cells": [
+            {
+              "text": "Stop offending drugs and supplements; cool if there is heat illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluate recurrent episodes",
+          "cells": [
+            {
+              "text": "Metabolic myopathy or malignant hyperthermia susceptibility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exertional_rhabdomyolysis-ddx-2",
+      "kind": "ddx",
+      "title": "Drug-induced myopathies and their toxic reactions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Major toxic reaction"
+      ],
+      "rows": [
+        {
+          "parameter": "Lipid-lowering agents (fibrates, HMG-CoA reductase inhibitors, niacin)",
+          "cells": [
+            {
+              "text": "All three classes can cause a range of toxicity: raised serum creatine kinase without symptoms, myalgias, exercise-induced pain, rhabdomyolysis and myoglobinuria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Acute high-dose treatment can cause acute quadriplegic myopathy, often together with nondepolarizing neuromuscular blockers but also without them; chronic use mainly causes proximal weakness"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nondepolarizing neuromuscular blocking agents",
+          "cells": [
+            {
+              "text": "Acute quadriplegic myopathy, with or without glucocorticoids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zidovudine",
+          "cells": [
+            {
+              "text": "Mitochondrial myopathy with ragged red fibers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drugs of abuse (alcohol, amphetamines, cocaine, heroin, phencyclidine, meperidine)",
+          "cells": [
+            {
+              "text": "Widespread muscle breakdown, rhabdomyolysis and myoglobinuria; local injection causes muscle necrosis, skin induration and limb contractures"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autoimmune toxic myopathy: d-penicillamine",
+          "cells": [
+            {
+              "text": "May cause polymyositis and myasthenia gravis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amphophilic cationic drugs (amiodarone, chloroquine, hydroxychloroquine)",
+          "cells": [
+            {
+              "text": "Painless proximal weakness with autophagic vacuoles on muscle biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antimicrotubular drug: colchicine",
+          "cells": [
+            {
+              "text": "Painless proximal weakness, especially in renal failure; biopsy shows autophagic vacuoles"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "exertional_rhabdomyolysis-dx-mgmt",
+      "title": "Diagnosis and management of Exertional rhabdomyolysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Muscle pain, weakness and dark urine after intense or unaccustomed exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (oliguria, rising creatinine, hyperkalaemia, tense painful limb, heat illness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium treatment; fasciotomy if compartment syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum CK, renal function, electrolytes, urine dipstick and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Markedly raised CK with myoglobinuria on the dipstick?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider compartment syndrome, myositis or a metabolic myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early aggressive intravenous fluids to protect the kidneys",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial monitoring of CK, renal function and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Remove drugs and supplements; cool if heat illness is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement therapy for refractory kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Evaluate recurrent episodes for metabolic myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover fully with early fluids; renal function usually normalises",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

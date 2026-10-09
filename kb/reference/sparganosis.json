@@ -1,174 +1,470 @@
 {
- "id": "sparganosis",
- "name": "Sparganosis (Spirometra)",
- "aliases": [
-  "Spirometra infection",
-  "sparganum infection",
-  "larval diphyllobothriid disease",
-  "plerocercoid larva migrans"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by migrating plerocercoid (sparganum) larvae of Spirometra tapeworms, with humans as accidental intermediate hosts",
-   "Acquired by drinking water containing infected copepods, eating raw or undercooked frog, snake or other paratenic hosts, or applying raw amphibian flesh as a traditional poultice",
-   "The larva does not mature but migrates through tissues, producing a slowly moving, sometimes painful subcutaneous nodule that may appear and disappear",
-   "Ocular sparganosis causes periorbital swelling, pain and lid oedema, while cerebral sparganosis can cause seizures, headache and focal neurological deficits",
-   "Peripheral eosinophilia is common and imaging may show a migrating or serpiginous track or an enhancing granuloma",
-   "Definitive treatment is surgical removal of the whole larva; anthelmintic drugs are generally ineffective against the tissue-dwelling sparganum",
-   "Prevention includes drinking safe water, cooking meat thoroughly and avoiding the practice of applying raw amphibian tissue to wounds or eyes"
+  "id": "sparganosis",
+  "name": "Sparganosis (Spirometra)",
+  "aliases": [
+    "Spirometra infection",
+    "sparganum infection",
+    "larval diphyllobothriid disease",
+    "plerocercoid larva migrans"
   ],
-  "pathophysiology": "Spirometra species are diphyllobothriid tapeworms whose adults live in cats, dogs and other carnivores. Their life cycle uses copepods as first intermediate hosts and amphibians, reptiles and other vertebrates as second intermediate or paratenic hosts harbouring the plerocercoid larva, the sparganum. Humans become accidental hosts by swallowing infected copepods in water, by eating raw or undercooked intermediate hosts, or by direct inoculation when raw frog or snake flesh is applied to skin, eyes or wounds as a poultice. The larva cannot mature in humans; instead it migrates through subcutaneous tissue, muscle, the eye or the central nervous system, provoking a local inflammatory and eosinophilic reaction with granuloma formation and, in the brain, surrounding oedema and mass effect. The living, motile larva accounts for the characteristic migratory and space-occupying features of the disease.",
-  "additionalDifferentials": [
-   "Cutaneous larva migrans and other migratory helminth infection",
-   "Neurocysticercosis and other cerebral cystic or granulomatous disease",
-   "Coenurosis and hydatid disease of the central nervous system or soft tissue",
-   "Soft-tissue lipoma, cyst or abscess",
-   "Orbital cellulitis or other periorbital inflammatory lesion",
-   "Primary or secondary intracranial tumour"
-  ],
-  "additionalInvestigations": [
-   "MRI or CT to localise migrating tracks, granulomas or intracranial lesions",
-   "Full blood count for eosinophilia",
-   "Serology for sparganum antigens where available",
-   "Histological examination of the excised larva to confirm the diagnosis",
-   "Ophthalmological assessment in suspected ocular disease",
-   "Exclusion of other cystic cestode infection by appropriate serology"
-  ],
-  "redFlags": [
-   "Seizures or focal neurological signs indicating cerebral involvement",
-   "Progressive ocular swelling threatening vision",
-   "An enlarging or migrating intracranial lesion with mass effect",
-   "Recurrent or incompletely excised larva with persistent symptoms"
-  ],
-  "prognosis": "Prognosis is good when a subcutaneous or ocular larva is completely removed, but cerebral sparganosis can cause lasting neurological deficits and may recur if the larva is not fully excised.",
-  "pitfalls": [
-   "Relying on anthelmintic drugs, which rarely eradicate the tissue-dwelling sparganum",
-   "Incomplete surgical removal leaving viable larva and causing relapse",
-   "Mistaking a migrating subcutaneous nodule for a benign lipoma or cyst",
-   "Overlooking the history of raw-flesh poultice application or untreated water consumption"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision of the entire larva is the definitive and curative treatment",
-   "Anthelmintic drugs are generally ineffective against the tissue-dwelling sparganum and are not relied upon",
-   "Corticosteroids to reduce peri-lesional inflammation and oedema, particularly in cerebral disease",
-   "Antiepileptic drugs to control seizures arising from cerebral sparganosis",
-   "Neurosurgical or ophthalmological referral for central nervous system or ocular larvae",
-   "Preventive advice: avoid drinking untreated water, eating raw or undercooked frog or snake, and applying raw amphibian poultices",
-   "Confirm complete removal and follow up, as incompletely excised larvae may recur"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sparganosis-pathway",
-   "title": "Sparganosis (Spirometra): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by migrating plerocercoid (sparganum) larvae of Spirometra tapeworms, with humans as accidental intermediate hosts",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Seizures or focal neurological signs indicating cerebral involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI or CT to localise migrating tracks, granulomas or intracranial lesions, Full blood count for eosinophilia, Serology for sparganum antigens where available"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision of the entire larva is the definitive and curative treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on anthelmintic drugs, which rarely eradicate the tissue-dwelling sparganum"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sparganosis (spirometra)."
-  }
- ],
- "tables": [
-  {
-   "id": "sparganosis-matrix",
-   "title": "Sparganosis (Spirometra): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by migrating plerocercoid (sparganum) larvae of Spirometra tapeworms, with humans as accidental intermediate hosts",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by migrating plerocercoid (sparganum) larvae of Spirometra tapeworms, with humans as accidental intermediate hosts",
+      "Acquired by drinking water containing infected copepods, eating raw or undercooked frog, snake or other paratenic hosts, or applying raw amphibian flesh as a traditional poultice",
+      "The larva does not mature but migrates through tissues, producing a slowly moving, sometimes painful subcutaneous nodule that may appear and disappear",
+      "Ocular sparganosis causes periorbital swelling, pain and lid oedema, while cerebral sparganosis can cause seizures, headache and focal neurological deficits",
+      "Peripheral eosinophilia is common and imaging may show a migrating or serpiginous track or an enhancing granuloma",
+      "Definitive treatment is surgical removal of the whole larva; anthelmintic drugs are generally ineffective against the tissue-dwelling sparganum",
+      "Prevention includes drinking safe water, cooking meat thoroughly and avoiding the practice of applying raw amphibian tissue to wounds or eyes"
     ],
-    [
-     "Key Investigations",
-     "MRI or CT to localise migrating tracks, granulomas or intracranial lesions, Full blood count for eosinophilia, Serology for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spirometra species are diphyllobothriid tapeworms whose adults live in cats, dogs and other carnivores. Their life cycle uses copepods as first intermediate hosts and amphibians, reptiles and other vertebrates as second intermediate or paratenic hosts harbouring the plerocercoid larva, the sparganum. Humans become accidental hosts by swallowing infected copepods in water, by eating raw or undercooked intermediate hosts, or by direct inoculation when raw frog or snake flesh is applied to skin, eyes or wounds as a poultice. The larva cannot mature in humans; instead it migrates through subcutaneous tissue, muscle, the eye or the central nervous system, provoking a local inflammatory and eosinophilic reaction with granuloma formation and, in the brain, surrounding oedema and mass effect. The living, motile larva accounts for the characteristic migratory and space-occupying features of the disease.",
+    "additionalDifferentials": [
+      "Cutaneous larva migrans and other migratory helminth infection",
+      "Neurocysticercosis and other cerebral cystic or granulomatous disease",
+      "Coenurosis and hydatid disease of the central nervous system or soft tissue",
+      "Soft-tissue lipoma, cyst or abscess",
+      "Orbital cellulitis or other periorbital inflammatory lesion",
+      "Primary or secondary intracranial tumour"
     ],
-    [
-     "Primary Differentials",
-     "Cutaneous larva migrans and other migratory helminth infection, Neurocysticercosis and other cerebral cystic or granulomatous",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI or CT to localise migrating tracks, granulomas or intracranial lesions",
+      "Full blood count for eosinophilia",
+      "Serology for sparganum antigens where available",
+      "Histological examination of the excised larva to confirm the diagnosis",
+      "Ophthalmological assessment in suspected ocular disease",
+      "Exclusion of other cystic cestode infection by appropriate serology"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision of the entire larva is the definitive and curative treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Seizures or focal neurological signs indicating cerebral involvement",
+      "Progressive ocular swelling threatening vision",
+      "An enlarging or migrating intracranial lesion with mass effect",
+      "Recurrent or incompletely excised larva with persistent symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on anthelmintic drugs, which rarely eradicate the tissue-dwelling sparganum",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is good when a subcutaneous or ocular larva is completely removed, but cerebral sparganosis can cause lasting neurological deficits and may recur if the larva is not fully excised.",
+    "pitfalls": [
+      "Relying on anthelmintic drugs, which rarely eradicate the tissue-dwelling sparganum",
+      "Incomplete surgical removal leaving viable larva and causing relapse",
+      "Mistaking a migrating subcutaneous nodule for a benign lipoma or cyst",
+      "Overlooking the history of raw-flesh poultice application or untreated water consumption"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision of the entire larva is the definitive and curative treatment",
+      "Anthelmintic drugs are generally ineffective against the tissue-dwelling sparganum and are not relied upon",
+      "Corticosteroids to reduce peri-lesional inflammation and oedema, particularly in cerebral disease",
+      "Antiepileptic drugs to control seizures arising from cerebral sparganosis",
+      "Neurosurgical or ophthalmological referral for central nervous system or ocular larvae",
+      "Preventive advice: avoid drinking untreated water, eating raw or undercooked frog or snake, and applying raw amphibian poultices",
+      "Confirm complete removal and follow up, as incompletely excised larvae may recur"
     ]
-   ],
-   "caption": "Overview comparison matrix for sparganosis (spirometra)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sparganosis-real-image",
-   "title": "Sparganosis (Spirometra): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "sparganosis-pathway",
+      "title": "Sparganosis (Spirometra): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by migrating plerocercoid (sparganum) larvae of Spirometra tapeworms, with humans as accidental intermediate hosts",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Seizures or focal neurological signs indicating cerebral involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI or CT to localise migrating tracks, granulomas or intracranial lesions, Full blood count for eosinophilia, Serology for sparganum antigens where available"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision of the entire larva is the definitive and curative treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on anthelmintic drugs, which rarely eradicate the tissue-dwelling sparganum"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sparganosis (spirometra)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sparganosis-matrix",
+      "title": "Sparganosis (Spirometra): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by migrating plerocercoid (sparganum) larvae of Spirometra tapeworms, with humans as accidental intermediate hosts",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI or CT to localise migrating tracks, granulomas or intracranial lesions, Full blood count for eosinophilia, Serology for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cutaneous larva migrans and other migratory helminth infection, Neurocysticercosis and other cerebral cystic or granulomatous",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision of the entire larva is the definitive and curative treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on anthelmintic drugs, which rarely eradicate the tissue-dwelling sparganum",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sparganosis (spirometra)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sparganosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI or CT",
+          "cells": [
+            {
+              "text": "Migrating tracks, granulomas or intracranial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sparganum serology",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the excised larva",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Ocular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cestode serology",
+          "cells": [
+            {
+              "text": "Excludes other cystic cestode infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sparganosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous larva migrans and other migratory helminths",
+          "cells": [
+            {
+              "text": "A migrating track in the skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocysticercosis and other cerebral cystic disease",
+          "cells": [
+            {
+              "text": "Excluded by serology for other cestodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soft-tissue lipoma, cyst or abscess",
+          "cells": [
+            {
+              "text": "Mistaken for a benign nodule; migration distinguishes the larva"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sparganosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision of the whole larva",
+          "cells": [
+            {
+              "text": "Definitive and curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anthelmintic drugs",
+          "cells": [
+            {
+              "text": "Generally ineffective against the tissue-dwelling larva"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Reduce peri-lesional oedema, particularly in cerebral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure drugs",
+          "cells": [
+            {
+              "text": "For seizures from cerebral sparganosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical or ophthalmological referral",
+          "cells": [
+            {
+              "text": "Central nervous system or ocular larvae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive advice",
+          "cells": [
+            {
+              "text": "Safe water; avoid raw frog or snake and raw amphibian poultices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Confirms complete removal; incomplete excision may recur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sparganosis-dx-mgmt",
+      "title": "Diagnosis and management of Sparganosis (Spirometra)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Migrating nodule with eosinophilia, after raw-food or untreated-water exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, progressive ocular swelling, enlarging lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical or ophthalmology referral for CNS or eye involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI or CT for tracks and lesions; FBC for eosinophilia; sparganum serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do imaging and eosinophilia support sparganosis with that exposure history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cutaneous larva migrans, cysticercosis or lipoma; repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision of the whole larva, which is curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anthelmintics rarely work against tissue-dwelling larvae",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids for peri-lesional oedema, especially cerebral",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure drugs for seizures from cerebral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Curative when the whole larva is removed; incomplete excision may recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

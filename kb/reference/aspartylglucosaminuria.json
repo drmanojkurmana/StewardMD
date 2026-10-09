@@ -1,175 +1,484 @@
 {
- "id": "aspartylglucosaminuria",
- "name": "Aspartylglucosaminuria",
- "aliases": [
-  "AGU",
-  "aspartylglucosaminidase deficiency",
-  "N-aspartyl-beta-glucosaminidase deficiency",
-  "glycosylasparaginase deficiency",
-  "AGA deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deficiency of aspartylglucosaminidase (glycosylasparaginase), which cleaves the linkage between the oligosaccharide and asparagine in glycoprotein degradation",
-   "Notably enriched in the Finnish population as part of the Finnish disease heritage, though it occurs worldwide",
-   "Follows a characteristic course: relatively normal early infancy, then slowly progressive intellectual decline through childhood into adulthood",
-   "Coarse facies, connective tissue laxity, recurrent infections, and mild skeletal changes are typical, with behavioural problems emerging over time",
-   "Adult patients often show a plateau followed by earlier-than-normal decline, sometimes with psychiatric features",
-   "Urinary oligosaccharide screening detects aspartylglucosamine, the accumulated glycoasparagine",
-   "Diagnosis is confirmed by deficient aspartylglucosaminidase activity and AGA gene testing"
+  "id": "aspartylglucosaminuria",
+  "name": "Aspartylglucosaminuria",
+  "aliases": [
+    "AGU",
+    "aspartylglucosaminidase deficiency",
+    "N-aspartyl-beta-glucosaminidase deficiency",
+    "glycosylasparaginase deficiency",
+    "AGA deficiency"
   ],
-  "pathophysiology": "Aspartylglucosaminuria is caused by biallelic pathogenic variants in AGA, encoding the lysosomal enzyme aspartylglucosaminidase (glycosylasparaginase). This enzyme hydrolyses the bond between N-acetylglucosamine and asparagine, a late step in the degradation of N-linked glycoproteins. Its deficiency causes accumulation of aspartylglucosamine and related glycoasparagines within lysosomes across many tissues, with excretion of aspartylglucosamine in the urine. Progressive storage in the central nervous system underlies the characteristically slow intellectual decline, while systemic accumulation contributes to the coarse features, connective tissue laxity, and skeletal changes. A single founder variant accounts for most Finnish cases. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Other oligosaccharidoses such as alpha-mannosidosis and fucosidosis",
-   "Mucopolysaccharidoses with coarse facies and slow cognitive decline",
-   "Sanfilippo syndrome given the behavioural and cognitive course",
-   "Non-syndromic intellectual disability",
-   "Other lysosomal storage disorders with adult psychiatric presentations",
-   "Sialidosis and galactosialidosis"
-  ],
-  "additionalInvestigations": [
-   "Leucocyte or fibroblast aspartylglucosaminidase enzyme assay",
-   "Urinary oligosaccharide analysis detecting aspartylglucosamine",
-   "AGA gene sequencing, including testing for the Finnish founder variant where relevant",
-   "Brain MRI for white matter and atrophic changes",
-   "Developmental and neuropsychological assessment to track decline",
-   "Skeletal survey for mild dysostosis"
-  ],
-  "redFlags": [
-   "Progressive intellectual decline after relatively normal early development",
-   "Emerging psychiatric or behavioural disturbance in adolescence or adulthood",
-   "Recurrent infections",
-   "Accelerated deterioration in adulthood"
-  ],
-  "prognosis": "The disorder is slowly progressive, with many patients reaching adulthood before a phase of more rapid cognitive decline; life expectancy is reduced but survival into middle adulthood is common. Management is supportive, and haematopoietic stem cell transplantation has been explored in selected cases.",
-  "pitfalls": [
-   "Attributing the slow cognitive decline to a static intellectual disability and missing the progressive storage disorder",
-   "Screening only for glycosaminoglycans and missing the oligosaccharide pattern",
-   "Overlooking the diagnosis outside the Finnish population where it also occurs",
-   "Failing to consider it in adults presenting with new psychiatric symptoms and intellectual disability"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive and rehabilitative care with special education plus speech, occupational and physiotherapy to support development and function",
-   "Management of the behavioural and psychiatric symptoms that emerge over time with appropriate psychotropic therapy and behavioural support",
-   "Prompt treatment of the recurrent infections characteristic of the disorder",
-   "Orthopaedic and dental surveillance for skeletal dysostosis and the effects of connective-tissue laxity",
-   "Consideration of haematopoietic stem cell transplantation in carefully selected early cases, where it has been explored as a disease-modifying option",
-   "Multidisciplinary metabolic follow-up tracking the slowly progressive cognitive decline with serial neuropsychological assessment",
-   "Genetic counselling and family screening for this autosomal recessive condition, including testing for the Finnish founder variant where relevant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aspartylglucosaminuria-pathway",
-   "title": "Aspartylglucosaminuria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deficiency of aspartylglucosaminidase (glycosylasparaginase), which cleaves the linkage between the oligosaccharide and asparagine in glycoprotein degradation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive intellectual decline after relatively normal early development",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Leucocyte or fibroblast aspartylglucosaminidase enzyme assay, Urinary oligosaccharide analysis detecting aspartylglucosamine, AGA gene sequencing, including testing for the Finnish founder variant where relevant"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive and rehabilitative care with special education plus speech, occupational and physiotherapy to support development and function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the slow cognitive decline to a static intellectual disability and missing the progressive storage disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aspartylglucosaminuria."
-  }
- ],
- "tables": [
-  {
-   "id": "aspartylglucosaminuria-matrix",
-   "title": "Aspartylglucosaminuria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deficiency of aspartylglucosaminidase (glycosylasparaginase), which cleaves the linkage between the oligosaccharide and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deficiency of aspartylglucosaminidase (glycosylasparaginase), which cleaves the linkage between the oligosaccharide and asparagine in glycoprotein degradation",
+      "Notably enriched in the Finnish population as part of the Finnish disease heritage, though it occurs worldwide",
+      "Follows a characteristic course: relatively normal early infancy, then slowly progressive intellectual decline through childhood into adulthood",
+      "Coarse facies, connective tissue laxity, recurrent infections, and mild skeletal changes are typical, with behavioural problems emerging over time",
+      "Adult patients often show a plateau followed by earlier-than-normal decline, sometimes with psychiatric features",
+      "Urinary oligosaccharide screening detects aspartylglucosamine, the accumulated glycoasparagine",
+      "Diagnosis is confirmed by deficient aspartylglucosaminidase activity and AGA gene testing"
     ],
-    [
-     "Key Investigations",
-     "Leucocyte or fibroblast aspartylglucosaminidase enzyme assay, Urinary oligosaccharide analysis detecting aspartylglucosamine, AGA",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Aspartylglucosaminuria is caused by biallelic pathogenic variants in AGA, encoding the lysosomal enzyme aspartylglucosaminidase (glycosylasparaginase). This enzyme hydrolyses the bond between N-acetylglucosamine and asparagine, a late step in the degradation of N-linked glycoproteins. Its deficiency causes accumulation of aspartylglucosamine and related glycoasparagines within lysosomes across many tissues, with excretion of aspartylglucosamine in the urine. Progressive storage in the central nervous system underlies the characteristically slow intellectual decline, while systemic accumulation contributes to the coarse features, connective tissue laxity, and skeletal changes. A single founder variant accounts for most Finnish cases. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Other oligosaccharidoses such as alpha-mannosidosis and fucosidosis",
+      "Mucopolysaccharidoses with coarse facies and slow cognitive decline",
+      "Sanfilippo syndrome given the behavioural and cognitive course",
+      "Non-syndromic intellectual disability",
+      "Other lysosomal storage disorders with adult psychiatric presentations",
+      "Sialidosis and galactosialidosis"
     ],
-    [
-     "Primary Differentials",
-     "Other oligosaccharidoses such as alpha-mannosidosis and fucosidosis, Mucopolysaccharidoses with coarse facies and slow cognitive",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Leucocyte or fibroblast aspartylglucosaminidase enzyme assay",
+      "Urinary oligosaccharide analysis detecting aspartylglucosamine",
+      "AGA gene sequencing, including testing for the Finnish founder variant where relevant",
+      "Brain MRI for white matter and atrophic changes",
+      "Developmental and neuropsychological assessment to track decline",
+      "Skeletal survey for mild dysostosis"
     ],
-    [
-     "Management Strategy",
-     "Supportive and rehabilitative care with special education plus speech, occupational and physiotherapy to support development and",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive intellectual decline after relatively normal early development",
+      "Emerging psychiatric or behavioural disturbance in adolescence or adulthood",
+      "Recurrent infections",
+      "Accelerated deterioration in adulthood"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the slow cognitive decline to a static intellectual disability and missing the progressive storage disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is slowly progressive, with many patients reaching adulthood before a phase of more rapid cognitive decline; life expectancy is reduced but survival into middle adulthood is common. Management is supportive, and haematopoietic stem cell transplantation has been explored in selected cases.",
+    "pitfalls": [
+      "Attributing the slow cognitive decline to a static intellectual disability and missing the progressive storage disorder",
+      "Screening only for glycosaminoglycans and missing the oligosaccharide pattern",
+      "Overlooking the diagnosis outside the Finnish population where it also occurs",
+      "Failing to consider it in adults presenting with new psychiatric symptoms and intellectual disability"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive and rehabilitative care with special education plus speech, occupational and physiotherapy to support development and function",
+      "Management of the behavioural and psychiatric symptoms that emerge over time with appropriate psychotropic therapy and behavioural support",
+      "Prompt treatment of the recurrent infections characteristic of the disorder",
+      "Orthopaedic and dental surveillance for skeletal dysostosis and the effects of connective-tissue laxity",
+      "Consideration of haematopoietic stem cell transplantation in carefully selected early cases, where it has been explored as a disease-modifying option",
+      "Multidisciplinary metabolic follow-up tracking the slowly progressive cognitive decline with serial neuropsychological assessment",
+      "Genetic counselling and family screening for this autosomal recessive condition, including testing for the Finnish founder variant where relevant"
     ]
-   ],
-   "caption": "Overview comparison matrix for aspartylglucosaminuria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aspartylglucosaminuria-real-image",
-   "title": "Aspartylglucosaminuria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "aspartylglucosaminuria-pathway",
+      "title": "Aspartylglucosaminuria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deficiency of aspartylglucosaminidase (glycosylasparaginase), which cleaves the linkage between the oligosaccharide and asparagine in glycoprotein degradation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive intellectual decline after relatively normal early development",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Leucocyte or fibroblast aspartylglucosaminidase enzyme assay, Urinary oligosaccharide analysis detecting aspartylglucosamine, AGA gene sequencing, including testing for the Finnish founder variant where relevant"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive and rehabilitative care with special education plus speech, occupational and physiotherapy to support development and function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the slow cognitive decline to a static intellectual disability and missing the progressive storage disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aspartylglucosaminuria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aspartylglucosaminuria-matrix",
+      "title": "Aspartylglucosaminuria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deficiency of aspartylglucosaminidase (glycosylasparaginase), which cleaves the linkage between the oligosaccharide and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Leucocyte or fibroblast aspartylglucosaminidase enzyme assay, Urinary oligosaccharide analysis detecting aspartylglucosamine, AGA",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other oligosaccharidoses such as alpha-mannosidosis and fucosidosis, Mucopolysaccharidoses with coarse facies and slow cognitive",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive and rehabilitative care with special education plus speech, occupational and physiotherapy to support development and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the slow cognitive decline to a static intellectual disability and missing the progressive storage disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aspartylglucosaminuria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aspartylglucosaminuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Leucocyte or fibroblast aspartylglucosaminidase enzyme assay",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary oligosaccharide analysis",
+          "cells": [
+            {
+              "text": "Aspartylglucosamine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AGA gene sequencing",
+          "cells": [
+            {
+              "text": "Finnish founder variant where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "White matter and atrophic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Tracks decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Mild dysostosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aspartylglucosaminuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other oligosaccharidoses such as alpha-mannosidosis and fucosidosis",
+          "cells": [
+            {
+              "text": "Separated by enzyme assay and urinary oligosaccharide analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucopolysaccharidoses",
+          "cells": [
+            {
+              "text": "Slow cognitive decline; urinary oligosaccharide analysis separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aspartylglucosaminuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and rehabilitative care",
+          "cells": [
+            {
+              "text": "Special education with speech, occupational and physiotherapy"
+            },
+            {
+              "text": "Development and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychotropic and behavioural support",
+          "cells": [
+            {
+              "text": "For behavioural and psychiatric symptoms that emerge over time"
+            },
+            {
+              "text": "Emerging in adolescence or adulthood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of recurrent infections",
+          "cells": [
+            {
+              "text": "Prompt treatment"
+            },
+            {
+              "text": "Characteristic recurrent infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and dental surveillance",
+          "cells": [
+            {
+              "text": "Skeletal dysostosis and connective-tissue laxity"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplant",
+          "cells": [
+            {
+              "text": "Carefully selected early cases"
+            },
+            {
+              "text": "Explored as a disease-modifying option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic follow-up",
+          "cells": [
+            {
+              "text": "Serial neuropsychological assessment of slowly progressive decline"
+            },
+            {
+              "text": "Progressive course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; Finnish founder variant testing where relevant"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aspartylglucosaminuria-dx-mgmt",
+      "title": "Diagnosis and management of Aspartylglucosaminuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive intellectual decline after relatively normal early development",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Emerging psychiatric disturbance or progressive decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Psychiatric and behavioural support for emerging disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Enzyme assay, urinary oligosaccharide analysis, AGA sequencing, MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Aspartylglucosaminidase deficiency with AGA variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive, rehabilitative and educational care",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat enzyme and genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat recurrent infections promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic and dental surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider stem cell transplant in carefully selected early cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial neuropsychological tracking of slowly progressive decline",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

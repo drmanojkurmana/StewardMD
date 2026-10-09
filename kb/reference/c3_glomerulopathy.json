@@ -1,180 +1,519 @@
 {
- "id": "c3_glomerulopathy",
- "name": "C3 glomerulopathy",
- "aliases": [
-  "C3G",
-  "dense deposit disease",
-  "C3 glomerulonephritis",
-  "C3 GN",
-  "membranoproliferative glomerulonephritis type II",
-  "C3 nephritic factor"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Oxford Handbook of Nephrology and Hypertension",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "C3 glomerulopathy is defined by glomerular deposition of complement C3 with little or no immunoglobulin on immunofluorescence, reflecting dysregulation of the alternative complement pathway",
-   "It encompasses two entities distinguished on electron microscopy: dense deposit disease, with dense intramembranous deposits, and C3 glomerulonephritis, with subendothelial and mesangial deposits",
-   "Presentation ranges from asymptomatic haematuria or proteinuria to nephrotic syndrome or a nephritic picture, often with low serum C3 and a normal C4",
-   "An acquired autoantibody, the C3 nephritic factor, stabilises the alternative-pathway C3 convertase and perpetuates complement consumption in many patients",
-   "Inherited or acquired abnormalities of complement regulators (such as factor H) or activators can underlie the disease",
-   "Diagnosis rests on kidney biopsy with immunofluorescence and electron microscopy, supported by a complement functional and genetic workup",
-   "Management combines general glomerular disease measures with immunosuppression in some cases; complement-targeted therapy is used in selected or refractory disease",
-   "Dense deposit disease may be associated with retinal drusen and acquired partial lipodystrophy"
+  "id": "c3_glomerulopathy",
+  "name": "C3 glomerulopathy",
+  "aliases": [
+    "C3G",
+    "dense deposit disease",
+    "C3 glomerulonephritis",
+    "C3 GN",
+    "membranoproliferative glomerulonephritis type II",
+    "C3 nephritic factor"
   ],
-  "pathophysiology": "C3 glomerulopathy results from persistent activation and dysregulation of the alternative complement pathway in the fluid phase, leading to deposition of C3 breakdown products within the glomerulus. Normally the alternative-pathway C3 convertase is tightly regulated by proteins such as factor H and factor I; in this disease acquired autoantibodies (notably C3 nephritic factor, which stabilises the convertase) or genetic abnormalities in complement regulators or activators allow uncontrolled convertase activity and continuous C3 turnover. The resulting C3 fragments accumulate along the glomerular basement membrane and mesangium, producing the characteristic complement-dominant, immunoglobulin-poor staining. This drives glomerular inflammation and a membranoproliferative pattern of injury, manifesting clinically as haematuria, proteinuria and progressive loss of kidney function, with correspondingly low circulating C3.",
-  "additionalDifferentials": [
-   "Immune-complex membranoproliferative glomerulonephritis (infection- or immune-complex-mediated)",
-   "Post-infectious glomerulonephritis",
-   "Lupus nephritis",
-   "Cryoglobulinaemic glomerulonephritis",
-   "Monoclonal gammopathy of renal significance",
-   "IgA nephropathy",
-   "Atypical haemolytic uraemic syndrome (also complement-mediated but a thrombotic microangiopathy)"
-  ],
-  "additionalInvestigations": [
-   "Kidney biopsy with immunofluorescence (C3-dominant staining) and electron microscopy to subclassify",
-   "Serum complement (low C3 with normal C4 typical of alternative-pathway activation)",
-   "Complement functional assays and detection of C3 nephritic factor and other autoantibodies",
-   "Assessment of complement regulator levels (e.g. factor H) and terminal complement activity",
-   "Screening for monoclonal gammopathy, especially in older adults",
-   "Genetic testing of alternative-pathway complement genes"
-  ],
-  "redFlags": [
-   "Rapidly progressive glomerulonephritis with crescents",
-   "Nephrotic-range proteinuria with declining renal function",
-   "Severe hypertension",
-   "Progression toward end-stage kidney disease",
-   "Recurrence in a kidney transplant"
-  ],
-  "prognosis": "C3 glomerulopathy is frequently progressive, with a substantial proportion of patients reaching end-stage kidney disease over years, and it commonly recurs after transplantation; outcome varies with histological severity and the underlying complement abnormality.",
-  "pitfalls": [
-   "Misclassifying it as immune-complex membranoproliferative glomerulonephritis without careful immunofluorescence",
-   "Overlooking an underlying monoclonal gammopathy driving complement dysregulation in older patients",
-   "Failing to perform a complement functional and genetic workup once the biopsy pattern is recognised",
-   "Not anticipating disease recurrence in the allograft",
-   "Confusing it with atypical HUS, which shares complement dysregulation but presents as thrombotic microangiopathy"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology (Feehally, Floege, Tonelli, Johnson)",
-   "KDIGO Clinical Practice Guideline on Glomerular Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce proteinuria and control blood pressure with renin-angiotensin system blockade as baseline nephroprotective therapy.",
-   "Offer immunosuppression, typically corticosteroids with mycophenolate mofetil, for progressive or moderate-to-severe disease.",
-   "Consider terminal complement inhibition with eculizumab in rapidly progressive or treatment-resistant disease showing terminal-pathway activation.",
-   "Identify and treat any underlying driver, including clone-directed therapy where a monoclonal gammopathy is causal.",
-   "Monitor renal function, proteinuria and serum complement to track disease activity and treatment response.",
-   "Involve nephrology and plan transplantation with awareness of the high risk of post-transplant recurrence.",
-   "Arrange complement functional and genetic testing with counselling, and screen for inherited regulator defects."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "c3_glomerulopathy-pathway",
-   "title": "C3 glomerulopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "C3 glomerulopathy is defined by glomerular deposition of complement C3 with little or no immunoglobulin on immunofluorescence, reflecting dysregulation of the alternative complement pathway",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive glomerulonephritis with crescents",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Kidney biopsy with immunofluorescence (C3-dominant staining) and electron microscopy to subclassify, Serum complement (low C3 with normal C4 typical of alternative-pathway activation), Complement functional assays and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce proteinuria and control blood pressure with renin-angiotensin system blockade as baseline nephroprotective therapy."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying it as immune-complex membranoproliferative glomerulonephritis without careful immunofluorescence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of c3 glomerulopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "c3_glomerulopathy-matrix",
-   "title": "C3 glomerulopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "C3 glomerulopathy is defined by glomerular deposition of complement C3 with little or no immunoglobulin on immunofluorescence,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Oxford Handbook of Nephrology and Hypertension",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "C3 glomerulopathy is defined by glomerular deposition of complement C3 with little or no immunoglobulin on immunofluorescence, reflecting dysregulation of the alternative complement pathway",
+      "It encompasses two entities distinguished on electron microscopy: dense deposit disease, with dense intramembranous deposits, and C3 glomerulonephritis, with subendothelial and mesangial deposits",
+      "Presentation ranges from asymptomatic haematuria or proteinuria to nephrotic syndrome or a nephritic picture, often with low serum C3 and a normal C4",
+      "An acquired autoantibody, the C3 nephritic factor, stabilises the alternative-pathway C3 convertase and perpetuates complement consumption in many patients",
+      "Inherited or acquired abnormalities of complement regulators (such as factor H) or activators can underlie the disease",
+      "Diagnosis rests on kidney biopsy with immunofluorescence and electron microscopy, supported by a complement functional and genetic workup",
+      "Management combines general glomerular disease measures with immunosuppression in some cases; complement-targeted therapy is used in selected or refractory disease",
+      "Dense deposit disease may be associated with retinal drusen and acquired partial lipodystrophy"
     ],
-    [
-     "Key Investigations",
-     "Kidney biopsy with immunofluorescence (C3-dominant staining) and electron microscopy to subclassify, Serum complement (low C3",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "C3 glomerulopathy results from persistent activation and dysregulation of the alternative complement pathway in the fluid phase, leading to deposition of C3 breakdown products within the glomerulus. Normally the alternative-pathway C3 convertase is tightly regulated by proteins such as factor H and factor I; in this disease acquired autoantibodies (notably C3 nephritic factor, which stabilises the convertase) or genetic abnormalities in complement regulators or activators allow uncontrolled convertase activity and continuous C3 turnover. The resulting C3 fragments accumulate along the glomerular basement membrane and mesangium, producing the characteristic complement-dominant, immunoglobulin-poor staining. This drives glomerular inflammation and a membranoproliferative pattern of injury, manifesting clinically as haematuria, proteinuria and progressive loss of kidney function, with correspondingly low circulating C3.",
+    "additionalDifferentials": [
+      "Immune-complex membranoproliferative glomerulonephritis (infection- or immune-complex-mediated)",
+      "Post-infectious glomerulonephritis",
+      "Lupus nephritis",
+      "Cryoglobulinaemic glomerulonephritis",
+      "Monoclonal gammopathy of renal significance",
+      "IgA nephropathy",
+      "Atypical haemolytic uraemic syndrome (also complement-mediated but a thrombotic microangiopathy)"
     ],
-    [
-     "Primary Differentials",
-     "Immune-complex membranoproliferative glomerulonephritis (infection- or immune-complex-mediated), Post-infectious",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Kidney biopsy with immunofluorescence (C3-dominant staining) and electron microscopy to subclassify",
+      "Serum complement (low C3 with normal C4 typical of alternative-pathway activation)",
+      "Complement functional assays and detection of C3 nephritic factor and other autoantibodies",
+      "Assessment of complement regulator levels (e.g. factor H) and terminal complement activity",
+      "Screening for monoclonal gammopathy, especially in older adults",
+      "Genetic testing of alternative-pathway complement genes"
     ],
-    [
-     "Management Strategy",
-     "Reduce proteinuria and control blood pressure with renin-angiotensin system blockade as baseline nephroprotective therapy.",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive glomerulonephritis with crescents",
+      "Nephrotic-range proteinuria with declining renal function",
+      "Severe hypertension",
+      "Progression toward end-stage kidney disease",
+      "Recurrence in a kidney transplant"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying it as immune-complex membranoproliferative glomerulonephritis without careful immunofluorescence",
-     "Prevent diagnostic or management error"
+    "prognosis": "C3 glomerulopathy is frequently progressive, with a substantial proportion of patients reaching end-stage kidney disease over years, and it commonly recurs after transplantation; outcome varies with histological severity and the underlying complement abnormality.",
+    "pitfalls": [
+      "Misclassifying it as immune-complex membranoproliferative glomerulonephritis without careful immunofluorescence",
+      "Overlooking an underlying monoclonal gammopathy driving complement dysregulation in older patients",
+      "Failing to perform a complement functional and genetic workup once the biopsy pattern is recognised",
+      "Not anticipating disease recurrence in the allograft",
+      "Confusing it with atypical HUS, which shares complement dysregulation but presents as thrombotic microangiopathy"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology (Feehally, Floege, Tonelli, Johnson)",
+      "KDIGO Clinical Practice Guideline on Glomerular Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce proteinuria and control blood pressure with renin-angiotensin system blockade as baseline nephroprotective therapy.",
+      "Offer immunosuppression, typically corticosteroids with mycophenolate mofetil, for progressive or moderate-to-severe disease.",
+      "Consider terminal complement inhibition with eculizumab in rapidly progressive or treatment-resistant disease showing terminal-pathway activation.",
+      "Identify and treat any underlying driver, including clone-directed therapy where a monoclonal gammopathy is causal.",
+      "Monitor renal function, proteinuria and serum complement to track disease activity and treatment response.",
+      "Involve nephrology and plan transplantation with awareness of the high risk of post-transplant recurrence.",
+      "Arrange complement functional and genetic testing with counselling, and screen for inherited regulator defects."
     ]
-   ],
-   "caption": "Overview comparison matrix for c3 glomerulopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "c3-glomerulopathy-real-image",
-   "title": "C3 glomerulopathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "c3_glomerulopathy-pathway",
+      "title": "C3 glomerulopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "C3 glomerulopathy is defined by glomerular deposition of complement C3 with little or no immunoglobulin on immunofluorescence, reflecting dysregulation of the alternative complement pathway",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive glomerulonephritis with crescents",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Kidney biopsy with immunofluorescence (C3-dominant staining) and electron microscopy to subclassify, Serum complement (low C3 with normal C4 typical of alternative-pathway activation), Complement functional assays and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce proteinuria and control blood pressure with renin-angiotensin system blockade as baseline nephroprotective therapy."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying it as immune-complex membranoproliferative glomerulonephritis without careful immunofluorescence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of c3 glomerulopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "c3_glomerulopathy-matrix",
+      "title": "C3 glomerulopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "C3 glomerulopathy is defined by glomerular deposition of complement C3 with little or no immunoglobulin on immunofluorescence,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Kidney biopsy with immunofluorescence (C3-dominant staining) and electron microscopy to subclassify, Serum complement (low C3",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Immune-complex membranoproliferative glomerulonephritis (infection- or immune-complex-mediated), Post-infectious",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce proteinuria and control blood pressure with renin-angiotensin system blockade as baseline nephroprotective therapy.",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying it as immune-complex membranoproliferative glomerulonephritis without careful immunofluorescence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for c3 glomerulopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Oxford Handbook of Nephrology and Hypertension",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 283-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "c3_glomerulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in C3 glomerulopathy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Kidney biopsy with immunofluorescence",
+          "cells": [
+            {
+              "text": "C3-dominant staining with little or no immunoglobulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electron microscopy",
+          "cells": [
+            {
+              "text": "Dense deposit disease or C3 glomerulonephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum complement",
+          "cells": [
+            {
+              "text": "Low C3 with normal C4 typical of alternative-pathway activation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C3 nephritic factor and other autoantibodies",
+          "cells": [
+            {
+              "text": "Complement functional assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement regulator levels (for example factor H) and terminal complement activity",
+          "cells": [
+            {
+              "text": "Regulatory defect or terminal-pathway activation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monoclonal gammopathy screen",
+          "cells": [
+            {
+              "text": "Especially in older adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of alternative-pathway genes",
+          "cells": [
+            {
+              "text": "Inherited regulator or activator abnormality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c3_glomerulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike membranoproliferative and complement-mediated kidney disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Immune-complex membranoproliferative glomerulonephritis",
+          "cells": [
+            {
+              "text": "Immunofluorescence shows immunoglobulin with complement; careful immunofluorescence distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical haemolytic uraemic syndrome",
+          "cells": [
+            {
+              "text": "Presents as a thrombotic microangiopathy rather than a C3-dominant glomerulopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c3_glomerulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options in C3 glomerulopathy",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Renin-angiotensin blockade",
+          "cells": [
+            {
+              "text": "Reduce proteinuria and control blood pressure as baseline nephroprotection"
+            },
+            {
+              "text": "Baseline therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Corticosteroids with mycophenolate mofetil for progressive or moderate-to-severe disease"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Terminal complement inhibition",
+          "cells": [
+            {
+              "text": "Eculizumab for rapidly progressive or treatment-resistant disease with terminal-pathway activation"
+            },
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying driver",
+          "cells": [
+            {
+              "text": "Clone-directed therapy where a monoclonal gammopathy is causal"
+            },
+            {
+              "text": "Older adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, proteinuria and serum complement"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant planning",
+          "cells": [
+            {
+              "text": "Plan with awareness of high risk of post-transplant recurrence"
+            },
+            {
+              "text": "End-stage disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Complement functional and genetic testing; screen for inherited regulator defects"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c3_glomerulopathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Membranoproliferative glomerulonephritis: types and associations",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated conditions"
+      ],
+      "rows": [
+        {
+          "parameter": "Type I (most common)",
+          "cells": [
+            {
+              "text": "Idiopathic; subacute bacterial endocarditis; systemic lupus erythematosus; hepatitis C with or without cryoglobulinemia; mixed cryoglobulinemia; hepatitis B; cancer of lung, breast and ovary (germinal)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type II (dense deposit disease)",
+          "cells": [
+            {
+              "text": "Idiopathic; C3 nephritic factor-associated; partial lipodystrophy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type III",
+          "cells": [
+            {
+              "text": "Idiopathic; complement receptor deficiency"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "c3_glomerulopathy-dx-mgmt",
+      "title": "Diagnosis and management of C3 glomerulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematuria, proteinuria or nephrotic or nephritic picture with low serum C3 and normal C4",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rapidly progressive glomerulonephritis, crescents, or declining renal function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent nephrology review; early biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Kidney biopsy with immunofluorescence and electron microscopy; complement functional and genetic workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "C3-dominant immunofluorescence with little immunoglobulin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Renin-angiotensin blockade; immunosuppression for progressive disease; complement inhibition if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Assess immune-complex membranoproliferative disease or thrombotic microangiopathy instead",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Often progressive; many reach end-stage kidney disease over years",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Recurrence after transplantation is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

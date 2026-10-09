@@ -1,177 +1,493 @@
 {
- "id": "phimosis_pathological",
- "name": "Pathological phimosis",
- "aliases": [
-  "pathological phimosis",
-  "scarring phimosis",
-  "acquired phimosis",
-  "cicatricial phimosis"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Andrology / Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Phimosis is inability to retract the foreskin over the glans, and the crucial distinction is between the physiological non-retractility of childhood and true pathological scarring",
-   "Physiological phimosis reflects natural preputial adhesions and a non-scarred narrow tip that resolves spontaneously as the child grows, and needs only reassurance and hygiene advice",
-   "Pathological phimosis is characterised by a firm, white, cicatricial ring at the preputial opening, the hallmark of acquired scarring most often due to lichen sclerosus",
-   "Presenting features include a ballooning foreskin on voiding, recurrent balanitis, painful erections, bleeding fissures, and, in scarred cases, spraying or obstructed urinary stream",
-   "Forcible retraction of a physiological or inflamed foreskin should be avoided as it causes tears that heal with further scarring and can precipitate paraphimosis",
-   "A trial of topical corticosteroid can soften and resolve many non-scarred narrow foreskins and avoid surgery",
-   "True scarring phimosis, particularly from lichen sclerosus, typically requires circumcision, and excised tissue should be examined histologically"
+  "id": "phimosis_pathological",
+  "name": "Pathological phimosis",
+  "aliases": [
+    "pathological phimosis",
+    "scarring phimosis",
+    "acquired phimosis",
+    "cicatricial phimosis"
   ],
-  "pathophysiology": "In the young child the foreskin is normally adherent to the glans and has a physiologically narrow opening; separation and retractility develop progressively over the early years, so non-retractility at this stage is developmental rather than diseased. Pathological phimosis instead results from acquired fibrosis of the distal prepuce. Chronic inflammation, most importantly lichen sclerosus (balanitis xerotica obliterans) but also recurrent balanoposthitis and the trauma of repeated forcible retraction, drives dermal scarring that contracts the preputial ring into a rigid, non-distensible band. This cicatricial narrowing prevents retraction, may obstruct the urinary stream, and can extend to involve the glans and meatus. Poorly controlled diabetes predisposes to the recurrent infection and inflammation that promote scarring.",
-  "additionalDifferentials": [
-   "Physiological (developmental) phimosis of childhood",
-   "Balanitis xerotica obliterans (genital lichen sclerosus)",
-   "Recurrent infective or irritant balanoposthitis",
-   "Paraphimosis, where a retracted foreskin cannot be reduced",
-   "Preputial adhesions or a congenitally short frenulum",
-   "Penile intraepithelial neoplasia or carcinoma presenting with preputial change"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination assessing retractility and looking for a cicatricial white ring",
-   "Inspection of the glans and meatus for coexisting lichen sclerosus or malignancy",
-   "Assessment of the urinary stream where obstruction or ballooning is reported",
-   "Blood glucose testing to detect diabetes predisposing to recurrent balanitis",
-   "Swab or microscopy if active infection is present",
-   "Histological examination of tissue removed at circumcision to confirm lichen sclerosus and exclude malignancy"
-  ],
-  "redFlags": [
-   "A firm white scarring ring or glans changes suggesting lichen sclerosus with its malignant association",
-   "A persistent ulcer or mass raising concern for penile carcinoma",
-   "Acute paraphimosis with a painful, swollen, irreducible retracted foreskin requiring urgent reduction",
-   "Obstructed voiding or urinary retention from severe narrowing"
-  ],
-  "prognosis": "Physiological phimosis resolves spontaneously with growth, and many narrow non-scarred foreskins respond to topical steroid, whereas true scarring phimosis is effectively cured by circumcision, though associated lichen sclerosus of the glans or urethra may need continued attention.",
-  "pitfalls": [
-   "Mislabelling normal developmental non-retractility as disease and recommending unnecessary surgery",
-   "Forcibly retracting the foreskin, causing tears, scarring, and paraphimosis",
-   "Missing underlying lichen sclerosus and its meatal, urethral, and malignant implications",
-   "Failing to send circumcision specimens for histology",
-   "Overlooking diabetes in a man with recurrent balanitis and secondary phimosis"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "British Association of Urological Surgeons guidance on circumcision",
-   "British Association of Dermatologists guidance on lichen sclerosus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer circumcision as the definitive treatment for the firm cicatricial preputial ring of true scarring phimosis",
-   "Trial a potent topical corticosteroid first for narrow but non-scarred foreskins, which may loosen the ring and avert surgery",
-   "Treat lichen sclerosus of the glans and prepuce with a potent topical corticosteroid",
-   "Treat active balanoposthitis with swab-directed topical or oral antimicrobials before elective surgery",
-   "Optimise glycaemic control in diabetes to reduce recurrent infection and refractory scarring",
-   "Avoid forcible retraction, which tears the foreskin and worsens scarring and can precipitate paraphimosis",
-   "Send excised preputial tissue for histology to confirm lichen sclerosus and exclude malignancy",
-   "Follow up for meatal or urethral stenosis and the long-term penile cancer risk associated with lichen sclerosus"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phimosis_pathological-pathway",
-   "title": "Pathological phimosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Phimosis is inability to retract the foreskin over the glans, and the crucial distinction is between the physiological non-retractility of childhood and true pathological scarring",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A firm white scarring ring or glans changes suggesting lichen sclerosus with its malignant association",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination assessing retractility and looking for a cicatricial white ring, Inspection of the glans and meatus for coexisting lichen sclerosus or malignancy, Assessment of the urinary stream where obstruction or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer circumcision as the definitive treatment for the firm cicatricial preputial ring of true scarring phimosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling normal developmental non-retractility as disease and recommending unnecessary surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pathological phimosis."
-  }
- ],
- "tables": [
-  {
-   "id": "phimosis_pathological-matrix",
-   "title": "Pathological phimosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Phimosis is inability to retract the foreskin over the glans, and the crucial distinction is between the physiological",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Andrology / Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Phimosis is inability to retract the foreskin over the glans, and the crucial distinction is between the physiological non-retractility of childhood and true pathological scarring",
+      "Physiological phimosis reflects natural preputial adhesions and a non-scarred narrow tip that resolves spontaneously as the child grows, and needs only reassurance and hygiene advice",
+      "Pathological phimosis is characterised by a firm, white, cicatricial ring at the preputial opening, the hallmark of acquired scarring most often due to lichen sclerosus",
+      "Presenting features include a ballooning foreskin on voiding, recurrent balanitis, painful erections, bleeding fissures, and, in scarred cases, spraying or obstructed urinary stream",
+      "Forcible retraction of a physiological or inflamed foreskin should be avoided as it causes tears that heal with further scarring and can precipitate paraphimosis",
+      "A trial of topical corticosteroid can soften and resolve many non-scarred narrow foreskins and avoid surgery",
+      "True scarring phimosis, particularly from lichen sclerosus, typically requires circumcision, and excised tissue should be examined histologically"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination assessing retractility and looking for a cicatricial white ring, Inspection of the glans and meatus for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In the young child the foreskin is normally adherent to the glans and has a physiologically narrow opening; separation and retractility develop progressively over the early years, so non-retractility at this stage is developmental rather than diseased. Pathological phimosis instead results from acquired fibrosis of the distal prepuce. Chronic inflammation, most importantly lichen sclerosus (balanitis xerotica obliterans) but also recurrent balanoposthitis and the trauma of repeated forcible retraction, drives dermal scarring that contracts the preputial ring into a rigid, non-distensible band. This cicatricial narrowing prevents retraction, may obstruct the urinary stream, and can extend to involve the glans and meatus. Poorly controlled diabetes predisposes to the recurrent infection and inflammation that promote scarring.",
+    "additionalDifferentials": [
+      "Physiological (developmental) phimosis of childhood",
+      "Balanitis xerotica obliterans (genital lichen sclerosus)",
+      "Recurrent infective or irritant balanoposthitis",
+      "Paraphimosis, where a retracted foreskin cannot be reduced",
+      "Preputial adhesions or a congenitally short frenulum",
+      "Penile intraepithelial neoplasia or carcinoma presenting with preputial change"
     ],
-    [
-     "Primary Differentials",
-     "Physiological (developmental) phimosis of childhood, Balanitis xerotica obliterans (genital lichen sclerosus), Recurrent",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination assessing retractility and looking for a cicatricial white ring",
+      "Inspection of the glans and meatus for coexisting lichen sclerosus or malignancy",
+      "Assessment of the urinary stream where obstruction or ballooning is reported",
+      "Blood glucose testing to detect diabetes predisposing to recurrent balanitis",
+      "Swab or microscopy if active infection is present",
+      "Histological examination of tissue removed at circumcision to confirm lichen sclerosus and exclude malignancy"
     ],
-    [
-     "Management Strategy",
-     "Offer circumcision as the definitive treatment for the firm cicatricial preputial ring of true scarring phimosis",
-     "Core treatment modality"
+    "redFlags": [
+      "A firm white scarring ring or glans changes suggesting lichen sclerosus with its malignant association",
+      "A persistent ulcer or mass raising concern for penile carcinoma",
+      "Acute paraphimosis with a painful, swollen, irreducible retracted foreskin requiring urgent reduction",
+      "Obstructed voiding or urinary retention from severe narrowing"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling normal developmental non-retractility as disease and recommending unnecessary surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "Physiological phimosis resolves spontaneously with growth, and many narrow non-scarred foreskins respond to topical steroid, whereas true scarring phimosis is effectively cured by circumcision, though associated lichen sclerosus of the glans or urethra may need continued attention.",
+    "pitfalls": [
+      "Mislabelling normal developmental non-retractility as disease and recommending unnecessary surgery",
+      "Forcibly retracting the foreskin, causing tears, scarring, and paraphimosis",
+      "Missing underlying lichen sclerosus and its meatal, urethral, and malignant implications",
+      "Failing to send circumcision specimens for histology",
+      "Overlooking diabetes in a man with recurrent balanitis and secondary phimosis"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "British Association of Urological Surgeons guidance on circumcision",
+      "British Association of Dermatologists guidance on lichen sclerosus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer circumcision as the definitive treatment for the firm cicatricial preputial ring of true scarring phimosis",
+      "Trial a potent topical corticosteroid first for narrow but non-scarred foreskins, which may loosen the ring and avert surgery",
+      "Treat lichen sclerosus of the glans and prepuce with a potent topical corticosteroid",
+      "Treat active balanoposthitis with swab-directed topical or oral antimicrobials before elective surgery",
+      "Optimise glycaemic control in diabetes to reduce recurrent infection and refractory scarring",
+      "Avoid forcible retraction, which tears the foreskin and worsens scarring and can precipitate paraphimosis",
+      "Send excised preputial tissue for histology to confirm lichen sclerosus and exclude malignancy",
+      "Follow up for meatal or urethral stenosis and the long-term penile cancer risk associated with lichen sclerosus"
     ]
-   ],
-   "caption": "Overview comparison matrix for pathological phimosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phimosis-pathological-real-image",
-   "title": "Pathological phimosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "phimosis_pathological-pathway",
+      "title": "Pathological phimosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Phimosis is inability to retract the foreskin over the glans, and the crucial distinction is between the physiological non-retractility of childhood and true pathological scarring",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A firm white scarring ring or glans changes suggesting lichen sclerosus with its malignant association",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination assessing retractility and looking for a cicatricial white ring, Inspection of the glans and meatus for coexisting lichen sclerosus or malignancy, Assessment of the urinary stream where obstruction or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer circumcision as the definitive treatment for the firm cicatricial preputial ring of true scarring phimosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling normal developmental non-retractility as disease and recommending unnecessary surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pathological phimosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phimosis_pathological-matrix",
+      "title": "Pathological phimosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Phimosis is inability to retract the foreskin over the glans, and the crucial distinction is between the physiological",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination assessing retractility and looking for a cicatricial white ring, Inspection of the glans and meatus for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Physiological (developmental) phimosis of childhood, Balanitis xerotica obliterans (genital lichen sclerosus), Recurrent",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer circumcision as the definitive treatment for the firm cicatricial preputial ring of true scarring phimosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling normal developmental non-retractility as disease and recommending unnecessary surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pathological phimosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phimosis_pathological-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of retractility",
+          "cells": [
+            {
+              "text": "Cicatricial white ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inspection of glans and meatus",
+          "cells": [
+            {
+              "text": "Coexisting lichen sclerosus or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the urinary stream",
+          "cells": [
+            {
+              "text": "Obstruction or ballooning, where reported"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose testing",
+          "cells": [
+            {
+              "text": "Diabetes predisposing to recurrent balanitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab or microscopy",
+          "cells": [
+            {
+              "text": "Active infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of tissue removed at circumcision",
+          "cells": [
+            {
+              "text": "Confirms lichen sclerosus and excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phimosis_pathological-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological phimosis of childhood",
+          "cells": [
+            {
+              "text": "Developmental non-retractility, not disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraphimosis",
+          "cells": [
+            {
+              "text": "Retracted foreskin cannot be reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balanitis xerotica obliterans",
+          "cells": [
+            {
+              "text": "Firm cicatricial white ring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phimosis_pathological-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Circumcision",
+          "cells": [
+            {
+              "text": "Definitive treatment for the firm cicatricial ring of true scarring phimosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent topical corticosteroid trial",
+          "cells": [
+            {
+              "text": "First, for narrow but non-scarred foreskins, which may loosen the ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen sclerosus treatment",
+          "cells": [
+            {
+              "text": "Potent topical corticosteroid for the glans and prepuce"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection before surgery",
+          "cells": [
+            {
+              "text": "Swab-directed topical or oral antimicrobials for active balanoposthitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "Optimise glycaemic control in diabetes to reduce recurrent infection and scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid forcible retraction",
+          "cells": [
+            {
+              "text": "Tears the foreskin, worsens scarring and can precipitate paraphimosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Excised preputial tissue to confirm lichen sclerosus and exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Meatal or urethral stenosis and long-term penile cancer risk with lichen sclerosus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phimosis_pathological-dx-mgmt",
+      "title": "Diagnosis and management of Pathological phimosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm cicatricial white ring at the preputial orifice preventing retraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute paraphimosis, persistent ulcer or mass, obstructed voiding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent reduction of acute paraphimosis; urgent review for penile carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Retractility and white ring check; glans and meatus; urinary stream; glucose; swab",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a firm cicatricial ring confirmed, rather than a narrow non-scarred foreskin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Trial a topical corticosteroid for a non-scarred foreskin and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Offer circumcision as definitive treatment for the firm cicatricial ring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial a potent topical corticosteroid first for narrow, non-scarred foreskins",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat lichen sclerosus of the glans and prepuce with a potent topical corticosteroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat active balanoposthitis with swab-directed antimicrobials before elective surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Send excised preputial tissue for histology to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Physiological phimosis resolves with growth; scarring phimosis is cured by circumcision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

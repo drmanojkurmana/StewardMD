@@ -1,185 +1,570 @@
 {
- "id": "IGA_NEPHROPATHY",
- "name": "IgA nephropathy",
- "system": "Nephrology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "iga nephropathy",
-  "berger disease",
-  "iga glomerulonephritis",
-  "synpharyngitic hematuria",
-  "ign",
-  "berger's disease",
-  "mesangial iga disease"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Most common primary glomerulonephritis worldwide, typically presenting in the second or third decade of life.",
-   "Classic presentation is episodic gross (macroscopic) hematuria occurring within 1-2 days of an upper respiratory or mucosal infection, distinguishing it from post-streptococcal GN which lags 1-3 weeks.",
-   "Can also present as asymptomatic microscopic hematuria with mild proteinuria found incidentally on urinalysis.",
-   "Diagnosis requires kidney biopsy showing dominant or codominant mesangial IgA deposition on immunofluorescence.",
-   "Course is highly variable: some patients have a benign lifelong course while roughly 20-40% progress to end-stage kidney disease over 20 years.",
-   "Recurrent gross hematuria episodes typically resolve completely between attacks, but persistent proteinuria or hypertension signals higher risk.",
-   "IgA vasculitis (Henoch-Schonlein purpura) is considered a systemic variant of the same underlying disease process affecting skin, gut, and joints.",
-   "Renal biopsy findings are graded using the Oxford (MEST-C) classification to help predict prognosis and guide therapy intensity."
+  "id": "IGA_NEPHROPATHY",
+  "name": "IgA nephropathy",
+  "system": "Nephrology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "iga nephropathy",
+    "berger disease",
+    "iga glomerulonephritis",
+    "synpharyngitic hematuria",
+    "ign",
+    "berger's disease",
+    "mesangial iga disease"
   ],
-  "pathophysiology": "Disease arises from circulating poorly galactosylated IgA1 molecules that form immune complexes, which deposit in the glomerular mesangium and trigger mesangial cell proliferation and matrix expansion. This deposition activates complement and local inflammatory pathways, leading to variable degrees of mesangial hypercellularity, segmental sclerosis, endocapillary proliferation, and interstitial fibrosis depending on disease severity. Mucosal immune stimulation (e.g., respiratory infection) is thought to transiently boost production of these abnormal IgA1 complexes, explaining the synpharyngitic timing of gross hematuria flares.",
-  "additionalDifferentials": [
-   "Thin basement membrane nephropathy (benign familial hematuria)",
-   "Alport syndrome (hereditary nephritis)",
-   "Post-infectious (post-streptococcal) glomerulonephritis",
-   "Lupus nephritis",
-   "IgA vasculitis with nephritis",
-   "Membranoproliferative glomerulonephritis"
-  ],
-  "infectionMimics": [
-   "Post-streptococcal glomerulonephritis",
-   "Infective endocarditis-associated glomerulonephritis",
-   "Hepatitis-associated glomerulonephritis"
-  ],
-  "nonInfectiousMimics": [
-   "Thin basement membrane nephropathy",
-   "Alport syndrome",
-   "Lupus nephritis",
-   "ANCA-associated vasculitis with glomerulonephritis"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis with microscopy — confirms dysmorphic red cells and red cell casts indicating glomerular bleeding",
-   "Urine protein-to-creatinine ratio or 24-hour urine protein — quantifies proteinuria for staging and prognosis",
-   "Serum creatinine and estimated GFR — establishes baseline kidney function and tracks progression",
-   "Serum complement levels (C3, C4) — typically normal in IgA nephropathy, helping exclude complement-mediated GN",
-   "Kidney biopsy with light microscopy, immunofluorescence, and electron microscopy — required for definitive diagnosis and Oxford classification grading",
-   "Serum IgA level — often elevated but neither sensitive nor specific enough to confirm diagnosis alone",
-   "ANA, ANCA, and hepatitis serologies — helps exclude secondary causes and mimicking systemic diseases",
-   "Renal ultrasound — assesses kidney size and excludes obstructive or structural causes of hematuria"
-  ],
-  "redFlags": [
-   "Rapidly rising creatinine suggesting crescentic (rapidly progressive) IgA nephropathy requiring urgent nephrology evaluation",
-   "Nephrotic-range proteinuria or nephrotic syndrome at presentation",
-   "New or worsening hypertension poorly responsive to therapy",
-   "Systemic features (purpura, arthralgia, abdominal pain) suggesting IgA vasculitis with renal involvement",
-   "Persistent proteinuria greater than 1 gram per day despite optimized supportive therapy"
-  ],
-  "pitfalls": [
-   "Attributing recurrent gross hematuria solely to urologic causes and delaying nephrology referral or biopsy.",
-   "Assuming normal complement levels rule out all forms of glomerulonephritis rather than supporting IgA nephropathy specifically.",
-   "Underestimating long-term risk in patients with isolated microscopic hematuria who lack proteinuria monitoring over time.",
-   "Confusing timing of hematuria onset relative to infection with post-streptococcal GN, missing the synpharyngitic pattern typical of IgA nephropathy."
-  ],
-  "prognosis": "Course ranges from indolent with preserved kidney function over decades to progressive decline, with an estimated 20-40% of patients reaching end-stage kidney disease within 20 years of diagnosis. Higher risk features include persistent proteinuria, hypertension, reduced GFR at presentation, and unfavorable histology on Oxford classification.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Chapter on Glomerular Diseases (IgA Nephropathy)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish optimised supportive care as the foundation — maximally tolerated renin-angiotensin system blockade, blood pressure control, and an SGLT2 inhibitor to lower proteinuria",
-   "Reinforce lifestyle measures including dietary sodium restriction, weight management, and smoking cessation",
-   "For persistent proteinuria and high progression risk despite supportive care, consider gut-targeted enteric budesonide or a course of systemic corticosteroids weighed against toxicity",
-   "Consider newer agents such as the endothelin-angiotensin receptor antagonist sparsentan or complement-directed therapy in appropriate patients",
-   "Treat rapidly progressive crescentic disease with corticosteroids and cyclophosphamide",
-   "Monitor proteinuria, blood pressure, and eGFR over time to detect progression, using the Oxford (MEST-C) biopsy classification for risk stratification",
-   "Plan kidney replacement therapy or transplantation for those progressing to kidney failure, counselling on post-transplant recurrence"
-  ]
- },
- "algorithms": [
-  {
-   "id": "iga_nephropathy-pathway",
-   "title": "IgA nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most common primary glomerulonephritis worldwide, typically presenting in the second or third decade of life.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly rising creatinine suggesting crescentic (rapidly progressive) IgA nephropathy requiring urgent nephrology evaluation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis with microscopy - confirms dysmorphic red cells and red cell casts indicating glomerular bleeding, Urine protein-to-creatinine ratio or 24-hour urine protein - quantifies proteinuria for staging and prognosis,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish optimised supportive care as the foundation - maximally tolerated renin-angiotensin system blockade, blood pressure control, and an SGLT2 inhibitor to lower proteinuria"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing recurrent gross hematuria solely to urologic causes and delaying nephrology referral or biopsy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of iga nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "iga_nephropathy-matrix",
-   "title": "IgA nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most common primary glomerulonephritis worldwide, typically presenting in the second or third decade of life.",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Most common primary glomerulonephritis worldwide, typically presenting in the second or third decade of life.",
+      "Classic presentation is episodic gross (macroscopic) hematuria occurring within 1-2 days of an upper respiratory or mucosal infection, distinguishing it from post-streptococcal GN which lags 1-3 weeks.",
+      "Can also present as asymptomatic microscopic hematuria with mild proteinuria found incidentally on urinalysis.",
+      "Diagnosis requires kidney biopsy showing dominant or codominant mesangial IgA deposition on immunofluorescence.",
+      "Course is highly variable: some patients have a benign lifelong course while roughly 20-40% progress to end-stage kidney disease over 20 years.",
+      "Recurrent gross hematuria episodes typically resolve completely between attacks, but persistent proteinuria or hypertension signals higher risk.",
+      "IgA vasculitis (Henoch-Schonlein purpura) is considered a systemic variant of the same underlying disease process affecting skin, gut, and joints.",
+      "Renal biopsy findings are graded using the Oxford (MEST-C) classification to help predict prognosis and guide therapy intensity."
     ],
-    [
-     "Key Investigations",
-     "Urinalysis with microscopy - confirms dysmorphic red cells and red cell casts indicating glomerular bleeding, Urine",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Disease arises from circulating poorly galactosylated IgA1 molecules that form immune complexes, which deposit in the glomerular mesangium and trigger mesangial cell proliferation and matrix expansion. This deposition activates complement and local inflammatory pathways, leading to variable degrees of mesangial hypercellularity, segmental sclerosis, endocapillary proliferation, and interstitial fibrosis depending on disease severity. Mucosal immune stimulation (e.g., respiratory infection) is thought to transiently boost production of these abnormal IgA1 complexes, explaining the synpharyngitic timing of gross hematuria flares.",
+    "additionalDifferentials": [
+      "Thin basement membrane nephropathy (benign familial hematuria)",
+      "Alport syndrome (hereditary nephritis)",
+      "Post-infectious (post-streptococcal) glomerulonephritis",
+      "Lupus nephritis",
+      "IgA vasculitis with nephritis",
+      "Membranoproliferative glomerulonephritis"
     ],
-    [
-     "Primary Differentials",
-     "Thin basement membrane nephropathy (benign familial hematuria), Alport syndrome (hereditary nephritis), Post-infectious",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Post-streptococcal glomerulonephritis",
+      "Infective endocarditis-associated glomerulonephritis",
+      "Hepatitis-associated glomerulonephritis"
     ],
-    [
-     "Management Strategy",
-     "Establish optimised supportive care as the foundation - maximally tolerated renin-angiotensin system blockade, blood pressure",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Thin basement membrane nephropathy",
+      "Alport syndrome",
+      "Lupus nephritis",
+      "ANCA-associated vasculitis with glomerulonephritis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing recurrent gross hematuria solely to urologic causes and delaying nephrology referral or biopsy.",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Urinalysis with microscopy — confirms dysmorphic red cells and red cell casts indicating glomerular bleeding",
+      "Urine protein-to-creatinine ratio or 24-hour urine protein — quantifies proteinuria for staging and prognosis",
+      "Serum creatinine and estimated GFR — establishes baseline kidney function and tracks progression",
+      "Serum complement levels (C3, C4) — typically normal in IgA nephropathy, helping exclude complement-mediated GN",
+      "Kidney biopsy with light microscopy, immunofluorescence, and electron microscopy — required for definitive diagnosis and Oxford classification grading",
+      "Serum IgA level — often elevated but neither sensitive nor specific enough to confirm diagnosis alone",
+      "ANA, ANCA, and hepatitis serologies — helps exclude secondary causes and mimicking systemic diseases",
+      "Renal ultrasound — assesses kidney size and excludes obstructive or structural causes of hematuria"
+    ],
+    "redFlags": [
+      "Rapidly rising creatinine suggesting crescentic (rapidly progressive) IgA nephropathy requiring urgent nephrology evaluation",
+      "Nephrotic-range proteinuria or nephrotic syndrome at presentation",
+      "New or worsening hypertension poorly responsive to therapy",
+      "Systemic features (purpura, arthralgia, abdominal pain) suggesting IgA vasculitis with renal involvement",
+      "Persistent proteinuria greater than 1 gram per day despite optimized supportive therapy"
+    ],
+    "pitfalls": [
+      "Attributing recurrent gross hematuria solely to urologic causes and delaying nephrology referral or biopsy.",
+      "Assuming normal complement levels rule out all forms of glomerulonephritis rather than supporting IgA nephropathy specifically.",
+      "Underestimating long-term risk in patients with isolated microscopic hematuria who lack proteinuria monitoring over time.",
+      "Confusing timing of hematuria onset relative to infection with post-streptococcal GN, missing the synpharyngitic pattern typical of IgA nephropathy."
+    ],
+    "prognosis": "Course ranges from indolent with preserved kidney function over decades to progressive decline, with an estimated 20-40% of patients reaching end-stage kidney disease within 20 years of diagnosis. Higher risk features include persistent proteinuria, hypertension, reduced GFR at presentation, and unfavorable histology on Oxford classification.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Chapter on Glomerular Diseases (IgA Nephropathy)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish optimised supportive care as the foundation — maximally tolerated renin-angiotensin system blockade, blood pressure control, and an SGLT2 inhibitor to lower proteinuria",
+      "Reinforce lifestyle measures including dietary sodium restriction, weight management, and smoking cessation",
+      "For persistent proteinuria and high progression risk despite supportive care, consider gut-targeted enteric budesonide or a course of systemic corticosteroids weighed against toxicity",
+      "Consider newer agents such as the endothelin-angiotensin receptor antagonist sparsentan or complement-directed therapy in appropriate patients",
+      "Treat rapidly progressive crescentic disease with corticosteroids and cyclophosphamide",
+      "Monitor proteinuria, blood pressure, and eGFR over time to detect progression, using the Oxford (MEST-C) biopsy classification for risk stratification",
+      "Plan kidney replacement therapy or transplantation for those progressing to kidney failure, counselling on post-transplant recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for iga nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "iga-nephropathy-real-image",
-   "title": "IgA nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "iga_nephropathy-pathway",
+      "title": "IgA nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most common primary glomerulonephritis worldwide, typically presenting in the second or third decade of life.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly rising creatinine suggesting crescentic (rapidly progressive) IgA nephropathy requiring urgent nephrology evaluation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis with microscopy - confirms dysmorphic red cells and red cell casts indicating glomerular bleeding, Urine protein-to-creatinine ratio or 24-hour urine protein - quantifies proteinuria for staging and prognosis,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish optimised supportive care as the foundation - maximally tolerated renin-angiotensin system blockade, blood pressure control, and an SGLT2 inhibitor to lower proteinuria"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing recurrent gross hematuria solely to urologic causes and delaying nephrology referral or biopsy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of iga nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "iga_nephropathy-matrix",
+      "title": "IgA nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most common primary glomerulonephritis worldwide, typically presenting in the second or third decade of life.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis with microscopy - confirms dysmorphic red cells and red cell casts indicating glomerular bleeding, Urine",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thin basement membrane nephropathy (benign familial hematuria), Alport syndrome (hereditary nephritis), Post-infectious",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish optimised supportive care as the foundation - maximally tolerated renin-angiotensin system blockade, blood pressure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing recurrent gross hematuria solely to urologic causes and delaying nephrology referral or biopsy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for iga nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Immunoglobulin A Nephropathy",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/glomerular-disorders/immunoglobulin-a-nephropathy",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "IGA_NEPHROPATHY-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in IgA nephropathy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Visible haematuria timing",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "1 to 2 after a febrile mucosal illness",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "{{hy:Synpharyngitic; earlier than post-infectious GN}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Proteinuria",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Usually below 1",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Nephrotic syndrome in about 10%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine sediment",
+          "cells": [
+            {
+              "text": "Dysmorphic red cells, occasional red cell casts"
+            },
+            {
+              "text": "Glomerular bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complement and serum IgA",
+          "cells": [
+            {
+              "text": "Complement normal; IgA may be raised"
+            },
+            {
+              "text": "Serum IgA not diagnostic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney biopsy",
+          "cells": [
+            {
+              "text": "Granular mesangial IgA and C3, mesangial expansion"
+            },
+            {
+              "text": "Needed in moderate or severe disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RPGN at presentation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 5",
+              "op": "=",
+              "value": 5
+            },
+            {
+              "text": "Crescentic disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Progression risk markers",
+          "cells": [
+            {
+              "text": "Proteinuria above 1 g/day, raised creatinine, hypertension, fibrosis, crescents"
+            },
+            {
+              "text": "Kidney failure in 5% to 60% at 10 years"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "IGA_NEPHROPATHY-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of IgA nephropathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-infectious glomerulonephritis",
+          "cells": [
+            {
+              "text": "{{hy:Haematuria starts weeks, not days, after infection; low complement}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IgA vasculitis (Henoch-Schonlein)",
+          "cells": [
+            {
+              "text": "Same biopsy; purpura, arthralgia, abdominal pain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary mesangial IgA",
+          "cells": [
+            {
+              "text": "Cirrhosis, IBD, coeliac disease, psoriasis, HIV, lung cancer"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thin basement membrane disease",
+          "cells": [
+            {
+              "text": "Isolated haematuria without proteinuria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Alport syndrome",
+          "cells": [
+            {
+              "text": "Hereditary nephritis with deafness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "IGA_NEPHROPATHY-treatment",
+      "kind": "treatment",
+      "title": "Treatment of IgA nephropathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "{{hy:Hypertension, creatinine above 1.2 mg/dL, or protein above 300 mg/day}}"
+            },
+            {
+              "text": "Target urine protein below 500 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "Persistent proteinuria on ACE inhibitor or ARB"
+            },
+            {
+              "text": "Slowed progression in DAPA-CKD subgroup"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sparsentan",
+          "cells": [
+            {
+              "text": "UPCR 1.5 or more despite ACE inhibitor or ARB"
+            },
+            {
+              "text": "Stop ACE inhibitor or ARB first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Proteinuria 1 g/day or more and eGFR 20 to 120 after 3 months supportive care"
+            },
+            {
+              "text": "At least 6 months; infection risk rises with dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV steroids with cyclophosphamide",
+          "cells": [
+            {
+              "text": "Crescentic or severe proliferative disease"
+            },
+            {
+              "text": "Then oral prednisone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney transplantation",
+          "cells": [
+            {
+              "text": "Kidney failure"
+            },
+            {
+              "text": "Recurs in about 30% of grafts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tonsillectomy, diets, immune globulin",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Unproven"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Avoid immunosuppression in advanced fibrotic disease."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "IGA_NEPHROPATHY-dx-mgmt",
+      "title": "Diagnosis and management of IgA nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematuria 1 to 2 days after a respiratory infection",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urinalysis, urine protein, creatinine, complement",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Proteinuria, raised creatinine or hypertension?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Monitor isolated haematuria",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Kidney biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Crescentic or rapidly progressive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "IV steroids, cyclophosphamide, then oral prednisone",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ACE inhibitor or ARB plus SGLT2 inhibitor for 3 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Proteinuria still 1 g/day or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids for 6 months or sparsentan",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue supportive care; monitor protein and creatinine",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

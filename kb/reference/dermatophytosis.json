@@ -1,173 +1,540 @@
 {
- "id": "dermatophytosis",
- "name": "Dermatophytosis",
- "aliases": [
-  "ringworm",
-  "tinea",
-  "dermatophyte infection"
- ],
- "class": "infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A superficial fungal infection of keratinised tissue named by body site: tinea corporis (body), cruris (groin), pedis (feet), capitis (scalp), unguium (nails), and faciei (face)",
-   "The classic lesion is an annular, scaly plaque with a raised, advancing, more inflamed edge and relative central clearing",
-   "Confirm the diagnosis before treatment with skin scrapings, hair, or nail clippings for microscopy and culture, as morphology alone can mislead",
-   "Prior use of topical corticosteroids alters the appearance (tinea incognito), masking scale and the active edge and delaying diagnosis",
-   "Localised skin infection responds to topical antifungals, whereas tinea capitis and onychomycosis require systemic antifungal therapy because topical agents cannot penetrate hair and nail adequately",
-   "Tinea capitis is largely a disease of children and can cause a boggy inflamed mass (kerion) with a risk of scarring alopecia if treatment is delayed",
-   "Address sources and reservoirs: treat tinea pedis to prevent recurrent groin and body infection, and consider animal contacts for zoophilic species",
-   "Consider underlying immunosuppression or diabetes in extensive, recurrent, or unusually severe infection"
+  "id": "dermatophytosis",
+  "name": "Dermatophytosis",
+  "aliases": [
+    "ringworm",
+    "tinea",
+    "dermatophyte infection"
   ],
-  "pathophysiology": "Dermatophytosis is caused by dermatophyte fungi of the genera Trichophyton, Microsporum, and Epidermophyton, which possess keratinases enabling them to invade and digest keratin in the stratum corneum, hair, and nails. Infection is acquired from other people (anthropophilic), animals (zoophilic), or soil (geophilic), with zoophilic species often producing more inflammatory reactions. The fungus spreads centrifugally through the stratum corneum, producing the characteristic annular lesion with an active advancing scaly margin. The host inflammatory response accounts for erythema and, in strongly inflammatory infections such as kerion, pustulation and potential scarring. Warmth, moisture, occlusion, and impaired immunity favour infection.",
-  "additionalDifferentials": [
-   "Nummular (discoid) eczema",
-   "Psoriasis",
-   "Pityriasis rosea",
-   "Seborrhoeic dermatitis",
-   "Granuloma annulare (for annular non-scaly lesions)",
-   "Erythrasma or candidal intertrigo in flexural disease"
-  ],
-  "additionalInvestigations": [
-   "Skin scrapings, hair, or nail clippings for direct microscopy with potassium hydroxide and fungal culture",
-   "Wood's lamp examination, which fluoresces in certain Microsporum scalp infections",
-   "Nail sampling for onychomycosis before starting prolonged systemic therapy",
-   "Consideration of underlying diabetes or immunosuppression in extensive or recurrent disease",
-   "Skin biopsy with fungal stains in diagnostically difficult cases"
-  ],
-  "redFlags": [
-   "Kerion or severe inflammatory tinea capitis risking permanent scarring alopecia",
-   "Extensive, widespread, or rapidly progressive infection suggesting immunosuppression",
-   "Secondary bacterial infection of macerated or fissured lesions",
-   "Deep or invasive fungal infection in an immunocompromised patient"
-  ],
-  "prognosis": "Prognosis is excellent with correct diagnosis and appropriate topical or systemic antifungal therapy; nail infections require prolonged treatment and relapse is common, while delayed treatment of inflammatory scalp disease can leave permanent scarring alopecia.",
-  "pitfalls": [
-   "Treating with topical corticosteroids and producing tinea incognito that obscures the diagnosis",
-   "Failing to confirm the diagnosis mycologically before long courses of systemic antifungals",
-   "Using topical-only therapy for scalp or nail infection, which will not eradicate it",
-   "Neglecting reservoirs such as untreated tinea pedis or animal contacts, leading to recurrence"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat localised skin infection with topical antifungals such as azoles or allylamines (terbinafine)",
-   "Use systemic antifungals such as oral terbinafine, itraconazole or griseofulvin for tinea capitis and onychomycosis, since topical agents cannot penetrate hair and nail",
-   "Confirm the diagnosis with microscopy and culture of scrapings or clippings before committing to prolonged systemic therapy",
-   "Add general measures to keep skin dry, decontaminate footwear and fomites, and treat affected household and animal contacts to reduce reinfection",
-   "Treat inflammatory tinea capitis and kerion promptly to prevent scarring alopecia and use a sporicidal shampoo to limit transmission",
-   "Address predisposing factors such as diabetes or immunosuppression in extensive or recurrent disease",
-   "Monitor liver function during prolonged courses of oral antifungal therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dermatophytosis-pathway",
-   "title": "Dermatophytosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A superficial fungal infection of keratinised tissue named by body site: tinea corporis (body), cruris (groin), pedis (feet), capitis (scalp), unguium (nails), and faciei (face)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Kerion or severe inflammatory tinea capitis risking permanent scarring alopecia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin scrapings, hair, or nail clippings for direct microscopy with potassium hydroxide and fungal culture, Wood's lamp examination, which fluoresces in certain Microsporum scalp infections, Nail sampling for onychomycosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat localised skin infection with topical antifungals such as azoles or allylamines (terbinafine)"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating with topical corticosteroids and producing tinea incognito that obscures the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dermatophytosis."
-  }
- ],
- "tables": [
-  {
-   "id": "dermatophytosis-matrix",
-   "title": "Dermatophytosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A superficial fungal infection of keratinised tissue named by body site: tinea corporis (body), cruris (groin), pedis (feet),",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A superficial fungal infection of keratinised tissue named by body site: tinea corporis (body), cruris (groin), pedis (feet), capitis (scalp), unguium (nails), and faciei (face)",
+      "The classic lesion is an annular, scaly plaque with a raised, advancing, more inflamed edge and relative central clearing",
+      "Confirm the diagnosis before treatment with skin scrapings, hair, or nail clippings for microscopy and culture, as morphology alone can mislead",
+      "Prior use of topical corticosteroids alters the appearance (tinea incognito), masking scale and the active edge and delaying diagnosis",
+      "Localised skin infection responds to topical antifungals, whereas tinea capitis and onychomycosis require systemic antifungal therapy because topical agents cannot penetrate hair and nail adequately",
+      "Tinea capitis is largely a disease of children and can cause a boggy inflamed mass (kerion) with a risk of scarring alopecia if treatment is delayed",
+      "Address sources and reservoirs: treat tinea pedis to prevent recurrent groin and body infection, and consider animal contacts for zoophilic species",
+      "Consider underlying immunosuppression or diabetes in extensive, recurrent, or unusually severe infection"
     ],
-    [
-     "Key Investigations",
-     "Skin scrapings, hair, or nail clippings for direct microscopy with potassium hydroxide and fungal culture, Wood's lamp",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dermatophytosis is caused by dermatophyte fungi of the genera Trichophyton, Microsporum, and Epidermophyton, which possess keratinases enabling them to invade and digest keratin in the stratum corneum, hair, and nails. Infection is acquired from other people (anthropophilic), animals (zoophilic), or soil (geophilic), with zoophilic species often producing more inflammatory reactions. The fungus spreads centrifugally through the stratum corneum, producing the characteristic annular lesion with an active advancing scaly margin. The host inflammatory response accounts for erythema and, in strongly inflammatory infections such as kerion, pustulation and potential scarring. Warmth, moisture, occlusion, and impaired immunity favour infection.",
+    "additionalDifferentials": [
+      "Nummular (discoid) eczema",
+      "Psoriasis",
+      "Pityriasis rosea",
+      "Seborrhoeic dermatitis",
+      "Granuloma annulare (for annular non-scaly lesions)",
+      "Erythrasma or candidal intertrigo in flexural disease"
     ],
-    [
-     "Primary Differentials",
-     "Nummular (discoid) eczema, Psoriasis, Pityriasis rosea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin scrapings, hair, or nail clippings for direct microscopy with potassium hydroxide and fungal culture",
+      "Wood's lamp examination, which fluoresces in certain Microsporum scalp infections",
+      "Nail sampling for onychomycosis before starting prolonged systemic therapy",
+      "Consideration of underlying diabetes or immunosuppression in extensive or recurrent disease",
+      "Skin biopsy with fungal stains in diagnostically difficult cases"
     ],
-    [
-     "Management Strategy",
-     "Treat localised skin infection with topical antifungals such as azoles or allylamines (terbinafine)",
-     "Core treatment modality"
+    "redFlags": [
+      "Kerion or severe inflammatory tinea capitis risking permanent scarring alopecia",
+      "Extensive, widespread, or rapidly progressive infection suggesting immunosuppression",
+      "Secondary bacterial infection of macerated or fissured lesions",
+      "Deep or invasive fungal infection in an immunocompromised patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating with topical corticosteroids and producing tinea incognito that obscures the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent with correct diagnosis and appropriate topical or systemic antifungal therapy; nail infections require prolonged treatment and relapse is common, while delayed treatment of inflammatory scalp disease can leave permanent scarring alopecia.",
+    "pitfalls": [
+      "Treating with topical corticosteroids and producing tinea incognito that obscures the diagnosis",
+      "Failing to confirm the diagnosis mycologically before long courses of systemic antifungals",
+      "Using topical-only therapy for scalp or nail infection, which will not eradicate it",
+      "Neglecting reservoirs such as untreated tinea pedis or animal contacts, leading to recurrence"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat localised skin infection with topical antifungals such as azoles or allylamines (terbinafine)",
+      "Use systemic antifungals such as oral terbinafine, itraconazole or griseofulvin for tinea capitis and onychomycosis, since topical agents cannot penetrate hair and nail",
+      "Confirm the diagnosis with microscopy and culture of scrapings or clippings before committing to prolonged systemic therapy",
+      "Add general measures to keep skin dry, decontaminate footwear and fomites, and treat affected household and animal contacts to reduce reinfection",
+      "Treat inflammatory tinea capitis and kerion promptly to prevent scarring alopecia and use a sporicidal shampoo to limit transmission",
+      "Address predisposing factors such as diabetes or immunosuppression in extensive or recurrent disease",
+      "Monitor liver function during prolonged courses of oral antifungal therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for dermatophytosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dermatophytosis-real-image",
-   "title": "Dermatophytosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "dermatophytosis-pathway",
+      "title": "Dermatophytosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A superficial fungal infection of keratinised tissue named by body site: tinea corporis (body), cruris (groin), pedis (feet), capitis (scalp), unguium (nails), and faciei (face)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Kerion or severe inflammatory tinea capitis risking permanent scarring alopecia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin scrapings, hair, or nail clippings for direct microscopy with potassium hydroxide and fungal culture, Wood's lamp examination, which fluoresces in certain Microsporum scalp infections, Nail sampling for onychomycosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat localised skin infection with topical antifungals such as azoles or allylamines (terbinafine)"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating with topical corticosteroids and producing tinea incognito that obscures the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dermatophytosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dermatophytosis-matrix",
+      "title": "Dermatophytosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A superficial fungal infection of keratinised tissue named by body site: tinea corporis (body), cruris (groin), pedis (feet),",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin scrapings, hair, or nail clippings for direct microscopy with potassium hydroxide and fungal culture, Wood's lamp",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nummular (discoid) eczema, Psoriasis, Pityriasis rosea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat localised skin infection with topical antifungals such as azoles or allylamines (terbinafine)",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating with topical corticosteroids and producing tinea incognito that obscures the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dermatophytosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 52-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dermatophytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "KOH microscopy and fungal culture of scrapings, hair or nails",
+          "cells": [
+            {
+              "text": "Confirms dermatophyte infection before prolonged therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Fluorescence in certain Microsporum scalp infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail sampling before systemic therapy",
+          "cells": [
+            {
+              "text": "Onychomycosis confirmed before prolonged treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with fungal stains",
+          "cells": [
+            {
+              "text": "Diagnostically difficult cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for diabetes or immunosuppression",
+          "cells": [
+            {
+              "text": "Predisposing factors in extensive or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatophytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Granuloma annulare",
+          "cells": [
+            {
+              "text": "Annular, non-scaly lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrasma or candidal intertrigo",
+          "cells": [
+            {
+              "text": "Flexural disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatophytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical antifungals",
+          "cells": [
+            {
+              "text": "Azoles or allylamines such as terbinafine for localised skin infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic antifungals",
+          "cells": [
+            {
+              "text": "Oral terbinafine, itraconazole or griseofulvin for tinea capitis and onychomycosis; topicals cannot penetrate hair and nail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm before systemic therapy",
+          "cells": [
+            {
+              "text": "Microscopy and culture before prolonged courses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "General and household measures",
+          "cells": [
+            {
+              "text": "Keep skin dry, decontaminate footwear and fomites, treat household and animal contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory tinea capitis and kerion",
+          "cells": [
+            {
+              "text": "Prompt treatment to prevent scarring alopecia; sporicidal shampoo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predisposing factors",
+          "cells": [
+            {
+              "text": "Address diabetes or immunosuppression in extensive or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver monitoring",
+          "cells": [
+            {
+              "text": "During prolonged oral antifungal courses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatophytosis-ddx-2",
+      "kind": "ddx",
+      "title": "Common skin infections",
+      "rowHeader": "Infection",
+      "columns": [
+        "Clinical features",
+        "Etiologic agent",
+        "Treatment"
+      ],
+      "rows": [
+        {
+          "parameter": "Impetigo",
+          "cells": [
+            {
+              "text": "Honey-colored crusted papules, plaques or bullae"
+            },
+            {
+              "text": "Group A streptococcus and Staphylococcus aureus"
+            },
+            {
+              "text": "Systemic or topical antistaphylococcal antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatophytosis",
+          "cells": [
+            {
+              "text": "Inflammatory or noninflammatory annular scaly plaques; may have hair loss; groin involvement spares the scrotum; hyphae on KOH preparation"
+            },
+            {
+              "text": "Trichophyton, Epidermophyton or Microsporum sp."
+            },
+            {
+              "text": "Topical azoles, systemic griseofulvin, terbinafine, or azoles"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Candidiasis",
+          "cells": [
+            {
+              "text": "Inflammatory papules and plaques with satellite pustules, frequently in intertriginous areas; may involve the scrotum; pseudohyphae on KOH preparation"
+            },
+            {
+              "text": "Candida albicans and other Candida sp."
+            },
+            {
+              "text": "Topical nystatin or azoles; systemic azoles for resistant disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tinea versicolor",
+          "cells": [
+            {
+              "text": "Hyper- or hypopigmented scaly patches on the trunk; mixture of hyphae and spores (spaghetti and meatballs) on KOH preparation"
+            },
+            {
+              "text": "Malassezia furfur"
+            },
+            {
+              "text": "Topical selenium sulfide lotion or azoles"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dermatophytosis-dx-mgmt",
+      "title": "Diagnosis and management of Dermatophytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dermatophytosis: scaly fungal infection of skin, scalp or nails",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (kerion, scarring scalp disease, extensive spread, deep infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of kerion or inflammatory tinea capitis to prevent scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "KOH microscopy and fungal culture of scrapings, hair or nail; Wood's lamp",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a dermatophyte confirmed by microscopy and culture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider eczema, psoriasis, granuloma annulare, erythrasma or candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical azole or terbinafine for localised skin infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral terbinafine, itraconazole or griseofulvin for tinea capitis and onychomycosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sporicidal shampoo and prompt treatment of inflammatory tinea capitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Keep skin dry, decontaminate fomites and treat household and animal contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor liver function during prolonged oral antifungal courses",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent with correct diagnosis; nail infection needs prolonged treatment and relapses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

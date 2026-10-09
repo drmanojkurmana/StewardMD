@@ -1,176 +1,473 @@
 {
- "id": "ataxia_with_oculomotor_apraxia_type_2",
- "name": "Ataxia with Oculomotor Apraxia Type 2",
- "aliases": [
-  "AOA2",
-  "Spinocerebellar ataxia autosomal recessive 1",
-  "SCAR1"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary ataxia",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive ataxia caused by biallelic SETX mutations affecting senataxin, a DNA/RNA helicase involved in transcription termination, resolution of R-loops and DNA damage repair.",
-   "Onset is typically in adolescence or early adulthood, later than in AOA1, with progressive cerebellar ataxia and an axonal sensorimotor neuropathy.",
-   "A raised serum alpha-fetoprotein is a hallmark of AOA2 and the key biochemical discriminator from AOA1.",
-   "Oculomotor apraxia is present in only about half of patients and is less consistent than in AOA1; strabismus and gaze-evoked nystagmus are also seen.",
-   "Additional features include head and limb tremor, dystonia, chorea, pes cavus and sometimes mildly raised creatine kinase or hypercholesterolaemia.",
-   "SETX is allelic with an autosomal dominant juvenile motor neuron disorder (ALS4), so the same gene can produce distinct phenotypes depending on the variant and inheritance pattern.",
-   "Unlike ataxia-telangiectasia there is no telangiectasia, immunodeficiency, radiosensitivity or marked cancer predisposition.",
-   "Cerebellar and vermian atrophy is the usual imaging finding."
+  "id": "ataxia_with_oculomotor_apraxia_type_2",
+  "name": "Ataxia with Oculomotor Apraxia Type 2",
+  "aliases": [
+    "AOA2",
+    "Spinocerebellar ataxia autosomal recessive 1",
+    "SCAR1"
   ],
-  "pathophysiology": "AOA2 arises from loss-of-function variants in SETX, encoding senataxin, a large helicase that acts on both DNA and RNA. Senataxin promotes efficient transcription termination and resolves R-loops, the hybrid structures formed when nascent RNA re-anneals to template DNA, and it also participates in the response to oxidative DNA damage. When senataxin is deficient, unresolved R-loops and accumulating DNA lesions destabilise the genome of vulnerable post-mitotic neurons. The cerebellar Purkinje cells and the dorsal root ganglion neurons are preferentially affected, generating progressive cerebellar degeneration together with a dorsal root ganglionopathy and axonal sensorimotor neuropathy. The consistent elevation of alpha-fetoprotein, shared with several other DNA-repair ataxias, provides a reliable diagnostic marker although its mechanistic basis remains unclear.",
-  "additionalDifferentials": [
-   "Ataxia with oculomotor apraxia type 1 (APTX-related)",
-   "Ataxia-telangiectasia",
-   "Friedreich ataxia",
-   "Autosomal dominant juvenile motor neuron disease (allelic SETX / ALS4)",
-   "Autosomal recessive spastic ataxia of Charlevoix-Saguenay",
-   "SYNE1-related ataxia and other recessive cerebellar ataxias",
-   "Ataxia-telangiectasia-like disorder"
-  ],
-  "additionalInvestigations": [
-   "Serum alpha-fetoprotein",
-   "Nerve conduction studies demonstrating an axonal sensorimotor neuropathy",
-   "Brain MRI assessing cerebellar and vermian atrophy",
-   "Creatine kinase, lipid profile and immunoglobulins",
-   "SETX sequencing or a recessive ataxia gene panel",
-   "Clinical saccade assessment or oculography",
-   "Electromyography if motor neuron overlap is suspected"
-  ],
-  "redFlags": [
-   "Rapid progression or prominent lower motor neuron signs suggesting a motor-neuron-disease overlap",
-   "Bulbar dysfunction with aspiration risk",
-   "New respiratory compromise",
-   "Rapidly worsening ambulation out of keeping with the usually slow course"
-  ],
-  "prognosis": "AOA2 is slowly progressive, with most patients losing independent ambulation over one to two decades. Cognition and life expectancy are relatively preserved in the majority.",
-  "pitfalls": [
-   "Interpreting a raised alpha-fetoprotein as pointing only to ataxia-telangiectasia or to hepatic pathology, rather than to a recessive DNA-repair ataxia.",
-   "Expecting oculomotor apraxia in every case, when its absence does not exclude AOA2.",
-   "Overlooking the allelic relationship with dominant motor neuron disease when lower motor neuron features emerge.",
-   "Confusing AOA2 with AOA1 when alpha-fetoprotein is not measured."
-  ],
-  "references": [
-   "Neurogenetics reference texts",
-   "Hereditary ataxia consensus reviews",
-   "Clinical neurology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids as independent ambulation is lost over time",
-   "Management of the axonal sensorimotor neuropathy with orthoses and foot care, and symptomatic treatment of tremor, dystonia and chorea",
-   "Monitoring and treatment of the associated hypercholesterolaemia",
-   "Podiatric and orthopaedic care for pes cavus",
-   "Multidisciplinary neurology follow-up to track progressive cerebellar and neuropathic disability",
-   "Genetic counselling and family testing for this autosomal recessive SETX disorder, noting the same gene can cause dominant ALS4 with distinct variants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ataxia_with_oculomotor_apraxia_type_2-pathway",
-   "title": "Ataxia with Oculomotor Apraxia Type 2: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive ataxia caused by biallelic SETX mutations affecting senataxin, a DNA/RNA helicase involved in transcription termination, resolution of R-loops and DNA damage repair.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid progression or prominent lower motor neuron signs suggesting a motor-neuron-disease overlap",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum alpha-fetoprotein, Nerve conduction studies demonstrating an axonal sensorimotor neuropathy, Brain MRI assessing cerebellar and vermian atrophy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids as independent ambulation is lost over time"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting a raised alpha-fetoprotein as pointing only to ataxia-telangiectasia or to hepatic pathology, rather than to a recessive DNA-repair ataxia."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ataxia with oculomotor apraxia type 2."
-  }
- ],
- "tables": [
-  {
-   "id": "ataxia_with_oculomotor_apraxia_type_2-matrix",
-   "title": "Ataxia with Oculomotor Apraxia Type 2: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive ataxia caused by biallelic SETX mutations affecting senataxin, a DNA/RNA helicase involved in transcription",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary ataxia",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive ataxia caused by biallelic SETX mutations affecting senataxin, a DNA/RNA helicase involved in transcription termination, resolution of R-loops and DNA damage repair.",
+      "Onset is typically in adolescence or early adulthood, later than in AOA1, with progressive cerebellar ataxia and an axonal sensorimotor neuropathy.",
+      "A raised serum alpha-fetoprotein is a hallmark of AOA2 and the key biochemical discriminator from AOA1.",
+      "Oculomotor apraxia is present in only about half of patients and is less consistent than in AOA1; strabismus and gaze-evoked nystagmus are also seen.",
+      "Additional features include head and limb tremor, dystonia, chorea, pes cavus and sometimes mildly raised creatine kinase or hypercholesterolaemia.",
+      "SETX is allelic with an autosomal dominant juvenile motor neuron disorder (ALS4), so the same gene can produce distinct phenotypes depending on the variant and inheritance pattern.",
+      "Unlike ataxia-telangiectasia there is no telangiectasia, immunodeficiency, radiosensitivity or marked cancer predisposition.",
+      "Cerebellar and vermian atrophy is the usual imaging finding."
     ],
-    [
-     "Key Investigations",
-     "Serum alpha-fetoprotein, Nerve conduction studies demonstrating an axonal sensorimotor neuropathy, Brain MRI assessing cerebellar",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "AOA2 arises from loss-of-function variants in SETX, encoding senataxin, a large helicase that acts on both DNA and RNA. Senataxin promotes efficient transcription termination and resolves R-loops, the hybrid structures formed when nascent RNA re-anneals to template DNA, and it also participates in the response to oxidative DNA damage. When senataxin is deficient, unresolved R-loops and accumulating DNA lesions destabilise the genome of vulnerable post-mitotic neurons. The cerebellar Purkinje cells and the dorsal root ganglion neurons are preferentially affected, generating progressive cerebellar degeneration together with a dorsal root ganglionopathy and axonal sensorimotor neuropathy. The consistent elevation of alpha-fetoprotein, shared with several other DNA-repair ataxias, provides a reliable diagnostic marker although its mechanistic basis remains unclear.",
+    "additionalDifferentials": [
+      "Ataxia with oculomotor apraxia type 1 (APTX-related)",
+      "Ataxia-telangiectasia",
+      "Friedreich ataxia",
+      "Autosomal dominant juvenile motor neuron disease (allelic SETX / ALS4)",
+      "Autosomal recessive spastic ataxia of Charlevoix-Saguenay",
+      "SYNE1-related ataxia and other recessive cerebellar ataxias",
+      "Ataxia-telangiectasia-like disorder"
     ],
-    [
-     "Primary Differentials",
-     "Ataxia with oculomotor apraxia type 1 (APTX-related), Ataxia-telangiectasia, Friedreich ataxia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum alpha-fetoprotein",
+      "Nerve conduction studies demonstrating an axonal sensorimotor neuropathy",
+      "Brain MRI assessing cerebellar and vermian atrophy",
+      "Creatine kinase, lipid profile and immunoglobulins",
+      "SETX sequencing or a recessive ataxia gene panel",
+      "Clinical saccade assessment or oculography",
+      "Electromyography if motor neuron overlap is suspected"
     ],
-    [
-     "Management Strategy",
-     "Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids as independent",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid progression or prominent lower motor neuron signs suggesting a motor-neuron-disease overlap",
+      "Bulbar dysfunction with aspiration risk",
+      "New respiratory compromise",
+      "Rapidly worsening ambulation out of keeping with the usually slow course"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting a raised alpha-fetoprotein as pointing only to ataxia-telangiectasia or to hepatic pathology, rather than to a",
-     "Prevent diagnostic or management error"
+    "prognosis": "AOA2 is slowly progressive, with most patients losing independent ambulation over one to two decades. Cognition and life expectancy are relatively preserved in the majority.",
+    "pitfalls": [
+      "Interpreting a raised alpha-fetoprotein as pointing only to ataxia-telangiectasia or to hepatic pathology, rather than to a recessive DNA-repair ataxia.",
+      "Expecting oculomotor apraxia in every case, when its absence does not exclude AOA2.",
+      "Overlooking the allelic relationship with dominant motor neuron disease when lower motor neuron features emerge.",
+      "Confusing AOA2 with AOA1 when alpha-fetoprotein is not measured."
+    ],
+    "references": [
+      "Neurogenetics reference texts",
+      "Hereditary ataxia consensus reviews",
+      "Clinical neurology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids as independent ambulation is lost over time",
+      "Management of the axonal sensorimotor neuropathy with orthoses and foot care, and symptomatic treatment of tremor, dystonia and chorea",
+      "Monitoring and treatment of the associated hypercholesterolaemia",
+      "Podiatric and orthopaedic care for pes cavus",
+      "Multidisciplinary neurology follow-up to track progressive cerebellar and neuropathic disability",
+      "Genetic counselling and family testing for this autosomal recessive SETX disorder, noting the same gene can cause dominant ALS4 with distinct variants"
     ]
-   ],
-   "caption": "Overview comparison matrix for ataxia with oculomotor apraxia type 2."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ataxia-with-oculomotor-apraxia-type-2-real-image",
-   "title": "Ataxia with Oculomotor Apraxia Type 2: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "ataxia_with_oculomotor_apraxia_type_2-pathway",
+      "title": "Ataxia with Oculomotor Apraxia Type 2: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive ataxia caused by biallelic SETX mutations affecting senataxin, a DNA/RNA helicase involved in transcription termination, resolution of R-loops and DNA damage repair.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid progression or prominent lower motor neuron signs suggesting a motor-neuron-disease overlap",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum alpha-fetoprotein, Nerve conduction studies demonstrating an axonal sensorimotor neuropathy, Brain MRI assessing cerebellar and vermian atrophy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids as independent ambulation is lost over time"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting a raised alpha-fetoprotein as pointing only to ataxia-telangiectasia or to hepatic pathology, rather than to a recessive DNA-repair ataxia."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ataxia with oculomotor apraxia type 2."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ataxia_with_oculomotor_apraxia_type_2-matrix",
+      "title": "Ataxia with Oculomotor Apraxia Type 2: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive ataxia caused by biallelic SETX mutations affecting senataxin, a DNA/RNA helicase involved in transcription",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum alpha-fetoprotein, Nerve conduction studies demonstrating an axonal sensorimotor neuropathy, Brain MRI assessing cerebellar",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ataxia with oculomotor apraxia type 1 (APTX-related), Ataxia-telangiectasia, Friedreich ataxia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids as independent",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting a raised alpha-fetoprotein as pointing only to ataxia-telangiectasia or to hepatic pathology, rather than to a",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ataxia with oculomotor apraxia type 2."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ataxia_with_oculomotor_apraxia_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Raised AFP is not specific to ataxia-telangiectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Axonal sensorimotor neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar and vermian atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SETX sequencing or recessive ataxia gene panel",
+          "cells": [
+            {
+              "text": "SETX-related disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical saccade assessment or oculography",
+          "cells": [
+            {
+              "text": "Oculomotor apraxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "If motor neuron overlap is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ataxia_with_oculomotor_apraxia_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ataxia with oculomotor apraxia type 1",
+          "cells": [
+            {
+              "text": "Separated by APTX sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ataxia-telangiectasia",
+          "cells": [
+            {
+              "text": "Separated by SETX sequencing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ataxia_with_oculomotor_apraxia_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurorehabilitation and mobility aids",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy; mobility aids as independent ambulation is lost"
+            },
+            {
+              "text": "Progressive disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathy and movement symptoms",
+          "cells": [
+            {
+              "text": "Orthoses and foot care; symptomatic treatment of tremor, dystonia and chorea"
+            },
+            {
+              "text": "Axonal sensorimotor neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypercholesterolaemia",
+          "cells": [
+            {
+              "text": "Monitoring and treatment"
+            },
+            {
+              "text": "Associated feature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Podiatric and orthopaedic care",
+          "cells": [
+            {
+              "text": "Pes cavus"
+            },
+            {
+              "text": "Pes cavus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology follow-up",
+          "cells": [
+            {
+              "text": "Track progressive cerebellar and neuropathic disability"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family testing for the autosomal recessive SETX disorder"
+            },
+            {
+              "text": "The same gene can cause dominant ALS4 with distinct variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ataxia_with_oculomotor_apraxia_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Ataxia with Oculomotor Apraxia Type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive cerebellar ataxia with axonal sensorimotor neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Motor neuron overlap, rapid progression or bulbar dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess swallow and aspiration risk; neurology review for motor overlap",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AFP, nerve conduction, MRI, lipid profile, SETX sequencing, saccade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SETX variants confirmed with neuropathy and cerebellar atrophy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Neurorehabilitation and mobility support",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthoses and foot care for neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic treatment of tremor, dystonia and chorea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Podiatric and orthopaedic care for pes cavus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling; SETX variants can also cause dominant ALS4",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

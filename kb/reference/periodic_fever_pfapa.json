@@ -1,174 +1,452 @@
 {
- "id": "periodic_fever_pfapa",
- "name": "PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis)",
- "aliases": [
-  "PFAPA",
-  "Marshall syndrome",
-  "periodic fever syndrome"
- ],
- "class": "non_infective",
- "system": "Immunological",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common periodic fever syndrome of childhood, typically beginning before the age of five.",
-   "The defining feature is highly regular, recurrent episodes of fever occurring at strikingly predictable intervals, often every 3-6 weeks.",
-   "Episodes classically combine aphthous mouth ulcers, pharyngitis, and cervical lymphadenopathy, though not every feature is present each time.",
-   "A hallmark is that the child is entirely well, thriving, and asymptomatic between episodes with normal growth and development.",
-   "It is a clinical diagnosis of exclusion; recurrent streptococcal infection, cyclic neutropenia, and monogenic autoinflammatory disorders should be considered.",
-   "Fevers respond dramatically to a single dose of corticosteroid, which can be both therapeutic and supportive of the diagnosis, though steroids may shorten the interval between episodes.",
-   "Routine antibiotics are ineffective because the condition is inflammatory rather than infective.",
-   "The disorder is self-limiting, usually resolving spontaneously over several years without long-term sequelae; tonsillectomy is an option in selected cases."
+  "id": "periodic_fever_pfapa",
+  "name": "PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis)",
+  "aliases": [
+    "PFAPA",
+    "Marshall syndrome",
+    "periodic fever syndrome"
   ],
-  "pathophysiology": "PFAPA is regarded as an autoinflammatory disorder of innate immunity rather than an infection or classic autoimmune disease. During attacks there is dysregulated activation of the innate immune system with increased pro-inflammatory cytokine signalling (including interleukin-1 beta pathway activity), producing the stereotyped febrile episodes. Unlike the monogenic periodic fever syndromes, no single consistent genetic cause has been identified, and inflammation resolves completely between episodes.",
-  "additionalDifferentials": [
-   "Recurrent streptococcal pharyngitis or tonsillitis",
-   "Cyclic neutropenia",
-   "Familial Mediterranean fever and other monogenic autoinflammatory syndromes",
-   "Hyper-IgD syndrome (mevalonate kinase deficiency)",
-   "TNF-receptor associated periodic syndrome (TRAPS)",
-   "Recurrent viral infections in young children"
-  ],
-  "additionalInvestigations": [
-   "Documentation of the fever pattern with a symptom and temperature diary",
-   "Full blood count during and between episodes (to exclude cyclic neutropenia)",
-   "Inflammatory markers during an attack",
-   "Throat swab or streptococcal testing to exclude recurrent bacterial pharyngitis",
-   "Genetic testing for monogenic periodic fever syndromes when features are atypical",
-   "Immunoglobulin levels where an alternative autoinflammatory diagnosis is suspected"
-  ],
-  "redFlags": [
-   "Poor growth or failure to thrive, which is not expected in PFAPA",
-   "Persistent symptoms or inflammation between episodes",
-   "Irregular, unpredictable, or evolving fever patterns suggesting another diagnosis",
-   "Neutropenia coinciding with fevers (points to cyclic neutropenia)",
-   "Features suggesting a monogenic autoinflammatory disorder such as serositis, rash, or a strong family history"
-  ],
-  "prognosis": "Excellent; PFAPA is benign and self-limiting, typically resolving over several years with no lasting effect on growth, development, or long-term health, and it is not associated with amyloidosis or organ damage.",
-  "pitfalls": [
-   "Repeatedly treating episodes with antibiotics for presumed bacterial pharyngitis",
-   "Diagnosing PFAPA in a child who is unwell or failing to thrive between episodes",
-   "Overlooking cyclic neutropenia by not checking blood counts during febrile episodes",
-   "Assuming steroid responsiveness alone confirms the diagnosis without excluding mimics",
-   "Not recognising that corticosteroids may shorten the interval to the next attack"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Abort individual febrile attacks with a corticosteroid given at the onset of an episode, which is dramatically effective and supports the diagnosis",
-   "Provide symptomatic supportive care during attacks with antipyretics or analgesia, hydration and reassurance",
-   "Consider colchicine prophylaxis in children with frequent attacks or shortened intervals between episodes",
-   "Discuss tonsillectomy as a potentially curative option in selected children with frequent or troublesome episodes",
-   "Confirm the clinical diagnosis by excluding cyclic neutropenia, recurrent streptococcal infection and monogenic autoinflammatory syndromes before committing to therapy",
-   "Counsel families that the child thrives between episodes and that the condition is benign and self-limiting, resolving over several years without organ damage"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "periodic_fever_pfapa-pathway",
-   "title": "PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common periodic fever syndrome of childhood, typically beginning before the age of five.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Poor growth or failure to thrive, which is not expected in PFAPA",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Documentation of the fever pattern with a symptom and temperature diary, Full blood count during and between episodes (to exclude cyclic neutropenia), Inflammatory markers during an attack"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Abort individual febrile attacks with a corticosteroid given at the onset of an episode, which is dramatically effective and supports the diagnosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeatedly treating episodes with antibiotics for presumed bacterial pharyngitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pfapa syndrome (periodic fever, aphthous stomatitis, pharyngitis, adenitis)."
-  }
- ],
- "tables": [
-  {
-   "id": "periodic_fever_pfapa-matrix",
-   "title": "PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common periodic fever syndrome of childhood, typically beginning before the age of five.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunological",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common periodic fever syndrome of childhood, typically beginning before the age of five.",
+      "The defining feature is highly regular, recurrent episodes of fever occurring at strikingly predictable intervals, often every 3-6 weeks.",
+      "Episodes classically combine aphthous mouth ulcers, pharyngitis, and cervical lymphadenopathy, though not every feature is present each time.",
+      "A hallmark is that the child is entirely well, thriving, and asymptomatic between episodes with normal growth and development.",
+      "It is a clinical diagnosis of exclusion; recurrent streptococcal infection, cyclic neutropenia, and monogenic autoinflammatory disorders should be considered.",
+      "Fevers respond dramatically to a single dose of corticosteroid, which can be both therapeutic and supportive of the diagnosis, though steroids may shorten the interval between episodes.",
+      "Routine antibiotics are ineffective because the condition is inflammatory rather than infective.",
+      "The disorder is self-limiting, usually resolving spontaneously over several years without long-term sequelae; tonsillectomy is an option in selected cases."
     ],
-    [
-     "Key Investigations",
-     "Documentation of the fever pattern with a symptom and temperature diary, Full blood count during and between episodes (to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PFAPA is regarded as an autoinflammatory disorder of innate immunity rather than an infection or classic autoimmune disease. During attacks there is dysregulated activation of the innate immune system with increased pro-inflammatory cytokine signalling (including interleukin-1 beta pathway activity), producing the stereotyped febrile episodes. Unlike the monogenic periodic fever syndromes, no single consistent genetic cause has been identified, and inflammation resolves completely between episodes.",
+    "additionalDifferentials": [
+      "Recurrent streptococcal pharyngitis or tonsillitis",
+      "Cyclic neutropenia",
+      "Familial Mediterranean fever and other monogenic autoinflammatory syndromes",
+      "Hyper-IgD syndrome (mevalonate kinase deficiency)",
+      "TNF-receptor associated periodic syndrome (TRAPS)",
+      "Recurrent viral infections in young children"
     ],
-    [
-     "Primary Differentials",
-     "Recurrent streptococcal pharyngitis or tonsillitis, Cyclic neutropenia, Familial Mediterranean fever and other monogenic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Documentation of the fever pattern with a symptom and temperature diary",
+      "Full blood count during and between episodes (to exclude cyclic neutropenia)",
+      "Inflammatory markers during an attack",
+      "Throat swab or streptococcal testing to exclude recurrent bacterial pharyngitis",
+      "Genetic testing for monogenic periodic fever syndromes when features are atypical",
+      "Immunoglobulin levels where an alternative autoinflammatory diagnosis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Abort individual febrile attacks with a corticosteroid given at the onset of an episode, which is dramatically effective and",
-     "Core treatment modality"
+    "redFlags": [
+      "Poor growth or failure to thrive, which is not expected in PFAPA",
+      "Persistent symptoms or inflammation between episodes",
+      "Irregular, unpredictable, or evolving fever patterns suggesting another diagnosis",
+      "Neutropenia coinciding with fevers (points to cyclic neutropenia)",
+      "Features suggesting a monogenic autoinflammatory disorder such as serositis, rash, or a strong family history"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeatedly treating episodes with antibiotics for presumed bacterial pharyngitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent; PFAPA is benign and self-limiting, typically resolving over several years with no lasting effect on growth, development, or long-term health, and it is not associated with amyloidosis or organ damage.",
+    "pitfalls": [
+      "Repeatedly treating episodes with antibiotics for presumed bacterial pharyngitis",
+      "Diagnosing PFAPA in a child who is unwell or failing to thrive between episodes",
+      "Overlooking cyclic neutropenia by not checking blood counts during febrile episodes",
+      "Assuming steroid responsiveness alone confirms the diagnosis without excluding mimics",
+      "Not recognising that corticosteroids may shorten the interval to the next attack"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Abort individual febrile attacks with a corticosteroid given at the onset of an episode, which is dramatically effective and supports the diagnosis",
+      "Provide symptomatic supportive care during attacks with antipyretics or analgesia, hydration and reassurance",
+      "Consider colchicine prophylaxis in children with frequent attacks or shortened intervals between episodes",
+      "Discuss tonsillectomy as a potentially curative option in selected children with frequent or troublesome episodes",
+      "Confirm the clinical diagnosis by excluding cyclic neutropenia, recurrent streptococcal infection and monogenic autoinflammatory syndromes before committing to therapy",
+      "Counsel families that the child thrives between episodes and that the condition is benign and self-limiting, resolving over several years without organ damage"
     ]
-   ],
-   "caption": "Overview comparison matrix for pfapa syndrome (periodic fever, aphthous stomatitis, pharyngitis, adenitis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "periodic-fever-pfapa-real-image",
-   "title": "PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "periodic_fever_pfapa-pathway",
+      "title": "PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common periodic fever syndrome of childhood, typically beginning before the age of five.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Poor growth or failure to thrive, which is not expected in PFAPA",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Documentation of the fever pattern with a symptom and temperature diary, Full blood count during and between episodes (to exclude cyclic neutropenia), Inflammatory markers during an attack"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Abort individual febrile attacks with a corticosteroid given at the onset of an episode, which is dramatically effective and supports the diagnosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeatedly treating episodes with antibiotics for presumed bacterial pharyngitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pfapa syndrome (periodic fever, aphthous stomatitis, pharyngitis, adenitis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "periodic_fever_pfapa-matrix",
+      "title": "PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common periodic fever syndrome of childhood, typically beginning before the age of five.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Documentation of the fever pattern with a symptom and temperature diary, Full blood count during and between episodes (to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Recurrent streptococcal pharyngitis or tonsillitis, Cyclic neutropenia, Familial Mediterranean fever and other monogenic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Abort individual febrile attacks with a corticosteroid given at the onset of an episode, which is dramatically effective and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeatedly treating episodes with antibiotics for presumed bacterial pharyngitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pfapa syndrome (periodic fever, aphthous stomatitis, pharyngitis, adenitis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "periodic_fever_pfapa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom and temperature diary",
+          "cells": [
+            {
+              "text": "Fever pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count during and between episodes",
+          "cells": [
+            {
+              "text": "Excludes cyclic neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers during an attack",
+          "cells": [
+            {
+              "text": "Inflammation during an attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Throat swab or streptococcal testing",
+          "cells": [
+            {
+              "text": "Excludes recurrent bacterial pharyngitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for monogenic periodic fever syndromes",
+          "cells": [
+            {
+              "text": "Used when features are atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels",
+          "cells": [
+            {
+              "text": "Used where an alternative autoinflammatory diagnosis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periodic_fever_pfapa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cyclic neutropenia",
+          "cells": [
+            {
+              "text": "Neutropenia coinciding with fevers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monogenic autoinflammatory syndromes",
+          "cells": [
+            {
+              "text": "Serositis, rash or a strong family history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periodic_fever_pfapa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroid at onset of attack",
+          "cells": [
+            {
+              "text": "Aborts individual febrile attacks; dramatically effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics or analgesia, hydration and reassurance during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colchicine prophylaxis",
+          "cells": [
+            {
+              "text": "Children with frequent attacks or shortened intervals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tonsillectomy",
+          "cells": [
+            {
+              "text": "Potentially curative in selected children with frequent or troublesome episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm diagnosis",
+          "cells": [
+            {
+              "text": "Exclude cyclic neutropenia, recurrent streptococcal infection and monogenic syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family counselling",
+          "cells": [
+            {
+              "text": "Child thrives between episodes; benign and self-limiting, typically resolving over several years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "periodic_fever_pfapa-dx-mgmt",
+      "title": "Diagnosis and management of PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent fever episodes with aphthous stomatitis, pharyngitis or adenitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (poor growth, persistent inflammation, evolving fever, neutropenia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist review for suspected monogenic autoinflammatory disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fever diary; full blood count between episodes; inflammatory markers during an attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are cyclic neutropenia and recurrent streptococcal infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider monogenic autoinflammatory syndromes or recurrent streptococcal pharyngitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Abort individual attacks with a corticosteroid given at the onset of an episode",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Provide antipyretics or analgesia, hydration and reassurance during attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider colchicine prophylaxis for frequent attacks or short intervals",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Discuss tonsillectomy in selected children with frequent or troublesome episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; no lasting effect on growth or development",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

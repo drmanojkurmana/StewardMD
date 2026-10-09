@@ -1,176 +1,369 @@
 {
- "id": "runx1_familial_platelet_disorder",
- "name": "RUNX1 familial platelet disorder with myeloid malignancy",
- "aliases": [
-  "RUNX1",
-  "FPD/AML",
-  "familial platelet disorder with predisposition to acute myeloid leukaemia",
-  "AML1",
-  "CBFA2"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / Nathan and Oski",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant disorder caused by germline mutations in RUNX1, characterised by lifelong mild-to-moderate thrombocytopenia and a substantial lifetime risk of myeloid malignancy",
-   "Platelet counts are usually only modestly reduced, so the bleeding tendency is often disproportionate to the count because of an accompanying qualitative platelet defect",
-   "Platelet aggregation studies frequently show a dense-granule (delta storage pool) defect with impaired responses to collagen and adrenaline",
-   "A family history of unexplained thrombocytopenia, easy bruising, or leukaemia across generations should prompt consideration of a germline RUNX1 lesion",
-   "Reported lifetime risk of progression to myelodysplasia or acute myeloid leukaemia is high, commonly cited around a third to a half of carriers",
-   "Somatic second hits (for example a second RUNX1 allele, or acquired mutations in genes such as CDC25C, GATA2 or the acquisition of trisomy 21 in marrow) often accompany transformation",
-   "Diagnosis rests on germline genetic testing, ideally on non-haematopoietic tissue such as cultured skin fibroblasts to avoid contamination by clonal blood cells",
-   "Because the mutation is germ line, related potential stem-cell donors must be screened to avoid transplanting an affected graft"
+  "id": "runx1_familial_platelet_disorder",
+  "name": "RUNX1 familial platelet disorder with myeloid malignancy",
+  "aliases": [
+    "RUNX1",
+    "FPD/AML",
+    "familial platelet disorder with predisposition to acute myeloid leukaemia",
+    "AML1",
+    "CBFA2"
   ],
-  "pathophysiology": "RUNX1 encodes the alpha subunit of the core-binding factor transcription complex, a master regulator of definitive haematopoiesis and megakaryocyte maturation. Germline loss-of-function or dominant-negative mutations reduce functional RUNX1 dosage (haploinsufficiency) and disturb the transcriptional programme that drives platelet production and granule formation, producing both a low platelet count and defective platelet function. The impaired transcriptional network also destabilises the myeloid compartment, so affected stem cells are primed for clonal evolution; acquisition of additional somatic mutations over time drives progression to myelodysplasia and acute myeloid leukaemia.",
-  "additionalDifferentials": [
-   "ANKRD26-related thrombocytopenia",
-   "ETV6-related thrombocytopenia with leukaemia predisposition",
-   "Immune thrombocytopenia (acquired)",
-   "MYH9-related disorder and other inherited macrothrombocytopenias",
-   "GATA2 deficiency with myeloid predisposition",
-   "Storage pool disease and other qualitative platelet disorders"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with review of the peripheral blood film for platelet number and morphology",
-   "Platelet aggregometry and dense-granule (delta storage pool) assessment",
-   "Germline RUNX1 sequencing performed on cultured fibroblasts or another non-haematopoietic source",
-   "Bone marrow aspirate and trephine with cytogenetics for baseline and surveillance",
-   "Serial monitoring for acquired clonal mutations and karyotypic change",
-   "Screening of related potential haematopoietic stem-cell donors"
-  ],
-  "redFlags": [
-   "New or worsening cytopenias, monocytosis, or circulating blasts suggesting transformation to myelodysplasia or leukaemia",
-   "Emergence of a new clonal cytogenetic abnormality on marrow surveillance",
-   "Rapidly falling platelet count or unexplained systemic symptoms",
-   "Bleeding out of proportion to the platelet count indicating a significant qualitative defect"
-  ],
-  "prognosis": "The bleeding tendency is usually manageable, but the defining concern is the high lifetime risk of myelodysplasia and acute myeloid leukaemia; outcomes depend on early detection through surveillance and on timely allogeneic transplantation using a mutation-negative donor when transformation supervenes.",
-  "pitfalls": [
-   "Mislabelling the condition as chronic immune thrombocytopenia and exposing patients to unnecessary immunosuppression or splenectomy",
-   "Testing only blood-derived DNA, which can miss or misattribute the germline variant when a blood clone is present",
-   "Using an affected relative as a stem-cell donor because germline status was not checked",
-   "Underestimating bleeding risk by relying on the platelet count alone rather than assessing platelet function"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Managing the bleeding tendency with antifibrinolytics such as tranexamic acid and platelet transfusion for significant bleeding or surgery, while avoiding antiplatelet agents such as aspirin and NSAIDs",
-   "Considering desmopressin to improve platelet function around haemostatic challenges",
-   "Regular haematological surveillance with serial full blood counts and periodic bone marrow examination and cytogenetics to detect progression to myelodysplasia or acute myeloid leukaemia",
-   "Monitoring for acquired clonal mutations and karyotypic change that herald transformation",
-   "Allogeneic haematopoietic stem-cell transplantation when myelodysplasia or acute leukaemia supervenes",
-   "Screening related potential stem-cell donors to ensure a mutation-negative graft",
-   "Genetic counselling for autosomal dominant inheritance, with germline RUNX1 testing performed on a non-haematopoietic source such as cultured fibroblasts"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "runx1_familial_platelet_disorder-pathway",
-   "title": "RUNX1 familial platelet disorder with myeloid malignancy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant disorder caused by germline mutations in RUNX1, characterised by lifelong mild-to-moderate thrombocytopenia and a substantial lifetime risk of myeloid malignancy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or worsening cytopenias, monocytosis, or circulating blasts suggesting transformation to myelodysplasia or leukaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with review of the peripheral blood film for platelet number and morphology, Platelet aggregometry and dense-granule (delta storage pool) assessment, Germline RUNX1 sequencing performed on cultured"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Managing the bleeding tendency with antifibrinolytics such as tranexamic acid and platelet transfusion for significant bleeding or surgery, while avoiding antiplatelet agents such as aspirin and NSAIDs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the condition as chronic immune thrombocytopenia and exposing patients to unnecessary immunosuppression or splenectomy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of runx1 familial platelet disorder with myeloid malignancy."
-  }
- ],
- "tables": [
-  {
-   "id": "runx1_familial_platelet_disorder-matrix",
-   "title": "RUNX1 familial platelet disorder with myeloid malignancy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant disorder caused by germline mutations in RUNX1, characterised by lifelong mild-to-moderate thrombocytopenia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / Nathan and Oski",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant disorder caused by germline mutations in RUNX1, characterised by lifelong mild-to-moderate thrombocytopenia and a substantial lifetime risk of myeloid malignancy",
+      "Platelet counts are usually only modestly reduced, so the bleeding tendency is often disproportionate to the count because of an accompanying qualitative platelet defect",
+      "Platelet aggregation studies frequently show a dense-granule (delta storage pool) defect with impaired responses to collagen and adrenaline",
+      "A family history of unexplained thrombocytopenia, easy bruising, or leukaemia across generations should prompt consideration of a germline RUNX1 lesion",
+      "Reported lifetime risk of progression to myelodysplasia or acute myeloid leukaemia is high, commonly cited around a third to a half of carriers",
+      "Somatic second hits (for example a second RUNX1 allele, or acquired mutations in genes such as CDC25C, GATA2 or the acquisition of trisomy 21 in marrow) often accompany transformation",
+      "Diagnosis rests on germline genetic testing, ideally on non-haematopoietic tissue such as cultured skin fibroblasts to avoid contamination by clonal blood cells",
+      "Because the mutation is germ line, related potential stem-cell donors must be screened to avoid transplanting an affected graft"
     ],
-    [
-     "Key Investigations",
-     "Full blood count with review of the peripheral blood film for platelet number and morphology, Platelet aggregometry and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "RUNX1 encodes the alpha subunit of the core-binding factor transcription complex, a master regulator of definitive haematopoiesis and megakaryocyte maturation. Germline loss-of-function or dominant-negative mutations reduce functional RUNX1 dosage (haploinsufficiency) and disturb the transcriptional programme that drives platelet production and granule formation, producing both a low platelet count and defective platelet function. The impaired transcriptional network also destabilises the myeloid compartment, so affected stem cells are primed for clonal evolution; acquisition of additional somatic mutations over time drives progression to myelodysplasia and acute myeloid leukaemia.",
+    "additionalDifferentials": [
+      "ANKRD26-related thrombocytopenia",
+      "ETV6-related thrombocytopenia with leukaemia predisposition",
+      "Immune thrombocytopenia (acquired)",
+      "MYH9-related disorder and other inherited macrothrombocytopenias",
+      "GATA2 deficiency with myeloid predisposition",
+      "Storage pool disease and other qualitative platelet disorders"
     ],
-    [
-     "Primary Differentials",
-     "ANKRD26-related thrombocytopenia, ETV6-related thrombocytopenia with leukaemia predisposition, Immune thrombocytopenia (acquired)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with review of the peripheral blood film for platelet number and morphology",
+      "Platelet aggregometry and dense-granule (delta storage pool) assessment",
+      "Germline RUNX1 sequencing performed on cultured fibroblasts or another non-haematopoietic source",
+      "Bone marrow aspirate and trephine with cytogenetics for baseline and surveillance",
+      "Serial monitoring for acquired clonal mutations and karyotypic change",
+      "Screening of related potential haematopoietic stem-cell donors"
     ],
-    [
-     "Management Strategy",
-     "Managing the bleeding tendency with antifibrinolytics such as tranexamic acid and platelet transfusion for significant bleeding",
-     "Core treatment modality"
+    "redFlags": [
+      "New or worsening cytopenias, monocytosis, or circulating blasts suggesting transformation to myelodysplasia or leukaemia",
+      "Emergence of a new clonal cytogenetic abnormality on marrow surveillance",
+      "Rapidly falling platelet count or unexplained systemic symptoms",
+      "Bleeding out of proportion to the platelet count indicating a significant qualitative defect"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the condition as chronic immune thrombocytopenia and exposing patients to unnecessary immunosuppression or",
-     "Prevent diagnostic or management error"
+    "prognosis": "The bleeding tendency is usually manageable, but the defining concern is the high lifetime risk of myelodysplasia and acute myeloid leukaemia; outcomes depend on early detection through surveillance and on timely allogeneic transplantation using a mutation-negative donor when transformation supervenes.",
+    "pitfalls": [
+      "Mislabelling the condition as chronic immune thrombocytopenia and exposing patients to unnecessary immunosuppression or splenectomy",
+      "Testing only blood-derived DNA, which can miss or misattribute the germline variant when a blood clone is present",
+      "Using an affected relative as a stem-cell donor because germline status was not checked",
+      "Underestimating bleeding risk by relying on the platelet count alone rather than assessing platelet function"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Managing the bleeding tendency with antifibrinolytics such as tranexamic acid and platelet transfusion for significant bleeding or surgery, while avoiding antiplatelet agents such as aspirin and NSAIDs",
+      "Considering desmopressin to improve platelet function around haemostatic challenges",
+      "Regular haematological surveillance with serial full blood counts and periodic bone marrow examination and cytogenetics to detect progression to myelodysplasia or acute myeloid leukaemia",
+      "Monitoring for acquired clonal mutations and karyotypic change that herald transformation",
+      "Allogeneic haematopoietic stem-cell transplantation when myelodysplasia or acute leukaemia supervenes",
+      "Screening related potential stem-cell donors to ensure a mutation-negative graft",
+      "Genetic counselling for autosomal dominant inheritance, with germline RUNX1 testing performed on a non-haematopoietic source such as cultured fibroblasts"
     ]
-   ],
-   "caption": "Overview comparison matrix for runx1 familial platelet disorder with myeloid malignancy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "runx1-familial-platelet-disorder-real-image",
-   "title": "RUNX1 familial platelet disorder with myeloid malignancy: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "runx1_familial_platelet_disorder-pathway",
+      "title": "RUNX1 familial platelet disorder with myeloid malignancy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant disorder caused by germline mutations in RUNX1, characterised by lifelong mild-to-moderate thrombocytopenia and a substantial lifetime risk of myeloid malignancy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or worsening cytopenias, monocytosis, or circulating blasts suggesting transformation to myelodysplasia or leukaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with review of the peripheral blood film for platelet number and morphology, Platelet aggregometry and dense-granule (delta storage pool) assessment, Germline RUNX1 sequencing performed on cultured"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Managing the bleeding tendency with antifibrinolytics such as tranexamic acid and platelet transfusion for significant bleeding or surgery, while avoiding antiplatelet agents such as aspirin and NSAIDs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the condition as chronic immune thrombocytopenia and exposing patients to unnecessary immunosuppression or splenectomy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of runx1 familial platelet disorder with myeloid malignancy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "runx1_familial_platelet_disorder-matrix",
+      "title": "RUNX1 familial platelet disorder with myeloid malignancy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant disorder caused by germline mutations in RUNX1, characterised by lifelong mild-to-moderate thrombocytopenia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with review of the peripheral blood film for platelet number and morphology, Platelet aggregometry and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "ANKRD26-related thrombocytopenia, ETV6-related thrombocytopenia with leukaemia predisposition, Immune thrombocytopenia (acquired)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Managing the bleeding tendency with antifibrinolytics such as tranexamic acid and platelet transfusion for significant bleeding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the condition as chronic immune thrombocytopenia and exposing patients to unnecessary immunosuppression or",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for runx1 familial platelet disorder with myeloid malignancy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "runx1_familial_platelet_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and peripheral film",
+          "cells": [
+            {
+              "text": "Platelet number and morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregometry and dense-granule assessment",
+          "cells": [
+            {
+              "text": "Delta storage pool defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline RUNX1 sequencing on non-haematopoietic cells",
+          "cells": [
+            {
+              "text": "Confirms the germline variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "runx1_familial_platelet_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tranexamic acid and platelet transfusion",
+          "cells": [
+            {
+              "text": "Significant bleeding or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aspirin and NSAIDs",
+          "cells": [
+            {
+              "text": "Antiplatelet agents worsen the bleeding tendency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Considered around haemostatic challenges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial full blood counts, marrow and cytogenetics",
+          "cells": [
+            {
+              "text": "Detects progression to myelodysplasia or acute myeloid leukaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "runx1_familial_platelet_disorder-dx-mgmt",
+      "title": "Diagnosis and management of RUNX1 familial platelet disorder with myeloid malignancy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Inherited thrombocytopenia with bleeding and a family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new cytopenia, circulating blasts, new clonal abnormality)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for suspected myelodysplasia or leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full blood count and film, platelet aggregometry, germline RUNX1 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a germline RUNX1 variant found on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ANKRD26, ETV6, MYH9-related disorder or immune thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tranexamic acid and platelet transfusion for significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid aspirin and NSAIDs; consider desmopressin before procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial full blood counts with periodic marrow and cytogenetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Monitor for progression to myelodysplasia or acute myeloid leukaemia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

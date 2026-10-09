@@ -1,175 +1,472 @@
 {
- "id": "ataxic_hemiparesis",
- "name": "Ataxic hemiparesis",
- "aliases": [
-  "homolateral ataxia and crural paresis",
-  "ataxic hemiparesis lacunar syndrome",
-  "ipsilateral ataxia and leg paresis"
- ],
- "class": "non_infective",
- "system": "Nervous system / Cerebrovascular",
- "specialty": "Neurology / Stroke",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A lacunar syndrome combining pyramidal weakness with cerebellar-type incoordination on the same side of the body",
-   "The ataxia is disproportionate to the degree of weakness and affects the same limbs, often with the leg more involved than the arm",
-   "Classic lesion sites are the basis pontis, the internal capsule, and the corona radiata",
-   "It is thought to arise from interruption of corticopontocerebellar fibres together with corticospinal fibres in a single small infarct",
-   "There is no sensory loss, hemianopia, or cortical dysfunction, in keeping with a lacunar mechanism",
-   "It shares the small-vessel risk factor profile of chronic hypertension and diabetes",
-   "The combination of weakness and incoordination can make the deficit appear more disabling than either alone"
+  "id": "ataxic_hemiparesis",
+  "name": "Ataxic hemiparesis",
+  "aliases": [
+    "homolateral ataxia and crural paresis",
+    "ataxic hemiparesis lacunar syndrome",
+    "ipsilateral ataxia and leg paresis"
   ],
-  "pathophysiology": "Ataxic hemiparesis is a lacunar syndrome produced by a small deep infarct, usually from small-vessel occlusion in the setting of hypertension and diabetes. The lesion, most often in the basis pontis or the posterior limb of the internal capsule and corona radiata, simultaneously interrupts descending corticospinal fibres, causing ipsilateral limb weakness, and corticopontocerebellar or cerebellar outflow fibres, causing ipsilateral incoordination. Because a single strategically placed lacune disrupts both motor and cerebellar-relay pathways, the patient shows weakness combined with ataxia disproportionate to that weakness, without sensory, visual, or cortical involvement.",
-  "additionalDifferentials": [
-   "Pure motor lacunar syndrome",
-   "Dysarthria-clumsy hand syndrome",
-   "Cerebellar infarction with limb ataxia",
-   "Brainstem infarct producing crossed signs",
-   "Demyelinating lesion of the pons or internal capsule",
-   "Space-occupying lesion affecting motor and cerebellar pathways"
-  ],
-  "additionalInvestigations": [
-   "Diffusion-weighted MRI to identify a small pontine or capsular infarct",
-   "Assessment of vascular risk factors including blood pressure, glucose, and lipids",
-   "MR or CT angiography and carotid imaging to exclude large-vessel disease",
-   "ECG and cardiac evaluation to screen for an embolic source",
-   "Metabolic screen to exclude non-vascular causes of ataxia and weakness",
-   "Repeat imaging where the initial scan is unrevealing but signs persist"
-  ],
-  "redFlags": [
-   "Progressive or fluctuating deficit suggesting an evolving infarct",
-   "Any cortical sign indicating a non-lacunar mechanism",
-   "Headache or reduced consciousness raising the possibility of haemorrhage",
-   "Bilateral or brainstem signs implying a larger posterior circulation event"
-  ],
-  "prognosis": "Recovery is often good for a single lacune, with improvement in both weakness and coordination over weeks, though recurrent small-vessel events can cause cumulative gait and cognitive decline.",
-  "pitfalls": [
-   "Mistaking the disproportionate ataxia for a primary cerebellar stroke",
-   "Assuming a lacunar cause without excluding large-vessel or cardioembolic sources",
-   "Overlooking subtle cortical signs that would reclassify the syndrome",
-   "Relying on early CT, which may not reveal a small acute lacune"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [
-   "pure_motor_lacunar_syndrome",
-   "dysarthria_clumsy_hand_syndrome"
-  ],
-  "management": [
-   "Acute stroke care with intravenous thrombolysis if the patient presents within the treatment window and there is no contraindication, delivered in a stroke unit",
-   "Antiplatelet therapy with aspirin, and a short course of dual antiplatelet therapy in eligible minor stroke, for secondary prevention",
-   "Aggressive small-vessel risk-factor control with antihypertensive therapy, a high-intensity statin and optimisation of diabetic glycaemic control",
-   "Early neurorehabilitation with physiotherapy and occupational therapy targeting the combined weakness and incoordination",
-   "Lifestyle modification including smoking cessation, with screening to exclude a cardioembolic or large-vessel source",
-   "Monitoring for recurrent lacunar events and cumulative vascular cognitive impairment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ataxic_hemiparesis-pathway",
-   "title": "Ataxic hemiparesis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A lacunar syndrome combining pyramidal weakness with cerebellar-type incoordination on the same side of the body",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive or fluctuating deficit suggesting an evolving infarct",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diffusion-weighted MRI to identify a small pontine or capsular infarct, Assessment of vascular risk factors including blood pressure, glucose, and lipids, MR or CT angiography and carotid imaging to exclude large-vessel"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Acute stroke care with intravenous thrombolysis if the patient presents within the treatment window and there is no contraindication, delivered in a stroke unit"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the disproportionate ataxia for a primary cerebellar stroke"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ataxic hemiparesis."
-  }
- ],
- "tables": [
-  {
-   "id": "ataxic_hemiparesis-matrix",
-   "title": "Ataxic hemiparesis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A lacunar syndrome combining pyramidal weakness with cerebellar-type incoordination on the same side of the body",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Cerebrovascular",
+  "specialty": "Neurology / Stroke",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A lacunar syndrome combining pyramidal weakness with cerebellar-type incoordination on the same side of the body",
+      "The ataxia is disproportionate to the degree of weakness and affects the same limbs, often with the leg more involved than the arm",
+      "Classic lesion sites are the basis pontis, the internal capsule, and the corona radiata",
+      "It is thought to arise from interruption of corticopontocerebellar fibres together with corticospinal fibres in a single small infarct",
+      "There is no sensory loss, hemianopia, or cortical dysfunction, in keeping with a lacunar mechanism",
+      "It shares the small-vessel risk factor profile of chronic hypertension and diabetes",
+      "The combination of weakness and incoordination can make the deficit appear more disabling than either alone"
     ],
-    [
-     "Key Investigations",
-     "Diffusion-weighted MRI to identify a small pontine or capsular infarct, Assessment of vascular risk factors including blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ataxic hemiparesis is a lacunar syndrome produced by a small deep infarct, usually from small-vessel occlusion in the setting of hypertension and diabetes. The lesion, most often in the basis pontis or the posterior limb of the internal capsule and corona radiata, simultaneously interrupts descending corticospinal fibres, causing ipsilateral limb weakness, and corticopontocerebellar or cerebellar outflow fibres, causing ipsilateral incoordination. Because a single strategically placed lacune disrupts both motor and cerebellar-relay pathways, the patient shows weakness combined with ataxia disproportionate to that weakness, without sensory, visual, or cortical involvement.",
+    "additionalDifferentials": [
+      "Pure motor lacunar syndrome",
+      "Dysarthria-clumsy hand syndrome",
+      "Cerebellar infarction with limb ataxia",
+      "Brainstem infarct producing crossed signs",
+      "Demyelinating lesion of the pons or internal capsule",
+      "Space-occupying lesion affecting motor and cerebellar pathways"
     ],
-    [
-     "Primary Differentials",
-     "Pure motor lacunar syndrome, Dysarthria-clumsy hand syndrome, Cerebellar infarction with limb ataxia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diffusion-weighted MRI to identify a small pontine or capsular infarct",
+      "Assessment of vascular risk factors including blood pressure, glucose, and lipids",
+      "MR or CT angiography and carotid imaging to exclude large-vessel disease",
+      "ECG and cardiac evaluation to screen for an embolic source",
+      "Metabolic screen to exclude non-vascular causes of ataxia and weakness",
+      "Repeat imaging where the initial scan is unrevealing but signs persist"
     ],
-    [
-     "Management Strategy",
-     "Acute stroke care with intravenous thrombolysis if the patient presents within the treatment window and there is no",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive or fluctuating deficit suggesting an evolving infarct",
+      "Any cortical sign indicating a non-lacunar mechanism",
+      "Headache or reduced consciousness raising the possibility of haemorrhage",
+      "Bilateral or brainstem signs implying a larger posterior circulation event"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the disproportionate ataxia for a primary cerebellar stroke",
-     "Prevent diagnostic or management error"
+    "prognosis": "Recovery is often good for a single lacune, with improvement in both weakness and coordination over weeks, though recurrent small-vessel events can cause cumulative gait and cognitive decline.",
+    "pitfalls": [
+      "Mistaking the disproportionate ataxia for a primary cerebellar stroke",
+      "Assuming a lacunar cause without excluding large-vessel or cardioembolic sources",
+      "Overlooking subtle cortical signs that would reclassify the syndrome",
+      "Relying on early CT, which may not reveal a small acute lacune"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [
+      "pure_motor_lacunar_syndrome",
+      "dysarthria_clumsy_hand_syndrome"
+    ],
+    "management": [
+      "Acute stroke care with intravenous thrombolysis if the patient presents within the treatment window and there is no contraindication, delivered in a stroke unit",
+      "Antiplatelet therapy with aspirin, and a short course of dual antiplatelet therapy in eligible minor stroke, for secondary prevention",
+      "Aggressive small-vessel risk-factor control with antihypertensive therapy, a high-intensity statin and optimisation of diabetic glycaemic control",
+      "Early neurorehabilitation with physiotherapy and occupational therapy targeting the combined weakness and incoordination",
+      "Lifestyle modification including smoking cessation, with screening to exclude a cardioembolic or large-vessel source",
+      "Monitoring for recurrent lacunar events and cumulative vascular cognitive impairment"
     ]
-   ],
-   "caption": "Overview comparison matrix for ataxic hemiparesis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ataxic-hemiparesis-real-image",
-   "title": "Ataxic hemiparesis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "ataxic_hemiparesis-pathway",
+      "title": "Ataxic hemiparesis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A lacunar syndrome combining pyramidal weakness with cerebellar-type incoordination on the same side of the body",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive or fluctuating deficit suggesting an evolving infarct",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diffusion-weighted MRI to identify a small pontine or capsular infarct, Assessment of vascular risk factors including blood pressure, glucose, and lipids, MR or CT angiography and carotid imaging to exclude large-vessel"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Acute stroke care with intravenous thrombolysis if the patient presents within the treatment window and there is no contraindication, delivered in a stroke unit"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the disproportionate ataxia for a primary cerebellar stroke"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ataxic hemiparesis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ataxic_hemiparesis-matrix",
+      "title": "Ataxic hemiparesis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A lacunar syndrome combining pyramidal weakness with cerebellar-type incoordination on the same side of the body",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diffusion-weighted MRI to identify a small pontine or capsular infarct, Assessment of vascular risk factors including blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pure motor lacunar syndrome, Dysarthria-clumsy hand syndrome, Cerebellar infarction with limb ataxia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Acute stroke care with intravenous thrombolysis if the patient presents within the treatment window and there is no",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the disproportionate ataxia for a primary cerebellar stroke",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ataxic hemiparesis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ataxic_hemiparesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted MRI",
+          "cells": [
+            {
+              "text": "Small pontine or capsular infarct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of vascular risk factors",
+          "cells": [
+            {
+              "text": "Blood pressure, glucose and lipids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography and carotid imaging",
+          "cells": [
+            {
+              "text": "Excludes large-vessel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes non-vascular causes of ataxia and weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat imaging",
+          "cells": [
+            {
+              "text": "Where the initial scan is unrevealing but signs persist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ataxic_hemiparesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebellar infarction with limb ataxia",
+          "cells": [
+            {
+              "text": "Disproportionate ataxia must not be taken as a primary cerebellar stroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brainstem infarct producing crossed sign",
+          "cells": [
+            {
+              "text": "Crossed signs point to a brainstem lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ataxic_hemiparesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute stroke care",
+          "cells": [
+            {
+              "text": "Intravenous thrombolysis within the window if no contraindication"
+            },
+            {
+              "text": "Delivered in the stroke pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Aspirin; short dual antiplatelet course in eligible minor stroke"
+            },
+            {
+              "text": "Secondary prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-vessel risk control",
+          "cells": [
+            {
+              "text": "Antihypertensives, high-intensity statin and glycaemic control"
+            },
+            {
+              "text": "Aggressive control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy for weakness and incoordination"
+            },
+            {
+              "text": "Combined weakness and incoordination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle and source screening",
+          "cells": [
+            {
+              "text": "Smoking cessation; screen for cardioembolic or large-vessel source"
+            },
+            {
+              "text": "Source exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Recurrent lacunar events and cumulative vascular cognitive impairment"
+            },
+            {
+              "text": "Ongoing surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ataxic_hemiparesis-dx-mgmt",
+      "title": "Diagnosis and management of Ataxic hemiparesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hemiparesis with ataxia from a small pontine or capsular lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Progressive deficit, cortical signs or reduced consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke assessment and thrombolysis if within window",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DWI MRI, vascular risk factors, MR or CT angiography, ECG, metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Small pontine or capsular infarct on DWI MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antiplatelet therapy and small-vessel risk-factor control",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensive statin and blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early neurorehabilitation for weakness and incoordination",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for cardioembolic or large-vessel source",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor recurrent lacunar events and vascular cognitive impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

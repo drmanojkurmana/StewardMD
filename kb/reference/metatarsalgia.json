@@ -1,178 +1,483 @@
 {
- "id": "metatarsalgia",
- "name": "Metatarsalgia",
- "aliases": [
-  "forefoot pain",
-  "metatarsal head pain",
-  "forefoot overload"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Foot & Ankle",
- "specialty": "Orthopaedics / Podiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Mann's Surgery of the Foot and Ankle",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Metatarsalgia is a symptom of pain under the metatarsal heads from forefoot overload rather than a single diagnosis, so the underlying cause must be sought",
-   "Pain is typically felt on the plantar aspect of the forefoot, worse on weight bearing and in hard or high-heeled shoes, and often accompanied by plantar callosities under the affected heads",
-   "Mechanical contributors include a tight gastrocnemius, cavus or splayed forefoot, hallux disorders that transfer load laterally, and lesser-toe deformities that plantarflex the metatarsal heads",
-   "Transfer metatarsalgia describes overload of neighbouring metatarsals when one ray is short, elevated, or has been altered by hallux surgery",
-   "Distinguish diffuse mechanical metatarsalgia from focal causes such as interdigital neuroma, plantar plate tear, Freiberg's infraction, stress fracture, and sesamoid pathology",
-   "Careful palpation localises tenderness to the metatarsal head, the intermetatarsal space, or the metatarsophalangeal joint, guiding the differential",
-   "Weight-bearing radiographs assess metatarsal length and alignment, while ultrasound or MRI evaluates soft-tissue and bony causes",
-   "Management is directed at the cause and includes metatarsal offloading orthoses and bars, cushioned footwear, calf stretching, activity modification, and correction of contributing deformity"
+  "id": "metatarsalgia",
+  "name": "Metatarsalgia",
+  "aliases": [
+    "forefoot pain",
+    "metatarsal head pain",
+    "forefoot overload"
   ],
-  "pathophysiology": "Metatarsalgia arises when load beneath the lesser metatarsal heads exceeds what the forefoot soft tissues can tolerate, causing pain, inflammation, and protective callosity. Normal forefoot loading depends on even metatarsal length and alignment, a mobile first ray that shares weight, an adequate plantar fat pad, and balanced toe function. Disturbance of any of these concentrates pressure: a tight gastrocnemius increases forefoot load throughout stance, hallux valgus or hallux rigidus shifts weight laterally, lesser-toe clawing or hammering plantarflexes the metatarsal heads, and a long or plantarflexed metatarsal bears excess load. Distal migration or atrophy of the protective plantar fat pad, common with age, removes cushioning. When one ray is shortened, elevated, or surgically altered, adjacent rays absorb the redistributed force, producing transfer metatarsalgia. The result is localised or diffuse plantar forefoot pain that reflects the specific mechanical derangement.",
-  "additionalDifferentials": [
-   "Interdigital (Morton's) neuroma",
-   "Plantar plate tear or metatarsophalangeal joint instability",
-   "Freiberg's infraction of a metatarsal head",
-   "Metatarsal stress fracture",
-   "Sesamoiditis and other sesamoid disorders",
-   "Inflammatory arthritis of the metatarsophalangeal joints",
-   "Plantar fibroma or other soft-tissue mass"
-  ],
-  "additionalInvestigations": [
-   "Standing clinical examination with palpation of metatarsal heads, intermetatarsal spaces, and joints",
-   "Assessment of gastrocnemius tightness, forefoot alignment, and associated hallux and lesser-toe deformity",
-   "Weight-bearing foot radiographs to assess metatarsal length, alignment, and joint change",
-   "Ultrasound to evaluate for interdigital neuroma or plantar plate pathology",
-   "MRI where stress fracture, Freiberg's infraction, or occult soft-tissue lesion is suspected",
-   "Pedobarography to map the distribution of forefoot loading",
-   "Inflammatory markers and serology if inflammatory arthropathy is considered"
-  ],
-  "redFlags": [
-   "Focal bony tenderness and swelling suggesting a metatarsal stress fracture, particularly with a change in activity",
-   "Rest or night pain, or a destructive lesion on imaging, suggesting infection or tumour",
-   "Systemic or polyarticular features indicating inflammatory arthritis",
-   "Plantar ulceration or sensory loss in a neuropathic or diabetic foot",
-   "Progressive lesser-toe deformity with instability indicating an evolving plantar plate tear"
-  ],
-  "prognosis": "Most mechanical metatarsalgia responds well to identifying and correcting the underlying cause with footwear, orthoses, calf stretching, and activity modification. Outcomes are good when contributing deformity is addressed, whereas symptoms persist or recur if the mechanical driver, such as a tight gastrocnemius or uncorrected toe deformity, is overlooked. Focal causes have their own prognosis and may require targeted intervention.",
-  "pitfalls": [
-   "Treating metatarsalgia as a diagnosis rather than identifying the specific underlying cause",
-   "Missing a focal cause such as stress fracture, neuroma, or plantar plate tear behind diffuse forefoot pain",
-   "Overlooking a tight gastrocnemius that maintains forefoot overload",
-   "Failing to recognise transfer metatarsalgia following hallux surgery or with a short or elevated ray",
-   "Neglecting fat pad atrophy and footwear factors in older patients"
-  ],
-  "references": [
-   "Mann's Surgery of the Foot and Ankle",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and correct the underlying mechanical driver rather than treating pain alone, as metatarsalgia is a symptom of forefoot overload",
-   "Modify footwear to cushioned, wide, low-heeled shoes with a stiff or rocker sole to reduce forefoot pressure",
-   "Prescribe orthoses with metatarsal pads, domes, or bars and custom insoles to offload the affected metatarsal heads",
-   "Advise gastrocnemius and calf stretching, activity modification, weight optimisation, and callus care",
-   "Target specific focal causes appropriately, such as interdigital neuroma, plantar plate tear, Freiberg's infraction, or stress fracture",
-   "Consider corrective surgery such as metatarsal osteotomy or correction of hallux and lesser-toe deformity for refractory structural cases",
-   "Refer to podiatry or orthopaedics when symptoms persist despite conservative measures"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "metatarsalgia-pathway",
-   "title": "Metatarsalgia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Metatarsalgia is a symptom of pain under the metatarsal heads from forefoot overload rather than a single diagnosis, so the underlying cause must be sought",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Focal bony tenderness and swelling suggesting a metatarsal stress fracture, particularly with a change in activity",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Standing clinical examination with palpation of metatarsal heads, intermetatarsal spaces, and joints, Assessment of gastrocnemius tightness, forefoot alignment, and associated hallux and lesser-toe deformity,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and correct the underlying mechanical driver rather than treating pain alone, as metatarsalgia is a symptom of forefoot overload"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating metatarsalgia as a diagnosis rather than identifying the specific underlying cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of metatarsalgia."
-  }
- ],
- "tables": [
-  {
-   "id": "metatarsalgia-matrix",
-   "title": "Metatarsalgia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Metatarsalgia is a symptom of pain under the metatarsal heads from forefoot overload rather than a single diagnosis, so the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Foot & Ankle",
+  "specialty": "Orthopaedics / Podiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mann's Surgery of the Foot and Ankle",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Metatarsalgia is a symptom of pain under the metatarsal heads from forefoot overload rather than a single diagnosis, so the underlying cause must be sought",
+      "Pain is typically felt on the plantar aspect of the forefoot, worse on weight bearing and in hard or high-heeled shoes, and often accompanied by plantar callosities under the affected heads",
+      "Mechanical contributors include a tight gastrocnemius, cavus or splayed forefoot, hallux disorders that transfer load laterally, and lesser-toe deformities that plantarflex the metatarsal heads",
+      "Transfer metatarsalgia describes overload of neighbouring metatarsals when one ray is short, elevated, or has been altered by hallux surgery",
+      "Distinguish diffuse mechanical metatarsalgia from focal causes such as interdigital neuroma, plantar plate tear, Freiberg's infraction, stress fracture, and sesamoid pathology",
+      "Careful palpation localises tenderness to the metatarsal head, the intermetatarsal space, or the metatarsophalangeal joint, guiding the differential",
+      "Weight-bearing radiographs assess metatarsal length and alignment, while ultrasound or MRI evaluates soft-tissue and bony causes",
+      "Management is directed at the cause and includes metatarsal offloading orthoses and bars, cushioned footwear, calf stretching, activity modification, and correction of contributing deformity"
     ],
-    [
-     "Key Investigations",
-     "Standing clinical examination with palpation of metatarsal heads, intermetatarsal spaces, and joints, Assessment of gastrocnemius",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Metatarsalgia arises when load beneath the lesser metatarsal heads exceeds what the forefoot soft tissues can tolerate, causing pain, inflammation, and protective callosity. Normal forefoot loading depends on even metatarsal length and alignment, a mobile first ray that shares weight, an adequate plantar fat pad, and balanced toe function. Disturbance of any of these concentrates pressure: a tight gastrocnemius increases forefoot load throughout stance, hallux valgus or hallux rigidus shifts weight laterally, lesser-toe clawing or hammering plantarflexes the metatarsal heads, and a long or plantarflexed metatarsal bears excess load. Distal migration or atrophy of the protective plantar fat pad, common with age, removes cushioning. When one ray is shortened, elevated, or surgically altered, adjacent rays absorb the redistributed force, producing transfer metatarsalgia. The result is localised or diffuse plantar forefoot pain that reflects the specific mechanical derangement.",
+    "additionalDifferentials": [
+      "Interdigital (Morton's) neuroma",
+      "Plantar plate tear or metatarsophalangeal joint instability",
+      "Freiberg's infraction of a metatarsal head",
+      "Metatarsal stress fracture",
+      "Sesamoiditis and other sesamoid disorders",
+      "Inflammatory arthritis of the metatarsophalangeal joints",
+      "Plantar fibroma or other soft-tissue mass"
     ],
-    [
-     "Primary Differentials",
-     "Interdigital (Morton's) neuroma, Plantar plate tear or metatarsophalangeal joint instability, Freiberg's infraction of a",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Standing clinical examination with palpation of metatarsal heads, intermetatarsal spaces, and joints",
+      "Assessment of gastrocnemius tightness, forefoot alignment, and associated hallux and lesser-toe deformity",
+      "Weight-bearing foot radiographs to assess metatarsal length, alignment, and joint change",
+      "Ultrasound to evaluate for interdigital neuroma or plantar plate pathology",
+      "MRI where stress fracture, Freiberg's infraction, or occult soft-tissue lesion is suspected",
+      "Pedobarography to map the distribution of forefoot loading",
+      "Inflammatory markers and serology if inflammatory arthropathy is considered"
     ],
-    [
-     "Management Strategy",
-     "Identify and correct the underlying mechanical driver rather than treating pain alone, as metatarsalgia is a symptom of forefoot",
-     "Core treatment modality"
+    "redFlags": [
+      "Focal bony tenderness and swelling suggesting a metatarsal stress fracture, particularly with a change in activity",
+      "Rest or night pain, or a destructive lesion on imaging, suggesting infection or tumour",
+      "Systemic or polyarticular features indicating inflammatory arthritis",
+      "Plantar ulceration or sensory loss in a neuropathic or diabetic foot",
+      "Progressive lesser-toe deformity with instability indicating an evolving plantar plate tear"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating metatarsalgia as a diagnosis rather than identifying the specific underlying cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most mechanical metatarsalgia responds well to identifying and correcting the underlying cause with footwear, orthoses, calf stretching, and activity modification. Outcomes are good when contributing deformity is addressed, whereas symptoms persist or recur if the mechanical driver, such as a tight gastrocnemius or uncorrected toe deformity, is overlooked. Focal causes have their own prognosis and may require targeted intervention.",
+    "pitfalls": [
+      "Treating metatarsalgia as a diagnosis rather than identifying the specific underlying cause",
+      "Missing a focal cause such as stress fracture, neuroma, or plantar plate tear behind diffuse forefoot pain",
+      "Overlooking a tight gastrocnemius that maintains forefoot overload",
+      "Failing to recognise transfer metatarsalgia following hallux surgery or with a short or elevated ray",
+      "Neglecting fat pad atrophy and footwear factors in older patients"
+    ],
+    "references": [
+      "Mann's Surgery of the Foot and Ankle",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and correct the underlying mechanical driver rather than treating pain alone, as metatarsalgia is a symptom of forefoot overload",
+      "Modify footwear to cushioned, wide, low-heeled shoes with a stiff or rocker sole to reduce forefoot pressure",
+      "Prescribe orthoses with metatarsal pads, domes, or bars and custom insoles to offload the affected metatarsal heads",
+      "Advise gastrocnemius and calf stretching, activity modification, weight optimisation, and callus care",
+      "Target specific focal causes appropriately, such as interdigital neuroma, plantar plate tear, Freiberg's infraction, or stress fracture",
+      "Consider corrective surgery such as metatarsal osteotomy or correction of hallux and lesser-toe deformity for refractory structural cases",
+      "Refer to podiatry or orthopaedics when symptoms persist despite conservative measures"
     ]
-   ],
-   "caption": "Overview comparison matrix for metatarsalgia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "metatarsalgia-real-image",
-   "title": "Metatarsalgia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "metatarsalgia-pathway",
+      "title": "Metatarsalgia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Metatarsalgia is a symptom of pain under the metatarsal heads from forefoot overload rather than a single diagnosis, so the underlying cause must be sought",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Focal bony tenderness and swelling suggesting a metatarsal stress fracture, particularly with a change in activity",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Standing clinical examination with palpation of metatarsal heads, intermetatarsal spaces, and joints, Assessment of gastrocnemius tightness, forefoot alignment, and associated hallux and lesser-toe deformity,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and correct the underlying mechanical driver rather than treating pain alone, as metatarsalgia is a symptom of forefoot overload"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating metatarsalgia as a diagnosis rather than identifying the specific underlying cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of metatarsalgia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "metatarsalgia-matrix",
+      "title": "Metatarsalgia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Metatarsalgia is a symptom of pain under the metatarsal heads from forefoot overload rather than a single diagnosis, so the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Standing clinical examination with palpation of metatarsal heads, intermetatarsal spaces, and joints, Assessment of gastrocnemius",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Interdigital (Morton's) neuroma, Plantar plate tear or metatarsophalangeal joint instability, Freiberg's infraction of a",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and correct the underlying mechanical driver rather than treating pain alone, as metatarsalgia is a symptom of forefoot",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating metatarsalgia as a diagnosis rather than identifying the specific underlying cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for metatarsalgia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "metatarsalgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standing examination with palpation of metatarsal heads and spaces",
+          "cells": [
+            {
+              "text": "Forefoot tenderness at metatarsal heads and spaces"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrocnemius tightness, forefoot alignment and hallux or lesser-toe deformity",
+          "cells": [
+            {
+              "text": "Associated deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing foot radiographs",
+          "cells": [
+            {
+              "text": "Metatarsal length, alignment and joint change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound for interdigital neuroma or plantar plate pathology",
+          "cells": [
+            {
+              "text": "Neuroma or plantar plate pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI, where stress fracture, Freiberg's infraction or occult lesion is suspected",
+          "cells": [
+            {
+              "text": "Stress fracture or Freiberg's infraction, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pedobarography",
+          "cells": [
+            {
+              "text": "Distribution of forefoot loading"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metatarsalgia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Interdigital (Morton's) neuroma",
+          "cells": [
+            {
+              "text": "Assessed on ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plantar plate tear or metatarsophalangeal joint instability",
+          "cells": [
+            {
+              "text": "Progressive lesser-toe deformity with instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metatarsal stress fracture",
+          "cells": [
+            {
+              "text": "Focal bony tenderness and swelling, particularly with a change in activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory arthritis of the metatarsophalangeal joints",
+          "cells": [
+            {
+              "text": "Systemic or polyarticular features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metatarsalgia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct the mechanical driver",
+          "cells": [
+            {
+              "text": "Metatarsalgia is a symptom of forefoot overload; treat the cause, not pain alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Footwear modification",
+          "cells": [
+            {
+              "text": "Cushioned, wide, low-heeled shoes with a stiff or rocker sole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses",
+          "cells": [
+            {
+              "text": "Metatarsal pads, domes, bars or custom insoles to offload the metatarsal heads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stretching and activity modification",
+          "cells": [
+            {
+              "text": "Gastrocnemius and calf stretching, weight optimisation and callus care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal causes",
+          "cells": [
+            {
+              "text": "Interdigital neuroma, plantar plate tear, Freiberg's infraction or stress fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Metatarsal osteotomy or hallux and lesser-toe correction for refractory structural cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Podiatry or orthopaedics if symptoms persist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "metatarsalgia-dx-mgmt",
+      "title": "Diagnosis and management of Metatarsalgia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Forefoot pain at the metatarsal heads from forefoot overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Focal bony tenderness after activity change, night pain, destructive lesion or ulcer?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Image for stress fracture, infection or tumour; specialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standing examination; weight-bearing radiographs; ultrasound; MRI if stress fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a focal cause such as neuroma, plantar plate tear or stress fracture found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Forefoot overload without focal cause: pedobarography and gait review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct the underlying mechanical driver of forefoot overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cushioned, wide, low-heeled shoes with a stiff or rocker sole",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Metatarsal pads, domes, bars or custom insoles to offload metatarsal heads",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Calf stretching, activity modification and callus care; target focal causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery such as metatarsal osteotomy for refractory structural cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

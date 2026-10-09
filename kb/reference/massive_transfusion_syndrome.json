@@ -1,175 +1,471 @@
 {
- "id": "massive_transfusion_syndrome",
- "name": "Massive transfusion syndrome",
- "aliases": [
-  "massive transfusion complications",
-  "complications of massive transfusion",
-  "massive haemorrhage transfusion effects"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / AABB technical manual",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Describes the metabolic and haemostatic derangements that follow replacement of a large fraction of the blood volume over a short period",
-   "The lethal triad of coagulopathy, hypothermia and acidosis compounds bleeding and worsens outcome",
-   "Dilutional and consumptive coagulopathy arises as clotting factors and platelets are diluted and consumed during massive haemorrhage",
-   "Citrate anticoagulant in stored components chelates calcium, producing hypocalcaemia that impairs coagulation and cardiac function",
-   "Potassium leaks from stored red cells and can cause hyperkalaemia, especially with rapid infusion of older units",
-   "Rapid infusion of cold components causes hypothermia, which itself impairs enzymatic clotting and platelet function",
-   "Major haemorrhage protocols emphasise balanced ratios of red cells, plasma and platelets, blood warming and correction of calcium",
-   "Frequent monitoring of coagulation, ionised calcium, potassium, temperature and acid-base status guides ongoing replacement"
+  "id": "massive_transfusion_syndrome",
+  "name": "Massive transfusion syndrome",
+  "aliases": [
+    "massive transfusion complications",
+    "complications of massive transfusion",
+    "massive haemorrhage transfusion effects"
   ],
-  "pathophysiology": "Massive transfusion syndrome is the constellation of disturbances that accompanies replacement of a large proportion of the circulating blood volume within hours. Coagulopathy develops through dilution and consumption of clotting factors and platelets, compounded by fibrinolysis and by the underlying tissue injury. Stored components are anticoagulated with citrate, which binds ionised calcium and can produce hypocalcaemia that impairs both coagulation and myocardial contractility. Progressive leakage of potassium from stored red cells may cause hyperkalaemia when large volumes are infused rapidly. Cold components lower core temperature, and the resulting hypothermia slows the enzymatic clotting cascade and platelet function. Tissue hypoperfusion generates a metabolic acidosis, and together hypothermia, acidosis and coagulopathy form a self-reinforcing lethal triad.",
-  "additionalDifferentials": [
-   "Disseminated intravascular coagulation from the underlying injury",
-   "Acute haemolytic transfusion reaction",
-   "Transfusion-associated circulatory overload",
-   "Transfusion-related acute lung injury",
-   "Dilutional thrombocytopenia from other fluids",
-   "Primary hyperfibrinolysis in trauma"
-  ],
-  "additionalInvestigations": [
-   "Serial coagulation screen, fibrinogen and platelet count, or viscoelastic testing",
-   "Ionised calcium to detect citrate-induced hypocalcaemia",
-   "Serum potassium and continuous cardiac monitoring for hyperkalaemia",
-   "Core temperature monitoring for hypothermia",
-   "Arterial blood gas and lactate for acidosis and perfusion",
-   "Full blood count to track haemoglobin and platelets during resuscitation"
-  ],
-  "redFlags": [
-   "Diffuse microvascular oozing indicating established coagulopathy",
-   "Electrocardiographic changes or arrhythmia from hyperkalaemia or hypocalcaemia",
-   "Falling core temperature refractory to warming measures",
-   "Worsening metabolic acidosis with rising lactate despite resuscitation"
-  ],
-  "prognosis": "Outcome is largely determined by the underlying cause of haemorrhage and the speed of control, but timely correction of coagulopathy, calcium, temperature and acidosis within a structured major haemorrhage protocol improves survival.",
-  "pitfalls": [
-   "Transfusing red cells alone without proportionate plasma and platelets",
-   "Neglecting to warm rapidly infused blood and fluids",
-   "Overlooking citrate-induced hypocalcaemia during high-volume transfusion",
-   "Failing to monitor and correct potassium and acid-base disturbances"
-  ],
-  "references": [
-   "Williams Hematology",
-   "AABB Technical Manual"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage within a structured major haemorrhage protocol with balanced component ratios to limit dilutional and consumptive coagulopathy",
-   "Warm the patient and all infused fluids and blood products to prevent hypothermia",
-   "Monitor and correct citrate-induced ionised hypocalcaemia with intravenous calcium",
-   "Monitor serum potassium with continuous cardiac monitoring and treat hyperkalaemia",
-   "Correct metabolic acidosis by restoring perfusion and controlling haemorrhage",
-   "Guide clotting-factor, platelet and fibrinogen replacement by coagulation and viscoelastic testing, with tranexamic acid where indicated",
-   "Achieve definitive control of the bleeding source",
-   "Coordinate haematology, transfusion and critical care management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "massive_transfusion_syndrome-pathway",
-   "title": "Massive transfusion syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Describes the metabolic and haemostatic derangements that follow replacement of a large fraction of the blood volume over a short period",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Diffuse microvascular oozing indicating established coagulopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial coagulation screen, fibrinogen and platelet count, or viscoelastic testing, Ionised calcium to detect citrate-induced hypocalcaemia, Serum potassium and continuous cardiac monitoring for hyperkalaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage within a structured major haemorrhage protocol with balanced component ratios to limit dilutional and consumptive coagulopathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Transfusing red cells alone without proportionate plasma and platelets"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of massive transfusion syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "massive_transfusion_syndrome-matrix",
-   "title": "Massive transfusion syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Describes the metabolic and haemostatic derangements that follow replacement of a large fraction of the blood volume over a short",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / AABB technical manual",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Describes the metabolic and haemostatic derangements that follow replacement of a large fraction of the blood volume over a short period",
+      "The lethal triad of coagulopathy, hypothermia and acidosis compounds bleeding and worsens outcome",
+      "Dilutional and consumptive coagulopathy arises as clotting factors and platelets are diluted and consumed during massive haemorrhage",
+      "Citrate anticoagulant in stored components chelates calcium, producing hypocalcaemia that impairs coagulation and cardiac function",
+      "Potassium leaks from stored red cells and can cause hyperkalaemia, especially with rapid infusion of older units",
+      "Rapid infusion of cold components causes hypothermia, which itself impairs enzymatic clotting and platelet function",
+      "Major haemorrhage protocols emphasise balanced ratios of red cells, plasma and platelets, blood warming and correction of calcium",
+      "Frequent monitoring of coagulation, ionised calcium, potassium, temperature and acid-base status guides ongoing replacement"
     ],
-    [
-     "Key Investigations",
-     "Serial coagulation screen, fibrinogen and platelet count, or viscoelastic testing, Ionised calcium to detect citrate-induced",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Massive transfusion syndrome is the constellation of disturbances that accompanies replacement of a large proportion of the circulating blood volume within hours. Coagulopathy develops through dilution and consumption of clotting factors and platelets, compounded by fibrinolysis and by the underlying tissue injury. Stored components are anticoagulated with citrate, which binds ionised calcium and can produce hypocalcaemia that impairs both coagulation and myocardial contractility. Progressive leakage of potassium from stored red cells may cause hyperkalaemia when large volumes are infused rapidly. Cold components lower core temperature, and the resulting hypothermia slows the enzymatic clotting cascade and platelet function. Tissue hypoperfusion generates a metabolic acidosis, and together hypothermia, acidosis and coagulopathy form a self-reinforcing lethal triad.",
+    "additionalDifferentials": [
+      "Disseminated intravascular coagulation from the underlying injury",
+      "Acute haemolytic transfusion reaction",
+      "Transfusion-associated circulatory overload",
+      "Transfusion-related acute lung injury",
+      "Dilutional thrombocytopenia from other fluids",
+      "Primary hyperfibrinolysis in trauma"
     ],
-    [
-     "Primary Differentials",
-     "Disseminated intravascular coagulation from the underlying injury, Acute haemolytic transfusion reaction, Transfusion-associated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial coagulation screen, fibrinogen and platelet count, or viscoelastic testing",
+      "Ionised calcium to detect citrate-induced hypocalcaemia",
+      "Serum potassium and continuous cardiac monitoring for hyperkalaemia",
+      "Core temperature monitoring for hypothermia",
+      "Arterial blood gas and lactate for acidosis and perfusion",
+      "Full blood count to track haemoglobin and platelets during resuscitation"
     ],
-    [
-     "Management Strategy",
-     "Manage within a structured major haemorrhage protocol with balanced component ratios to limit dilutional and consumptive",
-     "Core treatment modality"
+    "redFlags": [
+      "Diffuse microvascular oozing indicating established coagulopathy",
+      "Electrocardiographic changes or arrhythmia from hyperkalaemia or hypocalcaemia",
+      "Falling core temperature refractory to warming measures",
+      "Worsening metabolic acidosis with rising lactate despite resuscitation"
     ],
-    [
-     "Clinical Pitfall",
-     "Transfusing red cells alone without proportionate plasma and platelets",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is largely determined by the underlying cause of haemorrhage and the speed of control, but timely correction of coagulopathy, calcium, temperature and acidosis within a structured major haemorrhage protocol improves survival.",
+    "pitfalls": [
+      "Transfusing red cells alone without proportionate plasma and platelets",
+      "Neglecting to warm rapidly infused blood and fluids",
+      "Overlooking citrate-induced hypocalcaemia during high-volume transfusion",
+      "Failing to monitor and correct potassium and acid-base disturbances"
+    ],
+    "references": [
+      "Williams Hematology",
+      "AABB Technical Manual"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage within a structured major haemorrhage protocol with balanced component ratios to limit dilutional and consumptive coagulopathy",
+      "Warm the patient and all infused fluids and blood products to prevent hypothermia",
+      "Monitor and correct citrate-induced ionised hypocalcaemia with intravenous calcium",
+      "Monitor serum potassium with continuous cardiac monitoring and treat hyperkalaemia",
+      "Correct metabolic acidosis by restoring perfusion and controlling haemorrhage",
+      "Guide clotting-factor, platelet and fibrinogen replacement by coagulation and viscoelastic testing, with tranexamic acid where indicated",
+      "Achieve definitive control of the bleeding source",
+      "Coordinate haematology, transfusion and critical care management"
     ]
-   ],
-   "caption": "Overview comparison matrix for massive transfusion syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "massive-transfusion-syndrome-real-image",
-   "title": "Massive transfusion syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "massive_transfusion_syndrome-pathway",
+      "title": "Massive transfusion syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Describes the metabolic and haemostatic derangements that follow replacement of a large fraction of the blood volume over a short period",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Diffuse microvascular oozing indicating established coagulopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial coagulation screen, fibrinogen and platelet count, or viscoelastic testing, Ionised calcium to detect citrate-induced hypocalcaemia, Serum potassium and continuous cardiac monitoring for hyperkalaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage within a structured major haemorrhage protocol with balanced component ratios to limit dilutional and consumptive coagulopathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Transfusing red cells alone without proportionate plasma and platelets"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of massive transfusion syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "massive_transfusion_syndrome-matrix",
+      "title": "Massive transfusion syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Describes the metabolic and haemostatic derangements that follow replacement of a large fraction of the blood volume over a short",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial coagulation screen, fibrinogen and platelet count, or viscoelastic testing, Ionised calcium to detect citrate-induced",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Disseminated intravascular coagulation from the underlying injury, Acute haemolytic transfusion reaction, Transfusion-associated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage within a structured major haemorrhage protocol with balanced component ratios to limit dilutional and consumptive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Transfusing red cells alone without proportionate plasma and platelets",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for massive transfusion syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / AABB technical manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "massive_transfusion_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Coagulation screen, fibrinogen and platelet count, or viscoelastic testing",
+          "cells": [
+            {
+              "text": "Established coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised calcium",
+          "cells": [
+            {
+              "text": "Citrate-induced hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium with continuous cardiac monitoring",
+          "cells": [
+            {
+              "text": "Hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature monitoring",
+          "cells": [
+            {
+              "text": "Hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Acidosis and perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count during resuscitation",
+          "cells": [
+            {
+              "text": "Haemoglobin and platelets during resuscitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated intravascular coagulation from the underlying injury",
+          "cells": [
+            {
+              "text": "Diffuse microvascular oozing, indicating established coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilutional thrombocytopenia from other fluids",
+          "cells": [
+            {
+              "text": "Other fluids given alongside products; platelets tracked during resuscitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured major haemorrhage protocol",
+          "cells": [
+            {
+              "text": "Balanced component ratios to limit dilutional and consumptive coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warming",
+          "cells": [
+            {
+              "text": "Patient, infused fluids and blood products, to prevent hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised hypocalcaemia",
+          "cells": [
+            {
+              "text": "Monitor and correct citrate-induced hypocalcaemia with intravenous calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia",
+          "cells": [
+            {
+              "text": "Continuous cardiac monitoring of potassium and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acidosis",
+          "cells": [
+            {
+              "text": "Corrected by restoring perfusion and controlling haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor, platelet and fibrinogen replacement",
+          "cells": [
+            {
+              "text": "Guided by coagulation and viscoelastic testing; tranexamic acid where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive source control",
+          "cells": [
+            {
+              "text": "Definitive control of the bleeding source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary management",
+          "cells": [
+            {
+              "text": "Haematology, transfusion and critical care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "massive_transfusion_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Massive transfusion syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Massive transfusion with diffuse microvascular oozing or established coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Arrhythmia from hyperkalaemia or hypocalcaemia, or refractory hypothermia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat hyperkalaemia and hypocalcaemia; control the bleeding source",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Coagulation screen, fibrinogen, ionised calcium, potassium, temperature, gas and lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is established coagulopathy confirmed on coagulation or viscoelastic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DIC, dilutional thrombocytopenia or other causes; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Structured major haemorrhage protocol with balanced component ratios",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Warm patient and all products; correct citrate-induced hypocalcaemia with IV calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor potassium on continuous cardiac monitoring; treat hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Guide replacement by coagulation tests; tranexamic acid where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Definitive source control; coordinate haematology, transfusion and critical care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,167 +1,465 @@
 {
- "id": "posterior_polymorphous_corneal_dystrophy",
- "name": "Posterior polymorphous corneal dystrophy",
- "aliases": [
-  "PPCD",
-  "PPMD"
- ],
- "class": "non_infective",
- "system": "Eye / Cornea",
- "specialty": "Ophthalmology / Cornea",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A dystrophy of the corneal endothelium and Descemet membrane, usually inherited in an autosomal dominant pattern",
-   "It is characterised by vesicular, band-like or diffuse lesions at the level of Descemet membrane",
-   "Many patients are asymptomatic and diagnosed incidentally, with a generally mild course",
-   "The endothelial cells acquire epithelial-like characteristics and can migrate abnormally",
-   "It may be associated with iridocorneal adhesions, corectopia and, in some, raised intraocular pressure or glaucoma",
-   "Most cases need only monitoring, with corneal transplantation reserved for the minority developing significant oedema"
+  "id": "posterior_polymorphous_corneal_dystrophy",
+  "name": "Posterior polymorphous corneal dystrophy",
+  "aliases": [
+    "PPCD",
+    "PPMD"
   ],
-  "pathophysiology": "In posterior polymorphous corneal dystrophy the corneal endothelial cells behave abnormally, taking on epithelial-like features with the capacity to proliferate and migrate across the posterior cornea and, at times, onto the anterior chamber angle and iris. This aberrant tissue produces the characteristic vesicular and band lesions of Descemet membrane and can form adhesions that distort the iris and impair aqueous outflow, causing glaucoma in a subset. Endothelial dysfunction can occasionally progress to corneal oedema.",
-  "additionalDifferentials": [
-   "Fuchs endothelial corneal dystrophy",
-   "Iridocorneal endothelial (ICE) syndrome",
-   "Congenital hereditary endothelial dystrophy",
-   "Anterior segment dysgenesis",
-   "Descemet membrane changes from other cause"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination and specular or confocal microscopy of the endothelium",
-   "Assessment of the anterior chamber angle for adhesions",
-   "Intraocular pressure measurement and glaucoma assessment",
-   "Anterior segment imaging where needed",
-   "Family history and genetic evaluation in selected cases"
-  ],
-  "redFlags": [
-   "Raised intraocular pressure or glaucomatous damage",
-   "Progressive corneal oedema and visual loss",
-   "Extensive iridocorneal adhesions",
-   "Features overlapping with ICE syndrome (usually unilateral, non-hereditary)"
-  ],
-  "prognosis": "Most cases are mild and stable with a good prognosis; a minority develop glaucoma or corneal decompensation requiring specific treatment or transplantation.",
-  "pitfalls": [
-   "Confusing it with the typically unilateral, acquired ICE syndrome",
-   "Overlooking associated glaucoma",
-   "Attributing corneal oedema to another cause",
-   "Missing the autosomal dominant inheritance and need to examine relatives"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "IC3D classification of corneal dystrophies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage most patients with periodic observation alone, given the frequently mild and stable course",
-   "Perform specular or confocal microscopy and monitor endothelial function for early signs of decompensation",
-   "Measure intraocular pressure and treat associated glaucoma with pressure-lowering drops, escalating to surgery when medical control is inadequate",
-   "Reserve endothelial keratoplasty, or penetrating keratoplasty, for the minority who develop significant corneal oedema",
-   "Offer genetic counselling and family examination given the autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "posterior_polymorphous_corneal_dystrophy-pathway",
-   "title": "Posterior polymorphous corneal dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A dystrophy of the corneal endothelium and Descemet membrane, usually inherited in an autosomal dominant pattern",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Raised intraocular pressure or glaucomatous damage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination and specular or confocal microscopy of the endothelium, Assessment of the anterior chamber angle for adhesions, Intraocular pressure measurement and glaucoma assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage most patients with periodic observation alone, given the frequently mild and stable course"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with the typically unilateral, acquired ICE syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of posterior polymorphous corneal dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "posterior_polymorphous_corneal_dystrophy-matrix",
-   "title": "Posterior polymorphous corneal dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A dystrophy of the corneal endothelium and Descemet membrane, usually inherited in an autosomal dominant pattern",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Cornea",
+  "specialty": "Ophthalmology / Cornea",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A dystrophy of the corneal endothelium and Descemet membrane, usually inherited in an autosomal dominant pattern",
+      "It is characterised by vesicular, band-like or diffuse lesions at the level of Descemet membrane",
+      "Many patients are asymptomatic and diagnosed incidentally, with a generally mild course",
+      "The endothelial cells acquire epithelial-like characteristics and can migrate abnormally",
+      "It may be associated with iridocorneal adhesions, corectopia and, in some, raised intraocular pressure or glaucoma",
+      "Most cases need only monitoring, with corneal transplantation reserved for the minority developing significant oedema"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination and specular or confocal microscopy of the endothelium, Assessment of the anterior chamber angle for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In posterior polymorphous corneal dystrophy the corneal endothelial cells behave abnormally, taking on epithelial-like features with the capacity to proliferate and migrate across the posterior cornea and, at times, onto the anterior chamber angle and iris. This aberrant tissue produces the characteristic vesicular and band lesions of Descemet membrane and can form adhesions that distort the iris and impair aqueous outflow, causing glaucoma in a subset. Endothelial dysfunction can occasionally progress to corneal oedema.",
+    "additionalDifferentials": [
+      "Fuchs endothelial corneal dystrophy",
+      "Iridocorneal endothelial (ICE) syndrome",
+      "Congenital hereditary endothelial dystrophy",
+      "Anterior segment dysgenesis",
+      "Descemet membrane changes from other cause"
     ],
-    [
-     "Primary Differentials",
-     "Fuchs endothelial corneal dystrophy, Iridocorneal endothelial (ICE) syndrome, Congenital hereditary endothelial dystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination and specular or confocal microscopy of the endothelium",
+      "Assessment of the anterior chamber angle for adhesions",
+      "Intraocular pressure measurement and glaucoma assessment",
+      "Anterior segment imaging where needed",
+      "Family history and genetic evaluation in selected cases"
     ],
-    [
-     "Management Strategy",
-     "Manage most patients with periodic observation alone, given the frequently mild and stable course",
-     "Core treatment modality"
+    "redFlags": [
+      "Raised intraocular pressure or glaucomatous damage",
+      "Progressive corneal oedema and visual loss",
+      "Extensive iridocorneal adhesions",
+      "Features overlapping with ICE syndrome (usually unilateral, non-hereditary)"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with the typically unilateral, acquired ICE syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases are mild and stable with a good prognosis; a minority develop glaucoma or corneal decompensation requiring specific treatment or transplantation.",
+    "pitfalls": [
+      "Confusing it with the typically unilateral, acquired ICE syndrome",
+      "Overlooking associated glaucoma",
+      "Attributing corneal oedema to another cause",
+      "Missing the autosomal dominant inheritance and need to examine relatives"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "IC3D classification of corneal dystrophies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage most patients with periodic observation alone, given the frequently mild and stable course",
+      "Perform specular or confocal microscopy and monitor endothelial function for early signs of decompensation",
+      "Measure intraocular pressure and treat associated glaucoma with pressure-lowering drops, escalating to surgery when medical control is inadequate",
+      "Reserve endothelial keratoplasty, or penetrating keratoplasty, for the minority who develop significant corneal oedema",
+      "Offer genetic counselling and family examination given the autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for posterior polymorphous corneal dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "posterior-polymorphous-corneal-dystrophy-real-image",
-   "title": "Posterior polymorphous corneal dystrophy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "posterior_polymorphous_corneal_dystrophy-pathway",
+      "title": "Posterior polymorphous corneal dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A dystrophy of the corneal endothelium and Descemet membrane, usually inherited in an autosomal dominant pattern",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Raised intraocular pressure or glaucomatous damage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination and specular or confocal microscopy of the endothelium, Assessment of the anterior chamber angle for adhesions, Intraocular pressure measurement and glaucoma assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage most patients with periodic observation alone, given the frequently mild and stable course"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with the typically unilateral, acquired ICE syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of posterior polymorphous corneal dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "posterior_polymorphous_corneal_dystrophy-matrix",
+      "title": "Posterior polymorphous corneal dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A dystrophy of the corneal endothelium and Descemet membrane, usually inherited in an autosomal dominant pattern",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination and specular or confocal microscopy of the endothelium, Assessment of the anterior chamber angle for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fuchs endothelial corneal dystrophy, Iridocorneal endothelial (ICE) syndrome, Congenital hereditary endothelial dystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage most patients with periodic observation alone, given the frequently mild and stable course",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with the typically unilateral, acquired ICE syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for posterior polymorphous corneal dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_polymorphous_corneal_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp and specular or confocal microscopy",
+          "cells": [
+            {
+              "text": "Endothelial changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior chamber angle assessment",
+          "cells": [
+            {
+              "text": "Adhesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure and glaucoma assessment",
+          "cells": [
+            {
+              "text": "Raised pressure or glaucomatous damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment imaging",
+          "cells": [
+            {
+              "text": "Where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and genetic evaluation",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_polymorphous_corneal_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fuchs endothelial corneal dystrophy",
+          "cells": [
+            {
+              "text": "Guttae rather than vesicular lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iridocorneal endothelial syndrome",
+          "cells": [
+            {
+              "text": "Usually unilateral and non-hereditary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital hereditary endothelial dystrophy",
+          "cells": [
+            {
+              "text": "Present from birth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment dysgenesis",
+          "cells": [
+            {
+              "text": "Associated anterior segment anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Descemet membrane changes from other cause",
+          "cells": [
+            {
+              "text": "Secondary change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_polymorphous_corneal_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Periodic review for the frequently mild and stable disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endothelial monitoring",
+          "cells": [
+            {
+              "text": "Microscopy for early signs of decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma treatment",
+          "cells": [
+            {
+              "text": "Pressure-lowering drops for associated glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratoplasty",
+          "cells": [
+            {
+              "text": "Endothelial or penetrating keratoplasty for the minority with decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family examination given autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_polymorphous_corneal_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Posterior polymorphous corneal dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vesicular or band-like endothelial lesions found on routine eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (raised pressure, progressive corneal oedema, extensive adhesions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glaucoma treatment for raised intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp; specular or confocal microscopy; angle assessment; intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does microscopy confirm polymorphous endothelial lesions with an autosomal pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fuchs dystrophy or iridocorneal endothelial syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Periodic observation alone for most patients with mild disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Specular or confocal microscopy to monitor for early decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pressure-lowering drops for associated glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endothelial or penetrating keratoplasty for the minority who decompensate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most cases are mild and stable; a minority develop glaucoma or corneal decompensation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

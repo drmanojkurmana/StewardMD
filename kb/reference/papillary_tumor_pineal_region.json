@@ -1,180 +1,465 @@
 {
- "id": "papillary_tumor_pineal_region",
- "name": "Papillary tumour of the pineal region",
- "aliases": [
-  "PTPR",
-  "papillary tumour of the pineal region",
-  "papillary tumor of the pineal region",
-  "CNS WHO grade 2 or 3 pineal tumour"
- ],
- "class": "non_infective",
- "system": "Oncology / Neuro-oncology",
- "specialty": "Neuro-oncology / Neuropathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours of the CNS",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare neuroepithelial tumour of the pineal region occurring in both children and adults",
-   "Presents with features common to pineal masses: obstructive hydrocephalus and dorsal midbrain (Parinaud) signs from tectal compression",
-   "MRI shows a well-circumscribed, often partly cystic, enhancing pineal mass",
-   "Thought to arise from specialised ependymal cells of the subcommissural organ, giving a distinctive papillary architecture",
-   "Histology shows papillary and more solid epithelial-like areas; immunopositivity for cytokeratins (notably CK18) helps distinguish it from other pineal tumours",
-   "Behaviour is variable and it has a notable tendency to recur locally despite treatment",
-   "Management combines maximal safe resection with radiotherapy considered for residual or recurrent disease"
+  "id": "papillary_tumor_pineal_region",
+  "name": "Papillary tumour of the pineal region",
+  "aliases": [
+    "PTPR",
+    "papillary tumour of the pineal region",
+    "papillary tumor of the pineal region",
+    "CNS WHO grade 2 or 3 pineal tumour"
   ],
-  "pathophysiology": "Papillary tumour of the pineal region is a rare neuroepithelial neoplasm believed to originate from specialised ependymocytes of the subcommissural organ within the pineal region. It forms a circumscribed mass with a characteristic mixture of papillary structures, in which epithelial-like cells surround fibrovascular cores, and more densely cellular solid areas. The tumour cells express cytokeratins, a feature that helps separate it from pineal parenchymal tumours and ependymomas. Grading is imprecise but corresponds to CNS WHO grade 2 or 3, and the lesion is characterised clinically by a marked propensity for local recurrence. Its midline pineal location readily obstructs cerebrospinal fluid flow and compresses the dorsal midbrain.",
-  "additionalDifferentials": [
-   "Pineal parenchymal tumour of intermediate differentiation",
-   "Pineoblastoma",
-   "Pineocytoma",
-   "Ependymoma",
-   "Pineal region germ cell tumour",
-   "Metastasis to the pineal region"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced brain MRI to characterise the pineal mass and hydrocephalus",
-   "Craniospinal MRI to evaluate for dissemination",
-   "CSF and serum germ cell tumour markers to exclude germinoma",
-   "Histopathology showing papillary and solid epithelial-like areas",
-   "Cytokeratin (including CK18) immunohistochemistry to support the diagnosis",
-   "CSF cytology for staging where appropriate"
-  ],
-  "redFlags": [
-   "Acute obstructive hydrocephalus with raised intracranial pressure",
-   "Progressive dorsal midbrain (Parinaud) signs and impaired consciousness",
-   "Local recurrence on surveillance imaging",
-   "Features suggesting dissemination along the neuraxis"
-  ],
-  "prognosis": "Prognosis is intermediate and difficult to predict, being limited chiefly by a high rate of local recurrence even after resection and radiotherapy. Extent of resection influences outcome, and long-term surveillance is required because recurrences may occur years after initial treatment.",
-  "pitfalls": [
-   "Misclassifying it as an ependymoma or pineal parenchymal tumour without cytokeratin staining",
-   "Underestimating the strong tendency to local recurrence and relaxing surveillance",
-   "Overlooking a coexisting germ cell tumour by not checking tumour markers",
-   "Delaying relief of obstructive hydrocephalus"
-  ],
-  "references": [
-   "WHO Classification of Tumours of the Central Nervous System",
-   "Louis DN et al. The 2021 WHO Classification of Tumors of the Central Nervous System"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No established chemotherapy regimen or randomized data exists for this rare tumour; management is individualized rather than algorithm-driven",
-   "Maximal safe surgical resection is the primary intervention and the strongest determinant of local control",
-   "Radiotherapy (fractionated external beam or stereotactic radiosurgery) is added for residual, unresectable, or recurrent disease, chosen based on residual volume and proximity to critical structures",
-   "Craniospinal irradiation is not routinely used since this tumour lacks germinoma-like radiosensitivity or dissemination; fields are kept local unless imaging or CSF cytology shows neuraxis spread",
-   "Systemic chemotherapy has an unestablished role and is considered mainly for unresectable or recurrent disease that has exhausted surgical and radiotherapy options, ideally via a neuro-oncology multidisciplinary team or clinical trial",
-   "First-line approach is maximal safe resection with adjuvant radiotherapy for subtotal resection or higher-grade histology",
-   "For local recurrence, re-resection where feasible and/or radiotherapy (including stereotactic radiosurgery) if not previously given or a new field can be used safely",
-   "Surgery also addresses obstructive hydrocephalus; CSF diversion (endoscopic third ventriculostomy or ventricular shunting) may be needed as part of resection or as an urgent separate step",
-   "Prolonged serial contrast-enhanced MRI surveillance is required because local recurrence can occur years after apparently successful treatment",
-   "Surveillance should also monitor for delayed radiotherapy effects and evolving hydrocephalus, particularly without permanent CSF diversion",
-   "Any new pineal-region mass with hydrocephalus or Parinaud (dorsal midbrain) signs warrants urgent neurosurgical referral for diagnosis and relief of raised intracranial pressure",
-   "Confirmed or suspected cases should be managed in a neuro-oncology and neurosurgical multidisciplinary setting given rarity and lack of standardized systemic therapy",
-   "Local recurrence on surveillance imaging or suspected neuraxis dissemination should prompt re-referral to the multidisciplinary team rather than empiric treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "papillary_tumor_pineal_region-pathway",
-   "title": "Papillary tumour of the pineal region: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare neuroepithelial tumour of the pineal region occurring in both children and adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute obstructive hydrocephalus with raised intracranial pressure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced brain MRI to characterise the pineal mass and hydrocephalus, Craniospinal MRI to evaluate for dissemination, CSF and serum germ cell tumour markers to exclude germinoma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No established chemotherapy regimen or randomized data exists for this rare tumour; management is individualized rather than algorithm-driven"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying it as an ependymoma or pineal parenchymal tumour without cytokeratin staining"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of papillary tumour of the pineal region."
-  }
- ],
- "tables": [
-  {
-   "id": "papillary_tumor_pineal_region-matrix",
-   "title": "Papillary tumour of the pineal region: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare neuroepithelial tumour of the pineal region occurring in both children and adults",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Neuro-oncology",
+  "specialty": "Neuro-oncology / Neuropathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours of the CNS",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare neuroepithelial tumour of the pineal region occurring in both children and adults",
+      "Presents with features common to pineal masses: obstructive hydrocephalus and dorsal midbrain (Parinaud) signs from tectal compression",
+      "MRI shows a well-circumscribed, often partly cystic, enhancing pineal mass",
+      "Thought to arise from specialised ependymal cells of the subcommissural organ, giving a distinctive papillary architecture",
+      "Histology shows papillary and more solid epithelial-like areas; immunopositivity for cytokeratins (notably CK18) helps distinguish it from other pineal tumours",
+      "Behaviour is variable and it has a notable tendency to recur locally despite treatment",
+      "Management combines maximal safe resection with radiotherapy considered for residual or recurrent disease"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced brain MRI to characterise the pineal mass and hydrocephalus, Craniospinal MRI to evaluate for dissemination,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Papillary tumour of the pineal region is a rare neuroepithelial neoplasm believed to originate from specialised ependymocytes of the subcommissural organ within the pineal region. It forms a circumscribed mass with a characteristic mixture of papillary structures, in which epithelial-like cells surround fibrovascular cores, and more densely cellular solid areas. The tumour cells express cytokeratins, a feature that helps separate it from pineal parenchymal tumours and ependymomas. Grading is imprecise but corresponds to CNS WHO grade 2 or 3, and the lesion is characterised clinically by a marked propensity for local recurrence. Its midline pineal location readily obstructs cerebrospinal fluid flow and compresses the dorsal midbrain.",
+    "additionalDifferentials": [
+      "Pineal parenchymal tumour of intermediate differentiation",
+      "Pineoblastoma",
+      "Pineocytoma",
+      "Ependymoma",
+      "Pineal region germ cell tumour",
+      "Metastasis to the pineal region"
     ],
-    [
-     "Primary Differentials",
-     "Pineal parenchymal tumour of intermediate differentiation, Pineoblastoma, Pineocytoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced brain MRI to characterise the pineal mass and hydrocephalus",
+      "Craniospinal MRI to evaluate for dissemination",
+      "CSF and serum germ cell tumour markers to exclude germinoma",
+      "Histopathology showing papillary and solid epithelial-like areas",
+      "Cytokeratin (including CK18) immunohistochemistry to support the diagnosis",
+      "CSF cytology for staging where appropriate"
     ],
-    [
-     "Management Strategy",
-     "No established chemotherapy regimen or randomized data exists for this rare tumour; management is individualized rather than",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute obstructive hydrocephalus with raised intracranial pressure",
+      "Progressive dorsal midbrain (Parinaud) signs and impaired consciousness",
+      "Local recurrence on surveillance imaging",
+      "Features suggesting dissemination along the neuraxis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying it as an ependymoma or pineal parenchymal tumour without cytokeratin staining",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is intermediate and difficult to predict, being limited chiefly by a high rate of local recurrence even after resection and radiotherapy. Extent of resection influences outcome, and long-term surveillance is required because recurrences may occur years after initial treatment.",
+    "pitfalls": [
+      "Misclassifying it as an ependymoma or pineal parenchymal tumour without cytokeratin staining",
+      "Underestimating the strong tendency to local recurrence and relaxing surveillance",
+      "Overlooking a coexisting germ cell tumour by not checking tumour markers",
+      "Delaying relief of obstructive hydrocephalus"
+    ],
+    "references": [
+      "WHO Classification of Tumours of the Central Nervous System",
+      "Louis DN et al. The 2021 WHO Classification of Tumors of the Central Nervous System"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No established chemotherapy regimen or randomized data exists for this rare tumour; management is individualized rather than algorithm-driven",
+      "Maximal safe surgical resection is the primary intervention and the strongest determinant of local control",
+      "Radiotherapy (fractionated external beam or stereotactic radiosurgery) is added for residual, unresectable, or recurrent disease, chosen based on residual volume and proximity to critical structures",
+      "Craniospinal irradiation is not routinely used since this tumour lacks germinoma-like radiosensitivity or dissemination; fields are kept local unless imaging or CSF cytology shows neuraxis spread",
+      "Systemic chemotherapy has an unestablished role and is considered mainly for unresectable or recurrent disease that has exhausted surgical and radiotherapy options, ideally via a neuro-oncology multidisciplinary team or clinical trial",
+      "First-line approach is maximal safe resection with adjuvant radiotherapy for subtotal resection or higher-grade histology",
+      "For local recurrence, re-resection where feasible and/or radiotherapy (including stereotactic radiosurgery) if not previously given or a new field can be used safely",
+      "Surgery also addresses obstructive hydrocephalus; CSF diversion (endoscopic third ventriculostomy or ventricular shunting) may be needed as part of resection or as an urgent separate step",
+      "Prolonged serial contrast-enhanced MRI surveillance is required because local recurrence can occur years after apparently successful treatment",
+      "Surveillance should also monitor for delayed radiotherapy effects and evolving hydrocephalus, particularly without permanent CSF diversion",
+      "Any new pineal-region mass with hydrocephalus or Parinaud (dorsal midbrain) signs warrants urgent neurosurgical referral for diagnosis and relief of raised intracranial pressure",
+      "Confirmed or suspected cases should be managed in a neuro-oncology and neurosurgical multidisciplinary setting given rarity and lack of standardized systemic therapy",
+      "Local recurrence on surveillance imaging or suspected neuraxis dissemination should prompt re-referral to the multidisciplinary team rather than empiric treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for papillary tumour of the pineal region."
-  }
- ],
- "diagrams": [
-  {
-   "id": "papillary-tumor-pineal-region-real-image",
-   "title": "Papillary tumour of the pineal region: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "papillary_tumor_pineal_region-pathway",
+      "title": "Papillary tumour of the pineal region: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare neuroepithelial tumour of the pineal region occurring in both children and adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute obstructive hydrocephalus with raised intracranial pressure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced brain MRI to characterise the pineal mass and hydrocephalus, Craniospinal MRI to evaluate for dissemination, CSF and serum germ cell tumour markers to exclude germinoma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No established chemotherapy regimen or randomized data exists for this rare tumour; management is individualized rather than algorithm-driven"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying it as an ependymoma or pineal parenchymal tumour without cytokeratin staining"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of papillary tumour of the pineal region."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "papillary_tumor_pineal_region-matrix",
+      "title": "Papillary tumour of the pineal region: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare neuroepithelial tumour of the pineal region occurring in both children and adults",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced brain MRI to characterise the pineal mass and hydrocephalus, Craniospinal MRI to evaluate for dissemination,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pineal parenchymal tumour of intermediate differentiation, Pineoblastoma, Pineocytoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No established chemotherapy regimen or randomized data exists for this rare tumour; management is individualized rather than",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying it as an ependymoma or pineal parenchymal tumour without cytokeratin staining",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for papillary tumour of the pineal region."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "papillary_tumor_pineal_region-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast brain MRI",
+          "cells": [
+            {
+              "text": "Pineal mass and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniospinal MRI",
+          "cells": [
+            {
+              "text": "Dissemination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF and serum germ cell tumour markers",
+          "cells": [
+            {
+              "text": "Germinoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Papillary and solid epithelial-like areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytokeratin immunohistochemistry (CK18)",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF cytology",
+          "cells": [
+            {
+              "text": "Staging, where appropriate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_tumor_pineal_region-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pineal region germ cell tumour",
+          "cells": [
+            {
+              "text": "Germ cell markers; germinoma is radiosensitive, unlike this tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ependymoma",
+          "cells": [
+            {
+              "text": "Misclassified without cytokeratin staining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_tumor_pineal_region-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maximal safe resection",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The primary intervention and strongest determinant of local control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Fractionated or stereotactic, for residual, unresectable or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individualised treatment",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "No established chemotherapy regimen or randomised data"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniospinal irradiation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Not routine, as the tumour lacks germinoma-like radiosensitivity or spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Recurrence can occur years after treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "papillary_tumor_pineal_region-dx-mgmt",
+      "title": "Diagnosis and management of Papillary tumour of the pineal region",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pineal mass with obstructive hydrocephalus or Parinaud signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute obstructive hydrocephalus, falling consciousness, recurrence or spread)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for obstructive hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast brain MRI, craniospinal MRI, CSF and serum germ cell markers, CSF cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show papillary and solid epithelial areas with CK18 positivity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider germinoma, pineoblastoma, ependymoma or pineal parenchymal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal safe surgical resection as the primary intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy for residual, unresectable or recurrent disease, chosen by residual volume",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Craniospinal irradiation not routine; individualised care, no standard chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term surveillance, since recurrence can occur years after treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Intermediate and hard to predict; local recurrence is the main limit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

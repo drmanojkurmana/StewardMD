@@ -1,168 +1,417 @@
 {
- "id": "hook_of_hamate_fracture",
- "name": "Hook of hamate fracture",
- "aliases": [
-  "hamate hook fracture"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Hand surgery / Orthopaedics / Sports medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hand surgery and sports medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An often-missed fracture presenting with ulnar-sided, hypothenar wrist pain, typically in racquet, bat or club sports",
-   "The mechanism is usually a direct blow to the hypothenar area, such as from the butt of a club or bat, or a fall",
-   "Tenderness is localised over the hook of the hamate, and grip may be painful and weak",
-   "It is frequently missed on standard radiographs, and CT is the most reliable imaging",
-   "Nearby structures are at risk, including the ulnar nerve and artery and the flexor tendons of the little finger",
-   "Nonunion is common, and symptomatic cases are often treated by excision of the fractured hook"
+  "id": "hook_of_hamate_fracture",
+  "name": "Hook of hamate fracture",
+  "aliases": [
+    "hamate hook fracture"
   ],
-  "pathophysiology": "The hook of the hamate projects into the palm and forms part of the ulnar carpal tunnel (Guyon canal) and the origin of hypothenar muscles. A direct blow or repetitive impact fractures the hook, and because it has a relatively tenuous blood supply and is subject to shear from attached ligaments and tendons, healing is often poor, leading to nonunion. Its proximity to the ulnar nerve and artery and to the flexor tendons explains the associated neurovascular symptoms and the risk of attritional tendon rupture.",
-  "additionalDifferentials": [
-   "Ulnar-sided wrist sprain",
-   "Triangular fibrocartilage complex injury",
-   "Pisotriquetral pathology",
-   "Guyon canal syndrome of other cause",
-   "Fifth metacarpal base fracture"
-  ],
-  "additionalInvestigations": [
-   "CT of the wrist, the most sensitive test for the fracture",
-   "Dedicated carpal tunnel or oblique radiographic views",
-   "Assessment of ulnar nerve and artery function",
-   "Evaluation of the little and ring finger flexor tendons",
-   "MRI where soft-tissue or vascular injury is suspected"
-  ],
-  "redFlags": [
-   "Ulnar nerve or artery compromise",
-   "Little or ring finger flexor tendon rupture",
-   "Persistent pain from an established nonunion",
-   "Missed diagnosis with ongoing grip weakness"
-  ],
-  "prognosis": "With diagnosis and appropriate treatment, including excision of a symptomatic nonunited hook, outcomes are generally good, whereas missed fractures can cause chronic pain, nerve symptoms and tendon rupture.",
-  "pitfalls": [
-   "Relying on standard radiographs and missing the fracture",
-   "Overlooking ulnar nerve or artery involvement",
-   "Failing to recognise attritional flexor tendon rupture",
-   "Attributing persistent ulnar wrist pain to a simple sprain"
-  ],
-  "references": [
-   "Hand surgery reference texts (standard reference)",
-   "Sports medicine references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acute non-displaced fractures with cast immobilisation of the wrist",
-   "Excise the fractured hook fragment for symptomatic nonunion or displaced fractures, the usual definitive surgical treatment",
-   "Assess and manage associated ulnar nerve and artery compromise within Guyon canal, repairing injury as needed",
-   "Evaluate for and treat attritional flexor tendon rupture of the little and ring fingers",
-   "Provide analgesia and hand-therapy rehabilitation to restore grip strength after treatment",
-   "Advise graded return to racquet, bat or club sport with protective padding or grip modification to prevent recurrence",
-   "Refer to hand or orthopaedic surgery, using CT to confirm the diagnosis and guide management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hook_of_hamate_fracture-pathway",
-   "title": "Hook of hamate fracture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An often-missed fracture presenting with ulnar-sided, hypothenar wrist pain, typically in racquet, bat or club sports",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ulnar nerve or artery compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT of the wrist, the most sensitive test for the fracture, Dedicated carpal tunnel or oblique radiographic views, Assessment of ulnar nerve and artery function"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acute non-displaced fractures with cast immobilisation of the wrist"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on standard radiographs and missing the fracture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hook of hamate fracture."
-  }
- ],
- "tables": [
-  {
-   "id": "hook_of_hamate_fracture-matrix",
-   "title": "Hook of hamate fracture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An often-missed fracture presenting with ulnar-sided, hypothenar wrist pain, typically in racquet, bat or club sports",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Hand surgery / Orthopaedics / Sports medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hand surgery and sports medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An often-missed fracture presenting with ulnar-sided, hypothenar wrist pain, typically in racquet, bat or club sports",
+      "The mechanism is usually a direct blow to the hypothenar area, such as from the butt of a club or bat, or a fall",
+      "Tenderness is localised over the hook of the hamate, and grip may be painful and weak",
+      "It is frequently missed on standard radiographs, and CT is the most reliable imaging",
+      "Nearby structures are at risk, including the ulnar nerve and artery and the flexor tendons of the little finger",
+      "Nonunion is common, and symptomatic cases are often treated by excision of the fractured hook"
     ],
-    [
-     "Key Investigations",
-     "CT of the wrist, the most sensitive test for the fracture, Dedicated carpal tunnel or oblique radiographic views, Assessment of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The hook of the hamate projects into the palm and forms part of the ulnar carpal tunnel (Guyon canal) and the origin of hypothenar muscles. A direct blow or repetitive impact fractures the hook, and because it has a relatively tenuous blood supply and is subject to shear from attached ligaments and tendons, healing is often poor, leading to nonunion. Its proximity to the ulnar nerve and artery and to the flexor tendons explains the associated neurovascular symptoms and the risk of attritional tendon rupture.",
+    "additionalDifferentials": [
+      "Ulnar-sided wrist sprain",
+      "Triangular fibrocartilage complex injury",
+      "Pisotriquetral pathology",
+      "Guyon canal syndrome of other cause",
+      "Fifth metacarpal base fracture"
     ],
-    [
-     "Primary Differentials",
-     "Ulnar-sided wrist sprain, Triangular fibrocartilage complex injury, Pisotriquetral pathology",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT of the wrist, the most sensitive test for the fracture",
+      "Dedicated carpal tunnel or oblique radiographic views",
+      "Assessment of ulnar nerve and artery function",
+      "Evaluation of the little and ring finger flexor tendons",
+      "MRI where soft-tissue or vascular injury is suspected"
     ],
-    [
-     "Management Strategy",
-     "Treat acute non-displaced fractures with cast immobilisation of the wrist",
-     "Core treatment modality"
+    "redFlags": [
+      "Ulnar nerve or artery compromise",
+      "Little or ring finger flexor tendon rupture",
+      "Persistent pain from an established nonunion",
+      "Missed diagnosis with ongoing grip weakness"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on standard radiographs and missing the fracture",
-     "Prevent diagnostic or management error"
+    "prognosis": "With diagnosis and appropriate treatment, including excision of a symptomatic nonunited hook, outcomes are generally good, whereas missed fractures can cause chronic pain, nerve symptoms and tendon rupture.",
+    "pitfalls": [
+      "Relying on standard radiographs and missing the fracture",
+      "Overlooking ulnar nerve or artery involvement",
+      "Failing to recognise attritional flexor tendon rupture",
+      "Attributing persistent ulnar wrist pain to a simple sprain"
+    ],
+    "references": [
+      "Hand surgery reference texts (standard reference)",
+      "Sports medicine references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acute non-displaced fractures with cast immobilisation of the wrist",
+      "Excise the fractured hook fragment for symptomatic nonunion or displaced fractures, the usual definitive surgical treatment",
+      "Assess and manage associated ulnar nerve and artery compromise within Guyon canal, repairing injury as needed",
+      "Evaluate for and treat attritional flexor tendon rupture of the little and ring fingers",
+      "Provide analgesia and hand-therapy rehabilitation to restore grip strength after treatment",
+      "Advise graded return to racquet, bat or club sport with protective padding or grip modification to prevent recurrence",
+      "Refer to hand or orthopaedic surgery, using CT to confirm the diagnosis and guide management"
     ]
-   ],
-   "caption": "Overview comparison matrix for hook of hamate fracture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hook-of-hamate-fracture-real-image",
-   "title": "Hook of hamate fracture: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "hook_of_hamate_fracture-pathway",
+      "title": "Hook of hamate fracture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An often-missed fracture presenting with ulnar-sided, hypothenar wrist pain, typically in racquet, bat or club sports",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ulnar nerve or artery compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT of the wrist, the most sensitive test for the fracture, Dedicated carpal tunnel or oblique radiographic views, Assessment of ulnar nerve and artery function"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acute non-displaced fractures with cast immobilisation of the wrist"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on standard radiographs and missing the fracture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hook of hamate fracture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hook_of_hamate_fracture-matrix",
+      "title": "Hook of hamate fracture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An often-missed fracture presenting with ulnar-sided, hypothenar wrist pain, typically in racquet, bat or club sports",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT of the wrist, the most sensitive test for the fracture, Dedicated carpal tunnel or oblique radiographic views, Assessment of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ulnar-sided wrist sprain, Triangular fibrocartilage complex injury, Pisotriquetral pathology",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acute non-displaced fractures with cast immobilisation of the wrist",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on standard radiographs and missing the fracture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hook of hamate fracture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hand surgery and sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hook_of_hamate_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of the wrist",
+          "cells": [
+            {
+              "text": "Most sensitive test for the fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carpal tunnel or oblique radiographic views",
+          "cells": [
+            {
+              "text": "Hook of hamate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar nerve and artery assessment",
+          "cells": [
+            {
+              "text": "Compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexor tendon assessment of the little and ring fingers",
+          "cells": [
+            {
+              "text": "Tendon involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue or vascular injury, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hook_of_hamate_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cast immobilisation",
+          "cells": [
+            {
+              "text": "Acute non-displaced fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision of the hook fragment",
+          "cells": [
+            {
+              "text": "Symptomatic nonunion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar nerve and artery injury",
+          "cells": [
+            {
+              "text": "Assessed and managed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexor tendon rupture",
+          "cells": [
+            {
+              "text": "Attritional rupture evaluated and treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and hand therapy",
+          "cells": [
+            {
+              "text": "Restores grip and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded return to sport",
+          "cells": [
+            {
+              "text": "Racquet, bat or club sports"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand or orthopaedic surgery referral",
+          "cells": [
+            {
+              "text": "CT to confirm the fracture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hook_of_hamate_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Hook of hamate fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ulnar-sided wrist pain after a swing or grip injury, with grip weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ulnar nerve or artery compromise, flexor tendon rupture, or pain from nonunion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent hand surgical review for nerve, artery or tendon compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT of the wrist; carpal tunnel views; ulnar nerve and artery check; tendon check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a hook of hamate fracture confirmed on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ulnar sprain, TFCC injury, pisotriquetral disease or 5th metacarpal fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cast immobilisation for acute non-displaced fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excision of the hook fragment for symptomatic nonunion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Management of associated ulnar nerve and artery injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand-therapy rehabilitation and graded return to sport",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fracture healed or excised; grip restored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

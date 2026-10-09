@@ -1,175 +1,475 @@
 {
- "id": "chondrodysplasia_grebe",
- "name": "Grebe chondrodysplasia",
- "aliases": [
-  "Grebe syndrome",
-  "Grebe dysplasia",
-  "GDF5",
-  "CDMP1"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Skeletal dysplasia",
- "specialty": "Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Skeletal dysplasia references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Grebe chondrodysplasia is an autosomal recessive acromesomelic dysplasia caused by loss-of-function variants in GDF5 (growth/differentiation factor 5, formerly CDMP1).",
-   "The severity of limb shortening increases distally, so the hands and feet are most affected with rudimentary, knob-like digits, while proximal segments are relatively preserved, the reverse of a rhizomelic gradient.",
-   "The trunk, skull and intelligence are normal, and the condition is generally non-lethal with survival into adulthood.",
-   "Postaxial polydactyly may occur, and the malformed digits can resemble small toes.",
-   "Heterozygous carriers may show brachydactyly, typically type C, reflecting GDF5 dosage sensitivity.",
-   "It belongs to a GDF5-related spectrum, being allelic with Hunter-Thompson acromesomelic dysplasia and related to Du Pan syndrome, with Grebe being the most severe.",
-   "Although the limbs are severely malformed, the disorder is compatible with life and normal cognition.",
-   "Counselling is autosomal recessive; describing the distal-predominant micromelia helps distinguish it from lethal chondrodysplasias."
+  "id": "chondrodysplasia_grebe",
+  "name": "Grebe chondrodysplasia",
+  "aliases": [
+    "Grebe syndrome",
+    "Grebe dysplasia",
+    "GDF5",
+    "CDMP1"
   ],
-  "pathophysiology": "Grebe chondrodysplasia results from biallelic loss-of-function variants in GDF5 (CDMP1), which encodes a bone morphogenetic protein family signalling molecule essential for appendicular skeletogenesis and synovial joint formation, acting largely through the receptor BMPR1B. Loss of GDF5 signalling impairs chondrogenesis in the developing limb with a striking distal-to-proximal gradient, so the middle and distal limb segments and the digits are most severely truncated. The condition is allelic and pathway-related to Hunter-Thompson acromesomelic dysplasia and to Du Pan syndrome (fibular hypoplasia with brachydactyly), which represent milder phenotypes along the same signalling axis. The axial skeleton and craniofacial development, which depend less on GDF5, are spared.",
-  "additionalDifferentials": [
-   "Acromesomelic dysplasia, Hunter-Thompson type (GDF5)",
-   "Du Pan syndrome (GDF5 and BMPR1B pathway)",
-   "Acromesomelic dysplasia, Maroteaux type (NPR2)",
-   "Diastrophic dysplasia",
-   "Robinow syndrome",
-   "Chondroectodermal dysplasia (Ellis-van Creveld syndrome)"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey showing acromesomelic shortening and absent or hypoplastic phalanges with carpal and tarsal anomalies",
-   "GDF5 molecular genetic testing",
-   "Clinical photography with segmental limb measurements",
-   "Family history and segregation analysis for recessive inheritance",
-   "Examination of parents for brachydactyly",
-   "Antenatal ultrasound in at-risk pregnancies"
-  ],
-  "redFlags": [
-   "Severe distal limb and digit malformation in a neonate with a normal trunk and cognition, to avoid unnecessary investigation for a lethal dysplasia",
-   "Consanguinity or a suggestive family history",
-   "Functional hand impairment requiring early rehabilitation and orthopaedic input"
-  ],
-  "prognosis": "Non-lethal with a normal lifespan and normal intelligence; morbidity relates to severe limb and hand deformity and functional limitation, though mobility is often preserved.",
-  "pitfalls": [
-   "Mistaking the severe micromelia for a lethal chondrodysplasia",
-   "Missing the characteristic distal-worsening gradient of limb shortening",
-   "Overlooking brachydactyly in heterozygous parents",
-   "Confusing it with other acromesomelic dysplasias without molecular testing"
-  ],
-  "references": [
-   "Skeletal dysplasia nosology and classification",
-   "Medical genetics reference texts",
-   "Acromesomelic dysplasia clinical literature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no disease-specific drug therapy, so management is supportive and focused on function",
-   "Provide orthopaedic assessment and selective reconstructive or corrective surgery for severe limb and digital deformity",
-   "Optimise mobility and hand function with physiotherapy, occupational therapy and assistive devices",
-   "Fit prostheses, orthoses and adaptive aids to support independence",
-   "Provide genetic counselling for autosomal recessive inheritance, noting brachydactyly in heterozygous carriers",
-   "Offer segregation analysis and targeted antenatal ultrasound or molecular prenatal diagnosis in at-risk pregnancies",
-   "Coordinate care through clinical genetics and a skeletal dysplasia multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chondrodysplasia_grebe-pathway",
-   "title": "Grebe chondrodysplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Grebe chondrodysplasia is an autosomal recessive acromesomelic dysplasia caused by loss-of-function variants in GDF5 (growth/differentiation factor 5, formerly CDMP1).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe distal limb and digit malformation in a neonate with a normal trunk and cognition, to avoid unnecessary investigation for a lethal dysplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey showing acromesomelic shortening and absent or hypoplastic phalanges with carpal and tarsal anomalies, GDF5 molecular genetic testing, Clinical photography with segmental limb measurements"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no disease-specific drug therapy, so management is supportive and focused on function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the severe micromelia for a lethal chondrodysplasia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of grebe chondrodysplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "chondrodysplasia_grebe-matrix",
-   "title": "Grebe chondrodysplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Grebe chondrodysplasia is an autosomal recessive acromesomelic dysplasia caused by loss-of-function variants in GDF5",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Skeletal dysplasia",
+  "specialty": "Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Skeletal dysplasia references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Grebe chondrodysplasia is an autosomal recessive acromesomelic dysplasia caused by loss-of-function variants in GDF5 (growth/differentiation factor 5, formerly CDMP1).",
+      "The severity of limb shortening increases distally, so the hands and feet are most affected with rudimentary, knob-like digits, while proximal segments are relatively preserved, the reverse of a rhizomelic gradient.",
+      "The trunk, skull and intelligence are normal, and the condition is generally non-lethal with survival into adulthood.",
+      "Postaxial polydactyly may occur, and the malformed digits can resemble small toes.",
+      "Heterozygous carriers may show brachydactyly, typically type C, reflecting GDF5 dosage sensitivity.",
+      "It belongs to a GDF5-related spectrum, being allelic with Hunter-Thompson acromesomelic dysplasia and related to Du Pan syndrome, with Grebe being the most severe.",
+      "Although the limbs are severely malformed, the disorder is compatible with life and normal cognition.",
+      "Counselling is autosomal recessive; describing the distal-predominant micromelia helps distinguish it from lethal chondrodysplasias."
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey showing acromesomelic shortening and absent or hypoplastic phalanges with carpal and tarsal anomalies, GDF5",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Grebe chondrodysplasia results from biallelic loss-of-function variants in GDF5 (CDMP1), which encodes a bone morphogenetic protein family signalling molecule essential for appendicular skeletogenesis and synovial joint formation, acting largely through the receptor BMPR1B. Loss of GDF5 signalling impairs chondrogenesis in the developing limb with a striking distal-to-proximal gradient, so the middle and distal limb segments and the digits are most severely truncated. The condition is allelic and pathway-related to Hunter-Thompson acromesomelic dysplasia and to Du Pan syndrome (fibular hypoplasia with brachydactyly), which represent milder phenotypes along the same signalling axis. The axial skeleton and craniofacial development, which depend less on GDF5, are spared.",
+    "additionalDifferentials": [
+      "Acromesomelic dysplasia, Hunter-Thompson type (GDF5)",
+      "Du Pan syndrome (GDF5 and BMPR1B pathway)",
+      "Acromesomelic dysplasia, Maroteaux type (NPR2)",
+      "Diastrophic dysplasia",
+      "Robinow syndrome",
+      "Chondroectodermal dysplasia (Ellis-van Creveld syndrome)"
     ],
-    [
-     "Primary Differentials",
-     "Acromesomelic dysplasia, Hunter-Thompson type (GDF5), Du Pan syndrome (GDF5 and BMPR1B pathway), Acromesomelic dysplasia,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey showing acromesomelic shortening and absent or hypoplastic phalanges with carpal and tarsal anomalies",
+      "GDF5 molecular genetic testing",
+      "Clinical photography with segmental limb measurements",
+      "Family history and segregation analysis for recessive inheritance",
+      "Examination of parents for brachydactyly",
+      "Antenatal ultrasound in at-risk pregnancies"
     ],
-    [
-     "Management Strategy",
-     "There is no disease-specific drug therapy, so management is supportive and focused on function",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe distal limb and digit malformation in a neonate with a normal trunk and cognition, to avoid unnecessary investigation for a lethal dysplasia",
+      "Consanguinity or a suggestive family history",
+      "Functional hand impairment requiring early rehabilitation and orthopaedic input"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the severe micromelia for a lethal chondrodysplasia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Non-lethal with a normal lifespan and normal intelligence; morbidity relates to severe limb and hand deformity and functional limitation, though mobility is often preserved.",
+    "pitfalls": [
+      "Mistaking the severe micromelia for a lethal chondrodysplasia",
+      "Missing the characteristic distal-worsening gradient of limb shortening",
+      "Overlooking brachydactyly in heterozygous parents",
+      "Confusing it with other acromesomelic dysplasias without molecular testing"
+    ],
+    "references": [
+      "Skeletal dysplasia nosology and classification",
+      "Medical genetics reference texts",
+      "Acromesomelic dysplasia clinical literature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no disease-specific drug therapy, so management is supportive and focused on function",
+      "Provide orthopaedic assessment and selective reconstructive or corrective surgery for severe limb and digital deformity",
+      "Optimise mobility and hand function with physiotherapy, occupational therapy and assistive devices",
+      "Fit prostheses, orthoses and adaptive aids to support independence",
+      "Provide genetic counselling for autosomal recessive inheritance, noting brachydactyly in heterozygous carriers",
+      "Offer segregation analysis and targeted antenatal ultrasound or molecular prenatal diagnosis in at-risk pregnancies",
+      "Coordinate care through clinical genetics and a skeletal dysplasia multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for grebe chondrodysplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chondrodysplasia-grebe-real-image",
-   "title": "Grebe chondrodysplasia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "chondrodysplasia_grebe-pathway",
+      "title": "Grebe chondrodysplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Grebe chondrodysplasia is an autosomal recessive acromesomelic dysplasia caused by loss-of-function variants in GDF5 (growth/differentiation factor 5, formerly CDMP1).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe distal limb and digit malformation in a neonate with a normal trunk and cognition, to avoid unnecessary investigation for a lethal dysplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey showing acromesomelic shortening and absent or hypoplastic phalanges with carpal and tarsal anomalies, GDF5 molecular genetic testing, Clinical photography with segmental limb measurements"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no disease-specific drug therapy, so management is supportive and focused on function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the severe micromelia for a lethal chondrodysplasia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of grebe chondrodysplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chondrodysplasia_grebe-matrix",
+      "title": "Grebe chondrodysplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Grebe chondrodysplasia is an autosomal recessive acromesomelic dysplasia caused by loss-of-function variants in GDF5",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey showing acromesomelic shortening and absent or hypoplastic phalanges with carpal and tarsal anomalies, GDF5",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acromesomelic dysplasia, Hunter-Thompson type (GDF5), Du Pan syndrome (GDF5 and BMPR1B pathway), Acromesomelic dysplasia,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no disease-specific drug therapy, so management is supportive and focused on function",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the severe micromelia for a lethal chondrodysplasia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for grebe chondrodysplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Skeletal dysplasia references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chondrodysplasia_grebe-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Acromesomelic shortening with absent or hypoplastic phalanges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GDF5 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical photography with segmental limb measurements",
+          "cells": [
+            {
+              "text": "Documents distal-predominant shortening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of parents for brachydactyly",
+          "cells": [
+            {
+              "text": "Heterozygous carriers may show brachydactyly, typically type C"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal ultrasound",
+          "cells": [
+            {
+              "text": "In at-risk pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondrodysplasia_grebe-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acromesomelic dysplasia, Hunter-Thompson type",
+          "cells": [
+            {
+              "text": "Allelic GDF5 disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acromesomelic dysplasia, Maroteaux type",
+          "cells": [
+            {
+              "text": "NPR2 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondrodysplasia_grebe-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No disease-specific drug therapy; focus on function"
+            },
+            {
+              "text": "Core care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surgery",
+          "cells": [
+            {
+              "text": "Selective reconstructive or corrective surgery for severe limb and digital deformity"
+            },
+            {
+              "text": "Severe deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and devices",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and assistive devices"
+            },
+            {
+              "text": "Mobility and hand function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostheses and orthoses",
+          "cells": [
+            {
+              "text": "Fit prostheses, orthoses and adaptive aids"
+            },
+            {
+              "text": "Independence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; brachydactyly in heterozygous carriers"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prenatal diagnosis",
+          "cells": [
+            {
+              "text": "Segregation analysis and targeted antenatal ultrasound or molecular prenatal diagnosis"
+            },
+            {
+              "text": "At-risk pregnancies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team coordination",
+          "cells": [
+            {
+              "text": "Clinical genetics and a skeletal dysplasia multidisciplinary team"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chondrodysplasia_grebe-dx-mgmt",
+      "title": "Diagnosis and management of Grebe chondrodysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Grebe chondrodysplasia: severe distal limb shortening, normal cognition",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (consanguinity, suggestive family history, hand impairment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: early hand rehabilitation and orthopaedic input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, GDF5 testing, limb measurements and parental examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Acromesomelic pattern with biallelic GDF5 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive, function-focused care; no disease-specific drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Hunter-Thompson, Du Pan and Maroteaux acromesomelic dysplasias",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and assistive devices",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Selective reconstructive surgery for severe limb or digital deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prostheses, orthoses and adaptive aids to support independence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Autosomal recessive counselling; prenatal diagnosis in at-risk pregnancies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

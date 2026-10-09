@@ -1,177 +1,457 @@
 {
- "id": "donohue_syndrome",
- "name": "Donohue syndrome (leprechaunism, INSR)",
- "aliases": [
-  "leprechaunism",
-  "INSR mutation",
-  "insulin receptor gene defect",
-  "severe insulin receptoropathy"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder from severe biallelic INSR (insulin receptor) mutations causing the most extreme form of genetic insulin resistance",
-   "Presents in infancy with intrauterine and postnatal growth failure, marked subcutaneous fat and muscle loss, and dysmorphic 'elfin' facies",
-   "Acanthosis nigricans, hypertrichosis, and enlarged genitalia are characteristic, and girls may show ovarian cysts and virilisation",
-   "The hallmark glucose pattern is fasting hypoglycaemia alternating with severe postprandial hyperglycaemia, reflecting near-absent insulin signalling",
-   "Circulating insulin levels are enormously elevated because target tissues cannot respond to insulin",
-   "Because the defect is at the receptor, leptin has a limited role and recombinant IGF-1 (and IGF-1/IGFBP-3) is used to engage the IGF-1 receptor and improve metabolic control",
-   "It is the most severe end of the INSR spectrum, more extreme than Rabson-Mendenhall syndrome and type A insulin resistance",
-   "Diagnosis rests on the phenotype, extreme hyperinsulinaemia with the fasting-hypoglycaemia/postprandial-hyperglycaemia pattern, and INSR genetics"
+  "id": "donohue_syndrome",
+  "name": "Donohue syndrome (leprechaunism, INSR)",
+  "aliases": [
+    "leprechaunism",
+    "INSR mutation",
+    "insulin receptor gene defect",
+    "severe insulin receptoropathy"
   ],
-  "pathophysiology": "Donohue syndrome results from severe loss-of-function mutations in both copies of the insulin receptor gene (INSR), so insulin can bind but cannot transmit its signal. Insulin normally suppresses hepatic glucose output and promotes tissue glucose uptake and growth; when receptor signalling is almost absent, tissues cannot use glucose or grow normally despite grossly elevated insulin concentrations. This produces intrauterine growth restriction, near-total loss of adipose tissue and muscle, and a paradoxical glucose profile of fasting hypoglycaemia (from insulin's residual and IGF-mediated effects and poor counter-regulation) with severe postprandial hyperglycaemia. Impaired insulin/IGF signalling also underlies the dysmorphism, hypertrichosis, and organ abnormalities.",
-  "additionalDifferentials": [
-   "Rabson-Mendenhall syndrome (less severe INSR defect)",
-   "Type A insulin resistance syndrome",
-   "Congenital generalised lipodystrophy",
-   "Other neonatal progeroid or growth-restriction syndromes",
-   "Neonatal diabetes mellitus",
-   "Intrauterine growth restriction from placental causes",
-   "Congenital infections causing dysmorphism and growth failure"
-  ],
-  "additionalInvestigations": [
-   "Fasting and postprandial glucose to capture the hypoglycaemia/hyperglycaemia pattern",
-   "Fasting insulin and C-peptide, characteristically extremely elevated",
-   "INSR gene sequencing to confirm biallelic mutations",
-   "Serum leptin and lipid profile to characterise the metabolic state",
-   "Pelvic/gonadal imaging for ovarian cysts or genital abnormalities",
-   "Growth and developmental assessment with review of antenatal growth"
-  ],
-  "redFlags": [
-   "Recurrent fasting or nocturnal hypoglycaemia in infancy",
-   "Severe failure to thrive with progressive wasting",
-   "Life-threatening infections given frequent early mortality",
-   "Marked postprandial hyperglycaemia with ketosis risk"
-  ],
-  "prognosis": "Prognosis is poor, with most affected infants dying within the first one to two years of life from metabolic instability and infection, although recombinant IGF-1-based therapy may modestly improve metabolic control and survival in some children.",
-  "pitfalls": [
-   "Misreading the extreme hyperinsulinaemia as an insulinoma rather than receptor resistance",
-   "Overlooking the diagnostic fasting-hypoglycaemia/postprandial-hyperglycaemia oscillation",
-   "Attempting to control hyperglycaemia with escalating insulin, which is ineffective",
-   "Failing to arrange INSR genetics and genetic counselling for the family",
-   "Confusing the elfin dysmorphism with a congenital infection"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on severe insulin resistance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recombinant IGF-1 (mecasermin), or IGF-1 combined with IGFBP-3, to engage the IGF-1 receptor and bypass the defective insulin receptor and improve metabolic control",
-   "Frequent feeding and nutritional support to limit fasting hypoglycaemia, with careful management of postprandial hyperglycaemia",
-   "Continuous glucose monitoring to manage the alternating hypoglycaemia and hyperglycaemia",
-   "Aggressive treatment of intercurrent infection, a major cause of death",
-   "Monitor growth and the glycaemic profile, and screen for ovarian cysts and organ complications",
-   "Multidisciplinary paediatric endocrinology and genetics input, with honest discussion of the poor prognosis and palliative considerations",
-   "Genetic counselling and family testing given autosomal recessive INSR inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "donohue_syndrome-pathway",
-   "title": "Donohue syndrome (leprechaunism, INSR): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder from severe biallelic INSR (insulin receptor) mutations causing the most extreme form of genetic insulin resistance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent fasting or nocturnal hypoglycaemia in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting and postprandial glucose to capture the hypoglycaemia/hyperglycaemia pattern, Fasting insulin and C-peptide, characteristically extremely elevated, INSR gene sequencing to confirm biallelic mutations"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recombinant IGF-1 (mecasermin), or IGF-1 combined with IGFBP-3, to engage the IGF-1 receptor and bypass the defective insulin receptor and improve metabolic control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misreading the extreme hyperinsulinaemia as an insulinoma rather than receptor resistance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of donohue syndrome (leprechaunism, insr)."
-  }
- ],
- "tables": [
-  {
-   "id": "donohue_syndrome-matrix",
-   "title": "Donohue syndrome (leprechaunism, INSR): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder from severe biallelic INSR (insulin receptor) mutations causing the most extreme form of genetic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder from severe biallelic INSR (insulin receptor) mutations causing the most extreme form of genetic insulin resistance",
+      "Presents in infancy with intrauterine and postnatal growth failure, marked subcutaneous fat and muscle loss, and dysmorphic 'elfin' facies",
+      "Acanthosis nigricans, hypertrichosis, and enlarged genitalia are characteristic, and girls may show ovarian cysts and virilisation",
+      "The hallmark glucose pattern is fasting hypoglycaemia alternating with severe postprandial hyperglycaemia, reflecting near-absent insulin signalling",
+      "Circulating insulin levels are enormously elevated because target tissues cannot respond to insulin",
+      "Because the defect is at the receptor, leptin has a limited role and recombinant IGF-1 (and IGF-1/IGFBP-3) is used to engage the IGF-1 receptor and improve metabolic control",
+      "It is the most severe end of the INSR spectrum, more extreme than Rabson-Mendenhall syndrome and type A insulin resistance",
+      "Diagnosis rests on the phenotype, extreme hyperinsulinaemia with the fasting-hypoglycaemia/postprandial-hyperglycaemia pattern, and INSR genetics"
     ],
-    [
-     "Key Investigations",
-     "Fasting and postprandial glucose to capture the hypoglycaemia/hyperglycaemia pattern, Fasting insulin and C-peptide,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Donohue syndrome results from severe loss-of-function mutations in both copies of the insulin receptor gene (INSR), so insulin can bind but cannot transmit its signal. Insulin normally suppresses hepatic glucose output and promotes tissue glucose uptake and growth; when receptor signalling is almost absent, tissues cannot use glucose or grow normally despite grossly elevated insulin concentrations. This produces intrauterine growth restriction, near-total loss of adipose tissue and muscle, and a paradoxical glucose profile of fasting hypoglycaemia (from insulin's residual and IGF-mediated effects and poor counter-regulation) with severe postprandial hyperglycaemia. Impaired insulin/IGF signalling also underlies the dysmorphism, hypertrichosis, and organ abnormalities.",
+    "additionalDifferentials": [
+      "Rabson-Mendenhall syndrome (less severe INSR defect)",
+      "Type A insulin resistance syndrome",
+      "Congenital generalised lipodystrophy",
+      "Other neonatal progeroid or growth-restriction syndromes",
+      "Neonatal diabetes mellitus",
+      "Intrauterine growth restriction from placental causes",
+      "Congenital infections causing dysmorphism and growth failure"
     ],
-    [
-     "Primary Differentials",
-     "Rabson-Mendenhall syndrome (less severe INSR defect), Type A insulin resistance syndrome, Congenital generalised lipodystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting and postprandial glucose to capture the hypoglycaemia/hyperglycaemia pattern",
+      "Fasting insulin and C-peptide, characteristically extremely elevated",
+      "INSR gene sequencing to confirm biallelic mutations",
+      "Serum leptin and lipid profile to characterise the metabolic state",
+      "Pelvic/gonadal imaging for ovarian cysts or genital abnormalities",
+      "Growth and developmental assessment with review of antenatal growth"
     ],
-    [
-     "Management Strategy",
-     "Recombinant IGF-1 (mecasermin), or IGF-1 combined with IGFBP-3, to engage the IGF-1 receptor and bypass the defective insulin",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent fasting or nocturnal hypoglycaemia in infancy",
+      "Severe failure to thrive with progressive wasting",
+      "Life-threatening infections given frequent early mortality",
+      "Marked postprandial hyperglycaemia with ketosis risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Misreading the extreme hyperinsulinaemia as an insulinoma rather than receptor resistance",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is poor, with most affected infants dying within the first one to two years of life from metabolic instability and infection, although recombinant IGF-1-based therapy may modestly improve metabolic control and survival in some children.",
+    "pitfalls": [
+      "Misreading the extreme hyperinsulinaemia as an insulinoma rather than receptor resistance",
+      "Overlooking the diagnostic fasting-hypoglycaemia/postprandial-hyperglycaemia oscillation",
+      "Attempting to control hyperglycaemia with escalating insulin, which is ineffective",
+      "Failing to arrange INSR genetics and genetic counselling for the family",
+      "Confusing the elfin dysmorphism with a congenital infection"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on severe insulin resistance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recombinant IGF-1 (mecasermin), or IGF-1 combined with IGFBP-3, to engage the IGF-1 receptor and bypass the defective insulin receptor and improve metabolic control",
+      "Frequent feeding and nutritional support to limit fasting hypoglycaemia, with careful management of postprandial hyperglycaemia",
+      "Continuous glucose monitoring to manage the alternating hypoglycaemia and hyperglycaemia",
+      "Aggressive treatment of intercurrent infection, a major cause of death",
+      "Monitor growth and the glycaemic profile, and screen for ovarian cysts and organ complications",
+      "Multidisciplinary paediatric endocrinology and genetics input, with honest discussion of the poor prognosis and palliative considerations",
+      "Genetic counselling and family testing given autosomal recessive INSR inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for donohue syndrome (leprechaunism, insr)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "donohue-syndrome-real-image",
-   "title": "Donohue syndrome (leprechaunism, INSR): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "donohue_syndrome-pathway",
+      "title": "Donohue syndrome (leprechaunism, INSR): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder from severe biallelic INSR (insulin receptor) mutations causing the most extreme form of genetic insulin resistance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent fasting or nocturnal hypoglycaemia in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting and postprandial glucose to capture the hypoglycaemia/hyperglycaemia pattern, Fasting insulin and C-peptide, characteristically extremely elevated, INSR gene sequencing to confirm biallelic mutations"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recombinant IGF-1 (mecasermin), or IGF-1 combined with IGFBP-3, to engage the IGF-1 receptor and bypass the defective insulin receptor and improve metabolic control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misreading the extreme hyperinsulinaemia as an insulinoma rather than receptor resistance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of donohue syndrome (leprechaunism, insr)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "donohue_syndrome-matrix",
+      "title": "Donohue syndrome (leprechaunism, INSR): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder from severe biallelic INSR (insulin receptor) mutations causing the most extreme form of genetic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting and postprandial glucose to capture the hypoglycaemia/hyperglycaemia pattern, Fasting insulin and C-peptide,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rabson-Mendenhall syndrome (less severe INSR defect), Type A insulin resistance syndrome, Congenital generalised lipodystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recombinant IGF-1 (mecasermin), or IGF-1 combined with IGFBP-3, to engage the IGF-1 receptor and bypass the defective insulin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misreading the extreme hyperinsulinaemia as an insulinoma rather than receptor resistance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for donohue syndrome (leprechaunism, insr)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "donohue_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting and postprandial glucose",
+          "cells": [
+            {
+              "text": "Fasting hypoglycaemia and postprandial hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting insulin and C-peptide",
+          "cells": [
+            {
+              "text": "Extremely elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "INSR gene sequencing",
+          "cells": [
+            {
+              "text": "Biallelic INSR mutations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic and gonadal imaging",
+          "cells": [
+            {
+              "text": "Ovarian cysts or genital abnormalities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "donohue_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rabson-Mendenhall syndrome",
+          "cells": [
+            {
+              "text": "A less severe INSR defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infections causing dysmorphism",
+          "cells": [
+            {
+              "text": "Elfin dysmorphism is easily confused with infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "donohue_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recombinant IGF-1 (mecasermin)",
+          "cells": [
+            {
+              "text": "Engages the IGF-1 receptor to bypass the defective insulin receptor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frequent feeding",
+          "cells": [
+            {
+              "text": "Limits fasting hypoglycaemia; postprandial hyperglycaemia managed separately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous glucose monitoring",
+          "cells": [
+            {
+              "text": "Tracks alternating hypoglycaemia and hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection treatment",
+          "cells": [
+            {
+              "text": "Aggressive treatment; a major cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, glycaemic profile, ovarian cysts and organ complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Endocrinology and genetics; honest discussion of prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive INSR inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "donohue_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Donohue syndrome (leprechaunism, INSR)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Donohue syndrome: severe growth failure with extreme hyperinsulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent hypoglycaemia, severe wasting, life-threatening infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent infection treatment and feeding support for hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting and postprandial glucose; insulin and C-peptide; INSR sequencing; leptin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic INSR mutations found with extreme hyperinsulinaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Rabson-Mendenhall, lipodystrophy, neonatal diabetes or placental causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recombinant IGF-1 (mecasermin) to bypass the defective insulin receptor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Frequent feeding to limit fasting hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continuous glucose monitoring for alternating glycaemic extremes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aggressive treatment of intercurrent infection, a major cause of death",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing for autosomal recessive INSR",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Poor prognosis; most affected infants die in the first two years; IGF-1 may help",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

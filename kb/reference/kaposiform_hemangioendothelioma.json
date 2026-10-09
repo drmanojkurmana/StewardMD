@@ -1,175 +1,464 @@
 {
- "id": "kaposiform_hemangioendothelioma",
- "name": "Kaposiform haemangioendothelioma",
- "aliases": [
-  "KHE",
-  "Kaposiform haemangioendothelioma of infancy",
-  "kaposiform haemangioendothelioma",
-  "kaposiform hemangioendothelioma"
- ],
- "class": "non_infective",
- "system": "Vascular anomalies / Dermatology",
- "specialty": "Vascular Anomalies",
- "referenceOnly": true,
- "reference": {
-  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A locally aggressive vascular tumour of infancy and early childhood, not a malformation, that classically presents as a firm, indurated, purpuric plaque or mass",
-   "It is the principal tumour that triggers the Kasabach-Merritt phenomenon, a profound consumptive coagulopathy with severe thrombocytopenia",
-   "Lesions are typically solitary, may be cutaneous, deep soft tissue, or retroperitoneal, and often feel woody and ill-defined",
-   "Overlying skin change with rapid enlargement, tension and bruising should raise concern for platelet trapping",
-   "Histology shows infiltrating lobules and sheets of spindled endothelial cells with slit-like vessels; it is GLUT1-negative, distinguishing it from infantile haemangioma",
-   "Tufted angioma is considered part of the same spectrum and can also cause the Kasabach-Merritt phenomenon",
-   "First-line medical therapy is commonly sirolimus, often with corticosteroids, particularly when there is coagulopathy",
-   "Imaging (MRI) helps define the infiltrative extent and biopsy confirms the diagnosis when it is safe to perform"
+  "id": "kaposiform_hemangioendothelioma",
+  "name": "Kaposiform haemangioendothelioma",
+  "aliases": [
+    "KHE",
+    "Kaposiform haemangioendothelioma of infancy",
+    "kaposiform haemangioendothelioma",
+    "kaposiform hemangioendothelioma"
   ],
-  "pathophysiology": "Kaposiform haemangioendothelioma is a rare, locally invasive vascular tumour composed of infiltrating nodules of spindled endothelial cells forming slit-like, capillary-like channels reminiscent of Kaposi sarcoma but without its viral association. Its disordered, tortuous vasculature traps and activates platelets, which can precipitate the Kasabach-Merritt phenomenon: intralesional platelet consumption produces severe thrombocytopenia, secondary consumption of fibrinogen and clotting factors, and a life-threatening coagulopathy. The tumour is GLUT1-negative, does not spontaneously involute like infantile haemangioma, and although it does not typically metastasise, its infiltrative growth causes considerable local morbidity.",
-  "additionalDifferentials": [
-   "Tufted angioma (same biological spectrum)",
-   "Infantile haemangioma (GLUT1-positive, involuting)",
-   "Congenital haemangioma",
-   "Infantile fibrosarcoma or other soft-tissue sarcoma",
-   "Venous or lymphatic malformation with bleeding or infection",
-   "Kaposiform lymphangiomatosis"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with platelet count to detect severe thrombocytopenia",
-   "Coagulation studies including fibrinogen and D-dimer for consumptive coagulopathy",
-   "MRI to characterise the infiltrative extent and tissue planes involved",
-   "Image-guided or open biopsy for histological confirmation when bleeding risk allows",
-   "GLUT1 immunostaining to distinguish from infantile haemangioma",
-   "Baseline renal and metabolic panel before starting systemic therapy"
-  ],
-  "redFlags": [
-   "Rapidly enlarging, tense, bruised lesion with falling platelets indicating Kasabach-Merritt phenomenon",
-   "Bleeding, petechiae or haemorrhage from profound thrombocytopenia and coagulopathy",
-   "Retroperitoneal or intrathoracic disease causing mass effect",
-   "Haemodynamic instability or high-output physiology",
-   "Signs of visceral involvement or compromise of adjacent structures"
-  ],
-  "prognosis": "Prognosis depends on tumour extent and whether the Kasabach-Merritt phenomenon develops; the coagulopathy can be life-threatening acutely, but with sirolimus-based therapy many lesions stabilise and regress partially, though residual fibrotic tissue, pain and lymphoedema-like sequelae often persist.",
-  "pitfalls": [
-   "Mistaking it for a bruise, infection or ordinary haemangioma and delaying treatment",
-   "Transfusing platelets routinely, which can be consumed within the tumour and worsen swelling",
-   "Assuming spontaneous involution as would occur with infantile haemangioma",
-   "Attempting biopsy or surgery without correcting or anticipating coagulopathy"
-  ],
-  "references": [
-   "ISSVA Classification of Vascular Anomalies",
-   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with sirolimus as mainstay systemic therapy, adding corticosteroids during active consumptive coagulopathy",
-   "Replace fibrinogen and clotting factors with cryoprecipitate and fresh frozen plasma to support the coagulopathy",
-   "Withhold platelet transfusion except for active bleeding or surgery, since transfused platelets are consumed and can aggravate the lesion",
-   "Reserve image-guided or surgical intervention for accessible or refractory lesions where bleeding risk allows",
-   "Monitor platelet count, fibrinogen and D-dimer serially and follow lesion extent on MRI",
-   "Manage chronic pain and lymphoedema-like sequelae through a multidisciplinary vascular anomalies service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kaposiform_hemangioendothelioma-pathway",
-   "title": "Kaposiform haemangioendothelioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A locally aggressive vascular tumour of infancy and early childhood, not a malformation, that classically presents as a firm, indurated, purpuric plaque or mass",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging, tense, bruised lesion with falling platelets indicating Kasabach-Merritt phenomenon",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with platelet count to detect severe thrombocytopenia, Coagulation studies including fibrinogen and D-dimer for consumptive coagulopathy, MRI to characterise the infiltrative extent and tissue planes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with sirolimus as mainstay systemic therapy, adding corticosteroids during active consumptive coagulopathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for a bruise, infection or ordinary haemangioma and delaying treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kaposiform haemangioendothelioma."
-  }
- ],
- "tables": [
-  {
-   "id": "kaposiform_hemangioendothelioma-matrix",
-   "title": "Kaposiform haemangioendothelioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A locally aggressive vascular tumour of infancy and early childhood, not a malformation, that classically presents as a firm,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular anomalies / Dermatology",
+  "specialty": "Vascular Anomalies",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A locally aggressive vascular tumour of infancy and early childhood, not a malformation, that classically presents as a firm, indurated, purpuric plaque or mass",
+      "It is the principal tumour that triggers the Kasabach-Merritt phenomenon, a profound consumptive coagulopathy with severe thrombocytopenia",
+      "Lesions are typically solitary, may be cutaneous, deep soft tissue, or retroperitoneal, and often feel woody and ill-defined",
+      "Overlying skin change with rapid enlargement, tension and bruising should raise concern for platelet trapping",
+      "Histology shows infiltrating lobules and sheets of spindled endothelial cells with slit-like vessels; it is GLUT1-negative, distinguishing it from infantile haemangioma",
+      "Tufted angioma is considered part of the same spectrum and can also cause the Kasabach-Merritt phenomenon",
+      "First-line medical therapy is commonly sirolimus, often with corticosteroids, particularly when there is coagulopathy",
+      "Imaging (MRI) helps define the infiltrative extent and biopsy confirms the diagnosis when it is safe to perform"
     ],
-    [
-     "Key Investigations",
-     "Full blood count with platelet count to detect severe thrombocytopenia, Coagulation studies including fibrinogen and D-dimer for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kaposiform haemangioendothelioma is a rare, locally invasive vascular tumour composed of infiltrating nodules of spindled endothelial cells forming slit-like, capillary-like channels reminiscent of Kaposi sarcoma but without its viral association. Its disordered, tortuous vasculature traps and activates platelets, which can precipitate the Kasabach-Merritt phenomenon: intralesional platelet consumption produces severe thrombocytopenia, secondary consumption of fibrinogen and clotting factors, and a life-threatening coagulopathy. The tumour is GLUT1-negative, does not spontaneously involute like infantile haemangioma, and although it does not typically metastasise, its infiltrative growth causes considerable local morbidity.",
+    "additionalDifferentials": [
+      "Tufted angioma (same biological spectrum)",
+      "Infantile haemangioma (GLUT1-positive, involuting)",
+      "Congenital haemangioma",
+      "Infantile fibrosarcoma or other soft-tissue sarcoma",
+      "Venous or lymphatic malformation with bleeding or infection",
+      "Kaposiform lymphangiomatosis"
     ],
-    [
-     "Primary Differentials",
-     "Tufted angioma (same biological spectrum), Infantile haemangioma (GLUT1-positive, involuting), Congenital haemangioma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with platelet count to detect severe thrombocytopenia",
+      "Coagulation studies including fibrinogen and D-dimer for consumptive coagulopathy",
+      "MRI to characterise the infiltrative extent and tissue planes involved",
+      "Image-guided or open biopsy for histological confirmation when bleeding risk allows",
+      "GLUT1 immunostaining to distinguish from infantile haemangioma",
+      "Baseline renal and metabolic panel before starting systemic therapy"
     ],
-    [
-     "Management Strategy",
-     "Treat with sirolimus as mainstay systemic therapy, adding corticosteroids during active consumptive coagulopathy",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging, tense, bruised lesion with falling platelets indicating Kasabach-Merritt phenomenon",
+      "Bleeding, petechiae or haemorrhage from profound thrombocytopenia and coagulopathy",
+      "Retroperitoneal or intrathoracic disease causing mass effect",
+      "Haemodynamic instability or high-output physiology",
+      "Signs of visceral involvement or compromise of adjacent structures"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for a bruise, infection or ordinary haemangioma and delaying treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on tumour extent and whether the Kasabach-Merritt phenomenon develops; the coagulopathy can be life-threatening acutely, but with sirolimus-based therapy many lesions stabilise and regress partially, though residual fibrotic tissue, pain and lymphoedema-like sequelae often persist.",
+    "pitfalls": [
+      "Mistaking it for a bruise, infection or ordinary haemangioma and delaying treatment",
+      "Transfusing platelets routinely, which can be consumed within the tumour and worsen swelling",
+      "Assuming spontaneous involution as would occur with infantile haemangioma",
+      "Attempting biopsy or surgery without correcting or anticipating coagulopathy"
+    ],
+    "references": [
+      "ISSVA Classification of Vascular Anomalies",
+      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with sirolimus as mainstay systemic therapy, adding corticosteroids during active consumptive coagulopathy",
+      "Replace fibrinogen and clotting factors with cryoprecipitate and fresh frozen plasma to support the coagulopathy",
+      "Withhold platelet transfusion except for active bleeding or surgery, since transfused platelets are consumed and can aggravate the lesion",
+      "Reserve image-guided or surgical intervention for accessible or refractory lesions where bleeding risk allows",
+      "Monitor platelet count, fibrinogen and D-dimer serially and follow lesion extent on MRI",
+      "Manage chronic pain and lymphoedema-like sequelae through a multidisciplinary vascular anomalies service"
     ]
-   ],
-   "caption": "Overview comparison matrix for kaposiform haemangioendothelioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kaposiform-hemangioendothelioma-real-image",
-   "title": "Kaposiform haemangioendothelioma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "kaposiform_hemangioendothelioma-pathway",
+      "title": "Kaposiform haemangioendothelioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A locally aggressive vascular tumour of infancy and early childhood, not a malformation, that classically presents as a firm, indurated, purpuric plaque or mass",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging, tense, bruised lesion with falling platelets indicating Kasabach-Merritt phenomenon",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with platelet count to detect severe thrombocytopenia, Coagulation studies including fibrinogen and D-dimer for consumptive coagulopathy, MRI to characterise the infiltrative extent and tissue planes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with sirolimus as mainstay systemic therapy, adding corticosteroids during active consumptive coagulopathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for a bruise, infection or ordinary haemangioma and delaying treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kaposiform haemangioendothelioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kaposiform_hemangioendothelioma-matrix",
+      "title": "Kaposiform haemangioendothelioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A locally aggressive vascular tumour of infancy and early childhood, not a malformation, that classically presents as a firm,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with platelet count to detect severe thrombocytopenia, Coagulation studies including fibrinogen and D-dimer for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tufted angioma (same biological spectrum), Infantile haemangioma (GLUT1-positive, involuting), Congenital haemangioma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with sirolimus as mainstay systemic therapy, adding corticosteroids during active consumptive coagulopathy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for a bruise, infection or ordinary haemangioma and delaying treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kaposiform haemangioendothelioma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kaposiform_hemangioendothelioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with platelets",
+          "cells": [
+            {
+              "text": "Severe thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies with fibrinogen and D-dimer",
+          "cells": [
+            {
+              "text": "Consumptive coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Infiltrative extent and tissue planes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy when bleeding risk allows",
+          "cells": [
+            {
+              "text": "Histological confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLUT1 immunostaining",
+          "cells": [
+            {
+              "text": "Distinguishes from infantile haemangioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and metabolic panel",
+          "cells": [
+            {
+              "text": "Baseline before systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kaposiform_hemangioendothelioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infantile haemangioma",
+          "cells": [
+            {
+              "text": "GLUT1 positive and involuting; this tumour does not involute"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tufted angioma",
+          "cells": [
+            {
+              "text": "Same biological spectrum; linked to Kasabach-Merritt phenomenon"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kaposiform_hemangioendothelioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Sirolimus as mainstay; corticosteroids during active consumptive coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrinogen",
+          "cells": [
+            {
+              "text": "Cryoprecipitate and fresh frozen plasma to support the coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelets",
+          "cells": [
+            {
+              "text": "Withheld except for active bleeding or surgery; transfused platelets are consumed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procedures",
+          "cells": [
+            {
+              "text": "Image-guided or surgical intervention for accessible or refractory lesions when bleeding risk allows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Platelets, fibrinogen and D-dimer serially; MRI follow-up of extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic sequelae",
+          "cells": [
+            {
+              "text": "Pain and lymphoedema-like sequelae managed by vascular anomalies service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kaposiform_hemangioendothelioma-dx-mgmt",
+      "title": "Diagnosis and management of Kaposiform haemangioendothelioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm, indurated purpuric plaque or mass in an infant with bruising",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Falling platelets, active bleeding, retroperitoneal or intrathoracic mass, high output?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology and vascular anomaly review; coagulation support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Platelets, fibrinogen, D-dimer, MRI, biopsy with GLUT1 when safe, baseline renal panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Kaposiform tumour with consumptive coagulopathy confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infantile haemangioma or malformation; repeat biopsy and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sirolimus as mainstay systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids during active consumptive coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cryoprecipitate and fresh frozen plasma for fibrinogen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Withhold platelet transfusion except for bleeding or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial platelets, fibrinogen and D-dimer; MRI follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Locally aggressive and does not involute as haemangioma does",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

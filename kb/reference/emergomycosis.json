@@ -1,176 +1,474 @@
 {
- "id": "emergomycosis",
- "name": "Emergomycosis",
- "aliases": [
-  "Emergomyces infection",
-  "Emergomyces africanus infection",
-  "Emmonsia-like infection",
-  "disseminated emergomycosis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / ECMM-ISHAM guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An emerging dimorphic fungal infection caused by Emergomyces species (reclassified from the Emmonsia genus), reported across several continents with a notable burden in southern Africa",
-   "It behaves as an opportunistic dimorphic mycosis, occurring almost exclusively in significantly immunocompromised hosts, especially people with advanced HIV and low CD4 counts",
-   "Disseminated disease is typical, with widespread skin lesions (papules, plaques, and ulcers), fever, weight loss, and respiratory and systemic involvement",
-   "The clinical picture closely mimics disseminated histoplasmosis, talaromycosis, and cutaneous manifestations of other endemic mycoses in HIV",
-   "Diagnosis is confirmed by tissue biopsy and culture showing thermal dimorphism, with histology revealing small intracellular yeast-like cells, supported by molecular identification",
-   "Management uses amphotericin-based induction followed by azole antifungal therapy, together with antiretroviral treatment to restore immune function",
-   "It should be considered in immunocompromised patients with disseminated skin lesions and systemic illness, particularly where these dimorphic fungi are endemic"
+  "id": "emergomycosis",
+  "name": "Emergomycosis",
+  "aliases": [
+    "Emergomyces infection",
+    "Emergomyces africanus infection",
+    "Emmonsia-like infection",
+    "disseminated emergomycosis"
   ],
-  "pathophysiology": "Emergomyces species are thermally dimorphic environmental fungi, existing as moulds in the environment and converting to a yeast-like form at body temperature. Infection is thought to follow inhalation of conidia from soil, with the lungs as the primary portal of entry. In hosts with impaired cell-mediated immunity, particularly advanced HIV, the organism is not contained and disseminates haematogenously, seeding the skin, bone marrow, and multiple organs. The intracellular yeast-like form within macrophages accounts for the histological resemblance to histoplasmosis and the tendency toward widespread disseminated disease.",
-  "additionalDifferentials": [
-   "Disseminated histoplasmosis",
-   "Talaromycosis (Talaromyces marneffei infection)",
-   "Disseminated cryptococcosis with skin involvement",
-   "Cutaneous and disseminated blastomycosis",
-   "Molluscum contagiosum-like lesions in advanced HIV",
-   "Disseminated tuberculosis or non-tuberculous mycobacterial disease"
-  ],
-  "additionalInvestigations": [
-   "Skin-lesion biopsy for histopathology and fungal culture",
-   "Fungal culture demonstrating thermal dimorphism with molecular species identification",
-   "Blood and bone-marrow cultures in disseminated disease",
-   "HIV testing and CD4 count to define immune status",
-   "Chest imaging to assess pulmonary involvement",
-   "Testing to exclude mimicking endemic mycoses such as histoplasmosis and talaromycosis"
-  ],
-  "redFlags": [
-   "Widespread skin lesions with systemic illness in an advanced-HIV patient",
-   "Rapid clinical deterioration with multi-organ involvement",
-   "Respiratory failure from pulmonary dissemination",
-   "Very low CD4 count with disseminated fungal disease",
-   "Immune reconstitution inflammatory syndrome after starting antiretroviral therapy"
-  ],
-  "prognosis": "Untreated disseminated emergomycosis is frequently fatal, but with prompt antifungal therapy and immune restoration through antiretroviral treatment outcomes improve substantially; prognosis depends on the degree of immunosuppression and timeliness of diagnosis.",
-  "pitfalls": [
-   "Misdiagnosing it as disseminated histoplasmosis or talaromycosis given their close resemblance",
-   "Failing to obtain tissue for culture and molecular identification",
-   "Overlooking the diagnosis outside classically endemic regions as its recognised range expands",
-   "Not coordinating antifungal therapy with antiretroviral treatment and monitoring for immune reconstitution inflammatory syndrome",
-   "Attributing skin lesions to more common HIV-associated conditions without biopsy"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "ECMM-ISHAM guidance on emerging dimorphic fungal infections"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Amphotericin B-based induction antifungal therapy, using liposomal amphotericin, for disseminated disease",
-   "Step-down consolidation with an azole antifungal such as itraconazole after induction",
-   "Antiretroviral therapy to restore cell-mediated immunity in HIV, timed to reduce the risk of immune reconstitution inflammatory syndrome",
-   "Supportive care for fever, weight loss and systemic involvement, with wound care of ulcerating cutaneous lesions",
-   "Monitoring of antifungal response, azole drug levels and interactions with antiretrovirals, and of organ function",
-   "Vigilance for and management of immune reconstitution inflammatory syndrome after antiretroviral initiation",
-   "Infectious diseases referral with long-term follow-up and secondary antifungal prophylaxis until immune recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "emergomycosis-pathway",
-   "title": "Emergomycosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An emerging dimorphic fungal infection caused by Emergomyces species (reclassified from the Emmonsia genus), reported across several continents with a notable burden in southern Africa",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Widespread skin lesions with systemic illness in an advanced-HIV patient",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin-lesion biopsy for histopathology and fungal culture, Fungal culture demonstrating thermal dimorphism with molecular species identification, Blood and bone-marrow cultures in disseminated disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Amphotericin B-based induction antifungal therapy, using liposomal amphotericin, for disseminated disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as disseminated histoplasmosis or talaromycosis given their close resemblance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of emergomycosis."
-  }
- ],
- "tables": [
-  {
-   "id": "emergomycosis-matrix",
-   "title": "Emergomycosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An emerging dimorphic fungal infection caused by Emergomyces species (reclassified from the Emmonsia genus), reported across",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / ECMM-ISHAM guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An emerging dimorphic fungal infection caused by Emergomyces species (reclassified from the Emmonsia genus), reported across several continents with a notable burden in southern Africa",
+      "It behaves as an opportunistic dimorphic mycosis, occurring almost exclusively in significantly immunocompromised hosts, especially people with advanced HIV and low CD4 counts",
+      "Disseminated disease is typical, with widespread skin lesions (papules, plaques, and ulcers), fever, weight loss, and respiratory and systemic involvement",
+      "The clinical picture closely mimics disseminated histoplasmosis, talaromycosis, and cutaneous manifestations of other endemic mycoses in HIV",
+      "Diagnosis is confirmed by tissue biopsy and culture showing thermal dimorphism, with histology revealing small intracellular yeast-like cells, supported by molecular identification",
+      "Management uses amphotericin-based induction followed by azole antifungal therapy, together with antiretroviral treatment to restore immune function",
+      "It should be considered in immunocompromised patients with disseminated skin lesions and systemic illness, particularly where these dimorphic fungi are endemic"
     ],
-    [
-     "Key Investigations",
-     "Skin-lesion biopsy for histopathology and fungal culture, Fungal culture demonstrating thermal dimorphism with molecular species",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Emergomyces species are thermally dimorphic environmental fungi, existing as moulds in the environment and converting to a yeast-like form at body temperature. Infection is thought to follow inhalation of conidia from soil, with the lungs as the primary portal of entry. In hosts with impaired cell-mediated immunity, particularly advanced HIV, the organism is not contained and disseminates haematogenously, seeding the skin, bone marrow, and multiple organs. The intracellular yeast-like form within macrophages accounts for the histological resemblance to histoplasmosis and the tendency toward widespread disseminated disease.",
+    "additionalDifferentials": [
+      "Disseminated histoplasmosis",
+      "Talaromycosis (Talaromyces marneffei infection)",
+      "Disseminated cryptococcosis with skin involvement",
+      "Cutaneous and disseminated blastomycosis",
+      "Molluscum contagiosum-like lesions in advanced HIV",
+      "Disseminated tuberculosis or non-tuberculous mycobacterial disease"
     ],
-    [
-     "Primary Differentials",
-     "Disseminated histoplasmosis, Talaromycosis (Talaromyces marneffei infection), Disseminated cryptococcosis with skin involvement",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin-lesion biopsy for histopathology and fungal culture",
+      "Fungal culture demonstrating thermal dimorphism with molecular species identification",
+      "Blood and bone-marrow cultures in disseminated disease",
+      "HIV testing and CD4 count to define immune status",
+      "Chest imaging to assess pulmonary involvement",
+      "Testing to exclude mimicking endemic mycoses such as histoplasmosis and talaromycosis"
     ],
-    [
-     "Management Strategy",
-     "Amphotericin B-based induction antifungal therapy, using liposomal amphotericin, for disseminated disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Widespread skin lesions with systemic illness in an advanced-HIV patient",
+      "Rapid clinical deterioration with multi-organ involvement",
+      "Respiratory failure from pulmonary dissemination",
+      "Very low CD4 count with disseminated fungal disease",
+      "Immune reconstitution inflammatory syndrome after starting antiretroviral therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as disseminated histoplasmosis or talaromycosis given their close resemblance",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disseminated emergomycosis is frequently fatal, but with prompt antifungal therapy and immune restoration through antiretroviral treatment outcomes improve substantially; prognosis depends on the degree of immunosuppression and timeliness of diagnosis.",
+    "pitfalls": [
+      "Misdiagnosing it as disseminated histoplasmosis or talaromycosis given their close resemblance",
+      "Failing to obtain tissue for culture and molecular identification",
+      "Overlooking the diagnosis outside classically endemic regions as its recognised range expands",
+      "Not coordinating antifungal therapy with antiretroviral treatment and monitoring for immune reconstitution inflammatory syndrome",
+      "Attributing skin lesions to more common HIV-associated conditions without biopsy"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "ECMM-ISHAM guidance on emerging dimorphic fungal infections"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Amphotericin B-based induction antifungal therapy, using liposomal amphotericin, for disseminated disease",
+      "Step-down consolidation with an azole antifungal such as itraconazole after induction",
+      "Antiretroviral therapy to restore cell-mediated immunity in HIV, timed to reduce the risk of immune reconstitution inflammatory syndrome",
+      "Supportive care for fever, weight loss and systemic involvement, with wound care of ulcerating cutaneous lesions",
+      "Monitoring of antifungal response, azole drug levels and interactions with antiretrovirals, and of organ function",
+      "Vigilance for and management of immune reconstitution inflammatory syndrome after antiretroviral initiation",
+      "Infectious diseases referral with long-term follow-up and secondary antifungal prophylaxis until immune recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for emergomycosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "emergomycosis-real-image",
-   "title": "Emergomycosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "emergomycosis-pathway",
+      "title": "Emergomycosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An emerging dimorphic fungal infection caused by Emergomyces species (reclassified from the Emmonsia genus), reported across several continents with a notable burden in southern Africa",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Widespread skin lesions with systemic illness in an advanced-HIV patient",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin-lesion biopsy for histopathology and fungal culture, Fungal culture demonstrating thermal dimorphism with molecular species identification, Blood and bone-marrow cultures in disseminated disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Amphotericin B-based induction antifungal therapy, using liposomal amphotericin, for disseminated disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as disseminated histoplasmosis or talaromycosis given their close resemblance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of emergomycosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "emergomycosis-matrix",
+      "title": "Emergomycosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An emerging dimorphic fungal infection caused by Emergomyces species (reclassified from the Emmonsia genus), reported across",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin-lesion biopsy for histopathology and fungal culture, Fungal culture demonstrating thermal dimorphism with molecular species",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Disseminated histoplasmosis, Talaromycosis (Talaromyces marneffei infection), Disseminated cryptococcosis with skin involvement",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Amphotericin B-based induction antifungal therapy, using liposomal amphotericin, for disseminated disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as disseminated histoplasmosis or talaromycosis given their close resemblance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for emergomycosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / ECMM-ISHAM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "emergomycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin lesion biopsy for histology and fungal culture",
+          "cells": [
+            {
+              "text": "Dimorphic fungus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture with molecular identification",
+          "cells": [
+            {
+              "text": "Emergomyces species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and bone-marrow cultures",
+          "cells": [
+            {
+              "text": "Disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV test and CD4 count",
+          "cells": [
+            {
+              "text": "Immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "emergomycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated histoplasmosis",
+          "cells": [
+            {
+              "text": "Similar endemic mycosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Talaromycosis",
+          "cells": [
+            {
+              "text": "Talaromyces marneffei infection with skin lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated cryptococcosis",
+          "cells": [
+            {
+              "text": "Skin involvement with cryptococcal antigen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated tuberculosis or NTM",
+          "cells": [
+            {
+              "text": "Mycobacterial infection with skin lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "emergomycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Liposomal amphotericin B induction",
+          "cells": [
+            {
+              "text": "Disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Azole consolidation",
+          "cells": [
+            {
+              "text": "Itraconazole step-down after induction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Restores cell-mediated immunity; timed to limit IRIS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Fever, weight loss and wound care for ulcerating lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug monitoring",
+          "cells": [
+            {
+              "text": "Azole levels, antiretroviral interactions and organ function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prophylaxis",
+          "cells": [
+            {
+              "text": "Until immune recovery, with infectious diseases follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "emergomycosis-dx-mgmt",
+      "title": "Diagnosis and management of Emergomycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected emergomycosis: disseminated skin lesions with systemic illness in HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory failure, multi-organ involvement, very low CD4)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent infectious diseases review with liposomal amphotericin B",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for culture and histology; HIV and CD4; blood cultures; chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a thermally dimorphic fungus confirmed on culture or molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider histoplasmosis, talaromycosis, cryptococcosis or mycobacterial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Liposomal amphotericin B induction for disseminated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Itraconazole step-down consolidation after induction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiretroviral therapy, timed to limit immune reconstitution syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound care and supportive treatment of systemic illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Secondary antifungal prophylaxis until immune recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated disseminated disease is often fatal; antifungals and antiretrovirals improve it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,475 @@
 {
- "id": "anorectal_abscess",
- "name": "Anorectal abscess",
- "aliases": [
-  "perianal abscess",
-  "ischiorectal abscess",
-  "perirectal abscess",
-  "intersphincteric abscess"
- ],
- "class": "infective",
- "system": "GI / Anorectal / Surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with acute, constant, throbbing perianal or rectal pain, often with a tender fluctuant swelling, fever, and malaise",
-   "Classified by anatomical space into perianal, ischiorectal, intersphincteric, and supralevator abscesses, each with characteristic examination findings",
-   "Most arise from infection of the anal glands opening into the crypts at the dentate line (the cryptoglandular theory)",
-   "A superficial perianal abscess is visibly red and fluctuant, whereas a deeper ischiorectal or supralevator abscess may cause deep pain and systemic upset with little external sign",
-   "Treatment is prompt surgical incision and drainage; antibiotics alone are inadequate and delay is dangerous",
-   "A significant proportion of drained abscesses are associated with, or later develop, a fistula-in-ano",
-   "Diabetes, immunosuppression, and Crohn's disease predispose to abscess formation and to more aggressive, spreading infection",
-   "Spreading perianal sepsis with systemic toxicity may herald necrotising infection (Fournier's gangrene), which is a surgical emergency"
+  "id": "anorectal_abscess",
+  "name": "Anorectal abscess",
+  "aliases": [
+    "perianal abscess",
+    "ischiorectal abscess",
+    "perirectal abscess",
+    "intersphincteric abscess"
   ],
-  "pathophysiology": "Anorectal abscesses usually begin with obstruction and infection of an anal gland at the base of an anal crypt (cryptoglandular infection). Pus tracks along planes of least resistance from the intersphincteric space into the perianal, ischiorectal, or supralevator spaces, and can extend circumferentially in a horseshoe pattern. The causative organisms are typically gut flora, including coliforms and anaerobes. Underlying conditions such as Crohn's disease, diabetes, and immunosuppression predispose to formation and to more extensive spread. Persistence of the primary gland infection after drainage creates the epithelialised track of a fistula-in-ano.",
-  "additionalDifferentials": [
-   "Thrombosed external haemorrhoid",
-   "Pilonidal abscess",
-   "Bartholin abscess (in women)",
-   "Hidradenitis suppurativa",
-   "Perianal Crohn's disease",
-   "Anal or rectal malignancy with sepsis",
-   "Fournier's gangrene (necrotising perineal infection)"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination and, where pain permits, digital rectal examination to assess deeper spaces",
-   "Examination under anaesthesia to fully assess and drain the collection and look for a fistula",
-   "MRI pelvis or endoanal ultrasound for complex, recurrent, or supralevator disease",
-   "Blood glucose and screening for immunosuppression, and blood cultures if systemically septic",
-   "Consideration of investigations for Crohn's disease in recurrent or atypical abscesses"
-  ],
-  "redFlags": [
-   "Spreading cellulitis, crepitus, skin necrosis, or disproportionate pain suggesting Fournier's gangrene (surgical emergency)",
-   "Systemic sepsis with tachycardia, hypotension, or confusion",
-   "Immunocompromise or poorly controlled diabetes with rapid progression",
-   "Deep or supralevator sepsis with minimal external signs but severe pain and toxicity"
-  ],
-  "prognosis": "Simple abscesses drained promptly resolve well, but recurrence and fistula formation are common. Delayed treatment, deep spaces, immunosuppression, or necrotising infection markedly worsen outcomes and can be life-threatening.",
-  "pitfalls": [
-   "Relying on antibiotics instead of prompt incision and drainage",
-   "Missing a deep ischiorectal or supralevator abscess because external signs are minimal",
-   "Failing to recognise early Fournier's gangrene in a diabetic or immunosuppressed patient",
-   "Overzealous probing for a fistula at the time of acute drainage, risking a false track"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform prompt surgical incision and drainage as the definitive treatment, since antibiotics alone are inadequate and delay is dangerous",
-   "Add antibiotics targeting gut coliforms and anaerobes only for surrounding cellulitis, systemic sepsis, immunosuppression, diabetes, or valvular risk",
-   "Resuscitate with fluids and provide analgesia where there is systemic upset",
-   "Undertake examination under anaesthesia to assess deep ischiorectal or supralevator spaces and identify a coexisting fistula",
-   "Manage the drained cavity with open wound care and follow up for later development of a fistula-in-ano",
-   "Identify and treat predisposing conditions including diabetes, Crohn's disease, and immunosuppression",
-   "Escalate urgently for necrotising perineal infection with aggressive debridement and broad-spectrum antimicrobials"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anorectal_abscess-pathway",
-   "title": "Anorectal abscess: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with acute, constant, throbbing perianal or rectal pain, often with a tender fluctuant swelling, fever, and malaise",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Spreading cellulitis, crepitus, skin necrosis, or disproportionate pain suggesting Fournier's gangrene (surgical emergency)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination and, where pain permits, digital rectal examination to assess deeper spaces, Examination under anaesthesia to fully assess and drain the collection and look for a fistula, MRI pelvis or endoanal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform prompt surgical incision and drainage as the definitive treatment, since antibiotics alone are inadequate and delay is dangerous"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on antibiotics instead of prompt incision and drainage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anorectal abscess."
-  }
- ],
- "tables": [
-  {
-   "id": "anorectal_abscess-matrix",
-   "title": "Anorectal abscess: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with acute, constant, throbbing perianal or rectal pain, often with a tender fluctuant swelling, fever, and malaise",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "GI / Anorectal / Surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with acute, constant, throbbing perianal or rectal pain, often with a tender fluctuant swelling, fever, and malaise",
+      "Classified by anatomical space into perianal, ischiorectal, intersphincteric, and supralevator abscesses, each with characteristic examination findings",
+      "Most arise from infection of the anal glands opening into the crypts at the dentate line (the cryptoglandular theory)",
+      "A superficial perianal abscess is visibly red and fluctuant, whereas a deeper ischiorectal or supralevator abscess may cause deep pain and systemic upset with little external sign",
+      "Treatment is prompt surgical incision and drainage; antibiotics alone are inadequate and delay is dangerous",
+      "A significant proportion of drained abscesses are associated with, or later develop, a fistula-in-ano",
+      "Diabetes, immunosuppression, and Crohn's disease predispose to abscess formation and to more aggressive, spreading infection",
+      "Spreading perianal sepsis with systemic toxicity may herald necrotising infection (Fournier's gangrene), which is a surgical emergency"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination and, where pain permits, digital rectal examination to assess deeper spaces, Examination under anaesthesia",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Anorectal abscesses usually begin with obstruction and infection of an anal gland at the base of an anal crypt (cryptoglandular infection). Pus tracks along planes of least resistance from the intersphincteric space into the perianal, ischiorectal, or supralevator spaces, and can extend circumferentially in a horseshoe pattern. The causative organisms are typically gut flora, including coliforms and anaerobes. Underlying conditions such as Crohn's disease, diabetes, and immunosuppression predispose to formation and to more extensive spread. Persistence of the primary gland infection after drainage creates the epithelialised track of a fistula-in-ano.",
+    "additionalDifferentials": [
+      "Thrombosed external haemorrhoid",
+      "Pilonidal abscess",
+      "Bartholin abscess (in women)",
+      "Hidradenitis suppurativa",
+      "Perianal Crohn's disease",
+      "Anal or rectal malignancy with sepsis",
+      "Fournier's gangrene (necrotising perineal infection)"
     ],
-    [
-     "Primary Differentials",
-     "Thrombosed external haemorrhoid, Pilonidal abscess, Bartholin abscess (in women)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination and, where pain permits, digital rectal examination to assess deeper spaces",
+      "Examination under anaesthesia to fully assess and drain the collection and look for a fistula",
+      "MRI pelvis or endoanal ultrasound for complex, recurrent, or supralevator disease",
+      "Blood glucose and screening for immunosuppression, and blood cultures if systemically septic",
+      "Consideration of investigations for Crohn's disease in recurrent or atypical abscesses"
     ],
-    [
-     "Management Strategy",
-     "Perform prompt surgical incision and drainage as the definitive treatment, since antibiotics alone are inadequate and delay is",
-     "Core treatment modality"
+    "redFlags": [
+      "Spreading cellulitis, crepitus, skin necrosis, or disproportionate pain suggesting Fournier's gangrene (surgical emergency)",
+      "Systemic sepsis with tachycardia, hypotension, or confusion",
+      "Immunocompromise or poorly controlled diabetes with rapid progression",
+      "Deep or supralevator sepsis with minimal external signs but severe pain and toxicity"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on antibiotics instead of prompt incision and drainage",
-     "Prevent diagnostic or management error"
+    "prognosis": "Simple abscesses drained promptly resolve well, but recurrence and fistula formation are common. Delayed treatment, deep spaces, immunosuppression, or necrotising infection markedly worsen outcomes and can be life-threatening.",
+    "pitfalls": [
+      "Relying on antibiotics instead of prompt incision and drainage",
+      "Missing a deep ischiorectal or supralevator abscess because external signs are minimal",
+      "Failing to recognise early Fournier's gangrene in a diabetic or immunosuppressed patient",
+      "Overzealous probing for a fistula at the time of acute drainage, risking a false track"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform prompt surgical incision and drainage as the definitive treatment, since antibiotics alone are inadequate and delay is dangerous",
+      "Add antibiotics targeting gut coliforms and anaerobes only for surrounding cellulitis, systemic sepsis, immunosuppression, diabetes, or valvular risk",
+      "Resuscitate with fluids and provide analgesia where there is systemic upset",
+      "Undertake examination under anaesthesia to assess deep ischiorectal or supralevator spaces and identify a coexisting fistula",
+      "Manage the drained cavity with open wound care and follow up for later development of a fistula-in-ano",
+      "Identify and treat predisposing conditions including diabetes, Crohn's disease, and immunosuppression",
+      "Escalate urgently for necrotising perineal infection with aggressive debridement and broad-spectrum antimicrobials"
     ]
-   ],
-   "caption": "Overview comparison matrix for anorectal abscess."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anorectal-abscess-real-image",
-   "title": "Anorectal abscess: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "anorectal_abscess-pathway",
+      "title": "Anorectal abscess: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with acute, constant, throbbing perianal or rectal pain, often with a tender fluctuant swelling, fever, and malaise",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Spreading cellulitis, crepitus, skin necrosis, or disproportionate pain suggesting Fournier's gangrene (surgical emergency)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination and, where pain permits, digital rectal examination to assess deeper spaces, Examination under anaesthesia to fully assess and drain the collection and look for a fistula, MRI pelvis or endoanal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform prompt surgical incision and drainage as the definitive treatment, since antibiotics alone are inadequate and delay is dangerous"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on antibiotics instead of prompt incision and drainage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anorectal abscess."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anorectal_abscess-matrix",
+      "title": "Anorectal abscess: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with acute, constant, throbbing perianal or rectal pain, often with a tender fluctuant swelling, fever, and malaise",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination and, where pain permits, digital rectal examination to assess deeper spaces, Examination under anaesthesia",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thrombosed external haemorrhoid, Pilonidal abscess, Bartholin abscess (in women)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform prompt surgical incision and drainage as the definitive treatment, since antibiotics alone are inadequate and delay is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on antibiotics instead of prompt incision and drainage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anorectal abscess."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anorectal_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Digital rectal examination",
+          "cells": [
+            {
+              "text": "Assesses deeper spaces where pain permits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Drains the collection and looks for a fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI pelvis or endoanal ultrasound",
+          "cells": [
+            {
+              "text": "Complex, recurrent or supralevator disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and screening for immunosuppression",
+          "cells": [
+            {
+              "text": "Predisposing diabetes or immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Used if systemically septic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anorectal_abscess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fournier's gangrene",
+          "cells": [
+            {
+              "text": "Spreading cellulitis, crepitus, skin necrosis or disproportionate pain; a surgical emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal Crohn's disease",
+          "cells": [
+            {
+              "text": "Recurrent or atypical abscesses warrant Crohn's investigation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anorectal_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Incision and drainage",
+          "cells": [
+            {
+              "text": "Prompt surgical drainage as definitive treatment"
+            },
+            {
+              "text": "Antibiotics alone are inadequate and delay is dangerous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Targeting gut coliforms and anaerobes"
+            },
+            {
+              "text": "Only for cellulitis, systemic sepsis, immunosuppression, diabetes or valvular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluids and analgesia",
+          "cells": [
+            {
+              "text": "Resuscitation where systemic upset"
+            },
+            {
+              "text": "Systemic upset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Assess deep ischiorectal or supralevator spaces and any fistula"
+            },
+            {
+              "text": "Coexisting fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open wound care",
+          "cells": [
+            {
+              "text": "Manage the drained cavity"
+            },
+            {
+              "text": "Follow up for later fistula-in-ano"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat predisposing conditions",
+          "cells": [
+            {
+              "text": "Diabetes, Crohn's disease, immunosuppression"
+            },
+            {
+              "text": "Predisposing factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent escalation",
+          "cells": [
+            {
+              "text": "Aggressive debridement and broad-spectrum antimicrobials"
+            },
+            {
+              "text": "Necrotising perineal infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anorectal_abscess-dx-mgmt",
+      "title": "Diagnosis and management of Anorectal abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful perianal swelling with sepsis from a perianal or perirectal abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Spreading cellulitis, crepitus or skin necrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review; Fournier's gangrene is a surgical emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia; MRI or endoanal ultrasound if complex",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Collection confirmed on examination under anaesthesia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prompt incision and drainage as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics only for cellulitis, sepsis or immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Open wound care and follow-up for later fistula-in-ano",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat diabetes, Crohn's disease or immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Follow-up is needed for later fistula-in-ano in the drained cavity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

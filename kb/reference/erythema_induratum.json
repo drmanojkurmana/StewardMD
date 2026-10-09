@@ -1,174 +1,461 @@
 {
- "id": "erythema_induratum",
- "name": "Erythema induratum (nodular vasculitis)",
- "aliases": [
-  "nodular vasculitis",
-  "Bazin disease",
-  "erythema induratum of Bazin",
-  "tuberculid panniculitis"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A lobular panniculitis with vasculitis presenting as tender, indurated, often ulcerating nodules on the posterior lower legs (calves)",
-   "Predominantly affects women, and lesions tend to be more posterior than the anterior shins typical of erythema nodosum",
-   "Lesions frequently ulcerate and heal with atrophic scarring and pigmentation, distinguishing it from non-ulcerating erythema nodosum",
-   "When associated with tuberculosis it is regarded as a tuberculid, an immune (hypersensitivity) reaction to Mycobacterium tuberculosis rather than direct skin infection",
-   "The term nodular vasculitis is used for clinically and histologically identical disease without demonstrable tuberculous association",
-   "A strongly positive tuberculin skin test or interferon-gamma release assay supports the tuberculid form",
-   "Cases linked to tuberculosis respond to antituberculous therapy, so evaluating for latent or active infection is essential"
+  "id": "erythema_induratum",
+  "name": "Erythema induratum (nodular vasculitis)",
+  "aliases": [
+    "nodular vasculitis",
+    "Bazin disease",
+    "erythema induratum of Bazin",
+    "tuberculid panniculitis"
   ],
-  "pathophysiology": "Erythema induratum is a lobular panniculitis accompanied by vasculitis of the small and medium vessels within the subcutaneous fat, leading to ischaemic fat necrosis, nodule formation, and ulceration. In the classic Bazin form it represents a tuberculid: a delayed-type hypersensitivity response to mycobacterial antigens disseminated from a distant focus, rather than viable organisms in the skin, so mycobacterial cultures of lesions are typically negative while molecular tests may detect mycobacterial DNA. Identical disease without tuberculous association is termed nodular vasculitis and may follow other infections, drugs, or chronic venous insufficiency.",
-  "additionalDifferentials": [
-   "Erythema nodosum",
-   "Polyarteritis nodosa (cutaneous)",
-   "Superficial thrombophlebitis",
-   "Pancreatic panniculitis",
-   "Cutaneous polyarteritis and other vasculitides",
-   "Lupus panniculitis"
-  ],
-  "additionalInvestigations": [
-   "Deep incisional or excisional skin biopsy capturing subcutaneous fat to show lobular panniculitis with vasculitis",
-   "Tuberculin skin test and interferon-gamma release assay",
-   "Chest radiograph and evaluation for active or latent tuberculosis",
-   "Tissue mycobacterial staining, culture, and polymerase chain reaction for mycobacterial DNA",
-   "Assessment of venous insufficiency in the lower limbs",
-   "Screening for alternative infective, drug, or systemic triggers in non-tuberculous cases"
-  ],
-  "redFlags": [
-   "Evidence of active tuberculosis requiring prompt antituberculous treatment and public-health measures",
-   "Chronic non-healing ulceration with secondary infection",
-   "Systemic symptoms (fever, weight loss) suggesting disseminated infection or systemic vasculitis",
-   "Recurrent disease despite treatment, prompting re-evaluation of the underlying cause"
-  ],
-  "prognosis": "The condition tends to be chronic and relapsing with recurrent crops of nodules and scarring; tuberculid cases usually improve substantially with antituberculous therapy, whereas idiopathic nodular vasculitis may persist and require anti-inflammatory treatment.",
-  "pitfalls": [
-   "Confusing it with erythema nodosum and missing the posterior-leg distribution, ulceration, and vasculitis",
-   "Taking a biopsy too superficial to sample the subcutaneous fat",
-   "Failing to investigate for tuberculosis before attributing the disease to another cause",
-   "Overlooking treatable contributors such as chronic venous insufficiency or a drug trigger"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Standard multidrug antituberculous chemotherapy for the tuberculid form, which usually produces substantial improvement of the nodules",
-   "Investigation for and treatment of latent or active tuberculosis before attributing disease to another cause",
-   "Anti-inflammatory treatment for non-tuberculous nodular vasculitis using potassium iodide, non-steroidal anti-inflammatory drugs, or systemic corticosteroids",
-   "Wound care for ulcerated lesions and management of atrophic scarring",
-   "Compression therapy and treatment of coexisting lower-limb venous insufficiency",
-   "Identification and removal of alternative infective or drug triggers in cases without tuberculous association",
-   "Monitoring for recurrent crops of nodules given the chronic relapsing course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "erythema_induratum-pathway",
-   "title": "Erythema induratum (nodular vasculitis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A lobular panniculitis with vasculitis presenting as tender, indurated, often ulcerating nodules on the posterior lower legs (calves)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Evidence of active tuberculosis requiring prompt antituberculous treatment and public-health measures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Deep incisional or excisional skin biopsy capturing subcutaneous fat to show lobular panniculitis with vasculitis, Tuberculin skin test and interferon-gamma release assay, Chest radiograph and evaluation for active or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Standard multidrug antituberculous chemotherapy for the tuberculid form, which usually produces substantial improvement of the nodules"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with erythema nodosum and missing the posterior-leg distribution, ulceration, and vasculitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of erythema induratum (nodular vasculitis)."
-  }
- ],
- "tables": [
-  {
-   "id": "erythema_induratum-matrix",
-   "title": "Erythema induratum (nodular vasculitis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A lobular panniculitis with vasculitis presenting as tender, indurated, often ulcerating nodules on the posterior lower legs",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A lobular panniculitis with vasculitis presenting as tender, indurated, often ulcerating nodules on the posterior lower legs (calves)",
+      "Predominantly affects women, and lesions tend to be more posterior than the anterior shins typical of erythema nodosum",
+      "Lesions frequently ulcerate and heal with atrophic scarring and pigmentation, distinguishing it from non-ulcerating erythema nodosum",
+      "When associated with tuberculosis it is regarded as a tuberculid, an immune (hypersensitivity) reaction to Mycobacterium tuberculosis rather than direct skin infection",
+      "The term nodular vasculitis is used for clinically and histologically identical disease without demonstrable tuberculous association",
+      "A strongly positive tuberculin skin test or interferon-gamma release assay supports the tuberculid form",
+      "Cases linked to tuberculosis respond to antituberculous therapy, so evaluating for latent or active infection is essential"
     ],
-    [
-     "Key Investigations",
-     "Deep incisional or excisional skin biopsy capturing subcutaneous fat to show lobular panniculitis with vasculitis, Tuberculin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Erythema induratum is a lobular panniculitis accompanied by vasculitis of the small and medium vessels within the subcutaneous fat, leading to ischaemic fat necrosis, nodule formation, and ulceration. In the classic Bazin form it represents a tuberculid: a delayed-type hypersensitivity response to mycobacterial antigens disseminated from a distant focus, rather than viable organisms in the skin, so mycobacterial cultures of lesions are typically negative while molecular tests may detect mycobacterial DNA. Identical disease without tuberculous association is termed nodular vasculitis and may follow other infections, drugs, or chronic venous insufficiency.",
+    "additionalDifferentials": [
+      "Erythema nodosum",
+      "Polyarteritis nodosa (cutaneous)",
+      "Superficial thrombophlebitis",
+      "Pancreatic panniculitis",
+      "Cutaneous polyarteritis and other vasculitides",
+      "Lupus panniculitis"
     ],
-    [
-     "Primary Differentials",
-     "Erythema nodosum, Polyarteritis nodosa (cutaneous), Superficial thrombophlebitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Deep incisional or excisional skin biopsy capturing subcutaneous fat to show lobular panniculitis with vasculitis",
+      "Tuberculin skin test and interferon-gamma release assay",
+      "Chest radiograph and evaluation for active or latent tuberculosis",
+      "Tissue mycobacterial staining, culture, and polymerase chain reaction for mycobacterial DNA",
+      "Assessment of venous insufficiency in the lower limbs",
+      "Screening for alternative infective, drug, or systemic triggers in non-tuberculous cases"
     ],
-    [
-     "Management Strategy",
-     "Standard multidrug antituberculous chemotherapy for the tuberculid form, which usually produces substantial improvement of the",
-     "Core treatment modality"
+    "redFlags": [
+      "Evidence of active tuberculosis requiring prompt antituberculous treatment and public-health measures",
+      "Chronic non-healing ulceration with secondary infection",
+      "Systemic symptoms (fever, weight loss) suggesting disseminated infection or systemic vasculitis",
+      "Recurrent disease despite treatment, prompting re-evaluation of the underlying cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with erythema nodosum and missing the posterior-leg distribution, ulceration, and vasculitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition tends to be chronic and relapsing with recurrent crops of nodules and scarring; tuberculid cases usually improve substantially with antituberculous therapy, whereas idiopathic nodular vasculitis may persist and require anti-inflammatory treatment.",
+    "pitfalls": [
+      "Confusing it with erythema nodosum and missing the posterior-leg distribution, ulceration, and vasculitis",
+      "Taking a biopsy too superficial to sample the subcutaneous fat",
+      "Failing to investigate for tuberculosis before attributing the disease to another cause",
+      "Overlooking treatable contributors such as chronic venous insufficiency or a drug trigger"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Standard multidrug antituberculous chemotherapy for the tuberculid form, which usually produces substantial improvement of the nodules",
+      "Investigation for and treatment of latent or active tuberculosis before attributing disease to another cause",
+      "Anti-inflammatory treatment for non-tuberculous nodular vasculitis using potassium iodide, non-steroidal anti-inflammatory drugs, or systemic corticosteroids",
+      "Wound care for ulcerated lesions and management of atrophic scarring",
+      "Compression therapy and treatment of coexisting lower-limb venous insufficiency",
+      "Identification and removal of alternative infective or drug triggers in cases without tuberculous association",
+      "Monitoring for recurrent crops of nodules given the chronic relapsing course"
     ]
-   ],
-   "caption": "Overview comparison matrix for erythema induratum (nodular vasculitis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "erythema-induratum-real-image",
-   "title": "Erythema induratum (nodular vasculitis): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "erythema_induratum-pathway",
+      "title": "Erythema induratum (nodular vasculitis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A lobular panniculitis with vasculitis presenting as tender, indurated, often ulcerating nodules on the posterior lower legs (calves)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Evidence of active tuberculosis requiring prompt antituberculous treatment and public-health measures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Deep incisional or excisional skin biopsy capturing subcutaneous fat to show lobular panniculitis with vasculitis, Tuberculin skin test and interferon-gamma release assay, Chest radiograph and evaluation for active or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Standard multidrug antituberculous chemotherapy for the tuberculid form, which usually produces substantial improvement of the nodules"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with erythema nodosum and missing the posterior-leg distribution, ulceration, and vasculitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of erythema induratum (nodular vasculitis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "erythema_induratum-matrix",
+      "title": "Erythema induratum (nodular vasculitis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A lobular panniculitis with vasculitis presenting as tender, indurated, often ulcerating nodules on the posterior lower legs",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Deep incisional or excisional skin biopsy capturing subcutaneous fat to show lobular panniculitis with vasculitis, Tuberculin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Erythema nodosum, Polyarteritis nodosa (cutaneous), Superficial thrombophlebitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Standard multidrug antituberculous chemotherapy for the tuberculid form, which usually produces substantial improvement of the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with erythema nodosum and missing the posterior-leg distribution, ulceration, and vasculitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for erythema induratum (nodular vasculitis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythema_induratum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep biopsy including subcutaneous fat",
+          "cells": [
+            {
+              "text": "Lobular panniculitis with vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculin skin test and interferon-gamma release assay",
+          "cells": [
+            {
+              "text": "A strongly positive result supports the tuberculid form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Active or latent tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue mycobacterial staining, culture and PCR",
+          "cells": [
+            {
+              "text": "Mycobacterial DNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of lower-limb venous insufficiency",
+          "cells": [
+            {
+              "text": "Coexisting venous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for alternative infective, drug or systemic triggers",
+          "cells": [
+            {
+              "text": "Non-tuberculous cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_induratum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythema nodosum",
+          "cells": [
+            {
+              "text": "Non-ulcerating, anterior shin lesions; this condition is posterior, often ulcerates and heals with scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous polyarteritis and other vasculitides",
+          "cells": [
+            {
+              "text": "Fever and weight loss suggest systemic vasculitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_induratum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Standard multidrug antituberculous chemotherapy",
+          "cells": [
+            {
+              "text": "For the tuberculid form; usually produces substantial improvement of the nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigate latent or active tuberculosis",
+          "cells": [
+            {
+              "text": "Before attributing the disease to another cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium iodide, NSAIDs or systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Non-tuberculous nodular vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Ulcerated lesions and atrophic scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compression therapy",
+          "cells": [
+            {
+              "text": "Coexisting lower-limb venous insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove alternative triggers",
+          "cells": [
+            {
+              "text": "Infective or drug triggers in cases without tuberculous association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for recurrence",
+          "cells": [
+            {
+              "text": "Chronic relapsing course with recurrent crops of nodules"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythema_induratum-dx-mgmt",
+      "title": "Diagnosis and management of Erythema induratum (nodular vasculitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender, indurated nodules on the posterior lower legs, often ulcerating",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (active tuberculosis, non-healing ulcer, fever or weight loss, recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Antituberculous treatment and public-health measures if active tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep biopsy including subcutaneous fat; tuberculin test or IGRA; chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Tuberculous association supported by a positive test or mycobacteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat non-tuberculous nodular vasculitis; remove triggers; treat venous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Standard multidrug antituberculous chemotherapy for the tuberculid form",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat latent or active tuberculosis before other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Compression for coexisting venous insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound care for ulcers and atrophic scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and relapsing with scarring; tuberculid cases usually improve substantially",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

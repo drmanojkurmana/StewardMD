@@ -1,172 +1,450 @@
 {
- "id": "sarcopenia",
- "name": "Sarcopenia",
- "aliases": [
-  "age-related muscle loss",
-  "muscle wasting of ageing",
-  "low muscle mass and strength",
-  "sarcopenic syndrome"
- ],
- "class": "non_infective",
- "system": "Geriatrics / Palliative",
- "specialty": "Geriatrics & Palliative Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sarcopenia is the progressive, generalised loss of skeletal muscle mass together with reduced muscle strength or physical performance",
-   "Current definitions emphasise low muscle strength as the primary criterion, with low muscle mass confirming the diagnosis and poor performance marking severity",
-   "Grip strength and gait speed are simple, validated bedside measures that flag probable sarcopenia",
-   "The SARC-F questionnaire is a quick screening tool for case finding in clinical practice",
-   "Sarcopenia can be primary (age-related) or secondary to disease, inactivity, or undernutrition, and it overlaps with but is distinct from frailty and cachexia",
-   "It is a major contributor to falls, disability, loss of independence, and adverse surgical and hospital outcomes",
-   "Progressive resistance exercise is the most effective intervention and is more powerful than nutrition alone",
-   "Adequate protein and total energy intake, correction of vitamin D deficiency, and treatment of underlying conditions support muscle maintenance"
+  "id": "sarcopenia",
+  "name": "Sarcopenia",
+  "aliases": [
+    "age-related muscle loss",
+    "muscle wasting of ageing",
+    "low muscle mass and strength",
+    "sarcopenic syndrome"
   ],
-  "pathophysiology": "Sarcopenia results from an imbalance between muscle protein synthesis and breakdown, driven by ageing changes including loss of motor neurons and motor units, reduced anabolic hormone levels, anabolic resistance to dietary protein, mitochondrial dysfunction, chronic low-grade inflammation, and physical inactivity. Type II (fast-twitch) fibres are preferentially lost, and fatty and fibrous infiltration of muscle further reduces quality and strength. The result is diminished force generation and impaired physical performance out of proportion to the loss of mass alone.",
-  "additionalDifferentials": [
-   "Cancer cachexia with inflammation-driven muscle wasting",
-   "Frailty syndrome (overlapping but broader multisystem construct)",
-   "Disuse atrophy from immobility or prolonged bed rest",
-   "Neuromuscular disorders such as motor neuron disease or myopathy",
-   "Endocrine causes including hypothyroidism, hypogonadism, and hypercortisolism",
-   "Protein-energy undernutrition"
-  ],
-  "additionalInvestigations": [
-   "Muscle strength testing, particularly handgrip dynamometry",
-   "Assessment of muscle mass using DXA or bioimpedance where available",
-   "Physical performance measures such as gait speed, the short physical performance battery, or timed up-and-go",
-   "SARC-F questionnaire for screening",
-   "Laboratory evaluation for reversible secondary causes including vitamin D, thyroid function, and inflammatory markers"
-  ],
-  "redFlags": [
-   "Rapid muscle loss suggesting underlying malignancy or cachexia rather than age-related decline",
-   "Recurrent or injurious falls resulting from profound weakness",
-   "Progressive functional decline threatening independence",
-   "Neurological features pointing to a primary neuromuscular disorder"
-  ],
-  "prognosis": "Sarcopenia predicts falls, fractures, functional decline, hospitalisation, and mortality, and it worsens outcomes across surgery and acute illness. It is at least partly reversible: resistance training combined with adequate protein intake can improve strength and performance, and earlier intervention yields better results.",
-  "pitfalls": [
-   "Attributing weakness solely to old age and not screening or intervening",
-   "Relying on nutritional supplementation without prescribing resistance exercise",
-   "Overlooking secondary and reversible causes such as vitamin D deficiency and endocrine disorders",
-   "Missing the overlap with frailty and cachexia and thereby underestimating overall risk"
-  ],
-  "references": [
-   "Hazzard's Geriatric Medicine and Gerontology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prescribe progressive resistance and strength training as the cornerstone intervention to improve muscle strength and physical performance",
-   "Ensure adequate dietary protein intake distributed across meals, with oral nutritional supplementation where intake is insufficient",
-   "Correct vitamin D deficiency and optimise overall nutrition with dietitian input",
-   "Identify and treat reversible secondary causes such as endocrine disorders, inactivity, and undernutrition, and review contributory medications",
-   "Implement multidisciplinary falls prevention and functional rehabilitation through physiotherapy and comprehensive geriatric assessment",
-   "Monitor response and progression with bedside measures such as handgrip strength and gait speed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sarcopenia-pathway",
-   "title": "Sarcopenia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sarcopenia is the progressive, generalised loss of skeletal muscle mass together with reduced muscle strength or physical performance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid muscle loss suggesting underlying malignancy or cachexia rather than age-related decline",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Muscle strength testing, particularly handgrip dynamometry, Assessment of muscle mass using DXA or bioimpedance where available, Physical performance measures such as gait speed, the short physical performance battery, or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prescribe progressive resistance and strength training as the cornerstone intervention to improve muscle strength and physical performance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing weakness solely to old age and not screening or intervening"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sarcopenia."
-  }
- ],
- "tables": [
-  {
-   "id": "sarcopenia-matrix",
-   "title": "Sarcopenia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sarcopenia is the progressive, generalised loss of skeletal muscle mass together with reduced muscle strength or physical",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Geriatrics / Palliative",
+  "specialty": "Geriatrics & Palliative Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sarcopenia is the progressive, generalised loss of skeletal muscle mass together with reduced muscle strength or physical performance",
+      "Current definitions emphasise low muscle strength as the primary criterion, with low muscle mass confirming the diagnosis and poor performance marking severity",
+      "Grip strength and gait speed are simple, validated bedside measures that flag probable sarcopenia",
+      "The SARC-F questionnaire is a quick screening tool for case finding in clinical practice",
+      "Sarcopenia can be primary (age-related) or secondary to disease, inactivity, or undernutrition, and it overlaps with but is distinct from frailty and cachexia",
+      "It is a major contributor to falls, disability, loss of independence, and adverse surgical and hospital outcomes",
+      "Progressive resistance exercise is the most effective intervention and is more powerful than nutrition alone",
+      "Adequate protein and total energy intake, correction of vitamin D deficiency, and treatment of underlying conditions support muscle maintenance"
     ],
-    [
-     "Key Investigations",
-     "Muscle strength testing, particularly handgrip dynamometry, Assessment of muscle mass using DXA or bioimpedance where available,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sarcopenia results from an imbalance between muscle protein synthesis and breakdown, driven by ageing changes including loss of motor neurons and motor units, reduced anabolic hormone levels, anabolic resistance to dietary protein, mitochondrial dysfunction, chronic low-grade inflammation, and physical inactivity. Type II (fast-twitch) fibres are preferentially lost, and fatty and fibrous infiltration of muscle further reduces quality and strength. The result is diminished force generation and impaired physical performance out of proportion to the loss of mass alone.",
+    "additionalDifferentials": [
+      "Cancer cachexia with inflammation-driven muscle wasting",
+      "Frailty syndrome (overlapping but broader multisystem construct)",
+      "Disuse atrophy from immobility or prolonged bed rest",
+      "Neuromuscular disorders such as motor neuron disease or myopathy",
+      "Endocrine causes including hypothyroidism, hypogonadism, and hypercortisolism",
+      "Protein-energy undernutrition"
     ],
-    [
-     "Primary Differentials",
-     "Cancer cachexia with inflammation-driven muscle wasting, Frailty syndrome (overlapping but broader multisystem construct), Disuse",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Muscle strength testing, particularly handgrip dynamometry",
+      "Assessment of muscle mass using DXA or bioimpedance where available",
+      "Physical performance measures such as gait speed, the short physical performance battery, or timed up-and-go",
+      "SARC-F questionnaire for screening",
+      "Laboratory evaluation for reversible secondary causes including vitamin D, thyroid function, and inflammatory markers"
     ],
-    [
-     "Management Strategy",
-     "Prescribe progressive resistance and strength training as the cornerstone intervention to improve muscle strength and physical",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid muscle loss suggesting underlying malignancy or cachexia rather than age-related decline",
+      "Recurrent or injurious falls resulting from profound weakness",
+      "Progressive functional decline threatening independence",
+      "Neurological features pointing to a primary neuromuscular disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing weakness solely to old age and not screening or intervening",
-     "Prevent diagnostic or management error"
+    "prognosis": "Sarcopenia predicts falls, fractures, functional decline, hospitalisation, and mortality, and it worsens outcomes across surgery and acute illness. It is at least partly reversible: resistance training combined with adequate protein intake can improve strength and performance, and earlier intervention yields better results.",
+    "pitfalls": [
+      "Attributing weakness solely to old age and not screening or intervening",
+      "Relying on nutritional supplementation without prescribing resistance exercise",
+      "Overlooking secondary and reversible causes such as vitamin D deficiency and endocrine disorders",
+      "Missing the overlap with frailty and cachexia and thereby underestimating overall risk"
+    ],
+    "references": [
+      "Hazzard's Geriatric Medicine and Gerontology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prescribe progressive resistance and strength training as the cornerstone intervention to improve muscle strength and physical performance",
+      "Ensure adequate dietary protein intake distributed across meals, with oral nutritional supplementation where intake is insufficient",
+      "Correct vitamin D deficiency and optimise overall nutrition with dietitian input",
+      "Identify and treat reversible secondary causes such as endocrine disorders, inactivity, and undernutrition, and review contributory medications",
+      "Implement multidisciplinary falls prevention and functional rehabilitation through physiotherapy and comprehensive geriatric assessment",
+      "Monitor response and progression with bedside measures such as handgrip strength and gait speed"
     ]
-   ],
-   "caption": "Overview comparison matrix for sarcopenia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sarcopenia-real-image",
-   "title": "Sarcopenia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sarcopenia-pathway",
+      "title": "Sarcopenia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sarcopenia is the progressive, generalised loss of skeletal muscle mass together with reduced muscle strength or physical performance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid muscle loss suggesting underlying malignancy or cachexia rather than age-related decline",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Muscle strength testing, particularly handgrip dynamometry, Assessment of muscle mass using DXA or bioimpedance where available, Physical performance measures such as gait speed, the short physical performance battery, or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prescribe progressive resistance and strength training as the cornerstone intervention to improve muscle strength and physical performance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing weakness solely to old age and not screening or intervening"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sarcopenia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sarcopenia-matrix",
+      "title": "Sarcopenia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sarcopenia is the progressive, generalised loss of skeletal muscle mass together with reduced muscle strength or physical",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Muscle strength testing, particularly handgrip dynamometry, Assessment of muscle mass using DXA or bioimpedance where available,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cancer cachexia with inflammation-driven muscle wasting, Frailty syndrome (overlapping but broader multisystem construct), Disuse",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prescribe progressive resistance and strength training as the cornerstone intervention to improve muscle strength and physical",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing weakness solely to old age and not screening or intervening",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sarcopenia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sarcopenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Handgrip dynamometry",
+          "cells": [
+            {
+              "text": "Muscle strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DXA or bioimpedance",
+          "cells": [
+            {
+              "text": "Muscle mass, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait speed, SPPB or timed up-and-go",
+          "cells": [
+            {
+              "text": "Physical performance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SARC-F questionnaire",
+          "cells": [
+            {
+              "text": "Screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laboratory evaluation",
+          "cells": [
+            {
+              "text": "Reversible causes: vitamin D, thyroid function, inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sarcopenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cancer cachexia",
+          "cells": [
+            {
+              "text": "Rapid muscle loss with inflammation-driven wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular disorders",
+          "cells": [
+            {
+              "text": "Neurological features pointing to motor neuron disease or myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frailty syndrome",
+          "cells": [
+            {
+              "text": "Broader multisystem construct that overlaps with sarcopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sarcopenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resistance and strength training",
+          "cells": [
+            {
+              "text": "Cornerstone intervention for strength and performance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein intake",
+          "cells": [
+            {
+              "text": "Distributed across meals; oral supplements if intake is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D and nutrition",
+          "cells": [
+            {
+              "text": "Correct deficiency with dietitian input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary causes",
+          "cells": [
+            {
+              "text": "Treat endocrine disorders, inactivity, undernutrition; review medications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention and rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and comprehensive geriatric assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Handgrip strength and gait speed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sarcopenia-dx-mgmt",
+      "title": "Diagnosis and management of Sarcopenia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Older adult with weakness, slow gait or falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid muscle loss, injurious falls, rising dependence or neurological features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Look for malignancy, cachexia or a primary neuromuscular disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Handgrip, gait speed, DXA or bioimpedance, SARC-F, vitamin D and thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are low strength and low muscle mass or performance confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cachexia, disuse atrophy, endocrine causes, undernutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Progressive resistance training",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adequate protein across meals; correct vitamin D",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat secondary causes and review medications",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Falls prevention and physiotherapy; monitor grip and gait speed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Predicts falls, fractures and mortality; improves with exercise and nutrition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

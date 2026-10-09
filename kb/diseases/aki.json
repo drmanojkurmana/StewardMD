@@ -55,7 +55,7 @@
     ]
   },
   "review": {
-    "status": "approved",
+    "status": "ai_drafted",
     "reviewedBy": null,
     "reviewedAt": null
   },
@@ -222,25 +222,901 @@
       "caption": "Diagnostic and clinical overview matrix for acute kidney injury."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "aki-real-image",
-      "title": "Acute kidney injury: Diagnostic Renal Ultrasonography",
-      "type": "ultrasound",
-      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-      "annotations": [
+      "id": "c2",
+      "label": "Table 61-2, user-supplied; source edition not shown (laboratory findings in acute renal failure)",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Acute Kidney Injury",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/acute-kidney-injury/acute-kidney-injury-aki",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 352-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 47-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 285-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 44-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c8",
+      "label": "Tables PDF, Table 285-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arf-prerenal-vs-atn",
+      "title": "Urine and blood indices separating prerenal azotaemia from oliguric acute tubular necrosis",
+      "columns": [
+        "Parameter",
+        "Prerenal azotemia",
+        "Oliguric ARF (ATN)"
+      ],
+      "rows": [
         {
-          "label": "Renal Cortex",
-          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+          "parameter": "BUN/creatinine ratio (BUN, not urea)",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": "{{hy:>20:1}}",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "10-15:1",
+              "range": [
+                10,
+                15
+              ]
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Corticomedullary Junction",
-          "description": "Medullary pyramid definition and structural architecture."
+          "parameter": "Urine sodium (UNa)",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "<20",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": ">40",
+              "op": ">",
+              "value": 40
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Collecting System",
-          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+          "parameter": "Urine osmolality",
+          "unit": "mOsm/kg H2O",
+          "cells": [
+            {
+              "text": ">500",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "<350",
+              "op": "<",
+              "value": 350
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fractional excretion of sodium (FENa)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "{{hy:<1%}}",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "{{hy:>2%}}",
+              "op": ">",
+              "value": 2
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine/plasma creatinine ratio",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": ">40",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "<20",
+              "op": "<",
+              "value": 20
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urinary casts",
+          "cells": [
+            {
+              "text": "None, or hyaline/granular"
+            },
+            {
+              "text": "Muddy brown"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "FENa (%) = (UNa x PCr x 100) / (PNa x UCr), where U = urine and P = plasma. FENa is unreliable after diuretics, in sepsis, with contrast-associated AKI and in CKD; interpret with the clinical picture."
+    },
+    {
+      "id": "aki-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and staging acute kidney injury (KDIGO)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Creatinine",
+        "Urine output"
+      ],
+      "rows": [
+        {
+          "parameter": "AKI definition",
+          "cells": [
+            {
+              "text": "{{hy:Rise >=0.3 mg/dL within 48 h, or >=1.5 x baseline within 7 days}}"
+            },
+            {
+              "text": "<0.5 mL/kg/h for 6 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 1",
+          "cells": [
+            {
+              "text": "Rise >=0.3 mg/dL or 1.5 to 1.9 x baseline"
+            },
+            {
+              "text": "<0.5 mL/kg/h for 6 to 12 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 2",
+          "cells": [
+            {
+              "text": "2 to 2.9 x baseline",
+              "range": [
+                2,
+                2.9
+              ]
+            },
+            {
+              "text": "<0.5 mL/kg/h for >=12 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 3",
+          "cells": [
+            {
+              "text": "Creatinine >=4.0 mg/dL or >=3 x baseline, or RRT started"
+            },
+            {
+              "text": "<0.3 mL/kg/h for >=24 h or anuria >=12 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oliguria",
+          "unit": "mL/day",
+          "cells": [
+            {
+              "text": "Not applicable"
+            },
+            {
+              "text": "24-h output under 400 mL",
+              "op": "<",
+              "value": 400
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anuria",
+          "unit": "mL/day",
+          "cells": [
+            {
+              "text": "Not applicable"
+            },
+            {
+              "text": "24-h output under 100 mL",
+              "op": "<",
+              "value": 100
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine sediment",
+          "cells": [
+            {
+              "text": "Muddy-brown casts suggest ATN; RBC casts suggest GN; WBC casts suggest interstitial nephritis"
+            },
+            {
+              "text": "Key bedside test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound or post-void residual",
+          "cells": [
+            {
+              "text": "Hydronephrosis or retention"
+            },
+            {
+              "text": "Exclude obstruction early"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Staging should not on its own dictate clinical decisions (Merck). Urine indices for prerenal versus ATN are in the separate Table 61-2 above."
+    },
+    {
+      "id": "aki-ddx",
+      "kind": "ddx",
+      "title": "Causes of AKI to separate",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Prerenal azotaemia",
+          "cells": [
+            {
+              "text": "{{hy:40% to 80% of cases}}; reverses quickly with restored perfusion; FENa <1%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic or nephrotoxic ATN",
+          "cells": [
+            {
+              "text": "About 90% of intrinsic AKI; muddy-brown casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postrenal obstruction",
+          "cells": [
+            {
+              "text": "Under 5% of cases; dilated collecting system on ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute interstitial nephritis",
+          "cells": [
+            {
+              "text": "Drugs such as antibiotics, NSAIDs, PPIs; WBC casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glomerulonephritis or vasculitis",
+          "cells": [
+            {
+              "text": "RBC casts or dysmorphic red cells; early biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular disease: HUS, TTP, malignant hypertension",
+          "cells": [
+            {
+              "text": "Haemolysis, low platelets or severe hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atheroembolic disease",
+          "cells": [
+            {
+              "text": "Livedo reticularis, distal infarcts, eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic kidney disease",
+          "cells": [
+            {
+              "text": "Small echogenic kidneys, renal osteodystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myeloma cast nephropathy",
+          "cells": [
+            {
+              "text": "Anuria with paraprotein"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aki-treatment",
+      "kind": "treatment",
+      "title": "Management of acute kidney injury",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat reversible prerenal and postrenal causes",
+          "cells": [
+            {
+              "text": "{{hy:Every patient, first}}"
+            },
+            {
+              "text": "Restore perfusion; relieve obstruction"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stop nephrotoxins and adjust renally cleared drugs",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Use drug levels, for example digoxin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fluid balance",
+          "unit": "mL/day",
+          "cells": [
+            {
+              "text": "Euvolaemic patient"
+            },
+            {
+              "text": "Prior day urine output plus extrarenal losses plus 500 to 1000 mL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Calcium gluconate, insulin with dextrose",
+          "cells": [
+            {
+              "text": "Hyperkalaemia"
+            },
+            {
+              "text": "10 mL of 10% calcium gluconate IV, 50 g dextrose and 5 to 10 units insulin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Potassium binder",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Keep K <6 mmol/L without dialysis",
+              "op": "<",
+              "value": 6
+            },
+            {
+              "text": "Avoid sodium polystyrene sulfonate with bowel dysmotility"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV bicarbonate",
+          "cells": [
+            {
+              "text": "Severe acidosis, pH <7.20",
+              "op": "<",
+              "value": 7.2
+            },
+            {
+              "text": "Isotonic 150 mEq in 1 L 5% dextrose at 50 to 200 mL/h; 50 mEq bolus if life-threatening"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Phosphate binder",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Keep phosphate <5.5 mg/dL",
+              "op": "<",
+              "value": 5.5
+            },
+            {
+              "text": "Before meals"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Diuretics and vasodilators",
+          "cells": [
+            {
+              "text": "Pulmonary oedema"
+            },
+            {
+              "text": "Diuretics often ineffective in AKI"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dialysis",
+          "cells": [
+            {
+              "text": "K >6 mmol/L uncontrolled, refractory oedema or acidosis, uraemic encephalopathy, pericarditis or seizures"
+            },
+            {
+              "text": "BUN and creatinine alone are not triggers"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nutrition",
+          "unit": "g/kg/day",
+          "cells": [
+            {
+              "text": "Protein about 0.8 g/kg daily"
+            },
+            {
+              "text": "Parenteral only if enteral impossible"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Post-obstructive or recovery diuresis",
+          "cells": [
+            {
+              "text": "Large urine volumes"
+            },
+            {
+              "text": "Replace with 0.45% saline at about 75% of output"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "aki-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of hyperphosphatemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "I. Impaired renal phosphate excretion: renal insufficiency",
+          "cells": [
+            {
+              "text": "Renal insufficiency"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "I. Hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Developmental; autoimmune; after neck surgery or radiation; activating mutations of the calcium-sensing receptor"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "I. Parathyroid suppression",
+          "cells": [
+            {
+              "text": "Parathyroid-independent hypercalcemia (vitamin D or vitamin A intoxication; sarcoidosis and other granulomatous diseases; immobilization, osteolytic metastases; milk-alkali syndrome); severe hypermagnesemia or hypomagnesemia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "I. Other impaired excretion",
+          "cells": [
+            {
+              "text": "Pseudohypoparathyroidism; acromegaly; tumoral calcinosis; heparin therapy"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "II. Massive extracellular fluid phosphate load: exogenous",
+          "cells": [
+            {
+              "text": "Rapid administration of exogenous phosphate (intravenous, oral, rectal)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "II. Extensive cellular injury or necrosis",
+          "cells": [
+            {
+              "text": "Crush injuries; rhabdomyolysis; hyperthermia; fulminant hepatitis; cytotoxic therapy; severe hemolytic anemia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "II. Transcellular phosphate shifts",
+          "cells": [
+            {
+              "text": "Metabolic acidosis; respiratory acidosis"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "aki-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Causes of high anion-gap metabolic acidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acids and metabolic causes",
+          "cells": [
+            {
+              "text": "Lactic acidosis; ketoacidosis (diabetic, alcoholic, starvation)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Toxins",
+          "cells": [
+            {
+              "text": "Ethylene glycol; methanol; salicylates; propylene glycol; pyroglutamic acid"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Renal failure",
+          "cells": [
+            {
+              "text": "Acute and chronic"
+            }
+          ],
+          "cite": "c5"
+        }
+      ]
+    },
+    {
+      "id": "aki-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Major causes of papillary necrosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Causes",
+          "cells": [
+            {
+              "text": "Analgesic nephropathy; sickle cell nephropathy; diabetes with urinary tract infection; prolonged NSAID use (rare)"
+            }
+          ],
+          "cite": "c6"
+        }
+      ]
+    },
+    {
+      "id": "aki-diagnostic-5",
+      "kind": "diagnostic",
+      "title": "Laboratory findings in acute renal failure",
+      "rowHeader": "Index",
+      "columns": [
+        "Prerenal azotemia",
+        "Oliguric acute renal failure"
+      ],
+      "rows": [
+        {
+          "parameter": "BUN/plasma creatinine ratio",
+          "cells": [
+            {
+              "text": ">20:1"
+            },
+            {
+              "text": "10-15:1"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Urine sodium, meq/L",
+          "cells": [
+            {
+              "text": "<20"
+            },
+            {
+              "text": ">40"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Urine osmolality, mosmol/L H2O",
+          "cells": [
+            {
+              "text": ">500"
+            },
+            {
+              "text": "<350"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Fractional excretion of sodium, FE_Na = (U_Na x P_Cr x 100) / (P_Na x U_Cr)",
+          "cells": [
+            {
+              "text": "<1%"
+            },
+            {
+              "text": ">2%"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Urine/plasma creatinine ratio",
+          "cells": [
+            {
+              "text": ">40"
+            },
+            {
+              "text": "<20"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
+    },
+    {
+      "id": "aki-diagnostic-6",
+      "kind": "diagnostic",
+      "title": "Indications for corticosteroids and immunosuppressives in interstitial nephritis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Settings"
+      ],
+      "rows": [
+        {
+          "parameter": "Absolute indications",
+          "cells": [
+            {
+              "text": "Sjogren's syndrome; sarcoidosis; SLE interstitial nephritis; adults with TINU; idiopathic and other granulomatous interstitial nephritis"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Relative indications",
+          "cells": [
+            {
+              "text": "Drug-induced or idiopathic acute interstitial nephritis with rapid progression of renal failure, diffuse infiltrates on biopsy, impending need for dialysis, or delayed recovery; children with TINU; postinfectious acute interstitial nephritis with delayed recovery (marked with a question mark in the source)"
+            }
+          ],
+          "cite": "c8"
+        }
+      ],
+      "footnote": "The PDF text has a rendering artifact before the last three relative-indication items."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aki-dx-mgmt",
+      "title": "Diagnosis and management of acute kidney injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Creatinine rise or low urine output meeting KDIGO criteria",
+          "cite": "c3"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Life-threatening K, acidosis, oedema or uraemia?",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Emergency treatment; urgent dialysis if refractory",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bladder scan or ultrasound for obstruction",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Relieve obstruction; watch post-obstructive diuresis",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urine sediment, urine Na and FENa; review drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Prerenal pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Restore perfusion and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "RBC casts or active sediment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "GN work-up and early renal biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "ATN or AIN: stop nephrotoxins, supportive care",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
         }
       ]
     }

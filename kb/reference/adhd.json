@@ -1,177 +1,484 @@
 {
- "id": "adhd",
- "name": "Attention-deficit/hyperactivity disorder",
- "aliases": [
-  "ADHD",
-  "attention deficit hyperactivity disorder",
-  "ADD",
-  "hyperkinetic disorder"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A neurodevelopmental disorder defined by a persistent pattern of inattention and/or hyperactivity-impulsivity that interferes with functioning or development",
-   "Several symptoms must be present before around age twelve and across more than one setting, such as home and school or work",
-   "Presentations are described as predominantly inattentive, predominantly hyperactive-impulsive, or combined",
-   "Inattentive features include distractibility, disorganisation, forgetfulness, and difficulty sustaining attention; hyperactive-impulsive features include restlessness, excessive talking, and interrupting",
-   "Diagnosis relies on history and collateral information from multiple informants and standardised rating scales, not a single test",
-   "Management principles combine behavioural and educational interventions with pharmacotherapy; stimulants are first-line, with non-stimulant options available, all described here without dosing",
-   "Screen cardiovascular history before stimulant treatment and monitor growth, blood pressure, and heart rate during therapy",
-   "Comorbidities are common, including learning disorders, oppositional and conduct problems, anxiety, depression, and tics"
+  "id": "adhd",
+  "name": "Attention-deficit/hyperactivity disorder",
+  "aliases": [
+    "ADHD",
+    "attention deficit hyperactivity disorder",
+    "ADD",
+    "hyperkinetic disorder"
   ],
-  "pathophysiology": "Attention-deficit/hyperactivity disorder is a highly heritable neurodevelopmental condition involving dysregulation of dopaminergic and noradrenergic signalling in fronto-striatal and fronto-cerebellar circuits that support attention, executive function, and response inhibition. Delayed maturation of these networks and gene-environment interactions, including prematurity and prenatal exposures, contribute to the phenotype.",
-  "additionalDifferentials": [
-   "Anxiety disorders",
-   "Mood disorders including bipolar disorder",
-   "Oppositional defiant disorder and conduct disorder",
-   "Learning disorders and intellectual disability",
-   "Autism spectrum disorder",
-   "Sleep disorders such as obstructive sleep apnoea",
-   "Thyroid dysfunction",
-   "Substance use disorder in adolescents and adults"
-  ],
-  "additionalInvestigations": [
-   "Standardised rating scales completed by multiple informants across settings",
-   "Developmental, educational, and collateral history",
-   "Baseline cardiovascular assessment before stimulant initiation",
-   "Screening for comorbid learning, mood, anxiety, and sleep disorders",
-   "Growth, blood pressure, and heart rate monitoring during treatment"
-  ],
-  "redFlags": [
-   "Cardiac symptoms or family history of sudden death before or during stimulant therapy",
-   "Emerging psychosis, mania, or marked mood instability",
-   "Stimulant misuse or diversion, especially in adolescents and adults",
-   "Significant growth suppression during treatment in children"
-  ],
-  "prognosis": "Symptoms, particularly hyperactivity, often lessen with age, but many individuals continue to experience inattention and functional difficulties into adulthood. Outcomes improve with treatment and support, while untreated ADHD is associated with academic underachievement, accidents, and increased risk of substance use.",
-  "pitfalls": [
-   "Diagnosing on the basis of symptoms in a single setting or from one informant",
-   "Overlooking comorbid conditions such as anxiety, sleep disorders, or learning difficulties that mimic or worsen inattention",
-   "Starting stimulants without assessing cardiovascular history",
-   "Attributing normal age-appropriate activity to a disorder",
-   "Failing to reassess ongoing need for medication and monitor growth and vital signs"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Combine behavioural and educational interventions such as behavioural parent training, classroom accommodations and psychoeducation as the foundation of management",
-   "Offer stimulant pharmacotherapy (methylphenidate or amfetamine-based agents) as first-line drug treatment",
-   "Use non-stimulant options such as atomoxetine or guanfacine where stimulants are unsuitable, ineffective or poorly tolerated",
-   "Perform baseline cardiovascular assessment before starting a stimulant and monitor growth, heart rate and blood pressure during treatment",
-   "Screen for and treat comorbid mood, anxiety, sleep and learning disorders",
-   "Coordinate care across education, psychology and specialist paediatric or psychiatric services",
-   "Review response and adverse effects regularly, titrating or switching agents when control is inadequate"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adhd-pathway",
-   "title": "Attention-deficit/hyperactivity disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A neurodevelopmental disorder defined by a persistent pattern of inattention and/or hyperactivity-impulsivity that interferes with functioning or development",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac symptoms or family history of sudden death before or during stimulant therapy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Standardised rating scales completed by multiple informants across settings, Developmental, educational, and collateral history, Baseline cardiovascular assessment before stimulant initiation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Combine behavioural and educational interventions such as behavioural parent training, classroom accommodations and psychoeducation as the foundation of management"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing on the basis of symptoms in a single setting or from one informant"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of attention-deficit/hyperactivity disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "adhd-matrix",
-   "title": "Attention-deficit/hyperactivity disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A neurodevelopmental disorder defined by a persistent pattern of inattention and/or hyperactivity-impulsivity that interferes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A neurodevelopmental disorder defined by a persistent pattern of inattention and/or hyperactivity-impulsivity that interferes with functioning or development",
+      "Several symptoms must be present before around age twelve and across more than one setting, such as home and school or work",
+      "Presentations are described as predominantly inattentive, predominantly hyperactive-impulsive, or combined",
+      "Inattentive features include distractibility, disorganisation, forgetfulness, and difficulty sustaining attention; hyperactive-impulsive features include restlessness, excessive talking, and interrupting",
+      "Diagnosis relies on history and collateral information from multiple informants and standardised rating scales, not a single test",
+      "Management principles combine behavioural and educational interventions with pharmacotherapy; stimulants are first-line, with non-stimulant options available, all described here without dosing",
+      "Screen cardiovascular history before stimulant treatment and monitor growth, blood pressure, and heart rate during therapy",
+      "Comorbidities are common, including learning disorders, oppositional and conduct problems, anxiety, depression, and tics"
     ],
-    [
-     "Key Investigations",
-     "Standardised rating scales completed by multiple informants across settings, Developmental, educational, and collateral history,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Attention-deficit/hyperactivity disorder is a highly heritable neurodevelopmental condition involving dysregulation of dopaminergic and noradrenergic signalling in fronto-striatal and fronto-cerebellar circuits that support attention, executive function, and response inhibition. Delayed maturation of these networks and gene-environment interactions, including prematurity and prenatal exposures, contribute to the phenotype.",
+    "additionalDifferentials": [
+      "Anxiety disorders",
+      "Mood disorders including bipolar disorder",
+      "Oppositional defiant disorder and conduct disorder",
+      "Learning disorders and intellectual disability",
+      "Autism spectrum disorder",
+      "Sleep disorders such as obstructive sleep apnoea",
+      "Thyroid dysfunction",
+      "Substance use disorder in adolescents and adults"
     ],
-    [
-     "Primary Differentials",
-     "Anxiety disorders, Mood disorders including bipolar disorder, Oppositional defiant disorder and conduct disorder",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Standardised rating scales completed by multiple informants across settings",
+      "Developmental, educational, and collateral history",
+      "Baseline cardiovascular assessment before stimulant initiation",
+      "Screening for comorbid learning, mood, anxiety, and sleep disorders",
+      "Growth, blood pressure, and heart rate monitoring during treatment"
     ],
-    [
-     "Management Strategy",
-     "Combine behavioural and educational interventions such as behavioural parent training, classroom accommodations and",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac symptoms or family history of sudden death before or during stimulant therapy",
+      "Emerging psychosis, mania, or marked mood instability",
+      "Stimulant misuse or diversion, especially in adolescents and adults",
+      "Significant growth suppression during treatment in children"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing on the basis of symptoms in a single setting or from one informant",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms, particularly hyperactivity, often lessen with age, but many individuals continue to experience inattention and functional difficulties into adulthood. Outcomes improve with treatment and support, while untreated ADHD is associated with academic underachievement, accidents, and increased risk of substance use.",
+    "pitfalls": [
+      "Diagnosing on the basis of symptoms in a single setting or from one informant",
+      "Overlooking comorbid conditions such as anxiety, sleep disorders, or learning difficulties that mimic or worsen inattention",
+      "Starting stimulants without assessing cardiovascular history",
+      "Attributing normal age-appropriate activity to a disorder",
+      "Failing to reassess ongoing need for medication and monitor growth and vital signs"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Combine behavioural and educational interventions such as behavioural parent training, classroom accommodations and psychoeducation as the foundation of management",
+      "Offer stimulant pharmacotherapy (methylphenidate or amfetamine-based agents) as first-line drug treatment",
+      "Use non-stimulant options such as atomoxetine or guanfacine where stimulants are unsuitable, ineffective or poorly tolerated",
+      "Perform baseline cardiovascular assessment before starting a stimulant and monitor growth, heart rate and blood pressure during treatment",
+      "Screen for and treat comorbid mood, anxiety, sleep and learning disorders",
+      "Coordinate care across education, psychology and specialist paediatric or psychiatric services",
+      "Review response and adverse effects regularly, titrating or switching agents when control is inadequate"
     ]
-   ],
-   "caption": "Overview comparison matrix for attention-deficit/hyperactivity disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adhd-real-image",
-   "title": "Attention-deficit/hyperactivity disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "adhd-pathway",
+      "title": "Attention-deficit/hyperactivity disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A neurodevelopmental disorder defined by a persistent pattern of inattention and/or hyperactivity-impulsivity that interferes with functioning or development",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac symptoms or family history of sudden death before or during stimulant therapy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Standardised rating scales completed by multiple informants across settings, Developmental, educational, and collateral history, Baseline cardiovascular assessment before stimulant initiation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Combine behavioural and educational interventions such as behavioural parent training, classroom accommodations and psychoeducation as the foundation of management"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing on the basis of symptoms in a single setting or from one informant"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of attention-deficit/hyperactivity disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adhd-matrix",
+      "title": "Attention-deficit/hyperactivity disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A neurodevelopmental disorder defined by a persistent pattern of inattention and/or hyperactivity-impulsivity that interferes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Standardised rating scales completed by multiple informants across settings, Developmental, educational, and collateral history,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anxiety disorders, Mood disorders including bipolar disorder, Oppositional defiant disorder and conduct disorder",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Combine behavioural and educational interventions such as behavioural parent training, classroom accommodations and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing on the basis of symptoms in a single setting or from one informant",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for attention-deficit/hyperactivity disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adhd-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standardised rating scales from multiple informants across settings",
+          "cells": [
+            {
+              "text": "Symptoms across settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, educational and collateral history",
+          "cells": [
+            {
+              "text": "Onset before age 12"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline cardiovascular assessment before stimulant initiation",
+          "cells": [
+            {
+              "text": "Cardiac status before stimulants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for learning, mood, anxiety and sleep disorders",
+          "cells": [
+            {
+              "text": "Comorbid disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, blood pressure and heart rate monitoring during treatment",
+          "cells": [
+            {
+              "text": "Effects of treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adhd-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bipolar disorder",
+          "cells": [
+            {
+              "text": "Mood instability and mania"
+            },
+            {
+              "text": "Mood screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea and other sleep disorders",
+          "cells": [
+            {
+              "text": "Sleep disruption"
+            },
+            {
+              "text": "Sleep assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adhd-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural and educational interventions",
+          "cells": [
+            {
+              "text": "Foundation of management"
+            },
+            {
+              "text": "Parent training, classroom accommodations, psychoeducation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methylphenidate or amfetamine-based stimulants",
+          "cells": [
+            {
+              "text": "First-line drug treatment"
+            },
+            {
+              "text": "Stimulant pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atomoxetine or guanfacine",
+          "cells": [
+            {
+              "text": "Non-stimulant option"
+            },
+            {
+              "text": "Where stimulants are unsuitable or poorly tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular assessment before stimulants; growth, heart rate and BP monitoring",
+          "cells": [
+            {
+              "text": "Safety during treatment"
+            },
+            {
+              "text": "Baseline and ongoing checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening and treatment of comorbid mood, anxiety, sleep and learning disorders",
+          "cells": [
+            {
+              "text": "Comorbidity"
+            },
+            {
+              "text": "Treat comorbid disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care across education, psychology and specialist services",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            },
+            {
+              "text": "Coordination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular review; titrate or switch agents",
+          "cells": [
+            {
+              "text": "Inadequate control or adverse effects"
+            },
+            {
+              "text": "Review response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adhd-dx-mgmt",
+      "title": "Diagnosis and management of Attention-deficit/hyperactivity disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent inattention or hyperactivity-impulsivity from childhood across settings",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiac symptoms, family sudden death, emerging psychosis or mania?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist review before stimulant; cardiology or psychiatry input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rating scales from multiple informants; developmental and collateral history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Symptoms before age 12 and across more than one setting?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Baseline cardiovascular check; screen for comorbid disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review anxiety, mood, sleep disorders, thyroid and autism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Behavioural parent training and classroom accommodations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stimulant (methylphenidate or amfetamine-based) as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Atomoxetine or guanfacine if stimulants unsuitable; monitor growth and BP",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms often ease with age; treatment and support improve outcomes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

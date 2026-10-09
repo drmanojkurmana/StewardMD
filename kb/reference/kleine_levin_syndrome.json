@@ -1,175 +1,484 @@
 {
- "id": "kleine_levin_syndrome",
- "name": "Kleine-Levin syndrome",
- "aliases": [
-  "KLS",
-  "recurrent hypersomnia",
-  "periodic hypersomnia",
-  "Sleeping Beauty syndrome"
- ],
- "class": "non_infective",
- "system": "Sleep medicine",
- "specialty": "Sleep Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / International Classification of Sleep Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by recurrent episodes of profound hypersomnia lasting days to several weeks, during which the patient may sleep the majority of each day",
-   "Episodes feature cognitive disturbance with a dreamlike sense of derealisation, apathy, confusion and slowed thinking",
-   "Behavioural changes such as hyperphagia and, in some patients, disinhibited hypersexuality occur during episodes",
-   "Between episodes sleep, cognition, mood and behaviour return to normal",
-   "It most often begins in adolescence with a male predominance, and episodes are frequently triggered by infection or alcohol",
-   "The disorder is typically self-limiting, with episodes becoming less frequent and eventually resolving over years",
-   "Diagnosis rests on the recurrent stereotyped pattern after excluding other medical, neurological and psychiatric causes"
+  "id": "kleine_levin_syndrome",
+  "name": "Kleine-Levin syndrome",
+  "aliases": [
+    "KLS",
+    "recurrent hypersomnia",
+    "periodic hypersomnia",
+    "Sleeping Beauty syndrome"
   ],
-  "pathophysiology": "The cause of Kleine-Levin syndrome is not established, but the episodic nature and the frequent infective trigger suggest a transient, possibly immune-mediated or inflammatory disturbance affecting hypothalamic and thalamic circuits that regulate sleep, appetite and behaviour. Functional imaging during episodes has shown reduced activity in thalamic and other regions, supporting a reversible functional disturbance rather than a fixed structural lesion.",
-  "additionalDifferentials": [
-   "Idiopathic hypersomnia",
-   "Depression with hypersomnic features or bipolar depression",
-   "Substance intoxication or withdrawal",
-   "Focal temporal or frontal epilepsy",
-   "Encephalitis or another structural hypothalamic lesion",
-   "Narcolepsy"
-  ],
-  "additionalInvestigations": [
-   "Detailed episode history and a sleep diary documenting the recurrent pattern",
-   "Polysomnography and multiple sleep latency testing, ideally comparing periods within and between episodes",
-   "MRI brain to exclude a hypothalamic or thalamic structural lesion",
-   "Screening for infection, metabolic disturbance and substance use around episode onset",
-   "Psychiatric assessment to exclude a primary mood disorder"
-  ],
-  "redFlags": [
-   "Focal neurological signs or persistent deficits between episodes",
-   "A first episode in later adulthood or an atypical, non-remitting course",
-   "Fever, meningism or other features of central nervous system infection",
-   "Evidence of a structural hypothalamic lesion on imaging"
-  ],
-  "prognosis": "The natural history is generally favourable, with episodes tending to shorten and become less frequent over several years before remitting, although the unpredictability of relapses causes considerable disruption to education and work.",
-  "pitfalls": [
-   "Dismissing episodes as psychiatric illness or malingering in an adolescent",
-   "Missing an encephalitic or structural cause at first presentation",
-   "Failing to counsel about the episodic, self-limiting nature and about safety during episodes",
-   "Over-investigating between episodes when examination is normal"
-  ],
-  "references": [
-   "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
-   "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
-  ],
-  "crossLinks": [
-   "idiopathic_hypersomnia"
-  ],
-  "management": [
-   "Supportive care during episodes in a safe, low-stimulation environment with supervision and reassurance",
-   "Education of patient and family about the episodic, self-limiting nature and avoidance of recognised triggers such as alcohol, sleep deprivation and infection",
-   "Prompt treatment of precipitating infections",
-   "A trial of stimulants such as modafinil or amfetamines for disabling hypersomnolence during episodes, accepting limited benefit",
-   "Lithium considered for prophylaxis in patients with frequent or severely disruptive episodes",
-   "Practical support to protect education and employment given the disruption of recurrent episodes",
-   "Sleep medicine referral and longitudinal follow-up, tracking episode frequency as the disorder tends to remit over years"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kleine_levin_syndrome-pathway",
-   "title": "Kleine-Levin syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by recurrent episodes of profound hypersomnia lasting days to several weeks, during which the patient may sleep the majority of each day",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Focal neurological signs or persistent deficits between episodes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed episode history and a sleep diary documenting the recurrent pattern, Polysomnography and multiple sleep latency testing, ideally comparing periods within and between episodes, MRI brain to exclude a hypothalamic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care during episodes in a safe, low-stimulation environment with supervision and reassurance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing episodes as psychiatric illness or malingering in an adolescent"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kleine-levin syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "kleine_levin_syndrome-matrix",
-   "title": "Kleine-Levin syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by recurrent episodes of profound hypersomnia lasting days to several weeks, during which the patient may sleep the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Sleep medicine",
+  "specialty": "Sleep Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / International Classification of Sleep Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by recurrent episodes of profound hypersomnia lasting days to several weeks, during which the patient may sleep the majority of each day",
+      "Episodes feature cognitive disturbance with a dreamlike sense of derealisation, apathy, confusion and slowed thinking",
+      "Behavioural changes such as hyperphagia and, in some patients, disinhibited hypersexuality occur during episodes",
+      "Between episodes sleep, cognition, mood and behaviour return to normal",
+      "It most often begins in adolescence with a male predominance, and episodes are frequently triggered by infection or alcohol",
+      "The disorder is typically self-limiting, with episodes becoming less frequent and eventually resolving over years",
+      "Diagnosis rests on the recurrent stereotyped pattern after excluding other medical, neurological and psychiatric causes"
     ],
-    [
-     "Key Investigations",
-     "Detailed episode history and a sleep diary documenting the recurrent pattern, Polysomnography and multiple sleep latency testing,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The cause of Kleine-Levin syndrome is not established, but the episodic nature and the frequent infective trigger suggest a transient, possibly immune-mediated or inflammatory disturbance affecting hypothalamic and thalamic circuits that regulate sleep, appetite and behaviour. Functional imaging during episodes has shown reduced activity in thalamic and other regions, supporting a reversible functional disturbance rather than a fixed structural lesion.",
+    "additionalDifferentials": [
+      "Idiopathic hypersomnia",
+      "Depression with hypersomnic features or bipolar depression",
+      "Substance intoxication or withdrawal",
+      "Focal temporal or frontal epilepsy",
+      "Encephalitis or another structural hypothalamic lesion",
+      "Narcolepsy"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic hypersomnia, Depression with hypersomnic features or bipolar depression, Substance intoxication or withdrawal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed episode history and a sleep diary documenting the recurrent pattern",
+      "Polysomnography and multiple sleep latency testing, ideally comparing periods within and between episodes",
+      "MRI brain to exclude a hypothalamic or thalamic structural lesion",
+      "Screening for infection, metabolic disturbance and substance use around episode onset",
+      "Psychiatric assessment to exclude a primary mood disorder"
     ],
-    [
-     "Management Strategy",
-     "Supportive care during episodes in a safe, low-stimulation environment with supervision and reassurance",
-     "Core treatment modality"
+    "redFlags": [
+      "Focal neurological signs or persistent deficits between episodes",
+      "A first episode in later adulthood or an atypical, non-remitting course",
+      "Fever, meningism or other features of central nervous system infection",
+      "Evidence of a structural hypothalamic lesion on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing episodes as psychiatric illness or malingering in an adolescent",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is generally favourable, with episodes tending to shorten and become less frequent over several years before remitting, although the unpredictability of relapses causes considerable disruption to education and work.",
+    "pitfalls": [
+      "Dismissing episodes as psychiatric illness or malingering in an adolescent",
+      "Missing an encephalitic or structural cause at first presentation",
+      "Failing to counsel about the episodic, self-limiting nature and about safety during episodes",
+      "Over-investigating between episodes when examination is normal"
+    ],
+    "references": [
+      "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
+      "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
+    ],
+    "crossLinks": [
+      "idiopathic_hypersomnia"
+    ],
+    "management": [
+      "Supportive care during episodes in a safe, low-stimulation environment with supervision and reassurance",
+      "Education of patient and family about the episodic, self-limiting nature and avoidance of recognised triggers such as alcohol, sleep deprivation and infection",
+      "Prompt treatment of precipitating infections",
+      "A trial of stimulants such as modafinil or amfetamines for disabling hypersomnolence during episodes, accepting limited benefit",
+      "Lithium considered for prophylaxis in patients with frequent or severely disruptive episodes",
+      "Practical support to protect education and employment given the disruption of recurrent episodes",
+      "Sleep medicine referral and longitudinal follow-up, tracking episode frequency as the disorder tends to remit over years"
     ]
-   ],
-   "caption": "Overview comparison matrix for kleine-levin syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kleine-levin-syndrome-real-image",
-   "title": "Kleine-Levin syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "kleine_levin_syndrome-pathway",
+      "title": "Kleine-Levin syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by recurrent episodes of profound hypersomnia lasting days to several weeks, during which the patient may sleep the majority of each day",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Focal neurological signs or persistent deficits between episodes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed episode history and a sleep diary documenting the recurrent pattern, Polysomnography and multiple sleep latency testing, ideally comparing periods within and between episodes, MRI brain to exclude a hypothalamic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care during episodes in a safe, low-stimulation environment with supervision and reassurance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing episodes as psychiatric illness or malingering in an adolescent"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kleine-levin syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kleine_levin_syndrome-matrix",
+      "title": "Kleine-Levin syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by recurrent episodes of profound hypersomnia lasting days to several weeks, during which the patient may sleep the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed episode history and a sleep diary documenting the recurrent pattern, Polysomnography and multiple sleep latency testing,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic hypersomnia, Depression with hypersomnic features or bipolar depression, Substance intoxication or withdrawal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care during episodes in a safe, low-stimulation environment with supervision and reassurance",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing episodes as psychiatric illness or malingering in an adolescent",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kleine-levin syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kleine_levin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Episode history and sleep diary",
+          "cells": [
+            {
+              "text": "Recurrent, stereotyped pattern of episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography and multiple sleep latency testing",
+          "cells": [
+            {
+              "text": "Sleep pattern compared within and between episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Excludes a hypothalamic or thalamic structural lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection, metabolic and substance screen",
+          "cells": [
+            {
+              "text": "Triggers screened around episode onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric assessment",
+          "cells": [
+            {
+              "text": "Excludes a primary mood disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kleine_levin_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Depression with hypersomnic features, or bipolar depression",
+          "cells": [
+            {
+              "text": "Primary mood disorder, excluded by psychiatric assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance intoxication or withdrawal",
+          "cells": [
+            {
+              "text": "Substance use screened around episode onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Encephalitis or structural hypothalamic lesion",
+          "cells": [
+            {
+              "text": "Fever, meningism, focal signs or a structural lesion on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic hypersomnia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kleine_levin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care during episodes",
+          "cells": [
+            {
+              "text": "Safe, low-stimulation environment with supervision and reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient and family education",
+          "cells": [
+            {
+              "text": "Episodic, self-limiting nature; avoid triggers such as alcohol, sleep deprivation and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat precipitating infection",
+          "cells": [
+            {
+              "text": "Prompt treatment of infections that trigger episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stimulant trial",
+          "cells": [
+            {
+              "text": "Modafinil or amfetamines for disabling hypersomnolence; benefit may be limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lithium",
+          "cells": [
+            {
+              "text": "Considered for prophylaxis with frequent or severely disruptive episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Practical and sleep medicine support",
+          "cells": [
+            {
+              "text": "Protect education and employment; track episode frequency over years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kleine_levin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Kleine-Levin syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Kleine-Levin: recurrent profound hypersomnia with cognitive change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (focal signs, fever or meningism, structural lesion, atypical course)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent exclusion of encephalitis or a structural hypothalamic lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Episode history, sleep diary, polysomnography, MRI brain, infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do recurrent stereotyped episodes remain after other causes are excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic hypersomnia, mood disorder or substance-related causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive, low-stimulation care and supervision during episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Educate patient and family; avoid alcohol, sleep deprivation and infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any precipitating infection promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trial of modafinil or amfetamines for disabling hypersomnolence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider lithium for frequent or severely disruptive episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Sleep medicine follow-up tracking episode frequency",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Generally favourable; episodes shorten and become less frequent over years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

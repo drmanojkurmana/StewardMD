@@ -1,176 +1,918 @@
 {
- "id": "murine_typhus",
- "name": "Murine (endemic) typhus",
- "aliases": [
-  "endemic typhus",
-  "flea-borne typhus",
-  "Rickettsia typhi infection",
-  "shop typhus"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and cat fleas implicated in some urban and suburban settings",
-   "Infection follows contamination of the bite site or mucosae with infected flea faeces rather than the flea bite itself",
-   "Distributed worldwide in warm coastal and port regions, and often linked to rodent activity around homes and businesses",
-   "After an incubation of roughly 1-2 weeks there is fever, headache and myalgia, with a rash appearing in a variable minority of patients",
-   "When present the rash is often faint and macular, starting on the trunk, so its absence does not exclude the diagnosis",
-   "The illness is generally milder than epidemic typhus but can cause pneumonitis, hepatitis, renal impairment and, uncommonly, severe multi-organ disease",
-   "Doxycycline is the treatment of choice and should be started empirically, as serology is usually negative early in the illness"
+  "id": "murine_typhus",
+  "name": "Murine (endemic) typhus",
+  "aliases": [
+    "endemic typhus",
+    "flea-borne typhus",
+    "Rickettsia typhi infection",
+    "shop typhus"
   ],
-  "pathophysiology": "Rickettsia typhi is an obligate intracellular bacterium maintained in a rat-flea-rat cycle. Humans are infected when flea faeces containing viable organisms are inoculated through the bite wound, abraded skin or mucous membranes. The bacteria invade and proliferate within vascular endothelial cells, producing a widespread small-vessel vasculitis with increased vascular permeability and perivascular inflammation. This endothelial injury underlies the fever, rash and, in more severe disease, involvement of the lungs, liver, kidneys and central nervous system.",
-  "additionalDifferentials": [
-   "Epidemic (louse-borne) typhus",
-   "Spotted fever group rickettsioses",
-   "Dengue and other arboviral fevers",
-   "Typhoid fever",
-   "Leptospirosis",
-   "Undifferentiated viral febrile illness"
-  ],
-  "additionalInvestigations": [
-   "Indirect immunofluorescence antibody serology on paired acute and convalescent sera",
-   "PCR of blood where available",
-   "Full blood count, which may show thrombocytopenia",
-   "Liver enzymes, often mildly elevated",
-   "Renal function and serum sodium",
-   "Chest imaging if pneumonitis is suspected"
-  ],
-  "redFlags": [
-   "Confusion or other neurological signs suggesting meningoencephalitis",
-   "Respiratory distress from pneumonitis or acute respiratory distress syndrome",
-   "Jaundice or marked hepatic dysfunction",
-   "Acute kidney injury",
-   "Failure to improve on empirical antibiotics, prompting review of the diagnosis"
-  ],
-  "prognosis": "Murine typhus is usually a self-limiting febrile illness with low mortality and responds rapidly to doxycycline, although severe complications and occasional deaths occur, particularly with delayed treatment or in older or comorbid patients.",
-  "pitfalls": [
-   "Excluding the diagnosis because there is no rash, which is frequently absent or subtle",
-   "Waiting for confirmatory serology before starting treatment",
-   "Failing to elicit rodent or flea exposure in the history",
-   "Attributing the illness to a nonspecific viral fever and missing a treatable rickettsiosis",
-   "Overlooking the possibility of severe organ involvement in apparently mild cases"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as it produces rapid defervescence",
-   "Use a tetracycline-class agent as the mainstay, reserving alternatives for situations where tetracyclines are contraindicated",
-   "Supportive care with fluids, antipyretics and analgesia",
-   "Monitor for and manage complications such as pneumonitis, hepatitis and renal impairment, with organ support in severe multi-organ disease",
-   "Monitor full blood count, liver enzymes, renal function and sodium for thrombocytopenia, transaminitis, renal impairment and hyponatraemia",
-   "Environmental rodent and flea control to prevent reinfection and protect the household",
-   "Escalate to inpatient or critical care for severe or complicated disease, particularly in older or comorbid patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "murine_typhus-pathway",
-   "title": "Murine (endemic) typhus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and cat fleas implicated in some urban and suburban settings",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Confusion or other neurological signs suggesting meningoencephalitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Indirect immunofluorescence antibody serology on paired acute and convalescent sera, PCR of blood where available, Full blood count, which may show thrombocytopenia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as it produces rapid defervescence"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis because there is no rash, which is frequently absent or subtle"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of murine (endemic) typhus."
-  }
- ],
- "tables": [
-  {
-   "id": "murine_typhus-matrix",
-   "title": "Murine (endemic) typhus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and cat fleas implicated in some urban and suburban settings",
+      "Infection follows contamination of the bite site or mucosae with infected flea faeces rather than the flea bite itself",
+      "Distributed worldwide in warm coastal and port regions, and often linked to rodent activity around homes and businesses",
+      "After an incubation of roughly 1-2 weeks there is fever, headache and myalgia, with a rash appearing in a variable minority of patients",
+      "When present the rash is often faint and macular, starting on the trunk, so its absence does not exclude the diagnosis",
+      "The illness is generally milder than epidemic typhus but can cause pneumonitis, hepatitis, renal impairment and, uncommonly, severe multi-organ disease",
+      "Doxycycline is the treatment of choice and should be started empirically, as serology is usually negative early in the illness"
     ],
-    [
-     "Key Investigations",
-     "Indirect immunofluorescence antibody serology on paired acute and convalescent sera, PCR of blood where available, Full blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rickettsia typhi is an obligate intracellular bacterium maintained in a rat-flea-rat cycle. Humans are infected when flea faeces containing viable organisms are inoculated through the bite wound, abraded skin or mucous membranes. The bacteria invade and proliferate within vascular endothelial cells, producing a widespread small-vessel vasculitis with increased vascular permeability and perivascular inflammation. This endothelial injury underlies the fever, rash and, in more severe disease, involvement of the lungs, liver, kidneys and central nervous system.",
+    "additionalDifferentials": [
+      "Epidemic (louse-borne) typhus",
+      "Spotted fever group rickettsioses",
+      "Dengue and other arboviral fevers",
+      "Typhoid fever",
+      "Leptospirosis",
+      "Undifferentiated viral febrile illness"
     ],
-    [
-     "Primary Differentials",
-     "Epidemic (louse-borne) typhus, Spotted fever group rickettsioses, Dengue and other arboviral fevers",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Indirect immunofluorescence antibody serology on paired acute and convalescent sera",
+      "PCR of blood where available",
+      "Full blood count, which may show thrombocytopenia",
+      "Liver enzymes, often mildly elevated",
+      "Renal function and serum sodium",
+      "Chest imaging if pneumonitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as",
-     "Core treatment modality"
+    "redFlags": [
+      "Confusion or other neurological signs suggesting meningoencephalitis",
+      "Respiratory distress from pneumonitis or acute respiratory distress syndrome",
+      "Jaundice or marked hepatic dysfunction",
+      "Acute kidney injury",
+      "Failure to improve on empirical antibiotics, prompting review of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis because there is no rash, which is frequently absent or subtle",
-     "Prevent diagnostic or management error"
+    "prognosis": "Murine typhus is usually a self-limiting febrile illness with low mortality and responds rapidly to doxycycline, although severe complications and occasional deaths occur, particularly with delayed treatment or in older or comorbid patients.",
+    "pitfalls": [
+      "Excluding the diagnosis because there is no rash, which is frequently absent or subtle",
+      "Waiting for confirmatory serology before starting treatment",
+      "Failing to elicit rodent or flea exposure in the history",
+      "Attributing the illness to a nonspecific viral fever and missing a treatable rickettsiosis",
+      "Overlooking the possibility of severe organ involvement in apparently mild cases"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as it produces rapid defervescence",
+      "Use a tetracycline-class agent as the mainstay, reserving alternatives for situations where tetracyclines are contraindicated",
+      "Supportive care with fluids, antipyretics and analgesia",
+      "Monitor for and manage complications such as pneumonitis, hepatitis and renal impairment, with organ support in severe multi-organ disease",
+      "Monitor full blood count, liver enzymes, renal function and sodium for thrombocytopenia, transaminitis, renal impairment and hyponatraemia",
+      "Environmental rodent and flea control to prevent reinfection and protect the household",
+      "Escalate to inpatient or critical care for severe or complicated disease, particularly in older or comorbid patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for murine (endemic) typhus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "murine-typhus-real-image",
-   "title": "Murine (endemic) typhus: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "murine_typhus-pathway",
+      "title": "Murine (endemic) typhus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and cat fleas implicated in some urban and suburban settings",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Confusion or other neurological signs suggesting meningoencephalitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Indirect immunofluorescence antibody serology on paired acute and convalescent sera, PCR of blood where available, Full blood count, which may show thrombocytopenia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as it produces rapid defervescence"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis because there is no rash, which is frequently absent or subtle"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of murine (endemic) typhus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "murine_typhus-matrix",
+      "title": "Murine (endemic) typhus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Indirect immunofluorescence antibody serology on paired acute and convalescent sera, PCR of blood where available, Full blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epidemic (louse-borne) typhus, Spotted fever group rickettsioses, Dengue and other arboviral fevers",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis because there is no rash, which is frequently absent or subtle",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for murine (endemic) typhus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 174-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "murine_typhus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Indirect immunofluorescence antibody serology on paired sera",
+          "cells": [
+            {
+              "text": "Acute and convalescent samples; usually negative early in the illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of blood",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "May show thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver enzymes",
+          "cells": [
+            {
+              "text": "Often mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and serum sodium",
+          "cells": [
+            {
+              "text": "Renal impairment and hyponatraemia to monitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "If pneumonitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "murine_typhus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidemic (louse-borne) typhus",
+          "cells": [
+            {
+              "text": "Murine typhus is transmitted by rat fleas and is generally milder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Undifferentiated viral febrile illness",
+          "cells": [
+            {
+              "text": "Shares fever, headache and myalgia; a faint rash or none does not exclude murine typhus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "murine_typhus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Treatment of choice; start empirically, as serology is usually negative early in the illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetracycline-class alternatives",
+          "cells": [
+            {
+              "text": "Mainstay is a tetracycline-class agent; alternatives only where tetracyclines are contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Fluids, antipyretics and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complications",
+          "cells": [
+            {
+              "text": "Pneumonitis, hepatitis and renal impairment; organ support in severe multi-organ disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laboratory monitoring",
+          "cells": [
+            {
+              "text": "Full blood count, liver enzymes, renal function and sodium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Environmental control",
+          "cells": [
+            {
+              "text": "Rodent and flea control to prevent reinfection and protect the household"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Inpatient or critical care for severe disease, particularly in older or comorbid patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "murine_typhus-ddx-2",
+      "kind": "ddx",
+      "title": "Features of selected rickettsial infections",
+      "rowHeader": "Disease",
+      "columns": [
+        "Organism",
+        "Transmission",
+        "Geographic range",
+        "Incubation period, days",
+        "Duration, days",
+        "Rash, %",
+        "Eschar, %",
+        "Lymphadenopathy"
+      ],
+      "rows": [
+        {
+          "parameter": "Rocky Mountain spotted fever",
+          "cells": [
+            {
+              "text": "Rickettsia rickettsii"
+            },
+            {
+              "text": "Tick bite: Dermacentor andersoni, D. variabilis (United States); Amblyomma cajennense, A. aureolatum (Central/South America); Rhipicephalus sanguineus (Mexico, Brazil, United States)"
+            },
+            {
+              "text": "Not separately listed in the source row"
+            },
+            {
+              "text": "2 to 14"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "<1"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mediterranean spotted fever",
+          "cells": [
+            {
+              "text": "R. conorii"
+            },
+            {
+              "text": "Tick bite: R. sanguineus, R. pumilio"
+            },
+            {
+              "text": "Southern Europe, Africa, Middle East, Central Asia"
+            },
+            {
+              "text": "5 to 7"
+            },
+            {
+              "text": "7 to 14"
+            },
+            {
+              "text": "97"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "African tick-bite fever",
+          "cells": [
+            {
+              "text": "R. africae"
+            },
+            {
+              "text": "Tick bite: A. hebraeum, A. variegatum"
+            },
+            {
+              "text": "Sub-Saharan Africa, West Indies"
+            },
+            {
+              "text": "4 to 10"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maculatum disease",
+          "cells": [
+            {
+              "text": "R. parkeri"
+            },
+            {
+              "text": "A. maculatum"
+            },
+            {
+              "text": "United States, South America"
+            },
+            {
+              "text": "2 to 10"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "88"
+            },
+            {
+              "text": "94"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rickettsialpox",
+          "cells": [
+            {
+              "text": "R. akari"
+            },
+            {
+              "text": "Mite bite: Liponyssoides sanguineus"
+            },
+            {
+              "text": "United States, Ukraine, Turkey, Mexico, Croatia"
+            },
+            {
+              "text": "10 to 17"
+            },
+            {
+              "text": "3 to 11"
+            },
+            {
+              "text": "100"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tick-borne lymphadenopathy",
+          "cells": [
+            {
+              "text": "R. slovaca"
+            },
+            {
+              "text": "Tick bite: Dermacentor marginatus, D. reticularis"
+            },
+            {
+              "text": "Europe"
+            },
+            {
+              "text": "7 to 9"
+            },
+            {
+              "text": "17 to 180"
+            },
+            {
+              "text": "5"
+            },
+            {
+              "text": "100"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Flea-borne spotted fever",
+          "cells": [
+            {
+              "text": "R. felis"
+            },
+            {
+              "text": "Flea (mechanism undetermined): Ctenocephalides felis"
+            },
+            {
+              "text": "Worldwide"
+            },
+            {
+              "text": "8 to 16"
+            },
+            {
+              "text": "8 to 16"
+            },
+            {
+              "text": "80"
+            },
+            {
+              "text": "15"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epidemic typhus",
+          "cells": [
+            {
+              "text": "R. prowazekii"
+            },
+            {
+              "text": "Louse feces: Pediculus humanus corporis, fleas and lice of flying squirrels, or recrudescence"
+            },
+            {
+              "text": "Worldwide"
+            },
+            {
+              "text": "7 to 14"
+            },
+            {
+              "text": "10 to 18"
+            },
+            {
+              "text": "80"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Murine typhus",
+          "cells": [
+            {
+              "text": "R. typhi"
+            },
+            {
+              "text": "Flea feces: Xenopsylla cheopis, C. felis, others"
+            },
+            {
+              "text": "Worldwide"
+            },
+            {
+              "text": "8 to 16"
+            },
+            {
+              "text": "9 to 18"
+            },
+            {
+              "text": "80"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Human monocytotropic ehrlichiosis",
+          "cells": [
+            {
+              "text": "Ehrlichia chaffeensis"
+            },
+            {
+              "text": "Tick bite: Amblyomma americanum, D. variabilis"
+            },
+            {
+              "text": "United States"
+            },
+            {
+              "text": "1 to 21"
+            },
+            {
+              "text": "3 to 21"
+            },
+            {
+              "text": "26"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ewingii ehrlichiosis",
+          "cells": [
+            {
+              "text": "E. ewingii"
+            },
+            {
+              "text": "Tick bite: A. americanum"
+            },
+            {
+              "text": "United States"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "Not stated"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "Not stated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Human granulocytotropic anaplasmosis",
+          "cells": [
+            {
+              "text": "Anaplasma phagocytophilum"
+            },
+            {
+              "text": "Tick bite: Ixodes scapularis, I. ricinus, I. pacificus, I. persulcatus"
+            },
+            {
+              "text": "United States, Europe, Asia"
+            },
+            {
+              "text": "4 to 8"
+            },
+            {
+              "text": "3 to 14"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Scrub typhus",
+          "cells": [
+            {
+              "text": "Orientia tsutsugamushi"
+            },
+            {
+              "text": "Mite bite: Leptotrombidium deliense, others"
+            },
+            {
+              "text": "Asia, Australia, New Guinea, Pacific Islands"
+            },
+            {
+              "text": "9 to 18"
+            },
+            {
+              "text": "6 to 21"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "35"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Q fever",
+          "cells": [
+            {
+              "text": "Coxiella burnetii"
+            },
+            {
+              "text": "Inhalation of aerosols of infected parturition material (sheep, dogs, others), ingestion of infected milk or other routes (rest of cell cut off in source)"
+            },
+            {
+              "text": "Worldwide"
+            },
+            {
+              "text": "3 to 30"
+            },
+            {
+              "text": "5 to 57"
+            },
+            {
+              "text": "<1"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "For Rocky Mountain spotted fever the geographic range appears merged into the transmission cell in the source (the geographic cell is blank). Source footnote (a) on lymphadenopathy is cut off at the page edge."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "murine_typhus-dx-mgmt",
+      "title": "Diagnosis and management of Murine (endemic) typhus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, headache and myalgia; rash may be faint or absent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (confusion, respiratory distress, jaundice, acute kidney injury)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to inpatient or critical care for severe multi-organ disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired IFA serology, blood PCR, full blood count, liver enzymes, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rodent or flea exposure elicited in the history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Take a fuller rodent and flea exposure history; do not exclude on absent rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Doxycycline, started on clinical suspicion without awaiting serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tetracycline-class agent as mainstay; alternatives if contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care with fluids, antipyretics and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor FBC, liver enzymes, renal function and sodium for complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Rodent and flea control to prevent reinfection",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually self-limiting with rapid response to doxycycline; severe disease can occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

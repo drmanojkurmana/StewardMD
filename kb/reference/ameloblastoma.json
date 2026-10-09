@@ -1,175 +1,539 @@
 {
- "id": "ameloblastoma",
- "name": "Ameloblastoma",
- "aliases": [
-  "conventional ameloblastoma",
-  "solid/multicystic ameloblastoma",
-  "unicystic ameloblastoma"
- ],
- "class": "non_infective",
- "system": "Oral & Maxillofacial",
- "specialty": "Oral Medicine / OMFS",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Head and Neck Tumours (Odontogenic and Maxillofacial Bone Tumours) / Burket's Oral Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest clinically significant odontogenic tumour, benign but locally invasive with a marked tendency to recur if incompletely removed",
-   "Usually presents as a slow-growing, painless expansion of the jaw, most often the posterior mandible",
-   "Radiographs classically show a multilocular soap-bubble or honeycomb radiolucency, often with tooth displacement, root resorption, and cortical expansion",
-   "Recognised variants include the conventional (solid/multicystic), unicystic, and peripheral (extraosseous) types, which differ in behaviour and treatment",
-   "Histology shows islands or strands of odontogenic epithelium with peripheral palisaded ameloblast-like cells showing reverse nuclear polarity and a loose stellate-reticulum-like centre",
-   "Many conventional mandibular tumours harbour a BRAF V600E mutation, of potential relevance to targeted therapy",
-   "Because of infiltration between bony trabeculae, simple enucleation of conventional tumours leaves disease behind and leads to recurrence",
-   "Treatment of conventional ameloblastoma is resection with a margin of healthy bone, whereas unicystic and peripheral variants may be managed more conservatively"
+  "id": "ameloblastoma",
+  "name": "Ameloblastoma",
+  "aliases": [
+    "conventional ameloblastoma",
+    "solid/multicystic ameloblastoma",
+    "unicystic ameloblastoma"
   ],
-  "pathophysiology": "Ameloblastoma arises from odontogenic epithelium, including remnants of the dental lamina, the enamel organ, or the lining of odontogenic cysts, which proliferates as islands and cords with the histological hallmarks of ameloblast differentiation, namely peripheral palisading with reverse polarity and a stellate-reticulum-like core. Activating mutations in the mitogen-activated protein kinase pathway, particularly BRAF V600E in mandibular tumours and SMO mutations in maxillary tumours, drive the proliferation. Although the conventional tumour does not ordinarily metastasise, it infiltrates between medullary bone trabeculae beyond its apparent radiographic margin, which explains its locally destructive growth and its propensity to recur after conservative removal.",
-  "additionalDifferentials": [
-   "Odontogenic keratocyst",
-   "Dentigerous cyst and other odontogenic cysts",
-   "Odontogenic myxoma",
-   "Central giant cell granuloma",
-   "Ameloblastic fibroma and other mixed odontogenic tumours",
-   "Central mucoepidermoid carcinoma of the jaw",
-   "Metastatic tumour to the jaw"
-  ],
-  "additionalInvestigations": [
-   "Panoramic radiography and cross-sectional imaging (CT/CBCT, MRI) to define locularity and extent",
-   "Incisional biopsy with histopathological confirmation",
-   "Assessment of cortical integrity and the relationship to the inferior alveolar canal",
-   "Molecular testing such as BRAF status where targeted therapy is contemplated",
-   "Preoperative planning imaging for resection and reconstruction",
-   "Long-term radiographic surveillance for recurrence"
-  ],
-  "redFlags": [
-   "Rapid growth, pain, paraesthesia, or ulceration suggesting aggressive behaviour or malignant change",
-   "Cortical perforation with soft-tissue extension",
-   "Recurrence, which may appear many years after initial treatment",
-   "Features of the rare malignant forms, metastasising ameloblastoma or ameloblastic carcinoma"
-  ],
-  "prognosis": "The prognosis for life is excellent because the tumour is benign, but conventional ameloblastoma recurs frequently after inadequate excision and requires long-term follow-up; complete resection with clear margins gives a low recurrence rate, and unicystic and peripheral variants have a more favourable outlook.",
-  "pitfalls": [
-   "Treating a conventional ameloblastoma by enucleation alone, leading to recurrence",
-   "Mistaking it radiographically for a simple odontogenic cyst and under-treating",
-   "Insufficient follow-up, so that late recurrence is missed",
-   "Overlooking the rare malignant variants"
-  ],
-  "references": [
-   "WHO Classification of Head and Neck Tumours (Odontogenic and Maxillofacial Bone Tumours)",
-   "Burket's Oral Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat conventional solid or multicystic tumours with wide surgical resection including a margin of uninvolved bone, given infiltration beyond the radiographic margin",
-   "Manage unicystic and peripheral variants more conservatively with enucleation or local excision, reflecting their lower recurrence risk",
-   "Plan jaw reconstruction, for example with vascularised bone grafting, after segmental resection",
-   "Consider BRAF/MEK-targeted therapy for unresectable, recurrent or metastatic tumours harbouring a BRAF V600E mutation",
-   "Assess and preserve or reconstruct the inferior alveolar nerve and restore dental function",
-   "Undertake long-term radiographic surveillance for recurrence, which may appear years after treatment",
-   "Manage within an oral and maxillofacial surgery multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ameloblastoma-pathway",
-   "title": "Ameloblastoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest clinically significant odontogenic tumour, benign but locally invasive with a marked tendency to recur if incompletely removed",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, pain, paraesthesia, or ulceration suggesting aggressive behaviour or malignant change",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Panoramic radiography and cross-sectional imaging (CT/CBCT, MRI) to define locularity and extent, Incisional biopsy with histopathological confirmation, Assessment of cortical integrity and the relationship to the inferior"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat conventional solid or multicystic tumours with wide surgical resection including a margin of uninvolved bone, given infiltration beyond the radiographic margin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a conventional ameloblastoma by enucleation alone, leading to recurrence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ameloblastoma."
-  }
- ],
- "tables": [
-  {
-   "id": "ameloblastoma-matrix",
-   "title": "Ameloblastoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest clinically significant odontogenic tumour, benign but locally invasive with a marked tendency to recur if",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oral & Maxillofacial",
+  "specialty": "Oral Medicine / OMFS",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Head and Neck Tumours (Odontogenic and Maxillofacial Bone Tumours) / Burket's Oral Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest clinically significant odontogenic tumour, benign but locally invasive with a marked tendency to recur if incompletely removed",
+      "Usually presents as a slow-growing, painless expansion of the jaw, most often the posterior mandible",
+      "Radiographs classically show a multilocular soap-bubble or honeycomb radiolucency, often with tooth displacement, root resorption, and cortical expansion",
+      "Recognised variants include the conventional (solid/multicystic), unicystic, and peripheral (extraosseous) types, which differ in behaviour and treatment",
+      "Histology shows islands or strands of odontogenic epithelium with peripheral palisaded ameloblast-like cells showing reverse nuclear polarity and a loose stellate-reticulum-like centre",
+      "Many conventional mandibular tumours harbour a BRAF V600E mutation, of potential relevance to targeted therapy",
+      "Because of infiltration between bony trabeculae, simple enucleation of conventional tumours leaves disease behind and leads to recurrence",
+      "Treatment of conventional ameloblastoma is resection with a margin of healthy bone, whereas unicystic and peripheral variants may be managed more conservatively"
     ],
-    [
-     "Key Investigations",
-     "Panoramic radiography and cross-sectional imaging (CT/CBCT, MRI) to define locularity and extent, Incisional biopsy with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ameloblastoma arises from odontogenic epithelium, including remnants of the dental lamina, the enamel organ, or the lining of odontogenic cysts, which proliferates as islands and cords with the histological hallmarks of ameloblast differentiation, namely peripheral palisading with reverse polarity and a stellate-reticulum-like core. Activating mutations in the mitogen-activated protein kinase pathway, particularly BRAF V600E in mandibular tumours and SMO mutations in maxillary tumours, drive the proliferation. Although the conventional tumour does not ordinarily metastasise, it infiltrates between medullary bone trabeculae beyond its apparent radiographic margin, which explains its locally destructive growth and its propensity to recur after conservative removal.",
+    "additionalDifferentials": [
+      "Odontogenic keratocyst",
+      "Dentigerous cyst and other odontogenic cysts",
+      "Odontogenic myxoma",
+      "Central giant cell granuloma",
+      "Ameloblastic fibroma and other mixed odontogenic tumours",
+      "Central mucoepidermoid carcinoma of the jaw",
+      "Metastatic tumour to the jaw"
     ],
-    [
-     "Primary Differentials",
-     "Odontogenic keratocyst, Dentigerous cyst and other odontogenic cysts, Odontogenic myxoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Panoramic radiography and cross-sectional imaging (CT/CBCT, MRI) to define locularity and extent",
+      "Incisional biopsy with histopathological confirmation",
+      "Assessment of cortical integrity and the relationship to the inferior alveolar canal",
+      "Molecular testing such as BRAF status where targeted therapy is contemplated",
+      "Preoperative planning imaging for resection and reconstruction",
+      "Long-term radiographic surveillance for recurrence"
     ],
-    [
-     "Management Strategy",
-     "Treat conventional solid or multicystic tumours with wide surgical resection including a margin of uninvolved bone, given",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, pain, paraesthesia, or ulceration suggesting aggressive behaviour or malignant change",
+      "Cortical perforation with soft-tissue extension",
+      "Recurrence, which may appear many years after initial treatment",
+      "Features of the rare malignant forms, metastasising ameloblastoma or ameloblastic carcinoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a conventional ameloblastoma by enucleation alone, leading to recurrence",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis for life is excellent because the tumour is benign, but conventional ameloblastoma recurs frequently after inadequate excision and requires long-term follow-up; complete resection with clear margins gives a low recurrence rate, and unicystic and peripheral variants have a more favourable outlook.",
+    "pitfalls": [
+      "Treating a conventional ameloblastoma by enucleation alone, leading to recurrence",
+      "Mistaking it radiographically for a simple odontogenic cyst and under-treating",
+      "Insufficient follow-up, so that late recurrence is missed",
+      "Overlooking the rare malignant variants"
+    ],
+    "references": [
+      "WHO Classification of Head and Neck Tumours (Odontogenic and Maxillofacial Bone Tumours)",
+      "Burket's Oral Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat conventional solid or multicystic tumours with wide surgical resection including a margin of uninvolved bone, given infiltration beyond the radiographic margin",
+      "Manage unicystic and peripheral variants more conservatively with enucleation or local excision, reflecting their lower recurrence risk",
+      "Plan jaw reconstruction, for example with vascularised bone grafting, after segmental resection",
+      "Consider BRAF/MEK-targeted therapy for unresectable, recurrent or metastatic tumours harbouring a BRAF V600E mutation",
+      "Assess and preserve or reconstruct the inferior alveolar nerve and restore dental function",
+      "Undertake long-term radiographic surveillance for recurrence, which may appear years after treatment",
+      "Manage within an oral and maxillofacial surgery multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for ameloblastoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ameloblastoma-real-image",
-   "title": "Ameloblastoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ameloblastoma-pathway",
+      "title": "Ameloblastoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest clinically significant odontogenic tumour, benign but locally invasive with a marked tendency to recur if incompletely removed",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, pain, paraesthesia, or ulceration suggesting aggressive behaviour or malignant change",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Panoramic radiography and cross-sectional imaging (CT/CBCT, MRI) to define locularity and extent, Incisional biopsy with histopathological confirmation, Assessment of cortical integrity and the relationship to the inferior"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat conventional solid or multicystic tumours with wide surgical resection including a margin of uninvolved bone, given infiltration beyond the radiographic margin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a conventional ameloblastoma by enucleation alone, leading to recurrence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ameloblastoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ameloblastoma-matrix",
+      "title": "Ameloblastoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest clinically significant odontogenic tumour, benign but locally invasive with a marked tendency to recur if",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Panoramic radiography and cross-sectional imaging (CT/CBCT, MRI) to define locularity and extent, Incisional biopsy with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Odontogenic keratocyst, Dentigerous cyst and other odontogenic cysts, Odontogenic myxoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat conventional solid or multicystic tumours with wide surgical resection including a margin of uninvolved bone, given",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a conventional ameloblastoma by enucleation alone, leading to recurrence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ameloblastoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Head and Neck Tumours (Odontogenic and Maxillofacial Bone Tumours) / Burket's Oral Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ameloblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Panoramic radiography and CT, CBCT or MRI",
+          "cells": [
+            {
+              "text": "Locularity and extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incisional biopsy with histopathological confirmation",
+          "cells": [
+            {
+              "text": "Diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of cortical integrity and the inferior alveolar canal",
+          "cells": [
+            {
+              "text": "Relationship to nerve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF status where targeted therapy is considered",
+          "cells": [
+            {
+              "text": "BRAF V600E mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative planning imaging",
+          "cells": [
+            {
+              "text": "Resection and reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term radiographic surveillance",
+          "cells": [
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ameloblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Odontogenic keratocyst",
+          "cells": [
+            {
+              "text": "Cystic lesion of the jaw"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dentigerous cyst or other odontogenic cyst",
+          "cells": [
+            {
+              "text": "Cyst associated with a tooth"
+            },
+            {
+              "text": "Radiographs and histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Odontogenic myxoma",
+          "cells": [
+            {
+              "text": "Myxoid tumour"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central giant cell granuloma",
+          "cells": [
+            {
+              "text": "Giant cell lesion of the jaw"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central mucoepidermoid carcinoma of the jaw",
+          "cells": [
+            {
+              "text": "Malignant jaw tumour"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic tumour to the jaw",
+          "cells": [
+            {
+              "text": "Secondary jaw lesion"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ameloblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide surgical resection with margin of uninvolved bone",
+          "cells": [
+            {
+              "text": "Conventional solid or multicystic tumour"
+            },
+            {
+              "text": "Infiltration beyond radiographic margin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enucleation or local excision for unicystic and peripheral variants",
+          "cells": [
+            {
+              "text": "Lower recurrence risk"
+            },
+            {
+              "text": "More conservative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jaw reconstruction, for example vascularised bone grafting",
+          "cells": [
+            {
+              "text": "Segmental resection"
+            },
+            {
+              "text": "After resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF/MEK-targeted therapy",
+          "cells": [
+            {
+              "text": "Unresectable, recurrent or metastatic BRAF V600E tumour"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preservation or reconstruction of the inferior alveolar nerve",
+          "cells": [
+            {
+              "text": "Nerve and dental function"
+            },
+            {
+              "text": "Surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term radiographic surveillance for recurrence",
+          "cells": [
+            {
+              "text": "Recurrence years later"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral and maxillofacial multidisciplinary team care",
+          "cells": [
+            {
+              "text": "Complex jaw surgery"
+            },
+            {
+              "text": "Coordinated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ameloblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Ameloblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slow painless jaw swelling with soap-bubble radiolucency in the mandible",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pain, paraesthesia, cortical perforation or rapid growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent maxillofacial review; biopsy to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Panoramic and cross-sectional imaging; incisional biopsy; BRAF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Multilocular ameloblastoma confirmed on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Wide resection with bone margin for conventional type",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review keratocyst, dentigerous cyst, myxoma and giant cell granuloma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enucleation or local excision for unicystic or peripheral variants",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reconstruction after segmental resection; preserve nerve if possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "BRAF/MEK therapy for unresectable or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but recurs after inadequate excision; long follow-up needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

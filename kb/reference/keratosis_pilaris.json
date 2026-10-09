@@ -1,172 +1,488 @@
 {
- "id": "keratosis_pilaris",
- "name": "Keratosis pilaris",
- "aliases": [
-  "KP",
-  "follicular keratosis",
-  "keratosis pilaris"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An extremely common, benign disorder of follicular keratinisation producing rough, gritty, keratotic follicular papules with a goose-flesh texture",
-   "Classically affects the extensor upper arms, thighs, buttocks, and cheeks in a symmetrical distribution",
-   "Often accompanied by perifollicular erythema; a variant with prominent redness and atrophy affects the face (keratosis pilaris rubra and atrophicans)",
-   "Strongly associated with atopic dermatitis and ichthyosis vulgaris and tends to run in families with an autosomal dominant tendency",
-   "Frequently improves with age and is usually worse in winter and in dry skin",
-   "Caused by a keratin plug occluding the follicular opening, sometimes trapping a coiled hair",
-   "Usually asymptomatic and cosmetic, with a clinical diagnosis that seldom needs a biopsy",
-   "Management is symptomatic with regular emollients and keratolytics (urea, lactic acid, salicylic acid) and gentle exfoliation, and topical retinoids for resistant cases, with realistic expectations"
+  "id": "keratosis_pilaris",
+  "name": "Keratosis pilaris",
+  "aliases": [
+    "KP",
+    "follicular keratosis",
+    "keratosis pilaris"
   ],
-  "pathophysiology": "Keratosis pilaris results from excessive or abnormal keratinisation of the hair-follicle infundibulum, so that a keratin plug forms and occludes the follicular opening, sometimes enclosing a coiled or trapped hair. The plug produces the palpable, rough papule, while surrounding low-grade inflammation gives the perifollicular erythema. The disorder is constitutional and often familial, and its association with atopic dermatitis and ichthyosis vulgaris reflects a shared tendency to disordered keratinisation and impaired epidermal barrier function; the atrophic facial variants involve additional follicular inflammation and scarring.",
-  "additionalDifferentials": [
-   "Lichen nitidus",
-   "Follicular eczema",
-   "Folliculitis",
-   "Phrynoderma (vitamin A deficiency)",
-   "Lichen spinulosus",
-   "Milia or comedones",
-   "Keratosis pilaris atrophicans variants"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis, generally requiring no investigation",
-   "Dermoscopy showing coiled hairs and keratin plugs within follicular openings",
-   "Assessment for associated atopic dermatitis and ichthyosis vulgaris",
-   "Skin biopsy only in atypical presentations, showing follicular hyperkeratosis with a keratin plug",
-   "Consideration of an underlying syndrome when atrophy or scarring is prominent (keratosis pilaris atrophicans)"
-  ],
-  "redFlags": [
-   "Prominent facial erythema with scarring loss of the eyebrows suggesting a syndromic form (keratosis follicularis spinulosa decalvans)",
-   "Atrophy or scarring that may cause permanent hair loss",
-   "Atypical, inflammatory, or rapidly evolving lesions prompting reconsideration of the diagnosis"
-  ],
-  "prognosis": "Benign and chronic but tends to improve over time, often lessening markedly by adulthood; treatment controls rather than cures, and lesions recur if therapy is stopped.",
-  "pitfalls": [
-   "Over-treating a benign, cosmetic condition and causing irritation",
-   "Mistaking the atrophic facial variants for a scarring alopecia or another condition",
-   "Failing to recognise associated atopy or ichthyosis vulgaris",
-   "Promising cure rather than control"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Regular emollients and gentle skin care to soften the rough follicular papules and support barrier function",
-   "Keratolytic preparations containing urea, lactic acid or salicylic acid to reduce follicular plugging",
-   "Topical retinoids for persistent or cosmetically troublesome papules",
-   "Short-term topical corticosteroid or vascular laser for prominent perifollicular erythema",
-   "Treatment of coexisting atopic dermatitis and ichthyosis vulgaris and avoidance of skin drying",
-   "Reassurance that the condition is benign and tends to improve with age, with treatment controlling rather than curing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "keratosis_pilaris-pathway",
-   "title": "Keratosis pilaris: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An extremely common, benign disorder of follicular keratinisation producing rough, gritty, keratotic follicular papules with a goose-flesh texture",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Prominent facial erythema with scarring loss of the eyebrows suggesting a syndromic form (keratosis follicularis spinulosa decalvans)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis, generally requiring no investigation, Dermoscopy showing coiled hairs and keratin plugs within follicular openings, Assessment for associated atopic dermatitis and ichthyosis vulgaris"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Regular emollients and gentle skin care to soften the rough follicular papules and support barrier function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Over-treating a benign, cosmetic condition and causing irritation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of keratosis pilaris."
-  }
- ],
- "tables": [
-  {
-   "id": "keratosis_pilaris-matrix",
-   "title": "Keratosis pilaris: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An extremely common, benign disorder of follicular keratinisation producing rough, gritty, keratotic follicular papules with a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An extremely common, benign disorder of follicular keratinisation producing rough, gritty, keratotic follicular papules with a goose-flesh texture",
+      "Classically affects the extensor upper arms, thighs, buttocks, and cheeks in a symmetrical distribution",
+      "Often accompanied by perifollicular erythema; a variant with prominent redness and atrophy affects the face (keratosis pilaris rubra and atrophicans)",
+      "Strongly associated with atopic dermatitis and ichthyosis vulgaris and tends to run in families with an autosomal dominant tendency",
+      "Frequently improves with age and is usually worse in winter and in dry skin",
+      "Caused by a keratin plug occluding the follicular opening, sometimes trapping a coiled hair",
+      "Usually asymptomatic and cosmetic, with a clinical diagnosis that seldom needs a biopsy",
+      "Management is symptomatic with regular emollients and keratolytics (urea, lactic acid, salicylic acid) and gentle exfoliation, and topical retinoids for resistant cases, with realistic expectations"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis, generally requiring no investigation, Dermoscopy showing coiled hairs and keratin plugs within follicular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Keratosis pilaris results from excessive or abnormal keratinisation of the hair-follicle infundibulum, so that a keratin plug forms and occludes the follicular opening, sometimes enclosing a coiled or trapped hair. The plug produces the palpable, rough papule, while surrounding low-grade inflammation gives the perifollicular erythema. The disorder is constitutional and often familial, and its association with atopic dermatitis and ichthyosis vulgaris reflects a shared tendency to disordered keratinisation and impaired epidermal barrier function; the atrophic facial variants involve additional follicular inflammation and scarring.",
+    "additionalDifferentials": [
+      "Lichen nitidus",
+      "Follicular eczema",
+      "Folliculitis",
+      "Phrynoderma (vitamin A deficiency)",
+      "Lichen spinulosus",
+      "Milia or comedones",
+      "Keratosis pilaris atrophicans variants"
     ],
-    [
-     "Primary Differentials",
-     "Lichen nitidus, Follicular eczema, Folliculitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis, generally requiring no investigation",
+      "Dermoscopy showing coiled hairs and keratin plugs within follicular openings",
+      "Assessment for associated atopic dermatitis and ichthyosis vulgaris",
+      "Skin biopsy only in atypical presentations, showing follicular hyperkeratosis with a keratin plug",
+      "Consideration of an underlying syndrome when atrophy or scarring is prominent (keratosis pilaris atrophicans)"
     ],
-    [
-     "Management Strategy",
-     "Regular emollients and gentle skin care to soften the rough follicular papules and support barrier function",
-     "Core treatment modality"
+    "redFlags": [
+      "Prominent facial erythema with scarring loss of the eyebrows suggesting a syndromic form (keratosis follicularis spinulosa decalvans)",
+      "Atrophy or scarring that may cause permanent hair loss",
+      "Atypical, inflammatory, or rapidly evolving lesions prompting reconsideration of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Over-treating a benign, cosmetic condition and causing irritation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign and chronic but tends to improve over time, often lessening markedly by adulthood; treatment controls rather than cures, and lesions recur if therapy is stopped.",
+    "pitfalls": [
+      "Over-treating a benign, cosmetic condition and causing irritation",
+      "Mistaking the atrophic facial variants for a scarring alopecia or another condition",
+      "Failing to recognise associated atopy or ichthyosis vulgaris",
+      "Promising cure rather than control"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Regular emollients and gentle skin care to soften the rough follicular papules and support barrier function",
+      "Keratolytic preparations containing urea, lactic acid or salicylic acid to reduce follicular plugging",
+      "Topical retinoids for persistent or cosmetically troublesome papules",
+      "Short-term topical corticosteroid or vascular laser for prominent perifollicular erythema",
+      "Treatment of coexisting atopic dermatitis and ichthyosis vulgaris and avoidance of skin drying",
+      "Reassurance that the condition is benign and tends to improve with age, with treatment controlling rather than curing"
     ]
-   ],
-   "caption": "Overview comparison matrix for keratosis pilaris."
-  }
- ],
- "diagrams": [
-  {
-   "id": "keratosis-pilaris-real-image",
-   "title": "Keratosis pilaris: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "keratosis_pilaris-pathway",
+      "title": "Keratosis pilaris: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An extremely common, benign disorder of follicular keratinisation producing rough, gritty, keratotic follicular papules with a goose-flesh texture",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Prominent facial erythema with scarring loss of the eyebrows suggesting a syndromic form (keratosis follicularis spinulosa decalvans)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis, generally requiring no investigation, Dermoscopy showing coiled hairs and keratin plugs within follicular openings, Assessment for associated atopic dermatitis and ichthyosis vulgaris"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Regular emollients and gentle skin care to soften the rough follicular papules and support barrier function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Over-treating a benign, cosmetic condition and causing irritation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of keratosis pilaris."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "keratosis_pilaris-matrix",
+      "title": "Keratosis pilaris: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An extremely common, benign disorder of follicular keratinisation producing rough, gritty, keratotic follicular papules with a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis, generally requiring no investigation, Dermoscopy showing coiled hairs and keratin plugs within follicular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lichen nitidus, Follicular eczema, Folliculitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Regular emollients and gentle skin care to soften the rough follicular papules and support barrier function",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-treating a benign, cosmetic condition and causing irritation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for keratosis pilaris."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "keratosis_pilaris-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Generally no investigation needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Coiled hairs and keratin plugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atopy and ichthyosis review",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Only in atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndrome review",
+          "cells": [
+            {
+              "text": "When atrophy or scarring prominent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "keratosis_pilaris-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lichen nitidus",
+          "cells": [
+            {
+              "text": "Flat-topped papules, no follicular plugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follicular eczema",
+          "cells": [
+            {
+              "text": "Pruritic and inflamed papules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folliculitis",
+          "cells": [
+            {
+              "text": "Pustules; infective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phrynoderma",
+          "cells": [
+            {
+              "text": "Vitamin A deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen spinulosus",
+          "cells": [
+            {
+              "text": "Spiny papules, typically children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratosis pilaris atrophicans variants",
+          "cells": [
+            {
+              "text": "Atrophic scarring or inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "keratosis_pilaris-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Barrier care",
+          "cells": [
+            {
+              "text": "Regular emollients and gentle skin care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follicular plugging",
+          "cells": [
+            {
+              "text": "Urea, lactic acid or salicylic acid keratolytics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent papules",
+          "cells": [
+            {
+              "text": "Topical retinoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythema",
+          "cells": [
+            {
+              "text": "Short-term topical steroid or vascular laser"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting disease",
+          "cells": [
+            {
+              "text": "Treat atopic dermatitis and ichthyosis vulgaris"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expectation",
+          "cells": [
+            {
+              "text": "Benign; treatment controls rather than cures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "keratosis_pilaris-dx-mgmt",
+      "title": "Diagnosis and management of Keratosis pilaris",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rough, gritty follicular papules on the extensor arms, thighs or buttocks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Facial redness with eyebrow scarring, or atrophy with permanent hair loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer for syndromic or scarring disease; not an emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; dermoscopy; biopsy only if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical follicular papules with no scarring or atrophy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider keratosis pilaris atrophicans or follicular mimics; biopsy and refer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Regular emollients and gentle skin care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urea, lactic acid or salicylic acid keratolytics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical retinoids for persistent papules",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Short-term steroid or vascular laser for erythema",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat coexisting atopic dermatitis and ichthyosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and cosmetic; improves with age; controlled rather than cured",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

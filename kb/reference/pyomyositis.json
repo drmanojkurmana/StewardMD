@@ -1,178 +1,400 @@
 {
- "id": "pyomyositis",
- "name": "Pyomyositis",
- "aliases": [
-  "tropical pyomyositis",
-  "bacterial myositis",
-  "primary muscle abscess",
-  "suppurative myositis"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / IDSA",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A primary bacterial infection of skeletal muscle that forms an intramuscular abscess, most often affecting large muscles such as the thigh, buttock, or trunk",
-   "Staphylococcus aureus, including community-acquired MRSA, is the leading cause",
-   "Classically described in tropical regions but increasingly recognised in temperate climates, especially in diabetics and immunocompromised or HIV-positive patients",
-   "Evolves through an early invasive phase of vague muscle ache and low-grade fever, a suppurative phase with abscess and localised signs, and a late septic phase",
-   "Early disease is easily missed because overlying skin often looks normal and superficial fluctuance is absent",
-   "MRI is the most sensitive imaging modality for detecting muscle inflammation and abscess formation",
-   "Management principles combine antistaphylococcal antibiotics with drainage of any abscess, either percutaneously or surgically",
-   "Blood cultures are frequently positive and multiple muscle sites can be involved, so a thorough search is warranted"
+  "id": "pyomyositis",
+  "name": "Pyomyositis",
+  "aliases": [
+    "tropical pyomyositis",
+    "bacterial myositis",
+    "primary muscle abscess",
+    "suppurative myositis"
   ],
-  "pathophysiology": "Pyomyositis is a suppurative infection arising within skeletal muscle, thought to require transient bacteraemia together with muscle that has been rendered susceptible by trauma, strenuous exercise, or underlying compromise. Skeletal muscle is normally resistant to infection, but injury allows haematogenously seeded bacteria to establish a focus that progresses from diffuse inflammation to a walled-off intramuscular abscess. Without drainage the infection can extend, cause systemic sepsis, and, if untreated, seed distant sites.",
-  "additionalDifferentials": [
-   "Deep vein thrombosis of the affected limb",
-   "Muscle haematoma or strain",
-   "Cellulitis or deep soft-tissue infection",
-   "Septic arthritis or osteomyelitis of an adjacent bone",
-   "Necrotising fasciitis in the septic phase"
-  ],
-  "infectionMimics": [
-   "Muscle contusion or exertional injury",
-   "Deep vein thrombosis presenting with limb swelling and pain",
-   "Bone tumour or soft-tissue sarcoma",
-   "Inflammatory myopathy"
-  ],
-  "additionalInvestigations": [
-   "MRI to localise muscle inflammation and abscess; ultrasound or CT as alternatives",
-   "Blood cultures and inflammatory markers",
-   "Aspiration or drainage of collected pus for Gram stain and culture",
-   "Creatine kinase, which is often only mildly elevated despite muscle involvement",
-   "Screening for diabetes, HIV, or other immunosuppression"
-  ],
-  "redFlags": [
-   "Signs of septic shock in the late phase requiring urgent resuscitation",
-   "Rapidly spreading pain and toxicity raising concern for necrotising fasciitis needing surgical exploration",
-   "Extension into adjacent joint or bone suggesting septic arthritis or osteomyelitis",
-   "Large or multiple abscesses requiring prompt drainage"
-  ],
-  "prognosis": "With timely antibiotics and adequate drainage the outlook is generally good; delayed diagnosis, extensive or multifocal disease, and progression to septic shock worsen outcomes, and immunocompromised patients are at higher risk of complications.",
-  "pitfalls": [
-   "Dismissing early muscle pain with normal-looking skin as a simple strain",
-   "Relying on creatine kinase, which may be near normal, to exclude the diagnosis",
-   "Treating with antibiotics alone when an abscess needs drainage",
-   "Failing to look for additional muscle foci or an underlying immunocompromising condition"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "IDSA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start empirical intravenous antistaphylococcal antibiotics with cover for meticillin-resistant Staphylococcus aureus such as vancomycin, then narrow according to culture and sensitivities",
-   "Achieve source control by image-guided percutaneous or surgical drainage of any intramuscular abscess",
-   "Provide supportive analgesia and, in the septic phase, sepsis resuscitation with fluids and vasopressors and intensive care support for septic shock",
-   "Identify and manage predisposing immunocompromise by screening for and treating diabetes and HIV",
-   "Monitor clinical response, inflammatory markers and repeat imaging to confirm resolution and detect further collections",
-   "Continue a prolonged antibiotic course guided by response, stepping down to oral therapy once the infection is controlled"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pyomyositis-pathway",
-   "title": "Pyomyositis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A primary bacterial infection of skeletal muscle that forms an intramuscular abscess, most often affecting large muscles such as the thigh, buttock, or trunk",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of septic shock in the late phase requiring urgent resuscitation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI to localise muscle inflammation and abscess; ultrasound or CT as alternatives, Blood cultures and inflammatory markers, Aspiration or drainage of collected pus for Gram stain and culture"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start empirical intravenous antistaphylococcal antibiotics with cover for meticillin-resistant Staphylococcus aureus such as vancomycin, then narrow according to culture and sensitivities"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing early muscle pain with normal-looking skin as a simple strain"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pyomyositis."
-  }
- ],
- "tables": [
-  {
-   "id": "pyomyositis-matrix",
-   "title": "Pyomyositis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A primary bacterial infection of skeletal muscle that forms an intramuscular abscess, most often affecting large muscles such as",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / IDSA",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A primary bacterial infection of skeletal muscle that forms an intramuscular abscess, most often affecting large muscles such as the thigh, buttock, or trunk",
+      "Staphylococcus aureus, including community-acquired MRSA, is the leading cause",
+      "Classically described in tropical regions but increasingly recognised in temperate climates, especially in diabetics and immunocompromised or HIV-positive patients",
+      "Evolves through an early invasive phase of vague muscle ache and low-grade fever, a suppurative phase with abscess and localised signs, and a late septic phase",
+      "Early disease is easily missed because overlying skin often looks normal and superficial fluctuance is absent",
+      "MRI is the most sensitive imaging modality for detecting muscle inflammation and abscess formation",
+      "Management principles combine antistaphylococcal antibiotics with drainage of any abscess, either percutaneously or surgically",
+      "Blood cultures are frequently positive and multiple muscle sites can be involved, so a thorough search is warranted"
     ],
-    [
-     "Key Investigations",
-     "MRI to localise muscle inflammation and abscess; ultrasound or CT as alternatives, Blood cultures and inflammatory markers,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pyomyositis is a suppurative infection arising within skeletal muscle, thought to require transient bacteraemia together with muscle that has been rendered susceptible by trauma, strenuous exercise, or underlying compromise. Skeletal muscle is normally resistant to infection, but injury allows haematogenously seeded bacteria to establish a focus that progresses from diffuse inflammation to a walled-off intramuscular abscess. Without drainage the infection can extend, cause systemic sepsis, and, if untreated, seed distant sites.",
+    "additionalDifferentials": [
+      "Deep vein thrombosis of the affected limb",
+      "Muscle haematoma or strain",
+      "Cellulitis or deep soft-tissue infection",
+      "Septic arthritis or osteomyelitis of an adjacent bone",
+      "Necrotising fasciitis in the septic phase"
     ],
-    [
-     "Primary Differentials",
-     "Deep vein thrombosis of the affected limb, Muscle haematoma or strain, Cellulitis or deep soft-tissue infection",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Muscle contusion or exertional injury",
+      "Deep vein thrombosis presenting with limb swelling and pain",
+      "Bone tumour or soft-tissue sarcoma",
+      "Inflammatory myopathy"
     ],
-    [
-     "Management Strategy",
-     "Start empirical intravenous antistaphylococcal antibiotics with cover for meticillin-resistant Staphylococcus aureus such as",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "MRI to localise muscle inflammation and abscess; ultrasound or CT as alternatives",
+      "Blood cultures and inflammatory markers",
+      "Aspiration or drainage of collected pus for Gram stain and culture",
+      "Creatine kinase, which is often only mildly elevated despite muscle involvement",
+      "Screening for diabetes, HIV, or other immunosuppression"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing early muscle pain with normal-looking skin as a simple strain",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Signs of septic shock in the late phase requiring urgent resuscitation",
+      "Rapidly spreading pain and toxicity raising concern for necrotising fasciitis needing surgical exploration",
+      "Extension into adjacent joint or bone suggesting septic arthritis or osteomyelitis",
+      "Large or multiple abscesses requiring prompt drainage"
+    ],
+    "prognosis": "With timely antibiotics and adequate drainage the outlook is generally good; delayed diagnosis, extensive or multifocal disease, and progression to septic shock worsen outcomes, and immunocompromised patients are at higher risk of complications.",
+    "pitfalls": [
+      "Dismissing early muscle pain with normal-looking skin as a simple strain",
+      "Relying on creatine kinase, which may be near normal, to exclude the diagnosis",
+      "Treating with antibiotics alone when an abscess needs drainage",
+      "Failing to look for additional muscle foci or an underlying immunocompromising condition"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "IDSA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start empirical intravenous antistaphylococcal antibiotics with cover for meticillin-resistant Staphylococcus aureus such as vancomycin, then narrow according to culture and sensitivities",
+      "Achieve source control by image-guided percutaneous or surgical drainage of any intramuscular abscess",
+      "Provide supportive analgesia and, in the septic phase, sepsis resuscitation with fluids and vasopressors and intensive care support for septic shock",
+      "Identify and manage predisposing immunocompromise by screening for and treating diabetes and HIV",
+      "Monitor clinical response, inflammatory markers and repeat imaging to confirm resolution and detect further collections",
+      "Continue a prolonged antibiotic course guided by response, stepping down to oral therapy once the infection is controlled"
     ]
-   ],
-   "caption": "Overview comparison matrix for pyomyositis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pyomyositis-real-image",
-   "title": "Pyomyositis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "pyomyositis-pathway",
+      "title": "Pyomyositis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A primary bacterial infection of skeletal muscle that forms an intramuscular abscess, most often affecting large muscles such as the thigh, buttock, or trunk",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of septic shock in the late phase requiring urgent resuscitation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI to localise muscle inflammation and abscess; ultrasound or CT as alternatives, Blood cultures and inflammatory markers, Aspiration or drainage of collected pus for Gram stain and culture"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start empirical intravenous antistaphylococcal antibiotics with cover for meticillin-resistant Staphylococcus aureus such as vancomycin, then narrow according to culture and sensitivities"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing early muscle pain with normal-looking skin as a simple strain"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pyomyositis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pyomyositis-matrix",
+      "title": "Pyomyositis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A primary bacterial infection of skeletal muscle that forms an intramuscular abscess, most often affecting large muscles such as",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI to localise muscle inflammation and abscess; ultrasound or CT as alternatives, Blood cultures and inflammatory markers,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Deep vein thrombosis of the affected limb, Muscle haematoma or strain, Cellulitis or deep soft-tissue infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start empirical intravenous antistaphylococcal antibiotics with cover for meticillin-resistant Staphylococcus aureus such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing early muscle pain with normal-looking skin as a simple strain",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pyomyositis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / IDSA",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyomyositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Muscle inflammation and abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration or drainage of pus",
+          "cells": [
+            {
+              "text": "Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Often only mildly raised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyomyositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep vein thrombosis of the limb",
+          "cells": [
+            {
+              "text": "Limb swelling and pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising fasciitis",
+          "cells": [
+            {
+              "text": "Rapidly spreading pain and toxicity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyomyositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "IV antistaphylococcal antibiotics with MRSA cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Image-guided percutaneous or surgical drainage of collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia; sepsis resuscitation in the septic phase"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyomyositis-dx-mgmt",
+      "title": "Diagnosis and management of Pyomyositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pyomyositis: painful swollen muscle with fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Septic shock, spreading toxicity, or spread to joint or bone?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent resuscitation and surgical review for necrotising infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI; blood cultures; inflammatory markers; aspiration for Gram stain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is pus confirmed on aspiration or drainage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DVT, haematoma or sarcoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical IV antistaphylococcal antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Image-guided or surgical drainage of collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia and sepsis resuscitation if septic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Culture-guided antibiotic course; monitor for recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

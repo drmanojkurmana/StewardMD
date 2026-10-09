@@ -1,173 +1,441 @@
 {
- "id": "band_keratopathy",
- "name": "Band keratopathy",
- "aliases": [
-  "calcific band keratopathy",
-  "calcium band degeneration",
-  "band-shaped keratopathy"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Cornea",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A degeneration in which calcium (hydroxyapatite) is deposited at the level of the Bowman layer in the interpalpebral band across the cornea",
-   "The band begins peripherally with a clear lucid interval separating it from the limbus and spreads centrally over time",
-   "Characteristic small clear holes (Swiss-cheese appearance) within the plaque correspond to nerves penetrating the Bowman layer",
-   "Common ocular causes include chronic anterior uveitis (especially juvenile idiopathic arthritis-associated), long-standing keratitis, and phthisical or chronically inflamed eyes",
-   "Systemic causes relate to raised calcium or phosphate, including hypercalcaemia (hyperparathyroidism, sarcoidosis, vitamin D excess) and chronic renal failure",
-   "Symptoms include foreign body sensation, irritation, and reduced vision when the band crosses the visual axis; the surface may break down",
-   "Management is chelation with topical EDTA to remove superficial calcium, with phototherapeutic keratectomy for deeper or recurrent deposits, alongside treatment of the underlying cause",
-   "Recurrence is common if the underlying ocular inflammation or systemic calcium disturbance is not controlled"
+  "id": "band_keratopathy",
+  "name": "Band keratopathy",
+  "aliases": [
+    "calcific band keratopathy",
+    "calcium band degeneration",
+    "band-shaped keratopathy"
   ],
-  "pathophysiology": "Band keratopathy results from the deposition of calcium salts, chiefly hydroxyapatite, in and beneath the Bowman layer within the interpalpebral zone of the cornea. Evaporation of tears in the exposed interpalpebral strip raises local pH and concentrates calcium and phosphate, favouring precipitation, while chronic ocular inflammation and elevated serum calcium or phosphate promote deposition. Calcification typically begins at the periphery with a clear zone next to the limbus and advances centrally as a horizontal band, sparing regions where nerves pierce the Bowman layer, which appear as clear holes. As the band thickens it disrupts the epithelium and reduces vision when it reaches the visual axis.",
-  "additionalDifferentials": [
-   "Spheroidal (climatic droplet) degeneration",
-   "Calcific plaques from chronic exposure or scarring",
-   "Anterior corneal dystrophies affecting the Bowman layer",
-   "Salzmann nodular degeneration",
-   "Gelatinous drop-like corneal dystrophy",
-   "Corneal scarring from prior keratitis"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination documenting the interpalpebral calcific band with lucid interval and clear holes",
-   "Serum calcium, phosphate, and albumin to detect hypercalcaemia or altered calcium-phosphate product",
-   "Parathyroid hormone and vitamin D assessment when a metabolic cause is suspected",
-   "Renal function tests to identify chronic renal failure",
-   "Evaluation for underlying uveitis or chronic ocular inflammation",
-   "Investigation for sarcoidosis or other systemic causes of hypercalcaemia when indicated"
-  ],
-  "redFlags": [
-   "Band encroaching on the visual axis with progressive visual loss",
-   "Surface breakdown with pain and risk of secondary infection",
-   "Underlying hypercalcaemia signalling a serious systemic disorder requiring investigation",
-   "Rapid recurrence indicating uncontrolled ocular inflammation or metabolic disturbance"
-  ],
-  "prognosis": "Removal of superficial calcium by chelation or phototherapeutic keratectomy usually improves comfort and vision, but band keratopathy tends to recur unless the underlying ocular inflammation or systemic calcium disturbance is controlled.",
-  "pitfalls": [
-   "Treating the cornea without investigating and addressing an underlying cause such as hypercalcaemia or chronic uveitis",
-   "Overlooking juvenile idiopathic arthritis-associated uveitis in a child with band keratopathy",
-   "Attempting deep removal that risks scarring when superficial chelation would suffice",
-   "Failing to anticipate recurrence when the driving condition persists"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Cornea by Krachmer, Mannis and Holland"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Remove symptomatic superficial calcium by chelation with topical EDTA after epithelial debridement",
-   "Use phototherapeutic keratectomy for dense, recurrent or visually significant calcification",
-   "Treat the underlying ocular inflammation, controlling chronic anterior uveitis to reduce recurrence",
-   "Correct the underlying systemic calcium or phosphate disturbance such as hyperparathyroidism, sarcoidosis, vitamin D excess or chronic renal failure",
-   "Provide ocular surface lubrication and a bandage contact lens or analgesia for surface breakdown and foreign-body sensation",
-   "Monitor for recurrence and continue management of the causative condition"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "band_keratopathy-pathway",
-   "title": "Band keratopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A degeneration in which calcium (hydroxyapatite) is deposited at the level of the Bowman layer in the interpalpebral band across the cornea",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Band encroaching on the visual axis with progressive visual loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination documenting the interpalpebral calcific band with lucid interval and clear holes, Serum calcium, phosphate, and albumin to detect hypercalcaemia or altered calcium-phosphate product, Parathyroid"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Remove symptomatic superficial calcium by chelation with topical EDTA after epithelial debridement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the cornea without investigating and addressing an underlying cause such as hypercalcaemia or chronic uveitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of band keratopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "band_keratopathy-matrix",
-   "title": "Band keratopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A degeneration in which calcium (hydroxyapatite) is deposited at the level of the Bowman layer in the interpalpebral band across",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Cornea",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A degeneration in which calcium (hydroxyapatite) is deposited at the level of the Bowman layer in the interpalpebral band across the cornea",
+      "The band begins peripherally with a clear lucid interval separating it from the limbus and spreads centrally over time",
+      "Characteristic small clear holes (Swiss-cheese appearance) within the plaque correspond to nerves penetrating the Bowman layer",
+      "Common ocular causes include chronic anterior uveitis (especially juvenile idiopathic arthritis-associated), long-standing keratitis, and phthisical or chronically inflamed eyes",
+      "Systemic causes relate to raised calcium or phosphate, including hypercalcaemia (hyperparathyroidism, sarcoidosis, vitamin D excess) and chronic renal failure",
+      "Symptoms include foreign body sensation, irritation, and reduced vision when the band crosses the visual axis; the surface may break down",
+      "Management is chelation with topical EDTA to remove superficial calcium, with phototherapeutic keratectomy for deeper or recurrent deposits, alongside treatment of the underlying cause",
+      "Recurrence is common if the underlying ocular inflammation or systemic calcium disturbance is not controlled"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination documenting the interpalpebral calcific band with lucid interval and clear holes, Serum calcium, phosphate,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Band keratopathy results from the deposition of calcium salts, chiefly hydroxyapatite, in and beneath the Bowman layer within the interpalpebral zone of the cornea. Evaporation of tears in the exposed interpalpebral strip raises local pH and concentrates calcium and phosphate, favouring precipitation, while chronic ocular inflammation and elevated serum calcium or phosphate promote deposition. Calcification typically begins at the periphery with a clear zone next to the limbus and advances centrally as a horizontal band, sparing regions where nerves pierce the Bowman layer, which appear as clear holes. As the band thickens it disrupts the epithelium and reduces vision when it reaches the visual axis.",
+    "additionalDifferentials": [
+      "Spheroidal (climatic droplet) degeneration",
+      "Calcific plaques from chronic exposure or scarring",
+      "Anterior corneal dystrophies affecting the Bowman layer",
+      "Salzmann nodular degeneration",
+      "Gelatinous drop-like corneal dystrophy",
+      "Corneal scarring from prior keratitis"
     ],
-    [
-     "Primary Differentials",
-     "Spheroidal (climatic droplet) degeneration, Calcific plaques from chronic exposure or scarring, Anterior corneal dystrophies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination documenting the interpalpebral calcific band with lucid interval and clear holes",
+      "Serum calcium, phosphate, and albumin to detect hypercalcaemia or altered calcium-phosphate product",
+      "Parathyroid hormone and vitamin D assessment when a metabolic cause is suspected",
+      "Renal function tests to identify chronic renal failure",
+      "Evaluation for underlying uveitis or chronic ocular inflammation",
+      "Investigation for sarcoidosis or other systemic causes of hypercalcaemia when indicated"
     ],
-    [
-     "Management Strategy",
-     "Remove symptomatic superficial calcium by chelation with topical EDTA after epithelial debridement",
-     "Core treatment modality"
+    "redFlags": [
+      "Band encroaching on the visual axis with progressive visual loss",
+      "Surface breakdown with pain and risk of secondary infection",
+      "Underlying hypercalcaemia signalling a serious systemic disorder requiring investigation",
+      "Rapid recurrence indicating uncontrolled ocular inflammation or metabolic disturbance"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the cornea without investigating and addressing an underlying cause such as hypercalcaemia or chronic uveitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Removal of superficial calcium by chelation or phototherapeutic keratectomy usually improves comfort and vision, but band keratopathy tends to recur unless the underlying ocular inflammation or systemic calcium disturbance is controlled.",
+    "pitfalls": [
+      "Treating the cornea without investigating and addressing an underlying cause such as hypercalcaemia or chronic uveitis",
+      "Overlooking juvenile idiopathic arthritis-associated uveitis in a child with band keratopathy",
+      "Attempting deep removal that risks scarring when superficial chelation would suffice",
+      "Failing to anticipate recurrence when the driving condition persists"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Cornea by Krachmer, Mannis and Holland"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Remove symptomatic superficial calcium by chelation with topical EDTA after epithelial debridement",
+      "Use phototherapeutic keratectomy for dense, recurrent or visually significant calcification",
+      "Treat the underlying ocular inflammation, controlling chronic anterior uveitis to reduce recurrence",
+      "Correct the underlying systemic calcium or phosphate disturbance such as hyperparathyroidism, sarcoidosis, vitamin D excess or chronic renal failure",
+      "Provide ocular surface lubrication and a bandage contact lens or analgesia for surface breakdown and foreign-body sensation",
+      "Monitor for recurrence and continue management of the causative condition"
     ]
-   ],
-   "caption": "Overview comparison matrix for band keratopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "band-keratopathy-real-image",
-   "title": "Band keratopathy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "band_keratopathy-pathway",
+      "title": "Band keratopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A degeneration in which calcium (hydroxyapatite) is deposited at the level of the Bowman layer in the interpalpebral band across the cornea",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Band encroaching on the visual axis with progressive visual loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination documenting the interpalpebral calcific band with lucid interval and clear holes, Serum calcium, phosphate, and albumin to detect hypercalcaemia or altered calcium-phosphate product, Parathyroid"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Remove symptomatic superficial calcium by chelation with topical EDTA after epithelial debridement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the cornea without investigating and addressing an underlying cause such as hypercalcaemia or chronic uveitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of band keratopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "band_keratopathy-matrix",
+      "title": "Band keratopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A degeneration in which calcium (hydroxyapatite) is deposited at the level of the Bowman layer in the interpalpebral band across",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination documenting the interpalpebral calcific band with lucid interval and clear holes, Serum calcium, phosphate,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Spheroidal (climatic droplet) degeneration, Calcific plaques from chronic exposure or scarring, Anterior corneal dystrophies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Remove symptomatic superficial calcium by chelation with topical EDTA after epithelial debridement",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the cornea without investigating and addressing an underlying cause such as hypercalcaemia or chronic uveitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for band keratopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "band_keratopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination of the interpalpebral calcific band",
+          "cells": [
+            {
+              "text": "Band with lucid interval and clear holes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate and albumin",
+          "cells": [
+            {
+              "text": "Hypercalcaemia or altered calcium-phosphate product"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroid hormone and vitamin D assessment",
+          "cells": [
+            {
+              "text": "Where a metabolic cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests",
+          "cells": [
+            {
+              "text": "Chronic renal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for underlying uveitis or chronic ocular inflammation",
+          "cells": [
+            {
+              "text": "Chronic ocular inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for sarcoidosis or other systemic causes of hypercalcaemia",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "band_keratopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "EDTA chelation",
+          "cells": [
+            {
+              "text": "Topical EDTA after epithelial debridement for symptomatic superficial calcium"
+            },
+            {
+              "text": "Symptomatic superficial calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapeutic keratectomy",
+          "cells": [
+            {
+              "text": "Dense, recurrent or visually significant calcification"
+            },
+            {
+              "text": "Dense or recurrent calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Control uveitis",
+          "cells": [
+            {
+              "text": "Treat chronic anterior uveitis to reduce recurrence"
+            },
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic correction",
+          "cells": [
+            {
+              "text": "Hyperparathyroidism, sarcoidosis, vitamin D excess or chronic renal failure"
+            },
+            {
+              "text": "Underlying systemic disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surface care",
+          "cells": [
+            {
+              "text": "Lubrication, bandage contact lens or analgesia"
+            },
+            {
+              "text": "Surface breakdown and foreign-body sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Recurrence and the causative condition"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "band_keratopathy-dx-mgmt",
+      "title": "Diagnosis and management of Band keratopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Interpalpebral calcific band in the cornea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Band encroaching on the visual axis or surface breakdown with pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surface protection and analgesia for breakdown",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit lamp, serum calcium, phosphate, albumin, PTH, renal function, uveitis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypercalcaemia or chronic uveitis identified as the cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Correct the systemic calcium or phosphate disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat metabolic investigations",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "EDTA chelation after epithelial debridement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Phototherapeutic keratectomy for dense or recurrent calcification",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Control chronic anterior uveitis to reduce recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor for recurrence and treat the causative condition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

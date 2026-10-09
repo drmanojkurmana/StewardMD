@@ -1,174 +1,515 @@
 {
- "id": "cervical_dystonia",
- "name": "Cervical dystonia (spasmodic torticollis)",
- "aliases": [
-  "cervical dystonia",
-  "spasmodic torticollis",
-  "idiopathic cervical dystonia",
-  "torticollis (dystonic)"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest focal dystonia, producing involuntary posturing and turning of the head and neck",
-   "Patterns include torticollis (rotation), laterocollis (tilt), antecollis (flexion) and retrocollis (extension), often in combination and with associated head tremor",
-   "A sensory trick (geste antagoniste), such as lightly touching the chin or cheek, characteristically reduces the abnormal posture",
-   "Neck pain is common and can be a prominent, disabling feature, unlike most other focal dystonias",
-   "Onset is usually in adulthood, and the course frequently plateaus after the first few years",
-   "Hypertrophy of overactive muscles, such as the sternocleidomastoid, may be palpable",
-   "Most cases are idiopathic (primary), but secondary causes should be considered"
+  "id": "cervical_dystonia",
+  "name": "Cervical dystonia (spasmodic torticollis)",
+  "aliases": [
+    "cervical dystonia",
+    "spasmodic torticollis",
+    "idiopathic cervical dystonia",
+    "torticollis (dystonic)"
   ],
-  "pathophysiology": "Cervical dystonia arises from dysfunction of the basal ganglia and the wider sensorimotor network, with impaired inhibition and abnormal sensorimotor integration leading to excessive, inappropriate co-contraction of the cervical muscles. The effectiveness of a sensory trick illustrates the strong influence of afferent input on the abnormal motor output. Most cases are idiopathic and may have a genetic predisposition, although structural, drug-induced and other secondary causes are recognised.",
-  "additionalDifferentials": [
-   "Secondary (symptomatic) dystonia from structural, drug-induced or metabolic causes",
-   "Atlantoaxial rotatory subluxation and other orthopaedic cervical disorders",
-   "Congenital muscular torticollis",
-   "Cervical spine pathology or local infection causing a stiff, tilted neck",
-   "Tardive or acute drug-induced dystonia",
-   "Functional (psychogenic) movement disorder"
-  ],
-  "additionalInvestigations": [
-   "Careful clinical assessment of the movement pattern and any sensory trick",
-   "MRI of the brain and cervical spine where a secondary cause is suspected",
-   "Copper studies to exclude Wilson's disease in younger patients",
-   "Genetic testing where there are features of an inherited dystonia",
-   "Drug history review to identify dopamine-blocking agents",
-   "Electromyography to identify the muscles involved and to guide treatment"
-  ],
-  "redFlags": [
-   "Fixed posture present from birth or in early childhood suggesting a structural or congenital cause",
-   "Rapid progression or generalisation suggesting a secondary process",
-   "Associated focal neurological signs, myelopathy or systemic illness",
-   "Features of Wilson's disease in a younger patient"
-  ],
-  "prognosis": "Cervical dystonia is generally chronic; while it can be painful and disabling, it does not shorten life, and severity often stabilises after the early years. Botulinum toxin injection into the overactive muscles is the treatment of choice and produces meaningful, repeatable benefit in most patients; oral medication, physiotherapy and, in refractory cases, deep brain stimulation are additional options.",
-  "pitfalls": [
-   "Overlooking the sensory trick, which is a valuable diagnostic clue",
-   "Attributing the abnormal posture and pain to a primary orthopaedic or musculoskeletal cause",
-   "Missing a drug-induced or structural secondary cause",
-   "Under-treating the associated neck pain, which is often the most disabling symptom"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice, current edition",
-   "Fahn and Jankovic, Principles and Practice of Movement Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Inject botulinum toxin into the overactive muscles such as the sternocleidomastoid as the first-line, repeatable treatment of choice, guided by electromyography",
-   "Add oral agents as adjuncts, including anticholinergics, benzodiazepines and baclofen",
-   "Provide analgesia and physiotherapy for associated neck pain and teach use of the sensory trick (geste antagoniste)",
-   "Offer deep brain stimulation of the globus pallidus internus for refractory, disabling disease",
-   "Exclude and treat secondary causes by reviewing dopamine-blocking drugs and checking copper studies for Wilson's disease in younger patients",
-   "Offer genetic counselling where an inherited dystonia is identified",
-   "Refer to a movement disorders neurologist and provide multidisciplinary rehabilitation and support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cervical_dystonia-pathway",
-   "title": "Cervical dystonia (spasmodic torticollis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest focal dystonia, producing involuntary posturing and turning of the head and neck",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fixed posture present from birth or in early childhood suggesting a structural or congenital cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful clinical assessment of the movement pattern and any sensory trick, MRI of the brain and cervical spine where a secondary cause is suspected, Copper studies to exclude Wilson's disease in younger patients"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Inject botulinum toxin into the overactive muscles such as the sternocleidomastoid as the first-line, repeatable treatment of choice, guided by electromyography"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the sensory trick, which is a valuable diagnostic clue"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cervical dystonia (spasmodic torticollis)."
-  }
- ],
- "tables": [
-  {
-   "id": "cervical_dystonia-matrix",
-   "title": "Cervical dystonia (spasmodic torticollis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest focal dystonia, producing involuntary posturing and turning of the head and neck",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest focal dystonia, producing involuntary posturing and turning of the head and neck",
+      "Patterns include torticollis (rotation), laterocollis (tilt), antecollis (flexion) and retrocollis (extension), often in combination and with associated head tremor",
+      "A sensory trick (geste antagoniste), such as lightly touching the chin or cheek, characteristically reduces the abnormal posture",
+      "Neck pain is common and can be a prominent, disabling feature, unlike most other focal dystonias",
+      "Onset is usually in adulthood, and the course frequently plateaus after the first few years",
+      "Hypertrophy of overactive muscles, such as the sternocleidomastoid, may be palpable",
+      "Most cases are idiopathic (primary), but secondary causes should be considered"
     ],
-    [
-     "Key Investigations",
-     "Careful clinical assessment of the movement pattern and any sensory trick, MRI of the brain and cervical spine where a secondary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cervical dystonia arises from dysfunction of the basal ganglia and the wider sensorimotor network, with impaired inhibition and abnormal sensorimotor integration leading to excessive, inappropriate co-contraction of the cervical muscles. The effectiveness of a sensory trick illustrates the strong influence of afferent input on the abnormal motor output. Most cases are idiopathic and may have a genetic predisposition, although structural, drug-induced and other secondary causes are recognised.",
+    "additionalDifferentials": [
+      "Secondary (symptomatic) dystonia from structural, drug-induced or metabolic causes",
+      "Atlantoaxial rotatory subluxation and other orthopaedic cervical disorders",
+      "Congenital muscular torticollis",
+      "Cervical spine pathology or local infection causing a stiff, tilted neck",
+      "Tardive or acute drug-induced dystonia",
+      "Functional (psychogenic) movement disorder"
     ],
-    [
-     "Primary Differentials",
-     "Secondary (symptomatic) dystonia from structural, drug-induced or metabolic causes, Atlantoaxial rotatory subluxation and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful clinical assessment of the movement pattern and any sensory trick",
+      "MRI of the brain and cervical spine where a secondary cause is suspected",
+      "Copper studies to exclude Wilson's disease in younger patients",
+      "Genetic testing where there are features of an inherited dystonia",
+      "Drug history review to identify dopamine-blocking agents",
+      "Electromyography to identify the muscles involved and to guide treatment"
     ],
-    [
-     "Management Strategy",
-     "Inject botulinum toxin into the overactive muscles such as the sternocleidomastoid as the first-line, repeatable treatment of",
-     "Core treatment modality"
+    "redFlags": [
+      "Fixed posture present from birth or in early childhood suggesting a structural or congenital cause",
+      "Rapid progression or generalisation suggesting a secondary process",
+      "Associated focal neurological signs, myelopathy or systemic illness",
+      "Features of Wilson's disease in a younger patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the sensory trick, which is a valuable diagnostic clue",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cervical dystonia is generally chronic; while it can be painful and disabling, it does not shorten life, and severity often stabilises after the early years. Botulinum toxin injection into the overactive muscles is the treatment of choice and produces meaningful, repeatable benefit in most patients; oral medication, physiotherapy and, in refractory cases, deep brain stimulation are additional options.",
+    "pitfalls": [
+      "Overlooking the sensory trick, which is a valuable diagnostic clue",
+      "Attributing the abnormal posture and pain to a primary orthopaedic or musculoskeletal cause",
+      "Missing a drug-induced or structural secondary cause",
+      "Under-treating the associated neck pain, which is often the most disabling symptom"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice, current edition",
+      "Fahn and Jankovic, Principles and Practice of Movement Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Inject botulinum toxin into the overactive muscles such as the sternocleidomastoid as the first-line, repeatable treatment of choice, guided by electromyography",
+      "Add oral agents as adjuncts, including anticholinergics, benzodiazepines and baclofen",
+      "Provide analgesia and physiotherapy for associated neck pain and teach use of the sensory trick (geste antagoniste)",
+      "Offer deep brain stimulation of the globus pallidus internus for refractory, disabling disease",
+      "Exclude and treat secondary causes by reviewing dopamine-blocking drugs and checking copper studies for Wilson's disease in younger patients",
+      "Offer genetic counselling where an inherited dystonia is identified",
+      "Refer to a movement disorders neurologist and provide multidisciplinary rehabilitation and support"
     ]
-   ],
-   "caption": "Overview comparison matrix for cervical dystonia (spasmodic torticollis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cervical-dystonia-real-image",
-   "title": "Cervical dystonia (spasmodic torticollis): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cervical_dystonia-pathway",
+      "title": "Cervical dystonia (spasmodic torticollis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest focal dystonia, producing involuntary posturing and turning of the head and neck",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fixed posture present from birth or in early childhood suggesting a structural or congenital cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful clinical assessment of the movement pattern and any sensory trick, MRI of the brain and cervical spine where a secondary cause is suspected, Copper studies to exclude Wilson's disease in younger patients"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Inject botulinum toxin into the overactive muscles such as the sternocleidomastoid as the first-line, repeatable treatment of choice, guided by electromyography"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the sensory trick, which is a valuable diagnostic clue"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cervical dystonia (spasmodic torticollis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cervical_dystonia-matrix",
+      "title": "Cervical dystonia (spasmodic torticollis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest focal dystonia, producing involuntary posturing and turning of the head and neck",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful clinical assessment of the movement pattern and any sensory trick, MRI of the brain and cervical spine where a secondary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary (symptomatic) dystonia from structural, drug-induced or metabolic causes, Atlantoaxial rotatory subluxation and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Inject botulinum toxin into the overactive muscles such as the sternocleidomastoid as the first-line, repeatable treatment of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the sensory trick, which is a valuable diagnostic clue",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cervical dystonia (spasmodic torticollis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 372-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cervical_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of the movement pattern and sensory trick",
+          "cells": [
+            {
+              "text": "The sensory trick (geste antagoniste) characteristically reduces the abnormal posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain and cervical spine",
+          "cells": [
+            {
+              "text": "Where a secondary cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copper studies",
+          "cells": [
+            {
+              "text": "Excludes Wilson's disease in younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Where features of an inherited dystonia are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Identifies the muscles involved and guides treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cervical_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Injection into overactive muscles such as the sternocleidomastoid, guided by electromyography"
+            },
+            {
+              "text": "First-line, repeatable treatment of choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral adjuncts",
+          "cells": [
+            {
+              "text": "Anticholinergics, benzodiazepines and baclofen"
+            },
+            {
+              "text": "Adjunct agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Analgesia and physiotherapy for neck pain; teach the sensory trick"
+            },
+            {
+              "text": "Neck pain is often the most disabling feature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation",
+          "cells": [
+            {
+              "text": "Globus pallidus internus stimulation"
+            },
+            {
+              "text": "Refractory, disabling disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary cause review",
+          "cells": [
+            {
+              "text": "Review dopamine-blocking drugs; copper studies in younger patients"
+            },
+            {
+              "text": "Exclude secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Where an inherited dystonia is identified"
+            },
+            {
+              "text": "Inherited dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist and rehabilitation",
+          "cells": [
+            {
+              "text": "Movement disorders neurologist and multidisciplinary rehabilitation"
+            },
+            {
+              "text": "Multidisciplinary support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cervical_dystonia-ddx",
+      "kind": "ddx",
+      "title": "Hyperkinetic movement disorders defined",
+      "rowHeader": "Condition",
+      "columns": [
+        "Definition"
+      ],
+      "rows": [
+        {
+          "parameter": "Tremor",
+          "cells": [
+            {
+              "text": "Rhythmic oscillation of a body part from intermittent muscle contractions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystonia",
+          "cells": [
+            {
+              "text": "Involuntary patterned, sustained or repeated muscle contractions, often twisting, with abnormal posture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Athetosis",
+          "cells": [
+            {
+              "text": "Slow, distal, writhing involuntary movements, tending to affect the arms and hands"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chorea",
+          "cells": [
+            {
+              "text": "Rapid, semipurposeful, graceful, dance-like nonpatterned involuntary movements of distal or proximal muscles"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myoclonus",
+          "cells": [
+            {
+              "text": "Sudden, brief (under 100 ms), jerk-like, arrhythmic muscle twitches"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tic",
+          "cells": [
+            {
+              "text": "Brief, repeated, stereotyped muscle contractions, often suppressible; simple (one muscle group) or complex (range of motor activities)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cervical_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Cervical dystonia (spasmodic torticollis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cervical dystonia: involuntary head turning or tilt with neck pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fixed posture from birth, rapid spread, myelopathy, Wilson features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: assess for structural, congenital or Wilson disease causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Movement pattern and sensory trick assessment; EMG; copper studies if young",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Idiopathic pattern with secondary causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Botulinum toxin into overactive muscles, guided by electromyography",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check drug-induced dystonia, torticollis and atlantoaxial subluxation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Review and withdraw dopamine-blocking drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral adjuncts: anticholinergics, benzodiazepines or baclofen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesia, physiotherapy and sensory trick training for neck pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic but does not shorten life; botulinum toxin gives repeatable benefit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

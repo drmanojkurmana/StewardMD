@@ -1,174 +1,647 @@
 {
- "id": "giant_axonal_neuropathy",
- "name": "Giant axonal neuropathy (GAN)",
- "aliases": [
-  "GAN",
-  "gigaxonin deficiency",
-  "GAN1"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive early-childhood neurodegeneration combining a severe sensorimotor peripheral neuropathy with progressive central nervous system involvement",
-   "Caused by biallelic mutations in GAN encoding gigaxonin, which regulates the turnover of intermediate filaments",
-   "Tightly curled, kinky hair that differs from the parents' is a characteristic and useful clinical clue",
-   "The neuropathy causes distal weakness, sensory loss, areflexia and gait difficulty, with later ataxia, nystagmus, pyramidal signs and cognitive decline",
-   "The pathological hallmark is giant axons distended by disorganised accumulations of neurofilaments, seen on nerve biopsy",
-   "MRI often shows cerebral and cerebellar white-matter abnormalities reflecting central involvement",
-   "The intermediate-filament disorganisation is generalised, so other filament-containing tissues (including hair) are affected",
-   "Management is supportive and multidisciplinary, addressing mobility, contractures, respiratory function and nutrition"
+  "id": "giant_axonal_neuropathy",
+  "name": "Giant axonal neuropathy (GAN)",
+  "aliases": [
+    "GAN",
+    "gigaxonin deficiency",
+    "GAN1"
   ],
-  "pathophysiology": "Giant axonal neuropathy is caused by biallelic loss-of-function mutations in GAN, encoding gigaxonin, an E3 ubiquitin-ligase adaptor that controls the degradation of intermediate filament proteins. Loss of gigaxonin leads to abnormal accumulation and disorganisation of neurofilaments within axons, producing the characteristic focal axonal swellings (giant axons) packed with densely aggregated neurofilaments. This intermediate-filament dysregulation is generalised, disrupting both peripheral and central axons and other filament-rich tissues such as hair, and drives progressive degeneration of the peripheral nerves, cerebellum, corticospinal tracts and cerebral white matter.",
-  "additionalDifferentials": [
-   "Charcot-Marie-Tooth disease and other inherited sensorimotor neuropathies",
-   "Leukodystrophies with peripheral neuropathy (e.g. metachromatic leukodystrophy)",
-   "Other hereditary sensory and motor or motor neuropathies",
-   "Chronic inflammatory demyelinating polyneuropathy in childhood",
-   "Mitochondrial disorders with combined central and peripheral involvement",
-   "Friedreich ataxia and other early-onset recessive ataxias with neuropathy"
-  ],
-  "additionalInvestigations": [
-   "Targeted GAN genetic testing to confirm gigaxonin deficiency",
-   "Nerve conduction studies showing an axonal sensorimotor neuropathy",
-   "Nerve biopsy demonstrating giant axons with neurofilament accumulation",
-   "MRI brain assessing cerebral and cerebellar white-matter change",
-   "Examination and, if needed, microscopy of hair to document the characteristic kinky texture",
-   "Respiratory and swallowing assessment as disease advances"
-  ],
-  "redFlags": [
-   "Respiratory insufficiency from progressive neuromuscular weakness",
-   "Bulbar dysfunction with aspiration risk",
-   "Rapid neurological deterioration with new central signs",
-   "Severe scoliosis or contractures compromising function and respiration"
-  ],
-  "prognosis": "Giant axonal neuropathy is progressive, with loss of ambulation typically in later childhood or adolescence and death often in the second or third decade from respiratory and bulbar complications; the course and severity vary with the underlying mutation.",
-  "pitfalls": [
-   "Overlooking the characteristic kinky hair as a diagnostic pointer in a child with neuropathy",
-   "Attributing the picture to a purely peripheral neuropathy and missing the central involvement",
-   "Delaying nerve biopsy or genetic testing when the phenotype is suggestive",
-   "Neglecting respiratory and spinal surveillance that guide anticipatory care"
-  ],
-  "references": [
-   "GeneReviews: Giant Axonal Neuropathy",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no approved cure; care is supportive and multidisciplinary, with intrathecal gene therapy under investigation",
-   "Provide physiotherapy, occupational therapy, and orthoses for weakness and gait, with contracture prevention",
-   "Manage spasticity, ataxia, and declining mobility with aids and wheelchair provision as needed",
-   "Monitor respiratory function and provide ventilatory support as bulbar and respiratory involvement progress",
-   "Support swallowing and nutrition with speech and language therapy and dietetic input",
-   "Survey for scoliosis and other orthopaedic complications",
-   "Offer genetic counselling and family testing given autosomal recessive GAN inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "giant_axonal_neuropathy-pathway",
-   "title": "Giant axonal neuropathy (GAN): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive early-childhood neurodegeneration combining a severe sensorimotor peripheral neuropathy with progressive central nervous system involvement",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory insufficiency from progressive neuromuscular weakness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted GAN genetic testing to confirm gigaxonin deficiency, Nerve conduction studies showing an axonal sensorimotor neuropathy, Nerve biopsy demonstrating giant axons with neurofilament accumulation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no approved cure; care is supportive and multidisciplinary, with intrathecal gene therapy under investigation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the characteristic kinky hair as a diagnostic pointer in a child with neuropathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of giant axonal neuropathy (gan)."
-  }
- ],
- "tables": [
-  {
-   "id": "giant_axonal_neuropathy-matrix",
-   "title": "Giant axonal neuropathy (GAN): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive early-childhood neurodegeneration combining a severe sensorimotor peripheral neuropathy with progressive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive early-childhood neurodegeneration combining a severe sensorimotor peripheral neuropathy with progressive central nervous system involvement",
+      "Caused by biallelic mutations in GAN encoding gigaxonin, which regulates the turnover of intermediate filaments",
+      "Tightly curled, kinky hair that differs from the parents' is a characteristic and useful clinical clue",
+      "The neuropathy causes distal weakness, sensory loss, areflexia and gait difficulty, with later ataxia, nystagmus, pyramidal signs and cognitive decline",
+      "The pathological hallmark is giant axons distended by disorganised accumulations of neurofilaments, seen on nerve biopsy",
+      "MRI often shows cerebral and cerebellar white-matter abnormalities reflecting central involvement",
+      "The intermediate-filament disorganisation is generalised, so other filament-containing tissues (including hair) are affected",
+      "Management is supportive and multidisciplinary, addressing mobility, contractures, respiratory function and nutrition"
     ],
-    [
-     "Key Investigations",
-     "Targeted GAN genetic testing to confirm gigaxonin deficiency, Nerve conduction studies showing an axonal sensorimotor neuropathy,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Giant axonal neuropathy is caused by biallelic loss-of-function mutations in GAN, encoding gigaxonin, an E3 ubiquitin-ligase adaptor that controls the degradation of intermediate filament proteins. Loss of gigaxonin leads to abnormal accumulation and disorganisation of neurofilaments within axons, producing the characteristic focal axonal swellings (giant axons) packed with densely aggregated neurofilaments. This intermediate-filament dysregulation is generalised, disrupting both peripheral and central axons and other filament-rich tissues such as hair, and drives progressive degeneration of the peripheral nerves, cerebellum, corticospinal tracts and cerebral white matter.",
+    "additionalDifferentials": [
+      "Charcot-Marie-Tooth disease and other inherited sensorimotor neuropathies",
+      "Leukodystrophies with peripheral neuropathy (e.g. metachromatic leukodystrophy)",
+      "Other hereditary sensory and motor or motor neuropathies",
+      "Chronic inflammatory demyelinating polyneuropathy in childhood",
+      "Mitochondrial disorders with combined central and peripheral involvement",
+      "Friedreich ataxia and other early-onset recessive ataxias with neuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Charcot-Marie-Tooth disease and other inherited sensorimotor neuropathies, Leukodystrophies with peripheral neuropathy (e.g.",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted GAN genetic testing to confirm gigaxonin deficiency",
+      "Nerve conduction studies showing an axonal sensorimotor neuropathy",
+      "Nerve biopsy demonstrating giant axons with neurofilament accumulation",
+      "MRI brain assessing cerebral and cerebellar white-matter change",
+      "Examination and, if needed, microscopy of hair to document the characteristic kinky texture",
+      "Respiratory and swallowing assessment as disease advances"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no approved cure; care is supportive and multidisciplinary, with intrathecal gene therapy under investigation",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory insufficiency from progressive neuromuscular weakness",
+      "Bulbar dysfunction with aspiration risk",
+      "Rapid neurological deterioration with new central signs",
+      "Severe scoliosis or contractures compromising function and respiration"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the characteristic kinky hair as a diagnostic pointer in a child with neuropathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Giant axonal neuropathy is progressive, with loss of ambulation typically in later childhood or adolescence and death often in the second or third decade from respiratory and bulbar complications; the course and severity vary with the underlying mutation.",
+    "pitfalls": [
+      "Overlooking the characteristic kinky hair as a diagnostic pointer in a child with neuropathy",
+      "Attributing the picture to a purely peripheral neuropathy and missing the central involvement",
+      "Delaying nerve biopsy or genetic testing when the phenotype is suggestive",
+      "Neglecting respiratory and spinal surveillance that guide anticipatory care"
+    ],
+    "references": [
+      "GeneReviews: Giant Axonal Neuropathy",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no approved cure; care is supportive and multidisciplinary, with intrathecal gene therapy under investigation",
+      "Provide physiotherapy, occupational therapy, and orthoses for weakness and gait, with contracture prevention",
+      "Manage spasticity, ataxia, and declining mobility with aids and wheelchair provision as needed",
+      "Monitor respiratory function and provide ventilatory support as bulbar and respiratory involvement progress",
+      "Support swallowing and nutrition with speech and language therapy and dietetic input",
+      "Survey for scoliosis and other orthopaedic complications",
+      "Offer genetic counselling and family testing given autosomal recessive GAN inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for giant axonal neuropathy (gan)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "giant-axonal-neuropathy-real-image",
-   "title": "Giant axonal neuropathy (GAN): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "giant_axonal_neuropathy-pathway",
+      "title": "Giant axonal neuropathy (GAN): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive early-childhood neurodegeneration combining a severe sensorimotor peripheral neuropathy with progressive central nervous system involvement",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory insufficiency from progressive neuromuscular weakness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted GAN genetic testing to confirm gigaxonin deficiency, Nerve conduction studies showing an axonal sensorimotor neuropathy, Nerve biopsy demonstrating giant axons with neurofilament accumulation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no approved cure; care is supportive and multidisciplinary, with intrathecal gene therapy under investigation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the characteristic kinky hair as a diagnostic pointer in a child with neuropathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of giant axonal neuropathy (gan)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "giant_axonal_neuropathy-matrix",
+      "title": "Giant axonal neuropathy (GAN): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive early-childhood neurodegeneration combining a severe sensorimotor peripheral neuropathy with progressive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted GAN genetic testing to confirm gigaxonin deficiency, Nerve conduction studies showing an axonal sensorimotor neuropathy,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Charcot-Marie-Tooth disease and other inherited sensorimotor neuropathies, Leukodystrophies with peripheral neuropathy (e.g.",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no approved cure; care is supportive and multidisciplinary, with intrathecal gene therapy under investigation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the characteristic kinky hair as a diagnostic pointer in a child with neuropathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for giant axonal neuropathy (gan)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology / GeneReviews",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 384-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "giant_axonal_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted GAN genetic testing",
+          "cells": [
+            {
+              "text": "Gigaxonin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Axonal sensorimotor neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve biopsy",
+          "cells": [
+            {
+              "text": "Giant axons with neurofilament accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Cerebral and cerebellar white-matter change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair microscopy",
+          "cells": [
+            {
+              "text": "Characteristic kinky texture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and swallowing assessment",
+          "cells": [
+            {
+              "text": "As the disease advances"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giant_axonal_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Charcot-Marie-Tooth disease",
+          "cells": [
+            {
+              "text": "Purely peripheral picture; central involvement is missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metachromatic leukodystrophy",
+          "cells": [
+            {
+              "text": "Leukodystrophy with peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giant_axonal_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive multidisciplinary care",
+          "cells": [
+            {
+              "text": "No approved cure; intrathecal gene therapy under investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and orthoses",
+          "cells": [
+            {
+              "text": "Weakness and gait, with contracture prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mobility aids",
+          "cells": [
+            {
+              "text": "Spasticity, ataxia and declining mobility; wheelchair provision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Ventilatory support as bulbar and respiratory involvement progress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing and nutrition",
+          "cells": [
+            {
+              "text": "Speech and language therapy and dietetic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scoliosis surveillance",
+          "cells": [
+            {
+              "text": "Orthopaedic complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive GAN inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giant_axonal_neuropathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Axonal versus demyelinating electrophysiology",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Axonal degeneration",
+        "Segmental demyelination"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor: CMAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal (except with conduction block)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: conduction block",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: temporal dispersion",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: F wave",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: H reflex",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: SNAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle EMG: fibrillations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle EMG: fasciculations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor unit potentials: recruitment",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Decreased"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor unit potentials: morphology",
+          "cells": [
+            {
+              "text": "Long duration or polyphasic"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "CB in the source means conduction block."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "giant_axonal_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of Giant axonal neuropathy (GAN)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected giant axonal neuropathy: childhood neuropathy with kinky hair",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory insufficiency, bulbar dysfunction, new central signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory assessment for insufficiency or aspiration risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GAN gene testing, nerve conduction, MRI brain and hair microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does GAN testing confirm gigaxonin deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CMT, metachromatic leukodystrophy, CIDP or mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive multidisciplinary care; no approved cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and orthoses for weakness and gait",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ventilatory support as bulbar and respiratory involvement progress",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech therapy and dietetic input for swallowing and nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive; walking lost in later childhood, death often by the third decade",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

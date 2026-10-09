@@ -1,183 +1,678 @@
 {
- "id": "charcot_marie_tooth_disease_type_1a",
- "name": "Charcot-Marie-Tooth disease type 1A",
- "aliases": [
-  "CMT1A",
-  "HMSN IA",
-  "HMSN Ia",
-  "Hereditary motor and sensory neuropathy type IA",
-  "PMP22 duplication",
-  "charcot marie tooth type 1a",
-  "hereditary motor and sensory neuropathy type I"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary neuropathy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common inherited neuropathy, accounting for the majority of demyelinating CMT (CMT1) and a large share of all CMT.",
-   "Caused by a tandem duplication of PMP22 on chromosome 17, acting through a gene-dosage effect; inheritance is autosomal dominant with high penetrance.",
-   "Nerve conduction studies show uniform, symmetrical slowing of motor conduction velocities across all nerves in the demyelinating range, a key feature distinguishing it from acquired demyelinating neuropathies.",
-   "Typical onset is within the first two decades, with distal leg weakness, foot drop, pes cavus and hammer toes; hand involvement follows later.",
-   "Distal wasting produces the classic inverted-champagne-bottle (stork) leg appearance, with early loss of ankle reflexes and glove-and-stocking sensory loss.",
-   "Peripheral nerves may be palpably enlarged owing to onion-bulb hypertrophy from repeated demyelination and remyelination.",
-   "Diagnosis is confirmed by targeted PMP22 copy-number testing (for example MLPA) as a first-line test rather than a broad sequencing panel.",
-   "Certain neurotoxic drugs, notably vincristine, can precipitate severe, sometimes irreversible deterioration and should be avoided or used with extreme caution."
+  "id": "charcot_marie_tooth_disease_type_1a",
+  "name": "Charcot-Marie-Tooth disease type 1A",
+  "aliases": [
+    "CMT1A",
+    "HMSN IA",
+    "HMSN Ia",
+    "Hereditary motor and sensory neuropathy type IA",
+    "PMP22 duplication",
+    "charcot marie tooth type 1a",
+    "hereditary motor and sensory neuropathy type I"
   ],
-  "pathophysiology": "Charcot-Marie-Tooth disease type 1A results from a tandem duplication of a region on the short arm of chromosome 17 containing PMP22, which encodes peripheral myelin protein 22, a component of compact myelin in the peripheral nervous system. The additional gene copy produces a dosage effect, and overexpression of the protein disrupts Schwann cell function and myelin maintenance. This drives repeated cycles of segmental demyelination and remyelination, generating concentric Schwann cell proliferation (onion bulbs) and hypertrophic nerves, with uniform slowing of conduction along all nerves. Although the primary lesion is in myelin, progressive length-dependent axonal degeneration develops secondarily and is the principal determinant of long-term weakness and disability. Penetrance is high, but severity varies within and between families.",
-  "additionalDifferentials": [
-   "Other CMT1 subtypes (CMT1B/MPZ, CMT1C/LITAF, CMT1D/EGR2)",
-   "X-linked CMT (GJB1), which shows intermediate, often asymmetric slowing",
-   "Chronic inflammatory demyelinating polyradiculoneuropathy (a treatable acquired mimic)",
-   "Hereditary neuropathy with liability to pressure palsies (PMP22 deletion)",
-   "Distal hereditary motor neuropathy",
-   "Dejerine-Sottas / congenital hypomyelinating neuropathy at the severe end",
-   "Toxic or metabolic demyelinating neuropathies"
-  ],
-  "additionalInvestigations": [
-   "Motor and sensory nerve conduction studies demonstrating uniform demyelinating slowing",
-   "PMP22 copy-number analysis (MLPA or equivalent duplication testing)",
-   "Broader CMT gene panel if the PMP22 duplication is absent",
-   "Nerve ultrasound showing diffuse, symmetrical nerve enlargement",
-   "Clinical genetic counselling with family segregation studies",
-   "Sural nerve biopsy reserved for atypical cases (onion-bulb hypertrophy)",
-   "Orthopaedic assessment and foot radiographs for structural deformity"
-  ],
-  "redFlags": [
-   "Rapid, stepwise or markedly asymmetric progression suggesting superimposed inflammatory neuropathy",
-   "Prominent early sensory ataxia, bulbar or respiratory involvement, which is atypical",
-   "Severe infantile onset raising suspicion of a PMP22 point mutation or Dejerine-Sottas phenotype",
-   "Acute deterioration after exposure to neurotoxic chemotherapy such as vincristine"
-  ],
-  "prognosis": "The condition is slowly progressive over decades, and most patients remain ambulant, though many eventually require ankle-foot orthoses. Lifespan is normal.",
-  "pitfalls": [
-   "Attributing all conduction slowing to CMT1A and missing a superimposed, treatable inflammatory neuropathy.",
-   "Ordering large sequencing panels before the simple, high-yield PMP22 duplication test.",
-   "Administering neurotoxic drugs such as vincristine without recognising the diagnosis.",
-   "Assuming normal conduction velocities exclude the disease, when uniform slowing is the hallmark.",
-   "Overlooking mildly affected or asymptomatic gene carriers within the family."
-  ],
-  "references": [
-   "Peripheral neuropathy reference texts",
-   "Neuromuscular genetics reference guidelines",
-   "Clinical neurology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage supportively with physiotherapy and occupational therapy, as there is no disease-modifying drug therapy",
-   "Fit ankle-foot orthoses and provide podiatry, appropriate footwear and walking aids for foot drop and pes cavus",
-   "Offer orthopaedic foot surgery such as tendon transfer, osteotomy or arthrodesis for fixed, disabling deformity",
-   "Treat neuropathic pain and cramps symptomatically and address fatigue",
-   "Avoid drugs recognised as neurotoxic, particularly vincristine, which can cause severe deterioration in this subtype",
-   "Monitor for scoliosis and, less commonly, respiratory involvement",
-   "Offer genetic counselling for autosomal dominant, highly penetrant inheritance and family segregation testing for the PMP22 duplication",
-   "Coordinate multidisciplinary neuromuscular, orthopaedic and rehabilitation care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "charcot_marie_tooth_disease_type_1a-pathway",
-   "title": "Charcot-Marie-Tooth disease type 1A: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common inherited neuropathy, accounting for the majority of demyelinating CMT (CMT1) and a large share of all CMT.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid, stepwise or markedly asymmetric progression suggesting superimposed inflammatory neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Motor and sensory nerve conduction studies demonstrating uniform demyelinating slowing, PMP22 copy-number analysis (MLPA or equivalent duplication testing), Broader CMT gene panel if the PMP22 duplication is absent"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage supportively with physiotherapy and occupational therapy, as there is no disease-modifying drug therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all conduction slowing to CMT1A and missing a superimposed, treatable inflammatory neuropathy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 1a."
-  }
- ],
- "tables": [
-  {
-   "id": "charcot_marie_tooth_disease_type_1a-matrix",
-   "title": "Charcot-Marie-Tooth disease type 1A: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common inherited neuropathy, accounting for the majority of demyelinating CMT (CMT1) and a large share of all CMT.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary neuropathy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common inherited neuropathy, accounting for the majority of demyelinating CMT (CMT1) and a large share of all CMT.",
+      "Caused by a tandem duplication of PMP22 on chromosome 17, acting through a gene-dosage effect; inheritance is autosomal dominant with high penetrance.",
+      "Nerve conduction studies show uniform, symmetrical slowing of motor conduction velocities across all nerves in the demyelinating range, a key feature distinguishing it from acquired demyelinating neuropathies.",
+      "Typical onset is within the first two decades, with distal leg weakness, foot drop, pes cavus and hammer toes; hand involvement follows later.",
+      "Distal wasting produces the classic inverted-champagne-bottle (stork) leg appearance, with early loss of ankle reflexes and glove-and-stocking sensory loss.",
+      "Peripheral nerves may be palpably enlarged owing to onion-bulb hypertrophy from repeated demyelination and remyelination.",
+      "Diagnosis is confirmed by targeted PMP22 copy-number testing (for example MLPA) as a first-line test rather than a broad sequencing panel.",
+      "Certain neurotoxic drugs, notably vincristine, can precipitate severe, sometimes irreversible deterioration and should be avoided or used with extreme caution."
     ],
-    [
-     "Key Investigations",
-     "Motor and sensory nerve conduction studies demonstrating uniform demyelinating slowing, PMP22 copy-number analysis (MLPA or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Charcot-Marie-Tooth disease type 1A results from a tandem duplication of a region on the short arm of chromosome 17 containing PMP22, which encodes peripheral myelin protein 22, a component of compact myelin in the peripheral nervous system. The additional gene copy produces a dosage effect, and overexpression of the protein disrupts Schwann cell function and myelin maintenance. This drives repeated cycles of segmental demyelination and remyelination, generating concentric Schwann cell proliferation (onion bulbs) and hypertrophic nerves, with uniform slowing of conduction along all nerves. Although the primary lesion is in myelin, progressive length-dependent axonal degeneration develops secondarily and is the principal determinant of long-term weakness and disability. Penetrance is high, but severity varies within and between families.",
+    "additionalDifferentials": [
+      "Other CMT1 subtypes (CMT1B/MPZ, CMT1C/LITAF, CMT1D/EGR2)",
+      "X-linked CMT (GJB1), which shows intermediate, often asymmetric slowing",
+      "Chronic inflammatory demyelinating polyradiculoneuropathy (a treatable acquired mimic)",
+      "Hereditary neuropathy with liability to pressure palsies (PMP22 deletion)",
+      "Distal hereditary motor neuropathy",
+      "Dejerine-Sottas / congenital hypomyelinating neuropathy at the severe end",
+      "Toxic or metabolic demyelinating neuropathies"
     ],
-    [
-     "Primary Differentials",
-     "Other CMT1 subtypes (CMT1B/MPZ, CMT1C/LITAF, CMT1D/EGR2), X-linked CMT (GJB1), which shows intermediate, often asymmetric",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Motor and sensory nerve conduction studies demonstrating uniform demyelinating slowing",
+      "PMP22 copy-number analysis (MLPA or equivalent duplication testing)",
+      "Broader CMT gene panel if the PMP22 duplication is absent",
+      "Nerve ultrasound showing diffuse, symmetrical nerve enlargement",
+      "Clinical genetic counselling with family segregation studies",
+      "Sural nerve biopsy reserved for atypical cases (onion-bulb hypertrophy)",
+      "Orthopaedic assessment and foot radiographs for structural deformity"
     ],
-    [
-     "Management Strategy",
-     "Manage supportively with physiotherapy and occupational therapy, as there is no disease-modifying drug therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid, stepwise or markedly asymmetric progression suggesting superimposed inflammatory neuropathy",
+      "Prominent early sensory ataxia, bulbar or respiratory involvement, which is atypical",
+      "Severe infantile onset raising suspicion of a PMP22 point mutation or Dejerine-Sottas phenotype",
+      "Acute deterioration after exposure to neurotoxic chemotherapy such as vincristine"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all conduction slowing to CMT1A and missing a superimposed, treatable inflammatory neuropathy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is slowly progressive over decades, and most patients remain ambulant, though many eventually require ankle-foot orthoses. Lifespan is normal.",
+    "pitfalls": [
+      "Attributing all conduction slowing to CMT1A and missing a superimposed, treatable inflammatory neuropathy.",
+      "Ordering large sequencing panels before the simple, high-yield PMP22 duplication test.",
+      "Administering neurotoxic drugs such as vincristine without recognising the diagnosis.",
+      "Assuming normal conduction velocities exclude the disease, when uniform slowing is the hallmark.",
+      "Overlooking mildly affected or asymptomatic gene carriers within the family."
+    ],
+    "references": [
+      "Peripheral neuropathy reference texts",
+      "Neuromuscular genetics reference guidelines",
+      "Clinical neurology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage supportively with physiotherapy and occupational therapy, as there is no disease-modifying drug therapy",
+      "Fit ankle-foot orthoses and provide podiatry, appropriate footwear and walking aids for foot drop and pes cavus",
+      "Offer orthopaedic foot surgery such as tendon transfer, osteotomy or arthrodesis for fixed, disabling deformity",
+      "Treat neuropathic pain and cramps symptomatically and address fatigue",
+      "Avoid drugs recognised as neurotoxic, particularly vincristine, which can cause severe deterioration in this subtype",
+      "Monitor for scoliosis and, less commonly, respiratory involvement",
+      "Offer genetic counselling for autosomal dominant, highly penetrant inheritance and family segregation testing for the PMP22 duplication",
+      "Coordinate multidisciplinary neuromuscular, orthopaedic and rehabilitation care"
     ]
-   ],
-   "caption": "Overview comparison matrix for charcot-marie-tooth disease type 1a."
-  }
- ],
- "diagrams": [
-  {
-   "id": "charcot-marie-tooth-disease-type-1a-real-image",
-   "title": "Charcot-Marie-Tooth disease type 1A: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "charcot_marie_tooth_disease_type_1a-pathway",
+      "title": "Charcot-Marie-Tooth disease type 1A: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common inherited neuropathy, accounting for the majority of demyelinating CMT (CMT1) and a large share of all CMT.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid, stepwise or markedly asymmetric progression suggesting superimposed inflammatory neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Motor and sensory nerve conduction studies demonstrating uniform demyelinating slowing, PMP22 copy-number analysis (MLPA or equivalent duplication testing), Broader CMT gene panel if the PMP22 duplication is absent"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage supportively with physiotherapy and occupational therapy, as there is no disease-modifying drug therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all conduction slowing to CMT1A and missing a superimposed, treatable inflammatory neuropathy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 1a."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1a-matrix",
+      "title": "Charcot-Marie-Tooth disease type 1A: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common inherited neuropathy, accounting for the majority of demyelinating CMT (CMT1) and a large share of all CMT.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Motor and sensory nerve conduction studies demonstrating uniform demyelinating slowing, PMP22 copy-number analysis (MLPA or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other CMT1 subtypes (CMT1B/MPZ, CMT1C/LITAF, CMT1D/EGR2), X-linked CMT (GJB1), which shows intermediate, often asymmetric",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage supportively with physiotherapy and occupational therapy, as there is no disease-modifying drug therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all conduction slowing to CMT1A and missing a superimposed, treatable inflammatory neuropathy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for charcot-marie-tooth disease type 1a."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 384-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor and sensory nerve conduction studies",
+          "cells": [
+            {
+              "text": "Uniform, symmetrical demyelinating slowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PMP22 copy-number analysis (MLPA or equivalent)",
+          "cells": [
+            {
+              "text": "First-line test for the PMP22 duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve ultrasound",
+          "cells": [
+            {
+              "text": "Diffuse, symmetrical nerve enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broader CMT gene panel",
+          "cells": [
+            {
+              "text": "If the PMP22 duplication is absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot radiographs and orthopaedic assessment",
+          "cells": [
+            {
+              "text": "Structural deformity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_1a-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked CMT (GJB1)",
+          "cells": [
+            {
+              "text": "Intermediate, often asymmetric slowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary neuropathy with liability to pressure palsies",
+          "cells": [
+            {
+              "text": "PMP22 deletion rather than duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+          "cells": [
+            {
+              "text": "Treatable acquired mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_1a-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy"
+            },
+            {
+              "text": "No disease-modifying drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and footwear",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses, podiatry, footwear and walking aids"
+            },
+            {
+              "text": "Foot drop and pes cavus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot surgery",
+          "cells": [
+            {
+              "text": "Tendon transfer, osteotomy or arthrodesis for fixed, disabling deformity"
+            },
+            {
+              "text": "Disabling deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom control",
+          "cells": [
+            {
+              "text": "Treat neuropathic pain, cramps and fatigue"
+            },
+            {
+              "text": "Symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid neurotoxic drugs",
+          "cells": [
+            {
+              "text": "Avoid vincristine and other neurotoxic drugs"
+            },
+            {
+              "text": "Severe deterioration in this subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "Monitor for scoliosis and, less commonly, respiratory involvement"
+            },
+            {
+              "text": "Complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; family segregation testing for the PMP22 duplication"
+            },
+            {
+              "text": "Highly penetrant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_1a-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Axonal versus demyelinating electrophysiology",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Axonal degeneration",
+        "Segmental demyelination"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor: CMAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal (except with conduction block)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: conduction block",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: temporal dispersion",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: F wave",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: H reflex",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: SNAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle EMG: fibrillations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle EMG: fasciculations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor unit potentials: recruitment",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Decreased"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor unit potentials: morphology",
+          "cells": [
+            {
+              "text": "Long duration or polyphasic"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "CB in the source means conduction block."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1a-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth disease type 1A",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 1A: childhood distal weakness, pes cavus, demyelinating slowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stepwise or asymmetric decline, sensory ataxia, infant onset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: review for superimposed inflammatory neuropathy or severe phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, PMP22 copy-number analysis and nerve ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PMP22 duplication confirmed with uniform demyelinating slowing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy; no disease-modifying drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check X-linked CMT, CIDP and hereditary neuropathy with pressure palsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses, podiatry and footwear for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tendon transfer or arthrodesis for fixed, disabling deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid vincristine and other neurotoxic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Autosomal dominant with high penetrance; family testing for PMP22 duplication",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -209,25 +209,553 @@
       "caption": "Diagnostic and clinical overview matrix for vasovagal / orthostatic syncope."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "vasovagal-syncope-real-image",
-      "title": "Vasovagal / orthostatic syncope: 12-Lead Diagnostic Electrocardiogram",
-      "type": "ecg",
-      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Syncope",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/symptoms-of-cardiovascular-disorders/syncope",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Gauer, Syncope: Evaluation and Differential Diagnosis, Am Fam Physician 2017",
+      "url": "https://www.aafp.org/afp/2017/0301/p303",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "AFP, Midodrine for Recurrent Vasovagal Syncope, 2024",
+      "url": "https://www.aafp.org/pubs/afp/issues/2024/0700/fpin-hda-recurrent-vasovagal-syncope.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vasovagal_syncope-diagnostic",
+      "kind": "diagnostic",
+      "title": "Reflex and orthostatic syncope: diagnostic features and high-risk flags",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Conduction & Axis",
-          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+          "parameter": "Trigger",
+          "cells": [
+            {
+              "text": "Emotion, pain, sight of blood, venipuncture, prolonged standing"
+            },
+            {
+              "text": "Vasovagal reflex syncope"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Repolarization",
-          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+          "parameter": "Prodrome",
+          "cells": [
+            {
+              "text": "Sweating, pallor, nausea, yawning, light-headedness"
+            },
+            {
+              "text": "Favours reflex syncope"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Rhythm & Intervals",
-          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+          "parameter": "Orthostatic BP fall within 3 min of standing",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Systolic fall 20 or more, or diastolic fall 10 or more"
+            },
+            {
+              "text": "Orthostatic hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart rate rise on standing",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "About 30"
+            },
+            {
+              "text": "Suggests postural tachycardia syndrome"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Abnormal movements",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "Brief, under 30, arrhythmic jerks",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Common in syncope; do not mean seizure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recovery",
+          "cells": [
+            {
+              "text": "Prompt reorientation"
+            },
+            {
+              "text": "Prolonged confusion points to seizure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "History, exam and ECG find a cause in about 50%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tilt-table test",
+          "cells": [
+            {
+              "text": "Suspected reflex syncope or autonomic failure"
+            },
+            {
+              "text": "Separates vasovagal from orthostatic hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk history",
+          "cells": [
+            {
+              "text": "Syncope on exertion or lying down, palpitations, no prodrome, family history of sudden death"
+            },
+            {
+              "text": "{{hy:Suggests cardiac syncope; admit}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "High-risk ECG",
+          "cells": [
+            {
+              "text": "Bifascicular block, sinus rate under 40, pre-excitation, abnormal QT, Brugada pattern"
+            },
+            {
+              "text": "Admit for monitoring"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Systolic BP",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Under 90",
+              "op": "<",
+              "value": 90
+            },
+            {
+              "text": "High-risk feature"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Orthostatic hypotension definitions differ: Harrison uses systolic fall 20 or diastolic fall 10 mmHg; AFP 2017 uses systolic under 90 or a fall of 20 (10 if symptomatic). Single 3-minute standing checks can miss initial or delayed orthostatic hypotension."
+    },
+    {
+      "id": "vasovagal_syncope-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic reflex syncope",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac (arrhythmic or structural) syncope",
+          "cells": [
+            {
+              "text": "Little warning, can occur supine or on exertion, immediate recovery"
+            },
+            {
+              "text": "ECG, ambulatory monitoring, echocardiogram"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Orthostatic hypotension",
+          "cells": [
+            {
+              "text": "Within minutes of standing; elderly, drugs, autonomic failure"
+            },
+            {
+              "text": "Supine and 3-minute standing BP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Seizure",
+          "cells": [
+            {
+              "text": "Aura, long postictal confusion, rarely triggered by emotion or pain"
+            },
+            {
+              "text": "EEG if seizure suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Insulin-treated diabetes; hunger and tremor"
+            },
+            {
+              "text": "Blood glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cataplexy",
+          "cells": [
+            {
+              "text": "Emotion-triggered loss of tone with consciousness kept"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Hypoxaemia, tachycardia, dyspnoea"
+            },
+            {
+              "text": "CT pulmonary angiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psychogenic pseudosyncope",
+          "cells": [
+            {
+              "text": "Frequent events, no prodrome, rare injury"
+            },
+            {
+              "text": "Tilt test reproduces symptoms without BP or HR change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vasovagal_syncope-treatment",
+      "kind": "treatment",
+      "title": "Treatment of reflex and orthostatic syncope",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lie flat with legs raised",
+          "cells": [
+            {
+              "text": "During the episode, once dangerous causes excluded"
+            },
+            {
+              "text": "Avoid sitting up quickly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reassurance, education, trigger avoidance",
+          "cells": [
+            {
+              "text": "All reflex syncope"
+            },
+            {
+              "text": "Benign prognosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Physical counterpressure manoeuvres",
+          "cells": [
+            {
+              "text": "{{hy:At onset of prodrome}}"
+            },
+            {
+              "text": "Leg crossing, squatting, leg tensing; reduced syncope by 39% in one trial"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fluids and salt, slow rising",
+          "cells": [
+            {
+              "text": "Orthostatic hypotension"
+            },
+            {
+              "text": "Stop or reduce culprit drugs; head of bed up about 10 degrees, compression stockings"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Midodrine",
+          "cells": [
+            {
+              "text": "Recurrent vasovagal syncope without hypertension, heart failure or urinary retention"
+            },
+            {
+              "text": "Cuts recurrence by at least 30% (NNT 6); trial dose 5 mg three times daily, no night dose"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Fludrocortisone",
+          "cells": [
+            {
+              "text": "Orthostatic hypotension not controlled by measures above"
+            },
+            {
+              "text": "Conflicting results for vasovagal syncope"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paroxetine",
+          "cells": [
+            {
+              "text": "Only with coexisting psychiatric disease"
+            },
+            {
+              "text": "One small trial only"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dual-chamber pacing",
+          "cells": [
+            {
+              "text": "Severe asystolic reflex syncope"
+            },
+            {
+              "text": "Reduced recurrence in a placebo-controlled trial"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Driving restriction",
+          "cells": [
+            {
+              "text": "Until cause found and treated"
+            },
+            {
+              "text": "Especially if benign cause uncertain"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "AFP 2017 rates beta-blockers, alpha agonists and fludrocortisone as ineffective or conflicting in vasovagal syncope, while the 2024 AFP evidence summary supports midodrine for recurrent vasovagal syncope."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vasovagal_syncope-dx-mgmt",
+      "title": "Diagnosis and management of vasovagal and orthostatic syncope",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Transient loss of consciousness with spontaneous full recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "History, examination, supine and standing BP, 12-lead ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "High-risk features (exertional, supine, no prodrome, abnormal ECG)?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Admit; monitoring, echocardiogram for cardiac cause",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Orthostatic BP fall on standing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Review drugs; fluids, salt, slow rising, compression",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Typical trigger and prodrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tilt test or ambulatory monitoring if unclear",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassure, avoid triggers, teach counterpressure manoeuvres",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Recurrent despite these measures?",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider midodrine; pacing if severe asystole",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outpatient follow-up; good prognosis",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Reflex confirmed"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
         }
       ]
     }

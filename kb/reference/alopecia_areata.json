@@ -1,174 +1,579 @@
 {
- "id": "alopecia_areata",
- "name": "Alopecia Areata",
- "aliases": [
-  "AA",
-  "patchy hair loss",
-  "alopecia totalis",
-  "alopecia universalis"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as sudden, sharply bordered round or oval bald patches on otherwise normal-appearing scalp skin, without scarring or scale",
-   "Look for exclamation-mark hairs at the margins of active patches, where the shaft narrows towards the scalp",
-   "A positive hair-pull test at the periphery indicates ongoing disease activity",
-   "Extensive forms include loss of all scalp hair (totalis) and loss of all body hair (universalis); the ophiasis pattern along the occipital and temporal rim tends to respond poorly",
-   "Nail involvement such as fine regular pitting or roughening may accompany more severe or persistent disease",
-   "Associations with thyroid disease, vitiligo, atopy, and other autoimmune conditions warrant a focused history and examination",
-   "Regrowth often begins as fine depigmented or white hairs that later regain colour",
-   "Management ranges from watchful waiting in limited disease to intralesional or topical anti-inflammatory therapy, contact immunotherapy, and newer targeted systemic agents for extensive involvement; psychological impact should be addressed directly"
+  "id": "alopecia_areata",
+  "name": "Alopecia Areata",
+  "aliases": [
+    "AA",
+    "patchy hair loss",
+    "alopecia totalis",
+    "alopecia universalis"
   ],
-  "pathophysiology": "Alopecia areata is an organ-specific autoimmune disorder in which the immune privilege of the hair follicle breaks down, allowing a T-cell-mediated attack focused on the anagen-phase follicular bulb. Interferon-gamma and other cytokines signalling through the JAK-STAT pathway drive a peribulbar lymphocytic infiltrate classically likened to a swarm of bees. Affected follicles prematurely enter catagen and telogen and produce dystrophic hairs, but the follicular stem-cell compartment is preserved, which is why regrowth remains possible even after long-standing loss. A polygenic predisposition interacts with environmental triggers, and there is overlap with other autoimmune diseases.",
-  "additionalDifferentials": [
-   "Tinea capitis (scaly, inflamed, often with broken hairs and positive mycology)",
-   "Trichotillomania (irregular patches with hairs of varying length)",
-   "Telogen effluvium (diffuse shedding rather than discrete patches)",
-   "Traction alopecia at sites of chronic tension",
-   "Early scarring alopecias such as lichen planopilaris or discoid lupus",
-   "Secondary syphilis producing a moth-eaten pattern"
-  ],
-  "additionalInvestigations": [
-   "Usually a clinical diagnosis aided by dermoscopy showing exclamation-mark hairs, yellow dots, and black dots",
-   "Mycology (scrapings or culture) when tinea capitis cannot be excluded",
-   "Thyroid function and autoantibody testing when clinically indicated",
-   "Scalp biopsy reserved for atypical or diagnostically uncertain cases",
-   "Screening for associated autoimmune disease guided by symptoms"
-  ],
-  "redFlags": [
-   "Rapidly progressive or extensive loss suggesting evolution towards totalis or universalis",
-   "Scarring, scale, or follicular destruction indicating a different, potentially permanent alopecia",
-   "Significant psychological distress or impact on functioning requiring support",
-   "Diffuse hair loss with systemic symptoms prompting evaluation for an underlying disorder"
-  ],
-  "prognosis": "Outcome is variable and unpredictable; limited single patches frequently regrow spontaneously within months, whereas early onset, extensive involvement, the ophiasis pattern, nail changes, and atopy predict a more prolonged and relapsing course.",
-  "pitfalls": [
-   "Confusing non-scarring alopecia areata with a scarring alopecia and missing the window for treatment",
-   "Overlooking tinea capitis in children by not performing mycology",
-   "Attributing patchy loss to alopecia areata when hair-length variation points to trichotillomania",
-   "Underestimating the psychological burden and failing to offer support or counselling"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intralesional corticosteroids are first-line for limited patchy scalp disease, with potent topical corticosteroids as an alternative",
-   "Use topical minoxidil as an adjunct to promote regrowth",
-   "For extensive, rapidly progressive or totalis and universalis disease, consider oral JAK inhibitors such as baricitinib or ritlecitinib, which target the interferon-gamma driven JAK-STAT pathway",
-   "Consider topical immunotherapy such as diphencyprone for extensive or chronic patchy disease",
-   "Screen for and manage associated autoimmune conditions such as thyroid disease and vitiligo",
-   "Offer psychological support and camouflage options including wigs and cosmetic measures given the impact on wellbeing",
-   "Refer to dermatology for extensive, refractory or diagnostically uncertain disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alopecia_areata-pathway",
-   "title": "Alopecia Areata: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as sudden, sharply bordered round or oval bald patches on otherwise normal-appearing scalp skin, without scarring or scale",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or extensive loss suggesting evolution towards totalis or universalis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Usually a clinical diagnosis aided by dermoscopy showing exclamation-mark hairs, yellow dots, and black dots, Mycology (scrapings or culture) when tinea capitis cannot be excluded, Thyroid function and autoantibody testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intralesional corticosteroids are first-line for limited patchy scalp disease, with potent topical corticosteroids as an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing non-scarring alopecia areata with a scarring alopecia and missing the window for treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alopecia areata."
-  }
- ],
- "tables": [
-  {
-   "id": "alopecia_areata-matrix",
-   "title": "Alopecia Areata: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as sudden, sharply bordered round or oval bald patches on otherwise normal-appearing scalp skin, without scarring or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as sudden, sharply bordered round or oval bald patches on otherwise normal-appearing scalp skin, without scarring or scale",
+      "Look for exclamation-mark hairs at the margins of active patches, where the shaft narrows towards the scalp",
+      "A positive hair-pull test at the periphery indicates ongoing disease activity",
+      "Extensive forms include loss of all scalp hair (totalis) and loss of all body hair (universalis); the ophiasis pattern along the occipital and temporal rim tends to respond poorly",
+      "Nail involvement such as fine regular pitting or roughening may accompany more severe or persistent disease",
+      "Associations with thyroid disease, vitiligo, atopy, and other autoimmune conditions warrant a focused history and examination",
+      "Regrowth often begins as fine depigmented or white hairs that later regain colour",
+      "Management ranges from watchful waiting in limited disease to intralesional or topical anti-inflammatory therapy, contact immunotherapy, and newer targeted systemic agents for extensive involvement; psychological impact should be addressed directly"
     ],
-    [
-     "Key Investigations",
-     "Usually a clinical diagnosis aided by dermoscopy showing exclamation-mark hairs, yellow dots, and black dots, Mycology (scrapings",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Alopecia areata is an organ-specific autoimmune disorder in which the immune privilege of the hair follicle breaks down, allowing a T-cell-mediated attack focused on the anagen-phase follicular bulb. Interferon-gamma and other cytokines signalling through the JAK-STAT pathway drive a peribulbar lymphocytic infiltrate classically likened to a swarm of bees. Affected follicles prematurely enter catagen and telogen and produce dystrophic hairs, but the follicular stem-cell compartment is preserved, which is why regrowth remains possible even after long-standing loss. A polygenic predisposition interacts with environmental triggers, and there is overlap with other autoimmune diseases.",
+    "additionalDifferentials": [
+      "Tinea capitis (scaly, inflamed, often with broken hairs and positive mycology)",
+      "Trichotillomania (irregular patches with hairs of varying length)",
+      "Telogen effluvium (diffuse shedding rather than discrete patches)",
+      "Traction alopecia at sites of chronic tension",
+      "Early scarring alopecias such as lichen planopilaris or discoid lupus",
+      "Secondary syphilis producing a moth-eaten pattern"
     ],
-    [
-     "Primary Differentials",
-     "Tinea capitis (scaly, inflamed, often with broken hairs and positive mycology), Trichotillomania (irregular patches with hairs of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Usually a clinical diagnosis aided by dermoscopy showing exclamation-mark hairs, yellow dots, and black dots",
+      "Mycology (scrapings or culture) when tinea capitis cannot be excluded",
+      "Thyroid function and autoantibody testing when clinically indicated",
+      "Scalp biopsy reserved for atypical or diagnostically uncertain cases",
+      "Screening for associated autoimmune disease guided by symptoms"
     ],
-    [
-     "Management Strategy",
-     "Intralesional corticosteroids are first-line for limited patchy scalp disease, with potent topical corticosteroids as an",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or extensive loss suggesting evolution towards totalis or universalis",
+      "Scarring, scale, or follicular destruction indicating a different, potentially permanent alopecia",
+      "Significant psychological distress or impact on functioning requiring support",
+      "Diffuse hair loss with systemic symptoms prompting evaluation for an underlying disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing non-scarring alopecia areata with a scarring alopecia and missing the window for treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable and unpredictable; limited single patches frequently regrow spontaneously within months, whereas early onset, extensive involvement, the ophiasis pattern, nail changes, and atopy predict a more prolonged and relapsing course.",
+    "pitfalls": [
+      "Confusing non-scarring alopecia areata with a scarring alopecia and missing the window for treatment",
+      "Overlooking tinea capitis in children by not performing mycology",
+      "Attributing patchy loss to alopecia areata when hair-length variation points to trichotillomania",
+      "Underestimating the psychological burden and failing to offer support or counselling"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intralesional corticosteroids are first-line for limited patchy scalp disease, with potent topical corticosteroids as an alternative",
+      "Use topical minoxidil as an adjunct to promote regrowth",
+      "For extensive, rapidly progressive or totalis and universalis disease, consider oral JAK inhibitors such as baricitinib or ritlecitinib, which target the interferon-gamma driven JAK-STAT pathway",
+      "Consider topical immunotherapy such as diphencyprone for extensive or chronic patchy disease",
+      "Screen for and manage associated autoimmune conditions such as thyroid disease and vitiligo",
+      "Offer psychological support and camouflage options including wigs and cosmetic measures given the impact on wellbeing",
+      "Refer to dermatology for extensive, refractory or diagnostically uncertain disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for alopecia areata."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alopecia-areata-real-image",
-   "title": "Alopecia Areata: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "alopecia_areata-pathway",
+      "title": "Alopecia Areata: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as sudden, sharply bordered round or oval bald patches on otherwise normal-appearing scalp skin, without scarring or scale",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or extensive loss suggesting evolution towards totalis or universalis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Usually a clinical diagnosis aided by dermoscopy showing exclamation-mark hairs, yellow dots, and black dots, Mycology (scrapings or culture) when tinea capitis cannot be excluded, Thyroid function and autoantibody testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intralesional corticosteroids are first-line for limited patchy scalp disease, with potent topical corticosteroids as an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing non-scarring alopecia areata with a scarring alopecia and missing the window for treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alopecia areata."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alopecia_areata-matrix",
+      "title": "Alopecia Areata: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as sudden, sharply bordered round or oval bald patches on otherwise normal-appearing scalp skin, without scarring or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Usually a clinical diagnosis aided by dermoscopy showing exclamation-mark hairs, yellow dots, and black dots, Mycology (scrapings",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tinea capitis (scaly, inflamed, often with broken hairs and positive mycology), Trichotillomania (irregular patches with hairs of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intralesional corticosteroids are first-line for limited patchy scalp disease, with potent topical corticosteroids as an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing non-scarring alopecia areata with a scarring alopecia and missing the window for treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alopecia areata."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 53-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alopecia_areata-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermoscopy showing exclamation-mark hairs, yellow dots and black dots",
+          "cells": [
+            {
+              "text": "Characteristic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycology by scrapings or culture when tinea capitis cannot be excluded",
+          "cells": [
+            {
+              "text": "Tinea capitis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and autoantibody testing when clinically indicated",
+          "cells": [
+            {
+              "text": "Associated autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp biopsy in atypical or uncertain cases",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair-pull test at the periphery",
+          "cells": [
+            {
+              "text": "Ongoing activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alopecia_areata-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Tinea capitis",
+          "cells": [
+            {
+              "text": "Scaly, inflamed scalp with broken hairs"
+            },
+            {
+              "text": "Mycology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichotillomania",
+          "cells": [
+            {
+              "text": "Irregular patches with hairs of varying length"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Telogen effluvium",
+          "cells": [
+            {
+              "text": "Diffuse shedding rather than discrete patches"
+            },
+            {
+              "text": "Clinical pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traction alopecia",
+          "cells": [
+            {
+              "text": "Loss at sites of chronic tension"
+            },
+            {
+              "text": "Clinical pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen planopilaris or discoid lupus",
+          "cells": [
+            {
+              "text": "Scarring or follicular destruction"
+            },
+            {
+              "text": "Scalp biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alopecia_areata-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "Limited patchy scalp disease"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent topical corticosteroids",
+          "cells": [
+            {
+              "text": "Alternative for limited disease"
+            },
+            {
+              "text": "Alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical minoxidil",
+          "cells": [
+            {
+              "text": "Promotes regrowth"
+            },
+            {
+              "text": "Adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral JAK inhibitors such as baricitinib or ritlecitinib",
+          "cells": [
+            {
+              "text": "Extensive, rapidly progressive, totalis or universalis"
+            },
+            {
+              "text": "Interferon-gamma driven disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical immunotherapy such as diphencyprone",
+          "cells": [
+            {
+              "text": "Extensive or chronic patchy disease"
+            },
+            {
+              "text": "Second line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for thyroid disease and vitiligo",
+          "cells": [
+            {
+              "text": "Associated autoimmune disease"
+            },
+            {
+              "text": "Ongoing screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support, wigs and cosmetic camouflage",
+          "cells": [
+            {
+              "text": "Impact on wellbeing"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alopecia_areata-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of alopecia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "I.A Nonscarring: primary cutaneous disorders",
+          "cells": [
+            {
+              "text": "Telogen effluvium; androgenetic alopecia; alopecia areata; tinea capitis; traumatic alopecia (a)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "I.B Nonscarring: drugs",
+          "cells": [
+            {
+              "text": "Drugs (no individual agents listed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "I.C Nonscarring: systemic diseases",
+          "cells": [
+            {
+              "text": "Systemic lupus erythematosus; secondary syphilis; hypothyroidism; hyperthyroidism; hypopituitarism; deficiencies of protein, iron, biotin, and zinc"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "II.A Scarring: primary cutaneous disorders",
+          "cells": [
+            {
+              "text": "Cutaneous lupus (chronic discoid lesions) (b); lichen planus; central centrifugal cicatricial alopecia; folliculitis decalvans; linear scleroderma (morphea)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "II.B Scarring: systemic diseases",
+          "cells": [
+            {
+              "text": "Discoid lesions in systemic lupus erythematosus (b); sarcoidosis; cutaneous metastases"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnotes a and b are referenced but their text is not on the printed page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alopecia_areata-dx-mgmt",
+      "title": "Diagnosis and management of Alopecia Areata",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden sharply bordered bald patches on normal-looking scalp",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid spread towards totalis or universalis, or scarring with scale?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent dermatology review; treat progressive loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy; mycology if tinea possible; thyroid and autoantibody tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Exclamation-mark hairs and no scarring or scale confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intralesional steroids for limited patchy disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review tinea capitis, trichotillomania, telogen effluvium and scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical minoxidil as adjunct",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "JAK inhibitor for extensive or progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diphencyprone for extensive or chronic patchy disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; single patches often regrow, extensive or atopic disease relapses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

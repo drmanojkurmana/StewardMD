@@ -1,175 +1,482 @@
 {
- "id": "infantile_esotropia",
- "name": "Infantile esotropia",
- "aliases": [
-  "congenital esotropia",
-  "essential infantile esotropia"
- ],
- "class": "non_infective",
- "system": "Visual system",
- "specialty": "Paediatric ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / AAO Basic and Clinical Science Course",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A constant convergent strabismus with onset before 6 months of age in an otherwise neurologically normal child",
-   "Characteristic features are a large and relatively stable angle of esodeviation with cross-fixation, whereby the child uses the adducting eye to view the contralateral field, and often free alternation of fixation",
-   "Associated motor findings that emerge over the first years include inferior oblique overaction, dissociated vertical deviation and latent or manifest nystagmus",
-   "Because fixation often alternates, dense amblyopia is not universal, but a definite fixation preference indicates amblyopia that must be treated",
-   "Refractive error is usually a low, age-appropriate hypermetropia, and the esotropia is not corrected by spectacles, unlike accommodative esotropia",
-   "Cycloplegic refraction and dilated fundus examination are essential to detect significant hypermetropia and to exclude organic causes such as retinoblastoma or optic nerve and retinal disease producing a sensory esotropia",
-   "Amblyopia is treated first with spectacles if indicated and then occlusion or penalisation, and surgical alignment is undertaken early once vision is equalised to give the best chance of binocular cooperation",
-   "Distinguish it from pseudoesotropia, in which prominent epicanthal folds or a broad nasal bridge give a false appearance of esotropia despite a symmetrical corneal light reflex and no shift on cover testing"
+  "id": "infantile_esotropia",
+  "name": "Infantile esotropia",
+  "aliases": [
+    "congenital esotropia",
+    "essential infantile esotropia"
   ],
-  "pathophysiology": "Infantile esotropia is a disorder of early binocular development. Ocular misalignment during the critical period of visual maturation prevents normal development of binocular fusion and stereopsis and disrupts cortical binocular connections, giving rise to the associated motor phenomena of dissociated vertical deviation, latent nystagmus and oblique muscle dysfunction. The precise cause is uncertain and probably multifactorial, reflecting a primary defect in the neural control of ocular alignment and binocularity rather than a simple mechanical or refractive problem; there is a genetic predisposition and an increased incidence with prematurity and neurological impairment.",
-  "additionalDifferentials": [
-   "Pseudoesotropia from epicanthal folds or a wide nasal bridge",
-   "Accommodative esotropia with later onset, associated hypermetropia and improvement with spectacles",
-   "Sensory esotropia from a monocular organic lesion such as cataract, retinoblastoma or optic nerve hypoplasia",
-   "Sixth nerve (abducens) palsy",
-   "Duane retraction syndrome and nystagmus blockage syndrome",
-   "Congenital cranial dysinnervation disorders including Moebius syndrome"
-  ],
-  "additionalInvestigations": [
-   "Cover/uncover and alternate cover testing with corneal light reflex assessment to confirm and measure the deviation",
-   "Cycloplegic refraction to quantify hypermetropia and exclude an accommodative component",
-   "Dilated fundus and red reflex examination to exclude retinoblastoma and other organic causes",
-   "Assessment of fixation preference and visual acuity to detect amblyopia",
-   "Ocular motility examination for inferior oblique overaction, dissociated vertical deviation and any abduction limitation",
-   "Neuroimaging only if an abduction deficit or neurological signs suggest an abducens palsy or intracranial pathology"
-  ],
-  "redFlags": [
-   "Absent red reflex or leukocoria suggesting retinoblastoma or cataract",
-   "Limitation of abduction suggesting a sixth nerve palsy rather than infantile esotropia",
-   "Associated neurological signs, developmental delay or papilloedema",
-   "New-onset esotropia in an older child, or esotropia with diplopia, suggesting raised intracranial pressure",
-   "Progressive or variable deviation accompanied by systemic or neurological features"
-  ],
-  "prognosis": "With early amblyopia treatment and timely surgical alignment, satisfactory ocular alignment is usually achievable, although high-grade stereopsis is often not fully attained. Some children require more than one procedure and need long-term follow-up for recurrence, dissociated vertical deviation and amblyopia.",
-  "pitfalls": [
-   "Mistaking pseudoesotropia for true esotropia, or the reverse, by not checking the corneal light reflex and cover test",
-   "Missing an underlying sensory cause such as retinoblastoma by omitting a dilated fundus examination",
-   "Failing to detect and treat amblyopia before surgery",
-   "Confusing infantile esotropia with an abducens palsy by not testing abduction, for example with the doll's-head manoeuvre",
-   "Delaying referral and surgery beyond the window for developing binocular cooperation"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Pediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct significant hypermetropia found on cycloplegic refraction with spectacles, while recognising that the esotropia itself is not fully abolished by glasses, unlike accommodative esotropia",
-   "Treat amblyopia from a definite fixation preference with occlusion patching or pharmacological penalisation of the preferred eye before surgical alignment",
-   "Perform strabismus surgery, typically bilateral medial rectus recession, in early childhood to realign the eyes and give the best chance of binocular development",
-   "Address associated inferior oblique overaction and dissociated vertical deviation surgically as they emerge",
-   "Provide long-term orthoptic and ophthalmological follow-up for recurrence of deviation, residual amblyopia and evolving motor findings",
-   "Refer to paediatric ophthalmology and orthoptics for coordinated assessment and management",
-   "Escalate for neuroimaging if an abduction deficit or neurological signs suggest an abducens palsy or intracranial pathology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "infantile_esotropia-pathway",
-   "title": "Infantile esotropia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A constant convergent strabismus with onset before 6 months of age in an otherwise neurologically normal child",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Absent red reflex or leukocoria suggesting retinoblastoma or cataract",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cover/uncover and alternate cover testing with corneal light reflex assessment to confirm and measure the deviation, Cycloplegic refraction to quantify hypermetropia and exclude an accommodative component, Dilated fundus"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct significant hypermetropia found on cycloplegic refraction with spectacles, while recognising that the esotropia itself is not fully abolished by glasses, unlike accommodative esotropia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking pseudoesotropia for true esotropia, or the reverse, by not checking the corneal light reflex and cover test"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of infantile esotropia."
-  }
- ],
- "tables": [
-  {
-   "id": "infantile_esotropia-matrix",
-   "title": "Infantile esotropia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A constant convergent strabismus with onset before 6 months of age in an otherwise neurologically normal child",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Visual system",
+  "specialty": "Paediatric ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / AAO Basic and Clinical Science Course",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A constant convergent strabismus with onset before 6 months of age in an otherwise neurologically normal child",
+      "Characteristic features are a large and relatively stable angle of esodeviation with cross-fixation, whereby the child uses the adducting eye to view the contralateral field, and often free alternation of fixation",
+      "Associated motor findings that emerge over the first years include inferior oblique overaction, dissociated vertical deviation and latent or manifest nystagmus",
+      "Because fixation often alternates, dense amblyopia is not universal, but a definite fixation preference indicates amblyopia that must be treated",
+      "Refractive error is usually a low, age-appropriate hypermetropia, and the esotropia is not corrected by spectacles, unlike accommodative esotropia",
+      "Cycloplegic refraction and dilated fundus examination are essential to detect significant hypermetropia and to exclude organic causes such as retinoblastoma or optic nerve and retinal disease producing a sensory esotropia",
+      "Amblyopia is treated first with spectacles if indicated and then occlusion or penalisation, and surgical alignment is undertaken early once vision is equalised to give the best chance of binocular cooperation",
+      "Distinguish it from pseudoesotropia, in which prominent epicanthal folds or a broad nasal bridge give a false appearance of esotropia despite a symmetrical corneal light reflex and no shift on cover testing"
     ],
-    [
-     "Key Investigations",
-     "Cover/uncover and alternate cover testing with corneal light reflex assessment to confirm and measure the deviation, Cycloplegic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infantile esotropia is a disorder of early binocular development. Ocular misalignment during the critical period of visual maturation prevents normal development of binocular fusion and stereopsis and disrupts cortical binocular connections, giving rise to the associated motor phenomena of dissociated vertical deviation, latent nystagmus and oblique muscle dysfunction. The precise cause is uncertain and probably multifactorial, reflecting a primary defect in the neural control of ocular alignment and binocularity rather than a simple mechanical or refractive problem; there is a genetic predisposition and an increased incidence with prematurity and neurological impairment.",
+    "additionalDifferentials": [
+      "Pseudoesotropia from epicanthal folds or a wide nasal bridge",
+      "Accommodative esotropia with later onset, associated hypermetropia and improvement with spectacles",
+      "Sensory esotropia from a monocular organic lesion such as cataract, retinoblastoma or optic nerve hypoplasia",
+      "Sixth nerve (abducens) palsy",
+      "Duane retraction syndrome and nystagmus blockage syndrome",
+      "Congenital cranial dysinnervation disorders including Moebius syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Pseudoesotropia from epicanthal folds or a wide nasal bridge, Accommodative esotropia with later onset, associated hypermetropia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cover/uncover and alternate cover testing with corneal light reflex assessment to confirm and measure the deviation",
+      "Cycloplegic refraction to quantify hypermetropia and exclude an accommodative component",
+      "Dilated fundus and red reflex examination to exclude retinoblastoma and other organic causes",
+      "Assessment of fixation preference and visual acuity to detect amblyopia",
+      "Ocular motility examination for inferior oblique overaction, dissociated vertical deviation and any abduction limitation",
+      "Neuroimaging only if an abduction deficit or neurological signs suggest an abducens palsy or intracranial pathology"
     ],
-    [
-     "Management Strategy",
-     "Correct significant hypermetropia found on cycloplegic refraction with spectacles, while recognising that the esotropia itself is",
-     "Core treatment modality"
+    "redFlags": [
+      "Absent red reflex or leukocoria suggesting retinoblastoma or cataract",
+      "Limitation of abduction suggesting a sixth nerve palsy rather than infantile esotropia",
+      "Associated neurological signs, developmental delay or papilloedema",
+      "New-onset esotropia in an older child, or esotropia with diplopia, suggesting raised intracranial pressure",
+      "Progressive or variable deviation accompanied by systemic or neurological features"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking pseudoesotropia for true esotropia, or the reverse, by not checking the corneal light reflex and cover test",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early amblyopia treatment and timely surgical alignment, satisfactory ocular alignment is usually achievable, although high-grade stereopsis is often not fully attained. Some children require more than one procedure and need long-term follow-up for recurrence, dissociated vertical deviation and amblyopia.",
+    "pitfalls": [
+      "Mistaking pseudoesotropia for true esotropia, or the reverse, by not checking the corneal light reflex and cover test",
+      "Missing an underlying sensory cause such as retinoblastoma by omitting a dilated fundus examination",
+      "Failing to detect and treat amblyopia before surgery",
+      "Confusing infantile esotropia with an abducens palsy by not testing abduction, for example with the doll's-head manoeuvre",
+      "Delaying referral and surgery beyond the window for developing binocular cooperation"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Pediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct significant hypermetropia found on cycloplegic refraction with spectacles, while recognising that the esotropia itself is not fully abolished by glasses, unlike accommodative esotropia",
+      "Treat amblyopia from a definite fixation preference with occlusion patching or pharmacological penalisation of the preferred eye before surgical alignment",
+      "Perform strabismus surgery, typically bilateral medial rectus recession, in early childhood to realign the eyes and give the best chance of binocular development",
+      "Address associated inferior oblique overaction and dissociated vertical deviation surgically as they emerge",
+      "Provide long-term orthoptic and ophthalmological follow-up for recurrence of deviation, residual amblyopia and evolving motor findings",
+      "Refer to paediatric ophthalmology and orthoptics for coordinated assessment and management",
+      "Escalate for neuroimaging if an abduction deficit or neurological signs suggest an abducens palsy or intracranial pathology"
     ]
-   ],
-   "caption": "Overview comparison matrix for infantile esotropia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "infantile-esotropia-real-image",
-   "title": "Infantile esotropia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "infantile_esotropia-pathway",
+      "title": "Infantile esotropia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A constant convergent strabismus with onset before 6 months of age in an otherwise neurologically normal child",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Absent red reflex or leukocoria suggesting retinoblastoma or cataract",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cover/uncover and alternate cover testing with corneal light reflex assessment to confirm and measure the deviation, Cycloplegic refraction to quantify hypermetropia and exclude an accommodative component, Dilated fundus"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct significant hypermetropia found on cycloplegic refraction with spectacles, while recognising that the esotropia itself is not fully abolished by glasses, unlike accommodative esotropia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking pseudoesotropia for true esotropia, or the reverse, by not checking the corneal light reflex and cover test"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of infantile esotropia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "infantile_esotropia-matrix",
+      "title": "Infantile esotropia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A constant convergent strabismus with onset before 6 months of age in an otherwise neurologically normal child",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cover/uncover and alternate cover testing with corneal light reflex assessment to confirm and measure the deviation, Cycloplegic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pseudoesotropia from epicanthal folds or a wide nasal bridge, Accommodative esotropia with later onset, associated hypermetropia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct significant hypermetropia found on cycloplegic refraction with spectacles, while recognising that the esotropia itself is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking pseudoesotropia for true esotropia, or the reverse, by not checking the corneal light reflex and cover test",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for infantile esotropia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / AAO Basic and Clinical Science Course",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_esotropia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cover and alternate cover testing with corneal light reflex",
+          "cells": [
+            {
+              "text": "Confirms and measures the deviation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Hypermetropia; accommodative component excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus and red reflex examination",
+          "cells": [
+            {
+              "text": "Retinoblastoma and other organic causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fixation preference and visual acuity",
+          "cells": [
+            {
+              "text": "Amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular motility examination",
+          "cells": [
+            {
+              "text": "Inferior oblique overaction, dissociated vertical deviation, abduction limitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Only if abduction deficit or neurological signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_esotropia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudoesotropia",
+          "cells": [
+            {
+              "text": "Epicanthal folds or wide nasal bridge; excluded by corneal light reflex and cover test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accommodative esotropia",
+          "cells": [
+            {
+              "text": "Later onset with hypermetropia; improves with spectacles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sixth nerve (abducens) palsy",
+          "cells": [
+            {
+              "text": "Limitation of abduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory esotropia from a monocular organic lesion",
+          "cells": [
+            {
+              "text": "Cataract, retinoblastoma or optic nerve hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_esotropia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Spectacles",
+          "cells": [
+            {
+              "text": "Significant hypermetropia on cycloplegic refraction; esotropia not fully abolished by glasses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Occlusion or penalisation of the preferred eye before surgical alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early surgery",
+          "cells": [
+            {
+              "text": "Typically bilateral medial rectus recession in early childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated motor findings",
+          "cells": [
+            {
+              "text": "Inferior oblique overaction and dissociated vertical deviation treated surgically as they emerge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Orthoptic and ophthalmological follow-up for recurrence and residual amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Neuroimaging if an abduction deficit or neurological signs are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_esotropia-dx-mgmt",
+      "title": "Diagnosis and management of Infantile esotropia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Constant convergent squint before six months in a neurologically normal infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Absent red reflex, limited abduction, neurological signs or diplopia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent fundus examination; neuroimaging for abducens palsy or raised ICP",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cover test, corneal light reflex, cycloplegic refraction, fundus and motility",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Normal abduction and red reflex with infantile esotropia pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sixth nerve palsy, sensory or accommodative esotropia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Spectacles for significant hypermetropia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occlusion or penalisation for amblyopia before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early bilateral medial rectus recession",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for oblique overaction and vertical deviation as they emerge",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term orthoptic follow-up for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Alignment and binocular development targeted; amblyopia and recurrence monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

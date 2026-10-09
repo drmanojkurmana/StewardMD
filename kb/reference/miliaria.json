@@ -1,173 +1,404 @@
 {
- "id": "miliaria",
- "name": "Miliaria",
- "aliases": [
-  "heat rash",
-  "prickly heat",
-  "sweat rash",
-  "miliaria rubra",
-  "miliaria crystallina"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Miliaria arises from blockage of eccrine sweat ducts, so it favours hot, humid conditions, febrile illness, occlusion, and overdressing, and is common in neonates and in the newly bedridden",
-   "The subtype reflects the depth of duct obstruction: crystallina shows tiny clear, easily ruptured superficial vesicles; rubra produces itchy or prickly erythematous papulovesicles; and the deeper profunda presents as firm, skin-coloured papules",
-   "Typical sites are areas of occlusion and friction such as the trunk, flexures, and skin under clothing or dressings",
-   "In infants it commonly affects the neck, groin, and axillae and is easily provoked by warm environments and heavy wrapping",
-   "The cornerstone of management is cooling and reducing sweating: a cooler environment, loose breathable clothing, and avoiding occlusion, which allow the ducts to reopen",
-   "It is generally self-limiting once the provoking heat and occlusion are removed, and specific drug treatment is rarely needed",
-   "Widespread deep miliaria can impair sweating and predispose to heat intolerance and, in extreme heat, heat exhaustion",
-   "Secondary bacterial infection (miliaria pustulosa) can complicate the picture if lesions are scratched or persist"
+  "id": "miliaria",
+  "name": "Miliaria",
+  "aliases": [
+    "heat rash",
+    "prickly heat",
+    "sweat rash",
+    "miliaria rubra",
+    "miliaria crystallina"
   ],
-  "pathophysiology": "Miliaria results from obstruction of the eccrine sweat ducts, which causes sweat to leak into the surrounding skin rather than reach the surface. Keratin plugging of the duct, often aggravated by an overgrowth of skin flora producing occlusive material, blocks flow at varying levels. The level of the block determines the clinical form: obstruction within the stratum corneum causes the superficial vesicles of crystallina, blockage within the epidermis produces the inflammatory papulovesicles of rubra, and obstruction at the dermo-epidermal junction gives the deeper papules of profunda. The extravasated sweat provokes local inflammation and the sensation of prickling, while widespread duct blockage can compromise thermoregulation.",
-  "additionalDifferentials": [
-   "Folliculitis",
-   "Acute eczema or contact dermatitis",
-   "Candidal intertrigo in flexures",
-   "Viral exanthem or drug eruption",
-   "Neonatal erythema toxicum or transient neonatal pustular melanosis",
-   "Grover's disease (transient acantholytic dermatosis) in adults"
-  ],
-  "additionalInvestigations": [
-   "Diagnosis is clinical, based on morphology and a history of heat, occlusion, or fever",
-   "Skin swab if secondary bacterial infection (pustular miliaria) is suspected",
-   "Investigations are seldom required, and biopsy is reserved for atypical or persistent cases",
-   "Assessment of the environment and clothing or dressing practices, especially in infants and bedridden patients"
-  ],
-  "redFlags": [
-   "Extensive deep (profunda) involvement impairing sweating with symptoms of heat intolerance or heat exhaustion",
-   "Signs of secondary bacterial infection such as pustules, increasing pain, or spreading erythema",
-   "Systemic upset or fever suggesting an alternative or complicating diagnosis",
-   "Failure to settle after removing heat and occlusion, prompting reconsideration of the diagnosis"
-  ],
-  "prognosis": "Miliaria is benign and typically resolves quickly once overheating and occlusion are addressed; recurrence is common with repeated heat exposure, and only extensive deep disease or secondary infection causes significant problems.",
-  "pitfalls": [
-   "Treating with occlusive creams or heavy dressings that worsen duct blockage",
-   "Overwrapping or overdressing infants and perpetuating the rash",
-   "Mistaking pustular miliaria with secondary infection for a primary bacterial folliculitis or vice versa",
-   "Overlooking impaired thermoregulation in extensive deep disease during hot conditions"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cool the patient and reduce sweating with a cooler, less humid environment and air conditioning to allow the ducts to reopen",
-   "Wear loose, breathable clothing and avoid occlusive fabrics, dressings and overdressing",
-   "In infants, avoid heavy wrapping and keep the neck, groin and axillae cool and dry",
-   "Relieve the itch and prickling of miliaria rubra with cooling measures and, if needed, a short course of a topical corticosteroid",
-   "Treat secondary bacterial infection (pustular miliaria) with topical or systemic antibiotics guided by swab",
-   "Reassure that the condition is self-limiting once overheating and occlusion are removed, and advise avoiding future heat exposure to prevent recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "miliaria-pathway",
-   "title": "Miliaria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Miliaria arises from blockage of eccrine sweat ducts, so it favours hot, humid conditions, febrile illness, occlusion, and overdressing, and is common in neonates and in the newly bedridden",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive deep (profunda) involvement impairing sweating with symptoms of heat intolerance or heat exhaustion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diagnosis is clinical, based on morphology and a history of heat, occlusion, or fever, Skin swab if secondary bacterial infection (pustular miliaria) is suspected, Investigations are seldom required, and biopsy is reserved"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cool the patient and reduce sweating with a cooler, less humid environment and air conditioning to allow the ducts to reopen"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating with occlusive creams or heavy dressings that worsen duct blockage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of miliaria."
-  }
- ],
- "tables": [
-  {
-   "id": "miliaria-matrix",
-   "title": "Miliaria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Miliaria arises from blockage of eccrine sweat ducts, so it favours hot, humid conditions, febrile illness, occlusion, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Miliaria arises from blockage of eccrine sweat ducts, so it favours hot, humid conditions, febrile illness, occlusion, and overdressing, and is common in neonates and in the newly bedridden",
+      "The subtype reflects the depth of duct obstruction: crystallina shows tiny clear, easily ruptured superficial vesicles; rubra produces itchy or prickly erythematous papulovesicles; and the deeper profunda presents as firm, skin-coloured papules",
+      "Typical sites are areas of occlusion and friction such as the trunk, flexures, and skin under clothing or dressings",
+      "In infants it commonly affects the neck, groin, and axillae and is easily provoked by warm environments and heavy wrapping",
+      "The cornerstone of management is cooling and reducing sweating: a cooler environment, loose breathable clothing, and avoiding occlusion, which allow the ducts to reopen",
+      "It is generally self-limiting once the provoking heat and occlusion are removed, and specific drug treatment is rarely needed",
+      "Widespread deep miliaria can impair sweating and predispose to heat intolerance and, in extreme heat, heat exhaustion",
+      "Secondary bacterial infection (miliaria pustulosa) can complicate the picture if lesions are scratched or persist"
     ],
-    [
-     "Key Investigations",
-     "Diagnosis is clinical, based on morphology and a history of heat, occlusion, or fever, Skin swab if secondary bacterial infection",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Miliaria results from obstruction of the eccrine sweat ducts, which causes sweat to leak into the surrounding skin rather than reach the surface. Keratin plugging of the duct, often aggravated by an overgrowth of skin flora producing occlusive material, blocks flow at varying levels. The level of the block determines the clinical form: obstruction within the stratum corneum causes the superficial vesicles of crystallina, blockage within the epidermis produces the inflammatory papulovesicles of rubra, and obstruction at the dermo-epidermal junction gives the deeper papules of profunda. The extravasated sweat provokes local inflammation and the sensation of prickling, while widespread duct blockage can compromise thermoregulation.",
+    "additionalDifferentials": [
+      "Folliculitis",
+      "Acute eczema or contact dermatitis",
+      "Candidal intertrigo in flexures",
+      "Viral exanthem or drug eruption",
+      "Neonatal erythema toxicum or transient neonatal pustular melanosis",
+      "Grover's disease (transient acantholytic dermatosis) in adults"
     ],
-    [
-     "Primary Differentials",
-     "Folliculitis, Acute eczema or contact dermatitis, Candidal intertrigo in flexures",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diagnosis is clinical, based on morphology and a history of heat, occlusion, or fever",
+      "Skin swab if secondary bacterial infection (pustular miliaria) is suspected",
+      "Investigations are seldom required, and biopsy is reserved for atypical or persistent cases",
+      "Assessment of the environment and clothing or dressing practices, especially in infants and bedridden patients"
     ],
-    [
-     "Management Strategy",
-     "Cool the patient and reduce sweating with a cooler, less humid environment and air conditioning to allow the ducts to reopen",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive deep (profunda) involvement impairing sweating with symptoms of heat intolerance or heat exhaustion",
+      "Signs of secondary bacterial infection such as pustules, increasing pain, or spreading erythema",
+      "Systemic upset or fever suggesting an alternative or complicating diagnosis",
+      "Failure to settle after removing heat and occlusion, prompting reconsideration of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating with occlusive creams or heavy dressings that worsen duct blockage",
-     "Prevent diagnostic or management error"
+    "prognosis": "Miliaria is benign and typically resolves quickly once overheating and occlusion are addressed; recurrence is common with repeated heat exposure, and only extensive deep disease or secondary infection causes significant problems.",
+    "pitfalls": [
+      "Treating with occlusive creams or heavy dressings that worsen duct blockage",
+      "Overwrapping or overdressing infants and perpetuating the rash",
+      "Mistaking pustular miliaria with secondary infection for a primary bacterial folliculitis or vice versa",
+      "Overlooking impaired thermoregulation in extensive deep disease during hot conditions"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cool the patient and reduce sweating with a cooler, less humid environment and air conditioning to allow the ducts to reopen",
+      "Wear loose, breathable clothing and avoid occlusive fabrics, dressings and overdressing",
+      "In infants, avoid heavy wrapping and keep the neck, groin and axillae cool and dry",
+      "Relieve the itch and prickling of miliaria rubra with cooling measures and, if needed, a short course of a topical corticosteroid",
+      "Treat secondary bacterial infection (pustular miliaria) with topical or systemic antibiotics guided by swab",
+      "Reassure that the condition is self-limiting once overheating and occlusion are removed, and advise avoiding future heat exposure to prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for miliaria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "miliaria-real-image",
-   "title": "Miliaria: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "miliaria-pathway",
+      "title": "Miliaria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Miliaria arises from blockage of eccrine sweat ducts, so it favours hot, humid conditions, febrile illness, occlusion, and overdressing, and is common in neonates and in the newly bedridden",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive deep (profunda) involvement impairing sweating with symptoms of heat intolerance or heat exhaustion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diagnosis is clinical, based on morphology and a history of heat, occlusion, or fever, Skin swab if secondary bacterial infection (pustular miliaria) is suspected, Investigations are seldom required, and biopsy is reserved"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cool the patient and reduce sweating with a cooler, less humid environment and air conditioning to allow the ducts to reopen"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating with occlusive creams or heavy dressings that worsen duct blockage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of miliaria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "miliaria-matrix",
+      "title": "Miliaria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Miliaria arises from blockage of eccrine sweat ducts, so it favours hot, humid conditions, febrile illness, occlusion, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diagnosis is clinical, based on morphology and a history of heat, occlusion, or fever, Skin swab if secondary bacterial infection",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Folliculitis, Acute eczema or contact dermatitis, Candidal intertrigo in flexures",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cool the patient and reduce sweating with a cooler, less humid environment and air conditioning to allow the ducts to reopen",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating with occlusive creams or heavy dressings that worsen duct blockage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for miliaria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "miliaria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from morphology and history of heat, occlusion or fever",
+          "cells": [
+            {
+              "text": "Morphology with heat or occlusion history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swab, if secondary bacterial infection is suspected",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection in pustular miliaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy, for atypical or persistent cases",
+          "cells": [
+            {
+              "text": "Atypical or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the environment and clothing or dressing practices",
+          "cells": [
+            {
+              "text": "Heat, occlusion and clothing practices"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "miliaria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cooling",
+          "cells": [
+            {
+              "text": "A cooler, less humid environment and air conditioning, to let the ducts reopen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loose, breathable clothing",
+          "cells": [
+            {
+              "text": "Avoid occlusive fabrics, dressings and overdressing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infant care",
+          "cells": [
+            {
+              "text": "Avoid heavy wrapping; keep the neck, groin and axillae cool and dry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itch relief",
+          "cells": [
+            {
+              "text": "Cooling measures and, if needed, a short course of topical corticosteroid for miliaria rubra"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary infection",
+          "cells": [
+            {
+              "text": "Topical or systemic antibiotics guided by swab for pustular miliaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Self-limiting once overheating and occlusion are removed; avoid future heat exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "miliaria-dx-mgmt",
+      "title": "Diagnosis and management of Miliaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Itchy, prickly papules or pustules after heat, sweating or occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Deep involvement with heat intolerance, spreading erythema, pain or fever?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat secondary bacterial infection; reconsider the diagnosis if systemically unwell",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; skin swab if pustules; biopsy only if atypical or persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the picture settle after cooling and removing occlusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Failure to settle: reconsider the diagnosis and biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cool the patient in a cooler, less humid environment with air conditioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Loose, breathable clothing; avoid occlusive fabrics and overdressing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "In infants, avoid heavy wrapping; keep neck, groin and axillae cool and dry",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics guided by swab for secondary pustular infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting once overheating and occlusion are removed; avoid future heat exposure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

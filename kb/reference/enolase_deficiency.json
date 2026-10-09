@@ -1,173 +1,471 @@
 {
- "id": "enolase_deficiency",
- "name": "Erythrocyte enolase deficiency",
- "aliases": [
-  "red-cell enolase deficiency",
-  "phosphopyruvate hydratase deficiency",
-  "ENO1 gene"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A very rare glycolytic enzymopathy causing chronic non-spherocytic, Coombs-negative haemolytic anaemia",
-   "Reported in a small number of families, with an inheritance pattern consistent with an autosomal defect and reduced enzyme activity in affected members",
-   "Haemolysis may be exacerbated by oxidant drug exposure in some reports, so a careful drug history is worthwhile",
-   "The blood film shows non-specific changes without spherocytes, in keeping with a metabolic red-cell defect",
-   "Partial enzyme deficiency can be present in clinically unaffected relatives, complicating interpretation of assay results",
-   "Diagnosis relies on demonstrating reduced red-cell enolase activity and, where feasible, confirmatory genetic testing",
-   "Management is supportive with folate, transfusion when required and consideration of splenectomy in more severe disease"
+  "id": "enolase_deficiency",
+  "name": "Erythrocyte enolase deficiency",
+  "aliases": [
+    "red-cell enolase deficiency",
+    "phosphopyruvate hydratase deficiency",
+    "ENO1 gene"
   ],
-  "pathophysiology": "Enolase catalyses the conversion of 2-phosphoglycerate to phosphoenolpyruvate in the energy-yielding phase of glycolysis, the mature red cell's only route to ATP. Reduced enzyme activity limits glycolytic flux and ATP generation, impairing the cell's capacity to maintain ion gradients and membrane deformability and leading to premature destruction and a chronic non-spherocytic haemolytic anaemia. As with several glycolytic defects, the erythrocyte's inability to compensate through mitochondrial metabolism underlies its particular vulnerability.",
-  "additionalDifferentials": [
-   "Pyruvate kinase deficiency",
-   "Glucose phosphate isomerase deficiency",
-   "Glucose-6-phosphate dehydrogenase deficiency",
-   "Autoimmune haemolytic anaemia",
-   "Hereditary spherocytosis and membrane disorders",
-   "Unstable haemoglobin variants"
-  ],
-  "additionalInvestigations": [
-   "Red-cell enolase enzyme activity assay",
-   "Full blood count, reticulocyte count and blood film",
-   "Haemolysis screen including bilirubin, lactate dehydrogenase and haptoglobin",
-   "Direct antiglobulin test to exclude immune haemolysis",
-   "Family studies with enzyme levels in relatives",
-   "Molecular genetic testing where available"
-  ],
-  "redFlags": [
-   "Acute worsening of anaemia after oxidant drug exposure",
-   "Aplastic crisis precipitated by parvovirus B19 infection",
-   "Severe symptomatic anaemia requiring transfusion",
-   "Transfusional iron overload with long-term support"
-  ],
-  "prognosis": "Reported cases suggest a chronic but generally manageable haemolytic anaemia; severity varies between families and the rarity of the condition limits firm prognostic statements.",
-  "pitfalls": [
-   "Over-interpreting a partial enzyme reduction in an asymptomatic relative as diagnostic",
-   "Not seeking an oxidant drug trigger for episodic worsening",
-   "Assuming a membrane disorder in the absence of spherocytes rather than pursuing enzyme assays",
-   "Neglecting iron-overload surveillance in transfused patients"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Wintrobe's Clinical Hematology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific enzyme replacement exists; management is supportive for the chronic non-spherocytic haemolytic anaemia",
-   "Avoid oxidant drugs that may exacerbate haemolysis, taking a careful drug history",
-   "Transfuse red cells for symptomatic or severe anaemia, particularly during haemolytic exacerbations",
-   "Give folate supplementation to support the increased erythropoietic turnover",
-   "Monitor for transfusional iron overload and provide iron chelation where required",
-   "Ensure protective vaccination and monitoring around splenectomy if considered for severe transfusion-dependent disease",
-   "Confirm the diagnosis with a red-cell enolase activity assay and genetic testing, offering family assessment and genetic counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "enolase_deficiency-pathway",
-   "title": "Erythrocyte enolase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A very rare glycolytic enzymopathy causing chronic non-spherocytic, Coombs-negative haemolytic anaemia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute worsening of anaemia after oxidant drug exposure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Red-cell enolase enzyme activity assay, Full blood count, reticulocyte count and blood film, Haemolysis screen including bilirubin, lactate dehydrogenase and haptoglobin"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific enzyme replacement exists; management is supportive for the chronic non-spherocytic haemolytic anaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Over-interpreting a partial enzyme reduction in an asymptomatic relative as diagnostic"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of erythrocyte enolase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "enolase_deficiency-matrix",
-   "title": "Erythrocyte enolase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A very rare glycolytic enzymopathy causing chronic non-spherocytic, Coombs-negative haemolytic anaemia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A very rare glycolytic enzymopathy causing chronic non-spherocytic, Coombs-negative haemolytic anaemia",
+      "Reported in a small number of families, with an inheritance pattern consistent with an autosomal defect and reduced enzyme activity in affected members",
+      "Haemolysis may be exacerbated by oxidant drug exposure in some reports, so a careful drug history is worthwhile",
+      "The blood film shows non-specific changes without spherocytes, in keeping with a metabolic red-cell defect",
+      "Partial enzyme deficiency can be present in clinically unaffected relatives, complicating interpretation of assay results",
+      "Diagnosis relies on demonstrating reduced red-cell enolase activity and, where feasible, confirmatory genetic testing",
+      "Management is supportive with folate, transfusion when required and consideration of splenectomy in more severe disease"
     ],
-    [
-     "Key Investigations",
-     "Red-cell enolase enzyme activity assay, Full blood count, reticulocyte count and blood film, Haemolysis screen including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Enolase catalyses the conversion of 2-phosphoglycerate to phosphoenolpyruvate in the energy-yielding phase of glycolysis, the mature red cell's only route to ATP. Reduced enzyme activity limits glycolytic flux and ATP generation, impairing the cell's capacity to maintain ion gradients and membrane deformability and leading to premature destruction and a chronic non-spherocytic haemolytic anaemia. As with several glycolytic defects, the erythrocyte's inability to compensate through mitochondrial metabolism underlies its particular vulnerability.",
+    "additionalDifferentials": [
+      "Pyruvate kinase deficiency",
+      "Glucose phosphate isomerase deficiency",
+      "Glucose-6-phosphate dehydrogenase deficiency",
+      "Autoimmune haemolytic anaemia",
+      "Hereditary spherocytosis and membrane disorders",
+      "Unstable haemoglobin variants"
     ],
-    [
-     "Primary Differentials",
-     "Pyruvate kinase deficiency, Glucose phosphate isomerase deficiency, Glucose-6-phosphate dehydrogenase deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Red-cell enolase enzyme activity assay",
+      "Full blood count, reticulocyte count and blood film",
+      "Haemolysis screen including bilirubin, lactate dehydrogenase and haptoglobin",
+      "Direct antiglobulin test to exclude immune haemolysis",
+      "Family studies with enzyme levels in relatives",
+      "Molecular genetic testing where available"
     ],
-    [
-     "Management Strategy",
-     "No specific enzyme replacement exists; management is supportive for the chronic non-spherocytic haemolytic anaemia",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute worsening of anaemia after oxidant drug exposure",
+      "Aplastic crisis precipitated by parvovirus B19 infection",
+      "Severe symptomatic anaemia requiring transfusion",
+      "Transfusional iron overload with long-term support"
     ],
-    [
-     "Clinical Pitfall",
-     "Over-interpreting a partial enzyme reduction in an asymptomatic relative as diagnostic",
-     "Prevent diagnostic or management error"
+    "prognosis": "Reported cases suggest a chronic but generally manageable haemolytic anaemia; severity varies between families and the rarity of the condition limits firm prognostic statements.",
+    "pitfalls": [
+      "Over-interpreting a partial enzyme reduction in an asymptomatic relative as diagnostic",
+      "Not seeking an oxidant drug trigger for episodic worsening",
+      "Assuming a membrane disorder in the absence of spherocytes rather than pursuing enzyme assays",
+      "Neglecting iron-overload surveillance in transfused patients"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Wintrobe's Clinical Hematology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific enzyme replacement exists; management is supportive for the chronic non-spherocytic haemolytic anaemia",
+      "Avoid oxidant drugs that may exacerbate haemolysis, taking a careful drug history",
+      "Transfuse red cells for symptomatic or severe anaemia, particularly during haemolytic exacerbations",
+      "Give folate supplementation to support the increased erythropoietic turnover",
+      "Monitor for transfusional iron overload and provide iron chelation where required",
+      "Ensure protective vaccination and monitoring around splenectomy if considered for severe transfusion-dependent disease",
+      "Confirm the diagnosis with a red-cell enolase activity assay and genetic testing, offering family assessment and genetic counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for erythrocyte enolase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "enolase-deficiency-real-image",
-   "title": "Erythrocyte enolase deficiency: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "enolase_deficiency-pathway",
+      "title": "Erythrocyte enolase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A very rare glycolytic enzymopathy causing chronic non-spherocytic, Coombs-negative haemolytic anaemia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute worsening of anaemia after oxidant drug exposure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Red-cell enolase enzyme activity assay, Full blood count, reticulocyte count and blood film, Haemolysis screen including bilirubin, lactate dehydrogenase and haptoglobin"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific enzyme replacement exists; management is supportive for the chronic non-spherocytic haemolytic anaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Over-interpreting a partial enzyme reduction in an asymptomatic relative as diagnostic"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of erythrocyte enolase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "enolase_deficiency-matrix",
+      "title": "Erythrocyte enolase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A very rare glycolytic enzymopathy causing chronic non-spherocytic, Coombs-negative haemolytic anaemia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Red-cell enolase enzyme activity assay, Full blood count, reticulocyte count and blood film, Haemolysis screen including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pyruvate kinase deficiency, Glucose phosphate isomerase deficiency, Glucose-6-phosphate dehydrogenase deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific enzyme replacement exists; management is supportive for the chronic non-spherocytic haemolytic anaemia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-interpreting a partial enzyme reduction in an asymptomatic relative as diagnostic",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for erythrocyte enolase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "enolase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Red-cell enolase activity assay",
+          "cells": [
+            {
+              "text": "Reduced red-cell enolase activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocyte count and blood film",
+          "cells": [
+            {
+              "text": "Non-specific changes, without spherocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen",
+          "cells": [
+            {
+              "text": "Bilirubin, lactate dehydrogenase and haptoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Excludes immune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family enzyme studies",
+          "cells": [
+            {
+              "text": "Partial deficiency can occur in unaffected relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirmatory, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enolase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary spherocytosis and membrane disorders",
+          "cells": [
+            {
+              "text": "Spherocytes are absent, pointing to a metabolic red-cell defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Coombs-negative haemolysis; the direct antiglobulin test excludes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enolase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No specific enzyme replacement exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid oxidant drugs",
+          "cells": [
+            {
+              "text": "Careful drug history; oxidant drugs may exacerbate haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red cell transfusion",
+          "cells": [
+            {
+              "text": "Symptomatic or severe anaemia, especially in haemolytic exacerbations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folate supplementation",
+          "cells": [
+            {
+              "text": "Supports increased erythropoietic turnover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron overload surveillance",
+          "cells": [
+            {
+              "text": "Monitor for transfusional iron overload and chelate where required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy consideration",
+          "cells": [
+            {
+              "text": "Protective vaccination and monitoring if considered for severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family assessment",
+          "cells": [
+            {
+              "text": "Enzyme and genetic testing in relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "enolase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Erythrocyte enolase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic non-spherocytic, Coombs-negative haemolytic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute worsening after oxidant drug, aplastic crisis, severe anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Transfuse for severe anaemia; review oxidant drug exposure and parvovirus B19",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Red-cell enolase activity assay, blood film, haemolysis screen and DAT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reduced red-cell enolase activity confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pyruvate kinase deficiency or other red-cell enzymopathies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid oxidant drugs; take a careful drug history",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transfuse red cells for symptomatic or severe anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Folate supplementation for increased erythropoietic turnover",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor and chelate transfusional iron overload where required",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Family studies and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic but generally manageable haemolysis; severity varies by family",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

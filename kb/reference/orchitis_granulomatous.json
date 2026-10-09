@@ -1,172 +1,445 @@
 {
- "id": "orchitis_granulomatous",
- "name": "Idiopathic granulomatous orchitis",
- "aliases": [
-  "granulomatous orchitis",
-  "idiopathic granulomatous orchitis",
-  "non-specific granulomatous orchitis"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Idiopathic granulomatous orchitis is a rare non-infective inflammatory condition that characteristically mimics a testicular tumour, usually in middle-aged men",
-   "It presents as a firm, sometimes tender, testicular mass or diffuse enlargement, often with a preceding history of trauma or infection",
-   "Germ cell tumour markers are normal, but this does not reliably distinguish it from a testicular tumour, so malignancy remains the primary concern",
-   "Ultrasound findings are non-specific and may resemble a neoplasm, and the diagnosis is frequently only made on histology after orchidectomy",
-   "It is a diagnosis of exclusion once specific granulomatous causes such as tuberculosis, other infections, and sarcoidosis have been considered",
-   "Because a tumour cannot be confidently excluded preoperatively, many patients undergo radical inguinal orchidectomy, which is both diagnostic and therapeutic",
-   "Where diagnosis can be established without radical surgery, anti-inflammatory or immunosuppressive treatment may be considered, but tumour must first be excluded"
+  "id": "orchitis_granulomatous",
+  "name": "Idiopathic granulomatous orchitis",
+  "aliases": [
+    "granulomatous orchitis",
+    "idiopathic granulomatous orchitis",
+    "non-specific granulomatous orchitis"
   ],
-  "pathophysiology": "Idiopathic granulomatous orchitis is thought to represent an autoimmune or hypersensitivity reaction to extravasated sperm antigens, sometimes following trauma, infection, or obstruction that breaches the blood-testis barrier. The exposed germ cell antigens provoke a granulomatous inflammatory response within the seminiferous tubules and interstitium, with destruction of the tubules and formation of a firm mass. By definition, no specific infective organism or systemic granulomatous disease is identified, and the resulting swelling can closely imitate a testicular neoplasm.",
-  "additionalDifferentials": [
-   "Germ cell tumour of the testis",
-   "Testicular lymphoma",
-   "Tuberculous orchitis or epididymo-orchitis",
-   "Other infective granulomatous orchitis (e.g. fungal, brucellosis)",
-   "Sarcoidosis involving the testis",
-   "Chronic bacterial epididymo-orchitis"
-  ],
-  "additionalInvestigations": [
-   "Scrotal ultrasound to characterise the mass and assess the epididymis",
-   "Serum AFP, beta-hCG, and LDH (typically normal) to help assess for germ cell tumour",
-   "Urinalysis, culture, and tests for tuberculosis and other infections",
-   "Investigations for sarcoidosis when clinically suggested",
-   "Radical inguinal orchidectomy with histology when malignancy cannot be excluded",
-   "Histopathological review to confirm non-specific granulomatous inflammation"
-  ],
-  "redFlags": [
-   "Features indistinguishable from a testicular tumour on examination and imaging",
-   "Rapidly enlarging or hard testicular mass",
-   "Systemic symptoms suggesting tuberculosis or malignancy",
-   "Constitutional upset or nodal enlargement raising concern for lymphoma"
-  ],
-  "prognosis": "The condition itself is benign, but because it cannot be reliably distinguished from malignancy preoperatively, the affected testis is often removed; once a tumour is excluded and specific causes treated, the prognosis is good, though the involved testis is frequently rendered non-functional by the inflammation.",
-  "pitfalls": [
-   "Assuming a benign inflammatory cause and delaying exclusion of a testicular tumour",
-   "Relying on normal tumour markers to rule out malignancy",
-   "Failing to exclude tuberculosis and other specific granulomatous causes before labelling it idiopathic",
-   "Attempting conservative management before a tumour has been confidently excluded"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "WHO Classification of Tumours: Urinary and Male Genital Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform radical inguinal orchidectomy, which is usually both diagnostic and therapeutic because a testicular tumour cannot be reliably excluded preoperatively",
-   "Exclude and treat specific granulomatous causes first, including tuberculosis with anti-tuberculous therapy, other infections, and sarcoidosis",
-   "Give a trial of antibiotics where an infective epididymo-orchitis element is present",
-   "Obtain serum tumour markers (AFP, beta-hCG, LDH) and scrotal ultrasound as part of the malignancy work-up",
-   "Confirm non-specific granulomatous inflammation on histopathology after surgery",
-   "Refer to urology, assess the contralateral testis, and counsel regarding fertility and hypogonadism after orchidectomy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "orchitis_granulomatous-pathway",
-   "title": "Idiopathic granulomatous orchitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Idiopathic granulomatous orchitis is a rare non-infective inflammatory condition that characteristically mimics a testicular tumour, usually in middle-aged men",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features indistinguishable from a testicular tumour on examination and imaging",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Scrotal ultrasound to characterise the mass and assess the epididymis, Serum AFP, beta-hCG, and LDH (typically normal) to help assess for germ cell tumour, Urinalysis, culture, and tests for tuberculosis and other"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform radical inguinal orchidectomy, which is usually both diagnostic and therapeutic because a testicular tumour cannot be reliably excluded preoperatively"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a benign inflammatory cause and delaying exclusion of a testicular tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of idiopathic granulomatous orchitis."
-  }
- ],
- "tables": [
-  {
-   "id": "orchitis_granulomatous-matrix",
-   "title": "Idiopathic granulomatous orchitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Idiopathic granulomatous orchitis is a rare non-infective inflammatory condition that characteristically mimics a testicular",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Idiopathic granulomatous orchitis is a rare non-infective inflammatory condition that characteristically mimics a testicular tumour, usually in middle-aged men",
+      "It presents as a firm, sometimes tender, testicular mass or diffuse enlargement, often with a preceding history of trauma or infection",
+      "Germ cell tumour markers are normal, but this does not reliably distinguish it from a testicular tumour, so malignancy remains the primary concern",
+      "Ultrasound findings are non-specific and may resemble a neoplasm, and the diagnosis is frequently only made on histology after orchidectomy",
+      "It is a diagnosis of exclusion once specific granulomatous causes such as tuberculosis, other infections, and sarcoidosis have been considered",
+      "Because a tumour cannot be confidently excluded preoperatively, many patients undergo radical inguinal orchidectomy, which is both diagnostic and therapeutic",
+      "Where diagnosis can be established without radical surgery, anti-inflammatory or immunosuppressive treatment may be considered, but tumour must first be excluded"
     ],
-    [
-     "Key Investigations",
-     "Scrotal ultrasound to characterise the mass and assess the epididymis, Serum AFP, beta-hCG, and LDH (typically normal) to help",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Idiopathic granulomatous orchitis is thought to represent an autoimmune or hypersensitivity reaction to extravasated sperm antigens, sometimes following trauma, infection, or obstruction that breaches the blood-testis barrier. The exposed germ cell antigens provoke a granulomatous inflammatory response within the seminiferous tubules and interstitium, with destruction of the tubules and formation of a firm mass. By definition, no specific infective organism or systemic granulomatous disease is identified, and the resulting swelling can closely imitate a testicular neoplasm.",
+    "additionalDifferentials": [
+      "Germ cell tumour of the testis",
+      "Testicular lymphoma",
+      "Tuberculous orchitis or epididymo-orchitis",
+      "Other infective granulomatous orchitis (e.g. fungal, brucellosis)",
+      "Sarcoidosis involving the testis",
+      "Chronic bacterial epididymo-orchitis"
     ],
-    [
-     "Primary Differentials",
-     "Germ cell tumour of the testis, Testicular lymphoma, Tuberculous orchitis or epididymo-orchitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Scrotal ultrasound to characterise the mass and assess the epididymis",
+      "Serum AFP, beta-hCG, and LDH (typically normal) to help assess for germ cell tumour",
+      "Urinalysis, culture, and tests for tuberculosis and other infections",
+      "Investigations for sarcoidosis when clinically suggested",
+      "Radical inguinal orchidectomy with histology when malignancy cannot be excluded",
+      "Histopathological review to confirm non-specific granulomatous inflammation"
     ],
-    [
-     "Management Strategy",
-     "Perform radical inguinal orchidectomy, which is usually both diagnostic and therapeutic because a testicular tumour cannot be",
-     "Core treatment modality"
+    "redFlags": [
+      "Features indistinguishable from a testicular tumour on examination and imaging",
+      "Rapidly enlarging or hard testicular mass",
+      "Systemic symptoms suggesting tuberculosis or malignancy",
+      "Constitutional upset or nodal enlargement raising concern for lymphoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a benign inflammatory cause and delaying exclusion of a testicular tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition itself is benign, but because it cannot be reliably distinguished from malignancy preoperatively, the affected testis is often removed; once a tumour is excluded and specific causes treated, the prognosis is good, though the involved testis is frequently rendered non-functional by the inflammation.",
+    "pitfalls": [
+      "Assuming a benign inflammatory cause and delaying exclusion of a testicular tumour",
+      "Relying on normal tumour markers to rule out malignancy",
+      "Failing to exclude tuberculosis and other specific granulomatous causes before labelling it idiopathic",
+      "Attempting conservative management before a tumour has been confidently excluded"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "WHO Classification of Tumours: Urinary and Male Genital Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform radical inguinal orchidectomy, which is usually both diagnostic and therapeutic because a testicular tumour cannot be reliably excluded preoperatively",
+      "Exclude and treat specific granulomatous causes first, including tuberculosis with anti-tuberculous therapy, other infections, and sarcoidosis",
+      "Give a trial of antibiotics where an infective epididymo-orchitis element is present",
+      "Obtain serum tumour markers (AFP, beta-hCG, LDH) and scrotal ultrasound as part of the malignancy work-up",
+      "Confirm non-specific granulomatous inflammation on histopathology after surgery",
+      "Refer to urology, assess the contralateral testis, and counsel regarding fertility and hypogonadism after orchidectomy"
     ]
-   ],
-   "caption": "Overview comparison matrix for idiopathic granulomatous orchitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "orchitis-granulomatous-real-image",
-   "title": "Idiopathic granulomatous orchitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "orchitis_granulomatous-pathway",
+      "title": "Idiopathic granulomatous orchitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Idiopathic granulomatous orchitis is a rare non-infective inflammatory condition that characteristically mimics a testicular tumour, usually in middle-aged men",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features indistinguishable from a testicular tumour on examination and imaging",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Scrotal ultrasound to characterise the mass and assess the epididymis, Serum AFP, beta-hCG, and LDH (typically normal) to help assess for germ cell tumour, Urinalysis, culture, and tests for tuberculosis and other"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform radical inguinal orchidectomy, which is usually both diagnostic and therapeutic because a testicular tumour cannot be reliably excluded preoperatively"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a benign inflammatory cause and delaying exclusion of a testicular tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of idiopathic granulomatous orchitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "orchitis_granulomatous-matrix",
+      "title": "Idiopathic granulomatous orchitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Idiopathic granulomatous orchitis is a rare non-infective inflammatory condition that characteristically mimics a testicular",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Scrotal ultrasound to characterise the mass and assess the epididymis, Serum AFP, beta-hCG, and LDH (typically normal) to help",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Germ cell tumour of the testis, Testicular lymphoma, Tuberculous orchitis or epididymo-orchitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform radical inguinal orchidectomy, which is usually both diagnostic and therapeutic because a testicular tumour cannot be",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a benign inflammatory cause and delaying exclusion of a testicular tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for idiopathic granulomatous orchitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orchitis_granulomatous-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Mass characterisation; findings may resemble a neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum AFP, beta-hCG and LDH",
+          "cells": [
+            {
+              "text": "Typically normal, which does not reliably exclude tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis, culture and tuberculosis tests",
+          "cells": [
+            {
+              "text": "Specific granulomatous infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis investigations",
+          "cells": [
+            {
+              "text": "When clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radical inguinal orchidectomy with histology",
+          "cells": [
+            {
+              "text": "Confirms non-specific granulomatous inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orchitis_granulomatous-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Germ cell tumour of the testis",
+          "cells": [
+            {
+              "text": "Tumour markers may be normal in both; malignancy must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular lymphoma",
+          "cells": [
+            {
+              "text": "Constitutional upset or nodal enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous orchitis",
+          "cells": [
+            {
+              "text": "Systemic symptoms suggesting tuberculosis; treated with anti-tuberculous therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orchitis_granulomatous-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radical inguinal orchidectomy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Usually diagnostic and therapeutic, as a tumour cannot be reliably excluded before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for infective element",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Where an infective epididymo-orchitis element is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathological confirmation",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Non-specific granulomatous inflammation after surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urology referral and counselling",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Contralateral testis, fertility and hypogonadism after orchidectomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orchitis_granulomatous-dx-mgmt",
+      "title": "Diagnosis and management of Idiopathic granulomatous orchitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm, tender testicular mass in a middle-aged man that mimics a tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (tumour-like features, rapidly enlarging hard mass or systemic symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: radical inguinal orchidectomy when a tumour cannot be excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrotal ultrasound, AFP, beta-hCG, LDH, urine culture and tuberculosis tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are tuberculosis and other specific granulomatous causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat tuberculosis or another specific cause first, then reassess the mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Radical inguinal orchidectomy, usually diagnostic and therapeutic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics where an infective epididymo-orchitis element is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Confirm non-specific granulomatous inflammation on histopathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urology referral; counsel on fertility and hypogonadism after orchidectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign condition, but the testis is often lost; prognosis good once tumour excluded",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

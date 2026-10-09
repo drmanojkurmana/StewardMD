@@ -1,170 +1,439 @@
 {
- "id": "sigmoid_volvulus",
- "name": "Sigmoid volvulus",
- "aliases": [
-  "volvulus of the sigmoid colon",
-  "sigmoid colon volvulus"
- ],
- "class": "non_infective",
- "system": "GI / Colorectal / Surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with the features of large bowel obstruction: gross abdominal distension, colicky pain, absolute constipation, and often relatively little vomiting early on",
-   "Most common in elderly, institutionalised, or neuropsychiatric patients and those with chronic constipation and a long redundant sigmoid loop on a narrow mesenteric base",
-   "The abdominal radiograph classically shows a hugely dilated loop arising from the pelvis, described as a coffee-bean or inverted-U sign pointing toward the right upper quadrant",
-   "In the absence of peritonitis or bowel compromise, initial treatment is endoscopic decompression (flexible sigmoidoscopy or rigid scope) with insertion of a flatus tube",
-   "Successful decompression relieves the acute episode but recurrence is common, so elective sigmoid resection is often advised in fit patients",
-   "Signs of peritonitis, failed decompression, or suspicion of gangrenous or perforated bowel mandate emergency laparotomy",
-   "At emergency operation for compromised bowel, resection (commonly a Hartmann's procedure) is performed rather than simple untwisting",
-   "A CT scan confirms the diagnosis, shows the whirl sign of the twisted mesentery, and assesses for ischaemia or perforation"
+  "id": "sigmoid_volvulus",
+  "name": "Sigmoid volvulus",
+  "aliases": [
+    "volvulus of the sigmoid colon",
+    "sigmoid colon volvulus"
   ],
-  "pathophysiology": "Sigmoid volvulus occurs when a redundant, elongated sigmoid loop twists around its narrow mesenteric pedicle, producing a closed-loop large bowel obstruction. Chronic constipation and a lengthy, mobile sigmoid on a narrow mesenteric base predispose to torsion. The twist obstructs the lumen at both ends, and progressive distension raises intraluminal and intramural pressure. If the mesenteric vessels are compromised by the torsion, the loop becomes ischaemic, progressing to gangrene and perforation with faeculent peritonitis and sepsis. Massive gaseous distension of the closed loop is characteristic.",
-  "additionalDifferentials": [
-   "Caecal volvulus",
-   "Obstructing colorectal carcinoma",
-   "Pseudo-obstruction (Ogilvie's syndrome)",
-   "Diverticular stricture with obstruction",
-   "Faecal impaction with megacolon",
-   "Adhesional or hernia-related large bowel obstruction"
-  ],
-  "additionalInvestigations": [
-   "Plain abdominal radiograph for the characteristic dilated sigmoid loop",
-   "CT abdomen and pelvis to confirm the diagnosis, show the whirl sign, and assess for ischaemia or perforation",
-   "Bloods including full blood count, electrolytes, and lactate to gauge ischaemia and fitness for intervention",
-   "Endoscopic assessment of mucosal viability during attempted decompression"
-  ],
-  "redFlags": [
-   "Peritonitis, systemic sepsis, or shock suggesting ischaemic or perforated bowel (surgical emergency)",
-   "Bloodstained or necrotic mucosa or dark fluid at decompression indicating gangrene",
-   "Failure of endoscopic decompression",
-   "Rising lactate, worsening distension, or free gas on imaging"
-  ],
-  "prognosis": "Uncomplicated cases usually respond to endoscopic decompression but recur frequently unless definitive surgery is performed. Emergency surgery for gangrenous or perforated bowel in typically frail, elderly patients carries substantial morbidity and mortality.",
-  "pitfalls": [
-   "Persisting with endoscopic decompression when peritonitis or ischaemia is present",
-   "Mistaking the presentation for simple constipation and delaying imaging",
-   "Failing to offer elective resection to fit patients after decompression, allowing recurrence",
-   "Overlooking an obstructing carcinoma as an alternative cause of distal large bowel obstruction"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Endoscopic decompression by flexible sigmoidoscopy or rigid scope with insertion of a flatus tube as first-line treatment in the absence of peritonitis or gangrene",
-   "Fluid resuscitation, correction of electrolyte disturbance and nasogastric decompression as supportive measures",
-   "Inspection of mucosal viability during endoscopy, abandoning decompression and proceeding to surgery if ischaemic mucosa is seen",
-   "Emergency laparotomy with resection, typically a Hartmann's procedure, for peritonitis, failed decompression or gangrenous or perforated bowel",
-   "Elective sigmoid resection after successful decompression in fit patients to prevent frequent recurrence",
-   "Monitoring for recurrence and for signs of bowel compromise following decompression"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sigmoid_volvulus-pathway",
-   "title": "Sigmoid volvulus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with the features of large bowel obstruction: gross abdominal distension, colicky pain, absolute constipation, and often relatively little vomiting early on",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Peritonitis, systemic sepsis, or shock suggesting ischaemic or perforated bowel (surgical emergency)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain abdominal radiograph for the characteristic dilated sigmoid loop, CT abdomen and pelvis to confirm the diagnosis, show the whirl sign, and assess for ischaemia or perforation, Bloods including full blood count,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Endoscopic decompression by flexible sigmoidoscopy or rigid scope with insertion of a flatus tube as first-line treatment in the absence of peritonitis or gangrene"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Persisting with endoscopic decompression when peritonitis or ischaemia is present"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sigmoid volvulus."
-  }
- ],
- "tables": [
-  {
-   "id": "sigmoid_volvulus-matrix",
-   "title": "Sigmoid volvulus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with the features of large bowel obstruction: gross abdominal distension, colicky pain, absolute constipation, and often",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "GI / Colorectal / Surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with the features of large bowel obstruction: gross abdominal distension, colicky pain, absolute constipation, and often relatively little vomiting early on",
+      "Most common in elderly, institutionalised, or neuropsychiatric patients and those with chronic constipation and a long redundant sigmoid loop on a narrow mesenteric base",
+      "The abdominal radiograph classically shows a hugely dilated loop arising from the pelvis, described as a coffee-bean or inverted-U sign pointing toward the right upper quadrant",
+      "In the absence of peritonitis or bowel compromise, initial treatment is endoscopic decompression (flexible sigmoidoscopy or rigid scope) with insertion of a flatus tube",
+      "Successful decompression relieves the acute episode but recurrence is common, so elective sigmoid resection is often advised in fit patients",
+      "Signs of peritonitis, failed decompression, or suspicion of gangrenous or perforated bowel mandate emergency laparotomy",
+      "At emergency operation for compromised bowel, resection (commonly a Hartmann's procedure) is performed rather than simple untwisting",
+      "A CT scan confirms the diagnosis, shows the whirl sign of the twisted mesentery, and assesses for ischaemia or perforation"
     ],
-    [
-     "Key Investigations",
-     "Plain abdominal radiograph for the characteristic dilated sigmoid loop, CT abdomen and pelvis to confirm the diagnosis, show the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sigmoid volvulus occurs when a redundant, elongated sigmoid loop twists around its narrow mesenteric pedicle, producing a closed-loop large bowel obstruction. Chronic constipation and a lengthy, mobile sigmoid on a narrow mesenteric base predispose to torsion. The twist obstructs the lumen at both ends, and progressive distension raises intraluminal and intramural pressure. If the mesenteric vessels are compromised by the torsion, the loop becomes ischaemic, progressing to gangrene and perforation with faeculent peritonitis and sepsis. Massive gaseous distension of the closed loop is characteristic.",
+    "additionalDifferentials": [
+      "Caecal volvulus",
+      "Obstructing colorectal carcinoma",
+      "Pseudo-obstruction (Ogilvie's syndrome)",
+      "Diverticular stricture with obstruction",
+      "Faecal impaction with megacolon",
+      "Adhesional or hernia-related large bowel obstruction"
     ],
-    [
-     "Primary Differentials",
-     "Caecal volvulus, Obstructing colorectal carcinoma, Pseudo-obstruction (Ogilvie's syndrome)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain abdominal radiograph for the characteristic dilated sigmoid loop",
+      "CT abdomen and pelvis to confirm the diagnosis, show the whirl sign, and assess for ischaemia or perforation",
+      "Bloods including full blood count, electrolytes, and lactate to gauge ischaemia and fitness for intervention",
+      "Endoscopic assessment of mucosal viability during attempted decompression"
     ],
-    [
-     "Management Strategy",
-     "Endoscopic decompression by flexible sigmoidoscopy or rigid scope with insertion of a flatus tube as first-line treatment in the",
-     "Core treatment modality"
+    "redFlags": [
+      "Peritonitis, systemic sepsis, or shock suggesting ischaemic or perforated bowel (surgical emergency)",
+      "Bloodstained or necrotic mucosa or dark fluid at decompression indicating gangrene",
+      "Failure of endoscopic decompression",
+      "Rising lactate, worsening distension, or free gas on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Persisting with endoscopic decompression when peritonitis or ischaemia is present",
-     "Prevent diagnostic or management error"
+    "prognosis": "Uncomplicated cases usually respond to endoscopic decompression but recur frequently unless definitive surgery is performed. Emergency surgery for gangrenous or perforated bowel in typically frail, elderly patients carries substantial morbidity and mortality.",
+    "pitfalls": [
+      "Persisting with endoscopic decompression when peritonitis or ischaemia is present",
+      "Mistaking the presentation for simple constipation and delaying imaging",
+      "Failing to offer elective resection to fit patients after decompression, allowing recurrence",
+      "Overlooking an obstructing carcinoma as an alternative cause of distal large bowel obstruction"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Endoscopic decompression by flexible sigmoidoscopy or rigid scope with insertion of a flatus tube as first-line treatment in the absence of peritonitis or gangrene",
+      "Fluid resuscitation, correction of electrolyte disturbance and nasogastric decompression as supportive measures",
+      "Inspection of mucosal viability during endoscopy, abandoning decompression and proceeding to surgery if ischaemic mucosa is seen",
+      "Emergency laparotomy with resection, typically a Hartmann's procedure, for peritonitis, failed decompression or gangrenous or perforated bowel",
+      "Elective sigmoid resection after successful decompression in fit patients to prevent frequent recurrence",
+      "Monitoring for recurrence and for signs of bowel compromise following decompression"
     ]
-   ],
-   "caption": "Overview comparison matrix for sigmoid volvulus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sigmoid-volvulus-real-image",
-   "title": "Sigmoid volvulus: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sigmoid_volvulus-pathway",
+      "title": "Sigmoid volvulus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with the features of large bowel obstruction: gross abdominal distension, colicky pain, absolute constipation, and often relatively little vomiting early on",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Peritonitis, systemic sepsis, or shock suggesting ischaemic or perforated bowel (surgical emergency)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain abdominal radiograph for the characteristic dilated sigmoid loop, CT abdomen and pelvis to confirm the diagnosis, show the whirl sign, and assess for ischaemia or perforation, Bloods including full blood count,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Endoscopic decompression by flexible sigmoidoscopy or rigid scope with insertion of a flatus tube as first-line treatment in the absence of peritonitis or gangrene"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Persisting with endoscopic decompression when peritonitis or ischaemia is present"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sigmoid volvulus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sigmoid_volvulus-matrix",
+      "title": "Sigmoid volvulus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with the features of large bowel obstruction: gross abdominal distension, colicky pain, absolute constipation, and often",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain abdominal radiograph for the characteristic dilated sigmoid loop, CT abdomen and pelvis to confirm the diagnosis, show the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Caecal volvulus, Obstructing colorectal carcinoma, Pseudo-obstruction (Ogilvie's syndrome)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Endoscopic decompression by flexible sigmoidoscopy or rigid scope with insertion of a flatus tube as first-line treatment in the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Persisting with endoscopic decompression when peritonitis or ischaemia is present",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sigmoid volvulus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sigmoid_volvulus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain abdominal radiograph",
+          "cells": [
+            {
+              "text": "Characteristic dilated sigmoid loop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Whirl sign; ischaemia or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full count, electrolytes, lactate",
+          "cells": [
+            {
+              "text": "Gauge ischaemia and fitness for intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic assessment",
+          "cells": [
+            {
+              "text": "Mucosal viability during decompression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sigmoid_volvulus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Caecal volvulus",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructing colorectal carcinoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ogilvie syndrome",
+          "cells": [
+            {
+              "text": "Pseudo-obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sigmoid_volvulus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic decompression",
+          "cells": [
+            {
+              "text": "Flexible or rigid scope with flatus tube; first-line without peritonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "Fluids, electrolyte correction and nasogastric decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucosal viability check",
+          "cells": [
+            {
+              "text": "Abandon decompression and operate if ischaemic mucosa is seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency laparotomy",
+          "cells": [
+            {
+              "text": "Resection, typically Hartmann's, for peritonitis, failed decompression or gangrene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective sigmoid resection",
+          "cells": [
+            {
+              "text": "After decompression in fit patients to prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Recurrence and bowel compromise after decompression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sigmoid_volvulus-dx-mgmt",
+      "title": "Diagnosis and management of Sigmoid volvulus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abdominal distension, constipation and colicky pain: suspected sigmoid volvulus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (peritonitis, shock, rising lactate, free gas on imaging)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency laparotomy with resection (Hartmann's) after resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal radiograph, CT with whirl sign, lactate and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the bowel viable at endoscopic decompression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop decompression and proceed to surgery for necrotic or dark mucosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resuscitate and decompress with a nasogastric tube",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endoscopic decompression with a flatus tube",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Elective sigmoid resection in fit patients to prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for recurrence and bowel compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Uncomplicated cases decompress, but recurrence is frequent without definitive surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

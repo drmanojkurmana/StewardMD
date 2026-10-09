@@ -1,175 +1,622 @@
 {
- "id": "corticobasal_degeneration",
- "name": "Corticobasal degeneration",
- "aliases": [
-  "CBD",
-  "corticobasal syndrome",
-  "CBS",
-  "corticobasal ganglionic degeneration"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A tauopathy presenting with markedly asymmetric parkinsonism combined with cortical signs, poorly responsive to levodopa",
-   "The alien limb phenomenon, in which a limb moves or interferes without volitional control, is a striking but not invariable feature",
-   "Cortical sensory loss, apraxia, and focal dystonia or myoclonus of the affected limb are characteristic",
-   "Rigidity and bradykinesia are typically one-sided at onset before spreading",
-   "Cognitive and language impairment, including a nonfluent aphasia, may dominate in some patients",
-   "The clinical picture (corticobasal syndrome) can be produced by several pathologies, so clinical and pathological diagnoses do not always match",
-   "MRI often shows asymmetric cortical atrophy, typically greatest in the frontoparietal regions opposite the affected side",
-   "Distinguishing features from Parkinson disease include marked asymmetry, cortical signs, and poor levodopa response"
+  "id": "corticobasal_degeneration",
+  "name": "Corticobasal degeneration",
+  "aliases": [
+    "CBD",
+    "corticobasal syndrome",
+    "CBS",
+    "corticobasal ganglionic degeneration"
   ],
-  "pathophysiology": "Corticobasal degeneration is a four-repeat tauopathy with neuronal and glial tau deposition, including astrocytic plaques, and ballooned achromatic neurons, affecting the cerebral cortex (especially frontoparietal) and the basal ganglia asymmetrically. Cortical involvement produces apraxia, cortical sensory loss, and the alien limb phenomenon, while basal ganglia and nigral degeneration cause the akinetic-rigid, dystonic parkinsonism. Because the corticobasal syndrome can arise from Alzheimer, progressive supranuclear palsy, or other pathologies, the underlying substrate is confirmed only at autopsy.",
-  "additionalDifferentials": [
-   "Parkinson disease",
-   "Progressive supranuclear palsy",
-   "Multiple system atrophy",
-   "Alzheimer disease (which can present as corticobasal syndrome)",
-   "Frontotemporal dementia and primary progressive aphasia",
-   "Focal structural lesions or vascular parkinsonism"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain to demonstrate asymmetric frontoparietal atrophy and exclude structural lesions",
-   "Neuropsychological testing to characterise apraxia, cortical sensory loss, and language impairment",
-   "Trial of dopaminergic therapy to document limited benefit",
-   "Biomarkers for Alzheimer pathology when it is a plausible underlying cause",
-   "Functional imaging (e.g. FDG-PET) showing asymmetric hypometabolism in selected cases"
-  ],
-  "redFlags": [
-   "Rapid cognitive decline affecting safety, decision-making, and capacity",
-   "Progressive dysphagia with aspiration risk",
-   "Severe apraxia or dystonia causing loss of limb function and falls",
-   "Features pointing to a potentially treatable alternative diagnosis"
-  ],
-  "prognosis": "The disorder is progressive and untreatable at its root, with worsening motor disability, apraxia, and cognition over several years; survival typically spans several years from diagnosis, with aspiration and immobility complications determining outcome.",
-  "pitfalls": [
-   "Labeling asymmetric parkinsonism as Parkinson disease and persisting with ineffective levodopa",
-   "Equating the corticobasal syndrome with corticobasal degeneration pathology, which often differs",
-   "Overlooking cortical signs such as apraxia and cortical sensory loss",
-   "Missing an underlying Alzheimer pathology that alters counselling and management",
-   "Attributing the alien limb or dystonia to a functional or psychiatric cause"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Trial of levodopa to document the typically limited response of the akinetic-rigid parkinsonism, without expectation of sustained benefit",
-   "Symptomatic treatment of focal dystonia with botulinum toxin injection and of myoclonus with clonazepam",
-   "Physiotherapy, occupational therapy and gait aids for apraxia, rigidity and falls prevention",
-   "Speech and language therapy for nonfluent aphasia, with swallowing assessment and texture-modified diet for dysphagia",
-   "Multidisciplinary neurology-led care with early advance care planning and carer support",
-   "Surveillance for and management of aspiration, immobility complications and pressure injury",
-   "Timely palliative care involvement as disability progresses, including shared decisions on assisted feeding"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "corticobasal_degeneration-pathway",
-   "title": "Corticobasal degeneration: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A tauopathy presenting with markedly asymmetric parkinsonism combined with cortical signs, poorly responsive to levodopa",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid cognitive decline affecting safety, decision-making, and capacity",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain to demonstrate asymmetric frontoparietal atrophy and exclude structural lesions, Neuropsychological testing to characterise apraxia, cortical sensory loss, and language impairment, Trial of dopaminergic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Trial of levodopa to document the typically limited response of the akinetic-rigid parkinsonism, without expectation of sustained benefit"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labeling asymmetric parkinsonism as Parkinson disease and persisting with ineffective levodopa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of corticobasal degeneration."
-  }
- ],
- "tables": [
-  {
-   "id": "corticobasal_degeneration-matrix",
-   "title": "Corticobasal degeneration: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A tauopathy presenting with markedly asymmetric parkinsonism combined with cortical signs, poorly responsive to levodopa",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A tauopathy presenting with markedly asymmetric parkinsonism combined with cortical signs, poorly responsive to levodopa",
+      "The alien limb phenomenon, in which a limb moves or interferes without volitional control, is a striking but not invariable feature",
+      "Cortical sensory loss, apraxia, and focal dystonia or myoclonus of the affected limb are characteristic",
+      "Rigidity and bradykinesia are typically one-sided at onset before spreading",
+      "Cognitive and language impairment, including a nonfluent aphasia, may dominate in some patients",
+      "The clinical picture (corticobasal syndrome) can be produced by several pathologies, so clinical and pathological diagnoses do not always match",
+      "MRI often shows asymmetric cortical atrophy, typically greatest in the frontoparietal regions opposite the affected side",
+      "Distinguishing features from Parkinson disease include marked asymmetry, cortical signs, and poor levodopa response"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain to demonstrate asymmetric frontoparietal atrophy and exclude structural lesions, Neuropsychological testing to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Corticobasal degeneration is a four-repeat tauopathy with neuronal and glial tau deposition, including astrocytic plaques, and ballooned achromatic neurons, affecting the cerebral cortex (especially frontoparietal) and the basal ganglia asymmetrically. Cortical involvement produces apraxia, cortical sensory loss, and the alien limb phenomenon, while basal ganglia and nigral degeneration cause the akinetic-rigid, dystonic parkinsonism. Because the corticobasal syndrome can arise from Alzheimer, progressive supranuclear palsy, or other pathologies, the underlying substrate is confirmed only at autopsy.",
+    "additionalDifferentials": [
+      "Parkinson disease",
+      "Progressive supranuclear palsy",
+      "Multiple system atrophy",
+      "Alzheimer disease (which can present as corticobasal syndrome)",
+      "Frontotemporal dementia and primary progressive aphasia",
+      "Focal structural lesions or vascular parkinsonism"
     ],
-    [
-     "Primary Differentials",
-     "Parkinson disease, Progressive supranuclear palsy, Multiple system atrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain to demonstrate asymmetric frontoparietal atrophy and exclude structural lesions",
+      "Neuropsychological testing to characterise apraxia, cortical sensory loss, and language impairment",
+      "Trial of dopaminergic therapy to document limited benefit",
+      "Biomarkers for Alzheimer pathology when it is a plausible underlying cause",
+      "Functional imaging (e.g. FDG-PET) showing asymmetric hypometabolism in selected cases"
     ],
-    [
-     "Management Strategy",
-     "Trial of levodopa to document the typically limited response of the akinetic-rigid parkinsonism, without expectation of sustained",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid cognitive decline affecting safety, decision-making, and capacity",
+      "Progressive dysphagia with aspiration risk",
+      "Severe apraxia or dystonia causing loss of limb function and falls",
+      "Features pointing to a potentially treatable alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Labeling asymmetric parkinsonism as Parkinson disease and persisting with ineffective levodopa",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is progressive and untreatable at its root, with worsening motor disability, apraxia, and cognition over several years; survival typically spans several years from diagnosis, with aspiration and immobility complications determining outcome.",
+    "pitfalls": [
+      "Labeling asymmetric parkinsonism as Parkinson disease and persisting with ineffective levodopa",
+      "Equating the corticobasal syndrome with corticobasal degeneration pathology, which often differs",
+      "Overlooking cortical signs such as apraxia and cortical sensory loss",
+      "Missing an underlying Alzheimer pathology that alters counselling and management",
+      "Attributing the alien limb or dystonia to a functional or psychiatric cause"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Trial of levodopa to document the typically limited response of the akinetic-rigid parkinsonism, without expectation of sustained benefit",
+      "Symptomatic treatment of focal dystonia with botulinum toxin injection and of myoclonus with clonazepam",
+      "Physiotherapy, occupational therapy and gait aids for apraxia, rigidity and falls prevention",
+      "Speech and language therapy for nonfluent aphasia, with swallowing assessment and texture-modified diet for dysphagia",
+      "Multidisciplinary neurology-led care with early advance care planning and carer support",
+      "Surveillance for and management of aspiration, immobility complications and pressure injury",
+      "Timely palliative care involvement as disability progresses, including shared decisions on assisted feeding"
     ]
-   ],
-   "caption": "Overview comparison matrix for corticobasal degeneration."
-  }
- ],
- "diagrams": [
-  {
-   "id": "corticobasal-degeneration-real-image",
-   "title": "Corticobasal degeneration: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "corticobasal_degeneration-pathway",
+      "title": "Corticobasal degeneration: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A tauopathy presenting with markedly asymmetric parkinsonism combined with cortical signs, poorly responsive to levodopa",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid cognitive decline affecting safety, decision-making, and capacity",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain to demonstrate asymmetric frontoparietal atrophy and exclude structural lesions, Neuropsychological testing to characterise apraxia, cortical sensory loss, and language impairment, Trial of dopaminergic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Trial of levodopa to document the typically limited response of the akinetic-rigid parkinsonism, without expectation of sustained benefit"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labeling asymmetric parkinsonism as Parkinson disease and persisting with ineffective levodopa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of corticobasal degeneration."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "corticobasal_degeneration-matrix",
+      "title": "Corticobasal degeneration: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A tauopathy presenting with markedly asymmetric parkinsonism combined with cortical signs, poorly responsive to levodopa",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain to demonstrate asymmetric frontoparietal atrophy and exclude structural lesions, Neuropsychological testing to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Parkinson disease, Progressive supranuclear palsy, Multiple system atrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Trial of levodopa to document the typically limited response of the akinetic-rigid parkinsonism, without expectation of sustained",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labeling asymmetric parkinsonism as Parkinson disease and persisting with ineffective levodopa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for corticobasal degeneration."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 372-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 371-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "corticobasal_degeneration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Asymmetric frontoparietal atrophy; structural lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological testing",
+          "cells": [
+            {
+              "text": "Apraxia, cortical sensory loss and language impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of dopaminergic therapy",
+          "cells": [
+            {
+              "text": "Limited benefit documented"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Asymmetric hypometabolism in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "corticobasal_degeneration-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parkinson disease",
+          "cells": [
+            {
+              "text": "Pitfall: asymmetric parkinsonism labelled as Parkinson disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive supranuclear palsy",
+          "cells": [
+            {
+              "text": "Named look-alike parkinsonism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alzheimer disease",
+          "cells": [
+            {
+              "text": "Can present as corticobasal syndrome; Alzheimer biomarkers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "corticobasal_degeneration-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Levodopa trial",
+          "cells": [
+            {
+              "text": "Documents typically limited response; no sustained benefit expected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin and clonazepam",
+          "cells": [
+            {
+              "text": "Focal dystonia and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and gait aids",
+          "cells": [
+            {
+              "text": "Apraxia, rigidity and falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallowing care",
+          "cells": [
+            {
+              "text": "Nonfluent aphasia; swallowing assessment and texture-modified diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advance care planning",
+          "cells": [
+            {
+              "text": "Neurology-led care with carer support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "Aspiration, immobility and pressure injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Involvement as disability progresses, including assisted feeding decisions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "corticobasal_degeneration-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Clinical features of Parkinson disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Features"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardinal features",
+          "cells": [
+            {
+              "text": "bradykinesia, rest tremor, rigidity, gait disturbance and postural instability"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other motor features",
+          "cells": [
+            {
+              "text": "micrographia, masked facies (hypomimia), reduced eye blink, soft voice (hypophonia), dysphagia, freezing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nonmotor features",
+          "cells": [
+            {
+              "text": "anosmia; sensory disturbances such as pain; mood disorders such as depression; sleep disturbances; autonomic disturbances (orthostatic hypotension, gastrointestinal, genitourinary, sexual dysfunction); cognitive impairment or dementia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "corticobasal_degeneration-ddx-2",
+      "kind": "ddx",
+      "title": "Major dementias compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "First symptom",
+        "Mental status",
+        "Neuropsychiatry",
+        "Neurology",
+        "Imaging"
+      ],
+      "rows": [
+        {
+          "parameter": "Alzheimer disease",
+          "cells": [
+            {
+              "text": "Memory loss"
+            },
+            {
+              "text": "Episodic memory loss"
+            },
+            {
+              "text": "Initially normal"
+            },
+            {
+              "text": "Initially normal"
+            },
+            {
+              "text": "Entorhinal cortex and hippocampal atrophy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Frontotemporal dementia",
+          "cells": [
+            {
+              "text": "Apathy; poor judgment or insight; speech or language problems; hyperorality"
+            },
+            {
+              "text": "Frontal and executive deficits, language; spares drawing"
+            },
+            {
+              "text": "Apathy, disinhibition, hyperorality, euphoria, depression"
+            },
+            {
+              "text": "May have vertical gaze palsy, axial rigidity, dystonia, alien hand or motor neuron disease"
+            },
+            {
+              "text": "Frontal, insular and/or temporal atrophy; spares posterior parietal lobe"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dementia with Lewy bodies",
+          "cells": [
+            {
+              "text": "Visual hallucinations, REM sleep disorder, delirium, Capgras syndrome, parkinsonism"
+            },
+            {
+              "text": "Drawing and frontal/executive deficits; spares memory; delirium prone"
+            },
+            {
+              "text": "Visual hallucinations, depression, sleep disorder, delusions"
+            },
+            {
+              "text": "Parkinsonism"
+            },
+            {
+              "text": "Posterior parietal atrophy; hippocampi larger than in Alzheimer disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Creutzfeldt-Jakob disease",
+          "cells": [
+            {
+              "text": "Dementia, mood, anxiety, movement disorders"
+            },
+            {
+              "text": "Variable: frontal/executive, focal cortical, memory"
+            },
+            {
+              "text": "Depression, anxiety"
+            },
+            {
+              "text": "Myoclonus, rigidity, parkinsonism"
+            },
+            {
+              "text": "Cortical ribboning and basal ganglia or thalamus hyperintensity on diffusion/FLAIR MRI"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vascular dementia",
+          "cells": [
+            {
+              "text": "Often but not always sudden; variable; apathy, falls, focal weakness"
+            },
+            {
+              "text": "Frontal/executive deficits, cognitive slowing; can spare memory"
+            },
+            {
+              "text": "Apathy, delusions, anxiety"
+            },
+            {
+              "text": "Usually motor slowing, spasticity; can be normal"
+            },
+            {
+              "text": "Cortical and/or subcortical infarctions, confluent white matter disease"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Source abbreviations: CBD, cortical basal degeneration; MND, motor neuron disease; PSP, progressive supranuclear palsy."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "corticobasal_degeneration-dx-mgmt",
+      "title": "Diagnosis and management of Corticobasal degeneration",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected corticobasal degeneration: asymmetric apraxia, rigidity and cortical signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (rapid cognitive decline, dysphagia, severe apraxia or dystonia)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review; aspiration risk and safety assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for asymmetric frontoparietal atrophy; neuropsychology; levodopa trial; PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MRI and course show asymmetric cortical atrophy with poor levodopa response?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Parkinson disease, PSP, MSA or Alzheimer disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Levodopa trial with expectation of limited benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Botulinum toxin for focal dystonia; clonazepam for myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and gait aids for falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech and swallowing care; advance care planning and palliative input",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive and untreatable at its root, with worsening motor disability and cognition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

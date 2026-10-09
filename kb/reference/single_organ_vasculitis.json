@@ -1,178 +1,492 @@
 {
- "id": "single_organ_vasculitis",
- "name": "Single-organ vasculitis",
- "aliases": [
-  "Single-organ vasculitis",
-  "Isolated vasculitis",
-  "Localised vasculitis"
- ],
- "class": "non_infective",
- "system": "Multisystem",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kelley and Firestein's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Single-organ vasculitis denotes vasculitis confined to one organ or organ system without features of a systemic vasculitis, a category formalised in the current consensus nomenclature.",
-   "Recognised examples include isolated cutaneous small-vessel vasculitis, isolated aortitis, single-organ vasculitis of the gastrointestinal tract, testis, breast or urinary bladder, and isolated peripheral nerve vasculitis.",
-   "It is fundamentally a diagnosis of exclusion, requiring a thorough search for systemic disease before the 'single-organ' label is applied.",
-   "The distribution may be unifocal or multifocal within the affected organ, but by definition does not cross into other systems.",
-   "A subset of apparently localised disease later declares itself as systemic vasculitis, so ongoing surveillance is essential.",
-   "Histology (leukocytoclastic, granulomatous or necrotising) reflects the vessel size involved and helps frame differentials.",
-   "Management is often more conservative than systemic vasculitis; some cutaneous forms are self-limiting, while an isolated organ lesion such as focal aortitis may be treated surgically.",
-   "Isolated aortitis is frequently discovered incidentally in surgical aortic specimens and warrants assessment for large-vessel disease."
+  "id": "single_organ_vasculitis",
+  "name": "Single-organ vasculitis",
+  "aliases": [
+    "Single-organ vasculitis",
+    "Isolated vasculitis",
+    "Localised vasculitis"
   ],
-  "pathophysiology": "Single-organ vasculitis is inflammation of blood vessel walls restricted to a single organ or anatomical region, without the systemic distribution or serological markers of a defined systemic vasculitis. The vessel calibre involved varies by site and determines the histological pattern, ranging from leukocytoclastic small-vessel injury in isolated cutaneous disease to granulomatous or necrotising inflammation in isolated aortitis or nerve vasculitis. The initiating stimulus is usually unknown and may be immune-complex-mediated, cell-mediated or triggered by local factors. Because the same histology can be the first manifestation of a systemic process, single-organ vasculitis is defined partly by the absence of evidence for wider involvement over time.",
-  "additionalDifferentials": [
-   "Systemic vasculitis with early or limited organ involvement",
-   "ANCA-associated vasculitis",
-   "Vasculitis secondary to connective tissue disease",
-   "Infection-related vasculitis",
-   "Malignancy-associated or paraneoplastic vasculitis",
-   "Drug-induced vasculitis",
-   "Non-inflammatory vasculopathy mimicking vasculitis"
-  ],
-  "additionalInvestigations": [
-   "Tissue biopsy of the affected organ to characterise vessel size and inflammation",
-   "ANCA, ANA and complement to screen for systemic and autoimmune disease",
-   "Inflammatory markers and full systemic review of symptoms",
-   "Cross-sectional or vascular imaging appropriate to the organ involved",
-   "Screening for infective triggers including relevant serology",
-   "Age-appropriate malignancy screening where clinically indicated",
-   "Longitudinal follow-up to detect later systemic conversion"
-  ],
-  "redFlags": [
-   "Emergence of constitutional symptoms or new organ involvement suggesting systemic conversion",
-   "Progressive organ dysfunction despite treatment",
-   "Aortic dilatation or dissection in isolated aortitis",
-   "Rapidly evolving mononeuropathy in isolated nerve vasculitis",
-   "Positive ANCA or other systemic serology on follow-up"
-  ],
-  "prognosis": "Many single-organ forms have a favourable outlook, particularly self-limiting cutaneous disease, but prognosis depends on the organ affected and on whether the process later becomes systemic. Isolated aortitis and isolated nerve vasculitis carry organ-specific risks that require targeted follow-up.",
-  "pitfalls": [
-   "Prematurely labelling disease as single-organ without excluding systemic vasculitis.",
-   "Failing to arrange follow-up, so later systemic conversion is missed.",
-   "Over-treating benign self-limiting cutaneous vasculitis with aggressive immunosuppression.",
-   "Overlooking incidental aortitis in surgical specimens and its implications for large-vessel disease.",
-   "Assuming a single negative serology permanently excludes systemic disease."
-  ],
-  "references": [
-   "Kelley and Firestein's Textbook of Rheumatology, current edition",
-   "Revised international consensus nomenclature of the vasculitides",
-   "Oxford Textbook of Medicine, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm and characterise the vasculitis with organ biopsy and exclude systemic disease before treating, since it is a diagnosis of exclusion",
-   "For isolated cutaneous small-vessel disease, remove or treat triggers such as drugs and infection with supportive leg elevation and compression, reserving a short corticosteroid course, colchicine or dapsone for persistent disease",
-   "For organ-threatening forms such as isolated aortitis or peripheral nerve vasculitis, corticosteroids with a steroid-sparing agent (methotrexate or azathioprine) or systemic-vasculitis induction regimens",
-   "Organ-directed measures such as surgical repair and surveillance imaging for isolated aortitis, and neuropathic pain control and rehabilitation for nerve vasculitis",
-   "Long-term surveillance with clinical review, serology and inflammatory markers for later progression to systemic vasculitis",
-   "Coordinated rheumatology and organ-specialist input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "single_organ_vasculitis-pathway",
-   "title": "Single-organ vasculitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Single-organ vasculitis denotes vasculitis confined to one organ or organ system without features of a systemic vasculitis, a category formalised in the current consensus nomenclature.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emergence of constitutional symptoms or new organ involvement suggesting systemic conversion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Tissue biopsy of the affected organ to characterise vessel size and inflammation, ANCA, ANA and complement to screen for systemic and autoimmune disease, Inflammatory markers and full systemic review of symptoms"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm and characterise the vasculitis with organ biopsy and exclude systemic disease before treating, since it is a diagnosis of exclusion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prematurely labelling disease as single-organ without excluding systemic vasculitis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of single-organ vasculitis."
-  }
- ],
- "tables": [
-  {
-   "id": "single_organ_vasculitis-matrix",
-   "title": "Single-organ vasculitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Single-organ vasculitis denotes vasculitis confined to one organ or organ system without features of a systemic vasculitis, a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kelley and Firestein's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Single-organ vasculitis denotes vasculitis confined to one organ or organ system without features of a systemic vasculitis, a category formalised in the current consensus nomenclature.",
+      "Recognised examples include isolated cutaneous small-vessel vasculitis, isolated aortitis, single-organ vasculitis of the gastrointestinal tract, testis, breast or urinary bladder, and isolated peripheral nerve vasculitis.",
+      "It is fundamentally a diagnosis of exclusion, requiring a thorough search for systemic disease before the 'single-organ' label is applied.",
+      "The distribution may be unifocal or multifocal within the affected organ, but by definition does not cross into other systems.",
+      "A subset of apparently localised disease later declares itself as systemic vasculitis, so ongoing surveillance is essential.",
+      "Histology (leukocytoclastic, granulomatous or necrotising) reflects the vessel size involved and helps frame differentials.",
+      "Management is often more conservative than systemic vasculitis; some cutaneous forms are self-limiting, while an isolated organ lesion such as focal aortitis may be treated surgically.",
+      "Isolated aortitis is frequently discovered incidentally in surgical aortic specimens and warrants assessment for large-vessel disease."
     ],
-    [
-     "Key Investigations",
-     "Tissue biopsy of the affected organ to characterise vessel size and inflammation, ANCA, ANA and complement to screen for systemic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Single-organ vasculitis is inflammation of blood vessel walls restricted to a single organ or anatomical region, without the systemic distribution or serological markers of a defined systemic vasculitis. The vessel calibre involved varies by site and determines the histological pattern, ranging from leukocytoclastic small-vessel injury in isolated cutaneous disease to granulomatous or necrotising inflammation in isolated aortitis or nerve vasculitis. The initiating stimulus is usually unknown and may be immune-complex-mediated, cell-mediated or triggered by local factors. Because the same histology can be the first manifestation of a systemic process, single-organ vasculitis is defined partly by the absence of evidence for wider involvement over time.",
+    "additionalDifferentials": [
+      "Systemic vasculitis with early or limited organ involvement",
+      "ANCA-associated vasculitis",
+      "Vasculitis secondary to connective tissue disease",
+      "Infection-related vasculitis",
+      "Malignancy-associated or paraneoplastic vasculitis",
+      "Drug-induced vasculitis",
+      "Non-inflammatory vasculopathy mimicking vasculitis"
     ],
-    [
-     "Primary Differentials",
-     "Systemic vasculitis with early or limited organ involvement, ANCA-associated vasculitis, Vasculitis secondary to connective",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Tissue biopsy of the affected organ to characterise vessel size and inflammation",
+      "ANCA, ANA and complement to screen for systemic and autoimmune disease",
+      "Inflammatory markers and full systemic review of symptoms",
+      "Cross-sectional or vascular imaging appropriate to the organ involved",
+      "Screening for infective triggers including relevant serology",
+      "Age-appropriate malignancy screening where clinically indicated",
+      "Longitudinal follow-up to detect later systemic conversion"
     ],
-    [
-     "Management Strategy",
-     "Confirm and characterise the vasculitis with organ biopsy and exclude systemic disease before treating, since it is a diagnosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Emergence of constitutional symptoms or new organ involvement suggesting systemic conversion",
+      "Progressive organ dysfunction despite treatment",
+      "Aortic dilatation or dissection in isolated aortitis",
+      "Rapidly evolving mononeuropathy in isolated nerve vasculitis",
+      "Positive ANCA or other systemic serology on follow-up"
     ],
-    [
-     "Clinical Pitfall",
-     "Prematurely labelling disease as single-organ without excluding systemic vasculitis.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many single-organ forms have a favourable outlook, particularly self-limiting cutaneous disease, but prognosis depends on the organ affected and on whether the process later becomes systemic. Isolated aortitis and isolated nerve vasculitis carry organ-specific risks that require targeted follow-up.",
+    "pitfalls": [
+      "Prematurely labelling disease as single-organ without excluding systemic vasculitis.",
+      "Failing to arrange follow-up, so later systemic conversion is missed.",
+      "Over-treating benign self-limiting cutaneous vasculitis with aggressive immunosuppression.",
+      "Overlooking incidental aortitis in surgical specimens and its implications for large-vessel disease.",
+      "Assuming a single negative serology permanently excludes systemic disease."
+    ],
+    "references": [
+      "Kelley and Firestein's Textbook of Rheumatology, current edition",
+      "Revised international consensus nomenclature of the vasculitides",
+      "Oxford Textbook of Medicine, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm and characterise the vasculitis with organ biopsy and exclude systemic disease before treating, since it is a diagnosis of exclusion",
+      "For isolated cutaneous small-vessel disease, remove or treat triggers such as drugs and infection with supportive leg elevation and compression, reserving a short corticosteroid course, colchicine or dapsone for persistent disease",
+      "For organ-threatening forms such as isolated aortitis or peripheral nerve vasculitis, corticosteroids with a steroid-sparing agent (methotrexate or azathioprine) or systemic-vasculitis induction regimens",
+      "Organ-directed measures such as surgical repair and surveillance imaging for isolated aortitis, and neuropathic pain control and rehabilitation for nerve vasculitis",
+      "Long-term surveillance with clinical review, serology and inflammatory markers for later progression to systemic vasculitis",
+      "Coordinated rheumatology and organ-specialist input"
     ]
-   ],
-   "caption": "Overview comparison matrix for single-organ vasculitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "single-organ-vasculitis-real-image",
-   "title": "Single-organ vasculitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "single_organ_vasculitis-pathway",
+      "title": "Single-organ vasculitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Single-organ vasculitis denotes vasculitis confined to one organ or organ system without features of a systemic vasculitis, a category formalised in the current consensus nomenclature.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emergence of constitutional symptoms or new organ involvement suggesting systemic conversion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Tissue biopsy of the affected organ to characterise vessel size and inflammation, ANCA, ANA and complement to screen for systemic and autoimmune disease, Inflammatory markers and full systemic review of symptoms"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm and characterise the vasculitis with organ biopsy and exclude systemic disease before treating, since it is a diagnosis of exclusion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prematurely labelling disease as single-organ without excluding systemic vasculitis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of single-organ vasculitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "single_organ_vasculitis-matrix",
+      "title": "Single-organ vasculitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Single-organ vasculitis denotes vasculitis confined to one organ or organ system without features of a systemic vasculitis, a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Tissue biopsy of the affected organ to characterise vessel size and inflammation, ANCA, ANA and complement to screen for systemic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic vasculitis with early or limited organ involvement, ANCA-associated vasculitis, Vasculitis secondary to connective",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm and characterise the vasculitis with organ biopsy and exclude systemic disease before treating, since it is a diagnosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prematurely labelling disease as single-organ without excluding systemic vasculitis.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for single-organ vasculitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley and Firestein's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "single_organ_vasculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tissue biopsy of the affected organ",
+          "cells": [
+            {
+              "text": "Vessel size and pattern of inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA, ANA and complement",
+          "cells": [
+            {
+              "text": "Screens for systemic and autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and systemic review",
+          "cells": [
+            {
+              "text": "Systemic features that would point to wider disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-appropriate imaging",
+          "cells": [
+            {
+              "text": "Vascular involvement of the affected organ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and malignancy screening",
+          "cells": [
+            {
+              "text": "Infective triggers by relevant serology; age-appropriate malignancy screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Longitudinal follow-up",
+          "cells": [
+            {
+              "text": "Later conversion to systemic vasculitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "single_organ_vasculitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ANCA-associated vasculitis",
+          "cells": [
+            {
+              "text": "Positive ANCA on follow-up suggests systemic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic vasculitis with early organ involvement",
+          "cells": [
+            {
+              "text": "Constitutional symptoms or new organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculitis secondary to connective tissue disease",
+          "cells": [
+            {
+              "text": "Screened for by ANA and complement testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced vasculitis",
+          "cells": [
+            {
+              "text": "Drug exposure is a trigger to identify and remove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection-related vasculitis",
+          "cells": [
+            {
+              "text": "Infective triggers identified by serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy-associated vasculitis",
+          "cells": [
+            {
+              "text": "Age-appropriate malignancy screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "single_organ_vasculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Organ biopsy and exclusion of systemic disease",
+          "cells": [
+            {
+              "text": "Before treating; single-organ vasculitis is a diagnosis of exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated cutaneous disease",
+          "cells": [
+            {
+              "text": "Remove or treat triggers with leg elevation and compression; reserve a short corticosteroid course, colchicine or dapsone for persistent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-threatening forms",
+          "cells": [
+            {
+              "text": "Corticosteroids with methotrexate or azathioprine, or systemic induction regimens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-directed measures",
+          "cells": [
+            {
+              "text": "Surgical repair and surveillance imaging for aortitis; pain control and rehabilitation for nerve vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Clinical review, serology and inflammatory markers for later systemic progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated specialist input",
+          "cells": [
+            {
+              "text": "Rheumatology with organ specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "single_organ_vasculitis-dx-mgmt",
+      "title": "Diagnosis and management of Single-organ vasculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vasculitis confined to one organ or system: suspected single-organ vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (constitutional symptoms, new organ involvement, aortic dilatation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: evaluate for systemic vasculitis and treat as organ-threatening disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Organ biopsy; ANCA, ANA and complement; infection and malignancy screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm vasculitis, with no systemic disease on screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider systemic vasculitis, ANCA-associated disease or connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cutaneous forms: remove triggers, supportive care, and reserve steroids or dapsone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Organ-threatening forms: corticosteroids with methotrexate or azathioprine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Organ-directed care: surgical repair for aortitis, pain control for nerve disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term surveillance for later systemic conversion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many forms are favourable; prognosis depends on the organ and on systemic conversion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

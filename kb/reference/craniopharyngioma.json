@@ -1,178 +1,474 @@
 {
- "id": "craniopharyngioma",
- "name": "Craniopharyngioma",
- "aliases": [
-  "adamantinomatous craniopharyngioma",
-  "papillary craniopharyngioma",
-  "Rathke pouch tumour",
-  "suprasellar craniopharyngioma"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign but locally aggressive sellar/suprasellar tumour arising from remnants of Rathke's pouch along the craniopharyngeal duct",
-   "Shows a bimodal age distribution, with the adamantinomatous type predominating in children and a papillary type more typical in adults",
-   "Compression of the optic chiasm classically causes bitemporal visual field loss, while hypothalamic-pituitary involvement produces endocrine deficits",
-   "Growth hormone and gonadotrophin deficiencies are common; diabetes insipidus and other posterior pituitary problems may occur, particularly after surgery",
-   "The adamantinomatous variant characteristically shows cystic components, calcification and a mixed solid-cystic appearance on imaging",
-   "Cyst fluid is often described as machinery-oil-like, cholesterol-rich material at operation",
-   "Hypothalamic damage, whether from tumour or treatment, can lead to obesity, disordered temperature and thirst regulation, and behavioural change",
-   "Management balances surgical resection, often transsphenoidal or transcranial, with radiotherapy and long-term hormone replacement to preserve function"
+  "id": "craniopharyngioma",
+  "name": "Craniopharyngioma",
+  "aliases": [
+    "adamantinomatous craniopharyngioma",
+    "papillary craniopharyngioma",
+    "Rathke pouch tumour",
+    "suprasellar craniopharyngioma"
   ],
-  "pathophysiology": "Craniopharyngiomas develop from epithelial remnants of the craniopharyngeal duct and Rathke's pouch in the sellar and suprasellar region. Although histologically benign, they enlarge and encroach on adjacent structures, compressing the optic chiasm, pituitary gland and stalk, hypothalamus and third ventricle. The adamantinomatous subtype, linked to Wnt/beta-catenin pathway activation, tends to be cystic and calcified, whereas the papillary subtype, associated with BRAF mutation, is usually solid. Mass effect and infiltration produce the visual, endocrine and hydrocephalic manifestations, and hypothalamic disruption underlies the metabolic and regulatory sequelae.",
-  "additionalDifferentials": [
-   "Pituitary adenoma",
-   "Rathke cleft cyst",
-   "Meningioma of the sellar region",
-   "Germ cell tumour of the suprasellar region",
-   "Hypothalamic or optic pathway glioma",
-   "Lymphocytic hypophysitis"
-  ],
-  "additionalInvestigations": [
-   "Magnetic resonance imaging of the pituitary and hypothalamic region",
-   "Computed tomography to demonstrate calcification",
-   "Formal visual acuity and visual field assessment",
-   "Full anterior pituitary hormone profile",
-   "Assessment of posterior pituitary function including for diabetes insipidus",
-   "Histological and molecular characterisation of resected tissue"
-  ],
-  "redFlags": [
-   "Rapidly progressive visual loss from chiasmal compression",
-   "Raised intracranial pressure or obstructive hydrocephalus",
-   "Acute hypopituitarism or adrenal insufficiency",
-   "Hypothalamic dysfunction with disturbed thirst, temperature or consciousness",
-   "New-onset diabetes insipidus"
-  ],
-  "prognosis": "Overall survival is generally good given the benign histology, but recurrence is frequent and long-term morbidity from hypopituitarism, visual impairment and hypothalamic obesity substantially affects quality of life, so lifelong endocrine and ophthalmic follow-up is required.",
-  "pitfalls": [
-   "Mistaking a cystic calcified suprasellar mass for a simple pituitary adenoma",
-   "Failing to assess and monitor visual fields before and after treatment",
-   "Overlooking cortisol deficiency before surgery or before starting thyroid replacement",
-   "Underestimating the risk of postoperative diabetes insipidus and hypothalamic obesity",
-   "Assuming complete cure after resection despite a high recurrence rate"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "DeGroot's Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical resection by transsphenoidal or transcranial approach as primary treatment, aiming to relieve mass effect while limiting hypothalamic injury",
-   "Radiotherapy, including stereotactic or proton techniques, for residual or recurrent tumour or as an alternative to aggressive resection",
-   "Cyst management with drainage or a reservoir device and intracystic therapy such as bleomycin or interferon for predominantly cystic tumours",
-   "Full hormone replacement for hypopituitarism, including glucocorticoid, thyroid hormone, sex steroids and growth hormone as required",
-   "Desmopressin for diabetes insipidus with careful perioperative fluid and electrolyte management",
-   "Consider BRAF and MEK-targeted therapy for papillary BRAF-mutant craniopharyngioma",
-   "Manage hypothalamic obesity and metabolic sequelae with dietetic and endocrine input",
-   "Provide lifelong endocrine and ophthalmological follow-up with MRI surveillance for recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "craniopharyngioma-pathway",
-   "title": "Craniopharyngioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign but locally aggressive sellar/suprasellar tumour arising from remnants of Rathke's pouch along the craniopharyngeal duct",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive visual loss from chiasmal compression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Magnetic resonance imaging of the pituitary and hypothalamic region, Computed tomography to demonstrate calcification, Formal visual acuity and visual field assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical resection by transsphenoidal or transcranial approach as primary treatment, aiming to relieve mass effect while limiting hypothalamic injury"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a cystic calcified suprasellar mass for a simple pituitary adenoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of craniopharyngioma."
-  }
- ],
- "tables": [
-  {
-   "id": "craniopharyngioma-matrix",
-   "title": "Craniopharyngioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign but locally aggressive sellar/suprasellar tumour arising from remnants of Rathke's pouch along the craniopharyngeal duct",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign but locally aggressive sellar/suprasellar tumour arising from remnants of Rathke's pouch along the craniopharyngeal duct",
+      "Shows a bimodal age distribution, with the adamantinomatous type predominating in children and a papillary type more typical in adults",
+      "Compression of the optic chiasm classically causes bitemporal visual field loss, while hypothalamic-pituitary involvement produces endocrine deficits",
+      "Growth hormone and gonadotrophin deficiencies are common; diabetes insipidus and other posterior pituitary problems may occur, particularly after surgery",
+      "The adamantinomatous variant characteristically shows cystic components, calcification and a mixed solid-cystic appearance on imaging",
+      "Cyst fluid is often described as machinery-oil-like, cholesterol-rich material at operation",
+      "Hypothalamic damage, whether from tumour or treatment, can lead to obesity, disordered temperature and thirst regulation, and behavioural change",
+      "Management balances surgical resection, often transsphenoidal or transcranial, with radiotherapy and long-term hormone replacement to preserve function"
     ],
-    [
-     "Key Investigations",
-     "Magnetic resonance imaging of the pituitary and hypothalamic region, Computed tomography to demonstrate calcification, Formal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Craniopharyngiomas develop from epithelial remnants of the craniopharyngeal duct and Rathke's pouch in the sellar and suprasellar region. Although histologically benign, they enlarge and encroach on adjacent structures, compressing the optic chiasm, pituitary gland and stalk, hypothalamus and third ventricle. The adamantinomatous subtype, linked to Wnt/beta-catenin pathway activation, tends to be cystic and calcified, whereas the papillary subtype, associated with BRAF mutation, is usually solid. Mass effect and infiltration produce the visual, endocrine and hydrocephalic manifestations, and hypothalamic disruption underlies the metabolic and regulatory sequelae.",
+    "additionalDifferentials": [
+      "Pituitary adenoma",
+      "Rathke cleft cyst",
+      "Meningioma of the sellar region",
+      "Germ cell tumour of the suprasellar region",
+      "Hypothalamic or optic pathway glioma",
+      "Lymphocytic hypophysitis"
     ],
-    [
-     "Primary Differentials",
-     "Pituitary adenoma, Rathke cleft cyst, Meningioma of the sellar region",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Magnetic resonance imaging of the pituitary and hypothalamic region",
+      "Computed tomography to demonstrate calcification",
+      "Formal visual acuity and visual field assessment",
+      "Full anterior pituitary hormone profile",
+      "Assessment of posterior pituitary function including for diabetes insipidus",
+      "Histological and molecular characterisation of resected tissue"
     ],
-    [
-     "Management Strategy",
-     "Surgical resection by transsphenoidal or transcranial approach as primary treatment, aiming to relieve mass effect while limiting",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive visual loss from chiasmal compression",
+      "Raised intracranial pressure or obstructive hydrocephalus",
+      "Acute hypopituitarism or adrenal insufficiency",
+      "Hypothalamic dysfunction with disturbed thirst, temperature or consciousness",
+      "New-onset diabetes insipidus"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a cystic calcified suprasellar mass for a simple pituitary adenoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Overall survival is generally good given the benign histology, but recurrence is frequent and long-term morbidity from hypopituitarism, visual impairment and hypothalamic obesity substantially affects quality of life, so lifelong endocrine and ophthalmic follow-up is required.",
+    "pitfalls": [
+      "Mistaking a cystic calcified suprasellar mass for a simple pituitary adenoma",
+      "Failing to assess and monitor visual fields before and after treatment",
+      "Overlooking cortisol deficiency before surgery or before starting thyroid replacement",
+      "Underestimating the risk of postoperative diabetes insipidus and hypothalamic obesity",
+      "Assuming complete cure after resection despite a high recurrence rate"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "DeGroot's Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical resection by transsphenoidal or transcranial approach as primary treatment, aiming to relieve mass effect while limiting hypothalamic injury",
+      "Radiotherapy, including stereotactic or proton techniques, for residual or recurrent tumour or as an alternative to aggressive resection",
+      "Cyst management with drainage or a reservoir device and intracystic therapy such as bleomycin or interferon for predominantly cystic tumours",
+      "Full hormone replacement for hypopituitarism, including glucocorticoid, thyroid hormone, sex steroids and growth hormone as required",
+      "Desmopressin for diabetes insipidus with careful perioperative fluid and electrolyte management",
+      "Consider BRAF and MEK-targeted therapy for papillary BRAF-mutant craniopharyngioma",
+      "Manage hypothalamic obesity and metabolic sequelae with dietetic and endocrine input",
+      "Provide lifelong endocrine and ophthalmological follow-up with MRI surveillance for recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for craniopharyngioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "craniopharyngioma-real-image",
-   "title": "Craniopharyngioma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "craniopharyngioma-pathway",
+      "title": "Craniopharyngioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign but locally aggressive sellar/suprasellar tumour arising from remnants of Rathke's pouch along the craniopharyngeal duct",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive visual loss from chiasmal compression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Magnetic resonance imaging of the pituitary and hypothalamic region, Computed tomography to demonstrate calcification, Formal visual acuity and visual field assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical resection by transsphenoidal or transcranial approach as primary treatment, aiming to relieve mass effect while limiting hypothalamic injury"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a cystic calcified suprasellar mass for a simple pituitary adenoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of craniopharyngioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "craniopharyngioma-matrix",
+      "title": "Craniopharyngioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign but locally aggressive sellar/suprasellar tumour arising from remnants of Rathke's pouch along the craniopharyngeal duct",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Magnetic resonance imaging of the pituitary and hypothalamic region, Computed tomography to demonstrate calcification, Formal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pituitary adenoma, Rathke cleft cyst, Meningioma of the sellar region",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical resection by transsphenoidal or transcranial approach as primary treatment, aiming to relieve mass effect while limiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a cystic calcified suprasellar mass for a simple pituitary adenoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for craniopharyngioma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "craniopharyngioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of pituitary and hypothalamic region",
+          "cells": [
+            {
+              "text": "Suprasellar mass characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity and visual field assessment",
+          "cells": [
+            {
+              "text": "Chiasmal compression assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full anterior pituitary hormone profile",
+          "cells": [
+            {
+              "text": "Hypopituitarism assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior pituitary and fluid balance assessment",
+          "cells": [
+            {
+              "text": "Diabetes insipidus assessed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "craniopharyngioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pituitary adenoma",
+          "cells": [
+            {
+              "text": "Pitfall: calcified cystic suprasellar mass mistaken for adenoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rathke cleft cyst",
+          "cells": [
+            {
+              "text": "Named look-alike cystic sellar lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germ cell tumour of the suprasellar region",
+          "cells": [
+            {
+              "text": "Named look-alike suprasellar mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "craniopharyngioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Transsphenoidal or transcranial; relieve mass effect while limiting hypothalamic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Stereotactic or proton techniques for residual or recurrent tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst management",
+          "cells": [
+            {
+              "text": "Drainage or reservoir with intracystic bleomycin or interferon for cystic tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Glucocorticoid, thyroid hormone, sex steroids and growth hormone as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "For diabetes insipidus with careful perioperative fluid and electrolyte management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF and MEK inhibition",
+          "cells": [
+            {
+              "text": "Considered for papillary BRAF-mutant tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothalamic obesity",
+          "cells": [
+            {
+              "text": "Dietetic and endocrine input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong follow-up",
+          "cells": [
+            {
+              "text": "Endocrine and ophthalmological review; MRI for recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "craniopharyngioma-dx-mgmt",
+      "title": "Diagnosis and management of Craniopharyngioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected craniopharyngioma: suprasellar mass with visual or endocrine symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (rapid visual loss, raised pressure, acute adrenal insufficiency, new DI)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical and endocrine review; steroid cover for adrenal crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI pituitary region; CT for calcification; visual fields; pituitary hormone profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show a cystic or calcified suprasellar mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pituitary adenoma, Rathke cleft cyst or germ cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection by transsphenoidal or transcranial approach",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy for residual or recurrent tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Full hormone replacement and desmopressin for diabetes insipidus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong endocrine and ophthalmological follow-up with MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Survival generally good, but recurrence is frequent and morbidity is long-term",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

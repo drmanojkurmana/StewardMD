@@ -1,171 +1,411 @@
 {
- "id": "scaphoid_fracture",
- "name": "Scaphoid fracture",
- "aliases": [
-  "carpal scaphoid fracture",
-  "scaphoid waist fracture",
-  "carpal navicular fracture"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Trauma",
- "specialty": "Orthopaedic Trauma",
- "referenceOnly": true,
- "reference": {
-  "source": "Rockwood and Green's Fractures in Adults",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most commonly fractured carpal bone, typically following a fall on the outstretched hand with the wrist dorsiflexed and radially deviated",
-   "Hallmark signs are tenderness in the anatomical snuffbox, tenderness over the scaphoid tubercle, and pain on axial compression of the thumb",
-   "The scaphoid receives its blood supply retrogradely through vessels entering distally, so waist and proximal pole fractures place the proximal fragment at risk of avascular necrosis and non-union",
-   "Initial radiographs are frequently normal (occult fracture); a clinically suspected scaphoid injury should be immobilised and re-imaged, or evaluated earlier with MRI or CT",
-   "Dedicated scaphoid views, including a posteroanterior projection in ulnar deviation, improve fracture detection compared with standard wrist films",
-   "Undisplaced waist fractures are usually managed with cast immobilisation, whereas displaced, unstable or proximal pole fractures often require percutaneous or open fixation",
-   "Untreated non-union may progress to a predictable pattern of carpal collapse and arthritis (scaphoid non-union advanced collapse)"
+  "id": "scaphoid_fracture",
+  "name": "Scaphoid fracture",
+  "aliases": [
+    "carpal scaphoid fracture",
+    "scaphoid waist fracture",
+    "carpal navicular fracture"
   ],
-  "pathophysiology": "The scaphoid spans the proximal and distal carpal rows and derives most of its blood supply from vessels that enter the distal pole and dorsal ridge, perfusing the bone in a retrograde direction. A fracture, most often across the waist, can interrupt flow to the proximal fragment, which becomes prone to delayed union, non-union and avascular necrosis. Because the bone is largely covered by articular cartilage with little periosteum, healing depends heavily on this tenuous vascular supply and on adequate immobilisation or fixation to prevent motion at the fracture. Persistent non-union alters carpal kinematics and leads over time to progressive degenerative collapse of the wrist.",
-  "additionalDifferentials": [
-   "Distal radius fracture",
-   "De Quervain tenosynovitis",
-   "Scapholunate ligament injury",
-   "Simple wrist sprain",
-   "Fracture of the trapezium or other carpal bones",
-   "First carpometacarpal osteoarthritis"
-  ],
-  "additionalInvestigations": [
-   "Dedicated scaphoid radiographic series including a posteroanterior view in ulnar deviation, oblique and lateral projections",
-   "Repeat radiographs after an interval of immobilisation when initial films are normal but clinical suspicion persists",
-   "MRI for early detection of an occult fracture and marrow oedema",
-   "CT to characterise fracture displacement, humpback deformity and to assess union",
-   "Radionuclide bone scan as an alternative when MRI is unavailable"
-  ],
-  "redFlags": [
-   "Proximal pole fracture carrying a high risk of avascular necrosis and non-union",
-   "Fracture displacement or humpback (flexion) deformity indicating instability",
-   "Delayed presentation with established non-union or sclerosis",
-   "A snuffbox-tender wrist discharged on the basis of normal initial radiographs"
-  ],
-  "prognosis": "Undisplaced waist fractures usually unite with adequate immobilisation, but proximal pole and displaced fractures carry substantially higher rates of non-union and avascular necrosis; unaddressed non-union can culminate in carpal collapse and post-traumatic arthritis.",
-  "pitfalls": [
-   "Discharging a clinically suspicious, snuffbox-tender wrist because early radiographs appear normal",
-   "Underestimating the vascular vulnerability of proximal pole fractures",
-   "Inadequate duration or quality of immobilisation leading to non-union",
-   "Overlooking associated carpal ligament injury or instability"
-  ],
-  "references": [
-   "Rockwood and Green's Fractures in Adults",
-   "Green's Operative Hand Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immobilise undisplaced waist fractures in a cast until radiographic union, given the tenuous retrograde blood supply",
-   "Refer displaced, unstable, or proximal pole fractures for percutaneous or open screw fixation",
-   "Immobilise clinically suspected but radiographically occult fractures and re-image, or arrange early MRI, rather than discharging",
-   "Provide analgesia and, after immobilisation, hand therapy to restore wrist and grip function",
-   "Confirm union with CT and monitor for non-union and avascular necrosis, particularly in proximal fractures",
-   "Refer to a hand or orthopaedic surgeon for displaced injuries and for suspected non-union or avascular necrosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scaphoid_fracture-pathway",
-   "title": "Scaphoid fracture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most commonly fractured carpal bone, typically following a fall on the outstretched hand with the wrist dorsiflexed and radially deviated",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Proximal pole fracture carrying a high risk of avascular necrosis and non-union",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dedicated scaphoid radiographic series including a posteroanterior view in ulnar deviation, oblique and lateral projections, Repeat radiographs after an interval of immobilisation when initial films are normal but clinical"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immobilise undisplaced waist fractures in a cast until radiographic union, given the tenuous retrograde blood supply"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Discharging a clinically suspicious, snuffbox-tender wrist because early radiographs appear normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scaphoid fracture."
-  }
- ],
- "tables": [
-  {
-   "id": "scaphoid_fracture-matrix",
-   "title": "Scaphoid fracture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most commonly fractured carpal bone, typically following a fall on the outstretched hand with the wrist dorsiflexed and radially",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Trauma",
+  "specialty": "Orthopaedic Trauma",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rockwood and Green's Fractures in Adults",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most commonly fractured carpal bone, typically following a fall on the outstretched hand with the wrist dorsiflexed and radially deviated",
+      "Hallmark signs are tenderness in the anatomical snuffbox, tenderness over the scaphoid tubercle, and pain on axial compression of the thumb",
+      "The scaphoid receives its blood supply retrogradely through vessels entering distally, so waist and proximal pole fractures place the proximal fragment at risk of avascular necrosis and non-union",
+      "Initial radiographs are frequently normal (occult fracture); a clinically suspected scaphoid injury should be immobilised and re-imaged, or evaluated earlier with MRI or CT",
+      "Dedicated scaphoid views, including a posteroanterior projection in ulnar deviation, improve fracture detection compared with standard wrist films",
+      "Undisplaced waist fractures are usually managed with cast immobilisation, whereas displaced, unstable or proximal pole fractures often require percutaneous or open fixation",
+      "Untreated non-union may progress to a predictable pattern of carpal collapse and arthritis (scaphoid non-union advanced collapse)"
     ],
-    [
-     "Key Investigations",
-     "Dedicated scaphoid radiographic series including a posteroanterior view in ulnar deviation, oblique and lateral projections,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The scaphoid spans the proximal and distal carpal rows and derives most of its blood supply from vessels that enter the distal pole and dorsal ridge, perfusing the bone in a retrograde direction. A fracture, most often across the waist, can interrupt flow to the proximal fragment, which becomes prone to delayed union, non-union and avascular necrosis. Because the bone is largely covered by articular cartilage with little periosteum, healing depends heavily on this tenuous vascular supply and on adequate immobilisation or fixation to prevent motion at the fracture. Persistent non-union alters carpal kinematics and leads over time to progressive degenerative collapse of the wrist.",
+    "additionalDifferentials": [
+      "Distal radius fracture",
+      "De Quervain tenosynovitis",
+      "Scapholunate ligament injury",
+      "Simple wrist sprain",
+      "Fracture of the trapezium or other carpal bones",
+      "First carpometacarpal osteoarthritis"
     ],
-    [
-     "Primary Differentials",
-     "Distal radius fracture, De Quervain tenosynovitis, Scapholunate ligament injury",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dedicated scaphoid radiographic series including a posteroanterior view in ulnar deviation, oblique and lateral projections",
+      "Repeat radiographs after an interval of immobilisation when initial films are normal but clinical suspicion persists",
+      "MRI for early detection of an occult fracture and marrow oedema",
+      "CT to characterise fracture displacement, humpback deformity and to assess union",
+      "Radionuclide bone scan as an alternative when MRI is unavailable"
     ],
-    [
-     "Management Strategy",
-     "Immobilise undisplaced waist fractures in a cast until radiographic union, given the tenuous retrograde blood supply",
-     "Core treatment modality"
+    "redFlags": [
+      "Proximal pole fracture carrying a high risk of avascular necrosis and non-union",
+      "Fracture displacement or humpback (flexion) deformity indicating instability",
+      "Delayed presentation with established non-union or sclerosis",
+      "A snuffbox-tender wrist discharged on the basis of normal initial radiographs"
     ],
-    [
-     "Clinical Pitfall",
-     "Discharging a clinically suspicious, snuffbox-tender wrist because early radiographs appear normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Undisplaced waist fractures usually unite with adequate immobilisation, but proximal pole and displaced fractures carry substantially higher rates of non-union and avascular necrosis; unaddressed non-union can culminate in carpal collapse and post-traumatic arthritis.",
+    "pitfalls": [
+      "Discharging a clinically suspicious, snuffbox-tender wrist because early radiographs appear normal",
+      "Underestimating the vascular vulnerability of proximal pole fractures",
+      "Inadequate duration or quality of immobilisation leading to non-union",
+      "Overlooking associated carpal ligament injury or instability"
+    ],
+    "references": [
+      "Rockwood and Green's Fractures in Adults",
+      "Green's Operative Hand Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immobilise undisplaced waist fractures in a cast until radiographic union, given the tenuous retrograde blood supply",
+      "Refer displaced, unstable, or proximal pole fractures for percutaneous or open screw fixation",
+      "Immobilise clinically suspected but radiographically occult fractures and re-image, or arrange early MRI, rather than discharging",
+      "Provide analgesia and, after immobilisation, hand therapy to restore wrist and grip function",
+      "Confirm union with CT and monitor for non-union and avascular necrosis, particularly in proximal fractures",
+      "Refer to a hand or orthopaedic surgeon for displaced injuries and for suspected non-union or avascular necrosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for scaphoid fracture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scaphoid-fracture-real-image",
-   "title": "Scaphoid fracture: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "scaphoid_fracture-pathway",
+      "title": "Scaphoid fracture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most commonly fractured carpal bone, typically following a fall on the outstretched hand with the wrist dorsiflexed and radially deviated",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Proximal pole fracture carrying a high risk of avascular necrosis and non-union",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dedicated scaphoid radiographic series including a posteroanterior view in ulnar deviation, oblique and lateral projections, Repeat radiographs after an interval of immobilisation when initial films are normal but clinical"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immobilise undisplaced waist fractures in a cast until radiographic union, given the tenuous retrograde blood supply"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Discharging a clinically suspicious, snuffbox-tender wrist because early radiographs appear normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scaphoid fracture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scaphoid_fracture-matrix",
+      "title": "Scaphoid fracture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most commonly fractured carpal bone, typically following a fall on the outstretched hand with the wrist dorsiflexed and radially",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dedicated scaphoid radiographic series including a posteroanterior view in ulnar deviation, oblique and lateral projections,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Distal radius fracture, De Quervain tenosynovitis, Scapholunate ligament injury",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immobilise undisplaced waist fractures in a cast until radiographic union, given the tenuous retrograde blood supply",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Discharging a clinically suspicious, snuffbox-tender wrist because early radiographs appear normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scaphoid fracture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Green's Fractures in Adults",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scaphoid_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scaphoid radiographic series",
+          "cells": [
+            {
+              "text": "Dedicated views including PA in ulnar deviation, oblique and lateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat radiographs after immobilisation",
+          "cells": [
+            {
+              "text": "When films are normal but suspicion persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Occult fracture and marrow oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Displacement, humpback deformity and union"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radionuclide bone scan",
+          "cells": [
+            {
+              "text": "Alternative when MRI is unavailable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scaphoid_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cast immobilisation",
+          "cells": [
+            {
+              "text": "Undisplaced waist fractures until radiographic union"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screw fixation",
+          "cells": [
+            {
+              "text": "Displaced, unstable or proximal pole fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occult fracture handling",
+          "cells": [
+            {
+              "text": "Immobilise and re-image or arrange early MRI; do not discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and hand therapy",
+          "cells": [
+            {
+              "text": "Restore wrist and grip function after immobilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Union monitoring",
+          "cells": [
+            {
+              "text": "CT; watch for non-union and avascular necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "Displaced injuries, non-union or avascular necrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scaphoid_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Scaphoid fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Wrist pain and anatomical snuffbox tenderness after a fall on the hand",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Proximal pole, displacement or humpback deformity, or late non-union?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Hand or orthopaedic surgeon referral for screw fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scaphoid radiograph series; MRI or repeat films if normal but suspicious",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a fracture shown on radiograph, MRI or CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Immobilise suspected occult fracture and re-image; do not discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cast immobilisation for undisplaced waist fracture until union",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screw fixation for displaced, unstable or proximal pole fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand therapy after immobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Confirm union with CT; watch for non-union and avascular necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Undisplaced waist fractures usually unite; proximal or displaced risk non-union",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

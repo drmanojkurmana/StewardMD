@@ -1,173 +1,513 @@
 {
- "id": "alpha1_antitrypsin_panniculitis",
- "name": "Alpha-1-antitrypsin deficiency panniculitis",
- "aliases": [
-  "a1AT deficiency panniculitis",
-  "alpha-1-protease inhibitor deficiency panniculitis",
-  "AAT panniculitis"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as tender, red, indurated nodules or plaques, often on the trunk and proximal limbs, that may ulcerate and discharge oily fluid",
-   "Lesions are frequently provoked by trauma at the affected site",
-   "It is a rare cutaneous manifestation of alpha-1-antitrypsin deficiency, most strongly linked to the severe PiZZ phenotype",
-   "Look for associated features of the deficiency such as early-onset emphysema and liver disease",
-   "Biopsy shows a neutrophilic lobular (and often septal) panniculitis with splaying of neutrophils between dermal collagen bundles and liquefactive fat necrosis",
-   "Serum alpha-1-antitrypsin level and phenotype/genotype confirm the diagnosis",
-   "Treatment centres on alpha-1-antitrypsin replacement/augmentation therapy in severe disease, with dapsone often used for milder cases"
+  "id": "alpha1_antitrypsin_panniculitis",
+  "name": "Alpha-1-antitrypsin deficiency panniculitis",
+  "aliases": [
+    "a1AT deficiency panniculitis",
+    "alpha-1-protease inhibitor deficiency panniculitis",
+    "AAT panniculitis"
   ],
-  "pathophysiology": "Alpha-1-antitrypsin is the principal circulating inhibitor of neutrophil-derived proteases such as elastase. In deficiency states, particularly the PiZZ phenotype, unopposed protease activity in the subcutaneous fat leads to uncontrolled tissue and connective-tissue breakdown when neutrophils are recruited, often after minor trauma. The resulting neutrophilic panniculitis features destruction of collagen and adipose tissue with liquefactive necrosis, and the loss of protease inhibition allows the inflammatory process to become self-perpetuating and destructive.",
-  "additionalDifferentials": [
-   "Infective panniculitis",
-   "Pancreatic panniculitis",
-   "Factitial or traumatic panniculitis",
-   "Neutrophilic dermatoses with subcutaneous involvement",
-   "Erythema nodosum",
-   "Nodular vasculitis / erythema induratum"
-  ],
-  "additionalInvestigations": [
-   "Deep incisional biopsy including subcutaneous fat with tissue culture to exclude infection",
-   "Serum alpha-1-antitrypsin concentration",
-   "Alpha-1-antitrypsin phenotype (Pi typing) or genotype",
-   "Liver function tests and assessment for hepatic involvement",
-   "Pulmonary function tests for associated emphysema",
-   "Full blood count and inflammatory markers"
-  ],
-  "redFlags": [
-   "Extensive ulceration with rapid tissue destruction and secondary sepsis",
-   "Evidence of associated severe emphysema or progressive liver disease",
-   "Failure to respond to standard treatment, warranting augmentation therapy",
-   "Recurrent lesions at sites of minor trauma indicating ongoing uncontrolled protease activity"
-  ],
-  "prognosis": "The panniculitis often follows a chronic relapsing course and can be difficult to control, but replacement of alpha-1-antitrypsin can produce marked improvement in severe cases. Overall outlook is also shaped by the associated pulmonary and hepatic manifestations of the deficiency.",
-  "pitfalls": [
-   "Not measuring alpha-1-antitrypsin levels and phenotype in a neutrophilic panniculitis",
-   "Interpreting a normal level during acute inflammation without recognising it is an acute-phase reactant that can be falsely raised",
-   "Mistaking the neutrophilic infiltrate for infection and withholding appropriate therapy",
-   "Overlooking associated pulmonary and hepatic disease"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intravenous augmentation therapy with pooled human alpha-1-antitrypsin can produce marked improvement in severe or refractory panniculitis",
-   "Dapsone is commonly used first-line for its anti-neutrophil action, after screening for G6PD deficiency",
-   "Avoid trauma to susceptible skin, which can provoke new lesions",
-   "Provide wound care for ulcerating, oily-discharging nodules and treat any secondary infection",
-   "Assess and manage the associated pulmonary emphysema and hepatic manifestations of the deficiency",
-   "Coordinate care across dermatology, respiratory and metabolic teams, and consider liver transplantation in appropriate cases, which can also resolve the panniculitis",
-   "Offer genetic counselling and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alpha1_antitrypsin_panniculitis-pathway",
-   "title": "Alpha-1-antitrypsin deficiency panniculitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as tender, red, indurated nodules or plaques, often on the trunk and proximal limbs, that may ulcerate and discharge oily fluid",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive ulceration with rapid tissue destruction and secondary sepsis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Deep incisional biopsy including subcutaneous fat with tissue culture to exclude infection, Serum alpha-1-antitrypsin concentration, Alpha-1-antitrypsin phenotype (Pi typing) or genotype"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intravenous augmentation therapy with pooled human alpha-1-antitrypsin can produce marked improvement in severe or refractory panniculitis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not measuring alpha-1-antitrypsin levels and phenotype in a neutrophilic panniculitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alpha-1-antitrypsin deficiency panniculitis."
-  }
- ],
- "tables": [
-  {
-   "id": "alpha1_antitrypsin_panniculitis-matrix",
-   "title": "Alpha-1-antitrypsin deficiency panniculitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as tender, red, indurated nodules or plaques, often on the trunk and proximal limbs, that may ulcerate and discharge",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as tender, red, indurated nodules or plaques, often on the trunk and proximal limbs, that may ulcerate and discharge oily fluid",
+      "Lesions are frequently provoked by trauma at the affected site",
+      "It is a rare cutaneous manifestation of alpha-1-antitrypsin deficiency, most strongly linked to the severe PiZZ phenotype",
+      "Look for associated features of the deficiency such as early-onset emphysema and liver disease",
+      "Biopsy shows a neutrophilic lobular (and often septal) panniculitis with splaying of neutrophils between dermal collagen bundles and liquefactive fat necrosis",
+      "Serum alpha-1-antitrypsin level and phenotype/genotype confirm the diagnosis",
+      "Treatment centres on alpha-1-antitrypsin replacement/augmentation therapy in severe disease, with dapsone often used for milder cases"
     ],
-    [
-     "Key Investigations",
-     "Deep incisional biopsy including subcutaneous fat with tissue culture to exclude infection, Serum alpha-1-antitrypsin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Alpha-1-antitrypsin is the principal circulating inhibitor of neutrophil-derived proteases such as elastase. In deficiency states, particularly the PiZZ phenotype, unopposed protease activity in the subcutaneous fat leads to uncontrolled tissue and connective-tissue breakdown when neutrophils are recruited, often after minor trauma. The resulting neutrophilic panniculitis features destruction of collagen and adipose tissue with liquefactive necrosis, and the loss of protease inhibition allows the inflammatory process to become self-perpetuating and destructive.",
+    "additionalDifferentials": [
+      "Infective panniculitis",
+      "Pancreatic panniculitis",
+      "Factitial or traumatic panniculitis",
+      "Neutrophilic dermatoses with subcutaneous involvement",
+      "Erythema nodosum",
+      "Nodular vasculitis / erythema induratum"
     ],
-    [
-     "Primary Differentials",
-     "Infective panniculitis, Pancreatic panniculitis, Factitial or traumatic panniculitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Deep incisional biopsy including subcutaneous fat with tissue culture to exclude infection",
+      "Serum alpha-1-antitrypsin concentration",
+      "Alpha-1-antitrypsin phenotype (Pi typing) or genotype",
+      "Liver function tests and assessment for hepatic involvement",
+      "Pulmonary function tests for associated emphysema",
+      "Full blood count and inflammatory markers"
     ],
-    [
-     "Management Strategy",
-     "Intravenous augmentation therapy with pooled human alpha-1-antitrypsin can produce marked improvement in severe or refractory",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive ulceration with rapid tissue destruction and secondary sepsis",
+      "Evidence of associated severe emphysema or progressive liver disease",
+      "Failure to respond to standard treatment, warranting augmentation therapy",
+      "Recurrent lesions at sites of minor trauma indicating ongoing uncontrolled protease activity"
     ],
-    [
-     "Clinical Pitfall",
-     "Not measuring alpha-1-antitrypsin levels and phenotype in a neutrophilic panniculitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The panniculitis often follows a chronic relapsing course and can be difficult to control, but replacement of alpha-1-antitrypsin can produce marked improvement in severe cases. Overall outlook is also shaped by the associated pulmonary and hepatic manifestations of the deficiency.",
+    "pitfalls": [
+      "Not measuring alpha-1-antitrypsin levels and phenotype in a neutrophilic panniculitis",
+      "Interpreting a normal level during acute inflammation without recognising it is an acute-phase reactant that can be falsely raised",
+      "Mistaking the neutrophilic infiltrate for infection and withholding appropriate therapy",
+      "Overlooking associated pulmonary and hepatic disease"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intravenous augmentation therapy with pooled human alpha-1-antitrypsin can produce marked improvement in severe or refractory panniculitis",
+      "Dapsone is commonly used first-line for its anti-neutrophil action, after screening for G6PD deficiency",
+      "Avoid trauma to susceptible skin, which can provoke new lesions",
+      "Provide wound care for ulcerating, oily-discharging nodules and treat any secondary infection",
+      "Assess and manage the associated pulmonary emphysema and hepatic manifestations of the deficiency",
+      "Coordinate care across dermatology, respiratory and metabolic teams, and consider liver transplantation in appropriate cases, which can also resolve the panniculitis",
+      "Offer genetic counselling and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for alpha-1-antitrypsin deficiency panniculitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alpha1-antitrypsin-panniculitis-real-image",
-   "title": "Alpha-1-antitrypsin deficiency panniculitis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "alpha1_antitrypsin_panniculitis-pathway",
+      "title": "Alpha-1-antitrypsin deficiency panniculitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as tender, red, indurated nodules or plaques, often on the trunk and proximal limbs, that may ulcerate and discharge oily fluid",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive ulceration with rapid tissue destruction and secondary sepsis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Deep incisional biopsy including subcutaneous fat with tissue culture to exclude infection, Serum alpha-1-antitrypsin concentration, Alpha-1-antitrypsin phenotype (Pi typing) or genotype"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intravenous augmentation therapy with pooled human alpha-1-antitrypsin can produce marked improvement in severe or refractory panniculitis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not measuring alpha-1-antitrypsin levels and phenotype in a neutrophilic panniculitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alpha-1-antitrypsin deficiency panniculitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alpha1_antitrypsin_panniculitis-matrix",
+      "title": "Alpha-1-antitrypsin deficiency panniculitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as tender, red, indurated nodules or plaques, often on the trunk and proximal limbs, that may ulcerate and discharge",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Deep incisional biopsy including subcutaneous fat with tissue culture to exclude infection, Serum alpha-1-antitrypsin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Infective panniculitis, Pancreatic panniculitis, Factitial or traumatic panniculitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intravenous augmentation therapy with pooled human alpha-1-antitrypsin can produce marked improvement in severe or refractory",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not measuring alpha-1-antitrypsin levels and phenotype in a neutrophilic panniculitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alpha-1-antitrypsin deficiency panniculitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alpha1_antitrypsin_panniculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep incisional biopsy with subcutaneous fat and tissue culture",
+          "cells": [
+            {
+              "text": "Excludes infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alpha-1-antitrypsin concentration",
+          "cells": [
+            {
+              "text": "Low level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-1-antitrypsin phenotype (Pi typing) or genotype",
+          "cells": [
+            {
+              "text": "PiZZ phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Associated emphysema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha1_antitrypsin_panniculitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective panniculitis",
+          "cells": [
+            {
+              "text": "Infection on culture"
+            },
+            {
+              "text": "Tissue culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic panniculitis",
+          "cells": [
+            {
+              "text": "Fat necrosis with pancreatic disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitial or traumatic panniculitis",
+          "cells": [
+            {
+              "text": "Trauma at the site"
+            },
+            {
+              "text": "History of trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythema nodosum",
+          "cells": [
+            {
+              "text": "Tender nodules on the shins"
+            },
+            {
+              "text": "Clinical pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodular vasculitis or erythema induratum",
+          "cells": [
+            {
+              "text": "Vasculitic nodules"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha1_antitrypsin_panniculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous pooled human alpha-1-antitrypsin augmentation",
+          "cells": [
+            {
+              "text": "Severe or refractory panniculitis"
+            },
+            {
+              "text": "Marked improvement reported"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dapsone after G6PD screening",
+          "cells": [
+            {
+              "text": "Anti-neutrophil action"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of trauma to susceptible skin",
+          "cells": [
+            {
+              "text": "Provokes new lesions"
+            },
+            {
+              "text": "Preventive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and treatment of secondary infection",
+          "cells": [
+            {
+              "text": "Ulcerating, oily-discharging nodules"
+            },
+            {
+              "text": "Local care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of pulmonary emphysema and hepatic disease",
+          "cells": [
+            {
+              "text": "Associated deficiency features"
+            },
+            {
+              "text": "Respiratory and hepatic review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation in appropriate cases",
+          "cells": [
+            {
+              "text": "Resolves the panniculitis"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alpha1_antitrypsin_panniculitis-dx-mgmt",
+      "title": "Diagnosis and management of Alpha-1-antitrypsin deficiency panniculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender red nodules on trunk or limbs that ulcerate and discharge oil",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Extensive ulceration, sepsis or severe emphysema or liver disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical and infection review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep biopsy with culture; alpha-1-antitrypsin level and phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neutrophilic panniculitis with low level and PiZZ phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intravenous augmentation for severe or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review infective, pancreatic and traumatic panniculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dapsone after G6PD screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid trauma to affected skin; wound care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess emphysema and liver involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Relapsing course; augmentation can give marked improvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

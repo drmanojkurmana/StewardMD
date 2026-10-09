@@ -1,174 +1,505 @@
 {
- "id": "rheumatic_heart_disease",
- "name": "Rheumatic heart disease",
- "aliases": [
-  "RHD",
-  "chronic rheumatic valvular disease",
-  "post-rheumatic valve disease"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rheumatic heart disease is the chronic valvular sequel of acute rheumatic fever, an immune-mediated complication of group A streptococcal infection, and remains a major cause of valve disease in many parts of the world",
-   "The mitral valve is most often affected, and mitral stenosis is the most characteristic lesion, though mixed mitral and aortic valve involvement is common",
-   "Patients may be asymptomatic for years before developing exertional breathlessness, fatigue, palpitations from atrial fibrillation, or features of heart failure",
-   "Although the valve damage itself is non-infective, these valves are prone to infective endocarditis, which must be considered when there is fever or clinical deterioration",
-   "Mitral stenosis predisposes to atrial fibrillation and left atrial thrombus, and to systemic embolism including stroke",
-   "Echocardiography is central to assessing valve morphology, severity, and haemodynamic consequences",
-   "Prevention relies on prompt treatment of streptococcal pharyngitis and long-term secondary antibiotic prophylaxis to prevent recurrent rheumatic fever",
-   "Advanced disease may require balloon valvuloplasty for suitable mitral stenosis, or surgical repair or valve replacement"
+  "id": "rheumatic_heart_disease",
+  "name": "Rheumatic heart disease",
+  "aliases": [
+    "RHD",
+    "chronic rheumatic valvular disease",
+    "post-rheumatic valve disease"
   ],
-  "pathophysiology": "Acute rheumatic fever follows group A streptococcal pharyngitis in susceptible individuals, in whom molecular mimicry between streptococcal antigens and host tissue drives a cross-reactive immune response affecting the heart, joints, skin, and nervous system. Recurrent or severe carditis produces chronic inflammation and scarring of the valves, with leaflet thickening, commissural fusion, and chordal shortening. Over years this yields stenosis, regurgitation, or mixed dysfunction, most commonly of the mitral valve. The resulting pressure and volume loading leads to atrial enlargement, atrial fibrillation, pulmonary hypertension, and eventually heart failure.",
-  "additionalDifferentials": [
-   "Degenerative (calcific) valve disease",
-   "Congenital valve abnormalities such as bicuspid aortic valve",
-   "Infective endocarditis affecting native valves",
-   "Non-rheumatic mitral regurgitation from prolapse or ischaemia",
-   "Other causes of mitral stenosis such as severe annular calcification",
-   "Cardiomyopathy presenting with functional valve regurgitation"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic and, when needed, transoesophageal echocardiography to define valve morphology and severity",
-   "12-lead ECG to detect atrial fibrillation and chamber enlargement",
-   "Chest radiography for chamber size, pulmonary congestion, and valve calcification",
-   "Evidence of prior streptococcal infection and inflammatory markers in suspected acute disease",
-   "Assessment of pulmonary pressures and right heart consequences",
-   "Blood cultures and endocarditis workup when infection is suspected"
-  ],
-  "redFlags": [
-   "Fever or systemic features suggesting superimposed infective endocarditis on a damaged valve",
-   "New atrial fibrillation with embolic risk, or acute systemic embolism such as stroke",
-   "Acute pulmonary oedema or rapidly progressive heart failure",
-   "Haemoptysis or severe pulmonary hypertension in advanced mitral stenosis"
-  ],
-  "prognosis": "Prognosis depends on the valves involved, severity, and access to secondary prophylaxis and intervention; secondary prophylaxis and timely valve intervention allow many patients to do well, but advanced disease with pulmonary hypertension, atrial fibrillation, and heart failure carries significant morbidity and mortality.",
-  "pitfalls": [
-   "Overlooking superimposed infective endocarditis when a patient with known rheumatic valve disease develops fever",
-   "Failing to maintain long-term secondary antibiotic prophylaxis to prevent recurrent rheumatic fever",
-   "Underestimating stroke risk from atrial fibrillation and left atrial thrombus in mitral stenosis",
-   "Delaying valve intervention until irreversible pulmonary hypertension or ventricular dysfunction has developed"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ESC/ACC-AHA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Maintain long-term secondary prophylaxis with regular benzathine penicillin to prevent recurrent rheumatic fever",
-   "Manage heart-failure symptoms with diuretics and control the rate and rhythm in atrial fibrillation",
-   "Anticoagulate with a vitamin K antagonist for atrial fibrillation, left atrial thrombus or a prosthetic valve",
-   "Refer for valve intervention (balloon valvuloplasty, repair or replacement) guided by echocardiographic severity and symptoms",
-   "Maintain vigilance for infective endocarditis and treat it promptly when suspected",
-   "Monitor with serial echocardiography for progression of valve dysfunction and pulmonary hypertension",
-   "Coordinate combined cardiology and obstetric care in pregnancy and maintain dental and general health"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rheumatic_heart_disease-pathway",
-   "title": "Rheumatic heart disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rheumatic heart disease is the chronic valvular sequel of acute rheumatic fever, an immune-mediated complication of group A streptococcal infection, and remains a major cause of valve disease in many parts of the world",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fever or systemic features suggesting superimposed infective endocarditis on a damaged valve",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic and, when needed, transoesophageal echocardiography to define valve morphology and severity, 12-lead ECG to detect atrial fibrillation and chamber enlargement, Chest radiography for chamber size, pulmonary"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Maintain long-term secondary prophylaxis with regular benzathine penicillin to prevent recurrent rheumatic fever"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking superimposed infective endocarditis when a patient with known rheumatic valve disease develops fever"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rheumatic heart disease."
-  }
- ],
- "tables": [
-  {
-   "id": "rheumatic_heart_disease-matrix",
-   "title": "Rheumatic heart disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rheumatic heart disease is the chronic valvular sequel of acute rheumatic fever, an immune-mediated complication of group A",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rheumatic heart disease is the chronic valvular sequel of acute rheumatic fever, an immune-mediated complication of group A streptococcal infection, and remains a major cause of valve disease in many parts of the world",
+      "The mitral valve is most often affected, and mitral stenosis is the most characteristic lesion, though mixed mitral and aortic valve involvement is common",
+      "Patients may be asymptomatic for years before developing exertional breathlessness, fatigue, palpitations from atrial fibrillation, or features of heart failure",
+      "Although the valve damage itself is non-infective, these valves are prone to infective endocarditis, which must be considered when there is fever or clinical deterioration",
+      "Mitral stenosis predisposes to atrial fibrillation and left atrial thrombus, and to systemic embolism including stroke",
+      "Echocardiography is central to assessing valve morphology, severity, and haemodynamic consequences",
+      "Prevention relies on prompt treatment of streptococcal pharyngitis and long-term secondary antibiotic prophylaxis to prevent recurrent rheumatic fever",
+      "Advanced disease may require balloon valvuloplasty for suitable mitral stenosis, or surgical repair or valve replacement"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic and, when needed, transoesophageal echocardiography to define valve morphology and severity, 12-lead ECG to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute rheumatic fever follows group A streptococcal pharyngitis in susceptible individuals, in whom molecular mimicry between streptococcal antigens and host tissue drives a cross-reactive immune response affecting the heart, joints, skin, and nervous system. Recurrent or severe carditis produces chronic inflammation and scarring of the valves, with leaflet thickening, commissural fusion, and chordal shortening. Over years this yields stenosis, regurgitation, or mixed dysfunction, most commonly of the mitral valve. The resulting pressure and volume loading leads to atrial enlargement, atrial fibrillation, pulmonary hypertension, and eventually heart failure.",
+    "additionalDifferentials": [
+      "Degenerative (calcific) valve disease",
+      "Congenital valve abnormalities such as bicuspid aortic valve",
+      "Infective endocarditis affecting native valves",
+      "Non-rheumatic mitral regurgitation from prolapse or ischaemia",
+      "Other causes of mitral stenosis such as severe annular calcification",
+      "Cardiomyopathy presenting with functional valve regurgitation"
     ],
-    [
-     "Primary Differentials",
-     "Degenerative (calcific) valve disease, Congenital valve abnormalities such as bicuspid aortic valve, Infective endocarditis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic and, when needed, transoesophageal echocardiography to define valve morphology and severity",
+      "12-lead ECG to detect atrial fibrillation and chamber enlargement",
+      "Chest radiography for chamber size, pulmonary congestion, and valve calcification",
+      "Evidence of prior streptococcal infection and inflammatory markers in suspected acute disease",
+      "Assessment of pulmonary pressures and right heart consequences",
+      "Blood cultures and endocarditis workup when infection is suspected"
     ],
-    [
-     "Management Strategy",
-     "Maintain long-term secondary prophylaxis with regular benzathine penicillin to prevent recurrent rheumatic fever",
-     "Core treatment modality"
+    "redFlags": [
+      "Fever or systemic features suggesting superimposed infective endocarditis on a damaged valve",
+      "New atrial fibrillation with embolic risk, or acute systemic embolism such as stroke",
+      "Acute pulmonary oedema or rapidly progressive heart failure",
+      "Haemoptysis or severe pulmonary hypertension in advanced mitral stenosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking superimposed infective endocarditis when a patient with known rheumatic valve disease develops fever",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the valves involved, severity, and access to secondary prophylaxis and intervention; secondary prophylaxis and timely valve intervention allow many patients to do well, but advanced disease with pulmonary hypertension, atrial fibrillation, and heart failure carries significant morbidity and mortality.",
+    "pitfalls": [
+      "Overlooking superimposed infective endocarditis when a patient with known rheumatic valve disease develops fever",
+      "Failing to maintain long-term secondary antibiotic prophylaxis to prevent recurrent rheumatic fever",
+      "Underestimating stroke risk from atrial fibrillation and left atrial thrombus in mitral stenosis",
+      "Delaying valve intervention until irreversible pulmonary hypertension or ventricular dysfunction has developed"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ESC/ACC-AHA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Maintain long-term secondary prophylaxis with regular benzathine penicillin to prevent recurrent rheumatic fever",
+      "Manage heart-failure symptoms with diuretics and control the rate and rhythm in atrial fibrillation",
+      "Anticoagulate with a vitamin K antagonist for atrial fibrillation, left atrial thrombus or a prosthetic valve",
+      "Refer for valve intervention (balloon valvuloplasty, repair or replacement) guided by echocardiographic severity and symptoms",
+      "Maintain vigilance for infective endocarditis and treat it promptly when suspected",
+      "Monitor with serial echocardiography for progression of valve dysfunction and pulmonary hypertension",
+      "Coordinate combined cardiology and obstetric care in pregnancy and maintain dental and general health"
     ]
-   ],
-   "caption": "Overview comparison matrix for rheumatic heart disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rheumatic-heart-disease-real-image",
-   "title": "Rheumatic heart disease: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "rheumatic_heart_disease-pathway",
+      "title": "Rheumatic heart disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rheumatic heart disease is the chronic valvular sequel of acute rheumatic fever, an immune-mediated complication of group A streptococcal infection, and remains a major cause of valve disease in many parts of the world",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fever or systemic features suggesting superimposed infective endocarditis on a damaged valve",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic and, when needed, transoesophageal echocardiography to define valve morphology and severity, 12-lead ECG to detect atrial fibrillation and chamber enlargement, Chest radiography for chamber size, pulmonary"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Maintain long-term secondary prophylaxis with regular benzathine penicillin to prevent recurrent rheumatic fever"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking superimposed infective endocarditis when a patient with known rheumatic valve disease develops fever"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rheumatic heart disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rheumatic_heart_disease-matrix",
+      "title": "Rheumatic heart disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rheumatic heart disease is the chronic valvular sequel of acute rheumatic fever, an immune-mediated complication of group A",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic and, when needed, transoesophageal echocardiography to define valve morphology and severity, 12-lead ECG to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Degenerative (calcific) valve disease, Congenital valve abnormalities such as bicuspid aortic valve, Infective endocarditis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Maintain long-term secondary prophylaxis with regular benzathine penicillin to prevent recurrent rheumatic fever",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking superimposed infective endocarditis when a patient with known rheumatic valve disease develops fever",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rheumatic heart disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 322-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rheumatic_heart_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic and transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Valve morphology and severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Atrial fibrillation and chamber enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiography",
+          "cells": [
+            {
+              "text": "Chamber size, pulmonary congestion and valve calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evidence of prior streptococcal infection and inflammatory markers",
+          "cells": [
+            {
+              "text": "Recent streptococcal infection in suspected acute disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rheumatic_heart_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bicuspid aortic valve",
+          "cells": [
+            {
+              "text": "Congenital valve abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective endocarditis on native valves",
+          "cells": [
+            {
+              "text": "Fever or systemic features on a damaged valve suggest it (red flag)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-rheumatic mitral regurgitation",
+          "cells": [
+            {
+              "text": "Arises from prolapse or ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiomyopathy",
+          "cells": [
+            {
+              "text": "Presents with functional valve regurgitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rheumatic_heart_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary prophylaxis",
+          "cells": [
+            {
+              "text": "Regular benzathine penicillin to prevent recurrent rheumatic fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure and rhythm",
+          "cells": [
+            {
+              "text": "Diuretics; rate and rhythm control in atrial fibrillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Vitamin K antagonist for atrial fibrillation, left atrial thrombus or prosthetic valve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Valve intervention",
+          "cells": [
+            {
+              "text": "Balloon valvuloplasty, repair or replacement guided by echocardiographic severity and symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis vigilance",
+          "cells": [
+            {
+              "text": "Treat promptly when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial echocardiography",
+          "cells": [
+            {
+              "text": "Progression of valve dysfunction and pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy and general care",
+          "cells": [
+            {
+              "text": "Combined cardiology and obstetric care in pregnancy; dental and general health"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rheumatic_heart_disease-treatment-2",
+      "kind": "treatment",
+      "title": "Duration of secondary prophylaxis after rheumatic fever",
+      "rowHeader": "Option",
+      "columns": [
+        "Duration of prophylaxis"
+      ],
+      "rows": [
+        {
+          "parameter": "Rheumatic fever without carditis",
+          "cells": [
+            {
+              "text": "5 years after the last attack or until age 21, whichever is longer"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatic fever with carditis but no residual valvular disease",
+          "cells": [
+            {
+              "text": "10 years after the last attack or until age 21, whichever is longer"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatic fever with persistent valvular disease (clinical or echocardiographic)",
+          "cells": [
+            {
+              "text": "10 years after the last attack or until age 40, whichever is longer; sometimes lifelong"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "These are recommendations only and should be adapted to individual circumstances; other organizations differ slightly (see www.worldheart.org/rhd)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rheumatic_heart_disease-dx-mgmt",
+      "title": "Diagnosis and management of Rheumatic heart disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Patient with suspected rheumatic valve disease and cardiac symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, new AF with embolic risk, pulmonary oedema, haemoptysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: endocarditis, embolism or acute heart failure; cardiology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography (TOE if needed), 12-lead ECG, chest radiograph, inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is valve morphology and severity defined on echocardiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider degenerative, congenital or non-rheumatic valve disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Long-term secondary prophylaxis with regular benzathine penicillin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diuretics and rate or rhythm control for symptoms and atrial fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vitamin K antagonist for atrial fibrillation, left atrial thrombus or prosthetic valve",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Valve intervention guided by echocardiographic severity and symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on valves involved and access to prophylaxis and intervention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

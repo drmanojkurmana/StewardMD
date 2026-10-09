@@ -1,175 +1,460 @@
 {
- "id": "coal_workers_pneumoconiosis",
- "name": "Coal workers' pneumoconiosis",
- "aliases": [
-  "CWP",
-  "black lung disease",
-  "coal miner's lung",
-  "anthracosis (severe)"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory Medicine / Occupational Lung Disease",
- "referenceOnly": true,
- "reference": {
-  "source": "Occupational and Environmental Respiratory Medicine reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Arises from chronic inhalation of coal mine dust, with risk tied to cumulative exposure and to the rank (carbon content) of the coal",
-   "Simple pneumoconiosis is often asymptomatic and detected on imaging as small upper-zone nodular opacities",
-   "Progressive massive fibrosis (complicated CWP) is defined by coalescent conglomerate masses, typically in the upper zones, causing breathlessness and airflow limitation",
-   "Caplan syndrome describes rounded fibrotic nodules occurring in coal (and other dust) exposure alongside rheumatoid arthritis",
-   "The coal macule, a dust-laden macrophage collection around respiratory bronchioles, is the fundamental histological lesion and drives focal (centrilobular) emphysema",
-   "A careful occupational history including years underground and job type is central to diagnosis, as there is no curative treatment",
-   "Disease may progress even after exposure has ceased, so surveillance and cessation of further dust exposure are key"
+  "id": "coal_workers_pneumoconiosis",
+  "name": "Coal workers' pneumoconiosis",
+  "aliases": [
+    "CWP",
+    "black lung disease",
+    "coal miner's lung",
+    "anthracosis (severe)"
   ],
-  "pathophysiology": "Inhaled coal dust particles that reach the small airways and alveoli are engulfed by macrophages, which accumulate around respiratory bronchioles to form pigmented coal macules, the earliest lesion. Persistent dust burden and the resulting release of inflammatory mediators and reactive oxygen species provoke fibroblast activation and collagen deposition, producing fibrotic nodules. In simple disease these remain small and discrete, but with heavy exposure nodules enlarge and coalesce into large conglomerate masses (progressive massive fibrosis), which distort lung architecture, destroy vasculature, and cause focal emphysema. Coexisting silica in mixed dusts accelerates and worsens fibrosis.",
-  "additionalDifferentials": [
-   "Silicosis and mixed-dust pneumoconiosis",
-   "Pulmonary tuberculosis (may coexist and complicate)",
-   "Sarcoidosis",
-   "Pulmonary metastases or primary lung carcinoma (masses)",
-   "Chronic hypersensitivity pneumonitis",
-   "Rheumatoid lung nodules"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph with ILO classification of small opacities and large opacity categories",
-   "High-resolution CT to characterise nodularity, conglomerate masses, and emphysema",
-   "Detailed occupational and exposure history",
-   "Spirometry and lung volumes to define obstructive, restrictive, or mixed impairment",
-   "Diffusing capacity for carbon monoxide",
-   "Consideration of tuberculosis testing where masses cavitate or grow rapidly"
-  ],
-  "redFlags": [
-   "Rapidly enlarging or cavitating mass suggesting superimposed tuberculosis or malignancy",
-   "Accelerated progressive massive fibrosis with rapid decline in lung function",
-   "Haemoptysis prompting exclusion of carcinoma or mycobacterial disease",
-   "New systemic symptoms or weight loss requiring evaluation for alternative pathology"
-  ],
-  "prognosis": "Simple coal workers' pneumoconiosis often remains stable and asymptomatic, whereas progressive massive fibrosis causes progressive breathlessness, respiratory failure, and increased mortality; there is no reversal, so prevention through dust control and exposure cessation is paramount.",
-  "pitfalls": [
-   "Attributing all coal-worker breathlessness to pneumoconiosis while missing coexistent COPD or heart disease",
-   "Overlooking superimposed tuberculosis or malignancy within a conglomerate mass",
-   "Assuming disease stabilises once mining stops, when progression can still occur",
-   "Failing to take an adequate occupational history in a patient presenting with upper-zone nodules"
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "Parkes' Occupational Lung Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cessation of further coal dust exposure by removal from the dusty environment, as there is no curative treatment and prevention through dust control is paramount.",
-   "Smoking cessation support to limit additional airflow obstruction and emphysema.",
-   "Symptomatic treatment of airflow limitation with inhaled bronchodilators and enrolment in pulmonary rehabilitation.",
-   "Long-term oxygen therapy for chronic hypoxaemia and respiratory failure.",
-   "Influenza and pneumococcal vaccination with prompt treatment of respiratory infections.",
-   "Radiological surveillance for progressive massive fibrosis, with tuberculosis testing where masses cavitate or grow rapidly.",
-   "Monitoring for and management of complications such as respiratory failure and cor pulmonale.",
-   "Occupational health referral and support with disablement compensation claims."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "coal_workers_pneumoconiosis-pathway",
-   "title": "Coal workers' pneumoconiosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Arises from chronic inhalation of coal mine dust, with risk tied to cumulative exposure and to the rank (carbon content) of the coal",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging or cavitating mass suggesting superimposed tuberculosis or malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph with ILO classification of small opacities and large opacity categories, High-resolution CT to characterise nodularity, conglomerate masses, and emphysema, Detailed occupational and exposure history"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cessation of further coal dust exposure by removal from the dusty environment, as there is no curative treatment and prevention through dust control is paramount."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all coal-worker breathlessness to pneumoconiosis while missing coexistent COPD or heart disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coal workers' pneumoconiosis."
-  }
- ],
- "tables": [
-  {
-   "id": "coal_workers_pneumoconiosis-matrix",
-   "title": "Coal workers' pneumoconiosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Arises from chronic inhalation of coal mine dust, with risk tied to cumulative exposure and to the rank (carbon content) of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory Medicine / Occupational Lung Disease",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Occupational and Environmental Respiratory Medicine reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Arises from chronic inhalation of coal mine dust, with risk tied to cumulative exposure and to the rank (carbon content) of the coal",
+      "Simple pneumoconiosis is often asymptomatic and detected on imaging as small upper-zone nodular opacities",
+      "Progressive massive fibrosis (complicated CWP) is defined by coalescent conglomerate masses, typically in the upper zones, causing breathlessness and airflow limitation",
+      "Caplan syndrome describes rounded fibrotic nodules occurring in coal (and other dust) exposure alongside rheumatoid arthritis",
+      "The coal macule, a dust-laden macrophage collection around respiratory bronchioles, is the fundamental histological lesion and drives focal (centrilobular) emphysema",
+      "A careful occupational history including years underground and job type is central to diagnosis, as there is no curative treatment",
+      "Disease may progress even after exposure has ceased, so surveillance and cessation of further dust exposure are key"
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph with ILO classification of small opacities and large opacity categories, High-resolution CT to characterise",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Inhaled coal dust particles that reach the small airways and alveoli are engulfed by macrophages, which accumulate around respiratory bronchioles to form pigmented coal macules, the earliest lesion. Persistent dust burden and the resulting release of inflammatory mediators and reactive oxygen species provoke fibroblast activation and collagen deposition, producing fibrotic nodules. In simple disease these remain small and discrete, but with heavy exposure nodules enlarge and coalesce into large conglomerate masses (progressive massive fibrosis), which distort lung architecture, destroy vasculature, and cause focal emphysema. Coexisting silica in mixed dusts accelerates and worsens fibrosis.",
+    "additionalDifferentials": [
+      "Silicosis and mixed-dust pneumoconiosis",
+      "Pulmonary tuberculosis (may coexist and complicate)",
+      "Sarcoidosis",
+      "Pulmonary metastases or primary lung carcinoma (masses)",
+      "Chronic hypersensitivity pneumonitis",
+      "Rheumatoid lung nodules"
     ],
-    [
-     "Primary Differentials",
-     "Silicosis and mixed-dust pneumoconiosis, Pulmonary tuberculosis (may coexist and complicate), Sarcoidosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph with ILO classification of small opacities and large opacity categories",
+      "High-resolution CT to characterise nodularity, conglomerate masses, and emphysema",
+      "Detailed occupational and exposure history",
+      "Spirometry and lung volumes to define obstructive, restrictive, or mixed impairment",
+      "Diffusing capacity for carbon monoxide",
+      "Consideration of tuberculosis testing where masses cavitate or grow rapidly"
     ],
-    [
-     "Management Strategy",
-     "Cessation of further coal dust exposure by removal from the dusty environment, as there is no curative treatment and prevention",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging or cavitating mass suggesting superimposed tuberculosis or malignancy",
+      "Accelerated progressive massive fibrosis with rapid decline in lung function",
+      "Haemoptysis prompting exclusion of carcinoma or mycobacterial disease",
+      "New systemic symptoms or weight loss requiring evaluation for alternative pathology"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all coal-worker breathlessness to pneumoconiosis while missing coexistent COPD or heart disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Simple coal workers' pneumoconiosis often remains stable and asymptomatic, whereas progressive massive fibrosis causes progressive breathlessness, respiratory failure, and increased mortality; there is no reversal, so prevention through dust control and exposure cessation is paramount.",
+    "pitfalls": [
+      "Attributing all coal-worker breathlessness to pneumoconiosis while missing coexistent COPD or heart disease",
+      "Overlooking superimposed tuberculosis or malignancy within a conglomerate mass",
+      "Assuming disease stabilises once mining stops, when progression can still occur",
+      "Failing to take an adequate occupational history in a patient presenting with upper-zone nodules"
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "Parkes' Occupational Lung Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cessation of further coal dust exposure by removal from the dusty environment, as there is no curative treatment and prevention through dust control is paramount.",
+      "Smoking cessation support to limit additional airflow obstruction and emphysema.",
+      "Symptomatic treatment of airflow limitation with inhaled bronchodilators and enrolment in pulmonary rehabilitation.",
+      "Long-term oxygen therapy for chronic hypoxaemia and respiratory failure.",
+      "Influenza and pneumococcal vaccination with prompt treatment of respiratory infections.",
+      "Radiological surveillance for progressive massive fibrosis, with tuberculosis testing where masses cavitate or grow rapidly.",
+      "Monitoring for and management of complications such as respiratory failure and cor pulmonale.",
+      "Occupational health referral and support with disablement compensation claims."
     ]
-   ],
-   "caption": "Overview comparison matrix for coal workers' pneumoconiosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "coal-workers-pneumoconiosis-real-image",
-   "title": "Coal workers' pneumoconiosis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "coal_workers_pneumoconiosis-pathway",
+      "title": "Coal workers' pneumoconiosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Arises from chronic inhalation of coal mine dust, with risk tied to cumulative exposure and to the rank (carbon content) of the coal",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging or cavitating mass suggesting superimposed tuberculosis or malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph with ILO classification of small opacities and large opacity categories, High-resolution CT to characterise nodularity, conglomerate masses, and emphysema, Detailed occupational and exposure history"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cessation of further coal dust exposure by removal from the dusty environment, as there is no curative treatment and prevention through dust control is paramount."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all coal-worker breathlessness to pneumoconiosis while missing coexistent COPD or heart disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coal workers' pneumoconiosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "coal_workers_pneumoconiosis-matrix",
+      "title": "Coal workers' pneumoconiosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Arises from chronic inhalation of coal mine dust, with risk tied to cumulative exposure and to the rank (carbon content) of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph with ILO classification of small opacities and large opacity categories, High-resolution CT to characterise",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Silicosis and mixed-dust pneumoconiosis, Pulmonary tuberculosis (may coexist and complicate), Sarcoidosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cessation of further coal dust exposure by removal from the dusty environment, as there is no curative treatment and prevention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all coal-worker breathlessness to pneumoconiosis while missing coexistent COPD or heart disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coal workers' pneumoconiosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Occupational and Environmental Respiratory Medicine reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coal_workers_pneumoconiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph with ILO classification",
+          "cells": [
+            {
+              "text": "Small opacities and large opacity categories"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Nodularity, conglomerate masses and emphysema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed occupational history",
+          "cells": [
+            {
+              "text": "Years underground and job type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry and lung volumes",
+          "cells": [
+            {
+              "text": "Obstructive, restrictive or mixed impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffusing capacity for carbon monoxide",
+          "cells": [
+            {
+              "text": "Gas transfer impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coal_workers_pneumoconiosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Silicosis or mixed-dust pneumoconiosis",
+          "cells": [
+            {
+              "text": "Other dust exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "May coexist and complicate the disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Alternative granulomatous lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coal_workers_pneumoconiosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Removal from dust exposure and dust control",
+          "cells": [
+            {
+              "text": "No curative treatment; prevention is paramount"
+            },
+            {
+              "text": "Prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation support",
+          "cells": [
+            {
+              "text": "Limits airflow obstruction and emphysema"
+            },
+            {
+              "text": "Additional lung damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled bronchodilators and pulmonary rehabilitation",
+          "cells": [
+            {
+              "text": "Symptomatic treatment of airflow limitation"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term oxygen therapy",
+          "cells": [
+            {
+              "text": "Chronic hypoxaemia and respiratory failure"
+            },
+            {
+              "text": "Hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Influenza and pneumococcal vaccination",
+          "cells": [
+            {
+              "text": "Prompt treatment of respiratory infection"
+            },
+            {
+              "text": "Infection prevention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coal_workers_pneumoconiosis-dx-mgmt",
+      "title": "Diagnosis and management of Coal workers' pneumoconiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coal workers' pneumoconiosis: coal dust exposure with upper-zone opacities",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cavitating or enlarging mass, haemoptysis, rapid decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for tuberculosis or lung carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph with ILO classification, HRCT and spirometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Coal dust exposure with nodular opacities confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove from dust exposure and enforce dust control",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check silicosis, tuberculosis, sarcoidosis and lung carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Smoking cessation support to limit emphysema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhaled bronchodilators and pulmonary rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term oxygen for hypoxaemia; vaccination against infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Radiological surveillance for progressive massive fibrosis; occupational referral",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

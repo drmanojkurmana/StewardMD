@@ -1,176 +1,499 @@
 {
- "id": "semantic_dementia",
- "name": "Semantic dementia",
- "aliases": [
-  "SD",
-  "semantic variant primary progressive aphasia",
-  "svPPA",
-  "semantic variant PPA",
-  "temporal variant frontotemporal dementia"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Cognitive & Movement",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by progressive loss of knowledge of the meaning of words and objects, with fluent but empty speech and prominent anomia",
-   "Single-word comprehension is impaired and patients may ask what familiar words mean, yet speech remains fluent and grammatically correct",
-   "It is the semantic variant of primary progressive aphasia and usually reflects frontotemporal lobar degeneration with TDP-43 pathology",
-   "Surface dyslexia, with difficulty reading irregularly spelled words, is a characteristic feature",
-   "Imaging shows asymmetrical, often left-predominant, anterior temporal lobe atrophy, sometimes described as a knife-edge pattern",
-   "Right-predominant cases may present with prosopagnosia and behavioural or emotional change rather than language failure",
-   "Repetition and speech production are relatively preserved, helping to distinguish it from other aphasia variants"
+  "id": "semantic_dementia",
+  "name": "Semantic dementia",
+  "aliases": [
+    "SD",
+    "semantic variant primary progressive aphasia",
+    "svPPA",
+    "semantic variant PPA",
+    "temporal variant frontotemporal dementia"
   ],
-  "pathophysiology": "Semantic dementia is the semantic variant of primary progressive aphasia, caused by neurodegeneration focused on the anterior temporal lobes, which serve as a hub for conceptual and semantic knowledge. The commonest underlying pathology is frontotemporal lobar degeneration associated with abnormal TDP-43 protein aggregation. Progressive loss of neurones in the anterior temporal cortex erodes the store of meaning for words, objects and, in right-predominant cases, faces, while the more posterior and perisylvian regions supporting fluent speech output, grammar and repetition remain relatively intact until later. This produces fluent, well-articulated but semantically empty speech with severe naming and comprehension deficits.",
-  "additionalDifferentials": [
-   "Non-fluent/agrammatic variant primary progressive aphasia",
-   "Logopenic variant primary progressive aphasia",
-   "Behavioural variant frontotemporal dementia",
-   "Alzheimer disease",
-   "Herpes simplex or limbic encephalitis affecting the temporal lobes",
-   "Temporal lobe tumour or structural lesion",
-   "Amnestic syndromes of other cause"
-  ],
-  "additionalInvestigations": [
-   "Speech and language assessment demonstrating impaired single-word comprehension with fluent output",
-   "MRI of the brain showing asymmetrical anterior temporal atrophy",
-   "FDG-PET to demonstrate anterior temporal hypometabolism",
-   "Amyloid PET or cerebrospinal fluid biomarkers to exclude Alzheimer pathology",
-   "Neuropsychological testing of semantic knowledge, naming and reading of irregular words",
-   "Genetic testing where a family history of frontotemporal dementia is present"
-  ],
-  "redFlags": [
-   "Subacute onset or systemic features suggesting an inflammatory or infective encephalitis rather than degeneration",
-   "Rapid progression inconsistent with the usual course",
-   "Prominent behavioural disturbance affecting safety, especially in right-predominant cases",
-   "Focal deficits or headache raising concern for a structural lesion"
-  ],
-  "prognosis": "Semantic dementia progresses over years, with widening loss of conceptual knowledge and eventual emergence of behavioural change and broader cognitive decline; prognosis reflects the underlying frontotemporal lobar degeneration, and management is supportive with speech and language and behavioural strategies.",
-  "pitfalls": [
-   "Mistaking fluent, empty speech for preserved language and underestimating the comprehension deficit",
-   "Attributing the picture to Alzheimer disease rather than recognising the anterior temporal atrophy pattern",
-   "Overlooking a treatable temporal-lobe encephalitis in atypical or subacute presentations",
-   "Failing to recognise right-predominant cases presenting with prosopagnosia and behavioural change"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide speech and language therapy focused on communication strategies and personalised word and picture aids to compensate for semantic loss, as no disease-modifying therapy exists",
-   "Manage emerging behavioural and emotional change with non-pharmacological strategies, reserving judicious SSRIs for distressing symptoms and avoiding antipsychotics where possible",
-   "Offer occupational therapy, dietetic input for altered eating behaviour, and structured social care for progressive functional decline",
-   "Avoid cholinesterase inhibitors, which are ineffective, and distinguish the disorder from Alzheimer pathology to prevent inappropriate treatment",
-   "Monitor for dysphagia, safety risks, and carer strain, with proactive advance care planning as conceptual knowledge widens",
-   "Refer for genetic counselling and testing where there is a family history of frontotemporal dementia",
-   "Coordinate multidisciplinary and specialist cognitive-neurology follow-up to guide supportive care as the disease progresses"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "semantic_dementia-pathway",
-   "title": "Semantic dementia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by progressive loss of knowledge of the meaning of words and objects, with fluent but empty speech and prominent anomia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Subacute onset or systemic features suggesting an inflammatory or infective encephalitis rather than degeneration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Speech and language assessment demonstrating impaired single-word comprehension with fluent output, MRI of the brain showing asymmetrical anterior temporal atrophy, FDG-PET to demonstrate anterior temporal hypometabolism"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide speech and language therapy focused on communication strategies and personalised word and picture aids to compensate for semantic loss, as no disease-modifying therapy exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking fluent, empty speech for preserved language and underestimating the comprehension deficit"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of semantic dementia."
-  }
- ],
- "tables": [
-  {
-   "id": "semantic_dementia-matrix",
-   "title": "Semantic dementia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by progressive loss of knowledge of the meaning of words and objects, with fluent but empty speech and prominent",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Cognitive & Movement",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by progressive loss of knowledge of the meaning of words and objects, with fluent but empty speech and prominent anomia",
+      "Single-word comprehension is impaired and patients may ask what familiar words mean, yet speech remains fluent and grammatically correct",
+      "It is the semantic variant of primary progressive aphasia and usually reflects frontotemporal lobar degeneration with TDP-43 pathology",
+      "Surface dyslexia, with difficulty reading irregularly spelled words, is a characteristic feature",
+      "Imaging shows asymmetrical, often left-predominant, anterior temporal lobe atrophy, sometimes described as a knife-edge pattern",
+      "Right-predominant cases may present with prosopagnosia and behavioural or emotional change rather than language failure",
+      "Repetition and speech production are relatively preserved, helping to distinguish it from other aphasia variants"
     ],
-    [
-     "Key Investigations",
-     "Speech and language assessment demonstrating impaired single-word comprehension with fluent output, MRI of the brain showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Semantic dementia is the semantic variant of primary progressive aphasia, caused by neurodegeneration focused on the anterior temporal lobes, which serve as a hub for conceptual and semantic knowledge. The commonest underlying pathology is frontotemporal lobar degeneration associated with abnormal TDP-43 protein aggregation. Progressive loss of neurones in the anterior temporal cortex erodes the store of meaning for words, objects and, in right-predominant cases, faces, while the more posterior and perisylvian regions supporting fluent speech output, grammar and repetition remain relatively intact until later. This produces fluent, well-articulated but semantically empty speech with severe naming and comprehension deficits.",
+    "additionalDifferentials": [
+      "Non-fluent/agrammatic variant primary progressive aphasia",
+      "Logopenic variant primary progressive aphasia",
+      "Behavioural variant frontotemporal dementia",
+      "Alzheimer disease",
+      "Herpes simplex or limbic encephalitis affecting the temporal lobes",
+      "Temporal lobe tumour or structural lesion",
+      "Amnestic syndromes of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Non-fluent/agrammatic variant primary progressive aphasia, Logopenic variant primary progressive aphasia, Behavioural variant",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Speech and language assessment demonstrating impaired single-word comprehension with fluent output",
+      "MRI of the brain showing asymmetrical anterior temporal atrophy",
+      "FDG-PET to demonstrate anterior temporal hypometabolism",
+      "Amyloid PET or cerebrospinal fluid biomarkers to exclude Alzheimer pathology",
+      "Neuropsychological testing of semantic knowledge, naming and reading of irregular words",
+      "Genetic testing where a family history of frontotemporal dementia is present"
     ],
-    [
-     "Management Strategy",
-     "Provide speech and language therapy focused on communication strategies and personalised word and picture aids to compensate for",
-     "Core treatment modality"
+    "redFlags": [
+      "Subacute onset or systemic features suggesting an inflammatory or infective encephalitis rather than degeneration",
+      "Rapid progression inconsistent with the usual course",
+      "Prominent behavioural disturbance affecting safety, especially in right-predominant cases",
+      "Focal deficits or headache raising concern for a structural lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking fluent, empty speech for preserved language and underestimating the comprehension deficit",
-     "Prevent diagnostic or management error"
+    "prognosis": "Semantic dementia progresses over years, with widening loss of conceptual knowledge and eventual emergence of behavioural change and broader cognitive decline; prognosis reflects the underlying frontotemporal lobar degeneration, and management is supportive with speech and language and behavioural strategies.",
+    "pitfalls": [
+      "Mistaking fluent, empty speech for preserved language and underestimating the comprehension deficit",
+      "Attributing the picture to Alzheimer disease rather than recognising the anterior temporal atrophy pattern",
+      "Overlooking a treatable temporal-lobe encephalitis in atypical or subacute presentations",
+      "Failing to recognise right-predominant cases presenting with prosopagnosia and behavioural change"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide speech and language therapy focused on communication strategies and personalised word and picture aids to compensate for semantic loss, as no disease-modifying therapy exists",
+      "Manage emerging behavioural and emotional change with non-pharmacological strategies, reserving judicious SSRIs for distressing symptoms and avoiding antipsychotics where possible",
+      "Offer occupational therapy, dietetic input for altered eating behaviour, and structured social care for progressive functional decline",
+      "Avoid cholinesterase inhibitors, which are ineffective, and distinguish the disorder from Alzheimer pathology to prevent inappropriate treatment",
+      "Monitor for dysphagia, safety risks, and carer strain, with proactive advance care planning as conceptual knowledge widens",
+      "Refer for genetic counselling and testing where there is a family history of frontotemporal dementia",
+      "Coordinate multidisciplinary and specialist cognitive-neurology follow-up to guide supportive care as the disease progresses"
     ]
-   ],
-   "caption": "Overview comparison matrix for semantic dementia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "semantic-dementia-real-image",
-   "title": "Semantic dementia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "semantic_dementia-pathway",
+      "title": "Semantic dementia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by progressive loss of knowledge of the meaning of words and objects, with fluent but empty speech and prominent anomia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Subacute onset or systemic features suggesting an inflammatory or infective encephalitis rather than degeneration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Speech and language assessment demonstrating impaired single-word comprehension with fluent output, MRI of the brain showing asymmetrical anterior temporal atrophy, FDG-PET to demonstrate anterior temporal hypometabolism"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide speech and language therapy focused on communication strategies and personalised word and picture aids to compensate for semantic loss, as no disease-modifying therapy exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking fluent, empty speech for preserved language and underestimating the comprehension deficit"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of semantic dementia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "semantic_dementia-matrix",
+      "title": "Semantic dementia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by progressive loss of knowledge of the meaning of words and objects, with fluent but empty speech and prominent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Speech and language assessment demonstrating impaired single-word comprehension with fluent output, MRI of the brain showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-fluent/agrammatic variant primary progressive aphasia, Logopenic variant primary progressive aphasia, Behavioural variant",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide speech and language therapy focused on communication strategies and personalised word and picture aids to compensate for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking fluent, empty speech for preserved language and underestimating the comprehension deficit",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for semantic dementia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "semantic_dementia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Speech and language assessment",
+          "cells": [
+            {
+              "text": "Impaired single-word comprehension with fluent output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Asymmetrical, often left-predominant, anterior temporal atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Anterior temporal hypometabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid PET or CSF biomarkers",
+          "cells": [
+            {
+              "text": "Excludes Alzheimer pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological testing",
+          "cells": [
+            {
+              "text": "Semantic knowledge, naming and reading of irregular words"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Where there is a family history of frontotemporal dementia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "semantic_dementia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-fluent/agrammatic variant PPA",
+          "cells": [
+            {
+              "text": "Speech production and repetition are relatively preserved in semantic dementia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Logopenic variant PPA",
+          "cells": [
+            {
+              "text": "Speech production and repetition are relatively preserved in semantic dementia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural variant frontotemporal dementia",
+          "cells": [
+            {
+              "text": "Right-predominant semantic cases can present with prosopagnosia and behavioural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alzheimer disease",
+          "cells": [
+            {
+              "text": "Anterior temporal atrophy pattern; amyloid PET or CSF biomarkers separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex or limbic encephalitis",
+          "cells": [
+            {
+              "text": "Subacute onset or systemic features; treatable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal lobe tumour or structural lesion",
+          "cells": [
+            {
+              "text": "Focal deficits or headache"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "semantic_dementia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Communication strategies and personalised word and picture aids; no disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural and emotional change",
+          "cells": [
+            {
+              "text": "Non-pharmacological first; judicious SSRIs for distressing symptoms; avoid antipsychotics where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy, dietetics, social care",
+          "cells": [
+            {
+              "text": "Altered eating behaviour and progressive functional decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid cholinesterase inhibitors",
+          "cells": [
+            {
+              "text": "Ineffective; distinguish from Alzheimer pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and advance care planning",
+          "cells": [
+            {
+              "text": "Dysphagia, safety risks and carer strain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Where there is a family history of frontotemporal dementia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive-neurology follow-up",
+          "cells": [
+            {
+              "text": "Multidisciplinary, guiding supportive care as disease progresses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "semantic_dementia-dx-mgmt",
+      "title": "Diagnosis and management of Semantic dementia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive loss of word meaning with fluent, empty speech and anomia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Subacute onset, rapid progression, focal deficit, headache or unsafe behaviour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude encephalitis or temporal lobe lesion before accepting a degenerative cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Language testing; MRI for anterior temporal atrophy; FDG-PET; amyloid PET or CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Asymmetrical anterior temporal atrophy with semantic loss and no Alzheimer biomarkers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider other PPA variants, bvFTD, Alzheimer disease or a structural lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Speech and language therapy with word and picture aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Non-drug care for behaviour change; SSRIs only for distressing symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid cholinesterase inhibitors; occupational therapy and dietetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Advance care planning; genetic counselling if family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progresses over years to behavioural change and broader cognitive decline",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

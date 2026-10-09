@@ -1,177 +1,641 @@
 {
- "id": "erythema_infectiosum",
- "name": "Erythema infectiosum",
- "aliases": [
-  "fifth disease",
-  "slapped cheek syndrome",
-  "parvovirus B19 infection"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by parvovirus B19 and most common in school-aged children, often occurring in community outbreaks",
-   "The typical rash begins with bright red cheeks giving a slapped-cheek appearance, followed by a lacy, reticular erythematous eruption on the limbs and trunk",
-   "The rash can wax and wane over weeks and may flare with warmth, sunlight, or exercise",
-   "By the time the rash appears the child is usually no longer infectious, since viral shedding peaks earlier during the mild prodrome",
-   "Adults, especially women, more often develop a symmetrical polyarthropathy affecting hands, wrists, and knees rather than a prominent rash",
-   "Because the virus targets erythroid precursors, it can precipitate transient aplastic crisis in patients with chronic haemolytic disorders and chronic anaemia in the immunocompromised",
-   "Infection in pregnancy carries a risk of fetal anaemia and hydrops fetalis, warranting fetal surveillance after maternal exposure"
+  "id": "erythema_infectiosum",
+  "name": "Erythema infectiosum",
+  "aliases": [
+    "fifth disease",
+    "slapped cheek syndrome",
+    "parvovirus B19 infection"
   ],
-  "pathophysiology": "Parvovirus B19 is transmitted mainly by respiratory droplets and binds the P antigen (globoside) on erythroid progenitor cells, halting red cell production. In healthy hosts this transient arrest is clinically silent, and the exanthem and arthropathy that follow are largely immune-complex mediated, appearing as antibody develops. In people who depend on high red cell turnover the production arrest causes an acute aplastic crisis, while persistent infection in immunocompromised patients produces chronic anaemia. Transplacental infection can cause severe fetal anaemia and hydrops.",
-  "additionalDifferentials": [
-   "Rubella",
-   "Measles",
-   "Scarlet fever",
-   "Enteroviral exanthem",
-   "Drug eruption",
-   "Systemic lupus erythematosus (when arthropathy predominates in adults)"
-  ],
-  "infectionMimics": [
-   "Rubella",
-   "Enteroviral rash illness",
-   "Other viral arthropathies such as chikungunya or rubella-associated arthritis"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis usually adequate in a well child with the classic rash",
-   "Parvovirus B19 IgM and IgG serology to confirm recent infection, particularly in pregnancy or arthropathy",
-   "B19 DNA PCR in immunocompromised patients or when serology is unreliable",
-   "Full blood count and reticulocyte count where aplastic crisis is suspected",
-   "Fetal ultrasound surveillance for hydrops after maternal infection in pregnancy"
-  ],
-  "redFlags": [
-   "Sudden severe anaemia with a low reticulocyte count in a patient with an underlying haemolytic disorder (aplastic crisis)",
-   "Persistent anaemia or marrow suppression in an immunocompromised patient",
-   "Maternal infection in pregnancy with signs of fetal hydrops or anaemia",
-   "Profound pancytopenia suggesting a broader marrow process"
-  ],
-  "prognosis": "In immunocompetent children and adults the illness is self-limiting with an excellent outcome, though adult arthropathy may linger for weeks to months; the serious outcomes are aplastic crisis in haemolytic disease, chronic anaemia in the immunocompromised, and fetal loss or hydrops in pregnancy.",
-  "pitfalls": [
-   "Isolating the child once the rash appears, when infectivity has usually already passed",
-   "Missing an evolving aplastic crisis in a patient with sickle cell disease or other haemolytic anaemia",
-   "Overlooking recent parvovirus exposure as a cause of new symmetrical polyarthropathy in an adult",
-   "Failing to arrange fetal monitoring after documented maternal infection in pregnancy"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive care with antipyretics and analgesia in the immunocompetent, as the illness is self-limiting",
-   "Non-steroidal anti-inflammatory drugs for the symmetrical polyarthropathy that predominates in adults",
-   "Reassurance that the child is generally no longer infectious once the rash appears, since viral shedding peaks during the earlier prodrome",
-   "Prompt red-cell transfusion and haematological monitoring for transient aplastic crisis in patients with chronic haemolytic disorders",
-   "Intravenous immunoglobulin for persistent parvovirus B19 infection causing chronic anaemia in the immunocompromised",
-   "In pregnancy, confirmatory serology with serial foetal ultrasound surveillance for anaemia and hydrops, and intrauterine transfusion with maternal-foetal medicine referral for severe foetal anaemia",
-   "Infection-control precautions to protect pregnant contacts and those with haemolytic disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "erythema_infectiosum-pathway",
-   "title": "Erythema infectiosum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by parvovirus B19 and most common in school-aged children, often occurring in community outbreaks",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden severe anaemia with a low reticulocyte count in a patient with an underlying haemolytic disorder (aplastic crisis)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis usually adequate in a well child with the classic rash, Parvovirus B19 IgM and IgG serology to confirm recent infection, particularly in pregnancy or arthropathy, B19 DNA PCR in immunocompromised"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care with antipyretics and analgesia in the immunocompetent, as the illness is self-limiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Isolating the child once the rash appears, when infectivity has usually already passed"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of erythema infectiosum."
-  }
- ],
- "tables": [
-  {
-   "id": "erythema_infectiosum-matrix",
-   "title": "Erythema infectiosum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by parvovirus B19 and most common in school-aged children, often occurring in community outbreaks",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by parvovirus B19 and most common in school-aged children, often occurring in community outbreaks",
+      "The typical rash begins with bright red cheeks giving a slapped-cheek appearance, followed by a lacy, reticular erythematous eruption on the limbs and trunk",
+      "The rash can wax and wane over weeks and may flare with warmth, sunlight, or exercise",
+      "By the time the rash appears the child is usually no longer infectious, since viral shedding peaks earlier during the mild prodrome",
+      "Adults, especially women, more often develop a symmetrical polyarthropathy affecting hands, wrists, and knees rather than a prominent rash",
+      "Because the virus targets erythroid precursors, it can precipitate transient aplastic crisis in patients with chronic haemolytic disorders and chronic anaemia in the immunocompromised",
+      "Infection in pregnancy carries a risk of fetal anaemia and hydrops fetalis, warranting fetal surveillance after maternal exposure"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis usually adequate in a well child with the classic rash, Parvovirus B19 IgM and IgG serology to confirm recent",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Parvovirus B19 is transmitted mainly by respiratory droplets and binds the P antigen (globoside) on erythroid progenitor cells, halting red cell production. In healthy hosts this transient arrest is clinically silent, and the exanthem and arthropathy that follow are largely immune-complex mediated, appearing as antibody develops. In people who depend on high red cell turnover the production arrest causes an acute aplastic crisis, while persistent infection in immunocompromised patients produces chronic anaemia. Transplacental infection can cause severe fetal anaemia and hydrops.",
+    "additionalDifferentials": [
+      "Rubella",
+      "Measles",
+      "Scarlet fever",
+      "Enteroviral exanthem",
+      "Drug eruption",
+      "Systemic lupus erythematosus (when arthropathy predominates in adults)"
     ],
-    [
-     "Primary Differentials",
-     "Rubella, Measles, Scarlet fever",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Rubella",
+      "Enteroviral rash illness",
+      "Other viral arthropathies such as chikungunya or rubella-associated arthritis"
     ],
-    [
-     "Management Strategy",
-     "Supportive care with antipyretics and analgesia in the immunocompetent, as the illness is self-limiting",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Clinical diagnosis usually adequate in a well child with the classic rash",
+      "Parvovirus B19 IgM and IgG serology to confirm recent infection, particularly in pregnancy or arthropathy",
+      "B19 DNA PCR in immunocompromised patients or when serology is unreliable",
+      "Full blood count and reticulocyte count where aplastic crisis is suspected",
+      "Fetal ultrasound surveillance for hydrops after maternal infection in pregnancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Isolating the child once the rash appears, when infectivity has usually already passed",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Sudden severe anaemia with a low reticulocyte count in a patient with an underlying haemolytic disorder (aplastic crisis)",
+      "Persistent anaemia or marrow suppression in an immunocompromised patient",
+      "Maternal infection in pregnancy with signs of fetal hydrops or anaemia",
+      "Profound pancytopenia suggesting a broader marrow process"
+    ],
+    "prognosis": "In immunocompetent children and adults the illness is self-limiting with an excellent outcome, though adult arthropathy may linger for weeks to months; the serious outcomes are aplastic crisis in haemolytic disease, chronic anaemia in the immunocompromised, and fetal loss or hydrops in pregnancy.",
+    "pitfalls": [
+      "Isolating the child once the rash appears, when infectivity has usually already passed",
+      "Missing an evolving aplastic crisis in a patient with sickle cell disease or other haemolytic anaemia",
+      "Overlooking recent parvovirus exposure as a cause of new symmetrical polyarthropathy in an adult",
+      "Failing to arrange fetal monitoring after documented maternal infection in pregnancy"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive care with antipyretics and analgesia in the immunocompetent, as the illness is self-limiting",
+      "Non-steroidal anti-inflammatory drugs for the symmetrical polyarthropathy that predominates in adults",
+      "Reassurance that the child is generally no longer infectious once the rash appears, since viral shedding peaks during the earlier prodrome",
+      "Prompt red-cell transfusion and haematological monitoring for transient aplastic crisis in patients with chronic haemolytic disorders",
+      "Intravenous immunoglobulin for persistent parvovirus B19 infection causing chronic anaemia in the immunocompromised",
+      "In pregnancy, confirmatory serology with serial foetal ultrasound surveillance for anaemia and hydrops, and intrauterine transfusion with maternal-foetal medicine referral for severe foetal anaemia",
+      "Infection-control precautions to protect pregnant contacts and those with haemolytic disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for erythema infectiosum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "erythema-infectiosum-real-image",
-   "title": "Erythema infectiosum: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "erythema_infectiosum-pathway",
+      "title": "Erythema infectiosum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by parvovirus B19 and most common in school-aged children, often occurring in community outbreaks",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden severe anaemia with a low reticulocyte count in a patient with an underlying haemolytic disorder (aplastic crisis)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis usually adequate in a well child with the classic rash, Parvovirus B19 IgM and IgG serology to confirm recent infection, particularly in pregnancy or arthropathy, B19 DNA PCR in immunocompromised"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care with antipyretics and analgesia in the immunocompetent, as the illness is self-limiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Isolating the child once the rash appears, when infectivity has usually already passed"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of erythema infectiosum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "erythema_infectiosum-matrix",
+      "title": "Erythema infectiosum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by parvovirus B19 and most common in school-aged children, often occurring in community outbreaks",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis usually adequate in a well child with the classic rash, Parvovirus B19 IgM and IgG serology to confirm recent",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rubella, Measles, Scarlet fever",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care with antipyretics and analgesia in the immunocompetent, as the illness is self-limiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Isolating the child once the rash appears, when infectivity has usually already passed",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for erythema infectiosum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, DNA Viruses (p60)",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 184-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythema_infectiosum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Classic rash in a well child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parvovirus B19 IgM and IgG serology",
+          "cells": [
+            {
+              "text": "Recent infection, especially in pregnancy or arthropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parvovirus B19 DNA PCR",
+          "cells": [
+            {
+              "text": "Immunocompromised patients or unreliable serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and reticulocyte count",
+          "cells": [
+            {
+              "text": "Aplastic crisis, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal ultrasound surveillance",
+          "cells": [
+            {
+              "text": "Hydrops after maternal infection in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_infectiosum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care with antipyretics and analgesia",
+          "cells": [
+            {
+              "text": "Immunocompetent patients; the illness is self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Symmetrical polyarthropathy that predominates in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance on infectivity",
+          "cells": [
+            {
+              "text": "Usually no longer infectious once the rash appears"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red cell transfusion and haematological monitoring",
+          "cells": [
+            {
+              "text": "Transient aplastic crisis in chronic haemolytic disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Persistent parvovirus B19 infection causing chronic anaemia in the immunocompromised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy management",
+          "cells": [
+            {
+              "text": "Confirmatory serology, serial fetal ultrasound, and intrauterine transfusion with maternal-fetal medicine if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Protects pregnant contacts and those with haemolytic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_infectiosum-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "DNA viruses by family",
+      "rowHeader": "Family",
+      "columns": [
+        "Viruses",
+        "Genome"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepadnaviridae",
+          "cells": [
+            {
+              "text": "Hepatitis B virus"
+            },
+            {
+              "text": "Double-stranded DNA with single-stranded portions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parvoviridae",
+          "cells": [
+            {
+              "text": "Parvovirus B19"
+            },
+            {
+              "text": "Single-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Papovaviridae",
+          "cells": [
+            {
+              "text": "Human papillomaviruses; JC virus; BK virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adenoviridae",
+          "cells": [
+            {
+              "text": "Human adenoviruses"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Herpesviridae",
+          "cells": [
+            {
+              "text": "Herpes simplex virus types 1 and 2; varicella-zoster virus; Epstein-Barr virus; cytomegalovirus; human herpesvirus 6; human herpesvirus 7; Kaposi's sarcoma-associated herpesvirus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Poxviridae",
+          "cells": [
+            {
+              "text": "Variola (smallpox) virus; Orf virus; Molluscum contagiosum virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The source marks some viruses with superscript letters whose footnote text is not on the page."
+    },
+    {
+      "id": "erythema_infectiosum-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Diseases associated with parvovirus B19 infection and diagnostic tests",
+      "rowHeader": "Disease",
+      "columns": [
+        "Host(s)",
+        "IgM",
+        "IgG",
+        "PCR",
+        "Quantitative PCR"
+      ],
+      "rows": [
+        {
+          "parameter": "Fifth disease",
+          "cells": [
+            {
+              "text": "Healthy children"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": ">10^3 IU/mL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Polyarthropathy syndrome",
+          "cells": [
+            {
+              "text": "Healthy adults (more often women)"
+            },
+            {
+              "text": "Positive within 3 months of onset"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": ">10^3 IU/mL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Transient aplastic crisis",
+          "cells": [
+            {
+              "text": "Patients with increased erythropoiesis"
+            },
+            {
+              "text": "Negative or positive"
+            },
+            {
+              "text": "Negative or positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Often >10^12 IU/mL, but rapidly decreases"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Persistent anemia/pure red-cell aplasia",
+          "cells": [
+            {
+              "text": "Immunodeficient or immunocompetent patients"
+            },
+            {
+              "text": "Negative or weakly positive"
+            },
+            {
+              "text": "Negative or weakly positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Often >10^12 IU/mL, but should be >10^6 in the absence of treatment"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hydrops fetalis/congenital anemia",
+          "cells": [
+            {
+              "text": "Fetus (<20 weeks)"
+            },
+            {
+              "text": "Negative or positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive in amniotic fluid or tissue"
+            },
+            {
+              "text": "Not applicable"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythema_infectiosum-dx-mgmt",
+      "title": "Diagnosis and management of Erythema infectiosum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slapped-cheek rash with lacy limb rash in a child, or symmetrical arthropathy in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sudden severe anaemia with low reticulocytes, pancytopenia, fetal signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Transfusion and haematology review for aplastic crisis; fetal review in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Parvovirus B19 IgM and IgG serology; FBC and reticulocyte count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Recent parvovirus B19 infection confirmed on serology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Parvovirus B19 DNA PCR if immunocompromised or serology is unreliable",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antipyretics and analgesia; NSAIDs for adult polyarthropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure that the child is usually no longer infectious by rash onset",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial fetal ultrasound and intrauterine transfusion if pregnant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous immunoglobulin for persistent infection with chronic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting with an excellent outcome; adult arthropathy can linger for weeks to months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,484 @@
 {
- "id": "igg4_sclerosing_cholangitis",
- "name": "IgG4-related sclerosing cholangitis",
- "aliases": [
-  "IgG4-SC",
-  "IgG4-associated cholangitis",
-  "IgG4-related cholangiopathy"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatobiliary",
- "specialty": "Hepatobiliary / Pancreatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The biliary manifestation of systemic IgG4-related disease, and the most common extra-pancreatic organ involvement in type 1 autoimmune pancreatitis",
-   "Usually presents with obstructive jaundice, most often from a stricture of the distal bile duct, closely mimicking pancreatic or biliary malignancy",
-   "Can also produce proximal, hilar, or intrahepatic strictures that resemble primary sclerosing cholangitis or cholangiocarcinoma",
-   "Raised serum IgG4 supports the diagnosis, but is neither wholly sensitive nor specific and can be mildly elevated in cholangiocarcinoma and PSC",
-   "Bile duct wall biopsy or ampullary biopsy showing dense IgG4-positive plasma cell infiltration, storiform fibrosis, and obliterative phlebitis is confirmatory",
-   "The hallmark is a striking response to corticosteroids, with resolution of strictures and jaundice, unlike primary sclerosing cholangitis",
-   "Management is corticosteroid induction with biliary stenting as needed for obstruction, and immunomodulators or rituximab for relapsing disease"
+  "id": "igg4_sclerosing_cholangitis",
+  "name": "IgG4-related sclerosing cholangitis",
+  "aliases": [
+    "IgG4-SC",
+    "IgG4-associated cholangitis",
+    "IgG4-related cholangiopathy"
   ],
-  "pathophysiology": "IgG4-related sclerosing cholangitis is part of the systemic fibroinflammatory spectrum of IgG4-related disease. An aberrant immune response leads to infiltration of the bile duct walls by IgG4-positive plasma cells and lymphocytes, accompanied by storiform fibrosis and obliterative phlebitis. This transmural inflammation thickens the duct wall and narrows the lumen, producing single or multiple strictures anywhere along the biliary tree, though the intrapancreatic distal bile duct is most often affected, frequently in association with autoimmune pancreatitis. Because the process is immune-mediated rather than fixed fibrotic scarring, it characteristically regresses with immunosuppression, distinguishing it from primary sclerosing cholangitis.",
-  "additionalDifferentials": [
-   "Primary sclerosing cholangitis",
-   "Cholangiocarcinoma",
-   "Pancreatic head adenocarcinoma with biliary obstruction",
-   "Secondary sclerosing cholangitis",
-   "Choledocholithiasis with stricture",
-   "Autoimmune pancreatitis with biliary involvement"
-  ],
-  "additionalInvestigations": [
-   "MRI with MRCP to map the strictures and assess the pancreas and other organs",
-   "Serum IgG4 and total IgG with subclass analysis",
-   "Endoscopic ultrasound or cholangioscopy with biopsy to exclude cholangiocarcinoma",
-   "Ampullary or bile duct biopsy for IgG4 immunostaining and characteristic histology",
-   "Assessment for other IgG4-related organ involvement (pancreas, salivary glands, kidneys, retroperitoneum)",
-   "Serum CA 19-9 to help weigh malignancy",
-   "Documentation of biochemical and radiological response to a corticosteroid trial"
-  ],
-  "redFlags": [
-   "A dominant or mass-forming stricture with features suspicious for cholangiocarcinoma",
-   "Markedly raised CA 19-9 or progressive weight loss",
-   "Failure of jaundice or strictures to respond to corticosteroids",
-   "Cholangitis or biliary sepsis",
-   "Progression to biliary cirrhosis with portal hypertension"
-  ],
-  "prognosis": "The condition typically responds rapidly and completely to corticosteroids with resolution of strictures and jaundice; relapse is common in systemic IgG4-related disease and may require maintenance therapy, and untreated or refractory disease can progress to secondary biliary cirrhosis.",
-  "pitfalls": [
-   "Mislabelling the disease as primary sclerosing cholangitis and missing its steroid responsiveness",
-   "Overlooking cholangiocarcinoma, which can coexist with or mimic the condition and may itself raise IgG4",
-   "Relying on serum IgG4 alone for diagnosis given its imperfect specificity",
-   "Committing to major biliary surgery for a presumed malignant stricture that is in fact steroid-responsive disease",
-   "Failing to look for associated autoimmune pancreatitis and other organ involvement"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "HISORt and international criteria for IgG4-related sclerosing cholangitis",
-   "Reviews of IgG4-related disease and cholangiopathy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Exclude cholangiocarcinoma with imaging and biopsy before treating, as the presentation closely mimics biliary malignancy",
-   "Induce remission with corticosteroids, expecting striking resolution of strictures and jaundice",
-   "Add azathioprine, mycophenolate or rituximab for maintenance or relapsing disease",
-   "Relieve significant biliary obstruction or cholangitis with endoscopic stenting",
-   "Treat coexisting type 1 autoimmune pancreatitis as part of the same disease process",
-   "Monitor liver function, serum IgG4 and MRCP for relapse and progression towards secondary biliary cirrhosis",
-   "Manage through hepatobiliary and pancreatology services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "igg4_sclerosing_cholangitis-pathway",
-   "title": "IgG4-related sclerosing cholangitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The biliary manifestation of systemic IgG4-related disease, and the most common extra-pancreatic organ involvement in type 1 autoimmune pancreatitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A dominant or mass-forming stricture with features suspicious for cholangiocarcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI with MRCP to map the strictures and assess the pancreas and other organs, Serum IgG4 and total IgG with subclass analysis, Endoscopic ultrasound or cholangioscopy with biopsy to exclude cholangiocarcinoma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Exclude cholangiocarcinoma with imaging and biopsy before treating, as the presentation closely mimics biliary malignancy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the disease as primary sclerosing cholangitis and missing its steroid responsiveness"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of igg4-related sclerosing cholangitis."
-  }
- ],
- "tables": [
-  {
-   "id": "igg4_sclerosing_cholangitis-matrix",
-   "title": "IgG4-related sclerosing cholangitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The biliary manifestation of systemic IgG4-related disease, and the most common extra-pancreatic organ involvement in type 1",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatobiliary",
+  "specialty": "Hepatobiliary / Pancreatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The biliary manifestation of systemic IgG4-related disease, and the most common extra-pancreatic organ involvement in type 1 autoimmune pancreatitis",
+      "Usually presents with obstructive jaundice, most often from a stricture of the distal bile duct, closely mimicking pancreatic or biliary malignancy",
+      "Can also produce proximal, hilar, or intrahepatic strictures that resemble primary sclerosing cholangitis or cholangiocarcinoma",
+      "Raised serum IgG4 supports the diagnosis, but is neither wholly sensitive nor specific and can be mildly elevated in cholangiocarcinoma and PSC",
+      "Bile duct wall biopsy or ampullary biopsy showing dense IgG4-positive plasma cell infiltration, storiform fibrosis, and obliterative phlebitis is confirmatory",
+      "The hallmark is a striking response to corticosteroids, with resolution of strictures and jaundice, unlike primary sclerosing cholangitis",
+      "Management is corticosteroid induction with biliary stenting as needed for obstruction, and immunomodulators or rituximab for relapsing disease"
     ],
-    [
-     "Key Investigations",
-     "MRI with MRCP to map the strictures and assess the pancreas and other organs, Serum IgG4 and total IgG with subclass analysis,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "IgG4-related sclerosing cholangitis is part of the systemic fibroinflammatory spectrum of IgG4-related disease. An aberrant immune response leads to infiltration of the bile duct walls by IgG4-positive plasma cells and lymphocytes, accompanied by storiform fibrosis and obliterative phlebitis. This transmural inflammation thickens the duct wall and narrows the lumen, producing single or multiple strictures anywhere along the biliary tree, though the intrapancreatic distal bile duct is most often affected, frequently in association with autoimmune pancreatitis. Because the process is immune-mediated rather than fixed fibrotic scarring, it characteristically regresses with immunosuppression, distinguishing it from primary sclerosing cholangitis.",
+    "additionalDifferentials": [
+      "Primary sclerosing cholangitis",
+      "Cholangiocarcinoma",
+      "Pancreatic head adenocarcinoma with biliary obstruction",
+      "Secondary sclerosing cholangitis",
+      "Choledocholithiasis with stricture",
+      "Autoimmune pancreatitis with biliary involvement"
     ],
-    [
-     "Primary Differentials",
-     "Primary sclerosing cholangitis, Cholangiocarcinoma, Pancreatic head adenocarcinoma with biliary obstruction",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI with MRCP to map the strictures and assess the pancreas and other organs",
+      "Serum IgG4 and total IgG with subclass analysis",
+      "Endoscopic ultrasound or cholangioscopy with biopsy to exclude cholangiocarcinoma",
+      "Ampullary or bile duct biopsy for IgG4 immunostaining and characteristic histology",
+      "Assessment for other IgG4-related organ involvement (pancreas, salivary glands, kidneys, retroperitoneum)",
+      "Serum CA 19-9 to help weigh malignancy",
+      "Documentation of biochemical and radiological response to a corticosteroid trial"
     ],
-    [
-     "Management Strategy",
-     "Exclude cholangiocarcinoma with imaging and biopsy before treating, as the presentation closely mimics biliary malignancy",
-     "Core treatment modality"
+    "redFlags": [
+      "A dominant or mass-forming stricture with features suspicious for cholangiocarcinoma",
+      "Markedly raised CA 19-9 or progressive weight loss",
+      "Failure of jaundice or strictures to respond to corticosteroids",
+      "Cholangitis or biliary sepsis",
+      "Progression to biliary cirrhosis with portal hypertension"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the disease as primary sclerosing cholangitis and missing its steroid responsiveness",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition typically responds rapidly and completely to corticosteroids with resolution of strictures and jaundice; relapse is common in systemic IgG4-related disease and may require maintenance therapy, and untreated or refractory disease can progress to secondary biliary cirrhosis.",
+    "pitfalls": [
+      "Mislabelling the disease as primary sclerosing cholangitis and missing its steroid responsiveness",
+      "Overlooking cholangiocarcinoma, which can coexist with or mimic the condition and may itself raise IgG4",
+      "Relying on serum IgG4 alone for diagnosis given its imperfect specificity",
+      "Committing to major biliary surgery for a presumed malignant stricture that is in fact steroid-responsive disease",
+      "Failing to look for associated autoimmune pancreatitis and other organ involvement"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "HISORt and international criteria for IgG4-related sclerosing cholangitis",
+      "Reviews of IgG4-related disease and cholangiopathy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Exclude cholangiocarcinoma with imaging and biopsy before treating, as the presentation closely mimics biliary malignancy",
+      "Induce remission with corticosteroids, expecting striking resolution of strictures and jaundice",
+      "Add azathioprine, mycophenolate or rituximab for maintenance or relapsing disease",
+      "Relieve significant biliary obstruction or cholangitis with endoscopic stenting",
+      "Treat coexisting type 1 autoimmune pancreatitis as part of the same disease process",
+      "Monitor liver function, serum IgG4 and MRCP for relapse and progression towards secondary biliary cirrhosis",
+      "Manage through hepatobiliary and pancreatology services"
     ]
-   ],
-   "caption": "Overview comparison matrix for igg4-related sclerosing cholangitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "igg4-sclerosing-cholangitis-real-image",
-   "title": "IgG4-related sclerosing cholangitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "igg4_sclerosing_cholangitis-pathway",
+      "title": "IgG4-related sclerosing cholangitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The biliary manifestation of systemic IgG4-related disease, and the most common extra-pancreatic organ involvement in type 1 autoimmune pancreatitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A dominant or mass-forming stricture with features suspicious for cholangiocarcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI with MRCP to map the strictures and assess the pancreas and other organs, Serum IgG4 and total IgG with subclass analysis, Endoscopic ultrasound or cholangioscopy with biopsy to exclude cholangiocarcinoma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Exclude cholangiocarcinoma with imaging and biopsy before treating, as the presentation closely mimics biliary malignancy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the disease as primary sclerosing cholangitis and missing its steroid responsiveness"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of igg4-related sclerosing cholangitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "igg4_sclerosing_cholangitis-matrix",
+      "title": "IgG4-related sclerosing cholangitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The biliary manifestation of systemic IgG4-related disease, and the most common extra-pancreatic organ involvement in type 1",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI with MRCP to map the strictures and assess the pancreas and other organs, Serum IgG4 and total IgG with subclass analysis,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary sclerosing cholangitis, Cholangiocarcinoma, Pancreatic head adenocarcinoma with biliary obstruction",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Exclude cholangiocarcinoma with imaging and biopsy before treating, as the presentation closely mimics biliary malignancy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the disease as primary sclerosing cholangitis and missing its steroid responsiveness",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for igg4-related sclerosing cholangitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "igg4_sclerosing_cholangitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with MRCP",
+          "cells": [
+            {
+              "text": "Strictures, plus the pancreas and other organs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgG4 and total IgG with subclasses",
+          "cells": [
+            {
+              "text": "IgG4 level; specificity is imperfect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound or cholangioscopy with biopsy",
+          "cells": [
+            {
+              "text": "Excludes cholangiocarcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile duct biopsy",
+          "cells": [
+            {
+              "text": "IgG4 immunostaining and characteristic histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for other IgG4-related organs",
+          "cells": [
+            {
+              "text": "Pancreas, salivary glands, kidneys and retroperitoneum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CA 19-9",
+          "cells": [
+            {
+              "text": "Helps weigh malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid trial response",
+          "cells": [
+            {
+              "text": "Biochemical and radiological response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_sclerosing_cholangitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary sclerosing cholangitis",
+          "cells": [
+            {
+              "text": "Steroid responsiveness distinguishes this disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholangiocarcinoma",
+          "cells": [
+            {
+              "text": "Dominant or mass-forming stricture with raised CA 19-9"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune pancreatitis with biliary involvement",
+          "cells": [
+            {
+              "text": "Type 1 autoimmune pancreatitis often coexists in the same process"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_sclerosing_cholangitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude cholangiocarcinoma",
+          "cells": [
+            {
+              "text": "Imaging and biopsy before treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Induce remission; striking resolution of strictures and jaundice expected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance or relapse",
+          "cells": [
+            {
+              "text": "Azathioprine, mycophenolate or rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic stenting",
+          "cells": [
+            {
+              "text": "Significant biliary obstruction or cholangitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting pancreatitis",
+          "cells": [
+            {
+              "text": "Treat type 1 autoimmune pancreatitis as the same process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Liver function, serum IgG4 and MRCP for relapse and biliary cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "igg4_sclerosing_cholangitis-dx-mgmt",
+      "title": "Diagnosis and management of IgG4-related sclerosing cholangitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Obstructive jaundice from a distal, hilar or intrahepatic bile duct stricture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dominant or mass-forming stricture, raised CA 19-9, cholangitis or weight loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cholangioscopy and biopsy; relieve cholangitis with stenting",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRCP, serum IgG4, EUS or cholangioscopy with biopsy, CA 19-9",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "IgG4 histology confirmed and cholangiocarcinoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as malignancy or PSC; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids, with striking resolution expected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azathioprine, mycophenolate or rituximab for maintenance or relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic stenting for significant obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting type 1 autoimmune pancreatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor liver tests, IgG4 and MRCP for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Steroid-responsive disease; monitor for relapse and biliary cirrhosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,454 @@
 {
- "id": "molybdenum_cofactor_deficiency",
- "name": "Molybdenum cofactor deficiency",
- "aliases": [
-  "MoCD",
-  "MOCS1 deficiency",
-  "MOCS2 deficiency",
-  "GPHN gephyrin deficiency",
-  "combined deficiency of sulphite oxidase, xanthine oxidase and aldehyde oxidase"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder of molybdenum cofactor biosynthesis, most commonly due to MOCS1 variants, with MOCS2 and GPHN also implicated",
-   "The molybdenum cofactor is required by sulphite oxidase, xanthine oxidase/dehydrogenase and aldehyde oxidase, so all three enzyme activities are lost together",
-   "Loss of sulphite oxidase activity drives the severe neurological phenotype through accumulation of neurotoxic sulphite",
-   "Presents in the neonatal period with intractable seizures, feeding difficulties, marked hypotonia progressing to spasticity and rapid encephalopathy, often mimicking hypoxic-ischaemic injury",
-   "Biochemical clues include raised urinary sulphite and S-sulphocysteine with low plasma uric acid and low urinary urate reflecting xanthine oxidase deficiency",
-   "Lens dislocation (ectopia lentis) develops over time, as in isolated sulphite oxidase deficiency",
-   "Type A disease (MOCS1) can respond to substrate replacement with cyclic pyranopterin monophosphate if started very early",
-   "It is clinically and biochemically indistinguishable from isolated sulphite oxidase deficiency except for the low uric acid"
+  "id": "molybdenum_cofactor_deficiency",
+  "name": "Molybdenum cofactor deficiency",
+  "aliases": [
+    "MoCD",
+    "MOCS1 deficiency",
+    "MOCS2 deficiency",
+    "GPHN gephyrin deficiency",
+    "combined deficiency of sulphite oxidase, xanthine oxidase and aldehyde oxidase"
   ],
-  "pathophysiology": "Molybdenum cofactor is a pterin-based cofactor synthesised through a multistep pathway (involving MOCS1, MOCS2 and gephyrin) that is essential for the activity of the molybdoenzymes sulphite oxidase, xanthine oxidase/dehydrogenase and aldehyde oxidase. When cofactor synthesis fails, all three enzymes are inactive. The most damaging consequence is loss of sulphite oxidase, which normally converts sulphite to sulphate in cysteine catabolism; sulphite accumulates and is directly neurotoxic, while S-sulphocysteine builds up and may act as an excitotoxin. Xanthine oxidase deficiency additionally causes low uric acid and elevated hypoxanthine and xanthine. The combined effect is severe, progressive neonatal brain injury with cystic encephalomalacia.",
-  "additionalDifferentials": [
-   "Isolated sulphite oxidase deficiency",
-   "Hypoxic-ischaemic encephalopathy",
-   "Neonatal epileptic encephalopathies of other causes",
-   "Non-ketotic hyperglycinaemia",
-   "Pyridoxine-dependent and other vitamin-responsive epilepsies",
-   "Neonatal-onset organic acidaemias or urea cycle disorders"
-  ],
-  "additionalInvestigations": [
-   "Fresh urine sulphite testing (dipstick) and quantitation of urinary S-sulphocysteine",
-   "Plasma uric acid, which is characteristically low (distinguishing it from isolated sulphite oxidase deficiency)",
-   "Plasma total homocysteine, which tends to be low",
-   "Neuroimaging showing diffuse injury, cystic change and later cerebral atrophy",
-   "Molecular genetic testing of MOCS1, MOCS2 and GPHN",
-   "Ophthalmological assessment for lens dislocation"
-  ],
-  "redFlags": [
-   "Intractable neonatal seizures with rapidly progressive encephalopathy",
-   "Imaging suggesting hypoxic-ischaemic injury without a supporting perinatal history",
-   "Low plasma uric acid in an encephalopathic neonate",
-   "Progressive spasticity and microcephaly"
-  ],
-  "prognosis": "The classic neonatal form is usually devastating, with profound neurodevelopmental impairment and early death. Type A (MOCS1) disease may respond to early substrate replacement therapy, so prognosis can improve markedly when treatment is started before irreversible brain injury; type B and other genetic forms currently lack specific treatment.",
-  "pitfalls": [
-   "Mistaking the presentation for hypoxic-ischaemic encephalopathy and not testing for the metabolic cause",
-   "Missing the treatable MOCS1 form by delaying genetic and biochemical diagnosis",
-   "Relying on delayed urine sulphite testing, as sulphite degrades rapidly in stored samples",
-   "Failing to distinguish it from isolated sulphite oxidase deficiency by checking uric acid"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For type A (MOCS1) disease, substrate replacement with cyclic pyranopterin monophosphate (fosdenopterin) is disease-specific and should be started as early as possible, ideally before irreversible brain injury",
-   "Type B and other genetic subtypes have no available substrate therapy and are managed supportively",
-   "Dietary reduction of sulphur-containing amino acids as an adjunct to limit accumulation of neurotoxic sulphite and S-sulphocysteine",
-   "Seizure control with antiepileptic drugs, and management of feeding difficulty with nasogastric or gastrostomy feeding alongside management of hypotonia and spasticity",
-   "Biochemical monitoring of urinary sulphite and S-sulphocysteine, plasma urate and homocysteine to track treatment response, with ophthalmological review for ectopia lentis",
-   "Multidisciplinary input from metabolic medicine, neurology, dietetics and, where the phenotype is severe, palliative care",
-   "Genetic counselling for autosomal recessive inheritance, with family screening and prenatal diagnosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "molybdenum_cofactor_deficiency-pathway",
-   "title": "Molybdenum cofactor deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder of molybdenum cofactor biosynthesis, most commonly due to MOCS1 variants, with MOCS2 and GPHN also implicated",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intractable neonatal seizures with rapidly progressive encephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fresh urine sulphite testing (dipstick) and quantitation of urinary S-sulphocysteine, Plasma uric acid, which is characteristically low (distinguishing it from isolated sulphite oxidase deficiency), Plasma total"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For type A (MOCS1) disease, substrate replacement with cyclic pyranopterin monophosphate (fosdenopterin) is disease-specific and should be started as early as possible, ideally before irreversible brain injury"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the presentation for hypoxic-ischaemic encephalopathy and not testing for the metabolic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of molybdenum cofactor deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "molybdenum_cofactor_deficiency-matrix",
-   "title": "Molybdenum cofactor deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder of molybdenum cofactor biosynthesis, most commonly due to MOCS1 variants, with MOCS2 and GPHN also",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder of molybdenum cofactor biosynthesis, most commonly due to MOCS1 variants, with MOCS2 and GPHN also implicated",
+      "The molybdenum cofactor is required by sulphite oxidase, xanthine oxidase/dehydrogenase and aldehyde oxidase, so all three enzyme activities are lost together",
+      "Loss of sulphite oxidase activity drives the severe neurological phenotype through accumulation of neurotoxic sulphite",
+      "Presents in the neonatal period with intractable seizures, feeding difficulties, marked hypotonia progressing to spasticity and rapid encephalopathy, often mimicking hypoxic-ischaemic injury",
+      "Biochemical clues include raised urinary sulphite and S-sulphocysteine with low plasma uric acid and low urinary urate reflecting xanthine oxidase deficiency",
+      "Lens dislocation (ectopia lentis) develops over time, as in isolated sulphite oxidase deficiency",
+      "Type A disease (MOCS1) can respond to substrate replacement with cyclic pyranopterin monophosphate if started very early",
+      "It is clinically and biochemically indistinguishable from isolated sulphite oxidase deficiency except for the low uric acid"
     ],
-    [
-     "Key Investigations",
-     "Fresh urine sulphite testing (dipstick) and quantitation of urinary S-sulphocysteine, Plasma uric acid, which is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Molybdenum cofactor is a pterin-based cofactor synthesised through a multistep pathway (involving MOCS1, MOCS2 and gephyrin) that is essential for the activity of the molybdoenzymes sulphite oxidase, xanthine oxidase/dehydrogenase and aldehyde oxidase. When cofactor synthesis fails, all three enzymes are inactive. The most damaging consequence is loss of sulphite oxidase, which normally converts sulphite to sulphate in cysteine catabolism; sulphite accumulates and is directly neurotoxic, while S-sulphocysteine builds up and may act as an excitotoxin. Xanthine oxidase deficiency additionally causes low uric acid and elevated hypoxanthine and xanthine. The combined effect is severe, progressive neonatal brain injury with cystic encephalomalacia.",
+    "additionalDifferentials": [
+      "Isolated sulphite oxidase deficiency",
+      "Hypoxic-ischaemic encephalopathy",
+      "Neonatal epileptic encephalopathies of other causes",
+      "Non-ketotic hyperglycinaemia",
+      "Pyridoxine-dependent and other vitamin-responsive epilepsies",
+      "Neonatal-onset organic acidaemias or urea cycle disorders"
     ],
-    [
-     "Primary Differentials",
-     "Isolated sulphite oxidase deficiency, Hypoxic-ischaemic encephalopathy, Neonatal epileptic encephalopathies of other causes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fresh urine sulphite testing (dipstick) and quantitation of urinary S-sulphocysteine",
+      "Plasma uric acid, which is characteristically low (distinguishing it from isolated sulphite oxidase deficiency)",
+      "Plasma total homocysteine, which tends to be low",
+      "Neuroimaging showing diffuse injury, cystic change and later cerebral atrophy",
+      "Molecular genetic testing of MOCS1, MOCS2 and GPHN",
+      "Ophthalmological assessment for lens dislocation"
     ],
-    [
-     "Management Strategy",
-     "For type A (MOCS1) disease, substrate replacement with cyclic pyranopterin monophosphate (fosdenopterin) is disease-specific and",
-     "Core treatment modality"
+    "redFlags": [
+      "Intractable neonatal seizures with rapidly progressive encephalopathy",
+      "Imaging suggesting hypoxic-ischaemic injury without a supporting perinatal history",
+      "Low plasma uric acid in an encephalopathic neonate",
+      "Progressive spasticity and microcephaly"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the presentation for hypoxic-ischaemic encephalopathy and not testing for the metabolic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "The classic neonatal form is usually devastating, with profound neurodevelopmental impairment and early death. Type A (MOCS1) disease may respond to early substrate replacement therapy, so prognosis can improve markedly when treatment is started before irreversible brain injury; type B and other genetic forms currently lack specific treatment.",
+    "pitfalls": [
+      "Mistaking the presentation for hypoxic-ischaemic encephalopathy and not testing for the metabolic cause",
+      "Missing the treatable MOCS1 form by delaying genetic and biochemical diagnosis",
+      "Relying on delayed urine sulphite testing, as sulphite degrades rapidly in stored samples",
+      "Failing to distinguish it from isolated sulphite oxidase deficiency by checking uric acid"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For type A (MOCS1) disease, substrate replacement with cyclic pyranopterin monophosphate (fosdenopterin) is disease-specific and should be started as early as possible, ideally before irreversible brain injury",
+      "Type B and other genetic subtypes have no available substrate therapy and are managed supportively",
+      "Dietary reduction of sulphur-containing amino acids as an adjunct to limit accumulation of neurotoxic sulphite and S-sulphocysteine",
+      "Seizure control with antiepileptic drugs, and management of feeding difficulty with nasogastric or gastrostomy feeding alongside management of hypotonia and spasticity",
+      "Biochemical monitoring of urinary sulphite and S-sulphocysteine, plasma urate and homocysteine to track treatment response, with ophthalmological review for ectopia lentis",
+      "Multidisciplinary input from metabolic medicine, neurology, dietetics and, where the phenotype is severe, palliative care",
+      "Genetic counselling for autosomal recessive inheritance, with family screening and prenatal diagnosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for molybdenum cofactor deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "molybdenum-cofactor-deficiency-real-image",
-   "title": "Molybdenum cofactor deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "molybdenum_cofactor_deficiency-pathway",
+      "title": "Molybdenum cofactor deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder of molybdenum cofactor biosynthesis, most commonly due to MOCS1 variants, with MOCS2 and GPHN also implicated",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intractable neonatal seizures with rapidly progressive encephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fresh urine sulphite testing (dipstick) and quantitation of urinary S-sulphocysteine, Plasma uric acid, which is characteristically low (distinguishing it from isolated sulphite oxidase deficiency), Plasma total"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For type A (MOCS1) disease, substrate replacement with cyclic pyranopterin monophosphate (fosdenopterin) is disease-specific and should be started as early as possible, ideally before irreversible brain injury"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the presentation for hypoxic-ischaemic encephalopathy and not testing for the metabolic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of molybdenum cofactor deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "molybdenum_cofactor_deficiency-matrix",
+      "title": "Molybdenum cofactor deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder of molybdenum cofactor biosynthesis, most commonly due to MOCS1 variants, with MOCS2 and GPHN also",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fresh urine sulphite testing (dipstick) and quantitation of urinary S-sulphocysteine, Plasma uric acid, which is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated sulphite oxidase deficiency, Hypoxic-ischaemic encephalopathy, Neonatal epileptic encephalopathies of other causes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For type A (MOCS1) disease, substrate replacement with cyclic pyranopterin monophosphate (fosdenopterin) is disease-specific and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the presentation for hypoxic-ischaemic encephalopathy and not testing for the metabolic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for molybdenum cofactor deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "molybdenum_cofactor_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fresh urine sulphite dipstick and S-sulphocysteine",
+          "cells": [
+            {
+              "text": "Sulphite and S-sulphocysteine accumulate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma uric acid",
+          "cells": [
+            {
+              "text": "Characteristically low; separates it from isolated sulphite oxidase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma total homocysteine",
+          "cells": [
+            {
+              "text": "Tends to be low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Diffuse injury, cystic change, later atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MOCS1, MOCS2 and GPHN testing",
+          "cells": [
+            {
+              "text": "Defines genetic subtype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "molybdenum_cofactor_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated sulphite oxidase deficiency",
+          "cells": [
+            {
+              "text": "Uric acid is not low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoxic-ischaemic encephalopathy",
+          "cells": [
+            {
+              "text": "Imaging may mimic it without a supporting perinatal history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-ketotic hyperglycinaemia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "molybdenum_cofactor_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fosdenopterin (cyclic pyranopterin monophosphate)",
+          "cells": [
+            {
+              "text": "Disease-specific for type A (MOCS1); start early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for other subtypes",
+          "cells": [
+            {
+              "text": "No substrate therapy for type B and others"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary sulphur amino acid reduction",
+          "cells": [
+            {
+              "text": "Adjunct to limit sulphite and S-sulphocysteine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptics and feeding support",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical monitoring",
+          "cells": [
+            {
+              "text": "Urinary sulphite, S-sulphocysteine, plasma urate, homocysteine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; prenatal diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "molybdenum_cofactor_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Molybdenum cofactor deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with intractable seizures and progressive encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intractable seizures, HIE-like imaging without perinatal cause, low urate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Test urine sulphite now; urgent metabolic referral, fosdenopterin if type A",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine sulphite and S-sulphocysteine, plasma urate, homocysteine, MOCS1/2 and GPHN",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sulphite positive with low urate and a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated sulphite oxidase deficiency, HIE, NKH, vitamin-responsive epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fosdenopterin for MOCS1 (type A) disease, started as early as possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary sulphur reduction, antiepileptics and feeding support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor urinary sulphite, S-sulphocysteine, urate and homocysteine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling, family screening and prenatal diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Classic form devastating; type A may respond to early treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

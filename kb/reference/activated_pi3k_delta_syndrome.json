@@ -1,179 +1,495 @@
 {
- "id": "activated_pi3k_delta_syndrome",
- "name": "Activated PI3K-delta syndrome (APDS)",
- "aliases": [
-  "APDS",
-  "PIK3CD",
-  "PIK3R1",
-  "p110-delta activating mutation",
-  "PASLI"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with recurrent sinopulmonary bacterial infection often complicated by early bronchiectasis, alongside a marked tendency to persistent or severe herpesvirus infection such as EBV and CMV",
-   "Non-malignant lymphoproliferation is characteristic, with generalised lymphadenopathy, hepatosplenomegaly and mucosal lymphoid hyperplasia",
-   "APDS1 arises from gain-of-function variants in PIK3CD (p110-delta) and APDS2 from loss-of-function variants in the regulatory subunit gene PIK3R1, both increasing PI3K-delta signalling",
-   "The immunophenotype shows an excess of senescent, terminally differentiated effector T cells with reduced naive T cells and progressive CD4 lymphopenia",
-   "Antibody responses are impaired with dysregulated immunoglobulins, often raised IgM with low IgG, so immunoglobulin replacement is frequently required",
-   "There is a substantially increased risk of B-cell lymphoma, driven in part by persistent EBV infection",
-   "Inheritance is autosomal dominant and the phenotype is highly variable even within families",
-   "Targeted therapy with selective PI3K-delta inhibitors or with sirolimus can reduce lymphoproliferation, and haematopoietic stem cell transplantation is considered in severe disease"
+  "id": "activated_pi3k_delta_syndrome",
+  "name": "Activated PI3K-delta syndrome (APDS)",
+  "aliases": [
+    "APDS",
+    "PIK3CD",
+    "PIK3R1",
+    "p110-delta activating mutation",
+    "PASLI"
   ],
-  "pathophysiology": "APDS results from constitutive over-activity of the phosphoinositide 3-kinase delta pathway, either through activating variants in the catalytic subunit p110-delta (PIK3CD) or loss of the inhibitory regulatory subunit p85-alpha (PIK3R1). Excessive signalling through the downstream AKT-mTOR axis drives inappropriate lymphocyte activation and proliferation while promoting premature differentiation and senescence of effector T cells and impairing the generation and survival of naive and memory populations. Defective B-cell maturation and class switching produce a dysregulated antibody response, and the combination of impaired viral control and persistent lymphoproliferation underlies the recurrent infections, EBV-associated disease and lymphoma risk.",
-  "additionalDifferentials": [
-   "Common variable immunodeficiency",
-   "Autoimmune lymphoproliferative syndrome (ALPS)",
-   "Hyper-IgM syndromes",
-   "X-linked lymphoproliferative disease",
-   "CTLA4 haploinsufficiency and LRBA deficiency",
-   "Chronic active EBV infection",
-   "Nodal lymphoma of other cause"
-  ],
-  "additionalInvestigations": [
-   "Lymphocyte subsets showing reduced naive T cells with expanded senescent effector T cells and skewed B-cell maturation",
-   "Serum immunoglobulins, often with elevated IgM and reduced IgG, and specific antibody responses",
-   "Assessment of PI3K-AKT-mTOR pathway activity where available",
-   "EBV and CMV viral load monitoring",
-   "Targeted sequencing of PIK3CD and PIK3R1 for characteristic gain-of-function or splice variants",
-   "High-resolution chest imaging for bronchiectasis and imaging of lymphoid organs"
-  ],
-  "redFlags": [
-   "Rapidly enlarging or asymmetric lymphadenopathy suggesting lymphoma",
-   "Rising EBV viral load with systemic symptoms",
-   "Progressive respiratory decline from bronchiectasis",
-   "Severe or disseminated herpesvirus infection",
-   "Refractory cytopenias or organomegaly causing functional compromise"
-  ],
-  "prognosis": "Outcome varies widely; recurrent infection and bronchiectasis cause chronic morbidity while lymphoma is a major cause of death, but selective PI3K-delta inhibition and, in selected patients, transplantation have improved disease control.",
-  "pitfalls": [
-   "Labelling the condition common variable immunodeficiency and missing the specific targetable pathway defect",
-   "Mistaking benign lymphoproliferation for lymphoma or vice versa without histology",
-   "Overlooking early bronchiectasis because chest examination and spirometry appear normal",
-   "Failing to monitor and pre-emptively manage EBV",
-   "Using broad immunosuppression without recognising the option of pathway-specific therapy"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Targeted selective PI3K-delta inhibition with leniolisib as disease-specific therapy, with mTOR inhibition using sirolimus as an alternative for lymphoproliferation",
-   "Immunoglobulin replacement therapy for the dysregulated antibody response and impaired IgG",
-   "Antimicrobial prophylaxis with prompt treatment of bacterial infection, and antiviral therapy for EBV and CMV disease",
-   "Airway clearance physiotherapy and aggressive treatment of exacerbations to manage bronchiectasis",
-   "Surveillance for B-cell lymphoma with monitoring of EBV and CMV viral loads and lymphoid-organ imaging",
-   "Haematopoietic stem cell transplantation in selected severe or transformation-prone cases",
-   "Coordinated multidisciplinary clinical immunology and haematology-oncology care, with genetic counselling for the autosomal dominant PIK3CD or PIK3R1 variant and family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "activated_pi3k_delta_syndrome-pathway",
-   "title": "Activated PI3K-delta syndrome (APDS): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with recurrent sinopulmonary bacterial infection often complicated by early bronchiectasis, alongside a marked tendency to persistent or severe herpesvirus infection such as EBV and CMV",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging or asymmetric lymphadenopathy suggesting lymphoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lymphocyte subsets showing reduced naive T cells with expanded senescent effector T cells and skewed B-cell maturation, Serum immunoglobulins, often with elevated IgM and reduced IgG, and specific antibody responses,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Targeted selective PI3K-delta inhibition with leniolisib as disease-specific therapy, with mTOR inhibition using sirolimus as an alternative for lymphoproliferation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the condition common variable immunodeficiency and missing the specific targetable pathway defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of activated pi3k-delta syndrome (apds)."
-  }
- ],
- "tables": [
-  {
-   "id": "activated_pi3k_delta_syndrome-matrix",
-   "title": "Activated PI3K-delta syndrome (APDS): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with recurrent sinopulmonary bacterial infection often complicated by early bronchiectasis, alongside a marked tendency",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with recurrent sinopulmonary bacterial infection often complicated by early bronchiectasis, alongside a marked tendency to persistent or severe herpesvirus infection such as EBV and CMV",
+      "Non-malignant lymphoproliferation is characteristic, with generalised lymphadenopathy, hepatosplenomegaly and mucosal lymphoid hyperplasia",
+      "APDS1 arises from gain-of-function variants in PIK3CD (p110-delta) and APDS2 from loss-of-function variants in the regulatory subunit gene PIK3R1, both increasing PI3K-delta signalling",
+      "The immunophenotype shows an excess of senescent, terminally differentiated effector T cells with reduced naive T cells and progressive CD4 lymphopenia",
+      "Antibody responses are impaired with dysregulated immunoglobulins, often raised IgM with low IgG, so immunoglobulin replacement is frequently required",
+      "There is a substantially increased risk of B-cell lymphoma, driven in part by persistent EBV infection",
+      "Inheritance is autosomal dominant and the phenotype is highly variable even within families",
+      "Targeted therapy with selective PI3K-delta inhibitors or with sirolimus can reduce lymphoproliferation, and haematopoietic stem cell transplantation is considered in severe disease"
     ],
-    [
-     "Key Investigations",
-     "Lymphocyte subsets showing reduced naive T cells with expanded senescent effector T cells and skewed B-cell maturation, Serum",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "APDS results from constitutive over-activity of the phosphoinositide 3-kinase delta pathway, either through activating variants in the catalytic subunit p110-delta (PIK3CD) or loss of the inhibitory regulatory subunit p85-alpha (PIK3R1). Excessive signalling through the downstream AKT-mTOR axis drives inappropriate lymphocyte activation and proliferation while promoting premature differentiation and senescence of effector T cells and impairing the generation and survival of naive and memory populations. Defective B-cell maturation and class switching produce a dysregulated antibody response, and the combination of impaired viral control and persistent lymphoproliferation underlies the recurrent infections, EBV-associated disease and lymphoma risk.",
+    "additionalDifferentials": [
+      "Common variable immunodeficiency",
+      "Autoimmune lymphoproliferative syndrome (ALPS)",
+      "Hyper-IgM syndromes",
+      "X-linked lymphoproliferative disease",
+      "CTLA4 haploinsufficiency and LRBA deficiency",
+      "Chronic active EBV infection",
+      "Nodal lymphoma of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Common variable immunodeficiency, Autoimmune lymphoproliferative syndrome (ALPS), Hyper-IgM syndromes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lymphocyte subsets showing reduced naive T cells with expanded senescent effector T cells and skewed B-cell maturation",
+      "Serum immunoglobulins, often with elevated IgM and reduced IgG, and specific antibody responses",
+      "Assessment of PI3K-AKT-mTOR pathway activity where available",
+      "EBV and CMV viral load monitoring",
+      "Targeted sequencing of PIK3CD and PIK3R1 for characteristic gain-of-function or splice variants",
+      "High-resolution chest imaging for bronchiectasis and imaging of lymphoid organs"
     ],
-    [
-     "Management Strategy",
-     "Targeted selective PI3K-delta inhibition with leniolisib as disease-specific therapy, with mTOR inhibition using sirolimus as an",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging or asymmetric lymphadenopathy suggesting lymphoma",
+      "Rising EBV viral load with systemic symptoms",
+      "Progressive respiratory decline from bronchiectasis",
+      "Severe or disseminated herpesvirus infection",
+      "Refractory cytopenias or organomegaly causing functional compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the condition common variable immunodeficiency and missing the specific targetable pathway defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies widely; recurrent infection and bronchiectasis cause chronic morbidity while lymphoma is a major cause of death, but selective PI3K-delta inhibition and, in selected patients, transplantation have improved disease control.",
+    "pitfalls": [
+      "Labelling the condition common variable immunodeficiency and missing the specific targetable pathway defect",
+      "Mistaking benign lymphoproliferation for lymphoma or vice versa without histology",
+      "Overlooking early bronchiectasis because chest examination and spirometry appear normal",
+      "Failing to monitor and pre-emptively manage EBV",
+      "Using broad immunosuppression without recognising the option of pathway-specific therapy"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Targeted selective PI3K-delta inhibition with leniolisib as disease-specific therapy, with mTOR inhibition using sirolimus as an alternative for lymphoproliferation",
+      "Immunoglobulin replacement therapy for the dysregulated antibody response and impaired IgG",
+      "Antimicrobial prophylaxis with prompt treatment of bacterial infection, and antiviral therapy for EBV and CMV disease",
+      "Airway clearance physiotherapy and aggressive treatment of exacerbations to manage bronchiectasis",
+      "Surveillance for B-cell lymphoma with monitoring of EBV and CMV viral loads and lymphoid-organ imaging",
+      "Haematopoietic stem cell transplantation in selected severe or transformation-prone cases",
+      "Coordinated multidisciplinary clinical immunology and haematology-oncology care, with genetic counselling for the autosomal dominant PIK3CD or PIK3R1 variant and family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for activated pi3k-delta syndrome (apds)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "activated-pi3k-delta-syndrome-real-image",
-   "title": "Activated PI3K-delta syndrome (APDS): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "activated_pi3k_delta_syndrome-pathway",
+      "title": "Activated PI3K-delta syndrome (APDS): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with recurrent sinopulmonary bacterial infection often complicated by early bronchiectasis, alongside a marked tendency to persistent or severe herpesvirus infection such as EBV and CMV",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging or asymmetric lymphadenopathy suggesting lymphoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lymphocyte subsets showing reduced naive T cells with expanded senescent effector T cells and skewed B-cell maturation, Serum immunoglobulins, often with elevated IgM and reduced IgG, and specific antibody responses,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Targeted selective PI3K-delta inhibition with leniolisib as disease-specific therapy, with mTOR inhibition using sirolimus as an alternative for lymphoproliferation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the condition common variable immunodeficiency and missing the specific targetable pathway defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of activated pi3k-delta syndrome (apds)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "activated_pi3k_delta_syndrome-matrix",
+      "title": "Activated PI3K-delta syndrome (APDS): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with recurrent sinopulmonary bacterial infection often complicated by early bronchiectasis, alongside a marked tendency",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lymphocyte subsets showing reduced naive T cells with expanded senescent effector T cells and skewed B-cell maturation, Serum",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Common variable immunodeficiency, Autoimmune lymphoproliferative syndrome (ALPS), Hyper-IgM syndromes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Targeted selective PI3K-delta inhibition with leniolisib as disease-specific therapy, with mTOR inhibition using sirolimus as an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the condition common variable immunodeficiency and missing the specific targetable pathway defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for activated pi3k-delta syndrome (apds)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "activated_pi3k_delta_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Reduced naive T cells with expanded senescent effector T cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins and specific antibody responses",
+          "cells": [
+            {
+              "text": "Often elevated IgM with reduced IgG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PI3K-AKT-mTOR pathway activity",
+          "cells": [
+            {
+              "text": "Pathway over-activity where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EBV and CMV viral load monitoring",
+          "cells": [
+            {
+              "text": "Persistent or severe herpesvirus infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIK3CD and PIK3R1 targeted sequencing",
+          "cells": [
+            {
+              "text": "Gain-of-function or splice variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution chest imaging and lymphoid organ imaging",
+          "cells": [
+            {
+              "text": "Bronchiectasis and lymphoid organs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "activated_pi3k_delta_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic active EBV infection",
+          "cells": [
+            {
+              "text": "Persistent EBV without the PI3K-delta variant"
+            },
+            {
+              "text": "PIK3CD and PIK3R1 sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodal lymphoma of other cause",
+          "cells": [
+            {
+              "text": "Rapidly enlarging or asymmetric nodes"
+            },
+            {
+              "text": "Imaging of lymphoid organs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "activated_pi3k_delta_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Leniolisib (selective PI3K-delta inhibition)",
+          "cells": [
+            {
+              "text": "Disease-specific therapy"
+            },
+            {
+              "text": "Targeted selective inhibition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sirolimus",
+          "cells": [
+            {
+              "text": "Alternative for lymphoproliferation"
+            },
+            {
+              "text": "mTOR inhibition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Dysregulated antibody response and impaired IgG"
+            },
+            {
+              "text": "Replacement therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial prophylaxis and antiviral therapy",
+          "cells": [
+            {
+              "text": "Bacterial infection and EBV or CMV disease"
+            },
+            {
+              "text": "Prompt treatment of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance physiotherapy",
+          "cells": [
+            {
+              "text": "Bronchiectasis"
+            },
+            {
+              "text": "Aggressive treatment of exacerbations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for B-cell lymphoma",
+          "cells": [
+            {
+              "text": "EBV and CMV viral loads and lymphoid organ imaging"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Selected severe or transformation-prone cases"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "activated_pi3k_delta_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Activated PI3K-delta syndrome (APDS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent sinopulmonary infection, bronchiectasis and lymphadenopathy in a young patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly enlarging or asymmetric nodes, or rising EBV load?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent lymphoma assessment and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphocyte subsets, immunoglobulins and EBV and CMV viral loads",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Senescent effector T-cell expansion with PIK3CD or PIK3R1 variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start leniolisib, a selective PI3K-delta inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review CVID, ALPS, CTLA4 or LRBA deficiency and chronic EBV",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunoglobulin replacement and antimicrobial prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway clearance physiotherapy for bronchiectasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lymphoma surveillance; sirolimus as alternative for lymphoproliferation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrent infection causes chronic morbidity; lymphoma is a major cause of death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

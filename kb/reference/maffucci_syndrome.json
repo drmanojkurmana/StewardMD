@@ -1,173 +1,462 @@
 {
- "id": "maffucci_syndrome",
- "name": "Maffucci syndrome",
- "aliases": [
-  "enchondromatosis with haemangiomas",
-  "IDH1",
-  "IDH2",
-  "Maffucci-Kast syndrome"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by the combination of multiple enchondromas with soft-tissue vascular lesions, classically spindle-cell haemangiomas",
-   "Like Ollier disease it is a sporadic, non-hereditary condition caused by somatic mosaic IDH1 or IDH2 variants",
-   "Enchondromas show an asymmetric distribution affecting the hands, feet and long bones, causing deformity, swelling and limb-length discrepancy",
-   "The vascular lesions present as compressible, sometimes bluish subcutaneous nodules and may contain phleboliths visible on radiographs",
-   "Carries a higher overall risk of malignancy than Ollier disease, including chondrosarcoma and an increased risk of other neoplasms",
-   "Associated tumours reported include gliomas, and ovarian and pancreatic neoplasms, so surveillance extends beyond the skeleton",
-   "The presence of haemangiomas is the feature that separates Maffucci syndrome from isolated enchondromatosis"
+  "id": "maffucci_syndrome",
+  "name": "Maffucci syndrome",
+  "aliases": [
+    "enchondromatosis with haemangiomas",
+    "IDH1",
+    "IDH2",
+    "Maffucci-Kast syndrome"
   ],
-  "pathophysiology": "Maffucci syndrome shares its origin with Ollier disease in post-zygotic somatic mosaic gain-of-function variants of IDH1 or IDH2. The resulting oncometabolite 2-hydroxyglutarate perturbs epigenetic regulation, impairing chondrocyte differentiation so residual cartilage persists as intramedullary enchondromas. In Maffucci syndrome the mosaic mutation additionally affects vascular tissue, giving rise to spindle-cell haemangiomas and other vascular malformations. The broader mutational burden is thought to underlie the higher risk of malignant transformation and of non-skeletal tumours compared with Ollier disease.",
-  "additionalDifferentials": [
-   "Ollier disease (enchondromatosis without vascular lesions)",
-   "Multiple hereditary exostoses",
-   "Blue rubber bleb naevus syndrome",
-   "Klippel-Trenaunay syndrome",
-   "Metachondromatosis",
-   "Chondrosarcoma"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey to map enchondromas and identify phleboliths within vascular lesions",
-   "MRI to characterise both cartilaginous and vascular soft-tissue lesions",
-   "Consideration of somatic IDH1/IDH2 testing on lesional tissue where diagnosis is uncertain",
-   "Surveillance imaging for malignant transformation of enchondromas",
-   "Broader clinical vigilance and targeted imaging for associated non-skeletal tumours"
-  ],
-  "redFlags": [
-   "Growth or new pain in an enchondroma suggesting transformation to chondrosarcoma",
-   "Neurological symptoms that may indicate an associated intracranial tumour",
-   "A rapidly enlarging or bleeding vascular lesion",
-   "Systemic features suggesting an associated visceral neoplasm"
-  ],
-  "prognosis": "Morbidity arises from skeletal deformity, fractures and vascular lesions, but the defining concern is a substantially increased lifetime risk of malignancy, both chondrosarcoma and other tumours, mandating lifelong multi-system surveillance.",
-  "pitfalls": [
-   "Managing it as simple enchondromatosis and neglecting surveillance for the broader malignancy risk",
-   "Giving inherited recurrence-risk counselling for what is a sporadic mosaic disorder",
-   "Overlooking the vascular lesions that define the syndrome and its higher risk",
-   "Failing to investigate new neurological or systemic symptoms for associated neoplasms"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Orphanet / WHO Classification of Tumours: Maffucci Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No medical cure exists, so management centres on surveillance for malignant transformation and treatment of complications in this somatic mosaic, non-hereditary IDH1/IDH2 disorder",
-   "Surgical treatment of symptomatic enchondromas with curettage, grafting, and correction of deformity and limb-length discrepancy",
-   "Prompt biopsy and wide surgical resection of any lesion suspicious for chondrosarcoma, such as one showing growth, new pain or cortical destruction",
-   "Management of the spindle-cell haemangiomas and other vascular lesions surgically or with sclerotherapy when symptomatic",
-   "Lifelong surveillance imaging of the skeleton for malignant transformation, with broader vigilance for associated non-skeletal tumours including gliomas and ovarian and pancreatic neoplasms",
-   "Orthopaedic and rehabilitation support for deformity, fractures and functional limitation",
-   "Multidisciplinary care through skeletal-dysplasia and oncology services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "maffucci_syndrome-pathway",
-   "title": "Maffucci syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by the combination of multiple enchondromas with soft-tissue vascular lesions, classically spindle-cell haemangiomas",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Growth or new pain in an enchondroma suggesting transformation to chondrosarcoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey to map enchondromas and identify phleboliths within vascular lesions, MRI to characterise both cartilaginous and vascular soft-tissue lesions, Consideration of somatic IDH1/IDH2 testing on lesional tissue"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No medical cure exists, so management centres on surveillance for malignant transformation and treatment of complications in this somatic mosaic, non-hereditary IDH1/IDH2 disorder"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Managing it as simple enchondromatosis and neglecting surveillance for the broader malignancy risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of maffucci syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "maffucci_syndrome-matrix",
-   "title": "Maffucci syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by the combination of multiple enchondromas with soft-tissue vascular lesions, classically spindle-cell haemangiomas",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by the combination of multiple enchondromas with soft-tissue vascular lesions, classically spindle-cell haemangiomas",
+      "Like Ollier disease it is a sporadic, non-hereditary condition caused by somatic mosaic IDH1 or IDH2 variants",
+      "Enchondromas show an asymmetric distribution affecting the hands, feet and long bones, causing deformity, swelling and limb-length discrepancy",
+      "The vascular lesions present as compressible, sometimes bluish subcutaneous nodules and may contain phleboliths visible on radiographs",
+      "Carries a higher overall risk of malignancy than Ollier disease, including chondrosarcoma and an increased risk of other neoplasms",
+      "Associated tumours reported include gliomas, and ovarian and pancreatic neoplasms, so surveillance extends beyond the skeleton",
+      "The presence of haemangiomas is the feature that separates Maffucci syndrome from isolated enchondromatosis"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey to map enchondromas and identify phleboliths within vascular lesions, MRI to characterise both cartilaginous and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Maffucci syndrome shares its origin with Ollier disease in post-zygotic somatic mosaic gain-of-function variants of IDH1 or IDH2. The resulting oncometabolite 2-hydroxyglutarate perturbs epigenetic regulation, impairing chondrocyte differentiation so residual cartilage persists as intramedullary enchondromas. In Maffucci syndrome the mosaic mutation additionally affects vascular tissue, giving rise to spindle-cell haemangiomas and other vascular malformations. The broader mutational burden is thought to underlie the higher risk of malignant transformation and of non-skeletal tumours compared with Ollier disease.",
+    "additionalDifferentials": [
+      "Ollier disease (enchondromatosis without vascular lesions)",
+      "Multiple hereditary exostoses",
+      "Blue rubber bleb naevus syndrome",
+      "Klippel-Trenaunay syndrome",
+      "Metachondromatosis",
+      "Chondrosarcoma"
     ],
-    [
-     "Primary Differentials",
-     "Ollier disease (enchondromatosis without vascular lesions), Multiple hereditary exostoses, Blue rubber bleb naevus syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey to map enchondromas and identify phleboliths within vascular lesions",
+      "MRI to characterise both cartilaginous and vascular soft-tissue lesions",
+      "Consideration of somatic IDH1/IDH2 testing on lesional tissue where diagnosis is uncertain",
+      "Surveillance imaging for malignant transformation of enchondromas",
+      "Broader clinical vigilance and targeted imaging for associated non-skeletal tumours"
     ],
-    [
-     "Management Strategy",
-     "No medical cure exists, so management centres on surveillance for malignant transformation and treatment of complications in this",
-     "Core treatment modality"
+    "redFlags": [
+      "Growth or new pain in an enchondroma suggesting transformation to chondrosarcoma",
+      "Neurological symptoms that may indicate an associated intracranial tumour",
+      "A rapidly enlarging or bleeding vascular lesion",
+      "Systemic features suggesting an associated visceral neoplasm"
     ],
-    [
-     "Clinical Pitfall",
-     "Managing it as simple enchondromatosis and neglecting surveillance for the broader malignancy risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Morbidity arises from skeletal deformity, fractures and vascular lesions, but the defining concern is a substantially increased lifetime risk of malignancy, both chondrosarcoma and other tumours, mandating lifelong multi-system surveillance.",
+    "pitfalls": [
+      "Managing it as simple enchondromatosis and neglecting surveillance for the broader malignancy risk",
+      "Giving inherited recurrence-risk counselling for what is a sporadic mosaic disorder",
+      "Overlooking the vascular lesions that define the syndrome and its higher risk",
+      "Failing to investigate new neurological or systemic symptoms for associated neoplasms"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Orphanet / WHO Classification of Tumours: Maffucci Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No medical cure exists, so management centres on surveillance for malignant transformation and treatment of complications in this somatic mosaic, non-hereditary IDH1/IDH2 disorder",
+      "Surgical treatment of symptomatic enchondromas with curettage, grafting, and correction of deformity and limb-length discrepancy",
+      "Prompt biopsy and wide surgical resection of any lesion suspicious for chondrosarcoma, such as one showing growth, new pain or cortical destruction",
+      "Management of the spindle-cell haemangiomas and other vascular lesions surgically or with sclerotherapy when symptomatic",
+      "Lifelong surveillance imaging of the skeleton for malignant transformation, with broader vigilance for associated non-skeletal tumours including gliomas and ovarian and pancreatic neoplasms",
+      "Orthopaedic and rehabilitation support for deformity, fractures and functional limitation",
+      "Multidisciplinary care through skeletal-dysplasia and oncology services"
     ]
-   ],
-   "caption": "Overview comparison matrix for maffucci syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "maffucci-syndrome-real-image",
-   "title": "Maffucci syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "maffucci_syndrome-pathway",
+      "title": "Maffucci syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by the combination of multiple enchondromas with soft-tissue vascular lesions, classically spindle-cell haemangiomas",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Growth or new pain in an enchondroma suggesting transformation to chondrosarcoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey to map enchondromas and identify phleboliths within vascular lesions, MRI to characterise both cartilaginous and vascular soft-tissue lesions, Consideration of somatic IDH1/IDH2 testing on lesional tissue"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No medical cure exists, so management centres on surveillance for malignant transformation and treatment of complications in this somatic mosaic, non-hereditary IDH1/IDH2 disorder"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Managing it as simple enchondromatosis and neglecting surveillance for the broader malignancy risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of maffucci syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "maffucci_syndrome-matrix",
+      "title": "Maffucci syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by the combination of multiple enchondromas with soft-tissue vascular lesions, classically spindle-cell haemangiomas",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey to map enchondromas and identify phleboliths within vascular lesions, MRI to characterise both cartilaginous and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ollier disease (enchondromatosis without vascular lesions), Multiple hereditary exostoses, Blue rubber bleb naevus syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No medical cure exists, so management centres on surveillance for malignant transformation and treatment of complications in this",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Managing it as simple enchondromatosis and neglecting surveillance for the broader malignancy risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for maffucci syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "maffucci_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Map of enchondromas and phleboliths"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of cartilaginous and vascular lesions",
+          "cells": [
+            {
+              "text": "Soft-tissue extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatic IDH1 or IDH2 testing on lesional tissue",
+          "cells": [
+            {
+              "text": "Confirms mosaic variant where uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging of enchondromas",
+          "cells": [
+            {
+              "text": "Malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted imaging for non-skeletal tumours",
+          "cells": [
+            {
+              "text": "Gliomas, ovarian or pancreatic neoplasm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "maffucci_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ollier disease",
+          "cells": [
+            {
+              "text": "Enchondromatosis without vascular lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple hereditary exostoses",
+          "cells": [
+            {
+              "text": "Osteochondromas rather than enchondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klippel-Trenaunay syndrome",
+          "cells": [
+            {
+              "text": "Capillary and venous malformation pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondrosarcoma",
+          "cells": [
+            {
+              "text": "Growth, pain and cortical change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "maffucci_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Lifelong imaging for malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic enchondromas",
+          "cells": [
+            {
+              "text": "Curettage, grafting and deformity correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suspicious lesion",
+          "cells": [
+            {
+              "text": "Biopsy and wide resection for suspected chondrosarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular lesions",
+          "cells": [
+            {
+              "text": "Surgery or sclerotherapy when symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Support",
+          "cells": [
+            {
+              "text": "Orthopaedic and rehabilitation care for deformity and fractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "maffucci_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Maffucci syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple enchondromas with compressible bluish subcutaneous nodules in a child or adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (growth or pain in enchondroma, neurological or bleeding change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent oncology review and biopsy for suspected chondrosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, MRI of cartilaginous and vascular lesions, phlebolith check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are enchondromas and haemangiomas both present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Ollier disease, hereditary exostoses or Klippel-Trenaunay syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong skeletal surveillance for malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Curettage and grafting for symptomatic enchondromas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biopsy and wide resection for suspected chondrosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery or sclerotherapy for symptomatic vascular lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Broader vigilance for gliomas and visceral tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Higher lifetime malignancy risk than Ollier disease; surveillance is essential",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

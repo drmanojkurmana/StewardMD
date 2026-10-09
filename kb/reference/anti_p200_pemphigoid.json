@@ -1,176 +1,626 @@
 {
- "id": "anti_p200_pemphigoid",
- "name": "anti p200 pemphigoid",
- "aliases": [
-  "anti-p200 pemphigoid",
-  "anti-laminin gamma-1 pemphigoid"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare subepidermal autoimmune blistering disease defined by autoantibodies against a 200 kDa protein in the lower lamina lucida, identified in many cases as laminin gamma-1.",
-   "Clinically it often resembles bullous pemphigoid with tense blisters on an urticarial or erythematous base, but lesions may favour the palms, soles and acral sites.",
-   "A subset of patients show features overlapping with dermatitis herpetiformis, and mucosal involvement can occur, broadening the clinical differential.",
-   "An association with psoriasis is reported in a notable proportion of patients, which may precede or accompany the blistering eruption.",
-   "Direct immunofluorescence shows linear IgG and C3 along the basement-membrane zone, indistinguishable from other pemphigoid variants on routine testing.",
-   "On salt-split skin indirect immunofluorescence, autoantibodies bind the dermal (floor) side of the split, as in epidermolysis bullosa acquisita, so serological confirmation by immunoblot is needed to distinguish them.",
-   "Diagnosis is confirmed by immunoblotting serum against dermal extract, revealing reactivity with a 200 kDa band (and often laminin gamma-1).",
-   "The disease generally responds well to topical or systemic corticosteroids and steroid-sparing agents, and tends to be less refractory than epidermolysis bullosa acquisita."
+  "id": "anti_p200_pemphigoid",
+  "name": "anti p200 pemphigoid",
+  "aliases": [
+    "anti-p200 pemphigoid",
+    "anti-laminin gamma-1 pemphigoid"
   ],
-  "pathophysiology": "Anti-p200 pemphigoid is caused by circulating IgG autoantibodies directed against a 200 kDa acidic glycoprotein located in the lower portion of the lamina lucida at the dermo-epidermal junction; in a large proportion of patients this antigen has been characterised as laminin gamma-1, a constituent of several laminin isoforms. Antibody binding, with subsequent complement activation and neutrophil recruitment, produces a subepidermal split just above the lamina densa. Because the target lies deep within the basement-membrane zone, autoantibodies localise to the dermal side of salt-split skin, mimicking epidermolysis bullosa acquisita, yet the target and clinical behaviour differ. The frequent coexistence with psoriasis suggests that epidermal inflammation and basement-membrane remodelling may expose or alter the antigen and trigger autoimmunity.",
-  "additionalDifferentials": [
-   "bullous pemphigoid",
-   "epidermolysis bullosa acquisita",
-   "dermatitis herpetiformis",
-   "linear IgA bullous dermatosis",
-   "mucous membrane pemphigoid",
-   "bullous systemic lupus erythematosus",
-   "dyshidrosiform bullous eruptions of the palms and soles"
-  ],
-  "additionalInvestigations": [
-   "perilesional biopsy for direct immunofluorescence (linear IgG and C3 at the basement-membrane zone)",
-   "lesional biopsy for histopathology (subepidermal blister with neutrophil-rich infiltrate)",
-   "indirect immunofluorescence on salt-split skin (dermal-side binding)",
-   "immunoblotting of serum against dermal extract to identify the 200 kDa band",
-   "ELISA or immunoblot for laminin gamma-1 reactivity where available",
-   "serological exclusion of BP180, BP230 and type VII collagen antibodies",
-   "assessment for coexisting psoriasis"
-  ],
-  "redFlags": [
-   "extensive blistering with erosions predisposing to secondary infection and fluid loss",
-   "mucosal involvement compromising oral intake",
-   "diagnostic uncertainty with epidermolysis bullosa acquisita delaying appropriate therapy",
-   "complications of systemic immunosuppression in older or comorbid patients"
-  ],
-  "prognosis": "The disease usually responds favourably to corticosteroid-based therapy and generally follows a more benign, treatment-responsive course than epidermolysis bullosa acquisita, although relapses may occur on tapering.",
-  "pitfalls": [
-   "Labelling dermal-binding pemphigoid as epidermolysis bullosa acquisita without immunoblot confirmation.",
-   "Assuming routine direct immunofluorescence can distinguish anti-p200 disease from other pemphigoids.",
-   "Overlooking coexisting psoriasis that may influence management choices.",
-   "Failing to send serum for specialised immunoblotting, leaving the diagnosis presumptive.",
-   "Attributing acral blistering solely to friction or dyshidrotic eczema."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Fitzpatrick's Dermatology in General Medicine, current edition",
-   "Bolognia Dermatology, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical or systemic corticosteroids to suppress blistering, to which the disease usually responds favourably",
-   "Steroid-sparing agents such as dapsone or a tetracycline antibiotic with nicotinamide for maintenance and to limit corticosteroid exposure",
-   "Identify and treat associated psoriasis, which may accompany or precede the eruption",
-   "Wound and skin care of erosions and blisters to promote healing and prevent secondary infection",
-   "Escalate refractory disease to broader immunosuppression under dermatology supervision",
-   "Monitor for relapse on corticosteroid tapering with ongoing dermatology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anti_p200_pemphigoid-pathway",
-   "title": "anti p200 pemphigoid: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare subepidermal autoimmune blistering disease defined by autoantibodies against a 200 kDa protein in the lower lamina lucida, identified in many cases as laminin gamma-1.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: extensive blistering with erosions predisposing to secondary infection and fluid loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: perilesional biopsy for direct immunofluorescence (linear IgG and C3 at the basement-membrane zone), lesional biopsy for histopathology (subepidermal blister with neutrophil-rich infiltrate), indirect immunofluorescence on"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical or systemic corticosteroids to suppress blistering, to which the disease usually responds favourably"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling dermal-binding pemphigoid as epidermolysis bullosa acquisita without immunoblot confirmation."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anti p200 pemphigoid."
-  }
- ],
- "tables": [
-  {
-   "id": "anti_p200_pemphigoid-matrix",
-   "title": "anti p200 pemphigoid: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare subepidermal autoimmune blistering disease defined by autoantibodies against a 200 kDa protein in the lower lamina lucida,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare subepidermal autoimmune blistering disease defined by autoantibodies against a 200 kDa protein in the lower lamina lucida, identified in many cases as laminin gamma-1.",
+      "Clinically it often resembles bullous pemphigoid with tense blisters on an urticarial or erythematous base, but lesions may favour the palms, soles and acral sites.",
+      "A subset of patients show features overlapping with dermatitis herpetiformis, and mucosal involvement can occur, broadening the clinical differential.",
+      "An association with psoriasis is reported in a notable proportion of patients, which may precede or accompany the blistering eruption.",
+      "Direct immunofluorescence shows linear IgG and C3 along the basement-membrane zone, indistinguishable from other pemphigoid variants on routine testing.",
+      "On salt-split skin indirect immunofluorescence, autoantibodies bind the dermal (floor) side of the split, as in epidermolysis bullosa acquisita, so serological confirmation by immunoblot is needed to distinguish them.",
+      "Diagnosis is confirmed by immunoblotting serum against dermal extract, revealing reactivity with a 200 kDa band (and often laminin gamma-1).",
+      "The disease generally responds well to topical or systemic corticosteroids and steroid-sparing agents, and tends to be less refractory than epidermolysis bullosa acquisita."
     ],
-    [
-     "Key Investigations",
-     "perilesional biopsy for direct immunofluorescence (linear IgG and C3 at the basement-membrane zone), lesional biopsy for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Anti-p200 pemphigoid is caused by circulating IgG autoantibodies directed against a 200 kDa acidic glycoprotein located in the lower portion of the lamina lucida at the dermo-epidermal junction; in a large proportion of patients this antigen has been characterised as laminin gamma-1, a constituent of several laminin isoforms. Antibody binding, with subsequent complement activation and neutrophil recruitment, produces a subepidermal split just above the lamina densa. Because the target lies deep within the basement-membrane zone, autoantibodies localise to the dermal side of salt-split skin, mimicking epidermolysis bullosa acquisita, yet the target and clinical behaviour differ. The frequent coexistence with psoriasis suggests that epidermal inflammation and basement-membrane remodelling may expose or alter the antigen and trigger autoimmunity.",
+    "additionalDifferentials": [
+      "bullous pemphigoid",
+      "epidermolysis bullosa acquisita",
+      "dermatitis herpetiformis",
+      "linear IgA bullous dermatosis",
+      "mucous membrane pemphigoid",
+      "bullous systemic lupus erythematosus",
+      "dyshidrosiform bullous eruptions of the palms and soles"
     ],
-    [
-     "Primary Differentials",
-     "bullous pemphigoid, epidermolysis bullosa acquisita, dermatitis herpetiformis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "perilesional biopsy for direct immunofluorescence (linear IgG and C3 at the basement-membrane zone)",
+      "lesional biopsy for histopathology (subepidermal blister with neutrophil-rich infiltrate)",
+      "indirect immunofluorescence on salt-split skin (dermal-side binding)",
+      "immunoblotting of serum against dermal extract to identify the 200 kDa band",
+      "ELISA or immunoblot for laminin gamma-1 reactivity where available",
+      "serological exclusion of BP180, BP230 and type VII collagen antibodies",
+      "assessment for coexisting psoriasis"
     ],
-    [
-     "Management Strategy",
-     "Topical or systemic corticosteroids to suppress blistering, to which the disease usually responds favourably",
-     "Core treatment modality"
+    "redFlags": [
+      "extensive blistering with erosions predisposing to secondary infection and fluid loss",
+      "mucosal involvement compromising oral intake",
+      "diagnostic uncertainty with epidermolysis bullosa acquisita delaying appropriate therapy",
+      "complications of systemic immunosuppression in older or comorbid patients"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling dermal-binding pemphigoid as epidermolysis bullosa acquisita without immunoblot confirmation.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease usually responds favourably to corticosteroid-based therapy and generally follows a more benign, treatment-responsive course than epidermolysis bullosa acquisita, although relapses may occur on tapering.",
+    "pitfalls": [
+      "Labelling dermal-binding pemphigoid as epidermolysis bullosa acquisita without immunoblot confirmation.",
+      "Assuming routine direct immunofluorescence can distinguish anti-p200 disease from other pemphigoids.",
+      "Overlooking coexisting psoriasis that may influence management choices.",
+      "Failing to send serum for specialised immunoblotting, leaving the diagnosis presumptive.",
+      "Attributing acral blistering solely to friction or dyshidrotic eczema."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Fitzpatrick's Dermatology in General Medicine, current edition",
+      "Bolognia Dermatology, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical or systemic corticosteroids to suppress blistering, to which the disease usually responds favourably",
+      "Steroid-sparing agents such as dapsone or a tetracycline antibiotic with nicotinamide for maintenance and to limit corticosteroid exposure",
+      "Identify and treat associated psoriasis, which may accompany or precede the eruption",
+      "Wound and skin care of erosions and blisters to promote healing and prevent secondary infection",
+      "Escalate refractory disease to broader immunosuppression under dermatology supervision",
+      "Monitor for relapse on corticosteroid tapering with ongoing dermatology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for anti p200 pemphigoid."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anti-p200-pemphigoid-real-image",
-   "title": "anti p200 pemphigoid: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "anti_p200_pemphigoid-pathway",
+      "title": "anti p200 pemphigoid: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare subepidermal autoimmune blistering disease defined by autoantibodies against a 200 kDa protein in the lower lamina lucida, identified in many cases as laminin gamma-1.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: extensive blistering with erosions predisposing to secondary infection and fluid loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: perilesional biopsy for direct immunofluorescence (linear IgG and C3 at the basement-membrane zone), lesional biopsy for histopathology (subepidermal blister with neutrophil-rich infiltrate), indirect immunofluorescence on"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical or systemic corticosteroids to suppress blistering, to which the disease usually responds favourably"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling dermal-binding pemphigoid as epidermolysis bullosa acquisita without immunoblot confirmation."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anti p200 pemphigoid."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anti_p200_pemphigoid-matrix",
+      "title": "anti p200 pemphigoid: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare subepidermal autoimmune blistering disease defined by autoantibodies against a 200 kDa protein in the lower lamina lucida,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "perilesional biopsy for direct immunofluorescence (linear IgG and C3 at the basement-membrane zone), lesional biopsy for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "bullous pemphigoid, epidermolysis bullosa acquisita, dermatitis herpetiformis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical or systemic corticosteroids to suppress blistering, to which the disease usually responds favourably",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling dermal-binding pemphigoid as epidermolysis bullosa acquisita without immunoblot confirmation.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anti p200 pemphigoid."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 54-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_p200_pemphigoid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Perilesional biopsy for direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Linear IgG and C3 at the basement-membrane zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesional biopsy for histopathology",
+          "cells": [
+            {
+              "text": "Subepidermal blister with neutrophil-rich infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indirect immunofluorescence on salt-split skin",
+          "cells": [
+            {
+              "text": "Dermal-side binding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoblotting of serum against dermal extract",
+          "cells": [
+            {
+              "text": "The 200 kDa band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ELISA or immunoblot for laminin gamma-1 reactivity",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serological exclusion of BP180, BP230 and type VII collagen antibodies",
+          "cells": [
+            {
+              "text": "These antibodies are excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_p200_pemphigoid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Topical or systemic, to suppress blistering"
+            },
+            {
+              "text": "The disease usually responds favourably"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Dapsone, or a tetracycline antibiotic with nicotinamide"
+            },
+            {
+              "text": "For maintenance and to limit steroid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated psoriasis",
+          "cells": [
+            {
+              "text": "Identify and treat"
+            },
+            {
+              "text": "May accompany or precede the eruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and skin care",
+          "cells": [
+            {
+              "text": "Erosions and blisters"
+            },
+            {
+              "text": "Promotes healing and prevents secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Broader immunosuppression under dermatology supervision"
+            },
+            {
+              "text": "Escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse monitoring",
+          "cells": [
+            {
+              "text": "Monitor during corticosteroid tapering"
+            },
+            {
+              "text": "Ongoing dermatology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_p200_pemphigoid-ddx",
+      "kind": "ddx",
+      "title": "Immunologically mediated blistering diseases compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Clinical",
+        "Histology",
+        "Immunopathology",
+        "Autoantigens"
+      ],
+      "rows": [
+        {
+          "parameter": "Pemphigus foliaceus",
+          "cells": [
+            {
+              "text": "Crusts and shallow erosions on scalp, central face, upper chest and back"
+            },
+            {
+              "text": "Acantholytic blister in the superficial epidermis"
+            },
+            {
+              "text": "Cell surface IgG deposits on keratinocytes"
+            },
+            {
+              "text": "Dsg1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "Flaccid blisters, denuded skin, oromucosal lesions"
+            },
+            {
+              "text": "Acantholytic blister in the suprabasal epidermis"
+            },
+            {
+              "text": "Cell surface IgG deposits on keratinocytes"
+            },
+            {
+              "text": "Dsg3 (plus Dsg1 in patients with skin involvement)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Painful stomatitis with papulosquamous or lichenoid eruptions progressing to blisters"
+            },
+            {
+              "text": "Acantholysis, keratinocyte necrosis and vacuolar interface dermatitis"
+            },
+            {
+              "text": "Cell surface IgG and C3 on keratinocytes and, variably, similar deposits in the epidermal basement membrane zone"
+            },
+            {
+              "text": "Plakin protein family members and desmosomal cadherins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid",
+          "cells": [
+            {
+              "text": "Large tense blisters on flexor surfaces and trunk"
+            },
+            {
+              "text": "Subepidermal blister with eosinophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of IgG and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG1, BPAG2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigoid gestationis",
+          "cells": [
+            {
+              "text": "Pruritic urticarial plaques rimmed by vesicles and bullae on trunk and extremities"
+            },
+            {
+              "text": "Teardrop-shaped subepidermal blisters in dermal papillae; eosinophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2 (plus BPAG1 in some patients)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Linear IgA disease",
+          "cells": [
+            {
+              "text": "Pruritic small papules on extensor surfaces; occasionally larger arciform blisters"
+            },
+            {
+              "text": "Subepidermal blister with neutrophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of IgA in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cicatricial pemphigoid",
+          "cells": [
+            {
+              "text": "Erosive and/or blistering lesions of mucous membranes and possibly skin; scarring at some sites"
+            },
+            {
+              "text": "Subepidermal blister, leukocytic infiltrate may or may not be present"
+            },
+            {
+              "text": "Linear band of IgG, IgA and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2, laminin-332, or others"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epidermolysis bullosa acquisita",
+          "cells": [
+            {
+              "text": "Blisters, erosions, scars and milia at trauma-exposed sites; widespread inflammatory tense blisters may be seen initially"
+            },
+            {
+              "text": "Subepidermal blister, leukocytic infiltrate may or may not be present"
+            },
+            {
+              "text": "Linear band of IgG and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "Type VII collagen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "Extremely pruritic small papules and vesicles on elbows, knees, buttocks and posterior neck"
+            },
+            {
+              "text": "Subepidermal blister with neutrophils in dermal papillae"
+            },
+            {
+              "text": "Granular IgA deposits in dermal papillae"
+            },
+            {
+              "text": "Epidermal transglutaminase"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Dsg1, desmoglein 1; Dsg3, desmoglein 3; BPAG1, bullous pemphigoid antigen 1; BPAG2, bullous pemphigoid antigen 2."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_p200_pemphigoid-dx-mgmt",
+      "title": "Diagnosis and management of anti p200 pemphigoid",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blistering eruption with linear IgG and C3 at the basement membrane zone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Extensive erosions, mucosal involvement or fluid loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent wound care and treatment of extensive blistering",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Perilesional DIF, lesional histology, salt-split IIF, 200 kDa immunoblot",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Anti-p200 reactivity confirmed with BP180 and BP230 excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids, to which the disease usually responds",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat immunoblot testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dapsone or tetracycline with nicotinamide to limit steroid exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Identify and treat associated psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound and skin care to prevent secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor for relapse on tapering; escalate refractory disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

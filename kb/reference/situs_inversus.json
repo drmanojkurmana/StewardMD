@@ -1,178 +1,474 @@
 {
- "id": "situs_inversus",
- "name": "situs inversus",
- "aliases": [
-  "situs inversus totalis",
-  "situs transversus",
-  "situs oppositus"
- ],
- "class": "non_infective",
- "system": "cardiovascular",
- "specialty": "cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Situs inversus totalis denotes complete mirror-image reversal of both thoracic and abdominal viscera, with cardiac apex, aortic arch, stomach and spleen on the right and liver on the left.",
-   "In contrast to heterotaxy, situs inversus totalis carries a relatively low incidence of major congenital heart disease, most affected individuals having structurally normal hearts in mirror-image configuration.",
-   "Roughly a quarter of individuals with situs inversus totalis have primary ciliary dyskinesia (Kartagener syndrome), so persistent sinopulmonary disease, chronic otitis and subfertility should prompt ciliary evaluation.",
-   "Congenitally corrected transposition and other conotruncal lesions occur more often in situs inversus than in the general population and warrant careful segmental echocardiographic assessment.",
-   "Atypical presentation of common disease is the rule: left-sided appendicitis, left-sided biliary colic and a right-sided cardiac apex on examination are classic traps.",
-   "Standard ECG electrode placement produces a spurious picture (inverted P in lead I, reversed praecordial progression); mirror-image lead placement restores a normal-appearing trace.",
-   "A segmental (sequential) approach naming atrial situs, ventricular loop and great-artery relationship is essential before any surgical or catheter intervention.",
-   "Interventional and surgical teams must anticipate reversed anatomy for central venous access, coronary angiography, and abdominal surgery to avoid wrong-side procedures."
+  "id": "situs_inversus",
+  "name": "situs inversus",
+  "aliases": [
+    "situs inversus totalis",
+    "situs transversus",
+    "situs oppositus"
   ],
-  "pathophysiology": "Situs inversus arises from disruption of the normal left-right axis patterning established during early embryogenesis at the primitive node, where motile monocilia generate a leftward extra-embryonic fluid flow (nodal flow) that biases asymmetric expression of the Nodal-Lefty-Pitx2 signalling cascade. When this laterality signal is randomised or reversed, the viscera and cardiac tube loop in mirror-image fashion, producing complete reversal (situs inversus totalis) when the process is coordinated across all organ fields. In primary ciliary dyskinesia the nodal cilia are immotile or dyskinetic, so laterality is determined at random, explaining why about half of affected individuals have situs inversus and half situs solitus. Because the reversal is usually symmetric and complete, atrioventricular and ventriculoarterial concordance is preserved in mirror image and the heart is typically structurally normal, distinguishing this condition from the abnormal midline symmetry of heterotaxy.",
-  "additionalDifferentials": [
-   "heterotaxy syndrome (situs ambiguus)",
-   "situs solitus with isolated dextrocardia",
-   "dextroposition from pulmonary hypoplasia or diaphragmatic hernia",
-   "congenitally corrected transposition of the great arteries",
-   "primary ciliary dyskinesia without laterality defect",
-   "asplenia or polysplenia syndromes",
-   "acquired mediastinal shift mimicking cardiac malposition"
-  ],
-  "additionalInvestigations": [
-   "transthoracic echocardiography with formal segmental analysis",
-   "abdominal ultrasound documenting hepatic, splenic and gastric position",
-   "chest radiograph noting cardiac apex, gastric bubble and aortic arch side",
-   "ECG with both standard and mirror-image lead placement",
-   "nasal nitric oxide measurement and ciliary studies where primary ciliary dyskinesia is suspected",
-   "cross-sectional imaging (CT or MRI) for detailed situs and vascular mapping before intervention",
-   "genetic testing for ciliopathy and laterality genes in selected cases"
-  ],
-  "redFlags": [
-   "chronic productive cough, recurrent sinusitis or bronchiectasis suggesting primary ciliary dyskinesia",
-   "cyanosis, murmur or failure to thrive indicating associated structural heart disease",
-   "atypical or contralateral pain suggesting missed left-sided appendicitis or biliary disease",
-   "unexplained subfertility in the context of a laterality defect",
-   "planned surgery or intervention where reversed anatomy risks a wrong-side procedure"
-  ],
-  "prognosis": "Isolated situs inversus totalis with a structurally normal heart is compatible with a normal lifespan and requires mainly awareness for atypical disease presentation. Prognosis is chiefly determined by any coexisting congenital heart disease or by the respiratory and fertility consequences of associated primary ciliary dyskinesia.",
-  "pitfalls": [
-   "Assuming a normal heart and omitting a full segmental echocardiographic assessment.",
-   "Misinterpreting the ECG as ischaemic or abnormal when electrodes are placed conventionally.",
-   "Overlooking primary ciliary dyskinesia in a patient presenting only with situs inversus.",
-   "Diagnosing situs inversus when the true picture is heterotaxy, thereby underestimating cardiac and splenic risk.",
-   "Failing to communicate reversed anatomy to surgical, anaesthetic and interventional teams."
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
-   "Nadas' Pediatric Cardiology",
-   "European Respiratory Society guidelines on primary ciliary dyskinesia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform segmental echocardiographic assessment and refer to cardiology to identify and manage any associated congenital heart defects such as congenitally corrected transposition or conotruncal lesions",
-   "Screen for primary ciliary dyskinesia with nasal nitric oxide and ciliary studies where sinopulmonary disease, chronic otitis or subfertility coexist, instituting airway clearance and prompt antibiotics for infections if confirmed",
-   "Document the mirror-image anatomy prominently to avoid diagnostic traps such as left-sided appendicitis or right-sided biliary colic and to guide safe surgery",
-   "Use mirror-image ECG lead placement and annotate all imaging with the situs to prevent misinterpretation",
-   "Manage the respiratory and fertility consequences of associated ciliary disease with respiratory physiotherapy and fertility referral",
-   "Coordinate multidisciplinary care across cardiology, respiratory, ENT and surgery, flagging reversed anatomy before any operative or interventional procedure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "situs_inversus-pathway",
-   "title": "situs inversus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Situs inversus totalis denotes complete mirror-image reversal of both thoracic and abdominal viscera, with cardiac apex, aortic arch, stomach and spleen on the right and liver on the left.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: chronic productive cough, recurrent sinusitis or bronchiectasis suggesting primary ciliary dyskinesia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: transthoracic echocardiography with formal segmental analysis, abdominal ultrasound documenting hepatic, splenic and gastric position, chest radiograph noting cardiac apex, gastric bubble and aortic arch side"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform segmental echocardiographic assessment and refer to cardiology to identify and manage any associated congenital heart defects such as congenitally corrected transposition or conotruncal lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal heart and omitting a full segmental echocardiographic assessment."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of situs inversus."
-  }
- ],
- "tables": [
-  {
-   "id": "situs_inversus-matrix",
-   "title": "situs inversus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Situs inversus totalis denotes complete mirror-image reversal of both thoracic and abdominal viscera, with cardiac apex, aortic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "cardiovascular",
+  "specialty": "cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Situs inversus totalis denotes complete mirror-image reversal of both thoracic and abdominal viscera, with cardiac apex, aortic arch, stomach and spleen on the right and liver on the left.",
+      "In contrast to heterotaxy, situs inversus totalis carries a relatively low incidence of major congenital heart disease, most affected individuals having structurally normal hearts in mirror-image configuration.",
+      "Roughly a quarter of individuals with situs inversus totalis have primary ciliary dyskinesia (Kartagener syndrome), so persistent sinopulmonary disease, chronic otitis and subfertility should prompt ciliary evaluation.",
+      "Congenitally corrected transposition and other conotruncal lesions occur more often in situs inversus than in the general population and warrant careful segmental echocardiographic assessment.",
+      "Atypical presentation of common disease is the rule: left-sided appendicitis, left-sided biliary colic and a right-sided cardiac apex on examination are classic traps.",
+      "Standard ECG electrode placement produces a spurious picture (inverted P in lead I, reversed praecordial progression); mirror-image lead placement restores a normal-appearing trace.",
+      "A segmental (sequential) approach naming atrial situs, ventricular loop and great-artery relationship is essential before any surgical or catheter intervention.",
+      "Interventional and surgical teams must anticipate reversed anatomy for central venous access, coronary angiography, and abdominal surgery to avoid wrong-side procedures."
     ],
-    [
-     "Key Investigations",
-     "transthoracic echocardiography with formal segmental analysis, abdominal ultrasound documenting hepatic, splenic and gastric",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Situs inversus arises from disruption of the normal left-right axis patterning established during early embryogenesis at the primitive node, where motile monocilia generate a leftward extra-embryonic fluid flow (nodal flow) that biases asymmetric expression of the Nodal-Lefty-Pitx2 signalling cascade. When this laterality signal is randomised or reversed, the viscera and cardiac tube loop in mirror-image fashion, producing complete reversal (situs inversus totalis) when the process is coordinated across all organ fields. In primary ciliary dyskinesia the nodal cilia are immotile or dyskinetic, so laterality is determined at random, explaining why about half of affected individuals have situs inversus and half situs solitus. Because the reversal is usually symmetric and complete, atrioventricular and ventriculoarterial concordance is preserved in mirror image and the heart is typically structurally normal, distinguishing this condition from the abnormal midline symmetry of heterotaxy.",
+    "additionalDifferentials": [
+      "heterotaxy syndrome (situs ambiguus)",
+      "situs solitus with isolated dextrocardia",
+      "dextroposition from pulmonary hypoplasia or diaphragmatic hernia",
+      "congenitally corrected transposition of the great arteries",
+      "primary ciliary dyskinesia without laterality defect",
+      "asplenia or polysplenia syndromes",
+      "acquired mediastinal shift mimicking cardiac malposition"
     ],
-    [
-     "Primary Differentials",
-     "heterotaxy syndrome (situs ambiguus), situs solitus with isolated dextrocardia, dextroposition from pulmonary hypoplasia or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "transthoracic echocardiography with formal segmental analysis",
+      "abdominal ultrasound documenting hepatic, splenic and gastric position",
+      "chest radiograph noting cardiac apex, gastric bubble and aortic arch side",
+      "ECG with both standard and mirror-image lead placement",
+      "nasal nitric oxide measurement and ciliary studies where primary ciliary dyskinesia is suspected",
+      "cross-sectional imaging (CT or MRI) for detailed situs and vascular mapping before intervention",
+      "genetic testing for ciliopathy and laterality genes in selected cases"
     ],
-    [
-     "Management Strategy",
-     "Perform segmental echocardiographic assessment and refer to cardiology to identify and manage any associated congenital heart",
-     "Core treatment modality"
+    "redFlags": [
+      "chronic productive cough, recurrent sinusitis or bronchiectasis suggesting primary ciliary dyskinesia",
+      "cyanosis, murmur or failure to thrive indicating associated structural heart disease",
+      "atypical or contralateral pain suggesting missed left-sided appendicitis or biliary disease",
+      "unexplained subfertility in the context of a laterality defect",
+      "planned surgery or intervention where reversed anatomy risks a wrong-side procedure"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal heart and omitting a full segmental echocardiographic assessment.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated situs inversus totalis with a structurally normal heart is compatible with a normal lifespan and requires mainly awareness for atypical disease presentation. Prognosis is chiefly determined by any coexisting congenital heart disease or by the respiratory and fertility consequences of associated primary ciliary dyskinesia.",
+    "pitfalls": [
+      "Assuming a normal heart and omitting a full segmental echocardiographic assessment.",
+      "Misinterpreting the ECG as ischaemic or abnormal when electrodes are placed conventionally.",
+      "Overlooking primary ciliary dyskinesia in a patient presenting only with situs inversus.",
+      "Diagnosing situs inversus when the true picture is heterotaxy, thereby underestimating cardiac and splenic risk.",
+      "Failing to communicate reversed anatomy to surgical, anaesthetic and interventional teams."
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "Nadas' Pediatric Cardiology",
+      "European Respiratory Society guidelines on primary ciliary dyskinesia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform segmental echocardiographic assessment and refer to cardiology to identify and manage any associated congenital heart defects such as congenitally corrected transposition or conotruncal lesions",
+      "Screen for primary ciliary dyskinesia with nasal nitric oxide and ciliary studies where sinopulmonary disease, chronic otitis or subfertility coexist, instituting airway clearance and prompt antibiotics for infections if confirmed",
+      "Document the mirror-image anatomy prominently to avoid diagnostic traps such as left-sided appendicitis or right-sided biliary colic and to guide safe surgery",
+      "Use mirror-image ECG lead placement and annotate all imaging with the situs to prevent misinterpretation",
+      "Manage the respiratory and fertility consequences of associated ciliary disease with respiratory physiotherapy and fertility referral",
+      "Coordinate multidisciplinary care across cardiology, respiratory, ENT and surgery, flagging reversed anatomy before any operative or interventional procedure"
     ]
-   ],
-   "caption": "Overview comparison matrix for situs inversus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "situs-inversus-real-image",
-   "title": "situs inversus: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "situs_inversus-pathway",
+      "title": "situs inversus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Situs inversus totalis denotes complete mirror-image reversal of both thoracic and abdominal viscera, with cardiac apex, aortic arch, stomach and spleen on the right and liver on the left.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: chronic productive cough, recurrent sinusitis or bronchiectasis suggesting primary ciliary dyskinesia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: transthoracic echocardiography with formal segmental analysis, abdominal ultrasound documenting hepatic, splenic and gastric position, chest radiograph noting cardiac apex, gastric bubble and aortic arch side"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform segmental echocardiographic assessment and refer to cardiology to identify and manage any associated congenital heart defects such as congenitally corrected transposition or conotruncal lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal heart and omitting a full segmental echocardiographic assessment."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of situs inversus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "situs_inversus-matrix",
+      "title": "situs inversus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Situs inversus totalis denotes complete mirror-image reversal of both thoracic and abdominal viscera, with cardiac apex, aortic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "transthoracic echocardiography with formal segmental analysis, abdominal ultrasound documenting hepatic, splenic and gastric",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "heterotaxy syndrome (situs ambiguus), situs solitus with isolated dextrocardia, dextroposition from pulmonary hypoplasia or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform segmental echocardiographic assessment and refer to cardiology to identify and manage any associated congenital heart",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal heart and omitting a full segmental echocardiographic assessment.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for situs inversus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "situs_inversus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with segmental analysis",
+          "cells": [
+            {
+              "text": "Atrial situs, ventricular loop and great-artery relationship"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Hepatic, splenic and gastric position"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Cardiac apex, gastric bubble and aortic arch side"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG with standard and mirror-image leads",
+          "cells": [
+            {
+              "text": "Standard placement gives a spurious trace; mirror leads restore a normal-appearing one"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal nitric oxide and ciliary studies",
+          "cells": [
+            {
+              "text": "Primary ciliary dyskinesia, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Detailed situs and vascular mapping before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Ciliopathy or laterality gene variants, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "situs_inversus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Heterotaxy syndrome (situs ambiguus)",
+          "cells": [
+            {
+              "text": "Abnormal midline symmetry rather than mirror image; greater cardiac and splenic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary ciliary dyskinesia",
+          "cells": [
+            {
+              "text": "Sinopulmonary disease and subfertility; about a quarter of situs inversus totalis cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenitally corrected transposition of the great arteries",
+          "cells": [
+            {
+              "text": "Occurs more often in situs inversus; needs segmental assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "situs_inversus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Segmental echocardiography and cardiology referral",
+          "cells": [
+            {
+              "text": "Identifies associated defects such as corrected transposition or conotruncal lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for primary ciliary dyskinesia",
+          "cells": [
+            {
+              "text": "Nasal nitric oxide and ciliary studies where sinopulmonary disease, otitis or subfertility coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Document mirror-image anatomy",
+          "cells": [
+            {
+              "text": "Avoids traps such as left-sided appendicitis and guides safe surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mirror-image ECG leads and annotated imaging",
+          "cells": [
+            {
+              "text": "Prevents misinterpretation of the situs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and fertility management",
+          "cells": [
+            {
+              "text": "Airway clearance, prompt antibiotics for confirmed infection, and fertility referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flag reversed anatomy before procedures",
+          "cells": [
+            {
+              "text": "Cardiology, respiratory, ENT and surgical teams before any operative or interventional procedure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "situs_inversus-dx-mgmt",
+      "title": "Diagnosis and management of situs inversus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mirror-image thoracic and abdominal viscera found on imaging or examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (chronic cough, bronchiectasis, cyanosis or murmur, contralateral pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for cyanosis or murmur from associated heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Segmental echocardiography, abdominal imaging, chest film and mirror-lead ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does segmental analysis confirm situs inversus with a structurally normal heart?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider heterotaxy or another laterality disorder; complete segmental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Refer to cardiology for associated defects such as corrected transposition",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for primary ciliary dyskinesia with nasal nitric oxide and ciliary studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Flag reversed anatomy before any surgery or intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Respiratory physiotherapy and fertility referral if ciliary disease is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated situs inversus with a normal heart allows a normal lifespan",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

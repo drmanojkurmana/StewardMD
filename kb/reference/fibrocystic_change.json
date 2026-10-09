@@ -1,179 +1,466 @@
 {
- "id": "fibrocystic_change",
- "name": "Fibrocystic change",
- "aliases": [
-  "Fibrocystic disease",
-  "Fibroadenosis",
-  "Benign breast change"
- ],
- "class": "non_infective",
- "system": "Breast",
- "specialty": "Breast surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "ABC of Breast Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest benign breast condition, reflecting an aberration of normal development and involution rather than a true disease.",
-   "Presents with cyclical breast pain, nodularity and lumpiness, typically most marked in the upper outer quadrants and worse premenstrually.",
-   "Affects women predominantly in the reproductive years, with symptoms usually settling after the menopause.",
-   "Histology encompasses cysts, apocrine metaplasia, stromal fibrosis, adenosis and variable epithelial hyperplasia.",
-   "Management is largely reassurance, a well-supporting bra and simple analgesia once malignancy has been excluded by triple assessment.",
-   "Cancer risk is stratified by the epithelial component: non-proliferative change confers no excess risk, whereas atypical hyperplasia raises risk substantially.",
-   "Discrete dominant lumps or focal areas warrant imaging and core biopsy rather than being attributed to generalised nodularity.",
-   "Evening primrose oil and dietary caffeine reduction are commonly tried, though evidence for benefit is limited."
+  "id": "fibrocystic_change",
+  "name": "Fibrocystic change",
+  "aliases": [
+    "Fibrocystic disease",
+    "Fibroadenosis",
+    "Benign breast change"
   ],
-  "pathophysiology": "Fibrocystic change results from an exaggerated but physiological response of breast tissue to cyclical ovarian hormones across the reproductive years and to the involutional processes that follow. Relative imbalance in oestrogen and progesterone influence, together with variable local tissue sensitivity, produces a mixture of cyst formation from dilated lobular acini, apocrine metaplasia, fibrous stromal proliferation, adenosis and differing degrees of epithelial hyperplasia. These coexisting elements account for the lumpiness, nodularity and cyclical discomfort, and their proliferative or atypical nature determines any associated increase in subsequent carcinoma risk.",
-  "additionalDifferentials": [
-   "Simple or complex breast cysts",
-   "Fibroadenoma",
-   "Sclerosing adenosis presenting as a mass",
-   "Invasive or in situ carcinoma",
-   "Cyclical mastalgia without a mass",
-   "Duct ectasia",
-   "Fat necrosis"
-  ],
-  "additionalInvestigations": [
-   "Clinical breast examination correlated with menstrual timing",
-   "Ultrasound of focal or dominant areas",
-   "Mammography in women of screening age",
-   "Core biopsy of any discrete or suspicious lesion",
-   "Cyst aspiration where symptomatic cysts are present",
-   "Pain chart to document the cyclical pattern of mastalgia",
-   "Histological grading of the epithelial component when biopsied"
-  ],
-  "redFlags": [
-   "A discrete, hard or fixed dominant mass within nodular tissue",
-   "Bloody or persistent single-duct nipple discharge",
-   "Skin dimpling, nipple retraction or peau d'orange",
-   "Histological finding of atypical ductal or lobular hyperplasia",
-   "Progressive non-cyclical pain localised to one site"
-  ],
-  "prognosis": "The condition is benign and self-limiting, with symptoms typically easing after the menopause. Long-term breast cancer risk depends on the underlying histology, being negligible for non-proliferative change and appreciably higher where atypical hyperplasia is found.",
-  "pitfalls": [
-   "Attributing a discrete dominant lump to generalised nodularity and omitting biopsy",
-   "Failing to recognise that atypical hyperplasia carries a materially increased cancer risk",
-   "Labelling the change a 'disease', which causes unnecessary anxiety",
-   "Overlooking hormone replacement therapy as a cause of persistent symptoms after the menopause",
-   "Reassuring on the basis of imaging alone when clinical findings are discordant"
-  ],
-  "references": [
-   "ABC of Breast Diseases (current edition)",
-   "Standard textbook of benign breast disease and the ANDI classification",
-   "National guidance on benign breast conditions"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide reassurance once triple assessment excludes malignancy, framing the condition as an aberration of normal development and involution",
-   "Offer supportive measures including a well-fitting supportive bra, simple analgesia and topical non-steroidal anti-inflammatory drugs for mastalgia",
-   "Use a pain chart to document the cyclical pattern of mastalgia and guide treatment of persistent symptoms",
-   "Aspirate symptomatic cysts, sending any bloodstained aspirate for cytology and reassessing any residual mass",
-   "Reserve hormonal therapy such as danazol or tamoxifen for severe refractory cyclical mastalgia under specialist supervision",
-   "Perform core biopsy of discrete or suspicious lesions with risk-stratified surveillance where atypical hyperplasia is found",
-   "Refer to breast surgery for dominant or persistent lumps and any diagnostic uncertainty"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fibrocystic_change-pathway",
-   "title": "Fibrocystic change: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest benign breast condition, reflecting an aberration of normal development and involution rather than a true disease.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A discrete, hard or fixed dominant mass within nodular tissue",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical breast examination correlated with menstrual timing, Ultrasound of focal or dominant areas, Mammography in women of screening age"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide reassurance once triple assessment excludes malignancy, framing the condition as an aberration of normal development and involution"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a discrete dominant lump to generalised nodularity and omitting biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fibrocystic change."
-  }
- ],
- "tables": [
-  {
-   "id": "fibrocystic_change-matrix",
-   "title": "Fibrocystic change: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest benign breast condition, reflecting an aberration of normal development and involution rather than a true disease.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Breast",
+  "specialty": "Breast surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ABC of Breast Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest benign breast condition, reflecting an aberration of normal development and involution rather than a true disease.",
+      "Presents with cyclical breast pain, nodularity and lumpiness, typically most marked in the upper outer quadrants and worse premenstrually.",
+      "Affects women predominantly in the reproductive years, with symptoms usually settling after the menopause.",
+      "Histology encompasses cysts, apocrine metaplasia, stromal fibrosis, adenosis and variable epithelial hyperplasia.",
+      "Management is largely reassurance, a well-supporting bra and simple analgesia once malignancy has been excluded by triple assessment.",
+      "Cancer risk is stratified by the epithelial component: non-proliferative change confers no excess risk, whereas atypical hyperplasia raises risk substantially.",
+      "Discrete dominant lumps or focal areas warrant imaging and core biopsy rather than being attributed to generalised nodularity.",
+      "Evening primrose oil and dietary caffeine reduction are commonly tried, though evidence for benefit is limited."
     ],
-    [
-     "Key Investigations",
-     "Clinical breast examination correlated with menstrual timing, Ultrasound of focal or dominant areas, Mammography in women of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fibrocystic change results from an exaggerated but physiological response of breast tissue to cyclical ovarian hormones across the reproductive years and to the involutional processes that follow. Relative imbalance in oestrogen and progesterone influence, together with variable local tissue sensitivity, produces a mixture of cyst formation from dilated lobular acini, apocrine metaplasia, fibrous stromal proliferation, adenosis and differing degrees of epithelial hyperplasia. These coexisting elements account for the lumpiness, nodularity and cyclical discomfort, and their proliferative or atypical nature determines any associated increase in subsequent carcinoma risk.",
+    "additionalDifferentials": [
+      "Simple or complex breast cysts",
+      "Fibroadenoma",
+      "Sclerosing adenosis presenting as a mass",
+      "Invasive or in situ carcinoma",
+      "Cyclical mastalgia without a mass",
+      "Duct ectasia",
+      "Fat necrosis"
     ],
-    [
-     "Primary Differentials",
-     "Simple or complex breast cysts, Fibroadenoma, Sclerosing adenosis presenting as a mass",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical breast examination correlated with menstrual timing",
+      "Ultrasound of focal or dominant areas",
+      "Mammography in women of screening age",
+      "Core biopsy of any discrete or suspicious lesion",
+      "Cyst aspiration where symptomatic cysts are present",
+      "Pain chart to document the cyclical pattern of mastalgia",
+      "Histological grading of the epithelial component when biopsied"
     ],
-    [
-     "Management Strategy",
-     "Provide reassurance once triple assessment excludes malignancy, framing the condition as an aberration of normal development and",
-     "Core treatment modality"
+    "redFlags": [
+      "A discrete, hard or fixed dominant mass within nodular tissue",
+      "Bloody or persistent single-duct nipple discharge",
+      "Skin dimpling, nipple retraction or peau d'orange",
+      "Histological finding of atypical ductal or lobular hyperplasia",
+      "Progressive non-cyclical pain localised to one site"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a discrete dominant lump to generalised nodularity and omitting biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and self-limiting, with symptoms typically easing after the menopause. Long-term breast cancer risk depends on the underlying histology, being negligible for non-proliferative change and appreciably higher where atypical hyperplasia is found.",
+    "pitfalls": [
+      "Attributing a discrete dominant lump to generalised nodularity and omitting biopsy",
+      "Failing to recognise that atypical hyperplasia carries a materially increased cancer risk",
+      "Labelling the change a 'disease', which causes unnecessary anxiety",
+      "Overlooking hormone replacement therapy as a cause of persistent symptoms after the menopause",
+      "Reassuring on the basis of imaging alone when clinical findings are discordant"
+    ],
+    "references": [
+      "ABC of Breast Diseases (current edition)",
+      "Standard textbook of benign breast disease and the ANDI classification",
+      "National guidance on benign breast conditions"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide reassurance once triple assessment excludes malignancy, framing the condition as an aberration of normal development and involution",
+      "Offer supportive measures including a well-fitting supportive bra, simple analgesia and topical non-steroidal anti-inflammatory drugs for mastalgia",
+      "Use a pain chart to document the cyclical pattern of mastalgia and guide treatment of persistent symptoms",
+      "Aspirate symptomatic cysts, sending any bloodstained aspirate for cytology and reassessing any residual mass",
+      "Reserve hormonal therapy such as danazol or tamoxifen for severe refractory cyclical mastalgia under specialist supervision",
+      "Perform core biopsy of discrete or suspicious lesions with risk-stratified surveillance where atypical hyperplasia is found",
+      "Refer to breast surgery for dominant or persistent lumps and any diagnostic uncertainty"
     ]
-   ],
-   "caption": "Overview comparison matrix for fibrocystic change."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fibrocystic-change-real-image",
-   "title": "Fibrocystic change: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fibrocystic_change-pathway",
+      "title": "Fibrocystic change: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest benign breast condition, reflecting an aberration of normal development and involution rather than a true disease.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A discrete, hard or fixed dominant mass within nodular tissue",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical breast examination correlated with menstrual timing, Ultrasound of focal or dominant areas, Mammography in women of screening age"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide reassurance once triple assessment excludes malignancy, framing the condition as an aberration of normal development and involution"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a discrete dominant lump to generalised nodularity and omitting biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fibrocystic change."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fibrocystic_change-matrix",
+      "title": "Fibrocystic change: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest benign breast condition, reflecting an aberration of normal development and involution rather than a true disease.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical breast examination correlated with menstrual timing, Ultrasound of focal or dominant areas, Mammography in women of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Simple or complex breast cysts, Fibroadenoma, Sclerosing adenosis presenting as a mass",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide reassurance once triple assessment excludes malignancy, framing the condition as an aberration of normal development and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a discrete dominant lump to generalised nodularity and omitting biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fibrocystic change."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ABC of Breast Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibrocystic_change-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination correlated with menstrual timing",
+          "cells": [
+            {
+              "text": "Cyclical nodularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of dominant or focal areas",
+          "cells": [
+            {
+              "text": "Discrete lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy of discrete or suspicious lesion",
+          "cells": [
+            {
+              "text": "Histology and atypia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst aspiration for symptomatic cysts",
+          "cells": [
+            {
+              "text": "Bloodstained fluid for cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain chart documenting cyclical mastalgia",
+          "cells": [
+            {
+              "text": "Pattern of pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrocystic_change-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibroadenoma",
+          "cells": [
+            {
+              "text": "Discrete lump within nodular tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sclerosing adenosis presenting as a mass",
+          "cells": [
+            {
+              "text": "Mass-forming benign change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclical mastalgia without a mass",
+          "cells": [
+            {
+              "text": "Pain without lump"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrocystic_change-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance once triple assessment excludes malignancy",
+          "cells": [
+            {
+              "text": "Aberration of normal development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive bra, simple analgesia and topical NSAIDs",
+          "cells": [
+            {
+              "text": "Symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain chart to guide persistent symptoms",
+          "cells": [
+            {
+              "text": "Documents the cyclical pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration of symptomatic cysts",
+          "cells": [
+            {
+              "text": "Cytology of bloodstained aspirate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Danazol or tamoxifen for severe refractory mastalgia",
+          "cells": [
+            {
+              "text": "Specialist supervision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy and risk-stratified surveillance",
+          "cells": [
+            {
+              "text": "Atypical hyperplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast surgery referral",
+          "cells": [
+            {
+              "text": "Dominant or persistent lumps"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibrocystic_change-dx-mgmt",
+      "title": "Diagnosis and management of Fibrocystic change",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cyclical breast pain and nodularity, worst in the premenstrual phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (dominant hard mass, single-duct discharge, skin dimpling, non-cyclical pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Breast surgery referral for dominant or fixed mass or bloody discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination with cycle timing; imaging; core biopsy if discrete; pain chart",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Non-proliferative nodular change with no discrete suspicious lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy the discrete lesion; consider fibroadenoma or carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance once triple assessment excludes malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive bra, analgesia and topical NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspiration of symptomatic cysts with cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Core biopsy and surveillance where atypia is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; cancer risk depends on the epithelial component",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

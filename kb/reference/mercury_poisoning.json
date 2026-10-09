@@ -1,174 +1,423 @@
 {
- "id": "mercury_poisoning",
- "name": "Mercury poisoning",
- "aliases": [
-  "mercurialism",
-  "mercury toxicity",
-  "hydrargyria"
- ],
- "class": "non_infective",
- "system": "Occupational / Environmental",
- "specialty": "Occupational & Environmental Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hunter's Diseases of Occupations / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The clinical picture depends on the chemical form: elemental mercury vapour, inorganic mercury salts, and organic mercury (such as methylmercury) each cause distinct patterns",
-   "Inhaled elemental mercury vapour, seen in industries such as chloralkali and instrument work, chiefly affects the central nervous system and can cause an acute chemical pneumonitis at high concentrations",
-   "Chronic elemental and inorganic exposure produces the classic triad of tremor, gingivostomatitis and neuropsychiatric changes ('erethism') with irritability, shyness and memory impairment",
-   "Ingested inorganic mercury salts are corrosive, causing gastrointestinal burning and haemorrhage and acute kidney injury",
-   "Organic methylmercury, the cause of environmental epidemics from contaminated fish, targets the nervous system with sensory disturbance, ataxia, visual field constriction and hearing loss, and crosses the placenta to harm the developing fetus",
-   "Diagnosis uses blood and urine mercury levels, with the appropriate specimen depending on the form of exposure, interpreted with the exposure history",
-   "Management centres on removing exposure and supportive care, with a chelating agent used in significant inorganic or elemental poisoning under specialist advice, while chelation is less effective for organic mercury",
-   "Acrodynia (pink disease) is a distinctive reaction to mercury seen particularly in children, with painful pink extremities, irritability and desquamation"
+  "id": "mercury_poisoning",
+  "name": "Mercury poisoning",
+  "aliases": [
+    "mercurialism",
+    "mercury toxicity",
+    "hydrargyria"
   ],
-  "pathophysiology": "Mercury binds avidly to sulfhydryl groups, disrupting numerous enzymes and cellular proteins. Lipophilic elemental vapour and organic mercury readily cross the blood-brain barrier (and placenta), producing neuronal injury and the neurological and neuropsychiatric features, while inorganic salts concentrate in and damage the renal tubules and are locally corrosive to the gut. Oxidative stress and immune-mediated renal effects contribute to the tissue damage.",
-  "additionalDifferentials": [
-   "Essential or other causes of tremor",
-   "Primary psychiatric or neurodegenerative disease",
-   "Other heavy metal poisoning",
-   "Peripheral neuropathy of other cause",
-   "Acute corrosive ingestion of other agents",
-   "Acute kidney injury from other nephrotoxins"
-  ],
-  "additionalInvestigations": [
-   "Blood mercury (more useful for recent organic exposure) and urinary mercury (for elemental and inorganic exposure)",
-   "Renal function and urinalysis to detect tubular injury",
-   "Neurological and neuropsychological assessment",
-   "Chest imaging in acute vapour inhalation for pneumonitis",
-   "Exposure history covering occupation, dental amalgam handling, and dietary fish intake"
-  ],
-  "redFlags": [
-   "MEDICAL EMERGENCY: acute high-level vapour inhalation causing respiratory distress and chemical pneumonitis",
-   "Corrosive ingestion of inorganic salts with gastrointestinal haemorrhage and shock",
-   "Acute kidney injury",
-   "Pregnancy with organic mercury exposure given the risk of fetal neurological harm"
-  ],
-  "prognosis": "Removal from exposure often allows gradual improvement of inorganic and elemental effects, but severe neurological injury, especially from organic methylmercury, may be permanent, and prenatal exposure can cause lasting developmental impairment.",
-  "pitfalls": [
-   "Using the wrong specimen (for example relying on blood levels for chronic elemental exposure)",
-   "Expecting chelation to reverse established organic mercury neurotoxicity",
-   "Attributing neuropsychiatric change to primary psychiatric illness without an exposure history",
-   "Overlooking dietary fish as a source of methylmercury",
-   "Missing the risk to the fetus in exposed pregnant women"
-  ],
-  "references": [
-   "Hunter's Diseases of Occupations",
-   "WHO guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate removal from the source of exposure as the cornerstone of management",
-   "Chelation with succimer, DMPS or dimercaprol for symptomatic elemental or inorganic poisoning, noting dimercaprol is avoided in methylmercury exposure as it may worsen central nervous system toxicity",
-   "Supportive care for acute vapour pneumonitis with oxygen and ventilatory support, and management of corrosive gastrointestinal injury from ingested salts",
-   "Renal support including haemodialysis for acute kidney injury from inorganic mercury",
-   "Gut decontamination after significant ingestion where appropriate",
-   "Neurological and neuropsychological rehabilitation for persistent deficits",
-   "Occupational hygiene, source control and public health involvement, with dietary fish advice and counselling in pregnancy to protect the foetus"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mercury_poisoning-pathway",
-   "title": "Mercury poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The clinical picture depends on the chemical form: elemental mercury vapour, inorganic mercury salts, and organic mercury (such as methylmercury) each cause distinct patterns",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: acute high-level vapour inhalation causing respiratory distress and chemical pneumonitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood mercury (more useful for recent organic exposure) and urinary mercury (for elemental and inorganic exposure), Renal function and urinalysis to detect tubular injury, Neurological and neuropsychological assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate removal from the source of exposure as the cornerstone of management"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Using the wrong specimen (for example relying on blood levels for chronic elemental exposure)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mercury poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "mercury_poisoning-matrix",
-   "title": "Mercury poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The clinical picture depends on the chemical form: elemental mercury vapour, inorganic mercury salts, and organic mercury (such",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Occupational / Environmental",
+  "specialty": "Occupational & Environmental Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hunter's Diseases of Occupations / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The clinical picture depends on the chemical form: elemental mercury vapour, inorganic mercury salts, and organic mercury (such as methylmercury) each cause distinct patterns",
+      "Inhaled elemental mercury vapour, seen in industries such as chloralkali and instrument work, chiefly affects the central nervous system and can cause an acute chemical pneumonitis at high concentrations",
+      "Chronic elemental and inorganic exposure produces the classic triad of tremor, gingivostomatitis and neuropsychiatric changes ('erethism') with irritability, shyness and memory impairment",
+      "Ingested inorganic mercury salts are corrosive, causing gastrointestinal burning and haemorrhage and acute kidney injury",
+      "Organic methylmercury, the cause of environmental epidemics from contaminated fish, targets the nervous system with sensory disturbance, ataxia, visual field constriction and hearing loss, and crosses the placenta to harm the developing fetus",
+      "Diagnosis uses blood and urine mercury levels, with the appropriate specimen depending on the form of exposure, interpreted with the exposure history",
+      "Management centres on removing exposure and supportive care, with a chelating agent used in significant inorganic or elemental poisoning under specialist advice, while chelation is less effective for organic mercury",
+      "Acrodynia (pink disease) is a distinctive reaction to mercury seen particularly in children, with painful pink extremities, irritability and desquamation"
     ],
-    [
-     "Key Investigations",
-     "Blood mercury (more useful for recent organic exposure) and urinary mercury (for elemental and inorganic exposure), Renal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mercury binds avidly to sulfhydryl groups, disrupting numerous enzymes and cellular proteins. Lipophilic elemental vapour and organic mercury readily cross the blood-brain barrier (and placenta), producing neuronal injury and the neurological and neuropsychiatric features, while inorganic salts concentrate in and damage the renal tubules and are locally corrosive to the gut. Oxidative stress and immune-mediated renal effects contribute to the tissue damage.",
+    "additionalDifferentials": [
+      "Essential or other causes of tremor",
+      "Primary psychiatric or neurodegenerative disease",
+      "Other heavy metal poisoning",
+      "Peripheral neuropathy of other cause",
+      "Acute corrosive ingestion of other agents",
+      "Acute kidney injury from other nephrotoxins"
     ],
-    [
-     "Primary Differentials",
-     "Essential or other causes of tremor, Primary psychiatric or neurodegenerative disease, Other heavy metal poisoning",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood mercury (more useful for recent organic exposure) and urinary mercury (for elemental and inorganic exposure)",
+      "Renal function and urinalysis to detect tubular injury",
+      "Neurological and neuropsychological assessment",
+      "Chest imaging in acute vapour inhalation for pneumonitis",
+      "Exposure history covering occupation, dental amalgam handling, and dietary fish intake"
     ],
-    [
-     "Management Strategy",
-     "Immediate removal from the source of exposure as the cornerstone of management",
-     "Core treatment modality"
+    "redFlags": [
+      "MEDICAL EMERGENCY: acute high-level vapour inhalation causing respiratory distress and chemical pneumonitis",
+      "Corrosive ingestion of inorganic salts with gastrointestinal haemorrhage and shock",
+      "Acute kidney injury",
+      "Pregnancy with organic mercury exposure given the risk of fetal neurological harm"
     ],
-    [
-     "Clinical Pitfall",
-     "Using the wrong specimen (for example relying on blood levels for chronic elemental exposure)",
-     "Prevent diagnostic or management error"
+    "prognosis": "Removal from exposure often allows gradual improvement of inorganic and elemental effects, but severe neurological injury, especially from organic methylmercury, may be permanent, and prenatal exposure can cause lasting developmental impairment.",
+    "pitfalls": [
+      "Using the wrong specimen (for example relying on blood levels for chronic elemental exposure)",
+      "Expecting chelation to reverse established organic mercury neurotoxicity",
+      "Attributing neuropsychiatric change to primary psychiatric illness without an exposure history",
+      "Overlooking dietary fish as a source of methylmercury",
+      "Missing the risk to the fetus in exposed pregnant women"
+    ],
+    "references": [
+      "Hunter's Diseases of Occupations",
+      "WHO guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate removal from the source of exposure as the cornerstone of management",
+      "Chelation with succimer, DMPS or dimercaprol for symptomatic elemental or inorganic poisoning, noting dimercaprol is avoided in methylmercury exposure as it may worsen central nervous system toxicity",
+      "Supportive care for acute vapour pneumonitis with oxygen and ventilatory support, and management of corrosive gastrointestinal injury from ingested salts",
+      "Renal support including haemodialysis for acute kidney injury from inorganic mercury",
+      "Gut decontamination after significant ingestion where appropriate",
+      "Neurological and neuropsychological rehabilitation for persistent deficits",
+      "Occupational hygiene, source control and public health involvement, with dietary fish advice and counselling in pregnancy to protect the foetus"
     ]
-   ],
-   "caption": "Overview comparison matrix for mercury poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mercury-poisoning-real-image",
-   "title": "Mercury poisoning: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mercury_poisoning-pathway",
+      "title": "Mercury poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The clinical picture depends on the chemical form: elemental mercury vapour, inorganic mercury salts, and organic mercury (such as methylmercury) each cause distinct patterns",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: acute high-level vapour inhalation causing respiratory distress and chemical pneumonitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood mercury (more useful for recent organic exposure) and urinary mercury (for elemental and inorganic exposure), Renal function and urinalysis to detect tubular injury, Neurological and neuropsychological assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate removal from the source of exposure as the cornerstone of management"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Using the wrong specimen (for example relying on blood levels for chronic elemental exposure)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mercury poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mercury_poisoning-matrix",
+      "title": "Mercury poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The clinical picture depends on the chemical form: elemental mercury vapour, inorganic mercury salts, and organic mercury (such",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood mercury (more useful for recent organic exposure) and urinary mercury (for elemental and inorganic exposure), Renal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Essential or other causes of tremor, Primary psychiatric or neurodegenerative disease, Other heavy metal poisoning",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate removal from the source of exposure as the cornerstone of management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Using the wrong specimen (for example relying on blood levels for chronic elemental exposure)",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mercury poisoning."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mercury_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood mercury",
+          "cells": [
+            {
+              "text": "More useful for recent organic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary mercury",
+          "cells": [
+            {
+              "text": "Elemental and inorganic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Tubular injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging in acute vapour inhalation",
+          "cells": [
+            {
+              "text": "Pneumonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure history: occupation, dental amalgam handling, dietary fish",
+          "cells": [
+            {
+              "text": "Source of exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mercury_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Removal from the source of exposure",
+          "cells": [
+            {
+              "text": "The cornerstone of management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chelation",
+          "cells": [
+            {
+              "text": "Succimer, DMPS or dimercaprol for symptomatic elemental or inorganic poisoning; dimercaprol avoided in methylmercury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Oxygen and ventilatory support for vapour pneumonitis; management of corrosive GI injury from salts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal support",
+          "cells": [
+            {
+              "text": "Haemodialysis for acute kidney injury from inorganic mercury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gut decontamination",
+          "cells": [
+            {
+              "text": "After significant ingestion, where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological rehabilitation",
+          "cells": [
+            {
+              "text": "Neurological and neuropsychological rehabilitation for persistent deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and public health measures",
+          "cells": [
+            {
+              "text": "Source control, dietary fish advice and pregnancy counselling to protect the foetus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mercury_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Mercury poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mercury exposure with neurological or renal symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory distress, GI haemorrhage with shock, acute kidney injury or pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency: remove from source, support breathing; haemodialysis for AKI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and urinary mercury, renal function, urinalysis, chest imaging, exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is raised mercury confirmed in blood or urine with a matching exposure history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider essential tremor, other heavy metal poisoning or primary neurological disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate removal from the source of exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chelation with succimer, DMPS or dimercaprol for symptomatic poisoning",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oxygen and ventilatory support for vapour pneumonitis; haemodialysis for AKI",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurological and neuropsychological rehabilitation for persistent deficits",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Source control, occupational hygiene and fish and pregnancy advice",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

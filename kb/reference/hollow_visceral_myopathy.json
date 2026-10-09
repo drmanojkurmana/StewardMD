@@ -1,175 +1,471 @@
 {
- "id": "hollow_visceral_myopathy",
- "name": "Hollow visceral myopathy (chronic intestinal pseudo-obstruction)",
- "aliases": [
-  "visceral myopathy",
-  "familial visceral myopathy",
-  "chronic intestinal pseudo-obstruction",
-  "CIPO (myopathic)",
-  "megacystis-microcolon-intestinal hypoperistalsis (related spectrum)"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A cause of chronic intestinal pseudo-obstruction from primary degeneration of gastrointestinal smooth muscle",
-   "Presents with recurrent episodes of obstruction (distension, vomiting, pain, constipation) in the absence of a mechanical lesion",
-   "Characteristic findings include megaduodenum, dilated bowel loops, and often a dilated bladder (megacystis) reflecting smooth-muscle involvement beyond the gut",
-   "Can be familial (frequently autosomal dominant) or sporadic, and may involve the whole gut as well as urinary tract smooth muscle",
-   "Contrast studies and imaging show dilated, poorly contracting segments and delayed transit without an obstructing lesion",
-   "Full-thickness intestinal biopsy shows smooth-muscle degeneration, vacuolation, and fibrosis, distinguishing myopathic from neuropathic pseudo-obstruction",
-   "Management is supportive with nutritional support, prokinetic and symptom-directed measures, and treatment of bacterial overgrowth, avoiding unnecessary surgery"
+  "id": "hollow_visceral_myopathy",
+  "name": "Hollow visceral myopathy (chronic intestinal pseudo-obstruction)",
+  "aliases": [
+    "visceral myopathy",
+    "familial visceral myopathy",
+    "chronic intestinal pseudo-obstruction",
+    "CIPO (myopathic)",
+    "megacystis-microcolon-intestinal hypoperistalsis (related spectrum)"
   ],
-  "pathophysiology": "Hollow visceral myopathy is a primary disorder of gastrointestinal (and often urinary tract) smooth muscle, in which degeneration, vacuolar change, and replacement fibrosis of the muscle layers impair contractile function. The weakened, poorly contracting muscle cannot generate effective peristalsis, so luminal contents stagnate and the bowel dilates, producing the clinical picture of pseudo-obstruction with megaduodenum and megacystis despite a patent lumen. Stasis promotes small-intestinal bacterial overgrowth and malabsorption, compounding malnutrition.",
-  "additionalDifferentials": [
-   "Mechanical intestinal obstruction",
-   "Neuropathic chronic intestinal pseudo-obstruction",
-   "Mitochondrial neurogastrointestinal encephalomyopathy",
-   "Systemic sclerosis and other connective-tissue disease affecting gut muscle",
-   "Intestinal neuronal dysplasia and other dysganglionoses",
-   "Severe diabetic or paraneoplastic gastrointestinal dysmotility"
-  ],
-  "additionalInvestigations": [
-   "Abdominal radiography and contrast studies showing dilated, non-obstructed bowel and delayed transit",
-   "Cross-sectional imaging to exclude a mechanical cause and assess bladder and bowel calibre",
-   "Full-thickness intestinal biopsy with histology and immunohistochemistry of the muscle layers",
-   "Gastrointestinal manometry demonstrating low-amplitude (myopathic) contractions",
-   "Nutritional assessment and testing for bacterial overgrowth"
-  ],
-  "redFlags": [
-   "Acute severe distension with concern for perforation or ischaemia",
-   "Sepsis from bacterial overgrowth, translocation, or line infection during parenteral nutrition",
-   "Severe malnutrition and dependence on parenteral support",
-   "Urinary retention or upper tract dilatation from bladder involvement"
-  ],
-  "prognosis": "The course is typically chronic and progressive, with morbidity from malnutrition, dependence on parenteral nutrition, and recurrent pseudo-obstructive episodes; prognosis depends on the extent of gut involvement and complications of long-term nutritional support.",
-  "pitfalls": [
-   "Performing repeated laparotomies for presumed mechanical obstruction that is actually pseudo-obstruction",
-   "Failing to obtain full-thickness biopsy to distinguish myopathic from neuropathic disease",
-   "Overlooking urinary tract involvement (megacystis) as part of the same disorder",
-   "Neglecting bacterial overgrowth and nutritional deficiencies as sources of morbidity"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise nutritional support with small frequent low-residue feeds, enteral feeding where tolerated, and parenteral nutrition when intestinal failure supervenes",
-   "Treat small-intestinal bacterial overgrowth with cyclical antibiotics to reduce malabsorption and bloating",
-   "Manage pseudo-obstructive episodes with bowel rest, nasogastric or intestinal decompression, and fluid and electrolyte correction while avoiding unnecessary laparotomy",
-   "Trial prokinetic agents cautiously given limited efficacy in myopathic disease, and avoid opioids and other gut-slowing drugs",
-   "Address concurrent urinary tract smooth-muscle involvement with urology, using intermittent catheterisation for incomplete bladder emptying",
-   "Monitor for complications of long-term parenteral nutrition, including catheter sepsis, venous thrombosis and intestinal-failure-associated liver disease",
-   "Refer to a specialist intestinal-failure and gut-motility centre and consider intestinal transplantation in refractory intestinal failure",
-   "Offer genetic counselling and family assessment where an autosomal dominant familial form is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hollow_visceral_myopathy-pathway",
-   "title": "Hollow visceral myopathy (chronic intestinal pseudo-obstruction): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A cause of chronic intestinal pseudo-obstruction from primary degeneration of gastrointestinal smooth muscle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe distension with concern for perforation or ischaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Abdominal radiography and contrast studies showing dilated, non-obstructed bowel and delayed transit, Cross-sectional imaging to exclude a mechanical cause and assess bladder and bowel calibre, Full-thickness intestinal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise nutritional support with small frequent low-residue feeds, enteral feeding where tolerated, and parenteral nutrition when intestinal failure supervenes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing repeated laparotomies for presumed mechanical obstruction that is actually pseudo-obstruction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hollow visceral myopathy (chronic intestinal pseudo-obstruction)."
-  }
- ],
- "tables": [
-  {
-   "id": "hollow_visceral_myopathy-matrix",
-   "title": "Hollow visceral myopathy (chronic intestinal pseudo-obstruction): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A cause of chronic intestinal pseudo-obstruction from primary degeneration of gastrointestinal smooth muscle",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A cause of chronic intestinal pseudo-obstruction from primary degeneration of gastrointestinal smooth muscle",
+      "Presents with recurrent episodes of obstruction (distension, vomiting, pain, constipation) in the absence of a mechanical lesion",
+      "Characteristic findings include megaduodenum, dilated bowel loops, and often a dilated bladder (megacystis) reflecting smooth-muscle involvement beyond the gut",
+      "Can be familial (frequently autosomal dominant) or sporadic, and may involve the whole gut as well as urinary tract smooth muscle",
+      "Contrast studies and imaging show dilated, poorly contracting segments and delayed transit without an obstructing lesion",
+      "Full-thickness intestinal biopsy shows smooth-muscle degeneration, vacuolation, and fibrosis, distinguishing myopathic from neuropathic pseudo-obstruction",
+      "Management is supportive with nutritional support, prokinetic and symptom-directed measures, and treatment of bacterial overgrowth, avoiding unnecessary surgery"
     ],
-    [
-     "Key Investigations",
-     "Abdominal radiography and contrast studies showing dilated, non-obstructed bowel and delayed transit, Cross-sectional imaging to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hollow visceral myopathy is a primary disorder of gastrointestinal (and often urinary tract) smooth muscle, in which degeneration, vacuolar change, and replacement fibrosis of the muscle layers impair contractile function. The weakened, poorly contracting muscle cannot generate effective peristalsis, so luminal contents stagnate and the bowel dilates, producing the clinical picture of pseudo-obstruction with megaduodenum and megacystis despite a patent lumen. Stasis promotes small-intestinal bacterial overgrowth and malabsorption, compounding malnutrition.",
+    "additionalDifferentials": [
+      "Mechanical intestinal obstruction",
+      "Neuropathic chronic intestinal pseudo-obstruction",
+      "Mitochondrial neurogastrointestinal encephalomyopathy",
+      "Systemic sclerosis and other connective-tissue disease affecting gut muscle",
+      "Intestinal neuronal dysplasia and other dysganglionoses",
+      "Severe diabetic or paraneoplastic gastrointestinal dysmotility"
     ],
-    [
-     "Primary Differentials",
-     "Mechanical intestinal obstruction, Neuropathic chronic intestinal pseudo-obstruction, Mitochondrial neurogastrointestinal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Abdominal radiography and contrast studies showing dilated, non-obstructed bowel and delayed transit",
+      "Cross-sectional imaging to exclude a mechanical cause and assess bladder and bowel calibre",
+      "Full-thickness intestinal biopsy with histology and immunohistochemistry of the muscle layers",
+      "Gastrointestinal manometry demonstrating low-amplitude (myopathic) contractions",
+      "Nutritional assessment and testing for bacterial overgrowth"
     ],
-    [
-     "Management Strategy",
-     "Prioritise nutritional support with small frequent low-residue feeds, enteral feeding where tolerated, and parenteral nutrition",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe distension with concern for perforation or ischaemia",
+      "Sepsis from bacterial overgrowth, translocation, or line infection during parenteral nutrition",
+      "Severe malnutrition and dependence on parenteral support",
+      "Urinary retention or upper tract dilatation from bladder involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing repeated laparotomies for presumed mechanical obstruction that is actually pseudo-obstruction",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is typically chronic and progressive, with morbidity from malnutrition, dependence on parenteral nutrition, and recurrent pseudo-obstructive episodes; prognosis depends on the extent of gut involvement and complications of long-term nutritional support.",
+    "pitfalls": [
+      "Performing repeated laparotomies for presumed mechanical obstruction that is actually pseudo-obstruction",
+      "Failing to obtain full-thickness biopsy to distinguish myopathic from neuropathic disease",
+      "Overlooking urinary tract involvement (megacystis) as part of the same disorder",
+      "Neglecting bacterial overgrowth and nutritional deficiencies as sources of morbidity"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise nutritional support with small frequent low-residue feeds, enteral feeding where tolerated, and parenteral nutrition when intestinal failure supervenes",
+      "Treat small-intestinal bacterial overgrowth with cyclical antibiotics to reduce malabsorption and bloating",
+      "Manage pseudo-obstructive episodes with bowel rest, nasogastric or intestinal decompression, and fluid and electrolyte correction while avoiding unnecessary laparotomy",
+      "Trial prokinetic agents cautiously given limited efficacy in myopathic disease, and avoid opioids and other gut-slowing drugs",
+      "Address concurrent urinary tract smooth-muscle involvement with urology, using intermittent catheterisation for incomplete bladder emptying",
+      "Monitor for complications of long-term parenteral nutrition, including catheter sepsis, venous thrombosis and intestinal-failure-associated liver disease",
+      "Refer to a specialist intestinal-failure and gut-motility centre and consider intestinal transplantation in refractory intestinal failure",
+      "Offer genetic counselling and family assessment where an autosomal dominant familial form is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for hollow visceral myopathy (chronic intestinal pseudo-obstruction)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hollow-visceral-myopathy-real-image",
-   "title": "Hollow visceral myopathy (chronic intestinal pseudo-obstruction): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "hollow_visceral_myopathy-pathway",
+      "title": "Hollow visceral myopathy (chronic intestinal pseudo-obstruction): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A cause of chronic intestinal pseudo-obstruction from primary degeneration of gastrointestinal smooth muscle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe distension with concern for perforation or ischaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Abdominal radiography and contrast studies showing dilated, non-obstructed bowel and delayed transit, Cross-sectional imaging to exclude a mechanical cause and assess bladder and bowel calibre, Full-thickness intestinal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise nutritional support with small frequent low-residue feeds, enteral feeding where tolerated, and parenteral nutrition when intestinal failure supervenes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing repeated laparotomies for presumed mechanical obstruction that is actually pseudo-obstruction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hollow visceral myopathy (chronic intestinal pseudo-obstruction)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hollow_visceral_myopathy-matrix",
+      "title": "Hollow visceral myopathy (chronic intestinal pseudo-obstruction): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A cause of chronic intestinal pseudo-obstruction from primary degeneration of gastrointestinal smooth muscle",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Abdominal radiography and contrast studies showing dilated, non-obstructed bowel and delayed transit, Cross-sectional imaging to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mechanical intestinal obstruction, Neuropathic chronic intestinal pseudo-obstruction, Mitochondrial neurogastrointestinal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise nutritional support with small frequent low-residue feeds, enteral feeding where tolerated, and parenteral nutrition",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing repeated laparotomies for presumed mechanical obstruction that is actually pseudo-obstruction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hollow visceral myopathy (chronic intestinal pseudo-obstruction)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hollow_visceral_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal radiography and contrast studies",
+          "cells": [
+            {
+              "text": "Dilated bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Excludes a mechanical cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full-thickness intestinal biopsy",
+          "cells": [
+            {
+              "text": "Histology and immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal manometry",
+          "cells": [
+            {
+              "text": "Low-amplitude contractions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment and bacterial overgrowth testing",
+          "cells": [
+            {
+              "text": "Malnutrition and overgrowth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hollow_visceral_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical intestinal obstruction",
+          "cells": [
+            {
+              "text": "Excluded by imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial neurogastrointestinal encephalomyopathy",
+          "cells": [
+            {
+              "text": "Mitochondrial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal neuronal dysplasia and other dysganglionoses",
+          "cells": [
+            {
+              "text": "Dysganglionosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic sclerosis and other connective tissue disease",
+          "cells": [
+            {
+              "text": "Connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hollow_visceral_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Small frequent meals; prioritised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclical antibiotics",
+          "cells": [
+            {
+              "text": "Small-intestinal bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel rest and nasogastric decompression",
+          "cells": [
+            {
+              "text": "Pseudo-obstructive episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prokinetic agents",
+          "cells": [
+            {
+              "text": "Cautious trial given limited efficacy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary tract involvement",
+          "cells": [
+            {
+              "text": "Smooth-muscle involvement, managed concurrently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition complications",
+          "cells": [
+            {
+              "text": "Monitored long term"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist intestinal failure service",
+          "cells": [
+            {
+              "text": "Gut motility referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hollow_visceral_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Hollow visceral myopathy (chronic intestinal pseudo-obstruction)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent intestinal pseudo-obstruction with dilated bowel and malnutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Perforation, sepsis, severe malnutrition, or urinary retention?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: bowel rest, decompression and surgical review for perforation or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal imaging for mechanical cause; full-thickness biopsy; manometry; SIBO testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a non-mechanical neuromuscular cause confirmed on biopsy or manometry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mechanical obstruction, mitochondrial disease, dysganglionosis or scleroderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nutritional support with small frequent feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cyclical antibiotics for small-intestinal bacterial overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bowel rest and nasogastric decompression for episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cautious trial of prokinetic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Nutrition maintained; referral to intestinal failure service",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

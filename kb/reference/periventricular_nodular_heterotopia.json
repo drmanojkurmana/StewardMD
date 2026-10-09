@@ -1,176 +1,445 @@
 {
- "id": "periventricular_nodular_heterotopia",
- "name": "Periventricular nodular heterotopia",
- "aliases": [
-  "PVNH",
-  "periventricular heterotopia",
-  "subependymal heterotopia",
-  "FLNA (filamin A)",
-  "ARFGEF2"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A malformation of neuronal migration in which nodules of grey matter fail to migrate and remain lining the walls of the lateral ventricles",
-   "On MRI the nodules follow grey-matter signal on all sequences, are typically smooth and rounded, and do not enhance, distinguishing them from subependymal tumours",
-   "The classic form is X-linked, caused by FLNA (filamin A) variants, and is often bilateral and nodular; it is usually lethal in males, so most affected individuals are female",
-   "FLNA-related heterotopia carries systemic associations including cardiovascular anomalies such as aortic and valvular disease, and a bleeding or connective-tissue tendency, warranting cardiac surveillance",
-   "The autosomal recessive form due to ARFGEF2 is associated with microcephaly and more severe developmental impairment",
-   "Many individuals present in adolescence or adulthood with focal epilepsy and otherwise normal or near-normal intellect, particularly in the FLNA form",
-   "Diagnosis is by MRI recognition of grey-matter nodules along the ventricular margin combined with targeted genetic testing"
+  "id": "periventricular_nodular_heterotopia",
+  "name": "Periventricular nodular heterotopia",
+  "aliases": [
+    "PVNH",
+    "periventricular heterotopia",
+    "subependymal heterotopia",
+    "FLNA (filamin A)",
+    "ARFGEF2"
   ],
-  "pathophysiology": "Periventricular nodular heterotopia results from failure of neurons to migrate away from the germinal (ventricular) zone during cortical development, so that collections of neurons persist as nodules along the ependymal lining of the lateral ventricles. The X-linked form is caused by variants in FLNA, which encodes filamin A, an actin-binding protein required for the cytoskeletal dynamics that drive early neuronal migration and also important in vascular and connective tissue, explaining the cardiovascular associations. The autosomal recessive ARFGEF2 form disrupts vesicle trafficking needed for migration and proliferation, producing microcephaly with heterotopia.",
-  "additionalDifferentials": [
-   "Subependymal nodules of tuberous sclerosis, which may calcify and enhance",
-   "Subependymal spread of tumour or subependymoma",
-   "Subcortical band heterotopia and other heterotopia patterns",
-   "Tuberous sclerosis complex more broadly",
-   "Grey-matter signal artefact along the ventricle",
-   "Polymicrogyria with associated heterotopia"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to identify grey-matter-signal nodules lining the ventricles and any cortical involvement",
-   "Molecular genetic testing including FLNA analysis and, where indicated, ARFGEF2",
-   "Cardiac evaluation with echocardiography and aortic imaging in FLNA-related disease",
-   "Assessment for bleeding tendency and connective-tissue features in FLNA variants",
-   "Electroencephalography to characterise focal epilepsy",
-   "Developmental and cognitive assessment"
-  ],
-  "redFlags": [
-   "Aortic dilatation, valvular disease, or other cardiovascular complications in FLNA-related heterotopia",
-   "Bleeding tendency associated with filamin A dysfunction",
-   "Drug-resistant focal epilepsy",
-   "Microcephaly with severe developmental impairment suggesting the ARFGEF2 form"
-  ],
-  "prognosis": "In the common FLNA-related form, many individuals have normal or near-normal cognition with focal epilepsy that is often manageable, though cardiovascular and vascular complications can affect long-term health. The ARFGEF2 form and syndromic presentations carry a poorer neurodevelopmental prognosis.",
-  "pitfalls": [
-   "Mistaking heterotopic nodules for the enhancing, sometimes calcified subependymal nodules of tuberous sclerosis",
-   "Failing to arrange cardiovascular surveillance in FLNA-related disease",
-   "Overlooking X-linked inheritance and its implications for male fetal loss and family counselling",
-   "Attributing new focal seizures in an adult to another cause without considering heterotopia on MRI"
-  ],
-  "references": [
-   "Volpe's Neurology of the Newborn",
-   "Nelson Textbook of Paediatrics",
-   "GeneReviews: FLNA-Related Periventricular Nodular Heterotopia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antiseizure medication tailored to the focal epilepsy, which is the usual presenting problem",
-   "Consider resective epilepsy surgery, laser interstitial thermal ablation or neurostimulation for drug-resistant focal seizures",
-   "Cardiovascular surveillance with echocardiography and aortic imaging in FLNA-related disease to detect aortic and valvular disease",
-   "Assess for a bleeding tendency and connective-tissue features in FLNA variants and take precautions around surgery or delivery",
-   "Developmental, cognitive and educational support, particularly in the more severe ARFGEF2 form with microcephaly",
-   "Genetic counselling and family screening, recognising X-linked FLNA (usually male-lethal) and autosomal recessive ARFGEF2 inheritance",
-   "Coordinate care across neurology, clinical genetics and cardiology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "periventricular_nodular_heterotopia-pathway",
-   "title": "Periventricular nodular heterotopia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A malformation of neuronal migration in which nodules of grey matter fail to migrate and remain lining the walls of the lateral ventricles",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aortic dilatation, valvular disease, or other cardiovascular complications in FLNA-related heterotopia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to identify grey-matter-signal nodules lining the ventricles and any cortical involvement, Molecular genetic testing including FLNA analysis and, where indicated, ARFGEF2, Cardiac evaluation with echocardiography"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antiseizure medication tailored to the focal epilepsy, which is the usual presenting problem"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking heterotopic nodules for the enhancing, sometimes calcified subependymal nodules of tuberous sclerosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of periventricular nodular heterotopia."
-  }
- ],
- "tables": [
-  {
-   "id": "periventricular_nodular_heterotopia-matrix",
-   "title": "Periventricular nodular heterotopia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A malformation of neuronal migration in which nodules of grey matter fail to migrate and remain lining the walls of the lateral",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A malformation of neuronal migration in which nodules of grey matter fail to migrate and remain lining the walls of the lateral ventricles",
+      "On MRI the nodules follow grey-matter signal on all sequences, are typically smooth and rounded, and do not enhance, distinguishing them from subependymal tumours",
+      "The classic form is X-linked, caused by FLNA (filamin A) variants, and is often bilateral and nodular; it is usually lethal in males, so most affected individuals are female",
+      "FLNA-related heterotopia carries systemic associations including cardiovascular anomalies such as aortic and valvular disease, and a bleeding or connective-tissue tendency, warranting cardiac surveillance",
+      "The autosomal recessive form due to ARFGEF2 is associated with microcephaly and more severe developmental impairment",
+      "Many individuals present in adolescence or adulthood with focal epilepsy and otherwise normal or near-normal intellect, particularly in the FLNA form",
+      "Diagnosis is by MRI recognition of grey-matter nodules along the ventricular margin combined with targeted genetic testing"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to identify grey-matter-signal nodules lining the ventricles and any cortical involvement, Molecular genetic testing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Periventricular nodular heterotopia results from failure of neurons to migrate away from the germinal (ventricular) zone during cortical development, so that collections of neurons persist as nodules along the ependymal lining of the lateral ventricles. The X-linked form is caused by variants in FLNA, which encodes filamin A, an actin-binding protein required for the cytoskeletal dynamics that drive early neuronal migration and also important in vascular and connective tissue, explaining the cardiovascular associations. The autosomal recessive ARFGEF2 form disrupts vesicle trafficking needed for migration and proliferation, producing microcephaly with heterotopia.",
+    "additionalDifferentials": [
+      "Subependymal nodules of tuberous sclerosis, which may calcify and enhance",
+      "Subependymal spread of tumour or subependymoma",
+      "Subcortical band heterotopia and other heterotopia patterns",
+      "Tuberous sclerosis complex more broadly",
+      "Grey-matter signal artefact along the ventricle",
+      "Polymicrogyria with associated heterotopia"
     ],
-    [
-     "Primary Differentials",
-     "Subependymal nodules of tuberous sclerosis, which may calcify and enhance, Subependymal spread of tumour or subependymoma,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to identify grey-matter-signal nodules lining the ventricles and any cortical involvement",
+      "Molecular genetic testing including FLNA analysis and, where indicated, ARFGEF2",
+      "Cardiac evaluation with echocardiography and aortic imaging in FLNA-related disease",
+      "Assessment for bleeding tendency and connective-tissue features in FLNA variants",
+      "Electroencephalography to characterise focal epilepsy",
+      "Developmental and cognitive assessment"
     ],
-    [
-     "Management Strategy",
-     "Antiseizure medication tailored to the focal epilepsy, which is the usual presenting problem",
-     "Core treatment modality"
+    "redFlags": [
+      "Aortic dilatation, valvular disease, or other cardiovascular complications in FLNA-related heterotopia",
+      "Bleeding tendency associated with filamin A dysfunction",
+      "Drug-resistant focal epilepsy",
+      "Microcephaly with severe developmental impairment suggesting the ARFGEF2 form"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking heterotopic nodules for the enhancing, sometimes calcified subependymal nodules of tuberous sclerosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "In the common FLNA-related form, many individuals have normal or near-normal cognition with focal epilepsy that is often manageable, though cardiovascular and vascular complications can affect long-term health. The ARFGEF2 form and syndromic presentations carry a poorer neurodevelopmental prognosis.",
+    "pitfalls": [
+      "Mistaking heterotopic nodules for the enhancing, sometimes calcified subependymal nodules of tuberous sclerosis",
+      "Failing to arrange cardiovascular surveillance in FLNA-related disease",
+      "Overlooking X-linked inheritance and its implications for male fetal loss and family counselling",
+      "Attributing new focal seizures in an adult to another cause without considering heterotopia on MRI"
+    ],
+    "references": [
+      "Volpe's Neurology of the Newborn",
+      "Nelson Textbook of Paediatrics",
+      "GeneReviews: FLNA-Related Periventricular Nodular Heterotopia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antiseizure medication tailored to the focal epilepsy, which is the usual presenting problem",
+      "Consider resective epilepsy surgery, laser interstitial thermal ablation or neurostimulation for drug-resistant focal seizures",
+      "Cardiovascular surveillance with echocardiography and aortic imaging in FLNA-related disease to detect aortic and valvular disease",
+      "Assess for a bleeding tendency and connective-tissue features in FLNA variants and take precautions around surgery or delivery",
+      "Developmental, cognitive and educational support, particularly in the more severe ARFGEF2 form with microcephaly",
+      "Genetic counselling and family screening, recognising X-linked FLNA (usually male-lethal) and autosomal recessive ARFGEF2 inheritance",
+      "Coordinate care across neurology, clinical genetics and cardiology"
     ]
-   ],
-   "caption": "Overview comparison matrix for periventricular nodular heterotopia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "periventricular-nodular-heterotopia-real-image",
-   "title": "Periventricular nodular heterotopia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "periventricular_nodular_heterotopia-pathway",
+      "title": "Periventricular nodular heterotopia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A malformation of neuronal migration in which nodules of grey matter fail to migrate and remain lining the walls of the lateral ventricles",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aortic dilatation, valvular disease, or other cardiovascular complications in FLNA-related heterotopia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to identify grey-matter-signal nodules lining the ventricles and any cortical involvement, Molecular genetic testing including FLNA analysis and, where indicated, ARFGEF2, Cardiac evaluation with echocardiography"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antiseizure medication tailored to the focal epilepsy, which is the usual presenting problem"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking heterotopic nodules for the enhancing, sometimes calcified subependymal nodules of tuberous sclerosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of periventricular nodular heterotopia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "periventricular_nodular_heterotopia-matrix",
+      "title": "Periventricular nodular heterotopia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A malformation of neuronal migration in which nodules of grey matter fail to migrate and remain lining the walls of the lateral",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to identify grey-matter-signal nodules lining the ventricles and any cortical involvement, Molecular genetic testing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Subependymal nodules of tuberous sclerosis, which may calcify and enhance, Subependymal spread of tumour or subependymoma,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antiseizure medication tailored to the focal epilepsy, which is the usual presenting problem",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking heterotopic nodules for the enhancing, sometimes calcified subependymal nodules of tuberous sclerosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for periventricular nodular heterotopia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "periventricular_nodular_heterotopia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Grey-matter-signal nodules lining the ventricles and any cortical involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing (FLNA, and ARFGEF2 where indicated)",
+          "cells": [
+            {
+              "text": "Genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and aortic imaging in FLNA disease",
+          "cells": [
+            {
+              "text": "Cardiac and aortic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding and connective-tissue assessment in FLNA variants",
+          "cells": [
+            {
+              "text": "Bleeding tendency and connective-tissue features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Characterises focal epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and cognitive assessment",
+          "cells": [
+            {
+              "text": "Development and cognition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periventricular_nodular_heterotopia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Tailored to the focal epilepsy, the usual presenting problem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy surgery",
+          "cells": [
+            {
+              "text": "Resective surgery, laser interstitial thermal ablation or neurostimulation for drug-resistant focal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and aortic imaging in FLNA-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding precautions",
+          "cells": [
+            {
+              "text": "Assess bleeding tendency; take precautions around surgery or delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Cognitive and educational support, particularly in the ARFGEF2 form with microcephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening; X-linked FLNA (usually male-lethal) and autosomal recessive ARFGEF2 inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Neurology, clinical genetics and cardiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "periventricular_nodular_heterotopia-dx-mgmt",
+      "title": "Diagnosis and management of Periventricular nodular heterotopia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Focal epilepsy with grey-matter nodules lining the ventricles on brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (aortic or valvular disease, bleeding tendency, drug-resistant epilepsy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiology and aortic surveillance; bleeding precautions around surgery or delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI; FLNA and ARFGEF2 genetic testing; EEG; echocardiography in FLNA disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm an FLNA or ARFGEF2 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberous sclerosis subependymal nodules, band heterotopia or polymicrogyria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tailor antiseizure medication to the focal epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider epilepsy surgery, laser ablation or neurostimulation for drug-resistant seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Echocardiography and aortic imaging for FLNA-related cardiovascular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess bleeding tendency and take precautions around surgery or delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening for X-linked and recessive forms",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "The common FLNA form often has near-normal cognition with manageable epilepsy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

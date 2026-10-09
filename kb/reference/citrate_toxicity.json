@@ -1,175 +1,554 @@
 {
- "id": "citrate_toxicity",
- "name": "Citrate toxicity",
- "aliases": [
-  "Citrate-induced hypocalcaemia",
-  "Transfusion citrate toxicity"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion medicine",
- "specialty": "Haematology / Transfusion medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "AABB Technical Manual",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Citrate is the anticoagulant in blood components and chelates ionised calcium; toxicity is effectively acute hypocalcaemia and sometimes hypomagnesaemia.",
-   "Occurs when citrate is infused faster than the liver can metabolise it, as in massive or rapid transfusion, exchange transfusion, and apheresis procedures.",
-   "Neonates, patients with hepatic impairment, hypothermia or poor perfusion are at particular risk because citrate clearance is reduced.",
-   "Early symptoms include perioral and peripheral tingling, and this is a common experience for apheresis donors.",
-   "Progressive hypocalcaemia causes tremor, tetany, a prolonged QT interval, arrhythmias and reduced myocardial contractility with hypotension.",
-   "Ionised calcium, not total calcium, should guide assessment because citrate binds the ionised fraction.",
-   "Management is to slow or pause the infusion and replace calcium, with magnesium replacement if deficient.",
-   "Citrate is metabolised to bicarbonate, so a metabolic alkalosis may follow large citrate loads once the acute phase passes."
+  "id": "citrate_toxicity",
+  "name": "Citrate toxicity",
+  "aliases": [
+    "Citrate-induced hypocalcaemia",
+    "Transfusion citrate toxicity"
   ],
-  "pathophysiology": "Citrate toxicity is a metabolic complication of transfusion rather than an immune reaction. Citrate anticoagulants prevent clotting by chelating calcium ions, and when large volumes of citrated blood are infused rapidly, or when calcium is returned slowly as in apheresis, the plasma concentration of ionised calcium falls. Under normal conditions citrate is rapidly metabolised by the liver, kidney and skeletal muscle via the citric acid cycle to bicarbonate, so toxicity only occurs when the infusion rate exceeds metabolic capacity, which is more likely in hepatic dysfunction, hypothermia, shock and in neonates. The resulting acute hypocalcaemia, sometimes accompanied by hypomagnesaemia, impairs neuromuscular and cardiac function, producing paraesthesiae, tetany, QT prolongation, arrhythmia and depressed myocardial contractility. Subsequent conversion of the citrate load to bicarbonate can produce a metabolic alkalosis.",
-  "additionalDifferentials": [
-   "Hypocalcaemia from other causes such as hypoparathyroidism",
-   "Hypomagnesaemia of independent cause",
-   "Transfusion-associated hyperkalaemia causing arrhythmia",
-   "Hypothermia-related cardiac dysfunction during massive transfusion",
-   "Acute haemolytic transfusion reaction",
-   "Local anaesthetic or other drug-induced arrhythmia"
-  ],
-  "additionalInvestigations": [
-   "Ionised calcium measurement during rapid or massive transfusion",
-   "Serum magnesium level",
-   "Electrocardiogram assessing the corrected QT interval and rhythm",
-   "Arterial blood gas to detect accompanying alkalosis",
-   "Total calcium and albumin for context",
-   "Continuous cardiac monitoring during high-volume transfusion or apheresis"
-  ],
-  "redFlags": [
-   "Tetany or carpopedal spasm during transfusion",
-   "Prolonged QT interval or new arrhythmia",
-   "Hypotension with reduced myocardial contractility during massive transfusion",
-   "Seizures attributable to severe hypocalcaemia",
-   "Rapid citrate load in a neonate or patient with hepatic failure"
-  ],
-  "prognosis": "Citrate toxicity is readily reversible when recognised, by slowing the infusion and replacing calcium, and rarely causes lasting harm. Severe unrecognised hypocalcaemia during massive transfusion can, however, precipitate life-threatening arrhythmia and cardiac depression.",
-  "pitfalls": [
-   "Relying on total rather than ionised calcium to gauge severity.",
-   "Overlooking concurrent hypomagnesaemia that perpetuates hypocalcaemia.",
-   "Failing to anticipate toxicity in neonates, hepatic failure and hypothermia.",
-   "Attributing arrhythmia to hyperkalaemia alone and missing hypocalcaemia.",
-   "Neglecting the later metabolic alkalosis from citrate conversion to bicarbonate."
-  ],
-  "references": [
-   "AABB Technical Manual, current edition",
-   "British Society for Haematology guidelines on the management of massive haemorrhage",
-   "Mollison's Blood Transfusion in Clinical Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate slowing or interruption of the transfusion or apheresis return to allow hepatic citrate metabolism to catch up",
-   "Intravenous calcium replacement with calcium gluconate or calcium chloride, titrated to the ionised calcium",
-   "Correction of accompanying hypomagnesaemia with magnesium replacement",
-   "Guidance of treatment by the ionised rather than the total calcium, with electrocardiographic monitoring of the corrected QT interval and continuous cardiac monitoring",
-   "Preventive measures in high-risk patients, including neonates and those with hepatic impairment, hypothermia or poor perfusion, by warming and controlling the infusion rate",
-   "Escalation for arrhythmia or haemodynamic compromise from severe hypocalcaemia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "citrate_toxicity-pathway",
-   "title": "Citrate toxicity: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Citrate is the anticoagulant in blood components and chelates ionised calcium; toxicity is effectively acute hypocalcaemia and sometimes hypomagnesaemia.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Tetany or carpopedal spasm during transfusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ionised calcium measurement during rapid or massive transfusion, Serum magnesium level, Electrocardiogram assessing the corrected QT interval and rhythm"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate slowing or interruption of the transfusion or apheresis return to allow hepatic citrate metabolism to catch up"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on total rather than ionised calcium to gauge severity."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of citrate toxicity."
-  }
- ],
- "tables": [
-  {
-   "id": "citrate_toxicity-matrix",
-   "title": "Citrate toxicity: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Citrate is the anticoagulant in blood components and chelates ionised calcium; toxicity is effectively acute hypocalcaemia and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion medicine",
+  "specialty": "Haematology / Transfusion medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "AABB Technical Manual",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Citrate is the anticoagulant in blood components and chelates ionised calcium; toxicity is effectively acute hypocalcaemia and sometimes hypomagnesaemia.",
+      "Occurs when citrate is infused faster than the liver can metabolise it, as in massive or rapid transfusion, exchange transfusion, and apheresis procedures.",
+      "Neonates, patients with hepatic impairment, hypothermia or poor perfusion are at particular risk because citrate clearance is reduced.",
+      "Early symptoms include perioral and peripheral tingling, and this is a common experience for apheresis donors.",
+      "Progressive hypocalcaemia causes tremor, tetany, a prolonged QT interval, arrhythmias and reduced myocardial contractility with hypotension.",
+      "Ionised calcium, not total calcium, should guide assessment because citrate binds the ionised fraction.",
+      "Management is to slow or pause the infusion and replace calcium, with magnesium replacement if deficient.",
+      "Citrate is metabolised to bicarbonate, so a metabolic alkalosis may follow large citrate loads once the acute phase passes."
     ],
-    [
-     "Key Investigations",
-     "Ionised calcium measurement during rapid or massive transfusion, Serum magnesium level, Electrocardiogram assessing the corrected",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Citrate toxicity is a metabolic complication of transfusion rather than an immune reaction. Citrate anticoagulants prevent clotting by chelating calcium ions, and when large volumes of citrated blood are infused rapidly, or when calcium is returned slowly as in apheresis, the plasma concentration of ionised calcium falls. Under normal conditions citrate is rapidly metabolised by the liver, kidney and skeletal muscle via the citric acid cycle to bicarbonate, so toxicity only occurs when the infusion rate exceeds metabolic capacity, which is more likely in hepatic dysfunction, hypothermia, shock and in neonates. The resulting acute hypocalcaemia, sometimes accompanied by hypomagnesaemia, impairs neuromuscular and cardiac function, producing paraesthesiae, tetany, QT prolongation, arrhythmia and depressed myocardial contractility. Subsequent conversion of the citrate load to bicarbonate can produce a metabolic alkalosis.",
+    "additionalDifferentials": [
+      "Hypocalcaemia from other causes such as hypoparathyroidism",
+      "Hypomagnesaemia of independent cause",
+      "Transfusion-associated hyperkalaemia causing arrhythmia",
+      "Hypothermia-related cardiac dysfunction during massive transfusion",
+      "Acute haemolytic transfusion reaction",
+      "Local anaesthetic or other drug-induced arrhythmia"
     ],
-    [
-     "Primary Differentials",
-     "Hypocalcaemia from other causes such as hypoparathyroidism, Hypomagnesaemia of independent cause, Transfusion-associated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ionised calcium measurement during rapid or massive transfusion",
+      "Serum magnesium level",
+      "Electrocardiogram assessing the corrected QT interval and rhythm",
+      "Arterial blood gas to detect accompanying alkalosis",
+      "Total calcium and albumin for context",
+      "Continuous cardiac monitoring during high-volume transfusion or apheresis"
     ],
-    [
-     "Management Strategy",
-     "Immediate slowing or interruption of the transfusion or apheresis return to allow hepatic citrate metabolism to catch up",
-     "Core treatment modality"
+    "redFlags": [
+      "Tetany or carpopedal spasm during transfusion",
+      "Prolonged QT interval or new arrhythmia",
+      "Hypotension with reduced myocardial contractility during massive transfusion",
+      "Seizures attributable to severe hypocalcaemia",
+      "Rapid citrate load in a neonate or patient with hepatic failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on total rather than ionised calcium to gauge severity.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Citrate toxicity is readily reversible when recognised, by slowing the infusion and replacing calcium, and rarely causes lasting harm. Severe unrecognised hypocalcaemia during massive transfusion can, however, precipitate life-threatening arrhythmia and cardiac depression.",
+    "pitfalls": [
+      "Relying on total rather than ionised calcium to gauge severity.",
+      "Overlooking concurrent hypomagnesaemia that perpetuates hypocalcaemia.",
+      "Failing to anticipate toxicity in neonates, hepatic failure and hypothermia.",
+      "Attributing arrhythmia to hyperkalaemia alone and missing hypocalcaemia.",
+      "Neglecting the later metabolic alkalosis from citrate conversion to bicarbonate."
+    ],
+    "references": [
+      "AABB Technical Manual, current edition",
+      "British Society for Haematology guidelines on the management of massive haemorrhage",
+      "Mollison's Blood Transfusion in Clinical Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate slowing or interruption of the transfusion or apheresis return to allow hepatic citrate metabolism to catch up",
+      "Intravenous calcium replacement with calcium gluconate or calcium chloride, titrated to the ionised calcium",
+      "Correction of accompanying hypomagnesaemia with magnesium replacement",
+      "Guidance of treatment by the ionised rather than the total calcium, with electrocardiographic monitoring of the corrected QT interval and continuous cardiac monitoring",
+      "Preventive measures in high-risk patients, including neonates and those with hepatic impairment, hypothermia or poor perfusion, by warming and controlling the infusion rate",
+      "Escalation for arrhythmia or haemodynamic compromise from severe hypocalcaemia"
     ]
-   ],
-   "caption": "Overview comparison matrix for citrate toxicity."
-  }
- ],
- "diagrams": [
-  {
-   "id": "citrate-toxicity-real-image",
-   "title": "Citrate toxicity: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "citrate_toxicity-pathway",
+      "title": "Citrate toxicity: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Citrate is the anticoagulant in blood components and chelates ionised calcium; toxicity is effectively acute hypocalcaemia and sometimes hypomagnesaemia.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Tetany or carpopedal spasm during transfusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ionised calcium measurement during rapid or massive transfusion, Serum magnesium level, Electrocardiogram assessing the corrected QT interval and rhythm"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate slowing or interruption of the transfusion or apheresis return to allow hepatic citrate metabolism to catch up"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on total rather than ionised calcium to gauge severity."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of citrate toxicity."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "citrate_toxicity-matrix",
+      "title": "Citrate toxicity: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Citrate is the anticoagulant in blood components and chelates ionised calcium; toxicity is effectively acute hypocalcaemia and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ionised calcium measurement during rapid or massive transfusion, Serum magnesium level, Electrocardiogram assessing the corrected",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypocalcaemia from other causes such as hypoparathyroidism, Hypomagnesaemia of independent cause, Transfusion-associated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate slowing or interruption of the transfusion or apheresis return to allow hepatic citrate metabolism to catch up",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on total rather than ionised calcium to gauge severity.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for citrate toxicity."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "AABB Technical Manual",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 113-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "citrate_toxicity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ionised calcium during rapid or massive transfusion",
+          "cells": [
+            {
+              "text": "Guides treatment; citrate binds the ionised fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum magnesium",
+          "cells": [
+            {
+              "text": "Hypomagnesaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG with corrected QT interval and rhythm",
+          "cells": [
+            {
+              "text": "Prolonged QT or arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Metabolic alkalosis after large citrate loads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total calcium and albumin",
+          "cells": [
+            {
+              "text": "Context only"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "citrate_toxicity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypocalcaemia from other causes, such as hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Independent calcium disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypomagnesaemia of independent cause",
+          "cells": [
+            {
+              "text": "Low magnesium without a citrate load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemolytic transfusion reaction",
+          "cells": [
+            {
+              "text": "Transfusion reaction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "citrate_toxicity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Slow or interrupt the transfusion or apheresis",
+          "cells": [
+            {
+              "text": "Allows hepatic citrate metabolism to catch up"
+            },
+            {
+              "text": "Immediate step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous calcium gluconate or calcium chloride",
+          "cells": [
+            {
+              "text": "Titrated to the ionised calcium"
+            },
+            {
+              "text": "Guided by ionised calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium replacement",
+          "cells": [
+            {
+              "text": "If hypomagnesaemia is present"
+            },
+            {
+              "text": "If deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warming and a controlled infusion rate",
+          "cells": [
+            {
+              "text": "Neonates, hepatic impairment, hypothermia, poor perfusion"
+            },
+            {
+              "text": "Prevention in high-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiac monitoring with corrected QT",
+          "cells": [
+            {
+              "text": "During high-volume transfusion or apheresis"
+            },
+            {
+              "text": "Electrocardiographic monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "citrate_toxicity-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Characteristics of selected blood components",
+      "rowHeader": "Component",
+      "columns": [
+        "Volume, mL",
+        "Content",
+        "Clinical response"
+      ],
+      "rows": [
+        {
+          "parameter": "PRBC",
+          "cells": [
+            {
+              "text": "180-200"
+            },
+            {
+              "text": "Red cells with variable leukocyte content and a small amount of plasma"
+            },
+            {
+              "text": "Raises hemoglobin by 10 g/L and hematocrit by 3%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (random donor unit)",
+          "cells": [
+            {
+              "text": "50-70"
+            },
+            {
+              "text": "5.5 x 10^10 per random-donor unit"
+            },
+            {
+              "text": "Raises platelet count by 5000-10,000/uL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (single-donor apheresis product)",
+          "cells": [
+            {
+              "text": "200-400"
+            },
+            {
+              "text": ">=3 x 10^11 per single-donor apheresis product"
+            },
+            {
+              "text": "Corrected count increment >=10 x 10^9/L within 1 h and >=7.5 x 10^9/L within 24 h after transfusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FFP",
+          "cells": [
+            {
+              "text": "200-250"
+            },
+            {
+              "text": "Plasma proteins: coagulation factors, proteins C and S, antithrombin"
+            },
+            {
+              "text": "Raises coagulation factors by about 2%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cryoprecipitate",
+          "cells": [
+            {
+              "text": "10-15"
+            },
+            {
+              "text": "Cold-insoluble plasma proteins: fibrinogen, factor VIII, vWF"
+            },
+            {
+              "text": "Used as topical fibrin glue; also supplies 80 IU of factor VIII"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The PDF prints the platelet component as two rows; the second row has no component label and is read here as the apheresis product (CCI = corrected count increment)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "citrate_toxicity-dx-mgmt",
+      "title": "Diagnosis and management of Citrate toxicity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected citrate toxicity: tingling or tetany during rapid or massive transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tetany, prolonged QT, hypotension, seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: stop infusion and treat arrhythmia or haemodynamic compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ionised calcium, magnesium, ECG with corrected QT and blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ionised hypocalcaemia from citrate load confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Slow or interrupt the transfusion or apheresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check hypoparathyroidism, hypomagnesaemia and haemolytic reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous calcium replacement titrated to ionised calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Magnesium replacement if hypomagnesaemia is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Warm and control infusion rate in neonates and hepatic impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continuous cardiac monitoring; watch for metabolic alkalosis after load",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

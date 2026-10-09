@@ -1,177 +1,475 @@
 {
- "id": "treacher_collins_syndrome",
- "name": "Treacher Collins syndrome (TCOF1)",
- "aliases": [
-  "mandibulofacial dysostosis",
-  "Treacher Collins-Franceschetti syndrome",
-  "TCS",
-  "Franceschetti-Klein syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Craniofacial",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A symmetrical mandibulofacial dysostosis, in contrast to the asymmetry of the oculo-auriculo-vertebral spectrum",
-   "Hallmark features are down-slanting palpebral fissures, lower eyelid colobomata with deficient lower lash medial to the defect, and malar (zygomatic) hypoplasia",
-   "External ear anomalies with microtia and conductive hearing loss are typical, and audiological support is a priority for language development",
-   "Micrognathia and cleft palate contribute to neonatal airway and feeding problems",
-   "Intellect is characteristically normal, an important point for family counselling",
-   "Most cases follow autosomal dominant inheritance through TCOF1 variants, with variable expressivity even within families",
-   "Recessive forms linked to POLR1C and POLR1D and other polymerase-related genes are recognised, so a normal TCOF1 result does not exclude the diagnosis"
+  "id": "treacher_collins_syndrome",
+  "name": "Treacher Collins syndrome (TCOF1)",
+  "aliases": [
+    "mandibulofacial dysostosis",
+    "Treacher Collins-Franceschetti syndrome",
+    "TCS",
+    "Franceschetti-Klein syndrome"
   ],
-  "pathophysiology": "The condition results principally from haploinsufficiency of the treacle protein encoded by TCOF1, which participates in ribosomal RNA transcription and processing within the nucleolus. Reduced ribosome biogenesis is thought to trigger nucleolar stress and stabilisation of p53, leading to excessive apoptosis of cranial neural crest cells during early development. Because these neural crest cells populate the first and second branchial arches that form the midface, mandible, and external and middle ear, their depletion produces the symmetrical hypoplasia of the malar bones, mandible, and ear structures. Rarer forms arise from variants in RNA polymerase I and III subunit genes affecting the same pathway.",
-  "additionalDifferentials": [
-   "Nager acrofacial dysostosis (mandibulofacial dysostosis with preaxial limb defects)",
-   "Miller syndrome (mandibulofacial dysostosis with postaxial limb defects)",
-   "Goldenhar spectrum (asymmetric involvement)",
-   "Acrofacial dysostosis of other subtypes",
-   "Isolated Pierre Robin sequence",
-   "Maternal retinoid embryopathy"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing of TCOF1 with reflex analysis of POLR1C and POLR1D when negative",
-   "Audiological assessment including bone-conduction and brainstem-evoked response testing",
-   "Craniofacial computed tomography to define zygomatic, orbital, and middle-ear anatomy",
-   "Sleep study to assess for obstructive sleep apnoea related to airway hypoplasia",
-   "Ophthalmological review for eyelid coloboma and ocular surface protection",
-   "Genetic counselling and cascade testing of at-risk relatives"
-  ],
-  "redFlags": [
-   "Neonatal airway obstruction from combined micrognathia, choanal narrowing, and pharyngeal hypoplasia",
-   "Feeding failure and poor weight gain requiring nutritional intervention",
-   "Exposure keratopathy from lower eyelid colobomata threatening the cornea",
-   "Progressive obstructive sleep apnoea with growth or cardiorespiratory consequences",
-   "Difficult airway anticipated during any anaesthetic"
-  ],
-  "prognosis": "With multidisciplinary craniofacial care, airway and hearing support, and staged reconstruction, most individuals achieve good function and normal cognition, though repeated surgery over childhood and adolescence is often required.",
-  "pitfalls": [
-   "Assuming intellectual disability and thereby underestimating the child's potential",
-   "Failing to anticipate a difficult airway before sedation or surgery",
-   "Overlooking recessively inherited forms when TCOF1 testing is negative",
-   "Neglecting corneal protection in the presence of eyelid colobomata",
-   "Delaying hearing rehabilitation, harming speech and language outcomes"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: Treacher Collins Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Secure the neonatal airway compromised by micrognathia and cleft palate, ranging from positioning and a nasopharyngeal airway to mandibular distraction osteogenesis or tracheostomy in severe obstruction",
-   "Support feeding and nutrition, addressing the cleft palate with feeding aids and speech and language therapy input",
-   "Provide early audiological rehabilitation, typically bone-conduction hearing aids, to protect language development given conductive hearing loss and microtia",
-   "Undertake staged craniofacial reconstruction of the zygoma, mandible, eyelids and external ear through childhood and adolescence",
-   "Repair lower eyelid colobomata and protect the ocular surface under ophthalmology guidance",
-   "Investigate and treat obstructive sleep apnoea with a sleep study and continuous positive airway pressure where indicated",
-   "Coordinate care through a craniofacial multidisciplinary team",
-   "Provide genetic counselling and cascade testing of at-risk relatives for this autosomal dominant TCOF1-related disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "treacher_collins_syndrome-pathway",
-   "title": "Treacher Collins syndrome (TCOF1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A symmetrical mandibulofacial dysostosis, in contrast to the asymmetry of the oculo-auriculo-vertebral spectrum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal airway obstruction from combined micrognathia, choanal narrowing, and pharyngeal hypoplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing of TCOF1 with reflex analysis of POLR1C and POLR1D when negative, Audiological assessment including bone-conduction and brainstem-evoked response testing, Craniofacial computed tomography to define"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Secure the neonatal airway compromised by micrognathia and cleft palate, ranging from positioning and a nasopharyngeal airway to mandibular distraction osteogenesis or tracheostomy in severe obstruction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming intellectual disability and thereby underestimating the child's potential"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of treacher collins syndrome (tcof1)."
-  }
- ],
- "tables": [
-  {
-   "id": "treacher_collins_syndrome-matrix",
-   "title": "Treacher Collins syndrome (TCOF1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A symmetrical mandibulofacial dysostosis, in contrast to the asymmetry of the oculo-auriculo-vertebral spectrum",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Craniofacial",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A symmetrical mandibulofacial dysostosis, in contrast to the asymmetry of the oculo-auriculo-vertebral spectrum",
+      "Hallmark features are down-slanting palpebral fissures, lower eyelid colobomata with deficient lower lash medial to the defect, and malar (zygomatic) hypoplasia",
+      "External ear anomalies with microtia and conductive hearing loss are typical, and audiological support is a priority for language development",
+      "Micrognathia and cleft palate contribute to neonatal airway and feeding problems",
+      "Intellect is characteristically normal, an important point for family counselling",
+      "Most cases follow autosomal dominant inheritance through TCOF1 variants, with variable expressivity even within families",
+      "Recessive forms linked to POLR1C and POLR1D and other polymerase-related genes are recognised, so a normal TCOF1 result does not exclude the diagnosis"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing of TCOF1 with reflex analysis of POLR1C and POLR1D when negative, Audiological assessment including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The condition results principally from haploinsufficiency of the treacle protein encoded by TCOF1, which participates in ribosomal RNA transcription and processing within the nucleolus. Reduced ribosome biogenesis is thought to trigger nucleolar stress and stabilisation of p53, leading to excessive apoptosis of cranial neural crest cells during early development. Because these neural crest cells populate the first and second branchial arches that form the midface, mandible, and external and middle ear, their depletion produces the symmetrical hypoplasia of the malar bones, mandible, and ear structures. Rarer forms arise from variants in RNA polymerase I and III subunit genes affecting the same pathway.",
+    "additionalDifferentials": [
+      "Nager acrofacial dysostosis (mandibulofacial dysostosis with preaxial limb defects)",
+      "Miller syndrome (mandibulofacial dysostosis with postaxial limb defects)",
+      "Goldenhar spectrum (asymmetric involvement)",
+      "Acrofacial dysostosis of other subtypes",
+      "Isolated Pierre Robin sequence",
+      "Maternal retinoid embryopathy"
     ],
-    [
-     "Primary Differentials",
-     "Nager acrofacial dysostosis (mandibulofacial dysostosis with preaxial limb defects), Miller syndrome (mandibulofacial dysostosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing of TCOF1 with reflex analysis of POLR1C and POLR1D when negative",
+      "Audiological assessment including bone-conduction and brainstem-evoked response testing",
+      "Craniofacial computed tomography to define zygomatic, orbital, and middle-ear anatomy",
+      "Sleep study to assess for obstructive sleep apnoea related to airway hypoplasia",
+      "Ophthalmological review for eyelid coloboma and ocular surface protection",
+      "Genetic counselling and cascade testing of at-risk relatives"
     ],
-    [
-     "Management Strategy",
-     "Secure the neonatal airway compromised by micrognathia and cleft palate, ranging from positioning and a nasopharyngeal airway to",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal airway obstruction from combined micrognathia, choanal narrowing, and pharyngeal hypoplasia",
+      "Feeding failure and poor weight gain requiring nutritional intervention",
+      "Exposure keratopathy from lower eyelid colobomata threatening the cornea",
+      "Progressive obstructive sleep apnoea with growth or cardiorespiratory consequences",
+      "Difficult airway anticipated during any anaesthetic"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming intellectual disability and thereby underestimating the child's potential",
-     "Prevent diagnostic or management error"
+    "prognosis": "With multidisciplinary craniofacial care, airway and hearing support, and staged reconstruction, most individuals achieve good function and normal cognition, though repeated surgery over childhood and adolescence is often required.",
+    "pitfalls": [
+      "Assuming intellectual disability and thereby underestimating the child's potential",
+      "Failing to anticipate a difficult airway before sedation or surgery",
+      "Overlooking recessively inherited forms when TCOF1 testing is negative",
+      "Neglecting corneal protection in the presence of eyelid colobomata",
+      "Delaying hearing rehabilitation, harming speech and language outcomes"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: Treacher Collins Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Secure the neonatal airway compromised by micrognathia and cleft palate, ranging from positioning and a nasopharyngeal airway to mandibular distraction osteogenesis or tracheostomy in severe obstruction",
+      "Support feeding and nutrition, addressing the cleft palate with feeding aids and speech and language therapy input",
+      "Provide early audiological rehabilitation, typically bone-conduction hearing aids, to protect language development given conductive hearing loss and microtia",
+      "Undertake staged craniofacial reconstruction of the zygoma, mandible, eyelids and external ear through childhood and adolescence",
+      "Repair lower eyelid colobomata and protect the ocular surface under ophthalmology guidance",
+      "Investigate and treat obstructive sleep apnoea with a sleep study and continuous positive airway pressure where indicated",
+      "Coordinate care through a craniofacial multidisciplinary team",
+      "Provide genetic counselling and cascade testing of at-risk relatives for this autosomal dominant TCOF1-related disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for treacher collins syndrome (tcof1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "treacher-collins-syndrome-real-image",
-   "title": "Treacher Collins syndrome (TCOF1): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "treacher_collins_syndrome-pathway",
+      "title": "Treacher Collins syndrome (TCOF1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A symmetrical mandibulofacial dysostosis, in contrast to the asymmetry of the oculo-auriculo-vertebral spectrum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal airway obstruction from combined micrognathia, choanal narrowing, and pharyngeal hypoplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing of TCOF1 with reflex analysis of POLR1C and POLR1D when negative, Audiological assessment including bone-conduction and brainstem-evoked response testing, Craniofacial computed tomography to define"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Secure the neonatal airway compromised by micrognathia and cleft palate, ranging from positioning and a nasopharyngeal airway to mandibular distraction osteogenesis or tracheostomy in severe obstruction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming intellectual disability and thereby underestimating the child's potential"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of treacher collins syndrome (tcof1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "treacher_collins_syndrome-matrix",
+      "title": "Treacher Collins syndrome (TCOF1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A symmetrical mandibulofacial dysostosis, in contrast to the asymmetry of the oculo-auriculo-vertebral spectrum",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing of TCOF1 with reflex analysis of POLR1C and POLR1D when negative, Audiological assessment including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nager acrofacial dysostosis (mandibulofacial dysostosis with preaxial limb defects), Miller syndrome (mandibulofacial dysostosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Secure the neonatal airway compromised by micrognathia and cleft palate, ranging from positioning and a nasopharyngeal airway to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming intellectual disability and thereby underestimating the child's potential",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for treacher collins syndrome (tcof1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "treacher_collins_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Treacher Collins syndrome (TCOF1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Treacher Collins syndrome: down-slanting eyes, microtia and malar hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: neonatal airway obstruction, feeding failure, or corneal exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway management and feeding support in the neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TCOF1 testing; audiology; craniofacial CT; sleep study if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TCOF1 testing show a pathogenic variant with the typical facial pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Nager or Miller syndrome, Goldenhar spectrum or isolated Pierre Robin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Secure the neonatal airway, from positioning to distraction or tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Feeding aids and speech and language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early bone-conduction hearing aids for language development",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Staged craniofacial and eyelid reconstruction through childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and testing of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With multidisciplinary care most achieve good function and normal cognition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "treacher_collins_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TCOF1 molecular testing with POLR1C and POLR1D if negative",
+          "cells": [
+            {
+              "text": "Pathogenic variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Conductive hearing loss from microtia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial CT",
+          "cells": [
+            {
+              "text": "Zygomatic, orbital and middle-ear anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep study",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea from airway hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Lower eyelid coloboma and ocular surface"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "treacher_collins_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nager acrofacial dysostosis",
+          "cells": [
+            {
+              "text": "Preaxial limb defects alongside mandibulofacial dysostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Goldenhar spectrum",
+          "cells": [
+            {
+              "text": "Asymmetric involvement rather than symmetrical mandibulofacial dysostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated Pierre Robin sequence",
+          "cells": [
+            {
+              "text": "Micrognathia and cleft palate without the zygomatic and eyelid features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "treacher_collins_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal airway management",
+          "cells": [
+            {
+              "text": "Positioning, nasopharyngeal airway, distraction osteogenesis or tracheostomy in severe obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support and speech therapy",
+          "cells": [
+            {
+              "text": "Cleft palate and feeding aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early audiological rehabilitation",
+          "cells": [
+            {
+              "text": "Bone-conduction hearing aids to protect language"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged craniofacial reconstruction",
+          "cells": [
+            {
+              "text": "Zygoma, mandible, eyelids and external ear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyelid and ocular surface care",
+          "cells": [
+            {
+              "text": "Coloboma repair under ophthalmology guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep apnoea treatment",
+          "cells": [
+            {
+              "text": "Continuous positive airway pressure where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant TCOF1-related disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

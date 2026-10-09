@@ -206,25 +206,518 @@
       "caption": "Diagnostic and clinical overview matrix for copd exacerbation (non-infective)."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "copd-exac-ni-real-image",
-      "title": "COPD exacerbation (non-infective): Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Treatment of Acute COPD Exacerbation",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-acute-copd-exacerbation",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 254-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "copd_exac_ni-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessing a COPD exacerbation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Definition",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Worse dyspnoea, cough or sputum over <14 days",
+              "op": "<",
+              "value": 14
+            },
+            {
+              "text": "Clinical diagnosis; spirometry does not help acutely"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "PaCO2",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": ">45",
+              "op": ">",
+              "value": 45
+            },
+            {
+              "text": "Hypercarbia"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "pH with raised PaCO2",
+          "cells": [
+            {
+              "text": "pH <=7.35",
+              "op": "<=",
+              "value": 7.35
+            },
+            {
+              "text": "{{hy:Acute respiratory acidosis; consider ventilatory support}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "pH for NIV benefit",
+          "cells": [
+            {
+              "text": "pH <7.30 in a stable patient",
+              "op": "<",
+              "value": 7.3
+            },
+            {
+              "text": "Severe exacerbation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest x-ray in moderate to severe distress",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 25% abnormal, mostly pneumonia"
+            },
+            {
+              "text": "Also shows heart failure, pneumothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood eosinophils",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Below 100 no ICS benefit; above 300 favours ICS"
+            },
+            {
+              "text": "Guides inhaled steroid use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedside signs",
+          "cells": [
+            {
+              "text": "Accessory muscles, paradoxical abdomen, cyanosis, confusion, broken sentences"
+            },
+            {
+              "text": "Impending respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen target",
+          "cells": [
+            {
+              "text": "SpO2 88% to 92% (PaO2 about 60 mm Hg)"
+            },
+            {
+              "text": "Do not withhold oxygen for fear of CO2"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison gives SpO2 88% to 92%; Merck targets PaO2 about 60 mm Hg; both aim to avoid hyperoxia."
+    },
+    {
+      "id": "copd_exac_ni-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic or trigger a COPD exacerbation",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "Fever, focal signs"
+            },
+            {
+              "text": "{{hy:Chest x-ray}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Oedema, orthopnoea"
+            },
+            {
+              "text": "Chest x-ray"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax",
+          "cells": [
+            {
+              "text": "Sudden asymmetric breath sounds"
+            },
+            {
+              "text": "Chest x-ray"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Incidence raised during exacerbations; pleuritic pain, hypoxia"
+            },
+            {
+              "text": "CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Air pollution, allergen or non-adherence",
+          "cells": [
+            {
+              "text": "Non-infective precipitants"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "New clubbing is not a COPD feature"
+            },
+            {
+              "text": "Chest imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "copd_exac_ni-treatment",
+      "kind": "treatment",
+      "title": "Treatment of COPD exacerbation",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Controlled oxygen",
+          "cells": [
+            {
+              "text": "{{hy:Hypoxaemia}}"
+            },
+            {
+              "text": "Venturi mask or nasal prongs; target PaO2 about 60 mm Hg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Albuterol (salbutamol)",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Cornerstone; continuous nebulisation if severe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ipratropium",
+          "cells": [
+            {
+              "text": "With or alternating with albuterol"
+            },
+            {
+              "text": "0.25 to 0.5 mg nebulised or 2 puffs every 4 to 6 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral prednisone",
+          "cells": [
+            {
+              "text": "All but mild exacerbations"
+            },
+            {
+              "text": "30 to 60 mg once daily for 5 to 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV methylprednisolone",
+          "cells": [
+            {
+              "text": "Cannot take oral"
+            },
+            {
+              "text": "60 to 500 mg once daily for 3 days, then taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Increased dyspnoea, sputum volume and purulence; purulence plus one other; or on ventilation"
+            },
+            {
+              "text": "Amoxicillin-clavulanate, macrolide or doxycycline for 7 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Noninvasive ventilation",
+          "cells": [
+            {
+              "text": "pH <7.30, haemodynamically stable",
+              "op": "<",
+              "value": 7.3
+            },
+            {
+              "text": "Or blood gases worsening on initial therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intubation",
+          "cells": [
+            {
+              "text": "Worsening gases or mental state, fatigue, NIV failure"
+            },
+            {
+              "text": "Invasive ventilation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Admission",
+          "cells": [
+            {
+              "text": "Age >65, frailty, comorbidity, prior respiratory failure, gas changes"
+            },
+            {
+              "text": "ICU if acidosis, severe hypoxaemia or arrhythmia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Methylxanthines are no longer used. Antibiotic doses not stated in the source opened."
+    },
+    {
+      "id": "copd_exac_ni-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Factors affecting clearance of theophylline",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Factors"
+      ],
+      "rows": [
+        {
+          "parameter": "Increased clearance",
+          "cells": [
+            {
+              "text": "Enzyme induction (rifampicin, phenobarbitone, ethanol); smoking (tobacco, marijuana); high-protein, low-carbohydrate diet; barbecued meat; childhood"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Decreased clearance",
+          "cells": [
+            {
+              "text": "Enzyme inhibition (cimetidine, erythromycin, ciprofloxacin, allopurinol, zileuton, zafirlukast); congestive heart failure; liver disease; pneumonia; viral infection and vaccination; high carbohydrate diet; old age"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "The source table is cut off at the bottom of the page after old age and may continue on the next page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "copd_exac_ni-dx-mgmt",
+      "title": "Assessment and management of COPD exacerbation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known COPD with worse dyspnoea, cough or sputum",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "SpO2, ABG if severe or confused; chest x-ray",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Pneumonia, pneumothorax, heart failure or PE?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat the alternative diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Controlled oxygen, albuterol plus ipratropium, prednisone",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Antibiotic criteria met?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Add antibiotic for 7 to 14 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "pH <7.30 or worsening gases?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Improves on NIV?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Intubate and ventilate",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ward or home care; review oxygen at 60 to 90 days",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
         }
       ]
     }

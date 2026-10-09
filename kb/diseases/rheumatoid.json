@@ -212,25 +212,1348 @@
       "caption": "Diagnostic and clinical overview matrix for rheumatoid arthritis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "rheumatoid-real-image",
-      "title": "Rheumatoid arthritis: Diagnostic Musculoskeletal Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-      "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Rheumatoid Arthritis",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/joint-disorders/rheumatoid-arthritis-ra",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 321-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 11-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rheumatoid-diagnostic",
+      "kind": "diagnostic",
+      "title": "2010 ACR/EULAR classification and key tests for RA",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Points or interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cortical Margins",
-          "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+          "parameter": "Entry requirement",
+          "cells": [
+            {
+              "text": "At least 1 joint with definite synovitis not better explained by another disease"
+            },
+            {
+              "text": "DIP, first CMC and first MTP joints excluded"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Trabecular Architecture",
-          "description": "Medullary bone density, lucencies, and subchondral mineralization."
+          "parameter": "Joints: 1 large joint",
+          "cells": [
+            {
+              "text": "1 large joint"
+            },
+            {
+              "text": "0 points",
+              "op": "=",
+              "value": 0
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Joint Articulation",
-          "description": "Joint space width, alignment, and periarticular soft tissue contours."
+          "parameter": "Joints: 2 to 10 large joints",
+          "cells": [
+            {
+              "text": "2 to 10 large joints",
+              "range": [
+                2,
+                10
+              ]
+            },
+            {
+              "text": "1 point",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Joints: 1 to 3 small joints",
+          "cells": [
+            {
+              "text": "1 to 3 small joints, with or without large",
+              "range": [
+                1,
+                3
+              ]
+            },
+            {
+              "text": "2 points",
+              "op": "=",
+              "value": 2
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Joints: 4 to 10 small joints",
+          "cells": [
+            {
+              "text": "4 to 10 small joints, with or without large",
+              "range": [
+                4,
+                10
+              ]
+            },
+            {
+              "text": "3 points",
+              "op": "=",
+              "value": 3
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Joints: over 10 joints",
+          "cells": [
+            {
+              "text": "Over 10 joints, at least 1 small",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "5 points",
+              "op": "=",
+              "value": 5
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serology: RF or anti-CCP",
+          "cells": [
+            {
+              "text": "Negative 0; low positive (1 to 3 times ULN) 2; high positive (3 times ULN or more) 3"
+            },
+            {
+              "text": "0 to 3 points",
+              "range": [
+                0,
+                3
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute-phase reactants",
+          "cells": [
+            {
+              "text": "Abnormal CRP or ESR"
+            },
+            {
+              "text": "1 point",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Symptom duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "6 weeks or more",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "1 point",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total score",
+          "cells": [
+            {
+              "text": "6 or more out of 10",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "{{hy:Definite RA (classification, not diagnostic, criteria)}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-CCP",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Specificity about 90 to 95%; sensitivity about 77 to 86%"
+            },
+            {
+              "text": "Most specific test; predicts worse prognosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid factor",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 70 to 75%"
+            },
+            {
+              "text": "Also in other CTDs, hepatitis C, older adults; negative RF does not exclude RA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial fluid WBC",
+          "unit": "/microL",
+          "cells": [
+            {
+              "text": "About 5,000 to 50,000, neutrophil predominant",
+              "range": [
+                5000,
+                50000
+              ]
+            },
+            {
+              "text": "Inflammatory; under 2,000 suggests osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morning stiffness",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Over 1 hour, improves with activity",
+              "op": ">",
+              "value": 1
+            },
+            {
+              "text": "Typical of inflammatory arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Periarticular osteopenia, symmetric narrowing, marginal erosions"
+            },
+            {
+              "text": "MRI and ultrasound detect synovitis and erosions earlier than x-ray"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source figures differ: anti-CCP specificity about 95% in Harrison versus 90% in Merck; RF positivity about 75% (Harrison) versus about 70% (Merck); synovial WBC 5,000 to 50,000 (Harrison) versus 10,000 to 50,000/microL (Merck)."
+    },
+    {
+      "id": "rheumatoid-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic rheumatoid arthritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteoarthritis",
+          "cells": [
+            {
+              "text": "DIP, PIP and thumb-base involvement, wrist spared, no RF or anti-CCP, synovial WBC under 2,000/microL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Rash, ulcers, renal disease, anti-dsDNA, low complement; reducible Jaccoud deformity without erosions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic arthritis",
+          "cells": [
+            {
+              "text": "Asymmetric, DIP involvement, dactylitis, spine or SI joints, psoriasis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive arthritis",
+          "cells": [
+            {
+              "text": "Preceding GI or GU infection, asymmetric large joints, enthesitis, conjunctivitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CPPD (pseudogout)",
+          "cells": [
+            {
+              "text": "Crystals in synovial fluid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Primary Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Prominent sicca symptoms, ANA and anti-Ro/SSA; RF positive in about half"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymyalgia rheumatica",
+          "cells": [
+            {
+              "text": "Older patient, shoulder and hip girdle rather than hands and feet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatitis C arthritis",
+          "cells": [
+            {
+              "text": "RF may be positive but anti-CCP absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Viral arthritis (parvovirus B19), Lyme disease",
+          "cells": [
+            {
+              "text": "Infectious exposure; listed mimics in Merck"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "rheumatoid-treatment",
+      "kind": "treatment",
+      "title": "Treatment of rheumatoid arthritis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Methotrexate 10 to 15 mg orally once weekly plus folic acid 1 mg daily",
+          "cells": [
+            {
+              "text": "{{hy:First-line DMARD}}"
+            },
+            {
+              "text": "Increase every 3 to 5 weeks to max 25 mg; monitor CBC, AST, ALT, albumin, creatinine every 8 to 12 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat-to-target",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Aim for remission or minimal disease activity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone under 7.5 mg/day",
+          "cells": [
+            {
+              "text": "Short-term bridge until DMARD works"
+            },
+            {
+              "text": "Intra-articular steroid no more than 3 to 4 times a year per joint"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NSAID (for example naproxen 250 to 500 mg twice daily)",
+          "cells": [
+            {
+              "text": "Symptom relief"
+            },
+            {
+              "text": "Do not prevent erosions; one NSAID at a time, lowest dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other csDMARDs: leflunomide, sulfasalazine, hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Alternative to or with methotrexate"
+            },
+            {
+              "text": "Triple therapy methotrexate plus hydroxychloroquine plus sulfasalazine is an option"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biologic: TNF inhibitor (adalimumab, etanercept, infliximab and others)",
+          "cells": [
+            {
+              "text": "Inadequate response to csDMARD"
+            },
+            {
+              "text": "Usually added to methotrexate; biologics not combined with each other"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other biologics: tocilizumab, sarilumab, abatacept, rituximab",
+          "cells": [
+            {
+              "text": "Alternatives; rituximab after other biologics fail"
+            },
+            {
+              "text": "Check hepatitis B before rituximab"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "JAK inhibitor (tofacitinib, baricitinib, upadacitinib)",
+          "cells": [
+            {
+              "text": "Targeted synthetic DMARD option"
+            },
+            {
+              "text": "Zoster vaccine first; higher MACE and cancer risk over age 50 with CV risk factors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pre-biologic screening",
+          "cells": [
+            {
+              "text": "Before biologic or JAK inhibitor"
+            },
+            {
+              "text": "TB test (PPD or IGRA), hepatitis B and C serology, vaccinations"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "rheumatoid-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    },
+    {
+      "id": "rheumatoid-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Classification criteria for rheumatoid arthritis (score)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Score"
+      ],
+      "rows": [
+        {
+          "parameter": "Joint involvement",
+          "cells": [
+            {
+              "text": "1 large joint (shoulder, elbow, hip, knee, ankle)"
+            },
+            {
+              "text": "0"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Joint involvement",
+          "cells": [
+            {
+              "text": "2 to 10 large joints"
+            },
+            {
+              "text": "1"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Joint involvement",
+          "cells": [
+            {
+              "text": "1 to 3 small joints (MCP, PIP, thumb IP, MTP, wrists)"
+            },
+            {
+              "text": "2"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Joint involvement",
+          "cells": [
+            {
+              "text": "4 to 10 small joints"
+            },
+            {
+              "text": "3"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Joint involvement",
+          "cells": [
+            {
+              "text": "More than 10 joints (at least 1 small joint)"
+            },
+            {
+              "text": "5"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Serology",
+          "cells": [
+            {
+              "text": "Negative RF and negative ACPA"
+            },
+            {
+              "text": "0"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Serology",
+          "cells": [
+            {
+              "text": "Low-positive RF or low-positive anti-CCP (up to 3 times ULN)"
+            },
+            {
+              "text": "2"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Serology",
+          "cells": [
+            {
+              "text": "High-positive RF or high-positive anti-CCP (above 3 times ULN)"
+            },
+            {
+              "text": "3"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Acute-phase reactants",
+          "cells": [
+            {
+              "text": "Normal CRP and normal ESR"
+            },
+            {
+              "text": "0"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Acute-phase reactants",
+          "cells": [
+            {
+              "text": "Abnormal CRP or abnormal ESR"
+            },
+            {
+              "text": "1"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Duration of symptoms",
+          "cells": [
+            {
+              "text": "Under 6 weeks"
+            },
+            {
+              "text": "0"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Duration of symptoms",
+          "cells": [
+            {
+              "text": "6 weeks or more"
+            },
+            {
+              "text": "1"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "rheumatoid-treatment-2",
+      "kind": "treatment",
+      "title": "Painful conditions that respond to tricyclic antidepressants",
+      "rowHeader": "Option",
+      "columns": [
+        "Condition"
+      ],
+      "rows": [
+        {
+          "parameter": "Responsive painful conditions",
+          "cells": [
+            {
+              "text": "Postherpetic neuralgia (a); diabetic neuropathy (a); tension headache (a); migraine headache (a); rheumatoid arthritis (a, b); chronic low back pain (b); cancer pain; central post-stroke pain"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Footnote texts a and b are not shown on the printed page. The last two items are printed run together."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rheumatoid-dx-mgmt",
+      "title": "Diagnosis and management of rheumatoid arthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symmetric small-joint swelling with morning stiffness over 1 hour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "RF, anti-CCP, ESR/CRP, hand and foot x-rays",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Fever, single hot joint or crystals suspected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aspirate joint: cell count, crystals, culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ACR/EULAR score 6 or more, no better explanation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Consider mimics: OA, SLE, PsA, PMR, viral arthritis",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Methotrexate with folic acid; short prednisone bridge",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Remission or low disease activity at follow-up?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Continue and monitor bloods every 8 to 12 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen TB, hepatitis B and C, update vaccines",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Add biologic or JAK inhibitor, or triple therapy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Infection and crystals excluded"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
         }
       ]
     }

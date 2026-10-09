@@ -198,25 +198,488 @@
       "caption": "Diagnostic and clinical overview matrix for tension-type headache."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "tension-ha-real-image",
-      "title": "Tension-type headache: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP, VA/DoD headache guideline summary, Am Fam Physician 2021",
+      "url": "https://www.aafp.org/pubs/afp/issues/2021/0900/p316.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Tension-Type Headache",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/headache/tension-type-headache",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 11-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tension_ha-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing tension-type headache",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Number of attacks",
+          "cells": [
+            {
+              "text": "At least 10 headaches",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Required before labelling the pattern"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Attack duration",
+          "cells": [
+            {
+              "text": "30 minutes to 7 days"
+            },
+            {
+              "text": "Typical episodic duration"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Pain characteristics (at least 2)",
+          "cells": [
+            {
+              "text": "Bilateral, pressing or tightening, mild to moderate, not worse with activity"
+            },
+            {
+              "text": "{{hy:Band-like, non-throbbing pain}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Associated features",
+          "cells": [
+            {
+              "text": "No nausea or vomiting; photophobia or phonophobia but not both"
+            },
+            {
+              "text": "Any migrainous feature points toward migraine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Episodic frequency",
+          "unit": "days/month",
+          "cells": [
+            {
+              "text": "<15",
+              "op": "<",
+              "value": 15
+            },
+            {
+              "text": "Episodic TTH"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic frequency",
+          "unit": "days/month",
+          "cells": [
+            {
+              "text": ">=15",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "Chronic TTH; look for triggers and medication overuse"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Required; abnormal exam needs CT or MRI"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Red flag: age at onset",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Onset after 50 (AAFP) or after 55 (Harrison)"
+            },
+            {
+              "text": "Investigate for secondary headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other red flags",
+          "cells": [
+            {
+              "text": "Thunderclap onset, focal signs, papilloedema, fever, worse with Valsalva, posture or exertion"
+            },
+            {
+              "text": "{{hy:Image the brain; consider lumbar puncture}}"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Definitions differ: AAFP (IHS main definition) allows photophobia or phonophobia but not both; Harrison prefers the stricter feature-free appendix definition. Red-flag onset age differs: AAFP uses over 50, Harrison over 55."
+    },
+    {
+      "id": "tension_ha-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic tension-type headache",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Migraine",
+          "cells": [
+            {
+              "text": "{{hy:Nausea, photophobia and phonophobia, throbbing, worse with movement}}"
+            },
+            {
+              "text": "Clinical history; over 90% of chronic featureless headache in primary care is migraine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication overuse headache",
+          "cells": [
+            {
+              "text": "Daily or near-daily headache after about 3 months of frequent acute medication"
+            },
+            {
+              "text": "Medication diary"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Giant cell arteritis",
+          "cells": [
+            {
+              "text": "Older patient, temporal artery tenderness, systemic signs"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subarachnoid haemorrhage, meningitis or tumour",
+          "cells": [
+            {
+              "text": "Sudden or worst-ever headache, fever, or abnormal neurology"
+            },
+            {
+              "text": "CT or MRI brain, lumbar puncture if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subdural haematoma",
+          "cells": [
+            {
+              "text": "Subacute worsening, drowsiness, older or anticoagulated"
+            },
+            {
+              "text": "CT brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute glaucoma",
+          "cells": [
+            {
+              "text": "Eye pain and visual change"
+            },
+            {
+              "text": "Intraocular pressure measurement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tension_ha-treatment",
+      "kind": "treatment",
+      "title": "Treatment of tension-type headache",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Paracetamol (acetaminophen)",
+          "cells": [
+            {
+              "text": "Acute attack"
+            },
+            {
+              "text": "{{hy:1000 mg; lower doses not effective}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ibuprofen",
+          "cells": [
+            {
+              "text": "Acute attack"
+            },
+            {
+              "text": "400 mg raises the chance of being pain-free at 2 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aspirin",
+          "cells": [
+            {
+              "text": "Acute mild to moderate attack"
+            },
+            {
+              "text": "Over the counter; dose not stated"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Limit acute medication",
+          "cells": [
+            {
+              "text": "Frequent headaches"
+            },
+            {
+              "text": "Overuse converts episodic headache to daily headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amitriptyline",
+          "cells": [
+            {
+              "text": "Chronic or frequent TTH prevention"
+            },
+            {
+              "text": "Benefit appears after about 3 months; dose not stated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Manual physical therapy",
+          "cells": [
+            {
+              "text": "Frequent TTH"
+            },
+            {
+              "text": "Modestly reduces frequency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Relaxation and stress management",
+          "cells": [
+            {
+              "text": "Chronic TTH, with medication"
+            },
+            {
+              "text": "Treat triggers: sleep, stress, TMJ or neck pain, eye strain"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "OnabotulinumtoxinA",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Not effective for TTH"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "tension_ha-treatment-2",
+      "kind": "treatment",
+      "title": "Painful conditions that respond to tricyclic antidepressants",
+      "rowHeader": "Option",
+      "columns": [
+        "Condition"
+      ],
+      "rows": [
+        {
+          "parameter": "Responsive painful conditions",
+          "cells": [
+            {
+              "text": "Postherpetic neuralgia (a); diabetic neuropathy (a); tension headache (a); migraine headache (a); rheumatoid arthritis (a, b); chronic low back pain (b); cancer pain; central post-stroke pain"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Footnote texts a and b are not shown on the printed page. The last two items are printed run together."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tension_ha-dx-mgmt",
+      "title": "Diagnosis and management of tension-type headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral pressing headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Any red flag (thunderclap, focal signs, fever, new after 50)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate secondary cause: CT or MRI, lumbar puncture if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Nausea, throbbing, or both photophobia and phonophobia?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Manage as migraine",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Acute: paracetamol 1000 mg or ibuprofen 400 mg",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Headache on 15 or more days a month?",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Check medication overuse; treat sleep, stress, neck triggers",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Amitriptyline prophylaxis, review at 3 months; manual therapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Episodic TTH: simple analgesics as needed, limit use",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "No"
         }
       ]
     }

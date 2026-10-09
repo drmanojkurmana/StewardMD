@@ -1,176 +1,472 @@
 {
- "id": "familial_exudative_vitreoretinopathy",
- "name": "Familial exudative vitreoretinopathy",
- "aliases": [
-  "FEVR",
-  "Criswick-Schepens syndrome",
-  "FZD4",
-  "LRP5",
-  "TSPAN12",
-  "NDP"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Inherited disorder of retinal vascular development in which the peripheral retina fails to vascularise, resembling retinopathy of prematurity but occurring in full-term infants without oxygen exposure",
-   "Caused by mutations in Wnt/Norrin signalling genes (FZD4, LRP5, TSPAN12, NDP), with autosomal dominant, autosomal recessive and X-linked inheritance",
-   "Hallmark findings are a sharply demarcated avascular peripheral retina and, in advanced disease, temporal dragging of the retinal vessels and macula (dragged disc), falciform folds and tractional retinal detachment",
-   "Highly asymmetric and variable, ranging from asymptomatic peripheral avascularity found only on angiography to bilateral tractional detachment and blindness",
-   "Fluorescein angiography, especially wide-field, is key to demonstrating the peripheral avascular zone, leakage and abnormal vessels, and to screening at-risk relatives",
-   "Neovascularisation from the avascular junction can cause exudation, vitreous haemorrhage and retinal detachment",
-   "Management is guided by stage and includes surveillance, peripheral laser ablation or anti-angiogenic and surgical intervention for progressive disease, plus genetic counselling"
+  "id": "familial_exudative_vitreoretinopathy",
+  "name": "Familial exudative vitreoretinopathy",
+  "aliases": [
+    "FEVR",
+    "Criswick-Schepens syndrome",
+    "FZD4",
+    "LRP5",
+    "TSPAN12",
+    "NDP"
   ],
-  "pathophysiology": "Familial exudative vitreoretinopathy results from defective Norrin/Wnt-beta-catenin signalling, which is required for normal development of the retinal and inner-ear vasculature. Mutations in FZD4, LRP5, TSPAN12 or NDP impair this pathway, so the peripheral retina remains incompletely vascularised. The resulting retinal ischaemia drives release of angiogenic factors, producing abnormal new vessels, exudation, fibrovascular proliferation and vitreoretinal traction. Traction can drag the macula and vessels temporally and lead to falciform folds and tractional or combined retinal detachment.",
-  "additionalDifferentials": [
-   "Retinopathy of prematurity",
-   "Norrie disease",
-   "Coats disease",
-   "Persistent fetal vasculature",
-   "Incontinentia pigmenti with retinal vasculopathy",
-   "Toxocariasis or other causes of a peripheral retinal mass or traction"
-  ],
-  "additionalInvestigations": [
-   "Wide-field fluorescein angiography to define the peripheral avascular zone, leakage and neovascularisation",
-   "Dilated peripheral fundus examination, often under anaesthesia in infants",
-   "Angiographic screening of first-degree relatives who may be subclinically affected",
-   "Optical coherence tomography for macular traction and dragging",
-   "B-scan ultrasonography when media are opaque",
-   "Molecular genetic testing of the Wnt/Norrin signalling genes"
-  ],
-  "redFlags": [
-   "Signs of tractional or rhegmatogenous retinal detachment requiring urgent vitreoretinal referral",
-   "Vitreous haemorrhage or progressive exudation",
-   "Leukocoria or strabismus in an infant suggesting advanced disease",
-   "An affected relative prompting screening of the whole family given variable expressivity"
-  ],
-  "prognosis": "Prognosis depends heavily on stage: mild peripheral avascularity may never threaten vision, whereas progression to tractional detachment or falciform folds can cause severe, sometimes bilateral, visual loss; early detection and treatment improve outcomes.",
-  "pitfalls": [
-   "Assuming a normal-looking posterior pole excludes disease when the periphery is avascular",
-   "Not screening relatives, allowing progressive disease to be missed in mildly affected family members",
-   "Confusing it with retinopathy of prematurity without a birth and oxygen history",
-   "Underestimating the asymmetry and failing to examine the fellow eye carefully"
-  ],
-  "references": [
-   "Ryan's Retina",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Laser photocoagulation, or cryotherapy, of the peripheral avascular retina to ablate ischaemic tissue and halt neovascular progression",
-   "Anti-VEGF therapy as an adjunct for active neovascularisation and exudation",
-   "Vitreoretinal surgery with scleral buckling or vitrectomy for tractional or combined retinal detachment",
-   "Regular dilated fundus examination with wide-field fluorescein angiography to stage disease and detect progression",
-   "Observation of mild peripheral avascularity that does not threaten vision",
-   "Angiographic screening and genetic counselling of at-risk relatives given autosomal dominant, recessive and X-linked inheritance",
-   "Low-vision rehabilitation and paediatric ophthalmology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_exudative_vitreoretinopathy-pathway",
-   "title": "Familial exudative vitreoretinopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Inherited disorder of retinal vascular development in which the peripheral retina fails to vascularise, resembling retinopathy of prematurity but occurring in full-term infants without oxygen exposure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of tractional or rhegmatogenous retinal detachment requiring urgent vitreoretinal referral",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Wide-field fluorescein angiography to define the peripheral avascular zone, leakage and neovascularisation, Dilated peripheral fundus examination, often under anaesthesia in infants, Angiographic screening of first-degree"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Laser photocoagulation, or cryotherapy, of the peripheral avascular retina to ablate ischaemic tissue and halt neovascular progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal-looking posterior pole excludes disease when the periphery is avascular"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial exudative vitreoretinopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_exudative_vitreoretinopathy-matrix",
-   "title": "Familial exudative vitreoretinopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Inherited disorder of retinal vascular development in which the peripheral retina fails to vascularise, resembling retinopathy of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Inherited disorder of retinal vascular development in which the peripheral retina fails to vascularise, resembling retinopathy of prematurity but occurring in full-term infants without oxygen exposure",
+      "Caused by mutations in Wnt/Norrin signalling genes (FZD4, LRP5, TSPAN12, NDP), with autosomal dominant, autosomal recessive and X-linked inheritance",
+      "Hallmark findings are a sharply demarcated avascular peripheral retina and, in advanced disease, temporal dragging of the retinal vessels and macula (dragged disc), falciform folds and tractional retinal detachment",
+      "Highly asymmetric and variable, ranging from asymptomatic peripheral avascularity found only on angiography to bilateral tractional detachment and blindness",
+      "Fluorescein angiography, especially wide-field, is key to demonstrating the peripheral avascular zone, leakage and abnormal vessels, and to screening at-risk relatives",
+      "Neovascularisation from the avascular junction can cause exudation, vitreous haemorrhage and retinal detachment",
+      "Management is guided by stage and includes surveillance, peripheral laser ablation or anti-angiogenic and surgical intervention for progressive disease, plus genetic counselling"
     ],
-    [
-     "Key Investigations",
-     "Wide-field fluorescein angiography to define the peripheral avascular zone, leakage and neovascularisation, Dilated peripheral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Familial exudative vitreoretinopathy results from defective Norrin/Wnt-beta-catenin signalling, which is required for normal development of the retinal and inner-ear vasculature. Mutations in FZD4, LRP5, TSPAN12 or NDP impair this pathway, so the peripheral retina remains incompletely vascularised. The resulting retinal ischaemia drives release of angiogenic factors, producing abnormal new vessels, exudation, fibrovascular proliferation and vitreoretinal traction. Traction can drag the macula and vessels temporally and lead to falciform folds and tractional or combined retinal detachment.",
+    "additionalDifferentials": [
+      "Retinopathy of prematurity",
+      "Norrie disease",
+      "Coats disease",
+      "Persistent fetal vasculature",
+      "Incontinentia pigmenti with retinal vasculopathy",
+      "Toxocariasis or other causes of a peripheral retinal mass or traction"
     ],
-    [
-     "Primary Differentials",
-     "Retinopathy of prematurity, Norrie disease, Coats disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Wide-field fluorescein angiography to define the peripheral avascular zone, leakage and neovascularisation",
+      "Dilated peripheral fundus examination, often under anaesthesia in infants",
+      "Angiographic screening of first-degree relatives who may be subclinically affected",
+      "Optical coherence tomography for macular traction and dragging",
+      "B-scan ultrasonography when media are opaque",
+      "Molecular genetic testing of the Wnt/Norrin signalling genes"
     ],
-    [
-     "Management Strategy",
-     "Laser photocoagulation, or cryotherapy, of the peripheral avascular retina to ablate ischaemic tissue and halt neovascular",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of tractional or rhegmatogenous retinal detachment requiring urgent vitreoretinal referral",
+      "Vitreous haemorrhage or progressive exudation",
+      "Leukocoria or strabismus in an infant suggesting advanced disease",
+      "An affected relative prompting screening of the whole family given variable expressivity"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal-looking posterior pole excludes disease when the periphery is avascular",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends heavily on stage: mild peripheral avascularity may never threaten vision, whereas progression to tractional detachment or falciform folds can cause severe, sometimes bilateral, visual loss; early detection and treatment improve outcomes.",
+    "pitfalls": [
+      "Assuming a normal-looking posterior pole excludes disease when the periphery is avascular",
+      "Not screening relatives, allowing progressive disease to be missed in mildly affected family members",
+      "Confusing it with retinopathy of prematurity without a birth and oxygen history",
+      "Underestimating the asymmetry and failing to examine the fellow eye carefully"
+    ],
+    "references": [
+      "Ryan's Retina",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Laser photocoagulation, or cryotherapy, of the peripheral avascular retina to ablate ischaemic tissue and halt neovascular progression",
+      "Anti-VEGF therapy as an adjunct for active neovascularisation and exudation",
+      "Vitreoretinal surgery with scleral buckling or vitrectomy for tractional or combined retinal detachment",
+      "Regular dilated fundus examination with wide-field fluorescein angiography to stage disease and detect progression",
+      "Observation of mild peripheral avascularity that does not threaten vision",
+      "Angiographic screening and genetic counselling of at-risk relatives given autosomal dominant, recessive and X-linked inheritance",
+      "Low-vision rehabilitation and paediatric ophthalmology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial exudative vitreoretinopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-exudative-vitreoretinopathy-real-image",
-   "title": "Familial exudative vitreoretinopathy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "familial_exudative_vitreoretinopathy-pathway",
+      "title": "Familial exudative vitreoretinopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Inherited disorder of retinal vascular development in which the peripheral retina fails to vascularise, resembling retinopathy of prematurity but occurring in full-term infants without oxygen exposure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of tractional or rhegmatogenous retinal detachment requiring urgent vitreoretinal referral",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Wide-field fluorescein angiography to define the peripheral avascular zone, leakage and neovascularisation, Dilated peripheral fundus examination, often under anaesthesia in infants, Angiographic screening of first-degree"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Laser photocoagulation, or cryotherapy, of the peripheral avascular retina to ablate ischaemic tissue and halt neovascular progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal-looking posterior pole excludes disease when the periphery is avascular"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial exudative vitreoretinopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_exudative_vitreoretinopathy-matrix",
+      "title": "Familial exudative vitreoretinopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Inherited disorder of retinal vascular development in which the peripheral retina fails to vascularise, resembling retinopathy of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Wide-field fluorescein angiography to define the peripheral avascular zone, leakage and neovascularisation, Dilated peripheral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Retinopathy of prematurity, Norrie disease, Coats disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Laser photocoagulation, or cryotherapy, of the peripheral avascular retina to ablate ischaemic tissue and halt neovascular",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal-looking posterior pole excludes disease when the periphery is avascular",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial exudative vitreoretinopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_exudative_vitreoretinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide-field fluorescein angiography",
+          "cells": [
+            {
+              "text": "Peripheral avascular zone, leakage and neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated peripheral fundus examination",
+          "cells": [
+            {
+              "text": "Often under anaesthesia in infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiographic screening of first-degree relatives",
+          "cells": [
+            {
+              "text": "Subclinical disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular traction and dragging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Opaque media"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of Wnt/Norrin signalling genes",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_exudative_vitreoretinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinopathy of prematurity",
+          "cells": [
+            {
+              "text": "Distinguished by the absence of a birth and oxygen history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coats disease",
+          "cells": [
+            {
+              "text": "Peripheral vascular abnormality; wide-field angiography is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Norrie disease",
+          "cells": [
+            {
+              "text": "A distinct inherited retinal disorder considered in infants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_exudative_vitreoretinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Laser photocoagulation or cryotherapy",
+          "cells": [
+            {
+              "text": "Ablates ischaemic peripheral retina and halts neovascular progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-VEGF therapy",
+          "cells": [
+            {
+              "text": "Adjunct for active neovascularisation and exudation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreoretinal surgery",
+          "cells": [
+            {
+              "text": "Scleral buckling or vitrectomy for tractional or combined detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular dilated examination and wide-field angiography",
+          "cells": [
+            {
+              "text": "Stages disease and detects progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild peripheral avascularity that does not threaten vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiographic screening and genetic counselling of relatives",
+          "cells": [
+            {
+              "text": "Autosomal dominant, recessive and X-linked inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation and paediatric ophthalmology",
+          "cells": [
+            {
+              "text": "Follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_exudative_vitreoretinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Familial exudative vitreoretinopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Peripheral avascular retina found in an infant or child, or an affected relative",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (tractional or rhegmatogenous detachment, vitreous haemorrhage, leukocoria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vitreoretinal referral for detachment or haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wide-field fluorescein angiography; dilated peripheral examination; OCT; gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Peripheral avascularity with neovascularisation or exudation on angiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe mild peripheral avascularity; screen relatives for subclinical disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Laser photocoagulation or cryotherapy of avascular peripheral retina",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anti-VEGF therapy for active exudation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vitreoretinal surgery for tractional detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular dilated examination and angiography to stage progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild avascularity may never threaten vision; progression to detachment is the risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

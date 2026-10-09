@@ -1,177 +1,502 @@
 {
- "id": "kcnt1_epilepsy",
- "name": "KCNT1-related epilepsy",
- "aliases": [
-  "KCNT1",
-  "Slack channel epilepsy",
-  "KNa1.1 epilepsy",
-  "ADNFLE (KCNT1)",
-  "sleep-related hypermotor epilepsy KCNT1"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / ILAE",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by variants in KCNT1, which encodes the sodium-activated potassium channel Slack (KNa1.1) that regulates neuronal firing and the slow afterhyperpolarisation",
-   "Almost all pathogenic variants are gain-of-function, increasing potassium current in a way that paradoxically enhances network excitability",
-   "The two most recognised phenotypes are epilepsy of infancy with migrating focal seizures and autosomal dominant sleep-related hypermotor (nocturnal frontal lobe) epilepsy",
-   "The migrating focal seizure phenotype presents in early infancy with near-continuous multifocal seizures that shift between hemispheres on electroencephalography and severe developmental impairment",
-   "The sleep-related hypermotor phenotype can be familial, with clusters of brief nocturnal motor seizures, and may be associated with psychiatric and cognitive comorbidity",
-   "Quinidine has been trialled as a targeted blocker of the gain-of-function channel, but clinical responses have been inconsistent and it requires cardiac monitoring",
-   "Seizures are frequently drug-resistant, and multidisciplinary supportive care is central to management"
+  "id": "kcnt1_epilepsy",
+  "name": "KCNT1-related epilepsy",
+  "aliases": [
+    "KCNT1",
+    "Slack channel epilepsy",
+    "KNa1.1 epilepsy",
+    "ADNFLE (KCNT1)",
+    "sleep-related hypermotor epilepsy KCNT1"
   ],
-  "pathophysiology": "KCNT1 encodes Slack (KNa1.1), a sodium-activated potassium channel that contributes to the slow afterhyperpolarisation and shapes the timing and adaptation of neuronal firing. Pathogenic variants are predominantly gain-of-function, producing constitutively increased potassium current. Although greater potassium conductance might be expected to dampen activity, in affected networks it disrupts normal firing patterns and inhibitory balance, promoting the intense multifocal or frontal-predominant seizures seen clinically. The gain-of-function mechanism underlies the rationale for quinidine, which partially blocks the channel, though its clinical utility has proven variable.",
-  "additionalDifferentials": [
-   "SCN1A-related Dravet syndrome",
-   "SCN2A and SCN8A developmental and epileptic encephalopathies",
-   "CHRNA4/CHRNB2 autosomal dominant sleep-related hypermotor epilepsy",
-   "DEPDC5 and other GATOR1 familial focal epilepsies",
-   "Structural focal epilepsy from focal cortical dysplasia",
-   "Other genetic causes of epilepsy of infancy with migrating focal seizures"
-  ],
-  "additionalInvestigations": [
-   "Epilepsy gene panel or whole-exome sequencing to confirm the KCNT1 variant",
-   "Prolonged video electroencephalography to demonstrate migrating multifocal ictal patterns or nocturnal frontal seizures",
-   "Brain magnetic resonance imaging to exclude a structural lesion",
-   "Electrocardiography and cardiac assessment before and during any quinidine trial",
-   "Developmental and cognitive evaluation",
-   "Family history and segregation analysis in dominant sleep-related hypermotor cases"
-  ],
-  "redFlags": [
-   "Continuous or near-continuous migrating seizures with developmental arrest in infancy",
-   "Cardiac conduction abnormalities, especially with quinidine exposure",
-   "Sudden clustering of nocturnal seizures with injury risk",
-   "Progressive cognitive or behavioural deterioration"
-  ],
-  "prognosis": "The migrating focal seizure phenotype generally has a poor outcome with refractory seizures and severe developmental impairment, whereas the sleep-related hypermotor phenotype varies from relatively mild to disabling, sometimes with significant psychiatric and cognitive comorbidity.",
-  "pitfalls": [
-   "Expecting a uniform quinidine response, when benefit is inconsistent and requires careful cardiac monitoring",
-   "Assuming a potassium-channel gain-of-function must reduce excitability rather than disrupt network firing",
-   "Missing the familial nature of the sleep-related hypermotor phenotype and failing to counsel relatives",
-   "Mislabelling nocturnal hypermotor seizures as parasomnias"
-  ],
-  "references": [
-   "GeneReviews: KCNT1-Related Epilepsy",
-   "ILAE resources on epilepsy of infancy with migrating focal seizures and sleep-related hypermotor epilepsy"
-  ],
-  "crossLinks": [
-   "epilepsy_infancy_migrating_focal_seizures"
-  ],
-  "management": [
-   "Trial of quinidine as a targeted blocker of the gain-of-function channel in selected cases, recognising inconsistent responses and the need for cardiac monitoring",
-   "Broad-spectrum antiseizure medications for the migrating focal seizures, which are typically drug-resistant",
-   "Adjunctive options such as cannabidiol and consideration of the ketogenic diet for refractory seizures",
-   "Electrocardiography and cardiac surveillance for QT prolongation before and during any quinidine trial",
-   "Seizure control for the sleep-related hypermotor phenotype, with attention to associated psychiatric and cognitive comorbidity",
-   "Multidisciplinary developmental support and intensive care with rescue planning for the severe migrating focal seizure phenotype",
-   "Clinical genetics counselling, including segregation analysis in autosomal dominant sleep-related hypermotor families"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kcnt1_epilepsy-pathway",
-   "title": "KCNT1-related epilepsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by variants in KCNT1, which encodes the sodium-activated potassium channel Slack (KNa1.1) that regulates neuronal firing and the slow afterhyperpolarisation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Continuous or near-continuous migrating seizures with developmental arrest in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to confirm the KCNT1 variant, Prolonged video electroencephalography to demonstrate migrating multifocal ictal patterns or nocturnal frontal seizures, Brain magnetic resonance"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Trial of quinidine as a targeted blocker of the gain-of-function channel in selected cases, recognising inconsistent responses and the need for cardiac monitoring"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting a uniform quinidine response, when benefit is inconsistent and requires careful cardiac monitoring"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kcnt1-related epilepsy."
-  }
- ],
- "tables": [
-  {
-   "id": "kcnt1_epilepsy-matrix",
-   "title": "KCNT1-related epilepsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by variants in KCNT1, which encodes the sodium-activated potassium channel Slack (KNa1.1) that regulates neuronal firing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / ILAE",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by variants in KCNT1, which encodes the sodium-activated potassium channel Slack (KNa1.1) that regulates neuronal firing and the slow afterhyperpolarisation",
+      "Almost all pathogenic variants are gain-of-function, increasing potassium current in a way that paradoxically enhances network excitability",
+      "The two most recognised phenotypes are epilepsy of infancy with migrating focal seizures and autosomal dominant sleep-related hypermotor (nocturnal frontal lobe) epilepsy",
+      "The migrating focal seizure phenotype presents in early infancy with near-continuous multifocal seizures that shift between hemispheres on electroencephalography and severe developmental impairment",
+      "The sleep-related hypermotor phenotype can be familial, with clusters of brief nocturnal motor seizures, and may be associated with psychiatric and cognitive comorbidity",
+      "Quinidine has been trialled as a targeted blocker of the gain-of-function channel, but clinical responses have been inconsistent and it requires cardiac monitoring",
+      "Seizures are frequently drug-resistant, and multidisciplinary supportive care is central to management"
     ],
-    [
-     "Key Investigations",
-     "Epilepsy gene panel or whole-exome sequencing to confirm the KCNT1 variant, Prolonged video electroencephalography to demonstrate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "KCNT1 encodes Slack (KNa1.1), a sodium-activated potassium channel that contributes to the slow afterhyperpolarisation and shapes the timing and adaptation of neuronal firing. Pathogenic variants are predominantly gain-of-function, producing constitutively increased potassium current. Although greater potassium conductance might be expected to dampen activity, in affected networks it disrupts normal firing patterns and inhibitory balance, promoting the intense multifocal or frontal-predominant seizures seen clinically. The gain-of-function mechanism underlies the rationale for quinidine, which partially blocks the channel, though its clinical utility has proven variable.",
+    "additionalDifferentials": [
+      "SCN1A-related Dravet syndrome",
+      "SCN2A and SCN8A developmental and epileptic encephalopathies",
+      "CHRNA4/CHRNB2 autosomal dominant sleep-related hypermotor epilepsy",
+      "DEPDC5 and other GATOR1 familial focal epilepsies",
+      "Structural focal epilepsy from focal cortical dysplasia",
+      "Other genetic causes of epilepsy of infancy with migrating focal seizures"
     ],
-    [
-     "Primary Differentials",
-     "SCN1A-related Dravet syndrome, SCN2A and SCN8A developmental and epileptic encephalopathies, CHRNA4/CHRNB2 autosomal dominant",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Epilepsy gene panel or whole-exome sequencing to confirm the KCNT1 variant",
+      "Prolonged video electroencephalography to demonstrate migrating multifocal ictal patterns or nocturnal frontal seizures",
+      "Brain magnetic resonance imaging to exclude a structural lesion",
+      "Electrocardiography and cardiac assessment before and during any quinidine trial",
+      "Developmental and cognitive evaluation",
+      "Family history and segregation analysis in dominant sleep-related hypermotor cases"
     ],
-    [
-     "Management Strategy",
-     "Trial of quinidine as a targeted blocker of the gain-of-function channel in selected cases, recognising inconsistent responses",
-     "Core treatment modality"
+    "redFlags": [
+      "Continuous or near-continuous migrating seizures with developmental arrest in infancy",
+      "Cardiac conduction abnormalities, especially with quinidine exposure",
+      "Sudden clustering of nocturnal seizures with injury risk",
+      "Progressive cognitive or behavioural deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting a uniform quinidine response, when benefit is inconsistent and requires careful cardiac monitoring",
-     "Prevent diagnostic or management error"
+    "prognosis": "The migrating focal seizure phenotype generally has a poor outcome with refractory seizures and severe developmental impairment, whereas the sleep-related hypermotor phenotype varies from relatively mild to disabling, sometimes with significant psychiatric and cognitive comorbidity.",
+    "pitfalls": [
+      "Expecting a uniform quinidine response, when benefit is inconsistent and requires careful cardiac monitoring",
+      "Assuming a potassium-channel gain-of-function must reduce excitability rather than disrupt network firing",
+      "Missing the familial nature of the sleep-related hypermotor phenotype and failing to counsel relatives",
+      "Mislabelling nocturnal hypermotor seizures as parasomnias"
+    ],
+    "references": [
+      "GeneReviews: KCNT1-Related Epilepsy",
+      "ILAE resources on epilepsy of infancy with migrating focal seizures and sleep-related hypermotor epilepsy"
+    ],
+    "crossLinks": [
+      "epilepsy_infancy_migrating_focal_seizures"
+    ],
+    "management": [
+      "Trial of quinidine as a targeted blocker of the gain-of-function channel in selected cases, recognising inconsistent responses and the need for cardiac monitoring",
+      "Broad-spectrum antiseizure medications for the migrating focal seizures, which are typically drug-resistant",
+      "Adjunctive options such as cannabidiol and consideration of the ketogenic diet for refractory seizures",
+      "Electrocardiography and cardiac surveillance for QT prolongation before and during any quinidine trial",
+      "Seizure control for the sleep-related hypermotor phenotype, with attention to associated psychiatric and cognitive comorbidity",
+      "Multidisciplinary developmental support and intensive care with rescue planning for the severe migrating focal seizure phenotype",
+      "Clinical genetics counselling, including segregation analysis in autosomal dominant sleep-related hypermotor families"
     ]
-   ],
-   "caption": "Overview comparison matrix for kcnt1-related epilepsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kcnt1-epilepsy-real-image",
-   "title": "KCNT1-related epilepsy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "kcnt1_epilepsy-pathway",
+      "title": "KCNT1-related epilepsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by variants in KCNT1, which encodes the sodium-activated potassium channel Slack (KNa1.1) that regulates neuronal firing and the slow afterhyperpolarisation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Continuous or near-continuous migrating seizures with developmental arrest in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to confirm the KCNT1 variant, Prolonged video electroencephalography to demonstrate migrating multifocal ictal patterns or nocturnal frontal seizures, Brain magnetic resonance"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Trial of quinidine as a targeted blocker of the gain-of-function channel in selected cases, recognising inconsistent responses and the need for cardiac monitoring"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting a uniform quinidine response, when benefit is inconsistent and requires careful cardiac monitoring"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kcnt1-related epilepsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kcnt1_epilepsy-matrix",
+      "title": "KCNT1-related epilepsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by variants in KCNT1, which encodes the sodium-activated potassium channel Slack (KNa1.1) that regulates neuronal firing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Epilepsy gene panel or whole-exome sequencing to confirm the KCNT1 variant, Prolonged video electroencephalography to demonstrate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SCN1A-related Dravet syndrome, SCN2A and SCN8A developmental and epileptic encephalopathies, CHRNA4/CHRNB2 autosomal dominant",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Trial of quinidine as a targeted blocker of the gain-of-function channel in selected cases, recognising inconsistent responses",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting a uniform quinidine response, when benefit is inconsistent and requires careful cardiac monitoring",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kcnt1-related epilepsy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kcnt1_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "KCNT1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged video EEG",
+          "cells": [
+            {
+              "text": "Migrating focal or nocturnal frontal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG before and during quinidine",
+          "cells": [
+            {
+              "text": "QT prolongation or conduction change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and cognitive evaluation",
+          "cells": [
+            {
+              "text": "Impact of disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family segregation analysis",
+          "cells": [
+            {
+              "text": "Dominant sleep-related hypermotor cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kcnt1_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dravet syndrome",
+          "cells": [
+            {
+              "text": "SCN1A, with febrile and prolonged seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN2A or SCN8A encephalopathy",
+          "cells": [
+            {
+              "text": "Sodium channel genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHRNA4 or CHRNB2 hypermotor epilepsy",
+          "cells": [
+            {
+              "text": "Sleep-related hypermotor seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DEPDC5 familial focal epilepsy",
+          "cells": [
+            {
+              "text": "GATOR1 pathway, focal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal cortical dysplasia",
+          "cells": [
+            {
+              "text": "Structural lesion on MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kcnt1_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Quinidine trial",
+          "cells": [
+            {
+              "text": "Targeted block of gain-of-function channel; response inconsistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "ECG surveillance for QT prolongation before and during quinidine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migrating focal seizures",
+          "cells": [
+            {
+              "text": "Broad-spectrum antiseizure medication; often drug-resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuncts",
+          "cells": [
+            {
+              "text": "Cannabidiol or ketogenic diet for refractory seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypermotor phenotype",
+          "cells": [
+            {
+              "text": "Seizure control with attention to psychiatric comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental",
+          "cells": [
+            {
+              "text": "Multidisciplinary support and rescue planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Counselling and segregation analysis in dominant families"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kcnt1_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of KCNT1-related epilepsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with migrating focal seizures, or adult-onset nocturnal frontal seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Continuous seizures with developmental arrest, or cardiac conduction abnormality?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric neurology review; cardiac assessment before quinidine",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome, prolonged video EEG, MRI, ECG, developmental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KCNT1 variant with matching epilepsy phenotype confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Dravet, SCN2A, CHRNA4 or DEPDC5; reclassify nocturnal events",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Quinidine trial with ECG and cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure medication for migrating seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cannabidiol or ketogenic diet for refractory seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Seizure control for sleep-related hypermotor epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetics counselling and segregation analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often drug-resistant; quinidine response inconsistent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

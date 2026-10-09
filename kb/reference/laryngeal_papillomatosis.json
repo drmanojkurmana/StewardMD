@@ -1,173 +1,471 @@
 {
- "id": "laryngeal_papillomatosis",
- "name": "Laryngeal papillomatosis",
- "aliases": [
-  "recurrent respiratory papillomatosis",
-  "RRP",
-  "juvenile laryngeal papillomatosis",
-  "laryngeal papilloma"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common benign neoplasm of the larynx, caused by human papillomavirus, chiefly types 6 and 11",
-   "It occurs in a juvenile form, typically multiple and more aggressive, and an adult form that is often more localised",
-   "The usual presentation is progressive hoarseness or a weak or abnormal cry in a child, and with growth it can cause stridor and airway obstruction",
-   "Juvenile disease is thought to be acquired through vertical transmission from maternal genital HPV infection during birth",
-   "Laryngoscopy shows soft, warty, exophytic lesions favouring the vocal cords and other sites of squamous-ciliary junction",
-   "Because there is no definitive cure, treatment centres on repeated conservative surgical removal (commonly microlaryngeal or laser) to maintain the airway and voice while preserving normal tissue",
-   "The disease is characterised by frequent recurrence and can spread down the tracheobronchial tree, and a tracheostomy is best avoided as it may promote distal spread",
-   "Malignant transformation is uncommon but recognised, particularly with certain HPV types or after irradiation, so persistent or atypical lesions warrant biopsy"
+  "id": "laryngeal_papillomatosis",
+  "name": "Laryngeal papillomatosis",
+  "aliases": [
+    "recurrent respiratory papillomatosis",
+    "RRP",
+    "juvenile laryngeal papillomatosis",
+    "laryngeal papilloma"
   ],
-  "pathophysiology": "Laryngeal papillomatosis results from infection of the respiratory epithelium by human papillomavirus, most often types 6 and 11, which drives proliferation of squamous epithelium into finger-like papillary fronds supported by fibrovascular cores. Lesions favour the transition zones between squamous and ciliary epithelium, so the vocal cords are commonly affected. In children the virus is usually acquired at birth from an infected maternal genital tract, and the immature or immunologically naive host tends to develop multiple, recurrent lesions. Latent virus in adjacent normal-looking mucosa underlies the persistent recurrence after removal, and lesions may seed distally in the airway.",
-  "additionalDifferentials": [
-   "Vocal cord nodules or polyps",
-   "Laryngeal keratosis or leukoplakia",
-   "Laryngeal carcinoma",
-   "Croup or other infective laryngitis in a child",
-   "Vocal cord granuloma",
-   "Subglottic haemangioma"
-  ],
-  "additionalInvestigations": [
-   "Flexible and rigid laryngoscopy to identify and map the papillomas",
-   "Microlaryngoscopy under anaesthesia for detailed assessment and tissue removal",
-   "Histopathology of excised tissue to confirm the diagnosis and exclude dysplasia or malignancy",
-   "HPV typing where available, as certain types carry higher risk",
-   "Airway assessment for distal (tracheobronchial) spread in aggressive disease"
-  ],
-  "redFlags": [
-   "Progressive stridor and airway obstruction from bulky laryngeal disease requiring urgent airway management",
-   "Distal spread into the trachea and bronchi indicating aggressive disease",
-   "Features suggesting malignant transformation such as a firm, ulcerated, or rapidly enlarging lesion",
-   "Rapid recurrence needing frequent surgical intervention"
-  ],
-  "prognosis": "The course is unpredictable and marked by recurrence; juvenile disease may require many procedures over years before eventual regression around puberty in some children, while adult disease is often more limited, and although malignant change is rare it is an important long-term consideration.",
-  "pitfalls": [
-   "Aggressive surgery that damages the vocal cords and causes scarring or web formation",
-   "Performing a tracheostomy that may encourage distal tracheobronchial spread",
-   "Assuming benignity and not biopsying atypical or persistent lesions",
-   "Overlooking airway compromise in a child presenting only with a hoarse cry"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no curative drug, so treatment centres on repeated microlaryngoscopic or laser removal of papillomas to preserve airway patency and voice while conserving normal tissue",
-   "Consider adjuvant intralesional cidofovir or systemic bevacizumab for aggressive, multifocal, or rapidly recurring disease, and offer HPV vaccination",
-   "Relieve airway obstruction urgently in children with bulky disease and stridor, avoiding tracheostomy where feasible to limit distal spread",
-   "Support voice with speech-and-language therapy and minimise iatrogenic scarring during repeated procedures",
-   "Monitor for recurrence and distal tracheobronchial seeding, with HPV typing to identify higher-risk genotypes",
-   "Confirm histology of excised tissue to exclude dysplasia or malignant change over the long term",
-   "Manage through paediatric or adult ENT services with structured surveillance until eventual regression"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "laryngeal_papillomatosis-pathway",
-   "title": "Laryngeal papillomatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common benign neoplasm of the larynx, caused by human papillomavirus, chiefly types 6 and 11",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive stridor and airway obstruction from bulky laryngeal disease requiring urgent airway management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flexible and rigid laryngoscopy to identify and map the papillomas, Microlaryngoscopy under anaesthesia for detailed assessment and tissue removal, Histopathology of excised tissue to confirm the diagnosis and exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no curative drug, so treatment centres on repeated microlaryngoscopic or laser removal of papillomas to preserve airway patency and voice while conserving normal tissue"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Aggressive surgery that damages the vocal cords and causes scarring or web formation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of laryngeal papillomatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "laryngeal_papillomatosis-matrix",
-   "title": "Laryngeal papillomatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common benign neoplasm of the larynx, caused by human papillomavirus, chiefly types 6 and 11",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common benign neoplasm of the larynx, caused by human papillomavirus, chiefly types 6 and 11",
+      "It occurs in a juvenile form, typically multiple and more aggressive, and an adult form that is often more localised",
+      "The usual presentation is progressive hoarseness or a weak or abnormal cry in a child, and with growth it can cause stridor and airway obstruction",
+      "Juvenile disease is thought to be acquired through vertical transmission from maternal genital HPV infection during birth",
+      "Laryngoscopy shows soft, warty, exophytic lesions favouring the vocal cords and other sites of squamous-ciliary junction",
+      "Because there is no definitive cure, treatment centres on repeated conservative surgical removal (commonly microlaryngeal or laser) to maintain the airway and voice while preserving normal tissue",
+      "The disease is characterised by frequent recurrence and can spread down the tracheobronchial tree, and a tracheostomy is best avoided as it may promote distal spread",
+      "Malignant transformation is uncommon but recognised, particularly with certain HPV types or after irradiation, so persistent or atypical lesions warrant biopsy"
     ],
-    [
-     "Key Investigations",
-     "Flexible and rigid laryngoscopy to identify and map the papillomas, Microlaryngoscopy under anaesthesia for detailed assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Laryngeal papillomatosis results from infection of the respiratory epithelium by human papillomavirus, most often types 6 and 11, which drives proliferation of squamous epithelium into finger-like papillary fronds supported by fibrovascular cores. Lesions favour the transition zones between squamous and ciliary epithelium, so the vocal cords are commonly affected. In children the virus is usually acquired at birth from an infected maternal genital tract, and the immature or immunologically naive host tends to develop multiple, recurrent lesions. Latent virus in adjacent normal-looking mucosa underlies the persistent recurrence after removal, and lesions may seed distally in the airway.",
+    "additionalDifferentials": [
+      "Vocal cord nodules or polyps",
+      "Laryngeal keratosis or leukoplakia",
+      "Laryngeal carcinoma",
+      "Croup or other infective laryngitis in a child",
+      "Vocal cord granuloma",
+      "Subglottic haemangioma"
     ],
-    [
-     "Primary Differentials",
-     "Vocal cord nodules or polyps, Laryngeal keratosis or leukoplakia, Laryngeal carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flexible and rigid laryngoscopy to identify and map the papillomas",
+      "Microlaryngoscopy under anaesthesia for detailed assessment and tissue removal",
+      "Histopathology of excised tissue to confirm the diagnosis and exclude dysplasia or malignancy",
+      "HPV typing where available, as certain types carry higher risk",
+      "Airway assessment for distal (tracheobronchial) spread in aggressive disease"
     ],
-    [
-     "Management Strategy",
-     "There is no curative drug, so treatment centres on repeated microlaryngoscopic or laser removal of papillomas to preserve airway",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive stridor and airway obstruction from bulky laryngeal disease requiring urgent airway management",
+      "Distal spread into the trachea and bronchi indicating aggressive disease",
+      "Features suggesting malignant transformation such as a firm, ulcerated, or rapidly enlarging lesion",
+      "Rapid recurrence needing frequent surgical intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Aggressive surgery that damages the vocal cords and causes scarring or web formation",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is unpredictable and marked by recurrence; juvenile disease may require many procedures over years before eventual regression around puberty in some children, while adult disease is often more limited, and although malignant change is rare it is an important long-term consideration.",
+    "pitfalls": [
+      "Aggressive surgery that damages the vocal cords and causes scarring or web formation",
+      "Performing a tracheostomy that may encourage distal tracheobronchial spread",
+      "Assuming benignity and not biopsying atypical or persistent lesions",
+      "Overlooking airway compromise in a child presenting only with a hoarse cry"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no curative drug, so treatment centres on repeated microlaryngoscopic or laser removal of papillomas to preserve airway patency and voice while conserving normal tissue",
+      "Consider adjuvant intralesional cidofovir or systemic bevacizumab for aggressive, multifocal, or rapidly recurring disease, and offer HPV vaccination",
+      "Relieve airway obstruction urgently in children with bulky disease and stridor, avoiding tracheostomy where feasible to limit distal spread",
+      "Support voice with speech-and-language therapy and minimise iatrogenic scarring during repeated procedures",
+      "Monitor for recurrence and distal tracheobronchial seeding, with HPV typing to identify higher-risk genotypes",
+      "Confirm histology of excised tissue to exclude dysplasia or malignant change over the long term",
+      "Manage through paediatric or adult ENT services with structured surveillance until eventual regression"
     ]
-   ],
-   "caption": "Overview comparison matrix for laryngeal papillomatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "laryngeal-papillomatosis-real-image",
-   "title": "Laryngeal papillomatosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "laryngeal_papillomatosis-pathway",
+      "title": "Laryngeal papillomatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common benign neoplasm of the larynx, caused by human papillomavirus, chiefly types 6 and 11",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive stridor and airway obstruction from bulky laryngeal disease requiring urgent airway management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flexible and rigid laryngoscopy to identify and map the papillomas, Microlaryngoscopy under anaesthesia for detailed assessment and tissue removal, Histopathology of excised tissue to confirm the diagnosis and exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no curative drug, so treatment centres on repeated microlaryngoscopic or laser removal of papillomas to preserve airway patency and voice while conserving normal tissue"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Aggressive surgery that damages the vocal cords and causes scarring or web formation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of laryngeal papillomatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "laryngeal_papillomatosis-matrix",
+      "title": "Laryngeal papillomatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common benign neoplasm of the larynx, caused by human papillomavirus, chiefly types 6 and 11",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flexible and rigid laryngoscopy to identify and map the papillomas, Microlaryngoscopy under anaesthesia for detailed assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vocal cord nodules or polyps, Laryngeal keratosis or leukoplakia, Laryngeal carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no curative drug, so treatment centres on repeated microlaryngoscopic or laser removal of papillomas to preserve airway",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Aggressive surgery that damages the vocal cords and causes scarring or web formation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for laryngeal papillomatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "laryngeal_papillomatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible and rigid laryngoscopy",
+          "cells": [
+            {
+              "text": "Identifies and maps the papillomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microlaryngoscopy under anaesthesia",
+          "cells": [
+            {
+              "text": "Detailed assessment and tissue removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of excised tissue",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; excludes dysplasia or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPV typing",
+          "cells": [
+            {
+              "text": "Certain types carry higher risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway assessment for tracheobronchial spread",
+          "cells": [
+            {
+              "text": "Aggressive disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngeal_papillomatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vocal cord nodules or polyps",
+          "cells": [
+            {
+              "text": "Papillomas look soft, warty and exophytic on laryngoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngeal carcinoma",
+          "cells": [
+            {
+              "text": "Persistent or atypical lesions need biopsy, not assumed benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subglottic haemangioma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngeal_papillomatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated microlaryngoscopic or laser removal",
+          "cells": [
+            {
+              "text": "No curative drug; preserves airway patency and voice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant therapy",
+          "cells": [
+            {
+              "text": "Intralesional cidofovir or systemic bevacizumab for aggressive, multifocal or rapidly recurring disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPV vaccination",
+          "cells": [
+            {
+              "text": "Offered as an adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent airway relief",
+          "cells": [
+            {
+              "text": "Bulky disease with stridor in children; avoid tracheostomy where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice support",
+          "cells": [
+            {
+              "text": "Speech-and-language therapy; minimise scarring during repeated procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Recurrence and distal spread; HPV typing to identify higher-risk genotypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Confirms excised tissue; excludes dysplasia or malignant change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "laryngeal_papillomatosis-dx-mgmt",
+      "title": "Diagnosis and management of Laryngeal papillomatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with progressive hoarseness, weak cry and warty laryngeal lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, distal spread, ulcerated lesion, frequent recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway management for stridor from bulky laryngeal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy, microlaryngoscopy with biopsy, HPV typing, airway assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology confirm papilloma without dysplasia or malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vocal cord nodules, carcinoma or subglottic haemangioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Repeated microlaryngoscopic or laser removal to preserve airway and voice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intralesional cidofovir or bevacizumab for aggressive or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid tracheostomy where feasible, to limit distal spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech-and-language therapy and minimised scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance for recurrence and tracheobronchial seeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Unpredictable recurrent course; some juvenile cases regress around puberty",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,495 @@
 {
- "id": "anejaculation",
- "name": "Anejaculation",
- "aliases": [
-  "failure of ejaculation",
-  "absent ejaculation",
-  "aspermia",
-  "failure of seminal emission"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Andrology / Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Anejaculation is the complete absence of antegrade ejaculate, which may occur with or without preserved orgasmic sensation",
-   "It must be separated from retrograde ejaculation, so a post-orgasmic urine sample is examined; the absence of sperm there indicates true failure of emission rather than backward flow",
-   "Causes span neurological injury (spinal cord injury, multiple sclerosis, diabetic autonomic neuropathy), pelvic and retroperitoneal surgery, medications, and psychogenic factors",
-   "A situational pattern, with normal nocturnal emissions or ejaculation in some circumstances, points towards a psychogenic rather than organic cause",
-   "In spinal cord injury and other neurogenic cases, penile vibratory stimulation and, if unsuccessful, electroejaculation can induce emission for fertility purposes",
-   "When induced ejaculation fails or is unsuitable, surgical sperm retrieval from the epididymis or testis provides sperm for intracytoplasmic sperm injection",
-   "A careful drug history is essential, as antidepressants, antipsychotics, and sympatholytic agents can impair or abolish ejaculation"
+  "id": "anejaculation",
+  "name": "Anejaculation",
+  "aliases": [
+    "failure of ejaculation",
+    "absent ejaculation",
+    "aspermia",
+    "failure of seminal emission"
   ],
-  "pathophysiology": "Ejaculation is a two-phase spinal reflex: sympathetic-driven emission deposits sperm and seminal fluid into the posterior urethra with simultaneous bladder-neck closure, followed by rhythmic somatic contraction of the pelvic-floor muscles that expels semen. Anejaculation results when the emission phase fails, so no seminal fluid reaches the urethra. This occurs with interruption of the sympathetic outflow through spinal cord injury, multiple sclerosis, diabetic autonomic neuropathy, or retroperitoneal surgery that damages the sympathetic chain, and with drugs that block sympathetic transmission. Psychogenic anejaculation reflects central inhibition of the reflex with an intact peripheral apparatus. Unlike retrograde ejaculation, in which emission occurs but is misdirected into the bladder, true anejaculation produces no semen in either the antegrade ejaculate or the post-orgasmic urine.",
-  "additionalDifferentials": [
-   "Retrograde ejaculation with backward flow of semen",
-   "Ejaculatory duct obstruction",
-   "Severe hypogonadism reducing seminal output",
-   "Spinal cord injury or neurological disease",
-   "Medication effect, particularly antidepressants and antipsychotics",
-   "Psychogenic inhibition of ejaculation"
-  ],
-  "additionalInvestigations": [
-   "Post-orgasmic urine analysis to distinguish failure of emission from retrograde ejaculation",
-   "Detailed neurological, surgical, and drug history",
-   "Blood glucose or HbA1c to detect diabetes",
-   "Serum testosterone and gonadotropins to assess the endocrine axis",
-   "Scrotal and transrectal ultrasound where obstruction or structural abnormality is suspected",
-   "Assessment of nocturnal or situational ejaculation to gauge a psychogenic component"
-  ],
-  "redFlags": [
-   "New neurological symptoms suggesting spinal cord disease or demyelination",
-   "History of recent retroperitoneal or pelvic surgery with autonomic disturbance",
-   "Sudden loss of ejaculation with other autonomic features",
-   "Associated erectile failure and sensory loss indicating a broader neurological deficit"
-  ],
-  "prognosis": "General health is unaffected, and fertility can frequently be achieved using vibratory stimulation, electroejaculation, or surgical sperm retrieval combined with assisted reproduction; psychogenic cases may respond to behavioural or psychological treatment.",
-  "pitfalls": [
-   "Failing to examine post-orgasmic urine and thereby confusing anejaculation with retrograde ejaculation",
-   "Overlooking a causative medication that could be modified",
-   "Missing an underlying neurological disorder presenting with ejaculatory failure",
-   "Assuming an organic cause when the pattern is situational and psychogenic",
-   "Delaying referral for assisted reproductive techniques when natural conception is not feasible"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "European Association of Urology guidelines on sexual and reproductive health",
-   "WHO laboratory manual for the examination and processing of human semen"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Address reversible causes by reviewing and modifying offending sympatholytic medications and optimising glycaemic control in diabetic autonomic neuropathy",
-   "Penile vibratory stimulation as first-line to induce emission in neurogenic anejaculation such as spinal cord injury",
-   "Electroejaculation under specialist supervision when vibratory stimulation fails",
-   "Surgical sperm retrieval from the epididymis or testis for intracytoplasmic sperm injection when induced ejaculation is unsuccessful or unsuitable",
-   "Psychosexual therapy and behavioural treatment for situational or psychogenic anejaculation",
-   "Autonomic dysreflexia precautions with blood-pressure monitoring during vibratory or electroejaculation in high-level spinal cord injury",
-   "Referral to andrology and assisted reproduction services for fertility planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anejaculation-pathway",
-   "title": "Anejaculation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Anejaculation is the complete absence of antegrade ejaculate, which may occur with or without preserved orgasmic sensation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New neurological symptoms suggesting spinal cord disease or demyelination",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Post-orgasmic urine analysis to distinguish failure of emission from retrograde ejaculation, Detailed neurological, surgical, and drug history, Blood glucose or HbA1c to detect diabetes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Address reversible causes by reviewing and modifying offending sympatholytic medications and optimising glycaemic control in diabetic autonomic neuropathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to examine post-orgasmic urine and thereby confusing anejaculation with retrograde ejaculation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anejaculation."
-  }
- ],
- "tables": [
-  {
-   "id": "anejaculation-matrix",
-   "title": "Anejaculation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Anejaculation is the complete absence of antegrade ejaculate, which may occur with or without preserved orgasmic sensation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Andrology / Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Anejaculation is the complete absence of antegrade ejaculate, which may occur with or without preserved orgasmic sensation",
+      "It must be separated from retrograde ejaculation, so a post-orgasmic urine sample is examined; the absence of sperm there indicates true failure of emission rather than backward flow",
+      "Causes span neurological injury (spinal cord injury, multiple sclerosis, diabetic autonomic neuropathy), pelvic and retroperitoneal surgery, medications, and psychogenic factors",
+      "A situational pattern, with normal nocturnal emissions or ejaculation in some circumstances, points towards a psychogenic rather than organic cause",
+      "In spinal cord injury and other neurogenic cases, penile vibratory stimulation and, if unsuccessful, electroejaculation can induce emission for fertility purposes",
+      "When induced ejaculation fails or is unsuitable, surgical sperm retrieval from the epididymis or testis provides sperm for intracytoplasmic sperm injection",
+      "A careful drug history is essential, as antidepressants, antipsychotics, and sympatholytic agents can impair or abolish ejaculation"
     ],
-    [
-     "Key Investigations",
-     "Post-orgasmic urine analysis to distinguish failure of emission from retrograde ejaculation, Detailed neurological, surgical, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ejaculation is a two-phase spinal reflex: sympathetic-driven emission deposits sperm and seminal fluid into the posterior urethra with simultaneous bladder-neck closure, followed by rhythmic somatic contraction of the pelvic-floor muscles that expels semen. Anejaculation results when the emission phase fails, so no seminal fluid reaches the urethra. This occurs with interruption of the sympathetic outflow through spinal cord injury, multiple sclerosis, diabetic autonomic neuropathy, or retroperitoneal surgery that damages the sympathetic chain, and with drugs that block sympathetic transmission. Psychogenic anejaculation reflects central inhibition of the reflex with an intact peripheral apparatus. Unlike retrograde ejaculation, in which emission occurs but is misdirected into the bladder, true anejaculation produces no semen in either the antegrade ejaculate or the post-orgasmic urine.",
+    "additionalDifferentials": [
+      "Retrograde ejaculation with backward flow of semen",
+      "Ejaculatory duct obstruction",
+      "Severe hypogonadism reducing seminal output",
+      "Spinal cord injury or neurological disease",
+      "Medication effect, particularly antidepressants and antipsychotics",
+      "Psychogenic inhibition of ejaculation"
     ],
-    [
-     "Primary Differentials",
-     "Retrograde ejaculation with backward flow of semen, Ejaculatory duct obstruction, Severe hypogonadism reducing seminal output",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Post-orgasmic urine analysis to distinguish failure of emission from retrograde ejaculation",
+      "Detailed neurological, surgical, and drug history",
+      "Blood glucose or HbA1c to detect diabetes",
+      "Serum testosterone and gonadotropins to assess the endocrine axis",
+      "Scrotal and transrectal ultrasound where obstruction or structural abnormality is suspected",
+      "Assessment of nocturnal or situational ejaculation to gauge a psychogenic component"
     ],
-    [
-     "Management Strategy",
-     "Address reversible causes by reviewing and modifying offending sympatholytic medications and optimising glycaemic control in",
-     "Core treatment modality"
+    "redFlags": [
+      "New neurological symptoms suggesting spinal cord disease or demyelination",
+      "History of recent retroperitoneal or pelvic surgery with autonomic disturbance",
+      "Sudden loss of ejaculation with other autonomic features",
+      "Associated erectile failure and sensory loss indicating a broader neurological deficit"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to examine post-orgasmic urine and thereby confusing anejaculation with retrograde ejaculation",
-     "Prevent diagnostic or management error"
+    "prognosis": "General health is unaffected, and fertility can frequently be achieved using vibratory stimulation, electroejaculation, or surgical sperm retrieval combined with assisted reproduction; psychogenic cases may respond to behavioural or psychological treatment.",
+    "pitfalls": [
+      "Failing to examine post-orgasmic urine and thereby confusing anejaculation with retrograde ejaculation",
+      "Overlooking a causative medication that could be modified",
+      "Missing an underlying neurological disorder presenting with ejaculatory failure",
+      "Assuming an organic cause when the pattern is situational and psychogenic",
+      "Delaying referral for assisted reproductive techniques when natural conception is not feasible"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "European Association of Urology guidelines on sexual and reproductive health",
+      "WHO laboratory manual for the examination and processing of human semen"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Address reversible causes by reviewing and modifying offending sympatholytic medications and optimising glycaemic control in diabetic autonomic neuropathy",
+      "Penile vibratory stimulation as first-line to induce emission in neurogenic anejaculation such as spinal cord injury",
+      "Electroejaculation under specialist supervision when vibratory stimulation fails",
+      "Surgical sperm retrieval from the epididymis or testis for intracytoplasmic sperm injection when induced ejaculation is unsuccessful or unsuitable",
+      "Psychosexual therapy and behavioural treatment for situational or psychogenic anejaculation",
+      "Autonomic dysreflexia precautions with blood-pressure monitoring during vibratory or electroejaculation in high-level spinal cord injury",
+      "Referral to andrology and assisted reproduction services for fertility planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for anejaculation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anejaculation-real-image",
-   "title": "Anejaculation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "anejaculation-pathway",
+      "title": "Anejaculation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Anejaculation is the complete absence of antegrade ejaculate, which may occur with or without preserved orgasmic sensation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New neurological symptoms suggesting spinal cord disease or demyelination",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Post-orgasmic urine analysis to distinguish failure of emission from retrograde ejaculation, Detailed neurological, surgical, and drug history, Blood glucose or HbA1c to detect diabetes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Address reversible causes by reviewing and modifying offending sympatholytic medications and optimising glycaemic control in diabetic autonomic neuropathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to examine post-orgasmic urine and thereby confusing anejaculation with retrograde ejaculation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anejaculation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anejaculation-matrix",
+      "title": "Anejaculation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Anejaculation is the complete absence of antegrade ejaculate, which may occur with or without preserved orgasmic sensation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Post-orgasmic urine analysis to distinguish failure of emission from retrograde ejaculation, Detailed neurological, surgical, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Retrograde ejaculation with backward flow of semen, Ejaculatory duct obstruction, Severe hypogonadism reducing seminal output",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Address reversible causes by reviewing and modifying offending sympatholytic medications and optimising glycaemic control in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to examine post-orgasmic urine and thereby confusing anejaculation with retrograde ejaculation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anejaculation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anejaculation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-orgasmic urine analysis",
+          "cells": [
+            {
+              "text": "Distinguishes failure of emission from retrograde ejaculation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed neurological, surgical and drug history",
+          "cells": [
+            {
+              "text": "Identifies neurological, pelvic surgical and medication causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose or HbA1c",
+          "cells": [
+            {
+              "text": "Detects diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum testosterone and gonadotropins",
+          "cells": [
+            {
+              "text": "Assesses the endocrine axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal and transrectal ultrasound",
+          "cells": [
+            {
+              "text": "Where obstruction or structural abnormality is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocturnal or situational ejaculation assessment",
+          "cells": [
+            {
+              "text": "Gauges a psychogenic component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "anejaculation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retrograde ejaculation",
+          "cells": [
+            {
+              "text": "Backward flow; sperm present in post-orgasmic urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychogenic inhibition of ejaculation",
+          "cells": [
+            {
+              "text": "Situational pattern, with normal ejaculation in some circumstances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal cord injury or neurological disease",
+          "cells": [
+            {
+              "text": "New neurological symptoms suggesting spinal cord disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anejaculation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reversible causes",
+          "cells": [
+            {
+              "text": "Review and modify sympatholytic medications; optimise glycaemic control"
+            },
+            {
+              "text": "Relevant in diabetic autonomic neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile vibratory stimulation",
+          "cells": [
+            {
+              "text": "First-line to induce emission"
+            },
+            {
+              "text": "Neurogenic anejaculation such as spinal cord injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroejaculation",
+          "cells": [
+            {
+              "text": "Under specialist supervision when vibratory stimulation fails"
+            },
+            {
+              "text": "Specialist supervision required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical sperm retrieval",
+          "cells": [
+            {
+              "text": "From epididymis or testis for intracytoplasmic sperm injection"
+            },
+            {
+              "text": "When induced ejaculation is unsuccessful or unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosexual and behavioural therapy",
+          "cells": [
+            {
+              "text": "For situational or psychogenic anejaculation"
+            },
+            {
+              "text": "Psychogenic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic dysreflexia precautions",
+          "cells": [
+            {
+              "text": "Blood-pressure monitoring during vibratory or electroejaculation"
+            },
+            {
+              "text": "High-level spinal cord injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Andrology and assisted reproduction referral",
+          "cells": [
+            {
+              "text": "Fertility planning"
+            },
+            {
+              "text": "Avoids delay when natural conception is not feasible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anejaculation-dx-mgmt",
+      "title": "Diagnosis and management of Anejaculation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Complete absence of antegrade ejaculate, with or without orgasmic sensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? New neurological symptoms or recent pelvic surgery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological review for spinal cord disease or demyelination",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Post-orgasmic urine, neurological and drug history, glucose, testosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sperm absent from post-orgasmic urine, confirming failure of emission?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Review and modify sympatholytic drugs; optimise glycaemic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Penile vibratory stimulation first-line for neurogenic anejaculation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Electroejaculation under specialist supervision if vibration fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical sperm retrieval for ICSI if induced ejaculation is unsuccessful",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fertility often achieved with induction or retrieval plus assisted reproduction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

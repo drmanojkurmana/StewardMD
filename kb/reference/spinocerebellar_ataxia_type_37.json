@@ -1,172 +1,441 @@
 {
- "id": "spinocerebellar_ataxia_type_37",
- "name": "Spinocerebellar ataxia type 37",
- "aliases": [
-  "SCA37",
-  "DAB1-related ataxia"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary ataxia",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant cerebellar ataxia with a distinctive early sign: abnormal vertical eye movements, including dysmetric or slowed vertical saccades and impaired vertical pursuit, which may precede overt ataxia.",
-   "Caused by an unstable intronic pentanucleotide repeat insertion — an ATTTC insertion embedded within a normally present ATTTT array — in the DAB1 gene on chromosome 1p32.",
-   "DAB1 encodes Disabled-1, a key intracellular adaptor of the Reelin signalling pathway that governs neuronal migration and positioning.",
-   "Onset is usually in adult life, with falls, gait ataxia and dysarthria.",
-   "The disorder was originally described in families from Spain.",
-   "Repeat instability and anticipation across generations are features, correlating with the size of the inserted ATTTC motif.",
-   "Beyond the early vertical gaze disturbance the syndrome is relatively pure cerebellar, making the eye-movement abnormality the key clinical clue."
+  "id": "spinocerebellar_ataxia_type_37",
+  "name": "Spinocerebellar ataxia type 37",
+  "aliases": [
+    "SCA37",
+    "DAB1-related ataxia"
   ],
-  "pathophysiology": "Spinocerebellar ataxia type 37 is an autosomal dominant cerebellar ataxia caused by an unstable pentanucleotide repeat insertion within a regulatory intron of DAB1 at chromosome 1p32 — specifically an ATTTC insertion embedded within a polymorphic ATTTT array that is non-pathogenic when the ATTTC motif is absent. DAB1 encodes Disabled-1, an essential intracellular adaptor of the Reelin signalling pathway that directs neuronal migration and positioning; the inserted repeat is thought to alter DAB1 expression and splicing and to confer toxicity, leading to preferential cerebellar degeneration, notably of Purkinje cells. The disorder characteristically produces early abnormal vertical eye movements followed by a largely pure progressive cerebellar ataxia, and it shows repeat instability with anticipation across generations, placing it among the non-B DNA insertion repeat ataxias.",
-  "additionalDifferentials": [
-   "SCA6 and other relatively pure autosomal dominant cerebellar ataxias",
-   "SCA5, SCA11 and SCA26 — further pure dominant cerebellar ataxias",
-   "Progressive supranuclear palsy, which causes a vertical gaze abnormality that can mimic the early eye-movement sign",
-   "Niemann-Pick disease type C, characterised by vertical supranuclear gaze palsy",
-   "SCA31 and SCA4 at chromosome 16q, other repeat-related ataxias",
-   "Other ATTTC-insertion repeat disorders such as familial adult myoclonic epilepsy and SCA10"
-  ],
-  "additionalInvestigations": [
-   "Targeted molecular testing for the DAB1 ATTTC insertion using a specialised repeat assay",
-   "Video-oculography or eye-movement recording to document the vertical saccade and pursuit abnormality",
-   "MRI brain demonstrating cerebellar and vermian atrophy",
-   "Hereditary ataxia gene panel to exclude other dominant subtypes",
-   "Investigations to exclude Niemann-Pick disease type C and progressive supranuclear palsy where clinically relevant",
-   "Family pedigree analysis with genetic counselling addressing anticipation"
-  ],
-  "redFlags": [
-   "Prominent vertical supranuclear gaze palsy with early falls raising progressive supranuclear palsy.",
-   "Cognitive or behavioural decline suggesting an alternative neurodegenerative diagnosis.",
-   "Organomegaly or young-onset systemic features pointing towards Niemann-Pick disease type C.",
-   "Rapid progression atypical for this slowly evolving hereditary ataxia."
-  ],
-  "prognosis": "Slowly progressive over years to decades, with disability arising from a largely pure cerebellar syndrome; lifespan is usually preserved.",
-  "pitfalls": [
-   "Dismissing subtle early vertical eye-movement abnormalities that are the key diagnostic clue.",
-   "Missing the diagnosis because standard panels do not detect the ATTTC insertion within the ATTTT array.",
-   "Confusing the phenotype with progressive supranuclear palsy or Niemann-Pick disease type C.",
-   "Neglecting to counsel families about repeat instability and anticipation."
-  ],
-  "references": [
-   "Neurogenetics reference texts on autosomal dominant spinocerebellar ataxias",
-   "Standard neurology textbook chapters on inherited ataxias",
-   "Consensus reviews of non-repeat and insertion cerebellar ataxias"
-  ],
-  "crossLinks": [],
-  "management": [
-   "With no disease-modifying therapy for this DAB1-related ataxia, centre care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria",
-   "Institute an early falls-prevention programme and provide mobility aids, as falls are a presenting feature",
-   "Arrange orthoptic and ophthalmology input for the vertical saccade and pursuit abnormality and any oscillopsia or reading difficulty",
-   "Monitor for bulbar dysfunction with periodic swallow assessment",
-   "Provide multidisciplinary ataxia clinic follow-up",
-   "Offer genetic counselling addressing anticipation (larger ATTTC insertions correlate with earlier onset), with cascade testing by insertion-specific assay"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_37-pathway",
-   "title": "Spinocerebellar ataxia type 37: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant cerebellar ataxia with a distinctive early sign: abnormal vertical eye movements, including dysmetric or slowed vertical saccades and impaired vertical pursuit, which may precede overt ataxia.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Prominent vertical supranuclear gaze palsy with early falls raising progressive supranuclear palsy.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted molecular testing for the DAB1 ATTTC insertion using a specialised repeat assay, Video-oculography or eye-movement recording to document the vertical saccade and pursuit abnormality, MRI brain demonstrating"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: With no disease-modifying therapy for this DAB1-related ataxia, centre care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing subtle early vertical eye-movement abnormalities that are the key diagnostic clue."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 37."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_37-matrix",
-   "title": "Spinocerebellar ataxia type 37: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant cerebellar ataxia with a distinctive early sign: abnormal vertical eye movements, including dysmetric or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary ataxia",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant cerebellar ataxia with a distinctive early sign: abnormal vertical eye movements, including dysmetric or slowed vertical saccades and impaired vertical pursuit, which may precede overt ataxia.",
+      "Caused by an unstable intronic pentanucleotide repeat insertion — an ATTTC insertion embedded within a normally present ATTTT array — in the DAB1 gene on chromosome 1p32.",
+      "DAB1 encodes Disabled-1, a key intracellular adaptor of the Reelin signalling pathway that governs neuronal migration and positioning.",
+      "Onset is usually in adult life, with falls, gait ataxia and dysarthria.",
+      "The disorder was originally described in families from Spain.",
+      "Repeat instability and anticipation across generations are features, correlating with the size of the inserted ATTTC motif.",
+      "Beyond the early vertical gaze disturbance the syndrome is relatively pure cerebellar, making the eye-movement abnormality the key clinical clue."
     ],
-    [
-     "Key Investigations",
-     "Targeted molecular testing for the DAB1 ATTTC insertion using a specialised repeat assay, Video-oculography or eye-movement",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spinocerebellar ataxia type 37 is an autosomal dominant cerebellar ataxia caused by an unstable pentanucleotide repeat insertion within a regulatory intron of DAB1 at chromosome 1p32 — specifically an ATTTC insertion embedded within a polymorphic ATTTT array that is non-pathogenic when the ATTTC motif is absent. DAB1 encodes Disabled-1, an essential intracellular adaptor of the Reelin signalling pathway that directs neuronal migration and positioning; the inserted repeat is thought to alter DAB1 expression and splicing and to confer toxicity, leading to preferential cerebellar degeneration, notably of Purkinje cells. The disorder characteristically produces early abnormal vertical eye movements followed by a largely pure progressive cerebellar ataxia, and it shows repeat instability with anticipation across generations, placing it among the non-B DNA insertion repeat ataxias.",
+    "additionalDifferentials": [
+      "SCA6 and other relatively pure autosomal dominant cerebellar ataxias",
+      "SCA5, SCA11 and SCA26 — further pure dominant cerebellar ataxias",
+      "Progressive supranuclear palsy, which causes a vertical gaze abnormality that can mimic the early eye-movement sign",
+      "Niemann-Pick disease type C, characterised by vertical supranuclear gaze palsy",
+      "SCA31 and SCA4 at chromosome 16q, other repeat-related ataxias",
+      "Other ATTTC-insertion repeat disorders such as familial adult myoclonic epilepsy and SCA10"
     ],
-    [
-     "Primary Differentials",
-     "SCA6 and other relatively pure autosomal dominant cerebellar ataxias, SCA5, SCA11 and SCA26 - further pure dominant cerebellar",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted molecular testing for the DAB1 ATTTC insertion using a specialised repeat assay",
+      "Video-oculography or eye-movement recording to document the vertical saccade and pursuit abnormality",
+      "MRI brain demonstrating cerebellar and vermian atrophy",
+      "Hereditary ataxia gene panel to exclude other dominant subtypes",
+      "Investigations to exclude Niemann-Pick disease type C and progressive supranuclear palsy where clinically relevant",
+      "Family pedigree analysis with genetic counselling addressing anticipation"
     ],
-    [
-     "Management Strategy",
-     "With no disease-modifying therapy for this DAB1-related ataxia, centre care on physiotherapy for gait and balance, occupational",
-     "Core treatment modality"
+    "redFlags": [
+      "Prominent vertical supranuclear gaze palsy with early falls raising progressive supranuclear palsy.",
+      "Cognitive or behavioural decline suggesting an alternative neurodegenerative diagnosis.",
+      "Organomegaly or young-onset systemic features pointing towards Niemann-Pick disease type C.",
+      "Rapid progression atypical for this slowly evolving hereditary ataxia."
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing subtle early vertical eye-movement abnormalities that are the key diagnostic clue.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Slowly progressive over years to decades, with disability arising from a largely pure cerebellar syndrome; lifespan is usually preserved.",
+    "pitfalls": [
+      "Dismissing subtle early vertical eye-movement abnormalities that are the key diagnostic clue.",
+      "Missing the diagnosis because standard panels do not detect the ATTTC insertion within the ATTTT array.",
+      "Confusing the phenotype with progressive supranuclear palsy or Niemann-Pick disease type C.",
+      "Neglecting to counsel families about repeat instability and anticipation."
+    ],
+    "references": [
+      "Neurogenetics reference texts on autosomal dominant spinocerebellar ataxias",
+      "Standard neurology textbook chapters on inherited ataxias",
+      "Consensus reviews of non-repeat and insertion cerebellar ataxias"
+    ],
+    "crossLinks": [],
+    "management": [
+      "With no disease-modifying therapy for this DAB1-related ataxia, centre care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria",
+      "Institute an early falls-prevention programme and provide mobility aids, as falls are a presenting feature",
+      "Arrange orthoptic and ophthalmology input for the vertical saccade and pursuit abnormality and any oscillopsia or reading difficulty",
+      "Monitor for bulbar dysfunction with periodic swallow assessment",
+      "Provide multidisciplinary ataxia clinic follow-up",
+      "Offer genetic counselling addressing anticipation (larger ATTTC insertions correlate with earlier onset), with cascade testing by insertion-specific assay"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 37."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-37-real-image",
-   "title": "Spinocerebellar ataxia type 37: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia_type_37-pathway",
+      "title": "Spinocerebellar ataxia type 37: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant cerebellar ataxia with a distinctive early sign: abnormal vertical eye movements, including dysmetric or slowed vertical saccades and impaired vertical pursuit, which may precede overt ataxia.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Prominent vertical supranuclear gaze palsy with early falls raising progressive supranuclear palsy.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted molecular testing for the DAB1 ATTTC insertion using a specialised repeat assay, Video-oculography or eye-movement recording to document the vertical saccade and pursuit abnormality, MRI brain demonstrating"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: With no disease-modifying therapy for this DAB1-related ataxia, centre care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing subtle early vertical eye-movement abnormalities that are the key diagnostic clue."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 37."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_37-matrix",
+      "title": "Spinocerebellar ataxia type 37: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant cerebellar ataxia with a distinctive early sign: abnormal vertical eye movements, including dysmetric or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted molecular testing for the DAB1 ATTTC insertion using a specialised repeat assay, Video-oculography or eye-movement",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SCA6 and other relatively pure autosomal dominant cerebellar ataxias, SCA5, SCA11 and SCA26 - further pure dominant cerebellar",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "With no disease-modifying therapy for this DAB1-related ataxia, centre care on physiotherapy for gait and balance, occupational",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing subtle early vertical eye-movement abnormalities that are the key diagnostic clue.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 37."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_37-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "DAB1 ATTTC insertion assay",
+          "cells": [
+            {
+              "text": "Insertion confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-oculography",
+          "cells": [
+            {
+              "text": "Vertical saccade and pursuit abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar and vermian atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary ataxia gene panel",
+          "cells": [
+            {
+              "text": "Other dominant subtypes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for vertical gaze mimics",
+          "cells": [
+            {
+              "text": "Niemann-Pick type C and progressive supranuclear palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pedigree analysis",
+          "cells": [
+            {
+              "text": "Anticipation across generations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_37-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Progressive supranuclear palsy",
+          "cells": [
+            {
+              "text": "A vertical gaze abnormality that can mimic this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Niemann-Pick disease type C",
+          "cells": [
+            {
+              "text": "Vertical supranuclear gaze palsy, with organomegaly and systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_37-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and neurorehabilitation",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early falls prevention",
+          "cells": [
+            {
+              "text": "Falls are a prominent problem; mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic and ophthalmology input",
+          "cells": [
+            {
+              "text": "Vertical saccade and pursuit abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow assessment",
+          "cells": [
+            {
+              "text": "Periodic review for bulbar dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Repeat instability and anticipation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_37-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 37",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult ataxia with early vertical gaze abnormality and falls: suspected SCA37",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cognitive decline, organomegaly, rapid progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for Niemann-Pick type C or progressive supranuclear palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DAB1 ATTTC insertion assay; eye-movement recording; brain MRI; gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a DAB1 ATTTC insertion confirmed with a vertical saccade abnormality?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PSP, Niemann-Pick type C or SCA6; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and neurorehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early falls prevention and mobility aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthoptic and ophthalmology input for eye movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic swallow assessment and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-modifying therapy; falls are a prominent problem",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

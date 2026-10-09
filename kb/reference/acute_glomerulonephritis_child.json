@@ -1,176 +1,504 @@
 {
- "id": "acute_glomerulonephritis_child",
- "name": "Acute Glomerulonephritis (Child)",
- "aliases": [
-  "acute post-streptococcal glomerulonephritis",
-  "APSGN",
-  "acute nephritic syndrome",
-  "paediatric acute glomerulonephritis"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic nephritic picture is gross haematuria (often described as tea- or cola-coloured urine), oedema, and hypertension.",
-   "Post-streptococcal glomerulonephritis is the most common cause in children and typically follows a group A streptococcal throat infection by about 1-2 weeks or a skin infection by 3-6 weeks.",
-   "Although labelled non-infective as a glomerular process, it is an immune-mediated sequela of a preceding streptococcal infection rather than active kidney infection.",
-   "Look for evidence of recent streptococcal infection with elevated antibody titres (such as ASO) and a low serum C3 that typically normalises within 6-8 weeks.",
-   "Fluid overload from sodium and water retention can precipitate hypertension, pulmonary oedema, and hypertensive encephalopathy.",
-   "Urinalysis characteristically shows red blood cells, red cell casts, and mild to moderate proteinuria.",
-   "Management is largely supportive with salt and fluid restriction and control of hypertension; the condition is generally self-limiting in children.",
-   "Persistently low complement beyond 8 weeks should prompt consideration of an alternative diagnosis such as membranoproliferative glomerulonephritis or lupus nephritis."
+  "id": "acute_glomerulonephritis_child",
+  "name": "Acute Glomerulonephritis (Child)",
+  "aliases": [
+    "acute post-streptococcal glomerulonephritis",
+    "APSGN",
+    "acute nephritic syndrome",
+    "paediatric acute glomerulonephritis"
   ],
-  "pathophysiology": "Immune complexes involving streptococcal antigens deposit in or form within the glomerular basement membrane, activating the complement cascade (predominantly the alternative pathway). This drives glomerular inflammation with endothelial and mesangial proliferation and neutrophil influx, reducing the glomerular filtration surface. The result is a fall in filtration rate, sodium and water retention, haematuria, and proteinuria producing the nephritic syndrome.",
-  "additionalDifferentials": [
-   "IgA nephropathy",
-   "Membranoproliferative glomerulonephritis",
-   "Lupus nephritis",
-   "Henoch-Schonlein (IgA) vasculitis nephritis",
-   "Haemolytic uraemic syndrome",
-   "Alport syndrome or thin basement membrane disease"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis and microscopy for red cell casts and dysmorphic red cells",
-   "Serum complement (C3 and C4)",
-   "Evidence of streptococcal infection (ASO, anti-DNase B, throat or skin swab)",
-   "Renal function and electrolytes",
-   "Urine protein quantification",
-   "Renal biopsy if the course is atypical, complement stays low, or renal function deteriorates"
-  ],
-  "redFlags": [
-   "Severe hypertension or hypertensive encephalopathy (headache, seizures, altered consciousness)",
-   "Pulmonary oedema or respiratory distress from volume overload",
-   "Rapidly rising creatinine suggesting rapidly progressive glomerulonephritis",
-   "Oligoanuria or features of acute kidney injury requiring dialysis",
-   "Hyperkalaemia with associated arrhythmia risk"
-  ],
-  "prognosis": "The great majority of children with post-streptococcal glomerulonephritis recover completely, with resolution of gross haematuria within weeks and normalisation of complement within about two months; microscopic haematuria may persist for a year or more. A small minority develop chronic kidney impairment.",
-  "pitfalls": [
-   "Assuming all paediatric nephritis is post-streptococcal and missing lupus or membranoproliferative disease when complement stays persistently low",
-   "Overlooking hypertension, which may be asymptomatic yet dangerous, by not measuring blood pressure",
-   "Fluid overloading a child with impaired filtration",
-   "Attributing dark urine to dehydration rather than examining the urine sediment"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antibiotic eradication of residual group A streptococcal infection with penicillin, or a macrolide if penicillin-allergic",
-   "Sodium and fluid restriction to counter salt and water retention",
-   "Loop diuretics for oedema and fluid overload",
-   "Antihypertensive therapy such as calcium-channel blockers or vasodilators for hypertension",
-   "Urgent treatment of hypertensive encephalopathy and pulmonary oedema when fluid overload is severe",
-   "Monitor renal function, blood pressure, and urinalysis, with serial complement to confirm expected C3 normalisation",
-   "Paediatric nephrology referral and consideration of dialysis for severe or deteriorating renal impairment",
-   "Consider renal biopsy if the course is atypical or complement remains persistently low"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_glomerulonephritis_child-pathway",
-   "title": "Acute Glomerulonephritis (Child): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic nephritic picture is gross haematuria (often described as tea- or cola-coloured urine), oedema, and hypertension.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypertension or hypertensive encephalopathy (headache, seizures, altered consciousness)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis and microscopy for red cell casts and dysmorphic red cells, Serum complement (C3 and C4), Evidence of streptococcal infection (ASO, anti-DNase B, throat or skin swab)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antibiotic eradication of residual group A streptococcal infection with penicillin, or a macrolide if penicillin-allergic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all paediatric nephritis is post-streptococcal and missing lupus or membranoproliferative disease when complement stays persistently low"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute glomerulonephritis (child)."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_glomerulonephritis_child-matrix",
-   "title": "Acute Glomerulonephritis (Child): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic nephritic picture is gross haematuria (often described as tea- or cola-coloured urine), oedema, and hypertension.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic nephritic picture is gross haematuria (often described as tea- or cola-coloured urine), oedema, and hypertension.",
+      "Post-streptococcal glomerulonephritis is the most common cause in children and typically follows a group A streptococcal throat infection by about 1-2 weeks or a skin infection by 3-6 weeks.",
+      "Although labelled non-infective as a glomerular process, it is an immune-mediated sequela of a preceding streptococcal infection rather than active kidney infection.",
+      "Look for evidence of recent streptococcal infection with elevated antibody titres (such as ASO) and a low serum C3 that typically normalises within 6-8 weeks.",
+      "Fluid overload from sodium and water retention can precipitate hypertension, pulmonary oedema, and hypertensive encephalopathy.",
+      "Urinalysis characteristically shows red blood cells, red cell casts, and mild to moderate proteinuria.",
+      "Management is largely supportive with salt and fluid restriction and control of hypertension; the condition is generally self-limiting in children.",
+      "Persistently low complement beyond 8 weeks should prompt consideration of an alternative diagnosis such as membranoproliferative glomerulonephritis or lupus nephritis."
     ],
-    [
-     "Key Investigations",
-     "Urinalysis and microscopy for red cell casts and dysmorphic red cells, Serum complement (C3 and C4), Evidence of streptococcal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Immune complexes involving streptococcal antigens deposit in or form within the glomerular basement membrane, activating the complement cascade (predominantly the alternative pathway). This drives glomerular inflammation with endothelial and mesangial proliferation and neutrophil influx, reducing the glomerular filtration surface. The result is a fall in filtration rate, sodium and water retention, haematuria, and proteinuria producing the nephritic syndrome.",
+    "additionalDifferentials": [
+      "IgA nephropathy",
+      "Membranoproliferative glomerulonephritis",
+      "Lupus nephritis",
+      "Henoch-Schonlein (IgA) vasculitis nephritis",
+      "Haemolytic uraemic syndrome",
+      "Alport syndrome or thin basement membrane disease"
     ],
-    [
-     "Primary Differentials",
-     "IgA nephropathy, Membranoproliferative glomerulonephritis, Lupus nephritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis and microscopy for red cell casts and dysmorphic red cells",
+      "Serum complement (C3 and C4)",
+      "Evidence of streptococcal infection (ASO, anti-DNase B, throat or skin swab)",
+      "Renal function and electrolytes",
+      "Urine protein quantification",
+      "Renal biopsy if the course is atypical, complement stays low, or renal function deteriorates"
     ],
-    [
-     "Management Strategy",
-     "Antibiotic eradication of residual group A streptococcal infection with penicillin, or a macrolide if penicillin-allergic",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypertension or hypertensive encephalopathy (headache, seizures, altered consciousness)",
+      "Pulmonary oedema or respiratory distress from volume overload",
+      "Rapidly rising creatinine suggesting rapidly progressive glomerulonephritis",
+      "Oligoanuria or features of acute kidney injury requiring dialysis",
+      "Hyperkalaemia with associated arrhythmia risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all paediatric nephritis is post-streptococcal and missing lupus or membranoproliferative disease when complement stays",
-     "Prevent diagnostic or management error"
+    "prognosis": "The great majority of children with post-streptococcal glomerulonephritis recover completely, with resolution of gross haematuria within weeks and normalisation of complement within about two months; microscopic haematuria may persist for a year or more. A small minority develop chronic kidney impairment.",
+    "pitfalls": [
+      "Assuming all paediatric nephritis is post-streptococcal and missing lupus or membranoproliferative disease when complement stays persistently low",
+      "Overlooking hypertension, which may be asymptomatic yet dangerous, by not measuring blood pressure",
+      "Fluid overloading a child with impaired filtration",
+      "Attributing dark urine to dehydration rather than examining the urine sediment"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antibiotic eradication of residual group A streptococcal infection with penicillin, or a macrolide if penicillin-allergic",
+      "Sodium and fluid restriction to counter salt and water retention",
+      "Loop diuretics for oedema and fluid overload",
+      "Antihypertensive therapy such as calcium-channel blockers or vasodilators for hypertension",
+      "Urgent treatment of hypertensive encephalopathy and pulmonary oedema when fluid overload is severe",
+      "Monitor renal function, blood pressure, and urinalysis, with serial complement to confirm expected C3 normalisation",
+      "Paediatric nephrology referral and consideration of dialysis for severe or deteriorating renal impairment",
+      "Consider renal biopsy if the course is atypical or complement remains persistently low"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute glomerulonephritis (child)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-glomerulonephritis-child-real-image",
-   "title": "Acute Glomerulonephritis (Child): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "acute_glomerulonephritis_child-pathway",
+      "title": "Acute Glomerulonephritis (Child): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic nephritic picture is gross haematuria (often described as tea- or cola-coloured urine), oedema, and hypertension.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypertension or hypertensive encephalopathy (headache, seizures, altered consciousness)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis and microscopy for red cell casts and dysmorphic red cells, Serum complement (C3 and C4), Evidence of streptococcal infection (ASO, anti-DNase B, throat or skin swab)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antibiotic eradication of residual group A streptococcal infection with penicillin, or a macrolide if penicillin-allergic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all paediatric nephritis is post-streptococcal and missing lupus or membranoproliferative disease when complement stays persistently low"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute glomerulonephritis (child)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_glomerulonephritis_child-matrix",
+      "title": "Acute Glomerulonephritis (Child): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic nephritic picture is gross haematuria (often described as tea- or cola-coloured urine), oedema, and hypertension.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis and microscopy for red cell casts and dysmorphic red cells, Serum complement (C3 and C4), Evidence of streptococcal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "IgA nephropathy, Membranoproliferative glomerulonephritis, Lupus nephritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antibiotic eradication of residual group A streptococcal infection with penicillin, or a macrolide if penicillin-allergic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all paediatric nephritis is post-streptococcal and missing lupus or membranoproliferative disease when complement stays",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute glomerulonephritis (child)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_glomerulonephritis_child-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and microscopy",
+          "cells": [
+            {
+              "text": "Red cell casts and dysmorphic red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum C3 and C4",
+          "cells": [
+            {
+              "text": "Low C3 that normalises over 6 to 8 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Streptococcal evidence (ASO, anti-DNase B, throat or skin swab)",
+          "cells": [
+            {
+              "text": "Recent streptococcal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine protein quantification",
+          "cells": [
+            {
+              "text": "Quantified proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy",
+          "cells": [
+            {
+              "text": "Atypical course, persistent low complement or deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and electrolytes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_glomerulonephritis_child-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Membranoproliferative glomerulonephritis",
+          "cells": [
+            {
+              "text": "Complement stays persistently low"
+            },
+            {
+              "text": "Serial complement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lupus nephritis",
+          "cells": [
+            {
+              "text": "Complement stays persistently low"
+            },
+            {
+              "text": "Renal biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_glomerulonephritis_child-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Penicillin, or a macrolide if penicillin-allergic",
+          "cells": [
+            {
+              "text": "Eradicates residual group A streptococcal infection"
+            },
+            {
+              "text": "Antibiotic eradication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium and fluid restriction",
+          "cells": [
+            {
+              "text": "Salt and water retention"
+            },
+            {
+              "text": "Limits volume overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loop diuretics",
+          "cells": [
+            {
+              "text": "Oedema and fluid overload"
+            },
+            {
+              "text": "For oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium-channel blockers or vasodilators",
+          "cells": [
+            {
+              "text": "Hypertension"
+            },
+            {
+              "text": "Antihypertensive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment of hypertensive encephalopathy and pulmonary oedema",
+          "cells": [
+            {
+              "text": "Severe fluid overload"
+            },
+            {
+              "text": "When overload is severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of renal function, blood pressure, urinalysis and serial complement",
+          "cells": [
+            {
+              "text": "Confirms expected C3 normalisation"
+            },
+            {
+              "text": "Serial checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric nephrology referral; dialysis if severe",
+          "cells": [
+            {
+              "text": "Severe or deteriorating renal impairment"
+            },
+            {
+              "text": "Dialysis if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy",
+          "cells": [
+            {
+              "text": "Atypical course or persistently low complement"
+            },
+            {
+              "text": "If the course is atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_glomerulonephritis_child-dx-mgmt",
+      "title": "Diagnosis and management of Acute Glomerulonephritis (Child)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tea-coloured urine, oedema and hypertension 1 to 3 weeks after a sore throat",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe hypertension, pulmonary oedema or rising creatinine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric nephrology; treat encephalopathy and fluid overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis for red cell casts, streptococcal serology and serum C3, C4",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Recent streptococcal infection with low C3 found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Penicillin or macrolide; sodium restriction and loop diuretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Renal biopsy; review MPGN, lupus nephritis and IgA nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Calcium-channel blockers or vasodilators for hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor renal function, blood pressure and urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial complement to confirm expected C3 normalisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most recover completely; microscopic haematuria may persist for a year",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

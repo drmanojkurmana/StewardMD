@@ -1,177 +1,464 @@
 {
- "id": "frontometaphyseal_dysplasia",
- "name": "Frontometaphyseal dysplasia (FLNA)",
- "aliases": [
-  "FMD",
-  "FLNA",
-  "filamin A-related otopalatodigital spectrum",
-  "OPD spectrum disorder"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Part of the X-linked otopalatodigital spectrum caused by gain-of-function variants in FLNA, encoding the actin-cross-linking protein filamin A",
-   "Characteristic craniofacial features include a prominent supraorbital ridge with a heavy bony brow, hypertelorism and a small jaw with dental anomalies",
-   "The skeleton shows metaphyseal undermodelling (an Erlenmeyer-flask tendency), progressive scoliosis, joint contractures and hand and foot anomalies",
-   "Conductive and mixed hearing loss is common owing to ossicular and middle-ear involvement",
-   "As an X-linked condition, males are generally more severely affected than heterozygous females, who show milder and more variable features",
-   "Extraskeletal features such as urogenital and airway anomalies may occur across the FLNA otopalatodigital spectrum",
-   "Management is supportive and multidisciplinary, with hearing surveillance and support, orthopaedic care for scoliosis and contractures, and monitoring for cranial-nerve foraminal narrowing"
+  "id": "frontometaphyseal_dysplasia",
+  "name": "Frontometaphyseal dysplasia (FLNA)",
+  "aliases": [
+    "FMD",
+    "FLNA",
+    "filamin A-related otopalatodigital spectrum",
+    "OPD spectrum disorder"
   ],
-  "pathophysiology": "Frontometaphyseal dysplasia is caused by gain-of-function variants in FLNA, an X-linked gene encoding filamin A, a cytoskeletal protein that cross-links actin filaments and coordinates cell shape, migration and mechanotransduction. Altered filamin A function disturbs the modelling and remodelling of the skeleton, producing the prominent frontal bony ridge, metaphyseal undermodelling, contractures and progressive spinal deformity. Involvement of the ossicles and middle ear underlies the hearing loss. Because FLNA is X-linked, hemizygous males typically manifest a more severe phenotype, while heterozygous females are protected to a variable degree by X-inactivation, producing the characteristic sex difference across the otopalatodigital spectrum.",
-  "additionalDifferentials": [
-   "Otopalatodigital syndrome (the same FLNA spectrum)",
-   "Melnick-Needles syndrome (also FLNA-related)",
-   "Craniometaphyseal dysplasia",
-   "Pyle disease",
-   "Osteodysplasty and other skeletal dysplasias with metaphyseal flaring",
-   "Larsen syndrome and other contracture-associated dysplasias"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating the supraorbital ridge, metaphyseal undermodelling and hand and foot anomalies",
-   "Spinal imaging to detect and monitor scoliosis",
-   "Audiometry and middle-ear assessment for conductive or mixed hearing loss",
-   "Skull imaging to assess for foraminal narrowing where cranial-nerve symptoms arise",
-   "FLNA molecular genetic testing with X-linked segregation analysis",
-   "Urogenital and airway evaluation given the broader FLNA spectrum"
-  ],
-  "redFlags": [
-   "Progressive scoliosis causing respiratory or neurological compromise",
-   "Worsening hearing loss requiring intervention",
-   "Airway obstruction or laryngotracheal narrowing in the FLNA spectrum",
-   "Cranial-nerve deficits suggesting foraminal narrowing"
-  ],
-  "prognosis": "The prognosis depends on severity and sex, with males often more significantly affected; intelligence is usually normal and life expectancy generally preserved, though scoliosis, contractures, hearing loss and airway or urogenital anomalies contribute to morbidity.",
-  "pitfalls": [
-   "Failing to recognise the disorder as part of the FLNA otopalatodigital spectrum and its X-linked inheritance",
-   "Overlooking hearing loss and delaying audiological support",
-   "Missing progressive scoliosis that requires timely orthopaedic management",
-   "Underestimating extraskeletal (urogenital or airway) involvement within the spectrum"
-  ],
-  "references": [
-   "Resnick's Diagnosis of Bone and Joint Disorders",
-   "GeneReviews: FLNA-related otopalatodigital spectrum disorders"
-  ],
-  "crossLinks": [
-   "otopalatodigital_syndrome",
-   "melnick_needles_syndrome"
-  ],
-  "management": [
-   "Audiological management of conductive and mixed hearing loss with hearing aids and otological surgery for ossicular involvement",
-   "Orthopaedic and physiotherapy management of progressive scoliosis, joint contractures and hand and foot anomalies, with bracing or surgery",
-   "Surveillance for foraminal narrowing and cranial-nerve compromise, with neurosurgical assessment where symptoms arise",
-   "Evaluation and management of urogenital and airway anomalies across the FLNA otopalatodigital spectrum",
-   "Regular monitoring of spinal deformity, hearing and skeletal progression",
-   "Multidisciplinary coordination across metabolic bone, clinical genetics, ENT, orthopaedics and dentistry",
-   "Genetic counselling for the X-linked FLNA disorder, noting greater severity in males, with carrier testing and recurrence-risk discussion"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "frontometaphyseal_dysplasia-pathway",
-   "title": "Frontometaphyseal dysplasia (FLNA): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Part of the X-linked otopalatodigital spectrum caused by gain-of-function variants in FLNA, encoding the actin-cross-linking protein filamin A",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive scoliosis causing respiratory or neurological compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating the supraorbital ridge, metaphyseal undermodelling and hand and foot anomalies, Spinal imaging to detect and monitor scoliosis, Audiometry and middle-ear assessment for conductive or mixed"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Audiological management of conductive and mixed hearing loss with hearing aids and otological surgery for ossicular involvement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise the disorder as part of the FLNA otopalatodigital spectrum and its X-linked inheritance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of frontometaphyseal dysplasia (flna)."
-  }
- ],
- "tables": [
-  {
-   "id": "frontometaphyseal_dysplasia-matrix",
-   "title": "Frontometaphyseal dysplasia (FLNA): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Part of the X-linked otopalatodigital spectrum caused by gain-of-function variants in FLNA, encoding the actin-cross-linking",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Part of the X-linked otopalatodigital spectrum caused by gain-of-function variants in FLNA, encoding the actin-cross-linking protein filamin A",
+      "Characteristic craniofacial features include a prominent supraorbital ridge with a heavy bony brow, hypertelorism and a small jaw with dental anomalies",
+      "The skeleton shows metaphyseal undermodelling (an Erlenmeyer-flask tendency), progressive scoliosis, joint contractures and hand and foot anomalies",
+      "Conductive and mixed hearing loss is common owing to ossicular and middle-ear involvement",
+      "As an X-linked condition, males are generally more severely affected than heterozygous females, who show milder and more variable features",
+      "Extraskeletal features such as urogenital and airway anomalies may occur across the FLNA otopalatodigital spectrum",
+      "Management is supportive and multidisciplinary, with hearing surveillance and support, orthopaedic care for scoliosis and contractures, and monitoring for cranial-nerve foraminal narrowing"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating the supraorbital ridge, metaphyseal undermodelling and hand and foot anomalies, Spinal imaging to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Frontometaphyseal dysplasia is caused by gain-of-function variants in FLNA, an X-linked gene encoding filamin A, a cytoskeletal protein that cross-links actin filaments and coordinates cell shape, migration and mechanotransduction. Altered filamin A function disturbs the modelling and remodelling of the skeleton, producing the prominent frontal bony ridge, metaphyseal undermodelling, contractures and progressive spinal deformity. Involvement of the ossicles and middle ear underlies the hearing loss. Because FLNA is X-linked, hemizygous males typically manifest a more severe phenotype, while heterozygous females are protected to a variable degree by X-inactivation, producing the characteristic sex difference across the otopalatodigital spectrum.",
+    "additionalDifferentials": [
+      "Otopalatodigital syndrome (the same FLNA spectrum)",
+      "Melnick-Needles syndrome (also FLNA-related)",
+      "Craniometaphyseal dysplasia",
+      "Pyle disease",
+      "Osteodysplasty and other skeletal dysplasias with metaphyseal flaring",
+      "Larsen syndrome and other contracture-associated dysplasias"
     ],
-    [
-     "Primary Differentials",
-     "Otopalatodigital syndrome (the same FLNA spectrum), Melnick-Needles syndrome (also FLNA-related), Craniometaphyseal dysplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating the supraorbital ridge, metaphyseal undermodelling and hand and foot anomalies",
+      "Spinal imaging to detect and monitor scoliosis",
+      "Audiometry and middle-ear assessment for conductive or mixed hearing loss",
+      "Skull imaging to assess for foraminal narrowing where cranial-nerve symptoms arise",
+      "FLNA molecular genetic testing with X-linked segregation analysis",
+      "Urogenital and airway evaluation given the broader FLNA spectrum"
     ],
-    [
-     "Management Strategy",
-     "Audiological management of conductive and mixed hearing loss with hearing aids and otological surgery for ossicular involvement",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive scoliosis causing respiratory or neurological compromise",
+      "Worsening hearing loss requiring intervention",
+      "Airway obstruction or laryngotracheal narrowing in the FLNA spectrum",
+      "Cranial-nerve deficits suggesting foraminal narrowing"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise the disorder as part of the FLNA otopalatodigital spectrum and its X-linked inheritance",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis depends on severity and sex, with males often more significantly affected; intelligence is usually normal and life expectancy generally preserved, though scoliosis, contractures, hearing loss and airway or urogenital anomalies contribute to morbidity.",
+    "pitfalls": [
+      "Failing to recognise the disorder as part of the FLNA otopalatodigital spectrum and its X-linked inheritance",
+      "Overlooking hearing loss and delaying audiological support",
+      "Missing progressive scoliosis that requires timely orthopaedic management",
+      "Underestimating extraskeletal (urogenital or airway) involvement within the spectrum"
+    ],
+    "references": [
+      "Resnick's Diagnosis of Bone and Joint Disorders",
+      "GeneReviews: FLNA-related otopalatodigital spectrum disorders"
+    ],
+    "crossLinks": [
+      "otopalatodigital_syndrome",
+      "melnick_needles_syndrome"
+    ],
+    "management": [
+      "Audiological management of conductive and mixed hearing loss with hearing aids and otological surgery for ossicular involvement",
+      "Orthopaedic and physiotherapy management of progressive scoliosis, joint contractures and hand and foot anomalies, with bracing or surgery",
+      "Surveillance for foraminal narrowing and cranial-nerve compromise, with neurosurgical assessment where symptoms arise",
+      "Evaluation and management of urogenital and airway anomalies across the FLNA otopalatodigital spectrum",
+      "Regular monitoring of spinal deformity, hearing and skeletal progression",
+      "Multidisciplinary coordination across metabolic bone, clinical genetics, ENT, orthopaedics and dentistry",
+      "Genetic counselling for the X-linked FLNA disorder, noting greater severity in males, with carrier testing and recurrence-risk discussion"
     ]
-   ],
-   "caption": "Overview comparison matrix for frontometaphyseal dysplasia (flna)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "frontometaphyseal-dysplasia-real-image",
-   "title": "Frontometaphyseal dysplasia (FLNA): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "frontometaphyseal_dysplasia-pathway",
+      "title": "Frontometaphyseal dysplasia (FLNA): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Part of the X-linked otopalatodigital spectrum caused by gain-of-function variants in FLNA, encoding the actin-cross-linking protein filamin A",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive scoliosis causing respiratory or neurological compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating the supraorbital ridge, metaphyseal undermodelling and hand and foot anomalies, Spinal imaging to detect and monitor scoliosis, Audiometry and middle-ear assessment for conductive or mixed"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Audiological management of conductive and mixed hearing loss with hearing aids and otological surgery for ossicular involvement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise the disorder as part of the FLNA otopalatodigital spectrum and its X-linked inheritance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of frontometaphyseal dysplasia (flna)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "frontometaphyseal_dysplasia-matrix",
+      "title": "Frontometaphyseal dysplasia (FLNA): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Part of the X-linked otopalatodigital spectrum caused by gain-of-function variants in FLNA, encoding the actin-cross-linking",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating the supraorbital ridge, metaphyseal undermodelling and hand and foot anomalies, Spinal imaging to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Otopalatodigital syndrome (the same FLNA spectrum), Melnick-Needles syndrome (also FLNA-related), Craniometaphyseal dysplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Audiological management of conductive and mixed hearing loss with hearing aids and otological surgery for ossicular involvement",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise the disorder as part of the FLNA otopalatodigital spectrum and its X-linked inheritance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for frontometaphyseal dysplasia (flna)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frontometaphyseal_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Supraorbital ridge, metaphyseal undermodelling and hand and foot anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal imaging",
+          "cells": [
+            {
+              "text": "Detects and monitors scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and middle-ear assessment",
+          "cells": [
+            {
+              "text": "Conductive or mixed hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull imaging",
+          "cells": [
+            {
+              "text": "Foraminal narrowing where cranial-nerve symptoms arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FLNA molecular genetic testing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urogenital and airway evaluation",
+          "cells": [
+            {
+              "text": "Broader FLNA spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frontometaphyseal_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Otopalatodigital syndrome",
+          "cells": [
+            {
+              "text": "Same FLNA spectrum; X-linked inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melnick-Needles syndrome",
+          "cells": [
+            {
+              "text": "Also FLNA-related"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frontometaphyseal_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Audiological management",
+          "cells": [
+            {
+              "text": "Hearing aids for conductive and mixed loss; otological surgery for ossicular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and physiotherapy care",
+          "cells": [
+            {
+              "text": "Progressive scoliosis, joint contractures, hand and foot anomalies; bracing or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foraminal narrowing surveillance",
+          "cells": [
+            {
+              "text": "Cranial-nerve compromise; neurosurgical assessment where symptoms arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urogenital and airway anomalies",
+          "cells": [
+            {
+              "text": "Evaluation and management across the FLNA spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular monitoring",
+          "cells": [
+            {
+              "text": "Spinal deformity, hearing and skeletal progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Metabolic bone, clinical genetics, ENT, orthopaedics and dentistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked FLNA disorder, greater severity in males; carrier testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frontometaphyseal_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Frontometaphyseal dysplasia (FLNA)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected frontometaphyseal dysplasia: supraorbital ridge and metaphyseal change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive scoliosis, worsening hearing, airway narrowing)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for airway obstruction or laryngotracheal narrowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, spinal imaging, audiometry and FLNA genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does FLNA molecular testing with segregation analysis confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider otopalatodigital, Melnick-Needles, craniometaphyseal or Pyle disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hearing aids and otological surgery for conductive or mixed hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bracing or surgery for progressive scoliosis and joint contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveillance for foraminal narrowing and cranial-nerve compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for the X-linked FLNA disorder, greater severity in males",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on severity and sex; males often more affected; intelligence usually normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

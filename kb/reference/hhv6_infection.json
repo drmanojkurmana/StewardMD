@@ -1,175 +1,480 @@
 {
- "id": "hhv6_infection",
- "name": "HHV-6 infection (roseola/encephalitis)",
- "aliases": [
-  "human herpesvirus 6",
-  "HHV-6",
-  "roseola infantum",
-  "exanthem subitum",
-  "sixth disease"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Human herpesvirus 6 (chiefly HHV-6B) is acquired almost universally in early childhood and thereafter remains latent, capable of reactivation under immunosuppression",
-   "Primary infection in infants causes roseola infantum (exanthem subitum): several days of high fever followed by defervescence and a maculopapular rash as the child improves",
-   "It is a common cause of febrile seizures in young children owing to its neurotropism",
-   "In allograft recipients, especially after haematopoietic stem-cell transplantation, reactivation causes post-transplant limbic encephalitis with amnesia, confusion, seizures, and hyponatraemia",
-   "MRI in HHV-6 encephalitis characteristically shows medial temporal lobe and limbic signal change, and CSF HHV-6 DNA PCR is usually positive",
-   "Chromosomally integrated HHV-6 (ciHHV-6), present in a minority of people, produces persistently very high viral DNA loads in every nucleated cell and can be mistaken for active infection",
-   "Antiviral agents active against HHV-6 (such as ganciclovir or foscarnet) are used for significant reactivation disease, particularly encephalitis in the immunocompromised"
+  "id": "hhv6_infection",
+  "name": "HHV-6 infection (roseola/encephalitis)",
+  "aliases": [
+    "human herpesvirus 6",
+    "HHV-6",
+    "roseola infantum",
+    "exanthem subitum",
+    "sixth disease"
   ],
-  "pathophysiology": "HHV-6 is a betaherpesvirus that infects and replicates in T lymphocytes and establishes lifelong latency in lymphocytes, monocytes, and the central nervous system. Primary infection in infancy produces a viraemic febrile illness; as the immune response develops the fever subsides and a rash may appear. The virus is neurotropic and can invade the limbic system, causing encephalitis when cellular immunity is impaired, as after stem-cell or solid-organ transplantation. Uniquely among human herpesviruses, HHV-6 can integrate its genome into host chromosomal telomeres; when this occurs in a germ cell the integrated virus is inherited in every somatic cell, producing extraordinarily high blood viral loads that do not indicate active replication and can confound diagnosis.",
-  "additionalDifferentials": [
-   "Measles, rubella, and other viral exanthems of childhood",
-   "Herpes simplex virus encephalitis",
-   "Other viral encephalitides including cytomegalovirus and enterovirus",
-   "Autoimmune or paraneoplastic limbic encephalitis",
-   "Drug reaction with eosinophilia and systemic symptoms (DRESS), in which HHV-6 reactivation is often implicated",
-   "Bacterial meningitis or other causes of febrile seizures"
-  ],
-  "additionalInvestigations": [
-   "HHV-6 DNA PCR from cerebrospinal fluid in suspected encephalitis",
-   "Quantitative HHV-6 DNA PCR from plasma or whole blood to assess reactivation",
-   "MRI of the brain to demonstrate limbic and medial temporal involvement",
-   "Testing to identify chromosomally integrated HHV-6 (for example very high viral load in hair follicles or nails, or a consistent one-copy-per-cell ratio)",
-   "Serum sodium and full metabolic panel, as hyponatraemia accompanies limbic encephalitis",
-   "Electroencephalography where seizures or encephalopathy are present"
-  ],
-  "redFlags": [
-   "Amnesia, confusion, or seizures with limbic signal change after transplantation",
-   "Status epilepticus or prolonged febrile seizures",
-   "Rapidly declining conscious level suggesting encephalitis",
-   "Severe hyponatraemia accompanying suspected limbic encephalitis"
-  ],
-  "prognosis": "Roseola in healthy children is benign and self-limiting; post-transplant HHV-6 limbic encephalitis is serious, with a risk of persistent memory impairment, epilepsy, or death, and outcome depends on prompt antiviral treatment and immune recovery.",
-  "pitfalls": [
-   "Misinterpreting the very high viral loads of chromosomally integrated HHV-6 as active infection and treating unnecessarily",
-   "Overlooking HHV-6 as a cause of encephalitis and amnesia in the early post-transplant period",
-   "Attributing all high fever with rash in infants to HHV-6 without considering other exanthems",
-   "Failing to link HHV-6 reactivation with DRESS and its relapsing course"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "UpToDate: Human herpesvirus 6 infection in adults and children"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat serious disease such as post-transplant limbic encephalitis with ganciclovir or foscarnet, noting that aciclovir is not reliably effective against HHV-6",
-   "Manage roseola infantum in healthy children supportively with antipyretics and fluids, as it is self-limiting and needs no antiviral therapy",
-   "Provide supportive management of HHV-6-related febrile seizures and use antiepileptic therapy where encephalitic seizures occur",
-   "In transplant recipients, monitor blood viral load and reduce immunosuppression where feasible to aid immune recovery",
-   "Correct the hyponatraemia that accompanies limbic encephalitis and support neurological recovery",
-   "Identify chromosomally integrated HHV-6 to avoid misinterpreting persistently very high viral loads as active infection and overtreating",
-   "Escalate to specialist and critical care for encephalitis, refractory seizures or immunocompromised hosts"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hhv6_infection-pathway",
-   "title": "HHV-6 infection (roseola/encephalitis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Human herpesvirus 6 (chiefly HHV-6B) is acquired almost universally in early childhood and thereafter remains latent, capable of reactivation under immunosuppression",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Amnesia, confusion, or seizures with limbic signal change after transplantation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: HHV-6 DNA PCR from cerebrospinal fluid in suspected encephalitis, Quantitative HHV-6 DNA PCR from plasma or whole blood to assess reactivation, MRI of the brain to demonstrate limbic and medial temporal involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat serious disease such as post-transplant limbic encephalitis with ganciclovir or foscarnet, noting that aciclovir is not reliably effective against HHV-6"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the very high viral loads of chromosomally integrated HHV-6 as active infection and treating unnecessarily"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hhv-6 infection (roseola/encephalitis)."
-  }
- ],
- "tables": [
-  {
-   "id": "hhv6_infection-matrix",
-   "title": "HHV-6 infection (roseola/encephalitis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Human herpesvirus 6 (chiefly HHV-6B) is acquired almost universally in early childhood and thereafter remains latent, capable of",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Human herpesvirus 6 (chiefly HHV-6B) is acquired almost universally in early childhood and thereafter remains latent, capable of reactivation under immunosuppression",
+      "Primary infection in infants causes roseola infantum (exanthem subitum): several days of high fever followed by defervescence and a maculopapular rash as the child improves",
+      "It is a common cause of febrile seizures in young children owing to its neurotropism",
+      "In allograft recipients, especially after haematopoietic stem-cell transplantation, reactivation causes post-transplant limbic encephalitis with amnesia, confusion, seizures, and hyponatraemia",
+      "MRI in HHV-6 encephalitis characteristically shows medial temporal lobe and limbic signal change, and CSF HHV-6 DNA PCR is usually positive",
+      "Chromosomally integrated HHV-6 (ciHHV-6), present in a minority of people, produces persistently very high viral DNA loads in every nucleated cell and can be mistaken for active infection",
+      "Antiviral agents active against HHV-6 (such as ganciclovir or foscarnet) are used for significant reactivation disease, particularly encephalitis in the immunocompromised"
     ],
-    [
-     "Key Investigations",
-     "HHV-6 DNA PCR from cerebrospinal fluid in suspected encephalitis, Quantitative HHV-6 DNA PCR from plasma or whole blood to assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "HHV-6 is a betaherpesvirus that infects and replicates in T lymphocytes and establishes lifelong latency in lymphocytes, monocytes, and the central nervous system. Primary infection in infancy produces a viraemic febrile illness; as the immune response develops the fever subsides and a rash may appear. The virus is neurotropic and can invade the limbic system, causing encephalitis when cellular immunity is impaired, as after stem-cell or solid-organ transplantation. Uniquely among human herpesviruses, HHV-6 can integrate its genome into host chromosomal telomeres; when this occurs in a germ cell the integrated virus is inherited in every somatic cell, producing extraordinarily high blood viral loads that do not indicate active replication and can confound diagnosis.",
+    "additionalDifferentials": [
+      "Measles, rubella, and other viral exanthems of childhood",
+      "Herpes simplex virus encephalitis",
+      "Other viral encephalitides including cytomegalovirus and enterovirus",
+      "Autoimmune or paraneoplastic limbic encephalitis",
+      "Drug reaction with eosinophilia and systemic symptoms (DRESS), in which HHV-6 reactivation is often implicated",
+      "Bacterial meningitis or other causes of febrile seizures"
     ],
-    [
-     "Primary Differentials",
-     "Measles, rubella, and other viral exanthems of childhood, Herpes simplex virus encephalitis, Other viral encephalitides including",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "HHV-6 DNA PCR from cerebrospinal fluid in suspected encephalitis",
+      "Quantitative HHV-6 DNA PCR from plasma or whole blood to assess reactivation",
+      "MRI of the brain to demonstrate limbic and medial temporal involvement",
+      "Testing to identify chromosomally integrated HHV-6 (for example very high viral load in hair follicles or nails, or a consistent one-copy-per-cell ratio)",
+      "Serum sodium and full metabolic panel, as hyponatraemia accompanies limbic encephalitis",
+      "Electroencephalography where seizures or encephalopathy are present"
     ],
-    [
-     "Management Strategy",
-     "Treat serious disease such as post-transplant limbic encephalitis with ganciclovir or foscarnet, noting that aciclovir is not",
-     "Core treatment modality"
+    "redFlags": [
+      "Amnesia, confusion, or seizures with limbic signal change after transplantation",
+      "Status epilepticus or prolonged febrile seizures",
+      "Rapidly declining conscious level suggesting encephalitis",
+      "Severe hyponatraemia accompanying suspected limbic encephalitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the very high viral loads of chromosomally integrated HHV-6 as active infection and treating unnecessarily",
-     "Prevent diagnostic or management error"
+    "prognosis": "Roseola in healthy children is benign and self-limiting; post-transplant HHV-6 limbic encephalitis is serious, with a risk of persistent memory impairment, epilepsy, or death, and outcome depends on prompt antiviral treatment and immune recovery.",
+    "pitfalls": [
+      "Misinterpreting the very high viral loads of chromosomally integrated HHV-6 as active infection and treating unnecessarily",
+      "Overlooking HHV-6 as a cause of encephalitis and amnesia in the early post-transplant period",
+      "Attributing all high fever with rash in infants to HHV-6 without considering other exanthems",
+      "Failing to link HHV-6 reactivation with DRESS and its relapsing course"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "UpToDate: Human herpesvirus 6 infection in adults and children"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat serious disease such as post-transplant limbic encephalitis with ganciclovir or foscarnet, noting that aciclovir is not reliably effective against HHV-6",
+      "Manage roseola infantum in healthy children supportively with antipyretics and fluids, as it is self-limiting and needs no antiviral therapy",
+      "Provide supportive management of HHV-6-related febrile seizures and use antiepileptic therapy where encephalitic seizures occur",
+      "In transplant recipients, monitor blood viral load and reduce immunosuppression where feasible to aid immune recovery",
+      "Correct the hyponatraemia that accompanies limbic encephalitis and support neurological recovery",
+      "Identify chromosomally integrated HHV-6 to avoid misinterpreting persistently very high viral loads as active infection and overtreating",
+      "Escalate to specialist and critical care for encephalitis, refractory seizures or immunocompromised hosts"
     ]
-   ],
-   "caption": "Overview comparison matrix for hhv-6 infection (roseola/encephalitis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hhv6-infection-real-image",
-   "title": "HHV-6 infection (roseola/encephalitis): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hhv6_infection-pathway",
+      "title": "HHV-6 infection (roseola/encephalitis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Human herpesvirus 6 (chiefly HHV-6B) is acquired almost universally in early childhood and thereafter remains latent, capable of reactivation under immunosuppression",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Amnesia, confusion, or seizures with limbic signal change after transplantation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: HHV-6 DNA PCR from cerebrospinal fluid in suspected encephalitis, Quantitative HHV-6 DNA PCR from plasma or whole blood to assess reactivation, MRI of the brain to demonstrate limbic and medial temporal involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat serious disease such as post-transplant limbic encephalitis with ganciclovir or foscarnet, noting that aciclovir is not reliably effective against HHV-6"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the very high viral loads of chromosomally integrated HHV-6 as active infection and treating unnecessarily"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hhv-6 infection (roseola/encephalitis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hhv6_infection-matrix",
+      "title": "HHV-6 infection (roseola/encephalitis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Human herpesvirus 6 (chiefly HHV-6B) is acquired almost universally in early childhood and thereafter remains latent, capable of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "HHV-6 DNA PCR from cerebrospinal fluid in suspected encephalitis, Quantitative HHV-6 DNA PCR from plasma or whole blood to assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Measles, rubella, and other viral exanthems of childhood, Herpes simplex virus encephalitis, Other viral encephalitides including",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat serious disease such as post-transplant limbic encephalitis with ganciclovir or foscarnet, noting that aciclovir is not",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the very high viral loads of chromosomally integrated HHV-6 as active infection and treating unnecessarily",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hhv-6 infection (roseola/encephalitis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hhv6_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "HHV-6 DNA PCR from cerebrospinal fluid",
+          "cells": [
+            {
+              "text": "Encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative HHV-6 DNA PCR from plasma or blood",
+          "cells": [
+            {
+              "text": "Viral load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Limbic and medial temporal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for chromosomally integrated HHV-6",
+          "cells": [
+            {
+              "text": "Integrated viral genome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium and full metabolic panel",
+          "cells": [
+            {
+              "text": "Hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Seizures or encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hhv6_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex virus encephalitis",
+          "cells": [
+            {
+              "text": "CSF PCR separates the two viruses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune or paraneoplastic limbic encephalitis",
+          "cells": [
+            {
+              "text": "Limbic signal change on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug reaction with eosinophilia and systemic symptoms",
+          "cells": [
+            {
+              "text": "Drug exposure; eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles, rubella and other viral exanthems",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hhv6_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Serious disease, such as post-transplant limbic encephalitis",
+          "cells": [
+            {
+              "text": "Specialist treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Roseola infantum",
+          "cells": [
+            {
+              "text": "Supportive management in healthy children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HHV-6 related febrile seizures",
+          "cells": [
+            {
+              "text": "Supportive management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant recipients",
+          "cells": [
+            {
+              "text": "Monitor blood viral load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyponatraemia",
+          "cells": [
+            {
+              "text": "Corrected in limbic encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Integrated HHV-6 identification",
+          "cells": [
+            {
+              "text": "Avoids misinterpretation of viral load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Specialist and critical care for encephalitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hhv6_infection-dx-mgmt",
+      "title": "Diagnosis and management of HHV-6 infection (roseola/encephalitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with rash in a child, or limbic encephalitis with amnesia or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Limbic signs, status epilepticus, falling consciousness, or severe hyponatraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: specialist and critical care for encephalitis or status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSF and plasma HHV-6 PCR; MRI brain; sodium; EEG; integrated HHV-6 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is HHV-6 DNA detected in CSF with limbic MRI change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HSV encephalitis, autoimmune limbic encephalitis or DRESS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care for roseola and febrile seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Specialist treatment for serious disease such as post-transplant limbic encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor viral load in transplant recipients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct hyponatraemia that accompanies limbic encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serious disease treated; roseola settles with supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

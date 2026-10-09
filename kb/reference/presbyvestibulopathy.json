@@ -1,173 +1,449 @@
 {
- "id": "presbyvestibulopathy",
- "name": "Presbyvestibulopathy",
- "aliases": [
-  "age-related vestibular loss",
-  "presbyvestibular dysfunction",
-  "vestibular ageing",
-  "PVP"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology",
- "specialty": "Otology / Audiovestibular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Describes age-related decline in vestibular function producing chronic unsteadiness and a tendency to falls in older adults",
-   "Symptoms are typically mild imbalance and postural instability rather than discrete vertigo attacks",
-   "Diagnostic criteria require mild bilateral vestibular reduction on quantitative testing that falls short of the thresholds for bilateral vestibulopathy",
-   "It is a diagnosis reached after excluding other treatable vestibular and neurological causes of imbalance in the elderly",
-   "The deficit reflects gradual loss of vestibular hair cells and neurones as part of normal ageing",
-   "Vestibular rehabilitation and multifactorial falls-prevention measures are the mainstays of management",
-   "It frequently coexists with presbyacusis, visual decline, and peripheral neuropathy, compounding balance impairment"
+  "id": "presbyvestibulopathy",
+  "name": "Presbyvestibulopathy",
+  "aliases": [
+    "age-related vestibular loss",
+    "presbyvestibular dysfunction",
+    "vestibular ageing",
+    "PVP"
   ],
-  "pathophysiology": "With ageing there is progressive attrition of vestibular hair cells, primary vestibular neurones, and otolithic structures, together with reduced central compensation capacity. This produces a mild, symmetrical reduction in vestibular reflexes that impairs the vestibulo-ocular and vestibulospinal contributions to gaze and postural stability. Because the loss is gradual and moderate, patients experience chronic unsteadiness rather than acute vertigo, and the disability is amplified when other age-related sensory systems, particularly vision and proprioception, also decline, reducing the redundancy the balance system relies on for compensation.",
-  "additionalDifferentials": [
-   "Bilateral vestibulopathy with more severe reflex loss",
-   "Benign paroxysmal positional vertigo",
-   "Peripheral neuropathy and proprioceptive loss",
-   "Cerebrovascular and cerebellar degenerative disorders",
-   "Orthostatic hypotension and cardiovascular causes of unsteadiness",
-   "Medication-related dizziness and polypharmacy"
-  ],
-  "additionalInvestigations": [
-   "Video head impulse testing to quantify mild reduction in vestibulo-ocular reflex gain",
-   "Caloric or rotational chair testing to confirm mild bilateral hypofunction",
-   "Audiometry to assess coexisting presbyacusis",
-   "Assessment of gait, balance, and falls risk",
-   "Review of vision, proprioception, and medications contributing to instability",
-   "Neuroimaging when central or cerebrovascular disease is suspected"
-  ],
-  "redFlags": [
-   "Recurrent falls with injury",
-   "Focal neurological signs suggesting a central cause",
-   "Rapid deterioration inconsistent with gradual ageing",
-   "Severe reflex loss meeting criteria for bilateral vestibulopathy instead"
-  ],
-  "prognosis": "The vestibular decline itself is not reversible, but rehabilitation, sensory optimisation, and falls-prevention strategies meaningfully reduce instability and injury risk in most older adults.",
-  "pitfalls": [
-   "Labelling all elderly dizziness as ageing and missing a treatable cause such as positional vertigo",
-   "Overlooking contributory medications and cardiovascular factors",
-   "Not distinguishing mild age-related loss from true bilateral vestibulopathy",
-   "Neglecting the compounding effect of coexisting vision and proprioceptive decline"
-  ],
-  "references": [
-   "Cummings Otolaryngology",
-   "Barany Society Consensus: Presbyvestibulopathy Diagnostic Criteria"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Vestibular rehabilitation exercises as the mainstay to promote central compensation and improve gaze and postural stability",
-   "Multifactorial falls-prevention including home-hazard assessment, strength and balance training and appropriate walking aids",
-   "Optimise other sensory inputs by correcting visual impairment and ensuring good proprioceptive cues with suitable footwear",
-   "Review and rationalise medications that impair balance, such as sedatives and vestibular suppressants",
-   "Identify and treat coexisting or alternative vestibular and neurological disorders",
-   "Ongoing multidisciplinary follow-up across audiovestibular medicine, physiotherapy and geriatrics to monitor stability and injury risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "presbyvestibulopathy-pathway",
-   "title": "Presbyvestibulopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Describes age-related decline in vestibular function producing chronic unsteadiness and a tendency to falls in older adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent falls with injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Video head impulse testing to quantify mild reduction in vestibulo-ocular reflex gain, Caloric or rotational chair testing to confirm mild bilateral hypofunction, Audiometry to assess coexisting presbyacusis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Vestibular rehabilitation exercises as the mainstay to promote central compensation and improve gaze and postural stability"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling all elderly dizziness as ageing and missing a treatable cause such as positional vertigo"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of presbyvestibulopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "presbyvestibulopathy-matrix",
-   "title": "Presbyvestibulopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Describes age-related decline in vestibular function producing chronic unsteadiness and a tendency to falls in older adults",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology",
+  "specialty": "Otology / Audiovestibular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Describes age-related decline in vestibular function producing chronic unsteadiness and a tendency to falls in older adults",
+      "Symptoms are typically mild imbalance and postural instability rather than discrete vertigo attacks",
+      "Diagnostic criteria require mild bilateral vestibular reduction on quantitative testing that falls short of the thresholds for bilateral vestibulopathy",
+      "It is a diagnosis reached after excluding other treatable vestibular and neurological causes of imbalance in the elderly",
+      "The deficit reflects gradual loss of vestibular hair cells and neurones as part of normal ageing",
+      "Vestibular rehabilitation and multifactorial falls-prevention measures are the mainstays of management",
+      "It frequently coexists with presbyacusis, visual decline, and peripheral neuropathy, compounding balance impairment"
     ],
-    [
-     "Key Investigations",
-     "Video head impulse testing to quantify mild reduction in vestibulo-ocular reflex gain, Caloric or rotational chair testing to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "With ageing there is progressive attrition of vestibular hair cells, primary vestibular neurones, and otolithic structures, together with reduced central compensation capacity. This produces a mild, symmetrical reduction in vestibular reflexes that impairs the vestibulo-ocular and vestibulospinal contributions to gaze and postural stability. Because the loss is gradual and moderate, patients experience chronic unsteadiness rather than acute vertigo, and the disability is amplified when other age-related sensory systems, particularly vision and proprioception, also decline, reducing the redundancy the balance system relies on for compensation.",
+    "additionalDifferentials": [
+      "Bilateral vestibulopathy with more severe reflex loss",
+      "Benign paroxysmal positional vertigo",
+      "Peripheral neuropathy and proprioceptive loss",
+      "Cerebrovascular and cerebellar degenerative disorders",
+      "Orthostatic hypotension and cardiovascular causes of unsteadiness",
+      "Medication-related dizziness and polypharmacy"
     ],
-    [
-     "Primary Differentials",
-     "Bilateral vestibulopathy with more severe reflex loss, Benign paroxysmal positional vertigo, Peripheral neuropathy and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Video head impulse testing to quantify mild reduction in vestibulo-ocular reflex gain",
+      "Caloric or rotational chair testing to confirm mild bilateral hypofunction",
+      "Audiometry to assess coexisting presbyacusis",
+      "Assessment of gait, balance, and falls risk",
+      "Review of vision, proprioception, and medications contributing to instability",
+      "Neuroimaging when central or cerebrovascular disease is suspected"
     ],
-    [
-     "Management Strategy",
-     "Vestibular rehabilitation exercises as the mainstay to promote central compensation and improve gaze and postural stability",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent falls with injury",
+      "Focal neurological signs suggesting a central cause",
+      "Rapid deterioration inconsistent with gradual ageing",
+      "Severe reflex loss meeting criteria for bilateral vestibulopathy instead"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling all elderly dizziness as ageing and missing a treatable cause such as positional vertigo",
-     "Prevent diagnostic or management error"
+    "prognosis": "The vestibular decline itself is not reversible, but rehabilitation, sensory optimisation, and falls-prevention strategies meaningfully reduce instability and injury risk in most older adults.",
+    "pitfalls": [
+      "Labelling all elderly dizziness as ageing and missing a treatable cause such as positional vertigo",
+      "Overlooking contributory medications and cardiovascular factors",
+      "Not distinguishing mild age-related loss from true bilateral vestibulopathy",
+      "Neglecting the compounding effect of coexisting vision and proprioceptive decline"
+    ],
+    "references": [
+      "Cummings Otolaryngology",
+      "Barany Society Consensus: Presbyvestibulopathy Diagnostic Criteria"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Vestibular rehabilitation exercises as the mainstay to promote central compensation and improve gaze and postural stability",
+      "Multifactorial falls-prevention including home-hazard assessment, strength and balance training and appropriate walking aids",
+      "Optimise other sensory inputs by correcting visual impairment and ensuring good proprioceptive cues with suitable footwear",
+      "Review and rationalise medications that impair balance, such as sedatives and vestibular suppressants",
+      "Identify and treat coexisting or alternative vestibular and neurological disorders",
+      "Ongoing multidisciplinary follow-up across audiovestibular medicine, physiotherapy and geriatrics to monitor stability and injury risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for presbyvestibulopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "presbyvestibulopathy-real-image",
-   "title": "Presbyvestibulopathy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "presbyvestibulopathy-pathway",
+      "title": "Presbyvestibulopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Describes age-related decline in vestibular function producing chronic unsteadiness and a tendency to falls in older adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent falls with injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Video head impulse testing to quantify mild reduction in vestibulo-ocular reflex gain, Caloric or rotational chair testing to confirm mild bilateral hypofunction, Audiometry to assess coexisting presbyacusis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Vestibular rehabilitation exercises as the mainstay to promote central compensation and improve gaze and postural stability"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling all elderly dizziness as ageing and missing a treatable cause such as positional vertigo"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of presbyvestibulopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "presbyvestibulopathy-matrix",
+      "title": "Presbyvestibulopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Describes age-related decline in vestibular function producing chronic unsteadiness and a tendency to falls in older adults",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Video head impulse testing to quantify mild reduction in vestibulo-ocular reflex gain, Caloric or rotational chair testing to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bilateral vestibulopathy with more severe reflex loss, Benign paroxysmal positional vertigo, Peripheral neuropathy and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Vestibular rehabilitation exercises as the mainstay to promote central compensation and improve gaze and postural stability",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling all elderly dizziness as ageing and missing a treatable cause such as positional vertigo",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for presbyvestibulopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "presbyvestibulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video head impulse testing",
+          "cells": [
+            {
+              "text": "Mild reduction in vestibulo-ocular reflex gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caloric or rotational chair testing",
+          "cells": [
+            {
+              "text": "Mild bilateral hypofunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Coexisting presbyacusis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait, balance and falls assessment",
+          "cells": [
+            {
+              "text": "Gait, balance and falls risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Central or cerebrovascular disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "presbyvestibulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral vestibulopathy",
+          "cells": [
+            {
+              "text": "More severe reflex loss"
+            },
+            {
+              "text": "Caloric or rotational chair testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrovascular or cerebellar degenerative disorder",
+          "cells": [
+            {
+              "text": "Focal neurological signs suggesting a central cause"
+            },
+            {
+              "text": "Neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "presbyvestibulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vestibular rehabilitation",
+          "cells": [
+            {
+              "text": "Mainstay; promotes central compensation and improves gaze and postural stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention",
+          "cells": [
+            {
+              "text": "Home-hazard assessment, strength and balance training, appropriate walking aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimise other sensory inputs",
+          "cells": [
+            {
+              "text": "Correct visual impairment; good proprioceptive cues with suitable footwear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Rationalise sedatives and vestibular suppressants that impair balance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting disorders",
+          "cells": [
+            {
+              "text": "Other vestibular and neurological disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Audiovestibular medicine, physiotherapy and geriatrics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "presbyvestibulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Presbyvestibulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected presbyvestibulopathy: mild, gradual unsteadiness in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent falls with injury, focal neurological signs or rapid decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent evaluation for a central or cerebrovascular cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video head impulse test; caloric or rotational chair test; audiometry; falls review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do tests show mild bilateral vestibulo-ocular reflex loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bilateral vestibulopathy, BPPV or other causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vestibular rehabilitation exercises as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multifactorial falls prevention and walking aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct vision and proprioceptive cues; review medications",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting vestibular and neurological disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ongoing multidisciplinary follow-up to monitor stability and injury risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,380 @@
 {
- "id": "west_syndrome",
- "name": "West syndrome",
- "aliases": [
-  "Infantile spasms",
-  "Infantile epileptic spasms syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Paediatric neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "ILAE classification and clinical guidance on the epilepsy syndromes",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classic triad of epileptic (infantile) spasms, hypsarrhythmia on EEG, and developmental arrest or regression.",
-   "Onset is typically between 3 and 12 months, peaking around 4 to 7 months.",
-   "Spasms occur in clusters, often on awakening, with brief symmetrical flexion or extension of trunk and limbs.",
-   "Aetiology is diverse: structural (tuberous sclerosis, cortical malformation, hypoxic-ischaemic injury), genetic or metabolic, or unknown.",
-   "Hypsarrhythmia is a chaotic, high-amplitude, disorganised interictal pattern; modified or fragmented variants occur.",
-   "First-line treatments are hormonal therapy (adrenocorticotrophic hormone or corticosteroids) and vigabatrin, the latter being especially effective in tuberous sclerosis.",
-   "Prompt recognition and treatment improve developmental outcome, reflecting a treatment-lag effect.",
-   "The condition may evolve into Lennox-Gastaut syndrome or other epilepsies."
+  "id": "west_syndrome",
+  "name": "West syndrome",
+  "aliases": [
+    "Infantile spasms",
+    "Infantile epileptic spasms syndrome"
   ],
-  "pathophysiology": "West syndrome reflects age-specific hyperexcitability of the developing brain. Diverse structural, genetic and metabolic insults converge on dysregulated cortical, subcortical and brainstem networks during a critical developmental window; proposed contributors include abnormal corticotrophin-releasing hormone signalling and an imbalance of excitatory and inhibitory neurotransmission. The result is the characteristic clustered spasms and disorganised hypsarrhythmic EEG, with disruption of normal synaptic maturation contributing to developmental regression.",
-  "additionalDifferentials": [
-   "Benign non-epileptic infantile spasms and benign myoclonus of infancy",
-   "Sandifer syndrome and gastro-oesophageal reflux",
-   "Early infantile developmental and epileptic encephalopathy (Ohtahara)",
-   "Early myoclonic encephalopathy",
-   "Startle responses and benign sleep myoclonus",
-   "Tonic seizures of other origin"
-  ],
-  "additionalInvestigations": [
-   "Prolonged or video EEG including sleep to confirm hypsarrhythmia and capture spasms",
-   "MRI brain to identify a structural cause",
-   "Metabolic screen including consideration of pyridoxine-dependent and biotinidase disorders",
-   "Genetic testing (chromosomal microarray, gene panels or exome)",
-   "Skin examination and imaging for tuberous sclerosis",
-   "Ophthalmology assessment with fundoscopy",
-   "Therapeutic trial of pyridoxine where indicated"
-  ],
-  "redFlags": [
-   "Developmental regression or plateau",
-   "Clusters of spasms, especially on waking",
-   "Focal neurological signs suggesting a structural lesion",
-   "Features of raised intracranial pressure or an underlying metabolic crisis"
-  ],
-  "prognosis": "Outcome depends heavily on aetiology and treatment lag; cryptogenic cases treated promptly may do well, whereas symptomatic cases often have persistent epilepsy and intellectual disability, and many evolve into other epilepsy syndromes.",
-  "pitfalls": [
-   "Mistaking spasms for colic, reflux or startle and delaying diagnosis.",
-   "Not obtaining a sleep EEG and thereby missing hypsarrhythmia.",
-   "Prolonging the treatment lag by delaying therapy.",
-   "Overlooking tuberous sclerosis, which changes drug choice.",
-   "Failing to investigate for treatable metabolic causes."
-  ],
-  "references": [
-   "ILAE position papers on classification of the epilepsies and epileptic spasms",
-   "Panayiotopoulos CP. A Clinical Guide to Epileptic Syndromes and their Treatment",
-   "Standard textbook of paediatric neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start first-line hormonal therapy with adrenocorticotrophic hormone or oral corticosteroids such as prednisolone to suppress the spasms",
-   "Use vigabatrin as an alternative first-line agent, and preferentially where tuberous sclerosis is the underlying cause",
-   "Treat promptly to minimise the treatment lag, as early control improves developmental outcome",
-   "Identify and address the underlying aetiology, including a trial of pyridoxine for pyridoxine-dependent seizures and targeted management of metabolic or structural causes",
-   "Repeat EEG to confirm resolution of hypsarrhythmia and cessation of spasms as the treatment endpoint",
-   "Arrange long-term developmental surveillance and support, anticipating possible evolution to other epilepsy syndromes",
-   "Refer to paediatric neurology, and offer genetic counselling where a genetic cause is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "west_syndrome-pathway",
-   "title": "West syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic triad of epileptic (infantile) spasms, hypsarrhythmia on EEG, and developmental arrest or regression.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Developmental regression or plateau",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Prolonged or video EEG including sleep to confirm hypsarrhythmia and capture spasms, MRI brain to identify a structural cause, Metabolic screen including consideration of pyridoxine-dependent and biotinidase disorders"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start first-line hormonal therapy with adrenocorticotrophic hormone or oral corticosteroids such as prednisolone to suppress the spasms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking spasms for colic, reflux or startle and delaying diagnosis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of west syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "west_syndrome-matrix",
-   "title": "West syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic triad of epileptic (infantile) spasms, hypsarrhythmia on EEG, and developmental arrest or regression.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Paediatric neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ILAE classification and clinical guidance on the epilepsy syndromes",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classic triad of epileptic (infantile) spasms, hypsarrhythmia on EEG, and developmental arrest or regression.",
+      "Onset is typically between 3 and 12 months, peaking around 4 to 7 months.",
+      "Spasms occur in clusters, often on awakening, with brief symmetrical flexion or extension of trunk and limbs.",
+      "Aetiology is diverse: structural (tuberous sclerosis, cortical malformation, hypoxic-ischaemic injury), genetic or metabolic, or unknown.",
+      "Hypsarrhythmia is a chaotic, high-amplitude, disorganised interictal pattern; modified or fragmented variants occur.",
+      "First-line treatments are hormonal therapy (adrenocorticotrophic hormone or corticosteroids) and vigabatrin, the latter being especially effective in tuberous sclerosis.",
+      "Prompt recognition and treatment improve developmental outcome, reflecting a treatment-lag effect.",
+      "The condition may evolve into Lennox-Gastaut syndrome or other epilepsies."
     ],
-    [
-     "Key Investigations",
-     "Prolonged or video EEG including sleep to confirm hypsarrhythmia and capture spasms, MRI brain to identify a structural cause,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "West syndrome reflects age-specific hyperexcitability of the developing brain. Diverse structural, genetic and metabolic insults converge on dysregulated cortical, subcortical and brainstem networks during a critical developmental window; proposed contributors include abnormal corticotrophin-releasing hormone signalling and an imbalance of excitatory and inhibitory neurotransmission. The result is the characteristic clustered spasms and disorganised hypsarrhythmic EEG, with disruption of normal synaptic maturation contributing to developmental regression.",
+    "additionalDifferentials": [
+      "Benign non-epileptic infantile spasms and benign myoclonus of infancy",
+      "Sandifer syndrome and gastro-oesophageal reflux",
+      "Early infantile developmental and epileptic encephalopathy (Ohtahara)",
+      "Early myoclonic encephalopathy",
+      "Startle responses and benign sleep myoclonus",
+      "Tonic seizures of other origin"
     ],
-    [
-     "Primary Differentials",
-     "Benign non-epileptic infantile spasms and benign myoclonus of infancy, Sandifer syndrome and gastro-oesophageal reflux, Early",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Prolonged or video EEG including sleep to confirm hypsarrhythmia and capture spasms",
+      "MRI brain to identify a structural cause",
+      "Metabolic screen including consideration of pyridoxine-dependent and biotinidase disorders",
+      "Genetic testing (chromosomal microarray, gene panels or exome)",
+      "Skin examination and imaging for tuberous sclerosis",
+      "Ophthalmology assessment with fundoscopy",
+      "Therapeutic trial of pyridoxine where indicated"
     ],
-    [
-     "Management Strategy",
-     "Start first-line hormonal therapy with adrenocorticotrophic hormone or oral corticosteroids such as prednisolone to suppress the",
-     "Core treatment modality"
+    "redFlags": [
+      "Developmental regression or plateau",
+      "Clusters of spasms, especially on waking",
+      "Focal neurological signs suggesting a structural lesion",
+      "Features of raised intracranial pressure or an underlying metabolic crisis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking spasms for colic, reflux or startle and delaying diagnosis.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends heavily on aetiology and treatment lag; cryptogenic cases treated promptly may do well, whereas symptomatic cases often have persistent epilepsy and intellectual disability, and many evolve into other epilepsy syndromes.",
+    "pitfalls": [
+      "Mistaking spasms for colic, reflux or startle and delaying diagnosis.",
+      "Not obtaining a sleep EEG and thereby missing hypsarrhythmia.",
+      "Prolonging the treatment lag by delaying therapy.",
+      "Overlooking tuberous sclerosis, which changes drug choice.",
+      "Failing to investigate for treatable metabolic causes."
+    ],
+    "references": [
+      "ILAE position papers on classification of the epilepsies and epileptic spasms",
+      "Panayiotopoulos CP. A Clinical Guide to Epileptic Syndromes and their Treatment",
+      "Standard textbook of paediatric neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start first-line hormonal therapy with adrenocorticotrophic hormone or oral corticosteroids such as prednisolone to suppress the spasms",
+      "Use vigabatrin as an alternative first-line agent, and preferentially where tuberous sclerosis is the underlying cause",
+      "Treat promptly to minimise the treatment lag, as early control improves developmental outcome",
+      "Identify and address the underlying aetiology, including a trial of pyridoxine for pyridoxine-dependent seizures and targeted management of metabolic or structural causes",
+      "Repeat EEG to confirm resolution of hypsarrhythmia and cessation of spasms as the treatment endpoint",
+      "Arrange long-term developmental surveillance and support, anticipating possible evolution to other epilepsy syndromes",
+      "Refer to paediatric neurology, and offer genetic counselling where a genetic cause is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for west syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "west-syndrome-real-image",
-   "title": "West syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "west_syndrome-pathway",
+      "title": "West syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic triad of epileptic (infantile) spasms, hypsarrhythmia on EEG, and developmental arrest or regression.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Developmental regression or plateau",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Prolonged or video EEG including sleep to confirm hypsarrhythmia and capture spasms, MRI brain to identify a structural cause, Metabolic screen including consideration of pyridoxine-dependent and biotinidase disorders"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start first-line hormonal therapy with adrenocorticotrophic hormone or oral corticosteroids such as prednisolone to suppress the spasms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking spasms for colic, reflux or startle and delaying diagnosis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of west syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "west_syndrome-matrix",
+      "title": "West syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic triad of epileptic (infantile) spasms, hypsarrhythmia on EEG, and developmental arrest or regression.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Prolonged or video EEG including sleep to confirm hypsarrhythmia and capture spasms, MRI brain to identify a structural cause,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Benign non-epileptic infantile spasms and benign myoclonus of infancy, Sandifer syndrome and gastro-oesophageal reflux, Early",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start first-line hormonal therapy with adrenocorticotrophic hormone or oral corticosteroids such as prednisolone to suppress the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking spasms for colic, reflux or startle and delaying diagnosis.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for west syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification and clinical guidance on the epilepsy syndromes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "west_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged or video EEG including sleep",
+          "cells": [
+            {
+              "text": "Hypsarrhythmia and captured spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Structural cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "west_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign non-epileptic infantile spasms",
+          "cells": [
+            {
+              "text": "Benign myoclonus of infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sandifer syndrome",
+          "cells": [
+            {
+              "text": "Gastro-oesophageal reflux with posturing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colic or startle",
+          "cells": [
+            {
+              "text": "Spasms mistaken for these delay diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "west_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line hormonal therapy",
+          "cells": [
+            {
+              "text": "ACTH or oral prednisolone to suppress spasms and hypsarrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Structural or metabolic cause found on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "west_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of West syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected West syndrome: clusters of infantile spasms with developmental regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (developmental regression or focal signs suggesting structural cause)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for regression or focal structural signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video EEG including sleep, MRI brain, metabolic work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does EEG show hypsarrhythmia with captured spasms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign infantile spasms, myoclonus or reflux; repeat EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "First-line ACTH or oral prednisolone to suppress spasms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treatment of the underlying structural or metabolic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Obtain sleep EEG to avoid missing hypsarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Early hormonal treatment improves developmental outcome; delay worsens it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

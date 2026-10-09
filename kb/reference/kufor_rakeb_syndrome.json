@@ -1,176 +1,492 @@
 {
- "id": "kufor_rakeb_syndrome",
- "name": "Kufor-Rakeb syndrome",
- "aliases": [
-  "Kufor-Rakeb disease",
-  "PARK9",
-  "ATP13A2-related parkinsonism"
- ],
- "class": "non_infective",
- "system": "Neurology / Neurodegeneration",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurology and neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive juvenile or young-adult-onset parkinsonism caused by ATP13A2 (PARK9) variants, first described in a consanguineous family from the Kufor-Rakeb region of Jordan.",
-   "The signature is levodopa-responsive parkinsonism combined with pyramidal (spastic) signs, marking it as an atypical parkinsonism rather than classic young-onset Parkinson disease.",
-   "Supranuclear vertical gaze palsy with slow saccades is characteristic.",
-   "Facial-faucial-finger mini-myoclonus (fine myoclonic twitching) is a distinctive sign; oculogyric dystonic spasms and visual hallucinations also occur.",
-   "Despite a good initial response, levodopa-induced dyskinesias and motor fluctuations tend to appear early.",
-   "Progressive cognitive decline leading to dementia, together with psychiatric symptoms, is typical.",
-   "ATP13A2 encodes a lysosomal P5-type transport ATPase, so this is fundamentally a lysosomal storage/handling disorder; allelic variants also cause a form of neuronal ceroid lipofuscinosis.",
-   "MRI often shows diffuse cerebral and cerebellar atrophy, and basal ganglia iron accumulation may be seen, placing the syndrome within the NBIA spectrum."
+  "id": "kufor_rakeb_syndrome",
+  "name": "Kufor-Rakeb syndrome",
+  "aliases": [
+    "Kufor-Rakeb disease",
+    "PARK9",
+    "ATP13A2-related parkinsonism"
   ],
-  "pathophysiology": "ATP13A2, on chromosome 1p36, encodes a lysosomal type 5 P-type transport ATPase that handles cations such as zinc and manganese and transports polyamines, supporting lysosomal acidification and the autophagy-lysosome degradation pathway. Loss-of-function variants impair lysosomal proteolysis and autophagic clearance, so that alpha-synuclein and other substrates accumulate, mitochondrial function is compromised, and cellular handling of divalent metals (manganese, zinc and iron) becomes dysregulated. The resulting neuronal loss is prominent in the substantia nigra, producing levodopa-responsive parkinsonism, but extends widely to cause pyramidal signs, supranuclear gaze impairment, myoclonus and dementia. The overlap of lysosomal dysfunction with iron dyshomeostasis explains why the disorder sits at the intersection of the parkinsonism, NBIA and neuronal ceroid lipofuscinosis spectra, and inheritance is autosomal recessive, often in consanguineous families.",
-  "additionalDifferentials": [
-   "Young-onset/juvenile Parkinson disease (PRKN, PINK1, DJ-1)",
-   "Other NBIA subtypes",
-   "Wilson disease",
-   "Niemann-Pick disease type C (young-onset extrapyramidal features with vertical gaze palsy)",
-   "Dopa-responsive dystonia",
-   "Progressive supranuclear palsy (for the gaze palsy)",
-   "Neuronal ceroid lipofuscinosis"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI with iron-sensitive sequences and volumetric assessment to demonstrate atrophy and basal ganglia iron",
-   "ATP13A2 testing within a parkinsonism/NBIA gene panel",
-   "Serum caeruloplasmin, copper studies and slit-lamp examination for Kayser-Fleischer rings to exclude Wilson disease",
-   "Dopamine transporter (DAT) imaging showing a presynaptic dopaminergic deficit",
-   "Oculomotor assessment for supranuclear gaze palsy and saccadic slowing",
-   "Specialist metabolic testing to exclude Niemann-Pick disease type C, and neuropsychological assessment"
-  ],
-  "redFlags": [
-   "Rapid cognitive and motor deterioration in a young person with parkinsonism",
-   "Severe or disabling levodopa-induced dyskinesias",
-   "Recurrent falls from combined parkinsonism, spasticity and gaze palsy",
-   "Emergent psychosis or visual hallucinations"
-  ],
-  "prognosis": "The syndrome is progressive, with severe combined disability from parkinsonism, spasticity and dementia typically developing within roughly a decade of onset. Levodopa helps early on, but treatment is limited by early dyskinesias.",
-  "pitfalls": [
-   "Labelling it as ordinary young-onset Parkinson disease and missing the pyramidal signs, supranuclear gaze palsy and mini-myoclonus that mark an atypical parkinsonism.",
-   "Failing to exclude Wilson disease and Niemann-Pick type C, which share young-onset extrapyramidal features and vertical gaze abnormalities.",
-   "Overlooking the lysosomal/NBIA and neuronal ceroid lipofuscinosis overlap and its implications for targeted testing.",
-   "Attributing the early dyskinesias to overtreatment rather than to the underlying disorder."
-  ],
-  "references": [
-   "Movement disorders neurology references",
-   "Neurodegeneration with brain iron accumulation (NBIA) clinical references",
-   "Neurogenetics reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initiate levodopa combined with a dopa-decarboxylase inhibitor as first-line therapy for the levodopa-responsive parkinsonism",
-   "Anticipate and manage early levodopa-induced dyskinesias and motor fluctuations by adjusting the regimen and considering amantadine or adjunctive dopaminergic agents",
-   "Provide symptomatic treatment for spasticity with agents such as baclofen and for myoclonus and dystonic or oculogyric spasms",
-   "Manage neuropsychiatric and cognitive features with cognitive support and cautious pharmacotherapy for hallucinations and dementia, avoiding drugs that worsen parkinsonism",
-   "Deliver multidisciplinary rehabilitation with physiotherapy, occupational therapy, speech and language therapy and falls prevention",
-   "Offer genetic counselling and consider testing at-risk relatives given autosomal recessive inheritance",
-   "Monitor disease progression with attention to swallowing, mobility and safety, escalating supportive care as combined disability advances"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kufor_rakeb_syndrome-pathway",
-   "title": "Kufor-Rakeb syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive juvenile or young-adult-onset parkinsonism caused by ATP13A2 (PARK9) variants, first described in a consanguineous family from the Kufor-Rakeb region of Jordan.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid cognitive and motor deterioration in a young person with parkinsonism",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI with iron-sensitive sequences and volumetric assessment to demonstrate atrophy and basal ganglia iron, ATP13A2 testing within a parkinsonism/NBIA gene panel, Serum caeruloplasmin, copper studies and slit-lamp"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initiate levodopa combined with a dopa-decarboxylase inhibitor as first-line therapy for the levodopa-responsive parkinsonism"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling it as ordinary young-onset Parkinson disease and missing the pyramidal signs, supranuclear gaze palsy and mini-myoclonus that mark an atypical parkinsonism."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kufor-rakeb syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "kufor_rakeb_syndrome-matrix",
-   "title": "Kufor-Rakeb syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive juvenile or young-adult-onset parkinsonism caused by ATP13A2 (PARK9) variants, first described in a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Neurodegeneration",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurology and neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive juvenile or young-adult-onset parkinsonism caused by ATP13A2 (PARK9) variants, first described in a consanguineous family from the Kufor-Rakeb region of Jordan.",
+      "The signature is levodopa-responsive parkinsonism combined with pyramidal (spastic) signs, marking it as an atypical parkinsonism rather than classic young-onset Parkinson disease.",
+      "Supranuclear vertical gaze palsy with slow saccades is characteristic.",
+      "Facial-faucial-finger mini-myoclonus (fine myoclonic twitching) is a distinctive sign; oculogyric dystonic spasms and visual hallucinations also occur.",
+      "Despite a good initial response, levodopa-induced dyskinesias and motor fluctuations tend to appear early.",
+      "Progressive cognitive decline leading to dementia, together with psychiatric symptoms, is typical.",
+      "ATP13A2 encodes a lysosomal P5-type transport ATPase, so this is fundamentally a lysosomal storage/handling disorder; allelic variants also cause a form of neuronal ceroid lipofuscinosis.",
+      "MRI often shows diffuse cerebral and cerebellar atrophy, and basal ganglia iron accumulation may be seen, placing the syndrome within the NBIA spectrum."
     ],
-    [
-     "Key Investigations",
-     "Brain MRI with iron-sensitive sequences and volumetric assessment to demonstrate atrophy and basal ganglia iron, ATP13A2 testing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ATP13A2, on chromosome 1p36, encodes a lysosomal type 5 P-type transport ATPase that handles cations such as zinc and manganese and transports polyamines, supporting lysosomal acidification and the autophagy-lysosome degradation pathway. Loss-of-function variants impair lysosomal proteolysis and autophagic clearance, so that alpha-synuclein and other substrates accumulate, mitochondrial function is compromised, and cellular handling of divalent metals (manganese, zinc and iron) becomes dysregulated. The resulting neuronal loss is prominent in the substantia nigra, producing levodopa-responsive parkinsonism, but extends widely to cause pyramidal signs, supranuclear gaze impairment, myoclonus and dementia. The overlap of lysosomal dysfunction with iron dyshomeostasis explains why the disorder sits at the intersection of the parkinsonism, NBIA and neuronal ceroid lipofuscinosis spectra, and inheritance is autosomal recessive, often in consanguineous families.",
+    "additionalDifferentials": [
+      "Young-onset/juvenile Parkinson disease (PRKN, PINK1, DJ-1)",
+      "Other NBIA subtypes",
+      "Wilson disease",
+      "Niemann-Pick disease type C (young-onset extrapyramidal features with vertical gaze palsy)",
+      "Dopa-responsive dystonia",
+      "Progressive supranuclear palsy (for the gaze palsy)",
+      "Neuronal ceroid lipofuscinosis"
     ],
-    [
-     "Primary Differentials",
-     "Young-onset/juvenile Parkinson disease (PRKN, PINK1, DJ-1), Other NBIA subtypes, Wilson disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI with iron-sensitive sequences and volumetric assessment to demonstrate atrophy and basal ganglia iron",
+      "ATP13A2 testing within a parkinsonism/NBIA gene panel",
+      "Serum caeruloplasmin, copper studies and slit-lamp examination for Kayser-Fleischer rings to exclude Wilson disease",
+      "Dopamine transporter (DAT) imaging showing a presynaptic dopaminergic deficit",
+      "Oculomotor assessment for supranuclear gaze palsy and saccadic slowing",
+      "Specialist metabolic testing to exclude Niemann-Pick disease type C, and neuropsychological assessment"
     ],
-    [
-     "Management Strategy",
-     "Initiate levodopa combined with a dopa-decarboxylase inhibitor as first-line therapy for the levodopa-responsive parkinsonism",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid cognitive and motor deterioration in a young person with parkinsonism",
+      "Severe or disabling levodopa-induced dyskinesias",
+      "Recurrent falls from combined parkinsonism, spasticity and gaze palsy",
+      "Emergent psychosis or visual hallucinations"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling it as ordinary young-onset Parkinson disease and missing the pyramidal signs, supranuclear gaze palsy and",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome is progressive, with severe combined disability from parkinsonism, spasticity and dementia typically developing within roughly a decade of onset. Levodopa helps early on, but treatment is limited by early dyskinesias.",
+    "pitfalls": [
+      "Labelling it as ordinary young-onset Parkinson disease and missing the pyramidal signs, supranuclear gaze palsy and mini-myoclonus that mark an atypical parkinsonism.",
+      "Failing to exclude Wilson disease and Niemann-Pick type C, which share young-onset extrapyramidal features and vertical gaze abnormalities.",
+      "Overlooking the lysosomal/NBIA and neuronal ceroid lipofuscinosis overlap and its implications for targeted testing.",
+      "Attributing the early dyskinesias to overtreatment rather than to the underlying disorder."
+    ],
+    "references": [
+      "Movement disorders neurology references",
+      "Neurodegeneration with brain iron accumulation (NBIA) clinical references",
+      "Neurogenetics reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initiate levodopa combined with a dopa-decarboxylase inhibitor as first-line therapy for the levodopa-responsive parkinsonism",
+      "Anticipate and manage early levodopa-induced dyskinesias and motor fluctuations by adjusting the regimen and considering amantadine or adjunctive dopaminergic agents",
+      "Provide symptomatic treatment for spasticity with agents such as baclofen and for myoclonus and dystonic or oculogyric spasms",
+      "Manage neuropsychiatric and cognitive features with cognitive support and cautious pharmacotherapy for hallucinations and dementia, avoiding drugs that worsen parkinsonism",
+      "Deliver multidisciplinary rehabilitation with physiotherapy, occupational therapy, speech and language therapy and falls prevention",
+      "Offer genetic counselling and consider testing at-risk relatives given autosomal recessive inheritance",
+      "Monitor disease progression with attention to swallowing, mobility and safety, escalating supportive care as combined disability advances"
     ]
-   ],
-   "caption": "Overview comparison matrix for kufor-rakeb syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kufor-rakeb-syndrome-real-image",
-   "title": "Kufor-Rakeb syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "kufor_rakeb_syndrome-pathway",
+      "title": "Kufor-Rakeb syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive juvenile or young-adult-onset parkinsonism caused by ATP13A2 (PARK9) variants, first described in a consanguineous family from the Kufor-Rakeb region of Jordan.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid cognitive and motor deterioration in a young person with parkinsonism",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI with iron-sensitive sequences and volumetric assessment to demonstrate atrophy and basal ganglia iron, ATP13A2 testing within a parkinsonism/NBIA gene panel, Serum caeruloplasmin, copper studies and slit-lamp"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initiate levodopa combined with a dopa-decarboxylase inhibitor as first-line therapy for the levodopa-responsive parkinsonism"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling it as ordinary young-onset Parkinson disease and missing the pyramidal signs, supranuclear gaze palsy and mini-myoclonus that mark an atypical parkinsonism."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kufor-rakeb syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kufor_rakeb_syndrome-matrix",
+      "title": "Kufor-Rakeb syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive juvenile or young-adult-onset parkinsonism caused by ATP13A2 (PARK9) variants, first described in a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI with iron-sensitive sequences and volumetric assessment to demonstrate atrophy and basal ganglia iron, ATP13A2 testing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Young-onset/juvenile Parkinson disease (PRKN, PINK1, DJ-1), Other NBIA subtypes, Wilson disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initiate levodopa combined with a dopa-decarboxylase inhibitor as first-line therapy for the levodopa-responsive parkinsonism",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling it as ordinary young-onset Parkinson disease and missing the pyramidal signs, supranuclear gaze palsy and",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kufor-rakeb syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology and neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kufor_rakeb_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI with iron-sensitive sequences",
+          "cells": [
+            {
+              "text": "Atrophy and basal ganglia iron accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATP13A2 testing within a parkinsonism or NBIA panel",
+          "cells": [
+            {
+              "text": "ATP13A2 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caeruloplasmin, copper studies and slit-lamp examination",
+          "cells": [
+            {
+              "text": "Excludes Wilson disease; Kayser-Fleischer rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopamine transporter (DAT) imaging",
+          "cells": [
+            {
+              "text": "Presynaptic dopaminergic deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculomotor assessment",
+          "cells": [
+            {
+              "text": "Supranuclear gaze palsy and saccadic slowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist metabolic testing",
+          "cells": [
+            {
+              "text": "Excludes Niemann-Pick disease type C"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kufor_rakeb_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Young-onset Parkinson disease (PRKN, PINK1, DJ-1)",
+          "cells": [
+            {
+              "text": "Missed if the pyramidal signs and gaze palsy are overlooked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Caeruloplasmin, copper studies and Kayser-Fleischer rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Niemann-Pick disease type C",
+          "cells": [
+            {
+              "text": "Young-onset extrapyramidal features with vertical gaze palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive supranuclear palsy",
+          "cells": [
+            {
+              "text": "Shares the vertical gaze palsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kufor_rakeb_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Levodopa with a dopa-decarboxylase inhibitor",
+          "cells": [
+            {
+              "text": "First-line for the levodopa-responsive parkinsonism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dyskinesia and fluctuation management",
+          "cells": [
+            {
+              "text": "Adjust the regimen; amantadine or adjunctive dopaminergic agents considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity and myoclonus",
+          "cells": [
+            {
+              "text": "Baclofen for spasticity; symptomatic treatment of myoclonus and dystonic or oculogyric spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychiatric and cognitive care",
+          "cells": [
+            {
+              "text": "Cognitive support; cautious pharmacotherapy for hallucinations and dementia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy, falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; consider testing at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression monitoring",
+          "cells": [
+            {
+              "text": "Swallowing, mobility and safety; escalate supportive care as disability advances"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kufor_rakeb_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Kufor-Rakeb syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Kufor-Rakeb: young-onset parkinsonism with pyramidal signs and gaze palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid decline, disabling dyskinesia, falls, psychosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for rapid decline or emergent psychosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Iron-sensitive MRI, ATP13A2 panel, copper studies, DAT imaging, oculomotor review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ATP13A2 testing identify a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Wilson disease, Niemann-Pick type C or young-onset Parkinson disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Levodopa with a dopa-decarboxylase inhibitor as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage early dyskinesias and motor fluctuations by adjusting the regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Baclofen for spasticity; symptomatic treatment of myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary rehabilitation and falls prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and monitoring of swallowing, mobility and safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive; severe combined disability often develops within about a decade",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

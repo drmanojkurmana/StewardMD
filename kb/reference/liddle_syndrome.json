@@ -1,175 +1,491 @@
 {
- "id": "liddle_syndrome",
- "name": "Liddle syndrome",
- "aliases": [
-  "pseudoaldosteronism",
-  "ENaC gain-of-function",
-  "SCNN1B",
-  "SCNN1G",
-  "epithelial sodium channel disorder"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Oxford Handbook of Nephrology and Hypertension / Comprehensive Clinical Nephrology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Liddle syndrome is an autosomal dominant cause of early-onset, low-renin hypertension caused by gain-of-function variants in the beta or gamma subunits of the epithelial sodium channel (SCNN1B, SCNN1G)",
-   "The variants disrupt channel removal from the collecting-duct membrane, so ENaC remains constitutively active regardless of aldosterone",
-   "The typical picture is hypertension with hypokalaemia and metabolic alkalosis, and characteristically both renin and aldosterone are suppressed",
-   "It behaves like a mineralocorticoid excess state but there is no excess hormone, hence the older term pseudoaldosteronism",
-   "Because the defect is at the sodium channel itself, an ENaC-blocking potassium-sparing diuretic (amiloride or triamterene) is effective, whereas an aldosterone-receptor antagonist is not",
-   "Dietary salt restriction complements pharmacological ENaC blockade",
-   "Consider it in young patients with resistant hypertension, hypokalaemia and a suppressed renin and aldosterone, especially with a supportive family history"
+  "id": "liddle_syndrome",
+  "name": "Liddle syndrome",
+  "aliases": [
+    "pseudoaldosteronism",
+    "ENaC gain-of-function",
+    "SCNN1B",
+    "SCNN1G",
+    "epithelial sodium channel disorder"
   ],
-  "pathophysiology": "Liddle syndrome is driven by activating variants in the SCNN1B or SCNN1G genes that encode the beta and gamma subunits of the epithelial sodium channel in the distal nephron. These variants typically delete or alter a cytoplasmic motif that is normally recognised by the ubiquitin ligase machinery, so the channel is not internalised and degraded and instead accumulates at the apical membrane. The result is excessive, aldosterone-independent sodium reabsorption with parallel renal loss of potassium and hydrogen ion, generating volume expansion, hypertension, hypokalaemia and metabolic alkalosis. The expanded volume and raised pressure suppress renin release and therefore aldosterone secretion, giving the paradoxical combination of a mineralocorticoid-excess phenotype with low aldosterone.",
-  "additionalDifferentials": [
-   "Primary hyperaldosteronism (Conn syndrome)",
-   "Apparent mineralocorticoid excess (HSD11B2 deficiency)",
-   "Glucocorticoid-remediable aldosteronism (familial hyperaldosteronism type 1)",
-   "Cushing syndrome with mineralocorticoid effect",
-   "Renovascular or other secondary hypertension",
-   "Licorice ingestion or exogenous mineralocorticoid effect"
-  ],
-  "additionalInvestigations": [
-   "Plasma renin activity and aldosterone (both suppressed)",
-   "Serum potassium and bicarbonate to document hypokalaemic alkalosis",
-   "Aldosterone-to-renin ratio to exclude primary hyperaldosteronism",
-   "Assessment of therapeutic response to ENaC blockade versus aldosterone antagonism",
-   "Screening for licorice and exogenous mineralocorticoids",
-   "Molecular genetic testing of SCNN1B and SCNN1G"
-  ],
-  "redFlags": [
-   "Severe or resistant hypertension in a young person",
-   "Profound hypokalaemia with muscle weakness or arrhythmia",
-   "End-organ damage from long-standing untreated hypertension",
-   "Strong family history of early hypertension or premature stroke"
-  ],
-  "prognosis": "With ENaC-blocking therapy and salt restriction, blood pressure and potassium usually normalise and long-term outlook is good; untreated disease carries the cardiovascular and renal risks of chronic hypertension.",
-  "pitfalls": [
-   "Treating with an aldosterone-receptor antagonist, which is ineffective because the defect is downstream of the receptor at the channel",
-   "Misdiagnosing it as primary hyperaldosteronism despite the suppressed aldosterone",
-   "Overlooking the diagnosis in young hypertensive patients without checking renin and aldosterone",
-   "Failing to screen and counsel first-degree relatives given autosomal dominant inheritance"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology (Feehally, Floege, Tonelli, Johnson)",
-   "Oxford Handbook of Nephrology and Hypertension"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with ENaC-blocking potassium-sparing diuretics (amiloride or triamterene) as the specific and effective therapy",
-   "Combine dietary sodium restriction with pharmacological ENaC blockade",
-   "Avoid aldosterone-receptor antagonists, which are ineffective because aldosterone is already suppressed",
-   "Correct hypokalaemia and monitor blood pressure, serum potassium and acid-base status",
-   "Advise avoidance of liquorice and exogenous mineralocorticoids",
-   "Manage the cardiovascular and renal risks associated with chronic hypertension",
-   "Provide genetic counselling for autosomal dominant inheritance and screen first-degree relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "liddle_syndrome-pathway",
-   "title": "Liddle syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Liddle syndrome is an autosomal dominant cause of early-onset, low-renin hypertension caused by gain-of-function variants in the beta or gamma subunits of the epithelial sodium channel (SCNN1B, SCNN1G)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or resistant hypertension in a young person",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma renin activity and aldosterone (both suppressed), Serum potassium and bicarbonate to document hypokalaemic alkalosis, Aldosterone-to-renin ratio to exclude primary hyperaldosteronism"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with ENaC-blocking potassium-sparing diuretics (amiloride or triamterene) as the specific and effective therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating with an aldosterone-receptor antagonist, which is ineffective because the defect is downstream of the receptor at the channel"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of liddle syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "liddle_syndrome-matrix",
-   "title": "Liddle syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Liddle syndrome is an autosomal dominant cause of early-onset, low-renin hypertension caused by gain-of-function variants in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oxford Handbook of Nephrology and Hypertension / Comprehensive Clinical Nephrology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Liddle syndrome is an autosomal dominant cause of early-onset, low-renin hypertension caused by gain-of-function variants in the beta or gamma subunits of the epithelial sodium channel (SCNN1B, SCNN1G)",
+      "The variants disrupt channel removal from the collecting-duct membrane, so ENaC remains constitutively active regardless of aldosterone",
+      "The typical picture is hypertension with hypokalaemia and metabolic alkalosis, and characteristically both renin and aldosterone are suppressed",
+      "It behaves like a mineralocorticoid excess state but there is no excess hormone, hence the older term pseudoaldosteronism",
+      "Because the defect is at the sodium channel itself, an ENaC-blocking potassium-sparing diuretic (amiloride or triamterene) is effective, whereas an aldosterone-receptor antagonist is not",
+      "Dietary salt restriction complements pharmacological ENaC blockade",
+      "Consider it in young patients with resistant hypertension, hypokalaemia and a suppressed renin and aldosterone, especially with a supportive family history"
     ],
-    [
-     "Key Investigations",
-     "Plasma renin activity and aldosterone (both suppressed), Serum potassium and bicarbonate to document hypokalaemic alkalosis,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Liddle syndrome is driven by activating variants in the SCNN1B or SCNN1G genes that encode the beta and gamma subunits of the epithelial sodium channel in the distal nephron. These variants typically delete or alter a cytoplasmic motif that is normally recognised by the ubiquitin ligase machinery, so the channel is not internalised and degraded and instead accumulates at the apical membrane. The result is excessive, aldosterone-independent sodium reabsorption with parallel renal loss of potassium and hydrogen ion, generating volume expansion, hypertension, hypokalaemia and metabolic alkalosis. The expanded volume and raised pressure suppress renin release and therefore aldosterone secretion, giving the paradoxical combination of a mineralocorticoid-excess phenotype with low aldosterone.",
+    "additionalDifferentials": [
+      "Primary hyperaldosteronism (Conn syndrome)",
+      "Apparent mineralocorticoid excess (HSD11B2 deficiency)",
+      "Glucocorticoid-remediable aldosteronism (familial hyperaldosteronism type 1)",
+      "Cushing syndrome with mineralocorticoid effect",
+      "Renovascular or other secondary hypertension",
+      "Licorice ingestion or exogenous mineralocorticoid effect"
     ],
-    [
-     "Primary Differentials",
-     "Primary hyperaldosteronism (Conn syndrome), Apparent mineralocorticoid excess (HSD11B2 deficiency), Glucocorticoid-remediable",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma renin activity and aldosterone (both suppressed)",
+      "Serum potassium and bicarbonate to document hypokalaemic alkalosis",
+      "Aldosterone-to-renin ratio to exclude primary hyperaldosteronism",
+      "Assessment of therapeutic response to ENaC blockade versus aldosterone antagonism",
+      "Screening for licorice and exogenous mineralocorticoids",
+      "Molecular genetic testing of SCNN1B and SCNN1G"
     ],
-    [
-     "Management Strategy",
-     "Treat with ENaC-blocking potassium-sparing diuretics (amiloride or triamterene) as the specific and effective therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or resistant hypertension in a young person",
+      "Profound hypokalaemia with muscle weakness or arrhythmia",
+      "End-organ damage from long-standing untreated hypertension",
+      "Strong family history of early hypertension or premature stroke"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating with an aldosterone-receptor antagonist, which is ineffective because the defect is downstream of the receptor at the",
-     "Prevent diagnostic or management error"
+    "prognosis": "With ENaC-blocking therapy and salt restriction, blood pressure and potassium usually normalise and long-term outlook is good; untreated disease carries the cardiovascular and renal risks of chronic hypertension.",
+    "pitfalls": [
+      "Treating with an aldosterone-receptor antagonist, which is ineffective because the defect is downstream of the receptor at the channel",
+      "Misdiagnosing it as primary hyperaldosteronism despite the suppressed aldosterone",
+      "Overlooking the diagnosis in young hypertensive patients without checking renin and aldosterone",
+      "Failing to screen and counsel first-degree relatives given autosomal dominant inheritance"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology (Feehally, Floege, Tonelli, Johnson)",
+      "Oxford Handbook of Nephrology and Hypertension"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with ENaC-blocking potassium-sparing diuretics (amiloride or triamterene) as the specific and effective therapy",
+      "Combine dietary sodium restriction with pharmacological ENaC blockade",
+      "Avoid aldosterone-receptor antagonists, which are ineffective because aldosterone is already suppressed",
+      "Correct hypokalaemia and monitor blood pressure, serum potassium and acid-base status",
+      "Advise avoidance of liquorice and exogenous mineralocorticoids",
+      "Manage the cardiovascular and renal risks associated with chronic hypertension",
+      "Provide genetic counselling for autosomal dominant inheritance and screen first-degree relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for liddle syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "liddle-syndrome-real-image",
-   "title": "Liddle syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "liddle_syndrome-pathway",
+      "title": "Liddle syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Liddle syndrome is an autosomal dominant cause of early-onset, low-renin hypertension caused by gain-of-function variants in the beta or gamma subunits of the epithelial sodium channel (SCNN1B, SCNN1G)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or resistant hypertension in a young person",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma renin activity and aldosterone (both suppressed), Serum potassium and bicarbonate to document hypokalaemic alkalosis, Aldosterone-to-renin ratio to exclude primary hyperaldosteronism"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with ENaC-blocking potassium-sparing diuretics (amiloride or triamterene) as the specific and effective therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating with an aldosterone-receptor antagonist, which is ineffective because the defect is downstream of the receptor at the channel"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of liddle syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "liddle_syndrome-matrix",
+      "title": "Liddle syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Liddle syndrome is an autosomal dominant cause of early-onset, low-renin hypertension caused by gain-of-function variants in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma renin activity and aldosterone (both suppressed), Serum potassium and bicarbonate to document hypokalaemic alkalosis,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary hyperaldosteronism (Conn syndrome), Apparent mineralocorticoid excess (HSD11B2 deficiency), Glucocorticoid-remediable",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with ENaC-blocking potassium-sparing diuretics (amiloride or triamterene) as the specific and effective therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating with an aldosterone-receptor antagonist, which is ineffective because the defect is downstream of the receptor at the",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for liddle syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oxford Handbook of Nephrology and Hypertension / Comprehensive Clinical Nephrology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "liddle_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma renin activity and aldosterone",
+          "cells": [
+            {
+              "text": "Both suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium and bicarbonate",
+          "cells": [
+            {
+              "text": "Hypokalaemic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aldosterone-to-renin ratio",
+          "cells": [
+            {
+              "text": "Excludes primary hyperaldosteronism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to ENaC blockade versus aldosterone antagonism",
+          "cells": [
+            {
+              "text": "Response distinguishes the mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for liquorice and exogenous mineralocorticoids",
+          "cells": [
+            {
+              "text": "Exogenous causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCNN1B and SCNN1G molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the gene variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "liddle_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary hyperaldosteronism (Conn syndrome)",
+          "cells": [
+            {
+              "text": "Aldosterone is raised rather than suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoid-remediable aldosteronism",
+          "cells": [
+            {
+              "text": "Aldosterone-driven rather than channel-driven"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liquorice or exogenous mineralocorticoid effect",
+          "cells": [
+            {
+              "text": "Exposure history; screened for"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apparent mineralocorticoid excess (HSD11B2 deficiency)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "liddle_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ENaC-blocking diuretics",
+          "cells": [
+            {
+              "text": "Amiloride or triamterene; the specific and effective therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salt restriction",
+          "cells": [
+            {
+              "text": "Combined with ENaC blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aldosterone antagonists",
+          "cells": [
+            {
+              "text": "Ineffective because aldosterone is already suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and monitoring",
+          "cells": [
+            {
+              "text": "Correct hypokalaemia; monitor blood pressure, potassium and acid-base status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid liquorice",
+          "cells": [
+            {
+              "text": "And exogenous mineralocorticoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular and renal risk",
+          "cells": [
+            {
+              "text": "Manage the risks of chronic hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; screen first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "liddle_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Liddle syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young patient with resistant hypertension, hypokalaemia, suppressed renin and aldosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (profound hypokalaemia, severe hypertension, end-organ damage)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent correction of profound hypokalaemia and blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renin, aldosterone, potassium, aldosterone-to-renin ratio, SCNN1B and SCNN1G",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are renin and aldosterone suppressed, with an ENaC-blocker response?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary hyperaldosteronism, HSD11B2 deficiency or liquorice exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Amiloride or triamterene as specific ENaC blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary sodium restriction alongside ENaC blockers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid aldosterone antagonists, which are ineffective here",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct hypokalaemia; monitor blood pressure, potassium and acid-base",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and screening of first-degree relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With ENaC blockade and salt restriction, blood pressure and potassium usually normalise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

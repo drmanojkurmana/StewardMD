@@ -1,175 +1,746 @@
 {
- "id": "polymyositis",
- "name": "Polymyositis",
- "aliases": [
-  "PM",
-  "idiopathic inflammatory myopathy"
- ],
- "class": "non_infective",
- "system": "Rheumatology / MSK",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with progressive symmetric proximal muscle weakness affecting shoulder and hip girdles, causing difficulty rising from chairs, climbing stairs, and lifting the arms",
-   "Weakness rather than pain predominates, and there is no characteristic rash (distinguishing it from dermatomyositis)",
-   "Serum creatine kinase is typically markedly elevated, reflecting muscle fibre damage",
-   "Myositis-specific antibodies, including the antisynthetase antibodies (e.g. anti-Jo-1), help define clinical subsets",
-   "The antisynthetase syndrome combines myositis with interstitial lung disease, arthritis, Raynaud phenomenon, fever, and 'mechanic's hands'",
-   "It is a diagnosis of exclusion; inclusion body myositis in older patients and other myopathies must be considered before labelling weakness as polymyositis",
-   "Muscle biopsy classically shows endomysial CD8 T-cell infiltration surrounding and invading non-necrotic fibres",
-   "Corticosteroids are the mainstay of initial treatment, with steroid-sparing immunosuppressants added to control disease and limit steroid toxicity"
+  "id": "polymyositis",
+  "name": "Polymyositis",
+  "aliases": [
+    "PM",
+    "idiopathic inflammatory myopathy"
   ],
-  "pathophysiology": "Polymyositis is an idiopathic inflammatory myopathy driven by cell-mediated autoimmunity. Cytotoxic CD8 T lymphocytes recognise antigens expressed on muscle fibres and invade non-necrotic myofibres, causing fibre necrosis and regeneration and consequent weakness. Upregulation of MHC class I on muscle fibres is characteristic. Associations with specific autoantibodies define distinct phenotypes, and there is overlap with other connective tissue diseases and, less strongly than in dermatomyositis, with malignancy.",
-  "additionalDifferentials": [
-   "Dermatomyositis",
-   "Inclusion body myositis",
-   "Immune-mediated necrotising myopathy (including statin-associated)",
-   "Metabolic, mitochondrial, or muscular dystrophy",
-   "Endocrine myopathy (hypothyroidism, Cushing) and drug-induced myopathy",
-   "Motor neuron disease and myasthenia gravis"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase and other muscle enzymes",
-   "Myositis-specific and myositis-associated antibody panel including anti-Jo-1",
-   "Electromyography showing a myopathic pattern with irritability",
-   "MRI of muscle to identify oedema and guide biopsy",
-   "Muscle biopsy for endomysial inflammation; screening for interstitial lung disease with pulmonary function tests and high-resolution CT"
-  ],
-  "redFlags": [
-   "Rapidly progressive dyspnoea or hypoxia from interstitial lung disease, especially with antisynthetase antibodies",
-   "Bulbar or respiratory muscle weakness causing dysphagia, aspiration, or ventilatory compromise",
-   "Cardiac involvement with arrhythmia or heart failure",
-   "Features suggesting an underlying occult malignancy",
-   "Severe dysphagia risking aspiration pneumonia"
-  ],
-  "prognosis": "With treatment many patients regain strength, but relapses are common and prognosis is worse in the presence of interstitial lung disease, cardiac involvement, severe dysphagia, or associated malignancy. Long-term functional outcome depends on early treatment and control of extramuscular disease.",
-  "pitfalls": [
-   "Diagnosing polymyositis without excluding inclusion body myositis and necrotising myopathy, which respond differently to therapy",
-   "Overlooking interstitial lung disease, a major cause of morbidity and mortality",
-   "Attributing weakness solely to steroid myopathy during treatment without reassessing disease activity",
-   "Failing to screen for dysphagia and aspiration risk",
-   "Missing an associated malignancy or overlap connective tissue disease"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ACR/EULAR guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "High-dose corticosteroids as first-line therapy to suppress the cell-mediated myositis",
-   "Early introduction of a steroid-sparing immunosuppressant such as methotrexate or azathioprine, with intravenous immunoglobulin or rituximab for refractory disease",
-   "Treatment of antisynthetase-associated interstitial lung disease with agents such as mycophenolate, ciclosporin or cyclophosphamide",
-   "Physiotherapy to preserve and rebuild muscle strength, with speech and language therapy and aspiration precautions for dysphagia",
-   "Monitoring of creatine kinase and objective muscle strength to gauge response, with surveillance for interstitial lung and cardiac involvement",
-   "Age-appropriate malignancy screening given the association with underlying cancer",
-   "Bone protection and Pneumocystis prophylaxis to cover prolonged immunosuppression",
-   "Rheumatology-led multidisciplinary care, reconsidering the diagnosis where inclusion body myositis is possible"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "polymyositis-pathway",
-   "title": "Polymyositis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with progressive symmetric proximal muscle weakness affecting shoulder and hip girdles, causing difficulty rising from chairs, climbing stairs, and lifting the arms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive dyspnoea or hypoxia from interstitial lung disease, especially with antisynthetase antibodies",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase and other muscle enzymes, Myositis-specific and myositis-associated antibody panel including anti-Jo-1, Electromyography showing a myopathic pattern with irritability"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: High-dose corticosteroids as first-line therapy to suppress the cell-mediated myositis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing polymyositis without excluding inclusion body myositis and necrotising myopathy, which respond differently to therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of polymyositis."
-  }
- ],
- "tables": [
-  {
-   "id": "polymyositis-matrix",
-   "title": "Polymyositis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with progressive symmetric proximal muscle weakness affecting shoulder and hip girdles, causing difficulty rising from",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / MSK",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with progressive symmetric proximal muscle weakness affecting shoulder and hip girdles, causing difficulty rising from chairs, climbing stairs, and lifting the arms",
+      "Weakness rather than pain predominates, and there is no characteristic rash (distinguishing it from dermatomyositis)",
+      "Serum creatine kinase is typically markedly elevated, reflecting muscle fibre damage",
+      "Myositis-specific antibodies, including the antisynthetase antibodies (e.g. anti-Jo-1), help define clinical subsets",
+      "The antisynthetase syndrome combines myositis with interstitial lung disease, arthritis, Raynaud phenomenon, fever, and 'mechanic's hands'",
+      "It is a diagnosis of exclusion; inclusion body myositis in older patients and other myopathies must be considered before labelling weakness as polymyositis",
+      "Muscle biopsy classically shows endomysial CD8 T-cell infiltration surrounding and invading non-necrotic fibres",
+      "Corticosteroids are the mainstay of initial treatment, with steroid-sparing immunosuppressants added to control disease and limit steroid toxicity"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase and other muscle enzymes, Myositis-specific and myositis-associated antibody panel including anti-Jo-1,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Polymyositis is an idiopathic inflammatory myopathy driven by cell-mediated autoimmunity. Cytotoxic CD8 T lymphocytes recognise antigens expressed on muscle fibres and invade non-necrotic myofibres, causing fibre necrosis and regeneration and consequent weakness. Upregulation of MHC class I on muscle fibres is characteristic. Associations with specific autoantibodies define distinct phenotypes, and there is overlap with other connective tissue diseases and, less strongly than in dermatomyositis, with malignancy.",
+    "additionalDifferentials": [
+      "Dermatomyositis",
+      "Inclusion body myositis",
+      "Immune-mediated necrotising myopathy (including statin-associated)",
+      "Metabolic, mitochondrial, or muscular dystrophy",
+      "Endocrine myopathy (hypothyroidism, Cushing) and drug-induced myopathy",
+      "Motor neuron disease and myasthenia gravis"
     ],
-    [
-     "Primary Differentials",
-     "Dermatomyositis, Inclusion body myositis, Immune-mediated necrotising myopathy (including statin-associated)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase and other muscle enzymes",
+      "Myositis-specific and myositis-associated antibody panel including anti-Jo-1",
+      "Electromyography showing a myopathic pattern with irritability",
+      "MRI of muscle to identify oedema and guide biopsy",
+      "Muscle biopsy for endomysial inflammation; screening for interstitial lung disease with pulmonary function tests and high-resolution CT"
     ],
-    [
-     "Management Strategy",
-     "High-dose corticosteroids as first-line therapy to suppress the cell-mediated myositis",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive dyspnoea or hypoxia from interstitial lung disease, especially with antisynthetase antibodies",
+      "Bulbar or respiratory muscle weakness causing dysphagia, aspiration, or ventilatory compromise",
+      "Cardiac involvement with arrhythmia or heart failure",
+      "Features suggesting an underlying occult malignancy",
+      "Severe dysphagia risking aspiration pneumonia"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing polymyositis without excluding inclusion body myositis and necrotising myopathy, which respond differently to therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "With treatment many patients regain strength, but relapses are common and prognosis is worse in the presence of interstitial lung disease, cardiac involvement, severe dysphagia, or associated malignancy. Long-term functional outcome depends on early treatment and control of extramuscular disease.",
+    "pitfalls": [
+      "Diagnosing polymyositis without excluding inclusion body myositis and necrotising myopathy, which respond differently to therapy",
+      "Overlooking interstitial lung disease, a major cause of morbidity and mortality",
+      "Attributing weakness solely to steroid myopathy during treatment without reassessing disease activity",
+      "Failing to screen for dysphagia and aspiration risk",
+      "Missing an associated malignancy or overlap connective tissue disease"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ACR/EULAR guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "High-dose corticosteroids as first-line therapy to suppress the cell-mediated myositis",
+      "Early introduction of a steroid-sparing immunosuppressant such as methotrexate or azathioprine, with intravenous immunoglobulin or rituximab for refractory disease",
+      "Treatment of antisynthetase-associated interstitial lung disease with agents such as mycophenolate, ciclosporin or cyclophosphamide",
+      "Physiotherapy to preserve and rebuild muscle strength, with speech and language therapy and aspiration precautions for dysphagia",
+      "Monitoring of creatine kinase and objective muscle strength to gauge response, with surveillance for interstitial lung and cardiac involvement",
+      "Age-appropriate malignancy screening given the association with underlying cancer",
+      "Bone protection and Pneumocystis prophylaxis to cover prolonged immunosuppression",
+      "Rheumatology-led multidisciplinary care, reconsidering the diagnosis where inclusion body myositis is possible"
     ]
-   ],
-   "caption": "Overview comparison matrix for polymyositis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "polymyositis-real-image",
-   "title": "Polymyositis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "polymyositis-pathway",
+      "title": "Polymyositis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with progressive symmetric proximal muscle weakness affecting shoulder and hip girdles, causing difficulty rising from chairs, climbing stairs, and lifting the arms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive dyspnoea or hypoxia from interstitial lung disease, especially with antisynthetase antibodies",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase and other muscle enzymes, Myositis-specific and myositis-associated antibody panel including anti-Jo-1, Electromyography showing a myopathic pattern with irritability"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: High-dose corticosteroids as first-line therapy to suppress the cell-mediated myositis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing polymyositis without excluding inclusion body myositis and necrotising myopathy, which respond differently to therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of polymyositis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "polymyositis-matrix",
+      "title": "Polymyositis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with progressive symmetric proximal muscle weakness affecting shoulder and hip girdles, causing difficulty rising from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase and other muscle enzymes, Myositis-specific and myositis-associated antibody panel including anti-Jo-1,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dermatomyositis, Inclusion body myositis, Immune-mediated necrotising myopathy (including statin-associated)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "High-dose corticosteroids as first-line therapy to suppress the cell-mediated myositis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing polymyositis without excluding inclusion body myositis and necrotising myopathy, which respond differently to therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for polymyositis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 388-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polymyositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase and muscle enzymes",
+          "cells": [
+            {
+              "text": "Muscle injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myositis antibody panel including anti-Jo-1",
+          "cells": [
+            {
+              "text": "Antisynthetase and other myositis antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myopathic pattern with irritability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of muscle",
+          "cells": [
+            {
+              "text": "Oedema; guides biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Endomysial inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polymyositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Statin-associated necrotising myopathy",
+          "cells": [
+            {
+              "text": "Statin exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine myopathy",
+          "cells": [
+            {
+              "text": "Hypothyroidism or Cushing features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polymyositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "First-line therapy to suppress cell-mediated myositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Early methotrexate or azathioprine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antisynthetase lung disease",
+          "cells": [
+            {
+              "text": "Treatment of associated interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Preserve and rebuild muscle strength; speech therapy for bulbar weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Creatine kinase and objective strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Age-appropriate, given the association with cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protection",
+          "cells": [
+            {
+              "text": "Bone protection and Pneumocystis prophylaxis during immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Rheumatology-led care; reconsider the diagnosis if inclusion body features emerge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polymyositis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "ANA patterns, target antigens and clinical correlates",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antigen identified",
+        "Clinical correlate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse",
+          "cells": [
+            {
+              "text": "Deoxyribonucleoprotein, histones"
+            },
+            {
+              "text": "Nonspecific; drug-induced lupus, lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral (rim)",
+          "cells": [
+            {
+              "text": "ds-DNA"
+            },
+            {
+              "text": "50% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: U1-RNP",
+          "cells": [
+            {
+              "text": "U1-RNP"
+            },
+            {
+              "text": "Up to 90% of MCTD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Sm",
+          "cells": [
+            {
+              "text": "Sm"
+            },
+            {
+              "text": "30% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Ro (SS-A)",
+          "cells": [
+            {
+              "text": "Ro (SS-A)"
+            },
+            {
+              "text": "Sjogren's 60%, subacute cutaneous lupus, neonatal lupus, ANA-negative lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: La (SS-B)",
+          "cells": [
+            {
+              "text": "La (SS-B)"
+            },
+            {
+              "text": "50% of Sjogren's, 15% of lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Scl-70",
+          "cells": [
+            {
+              "text": "Scl-70"
+            },
+            {
+              "text": "40% of diffuse scleroderma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: PM-1",
+          "cells": [
+            {
+              "text": "PM-1"
+            },
+            {
+              "text": "Polymyositis, dermatomyositis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Jo-1",
+          "cells": [
+            {
+              "text": "Jo-1"
+            },
+            {
+              "text": "Polymyositis with pneumonitis and arthritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nucleolar",
+          "cells": [
+            {
+              "text": "RNA polymerase I, others"
+            },
+            {
+              "text": "40% of progressive systemic sclerosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Centromere",
+          "cells": [
+            {
+              "text": "Kinetochore"
+            },
+            {
+              "text": "75% of CREST (limited scleroderma)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "polymyositis-ddx-2",
+      "kind": "ddx",
+      "title": "Polymyositis, dermatomyositis and inclusion body myositis compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Age at onset",
+        "Familial association",
+        "Extramuscular manifestations",
+        "Connective tissue diseases",
+        "Systemic autoimmune diseases",
+        "Malignancy",
+        "Viruses",
+        "Drugs",
+        "Parasites and bacteria"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymyositis",
+          "cells": [
+            {
+              "text": "Over 18 years"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes (footnote a)"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "Yes (footnote d)"
+            },
+            {
+              "text": "Yes (footnote e)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dermatomyositis",
+          "cells": [
+            {
+              "text": "Adulthood and childhood"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Scleroderma and mixed connective tissue disease (overlap syndromes)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "Yes, in up to 15% of cases"
+            },
+            {
+              "text": "Unproven"
+            },
+            {
+              "text": "Yes, rarely (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "Over 50 years"
+            },
+            {
+              "text": "Yes, in some cases"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes, in up to 20% of cases (footnote a)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "No (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Footnote letters a to e (including b for systemic autoimmune diseases) appear in the source but their text is not printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polymyositis-dx-mgmt",
+      "title": "Diagnosis and management of Polymyositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proximal muscle weakness with raised creatine kinase and myopathic EMG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid dyspnoea, bulbar weakness, cardiac involvement, malignancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory and rheumatology review for lung disease or dysphagia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Creatine kinase; myositis antibodies; EMG; muscle MRI; muscle biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show endomysial inflammation without another cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dermatomyositis, inclusion body myositis, statin myopathy or endocrine myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose corticosteroids as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early steroid-sparing immunosuppression such as methotrexate or azathioprine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treatment of antisynthetase-associated interstitial lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy to preserve and rebuild muscle strength",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Age-appropriate malignancy screening given the association with cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many regain strength; relapses are common; lung disease worsens prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,474 @@
 {
- "id": "kimura_disease",
- "name": "Kimura disease",
- "aliases": [
-  "eosinophilic lymphogranuloma",
-  "Kimura's disease",
-  "eosinophilic hyperplastic lymphogranuloma"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Immunology",
- "specialty": "Rheumatology / Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic inflammatory disorder typically affecting young to middle-aged men of Asian descent",
-   "Presents with painless subcutaneous nodules or masses in the head and neck, often with regional lymphadenopathy and salivary gland involvement",
-   "Marked peripheral blood eosinophilia and strikingly elevated serum IgE are characteristic",
-   "Renal involvement, particularly nephrotic syndrome, occurs in a notable minority and should be actively sought",
-   "Histology shows lymphoid follicles with germinal centres, dense eosinophilic infiltration with eosinophilic microabscesses, and proliferation of postcapillary venules",
-   "Distinct from angiolymphoid hyperplasia with eosinophilia, which is more superficial and occurs in a different demographic",
-   "Benign but frequently relapses after excision; corticosteroids and other systemic immunosuppression are used for extensive or recurrent disease"
+  "id": "kimura_disease",
+  "name": "Kimura disease",
+  "aliases": [
+    "eosinophilic lymphogranuloma",
+    "Kimura's disease",
+    "eosinophilic hyperplastic lymphogranuloma"
   ],
-  "pathophysiology": "Kimura disease is a chronic immune-mediated inflammatory condition of unknown cause, possibly reflecting an aberrant T-helper-2 driven allergic or autoimmune response. There is exuberant reactive lymphoid proliferation with well-formed germinal centres accompanied by heavy eosinophil recruitment, elevated IgE, and proliferation of small blood vessels within affected soft tissue and lymph nodes. Cytokines such as interleukin-4 and interleukin-5 are thought to promote the eosinophilia and IgE production. The immune dysregulation may also injure the glomerulus, accounting for the associated nephrotic syndrome.",
-  "additionalDifferentials": [
-   "Angiolymphoid hyperplasia with eosinophilia (epithelioid haemangioma)",
-   "Lymphoma, particularly Hodgkin and T-cell types",
-   "Langerhans cell histiocytosis",
-   "Salivary gland tumour or reactive lymphadenopathy",
-   "Parasitic infection with eosinophilia",
-   "IgG4-related disease"
-  ],
-  "additionalInvestigations": [
-   "Excisional or core biopsy of the mass for histology showing lymphoid follicles and eosinophilic infiltration",
-   "Full blood count with differential documenting peripheral eosinophilia",
-   "Serum total IgE, which is characteristically very high",
-   "Urinalysis and renal function to detect associated nephrotic syndrome or proteinuria",
-   "Cross-sectional imaging (ultrasound or MRI) to define extent and lymph node involvement",
-   "Exclusion of parasitic infection and lymphoma where clinically indicated"
-  ],
-  "redFlags": [
-   "Nephrotic-range proteinuria indicating renal involvement",
-   "Rapidly enlarging or systemic lymphadenopathy suggesting lymphoma",
-   "Constitutional symptoms such as fever and weight loss requiring exclusion of malignancy",
-   "Airway compromise from large head and neck masses"
-  ],
-  "prognosis": "Kimura disease is benign and does not undergo malignant transformation, but it is characterised by a chronic, relapsing course with frequent recurrence after excision; associated nephrotic syndrome influences long-term outcome.",
-  "pitfalls": [
-   "Confusing it with angiolymphoid hyperplasia with eosinophilia, a distinct entity",
-   "Failing to check for renal involvement and missing associated nephrotic syndrome",
-   "Attributing the mass to malignancy without histological confirmation, or vice versa",
-   "Assuming surgical excision is curative when relapse is common",
-   "Overlooking the diagnosis in a patient with unexplained eosinophilia and raised IgE"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical excision of symptomatic head-and-neck nodules or masses as first-line treatment, accepting that recurrence is common",
-   "Systemic or intralesional corticosteroids for extensive, recurrent or renal-associated disease",
-   "Steroid-sparing immunosuppression such as ciclosporin for relapsing or steroid-dependent disease",
-   "Radiotherapy reserved for refractory or repeatedly recurrent lesions",
-   "Actively seek and manage renal involvement, particularly nephrotic syndrome, with urinalysis and proteinuria assessment",
-   "Monitor peripheral eosinophilia and serum IgE as markers of disease activity",
-   "Long-term follow-up given the chronic, relapsing course without malignant transformation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kimura_disease-pathway",
-   "title": "Kimura disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic inflammatory disorder typically affecting young to middle-aged men of Asian descent",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Nephrotic-range proteinuria indicating renal involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Excisional or core biopsy of the mass for histology showing lymphoid follicles and eosinophilic infiltration, Full blood count with differential documenting peripheral eosinophilia, Serum total IgE, which is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical excision of symptomatic head-and-neck nodules or masses as first-line treatment, accepting that recurrence is common"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with angiolymphoid hyperplasia with eosinophilia, a distinct entity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kimura disease."
-  }
- ],
- "tables": [
-  {
-   "id": "kimura_disease-matrix",
-   "title": "Kimura disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic inflammatory disorder typically affecting young to middle-aged men of Asian descent",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Immunology",
+  "specialty": "Rheumatology / Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic inflammatory disorder typically affecting young to middle-aged men of Asian descent",
+      "Presents with painless subcutaneous nodules or masses in the head and neck, often with regional lymphadenopathy and salivary gland involvement",
+      "Marked peripheral blood eosinophilia and strikingly elevated serum IgE are characteristic",
+      "Renal involvement, particularly nephrotic syndrome, occurs in a notable minority and should be actively sought",
+      "Histology shows lymphoid follicles with germinal centres, dense eosinophilic infiltration with eosinophilic microabscesses, and proliferation of postcapillary venules",
+      "Distinct from angiolymphoid hyperplasia with eosinophilia, which is more superficial and occurs in a different demographic",
+      "Benign but frequently relapses after excision; corticosteroids and other systemic immunosuppression are used for extensive or recurrent disease"
     ],
-    [
-     "Key Investigations",
-     "Excisional or core biopsy of the mass for histology showing lymphoid follicles and eosinophilic infiltration, Full blood count",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kimura disease is a chronic immune-mediated inflammatory condition of unknown cause, possibly reflecting an aberrant T-helper-2 driven allergic or autoimmune response. There is exuberant reactive lymphoid proliferation with well-formed germinal centres accompanied by heavy eosinophil recruitment, elevated IgE, and proliferation of small blood vessels within affected soft tissue and lymph nodes. Cytokines such as interleukin-4 and interleukin-5 are thought to promote the eosinophilia and IgE production. The immune dysregulation may also injure the glomerulus, accounting for the associated nephrotic syndrome.",
+    "additionalDifferentials": [
+      "Angiolymphoid hyperplasia with eosinophilia (epithelioid haemangioma)",
+      "Lymphoma, particularly Hodgkin and T-cell types",
+      "Langerhans cell histiocytosis",
+      "Salivary gland tumour or reactive lymphadenopathy",
+      "Parasitic infection with eosinophilia",
+      "IgG4-related disease"
     ],
-    [
-     "Primary Differentials",
-     "Angiolymphoid hyperplasia with eosinophilia (epithelioid haemangioma), Lymphoma, particularly Hodgkin and T-cell types,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Excisional or core biopsy of the mass for histology showing lymphoid follicles and eosinophilic infiltration",
+      "Full blood count with differential documenting peripheral eosinophilia",
+      "Serum total IgE, which is characteristically very high",
+      "Urinalysis and renal function to detect associated nephrotic syndrome or proteinuria",
+      "Cross-sectional imaging (ultrasound or MRI) to define extent and lymph node involvement",
+      "Exclusion of parasitic infection and lymphoma where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Surgical excision of symptomatic head-and-neck nodules or masses as first-line treatment, accepting that recurrence is common",
-     "Core treatment modality"
+    "redFlags": [
+      "Nephrotic-range proteinuria indicating renal involvement",
+      "Rapidly enlarging or systemic lymphadenopathy suggesting lymphoma",
+      "Constitutional symptoms such as fever and weight loss requiring exclusion of malignancy",
+      "Airway compromise from large head and neck masses"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with angiolymphoid hyperplasia with eosinophilia, a distinct entity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Kimura disease is benign and does not undergo malignant transformation, but it is characterised by a chronic, relapsing course with frequent recurrence after excision; associated nephrotic syndrome influences long-term outcome.",
+    "pitfalls": [
+      "Confusing it with angiolymphoid hyperplasia with eosinophilia, a distinct entity",
+      "Failing to check for renal involvement and missing associated nephrotic syndrome",
+      "Attributing the mass to malignancy without histological confirmation, or vice versa",
+      "Assuming surgical excision is curative when relapse is common",
+      "Overlooking the diagnosis in a patient with unexplained eosinophilia and raised IgE"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical excision of symptomatic head-and-neck nodules or masses as first-line treatment, accepting that recurrence is common",
+      "Systemic or intralesional corticosteroids for extensive, recurrent or renal-associated disease",
+      "Steroid-sparing immunosuppression such as ciclosporin for relapsing or steroid-dependent disease",
+      "Radiotherapy reserved for refractory or repeatedly recurrent lesions",
+      "Actively seek and manage renal involvement, particularly nephrotic syndrome, with urinalysis and proteinuria assessment",
+      "Monitor peripheral eosinophilia and serum IgE as markers of disease activity",
+      "Long-term follow-up given the chronic, relapsing course without malignant transformation"
     ]
-   ],
-   "caption": "Overview comparison matrix for kimura disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kimura-disease-real-image",
-   "title": "Kimura disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "kimura_disease-pathway",
+      "title": "Kimura disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic inflammatory disorder typically affecting young to middle-aged men of Asian descent",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Nephrotic-range proteinuria indicating renal involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Excisional or core biopsy of the mass for histology showing lymphoid follicles and eosinophilic infiltration, Full blood count with differential documenting peripheral eosinophilia, Serum total IgE, which is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical excision of symptomatic head-and-neck nodules or masses as first-line treatment, accepting that recurrence is common"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with angiolymphoid hyperplasia with eosinophilia, a distinct entity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kimura disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kimura_disease-matrix",
+      "title": "Kimura disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic inflammatory disorder typically affecting young to middle-aged men of Asian descent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Excisional or core biopsy of the mass for histology showing lymphoid follicles and eosinophilic infiltration, Full blood count",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Angiolymphoid hyperplasia with eosinophilia (epithelioid haemangioma), Lymphoma, particularly Hodgkin and T-cell types,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical excision of symptomatic head-and-neck nodules or masses as first-line treatment, accepting that recurrence is common",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with angiolymphoid hyperplasia with eosinophilia, a distinct entity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kimura disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kimura_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional or core biopsy",
+          "cells": [
+            {
+              "text": "Lymphoid follicles with germinal centres and dense eosinophilic infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Peripheral blood eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum total IgE",
+          "cells": [
+            {
+              "text": "Characteristically very high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and renal function",
+          "cells": [
+            {
+              "text": "Nephrotic syndrome or proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Extent of disease and lymph node involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kimura_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Rapidly enlarging or systemic lymphadenopathy, or constitutional symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parasitic infection with eosinophilia",
+          "cells": [
+            {
+              "text": "Excluded where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiolymphoid hyperplasia with eosinophilia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kimura_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "First-line for symptomatic head-and-neck nodules or masses; recurrence is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Systemic or intralesional, for extensive, recurrent or renal-associated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciclosporin",
+          "cells": [
+            {
+              "text": "Steroid-sparing, for relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Reserved for refractory or repeatedly recurrent lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal involvement",
+          "cells": [
+            {
+              "text": "Actively seek and manage, particularly nephrotic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity monitoring",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia and serum IgE as markers of disease activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kimura_disease-dx-mgmt",
+      "title": "Diagnosis and management of Kimura disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Head and neck nodules with peripheral eosinophilia and raised serum IgE",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (nephrotic proteinuria, rapid lymphadenopathy, constitutional symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude lymphoma and manage nephrotic syndrome urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy for histology; FBC with eosinophils; serum IgE; urinalysis; ultrasound or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show lymphoid follicles with eosinophilic infiltration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider angiolymphoid hyperplasia with eosinophilia, lymphoma or parasitic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical excision of symptomatic nodules, accepting recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids, systemic or intralesional, for extensive or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ciclosporin for relapsing or steroid-dependent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy for refractory or repeatedly recurrent lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Seek and manage renal involvement with proteinuria assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Track eosinophilia and serum IgE as markers of disease activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Benign but chronic and relapsing; recurrence is frequent after excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

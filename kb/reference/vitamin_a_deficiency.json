@@ -1,174 +1,396 @@
 {
- "id": "vitamin_a_deficiency",
- "name": "Vitamin A Deficiency",
- "aliases": [
-  "hypovitaminosis A",
-  "xerophthalmia",
-  "retinol deficiency"
- ],
- "class": "non_infective",
- "system": "Nutritional",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A major cause of preventable childhood blindness and increased infection-related mortality in low- and middle-income countries.",
-   "The earliest and most sensitive symptom is night blindness, reflecting impaired rod photoreceptor function.",
-   "Progressive ocular signs (xerophthalmia) include conjunctival dryness, Bitot spots, corneal xerosis, and ultimately corneal ulceration and keratomalacia that can rapidly destroy the eye.",
-   "Deficiency also impairs epithelial integrity and immune function, increasing severity of infections such as measles and diarrhoeal disease.",
-   "It commonly coexists with protein-energy malnutrition and other micronutrient deficiencies.",
-   "Measles can precipitate acute deficiency and corneal damage, so supplementation is recommended during measles infection in at-risk children.",
-   "Diagnosis is largely clinical, supported by a low serum retinol level and dietary history.",
-   "High-dose vitamin A supplementation reverses early ocular signs and reduces mortality, and periodic supplementation programmes are a key public health measure.",
-   "Excessive vitamin A intake is toxic, so dosing schedules must be followed carefully."
+  "id": "vitamin_a_deficiency",
+  "name": "Vitamin A Deficiency",
+  "aliases": [
+    "hypovitaminosis A",
+    "xerophthalmia",
+    "retinol deficiency"
   ],
-  "pathophysiology": "Vitamin A (retinol) is essential for the visual cycle, where its aldehyde form retinal combines with opsin to form rhodopsin in rod cells; deficiency reduces rhodopsin regeneration and causes night blindness. Retinoic acid also regulates differentiation and maintenance of epithelial tissues and mucosal barriers, so deficiency leads to squamous metaplasia and keratinisation of conjunctival and corneal epithelium (xerophthalmia) and of other epithelia. Impaired epithelial barriers and immune regulation increase susceptibility to and severity of infection.",
-  "additionalDifferentials": [
-   "Other causes of night blindness (retinitis pigmentosa)",
-   "Fat malabsorption syndromes (cystic fibrosis, cholestatic liver disease, coeliac disease)",
-   "Protein-energy malnutrition with multiple deficiencies",
-   "Infective keratoconjunctivitis",
-   "Zinc deficiency",
-   "Dry eye from other causes"
-  ],
-  "additionalInvestigations": [
-   "Serum retinol level",
-   "Clinical ocular examination for Bitot spots, xerosis, and corneal changes",
-   "Assessment of nutritional status and dietary intake",
-   "Investigation for fat malabsorption where suspected",
-   "Screening for coexisting micronutrient deficiencies"
-  ],
-  "redFlags": [
-   "Corneal ulceration or keratomalacia threatening irreversible blindness",
-   "Rapidly progressing ocular signs, particularly during measles",
-   "Severe concurrent infection in a malnourished child",
-   "Signs of advanced protein-energy malnutrition",
-   "Bilateral corneal involvement"
-  ],
-  "prognosis": "Early ocular changes are fully reversible with prompt supplementation, but corneal ulceration and keratomalacia can cause permanent blindness; adequate vitamin A status also lowers infection-related mortality.",
-  "pitfalls": [
-   "Overlooking night blindness as an early, treatable warning sign",
-   "Failing to supplement vitamin A during measles in at-risk children",
-   "Missing underlying fat malabsorption in a child with deficiency and adequate intake",
-   "Causing toxicity by exceeding recommended supplementation doses"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt oral vitamin A (retinol) supplementation, given as an age-based course, to reverse deficiency and halt progression of xerophthalmia",
-   "Vitamin A supplementation during measles infection in at-risk children to prevent acute deficiency and corneal damage",
-   "Ophthalmic care of corneal xerosis, ulceration and keratomalacia with topical lubrication and antibiotics to prevent secondary infection and preserve sight",
-   "Dietary improvement with vitamin A-rich foods and treatment of coexisting protein-energy malnutrition and other micronutrient deficiencies",
-   "Investigate and manage underlying fat malabsorption where present",
-   "Population prevention through periodic supplementation programmes and food fortification in endemic regions",
-   "Monitor serum retinol and perform regular ocular examination to track recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vitamin_a_deficiency-pathway",
-   "title": "Vitamin A Deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A major cause of preventable childhood blindness and increased infection-related mortality in low- and middle-income countries.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Corneal ulceration or keratomalacia threatening irreversible blindness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum retinol level, Clinical ocular examination for Bitot spots, xerosis, and corneal changes, Assessment of nutritional status and dietary intake"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt oral vitamin A (retinol) supplementation, given as an age-based course, to reverse deficiency and halt progression of xerophthalmia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking night blindness as an early, treatable warning sign"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vitamin a deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "vitamin_a_deficiency-matrix",
-   "title": "Vitamin A Deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A major cause of preventable childhood blindness and increased infection-related mortality in low- and middle-income countries.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutritional",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A major cause of preventable childhood blindness and increased infection-related mortality in low- and middle-income countries.",
+      "The earliest and most sensitive symptom is night blindness, reflecting impaired rod photoreceptor function.",
+      "Progressive ocular signs (xerophthalmia) include conjunctival dryness, Bitot spots, corneal xerosis, and ultimately corneal ulceration and keratomalacia that can rapidly destroy the eye.",
+      "Deficiency also impairs epithelial integrity and immune function, increasing severity of infections such as measles and diarrhoeal disease.",
+      "It commonly coexists with protein-energy malnutrition and other micronutrient deficiencies.",
+      "Measles can precipitate acute deficiency and corneal damage, so supplementation is recommended during measles infection in at-risk children.",
+      "Diagnosis is largely clinical, supported by a low serum retinol level and dietary history.",
+      "High-dose vitamin A supplementation reverses early ocular signs and reduces mortality, and periodic supplementation programmes are a key public health measure.",
+      "Excessive vitamin A intake is toxic, so dosing schedules must be followed carefully."
     ],
-    [
-     "Key Investigations",
-     "Serum retinol level, Clinical ocular examination for Bitot spots, xerosis, and corneal changes, Assessment of nutritional status",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vitamin A (retinol) is essential for the visual cycle, where its aldehyde form retinal combines with opsin to form rhodopsin in rod cells; deficiency reduces rhodopsin regeneration and causes night blindness. Retinoic acid also regulates differentiation and maintenance of epithelial tissues and mucosal barriers, so deficiency leads to squamous metaplasia and keratinisation of conjunctival and corneal epithelium (xerophthalmia) and of other epithelia. Impaired epithelial barriers and immune regulation increase susceptibility to and severity of infection.",
+    "additionalDifferentials": [
+      "Other causes of night blindness (retinitis pigmentosa)",
+      "Fat malabsorption syndromes (cystic fibrosis, cholestatic liver disease, coeliac disease)",
+      "Protein-energy malnutrition with multiple deficiencies",
+      "Infective keratoconjunctivitis",
+      "Zinc deficiency",
+      "Dry eye from other causes"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of night blindness (retinitis pigmentosa), Fat malabsorption syndromes (cystic fibrosis, cholestatic liver disease,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum retinol level",
+      "Clinical ocular examination for Bitot spots, xerosis, and corneal changes",
+      "Assessment of nutritional status and dietary intake",
+      "Investigation for fat malabsorption where suspected",
+      "Screening for coexisting micronutrient deficiencies"
     ],
-    [
-     "Management Strategy",
-     "Prompt oral vitamin A (retinol) supplementation, given as an age-based course, to reverse deficiency and halt progression of",
-     "Core treatment modality"
+    "redFlags": [
+      "Corneal ulceration or keratomalacia threatening irreversible blindness",
+      "Rapidly progressing ocular signs, particularly during measles",
+      "Severe concurrent infection in a malnourished child",
+      "Signs of advanced protein-energy malnutrition",
+      "Bilateral corneal involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking night blindness as an early, treatable warning sign",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early ocular changes are fully reversible with prompt supplementation, but corneal ulceration and keratomalacia can cause permanent blindness; adequate vitamin A status also lowers infection-related mortality.",
+    "pitfalls": [
+      "Overlooking night blindness as an early, treatable warning sign",
+      "Failing to supplement vitamin A during measles in at-risk children",
+      "Missing underlying fat malabsorption in a child with deficiency and adequate intake",
+      "Causing toxicity by exceeding recommended supplementation doses"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt oral vitamin A (retinol) supplementation, given as an age-based course, to reverse deficiency and halt progression of xerophthalmia",
+      "Vitamin A supplementation during measles infection in at-risk children to prevent acute deficiency and corneal damage",
+      "Ophthalmic care of corneal xerosis, ulceration and keratomalacia with topical lubrication and antibiotics to prevent secondary infection and preserve sight",
+      "Dietary improvement with vitamin A-rich foods and treatment of coexisting protein-energy malnutrition and other micronutrient deficiencies",
+      "Investigate and manage underlying fat malabsorption where present",
+      "Population prevention through periodic supplementation programmes and food fortification in endemic regions",
+      "Monitor serum retinol and perform regular ocular examination to track recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for vitamin a deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vitamin-a-deficiency-real-image",
-   "title": "Vitamin A Deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vitamin_a_deficiency-pathway",
+      "title": "Vitamin A Deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A major cause of preventable childhood blindness and increased infection-related mortality in low- and middle-income countries.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Corneal ulceration or keratomalacia threatening irreversible blindness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum retinol level, Clinical ocular examination for Bitot spots, xerosis, and corneal changes, Assessment of nutritional status and dietary intake"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt oral vitamin A (retinol) supplementation, given as an age-based course, to reverse deficiency and halt progression of xerophthalmia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking night blindness as an early, treatable warning sign"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vitamin a deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vitamin_a_deficiency-matrix",
+      "title": "Vitamin A Deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A major cause of preventable childhood blindness and increased infection-related mortality in low- and middle-income countries.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum retinol level, Clinical ocular examination for Bitot spots, xerosis, and corneal changes, Assessment of nutritional status",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of night blindness (retinitis pigmentosa), Fat malabsorption syndromes (cystic fibrosis, cholestatic liver disease,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt oral vitamin A (retinol) supplementation, given as an age-based course, to reverse deficiency and halt progression of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking night blindness as an early, treatable warning sign",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vitamin a deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitamin_a_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum retinol level",
+          "cells": [
+            {
+              "text": "Vitamin A status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical ocular examination",
+          "cells": [
+            {
+              "text": "Bitot spots, xerosis and corneal changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of nutritional status and dietary intake",
+          "cells": [
+            {
+              "text": "Dietary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for fat malabsorption",
+          "cells": [
+            {
+              "text": "Cystic fibrosis or cholestatic liver disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_a_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinitis pigmentosa",
+          "cells": [
+            {
+              "text": "Night blindness from retinal disease rather than deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective keratoconjunctivitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zinc deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_a_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral vitamin A (retinol) supplementation",
+          "cells": [
+            {
+              "text": "Age-based course to reverse deficiency and halt xerophthalmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplementation during measles",
+          "cells": [
+            {
+              "text": "At-risk children to prevent acute deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitamin_a_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Vitamin A Deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitamin A deficiency: night blindness or Bitot spots in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (corneal ulceration, rapid ocular change or severe infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmic review for keratomalacia and high-dose vitamin A",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum retinol, ocular examination, nutritional history, malabsorption screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is serum retinol low with ocular signs of deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider retinitis pigmentosa or other causes of night blindness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral vitamin A (retinol) as an age-based course",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supplementation during measles in at-risk children",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any fat malabsorption and nutritional deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Early treatment reverses night blindness; delay risks irreversible blindness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

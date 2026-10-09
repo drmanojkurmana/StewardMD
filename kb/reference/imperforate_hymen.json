@@ -1,173 +1,453 @@
 {
- "id": "imperforate_hymen",
- "name": "Imperforate hymen",
- "aliases": [
-  "imperforate hymen",
-  "hymenal atresia",
-  "occlusive hymen"
- ],
- "class": "non_infective",
- "system": "Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard gynaecology textbook and paediatric and adolescent gynaecology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An imperforate hymen is a persistent membrane that completely occludes the vaginal opening, and it is the commonest obstructive anomaly of the female genital tract",
-   "The classic adolescent presentation is primary amenorrhoea with cyclical lower abdominal or pelvic pain, because menstrual blood cannot escape and accumulates behind the obstruction",
-   "Retained blood distends the vagina (haematocolpos) and may extend to the uterus (haematometra), producing a lower abdominal mass and, at times, urinary retention from pressure on the urethra or bladder",
-   "Secondary sexual characteristics are normal because ovarian function and the endocrine axis are intact, distinguishing it from causes of primary amenorrhoea due to hormonal failure",
-   "On inspection the hymen typically bulges as a tense, bluish membrane, and a rectal or abdominal examination may reveal a pelvic mass of retained blood",
-   "It can occasionally present in neonates as a mucocolpos from mucus accumulation driven by maternal oestrogen, seen as a bulging introital membrane",
-   "Definitive treatment is surgical incision of the membrane, classically a cruciate incision, to release the retained blood and restore patency, ideally performed electively rather than as an emergency",
-   "Aspiration alone should be avoided because it risks introducing infection into a closed collection of blood"
+  "id": "imperforate_hymen",
+  "name": "Imperforate hymen",
+  "aliases": [
+    "imperforate hymen",
+    "hymenal atresia",
+    "occlusive hymen"
   ],
-  "pathophysiology": "The hymen represents the junction between the sinovaginal bulbs and the urogenital sinus and normally becomes perforate before or around birth. When canalisation fails, a complete membrane persists across the vaginal introitus. Before menarche this is usually silent, but once ovulatory cycles begin, endometrial shedding produces menstrual blood that cannot drain. Blood collects first in the vagina (haematocolpos) and then in the uterus (haematometra), and with time can reflux along the tubes (haematosalpinx). The expanding collection causes cyclical pain and a pelvic mass and may compress the urethra or rectum. Because the ovaries and hormonal axis are unaffected, pubertal development proceeds normally despite the absence of visible menstruation.",
-  "additionalDifferentials": [
-   "Transverse vaginal septum",
-   "Distal vaginal atresia or agenesis",
-   "Cervical or vaginal agenesis (e.g. Mullerian agenesis)",
-   "Androgen insensitivity syndrome",
-   "Obstructed hemivagina in complex Mullerian anomalies",
-   "Other causes of primary amenorrhoea with normal secondary sexual characteristics"
-  ],
-  "additionalInvestigations": [
-   "Careful genital inspection to identify a bulging bluish membrane at the introitus",
-   "Pelvic (often transabdominal or perineal) ultrasound to demonstrate haematocolpos and haematometra",
-   "Magnetic resonance imaging where the level or nature of obstruction is uncertain or a complex anomaly is suspected",
-   "Assessment of secondary sexual characteristics and pubertal staging",
-   "Renal tract imaging given the association of genital tract anomalies with urinary tract malformations"
-  ],
-  "redFlags": [
-   "Acute urinary retention or severe pain from a large obstructing collection",
-   "Features suggesting a more proximal or complex obstruction rather than a simple imperforate hymen",
-   "Signs of infection within a retained blood collection",
-   "A pelvic mass of uncertain nature requiring urgent imaging"
-  ],
-  "prognosis": "The outlook after timely surgical release is excellent, with restoration of normal menstruation and preservation of fertility; delayed diagnosis can allow complications such as endometriosis from retrograde menstruation or, rarely, infection of the retained blood.",
-  "pitfalls": [
-   "Overlooking imperforate hymen in an adolescent with cyclical pain and primary amenorrhoea by not inspecting the introitus",
-   "Confusing it with a transverse vaginal septum, which sits higher and needs different surgical planning",
-   "Aspirating the collection rather than performing formal incision, risking infection",
-   "Attributing normal pubertal development plus amenorrhoea to hormonal causes and missing an obstructive anomaly",
-   "Failing to arrange renal tract imaging for associated urinary anomalies"
-  ],
-  "references": [
-   "Standard gynaecology reference text on Mullerian and outflow tract anomalies",
-   "Paediatric and adolescent gynaecology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment by surgical incision of the membrane (hymenotomy or hymenectomy) to drain retained blood and restore menstrual outflow",
-   "Analgesia for cyclical pain and relief of acute urinary retention with catheterisation when the collection compresses the urethra",
-   "Avoidance of simple needle aspiration of the haematocolpos because of the risk of introducing infection",
-   "Expectant management of an asymptomatic neonatal mucocolpos, reserving intervention for obstructive symptoms",
-   "Surveillance for complications of delayed diagnosis such as endometriosis from retrograde menstruation",
-   "Reassurance regarding normal fertility and pubertal development, with gynaecology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "imperforate_hymen-pathway",
-   "title": "Imperforate hymen: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An imperforate hymen is a persistent membrane that completely occludes the vaginal opening, and it is the commonest obstructive anomaly of the female genital tract",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute urinary retention or severe pain from a large obstructing collection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful genital inspection to identify a bulging bluish membrane at the introitus, Pelvic (often transabdominal or perineal) ultrasound to demonstrate haematocolpos and haematometra, Magnetic resonance imaging where the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment by surgical incision of the membrane (hymenotomy or hymenectomy) to drain retained blood and restore menstrual outflow"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking imperforate hymen in an adolescent with cyclical pain and primary amenorrhoea by not inspecting the introitus"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of imperforate hymen."
-  }
- ],
- "tables": [
-  {
-   "id": "imperforate_hymen-matrix",
-   "title": "Imperforate hymen: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An imperforate hymen is a persistent membrane that completely occludes the vaginal opening, and it is the commonest obstructive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard gynaecology textbook and paediatric and adolescent gynaecology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An imperforate hymen is a persistent membrane that completely occludes the vaginal opening, and it is the commonest obstructive anomaly of the female genital tract",
+      "The classic adolescent presentation is primary amenorrhoea with cyclical lower abdominal or pelvic pain, because menstrual blood cannot escape and accumulates behind the obstruction",
+      "Retained blood distends the vagina (haematocolpos) and may extend to the uterus (haematometra), producing a lower abdominal mass and, at times, urinary retention from pressure on the urethra or bladder",
+      "Secondary sexual characteristics are normal because ovarian function and the endocrine axis are intact, distinguishing it from causes of primary amenorrhoea due to hormonal failure",
+      "On inspection the hymen typically bulges as a tense, bluish membrane, and a rectal or abdominal examination may reveal a pelvic mass of retained blood",
+      "It can occasionally present in neonates as a mucocolpos from mucus accumulation driven by maternal oestrogen, seen as a bulging introital membrane",
+      "Definitive treatment is surgical incision of the membrane, classically a cruciate incision, to release the retained blood and restore patency, ideally performed electively rather than as an emergency",
+      "Aspiration alone should be avoided because it risks introducing infection into a closed collection of blood"
     ],
-    [
-     "Key Investigations",
-     "Careful genital inspection to identify a bulging bluish membrane at the introitus, Pelvic (often transabdominal or perineal)",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The hymen represents the junction between the sinovaginal bulbs and the urogenital sinus and normally becomes perforate before or around birth. When canalisation fails, a complete membrane persists across the vaginal introitus. Before menarche this is usually silent, but once ovulatory cycles begin, endometrial shedding produces menstrual blood that cannot drain. Blood collects first in the vagina (haematocolpos) and then in the uterus (haematometra), and with time can reflux along the tubes (haematosalpinx). The expanding collection causes cyclical pain and a pelvic mass and may compress the urethra or rectum. Because the ovaries and hormonal axis are unaffected, pubertal development proceeds normally despite the absence of visible menstruation.",
+    "additionalDifferentials": [
+      "Transverse vaginal septum",
+      "Distal vaginal atresia or agenesis",
+      "Cervical or vaginal agenesis (e.g. Mullerian agenesis)",
+      "Androgen insensitivity syndrome",
+      "Obstructed hemivagina in complex Mullerian anomalies",
+      "Other causes of primary amenorrhoea with normal secondary sexual characteristics"
     ],
-    [
-     "Primary Differentials",
-     "Transverse vaginal septum, Distal vaginal atresia or agenesis, Cervical or vaginal agenesis (e.g. Mullerian agenesis)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful genital inspection to identify a bulging bluish membrane at the introitus",
+      "Pelvic (often transabdominal or perineal) ultrasound to demonstrate haematocolpos and haematometra",
+      "Magnetic resonance imaging where the level or nature of obstruction is uncertain or a complex anomaly is suspected",
+      "Assessment of secondary sexual characteristics and pubertal staging",
+      "Renal tract imaging given the association of genital tract anomalies with urinary tract malformations"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment by surgical incision of the membrane (hymenotomy or hymenectomy) to drain retained blood and restore",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute urinary retention or severe pain from a large obstructing collection",
+      "Features suggesting a more proximal or complex obstruction rather than a simple imperforate hymen",
+      "Signs of infection within a retained blood collection",
+      "A pelvic mass of uncertain nature requiring urgent imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking imperforate hymen in an adolescent with cyclical pain and primary amenorrhoea by not inspecting the introitus",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook after timely surgical release is excellent, with restoration of normal menstruation and preservation of fertility; delayed diagnosis can allow complications such as endometriosis from retrograde menstruation or, rarely, infection of the retained blood.",
+    "pitfalls": [
+      "Overlooking imperforate hymen in an adolescent with cyclical pain and primary amenorrhoea by not inspecting the introitus",
+      "Confusing it with a transverse vaginal septum, which sits higher and needs different surgical planning",
+      "Aspirating the collection rather than performing formal incision, risking infection",
+      "Attributing normal pubertal development plus amenorrhoea to hormonal causes and missing an obstructive anomaly",
+      "Failing to arrange renal tract imaging for associated urinary anomalies"
+    ],
+    "references": [
+      "Standard gynaecology reference text on Mullerian and outflow tract anomalies",
+      "Paediatric and adolescent gynaecology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment by surgical incision of the membrane (hymenotomy or hymenectomy) to drain retained blood and restore menstrual outflow",
+      "Analgesia for cyclical pain and relief of acute urinary retention with catheterisation when the collection compresses the urethra",
+      "Avoidance of simple needle aspiration of the haematocolpos because of the risk of introducing infection",
+      "Expectant management of an asymptomatic neonatal mucocolpos, reserving intervention for obstructive symptoms",
+      "Surveillance for complications of delayed diagnosis such as endometriosis from retrograde menstruation",
+      "Reassurance regarding normal fertility and pubertal development, with gynaecology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for imperforate hymen."
-  }
- ],
- "diagrams": [
-  {
-   "id": "imperforate-hymen-real-image",
-   "title": "Imperforate hymen: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "imperforate_hymen-pathway",
+      "title": "Imperforate hymen: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An imperforate hymen is a persistent membrane that completely occludes the vaginal opening, and it is the commonest obstructive anomaly of the female genital tract",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute urinary retention or severe pain from a large obstructing collection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful genital inspection to identify a bulging bluish membrane at the introitus, Pelvic (often transabdominal or perineal) ultrasound to demonstrate haematocolpos and haematometra, Magnetic resonance imaging where the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment by surgical incision of the membrane (hymenotomy or hymenectomy) to drain retained blood and restore menstrual outflow"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking imperforate hymen in an adolescent with cyclical pain and primary amenorrhoea by not inspecting the introitus"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of imperforate hymen."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "imperforate_hymen-matrix",
+      "title": "Imperforate hymen: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An imperforate hymen is a persistent membrane that completely occludes the vaginal opening, and it is the commonest obstructive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful genital inspection to identify a bulging bluish membrane at the introitus, Pelvic (often transabdominal or perineal)",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transverse vaginal septum, Distal vaginal atresia or agenesis, Cervical or vaginal agenesis (e.g. Mullerian agenesis)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment by surgical incision of the membrane (hymenotomy or hymenectomy) to drain retained blood and restore",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking imperforate hymen in an adolescent with cyclical pain and primary amenorrhoea by not inspecting the introitus",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for imperforate hymen."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology textbook and paediatric and adolescent gynaecology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "imperforate_hymen-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Careful genital inspection",
+          "cells": [
+            {
+              "text": "Bulging bluish membrane at the introitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Haematocolpos and haematometra"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnetic resonance imaging",
+          "cells": [
+            {
+              "text": "Level or nature of obstruction when uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pubertal staging",
+          "cells": [
+            {
+              "text": "Secondary sexual characteristics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging",
+          "cells": [
+            {
+              "text": "Associated urinary tract malformations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "imperforate_hymen-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transverse vaginal septum",
+          "cells": [
+            {
+              "text": "Sits higher; needs different surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other primary amenorrhoea",
+          "cells": [
+            {
+              "text": "Primary amenorrhoea with normal secondary sexual characteristics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "imperforate_hymen-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical incision",
+          "cells": [
+            {
+              "text": "Hymenotomy or hymenectomy to drain retained blood and restore menstrual outflow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and catheterisation",
+          "cells": [
+            {
+              "text": "Cyclical pain; catheterise for acute urinary retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid needle aspiration",
+          "cells": [
+            {
+              "text": "Risk of introducing infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal mucocolpos",
+          "cells": [
+            {
+              "text": "Expectant management unless obstructive symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complications",
+          "cells": [
+            {
+              "text": "Surveillance for endometriosis from retrograde menstruation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and follow-up",
+          "cells": [
+            {
+              "text": "Normal fertility and pubertal development; gynaecology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "imperforate_hymen-dx-mgmt",
+      "title": "Diagnosis and management of Imperforate hymen",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Primary amenorrhoea with cyclical pelvic pain in an adolescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute urinary retention, severe pain, infection or a proximal obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and catheterisation; imaging for proximal obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Genital inspection, pelvic ultrasound, MRI if uncertain, renal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Simple imperforate hymen confirmed with no proximal obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess for transverse septum or complex Mullerian anomaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical incision of the membrane to drain retained blood",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia for cyclical pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid needle aspiration of the collection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Expectant management of asymptomatic neonatal mucocolpos",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Gynaecology follow-up and endometriosis surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Menstrual outflow restored; normal fertility expected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

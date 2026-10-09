@@ -1,177 +1,473 @@
 {
- "id": "sex_cord_stromal_tumor",
- "name": "Sex cord-stromal tumour",
- "aliases": [
-  "sex cord-stromal tumor",
-  "granulosa cell tumour",
-  "Sertoli-Leydig cell tumour",
-  "gonadal stromal tumour"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive",
- "specialty": "Paediatric & Reproductive Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of gonadal neoplasms arising from the non-germ-cell supporting tissues (granulosa, theca, Sertoli, and Leydig cells) that are frequently hormonally active",
-   "In children an oestrogen-secreting tumour, such as a juvenile granulosa cell tumour, can cause peripheral (gonadotropin-independent) precocious pseudopuberty with breast development and vaginal bleeding",
-   "Androgen-secreting variants, such as Sertoli-Leydig cell tumours, can produce virilisation in girls or contribute to precocity in boys",
-   "The hormonal effects are autonomous, so gonadotropins are suppressed and the GnRH stimulation test is prepubertal, unlike central precocious puberty",
-   "A unilateral adnexal or testicular mass on imaging in a child with signs of sex-steroid excess should raise the suspicion of a hormone-secreting gonadal tumour",
-   "Certain sex cord-stromal tumours are associated with genetic syndromes (for example the association of ovarian sex cord tumour with annular tubules and Peutz-Jeghers syndrome, and Sertoli-Leydig tumours with DICER1 mutations)",
-   "Management is primarily surgical, with fertility-sparing resection where feasible, and the histological subtype and stage guide the need for any further therapy"
+  "id": "sex_cord_stromal_tumor",
+  "name": "Sex cord-stromal tumour",
+  "aliases": [
+    "sex cord-stromal tumor",
+    "granulosa cell tumour",
+    "Sertoli-Leydig cell tumour",
+    "gonadal stromal tumour"
   ],
-  "pathophysiology": "Sex cord-stromal tumours develop from the steroidogenic and supporting cells of the gonad rather than from germ cells, and they often retain the capacity to synthesise sex steroids. Depending on the cell of origin, they may secrete oestrogens, causing feminising effects and isolated pseudopuberty, or androgens, causing virilisation; some are hormonally silent. Because the hormone production is autonomous and independent of pituitary drive, gonadotropins are suppressed and the changes represent precocious pseudopuberty rather than true, centrally driven puberty. The clinical picture therefore combines the local effects of a gonadal mass with the systemic consequences of the particular hormone being produced, and a subset arises in the context of tumour-predisposition syndromes.",
-  "additionalDifferentials": [
-   "Central precocious puberty",
-   "Gonadotropin-independent precocious puberty from other causes (e.g. McCune-Albright syndrome, testotoxicosis)",
-   "Congenital adrenal hyperplasia or a virilising adrenal tumour",
-   "Germ cell tumour of the gonad",
-   "Functional ovarian cyst producing oestrogen",
-   "Gonadoblastoma in a dysgenetic gonad",
-   "Exogenous sex-steroid exposure"
-  ],
-  "additionalInvestigations": [
-   "Sex-steroid measurement (oestradiol and/or testosterone) with basal LH and FSH (suppressed)",
-   "GnRH (LHRH) stimulation test showing a prepubertal, suppressed response",
-   "Pelvic or scrotal ultrasound to identify and characterise a gonadal mass",
-   "Tumour markers (for example inhibin and anti-Müllerian hormone) that can accompany certain sex cord-stromal tumours",
-   "Cross-sectional imaging for staging when a tumour is confirmed",
-   "Genetic evaluation for associated syndromes (such as DICER1 or Peutz-Jeghers) where clinically indicated"
-  ],
-  "redFlags": [
-   "A palpable or radiologically evident gonadal mass with signs of sex-steroid excess",
-   "Rapidly progressive virilisation or feminisation suggesting an active tumour",
-   "Features of a tumour-predisposition syndrome pointing to hereditary risk",
-   "Abdominal pain, distension, or ascites suggesting a large or advanced tumour",
-   "Recurrence of hormonal signs after resection, indicating residual or recurrent disease"
-  ],
-  "prognosis": "Many sex cord-stromal tumours in children are of low stage and behave in a benign or indolent fashion with an excellent outcome after complete resection, and hormone-driven signs typically regress once the tumour is removed; higher-stage or aggressive histological subtypes carry a less favourable outlook and require additional treatment and surveillance.",
-  "pitfalls": [
-   "Attributing precocious puberty to central causes without recognising a hormone-secreting gonadal tumour",
-   "Failing to perform a GnRH stimulation test to establish gonadotropin independence",
-   "Overlooking an associated genetic syndrome and its implications for the patient and family",
-   "Assuming all such tumours are benign and omitting appropriate staging and follow-up",
-   "Missing a small contralateral or recurrent lesion after initial surgery"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical resection of the gonadal tumour, typically fertility-sparing unilateral oophorectomy or orchidectomy, as the mainstay",
-   "Adjuvant platinum-based chemotherapy reserved for higher-stage or aggressive histological subtypes",
-   "Anticipate regression of precocious pseudopuberty or virilisation after tumour removal",
-   "Surveillance with serial tumour markers (inhibin, anti-Mullerian hormone) and sex-steroid levels plus imaging to detect recurrence",
-   "Genetic evaluation and counselling for associated syndromes (DICER1, Peutz-Jeghers) with family screening where indicated",
-   "Monitor and manage the effects of prior sex-steroid exposure on growth and bone maturation",
-   "Manage through paediatric oncology and endocrinology multidisciplinary teams"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sex_cord_stromal_tumor-pathway",
-   "title": "Sex cord-stromal tumour: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of gonadal neoplasms arising from the non-germ-cell supporting tissues (granulosa, theca, Sertoli, and Leydig cells) that are frequently hormonally active",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A palpable or radiologically evident gonadal mass with signs of sex-steroid excess",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Sex-steroid measurement (oestradiol and/or testosterone) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation test showing a prepubertal, suppressed response, Pelvic or scrotal ultrasound to identify and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical resection of the gonadal tumour, typically fertility-sparing unilateral oophorectomy or orchidectomy, as the mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing precocious puberty to central causes without recognising a hormone-secreting gonadal tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sex cord-stromal tumour."
-  }
- ],
- "tables": [
-  {
-   "id": "sex_cord_stromal_tumor-matrix",
-   "title": "Sex cord-stromal tumour: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of gonadal neoplasms arising from the non-germ-cell supporting tissues (granulosa, theca, Sertoli, and Leydig cells) that",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive",
+  "specialty": "Paediatric & Reproductive Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of gonadal neoplasms arising from the non-germ-cell supporting tissues (granulosa, theca, Sertoli, and Leydig cells) that are frequently hormonally active",
+      "In children an oestrogen-secreting tumour, such as a juvenile granulosa cell tumour, can cause peripheral (gonadotropin-independent) precocious pseudopuberty with breast development and vaginal bleeding",
+      "Androgen-secreting variants, such as Sertoli-Leydig cell tumours, can produce virilisation in girls or contribute to precocity in boys",
+      "The hormonal effects are autonomous, so gonadotropins are suppressed and the GnRH stimulation test is prepubertal, unlike central precocious puberty",
+      "A unilateral adnexal or testicular mass on imaging in a child with signs of sex-steroid excess should raise the suspicion of a hormone-secreting gonadal tumour",
+      "Certain sex cord-stromal tumours are associated with genetic syndromes (for example the association of ovarian sex cord tumour with annular tubules and Peutz-Jeghers syndrome, and Sertoli-Leydig tumours with DICER1 mutations)",
+      "Management is primarily surgical, with fertility-sparing resection where feasible, and the histological subtype and stage guide the need for any further therapy"
     ],
-    [
-     "Key Investigations",
-     "Sex-steroid measurement (oestradiol and/or testosterone) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation test showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sex cord-stromal tumours develop from the steroidogenic and supporting cells of the gonad rather than from germ cells, and they often retain the capacity to synthesise sex steroids. Depending on the cell of origin, they may secrete oestrogens, causing feminising effects and isolated pseudopuberty, or androgens, causing virilisation; some are hormonally silent. Because the hormone production is autonomous and independent of pituitary drive, gonadotropins are suppressed and the changes represent precocious pseudopuberty rather than true, centrally driven puberty. The clinical picture therefore combines the local effects of a gonadal mass with the systemic consequences of the particular hormone being produced, and a subset arises in the context of tumour-predisposition syndromes.",
+    "additionalDifferentials": [
+      "Central precocious puberty",
+      "Gonadotropin-independent precocious puberty from other causes (e.g. McCune-Albright syndrome, testotoxicosis)",
+      "Congenital adrenal hyperplasia or a virilising adrenal tumour",
+      "Germ cell tumour of the gonad",
+      "Functional ovarian cyst producing oestrogen",
+      "Gonadoblastoma in a dysgenetic gonad",
+      "Exogenous sex-steroid exposure"
     ],
-    [
-     "Primary Differentials",
-     "Central precocious puberty, Gonadotropin-independent precocious puberty from other causes (e.g. McCune-Albright syndrome,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Sex-steroid measurement (oestradiol and/or testosterone) with basal LH and FSH (suppressed)",
+      "GnRH (LHRH) stimulation test showing a prepubertal, suppressed response",
+      "Pelvic or scrotal ultrasound to identify and characterise a gonadal mass",
+      "Tumour markers (for example inhibin and anti-Müllerian hormone) that can accompany certain sex cord-stromal tumours",
+      "Cross-sectional imaging for staging when a tumour is confirmed",
+      "Genetic evaluation for associated syndromes (such as DICER1 or Peutz-Jeghers) where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical resection of the gonadal tumour, typically fertility-sparing unilateral oophorectomy or orchidectomy, as the",
-     "Core treatment modality"
+    "redFlags": [
+      "A palpable or radiologically evident gonadal mass with signs of sex-steroid excess",
+      "Rapidly progressive virilisation or feminisation suggesting an active tumour",
+      "Features of a tumour-predisposition syndrome pointing to hereditary risk",
+      "Abdominal pain, distension, or ascites suggesting a large or advanced tumour",
+      "Recurrence of hormonal signs after resection, indicating residual or recurrent disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing precocious puberty to central causes without recognising a hormone-secreting gonadal tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many sex cord-stromal tumours in children are of low stage and behave in a benign or indolent fashion with an excellent outcome after complete resection, and hormone-driven signs typically regress once the tumour is removed; higher-stage or aggressive histological subtypes carry a less favourable outlook and require additional treatment and surveillance.",
+    "pitfalls": [
+      "Attributing precocious puberty to central causes without recognising a hormone-secreting gonadal tumour",
+      "Failing to perform a GnRH stimulation test to establish gonadotropin independence",
+      "Overlooking an associated genetic syndrome and its implications for the patient and family",
+      "Assuming all such tumours are benign and omitting appropriate staging and follow-up",
+      "Missing a small contralateral or recurrent lesion after initial surgery"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical resection of the gonadal tumour, typically fertility-sparing unilateral oophorectomy or orchidectomy, as the mainstay",
+      "Adjuvant platinum-based chemotherapy reserved for higher-stage or aggressive histological subtypes",
+      "Anticipate regression of precocious pseudopuberty or virilisation after tumour removal",
+      "Surveillance with serial tumour markers (inhibin, anti-Mullerian hormone) and sex-steroid levels plus imaging to detect recurrence",
+      "Genetic evaluation and counselling for associated syndromes (DICER1, Peutz-Jeghers) with family screening where indicated",
+      "Monitor and manage the effects of prior sex-steroid exposure on growth and bone maturation",
+      "Manage through paediatric oncology and endocrinology multidisciplinary teams"
     ]
-   ],
-   "caption": "Overview comparison matrix for sex cord-stromal tumour."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sex-cord-stromal-tumor-real-image",
-   "title": "Sex cord-stromal tumour: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "sex_cord_stromal_tumor-pathway",
+      "title": "Sex cord-stromal tumour: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of gonadal neoplasms arising from the non-germ-cell supporting tissues (granulosa, theca, Sertoli, and Leydig cells) that are frequently hormonally active",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A palpable or radiologically evident gonadal mass with signs of sex-steroid excess",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Sex-steroid measurement (oestradiol and/or testosterone) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation test showing a prepubertal, suppressed response, Pelvic or scrotal ultrasound to identify and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical resection of the gonadal tumour, typically fertility-sparing unilateral oophorectomy or orchidectomy, as the mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing precocious puberty to central causes without recognising a hormone-secreting gonadal tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sex cord-stromal tumour."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sex_cord_stromal_tumor-matrix",
+      "title": "Sex cord-stromal tumour: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of gonadal neoplasms arising from the non-germ-cell supporting tissues (granulosa, theca, Sertoli, and Leydig cells) that",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Sex-steroid measurement (oestradiol and/or testosterone) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation test showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Central precocious puberty, Gonadotropin-independent precocious puberty from other causes (e.g. McCune-Albright syndrome,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical resection of the gonadal tumour, typically fertility-sparing unilateral oophorectomy or orchidectomy, as the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing precocious puberty to central causes without recognising a hormone-secreting gonadal tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sex cord-stromal tumour."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sex_cord_stromal_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Oestradiol and/or testosterone, basal LH and FSH",
+          "cells": [
+            {
+              "text": "Sex steroid raised; LH and FSH suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GnRH stimulation test",
+          "cells": [
+            {
+              "text": "Prepubertal, suppressed response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic or scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Identifies and characterises a gonadal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhibin and anti-Mullerian hormone",
+          "cells": [
+            {
+              "text": "Tumour markers accompanying some tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Staging once a tumour is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation (DICER1, Peutz-Jeghers)",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sex_cord_stromal_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central precocious puberty",
+          "cells": [
+            {
+              "text": "Gonadotropins suppressed and GnRH response prepubertal in the tumour; not so in central puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other gonadotropin-independent precocity (McCune-Albright, testotoxicosis)",
+          "cells": [
+            {
+              "text": "Unilateral gonadal mass on imaging points to a tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia or virilising adrenal tumour",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sex_cord_stromal_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Mainstay; typically fertility-sparing unilateral oophorectomy or orchidectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant platinum-based chemotherapy",
+          "cells": [
+            {
+              "text": "Higher-stage or aggressive histological subtypes only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expected regression",
+          "cells": [
+            {
+              "text": "Precocious pseudopuberty or virilisation regresses after removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence surveillance",
+          "cells": [
+            {
+              "text": "Serial inhibin and anti-Mullerian hormone, sex steroids and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation and counselling",
+          "cells": [
+            {
+              "text": "DICER1 and Peutz-Jeghers, with family screening where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and bone maturation",
+          "cells": [
+            {
+              "text": "Monitor effects of prior sex steroid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric oncology and endocrinology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sex_cord_stromal_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Sex cord-stromal tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with oestrogen or androgen excess: breast development, bleeding or virilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Gonadal mass with sex-steroid excess, rapid progression, ascites or syndrome features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and surgical oncology referral for staging and resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oestradiol or testosterone; LH, FSH; GnRH stimulation test; gonadal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Suppressed gonadotropins with a gonadal mass on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate central puberty, McCune-Albright, adrenal causes or exogenous steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resect completely, fertility-sparing where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Platinum-based chemotherapy only for higher-stage or aggressive subtypes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveil with inhibin, anti-Mullerian hormone, sex steroids and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic evaluation for DICER1 and Peutz-Jeghers; family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent if low stage and completely resected; hormonal signs regress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

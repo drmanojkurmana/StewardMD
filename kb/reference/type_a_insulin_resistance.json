@@ -1,177 +1,473 @@
 {
- "id": "type_a_insulin_resistance",
- "name": "Type A insulin resistance syndrome",
- "aliases": [
-  "type A insulin resistance",
-  "INSR mutation",
-  "HAIR-AN syndrome (overlap)",
-  "severe insulin resistance without obesity"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The mildest of the inherited insulin-receptor disorders, typically from heterozygous INSR mutations and often presenting in adolescent or young adult women",
-   "Classic triad of severe insulin resistance, acanthosis nigricans, and hyperandrogenism (hirsutism, oligomenorrhoea, polycystic ovaries) in a lean, non-obese individual",
-   "Distinguished from ordinary polycystic ovary syndrome by the disproportionate degree of insulin resistance relative to body weight",
-   "Marked hyperinsulinaemia is present, and glucose tolerance may be normal early before overt diabetes develops",
-   "Ovarian theca-cell stimulation by high insulin drives the hyperandrogenism (an overlap with the acquired HAIR-AN picture)",
-   "Because the defect is at the insulin receptor, management uses insulin sensitisers and, in more severe cases, recombinant IGF-1 for severe insulin resistance; leptin has a limited role when leptin is not deficient",
-   "It sits at the mild end of the INSR spectrum, far less severe than Rabson-Mendenhall or Donohue syndromes",
-   "Diagnosis rests on the lean hyperandrogenic phenotype with disproportionate hyperinsulinaemia and INSR genetics"
+  "id": "type_a_insulin_resistance",
+  "name": "Type A insulin resistance syndrome",
+  "aliases": [
+    "type A insulin resistance",
+    "INSR mutation",
+    "HAIR-AN syndrome (overlap)",
+    "severe insulin resistance without obesity"
   ],
-  "pathophysiology": "Type A insulin resistance syndrome is a genetic insulin-signalling defect, usually from heterozygous mutations in the insulin receptor gene (INSR), that impairs insulin action without the obesity, autoimmunity, or lipodystrophy that cause other insulin-resistant states. Reduced receptor function forces compensatory hyperinsulinaemia; the excess insulin acts on ovarian theca cells to stimulate androgen production, generating hirsutism, menstrual disturbance, and polycystic ovaries, while impaired insulin action on skin promotes acanthosis nigricans. Because affected individuals are typically lean, the severity of insulin resistance is out of proportion to body weight, and overt insulin-resistant diabetes may emerge over time as compensation fails.",
-  "additionalDifferentials": [
-   "Polycystic ovary syndrome with ordinary insulin resistance",
-   "HAIR-AN syndrome (acquired hyperandrogenism-insulin resistance-acanthosis)",
-   "Type B insulin resistance from anti-insulin-receptor antibodies",
-   "Rabson-Mendenhall syndrome (more severe INSR defect)",
-   "Familial partial lipodystrophy",
-   "Cushing syndrome",
-   "Androgen-secreting ovarian or adrenal tumour"
-  ],
-  "additionalInvestigations": [
-   "Fasting insulin and C-peptide demonstrating marked hyperinsulinaemia",
-   "Glucose/HbA1c and glucose tolerance testing",
-   "Androgen profile (testosterone and related androgens) for hyperandrogenism",
-   "Pelvic ultrasound for polycystic ovarian morphology",
-   "INSR gene sequencing, with autoantibody testing to exclude type B resistance",
-   "Lipid profile and leptin to characterise the metabolic state"
-  ],
-  "redFlags": [
-   "Progression to overt, difficult-to-control insulin-resistant diabetes",
-   "Rapidly worsening virilisation suggesting an alternative androgen source",
-   "Features suggesting type B (autoimmune) insulin resistance",
-   "Severe metabolic derangement disproportionate to body habitus"
-  ],
-  "prognosis": "The prognosis is more favourable than the severe childhood INSR disorders; many patients are managed for years with insulin sensitisers, though progression to overt diabetes and the burden of hyperandrogenism require ongoing care.",
-  "pitfalls": [
-   "Labelling the presentation as ordinary polycystic ovary syndrome and missing the disproportionate insulin resistance",
-   "Overlooking a lean body habitus as a clue against obesity-driven resistance",
-   "Failing to separate genetic type A from autoimmune type B insulin resistance",
-   "Assuming leptin replacement will help when leptin is not deficient",
-   "Not confirming the diagnosis with INSR genetic testing"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on severe insulin resistance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Insulin sensitisers, principally metformin and where appropriate a thiazolidinedione, to counter the receptor-level insulin resistance and compensatory hyperinsulinaemia",
-   "Recombinant IGF-1 (mecasermin) as targeted therapy in more severe insulin resistance, bypassing the defective insulin receptor via the IGF-1 receptor",
-   "Management of hyperandrogenism with a combined oral contraceptive and an anti-androgen such as spironolactone for hirsutism and menstrual disturbance",
-   "Surveillance for progression to overt insulin-resistant diabetes with periodic glucose and HbA1c monitoring as beta-cell compensation fails",
-   "Fertility and reproductive care addressing oligomenorrhoea and polycystic ovarian dysfunction",
-   "Multidisciplinary input from endocrinology and clinical genetics, with dietetic support even in lean patients",
-   "Genetic counselling and family assessment given the heritable INSR mutation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "type_a_insulin_resistance-pathway",
-   "title": "Type A insulin resistance syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The mildest of the inherited insulin-receptor disorders, typically from heterozygous INSR mutations and often presenting in adolescent or young adult women",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progression to overt, difficult-to-control insulin-resistant diabetes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting insulin and C-peptide demonstrating marked hyperinsulinaemia, Glucose/HbA1c and glucose tolerance testing, Androgen profile (testosterone and related androgens) for hyperandrogenism"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Insulin sensitisers, principally metformin and where appropriate a thiazolidinedione, to counter the receptor-level insulin resistance and compensatory hyperinsulinaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the presentation as ordinary polycystic ovary syndrome and missing the disproportionate insulin resistance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of type a insulin resistance syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "type_a_insulin_resistance-matrix",
-   "title": "Type A insulin resistance syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The mildest of the inherited insulin-receptor disorders, typically from heterozygous INSR mutations and often presenting in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The mildest of the inherited insulin-receptor disorders, typically from heterozygous INSR mutations and often presenting in adolescent or young adult women",
+      "Classic triad of severe insulin resistance, acanthosis nigricans, and hyperandrogenism (hirsutism, oligomenorrhoea, polycystic ovaries) in a lean, non-obese individual",
+      "Distinguished from ordinary polycystic ovary syndrome by the disproportionate degree of insulin resistance relative to body weight",
+      "Marked hyperinsulinaemia is present, and glucose tolerance may be normal early before overt diabetes develops",
+      "Ovarian theca-cell stimulation by high insulin drives the hyperandrogenism (an overlap with the acquired HAIR-AN picture)",
+      "Because the defect is at the insulin receptor, management uses insulin sensitisers and, in more severe cases, recombinant IGF-1 for severe insulin resistance; leptin has a limited role when leptin is not deficient",
+      "It sits at the mild end of the INSR spectrum, far less severe than Rabson-Mendenhall or Donohue syndromes",
+      "Diagnosis rests on the lean hyperandrogenic phenotype with disproportionate hyperinsulinaemia and INSR genetics"
     ],
-    [
-     "Key Investigations",
-     "Fasting insulin and C-peptide demonstrating marked hyperinsulinaemia, Glucose/HbA1c and glucose tolerance testing, Androgen",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Type A insulin resistance syndrome is a genetic insulin-signalling defect, usually from heterozygous mutations in the insulin receptor gene (INSR), that impairs insulin action without the obesity, autoimmunity, or lipodystrophy that cause other insulin-resistant states. Reduced receptor function forces compensatory hyperinsulinaemia; the excess insulin acts on ovarian theca cells to stimulate androgen production, generating hirsutism, menstrual disturbance, and polycystic ovaries, while impaired insulin action on skin promotes acanthosis nigricans. Because affected individuals are typically lean, the severity of insulin resistance is out of proportion to body weight, and overt insulin-resistant diabetes may emerge over time as compensation fails.",
+    "additionalDifferentials": [
+      "Polycystic ovary syndrome with ordinary insulin resistance",
+      "HAIR-AN syndrome (acquired hyperandrogenism-insulin resistance-acanthosis)",
+      "Type B insulin resistance from anti-insulin-receptor antibodies",
+      "Rabson-Mendenhall syndrome (more severe INSR defect)",
+      "Familial partial lipodystrophy",
+      "Cushing syndrome",
+      "Androgen-secreting ovarian or adrenal tumour"
     ],
-    [
-     "Primary Differentials",
-     "Polycystic ovary syndrome with ordinary insulin resistance, HAIR-AN syndrome (acquired hyperandrogenism-insulin",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting insulin and C-peptide demonstrating marked hyperinsulinaemia",
+      "Glucose/HbA1c and glucose tolerance testing",
+      "Androgen profile (testosterone and related androgens) for hyperandrogenism",
+      "Pelvic ultrasound for polycystic ovarian morphology",
+      "INSR gene sequencing, with autoantibody testing to exclude type B resistance",
+      "Lipid profile and leptin to characterise the metabolic state"
     ],
-    [
-     "Management Strategy",
-     "Insulin sensitisers, principally metformin and where appropriate a thiazolidinedione, to counter the receptor-level insulin",
-     "Core treatment modality"
+    "redFlags": [
+      "Progression to overt, difficult-to-control insulin-resistant diabetes",
+      "Rapidly worsening virilisation suggesting an alternative androgen source",
+      "Features suggesting type B (autoimmune) insulin resistance",
+      "Severe metabolic derangement disproportionate to body habitus"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the presentation as ordinary polycystic ovary syndrome and missing the disproportionate insulin resistance",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is more favourable than the severe childhood INSR disorders; many patients are managed for years with insulin sensitisers, though progression to overt diabetes and the burden of hyperandrogenism require ongoing care.",
+    "pitfalls": [
+      "Labelling the presentation as ordinary polycystic ovary syndrome and missing the disproportionate insulin resistance",
+      "Overlooking a lean body habitus as a clue against obesity-driven resistance",
+      "Failing to separate genetic type A from autoimmune type B insulin resistance",
+      "Assuming leptin replacement will help when leptin is not deficient",
+      "Not confirming the diagnosis with INSR genetic testing"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on severe insulin resistance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Insulin sensitisers, principally metformin and where appropriate a thiazolidinedione, to counter the receptor-level insulin resistance and compensatory hyperinsulinaemia",
+      "Recombinant IGF-1 (mecasermin) as targeted therapy in more severe insulin resistance, bypassing the defective insulin receptor via the IGF-1 receptor",
+      "Management of hyperandrogenism with a combined oral contraceptive and an anti-androgen such as spironolactone for hirsutism and menstrual disturbance",
+      "Surveillance for progression to overt insulin-resistant diabetes with periodic glucose and HbA1c monitoring as beta-cell compensation fails",
+      "Fertility and reproductive care addressing oligomenorrhoea and polycystic ovarian dysfunction",
+      "Multidisciplinary input from endocrinology and clinical genetics, with dietetic support even in lean patients",
+      "Genetic counselling and family assessment given the heritable INSR mutation"
     ]
-   ],
-   "caption": "Overview comparison matrix for type a insulin resistance syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "type-a-insulin-resistance-real-image",
-   "title": "Type A insulin resistance syndrome: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "type_a_insulin_resistance-pathway",
+      "title": "Type A insulin resistance syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The mildest of the inherited insulin-receptor disorders, typically from heterozygous INSR mutations and often presenting in adolescent or young adult women",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progression to overt, difficult-to-control insulin-resistant diabetes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting insulin and C-peptide demonstrating marked hyperinsulinaemia, Glucose/HbA1c and glucose tolerance testing, Androgen profile (testosterone and related androgens) for hyperandrogenism"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Insulin sensitisers, principally metformin and where appropriate a thiazolidinedione, to counter the receptor-level insulin resistance and compensatory hyperinsulinaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the presentation as ordinary polycystic ovary syndrome and missing the disproportionate insulin resistance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of type a insulin resistance syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "type_a_insulin_resistance-matrix",
+      "title": "Type A insulin resistance syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The mildest of the inherited insulin-receptor disorders, typically from heterozygous INSR mutations and often presenting in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting insulin and C-peptide demonstrating marked hyperinsulinaemia, Glucose/HbA1c and glucose tolerance testing, Androgen",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Polycystic ovary syndrome with ordinary insulin resistance, HAIR-AN syndrome (acquired hyperandrogenism-insulin",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Insulin sensitisers, principally metformin and where appropriate a thiazolidinedione, to counter the receptor-level insulin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the presentation as ordinary polycystic ovary syndrome and missing the disproportionate insulin resistance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for type a insulin resistance syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "type_a_insulin_resistance-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting insulin and C-peptide",
+          "cells": [
+            {
+              "text": "Marked hyperinsulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, HbA1c and glucose tolerance testing",
+          "cells": [
+            {
+              "text": "Glucose tolerance may be normal early, before overt diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen profile",
+          "cells": [
+            {
+              "text": "Hyperandrogenism, with hirsutism and oligomenorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Polycystic ovarian morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "INSR gene sequencing with autoantibody testing",
+          "cells": [
+            {
+              "text": "Pathogenic INSR variant; autoantibodies exclude type B resistance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "type_a_insulin_resistance-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Polycystic ovary syndrome with ordinary insulin resistance",
+          "cells": [
+            {
+              "text": "Type A resistance is disproportionate to body weight"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HAIR-AN syndrome",
+          "cells": [
+            {
+              "text": "Acquired form; overlaps with the hyperandrogenism of type A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type B insulin resistance",
+          "cells": [
+            {
+              "text": "Autoimmune rather than genetic; separated by autoantibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rabson-Mendenhall syndrome",
+          "cells": [
+            {
+              "text": "A more severe INSR defect; type A is the mildest end of the spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "type_a_insulin_resistance-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Insulin sensitisers",
+          "cells": [
+            {
+              "text": "Metformin and, where appropriate, a thiazolidinedione"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant IGF-1 (mecasermin)",
+          "cells": [
+            {
+              "text": "Severe insulin resistance; acts via the IGF-1 receptor, bypassing the defective insulin receptor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperandrogenism management",
+          "cells": [
+            {
+              "text": "Combined oral contraceptive and an anti-androgen such as spironolactone for hirsutism and menstrual disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Periodic glucose and HbA1c monitoring for progression to overt diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive care",
+          "cells": [
+            {
+              "text": "Oligomenorrhoea and polycystic ovarian dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine and genetic input",
+          "cells": [
+            {
+              "text": "Endocrinology and clinical genetics, with dietetic support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family assessment for the heritable INSR mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "type_a_insulin_resistance-dx-mgmt",
+      "title": "Diagnosis and management of Type A insulin resistance syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected type A insulin resistance: lean patient with acanthosis and hyperandrogenism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (overt diabetes, rapid virilisation or features of type B resistance)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine review for rapid virilisation or an alternative androgen source",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting insulin and C-peptide, androgen profile, pelvic ultrasound, INSR sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does INSR sequencing confirm type A, with autoantibodies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type B resistance or PCOS with ordinary insulin resistance; repeat workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Insulin sensitisers such as metformin to counter receptor-level resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recombinant IGF-1 in more severe insulin resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combined oral contraceptive and anti-androgen for hyperandrogenism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic glucose and HbA1c surveillance for progression to overt diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mildest INSR disorder; many are managed for years, though diabetes may develop",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

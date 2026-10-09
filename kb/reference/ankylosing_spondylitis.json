@@ -1,175 +1,1043 @@
 {
- "id": "ankylosing_spondylitis",
- "name": "Ankylosing spondylitis",
- "aliases": [
-  "AS",
-  "radiographic axial spondyloarthritis",
-  "Bechterew disease"
- ],
- "class": "non_infective",
- "system": "Rheumatology / MSK",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with activity and worsens with rest, especially in the second half of the night",
-   "Morning stiffness lasting more than 30 minutes and buttock pain from sacroiliitis are characteristic inflammatory back pain features",
-   "Progressive loss of spinal mobility can be assessed with the modified Schober test and chest expansion measurement",
-   "Enthesitis (notably at the Achilles tendon and plantar fascia) and asymmetric large-joint peripheral arthritis are common",
-   "Extra-articular manifestations include acute anterior uveitis, inflammatory bowel disease, and psoriasis",
-   "Strongly associated with HLA-B27, though a positive test alone is neither diagnostic nor required",
-   "Early sacroiliitis is often better seen on MRI (bone marrow oedema) before radiographic changes such as sclerosis, erosions, and eventual ankylosis appear",
-   "Management combines a regular exercise and physiotherapy programme with NSAIDs first-line, escalating to biologic therapy (TNF or IL-17 inhibitors) for inadequate control"
+  "id": "ankylosing_spondylitis",
+  "name": "Ankylosing spondylitis",
+  "aliases": [
+    "AS",
+    "radiographic axial spondyloarthritis",
+    "Bechterew disease"
   ],
-  "pathophysiology": "Ankylosing spondylitis is a chronic immune-mediated inflammatory disease of the axial skeleton and the prototype of the seronegative spondyloarthritides. Inflammation centres on the entheses (sites where ligaments and tendons attach to bone) and the sacroiliac joints. A strong genetic association with HLA-B27 implicates aberrant antigen presentation and dysregulated IL-23/IL-17 pathway signalling. Chronic enthesitis and osteitis drive a cycle of erosion followed by reactive new bone formation, leading to syndesmophyte development, bony bridging across vertebrae, and ultimately spinal fusion (the 'bamboo spine').",
-  "additionalDifferentials": [
-   "Mechanical or degenerative low back pain",
-   "Psoriatic arthritis with axial involvement",
-   "Reactive arthritis",
-   "Arthritis associated with inflammatory bowel disease",
-   "Diffuse idiopathic skeletal hyperostosis (DISH)",
-   "Infective sacroiliitis or vertebral osteomyelitis"
-  ],
-  "additionalInvestigations": [
-   "MRI of the sacroiliac joints to detect early active inflammation before radiographic change",
-   "Plain radiographs of the pelvis and spine for sacroiliitis, syndesmophytes, and ankylosis",
-   "HLA-B27 typing to support the diagnosis in the right clinical context",
-   "Inflammatory markers (CRP and ESR), which may be normal despite active disease",
-   "Assessment of extra-articular features including ophthalmology review for uveitis"
-  ],
-  "redFlags": [
-   "Acute painful red eye suggesting anterior uveitis requiring urgent ophthalmology assessment",
-   "New or worsening neurological deficit, or acute severe pain after minor trauma, raising concern for spinal fracture through a rigid fused spine",
-   "Cauda equina syndrome from arachnoiditis",
-   "Symptoms of cardiac conduction block or aortic regurgitation from cardiac involvement",
-   "Restrictive lung disease or apical pulmonary fibrosis"
-  ],
-  "prognosis": "Disease course is variable; many patients maintain good function with exercise and modern therapy, but persistent inflammation can lead to progressive spinal ankylosis, fixed kyphotic deformity, and increased fracture risk. Early diagnosis and biologic therapy have improved symptom control and quality of life.",
-  "pitfalls": [
-   "Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years",
-   "Relying on HLA-B27 as a diagnostic test rather than a supportive finding",
-   "Assuming normal inflammatory markers exclude active disease",
-   "Overlooking the high fracture risk of a rigid, osteoporotic spine after minor trauma",
-   "Neglecting extra-articular manifestations such as uveitis, bowel disease, and cardiac involvement"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ACR/EULAR guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of care",
-   "Use non-steroidal anti-inflammatory drugs as first-line pharmacological therapy for pain and stiffness",
-   "Escalate to biologic or targeted therapy with tumour necrosis factor inhibitors or interleukin-17 inhibitors when response to NSAIDs is inadequate",
-   "Treat peripheral arthritis and enthesitis with local corticosteroid injections and consider sulfasalazine for peripheral (not axial) involvement",
-   "Identify and co-manage extra-articular disease including acute anterior uveitis with ophthalmology, inflammatory bowel disease, and psoriasis",
-   "Monitor for and manage osteoporosis, spinal fracture risk, and cardiovascular risk, and advise smoking cessation",
-   "Refer to a rheumatology-led multidisciplinary team and consider spinal surgery for severe fixed deformity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ankylosing_spondylitis-pathway",
-   "title": "Ankylosing spondylitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with activity and worsens with rest, especially in the second half of the night",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute painful red eye suggesting anterior uveitis requiring urgent ophthalmology assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the sacroiliac joints to detect early active inflammation before radiographic change, Plain radiographs of the pelvis and spine for sacroiliitis, syndesmophytes, and ankylosis, HLA-B27 typing to support the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of care"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ankylosing spondylitis."
-  }
- ],
- "tables": [
-  {
-   "id": "ankylosing_spondylitis-matrix",
-   "title": "Ankylosing spondylitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / MSK",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with activity and worsens with rest, especially in the second half of the night",
+      "Morning stiffness lasting more than 30 minutes and buttock pain from sacroiliitis are characteristic inflammatory back pain features",
+      "Progressive loss of spinal mobility can be assessed with the modified Schober test and chest expansion measurement",
+      "Enthesitis (notably at the Achilles tendon and plantar fascia) and asymmetric large-joint peripheral arthritis are common",
+      "Extra-articular manifestations include acute anterior uveitis, inflammatory bowel disease, and psoriasis",
+      "Strongly associated with HLA-B27, though a positive test alone is neither diagnostic nor required",
+      "Early sacroiliitis is often better seen on MRI (bone marrow oedema) before radiographic changes such as sclerosis, erosions, and eventual ankylosis appear",
+      "Management combines a regular exercise and physiotherapy programme with NSAIDs first-line, escalating to biologic therapy (TNF or IL-17 inhibitors) for inadequate control"
     ],
-    [
-     "Key Investigations",
-     "MRI of the sacroiliac joints to detect early active inflammation before radiographic change, Plain radiographs of the pelvis and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ankylosing spondylitis is a chronic immune-mediated inflammatory disease of the axial skeleton and the prototype of the seronegative spondyloarthritides. Inflammation centres on the entheses (sites where ligaments and tendons attach to bone) and the sacroiliac joints. A strong genetic association with HLA-B27 implicates aberrant antigen presentation and dysregulated IL-23/IL-17 pathway signalling. Chronic enthesitis and osteitis drive a cycle of erosion followed by reactive new bone formation, leading to syndesmophyte development, bony bridging across vertebrae, and ultimately spinal fusion (the 'bamboo spine').",
+    "additionalDifferentials": [
+      "Mechanical or degenerative low back pain",
+      "Psoriatic arthritis with axial involvement",
+      "Reactive arthritis",
+      "Arthritis associated with inflammatory bowel disease",
+      "Diffuse idiopathic skeletal hyperostosis (DISH)",
+      "Infective sacroiliitis or vertebral osteomyelitis"
     ],
-    [
-     "Primary Differentials",
-     "Mechanical or degenerative low back pain, Psoriatic arthritis with axial involvement, Reactive arthritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the sacroiliac joints to detect early active inflammation before radiographic change",
+      "Plain radiographs of the pelvis and spine for sacroiliitis, syndesmophytes, and ankylosis",
+      "HLA-B27 typing to support the diagnosis in the right clinical context",
+      "Inflammatory markers (CRP and ESR), which may be normal despite active disease",
+      "Assessment of extra-articular features including ophthalmology review for uveitis"
     ],
-    [
-     "Management Strategy",
-     "Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute painful red eye suggesting anterior uveitis requiring urgent ophthalmology assessment",
+      "New or worsening neurological deficit, or acute severe pain after minor trauma, raising concern for spinal fracture through a rigid fused spine",
+      "Cauda equina syndrome from arachnoiditis",
+      "Symptoms of cardiac conduction block or aortic regurgitation from cardiac involvement",
+      "Restrictive lung disease or apical pulmonary fibrosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years",
-     "Prevent diagnostic or management error"
+    "prognosis": "Disease course is variable; many patients maintain good function with exercise and modern therapy, but persistent inflammation can lead to progressive spinal ankylosis, fixed kyphotic deformity, and increased fracture risk. Early diagnosis and biologic therapy have improved symptom control and quality of life.",
+    "pitfalls": [
+      "Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years",
+      "Relying on HLA-B27 as a diagnostic test rather than a supportive finding",
+      "Assuming normal inflammatory markers exclude active disease",
+      "Overlooking the high fracture risk of a rigid, osteoporotic spine after minor trauma",
+      "Neglecting extra-articular manifestations such as uveitis, bowel disease, and cardiac involvement"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ACR/EULAR guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of care",
+      "Use non-steroidal anti-inflammatory drugs as first-line pharmacological therapy for pain and stiffness",
+      "Escalate to biologic or targeted therapy with tumour necrosis factor inhibitors or interleukin-17 inhibitors when response to NSAIDs is inadequate",
+      "Treat peripheral arthritis and enthesitis with local corticosteroid injections and consider sulfasalazine for peripheral (not axial) involvement",
+      "Identify and co-manage extra-articular disease including acute anterior uveitis with ophthalmology, inflammatory bowel disease, and psoriasis",
+      "Monitor for and manage osteoporosis, spinal fracture risk, and cardiovascular risk, and advise smoking cessation",
+      "Refer to a rheumatology-led multidisciplinary team and consider spinal surgery for severe fixed deformity"
     ]
-   ],
-   "caption": "Overview comparison matrix for ankylosing spondylitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ankylosing-spondylitis-real-image",
-   "title": "Ankylosing spondylitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ankylosing_spondylitis-pathway",
+      "title": "Ankylosing spondylitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with activity and worsens with rest, especially in the second half of the night",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute painful red eye suggesting anterior uveitis requiring urgent ophthalmology assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the sacroiliac joints to detect early active inflammation before radiographic change, Plain radiographs of the pelvis and spine for sacroiliitis, syndesmophytes, and ankylosis, HLA-B27 typing to support the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of care"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ankylosing spondylitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ankylosing_spondylitis-matrix",
+      "title": "Ankylosing spondylitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the sacroiliac joints to detect early active inflammation before radiographic change, Plain radiographs of the pelvis and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mechanical or degenerative low back pain, Psoriatic arthritis with axial involvement, Reactive arthritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ankylosing spondylitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ankylosing_spondylitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the sacroiliac joints",
+          "cells": [
+            {
+              "text": "Early active inflammation before radiographic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs of the pelvis and spine",
+          "cells": [
+            {
+              "text": "Sacroiliitis, syndesmophytes and ankylosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B27 typing",
+          "cells": [
+            {
+              "text": "Supports the diagnosis in the right clinical context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP and ESR",
+          "cells": [
+            {
+              "text": "May be normal despite active disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Uveitis among the extra-articular features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankylosing_spondylitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical or degenerative low back pain",
+          "cells": [
+            {
+              "text": "Attributing young-adult back pain to mechanical causes delays diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriatic arthritis with axial involvement",
+          "cells": [
+            {
+              "text": "Psoriasis is an associated extra-articular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthritis associated with inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Inflammatory bowel disease is an associated extra-articular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankylosing_spondylitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exercise and structured physiotherapy",
+          "cells": [
+            {
+              "text": "Maintain spinal mobility, posture and function"
+            },
+            {
+              "text": "Foundation of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Pain and stiffness"
+            },
+            {
+              "text": "First-line pharmacological therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF or IL-17 inhibitors",
+          "cells": [
+            {
+              "text": "When response to NSAIDs is inadequate"
+            },
+            {
+              "text": "Biologic or targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local corticosteroid injection",
+          "cells": [
+            {
+              "text": "Peripheral arthritis and enthesitis"
+            },
+            {
+              "text": "Sulfasalazine for peripheral, not axial, involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extra-articular disease",
+          "cells": [
+            {
+              "text": "Acute anterior uveitis, inflammatory bowel disease, psoriasis"
+            },
+            {
+              "text": "Co-managed with ophthalmology and other specialists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone and cardiovascular care",
+          "cells": [
+            {
+              "text": "Osteoporosis, spinal fracture risk, cardiovascular risk"
+            },
+            {
+              "text": "Advise smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care",
+          "cells": [
+            {
+              "text": "Rheumatology-led multidisciplinary team"
+            },
+            {
+              "text": "Spinal surgery considered for severe fixed deformity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankylosing_spondylitis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ankylosing_spondylitis-dx-mgmt",
+      "title": "Diagnosis and management of Ankylosing spondylitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic back pain and stiffness in a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Painful red eye or deficit after minor trauma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology for uveitis; spinal fracture assessment after trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI sacroiliac joints, pelvis and spine films, HLA-B27, CRP and ESR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sacroiliitis on MRI or radiographs in the right clinical context?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start NSAIDs and structured physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat sacroiliac imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate to TNF or IL-17 inhibitor when NSAIDs fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Local steroid injection for peripheral arthritis; sulfasalazine if peripheral",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor osteoporosis, cardiovascular risk and extra-articular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rheumatology-led care; spinal surgery for severe fixed deformity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

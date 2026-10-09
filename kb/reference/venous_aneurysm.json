@@ -1,178 +1,427 @@
 {
- "id": "venous_aneurysm",
- "name": "venous aneurysm",
- "aliases": [
-  "venous aneurysmal dilatation",
-  "popliteal venous aneurysm",
-  "venous phlebectasia"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A venous aneurysm is a localised saccular or fusiform dilatation of a vein arising without an antecedent arteriovenous fistula or pseudoaneurysm; these lesions are uncommon and are often congenital or idiopathic",
-   "Popliteal venous aneurysm is the most clinically important type because it is a well-recognised source of recurrent pulmonary embolism, which may occur despite adequate anticoagulation",
-   "Presentations range from an asymptomatic popliteal swelling to leg pain, deep vein thrombosis or pulmonary embolism, and a mass that changes with posture or Valsalva is suggestive",
-   "Internal jugular venous aneurysm (phlebectasia) typically presents in children as a soft, compressible neck swelling that enlarges on straining and is usually benign",
-   "Duplex ultrasound is the principal diagnostic test, while cross-sectional venography by CT or MR delineates the anatomy for surgical planning and helps to identify intraluminal thrombus",
-   "Surgical repair, such as tangential aneurysmorrhaphy with lateral venorrhaphy or resection with an end-to-end anastomosis or interposition graft, is recommended for popliteal venous aneurysm because of the embolic risk, generally with perioperative anticoagulation",
-   "Small or superficial saccular aneurysms elsewhere may be observed with surveillance, whereas deep venous aneurysms containing thrombus or associated with embolism warrant intervention"
+  "id": "venous_aneurysm",
+  "name": "venous aneurysm",
+  "aliases": [
+    "venous aneurysmal dilatation",
+    "popliteal venous aneurysm",
+    "venous phlebectasia"
   ],
-  "pathophysiology": "Venous aneurysms arise from a focal weakness of the vein wall with loss of the normal balance of smooth muscle and elastic tissue, allowing localised dilatation. The cause is frequently congenital or idiopathic, although trauma, chronic inflammation, degenerative change and localised elevations in venous pressure are implicated. The dilated segment behaves as a low-flow reservoir in which turbulence and stasis promote the formation of mural thrombus; within a deep vein such as the popliteal, this thrombus can detach and embolise to the pulmonary circulation. A saccular morphology tends to carry a greater thrombogenic and embolic risk than a fusiform dilatation.",
-  "additionalDifferentials": [
-   "Popliteal (Baker) cyst",
-   "Popliteal artery aneurysm",
-   "Soft tissue tumour such as lipoma or sarcoma",
-   "Deep vein thrombosis",
-   "Varicose vein or venous malformation",
-   "Lymph node mass or cystic lymphangioma",
-   "Ganglion or synovial cyst"
-  ],
-  "additionalInvestigations": [
-   "Duplex ultrasound as the first-line diagnostic study",
-   "CT or MR venography to define morphology and extent",
-   "Contrast venography where the anatomy remains unclear",
-   "CT pulmonary angiography when pulmonary embolism is suspected",
-   "Careful imaging assessment for intraluminal thrombus",
-   "Thrombophilia screen in patients presenting with thromboembolism",
-   "Comparative arterial imaging to distinguish from an arterial aneurysm when the site is ambiguous"
-  ],
-  "redFlags": [
-   "Pulmonary embolism, especially when recurrent or occurring despite anticoagulation",
-   "Intraluminal thrombus demonstrated within the aneurysm",
-   "Rapid enlargement or symptoms of local compression",
-   "Saccular morphology of a deep (popliteal) venous aneurysm",
-   "Rupture, though rare, or features of an acute deep vein thrombosis"
-  ],
-  "prognosis": "Superficial and small venous aneurysms are generally benign and can be observed. Popliteal and other deep venous aneurysms carry a genuine risk of potentially fatal pulmonary embolism, but surgical repair has good long-term outcomes with a low rate of recurrence.",
-  "pitfalls": [
-   "Misdiagnosing a popliteal venous aneurysm as a Baker cyst and thereby missing the embolic risk",
-   "Relying on anticoagulation alone for a popliteal venous aneurysm, which does not reliably prevent recurrent embolism",
-   "Failing to image for intraluminal thrombus before planning intervention",
-   "Overlooking a venous aneurysm as the source in unexplained or recurrent pulmonary embolism",
-   "Attempting to distinguish a venous from an arterial aneurysm on clinical grounds alone"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "Haimovici's Vascular Surgery",
-   "Journal of Vascular Surgery review literature on venous aneurysms"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Repair popliteal and other deep venous aneurysms surgically by tangential aneurysmorrhaphy with lateral venorrhaphy, or resection with end-to-end anastomosis or interposition graft, because of the risk of pulmonary embolism",
-   "Give perioperative anticoagulation and treat established thrombosis or pulmonary embolism with therapeutic anticoagulation",
-   "Observe small, superficial or asymptomatic aneurysms and manage benign internal jugular phlebectasia in children conservatively",
-   "Monitor with serial duplex ultrasound, assessing specifically for intraluminal thrombus",
-   "Investigate suspected pulmonary embolism with CT pulmonary angiography",
-   "Perform a thrombophilia screen in patients presenting with thromboembolism",
-   "Refer to vascular surgery for deep venous aneurysms and for operative planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "venous_aneurysm-pathway",
-   "title": "venous aneurysm: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A venous aneurysm is a localised saccular or fusiform dilatation of a vein arising without an antecedent arteriovenous fistula or pseudoaneurysm; these lesions are uncommon and are often congenital or idiopathic",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Pulmonary embolism, especially when recurrent or occurring despite anticoagulation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Duplex ultrasound as the first-line diagnostic study, CT or MR venography to define morphology and extent, Contrast venography where the anatomy remains unclear"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Repair popliteal and other deep venous aneurysms surgically by tangential aneurysmorrhaphy with lateral venorrhaphy, or resection with end-to-end anastomosis or interposition graft, because of the risk of pulmonary"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing a popliteal venous aneurysm as a Baker cyst and thereby missing the embolic risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of venous aneurysm."
-  }
- ],
- "tables": [
-  {
-   "id": "venous_aneurysm-matrix",
-   "title": "venous aneurysm: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A venous aneurysm is a localised saccular or fusiform dilatation of a vein arising without an antecedent arteriovenous fistula or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A venous aneurysm is a localised saccular or fusiform dilatation of a vein arising without an antecedent arteriovenous fistula or pseudoaneurysm; these lesions are uncommon and are often congenital or idiopathic",
+      "Popliteal venous aneurysm is the most clinically important type because it is a well-recognised source of recurrent pulmonary embolism, which may occur despite adequate anticoagulation",
+      "Presentations range from an asymptomatic popliteal swelling to leg pain, deep vein thrombosis or pulmonary embolism, and a mass that changes with posture or Valsalva is suggestive",
+      "Internal jugular venous aneurysm (phlebectasia) typically presents in children as a soft, compressible neck swelling that enlarges on straining and is usually benign",
+      "Duplex ultrasound is the principal diagnostic test, while cross-sectional venography by CT or MR delineates the anatomy for surgical planning and helps to identify intraluminal thrombus",
+      "Surgical repair, such as tangential aneurysmorrhaphy with lateral venorrhaphy or resection with an end-to-end anastomosis or interposition graft, is recommended for popliteal venous aneurysm because of the embolic risk, generally with perioperative anticoagulation",
+      "Small or superficial saccular aneurysms elsewhere may be observed with surveillance, whereas deep venous aneurysms containing thrombus or associated with embolism warrant intervention"
     ],
-    [
-     "Key Investigations",
-     "Duplex ultrasound as the first-line diagnostic study, CT or MR venography to define morphology and extent, Contrast venography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Venous aneurysms arise from a focal weakness of the vein wall with loss of the normal balance of smooth muscle and elastic tissue, allowing localised dilatation. The cause is frequently congenital or idiopathic, although trauma, chronic inflammation, degenerative change and localised elevations in venous pressure are implicated. The dilated segment behaves as a low-flow reservoir in which turbulence and stasis promote the formation of mural thrombus; within a deep vein such as the popliteal, this thrombus can detach and embolise to the pulmonary circulation. A saccular morphology tends to carry a greater thrombogenic and embolic risk than a fusiform dilatation.",
+    "additionalDifferentials": [
+      "Popliteal (Baker) cyst",
+      "Popliteal artery aneurysm",
+      "Soft tissue tumour such as lipoma or sarcoma",
+      "Deep vein thrombosis",
+      "Varicose vein or venous malformation",
+      "Lymph node mass or cystic lymphangioma",
+      "Ganglion or synovial cyst"
     ],
-    [
-     "Primary Differentials",
-     "Popliteal (Baker) cyst, Popliteal artery aneurysm, Soft tissue tumour such as lipoma or sarcoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Duplex ultrasound as the first-line diagnostic study",
+      "CT or MR venography to define morphology and extent",
+      "Contrast venography where the anatomy remains unclear",
+      "CT pulmonary angiography when pulmonary embolism is suspected",
+      "Careful imaging assessment for intraluminal thrombus",
+      "Thrombophilia screen in patients presenting with thromboembolism",
+      "Comparative arterial imaging to distinguish from an arterial aneurysm when the site is ambiguous"
     ],
-    [
-     "Management Strategy",
-     "Repair popliteal and other deep venous aneurysms surgically by tangential aneurysmorrhaphy with lateral venorrhaphy, or resection",
-     "Core treatment modality"
+    "redFlags": [
+      "Pulmonary embolism, especially when recurrent or occurring despite anticoagulation",
+      "Intraluminal thrombus demonstrated within the aneurysm",
+      "Rapid enlargement or symptoms of local compression",
+      "Saccular morphology of a deep (popliteal) venous aneurysm",
+      "Rupture, though rare, or features of an acute deep vein thrombosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing a popliteal venous aneurysm as a Baker cyst and thereby missing the embolic risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Superficial and small venous aneurysms are generally benign and can be observed. Popliteal and other deep venous aneurysms carry a genuine risk of potentially fatal pulmonary embolism, but surgical repair has good long-term outcomes with a low rate of recurrence.",
+    "pitfalls": [
+      "Misdiagnosing a popliteal venous aneurysm as a Baker cyst and thereby missing the embolic risk",
+      "Relying on anticoagulation alone for a popliteal venous aneurysm, which does not reliably prevent recurrent embolism",
+      "Failing to image for intraluminal thrombus before planning intervention",
+      "Overlooking a venous aneurysm as the source in unexplained or recurrent pulmonary embolism",
+      "Attempting to distinguish a venous from an arterial aneurysm on clinical grounds alone"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "Haimovici's Vascular Surgery",
+      "Journal of Vascular Surgery review literature on venous aneurysms"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Repair popliteal and other deep venous aneurysms surgically by tangential aneurysmorrhaphy with lateral venorrhaphy, or resection with end-to-end anastomosis or interposition graft, because of the risk of pulmonary embolism",
+      "Give perioperative anticoagulation and treat established thrombosis or pulmonary embolism with therapeutic anticoagulation",
+      "Observe small, superficial or asymptomatic aneurysms and manage benign internal jugular phlebectasia in children conservatively",
+      "Monitor with serial duplex ultrasound, assessing specifically for intraluminal thrombus",
+      "Investigate suspected pulmonary embolism with CT pulmonary angiography",
+      "Perform a thrombophilia screen in patients presenting with thromboembolism",
+      "Refer to vascular surgery for deep venous aneurysms and for operative planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for venous aneurysm."
-  }
- ],
- "diagrams": [
-  {
-   "id": "venous-aneurysm-real-image",
-   "title": "venous aneurysm: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "venous_aneurysm-pathway",
+      "title": "venous aneurysm: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A venous aneurysm is a localised saccular or fusiform dilatation of a vein arising without an antecedent arteriovenous fistula or pseudoaneurysm; these lesions are uncommon and are often congenital or idiopathic",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Pulmonary embolism, especially when recurrent or occurring despite anticoagulation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Duplex ultrasound as the first-line diagnostic study, CT or MR venography to define morphology and extent, Contrast venography where the anatomy remains unclear"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Repair popliteal and other deep venous aneurysms surgically by tangential aneurysmorrhaphy with lateral venorrhaphy, or resection with end-to-end anastomosis or interposition graft, because of the risk of pulmonary"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing a popliteal venous aneurysm as a Baker cyst and thereby missing the embolic risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of venous aneurysm."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "venous_aneurysm-matrix",
+      "title": "venous aneurysm: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A venous aneurysm is a localised saccular or fusiform dilatation of a vein arising without an antecedent arteriovenous fistula or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Duplex ultrasound as the first-line diagnostic study, CT or MR venography to define morphology and extent, Contrast venography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Popliteal (Baker) cyst, Popliteal artery aneurysm, Soft tissue tumour such as lipoma or sarcoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Repair popliteal and other deep venous aneurysms surgically by tangential aneurysmorrhaphy with lateral venorrhaphy, or resection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing a popliteal venous aneurysm as a Baker cyst and thereby missing the embolic risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for venous aneurysm."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "venous_aneurysm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Duplex ultrasound",
+          "cells": [
+            {
+              "text": "First-line study of the aneurysm and its thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR venography",
+          "cells": [
+            {
+              "text": "Morphology and extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast venography",
+          "cells": [
+            {
+              "text": "Anatomy when it remains unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Pulmonary embolism when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia screen",
+          "cells": [
+            {
+              "text": "Predisposition in patients presenting with thrombosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_aneurysm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Popliteal (Baker) cyst",
+          "cells": [
+            {
+              "text": "Misdiagnosis of a popliteal venous aneurysm; the aneurysm carries the embolic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Popliteal artery aneurysm",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep vein thrombosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymph node mass or cystic lymphangioma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_aneurysm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Popliteal and other deep venous aneurysms by tangential aneurysmorrhaphy or resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Perioperative anticoagulation; therapeutic anticoagulation for thrombosis or embolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, superficial or asymptomatic aneurysms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "venous_aneurysm-dx-mgmt",
+      "title": "Diagnosis and management of venous aneurysm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected popliteal venous aneurysm: posterior knee swelling with recurrent embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pulmonary embolism, intraluminal thrombus or rapid enlargement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent anticoagulation and CT pulmonary angiography for pulmonary embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Duplex ultrasound, CT or MR venography, thrombophilia screen, CT angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does venography confirm a saccular or fusiform venous aneurysm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Baker cyst, popliteal artery aneurysm or deep vein thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Perioperative anticoagulation and treatment of established thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical repair of popliteal and other deep venous aneurysms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Observe small, superficial or asymptomatic aneurysms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Anticoagulation alone does not reliably prevent recurrent embolism",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

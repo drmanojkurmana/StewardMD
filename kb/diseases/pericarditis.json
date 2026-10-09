@@ -238,5 +238,592 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pericarditis, 2026",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/myocarditis-and-pericarditis/pericarditis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 239-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pericarditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing acute pericarditis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic rule",
+          "unit": "of 4 features",
+          "cells": [
+            {
+              "text": "2 or more of: typical chest pain, friction rub, ECG changes, effusion",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "{{hy:Diagnosis of acute pericarditis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Newer categories (typical pain present)",
+          "cells": [
+            {
+              "text": "2 or more additional findings = definite; 1 = possible; 0 = unlikely"
+            },
+            {
+              "text": "Additional findings: rub, ECG, raised CRP or ESR, effusion, MRI oedema or enhancement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest pain",
+          "cells": [
+            {
+              "text": "Pleuritic, worse supine, eased sitting forward"
+            },
+            {
+              "text": "Referral to trapezius ridge is characteristic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG stage 1",
+          "cells": [
+            {
+              "text": "Diffuse concave ST elevation and PR depression, except aVR and V1"
+            },
+            {
+              "text": "No reciprocal ST depression (apart from aVR, V1) and no Q waves, unlike MI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG stages 2 to 4",
+          "cells": [
+            {
+              "text": "ST to baseline, T flattening, diffuse T inversion, then resolution"
+            },
+            {
+              "text": "Not all stages occur"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echocardiography",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "May be normal in 34 to 50% of cases",
+              "range": [
+                34,
+                50
+              ]
+            },
+            {
+              "text": "A normal echo does not exclude pericarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP or ESR",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Supports diagnosis and guides treatment duration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Troponin",
+          "cells": [
+            {
+              "text": "Often raised"
+            },
+            {
+              "text": "Does not separate from MI or PE; very high level suggests myopericarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Detects myopericarditis in about 15 to 24%",
+              "range": [
+                15,
+                24
+              ]
+            },
+            {
+              "text": "Shows presence and acuity of inflammation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-risk features for admission",
+          "cells": [
+            {
+              "text": "Moderate or large effusion, fever, subacute onset, immunosuppression, trauma, oral anticoagulant, NSAID failure, myopericarditis"
+            },
+            {
+              "text": "Admit to find cause and watch for tamponade"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Incessant, recurrent, chronic",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Incessant over 4 to 6 weeks; recurrent after 4 to 6 week symptom-free gap; chronic over 3 months",
+              "range": [
+                4,
+                6
+              ]
+            },
+            {
+              "text": "Timing classification"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "pericarditis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute pericarditis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute myocardial infarction",
+          "cells": [
+            {
+              "text": "ST elevation in one coronary territory with reciprocal depression and Q waves"
+            },
+            {
+              "text": "{{hy:ECG pattern; biomarkers or CT angiography if atypical}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary embolism or infarction",
+          "cells": [
+            {
+              "text": "Pleuritic pain can mimic pericarditis; troponin does not separate"
+            },
+            {
+              "text": "CT angiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myocarditis or myopericarditis",
+          "cells": [
+            {
+              "text": "Very high troponin, new LV dysfunction"
+            },
+            {
+              "text": "Cardiac MRI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Postpericardiotomy or post-MI syndrome",
+          "cells": [
+            {
+              "text": "Pain, rub and fever 2 weeks to months after surgery or MI"
+            },
+            {
+              "text": "Rapid response to anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac tamponade",
+          "cells": [
+            {
+              "text": "Pulsus paradoxus common, electrical alternans possible, no Kussmaul sign"
+            },
+            {
+              "text": "Echo: effusion with right atrial and RV diastolic collapse"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Pericardial knock, thickened or calcified pericardium, no effusion"
+            },
+            {
+              "text": "Echo, CT or MRI showing thick pericardium"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aortic dissection",
+          "cells": [
+            {
+              "text": "Can extend into the pericardium"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takotsubo cardiomyopathy",
+          "cells": [
+            {
+              "text": "ST elevation and biomarker rise mimicking MI"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pericarditis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of acute pericarditis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspirin",
+          "cells": [
+            {
+              "text": "First line; preferred after MI"
+            },
+            {
+              "text": "325 to 650 mg PO every 4 to 6 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ibuprofen",
+          "cells": [
+            {
+              "text": "First line"
+            },
+            {
+              "text": "600 to 800 mg PO every 6 to 8 h; consider PPI cover"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colchicine",
+          "cells": [
+            {
+              "text": "{{hy:Add to NSAID for 3 months in a first episode}}"
+            },
+            {
+              "text": "0.5 or 0.6 mg once or twice daily; cuts recurrence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Until symptoms, effusion and CRP or ESR resolve"
+            },
+            {
+              "text": "NSAID course of 3 to 4 weeks may lower recurrence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose glucocorticoid",
+          "cells": [
+            {
+              "text": "NSAIDs contraindicated; exclude TB and pyogenic cause first"
+            },
+            {
+              "text": "Prednisone 0.2 to 0.5 mg/kg/day; avoid 60 to 80 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IL-1 inhibitor (anakinra, rilonacept)",
+          "cells": [
+            {
+              "text": "Inflammatory phenotype not responding to NSAID plus colchicine"
+            },
+            {
+              "text": "Preferred second line; steroid sparing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Recurrent pericarditis",
+          "cells": [
+            {
+              "text": "Recurrence after symptom-free interval"
+            },
+            {
+              "text": "NSAID and or colchicine twice daily for 6 to 12 months with slow taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pericardiocentesis",
+          "cells": [
+            {
+              "text": "Tamponade, some large effusions, suspected TB or purulent cause"
+            },
+            {
+              "text": "Echo-guided; tamponade is a clinical diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exercise restriction",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "No strenuous exercise for at least 1 month and until inflammation resolves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid anticoagulants",
+          "cells": [
+            {
+              "text": "Usual acute pericarditis"
+            },
+            {
+              "text": "Bleeding and tamponade risk"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pericarditis-dx-mgmt",
+      "title": "Diagnosis and management of acute pericarditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pleuritic positional chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ECG, troponin, CRP or ESR, echocardiogram, chest x-ray",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Regional ST elevation with reciprocal change?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat as acute MI",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "2 or more of pain, rub, ECG change, effusion?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Pericarditis unlikely; pursue other causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Tamponade signs?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Urgent pericardiocentesis",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Any high-risk feature?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Admit; search for cause, monitor for tamponade",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Outpatient NSAID or aspirin plus colchicine 3 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Response to NSAID plus colchicine?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Taper when CRP normal; restrict exercise 1 month or more",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "IL-1 inhibitor or low-dose steroid after excluding infection",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Treat"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
   ]
 }

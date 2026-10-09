@@ -1,173 +1,471 @@
 {
- "id": "truncus_arteriosus",
- "name": "Truncus arteriosus",
- "aliases": [
-  "common arterial trunk",
-  "persistent truncus arteriosus",
-  "truncus arteriosus communis"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A single arterial trunk arises from the heart and gives rise to the coronary, pulmonary and systemic circulations, overriding a ventricular septal defect",
-   "A single truncal valve, often abnormal and regurgitant or stenotic, guards the common trunk",
-   "Complete mixing at the trunk produces mild cyanosis combined with heavy pulmonary overcirculation once pulmonary resistance falls",
-   "Untreated infants develop early heart failure and are at risk of rapidly progressive pulmonary vascular disease",
-   "There is a strong association with 22q11.2 deletion and the DiGeorge phenotype, warranting evaluation for immune and calcium abnormalities",
-   "Classification is based on how the pulmonary arteries branch from the common trunk",
-   "Early surgical repair separates the pulmonary arteries from the trunk, closes the ventricular septal defect and interposes a valved conduit to the pulmonary circulation"
+  "id": "truncus_arteriosus",
+  "name": "Truncus arteriosus",
+  "aliases": [
+    "common arterial trunk",
+    "persistent truncus arteriosus",
+    "truncus arteriosus communis"
   ],
-  "pathophysiology": "Truncus arteriosus results from failure of the embryonic truncus to septate into separate aorta and pulmonary artery, leaving a single great vessel overriding a ventricular septal defect and receiving output from both ventricles. Complete mixing of systemic and pulmonary venous blood occurs at the trunk, so arterial saturation reflects the ratio of pulmonary to systemic flow. As neonatal pulmonary vascular resistance falls, blood floods the pulmonary arteries, causing marked pulmonary overcirculation, torrential left-to-right shunting and congestive heart failure with only mild cyanosis. The frequently abnormal truncal valve may be regurgitant or stenotic, adding to ventricular loading. Persistent high pulmonary flow accelerates pulmonary vascular obstructive disease, which becomes irreversible if repair is delayed. The lesion is strongly linked to 22q11.2 microdeletion.",
-  "additionalDifferentials": [
-   "Tetralogy of Fallot with pulmonary atresia and major aortopulmonary collaterals",
-   "Aortopulmonary window with ventricular septal defect",
-   "Large ventricular septal defect",
-   "Transposition of the great arteries with ventricular septal defect",
-   "Double outlet right ventricle",
-   "Interrupted aortic arch (which may coexist)"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography to demonstrate the single trunk, truncal valve, ventricular septal defect and pulmonary artery origins",
-   "Cardiac CT or MR angiography to define pulmonary artery and arch anatomy for surgery",
-   "Cardiac catheterisation to assess pulmonary vascular resistance when reversibility is uncertain",
-   "Genetic testing for 22q11.2 deletion with immune and calcium evaluation",
-   "Chest radiograph showing cardiomegaly and pulmonary plethora",
-   "Electrocardiogram for biventricular hypertrophy"
-  ],
-  "redFlags": [
-   "Early severe heart failure from unrestricted pulmonary overcirculation",
-   "Signs of advancing pulmonary vascular obstructive disease",
-   "Significant truncal valve regurgitation or stenosis with ventricular dysfunction",
-   "Hypocalcaemia, immune deficiency or coexisting interrupted aortic arch in the DiGeorge spectrum"
-  ],
-  "prognosis": "Without surgery the outlook is poor because of early heart failure and irreversible pulmonary vascular disease; with early repair survival is good, though conduit replacement and truncal valve problems commonly require reintervention.",
-  "pitfalls": [
-   "Delaying repair and allowing fixed pulmonary vascular disease to develop",
-   "Overlooking truncal valve dysfunction as a driver of ventricular failure",
-   "Missing associated 22q11.2 deletion with its hypocalcaemia and immune risks, including the need for irradiated blood products",
-   "Failing to detect a coexisting interrupted aortic arch"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake early complete surgical repair with ventricular septal defect closure and a right-ventricle-to-pulmonary-artery conduit",
-   "Control preoperative heart failure medically with diuretics and afterload reduction to limit pulmonary overcirculation",
-   "Repair or replace the truncal valve when significant regurgitation or stenosis is present",
-   "Screen for 22q11.2 deletion and manage hypocalcaemia and immunodeficiency, using irradiated CMV-negative blood products until immune status is known",
-   "Provide lifelong surveillance for conduit stenosis needing reintervention and for progressive pulmonary vascular disease",
-   "Give endocarditis prophylaxis and coordinate congenital cardiology follow-up",
-   "Offer genetic counselling in view of the strong 22q11.2 deletion association"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "truncus_arteriosus-pathway",
-   "title": "Truncus arteriosus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A single arterial trunk arises from the heart and gives rise to the coronary, pulmonary and systemic circulations, overriding a ventricular septal defect",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Early severe heart failure from unrestricted pulmonary overcirculation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography to demonstrate the single trunk, truncal valve, ventricular septal defect and pulmonary artery origins, Cardiac CT or MR angiography to define pulmonary artery and arch anatomy for surgery, Cardiac"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake early complete surgical repair with ventricular septal defect closure and a right-ventricle-to-pulmonary-artery conduit"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying repair and allowing fixed pulmonary vascular disease to develop"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of truncus arteriosus."
-  }
- ],
- "tables": [
-  {
-   "id": "truncus_arteriosus-matrix",
-   "title": "Truncus arteriosus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A single arterial trunk arises from the heart and gives rise to the coronary, pulmonary and systemic circulations, overriding a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A single arterial trunk arises from the heart and gives rise to the coronary, pulmonary and systemic circulations, overriding a ventricular septal defect",
+      "A single truncal valve, often abnormal and regurgitant or stenotic, guards the common trunk",
+      "Complete mixing at the trunk produces mild cyanosis combined with heavy pulmonary overcirculation once pulmonary resistance falls",
+      "Untreated infants develop early heart failure and are at risk of rapidly progressive pulmonary vascular disease",
+      "There is a strong association with 22q11.2 deletion and the DiGeorge phenotype, warranting evaluation for immune and calcium abnormalities",
+      "Classification is based on how the pulmonary arteries branch from the common trunk",
+      "Early surgical repair separates the pulmonary arteries from the trunk, closes the ventricular septal defect and interposes a valved conduit to the pulmonary circulation"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography to demonstrate the single trunk, truncal valve, ventricular septal defect and pulmonary artery origins, Cardiac",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Truncus arteriosus results from failure of the embryonic truncus to septate into separate aorta and pulmonary artery, leaving a single great vessel overriding a ventricular septal defect and receiving output from both ventricles. Complete mixing of systemic and pulmonary venous blood occurs at the trunk, so arterial saturation reflects the ratio of pulmonary to systemic flow. As neonatal pulmonary vascular resistance falls, blood floods the pulmonary arteries, causing marked pulmonary overcirculation, torrential left-to-right shunting and congestive heart failure with only mild cyanosis. The frequently abnormal truncal valve may be regurgitant or stenotic, adding to ventricular loading. Persistent high pulmonary flow accelerates pulmonary vascular obstructive disease, which becomes irreversible if repair is delayed. The lesion is strongly linked to 22q11.2 microdeletion.",
+    "additionalDifferentials": [
+      "Tetralogy of Fallot with pulmonary atresia and major aortopulmonary collaterals",
+      "Aortopulmonary window with ventricular septal defect",
+      "Large ventricular septal defect",
+      "Transposition of the great arteries with ventricular septal defect",
+      "Double outlet right ventricle",
+      "Interrupted aortic arch (which may coexist)"
     ],
-    [
-     "Primary Differentials",
-     "Tetralogy of Fallot with pulmonary atresia and major aortopulmonary collaterals, Aortopulmonary window with ventricular septal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography to demonstrate the single trunk, truncal valve, ventricular septal defect and pulmonary artery origins",
+      "Cardiac CT or MR angiography to define pulmonary artery and arch anatomy for surgery",
+      "Cardiac catheterisation to assess pulmonary vascular resistance when reversibility is uncertain",
+      "Genetic testing for 22q11.2 deletion with immune and calcium evaluation",
+      "Chest radiograph showing cardiomegaly and pulmonary plethora",
+      "Electrocardiogram for biventricular hypertrophy"
     ],
-    [
-     "Management Strategy",
-     "Undertake early complete surgical repair with ventricular septal defect closure and a right-ventricle-to-pulmonary-artery conduit",
-     "Core treatment modality"
+    "redFlags": [
+      "Early severe heart failure from unrestricted pulmonary overcirculation",
+      "Signs of advancing pulmonary vascular obstructive disease",
+      "Significant truncal valve regurgitation or stenosis with ventricular dysfunction",
+      "Hypocalcaemia, immune deficiency or coexisting interrupted aortic arch in the DiGeorge spectrum"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying repair and allowing fixed pulmonary vascular disease to develop",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without surgery the outlook is poor because of early heart failure and irreversible pulmonary vascular disease; with early repair survival is good, though conduit replacement and truncal valve problems commonly require reintervention.",
+    "pitfalls": [
+      "Delaying repair and allowing fixed pulmonary vascular disease to develop",
+      "Overlooking truncal valve dysfunction as a driver of ventricular failure",
+      "Missing associated 22q11.2 deletion with its hypocalcaemia and immune risks, including the need for irradiated blood products",
+      "Failing to detect a coexisting interrupted aortic arch"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake early complete surgical repair with ventricular septal defect closure and a right-ventricle-to-pulmonary-artery conduit",
+      "Control preoperative heart failure medically with diuretics and afterload reduction to limit pulmonary overcirculation",
+      "Repair or replace the truncal valve when significant regurgitation or stenosis is present",
+      "Screen for 22q11.2 deletion and manage hypocalcaemia and immunodeficiency, using irradiated CMV-negative blood products until immune status is known",
+      "Provide lifelong surveillance for conduit stenosis needing reintervention and for progressive pulmonary vascular disease",
+      "Give endocarditis prophylaxis and coordinate congenital cardiology follow-up",
+      "Offer genetic counselling in view of the strong 22q11.2 deletion association"
     ]
-   ],
-   "caption": "Overview comparison matrix for truncus arteriosus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "truncus-arteriosus-real-image",
-   "title": "Truncus arteriosus: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "truncus_arteriosus-pathway",
+      "title": "Truncus arteriosus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A single arterial trunk arises from the heart and gives rise to the coronary, pulmonary and systemic circulations, overriding a ventricular septal defect",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Early severe heart failure from unrestricted pulmonary overcirculation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography to demonstrate the single trunk, truncal valve, ventricular septal defect and pulmonary artery origins, Cardiac CT or MR angiography to define pulmonary artery and arch anatomy for surgery, Cardiac"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake early complete surgical repair with ventricular septal defect closure and a right-ventricle-to-pulmonary-artery conduit"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying repair and allowing fixed pulmonary vascular disease to develop"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of truncus arteriosus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "truncus_arteriosus-matrix",
+      "title": "Truncus arteriosus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A single arterial trunk arises from the heart and gives rise to the coronary, pulmonary and systemic circulations, overriding a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography to demonstrate the single trunk, truncal valve, ventricular septal defect and pulmonary artery origins, Cardiac",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tetralogy of Fallot with pulmonary atresia and major aortopulmonary collaterals, Aortopulmonary window with ventricular septal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake early complete surgical repair with ventricular septal defect closure and a right-ventricle-to-pulmonary-artery conduit",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying repair and allowing fixed pulmonary vascular disease to develop",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for truncus arteriosus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "truncus_arteriosus-dx-mgmt",
+      "title": "Diagnosis and management of Truncus arteriosus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected truncus arteriosus: single arterial trunk with cyanosis and plethora",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: early severe heart failure or rising pulmonary vascular resistance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac surgery referral for heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography; CT or MR angiography; 22q11.2 testing; catheterisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echo show a single trunk overriding a VSD with a truncal valve?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tetralogy with pulmonary atresia, aortopulmonary window or double outlet RV",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early complete surgical repair with VSD closure and conduit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diuretics and afterload reduction before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair or replace the truncal valve when significant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for 22q11.2 deletion and manage hypocalcaemia and immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong surveillance for conduit stenosis and pulmonary vascular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated outlook poor; early repair gives good survival with later reintervention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "truncus_arteriosus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Single trunk, truncal valve, VSD and pulmonary artery origins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MR angiography",
+          "cells": [
+            {
+              "text": "Pulmonary artery and arch anatomy for surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Pulmonary vascular resistance when reversibility uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "22q11.2 deletion testing",
+          "cells": [
+            {
+              "text": "With immune and calcium evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Cardiomegaly and pulmonary plethora"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Biventricular hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "truncus_arteriosus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tetralogy of Fallot with pulmonary atresia",
+          "cells": [
+            {
+              "text": "Aortopulmonary collaterals; no single arterial trunk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortopulmonary window with VSD",
+          "cells": [
+            {
+              "text": "Separate aorta and pulmonary artery origins with a window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Double outlet right ventricle",
+          "cells": [
+            {
+              "text": "Both great arteries arise from the right ventricle"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "truncus_arteriosus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early complete surgical repair",
+          "cells": [
+            {
+              "text": "VSD closure and right ventricle to pulmonary artery conduit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics and afterload reduction",
+          "cells": [
+            {
+              "text": "Preoperative control of overcirculation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Truncal valve repair or replacement",
+          "cells": [
+            {
+              "text": "Significant regurgitation or stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irradiated CMV-negative blood products",
+          "cells": [
+            {
+              "text": "Until immune status known in 22q11.2 deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Conduit stenosis and pulmonary vascular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis prophylaxis and genetic counselling",
+          "cells": [
+            {
+              "text": "Supportive and family care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

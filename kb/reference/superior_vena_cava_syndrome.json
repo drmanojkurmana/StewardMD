@@ -1,173 +1,460 @@
 {
- "id": "superior_vena_cava_syndrome",
- "name": "Superior vena cava syndrome",
- "aliases": [
-  "SVC syndrome",
-  "SVC obstruction",
-  "superior vena cava obstruction"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by obstruction of the superior vena cava, either extrinsic compression or invasion by tumour or intraluminal thrombosis",
-   "Malignancy is the leading cause, particularly bronchogenic carcinoma (small-cell and squamous) and non-Hodgkin lymphoma",
-   "Thrombotic causes are increasingly common with indwelling central venous catheters and pacemaker leads",
-   "Presents with facial and neck swelling and plethora, distended neck and chest wall veins, arm swelling, headache, and dyspnoea, typically worse on bending forward or lying flat",
-   "Pemberton's sign (facial congestion on raising the arms) supports the diagnosis",
-   "Contrast-enhanced CT of the chest defines the level and cause of obstruction and guides biopsy; a tissue diagnosis is important because management depends on tumour type",
-   "Management is directed at the cause, treating the underlying malignancy (chemotherapy or radiotherapy) or thrombus (anticoagulation), with endovascular stenting for prompt symptom relief in severe or refractory cases"
+  "id": "superior_vena_cava_syndrome",
+  "name": "Superior vena cava syndrome",
+  "aliases": [
+    "SVC syndrome",
+    "SVC obstruction",
+    "superior vena cava obstruction"
   ],
-  "pathophysiology": "Superior vena cava syndrome results from obstruction to venous return through the SVC to the right atrium. Most cases are due to malignant mediastinal disease, commonly lung cancer or lymphoma, that compresses or invades the thin-walled, low-pressure SVC; thrombosis, frequently related to intravascular devices, is a growing non-malignant cause. Obstruction raises venous pressure in the head, neck, and upper limbs, producing oedema, venous distension, and the recruitment of collateral chest wall veins. The severity of symptoms depends on how rapidly the obstruction develops and whether collaterals have had time to form, with airway and cerebral oedema being the most dangerous consequences.",
-  "additionalDifferentials": [
-   "Congestive cardiac failure",
-   "Cardiac tamponade or constrictive pericarditis",
-   "Mediastinal fibrosis (for example fibrosing mediastinitis or post-radiation)",
-   "Nephrotic syndrome or other causes of facial oedema",
-   "Angioedema",
-   "Bilateral internal jugular vein thrombosis"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the chest to define the level, extent, and cause",
-   "Tissue diagnosis (sputum cytology, bronchoscopy, or biopsy of a nodal or mediastinal mass) to guide oncological treatment",
-   "CT or MR venography to map the obstruction and collaterals",
-   "Chest radiograph as an initial screen for mediastinal widening or mass",
-   "Venography at the time of stenting",
-   "Assessment for catheter- or lead-related thrombosis where relevant"
-  ],
-  "redFlags": [
-   "Stridor, laryngeal oedema, or respiratory compromise (an airway emergency)",
-   "Cerebral oedema with confusion, severe headache, or altered consciousness",
-   "Haemodynamic instability",
-   "Rapid onset of severe symptoms without collateral formation"
-  ],
-  "prognosis": "Outcome depends chiefly on the underlying cause; malignant SVC syndrome reflects the prognosis of the tumour, although stenting and oncological therapy give rapid symptom relief, whereas benign thrombotic causes generally respond well to anticoagulation and stenting.",
-  "pitfalls": [
-   "Starting empirical radiotherapy before obtaining a tissue diagnosis in a stable patient, potentially obscuring histology",
-   "Overlooking a catheter- or lead-related thrombus as the cause",
-   "Failing to recognise airway or cerebral compromise requiring urgent intervention",
-   "Assuming all SVC obstruction is malignant"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "ESVS Clinical Practice Guidelines on Venous Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Obtain a tissue diagnosis before treatment wherever it is clinically safe, as management depends on the tumour type",
-   "Use endovascular stent placement for prompt relief of severe symptoms regardless of the underlying histology",
-   "Treat the cause definitively, with chemotherapy for small-cell bronchogenic carcinoma and non-Hodgkin lymphoma and radiotherapy for radiosensitive tumours",
-   "Manage catheter- or lead-related thrombotic obstruction with anticoagulation and device removal where appropriate",
-   "Give supportive care with head-of-bed elevation, oxygen and corticosteroids where there is airway or cerebral oedema",
-   "Escalate urgently for airway protection when stridor or laryngeal oedema develops",
-   "Refer to a multidisciplinary oncology team to guide tumour-directed treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "superior_vena_cava_syndrome-pathway",
-   "title": "Superior vena cava syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by obstruction of the superior vena cava, either extrinsic compression or invasion by tumour or intraluminal thrombosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Stridor, laryngeal oedema, or respiratory compromise (an airway emergency)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the chest to define the level, extent, and cause, Tissue diagnosis (sputum cytology, bronchoscopy, or biopsy of a nodal or mediastinal mass) to guide oncological treatment, CT or MR venography to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Obtain a tissue diagnosis before treatment wherever it is clinically safe, as management depends on the tumour type"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Starting empirical radiotherapy before obtaining a tissue diagnosis in a stable patient, potentially obscuring histology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of superior vena cava syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "superior_vena_cava_syndrome-matrix",
-   "title": "Superior vena cava syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by obstruction of the superior vena cava, either extrinsic compression or invasion by tumour or intraluminal thrombosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by obstruction of the superior vena cava, either extrinsic compression or invasion by tumour or intraluminal thrombosis",
+      "Malignancy is the leading cause, particularly bronchogenic carcinoma (small-cell and squamous) and non-Hodgkin lymphoma",
+      "Thrombotic causes are increasingly common with indwelling central venous catheters and pacemaker leads",
+      "Presents with facial and neck swelling and plethora, distended neck and chest wall veins, arm swelling, headache, and dyspnoea, typically worse on bending forward or lying flat",
+      "Pemberton's sign (facial congestion on raising the arms) supports the diagnosis",
+      "Contrast-enhanced CT of the chest defines the level and cause of obstruction and guides biopsy; a tissue diagnosis is important because management depends on tumour type",
+      "Management is directed at the cause, treating the underlying malignancy (chemotherapy or radiotherapy) or thrombus (anticoagulation), with endovascular stenting for prompt symptom relief in severe or refractory cases"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the chest to define the level, extent, and cause, Tissue diagnosis (sputum cytology, bronchoscopy, or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Superior vena cava syndrome results from obstruction to venous return through the SVC to the right atrium. Most cases are due to malignant mediastinal disease, commonly lung cancer or lymphoma, that compresses or invades the thin-walled, low-pressure SVC; thrombosis, frequently related to intravascular devices, is a growing non-malignant cause. Obstruction raises venous pressure in the head, neck, and upper limbs, producing oedema, venous distension, and the recruitment of collateral chest wall veins. The severity of symptoms depends on how rapidly the obstruction develops and whether collaterals have had time to form, with airway and cerebral oedema being the most dangerous consequences.",
+    "additionalDifferentials": [
+      "Congestive cardiac failure",
+      "Cardiac tamponade or constrictive pericarditis",
+      "Mediastinal fibrosis (for example fibrosing mediastinitis or post-radiation)",
+      "Nephrotic syndrome or other causes of facial oedema",
+      "Angioedema",
+      "Bilateral internal jugular vein thrombosis"
     ],
-    [
-     "Primary Differentials",
-     "Congestive cardiac failure, Cardiac tamponade or constrictive pericarditis, Mediastinal fibrosis (for example fibrosing",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the chest to define the level, extent, and cause",
+      "Tissue diagnosis (sputum cytology, bronchoscopy, or biopsy of a nodal or mediastinal mass) to guide oncological treatment",
+      "CT or MR venography to map the obstruction and collaterals",
+      "Chest radiograph as an initial screen for mediastinal widening or mass",
+      "Venography at the time of stenting",
+      "Assessment for catheter- or lead-related thrombosis where relevant"
     ],
-    [
-     "Management Strategy",
-     "Obtain a tissue diagnosis before treatment wherever it is clinically safe, as management depends on the tumour type",
-     "Core treatment modality"
+    "redFlags": [
+      "Stridor, laryngeal oedema, or respiratory compromise (an airway emergency)",
+      "Cerebral oedema with confusion, severe headache, or altered consciousness",
+      "Haemodynamic instability",
+      "Rapid onset of severe symptoms without collateral formation"
     ],
-    [
-     "Clinical Pitfall",
-     "Starting empirical radiotherapy before obtaining a tissue diagnosis in a stable patient, potentially obscuring histology",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends chiefly on the underlying cause; malignant SVC syndrome reflects the prognosis of the tumour, although stenting and oncological therapy give rapid symptom relief, whereas benign thrombotic causes generally respond well to anticoagulation and stenting.",
+    "pitfalls": [
+      "Starting empirical radiotherapy before obtaining a tissue diagnosis in a stable patient, potentially obscuring histology",
+      "Overlooking a catheter- or lead-related thrombus as the cause",
+      "Failing to recognise airway or cerebral compromise requiring urgent intervention",
+      "Assuming all SVC obstruction is malignant"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "ESVS Clinical Practice Guidelines on Venous Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Obtain a tissue diagnosis before treatment wherever it is clinically safe, as management depends on the tumour type",
+      "Use endovascular stent placement for prompt relief of severe symptoms regardless of the underlying histology",
+      "Treat the cause definitively, with chemotherapy for small-cell bronchogenic carcinoma and non-Hodgkin lymphoma and radiotherapy for radiosensitive tumours",
+      "Manage catheter- or lead-related thrombotic obstruction with anticoagulation and device removal where appropriate",
+      "Give supportive care with head-of-bed elevation, oxygen and corticosteroids where there is airway or cerebral oedema",
+      "Escalate urgently for airway protection when stridor or laryngeal oedema develops",
+      "Refer to a multidisciplinary oncology team to guide tumour-directed treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for superior vena cava syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "superior-vena-cava-syndrome-real-image",
-   "title": "Superior vena cava syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "superior_vena_cava_syndrome-pathway",
+      "title": "Superior vena cava syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by obstruction of the superior vena cava, either extrinsic compression or invasion by tumour or intraluminal thrombosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Stridor, laryngeal oedema, or respiratory compromise (an airway emergency)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the chest to define the level, extent, and cause, Tissue diagnosis (sputum cytology, bronchoscopy, or biopsy of a nodal or mediastinal mass) to guide oncological treatment, CT or MR venography to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Obtain a tissue diagnosis before treatment wherever it is clinically safe, as management depends on the tumour type"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Starting empirical radiotherapy before obtaining a tissue diagnosis in a stable patient, potentially obscuring histology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of superior vena cava syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "superior_vena_cava_syndrome-matrix",
+      "title": "Superior vena cava syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by obstruction of the superior vena cava, either extrinsic compression or invasion by tumour or intraluminal thrombosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the chest to define the level, extent, and cause, Tissue diagnosis (sputum cytology, bronchoscopy, or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congestive cardiac failure, Cardiac tamponade or constrictive pericarditis, Mediastinal fibrosis (for example fibrosing",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Obtain a tissue diagnosis before treatment wherever it is clinically safe, as management depends on the tumour type",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Starting empirical radiotherapy before obtaining a tissue diagnosis in a stable patient, potentially obscuring histology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for superior vena cava syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "superior_vena_cava_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of the chest",
+          "cells": [
+            {
+              "text": "Level, extent and cause of obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue diagnosis",
+          "cells": [
+            {
+              "text": "Sputum cytology, bronchoscopy or nodal or mediastinal biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR venography",
+          "cells": [
+            {
+              "text": "Obstruction and collaterals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Mediastinal widening or mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venography at stenting",
+          "cells": [
+            {
+              "text": "Confirms the stent site"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superior_vena_cava_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congestive cardiac failure",
+          "cells": [
+            {
+              "text": "Systemic venous congestion without SVC obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac tamponade or constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Pericardial cause of venous congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral internal jugular vein thrombosis",
+          "cells": [
+            {
+              "text": "Thrombosis of both jugular veins"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superior_vena_cava_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tissue diagnosis before treatment",
+          "cells": [
+            {
+              "text": "Management depends on tumour type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovascular stent placement",
+          "cells": [
+            {
+              "text": "Prompt relief of severe symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy or radiotherapy",
+          "cells": [
+            {
+              "text": "Definitive treatment of the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation and device removal",
+          "cells": [
+            {
+              "text": "Catheter or lead-related thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head elevation, oxygen and corticosteroids",
+          "cells": [
+            {
+              "text": "Airway or cerebral oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent airway protection",
+          "cells": [
+            {
+              "text": "Stridor or laryngeal oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary oncology team",
+          "cells": [
+            {
+              "text": "Guides tumour-directed treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "superior_vena_cava_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Superior vena cava syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Facial and neck swelling with arm swelling and dyspnoea: suspected SVC syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, cerebral oedema, haemodynamic instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway protection for stridor or laryngeal oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT of the chest; tissue diagnosis; CT or MR venography; chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is SVC obstruction shown with a tissue diagnosis obtained where safe?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider heart failure, pericardial disease or jugular thrombosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tissue diagnosis before treatment where clinically safe",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endovascular stent for prompt relief regardless of histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chemotherapy or radiotherapy for the underlying tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticoagulation and device removal for catheter-related thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome follows the underlying cause; airway emergencies need immediate action",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

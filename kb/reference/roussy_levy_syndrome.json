@@ -1,174 +1,378 @@
 {
- "id": "roussy_levy_syndrome",
- "name": "Roussy-Levy syndrome",
- "aliases": [
-  "Roussy-Levy hereditary areflexic dystasia",
-  "hereditary areflexic dystasia",
-  "CMT with tremor",
-  "MPZ",
-  "PMP22"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley and Daroff Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Regarded as a demyelinating CMT phenotype (a variant of CMT1) rather than a distinct disease, historically linked to variants in PMP22 and MPZ",
-   "Classic combination of a hereditary demyelinating neuropathy with postural upper-limb tremor and gait ataxia (dystasia)",
-   "Features overlap classic CMT: distal wasting, pes cavus, areflexia and glove-and-stocking sensory loss, with the tremor and ataxia being the distinguishing additions",
-   "The tremor resembles an essential or postural tremor and the ataxia is largely sensory, reflecting loss of large fibre proprioceptive input rather than a primary cerebellar lesion",
-   "Nerve conduction studies show markedly slowed motor conduction velocities in keeping with the underlying demyelinating neuropathy",
-   "Autosomal dominant inheritance is typical given the PMP22/MPZ basis",
-   "Diagnosis rests on the characteristic clinical triad supported by demyelinating electrophysiology and genetic confirmation"
+  "id": "roussy_levy_syndrome",
+  "name": "Roussy-Levy syndrome",
+  "aliases": [
+    "Roussy-Levy hereditary areflexic dystasia",
+    "hereditary areflexic dystasia",
+    "CMT with tremor",
+    "MPZ",
+    "PMP22"
   ],
-  "pathophysiology": "Roussy-Levy syndrome is now understood as a phenotypic variant of demyelinating CMT, most often associated with PMP22 or MPZ variants that impair peripheral myelin. The demyelinating neuropathy causes distal weakness and prominent loss of large-fibre sensory function; the resulting deafferentation of proprioceptive pathways produces sensory ataxia and contributes to the characteristic postural tremor. The tremor is thought to arise from disturbed sensorimotor feedback rather than a distinct central lesion. As in other CMT1 subtypes, repeated demyelination and remyelination generate onion-bulb formations and secondary axonal loss, and the diffuse myelin involvement explains the uniformly slow conduction velocities.",
-  "additionalDifferentials": [
-   "Classic CMT type 1A or 1B without prominent tremor",
-   "Essential tremor with coincidental neuropathy",
-   "Chronic inflammatory demyelinating polyradiculoneuropathy",
-   "Hereditary ataxias with peripheral neuropathy (e.g. Friedreich ataxia)",
-   "Cerebellar ataxia of other cause",
-   "Sensory ataxic neuropathy from other aetiologies"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies showing demyelinating-range slowing",
-   "PMP22 duplication testing and MPZ sequencing, or a hereditary neuropathy panel",
-   "Assessment of proprioception and Romberg testing to characterise sensory ataxia",
-   "Family history and examination of relatives for the tremor-neuropathy phenotype",
-   "Exclusion of acquired demyelinating neuropathy when the course is atypical",
-   "Consideration of hereditary ataxia testing where the ataxic component predominates"
-  ],
-  "redFlags": [
-   "Prominent cerebellar signs suggesting an alternative hereditary ataxia rather than sensory ataxia",
-   "Subacute deterioration indicating a superimposed acquired neuropathy",
-   "Rapidly worsening tremor or ataxia out of keeping with slowly progressive inherited disease",
-   "New bulbar or breathing symptoms requiring review"
-  ],
-  "prognosis": "Typically slowly progressive with long preservation of ambulation; the tremor and ataxia can be functionally limiting but the overall course mirrors that of other CMT1 subtypes with normal life expectancy.",
-  "pitfalls": [
-   "Treating the presentation as isolated essential tremor and overlooking the underlying neuropathy",
-   "Attributing the ataxia to a cerebellar lesion rather than sensory deafferentation",
-   "Regarding Roussy-Levy as a separate disorder rather than a CMT1 phenotype",
-   "Missing a treatable acquired demyelinating neuropathy"
-  ],
-  "references": [
-   "GeneReviews: Charcot-Marie-Tooth Neuropathy Type 1",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Physiotherapy and occupational therapy to maintain strength, function and gait",
-   "Ankle-foot orthoses and mobility aids for foot drop and sensory ataxia, with foot care and orthopaedic correction of pes cavus and deformity",
-   "Symptomatic management of the postural upper-limb tremor, including a trial of a beta-blocker, with functional adaptation",
-   "Avoidance of potentially neurotoxic drugs such as vincristine that can worsen the neuropathy",
-   "Multidisciplinary neuromuscular team input with proprioceptive training and fall prevention",
-   "Genetic counselling for autosomal dominant inheritance, with PMP22 duplication and MPZ testing and evaluation of relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "roussy_levy_syndrome-pathway",
-   "title": "Roussy-Levy syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Regarded as a demyelinating CMT phenotype (a variant of CMT1) rather than a distinct disease, historically linked to variants in PMP22 and MPZ",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Prominent cerebellar signs suggesting an alternative hereditary ataxia rather than sensory ataxia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies showing demyelinating-range slowing, PMP22 duplication testing and MPZ sequencing, or a hereditary neuropathy panel, Assessment of proprioception and Romberg testing to characterise sensory ataxia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Physiotherapy and occupational therapy to maintain strength, function and gait"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the presentation as isolated essential tremor and overlooking the underlying neuropathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of roussy-levy syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "roussy_levy_syndrome-matrix",
-   "title": "Roussy-Levy syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Regarded as a demyelinating CMT phenotype (a variant of CMT1) rather than a distinct disease, historically linked to variants in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley and Daroff Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Regarded as a demyelinating CMT phenotype (a variant of CMT1) rather than a distinct disease, historically linked to variants in PMP22 and MPZ",
+      "Classic combination of a hereditary demyelinating neuropathy with postural upper-limb tremor and gait ataxia (dystasia)",
+      "Features overlap classic CMT: distal wasting, pes cavus, areflexia and glove-and-stocking sensory loss, with the tremor and ataxia being the distinguishing additions",
+      "The tremor resembles an essential or postural tremor and the ataxia is largely sensory, reflecting loss of large fibre proprioceptive input rather than a primary cerebellar lesion",
+      "Nerve conduction studies show markedly slowed motor conduction velocities in keeping with the underlying demyelinating neuropathy",
+      "Autosomal dominant inheritance is typical given the PMP22/MPZ basis",
+      "Diagnosis rests on the characteristic clinical triad supported by demyelinating electrophysiology and genetic confirmation"
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies showing demyelinating-range slowing, PMP22 duplication testing and MPZ sequencing, or a hereditary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Roussy-Levy syndrome is now understood as a phenotypic variant of demyelinating CMT, most often associated with PMP22 or MPZ variants that impair peripheral myelin. The demyelinating neuropathy causes distal weakness and prominent loss of large-fibre sensory function; the resulting deafferentation of proprioceptive pathways produces sensory ataxia and contributes to the characteristic postural tremor. The tremor is thought to arise from disturbed sensorimotor feedback rather than a distinct central lesion. As in other CMT1 subtypes, repeated demyelination and remyelination generate onion-bulb formations and secondary axonal loss, and the diffuse myelin involvement explains the uniformly slow conduction velocities.",
+    "additionalDifferentials": [
+      "Classic CMT type 1A or 1B without prominent tremor",
+      "Essential tremor with coincidental neuropathy",
+      "Chronic inflammatory demyelinating polyradiculoneuropathy",
+      "Hereditary ataxias with peripheral neuropathy (e.g. Friedreich ataxia)",
+      "Cerebellar ataxia of other cause",
+      "Sensory ataxic neuropathy from other aetiologies"
     ],
-    [
-     "Primary Differentials",
-     "Classic CMT type 1A or 1B without prominent tremor, Essential tremor with coincidental neuropathy, Chronic inflammatory",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies showing demyelinating-range slowing",
+      "PMP22 duplication testing and MPZ sequencing, or a hereditary neuropathy panel",
+      "Assessment of proprioception and Romberg testing to characterise sensory ataxia",
+      "Family history and examination of relatives for the tremor-neuropathy phenotype",
+      "Exclusion of acquired demyelinating neuropathy when the course is atypical",
+      "Consideration of hereditary ataxia testing where the ataxic component predominates"
     ],
-    [
-     "Management Strategy",
-     "Physiotherapy and occupational therapy to maintain strength, function and gait",
-     "Core treatment modality"
+    "redFlags": [
+      "Prominent cerebellar signs suggesting an alternative hereditary ataxia rather than sensory ataxia",
+      "Subacute deterioration indicating a superimposed acquired neuropathy",
+      "Rapidly worsening tremor or ataxia out of keeping with slowly progressive inherited disease",
+      "New bulbar or breathing symptoms requiring review"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the presentation as isolated essential tremor and overlooking the underlying neuropathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Typically slowly progressive with long preservation of ambulation; the tremor and ataxia can be functionally limiting but the overall course mirrors that of other CMT1 subtypes with normal life expectancy.",
+    "pitfalls": [
+      "Treating the presentation as isolated essential tremor and overlooking the underlying neuropathy",
+      "Attributing the ataxia to a cerebellar lesion rather than sensory deafferentation",
+      "Regarding Roussy-Levy as a separate disorder rather than a CMT1 phenotype",
+      "Missing a treatable acquired demyelinating neuropathy"
+    ],
+    "references": [
+      "GeneReviews: Charcot-Marie-Tooth Neuropathy Type 1",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Physiotherapy and occupational therapy to maintain strength, function and gait",
+      "Ankle-foot orthoses and mobility aids for foot drop and sensory ataxia, with foot care and orthopaedic correction of pes cavus and deformity",
+      "Symptomatic management of the postural upper-limb tremor, including a trial of a beta-blocker, with functional adaptation",
+      "Avoidance of potentially neurotoxic drugs such as vincristine that can worsen the neuropathy",
+      "Multidisciplinary neuromuscular team input with proprioceptive training and fall prevention",
+      "Genetic counselling for autosomal dominant inheritance, with PMP22 duplication and MPZ testing and evaluation of relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for roussy-levy syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "roussy-levy-syndrome-real-image",
-   "title": "Roussy-Levy syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "roussy_levy_syndrome-pathway",
+      "title": "Roussy-Levy syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Regarded as a demyelinating CMT phenotype (a variant of CMT1) rather than a distinct disease, historically linked to variants in PMP22 and MPZ",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Prominent cerebellar signs suggesting an alternative hereditary ataxia rather than sensory ataxia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies showing demyelinating-range slowing, PMP22 duplication testing and MPZ sequencing, or a hereditary neuropathy panel, Assessment of proprioception and Romberg testing to characterise sensory ataxia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Physiotherapy and occupational therapy to maintain strength, function and gait"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the presentation as isolated essential tremor and overlooking the underlying neuropathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of roussy-levy syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "roussy_levy_syndrome-matrix",
+      "title": "Roussy-Levy syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Regarded as a demyelinating CMT phenotype (a variant of CMT1) rather than a distinct disease, historically linked to variants in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies showing demyelinating-range slowing, PMP22 duplication testing and MPZ sequencing, or a hereditary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic CMT type 1A or 1B without prominent tremor, Essential tremor with coincidental neuropathy, Chronic inflammatory",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Physiotherapy and occupational therapy to maintain strength, function and gait",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the presentation as isolated essential tremor and overlooking the underlying neuropathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for roussy-levy syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley and Daroff Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "roussy_levy_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Demyelinating-range slowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PMP22 duplication testing, MPZ sequencing or neuropathy panel",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proprioception and Romberg testing",
+          "cells": [
+            {
+              "text": "Sensory ataxia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "roussy_levy_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Maintain strength, function and gait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthoses and mobility aids",
+          "cells": [
+            {
+              "text": "Foot drop and sensory ataxia; foot care and pes cavus correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blocker trial and functional adaptation",
+          "cells": [
+            {
+              "text": "Postural upper-limb tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid neurotoxic drugs",
+          "cells": [
+            {
+              "text": "Vincristine can worsen the neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "roussy_levy_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Roussy-Levy syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive sensory ataxia with neuropathy and postural tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (prominent cerebellar signs, subacute deterioration, rapid tremor)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Work-up for superimposed acquired neuropathy or alternative ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, PMP22 and MPZ testing, Romberg and proprioception testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do nerve studies and genetic testing confirm a hereditary demyelinating neuropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CIDP, Friedreich ataxia or essential tremor and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for strength and gait",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses and foot care for foot drop and sensory ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blocker trial for postural tremor with functional adaptation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid vincristine and other neurotoxic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary neuromuscular team input for ongoing care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

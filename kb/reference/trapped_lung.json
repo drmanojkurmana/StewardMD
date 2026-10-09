@@ -1,171 +1,460 @@
 {
- "id": "trapped_lung",
- "name": "Trapped lung",
- "aliases": [
-  "non-expandable lung",
-  "unexpandable lung",
-  "visceral pleural peel"
- ],
- "class": "non_infective",
- "system": "Respiratory / Thoracic",
- "specialty": "Respiratory / Thoracic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Murray & Nadel's Textbook of Respiratory Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic, non-expandable lung caused by a fibrous visceral pleural peel that prevents the lung re-expanding to the chest wall",
-   "Results from a remote, now-quiescent pleural insult such as prior infection, haemothorax, or inflammation, in contrast to active lung entrapment where inflammation is ongoing",
-   "Produces a persistent, typically small to moderate pleural effusion that reaccumulates after drainage",
-   "The fluid is characteristically a transudate or borderline exudate formed by negative pleural pressure (ex vacuo effusion)",
-   "Pleural manometry shows a rapid, excessive fall in pleural pressure during fluid removal, and imaging after drainage reveals failure of the lung to fully expand",
-   "Repeated therapeutic thoracocentesis gives little lasting symptomatic benefit because the lung cannot expand",
-   "Definitive treatment when symptomatic is surgical decortication to release the visceral peel"
+  "id": "trapped_lung",
+  "name": "Trapped lung",
+  "aliases": [
+    "non-expandable lung",
+    "unexpandable lung",
+    "visceral pleural peel"
   ],
-  "pathophysiology": "Following a resolved pleural inflammatory process, a mature, relatively acellular fibrous membrane forms over the visceral pleura. This inelastic peel mechanically restrains the lung so that it cannot expand to fill the hemithorax. The persistently unexpanded lung creates an abnormally negative intrapleural pressure, which draws a transudative effusion into the space through an imbalance of hydrostatic forces rather than active inflammation. Because the driving mechanism is mechanical, the fluid recurs after drainage and the lung fails to re-expand, distinguishing established trapped lung from active entrapment where ongoing pleural inflammation is present.",
-  "additionalDifferentials": [
-   "Active lung entrapment from ongoing pleural inflammation or malignancy",
-   "Fibrothorax after empyema or haemothorax",
-   "Malignant pleural effusion with visceral pleural involvement",
-   "Chronic organising empyema",
-   "Endobronchial obstruction preventing lung expansion",
-   "Chylothorax or other persistent effusion"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph before and after thoracocentesis to assess lung re-expansion",
-   "CT of the thorax to demonstrate visceral pleural thickening and exclude malignancy or endobronchial obstruction",
-   "Pleural fluid analysis, typically showing a transudate or borderline exudate",
-   "Pleural manometry demonstrating a steep pressure drop during fluid removal",
-   "Bronchoscopy where an endobronchial cause of non-expansion is suspected"
-  ],
-  "redFlags": [
-   "Features suggesting an underlying malignancy such as a bloody effusion or pleural nodularity",
-   "Signs of active or recurrent pleural infection",
-   "Development of a hydropneumothorax after attempted drainage",
-   "Progressive breathlessness with an enlarging pleural collection"
-  ],
-  "prognosis": "Trapped lung itself is a stable, benign mechanical problem; symptomatic cases can improve after decortication if the underlying lung is healthy, whereas the outlook is dominated by any underlying malignant or infective cause when present.",
-  "pitfalls": [
-   "Repeatedly draining the effusion without recognising that the lung cannot re-expand",
-   "Mislabelling a mechanical ex vacuo transudate as an unexplained exudate",
-   "Attempting pleurodesis when the lung will not appose the chest wall",
-   "Failing to distinguish quiescent trapped lung from active entrapment that needs treatment of ongoing disease"
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "Shields' General Thoracic Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical decortication to strip the fibrous visceral pleural peel and allow lung re-expansion in symptomatic patients whose underlying lung is healthy",
-   "Confirm the diagnosis with pleural manometry showing an excessive pressure drop on fluid removal and post-drainage imaging showing failure of re-expansion",
-   "Avoid repeated therapeutic thoracocentesis, which gives little lasting benefit because the lung cannot expand",
-   "Identify and treat any underlying malignant or infective process driving the pleural disease",
-   "Observe asymptomatic patients, reserving intervention for breathlessness or diagnostic uncertainty",
-   "Refer to thoracic surgery for assessment of decortication and to distinguish established trapped lung from active lung entrapment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trapped_lung-pathway",
-   "title": "Trapped lung: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic, non-expandable lung caused by a fibrous visceral pleural peel that prevents the lung re-expanding to the chest wall",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting an underlying malignancy such as a bloody effusion or pleural nodularity",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph before and after thoracocentesis to assess lung re-expansion, CT of the thorax to demonstrate visceral pleural thickening and exclude malignancy or endobronchial obstruction, Pleural fluid analysis,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical decortication to strip the fibrous visceral pleural peel and allow lung re-expansion in symptomatic patients whose underlying lung is healthy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeatedly draining the effusion without recognising that the lung cannot re-expand"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trapped lung."
-  }
- ],
- "tables": [
-  {
-   "id": "trapped_lung-matrix",
-   "title": "Trapped lung: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic, non-expandable lung caused by a fibrous visceral pleural peel that prevents the lung re-expanding to the chest wall",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Thoracic",
+  "specialty": "Respiratory / Thoracic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Murray & Nadel's Textbook of Respiratory Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic, non-expandable lung caused by a fibrous visceral pleural peel that prevents the lung re-expanding to the chest wall",
+      "Results from a remote, now-quiescent pleural insult such as prior infection, haemothorax, or inflammation, in contrast to active lung entrapment where inflammation is ongoing",
+      "Produces a persistent, typically small to moderate pleural effusion that reaccumulates after drainage",
+      "The fluid is characteristically a transudate or borderline exudate formed by negative pleural pressure (ex vacuo effusion)",
+      "Pleural manometry shows a rapid, excessive fall in pleural pressure during fluid removal, and imaging after drainage reveals failure of the lung to fully expand",
+      "Repeated therapeutic thoracocentesis gives little lasting symptomatic benefit because the lung cannot expand",
+      "Definitive treatment when symptomatic is surgical decortication to release the visceral peel"
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph before and after thoracocentesis to assess lung re-expansion, CT of the thorax to demonstrate visceral pleural",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Following a resolved pleural inflammatory process, a mature, relatively acellular fibrous membrane forms over the visceral pleura. This inelastic peel mechanically restrains the lung so that it cannot expand to fill the hemithorax. The persistently unexpanded lung creates an abnormally negative intrapleural pressure, which draws a transudative effusion into the space through an imbalance of hydrostatic forces rather than active inflammation. Because the driving mechanism is mechanical, the fluid recurs after drainage and the lung fails to re-expand, distinguishing established trapped lung from active entrapment where ongoing pleural inflammation is present.",
+    "additionalDifferentials": [
+      "Active lung entrapment from ongoing pleural inflammation or malignancy",
+      "Fibrothorax after empyema or haemothorax",
+      "Malignant pleural effusion with visceral pleural involvement",
+      "Chronic organising empyema",
+      "Endobronchial obstruction preventing lung expansion",
+      "Chylothorax or other persistent effusion"
     ],
-    [
-     "Primary Differentials",
-     "Active lung entrapment from ongoing pleural inflammation or malignancy, Fibrothorax after empyema or haemothorax, Malignant",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph before and after thoracocentesis to assess lung re-expansion",
+      "CT of the thorax to demonstrate visceral pleural thickening and exclude malignancy or endobronchial obstruction",
+      "Pleural fluid analysis, typically showing a transudate or borderline exudate",
+      "Pleural manometry demonstrating a steep pressure drop during fluid removal",
+      "Bronchoscopy where an endobronchial cause of non-expansion is suspected"
     ],
-    [
-     "Management Strategy",
-     "Surgical decortication to strip the fibrous visceral pleural peel and allow lung re-expansion in symptomatic patients whose",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting an underlying malignancy such as a bloody effusion or pleural nodularity",
+      "Signs of active or recurrent pleural infection",
+      "Development of a hydropneumothorax after attempted drainage",
+      "Progressive breathlessness with an enlarging pleural collection"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeatedly draining the effusion without recognising that the lung cannot re-expand",
-     "Prevent diagnostic or management error"
+    "prognosis": "Trapped lung itself is a stable, benign mechanical problem; symptomatic cases can improve after decortication if the underlying lung is healthy, whereas the outlook is dominated by any underlying malignant or infective cause when present.",
+    "pitfalls": [
+      "Repeatedly draining the effusion without recognising that the lung cannot re-expand",
+      "Mislabelling a mechanical ex vacuo transudate as an unexplained exudate",
+      "Attempting pleurodesis when the lung will not appose the chest wall",
+      "Failing to distinguish quiescent trapped lung from active entrapment that needs treatment of ongoing disease"
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "Shields' General Thoracic Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical decortication to strip the fibrous visceral pleural peel and allow lung re-expansion in symptomatic patients whose underlying lung is healthy",
+      "Confirm the diagnosis with pleural manometry showing an excessive pressure drop on fluid removal and post-drainage imaging showing failure of re-expansion",
+      "Avoid repeated therapeutic thoracocentesis, which gives little lasting benefit because the lung cannot expand",
+      "Identify and treat any underlying malignant or infective process driving the pleural disease",
+      "Observe asymptomatic patients, reserving intervention for breathlessness or diagnostic uncertainty",
+      "Refer to thoracic surgery for assessment of decortication and to distinguish established trapped lung from active lung entrapment"
     ]
-   ],
-   "caption": "Overview comparison matrix for trapped lung."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trapped-lung-real-image",
-   "title": "Trapped lung: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "trapped_lung-pathway",
+      "title": "Trapped lung: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic, non-expandable lung caused by a fibrous visceral pleural peel that prevents the lung re-expanding to the chest wall",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting an underlying malignancy such as a bloody effusion or pleural nodularity",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph before and after thoracocentesis to assess lung re-expansion, CT of the thorax to demonstrate visceral pleural thickening and exclude malignancy or endobronchial obstruction, Pleural fluid analysis,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical decortication to strip the fibrous visceral pleural peel and allow lung re-expansion in symptomatic patients whose underlying lung is healthy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeatedly draining the effusion without recognising that the lung cannot re-expand"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trapped lung."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trapped_lung-matrix",
+      "title": "Trapped lung: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic, non-expandable lung caused by a fibrous visceral pleural peel that prevents the lung re-expanding to the chest wall",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph before and after thoracocentesis to assess lung re-expansion, CT of the thorax to demonstrate visceral pleural",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Active lung entrapment from ongoing pleural inflammation or malignancy, Fibrothorax after empyema or haemothorax, Malignant",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical decortication to strip the fibrous visceral pleural peel and allow lung re-expansion in symptomatic patients whose",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeatedly draining the effusion without recognising that the lung cannot re-expand",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trapped lung."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trapped_lung-dx-mgmt",
+      "title": "Diagnosis and management of Trapped lung",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trapped lung: persistent pleural effusion that reaccumulates after drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: bloody effusion, pleural infection, or hydropneumothorax after drainage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for malignancy or pleural infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph before and after drainage; CT; manometry; fluid analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does manometry show a steep pressure fall with failure of re-expansion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider active entrapment, malignant effusion or fibrothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical decortication for symptomatic patients with a healthy lung",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm with manometry and post-drainage imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid repeated thoracocentesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat any underlying malignant or infective process",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Observe asymptomatic patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mechanically benign itself; outcome set by any underlying malignant or infective cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trapped_lung-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph before and after thoracocentesis",
+          "cells": [
+            {
+              "text": "Lung re-expansion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the thorax",
+          "cells": [
+            {
+              "text": "Visceral pleural thickening; malignancy or endobronchial cause excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural fluid analysis",
+          "cells": [
+            {
+              "text": "Transudate or borderline exudate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural manometry",
+          "cells": [
+            {
+              "text": "Steep pressure drop during fluid removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Endobronchial cause of non-expansion, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trapped_lung-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Active lung entrapment",
+          "cells": [
+            {
+              "text": "Ongoing pleural inflammation or malignancy rather than a quiescent peel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrothorax after empyema or haemothorax",
+          "cells": [
+            {
+              "text": "Prior empyema or haemothorax; active infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant pleural effusion",
+          "cells": [
+            {
+              "text": "Bloody effusion or pleural nodularity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trapped_lung-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical decortication",
+          "cells": [
+            {
+              "text": "Symptomatic patients whose underlying lung is healthy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural manometry and imaging",
+          "cells": [
+            {
+              "text": "Confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid repeated thoracocentesis",
+          "cells": [
+            {
+              "text": "Little lasting benefit because the lung cannot expand"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying disease",
+          "cells": [
+            {
+              "text": "Malignant or infective process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic surgery referral",
+          "cells": [
+            {
+              "text": "Decortication assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

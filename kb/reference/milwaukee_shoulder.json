@@ -1,172 +1,450 @@
 {
- "id": "milwaukee_shoulder",
- "name": "Milwaukee shoulder syndrome",
- "aliases": [
-  "Milwaukee shoulder",
-  "apatite-associated destructive arthritis",
-  "BCP destructive arthropathy of the shoulder",
-  "rotator cuff crystal arthropathy"
- ],
- "class": "non_infective",
- "system": "Rheumatology",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Milwaukee shoulder is a rapidly destructive arthropathy of the shoulder driven by basic calcium phosphate (hydroxyapatite) crystals, typically affecting elderly women",
-   "It presents with a large, often blood-tinged, minimally inflammatory joint effusion together with shoulder pain and marked loss of function",
-   "There is extensive rotator cuff deficiency (a large or massive tear) that allows superior migration of the humeral head towards the acromion",
-   "Radiographs show glenohumeral joint destruction, superior subluxation of the humeral head into a high-riding position, and soft-tissue calcification",
-   "Synovial fluid contains relatively few cells (non-inflammatory to only mildly inflammatory) but harbours aggregates of BCP crystals, which are non-birefringent and require special staining such as alizarin red to suggest",
-   "The crystals stimulate synovial release of proteolytic enzymes, including collagenases and other proteases, which degrade cartilage and the rotator cuff in a self-perpetuating destructive cycle",
-   "Treatment is largely palliative, using analgesia, anti-inflammatory therapy, joint aspiration, activity modification, and physiotherapy, with surgery including arthroplasty options reserved for selected patients"
+  "id": "milwaukee_shoulder",
+  "name": "Milwaukee shoulder syndrome",
+  "aliases": [
+    "Milwaukee shoulder",
+    "apatite-associated destructive arthritis",
+    "BCP destructive arthropathy of the shoulder",
+    "rotator cuff crystal arthropathy"
   ],
-  "pathophysiology": "In Milwaukee shoulder, basic calcium phosphate (hydroxyapatite) crystals within the joint are phagocytosed by synovial lining cells, which respond by secreting matrix metalloproteinases and other proteolytic enzymes. These enzymes degrade articular cartilage and the rotator cuff tendons; the resulting cuff deficiency allows the humeral head to migrate superiorly, and continued crystal shedding perpetuates enzyme release and progressive joint destruction. The effusions are large but contain few inflammatory cells, which helps distinguish the condition from septic or highly inflammatory arthritis.",
-  "additionalDifferentials": [
-   "Rotator cuff tear arthropathy",
-   "Septic arthritis",
-   "Gout or CPP crystal arthritis",
-   "Rheumatoid arthritis of the shoulder",
-   "Neuropathic (Charcot) shoulder",
-   "Rapidly progressive osteoarthritis"
-  ],
-  "additionalInvestigations": [
-   "Joint aspiration showing a large, blood-tinged, low-cell-count effusion, with culture to exclude infection",
-   "Alizarin red staining or electron microscopy to suggest or confirm BCP crystals, which are non-birefringent on polarised light",
-   "Radiographs showing glenohumeral destruction and superior humeral head migration",
-   "MRI or ultrasound to define the rotator cuff tear",
-   "Cross-sectional CT for bony destruction and surgical planning",
-   "Synovial fluid cell count and Gram stain to differentiate from sepsis"
-  ],
-  "redFlags": [
-   "Rapidly progressive joint destruction with loss of function",
-   "Features that could indicate septic arthritis superimposed on a destroyed joint",
-   "Large recurrent haemorrhagic effusions"
-  ],
-  "prognosis": "The condition is typically progressive with a limited response to medical treatment; joint destruction and functional impairment tend to continue, so management is largely aimed at symptom control, with surgery considered only in selected patients because rotator cuff deficiency complicates reconstruction.",
-  "pitfalls": [
-   "Mistaking the large, low-inflammatory effusion for a benign process, or conversely over-diagnosing sepsis",
-   "Failing to detect the BCP crystals because they are non-birefringent",
-   "Overlooking the massive rotator cuff tear that drives the deformity",
-   "Assuming a standard arthroplasty will behave as it would in routine osteoarthritis, when cuff deficiency alters the options and outcome"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Oxford Textbook of Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Focus on symptom control with simple analgesia and cautious use of NSAIDs, given the typically elderly patients",
-   "Perform therapeutic joint aspiration of large effusions, always with culture to exclude infection",
-   "Give intra-articular corticosteroid injection to reduce pain and effusion",
-   "Maintain range of movement and function with physiotherapy and activity modification",
-   "Reserve surgery for selected patients, with reverse total shoulder arthroplasty an option since rotator cuff deficiency precludes conventional repair",
-   "Monitor the joint and remain alert to superimposed septic arthritis given the destructive course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "milwaukee_shoulder-pathway",
-   "title": "Milwaukee shoulder syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Milwaukee shoulder is a rapidly destructive arthropathy of the shoulder driven by basic calcium phosphate (hydroxyapatite) crystals, typically affecting elderly women",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive joint destruction with loss of function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Joint aspiration showing a large, blood-tinged, low-cell-count effusion, with culture to exclude infection, Alizarin red staining or electron microscopy to suggest or confirm BCP crystals, which are non-birefringent on"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Focus on symptom control with simple analgesia and cautious use of NSAIDs, given the typically elderly patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the large, low-inflammatory effusion for a benign process, or conversely over-diagnosing sepsis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of milwaukee shoulder syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "milwaukee_shoulder-matrix",
-   "title": "Milwaukee shoulder syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Milwaukee shoulder is a rapidly destructive arthropathy of the shoulder driven by basic calcium phosphate (hydroxyapatite)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Milwaukee shoulder is a rapidly destructive arthropathy of the shoulder driven by basic calcium phosphate (hydroxyapatite) crystals, typically affecting elderly women",
+      "It presents with a large, often blood-tinged, minimally inflammatory joint effusion together with shoulder pain and marked loss of function",
+      "There is extensive rotator cuff deficiency (a large or massive tear) that allows superior migration of the humeral head towards the acromion",
+      "Radiographs show glenohumeral joint destruction, superior subluxation of the humeral head into a high-riding position, and soft-tissue calcification",
+      "Synovial fluid contains relatively few cells (non-inflammatory to only mildly inflammatory) but harbours aggregates of BCP crystals, which are non-birefringent and require special staining such as alizarin red to suggest",
+      "The crystals stimulate synovial release of proteolytic enzymes, including collagenases and other proteases, which degrade cartilage and the rotator cuff in a self-perpetuating destructive cycle",
+      "Treatment is largely palliative, using analgesia, anti-inflammatory therapy, joint aspiration, activity modification, and physiotherapy, with surgery including arthroplasty options reserved for selected patients"
     ],
-    [
-     "Key Investigations",
-     "Joint aspiration showing a large, blood-tinged, low-cell-count effusion, with culture to exclude infection, Alizarin red staining",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In Milwaukee shoulder, basic calcium phosphate (hydroxyapatite) crystals within the joint are phagocytosed by synovial lining cells, which respond by secreting matrix metalloproteinases and other proteolytic enzymes. These enzymes degrade articular cartilage and the rotator cuff tendons; the resulting cuff deficiency allows the humeral head to migrate superiorly, and continued crystal shedding perpetuates enzyme release and progressive joint destruction. The effusions are large but contain few inflammatory cells, which helps distinguish the condition from septic or highly inflammatory arthritis.",
+    "additionalDifferentials": [
+      "Rotator cuff tear arthropathy",
+      "Septic arthritis",
+      "Gout or CPP crystal arthritis",
+      "Rheumatoid arthritis of the shoulder",
+      "Neuropathic (Charcot) shoulder",
+      "Rapidly progressive osteoarthritis"
     ],
-    [
-     "Primary Differentials",
-     "Rotator cuff tear arthropathy, Septic arthritis, Gout or CPP crystal arthritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Joint aspiration showing a large, blood-tinged, low-cell-count effusion, with culture to exclude infection",
+      "Alizarin red staining or electron microscopy to suggest or confirm BCP crystals, which are non-birefringent on polarised light",
+      "Radiographs showing glenohumeral destruction and superior humeral head migration",
+      "MRI or ultrasound to define the rotator cuff tear",
+      "Cross-sectional CT for bony destruction and surgical planning",
+      "Synovial fluid cell count and Gram stain to differentiate from sepsis"
     ],
-    [
-     "Management Strategy",
-     "Focus on symptom control with simple analgesia and cautious use of NSAIDs, given the typically elderly patients",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive joint destruction with loss of function",
+      "Features that could indicate septic arthritis superimposed on a destroyed joint",
+      "Large recurrent haemorrhagic effusions"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the large, low-inflammatory effusion for a benign process, or conversely over-diagnosing sepsis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is typically progressive with a limited response to medical treatment; joint destruction and functional impairment tend to continue, so management is largely aimed at symptom control, with surgery considered only in selected patients because rotator cuff deficiency complicates reconstruction.",
+    "pitfalls": [
+      "Mistaking the large, low-inflammatory effusion for a benign process, or conversely over-diagnosing sepsis",
+      "Failing to detect the BCP crystals because they are non-birefringent",
+      "Overlooking the massive rotator cuff tear that drives the deformity",
+      "Assuming a standard arthroplasty will behave as it would in routine osteoarthritis, when cuff deficiency alters the options and outcome"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Oxford Textbook of Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Focus on symptom control with simple analgesia and cautious use of NSAIDs, given the typically elderly patients",
+      "Perform therapeutic joint aspiration of large effusions, always with culture to exclude infection",
+      "Give intra-articular corticosteroid injection to reduce pain and effusion",
+      "Maintain range of movement and function with physiotherapy and activity modification",
+      "Reserve surgery for selected patients, with reverse total shoulder arthroplasty an option since rotator cuff deficiency precludes conventional repair",
+      "Monitor the joint and remain alert to superimposed septic arthritis given the destructive course"
     ]
-   ],
-   "caption": "Overview comparison matrix for milwaukee shoulder syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "milwaukee-shoulder-real-image",
-   "title": "Milwaukee shoulder syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "milwaukee_shoulder-pathway",
+      "title": "Milwaukee shoulder syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Milwaukee shoulder is a rapidly destructive arthropathy of the shoulder driven by basic calcium phosphate (hydroxyapatite) crystals, typically affecting elderly women",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive joint destruction with loss of function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Joint aspiration showing a large, blood-tinged, low-cell-count effusion, with culture to exclude infection, Alizarin red staining or electron microscopy to suggest or confirm BCP crystals, which are non-birefringent on"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Focus on symptom control with simple analgesia and cautious use of NSAIDs, given the typically elderly patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the large, low-inflammatory effusion for a benign process, or conversely over-diagnosing sepsis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of milwaukee shoulder syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "milwaukee_shoulder-matrix",
+      "title": "Milwaukee shoulder syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Milwaukee shoulder is a rapidly destructive arthropathy of the shoulder driven by basic calcium phosphate (hydroxyapatite)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Joint aspiration showing a large, blood-tinged, low-cell-count effusion, with culture to exclude infection, Alizarin red staining",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rotator cuff tear arthropathy, Septic arthritis, Gout or CPP crystal arthritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Focus on symptom control with simple analgesia and cautious use of NSAIDs, given the typically elderly patients",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the large, low-inflammatory effusion for a benign process, or conversely over-diagnosing sepsis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for milwaukee shoulder syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "milwaukee_shoulder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Joint aspiration with cell count and culture",
+          "cells": [
+            {
+              "text": "Blood-tinged, low-cell-count effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alizarin red staining or electron microscopy",
+          "cells": [
+            {
+              "text": "BCP crystals, which are non-birefringent on polarised light"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Glenohumeral destruction and superior humeral head migration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound",
+          "cells": [
+            {
+              "text": "Rotator cuff tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional CT",
+          "cells": [
+            {
+              "text": "Bony destruction and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial fluid cell count and Gram stain",
+          "cells": [
+            {
+              "text": "Sepsis excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "milwaukee_shoulder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "Superimposed on a destroyed joint; Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout or CPP crystal arthritis",
+          "cells": [
+            {
+              "text": "Crystal analysis; BCP crystals are non-birefringent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "milwaukee_shoulder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesia and cautious NSAIDs, given the typically elderly patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic aspiration",
+          "cells": [
+            {
+              "text": "Large effusions, always with culture to exclude infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular corticosteroid",
+          "cells": [
+            {
+              "text": "To reduce pain and effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Maintain range of movement and function; activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Selected patients; reverse total shoulder arthroplasty as rotator cuff deficiency precludes conventional repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Remain alert to superimposed septic arthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "milwaukee_shoulder-dx-mgmt",
+      "title": "Diagnosis and management of Milwaukee shoulder syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful shoulder with rotator cuff tear, typically in an older patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid joint destruction, signs of septic arthritis, or large haemorrhagic effusions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Aspirate with culture; exclude septic arthritis urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Joint aspiration with cell count, Gram stain and culture; BCP crystal study; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are BCP crystals found with sepsis excluded on culture and Gram stain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider septic arthritis, gout or CPP crystal arthritis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Simple analgesia and cautious NSAIDs for typically elderly patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Therapeutic aspiration of large effusions, always with culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intra-articular corticosteroid injection to reduce pain and effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and activity modification to maintain range and function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reverse total shoulder arthroplasty for selected surgical cases; monitor for infection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

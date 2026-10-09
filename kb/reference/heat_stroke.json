@@ -1,176 +1,492 @@
 {
- "id": "heat_stroke",
- "name": "Heat stroke",
- "aliases": [
-  "heatstroke",
-  "exertional heat stroke",
-  "classic heat stroke",
-  "severe hyperthermia"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Tintinalli's Emergency Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Heat stroke is a life-threatening emergency defined by a markedly raised core temperature, typically above 40 degrees Celsius, together with central nervous system dysfunction",
-   "It is distinguished from heat exhaustion by the presence of neurological impairment such as confusion, agitation, seizures, or coma",
-   "Two forms are recognised: classic (non-exertional) heat stroke affecting vulnerable people during heat waves, and exertional heat stroke affecting young, active individuals such as athletes and military recruits",
-   "Sweating may be present in exertional heat stroke, so absence of dry skin does not exclude the diagnosis",
-   "Rapid cooling is the priority and takes precedence over detailed investigation; cold-water immersion is the most effective method, particularly for exertional cases",
-   "Multi-organ complications include rhabdomyolysis, acute kidney injury, liver injury, disseminated intravascular coagulation, and cardiovascular instability",
-   "The degree and duration of hyperthermia strongly influence outcome, so cooling should begin as early as possible, ideally before or during transport"
+  "id": "heat_stroke",
+  "name": "Heat stroke",
+  "aliases": [
+    "heatstroke",
+    "exertional heat stroke",
+    "classic heat stroke",
+    "severe hyperthermia"
   ],
-  "pathophysiology": "Heat stroke occurs when heat gain overwhelms the body's ability to dissipate heat, causing core temperature to rise to a level that produces direct thermal injury to cells and tissues. Excessive environmental heat or intense muscular activity generates a heat load that exceeds losses through radiation, convection, and evaporation, especially in hot, humid conditions or when thermoregulation is impaired. The resulting hyperthermia denatures proteins and damages cell membranes, and triggers a systemic inflammatory response and endothelial injury resembling sepsis. This leads to loss of thermoregulatory control, capillary leak, coagulation activation, and progressive multi-organ dysfunction, with the brain being especially vulnerable, producing the characteristic encephalopathy.",
-  "additionalDifferentials": [
-   "Heat exhaustion without central nervous system dysfunction",
-   "Sepsis or severe systemic infection with fever",
-   "Neuroleptic malignant syndrome or serotonin syndrome",
-   "Malignant hyperthermia",
-   "Thyroid storm",
-   "Central nervous system infection such as meningitis or encephalitis",
-   "Drug toxicity from stimulants or anticholinergics"
-  ],
-  "additionalInvestigations": [
-   "Core temperature measurement, ideally rectal, to confirm severe hyperthermia",
-   "Electrolytes, renal and liver function tests to assess organ injury",
-   "Creatine kinase and urinalysis for rhabdomyolysis and myoglobinuria",
-   "Coagulation studies and platelets to detect disseminated intravascular coagulation",
-   "Blood glucose and arterial blood gas for metabolic disturbance",
-   "Electrocardiogram and cardiac monitoring, with a septic and toxicological screen when the cause is unclear"
-  ],
-  "redFlags": [
-   "Core temperature above 40 degrees with altered consciousness, seizures, or coma",
-   "Signs of shock, arrhythmia, or cardiovascular collapse",
-   "Evidence of rhabdomyolysis with acute kidney injury",
-   "Coagulopathy or disseminated intravascular coagulation"
-  ],
-  "prognosis": "Outcome depends chiefly on the peak temperature and how quickly cooling is achieved: rapid recognition and cooling greatly improve survival, whereas prolonged severe hyperthermia carries high mortality and a risk of permanent neurological deficit. Multi-organ failure and delayed treatment worsen prognosis, and some survivors have lasting impairment of heat tolerance.",
-  "pitfalls": [
-   "Waiting for laboratory results or transport before starting aggressive cooling",
-   "Excluding heat stroke because the patient is sweating, which can occur in exertional cases",
-   "Mistaking heat stroke for simple heat exhaustion and missing the neurological dysfunction",
-   "Using antipyretics, which are ineffective because the hypothalamic set point is not raised",
-   "Failing to monitor for and treat rhabdomyolysis, coagulopathy, and organ failure after cooling"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Tintinalli's Emergency Medicine: A Comprehensive Study Guide"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin immediate rapid cooling as the top priority, using cold-water immersion for exertional cases or evaporative cooling, ahead of detailed investigation",
-   "Monitor a continuous core (rectal) temperature and stop active cooling at target to avoid overshoot hypothermia",
-   "Support airway, breathing, and circulation with intravenous fluids for hypovolaemia and haemodynamic instability",
-   "Manage multi-organ complications including rhabdomyolysis with fluid resuscitation, acute kidney injury with renal replacement where needed, disseminated intravascular coagulation, hepatic injury, and seizures",
-   "Avoid antipyretics, which are ineffective, and dantrolene, which has no role in heat stroke",
-   "Admit to intensive care for organ support and serial monitoring of electrolytes, creatine kinase, coagulation, renal and liver function, and glucose",
-   "Educate at-risk individuals and address predisposing medications and comorbidities to prevent recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "heat_stroke-pathway",
-   "title": "Heat stroke: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Heat stroke is a life-threatening emergency defined by a markedly raised core temperature, typically above 40 degrees Celsius, together with central nervous system dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Core temperature above 40 degrees with altered consciousness, seizures, or coma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Core temperature measurement, ideally rectal, to confirm severe hyperthermia, Electrolytes, renal and liver function tests to assess organ injury, Creatine kinase and urinalysis for rhabdomyolysis and myoglobinuria"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin immediate rapid cooling as the top priority, using cold-water immersion for exertional cases or evaporative cooling, ahead of detailed investigation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Waiting for laboratory results or transport before starting aggressive cooling"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of heat stroke."
-  }
- ],
- "tables": [
-  {
-   "id": "heat_stroke-matrix",
-   "title": "Heat stroke: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Heat stroke is a life-threatening emergency defined by a markedly raised core temperature, typically above 40 degrees Celsius,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Tintinalli's Emergency Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Heat stroke is a life-threatening emergency defined by a markedly raised core temperature, typically above 40 degrees Celsius, together with central nervous system dysfunction",
+      "It is distinguished from heat exhaustion by the presence of neurological impairment such as confusion, agitation, seizures, or coma",
+      "Two forms are recognised: classic (non-exertional) heat stroke affecting vulnerable people during heat waves, and exertional heat stroke affecting young, active individuals such as athletes and military recruits",
+      "Sweating may be present in exertional heat stroke, so absence of dry skin does not exclude the diagnosis",
+      "Rapid cooling is the priority and takes precedence over detailed investigation; cold-water immersion is the most effective method, particularly for exertional cases",
+      "Multi-organ complications include rhabdomyolysis, acute kidney injury, liver injury, disseminated intravascular coagulation, and cardiovascular instability",
+      "The degree and duration of hyperthermia strongly influence outcome, so cooling should begin as early as possible, ideally before or during transport"
     ],
-    [
-     "Key Investigations",
-     "Core temperature measurement, ideally rectal, to confirm severe hyperthermia, Electrolytes, renal and liver function tests to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Heat stroke occurs when heat gain overwhelms the body's ability to dissipate heat, causing core temperature to rise to a level that produces direct thermal injury to cells and tissues. Excessive environmental heat or intense muscular activity generates a heat load that exceeds losses through radiation, convection, and evaporation, especially in hot, humid conditions or when thermoregulation is impaired. The resulting hyperthermia denatures proteins and damages cell membranes, and triggers a systemic inflammatory response and endothelial injury resembling sepsis. This leads to loss of thermoregulatory control, capillary leak, coagulation activation, and progressive multi-organ dysfunction, with the brain being especially vulnerable, producing the characteristic encephalopathy.",
+    "additionalDifferentials": [
+      "Heat exhaustion without central nervous system dysfunction",
+      "Sepsis or severe systemic infection with fever",
+      "Neuroleptic malignant syndrome or serotonin syndrome",
+      "Malignant hyperthermia",
+      "Thyroid storm",
+      "Central nervous system infection such as meningitis or encephalitis",
+      "Drug toxicity from stimulants or anticholinergics"
     ],
-    [
-     "Primary Differentials",
-     "Heat exhaustion without central nervous system dysfunction, Sepsis or severe systemic infection with fever, Neuroleptic malignant",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Core temperature measurement, ideally rectal, to confirm severe hyperthermia",
+      "Electrolytes, renal and liver function tests to assess organ injury",
+      "Creatine kinase and urinalysis for rhabdomyolysis and myoglobinuria",
+      "Coagulation studies and platelets to detect disseminated intravascular coagulation",
+      "Blood glucose and arterial blood gas for metabolic disturbance",
+      "Electrocardiogram and cardiac monitoring, with a septic and toxicological screen when the cause is unclear"
     ],
-    [
-     "Management Strategy",
-     "Begin immediate rapid cooling as the top priority, using cold-water immersion for exertional cases or evaporative cooling, ahead",
-     "Core treatment modality"
+    "redFlags": [
+      "Core temperature above 40 degrees with altered consciousness, seizures, or coma",
+      "Signs of shock, arrhythmia, or cardiovascular collapse",
+      "Evidence of rhabdomyolysis with acute kidney injury",
+      "Coagulopathy or disseminated intravascular coagulation"
     ],
-    [
-     "Clinical Pitfall",
-     "Waiting for laboratory results or transport before starting aggressive cooling",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends chiefly on the peak temperature and how quickly cooling is achieved: rapid recognition and cooling greatly improve survival, whereas prolonged severe hyperthermia carries high mortality and a risk of permanent neurological deficit. Multi-organ failure and delayed treatment worsen prognosis, and some survivors have lasting impairment of heat tolerance.",
+    "pitfalls": [
+      "Waiting for laboratory results or transport before starting aggressive cooling",
+      "Excluding heat stroke because the patient is sweating, which can occur in exertional cases",
+      "Mistaking heat stroke for simple heat exhaustion and missing the neurological dysfunction",
+      "Using antipyretics, which are ineffective because the hypothalamic set point is not raised",
+      "Failing to monitor for and treat rhabdomyolysis, coagulopathy, and organ failure after cooling"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Tintinalli's Emergency Medicine: A Comprehensive Study Guide"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin immediate rapid cooling as the top priority, using cold-water immersion for exertional cases or evaporative cooling, ahead of detailed investigation",
+      "Monitor a continuous core (rectal) temperature and stop active cooling at target to avoid overshoot hypothermia",
+      "Support airway, breathing, and circulation with intravenous fluids for hypovolaemia and haemodynamic instability",
+      "Manage multi-organ complications including rhabdomyolysis with fluid resuscitation, acute kidney injury with renal replacement where needed, disseminated intravascular coagulation, hepatic injury, and seizures",
+      "Avoid antipyretics, which are ineffective, and dantrolene, which has no role in heat stroke",
+      "Admit to intensive care for organ support and serial monitoring of electrolytes, creatine kinase, coagulation, renal and liver function, and glucose",
+      "Educate at-risk individuals and address predisposing medications and comorbidities to prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for heat stroke."
-  }
- ],
- "diagrams": [
-  {
-   "id": "heat-stroke-real-image",
-   "title": "Heat stroke: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "heat_stroke-pathway",
+      "title": "Heat stroke: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Heat stroke is a life-threatening emergency defined by a markedly raised core temperature, typically above 40 degrees Celsius, together with central nervous system dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Core temperature above 40 degrees with altered consciousness, seizures, or coma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Core temperature measurement, ideally rectal, to confirm severe hyperthermia, Electrolytes, renal and liver function tests to assess organ injury, Creatine kinase and urinalysis for rhabdomyolysis and myoglobinuria"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin immediate rapid cooling as the top priority, using cold-water immersion for exertional cases or evaporative cooling, ahead of detailed investigation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Waiting for laboratory results or transport before starting aggressive cooling"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of heat stroke."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "heat_stroke-matrix",
+      "title": "Heat stroke: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Heat stroke is a life-threatening emergency defined by a markedly raised core temperature, typically above 40 degrees Celsius,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Core temperature measurement, ideally rectal, to confirm severe hyperthermia, Electrolytes, renal and liver function tests to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Heat exhaustion without central nervous system dysfunction, Sepsis or severe systemic infection with fever, Neuroleptic malignant",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin immediate rapid cooling as the top priority, using cold-water immersion for exertional cases or evaporative cooling, ahead",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Waiting for laboratory results or transport before starting aggressive cooling",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for heat stroke."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Tintinalli's Emergency Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heat_stroke-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Core temperature, ideally rectal",
+          "cells": [
+            {
+              "text": "Confirms severe hyperthermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes, renal and liver function tests",
+          "cells": [
+            {
+              "text": "Organ injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and urinalysis",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis and myoglobinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies and platelets",
+          "cells": [
+            {
+              "text": "Disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and arterial blood gas",
+          "cells": [
+            {
+              "text": "Metabolic disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heat_stroke-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Heat exhaustion without central nervous system dysfunction",
+          "cells": [
+            {
+              "text": "Neurological impairment (confusion, agitation, seizures) separates heat stroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug toxicity from stimulants or anticholinergics",
+          "cells": [
+            {
+              "text": "Toxicological screen when the cause is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis or severe systemic infection with fever",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroleptic malignant syndrome or serotonin syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heat_stroke-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rapid cooling",
+          "cells": [
+            {
+              "text": "The top priority; cold-water immersion is favoured for exertional cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous core temperature",
+          "cells": [
+            {
+              "text": "Stop active cooling at target to avoid overshoot hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway, breathing and circulation",
+          "cells": [
+            {
+              "text": "Intravenous fluids for hypovolaemia and haemodynamic instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multi-organ complications",
+          "cells": [
+            {
+              "text": "Fluid resuscitation for rhabdomyolysis; management of acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antipyretics and dantrolene",
+          "cells": [
+            {
+              "text": "Antipyretics are ineffective; dantrolene has no role in heat stroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care admission",
+          "cells": [
+            {
+              "text": "Organ support and serial monitoring of electrolytes, creatine kinase and coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Educate at-risk individuals; address predisposing medications and comorbidities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heat_stroke-dx-mgmt",
+      "title": "Diagnosis and management of Heat stroke",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Markedly raised core temperature with altered consciousness or collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coma, seizures, shock, rhabdomyolysis or coagulopathy present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: rapid cooling and intensive care for organ failure or coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rectal core temperature; creatine kinase, electrolytes, renal and liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is severe hyperthermia confirmed, with central nervous system dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider heat exhaustion, sepsis, neuroleptic malignant syndrome or drug toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate rapid cooling, with cold-water immersion favoured for exertional cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous core temperature; stop cooling at target",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous fluids and airway, breathing and circulation support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage rhabdomyolysis and acute kidney injury; avoid antipyretics and dantrolene",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Intensive care admission for organ support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Organ support and monitoring in intensive care until complications resolve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

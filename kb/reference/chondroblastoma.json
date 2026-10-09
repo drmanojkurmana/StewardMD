@@ -1,180 +1,480 @@
 {
- "id": "chondroblastoma",
- "name": "Chondroblastoma",
- "aliases": [
-  "chondroblastoma",
-  "Codman tumour",
-  "calcifying giant cell tumour"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Oncology",
- "specialty": "Orthopaedic Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare benign cartilage-forming tumour that characteristically arises in the epiphysis or apophysis of a long bone in the skeletally immature",
-   "Common sites include the proximal humerus, distal femur and proximal tibia, and it typically presents in the second decade of life",
-   "Presents with chronic localised pain, often with an adjacent joint effusion and reduced range of movement",
-   "Radiographs show a well-defined lytic epiphyseal lesion, frequently with a thin sclerotic rim and internal matrix calcification",
-   "Histology shows chondroblasts with grooved nuclei, scattered osteoclast-type giant cells and a chicken-wire pattern of pericellular calcification",
-   "Most lesions harbour a characteristic H3F3B histone gene mutation, a useful diagnostic marker",
-   "Treatment is usually curettage with grafting of the cavity, with attention to protecting the adjacent growth plate and joint surface"
+  "id": "chondroblastoma",
+  "name": "Chondroblastoma",
+  "aliases": [
+    "chondroblastoma",
+    "Codman tumour",
+    "calcifying giant cell tumour"
   ],
-  "pathophysiology": "Chondroblastoma is a benign neoplasm of immature cartilage-producing cells (chondroblasts) that arises in the secondary ossification centre, explaining its typical epiphyseal or apophyseal location in growing bone. The tumour is composed of sheets of chondroblasts with characteristic nuclear grooves, admixed osteoclast-like giant cells and a distinctive fine pericellular (chicken-wire) calcification of the chondroid matrix. Recurrent driver mutations in the histone gene H3F3B underpin its development and provide a diagnostic immunohistochemical and molecular signature. Although benign, the lesion can breach the growth plate or extend to the articular surface, and rare pulmonary implants have been reported.",
-  "additionalDifferentials": [
-   "Giant cell tumour of bone (usually skeletally mature)",
-   "Clear cell chondrosarcoma",
-   "Aneurysmal bone cyst",
-   "Osteomyelitis or Brodie abscess",
-   "Langerhans cell histiocytosis",
-   "Enchondroma"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs demonstrating a well-defined lytic epiphyseal lesion with a sclerotic margin",
-   "CT to characterise matrix calcification and cortical integrity",
-   "MRI to assess marrow oedema, joint involvement and soft-tissue extension",
-   "Image-guided or open biopsy with histopathology",
-   "Immunohistochemistry and molecular testing for the H3F3B mutation",
-   "Chest imaging when atypical or aggressive behaviour raises concern for pulmonary spread"
-  ],
-  "redFlags": [
-   "Aggressive features or rapid growth suggesting clear cell chondrosarcoma",
-   "Articular collapse or secondary joint damage",
-   "Extensive growth-plate involvement threatening future limb growth",
-   "Pulmonary nodules suggesting the rare benign pulmonary implants"
-  ],
-  "prognosis": "With adequate curettage and grafting the prognosis is very good, though local recurrence can occur, particularly with incomplete removal or aggressive lesions. Malignant behaviour is exceptional, and rare pulmonary implants are usually indolent.",
-  "pitfalls": [
-   "Confusing an epiphyseal chondroblastoma in a child with giant cell tumour of bone, which favours mature bone",
-   "Overlooking clear cell chondrosarcoma in the differential of an epiphyseal cartilage lesion",
-   "Damaging the growth plate or articular surface during curettage",
-   "Attributing joint symptoms to primary arthropathy and missing the underlying lesion"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Soft Tissue and Bone",
-   "Standard orthopaedic oncology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "This is a benign, locally aggressive lesion, so local control with preservation of the growth plate and joint surface is the goal, not systemic cancer therapy",
-   "Primary treatment is intralesional curettage of the lesion followed by filling the cavity with bone graft or bone cement",
-   "Local adjuvants such as high speed burring, cryotherapy, or phenol can be applied to the curetted cavity to reduce recurrence risk",
-   "Radiofrequency ablation is a reasonable less invasive alternative for small, favourably located lesions",
-   "Surgical planning must protect the adjacent growth plate and articular cartilage given the risk of growth arrest or joint damage in skeletally immature patients",
-   "Wide resection is not first line for a benign lesion and is reserved for extensive, destructive, or repeatedly recurrent disease after curettage has failed",
-   "Local recurrence is managed with repeat curettage using the same principles and the same attention to growth plate and joint preservation",
-   "There is no established role for chemotherapy in ordinary chondroblastoma; systemic therapy is considered only for rare pulmonary implants or atypical aggressive behaviour and should prompt referral rather than empirical treatment",
-   "Radiotherapy has no established primary role given the benign nature of the tumour and the added long term risk of radiation near the growth plate in children",
-   "Monitor with surveillance imaging, plain radiographs supplemented by MRI as needed, to detect local recurrence, with closer follow up after incomplete excision or in aggressive looking lesions",
-   "Follow clinically for joint function and for any growth disturbance related to growth plate involvement or surgical violation of the physis",
-   "Consider chest imaging when the lesion behaves aggressively, since rare and usually indolent pulmonary implants have been described",
-   "Refer to an orthopaedic oncology multidisciplinary team from diagnosis for biopsy planning, surgical planning around the physis and joint, and molecular confirmation",
-   "Refer promptly for atypical features suggesting clear cell chondrosarcoma, for extensive growth plate or articular threat, for recurrence after curettage, or for pulmonary nodules on imaging"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chondroblastoma-pathway",
-   "title": "Chondroblastoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare benign cartilage-forming tumour that characteristically arises in the epiphysis or apophysis of a long bone in the skeletally immature",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aggressive features or rapid growth suggesting clear cell chondrosarcoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs demonstrating a well-defined lytic epiphyseal lesion with a sclerotic margin, CT to characterise matrix calcification and cortical integrity, MRI to assess marrow oedema, joint involvement and soft-tissue"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: This is a benign, locally aggressive lesion, so local control with preservation of the growth plate and joint surface is the goal, not systemic cancer therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing an epiphyseal chondroblastoma in a child with giant cell tumour of bone, which favours mature bone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chondroblastoma."
-  }
- ],
- "tables": [
-  {
-   "id": "chondroblastoma-matrix",
-   "title": "Chondroblastoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare benign cartilage-forming tumour that characteristically arises in the epiphysis or apophysis of a long bone in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Oncology",
+  "specialty": "Orthopaedic Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare benign cartilage-forming tumour that characteristically arises in the epiphysis or apophysis of a long bone in the skeletally immature",
+      "Common sites include the proximal humerus, distal femur and proximal tibia, and it typically presents in the second decade of life",
+      "Presents with chronic localised pain, often with an adjacent joint effusion and reduced range of movement",
+      "Radiographs show a well-defined lytic epiphyseal lesion, frequently with a thin sclerotic rim and internal matrix calcification",
+      "Histology shows chondroblasts with grooved nuclei, scattered osteoclast-type giant cells and a chicken-wire pattern of pericellular calcification",
+      "Most lesions harbour a characteristic H3F3B histone gene mutation, a useful diagnostic marker",
+      "Treatment is usually curettage with grafting of the cavity, with attention to protecting the adjacent growth plate and joint surface"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs demonstrating a well-defined lytic epiphyseal lesion with a sclerotic margin, CT to characterise matrix",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chondroblastoma is a benign neoplasm of immature cartilage-producing cells (chondroblasts) that arises in the secondary ossification centre, explaining its typical epiphyseal or apophyseal location in growing bone. The tumour is composed of sheets of chondroblasts with characteristic nuclear grooves, admixed osteoclast-like giant cells and a distinctive fine pericellular (chicken-wire) calcification of the chondroid matrix. Recurrent driver mutations in the histone gene H3F3B underpin its development and provide a diagnostic immunohistochemical and molecular signature. Although benign, the lesion can breach the growth plate or extend to the articular surface, and rare pulmonary implants have been reported.",
+    "additionalDifferentials": [
+      "Giant cell tumour of bone (usually skeletally mature)",
+      "Clear cell chondrosarcoma",
+      "Aneurysmal bone cyst",
+      "Osteomyelitis or Brodie abscess",
+      "Langerhans cell histiocytosis",
+      "Enchondroma"
     ],
-    [
-     "Primary Differentials",
-     "Giant cell tumour of bone (usually skeletally mature), Clear cell chondrosarcoma, Aneurysmal bone cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs demonstrating a well-defined lytic epiphyseal lesion with a sclerotic margin",
+      "CT to characterise matrix calcification and cortical integrity",
+      "MRI to assess marrow oedema, joint involvement and soft-tissue extension",
+      "Image-guided or open biopsy with histopathology",
+      "Immunohistochemistry and molecular testing for the H3F3B mutation",
+      "Chest imaging when atypical or aggressive behaviour raises concern for pulmonary spread"
     ],
-    [
-     "Management Strategy",
-     "This is a benign, locally aggressive lesion, so local control with preservation of the growth plate and joint surface is the",
-     "Core treatment modality"
+    "redFlags": [
+      "Aggressive features or rapid growth suggesting clear cell chondrosarcoma",
+      "Articular collapse or secondary joint damage",
+      "Extensive growth-plate involvement threatening future limb growth",
+      "Pulmonary nodules suggesting the rare benign pulmonary implants"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing an epiphyseal chondroblastoma in a child with giant cell tumour of bone, which favours mature bone",
-     "Prevent diagnostic or management error"
+    "prognosis": "With adequate curettage and grafting the prognosis is very good, though local recurrence can occur, particularly with incomplete removal or aggressive lesions. Malignant behaviour is exceptional, and rare pulmonary implants are usually indolent.",
+    "pitfalls": [
+      "Confusing an epiphyseal chondroblastoma in a child with giant cell tumour of bone, which favours mature bone",
+      "Overlooking clear cell chondrosarcoma in the differential of an epiphyseal cartilage lesion",
+      "Damaging the growth plate or articular surface during curettage",
+      "Attributing joint symptoms to primary arthropathy and missing the underlying lesion"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Soft Tissue and Bone",
+      "Standard orthopaedic oncology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "This is a benign, locally aggressive lesion, so local control with preservation of the growth plate and joint surface is the goal, not systemic cancer therapy",
+      "Primary treatment is intralesional curettage of the lesion followed by filling the cavity with bone graft or bone cement",
+      "Local adjuvants such as high speed burring, cryotherapy, or phenol can be applied to the curetted cavity to reduce recurrence risk",
+      "Radiofrequency ablation is a reasonable less invasive alternative for small, favourably located lesions",
+      "Surgical planning must protect the adjacent growth plate and articular cartilage given the risk of growth arrest or joint damage in skeletally immature patients",
+      "Wide resection is not first line for a benign lesion and is reserved for extensive, destructive, or repeatedly recurrent disease after curettage has failed",
+      "Local recurrence is managed with repeat curettage using the same principles and the same attention to growth plate and joint preservation",
+      "There is no established role for chemotherapy in ordinary chondroblastoma; systemic therapy is considered only for rare pulmonary implants or atypical aggressive behaviour and should prompt referral rather than empirical treatment",
+      "Radiotherapy has no established primary role given the benign nature of the tumour and the added long term risk of radiation near the growth plate in children",
+      "Monitor with surveillance imaging, plain radiographs supplemented by MRI as needed, to detect local recurrence, with closer follow up after incomplete excision or in aggressive looking lesions",
+      "Follow clinically for joint function and for any growth disturbance related to growth plate involvement or surgical violation of the physis",
+      "Consider chest imaging when the lesion behaves aggressively, since rare and usually indolent pulmonary implants have been described",
+      "Refer to an orthopaedic oncology multidisciplinary team from diagnosis for biopsy planning, surgical planning around the physis and joint, and molecular confirmation",
+      "Refer promptly for atypical features suggesting clear cell chondrosarcoma, for extensive growth plate or articular threat, for recurrence after curettage, or for pulmonary nodules on imaging"
     ]
-   ],
-   "caption": "Overview comparison matrix for chondroblastoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chondroblastoma-real-image",
-   "title": "Chondroblastoma: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "chondroblastoma-pathway",
+      "title": "Chondroblastoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare benign cartilage-forming tumour that characteristically arises in the epiphysis or apophysis of a long bone in the skeletally immature",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aggressive features or rapid growth suggesting clear cell chondrosarcoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs demonstrating a well-defined lytic epiphyseal lesion with a sclerotic margin, CT to characterise matrix calcification and cortical integrity, MRI to assess marrow oedema, joint involvement and soft-tissue"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: This is a benign, locally aggressive lesion, so local control with preservation of the growth plate and joint surface is the goal, not systemic cancer therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing an epiphyseal chondroblastoma in a child with giant cell tumour of bone, which favours mature bone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chondroblastoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chondroblastoma-matrix",
+      "title": "Chondroblastoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare benign cartilage-forming tumour that characteristically arises in the epiphysis or apophysis of a long bone in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs demonstrating a well-defined lytic epiphyseal lesion with a sclerotic margin, CT to characterise matrix",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Giant cell tumour of bone (usually skeletally mature), Clear cell chondrosarcoma, Aneurysmal bone cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "This is a benign, locally aggressive lesion, so local control with preservation of the growth plate and joint surface is the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing an epiphyseal chondroblastoma in a child with giant cell tumour of bone, which favours mature bone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chondroblastoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chondroblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Well-defined lytic epiphyseal lesion with a sclerotic margin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Matrix calcification and cortical integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Marrow oedema, joint involvement and soft-tissue extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with H3F3B testing",
+          "cells": [
+            {
+              "text": "Histology and the characteristic H3F3B mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Atypical or aggressive behaviour raising concern for pulmonary spread"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondroblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Giant cell tumour of bone",
+          "cells": [
+            {
+              "text": "Usually skeletally mature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clear cell chondrosarcoma",
+          "cells": [
+            {
+              "text": "Aggressive features or rapid growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondroblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intralesional curettage and graft",
+          "cells": [
+            {
+              "text": "Curettage, then filling the cavity with bone graft or bone cement"
+            },
+            {
+              "text": "Primary treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local adjuvants",
+          "cells": [
+            {
+              "text": "High-speed burring, cryotherapy or phenol applied to the cavity"
+            },
+            {
+              "text": "Reduces recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiofrequency ablation",
+          "cells": [
+            {
+              "text": "Less invasive option for small, favourably placed lesions"
+            },
+            {
+              "text": "Small lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth-plate protection",
+          "cells": [
+            {
+              "text": "Surgical planning to protect the physis and articular cartilage"
+            },
+            {
+              "text": "Skeletally immature patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide resection",
+          "cells": [
+            {
+              "text": "Reserved for extensive, destructive or recurrent disease after curettage fails"
+            },
+            {
+              "text": "Not first line for a benign lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Radiographs with MRI as needed; closer follow-up after incomplete excision"
+            },
+            {
+              "text": "Local recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic oncology referral",
+          "cells": [
+            {
+              "text": "Refer from diagnosis; promptly for atypical features or pulmonary nodules"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chondroblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Chondroblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chondroblastoma: chronic pain with lytic epiphyseal lesion in adolescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aggressive features, joint collapse, growth-plate or lung involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: orthopaedic oncology review for atypical or aggressive features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, CT, MRI and biopsy with H3F3B testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Benign epiphyseal lesion with H3F3B mutation confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intralesional curettage with bone graft or cement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check giant cell tumour of bone, clear cell chondrosarcoma and Brodie abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Local adjuvants such as high-speed burring, cryotherapy or phenol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radiofrequency ablation for small, favourably placed lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protect the growth plate and joint surface during surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Local control with surveillance; wide resection only if curettage fails",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

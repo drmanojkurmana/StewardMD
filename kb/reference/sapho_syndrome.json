@@ -1,172 +1,450 @@
 {
- "id": "sapho_syndrome",
- "name": "SAPHO syndrome",
- "aliases": [
-  "synovitis acne pustulosis hyperostosis osteitis syndrome",
-  "acne-associated spondyloarthropathy",
-  "chronic recurrent multifocal osteomyelitis with skin involvement"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by the pentad of synovitis, acne, pustulosis, hyperostosis and osteitis, though few patients show all features simultaneously",
-   "The anterior chest wall (sternoclavicular and sternocostoclavicular region) is the most characteristic site, producing painful bony swelling and hyperostosis",
-   "Palmoplantar pustulosis and severe acne (including acne fulminans and conglobata) are the typical dermatological associations, but skin disease may precede, follow or never accompany the bone disease",
-   "Regarded as part of the autoinflammatory spectrum and overlapping closely with chronic recurrent multifocal osteomyelitis in children",
-   "Bone lesions are sterile; cultures are negative and the disorder is not a true pyogenic infection",
-   "Bone scintigraphy classically shows the 'bull's head' sign of tracer uptake across the manubrium and both sternoclavicular joints",
-   "Management uses NSAIDs first-line, with bisphosphonates, conventional and biologic DMARDs (including TNF and IL-1 directed therapy) for refractory disease"
+  "id": "sapho_syndrome",
+  "name": "SAPHO syndrome",
+  "aliases": [
+    "synovitis acne pustulosis hyperostosis osteitis syndrome",
+    "acne-associated spondyloarthropathy",
+    "chronic recurrent multifocal osteomyelitis with skin involvement"
   ],
-  "pathophysiology": "SAPHO syndrome is considered a sterile autoinflammatory disorder in which innate immune dysregulation drives neutrophil-rich inflammation of bone, joints and skin. Aberrant activation of the innate immune system, with a role proposed for cutaneous commensal organisms such as Cutibacterium acnes acting as an immune trigger rather than a true infection, promotes release of pro-inflammatory cytokines including interleukin-1, interleukin-17, interleukin-23 and tumour necrosis factor. The result is osteitis with reactive new bone formation (hyperostosis), synovitis at adjacent joints, and neutrophilic skin lesions. It shares genetic and mechanistic features with the paediatric entity chronic recurrent multifocal osteomyelitis, and both are viewed as ends of one autoinflammatory sterile osteomyelitis spectrum.",
-  "additionalDifferentials": [
-   "Infective (pyogenic) osteomyelitis",
-   "Ankylosing spondylitis and other spondyloarthropathies",
-   "Psoriatic arthritis",
-   "Bone metastases or primary bone tumour",
-   "Paget disease of bone",
-   "Chronic recurrent multifocal osteomyelitis (paediatric overlap)"
-  ],
-  "additionalInvestigations": [
-   "Whole-body MRI or technetium bone scintigraphy to map multifocal osteitis and detect the anterior chest wall 'bull's head' pattern",
-   "Plain radiographs and CT of the anterior chest wall showing hyperostosis and sclerosis",
-   "Inflammatory markers (ESR, CRP), which are often mildly to moderately raised",
-   "Bone biopsy with culture to exclude infection and malignancy when the diagnosis is uncertain",
-   "Dermatological assessment for palmoplantar pustulosis and severe acne"
-  ],
-  "redFlags": [
-   "Features suggesting true infective osteomyelitis (fever, rigors, positive cultures, rapidly progressive destruction)",
-   "Bony destruction or a mass raising concern for malignancy requiring biopsy",
-   "Neurological compromise from spinal involvement or vertebral collapse",
-   "Vascular compression at the anterior chest wall (e.g. subclavian vein thrombosis)"
-  ],
-  "prognosis": "SAPHO syndrome typically follows a chronic relapsing-remitting course; most patients maintain function, but persistent anterior chest wall hyperostosis, spinal involvement and cutaneous flares can cause long-term pain and disability.",
-  "pitfalls": [
-   "Misdiagnosing sterile osteitis as pyogenic osteomyelitis and giving prolonged unnecessary antibiotics or surgery",
-   "Overlooking the diagnosis when skin disease is absent or separated in time from bone symptoms",
-   "Attributing anterior chest wall pain to cardiac disease and missing the characteristic bone lesions",
-   "Failing to recognise the overlap with paediatric chronic recurrent multifocal osteomyelitis"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Oxford Textbook of Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Non-steroidal anti-inflammatory drugs as first-line therapy for the bone, joint and anterior chest wall pain",
-   "Bisphosphonates to suppress the osteitis and hyperostosis, particularly for refractory bone pain",
-   "Conventional disease-modifying agents such as methotrexate, escalating to tumour necrosis factor inhibitors or interleukin-1 blockade for resistant disease",
-   "Dermatological treatment of the associated palmoplantar pustulosis and severe acne, including topical therapy and systemic retinoids",
-   "Trials of antimicrobial therapy directed at Cutibacterium acnes in selected cases, reflecting its proposed immune-triggering role",
-   "Whole-body MRI or bone scintigraphy with inflammatory markers to map disease and monitor activity, and bone biopsy to exclude infection or malignancy where uncertain",
-   "Rheumatology-led multidisciplinary care with dermatology input and physiotherapy to preserve function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sapho_syndrome-pathway",
-   "title": "SAPHO syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by the pentad of synovitis, acne, pustulosis, hyperostosis and osteitis, though few patients show all features simultaneously",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting true infective osteomyelitis (fever, rigors, positive cultures, rapidly progressive destruction)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Whole-body MRI or technetium bone scintigraphy to map multifocal osteitis and detect the anterior chest wall 'bull's head' pattern, Plain radiographs and CT of the anterior chest wall showing hyperostosis and sclerosis,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Non-steroidal anti-inflammatory drugs as first-line therapy for the bone, joint and anterior chest wall pain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing sterile osteitis as pyogenic osteomyelitis and giving prolonged unnecessary antibiotics or surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sapho syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "sapho_syndrome-matrix",
-   "title": "SAPHO syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by the pentad of synovitis, acne, pustulosis, hyperostosis and osteitis, though few patients show all features",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by the pentad of synovitis, acne, pustulosis, hyperostosis and osteitis, though few patients show all features simultaneously",
+      "The anterior chest wall (sternoclavicular and sternocostoclavicular region) is the most characteristic site, producing painful bony swelling and hyperostosis",
+      "Palmoplantar pustulosis and severe acne (including acne fulminans and conglobata) are the typical dermatological associations, but skin disease may precede, follow or never accompany the bone disease",
+      "Regarded as part of the autoinflammatory spectrum and overlapping closely with chronic recurrent multifocal osteomyelitis in children",
+      "Bone lesions are sterile; cultures are negative and the disorder is not a true pyogenic infection",
+      "Bone scintigraphy classically shows the 'bull's head' sign of tracer uptake across the manubrium and both sternoclavicular joints",
+      "Management uses NSAIDs first-line, with bisphosphonates, conventional and biologic DMARDs (including TNF and IL-1 directed therapy) for refractory disease"
     ],
-    [
-     "Key Investigations",
-     "Whole-body MRI or technetium bone scintigraphy to map multifocal osteitis and detect the anterior chest wall 'bull's head'",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SAPHO syndrome is considered a sterile autoinflammatory disorder in which innate immune dysregulation drives neutrophil-rich inflammation of bone, joints and skin. Aberrant activation of the innate immune system, with a role proposed for cutaneous commensal organisms such as Cutibacterium acnes acting as an immune trigger rather than a true infection, promotes release of pro-inflammatory cytokines including interleukin-1, interleukin-17, interleukin-23 and tumour necrosis factor. The result is osteitis with reactive new bone formation (hyperostosis), synovitis at adjacent joints, and neutrophilic skin lesions. It shares genetic and mechanistic features with the paediatric entity chronic recurrent multifocal osteomyelitis, and both are viewed as ends of one autoinflammatory sterile osteomyelitis spectrum.",
+    "additionalDifferentials": [
+      "Infective (pyogenic) osteomyelitis",
+      "Ankylosing spondylitis and other spondyloarthropathies",
+      "Psoriatic arthritis",
+      "Bone metastases or primary bone tumour",
+      "Paget disease of bone",
+      "Chronic recurrent multifocal osteomyelitis (paediatric overlap)"
     ],
-    [
-     "Primary Differentials",
-     "Infective (pyogenic) osteomyelitis, Ankylosing spondylitis and other spondyloarthropathies, Psoriatic arthritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Whole-body MRI or technetium bone scintigraphy to map multifocal osteitis and detect the anterior chest wall 'bull's head' pattern",
+      "Plain radiographs and CT of the anterior chest wall showing hyperostosis and sclerosis",
+      "Inflammatory markers (ESR, CRP), which are often mildly to moderately raised",
+      "Bone biopsy with culture to exclude infection and malignancy when the diagnosis is uncertain",
+      "Dermatological assessment for palmoplantar pustulosis and severe acne"
     ],
-    [
-     "Management Strategy",
-     "Non-steroidal anti-inflammatory drugs as first-line therapy for the bone, joint and anterior chest wall pain",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting true infective osteomyelitis (fever, rigors, positive cultures, rapidly progressive destruction)",
+      "Bony destruction or a mass raising concern for malignancy requiring biopsy",
+      "Neurological compromise from spinal involvement or vertebral collapse",
+      "Vascular compression at the anterior chest wall (e.g. subclavian vein thrombosis)"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing sterile osteitis as pyogenic osteomyelitis and giving prolonged unnecessary antibiotics or surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "SAPHO syndrome typically follows a chronic relapsing-remitting course; most patients maintain function, but persistent anterior chest wall hyperostosis, spinal involvement and cutaneous flares can cause long-term pain and disability.",
+    "pitfalls": [
+      "Misdiagnosing sterile osteitis as pyogenic osteomyelitis and giving prolonged unnecessary antibiotics or surgery",
+      "Overlooking the diagnosis when skin disease is absent or separated in time from bone symptoms",
+      "Attributing anterior chest wall pain to cardiac disease and missing the characteristic bone lesions",
+      "Failing to recognise the overlap with paediatric chronic recurrent multifocal osteomyelitis"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Oxford Textbook of Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Non-steroidal anti-inflammatory drugs as first-line therapy for the bone, joint and anterior chest wall pain",
+      "Bisphosphonates to suppress the osteitis and hyperostosis, particularly for refractory bone pain",
+      "Conventional disease-modifying agents such as methotrexate, escalating to tumour necrosis factor inhibitors or interleukin-1 blockade for resistant disease",
+      "Dermatological treatment of the associated palmoplantar pustulosis and severe acne, including topical therapy and systemic retinoids",
+      "Trials of antimicrobial therapy directed at Cutibacterium acnes in selected cases, reflecting its proposed immune-triggering role",
+      "Whole-body MRI or bone scintigraphy with inflammatory markers to map disease and monitor activity, and bone biopsy to exclude infection or malignancy where uncertain",
+      "Rheumatology-led multidisciplinary care with dermatology input and physiotherapy to preserve function"
     ]
-   ],
-   "caption": "Overview comparison matrix for sapho syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sapho-syndrome-real-image",
-   "title": "SAPHO syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "sapho_syndrome-pathway",
+      "title": "SAPHO syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by the pentad of synovitis, acne, pustulosis, hyperostosis and osteitis, though few patients show all features simultaneously",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting true infective osteomyelitis (fever, rigors, positive cultures, rapidly progressive destruction)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Whole-body MRI or technetium bone scintigraphy to map multifocal osteitis and detect the anterior chest wall 'bull's head' pattern, Plain radiographs and CT of the anterior chest wall showing hyperostosis and sclerosis,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Non-steroidal anti-inflammatory drugs as first-line therapy for the bone, joint and anterior chest wall pain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing sterile osteitis as pyogenic osteomyelitis and giving prolonged unnecessary antibiotics or surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sapho syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sapho_syndrome-matrix",
+      "title": "SAPHO syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by the pentad of synovitis, acne, pustulosis, hyperostosis and osteitis, though few patients show all features",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Whole-body MRI or technetium bone scintigraphy to map multifocal osteitis and detect the anterior chest wall 'bull's head'",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Infective (pyogenic) osteomyelitis, Ankylosing spondylitis and other spondyloarthropathies, Psoriatic arthritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Non-steroidal anti-inflammatory drugs as first-line therapy for the bone, joint and anterior chest wall pain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing sterile osteitis as pyogenic osteomyelitis and giving prolonged unnecessary antibiotics or surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sapho syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sapho_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-body MRI or bone scintigraphy",
+          "cells": [
+            {
+              "text": "Multifocal osteitis and the anterior chest wall bull's head pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest wall radiographs and CT",
+          "cells": [
+            {
+              "text": "Hyperostosis and sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Often mildly to moderately raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone biopsy with culture",
+          "cells": [
+            {
+              "text": "Excludes infection and malignancy when the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological assessment",
+          "cells": [
+            {
+              "text": "Palmoplantar pustulosis and severe acne"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sapho_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyogenic osteomyelitis",
+          "cells": [
+            {
+              "text": "Fever, rigors, positive cultures and rapidly progressive destruction; SAPHO osteitis is sterile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone metastasis or primary bone tumour",
+          "cells": [
+            {
+              "text": "Bony destruction or a mass needing biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sapho_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "First-line for bone, joint and anterior chest wall pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonates",
+          "cells": [
+            {
+              "text": "Suppress osteitis and hyperostosis, especially refractory bone pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DMARDs then biologics",
+          "cells": [
+            {
+              "text": "Methotrexate, escalating to TNF inhibitors or interleukin-1 blockade for resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin treatment",
+          "cells": [
+            {
+              "text": "Topical therapy and systemic retinoids for pustulosis and severe acne"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial trial",
+          "cells": [
+            {
+              "text": "Directed at Cutibacterium acnes in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disease mapping and monitoring",
+          "cells": [
+            {
+              "text": "Whole-body MRI or scintigraphy with inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Rheumatology-led, with dermatology and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sapho_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of SAPHO syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chest wall or bone pain with palmoplantar pustulosis or severe acne",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever with positive cultures, bone destruction or mass, or spinal cord compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy and culture for infection or tumour; urgent spinal or vascular review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-body MRI or bone scan, chest wall CT, ESR and CRP, skin review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sterile osteitis with hyperostosis and skin disease fit SAPHO?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteomyelitis, spondyloarthropathy, Paget disease, metastasis, CRMO",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs first-line for bone and chest wall pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bisphosphonates for refractory osteitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Methotrexate, then TNF or IL-1 blockade for resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat skin disease; rheumatology-led multidisciplinary care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic relapsing-remitting course; most patients keep function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

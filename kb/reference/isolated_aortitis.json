@@ -1,174 +1,472 @@
 {
- "id": "isolated_aortitis",
- "name": "Clinically isolated aortitis",
- "aliases": [
-  "idiopathic aortitis",
-  "isolated aortitis",
-  "non-infectious aortitis",
-  "clinically isolated aortitis (CIA)"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Vascular",
- "specialty": "Rheumatology / Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Kelley & Firestein's Textbook of Rheumatology / large-vessel vasculitis guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Often discovered incidentally when aortic tissue removed at aneurysm surgery shows inflammation without a preceding systemic diagnosis",
-   "Histology commonly demonstrates giant-cell or lymphoplasmacytic inflammation of the aortic wall",
-   "By definition there are no features of a defined systemic vasculitis or infection at presentation",
-   "The thoracic aorta, particularly the ascending segment, is the most frequent site",
-   "Aneurysm formation and dissection are the principal structural risks",
-   "A proportion of patients later declare a systemic large-vessel vasculitis such as giant-cell arteritis, warranting follow-up",
-   "Postoperative imaging surveillance is needed because disease may progress at other aortic segments"
+  "id": "isolated_aortitis",
+  "name": "Clinically isolated aortitis",
+  "aliases": [
+    "idiopathic aortitis",
+    "isolated aortitis",
+    "non-infectious aortitis",
+    "clinically isolated aortitis (CIA)"
   ],
-  "pathophysiology": "Clinically isolated aortitis is inflammation confined to the aortic wall without an identified systemic vasculitis or infection. Immune-mediated infiltration of the media and adventitia, frequently with giant cells and lymphoplasmacytic cells, damages elastic and smooth-muscle components of the wall. Loss of structural integrity weakens the aorta, predisposing to aneurysmal dilatation and dissection. Because it may represent a limited or early form of large-vessel vasculitis, some cases evolve into a recognised systemic disease over time.",
-  "additionalDifferentials": [
-   "Giant-cell arteritis with aortic involvement",
-   "Takayasu arteritis",
-   "IgG4-related aortitis",
-   "Infective (mycotic) aortitis",
-   "Behcet disease with vascular involvement",
-   "Atherosclerotic aortic aneurysm"
-  ],
-  "additionalInvestigations": [
-   "Cross-sectional aortic imaging with CT or MR angiography",
-   "Histology of resected aortic tissue with attention to giant cells and IgG4-positive plasma cells",
-   "Inflammatory markers (erythrocyte sedimentation rate and C-reactive protein)",
-   "Serum IgG4 to exclude an IgG4-related process",
-   "Screening for systemic large-vessel vasculitis including temporal artery assessment where indicated",
-   "PET imaging to assess extent of vascular inflammation"
-  ],
-  "redFlags": [
-   "Acute severe chest or back pain suggesting dissection or impending rupture",
-   "Rapid aneurysm enlargement on surveillance imaging",
-   "Systemic features heralding evolution to giant-cell or Takayasu arteritis",
-   "Aortic regurgitation from ascending aortic involvement"
-  ],
-  "prognosis": "With surgical repair of the affected segment and appropriate immunosuppression when active inflammation persists, outcomes are generally favourable, but ongoing surveillance is essential because new aneurysms and dissection can develop elsewhere in the aorta.",
-  "pitfalls": [
-   "Assuming resection is curative and abandoning imaging surveillance",
-   "Failing to check IgG4 and exclude an IgG4-related aortitis",
-   "Missing an underlying systemic large-vessel vasculitis",
-   "Overlooking infective aortitis before attributing inflammation to an idiopathic cause"
-  ],
-  "references": [
-   "Kelley & Firestein's Textbook of Rheumatology",
-   "Chapel Hill Consensus Conference vasculitis nomenclature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical repair of the affected aortic segment when aneurysmal or dissecting, as is often identified at aneurysm surgery",
-   "Glucocorticoid therapy when active inflammation persists, with steroid-sparing immunosuppression for relapsing or steroid-dependent disease",
-   "Serial cross-sectional aortic imaging with CT or MR angiography to detect new aneurysm formation or dissection elsewhere in the aorta",
-   "Monitor inflammatory markers, erythrocyte sedimentation rate and C-reactive protein, to track disease activity",
-   "Screen for and monitor evolution into a systemic large-vessel vasculitis such as giant-cell arteritis, and exclude an IgG4-related process",
-   "Cardiovascular risk-factor control and blood-pressure management to reduce aortic wall stress",
-   "Multidisciplinary follow-up with rheumatology and vascular or cardiothoracic surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "isolated_aortitis-pathway",
-   "title": "Clinically isolated aortitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Often discovered incidentally when aortic tissue removed at aneurysm surgery shows inflammation without a preceding systemic diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe chest or back pain suggesting dissection or impending rupture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cross-sectional aortic imaging with CT or MR angiography, Histology of resected aortic tissue with attention to giant cells and IgG4-positive plasma cells, Inflammatory markers (erythrocyte sedimentation rate and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical repair of the affected aortic segment when aneurysmal or dissecting, as is often identified at aneurysm surgery"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming resection is curative and abandoning imaging surveillance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of clinically isolated aortitis."
-  }
- ],
- "tables": [
-  {
-   "id": "isolated_aortitis-matrix",
-   "title": "Clinically isolated aortitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Often discovered incidentally when aortic tissue removed at aneurysm surgery shows inflammation without a preceding systemic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Vascular",
+  "specialty": "Rheumatology / Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kelley & Firestein's Textbook of Rheumatology / large-vessel vasculitis guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Often discovered incidentally when aortic tissue removed at aneurysm surgery shows inflammation without a preceding systemic diagnosis",
+      "Histology commonly demonstrates giant-cell or lymphoplasmacytic inflammation of the aortic wall",
+      "By definition there are no features of a defined systemic vasculitis or infection at presentation",
+      "The thoracic aorta, particularly the ascending segment, is the most frequent site",
+      "Aneurysm formation and dissection are the principal structural risks",
+      "A proportion of patients later declare a systemic large-vessel vasculitis such as giant-cell arteritis, warranting follow-up",
+      "Postoperative imaging surveillance is needed because disease may progress at other aortic segments"
     ],
-    [
-     "Key Investigations",
-     "Cross-sectional aortic imaging with CT or MR angiography, Histology of resected aortic tissue with attention to giant cells and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Clinically isolated aortitis is inflammation confined to the aortic wall without an identified systemic vasculitis or infection. Immune-mediated infiltration of the media and adventitia, frequently with giant cells and lymphoplasmacytic cells, damages elastic and smooth-muscle components of the wall. Loss of structural integrity weakens the aorta, predisposing to aneurysmal dilatation and dissection. Because it may represent a limited or early form of large-vessel vasculitis, some cases evolve into a recognised systemic disease over time.",
+    "additionalDifferentials": [
+      "Giant-cell arteritis with aortic involvement",
+      "Takayasu arteritis",
+      "IgG4-related aortitis",
+      "Infective (mycotic) aortitis",
+      "Behcet disease with vascular involvement",
+      "Atherosclerotic aortic aneurysm"
     ],
-    [
-     "Primary Differentials",
-     "Giant-cell arteritis with aortic involvement, Takayasu arteritis, IgG4-related aortitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cross-sectional aortic imaging with CT or MR angiography",
+      "Histology of resected aortic tissue with attention to giant cells and IgG4-positive plasma cells",
+      "Inflammatory markers (erythrocyte sedimentation rate and C-reactive protein)",
+      "Serum IgG4 to exclude an IgG4-related process",
+      "Screening for systemic large-vessel vasculitis including temporal artery assessment where indicated",
+      "PET imaging to assess extent of vascular inflammation"
     ],
-    [
-     "Management Strategy",
-     "Surgical repair of the affected aortic segment when aneurysmal or dissecting, as is often identified at aneurysm surgery",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe chest or back pain suggesting dissection or impending rupture",
+      "Rapid aneurysm enlargement on surveillance imaging",
+      "Systemic features heralding evolution to giant-cell or Takayasu arteritis",
+      "Aortic regurgitation from ascending aortic involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming resection is curative and abandoning imaging surveillance",
-     "Prevent diagnostic or management error"
+    "prognosis": "With surgical repair of the affected segment and appropriate immunosuppression when active inflammation persists, outcomes are generally favourable, but ongoing surveillance is essential because new aneurysms and dissection can develop elsewhere in the aorta.",
+    "pitfalls": [
+      "Assuming resection is curative and abandoning imaging surveillance",
+      "Failing to check IgG4 and exclude an IgG4-related aortitis",
+      "Missing an underlying systemic large-vessel vasculitis",
+      "Overlooking infective aortitis before attributing inflammation to an idiopathic cause"
+    ],
+    "references": [
+      "Kelley & Firestein's Textbook of Rheumatology",
+      "Chapel Hill Consensus Conference vasculitis nomenclature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical repair of the affected aortic segment when aneurysmal or dissecting, as is often identified at aneurysm surgery",
+      "Glucocorticoid therapy when active inflammation persists, with steroid-sparing immunosuppression for relapsing or steroid-dependent disease",
+      "Serial cross-sectional aortic imaging with CT or MR angiography to detect new aneurysm formation or dissection elsewhere in the aorta",
+      "Monitor inflammatory markers, erythrocyte sedimentation rate and C-reactive protein, to track disease activity",
+      "Screen for and monitor evolution into a systemic large-vessel vasculitis such as giant-cell arteritis, and exclude an IgG4-related process",
+      "Cardiovascular risk-factor control and blood-pressure management to reduce aortic wall stress",
+      "Multidisciplinary follow-up with rheumatology and vascular or cardiothoracic surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for clinically isolated aortitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "isolated-aortitis-real-image",
-   "title": "Clinically isolated aortitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "isolated_aortitis-pathway",
+      "title": "Clinically isolated aortitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Often discovered incidentally when aortic tissue removed at aneurysm surgery shows inflammation without a preceding systemic diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe chest or back pain suggesting dissection or impending rupture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cross-sectional aortic imaging with CT or MR angiography, Histology of resected aortic tissue with attention to giant cells and IgG4-positive plasma cells, Inflammatory markers (erythrocyte sedimentation rate and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical repair of the affected aortic segment when aneurysmal or dissecting, as is often identified at aneurysm surgery"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming resection is curative and abandoning imaging surveillance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of clinically isolated aortitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "isolated_aortitis-matrix",
+      "title": "Clinically isolated aortitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Often discovered incidentally when aortic tissue removed at aneurysm surgery shows inflammation without a preceding systemic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cross-sectional aortic imaging with CT or MR angiography, Histology of resected aortic tissue with attention to giant cells and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Giant-cell arteritis with aortic involvement, Takayasu arteritis, IgG4-related aortitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical repair of the affected aortic segment when aneurysmal or dissecting, as is often identified at aneurysm surgery",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming resection is curative and abandoning imaging surveillance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for clinically isolated aortitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / large-vessel vasculitis guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "isolated_aortitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MR angiography of the aorta",
+          "cells": [
+            {
+              "text": "Aortic wall and new aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of resected aortic tissue",
+          "cells": [
+            {
+              "text": "Giant cells and IgG4-positive plasma cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and C-reactive protein",
+          "cells": [
+            {
+              "text": "Inflammatory activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgG4",
+          "cells": [
+            {
+              "text": "IgG4-related process excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for systemic large-vessel vasculitis",
+          "cells": [
+            {
+              "text": "Temporal artery assessment where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET imaging",
+          "cells": [
+            {
+              "text": "Extent of vascular inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isolated_aortitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Giant-cell arteritis with aortic involvement",
+          "cells": [
+            {
+              "text": "Evolves to systemic large-vessel vasculitis; temporal artery screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takayasu arteritis",
+          "cells": [
+            {
+              "text": "Systemic evolution of aortic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related aortitis",
+          "cells": [
+            {
+              "text": "Raised IgG4 and IgG4-positive plasma cells on histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isolated_aortitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Affected aortic segment when aneurysmal or dissecting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Active inflammation; steroid-sparing immunosuppression for relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "CT or MR angiography to detect new aneurysm or dissection elsewhere"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity markers",
+          "cells": [
+            {
+              "text": "ESR and C-reactive protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic screen",
+          "cells": [
+            {
+              "text": "Monitor for evolution into systemic vasculitis; exclude IgG4-related process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk control",
+          "cells": [
+            {
+              "text": "Cardiovascular risk factors and blood pressure to reduce aortic wall stress"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "isolated_aortitis-dx-mgmt",
+      "title": "Diagnosis and management of Clinically isolated aortitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Aortic wall inflammation at aneurysm surgery or on imaging; no systemic vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute chest or back pain, rapid enlargement, aortic regurgitation or systemic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Vascular surgery review for dissection or rupture; assess systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MR angiography, histology, ESR, CRP, IgG4, temporal artery screen, PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Isolated aortic inflammation with systemic disease, IgG4 and infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the systemic vasculitis, IgG4 disease or infection found",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical repair when aneurysmal or dissecting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Glucocorticoids for active inflammation; steroid-sparing agents if relapsing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial CT or MR angiography of the whole aorta",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor ESR and CRP for activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardiovascular risk control and blood pressure management",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Repair as needed; long-term imaging surveillance for new disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

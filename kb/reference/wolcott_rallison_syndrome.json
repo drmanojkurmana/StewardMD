@@ -1,175 +1,388 @@
 {
- "id": "wolcott_rallison_syndrome",
- "name": "Wolcott-Rallison syndrome",
- "aliases": [
-  "WRS",
-  "EIF2AK3-related neonatal diabetes",
-  "Multiple epiphyseal dysplasia with early-onset diabetes"
- ],
- "class": "non_infective",
- "system": "Endocrine / Monogenic",
- "specialty": "Paediatric endocrinology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Monogenic diabetes references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The syndrome is autosomal recessive, caused by biallelic mutations in EIF2AK3, which encodes the endoplasmic reticulum stress kinase PERK.",
-   "The classic triad is early-onset permanent diabetes, multiple epiphyseal (spondyloepiphyseal) dysplasia, and recurrent episodes of acute liver dysfunction.",
-   "It is the commonest cause of permanent neonatal or early-infancy diabetes in consanguineous populations.",
-   "Diabetes usually appears first, with skeletal dysplasia and growth failure becoming apparent through early childhood.",
-   "Episodic acute liver failure, frequently precipitated by intercurrent infection, is life-threatening and may cause sudden deterioration.",
-   "Additional features can include renal dysfunction, recurrent infections, exocrine pancreatic insufficiency, and neurodevelopmental impairment.",
-   "Unlike potassium-channel neonatal diabetes, the beta-cell defect is not sulfonylurea-responsive and insulin therapy is required."
+  "id": "wolcott_rallison_syndrome",
+  "name": "Wolcott-Rallison syndrome",
+  "aliases": [
+    "WRS",
+    "EIF2AK3-related neonatal diabetes",
+    "Multiple epiphyseal dysplasia with early-onset diabetes"
   ],
-  "pathophysiology": "Wolcott-Rallison syndrome results from loss of function of PERK, an endoplasmic reticulum transmembrane kinase encoded by EIF2AK3 that is central to the unfolded protein response. When misfolded proteins accumulate, PERK phosphorylates the translation initiation factor eIF2-alpha, transiently attenuating protein synthesis to relieve endoplasmic reticulum stress. Cells with a heavy secretory burden, notably pancreatic beta cells, hepatocytes and osteoblasts, depend on this protective pathway; when it fails, unresolved endoplasmic reticulum stress drives apoptosis. Beta-cell loss produces early permanent insulin-deficient diabetes, osteoblast dysfunction underlies the multiple epiphyseal and spondyloepiphyseal dysplasia with disproportionate growth failure, and vulnerable hepatocytes give rise to episodic acute liver failure that is often unmasked by the metabolic demands of infection. The same broad secretory vulnerability accounts for the variable renal, exocrine pancreatic, haematological and neurological involvement that makes this a true multisystem disorder rather than isolated diabetes.",
-  "additionalDifferentials": [
-   "Other causes of permanent neonatal diabetes (KCNJ11, ABCC8, INS)",
-   "IPEX syndrome with autoimmune enteropathy and early diabetes",
-   "Mitochondrial disorders with diabetes and multisystem involvement",
-   "Other skeletal dysplasias with epiphyseal changes unrelated to diabetes",
-   "Alternative genetic and metabolic causes of paediatric acute liver failure",
-   "Syndromic pancreatic hypoplasia or agenesis"
-  ],
-  "additionalInvestigations": [
-   "EIF2AK3 genetic testing to confirm the diagnosis",
-   "Blood glucose with C-peptide and negative islet autoantibodies",
-   "Liver function tests and coagulation profile, monitored closely during illness",
-   "Skeletal survey demonstrating multiple epiphyseal or spondyloepiphyseal dysplasia",
-   "Renal function assessment and urinalysis",
-   "Exocrine pancreatic function testing where malabsorption is suspected"
-  ],
-  "redFlags": [
-   "Acute liver failure with coagulopathy, hypoglycaemia or encephalopathy, often during infection",
-   "Rapid clinical deterioration or sudden collapse during an intercurrent illness",
-   "Acute kidney injury superimposed on chronic renal involvement",
-   "Sepsis in a child with recurrent infections and multisystem fragility"
-  ],
-  "prognosis": "The prognosis is guarded, dominated by recurrent hepatic and renal crises that can be fatal in early childhood, particularly during intercurrent infection. Meticulous metabolic control, aggressive management of illness and multidisciplinary surveillance improve outcomes, but life-limiting complications remain common.",
-  "pitfalls": [
-   "Attributing the diabetes to type 1 disease and missing the underlying syndrome and its recurrence risk.",
-   "Underestimating the speed and severity of infection-triggered acute liver failure.",
-   "Failing to anticipate multisystem involvement beyond diabetes and skeletal disease.",
-   "Using potentially hepatotoxic agents without regard to the fragile liver.",
-   "Overlooking consanguinity as a clue to a recessive syndromic diagnosis."
-  ],
-  "references": [
-   "Paediatric endocrinology reference texts",
-   "Clinical genetics reference resources on recessive multisystem disorders",
-   "International consensus guidance on monogenic and neonatal diabetes"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong insulin replacement for the permanent, non-autoimmune insulin-deficient diabetes that typically presents in neonatal life or early infancy",
-   "Anticipatory intensive management of intercurrent illness with close monitoring of liver function and coagulation, as infection frequently precipitates life-threatening acute liver failure",
-   "Supportive hepatic care during episodic acute liver dysfunction, with liver transplantation considered for recurrent or fulminant failure",
-   "Orthopaedic and physiotherapy management of the spondyloepiphyseal dysplasia and disproportionate growth failure",
-   "Pancreatic enzyme replacement and nutritional support where exocrine pancreatic insufficiency and malabsorption occur, with monitoring of renal function",
-   "Multidisciplinary coordination across paediatric endocrinology, hepatology, orthopaedics and clinical genetics",
-   "Genetic counselling for this autosomal recessive disorder with family screening, and a clear sick-day and emergency plan for rapid deterioration"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "wolcott_rallison_syndrome-pathway",
-   "title": "Wolcott-Rallison syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The syndrome is autosomal recessive, caused by biallelic mutations in EIF2AK3, which encodes the endoplasmic reticulum stress kinase PERK.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute liver failure with coagulopathy, hypoglycaemia or encephalopathy, often during infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: EIF2AK3 genetic testing to confirm the diagnosis, Blood glucose with C-peptide and negative islet autoantibodies, Liver function tests and coagulation profile, monitored closely during illness"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong insulin replacement for the permanent, non-autoimmune insulin-deficient diabetes that typically presents in neonatal life or early infancy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the diabetes to type 1 disease and missing the underlying syndrome and its recurrence risk."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of wolcott-rallison syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "wolcott_rallison_syndrome-matrix",
-   "title": "Wolcott-Rallison syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The syndrome is autosomal recessive, caused by biallelic mutations in EIF2AK3, which encodes the endoplasmic reticulum stress",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Monogenic",
+  "specialty": "Paediatric endocrinology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Monogenic diabetes references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The syndrome is autosomal recessive, caused by biallelic mutations in EIF2AK3, which encodes the endoplasmic reticulum stress kinase PERK.",
+      "The classic triad is early-onset permanent diabetes, multiple epiphyseal (spondyloepiphyseal) dysplasia, and recurrent episodes of acute liver dysfunction.",
+      "It is the commonest cause of permanent neonatal or early-infancy diabetes in consanguineous populations.",
+      "Diabetes usually appears first, with skeletal dysplasia and growth failure becoming apparent through early childhood.",
+      "Episodic acute liver failure, frequently precipitated by intercurrent infection, is life-threatening and may cause sudden deterioration.",
+      "Additional features can include renal dysfunction, recurrent infections, exocrine pancreatic insufficiency, and neurodevelopmental impairment.",
+      "Unlike potassium-channel neonatal diabetes, the beta-cell defect is not sulfonylurea-responsive and insulin therapy is required."
     ],
-    [
-     "Key Investigations",
-     "EIF2AK3 genetic testing to confirm the diagnosis, Blood glucose with C-peptide and negative islet autoantibodies, Liver function",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Wolcott-Rallison syndrome results from loss of function of PERK, an endoplasmic reticulum transmembrane kinase encoded by EIF2AK3 that is central to the unfolded protein response. When misfolded proteins accumulate, PERK phosphorylates the translation initiation factor eIF2-alpha, transiently attenuating protein synthesis to relieve endoplasmic reticulum stress. Cells with a heavy secretory burden, notably pancreatic beta cells, hepatocytes and osteoblasts, depend on this protective pathway; when it fails, unresolved endoplasmic reticulum stress drives apoptosis. Beta-cell loss produces early permanent insulin-deficient diabetes, osteoblast dysfunction underlies the multiple epiphyseal and spondyloepiphyseal dysplasia with disproportionate growth failure, and vulnerable hepatocytes give rise to episodic acute liver failure that is often unmasked by the metabolic demands of infection. The same broad secretory vulnerability accounts for the variable renal, exocrine pancreatic, haematological and neurological involvement that makes this a true multisystem disorder rather than isolated diabetes.",
+    "additionalDifferentials": [
+      "Other causes of permanent neonatal diabetes (KCNJ11, ABCC8, INS)",
+      "IPEX syndrome with autoimmune enteropathy and early diabetes",
+      "Mitochondrial disorders with diabetes and multisystem involvement",
+      "Other skeletal dysplasias with epiphyseal changes unrelated to diabetes",
+      "Alternative genetic and metabolic causes of paediatric acute liver failure",
+      "Syndromic pancreatic hypoplasia or agenesis"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of permanent neonatal diabetes (KCNJ11, ABCC8, INS), IPEX syndrome with autoimmune enteropathy and early diabetes,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "EIF2AK3 genetic testing to confirm the diagnosis",
+      "Blood glucose with C-peptide and negative islet autoantibodies",
+      "Liver function tests and coagulation profile, monitored closely during illness",
+      "Skeletal survey demonstrating multiple epiphyseal or spondyloepiphyseal dysplasia",
+      "Renal function assessment and urinalysis",
+      "Exocrine pancreatic function testing where malabsorption is suspected"
     ],
-    [
-     "Management Strategy",
-     "Lifelong insulin replacement for the permanent, non-autoimmune insulin-deficient diabetes that typically presents in neonatal",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute liver failure with coagulopathy, hypoglycaemia or encephalopathy, often during infection",
+      "Rapid clinical deterioration or sudden collapse during an intercurrent illness",
+      "Acute kidney injury superimposed on chronic renal involvement",
+      "Sepsis in a child with recurrent infections and multisystem fragility"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the diabetes to type 1 disease and missing the underlying syndrome and its recurrence risk.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is guarded, dominated by recurrent hepatic and renal crises that can be fatal in early childhood, particularly during intercurrent infection. Meticulous metabolic control, aggressive management of illness and multidisciplinary surveillance improve outcomes, but life-limiting complications remain common.",
+    "pitfalls": [
+      "Attributing the diabetes to type 1 disease and missing the underlying syndrome and its recurrence risk.",
+      "Underestimating the speed and severity of infection-triggered acute liver failure.",
+      "Failing to anticipate multisystem involvement beyond diabetes and skeletal disease.",
+      "Using potentially hepatotoxic agents without regard to the fragile liver.",
+      "Overlooking consanguinity as a clue to a recessive syndromic diagnosis."
+    ],
+    "references": [
+      "Paediatric endocrinology reference texts",
+      "Clinical genetics reference resources on recessive multisystem disorders",
+      "International consensus guidance on monogenic and neonatal diabetes"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong insulin replacement for the permanent, non-autoimmune insulin-deficient diabetes that typically presents in neonatal life or early infancy",
+      "Anticipatory intensive management of intercurrent illness with close monitoring of liver function and coagulation, as infection frequently precipitates life-threatening acute liver failure",
+      "Supportive hepatic care during episodic acute liver dysfunction, with liver transplantation considered for recurrent or fulminant failure",
+      "Orthopaedic and physiotherapy management of the spondyloepiphyseal dysplasia and disproportionate growth failure",
+      "Pancreatic enzyme replacement and nutritional support where exocrine pancreatic insufficiency and malabsorption occur, with monitoring of renal function",
+      "Multidisciplinary coordination across paediatric endocrinology, hepatology, orthopaedics and clinical genetics",
+      "Genetic counselling for this autosomal recessive disorder with family screening, and a clear sick-day and emergency plan for rapid deterioration"
     ]
-   ],
-   "caption": "Overview comparison matrix for wolcott-rallison syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "wolcott-rallison-syndrome-real-image",
-   "title": "Wolcott-Rallison syndrome: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "wolcott_rallison_syndrome-pathway",
+      "title": "Wolcott-Rallison syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The syndrome is autosomal recessive, caused by biallelic mutations in EIF2AK3, which encodes the endoplasmic reticulum stress kinase PERK.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute liver failure with coagulopathy, hypoglycaemia or encephalopathy, often during infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: EIF2AK3 genetic testing to confirm the diagnosis, Blood glucose with C-peptide and negative islet autoantibodies, Liver function tests and coagulation profile, monitored closely during illness"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong insulin replacement for the permanent, non-autoimmune insulin-deficient diabetes that typically presents in neonatal life or early infancy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the diabetes to type 1 disease and missing the underlying syndrome and its recurrence risk."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of wolcott-rallison syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "wolcott_rallison_syndrome-matrix",
+      "title": "Wolcott-Rallison syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The syndrome is autosomal recessive, caused by biallelic mutations in EIF2AK3, which encodes the endoplasmic reticulum stress",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "EIF2AK3 genetic testing to confirm the diagnosis, Blood glucose with C-peptide and negative islet autoantibodies, Liver function",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of permanent neonatal diabetes (KCNJ11, ABCC8, INS), IPEX syndrome with autoimmune enteropathy and early diabetes,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong insulin replacement for the permanent, non-autoimmune insulin-deficient diabetes that typically presents in neonatal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the diabetes to type 1 disease and missing the underlying syndrome and its recurrence risk.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for wolcott-rallison syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Monogenic diabetes references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wolcott_rallison_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EIF2AK3 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose with C-peptide and islet autoantibodies",
+          "cells": [
+            {
+              "text": "Insulin deficiency with negative autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wolcott_rallison_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other causes of permanent neonatal diabetes",
+          "cells": [
+            {
+              "text": "KCNJ11, ABCC8 or INS variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IPEX syndrome",
+          "cells": [
+            {
+              "text": "Autoimmune enteropathy and early diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 1 diabetes",
+          "cells": [
+            {
+              "text": "Negative islet autoantibodies separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wolcott_rallison_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong insulin replacement",
+          "cells": [
+            {
+              "text": "Permanent, non-autoimmune insulin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for liver and infection",
+          "cells": [
+            {
+              "text": "Recurrence during infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wolcott_rallison_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Wolcott-Rallison syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Wolcott-Rallison: neonatal insulin-deficient diabetes with liver crises",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute liver failure, coagulopathy or hypoglycaemia during infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of liver failure, hypoglycaemia or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EIF2AK3 testing, glucose with C-peptide, islet autoantibodies, liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does EIF2AK3 testing confirm biallelic variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other causes of permanent neonatal diabetes or IPEX",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong insulin replacement for insulin deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor liver function and manage decompensation during infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid attributing diabetes to type 1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Lifelong insulin need; recurrent decompensation with infection is a risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,172 +1,229 @@
 {
- "id": "bone_island",
- "name": "Bone island",
- "aliases": [
-  "Enostosis",
-  "Solitary enostosis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Orthopaedics / Musculoskeletal radiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Greenspan, Orthopedic Imaging: A Practical Approach",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A focus of compact cortical bone within the cancellous medullary bone, most often an incidental finding in the pelvis, proximal femur and other long bones.",
-   "The hallmark radiographic feature is a homogeneously dense sclerotic focus with radiating spiculated thorny or brush-border margins that blend into the surrounding trabeculae.",
-   "The lesion is typically asymptomatic and stable, although slow growth can occur over years.",
-   "Bone scintigraphy usually shows little or no increased uptake, which helps distinguish it from osteoblastic metastasis that is typically intensely avid, though large or growing islands may show mild uptake.",
-   "CT attenuation is very high, often in the range of dense cortical bone, which helps separate it from lower-attenuation sclerotic metastases.",
-   "Multiple bone islands define osteopoikilosis, an autosomal dominant condition caused by LEMD3 mutations that may occur with the skin lesions of Buschke-Ollendorff syndrome (dermatofibrosis lenticularis disseminata).",
-   "A lesion larger than about 2 cm is termed a giant bone island; slow growth is acceptable but marked or rapid enlargement warrants scrutiny.",
-   "No treatment is required; the key clinical value is confident recognition to avoid unnecessary biopsy or oncological work-up."
+  "id": "bone_island",
+  "name": "Bone island",
+  "aliases": [
+    "Enostosis",
+    "Solitary enostosis"
   ],
-  "pathophysiology": "A bone island, or enostosis, is a benign developmental hamartomatous focus of mature compact (lamellar) bone situated within the spongiosa. It is thought to result from a localised failure of osteoclastic resorption during endochondral ossification and remodelling, leaving an island of dense cortical-type bone that maintains continuity with the surrounding trabeculae through its characteristic radiating bony spicules. Histologically it consists of normal lamellar bone with Haversian systems, and it possesses no malignant potential. When multiple and symmetrically distributed, particularly in a periarticular distribution, the lesions represent osteopoikilosis, linked to loss-of-function mutations in the LEMD3 gene.",
-  "additionalDifferentials": [
-   "Osteoblastic metastasis (notably prostate and breast carcinoma)",
-   "Osteoid osteoma (with a lucent nidus)",
-   "Osteoblastoma",
-   "Low-grade or sclerosing osteosarcoma",
-   "Osteopoikilosis when lesions are multiple",
-   "Healed or sclerotic phase of a prior benign lesion"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs demonstrating a dense focus with radiating spiculated margins",
-   "CT to document very high attenuation approaching that of cortical bone",
-   "Bone scintigraphy to assess for the intense uptake that would favour metastasis",
-   "Comparison with prior imaging to confirm stability or characterise growth",
-   "MRI in selected uncertain cases, where the lesion is low signal on all sequences",
-   "Correlation with tumour markers and primary tumour history when metastasis is a concern"
-  ],
-  "redFlags": [
-   "Significant interval growth, particularly more than about 1 cm per year",
-   "Associated lucency, cortical destruction or a soft-tissue mass",
-   "Intense uptake on bone scintigraphy with a known primary malignancy or rising tumour markers",
-   "New localised pain attributable to the lesion"
-  ],
-  "prognosis": "The prognosis is excellent; the bone island is entirely benign with no malignant potential and requires only recognition rather than treatment.",
-  "pitfalls": [
-   "Misinterpreting a bone island as an osteoblastic metastasis, or dismissing a true metastasis as a bone island",
-   "Proceeding to unnecessary biopsy of a radiographically classic lesion",
-   "Failing to act on documented marked interval growth",
-   "Overlooking the pattern of osteopoikilosis and its familial and cutaneous associations"
-  ],
-  "references": [
-   "Greenspan, Orthopedic Imaging: A Practical Approach",
-   "Resnick, Diagnosis of Bone and Joint Disorders",
-   "WHO Classification of Tumours of Soft Tissue and Bone (current edition)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No treatment is required, as the lesion is entirely benign with no malignant potential and management is recognition and reassurance",
-   "Confirm the diagnosis radiologically by the dense sclerotic focus with radiating spiculated margins and very high CT attenuation approaching cortical bone",
-   "Use bone scintigraphy and comparison with prior imaging to distinguish it from osteoblastic metastasis, avoiding unnecessary biopsy",
-   "Interval follow-up imaging only where the lesion is large, growing or diagnostically uncertain, to document stability",
-   "When multiple islands indicate osteopoikilosis, consider LEMD3-related Buschke-Ollendorff syndrome with dermatological review and genetic counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bone_island-pathway",
-   "title": "Bone island: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A focus of compact cortical bone within the cancellous medullary bone, most often an incidental finding in the pelvis, proximal femur and other long bones.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant interval growth, particularly more than about 1 cm per year",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs demonstrating a dense focus with radiating spiculated margins, CT to document very high attenuation approaching that of cortical bone, Bone scintigraphy to assess for the intense uptake that would favour"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No treatment is required, as the lesion is entirely benign with no malignant potential and management is recognition and reassurance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting a bone island as an osteoblastic metastasis, or dismissing a true metastasis as a bone island"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bone island."
-  }
- ],
- "tables": [
-  {
-   "id": "bone_island-matrix",
-   "title": "Bone island: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A focus of compact cortical bone within the cancellous medullary bone, most often an incidental finding in the pelvis, proximal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Orthopaedics / Musculoskeletal radiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Greenspan, Orthopedic Imaging: A Practical Approach",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A focus of compact cortical bone within the cancellous medullary bone, most often an incidental finding in the pelvis, proximal femur and other long bones.",
+      "The hallmark radiographic feature is a homogeneously dense sclerotic focus with radiating spiculated thorny or brush-border margins that blend into the surrounding trabeculae.",
+      "The lesion is typically asymptomatic and stable, although slow growth can occur over years.",
+      "Bone scintigraphy usually shows little or no increased uptake, which helps distinguish it from osteoblastic metastasis that is typically intensely avid, though large or growing islands may show mild uptake.",
+      "CT attenuation is very high, often in the range of dense cortical bone, which helps separate it from lower-attenuation sclerotic metastases.",
+      "Multiple bone islands define osteopoikilosis, an autosomal dominant condition caused by LEMD3 mutations that may occur with the skin lesions of Buschke-Ollendorff syndrome (dermatofibrosis lenticularis disseminata).",
+      "A lesion larger than about 2 cm is termed a giant bone island; slow growth is acceptable but marked or rapid enlargement warrants scrutiny.",
+      "No treatment is required; the key clinical value is confident recognition to avoid unnecessary biopsy or oncological work-up."
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs demonstrating a dense focus with radiating spiculated margins, CT to document very high attenuation approaching",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A bone island, or enostosis, is a benign developmental hamartomatous focus of mature compact (lamellar) bone situated within the spongiosa. It is thought to result from a localised failure of osteoclastic resorption during endochondral ossification and remodelling, leaving an island of dense cortical-type bone that maintains continuity with the surrounding trabeculae through its characteristic radiating bony spicules. Histologically it consists of normal lamellar bone with Haversian systems, and it possesses no malignant potential. When multiple and symmetrically distributed, particularly in a periarticular distribution, the lesions represent osteopoikilosis, linked to loss-of-function mutations in the LEMD3 gene.",
+    "additionalDifferentials": [
+      "Osteoblastic metastasis (notably prostate and breast carcinoma)",
+      "Osteoid osteoma (with a lucent nidus)",
+      "Osteoblastoma",
+      "Low-grade or sclerosing osteosarcoma",
+      "Osteopoikilosis when lesions are multiple",
+      "Healed or sclerotic phase of a prior benign lesion"
     ],
-    [
-     "Primary Differentials",
-     "Osteoblastic metastasis (notably prostate and breast carcinoma), Osteoid osteoma (with a lucent nidus), Osteoblastoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs demonstrating a dense focus with radiating spiculated margins",
+      "CT to document very high attenuation approaching that of cortical bone",
+      "Bone scintigraphy to assess for the intense uptake that would favour metastasis",
+      "Comparison with prior imaging to confirm stability or characterise growth",
+      "MRI in selected uncertain cases, where the lesion is low signal on all sequences",
+      "Correlation with tumour markers and primary tumour history when metastasis is a concern"
     ],
-    [
-     "Management Strategy",
-     "No treatment is required, as the lesion is entirely benign with no malignant potential and management is recognition and",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant interval growth, particularly more than about 1 cm per year",
+      "Associated lucency, cortical destruction or a soft-tissue mass",
+      "Intense uptake on bone scintigraphy with a known primary malignancy or rising tumour markers",
+      "New localised pain attributable to the lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting a bone island as an osteoblastic metastasis, or dismissing a true metastasis as a bone island",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent; the bone island is entirely benign with no malignant potential and requires only recognition rather than treatment.",
+    "pitfalls": [
+      "Misinterpreting a bone island as an osteoblastic metastasis, or dismissing a true metastasis as a bone island",
+      "Proceeding to unnecessary biopsy of a radiographically classic lesion",
+      "Failing to act on documented marked interval growth",
+      "Overlooking the pattern of osteopoikilosis and its familial and cutaneous associations"
+    ],
+    "references": [
+      "Greenspan, Orthopedic Imaging: A Practical Approach",
+      "Resnick, Diagnosis of Bone and Joint Disorders",
+      "WHO Classification of Tumours of Soft Tissue and Bone (current edition)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No treatment is required, as the lesion is entirely benign with no malignant potential and management is recognition and reassurance",
+      "Confirm the diagnosis radiologically by the dense sclerotic focus with radiating spiculated margins and very high CT attenuation approaching cortical bone",
+      "Use bone scintigraphy and comparison with prior imaging to distinguish it from osteoblastic metastasis, avoiding unnecessary biopsy",
+      "Interval follow-up imaging only where the lesion is large, growing or diagnostically uncertain, to document stability",
+      "When multiple islands indicate osteopoikilosis, consider LEMD3-related Buschke-Ollendorff syndrome with dermatological review and genetic counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for bone island."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bone-island-real-image",
-   "title": "Bone island: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "bone_island-pathway",
+      "title": "Bone island: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A focus of compact cortical bone within the cancellous medullary bone, most often an incidental finding in the pelvis, proximal femur and other long bones.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant interval growth, particularly more than about 1 cm per year",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs demonstrating a dense focus with radiating spiculated margins, CT to document very high attenuation approaching that of cortical bone, Bone scintigraphy to assess for the intense uptake that would favour"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No treatment is required, as the lesion is entirely benign with no malignant potential and management is recognition and reassurance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting a bone island as an osteoblastic metastasis, or dismissing a true metastasis as a bone island"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bone island."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bone_island-matrix",
+      "title": "Bone island: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A focus of compact cortical bone within the cancellous medullary bone, most often an incidental finding in the pelvis, proximal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs demonstrating a dense focus with radiating spiculated margins, CT to document very high attenuation approaching",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Osteoblastic metastasis (notably prostate and breast carcinoma), Osteoid osteoma (with a lucent nidus), Osteoblastoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No treatment is required, as the lesion is entirely benign with no malignant potential and management is recognition and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting a bone island as an osteoblastic metastasis, or dismissing a true metastasis as a bone island",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bone island."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Greenspan, Orthopedic Imaging: A Practical Approach",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bone_island-diagnostic",
+      "kind": "diagnostic",
+      "title": "Imaging features of a bone island",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Plain radiographs", "cells": [{"text": "Homogeneously dense focus with radiating spiculated, brush-border margins"}], "cite": "c1"},
+        {"parameter": "CT attenuation", "cells": [{"text": "Very high, approaching that of cortical bone"}], "cite": "c1"},
+        {"parameter": "Bone scintigraphy", "cells": [{"text": "Little or no uptake; intense uptake favours metastasis"}], "cite": "c1"},
+        {"parameter": "Comparison with prior imaging", "cells": [{"text": "Stability, or slow growth over years"}], "cite": "c1"},
+        {"parameter": "MRI", "cells": [{"text": "Used in uncertain cases"}], "cite": "c1"},
+        {"parameter": "Tumour markers and primary tumour history", "cells": [{"text": "Relevant when metastasis is a concern"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bone_island-ddx",
+      "kind": "ddx",
+      "title": "Look-alike sclerotic bone lesions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Osteoblastic metastasis", "cells": [{"text": "Typically intense uptake on bone scintigraphy; bone islands show little or none"}], "cite": "c1"},
+        {"parameter": "Osteoid osteoma", "cells": [{"text": "Has a lucent nidus; a bone island is a sclerotic focus"}], "cite": "c1"},
+        {"parameter": "Osteopoikilosis", "cells": [{"text": "Multiple, symmetric islands define osteopoikilosis"}], "cite": "c1"},
+        {"parameter": "Low-grade or sclerosing osteosarcoma", "cells": [{"text": "Marked growth, cortical destruction or a soft-tissue mass argue against a bone island"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bone_island-treatment",
+      "kind": "treatment",
+      "title": "Management options for bone island",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "No treatment", "cells": [{"text": "Recognition and reassurance"}, {"text": "Entirely benign with no malignant potential"}], "cite": "c1"},
+        {"parameter": "Radiological confirmation", "cells": [{"text": "Dense focus with spiculated margins and very high CT attenuation"}, {"text": "Avoids unnecessary biopsy"}], "cite": "c1"},
+        {"parameter": "Scintigraphy and comparison", "cells": [{"text": "Bone scintigraphy and prior imaging to exclude osteoblastic metastasis"}, {"text": "Distinguishes from metastasis"}], "cite": "c1"},
+        {"parameter": "Interval imaging", "cells": [{"text": "Only where the lesion is large, growing or uncertain"}, {"text": "Documents stability"}], "cite": "c1"},
+        {"parameter": "Multiple islands", "cells": [{"text": "Dermatology review and genetic counselling for LEMD3-related Buschke-Ollendorff syndrome"}, {"text": "When osteopoikilosis is present"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bone_island-dx-mgmt",
+      "title": "Diagnosis and management of bone island",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Incidental dense bone focus with spiculated margins on imaging of pelvis or femur", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: marked or rapid growth, cortical destruction, soft-tissue mass or intense uptake?", "cite": "c1"},
+        {"id": "n3", "type": "outcome", "text": "Yes: biopsy and oncological work-up for metastasis or sarcoma", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "CT attenuation near cortical bone; compare with prior imaging", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Very high CT attenuation with little scintigraphic uptake?", "cite": "c1"},
+        {"id": "n6", "type": "action","text": "Yes: benign bone island; reassurance, no biopsy or treatment", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "No: MRI or biopsy for an indeterminate lesion", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Check for multiple symmetric islands suggesting osteopoikilosis; refer to dermatology and genetics", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Entirely benign with no malignant potential", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

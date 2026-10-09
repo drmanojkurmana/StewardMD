@@ -1,173 +1,513 @@
 {
- "id": "alien_hand_syndrome",
- "name": "Alien hand syndrome",
- "aliases": [
-  "alien limb syndrome",
-  "anarchic hand",
-  "Dr Strangelove syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Neuropsychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The affected hand performs complex, apparently purposeful movements outside the patient's voluntary control, and is felt as foreign or not their own",
-   "Patients often personify the limb and may use the other hand to restrain it",
-   "The callosal (anterior) form typically causes intermanual conflict, where one hand opposes the actions of the other",
-   "The frontal (medial) form, associated with anterior cerebral artery territory and supplementary motor area lesions, produces compulsive grasping and groping in the dominant hand",
-   "A posterior (parietal) variant is linked with more withdrawal-type or levitating movements and sensory features",
-   "Causes include stroke, corticobasal degeneration, tumour, trauma, and callosal surgery",
-   "Management is supportive, addressing the underlying disorder, with behavioural strategies to occupy or constrain the limb"
+  "id": "alien_hand_syndrome",
+  "name": "Alien hand syndrome",
+  "aliases": [
+    "alien limb syndrome",
+    "anarchic hand",
+    "Dr Strangelove syndrome"
   ],
-  "pathophysiology": "Alien hand syndrome reflects a disconnection between the systems that generate movement and those that experience movement as self-willed. In the callosal form, damage to the corpus callosum impairs interhemispheric communication, so the non-dominant hemisphere can drive the hand independently, producing intermanual conflict. In the frontal form, medial frontal lesions involving the supplementary motor area and anterior cingulate release environmentally triggered grasping and reaching behaviours from voluntary inhibitory control. Parietal lesions disrupt the sense of ownership and agency over the limb. In each case, motor acts are produced without the normal accompanying sense of intention, so the hand feels autonomous and alien.",
-  "additionalDifferentials": [
-   "Corticobasal degeneration (a common progressive cause)",
-   "Anterior or middle cerebral artery stroke",
-   "Corpus callosum lesion or surgical callosotomy",
-   "Frontal or parietal tumour",
-   "Creutzfeldt-Jakob disease",
-   "Functional (psychogenic) limb phenomena"
-  ],
-  "additionalInvestigations": [
-   "MRI brain to identify callosal, frontal, or parietal lesions",
-   "Vascular imaging in suspected stroke",
-   "Neuropsychological assessment of interhemispheric function and apraxia",
-   "Investigations for corticobasal degeneration and other neurodegenerative disease",
-   "Electroencephalography and cerebrospinal fluid studies where prion disease is suspected",
-   "Bloods and metabolic screen"
-  ],
-  "redFlags": [
-   "Acute onset indicating a new stroke",
-   "Rapidly progressive cognitive and motor decline suggesting a neurodegenerative or prion disorder",
-   "Movements causing self-injury or endangering the patient",
-   "New focal neurological signs pointing to an expanding lesion"
-  ],
-  "prognosis": "Prognosis depends on the cause; the alien hand from stroke may partially improve, whereas that due to corticobasal degeneration or prion disease progresses with the underlying illness, and the phenomenon can be persistently disabling.",
-  "pitfalls": [
-   "Dismissing the complaint as functional or psychiatric without imaging",
-   "Failing to recognise corticobasal degeneration as an underlying cause",
-   "Overlooking safety risks from uncontrolled limb movements",
-   "Confusing the different anatomical subtypes and their localisation"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying cause — stroke, tumour, corticobasal degeneration or other neurodegeneration — as the primary determinant of outcome",
-   "Use occupational and behavioural strategies, including keeping the affected hand occupied with an object or task to reduce involuntary interference",
-   "Apply sensory cueing, mirror and visuospatial techniques to reduce intermanual conflict",
-   "Address safety by removing hazards the autonomous hand might grasp and supporting activities of daily living",
-   "Manage associated focal dystonic posturing with botulinum toxin where present",
-   "Provide neuropsychological support and educate patient and carers about the involuntary, non-volitional nature of the movements",
-   "Refer to neurology and neurorehabilitation, with palliative and supportive care where the cause is progressive"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alien_hand_syndrome-pathway",
-   "title": "Alien hand syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The affected hand performs complex, apparently purposeful movements outside the patient's voluntary control, and is felt as foreign or not their own",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute onset indicating a new stroke",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain to identify callosal, frontal, or parietal lesions, Vascular imaging in suspected stroke, Neuropsychological assessment of interhemispheric function and apraxia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying cause - stroke, tumour, corticobasal degeneration or other neurodegeneration - as the primary determinant of outcome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing the complaint as functional or psychiatric without imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alien hand syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "alien_hand_syndrome-matrix",
-   "title": "Alien hand syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The affected hand performs complex, apparently purposeful movements outside the patient's voluntary control, and is felt as",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Neuropsychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The affected hand performs complex, apparently purposeful movements outside the patient's voluntary control, and is felt as foreign or not their own",
+      "Patients often personify the limb and may use the other hand to restrain it",
+      "The callosal (anterior) form typically causes intermanual conflict, where one hand opposes the actions of the other",
+      "The frontal (medial) form, associated with anterior cerebral artery territory and supplementary motor area lesions, produces compulsive grasping and groping in the dominant hand",
+      "A posterior (parietal) variant is linked with more withdrawal-type or levitating movements and sensory features",
+      "Causes include stroke, corticobasal degeneration, tumour, trauma, and callosal surgery",
+      "Management is supportive, addressing the underlying disorder, with behavioural strategies to occupy or constrain the limb"
     ],
-    [
-     "Key Investigations",
-     "MRI brain to identify callosal, frontal, or parietal lesions, Vascular imaging in suspected stroke, Neuropsychological assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Alien hand syndrome reflects a disconnection between the systems that generate movement and those that experience movement as self-willed. In the callosal form, damage to the corpus callosum impairs interhemispheric communication, so the non-dominant hemisphere can drive the hand independently, producing intermanual conflict. In the frontal form, medial frontal lesions involving the supplementary motor area and anterior cingulate release environmentally triggered grasping and reaching behaviours from voluntary inhibitory control. Parietal lesions disrupt the sense of ownership and agency over the limb. In each case, motor acts are produced without the normal accompanying sense of intention, so the hand feels autonomous and alien.",
+    "additionalDifferentials": [
+      "Corticobasal degeneration (a common progressive cause)",
+      "Anterior or middle cerebral artery stroke",
+      "Corpus callosum lesion or surgical callosotomy",
+      "Frontal or parietal tumour",
+      "Creutzfeldt-Jakob disease",
+      "Functional (psychogenic) limb phenomena"
     ],
-    [
-     "Primary Differentials",
-     "Corticobasal degeneration (a common progressive cause), Anterior or middle cerebral artery stroke, Corpus callosum lesion or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain to identify callosal, frontal, or parietal lesions",
+      "Vascular imaging in suspected stroke",
+      "Neuropsychological assessment of interhemispheric function and apraxia",
+      "Investigations for corticobasal degeneration and other neurodegenerative disease",
+      "Electroencephalography and cerebrospinal fluid studies where prion disease is suspected",
+      "Bloods and metabolic screen"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying cause - stroke, tumour, corticobasal degeneration or other neurodegeneration - as the primary determinant of",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute onset indicating a new stroke",
+      "Rapidly progressive cognitive and motor decline suggesting a neurodegenerative or prion disorder",
+      "Movements causing self-injury or endangering the patient",
+      "New focal neurological signs pointing to an expanding lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing the complaint as functional or psychiatric without imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the cause; the alien hand from stroke may partially improve, whereas that due to corticobasal degeneration or prion disease progresses with the underlying illness, and the phenomenon can be persistently disabling.",
+    "pitfalls": [
+      "Dismissing the complaint as functional or psychiatric without imaging",
+      "Failing to recognise corticobasal degeneration as an underlying cause",
+      "Overlooking safety risks from uncontrolled limb movements",
+      "Confusing the different anatomical subtypes and their localisation"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying cause — stroke, tumour, corticobasal degeneration or other neurodegeneration — as the primary determinant of outcome",
+      "Use occupational and behavioural strategies, including keeping the affected hand occupied with an object or task to reduce involuntary interference",
+      "Apply sensory cueing, mirror and visuospatial techniques to reduce intermanual conflict",
+      "Address safety by removing hazards the autonomous hand might grasp and supporting activities of daily living",
+      "Manage associated focal dystonic posturing with botulinum toxin where present",
+      "Provide neuropsychological support and educate patient and carers about the involuntary, non-volitional nature of the movements",
+      "Refer to neurology and neurorehabilitation, with palliative and supportive care where the cause is progressive"
     ]
-   ],
-   "caption": "Overview comparison matrix for alien hand syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alien-hand-syndrome-real-image",
-   "title": "Alien hand syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "alien_hand_syndrome-pathway",
+      "title": "Alien hand syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The affected hand performs complex, apparently purposeful movements outside the patient's voluntary control, and is felt as foreign or not their own",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute onset indicating a new stroke",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain to identify callosal, frontal, or parietal lesions, Vascular imaging in suspected stroke, Neuropsychological assessment of interhemispheric function and apraxia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying cause - stroke, tumour, corticobasal degeneration or other neurodegeneration - as the primary determinant of outcome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing the complaint as functional or psychiatric without imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alien hand syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alien_hand_syndrome-matrix",
+      "title": "Alien hand syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The affected hand performs complex, apparently purposeful movements outside the patient's voluntary control, and is felt as",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain to identify callosal, frontal, or parietal lesions, Vascular imaging in suspected stroke, Neuropsychological assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Corticobasal degeneration (a common progressive cause), Anterior or middle cerebral artery stroke, Corpus callosum lesion or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying cause - stroke, tumour, corticobasal degeneration or other neurodegeneration - as the primary determinant of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing the complaint as functional or psychiatric without imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alien hand syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alien_hand_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain for callosal, frontal or parietal lesions",
+          "cells": [
+            {
+              "text": "Localises the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging in suspected stroke",
+          "cells": [
+            {
+              "text": "Anterior cerebral artery territory lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment of interhemispheric function and apraxia",
+          "cells": [
+            {
+              "text": "Intermanual conflict and apraxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigations for corticobasal degeneration and other neurodegeneration",
+          "cells": [
+            {
+              "text": "Progressive cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and cerebrospinal fluid studies where prion disease is suspected",
+          "cells": [
+            {
+              "text": "Prion disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods and metabolic screen",
+          "cells": [
+            {
+              "text": "Metabolic contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alien_hand_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticobasal degeneration",
+          "cells": [
+            {
+              "text": "Progressive cortical syndrome"
+            },
+            {
+              "text": "Neurodegeneration workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior or middle cerebral artery stroke",
+          "cells": [
+            {
+              "text": "Acute onset with new deficit"
+            },
+            {
+              "text": "Vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creutzfeldt-Jakob disease",
+          "cells": [
+            {
+              "text": "Rapid cognitive and motor decline"
+            },
+            {
+              "text": "EEG and CSF studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (psychogenic) limb phenomena",
+          "cells": [
+            {
+              "text": "No structural lesion"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alien_hand_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treatment of the underlying cause (stroke, tumour or neurodegeneration)",
+          "cells": [
+            {
+              "text": "Primary determinant of outcome"
+            },
+            {
+              "text": "Cause-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and behavioural strategies, including occupying the affected hand",
+          "cells": [
+            {
+              "text": "Involuntary interference"
+            },
+            {
+              "text": "Functional strategy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory cueing, mirror and visuospatial techniques",
+          "cells": [
+            {
+              "text": "Intermanual conflict"
+            },
+            {
+              "text": "Reduces conflict"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hazard removal and support for daily living",
+          "cells": [
+            {
+              "text": "Risk of self-injury or harm"
+            },
+            {
+              "text": "Safety measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin for associated focal dystonic posturing",
+          "cells": [
+            {
+              "text": "Dystonia"
+            },
+            {
+              "text": "Where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological support and education of patient and carers",
+          "cells": [
+            {
+              "text": "Non-volitional movements"
+            },
+            {
+              "text": "Counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and neurorehabilitation, with palliative care if progressive",
+          "cells": [
+            {
+              "text": "Progressive cause"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alien_hand_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Alien hand syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Autonomous, purposeful-looking movements of one hand felt as foreign",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute new stroke, self-injury or rapid cognitive decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke pathway or neurology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain; vascular imaging; neuropsychological testing; metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Callosal, frontal or parietal lesion on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the underlying cause as the main determinant",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review corticobasal degeneration, stroke, CJD and functional disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occupational and behavioural strategies to occupy the hand",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sensory cueing and mirror techniques for intermanual conflict",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hazard removal; botulinum toxin for dystonic posturing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome follows the cause; stroke may improve, neurodegeneration does not",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,444 @@
 {
- "id": "peripheral_arterial_disease",
- "name": "Peripheral arterial disease",
- "aliases": [
-  "PAD",
-  "peripheral vascular disease",
-  "PVD",
-  "lower limb arterial disease"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "PAD is atherosclerotic narrowing of the arteries supplying the limbs, most often the lower extremities, and is a marker of widespread atherosclerosis with high cardiovascular risk",
-   "The classic symptom is intermittent claudication, exertional muscle pain in the calf, thigh, or buttock that is relieved by rest, though many patients are asymptomatic or have atypical leg symptoms",
-   "Examination may reveal diminished or absent pulses, arterial bruits, cool skin, hair loss, and delayed capillary refill",
-   "The ankle-brachial index is a simple, key bedside test; a reduced value confirms obstruction, while an abnormally high or incompressible value suggests medial calcification, common in diabetes and chronic kidney disease",
-   "Critical limb ischaemia, with rest pain, non-healing ulcers, or gangrene, indicates severe disease that threatens the limb and warrants urgent vascular assessment",
-   "Acute limb ischaemia is a vascular emergency presenting with the classic features of a suddenly painful, pale, pulseless, cold limb with sensory and motor changes",
-   "Management emphasises aggressive cardiovascular risk reduction, structured exercise, and antiplatelet and statin therapy, with revascularisation for lifestyle-limiting or limb-threatening disease",
-   "Because PAD reflects systemic atherosclerosis, coexisting coronary and cerebrovascular disease should be actively addressed"
+  "id": "peripheral_arterial_disease",
+  "name": "Peripheral arterial disease",
+  "aliases": [
+    "PAD",
+    "peripheral vascular disease",
+    "PVD",
+    "lower limb arterial disease"
   ],
-  "pathophysiology": "PAD is usually caused by atherosclerosis, in which lipid-laden plaque progressively narrows the arterial lumen and limits blood flow to the limbs. When demand rises with exertion, a flow-limiting stenosis cannot meet the increased oxygen requirement of exercising muscle, producing the ischaemic pain of claudication. As disease advances, resting perfusion becomes inadequate, causing rest pain, impaired wound healing, ulceration, and tissue loss (critical limb ischaemia). Acute limb ischaemia results from sudden occlusion by thrombosis of a diseased segment or by embolism, abruptly interrupting flow and threatening tissue viability within hours.",
-  "additionalDifferentials": [
-   "Lumbar spinal stenosis causing neurogenic claudication",
-   "Deep vein thrombosis and chronic venous insufficiency",
-   "Musculoskeletal or arthritic leg pain",
-   "Peripheral neuropathy",
-   "Chronic compartment syndrome",
-   "Nerve root compression or sciatica"
-  ],
-  "additionalInvestigations": [
-   "Ankle-brachial index measurement, with exercise testing if resting values are equivocal",
-   "Duplex ultrasound to localise and grade stenoses",
-   "CT or MR angiography, or invasive angiography, to plan revascularisation",
-   "Assessment of cardiovascular risk factors including lipids, glucose, and smoking status",
-   "Toe-brachial index or other measures when arteries are incompressible",
-   "Wound and infection assessment in patients with ulcers or tissue loss"
-  ],
-  "redFlags": [
-   "MEDICAL EMERGENCY: acute limb ischaemia with a painful, pale, pulseless, cold limb and sensory or motor deficit requiring urgent revascularisation",
-   "Critical limb ischaemia with rest pain, non-healing ulceration, or gangrene threatening the limb",
-   "Rapidly progressive tissue loss or signs of spreading infection in an ischaemic foot",
-   "Sudden onset of severe leg symptoms suggesting embolic occlusion"
-  ],
-  "prognosis": "Limb prognosis is often stable in claudication with good risk-factor control, but PAD signals a substantially elevated risk of myocardial infarction, stroke, and cardiovascular death; critical and acute limb ischaemia carry high risks of amputation and mortality without timely intervention.",
-  "pitfalls": [
-   "Relying on a normal or high ankle-brachial index in patients with incompressible calcified vessels, as in diabetes or renal disease",
-   "Attributing exertional leg pain to musculoskeletal or neurogenic causes and missing PAD",
-   "Focusing on the limb while neglecting the high coronary and cerebrovascular risk",
-   "Failing to recognise acute limb ischaemia as an emergency requiring urgent revascularisation"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ESC/ACC-AHA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide cardiovascular risk reduction as the foundation with statin therapy, antiplatelet therapy and control of blood pressure and glucose, since PAD marks widespread atherosclerosis",
-   "Support smoking cessation as the single most important modifiable measure",
-   "Prescribe a supervised walking exercise programme to improve claudication distance",
-   "Offer cilostazol for symptomatic claudication where not contraindicated",
-   "Revascularise by endovascular angioplasty or stenting, or surgical bypass, for lifestyle-limiting claudication refractory to conservative care and urgently for critical limb ischaemia with rest pain, non-healing ulcers or gangrene",
-   "Treat acute limb ischaemia as a vascular emergency with anticoagulation and urgent embolectomy, thrombolysis or revascularisation to salvage the limb",
-   "Provide meticulous foot care, wound management and treatment of infection in tissue loss, and refer to vascular surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "peripheral_arterial_disease-pathway",
-   "title": "Peripheral arterial disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "PAD is atherosclerotic narrowing of the arteries supplying the limbs, most often the lower extremities, and is a marker of widespread atherosclerosis with high cardiovascular risk",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: acute limb ischaemia with a painful, pale, pulseless, cold limb and sensory or motor deficit requiring urgent revascularisation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ankle-brachial index measurement, with exercise testing if resting values are equivocal, Duplex ultrasound to localise and grade stenoses, CT or MR angiography, or invasive angiography, to plan revascularisation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide cardiovascular risk reduction as the foundation with statin therapy, antiplatelet therapy and control of blood pressure and glucose, since PAD marks widespread atherosclerosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on a normal or high ankle-brachial index in patients with incompressible calcified vessels, as in diabetes or renal disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of peripheral arterial disease."
-  }
- ],
- "tables": [
-  {
-   "id": "peripheral_arterial_disease-matrix",
-   "title": "Peripheral arterial disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "PAD is atherosclerotic narrowing of the arteries supplying the limbs, most often the lower extremities, and is a marker of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "PAD is atherosclerotic narrowing of the arteries supplying the limbs, most often the lower extremities, and is a marker of widespread atherosclerosis with high cardiovascular risk",
+      "The classic symptom is intermittent claudication, exertional muscle pain in the calf, thigh, or buttock that is relieved by rest, though many patients are asymptomatic or have atypical leg symptoms",
+      "Examination may reveal diminished or absent pulses, arterial bruits, cool skin, hair loss, and delayed capillary refill",
+      "The ankle-brachial index is a simple, key bedside test; a reduced value confirms obstruction, while an abnormally high or incompressible value suggests medial calcification, common in diabetes and chronic kidney disease",
+      "Critical limb ischaemia, with rest pain, non-healing ulcers, or gangrene, indicates severe disease that threatens the limb and warrants urgent vascular assessment",
+      "Acute limb ischaemia is a vascular emergency presenting with the classic features of a suddenly painful, pale, pulseless, cold limb with sensory and motor changes",
+      "Management emphasises aggressive cardiovascular risk reduction, structured exercise, and antiplatelet and statin therapy, with revascularisation for lifestyle-limiting or limb-threatening disease",
+      "Because PAD reflects systemic atherosclerosis, coexisting coronary and cerebrovascular disease should be actively addressed"
     ],
-    [
-     "Key Investigations",
-     "Ankle-brachial index measurement, with exercise testing if resting values are equivocal, Duplex ultrasound to localise and grade",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PAD is usually caused by atherosclerosis, in which lipid-laden plaque progressively narrows the arterial lumen and limits blood flow to the limbs. When demand rises with exertion, a flow-limiting stenosis cannot meet the increased oxygen requirement of exercising muscle, producing the ischaemic pain of claudication. As disease advances, resting perfusion becomes inadequate, causing rest pain, impaired wound healing, ulceration, and tissue loss (critical limb ischaemia). Acute limb ischaemia results from sudden occlusion by thrombosis of a diseased segment or by embolism, abruptly interrupting flow and threatening tissue viability within hours.",
+    "additionalDifferentials": [
+      "Lumbar spinal stenosis causing neurogenic claudication",
+      "Deep vein thrombosis and chronic venous insufficiency",
+      "Musculoskeletal or arthritic leg pain",
+      "Peripheral neuropathy",
+      "Chronic compartment syndrome",
+      "Nerve root compression or sciatica"
     ],
-    [
-     "Primary Differentials",
-     "Lumbar spinal stenosis causing neurogenic claudication, Deep vein thrombosis and chronic venous insufficiency, Musculoskeletal or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ankle-brachial index measurement, with exercise testing if resting values are equivocal",
+      "Duplex ultrasound to localise and grade stenoses",
+      "CT or MR angiography, or invasive angiography, to plan revascularisation",
+      "Assessment of cardiovascular risk factors including lipids, glucose, and smoking status",
+      "Toe-brachial index or other measures when arteries are incompressible",
+      "Wound and infection assessment in patients with ulcers or tissue loss"
     ],
-    [
-     "Management Strategy",
-     "Provide cardiovascular risk reduction as the foundation with statin therapy, antiplatelet therapy and control of blood pressure",
-     "Core treatment modality"
+    "redFlags": [
+      "MEDICAL EMERGENCY: acute limb ischaemia with a painful, pale, pulseless, cold limb and sensory or motor deficit requiring urgent revascularisation",
+      "Critical limb ischaemia with rest pain, non-healing ulceration, or gangrene threatening the limb",
+      "Rapidly progressive tissue loss or signs of spreading infection in an ischaemic foot",
+      "Sudden onset of severe leg symptoms suggesting embolic occlusion"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on a normal or high ankle-brachial index in patients with incompressible calcified vessels, as in diabetes or renal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Limb prognosis is often stable in claudication with good risk-factor control, but PAD signals a substantially elevated risk of myocardial infarction, stroke, and cardiovascular death; critical and acute limb ischaemia carry high risks of amputation and mortality without timely intervention.",
+    "pitfalls": [
+      "Relying on a normal or high ankle-brachial index in patients with incompressible calcified vessels, as in diabetes or renal disease",
+      "Attributing exertional leg pain to musculoskeletal or neurogenic causes and missing PAD",
+      "Focusing on the limb while neglecting the high coronary and cerebrovascular risk",
+      "Failing to recognise acute limb ischaemia as an emergency requiring urgent revascularisation"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ESC/ACC-AHA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide cardiovascular risk reduction as the foundation with statin therapy, antiplatelet therapy and control of blood pressure and glucose, since PAD marks widespread atherosclerosis",
+      "Support smoking cessation as the single most important modifiable measure",
+      "Prescribe a supervised walking exercise programme to improve claudication distance",
+      "Offer cilostazol for symptomatic claudication where not contraindicated",
+      "Revascularise by endovascular angioplasty or stenting, or surgical bypass, for lifestyle-limiting claudication refractory to conservative care and urgently for critical limb ischaemia with rest pain, non-healing ulcers or gangrene",
+      "Treat acute limb ischaemia as a vascular emergency with anticoagulation and urgent embolectomy, thrombolysis or revascularisation to salvage the limb",
+      "Provide meticulous foot care, wound management and treatment of infection in tissue loss, and refer to vascular surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for peripheral arterial disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "peripheral-arterial-disease-real-image",
-   "title": "Peripheral arterial disease: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "peripheral_arterial_disease-pathway",
+      "title": "Peripheral arterial disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "PAD is atherosclerotic narrowing of the arteries supplying the limbs, most often the lower extremities, and is a marker of widespread atherosclerosis with high cardiovascular risk",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: acute limb ischaemia with a painful, pale, pulseless, cold limb and sensory or motor deficit requiring urgent revascularisation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ankle-brachial index measurement, with exercise testing if resting values are equivocal, Duplex ultrasound to localise and grade stenoses, CT or MR angiography, or invasive angiography, to plan revascularisation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide cardiovascular risk reduction as the foundation with statin therapy, antiplatelet therapy and control of blood pressure and glucose, since PAD marks widespread atherosclerosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on a normal or high ankle-brachial index in patients with incompressible calcified vessels, as in diabetes or renal disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of peripheral arterial disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "peripheral_arterial_disease-matrix",
+      "title": "Peripheral arterial disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "PAD is atherosclerotic narrowing of the arteries supplying the limbs, most often the lower extremities, and is a marker of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ankle-brachial index measurement, with exercise testing if resting values are equivocal, Duplex ultrasound to localise and grade",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lumbar spinal stenosis causing neurogenic claudication, Deep vein thrombosis and chronic venous insufficiency, Musculoskeletal or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide cardiovascular risk reduction as the foundation with statin therapy, antiplatelet therapy and control of blood pressure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a normal or high ankle-brachial index in patients with incompressible calcified vessels, as in diabetes or renal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for peripheral arterial disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peripheral_arterial_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankle-brachial index",
+          "cells": [
+            {
+              "text": "Arterial pressure ratio at rest; exercise testing if equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound",
+          "cells": [
+            {
+              "text": "Localises and grades stenoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography, or invasive angiography",
+          "cells": [
+            {
+              "text": "Planning revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk factor assessment",
+          "cells": [
+            {
+              "text": "Lipids, glucose and smoking status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toe-brachial index",
+          "cells": [
+            {
+              "text": "Used when arteries are incompressible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and infection assessment",
+          "cells": [
+            {
+              "text": "Ulcers or tissue loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peripheral_arterial_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk reduction foundation",
+          "cells": [
+            {
+              "text": "Statin therapy, antiplatelet therapy and control of blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "The single most important modifiable measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised walking",
+          "cells": [
+            {
+              "text": "Improves claudication distance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cilostazol",
+          "cells": [
+            {
+              "text": "Symptomatic claudication where not contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Revascularisation",
+          "cells": [
+            {
+              "text": "Endovascular angioplasty or stenting, or surgical bypass, for lifestyle-limiting claudication refractory to conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute limb ischaemia",
+          "cells": [
+            {
+              "text": "Vascular emergency: anticoagulation and urgent embolectomy, thrombolysis or revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot care and tissue loss",
+          "cells": [
+            {
+              "text": "Foot care, wound management and treatment of infection; refer to vascular surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peripheral_arterial_disease-dx-mgmt",
+      "title": "Diagnosis and management of Peripheral arterial disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Leg pain on walking or at rest, or ulceration in a patient with vascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (pale pulseless cold limb, rest pain, gangrene, sudden embolic symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Vascular emergency: anticoagulation and urgent embolectomy or revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ankle-brachial index; duplex ultrasound; CT or MR angiography for planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is peripheral arterial disease confirmed on ankle-brachial index or duplex?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lumbar spinal stenosis, venous disease, arthritic pain or neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Statin, antiplatelet therapy and blood pressure control as the foundation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Support smoking cessation as the most important modifiable measure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prescribe supervised walking exercise to improve claudication distance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Offer cilostazol for symptomatic claudication where not contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Revascularise by angioplasty, stenting or bypass for lifestyle-limiting claudication",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Claudication is often stable with risk control; PAD raises risk of MI, stroke and death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

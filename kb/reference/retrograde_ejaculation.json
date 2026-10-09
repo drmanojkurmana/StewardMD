@@ -1,174 +1,452 @@
 {
- "id": "retrograde_ejaculation",
- "name": "Retrograde ejaculation",
- "aliases": [
-  "backward ejaculation",
-  "retrograde ejaculation into the bladder",
-  "dry orgasm from retrograde flow"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Andrology / Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Men describe orgasm with little or no antegrade ejaculate, and the first urine passed afterwards is characteristically cloudy from admixed semen",
-   "The diagnosis is confirmed by finding sperm in a post-orgasmic urine specimen, distinguishing it from failure of emission where no semen is produced at all",
-   "The common causes are diabetic autonomic neuropathy, bladder-neck or prostate surgery, retroperitoneal surgery, and alpha-blocker medication",
-   "It is a recognised and treatable cause of low-volume ejaculate and of male-factor infertility",
-   "Alkalinisation and appropriate preparation of the post-orgasmic urine allow sperm to be harvested for assisted reproduction when medical treatment fails",
-   "Medical treatment aims to restore bladder-neck closure using sympathomimetic or alpha-agonist agents, most useful when the cause is neuropathic rather than anatomical",
-   "Anatomical causes following bladder-neck resection generally do not respond to drugs, so assisted conception is planned from the outset when fertility is the goal"
+  "id": "retrograde_ejaculation",
+  "name": "Retrograde ejaculation",
+  "aliases": [
+    "backward ejaculation",
+    "retrograde ejaculation into the bladder",
+    "dry orgasm from retrograde flow"
   ],
-  "pathophysiology": "Normal ejaculation depends on coordinated closure of the bladder neck at the moment of emission so that semen is propelled forward through the urethra rather than back into the bladder. When the internal urethral sphincter fails to close, seminal fluid takes the path of least resistance and flows retrogradely into the bladder. This failure may be neurogenic, as in diabetic autonomic neuropathy or after retroperitoneal lymph-node dissection that interrupts sympathetic outflow; anatomical, following transurethral or open bladder-neck and prostate surgery that destroys the sphincter mechanism; or pharmacological, notably with alpha-adrenergic blocking drugs that relax the bladder neck. The result is a reduced or absent antegrade ejaculate with sperm recoverable from the post-orgasmic urine.",
-  "additionalDifferentials": [
-   "Failure of seminal emission (anejaculation)",
-   "Ejaculatory duct obstruction producing low ejaculate volume",
-   "Congenital absence of the vasa and seminal vesicles",
-   "Hypogonadism reducing ejaculate volume",
-   "Androgen-deficiency-related reduction in ejaculate",
-   "Psychogenic ejaculatory dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Post-orgasmic urine analysis for the presence of sperm, the confirmatory test",
-   "Standard semen analysis assessing ejaculate volume and sperm content",
-   "Blood glucose or HbA1c to identify diabetes",
-   "Medication review focusing on alpha-blockers and other implicated drugs",
-   "Surgical and neurological history including bladder-neck, prostate, and retroperitoneal procedures",
-   "Scrotal or transrectal ultrasound where an anatomical or obstructive cause is also considered"
-  ],
-  "redFlags": [
-   "New retrograde ejaculation as an early clue to undiagnosed diabetes",
-   "Recent retroperitoneal or pelvic surgery with additional neurological deficits",
-   "Associated bladder or voiding symptoms suggesting broader outflow pathology",
-   "Complete absence of orgasmic sensation pointing to a different neurological problem"
-  ],
-  "prognosis": "The condition is benign and does not threaten general health; fertility is frequently achievable, either by restoring antegrade ejaculation with medication in neuropathic cases or by retrieving sperm from post-orgasmic urine for assisted reproduction when the cause is anatomical.",
-  "pitfalls": [
-   "Confusing retrograde ejaculation with true anejaculation by not examining post-orgasmic urine",
-   "Attempting drug treatment for an anatomical bladder-neck defect that will not respond",
-   "Missing underlying diabetes as the driver of a neuropathic cause",
-   "Overlooking a culprit alpha-blocker that could simply be adjusted",
-   "Failing to alkalinise and prepare urine promptly, reducing the yield of viable sperm"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "European Association of Urology guidelines on sexual and reproductive health",
-   "WHO laboratory manual for the examination and processing of human semen"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore bladder-neck closure pharmacologically with sympathomimetic or alpha-adrenergic agonist agents such as pseudoephedrine or imipramine, most effective when the cause is neuropathic",
-   "Withdraw or substitute causative drugs, particularly alpha-adrenergic blockers, where feasible",
-   "Optimise glycaemic control in diabetic autonomic neuropathy to limit progression",
-   "When medical therapy fails, harvest sperm from alkalinised, appropriately prepared post-orgasmic urine for assisted reproduction",
-   "Refer to reproductive medicine for assisted conception (intrauterine insemination or IVF with ICSI) when fertility is desired",
-   "Reassure that the condition is benign and does not threaten general health"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "retrograde_ejaculation-pathway",
-   "title": "Retrograde ejaculation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Men describe orgasm with little or no antegrade ejaculate, and the first urine passed afterwards is characteristically cloudy from admixed semen",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New retrograde ejaculation as an early clue to undiagnosed diabetes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Post-orgasmic urine analysis for the presence of sperm, the confirmatory test, Standard semen analysis assessing ejaculate volume and sperm content, Blood glucose or HbA1c to identify diabetes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore bladder-neck closure pharmacologically with sympathomimetic or alpha-adrenergic agonist agents such as pseudoephedrine or imipramine, most effective when the cause is neuropathic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing retrograde ejaculation with true anejaculation by not examining post-orgasmic urine"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of retrograde ejaculation."
-  }
- ],
- "tables": [
-  {
-   "id": "retrograde_ejaculation-matrix",
-   "title": "Retrograde ejaculation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Men describe orgasm with little or no antegrade ejaculate, and the first urine passed afterwards is characteristically cloudy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Andrology / Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Men describe orgasm with little or no antegrade ejaculate, and the first urine passed afterwards is characteristically cloudy from admixed semen",
+      "The diagnosis is confirmed by finding sperm in a post-orgasmic urine specimen, distinguishing it from failure of emission where no semen is produced at all",
+      "The common causes are diabetic autonomic neuropathy, bladder-neck or prostate surgery, retroperitoneal surgery, and alpha-blocker medication",
+      "It is a recognised and treatable cause of low-volume ejaculate and of male-factor infertility",
+      "Alkalinisation and appropriate preparation of the post-orgasmic urine allow sperm to be harvested for assisted reproduction when medical treatment fails",
+      "Medical treatment aims to restore bladder-neck closure using sympathomimetic or alpha-agonist agents, most useful when the cause is neuropathic rather than anatomical",
+      "Anatomical causes following bladder-neck resection generally do not respond to drugs, so assisted conception is planned from the outset when fertility is the goal"
     ],
-    [
-     "Key Investigations",
-     "Post-orgasmic urine analysis for the presence of sperm, the confirmatory test, Standard semen analysis assessing ejaculate volume",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Normal ejaculation depends on coordinated closure of the bladder neck at the moment of emission so that semen is propelled forward through the urethra rather than back into the bladder. When the internal urethral sphincter fails to close, seminal fluid takes the path of least resistance and flows retrogradely into the bladder. This failure may be neurogenic, as in diabetic autonomic neuropathy or after retroperitoneal lymph-node dissection that interrupts sympathetic outflow; anatomical, following transurethral or open bladder-neck and prostate surgery that destroys the sphincter mechanism; or pharmacological, notably with alpha-adrenergic blocking drugs that relax the bladder neck. The result is a reduced or absent antegrade ejaculate with sperm recoverable from the post-orgasmic urine.",
+    "additionalDifferentials": [
+      "Failure of seminal emission (anejaculation)",
+      "Ejaculatory duct obstruction producing low ejaculate volume",
+      "Congenital absence of the vasa and seminal vesicles",
+      "Hypogonadism reducing ejaculate volume",
+      "Androgen-deficiency-related reduction in ejaculate",
+      "Psychogenic ejaculatory dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "Failure of seminal emission (anejaculation), Ejaculatory duct obstruction producing low ejaculate volume, Congenital absence of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Post-orgasmic urine analysis for the presence of sperm, the confirmatory test",
+      "Standard semen analysis assessing ejaculate volume and sperm content",
+      "Blood glucose or HbA1c to identify diabetes",
+      "Medication review focusing on alpha-blockers and other implicated drugs",
+      "Surgical and neurological history including bladder-neck, prostate, and retroperitoneal procedures",
+      "Scrotal or transrectal ultrasound where an anatomical or obstructive cause is also considered"
     ],
-    [
-     "Management Strategy",
-     "Restore bladder-neck closure pharmacologically with sympathomimetic or alpha-adrenergic agonist agents such as pseudoephedrine or",
-     "Core treatment modality"
+    "redFlags": [
+      "New retrograde ejaculation as an early clue to undiagnosed diabetes",
+      "Recent retroperitoneal or pelvic surgery with additional neurological deficits",
+      "Associated bladder or voiding symptoms suggesting broader outflow pathology",
+      "Complete absence of orgasmic sensation pointing to a different neurological problem"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing retrograde ejaculation with true anejaculation by not examining post-orgasmic urine",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and does not threaten general health; fertility is frequently achievable, either by restoring antegrade ejaculation with medication in neuropathic cases or by retrieving sperm from post-orgasmic urine for assisted reproduction when the cause is anatomical.",
+    "pitfalls": [
+      "Confusing retrograde ejaculation with true anejaculation by not examining post-orgasmic urine",
+      "Attempting drug treatment for an anatomical bladder-neck defect that will not respond",
+      "Missing underlying diabetes as the driver of a neuropathic cause",
+      "Overlooking a culprit alpha-blocker that could simply be adjusted",
+      "Failing to alkalinise and prepare urine promptly, reducing the yield of viable sperm"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "European Association of Urology guidelines on sexual and reproductive health",
+      "WHO laboratory manual for the examination and processing of human semen"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore bladder-neck closure pharmacologically with sympathomimetic or alpha-adrenergic agonist agents such as pseudoephedrine or imipramine, most effective when the cause is neuropathic",
+      "Withdraw or substitute causative drugs, particularly alpha-adrenergic blockers, where feasible",
+      "Optimise glycaemic control in diabetic autonomic neuropathy to limit progression",
+      "When medical therapy fails, harvest sperm from alkalinised, appropriately prepared post-orgasmic urine for assisted reproduction",
+      "Refer to reproductive medicine for assisted conception (intrauterine insemination or IVF with ICSI) when fertility is desired",
+      "Reassure that the condition is benign and does not threaten general health"
     ]
-   ],
-   "caption": "Overview comparison matrix for retrograde ejaculation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "retrograde-ejaculation-real-image",
-   "title": "Retrograde ejaculation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "retrograde_ejaculation-pathway",
+      "title": "Retrograde ejaculation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Men describe orgasm with little or no antegrade ejaculate, and the first urine passed afterwards is characteristically cloudy from admixed semen",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New retrograde ejaculation as an early clue to undiagnosed diabetes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Post-orgasmic urine analysis for the presence of sperm, the confirmatory test, Standard semen analysis assessing ejaculate volume and sperm content, Blood glucose or HbA1c to identify diabetes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore bladder-neck closure pharmacologically with sympathomimetic or alpha-adrenergic agonist agents such as pseudoephedrine or imipramine, most effective when the cause is neuropathic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing retrograde ejaculation with true anejaculation by not examining post-orgasmic urine"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of retrograde ejaculation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "retrograde_ejaculation-matrix",
+      "title": "Retrograde ejaculation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Men describe orgasm with little or no antegrade ejaculate, and the first urine passed afterwards is characteristically cloudy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Post-orgasmic urine analysis for the presence of sperm, the confirmatory test, Standard semen analysis assessing ejaculate volume",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Failure of seminal emission (anejaculation), Ejaculatory duct obstruction producing low ejaculate volume, Congenital absence of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore bladder-neck closure pharmacologically with sympathomimetic or alpha-adrenergic agonist agents such as pseudoephedrine or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing retrograde ejaculation with true anejaculation by not examining post-orgasmic urine",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for retrograde ejaculation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retrograde_ejaculation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-orgasmic urine analysis",
+          "cells": [
+            {
+              "text": "Sperm present, which confirms retrograde ejaculation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard semen analysis",
+          "cells": [
+            {
+              "text": "Ejaculate volume and sperm content"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose or HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes as the driver of a neuropathic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Alpha-blockers and other implicated drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical and neurological history",
+          "cells": [
+            {
+              "text": "Bladder-neck, prostate or pelvic surgery, and neurological deficits"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retrograde_ejaculation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Failure of seminal emission (anejaculation)",
+          "cells": [
+            {
+              "text": "No semen is produced at all, so post-orgasmic urine has no sperm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ejaculatory duct obstruction",
+          "cells": [
+            {
+              "text": "Low ejaculate volume on semen analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypogonadism",
+          "cells": [
+            {
+              "text": "Reduced ejaculate volume from androgen deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retrograde_ejaculation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pharmacological bladder-neck closure",
+          "cells": [
+            {
+              "text": "Pseudoephedrine or imipramine; most effective when the cause is neuropathic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug withdrawal",
+          "cells": [
+            {
+              "text": "Withdraw or substitute causative drugs, particularly alpha-blockers, where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "In diabetic autonomic neuropathy, to limit progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sperm harvest",
+          "cells": [
+            {
+              "text": "If medical therapy fails: sperm from alkalinised post-orgasmic urine for assisted reproduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive medicine referral",
+          "cells": [
+            {
+              "text": "Intrauterine insemination or IVF with ICSI when fertility is desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign; does not threaten general health"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retrograde_ejaculation-dx-mgmt",
+      "title": "Diagnosis and management of Retrograde ejaculation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Man with little or no antegrade ejaculate at orgasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new onset, recent pelvic surgery, neurological or voiding features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent workup for undiagnosed diabetes or neurological and surgical causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Post-orgasmic urine for sperm, semen analysis, glucose or HbA1c, medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is sperm found in post-orgasmic urine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider failure of emission or other anejaculation; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pharmacological bladder-neck closure, most effective when neuropathic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw causative drugs such as alpha-blockers; control diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sperm harvest from alkalinised post-orgasmic urine if medical therapy fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reproductive medicine referral for IUI or IVF with ICSI",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; fertility often achievable through restored ejaculation or sperm retrieval",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

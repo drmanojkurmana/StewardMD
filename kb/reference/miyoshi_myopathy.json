@@ -1,175 +1,471 @@
 {
- "id": "miyoshi_myopathy",
- "name": "Miyoshi myopathy",
- "aliases": [
-  "DYSF",
-  "dysferlinopathy",
-  "Miyoshi muscular dystrophy",
-  "distal myopathy, posterior compartment",
-  "MMD1"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A distal myopathy typically presenting in young adulthood with weakness of the posterior calf, so that patients notice difficulty standing on tiptoe or running",
-   "Wasting begins in the gastrocnemius and soleus, in contrast to the anterior distal weakness of several other distal myopathies",
-   "Caused by mutations in DYSF encoding dysferlin, and inherited in an autosomal recessive pattern, part of the dysferlinopathy spectrum that also includes limb-girdle muscular dystrophy",
-   "Serum creatine kinase is characteristically very high, often markedly so, which is a useful pointer",
-   "Weakness spreads over time to involve the thighs and upper limbs, and the same DYSF mutations can produce a proximal limb-girdle phenotype even within one family",
-   "Muscle biopsy shows dystrophic changes with reduced or absent dysferlin on immunostaining, sometimes with an inflammatory infiltrate that can mimic myositis",
-   "Immunosuppression is ineffective, so distinguishing it from inflammatory myopathy avoids inappropriate treatment"
+  "id": "miyoshi_myopathy",
+  "name": "Miyoshi myopathy",
+  "aliases": [
+    "DYSF",
+    "dysferlinopathy",
+    "Miyoshi muscular dystrophy",
+    "distal myopathy, posterior compartment",
+    "MMD1"
   ],
-  "pathophysiology": "Miyoshi myopathy is caused by biallelic loss-of-function mutations in DYSF, the gene encoding dysferlin, a membrane protein concentrated at the sarcolemma that is essential for the calcium-dependent resealing of the muscle-fibre membrane after injury. When dysferlin is deficient, small membrane disruptions that occur with normal muscle activity are not repaired efficiently, leading to progressive membrane damage, leakage of muscle enzymes and fibre degeneration. The resulting dystrophic process preferentially begins in the posterior lower-leg muscles in the Miyoshi phenotype, and impaired membrane repair may also provoke a secondary inflammatory response that can be mistaken histologically for an inflammatory myopathy.",
-  "additionalDifferentials": [
-   "Limb-girdle muscular dystrophy (including other dysferlinopathy phenotypes)",
-   "Other distal myopathies such as GNE and tibial (anterior) distal myopathies",
-   "Inflammatory myopathies such as polymyositis",
-   "Myofibrillar myopathies",
-   "Metabolic myopathies causing exercise intolerance and high creatine kinase",
-   "Chronic neuropathies causing distal wasting"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase, characteristically markedly elevated",
-   "Electromyography showing a myopathic pattern",
-   "Muscle magnetic resonance imaging demonstrating posterior calf and later thigh involvement",
-   "Muscle biopsy with dysferlin immunostaining and evaluation of monocyte dysferlin expression",
-   "Targeted DYSF genetic testing",
-   "Assessment to exclude an inflammatory myopathy when the biopsy shows inflammation"
-  ],
-  "redFlags": [
-   "Being started on immunosuppression for a presumed inflammatory myopathy",
-   "Rapidly progressive proximal weakness suggesting a limb-girdle phenotype",
-   "Respiratory involvement in advanced disease",
-   "Loss of ambulation requiring rehabilitation input"
-  ],
-  "prognosis": "Miyoshi myopathy is slowly progressive, with weakness spreading from the calves to more proximal muscles over years to decades; many patients eventually need walking aids, but respiratory and cardiac involvement are relatively uncommon and lifespan is often near normal.",
-  "pitfalls": [
-   "Mistaking the inflammatory biopsy findings for polymyositis and giving ineffective immunosuppression",
-   "Overlooking the very high creatine kinase as a clue to a dysferlinopathy",
-   "Assuming a purely distal disorder, when proximal limb-girdle phenotypes share the same gene",
-   "Attributing early calf weakness to a neuropathy rather than a myopathy"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: Dysferlinopathy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-modifying drug and base care on physiotherapy with a graded exercise and stretching programme to preserve function and prevent contractures",
-   "Avoid corticosteroids, which do not help dysferlinopathy and may worsen it despite biopsy inflammation mimicking myositis",
-   "Provide mobility aids, orthoses and occupational therapy as distal then proximal weakness progresses",
-   "Undertake periodic respiratory and cardiac assessment, although these are relatively uncommon in this phenotype",
-   "Support weight and metabolic health to reduce load on weakening muscle",
-   "Offer genetic counselling for autosomal recessive DYSF inheritance and test at-risk relatives",
-   "Refer to a specialist neuromuscular service for multidisciplinary care and access to dysferlinopathy trials"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "miyoshi_myopathy-pathway",
-   "title": "Miyoshi myopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A distal myopathy typically presenting in young adulthood with weakness of the posterior calf, so that patients notice difficulty standing on tiptoe or running",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Being started on immunosuppression for a presumed inflammatory myopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase, characteristically markedly elevated, Electromyography showing a myopathic pattern, Muscle magnetic resonance imaging demonstrating posterior calf and later thigh involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-modifying drug and base care on physiotherapy with a graded exercise and stretching programme to preserve function and prevent contractures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the inflammatory biopsy findings for polymyositis and giving ineffective immunosuppression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of miyoshi myopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "miyoshi_myopathy-matrix",
-   "title": "Miyoshi myopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A distal myopathy typically presenting in young adulthood with weakness of the posterior calf, so that patients notice difficulty",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A distal myopathy typically presenting in young adulthood with weakness of the posterior calf, so that patients notice difficulty standing on tiptoe or running",
+      "Wasting begins in the gastrocnemius and soleus, in contrast to the anterior distal weakness of several other distal myopathies",
+      "Caused by mutations in DYSF encoding dysferlin, and inherited in an autosomal recessive pattern, part of the dysferlinopathy spectrum that also includes limb-girdle muscular dystrophy",
+      "Serum creatine kinase is characteristically very high, often markedly so, which is a useful pointer",
+      "Weakness spreads over time to involve the thighs and upper limbs, and the same DYSF mutations can produce a proximal limb-girdle phenotype even within one family",
+      "Muscle biopsy shows dystrophic changes with reduced or absent dysferlin on immunostaining, sometimes with an inflammatory infiltrate that can mimic myositis",
+      "Immunosuppression is ineffective, so distinguishing it from inflammatory myopathy avoids inappropriate treatment"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase, characteristically markedly elevated, Electromyography showing a myopathic pattern, Muscle magnetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Miyoshi myopathy is caused by biallelic loss-of-function mutations in DYSF, the gene encoding dysferlin, a membrane protein concentrated at the sarcolemma that is essential for the calcium-dependent resealing of the muscle-fibre membrane after injury. When dysferlin is deficient, small membrane disruptions that occur with normal muscle activity are not repaired efficiently, leading to progressive membrane damage, leakage of muscle enzymes and fibre degeneration. The resulting dystrophic process preferentially begins in the posterior lower-leg muscles in the Miyoshi phenotype, and impaired membrane repair may also provoke a secondary inflammatory response that can be mistaken histologically for an inflammatory myopathy.",
+    "additionalDifferentials": [
+      "Limb-girdle muscular dystrophy (including other dysferlinopathy phenotypes)",
+      "Other distal myopathies such as GNE and tibial (anterior) distal myopathies",
+      "Inflammatory myopathies such as polymyositis",
+      "Myofibrillar myopathies",
+      "Metabolic myopathies causing exercise intolerance and high creatine kinase",
+      "Chronic neuropathies causing distal wasting"
     ],
-    [
-     "Primary Differentials",
-     "Limb-girdle muscular dystrophy (including other dysferlinopathy phenotypes), Other distal myopathies such as GNE and tibial",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase, characteristically markedly elevated",
+      "Electromyography showing a myopathic pattern",
+      "Muscle magnetic resonance imaging demonstrating posterior calf and later thigh involvement",
+      "Muscle biopsy with dysferlin immunostaining and evaluation of monocyte dysferlin expression",
+      "Targeted DYSF genetic testing",
+      "Assessment to exclude an inflammatory myopathy when the biopsy shows inflammation"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-modifying drug and base care on physiotherapy with a graded exercise and stretching programme to",
-     "Core treatment modality"
+    "redFlags": [
+      "Being started on immunosuppression for a presumed inflammatory myopathy",
+      "Rapidly progressive proximal weakness suggesting a limb-girdle phenotype",
+      "Respiratory involvement in advanced disease",
+      "Loss of ambulation requiring rehabilitation input"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the inflammatory biopsy findings for polymyositis and giving ineffective immunosuppression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Miyoshi myopathy is slowly progressive, with weakness spreading from the calves to more proximal muscles over years to decades; many patients eventually need walking aids, but respiratory and cardiac involvement are relatively uncommon and lifespan is often near normal.",
+    "pitfalls": [
+      "Mistaking the inflammatory biopsy findings for polymyositis and giving ineffective immunosuppression",
+      "Overlooking the very high creatine kinase as a clue to a dysferlinopathy",
+      "Assuming a purely distal disorder, when proximal limb-girdle phenotypes share the same gene",
+      "Attributing early calf weakness to a neuropathy rather than a myopathy"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: Dysferlinopathy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-modifying drug and base care on physiotherapy with a graded exercise and stretching programme to preserve function and prevent contractures",
+      "Avoid corticosteroids, which do not help dysferlinopathy and may worsen it despite biopsy inflammation mimicking myositis",
+      "Provide mobility aids, orthoses and occupational therapy as distal then proximal weakness progresses",
+      "Undertake periodic respiratory and cardiac assessment, although these are relatively uncommon in this phenotype",
+      "Support weight and metabolic health to reduce load on weakening muscle",
+      "Offer genetic counselling for autosomal recessive DYSF inheritance and test at-risk relatives",
+      "Refer to a specialist neuromuscular service for multidisciplinary care and access to dysferlinopathy trials"
     ]
-   ],
-   "caption": "Overview comparison matrix for miyoshi myopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "miyoshi-myopathy-real-image",
-   "title": "Miyoshi myopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "miyoshi_myopathy-pathway",
+      "title": "Miyoshi myopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A distal myopathy typically presenting in young adulthood with weakness of the posterior calf, so that patients notice difficulty standing on tiptoe or running",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Being started on immunosuppression for a presumed inflammatory myopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase, characteristically markedly elevated, Electromyography showing a myopathic pattern, Muscle magnetic resonance imaging demonstrating posterior calf and later thigh involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-modifying drug and base care on physiotherapy with a graded exercise and stretching programme to preserve function and prevent contractures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the inflammatory biopsy findings for polymyositis and giving ineffective immunosuppression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of miyoshi myopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "miyoshi_myopathy-matrix",
+      "title": "Miyoshi myopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A distal myopathy typically presenting in young adulthood with weakness of the posterior calf, so that patients notice difficulty",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase, characteristically markedly elevated, Electromyography showing a myopathic pattern, Muscle magnetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Limb-girdle muscular dystrophy (including other dysferlinopathy phenotypes), Other distal myopathies such as GNE and tibial",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-modifying drug and base care on physiotherapy with a graded exercise and stretching programme to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the inflammatory biopsy findings for polymyositis and giving ineffective immunosuppression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for miyoshi myopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "miyoshi_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myopathic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Posterior calf and later thigh involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with dysferlin immunostaining",
+          "cells": [
+            {
+              "text": "Dysferlin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted DYSF genetic testing",
+          "cells": [
+            {
+              "text": "DYSF variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment to exclude inflammatory myopathy",
+          "cells": [
+            {
+              "text": "Inflammatory myopathy excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "miyoshi_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Limb-girdle muscular dystrophy",
+          "cells": [
+            {
+              "text": "Rapidly progressive proximal weakness suggests a limb-girdle phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory myopathy such as polymyositis",
+          "cells": [
+            {
+              "text": "Biopsy inflammation can mimic myositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic myopathy",
+          "cells": [
+            {
+              "text": "Exercise intolerance with high creatine kinase"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "miyoshi_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-modifying drug",
+          "cells": [
+            {
+              "text": "Physiotherapy with graded exercise and stretching to preserve function and prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid corticosteroids",
+          "cells": [
+            {
+              "text": "Do not help dysferlinopathy and may worsen it despite biopsy inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mobility aids and orthoses",
+          "cells": [
+            {
+              "text": "Occupational therapy as distal then proximal weakness progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and cardiac assessment",
+          "cells": [
+            {
+              "text": "Periodic; relatively uncommon in this phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight and metabolic health",
+          "cells": [
+            {
+              "text": "Reduces load on weakening muscle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DYSF inheritance; test at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular service",
+          "cells": [
+            {
+              "text": "Multidisciplinary care and access to dysferlinopathy trials"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "miyoshi_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Miyoshi myopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Posterior calf weakness with markedly elevated creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Immunosuppression for presumed myositis, proximal weakness or respiratory involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Review immunosuppression; refer to neuromuscular service",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK; EMG; muscle MRI; muscle biopsy with dysferlin staining; DYSF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is dysferlin deficiency confirmed on biopsy or by DYSF testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider limb-girdle dystrophy, inflammatory or metabolic myopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy with graded exercise and stretching to preserve function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid corticosteroids, which do not help dysferlinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mobility aids, orthoses and occupational therapy as weakness progresses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic respiratory and cardiac assessment; support weight and metabolic health",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Autosomal recessive DYSF counselling; neuromuscular service and trial referral",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

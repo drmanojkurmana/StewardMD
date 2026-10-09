@@ -1,174 +1,463 @@
 {
- "id": "plaid_syndrome",
- "name": "PLAID (PLCG2-associated antibody deficiency and immune dysregulation)",
- "aliases": [
-  "PLCG2-associated antibody deficiency and immune dysregulation",
-  "familial cold urticaria with immunodeficiency",
-  "PLCG2",
-  "phospholipase C gamma 2 defect"
- ],
- "class": "non_infective",
- "system": "Immunology / Autoinflammatory",
- "specialty": "Clinical Immunology / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Autoinflammation / Middleton's Allergy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by mutations in PLCG2, which encodes phospholipase C gamma 2, a signalling enzyme important in immune cells",
-   "Characterised by cold-induced urticaria triggered by evaporative cooling rather than by contact with a cold object",
-   "Combines an autoinflammatory cold urticaria with features of humoral immunodeficiency and autoimmunity",
-   "Antibody deficiency predisposes to recurrent sinopulmonary infection and may require immunoglobulin support",
-   "Autoimmune and granulomatous manifestations, including autoantibodies, can coexist with the immunodeficiency",
-   "The cold urticaria differs from classic acquired cold urticaria and from cryopyrin-associated periodic syndromes",
-   "Management is largely supportive, targeting infection risk, cold avoidance, and specific autoimmune complications"
+  "id": "plaid_syndrome",
+  "name": "PLAID (PLCG2-associated antibody deficiency and immune dysregulation)",
+  "aliases": [
+    "PLCG2-associated antibody deficiency and immune dysregulation",
+    "familial cold urticaria with immunodeficiency",
+    "PLCG2",
+    "phospholipase C gamma 2 defect"
   ],
-  "pathophysiology": "PLAID results from mutations in PLCG2 that alter phospholipase C gamma 2 signalling in immune cells such as B lymphocytes, natural killer cells, and mast cells. The abnormal enzyme shows enhanced activity at reduced temperatures, so mild cooling of the skin triggers mast cell activation and urticaria. The same signalling defect disturbs B-cell development and function, producing antibody deficiency alongside a paradoxical tendency to autoimmunity and, in some, granulomatous disease. This dual disturbance explains the coexistence of cold urticaria, immunodeficiency, and immune dysregulation.",
-  "additionalDifferentials": [
-   "Cryopyrin-associated periodic syndromes (CAPS) with cold-triggered features",
-   "Acquired cold urticaria",
-   "Common variable immunodeficiency",
-   "APLAID (PLCG2 autoinflammation and immune dysregulation) variant",
-   "Systemic autoimmune disease with cutaneous features",
-   "Chronic spontaneous urticaria"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for PLCG2 mutations",
-   "Evaporative cooling challenge reproducing cold urticaria",
-   "Immunoglobulin levels and specific antibody responses",
-   "Lymphocyte subset analysis including B-cell subsets",
-   "Autoantibody panel to assess autoimmunity",
-   "Assessment for granulomatous disease where clinically suggested"
-  ],
-  "redFlags": [
-   "Recurrent or severe sinopulmonary infections indicating significant antibody deficiency",
-   "Anaphylaxis or airway involvement during cold exposure",
-   "Emergence of serious autoimmune or granulomatous complications",
-   "Bronchiectasis from repeated respiratory infection"
-  ],
-  "prognosis": "PLAID is a chronic condition; with cold avoidance, infection management, and treatment of autoimmune complications, many patients do well, though antibody deficiency and autoimmunity require ongoing care.",
-  "pitfalls": [
-   "Confusing cold-evaporation urticaria with cryopyrin-associated periodic syndromes and mistargeting therapy",
-   "Overlooking the underlying antibody deficiency and infection risk",
-   "Attributing autoimmunity to an unrelated primary autoimmune disease",
-   "Testing only for classic contact cold urticaria and missing the evaporative trigger"
-  ],
-  "references": [
-   "Textbook of Autoinflammation",
-   "Middleton's Allergy: Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoidance of evaporative skin cooling, the principal trigger of the cold urticaria",
-   "Antihistamines to attenuate cold-induced urticarial symptoms",
-   "Immunoglobulin replacement therapy for significant antibody deficiency",
-   "Prompt treatment and, where needed, prophylaxis of recurrent sinopulmonary infections",
-   "Immunosuppressive treatment of autoimmune and granulomatous manifestations as they arise",
-   "Regular vaccination and immunological monitoring within specialist immunology care",
-   "Genetic counselling and family testing for this PLCG2-associated dominant disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "plaid_syndrome-pathway",
-   "title": "PLAID (PLCG2-associated antibody deficiency and immune dysregulation): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by mutations in PLCG2, which encodes phospholipase C gamma 2, a signalling enzyme important in immune cells",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or severe sinopulmonary infections indicating significant antibody deficiency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for PLCG2 mutations, Evaporative cooling challenge reproducing cold urticaria, Immunoglobulin levels and specific antibody responses"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoidance of evaporative skin cooling, the principal trigger of the cold urticaria"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing cold-evaporation urticaria with cryopyrin-associated periodic syndromes and mistargeting therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of plaid (plcg2-associated antibody deficiency and immune dysregulation)."
-  }
- ],
- "tables": [
-  {
-   "id": "plaid_syndrome-matrix",
-   "title": "PLAID (PLCG2-associated antibody deficiency and immune dysregulation): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by mutations in PLCG2, which encodes phospholipase C gamma 2, a signalling enzyme important in immune cells",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Autoinflammatory",
+  "specialty": "Clinical Immunology / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Autoinflammation / Middleton's Allergy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by mutations in PLCG2, which encodes phospholipase C gamma 2, a signalling enzyme important in immune cells",
+      "Characterised by cold-induced urticaria triggered by evaporative cooling rather than by contact with a cold object",
+      "Combines an autoinflammatory cold urticaria with features of humoral immunodeficiency and autoimmunity",
+      "Antibody deficiency predisposes to recurrent sinopulmonary infection and may require immunoglobulin support",
+      "Autoimmune and granulomatous manifestations, including autoantibodies, can coexist with the immunodeficiency",
+      "The cold urticaria differs from classic acquired cold urticaria and from cryopyrin-associated periodic syndromes",
+      "Management is largely supportive, targeting infection risk, cold avoidance, and specific autoimmune complications"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for PLCG2 mutations, Evaporative cooling challenge reproducing cold urticaria, Immunoglobulin levels and specific",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PLAID results from mutations in PLCG2 that alter phospholipase C gamma 2 signalling in immune cells such as B lymphocytes, natural killer cells, and mast cells. The abnormal enzyme shows enhanced activity at reduced temperatures, so mild cooling of the skin triggers mast cell activation and urticaria. The same signalling defect disturbs B-cell development and function, producing antibody deficiency alongside a paradoxical tendency to autoimmunity and, in some, granulomatous disease. This dual disturbance explains the coexistence of cold urticaria, immunodeficiency, and immune dysregulation.",
+    "additionalDifferentials": [
+      "Cryopyrin-associated periodic syndromes (CAPS) with cold-triggered features",
+      "Acquired cold urticaria",
+      "Common variable immunodeficiency",
+      "APLAID (PLCG2 autoinflammation and immune dysregulation) variant",
+      "Systemic autoimmune disease with cutaneous features",
+      "Chronic spontaneous urticaria"
     ],
-    [
-     "Primary Differentials",
-     "Cryopyrin-associated periodic syndromes (CAPS) with cold-triggered features, Acquired cold urticaria, Common variable",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for PLCG2 mutations",
+      "Evaporative cooling challenge reproducing cold urticaria",
+      "Immunoglobulin levels and specific antibody responses",
+      "Lymphocyte subset analysis including B-cell subsets",
+      "Autoantibody panel to assess autoimmunity",
+      "Assessment for granulomatous disease where clinically suggested"
     ],
-    [
-     "Management Strategy",
-     "Avoidance of evaporative skin cooling, the principal trigger of the cold urticaria",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or severe sinopulmonary infections indicating significant antibody deficiency",
+      "Anaphylaxis or airway involvement during cold exposure",
+      "Emergence of serious autoimmune or granulomatous complications",
+      "Bronchiectasis from repeated respiratory infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing cold-evaporation urticaria with cryopyrin-associated periodic syndromes and mistargeting therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "PLAID is a chronic condition; with cold avoidance, infection management, and treatment of autoimmune complications, many patients do well, though antibody deficiency and autoimmunity require ongoing care.",
+    "pitfalls": [
+      "Confusing cold-evaporation urticaria with cryopyrin-associated periodic syndromes and mistargeting therapy",
+      "Overlooking the underlying antibody deficiency and infection risk",
+      "Attributing autoimmunity to an unrelated primary autoimmune disease",
+      "Testing only for classic contact cold urticaria and missing the evaporative trigger"
+    ],
+    "references": [
+      "Textbook of Autoinflammation",
+      "Middleton's Allergy: Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoidance of evaporative skin cooling, the principal trigger of the cold urticaria",
+      "Antihistamines to attenuate cold-induced urticarial symptoms",
+      "Immunoglobulin replacement therapy for significant antibody deficiency",
+      "Prompt treatment and, where needed, prophylaxis of recurrent sinopulmonary infections",
+      "Immunosuppressive treatment of autoimmune and granulomatous manifestations as they arise",
+      "Regular vaccination and immunological monitoring within specialist immunology care",
+      "Genetic counselling and family testing for this PLCG2-associated dominant disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for plaid (plcg2-associated antibody deficiency and immune dysregulation)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "plaid-syndrome-real-image",
-   "title": "PLAID (PLCG2-associated antibody deficiency and immune dysregulation): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "plaid_syndrome-pathway",
+      "title": "PLAID (PLCG2-associated antibody deficiency and immune dysregulation): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by mutations in PLCG2, which encodes phospholipase C gamma 2, a signalling enzyme important in immune cells",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or severe sinopulmonary infections indicating significant antibody deficiency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for PLCG2 mutations, Evaporative cooling challenge reproducing cold urticaria, Immunoglobulin levels and specific antibody responses"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoidance of evaporative skin cooling, the principal trigger of the cold urticaria"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing cold-evaporation urticaria with cryopyrin-associated periodic syndromes and mistargeting therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of plaid (plcg2-associated antibody deficiency and immune dysregulation)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "plaid_syndrome-matrix",
+      "title": "PLAID (PLCG2-associated antibody deficiency and immune dysregulation): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by mutations in PLCG2, which encodes phospholipase C gamma 2, a signalling enzyme important in immune cells",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for PLCG2 mutations, Evaporative cooling challenge reproducing cold urticaria, Immunoglobulin levels and specific",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cryopyrin-associated periodic syndromes (CAPS) with cold-triggered features, Acquired cold urticaria, Common variable",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoidance of evaporative skin cooling, the principal trigger of the cold urticaria",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing cold-evaporation urticaria with cryopyrin-associated periodic syndromes and mistargeting therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for plaid (plcg2-associated antibody deficiency and immune dysregulation)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Autoinflammation / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "plaid_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for PLCG2 mutations",
+          "cells": [
+            {
+              "text": "Genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaporative cooling challenge",
+          "cells": [
+            {
+              "text": "Reproduces cold urticaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels and specific antibody responses",
+          "cells": [
+            {
+              "text": "Antibody deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subset analysis including B-cell subsets",
+          "cells": [
+            {
+              "text": "B-cell subsets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody panel",
+          "cells": [
+            {
+              "text": "Autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for granulomatous disease",
+          "cells": [
+            {
+              "text": "Where clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plaid_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cryopyrin-associated periodic syndromes",
+          "cells": [
+            {
+              "text": "Cold-triggered features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plaid_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid the cold trigger",
+          "cells": [
+            {
+              "text": "Avoidance of evaporative skin cooling, the principal trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamines",
+          "cells": [
+            {
+              "text": "Attenuate cold-induced urticarial symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "For significant antibody deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection management",
+          "cells": [
+            {
+              "text": "Prompt treatment and prophylaxis of recurrent sinopulmonary infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and granulomatous disease",
+          "cells": [
+            {
+              "text": "Immunosuppression as manifestations arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist monitoring",
+          "cells": [
+            {
+              "text": "Regular vaccination and immunological monitoring in specialist immunology care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family testing for this PLCG2-associated dominant disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "plaid_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of PLAID (PLCG2-associated antibody deficiency and immune dysregulation)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cold-triggered urticaria with recurrent sinopulmonary infections and antibody deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (anaphylaxis or airway involvement with cold, autoimmunity, bronchiectasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and allergy review for anaphylaxis or airway involvement with cold",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PLCG2 genetic testing; evaporative cooling challenge; immunoglobulins and antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PLCG2 testing confirm a PLAID variant with cold-triggered urticaria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CAPS, acquired cold urticaria, CVID or chronic urticaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid evaporative skin cooling, the principal trigger of cold urticaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antihistamines to attenuate cold-induced urticarial symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunoglobulin replacement for significant antibody deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prompt treatment and prophylaxis of recurrent sinopulmonary infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Immunosuppression for autoimmune and granulomatous manifestations as they arise",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic; with cold avoidance and infection management many patients do well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

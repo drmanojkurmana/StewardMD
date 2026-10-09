@@ -1,172 +1,470 @@
 {
- "id": "dissecting_cellulitis_scalp",
- "name": "Dissecting cellulitis of the scalp",
- "aliases": [
-  "perifolliculitis capitis abscedens et suffodiens",
-  "Hoffman disease",
-  "dissecting folliculitis of the scalp"
- ],
- "class": "non_infective",
- "system": "Dermatology / Trichology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic neutrophilic scarring alopecia forming part of the follicular occlusion tetrad together with hidradenitis suppurativa, acne conglobata and pilonidal sinus",
-   "Presents with tender, boggy, fluctuant nodules and interconnecting sinuses on the vertex and occiput that discharge pus and cause patchy scarring alopecia",
-   "Pressure on one nodule may express pus from a distant opening, reflecting the interconnecting subcutaneous tracts",
-   "It predominantly affects young adult men, especially those of African descent",
-   "Follicular occlusion with secondary bacterial colonisation drives the deep suppurative inflammation, so it is not a primary infection",
-   "Advanced disease produces hypertrophic scarring, keloids and permanent hair loss with loss of follicular ostia",
-   "Management is difficult and includes anti-inflammatory antibiotic-class therapy, drainage of abscesses, and oral retinoid or biologic therapy in refractory disease, with surgery for scarred sinuses"
+  "id": "dissecting_cellulitis_scalp",
+  "name": "Dissecting cellulitis of the scalp",
+  "aliases": [
+    "perifolliculitis capitis abscedens et suffodiens",
+    "Hoffman disease",
+    "dissecting folliculitis of the scalp"
   ],
-  "pathophysiology": "Dissecting cellulitis of the scalp begins with follicular hyperkeratosis and occlusion, leading to follicular rupture, deep dermal and subcutaneous neutrophilic inflammation, abscess formation and interconnecting sinus tracts. Secondary bacterial colonisation amplifies the suppuration. As a component of the follicular occlusion tetrad it shares this pathogenic mechanism with hidradenitis suppurativa and acne conglobata. Chronic inflammation and sinus formation destroy follicles and produce extensive fibrosis with permanent, scarring alopecia.",
-  "additionalDifferentials": [
-   "Folliculitis decalvans, with pustules and tufting but less bogginess",
-   "Kerion, a fungal infection with positive mycology",
-   "Acne keloidalis nuchae",
-   "Bacterial carbuncle or scalp abscess",
-   "Other nodular scalp conditions such as cutis verticis gyrata"
-  ],
-  "additionalInvestigations": [
-   "Bacterial swab and culture to guide antibacterial therapy and exclude a primary infection",
-   "Mycology to exclude a kerion",
-   "Trichoscopy and clinical assessment of sinus interconnection",
-   "Scalp biopsy showing deep neutrophilic and granulomatous inflammation with sinus tracts",
-   "Screening for associated follicular occlusion tetrad conditions such as hidradenitis suppurativa and pilonidal sinus"
-  ],
-  "redFlags": [
-   "Extensive interconnecting sinuses with progressive scarring and keloid formation",
-   "Signs of deep or systemic infection",
-   "Long-standing disease with new indurated or non-healing areas, given the rare risk of squamous carcinoma",
-   "Severe refractory disease affecting quality of life, prompting escalation to systemic therapy"
-  ],
-  "prognosis": "The course is chronic and relapsing with a tendency to permanent scarring alopecia and keloids; response to treatment is variable and often incomplete, and refractory disease may require systemic retinoids, biologics or surgery.",
-  "pitfalls": [
-   "Treating recurrent nodules as isolated abscesses rather than recognising the interconnected disease",
-   "Missing the association with hidradenitis suppurativa and other occlusion-tetrad conditions",
-   "Under-treating with short antibiotic courses, allowing progression to scarring",
-   "Overlooking the small long-term risk of malignant change in chronic sinuses"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Oral retinoids such as isotretinoin are the mainstay to reduce follicular occlusion and suppurative inflammation",
-   "Give antibacterials such as tetracyclines guided by swab culture for secondary bacterial colonisation",
-   "Use biologic therapy with a TNF inhibitor such as adalimumab for refractory disease, reflecting the shared pathogenesis with hidradenitis suppurativa",
-   "Provide symptom relief with intralesional corticosteroids and incision and drainage of fluctuant abscesses",
-   "Add adjuncts such as oral zinc and antiseptic and keratolytic scalp care",
-   "Reserve surgical excision of extensive sinus tracts or laser epilation for recalcitrant disease",
-   "Screen for and manage associated follicular occlusion tetrad conditions including hidradenitis suppurativa and pilonidal sinus",
-   "Maintain dermatology follow-up given the chronic relapsing scarring course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dissecting_cellulitis_scalp-pathway",
-   "title": "Dissecting cellulitis of the scalp: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic neutrophilic scarring alopecia forming part of the follicular occlusion tetrad together with hidradenitis suppurativa, acne conglobata and pilonidal sinus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive interconnecting sinuses with progressive scarring and keloid formation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bacterial swab and culture to guide antibacterial therapy and exclude a primary infection, Mycology to exclude a kerion, Trichoscopy and clinical assessment of sinus interconnection"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Oral retinoids such as isotretinoin are the mainstay to reduce follicular occlusion and suppurative inflammation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating recurrent nodules as isolated abscesses rather than recognising the interconnected disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dissecting cellulitis of the scalp."
-  }
- ],
- "tables": [
-  {
-   "id": "dissecting_cellulitis_scalp-matrix",
-   "title": "Dissecting cellulitis of the scalp: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic neutrophilic scarring alopecia forming part of the follicular occlusion tetrad together with hidradenitis suppurativa,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Trichology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic neutrophilic scarring alopecia forming part of the follicular occlusion tetrad together with hidradenitis suppurativa, acne conglobata and pilonidal sinus",
+      "Presents with tender, boggy, fluctuant nodules and interconnecting sinuses on the vertex and occiput that discharge pus and cause patchy scarring alopecia",
+      "Pressure on one nodule may express pus from a distant opening, reflecting the interconnecting subcutaneous tracts",
+      "It predominantly affects young adult men, especially those of African descent",
+      "Follicular occlusion with secondary bacterial colonisation drives the deep suppurative inflammation, so it is not a primary infection",
+      "Advanced disease produces hypertrophic scarring, keloids and permanent hair loss with loss of follicular ostia",
+      "Management is difficult and includes anti-inflammatory antibiotic-class therapy, drainage of abscesses, and oral retinoid or biologic therapy in refractory disease, with surgery for scarred sinuses"
     ],
-    [
-     "Key Investigations",
-     "Bacterial swab and culture to guide antibacterial therapy and exclude a primary infection, Mycology to exclude a kerion,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dissecting cellulitis of the scalp begins with follicular hyperkeratosis and occlusion, leading to follicular rupture, deep dermal and subcutaneous neutrophilic inflammation, abscess formation and interconnecting sinus tracts. Secondary bacterial colonisation amplifies the suppuration. As a component of the follicular occlusion tetrad it shares this pathogenic mechanism with hidradenitis suppurativa and acne conglobata. Chronic inflammation and sinus formation destroy follicles and produce extensive fibrosis with permanent, scarring alopecia.",
+    "additionalDifferentials": [
+      "Folliculitis decalvans, with pustules and tufting but less bogginess",
+      "Kerion, a fungal infection with positive mycology",
+      "Acne keloidalis nuchae",
+      "Bacterial carbuncle or scalp abscess",
+      "Other nodular scalp conditions such as cutis verticis gyrata"
     ],
-    [
-     "Primary Differentials",
-     "Folliculitis decalvans, with pustules and tufting but less bogginess, Kerion, a fungal infection with positive mycology, Acne",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bacterial swab and culture to guide antibacterial therapy and exclude a primary infection",
+      "Mycology to exclude a kerion",
+      "Trichoscopy and clinical assessment of sinus interconnection",
+      "Scalp biopsy showing deep neutrophilic and granulomatous inflammation with sinus tracts",
+      "Screening for associated follicular occlusion tetrad conditions such as hidradenitis suppurativa and pilonidal sinus"
     ],
-    [
-     "Management Strategy",
-     "Oral retinoids such as isotretinoin are the mainstay to reduce follicular occlusion and suppurative inflammation",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive interconnecting sinuses with progressive scarring and keloid formation",
+      "Signs of deep or systemic infection",
+      "Long-standing disease with new indurated or non-healing areas, given the rare risk of squamous carcinoma",
+      "Severe refractory disease affecting quality of life, prompting escalation to systemic therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating recurrent nodules as isolated abscesses rather than recognising the interconnected disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is chronic and relapsing with a tendency to permanent scarring alopecia and keloids; response to treatment is variable and often incomplete, and refractory disease may require systemic retinoids, biologics or surgery.",
+    "pitfalls": [
+      "Treating recurrent nodules as isolated abscesses rather than recognising the interconnected disease",
+      "Missing the association with hidradenitis suppurativa and other occlusion-tetrad conditions",
+      "Under-treating with short antibiotic courses, allowing progression to scarring",
+      "Overlooking the small long-term risk of malignant change in chronic sinuses"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Oral retinoids such as isotretinoin are the mainstay to reduce follicular occlusion and suppurative inflammation",
+      "Give antibacterials such as tetracyclines guided by swab culture for secondary bacterial colonisation",
+      "Use biologic therapy with a TNF inhibitor such as adalimumab for refractory disease, reflecting the shared pathogenesis with hidradenitis suppurativa",
+      "Provide symptom relief with intralesional corticosteroids and incision and drainage of fluctuant abscesses",
+      "Add adjuncts such as oral zinc and antiseptic and keratolytic scalp care",
+      "Reserve surgical excision of extensive sinus tracts or laser epilation for recalcitrant disease",
+      "Screen for and manage associated follicular occlusion tetrad conditions including hidradenitis suppurativa and pilonidal sinus",
+      "Maintain dermatology follow-up given the chronic relapsing scarring course"
     ]
-   ],
-   "caption": "Overview comparison matrix for dissecting cellulitis of the scalp."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dissecting-cellulitis-scalp-real-image",
-   "title": "Dissecting cellulitis of the scalp: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "dissecting_cellulitis_scalp-pathway",
+      "title": "Dissecting cellulitis of the scalp: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic neutrophilic scarring alopecia forming part of the follicular occlusion tetrad together with hidradenitis suppurativa, acne conglobata and pilonidal sinus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive interconnecting sinuses with progressive scarring and keloid formation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bacterial swab and culture to guide antibacterial therapy and exclude a primary infection, Mycology to exclude a kerion, Trichoscopy and clinical assessment of sinus interconnection"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Oral retinoids such as isotretinoin are the mainstay to reduce follicular occlusion and suppurative inflammation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating recurrent nodules as isolated abscesses rather than recognising the interconnected disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dissecting cellulitis of the scalp."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dissecting_cellulitis_scalp-matrix",
+      "title": "Dissecting cellulitis of the scalp: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic neutrophilic scarring alopecia forming part of the follicular occlusion tetrad together with hidradenitis suppurativa,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bacterial swab and culture to guide antibacterial therapy and exclude a primary infection, Mycology to exclude a kerion,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Folliculitis decalvans, with pustules and tufting but less bogginess, Kerion, a fungal infection with positive mycology, Acne",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Oral retinoids such as isotretinoin are the mainstay to reduce follicular occlusion and suppurative inflammation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating recurrent nodules as isolated abscesses rather than recognising the interconnected disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dissecting cellulitis of the scalp."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dissecting_cellulitis_scalp-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial swab and culture",
+          "cells": [
+            {
+              "text": "Guides antibacterial therapy and excludes primary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycology",
+          "cells": [
+            {
+              "text": "Excludes a kerion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy and clinical assessment",
+          "cells": [
+            {
+              "text": "Interconnection of sinuses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp biopsy",
+          "cells": [
+            {
+              "text": "Deep neutrophilic and granulomatous inflammation with sinus tracts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for follicular occlusion tetrad conditions",
+          "cells": [
+            {
+              "text": "Hidradenitis suppurativa and pilonidal sinus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dissecting_cellulitis_scalp-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Folliculitis decalvans",
+          "cells": [
+            {
+              "text": "Pustules and tufting, with less bogginess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kerion",
+          "cells": [
+            {
+              "text": "Fungal infection with positive mycology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial carbuncle or scalp abscess",
+          "cells": [
+            {
+              "text": "Recurrent nodules are interconnected disease, not isolated abscesses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dissecting_cellulitis_scalp-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral isotretinoin",
+          "cells": [
+            {
+              "text": "Mainstay to reduce follicular occlusion and suppurative inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetracyclines guided by culture",
+          "cells": [
+            {
+              "text": "For secondary bacterial colonisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF inhibitor (adalimumab)",
+          "cells": [
+            {
+              "text": "Refractory disease; shares pathogenesis with hidradenitis suppurativa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional steroids and drainage",
+          "cells": [
+            {
+              "text": "Symptom relief; incision and drainage of fluctuant abscesses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral zinc and scalp care",
+          "cells": [
+            {
+              "text": "Adjuncts with antiseptic and keratolytic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery or laser",
+          "cells": [
+            {
+              "text": "Extensive sinus tracts or recalcitrant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "Hidradenitis suppurativa and pilonidal sinus; chronic relapsing scarring course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dissecting_cellulitis_scalp-dx-mgmt",
+      "title": "Diagnosis and management of Dissecting cellulitis of the scalp",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dissecting cellulitis of the scalp: interconnected nodules and sinuses",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (scarring sinuses, deep infection, new non-healing indurated area)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of deep or systemic infection; biopsy any new indurated area",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Culture and mycology; trichoscopy; scalp biopsy; screen for HS and pilonidal sinus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show deep neutrophilic and granulomatous inflammation with sinus tracts?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider folliculitis decalvans, kerion, carbuncle or cutis verticis gyrata",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral isotretinoin as the mainstay to reduce follicular occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Culture-guided tetracyclines for secondary bacterial colonisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "TNF inhibitor such as adalimumab for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intralesional steroid and drainage of fluctuant abscesses",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for hidradenitis suppurativa and pilonidal sinus",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and relapsing with scarring and keloids; response is often incomplete",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

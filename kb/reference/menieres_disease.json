@@ -1,172 +1,514 @@
 {
- "id": "menieres_disease",
- "name": "Meniere's disease",
- "aliases": [
-  "Meniere disease",
-  "endolymphatic hydrops",
-  "Meniere's syndrome"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by a triad of episodic vertigo, fluctuating sensorineural hearing loss and tinnitus, often with a sense of aural fullness",
-   "Vertigo attacks typically last from minutes to hours, distinguishing them from the seconds-long spells of positional vertigo",
-   "Hearing loss initially affects lower frequencies and fluctuates, but tends to become permanent and progressive over time",
-   "Usually begins unilaterally, though the second ear can become involved in a proportion of patients",
-   "The underlying disorder is endolymphatic hydrops, an increase in endolymph volume within the membranous labyrinth",
-   "Management principles include dietary salt restriction, diuretics and vestibular sedatives for acute attacks, with lifestyle measures to reduce triggers",
-   "Escalating options for intractable disease range from intratympanic therapy to surgical procedures such as endolymphatic sac decompression or labyrinthine ablation",
-   "Sudden drop attacks (Tumarkin crises) can cause falls without warning and pose an injury risk"
+  "id": "menieres_disease",
+  "name": "Meniere's disease",
+  "aliases": [
+    "Meniere disease",
+    "endolymphatic hydrops",
+    "Meniere's syndrome"
   ],
-  "pathophysiology": "Meniere's disease is attributed to endolymphatic hydrops, an abnormal accumulation of endolymph that distends the membranous labyrinth. Impaired production, circulation or absorption of endolymph, potentially involving the endolymphatic sac, raises pressure within the scala media. Episodic rupture or dysfunction of the membranes allows mixing of endolymph and perilymph, disturbing the ionic environment of the sensory hair cells and producing acute vertigo, fluctuating hearing loss and tinnitus. Repeated insults cause progressive damage to cochlear and vestibular structures, leading to permanent hearing loss and vestibular hypofunction.",
-  "additionalDifferentials": [
-   "Vestibular migraine",
-   "Vestibular neuritis or labyrinthitis",
-   "Benign paroxysmal positional vertigo",
-   "Acoustic neuroma (vestibular schwannoma)",
-   "Autoimmune inner ear disease",
-   "Perilymph fistula"
-  ],
-  "additionalInvestigations": [
-   "Pure tone audiometry to document fluctuating low-frequency sensorineural loss",
-   "Tests of vestibular function such as caloric testing and video head impulse testing",
-   "Electrocochleography and other specialised tests where available",
-   "MRI of the internal auditory meatus to exclude a vestibular schwannoma",
-   "Blood tests to exclude alternative causes when clinically indicated"
-  ],
-  "redFlags": [
-   "Progressive unilateral hearing loss with tinnitus raising concern for vestibular schwannoma",
-   "Neurological signs suggesting a central cause",
-   "Sudden severe sensorineural hearing loss requiring urgent assessment",
-   "Recurrent drop attacks causing injury"
-  ],
-  "prognosis": "The course is variable and unpredictable, with clustered attacks and remissions; vertigo often diminishes over years as vestibular function declines, but hearing loss tends to be progressive and permanent.",
-  "pitfalls": [
-   "Diagnosing Meniere's without excluding a retrocochlear lesion such as acoustic neuroma",
-   "Confusing it with vestibular migraine, which can present similarly",
-   "Overusing vestibular sedatives beyond acute attacks and impairing compensation",
-   "Underestimating the psychosocial and safety impact of unpredictable attacks"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Dietary salt restriction with reduction of caffeine and alcohol as first-line lifestyle measures to limit endolymphatic hydrops",
-   "Maintenance diuretic therapy and betahistine to reduce attack frequency",
-   "Vestibular sedatives and antiemetics such as prochlorperazine or antihistamines for acute vertiginous attacks",
-   "Intratympanic corticosteroid, or ablative intratympanic gentamicin for disabling refractory unilateral disease",
-   "Vestibular rehabilitation and hearing aids to manage residual vestibular hypofunction and progressive sensorineural loss",
-   "Surgical options such as endolymphatic sac decompression, vestibular neurectomy or labyrinthectomy reserved for intractable vertigo",
-   "Audiological monitoring and safety counselling regarding sudden attacks, with ENT specialist follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "menieres_disease-pathway",
-   "title": "Meniere's disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by a triad of episodic vertigo, fluctuating sensorineural hearing loss and tinnitus, often with a sense of aural fullness",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive unilateral hearing loss with tinnitus raising concern for vestibular schwannoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pure tone audiometry to document fluctuating low-frequency sensorineural loss, Tests of vestibular function such as caloric testing and video head impulse testing, Electrocochleography and other specialised tests where"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Dietary salt restriction with reduction of caffeine and alcohol as first-line lifestyle measures to limit endolymphatic hydrops"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing Meniere's without excluding a retrocochlear lesion such as acoustic neuroma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of meniere's disease."
-  }
- ],
- "tables": [
-  {
-   "id": "menieres_disease-matrix",
-   "title": "Meniere's disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by a triad of episodic vertigo, fluctuating sensorineural hearing loss and tinnitus, often with a sense of aural",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by a triad of episodic vertigo, fluctuating sensorineural hearing loss and tinnitus, often with a sense of aural fullness",
+      "Vertigo attacks typically last from minutes to hours, distinguishing them from the seconds-long spells of positional vertigo",
+      "Hearing loss initially affects lower frequencies and fluctuates, but tends to become permanent and progressive over time",
+      "Usually begins unilaterally, though the second ear can become involved in a proportion of patients",
+      "The underlying disorder is endolymphatic hydrops, an increase in endolymph volume within the membranous labyrinth",
+      "Management principles include dietary salt restriction, diuretics and vestibular sedatives for acute attacks, with lifestyle measures to reduce triggers",
+      "Escalating options for intractable disease range from intratympanic therapy to surgical procedures such as endolymphatic sac decompression or labyrinthine ablation",
+      "Sudden drop attacks (Tumarkin crises) can cause falls without warning and pose an injury risk"
     ],
-    [
-     "Key Investigations",
-     "Pure tone audiometry to document fluctuating low-frequency sensorineural loss, Tests of vestibular function such as caloric",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Meniere's disease is attributed to endolymphatic hydrops, an abnormal accumulation of endolymph that distends the membranous labyrinth. Impaired production, circulation or absorption of endolymph, potentially involving the endolymphatic sac, raises pressure within the scala media. Episodic rupture or dysfunction of the membranes allows mixing of endolymph and perilymph, disturbing the ionic environment of the sensory hair cells and producing acute vertigo, fluctuating hearing loss and tinnitus. Repeated insults cause progressive damage to cochlear and vestibular structures, leading to permanent hearing loss and vestibular hypofunction.",
+    "additionalDifferentials": [
+      "Vestibular migraine",
+      "Vestibular neuritis or labyrinthitis",
+      "Benign paroxysmal positional vertigo",
+      "Acoustic neuroma (vestibular schwannoma)",
+      "Autoimmune inner ear disease",
+      "Perilymph fistula"
     ],
-    [
-     "Primary Differentials",
-     "Vestibular migraine, Vestibular neuritis or labyrinthitis, Benign paroxysmal positional vertigo",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pure tone audiometry to document fluctuating low-frequency sensorineural loss",
+      "Tests of vestibular function such as caloric testing and video head impulse testing",
+      "Electrocochleography and other specialised tests where available",
+      "MRI of the internal auditory meatus to exclude a vestibular schwannoma",
+      "Blood tests to exclude alternative causes when clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Dietary salt restriction with reduction of caffeine and alcohol as first-line lifestyle measures to limit endolymphatic hydrops",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive unilateral hearing loss with tinnitus raising concern for vestibular schwannoma",
+      "Neurological signs suggesting a central cause",
+      "Sudden severe sensorineural hearing loss requiring urgent assessment",
+      "Recurrent drop attacks causing injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing Meniere's without excluding a retrocochlear lesion such as acoustic neuroma",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable and unpredictable, with clustered attacks and remissions; vertigo often diminishes over years as vestibular function declines, but hearing loss tends to be progressive and permanent.",
+    "pitfalls": [
+      "Diagnosing Meniere's without excluding a retrocochlear lesion such as acoustic neuroma",
+      "Confusing it with vestibular migraine, which can present similarly",
+      "Overusing vestibular sedatives beyond acute attacks and impairing compensation",
+      "Underestimating the psychosocial and safety impact of unpredictable attacks"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Dietary salt restriction with reduction of caffeine and alcohol as first-line lifestyle measures to limit endolymphatic hydrops",
+      "Maintenance diuretic therapy and betahistine to reduce attack frequency",
+      "Vestibular sedatives and antiemetics such as prochlorperazine or antihistamines for acute vertiginous attacks",
+      "Intratympanic corticosteroid, or ablative intratympanic gentamicin for disabling refractory unilateral disease",
+      "Vestibular rehabilitation and hearing aids to manage residual vestibular hypofunction and progressive sensorineural loss",
+      "Surgical options such as endolymphatic sac decompression, vestibular neurectomy or labyrinthectomy reserved for intractable vertigo",
+      "Audiological monitoring and safety counselling regarding sudden attacks, with ENT specialist follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for meniere's disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "menieres-disease-real-image",
-   "title": "Meniere's disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "menieres_disease-pathway",
+      "title": "Meniere's disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by a triad of episodic vertigo, fluctuating sensorineural hearing loss and tinnitus, often with a sense of aural fullness",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive unilateral hearing loss with tinnitus raising concern for vestibular schwannoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pure tone audiometry to document fluctuating low-frequency sensorineural loss, Tests of vestibular function such as caloric testing and video head impulse testing, Electrocochleography and other specialised tests where"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Dietary salt restriction with reduction of caffeine and alcohol as first-line lifestyle measures to limit endolymphatic hydrops"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing Meniere's without excluding a retrocochlear lesion such as acoustic neuroma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of meniere's disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "menieres_disease-matrix",
+      "title": "Meniere's disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by a triad of episodic vertigo, fluctuating sensorineural hearing loss and tinnitus, often with a sense of aural",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pure tone audiometry to document fluctuating low-frequency sensorineural loss, Tests of vestibular function such as caloric",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vestibular migraine, Vestibular neuritis or labyrinthitis, Benign paroxysmal positional vertigo",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Dietary salt restriction with reduction of caffeine and alcohol as first-line lifestyle measures to limit endolymphatic hydrops",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing Meniere's without excluding a retrocochlear lesion such as acoustic neuroma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for meniere's disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 21-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "menieres_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure tone audiometry",
+          "cells": [
+            {
+              "text": "Fluctuating low-frequency sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caloric testing and video head impulse testing",
+          "cells": [
+            {
+              "text": "Vestibular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the internal auditory meatus",
+          "cells": [
+            {
+              "text": "Vestibular schwannoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests, when clinically indicated",
+          "cells": [
+            {
+              "text": "Alternative causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "menieres_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Salt restriction",
+          "cells": [
+            {
+              "text": "With reduced caffeine and alcohol, as first-line lifestyle measures to limit endolymphatic hydrops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics and betahistine",
+          "cells": [
+            {
+              "text": "Maintenance therapy to reduce attack frequency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular sedatives and antiemetics",
+          "cells": [
+            {
+              "text": "Prochlorperazine or antihistamines for acute vertiginous attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intratympanic therapy",
+          "cells": [
+            {
+              "text": "Corticosteroid, or ablative gentamicin for disabling refractory unilateral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular rehabilitation and hearing aids",
+          "cells": [
+            {
+              "text": "Residual vestibular hypofunction and progressive sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Endolymphatic sac decompression, vestibular neurectomy or labyrinthectomy for intractable vertigo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology and safety counselling",
+          "cells": [
+            {
+              "text": "Sudden attacks; ENT specialist follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "menieres_disease-ddx",
+      "kind": "ddx",
+      "title": "Peripheral versus central vertigo",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Peripheral (labyrinth or vestibular nerve)",
+        "Central (brainstem or cerebellum)"
+      ],
+      "rows": [
+        {
+          "parameter": "Nystagmus direction",
+          "cells": [
+            {
+              "text": "Unidirectional, fast phase away from the lesion"
+            },
+            {
+              "text": "Bidirectional (direction-changing) or unidirectional"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Purely horizontal nystagmus without torsion",
+          "cells": [
+            {
+              "text": "Uncommon"
+            },
+            {
+              "text": "May be present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Purely vertical or purely torsional nystagmus",
+          "cells": [
+            {
+              "text": "Never present"
+            },
+            {
+              "text": "May be present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Visual fixation",
+          "cells": [
+            {
+              "text": "Inhibits nystagmus"
+            },
+            {
+              "text": "No inhibition"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tinnitus or deafness",
+          "cells": [
+            {
+              "text": "Often present"
+            },
+            {
+              "text": "Usually absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Associated CNS abnormalities",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "Extremely common (diplopia, hiccups, cranial neuropathies, dysarthria)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Common causes",
+          "cells": [
+            {
+              "text": "Benign paroxysmal positional vertigo, labyrinthitis, vestibular neuritis, Meniere disease, labyrinthine ischemia, trauma, toxin"
+            },
+            {
+              "text": "Vascular, demyelinating, neoplasm"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The source prints footnote markers a and b but no footnote text."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "menieres_disease-dx-mgmt",
+      "title": "Diagnosis and management of Meniere's disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Episodic vertigo with fluctuating low-frequency hearing loss and tinnitus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive unilateral hearing loss, sudden deafness, drop attacks or central signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent assessment for sudden deafness or a central cause; MRI for schwannoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry; vestibular testing (calorics, vHIT); MRI of internal auditory meatus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is vestibular schwannoma excluded on MRI of the internal auditory meatus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acoustic neuroma or other vestibular disorders; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Salt restriction, with reduced caffeine and alcohol, as first-line measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maintenance diuretic and betahistine to reduce attack frequency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prochlorperazine or antihistamines for acute vertiginous attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intratympanic corticosteroid, or ablative gentamicin for disabling refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vestibular rehabilitation and hearing aids; surgery reserved for intractable vertigo",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

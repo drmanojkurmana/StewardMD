@@ -1,173 +1,451 @@
 {
- "id": "foxg1_syndrome",
- "name": "FOXG1 syndrome (congenital Rett variant)",
- "aliases": [
-  "FOXG1",
-  "congenital variant of Rett syndrome",
-  "FOXG1-related encephalopathy",
-  "14q12 deletion syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Clinical Genetics / Neurodevelopmental",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents in the first months of life, earlier than classic Rett syndrome, with severe developmental impairment and absent early milestones rather than a regression after normal early development",
-   "Postnatal (acquired) microcephaly with deceleration of head growth is characteristic",
-   "A prominent dyskinetic movement disorder with stereotypies, chorea, dystonia and hand automatisms is a hallmark feature",
-   "Feeding difficulties, gastro-oesophageal reflux, irritability and disordered sleep are common in infancy",
-   "Epilepsy is frequent, and brain imaging often shows a thin or hypoplastic corpus callosum, simplified gyration and delayed myelination",
-   "Caused by loss-of-function of FOXG1, a forkhead-box transcription factor essential to early forebrain (telencephalic) development, usually as a de novo autosomal dominant variant or a 14q12 deletion",
-   "Unlike classic Rett syndrome (MECP2), FOXG1 syndrome affects both sexes and lacks the typical period of normal early development"
+  "id": "foxg1_syndrome",
+  "name": "FOXG1 syndrome (congenital Rett variant)",
+  "aliases": [
+    "FOXG1",
+    "congenital variant of Rett syndrome",
+    "FOXG1-related encephalopathy",
+    "14q12 deletion syndrome"
   ],
-  "pathophysiology": "FOXG1 encodes a forkhead-box transcription factor that is a master regulator of early forebrain patterning, controlling telencephalic progenitor proliferation, cortical neuron layering and corpus callosum formation. Heterozygous loss-of-function variants or 14q12 deletions reduce functional protein, disrupting the developmental programme that builds the cerebral cortex and interhemispheric connections. The resulting structural and connectivity abnormalities produce the profound congenital encephalopathy, movement disorder and acquired microcephaly. Because the primary defect is in prenatal brain construction rather than in later synaptic maintenance, the phenotype is congenital rather than regressive.",
-  "additionalDifferentials": [
-   "Classic Rett syndrome (MECP2)",
-   "CDKL5 deficiency disorder",
-   "Angelman syndrome",
-   "Cerebral palsy of hypoxic-ischaemic origin",
-   "Pitt-Hopkins syndrome",
-   "Other early-infantile developmental and epileptic encephalopathies"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to assess corpus callosum, gyration, myelination and frontal lobe volume",
-   "EEG to characterise epileptiform activity and background",
-   "Chromosomal microarray to detect 14q12 deletions or duplications",
-   "Targeted FOXG1 sequencing or a Rett/epileptic-encephalopathy gene panel or exome sequencing",
-   "Developmental, feeding and swallowing assessment"
-  ],
-  "redFlags": [
-   "Rapidly decelerating head circumference indicating acquired microcephaly",
-   "Emerging or poorly controlled seizures",
-   "Feeding failure, aspiration or faltering growth",
-   "Severe irritability or sleep disruption affecting the child and family"
-  ],
-  "prognosis": "FOXG1 syndrome is a severe lifelong neurodevelopmental disorder with profound intellectual disability, absent speech and limited independent mobility. Life expectancy can be reduced by seizures and respiratory or feeding complications, and care is supportive and multidisciplinary.",
-  "pitfalls": [
-   "Labelling the child as having cerebral palsy and not pursuing a genetic diagnosis",
-   "Assuming Rett syndrome requires a female patient and a regression history, thereby missing the congenital FOXG1 variant",
-   "Overlooking the dyskinetic movement disorder or misattributing it solely to seizures",
-   "Failing to recognise that FOXG1 duplications cause a distinct, epilepsy-predominant phenotype different from deletions"
-  ],
-  "references": [
-   "GeneReviews: FOXG1 Syndrome",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antiseizure medication tailored to the epileptic encephalopathy, adjusted according to EEG and seizure semiology",
-   "Symptomatic control of the dyskinetic movement disorder (chorea, dystonia, stereotypies) with agents such as trihexyphenidyl or a dopamine-depleting drug",
-   "Management of feeding difficulty and gastro-oesophageal reflux with feeding therapy and antireflux measures, and gastrostomy where aspiration or failure to thrive occurs",
-   "Treatment of disordered sleep and irritability, with physiotherapy and occupational therapy to support posture and tone and prevent contractures",
-   "Surveillance of head growth, respiratory function and nutrition, with prompt treatment of aspiration and chest infections",
-   "Multidisciplinary neurodevelopmental care with augmentative and alternative communication aids given absent speech",
-   "Genetic counselling for the family, noting most cases are de novo autosomal dominant variants or 14q12 deletions, with discussion of germline mosaicism recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "foxg1_syndrome-pathway",
-   "title": "FOXG1 syndrome (congenital Rett variant): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents in the first months of life, earlier than classic Rett syndrome, with severe developmental impairment and absent early milestones rather than a regression after normal early development",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly decelerating head circumference indicating acquired microcephaly",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to assess corpus callosum, gyration, myelination and frontal lobe volume, EEG to characterise epileptiform activity and background, Chromosomal microarray to detect 14q12 deletions or duplications"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antiseizure medication tailored to the epileptic encephalopathy, adjusted according to EEG and seizure semiology"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the child as having cerebral palsy and not pursuing a genetic diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of foxg1 syndrome (congenital rett variant)."
-  }
- ],
- "tables": [
-  {
-   "id": "foxg1_syndrome-matrix",
-   "title": "FOXG1 syndrome (congenital Rett variant): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents in the first months of life, earlier than classic Rett syndrome, with severe developmental impairment and absent early",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Clinical Genetics / Neurodevelopmental",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents in the first months of life, earlier than classic Rett syndrome, with severe developmental impairment and absent early milestones rather than a regression after normal early development",
+      "Postnatal (acquired) microcephaly with deceleration of head growth is characteristic",
+      "A prominent dyskinetic movement disorder with stereotypies, chorea, dystonia and hand automatisms is a hallmark feature",
+      "Feeding difficulties, gastro-oesophageal reflux, irritability and disordered sleep are common in infancy",
+      "Epilepsy is frequent, and brain imaging often shows a thin or hypoplastic corpus callosum, simplified gyration and delayed myelination",
+      "Caused by loss-of-function of FOXG1, a forkhead-box transcription factor essential to early forebrain (telencephalic) development, usually as a de novo autosomal dominant variant or a 14q12 deletion",
+      "Unlike classic Rett syndrome (MECP2), FOXG1 syndrome affects both sexes and lacks the typical period of normal early development"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to assess corpus callosum, gyration, myelination and frontal lobe volume, EEG to characterise epileptiform activity and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "FOXG1 encodes a forkhead-box transcription factor that is a master regulator of early forebrain patterning, controlling telencephalic progenitor proliferation, cortical neuron layering and corpus callosum formation. Heterozygous loss-of-function variants or 14q12 deletions reduce functional protein, disrupting the developmental programme that builds the cerebral cortex and interhemispheric connections. The resulting structural and connectivity abnormalities produce the profound congenital encephalopathy, movement disorder and acquired microcephaly. Because the primary defect is in prenatal brain construction rather than in later synaptic maintenance, the phenotype is congenital rather than regressive.",
+    "additionalDifferentials": [
+      "Classic Rett syndrome (MECP2)",
+      "CDKL5 deficiency disorder",
+      "Angelman syndrome",
+      "Cerebral palsy of hypoxic-ischaemic origin",
+      "Pitt-Hopkins syndrome",
+      "Other early-infantile developmental and epileptic encephalopathies"
     ],
-    [
-     "Primary Differentials",
-     "Classic Rett syndrome (MECP2), CDKL5 deficiency disorder, Angelman syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to assess corpus callosum, gyration, myelination and frontal lobe volume",
+      "EEG to characterise epileptiform activity and background",
+      "Chromosomal microarray to detect 14q12 deletions or duplications",
+      "Targeted FOXG1 sequencing or a Rett/epileptic-encephalopathy gene panel or exome sequencing",
+      "Developmental, feeding and swallowing assessment"
     ],
-    [
-     "Management Strategy",
-     "Antiseizure medication tailored to the epileptic encephalopathy, adjusted according to EEG and seizure semiology",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly decelerating head circumference indicating acquired microcephaly",
+      "Emerging or poorly controlled seizures",
+      "Feeding failure, aspiration or faltering growth",
+      "Severe irritability or sleep disruption affecting the child and family"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the child as having cerebral palsy and not pursuing a genetic diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "FOXG1 syndrome is a severe lifelong neurodevelopmental disorder with profound intellectual disability, absent speech and limited independent mobility. Life expectancy can be reduced by seizures and respiratory or feeding complications, and care is supportive and multidisciplinary.",
+    "pitfalls": [
+      "Labelling the child as having cerebral palsy and not pursuing a genetic diagnosis",
+      "Assuming Rett syndrome requires a female patient and a regression history, thereby missing the congenital FOXG1 variant",
+      "Overlooking the dyskinetic movement disorder or misattributing it solely to seizures",
+      "Failing to recognise that FOXG1 duplications cause a distinct, epilepsy-predominant phenotype different from deletions"
+    ],
+    "references": [
+      "GeneReviews: FOXG1 Syndrome",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antiseizure medication tailored to the epileptic encephalopathy, adjusted according to EEG and seizure semiology",
+      "Symptomatic control of the dyskinetic movement disorder (chorea, dystonia, stereotypies) with agents such as trihexyphenidyl or a dopamine-depleting drug",
+      "Management of feeding difficulty and gastro-oesophageal reflux with feeding therapy and antireflux measures, and gastrostomy where aspiration or failure to thrive occurs",
+      "Treatment of disordered sleep and irritability, with physiotherapy and occupational therapy to support posture and tone and prevent contractures",
+      "Surveillance of head growth, respiratory function and nutrition, with prompt treatment of aspiration and chest infections",
+      "Multidisciplinary neurodevelopmental care with augmentative and alternative communication aids given absent speech",
+      "Genetic counselling for the family, noting most cases are de novo autosomal dominant variants or 14q12 deletions, with discussion of germline mosaicism recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for foxg1 syndrome (congenital rett variant)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "foxg1-syndrome-real-image",
-   "title": "FOXG1 syndrome (congenital Rett variant): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "foxg1_syndrome-pathway",
+      "title": "FOXG1 syndrome (congenital Rett variant): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents in the first months of life, earlier than classic Rett syndrome, with severe developmental impairment and absent early milestones rather than a regression after normal early development",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly decelerating head circumference indicating acquired microcephaly",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to assess corpus callosum, gyration, myelination and frontal lobe volume, EEG to characterise epileptiform activity and background, Chromosomal microarray to detect 14q12 deletions or duplications"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antiseizure medication tailored to the epileptic encephalopathy, adjusted according to EEG and seizure semiology"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the child as having cerebral palsy and not pursuing a genetic diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of foxg1 syndrome (congenital rett variant)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "foxg1_syndrome-matrix",
+      "title": "FOXG1 syndrome (congenital Rett variant): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents in the first months of life, earlier than classic Rett syndrome, with severe developmental impairment and absent early",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to assess corpus callosum, gyration, myelination and frontal lobe volume, EEG to characterise epileptiform activity and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic Rett syndrome (MECP2), CDKL5 deficiency disorder, Angelman syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antiseizure medication tailored to the epileptic encephalopathy, adjusted according to EEG and seizure semiology",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the child as having cerebral palsy and not pursuing a genetic diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for foxg1 syndrome (congenital rett variant)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "foxg1_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Assesses corpus callosum, gyration, myelination and frontal lobe volume"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Characterises epileptiform activity and background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Detects 14q12 deletions or duplications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted FOXG1 sequencing, gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, feeding and swallowing assessment",
+          "cells": [
+            {
+              "text": "Feeding and swallowing function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "foxg1_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic Rett syndrome (MECP2)",
+          "cells": [
+            {
+              "text": "Assuming a female patient with regression misses the congenital FOXG1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral palsy of hypoxic-ischaemic origin",
+          "cells": [
+            {
+              "text": "Labelling as cerebral palsy without pursuing a genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "foxg1_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Tailored to the epileptic encephalopathy, adjusted by EEG and seizure semiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dyskinetic movement disorder",
+          "cells": [
+            {
+              "text": "Chorea, dystonia and stereotypies; agents such as trihexyphenidyl"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and reflux",
+          "cells": [
+            {
+              "text": "Feeding therapy and antireflux measures; gastrostomy where aspiration or failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep and irritability",
+          "cells": [
+            {
+              "text": "Treatment, with physiotherapy and occupational therapy for posture and tone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Head growth, respiratory function and nutrition; prompt treatment of aspiration and chest infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Communication aids",
+          "cells": [
+            {
+              "text": "Augmentative and alternative communication, given absent speech"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Most cases are de novo autosomal dominant variants or 14q12 deletions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "foxg1_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of FOXG1 syndrome (congenital Rett variant)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected FOXG1 syndrome: severe developmental delay, epilepsy and absent speech",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acquired microcephaly, poorly controlled seizures, feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for acquired microcephaly, uncontrolled seizures or aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, EEG, chromosomal microarray and FOXG1 sequencing or panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does FOXG1 sequencing or the gene panel confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Rett syndrome, CDKL5 disorder, Angelman syndrome or hypoxic cerebral palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication adjusted to EEG and seizure semiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Symptomatic control of chorea, dystonia and stereotypies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding therapy and antireflux measures; gastrostomy if aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance of head growth, respiration and nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe lifelong disorder with profound intellectual disability and absent speech",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

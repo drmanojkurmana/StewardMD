@@ -1,174 +1,517 @@
 {
- "id": "alport_hearing_variant",
- "name": "Alport syndrome - sensorineural hearing loss features",
- "aliases": [
-  "hereditary nephritis",
-  "COL4A5",
-  "COL4A3",
-  "COL4A4",
-  "Alport syndrome"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology / Genetics",
- "specialty": "Otology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology / Comprehensive Clinical Nephrology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A type IV collagen disorder combining progressive hereditary nephritis, sensorineural hearing loss and characteristic ocular changes",
-   "Hearing loss is bilateral, high-frequency and progressive, typically emerging in later childhood or adolescence rather than at birth",
-   "Most cases are X-linked from COL4A5 mutations, so affected males are usually more severely affected than female carriers; autosomal recessive and dominant forms involve COL4A3 and COL4A4",
-   "Renal disease presents with haematuria progressing to proteinuria and declining renal function, and is the dominant determinant of prognosis",
-   "Ocular signs such as anterior lenticonus and retinal flecks are highly suggestive when present",
-   "The hearing loss reflects abnormal type IV collagen in the cochlear basement membranes rather than a structural malformation",
-   "Persistent haematuria with a family history and hearing loss should prompt evaluation for Alport syndrome"
+  "id": "alport_hearing_variant",
+  "name": "Alport syndrome - sensorineural hearing loss features",
+  "aliases": [
+    "hereditary nephritis",
+    "COL4A5",
+    "COL4A3",
+    "COL4A4",
+    "Alport syndrome"
   ],
-  "pathophysiology": "Alport syndrome is caused by mutations in the genes encoding the alpha-3, alpha-4 and alpha-5 chains of type IV collagen, a key component of specialised basement membranes. In the kidney, defective collagen disrupts the glomerular basement membrane, producing progressive nephritis with haematuria and eventual renal failure. The same collagen is present in basement membranes of the cochlea, and its abnormality is thought to impair the mechanical and metabolic environment of the organ of Corti, causing progressive high-frequency sensorineural hearing loss. Defective basement-membrane collagen in the lens capsule and retina underlies the associated ocular abnormalities.",
-  "additionalDifferentials": [
-   "Thin basement membrane nephropathy (benign familial haematuria)",
-   "Other causes of progressive sensorineural hearing loss in adolescence",
-   "IgA nephropathy and other glomerulonephritides with haematuria",
-   "Other syndromic hearing loss with systemic involvement",
-   "Acquired hearing loss from noise or ototoxic exposure",
-   "Fabry disease and other inherited disorders with renal and sensory features"
-  ],
-  "additionalInvestigations": [
-   "Serial audiometry to document progressive high-frequency sensorineural loss",
-   "Urinalysis for haematuria and proteinuria with renal function testing",
-   "Ophthalmic examination for lenticonus and retinal flecks",
-   "Renal biopsy with electron microscopy of the glomerular basement membrane where diagnosis is unclear",
-   "Molecular genetic testing of type IV collagen genes with family screening"
-  ],
-  "redFlags": [
-   "Rising proteinuria or declining renal function indicating progression toward renal failure",
-   "Rapidly progressive hearing loss affecting communication",
-   "Visual disturbance suggesting lenticonus or retinal involvement",
-   "Family history of renal failure and deafness indicating inherited disease"
-  ],
-  "prognosis": "Prognosis is dominated by the renal disease, which in more severe (often X-linked male) cases progresses to end-stage renal failure requiring dialysis or transplantation; the sensorineural hearing loss is progressive but manageable with amplification, and does not itself threaten life.",
-  "pitfalls": [
-   "Attributing isolated haematuria to a benign cause and missing evolving Alport syndrome",
-   "Assuming congenital deafness, when Alport hearing loss develops progressively later",
-   "Overlooking female carriers who may have milder or later renal and hearing involvement",
-   "Neglecting regular renal monitoring while focusing on the hearing loss"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Comprehensive Clinical Nephrology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Slow renal progression with early renin-angiotensin system blockade using an ACE inhibitor, as renal disease determines prognosis",
-   "Provide hearing rehabilitation with hearing aids for the progressive high-frequency sensorineural loss, and cochlear implantation where amplification is inadequate",
-   "Undertake serial audiometry to document progression and adjust amplification",
-   "Monitor urinalysis, proteinuria and renal function and manage chronic kidney disease complications and blood pressure",
-   "Arrange ophthalmology review for lenticonus and retinal flecks",
-   "Provide speech, language and educational support for children with progressing hearing loss",
-   "Offer genetic counselling and family screening, noting the commonly X-linked inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alport_hearing_variant-pathway",
-   "title": "Alport syndrome - sensorineural hearing loss features: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A type IV collagen disorder combining progressive hereditary nephritis, sensorineural hearing loss and characteristic ocular changes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rising proteinuria or declining renal function indicating progression toward renal failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial audiometry to document progressive high-frequency sensorineural loss, Urinalysis for haematuria and proteinuria with renal function testing, Ophthalmic examination for lenticonus and retinal flecks"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Slow renal progression with early renin-angiotensin system blockade using an ACE inhibitor, as renal disease determines prognosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing isolated haematuria to a benign cause and missing evolving Alport syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alport syndrome - sensorineural hearing loss features."
-  }
- ],
- "tables": [
-  {
-   "id": "alport_hearing_variant-matrix",
-   "title": "Alport syndrome - sensorineural hearing loss features: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A type IV collagen disorder combining progressive hereditary nephritis, sensorineural hearing loss and characteristic ocular",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology / Genetics",
+  "specialty": "Otology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology / Comprehensive Clinical Nephrology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A type IV collagen disorder combining progressive hereditary nephritis, sensorineural hearing loss and characteristic ocular changes",
+      "Hearing loss is bilateral, high-frequency and progressive, typically emerging in later childhood or adolescence rather than at birth",
+      "Most cases are X-linked from COL4A5 mutations, so affected males are usually more severely affected than female carriers; autosomal recessive and dominant forms involve COL4A3 and COL4A4",
+      "Renal disease presents with haematuria progressing to proteinuria and declining renal function, and is the dominant determinant of prognosis",
+      "Ocular signs such as anterior lenticonus and retinal flecks are highly suggestive when present",
+      "The hearing loss reflects abnormal type IV collagen in the cochlear basement membranes rather than a structural malformation",
+      "Persistent haematuria with a family history and hearing loss should prompt evaluation for Alport syndrome"
     ],
-    [
-     "Key Investigations",
-     "Serial audiometry to document progressive high-frequency sensorineural loss, Urinalysis for haematuria and proteinuria with renal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Alport syndrome is caused by mutations in the genes encoding the alpha-3, alpha-4 and alpha-5 chains of type IV collagen, a key component of specialised basement membranes. In the kidney, defective collagen disrupts the glomerular basement membrane, producing progressive nephritis with haematuria and eventual renal failure. The same collagen is present in basement membranes of the cochlea, and its abnormality is thought to impair the mechanical and metabolic environment of the organ of Corti, causing progressive high-frequency sensorineural hearing loss. Defective basement-membrane collagen in the lens capsule and retina underlies the associated ocular abnormalities.",
+    "additionalDifferentials": [
+      "Thin basement membrane nephropathy (benign familial haematuria)",
+      "Other causes of progressive sensorineural hearing loss in adolescence",
+      "IgA nephropathy and other glomerulonephritides with haematuria",
+      "Other syndromic hearing loss with systemic involvement",
+      "Acquired hearing loss from noise or ototoxic exposure",
+      "Fabry disease and other inherited disorders with renal and sensory features"
     ],
-    [
-     "Primary Differentials",
-     "Thin basement membrane nephropathy (benign familial haematuria), Other causes of progressive sensorineural hearing loss in",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial audiometry to document progressive high-frequency sensorineural loss",
+      "Urinalysis for haematuria and proteinuria with renal function testing",
+      "Ophthalmic examination for lenticonus and retinal flecks",
+      "Renal biopsy with electron microscopy of the glomerular basement membrane where diagnosis is unclear",
+      "Molecular genetic testing of type IV collagen genes with family screening"
     ],
-    [
-     "Management Strategy",
-     "Slow renal progression with early renin-angiotensin system blockade using an ACE inhibitor, as renal disease determines prognosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Rising proteinuria or declining renal function indicating progression toward renal failure",
+      "Rapidly progressive hearing loss affecting communication",
+      "Visual disturbance suggesting lenticonus or retinal involvement",
+      "Family history of renal failure and deafness indicating inherited disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing isolated haematuria to a benign cause and missing evolving Alport syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is dominated by the renal disease, which in more severe (often X-linked male) cases progresses to end-stage renal failure requiring dialysis or transplantation; the sensorineural hearing loss is progressive but manageable with amplification, and does not itself threaten life.",
+    "pitfalls": [
+      "Attributing isolated haematuria to a benign cause and missing evolving Alport syndrome",
+      "Assuming congenital deafness, when Alport hearing loss develops progressively later",
+      "Overlooking female carriers who may have milder or later renal and hearing involvement",
+      "Neglecting regular renal monitoring while focusing on the hearing loss"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Comprehensive Clinical Nephrology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Slow renal progression with early renin-angiotensin system blockade using an ACE inhibitor, as renal disease determines prognosis",
+      "Provide hearing rehabilitation with hearing aids for the progressive high-frequency sensorineural loss, and cochlear implantation where amplification is inadequate",
+      "Undertake serial audiometry to document progression and adjust amplification",
+      "Monitor urinalysis, proteinuria and renal function and manage chronic kidney disease complications and blood pressure",
+      "Arrange ophthalmology review for lenticonus and retinal flecks",
+      "Provide speech, language and educational support for children with progressing hearing loss",
+      "Offer genetic counselling and family screening, noting the commonly X-linked inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for alport syndrome - sensorineural hearing loss features."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alport-hearing-variant-real-image",
-   "title": "Alport syndrome - sensorineural hearing loss features: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "alport_hearing_variant-pathway",
+      "title": "Alport syndrome - sensorineural hearing loss features: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A type IV collagen disorder combining progressive hereditary nephritis, sensorineural hearing loss and characteristic ocular changes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rising proteinuria or declining renal function indicating progression toward renal failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial audiometry to document progressive high-frequency sensorineural loss, Urinalysis for haematuria and proteinuria with renal function testing, Ophthalmic examination for lenticonus and retinal flecks"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Slow renal progression with early renin-angiotensin system blockade using an ACE inhibitor, as renal disease determines prognosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing isolated haematuria to a benign cause and missing evolving Alport syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alport syndrome - sensorineural hearing loss features."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alport_hearing_variant-matrix",
+      "title": "Alport syndrome - sensorineural hearing loss features: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A type IV collagen disorder combining progressive hereditary nephritis, sensorineural hearing loss and characteristic ocular",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial audiometry to document progressive high-frequency sensorineural loss, Urinalysis for haematuria and proteinuria with renal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thin basement membrane nephropathy (benign familial haematuria), Other causes of progressive sensorineural hearing loss in",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Slow renal progression with early renin-angiotensin system blockade using an ACE inhibitor, as renal disease determines prognosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing isolated haematuria to a benign cause and missing evolving Alport syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alport syndrome - sensorineural hearing loss features."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology / Comprehensive Clinical Nephrology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alport_hearing_variant-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Progressive high-frequency sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis with renal function testing",
+          "cells": [
+            {
+              "text": "Haematuria and proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic examination",
+          "cells": [
+            {
+              "text": "Lenticonus and retinal flecks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy with electron microscopy where unclear",
+          "cells": [
+            {
+              "text": "Basement membrane changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of type IV collagen genes with family screening",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alport_hearing_variant-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Thin basement membrane nephropathy",
+          "cells": [
+            {
+              "text": "Benign haematuria without hearing loss"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of progressive sensorineural hearing loss",
+          "cells": [
+            {
+              "text": "Adolescent hearing loss"
+            },
+            {
+              "text": "Audiology and genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgA nephropathy and other glomerulonephritides",
+          "cells": [
+            {
+              "text": "Haematuria without hearing loss"
+            },
+            {
+              "text": "Renal biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fabry disease",
+          "cells": [
+            {
+              "text": "Renal and sensory features"
+            },
+            {
+              "text": "Enzyme or genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired hearing loss from noise or ototoxic exposure",
+          "cells": [
+            {
+              "text": "Exposure history"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alport_hearing_variant-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early ACE inhibitor",
+          "cells": [
+            {
+              "text": "Renal disease determines prognosis"
+            },
+            {
+              "text": "Slows renal progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aids; cochlear implantation where amplification is inadequate",
+          "cells": [
+            {
+              "text": "Progressive high-frequency loss"
+            },
+            {
+              "text": "Hearing rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry to adjust amplification",
+          "cells": [
+            {
+              "text": "Documents progression"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of urinalysis, proteinuria, renal function and blood pressure",
+          "cells": [
+            {
+              "text": "CKD and blood pressure"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review for lenticonus and retinal flecks",
+          "cells": [
+            {
+              "text": "Ocular involvement"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech, language and educational support",
+          "cells": [
+            {
+              "text": "Children with progressing loss"
+            },
+            {
+              "text": "Support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Commonly X-linked"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alport_hearing_variant-dx-mgmt",
+      "title": "Diagnosis and management of Alport syndrome - sensorineural hearing loss features",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent haematuria with progressive high-frequency hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising proteinuria, falling renal function or new visual disturbance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review; start ACE inhibitor if not already",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial audiometry; urinalysis and renal function; ophthalmic examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Type IV collagen variant confirmed with hearing and renal disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ACE inhibitor to slow renal progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review thin membrane disease, IgA nephropathy and Fabry",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hearing aids; cochlear implant if amplification inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Eye review and blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech and educational support for children",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Renal disease dominates prognosis; hearing loss manageable with amplification",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

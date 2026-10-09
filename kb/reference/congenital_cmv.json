@@ -1,176 +1,463 @@
 {
- "id": "congenital_cmv",
- "name": "Congenital Cytomegalovirus Infection",
- "aliases": [
-  "cCMV",
-  "congenital CMV",
-  "congenital cytomegalovirus"
- ],
- "class": "infective",
- "system": "Neonatal / Infectious",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common congenital viral infection and a leading non-genetic cause of sensorineural hearing loss and neurodevelopmental disability in children.",
-   "Most infected newborns are asymptomatic at birth, yet a proportion of these still go on to develop late-onset hearing loss.",
-   "Symptomatic disease may include small size for gestational age, microcephaly, petechiae, jaundice, hepatosplenomegaly, and low platelets.",
-   "Neurological features can include intracranial calcifications (often periventricular), chorioretinitis, and seizures.",
-   "Both primary maternal infection and non-primary (reactivation or reinfection) during pregnancy can transmit to the fetus, with primary infection carrying higher risk.",
-   "Diagnosis must be confirmed within the first three weeks of life to distinguish congenital from perinatally acquired infection, using viral detection from urine or saliva.",
-   "Because of the risk of progressive hearing loss, confirmed cases need structured audiological surveillance over time, not just a single newborn screen.",
-   "Antiviral therapy is considered for symptomatic infants, particularly those with central nervous system involvement, to improve hearing and neurodevelopmental outcomes."
+  "id": "congenital_cmv",
+  "name": "Congenital Cytomegalovirus Infection",
+  "aliases": [
+    "cCMV",
+    "congenital CMV",
+    "congenital cytomegalovirus"
   ],
-  "pathophysiology": "Cytomegalovirus, a herpesvirus, crosses the placenta following maternal infection and disseminates in the fetus, where it replicates in multiple organs. The developing central nervous system is particularly vulnerable: infection disrupts neuronal migration and brain development and causes an inflammatory response that produces calcifications, microcephaly, and migrational abnormalities. Involvement of the inner ear leads to progressive sensorineural hearing loss, while infection of the liver, bone marrow, and reticuloendothelial system accounts for hepatosplenomegaly, thrombocytopenia, and jaundice.",
-  "additionalDifferentials": [
-   "Other congenital infections in the TORCH group (toxoplasmosis, rubella, syphilis, herpes simplex, Zika)",
-   "Neonatal sepsis or bacterial infection",
-   "Congenital toxoplasmosis (also causes intracranial calcification)",
-   "Haemolytic disease of the newborn",
-   "Inherited metabolic or genetic disorders causing microcephaly",
-   "Neonatal haematological disorders causing thrombocytopenia"
-  ],
-  "additionalInvestigations": [
-   "CMV detection by PCR from urine or saliva within the first three weeks of life",
-   "Newborn and serial audiological (hearing) assessment",
-   "Cranial imaging (ultrasound and/or MRI) for calcification and brain abnormalities",
-   "Ophthalmological examination for chorioretinitis",
-   "Full blood count, platelets, and liver function tests",
-   "Dried blood spot testing when late confirmation is needed"
-  ],
-  "redFlags": [
-   "Microcephaly or abnormal neuroimaging indicating central nervous system involvement",
-   "Confirmed or progressive sensorineural hearing loss",
-   "Symptomatic disease with thrombocytopenia, hepatitis, or petechiae",
-   "Chorioretinitis threatening vision",
-   "Seizures in the neonatal period",
-   "Failure to confirm the diagnosis within three weeks, losing the ability to prove congenital infection"
-  ],
-  "prognosis": "Asymptomatic infants generally do well but remain at risk of late-onset hearing loss, warranting ongoing audiological follow-up; symptomatic infants, especially those with neurological involvement, have a higher risk of hearing loss, developmental delay, and other long-term deficits, though early antiviral therapy can improve outcomes in selected cases.",
-  "pitfalls": [
-   "Missing the diagnostic window by testing after three weeks of age and being unable to distinguish congenital from acquired infection",
-   "Assuming a normal newborn hearing screen excludes future hearing loss",
-   "Overlooking asymptomatic infection, which still carries a risk of late sequelae",
-   "Attributing intracranial calcification solely to toxoplasmosis without confirming CMV",
-   "Failing to arrange long-term audiological and developmental surveillance"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat symptomatic congenital infection, particularly with central nervous system involvement, with antiviral therapy using oral valganciclovir or intravenous ganciclovir to improve hearing and neurodevelopmental outcomes",
-   "Monitor during antiviral treatment for neutropenia and hepatotoxicity",
-   "Undertake serial audiological assessment with early hearing intervention such as hearing aids or cochlear implantation",
-   "Provide ophthalmological surveillance and treat chorioretinitis",
-   "Arrange neurodevelopmental follow-up with early intervention and therapy services",
-   "Withhold routine antivirals in asymptomatic infants but continue audiological surveillance for late-onset sensorineural hearing loss",
-   "Coordinate multidisciplinary follow-up across audiology, ophthalmology, neurology and paediatrics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_cmv-pathway",
-   "title": "Congenital Cytomegalovirus Infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common congenital viral infection and a leading non-genetic cause of sensorineural hearing loss and neurodevelopmental disability in children.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Microcephaly or abnormal neuroimaging indicating central nervous system involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CMV detection by PCR from urine or saliva within the first three weeks of life, Newborn and serial audiological (hearing) assessment, Cranial imaging (ultrasound and/or MRI) for calcification and brain abnormalities"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat symptomatic congenital infection, particularly with central nervous system involvement, with antiviral therapy using oral valganciclovir or intravenous ganciclovir to improve hearing and neurodevelopmental"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnostic window by testing after three weeks of age and being unable to distinguish congenital from acquired infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital cytomegalovirus infection."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_cmv-matrix",
-   "title": "Congenital Cytomegalovirus Infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common congenital viral infection and a leading non-genetic cause of sensorineural hearing loss and neurodevelopmental",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Neonatal / Infectious",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common congenital viral infection and a leading non-genetic cause of sensorineural hearing loss and neurodevelopmental disability in children.",
+      "Most infected newborns are asymptomatic at birth, yet a proportion of these still go on to develop late-onset hearing loss.",
+      "Symptomatic disease may include small size for gestational age, microcephaly, petechiae, jaundice, hepatosplenomegaly, and low platelets.",
+      "Neurological features can include intracranial calcifications (often periventricular), chorioretinitis, and seizures.",
+      "Both primary maternal infection and non-primary (reactivation or reinfection) during pregnancy can transmit to the fetus, with primary infection carrying higher risk.",
+      "Diagnosis must be confirmed within the first three weeks of life to distinguish congenital from perinatally acquired infection, using viral detection from urine or saliva.",
+      "Because of the risk of progressive hearing loss, confirmed cases need structured audiological surveillance over time, not just a single newborn screen.",
+      "Antiviral therapy is considered for symptomatic infants, particularly those with central nervous system involvement, to improve hearing and neurodevelopmental outcomes."
     ],
-    [
-     "Key Investigations",
-     "CMV detection by PCR from urine or saliva within the first three weeks of life, Newborn and serial audiological (hearing)",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cytomegalovirus, a herpesvirus, crosses the placenta following maternal infection and disseminates in the fetus, where it replicates in multiple organs. The developing central nervous system is particularly vulnerable: infection disrupts neuronal migration and brain development and causes an inflammatory response that produces calcifications, microcephaly, and migrational abnormalities. Involvement of the inner ear leads to progressive sensorineural hearing loss, while infection of the liver, bone marrow, and reticuloendothelial system accounts for hepatosplenomegaly, thrombocytopenia, and jaundice.",
+    "additionalDifferentials": [
+      "Other congenital infections in the TORCH group (toxoplasmosis, rubella, syphilis, herpes simplex, Zika)",
+      "Neonatal sepsis or bacterial infection",
+      "Congenital toxoplasmosis (also causes intracranial calcification)",
+      "Haemolytic disease of the newborn",
+      "Inherited metabolic or genetic disorders causing microcephaly",
+      "Neonatal haematological disorders causing thrombocytopenia"
     ],
-    [
-     "Primary Differentials",
-     "Other congenital infections in the TORCH group (toxoplasmosis, rubella, syphilis, herpes simplex, Zika), Neonatal sepsis or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CMV detection by PCR from urine or saliva within the first three weeks of life",
+      "Newborn and serial audiological (hearing) assessment",
+      "Cranial imaging (ultrasound and/or MRI) for calcification and brain abnormalities",
+      "Ophthalmological examination for chorioretinitis",
+      "Full blood count, platelets, and liver function tests",
+      "Dried blood spot testing when late confirmation is needed"
     ],
-    [
-     "Management Strategy",
-     "Treat symptomatic congenital infection, particularly with central nervous system involvement, with antiviral therapy using oral",
-     "Core treatment modality"
+    "redFlags": [
+      "Microcephaly or abnormal neuroimaging indicating central nervous system involvement",
+      "Confirmed or progressive sensorineural hearing loss",
+      "Symptomatic disease with thrombocytopenia, hepatitis, or petechiae",
+      "Chorioretinitis threatening vision",
+      "Seizures in the neonatal period",
+      "Failure to confirm the diagnosis within three weeks, losing the ability to prove congenital infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnostic window by testing after three weeks of age and being unable to distinguish congenital from acquired",
-     "Prevent diagnostic or management error"
+    "prognosis": "Asymptomatic infants generally do well but remain at risk of late-onset hearing loss, warranting ongoing audiological follow-up; symptomatic infants, especially those with neurological involvement, have a higher risk of hearing loss, developmental delay, and other long-term deficits, though early antiviral therapy can improve outcomes in selected cases.",
+    "pitfalls": [
+      "Missing the diagnostic window by testing after three weeks of age and being unable to distinguish congenital from acquired infection",
+      "Assuming a normal newborn hearing screen excludes future hearing loss",
+      "Overlooking asymptomatic infection, which still carries a risk of late sequelae",
+      "Attributing intracranial calcification solely to toxoplasmosis without confirming CMV",
+      "Failing to arrange long-term audiological and developmental surveillance"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat symptomatic congenital infection, particularly with central nervous system involvement, with antiviral therapy using oral valganciclovir or intravenous ganciclovir to improve hearing and neurodevelopmental outcomes",
+      "Monitor during antiviral treatment for neutropenia and hepatotoxicity",
+      "Undertake serial audiological assessment with early hearing intervention such as hearing aids or cochlear implantation",
+      "Provide ophthalmological surveillance and treat chorioretinitis",
+      "Arrange neurodevelopmental follow-up with early intervention and therapy services",
+      "Withhold routine antivirals in asymptomatic infants but continue audiological surveillance for late-onset sensorineural hearing loss",
+      "Coordinate multidisciplinary follow-up across audiology, ophthalmology, neurology and paediatrics"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital cytomegalovirus infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-cmv-real-image",
-   "title": "Congenital Cytomegalovirus Infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "congenital_cmv-pathway",
+      "title": "Congenital Cytomegalovirus Infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common congenital viral infection and a leading non-genetic cause of sensorineural hearing loss and neurodevelopmental disability in children.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Microcephaly or abnormal neuroimaging indicating central nervous system involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CMV detection by PCR from urine or saliva within the first three weeks of life, Newborn and serial audiological (hearing) assessment, Cranial imaging (ultrasound and/or MRI) for calcification and brain abnormalities"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat symptomatic congenital infection, particularly with central nervous system involvement, with antiviral therapy using oral valganciclovir or intravenous ganciclovir to improve hearing and neurodevelopmental"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnostic window by testing after three weeks of age and being unable to distinguish congenital from acquired infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital cytomegalovirus infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_cmv-matrix",
+      "title": "Congenital Cytomegalovirus Infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common congenital viral infection and a leading non-genetic cause of sensorineural hearing loss and neurodevelopmental",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CMV detection by PCR from urine or saliva within the first three weeks of life, Newborn and serial audiological (hearing)",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other congenital infections in the TORCH group (toxoplasmosis, rubella, syphilis, herpes simplex, Zika), Neonatal sepsis or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat symptomatic congenital infection, particularly with central nervous system involvement, with antiviral therapy using oral",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnostic window by testing after three weeks of age and being unable to distinguish congenital from acquired",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital cytomegalovirus infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_cmv-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CMV PCR from urine or saliva in the first three weeks",
+          "cells": [
+            {
+              "text": "Congenital infection confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiological assessment",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial ultrasound and/or MRI",
+          "cells": [
+            {
+              "text": "Calcification and brain abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Chorioretinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, platelets and liver function",
+          "cells": [
+            {
+              "text": "Thrombocytopenia, hepatitis or petechiae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_cmv-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital toxoplasmosis",
+          "cells": [
+            {
+              "text": "Also causes intracranial calcification; TORCH testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis or bacterial infection",
+          "cells": [
+            {
+              "text": "Acute neonatal infection; congenital infection confirmed by PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolytic disease of the newborn",
+          "cells": [
+            {
+              "text": "Named neonatal look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_cmv-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiviral therapy for symptomatic disease",
+          "cells": [
+            {
+              "text": "Oral valganciclovir or intravenous ganciclovir, especially with CNS involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring on antiviral",
+          "cells": [
+            {
+              "text": "Neutropenia and hepatotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiological assessment",
+          "cells": [
+            {
+              "text": "Early hearing intervention with hearing aids or cochlear implantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological surveillance",
+          "cells": [
+            {
+              "text": "Treat chorioretinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental follow-up",
+          "cells": [
+            {
+              "text": "Early intervention and therapy services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic infants",
+          "cells": [
+            {
+              "text": "Routine antivirals withheld; audiological surveillance continues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Audiology, ophthalmology, neurology and paediatrics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_cmv-dx-mgmt",
+      "title": "Diagnosis and management of Congenital Cytomegalovirus Infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital CMV: newborn with microcephaly, petechiae or hearing concerns",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (microcephaly, CNS signs, thrombocytopenia, chorioretinitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antiviral discussion for symptomatic CNS or systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CMV PCR in urine or saliva within three weeks; cranial imaging; audiology; eyes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is CMV confirmed by PCR within the first three weeks of life?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital toxoplasmosis, sepsis or haemolytic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiviral therapy (valganciclovir or ganciclovir) for symptomatic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor for neutropenia and hepatotoxicity during treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial audiological assessment with early hearing intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmological surveillance and neurodevelopmental follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Asymptomatic infants do well but remain at risk of late-onset hearing loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

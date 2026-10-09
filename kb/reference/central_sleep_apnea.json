@@ -1,172 +1,431 @@
 {
- "id": "central_sleep_apnea",
- "name": "Central sleep apnoea",
- "aliases": [
-  "CSA",
-  "central sleep apnea",
-  "central apnoea",
-  "Cheyne-Stokes breathing"
- ],
- "class": "non_infective",
- "system": "Sleep medicine",
- "specialty": "Sleep Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Central sleep apnoea reflects a transient loss of respiratory drive, so airflow and respiratory effort stop together, distinguishing it from obstructive events where effort continues against a closed airway",
-   "Unlike the loud habitual snoring of obstructive disease, patients may present chiefly with fragmented sleep, frequent awakenings, nocturnal breathlessness, or witnessed pauses without much snoring",
-   "A Cheyne-Stokes crescendo-decrescendo breathing pattern is characteristic and points strongly towards underlying heart failure",
-   "The disorder clusters into hypercapnic forms (blunted drive, as in brainstem disease or opioid use) and non-hypercapnic forms driven by an unstable, oversensitive ventilatory control loop",
-   "Polysomnography is required to confirm the diagnosis and to separate central from obstructive and mixed events",
-   "Treatment is directed at the underlying cause; optimising heart failure therapy often reduces central events, and supplemental oxygen or adaptive ventilatory support may be considered in selected patients",
-   "Long-term opioid therapy is an increasingly common and reversible contributor that should be actively sought in the history",
-   "Adaptive servo-ventilation should be used cautiously and is contraindicated in patients with symptomatic heart failure and reduced ejection fraction"
+  "id": "central_sleep_apnea",
+  "name": "Central sleep apnoea",
+  "aliases": [
+    "CSA",
+    "central sleep apnea",
+    "central apnoea",
+    "Cheyne-Stokes breathing"
   ],
-  "pathophysiology": "Central sleep apnoea arises from intermittent failure of the brainstem respiratory rhythm generator to signal the respiratory muscles, so both airflow and inspiratory effort cease simultaneously. In non-hypercapnic (high loop gain) forms, ventilatory control is unstable: an oversensitive chemoreceptor response drives arterial CO2 below the apnoeic threshold, breathing stops until CO2 rises again, and overshoot perpetuates a cyclical pattern. Prolonged circulation time in heart failure delays chemoreceptor feedback and produces the crescendo-decrescendo Cheyne-Stokes cycling. In hypercapnic forms, reduced central drive or neuromuscular capacity (brainstem lesions, opioids, chronic hypoventilation) causes sustained underventilation with superimposed central pauses. Recurrent apnoeas generate cyclical hypoxaemia, arousals, and sympathetic surges.",
-  "additionalDifferentials": [
-   "Obstructive sleep apnoea",
-   "Mixed (complex) sleep apnoea",
-   "Obesity hypoventilation syndrome",
-   "Nocturnal breathlessness from decompensated heart failure",
-   "Periodic breathing at high altitude",
-   "Neuromuscular or chest-wall hypoventilation disorders"
-  ],
-  "additionalInvestigations": [
-   "Attended polysomnography to characterise and quantify central versus obstructive events",
-   "Echocardiography and cardiac assessment when heart failure is suspected",
-   "Daytime arterial or capillary blood gas to identify chronic hypercapnia",
-   "Brain and brainstem imaging if a central neurological cause is suspected",
-   "Review of opioid and sedative medication as a reversible contributor"
-  ],
-  "redFlags": [
-   "Cheyne-Stokes breathing indicating underlying heart failure requiring cardiac evaluation and optimisation",
-   "New central apnoea with focal neurology suggesting a brainstem lesion or stroke",
-   "Central events emerging or worsening on chronic opioid therapy",
-   "Daytime hypercapnia, cor pulmonale, or morning headache signalling chronic ventilatory failure"
-  ],
-  "prognosis": "Prognosis is largely determined by the underlying disorder; central sleep apnoea complicating advanced heart failure is a marker of poorer outcome, whereas apnoea from reversible causes such as opioids or high altitude often improves once the trigger is addressed.",
-  "pitfalls": [
-   "Assuming all sleep apnoea is obstructive and missing the absent respiratory effort that defines central events",
-   "Prescribing adaptive servo-ventilation to patients with symptomatic reduced-ejection-fraction heart failure, in whom it may be harmful",
-   "Overlooking chronic opioid use as a treatable cause",
-   "Failing to investigate and treat underlying heart failure or brainstem pathology"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying cause, optimising guideline-directed heart failure therapy to reduce Cheyne-Stokes central events",
-   "Review and reduce opioids and sedatives that contribute to hypercapnic central apnoea",
-   "Nocturnal supplemental oxygen for non-hypercapnic (high loop gain) forms to stabilise ventilatory control",
-   "Adaptive servo-ventilation in selected patients, avoiding it in heart failure with reduced ejection fraction",
-   "Nocturnal non-invasive bilevel ventilation for hypercapnic hypoventilation forms, and a CPAP trial where obstructive events coexist",
-   "Refer to sleep medicine, confirm treatment response with repeat polysomnography and manage the primary cardiac or neurological disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "central_sleep_apnea-pathway",
-   "title": "Central sleep apnoea: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Central sleep apnoea reflects a transient loss of respiratory drive, so airflow and respiratory effort stop together, distinguishing it from obstructive events where effort continues against a closed airway",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cheyne-Stokes breathing indicating underlying heart failure requiring cardiac evaluation and optimisation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Attended polysomnography to characterise and quantify central versus obstructive events, Echocardiography and cardiac assessment when heart failure is suspected, Daytime arterial or capillary blood gas to identify chronic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying cause, optimising guideline-directed heart failure therapy to reduce Cheyne-Stokes central events"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all sleep apnoea is obstructive and missing the absent respiratory effort that defines central events"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of central sleep apnoea."
-  }
- ],
- "tables": [
-  {
-   "id": "central_sleep_apnea-matrix",
-   "title": "Central sleep apnoea: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Central sleep apnoea reflects a transient loss of respiratory drive, so airflow and respiratory effort stop together,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Sleep medicine",
+  "specialty": "Sleep Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Central sleep apnoea reflects a transient loss of respiratory drive, so airflow and respiratory effort stop together, distinguishing it from obstructive events where effort continues against a closed airway",
+      "Unlike the loud habitual snoring of obstructive disease, patients may present chiefly with fragmented sleep, frequent awakenings, nocturnal breathlessness, or witnessed pauses without much snoring",
+      "A Cheyne-Stokes crescendo-decrescendo breathing pattern is characteristic and points strongly towards underlying heart failure",
+      "The disorder clusters into hypercapnic forms (blunted drive, as in brainstem disease or opioid use) and non-hypercapnic forms driven by an unstable, oversensitive ventilatory control loop",
+      "Polysomnography is required to confirm the diagnosis and to separate central from obstructive and mixed events",
+      "Treatment is directed at the underlying cause; optimising heart failure therapy often reduces central events, and supplemental oxygen or adaptive ventilatory support may be considered in selected patients",
+      "Long-term opioid therapy is an increasingly common and reversible contributor that should be actively sought in the history",
+      "Adaptive servo-ventilation should be used cautiously and is contraindicated in patients with symptomatic heart failure and reduced ejection fraction"
     ],
-    [
-     "Key Investigations",
-     "Attended polysomnography to characterise and quantify central versus obstructive events, Echocardiography and cardiac assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Central sleep apnoea arises from intermittent failure of the brainstem respiratory rhythm generator to signal the respiratory muscles, so both airflow and inspiratory effort cease simultaneously. In non-hypercapnic (high loop gain) forms, ventilatory control is unstable: an oversensitive chemoreceptor response drives arterial CO2 below the apnoeic threshold, breathing stops until CO2 rises again, and overshoot perpetuates a cyclical pattern. Prolonged circulation time in heart failure delays chemoreceptor feedback and produces the crescendo-decrescendo Cheyne-Stokes cycling. In hypercapnic forms, reduced central drive or neuromuscular capacity (brainstem lesions, opioids, chronic hypoventilation) causes sustained underventilation with superimposed central pauses. Recurrent apnoeas generate cyclical hypoxaemia, arousals, and sympathetic surges.",
+    "additionalDifferentials": [
+      "Obstructive sleep apnoea",
+      "Mixed (complex) sleep apnoea",
+      "Obesity hypoventilation syndrome",
+      "Nocturnal breathlessness from decompensated heart failure",
+      "Periodic breathing at high altitude",
+      "Neuromuscular or chest-wall hypoventilation disorders"
     ],
-    [
-     "Primary Differentials",
-     "Obstructive sleep apnoea, Mixed (complex) sleep apnoea, Obesity hypoventilation syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Attended polysomnography to characterise and quantify central versus obstructive events",
+      "Echocardiography and cardiac assessment when heart failure is suspected",
+      "Daytime arterial or capillary blood gas to identify chronic hypercapnia",
+      "Brain and brainstem imaging if a central neurological cause is suspected",
+      "Review of opioid and sedative medication as a reversible contributor"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying cause, optimising guideline-directed heart failure therapy to reduce Cheyne-Stokes central",
-     "Core treatment modality"
+    "redFlags": [
+      "Cheyne-Stokes breathing indicating underlying heart failure requiring cardiac evaluation and optimisation",
+      "New central apnoea with focal neurology suggesting a brainstem lesion or stroke",
+      "Central events emerging or worsening on chronic opioid therapy",
+      "Daytime hypercapnia, cor pulmonale, or morning headache signalling chronic ventilatory failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all sleep apnoea is obstructive and missing the absent respiratory effort that defines central events",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is largely determined by the underlying disorder; central sleep apnoea complicating advanced heart failure is a marker of poorer outcome, whereas apnoea from reversible causes such as opioids or high altitude often improves once the trigger is addressed.",
+    "pitfalls": [
+      "Assuming all sleep apnoea is obstructive and missing the absent respiratory effort that defines central events",
+      "Prescribing adaptive servo-ventilation to patients with symptomatic reduced-ejection-fraction heart failure, in whom it may be harmful",
+      "Overlooking chronic opioid use as a treatable cause",
+      "Failing to investigate and treat underlying heart failure or brainstem pathology"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying cause, optimising guideline-directed heart failure therapy to reduce Cheyne-Stokes central events",
+      "Review and reduce opioids and sedatives that contribute to hypercapnic central apnoea",
+      "Nocturnal supplemental oxygen for non-hypercapnic (high loop gain) forms to stabilise ventilatory control",
+      "Adaptive servo-ventilation in selected patients, avoiding it in heart failure with reduced ejection fraction",
+      "Nocturnal non-invasive bilevel ventilation for hypercapnic hypoventilation forms, and a CPAP trial where obstructive events coexist",
+      "Refer to sleep medicine, confirm treatment response with repeat polysomnography and manage the primary cardiac or neurological disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for central sleep apnoea."
-  }
- ],
- "diagrams": [
-  {
-   "id": "central-sleep-apnea-real-image",
-   "title": "Central sleep apnoea: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "central_sleep_apnea-pathway",
+      "title": "Central sleep apnoea: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Central sleep apnoea reflects a transient loss of respiratory drive, so airflow and respiratory effort stop together, distinguishing it from obstructive events where effort continues against a closed airway",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cheyne-Stokes breathing indicating underlying heart failure requiring cardiac evaluation and optimisation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Attended polysomnography to characterise and quantify central versus obstructive events, Echocardiography and cardiac assessment when heart failure is suspected, Daytime arterial or capillary blood gas to identify chronic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying cause, optimising guideline-directed heart failure therapy to reduce Cheyne-Stokes central events"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all sleep apnoea is obstructive and missing the absent respiratory effort that defines central events"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of central sleep apnoea."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "central_sleep_apnea-matrix",
+      "title": "Central sleep apnoea: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Central sleep apnoea reflects a transient loss of respiratory drive, so airflow and respiratory effort stop together,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Attended polysomnography to characterise and quantify central versus obstructive events, Echocardiography and cardiac assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Obstructive sleep apnoea, Mixed (complex) sleep apnoea, Obesity hypoventilation syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying cause, optimising guideline-directed heart failure therapy to reduce Cheyne-Stokes central",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all sleep apnoea is obstructive and missing the absent respiratory effort that defines central events",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for central sleep apnoea."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_sleep_apnea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Attended polysomnography",
+          "cells": [
+            {
+              "text": "Characterises and quantifies central versus obstructive events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac assessment",
+          "cells": [
+            {
+              "text": "When heart failure is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Daytime arterial or capillary blood gas",
+          "cells": [
+            {
+              "text": "Identifies chronic hypercapnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain and brainstem imaging",
+          "cells": [
+            {
+              "text": "If a central neurological cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of opioid and sedative medication",
+          "cells": [
+            {
+              "text": "A reversible contributor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_sleep_apnea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Optimise guideline-directed heart failure therapy"
+            },
+            {
+              "text": "Reduces Cheyne-Stokes central events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduce opioids and sedatives",
+          "cells": [
+            {
+              "text": "Review and reduce opioids and sedatives"
+            },
+            {
+              "text": "Contribute to hypercapnic central apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocturnal supplemental oxygen",
+          "cells": [
+            {
+              "text": "Oxygen for non-hypercapnic (high loop gain) forms"
+            },
+            {
+              "text": "Stabilises ventilatory control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adaptive servo-ventilation",
+          "cells": [
+            {
+              "text": "In selected patients"
+            },
+            {
+              "text": "Avoid in heart failure with reduced ejection fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilevel ventilation or CPAP",
+          "cells": [
+            {
+              "text": "Non-invasive bilevel ventilation for hypoventilation; CPAP where obstructive events coexist"
+            },
+            {
+              "text": "Depends on the form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep medicine review",
+          "cells": [
+            {
+              "text": "Refer to sleep medicine; repeat polysomnography to confirm response"
+            },
+            {
+              "text": "Confirms treatment response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_sleep_apnea-dx-mgmt",
+      "title": "Diagnosis and management of Central sleep apnoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central sleep apnoea: pauses with absent effort, Cheyne-Stokes breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Cheyne-Stokes, focal neurology, opioid-related events, hypercapnia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: cardiac evaluation for heart failure; neurology for brainstem lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Attended polysomnography, echocardiography and daytime blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Central events confirmed on polysomnography, separated from obstructive events?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Optimise guideline-directed heart failure therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check obstructive sleep apnoea, mixed apnoea and obesity hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce opioids and sedatives that drive hypercapnic apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nocturnal oxygen or adaptive servo-ventilation, avoiding it in reduced ejection fraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bilevel ventilation for hypoventilation; CPAP where obstructive events coexist",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis set by cause; heart-failure-related central apnoea marks poorer outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,471 @@
 {
- "id": "primary_hyperoxaluria",
- "name": "Primary hyperoxaluria",
- "aliases": [
-  "PH",
-  "hereditary oxalosis",
-  "primary oxalosis",
-  "AGT deficiency"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Primary hyperoxaluria is a group of inherited disorders of glyoxylate metabolism that cause marked overproduction of oxalate by the liver",
-   "It typically presents with recurrent calcium oxalate kidney stones and nephrocalcinosis, often from childhood, and can progress to renal failure",
-   "Type 1, from deficiency of the hepatic enzyme alanine-glyoxylate aminotransferase, is the most common and generally the most severe form",
-   "As renal function declines, oxalate can no longer be cleared and deposits throughout the body (systemic oxalosis), affecting bone, heart, retina, and vessels",
-   "The diagnosis should be considered in any patient with recurrent oxalate stones, especially with early onset, a family history, or nephrocalcinosis",
-   "Elevated urinary oxalate, genetic testing, and sometimes liver biopsy establish the diagnosis, and high fluid intake with crystallisation inhibitors is a supportive measure",
-   "A subset of type 1 disease responds biochemically to pyridoxine, and definitive treatment historically involved combined or sequential liver and kidney transplantation, with newer RNA-targeted therapies now available"
+  "id": "primary_hyperoxaluria",
+  "name": "Primary hyperoxaluria",
+  "aliases": [
+    "PH",
+    "hereditary oxalosis",
+    "primary oxalosis",
+    "AGT deficiency"
   ],
-  "pathophysiology": "Primary hyperoxaluria results from autosomal recessive defects in enzymes of hepatic glyoxylate detoxification. In type 1, deficiency of the peroxisomal enzyme alanine-glyoxylate aminotransferase allows glyoxylate to be oxidised to oxalate; types 2 and 3 involve other enzymes in the same pathway. The liver overproduces oxalate, which the kidneys excrete in high amounts, promoting calcium oxalate crystallisation, stone formation, and nephrocalcinosis. Because oxalate is poorly cleared once renal function fails, it accumulates systemically and is deposited in multiple tissues as oxalosis.",
-  "additionalDifferentials": [
-   "Enteric (secondary) hyperoxaluria from fat malabsorption",
-   "Dietary oxalate overload",
-   "Idiopathic recurrent calcium oxalate stone disease",
-   "Other hereditary stone-forming disorders such as cystinuria",
-   "Distal renal tubular acidosis with nephrocalcinosis",
-   "Medullary sponge kidney"
-  ],
-  "additionalInvestigations": [
-   "24-hour urinary oxalate measurement",
-   "Plasma oxalate, particularly as renal function declines",
-   "Stone analysis confirming calcium oxalate composition",
-   "Renal imaging for stones and nephrocalcinosis",
-   "Genetic testing for the causative enzyme defect",
-   "Liver enzyme assay on biopsy in selected diagnostic uncertainty",
-   "Assessment for systemic oxalosis when renal failure is present"
-  ],
-  "redFlags": [
-   "Progressive decline in renal function toward end-stage disease",
-   "Systemic oxalosis with cardiac, skeletal, retinal, or vascular involvement",
-   "Recurrent obstructing stones with infection or acute kidney injury",
-   "Early-onset stone disease with nephrocalcinosis suggesting a severe genotype"
-  ],
-  "prognosis": "The outlook varies with type and genotype; type 1 disease can progress to end-stage renal failure and life-threatening systemic oxalosis, whereas some pyridoxine-responsive and non-type-1 forms are milder, and early diagnosis with modern therapies has improved outcomes considerably.",
-  "pitfalls": [
-   "Treating recurrent stones symptomatically without recognising an underlying inherited metabolic cause",
-   "Confusing primary with enteric hyperoxaluria, which have different mechanisms and management",
-   "Overlooking systemic oxalosis as renal function falls",
-   "Performing isolated kidney transplantation in type 1 disease without addressing continued hepatic oxalate overproduction"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Vigorous maintenance hyperhydration to lower urinary calcium oxalate supersaturation",
-   "Crystallisation inhibitors such as potassium citrate, orthophosphate and magnesium to reduce stone formation",
-   "Supervised pyridoxine (vitamin B6) trial, which is effective in a subset of type 1 disease",
-   "RNA-interference therapy directed at hepatic oxalate production, such as lumasiran, in type 1 disease",
-   "Stone clearance by lithotripsy or endourological removal, minimising nephron-damaging interventions",
-   "Monitoring of renal function and of urinary and plasma oxalate, with surveillance for systemic oxalosis affecting bone, heart, retina and vessels once renal function declines",
-   "Intensive dialysis and combined or sequential liver-kidney transplantation for type 1 disease progressing to end-stage renal failure",
-   "Genetic counselling and family screening given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_hyperoxaluria-pathway",
-   "title": "Primary hyperoxaluria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Primary hyperoxaluria is a group of inherited disorders of glyoxylate metabolism that cause marked overproduction of oxalate by the liver",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive decline in renal function toward end-stage disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 24-hour urinary oxalate measurement, Plasma oxalate, particularly as renal function declines, Stone analysis confirming calcium oxalate composition"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Vigorous maintenance hyperhydration to lower urinary calcium oxalate supersaturation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating recurrent stones symptomatically without recognising an underlying inherited metabolic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary hyperoxaluria."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_hyperoxaluria-matrix",
-   "title": "Primary hyperoxaluria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Primary hyperoxaluria is a group of inherited disorders of glyoxylate metabolism that cause marked overproduction of oxalate by",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Primary hyperoxaluria is a group of inherited disorders of glyoxylate metabolism that cause marked overproduction of oxalate by the liver",
+      "It typically presents with recurrent calcium oxalate kidney stones and nephrocalcinosis, often from childhood, and can progress to renal failure",
+      "Type 1, from deficiency of the hepatic enzyme alanine-glyoxylate aminotransferase, is the most common and generally the most severe form",
+      "As renal function declines, oxalate can no longer be cleared and deposits throughout the body (systemic oxalosis), affecting bone, heart, retina, and vessels",
+      "The diagnosis should be considered in any patient with recurrent oxalate stones, especially with early onset, a family history, or nephrocalcinosis",
+      "Elevated urinary oxalate, genetic testing, and sometimes liver biopsy establish the diagnosis, and high fluid intake with crystallisation inhibitors is a supportive measure",
+      "A subset of type 1 disease responds biochemically to pyridoxine, and definitive treatment historically involved combined or sequential liver and kidney transplantation, with newer RNA-targeted therapies now available"
     ],
-    [
-     "Key Investigations",
-     "24-hour urinary oxalate measurement, Plasma oxalate, particularly as renal function declines, Stone analysis confirming calcium",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary hyperoxaluria results from autosomal recessive defects in enzymes of hepatic glyoxylate detoxification. In type 1, deficiency of the peroxisomal enzyme alanine-glyoxylate aminotransferase allows glyoxylate to be oxidised to oxalate; types 2 and 3 involve other enzymes in the same pathway. The liver overproduces oxalate, which the kidneys excrete in high amounts, promoting calcium oxalate crystallisation, stone formation, and nephrocalcinosis. Because oxalate is poorly cleared once renal function fails, it accumulates systemically and is deposited in multiple tissues as oxalosis.",
+    "additionalDifferentials": [
+      "Enteric (secondary) hyperoxaluria from fat malabsorption",
+      "Dietary oxalate overload",
+      "Idiopathic recurrent calcium oxalate stone disease",
+      "Other hereditary stone-forming disorders such as cystinuria",
+      "Distal renal tubular acidosis with nephrocalcinosis",
+      "Medullary sponge kidney"
     ],
-    [
-     "Primary Differentials",
-     "Enteric (secondary) hyperoxaluria from fat malabsorption, Dietary oxalate overload, Idiopathic recurrent calcium oxalate stone",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "24-hour urinary oxalate measurement",
+      "Plasma oxalate, particularly as renal function declines",
+      "Stone analysis confirming calcium oxalate composition",
+      "Renal imaging for stones and nephrocalcinosis",
+      "Genetic testing for the causative enzyme defect",
+      "Liver enzyme assay on biopsy in selected diagnostic uncertainty",
+      "Assessment for systemic oxalosis when renal failure is present"
     ],
-    [
-     "Management Strategy",
-     "Vigorous maintenance hyperhydration to lower urinary calcium oxalate supersaturation",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive decline in renal function toward end-stage disease",
+      "Systemic oxalosis with cardiac, skeletal, retinal, or vascular involvement",
+      "Recurrent obstructing stones with infection or acute kidney injury",
+      "Early-onset stone disease with nephrocalcinosis suggesting a severe genotype"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating recurrent stones symptomatically without recognising an underlying inherited metabolic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook varies with type and genotype; type 1 disease can progress to end-stage renal failure and life-threatening systemic oxalosis, whereas some pyridoxine-responsive and non-type-1 forms are milder, and early diagnosis with modern therapies has improved outcomes considerably.",
+    "pitfalls": [
+      "Treating recurrent stones symptomatically without recognising an underlying inherited metabolic cause",
+      "Confusing primary with enteric hyperoxaluria, which have different mechanisms and management",
+      "Overlooking systemic oxalosis as renal function falls",
+      "Performing isolated kidney transplantation in type 1 disease without addressing continued hepatic oxalate overproduction"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Vigorous maintenance hyperhydration to lower urinary calcium oxalate supersaturation",
+      "Crystallisation inhibitors such as potassium citrate, orthophosphate and magnesium to reduce stone formation",
+      "Supervised pyridoxine (vitamin B6) trial, which is effective in a subset of type 1 disease",
+      "RNA-interference therapy directed at hepatic oxalate production, such as lumasiran, in type 1 disease",
+      "Stone clearance by lithotripsy or endourological removal, minimising nephron-damaging interventions",
+      "Monitoring of renal function and of urinary and plasma oxalate, with surveillance for systemic oxalosis affecting bone, heart, retina and vessels once renal function declines",
+      "Intensive dialysis and combined or sequential liver-kidney transplantation for type 1 disease progressing to end-stage renal failure",
+      "Genetic counselling and family screening given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary hyperoxaluria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-hyperoxaluria-real-image",
-   "title": "Primary hyperoxaluria: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "primary_hyperoxaluria-pathway",
+      "title": "Primary hyperoxaluria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Primary hyperoxaluria is a group of inherited disorders of glyoxylate metabolism that cause marked overproduction of oxalate by the liver",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive decline in renal function toward end-stage disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 24-hour urinary oxalate measurement, Plasma oxalate, particularly as renal function declines, Stone analysis confirming calcium oxalate composition"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Vigorous maintenance hyperhydration to lower urinary calcium oxalate supersaturation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating recurrent stones symptomatically without recognising an underlying inherited metabolic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary hyperoxaluria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_hyperoxaluria-matrix",
+      "title": "Primary hyperoxaluria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Primary hyperoxaluria is a group of inherited disorders of glyoxylate metabolism that cause marked overproduction of oxalate by",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "24-hour urinary oxalate measurement, Plasma oxalate, particularly as renal function declines, Stone analysis confirming calcium",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Enteric (secondary) hyperoxaluria from fat malabsorption, Dietary oxalate overload, Idiopathic recurrent calcium oxalate stone",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Vigorous maintenance hyperhydration to lower urinary calcium oxalate supersaturation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating recurrent stones symptomatically without recognising an underlying inherited metabolic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary hyperoxaluria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_hyperoxaluria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "24-hour urinary oxalate measurement",
+          "cells": [
+            {
+              "text": "Urinary oxalate excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma oxalate",
+          "cells": [
+            {
+              "text": "Rise as renal function declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone analysis",
+          "cells": [
+            {
+              "text": "Calcium oxalate composition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging",
+          "cells": [
+            {
+              "text": "Stones and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Causative enzyme defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for systemic oxalosis when renal failure is present",
+          "cells": [
+            {
+              "text": "Systemic oxalosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperoxaluria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Enteric (secondary) hyperoxaluria",
+          "cells": [
+            {
+              "text": "Fat malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary oxalate overload",
+          "cells": [
+            {
+              "text": "Excess dietary oxalate intake"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperoxaluria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maintenance hyperhydration",
+          "cells": [
+            {
+              "text": "Vigorous, to lower urinary calcium oxalate supersaturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crystallisation inhibitors",
+          "cells": [
+            {
+              "text": "Potassium citrate, orthophosphate and magnesium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine trial",
+          "cells": [
+            {
+              "text": "Supervised; effective in a subset of type 1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RNA-interference therapy",
+          "cells": [
+            {
+              "text": "Lumasiran, targeting hepatic oxalate production, in type 1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone clearance",
+          "cells": [
+            {
+              "text": "Lithotripsy or endourological removal, minimising nephron-damaging interventions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, urinary and plasma oxalate; surveillance for systemic oxalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant for end-stage disease",
+          "cells": [
+            {
+              "text": "Intensive dialysis and combined or sequential liver-kidney transplantation in type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_hyperoxaluria-dx-mgmt",
+      "title": "Diagnosis and management of Primary hyperoxaluria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary hyperoxaluria: recurrent calcium oxalate stones or nephrocalcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Declining renal function, systemic oxalosis or early-onset severe stone disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent nephrology review for systemic oxalosis or renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "24-hour urinary oxalate; plasma oxalate; renal imaging; genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do oxalate levels and genetic testing confirm primary hyperoxaluria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider enteric or dietary hyperoxaluria or idiopathic stone disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vigorous maintenance hyperhydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Crystallisation inhibitors such as potassium citrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supervised pyridoxine trial in a subset of type 1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stone clearance with minimal nephron-damaging intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Renal and systemic oxalosis surveillance; transplant considered for end-stage type 1",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

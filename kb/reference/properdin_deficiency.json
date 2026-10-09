@@ -1,177 +1,542 @@
 {
- "id": "properdin_deficiency",
- "name": "Properdin deficiency",
- "aliases": [
-  "Properdin deficiency",
-  "Factor P deficiency",
-  "Complement properdin deficiency"
- ],
- "class": "non_infective",
- "system": "Immune system",
- "specialty": "Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Middleton's Allergy: Principles and Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Properdin deficiency is the principal X-linked complement deficiency, so it predominantly affects males.",
-   "It markedly increases susceptibility to fulminant meningococcal disease, which can be rapidly fatal even at first presentation.",
-   "Meningococcal infection in properdin deficiency often presents acutely and with a high case-fatality rate rather than the recurrent pattern seen in terminal-pathway defects.",
-   "Properdin is the only known positive regulator of complement, stabilising the alternative-pathway C3 convertase.",
-   "The AH50 alternative-pathway assay is abnormal while the CH50 classical-pathway assay is typically preserved.",
-   "A specific low or absent properdin level confirms the diagnosis after alternative-pathway dysfunction is shown.",
-   "Meningococcal vaccination, including conjugate quadrivalent and serogroup B vaccines, and family screening are essential.",
-   "Patient and family education about seeking urgent care for febrile illness can be life-saving."
+  "id": "properdin_deficiency",
+  "name": "Properdin deficiency",
+  "aliases": [
+    "Properdin deficiency",
+    "Factor P deficiency",
+    "Complement properdin deficiency"
   ],
-  "pathophysiology": "Properdin (factor P) is the sole positive regulator of the complement system: it binds and stabilises the alternative-pathway C3 convertase, prolonging its half-life and amplifying complement deposition on microbial surfaces. In its absence the alternative pathway cannot be sustained, so amplification of C3b deposition and downstream membrane attack complex formation on Neisseria is impaired. This leaves the host unable to mount rapid complement-mediated killing of meningococci, producing a striking vulnerability to fulminant meningococcal sepsis. Because the classical and lectin pathways remain functional, susceptibility is largely confined to neisserial organisms, and the disease is inherited in an X-linked pattern, so affected individuals are typically male.",
-  "additionalDifferentials": [
-   "Terminal complement component deficiencies (C5 to C9)",
-   "Factor D or other alternative-pathway defects",
-   "Asplenia or hyposplenism",
-   "Antibody deficiency predisposing to infection",
-   "Idiopathic invasive meningococcal disease",
-   "Acquired complement consumption"
-  ],
-  "additionalInvestigations": [
-   "AH50 alternative-pathway assay (abnormal)",
-   "CH50 classical-pathway assay (usually preserved)",
-   "Specific properdin (factor P) level",
-   "Genetic testing of the CFP gene",
-   "Cultures and PCR during acute infection to identify serogroup",
-   "Meningococcal and other vaccination status",
-   "X-linked family screening and carrier assessment"
-  ],
-  "redFlags": [
-   "Fever with headache, neck stiffness or a non-blanching rash",
-   "Rapidly progressive meningococcaemia or septic shock",
-   "Any febrile illness in a known properdin-deficient individual",
-   "Purpura fulminans",
-   "Family history of fatal meningococcal disease"
-  ],
-  "prognosis": "The main hazard is fulminant meningococcal disease with a high case-fatality if not treated immediately; with vaccination, education and prompt antibiotics the outlook is greatly improved. Because episodes can be overwhelming at first presentation, prevention and rapid response are paramount.",
-  "pitfalls": [
-   "Overlooking an X-linked complement defect in a male with severe meningococcal disease.",
-   "Relying on a normal CH50 to exclude complement deficiency when the defect is in the alternative pathway.",
-   "Failing to provide serogroup B and conjugate meningococcal vaccination.",
-   "Not screening male relatives after an index case.",
-   "Underestimating how rapidly meningococcaemia can progress in these patients."
-  ],
-  "references": [
-   "Middleton's Allergy: Principles and Practice, current edition",
-   "Oxford Textbook of Medicine, current edition",
-   "Reviews on complement deficiency and meningococcal susceptibility"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immunise fully against Neisseria meningitidis with both quadrivalent conjugate (ACWY) and serogroup B meningococcal vaccines, with boosters as advised",
-   "Educate the patient and family to seek immediate medical care for any febrile illness and, where appropriate, supply stand-by antibiotics",
-   "Treat suspected invasive meningococcal disease as an emergency with immediate parenteral third-generation cephalosporin such as ceftriaxone, fluid resuscitation and intensive care support",
-   "Consider long-term prophylactic penicillin in selected patients to reduce meningococcal risk",
-   "Screen at-risk male relatives and provide genetic counselling, as the deficiency is X-linked",
-   "Keep routine immunisations current and refer to clinical immunology for coordinated preventive care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "properdin_deficiency-pathway",
-   "title": "Properdin deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Properdin deficiency is the principal X-linked complement deficiency, so it predominantly affects males.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fever with headache, neck stiffness or a non-blanching rash",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: AH50 alternative-pathway assay (abnormal), CH50 classical-pathway assay (usually preserved), Specific properdin (factor P) level"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immunise fully against Neisseria meningitidis with both quadrivalent conjugate (ACWY) and serogroup B meningococcal vaccines, with boosters as advised"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking an X-linked complement defect in a male with severe meningococcal disease."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of properdin deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "properdin_deficiency-matrix",
-   "title": "Properdin deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Properdin deficiency is the principal X-linked complement deficiency, so it predominantly affects males.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immune system",
+  "specialty": "Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Middleton's Allergy: Principles and Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Properdin deficiency is the principal X-linked complement deficiency, so it predominantly affects males.",
+      "It markedly increases susceptibility to fulminant meningococcal disease, which can be rapidly fatal even at first presentation.",
+      "Meningococcal infection in properdin deficiency often presents acutely and with a high case-fatality rate rather than the recurrent pattern seen in terminal-pathway defects.",
+      "Properdin is the only known positive regulator of complement, stabilising the alternative-pathway C3 convertase.",
+      "The AH50 alternative-pathway assay is abnormal while the CH50 classical-pathway assay is typically preserved.",
+      "A specific low or absent properdin level confirms the diagnosis after alternative-pathway dysfunction is shown.",
+      "Meningococcal vaccination, including conjugate quadrivalent and serogroup B vaccines, and family screening are essential.",
+      "Patient and family education about seeking urgent care for febrile illness can be life-saving."
     ],
-    [
-     "Key Investigations",
-     "AH50 alternative-pathway assay (abnormal), CH50 classical-pathway assay (usually preserved), Specific properdin (factor P) level",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Properdin (factor P) is the sole positive regulator of the complement system: it binds and stabilises the alternative-pathway C3 convertase, prolonging its half-life and amplifying complement deposition on microbial surfaces. In its absence the alternative pathway cannot be sustained, so amplification of C3b deposition and downstream membrane attack complex formation on Neisseria is impaired. This leaves the host unable to mount rapid complement-mediated killing of meningococci, producing a striking vulnerability to fulminant meningococcal sepsis. Because the classical and lectin pathways remain functional, susceptibility is largely confined to neisserial organisms, and the disease is inherited in an X-linked pattern, so affected individuals are typically male.",
+    "additionalDifferentials": [
+      "Terminal complement component deficiencies (C5 to C9)",
+      "Factor D or other alternative-pathway defects",
+      "Asplenia or hyposplenism",
+      "Antibody deficiency predisposing to infection",
+      "Idiopathic invasive meningococcal disease",
+      "Acquired complement consumption"
     ],
-    [
-     "Primary Differentials",
-     "Terminal complement component deficiencies (C5 to C9), Factor D or other alternative-pathway defects, Asplenia or hyposplenism",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "AH50 alternative-pathway assay (abnormal)",
+      "CH50 classical-pathway assay (usually preserved)",
+      "Specific properdin (factor P) level",
+      "Genetic testing of the CFP gene",
+      "Cultures and PCR during acute infection to identify serogroup",
+      "Meningococcal and other vaccination status",
+      "X-linked family screening and carrier assessment"
     ],
-    [
-     "Management Strategy",
-     "Immunise fully against Neisseria meningitidis with both quadrivalent conjugate (ACWY) and serogroup B meningococcal vaccines,",
-     "Core treatment modality"
+    "redFlags": [
+      "Fever with headache, neck stiffness or a non-blanching rash",
+      "Rapidly progressive meningococcaemia or septic shock",
+      "Any febrile illness in a known properdin-deficient individual",
+      "Purpura fulminans",
+      "Family history of fatal meningococcal disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking an X-linked complement defect in a male with severe meningococcal disease.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The main hazard is fulminant meningococcal disease with a high case-fatality if not treated immediately; with vaccination, education and prompt antibiotics the outlook is greatly improved. Because episodes can be overwhelming at first presentation, prevention and rapid response are paramount.",
+    "pitfalls": [
+      "Overlooking an X-linked complement defect in a male with severe meningococcal disease.",
+      "Relying on a normal CH50 to exclude complement deficiency when the defect is in the alternative pathway.",
+      "Failing to provide serogroup B and conjugate meningococcal vaccination.",
+      "Not screening male relatives after an index case.",
+      "Underestimating how rapidly meningococcaemia can progress in these patients."
+    ],
+    "references": [
+      "Middleton's Allergy: Principles and Practice, current edition",
+      "Oxford Textbook of Medicine, current edition",
+      "Reviews on complement deficiency and meningococcal susceptibility"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immunise fully against Neisseria meningitidis with both quadrivalent conjugate (ACWY) and serogroup B meningococcal vaccines, with boosters as advised",
+      "Educate the patient and family to seek immediate medical care for any febrile illness and, where appropriate, supply stand-by antibiotics",
+      "Treat suspected invasive meningococcal disease as an emergency with immediate parenteral third-generation cephalosporin such as ceftriaxone, fluid resuscitation and intensive care support",
+      "Consider long-term prophylactic penicillin in selected patients to reduce meningococcal risk",
+      "Screen at-risk male relatives and provide genetic counselling, as the deficiency is X-linked",
+      "Keep routine immunisations current and refer to clinical immunology for coordinated preventive care"
     ]
-   ],
-   "caption": "Overview comparison matrix for properdin deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "properdin-deficiency-real-image",
-   "title": "Properdin deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "properdin_deficiency-pathway",
+      "title": "Properdin deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Properdin deficiency is the principal X-linked complement deficiency, so it predominantly affects males.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fever with headache, neck stiffness or a non-blanching rash",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: AH50 alternative-pathway assay (abnormal), CH50 classical-pathway assay (usually preserved), Specific properdin (factor P) level"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immunise fully against Neisseria meningitidis with both quadrivalent conjugate (ACWY) and serogroup B meningococcal vaccines, with boosters as advised"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking an X-linked complement defect in a male with severe meningococcal disease."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of properdin deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "properdin_deficiency-matrix",
+      "title": "Properdin deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Properdin deficiency is the principal X-linked complement deficiency, so it predominantly affects males.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "AH50 alternative-pathway assay (abnormal), CH50 classical-pathway assay (usually preserved), Specific properdin (factor P) level",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Terminal complement component deficiencies (C5 to C9), Factor D or other alternative-pathway defects, Asplenia or hyposplenism",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immunise fully against Neisseria meningitidis with both quadrivalent conjugate (ACWY) and serogroup B meningococcal vaccines,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking an X-linked complement defect in a male with severe meningococcal disease.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for properdin deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Middleton's Allergy: Principles and Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 314-17",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "properdin_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AH50 alternative-pathway assay",
+          "cells": [
+            {
+              "text": "Alternative-pathway activity, abnormal in properdin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CH50 classical-pathway assay",
+          "cells": [
+            {
+              "text": "Classical pathway, usually preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific properdin (factor P) level",
+          "cells": [
+            {
+              "text": "Properdin level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CFP gene testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures and PCR during acute infection",
+          "cells": [
+            {
+              "text": "Serogroup of the infecting organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningococcal and other vaccination status",
+          "cells": [
+            {
+              "text": "Vaccine coverage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "X-linked family screening and carrier assessment",
+          "cells": [
+            {
+              "text": "Carrier status in relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "properdin_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningococcal vaccination",
+          "cells": [
+            {
+              "text": "Quadrivalent conjugate (ACWY) and serogroup B vaccines, with boosters as advised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education and stand-by antibiotics",
+          "cells": [
+            {
+              "text": "Seek immediate care for any febrile illness; stand-by antibiotics where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency treatment",
+          "cells": [
+            {
+              "text": "Immediate parenteral third-generation cephalosporin such as ceftriaxone, with fluid resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term prophylaxis",
+          "cells": [
+            {
+              "text": "Prophylactic penicillin in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family",
+          "cells": [
+            {
+              "text": "Screen at-risk male relatives; genetic counselling for X-linked inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine care",
+          "cells": [
+            {
+              "text": "Keep routine immunisations current; refer to clinical immunology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "properdin_deficiency-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Complement component deficiencies and the diseases they cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated diseases"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic pathway: C1q, C1r, C1s, C4",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C2",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C1 inhibitor",
+          "cells": [
+            {
+              "text": "Rare immune-complex disease, few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: C3",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor D",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: properdin",
+          "cells": [
+            {
+              "text": "Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor I",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor H",
+          "cells": [
+            {
+              "text": "Hemolytic uremic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C5, C6, C7, C8",
+          "cells": [
+            {
+              "text": "Recurrent Neisseria infections, immune-complex disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C9",
+          "cells": [
+            {
+              "text": "Rare Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Immune-complex syndromes here include systemic lupus erythematosus and SLE-like syndromes, glomerulonephritis and vasculitis syndromes."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "properdin_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Properdin deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected properdin deficiency: febrile illness with meningococcal risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Headache with neck stiffness, non-blanching rash, septic shock, or purpura fulminans?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: IV ceftriaxone for suspected invasive meningococcal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AH50 and CH50; properdin level; CFP gene testing; cultures and PCR during infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is AH50 abnormal with CH50 preserved on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider terminal complement deficiency, factor D defect or asplenia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Full meningococcal vaccination (ACWY and serogroup B)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stand-by antibiotics and immediate care for any febrile illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Long-term prophylactic penicillin in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen at-risk male relatives; genetic counselling for X-linked inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Clinical immunology follow-up with routine immunisations kept current",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

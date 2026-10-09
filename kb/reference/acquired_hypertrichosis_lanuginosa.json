@@ -1,172 +1,476 @@
 {
- "id": "acquired_hypertrichosis_lanuginosa",
- "name": "acquired hypertrichosis lanuginosa",
- "aliases": [
-  "malignant down",
-  "hypertrichosis lanuginosa acquisita"
- ],
- "class": "non_infective",
- "system": "Integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as rapid growth of fine, soft, non-pigmented lanugo hair, often beginning on the face (including the nose and eyelids) and spreading caudally to the trunk and limbs, sparing only the palms and soles.",
-   "A strong marker of underlying, often advanced malignancy; lung, colorectal and breast carcinoma are the commonest associations.",
-   "In women breast and gynaecological tumours predominate, while in men lung and colorectal cancers are most frequent.",
-   "The eruption of malignant down may appear before the tumour is diagnosed and typically indicates advanced or metastatic disease.",
-   "It is frequently accompanied by glossitis with painful tongue papillae and by other paraneoplastic signs such as acanthosis nigricans and tripe palms.",
-   "It must be distinguished from drug-induced hypertrichosis and from androgen-dependent hirsutism, which follows a female terminal-hair pattern.",
-   "Florid facial lanugo growth produces a characteristic elongated, simian facies, often with accompanying weight loss and cachexia."
+  "id": "acquired_hypertrichosis_lanuginosa",
+  "name": "acquired hypertrichosis lanuginosa",
+  "aliases": [
+    "malignant down",
+    "hypertrichosis lanuginosa acquisita"
   ],
-  "pathophysiology": "The mechanism of acquired hypertrichosis lanuginosa is incompletely understood. Tumour-derived factors are thought to reset hair follicles from the resting or vellus state into active production of lanugo-type hair, possibly through altered growth-factor signalling and disturbance of the normal androgen-independent follicular cycle. The resulting hair is fine and unpigmented, resembling foetal lanugo, which distinguishes it from the pigmented terminal hair of androgen-driven hirsutism. The frequent association with advanced malignancy and cachexia suggests a humoral, tumour-related aetiology.",
-  "additionalDifferentials": [
-   "Drug-induced hypertrichosis (ciclosporin, minoxidil, phenytoin, corticosteroids)",
-   "Hirsutism from androgen excess (polycystic ovary syndrome, adrenal or ovarian tumour)",
-   "Congenital hypertrichosis lanuginosa (present from birth)",
-   "Hypertrichosis of anorexia nervosa or severe malnutrition",
-   "Hypothyroidism-related hypertrichosis",
-   "Porphyria cutanea tarda with localised facial hypertrichosis"
-  ],
-  "additionalInvestigations": [
-   "CT of chest, abdomen and pelvis to identify an occult primary",
-   "Age- and sex-appropriate cancer screening (mammography, colonoscopy, gynaecological assessment)",
-   "Skin and scalp examination with dermoscopy confirming fine lanugo hair",
-   "Tumour markers guided by the suspected primary",
-   "Thyroid function tests",
-   "Review of the drug history to exclude iatrogenic causes"
-  ],
-  "redFlags": [
-   "Rapid development of fine lanugo hair on the face of an adult",
-   "Accompanying weight loss, cachexia or glossitis",
-   "Coexisting acanthosis nigricans or tripe palms",
-   "Known or suspected internal malignancy"
-  ],
-  "prognosis": "Acquired hypertrichosis lanuginosa usually signifies advanced or metastatic malignancy and therefore carries a poor prognosis; hair growth may regress following successful tumour treatment.",
-  "pitfalls": [
-   "Confusing lanugo hypertrichosis with androgen-driven hirsutism",
-   "Overlooking a drug cause before attributing the eruption to malignancy",
-   "Failing to appreciate that it often indicates advanced disease",
-   "Not examining for accompanying paraneoplastic signs and glossitis"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Urgent search for and treatment of the underlying malignancy (commonly lung, colorectal or breast carcinoma), as the lanugo hair may regress with successful tumour control",
-   "Cosmetic hair removal by shaving or depilation for symptomatic relief, as there is no specific pharmacological therapy",
-   "Manage accompanying paraneoplastic features such as glossitis and acanthosis nigricans",
-   "Review the drug history to exclude medication-induced hypertrichosis before attributing the eruption to malignancy",
-   "Coordinate oncology-led multidisciplinary care, including palliative input where disease is advanced or metastatic",
-   "Clinical surveillance, since the eruption often signifies advanced disease and may track tumour activity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acquired_hypertrichosis_lanuginosa-pathway",
-   "title": "acquired hypertrichosis lanuginosa: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as rapid growth of fine, soft, non-pigmented lanugo hair, often beginning on the face (including the nose and eyelids) and spreading caudally to the trunk and limbs, sparing only the palms and soles.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid development of fine lanugo hair on the face of an adult",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT of chest, abdomen and pelvis to identify an occult primary, Age- and sex-appropriate cancer screening (mammography, colonoscopy, gynaecological assessment), Skin and scalp examination with dermoscopy confirming fine"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Urgent search for and treatment of the underlying malignancy (commonly lung, colorectal or breast carcinoma), as the lanugo hair may regress with successful tumour control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing lanugo hypertrichosis with androgen-driven hirsutism"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acquired hypertrichosis lanuginosa."
-  }
- ],
- "tables": [
-  {
-   "id": "acquired_hypertrichosis_lanuginosa-matrix",
-   "title": "acquired hypertrichosis lanuginosa: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as rapid growth of fine, soft, non-pigmented lanugo hair, often beginning on the face (including the nose and eyelids)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as rapid growth of fine, soft, non-pigmented lanugo hair, often beginning on the face (including the nose and eyelids) and spreading caudally to the trunk and limbs, sparing only the palms and soles.",
+      "A strong marker of underlying, often advanced malignancy; lung, colorectal and breast carcinoma are the commonest associations.",
+      "In women breast and gynaecological tumours predominate, while in men lung and colorectal cancers are most frequent.",
+      "The eruption of malignant down may appear before the tumour is diagnosed and typically indicates advanced or metastatic disease.",
+      "It is frequently accompanied by glossitis with painful tongue papillae and by other paraneoplastic signs such as acanthosis nigricans and tripe palms.",
+      "It must be distinguished from drug-induced hypertrichosis and from androgen-dependent hirsutism, which follows a female terminal-hair pattern.",
+      "Florid facial lanugo growth produces a characteristic elongated, simian facies, often with accompanying weight loss and cachexia."
     ],
-    [
-     "Key Investigations",
-     "CT of chest, abdomen and pelvis to identify an occult primary, Age- and sex-appropriate cancer screening (mammography,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The mechanism of acquired hypertrichosis lanuginosa is incompletely understood. Tumour-derived factors are thought to reset hair follicles from the resting or vellus state into active production of lanugo-type hair, possibly through altered growth-factor signalling and disturbance of the normal androgen-independent follicular cycle. The resulting hair is fine and unpigmented, resembling foetal lanugo, which distinguishes it from the pigmented terminal hair of androgen-driven hirsutism. The frequent association with advanced malignancy and cachexia suggests a humoral, tumour-related aetiology.",
+    "additionalDifferentials": [
+      "Drug-induced hypertrichosis (ciclosporin, minoxidil, phenytoin, corticosteroids)",
+      "Hirsutism from androgen excess (polycystic ovary syndrome, adrenal or ovarian tumour)",
+      "Congenital hypertrichosis lanuginosa (present from birth)",
+      "Hypertrichosis of anorexia nervosa or severe malnutrition",
+      "Hypothyroidism-related hypertrichosis",
+      "Porphyria cutanea tarda with localised facial hypertrichosis"
     ],
-    [
-     "Primary Differentials",
-     "Drug-induced hypertrichosis (ciclosporin, minoxidil, phenytoin, corticosteroids), Hirsutism from androgen excess (polycystic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT of chest, abdomen and pelvis to identify an occult primary",
+      "Age- and sex-appropriate cancer screening (mammography, colonoscopy, gynaecological assessment)",
+      "Skin and scalp examination with dermoscopy confirming fine lanugo hair",
+      "Tumour markers guided by the suspected primary",
+      "Thyroid function tests",
+      "Review of the drug history to exclude iatrogenic causes"
     ],
-    [
-     "Management Strategy",
-     "Urgent search for and treatment of the underlying malignancy (commonly lung, colorectal or breast carcinoma), as the lanugo hair",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid development of fine lanugo hair on the face of an adult",
+      "Accompanying weight loss, cachexia or glossitis",
+      "Coexisting acanthosis nigricans or tripe palms",
+      "Known or suspected internal malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing lanugo hypertrichosis with androgen-driven hirsutism",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acquired hypertrichosis lanuginosa usually signifies advanced or metastatic malignancy and therefore carries a poor prognosis; hair growth may regress following successful tumour treatment.",
+    "pitfalls": [
+      "Confusing lanugo hypertrichosis with androgen-driven hirsutism",
+      "Overlooking a drug cause before attributing the eruption to malignancy",
+      "Failing to appreciate that it often indicates advanced disease",
+      "Not examining for accompanying paraneoplastic signs and glossitis"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Urgent search for and treatment of the underlying malignancy (commonly lung, colorectal or breast carcinoma), as the lanugo hair may regress with successful tumour control",
+      "Cosmetic hair removal by shaving or depilation for symptomatic relief, as there is no specific pharmacological therapy",
+      "Manage accompanying paraneoplastic features such as glossitis and acanthosis nigricans",
+      "Review the drug history to exclude medication-induced hypertrichosis before attributing the eruption to malignancy",
+      "Coordinate oncology-led multidisciplinary care, including palliative input where disease is advanced or metastatic",
+      "Clinical surveillance, since the eruption often signifies advanced disease and may track tumour activity"
     ]
-   ],
-   "caption": "Overview comparison matrix for acquired hypertrichosis lanuginosa."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acquired-hypertrichosis-lanuginosa-real-image",
-   "title": "acquired hypertrichosis lanuginosa: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acquired_hypertrichosis_lanuginosa-pathway",
+      "title": "acquired hypertrichosis lanuginosa: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as rapid growth of fine, soft, non-pigmented lanugo hair, often beginning on the face (including the nose and eyelids) and spreading caudally to the trunk and limbs, sparing only the palms and soles.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid development of fine lanugo hair on the face of an adult",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT of chest, abdomen and pelvis to identify an occult primary, Age- and sex-appropriate cancer screening (mammography, colonoscopy, gynaecological assessment), Skin and scalp examination with dermoscopy confirming fine"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Urgent search for and treatment of the underlying malignancy (commonly lung, colorectal or breast carcinoma), as the lanugo hair may regress with successful tumour control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing lanugo hypertrichosis with androgen-driven hirsutism"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acquired hypertrichosis lanuginosa."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acquired_hypertrichosis_lanuginosa-matrix",
+      "title": "acquired hypertrichosis lanuginosa: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as rapid growth of fine, soft, non-pigmented lanugo hair, often beginning on the face (including the nose and eyelids)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT of chest, abdomen and pelvis to identify an occult primary, Age- and sex-appropriate cancer screening (mammography,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Drug-induced hypertrichosis (ciclosporin, minoxidil, phenytoin, corticosteroids), Hirsutism from androgen excess (polycystic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Urgent search for and treatment of the underlying malignancy (commonly lung, colorectal or breast carcinoma), as the lanugo hair",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing lanugo hypertrichosis with androgen-driven hirsutism",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acquired hypertrichosis lanuginosa."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_hypertrichosis_lanuginosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Occult primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age- and sex-appropriate cancer screening",
+          "cells": [
+            {
+              "text": "Mammography, colonoscopy and gynaecological assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and scalp examination with dermoscopy",
+          "cells": [
+            {
+              "text": "Fine lanugo hair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers guided by the suspected primary",
+          "cells": [
+            {
+              "text": "Guided by suspected primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of the drug history",
+          "cells": [
+            {
+              "text": "Iatrogenic causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_hypertrichosis_lanuginosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced hypertrichosis (ciclosporin, minoxidil, phenytoin, corticosteroids)",
+          "cells": [
+            {
+              "text": "Drug exposure"
+            },
+            {
+              "text": "Drug history review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirsutism from androgen excess (PCOS, adrenal or ovarian tumour)",
+          "cells": [
+            {
+              "text": "Androgen-driven terminal hair, not lanugo"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_hypertrichosis_lanuginosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent search for and treatment of underlying malignancy",
+          "cells": [
+            {
+              "text": "Lanugo hair may regress with tumour control"
+            },
+            {
+              "text": "Commonly lung, colorectal or breast carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shaving or depilation",
+          "cells": [
+            {
+              "text": "Cosmetic relief; no specific drug therapy"
+            },
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage paraneoplastic features",
+          "cells": [
+            {
+              "text": "Glossitis and acanthosis nigricans"
+            },
+            {
+              "text": "Coexisting features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review the drug history",
+          "cells": [
+            {
+              "text": "Excludes medication-induced hypertrichosis"
+            },
+            {
+              "text": "Before attributing to malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncology-led multidisciplinary care",
+          "cells": [
+            {
+              "text": "Advanced or metastatic disease"
+            },
+            {
+              "text": "Includes palliative input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical surveillance",
+          "cells": [
+            {
+              "text": "Eruption may track tumour activity"
+            },
+            {
+              "text": "Often signifies advanced disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_hypertrichosis_lanuginosa-dx-mgmt",
+      "title": "Diagnosis and management of acquired hypertrichosis lanuginosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapid growth of fine lanugo hair, starting on the face of an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Weight loss, glossitis or acanthosis nigricans present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cancer search: CT of chest, abdomen and pelvis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Review drug history; dermoscopy of the fine lanugo hair",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Medication-induced hypertrichosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "CT chest, abdomen and pelvis; age-appropriate cancer screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop or change the implicated drug; reassess hair growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat any occult malignancy (lung, colorectal or breast carcinoma)",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Shaving or depilation for cosmetic relief; no drug therapy exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat paraneoplastic glossitis; involve oncology and palliative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually signals advanced malignancy; hair may regress with tumour control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

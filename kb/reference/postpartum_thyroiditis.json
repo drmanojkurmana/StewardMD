@@ -1,167 +1,474 @@
 {
- "id": "postpartum_thyroiditis",
- "name": "Postpartum thyroiditis",
- "aliases": [
-  "postpartum thyroid dysfunction"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology / Obstetrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Endocrinology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A painless autoimmune destructive thyroiditis occurring within about a year of delivery (or miscarriage)",
-   "It classically follows a triphasic course of thyrotoxicosis, then hypothyroidism, then recovery, though many present with only one phase",
-   "It is strongly associated with thyroid peroxidase antibodies detectable before or during pregnancy",
-   "The thyrotoxic phase is destructive with low radioactive iodine uptake, distinguishing it from Graves disease",
-   "Symptoms are easily mistaken for normal postpartum fatigue or postnatal depression",
-   "A significant proportion develop permanent hypothyroidism and it tends to recur after future pregnancies"
+  "id": "postpartum_thyroiditis",
+  "name": "Postpartum thyroiditis",
+  "aliases": [
+    "postpartum thyroid dysfunction"
   ],
-  "pathophysiology": "Postpartum thyroiditis is an autoimmune lymphocytic thyroiditis unmasked by the immune rebound that follows the relative immunosuppression of pregnancy. Immune-mediated destruction of thyroid follicles releases stored hormone, causing a transient thyrotoxic phase, after which hormone depletion produces hypothyroidism before the gland usually recovers. Thyroid peroxidase antibodies mark the underlying autoimmunity and predict risk. As a destructive process, radioactive iodine uptake is low and antithyroid drugs are unhelpful.",
-  "additionalDifferentials": [
-   "Graves disease presenting postpartum",
-   "Silent (painless) thyroiditis unrelated to pregnancy",
-   "Normal postpartum fatigue or postnatal depression",
-   "Subacute granulomatous thyroiditis",
-   "Sheehan syndrome (for postpartum hypothyroid symptoms)"
-  ],
-  "additionalInvestigations": [
-   "Thyroid function tests across the phases",
-   "Thyroid peroxidase antibodies",
-   "Radioactive iodine uptake if Graves disease must be excluded (avoiding breastfeeding considerations)",
-   "Follow-up thyroid function to detect permanent hypothyroidism",
-   "Screening in subsequent pregnancies given recurrence risk"
-  ],
-  "redFlags": [
-   "Features suggesting Graves disease",
-   "Symptoms mislabelled as postnatal depression",
-   "Persistent hypothyroidism affecting the mother and breastfeeding",
-   "Severe thyrotoxic symptoms"
-  ],
-  "prognosis": "Most women return to euthyroidism within a year, but many develop permanent hypothyroidism over subsequent years, and the condition frequently recurs after later pregnancies.",
-  "pitfalls": [
-   "Attributing symptoms to normal postpartum tiredness or depression",
-   "Treating the thyrotoxic phase with antithyroid drugs",
-   "Confusing it with Graves disease and giving radioactive iodine",
-   "Not arranging follow-up for permanent hypothyroidism"
-  ],
-  "references": [
-   "Endocrinology reference texts (standard reference)",
-   "Thyroid in pregnancy guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control symptomatic thyrotoxic-phase adrenergic symptoms with a beta-blocker, since the destructive process does not respond to antithyroid drugs",
-   "Treat the hypothyroid phase with levothyroxine replacement when the patient is symptomatic or is planning or continuing pregnancy",
-   "Avoid antithyroid drugs and radioactive iodine, distinguishing this destructive thyroiditis from Graves disease by the low radioactive iodine uptake",
-   "Monitor thyroid function serially through the triphasic course to guide, and later withdraw, treatment",
-   "Undertake long-term follow-up to detect permanent hypothyroidism, which develops in a significant proportion",
-   "Screen thyroid function in subsequent pregnancies given the recurrence risk, and check thyroid peroxidase antibodies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "postpartum_thyroiditis-pathway",
-   "title": "Postpartum thyroiditis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A painless autoimmune destructive thyroiditis occurring within about a year of delivery (or miscarriage)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting Graves disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thyroid function tests across the phases, Thyroid peroxidase antibodies, Radioactive iodine uptake if Graves disease must be excluded (avoiding breastfeeding considerations)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control symptomatic thyrotoxic-phase adrenergic symptoms with a beta-blocker, since the destructive process does not respond to antithyroid drugs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing symptoms to normal postpartum tiredness or depression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of postpartum thyroiditis."
-  }
- ],
- "tables": [
-  {
-   "id": "postpartum_thyroiditis-matrix",
-   "title": "Postpartum thyroiditis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A painless autoimmune destructive thyroiditis occurring within about a year of delivery (or miscarriage)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology / Obstetrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Endocrinology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A painless autoimmune destructive thyroiditis occurring within about a year of delivery (or miscarriage)",
+      "It classically follows a triphasic course of thyrotoxicosis, then hypothyroidism, then recovery, though many present with only one phase",
+      "It is strongly associated with thyroid peroxidase antibodies detectable before or during pregnancy",
+      "The thyrotoxic phase is destructive with low radioactive iodine uptake, distinguishing it from Graves disease",
+      "Symptoms are easily mistaken for normal postpartum fatigue or postnatal depression",
+      "A significant proportion develop permanent hypothyroidism and it tends to recur after future pregnancies"
     ],
-    [
-     "Key Investigations",
-     "Thyroid function tests across the phases, Thyroid peroxidase antibodies, Radioactive iodine uptake if Graves disease must be",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Postpartum thyroiditis is an autoimmune lymphocytic thyroiditis unmasked by the immune rebound that follows the relative immunosuppression of pregnancy. Immune-mediated destruction of thyroid follicles releases stored hormone, causing a transient thyrotoxic phase, after which hormone depletion produces hypothyroidism before the gland usually recovers. Thyroid peroxidase antibodies mark the underlying autoimmunity and predict risk. As a destructive process, radioactive iodine uptake is low and antithyroid drugs are unhelpful.",
+    "additionalDifferentials": [
+      "Graves disease presenting postpartum",
+      "Silent (painless) thyroiditis unrelated to pregnancy",
+      "Normal postpartum fatigue or postnatal depression",
+      "Subacute granulomatous thyroiditis",
+      "Sheehan syndrome (for postpartum hypothyroid symptoms)"
     ],
-    [
-     "Primary Differentials",
-     "Graves disease presenting postpartum, Silent (painless) thyroiditis unrelated to pregnancy, Normal postpartum fatigue or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thyroid function tests across the phases",
+      "Thyroid peroxidase antibodies",
+      "Radioactive iodine uptake if Graves disease must be excluded (avoiding breastfeeding considerations)",
+      "Follow-up thyroid function to detect permanent hypothyroidism",
+      "Screening in subsequent pregnancies given recurrence risk"
     ],
-    [
-     "Management Strategy",
-     "Control symptomatic thyrotoxic-phase adrenergic symptoms with a beta-blocker, since the destructive process does not respond to",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting Graves disease",
+      "Symptoms mislabelled as postnatal depression",
+      "Persistent hypothyroidism affecting the mother and breastfeeding",
+      "Severe thyrotoxic symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing symptoms to normal postpartum tiredness or depression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most women return to euthyroidism within a year, but many develop permanent hypothyroidism over subsequent years, and the condition frequently recurs after later pregnancies.",
+    "pitfalls": [
+      "Attributing symptoms to normal postpartum tiredness or depression",
+      "Treating the thyrotoxic phase with antithyroid drugs",
+      "Confusing it with Graves disease and giving radioactive iodine",
+      "Not arranging follow-up for permanent hypothyroidism"
+    ],
+    "references": [
+      "Endocrinology reference texts (standard reference)",
+      "Thyroid in pregnancy guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control symptomatic thyrotoxic-phase adrenergic symptoms with a beta-blocker, since the destructive process does not respond to antithyroid drugs",
+      "Treat the hypothyroid phase with levothyroxine replacement when the patient is symptomatic or is planning or continuing pregnancy",
+      "Avoid antithyroid drugs and radioactive iodine, distinguishing this destructive thyroiditis from Graves disease by the low radioactive iodine uptake",
+      "Monitor thyroid function serially through the triphasic course to guide, and later withdraw, treatment",
+      "Undertake long-term follow-up to detect permanent hypothyroidism, which develops in a significant proportion",
+      "Screen thyroid function in subsequent pregnancies given the recurrence risk, and check thyroid peroxidase antibodies"
     ]
-   ],
-   "caption": "Overview comparison matrix for postpartum thyroiditis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "postpartum-thyroiditis-real-image",
-   "title": "Postpartum thyroiditis: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "postpartum_thyroiditis-pathway",
+      "title": "Postpartum thyroiditis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A painless autoimmune destructive thyroiditis occurring within about a year of delivery (or miscarriage)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting Graves disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thyroid function tests across the phases, Thyroid peroxidase antibodies, Radioactive iodine uptake if Graves disease must be excluded (avoiding breastfeeding considerations)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control symptomatic thyrotoxic-phase adrenergic symptoms with a beta-blocker, since the destructive process does not respond to antithyroid drugs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing symptoms to normal postpartum tiredness or depression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of postpartum thyroiditis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "postpartum_thyroiditis-matrix",
+      "title": "Postpartum thyroiditis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A painless autoimmune destructive thyroiditis occurring within about a year of delivery (or miscarriage)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thyroid function tests across the phases, Thyroid peroxidase antibodies, Radioactive iodine uptake if Graves disease must be",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Graves disease presenting postpartum, Silent (painless) thyroiditis unrelated to pregnancy, Normal postpartum fatigue or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control symptomatic thyrotoxic-phase adrenergic symptoms with a beta-blocker, since the destructive process does not respond to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing symptoms to normal postpartum tiredness or depression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for postpartum thyroiditis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "postpartum_thyroiditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid function tests across the phases",
+          "cells": [
+            {
+              "text": "Thyrotoxic then hypothyroid phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid peroxidase antibodies",
+          "cells": [
+            {
+              "text": "Autoimmune basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioactive iodine uptake",
+          "cells": [
+            {
+              "text": "Graves disease excluded where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up thyroid function",
+          "cells": [
+            {
+              "text": "Permanent hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening in later pregnancies",
+          "cells": [
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postpartum_thyroiditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Graves disease presenting postpartum",
+          "cells": [
+            {
+              "text": "Persistent or rising thyroid activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silent (painless) thyroiditis",
+          "cells": [
+            {
+              "text": "Unrelated to pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal postpartum fatigue or depression",
+          "cells": [
+            {
+              "text": "No thyroid abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute granulomatous thyroiditis",
+          "cells": [
+            {
+              "text": "Painful thyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sheehan syndrome",
+          "cells": [
+            {
+              "text": "Postpartum hypothyroid symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postpartum_thyroiditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blocker",
+          "cells": [
+            {
+              "text": "Symptomatic thyrotoxic-phase adrenergic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "Symptomatic hypothyroid phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antithyroid drugs and iodine",
+          "cells": [
+            {
+              "text": "Destructive thyroiditis distinguished from Graves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial thyroid function",
+          "cells": [
+            {
+              "text": "Guides treatment through the triphasic course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Permanent hypothyroidism develops in many"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subsequent pregnancies",
+          "cells": [
+            {
+              "text": "Thyroid screening given recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "postpartum_thyroiditis-dx-mgmt",
+      "title": "Diagnosis and management of Postpartum thyroiditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thyroid dysfunction in the first year after childbirth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (features of Graves disease, severe thyrotoxicosis, persistent hypothyroidism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine review for severe thyrotoxicosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thyroid function tests; thyroid peroxidase antibodies; radioiodine uptake if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do thyroid function and antibodies confirm postpartum thyroiditis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Graves disease, subacute thyroiditis, Sheehan syndrome or depression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blocker for symptomatic thyrotoxic-phase symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levothyroxine replacement when the hypothyroid phase is symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid antithyroid drugs and radioiodine in this destructive thyroiditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial thyroid function tests through the triphasic course",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term follow-up to detect permanent hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most return to euthyroidism within a year, but many develop permanent hypothyroidism",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

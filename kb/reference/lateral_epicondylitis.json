@@ -1,173 +1,471 @@
 {
- "id": "lateral_epicondylitis",
- "name": "Lateral epicondylitis (tennis elbow)",
- "aliases": [
-  "tennis elbow",
-  "lateral epicondylalgia",
-  "common extensor origin tendinopathy",
-  "lateral elbow tendinopathy"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Sports & Soft tissue",
- "specialty": "Sports Medicine / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Brukner and Khan's Clinical Sports Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Lateral elbow pain arising from the common extensor origin, chiefly extensor carpi radialis brevis",
-   "Despite the '-itis' name it is a degenerative tendinopathy (angiofibroblastic tendinosis) from overuse, not primary inflammation",
-   "Provoked by gripping and wrist and finger extension; pain is reproduced by resisted wrist extension and by Cozen's test",
-   "Tenderness is typically just distal and anterior to the lateral epicondyle",
-   "Diagnosis is largely clinical, with ultrasound or MRI reserved for uncertain or refractory cases",
-   "Often self-limiting; management is load modification, avoiding aggravating grip activity, and progressive or eccentric loading with physiotherapy",
-   "Corticosteroid injection may give short-term relief but is associated with poorer longer-term outcomes and possible tendon harm, so it is used cautiously",
-   "Counterforce bracing, and shockwave therapy in resistant cases, may help"
+  "id": "lateral_epicondylitis",
+  "name": "Lateral epicondylitis (tennis elbow)",
+  "aliases": [
+    "tennis elbow",
+    "lateral epicondylalgia",
+    "common extensor origin tendinopathy",
+    "lateral elbow tendinopathy"
   ],
-  "pathophysiology": "Lateral epicondylitis is an overuse tendinopathy of the common extensor origin at the lateral humeral epicondyle, predominantly involving extensor carpi radialis brevis. Repetitive gripping and wrist extension generate cumulative tensile load that exceeds the tendon's repair capacity. Histology shows angiofibroblastic degeneration with disorganised collagen, increased ground substance and neovascularisation, and a notable absence of inflammatory cells, so it is best regarded as a tendinosis rather than a true '-itis'. Chronic change reflects a failed healing response at the enthesis.",
-  "additionalDifferentials": [
-   "Radial tunnel syndrome (posterior interosseous nerve entrapment)",
-   "Radiocapitellar osteoarthritis",
-   "Cervical radiculopathy (C6 or C7)",
-   "Posterolateral rotatory instability of the elbow",
-   "Osteochondral or plica pathology of the radiocapitellar joint",
-   "Referred pain from the shoulder"
-  ],
-  "additionalInvestigations": [
-   "Clinical provocative tests (resisted wrist extension, Cozen's test, Mill's test)",
-   "Ultrasound to confirm common extensor tendinopathy or a tear",
-   "MRI in refractory or diagnostically unclear cases",
-   "Plain radiographs to assess the joint and exclude calcification or arthritis",
-   "Nerve conduction studies if radial tunnel syndrome or radiculopathy is suspected"
-  ],
-  "redFlags": [
-   "Neurological symptoms suggesting nerve entrapment or cervical radiculopathy",
-   "Night pain, systemic upset or a mass suggesting other pathology",
-   "Locking or instability implying intra-articular derangement",
-   "Failure to respond, prompting reassessment of the diagnosis"
-  ],
-  "prognosis": "The majority recover within a year with load management and rehabilitation, although symptoms can be prolonged; a minority with refractory disease may need shockwave therapy or, rarely, surgery.",
-  "pitfalls": [
-   "Treating as inflammatory and relying on rest or repeated steroid injections rather than progressive loading",
-   "Corticosteroid injection giving short-term relief but poorer long-term outcomes",
-   "Missing radial tunnel syndrome, which can mimic or coexist",
-   "Overlooking the cervical spine as a source of referred pain"
-  ],
-  "references": [
-   "Brukner and Khan's Clinical Sports Medicine",
-   "British Journal of Sports Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line management is load and activity modification, avoiding aggravating gripping and repetitive wrist extension while maintaining function",
-   "Refer for physiotherapy with a progressive, eccentric extensor-loading programme, the cornerstone of recovery",
-   "Provide symptomatic relief with topical or short-course oral NSAIDs and a counterforce forearm brace",
-   "Reserve corticosteroid injection for short-term relief only, recognising poorer long-term outcomes, and consider platelet-rich plasma in selected refractory cases",
-   "Offer extracorporeal shockwave therapy, and rarely surgical debridement of the extensor origin, for disease refractory to sustained conservative care",
-   "Reassure on the generally self-limiting natural history, and investigate atypical cases with nerve conduction studies to exclude radial tunnel syndrome"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lateral_epicondylitis-pathway",
-   "title": "Lateral epicondylitis (tennis elbow): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Lateral elbow pain arising from the common extensor origin, chiefly extensor carpi radialis brevis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological symptoms suggesting nerve entrapment or cervical radiculopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical provocative tests (resisted wrist extension, Cozen's test, Mill's test), Ultrasound to confirm common extensor tendinopathy or a tear, MRI in refractory or diagnostically unclear cases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line management is load and activity modification, avoiding aggravating gripping and repetitive wrist extension while maintaining function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating as inflammatory and relying on rest or repeated steroid injections rather than progressive loading"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lateral epicondylitis (tennis elbow)."
-  }
- ],
- "tables": [
-  {
-   "id": "lateral_epicondylitis-matrix",
-   "title": "Lateral epicondylitis (tennis elbow): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Lateral elbow pain arising from the common extensor origin, chiefly extensor carpi radialis brevis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Sports & Soft tissue",
+  "specialty": "Sports Medicine / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Brukner and Khan's Clinical Sports Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Lateral elbow pain arising from the common extensor origin, chiefly extensor carpi radialis brevis",
+      "Despite the '-itis' name it is a degenerative tendinopathy (angiofibroblastic tendinosis) from overuse, not primary inflammation",
+      "Provoked by gripping and wrist and finger extension; pain is reproduced by resisted wrist extension and by Cozen's test",
+      "Tenderness is typically just distal and anterior to the lateral epicondyle",
+      "Diagnosis is largely clinical, with ultrasound or MRI reserved for uncertain or refractory cases",
+      "Often self-limiting; management is load modification, avoiding aggravating grip activity, and progressive or eccentric loading with physiotherapy",
+      "Corticosteroid injection may give short-term relief but is associated with poorer longer-term outcomes and possible tendon harm, so it is used cautiously",
+      "Counterforce bracing, and shockwave therapy in resistant cases, may help"
     ],
-    [
-     "Key Investigations",
-     "Clinical provocative tests (resisted wrist extension, Cozen's test, Mill's test), Ultrasound to confirm common extensor",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lateral epicondylitis is an overuse tendinopathy of the common extensor origin at the lateral humeral epicondyle, predominantly involving extensor carpi radialis brevis. Repetitive gripping and wrist extension generate cumulative tensile load that exceeds the tendon's repair capacity. Histology shows angiofibroblastic degeneration with disorganised collagen, increased ground substance and neovascularisation, and a notable absence of inflammatory cells, so it is best regarded as a tendinosis rather than a true '-itis'. Chronic change reflects a failed healing response at the enthesis.",
+    "additionalDifferentials": [
+      "Radial tunnel syndrome (posterior interosseous nerve entrapment)",
+      "Radiocapitellar osteoarthritis",
+      "Cervical radiculopathy (C6 or C7)",
+      "Posterolateral rotatory instability of the elbow",
+      "Osteochondral or plica pathology of the radiocapitellar joint",
+      "Referred pain from the shoulder"
     ],
-    [
-     "Primary Differentials",
-     "Radial tunnel syndrome (posterior interosseous nerve entrapment), Radiocapitellar osteoarthritis, Cervical radiculopathy (C6 or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical provocative tests (resisted wrist extension, Cozen's test, Mill's test)",
+      "Ultrasound to confirm common extensor tendinopathy or a tear",
+      "MRI in refractory or diagnostically unclear cases",
+      "Plain radiographs to assess the joint and exclude calcification or arthritis",
+      "Nerve conduction studies if radial tunnel syndrome or radiculopathy is suspected"
     ],
-    [
-     "Management Strategy",
-     "First-line management is load and activity modification, avoiding aggravating gripping and repetitive wrist extension while",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological symptoms suggesting nerve entrapment or cervical radiculopathy",
+      "Night pain, systemic upset or a mass suggesting other pathology",
+      "Locking or instability implying intra-articular derangement",
+      "Failure to respond, prompting reassessment of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating as inflammatory and relying on rest or repeated steroid injections rather than progressive loading",
-     "Prevent diagnostic or management error"
+    "prognosis": "The majority recover within a year with load management and rehabilitation, although symptoms can be prolonged; a minority with refractory disease may need shockwave therapy or, rarely, surgery.",
+    "pitfalls": [
+      "Treating as inflammatory and relying on rest or repeated steroid injections rather than progressive loading",
+      "Corticosteroid injection giving short-term relief but poorer long-term outcomes",
+      "Missing radial tunnel syndrome, which can mimic or coexist",
+      "Overlooking the cervical spine as a source of referred pain"
+    ],
+    "references": [
+      "Brukner and Khan's Clinical Sports Medicine",
+      "British Journal of Sports Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line management is load and activity modification, avoiding aggravating gripping and repetitive wrist extension while maintaining function",
+      "Refer for physiotherapy with a progressive, eccentric extensor-loading programme, the cornerstone of recovery",
+      "Provide symptomatic relief with topical or short-course oral NSAIDs and a counterforce forearm brace",
+      "Reserve corticosteroid injection for short-term relief only, recognising poorer long-term outcomes, and consider platelet-rich plasma in selected refractory cases",
+      "Offer extracorporeal shockwave therapy, and rarely surgical debridement of the extensor origin, for disease refractory to sustained conservative care",
+      "Reassure on the generally self-limiting natural history, and investigate atypical cases with nerve conduction studies to exclude radial tunnel syndrome"
     ]
-   ],
-   "caption": "Overview comparison matrix for lateral epicondylitis (tennis elbow)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lateral-epicondylitis-real-image",
-   "title": "Lateral epicondylitis (tennis elbow): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "lateral_epicondylitis-pathway",
+      "title": "Lateral epicondylitis (tennis elbow): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Lateral elbow pain arising from the common extensor origin, chiefly extensor carpi radialis brevis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological symptoms suggesting nerve entrapment or cervical radiculopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical provocative tests (resisted wrist extension, Cozen's test, Mill's test), Ultrasound to confirm common extensor tendinopathy or a tear, MRI in refractory or diagnostically unclear cases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line management is load and activity modification, avoiding aggravating gripping and repetitive wrist extension while maintaining function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating as inflammatory and relying on rest or repeated steroid injections rather than progressive loading"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lateral epicondylitis (tennis elbow)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lateral_epicondylitis-matrix",
+      "title": "Lateral epicondylitis (tennis elbow): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Lateral elbow pain arising from the common extensor origin, chiefly extensor carpi radialis brevis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical provocative tests (resisted wrist extension, Cozen's test, Mill's test), Ultrasound to confirm common extensor",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Radial tunnel syndrome (posterior interosseous nerve entrapment), Radiocapitellar osteoarthritis, Cervical radiculopathy (C6 or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line management is load and activity modification, avoiding aggravating gripping and repetitive wrist extension while",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating as inflammatory and relying on rest or repeated steroid injections rather than progressive loading",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lateral epicondylitis (tennis elbow)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lateral_epicondylitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Provocative tests (resisted wrist extension, Cozen, Mill)",
+          "cells": [
+            {
+              "text": "Pain reproduced by resisted wrist extension and Cozen's test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms common extensor tendinopathy or a tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Refractory or diagnostically unclear cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Joint assessment; excludes calcification or arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "If radial tunnel syndrome or radiculopathy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lateral_epicondylitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Radial tunnel syndrome",
+          "cells": [
+            {
+              "text": "Posterior interosseous nerve entrapment; can mimic or coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical radiculopathy (C6 or C7)",
+          "cells": [
+            {
+              "text": "Neurological symptoms; the cervical spine can refer pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiocapitellar osteoarthritis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lateral_epicondylitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Load and activity modification",
+          "cells": [
+            {
+              "text": "First-line; avoid aggravating gripping and repetitive wrist extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Progressive eccentric extensor-loading programme; the cornerstone of recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Topical or short-course oral NSAIDs and a counterforce brace"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "Short-term relief only; poorer longer-term outcomes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet-rich plasma",
+          "cells": [
+            {
+              "text": "Selected refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shockwave therapy and surgery",
+          "cells": [
+            {
+              "text": "Extracorporeal shockwave; rarely surgical debridement of the extensor origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and investigation",
+          "cells": [
+            {
+              "text": "Self-limiting course; nerve conduction studies for atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lateral_epicondylitis-dx-mgmt",
+      "title": "Diagnosis and management of Lateral epicondylitis (tennis elbow)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lateral elbow pain from gripping, reproduced by resisted wrist extension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological signs, night pain, mass, locking, no response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: reassess the diagnosis and investigate for other pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Provocative tests, ultrasound; MRI or nerve studies if refractory or atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is pain reproduced by resisted wrist extension and Cozen's test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider radial tunnel syndrome, radiculopathy or radiocapitellar arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Load and activity modification, avoiding aggravating gripping",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Progressive eccentric extensor-loading physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short-course NSAIDs and a counterforce brace",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroid injection for short-term relief only",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Shockwave therapy for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover within a year with load management and rehabilitation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

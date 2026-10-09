@@ -1,175 +1,480 @@
 {
- "id": "hereditary_spastic_paraplegia_spg15",
- "name": "HSP SPG15 (ZFYVE26, Kjellin)",
- "aliases": [
-  "SPG15",
-  "Kjellin syndrome",
-  "ZFYVE26-related hereditary spastic paraplegia",
-  "spastizin deficiency",
-  "locus 14q24.1"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic ZFYVE26 variants affecting spastizin",
-   "The Kjellin syndrome phenotype combines spastic paraparesis with a central pigmentary maculopathy causing progressive visual loss",
-   "Cognitive decline, thin corpus callosum and periventricular white-matter change are characteristic, closely mirroring SPG11",
-   "Onset is typically in childhood or adolescence with learning difficulty preceding or accompanying gait deterioration",
-   "A peripheral axonal neuropathy and distal amyotrophy are common additional features",
-   "Spastizin functions in autophagy and endosomal trafficking, and its loss impairs lysosomal recycling in neurons",
-   "Management is symptomatic and multidisciplinary, including physiotherapy, spasticity control, low-vision support and educational input"
+  "id": "hereditary_spastic_paraplegia_spg15",
+  "name": "HSP SPG15 (ZFYVE26, Kjellin)",
+  "aliases": [
+    "SPG15",
+    "Kjellin syndrome",
+    "ZFYVE26-related hereditary spastic paraplegia",
+    "spastizin deficiency",
+    "locus 14q24.1"
   ],
-  "pathophysiology": "SPG15 is caused by biallelic loss-of-function variants in ZFYVE26, which encodes spastizin, a large protein that partners with spatacsin (the SPG11 protein) in autophagic lysosome reformation and endosomal trafficking. Deficiency impairs recycling of lysosomes and clearance of cellular material, leading to accumulation of storage-like material and neurodegeneration. The corticospinal tracts, cerebral white matter (with thin corpus callosum), retina and peripheral nerves are all affected, producing complicated spastic paraparesis with cognitive impairment, the distinctive Kjellin pigmentary maculopathy and an associated neuropathy. The close functional relationship with spatacsin explains the marked clinical overlap between SPG15 and SPG11.",
-  "additionalDifferentials": [
-   "SPG11 (spatacsin) complicated hereditary spastic paraplegia with thin corpus callosum",
-   "SPG21 (MAST syndrome) and other complicated recessive HSPs",
-   "Neuronal ceroid lipofuscinoses and other storage disorders with maculopathy",
-   "Metabolic leukodystrophies",
-   "Juvenile-onset amyotrophic lateral sclerosis",
-   "Retinal dystrophies with associated neurological disease"
-  ],
-  "additionalInvestigations": [
-   "ZFYVE26 sequencing and deletion analysis within a complicated-HSP panel",
-   "MRI of brain demonstrating thin corpus callosum and white-matter change",
-   "Ophthalmological review with fundus imaging and electroretinography for the maculopathy",
-   "Nerve conduction studies for the associated axonal neuropathy",
-   "Neuropsychological assessment of cognition",
-   "Metabolic and storage-disorder screen to exclude mimics"
-  ],
-  "redFlags": [
-   "Progressive visual loss requiring formal ophthalmological assessment",
-   "Rapid cognitive or behavioural decline prompting broader evaluation",
-   "Loss of ambulation or safe swallowing indicating advancing disease",
-   "Seizures suggesting more extensive cortical involvement"
-  ],
-  "prognosis": "SPG15 is a progressive multisystem disorder, and many affected individuals lose independent walking and develop significant cognitive and visual impairment by adulthood, although the rate of decline varies.",
-  "pitfalls": [
-   "Failing to examine the retina and missing the pigmentary maculopathy that distinguishes Kjellin syndrome",
-   "Not distinguishing SPG15 from SPG11 without complete genetic testing",
-   "Overlooking a peripheral neuropathy that contributes to disability",
-   "Attributing early learning difficulty to an unrelated cause and delaying diagnosis"
-  ],
-  "references": [
-   "GeneReviews: Hereditary Spastic Paraplegia Overview",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy exists; manage spasticity with oral antispasticity agents and focal botulinum toxin, adding intrathecal baclofen where tone is refractory",
-   "Physiotherapy, stretching and ankle-foot orthoses to maintain gait, with wheelchair and seating provision as ambulation is lost",
-   "Ophthalmological surveillance and low-vision rehabilitation for the progressive Kjellin pigmentary maculopathy",
-   "Neuropsychological support, cognitive rehabilitation and carer education for progressive cognitive decline",
-   "Podiatry and orthotic management of the associated axonal neuropathy and distal amyotrophy",
-   "Treat neurogenic bladder symptoms with antimuscarinic agents and urological input",
-   "Genetic counselling with cascade ZFYVE26 testing for autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_spastic_paraplegia_spg15-pathway",
-   "title": "HSP SPG15 (ZFYVE26, Kjellin): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic ZFYVE26 variants affecting spastizin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive visual loss requiring formal ophthalmological assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: ZFYVE26 sequencing and deletion analysis within a complicated-HSP panel, MRI of brain demonstrating thin corpus callosum and white-matter change, Ophthalmological review with fundus imaging and electroretinography for the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy exists; manage spasticity with oral antispasticity agents and focal botulinum toxin, adding intrathecal baclofen where tone is refractory"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to examine the retina and missing the pigmentary maculopathy that distinguishes Kjellin syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hsp spg15 (zfyve26, kjellin)."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_spastic_paraplegia_spg15-matrix",
-   "title": "HSP SPG15 (ZFYVE26, Kjellin): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic ZFYVE26 variants affecting spastizin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic ZFYVE26 variants affecting spastizin",
+      "The Kjellin syndrome phenotype combines spastic paraparesis with a central pigmentary maculopathy causing progressive visual loss",
+      "Cognitive decline, thin corpus callosum and periventricular white-matter change are characteristic, closely mirroring SPG11",
+      "Onset is typically in childhood or adolescence with learning difficulty preceding or accompanying gait deterioration",
+      "A peripheral axonal neuropathy and distal amyotrophy are common additional features",
+      "Spastizin functions in autophagy and endosomal trafficking, and its loss impairs lysosomal recycling in neurons",
+      "Management is symptomatic and multidisciplinary, including physiotherapy, spasticity control, low-vision support and educational input"
     ],
-    [
-     "Key Investigations",
-     "ZFYVE26 sequencing and deletion analysis within a complicated-HSP panel, MRI of brain demonstrating thin corpus callosum and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SPG15 is caused by biallelic loss-of-function variants in ZFYVE26, which encodes spastizin, a large protein that partners with spatacsin (the SPG11 protein) in autophagic lysosome reformation and endosomal trafficking. Deficiency impairs recycling of lysosomes and clearance of cellular material, leading to accumulation of storage-like material and neurodegeneration. The corticospinal tracts, cerebral white matter (with thin corpus callosum), retina and peripheral nerves are all affected, producing complicated spastic paraparesis with cognitive impairment, the distinctive Kjellin pigmentary maculopathy and an associated neuropathy. The close functional relationship with spatacsin explains the marked clinical overlap between SPG15 and SPG11.",
+    "additionalDifferentials": [
+      "SPG11 (spatacsin) complicated hereditary spastic paraplegia with thin corpus callosum",
+      "SPG21 (MAST syndrome) and other complicated recessive HSPs",
+      "Neuronal ceroid lipofuscinoses and other storage disorders with maculopathy",
+      "Metabolic leukodystrophies",
+      "Juvenile-onset amyotrophic lateral sclerosis",
+      "Retinal dystrophies with associated neurological disease"
     ],
-    [
-     "Primary Differentials",
-     "SPG11 (spatacsin) complicated hereditary spastic paraplegia with thin corpus callosum, SPG21 (MAST syndrome) and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "ZFYVE26 sequencing and deletion analysis within a complicated-HSP panel",
+      "MRI of brain demonstrating thin corpus callosum and white-matter change",
+      "Ophthalmological review with fundus imaging and electroretinography for the maculopathy",
+      "Nerve conduction studies for the associated axonal neuropathy",
+      "Neuropsychological assessment of cognition",
+      "Metabolic and storage-disorder screen to exclude mimics"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy exists; manage spasticity with oral antispasticity agents and focal botulinum toxin, adding",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive visual loss requiring formal ophthalmological assessment",
+      "Rapid cognitive or behavioural decline prompting broader evaluation",
+      "Loss of ambulation or safe swallowing indicating advancing disease",
+      "Seizures suggesting more extensive cortical involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to examine the retina and missing the pigmentary maculopathy that distinguishes Kjellin syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "SPG15 is a progressive multisystem disorder, and many affected individuals lose independent walking and develop significant cognitive and visual impairment by adulthood, although the rate of decline varies.",
+    "pitfalls": [
+      "Failing to examine the retina and missing the pigmentary maculopathy that distinguishes Kjellin syndrome",
+      "Not distinguishing SPG15 from SPG11 without complete genetic testing",
+      "Overlooking a peripheral neuropathy that contributes to disability",
+      "Attributing early learning difficulty to an unrelated cause and delaying diagnosis"
+    ],
+    "references": [
+      "GeneReviews: Hereditary Spastic Paraplegia Overview",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy exists; manage spasticity with oral antispasticity agents and focal botulinum toxin, adding intrathecal baclofen where tone is refractory",
+      "Physiotherapy, stretching and ankle-foot orthoses to maintain gait, with wheelchair and seating provision as ambulation is lost",
+      "Ophthalmological surveillance and low-vision rehabilitation for the progressive Kjellin pigmentary maculopathy",
+      "Neuropsychological support, cognitive rehabilitation and carer education for progressive cognitive decline",
+      "Podiatry and orthotic management of the associated axonal neuropathy and distal amyotrophy",
+      "Treat neurogenic bladder symptoms with antimuscarinic agents and urological input",
+      "Genetic counselling with cascade ZFYVE26 testing for autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for hsp spg15 (zfyve26, kjellin)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-spastic-paraplegia-spg15-real-image",
-   "title": "HSP SPG15 (ZFYVE26, Kjellin): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hereditary_spastic_paraplegia_spg15-pathway",
+      "title": "HSP SPG15 (ZFYVE26, Kjellin): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic ZFYVE26 variants affecting spastizin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive visual loss requiring formal ophthalmological assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: ZFYVE26 sequencing and deletion analysis within a complicated-HSP panel, MRI of brain demonstrating thin corpus callosum and white-matter change, Ophthalmological review with fundus imaging and electroretinography for the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy exists; manage spasticity with oral antispasticity agents and focal botulinum toxin, adding intrathecal baclofen where tone is refractory"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to examine the retina and missing the pigmentary maculopathy that distinguishes Kjellin syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hsp spg15 (zfyve26, kjellin)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg15-matrix",
+      "title": "HSP SPG15 (ZFYVE26, Kjellin): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic ZFYVE26 variants affecting spastizin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "ZFYVE26 sequencing and deletion analysis within a complicated-HSP panel, MRI of brain demonstrating thin corpus callosum and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SPG11 (spatacsin) complicated hereditary spastic paraplegia with thin corpus callosum, SPG21 (MAST syndrome) and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy exists; manage spasticity with oral antispasticity agents and focal botulinum toxin, adding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to examine the retina and missing the pigmentary maculopathy that distinguishes Kjellin syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hsp spg15 (zfyve26, kjellin)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg15-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ZFYVE26 sequencing and deletion analysis",
+          "cells": [
+            {
+              "text": "Biallelic variants in a complicated HSP panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain",
+          "cells": [
+            {
+              "text": "Thin corpus callosum and white matter change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology with fundus imaging and electroretinography",
+          "cells": [
+            {
+              "text": "Maculopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated axonal neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Cognition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and storage-disorder screen",
+          "cells": [
+            {
+              "text": "Excludes mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg15-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SPG11 (spatacsin)",
+          "cells": [
+            {
+              "text": "Also complicated with thin corpus callosum; ZFYVE26 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuronal ceroid lipofuscinoses and other storage disorders",
+          "cells": [
+            {
+              "text": "Maculopathy with storage disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPG21 (MAST syndrome)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile-onset amyotrophic lateral sclerosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg15-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral antispasticity agents",
+          "cells": [
+            {
+              "text": "For spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, stretching and ankle-foot orthoses",
+          "cells": [
+            {
+              "text": "Maintains gait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological surveillance",
+          "cells": [
+            {
+              "text": "Progressive visual loss, with low-vision rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological support",
+          "cells": [
+            {
+              "text": "Cognitive rehabilitation and carer education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Podiatry and orthotic management",
+          "cells": [
+            {
+              "text": "Axonal neuropathy and distal amyotrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimuscarinic agents",
+          "cells": [
+            {
+              "text": "Neurogenic bladder symptoms, with urological input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance with cascade ZFYVE26 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg15-dx-mgmt",
+      "title": "Diagnosis and management of HSP SPG15 (ZFYVE26, Kjellin)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spastic paraparesis with learning difficulty and pigmentary maculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive visual loss, rapid cognitive decline, loss of walking, or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: ophthalmology and neurology review for visual loss or rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ZFYVE26 testing; MRI brain; fundus imaging and ERG; nerve studies; cognition",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic ZFYVE26 variants found, with storage disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SPG11, neuronal ceroid lipofuscinosis or another complicated recessive HSP",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral antispasticity agents such as baclofen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, stretching and ankle-foot orthoses for gait",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmological surveillance and low-vision rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neuropsychological support and carer education",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive disease supported; ophthalmology and cognitive care ongoing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,472 @@
 {
- "id": "down_syndrome",
- "name": "Down Syndrome",
- "aliases": [
-  "trisomy 21",
-  "Down's syndrome",
-  "trisomy 21 syndrome"
- ],
- "class": "non_infective",
- "system": "Genetic",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common autosomal chromosomal disorder and a leading genetic cause of intellectual disability, resulting from an extra copy of chromosome 21.",
-   "Most cases are due to meiotic nondisjunction, with incidence rising markedly with advancing maternal age; a minority result from translocation or mosaicism.",
-   "Recognisable features include hypotonia, upslanting palpebral fissures, epicanthic folds, a flat nasal bridge, small ears, a single transverse palmar crease, and a sandal gap between the toes.",
-   "Congenital heart disease is common, particularly atrioventricular septal defects, so early echocardiography is recommended.",
-   "Gastrointestinal anomalies such as duodenal atresia and Hirschsprung disease occur more frequently.",
-   "There is increased risk of hypothyroidism, hearing and visual impairment, obstructive sleep apnoea, and atlantoaxial instability, warranting scheduled surveillance.",
-   "Children have a higher risk of transient myeloproliferative disorder in the newborn period and of leukaemia in childhood.",
-   "Diagnosis is confirmed by karyotype, which also identifies translocations relevant to recurrence risk and family counselling.",
-   "Early developmental support and coordinated multidisciplinary care improve developmental and health outcomes."
+  "id": "down_syndrome",
+  "name": "Down Syndrome",
+  "aliases": [
+    "trisomy 21",
+    "Down's syndrome",
+    "trisomy 21 syndrome"
   ],
-  "pathophysiology": "The presence of a third copy of chromosome 21 leads to over-expression of the genes it carries, disrupting normal development across multiple organ systems in a dosage-dependent manner. This gene-dosage imbalance affects neurodevelopment, cardiac and gastrointestinal morphogenesis, immune function, and haematopoiesis. Most trisomy 21 arises from failure of chromosomal separation during meiosis (nondisjunction), while translocation and mosaic forms produce the extra genetic material through other mechanisms.",
-  "additionalDifferentials": [
-   "Other trisomies (trisomy 18, trisomy 13)",
-   "Congenital hypothyroidism (overlapping hypotonia and coarse features)",
-   "Zellweger and other syndromes with hypotonia",
-   "Other syndromic causes of intellectual disability",
-   "Non-syndromic congenital heart disease"
-  ],
-  "additionalInvestigations": [
-   "Karyotype to confirm trisomy 21 and identify translocation or mosaicism",
-   "Echocardiography to detect congenital heart disease",
-   "Thyroid function testing at birth and on a scheduled basis",
-   "Hearing and vision assessments",
-   "Full blood count to screen for transient myeloproliferative disorder and later leukaemia",
-   "Cervical spine assessment when symptoms suggest atlantoaxial instability"
-  ],
-  "redFlags": [
-   "Signs of significant congenital heart disease or heart failure",
-   "Bilious vomiting or abdominal signs suggesting intestinal obstruction",
-   "Neurological signs of cervical cord compression from atlantoaxial instability",
-   "Persistent pallor, bruising, or abnormal blood counts suggesting leukaemia",
-   "Severe obstructive sleep apnoea"
-  ],
-  "prognosis": "Life expectancy has improved substantially with modern medical and surgical care and now commonly extends into adulthood; outcomes depend largely on cardiac disease and other complications, and most individuals have mild to moderate intellectual disability with early-onset Alzheimer-type changes in later life.",
-  "pitfalls": [
-   "Assuming a normal heart without echocardiographic screening",
-   "Overlooking hypothyroidism, which can mimic or worsen developmental delay",
-   "Missing atlantoaxial instability before activities or anaesthesia in symptomatic children",
-   "Failing to follow structured health surveillance recommendations"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no disease-specific cure, so care centres on early developmental intervention (physiotherapy, speech and language and occupational therapy) and structured surveillance for the associated multisystem complications",
-   "Detect and surgically correct congenital heart disease, particularly atrioventricular septal defect, guided by early echocardiography",
-   "Surgically manage associated gastrointestinal anomalies such as duodenal atresia and Hirschsprung disease",
-   "Screen for and treat hypothyroidism with levothyroxine on a scheduled basis, alongside regular hearing and vision assessment with correction of deficits",
-   "Screen for and manage obstructive sleep apnoea, and monitor the full blood count for transient myeloproliferative disorder in infancy and later leukaemia",
-   "Assess for atlantoaxial instability when neurological symptoms arise and counsel on activity precautions",
-   "Coordinate lifelong multidisciplinary care through paediatrics and primary care, and offer genetic counselling with parental karyotyping to determine recurrence risk, especially in translocation forms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "down_syndrome-pathway",
-   "title": "Down Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common autosomal chromosomal disorder and a leading genetic cause of intellectual disability, resulting from an extra copy of chromosome 21.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of significant congenital heart disease or heart failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Karyotype to confirm trisomy 21 and identify translocation or mosaicism, Echocardiography to detect congenital heart disease, Thyroid function testing at birth and on a scheduled basis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no disease-specific cure, so care centres on early developmental intervention (physiotherapy, speech and language and occupational therapy) and structured surveillance for the associated multisystem"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal heart without echocardiographic screening"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of down syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "down_syndrome-matrix",
-   "title": "Down Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common autosomal chromosomal disorder and a leading genetic cause of intellectual disability, resulting from an extra",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common autosomal chromosomal disorder and a leading genetic cause of intellectual disability, resulting from an extra copy of chromosome 21.",
+      "Most cases are due to meiotic nondisjunction, with incidence rising markedly with advancing maternal age; a minority result from translocation or mosaicism.",
+      "Recognisable features include hypotonia, upslanting palpebral fissures, epicanthic folds, a flat nasal bridge, small ears, a single transverse palmar crease, and a sandal gap between the toes.",
+      "Congenital heart disease is common, particularly atrioventricular septal defects, so early echocardiography is recommended.",
+      "Gastrointestinal anomalies such as duodenal atresia and Hirschsprung disease occur more frequently.",
+      "There is increased risk of hypothyroidism, hearing and visual impairment, obstructive sleep apnoea, and atlantoaxial instability, warranting scheduled surveillance.",
+      "Children have a higher risk of transient myeloproliferative disorder in the newborn period and of leukaemia in childhood.",
+      "Diagnosis is confirmed by karyotype, which also identifies translocations relevant to recurrence risk and family counselling.",
+      "Early developmental support and coordinated multidisciplinary care improve developmental and health outcomes."
     ],
-    [
-     "Key Investigations",
-     "Karyotype to confirm trisomy 21 and identify translocation or mosaicism, Echocardiography to detect congenital heart disease,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The presence of a third copy of chromosome 21 leads to over-expression of the genes it carries, disrupting normal development across multiple organ systems in a dosage-dependent manner. This gene-dosage imbalance affects neurodevelopment, cardiac and gastrointestinal morphogenesis, immune function, and haematopoiesis. Most trisomy 21 arises from failure of chromosomal separation during meiosis (nondisjunction), while translocation and mosaic forms produce the extra genetic material through other mechanisms.",
+    "additionalDifferentials": [
+      "Other trisomies (trisomy 18, trisomy 13)",
+      "Congenital hypothyroidism (overlapping hypotonia and coarse features)",
+      "Zellweger and other syndromes with hypotonia",
+      "Other syndromic causes of intellectual disability",
+      "Non-syndromic congenital heart disease"
     ],
-    [
-     "Primary Differentials",
-     "Other trisomies (trisomy 18, trisomy 13), Congenital hypothyroidism (overlapping hypotonia and coarse features), Zellweger and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Karyotype to confirm trisomy 21 and identify translocation or mosaicism",
+      "Echocardiography to detect congenital heart disease",
+      "Thyroid function testing at birth and on a scheduled basis",
+      "Hearing and vision assessments",
+      "Full blood count to screen for transient myeloproliferative disorder and later leukaemia",
+      "Cervical spine assessment when symptoms suggest atlantoaxial instability"
     ],
-    [
-     "Management Strategy",
-     "There is no disease-specific cure, so care centres on early developmental intervention (physiotherapy, speech and language and",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of significant congenital heart disease or heart failure",
+      "Bilious vomiting or abdominal signs suggesting intestinal obstruction",
+      "Neurological signs of cervical cord compression from atlantoaxial instability",
+      "Persistent pallor, bruising, or abnormal blood counts suggesting leukaemia",
+      "Severe obstructive sleep apnoea"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal heart without echocardiographic screening",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy has improved substantially with modern medical and surgical care and now commonly extends into adulthood; outcomes depend largely on cardiac disease and other complications, and most individuals have mild to moderate intellectual disability with early-onset Alzheimer-type changes in later life.",
+    "pitfalls": [
+      "Assuming a normal heart without echocardiographic screening",
+      "Overlooking hypothyroidism, which can mimic or worsen developmental delay",
+      "Missing atlantoaxial instability before activities or anaesthesia in symptomatic children",
+      "Failing to follow structured health surveillance recommendations"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no disease-specific cure, so care centres on early developmental intervention (physiotherapy, speech and language and occupational therapy) and structured surveillance for the associated multisystem complications",
+      "Detect and surgically correct congenital heart disease, particularly atrioventricular septal defect, guided by early echocardiography",
+      "Surgically manage associated gastrointestinal anomalies such as duodenal atresia and Hirschsprung disease",
+      "Screen for and treat hypothyroidism with levothyroxine on a scheduled basis, alongside regular hearing and vision assessment with correction of deficits",
+      "Screen for and manage obstructive sleep apnoea, and monitor the full blood count for transient myeloproliferative disorder in infancy and later leukaemia",
+      "Assess for atlantoaxial instability when neurological symptoms arise and counsel on activity precautions",
+      "Coordinate lifelong multidisciplinary care through paediatrics and primary care, and offer genetic counselling with parental karyotyping to determine recurrence risk, especially in translocation forms"
     ]
-   ],
-   "caption": "Overview comparison matrix for down syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "down-syndrome-real-image",
-   "title": "Down Syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "down_syndrome-pathway",
+      "title": "Down Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common autosomal chromosomal disorder and a leading genetic cause of intellectual disability, resulting from an extra copy of chromosome 21.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of significant congenital heart disease or heart failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Karyotype to confirm trisomy 21 and identify translocation or mosaicism, Echocardiography to detect congenital heart disease, Thyroid function testing at birth and on a scheduled basis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no disease-specific cure, so care centres on early developmental intervention (physiotherapy, speech and language and occupational therapy) and structured surveillance for the associated multisystem"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal heart without echocardiographic screening"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of down syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "down_syndrome-matrix",
+      "title": "Down Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common autosomal chromosomal disorder and a leading genetic cause of intellectual disability, resulting from an extra",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Karyotype to confirm trisomy 21 and identify translocation or mosaicism, Echocardiography to detect congenital heart disease,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other trisomies (trisomy 18, trisomy 13), Congenital hypothyroidism (overlapping hypotonia and coarse features), Zellweger and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no disease-specific cure, so care centres on early developmental intervention (physiotherapy, speech and language and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal heart without echocardiographic screening",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for down syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "down_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Trisomy 21, translocation or mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Transient myeloproliferative disorder and later leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine assessment when symptomatic",
+          "cells": [
+            {
+              "text": "Atlantoaxial instability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "down_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital hypothyroidism",
+          "cells": [
+            {
+              "text": "Overlapping hypotonia and coarse features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trisomy 18 or trisomy 13",
+          "cells": [
+            {
+              "text": "Distinguished by karyotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "down_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Physiotherapy, speech and language and occupational therapy; no disease-specific cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surgery",
+          "cells": [
+            {
+              "text": "Congenital heart disease, especially AV septal defect, guided by early echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal surgery",
+          "cells": [
+            {
+              "text": "Duodenal atresia and Hirschsprung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid replacement",
+          "cells": [
+            {
+              "text": "Levothyroxine on a scheduled basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and vision",
+          "cells": [
+            {
+              "text": "Regular assessment with correction of deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep apnoea and leukaemia surveillance",
+          "cells": [
+            {
+              "text": "Screen for obstructive sleep apnoea; FBC for transient myeloproliferative disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atlantoaxial instability",
+          "cells": [
+            {
+              "text": "Assess when neurological symptoms arise; activity precautions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental karyotyping, especially in translocation forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "down_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Down Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Down syndrome: neonatal hypotonia and characteristic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (heart failure, bilious vomiting, cord signs, leukaemia features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac and bowel surgical review; cervical spine assessment for cord signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype; echocardiography; thyroid function; FBC; hearing and vision; cervical spine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is trisomy 21 confirmed on karyotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider trisomy 18 or 13, congenital hypothyroidism or other syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early physiotherapy, speech and occupational therapy for development",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct congenital heart disease, especially AV septal defect, after echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery for duodenal atresia or Hirschsprung disease where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Scheduled thyroid testing and levothyroxine; hearing and vision review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for sleep apnoea and monitor FBC for leukaemia; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Life expectancy often reaches adulthood; outcome depends on cardiac complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,180 +1,431 @@
 {
- "id": "vanishing_white_matter_disease",
- "name": "Vanishing white matter disease",
- "aliases": [
-  "VWM",
-  "childhood ataxia with central hypomyelination",
-  "CACH",
-  "leukoencephalopathy with vanishing white matter",
-  "EIF2B1",
-  "EIF2B2",
-  "EIF2B3",
-  "EIF2B4",
-  "EIF2B5"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurology textbooks and peer-reviewed leukodystrophy reviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive leukodystrophy caused by biallelic variants in any of the five genes encoding subunits of eukaryotic translation initiation factor 2B (EIF2B1-5)",
-   "Hallmark clinical feature is episodic, stepwise neurological deterioration provoked by febrile illness, minor head trauma, or acute fright, often with marked lethargy or coma out of proportion to the trigger",
-   "Cerebellar ataxia and spasticity dominate the motor picture, whereas cognitive function is relatively spared until late",
-   "Classic childhood-onset form is most common, but the phenotype spans an antenatal/infantile severe end through to adult-onset and an ovarioleukodystrophy variant with premature ovarian failure in females",
-   "MRI shows diffuse, symmetrical white-matter abnormality that progressively rarefies and takes on cerebrospinal-fluid-like signal on all sequences, with a radiating stripe pattern of relatively preserved tissue",
-   "FLAIR sequences are especially useful, showing the affected white matter becoming suppressed (dark) as it liquefies, distinguishing it from simple demyelination",
-   "Confirmation is by molecular genetic testing of the EIF2B genes; there is no curative treatment, and management centres on avoiding known triggers",
-   "Families should be counselled to seek early care and antipyresis during infections and to minimise head injury, as these precipitate crises"
+  "id": "vanishing_white_matter_disease",
+  "name": "Vanishing white matter disease",
+  "aliases": [
+    "VWM",
+    "childhood ataxia with central hypomyelination",
+    "CACH",
+    "leukoencephalopathy with vanishing white matter",
+    "EIF2B1",
+    "EIF2B2",
+    "EIF2B3",
+    "EIF2B4",
+    "EIF2B5"
   ],
-  "pathophysiology": "Vanishing white matter disease results from loss-of-function variants in the genes encoding the five subunits of eukaryotic translation initiation factor 2B (eIF2B), a guanine-nucleotide exchange factor central to the regulation of protein synthesis, particularly under cellular stress. Impaired eIF2B activity deranges the integrated stress response, leaving glial cells (especially astrocytes and oligodendrocytes) unable to adapt to metabolic stresses such as fever, inflammation, or trauma. The result is progressive cerebral white-matter breakdown with abnormal, immature astrocytes and dysmyelination, so that the white matter gradually rarefies and cavitates into a fluid-like state while grey matter is comparatively preserved.",
-  "additionalDifferentials": [
-   "Metachromatic leukodystrophy and other lysosomal leukodystrophies",
-   "Megalencephalic leukoencephalopathy with subcortical cysts",
-   "Mitochondrial leukoencephalopathies",
-   "Acute disseminated encephalomyelitis or post-infectious demyelination",
-   "Alexander disease",
-   "Cerebral folate deficiency and other treatable metabolic leukoencephalopathies"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI with FLAIR and T2 sequences to demonstrate diffuse white-matter rarefaction with progressive CSF-like signal",
-   "Molecular genetic testing of EIF2B1-5 to confirm the diagnosis",
-   "Metabolic screen to exclude other leukodystrophies (arylsulfatase A, very-long-chain fatty acids, lactate)",
-   "Serial neuroimaging to document progression and cavitation of white matter",
-   "Endocrine assessment of ovarian function in affected females (ovarioleukodystrophy variant)"
-  ],
-  "redFlags": [
-   "Rapid decline into stupor or coma following a febrile illness or minor head injury",
-   "Acute loss of previously acquired motor milestones after a trigger event",
-   "Status epilepticus or intractable seizures during an episode of deterioration",
-   "Signs of raised intracranial pressure or brainstem dysfunction during a crisis"
-  ],
-  "prognosis": "The disorder is progressive and currently incurable; the classic childhood form typically causes stepwise decline with death within a few years of onset, whereas later-onset forms progress more slowly. Prognosis is strongly influenced by age at onset, with the earliest-onset presentations carrying the worst outlook.",
-  "pitfalls": [
-   "Attributing a post-febrile collapse to encephalitis or sepsis alone and missing the underlying leukodystrophy",
-   "Misreading early MRI as ordinary demyelination and failing to recognise the FLAIR suppression that signals white-matter liquefaction",
-   "Overlooking premature ovarian failure as a clue in adolescent or adult females",
-   "Failing to counsel families about trigger avoidance, prompt antipyresis, and head-injury prevention"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "GeneReviews: Childhood Ataxia with Central Nervous System Hypomyelination / Vanishing White Matter"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No curative therapy; care is supportive with strict avoidance of the stress triggers that provoke deterioration",
-   "Prompt, aggressive management of febrile illness with antipyretics and early antibiotics, together with head-injury precautions",
-   "Perioperative and vaccination planning to reduce stress-related decompensation",
-   "Physiotherapy, occupational therapy and antispasticity treatment such as baclofen for ataxia and spasticity, with mobility and communication aids",
-   "Anticonvulsants for seizures and management of feeding difficulties, including gastrostomy where needed",
-   "Endocrine review and hormone replacement for premature ovarian failure in affected females",
-   "Multidisciplinary neurodisability support with palliative care in advanced disease",
-   "Autosomal recessive genetic counselling, EIF2B testing and cascade family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vanishing_white_matter_disease-pathway",
-   "title": "Vanishing white matter disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive leukodystrophy caused by biallelic variants in any of the five genes encoding subunits of eukaryotic translation initiation factor 2B (EIF2B1-5)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid decline into stupor or coma following a febrile illness or minor head injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI with FLAIR and T2 sequences to demonstrate diffuse white-matter rarefaction with progressive CSF-like signal, Molecular genetic testing of EIF2B1-5 to confirm the diagnosis, Metabolic screen to exclude other"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No curative therapy; care is supportive with strict avoidance of the stress triggers that provoke deterioration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a post-febrile collapse to encephalitis or sepsis alone and missing the underlying leukodystrophy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vanishing white matter disease."
-  }
- ],
- "tables": [
-  {
-   "id": "vanishing_white_matter_disease-matrix",
-   "title": "Vanishing white matter disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive leukodystrophy caused by biallelic variants in any of the five genes encoding subunits of eukaryotic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurology textbooks and peer-reviewed leukodystrophy reviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive leukodystrophy caused by biallelic variants in any of the five genes encoding subunits of eukaryotic translation initiation factor 2B (EIF2B1-5)",
+      "Hallmark clinical feature is episodic, stepwise neurological deterioration provoked by febrile illness, minor head trauma, or acute fright, often with marked lethargy or coma out of proportion to the trigger",
+      "Cerebellar ataxia and spasticity dominate the motor picture, whereas cognitive function is relatively spared until late",
+      "Classic childhood-onset form is most common, but the phenotype spans an antenatal/infantile severe end through to adult-onset and an ovarioleukodystrophy variant with premature ovarian failure in females",
+      "MRI shows diffuse, symmetrical white-matter abnormality that progressively rarefies and takes on cerebrospinal-fluid-like signal on all sequences, with a radiating stripe pattern of relatively preserved tissue",
+      "FLAIR sequences are especially useful, showing the affected white matter becoming suppressed (dark) as it liquefies, distinguishing it from simple demyelination",
+      "Confirmation is by molecular genetic testing of the EIF2B genes; there is no curative treatment, and management centres on avoiding known triggers",
+      "Families should be counselled to seek early care and antipyresis during infections and to minimise head injury, as these precipitate crises"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI with FLAIR and T2 sequences to demonstrate diffuse white-matter rarefaction with progressive CSF-like signal, Molecular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vanishing white matter disease results from loss-of-function variants in the genes encoding the five subunits of eukaryotic translation initiation factor 2B (eIF2B), a guanine-nucleotide exchange factor central to the regulation of protein synthesis, particularly under cellular stress. Impaired eIF2B activity deranges the integrated stress response, leaving glial cells (especially astrocytes and oligodendrocytes) unable to adapt to metabolic stresses such as fever, inflammation, or trauma. The result is progressive cerebral white-matter breakdown with abnormal, immature astrocytes and dysmyelination, so that the white matter gradually rarefies and cavitates into a fluid-like state while grey matter is comparatively preserved.",
+    "additionalDifferentials": [
+      "Metachromatic leukodystrophy and other lysosomal leukodystrophies",
+      "Megalencephalic leukoencephalopathy with subcortical cysts",
+      "Mitochondrial leukoencephalopathies",
+      "Acute disseminated encephalomyelitis or post-infectious demyelination",
+      "Alexander disease",
+      "Cerebral folate deficiency and other treatable metabolic leukoencephalopathies"
     ],
-    [
-     "Primary Differentials",
-     "Metachromatic leukodystrophy and other lysosomal leukodystrophies, Megalencephalic leukoencephalopathy with subcortical cysts,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI with FLAIR and T2 sequences to demonstrate diffuse white-matter rarefaction with progressive CSF-like signal",
+      "Molecular genetic testing of EIF2B1-5 to confirm the diagnosis",
+      "Metabolic screen to exclude other leukodystrophies (arylsulfatase A, very-long-chain fatty acids, lactate)",
+      "Serial neuroimaging to document progression and cavitation of white matter",
+      "Endocrine assessment of ovarian function in affected females (ovarioleukodystrophy variant)"
     ],
-    [
-     "Management Strategy",
-     "No curative therapy; care is supportive with strict avoidance of the stress triggers that provoke deterioration",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid decline into stupor or coma following a febrile illness or minor head injury",
+      "Acute loss of previously acquired motor milestones after a trigger event",
+      "Status epilepticus or intractable seizures during an episode of deterioration",
+      "Signs of raised intracranial pressure or brainstem dysfunction during a crisis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a post-febrile collapse to encephalitis or sepsis alone and missing the underlying leukodystrophy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is progressive and currently incurable; the classic childhood form typically causes stepwise decline with death within a few years of onset, whereas later-onset forms progress more slowly. Prognosis is strongly influenced by age at onset, with the earliest-onset presentations carrying the worst outlook.",
+    "pitfalls": [
+      "Attributing a post-febrile collapse to encephalitis or sepsis alone and missing the underlying leukodystrophy",
+      "Misreading early MRI as ordinary demyelination and failing to recognise the FLAIR suppression that signals white-matter liquefaction",
+      "Overlooking premature ovarian failure as a clue in adolescent or adult females",
+      "Failing to counsel families about trigger avoidance, prompt antipyresis, and head-injury prevention"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "GeneReviews: Childhood Ataxia with Central Nervous System Hypomyelination / Vanishing White Matter"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No curative therapy; care is supportive with strict avoidance of the stress triggers that provoke deterioration",
+      "Prompt, aggressive management of febrile illness with antipyretics and early antibiotics, together with head-injury precautions",
+      "Perioperative and vaccination planning to reduce stress-related decompensation",
+      "Physiotherapy, occupational therapy and antispasticity treatment such as baclofen for ataxia and spasticity, with mobility and communication aids",
+      "Anticonvulsants for seizures and management of feeding difficulties, including gastrostomy where needed",
+      "Endocrine review and hormone replacement for premature ovarian failure in affected females",
+      "Multidisciplinary neurodisability support with palliative care in advanced disease",
+      "Autosomal recessive genetic counselling, EIF2B testing and cascade family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for vanishing white matter disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vanishing-white-matter-disease-real-image",
-   "title": "Vanishing white matter disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vanishing_white_matter_disease-pathway",
+      "title": "Vanishing white matter disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive leukodystrophy caused by biallelic variants in any of the five genes encoding subunits of eukaryotic translation initiation factor 2B (EIF2B1-5)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid decline into stupor or coma following a febrile illness or minor head injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI with FLAIR and T2 sequences to demonstrate diffuse white-matter rarefaction with progressive CSF-like signal, Molecular genetic testing of EIF2B1-5 to confirm the diagnosis, Metabolic screen to exclude other"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No curative therapy; care is supportive with strict avoidance of the stress triggers that provoke deterioration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a post-febrile collapse to encephalitis or sepsis alone and missing the underlying leukodystrophy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vanishing white matter disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vanishing_white_matter_disease-matrix",
+      "title": "Vanishing white matter disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive leukodystrophy caused by biallelic variants in any of the five genes encoding subunits of eukaryotic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI with FLAIR and T2 sequences to demonstrate diffuse white-matter rarefaction with progressive CSF-like signal, Molecular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Metachromatic leukodystrophy and other lysosomal leukodystrophies, Megalencephalic leukoencephalopathy with subcortical cysts,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No curative therapy; care is supportive with strict avoidance of the stress triggers that provoke deterioration",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a post-febrile collapse to encephalitis or sepsis alone and missing the underlying leukodystrophy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vanishing white matter disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology textbooks and peer-reviewed leukodystrophy reviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vanishing_white_matter_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI with FLAIR and T2 sequences",
+          "cells": [
+            {
+              "text": "Diffuse white matter rarefaction with progressive CSF-like signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EIF2B1-5 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen (arylsulfatase A, very-long-chain fatty acids, lactate)",
+          "cells": [
+            {
+              "text": "Excludes other leukodystrophies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neuroimaging",
+          "cells": [
+            {
+              "text": "Progression and cavitation of white matter"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vanishing_white_matter_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metachromatic leukodystrophy",
+          "cells": [
+            {
+              "text": "Other lysosomal leukodystrophy; arylsulfatase A screen separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute disseminated encephalomyelitis or post-infectious demyelination",
+          "cells": [
+            {
+              "text": "Post-infectious picture; FLAIR suppression favours white matter disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alexander disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vanishing_white_matter_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No curative therapy; strict avoidance of stress triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive fever management",
+          "cells": [
+            {
+              "text": "Antipyretics and early antibiotics, with head-injury precautions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative and vaccination planning",
+          "cells": [
+            {
+              "text": "Reduces stress-related decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and antispasticity measures",
+          "cells": [
+            {
+              "text": "Cerebellar ataxia and spasticity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vanishing_white_matter_disease-dx-mgmt",
+      "title": "Diagnosis and management of Vanishing white matter disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vanishing white matter disease: stepwise decline after fever or head injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stupor or coma after a trigger, loss of skills or status epilepticus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of stupor, status epilepticus or intractable seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FLAIR and T2 MRI, EIF2B1-5 testing, metabolic screen, serial neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does molecular testing confirm biallelic EIF2B1-5 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metachromatic leukodystrophy or other leukodystrophy; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with strict avoidance of stress triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt antipyretic and early antibiotic treatment of febrile illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Perioperative and vaccination planning to reduce decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and antispasticity measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No curative therapy; the course is episodic and stepwise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

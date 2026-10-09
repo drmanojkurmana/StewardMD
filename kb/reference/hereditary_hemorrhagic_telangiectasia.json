@@ -1,175 +1,471 @@
 {
- "id": "hereditary_hemorrhagic_telangiectasia",
- "name": "Hereditary haemorrhagic telangiectasia",
- "aliases": [
-  "HHT",
-  "Osler-Weber-Rendu disease",
-  "ENG",
-  "ACVRL1",
-  "SMAD4"
- ],
- "class": "non_infective",
- "system": "Genetics / Oncology",
- "specialty": "Clinical Genetics / Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant vascular dysplasia most often caused by variants in ENG or ACVRL1, with SMAD4 variants producing a combined HHT and juvenile polyposis phenotype",
-   "Recurrent spontaneous epistaxis is usually the earliest and most frequent manifestation, often from childhood",
-   "Mucocutaneous telangiectases characteristically appear on the lips, tongue, face and fingertips",
-   "Visceral arteriovenous malformations occur in the lungs, liver and brain and can cause serious complications well before overt symptoms",
-   "Pulmonary arteriovenous malformations create a right-to-left shunt with risk of paradoxical embolic stroke and cerebral abscess, so contrast echocardiography screening is important",
-   "The Curacao clinical criteria (epistaxis, telangiectases, visceral involvement, affected first-degree relative) support diagnosis, confirmed by genetic testing",
-   "The causative genes encode components of the TGF-beta/BMP signalling pathway that maintains normal vascular integrity"
+  "id": "hereditary_hemorrhagic_telangiectasia",
+  "name": "Hereditary haemorrhagic telangiectasia",
+  "aliases": [
+    "HHT",
+    "Osler-Weber-Rendu disease",
+    "ENG",
+    "ACVRL1",
+    "SMAD4"
   ],
-  "pathophysiology": "Hereditary haemorrhagic telangiectasia is an autosomal dominant disorder of vascular development caused by loss-of-function variants in genes of the transforming growth factor-beta (TGF-beta)/bone morphogenetic protein signalling pathway, principally ENG (endoglin) and ACVRL1 (ALK1), with SMAD4 accounting for the combined syndrome with juvenile polyposis. Disruption of this pathway impairs the normal balance of signals controlling endothelial proliferation, vessel maturation and mural cell recruitment. The result is fragile, dilated telangiectatic vessels and larger arteriovenous malformations lacking an intervening capillary bed, which bleed readily and, in the case of pulmonary lesions, permit right-to-left shunting.",
-  "additionalDifferentials": [
-   "Isolated recurrent epistaxis from local nasal causes",
-   "CREST/systemic sclerosis with facial telangiectases",
-   "Generalised essential telangiectasia",
-   "Von Willebrand disease and other bleeding disorders",
-   "Cutaneous or hepatic vascular malformations of other cause",
-   "Capillary malformation-arteriovenous malformation syndrome (RASA1)"
-  ],
-  "additionalInvestigations": [
-   "Germline molecular genetic testing of ENG, ACVRL1 and SMAD4",
-   "Transthoracic contrast (bubble) echocardiography to screen for pulmonary arteriovenous malformations",
-   "CT of the chest to characterise pulmonary arteriovenous malformations when screening is positive",
-   "Contrast-enhanced brain MRI for cerebral vascular malformations per guidelines",
-   "Liver imaging (Doppler ultrasound or cross-sectional) for hepatic arteriovenous malformations",
-   "Full blood count and iron studies to assess bleeding-related anaemia; colonoscopy if SMAD4-related"
-  ],
-  "redFlags": [
-   "Neurological deficit from paradoxical embolic stroke or cerebral abscess via a pulmonary shunt",
-   "Massive epistaxis or gastrointestinal bleeding causing haemodynamic compromise",
-   "High-output cardiac failure from extensive hepatic arteriovenous malformations",
-   "Haemoptysis or spontaneous haemothorax from a pulmonary arteriovenous malformation, especially in pregnancy"
-  ],
-  "prognosis": "With screening and treatment of visceral arteriovenous malformations, many life-threatening complications are preventable, and most affected individuals have a near-normal life expectancy. Chronic epistaxis and gastrointestinal bleeding, however, cause substantial iron-deficiency anaemia and reduced quality of life over time.",
-  "pitfalls": [
-   "Managing recurrent epistaxis without screening for occult pulmonary or cerebral arteriovenous malformations",
-   "Omitting antibiotic prophylaxis for procedures in patients with pulmonary arteriovenous malformations at risk of abscess",
-   "Missing the SMAD4-associated juvenile polyposis phenotype and its cancer surveillance needs",
-   "Under-recognising the condition in relatives because features and severity vary within families"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "GeneReviews: Hereditary Hemorrhagic Telangiectasia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage recurrent epistaxis with nasal humidification and moisturisers, tranexamic acid, laser or other ablative therapy, and antiangiogenic bevacizumab for severe refractory bleeding",
-   "Correct bleeding-related iron-deficiency anaemia with iron replacement and transfusion as needed",
-   "Screen for and treat pulmonary arteriovenous malformations with transcatheter embolisation to prevent paradoxical embolic stroke and cerebral abscess",
-   "Provide antibiotic prophylaxis for procedures and air-embolism precautions in patients with pulmonary arteriovenous malformations",
-   "Undertake guideline-based surveillance and treatment of cerebral and hepatic arteriovenous malformations, and manage gastrointestinal telangiectatic bleeding with endoscopic therapy and antiangiogenic agents",
-   "In SMAD4-related disease, add colonoscopic surveillance and management of juvenile polyposis",
-   "Genetic counselling with ENG, ACVRL1 and SMAD4 testing and cascade screening of relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_hemorrhagic_telangiectasia-pathway",
-   "title": "Hereditary haemorrhagic telangiectasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant vascular dysplasia most often caused by variants in ENG or ACVRL1, with SMAD4 variants producing a combined HHT and juvenile polyposis phenotype",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological deficit from paradoxical embolic stroke or cerebral abscess via a pulmonary shunt",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Germline molecular genetic testing of ENG, ACVRL1 and SMAD4, Transthoracic contrast (bubble) echocardiography to screen for pulmonary arteriovenous malformations, CT of the chest to characterise pulmonary arteriovenous"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage recurrent epistaxis with nasal humidification and moisturisers, tranexamic acid, laser or other ablative therapy, and antiangiogenic bevacizumab for severe refractory bleeding"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Managing recurrent epistaxis without screening for occult pulmonary or cerebral arteriovenous malformations"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary haemorrhagic telangiectasia."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_hemorrhagic_telangiectasia-matrix",
-   "title": "Hereditary haemorrhagic telangiectasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant vascular dysplasia most often caused by variants in ENG or ACVRL1, with SMAD4 variants producing a combined",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Oncology",
+  "specialty": "Clinical Genetics / Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant vascular dysplasia most often caused by variants in ENG or ACVRL1, with SMAD4 variants producing a combined HHT and juvenile polyposis phenotype",
+      "Recurrent spontaneous epistaxis is usually the earliest and most frequent manifestation, often from childhood",
+      "Mucocutaneous telangiectases characteristically appear on the lips, tongue, face and fingertips",
+      "Visceral arteriovenous malformations occur in the lungs, liver and brain and can cause serious complications well before overt symptoms",
+      "Pulmonary arteriovenous malformations create a right-to-left shunt with risk of paradoxical embolic stroke and cerebral abscess, so contrast echocardiography screening is important",
+      "The Curacao clinical criteria (epistaxis, telangiectases, visceral involvement, affected first-degree relative) support diagnosis, confirmed by genetic testing",
+      "The causative genes encode components of the TGF-beta/BMP signalling pathway that maintains normal vascular integrity"
     ],
-    [
-     "Key Investigations",
-     "Germline molecular genetic testing of ENG, ACVRL1 and SMAD4, Transthoracic contrast (bubble) echocardiography to screen for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary haemorrhagic telangiectasia is an autosomal dominant disorder of vascular development caused by loss-of-function variants in genes of the transforming growth factor-beta (TGF-beta)/bone morphogenetic protein signalling pathway, principally ENG (endoglin) and ACVRL1 (ALK1), with SMAD4 accounting for the combined syndrome with juvenile polyposis. Disruption of this pathway impairs the normal balance of signals controlling endothelial proliferation, vessel maturation and mural cell recruitment. The result is fragile, dilated telangiectatic vessels and larger arteriovenous malformations lacking an intervening capillary bed, which bleed readily and, in the case of pulmonary lesions, permit right-to-left shunting.",
+    "additionalDifferentials": [
+      "Isolated recurrent epistaxis from local nasal causes",
+      "CREST/systemic sclerosis with facial telangiectases",
+      "Generalised essential telangiectasia",
+      "Von Willebrand disease and other bleeding disorders",
+      "Cutaneous or hepatic vascular malformations of other cause",
+      "Capillary malformation-arteriovenous malformation syndrome (RASA1)"
     ],
-    [
-     "Primary Differentials",
-     "Isolated recurrent epistaxis from local nasal causes, CREST/systemic sclerosis with facial telangiectases, Generalised essential",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Germline molecular genetic testing of ENG, ACVRL1 and SMAD4",
+      "Transthoracic contrast (bubble) echocardiography to screen for pulmonary arteriovenous malformations",
+      "CT of the chest to characterise pulmonary arteriovenous malformations when screening is positive",
+      "Contrast-enhanced brain MRI for cerebral vascular malformations per guidelines",
+      "Liver imaging (Doppler ultrasound or cross-sectional) for hepatic arteriovenous malformations",
+      "Full blood count and iron studies to assess bleeding-related anaemia; colonoscopy if SMAD4-related"
     ],
-    [
-     "Management Strategy",
-     "Manage recurrent epistaxis with nasal humidification and moisturisers, tranexamic acid, laser or other ablative therapy, and",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological deficit from paradoxical embolic stroke or cerebral abscess via a pulmonary shunt",
+      "Massive epistaxis or gastrointestinal bleeding causing haemodynamic compromise",
+      "High-output cardiac failure from extensive hepatic arteriovenous malformations",
+      "Haemoptysis or spontaneous haemothorax from a pulmonary arteriovenous malformation, especially in pregnancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Managing recurrent epistaxis without screening for occult pulmonary or cerebral arteriovenous malformations",
-     "Prevent diagnostic or management error"
+    "prognosis": "With screening and treatment of visceral arteriovenous malformations, many life-threatening complications are preventable, and most affected individuals have a near-normal life expectancy. Chronic epistaxis and gastrointestinal bleeding, however, cause substantial iron-deficiency anaemia and reduced quality of life over time.",
+    "pitfalls": [
+      "Managing recurrent epistaxis without screening for occult pulmonary or cerebral arteriovenous malformations",
+      "Omitting antibiotic prophylaxis for procedures in patients with pulmonary arteriovenous malformations at risk of abscess",
+      "Missing the SMAD4-associated juvenile polyposis phenotype and its cancer surveillance needs",
+      "Under-recognising the condition in relatives because features and severity vary within families"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "GeneReviews: Hereditary Hemorrhagic Telangiectasia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage recurrent epistaxis with nasal humidification and moisturisers, tranexamic acid, laser or other ablative therapy, and antiangiogenic bevacizumab for severe refractory bleeding",
+      "Correct bleeding-related iron-deficiency anaemia with iron replacement and transfusion as needed",
+      "Screen for and treat pulmonary arteriovenous malformations with transcatheter embolisation to prevent paradoxical embolic stroke and cerebral abscess",
+      "Provide antibiotic prophylaxis for procedures and air-embolism precautions in patients with pulmonary arteriovenous malformations",
+      "Undertake guideline-based surveillance and treatment of cerebral and hepatic arteriovenous malformations, and manage gastrointestinal telangiectatic bleeding with endoscopic therapy and antiangiogenic agents",
+      "In SMAD4-related disease, add colonoscopic surveillance and management of juvenile polyposis",
+      "Genetic counselling with ENG, ACVRL1 and SMAD4 testing and cascade screening of relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary haemorrhagic telangiectasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-hemorrhagic-telangiectasia-real-image",
-   "title": "Hereditary haemorrhagic telangiectasia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hereditary_hemorrhagic_telangiectasia-pathway",
+      "title": "Hereditary haemorrhagic telangiectasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant vascular dysplasia most often caused by variants in ENG or ACVRL1, with SMAD4 variants producing a combined HHT and juvenile polyposis phenotype",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological deficit from paradoxical embolic stroke or cerebral abscess via a pulmonary shunt",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Germline molecular genetic testing of ENG, ACVRL1 and SMAD4, Transthoracic contrast (bubble) echocardiography to screen for pulmonary arteriovenous malformations, CT of the chest to characterise pulmonary arteriovenous"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage recurrent epistaxis with nasal humidification and moisturisers, tranexamic acid, laser or other ablative therapy, and antiangiogenic bevacizumab for severe refractory bleeding"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Managing recurrent epistaxis without screening for occult pulmonary or cerebral arteriovenous malformations"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary haemorrhagic telangiectasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_hemorrhagic_telangiectasia-matrix",
+      "title": "Hereditary haemorrhagic telangiectasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant vascular dysplasia most often caused by variants in ENG or ACVRL1, with SMAD4 variants producing a combined",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Germline molecular genetic testing of ENG, ACVRL1 and SMAD4, Transthoracic contrast (bubble) echocardiography to screen for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated recurrent epistaxis from local nasal causes, CREST/systemic sclerosis with facial telangiectases, Generalised essential",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage recurrent epistaxis with nasal humidification and moisturisers, tranexamic acid, laser or other ablative therapy, and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Managing recurrent epistaxis without screening for occult pulmonary or cerebral arteriovenous malformations",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary haemorrhagic telangiectasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_hemorrhagic_telangiectasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline ENG, ACVRL1 and SMAD4 testing",
+          "cells": [
+            {
+              "text": "Genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic contrast (bubble) echocardiography",
+          "cells": [
+            {
+              "text": "Screens for pulmonary arteriovenous malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest",
+          "cells": [
+            {
+              "text": "Characterises pulmonary arteriovenous malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced brain MRI",
+          "cells": [
+            {
+              "text": "Cerebral vascular malformations, per guidelines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver imaging",
+          "cells": [
+            {
+              "text": "Hepatic arteriovenous malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Bleeding-related anaemia; colonoscopy where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hemorrhagic_telangiectasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated recurrent epistaxis from local nasal causes",
+          "cells": [
+            {
+              "text": "No telangiectasia or visceral involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CREST or systemic sclerosis with facial telangiectasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised essential telangiectasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hemorrhagic_telangiectasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Epistaxis care",
+          "cells": [
+            {
+              "text": "Nasal humidification, moisturisers and tranexamic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron replacement and transfusion",
+          "cells": [
+            {
+              "text": "Bleeding-related iron-deficiency anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transcatheter embolisation",
+          "cells": [
+            {
+              "text": "Pulmonary arteriovenous malformations with screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic prophylaxis and air-embolism precautions",
+          "cells": [
+            {
+              "text": "For procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral and hepatic AVM surveillance",
+          "cells": [
+            {
+              "text": "Guideline-based surveillance and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SMAD4-related disease",
+          "cells": [
+            {
+              "text": "Colonoscopic surveillance and juvenile polyposis management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "ENG, ACVRL1 and SMAD4 testing; cascade screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_hemorrhagic_telangiectasia-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary haemorrhagic telangiectasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent spontaneous epistaxis with mucocutaneous telangiectasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological deficit, massive bleed, high-output failure or haemoptysis present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for paradoxical embolic stroke or massive haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ENG, ACVRL1, SMAD4 testing; bubble echo; chest CT; brain MRI; liver imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the Curacao clinical criteria met, with a pathogenic variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider local nasal causes, CREST, generalised essential telangiectasia or VWD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nasal humidification, moisturisers and tranexamic acid for epistaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron replacement or transfusion for bleeding-related anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transcatheter embolisation of pulmonary AVMs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotic prophylaxis and air-embolism precautions for procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bleeding and shunts managed; genetic counselling and cascade screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

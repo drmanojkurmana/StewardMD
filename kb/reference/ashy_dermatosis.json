@@ -1,171 +1,459 @@
 {
- "id": "ashy_dermatosis",
- "name": "Ashy dermatosis (erythema dyschromicum perstans)",
- "aliases": [
-  "erythema dyschromicum perstans",
-  "EDP",
-  "dermatosis cenicienta"
- ],
- "class": "non_infective",
- "system": "Dermatology / Pigmentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Symmetrical ash-grey to blue-grey macules and patches, mainly over the trunk, proximal limbs and neck",
-   "Early active lesions may show a slightly raised erythematous border that later resolves, leaving grey pigmentation",
-   "Considered by many authors to lie within the spectrum of lichen planus pigmentosus",
-   "The grey colour reflects dermal melanin held within melanophages, the result of an interface reaction with pigment incontinence",
-   "Wood-lamp does not accentuate the dermal pigment, and biopsy helps confirm the diagnosis and exclude mimics",
-   "The course is chronic and often resistant to treatment, so drugs, contactants and other triggers should be sought and removed",
-   "More commonly reported in younger patients and in those with darker skin"
+  "id": "ashy_dermatosis",
+  "name": "Ashy dermatosis (erythema dyschromicum perstans)",
+  "aliases": [
+    "erythema dyschromicum perstans",
+    "EDP",
+    "dermatosis cenicienta"
   ],
-  "pathophysiology": "A lichenoid interface dermatitis damages the basal layer of the epidermis, causing pigment incontinence in which melanin escapes into the papillary dermis. There it is taken up by melanophages, and the deep location of this melanin gives the characteristic ashy-grey hue. The trigger is usually idiopathic, though drugs, chemicals and infections have been implicated in some cases.",
-  "additionalDifferentials": [
-   "Lichen planus pigmentosus",
-   "Post-inflammatory hyperpigmentation",
-   "Fixed drug eruption or other drug-induced pigmentation",
-   "Riehl melanosis (pigmented contact dermatitis)",
-   "Pinta and other endemic treponematoses",
-   "Argyria",
-   "Diffuse pigmentation of Addison disease or haemochromatosis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy to confirm the interface pattern with dermal melanophages",
-   "Wood-lamp examination confirming non-accentuated dermal pigment",
-   "Careful drug and contactant history",
-   "Dermoscopy of representative lesions",
-   "Targeted screening for systemic or infective mimics when the picture is atypical"
-  ],
-  "redFlags": [
-   "Features of systemic disease such as Addisonian pigmentation with weight loss and fatigue",
-   "A temporal link to a new drug suggesting a drug-induced eruption",
-   "Endemic exposure raising the possibility of pinta or another treponematosis"
-  ],
-  "prognosis": "The condition is benign but chronic and persistent; it may fade slowly over years, with a better tendency to resolve in children than in adults.",
-  "pitfalls": [
-   "Expecting a response to topical lightening agents against dermal pigment",
-   "Missing an underlying drug cause",
-   "Overlooking systemic mimics of diffuse hyperpigmentation",
-   "Failing to distinguish it from lichen planus pigmentosus or post-inflammatory change"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identification and removal of potential triggers, including causative drugs, contactants and any underlying infection",
-   "A trial of topical calcineurin inhibitors or topical corticosteroids on active inflammatory (bordered) lesions, recognising that established grey pigment responds poorly",
-   "Consideration of dapsone or narrowband ultraviolet phototherapy in extensive or progressive disease, given the limited and inconsistent evidence",
-   "Photoprotection to limit further darkening of the dermal pigment",
-   "Reassurance about the benign nature, with cosmetic camouflage for cosmetically troublesome pigmentation",
-   "Confirmatory skin biopsy and dermatological follow-up to exclude mimics and monitor a chronic, often treatment-resistant course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ashy_dermatosis-pathway",
-   "title": "Ashy dermatosis (erythema dyschromicum perstans): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Symmetrical ash-grey to blue-grey macules and patches, mainly over the trunk, proximal limbs and neck",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of systemic disease such as Addisonian pigmentation with weight loss and fatigue",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy to confirm the interface pattern with dermal melanophages, Wood-lamp examination confirming non-accentuated dermal pigment, Careful drug and contactant history"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identification and removal of potential triggers, including causative drugs, contactants and any underlying infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting a response to topical lightening agents against dermal pigment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ashy dermatosis (erythema dyschromicum perstans)."
-  }
- ],
- "tables": [
-  {
-   "id": "ashy_dermatosis-matrix",
-   "title": "Ashy dermatosis (erythema dyschromicum perstans): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Symmetrical ash-grey to blue-grey macules and patches, mainly over the trunk, proximal limbs and neck",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Pigmentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Symmetrical ash-grey to blue-grey macules and patches, mainly over the trunk, proximal limbs and neck",
+      "Early active lesions may show a slightly raised erythematous border that later resolves, leaving grey pigmentation",
+      "Considered by many authors to lie within the spectrum of lichen planus pigmentosus",
+      "The grey colour reflects dermal melanin held within melanophages, the result of an interface reaction with pigment incontinence",
+      "Wood-lamp does not accentuate the dermal pigment, and biopsy helps confirm the diagnosis and exclude mimics",
+      "The course is chronic and often resistant to treatment, so drugs, contactants and other triggers should be sought and removed",
+      "More commonly reported in younger patients and in those with darker skin"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy to confirm the interface pattern with dermal melanophages, Wood-lamp examination confirming non-accentuated dermal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A lichenoid interface dermatitis damages the basal layer of the epidermis, causing pigment incontinence in which melanin escapes into the papillary dermis. There it is taken up by melanophages, and the deep location of this melanin gives the characteristic ashy-grey hue. The trigger is usually idiopathic, though drugs, chemicals and infections have been implicated in some cases.",
+    "additionalDifferentials": [
+      "Lichen planus pigmentosus",
+      "Post-inflammatory hyperpigmentation",
+      "Fixed drug eruption or other drug-induced pigmentation",
+      "Riehl melanosis (pigmented contact dermatitis)",
+      "Pinta and other endemic treponematoses",
+      "Argyria",
+      "Diffuse pigmentation of Addison disease or haemochromatosis"
     ],
-    [
-     "Primary Differentials",
-     "Lichen planus pigmentosus, Post-inflammatory hyperpigmentation, Fixed drug eruption or other drug-induced pigmentation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy to confirm the interface pattern with dermal melanophages",
+      "Wood-lamp examination confirming non-accentuated dermal pigment",
+      "Careful drug and contactant history",
+      "Dermoscopy of representative lesions",
+      "Targeted screening for systemic or infective mimics when the picture is atypical"
     ],
-    [
-     "Management Strategy",
-     "Identification and removal of potential triggers, including causative drugs, contactants and any underlying infection",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of systemic disease such as Addisonian pigmentation with weight loss and fatigue",
+      "A temporal link to a new drug suggesting a drug-induced eruption",
+      "Endemic exposure raising the possibility of pinta or another treponematosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting a response to topical lightening agents against dermal pigment",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign but chronic and persistent; it may fade slowly over years, with a better tendency to resolve in children than in adults.",
+    "pitfalls": [
+      "Expecting a response to topical lightening agents against dermal pigment",
+      "Missing an underlying drug cause",
+      "Overlooking systemic mimics of diffuse hyperpigmentation",
+      "Failing to distinguish it from lichen planus pigmentosus or post-inflammatory change"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identification and removal of potential triggers, including causative drugs, contactants and any underlying infection",
+      "A trial of topical calcineurin inhibitors or topical corticosteroids on active inflammatory (bordered) lesions, recognising that established grey pigment responds poorly",
+      "Consideration of dapsone or narrowband ultraviolet phototherapy in extensive or progressive disease, given the limited and inconsistent evidence",
+      "Photoprotection to limit further darkening of the dermal pigment",
+      "Reassurance about the benign nature, with cosmetic camouflage for cosmetically troublesome pigmentation",
+      "Confirmatory skin biopsy and dermatological follow-up to exclude mimics and monitor a chronic, often treatment-resistant course"
     ]
-   ],
-   "caption": "Overview comparison matrix for ashy dermatosis (erythema dyschromicum perstans)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ashy-dermatosis-real-image",
-   "title": "Ashy dermatosis (erythema dyschromicum perstans): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "ashy_dermatosis-pathway",
+      "title": "Ashy dermatosis (erythema dyschromicum perstans): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Symmetrical ash-grey to blue-grey macules and patches, mainly over the trunk, proximal limbs and neck",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of systemic disease such as Addisonian pigmentation with weight loss and fatigue",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy to confirm the interface pattern with dermal melanophages, Wood-lamp examination confirming non-accentuated dermal pigment, Careful drug and contactant history"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identification and removal of potential triggers, including causative drugs, contactants and any underlying infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting a response to topical lightening agents against dermal pigment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ashy dermatosis (erythema dyschromicum perstans)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ashy_dermatosis-matrix",
+      "title": "Ashy dermatosis (erythema dyschromicum perstans): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Symmetrical ash-grey to blue-grey macules and patches, mainly over the trunk, proximal limbs and neck",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy to confirm the interface pattern with dermal melanophages, Wood-lamp examination confirming non-accentuated dermal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lichen planus pigmentosus, Post-inflammatory hyperpigmentation, Fixed drug eruption or other drug-induced pigmentation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identification and removal of potential triggers, including causative drugs, contactants and any underlying infection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting a response to topical lightening agents against dermal pigment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ashy dermatosis (erythema dyschromicum perstans)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ashy_dermatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Interface pattern with dermal melanophages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood-lamp examination",
+          "cells": [
+            {
+              "text": "Non-accentuated dermal pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug and contactant history",
+          "cells": [
+            {
+              "text": "Causative triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy of representative lesions",
+          "cells": [
+            {
+              "text": "Representative lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for systemic or infective mimics",
+          "cells": [
+            {
+              "text": "When the picture is atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ashy_dermatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fixed drug eruption or other drug-induced pigmentation",
+          "cells": [
+            {
+              "text": "A temporal link to a new drug suggests it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Addisonian pigmentation",
+          "cells": [
+            {
+              "text": "With weight loss and fatigue, suggests systemic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ashy_dermatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove triggers",
+          "cells": [
+            {
+              "text": "Causative drugs, contactants and any underlying infection"
+            },
+            {
+              "text": "Identification and removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical calcineurin inhibitor or corticosteroid",
+          "cells": [
+            {
+              "text": "Active bordered inflammatory lesions"
+            },
+            {
+              "text": "Trial on active lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dapsone or narrowband UVB",
+          "cells": [
+            {
+              "text": "Extensive or progressive disease"
+            },
+            {
+              "text": "Limited and inconsistent evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Limits further darkening of dermal pigment"
+            },
+            {
+              "text": "Protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and camouflage",
+          "cells": [
+            {
+              "text": "Benign condition; cosmetic camouflage"
+            },
+            {
+              "text": "Cosmetically troublesome pigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and follow-up",
+          "cells": [
+            {
+              "text": "Confirms the pattern; excludes mimics"
+            },
+            {
+              "text": "Chronic, often treatment-resistant course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ashy_dermatosis-dx-mgmt",
+      "title": "Diagnosis and management of Ashy dermatosis (erythema dyschromicum perstans)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Grey-brown pigmentation, often with bordered inflammatory lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Systemic features or a temporal link to a new drug?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Review for drug cause and systemic disease such as Addisonian pigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, Wood lamp, drug history, dermoscopy, mimic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biopsy shows interface pattern with dermal melanophages?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove triggers; topical calcineurin inhibitor or steroid on active lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dapsone or narrowband UVB for extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Photoprotection to limit further darkening",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cosmetic camouflage and reassurance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic, often treatment-resistant course; dermatology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

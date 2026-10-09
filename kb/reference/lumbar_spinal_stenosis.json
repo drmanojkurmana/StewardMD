@@ -1,177 +1,466 @@
 {
- "id": "lumbar_spinal_stenosis",
- "name": "Lumbar spinal stenosis",
- "aliases": [
-  "LSS",
-  "central canal stenosis",
-  "lateral recess stenosis",
-  "neurogenic claudication"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Spine",
- "specialty": "Spinal Surgery / Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rothman-Simeone and Herkowitz's The Spine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically affects older adults and reflects degenerative narrowing of the central canal, lateral recesses, or neural foramina",
-   "The hallmark symptom is neurogenic claudication: bilateral buttock, thigh, and calf discomfort, heaviness, or paraesthesiae brought on by standing and walking",
-   "Symptoms are characteristically relieved by lumbar flexion, such as sitting, leaning forward on a shopping trolley, or cycling, because flexion enlarges the canal",
-   "Walking downhill (which extends the spine) tends to worsen symptoms whereas bending forward or walking uphill eases them, a useful contrast with vascular claudication",
-   "Vascular claudication is relieved simply by stopping and standing still and is associated with diminished peripheral pulses, unlike neurogenic claudication which requires postural flexion for relief",
-   "Neurological examination is often normal at rest, and deficits may only emerge after a provocative period of walking",
-   "MRI is the investigation of choice, and standing or extension imaging can reveal dynamic compression not apparent when supine",
-   "Initial management is conservative (activity modification, physiotherapy, analgesia, epidural steroid injection); decompressive surgery is considered for disabling or progressive symptoms"
+  "id": "lumbar_spinal_stenosis",
+  "name": "Lumbar spinal stenosis",
+  "aliases": [
+    "LSS",
+    "central canal stenosis",
+    "lateral recess stenosis",
+    "neurogenic claudication"
   ],
-  "pathophysiology": "Lumbar spinal stenosis arises from progressive degenerative narrowing of the spinal canal and its lateral recesses and neural foramina. A combination of intervertebral disc bulging, facet joint hypertrophy, thickening and buckling of the ligamentum flavum, and sometimes degenerative spondylolisthesis reduces the space available for the cauda equina and exiting nerve roots. The compression is dynamic: spinal extension during standing and walking further narrows the canal and compromises neural blood flow, producing the characteristic exertional leg symptoms, whereas flexion enlarges the canal and relieves them. Venous congestion and transient ischaemia of the compressed nerve roots are thought to underlie the claudicant pattern.",
-  "additionalDifferentials": [
-   "Vascular (arterial) claudication from peripheral arterial disease",
-   "Lumbar disc herniation with radiculopathy",
-   "Diabetic or other peripheral neuropathy",
-   "Hip or knee osteoarthritis",
-   "Trochanteric bursitis or other referred hip pathology",
-   "Peripheral nerve entrapment"
-  ],
-  "additionalInvestigations": [
-   "MRI of the lumbar spine as the investigation of choice",
-   "Standing and flexion-extension radiographs to assess instability or degenerative spondylolisthesis",
-   "CT or CT myelography where MRI is contraindicated",
-   "Ankle-brachial pressure index and vascular studies to exclude arterial claudication",
-   "Nerve conduction studies and EMG if peripheral neuropathy is suspected"
-  ],
-  "redFlags": [
-   "New saddle anaesthesia, urinary retention or incontinence, or faecal incontinence suggesting cauda equina syndrome and mandating urgent MRI",
-   "Rapidly progressive bilateral leg weakness",
-   "Constitutional features such as weight loss, fever, or night pain suggesting malignancy or infection"
-  ],
-  "prognosis": "Many patients have a stable or slowly progressive course and can be managed conservatively for years; decompressive surgery gives good relief of leg symptoms in appropriately selected patients, although back pain and other degenerative changes may persist.",
-  "pitfalls": [
-   "Mistaking neurogenic for vascular claudication, or vice versa, and instituting the wrong management",
-   "Attributing symptoms to imaging findings when incidental degenerative narrowing is common in the asymptomatic elderly",
-   "Overlooking coexisting hip osteoarthritis as a cause of buttock and leg pain",
-   "Missing an evolving cauda equina syndrome"
-  ],
-  "references": [
-   "Rothman-Simeone and Herkowitz's The Spine",
-   "North American Spine Society Clinical Guidelines: Degenerative Lumbar Spinal Stenosis"
-  ],
-  "crossLinks": [
-   "degenerative_disc_disease",
-   "lumbar_disc_herniation",
-   "facet_joint_syndrome"
-  ],
-  "management": [
-   "Manage conservatively first with flexion-based physiotherapy and exercise, activity modification and simple analgesia, since the course is often stable or slowly progressive",
-   "Trial neuropathic analgesics for leg symptoms, recognising the limited evidence in neurogenic claudication",
-   "Offer an epidural corticosteroid injection for symptom relief in patients unsuitable for or awaiting surgery",
-   "Refer for decompressive surgery such as laminectomy when neurogenic claudication is disabling or refractory to conservative care",
-   "Add instrumented fusion where there is associated degenerative spondylolisthesis or instability",
-   "Exclude vascular claudication with ankle-brachial pressure index and peripheral pulse assessment before attributing symptoms to stenosis",
-   "Escalate urgently for a progressive neurological deficit or features of cauda equina syndrome"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lumbar_spinal_stenosis-pathway",
-   "title": "Lumbar spinal stenosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically affects older adults and reflects degenerative narrowing of the central canal, lateral recesses, or neural foramina",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New saddle anaesthesia, urinary retention or incontinence, or faecal incontinence suggesting cauda equina syndrome and mandating urgent MRI",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the lumbar spine as the investigation of choice, Standing and flexion-extension radiographs to assess instability or degenerative spondylolisthesis, CT or CT myelography where MRI is contraindicated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage conservatively first with flexion-based physiotherapy and exercise, activity modification and simple analgesia, since the course is often stable or slowly progressive"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking neurogenic for vascular claudication, or vice versa, and instituting the wrong management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lumbar spinal stenosis."
-  }
- ],
- "tables": [
-  {
-   "id": "lumbar_spinal_stenosis-matrix",
-   "title": "Lumbar spinal stenosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically affects older adults and reflects degenerative narrowing of the central canal, lateral recesses, or neural foramina",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Spine",
+  "specialty": "Spinal Surgery / Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rothman-Simeone and Herkowitz's The Spine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically affects older adults and reflects degenerative narrowing of the central canal, lateral recesses, or neural foramina",
+      "The hallmark symptom is neurogenic claudication: bilateral buttock, thigh, and calf discomfort, heaviness, or paraesthesiae brought on by standing and walking",
+      "Symptoms are characteristically relieved by lumbar flexion, such as sitting, leaning forward on a shopping trolley, or cycling, because flexion enlarges the canal",
+      "Walking downhill (which extends the spine) tends to worsen symptoms whereas bending forward or walking uphill eases them, a useful contrast with vascular claudication",
+      "Vascular claudication is relieved simply by stopping and standing still and is associated with diminished peripheral pulses, unlike neurogenic claudication which requires postural flexion for relief",
+      "Neurological examination is often normal at rest, and deficits may only emerge after a provocative period of walking",
+      "MRI is the investigation of choice, and standing or extension imaging can reveal dynamic compression not apparent when supine",
+      "Initial management is conservative (activity modification, physiotherapy, analgesia, epidural steroid injection); decompressive surgery is considered for disabling or progressive symptoms"
     ],
-    [
-     "Key Investigations",
-     "MRI of the lumbar spine as the investigation of choice, Standing and flexion-extension radiographs to assess instability or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lumbar spinal stenosis arises from progressive degenerative narrowing of the spinal canal and its lateral recesses and neural foramina. A combination of intervertebral disc bulging, facet joint hypertrophy, thickening and buckling of the ligamentum flavum, and sometimes degenerative spondylolisthesis reduces the space available for the cauda equina and exiting nerve roots. The compression is dynamic: spinal extension during standing and walking further narrows the canal and compromises neural blood flow, producing the characteristic exertional leg symptoms, whereas flexion enlarges the canal and relieves them. Venous congestion and transient ischaemia of the compressed nerve roots are thought to underlie the claudicant pattern.",
+    "additionalDifferentials": [
+      "Vascular (arterial) claudication from peripheral arterial disease",
+      "Lumbar disc herniation with radiculopathy",
+      "Diabetic or other peripheral neuropathy",
+      "Hip or knee osteoarthritis",
+      "Trochanteric bursitis or other referred hip pathology",
+      "Peripheral nerve entrapment"
     ],
-    [
-     "Primary Differentials",
-     "Vascular (arterial) claudication from peripheral arterial disease, Lumbar disc herniation with radiculopathy, Diabetic or other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the lumbar spine as the investigation of choice",
+      "Standing and flexion-extension radiographs to assess instability or degenerative spondylolisthesis",
+      "CT or CT myelography where MRI is contraindicated",
+      "Ankle-brachial pressure index and vascular studies to exclude arterial claudication",
+      "Nerve conduction studies and EMG if peripheral neuropathy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Manage conservatively first with flexion-based physiotherapy and exercise, activity modification and simple analgesia, since the",
-     "Core treatment modality"
+    "redFlags": [
+      "New saddle anaesthesia, urinary retention or incontinence, or faecal incontinence suggesting cauda equina syndrome and mandating urgent MRI",
+      "Rapidly progressive bilateral leg weakness",
+      "Constitutional features such as weight loss, fever, or night pain suggesting malignancy or infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking neurogenic for vascular claudication, or vice versa, and instituting the wrong management",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients have a stable or slowly progressive course and can be managed conservatively for years; decompressive surgery gives good relief of leg symptoms in appropriately selected patients, although back pain and other degenerative changes may persist.",
+    "pitfalls": [
+      "Mistaking neurogenic for vascular claudication, or vice versa, and instituting the wrong management",
+      "Attributing symptoms to imaging findings when incidental degenerative narrowing is common in the asymptomatic elderly",
+      "Overlooking coexisting hip osteoarthritis as a cause of buttock and leg pain",
+      "Missing an evolving cauda equina syndrome"
+    ],
+    "references": [
+      "Rothman-Simeone and Herkowitz's The Spine",
+      "North American Spine Society Clinical Guidelines: Degenerative Lumbar Spinal Stenosis"
+    ],
+    "crossLinks": [
+      "degenerative_disc_disease",
+      "lumbar_disc_herniation",
+      "facet_joint_syndrome"
+    ],
+    "management": [
+      "Manage conservatively first with flexion-based physiotherapy and exercise, activity modification and simple analgesia, since the course is often stable or slowly progressive",
+      "Trial neuropathic analgesics for leg symptoms, recognising the limited evidence in neurogenic claudication",
+      "Offer an epidural corticosteroid injection for symptom relief in patients unsuitable for or awaiting surgery",
+      "Refer for decompressive surgery such as laminectomy when neurogenic claudication is disabling or refractory to conservative care",
+      "Add instrumented fusion where there is associated degenerative spondylolisthesis or instability",
+      "Exclude vascular claudication with ankle-brachial pressure index and peripheral pulse assessment before attributing symptoms to stenosis",
+      "Escalate urgently for a progressive neurological deficit or features of cauda equina syndrome"
     ]
-   ],
-   "caption": "Overview comparison matrix for lumbar spinal stenosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lumbar-spinal-stenosis-real-image",
-   "title": "Lumbar spinal stenosis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "lumbar_spinal_stenosis-pathway",
+      "title": "Lumbar spinal stenosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically affects older adults and reflects degenerative narrowing of the central canal, lateral recesses, or neural foramina",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New saddle anaesthesia, urinary retention or incontinence, or faecal incontinence suggesting cauda equina syndrome and mandating urgent MRI",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the lumbar spine as the investigation of choice, Standing and flexion-extension radiographs to assess instability or degenerative spondylolisthesis, CT or CT myelography where MRI is contraindicated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage conservatively first with flexion-based physiotherapy and exercise, activity modification and simple analgesia, since the course is often stable or slowly progressive"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking neurogenic for vascular claudication, or vice versa, and instituting the wrong management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lumbar spinal stenosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lumbar_spinal_stenosis-matrix",
+      "title": "Lumbar spinal stenosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically affects older adults and reflects degenerative narrowing of the central canal, lateral recesses, or neural foramina",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the lumbar spine as the investigation of choice, Standing and flexion-extension radiographs to assess instability or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vascular (arterial) claudication from peripheral arterial disease, Lumbar disc herniation with radiculopathy, Diabetic or other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage conservatively first with flexion-based physiotherapy and exercise, activity modification and simple analgesia, since the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking neurogenic for vascular claudication, or vice versa, and instituting the wrong management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lumbar spinal stenosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rothman-Simeone and Herkowitz's The Spine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lumbar_spinal_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standing and flexion-extension radiographs",
+          "cells": [
+            {
+              "text": "Instability or degenerative spondylolisthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the lumbar spine",
+          "cells": [
+            {
+              "text": "Investigation of choice; standing imaging shows dynamic compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial pressure index",
+          "cells": [
+            {
+              "text": "Excludes arterial claudication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lumbar_spinal_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vascular claudication",
+          "cells": [
+            {
+              "text": "Relieved by standing still; diminished pulses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar disc herniation with radiculopathy",
+          "cells": [
+            {
+              "text": "Dermatomal pattern; leg pain exceeds back pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral neuropathy",
+          "cells": [
+            {
+              "text": "Diabetic or other neuropathy; nerve studies help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip or knee osteoarthritis",
+          "cells": [
+            {
+              "text": "Joint-based pain and reduced range"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lumbar_spinal_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexion-based physiotherapy",
+          "cells": [
+            {
+              "text": "Exercise and activity modification; course often stable or slowly progressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic analgesics",
+          "cells": [
+            {
+              "text": "Trial for leg symptoms; evidence in neurogenic claudication is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural corticosteroid injection",
+          "cells": [
+            {
+              "text": "Relief for patients unsuitable for or awaiting surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompressive surgery",
+          "cells": [
+            {
+              "text": "Laminectomy when claudication is disabling or refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Instrumented fusion",
+          "cells": [
+            {
+              "text": "Associated degenerative spondylolisthesis or instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cauda equina or progressive deficit",
+          "cells": [
+            {
+              "text": "Escalate urgently"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lumbar_spinal_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of Lumbar spinal stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral buttock and leg discomfort brought on by standing or walking, eased by sitting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (saddle anaesthesia, retention, rapidly progressive weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate urgently for progressive deficit or cauda equina features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standing MRI, flexion-extension radiographs, ankle-brachial index",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is neurogenic claudication confirmed with arterial disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage vascular claudication, disc disease or hip pathology instead",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Flexion-based physiotherapy and activity modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of neuropathic analgesics for leg symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Epidural corticosteroid injection for symptom relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Decompressive surgery for disabling or refractory claudication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Instrumented fusion for associated spondylolisthesis or instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many have stable course for years; surgery relieves leg symptoms in selected patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

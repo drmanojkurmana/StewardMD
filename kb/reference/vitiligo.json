@@ -1,172 +1,403 @@
 {
- "id": "vitiligo",
- "name": "Vitiligo",
- "aliases": [
-  "leucoderma",
-  "acquired depigmentation"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as well-demarcated, chalk-white macules and patches with complete loss of pigment, typically symmetrical in the common non-segmental form",
-   "Favoured sites include periorificial areas (around the eyes and mouth), the hands, and other acral and extensor surfaces",
-   "Wood's lamp examination accentuates the depigmented patches and helps detect early or subtle lesions, especially in lighter skin",
-   "New patches may appear at sites of trauma or friction (Koebner phenomenon)",
-   "As an autoimmune condition, it is associated with other autoimmune diseases, particularly thyroid disease, so consider screening for these",
-   "Management options include topical corticosteroids and calcineurin inhibitors, phototherapy for more extensive disease, and rigorous photoprotection of depigmented skin",
-   "The psychosocial impact can be substantial, particularly in darker skin and in visible areas, and should be addressed directly",
-   "Set realistic expectations: repigmentation is slow and variable, and hair-bearing and facial areas respond better than acral sites"
+  "id": "vitiligo",
+  "name": "Vitiligo",
+  "aliases": [
+    "leucoderma",
+    "acquired depigmentation"
   ],
-  "pathophysiology": "Vitiligo is an acquired disorder characterised by immune-mediated destruction of epidermal melanocytes, leading to loss of pigment. Current understanding emphasises an interplay of genetic susceptibility, intrinsic melanocyte vulnerability with oxidative stress, and an autoimmune response in which CD8 cytotoxic T cells and interferon-gamma signalling target and destroy melanocytes. The absence of functioning melanocytes leaves affected skin devoid of melanin, producing the characteristic depigmented macules. Non-segmental vitiligo tends to be symmetrical and progressive with autoimmune associations, whereas segmental vitiligo is localised to a dermatomal-like distribution and often stabilises after an early active phase.",
-  "additionalDifferentials": [
-   "Pityriasis versicolor (hypopigmented type)",
-   "Post-inflammatory hypopigmentation",
-   "Pityriasis alba",
-   "Tuberculoid leprosy (hypopigmented anaesthetic patch)",
-   "Naevus depigmentosus or naevus anaemicus",
-   "Chemical or occupational leucoderma"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis aided by Wood's lamp examination",
-   "Thyroid function tests and thyroid autoantibodies given autoimmune associations",
-   "Screening for other autoimmune disease when clinically indicated",
-   "Skin biopsy only in atypical cases to confirm melanocyte loss",
-   "Assessment of disease activity and extent to guide and monitor therapy"
-  ],
-  "redFlags": [
-   "Rapidly spreading depigmentation indicating active, unstable disease",
-   "A solitary hypopigmented patch with reduced sensation, which should prompt exclusion of leprosy where endemic",
-   "Symptoms suggesting associated autoimmune disease, such as thyroid dysfunction",
-   "Significant psychological distress warranting mental health support"
-  ],
-  "prognosis": "Vitiligo follows an unpredictable course; spontaneous repigmentation is uncommon and treatment results are variable, with facial and truncal lesions generally more responsive than acral and hair-bearing sites. It is not physically dangerous but can be psychologically distressing and often chronic.",
-  "pitfalls": [
-   "Confusing it with pityriasis versicolor or post-inflammatory hypopigmentation",
-   "Failing to protect depigmented skin from sunburn and photodamage",
-   "Overlooking associated autoimmune thyroid disease",
-   "Underestimating the psychological burden and promising unrealistic repigmentation"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical corticosteroids and topical calcineurin inhibitors as first-line therapy to arrest progression and promote repigmentation",
-   "Topical JAK inhibitor (ruxolitinib) for non-segmental facial and limited disease",
-   "Narrowband ultraviolet B phototherapy for extensive or progressive disease, with targeted excimer light for localised patches",
-   "Rigorous photoprotection of depigmented skin and cosmetic camouflage to reduce contrast",
-   "Surgical melanocyte or epidermal grafting for stable segmental disease, and depigmentation therapy in extensive refractory cases",
-   "Screen for and manage associated autoimmune disease, particularly thyroid dysfunction",
-   "Psychological support for the distress and impact on quality of life, with dermatology referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vitiligo-pathway",
-   "title": "Vitiligo: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as well-demarcated, chalk-white macules and patches with complete loss of pigment, typically symmetrical in the common non-segmental form",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly spreading depigmentation indicating active, unstable disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis aided by Wood's lamp examination, Thyroid function tests and thyroid autoantibodies given autoimmune associations, Screening for other autoimmune disease when clinically indicated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical corticosteroids and topical calcineurin inhibitors as first-line therapy to arrest progression and promote repigmentation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with pityriasis versicolor or post-inflammatory hypopigmentation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vitiligo."
-  }
- ],
- "tables": [
-  {
-   "id": "vitiligo-matrix",
-   "title": "Vitiligo: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as well-demarcated, chalk-white macules and patches with complete loss of pigment, typically symmetrical in the common",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as well-demarcated, chalk-white macules and patches with complete loss of pigment, typically symmetrical in the common non-segmental form",
+      "Favoured sites include periorificial areas (around the eyes and mouth), the hands, and other acral and extensor surfaces",
+      "Wood's lamp examination accentuates the depigmented patches and helps detect early or subtle lesions, especially in lighter skin",
+      "New patches may appear at sites of trauma or friction (Koebner phenomenon)",
+      "As an autoimmune condition, it is associated with other autoimmune diseases, particularly thyroid disease, so consider screening for these",
+      "Management options include topical corticosteroids and calcineurin inhibitors, phototherapy for more extensive disease, and rigorous photoprotection of depigmented skin",
+      "The psychosocial impact can be substantial, particularly in darker skin and in visible areas, and should be addressed directly",
+      "Set realistic expectations: repigmentation is slow and variable, and hair-bearing and facial areas respond better than acral sites"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis aided by Wood's lamp examination, Thyroid function tests and thyroid autoantibodies given autoimmune",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vitiligo is an acquired disorder characterised by immune-mediated destruction of epidermal melanocytes, leading to loss of pigment. Current understanding emphasises an interplay of genetic susceptibility, intrinsic melanocyte vulnerability with oxidative stress, and an autoimmune response in which CD8 cytotoxic T cells and interferon-gamma signalling target and destroy melanocytes. The absence of functioning melanocytes leaves affected skin devoid of melanin, producing the characteristic depigmented macules. Non-segmental vitiligo tends to be symmetrical and progressive with autoimmune associations, whereas segmental vitiligo is localised to a dermatomal-like distribution and often stabilises after an early active phase.",
+    "additionalDifferentials": [
+      "Pityriasis versicolor (hypopigmented type)",
+      "Post-inflammatory hypopigmentation",
+      "Pityriasis alba",
+      "Tuberculoid leprosy (hypopigmented anaesthetic patch)",
+      "Naevus depigmentosus or naevus anaemicus",
+      "Chemical or occupational leucoderma"
     ],
-    [
-     "Primary Differentials",
-     "Pityriasis versicolor (hypopigmented type), Post-inflammatory hypopigmentation, Pityriasis alba",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis aided by Wood's lamp examination",
+      "Thyroid function tests and thyroid autoantibodies given autoimmune associations",
+      "Screening for other autoimmune disease when clinically indicated",
+      "Skin biopsy only in atypical cases to confirm melanocyte loss",
+      "Assessment of disease activity and extent to guide and monitor therapy"
     ],
-    [
-     "Management Strategy",
-     "Topical corticosteroids and topical calcineurin inhibitors as first-line therapy to arrest progression and promote repigmentation",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly spreading depigmentation indicating active, unstable disease",
+      "A solitary hypopigmented patch with reduced sensation, which should prompt exclusion of leprosy where endemic",
+      "Symptoms suggesting associated autoimmune disease, such as thyroid dysfunction",
+      "Significant psychological distress warranting mental health support"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with pityriasis versicolor or post-inflammatory hypopigmentation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vitiligo follows an unpredictable course; spontaneous repigmentation is uncommon and treatment results are variable, with facial and truncal lesions generally more responsive than acral and hair-bearing sites. It is not physically dangerous but can be psychologically distressing and often chronic.",
+    "pitfalls": [
+      "Confusing it with pityriasis versicolor or post-inflammatory hypopigmentation",
+      "Failing to protect depigmented skin from sunburn and photodamage",
+      "Overlooking associated autoimmune thyroid disease",
+      "Underestimating the psychological burden and promising unrealistic repigmentation"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical corticosteroids and topical calcineurin inhibitors as first-line therapy to arrest progression and promote repigmentation",
+      "Topical JAK inhibitor (ruxolitinib) for non-segmental facial and limited disease",
+      "Narrowband ultraviolet B phototherapy for extensive or progressive disease, with targeted excimer light for localised patches",
+      "Rigorous photoprotection of depigmented skin and cosmetic camouflage to reduce contrast",
+      "Surgical melanocyte or epidermal grafting for stable segmental disease, and depigmentation therapy in extensive refractory cases",
+      "Screen for and manage associated autoimmune disease, particularly thyroid dysfunction",
+      "Psychological support for the distress and impact on quality of life, with dermatology referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for vitiligo."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vitiligo-real-image",
-   "title": "Vitiligo: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "vitiligo-pathway",
+      "title": "Vitiligo: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as well-demarcated, chalk-white macules and patches with complete loss of pigment, typically symmetrical in the common non-segmental form",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly spreading depigmentation indicating active, unstable disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis aided by Wood's lamp examination, Thyroid function tests and thyroid autoantibodies given autoimmune associations, Screening for other autoimmune disease when clinically indicated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical corticosteroids and topical calcineurin inhibitors as first-line therapy to arrest progression and promote repigmentation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with pityriasis versicolor or post-inflammatory hypopigmentation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vitiligo."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vitiligo-matrix",
+      "title": "Vitiligo: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as well-demarcated, chalk-white macules and patches with complete loss of pigment, typically symmetrical in the common",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis aided by Wood's lamp examination, Thyroid function tests and thyroid autoantibodies given autoimmune",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pityriasis versicolor (hypopigmented type), Post-inflammatory hypopigmentation, Pityriasis alba",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical corticosteroids and topical calcineurin inhibitors as first-line therapy to arrest progression and promote repigmentation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with pityriasis versicolor or post-inflammatory hypopigmentation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vitiligo."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitiligo-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Aids the clinical diagnosis of depigmented patches"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests and thyroid autoantibodies",
+          "cells": [
+            {
+              "text": "Autoimmune association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for other autoimmune disease",
+          "cells": [
+            {
+              "text": "When clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitiligo-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pityriasis versicolor, hypopigmented type",
+          "cells": [
+            {
+              "text": "Confused with vitiligo; separated by fungal examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-inflammatory hypopigmentation",
+          "cells": [
+            {
+              "text": "Follows an inflammatory skin condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pityriasis alba",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculoid leprosy",
+          "cells": [
+            {
+              "text": "Solitary hypopigmented anaesthetic patch"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitiligo-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical corticosteroids and calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "First-line to arrest progression and promote repigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical ruxolitinib",
+          "cells": [
+            {
+              "text": "Non-segmental facial vitiligo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sun protection",
+          "cells": [
+            {
+              "text": "Depigmented skin is prone to sunburn and photodamage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitiligo-dx-mgmt",
+      "title": "Diagnosis and management of Vitiligo",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitiligo: well-demarcated chalk-white macules with complete loss of pigment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly spreading depigmentation or anaesthetic patch)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for leprosy where endemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wood's lamp examination, thyroid function and autoantibodies, autoimmune screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does clinical examination with Wood's lamp confirm vitiligo?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pityriasis versicolor, post-inflammatory change or leprosy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical corticosteroids or calcineurin inhibitors to arrest progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical ruxolitinib for non-segmental facial vitiligo",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sun protection for depigmented skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Disease may progress or stabilise; repigmentation varies between patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

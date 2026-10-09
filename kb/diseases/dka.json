@@ -199,25 +199,577 @@
       "caption": "Diagnostic and clinical overview matrix for diabetic ketoacidosis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "dka-real-image",
-      "title": "Diabetic ketoacidosis: Diagnostic Endocrine Cross-Sectional Imaging",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Diabetic Ketoacidosis (acute complications of diabetes)",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/diabetic-ketoacidosis-dka",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 47-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dka-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for diabetic ketoacidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Notes"
+      ],
+      "rows": [
         {
-          "label": "Gland Morphology",
-          "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+          "parameter": "pH (arterial or venous)",
+          "cells": [
+            {
+              "text": "<7.30",
+              "op": "<",
+              "value": 7.3
+            },
+            {
+              "text": "Acidaemia"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Focal Lesions",
-          "description": "Nodularity, adenoma attenuation, and washout dynamics."
+          "parameter": "Serum bicarbonate",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "<15 to 18",
+              "op": "<",
+              "value": 18
+            },
+            {
+              "text": "Low bicarbonate"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Surrounding Structures",
-          "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+          "parameter": "Anion gap",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": ">10 to 12",
+              "op": ">",
+              "value": 12
+            },
+            {
+              "text": "High anion gap acidosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ketones",
+          "cells": [
+            {
+              "text": "Present in serum or urine"
+            },
+            {
+              "text": "{{hy:Measure beta-hydroxybutyrate; dipstick misses it}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">200 to 250",
+              "op": ">",
+              "value": 250
+            },
+            {
+              "text": "Can be near normal in SGLT2-inhibitor euglycaemic DKA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corrected sodium",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "Add 1.6 for each 100 mg/dL glucose above 100"
+            },
+            {
+              "text": "Guides fluid choice"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Initial potassium",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "<4.5 means marked depletion",
+              "op": "<",
+              "value": 4.5
+            },
+            {
+              "text": "Normal or high values can mask deficit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "pH for possible bicarbonate",
+          "cells": [
+            {
+              "text": "<7.00",
+              "op": "<",
+              "value": 7.0
+            },
+            {
+              "text": "Only severe acidaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ketone reading during treatment",
+          "cells": [
+            {
+              "text": "Nitroprusside test may rise"
+            },
+            {
+              "text": "Shift to acetoacetate, not deterioration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck lists the glucose criterion as >200 to 250 mg/dL and notes some guidelines drop it because of euglycaemic DKA."
+    },
+    {
+      "id": "dka-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic DKA",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Alcoholic ketoacidosis",
+          "cells": [
+            {
+              "text": "{{hy:Little or no hyperglycaemia}}; alcohol use and vomiting"
+            },
+            {
+              "text": "Glucose, ketones, history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Starvation ketoacidosis",
+          "cells": [
+            {
+              "text": "Normal or low glucose"
+            },
+            {
+              "text": "Glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methanol or ethylene glycol poisoning",
+          "cells": [
+            {
+              "text": "High osmolar gap; oxalate crystals in ethylene glycol"
+            },
+            {
+              "text": "Toxic alcohol levels"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lactic acidosis",
+          "cells": [
+            {
+              "text": "Shock or hypoperfusion"
+            },
+            {
+              "text": "Lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salicylate poisoning",
+          "cells": [
+            {
+              "text": "Mixed respiratory alkalosis and metabolic acidosis"
+            },
+            {
+              "text": "Salicylate level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uraemic acidosis",
+          "cells": [
+            {
+              "text": "Renal failure"
+            },
+            {
+              "text": "Urea and creatinine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pancreatitis",
+          "cells": [
+            {
+              "text": "Abdominal pain; amylase can rise in DKA too"
+            },
+            {
+              "text": "Lipase and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperosmolar hyperglycaemic state",
+          "cells": [
+            {
+              "text": "Glucose >=600, osmolality high, little ketosis"
+            },
+            {
+              "text": "Osmolality, pH"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "dka-treatment",
+      "kind": "treatment",
+      "title": "Treatment of diabetic ketoacidosis in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "0.9% saline",
+          "cells": [
+            {
+              "text": "{{hy:First hour}}"
+            },
+            {
+              "text": "1 to 1.5 L IV, then 250 to 500 mL/h; 0.45% if corrected Na normal or high"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potassium before insulin",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "Hold insulin if K <3.3",
+              "op": "<",
+              "value": 3.3
+            },
+            {
+              "text": "Give 40 mEq/h until K >=3.3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Regular insulin infusion",
+          "cells": [
+            {
+              "text": "K >=3.3 mEq/L"
+            },
+            {
+              "text": "0.1 unit/kg/h (optional 0.1 unit/kg bolus); double if glucose falls <50 to 75 mg/dL in first hour"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potassium in fluids",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "K 3.3 to 5"
+            },
+            {
+              "text": "20 to 30 mEq per litre to keep K 4 to 5; none if K >5"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add 5% to 10% dextrose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Glucose <250",
+              "op": "<",
+              "value": 250
+            },
+            {
+              "text": "Keep glucose 150 to 200 mg/dL; continue insulin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sodium bicarbonate",
+          "cells": [
+            {
+              "text": "pH <7",
+              "op": "<",
+              "value": 7
+            },
+            {
+              "text": "50 to 100 mEq over 2 h; not routine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Phosphate",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Phosphate <0.78 or rhabdomyolysis, haemolysis",
+              "op": "<",
+              "value": 0.78
+            },
+            {
+              "text": "Potassium phosphate 1 to 2 mmol/kg over 6 to 12 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop infusion",
+          "cells": [
+            {
+              "text": "Anion gap closed on 2 tests and ketones cleared"
+            },
+            {
+              "text": "Overlap IV insulin 2 h after first basal SC dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat precipitant",
+          "cells": [
+            {
+              "text": "Infection, missed insulin, SGLT2 inhibitor"
+            },
+            {
+              "text": "Search in all"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives dextrose start at glucose <250 mg/dL in the insulin section and <200 mg/dL in the fluids section. Cerebral oedema occurs in under 1%, mostly children."
+    },
+    {
+      "id": "dka-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of high anion-gap metabolic acidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acids and metabolic causes",
+          "cells": [
+            {
+              "text": "Lactic acidosis; ketoacidosis (diabetic, alcoholic, starvation)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Toxins",
+          "cells": [
+            {
+              "text": "Ethylene glycol; methanol; salicylates; propylene glycol; pyroglutamic acid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Renal failure",
+          "cells": [
+            {
+              "text": "Acute and chronic"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dka-dx-mgmt",
+      "title": "Diagnosis and management of DKA",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperglycaemia or diabetes with vomiting, Kussmaul breathing, ketones",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Venous gas, glucose, electrolytes, beta-hydroxybutyrate, anion gap",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "pH <7.30, bicarbonate low, ketones present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider HHS, alcoholic or starvation ketosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "0.9% saline 1 to 1.5 L in first hour",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "K <3.3 mEq/L?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Replace K 40 mEq/h; hold insulin",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Insulin 0.1 unit/kg/h; K 20 to 30 mEq/L in fluids",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add dextrose when glucose <250; keep 150 to 200",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Anion gap closed and ketones cleared?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Start SC basal-bolus; stop IV 2 h later",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "K >=3.3"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n9",
+          "label": "No"
         }
       ]
     }

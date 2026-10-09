@@ -1,172 +1,234 @@
 {
- "id": "beau_lines",
- "name": "Beau lines",
- "aliases": [
-  "Beau's lines",
-  "transverse nail grooves",
-  "transverse furrows"
- ],
- "class": "non_infective",
- "system": "Dermatology / Nail",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Beau lines are transverse grooves running across the nail plate parallel to the lunula, marking a temporary slowing of matrix activity",
-   "When several nails are affected at the same level the cause is usually systemic, such as a severe febrile illness, chemotherapy, or major metabolic upset",
-   "A single affected nail more often reflects local trauma to that particular matrix",
-   "The distance of the groove from the proximal nail fold allows the timing of the insult to be estimated from the known rate of nail growth",
-   "Complete arrest of the matrix produces total-thickness separation and shedding, which is termed onychomadesis and lies at the severe end of the same spectrum",
-   "They are retrospective markers of a past event rather than an active disease requiring treatment of the nail itself",
-   "Reassurance is appropriate once a self-limited precipitant is identified, as the groove grows out with the nail"
+  "id": "beau_lines",
+  "name": "Beau lines",
+  "aliases": [
+    "Beau's lines",
+    "transverse nail grooves",
+    "transverse furrows"
   ],
-  "pathophysiology": "Beau lines result from a transient interruption of proximal nail matrix function that temporarily reduces the production of nail plate. During the period of impaired activity a thinner segment of plate is laid down, which appears as a transverse depression once that portion emerges from beneath the proximal nail fold and grows distally. Any insult severe enough to divert resources away from the matrix, whether a systemic illness, cytotoxic therapy, nutritional or metabolic disturbance, or direct local trauma, can produce the groove, and the depth of the furrow reflects the severity and duration of the interruption.",
-  "additionalDifferentials": [
-   "Onychomadesis (complete matrix arrest with plate shedding)",
-   "Habit-tic deformity producing washboard transverse ridging",
-   "Longitudinal ridging of ageing (distinguished by orientation)",
-   "Nail changes of eczema or psoriasis affecting the proximal fold",
-   "Transverse leukonychia (Mees' lines) from toxic exposure",
-   "Trauma-induced single-nail deformity"
-  ],
-  "additionalInvestigations": [
-   "History to identify a preceding febrile illness, chemotherapy, or metabolic event",
-   "Examination of all nails to determine whether one or many are affected",
-   "Estimation of the timing of the insult from the groove position and nail growth rate",
-   "Screening for systemic illness or nutritional deficiency if the cause is unclear",
-   "Onychoscopy to distinguish true matrix grooves from surface ridging",
-   "Review of recent medications, particularly cytotoxic agents"
-  ],
-  "redFlags": [
-   "Multiple nails affected together, pointing to a significant systemic illness that warrants explanation",
-   "Recurrent regular Beau lines suggesting cyclical systemic disease or repeated chemotherapy cycles",
-   "Progression to complete plate shedding (onychomadesis) indicating severe matrix arrest",
-   "Beau lines with other signs of serious underlying disease requiring further workup"
-  ],
-  "prognosis": "Beau lines are self-limiting and grow out completely over several months as the nail advances, provided the precipitating event does not recur, and they require no specific treatment of the nail.",
-  "pitfalls": [
-   "Treating the nail groove itself instead of investigating and addressing the systemic trigger",
-   "Failing to distinguish widespread systemic Beau lines from a single traumatic nail",
-   "Confusing surface habit-tic ridging with true matrix-derived Beau lines",
-   "Missing recurrent lines that signal cyclical illness or repeated drug exposure"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Baran and Dawber's Diseases of the Nails and their Management"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that the grooves are a retrospective marker of a past insult that grows out over months and need no treatment of the nail itself",
-   "Identify and address the precipitating systemic cause, such as a severe febrile illness, chemotherapy or metabolic disturbance, to prevent recurrence",
-   "For a single affected nail, protect the digit from further local trauma to the matrix",
-   "Correct any underlying nutritional deficiency and review recent cytotoxic or other implicated medications",
-   "Monitor for onychomadesis (complete nail-plate shedding), which lies at the severe end of the same spectrum",
-   "Refer for dermatological review only if the cause remains unexplained or multiple nails are progressively affected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "beau_lines-pathway",
-   "title": "Beau lines: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Beau lines are transverse grooves running across the nail plate parallel to the lunula, marking a temporary slowing of matrix activity",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Multiple nails affected together, pointing to a significant systemic illness that warrants explanation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: History to identify a preceding febrile illness, chemotherapy, or metabolic event, Examination of all nails to determine whether one or many are affected, Estimation of the timing of the insult from the groove position and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that the grooves are a retrospective marker of a past insult that grows out over months and need no treatment of the nail itself"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the nail groove itself instead of investigating and addressing the systemic trigger"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of beau lines."
-  }
- ],
- "tables": [
-  {
-   "id": "beau_lines-matrix",
-   "title": "Beau lines: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Beau lines are transverse grooves running across the nail plate parallel to the lunula, marking a temporary slowing of matrix",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Nail",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Beau lines are transverse grooves running across the nail plate parallel to the lunula, marking a temporary slowing of matrix activity",
+      "When several nails are affected at the same level the cause is usually systemic, such as a severe febrile illness, chemotherapy, or major metabolic upset",
+      "A single affected nail more often reflects local trauma to that particular matrix",
+      "The distance of the groove from the proximal nail fold allows the timing of the insult to be estimated from the known rate of nail growth",
+      "Complete arrest of the matrix produces total-thickness separation and shedding, which is termed onychomadesis and lies at the severe end of the same spectrum",
+      "They are retrospective markers of a past event rather than an active disease requiring treatment of the nail itself",
+      "Reassurance is appropriate once a self-limited precipitant is identified, as the groove grows out with the nail"
     ],
-    [
-     "Key Investigations",
-     "History to identify a preceding febrile illness, chemotherapy, or metabolic event, Examination of all nails to determine whether",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Beau lines result from a transient interruption of proximal nail matrix function that temporarily reduces the production of nail plate. During the period of impaired activity a thinner segment of plate is laid down, which appears as a transverse depression once that portion emerges from beneath the proximal nail fold and grows distally. Any insult severe enough to divert resources away from the matrix, whether a systemic illness, cytotoxic therapy, nutritional or metabolic disturbance, or direct local trauma, can produce the groove, and the depth of the furrow reflects the severity and duration of the interruption.",
+    "additionalDifferentials": [
+      "Onychomadesis (complete matrix arrest with plate shedding)",
+      "Habit-tic deformity producing washboard transverse ridging",
+      "Longitudinal ridging of ageing (distinguished by orientation)",
+      "Nail changes of eczema or psoriasis affecting the proximal fold",
+      "Transverse leukonychia (Mees' lines) from toxic exposure",
+      "Trauma-induced single-nail deformity"
     ],
-    [
-     "Primary Differentials",
-     "Onychomadesis (complete matrix arrest with plate shedding), Habit-tic deformity producing washboard transverse ridging,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "History to identify a preceding febrile illness, chemotherapy, or metabolic event",
+      "Examination of all nails to determine whether one or many are affected",
+      "Estimation of the timing of the insult from the groove position and nail growth rate",
+      "Screening for systemic illness or nutritional deficiency if the cause is unclear",
+      "Onychoscopy to distinguish true matrix grooves from surface ridging",
+      "Review of recent medications, particularly cytotoxic agents"
     ],
-    [
-     "Management Strategy",
-     "Reassure that the grooves are a retrospective marker of a past insult that grows out over months and need no treatment of the",
-     "Core treatment modality"
+    "redFlags": [
+      "Multiple nails affected together, pointing to a significant systemic illness that warrants explanation",
+      "Recurrent regular Beau lines suggesting cyclical systemic disease or repeated chemotherapy cycles",
+      "Progression to complete plate shedding (onychomadesis) indicating severe matrix arrest",
+      "Beau lines with other signs of serious underlying disease requiring further workup"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the nail groove itself instead of investigating and addressing the systemic trigger",
-     "Prevent diagnostic or management error"
+    "prognosis": "Beau lines are self-limiting and grow out completely over several months as the nail advances, provided the precipitating event does not recur, and they require no specific treatment of the nail.",
+    "pitfalls": [
+      "Treating the nail groove itself instead of investigating and addressing the systemic trigger",
+      "Failing to distinguish widespread systemic Beau lines from a single traumatic nail",
+      "Confusing surface habit-tic ridging with true matrix-derived Beau lines",
+      "Missing recurrent lines that signal cyclical illness or repeated drug exposure"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Baran and Dawber's Diseases of the Nails and their Management"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that the grooves are a retrospective marker of a past insult that grows out over months and need no treatment of the nail itself",
+      "Identify and address the precipitating systemic cause, such as a severe febrile illness, chemotherapy or metabolic disturbance, to prevent recurrence",
+      "For a single affected nail, protect the digit from further local trauma to the matrix",
+      "Correct any underlying nutritional deficiency and review recent cytotoxic or other implicated medications",
+      "Monitor for onychomadesis (complete nail-plate shedding), which lies at the severe end of the same spectrum",
+      "Refer for dermatological review only if the cause remains unexplained or multiple nails are progressively affected"
     ]
-   ],
-   "caption": "Overview comparison matrix for beau lines."
-  }
- ],
- "diagrams": [
-  {
-   "id": "beau-lines-real-image",
-   "title": "Beau lines: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "beau_lines-pathway",
+      "title": "Beau lines: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Beau lines are transverse grooves running across the nail plate parallel to the lunula, marking a temporary slowing of matrix activity",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Multiple nails affected together, pointing to a significant systemic illness that warrants explanation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: History to identify a preceding febrile illness, chemotherapy, or metabolic event, Examination of all nails to determine whether one or many are affected, Estimation of the timing of the insult from the groove position and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that the grooves are a retrospective marker of a past insult that grows out over months and need no treatment of the nail itself"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the nail groove itself instead of investigating and addressing the systemic trigger"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of beau lines."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "beau_lines-matrix",
+      "title": "Beau lines: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Beau lines are transverse grooves running across the nail plate parallel to the lunula, marking a temporary slowing of matrix",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "History to identify a preceding febrile illness, chemotherapy, or metabolic event, Examination of all nails to determine whether",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Onychomadesis (complete matrix arrest with plate shedding), Habit-tic deformity producing washboard transverse ridging,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that the grooves are a retrospective marker of a past insult that grows out over months and need no treatment of the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the nail groove itself instead of investigating and addressing the systemic trigger",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for beau lines."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beau_lines-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Beau lines",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "History", "cells": [{"text": "Preceding febrile illness, chemotherapy or metabolic event"}], "cite": "c1"},
+        {"parameter": "Examination of all nails", "cells": [{"text": "Whether one or many nails are affected; many nails at one level suggests a systemic cause"}], "cite": "c1"},
+        {"parameter": "Groove position and nail growth rate", "cells": [{"text": "Estimated timing of the insult"}], "cite": "c1"},
+        {"parameter": "Screening for systemic illness or nutritional deficiency", "cells": [{"text": "Cause when it is unclear"}], "cite": "c1"},
+        {"parameter": "Onychoscopy", "cells": [{"text": "True matrix grooves as distinct from surface ridging"}], "cite": "c1"},
+        {"parameter": "Review of recent medications", "cells": [{"text": "Cytotoxic agents as a trigger"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beau_lines-ddx",
+      "kind": "ddx",
+      "title": "Look-alike nail changes for Beau lines",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Onychomadesis", "cells": [{"text": "Complete matrix arrest with plate shedding, the severe end of the same spectrum"}], "cite": "c1"},
+        {"parameter": "Habit-tic deformity", "cells": [{"text": "Surface ridging rather than a matrix-derived groove"}], "cite": "c1"},
+        {"parameter": "Longitudinal ridging of ageing", "cells": [{"text": "Distinguished by its longitudinal orientation"}], "cite": "c1"},
+        {"parameter": "Trauma-induced single-nail deformity", "cells": [{"text": "A single affected nail more often reflects local trauma"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beau_lines-treatment",
+      "kind": "treatment",
+      "title": "Management options in Beau lines",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "Explain the grooves mark a past insult and grow out over months"}, {"text": "No treatment of the nail itself is needed"}], "cite": "c1"},
+        {"parameter": "Address the systemic cause", "cells": [{"text": "Identify and treat the precipitant, such as febrile illness, chemotherapy or metabolic disturbance"}, {"text": "Prevents recurrence"}], "cite": "c1"},
+        {"parameter": "Single affected nail", "cells": [{"text": "Protect the digit from further local trauma to the matrix"}, {"text": "Applies to a single affected nail"}], "cite": "c1"},
+        {"parameter": "Nutritional and medication review", "cells": [{"text": "Correct any nutritional deficiency; review cytotoxic or other implicated medications"}, {"text": "Recent drug exposure is a possible trigger"}], "cite": "c1"},
+        {"parameter": "Monitor for onychomadesis", "cells": [{"text": "Watch for complete nail-plate shedding"}, {"text": "Lies at the severe end of the same spectrum"}], "cite": "c1"},
+        {"parameter": "Dermatology referral", "cells": [{"text": "Refer if the cause remains unexplained or multiple nails are progressively affected"}, {"text": "Only when the cause is not found"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beau_lines-dx-mgmt",
+      "title": "Diagnosis and management of Beau lines",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Transverse nail groove parallel to the lunula, in one or several nails", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: several nails at once, recurrent lines, or progression to onychomadesis?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: search for systemic illness, chemotherapy or metabolic upset", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Single nail: look for local trauma to that matrix", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Ask about febrile illness, chemotherapy and medicines; examine all nails; time the groove", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Precipitant identified and self-limited?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Address the precipitant to prevent recurrence", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Screen for systemic illness or deficiency; onychoscopy to confirm true grooves", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Refer to dermatology if unexplained; watch for onychomadesis", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Grooves grow out over months with no nail-specific treatment", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n10", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

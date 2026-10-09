@@ -1,170 +1,468 @@
 {
- "id": "dyssynergic_defecation",
- "name": "Dyssynergic defecation",
- "aliases": [
-  "pelvic floor dyssynergia",
-  "anismus",
-  "defecatory disorder"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology / Colorectal surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rome IV criteria / gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A functional defecation disorder in which impaired coordination of the abdominal, rectal and pelvic floor muscles prevents effective evacuation",
-   "Patients strain excessively, feel incomplete evacuation and may use digital manoeuvres to pass stool",
-   "There is paradoxical contraction or inadequate relaxation of the anal sphincter and pelvic floor during attempted defecation, or inadequate propulsive force",
-   "It is a common and often overlooked cause of refractory constipation",
-   "Diagnosis requires anorectal physiology testing, including manometry and a balloon expulsion test",
-   "Biofeedback-based pelvic floor retraining is the treatment of choice and is more effective than laxatives alone"
+  "id": "dyssynergic_defecation",
+  "name": "Dyssynergic defecation",
+  "aliases": [
+    "pelvic floor dyssynergia",
+    "anismus",
+    "defecatory disorder"
   ],
-  "pathophysiology": "Dyssynergic defecation is a disorder of the coordinated neuromuscular sequence required for normal evacuation. Rather than the normal rise in rectal pressure with relaxation of the anal sphincter and pelvic floor, affected patients show paradoxical pelvic floor and sphincter contraction, incomplete relaxation, or insufficient rectal propulsive force. This learned incoordination obstructs stool passage despite otherwise normal colonic function, and because it is a behavioural motor-control problem it responds to retraining rather than to laxatives targeting transit.",
-  "additionalDifferentials": [
-   "Slow-transit constipation",
-   "Functional constipation of normal transit",
-   "Structural outlet obstruction (rectocele, intussusception)",
-   "Hirschsprung disease (in appropriate patients)",
-   "Neurological disease affecting defecation"
-  ],
-  "additionalInvestigations": [
-   "Anorectal manometry to demonstrate the dyssynergic pattern",
-   "Balloon expulsion test",
-   "Defecography where structural outlet problems are suspected",
-   "Colonic transit study to assess for coexisting slow transit",
-   "Digital rectal examination as an initial screen for impaired relaxation"
-  ],
-  "redFlags": [
-   "Alarm features suggesting organic disease",
-   "Suspected structural outlet obstruction requiring surgery",
-   "Features suggesting Hirschsprung disease",
-   "Neurological signs"
-  ],
-  "prognosis": "The prognosis is good, with the majority improving through biofeedback-directed pelvic floor retraining; outcomes are poorer if the diagnosis is missed and only laxatives are used.",
-  "pitfalls": [
-   "Treating refractory constipation with escalating laxatives without testing for dyssynergia",
-   "Overlooking the diagnosis on a normal-appearing colon",
-   "Missing a coexisting structural outlet problem",
-   "Not referring for biofeedback, the definitive treatment"
-  ],
-  "references": [
-   "Rome IV diagnostic criteria",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer biofeedback-based pelvic floor retraining as the first-line treatment to correct the paradoxical contraction or inadequate relaxation of the sphincter and pelvic floor",
-   "Provide bowel retraining with education on toileting posture and technique, discouraging excessive straining",
-   "Optimise stool consistency with fibre and osmotic agents so that retrained coordination is effective, rather than relying on stimulant laxatives alone",
-   "Confirm the pattern with anorectal physiology testing including manometry and a balloon expulsion test before committing to retraining",
-   "Identify and treat coexisting slow-transit constipation or structural outlet problems detected on testing",
-   "Add rectal balloon and sensory retraining where associated rectal hyposensitivity is present",
-   "Refer refractory cases to a specialist pelvic floor or colorectal service and address contributing psychological factors"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dyssynergic_defecation-pathway",
-   "title": "Dyssynergic defecation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A functional defecation disorder in which impaired coordination of the abdominal, rectal and pelvic floor muscles prevents effective evacuation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Alarm features suggesting organic disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anorectal manometry to demonstrate the dyssynergic pattern, Balloon expulsion test, Defecography where structural outlet problems are suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer biofeedback-based pelvic floor retraining as the first-line treatment to correct the paradoxical contraction or inadequate relaxation of the sphincter and pelvic floor"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating refractory constipation with escalating laxatives without testing for dyssynergia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dyssynergic defecation."
-  }
- ],
- "tables": [
-  {
-   "id": "dyssynergic_defecation-matrix",
-   "title": "Dyssynergic defecation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A functional defecation disorder in which impaired coordination of the abdominal, rectal and pelvic floor muscles prevents",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology / Colorectal surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rome IV criteria / gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A functional defecation disorder in which impaired coordination of the abdominal, rectal and pelvic floor muscles prevents effective evacuation",
+      "Patients strain excessively, feel incomplete evacuation and may use digital manoeuvres to pass stool",
+      "There is paradoxical contraction or inadequate relaxation of the anal sphincter and pelvic floor during attempted defecation, or inadequate propulsive force",
+      "It is a common and often overlooked cause of refractory constipation",
+      "Diagnosis requires anorectal physiology testing, including manometry and a balloon expulsion test",
+      "Biofeedback-based pelvic floor retraining is the treatment of choice and is more effective than laxatives alone"
     ],
-    [
-     "Key Investigations",
-     "Anorectal manometry to demonstrate the dyssynergic pattern, Balloon expulsion test, Defecography where structural outlet problems",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dyssynergic defecation is a disorder of the coordinated neuromuscular sequence required for normal evacuation. Rather than the normal rise in rectal pressure with relaxation of the anal sphincter and pelvic floor, affected patients show paradoxical pelvic floor and sphincter contraction, incomplete relaxation, or insufficient rectal propulsive force. This learned incoordination obstructs stool passage despite otherwise normal colonic function, and because it is a behavioural motor-control problem it responds to retraining rather than to laxatives targeting transit.",
+    "additionalDifferentials": [
+      "Slow-transit constipation",
+      "Functional constipation of normal transit",
+      "Structural outlet obstruction (rectocele, intussusception)",
+      "Hirschsprung disease (in appropriate patients)",
+      "Neurological disease affecting defecation"
     ],
-    [
-     "Primary Differentials",
-     "Slow-transit constipation, Functional constipation of normal transit, Structural outlet obstruction (rectocele, intussusception)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anorectal manometry to demonstrate the dyssynergic pattern",
+      "Balloon expulsion test",
+      "Defecography where structural outlet problems are suspected",
+      "Colonic transit study to assess for coexisting slow transit",
+      "Digital rectal examination as an initial screen for impaired relaxation"
     ],
-    [
-     "Management Strategy",
-     "Offer biofeedback-based pelvic floor retraining as the first-line treatment to correct the paradoxical contraction or inadequate",
-     "Core treatment modality"
+    "redFlags": [
+      "Alarm features suggesting organic disease",
+      "Suspected structural outlet obstruction requiring surgery",
+      "Features suggesting Hirschsprung disease",
+      "Neurological signs"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating refractory constipation with escalating laxatives without testing for dyssynergia",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is good, with the majority improving through biofeedback-directed pelvic floor retraining; outcomes are poorer if the diagnosis is missed and only laxatives are used.",
+    "pitfalls": [
+      "Treating refractory constipation with escalating laxatives without testing for dyssynergia",
+      "Overlooking the diagnosis on a normal-appearing colon",
+      "Missing a coexisting structural outlet problem",
+      "Not referring for biofeedback, the definitive treatment"
+    ],
+    "references": [
+      "Rome IV diagnostic criteria",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer biofeedback-based pelvic floor retraining as the first-line treatment to correct the paradoxical contraction or inadequate relaxation of the sphincter and pelvic floor",
+      "Provide bowel retraining with education on toileting posture and technique, discouraging excessive straining",
+      "Optimise stool consistency with fibre and osmotic agents so that retrained coordination is effective, rather than relying on stimulant laxatives alone",
+      "Confirm the pattern with anorectal physiology testing including manometry and a balloon expulsion test before committing to retraining",
+      "Identify and treat coexisting slow-transit constipation or structural outlet problems detected on testing",
+      "Add rectal balloon and sensory retraining where associated rectal hyposensitivity is present",
+      "Refer refractory cases to a specialist pelvic floor or colorectal service and address contributing psychological factors"
     ]
-   ],
-   "caption": "Overview comparison matrix for dyssynergic defecation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dyssynergic-defecation-real-image",
-   "title": "Dyssynergic defecation: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "dyssynergic_defecation-pathway",
+      "title": "Dyssynergic defecation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A functional defecation disorder in which impaired coordination of the abdominal, rectal and pelvic floor muscles prevents effective evacuation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Alarm features suggesting organic disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anorectal manometry to demonstrate the dyssynergic pattern, Balloon expulsion test, Defecography where structural outlet problems are suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer biofeedback-based pelvic floor retraining as the first-line treatment to correct the paradoxical contraction or inadequate relaxation of the sphincter and pelvic floor"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating refractory constipation with escalating laxatives without testing for dyssynergia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dyssynergic defecation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dyssynergic_defecation-matrix",
+      "title": "Dyssynergic defecation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A functional defecation disorder in which impaired coordination of the abdominal, rectal and pelvic floor muscles prevents",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anorectal manometry to demonstrate the dyssynergic pattern, Balloon expulsion test, Defecography where structural outlet problems",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Slow-transit constipation, Functional constipation of normal transit, Structural outlet obstruction (rectocele, intussusception)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer biofeedback-based pelvic floor retraining as the first-line treatment to correct the paradoxical contraction or inadequate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating refractory constipation with escalating laxatives without testing for dyssynergia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dyssynergic defecation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dyssynergic_defecation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anorectal manometry",
+          "cells": [
+            {
+              "text": "Dyssynergic pattern of defecation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon expulsion test",
+          "cells": [
+            {
+              "text": "Ability to expel a balloon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defecography where outlet problems suspected",
+          "cells": [
+            {
+              "text": "Structural outlet problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonic transit study",
+          "cells": [
+            {
+              "text": "Coexisting slow transit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital rectal examination",
+          "cells": [
+            {
+              "text": "Impaired relaxation on initial screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyssynergic_defecation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Slow-transit constipation",
+          "cells": [
+            {
+              "text": "Coexisting slow transit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural outlet obstruction (rectocele, intussusception)",
+          "cells": [
+            {
+              "text": "Structural outlet problem on defecography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Features in appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyssynergic_defecation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biofeedback pelvic floor retraining",
+          "cells": [
+            {
+              "text": "First-line; corrects paradoxical contraction or poor relaxation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel retraining",
+          "cells": [
+            {
+              "text": "Toileting posture and technique; discourage straining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool consistency",
+          "cells": [
+            {
+              "text": "Fibre and osmotic agents so retraining works; avoid relying on stimulants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiology confirmation",
+          "cells": [
+            {
+              "text": "Manometry and balloon expulsion before retraining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting problems",
+          "cells": [
+            {
+              "text": "Treat slow transit or structural outlet problems found on testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectal sensory retraining",
+          "cells": [
+            {
+              "text": "Where rectal hyposensitivity is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Refractory cases and psychological contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dyssynergic_defecation-dx-mgmt",
+      "title": "Diagnosis and management of Dyssynergic defecation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dyssynergic defecation: straining and incomplete evacuation on a normal colon",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (alarm features, suspected outlet obstruction, neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent investigation for alarm features or suspected structural obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anorectal manometry; balloon expulsion test; defecography if outlet problem suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does manometry show the dyssynergic pattern on balloon expulsion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider slow-transit constipation, structural outlet obstruction or Hirschsprung",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Biofeedback pelvic floor retraining as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bowel retraining with toileting posture and discouraging straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fibre and osmotic agents to optimise stool consistency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting slow transit or structural outlet problems",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer refractory cases to a specialist pelvic floor service",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good prognosis; most improve with biofeedback, while laxatives alone do poorly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

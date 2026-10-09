@@ -1,172 +1,441 @@
 {
- "id": "colles_fracture",
- "name": "Colles' fracture",
- "aliases": [
-  "distal radius fracture",
-  "dorsally displaced distal radial fracture",
-  "dinner-fork deformity fracture"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically a fracture of the distal radius within a few centimetres of the wrist with dorsal displacement and angulation, producing the 'dinner-fork' deformity",
-   "Typically caused by a fall onto the outstretched hand in an older, osteoporotic patient; its occurrence should prompt bone-health assessment",
-   "Radiographs show dorsal tilt, radial shortening, and often an associated ulnar styloid fracture; the degree of intra-articular involvement guides management",
-   "Undisplaced or minimally displaced fractures are treated with a cast; displaced fractures usually require closed reduction and immobilisation, checking that radial length and volar tilt are restored",
-   "Unstable, markedly comminuted, or intra-articular fractures often need surgical fixation such as a volar locking plate or K-wires to maintain alignment",
-   "Median nerve symptoms (acute carpal tunnel) can arise from swelling or displacement and must be sought before and after reduction",
-   "Watch for later complications including malunion, extensor pollicis longus tendon rupture, stiffness, and complex regional pain syndrome",
-   "Early finger, elbow, and shoulder mobilisation during cast treatment helps prevent stiffness and disuse"
+  "id": "colles_fracture",
+  "name": "Colles' fracture",
+  "aliases": [
+    "distal radius fracture",
+    "dorsally displaced distal radial fracture",
+    "dinner-fork deformity fracture"
   ],
-  "pathophysiology": "A Colles' fracture occurs when a fall onto the dorsiflexed, outstretched hand transmits force through the distal radius, which fails in its metaphyseal cancellous bone. Osteoporosis lowers the threshold for injury, explaining its predominance in postmenopausal women and older adults. The distal fragment tilts and displaces dorsally and radially and impacts proximally, shortening the radius and disrupting the normal volar tilt and radial inclination of the articular surface. Associated soft-tissue swelling or bony displacement may compress the median nerve in the carpal tunnel, and disruption of the distal radioulnar joint or triangular fibrocartilage can affect forearm rotation.",
-  "additionalDifferentials": [
-   "Smith's fracture (volar displacement) and Barton's fracture (intra-articular shear)",
-   "Scaphoid fracture",
-   "Distal radial physeal injury in adolescents",
-   "Wrist sprain or ligamentous injury",
-   "Carpal dislocation (perilunate/lunate)",
-   "Distal radioulnar joint injury"
-  ],
-  "additionalInvestigations": [
-   "Posteroanterior and lateral wrist radiographs to assess dorsal tilt, radial length and inclination, and articular involvement",
-   "CT for complex intra-articular or comminuted patterns to plan fixation",
-   "Post-reduction radiographs to confirm and monitor alignment",
-   "Assessment for osteoporosis and secondary fracture prevention in older patients",
-   "Clinical assessment of median nerve function before and after reduction"
-  ],
-  "redFlags": [
-   "Progressive median nerve symptoms indicating acute carpal tunnel syndrome requiring urgent decompression or reduction",
-   "Open fracture or skin compromise",
-   "Marked deformity with vascular compromise of the hand",
-   "Fracture from trivial trauma signalling significant underlying osteoporosis"
-  ],
-  "prognosis": "Most stable distal radial fractures unite and recover good function with appropriate reduction and rehabilitation, but malunion with residual dorsal tilt and radial shortening can leave weakness, reduced grip, and cosmetic deformity, and intra-articular incongruity predisposes to post-traumatic arthritis.",
-  "pitfalls": [
-   "Accepting a poor reduction with persistent dorsal tilt or radial shortening, leading to symptomatic malunion",
-   "Failing to recognise or monitor acute median nerve compression",
-   "Immobilising the wrist in excessive flexion (Cotton-Loder position), which risks stiffness and nerve compression",
-   "Neglecting finger and shoulder movement during cast treatment, causing stiffness and complex regional pain syndrome"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Closed reduction and cast immobilisation for displaced fractures, and casting alone for undisplaced injuries, restoring radial length and volar tilt",
-   "Surgical fixation with a volar locking plate or K-wires for unstable, comminuted or intra-articular fractures",
-   "Adequate analgesia and limb elevation to control pain and swelling",
-   "Assess median nerve function before and after reduction and decompress promptly for acute carpal tunnel syndrome",
-   "Post-reduction and serial radiographs to confirm and maintain alignment",
-   "Hand therapy and physiotherapy to restore wrist mobility and grip strength",
-   "Bone-health assessment with osteoporosis treatment such as bisphosphonates and falls-prevention measures in older patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "colles_fracture-pathway",
-   "title": "Colles' fracture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically a fracture of the distal radius within a few centimetres of the wrist with dorsal displacement and angulation, producing the 'dinner-fork' deformity",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive median nerve symptoms indicating acute carpal tunnel syndrome requiring urgent decompression or reduction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Posteroanterior and lateral wrist radiographs to assess dorsal tilt, radial length and inclination, and articular involvement, CT for complex intra-articular or comminuted patterns to plan fixation, Post-reduction"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Closed reduction and cast immobilisation for displaced fractures, and casting alone for undisplaced injuries, restoring radial length and volar tilt"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Accepting a poor reduction with persistent dorsal tilt or radial shortening, leading to symptomatic malunion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of colles' fracture."
-  }
- ],
- "tables": [
-  {
-   "id": "colles_fracture-matrix",
-   "title": "Colles' fracture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically a fracture of the distal radius within a few centimetres of the wrist with dorsal displacement and angulation,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically a fracture of the distal radius within a few centimetres of the wrist with dorsal displacement and angulation, producing the 'dinner-fork' deformity",
+      "Typically caused by a fall onto the outstretched hand in an older, osteoporotic patient; its occurrence should prompt bone-health assessment",
+      "Radiographs show dorsal tilt, radial shortening, and often an associated ulnar styloid fracture; the degree of intra-articular involvement guides management",
+      "Undisplaced or minimally displaced fractures are treated with a cast; displaced fractures usually require closed reduction and immobilisation, checking that radial length and volar tilt are restored",
+      "Unstable, markedly comminuted, or intra-articular fractures often need surgical fixation such as a volar locking plate or K-wires to maintain alignment",
+      "Median nerve symptoms (acute carpal tunnel) can arise from swelling or displacement and must be sought before and after reduction",
+      "Watch for later complications including malunion, extensor pollicis longus tendon rupture, stiffness, and complex regional pain syndrome",
+      "Early finger, elbow, and shoulder mobilisation during cast treatment helps prevent stiffness and disuse"
     ],
-    [
-     "Key Investigations",
-     "Posteroanterior and lateral wrist radiographs to assess dorsal tilt, radial length and inclination, and articular involvement, CT",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A Colles' fracture occurs when a fall onto the dorsiflexed, outstretched hand transmits force through the distal radius, which fails in its metaphyseal cancellous bone. Osteoporosis lowers the threshold for injury, explaining its predominance in postmenopausal women and older adults. The distal fragment tilts and displaces dorsally and radially and impacts proximally, shortening the radius and disrupting the normal volar tilt and radial inclination of the articular surface. Associated soft-tissue swelling or bony displacement may compress the median nerve in the carpal tunnel, and disruption of the distal radioulnar joint or triangular fibrocartilage can affect forearm rotation.",
+    "additionalDifferentials": [
+      "Smith's fracture (volar displacement) and Barton's fracture (intra-articular shear)",
+      "Scaphoid fracture",
+      "Distal radial physeal injury in adolescents",
+      "Wrist sprain or ligamentous injury",
+      "Carpal dislocation (perilunate/lunate)",
+      "Distal radioulnar joint injury"
     ],
-    [
-     "Primary Differentials",
-     "Smith's fracture (volar displacement) and Barton's fracture (intra-articular shear), Scaphoid fracture, Distal radial physeal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Posteroanterior and lateral wrist radiographs to assess dorsal tilt, radial length and inclination, and articular involvement",
+      "CT for complex intra-articular or comminuted patterns to plan fixation",
+      "Post-reduction radiographs to confirm and monitor alignment",
+      "Assessment for osteoporosis and secondary fracture prevention in older patients",
+      "Clinical assessment of median nerve function before and after reduction"
     ],
-    [
-     "Management Strategy",
-     "Closed reduction and cast immobilisation for displaced fractures, and casting alone for undisplaced injuries, restoring radial",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive median nerve symptoms indicating acute carpal tunnel syndrome requiring urgent decompression or reduction",
+      "Open fracture or skin compromise",
+      "Marked deformity with vascular compromise of the hand",
+      "Fracture from trivial trauma signalling significant underlying osteoporosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Accepting a poor reduction with persistent dorsal tilt or radial shortening, leading to symptomatic malunion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most stable distal radial fractures unite and recover good function with appropriate reduction and rehabilitation, but malunion with residual dorsal tilt and radial shortening can leave weakness, reduced grip, and cosmetic deformity, and intra-articular incongruity predisposes to post-traumatic arthritis.",
+    "pitfalls": [
+      "Accepting a poor reduction with persistent dorsal tilt or radial shortening, leading to symptomatic malunion",
+      "Failing to recognise or monitor acute median nerve compression",
+      "Immobilising the wrist in excessive flexion (Cotton-Loder position), which risks stiffness and nerve compression",
+      "Neglecting finger and shoulder movement during cast treatment, causing stiffness and complex regional pain syndrome"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Closed reduction and cast immobilisation for displaced fractures, and casting alone for undisplaced injuries, restoring radial length and volar tilt",
+      "Surgical fixation with a volar locking plate or K-wires for unstable, comminuted or intra-articular fractures",
+      "Adequate analgesia and limb elevation to control pain and swelling",
+      "Assess median nerve function before and after reduction and decompress promptly for acute carpal tunnel syndrome",
+      "Post-reduction and serial radiographs to confirm and maintain alignment",
+      "Hand therapy and physiotherapy to restore wrist mobility and grip strength",
+      "Bone-health assessment with osteoporosis treatment such as bisphosphonates and falls-prevention measures in older patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for colles' fracture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "colles-fracture-real-image",
-   "title": "Colles' fracture: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "colles_fracture-pathway",
+      "title": "Colles' fracture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically a fracture of the distal radius within a few centimetres of the wrist with dorsal displacement and angulation, producing the 'dinner-fork' deformity",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive median nerve symptoms indicating acute carpal tunnel syndrome requiring urgent decompression or reduction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Posteroanterior and lateral wrist radiographs to assess dorsal tilt, radial length and inclination, and articular involvement, CT for complex intra-articular or comminuted patterns to plan fixation, Post-reduction"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Closed reduction and cast immobilisation for displaced fractures, and casting alone for undisplaced injuries, restoring radial length and volar tilt"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Accepting a poor reduction with persistent dorsal tilt or radial shortening, leading to symptomatic malunion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of colles' fracture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "colles_fracture-matrix",
+      "title": "Colles' fracture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically a fracture of the distal radius within a few centimetres of the wrist with dorsal displacement and angulation,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Posteroanterior and lateral wrist radiographs to assess dorsal tilt, radial length and inclination, and articular involvement, CT",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Smith's fracture (volar displacement) and Barton's fracture (intra-articular shear), Scaphoid fracture, Distal radial physeal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Closed reduction and cast immobilisation for displaced fractures, and casting alone for undisplaced injuries, restoring radial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Accepting a poor reduction with persistent dorsal tilt or radial shortening, leading to symptomatic malunion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for colles' fracture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "colles_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Posteroanterior and lateral wrist radiographs",
+          "cells": [
+            {
+              "text": "Dorsal tilt, radial length, inclination and articular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT for complex intra-articular or comminuted patterns",
+          "cells": [
+            {
+              "text": "Complex pattern, to plan fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical median nerve assessment",
+          "cells": [
+            {
+              "text": "Median nerve function before and after reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporosis assessment in older patients",
+          "cells": [
+            {
+              "text": "Secondary fracture prevention needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "colles_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Smith's fracture and Barton's fracture",
+          "cells": [
+            {
+              "text": "Volar displacement (Smith) or intra-articular shear (Barton)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute carpal tunnel syndrome",
+          "cells": [
+            {
+              "text": "Progressive median nerve symptoms need urgent decompression or reduction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "colles_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Closed reduction and cast immobilisation",
+          "cells": [
+            {
+              "text": "Displaced fractures, restoring radial length and volar tilt; casting alone for undisplaced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical fixation",
+          "cells": [
+            {
+              "text": "Volar locking plate or K-wires for unstable, comminuted or intra-articular fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and elevation",
+          "cells": [
+            {
+              "text": "Controls pain and swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Median nerve assessment and decompression",
+          "cells": [
+            {
+              "text": "Assess before and after reduction; decompress promptly for acute carpal tunnel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial radiographs",
+          "cells": [
+            {
+              "text": "Confirm and maintain alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy and physiotherapy",
+          "cells": [
+            {
+              "text": "Restore wrist mobility and grip strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-health assessment",
+          "cells": [
+            {
+              "text": "Osteoporosis treatment such as bisphosphonates and falls prevention in older patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "colles_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Colles' fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Colles' fracture: distal radius, dorsal displacement after a fall on the hand",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive median nerve symptoms, open fracture, vascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: decompress for acute carpal tunnel or reduce; manage any open fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wrist radiographs for dorsal tilt and radial length; CT if intra-articular",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the reduction acceptable, with dorsal tilt and radial length restored?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-reduce or fix surgically with volar plate or K-wires if unstable",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Closed reduction and cast immobilisation for displaced fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia and limb elevation for pain and swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand therapy and physiotherapy for wrist mobility and grip",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bone-health assessment and osteoporosis treatment in older patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most stable fractures recover well; malunion can leave weakness and reduced function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

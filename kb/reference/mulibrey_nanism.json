@@ -1,174 +1,481 @@
 {
- "id": "mulibrey_nanism",
- "name": "Mulibrey nanism",
- "aliases": [
-  "muscle-liver-brain-eye nanism",
-  "TRIM37-related disorder",
-  "Perheentupa syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The name is an acronym for the tissues involved: muscle, liver, brain, and eye, with nanism denoting severe growth restriction",
-   "Presents with prenatal-onset growth failure, a triangular face with frontal bossing, and a high-pitched voice, alongside normal or near-normal cognition",
-   "Constrictive pericarditis is a hallmark and a major determinant of prognosis, causing hepatomegaly, ascites, and signs of chronic heart failure",
-   "Yellowish dots and pigment dispersion in the ocular fundus are a characteristic ophthalmological finding",
-   "Caused by biallelic loss-of-function variants in TRIM37 and inherited in an autosomal recessive pattern, with relatively high prevalence in the Finnish population",
-   "There is an increased risk of tumours, including Wilms tumour and other neoplasms, so surveillance is warranted",
-   "Endocrine problems such as hypogonadism, insulin resistance, and metabolic syndrome features may emerge with age"
+  "id": "mulibrey_nanism",
+  "name": "Mulibrey nanism",
+  "aliases": [
+    "muscle-liver-brain-eye nanism",
+    "TRIM37-related disorder",
+    "Perheentupa syndrome"
   ],
-  "pathophysiology": "Mulibrey nanism is caused by biallelic loss-of-function variants in TRIM37, which encodes a peroxisomal and nuclear E3 ubiquitin ligase involved in protein turnover, chromatin regulation, and cell proliferation control. Loss of TRIM37 function disturbs these processes across multiple tissues, producing severe growth restriction, fibrous change in the pericardium leading to constriction, characteristic craniofacial and ocular features, and a predisposition to tumours. The multisystem involvement reflects the broad expression and regulatory roles of the protein.",
-  "additionalDifferentials": [
-   "Silver-Russell syndrome",
-   "3-M syndrome and other primordial short-stature disorders",
-   "Seckel syndrome",
-   "Constrictive pericarditis of other cause",
-   "Noonan syndrome",
-   "Fetal growth restriction of environmental cause"
-  ],
-  "additionalInvestigations": [
-   "TRIM37 gene sequencing and deletion/duplication analysis",
-   "Echocardiography and cardiac imaging to detect constrictive pericarditis",
-   "Ophthalmological examination for characteristic fundal pigment changes",
-   "Abdominal and renal ultrasound for tumour surveillance including Wilms tumour",
-   "Endocrine evaluation for hypogonadism, glucose intolerance, and growth axis",
-   "Liver assessment for hepatomegaly and congestion"
-  ],
-  "redFlags": [
-   "Signs of constrictive pericarditis with heart failure, ascites, and hepatic congestion",
-   "New abdominal mass or haematuria suggesting Wilms tumour",
-   "Progressive metabolic derangement with insulin resistance",
-   "Failure to thrive with cardiac decompensation in infancy"
-  ],
-  "prognosis": "Prognosis is largely dictated by cardiac involvement, and constrictive pericarditis can cause progressive heart failure that may require pericardiectomy. With cardiac management and tumour surveillance many individuals survive into adulthood, though short stature and endocrine complications persist.",
-  "pitfalls": [
-   "Overlooking constrictive pericarditis as the cause of hepatomegaly and ascites in a child with growth failure",
-   "Failing to institute tumour surveillance for Wilms tumour and other neoplasms",
-   "Mistaking the disorder for Silver-Russell or Seckel syndrome given overlapping growth restriction",
-   "Missing the emergence of metabolic and endocrine complications in later childhood and adulthood"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: Mulibrey Nanism"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Pericardiectomy for constrictive pericarditis, the principal determinant of prognosis",
-   "Diuretic therapy and supportive management of congestive heart failure features such as hepatomegaly, ascites and oedema",
-   "Tumour surveillance with abdominal and renal ultrasound for Wilms tumour and other neoplasms",
-   "Endocrine management including hormone replacement for hypogonadism and monitoring and treatment of glucose intolerance and the growth axis",
-   "Regular ophthalmological review for the characteristic fundal pigment changes",
-   "Genetic counselling for this autosomal recessive TRIM37 disorder, with testing of at-risk relatives",
-   "Multidisciplinary follow-up coordinating cardiology, endocrinology, oncology and ophthalmology",
-   "Escalate to cardiac surgical assessment when heart failure progresses despite medical therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mulibrey_nanism-pathway",
-   "title": "Mulibrey nanism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The name is an acronym for the tissues involved: muscle, liver, brain, and eye, with nanism denoting severe growth restriction",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of constrictive pericarditis with heart failure, ascites, and hepatic congestion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: TRIM37 gene sequencing and deletion/duplication analysis, Echocardiography and cardiac imaging to detect constrictive pericarditis, Ophthalmological examination for characteristic fundal pigment changes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Pericardiectomy for constrictive pericarditis, the principal determinant of prognosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking constrictive pericarditis as the cause of hepatomegaly and ascites in a child with growth failure"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mulibrey nanism."
-  }
- ],
- "tables": [
-  {
-   "id": "mulibrey_nanism-matrix",
-   "title": "Mulibrey nanism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The name is an acronym for the tissues involved: muscle, liver, brain, and eye, with nanism denoting severe growth restriction",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The name is an acronym for the tissues involved: muscle, liver, brain, and eye, with nanism denoting severe growth restriction",
+      "Presents with prenatal-onset growth failure, a triangular face with frontal bossing, and a high-pitched voice, alongside normal or near-normal cognition",
+      "Constrictive pericarditis is a hallmark and a major determinant of prognosis, causing hepatomegaly, ascites, and signs of chronic heart failure",
+      "Yellowish dots and pigment dispersion in the ocular fundus are a characteristic ophthalmological finding",
+      "Caused by biallelic loss-of-function variants in TRIM37 and inherited in an autosomal recessive pattern, with relatively high prevalence in the Finnish population",
+      "There is an increased risk of tumours, including Wilms tumour and other neoplasms, so surveillance is warranted",
+      "Endocrine problems such as hypogonadism, insulin resistance, and metabolic syndrome features may emerge with age"
     ],
-    [
-     "Key Investigations",
-     "TRIM37 gene sequencing and deletion/duplication analysis, Echocardiography and cardiac imaging to detect constrictive",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mulibrey nanism is caused by biallelic loss-of-function variants in TRIM37, which encodes a peroxisomal and nuclear E3 ubiquitin ligase involved in protein turnover, chromatin regulation, and cell proliferation control. Loss of TRIM37 function disturbs these processes across multiple tissues, producing severe growth restriction, fibrous change in the pericardium leading to constriction, characteristic craniofacial and ocular features, and a predisposition to tumours. The multisystem involvement reflects the broad expression and regulatory roles of the protein.",
+    "additionalDifferentials": [
+      "Silver-Russell syndrome",
+      "3-M syndrome and other primordial short-stature disorders",
+      "Seckel syndrome",
+      "Constrictive pericarditis of other cause",
+      "Noonan syndrome",
+      "Fetal growth restriction of environmental cause"
     ],
-    [
-     "Primary Differentials",
-     "Silver-Russell syndrome, 3-M syndrome and other primordial short-stature disorders, Seckel syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "TRIM37 gene sequencing and deletion/duplication analysis",
+      "Echocardiography and cardiac imaging to detect constrictive pericarditis",
+      "Ophthalmological examination for characteristic fundal pigment changes",
+      "Abdominal and renal ultrasound for tumour surveillance including Wilms tumour",
+      "Endocrine evaluation for hypogonadism, glucose intolerance, and growth axis",
+      "Liver assessment for hepatomegaly and congestion"
     ],
-    [
-     "Management Strategy",
-     "Pericardiectomy for constrictive pericarditis, the principal determinant of prognosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of constrictive pericarditis with heart failure, ascites, and hepatic congestion",
+      "New abdominal mass or haematuria suggesting Wilms tumour",
+      "Progressive metabolic derangement with insulin resistance",
+      "Failure to thrive with cardiac decompensation in infancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking constrictive pericarditis as the cause of hepatomegaly and ascites in a child with growth failure",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is largely dictated by cardiac involvement, and constrictive pericarditis can cause progressive heart failure that may require pericardiectomy. With cardiac management and tumour surveillance many individuals survive into adulthood, though short stature and endocrine complications persist.",
+    "pitfalls": [
+      "Overlooking constrictive pericarditis as the cause of hepatomegaly and ascites in a child with growth failure",
+      "Failing to institute tumour surveillance for Wilms tumour and other neoplasms",
+      "Mistaking the disorder for Silver-Russell or Seckel syndrome given overlapping growth restriction",
+      "Missing the emergence of metabolic and endocrine complications in later childhood and adulthood"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: Mulibrey Nanism"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Pericardiectomy for constrictive pericarditis, the principal determinant of prognosis",
+      "Diuretic therapy and supportive management of congestive heart failure features such as hepatomegaly, ascites and oedema",
+      "Tumour surveillance with abdominal and renal ultrasound for Wilms tumour and other neoplasms",
+      "Endocrine management including hormone replacement for hypogonadism and monitoring and treatment of glucose intolerance and the growth axis",
+      "Regular ophthalmological review for the characteristic fundal pigment changes",
+      "Genetic counselling for this autosomal recessive TRIM37 disorder, with testing of at-risk relatives",
+      "Multidisciplinary follow-up coordinating cardiology, endocrinology, oncology and ophthalmology",
+      "Escalate to cardiac surgical assessment when heart failure progresses despite medical therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for mulibrey nanism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mulibrey-nanism-real-image",
-   "title": "Mulibrey nanism: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mulibrey_nanism-pathway",
+      "title": "Mulibrey nanism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The name is an acronym for the tissues involved: muscle, liver, brain, and eye, with nanism denoting severe growth restriction",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of constrictive pericarditis with heart failure, ascites, and hepatic congestion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: TRIM37 gene sequencing and deletion/duplication analysis, Echocardiography and cardiac imaging to detect constrictive pericarditis, Ophthalmological examination for characteristic fundal pigment changes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Pericardiectomy for constrictive pericarditis, the principal determinant of prognosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking constrictive pericarditis as the cause of hepatomegaly and ascites in a child with growth failure"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mulibrey nanism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mulibrey_nanism-matrix",
+      "title": "Mulibrey nanism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The name is an acronym for the tissues involved: muscle, liver, brain, and eye, with nanism denoting severe growth restriction",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "TRIM37 gene sequencing and deletion/duplication analysis, Echocardiography and cardiac imaging to detect constrictive",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Silver-Russell syndrome, 3-M syndrome and other primordial short-stature disorders, Seckel syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Pericardiectomy for constrictive pericarditis, the principal determinant of prognosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking constrictive pericarditis as the cause of hepatomegaly and ascites in a child with growth failure",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mulibrey nanism."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mulibrey_nanism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TRIM37 gene sequencing and deletion/duplication analysis",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function TRIM37 variants give the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac imaging",
+          "cells": [
+            {
+              "text": "Constrictive pericarditis, the hallmark and main determinant of prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Yellowish dots and pigment dispersion in the fundus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal and renal ultrasound",
+          "cells": [
+            {
+              "text": "Tumour surveillance, including Wilms tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine evaluation",
+          "cells": [
+            {
+              "text": "Hypogonadism, glucose intolerance and the growth axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver assessment",
+          "cells": [
+            {
+              "text": "Hepatomegaly and congestion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mulibrey_nanism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Silver-Russell syndrome",
+          "cells": [
+            {
+              "text": "Overlapping growth restriction; easily mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seckel syndrome",
+          "cells": [
+            {
+              "text": "Overlapping growth restriction; easily mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mulibrey_nanism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pericardiectomy",
+          "cells": [
+            {
+              "text": "For constrictive pericarditis, the principal determinant of prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretic therapy",
+          "cells": [
+            {
+              "text": "Supportive management of hepatomegaly, ascites and oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour surveillance",
+          "cells": [
+            {
+              "text": "Abdominal and renal ultrasound for Wilms tumour and other neoplasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine management",
+          "cells": [
+            {
+              "text": "Hormone replacement for hypogonadism; monitor glucose tolerance and growth axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Regular review of the characteristic fundal pigment changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive TRIM37 disorder; test at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Cardiology, endocrinology, oncology and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surgical assessment",
+          "cells": [
+            {
+              "text": "When heart failure progresses despite medical therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mulibrey_nanism-dx-mgmt",
+      "title": "Diagnosis and management of Mulibrey nanism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prenatal-onset growth failure, triangular face, high voice, normal cognition",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (constrictive pericarditis, abdominal mass or haematuria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac review for constrictive pericarditis and heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TRIM37 sequencing, echocardiography, fundal examination, abdominal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic loss-of-function TRIM37 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Silver-Russell, Seckel or 3-M syndrome; repeat growth and cardiac review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pericardiectomy for constrictive pericarditis, the main prognostic factor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diuretics and supportive care for hepatomegaly, ascites and oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Abdominal and renal ultrasound surveillance for Wilms tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endocrine management: hormone replacement, glucose and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling; test at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many survive into adulthood with cardiac care and tumour surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

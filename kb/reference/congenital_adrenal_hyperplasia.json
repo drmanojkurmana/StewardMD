@@ -1,175 +1,1021 @@
 {
- "id": "congenital_adrenal_hyperplasia",
- "name": "Congenital Adrenal Hyperplasia",
- "aliases": [
-  "CAH",
-  "21-hydroxylase deficiency",
-  "adrenogenital syndrome"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of autosomal recessive disorders of adrenal steroid synthesis, the great majority caused by 21-hydroxylase deficiency.",
-   "The classic salt-wasting form presents in the first weeks of life with vomiting, poor feeding, weight loss, dehydration, and shock from combined cortisol and aldosterone deficiency.",
-   "Female infants with the classic form often show virilisation of the external genitalia (ambiguous genitalia), whereas affected males may appear normal at birth and are at particular risk of unrecognised salt-wasting crisis.",
-   "Characteristic biochemistry includes hyponatraemia, hyperkalaemia, and metabolic acidosis in the salt-wasting crisis, with markedly elevated 17-hydroxyprogesterone.",
-   "A non-classic (late-onset) form presents later with signs of androgen excess such as premature pubarche, hirsutism, or menstrual irregularity.",
-   "Newborn screening measuring 17-hydroxyprogesterone allows early detection before a life-threatening crisis.",
-   "Treatment principle is glucocorticoid replacement to correct cortisol deficiency and suppress excess adrenal androgen, with mineralocorticoid replacement (and salt supplementation in infancy) for salt-wasting forms.",
-   "Additional stress steroid cover is essential during illness, surgery, or major stress to prevent adrenal crisis.",
-   "Management of affected girls includes multidisciplinary care regarding virilised genitalia, and genetic counselling is important for families."
+  "id": "congenital_adrenal_hyperplasia",
+  "name": "Congenital Adrenal Hyperplasia",
+  "aliases": [
+    "CAH",
+    "21-hydroxylase deficiency",
+    "adrenogenital syndrome"
   ],
-  "pathophysiology": "A deficiency of an enzyme in the adrenal cortisol synthesis pathway, most often 21-hydroxylase, reduces cortisol production. The resulting loss of negative feedback drives increased ACTH secretion, which stimulates adrenal hyperplasia and diverts steroid precursors into the androgen pathway, causing androgen excess and virilisation. In the severe salt-wasting form, aldosterone synthesis is also impaired, leading to sodium loss, hyperkalaemia, and volume depletion, while accumulation of the precursor 17-hydroxyprogesterone serves as a diagnostic marker.",
-  "additionalDifferentials": [
-   "Other causes of ambiguous genitalia and disorders of sex development",
-   "Pyloric stenosis or sepsis in a vomiting, dehydrated neonate",
-   "Other forms of primary adrenal insufficiency",
-   "Rarer enzyme defects (11-beta-hydroxylase, 3-beta-hydroxysteroid dehydrogenase deficiency)",
-   "Precocious puberty from other causes",
-   "Polycystic ovary syndrome (for non-classic presentations)"
-  ],
-  "additionalInvestigations": [
-   "Serum 17-hydroxyprogesterone (baseline and, if needed, after ACTH stimulation)",
-   "Serum electrolytes, glucose, and acid-base status",
-   "Plasma renin activity and aldosterone",
-   "Adrenal androgens (androstenedione, testosterone)",
-   "Karyotype and pelvic ultrasound in ambiguous genitalia",
-   "Genetic analysis of the CYP21A2 gene"
-  ],
-  "redFlags": [
-   "Salt-wasting adrenal crisis with dehydration, hypotension, or shock",
-   "Severe hyponatraemia and hyperkalaemia",
-   "Hypoglycaemia",
-   "Vomiting and poor feeding in a neonate, particularly a male infant",
-   "Intercurrent illness or surgery without adequate stress steroid cover"
-  ],
-  "prognosis": "With early diagnosis, hormone replacement, and stress dosing, children generally grow and develop well; risks include life-threatening adrenal crises, effects of over- or under-treatment on growth and puberty, and fertility and psychosocial issues in classic disease.",
-  "pitfalls": [
-   "Missing salt-wasting crisis in a male infant with normal genitalia",
-   "Failing to provide stress steroid cover during illness or surgery",
-   "Over-treating with glucocorticoids, impairing growth, or under-treating, allowing androgen excess",
-   "Misattributing a neonatal collapse to sepsis or pyloric stenosis without checking electrolytes and adrenal steroids"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Replace cortisol with glucocorticoid therapy (hydrocortisone in children) to relieve deficiency and suppress ACTH-driven adrenal androgen excess",
-   "Add mineralocorticoid replacement with fludrocortisone plus sodium chloride supplementation in the salt-wasting form",
-   "Treat salt-wasting adrenal crisis urgently with intravenous saline, glucose, parenteral hydrocortisone and correction of hyperkalaemia",
-   "Educate on sick-day rules, provide an emergency steroid card and injectable hydrocortisone, and increase glucocorticoid cover during illness and surgery",
-   "Monitor growth, bone age and androgen markers such as 17-hydroxyprogesterone and androstenedione to balance over- and under-treatment",
-   "Coordinate multidisciplinary care with paediatric endocrinology, surgery for genital reconstruction where indicated, and psychological support",
-   "Offer genetic counselling and family screening given autosomal recessive CYP21A2 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_adrenal_hyperplasia-pathway",
-   "title": "Congenital Adrenal Hyperplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of autosomal recessive disorders of adrenal steroid synthesis, the great majority caused by 21-hydroxylase deficiency.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Salt-wasting adrenal crisis with dehydration, hypotension, or shock",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum 17-hydroxyprogesterone (baseline and, if needed, after ACTH stimulation), Serum electrolytes, glucose, and acid-base status, Plasma renin activity and aldosterone"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replace cortisol with glucocorticoid therapy (hydrocortisone in children) to relieve deficiency and suppress ACTH-driven adrenal androgen excess"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing salt-wasting crisis in a male infant with normal genitalia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital adrenal hyperplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_adrenal_hyperplasia-matrix",
-   "title": "Congenital Adrenal Hyperplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of autosomal recessive disorders of adrenal steroid synthesis, the great majority caused by 21-hydroxylase deficiency.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of autosomal recessive disorders of adrenal steroid synthesis, the great majority caused by 21-hydroxylase deficiency.",
+      "The classic salt-wasting form presents in the first weeks of life with vomiting, poor feeding, weight loss, dehydration, and shock from combined cortisol and aldosterone deficiency.",
+      "Female infants with the classic form often show virilisation of the external genitalia (ambiguous genitalia), whereas affected males may appear normal at birth and are at particular risk of unrecognised salt-wasting crisis.",
+      "Characteristic biochemistry includes hyponatraemia, hyperkalaemia, and metabolic acidosis in the salt-wasting crisis, with markedly elevated 17-hydroxyprogesterone.",
+      "A non-classic (late-onset) form presents later with signs of androgen excess such as premature pubarche, hirsutism, or menstrual irregularity.",
+      "Newborn screening measuring 17-hydroxyprogesterone allows early detection before a life-threatening crisis.",
+      "Treatment principle is glucocorticoid replacement to correct cortisol deficiency and suppress excess adrenal androgen, with mineralocorticoid replacement (and salt supplementation in infancy) for salt-wasting forms.",
+      "Additional stress steroid cover is essential during illness, surgery, or major stress to prevent adrenal crisis.",
+      "Management of affected girls includes multidisciplinary care regarding virilised genitalia, and genetic counselling is important for families."
     ],
-    [
-     "Key Investigations",
-     "Serum 17-hydroxyprogesterone (baseline and, if needed, after ACTH stimulation), Serum electrolytes, glucose, and acid-base",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A deficiency of an enzyme in the adrenal cortisol synthesis pathway, most often 21-hydroxylase, reduces cortisol production. The resulting loss of negative feedback drives increased ACTH secretion, which stimulates adrenal hyperplasia and diverts steroid precursors into the androgen pathway, causing androgen excess and virilisation. In the severe salt-wasting form, aldosterone synthesis is also impaired, leading to sodium loss, hyperkalaemia, and volume depletion, while accumulation of the precursor 17-hydroxyprogesterone serves as a diagnostic marker.",
+    "additionalDifferentials": [
+      "Other causes of ambiguous genitalia and disorders of sex development",
+      "Pyloric stenosis or sepsis in a vomiting, dehydrated neonate",
+      "Other forms of primary adrenal insufficiency",
+      "Rarer enzyme defects (11-beta-hydroxylase, 3-beta-hydroxysteroid dehydrogenase deficiency)",
+      "Precocious puberty from other causes",
+      "Polycystic ovary syndrome (for non-classic presentations)"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of ambiguous genitalia and disorders of sex development, Pyloric stenosis or sepsis in a vomiting, dehydrated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum 17-hydroxyprogesterone (baseline and, if needed, after ACTH stimulation)",
+      "Serum electrolytes, glucose, and acid-base status",
+      "Plasma renin activity and aldosterone",
+      "Adrenal androgens (androstenedione, testosterone)",
+      "Karyotype and pelvic ultrasound in ambiguous genitalia",
+      "Genetic analysis of the CYP21A2 gene"
     ],
-    [
-     "Management Strategy",
-     "Replace cortisol with glucocorticoid therapy (hydrocortisone in children) to relieve deficiency and suppress ACTH-driven adrenal",
-     "Core treatment modality"
+    "redFlags": [
+      "Salt-wasting adrenal crisis with dehydration, hypotension, or shock",
+      "Severe hyponatraemia and hyperkalaemia",
+      "Hypoglycaemia",
+      "Vomiting and poor feeding in a neonate, particularly a male infant",
+      "Intercurrent illness or surgery without adequate stress steroid cover"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing salt-wasting crisis in a male infant with normal genitalia",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis, hormone replacement, and stress dosing, children generally grow and develop well; risks include life-threatening adrenal crises, effects of over- or under-treatment on growth and puberty, and fertility and psychosocial issues in classic disease.",
+    "pitfalls": [
+      "Missing salt-wasting crisis in a male infant with normal genitalia",
+      "Failing to provide stress steroid cover during illness or surgery",
+      "Over-treating with glucocorticoids, impairing growth, or under-treating, allowing androgen excess",
+      "Misattributing a neonatal collapse to sepsis or pyloric stenosis without checking electrolytes and adrenal steroids"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Replace cortisol with glucocorticoid therapy (hydrocortisone in children) to relieve deficiency and suppress ACTH-driven adrenal androgen excess",
+      "Add mineralocorticoid replacement with fludrocortisone plus sodium chloride supplementation in the salt-wasting form",
+      "Treat salt-wasting adrenal crisis urgently with intravenous saline, glucose, parenteral hydrocortisone and correction of hyperkalaemia",
+      "Educate on sick-day rules, provide an emergency steroid card and injectable hydrocortisone, and increase glucocorticoid cover during illness and surgery",
+      "Monitor growth, bone age and androgen markers such as 17-hydroxyprogesterone and androstenedione to balance over- and under-treatment",
+      "Coordinate multidisciplinary care with paediatric endocrinology, surgery for genital reconstruction where indicated, and psychological support",
+      "Offer genetic counselling and family screening given autosomal recessive CYP21A2 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital adrenal hyperplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-adrenal-hyperplasia-real-image",
-   "title": "Congenital Adrenal Hyperplasia: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "congenital_adrenal_hyperplasia-pathway",
+      "title": "Congenital Adrenal Hyperplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of autosomal recessive disorders of adrenal steroid synthesis, the great majority caused by 21-hydroxylase deficiency.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Salt-wasting adrenal crisis with dehydration, hypotension, or shock",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum 17-hydroxyprogesterone (baseline and, if needed, after ACTH stimulation), Serum electrolytes, glucose, and acid-base status, Plasma renin activity and aldosterone"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replace cortisol with glucocorticoid therapy (hydrocortisone in children) to relieve deficiency and suppress ACTH-driven adrenal androgen excess"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing salt-wasting crisis in a male infant with normal genitalia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital adrenal hyperplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_adrenal_hyperplasia-matrix",
+      "title": "Congenital Adrenal Hyperplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of autosomal recessive disorders of adrenal steroid synthesis, the great majority caused by 21-hydroxylase deficiency.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum 17-hydroxyprogesterone (baseline and, if needed, after ACTH stimulation), Serum electrolytes, glucose, and acid-base",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of ambiguous genitalia and disorders of sex development, Pyloric stenosis or sepsis in a vomiting, dehydrated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replace cortisol with glucocorticoid therapy (hydrocortisone in children) to relieve deficiency and suppress ACTH-driven adrenal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing salt-wasting crisis in a male infant with normal genitalia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital adrenal hyperplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_adrenal_hyperplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum 17-hydroxyprogesterone",
+          "cells": [
+            {
+              "text": "Baseline, and after ACTH stimulation if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes, glucose and acid-base status",
+          "cells": [
+            {
+              "text": "Salt-wasting markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin activity and aldosterone",
+          "cells": [
+            {
+              "text": "Mineralocorticoid status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal androgens (androstenedione, testosterone)",
+          "cells": [
+            {
+              "text": "Adrenal androgen excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Ambiguous genitalia assessed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_adrenal_hyperplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyloric stenosis or sepsis in a vomiting, dehydrated neonate",
+          "cells": [
+            {
+              "text": "Vomiting and dehydration overlap; salt-wasting crisis excluded by hormone tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other forms of primary adrenal insufficiency",
+          "cells": [
+            {
+              "text": "Primary adrenal failure with salt loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic ovary syndrome",
+          "cells": [
+            {
+              "text": "Non-classic presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_adrenal_hyperplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoid replacement",
+          "cells": [
+            {
+              "text": "Hydrocortisone in children; relieves deficiency and suppresses ACTH-driven androgen excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mineralocorticoid replacement",
+          "cells": [
+            {
+              "text": "Fludrocortisone plus sodium chloride in the salt-wasting form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salt-wasting crisis",
+          "cells": [
+            {
+              "text": "Intravenous saline, glucose, parenteral hydrocortisone and correction of hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day rules",
+          "cells": [
+            {
+              "text": "Emergency steroid card and injectable hydrocortisone; increase cover in illness and surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and hormone monitoring",
+          "cells": [
+            {
+              "text": "Growth, bone age, 17-hydroxyprogesterone and androstenedione to balance treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology, genital reconstruction where indicated, psychological support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive CYP21A2; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_adrenal_hyperplasia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_adrenal_hyperplasia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital Adrenal Hyperplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital adrenal hyperplasia: ambiguous genitalia or salt-wasting in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (salt-wasting crisis, hyponatraemia, hypoglycaemia, vomiting)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: IV saline, glucose, parenteral hydrocortisone; correct hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "17-hydroxyprogesterone; electrolytes; renin and aldosterone; androgens; CYP21A2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are 17-hydroxyprogesterone and androgens raised with CYP21A2 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pyloric stenosis, other adrenal insufficiency or PCOS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Glucocorticoid replacement with hydrocortisone in children",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fludrocortisone and salt supplementation for the salt-wasting form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sick-day rules with an emergency steroid card and injectable hydrocortisone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor growth, bone age and androgen markers to avoid over- or under-treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With early diagnosis and stress dosing children grow well; crises are the main risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,464 @@
 {
- "id": "succinic_semialdehyde_dehydrogenase_deficiency",
- "name": "Succinic semialdehyde dehydrogenase deficiency (GABA metabolism)",
- "aliases": [
-  "succinic semialdehyde dehydrogenase deficiency",
-  "SSADH deficiency",
-  "ALDH5A1 deficiency",
-  "4-hydroxybutyric aciduria",
-  "gamma-hydroxybutyric aciduria",
-  "GHB aciduria"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deficiency of succinic semialdehyde dehydrogenase (ALDH5A1), the second enzyme of GABA degradation, so succinic semialdehyde is diverted to gamma-hydroxybutyric acid (GHB)",
-   "The diagnostic biochemical hallmark is accumulation of 4-hydroxybutyric acid (gamma-hydroxybutyrate) in urine, plasma, and CSF, which is not detected on routine organic acid screening unless specifically sought",
-   "Typical features are global developmental delay, prominent expressive language delay, hypotonia, ataxia, and behavioural/psychiatric problems, with epilepsy in many",
-   "Both GABA and GHB accumulate, and the balance of GABA-B and GHB receptor effects is thought to explain the mixed excitatory and sedative neurological picture",
-   "Brain MRI often shows a characteristic symmetric high T2 signal in the globus pallidus, subthalamic nuclei, and dentate nuclei",
-   "It is generally a slowly progressive or static encephalopathy rather than an acute metabolic crisis illness; management is supportive and antiepileptic, with vigabatrin used cautiously given theoretical benefit and risk",
-   "Inheritance is autosomal recessive",
-   "British spelling and paediatric context apply"
+  "id": "succinic_semialdehyde_dehydrogenase_deficiency",
+  "name": "Succinic semialdehyde dehydrogenase deficiency (GABA metabolism)",
+  "aliases": [
+    "succinic semialdehyde dehydrogenase deficiency",
+    "SSADH deficiency",
+    "ALDH5A1 deficiency",
+    "4-hydroxybutyric aciduria",
+    "gamma-hydroxybutyric aciduria",
+    "GHB aciduria"
   ],
-  "pathophysiology": "The inhibitory neurotransmitter GABA is catabolised via GABA transaminase to succinic semialdehyde, which succinic semialdehyde dehydrogenase then oxidises to succinate for entry into the citric acid cycle. When this enzyme is deficient, succinic semialdehyde is instead reduced to gamma-hydroxybutyrate (GHB), which accumulates along with GABA in the brain and body fluids. GHB and elevated GABA act on GHB and GABA-B receptors, disturbing neurotransmission in ways that produce the developmental, motor, epileptic, and behavioural manifestations. The build-up of these neuroactive compounds, rather than an energy-failure crisis, characterises the disorder, giving a comparatively static or slowly evolving encephalopathy.",
-  "additionalDifferentials": [
-   "Other causes of global developmental delay with prominent language impairment",
-   "Autism spectrum disorder with regression",
-   "Other neurotransmitter metabolism disorders",
-   "Mitochondrial disorders with bilateral pallidal signal change",
-   "Other genetic epileptic encephalopathies",
-   "GHB ingestion or intoxication (acquired) as a mimic of the biochemistry"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acids with specific detection of 4-hydroxybutyric acid (may be missed on standard screens)",
-   "Quantification of gamma-hydroxybutyrate in plasma and CSF",
-   "Brain MRI for symmetric globus pallidus, subthalamic, and dentate signal change",
-   "EEG in those with seizures",
-   "Enzyme activity assay in leucocytes or lymphocytes",
-   "Molecular analysis of the ALDH5A1 gene"
-  ],
-  "redFlags": [
-   "Worsening seizures or status epilepticus requiring urgent management",
-   "Significant neuropsychiatric deterioration or behavioural crisis",
-   "Regression or unexpected rapid decline prompting reassessment",
-   "Suspected GHB intoxication needing differentiation from the inherited disorder"
-  ],
-  "prognosis": "The course is usually that of a static or slowly progressive encephalopathy with intellectual disability, language impairment, and variable epilepsy; many survive into adulthood. Outcome varies, and behavioural and psychiatric symptoms can be prominent later.",
-  "pitfalls": [
-   "Missing the diagnosis because 4-hydroxybutyrate is not reliably seen on routine organic acid analysis",
-   "Overlooking the characteristic MRI pattern",
-   "Confusing the biochemical finding with exogenous GHB exposure",
-   "Using antiepileptic agents without regard to the disturbed GABA metabolism"
-  ],
-  "references": [
-   "Scriver's OMMBID: succinic semialdehyde dehydrogenase deficiency and GABA metabolism",
-   "Nyhan, Atlas of Inherited Metabolic Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage epilepsy with antiepileptic drugs, avoiding valproate which may further inhibit residual enzyme activity",
-   "Consider cautious vigabatrin to lower gamma-hydroxybutyrate, balanced against its risk of visual field loss",
-   "Treat behavioural and psychiatric symptoms with appropriate psychotropic agents alongside behavioural support",
-   "Provide developmental support with physiotherapy, occupational therapy and speech and language therapy for delay, hypotonia and ataxia",
-   "Monitor with EEG for seizures and, when vigabatrin is used, regular ophthalmological visual field assessment",
-   "Offer genetic counselling and family testing given autosomal recessive inheritance of ALDH5A1 variants",
-   "Coordinate care through a metabolic medicine and neurology multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "succinic_semialdehyde_dehydrogenase_deficiency-pathway",
-   "title": "Succinic semialdehyde dehydrogenase deficiency (GABA metabolism): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deficiency of succinic semialdehyde dehydrogenase (ALDH5A1), the second enzyme of GABA degradation, so succinic semialdehyde is diverted to gamma-hydroxybutyric acid (GHB)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Worsening seizures or status epilepticus requiring urgent management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acids with specific detection of 4-hydroxybutyric acid (may be missed on standard screens), Quantification of gamma-hydroxybutyrate in plasma and CSF, Brain MRI for symmetric globus pallidus, subthalamic, and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage epilepsy with antiepileptic drugs, avoiding valproate which may further inhibit residual enzyme activity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis because 4-hydroxybutyrate is not reliably seen on routine organic acid analysis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of succinic semialdehyde dehydrogenase deficiency (gaba metabolism)."
-  }
- ],
- "tables": [
-  {
-   "id": "succinic_semialdehyde_dehydrogenase_deficiency-matrix",
-   "title": "Succinic semialdehyde dehydrogenase deficiency (GABA metabolism): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deficiency of succinic semialdehyde dehydrogenase (ALDH5A1), the second enzyme of GABA degradation, so succinic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deficiency of succinic semialdehyde dehydrogenase (ALDH5A1), the second enzyme of GABA degradation, so succinic semialdehyde is diverted to gamma-hydroxybutyric acid (GHB)",
+      "The diagnostic biochemical hallmark is accumulation of 4-hydroxybutyric acid (gamma-hydroxybutyrate) in urine, plasma, and CSF, which is not detected on routine organic acid screening unless specifically sought",
+      "Typical features are global developmental delay, prominent expressive language delay, hypotonia, ataxia, and behavioural/psychiatric problems, with epilepsy in many",
+      "Both GABA and GHB accumulate, and the balance of GABA-B and GHB receptor effects is thought to explain the mixed excitatory and sedative neurological picture",
+      "Brain MRI often shows a characteristic symmetric high T2 signal in the globus pallidus, subthalamic nuclei, and dentate nuclei",
+      "It is generally a slowly progressive or static encephalopathy rather than an acute metabolic crisis illness; management is supportive and antiepileptic, with vigabatrin used cautiously given theoretical benefit and risk",
+      "Inheritance is autosomal recessive",
+      "British spelling and paediatric context apply"
     ],
-    [
-     "Key Investigations",
-     "Urine organic acids with specific detection of 4-hydroxybutyric acid (may be missed on standard screens), Quantification of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The inhibitory neurotransmitter GABA is catabolised via GABA transaminase to succinic semialdehyde, which succinic semialdehyde dehydrogenase then oxidises to succinate for entry into the citric acid cycle. When this enzyme is deficient, succinic semialdehyde is instead reduced to gamma-hydroxybutyrate (GHB), which accumulates along with GABA in the brain and body fluids. GHB and elevated GABA act on GHB and GABA-B receptors, disturbing neurotransmission in ways that produce the developmental, motor, epileptic, and behavioural manifestations. The build-up of these neuroactive compounds, rather than an energy-failure crisis, characterises the disorder, giving a comparatively static or slowly evolving encephalopathy.",
+    "additionalDifferentials": [
+      "Other causes of global developmental delay with prominent language impairment",
+      "Autism spectrum disorder with regression",
+      "Other neurotransmitter metabolism disorders",
+      "Mitochondrial disorders with bilateral pallidal signal change",
+      "Other genetic epileptic encephalopathies",
+      "GHB ingestion or intoxication (acquired) as a mimic of the biochemistry"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of global developmental delay with prominent language impairment, Autism spectrum disorder with regression, Other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acids with specific detection of 4-hydroxybutyric acid (may be missed on standard screens)",
+      "Quantification of gamma-hydroxybutyrate in plasma and CSF",
+      "Brain MRI for symmetric globus pallidus, subthalamic, and dentate signal change",
+      "EEG in those with seizures",
+      "Enzyme activity assay in leucocytes or lymphocytes",
+      "Molecular analysis of the ALDH5A1 gene"
     ],
-    [
-     "Management Strategy",
-     "Manage epilepsy with antiepileptic drugs, avoiding valproate which may further inhibit residual enzyme activity",
-     "Core treatment modality"
+    "redFlags": [
+      "Worsening seizures or status epilepticus requiring urgent management",
+      "Significant neuropsychiatric deterioration or behavioural crisis",
+      "Regression or unexpected rapid decline prompting reassessment",
+      "Suspected GHB intoxication needing differentiation from the inherited disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis because 4-hydroxybutyrate is not reliably seen on routine organic acid analysis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is usually that of a static or slowly progressive encephalopathy with intellectual disability, language impairment, and variable epilepsy; many survive into adulthood. Outcome varies, and behavioural and psychiatric symptoms can be prominent later.",
+    "pitfalls": [
+      "Missing the diagnosis because 4-hydroxybutyrate is not reliably seen on routine organic acid analysis",
+      "Overlooking the characteristic MRI pattern",
+      "Confusing the biochemical finding with exogenous GHB exposure",
+      "Using antiepileptic agents without regard to the disturbed GABA metabolism"
+    ],
+    "references": [
+      "Scriver's OMMBID: succinic semialdehyde dehydrogenase deficiency and GABA metabolism",
+      "Nyhan, Atlas of Inherited Metabolic Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage epilepsy with antiepileptic drugs, avoiding valproate which may further inhibit residual enzyme activity",
+      "Consider cautious vigabatrin to lower gamma-hydroxybutyrate, balanced against its risk of visual field loss",
+      "Treat behavioural and psychiatric symptoms with appropriate psychotropic agents alongside behavioural support",
+      "Provide developmental support with physiotherapy, occupational therapy and speech and language therapy for delay, hypotonia and ataxia",
+      "Monitor with EEG for seizures and, when vigabatrin is used, regular ophthalmological visual field assessment",
+      "Offer genetic counselling and family testing given autosomal recessive inheritance of ALDH5A1 variants",
+      "Coordinate care through a metabolic medicine and neurology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for succinic semialdehyde dehydrogenase deficiency (gaba metabolism)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "succinic-semialdehyde-dehydrogenase-deficiency-real-image",
-   "title": "Succinic semialdehyde dehydrogenase deficiency (GABA metabolism): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "succinic_semialdehyde_dehydrogenase_deficiency-pathway",
+      "title": "Succinic semialdehyde dehydrogenase deficiency (GABA metabolism): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deficiency of succinic semialdehyde dehydrogenase (ALDH5A1), the second enzyme of GABA degradation, so succinic semialdehyde is diverted to gamma-hydroxybutyric acid (GHB)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Worsening seizures or status epilepticus requiring urgent management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acids with specific detection of 4-hydroxybutyric acid (may be missed on standard screens), Quantification of gamma-hydroxybutyrate in plasma and CSF, Brain MRI for symmetric globus pallidus, subthalamic, and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage epilepsy with antiepileptic drugs, avoiding valproate which may further inhibit residual enzyme activity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis because 4-hydroxybutyrate is not reliably seen on routine organic acid analysis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of succinic semialdehyde dehydrogenase deficiency (gaba metabolism)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "succinic_semialdehyde_dehydrogenase_deficiency-matrix",
+      "title": "Succinic semialdehyde dehydrogenase deficiency (GABA metabolism): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deficiency of succinic semialdehyde dehydrogenase (ALDH5A1), the second enzyme of GABA degradation, so succinic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acids with specific detection of 4-hydroxybutyric acid (may be missed on standard screens), Quantification of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of global developmental delay with prominent language impairment, Autism spectrum disorder with regression, Other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage epilepsy with antiepileptic drugs, avoiding valproate which may further inhibit residual enzyme activity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis because 4-hydroxybutyrate is not reliably seen on routine organic acid analysis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for succinic semialdehyde dehydrogenase deficiency (gaba metabolism)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "succinic_semialdehyde_dehydrogenase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids with specific 4-hydroxybutyric acid detection",
+          "cells": [
+            {
+              "text": "Missed on standard screens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantification of GHB in plasma and CSF",
+          "cells": [
+            {
+              "text": "Biochemical hallmark"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Symmetric pallidal, subthalamic and dentate high T2 signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALDH5A1 gene analysis",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "succinic_semialdehyde_dehydrogenase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autism spectrum disorder with regression",
+          "cells": [
+            {
+              "text": "Behavioural features without the biochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial disorders with bilateral pallidal change",
+          "cells": [
+            {
+              "text": "Pallidal signal change on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GHB ingestion or intoxication",
+          "cells": [
+            {
+              "text": "Acquired cause of the same biochemistry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "succinic_semialdehyde_dehydrogenase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiepileptic drugs",
+          "cells": [
+            {
+              "text": "Epilepsy management, avoiding valproate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious vigabatrin",
+          "cells": [
+            {
+              "text": "Lowers gamma-hydroxybutyrate; risk of visual field loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychotropic treatment",
+          "cells": [
+            {
+              "text": "Behavioural and psychiatric symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental therapy",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field monitoring",
+          "cells": [
+            {
+              "text": "When vigabatrin is used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and neurology team care",
+          "cells": [
+            {
+              "text": "Coordinated multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "succinic_semialdehyde_dehydrogenase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Succinic semialdehyde dehydrogenase deficiency (GABA metabolism)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Global delay, language impairment and ataxia with epilepsy: suspected SSADH deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (status epilepticus, neuropsychiatric crisis, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of status epilepticus or behavioural crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids for 4-hydroxybutyrate; GHB in plasma and CSF; MRI; ALDH5A1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is 4-hydroxybutyrate raised with the characteristic pallidal MRI pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider autism with regression, mitochondrial disease or GHB exposure; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiepileptic drugs, avoiding valproate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cautious vigabatrin to lower GHB, with visual field monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychotropic agents with behavioural support for psychiatric symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational and speech therapy for delay and ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually a slowly progressive or static encephalopathy; care is supportive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

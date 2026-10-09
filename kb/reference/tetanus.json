@@ -1,190 +1,669 @@
 {
- "id": "tetanus",
- "name": "Tetanus",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 157,
- "page": 1233,
- "aliases": [
-  "lockjaw"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1230-1233",
-  "clinicalPearls": [
-   "Trismus (lockjaw) is typically the earliest symptom, progressing to neck and trunk rigidity, dysphagia, and pharyngeal/laryngeal spasm; risus sardonicus and opisthotonos reflect the characteristic sustained muscle rigidity.",
-   "Generalized tetanus is the most common form, characterized by muscle rigidity with generalized spasms; localized tetanus affects only isolated muscle groups but can progress to the generalized form.",
-   "Cephalic tetanus is a localized form involving the cranial nerves, which can cause pharyngeal or laryngeal spasm leading to aspiration, airway obstruction, or respiratory failure.",
-   "Neonatal tetanus classically presents with loss of the ability to suck and cry (a newborn normal in the first 2 days who deteriorates between days 3 and 28), poor feeding, rigidity, and generalized spasms.",
-   "Laryngeal spasm causing apnea or respiratory failure is a life-threatening event and, without immediate respiratory support, is the most common cause of death.",
-   "Autonomic nervous system disturbance characteristically emerges in the second week of severe disease, with fluctuating heart rate and blood pressure, sweating, gastrointestinal stasis, and increased tracheal secretions; cardiovascular events then become the major threat.",
-   "Disease severity is graded with the Ablett classification (Grades I-IV), where Grade IV is Grade III plus autonomic dysfunction.",
-   "Abdominal rigidity in tetanus is characteristically continuous, distinguishing it from the rigidity of peritonitis or an acute abdomen.",
-   "Roughly 20-30% of cases have no identifiable entry wound; superficial limb abrasions are the most common portal of entry in adults, while deeper injuries (open fractures, drug injection) are linked to more severe disease.",
-   "Natural infection does not confer protective immunity because tetanus toxin is poorly immunogenic, so survivors still require a full primary immunization course."
+  "id": "tetanus",
+  "name": "Tetanus",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 157,
+  "page": 1233,
+  "aliases": [
+    "lockjaw"
   ],
-  "pathophysiology": "Tetanus is caused by tetanus toxin (tetanospasmin) produced by Clostridium tetani, an anaerobic, gram-positive, spore-forming rod whose resilient environmental spores enter through wounds, abrasions, or the umbilical stump and germinate in anaerobic tissue. Only toxin-producing organisms cause disease. The toxin is a 150-kDa protein cleaved into a heavy (100-kDa) and light (50-kDa) chain joined by a disulfide bond; the heavy-chain carboxy terminal binds presynaptic motor nerve terminals, leading to internalization and retrograde intra-axonal transport to motor nuclei of cranial nerves and spinal cord ventral horns. The toxin then crosses the synapse into GABA-ergic presynaptic inhibitory interneurons, where the light chain (a zinc-dependent endopeptidase) cleaves VAMP2 (synaptobrevin), blocking inhibitory neurotransmitter release. Loss of inhibition produces unregulated motor activity (muscle rigidity and spasms), and similar disinhibition in the autonomic system produces autonomic instability; elevated circulating catecholamines in severe disease drive cardiovascular complications.",
-  "additionalDifferentials": [
-   "Strychnine poisoning",
-   "Dystonic reactions to antidopaminergic (antidopaminergic drug) agents",
-   "Stiff person syndrome",
-   "Somatic symptom disorder",
-   "Hypocalcemia (in neonatal tetanus)",
-   "Meningoencephalitis (in neonatal tetanus)",
-   "Oropharyngeal, peritonsillar, or submaxillary infection / lymphadenitis and cranial nerve disease (mimics of cephalic tetanus / trismus)",
-   "Intracranial hemorrhage",
-   "Peritonitis or acute abdominal emergency (versus continuous abdominal rigidity of tetanus)"
-  ],
-  "infectionMimics": [
-   "Oropharyngeal infection",
-   "Peritonsillar infection",
-   "Submaxillary lymphadenitis",
-   "Meningoencephalitis"
-  ],
-  "nonInfectiousMimics": [
-   "Strychnine poisoning",
-   "Neuroleptic malignant syndrome",
-   "Dystonic reaction to antidopaminergic drugs",
-   "Stiff person syndrome",
-   "Somatic symptom disorder",
-   "Hypocalcemia",
-   "Intracranial hemorrhage"
-  ],
-  "additionalInvestigations": [
-   "Diagnosis is clinical; confirmatory laboratory testing is limited.",
-   "Wound culture of C. tetani cannot confirm the diagnosis (a positive culture is non-confirmatory).",
-   "Serum antitetanus IgG measured before antitoxin/immunoglobulin administration: levels >0.1 IU/mL (standard ELISA) are deemed protective and argue against tetanus.",
-   "Serum tetanus toxin bioassay may help if antibody is below the protective threshold, but a negative result does not exclude tetanus and the assay is not generally performed.",
-   "PCR and recombinase polymerase amplification to detect the tetanus neurotoxin gene are promising but emerging techniques."
-  ],
-  "redFlags": [
-   "Laryngeal spasm with apnea or respiratory failure - life-threatening and the most common cause of death.",
-   "Autonomic nervous system disturbance (labile heart rate and blood pressure, sweating, GI stasis, increased tracheal secretions), typically in the second week, marking high cardiovascular mortality risk.",
-   "Short incubation period (wound to first symptom) and short period of onset (first symptom to first generalized/pharyngeal/laryngeal spasm) - rapid progression predicts worse outcome.",
-   "Dysphagia with laryngeal hyperactivity, which makes airway management difficult and raises aspiration risk."
-  ],
-  "prognosis": "Tetanus has a high survival rate when complications are controlled and interventions are prompt, though recovery is prolonged, typically taking about 4-6 weeks. Rapid onset predicts more severe disease: the shorter the incubation period (wound to first symptom) and the period of onset (first symptom to first generalized or pharyngeal/laryngeal spasm), the worse the prognosis. The Tetanus Severity Score (TSS) outperforms the Dakar and Philips scores for predicting severity and outcome (sensitivity ~66%, specificity ~91%; a cutoff score of >=8 predicts death). Surviving adults, especially the elderly, may have reduced long-term functional outcomes, while affected children and neonates have a higher incidence of neurologic sequelae (neonates may face increased risk of learning disabilities, behavioral problems, cerebral palsy, and deafness).",
-  "pitfalls": [
-   "Diagnosis is clinical - waiting for laboratory confirmation is misguided; a positive wound culture does not confirm and a protective antitetanus IgG (>0.1 IU/mL) argues against the diagnosis.",
-   "Treatment should not be delayed once tetanus is clinically diagnosed.",
-   "Assuming natural infection confers immunity: tetanus toxin is poorly immunogenic, so survivors still require a full primary immunization course.",
-   "Overlooking absence of a wound: about 20-30% of cases have no identifiable entry site, so a negative wound history does not exclude tetanus.",
-   "Failure to identify and debride the entry wound (to remove anaerobic foci) can lead to recurrent or prolonged disease.",
-   "Long-term ICU care with deep sedation predisposes to hospital-acquired infections (ventilator-associated pneumonia, bloodstream and urinary tract infection, sepsis), venous thromboembolism, and other complications - prognosis depends on controlling these."
-  ],
-  "severityClassification": "Ablett classification of tetanus severity: Grade I (mild) - mild trismus, general spasticity, no respiratory compromise, no spasms, no dysphagia; Grade II (moderate) - moderate trismus and rigidity, short spasms, mild dysphagia, moderate respiratory involvement, respiratory rate >30/min; Grade III (severe) - severe trismus, generalized rigidity, prolonged spasms, severe dysphagia, apneic spells, pulse >120/min, respiratory rate >40/min; Grade IV (very severe) - Grade III features plus autonomic dysfunction. Prognostic scoring is provided by the Tetanus Severity Score (TSS), which is superior to the Dakar and Philips scores.",
-  "references": [
-   "Harrison 22e p.1230-1233",
-   "Harrison 22e p.1233"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Neutralise circulating unbound toxin promptly with human tetanus immunoglobulin",
-   "Eradicate the organism with wound debridement and antibiotic therapy, metronidazole being the preferred agent",
-   "Control muscle rigidity and spasms with benzodiazepine sedation and adjuncts such as magnesium sulphate and muscle relaxants",
-   "Secure the airway and provide mechanical ventilation, often with neuromuscular blockade, for laryngeal spasm and respiratory failure",
-   "Manage the autonomic instability of severe disease with magnesium, sedation and alpha- and beta-adrenergic blockade",
-   "Nurse in a quiet environment that minimises stimuli, with intensive supportive care including nutrition and thromboprophylaxis",
-   "Administer tetanus toxoid to actively immunise during recovery, since natural infection does not confer immunity, and complete the vaccination schedule",
-   "Reinforce prevention through vaccination and appropriate wound tetanus prophylaxis in the community"
-  ]
- },
- "algorithms": [
-  {
-   "id": "tetanus-pathway",
-   "title": "Tetanus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Trismus (lockjaw) is typically the earliest symptom, progressing to neck and trunk rigidity, dysphagia, and pharyngeal/laryngeal spasm; risus sardonicus and opisthotonos reflect the characteristic sustained muscle rigidity.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Laryngeal spasm with apnea or respiratory failure - life-threatening and the most common cause of death.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diagnosis is clinical; confirmatory laboratory testing is limited., Wound culture of C. tetani cannot confirm the diagnosis (a positive culture is non-confirmatory)., Serum antitetanus IgG measured before"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Neutralise circulating unbound toxin promptly with human tetanus immunoglobulin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosis is clinical - waiting for laboratory confirmation is misguided; a positive wound culture does not confirm and a protective antitetanus IgG (>0.1 IU/mL) argues against the diagnosis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tetanus."
-  }
- ],
- "tables": [
-  {
-   "id": "tetanus-matrix",
-   "title": "Tetanus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Trismus (lockjaw) is typically the earliest symptom, progressing to neck and trunk rigidity, dysphagia, and pharyngeal/laryngeal",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1230-1233",
+    "clinicalPearls": [
+      "Trismus (lockjaw) is typically the earliest symptom, progressing to neck and trunk rigidity, dysphagia, and pharyngeal/laryngeal spasm; risus sardonicus and opisthotonos reflect the characteristic sustained muscle rigidity.",
+      "Generalized tetanus is the most common form, characterized by muscle rigidity with generalized spasms; localized tetanus affects only isolated muscle groups but can progress to the generalized form.",
+      "Cephalic tetanus is a localized form involving the cranial nerves, which can cause pharyngeal or laryngeal spasm leading to aspiration, airway obstruction, or respiratory failure.",
+      "Neonatal tetanus classically presents with loss of the ability to suck and cry (a newborn normal in the first 2 days who deteriorates between days 3 and 28), poor feeding, rigidity, and generalized spasms.",
+      "Laryngeal spasm causing apnea or respiratory failure is a life-threatening event and, without immediate respiratory support, is the most common cause of death.",
+      "Autonomic nervous system disturbance characteristically emerges in the second week of severe disease, with fluctuating heart rate and blood pressure, sweating, gastrointestinal stasis, and increased tracheal secretions; cardiovascular events then become the major threat.",
+      "Disease severity is graded with the Ablett classification (Grades I-IV), where Grade IV is Grade III plus autonomic dysfunction.",
+      "Abdominal rigidity in tetanus is characteristically continuous, distinguishing it from the rigidity of peritonitis or an acute abdomen.",
+      "Roughly 20-30% of cases have no identifiable entry wound; superficial limb abrasions are the most common portal of entry in adults, while deeper injuries (open fractures, drug injection) are linked to more severe disease.",
+      "Natural infection does not confer protective immunity because tetanus toxin is poorly immunogenic, so survivors still require a full primary immunization course."
     ],
-    [
-     "Key Investigations",
-     "Diagnosis is clinical; confirmatory laboratory testing is limited., Wound culture of C. tetani cannot confirm the diagnosis (a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tetanus is caused by tetanus toxin (tetanospasmin) produced by Clostridium tetani, an anaerobic, gram-positive, spore-forming rod whose resilient environmental spores enter through wounds, abrasions, or the umbilical stump and germinate in anaerobic tissue. Only toxin-producing organisms cause disease. The toxin is a 150-kDa protein cleaved into a heavy (100-kDa) and light (50-kDa) chain joined by a disulfide bond; the heavy-chain carboxy terminal binds presynaptic motor nerve terminals, leading to internalization and retrograde intra-axonal transport to motor nuclei of cranial nerves and spinal cord ventral horns. The toxin then crosses the synapse into GABA-ergic presynaptic inhibitory interneurons, where the light chain (a zinc-dependent endopeptidase) cleaves VAMP2 (synaptobrevin), blocking inhibitory neurotransmitter release. Loss of inhibition produces unregulated motor activity (muscle rigidity and spasms), and similar disinhibition in the autonomic system produces autonomic instability; elevated circulating catecholamines in severe disease drive cardiovascular complications.",
+    "additionalDifferentials": [
+      "Strychnine poisoning",
+      "Dystonic reactions to antidopaminergic (antidopaminergic drug) agents",
+      "Stiff person syndrome",
+      "Somatic symptom disorder",
+      "Hypocalcemia (in neonatal tetanus)",
+      "Meningoencephalitis (in neonatal tetanus)",
+      "Oropharyngeal, peritonsillar, or submaxillary infection / lymphadenitis and cranial nerve disease (mimics of cephalic tetanus / trismus)",
+      "Intracranial hemorrhage",
+      "Peritonitis or acute abdominal emergency (versus continuous abdominal rigidity of tetanus)"
     ],
-    [
-     "Primary Differentials",
-     "Strychnine poisoning, Dystonic reactions to antidopaminergic (antidopaminergic drug) agents, Stiff person syndrome",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Oropharyngeal infection",
+      "Peritonsillar infection",
+      "Submaxillary lymphadenitis",
+      "Meningoencephalitis"
     ],
-    [
-     "Management Strategy",
-     "Neutralise circulating unbound toxin promptly with human tetanus immunoglobulin",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Strychnine poisoning",
+      "Neuroleptic malignant syndrome",
+      "Dystonic reaction to antidopaminergic drugs",
+      "Stiff person syndrome",
+      "Somatic symptom disorder",
+      "Hypocalcemia",
+      "Intracranial hemorrhage"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosis is clinical - waiting for laboratory confirmation is misguided; a positive wound culture does not confirm and a",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Diagnosis is clinical; confirmatory laboratory testing is limited.",
+      "Wound culture of C. tetani cannot confirm the diagnosis (a positive culture is non-confirmatory).",
+      "Serum antitetanus IgG measured before antitoxin/immunoglobulin administration: levels >0.1 IU/mL (standard ELISA) are deemed protective and argue against tetanus.",
+      "Serum tetanus toxin bioassay may help if antibody is below the protective threshold, but a negative result does not exclude tetanus and the assay is not generally performed.",
+      "PCR and recombinase polymerase amplification to detect the tetanus neurotoxin gene are promising but emerging techniques."
+    ],
+    "redFlags": [
+      "Laryngeal spasm with apnea or respiratory failure - life-threatening and the most common cause of death.",
+      "Autonomic nervous system disturbance (labile heart rate and blood pressure, sweating, GI stasis, increased tracheal secretions), typically in the second week, marking high cardiovascular mortality risk.",
+      "Short incubation period (wound to first symptom) and short period of onset (first symptom to first generalized/pharyngeal/laryngeal spasm) - rapid progression predicts worse outcome.",
+      "Dysphagia with laryngeal hyperactivity, which makes airway management difficult and raises aspiration risk."
+    ],
+    "prognosis": "Tetanus has a high survival rate when complications are controlled and interventions are prompt, though recovery is prolonged, typically taking about 4-6 weeks. Rapid onset predicts more severe disease: the shorter the incubation period (wound to first symptom) and the period of onset (first symptom to first generalized or pharyngeal/laryngeal spasm), the worse the prognosis. The Tetanus Severity Score (TSS) outperforms the Dakar and Philips scores for predicting severity and outcome (sensitivity ~66%, specificity ~91%; a cutoff score of >=8 predicts death). Surviving adults, especially the elderly, may have reduced long-term functional outcomes, while affected children and neonates have a higher incidence of neurologic sequelae (neonates may face increased risk of learning disabilities, behavioral problems, cerebral palsy, and deafness).",
+    "pitfalls": [
+      "Diagnosis is clinical - waiting for laboratory confirmation is misguided; a positive wound culture does not confirm and a protective antitetanus IgG (>0.1 IU/mL) argues against the diagnosis.",
+      "Treatment should not be delayed once tetanus is clinically diagnosed.",
+      "Assuming natural infection confers immunity: tetanus toxin is poorly immunogenic, so survivors still require a full primary immunization course.",
+      "Overlooking absence of a wound: about 20-30% of cases have no identifiable entry site, so a negative wound history does not exclude tetanus.",
+      "Failure to identify and debride the entry wound (to remove anaerobic foci) can lead to recurrent or prolonged disease.",
+      "Long-term ICU care with deep sedation predisposes to hospital-acquired infections (ventilator-associated pneumonia, bloodstream and urinary tract infection, sepsis), venous thromboembolism, and other complications - prognosis depends on controlling these."
+    ],
+    "severityClassification": "Ablett classification of tetanus severity: Grade I (mild) - mild trismus, general spasticity, no respiratory compromise, no spasms, no dysphagia; Grade II (moderate) - moderate trismus and rigidity, short spasms, mild dysphagia, moderate respiratory involvement, respiratory rate >30/min; Grade III (severe) - severe trismus, generalized rigidity, prolonged spasms, severe dysphagia, apneic spells, pulse >120/min, respiratory rate >40/min; Grade IV (very severe) - Grade III features plus autonomic dysfunction. Prognostic scoring is provided by the Tetanus Severity Score (TSS), which is superior to the Dakar and Philips scores.",
+    "references": [
+      "Harrison 22e p.1230-1233",
+      "Harrison 22e p.1233"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Neutralise circulating unbound toxin promptly with human tetanus immunoglobulin",
+      "Eradicate the organism with wound debridement and antibiotic therapy, metronidazole being the preferred agent",
+      "Control muscle rigidity and spasms with benzodiazepine sedation and adjuncts such as magnesium sulphate and muscle relaxants",
+      "Secure the airway and provide mechanical ventilation, often with neuromuscular blockade, for laryngeal spasm and respiratory failure",
+      "Manage the autonomic instability of severe disease with magnesium, sedation and alpha- and beta-adrenergic blockade",
+      "Nurse in a quiet environment that minimises stimuli, with intensive supportive care including nutrition and thromboprophylaxis",
+      "Administer tetanus toxoid to actively immunise during recovery, since natural infection does not confer immunity, and complete the vaccination schedule",
+      "Reinforce prevention through vaccination and appropriate wound tetanus prophylaxis in the community"
     ]
-   ],
-   "caption": "Overview comparison matrix for tetanus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tetanus-real-image",
-   "title": "Tetanus: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "tetanus-pathway",
+      "title": "Tetanus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Trismus (lockjaw) is typically the earliest symptom, progressing to neck and trunk rigidity, dysphagia, and pharyngeal/laryngeal spasm; risus sardonicus and opisthotonos reflect the characteristic sustained muscle rigidity.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Laryngeal spasm with apnea or respiratory failure - life-threatening and the most common cause of death.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diagnosis is clinical; confirmatory laboratory testing is limited., Wound culture of C. tetani cannot confirm the diagnosis (a positive culture is non-confirmatory)., Serum antitetanus IgG measured before"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Neutralise circulating unbound toxin promptly with human tetanus immunoglobulin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosis is clinical - waiting for laboratory confirmation is misguided; a positive wound culture does not confirm and a protective antitetanus IgG (>0.1 IU/mL) argues against the diagnosis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tetanus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tetanus-matrix",
+      "title": "Tetanus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Trismus (lockjaw) is typically the earliest symptom, progressing to neck and trunk rigidity, dysphagia, and pharyngeal/laryngeal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diagnosis is clinical; confirmatory laboratory testing is limited., Wound culture of C. tetani cannot confirm the diagnosis (a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Strychnine poisoning, Dystonic reactions to antidopaminergic (antidopaminergic drug) agents, Stiff person syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Neutralise circulating unbound toxin promptly with human tetanus immunoglobulin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosis is clinical - waiting for laboratory confirmation is misguided; a positive wound culture does not confirm and a",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tetanus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Tetanus",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/anaerobic-bacteria/tetanus"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tetanus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and grading tetanus",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical picture",
+          "cells": [
+            {
+              "text": "Trismus, rigidity, spasms with clear sensorium"
+            },
+            {
+              "text": "{{hy:Diagnosis is clinical; do not wait for tests}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in only about 30%",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Neither confirms nor excludes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-tetanus IgG before antitoxin",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "Over 0.1 IU/mL is protective",
+              "op": ">",
+              "value": 0.1
+            },
+            {
+              "text": "Argues against tetanus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No wound found",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20 to 30% of cases",
+              "range": [
+                20,
+                30
+              ]
+            },
+            {
+              "text": "Does not exclude tetanus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablett grade II (moderate)",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": "Short spasms, mild dysphagia, RR over 30/min",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "Moderate respiratory involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablett grade III (severe)",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": "Prolonged spasms, apnoeic spells, pulse over 120, RR over 40/min",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Severe dysphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablett grade IV",
+          "cells": [
+            {
+              "text": "Grade III plus autonomic dysfunction"
+            },
+            {
+              "text": "Highest cardiovascular mortality, usually week 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical forms",
+          "cells": [
+            {
+              "text": "Generalised, localised, cephalic (CN VII), neonatal"
+            },
+            {
+              "text": "Neonatal onset within 2 weeks with poor feeding"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "tetanus-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic tetanus",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningoencephalitis",
+          "cells": [
+            {
+              "text": "Altered sensorium, abnormal CSF"
+            },
+            {
+              "text": "Lumbar puncture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peritonsillar or retropharyngeal abscess",
+          "cells": [
+            {
+              "text": "Local cause of trismus"
+            },
+            {
+              "text": "Examination, CT neck"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug dystonia or neuroleptic malignant syndrome",
+          "cells": [
+            {
+              "text": "Phenothiazine or antidopaminergic exposure"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Strychnine poisoning",
+          "cells": [
+            {
+              "text": "Similar spasms"
+            },
+            {
+              "text": "Toxicology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stiff person syndrome",
+          "cells": [
+            {
+              "text": "Chronic progressive rigidity"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypocalcaemia (neonate)",
+          "cells": [
+            {
+              "text": "Tetany"
+            },
+            {
+              "text": "Serum calcium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tetanus-treatment",
+      "kind": "treatment",
+      "title": "Treating tetanus",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Human tetanus immunoglobulin",
+          "unit": "units",
+          "cells": [
+            {
+              "text": "All cases, at once"
+            },
+            {
+              "text": "500 units IM once (as good as 3000 to 6000 units)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wound debridement",
+          "cells": [
+            {
+              "text": "Any wound found"
+            },
+            {
+              "text": "More important than antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metronidazole",
+          "cells": [
+            {
+              "text": "All cases"
+            },
+            {
+              "text": "Preferred antibiotic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzodiazepine (diazepam, midazolam)",
+          "cells": [
+            {
+              "text": "Rigidity and spasms"
+            },
+            {
+              "text": "Midazolam for prolonged infusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Magnesium sulfate infusion",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "Spasms and autonomic instability"
+            },
+            {
+              "text": "Serum 4 to 8 mEq/L; watch patellar reflex"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intubation, vecuronium, ventilation",
+          "cells": [
+            {
+              "text": "Moderate to severe disease, laryngeal spasm"
+            },
+            {
+              "text": "{{hy:Respiratory failure is the commonest cause of death}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Esmolol, morphine infusion, atropine, clonidine",
+          "cells": [
+            {
+              "text": "Autonomic instability"
+            },
+            {
+              "text": "Avoid long-acting propranolol"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Full tetanus toxoid course",
+          "cells": [
+            {
+              "text": "After recovery"
+            },
+            {
+              "text": "Disease gives no immunity; separate site from TIG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wound prophylaxis: dirty wound, under 3 doses",
+          "cells": [
+            {
+              "text": "Unknown or under 3 toxoid doses"
+            },
+            {
+              "text": "Vaccine plus TIG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wound prophylaxis: 3 or more doses",
+          "cells": [
+            {
+              "text": "Booster if last dose 10 years ago (clean) or 5 years (dirty)"
+            },
+            {
+              "text": "TIG not needed unless immunodeficient"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tetanus-dx-mgmt",
+      "title": "Diagnosis and management of tetanus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Trismus, rigidity or spasms with clear mind, or tetanus-prone wound",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Clinical tetanus present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Under 3 toxoid doses or unknown?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Toxoid plus TIG if dirty wound; toxoid alone if clean",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Booster if 10 years (clean) or 5 years (dirty) since last dose",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "TIG 500 units IM, debride wound, metronidazole",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benzodiazepine sedation in quiet room; magnesium",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Laryngeal spasm or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intubate, ventilate, vecuronium",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Autonomic instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Esmolol, morphine, magnesium; then full vaccine course",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Supportive care; full vaccine course after recovery",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

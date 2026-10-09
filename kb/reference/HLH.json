@@ -1,183 +1,645 @@
 {
- "id": "HLH",
- "name": "Hemophagocytic Lymphohistiocytosis (HLH)",
- "system": "Hematology / Immunology",
- "class": "non_infective",
- "aliases": [
-  "HLH",
-  "Hemophagocytic syndrome",
-  "Haemophagocytic lymphohistiocytosis",
-  "Macrophage activation syndrome",
-  "MAS"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e — histiocytic / hemophagocytic syndromes",
-  "clinicalPearls": [
-   "HLH is a hyperinflammatory syndrome of uncontrolled immune activation: over-activated CD8 T cells and macrophages drive a cytokine storm and widespread hemophagocytosis (immune cells engulfing blood cells), producing fever, cytopenias and organ injury rather than effective clearance of the trigger.",
-   "Two broad forms exist — primary/familial HLH from inherited defects of lymphocyte cytotoxicity (e.g. perforin/PRF1, UNC13D), usually presenting in infants and children; and secondary/acquired HLH triggered by infection (classically EBV), malignancy (especially lymphoma), or autoimmune/autoinflammatory disease, where it is termed macrophage activation syndrome (MAS).",
-   "The clinical hallmark is persistent high fever that does NOT respond to antibiotics, with hepatosplenomegaly and progressive cytopenias affecting two or more lineages — a picture that closely mimics severe sepsis but fails to resolve with antimicrobials alone.",
-   "A markedly elevated serum ferritin is the most useful bedside clue: values in the tens of thousands are strongly suggestive in adults, and a rising ferritin with falling cell counts and falling fibrinogen should prompt urgent evaluation.",
-   "Diagnosis commonly uses the HLH-2004 framework (five or more of eight features): fever; splenomegaly; cytopenias in two or more lineages; hypertriglyceridemia and/or hypofibrinogenemia; hemophagocytosis on marrow, spleen or lymph node; low or absent NK-cell activity; ferritin at or above 500 micrograms/L; and elevated soluble CD25 (soluble IL-2 receptor). The H-score is an alternative probability tool for secondary HLH in adults."
+  "id": "HLH",
+  "name": "Hemophagocytic Lymphohistiocytosis (HLH)",
+  "system": "Hematology / Immunology",
+  "class": "non_infective",
+  "aliases": [
+    "HLH",
+    "Hemophagocytic syndrome",
+    "Haemophagocytic lymphohistiocytosis",
+    "Macrophage activation syndrome",
+    "MAS"
   ],
-  "pathophysiology": "Defective or overwhelmed cytotoxic lymphocyte function fails to clear antigen-presenting and infected cells, so antigen persists and continuously stimulates CD8+ T cells and macrophages. The result is unrestrained secretion of pro-inflammatory cytokines (notably interferon-gamma, IL-6, IL-10, TNF and IL-18) — a cytokine storm — that activates macrophages to phagocytose erythrocytes, leukocytes and platelets (hemophagocytosis) in the marrow and reticuloendothelial system. This drives the cardinal features: fever from systemic inflammation, cytopenias from marrow consumption and hemophagocytosis, hepatosplenomegaly and transaminitis from organ infiltration, hyperferritinemia and hypertriglyceridemia from macrophage activation, and hypofibrinogenemia with coagulopathy that can progress to disseminated intravascular coagulation and multi-organ failure.",
-  "additionalDifferentials": [
-   "Severe sepsis / septic shock — the principal mimic, with overlapping fever, cytopenias and organ dysfunction",
-   "Disseminated infection (EBV, CMV and other viruses; tuberculosis; visceral leishmaniasis; severe rickettsial disease)",
-   "Lymphoma and other haematological malignancies, which can both trigger and mimic HLH",
-   "Adult-onset Still's disease and systemic juvenile idiopathic arthritis complicated by macrophage activation syndrome",
-   "Thrombotic microangiopathy (TTP/HUS) and other causes of fever with cytopenias",
-   "Drug reaction with eosinophilia and systemic symptoms (DRESS)"
-  ],
-  "infectionMimics": [
-   "Severe sepsis / septic shock",
-   "Disseminated viral infection (EBV, CMV)",
-   "Visceral leishmaniasis",
-   "Miliary / disseminated tuberculosis",
-   "Severe rickettsial or scrub typhus infection"
-  ],
-  "nonInfectiousMimics": [
-   "Lymphoma / leukaemia",
-   "Adult-onset Still's disease / systemic JIA with macrophage activation syndrome",
-   "Thrombotic microangiopathy (TTP/HUS)",
-   "DRESS syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum ferritin — very high values (often above 10,000 micrograms/L in adults) are highly suggestive",
-   "Fasting triglycerides and fibrinogen (hypertriglyceridemia and/or hypofibrinogenemia)",
-   "Full blood count with film (bi- or tri-lineage cytopenias)",
-   "Soluble CD25 (soluble IL-2 receptor) and NK-cell activity where available",
-   "Bone marrow aspirate / biopsy for hemophagocytosis (may be absent early — a normal marrow does NOT exclude HLH)",
-   "Liver function tests and coagulation profile (transaminitis, coagulopathy / DIC)",
-   "Trigger work-up: EBV / CMV and other viral PCR, blood cultures, and evaluation for lymphoma and autoimmune disease",
-   "H-score calculation to estimate the probability of secondary HLH in adults"
-  ],
-  "redFlags": [
-   "Persistent high fever unresponsive to broad-spectrum antibiotics with worsening cytopenias",
-   "Extreme hyperferritinemia (tens of thousands) with falling fibrinogen — impending decompensation",
-   "Rapidly progressive multi-organ dysfunction, coagulopathy or DIC",
-   "Neurological involvement (seizures, altered sensorium) indicating CNS-HLH",
-   "Underlying lymphoma or EBV-driven disease, which carry high mortality and need urgent trigger-directed therapy"
-  ],
-  "pitfalls": [
-   "Anchoring on 'sepsis' and continuing antibiotics while HLH progresses — suspect HLH when a septic picture does not improve and the ferritin is very high.",
-   "Assuming a normal early bone marrow excludes HLH; hemophagocytosis can appear later, and the diagnosis is clinical plus biochemical, not marrow-dependent.",
-   "Treating the syndrome without an aggressive search for the trigger (infection, malignancy, autoimmune) — outcome depends on identifying and treating it.",
-   "Over-relying on a ferritin of 500 micrograms/L alone, which is not specific; it is the very high values and the overall pattern that matter."
-  ],
-  "prognosis": "Untreated HLH is frequently fatal. Outcome depends on prompt recognition, the underlying trigger (malignancy- and EBV-associated disease carry the worst prognosis), and timely trigger-directed and immunosuppressive therapy. Macrophage activation syndrome arising in rheumatic disease generally has a better prognosis when recognised and treated early.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — histiocytic / hemophagocytic syndromes",
-   "HLH-2004 diagnostic criteria (Histiocyte Society)",
-   "H-score for reactive haemophagocytic syndrome (Fardet et al., Arthritis Rheumatol 2014)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress the hyperinflammatory cytokine storm promptly with immunochemotherapy combining etoposide and dexamethasone, with ciclosporin, while identifying the trigger",
-   "Direct therapy at the underlying cause: rituximab for EBV-driven disease, treatment of the causative lymphoma or malignancy, or control of the underlying rheumatic disorder",
-   "For macrophage activation syndrome, use pulsed corticosteroids with anakinra (IL-1 blockade) and consider ciclosporin",
-   "Consider emapalumab (interferon-gamma blockade) for refractory or primary familial disease",
-   "Provide supportive care for cytopenias, coagulopathy and disseminated intravascular coagulation, plus prophylaxis and treatment of infection",
-   "Refer primary or familial HLH for allogeneic haematopoietic stem cell transplantation, the only curative option, and offer genetic counselling and family testing",
-   "Monitor ferritin, blood counts, fibrinogen and organ function, watch for CNS involvement, and escalate to intensive care for multi-organ failure"
-  ]
- },
- "algorithms": [
-  {
-   "id": "hlh-pathway",
-   "title": "Hemophagocytic Lymphohistiocytosis (HLH): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "HLH is a hyperinflammatory syndrome of uncontrolled immune activation: over-activated CD8 T cells and macrophages drive a cytokine storm and widespread hemophagocytosis (immune cells engulfing blood cells), producing fever, cytopenias and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent high fever unresponsive to broad-spectrum antibiotics with worsening cytopenias",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum ferritin - very high values (often above 10,000 micrograms/L in adults) are highly suggestive, Fasting triglycerides and fibrinogen (hypertriglyceridemia and/or hypofibrinogenemia), Full blood count with film (bi- or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress the hyperinflammatory cytokine storm promptly with immunochemotherapy combining etoposide and dexamethasone, with ciclosporin, while identifying the trigger"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Anchoring on 'sepsis' and continuing antibiotics while HLH progresses - suspect HLH when a septic picture does not improve and the ferritin is very high."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hemophagocytic lymphohistiocytosis (hlh)."
-  }
- ],
- "tables": [
-  {
-   "id": "hlh-matrix",
-   "title": "Hemophagocytic Lymphohistiocytosis (HLH): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "HLH is a hyperinflammatory syndrome of uncontrolled immune activation: over-activated CD8 T cells and macrophages drive a",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e — histiocytic / hemophagocytic syndromes",
+    "clinicalPearls": [
+      "HLH is a hyperinflammatory syndrome of uncontrolled immune activation: over-activated CD8 T cells and macrophages drive a cytokine storm and widespread hemophagocytosis (immune cells engulfing blood cells), producing fever, cytopenias and organ injury rather than effective clearance of the trigger.",
+      "Two broad forms exist — primary/familial HLH from inherited defects of lymphocyte cytotoxicity (e.g. perforin/PRF1, UNC13D), usually presenting in infants and children; and secondary/acquired HLH triggered by infection (classically EBV), malignancy (especially lymphoma), or autoimmune/autoinflammatory disease, where it is termed macrophage activation syndrome (MAS).",
+      "The clinical hallmark is persistent high fever that does NOT respond to antibiotics, with hepatosplenomegaly and progressive cytopenias affecting two or more lineages — a picture that closely mimics severe sepsis but fails to resolve with antimicrobials alone.",
+      "A markedly elevated serum ferritin is the most useful bedside clue: values in the tens of thousands are strongly suggestive in adults, and a rising ferritin with falling cell counts and falling fibrinogen should prompt urgent evaluation.",
+      "Diagnosis commonly uses the HLH-2004 framework (five or more of eight features): fever; splenomegaly; cytopenias in two or more lineages; hypertriglyceridemia and/or hypofibrinogenemia; hemophagocytosis on marrow, spleen or lymph node; low or absent NK-cell activity; ferritin at or above 500 micrograms/L; and elevated soluble CD25 (soluble IL-2 receptor). The H-score is an alternative probability tool for secondary HLH in adults."
     ],
-    [
-     "Key Investigations",
-     "Serum ferritin - very high values (often above 10,000 micrograms/L in adults) are highly suggestive, Fasting triglycerides and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Defective or overwhelmed cytotoxic lymphocyte function fails to clear antigen-presenting and infected cells, so antigen persists and continuously stimulates CD8+ T cells and macrophages. The result is unrestrained secretion of pro-inflammatory cytokines (notably interferon-gamma, IL-6, IL-10, TNF and IL-18) — a cytokine storm — that activates macrophages to phagocytose erythrocytes, leukocytes and platelets (hemophagocytosis) in the marrow and reticuloendothelial system. This drives the cardinal features: fever from systemic inflammation, cytopenias from marrow consumption and hemophagocytosis, hepatosplenomegaly and transaminitis from organ infiltration, hyperferritinemia and hypertriglyceridemia from macrophage activation, and hypofibrinogenemia with coagulopathy that can progress to disseminated intravascular coagulation and multi-organ failure.",
+    "additionalDifferentials": [
+      "Severe sepsis / septic shock — the principal mimic, with overlapping fever, cytopenias and organ dysfunction",
+      "Disseminated infection (EBV, CMV and other viruses; tuberculosis; visceral leishmaniasis; severe rickettsial disease)",
+      "Lymphoma and other haematological malignancies, which can both trigger and mimic HLH",
+      "Adult-onset Still's disease and systemic juvenile idiopathic arthritis complicated by macrophage activation syndrome",
+      "Thrombotic microangiopathy (TTP/HUS) and other causes of fever with cytopenias",
+      "Drug reaction with eosinophilia and systemic symptoms (DRESS)"
     ],
-    [
-     "Primary Differentials",
-     "Severe sepsis / septic shock - the principal mimic, with overlapping fever, cytopenias and organ dysfunction, Disseminated",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Severe sepsis / septic shock",
+      "Disseminated viral infection (EBV, CMV)",
+      "Visceral leishmaniasis",
+      "Miliary / disseminated tuberculosis",
+      "Severe rickettsial or scrub typhus infection"
     ],
-    [
-     "Management Strategy",
-     "Suppress the hyperinflammatory cytokine storm promptly with immunochemotherapy combining etoposide and dexamethasone, with",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Lymphoma / leukaemia",
+      "Adult-onset Still's disease / systemic JIA with macrophage activation syndrome",
+      "Thrombotic microangiopathy (TTP/HUS)",
+      "DRESS syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Anchoring on 'sepsis' and continuing antibiotics while HLH progresses - suspect HLH when a septic picture does not improve and",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Serum ferritin — very high values (often above 10,000 micrograms/L in adults) are highly suggestive",
+      "Fasting triglycerides and fibrinogen (hypertriglyceridemia and/or hypofibrinogenemia)",
+      "Full blood count with film (bi- or tri-lineage cytopenias)",
+      "Soluble CD25 (soluble IL-2 receptor) and NK-cell activity where available",
+      "Bone marrow aspirate / biopsy for hemophagocytosis (may be absent early — a normal marrow does NOT exclude HLH)",
+      "Liver function tests and coagulation profile (transaminitis, coagulopathy / DIC)",
+      "Trigger work-up: EBV / CMV and other viral PCR, blood cultures, and evaluation for lymphoma and autoimmune disease",
+      "H-score calculation to estimate the probability of secondary HLH in adults"
+    ],
+    "redFlags": [
+      "Persistent high fever unresponsive to broad-spectrum antibiotics with worsening cytopenias",
+      "Extreme hyperferritinemia (tens of thousands) with falling fibrinogen — impending decompensation",
+      "Rapidly progressive multi-organ dysfunction, coagulopathy or DIC",
+      "Neurological involvement (seizures, altered sensorium) indicating CNS-HLH",
+      "Underlying lymphoma or EBV-driven disease, which carry high mortality and need urgent trigger-directed therapy"
+    ],
+    "pitfalls": [
+      "Anchoring on 'sepsis' and continuing antibiotics while HLH progresses — suspect HLH when a septic picture does not improve and the ferritin is very high.",
+      "Assuming a normal early bone marrow excludes HLH; hemophagocytosis can appear later, and the diagnosis is clinical plus biochemical, not marrow-dependent.",
+      "Treating the syndrome without an aggressive search for the trigger (infection, malignancy, autoimmune) — outcome depends on identifying and treating it.",
+      "Over-relying on a ferritin of 500 micrograms/L alone, which is not specific; it is the very high values and the overall pattern that matter."
+    ],
+    "prognosis": "Untreated HLH is frequently fatal. Outcome depends on prompt recognition, the underlying trigger (malignancy- and EBV-associated disease carry the worst prognosis), and timely trigger-directed and immunosuppressive therapy. Macrophage activation syndrome arising in rheumatic disease generally has a better prognosis when recognised and treated early.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — histiocytic / hemophagocytic syndromes",
+      "HLH-2004 diagnostic criteria (Histiocyte Society)",
+      "H-score for reactive haemophagocytic syndrome (Fardet et al., Arthritis Rheumatol 2014)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress the hyperinflammatory cytokine storm promptly with immunochemotherapy combining etoposide and dexamethasone, with ciclosporin, while identifying the trigger",
+      "Direct therapy at the underlying cause: rituximab for EBV-driven disease, treatment of the causative lymphoma or malignancy, or control of the underlying rheumatic disorder",
+      "For macrophage activation syndrome, use pulsed corticosteroids with anakinra (IL-1 blockade) and consider ciclosporin",
+      "Consider emapalumab (interferon-gamma blockade) for refractory or primary familial disease",
+      "Provide supportive care for cytopenias, coagulopathy and disseminated intravascular coagulation, plus prophylaxis and treatment of infection",
+      "Refer primary or familial HLH for allogeneic haematopoietic stem cell transplantation, the only curative option, and offer genetic counselling and family testing",
+      "Monitor ferritin, blood counts, fibrinogen and organ function, watch for CNS involvement, and escalate to intensive care for multi-organ failure"
     ]
-   ],
-   "caption": "Overview comparison matrix for hemophagocytic lymphohistiocytosis (hlh)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hlh-real-image",
-   "title": "Hemophagocytic Lymphohistiocytosis (HLH): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "hlh-pathway",
+      "title": "Hemophagocytic Lymphohistiocytosis (HLH): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "HLH is a hyperinflammatory syndrome of uncontrolled immune activation: over-activated CD8 T cells and macrophages drive a cytokine storm and widespread hemophagocytosis (immune cells engulfing blood cells), producing fever, cytopenias and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent high fever unresponsive to broad-spectrum antibiotics with worsening cytopenias",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum ferritin - very high values (often above 10,000 micrograms/L in adults) are highly suggestive, Fasting triglycerides and fibrinogen (hypertriglyceridemia and/or hypofibrinogenemia), Full blood count with film (bi- or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress the hyperinflammatory cytokine storm promptly with immunochemotherapy combining etoposide and dexamethasone, with ciclosporin, while identifying the trigger"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Anchoring on 'sepsis' and continuing antibiotics while HLH progresses - suspect HLH when a septic picture does not improve and the ferritin is very high."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hemophagocytic lymphohistiocytosis (hlh)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hlh-matrix",
+      "title": "Hemophagocytic Lymphohistiocytosis (HLH): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "HLH is a hyperinflammatory syndrome of uncontrolled immune activation: over-activated CD8 T cells and macrophages drive a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum ferritin - very high values (often above 10,000 micrograms/L in adults) are highly suggestive, Fasting triglycerides and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Severe sepsis / septic shock - the principal mimic, with overlapping fever, cytopenias and organ dysfunction, Disseminated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress the hyperinflammatory cytokine storm promptly with immunochemotherapy combining etoposide and dexamethasone, with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Anchoring on 'sepsis' and continuing antibiotics while HLH progresses - suspect HLH when a septic picture does not improve and",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hemophagocytic lymphohistiocytosis (hlh)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hemophagocytic Lymphohistiocytosis",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/histiocytic-syndromes/hemophagocytic-lymphohistiocytosis-hlh",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Multicenter validation of secondary HLH diagnostic criteria, 2025",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11846073/fullTextXML",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "HLH-diagnostic",
+      "kind": "diagnostic",
+      "title": "HLH-2004 diagnostic criteria",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rule",
+          "cells": [
+            {
+              "text": "HLH gene mutation, or 5 of the 8 criteria below"
+            },
+            {
+              "text": "{{hy:Start treatment on suspicion, before all criteria are met}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fever",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Peak above 38.5 for more than 7 days",
+              "op": ">",
+              "value": 38.5
+            },
+            {
+              "text": "Persistent fever"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Splenomegaly",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Palpable more than 3 below costal margin",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "On examination"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cytopenias (2 or more lines)",
+          "cells": [
+            {
+              "text": "Hb below 9 g/dL; platelets below 100,000/uL; neutrophils low"
+            },
+            {
+              "text": "Neutrophil cut-off printed by source as 100/uL; check primary source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Triglycerides or fibrinogen",
+          "cells": [
+            {
+              "text": "Fasting TG above 177 mg/dL (2.0 mmol/L) or fibrinogen below 150 mg/dL (1.5 g/L)"
+            },
+            {
+              "text": "Either counts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haemophagocytosis",
+          "cells": [
+            {
+              "text": "In marrow, spleen or lymph node"
+            },
+            {
+              "text": "Not required on its own"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NK cell activity",
+          "cells": [
+            {
+              "text": "Low or absent"
+            },
+            {
+              "text": "Specialist test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ferritin",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Above 500",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "94% sensitive at 500 ug/L or more in secondary HLH"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Soluble CD25 (sIL-2R)",
+          "unit": "U/mL",
+          "cells": [
+            {
+              "text": "Above 2400",
+              "op": ">",
+              "value": 2400
+            },
+            {
+              "text": "Or very high for age"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary HLH in adults",
+          "cells": [
+            {
+              "text": "4 of 8 HLH-2004 criteria, or HScore 169 or more"
+            },
+            {
+              "text": "Sensitivity 86.5% and 82.4%; specificity 86.1% and 87.6%"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Merck lists the neutrophil threshold as below 100/uL (0.10 x 10^9/L) and gives ferritin with an inconsistent conversion; both should be checked against the original HLH-2004 publication."
+    },
+    {
+      "id": "HLH-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis and triggers of HLH",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sepsis or septic shock",
+          "cells": [
+            {
+              "text": "{{hy:Main mimic; ferritin and sCD25 far higher in HLH}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EBV, CMV and other infections",
+          "cells": [
+            {
+              "text": "Both trigger and mimic; viral PCR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphoma and leukaemia",
+          "cells": [
+            {
+              "text": "Both trigger and mimic; marrow or node biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adult-onset Still disease with MAS",
+          "cells": [
+            {
+              "text": "Rash, arthritis, rheumatic background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visceral leishmaniasis",
+          "cells": [
+            {
+              "text": "Endemic exposure; parasites in marrow"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Thrombotic microangiopathy",
+          "cells": [
+            {
+              "text": "Schistocytes, low ADAMTS13 in TTP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DRESS",
+          "cells": [
+            {
+              "text": "Drug exposure, eosinophilia, rash"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "HLH-treatment",
+      "kind": "treatment",
+      "title": "Treatment of HLH",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Etoposide with dexamethasone",
+          "cells": [
+            {
+              "text": "{{hy:Standard immunochemotherapy (HLH-2004)}}"
+            },
+            {
+              "text": "Often with ciclosporin; no doses in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat the trigger",
+          "cells": [
+            {
+              "text": "All secondary HLH"
+            },
+            {
+              "text": "Rituximab for EBV, lymphoma therapy, control rheumatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse steroids with anakinra",
+          "cells": [
+            {
+              "text": "Macrophage activation syndrome, some secondary HLH"
+            },
+            {
+              "text": "May avoid intensive chemotherapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Emapalumab",
+          "cells": [
+            {
+              "text": "Refractory, recurrent or progressive HLH, or intolerance"
+            },
+            {
+              "text": "Interferon gamma antibody"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ruxolitinib",
+          "cells": [
+            {
+              "text": "Under study for upfront treatment"
+            },
+            {
+              "text": "JAK inhibitor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplant",
+          "cells": [
+            {
+              "text": "Primary or familial HLH, refractory disease"
+            },
+            {
+              "text": "Only curative option for familial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Cytopenias, DIC, infection"
+            },
+            {
+              "text": "Monitor ferritin, counts, fibrinogen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "HLH-dx-mgmt",
+      "title": "Diagnosis and management of HLH",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent fever, cytopenias, splenomegaly, very high ferritin",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Triglycerides, fibrinogen, sCD25, marrow, EBV/CMV PCR, cultures",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Meets HLH-2004 (5 of 8) or HScore 169 or more?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Suspicion still high?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Pursue sepsis, malignancy or other diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Search for trigger: infection, lymphoma, rheumatic disease",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Rheumatic MAS?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pulse steroids with anakinra; consider ciclosporin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Etoposide and dexamethasone; treat trigger",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Refractory or familial?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Emapalumab and allogeneic stem cell transplant",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue therapy; monitor ferritin and counts",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

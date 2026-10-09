@@ -1,173 +1,478 @@
 {
- "id": "median_nail_dystrophy",
- "name": "Median canaliform nail dystrophy",
- "aliases": [
-  "median canaliform dystrophy of Heller",
-  "dystrophia unguis mediana canaliformis",
-  "median nail dystrophy"
- ],
- "class": "non_infective",
- "system": "Dermatology / Nail",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Median canaliform dystrophy shows a longitudinal split or canal running down the centre of the nail, most often the thumb",
-   "Fine ridges angle outwards from the central groove towards the sides, producing the classic inverted fir-tree or Christmas-tree pattern",
-   "An enlarged lunula is a frequently associated feature",
-   "It commonly affects both thumbs symmetrically and can wax and wane over time",
-   "Repetitive trauma or pressure on the proximal nail fold is thought to contribute, and it overlaps clinically with habit-tic deformity",
-   "It is a benign condition, and the diagnosis is usually made clinically from the characteristic pattern",
-   "Management is conservative, centring on avoiding trauma and protecting the nail, as many cases improve spontaneously though relapse is common"
+  "id": "median_nail_dystrophy",
+  "name": "Median canaliform nail dystrophy",
+  "aliases": [
+    "median canaliform dystrophy of Heller",
+    "dystrophia unguis mediana canaliformis",
+    "median nail dystrophy"
   ],
-  "pathophysiology": "Median canaliform dystrophy is thought to arise from a temporary defect in nail formation at the centre of the matrix, producing a longitudinal split or canal down the middle of the plate with oblique ridges branching towards the edges. The cause is not fully understood, but repetitive trauma or pressure transmitted to the proximal nail matrix is considered an important contributor, which is why it overlaps with self-induced habit-tic deformity. Because the matrix is disturbed rather than destroyed, the change is generally reversible and can fluctuate, with the nail capable of recovering a normal surface once any trauma ceases.",
-  "additionalDifferentials": [
-   "Habit-tic nail deformity",
-   "Myxoid (mucous) cyst producing a longitudinal groove",
-   "Nail changes of lichen planus",
-   "Traumatic nail splitting",
-   "Onychotillomania and other self-induced dystrophies",
-   "Congenital or hereditary nail canal variants"
-  ],
-  "additionalInvestigations": [
-   "Clinical recognition of the central canal with the inverted fir-tree ridge pattern",
-   "History for repetitive trauma, pressure, or manipulation of the nail fold",
-   "Examination of the proximal nail fold and lunula",
-   "Onychoscopy to define the ridging pattern",
-   "Assessment to exclude a proximal myxoid cyst causing a groove",
-   "Photographic follow-up to monitor the characteristic fluctuation"
-  ],
-  "redFlags": [
-   "A persistent groove localised to one nail with a swelling over the proximal fold suggesting a myxoid cyst",
-   "Features of scarring nail disease such as lichen planus that require specific treatment",
-   "Atypical or destructive change inconsistent with a benign central dystrophy",
-   "Evidence of significant self-injurious behaviour requiring psychological support"
-  ],
-  "prognosis": "Median canaliform dystrophy is benign and often improves spontaneously, particularly when trauma is avoided, but it characteristically fluctuates and may recur, and complete permanent resolution cannot be guaranteed.",
-  "pitfalls": [
-   "Confusing it with a myxoid cyst, which needs different management of the underlying cyst",
-   "Overlooking a contributory habit or repetitive trauma",
-   "Over-treating a benign, self-limiting condition",
-   "Assuming permanent cure when the course is typically relapsing and remitting"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Baran and Dawber's Diseases of the Nails and their Management"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the patient that the condition is benign and often reverses once the underlying cause is removed",
-   "Identify and stop repetitive trauma, pressure or manipulation of the proximal nail fold, including habit-tic behaviour",
-   "Habit-reversal behavioural measures, with an occlusive dressing or tape over the nail fold to interrupt picking",
-   "Emollients and protective nail care to shield the matrix and nail plate",
-   "Consider a trial of topical calcineurin inhibitor (tacrolimus) or intralesional corticosteroid around the proximal fold in persistent cases",
-   "Exclude a proximal myxoid cyst as a treatable cause of a longitudinal groove",
-   "Photographic follow-up to track the characteristic fluctuation and confirm recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "median_nail_dystrophy-pathway",
-   "title": "Median canaliform nail dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Median canaliform dystrophy shows a longitudinal split or canal running down the centre of the nail, most often the thumb",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A persistent groove localised to one nail with a swelling over the proximal fold suggesting a myxoid cyst",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical recognition of the central canal with the inverted fir-tree ridge pattern, History for repetitive trauma, pressure, or manipulation of the nail fold, Examination of the proximal nail fold and lunula"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the patient that the condition is benign and often reverses once the underlying cause is removed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with a myxoid cyst, which needs different management of the underlying cyst"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of median canaliform nail dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "median_nail_dystrophy-matrix",
-   "title": "Median canaliform nail dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Median canaliform dystrophy shows a longitudinal split or canal running down the centre of the nail, most often the thumb",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Nail",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Median canaliform dystrophy shows a longitudinal split or canal running down the centre of the nail, most often the thumb",
+      "Fine ridges angle outwards from the central groove towards the sides, producing the classic inverted fir-tree or Christmas-tree pattern",
+      "An enlarged lunula is a frequently associated feature",
+      "It commonly affects both thumbs symmetrically and can wax and wane over time",
+      "Repetitive trauma or pressure on the proximal nail fold is thought to contribute, and it overlaps clinically with habit-tic deformity",
+      "It is a benign condition, and the diagnosis is usually made clinically from the characteristic pattern",
+      "Management is conservative, centring on avoiding trauma and protecting the nail, as many cases improve spontaneously though relapse is common"
     ],
-    [
-     "Key Investigations",
-     "Clinical recognition of the central canal with the inverted fir-tree ridge pattern, History for repetitive trauma, pressure, or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Median canaliform dystrophy is thought to arise from a temporary defect in nail formation at the centre of the matrix, producing a longitudinal split or canal down the middle of the plate with oblique ridges branching towards the edges. The cause is not fully understood, but repetitive trauma or pressure transmitted to the proximal nail matrix is considered an important contributor, which is why it overlaps with self-induced habit-tic deformity. Because the matrix is disturbed rather than destroyed, the change is generally reversible and can fluctuate, with the nail capable of recovering a normal surface once any trauma ceases.",
+    "additionalDifferentials": [
+      "Habit-tic nail deformity",
+      "Myxoid (mucous) cyst producing a longitudinal groove",
+      "Nail changes of lichen planus",
+      "Traumatic nail splitting",
+      "Onychotillomania and other self-induced dystrophies",
+      "Congenital or hereditary nail canal variants"
     ],
-    [
-     "Primary Differentials",
-     "Habit-tic nail deformity, Myxoid (mucous) cyst producing a longitudinal groove, Nail changes of lichen planus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical recognition of the central canal with the inverted fir-tree ridge pattern",
+      "History for repetitive trauma, pressure, or manipulation of the nail fold",
+      "Examination of the proximal nail fold and lunula",
+      "Onychoscopy to define the ridging pattern",
+      "Assessment to exclude a proximal myxoid cyst causing a groove",
+      "Photographic follow-up to monitor the characteristic fluctuation"
     ],
-    [
-     "Management Strategy",
-     "Reassure the patient that the condition is benign and often reverses once the underlying cause is removed",
-     "Core treatment modality"
+    "redFlags": [
+      "A persistent groove localised to one nail with a swelling over the proximal fold suggesting a myxoid cyst",
+      "Features of scarring nail disease such as lichen planus that require specific treatment",
+      "Atypical or destructive change inconsistent with a benign central dystrophy",
+      "Evidence of significant self-injurious behaviour requiring psychological support"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with a myxoid cyst, which needs different management of the underlying cyst",
-     "Prevent diagnostic or management error"
+    "prognosis": "Median canaliform dystrophy is benign and often improves spontaneously, particularly when trauma is avoided, but it characteristically fluctuates and may recur, and complete permanent resolution cannot be guaranteed.",
+    "pitfalls": [
+      "Confusing it with a myxoid cyst, which needs different management of the underlying cyst",
+      "Overlooking a contributory habit or repetitive trauma",
+      "Over-treating a benign, self-limiting condition",
+      "Assuming permanent cure when the course is typically relapsing and remitting"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Baran and Dawber's Diseases of the Nails and their Management"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the patient that the condition is benign and often reverses once the underlying cause is removed",
+      "Identify and stop repetitive trauma, pressure or manipulation of the proximal nail fold, including habit-tic behaviour",
+      "Habit-reversal behavioural measures, with an occlusive dressing or tape over the nail fold to interrupt picking",
+      "Emollients and protective nail care to shield the matrix and nail plate",
+      "Consider a trial of topical calcineurin inhibitor (tacrolimus) or intralesional corticosteroid around the proximal fold in persistent cases",
+      "Exclude a proximal myxoid cyst as a treatable cause of a longitudinal groove",
+      "Photographic follow-up to track the characteristic fluctuation and confirm recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for median canaliform nail dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "median-nail-dystrophy-real-image",
-   "title": "Median canaliform nail dystrophy: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "median_nail_dystrophy-pathway",
+      "title": "Median canaliform nail dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Median canaliform dystrophy shows a longitudinal split or canal running down the centre of the nail, most often the thumb",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A persistent groove localised to one nail with a swelling over the proximal fold suggesting a myxoid cyst",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical recognition of the central canal with the inverted fir-tree ridge pattern, History for repetitive trauma, pressure, or manipulation of the nail fold, Examination of the proximal nail fold and lunula"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the patient that the condition is benign and often reverses once the underlying cause is removed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with a myxoid cyst, which needs different management of the underlying cyst"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of median canaliform nail dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "median_nail_dystrophy-matrix",
+      "title": "Median canaliform nail dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Median canaliform dystrophy shows a longitudinal split or canal running down the centre of the nail, most often the thumb",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical recognition of the central canal with the inverted fir-tree ridge pattern, History for repetitive trauma, pressure, or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Habit-tic nail deformity, Myxoid (mucous) cyst producing a longitudinal groove, Nail changes of lichen planus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the patient that the condition is benign and often reverses once the underlying cause is removed",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with a myxoid cyst, which needs different management of the underlying cyst",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for median canaliform nail dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "median_nail_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical recognition of the central canal",
+          "cells": [
+            {
+              "text": "Inverted fir-tree ridge pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History for repetitive trauma, pressure or manipulation",
+          "cells": [
+            {
+              "text": "Repetitive trauma, pressure or manipulation of the nail fold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the proximal nail fold and lunula",
+          "cells": [
+            {
+              "text": "Proximal nail fold and lunula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Onychoscopy",
+          "cells": [
+            {
+              "text": "Ridging pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment to exclude a proximal myxoid cyst",
+          "cells": [
+            {
+              "text": "Myxoid cyst causing a groove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic follow-up",
+          "cells": [
+            {
+              "text": "Characteristic fluctuation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "median_nail_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Habit-tic nail deformity",
+          "cells": [
+            {
+              "text": "Repetitive picking; habit-tic behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myxoid (mucous) cyst producing a longitudinal groove",
+          "cells": [
+            {
+              "text": "Persistent groove with a swelling over the proximal fold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail changes of lichen planus",
+          "cells": [
+            {
+              "text": "Scarring nail disease that requires specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Onychotillomania and other self-induced dystrophies",
+          "cells": [
+            {
+              "text": "Significant self-injurious behaviour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "median_nail_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign; often reverses once the underlying cause is removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop repetitive trauma",
+          "cells": [
+            {
+              "text": "Pressure or manipulation of the proximal nail fold, including habit-tic behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Habit-reversal measures",
+          "cells": [
+            {
+              "text": "Occlusive dressing or tape over the nail fold to interrupt picking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and protective nail care",
+          "cells": [
+            {
+              "text": "Shield the matrix and nail plate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or intralesional treatment",
+          "cells": [
+            {
+              "text": "Tacrolimus or intralesional corticosteroid around the proximal fold in persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude myxoid cyst",
+          "cells": [
+            {
+              "text": "A treatable cause of a longitudinal groove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic follow-up",
+          "cells": [
+            {
+              "text": "Track the characteristic fluctuation and confirm recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "median_nail_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Median canaliform nail dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Central longitudinal nail groove with an inverted fir-tree ridge pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Groove with a proximal swelling, scarring nail disease or self-injurious behaviour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat the scarring disease or cyst; provide psychological support for self-injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical and onychoscopic review of the proximal nail fold and lunula; trauma history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a proximal myxoid cyst excluded on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the myxoid cyst as the cause of the groove; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure the patient that the condition is benign and often reverses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop repetitive trauma, pressure or manipulation of the proximal nail fold",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Occlusive dressing or tape over the nail fold to interrupt picking",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical tacrolimus or intralesional corticosteroid in persistent cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Photographic follow-up to confirm the fluctuation and recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

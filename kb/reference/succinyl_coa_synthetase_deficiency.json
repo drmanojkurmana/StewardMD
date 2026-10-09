@@ -1,178 +1,483 @@
 {
- "id": "succinyl_coa_synthetase_deficiency",
- "name": "Succinyl-CoA synthetase deficiency",
- "aliases": [
-  "SUCLA2 deficiency",
-  "SUCLG1 deficiency",
-  "Succinate-CoA ligase deficiency",
-  "mtDNA depletion syndrome with methylmalonic aciduria"
- ],
- "class": "non_infective",
- "system": "Metabolic / Neurology",
- "specialty": "Mitochondrial medicine / Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mitochondrial medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A deficiency of the tricarboxylic-acid-cycle enzyme succinyl-CoA synthetase (succinate-CoA ligase) arising from variants in SUCLA2 (a beta subunit) or SUCLG1 (the alpha subunit); it behaves as a mitochondrial DNA depletion syndrome.",
-   "SUCLA2 disease is an encephalomyopathic mtDNA depletion syndrome that typically begins in infancy with hypotonia, muscle atrophy, dystonia or another movement disorder, sensorineural hearing loss and feeding difficulty.",
-   "SUCLG1 disease tends to be more severe and earlier in onset — the alpha subunit is shared by both the ATP- and GTP-forming isoenzymes — often with fatal neonatal lactic acidosis and sometimes hepatic involvement.",
-   "A characteristic biochemical clue is mild-to-moderate methylmalonic aciduria with raised methylcitrate, plus elevated succinylcarnitine (a C4-dicarboxylylcarnitine) on the acylcarnitine profile, which helps separate it from classical methylmalonic acidaemia.",
-   "Lactic acidosis and Leigh-like basal ganglia signal change on MRI are common findings.",
-   "Depletion of mitochondrial DNA is demonstrable in skeletal muscle.",
-   "The methylmalonic aciduria is not cobalamin-responsive, distinguishing it from vitamin B12 (cobalamin) metabolic disorders.",
-   "Management is supportive and multidisciplinary; no curative therapy is available."
+  "id": "succinyl_coa_synthetase_deficiency",
+  "name": "Succinyl-CoA synthetase deficiency",
+  "aliases": [
+    "SUCLA2 deficiency",
+    "SUCLG1 deficiency",
+    "Succinate-CoA ligase deficiency",
+    "mtDNA depletion syndrome with methylmalonic aciduria"
   ],
-  "pathophysiology": "Succinyl-CoA synthetase (succinate-CoA ligase) is a tricarboxylic-acid-cycle enzyme that reversibly converts succinyl-CoA to succinate with substrate-level phosphorylation of ADP or GDP. Its alpha subunit, encoded by SUCLG1, partners either with the ATP-forming beta subunit encoded by SUCLA2 or with the GTP-forming beta subunit encoded by SUCLG2, so loss of the shared alpha subunit tends to be more severe than loss of a single beta subunit. The enzyme associates with mitochondrial nucleoside diphosphate kinase to maintain the matrix nucleotide pool needed for mtDNA replication, and deficiency therefore causes mitochondrial DNA depletion with multiple respiratory-chain enzyme deficiencies. Reduced succinyl-CoA turnover shifts the methylmalonyl-CoA to succinyl-CoA equilibrium, producing the characteristic mild methylmalonic aciduria, raised methylcitrate and elevated succinylcarnitine. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Classical methylmalonic acidaemia (MUT and cobalamin defects) — with much higher methylmalonic acid and cobalamin-responsive forms",
-   "Other mtDNA depletion syndromes (POLG, DGUOK, MPV17, TK2, RRM2B)",
-   "Leigh syndrome of other genetic cause",
-   "Combined oxidative phosphorylation deficiencies",
-   "Primary lactic acidosis of other mitochondrial aetiology",
-   "The sibling genotype (SUCLA2 versus SUCLG1), which differ in severity and organ involvement"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acids showing mild methylmalonic aciduria and raised methylcitrate",
-   "Plasma acylcarnitines demonstrating elevated succinylcarnitine (C4-dicarboxylylcarnitine)",
-   "Blood and CSF lactate",
-   "Brain MRI for basal ganglia and Leigh-like changes",
-   "Muscle biopsy with mtDNA quantification and respiratory-chain enzymology",
-   "SUCLA2 and SUCLG1 sequencing or a mitochondrial gene panel",
-   "Audiological assessment for sensorineural hearing loss"
-  ],
-  "redFlags": [
-   "Neonatal lactic acidosis with rapid deterioration, which favours SUCLG1 disease",
-   "Progressive dystonia, hypotonia and loss of milestones in infancy",
-   "New or evolving basal ganglia signal change on MRI",
-   "Sensorineural hearing loss accompanying a movement disorder"
-  ],
-  "prognosis": "The condition is serious: SUCLG1 disease is frequently fatal in the neonatal period or infancy, whereas SUCLA2 disease often allows survival into childhood or beyond, albeit with significant disability.",
-  "pitfalls": [
-   "Misreading the mild methylmalonic aciduria as classical methylmalonic acidaemia and giving cobalamin, which is ineffective here.",
-   "Missing the diagnosis when the acylcarnitine profile, and specifically succinylcarnitine, is not scrutinised.",
-   "Attributing the lactic acidosis solely to acute intercurrent illness.",
-   "Failing to quantify mitochondrial DNA in muscle when a depletion syndrome is suspected."
-  ],
-  "references": [
-   "Mitochondrial disease reference texts",
-   "Inherited metabolic disease review literature",
-   "mtDNA depletion syndrome clinical guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive mitochondrial care, as no disease-modifying therapy exists for this mtDNA depletion syndrome",
-   "Manage lactic acidosis with fluids and buffering during metabolic decompensation and minimise catabolic stress",
-   "Ensure nutritional support with nasogastric or gastrostomy feeding for feeding difficulty and poor growth",
-   "Treat dystonia and movement disorder with appropriate agents alongside physiotherapy, occupational and speech therapy",
-   "Rehabilitate sensorineural hearing loss with hearing aids or cochlear implantation",
-   "Avoid mitochondrial toxins such as sodium valproate and aminoglycosides, and a cofactor supplement regimen may be trialled",
-   "Offer genetic counselling and family testing for autosomal recessive SUCLA2 or SUCLG1 variants, with monitoring of development, hearing and neuroimaging",
-   "Coordinate multidisciplinary care through metabolic and mitochondrial medicine specialists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "succinyl_coa_synthetase_deficiency-pathway",
-   "title": "Succinyl-CoA synthetase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A deficiency of the tricarboxylic-acid-cycle enzyme succinyl-CoA synthetase (succinate-CoA ligase) arising from variants in SUCLA2 (a beta subunit) or SUCLG1 (the alpha subunit); it behaves as a mitochondrial DNA depletion syndrome.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal lactic acidosis with rapid deterioration, which favours SUCLG1 disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acids showing mild methylmalonic aciduria and raised methylcitrate, Plasma acylcarnitines demonstrating elevated succinylcarnitine (C4-dicarboxylylcarnitine), Blood and CSF lactate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive mitochondrial care, as no disease-modifying therapy exists for this mtDNA depletion syndrome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misreading the mild methylmalonic aciduria as classical methylmalonic acidaemia and giving cobalamin, which is ineffective here."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of succinyl-coa synthetase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "succinyl_coa_synthetase_deficiency-matrix",
-   "title": "Succinyl-CoA synthetase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A deficiency of the tricarboxylic-acid-cycle enzyme succinyl-CoA synthetase (succinate-CoA ligase) arising from variants in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Neurology",
+  "specialty": "Mitochondrial medicine / Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mitochondrial medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A deficiency of the tricarboxylic-acid-cycle enzyme succinyl-CoA synthetase (succinate-CoA ligase) arising from variants in SUCLA2 (a beta subunit) or SUCLG1 (the alpha subunit); it behaves as a mitochondrial DNA depletion syndrome.",
+      "SUCLA2 disease is an encephalomyopathic mtDNA depletion syndrome that typically begins in infancy with hypotonia, muscle atrophy, dystonia or another movement disorder, sensorineural hearing loss and feeding difficulty.",
+      "SUCLG1 disease tends to be more severe and earlier in onset — the alpha subunit is shared by both the ATP- and GTP-forming isoenzymes — often with fatal neonatal lactic acidosis and sometimes hepatic involvement.",
+      "A characteristic biochemical clue is mild-to-moderate methylmalonic aciduria with raised methylcitrate, plus elevated succinylcarnitine (a C4-dicarboxylylcarnitine) on the acylcarnitine profile, which helps separate it from classical methylmalonic acidaemia.",
+      "Lactic acidosis and Leigh-like basal ganglia signal change on MRI are common findings.",
+      "Depletion of mitochondrial DNA is demonstrable in skeletal muscle.",
+      "The methylmalonic aciduria is not cobalamin-responsive, distinguishing it from vitamin B12 (cobalamin) metabolic disorders.",
+      "Management is supportive and multidisciplinary; no curative therapy is available."
     ],
-    [
-     "Key Investigations",
-     "Urine organic acids showing mild methylmalonic aciduria and raised methylcitrate, Plasma acylcarnitines demonstrating elevated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Succinyl-CoA synthetase (succinate-CoA ligase) is a tricarboxylic-acid-cycle enzyme that reversibly converts succinyl-CoA to succinate with substrate-level phosphorylation of ADP or GDP. Its alpha subunit, encoded by SUCLG1, partners either with the ATP-forming beta subunit encoded by SUCLA2 or with the GTP-forming beta subunit encoded by SUCLG2, so loss of the shared alpha subunit tends to be more severe than loss of a single beta subunit. The enzyme associates with mitochondrial nucleoside diphosphate kinase to maintain the matrix nucleotide pool needed for mtDNA replication, and deficiency therefore causes mitochondrial DNA depletion with multiple respiratory-chain enzyme deficiencies. Reduced succinyl-CoA turnover shifts the methylmalonyl-CoA to succinyl-CoA equilibrium, producing the characteristic mild methylmalonic aciduria, raised methylcitrate and elevated succinylcarnitine. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Classical methylmalonic acidaemia (MUT and cobalamin defects) — with much higher methylmalonic acid and cobalamin-responsive forms",
+      "Other mtDNA depletion syndromes (POLG, DGUOK, MPV17, TK2, RRM2B)",
+      "Leigh syndrome of other genetic cause",
+      "Combined oxidative phosphorylation deficiencies",
+      "Primary lactic acidosis of other mitochondrial aetiology",
+      "The sibling genotype (SUCLA2 versus SUCLG1), which differ in severity and organ involvement"
     ],
-    [
-     "Primary Differentials",
-     "Classical methylmalonic acidaemia (MUT and cobalamin defects) - with much higher methylmalonic acid and cobalamin-responsive",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acids showing mild methylmalonic aciduria and raised methylcitrate",
+      "Plasma acylcarnitines demonstrating elevated succinylcarnitine (C4-dicarboxylylcarnitine)",
+      "Blood and CSF lactate",
+      "Brain MRI for basal ganglia and Leigh-like changes",
+      "Muscle biopsy with mtDNA quantification and respiratory-chain enzymology",
+      "SUCLA2 and SUCLG1 sequencing or a mitochondrial gene panel",
+      "Audiological assessment for sensorineural hearing loss"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive mitochondrial care, as no disease-modifying therapy exists for this mtDNA depletion syndrome",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal lactic acidosis with rapid deterioration, which favours SUCLG1 disease",
+      "Progressive dystonia, hypotonia and loss of milestones in infancy",
+      "New or evolving basal ganglia signal change on MRI",
+      "Sensorineural hearing loss accompanying a movement disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Misreading the mild methylmalonic aciduria as classical methylmalonic acidaemia and giving cobalamin, which is ineffective here.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is serious: SUCLG1 disease is frequently fatal in the neonatal period or infancy, whereas SUCLA2 disease often allows survival into childhood or beyond, albeit with significant disability.",
+    "pitfalls": [
+      "Misreading the mild methylmalonic aciduria as classical methylmalonic acidaemia and giving cobalamin, which is ineffective here.",
+      "Missing the diagnosis when the acylcarnitine profile, and specifically succinylcarnitine, is not scrutinised.",
+      "Attributing the lactic acidosis solely to acute intercurrent illness.",
+      "Failing to quantify mitochondrial DNA in muscle when a depletion syndrome is suspected."
+    ],
+    "references": [
+      "Mitochondrial disease reference texts",
+      "Inherited metabolic disease review literature",
+      "mtDNA depletion syndrome clinical guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive mitochondrial care, as no disease-modifying therapy exists for this mtDNA depletion syndrome",
+      "Manage lactic acidosis with fluids and buffering during metabolic decompensation and minimise catabolic stress",
+      "Ensure nutritional support with nasogastric or gastrostomy feeding for feeding difficulty and poor growth",
+      "Treat dystonia and movement disorder with appropriate agents alongside physiotherapy, occupational and speech therapy",
+      "Rehabilitate sensorineural hearing loss with hearing aids or cochlear implantation",
+      "Avoid mitochondrial toxins such as sodium valproate and aminoglycosides, and a cofactor supplement regimen may be trialled",
+      "Offer genetic counselling and family testing for autosomal recessive SUCLA2 or SUCLG1 variants, with monitoring of development, hearing and neuroimaging",
+      "Coordinate multidisciplinary care through metabolic and mitochondrial medicine specialists"
     ]
-   ],
-   "caption": "Overview comparison matrix for succinyl-coa synthetase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "succinyl-coa-synthetase-deficiency-real-image",
-   "title": "Succinyl-CoA synthetase deficiency: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "succinyl_coa_synthetase_deficiency-pathway",
+      "title": "Succinyl-CoA synthetase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A deficiency of the tricarboxylic-acid-cycle enzyme succinyl-CoA synthetase (succinate-CoA ligase) arising from variants in SUCLA2 (a beta subunit) or SUCLG1 (the alpha subunit); it behaves as a mitochondrial DNA depletion syndrome.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal lactic acidosis with rapid deterioration, which favours SUCLG1 disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acids showing mild methylmalonic aciduria and raised methylcitrate, Plasma acylcarnitines demonstrating elevated succinylcarnitine (C4-dicarboxylylcarnitine), Blood and CSF lactate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive mitochondrial care, as no disease-modifying therapy exists for this mtDNA depletion syndrome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misreading the mild methylmalonic aciduria as classical methylmalonic acidaemia and giving cobalamin, which is ineffective here."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of succinyl-coa synthetase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "succinyl_coa_synthetase_deficiency-matrix",
+      "title": "Succinyl-CoA synthetase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A deficiency of the tricarboxylic-acid-cycle enzyme succinyl-CoA synthetase (succinate-CoA ligase) arising from variants in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acids showing mild methylmalonic aciduria and raised methylcitrate, Plasma acylcarnitines demonstrating elevated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classical methylmalonic acidaemia (MUT and cobalamin defects) - with much higher methylmalonic acid and cobalamin-responsive",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive mitochondrial care, as no disease-modifying therapy exists for this mtDNA depletion syndrome",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misreading the mild methylmalonic aciduria as classical methylmalonic acidaemia and giving cobalamin, which is ineffective here.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for succinyl-coa synthetase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mitochondrial medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "succinyl_coa_synthetase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Mild methylmalonic aciduria with raised methylcitrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitines",
+          "cells": [
+            {
+              "text": "Elevated succinylcarnitine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and CSF lactate",
+          "cells": [
+            {
+              "text": "Lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Basal ganglia and Leigh-like change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with mtDNA quantification",
+          "cells": [
+            {
+              "text": "mtDNA depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SUCLA2 and SUCLG1 sequencing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "succinyl_coa_synthetase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classical methylmalonic acidaemia",
+          "cells": [
+            {
+              "text": "Much higher methylmalonic acid; cobalamin-responsive forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other mtDNA depletion syndromes",
+          "cells": [
+            {
+              "text": "POLG, DGUOK, MPV17, TK2 and RRM2B"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leigh syndrome of other genetic cause",
+          "cells": [
+            {
+              "text": "Basal ganglia change without this biochemistry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "succinyl_coa_synthetase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive mitochondrial care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluids and buffering",
+          "cells": [
+            {
+              "text": "Lactic acidosis during decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystonia and movement disorder treatment",
+          "cells": [
+            {
+              "text": "With physiotherapy, occupational and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids or cochlear implantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of valproate and aminoglycosides",
+          "cells": [
+            {
+              "text": "Mitochondrial toxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive SUCLA2 or SUCLG1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "succinyl_coa_synthetase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Succinyl-CoA synthetase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant hypotonia, dystonia and lactic acidosis: suspected SUCLA2 or SUCLG1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal lactic acidosis, rapid decline, new basal ganglia change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic care for lactic acidosis during decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids; acylcarnitines for succinylcarnitine; lactate; MRI; muscle mtDNA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are succinylcarnitine and methylcitrate raised with mtDNA depletion in muscle?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider classical methylmalonic acidaemia or another mtDNA syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive mitochondrial care as no curative therapy exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fluids and buffering during metabolic decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nasogastric or gastrostomy feeding for feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treatment of dystonia with physiotherapy and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on the subunit; SUCLG1 disease is typically more severe and earlier",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

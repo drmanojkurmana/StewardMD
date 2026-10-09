@@ -1,174 +1,443 @@
 {
- "id": "pilar_cyst",
- "name": "pilar cyst",
- "aliases": [
-  "trichilemmal cyst",
-  "isthmus-catagen cyst",
-  "wen"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as a smooth, firm, mobile subcutaneous nodule, with the great majority occurring on the scalp.",
-   "Unlike epidermoid cysts, pilar cysts lack a central punctum and characteristically shell out cleanly and intact at surgery.",
-   "They are frequently multiple and show an autosomal dominant inheritance pattern in many affected families.",
-   "The lining shows trichilemmal keratinisation without a granular layer, abruptly producing dense homogeneous keratin, often with calcification.",
-   "Overlying hair may be thinned or lost due to pressure, but the lesions themselves are asymptomatic unless inflamed or ruptured.",
-   "A proliferating trichilemmal tumour can arise within a long-standing cyst, presenting as a rapidly enlarging exophytic scalp mass.",
-   "Complete excision with the intact capsule is curative and technically easier than for epidermoid cysts.",
-   "Rarely, malignant proliferating trichilemmal tumours occur and may recur locally or metastasise, warranting histological review of atypical lesions."
+  "id": "pilar_cyst",
+  "name": "pilar cyst",
+  "aliases": [
+    "trichilemmal cyst",
+    "isthmus-catagen cyst",
+    "wen"
   ],
-  "pathophysiology": "Pilar cysts derive from the outer root sheath of the hair follicle at the level of the isthmus, and the lining epithelium undergoes trichilemmal keratinisation in which cells enlarge and keratinise abruptly without forming a granular layer. The cavity fills with compact, homogeneous keratin that frequently calcifies. A hereditary autosomal dominant tendency underlies the common multiplicity and scalp predilection, and clonal proliferation of the cyst lining can give rise to a proliferating trichilemmal tumour. Malignant change is rare but recognised, characterised by cytological atypia, infiltrative growth and occasionally metastatic potential.",
-  "additionalDifferentials": [
-   "epidermoid cyst",
-   "lipoma",
-   "proliferating trichilemmal tumour",
-   "dermoid cyst",
-   "cylindroma",
-   "scalp metastasis or adnexal tumour",
-   "osteoma cutis"
-  ],
-  "additionalInvestigations": [
-   "clinical examination noting absence of a punctum",
-   "ultrasonography showing a well-defined cystic scalp lesion, sometimes with calcification",
-   "histopathology confirming trichilemmal keratinisation without a granular layer",
-   "imaging and wide histological sampling if a proliferating trichilemmal tumour is suspected",
-   "family history assessment given autosomal dominant inheritance"
-  ],
-  "redFlags": [
-   "rapid enlargement or exophytic ulcerated growth suggesting a proliferating or malignant trichilemmal tumour",
-   "fixation to deeper tissues or irregular infiltrative margins",
-   "recurrence after apparently complete excision",
-   "a solitary firm scalp nodule with atypical features that could represent metastasis"
-  ],
-  "prognosis": "Pilar cysts are benign and excision of the intact capsule is curative with a low recurrence rate. Proliferating trichilemmal tumours are usually benign but may recur locally, and the rare malignant variant can metastasise.",
-  "pitfalls": [
-   "Assuming a rapidly growing scalp cyst is simply inflamed and missing a proliferating or malignant trichilemmal tumour.",
-   "Confusing a pilar cyst with an epidermoid cyst and expecting a punctum that is absent.",
-   "Rupturing the fragile capsule during excision, complicating complete removal.",
-   "Failing to submit an atypical or recurrent lesion for histopathology."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "Weedon's Skin Pathology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe and reassure for asymptomatic lesions, as pilar cysts are benign",
-   "Offer complete surgical excision of the intact capsule, which shells out cleanly and is curative with a low recurrence rate",
-   "For an inflamed or ruptured cyst, drain and treat secondary infection, deferring definitive excision until inflammation settles",
-   "Send excised tissue for histopathology to confirm trichilemmal keratinisation and exclude a proliferating trichilemmal tumour",
-   "Perform wide excision with careful histological sampling when a rapidly enlarging exophytic mass raises concern for a proliferating or malignant trichilemmal tumour",
-   "Take a family history given the autosomal dominant tendency to multiple scalp cysts"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pilar_cyst-pathway",
-   "title": "pilar cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as a smooth, firm, mobile subcutaneous nodule, with the great majority occurring on the scalp.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rapid enlargement or exophytic ulcerated growth suggesting a proliferating or malignant trichilemmal tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: clinical examination noting absence of a punctum, ultrasonography showing a well-defined cystic scalp lesion, sometimes with calcification, histopathology confirming trichilemmal keratinisation without a granular layer"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe and reassure for asymptomatic lesions, as pilar cysts are benign"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a rapidly growing scalp cyst is simply inflamed and missing a proliferating or malignant trichilemmal tumour."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pilar cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "pilar_cyst-matrix",
-   "title": "pilar cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as a smooth, firm, mobile subcutaneous nodule, with the great majority occurring on the scalp.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as a smooth, firm, mobile subcutaneous nodule, with the great majority occurring on the scalp.",
+      "Unlike epidermoid cysts, pilar cysts lack a central punctum and characteristically shell out cleanly and intact at surgery.",
+      "They are frequently multiple and show an autosomal dominant inheritance pattern in many affected families.",
+      "The lining shows trichilemmal keratinisation without a granular layer, abruptly producing dense homogeneous keratin, often with calcification.",
+      "Overlying hair may be thinned or lost due to pressure, but the lesions themselves are asymptomatic unless inflamed or ruptured.",
+      "A proliferating trichilemmal tumour can arise within a long-standing cyst, presenting as a rapidly enlarging exophytic scalp mass.",
+      "Complete excision with the intact capsule is curative and technically easier than for epidermoid cysts.",
+      "Rarely, malignant proliferating trichilemmal tumours occur and may recur locally or metastasise, warranting histological review of atypical lesions."
     ],
-    [
-     "Key Investigations",
-     "clinical examination noting absence of a punctum, ultrasonography showing a well-defined cystic scalp lesion, sometimes with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pilar cysts derive from the outer root sheath of the hair follicle at the level of the isthmus, and the lining epithelium undergoes trichilemmal keratinisation in which cells enlarge and keratinise abruptly without forming a granular layer. The cavity fills with compact, homogeneous keratin that frequently calcifies. A hereditary autosomal dominant tendency underlies the common multiplicity and scalp predilection, and clonal proliferation of the cyst lining can give rise to a proliferating trichilemmal tumour. Malignant change is rare but recognised, characterised by cytological atypia, infiltrative growth and occasionally metastatic potential.",
+    "additionalDifferentials": [
+      "epidermoid cyst",
+      "lipoma",
+      "proliferating trichilemmal tumour",
+      "dermoid cyst",
+      "cylindroma",
+      "scalp metastasis or adnexal tumour",
+      "osteoma cutis"
     ],
-    [
-     "Primary Differentials",
-     "epidermoid cyst, lipoma, proliferating trichilemmal tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "clinical examination noting absence of a punctum",
+      "ultrasonography showing a well-defined cystic scalp lesion, sometimes with calcification",
+      "histopathology confirming trichilemmal keratinisation without a granular layer",
+      "imaging and wide histological sampling if a proliferating trichilemmal tumour is suspected",
+      "family history assessment given autosomal dominant inheritance"
     ],
-    [
-     "Management Strategy",
-     "Observe and reassure for asymptomatic lesions, as pilar cysts are benign",
-     "Core treatment modality"
+    "redFlags": [
+      "rapid enlargement or exophytic ulcerated growth suggesting a proliferating or malignant trichilemmal tumour",
+      "fixation to deeper tissues or irregular infiltrative margins",
+      "recurrence after apparently complete excision",
+      "a solitary firm scalp nodule with atypical features that could represent metastasis"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a rapidly growing scalp cyst is simply inflamed and missing a proliferating or malignant trichilemmal tumour.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pilar cysts are benign and excision of the intact capsule is curative with a low recurrence rate. Proliferating trichilemmal tumours are usually benign but may recur locally, and the rare malignant variant can metastasise.",
+    "pitfalls": [
+      "Assuming a rapidly growing scalp cyst is simply inflamed and missing a proliferating or malignant trichilemmal tumour.",
+      "Confusing a pilar cyst with an epidermoid cyst and expecting a punctum that is absent.",
+      "Rupturing the fragile capsule during excision, complicating complete removal.",
+      "Failing to submit an atypical or recurrent lesion for histopathology."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "Weedon's Skin Pathology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe and reassure for asymptomatic lesions, as pilar cysts are benign",
+      "Offer complete surgical excision of the intact capsule, which shells out cleanly and is curative with a low recurrence rate",
+      "For an inflamed or ruptured cyst, drain and treat secondary infection, deferring definitive excision until inflammation settles",
+      "Send excised tissue for histopathology to confirm trichilemmal keratinisation and exclude a proliferating trichilemmal tumour",
+      "Perform wide excision with careful histological sampling when a rapidly enlarging exophytic mass raises concern for a proliferating or malignant trichilemmal tumour",
+      "Take a family history given the autosomal dominant tendency to multiple scalp cysts"
     ]
-   ],
-   "caption": "Overview comparison matrix for pilar cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pilar-cyst-real-image",
-   "title": "pilar cyst: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pilar_cyst-pathway",
+      "title": "pilar cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as a smooth, firm, mobile subcutaneous nodule, with the great majority occurring on the scalp.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rapid enlargement or exophytic ulcerated growth suggesting a proliferating or malignant trichilemmal tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: clinical examination noting absence of a punctum, ultrasonography showing a well-defined cystic scalp lesion, sometimes with calcification, histopathology confirming trichilemmal keratinisation without a granular layer"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe and reassure for asymptomatic lesions, as pilar cysts are benign"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a rapidly growing scalp cyst is simply inflamed and missing a proliferating or malignant trichilemmal tumour."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pilar cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pilar_cyst-matrix",
+      "title": "pilar cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as a smooth, firm, mobile subcutaneous nodule, with the great majority occurring on the scalp.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "clinical examination noting absence of a punctum, ultrasonography showing a well-defined cystic scalp lesion, sometimes with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "epidermoid cyst, lipoma, proliferating trichilemmal tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe and reassure for asymptomatic lesions, as pilar cysts are benign",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a rapidly growing scalp cyst is simply inflamed and missing a proliferating or malignant trichilemmal tumour.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pilar cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pilar_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Absence of a punctum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasonography",
+          "cells": [
+            {
+              "text": "Well-defined cystic scalp lesion, sometimes calcified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Trichilemmal keratinisation without a granular layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging and wide histological sampling",
+          "cells": [
+            {
+              "text": "Proliferating trichilemmal tumour, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Autosomal dominant tendency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pilar_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Proliferating trichilemmal tumour",
+          "cells": [
+            {
+              "text": "Rapid enlargement or exophytic, ulcerated growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp metastasis or adnexal tumour",
+          "cells": [
+            {
+              "text": "Solitary firm nodule with atypical features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pilar_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic lesions, as pilar cysts are benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete excision",
+          "cells": [
+            {
+              "text": "Excision of the intact capsule, which is curative with low recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflamed or ruptured cyst",
+          "cells": [
+            {
+              "text": "Drain and treat secondary infection; excise definitively once inflammation settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Confirms trichilemmal keratinisation and excludes proliferating tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide excision",
+          "cells": [
+            {
+              "text": "For a rapidly enlarging exophytic mass suspected to be a proliferating trichilemmal tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Autosomal dominant tendency to multiple scalp cysts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pilar_cyst-dx-mgmt",
+      "title": "Diagnosis and management of pilar cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm, mobile scalp cyst without a punctum",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid enlargement, ulceration, fixation, recurrence after excision)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Wide excision with histology for a proliferating or malignant trichilemmal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination for punctum; ultrasound; family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ultrasound show a well-defined cyst with no atypical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider proliferating trichilemmal tumour, scalp metastasis or adnexal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe and reassure asymptomatic lesions, as pilar cysts are benign",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Complete excision of the intact capsule, which is curative with low recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drain an inflamed or ruptured cyst and treat infection; excise once settled",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Send excised tissue for histopathology to confirm trichilemmal keratinisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; excision of the intact capsule is curative; a rare malignant variant exists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

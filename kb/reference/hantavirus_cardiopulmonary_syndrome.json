@@ -1,177 +1,666 @@
 {
- "id": "hantavirus_cardiopulmonary_syndrome",
- "name": "Hantavirus cardiopulmonary syndrome",
- "aliases": [
-  "hantavirus pulmonary syndrome",
-  "HPS",
-  "HCPS",
-  "Sin Nombre virus infection",
-  "New World hantavirus infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC Yellow Book",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by New World hantaviruses (notably Sin Nombre virus in North America and Andes virus in South America) acquired by inhaling aerosolised rodent excreta, classically from deer mice in rural or peridomestic settings",
-   "A febrile prodrome of fever, myalgia, headache, and gastrointestinal upset lasting several days is followed by an abrupt cardiopulmonary phase with cough, dyspnoea, and rapidly progressive non-cardiogenic pulmonary oedema",
-   "The cardiopulmonary phase reflects a capillary-leak process; hypotension and myocardial depression producing cardiogenic shock carry the highest mortality",
-   "A characteristic haematological triad supports the diagnosis: thrombocytopenia, left-shifted leucocytosis, and circulating immunoblasts (atypical lymphocytes), often with haemoconcentration",
-   "Andes virus is distinctive among hantaviruses for documented person-to-person transmission, so respiratory precautions and contact tracing may be warranted in South American cases",
-   "Care is intensive and supportive with no licensed specific antiviral; early transfer to a centre with extracorporeal membrane oxygenation capability improves survival in refractory cardiogenic shock",
-   "Diagnosis rests on serology (IgM/IgG) and RT-PCR, and a compatible rodent-exposure history in an endemic region should prompt early consideration"
+  "id": "hantavirus_cardiopulmonary_syndrome",
+  "name": "Hantavirus cardiopulmonary syndrome",
+  "aliases": [
+    "hantavirus pulmonary syndrome",
+    "HPS",
+    "HCPS",
+    "Sin Nombre virus infection",
+    "New World hantavirus infection"
   ],
-  "pathophysiology": "Infection follows inhalation of virus shed in the urine, droppings, or saliva of chronically infected rodent reservoirs. The virus targets pulmonary microvascular endothelial cells, and a vigorous host immune response, rather than direct cytopathic injury, increases vascular permeability. The resulting capillary leak floods the alveoli with protein-rich fluid, producing non-cardiogenic pulmonary oedema, while myocardial dysfunction and reduced cardiac output drive shock. The interplay of profound capillary leak and cardiac depression defines the severe cardiopulmonary phase.",
-  "additionalDifferentials": [
-   "Community-acquired pneumonia with acute respiratory distress syndrome",
-   "Influenza and other severe viral respiratory infections",
-   "Bacterial sepsis with septic shock",
-   "Leptospirosis with pulmonary haemorrhage",
-   "Acute cardiogenic pulmonary oedema from primary cardiac disease",
-   "Plague or other zoonoses with a rodent-exposure history"
-  ],
-  "additionalInvestigations": [
-   "Hantavirus-specific serology for IgM and IgG antibodies",
-   "RT-PCR on blood for viral RNA in the early phase",
-   "Full blood count and film looking for thrombocytopenia, left shift, and immunoblasts",
-   "Chest radiograph and arterial blood gas to characterise bilateral interstitial and alveolar oedema and hypoxaemia",
-   "Echocardiography and cardiac biomarkers to assess myocardial depression and guide haemodynamic support",
-   "Lactate and metabolic panel to gauge shock severity"
-  ],
-  "redFlags": [
-   "Rapid progression from prodrome to breathlessness and hypoxaemia over hours",
-   "Hypotension with rising lactate signalling impending cardiogenic shock",
-   "Haemoconcentration with worsening thrombocytopenia indicating severe capillary leak",
-   "Need for high fractional inspired oxygen or mechanical ventilation",
-   "Refractory shock potentially requiring extracorporeal membrane oxygenation"
-  ],
-  "prognosis": "The cardiopulmonary phase can be fulminant and case fatality is high in New World hantavirus disease. Patients who survive the first few critical days typically improve rapidly with resolution of the capillary leak and often recover without long-term pulmonary sequelae.",
-  "pitfalls": [
-   "Attributing the prodrome to a self-limiting viral illness and discharging before the cardiopulmonary phase declares itself",
-   "Administering large-volume fluid resuscitation, which can worsen pulmonary oedema in a capillary-leak state",
-   "Overlooking a rural rodent-exposure history that would raise suspicion",
-   "Failing to arrange early referral to a centre capable of advanced cardiorespiratory support",
-   "Not considering Andes virus person-to-person spread and appropriate precautions in South American cases"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "CDC Yellow Book: Health Information for International Travel"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Deliver intensive supportive care in critical care, as there is no licensed specific antiviral",
-   "Support the failing circulation with inotropes and vasopressors for cardiogenic shock while giving fluids judiciously because of the profound capillary leak",
-   "Provide oxygen and mechanical ventilation with lung-protective strategy for the non-cardiogenic pulmonary oedema",
-   "Transfer early to an extracorporeal membrane oxygenation-capable centre for refractory cardiogenic shock or hypoxaemia",
-   "Monitor with echocardiography, cardiac biomarkers, serial lactate, and platelet count to guide haemodynamic support",
-   "Apply respiratory precautions and contact tracing where Andes virus is implicated because of person-to-person transmission",
-   "Recognise the abrupt transition from febrile prodrome to the cardiopulmonary phase and escalate care without delay"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hantavirus_cardiopulmonary_syndrome-pathway",
-   "title": "Hantavirus cardiopulmonary syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by New World hantaviruses (notably Sin Nombre virus in North America and Andes virus in South America) acquired by inhaling aerosolised rodent excreta, classically from deer mice in rural or peridomestic settings",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid progression from prodrome to breathlessness and hypoxaemia over hours",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Hantavirus-specific serology for IgM and IgG antibodies, RT-PCR on blood for viral RNA in the early phase, Full blood count and film looking for thrombocytopenia, left shift, and immunoblasts"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deliver intensive supportive care in critical care, as there is no licensed specific antiviral"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the prodrome to a self-limiting viral illness and discharging before the cardiopulmonary phase declares itself"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hantavirus cardiopulmonary syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "hantavirus_cardiopulmonary_syndrome-matrix",
-   "title": "Hantavirus cardiopulmonary syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by New World hantaviruses (notably Sin Nombre virus in North America and Andes virus in South America) acquired by",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC Yellow Book",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by New World hantaviruses (notably Sin Nombre virus in North America and Andes virus in South America) acquired by inhaling aerosolised rodent excreta, classically from deer mice in rural or peridomestic settings",
+      "A febrile prodrome of fever, myalgia, headache, and gastrointestinal upset lasting several days is followed by an abrupt cardiopulmonary phase with cough, dyspnoea, and rapidly progressive non-cardiogenic pulmonary oedema",
+      "The cardiopulmonary phase reflects a capillary-leak process; hypotension and myocardial depression producing cardiogenic shock carry the highest mortality",
+      "A characteristic haematological triad supports the diagnosis: thrombocytopenia, left-shifted leucocytosis, and circulating immunoblasts (atypical lymphocytes), often with haemoconcentration",
+      "Andes virus is distinctive among hantaviruses for documented person-to-person transmission, so respiratory precautions and contact tracing may be warranted in South American cases",
+      "Care is intensive and supportive with no licensed specific antiviral; early transfer to a centre with extracorporeal membrane oxygenation capability improves survival in refractory cardiogenic shock",
+      "Diagnosis rests on serology (IgM/IgG) and RT-PCR, and a compatible rodent-exposure history in an endemic region should prompt early consideration"
     ],
-    [
-     "Key Investigations",
-     "Hantavirus-specific serology for IgM and IgG antibodies, RT-PCR on blood for viral RNA in the early phase, Full blood count and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infection follows inhalation of virus shed in the urine, droppings, or saliva of chronically infected rodent reservoirs. The virus targets pulmonary microvascular endothelial cells, and a vigorous host immune response, rather than direct cytopathic injury, increases vascular permeability. The resulting capillary leak floods the alveoli with protein-rich fluid, producing non-cardiogenic pulmonary oedema, while myocardial dysfunction and reduced cardiac output drive shock. The interplay of profound capillary leak and cardiac depression defines the severe cardiopulmonary phase.",
+    "additionalDifferentials": [
+      "Community-acquired pneumonia with acute respiratory distress syndrome",
+      "Influenza and other severe viral respiratory infections",
+      "Bacterial sepsis with septic shock",
+      "Leptospirosis with pulmonary haemorrhage",
+      "Acute cardiogenic pulmonary oedema from primary cardiac disease",
+      "Plague or other zoonoses with a rodent-exposure history"
     ],
-    [
-     "Primary Differentials",
-     "Community-acquired pneumonia with acute respiratory distress syndrome, Influenza and other severe viral respiratory infections,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Hantavirus-specific serology for IgM and IgG antibodies",
+      "RT-PCR on blood for viral RNA in the early phase",
+      "Full blood count and film looking for thrombocytopenia, left shift, and immunoblasts",
+      "Chest radiograph and arterial blood gas to characterise bilateral interstitial and alveolar oedema and hypoxaemia",
+      "Echocardiography and cardiac biomarkers to assess myocardial depression and guide haemodynamic support",
+      "Lactate and metabolic panel to gauge shock severity"
     ],
-    [
-     "Management Strategy",
-     "Deliver intensive supportive care in critical care, as there is no licensed specific antiviral",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid progression from prodrome to breathlessness and hypoxaemia over hours",
+      "Hypotension with rising lactate signalling impending cardiogenic shock",
+      "Haemoconcentration with worsening thrombocytopenia indicating severe capillary leak",
+      "Need for high fractional inspired oxygen or mechanical ventilation",
+      "Refractory shock potentially requiring extracorporeal membrane oxygenation"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the prodrome to a self-limiting viral illness and discharging before the cardiopulmonary phase declares itself",
-     "Prevent diagnostic or management error"
+    "prognosis": "The cardiopulmonary phase can be fulminant and case fatality is high in New World hantavirus disease. Patients who survive the first few critical days typically improve rapidly with resolution of the capillary leak and often recover without long-term pulmonary sequelae.",
+    "pitfalls": [
+      "Attributing the prodrome to a self-limiting viral illness and discharging before the cardiopulmonary phase declares itself",
+      "Administering large-volume fluid resuscitation, which can worsen pulmonary oedema in a capillary-leak state",
+      "Overlooking a rural rodent-exposure history that would raise suspicion",
+      "Failing to arrange early referral to a centre capable of advanced cardiorespiratory support",
+      "Not considering Andes virus person-to-person spread and appropriate precautions in South American cases"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "CDC Yellow Book: Health Information for International Travel"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Deliver intensive supportive care in critical care, as there is no licensed specific antiviral",
+      "Support the failing circulation with inotropes and vasopressors for cardiogenic shock while giving fluids judiciously because of the profound capillary leak",
+      "Provide oxygen and mechanical ventilation with lung-protective strategy for the non-cardiogenic pulmonary oedema",
+      "Transfer early to an extracorporeal membrane oxygenation-capable centre for refractory cardiogenic shock or hypoxaemia",
+      "Monitor with echocardiography, cardiac biomarkers, serial lactate, and platelet count to guide haemodynamic support",
+      "Apply respiratory precautions and contact tracing where Andes virus is implicated because of person-to-person transmission",
+      "Recognise the abrupt transition from febrile prodrome to the cardiopulmonary phase and escalate care without delay"
     ]
-   ],
-   "caption": "Overview comparison matrix for hantavirus cardiopulmonary syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hantavirus-cardiopulmonary-syndrome-real-image",
-   "title": "Hantavirus cardiopulmonary syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "hantavirus_cardiopulmonary_syndrome-pathway",
+      "title": "Hantavirus cardiopulmonary syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by New World hantaviruses (notably Sin Nombre virus in North America and Andes virus in South America) acquired by inhaling aerosolised rodent excreta, classically from deer mice in rural or peridomestic settings",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid progression from prodrome to breathlessness and hypoxaemia over hours",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Hantavirus-specific serology for IgM and IgG antibodies, RT-PCR on blood for viral RNA in the early phase, Full blood count and film looking for thrombocytopenia, left shift, and immunoblasts"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deliver intensive supportive care in critical care, as there is no licensed specific antiviral"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the prodrome to a self-limiting viral illness and discharging before the cardiopulmonary phase declares itself"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hantavirus cardiopulmonary syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hantavirus_cardiopulmonary_syndrome-matrix",
+      "title": "Hantavirus cardiopulmonary syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by New World hantaviruses (notably Sin Nombre virus in North America and Andes virus in South America) acquired by",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Hantavirus-specific serology for IgM and IgG antibodies, RT-PCR on blood for viral RNA in the early phase, Full blood count and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Community-acquired pneumonia with acute respiratory distress syndrome, Influenza and other severe viral respiratory infections,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deliver intensive supportive care in critical care, as there is no licensed specific antiviral",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the prodrome to a self-limiting viral illness and discharging before the cardiopulmonary phase declares itself",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hantavirus cardiopulmonary syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC Yellow Book",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 196-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hantavirus_cardiopulmonary_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hantavirus-specific IgM and IgG antibodies",
+          "cells": [
+            {
+              "text": "Serological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RT-PCR on blood",
+          "cells": [
+            {
+              "text": "Viral RNA in the early phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Thrombocytopenia, left shift and immunoblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph and arterial blood gas",
+          "cells": [
+            {
+              "text": "Bilateral interstitial and alveolar oedema, and hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Myocardial depression, to guide haemodynamic support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactate and metabolic panel",
+          "cells": [
+            {
+              "text": "Shock severity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hantavirus_cardiopulmonary_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "In critical care; no licensed specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inotropes and vasopressors",
+          "cells": [
+            {
+              "text": "For cardiogenic shock, with fluids given judiciously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and mechanical ventilation",
+          "cells": [
+            {
+              "text": "Lung-protective strategy for the non-cardiogenic pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early transfer for ECMO",
+          "cells": [
+            {
+              "text": "To an ECMO-capable centre for refractory cardiogenic shock or hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Echocardiography, cardiac biomarkers, serial lactate and platelet count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory precautions and contact tracing",
+          "cells": [
+            {
+              "text": "Where Andes virus is implicated, because of person-to-person transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early escalation",
+          "cells": [
+            {
+              "text": "Recognise the abrupt move from febrile prodrome to the cardiopulmonary phase"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hantavirus_cardiopulmonary_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Viral hemorrhagic fever syndromes and their distribution",
+      "rowHeader": "Disease",
+      "columns": [
+        "Incubation period, days",
+        "Case-infection ratio",
+        "Case-fatality rate, %",
+        "Geographic range",
+        "Target population"
+      ],
+      "rows": [
+        {
+          "parameter": "Lassa fever",
+          "cells": [
+            {
+              "text": "5 to 16"
+            },
+            {
+              "text": "Mild infections probably common"
+            },
+            {
+              "text": "15"
+            },
+            {
+              "text": "West Africa"
+            },
+            {
+              "text": "All ages, both sexes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "South American HF",
+          "cells": [
+            {
+              "text": "7 to 14"
+            },
+            {
+              "text": "Most infections (more than half) result in disease"
+            },
+            {
+              "text": "15 to 30"
+            },
+            {
+              "text": "Selected rural areas of Bolivia, Argentina, Venezuela and Brazil"
+            },
+            {
+              "text": "Bolivia: men in the countryside; all ages and both sexes in villages. Argentina: all ages, both sexes; excess exposure and disease in men. Venezuela: all ages, both sexes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rift Valley fever",
+          "cells": [
+            {
+              "text": "2 to 5"
+            },
+            {
+              "text": "About 1:100"
+            },
+            {
+              "text": "About 50"
+            },
+            {
+              "text": "Sub-Saharan Africa, Madagascar, Egypt"
+            },
+            {
+              "text": "All ages, both sexes; more often diagnosed in men; preexisting liver disease may predispose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Crimean-Congo HF",
+          "cells": [
+            {
+              "text": "3 to 12"
+            },
+            {
+              "text": ">=1:5"
+            },
+            {
+              "text": "15 to 30"
+            },
+            {
+              "text": "Africa, Middle East, Turkey, Balkans, southern region of the former Soviet Union, western China"
+            },
+            {
+              "text": "All ages, both sexes; men more exposed in some settings"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HF with renal syndrome",
+          "cells": [
+            {
+              "text": "9 to 35"
+            },
+            {
+              "text": "Hantaan, >1:1.25; Puumala, 1:20"
+            },
+            {
+              "text": "Hantaan, 5 to 15; Puumala, <1"
+            },
+            {
+              "text": "Worldwide, depending on rodent reservoir"
+            },
+            {
+              "text": "Excess of male patients (partly from greater exposure); mainly adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hantavirus pulmonary syndrome",
+          "cells": [
+            {
+              "text": "About 7 to 28"
+            },
+            {
+              "text": "Very high"
+            },
+            {
+              "text": "40 to 50"
+            },
+            {
+              "text": "Americas"
+            },
+            {
+              "text": "Excess of male patients due to some occupational exposure; mainly adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Marburg or Ebola HF",
+          "cells": [
+            {
+              "text": "3 to 16"
+            },
+            {
+              "text": "High"
+            },
+            {
+              "text": "25 to 90"
+            },
+            {
+              "text": "Sub-Saharan Africa"
+            },
+            {
+              "text": "All ages, both sexes; children less exposed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Yellow fever",
+          "cells": [
+            {
+              "text": "3 to 6"
+            },
+            {
+              "text": "1:2 to 1:20"
+            },
+            {
+              "text": "20"
+            },
+            {
+              "text": "Africa, South America"
+            },
+            {
+              "text": "All ages, both sexes; adults more exposed in jungle setting; preexisting flavivirus immunity may cross-protect"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dengue HF/dengue shock syndrome",
+          "cells": [
+            {
+              "text": "2 to 7"
+            },
+            {
+              "text": "Nonimmune, 1:10,000; heterologous immune, 1:100"
+            },
+            {
+              "text": "<1 with supportive treatment"
+            },
+            {
+              "text": "Tropics and subtropics worldwide"
+            },
+            {
+              "text": "Predominantly children; previous heterologous dengue infection predisposes to HF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kyasanur Forest/Omsk HF",
+          "cells": [
+            {
+              "text": "3 to 8"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "0.5 to 10"
+            },
+            {
+              "text": "Mysore State, India / western Siberia"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source footnote (a) on the Rift Valley fever case-infection ratio is not shown."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hantavirus_cardiopulmonary_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hantavirus cardiopulmonary syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever and myalgia prodrome, then rapid breathlessness after rodent exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid hypoxaemia, hypotension with rising lactate, refractory shock)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: transfer early to an ECMO-capable centre for refractory shock or hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hantavirus IgM and IgG, RT-PCR, platelets, chest film, arterial gas, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Haematological triad present, with positive hantavirus serology or PCR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider community-acquired pneumonia, influenza, leptospirosis or cardiogenic oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care in critical care; no licensed specific antiviral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inotropes and vasopressors for cardiogenic shock; judicious fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oxygen and mechanical ventilation with a lung-protective strategy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Respiratory precautions and contact tracing if Andes virus is implicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Intensive supportive care; ECMO referral for refractory disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

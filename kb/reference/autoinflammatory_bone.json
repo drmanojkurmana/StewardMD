@@ -1,174 +1,465 @@
 {
- "id": "autoinflammatory_bone",
- "name": "Autoinflammatory bone disease",
- "aliases": [
-  "chronic nonbacterial osteomyelitis spectrum",
-  "sterile osteitis",
-  "DIRA",
-  "Majeed syndrome"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Immunology",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / standard rheumatology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of disorders characterised by sterile (culture-negative) inflammation of bone driven by innate immune dysregulation rather than infection",
-   "The spectrum spans sporadic chronic nonbacterial osteomyelitis (including CRMO), the adult SAPHO syndrome, and rare monogenic forms",
-   "Deficiency of the interleukin-1 receptor antagonist (DIRA), caused by IL1RN mutations, presents in neonates with sterile multifocal osteomyelitis, periostitis, and pustular skin disease",
-   "Majeed syndrome, due to LPIN2 mutations, combines chronic recurrent multifocal osteomyelitis with congenital dyserythropoietic anaemia and a neutrophilic dermatosis",
-   "Bone pain, local swelling, and multifocal metaphyseal or clavicular lesions are typical, often with a relapsing course",
-   "Interleukin-1 signalling is central to many of these conditions, and IL-1 blockade is dramatically effective in the monogenic IL-1-driven forms such as DIRA",
-   "MRI (including whole-body imaging) detects clinically silent lesions, and biopsy shows sterile inflammation with negative cultures",
-   "The diagnosis rests on excluding infection and malignancy and recognising associated skin, gut, or haematological features"
+  "id": "autoinflammatory_bone",
+  "name": "Autoinflammatory bone disease",
+  "aliases": [
+    "chronic nonbacterial osteomyelitis spectrum",
+    "sterile osteitis",
+    "DIRA",
+    "Majeed syndrome"
   ],
-  "pathophysiology": "These conditions arise from dysregulated innate immunity leading to sterile osteoclast- and neutrophil-mediated bone inflammation. In monogenic forms, specific defects drive the phenotype: loss of the IL-1 receptor antagonist (DIRA) removes the natural brake on IL-1 signalling, producing unopposed IL-1-mediated inflammation, while LPIN2 mutations (Majeed syndrome) disturb lipid metabolism and inflammatory regulation. The common theme is cytokine-driven (especially IL-1) sterile osteitis with reactive bone remodelling.",
-  "additionalDifferentials": [
-   "Infective (bacterial) osteomyelitis",
-   "Malignant bone lesions and leukaemia/lymphoma",
-   "Langerhans cell histiocytosis",
-   "Metabolic and genetic skeletal dysplasias",
-   "Other systemic autoinflammatory syndromes with bone involvement",
-   "Hypophosphatasia"
-  ],
-  "additionalInvestigations": [
-   "Whole-body MRI to define multifocal and subclinical lesions",
-   "Bone biopsy with microbiology and histology to confirm sterile inflammation",
-   "Acute-phase reactants",
-   "Targeted genetic testing (e.g. IL1RN, LPIN2) in early-onset or syndromic presentations",
-   "Full blood count to detect anaemia or dyserythropoiesis (as in Majeed syndrome)"
-  ],
-  "redFlags": [
-   "Features indistinguishable from bacterial osteomyelitis or malignancy without biopsy",
-   "Vertebral lesions risking collapse, deformity, or neurological compromise",
-   "Neonatal presentation with severe systemic inflammation suggesting a monogenic IL-1-driven disorder",
-   "Progressive anaemia or cytopenias pointing to a syndromic (e.g. Majeed) form"
-  ],
-  "prognosis": "Prognosis varies by subtype: sporadic nonbacterial osteomyelitis often follows a fluctuating course that eventually settles, whereas monogenic IL-1-driven forms can be severe in infancy but respond dramatically to IL-1 blockade; early recognition and treatment limit permanent skeletal damage.",
-  "pitfalls": [
-   "Treating sterile osteitis as bacterial infection with repeated or prolonged antibiotics",
-   "Failing to consider a monogenic cause in neonatal or syndromic presentations",
-   "Underusing whole-body imaging and underestimating disease extent",
-   "Missing associated skin, gut, or haematological disease that clarifies the diagnosis"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line non-steroidal anti-inflammatory drugs for sporadic chronic nonbacterial osteomyelitis and CRMO",
-   "Escalation to bisphosphonates, TNF inhibitors, or corticosteroids with methotrexate or sulfasalazine for NSAID-refractory, spinal or erosive disease",
-   "Interleukin-1 blockade with anakinra as targeted therapy, dramatically effective in the monogenic IL-1-driven forms such as DIRA",
-   "Supportive analgesia and physiotherapy to preserve function and limit skeletal deformity",
-   "Whole-body MRI surveillance to monitor multifocal and subclinical lesions and gauge treatment response",
-   "Management of associated features, including congenital dyserythropoietic anaemia in Majeed syndrome and neutrophilic skin disease",
-   "Targeted genetic testing (IL1RN, LPIN2) with genetic counselling in early-onset or syndromic presentations",
-   "Multidisciplinary rheumatology, orthopaedics and dermatology care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "autoinflammatory_bone-pathway",
-   "title": "Autoinflammatory bone disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of disorders characterised by sterile (culture-negative) inflammation of bone driven by innate immune dysregulation rather than infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features indistinguishable from bacterial osteomyelitis or malignancy without biopsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Whole-body MRI to define multifocal and subclinical lesions, Bone biopsy with microbiology and histology to confirm sterile inflammation, Acute-phase reactants"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line non-steroidal anti-inflammatory drugs for sporadic chronic nonbacterial osteomyelitis and CRMO"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating sterile osteitis as bacterial infection with repeated or prolonged antibiotics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autoinflammatory bone disease."
-  }
- ],
- "tables": [
-  {
-   "id": "autoinflammatory_bone-matrix",
-   "title": "Autoinflammatory bone disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of disorders characterised by sterile (culture-negative) inflammation of bone driven by innate immune dysregulation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Immunology",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / standard rheumatology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of disorders characterised by sterile (culture-negative) inflammation of bone driven by innate immune dysregulation rather than infection",
+      "The spectrum spans sporadic chronic nonbacterial osteomyelitis (including CRMO), the adult SAPHO syndrome, and rare monogenic forms",
+      "Deficiency of the interleukin-1 receptor antagonist (DIRA), caused by IL1RN mutations, presents in neonates with sterile multifocal osteomyelitis, periostitis, and pustular skin disease",
+      "Majeed syndrome, due to LPIN2 mutations, combines chronic recurrent multifocal osteomyelitis with congenital dyserythropoietic anaemia and a neutrophilic dermatosis",
+      "Bone pain, local swelling, and multifocal metaphyseal or clavicular lesions are typical, often with a relapsing course",
+      "Interleukin-1 signalling is central to many of these conditions, and IL-1 blockade is dramatically effective in the monogenic IL-1-driven forms such as DIRA",
+      "MRI (including whole-body imaging) detects clinically silent lesions, and biopsy shows sterile inflammation with negative cultures",
+      "The diagnosis rests on excluding infection and malignancy and recognising associated skin, gut, or haematological features"
     ],
-    [
-     "Key Investigations",
-     "Whole-body MRI to define multifocal and subclinical lesions, Bone biopsy with microbiology and histology to confirm sterile",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "These conditions arise from dysregulated innate immunity leading to sterile osteoclast- and neutrophil-mediated bone inflammation. In monogenic forms, specific defects drive the phenotype: loss of the IL-1 receptor antagonist (DIRA) removes the natural brake on IL-1 signalling, producing unopposed IL-1-mediated inflammation, while LPIN2 mutations (Majeed syndrome) disturb lipid metabolism and inflammatory regulation. The common theme is cytokine-driven (especially IL-1) sterile osteitis with reactive bone remodelling.",
+    "additionalDifferentials": [
+      "Infective (bacterial) osteomyelitis",
+      "Malignant bone lesions and leukaemia/lymphoma",
+      "Langerhans cell histiocytosis",
+      "Metabolic and genetic skeletal dysplasias",
+      "Other systemic autoinflammatory syndromes with bone involvement",
+      "Hypophosphatasia"
     ],
-    [
-     "Primary Differentials",
-     "Infective (bacterial) osteomyelitis, Malignant bone lesions and leukaemia/lymphoma, Langerhans cell histiocytosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Whole-body MRI to define multifocal and subclinical lesions",
+      "Bone biopsy with microbiology and histology to confirm sterile inflammation",
+      "Acute-phase reactants",
+      "Targeted genetic testing (e.g. IL1RN, LPIN2) in early-onset or syndromic presentations",
+      "Full blood count to detect anaemia or dyserythropoiesis (as in Majeed syndrome)"
     ],
-    [
-     "Management Strategy",
-     "First-line non-steroidal anti-inflammatory drugs for sporadic chronic nonbacterial osteomyelitis and CRMO",
-     "Core treatment modality"
+    "redFlags": [
+      "Features indistinguishable from bacterial osteomyelitis or malignancy without biopsy",
+      "Vertebral lesions risking collapse, deformity, or neurological compromise",
+      "Neonatal presentation with severe systemic inflammation suggesting a monogenic IL-1-driven disorder",
+      "Progressive anaemia or cytopenias pointing to a syndromic (e.g. Majeed) form"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating sterile osteitis as bacterial infection with repeated or prolonged antibiotics",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies by subtype: sporadic nonbacterial osteomyelitis often follows a fluctuating course that eventually settles, whereas monogenic IL-1-driven forms can be severe in infancy but respond dramatically to IL-1 blockade; early recognition and treatment limit permanent skeletal damage.",
+    "pitfalls": [
+      "Treating sterile osteitis as bacterial infection with repeated or prolonged antibiotics",
+      "Failing to consider a monogenic cause in neonatal or syndromic presentations",
+      "Underusing whole-body imaging and underestimating disease extent",
+      "Missing associated skin, gut, or haematological disease that clarifies the diagnosis"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line non-steroidal anti-inflammatory drugs for sporadic chronic nonbacterial osteomyelitis and CRMO",
+      "Escalation to bisphosphonates, TNF inhibitors, or corticosteroids with methotrexate or sulfasalazine for NSAID-refractory, spinal or erosive disease",
+      "Interleukin-1 blockade with anakinra as targeted therapy, dramatically effective in the monogenic IL-1-driven forms such as DIRA",
+      "Supportive analgesia and physiotherapy to preserve function and limit skeletal deformity",
+      "Whole-body MRI surveillance to monitor multifocal and subclinical lesions and gauge treatment response",
+      "Management of associated features, including congenital dyserythropoietic anaemia in Majeed syndrome and neutrophilic skin disease",
+      "Targeted genetic testing (IL1RN, LPIN2) with genetic counselling in early-onset or syndromic presentations",
+      "Multidisciplinary rheumatology, orthopaedics and dermatology care"
     ]
-   ],
-   "caption": "Overview comparison matrix for autoinflammatory bone disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "autoinflammatory-bone-real-image",
-   "title": "Autoinflammatory bone disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "autoinflammatory_bone-pathway",
+      "title": "Autoinflammatory bone disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of disorders characterised by sterile (culture-negative) inflammation of bone driven by innate immune dysregulation rather than infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features indistinguishable from bacterial osteomyelitis or malignancy without biopsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Whole-body MRI to define multifocal and subclinical lesions, Bone biopsy with microbiology and histology to confirm sterile inflammation, Acute-phase reactants"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line non-steroidal anti-inflammatory drugs for sporadic chronic nonbacterial osteomyelitis and CRMO"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating sterile osteitis as bacterial infection with repeated or prolonged antibiotics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autoinflammatory bone disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "autoinflammatory_bone-matrix",
+      "title": "Autoinflammatory bone disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of disorders characterised by sterile (culture-negative) inflammation of bone driven by innate immune dysregulation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Whole-body MRI to define multifocal and subclinical lesions, Bone biopsy with microbiology and histology to confirm sterile",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Infective (bacterial) osteomyelitis, Malignant bone lesions and leukaemia/lymphoma, Langerhans cell histiocytosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line non-steroidal anti-inflammatory drugs for sporadic chronic nonbacterial osteomyelitis and CRMO",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating sterile osteitis as bacterial infection with repeated or prolonged antibiotics",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autoinflammatory bone disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard rheumatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autoinflammatory_bone-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-body MRI",
+          "cells": [
+            {
+              "text": "Multifocal and subclinical lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone biopsy with microbiology and histology",
+          "cells": [
+            {
+              "text": "Sterile inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted genetic testing (IL1RN, LPIN2)",
+          "cells": [
+            {
+              "text": "Early-onset or syndromic presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia or dyserythropoiesis, as in Majeed syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoinflammatory_bone-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective (bacterial) osteomyelitis",
+          "cells": [
+            {
+              "text": "Indistinguishable from it without biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant bone lesions and leukaemia or lymphoma",
+          "cells": [
+            {
+              "text": "Indistinguishable from malignancy without biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoinflammatory_bone-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "First-line for sporadic chronic nonbacterial osteomyelitis and CRMO"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Bisphosphonates, TNF inhibitors, or corticosteroids with methotrexate or sulfasalazine"
+            },
+            {
+              "text": "NSAID-refractory, spinal or erosive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IL-1 blockade with anakinra",
+          "cells": [
+            {
+              "text": "Targeted therapy"
+            },
+            {
+              "text": "Dramatically effective in IL-1-driven monogenic forms such as DIRA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Preserve function and limit skeletal deformity"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body MRI surveillance",
+          "cells": [
+            {
+              "text": "Multifocal and subclinical lesions; treatment response"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated features",
+          "cells": [
+            {
+              "text": "Congenital dyserythropoietic anaemia in Majeed syndrome; neutrophilic skin disease"
+            },
+            {
+              "text": "Associated features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "IL1RN and LPIN2 testing in early-onset or syndromic presentations"
+            },
+            {
+              "text": "Early-onset disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autoinflammatory_bone-dx-mgmt",
+      "title": "Diagnosis and management of Autoinflammatory bone disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful bone lesions with multifocal sterile inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Vertebral lesions risking collapse or neurological compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal review for collapse or neurological deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-body MRI, bone biopsy with microbiology and histology, acute-phase reactants, genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sterile inflammation on bone biopsy with infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "NSAIDs first-line for sporadic chronic nonbacterial osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bisphosphonate, TNF inhibitor or steroid with methotrexate for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anakinra for IL-1-driven monogenic disease such as DIRA",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Whole-body MRI to track multifocal lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling for early-onset or syndromic presentations",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

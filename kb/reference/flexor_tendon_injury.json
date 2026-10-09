@@ -1,174 +1,486 @@
 {
- "id": "flexor_tendon_injury",
- "name": "Flexor tendon injury",
- "aliases": [
-  "flexor tendon laceration",
-  "flexor tendon repair",
-  "zone II flexor injury",
-  "digital flexor tendon injury"
- ],
- "class": "non_infective",
- "system": "Plastic / Reconstructive",
- "specialty": "Plastic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Grabb & Smith's Plastic Surgery / standard references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Flexor tendon injuries are described by anatomical zones, and zone II (within the fibro-osseous flexor sheath, historically 'no man's land') is the most technically challenging because both flexor tendons run within a tight sheath",
-   "Examination should test flexor digitorum profundus and flexor digitorum superficialis separately, as one may be intact while the other is divided",
-   "The resting cascade of the fingers is disrupted when a tendon is cut, and loss of the normal flexion posture on inspection is an important clue",
-   "Associated digital nerve and vessel injuries are common because of their proximity to the tendons and should be actively sought",
-   "Partial lacerations may retain some active movement but can still catch, rupture, or trigger, so they require careful assessment",
-   "Repair aims for a strong core suture with an epitendinous suture to allow early controlled motion, and preservation of key pulleys (particularly A2 and A4) prevents bowstringing",
-   "Structured early rehabilitation with a hand therapist is critical, balancing tendon glide against the risk of rupture, using controlled active or passive motion protocols",
-   "The main complications are adhesions causing stiffness, repair rupture, and joint contracture, and delayed presentation may require staged grafting or tendon reconstruction"
+  "id": "flexor_tendon_injury",
+  "name": "Flexor tendon injury",
+  "aliases": [
+    "flexor tendon laceration",
+    "flexor tendon repair",
+    "zone II flexor injury",
+    "digital flexor tendon injury"
   ],
-  "pathophysiology": "Flexor tendons transmit force from forearm muscles to flex the digits and glide within synovial sheaths and beneath a series of annular and cruciate pulleys that hold them close to bone. Laceration divides the tendon and causes proximal retraction of the cut end, particularly when the muscle is contracting at the time of injury. Healing occurs through both intrinsic mechanisms, from tenocytes and synovial nutrition, and extrinsic mechanisms, through ingrowth of surrounding tissue that forms adhesions. Excessive extrinsic healing produces adhesions that restrict glide, while inadequate healing or excessive load risks gap formation and rupture. Within the confined zone II sheath, even small amounts of scarring markedly impair function.",
-  "additionalDifferentials": [
-   "Extensor tendon injury or combined flexor-extensor injury",
-   "Digital nerve injury without tendon division",
-   "Closed flexor tendon avulsion (jersey finger)",
-   "Trigger finger or stenosing tenosynovitis",
-   "Musculotendinous junction or forearm-level injury",
-   "Retained foreign body limiting movement"
-  ],
-  "additionalInvestigations": [
-   "Careful clinical testing of profundus and superficialis function in each digit",
-   "Assessment of digital nerve sensation and vascular status",
-   "Plain radiographs to detect fractures, foreign bodies, or bony avulsion",
-   "Ultrasound or MRI to localise a retracted tendon end or characterise closed or partial injuries",
-   "Surgical exploration, which remains definitive for confirming and treating suspected injury"
-  ],
-  "redFlags": [
-   "Associated neurovascular injury threatening digital viability requiring urgent exploration",
-   "Signs of flexor sheath infection following an open injury (a surgical emergency)",
-   "Complete loss of active flexion with a retracted tendon needing timely repair before further retraction",
-   "Devascularised or grossly contaminated wound requiring prompt surgical management"
-  ],
-  "prognosis": "Outcome depends on the zone of injury, associated damage, quality of repair, and adherence to rehabilitation. Zone II injuries carry the highest risk of adhesions and stiffness. With sound repair and supervised early motion, many patients regain good function, but adhesions, rupture, and contracture can necessitate tenolysis or staged reconstruction and may leave lasting deficits.",
-  "pitfalls": [
-   "Failing to test profundus and superficialis separately and missing a partial or isolated tendon division",
-   "Overlooking associated digital nerve or vessel injury",
-   "Damaging or dividing critical pulleys (A2, A4), leading to bowstringing",
-   "Immobilising rather than starting an appropriate early motion protocol, causing dense adhesions",
-   "Being too aggressive with rehabilitation and precipitating repair rupture",
-   "Delaying repair so that tendon retraction complicates later reconstruction"
-  ],
-  "references": [
-   "Grabb & Smith's Plastic Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Primary surgical repair with a strong multi-strand core suture and an epitendinous suture, preserving the A2 and A4 pulleys to prevent bowstringing",
-   "Concurrent repair of associated digital nerve and vessel injuries identified at exploration",
-   "Early controlled-motion rehabilitation under a specialist hand therapist with a protective dorsal blocking splint",
-   "Staged tendon reconstruction or grafting for delayed presentation, failed repair or segmental tendon loss",
-   "Tenolysis for restrictive adhesions limiting glide once healing is established and passive motion preserved",
-   "Hand-surgery and hand-therapy multidisciplinary follow-up to monitor for rupture, adhesions and contracture"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "flexor_tendon_injury-pathway",
-   "title": "Flexor tendon injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Flexor tendon injuries are described by anatomical zones, and zone II (within the fibro-osseous flexor sheath, historically 'no man's land') is the most technically challenging because both flexor tendons run within a tight sheath",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Associated neurovascular injury threatening digital viability requiring urgent exploration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful clinical testing of profundus and superficialis function in each digit, Assessment of digital nerve sensation and vascular status, Plain radiographs to detect fractures, foreign bodies, or bony avulsion"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Primary surgical repair with a strong multi-strand core suture and an epitendinous suture, preserving the A2 and A4 pulleys to prevent bowstringing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to test profundus and superficialis separately and missing a partial or isolated tendon division"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of flexor tendon injury."
-  }
- ],
- "tables": [
-  {
-   "id": "flexor_tendon_injury-matrix",
-   "title": "Flexor tendon injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Flexor tendon injuries are described by anatomical zones, and zone II (within the fibro-osseous flexor sheath, historically 'no",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Plastic / Reconstructive",
+  "specialty": "Plastic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Grabb & Smith's Plastic Surgery / standard references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Flexor tendon injuries are described by anatomical zones, and zone II (within the fibro-osseous flexor sheath, historically 'no man's land') is the most technically challenging because both flexor tendons run within a tight sheath",
+      "Examination should test flexor digitorum profundus and flexor digitorum superficialis separately, as one may be intact while the other is divided",
+      "The resting cascade of the fingers is disrupted when a tendon is cut, and loss of the normal flexion posture on inspection is an important clue",
+      "Associated digital nerve and vessel injuries are common because of their proximity to the tendons and should be actively sought",
+      "Partial lacerations may retain some active movement but can still catch, rupture, or trigger, so they require careful assessment",
+      "Repair aims for a strong core suture with an epitendinous suture to allow early controlled motion, and preservation of key pulleys (particularly A2 and A4) prevents bowstringing",
+      "Structured early rehabilitation with a hand therapist is critical, balancing tendon glide against the risk of rupture, using controlled active or passive motion protocols",
+      "The main complications are adhesions causing stiffness, repair rupture, and joint contracture, and delayed presentation may require staged grafting or tendon reconstruction"
     ],
-    [
-     "Key Investigations",
-     "Careful clinical testing of profundus and superficialis function in each digit, Assessment of digital nerve sensation and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Flexor tendons transmit force from forearm muscles to flex the digits and glide within synovial sheaths and beneath a series of annular and cruciate pulleys that hold them close to bone. Laceration divides the tendon and causes proximal retraction of the cut end, particularly when the muscle is contracting at the time of injury. Healing occurs through both intrinsic mechanisms, from tenocytes and synovial nutrition, and extrinsic mechanisms, through ingrowth of surrounding tissue that forms adhesions. Excessive extrinsic healing produces adhesions that restrict glide, while inadequate healing or excessive load risks gap formation and rupture. Within the confined zone II sheath, even small amounts of scarring markedly impair function.",
+    "additionalDifferentials": [
+      "Extensor tendon injury or combined flexor-extensor injury",
+      "Digital nerve injury without tendon division",
+      "Closed flexor tendon avulsion (jersey finger)",
+      "Trigger finger or stenosing tenosynovitis",
+      "Musculotendinous junction or forearm-level injury",
+      "Retained foreign body limiting movement"
     ],
-    [
-     "Primary Differentials",
-     "Extensor tendon injury or combined flexor-extensor injury, Digital nerve injury without tendon division, Closed flexor tendon",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful clinical testing of profundus and superficialis function in each digit",
+      "Assessment of digital nerve sensation and vascular status",
+      "Plain radiographs to detect fractures, foreign bodies, or bony avulsion",
+      "Ultrasound or MRI to localise a retracted tendon end or characterise closed or partial injuries",
+      "Surgical exploration, which remains definitive for confirming and treating suspected injury"
     ],
-    [
-     "Management Strategy",
-     "Primary surgical repair with a strong multi-strand core suture and an epitendinous suture, preserving the A2 and A4 pulleys to",
-     "Core treatment modality"
+    "redFlags": [
+      "Associated neurovascular injury threatening digital viability requiring urgent exploration",
+      "Signs of flexor sheath infection following an open injury (a surgical emergency)",
+      "Complete loss of active flexion with a retracted tendon needing timely repair before further retraction",
+      "Devascularised or grossly contaminated wound requiring prompt surgical management"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to test profundus and superficialis separately and missing a partial or isolated tendon division",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the zone of injury, associated damage, quality of repair, and adherence to rehabilitation. Zone II injuries carry the highest risk of adhesions and stiffness. With sound repair and supervised early motion, many patients regain good function, but adhesions, rupture, and contracture can necessitate tenolysis or staged reconstruction and may leave lasting deficits.",
+    "pitfalls": [
+      "Failing to test profundus and superficialis separately and missing a partial or isolated tendon division",
+      "Overlooking associated digital nerve or vessel injury",
+      "Damaging or dividing critical pulleys (A2, A4), leading to bowstringing",
+      "Immobilising rather than starting an appropriate early motion protocol, causing dense adhesions",
+      "Being too aggressive with rehabilitation and precipitating repair rupture",
+      "Delaying repair so that tendon retraction complicates later reconstruction"
+    ],
+    "references": [
+      "Grabb & Smith's Plastic Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Primary surgical repair with a strong multi-strand core suture and an epitendinous suture, preserving the A2 and A4 pulleys to prevent bowstringing",
+      "Concurrent repair of associated digital nerve and vessel injuries identified at exploration",
+      "Early controlled-motion rehabilitation under a specialist hand therapist with a protective dorsal blocking splint",
+      "Staged tendon reconstruction or grafting for delayed presentation, failed repair or segmental tendon loss",
+      "Tenolysis for restrictive adhesions limiting glide once healing is established and passive motion preserved",
+      "Hand-surgery and hand-therapy multidisciplinary follow-up to monitor for rupture, adhesions and contracture"
     ]
-   ],
-   "caption": "Overview comparison matrix for flexor tendon injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "flexor-tendon-injury-real-image",
-   "title": "Flexor tendon injury: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "flexor_tendon_injury-pathway",
+      "title": "Flexor tendon injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Flexor tendon injuries are described by anatomical zones, and zone II (within the fibro-osseous flexor sheath, historically 'no man's land') is the most technically challenging because both flexor tendons run within a tight sheath",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Associated neurovascular injury threatening digital viability requiring urgent exploration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful clinical testing of profundus and superficialis function in each digit, Assessment of digital nerve sensation and vascular status, Plain radiographs to detect fractures, foreign bodies, or bony avulsion"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Primary surgical repair with a strong multi-strand core suture and an epitendinous suture, preserving the A2 and A4 pulleys to prevent bowstringing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to test profundus and superficialis separately and missing a partial or isolated tendon division"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of flexor tendon injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "flexor_tendon_injury-matrix",
+      "title": "Flexor tendon injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Flexor tendon injuries are described by anatomical zones, and zone II (within the fibro-osseous flexor sheath, historically 'no",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful clinical testing of profundus and superficialis function in each digit, Assessment of digital nerve sensation and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Extensor tendon injury or combined flexor-extensor injury, Digital nerve injury without tendon division, Closed flexor tendon",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Primary surgical repair with a strong multi-strand core suture and an epitendinous suture, preserving the A2 and A4 pulleys to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to test profundus and superficialis separately and missing a partial or isolated tendon division",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for flexor tendon injury."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grabb & Smith's Plastic Surgery / standard references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "flexor_tendon_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Separate testing of profundus and superficialis in each digit",
+          "cells": [
+            {
+              "text": "Partial or isolated division"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital nerve sensation and vascular status",
+          "cells": [
+            {
+              "text": "Associated injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Fracture, foreign body or avulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Retracted tendon end or closed injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical exploration",
+          "cells": [
+            {
+              "text": "Definitive confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "flexor_tendon_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Extensor tendon or combined flexor-extensor injury",
+          "cells": [
+            {
+              "text": "Injury to the opposing tendon group"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital nerve injury without tendon division",
+          "cells": [
+            {
+              "text": "Sensory loss without flexor loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closed flexor tendon avulsion (jersey finger)",
+          "cells": [
+            {
+              "text": "Closed rather than open mechanism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "flexor_tendon_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary surgical repair with core and epitendinous sutures",
+          "cells": [
+            {
+              "text": "Preserves A2 and A4 pulleys"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repair of associated nerve and vessel injuries",
+          "cells": [
+            {
+              "text": "Identified at exploration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early controlled-motion rehabilitation with hand therapist",
+          "cells": [
+            {
+              "text": "Protective dorsal blocking splint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged reconstruction or grafting",
+          "cells": [
+            {
+              "text": "Delayed presentation, failed repair or segmental loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tenolysis for restrictive adhesions",
+          "cells": [
+            {
+              "text": "Once healing is established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand surgery and therapy follow-up",
+          "cells": [
+            {
+              "text": "Monitor rupture, adhesion and contracture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "flexor_tendon_injury-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs linked to tendon injury and myopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Tendon rupture or tendinitis",
+          "cells": [
+            {
+              "text": "quinolones, glucocorticoids, isotretinoin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myalgias or myopathy",
+          "cells": [
+            {
+              "text": "glucocorticoids, penicillamine, hydroxychloroquine, AZT, lovastatin, simvastatin, pravastatin, clofibrate, interferon, IL-2, alcohol, cocaine, taxol, docetaxel, colchicine, quinolones, cyclosporine, protease inhibitors"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "flexor_tendon_injury-dx-mgmt",
+      "title": "Diagnosis and management of Flexor tendon injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cut finger or hand wound with loss of active flexion and a disrupted resting cascade",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (neurovascular threat, flexor sheath infection, devascularised wound)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exploration for neurovascular threat or flexor sheath infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Test profundus and superficialis separately; nerve and vascular check; radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Flexor tendon division confirmed at surgical exploration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider extensor injury, digital nerve injury or jersey finger",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Primary repair with core and epitendinous sutures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repair associated digital nerve and vessel injuries",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early controlled-motion rehabilitation with a hand therapist",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Staged reconstruction for delayed or failed repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on zone, associated damage, repair quality and rehabilitation adherence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

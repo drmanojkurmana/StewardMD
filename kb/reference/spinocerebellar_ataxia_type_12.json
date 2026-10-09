@@ -1,177 +1,455 @@
 {
- "id": "spinocerebellar_ataxia_type_12",
- "name": "Spinocerebellar ataxia type 12 (PPP2R2B)",
- "aliases": [
-  "SCA12",
-  "PPP2R2B-related ataxia",
-  "PPP2R2B CAG repeat expansion",
-  "autosomal dominant cerebellar ataxia type SCA12"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant ataxia caused by an expanded CAG trinucleotide repeat in the 5' region of PPP2R2B, which encodes a regulatory subunit of protein phosphatase 2A; unusually the repeat lies outside the coding sequence rather than producing a polyglutamine tract",
-   "A characteristic early feature is a prominent postural and action tremor of the upper limbs that can be mistaken for essential tremor and may precede or overshadow gait ataxia",
-   "As the disorder advances patients develop cerebellar dysarthria, limb and gait ataxia, abnormal eye movements and hyperreflexia, with parkinsonian features or cognitive decline in some",
-   "Described in several populations but reported with particular frequency in certain Indian kindreds, so ancestry and a detailed family history can be useful clues",
-   "Brain MRI typically shows both cerebellar and cerebral cortical atrophy, reflecting the wider cortical involvement of this subtype",
-   "Diagnosis rests on sizing the CAG repeat within PPP2R2B; standard exome sequencing or panels that do not specifically assess this repeat will miss the diagnosis",
-   "No disease-modifying therapy exists, so care is supportive and multidisciplinary, with physiotherapy, speech and language therapy, gait aids and tremor management"
+  "id": "spinocerebellar_ataxia_type_12",
+  "name": "Spinocerebellar ataxia type 12 (PPP2R2B)",
+  "aliases": [
+    "SCA12",
+    "PPP2R2B-related ataxia",
+    "PPP2R2B CAG repeat expansion",
+    "autosomal dominant cerebellar ataxia type SCA12"
   ],
-  "pathophysiology": "SCA12 is caused by an expanded CAG repeat in the 5' regulatory region of PPP2R2B, which encodes the Bbeta regulatory subunit of protein phosphatase 2A, a major serine/threonine phosphatase controlling neuronal signalling. Because the repeat lies outside the coding region, the mechanism is thought to be altered gene expression rather than a toxic polyglutamine protein, with dysregulated phosphatase activity disturbing neuronal signalling, calcium handling and survival. Purkinje cells and cerebral cortical neurons appear particularly vulnerable, producing the combination of tremor, progressive cerebellar ataxia and cortical features that characterises the disorder.",
-  "additionalDifferentials": [
-   "Essential tremor, especially early when tremor dominates the picture",
-   "Repeat-expansion spinocerebellar ataxias (SCA1, 2, 3 and related types)",
-   "Fragile X-associated tremor/ataxia syndrome (FXTAS) in older men",
-   "Tremor-predominant or atypical parkinsonism",
-   "Dystonic tremor and other combined tremor syndromes",
-   "Sporadic adult-onset cerebellar ataxia"
-  ],
-  "additionalInvestigations": [
-   "Targeted CAG repeat-sizing analysis of PPP2R2B to confirm the expansion",
-   "Brain MRI to document cerebellar and cerebral cortical atrophy and exclude structural causes",
-   "Testing for common repeat-expansion SCAs before or alongside PPP2R2B analysis",
-   "FMR1 premutation testing to exclude FXTAS in appropriate patients",
-   "Detailed three-generation family history to establish autosomal dominant transmission",
-   "Screening for acquired ataxia (thyroid function, vitamin B12, coeliac serology, alcohol history) and neuropsychological assessment where cognition is affected"
-  ],
-  "redFlags": [
-   "Rapid progression or an atypical course prompting reconsideration of an acquired, paraneoplastic or structural cause",
-   "Prominent early cognitive decline suggesting a broader neurodegenerative process",
-   "Dysphagia with recurrent aspiration requiring swallow assessment and airway protection",
-   "Recurrent falls with injury as gait ataxia worsens"
-  ],
-  "prognosis": "SCA12 is slowly progressive over years to decades, with tremor and ataxia gradually becoming disabling and cognitive or parkinsonian features emerging in a subset. Life expectancy is often relatively preserved, and prognosis is influenced chiefly by falls, bulbar involvement and the degree of cortical dysfunction.",
-  "pitfalls": [
-   "Labelling the patient with essential tremor and not pursuing a genetic cause when subtle cerebellar signs are present",
-   "Stopping investigation when common SCA panels are negative, thereby missing the PPP2R2B repeat",
-   "Relying on exome sequencing, which does not reliably detect this non-coding repeat expansion",
-   "Attributing the picture solely to Parkinson's disease when parkinsonian features appear",
-   "Failing to offer genetic counselling regarding dominant inheritance and variable expressivity"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [
-   "spinocerebellar_ataxia_type_5",
-   "spinocerebellar_ataxia_type_14"
-  ],
-  "management": [
-   "Provide symptomatic and supportive care, as there is no disease-modifying therapy for the PPP2R2B expansion",
-   "Treat the prominent postural and action tremor symptomatically, trialling agents used for essential tremor such as beta-blockers or primidone",
-   "Maintain mobility and safety with physiotherapy, occupational therapy and gait aids, and offer speech and language therapy for dysarthria",
-   "Manage emerging parkinsonian features and cognitive decline with appropriate symptomatic treatment and neuropsychological support",
-   "Monitor progression with ataxia rating scales and surveil for falls and bulbar involvement",
-   "Offer genetic counselling for autosomal dominant inheritance, with CAG-repeat sizing of PPP2R2B for at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_12-pathway",
-   "title": "Spinocerebellar ataxia type 12 (PPP2R2B): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant ataxia caused by an expanded CAG trinucleotide repeat in the 5' region of PPP2R2B, which encodes a regulatory subunit of protein phosphatase 2A; unusually the repeat lies outside the coding sequence rather than",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid progression or an atypical course prompting reconsideration of an acquired, paraneoplastic or structural cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted CAG repeat-sizing analysis of PPP2R2B to confirm the expansion, Brain MRI to document cerebellar and cerebral cortical atrophy and exclude structural causes, Testing for common repeat-expansion SCAs before or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide symptomatic and supportive care, as there is no disease-modifying therapy for the PPP2R2B expansion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the patient with essential tremor and not pursuing a genetic cause when subtle cerebellar signs are present"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 12 (ppp2r2b)."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_12-matrix",
-   "title": "Spinocerebellar ataxia type 12 (PPP2R2B): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant ataxia caused by an expanded CAG trinucleotide repeat in the 5' region of PPP2R2B, which encodes a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant ataxia caused by an expanded CAG trinucleotide repeat in the 5' region of PPP2R2B, which encodes a regulatory subunit of protein phosphatase 2A; unusually the repeat lies outside the coding sequence rather than producing a polyglutamine tract",
+      "A characteristic early feature is a prominent postural and action tremor of the upper limbs that can be mistaken for essential tremor and may precede or overshadow gait ataxia",
+      "As the disorder advances patients develop cerebellar dysarthria, limb and gait ataxia, abnormal eye movements and hyperreflexia, with parkinsonian features or cognitive decline in some",
+      "Described in several populations but reported with particular frequency in certain Indian kindreds, so ancestry and a detailed family history can be useful clues",
+      "Brain MRI typically shows both cerebellar and cerebral cortical atrophy, reflecting the wider cortical involvement of this subtype",
+      "Diagnosis rests on sizing the CAG repeat within PPP2R2B; standard exome sequencing or panels that do not specifically assess this repeat will miss the diagnosis",
+      "No disease-modifying therapy exists, so care is supportive and multidisciplinary, with physiotherapy, speech and language therapy, gait aids and tremor management"
     ],
-    [
-     "Key Investigations",
-     "Targeted CAG repeat-sizing analysis of PPP2R2B to confirm the expansion, Brain MRI to document cerebellar and cerebral cortical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA12 is caused by an expanded CAG repeat in the 5' regulatory region of PPP2R2B, which encodes the Bbeta regulatory subunit of protein phosphatase 2A, a major serine/threonine phosphatase controlling neuronal signalling. Because the repeat lies outside the coding region, the mechanism is thought to be altered gene expression rather than a toxic polyglutamine protein, with dysregulated phosphatase activity disturbing neuronal signalling, calcium handling and survival. Purkinje cells and cerebral cortical neurons appear particularly vulnerable, producing the combination of tremor, progressive cerebellar ataxia and cortical features that characterises the disorder.",
+    "additionalDifferentials": [
+      "Essential tremor, especially early when tremor dominates the picture",
+      "Repeat-expansion spinocerebellar ataxias (SCA1, 2, 3 and related types)",
+      "Fragile X-associated tremor/ataxia syndrome (FXTAS) in older men",
+      "Tremor-predominant or atypical parkinsonism",
+      "Dystonic tremor and other combined tremor syndromes",
+      "Sporadic adult-onset cerebellar ataxia"
     ],
-    [
-     "Primary Differentials",
-     "Essential tremor, especially early when tremor dominates the picture, Repeat-expansion spinocerebellar ataxias (SCA1, 2, 3 and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted CAG repeat-sizing analysis of PPP2R2B to confirm the expansion",
+      "Brain MRI to document cerebellar and cerebral cortical atrophy and exclude structural causes",
+      "Testing for common repeat-expansion SCAs before or alongside PPP2R2B analysis",
+      "FMR1 premutation testing to exclude FXTAS in appropriate patients",
+      "Detailed three-generation family history to establish autosomal dominant transmission",
+      "Screening for acquired ataxia (thyroid function, vitamin B12, coeliac serology, alcohol history) and neuropsychological assessment where cognition is affected"
     ],
-    [
-     "Management Strategy",
-     "Provide symptomatic and supportive care, as there is no disease-modifying therapy for the PPP2R2B expansion",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid progression or an atypical course prompting reconsideration of an acquired, paraneoplastic or structural cause",
+      "Prominent early cognitive decline suggesting a broader neurodegenerative process",
+      "Dysphagia with recurrent aspiration requiring swallow assessment and airway protection",
+      "Recurrent falls with injury as gait ataxia worsens"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the patient with essential tremor and not pursuing a genetic cause when subtle cerebellar signs are present",
-     "Prevent diagnostic or management error"
+    "prognosis": "SCA12 is slowly progressive over years to decades, with tremor and ataxia gradually becoming disabling and cognitive or parkinsonian features emerging in a subset. Life expectancy is often relatively preserved, and prognosis is influenced chiefly by falls, bulbar involvement and the degree of cortical dysfunction.",
+    "pitfalls": [
+      "Labelling the patient with essential tremor and not pursuing a genetic cause when subtle cerebellar signs are present",
+      "Stopping investigation when common SCA panels are negative, thereby missing the PPP2R2B repeat",
+      "Relying on exome sequencing, which does not reliably detect this non-coding repeat expansion",
+      "Attributing the picture solely to Parkinson's disease when parkinsonian features appear",
+      "Failing to offer genetic counselling regarding dominant inheritance and variable expressivity"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [
+      "spinocerebellar_ataxia_type_5",
+      "spinocerebellar_ataxia_type_14"
+    ],
+    "management": [
+      "Provide symptomatic and supportive care, as there is no disease-modifying therapy for the PPP2R2B expansion",
+      "Treat the prominent postural and action tremor symptomatically, trialling agents used for essential tremor such as beta-blockers or primidone",
+      "Maintain mobility and safety with physiotherapy, occupational therapy and gait aids, and offer speech and language therapy for dysarthria",
+      "Manage emerging parkinsonian features and cognitive decline with appropriate symptomatic treatment and neuropsychological support",
+      "Monitor progression with ataxia rating scales and surveil for falls and bulbar involvement",
+      "Offer genetic counselling for autosomal dominant inheritance, with CAG-repeat sizing of PPP2R2B for at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 12 (ppp2r2b)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-12-real-image",
-   "title": "Spinocerebellar ataxia type 12 (PPP2R2B): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia_type_12-pathway",
+      "title": "Spinocerebellar ataxia type 12 (PPP2R2B): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant ataxia caused by an expanded CAG trinucleotide repeat in the 5' region of PPP2R2B, which encodes a regulatory subunit of protein phosphatase 2A; unusually the repeat lies outside the coding sequence rather than",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid progression or an atypical course prompting reconsideration of an acquired, paraneoplastic or structural cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted CAG repeat-sizing analysis of PPP2R2B to confirm the expansion, Brain MRI to document cerebellar and cerebral cortical atrophy and exclude structural causes, Testing for common repeat-expansion SCAs before or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide symptomatic and supportive care, as there is no disease-modifying therapy for the PPP2R2B expansion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the patient with essential tremor and not pursuing a genetic cause when subtle cerebellar signs are present"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 12 (ppp2r2b)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_12-matrix",
+      "title": "Spinocerebellar ataxia type 12 (PPP2R2B): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant ataxia caused by an expanded CAG trinucleotide repeat in the 5' region of PPP2R2B, which encodes a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted CAG repeat-sizing analysis of PPP2R2B to confirm the expansion, Brain MRI to document cerebellar and cerebral cortical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Essential tremor, especially early when tremor dominates the picture, Repeat-expansion spinocerebellar ataxias (SCA1, 2, 3 and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide symptomatic and supportive care, as there is no disease-modifying therapy for the PPP2R2B expansion",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the patient with essential tremor and not pursuing a genetic cause when subtle cerebellar signs are present",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 12 (ppp2r2b)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_12-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PPP2R2B CAG repeat sizing",
+          "cells": [
+            {
+              "text": "Expanded repeat confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar and cerebral cortical atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for common repeat-expansion SCAs",
+          "cells": [
+            {
+              "text": "Excludes commoner causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FMR1 premutation testing",
+          "cells": [
+            {
+              "text": "Excludes FXTAS in appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-generation family history",
+          "cells": [
+            {
+              "text": "Autosomal dominant transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for acquired ataxia",
+          "cells": [
+            {
+              "text": "Thyroid function, B12, coeliac serology and alcohol history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_12-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Essential tremor",
+          "cells": [
+            {
+              "text": "Tremor dominates early; subtle cerebellar signs are easily missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fragile X-associated tremor/ataxia syndrome",
+          "cells": [
+            {
+              "text": "Affects older men; FMR1 premutation testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_12-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic and supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tremor treatment",
+          "cells": [
+            {
+              "text": "Agents used for essential tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and gait aids",
+          "cells": [
+            {
+              "text": "Mobility and safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment of parkinsonism and cognitive decline",
+          "cells": [
+            {
+              "text": "As features emerge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Ataxia rating scales; falls and bulbar involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; PPP2R2B repeat sizing for at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_12-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 12 (PPP2R2B)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early postural or action tremor with later ataxia: suspected SCA12",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid progression, cognitive decline, dysphagia, falls)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for an acquired or paraneoplastic cause if the course is atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PPP2R2B CAG repeat sizing; brain MRI; common SCA testing; FMR1 if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded PPP2R2B CAG repeat found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider essential tremor, FXTAS or another ataxia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic care; no disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tremor treatment with agents used for essential tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and gait aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling with repeat sizing for at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive disorder without disease-modifying therapy; care is supportive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

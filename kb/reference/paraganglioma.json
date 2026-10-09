@@ -1,178 +1,451 @@
 {
- "id": "paraganglioma",
- "name": "Paraganglioma",
- "aliases": [
-  "extra-adrenal phaeochromocytoma",
-  "glomus tumour (head and neck paraganglioma)",
-  "chemodectoma"
- ],
- "class": "non_infective",
- "system": "Endocrine system / Autonomic nervous system",
- "specialty": "Endocrinology / Endocrine surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Neuroendocrine tumour of extra-adrenal paraganglia; sympathetic (thoracic, abdominal, pelvic) tumours are often catecholamine-secreting, whereas parasympathetic (head and neck) tumours are usually non-secretory",
-   "Head and neck paragangliomas (carotid body, jugulotympanic, vagal) typically present as slowly growing painless masses with cranial nerve palsies or pulsatile tinnitus rather than catecholamine excess",
-   "Functional tumours cause paroxysmal or sustained hypertension, headache, palpitations and sweating, mirroring phaeochromocytoma",
-   "Up to 40 per cent are hereditary; germline succinate dehydrogenase (SDHB, SDHD, SDHC and related) mutations are commonest, so genetic testing and counselling are recommended in essentially all patients",
-   "SDHB mutations carry a notably higher risk of malignant (metastatic) disease and of extra-adrenal, abdominal tumours",
-   "Biochemical screening with plasma free or 24-hour urinary fractionated metanephrines is essential before any intervention; some tumours secrete predominantly noradrenaline or dopamine",
-   "Somatostatin receptor PET (DOTATATE) is highly sensitive, particularly for SDHB-related and metastatic disease, complementing MIBG and cross-sectional imaging",
-   "Preoperative alpha-adrenergic blockade, established before any beta-blockade, is mandatory for secretory tumours to prevent intraoperative hypertensive crisis"
+  "id": "paraganglioma",
+  "name": "Paraganglioma",
+  "aliases": [
+    "extra-adrenal phaeochromocytoma",
+    "glomus tumour (head and neck paraganglioma)",
+    "chemodectoma"
   ],
-  "pathophysiology": "Paragangliomas arise from neural crest-derived chromaffin or glomus cells of the autonomic paraganglia. Sympathetic paraganglia along the paravertebral and para-aortic chains may synthesise and release catecholamines, producing the adrenergic syndrome, whereas parasympathetic paraganglia of the head and neck rarely secrete and instead cause symptoms through local mass effect. A large fraction are driven by germline mutations, most often in the succinate dehydrogenase complex genes; loss of SDH function causes succinate accumulation and a pseudohypoxic state that stabilises hypoxia-inducible factors and promotes tumorigenesis. Malignancy is defined by the presence of metastases at sites where paraganglia are not normally found.",
-  "additionalDifferentials": [
-   "Adrenal phaeochromocytoma",
-   "Other causes of paroxysmal symptoms and secondary hypertension (anxiety or panic, thyrotoxicosis)",
-   "Head and neck schwannoma, nodal mass or carotid aneurysm mimicking a carotid body tumour",
-   "Metastatic neuroendocrine tumour from another primary",
-   "Medullary thyroid carcinoma within a hereditary syndrome",
-   "Neuroblastoma or ganglioneuroma in younger patients"
-  ],
-  "additionalInvestigations": [
-   "Plasma free metanephrines or 24-hour urinary fractionated metanephrines and catecholamines",
-   "Plasma or urinary methoxytyramine where a dopamine-secreting tumour is suspected",
-   "Contrast CT or MRI of the relevant region (neck, thorax, abdomen, pelvis)",
-   "Somatostatin receptor PET/CT (DOTATATE), with MIBG scintigraphy in selected cases",
-   "Germline genetic testing (SDHx and extended panel) with genetic counselling",
-   "SDHB immunohistochemistry on resected tissue to guide genetic evaluation",
-   "Whole-body imaging for multifocal or metastatic disease, especially in SDHB carriers"
-  ],
-  "redFlags": [
-   "Hypertensive crisis, arrhythmia or catecholamine-induced cardiomyopathy",
-   "Rapid tumour growth, local invasion or metastatic disease (SDHB association)",
-   "New cranial neuropathies from an enlarging skull-base or neck tumour",
-   "Symptoms provoked by anaesthesia, biopsy or tumour manipulation without prior blockade",
-   "Family history of paraganglioma or phaeochromocytoma indicating a hereditary syndrome"
-  ],
-  "prognosis": "Benign, completely resected paragangliomas have an excellent prognosis, but metastatic disease, which is more frequent with SDHB mutations, reduces survival although its course can still be prolonged; lifelong surveillance is required because of multifocal and recurrent disease.",
-  "pitfalls": [
-   "Biopsying or operating on a secretory tumour without excluding catecholamine excess and without alpha-blockade, precipitating a hypertensive crisis",
-   "Giving beta-blockade before adequate alpha-blockade, causing unopposed alpha vasoconstriction",
-   "Assuming head and neck paragangliomas are always non-secretory and omitting biochemical screening",
-   "Not offering germline genetic testing, thereby missing hereditary and malignancy risk",
-   "Relying on histology alone to predict malignancy, which is defined by the presence of metastasis"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society Clinical Practice Guideline on phaeochromocytoma and paraganglioma",
-   "WHO Classification of Tumours: Endocrine and Neuroendocrine Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical resection is the definitive treatment for localised paraganglioma",
-   "For catecholamine-secreting tumours, preoperative alpha-adrenergic blockade with phenoxybenzamine or doxazosin followed by beta-blockade, together with volume expansion, before any surgery or intervention",
-   "Systemic treatment of metastatic disease with radionuclide therapy such as I-131 MIBG or lutetium-177 DOTATATE peptide receptor therapy, cytotoxic chemotherapy or external-beam radiotherapy",
-   "Germline genetic testing across the SDHx and extended panel with genetic counselling, recommended in essentially all patients",
-   "Lifelong biochemical and imaging surveillance for multifocal, recurrent and metastatic disease, particularly with SDHB mutations",
-   "Cascade genetic testing and screening of at-risk relatives",
-   "Management within an endocrine and endocrine-surgery multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paraganglioma-pathway",
-   "title": "Paraganglioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Neuroendocrine tumour of extra-adrenal paraganglia; sympathetic (thoracic, abdominal, pelvic) tumours are often catecholamine-secreting, whereas parasympathetic (head and neck) tumours are usually non-secretory",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypertensive crisis, arrhythmia or catecholamine-induced cardiomyopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma free metanephrines or 24-hour urinary fractionated metanephrines and catecholamines, Plasma or urinary methoxytyramine where a dopamine-secreting tumour is suspected, Contrast CT or MRI of the relevant region (neck,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical resection is the definitive treatment for localised paraganglioma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Biopsying or operating on a secretory tumour without excluding catecholamine excess and without alpha-blockade, precipitating a hypertensive crisis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paraganglioma."
-  }
- ],
- "tables": [
-  {
-   "id": "paraganglioma-matrix",
-   "title": "Paraganglioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Neuroendocrine tumour of extra-adrenal paraganglia; sympathetic (thoracic, abdominal, pelvic) tumours are often",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine system / Autonomic nervous system",
+  "specialty": "Endocrinology / Endocrine surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Neuroendocrine tumour of extra-adrenal paraganglia; sympathetic (thoracic, abdominal, pelvic) tumours are often catecholamine-secreting, whereas parasympathetic (head and neck) tumours are usually non-secretory",
+      "Head and neck paragangliomas (carotid body, jugulotympanic, vagal) typically present as slowly growing painless masses with cranial nerve palsies or pulsatile tinnitus rather than catecholamine excess",
+      "Functional tumours cause paroxysmal or sustained hypertension, headache, palpitations and sweating, mirroring phaeochromocytoma",
+      "Up to 40 per cent are hereditary; germline succinate dehydrogenase (SDHB, SDHD, SDHC and related) mutations are commonest, so genetic testing and counselling are recommended in essentially all patients",
+      "SDHB mutations carry a notably higher risk of malignant (metastatic) disease and of extra-adrenal, abdominal tumours",
+      "Biochemical screening with plasma free or 24-hour urinary fractionated metanephrines is essential before any intervention; some tumours secrete predominantly noradrenaline or dopamine",
+      "Somatostatin receptor PET (DOTATATE) is highly sensitive, particularly for SDHB-related and metastatic disease, complementing MIBG and cross-sectional imaging",
+      "Preoperative alpha-adrenergic blockade, established before any beta-blockade, is mandatory for secretory tumours to prevent intraoperative hypertensive crisis"
     ],
-    [
-     "Key Investigations",
-     "Plasma free metanephrines or 24-hour urinary fractionated metanephrines and catecholamines, Plasma or urinary methoxytyramine",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Paragangliomas arise from neural crest-derived chromaffin or glomus cells of the autonomic paraganglia. Sympathetic paraganglia along the paravertebral and para-aortic chains may synthesise and release catecholamines, producing the adrenergic syndrome, whereas parasympathetic paraganglia of the head and neck rarely secrete and instead cause symptoms through local mass effect. A large fraction are driven by germline mutations, most often in the succinate dehydrogenase complex genes; loss of SDH function causes succinate accumulation and a pseudohypoxic state that stabilises hypoxia-inducible factors and promotes tumorigenesis. Malignancy is defined by the presence of metastases at sites where paraganglia are not normally found.",
+    "additionalDifferentials": [
+      "Adrenal phaeochromocytoma",
+      "Other causes of paroxysmal symptoms and secondary hypertension (anxiety or panic, thyrotoxicosis)",
+      "Head and neck schwannoma, nodal mass or carotid aneurysm mimicking a carotid body tumour",
+      "Metastatic neuroendocrine tumour from another primary",
+      "Medullary thyroid carcinoma within a hereditary syndrome",
+      "Neuroblastoma or ganglioneuroma in younger patients"
     ],
-    [
-     "Primary Differentials",
-     "Adrenal phaeochromocytoma, Other causes of paroxysmal symptoms and secondary hypertension (anxiety or panic, thyrotoxicosis),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma free metanephrines or 24-hour urinary fractionated metanephrines and catecholamines",
+      "Plasma or urinary methoxytyramine where a dopamine-secreting tumour is suspected",
+      "Contrast CT or MRI of the relevant region (neck, thorax, abdomen, pelvis)",
+      "Somatostatin receptor PET/CT (DOTATATE), with MIBG scintigraphy in selected cases",
+      "Germline genetic testing (SDHx and extended panel) with genetic counselling",
+      "SDHB immunohistochemistry on resected tissue to guide genetic evaluation",
+      "Whole-body imaging for multifocal or metastatic disease, especially in SDHB carriers"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical resection is the definitive treatment for localised paraganglioma",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypertensive crisis, arrhythmia or catecholamine-induced cardiomyopathy",
+      "Rapid tumour growth, local invasion or metastatic disease (SDHB association)",
+      "New cranial neuropathies from an enlarging skull-base or neck tumour",
+      "Symptoms provoked by anaesthesia, biopsy or tumour manipulation without prior blockade",
+      "Family history of paraganglioma or phaeochromocytoma indicating a hereditary syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Biopsying or operating on a secretory tumour without excluding catecholamine excess and without alpha-blockade, precipitating a",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign, completely resected paragangliomas have an excellent prognosis, but metastatic disease, which is more frequent with SDHB mutations, reduces survival although its course can still be prolonged; lifelong surveillance is required because of multifocal and recurrent disease.",
+    "pitfalls": [
+      "Biopsying or operating on a secretory tumour without excluding catecholamine excess and without alpha-blockade, precipitating a hypertensive crisis",
+      "Giving beta-blockade before adequate alpha-blockade, causing unopposed alpha vasoconstriction",
+      "Assuming head and neck paragangliomas are always non-secretory and omitting biochemical screening",
+      "Not offering germline genetic testing, thereby missing hereditary and malignancy risk",
+      "Relying on histology alone to predict malignancy, which is defined by the presence of metastasis"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society Clinical Practice Guideline on phaeochromocytoma and paraganglioma",
+      "WHO Classification of Tumours: Endocrine and Neuroendocrine Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical resection is the definitive treatment for localised paraganglioma",
+      "For catecholamine-secreting tumours, preoperative alpha-adrenergic blockade with phenoxybenzamine or doxazosin followed by beta-blockade, together with volume expansion, before any surgery or intervention",
+      "Systemic treatment of metastatic disease with radionuclide therapy such as I-131 MIBG or lutetium-177 DOTATATE peptide receptor therapy, cytotoxic chemotherapy or external-beam radiotherapy",
+      "Germline genetic testing across the SDHx and extended panel with genetic counselling, recommended in essentially all patients",
+      "Lifelong biochemical and imaging surveillance for multifocal, recurrent and metastatic disease, particularly with SDHB mutations",
+      "Cascade genetic testing and screening of at-risk relatives",
+      "Management within an endocrine and endocrine-surgery multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for paraganglioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paraganglioma-real-image",
-   "title": "Paraganglioma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "paraganglioma-pathway",
+      "title": "Paraganglioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Neuroendocrine tumour of extra-adrenal paraganglia; sympathetic (thoracic, abdominal, pelvic) tumours are often catecholamine-secreting, whereas parasympathetic (head and neck) tumours are usually non-secretory",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypertensive crisis, arrhythmia or catecholamine-induced cardiomyopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma free metanephrines or 24-hour urinary fractionated metanephrines and catecholamines, Plasma or urinary methoxytyramine where a dopamine-secreting tumour is suspected, Contrast CT or MRI of the relevant region (neck,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical resection is the definitive treatment for localised paraganglioma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Biopsying or operating on a secretory tumour without excluding catecholamine excess and without alpha-blockade, precipitating a hypertensive crisis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paraganglioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paraganglioma-matrix",
+      "title": "Paraganglioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Neuroendocrine tumour of extra-adrenal paraganglia; sympathetic (thoracic, abdominal, pelvic) tumours are often",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma free metanephrines or 24-hour urinary fractionated metanephrines and catecholamines, Plasma or urinary methoxytyramine",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Adrenal phaeochromocytoma, Other causes of paroxysmal symptoms and secondary hypertension (anxiety or panic, thyrotoxicosis),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical resection is the definitive treatment for localised paraganglioma",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Biopsying or operating on a secretory tumour without excluding catecholamine excess and without alpha-blockade, precipitating a",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paraganglioma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paraganglioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma free metanephrines or 24-hour urinary metanephrines",
+          "cells": [
+            {
+              "text": "Secretory tumour screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or urinary methoxytyramine",
+          "cells": [
+            {
+              "text": "Dopamine-secreting tumour, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT or MRI",
+          "cells": [
+            {
+              "text": "Extent in neck, thorax, abdomen or pelvis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DOTATATE PET with MIBG scintigraphy",
+          "cells": [
+            {
+              "text": "Staging, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline SDHx and extended panel testing",
+          "cells": [
+            {
+              "text": "Hereditary basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SDHB immunohistochemistry",
+          "cells": [
+            {
+              "text": "Guides genetic evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraganglioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anxiety or thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Paroxysmal symptoms mimic the catecholamine syndrome; metanephrines distinguish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head and neck schwannoma or carotid aneurysm",
+          "cells": [
+            {
+              "text": "Mimic carotid body tumours; biochemistry and imaging separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraganglioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Definitive treatment for localised paraganglioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative adrenergic blockade",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Alpha blockade with phenoxybenzamine or doxazosin, then beta-blockade, with volume expansion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "I-131 MIBG or lutetium-177 DOTATATE, cytotoxic chemotherapy or external-beam radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline genetic testing",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "With genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paraganglioma-dx-mgmt",
+      "title": "Diagnosis and management of Paraganglioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paroxysmal headache, palpitations and sweating, or a painless neck or abdominal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hypertensive crisis, arrhythmia, cranial neuropathy or rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent alpha blockade and cardiac review for hypertensive crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma metanephrines or urine, methoxytyramine, cross-sectional imaging, DOTATATE PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are metanephrines raised, with imaging localising a paraganglioma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anxiety disorder, thyrotoxicosis, schwannoma or carotid aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical resection as definitive treatment for localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Alpha blockade, then beta-blockade, with volume expansion before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radionuclide therapy, chemotherapy or radiotherapy for metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Germline genetic testing and counselling for SDHx and related genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent after complete resection; SDHB-related metastatic disease has a worse outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,453 @@
 {
- "id": "congenital_diaphragmatic_hernia",
- "name": "Congenital Diaphragmatic Hernia",
- "aliases": [
-  "CDH",
-  "Bochdalek hernia",
-  "diaphragmatic hernia"
- ],
- "class": "non_infective",
- "system": "Neonatology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A defect in the diaphragm allows abdominal viscera to herniate into the thorax during fetal development, impairing lung growth; the posterolateral (Bochdalek) defect, more often left-sided, is most common.",
-   "The principal problems are pulmonary hypoplasia and pulmonary hypertension rather than the anatomical defect itself.",
-   "Many cases are detected on antenatal ultrasound, allowing delivery at a centre with neonatal surgical and intensive care support.",
-   "A typical presentation is respiratory distress soon after birth with a scaphoid (sunken) abdomen and a shifted apex or heart sounds, and reduced breath sounds on the affected side.",
-   "Bowel sounds may be audible in the chest, and the chest radiograph shows bowel loops in the thorax with mediastinal shift.",
-   "Bag-mask ventilation should be avoided because it distends the herniated bowel and worsens lung compression; early endotracheal intubation and gastric decompression are preferred.",
-   "Initial management focuses on gentle, lung-protective ventilation, cardiorespiratory stabilisation, and treatment of pulmonary hypertension before surgery.",
-   "Surgical reduction and repair of the defect is undertaken after the infant is physiologically stabilised, not as an emergency.",
-   "Severe cases may need advanced support such as inhaled pulmonary vasodilators or extracorporeal membrane oxygenation."
+  "id": "congenital_diaphragmatic_hernia",
+  "name": "Congenital Diaphragmatic Hernia",
+  "aliases": [
+    "CDH",
+    "Bochdalek hernia",
+    "diaphragmatic hernia"
   ],
-  "pathophysiology": "Failure of the diaphragm to close completely during embryogenesis permits abdominal organs to occupy the thoracic cavity while the lungs are developing. The space-occupying viscera restrict growth of the ipsilateral (and to a lesser extent contralateral) lung, producing pulmonary hypoplasia with fewer alveoli and abnormal, muscularised pulmonary arterioles. After birth these abnormal vessels fail to relax normally, causing persistent pulmonary hypertension with right-to-left shunting, hypoxaemia, and acidosis. The combination of reduced functional lung tissue and elevated pulmonary vascular resistance drives the respiratory failure that dominates the clinical course.",
-  "additionalDifferentials": [
-   "Congenital pulmonary airway malformation",
-   "Congenital lobar emphysema",
-   "Pulmonary sequestration",
-   "Pneumothorax or large pleural effusion",
-   "Persistent pulmonary hypertension of the newborn of other cause",
-   "Eventration of the diaphragm"
-  ],
-  "additionalInvestigations": [
-   "Antenatal ultrasound and, where available, fetal MRI with lung volume estimation",
-   "Chest and abdominal radiograph showing thoracic bowel loops and mediastinal shift",
-   "Echocardiography to assess pulmonary hypertension and exclude associated cardiac lesions",
-   "Blood gas and pre- and post-ductal oxygen saturations to gauge shunting",
-   "Evaluation for associated anomalies and genetic conditions"
-  ],
-  "redFlags": [
-   "Severe respiratory distress and hypoxaemia at or shortly after birth",
-   "Persistent pulmonary hypertension with right-to-left shunting refractory to therapy",
-   "Deterioration after bag-mask ventilation distends intrathoracic bowel",
-   "Signs of inadequate oxygenation and rising acidosis",
-   "Associated major cardiac or other anomalies worsening the outlook"
-  ],
-  "prognosis": "Outcome depends chiefly on the degree of pulmonary hypoplasia and pulmonary hypertension and on associated anomalies. With optimal perinatal care many infants survive, though survivors may have chronic lung disease, feeding and growth problems, and neurodevelopmental sequelae. Severe hypoplasia and refractory pulmonary hypertension carry a poor prognosis.",
-  "pitfalls": [
-   "Using bag-mask ventilation and inflating herniated bowel, worsening lung compression",
-   "Rushing to surgery before stabilising pulmonary hypertension and gas exchange",
-   "Attributing neonatal distress to primary lung disease and missing the diagnosis on examination and radiograph",
-   "Using aggressive high-pressure ventilation that risks barotrauma to hypoplastic lungs",
-   "Overlooking associated cardiac and genetic anomalies that affect management and prognosis"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Secure the airway at birth with elective endotracheal intubation, avoiding bag-mask ventilation, and decompress the stomach with a nasogastric tube",
-   "Ventilate with a gentle, lung-protective strategy accepting permissive hypercapnia to minimise barotrauma to the hypoplastic lungs",
-   "Treat persistent pulmonary hypertension with inhaled nitric oxide and pulmonary vasodilators, escalating to extracorporeal membrane oxygenation for refractory hypoxaemia",
-   "Support the circulation with fluids and inotropes or vasopressors and correct acidosis",
-   "Undertake delayed surgical repair of the diaphragmatic defect once the infant is physiologically stabilised",
-   "Deliver and manage at a centre with neonatal surgery and intensive care, considering foetal tracheal occlusion in severe antenatally diagnosed cases",
-   "Evaluate for associated anomalies and genetic conditions, and provide long-term follow-up for chronic lung disease, feeding and growth difficulties and neurodevelopmental sequelae"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_diaphragmatic_hernia-pathway",
-   "title": "Congenital Diaphragmatic Hernia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A defect in the diaphragm allows abdominal viscera to herniate into the thorax during fetal development, impairing lung growth; the posterolateral (Bochdalek) defect, more often left-sided, is most common.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe respiratory distress and hypoxaemia at or shortly after birth",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antenatal ultrasound and, where available, fetal MRI with lung volume estimation, Chest and abdominal radiograph showing thoracic bowel loops and mediastinal shift, Echocardiography to assess pulmonary hypertension and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Secure the airway at birth with elective endotracheal intubation, avoiding bag-mask ventilation, and decompress the stomach with a nasogastric tube"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Using bag-mask ventilation and inflating herniated bowel, worsening lung compression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital diaphragmatic hernia."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_diaphragmatic_hernia-matrix",
-   "title": "Congenital Diaphragmatic Hernia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A defect in the diaphragm allows abdominal viscera to herniate into the thorax during fetal development, impairing lung growth;",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neonatology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A defect in the diaphragm allows abdominal viscera to herniate into the thorax during fetal development, impairing lung growth; the posterolateral (Bochdalek) defect, more often left-sided, is most common.",
+      "The principal problems are pulmonary hypoplasia and pulmonary hypertension rather than the anatomical defect itself.",
+      "Many cases are detected on antenatal ultrasound, allowing delivery at a centre with neonatal surgical and intensive care support.",
+      "A typical presentation is respiratory distress soon after birth with a scaphoid (sunken) abdomen and a shifted apex or heart sounds, and reduced breath sounds on the affected side.",
+      "Bowel sounds may be audible in the chest, and the chest radiograph shows bowel loops in the thorax with mediastinal shift.",
+      "Bag-mask ventilation should be avoided because it distends the herniated bowel and worsens lung compression; early endotracheal intubation and gastric decompression are preferred.",
+      "Initial management focuses on gentle, lung-protective ventilation, cardiorespiratory stabilisation, and treatment of pulmonary hypertension before surgery.",
+      "Surgical reduction and repair of the defect is undertaken after the infant is physiologically stabilised, not as an emergency.",
+      "Severe cases may need advanced support such as inhaled pulmonary vasodilators or extracorporeal membrane oxygenation."
     ],
-    [
-     "Key Investigations",
-     "Antenatal ultrasound and, where available, fetal MRI with lung volume estimation, Chest and abdominal radiograph showing thoracic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Failure of the diaphragm to close completely during embryogenesis permits abdominal organs to occupy the thoracic cavity while the lungs are developing. The space-occupying viscera restrict growth of the ipsilateral (and to a lesser extent contralateral) lung, producing pulmonary hypoplasia with fewer alveoli and abnormal, muscularised pulmonary arterioles. After birth these abnormal vessels fail to relax normally, causing persistent pulmonary hypertension with right-to-left shunting, hypoxaemia, and acidosis. The combination of reduced functional lung tissue and elevated pulmonary vascular resistance drives the respiratory failure that dominates the clinical course.",
+    "additionalDifferentials": [
+      "Congenital pulmonary airway malformation",
+      "Congenital lobar emphysema",
+      "Pulmonary sequestration",
+      "Pneumothorax or large pleural effusion",
+      "Persistent pulmonary hypertension of the newborn of other cause",
+      "Eventration of the diaphragm"
     ],
-    [
-     "Primary Differentials",
-     "Congenital pulmonary airway malformation, Congenital lobar emphysema, Pulmonary sequestration",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antenatal ultrasound and, where available, fetal MRI with lung volume estimation",
+      "Chest and abdominal radiograph showing thoracic bowel loops and mediastinal shift",
+      "Echocardiography to assess pulmonary hypertension and exclude associated cardiac lesions",
+      "Blood gas and pre- and post-ductal oxygen saturations to gauge shunting",
+      "Evaluation for associated anomalies and genetic conditions"
     ],
-    [
-     "Management Strategy",
-     "Secure the airway at birth with elective endotracheal intubation, avoiding bag-mask ventilation, and decompress the stomach with",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe respiratory distress and hypoxaemia at or shortly after birth",
+      "Persistent pulmonary hypertension with right-to-left shunting refractory to therapy",
+      "Deterioration after bag-mask ventilation distends intrathoracic bowel",
+      "Signs of inadequate oxygenation and rising acidosis",
+      "Associated major cardiac or other anomalies worsening the outlook"
     ],
-    [
-     "Clinical Pitfall",
-     "Using bag-mask ventilation and inflating herniated bowel, worsening lung compression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends chiefly on the degree of pulmonary hypoplasia and pulmonary hypertension and on associated anomalies. With optimal perinatal care many infants survive, though survivors may have chronic lung disease, feeding and growth problems, and neurodevelopmental sequelae. Severe hypoplasia and refractory pulmonary hypertension carry a poor prognosis.",
+    "pitfalls": [
+      "Using bag-mask ventilation and inflating herniated bowel, worsening lung compression",
+      "Rushing to surgery before stabilising pulmonary hypertension and gas exchange",
+      "Attributing neonatal distress to primary lung disease and missing the diagnosis on examination and radiograph",
+      "Using aggressive high-pressure ventilation that risks barotrauma to hypoplastic lungs",
+      "Overlooking associated cardiac and genetic anomalies that affect management and prognosis"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Secure the airway at birth with elective endotracheal intubation, avoiding bag-mask ventilation, and decompress the stomach with a nasogastric tube",
+      "Ventilate with a gentle, lung-protective strategy accepting permissive hypercapnia to minimise barotrauma to the hypoplastic lungs",
+      "Treat persistent pulmonary hypertension with inhaled nitric oxide and pulmonary vasodilators, escalating to extracorporeal membrane oxygenation for refractory hypoxaemia",
+      "Support the circulation with fluids and inotropes or vasopressors and correct acidosis",
+      "Undertake delayed surgical repair of the diaphragmatic defect once the infant is physiologically stabilised",
+      "Deliver and manage at a centre with neonatal surgery and intensive care, considering foetal tracheal occlusion in severe antenatally diagnosed cases",
+      "Evaluate for associated anomalies and genetic conditions, and provide long-term follow-up for chronic lung disease, feeding and growth difficulties and neurodevelopmental sequelae"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital diaphragmatic hernia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-diaphragmatic-hernia-real-image",
-   "title": "Congenital Diaphragmatic Hernia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "congenital_diaphragmatic_hernia-pathway",
+      "title": "Congenital Diaphragmatic Hernia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A defect in the diaphragm allows abdominal viscera to herniate into the thorax during fetal development, impairing lung growth; the posterolateral (Bochdalek) defect, more often left-sided, is most common.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe respiratory distress and hypoxaemia at or shortly after birth",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antenatal ultrasound and, where available, fetal MRI with lung volume estimation, Chest and abdominal radiograph showing thoracic bowel loops and mediastinal shift, Echocardiography to assess pulmonary hypertension and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Secure the airway at birth with elective endotracheal intubation, avoiding bag-mask ventilation, and decompress the stomach with a nasogastric tube"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Using bag-mask ventilation and inflating herniated bowel, worsening lung compression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital diaphragmatic hernia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_diaphragmatic_hernia-matrix",
+      "title": "Congenital Diaphragmatic Hernia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A defect in the diaphragm allows abdominal viscera to herniate into the thorax during fetal development, impairing lung growth;",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antenatal ultrasound and, where available, fetal MRI with lung volume estimation, Chest and abdominal radiograph showing thoracic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital pulmonary airway malformation, Congenital lobar emphysema, Pulmonary sequestration",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Secure the airway at birth with elective endotracheal intubation, avoiding bag-mask ventilation, and decompress the stomach with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Using bag-mask ventilation and inflating herniated bowel, worsening lung compression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital diaphragmatic hernia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_diaphragmatic_hernia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal ultrasound and fetal MRI with lung volume estimation",
+          "cells": [
+            {
+              "text": "Lung volume estimated antenatally"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest and abdominal radiograph",
+          "cells": [
+            {
+              "text": "Thoracic bowel loops and mediastinal shift"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension and associated cardiac lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas and pre- and post-ductal saturations",
+          "cells": [
+            {
+              "text": "Degree of shunting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_diaphragmatic_hernia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital pulmonary airway malformation",
+          "cells": [
+            {
+              "text": "Named look-alike on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital lobar emphysema",
+          "cells": [
+            {
+              "text": "Lung overinflation rather than herniated bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary sequestration",
+          "cells": [
+            {
+              "text": "Named look-alike with lung mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_diaphragmatic_hernia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Elective intubation at birth",
+          "cells": [
+            {
+              "text": "Avoid bag-mask ventilation; decompress stomach by nasogastric tube"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung-protective ventilation",
+          "cells": [
+            {
+              "text": "Permissive hypercapnia to limit barotrauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension treatment",
+          "cells": [
+            {
+              "text": "Inhaled nitric oxide and pulmonary vasodilators; ECMO for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circulatory support",
+          "cells": [
+            {
+              "text": "Fluids, inotropes or vasopressors; correct acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed surgical repair",
+          "cells": [
+            {
+              "text": "Once physiologically stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist delivery",
+          "cells": [
+            {
+              "text": "Neonatal surgery and intensive care; foetal tracheal occlusion considered in severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Chronic lung disease, feeding and growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_diaphragmatic_hernia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital Diaphragmatic Hernia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital diaphragmatic hernia: respiratory distress and bowel in chest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypoxaemia, refractory pulmonary hypertension, acidosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intubate; avoid bag-mask; treat pulmonary hypertension; consider ECMO",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antenatal imaging; chest radiograph; echo; pre- and post-ductal saturations",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm herniated bowel loops and mediastinal shift?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital airway malformation, lobar emphysema or sequestration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Elective intubation and nasogastric decompression at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lung-protective ventilation with permissive hypercapnia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhaled nitric oxide; ECMO for refractory pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Delayed surgical repair once physiologically stable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on pulmonary hypoplasia, pulmonary hypertension and associated anomalies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

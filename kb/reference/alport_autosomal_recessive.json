@@ -1,175 +1,527 @@
 {
- "id": "alport_autosomal_recessive",
- "name": "Autosomal recessive Alport syndrome",
- "aliases": [
-  "ARAS",
-  "autosomal recessive Alport syndrome",
-  "COL4A3-related Alport syndrome",
-  "COL4A4-related Alport syndrome",
-  "hereditary nephritis (autosomal recessive)"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard nephrology and clinical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by biallelic (homozygous or compound heterozygous) variants in COL4A3 or COL4A4, encoding the alpha-3 and alpha-4 chains of type IV collagen",
-   "Presents with progressive haematuric nephritis, often with proteinuria, that tends to progress to kidney failure earlier than in many X-linked female carriers",
-   "Sensorineural hearing loss and ocular abnormalities (such as anterior lenticonus and retinal flecks) may occur and support the diagnosis",
-   "Unlike X-linked Alport syndrome, both sexes are affected equally in the autosomal recessive form",
-   "Parents, being heterozygous carriers, may have thin basement membrane nephropathy with isolated microscopic haematuria",
-   "Kidney biopsy shows characteristic lamellation ('basket-weave') and variable thinning of the glomerular basement membrane on electron microscopy",
-   "Renin-angiotensin system blockade is the mainstay of therapy to reduce proteinuria and slow progression"
+  "id": "alport_autosomal_recessive",
+  "name": "Autosomal recessive Alport syndrome",
+  "aliases": [
+    "ARAS",
+    "autosomal recessive Alport syndrome",
+    "COL4A3-related Alport syndrome",
+    "COL4A4-related Alport syndrome",
+    "hereditary nephritis (autosomal recessive)"
   ],
-  "pathophysiology": "Alport syndrome results from defective type IV collagen, the principal structural collagen of basement membranes. In the autosomal recessive form, pathogenic variants affect both copies of COL4A3 or COL4A4, so the alpha-3/alpha-4/alpha-5 collagen network of the glomerular basement membrane cannot assemble normally. The membrane becomes structurally abnormal, showing thinning and later irregular thickening and splitting (lamellation), leading to progressive glomerular leakage of blood and protein, glomerulosclerosis, tubulointerstitial fibrosis and declining renal function. The same collagen network is important in the cochlea and eye, explaining the associated sensorineural deafness and lens and retinal abnormalities. Heterozygous carriers typically have only a thinned basement membrane manifesting as benign familial haematuria.",
-  "additionalDifferentials": [
-   "X-linked Alport syndrome (COL4A5)",
-   "Thin basement membrane nephropathy (heterozygous carriers)",
-   "IgA nephropathy",
-   "Other hereditary glomerulopathies and podocytopathies",
-   "Post-infectious or other glomerulonephritis",
-   "Autosomal dominant Alport syndrome"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis and urine protein quantification to characterise haematuria and proteinuria",
-   "Serum creatinine and eGFR to track progression",
-   "Audiometry for sensorineural hearing loss",
-   "Ophthalmological assessment for lenticonus and retinopathy",
-   "Kidney biopsy with electron microscopy showing basement-membrane lamellation and thinning",
-   "Genetic testing of COL4A3 and COL4A4 with family segregation studies"
-  ],
-  "redFlags": [
-   "Rapidly rising creatinine or nephrotic-range proteinuria signalling accelerated progression",
-   "Progressive hearing loss impairing communication",
-   "Advanced CKD requiring planning for renal replacement or transplantation",
-   "Rare anti-GBM disease developing after transplantation"
-  ],
-  "prognosis": "The autosomal recessive form tends to progress to kidney failure in adolescence or early adulthood; timely renin-angiotensin blockade slows decline, and transplantation is generally successful though a small minority develop post-transplant anti-glomerular basement membrane disease.",
-  "pitfalls": [
-   "Misclassifying inheritance as X-linked, which alters family risk assessment",
-   "Dismissing a carrier parent's isolated haematuria as unimportant",
-   "Missing extrarenal clues (hearing and eye findings) that point to the diagnosis",
-   "Attributing the glomerulonephritis to an acquired cause and delaying genetic testing"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "GeneReviews / KDIGO resources on Alport syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start renin-angiotensin system blockade with an ACE inhibitor early to reduce proteinuria and slow progression to kidney failure",
-   "Add angiotensin receptor blockade or other antiproteinuric therapy where proteinuria persists",
-   "Monitor blood pressure, proteinuria and eGFR regularly to track decline and titrate therapy",
-   "Manage chronic kidney disease complications including anaemia, mineral-bone disorder and acidosis, and control cardiovascular risk",
-   "Provide audiological surveillance with hearing amplification and ophthalmology review for lenticonus and retinopathy",
-   "Plan timely renal replacement therapy with dialysis and transplantation, watching for post-transplant anti-glomerular basement membrane disease",
-   "Offer genetic counselling and screen relatives, recognising heterozygous carriers may have thin basement membrane nephropathy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alport_autosomal_recessive-pathway",
-   "title": "Autosomal recessive Alport syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by biallelic (homozygous or compound heterozygous) variants in COL4A3 or COL4A4, encoding the alpha-3 and alpha-4 chains of type IV collagen",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly rising creatinine or nephrotic-range proteinuria signalling accelerated progression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis and urine protein quantification to characterise haematuria and proteinuria, Serum creatinine and eGFR to track progression, Audiometry for sensorineural hearing loss"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start renin-angiotensin system blockade with an ACE inhibitor early to reduce proteinuria and slow progression to kidney failure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying inheritance as X-linked, which alters family risk assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autosomal recessive alport syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "alport_autosomal_recessive-matrix",
-   "title": "Autosomal recessive Alport syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by biallelic (homozygous or compound heterozygous) variants in COL4A3 or COL4A4, encoding the alpha-3 and alpha-4 chains",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard nephrology and clinical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by biallelic (homozygous or compound heterozygous) variants in COL4A3 or COL4A4, encoding the alpha-3 and alpha-4 chains of type IV collagen",
+      "Presents with progressive haematuric nephritis, often with proteinuria, that tends to progress to kidney failure earlier than in many X-linked female carriers",
+      "Sensorineural hearing loss and ocular abnormalities (such as anterior lenticonus and retinal flecks) may occur and support the diagnosis",
+      "Unlike X-linked Alport syndrome, both sexes are affected equally in the autosomal recessive form",
+      "Parents, being heterozygous carriers, may have thin basement membrane nephropathy with isolated microscopic haematuria",
+      "Kidney biopsy shows characteristic lamellation ('basket-weave') and variable thinning of the glomerular basement membrane on electron microscopy",
+      "Renin-angiotensin system blockade is the mainstay of therapy to reduce proteinuria and slow progression"
     ],
-    [
-     "Key Investigations",
-     "Urinalysis and urine protein quantification to characterise haematuria and proteinuria, Serum creatinine and eGFR to track",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Alport syndrome results from defective type IV collagen, the principal structural collagen of basement membranes. In the autosomal recessive form, pathogenic variants affect both copies of COL4A3 or COL4A4, so the alpha-3/alpha-4/alpha-5 collagen network of the glomerular basement membrane cannot assemble normally. The membrane becomes structurally abnormal, showing thinning and later irregular thickening and splitting (lamellation), leading to progressive glomerular leakage of blood and protein, glomerulosclerosis, tubulointerstitial fibrosis and declining renal function. The same collagen network is important in the cochlea and eye, explaining the associated sensorineural deafness and lens and retinal abnormalities. Heterozygous carriers typically have only a thinned basement membrane manifesting as benign familial haematuria.",
+    "additionalDifferentials": [
+      "X-linked Alport syndrome (COL4A5)",
+      "Thin basement membrane nephropathy (heterozygous carriers)",
+      "IgA nephropathy",
+      "Other hereditary glomerulopathies and podocytopathies",
+      "Post-infectious or other glomerulonephritis",
+      "Autosomal dominant Alport syndrome"
     ],
-    [
-     "Primary Differentials",
-     "X-linked Alport syndrome (COL4A5), Thin basement membrane nephropathy (heterozygous carriers), IgA nephropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis and urine protein quantification to characterise haematuria and proteinuria",
+      "Serum creatinine and eGFR to track progression",
+      "Audiometry for sensorineural hearing loss",
+      "Ophthalmological assessment for lenticonus and retinopathy",
+      "Kidney biopsy with electron microscopy showing basement-membrane lamellation and thinning",
+      "Genetic testing of COL4A3 and COL4A4 with family segregation studies"
     ],
-    [
-     "Management Strategy",
-     "Start renin-angiotensin system blockade with an ACE inhibitor early to reduce proteinuria and slow progression to kidney failure",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly rising creatinine or nephrotic-range proteinuria signalling accelerated progression",
+      "Progressive hearing loss impairing communication",
+      "Advanced CKD requiring planning for renal replacement or transplantation",
+      "Rare anti-GBM disease developing after transplantation"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying inheritance as X-linked, which alters family risk assessment",
-     "Prevent diagnostic or management error"
+    "prognosis": "The autosomal recessive form tends to progress to kidney failure in adolescence or early adulthood; timely renin-angiotensin blockade slows decline, and transplantation is generally successful though a small minority develop post-transplant anti-glomerular basement membrane disease.",
+    "pitfalls": [
+      "Misclassifying inheritance as X-linked, which alters family risk assessment",
+      "Dismissing a carrier parent's isolated haematuria as unimportant",
+      "Missing extrarenal clues (hearing and eye findings) that point to the diagnosis",
+      "Attributing the glomerulonephritis to an acquired cause and delaying genetic testing"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "GeneReviews / KDIGO resources on Alport syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start renin-angiotensin system blockade with an ACE inhibitor early to reduce proteinuria and slow progression to kidney failure",
+      "Add angiotensin receptor blockade or other antiproteinuric therapy where proteinuria persists",
+      "Monitor blood pressure, proteinuria and eGFR regularly to track decline and titrate therapy",
+      "Manage chronic kidney disease complications including anaemia, mineral-bone disorder and acidosis, and control cardiovascular risk",
+      "Provide audiological surveillance with hearing amplification and ophthalmology review for lenticonus and retinopathy",
+      "Plan timely renal replacement therapy with dialysis and transplantation, watching for post-transplant anti-glomerular basement membrane disease",
+      "Offer genetic counselling and screen relatives, recognising heterozygous carriers may have thin basement membrane nephropathy"
     ]
-   ],
-   "caption": "Overview comparison matrix for autosomal recessive alport syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alport-autosomal-recessive-real-image",
-   "title": "Autosomal recessive Alport syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "alport_autosomal_recessive-pathway",
+      "title": "Autosomal recessive Alport syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by biallelic (homozygous or compound heterozygous) variants in COL4A3 or COL4A4, encoding the alpha-3 and alpha-4 chains of type IV collagen",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly rising creatinine or nephrotic-range proteinuria signalling accelerated progression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis and urine protein quantification to characterise haematuria and proteinuria, Serum creatinine and eGFR to track progression, Audiometry for sensorineural hearing loss"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start renin-angiotensin system blockade with an ACE inhibitor early to reduce proteinuria and slow progression to kidney failure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying inheritance as X-linked, which alters family risk assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autosomal recessive alport syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alport_autosomal_recessive-matrix",
+      "title": "Autosomal recessive Alport syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by biallelic (homozygous or compound heterozygous) variants in COL4A3 or COL4A4, encoding the alpha-3 and alpha-4 chains",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis and urine protein quantification to characterise haematuria and proteinuria, Serum creatinine and eGFR to track",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "X-linked Alport syndrome (COL4A5), Thin basement membrane nephropathy (heterozygous carriers), IgA nephropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start renin-angiotensin system blockade with an ACE inhibitor early to reduce proteinuria and slow progression to kidney failure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying inheritance as X-linked, which alters family risk assessment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autosomal recessive alport syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard nephrology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alport_autosomal_recessive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and urine protein quantification",
+          "cells": [
+            {
+              "text": "Haematuria and proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine and eGFR",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Lenticonus and retinal flecks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney biopsy with electron microscopy",
+          "cells": [
+            {
+              "text": "Basement membrane lamellation and thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COL4A3 and COL4A4 genetic testing with family segregation",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alport_autosomal_recessive-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked Alport syndrome (COL4A5)",
+          "cells": [
+            {
+              "text": "Inheritance pattern differs"
+            },
+            {
+              "text": "COL4A5 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thin basement membrane nephropathy",
+          "cells": [
+            {
+              "text": "Heterozygous carriers"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgA nephropathy",
+          "cells": [
+            {
+              "text": "Haematuria with IgA deposition"
+            },
+            {
+              "text": "Kidney biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant Alport syndrome",
+          "cells": [
+            {
+              "text": "Heterozygous variants"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-infectious glomerulonephritis",
+          "cells": [
+            {
+              "text": "Acute nephritic presentation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alport_autosomal_recessive-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early ACE inhibitor",
+          "cells": [
+            {
+              "text": "Reduces proteinuria and slows progression"
+            },
+            {
+              "text": "Early start"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiotensin receptor blocker or other antiproteinuric therapy",
+          "cells": [
+            {
+              "text": "Persistent proteinuria"
+            },
+            {
+              "text": "Add-on"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular blood pressure, proteinuria and eGFR monitoring",
+          "cells": [
+            {
+              "text": "Tracks decline"
+            },
+            {
+              "text": "Titrate therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of anaemia, mineral-bone disorder and acidosis",
+          "cells": [
+            {
+              "text": "CKD complications"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological surveillance and hearing amplification; ophthalmology review",
+          "cells": [
+            {
+              "text": "Hearing loss and lenticonus"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy planning with transplantation",
+          "cells": [
+            {
+              "text": "Advanced CKD"
+            },
+            {
+              "text": "Timely planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and screening of relatives",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "Relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alport_autosomal_recessive-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal recessive Alport syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematuria with progressive proteinuria, hearing loss or lenticonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly rising creatinine, nephrotic proteinuria or accelerated decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review; optimise blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis; eGFR; audiometry; eye review; COL4A3 and COL4A4 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic COL4A3 or COL4A4 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start early ACE inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review X-linked Alport, thin membrane disease and IgA nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add angiotensin receptor blocker for persistent proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor blood pressure, proteinuria and eGFR",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing and eye surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Kidney failure often in adolescence or early adulthood; transplant usually succeeds",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

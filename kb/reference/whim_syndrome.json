@@ -1,175 +1,388 @@
 {
- "id": "whim_syndrome",
- "name": "WHIM syndrome (CXCR4)",
- "aliases": [
-  "CXCR4",
-  "warts, hypogammaglobulinaemia, infections, myelokathexis",
-  "WHIM"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The acronym captures the tetrad of warts, hypogammaglobulinaemia, recurrent infections and myelokathexis, though not every feature is present in each patient",
-   "Peripheral blood shows profound neutropenia despite a hypercellular bone marrow densely packed with mature, degenerating neutrophils held back from release (myelokathexis)",
-   "Human papillomavirus disease is characteristic and severe, with extensive cutaneous and anogenital warts and a raised risk of HPV-driven malignancy",
-   "Recurrent bacterial sinopulmonary infection reflects both neutropenia and impaired humoral immunity with low immunoglobulins and poor vaccine responses",
-   "Lymphopenia affecting B and T cells is usual, and the neutropenia paradoxically worsens the picture despite abundant marrow reserve",
-   "Neutrophil counts often rise transiently during acute infection or after corticosteroid stress, a clue to marrow retention rather than production failure",
-   "Most cases arise from autosomal dominant gain-of-function truncating variants in CXCR4 that prevent normal receptor internalisation",
-   "A CXCR4 antagonist (plerixafor) mobilises retained marrow neutrophils and lymphocytes into the circulation and can reduce infection and wart burden"
+  "id": "whim_syndrome",
+  "name": "WHIM syndrome (CXCR4)",
+  "aliases": [
+    "CXCR4",
+    "warts, hypogammaglobulinaemia, infections, myelokathexis",
+    "WHIM"
   ],
-  "pathophysiology": "WHIM syndrome is caused by gain-of-function variants, usually truncations of the C-terminal tail of the chemokine receptor CXCR4, that impair receptor desensitisation and internalisation after binding its ligand CXCL12. The resulting exaggerated and sustained CXCR4 signalling anchors mature neutrophils and lymphocytes within the bone marrow, preventing their egress into the blood despite adequate production; the retained neutrophils age and die in the marrow, producing myelokathexis. Persistent peripheral neutropenia and lymphopenia, together with impaired antibody production, underlie the recurrent bacterial infections, while defective trafficking and immunity permit uncontrolled human papillomavirus infection.",
-  "additionalDifferentials": [
-   "Severe congenital neutropenia (e.g. ELANE-related)",
-   "Cyclical neutropenia",
-   "Common variable immunodeficiency",
-   "Epidermodysplasia verruciformis",
-   "GATA2 deficiency",
-   "Autoimmune or drug-induced neutropenia"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and differential demonstrating persistent neutropenia and lymphopenia",
-   "Bone marrow examination showing hypercellularity with myelokathexis and degenerating mature neutrophils",
-   "Serum immunoglobulins with hypogammaglobulinaemia and specific antibody responses to vaccines",
-   "Lymphocyte subset enumeration",
-   "CXCR4 gene sequencing for gain-of-function variants",
-   "HPV assessment including cervical and anogenital surveillance"
-  ],
-  "redFlags": [
-   "New or rapidly changing anogenital or cutaneous lesion suggesting HPV-driven malignancy",
-   "Overwhelming bacterial infection in the setting of severe neutropenia",
-   "Progressive hypogammaglobulinaemia with recurrent pneumonia and bronchiectasis",
-   "Cytopenias or marrow changes raising concern for evolving haematological disease"
-  ],
-  "prognosis": "With immunoglobulin replacement, infection prophylaxis and measures to raise the neutrophil count, many patients survive into adulthood, but the persistent HPV burden carries a significant long-term risk of malignancy and chronic morbidity from bronchiectasis.",
-  "pitfalls": [
-   "Interpreting the neutropenia as a production defect and overlooking the hypercellular marrow of myelokathexis",
-   "Missing the diagnosis when only some components of the tetrad are present",
-   "Neglecting systematic HPV surveillance and vaccination in affected patients",
-   "Attributing recurrent infection solely to neutropenia and failing to detect the antibody deficiency",
-   "Being reassured by transient rises in neutrophil count during acute illness"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Consider targeted therapy with a CXCR4 antagonist such as plerixafor or oral mavorixafor to mobilise retained leucocytes and correct the neutropenia and lymphopenia",
-   "Raise neutrophil counts with granulocyte colony-stimulating factor during infection or as maintenance",
-   "Replace immunoglobulin for hypogammaglobulinaemia and poor vaccine responses",
-   "Give antimicrobial prophylaxis and treat bacterial sinopulmonary infections promptly",
-   "Manage the human papillomavirus burden with HPV vaccination, ablative wart treatment and regular cervical and anogenital surveillance for malignancy",
-   "Monitor for and manage bronchiectasis arising from recurrent infection, with airway clearance and physiotherapy",
-   "Offer genetic counselling for this autosomal dominant condition and refer to clinical immunology for coordinated care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "whim_syndrome-pathway",
-   "title": "WHIM syndrome (CXCR4): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The acronym captures the tetrad of warts, hypogammaglobulinaemia, recurrent infections and myelokathexis, though not every feature is present in each patient",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or rapidly changing anogenital or cutaneous lesion suggesting HPV-driven malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and differential demonstrating persistent neutropenia and lymphopenia, Bone marrow examination showing hypercellularity with myelokathexis and degenerating mature neutrophils, Serum immunoglobulins with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Consider targeted therapy with a CXCR4 antagonist such as plerixafor or oral mavorixafor to mobilise retained leucocytes and correct the neutropenia and lymphopenia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting the neutropenia as a production defect and overlooking the hypercellular marrow of myelokathexis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of whim syndrome (cxcr4)."
-  }
- ],
- "tables": [
-  {
-   "id": "whim_syndrome-matrix",
-   "title": "WHIM syndrome (CXCR4): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The acronym captures the tetrad of warts, hypogammaglobulinaemia, recurrent infections and myelokathexis, though not every",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The acronym captures the tetrad of warts, hypogammaglobulinaemia, recurrent infections and myelokathexis, though not every feature is present in each patient",
+      "Peripheral blood shows profound neutropenia despite a hypercellular bone marrow densely packed with mature, degenerating neutrophils held back from release (myelokathexis)",
+      "Human papillomavirus disease is characteristic and severe, with extensive cutaneous and anogenital warts and a raised risk of HPV-driven malignancy",
+      "Recurrent bacterial sinopulmonary infection reflects both neutropenia and impaired humoral immunity with low immunoglobulins and poor vaccine responses",
+      "Lymphopenia affecting B and T cells is usual, and the neutropenia paradoxically worsens the picture despite abundant marrow reserve",
+      "Neutrophil counts often rise transiently during acute infection or after corticosteroid stress, a clue to marrow retention rather than production failure",
+      "Most cases arise from autosomal dominant gain-of-function truncating variants in CXCR4 that prevent normal receptor internalisation",
+      "A CXCR4 antagonist (plerixafor) mobilises retained marrow neutrophils and lymphocytes into the circulation and can reduce infection and wart burden"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and differential demonstrating persistent neutropenia and lymphopenia, Bone marrow examination showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "WHIM syndrome is caused by gain-of-function variants, usually truncations of the C-terminal tail of the chemokine receptor CXCR4, that impair receptor desensitisation and internalisation after binding its ligand CXCL12. The resulting exaggerated and sustained CXCR4 signalling anchors mature neutrophils and lymphocytes within the bone marrow, preventing their egress into the blood despite adequate production; the retained neutrophils age and die in the marrow, producing myelokathexis. Persistent peripheral neutropenia and lymphopenia, together with impaired antibody production, underlie the recurrent bacterial infections, while defective trafficking and immunity permit uncontrolled human papillomavirus infection.",
+    "additionalDifferentials": [
+      "Severe congenital neutropenia (e.g. ELANE-related)",
+      "Cyclical neutropenia",
+      "Common variable immunodeficiency",
+      "Epidermodysplasia verruciformis",
+      "GATA2 deficiency",
+      "Autoimmune or drug-induced neutropenia"
     ],
-    [
-     "Primary Differentials",
-     "Severe congenital neutropenia (e.g. ELANE-related), Cyclical neutropenia, Common variable immunodeficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and differential demonstrating persistent neutropenia and lymphopenia",
+      "Bone marrow examination showing hypercellularity with myelokathexis and degenerating mature neutrophils",
+      "Serum immunoglobulins with hypogammaglobulinaemia and specific antibody responses to vaccines",
+      "Lymphocyte subset enumeration",
+      "CXCR4 gene sequencing for gain-of-function variants",
+      "HPV assessment including cervical and anogenital surveillance"
     ],
-    [
-     "Management Strategy",
-     "Consider targeted therapy with a CXCR4 antagonist such as plerixafor or oral mavorixafor to mobilise retained leucocytes and",
-     "Core treatment modality"
+    "redFlags": [
+      "New or rapidly changing anogenital or cutaneous lesion suggesting HPV-driven malignancy",
+      "Overwhelming bacterial infection in the setting of severe neutropenia",
+      "Progressive hypogammaglobulinaemia with recurrent pneumonia and bronchiectasis",
+      "Cytopenias or marrow changes raising concern for evolving haematological disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting the neutropenia as a production defect and overlooking the hypercellular marrow of myelokathexis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With immunoglobulin replacement, infection prophylaxis and measures to raise the neutrophil count, many patients survive into adulthood, but the persistent HPV burden carries a significant long-term risk of malignancy and chronic morbidity from bronchiectasis.",
+    "pitfalls": [
+      "Interpreting the neutropenia as a production defect and overlooking the hypercellular marrow of myelokathexis",
+      "Missing the diagnosis when only some components of the tetrad are present",
+      "Neglecting systematic HPV surveillance and vaccination in affected patients",
+      "Attributing recurrent infection solely to neutropenia and failing to detect the antibody deficiency",
+      "Being reassured by transient rises in neutrophil count during acute illness"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Consider targeted therapy with a CXCR4 antagonist such as plerixafor or oral mavorixafor to mobilise retained leucocytes and correct the neutropenia and lymphopenia",
+      "Raise neutrophil counts with granulocyte colony-stimulating factor during infection or as maintenance",
+      "Replace immunoglobulin for hypogammaglobulinaemia and poor vaccine responses",
+      "Give antimicrobial prophylaxis and treat bacterial sinopulmonary infections promptly",
+      "Manage the human papillomavirus burden with HPV vaccination, ablative wart treatment and regular cervical and anogenital surveillance for malignancy",
+      "Monitor for and manage bronchiectasis arising from recurrent infection, with airway clearance and physiotherapy",
+      "Offer genetic counselling for this autosomal dominant condition and refer to clinical immunology for coordinated care"
     ]
-   ],
-   "caption": "Overview comparison matrix for whim syndrome (cxcr4)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "whim-syndrome-real-image",
-   "title": "WHIM syndrome (CXCR4): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "whim_syndrome-pathway",
+      "title": "WHIM syndrome (CXCR4): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The acronym captures the tetrad of warts, hypogammaglobulinaemia, recurrent infections and myelokathexis, though not every feature is present in each patient",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or rapidly changing anogenital or cutaneous lesion suggesting HPV-driven malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and differential demonstrating persistent neutropenia and lymphopenia, Bone marrow examination showing hypercellularity with myelokathexis and degenerating mature neutrophils, Serum immunoglobulins with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Consider targeted therapy with a CXCR4 antagonist such as plerixafor or oral mavorixafor to mobilise retained leucocytes and correct the neutropenia and lymphopenia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting the neutropenia as a production defect and overlooking the hypercellular marrow of myelokathexis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of whim syndrome (cxcr4)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "whim_syndrome-matrix",
+      "title": "WHIM syndrome (CXCR4): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The acronym captures the tetrad of warts, hypogammaglobulinaemia, recurrent infections and myelokathexis, though not every",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and differential demonstrating persistent neutropenia and lymphopenia, Bone marrow examination showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Severe congenital neutropenia (e.g. ELANE-related), Cyclical neutropenia, Common variable immunodeficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Consider targeted therapy with a CXCR4 antagonist such as plerixafor or oral mavorixafor to mobilise retained leucocytes and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting the neutropenia as a production defect and overlooking the hypercellular marrow of myelokathexis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for whim syndrome (cxcr4)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "whim_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and differential",
+          "cells": [
+            {
+              "text": "Persistent neutropenia and lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Hypercellular marrow with mature neutrophils retained"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "whim_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe congenital neutropenia",
+          "cells": [
+            {
+              "text": "ELANE-related; production defect rather than retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclical neutropenia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common variable immunodeficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidermodysplasia verruciformis",
+          "cells": [
+            {
+              "text": "Warts and HPV-driven lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "whim_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "CXCR4 antagonist",
+          "cells": [
+            {
+              "text": "Plerixafor or oral mavorixafor to mobilise retained leucocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for HPV-driven malignancy",
+          "cells": [
+            {
+              "text": "New or changing anogenital or cutaneous lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "whim_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of WHIM syndrome (CXCR4)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected WHIM syndrome: warts, hypogammaglobulinaemia and recurrent infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (changing HPV lesion or overwhelming bacterial infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of overwhelming infection; biopsy changing lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and differential, bone marrow examination, immunoglobulin levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does marrow show retained mature neutrophils with neutropenia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe congenital or cyclical neutropenia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider CXCR4 antagonist such as plerixafor or mavorixafor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Do not interpret neutropenia as a production defect alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveillance for HPV-driven malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Recurrent infections and HPV disease persist; targeted therapy is evolving",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

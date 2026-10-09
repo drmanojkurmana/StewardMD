@@ -1,178 +1,474 @@
 {
- "id": "undescended_testis",
- "name": "Undescended Testis",
- "aliases": [
-  "undescended testis",
-  "undescended testicle",
-  "cryptorchidism",
-  "maldescended testis",
-  "cryptorchid testis"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Undescended testis (cryptorchidism) is failure of one or both testes to reach the scrotum, and is among the commonest congenital genitourinary anomalies in boys, more frequent in preterm infants",
-   "Many testes that are undescended at birth descend spontaneously within the first few months, so definitive management is guided by examination after this early window",
-   "It is important to distinguish a true undescended testis from a retractile testis, which can be manipulated into the scrotum and stays there, and requires observation rather than surgery",
-   "A truly impalpable testis raises the possibility of an intra-abdominal, absent, or atrophic (vanished) testis and warrants surgical evaluation",
-   "Bilateral non-palpable testes, especially with hypospadias or other genital ambiguity, should prompt urgent evaluation for a disorder of sex development",
-   "Imaging is unreliable for locating an impalpable testis, and laparoscopy is the definitive means of identifying and managing it",
-   "Orchidopexy, ideally performed in early childhood, brings the testis into the scrotum to optimise fertility potential, allow examination, and reduce though not eliminate cancer risk",
-   "Cryptorchidism is associated with reduced fertility and an increased lifetime risk of testicular germ cell tumour, in both the affected and, to a lesser degree, the contralateral testis",
-   "An acutely painful, swollen groin or scrotum in a boy with an undescended testis should raise concern for torsion of that testis"
+  "id": "undescended_testis",
+  "name": "Undescended Testis",
+  "aliases": [
+    "undescended testis",
+    "undescended testicle",
+    "cryptorchidism",
+    "maldescended testis",
+    "cryptorchid testis"
   ],
-  "pathophysiology": "Testicular descent occurs in two phases governed by hormonal and mechanical factors: a transabdominal phase dependent on insulin-like factor 3 and the gubernaculum, and an inguinoscrotal phase dependent on androgens and the genitofemoral nerve. Disruption of these hormonal signals, gubernacular development, or the mechanical pathway leaves the testis arrested anywhere along its normal route from the abdomen to the scrotum, or in an ectopic position. The undescended testis is exposed to a higher-than-scrotal temperature, which impairs germ cell maturation over time, accounting for reduced fertility, and it carries intrinsic and environmental factors that raise malignancy risk.",
-  "additionalDifferentials": [
-   "Retractile testis",
-   "Ectopic testis (outside the normal line of descent)",
-   "Absent or atrophic (vanished) testis",
-   "Ascending (acquired) undescended testis",
-   "Disorder of sex development in bilateral impalpable cases",
-   "Inguinal hernia presenting as a groin swelling"
-  ],
-  "additionalInvestigations": [
-   "Careful repeated clinical examination in a warm, relaxed setting to determine palpability and position",
-   "Laparoscopy as the definitive investigation for an impalpable testis",
-   "Hormonal evaluation (including gonadotrophins and testosterone-axis testing) in bilateral impalpable cases",
-   "Karyotype and endocrine work-up where a disorder of sex development is suspected",
-   "Ultrasound has limited value and should not delay surgical referral for an impalpable testis"
-  ],
-  "redFlags": [
-   "Bilateral impalpable testes, particularly with hypospadias, suggesting a disorder of sex development requiring urgent assessment",
-   "Acute pain and swelling in an undescended or inguinal testis suggesting torsion",
-   "A previously descended testis that has ascended (acquired cryptorchidism)",
-   "A firm or enlarging testicular mass raising concern for malignancy in later life",
-   "Associated genital ambiguity or endocrine abnormality"
-  ],
-  "prognosis": "Timely orchidopexy in early childhood improves fertility outcomes, particularly in unilateral cases, and facilitates self-examination and earlier tumour detection. Bilateral disease carries greater fertility risk. The increased risk of testicular cancer persists into adulthood despite surgery, so lifelong awareness and self-examination are advised. Retractile testes generally have a benign course but need follow-up because a minority ascend.",
-  "pitfalls": [
-   "Confusing a retractile testis with a true undescended testis and operating unnecessarily",
-   "Relying on ultrasound to locate an impalpable testis and delaying definitive laparoscopy",
-   "Missing a disorder of sex development in bilateral impalpable testes with genital anomalies",
-   "Deferring orchidopexy beyond the optimal early window, compromising fertility potential",
-   "Reassuring families that surgery abolishes the future cancer risk"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Orchidopexy in early childhood as the definitive treatment, surgically mobilising and fixing the testis in the scrotum to improve fertility potential and enable examination",
-   "A period of watchful waiting in the first few months for spontaneous descent, and observation rather than surgery for a retractile testis",
-   "Diagnostic laparoscopy for the truly impalpable testis to locate an intra-abdominal, atrophic or absent gonad and guide operative management",
-   "Long-term monitoring of fertility and instruction in testicular self-examination, since the risk of testicular malignancy persists into adulthood despite surgery",
-   "Urgent evaluation for a disorder of sex development when there are bilateral non-palpable testes, especially with hypospadias or genital ambiguity",
-   "Karyotype, endocrine work-up and genetic counselling where a disorder of sex development is confirmed, with paediatric urology referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "undescended_testis-pathway",
-   "title": "Undescended Testis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Undescended testis (cryptorchidism) is failure of one or both testes to reach the scrotum, and is among the commonest congenital genitourinary anomalies in boys, more frequent in preterm infants",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilateral impalpable testes, particularly with hypospadias, suggesting a disorder of sex development requiring urgent assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful repeated clinical examination in a warm, relaxed setting to determine palpability and position, Laparoscopy as the definitive investigation for an impalpable testis, Hormonal evaluation (including gonadotrophins"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Orchidopexy in early childhood as the definitive treatment, surgically mobilising and fixing the testis in the scrotum to improve fertility potential and enable examination"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a retractile testis with a true undescended testis and operating unnecessarily"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of undescended testis."
-  }
- ],
- "tables": [
-  {
-   "id": "undescended_testis-matrix",
-   "title": "Undescended Testis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Undescended testis (cryptorchidism) is failure of one or both testes to reach the scrotum, and is among the commonest congenital",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Undescended testis (cryptorchidism) is failure of one or both testes to reach the scrotum, and is among the commonest congenital genitourinary anomalies in boys, more frequent in preterm infants",
+      "Many testes that are undescended at birth descend spontaneously within the first few months, so definitive management is guided by examination after this early window",
+      "It is important to distinguish a true undescended testis from a retractile testis, which can be manipulated into the scrotum and stays there, and requires observation rather than surgery",
+      "A truly impalpable testis raises the possibility of an intra-abdominal, absent, or atrophic (vanished) testis and warrants surgical evaluation",
+      "Bilateral non-palpable testes, especially with hypospadias or other genital ambiguity, should prompt urgent evaluation for a disorder of sex development",
+      "Imaging is unreliable for locating an impalpable testis, and laparoscopy is the definitive means of identifying and managing it",
+      "Orchidopexy, ideally performed in early childhood, brings the testis into the scrotum to optimise fertility potential, allow examination, and reduce though not eliminate cancer risk",
+      "Cryptorchidism is associated with reduced fertility and an increased lifetime risk of testicular germ cell tumour, in both the affected and, to a lesser degree, the contralateral testis",
+      "An acutely painful, swollen groin or scrotum in a boy with an undescended testis should raise concern for torsion of that testis"
     ],
-    [
-     "Key Investigations",
-     "Careful repeated clinical examination in a warm, relaxed setting to determine palpability and position, Laparoscopy as the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Testicular descent occurs in two phases governed by hormonal and mechanical factors: a transabdominal phase dependent on insulin-like factor 3 and the gubernaculum, and an inguinoscrotal phase dependent on androgens and the genitofemoral nerve. Disruption of these hormonal signals, gubernacular development, or the mechanical pathway leaves the testis arrested anywhere along its normal route from the abdomen to the scrotum, or in an ectopic position. The undescended testis is exposed to a higher-than-scrotal temperature, which impairs germ cell maturation over time, accounting for reduced fertility, and it carries intrinsic and environmental factors that raise malignancy risk.",
+    "additionalDifferentials": [
+      "Retractile testis",
+      "Ectopic testis (outside the normal line of descent)",
+      "Absent or atrophic (vanished) testis",
+      "Ascending (acquired) undescended testis",
+      "Disorder of sex development in bilateral impalpable cases",
+      "Inguinal hernia presenting as a groin swelling"
     ],
-    [
-     "Primary Differentials",
-     "Retractile testis, Ectopic testis (outside the normal line of descent), Absent or atrophic (vanished) testis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful repeated clinical examination in a warm, relaxed setting to determine palpability and position",
+      "Laparoscopy as the definitive investigation for an impalpable testis",
+      "Hormonal evaluation (including gonadotrophins and testosterone-axis testing) in bilateral impalpable cases",
+      "Karyotype and endocrine work-up where a disorder of sex development is suspected",
+      "Ultrasound has limited value and should not delay surgical referral for an impalpable testis"
     ],
-    [
-     "Management Strategy",
-     "Orchidopexy in early childhood as the definitive treatment, surgically mobilising and fixing the testis in the scrotum to improve",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilateral impalpable testes, particularly with hypospadias, suggesting a disorder of sex development requiring urgent assessment",
+      "Acute pain and swelling in an undescended or inguinal testis suggesting torsion",
+      "A previously descended testis that has ascended (acquired cryptorchidism)",
+      "A firm or enlarging testicular mass raising concern for malignancy in later life",
+      "Associated genital ambiguity or endocrine abnormality"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a retractile testis with a true undescended testis and operating unnecessarily",
-     "Prevent diagnostic or management error"
+    "prognosis": "Timely orchidopexy in early childhood improves fertility outcomes, particularly in unilateral cases, and facilitates self-examination and earlier tumour detection. Bilateral disease carries greater fertility risk. The increased risk of testicular cancer persists into adulthood despite surgery, so lifelong awareness and self-examination are advised. Retractile testes generally have a benign course but need follow-up because a minority ascend.",
+    "pitfalls": [
+      "Confusing a retractile testis with a true undescended testis and operating unnecessarily",
+      "Relying on ultrasound to locate an impalpable testis and delaying definitive laparoscopy",
+      "Missing a disorder of sex development in bilateral impalpable testes with genital anomalies",
+      "Deferring orchidopexy beyond the optimal early window, compromising fertility potential",
+      "Reassuring families that surgery abolishes the future cancer risk"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Orchidopexy in early childhood as the definitive treatment, surgically mobilising and fixing the testis in the scrotum to improve fertility potential and enable examination",
+      "A period of watchful waiting in the first few months for spontaneous descent, and observation rather than surgery for a retractile testis",
+      "Diagnostic laparoscopy for the truly impalpable testis to locate an intra-abdominal, atrophic or absent gonad and guide operative management",
+      "Long-term monitoring of fertility and instruction in testicular self-examination, since the risk of testicular malignancy persists into adulthood despite surgery",
+      "Urgent evaluation for a disorder of sex development when there are bilateral non-palpable testes, especially with hypospadias or genital ambiguity",
+      "Karyotype, endocrine work-up and genetic counselling where a disorder of sex development is confirmed, with paediatric urology referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for undescended testis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "undescended-testis-real-image",
-   "title": "Undescended Testis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "undescended_testis-pathway",
+      "title": "Undescended Testis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Undescended testis (cryptorchidism) is failure of one or both testes to reach the scrotum, and is among the commonest congenital genitourinary anomalies in boys, more frequent in preterm infants",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilateral impalpable testes, particularly with hypospadias, suggesting a disorder of sex development requiring urgent assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful repeated clinical examination in a warm, relaxed setting to determine palpability and position, Laparoscopy as the definitive investigation for an impalpable testis, Hormonal evaluation (including gonadotrophins"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Orchidopexy in early childhood as the definitive treatment, surgically mobilising and fixing the testis in the scrotum to improve fertility potential and enable examination"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a retractile testis with a true undescended testis and operating unnecessarily"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of undescended testis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "undescended_testis-matrix",
+      "title": "Undescended Testis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Undescended testis (cryptorchidism) is failure of one or both testes to reach the scrotum, and is among the commonest congenital",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful repeated clinical examination in a warm, relaxed setting to determine palpability and position, Laparoscopy as the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Retractile testis, Ectopic testis (outside the normal line of descent), Absent or atrophic (vanished) testis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Orchidopexy in early childhood as the definitive treatment, surgically mobilising and fixing the testis in the scrotum to improve",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a retractile testis with a true undescended testis and operating unnecessarily",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for undescended testis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "undescended_testis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated clinical examination in a warm, relaxed setting",
+          "cells": [
+            {
+              "text": "Palpability and position of the testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopy",
+          "cells": [
+            {
+              "text": "Definitive investigation for an impalpable testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal evaluation",
+          "cells": [
+            {
+              "text": "Gonadotrophins and testosterone-axis testing in bilateral impalpable cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and endocrine work-up",
+          "cells": [
+            {
+              "text": "Disorder of sex development, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Limited value; should not delay surgical referral for an impalpable testis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "undescended_testis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retractile testis",
+          "cells": [
+            {
+              "text": "Manipulated into the scrotum and stays there; observation rather than surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic testis",
+          "cells": [
+            {
+              "text": "Lies outside the normal line of descent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Absent or atrophic (vanished) testis",
+          "cells": [
+            {
+              "text": "A truly impalpable testis raises this possibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disorder of sex development",
+          "cells": [
+            {
+              "text": "Bilateral non-palpable testes, especially with hypospadias or genital ambiguity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "undescended_testis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "Spontaneous descent in the first few months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchidopexy",
+          "cells": [
+            {
+              "text": "Early childhood; mobilise and fix the testis in the scrotum to improve fertility potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy",
+          "cells": [
+            {
+              "text": "Truly impalpable testis, to locate an intra-abdominal, atrophic or absent gonad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retractile testis",
+          "cells": [
+            {
+              "text": "Observation rather than surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disorder of sex development evaluation",
+          "cells": [
+            {
+              "text": "Urgent with bilateral non-palpable testes, especially with hypospadias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Fertility and testicular self-examination; cancer risk persists despite surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and endocrine work-up",
+          "cells": [
+            {
+              "text": "Karyotype and genetic counselling when a disorder of sex development is confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "undescended_testis-dx-mgmt",
+      "title": "Diagnosis and management of Undescended Testis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected undescended testis: testis not in the scrotum in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bilateral impalpable testes, acute pain or genital ambiguity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent assessment for a disorder of sex development or testicular torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated examination in a warm setting; laparoscopy if truly impalpable",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the testis confirmed undescended, rather than retractile?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Retractile testis: observe rather than operate; re-examine for descent",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Watchful waiting for spontaneous descent in the first few months",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orchidopexy in early childhood to improve fertility potential",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diagnostic laparoscopy for a truly impalpable testis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong fertility monitoring and testicular self-examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Timely orchidopexy helps fertility and tumour detection; cancer risk persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

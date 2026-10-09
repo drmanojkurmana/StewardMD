@@ -1,167 +1,405 @@
 {
- "id": "oculopalatal_tremor",
- "name": "Oculopalatal tremor",
- "aliases": [
-  "symptomatic palatal tremor",
-  "oculopalatal myoclonus"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology / movement disorder literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A symptomatic tremor combining rhythmic palatal movement with a synchronous pendular, often vertical, nystagmus",
-   "It develops months after a lesion in the brainstem or cerebellum affecting the triangle of Guillain and Mollaret",
-   "The delay to onset corresponds to the development of hypertrophic degeneration of the inferior olive",
-   "The pendular nystagmus causes oscillopsia and is frequently the most disabling symptom for vision",
-   "Unlike essential palatal tremor, it typically persists during sleep and is not primarily associated with an ear click",
-   "MRI characteristically shows enlargement and increased signal of the inferior olive"
+  "id": "oculopalatal_tremor",
+  "name": "Oculopalatal tremor",
+  "aliases": [
+    "symptomatic palatal tremor",
+    "oculopalatal myoclonus"
   ],
-  "pathophysiology": "Oculopalatal tremor arises after a lesion interrupts the dentato-rubro-olivary pathway (the Guillain-Mollaret triangle), leading to transsynaptic hypertrophic degeneration of the inferior olivary nucleus. The abnormal, hypertrophied olive develops rhythmic oscillatory activity that drives synchronous rhythmic movements of the palate and the eyes, producing pendular nystagmus. The characteristic delay of months between the causative lesion and symptom onset reflects the time course of olivary hypertrophy.",
-  "additionalDifferentials": [
-   "Essential palatal tremor",
-   "Other acquired pendular nystagmus (for example demyelinating)",
-   "See-saw nystagmus",
-   "Downbeat or other central nystagmus",
-   "Brainstem or cerebellar tremor syndromes"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brainstem showing hypertrophic olivary degeneration",
-   "Examination of the palate and eyes for synchronous rhythmic movement",
-   "History of a preceding brainstem or cerebellar lesion",
-   "Neuro-ophthalmological assessment of the nystagmus and oscillopsia",
-   "Investigation of the underlying causative lesion if not already known"
-  ],
-  "redFlags": [
-   "Disabling oscillopsia impairing vision",
-   "New or progressive brainstem or cerebellar signs",
-   "An undiagnosed underlying lesion requiring evaluation",
-   "Features suggesting an alternative progressive disorder"
-  ],
-  "prognosis": "The tremor and pendular nystagmus tend to persist and are often difficult to treat; some patients gain partial benefit from medication for the nystagmus, but the underlying olivary change is irreversible.",
-  "pitfalls": [
-   "Confusing it with benign essential palatal tremor despite the nystagmus and persistence in sleep",
-   "Overlooking the typical delayed onset after a brainstem lesion",
-   "Missing hypertrophic olivary degeneration on imaging",
-   "Underestimating the visual disability from oscillopsia"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Bradley and Daroff Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Pharmacological treatment of the disabling pendular nystagmus and oscillopsia, with gabapentin or memantine as best-supported agents and clonazepam as an alternative",
-   "Optical measures for oscillopsia, and consideration of botulinum toxin for troublesome symptomatic nystagmus or palatal movement",
-   "Identification, treatment and monitoring of the underlying brainstem or cerebellar lesion",
-   "Low-vision support and rehabilitation for persistent oscillopsia",
-   "Neurology and neuro-ophthalmology follow-up with realistic counselling, since the hypertrophic olivary change is irreversible and response is often only partial"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oculopalatal_tremor-pathway",
-   "title": "Oculopalatal tremor: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A symptomatic tremor combining rhythmic palatal movement with a synchronous pendular, often vertical, nystagmus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disabling oscillopsia impairing vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brainstem showing hypertrophic olivary degeneration, Examination of the palate and eyes for synchronous rhythmic movement, History of a preceding brainstem or cerebellar lesion"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Pharmacological treatment of the disabling pendular nystagmus and oscillopsia, with gabapentin or memantine as best-supported agents and clonazepam as an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with benign essential palatal tremor despite the nystagmus and persistence in sleep"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oculopalatal tremor."
-  }
- ],
- "tables": [
-  {
-   "id": "oculopalatal_tremor-matrix",
-   "title": "Oculopalatal tremor: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A symptomatic tremor combining rhythmic palatal movement with a synchronous pendular, often vertical, nystagmus",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology / movement disorder literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A symptomatic tremor combining rhythmic palatal movement with a synchronous pendular, often vertical, nystagmus",
+      "It develops months after a lesion in the brainstem or cerebellum affecting the triangle of Guillain and Mollaret",
+      "The delay to onset corresponds to the development of hypertrophic degeneration of the inferior olive",
+      "The pendular nystagmus causes oscillopsia and is frequently the most disabling symptom for vision",
+      "Unlike essential palatal tremor, it typically persists during sleep and is not primarily associated with an ear click",
+      "MRI characteristically shows enlargement and increased signal of the inferior olive"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brainstem showing hypertrophic olivary degeneration, Examination of the palate and eyes for synchronous rhythmic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oculopalatal tremor arises after a lesion interrupts the dentato-rubro-olivary pathway (the Guillain-Mollaret triangle), leading to transsynaptic hypertrophic degeneration of the inferior olivary nucleus. The abnormal, hypertrophied olive develops rhythmic oscillatory activity that drives synchronous rhythmic movements of the palate and the eyes, producing pendular nystagmus. The characteristic delay of months between the causative lesion and symptom onset reflects the time course of olivary hypertrophy.",
+    "additionalDifferentials": [
+      "Essential palatal tremor",
+      "Other acquired pendular nystagmus (for example demyelinating)",
+      "See-saw nystagmus",
+      "Downbeat or other central nystagmus",
+      "Brainstem or cerebellar tremor syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Essential palatal tremor, Other acquired pendular nystagmus (for example demyelinating), See-saw nystagmus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brainstem showing hypertrophic olivary degeneration",
+      "Examination of the palate and eyes for synchronous rhythmic movement",
+      "History of a preceding brainstem or cerebellar lesion",
+      "Neuro-ophthalmological assessment of the nystagmus and oscillopsia",
+      "Investigation of the underlying causative lesion if not already known"
     ],
-    [
-     "Management Strategy",
-     "Pharmacological treatment of the disabling pendular nystagmus and oscillopsia, with gabapentin or memantine as best-supported",
-     "Core treatment modality"
+    "redFlags": [
+      "Disabling oscillopsia impairing vision",
+      "New or progressive brainstem or cerebellar signs",
+      "An undiagnosed underlying lesion requiring evaluation",
+      "Features suggesting an alternative progressive disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with benign essential palatal tremor despite the nystagmus and persistence in sleep",
-     "Prevent diagnostic or management error"
+    "prognosis": "The tremor and pendular nystagmus tend to persist and are often difficult to treat; some patients gain partial benefit from medication for the nystagmus, but the underlying olivary change is irreversible.",
+    "pitfalls": [
+      "Confusing it with benign essential palatal tremor despite the nystagmus and persistence in sleep",
+      "Overlooking the typical delayed onset after a brainstem lesion",
+      "Missing hypertrophic olivary degeneration on imaging",
+      "Underestimating the visual disability from oscillopsia"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Bradley and Daroff Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Pharmacological treatment of the disabling pendular nystagmus and oscillopsia, with gabapentin or memantine as best-supported agents and clonazepam as an alternative",
+      "Optical measures for oscillopsia, and consideration of botulinum toxin for troublesome symptomatic nystagmus or palatal movement",
+      "Identification, treatment and monitoring of the underlying brainstem or cerebellar lesion",
+      "Low-vision support and rehabilitation for persistent oscillopsia",
+      "Neurology and neuro-ophthalmology follow-up with realistic counselling, since the hypertrophic olivary change is irreversible and response is often only partial"
     ]
-   ],
-   "caption": "Overview comparison matrix for oculopalatal tremor."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oculopalatal-tremor-real-image",
-   "title": "Oculopalatal tremor: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "oculopalatal_tremor-pathway",
+      "title": "Oculopalatal tremor: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A symptomatic tremor combining rhythmic palatal movement with a synchronous pendular, often vertical, nystagmus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disabling oscillopsia impairing vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brainstem showing hypertrophic olivary degeneration, Examination of the palate and eyes for synchronous rhythmic movement, History of a preceding brainstem or cerebellar lesion"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Pharmacological treatment of the disabling pendular nystagmus and oscillopsia, with gabapentin or memantine as best-supported agents and clonazepam as an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with benign essential palatal tremor despite the nystagmus and persistence in sleep"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oculopalatal tremor."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oculopalatal_tremor-matrix",
+      "title": "Oculopalatal tremor: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A symptomatic tremor combining rhythmic palatal movement with a synchronous pendular, often vertical, nystagmus",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brainstem showing hypertrophic olivary degeneration, Examination of the palate and eyes for synchronous rhythmic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Essential palatal tremor, Other acquired pendular nystagmus (for example demyelinating), See-saw nystagmus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Pharmacological treatment of the disabling pendular nystagmus and oscillopsia, with gabapentin or memantine as best-supported",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with benign essential palatal tremor despite the nystagmus and persistence in sleep",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oculopalatal tremor."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology / movement disorder literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oculopalatal_tremor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brainstem",
+          "cells": [
+            {
+              "text": "Hypertrophic olivary degeneration; enlarged, high-signal inferior olive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of palate and eyes",
+          "cells": [
+            {
+              "text": "Synchronous rhythmic movement of the palate and eyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of brainstem or cerebellar lesion",
+          "cells": [
+            {
+              "text": "Onset months after a lesion of the triangle of Guillain and Mollaret"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Pendular nystagmus and oscillopsia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculopalatal_tremor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug treatment of disabling nystagmus",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Gabapentin or memantine as best-supported agents; clonazepam as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical measures and botulinum toxin",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Optical measures for oscillopsia; botulinum toxin considered for troublesome symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of the underlying lesion",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Identification, treatment and monitoring of the brainstem or cerebellar lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Rehabilitation for persistent oscillopsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and neuro-ophthalmology follow-up",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Realistic counselling; response is often only partial and olivary change is irreversible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oculopalatal_tremor-dx-mgmt",
+      "title": "Diagnosis and management of Oculopalatal tremor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Palatal tremor with synchronous pendular nystagmus after a brainstem lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (disabling oscillopsia, new brainstem or cerebellar signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: evaluate for an alternative progressive disorder or an unknown lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brainstem for hypertrophic olivary degeneration; palate and eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show an enlarged, high-signal inferior olive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider essential palatal tremor or other pendular nystagmus; review the history",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gabapentin or memantine for disabling nystagmus; clonazepam as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Optical measures for oscillopsia; consider botulinum toxin for troublesome symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision support and rehabilitation for persistent oscillopsia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurology and neuro-ophthalmology follow-up with realistic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms persist; partial benefit possible; olivary change is irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

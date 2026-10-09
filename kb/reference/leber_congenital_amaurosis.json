@@ -1,174 +1,481 @@
 {
- "id": "leber_congenital_amaurosis",
- "name": "Leber congenital amaurosis",
- "aliases": [
-  "LCA",
-  "RPE65",
-  "CEP290",
-  "GUCY2D",
-  "early-onset severe retinal dystrophy"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of severe inherited retinal dystrophies presenting in infancy with profound visual impairment, usually autosomal recessive",
-   "Caused by variants in many genes, including RPE65, CEP290, GUCY2D, CRB1, and others, each with characteristic features",
-   "Infants show poor visual behaviour, roving nystagmus, sluggish pupillary responses, and the oculodigital sign (eye-poking/pressing)",
-   "The electroretinogram is severely reduced or non-recordable early, which is key to the diagnosis",
-   "Fundus may look near-normal in infancy, later developing pigmentary retinopathy, vessel attenuation, and disc pallor",
-   "RPE65-associated disease is treatable with an approved subretinal gene therapy, making genetic diagnosis clinically actionable",
-   "Certain genotypes have systemic associations (e.g. CEP290 with ciliopathy features), so systemic evaluation may be warranted"
+  "id": "leber_congenital_amaurosis",
+  "name": "Leber congenital amaurosis",
+  "aliases": [
+    "LCA",
+    "RPE65",
+    "CEP290",
+    "GUCY2D",
+    "early-onset severe retinal dystrophy"
   ],
-  "pathophysiology": "Leber congenital amaurosis encompasses genetically heterogeneous defects that disrupt photoreceptor development or function and the visual (retinoid) cycle. In RPE65-related disease, for example, the retinal pigment epithelium cannot regenerate the chromophore needed to restore light sensitivity to photoreceptors, so phototransduction fails and photoreceptors degenerate. Other causative genes impair photoreceptor ciliary transport, guanylate cyclase signalling, or outer-segment structure. The common consequence is early and severe loss of rod and cone function, reflected in a profoundly abnormal electroretinogram and progressive retinal degeneration.",
-  "additionalDifferentials": [
-   "Achromatopsia (congenital cone dysfunction)",
-   "Congenital stationary night blindness",
-   "Other early-onset/severe retinal dystrophies",
-   "Cortical (cerebral) visual impairment",
-   "Ocular albinism with nystagmus",
-   "Joubert and Senior-Loken syndromes and other ciliopathies with retinal involvement"
-  ],
-  "additionalInvestigations": [
-   "Full-field electroretinography (severely reduced or non-recordable)",
-   "Molecular genetic testing via retinal dystrophy gene panels",
-   "Optical coherence tomography to assess retinal layer and photoreceptor integrity",
-   "Detailed dilated fundus examination and retinal imaging",
-   "Systemic evaluation (including renal and neurological) where a ciliopathy is suspected",
-   "Assessment of vision and refraction, noting frequent high hyperopia"
-  ],
-  "redFlags": [
-   "Systemic features suggesting an associated ciliopathy (renal impairment, neurological or developmental signs)",
-   "Rapidly progressive visual loss or atypical course prompting reassessment",
-   "Failure to consider a treatable genotype (e.g. RPE65) that has an approved therapy"
-  ],
-  "prognosis": "Vision is severely impaired from infancy and most genotypes are progressive, though some are relatively stable; the prognosis is being transformed for RPE65-related disease by gene therapy, and genotype-specific trials are altering outlook for other subtypes.",
-  "pitfalls": [
-   "Attributing infantile nystagmus and poor vision to cortical visual impairment without electrophysiology",
-   "Failing to obtain genetic testing and missing a treatable RPE65 genotype",
-   "Overlooking systemic ciliopathy associations that require renal or neurological monitoring",
-   "Not correcting the frequently high hyperopic refractive error"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish the molecular genetic diagnosis, since genotype determines treatment eligibility and prognosis and identifies treatable subtypes",
-   "Offer subretinal gene therapy with voretigene neparvovec for confirmed biallelic RPE65-associated disease",
-   "Optimise residual vision with refractive correction of the frequent high hyperopia and provision of low-vision aids",
-   "Provide early visual rehabilitation, educational support and mobility training for children with profound impairment",
-   "Screen for systemic renal and neurological involvement where a ciliopathy such as CEP290-related disease is suspected",
-   "Offer genetic counselling for this usually autosomal recessive condition, with testing of at-risk relatives",
-   "Refer to a specialist inherited retinal disease centre and consider enrolment in genotype-specific therapeutic trials"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "leber_congenital_amaurosis-pathway",
-   "title": "Leber congenital amaurosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of severe inherited retinal dystrophies presenting in infancy with profound visual impairment, usually autosomal recessive",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Systemic features suggesting an associated ciliopathy (renal impairment, neurological or developmental signs)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full-field electroretinography (severely reduced or non-recordable), Molecular genetic testing via retinal dystrophy gene panels, Optical coherence tomography to assess retinal layer and photoreceptor integrity"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish the molecular genetic diagnosis, since genotype determines treatment eligibility and prognosis and identifies treatable subtypes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing infantile nystagmus and poor vision to cortical visual impairment without electrophysiology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of leber congenital amaurosis."
-  }
- ],
- "tables": [
-  {
-   "id": "leber_congenital_amaurosis-matrix",
-   "title": "Leber congenital amaurosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of severe inherited retinal dystrophies presenting in infancy with profound visual impairment, usually autosomal recessive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of severe inherited retinal dystrophies presenting in infancy with profound visual impairment, usually autosomal recessive",
+      "Caused by variants in many genes, including RPE65, CEP290, GUCY2D, CRB1, and others, each with characteristic features",
+      "Infants show poor visual behaviour, roving nystagmus, sluggish pupillary responses, and the oculodigital sign (eye-poking/pressing)",
+      "The electroretinogram is severely reduced or non-recordable early, which is key to the diagnosis",
+      "Fundus may look near-normal in infancy, later developing pigmentary retinopathy, vessel attenuation, and disc pallor",
+      "RPE65-associated disease is treatable with an approved subretinal gene therapy, making genetic diagnosis clinically actionable",
+      "Certain genotypes have systemic associations (e.g. CEP290 with ciliopathy features), so systemic evaluation may be warranted"
     ],
-    [
-     "Key Investigations",
-     "Full-field electroretinography (severely reduced or non-recordable), Molecular genetic testing via retinal dystrophy gene panels,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Leber congenital amaurosis encompasses genetically heterogeneous defects that disrupt photoreceptor development or function and the visual (retinoid) cycle. In RPE65-related disease, for example, the retinal pigment epithelium cannot regenerate the chromophore needed to restore light sensitivity to photoreceptors, so phototransduction fails and photoreceptors degenerate. Other causative genes impair photoreceptor ciliary transport, guanylate cyclase signalling, or outer-segment structure. The common consequence is early and severe loss of rod and cone function, reflected in a profoundly abnormal electroretinogram and progressive retinal degeneration.",
+    "additionalDifferentials": [
+      "Achromatopsia (congenital cone dysfunction)",
+      "Congenital stationary night blindness",
+      "Other early-onset/severe retinal dystrophies",
+      "Cortical (cerebral) visual impairment",
+      "Ocular albinism with nystagmus",
+      "Joubert and Senior-Loken syndromes and other ciliopathies with retinal involvement"
     ],
-    [
-     "Primary Differentials",
-     "Achromatopsia (congenital cone dysfunction), Congenital stationary night blindness, Other early-onset/severe retinal dystrophies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full-field electroretinography (severely reduced or non-recordable)",
+      "Molecular genetic testing via retinal dystrophy gene panels",
+      "Optical coherence tomography to assess retinal layer and photoreceptor integrity",
+      "Detailed dilated fundus examination and retinal imaging",
+      "Systemic evaluation (including renal and neurological) where a ciliopathy is suspected",
+      "Assessment of vision and refraction, noting frequent high hyperopia"
     ],
-    [
-     "Management Strategy",
-     "Establish the molecular genetic diagnosis, since genotype determines treatment eligibility and prognosis and identifies treatable",
-     "Core treatment modality"
+    "redFlags": [
+      "Systemic features suggesting an associated ciliopathy (renal impairment, neurological or developmental signs)",
+      "Rapidly progressive visual loss or atypical course prompting reassessment",
+      "Failure to consider a treatable genotype (e.g. RPE65) that has an approved therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing infantile nystagmus and poor vision to cortical visual impairment without electrophysiology",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vision is severely impaired from infancy and most genotypes are progressive, though some are relatively stable; the prognosis is being transformed for RPE65-related disease by gene therapy, and genotype-specific trials are altering outlook for other subtypes.",
+    "pitfalls": [
+      "Attributing infantile nystagmus and poor vision to cortical visual impairment without electrophysiology",
+      "Failing to obtain genetic testing and missing a treatable RPE65 genotype",
+      "Overlooking systemic ciliopathy associations that require renal or neurological monitoring",
+      "Not correcting the frequently high hyperopic refractive error"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish the molecular genetic diagnosis, since genotype determines treatment eligibility and prognosis and identifies treatable subtypes",
+      "Offer subretinal gene therapy with voretigene neparvovec for confirmed biallelic RPE65-associated disease",
+      "Optimise residual vision with refractive correction of the frequent high hyperopia and provision of low-vision aids",
+      "Provide early visual rehabilitation, educational support and mobility training for children with profound impairment",
+      "Screen for systemic renal and neurological involvement where a ciliopathy such as CEP290-related disease is suspected",
+      "Offer genetic counselling for this usually autosomal recessive condition, with testing of at-risk relatives",
+      "Refer to a specialist inherited retinal disease centre and consider enrolment in genotype-specific therapeutic trials"
     ]
-   ],
-   "caption": "Overview comparison matrix for leber congenital amaurosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "leber-congenital-amaurosis-real-image",
-   "title": "Leber congenital amaurosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "leber_congenital_amaurosis-pathway",
+      "title": "Leber congenital amaurosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of severe inherited retinal dystrophies presenting in infancy with profound visual impairment, usually autosomal recessive",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Systemic features suggesting an associated ciliopathy (renal impairment, neurological or developmental signs)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full-field electroretinography (severely reduced or non-recordable), Molecular genetic testing via retinal dystrophy gene panels, Optical coherence tomography to assess retinal layer and photoreceptor integrity"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish the molecular genetic diagnosis, since genotype determines treatment eligibility and prognosis and identifies treatable subtypes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing infantile nystagmus and poor vision to cortical visual impairment without electrophysiology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of leber congenital amaurosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "leber_congenital_amaurosis-matrix",
+      "title": "Leber congenital amaurosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of severe inherited retinal dystrophies presenting in infancy with profound visual impairment, usually autosomal recessive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full-field electroretinography (severely reduced or non-recordable), Molecular genetic testing via retinal dystrophy gene panels,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Achromatopsia (congenital cone dysfunction), Congenital stationary night blindness, Other early-onset/severe retinal dystrophies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish the molecular genetic diagnosis, since genotype determines treatment eligibility and prognosis and identifies treatable",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing infantile nystagmus and poor vision to cortical visual impairment without electrophysiology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for leber congenital amaurosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leber_congenital_amaurosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-field electroretinography",
+          "cells": [
+            {
+              "text": "Severely reduced or non-recordable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing via retinal dystrophy panels",
+          "cells": [
+            {
+              "text": "Genotype; RPE65 disease is treatable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Retinal layer and photoreceptor integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination and imaging",
+          "cells": [
+            {
+              "text": "Near-normal in infancy; later pigmentary retinopathy and disc pallor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic renal and neurological evaluation",
+          "cells": [
+            {
+              "text": "Where a ciliopathy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction",
+          "cells": [
+            {
+              "text": "Frequent high hyperopia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leber_congenital_amaurosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cortical (cerebral) visual impairment",
+          "cells": [
+            {
+              "text": "Electrophysiology shows severely reduced or non-recordable retinal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joubert and Senior-Loken syndromes",
+          "cells": [
+            {
+              "text": "Ciliopathies with retinal involvement; systemic evaluation needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Achromatopsia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leber_congenital_amaurosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic diagnosis",
+          "cells": [
+            {
+              "text": "Genotype determines treatment eligibility and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subretinal gene therapy",
+          "cells": [
+            {
+              "text": "Voretigene neparvovec for confirmed biallelic RPE65-associated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractive correction and low-vision aids",
+          "cells": [
+            {
+              "text": "For the frequent high hyperopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early visual rehabilitation",
+          "cells": [
+            {
+              "text": "Educational support and mobility training for profound impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic screening",
+          "cells": [
+            {
+              "text": "Renal and neurological involvement where CEP290-related disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually autosomal recessive; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Inherited retinal disease centre; genotype-specific trials"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leber_congenital_amaurosis-dx-mgmt",
+      "title": "Diagnosis and management of Leber congenital amaurosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with profound visual impairment, roving nystagmus and oculodigital sign",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ciliopathy features, rapid visual loss, atypical course)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: renal and neurological evaluation for suspected ciliopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-field ERG, retinal gene panel, OCT, fundus imaging, refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the ERG severely reduced or non-recordable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cortical visual impairment or other retinal or neurological causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Establish the molecular genetic diagnosis to guide treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Offer voretigene neparvovec for confirmed RPE65-associated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Refractive correction of hyperopia and low-vision aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early visual rehabilitation and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for renal and neurological involvement if ciliopathy is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe visual impairment from infancy; progressive in most genotypes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,179 +1,545 @@
 {
- "id": "hyperkalemic_periodic_paralysis",
- "name": "Hyperkalaemic periodic paralysis",
- "aliases": [
-  "Gamstorp disease",
-  "HyperPP",
-  "SCN4A",
-  "adynamia episodica hereditaria",
-  "familial hyperkalaemic periodic paralysis",
-  "hyperPP",
-  "hyperkalaemic periodic paralysis",
-  "potassium-aggravated periodic paralysis",
-  "sodium channelopathy of muscle"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Causes recurrent episodes of flaccid weakness that are typically shorter and more frequent than in the hypokalaemic form, often beginning in early childhood",
-   "Attacks are provoked by rest after exercise, fasting, cold exposure and ingestion of potassium-rich foods",
-   "Serum potassium rises or stays in the upper normal range during an attack because potassium moves out of muscle, though it may be normal by the time it is measured",
-   "Inherited as an autosomal dominant trait caused by gain-of-function mutations in the SCN4A skeletal-muscle sodium channel gene",
-   "Clinical or electrical myotonia, particularly of the eyelids, frequently coexists and helps distinguish it from the hypokalaemic form",
-   "Ingesting carbohydrate or gentle continued activity can abort an evolving attack, and prophylaxis uses carbonic anhydrase inhibitors or potassium-lowering measures such as thiazide diuretics",
-   "Allelic overlap with paramyotonia congenita and the potassium-aggravated myotonias means phenotypes can blend within families"
+  "id": "hyperkalemic_periodic_paralysis",
+  "name": "Hyperkalaemic periodic paralysis",
+  "aliases": [
+    "Gamstorp disease",
+    "HyperPP",
+    "SCN4A",
+    "adynamia episodica hereditaria",
+    "familial hyperkalaemic periodic paralysis",
+    "hyperPP",
+    "hyperkalaemic periodic paralysis",
+    "potassium-aggravated periodic paralysis",
+    "sodium channelopathy of muscle"
   ],
-  "pathophysiology": "Hyperkalaemic periodic paralysis is caused by gain-of-function mutations in SCN4A, the gene for the alpha subunit of the skeletal-muscle voltage-gated sodium channel Nav1.4. The mutant channels fail to inactivate completely, producing a persistent inward sodium current that keeps the sarcolemma partially depolarised. A modest rise in extracellular potassium further depolarises the membrane, and when depolarisation is sufficient the sodium channels become inactivated and the fibre inexcitable, causing flaccid paralysis. When depolarisation is milder it instead produces repetitive firing experienced as myotonia, explaining the frequent overlap of weakness and stiffness in affected individuals.",
-  "additionalDifferentials": [
-   "Hypokalaemic periodic paralysis",
-   "Paramyotonia congenita and potassium-aggravated myotonia",
-   "Andersen-Tawil syndrome",
-   "Secondary hyperkalaemia from renal failure, adrenal insufficiency or medication",
-   "Myotonia congenita",
-   "Acute neuromuscular weakness such as Guillain-Barre syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum potassium and electrocardiogram during a spontaneous attack",
-   "Electromyography to detect myotonic discharges between or during attacks",
-   "Short and prolonged exercise electromyography protocols demonstrating characteristic compound muscle action potential changes",
-   "Renal and adrenal assessment to exclude secondary causes of hyperkalaemia",
-   "Targeted SCN4A genetic testing",
-   "Muscle biopsy where a fixed myopathy or diagnostic uncertainty exists"
-  ],
-  "redFlags": [
-   "Respiratory compromise or unusually prolonged, severe weakness during an attack",
-   "Cardiac arrhythmia associated with rising potassium",
-   "Hyperkalaemia due to a coexisting renal or endocrine disorder requiring separate treatment",
-   "Development of a fixed proximal myopathy with permanent weakness"
-  ],
-  "prognosis": "Attacks tend to be brief and frequent in childhood and often become milder in adult life, and most patients have a normal life expectancy, although some develop a slowly progressive fixed proximal myopathy over time.",
-  "pitfalls": [
-   "Measuring potassium too late, when a transiently elevated level has already returned to normal",
-   "Failing to recognise coexisting myotonia that would point away from the hypokalaemic form",
-   "Attributing hyperkalaemia to primary renal or adrenal disease and missing the channelopathy",
-   "Overlooking that potassium supplementation or potassium-rich diets can precipitate rather than relieve attacks"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: Hyperkalemic Periodic Paralysis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Terminate early attacks with carbohydrate ingestion or mild sustained activity, and consider an inhaled beta-agonist to shift potassium intracellularly",
-   "Prevent recurrent attacks with a carbonic anhydrase inhibitor such as acetazolamide or with a thiazide diuretic to lower potassium",
-   "Counsel on avoiding provoking factors including fasting, cold exposure, potassium-rich foods and rest after exertion",
-   "Encourage a potassium-sparing, carbohydrate-rich dietary pattern with regular meals",
-   "Manage coexisting myotonia where symptomatic, for example with a sodium-channel-blocking agent",
-   "Monitor serum potassium and the electrocardiogram during attacks and watch for a progressive fixed proximal myopathy",
-   "Provide genetic counselling for autosomal dominant inheritance and manage through a neuromuscular service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hyperkalemic_periodic_paralysis-pathway",
-   "title": "Hyperkalaemic periodic paralysis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Causes recurrent episodes of flaccid weakness that are typically shorter and more frequent than in the hypokalaemic form, often beginning in early childhood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory compromise or unusually prolonged, severe weakness during an attack",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum potassium and electrocardiogram during a spontaneous attack, Electromyography to detect myotonic discharges between or during attacks, Short and prolonged exercise electromyography protocols demonstrating"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Terminate early attacks with carbohydrate ingestion or mild sustained activity, and consider an inhaled beta-agonist to shift potassium intracellularly"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Measuring potassium too late, when a transiently elevated level has already returned to normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hyperkalaemic periodic paralysis."
-  }
- ],
- "tables": [
-  {
-   "id": "hyperkalemic_periodic_paralysis-matrix",
-   "title": "Hyperkalaemic periodic paralysis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Causes recurrent episodes of flaccid weakness that are typically shorter and more frequent than in the hypokalaemic form, often",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Causes recurrent episodes of flaccid weakness that are typically shorter and more frequent than in the hypokalaemic form, often beginning in early childhood",
+      "Attacks are provoked by rest after exercise, fasting, cold exposure and ingestion of potassium-rich foods",
+      "Serum potassium rises or stays in the upper normal range during an attack because potassium moves out of muscle, though it may be normal by the time it is measured",
+      "Inherited as an autosomal dominant trait caused by gain-of-function mutations in the SCN4A skeletal-muscle sodium channel gene",
+      "Clinical or electrical myotonia, particularly of the eyelids, frequently coexists and helps distinguish it from the hypokalaemic form",
+      "Ingesting carbohydrate or gentle continued activity can abort an evolving attack, and prophylaxis uses carbonic anhydrase inhibitors or potassium-lowering measures such as thiazide diuretics",
+      "Allelic overlap with paramyotonia congenita and the potassium-aggravated myotonias means phenotypes can blend within families"
     ],
-    [
-     "Key Investigations",
-     "Serum potassium and electrocardiogram during a spontaneous attack, Electromyography to detect myotonic discharges between or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hyperkalaemic periodic paralysis is caused by gain-of-function mutations in SCN4A, the gene for the alpha subunit of the skeletal-muscle voltage-gated sodium channel Nav1.4. The mutant channels fail to inactivate completely, producing a persistent inward sodium current that keeps the sarcolemma partially depolarised. A modest rise in extracellular potassium further depolarises the membrane, and when depolarisation is sufficient the sodium channels become inactivated and the fibre inexcitable, causing flaccid paralysis. When depolarisation is milder it instead produces repetitive firing experienced as myotonia, explaining the frequent overlap of weakness and stiffness in affected individuals.",
+    "additionalDifferentials": [
+      "Hypokalaemic periodic paralysis",
+      "Paramyotonia congenita and potassium-aggravated myotonia",
+      "Andersen-Tawil syndrome",
+      "Secondary hyperkalaemia from renal failure, adrenal insufficiency or medication",
+      "Myotonia congenita",
+      "Acute neuromuscular weakness such as Guillain-Barre syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Hypokalaemic periodic paralysis, Paramyotonia congenita and potassium-aggravated myotonia, Andersen-Tawil syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum potassium and electrocardiogram during a spontaneous attack",
+      "Electromyography to detect myotonic discharges between or during attacks",
+      "Short and prolonged exercise electromyography protocols demonstrating characteristic compound muscle action potential changes",
+      "Renal and adrenal assessment to exclude secondary causes of hyperkalaemia",
+      "Targeted SCN4A genetic testing",
+      "Muscle biopsy where a fixed myopathy or diagnostic uncertainty exists"
     ],
-    [
-     "Management Strategy",
-     "Terminate early attacks with carbohydrate ingestion or mild sustained activity, and consider an inhaled beta-agonist to shift",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory compromise or unusually prolonged, severe weakness during an attack",
+      "Cardiac arrhythmia associated with rising potassium",
+      "Hyperkalaemia due to a coexisting renal or endocrine disorder requiring separate treatment",
+      "Development of a fixed proximal myopathy with permanent weakness"
     ],
-    [
-     "Clinical Pitfall",
-     "Measuring potassium too late, when a transiently elevated level has already returned to normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Attacks tend to be brief and frequent in childhood and often become milder in adult life, and most patients have a normal life expectancy, although some develop a slowly progressive fixed proximal myopathy over time.",
+    "pitfalls": [
+      "Measuring potassium too late, when a transiently elevated level has already returned to normal",
+      "Failing to recognise coexisting myotonia that would point away from the hypokalaemic form",
+      "Attributing hyperkalaemia to primary renal or adrenal disease and missing the channelopathy",
+      "Overlooking that potassium supplementation or potassium-rich diets can precipitate rather than relieve attacks"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: Hyperkalemic Periodic Paralysis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Terminate early attacks with carbohydrate ingestion or mild sustained activity, and consider an inhaled beta-agonist to shift potassium intracellularly",
+      "Prevent recurrent attacks with a carbonic anhydrase inhibitor such as acetazolamide or with a thiazide diuretic to lower potassium",
+      "Counsel on avoiding provoking factors including fasting, cold exposure, potassium-rich foods and rest after exertion",
+      "Encourage a potassium-sparing, carbohydrate-rich dietary pattern with regular meals",
+      "Manage coexisting myotonia where symptomatic, for example with a sodium-channel-blocking agent",
+      "Monitor serum potassium and the electrocardiogram during attacks and watch for a progressive fixed proximal myopathy",
+      "Provide genetic counselling for autosomal dominant inheritance and manage through a neuromuscular service"
     ]
-   ],
-   "caption": "Overview comparison matrix for hyperkalaemic periodic paralysis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hyperkalemic-periodic-paralysis-real-image",
-   "title": "Hyperkalaemic periodic paralysis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hyperkalemic_periodic_paralysis-pathway",
+      "title": "Hyperkalaemic periodic paralysis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Causes recurrent episodes of flaccid weakness that are typically shorter and more frequent than in the hypokalaemic form, often beginning in early childhood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory compromise or unusually prolonged, severe weakness during an attack",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum potassium and electrocardiogram during a spontaneous attack, Electromyography to detect myotonic discharges between or during attacks, Short and prolonged exercise electromyography protocols demonstrating"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Terminate early attacks with carbohydrate ingestion or mild sustained activity, and consider an inhaled beta-agonist to shift potassium intracellularly"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Measuring potassium too late, when a transiently elevated level has already returned to normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hyperkalaemic periodic paralysis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hyperkalemic_periodic_paralysis-matrix",
+      "title": "Hyperkalaemic periodic paralysis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Causes recurrent episodes of flaccid weakness that are typically shorter and more frequent than in the hypokalaemic form, often",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum potassium and electrocardiogram during a spontaneous attack, Electromyography to detect myotonic discharges between or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypokalaemic periodic paralysis, Paramyotonia congenita and potassium-aggravated myotonia, Andersen-Tawil syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Terminate early attacks with carbohydrate ingestion or mild sustained activity, and consider an inhaled beta-agonist to shift",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Measuring potassium too late, when a transiently elevated level has already returned to normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hyperkalaemic periodic paralysis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 22-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperkalemic_periodic_paralysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum potassium and ECG during a spontaneous attack",
+          "cells": [
+            {
+              "text": "Raised or high-normal potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography between or during attacks",
+          "cells": [
+            {
+              "text": "Myotonic discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short and prolonged exercise electromyography",
+          "cells": [
+            {
+              "text": "Characteristic compound muscle action potential changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and adrenal assessment",
+          "cells": [
+            {
+              "text": "Excludes secondary hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN4A genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Fixed myopathy or diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemic_periodic_paralysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypokalaemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Low potassium during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paramyotonia congenita",
+          "cells": [
+            {
+              "text": "Cold-induced stiffness and potassium-aggravated myotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Andersen-Tawil syndrome",
+          "cells": [
+            {
+              "text": "Cardiac arrhythmia and dysmorphic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary hyperkalaemia",
+          "cells": [
+            {
+              "text": "Renal failure, adrenal insufficiency or medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Reflex loss and rising CSF protein"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemic_periodic_paralysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbohydrate ingestion or mild activity",
+          "cells": [
+            {
+              "text": "Terminates early attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled beta-agonist",
+          "cells": [
+            {
+              "text": "Shifts potassium intracellularly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetazolamide or a thiazide diuretic",
+          "cells": [
+            {
+              "text": "Prevents recurrent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid provoking factors",
+          "cells": [
+            {
+              "text": "Fasting, cold, potassium-rich food and rest after exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-sparing, carbohydrate-rich diet",
+          "cells": [
+            {
+              "text": "Regular meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium-channel-blocking agent",
+          "cells": [
+            {
+              "text": "Symptomatic myotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium and ECG monitoring",
+          "cells": [
+            {
+              "text": "Watch for progressive fixed proximal myopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemic_periodic_paralysis-ddx-2",
+      "kind": "ddx",
+      "title": "Causes of episodic generalized weakness",
+      "rowHeader": "Condition",
+      "columns": [
+        "Examples"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrolyte disturbances",
+          "cells": [
+            {
+              "text": "hypokalemia, hyperkalemia, hypercalcemia, hypernatremia, hyponatremia, hypophosphatemia, hypermagnesemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Muscle disorders",
+          "cells": [
+            {
+              "text": "channelopathies (periodic paralyses); metabolic defects of muscle (impaired carbohydrate or fatty acid use, abnormal mitochondrial function)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuromuscular junction disorders",
+          "cells": [
+            {
+              "text": "myasthenia gravis; Lambert-Eaton myasthenic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Central nervous system disorders",
+          "cells": [
+            {
+              "text": "transient ischemic attacks of the brainstem; transient global cerebral ischemia; multiple sclerosis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperkalemic_periodic_paralysis-dx-mgmt",
+      "title": "Diagnosis and management of Hyperkalaemic periodic paralysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent flaccid weakness with raised or high-normal potassium during attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory compromise, prolonged severe weakness, arrhythmia, or fixed myopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for respiratory compromise or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Potassium and ECG in attack; EMG; exercise EMG; renal and adrenal tests; SCN4A",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are SCN4A variants found with secondary causes of hyperkalaemia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypokalaemic PP, paramyotonia, Andersen-Tawil or secondary hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Carbohydrate or mild activity to end early attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inhaled beta-agonist to shift potassium into cells",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acetazolamide or thiazide diuretic to prevent attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietary and trigger avoidance with neuromuscular follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks reduced; potassium and myopathy monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

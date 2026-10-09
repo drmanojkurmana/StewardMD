@@ -1,199 +1,681 @@
 {
- "id": "oncologic_emergencies",
- "name": "Oncologic Emergencies",
- "system": "Oncology / Emergency",
- "class": "non_infective",
- "chapter": 80,
- "page": 585,
- "aliases": [
-  "tumor lysis syndrome",
-  "superior vena cava syndrome"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.585-595",
-  "clinicalPearls": [
-   "Emergencies in cancer fall into three groups: pressure/obstruction from a space-occupying lesion (structural-obstructive), metabolic or hormonal problems (paraneoplastic), and treatment-related complications (Harrison 22e p.585).",
-   "Superior vena cava syndrome (SVCS) reflects SVC obstruction with severe reduction of venous return from head, neck and upper extremities; lung cancer (especially small-cell and squamous) accounts for ~85% of malignant cases, and in young adults lymphoma is a leading cause (Harrison 22e p.585).",
-   "Benign causes of SVCS are increasing with intravascular device use (central catheters, pacemaker/defibrillator leads) and now account for at least 40% of cases (Harrison 22e p.585).",
-   "SVCS typically presents with neck and facial swelling (especially periorbital), dyspnea, cough, dilated neck veins, collateral chest-wall veins, cyanosis and facial plethora that worsens when supine; bending forward or lying down aggravates symptoms (Harrison 22e p.585).",
-   "The diagnosis of SVCS is clinical; the most significant chest radiograph finding is widening of the superior mediastinum (most often right-sided), and CT provides the most reliable mediastinal anatomy (Harrison 22e p.586).",
-   "Malignant spinal cord compression (MSCC) is compression of cord and/or cauda equina by an extradural tumor mass; spinal cord compression occurs in 5-10% of cancer patients and is the first manifestation of malignancy in ~10% (Harrison 22e p.588).",
-   "Localized back pain and tenderness is the most common initial symptom of spinal cord compression, often present for days to months before neurologic findings; it characteristically worsens when supine, unlike disk-disease pain (Harrison 22e p.588-589).",
-   "The thoracic spine is the most common site of cord compression (70%), followed by lumbosacral (20%) and cervical (10%); lung, breast and prostate cancers are the most frequent offenders (Harrison 22e p.588).",
-   "Treatment of spinal cord compression is more often successful in patients still ambulatory and with sphincter control at initiation; patients whose exam suggests compression should receive dexamethasone immediately and undergo MRI (Harrison 22e p.589).",
-   "Full-length spinal MRI is the imaging procedure of choice for cord compression and is as good as or better than myelography plus post-myelogram CT (Harrison 22e p.589).",
-   "About 25% of cancer patients die with intracranial metastases; lung and breast cancer and melanoma metastasize to brain most often, and brain metastases present features of an expanding intracranial lesion: headache, nausea, vomiting, behavioral change, seizures and focal progressive deficits (Harrison 22e p.589-590).",
-   "Dexamethasone is the best initial treatment for all symptomatic patients with brain metastases and raised intracranial pressure (Harrison 22e p.590).",
-   "Hypercalcemia is the most common paraneoplastic syndrome, and SIADH is the most common cause of hyponatremia among cancer patients (both detailed in Chaps. 98 and 422/393) (Harrison 22e p.592).",
-   "Tumor lysis syndrome (TLS) is characterized by hyperuricemia, hyperkalemia, hyperphosphatemia and hypocalcemia from destruction of large numbers of rapidly proliferating cells; acidosis may develop and acute renal failure occurs frequently (Harrison 22e p.593).",
-   "TLS is most often associated with treatment of Burkitt's lymphoma, ALL, AML and other rapidly proliferating lymphomas, and usually occurs during or shortly (1-5 days) after chemotherapy; risk correlates with tumor burden and high LDH (>1500 U/L) (Harrison 22e p.593).",
-   "Recognition of risk and prevention are the most important steps in TLS management; the standard preventive approach is allopurinol plus aggressive hydration (Harrison 22e p.593).",
-   "Febrile neutropenia is the clinical presentation of fever with <1500 granulocytes/uL; it is a key treatment-related emergency in cancer patients (Harrison 22e p.575)."
+  "id": "oncologic_emergencies",
+  "name": "Oncologic Emergencies",
+  "system": "Oncology / Emergency",
+  "class": "non_infective",
+  "chapter": 80,
+  "page": 585,
+  "aliases": [
+    "tumor lysis syndrome",
+    "superior vena cava syndrome"
   ],
-  "pathophysiology": "Oncologic emergencies arise by three mechanisms (Harrison 22e p.585). Structural-obstructive emergencies result from a space-occupying lesion: in SVCS, malignant tumor or thrombosis obstructs the superior vena cava, reducing venous return from head, neck and upper limbs; in malignant spinal cord compression, an expanding extradural tumor (usually metastasis to vertebral body or pedicle, or paravertebral extension through the intervertebral foramen) mechanically injures axons and myelin and compromises blood flow, causing ischemia/infarction; raised intracranial pressure results from brain metastases and surrounding edema, sometimes with hemorrhage or CSF obstruction causing hydrocephalus and herniation (Harrison 22e p.585-590). Metabolic/hormonal (paraneoplastic) emergencies include hypercalcemia, SIADH-related hyponatremia, lactic acidosis and hypoglycemia (Harrison 22e p.592-593). Treatment-related TLS occurs when cytotoxic killing of a large rapidly proliferating tumor releases intracellular contents: nucleic acid turnover raises uric acid which precipitates in the acidic renal tubules; released phosphate causes hyperphosphatemia with reciprocal hypocalcemia and calcium-phosphate nephrocalcinosis; and massive cell destruction releases potassium causing hyperkalemia, which in renal failure can cause fatal ventricular arrhythmias (Harrison 22e p.593).",
-  "additionalDifferentials": [
-   "SVCS in a young man with a mediastinal mass: lymphoma versus primary mediastinal germ cell tumor (Harrison 22e p.585)",
-   "Cauda equina syndrome: low back pain, saddle sensory loss, rectal/bladder dysfunction, sexual impotence and absent reflexes from compression of nerve roots forming the cauda equina (Harrison 22e p.589)",
-   "Abrupt stroke-like onset of headache, nausea, vomiting and focal deficit in brain metastasis usually indicates hemorrhage into the metastasis (melanoma, germ cell and renal cell tumors bleed readily) (Harrison 22e p.590)"
-  ],
-  "infectionMimics": [
-   "Pyogenic epidural abscess or vertebral tuberculosis can mimic malignant spinal cord compression (Harrison 22e p.589)"
-  ],
-  "nonInfectiousMimics": [
-   "Spinal cord compression mimics: osteoporotic vertebral collapse, disk disease, radiation myelopathy, neoplastic leptomeningitis, benign tumors, epidural hematoma and spinal lipomatosis (Harrison 22e p.589)",
-   "About 20% of vertebral collapse (especially in older patients and postmenopausal women) is due to osteoporosis rather than cancer (Harrison 22e p.589)",
-   "Benign causes of SVCS: aortic aneurysm, thyromegaly, thrombosis, and fibrosing mediastinitis from prior irradiation, histoplasmosis or Behcet's syndrome (Harrison 22e p.585)",
-   "Pseudohyperkalemia from high leukocyte/platelet counts (cell lysis after blood draw) can falsely elevate potassium in TLS; no ECG abnormalities are present (Harrison 22e p.593)",
-   "Pseudohypoglycemia from glucose consumption in the test tube with hyperleukocytosis, myeloproliferative disease or CSF treatment (Harrison 22e p.593)"
-  ],
-  "additionalInvestigations": [
-   "SVCS: chest radiograph (superior mediastinal widening, usually right-sided), CT thorax (most reliable mediastinal view; 'hot quadrate' hepatic hotspot sign suggests SVC obstruction), MRI (100% sensitivity/specificity but supine positioning may be difficult in dyspneic patients) (Harrison 22e p.586)",
-   "Spinal cord compression: neurologic exam and plain spine films first (earliest finding is the 'winking owl' sign of pedicle erosion; plain films are insensitive), then full-length spinal MRI (procedure of choice); myelography reserved for poor or unobtainable MRI (Harrison 22e p.589)",
-   "Brain metastases/raised ICP: gadolinium-enhanced MRI is superior to CT and more sensitive for meningeal involvement and small posterior-fossa lesions (Harrison 22e p.590)",
-   "TLS pretreatment evaluation in at-risk patients: complete blood count, serum chemistry (electrolytes, creatinine, calcium, phosphate, uric acid) and urinalysis; follow plasma rather than serum potassium when pseudohyperkalemia is suspected; sonography/CT of kidneys and retroperitoneum if baseline renal function is abnormal (Harrison 22e p.593)",
-   "A urinary uric acid to urinary creatinine ratio >1 supports acute hyperuricemic nephropathy; <1 suggests renal failure of other cause (Harrison 22e p.593)"
-  ],
-  "redFlags": [
-   "SVCS with cerebral and/or laryngeal edema, proptosis, glossal/laryngeal edema, obtundation or postural hypotension carries poorer prognosis and requires urgent evaluation and early stenting (Harrison 22e p.585-586)",
-   "Tracheal obstruction from a superior mediastinal mass is the one potentially life-threatening complication of SVCS and demands emergent therapy; cardiac arrest or respiratory failure can occur, particularly with sedatives or general anesthesia (Harrison 22e p.585-586)",
-   "Cancer patient with back pain plus a crescendo pain pattern, Lhermitte's sign, or pain aggravated by cough/Valsalva/recumbency should be evaluated for cord compression as quickly as possible (Harrison 22e p.589)",
-   "Loss of bowel or bladder control, autonomic dysfunction (decreased anal tone, distended bladder, absent anal wink/bulbocavernosus reflex) signals significant cord involvement and is an unfavorable prognostic feature (Harrison 22e p.588)",
-   "Hyperkalemia in TLS with renal failure can rapidly become life-threatening, causing ventricular arrhythmias and sudden death (Harrison 22e p.593)",
-   "Acute adrenal insufficiency (adrenal crisis) is potentially lethal and may be masked by nonspecific symptoms attributed to cancer or therapy (Harrison 22e p.593)",
-   "Febrile neutropenia (fever with <1500 granulocytes/uL) is a treatment-related emergency requiring prompt management (Harrison 22e p.575)"
-  ],
-  "prognosis": "In SVCS, mortality relates to the underlying cause rather than to caval obstruction itself, and clinical improvement occurs in most patients (sometimes via collateral circulation); SVCS recurs in 10-30% (Harrison 22e p.586). For spinal cord compression, tumor histology is an important determinant of recovery and survival, and rapid onset/progression of signs and symptoms are poor prognostic features; treatment is more often successful in ambulatory patients who retain sphincter control (Harrison 22e p.589). Brain metastases frequently cause major symptoms, disability and early death (Harrison 22e p.590). Lactic acidosis in cancer carries a poor prognosis regardless of treatment, and cancer patients with malignant cells on pericardial cytology have very poor survival (Harrison 22e p.587, 592). Despite aggressive prophylaxis, TLS with oliguric/anuric renal failure may still occur and often requires renal replacement therapy (Harrison 22e p.594).",
-  "pitfalls": [
-   "A normal chest radiograph is still compatible with the diagnosis of SVCS if other characteristic findings are present (Harrison 22e p.586)",
-   "A normal appearance of plain spine films does not exclude cancer; plain films are insensitive for cord compression (Harrison 22e p.589)",
-   "Vertebral collapse is not a reliable indicator of tumor since ~20% of collapses are osteoporotic (Harrison 22e p.589)",
-   "After SVC stenting, the prompt increase in venous return may precipitate heart failure and pulmonary edema (Harrison 22e p.586)",
-   "Urinary alkalinization with sodium bicarbonate is no longer recommended in TLS: although it increases uric acid solubility, a high pH decreases solubility of xanthine, hypoxanthine and calcium phosphate, potentially increasing intratubular crystallization (Harrison 22e p.593)",
-   "Rasburicase is contraindicated in glucose-6-phosphate dehydrogenase deficiency, and it causes ex vivo degradation of uric acid in the test tube giving spuriously low levels unless samples are cooled immediately (Harrison 22e p.594)",
-   "Pseudohyperkalemia in TLS shows no ECG abnormalities; plasma rather than serum potassium should be followed (Harrison 22e p.593)",
-   "Arterial blood gas oxygen tension can be spuriously low in hyperleukocytosis due to oxygen consumption by white cells; pulse oximetry is the most accurate measure of oxygenation (Harrison 22e p.591)"
-  ],
-  "severityClassification": "Spinal cord compression management uses the NOMS framework (Memorial Sloan Kettering): Neurologic assessment (degree of epidural compression, myelopathy, functional radiculopathy), Oncologic assessment (tumor radiosensitivity), Mechanical assessment (spinal stability), and Systemic factors (extent of disease and comorbidities determining tolerance of therapy) (Harrison 22e p.589-590). TLS risk is stratified by tumor burden, renal function, hyperuricemia and high LDH (>1500 U/L); a high-risk management algorithm escalates from hydration and allopurinol to recombinant urate oxidase/rasburicase and hemodialysis based on serum uric acid, creatinine, potassium, phosphate and symptomatic hypocalcemia thresholds (Harrison 22e p.593-594).",
-  "references": [
-   "Harrison 22e p.585-595",
-   "Azizi AH et al: Superior vena cava syndrome. JACC Cardiovasc Interv 13:2896, 2020",
-   "Durani U, Hogan WJ: Emergencies in haematology: Tumour lysis syndrome. Br J Haematol 188:494, 2020",
-   "Lawton AJ et al: Assessment and management of patients with metastatic spinal cord compression: A multidisciplinary review. J Clin Oncol 37:61, 2019"
-  ],
-  "crossLinks": [
-   "svc_obstruction",
-   "cord_compression",
-   "hypercalcemia",
-   "FEBRILE_NEUTROPENIA",
-   "hyponatremia"
-  ],
-  "management": [
-   "In superior vena cava syndrome, elevate the head, give oxygen and corticosteroids, and direct urgent chemotherapy or radiotherapy at the tumour type, with endovascular stenting for severe or refractory obstruction and catheter removal plus anticoagulation for device-related thrombosis",
-   "In malignant spinal cord compression, start corticosteroids (dexamethasone) immediately, obtain urgent MRI, and achieve definitive decompression by surgery or radiotherapy to preserve neurological function",
-   "For raised intracranial pressure from brain metastases, give corticosteroids for vasogenic oedema, add osmotic therapy, and proceed to radiotherapy or surgical resection, with anticonvulsants for seizures",
-   "In tumour lysis syndrome, use vigorous intravenous hydration, rasburicase or allopurinol for hyperuricaemia, and correct hyperkalaemia, hyperphosphataemia and hypocalcaemia, escalating to renal replacement therapy when refractory",
-   "Obtain prompt histological diagnosis where malignancy is not yet established, since tissue diagnosis directs definitive tumour-specific therapy",
-   "Coordinate care across oncology, radiation oncology, neurosurgery and critical care",
-   "Escalate to emergency intervention for airway compromise, rapidly progressive neurological deficit or refractory metabolic derangement"
-  ]
- },
- "algorithms": [
-  {
-   "id": "oncologic_emergencies-pathway",
-   "title": "Oncologic Emergencies: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Emergencies in cancer fall into three groups: pressure/obstruction from a space-occupying lesion (structural-obstructive), metabolic or hormonal problems (paraneoplastic), and treatment-related complications (Harrison 22e p.585).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: SVCS with cerebral and/or laryngeal edema, proptosis, glossal/laryngeal edema, obtundation or postural hypotension carries poorer prognosis and requires urgent evaluation and early stenting (Harrison 22e",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: SVCS: chest radiograph (superior mediastinal widening, usually right-sided), CT thorax (most reliable mediastinal view; 'hot quadrate' hepatic hotspot sign suggests SVC obstruction), MRI (100% sensitivity/specificity but"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In superior vena cava syndrome, elevate the head, give oxygen and corticosteroids, and direct urgent chemotherapy or radiotherapy at the tumour type, with endovascular stenting for severe or refractory obstruction and"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: A normal chest radiograph is still compatible with the diagnosis of SVCS if other characteristic findings are present (Harrison 22e p.586)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oncologic emergencies."
-  }
- ],
- "tables": [
-  {
-   "id": "oncologic_emergencies-matrix",
-   "title": "Oncologic Emergencies: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Emergencies in cancer fall into three groups: pressure/obstruction from a space-occupying lesion (structural-obstructive),",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.585-595",
+    "clinicalPearls": [
+      "Emergencies in cancer fall into three groups: pressure/obstruction from a space-occupying lesion (structural-obstructive), metabolic or hormonal problems (paraneoplastic), and treatment-related complications (Harrison 22e p.585).",
+      "Superior vena cava syndrome (SVCS) reflects SVC obstruction with severe reduction of venous return from head, neck and upper extremities; lung cancer (especially small-cell and squamous) accounts for ~85% of malignant cases, and in young adults lymphoma is a leading cause (Harrison 22e p.585).",
+      "Benign causes of SVCS are increasing with intravascular device use (central catheters, pacemaker/defibrillator leads) and now account for at least 40% of cases (Harrison 22e p.585).",
+      "SVCS typically presents with neck and facial swelling (especially periorbital), dyspnea, cough, dilated neck veins, collateral chest-wall veins, cyanosis and facial plethora that worsens when supine; bending forward or lying down aggravates symptoms (Harrison 22e p.585).",
+      "The diagnosis of SVCS is clinical; the most significant chest radiograph finding is widening of the superior mediastinum (most often right-sided), and CT provides the most reliable mediastinal anatomy (Harrison 22e p.586).",
+      "Malignant spinal cord compression (MSCC) is compression of cord and/or cauda equina by an extradural tumor mass; spinal cord compression occurs in 5-10% of cancer patients and is the first manifestation of malignancy in ~10% (Harrison 22e p.588).",
+      "Localized back pain and tenderness is the most common initial symptom of spinal cord compression, often present for days to months before neurologic findings; it characteristically worsens when supine, unlike disk-disease pain (Harrison 22e p.588-589).",
+      "The thoracic spine is the most common site of cord compression (70%), followed by lumbosacral (20%) and cervical (10%); lung, breast and prostate cancers are the most frequent offenders (Harrison 22e p.588).",
+      "Treatment of spinal cord compression is more often successful in patients still ambulatory and with sphincter control at initiation; patients whose exam suggests compression should receive dexamethasone immediately and undergo MRI (Harrison 22e p.589).",
+      "Full-length spinal MRI is the imaging procedure of choice for cord compression and is as good as or better than myelography plus post-myelogram CT (Harrison 22e p.589).",
+      "About 25% of cancer patients die with intracranial metastases; lung and breast cancer and melanoma metastasize to brain most often, and brain metastases present features of an expanding intracranial lesion: headache, nausea, vomiting, behavioral change, seizures and focal progressive deficits (Harrison 22e p.589-590).",
+      "Dexamethasone is the best initial treatment for all symptomatic patients with brain metastases and raised intracranial pressure (Harrison 22e p.590).",
+      "Hypercalcemia is the most common paraneoplastic syndrome, and SIADH is the most common cause of hyponatremia among cancer patients (both detailed in Chaps. 98 and 422/393) (Harrison 22e p.592).",
+      "Tumor lysis syndrome (TLS) is characterized by hyperuricemia, hyperkalemia, hyperphosphatemia and hypocalcemia from destruction of large numbers of rapidly proliferating cells; acidosis may develop and acute renal failure occurs frequently (Harrison 22e p.593).",
+      "TLS is most often associated with treatment of Burkitt's lymphoma, ALL, AML and other rapidly proliferating lymphomas, and usually occurs during or shortly (1-5 days) after chemotherapy; risk correlates with tumor burden and high LDH (>1500 U/L) (Harrison 22e p.593).",
+      "Recognition of risk and prevention are the most important steps in TLS management; the standard preventive approach is allopurinol plus aggressive hydration (Harrison 22e p.593).",
+      "Febrile neutropenia is the clinical presentation of fever with <1500 granulocytes/uL; it is a key treatment-related emergency in cancer patients (Harrison 22e p.575)."
     ],
-    [
-     "Key Investigations",
-     "SVCS: chest radiograph (superior mediastinal widening, usually right-sided), CT thorax (most reliable mediastinal view; 'hot",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oncologic emergencies arise by three mechanisms (Harrison 22e p.585). Structural-obstructive emergencies result from a space-occupying lesion: in SVCS, malignant tumor or thrombosis obstructs the superior vena cava, reducing venous return from head, neck and upper limbs; in malignant spinal cord compression, an expanding extradural tumor (usually metastasis to vertebral body or pedicle, or paravertebral extension through the intervertebral foramen) mechanically injures axons and myelin and compromises blood flow, causing ischemia/infarction; raised intracranial pressure results from brain metastases and surrounding edema, sometimes with hemorrhage or CSF obstruction causing hydrocephalus and herniation (Harrison 22e p.585-590). Metabolic/hormonal (paraneoplastic) emergencies include hypercalcemia, SIADH-related hyponatremia, lactic acidosis and hypoglycemia (Harrison 22e p.592-593). Treatment-related TLS occurs when cytotoxic killing of a large rapidly proliferating tumor releases intracellular contents: nucleic acid turnover raises uric acid which precipitates in the acidic renal tubules; released phosphate causes hyperphosphatemia with reciprocal hypocalcemia and calcium-phosphate nephrocalcinosis; and massive cell destruction releases potassium causing hyperkalemia, which in renal failure can cause fatal ventricular arrhythmias (Harrison 22e p.593).",
+    "additionalDifferentials": [
+      "SVCS in a young man with a mediastinal mass: lymphoma versus primary mediastinal germ cell tumor (Harrison 22e p.585)",
+      "Cauda equina syndrome: low back pain, saddle sensory loss, rectal/bladder dysfunction, sexual impotence and absent reflexes from compression of nerve roots forming the cauda equina (Harrison 22e p.589)",
+      "Abrupt stroke-like onset of headache, nausea, vomiting and focal deficit in brain metastasis usually indicates hemorrhage into the metastasis (melanoma, germ cell and renal cell tumors bleed readily) (Harrison 22e p.590)"
     ],
-    [
-     "Primary Differentials",
-     "SVCS in a young man with a mediastinal mass: lymphoma versus primary mediastinal germ cell tumor (Harrison 22e p.585), Cauda",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Pyogenic epidural abscess or vertebral tuberculosis can mimic malignant spinal cord compression (Harrison 22e p.589)"
     ],
-    [
-     "Management Strategy",
-     "In superior vena cava syndrome, elevate the head, give oxygen and corticosteroids, and direct urgent chemotherapy or radiotherapy",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Spinal cord compression mimics: osteoporotic vertebral collapse, disk disease, radiation myelopathy, neoplastic leptomeningitis, benign tumors, epidural hematoma and spinal lipomatosis (Harrison 22e p.589)",
+      "About 20% of vertebral collapse (especially in older patients and postmenopausal women) is due to osteoporosis rather than cancer (Harrison 22e p.589)",
+      "Benign causes of SVCS: aortic aneurysm, thyromegaly, thrombosis, and fibrosing mediastinitis from prior irradiation, histoplasmosis or Behcet's syndrome (Harrison 22e p.585)",
+      "Pseudohyperkalemia from high leukocyte/platelet counts (cell lysis after blood draw) can falsely elevate potassium in TLS; no ECG abnormalities are present (Harrison 22e p.593)",
+      "Pseudohypoglycemia from glucose consumption in the test tube with hyperleukocytosis, myeloproliferative disease or CSF treatment (Harrison 22e p.593)"
     ],
-    [
-     "Clinical Pitfall",
-     "A normal chest radiograph is still compatible with the diagnosis of SVCS if other characteristic findings are present (Harrison",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "SVCS: chest radiograph (superior mediastinal widening, usually right-sided), CT thorax (most reliable mediastinal view; 'hot quadrate' hepatic hotspot sign suggests SVC obstruction), MRI (100% sensitivity/specificity but supine positioning may be difficult in dyspneic patients) (Harrison 22e p.586)",
+      "Spinal cord compression: neurologic exam and plain spine films first (earliest finding is the 'winking owl' sign of pedicle erosion; plain films are insensitive), then full-length spinal MRI (procedure of choice); myelography reserved for poor or unobtainable MRI (Harrison 22e p.589)",
+      "Brain metastases/raised ICP: gadolinium-enhanced MRI is superior to CT and more sensitive for meningeal involvement and small posterior-fossa lesions (Harrison 22e p.590)",
+      "TLS pretreatment evaluation in at-risk patients: complete blood count, serum chemistry (electrolytes, creatinine, calcium, phosphate, uric acid) and urinalysis; follow plasma rather than serum potassium when pseudohyperkalemia is suspected; sonography/CT of kidneys and retroperitoneum if baseline renal function is abnormal (Harrison 22e p.593)",
+      "A urinary uric acid to urinary creatinine ratio >1 supports acute hyperuricemic nephropathy; <1 suggests renal failure of other cause (Harrison 22e p.593)"
+    ],
+    "redFlags": [
+      "SVCS with cerebral and/or laryngeal edema, proptosis, glossal/laryngeal edema, obtundation or postural hypotension carries poorer prognosis and requires urgent evaluation and early stenting (Harrison 22e p.585-586)",
+      "Tracheal obstruction from a superior mediastinal mass is the one potentially life-threatening complication of SVCS and demands emergent therapy; cardiac arrest or respiratory failure can occur, particularly with sedatives or general anesthesia (Harrison 22e p.585-586)",
+      "Cancer patient with back pain plus a crescendo pain pattern, Lhermitte's sign, or pain aggravated by cough/Valsalva/recumbency should be evaluated for cord compression as quickly as possible (Harrison 22e p.589)",
+      "Loss of bowel or bladder control, autonomic dysfunction (decreased anal tone, distended bladder, absent anal wink/bulbocavernosus reflex) signals significant cord involvement and is an unfavorable prognostic feature (Harrison 22e p.588)",
+      "Hyperkalemia in TLS with renal failure can rapidly become life-threatening, causing ventricular arrhythmias and sudden death (Harrison 22e p.593)",
+      "Acute adrenal insufficiency (adrenal crisis) is potentially lethal and may be masked by nonspecific symptoms attributed to cancer or therapy (Harrison 22e p.593)",
+      "Febrile neutropenia (fever with <1500 granulocytes/uL) is a treatment-related emergency requiring prompt management (Harrison 22e p.575)"
+    ],
+    "prognosis": "In SVCS, mortality relates to the underlying cause rather than to caval obstruction itself, and clinical improvement occurs in most patients (sometimes via collateral circulation); SVCS recurs in 10-30% (Harrison 22e p.586). For spinal cord compression, tumor histology is an important determinant of recovery and survival, and rapid onset/progression of signs and symptoms are poor prognostic features; treatment is more often successful in ambulatory patients who retain sphincter control (Harrison 22e p.589). Brain metastases frequently cause major symptoms, disability and early death (Harrison 22e p.590). Lactic acidosis in cancer carries a poor prognosis regardless of treatment, and cancer patients with malignant cells on pericardial cytology have very poor survival (Harrison 22e p.587, 592). Despite aggressive prophylaxis, TLS with oliguric/anuric renal failure may still occur and often requires renal replacement therapy (Harrison 22e p.594).",
+    "pitfalls": [
+      "A normal chest radiograph is still compatible with the diagnosis of SVCS if other characteristic findings are present (Harrison 22e p.586)",
+      "A normal appearance of plain spine films does not exclude cancer; plain films are insensitive for cord compression (Harrison 22e p.589)",
+      "Vertebral collapse is not a reliable indicator of tumor since ~20% of collapses are osteoporotic (Harrison 22e p.589)",
+      "After SVC stenting, the prompt increase in venous return may precipitate heart failure and pulmonary edema (Harrison 22e p.586)",
+      "Urinary alkalinization with sodium bicarbonate is no longer recommended in TLS: although it increases uric acid solubility, a high pH decreases solubility of xanthine, hypoxanthine and calcium phosphate, potentially increasing intratubular crystallization (Harrison 22e p.593)",
+      "Rasburicase is contraindicated in glucose-6-phosphate dehydrogenase deficiency, and it causes ex vivo degradation of uric acid in the test tube giving spuriously low levels unless samples are cooled immediately (Harrison 22e p.594)",
+      "Pseudohyperkalemia in TLS shows no ECG abnormalities; plasma rather than serum potassium should be followed (Harrison 22e p.593)",
+      "Arterial blood gas oxygen tension can be spuriously low in hyperleukocytosis due to oxygen consumption by white cells; pulse oximetry is the most accurate measure of oxygenation (Harrison 22e p.591)"
+    ],
+    "severityClassification": "Spinal cord compression management uses the NOMS framework (Memorial Sloan Kettering): Neurologic assessment (degree of epidural compression, myelopathy, functional radiculopathy), Oncologic assessment (tumor radiosensitivity), Mechanical assessment (spinal stability), and Systemic factors (extent of disease and comorbidities determining tolerance of therapy) (Harrison 22e p.589-590). TLS risk is stratified by tumor burden, renal function, hyperuricemia and high LDH (>1500 U/L); a high-risk management algorithm escalates from hydration and allopurinol to recombinant urate oxidase/rasburicase and hemodialysis based on serum uric acid, creatinine, potassium, phosphate and symptomatic hypocalcemia thresholds (Harrison 22e p.593-594).",
+    "references": [
+      "Harrison 22e p.585-595",
+      "Azizi AH et al: Superior vena cava syndrome. JACC Cardiovasc Interv 13:2896, 2020",
+      "Durani U, Hogan WJ: Emergencies in haematology: Tumour lysis syndrome. Br J Haematol 188:494, 2020",
+      "Lawton AJ et al: Assessment and management of patients with metastatic spinal cord compression: A multidisciplinary review. J Clin Oncol 37:61, 2019"
+    ],
+    "crossLinks": [
+      "svc_obstruction",
+      "cord_compression",
+      "hypercalcemia",
+      "FEBRILE_NEUTROPENIA",
+      "hyponatremia"
+    ],
+    "management": [
+      "In superior vena cava syndrome, elevate the head, give oxygen and corticosteroids, and direct urgent chemotherapy or radiotherapy at the tumour type, with endovascular stenting for severe or refractory obstruction and catheter removal plus anticoagulation for device-related thrombosis",
+      "In malignant spinal cord compression, start corticosteroids (dexamethasone) immediately, obtain urgent MRI, and achieve definitive decompression by surgery or radiotherapy to preserve neurological function",
+      "For raised intracranial pressure from brain metastases, give corticosteroids for vasogenic oedema, add osmotic therapy, and proceed to radiotherapy or surgical resection, with anticonvulsants for seizures",
+      "In tumour lysis syndrome, use vigorous intravenous hydration, rasburicase or allopurinol for hyperuricaemia, and correct hyperkalaemia, hyperphosphataemia and hypocalcaemia, escalating to renal replacement therapy when refractory",
+      "Obtain prompt histological diagnosis where malignancy is not yet established, since tissue diagnosis directs definitive tumour-specific therapy",
+      "Coordinate care across oncology, radiation oncology, neurosurgery and critical care",
+      "Escalate to emergency intervention for airway compromise, rapidly progressive neurological deficit or refractory metabolic derangement"
     ]
-   ],
-   "caption": "Overview comparison matrix for oncologic emergencies."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oncologic-emergencies-real-image",
-   "title": "Oncologic Emergencies: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "oncologic_emergencies-pathway",
+      "title": "Oncologic Emergencies: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Emergencies in cancer fall into three groups: pressure/obstruction from a space-occupying lesion (structural-obstructive), metabolic or hormonal problems (paraneoplastic), and treatment-related complications (Harrison 22e p.585).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: SVCS with cerebral and/or laryngeal edema, proptosis, glossal/laryngeal edema, obtundation or postural hypotension carries poorer prognosis and requires urgent evaluation and early stenting (Harrison 22e",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: SVCS: chest radiograph (superior mediastinal widening, usually right-sided), CT thorax (most reliable mediastinal view; 'hot quadrate' hepatic hotspot sign suggests SVC obstruction), MRI (100% sensitivity/specificity but"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In superior vena cava syndrome, elevate the head, give oxygen and corticosteroids, and direct urgent chemotherapy or radiotherapy at the tumour type, with endovascular stenting for severe or refractory obstruction and"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: A normal chest radiograph is still compatible with the diagnosis of SVCS if other characteristic findings are present (Harrison 22e p.586)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oncologic emergencies."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oncologic_emergencies-matrix",
+      "title": "Oncologic Emergencies: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Emergencies in cancer fall into three groups: pressure/obstruction from a space-occupying lesion (structural-obstructive),",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "SVCS: chest radiograph (superior mediastinal widening, usually right-sided), CT thorax (most reliable mediastinal view; 'hot",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SVCS in a young man with a mediastinal mass: lymphoma versus primary mediastinal germ cell tumor (Harrison 22e p.585), Cauda",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In superior vena cava syndrome, elevate the head, give oxygen and corticosteroids, and direct urgent chemotherapy or radiotherapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "A normal chest radiograph is still compatible with the diagnosis of SVCS if other characteristic findings are present (Harrison",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oncologic emergencies."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "WikEM, Tumor Lysis Syndrome (Cairo-Bishop criteria)",
+      "kind": "web",
+      "url": "https://wikem.org/wiki/Tumor_Lysis_Syndrome"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oncologic_emergencies-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising oncologic emergencies",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Laboratory TLS (Cairo-Bishop)",
+          "cells": [
+            {
+              "text": "2 or more within 3 days before to 7 days after chemotherapy",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Uric acid 8 mg/dL or more, K 6 or more, phosphate 4.5 mg/dL or more, Ca 7 mg/dL or less (or 25% change)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clinical TLS",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Lab TLS plus creatinine over 1.5 x ULN, arrhythmia or seizure",
+              "op": ">",
+              "value": 1.5
+            },
+            {
+              "text": "High LDH over 1500 U/L marks high risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Uric acid nephropathy",
+          "cells": [
+            {
+              "text": "Urine uric acid to creatinine ratio over 1",
+              "op": ">",
+              "value": 1
+            },
+            {
+              "text": "Under 1 suggests other cause of AKI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudohyperkalaemia",
+          "cells": [
+            {
+              "text": "High K without ECG change in leukocytosis"
+            },
+            {
+              "text": "Check plasma potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SVC syndrome",
+          "cells": [
+            {
+              "text": "Face and neck swelling, distended neck and chest veins, worse lying down"
+            },
+            {
+              "text": "Lung cancer about 85% of malignant cases; devices cause at least 40% overall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SVC imaging",
+          "cells": [
+            {
+              "text": "Chest film: right superior mediastinal widening; CT most reliable"
+            },
+            {
+              "text": "Normal film does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal cord compression",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "In 5 to 10% of cancer patients; thoracic 70%",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "{{hy:Back pain worse lying down is the first symptom}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cord compression imaging",
+          "cells": [
+            {
+              "text": "Whole-spine MRI"
+            },
+            {
+              "text": "Plain films are insensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Febrile neutropenia",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Fever with granulocytes under 1500/uL",
+              "op": "<",
+              "value": 1500
+            },
+            {
+              "text": "Treat as an emergency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oncologic_emergencies-ddx",
+      "kind": "ddx",
+      "title": "Mimics of oncologic emergencies",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteoporotic vertebral collapse",
+          "cells": [
+            {
+              "text": "About 20% of collapses; older women"
+            },
+            {
+              "text": "MRI marrow signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural abscess or spinal TB",
+          "cells": [
+            {
+              "text": "Fever, raised inflammatory markers"
+            },
+            {
+              "text": "MRI and blood cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disc disease",
+          "cells": [
+            {
+              "text": "Pain eases lying down"
+            },
+            {
+              "text": "MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign SVC obstruction",
+          "cells": [
+            {
+              "text": "Catheter or pacemaker lead, fibrosing mediastinitis"
+            },
+            {
+              "text": "CT venography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhage into brain metastasis",
+          "cells": [
+            {
+              "text": "Sudden stroke-like onset; melanoma, renal, germ cell"
+            },
+            {
+              "text": "CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudohyperkalaemia or pseudohypoglycaemia",
+          "cells": [
+            {
+              "text": "Very high white or platelet count"
+            },
+            {
+              "text": "Plasma K; repeat on ice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cauda equina syndrome",
+          "cells": [
+            {
+              "text": "Saddle anaesthesia, sphincter loss, absent reflexes"
+            },
+            {
+              "text": "Lumbosacral MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oncologic_emergencies-treatment",
+      "kind": "treatment",
+      "title": "Emergency management",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dexamethasone then MRI",
+          "cells": [
+            {
+              "text": "{{hy:Suspected cord compression}}"
+            },
+            {
+              "text": "Then radiotherapy or surgical decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SVC syndrome care",
+          "cells": [
+            {
+              "text": "SVC obstruction"
+            },
+            {
+              "text": "Head up, oxygen, steroids; tissue diagnosis; stent if severe or airway or brain oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TLS hydration",
+          "cells": [
+            {
+              "text": "High risk or established TLS"
+            },
+            {
+              "text": "Target urine output 3 L/24 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allopurinol",
+          "cells": [
+            {
+              "text": "TLS prevention"
+            },
+            {
+              "text": "10 mg/kg/day PO in 3 doses or 200 to 400 mg/m2 IV every 12 h; renally adjust"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rasburicase",
+          "cells": [
+            {
+              "text": "High risk or uric acid 8 mg/dL or more"
+            },
+            {
+              "text": "0.05 to 0.2 mg/kg IV; not in G6PD deficiency; cool samples"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No urine alkalinisation",
+          "cells": [
+            {
+              "text": "TLS"
+            },
+            {
+              "text": "Raises xanthine and calcium phosphate crystallisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dialysis",
+          "cells": [
+            {
+              "text": "K over 6, uric acid over 10, phosphate over 10, creatinine over 10, symptomatic hypocalcaemia, overload"
+            },
+            {
+              "text": "Refractory derangement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Raised ICP from metastases",
+          "cells": [
+            {
+              "text": "Vasogenic oedema"
+            },
+            {
+              "text": "Steroids, osmotic therapy, then radiotherapy or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Febrile neutropenia",
+          "cells": [
+            {
+              "text": "Fever with neutropenia"
+            },
+            {
+              "text": "Prompt cultures and empiric broad antibiotics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oncologic_emergencies-dx-mgmt",
+      "title": "Diagnosis and management of oncologic emergencies",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Patient with known or suspected cancer and acute deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Back pain with neuro signs or sphincter change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Dexamethasone now; whole-spine MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Radiotherapy or surgery by NOMS assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Face or neck swelling with distended veins?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "CT chest; tissue diagnosis; stent if airway or cerebral oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Recent chemotherapy with high K, phosphate or uric acid?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hydrate, rasburicase or allopurinol; cardiac monitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Refractory K, uric acid, phosphate or overload?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Urgent dialysis",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue hydration and repeat electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Assess for febrile neutropenia, hypercalcaemia, raised ICP",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

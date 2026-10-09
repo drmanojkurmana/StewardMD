@@ -1,203 +1,695 @@
 {
- "id": "nafld",
- "name": "MASLD / NAFLD (Fatty Liver Disease)",
- "system": "Hepatology",
- "class": "non_infective",
- "chapter": 354,
- "page": 2700,
- "aliases": [
-  "NAFLD",
-  "NASH",
-  "MASLD",
-  "MASH",
-  "fatty liver"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2700",
-  "clinicalPearls": [
-   "Steatotic liver disease (SLD) is the most common cause of chronic liver disease in the US and worldwide; metabolic dysfunction-associated steatotic liver disease (MASLD) and steatohepatitis (MASH) now replace the older terms NAFLD and NASH, with ~98% population overlap (Harrison 22e p.2700-2701).",
-   "Diagnosis of MASLD requires hepatic steatosis plus little/no alcohol intake (<20 g/d women, <30 g/d men) and at least one cardiometabolic risk factor (overweight/obesity, hypertension, dyslipidemia, insulin resistance/T2DM) (Harrison 22e p.2700, 2703).",
-   "Most patients are asymptomatic; MASLD is typically detected incidentally via raised ALT or steatosis on imaging done for other reasons (Harrison 22e p.2702-2703).",
-   "Disease spans a dynamic, potentially reversible spectrum: simple steatosis (MASL) -> steatohepatitis (MASH) -> fibrosis -> cirrhosis/HCC; chronic steatohepatitis is the primary driver of fibrosis, and fibrosis severity is the chief predictor of liver-related morbidity/mortality (Harrison 22e p.2700-2701, 2704).",
-   "FIB-4 (age, AST, ALT, platelets) is the recommended first-line noninvasive score with excellent negative predictive value: FIB-4 <1.3 = low risk (manage in primary care), >=2.67 = moderate/high risk warranting a secondary test (elastography or ELF) (Harrison 22e p.2704-2705).",
-   "T2DM is the strongest risk factor for MASLD acquisition, fibrosis progression, and HCC; the MASLD-T2DM relationship is bidirectional, so patients with MASLD should be screened for T2DM (Harrison 22e p.2703).",
-   "Foundational treatment is lifestyle modification with weight loss: ~5% weight loss improves steatosis, while >10% improves MASH and can reverse fibrosis; cardiovascular risk reduction and treatment of metabolic comorbidities apply to all patients (Harrison 22e p.2706).",
-   "Statins are safe across the MASLD spectrum and indicated for dyslipidemia given high cardiovascular risk; reluctance to use them is not supported by evidence of liver harm (Harrison 22e p.2707)."
+  "id": "nafld",
+  "name": "MASLD / NAFLD (Fatty Liver Disease)",
+  "system": "Hepatology",
+  "class": "non_infective",
+  "chapter": 354,
+  "page": 2700,
+  "aliases": [
+    "NAFLD",
+    "NASH",
+    "MASLD",
+    "MASH",
+    "fatty liver"
   ],
-  "pathophysiology": "MASLD arises from imbalance between energy intake and expenditure: excess caloric intake, reduced physical activity, and limited peripheral adipose expansion drive visceral adiposity, insulin resistance, and metabolic dysfunction. Hepatocyte triglyceride accumulates from increased free fatty acid delivery (dietary uptake, adipose lipolysis, de novo lipogenesis), impaired fatty acid disposal, or impaired triglyceride export; triglyceride storage itself is relatively safe, so steatosis per se does not damage the liver but is a biomarker of metabolic dysfunction. When adaptive mechanisms are overwhelmed, lipotoxicity from dysfunctional lipid handling injures and kills hepatocytes, producing steatohepatitis (MASH) with inflammation and ballooned hepatocytes. Repeated/protracted MASH triggers regenerative responses that become maladaptive, promoting progressive fibrosis (replacement of functional parenchyma by scar) and primary liver cancer; cirrhosis represents futile repair. Heritable factors (e.g., PNPLA3, TM6SF2, MBOAT7 variants), epigenetic influences, gut microbiota alterations, and environmental factors (high-fat/high-sugar diets) modify susceptibility (Harrison 22e p.2701-2702).",
-  "additionalDifferentials": [
-   "Alcohol-associated liver disease (ALD) and the intermediate MetALD category (metabolic dysfunction with social alcohol use, 20-50 g/d women, 30-60 g/d men)",
-   "Hepatitis C, particularly genotype 3",
-   "Autoimmune hepatitis",
-   "Wilson disease",
-   "Hemochromatosis / iron overload",
-   "Alpha-1 antitrypsin deficiency",
-   "Inborn errors of metabolism (abetalipoproteinemia, cholesterol ester storage disease, galactosemia, glycogen storage disease, hereditary fructose intolerance, homocystinuria, systemic carnitine deficiency, tyrosinemia)",
-   "Weber-Christian syndrome"
-  ],
-  "infectionMimics": [
-   "Chronic hepatitis C (genotype 3 causes hepatic steatosis)",
-   "Chronic hepatitis B"
-  ],
-  "nonInfectiousMimics": [
-   "Alcohol-associated liver disease (histologically can be indistinguishable; alcohol intake must be excluded)",
-   "Autoimmune hepatitis (note ~20% of steatotic liver disease patients have a positive ANA)",
-   "Medication/drug-associated steatosis or steatohepatitis",
-   "Wilson disease, hemochromatosis, alpha-1 antitrypsin deficiency"
-  ],
-  "additionalInvestigations": [
-   "Serum aminotransferases (ALT/AST) - true normal ALT is ~29-33 U/L (men) and ~19-25 U/L (women); normal liver enzymes do NOT exclude MASLD",
-   "FIB-4 score (age, AST, ALT, platelet count) - first-line noninvasive fibrosis risk score",
-   "Vibration-controlled transient elastography / liver stiffness measurement (VCTE <8 kPa low, >12 kPa high; LSM >12 kPa associated with cirrhosis)",
-   "Enhanced Liver Fibrosis (ELF) blood test (ELF >=9.8 increased risk; >11.8 suspect cirrhosis)",
-   "Magnetic resonance elastography (MRE) and cT1 for refined risk stratification",
-   "Abdominal ultrasound / cross-sectional imaging for steatosis",
-   "Workup to exclude other causes: viral hepatitis serologies, autoimmune markers, iron/copper studies, alpha-1 antitrypsin",
-   "Screening for T2DM; assessment of metabolic syndrome components",
-   "Liver biopsy - historical gold standard for staging, reserved for indeterminate/discordant NITs, diagnostic uncertainty, or suspected concurrent chronic hepatitis (limited by sampling and observer variability)"
-  ],
-  "redFlags": [
-   "FIB-4 >=2.67 (moderate/high risk for advanced fibrosis - needs secondary testing/specialist referral)",
-   "Fibrosis stage >=F2 = 'at-risk MASH' with increased risk of further progression and adverse liver outcomes",
-   "Persistently elevated AST and ALT",
-   "Stigmata of advanced disease: spider angiomata, palmar erythema, splenomegaly, thrombocytopenia, clubbing, ascites, encephalopathy",
-   "Features of decompensation/end-stage disease: jaundice, ascites, variceal hemorrhage",
-   "Clinical/radiologic suspicion of cirrhosis or ELF >11.8"
-  ],
-  "prognosis": "Variable and stage-dependent. The 10-year probability of liver-related morbidity/mortality is negligible with steatosis alone, so this group is managed conservatively. Fibrosis severity is the primary predictor of outcome: average fibrosis progression is roughly one stage every 14 years in steatosis versus one stage every 7 years in MASH; once at stage >=F2 ('at-risk MASH') the risk of further progression and bad outcomes rises. Once MASLD-related cirrhosis develops, progression to decompensation runs 3-20% per year and annual primary liver cancer incidence can reach 1-2% per year, prompting biannual HCC surveillance and variceal screening. Cirrhosis can regress, and MASLD outcomes after liver transplantation are generally good in well-selected patients, though comorbid diabetes, obesity, and CVD limit candidacy and disease may recur post-transplant. MASLD is also a premalignant condition increasing risk of primary and extrahepatic malignancy even in noncirrhotic livers (Harrison 22e p.2701, 2704, 2708).",
-  "pitfalls": [
-   "Failing to exclude significant alcohol intake and other chronic liver diseases (viral, autoimmune, iron/copper overload, alpha-1 antitrypsin) before attributing steatosis to MASLD.",
-   "Assuming normal liver enzymes exclude MASLD - they do not; normal ALT 'reference ranges' are inflated by including people with undiagnosed liver disease.",
-   "Relying on liver tests for staging - aminotransferases, alkaline phosphatase, bilirubin, albumin, and PT may all be completely normal even with significant disease.",
-   "MASLD can occur in lean individuals (BMI <25, or <23 in Asians), especially with truncal/visceral adiposity, so a normal BMI does not exclude it.",
-   "FIB-4 has reduced accuracy in patients >65 and <35 years and is a less robust predictor in T2DM, so a secondary noninvasive test is needed in these groups.",
-   "Liver biopsy is limited by sampling error, inter/intraobserver variability (worse with cores <2 cm), and gives only a static snapshot of disease activity."
-  ],
-  "severityClassification": "Histopathologic/fibrosis staging spectrum: simple steatosis (MASL) -> steatohepatitis (MASH) -> fibrosis -> cirrhosis. Fibrosis stages F0 (none), F1 (minimal), F2 (significant), F3 (advanced/bridging), F4 (cirrhosis, further stratified into compensated and decompensated). 'At-risk MASH' = MASH with fibrosis stage >=F2. Noninvasive risk stratification: FIB-4 <1.3 low risk, >=1.3 intermediate, >=2.67 moderate/high; secondary tests VCTE <8 kPa low / 8-12 intermediate / >12 high, ELF <7.7 low / 7.7-9.8 intermediate / >9.8 high (Harrison 22e p.2704-2705).",
-  "references": [
-   "Harrison 22e p.2700",
-   "Harrison 22e p.2701",
-   "Harrison 22e p.2702",
-   "Harrison 22e p.2703",
-   "Harrison 22e p.2704",
-   "Harrison 22e p.2705",
-   "Harrison 22e p.2706",
-   "Harrison 22e p.2707",
-   "Harrison 22e p.2708"
-  ],
-  "crossLinks": [
-   "obesity",
-   "diabetes_mellitus",
-   "decomp_cirrhosis",
-   "alcohol_liver_disease"
-  ],
-  "management": [
-   "Institute lifestyle intervention as the cornerstone, with sustained weight loss through calorie restriction and increased physical activity to reverse the underlying metabolic dysfunction",
-   "Optimise cardiometabolic drivers by controlling type 2 diabetes, dyslipidaemia and hypertension, and treating obesity with GLP-1 receptor agonists and, in eligible patients, metabolic (bariatric) surgery",
-   "Consider disease-specific pharmacotherapy for confirmed steatohepatitis with fibrosis, notably the thyroid-hormone-receptor-beta agonist resmetirom, with GLP-1 agonists, pioglitazone or vitamin E as options in selected patients",
-   "Advise alcohol minimisation and provide hepatitis immunisation to limit additional liver injury",
-   "Risk-stratify and monitor fibrosis with FIB-4 and elastography, referring higher-risk patients from primary care to hepatology",
-   "Surveil for complications of advanced fibrosis and cirrhosis, including hepatocellular carcinoma screening and variceal surveillance, and screen for coexisting type 2 diabetes",
-   "Prioritise cardiovascular risk reduction as the leading cause of death, and refer for liver transplantation assessment in decompensated cirrhosis"
-  ]
- },
- "algorithms": [
-  {
-   "id": "nafld-pathway",
-   "title": "MASLD / NAFLD (Fatty Liver Disease): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Steatotic liver disease (SLD) is the most common cause of chronic liver disease in the US and worldwide; metabolic dysfunction-associated steatotic liver disease (MASLD) and steatohepatitis (MASH) now replace the older terms NAFLD and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: FIB-4 >=2.67 (moderate/high risk for advanced fibrosis - needs secondary testing/specialist referral)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum aminotransferases (ALT/AST) - true normal ALT is ~29-33 U/L (men) and ~19-25 U/L (women); normal liver enzymes do NOT exclude MASLD, FIB-4 score (age, AST, ALT, platelet count) - first-line noninvasive fibrosis risk"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute lifestyle intervention as the cornerstone, with sustained weight loss through calorie restriction and increased physical activity to reverse the underlying metabolic dysfunction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to exclude significant alcohol intake and other chronic liver diseases (viral, autoimmune, iron/copper overload, alpha-1 antitrypsin) before attributing steatosis to MASLD."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of masld / nafld (fatty liver disease)."
-  }
- ],
- "tables": [
-  {
-   "id": "nafld-matrix",
-   "title": "MASLD / NAFLD (Fatty Liver Disease): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Steatotic liver disease (SLD) is the most common cause of chronic liver disease in the US and worldwide; metabolic",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2700",
+    "clinicalPearls": [
+      "Steatotic liver disease (SLD) is the most common cause of chronic liver disease in the US and worldwide; metabolic dysfunction-associated steatotic liver disease (MASLD) and steatohepatitis (MASH) now replace the older terms NAFLD and NASH, with ~98% population overlap (Harrison 22e p.2700-2701).",
+      "Diagnosis of MASLD requires hepatic steatosis plus little/no alcohol intake (<20 g/d women, <30 g/d men) and at least one cardiometabolic risk factor (overweight/obesity, hypertension, dyslipidemia, insulin resistance/T2DM) (Harrison 22e p.2700, 2703).",
+      "Most patients are asymptomatic; MASLD is typically detected incidentally via raised ALT or steatosis on imaging done for other reasons (Harrison 22e p.2702-2703).",
+      "Disease spans a dynamic, potentially reversible spectrum: simple steatosis (MASL) -> steatohepatitis (MASH) -> fibrosis -> cirrhosis/HCC; chronic steatohepatitis is the primary driver of fibrosis, and fibrosis severity is the chief predictor of liver-related morbidity/mortality (Harrison 22e p.2700-2701, 2704).",
+      "FIB-4 (age, AST, ALT, platelets) is the recommended first-line noninvasive score with excellent negative predictive value: FIB-4 <1.3 = low risk (manage in primary care), >=2.67 = moderate/high risk warranting a secondary test (elastography or ELF) (Harrison 22e p.2704-2705).",
+      "T2DM is the strongest risk factor for MASLD acquisition, fibrosis progression, and HCC; the MASLD-T2DM relationship is bidirectional, so patients with MASLD should be screened for T2DM (Harrison 22e p.2703).",
+      "Foundational treatment is lifestyle modification with weight loss: ~5% weight loss improves steatosis, while >10% improves MASH and can reverse fibrosis; cardiovascular risk reduction and treatment of metabolic comorbidities apply to all patients (Harrison 22e p.2706).",
+      "Statins are safe across the MASLD spectrum and indicated for dyslipidemia given high cardiovascular risk; reluctance to use them is not supported by evidence of liver harm (Harrison 22e p.2707)."
     ],
-    [
-     "Key Investigations",
-     "Serum aminotransferases (ALT/AST) - true normal ALT is ~29-33 U/L (men) and ~19-25 U/L (women); normal liver enzymes do NOT",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MASLD arises from imbalance between energy intake and expenditure: excess caloric intake, reduced physical activity, and limited peripheral adipose expansion drive visceral adiposity, insulin resistance, and metabolic dysfunction. Hepatocyte triglyceride accumulates from increased free fatty acid delivery (dietary uptake, adipose lipolysis, de novo lipogenesis), impaired fatty acid disposal, or impaired triglyceride export; triglyceride storage itself is relatively safe, so steatosis per se does not damage the liver but is a biomarker of metabolic dysfunction. When adaptive mechanisms are overwhelmed, lipotoxicity from dysfunctional lipid handling injures and kills hepatocytes, producing steatohepatitis (MASH) with inflammation and ballooned hepatocytes. Repeated/protracted MASH triggers regenerative responses that become maladaptive, promoting progressive fibrosis (replacement of functional parenchyma by scar) and primary liver cancer; cirrhosis represents futile repair. Heritable factors (e.g., PNPLA3, TM6SF2, MBOAT7 variants), epigenetic influences, gut microbiota alterations, and environmental factors (high-fat/high-sugar diets) modify susceptibility (Harrison 22e p.2701-2702).",
+    "additionalDifferentials": [
+      "Alcohol-associated liver disease (ALD) and the intermediate MetALD category (metabolic dysfunction with social alcohol use, 20-50 g/d women, 30-60 g/d men)",
+      "Hepatitis C, particularly genotype 3",
+      "Autoimmune hepatitis",
+      "Wilson disease",
+      "Hemochromatosis / iron overload",
+      "Alpha-1 antitrypsin deficiency",
+      "Inborn errors of metabolism (abetalipoproteinemia, cholesterol ester storage disease, galactosemia, glycogen storage disease, hereditary fructose intolerance, homocystinuria, systemic carnitine deficiency, tyrosinemia)",
+      "Weber-Christian syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Alcohol-associated liver disease (ALD) and the intermediate MetALD category (metabolic dysfunction with social alcohol use, 20-50",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Chronic hepatitis C (genotype 3 causes hepatic steatosis)",
+      "Chronic hepatitis B"
     ],
-    [
-     "Management Strategy",
-     "Institute lifestyle intervention as the cornerstone, with sustained weight loss through calorie restriction and increased",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Alcohol-associated liver disease (histologically can be indistinguishable; alcohol intake must be excluded)",
+      "Autoimmune hepatitis (note ~20% of steatotic liver disease patients have a positive ANA)",
+      "Medication/drug-associated steatosis or steatohepatitis",
+      "Wilson disease, hemochromatosis, alpha-1 antitrypsin deficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to exclude significant alcohol intake and other chronic liver diseases (viral, autoimmune, iron/copper overload, alpha-1",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Serum aminotransferases (ALT/AST) - true normal ALT is ~29-33 U/L (men) and ~19-25 U/L (women); normal liver enzymes do NOT exclude MASLD",
+      "FIB-4 score (age, AST, ALT, platelet count) - first-line noninvasive fibrosis risk score",
+      "Vibration-controlled transient elastography / liver stiffness measurement (VCTE <8 kPa low, >12 kPa high; LSM >12 kPa associated with cirrhosis)",
+      "Enhanced Liver Fibrosis (ELF) blood test (ELF >=9.8 increased risk; >11.8 suspect cirrhosis)",
+      "Magnetic resonance elastography (MRE) and cT1 for refined risk stratification",
+      "Abdominal ultrasound / cross-sectional imaging for steatosis",
+      "Workup to exclude other causes: viral hepatitis serologies, autoimmune markers, iron/copper studies, alpha-1 antitrypsin",
+      "Screening for T2DM; assessment of metabolic syndrome components",
+      "Liver biopsy - historical gold standard for staging, reserved for indeterminate/discordant NITs, diagnostic uncertainty, or suspected concurrent chronic hepatitis (limited by sampling and observer variability)"
+    ],
+    "redFlags": [
+      "FIB-4 >=2.67 (moderate/high risk for advanced fibrosis - needs secondary testing/specialist referral)",
+      "Fibrosis stage >=F2 = 'at-risk MASH' with increased risk of further progression and adverse liver outcomes",
+      "Persistently elevated AST and ALT",
+      "Stigmata of advanced disease: spider angiomata, palmar erythema, splenomegaly, thrombocytopenia, clubbing, ascites, encephalopathy",
+      "Features of decompensation/end-stage disease: jaundice, ascites, variceal hemorrhage",
+      "Clinical/radiologic suspicion of cirrhosis or ELF >11.8"
+    ],
+    "prognosis": "Variable and stage-dependent. The 10-year probability of liver-related morbidity/mortality is negligible with steatosis alone, so this group is managed conservatively. Fibrosis severity is the primary predictor of outcome: average fibrosis progression is roughly one stage every 14 years in steatosis versus one stage every 7 years in MASH; once at stage >=F2 ('at-risk MASH') the risk of further progression and bad outcomes rises. Once MASLD-related cirrhosis develops, progression to decompensation runs 3-20% per year and annual primary liver cancer incidence can reach 1-2% per year, prompting biannual HCC surveillance and variceal screening. Cirrhosis can regress, and MASLD outcomes after liver transplantation are generally good in well-selected patients, though comorbid diabetes, obesity, and CVD limit candidacy and disease may recur post-transplant. MASLD is also a premalignant condition increasing risk of primary and extrahepatic malignancy even in noncirrhotic livers (Harrison 22e p.2701, 2704, 2708).",
+    "pitfalls": [
+      "Failing to exclude significant alcohol intake and other chronic liver diseases (viral, autoimmune, iron/copper overload, alpha-1 antitrypsin) before attributing steatosis to MASLD.",
+      "Assuming normal liver enzymes exclude MASLD - they do not; normal ALT 'reference ranges' are inflated by including people with undiagnosed liver disease.",
+      "Relying on liver tests for staging - aminotransferases, alkaline phosphatase, bilirubin, albumin, and PT may all be completely normal even with significant disease.",
+      "MASLD can occur in lean individuals (BMI <25, or <23 in Asians), especially with truncal/visceral adiposity, so a normal BMI does not exclude it.",
+      "FIB-4 has reduced accuracy in patients >65 and <35 years and is a less robust predictor in T2DM, so a secondary noninvasive test is needed in these groups.",
+      "Liver biopsy is limited by sampling error, inter/intraobserver variability (worse with cores <2 cm), and gives only a static snapshot of disease activity."
+    ],
+    "severityClassification": "Histopathologic/fibrosis staging spectrum: simple steatosis (MASL) -> steatohepatitis (MASH) -> fibrosis -> cirrhosis. Fibrosis stages F0 (none), F1 (minimal), F2 (significant), F3 (advanced/bridging), F4 (cirrhosis, further stratified into compensated and decompensated). 'At-risk MASH' = MASH with fibrosis stage >=F2. Noninvasive risk stratification: FIB-4 <1.3 low risk, >=1.3 intermediate, >=2.67 moderate/high; secondary tests VCTE <8 kPa low / 8-12 intermediate / >12 high, ELF <7.7 low / 7.7-9.8 intermediate / >9.8 high (Harrison 22e p.2704-2705).",
+    "references": [
+      "Harrison 22e p.2700",
+      "Harrison 22e p.2701",
+      "Harrison 22e p.2702",
+      "Harrison 22e p.2703",
+      "Harrison 22e p.2704",
+      "Harrison 22e p.2705",
+      "Harrison 22e p.2706",
+      "Harrison 22e p.2707",
+      "Harrison 22e p.2708"
+    ],
+    "crossLinks": [
+      "obesity",
+      "diabetes_mellitus",
+      "decomp_cirrhosis",
+      "alcohol_liver_disease"
+    ],
+    "management": [
+      "Institute lifestyle intervention as the cornerstone, with sustained weight loss through calorie restriction and increased physical activity to reverse the underlying metabolic dysfunction",
+      "Optimise cardiometabolic drivers by controlling type 2 diabetes, dyslipidaemia and hypertension, and treating obesity with GLP-1 receptor agonists and, in eligible patients, metabolic (bariatric) surgery",
+      "Consider disease-specific pharmacotherapy for confirmed steatohepatitis with fibrosis, notably the thyroid-hormone-receptor-beta agonist resmetirom, with GLP-1 agonists, pioglitazone or vitamin E as options in selected patients",
+      "Advise alcohol minimisation and provide hepatitis immunisation to limit additional liver injury",
+      "Risk-stratify and monitor fibrosis with FIB-4 and elastography, referring higher-risk patients from primary care to hepatology",
+      "Surveil for complications of advanced fibrosis and cirrhosis, including hepatocellular carcinoma screening and variceal surveillance, and screen for coexisting type 2 diabetes",
+      "Prioritise cardiovascular risk reduction as the leading cause of death, and refer for liver transplantation assessment in decompensated cirrhosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for masld / nafld (fatty liver disease)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nafld-real-image",
-   "title": "MASLD / NAFLD (Fatty Liver Disease): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "nafld-pathway",
+      "title": "MASLD / NAFLD (Fatty Liver Disease): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Steatotic liver disease (SLD) is the most common cause of chronic liver disease in the US and worldwide; metabolic dysfunction-associated steatotic liver disease (MASLD) and steatohepatitis (MASH) now replace the older terms NAFLD and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: FIB-4 >=2.67 (moderate/high risk for advanced fibrosis - needs secondary testing/specialist referral)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum aminotransferases (ALT/AST) - true normal ALT is ~29-33 U/L (men) and ~19-25 U/L (women); normal liver enzymes do NOT exclude MASLD, FIB-4 score (age, AST, ALT, platelet count) - first-line noninvasive fibrosis risk"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute lifestyle intervention as the cornerstone, with sustained weight loss through calorie restriction and increased physical activity to reverse the underlying metabolic dysfunction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to exclude significant alcohol intake and other chronic liver diseases (viral, autoimmune, iron/copper overload, alpha-1 antitrypsin) before attributing steatosis to MASLD."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of masld / nafld (fatty liver disease)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nafld-matrix",
+      "title": "MASLD / NAFLD (Fatty Liver Disease): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Steatotic liver disease (SLD) is the most common cause of chronic liver disease in the US and worldwide; metabolic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum aminotransferases (ALT/AST) - true normal ALT is ~29-33 U/L (men) and ~19-25 U/L (women); normal liver enzymes do NOT",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alcohol-associated liver disease (ALD) and the intermediate MetALD category (metabolic dysfunction with social alcohol use, 20-50",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute lifestyle intervention as the cornerstone, with sustained weight loss through calorie restriction and increased",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to exclude significant alcohol intake and other chronic liver diseases (viral, autoimmune, iron/copper overload, alpha-1",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for masld / nafld (fatty liver disease)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AASLD, Update to MASLD Practice Guidance (semaglutide), November 2025",
+      "kind": "web",
+      "url": "https://www.aasld.org/aasld-announces-update-metabolic-dysfunction-associated-steatotic-liver-disease-masld-practice"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 309-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 307-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nafld-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and fibrosis staging of MASLD",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "MASLD definition",
+          "cells": [
+            {
+              "text": "Steatosis plus at least one cardiometabolic risk factor"
+            },
+            {
+              "text": "Overweight, hypertension, dyslipidaemia, insulin resistance or T2DM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol limit",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Under 20 g/day women, under 30 g/day men",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "MetALD: 20 to 50 g/day women, 30 to 60 g/day men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FIB-4 low risk",
+          "cells": [
+            {
+              "text": "Under 1.3",
+              "op": "<",
+              "value": 1.3
+            },
+            {
+              "text": "{{hy:Manage in primary care}}; less accurate under 35 or over 65"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FIB-4 high risk",
+          "cells": [
+            {
+              "text": "2.67 or more",
+              "op": ">=",
+              "value": 2.67
+            },
+            {
+              "text": "Needs elastography or ELF and specialist review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient elastography (VCTE)",
+          "unit": "kPa",
+          "cells": [
+            {
+              "text": "Under 8 kPa low; 8 to 12 intermediate; over 12 high",
+              "range": [
+                8,
+                12
+              ]
+            },
+            {
+              "text": "Over 12 kPa associated with cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ELF test",
+          "cells": [
+            {
+              "text": "Under 7.7 low; 7.7 to 9.8 intermediate; over 9.8 high",
+              "range": [
+                7.7,
+                9.8
+              ]
+            },
+            {
+              "text": "Over 11.8 suspect cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALT",
+          "cells": [
+            {
+              "text": "Normal ALT does not exclude MASLD"
+            },
+            {
+              "text": "True normal about 29 to 33 U/L men, 19 to 25 U/L women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "At-risk MASH",
+          "cells": [
+            {
+              "text": "Fibrosis stage F2 or more",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Higher risk of liver outcomes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lean MASLD",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "BMI under 25 (under 23 in Asians)",
+              "op": "<",
+              "value": 25
+            },
+            {
+              "text": "Normal BMI does not exclude"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nafld-ddx",
+      "kind": "ddx",
+      "title": "Other causes of fatty liver to exclude",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Alcohol-related liver disease",
+          "cells": [
+            {
+              "text": "AST two to sevenfold, under 400 U/L, AST/ALT usually over 1"
+            },
+            {
+              "text": "Alcohol history; GGT rises in all fatty liver"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Drug-induced steatosis",
+          "cells": [
+            {
+              "text": "Glucocorticoids, oestrogens, tamoxifen, amiodarone"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hepatitis C genotype 3",
+          "cells": [
+            {
+              "text": "Steatosis from the virus"
+            },
+            {
+              "text": "HCV antibody and RNA"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Young patient, haemolysis or neuro signs"
+            },
+            {
+              "text": "Ceruloplasmin, urine copper"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nutritional causes",
+          "cells": [
+            {
+              "text": "Starvation, kwashiorkor, choline deficiency, jejunoileal bypass"
+            },
+            {
+              "text": "Diet and surgical history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Autoimmune hepatitis",
+          "cells": [
+            {
+              "text": "High IgG; ANA positive in about 20% of SLD so interpret carefully"
+            },
+            {
+              "text": "Autoantibodies, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemochromatosis or alpha-1 antitrypsin deficiency",
+          "cells": [
+            {
+              "text": "Iron overload or lung disease"
+            },
+            {
+              "text": "Ferritin, transferrin saturation, A1AT level"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nafld-treatment",
+      "kind": "treatment",
+      "title": "Management of MASLD and MASH",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle and weight loss",
+          "cells": [
+            {
+              "text": "{{hy:All patients}}"
+            },
+            {
+              "text": "About 5% loss improves steatosis; over 10% improves MASH and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiometabolic control",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Treat diabetes, lipids, BP; CV disease is the leading cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semaglutide",
+          "cells": [
+            {
+              "text": "MASH with moderate to advanced fibrosis (F2 to F3)"
+            },
+            {
+              "text": "AASLD 2025 guidance; lifestyle remains the base"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resmetirom",
+          "cells": [
+            {
+              "text": "Noncirrhotic MASH with F2 to F3 fibrosis"
+            },
+            {
+              "text": "Thyroid hormone receptor beta agonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pioglitazone or vitamin E",
+          "cells": [
+            {
+              "text": "Selected patients with MASH"
+            },
+            {
+              "text": "Per specialist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bariatric surgery",
+          "cells": [
+            {
+              "text": "Eligible obese patients"
+            },
+            {
+              "text": "Improves MASH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol reduction and vaccination",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Hepatitis A and B vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cirrhosis care",
+          "cells": [
+            {
+              "text": "F4"
+            },
+            {
+              "text": "HCC and variceal surveillance; transplant referral when decompensated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No drug doses are stated in the opened sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nafld-dx-mgmt",
+      "title": "Diagnosis and management of MASLD",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Steatosis on imaging or raised ALT with metabolic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Alcohol history; exclude viral, drug, autoimmune, metabolic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Other cause found?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat that cause",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Calculate FIB-4; screen for type 2 diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "FIB-4 under 1.3?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Low risk: lifestyle, metabolic care; repeat FIB-4",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Elastography or ELF",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "VCTE over 12 kPa or features of cirrhosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Hepatology: cirrhosis care, HCC surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "VCTE 8 to 12 kPa (likely F2 to F3)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Hepatology: consider semaglutide or resmetirom plus lifestyle",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n7",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

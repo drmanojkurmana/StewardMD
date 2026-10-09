@@ -1,172 +1,450 @@
 {
- "id": "glucose_galactose_malabsorption",
- "name": "Glucose-galactose malabsorption",
- "aliases": [
-  "SLC5A1",
-  "SGLT1 deficiency",
-  "GGM",
-  "congenital glucose-galactose malabsorption"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Genetics",
- "specialty": "Gastroenterology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive monosaccharide transport defect caused by SLC5A1 variants affecting the sodium/glucose cotransporter SGLT1",
-   "Presents in the neonatal period with severe watery osmotic diarrhoea beginning with the first milk feeds",
-   "Because SGLT1 also transports galactose, both glucose and galactose (and therefore lactose- and sucrose-containing feeds) provoke symptoms",
-   "The diarrhoea is osmotic and stops promptly on withdrawal of dietary glucose and galactose, with acidic stool and reducing substances",
-   "Fructose is absorbed by a different transporter and is tolerated, forming the basis of a fructose-based feed",
-   "Intermittent glucosuria may be present because SGLT1 contributes to renal monosaccharide handling",
-   "Lifelong avoidance of glucose and galactose with a fructose-based diet allows normal growth"
+  "id": "glucose_galactose_malabsorption",
+  "name": "Glucose-galactose malabsorption",
+  "aliases": [
+    "SLC5A1",
+    "SGLT1 deficiency",
+    "GGM",
+    "congenital glucose-galactose malabsorption"
   ],
-  "pathophysiology": "Glucose-galactose malabsorption is an osmotic diarrhoea caused by defective apical monosaccharide uptake. Variants in SLC5A1 impair the sodium/glucose cotransporter SGLT1, which normally drives coupled absorption of glucose, galactose and sodium across the enterocyte brush border. When this transporter fails, glucose and galactose accumulate in the lumen along with sodium and water, producing a profuse osmotic diarrhoea. Because dietary lactose and sucrose are digested to these monosaccharides, all glucose- and galactose-containing feeds cause symptoms, whereas fructose, absorbed via GLUT5, is well tolerated.",
-  "additionalDifferentials": [
-   "Congenital sucrase-isomaltase deficiency",
-   "Congenital and adult-type lactase deficiency",
-   "Congenital secretory diarrhoeas (chloride and sodium diarrhoea)",
-   "Microvillus inclusion disease and tufting enteropathy",
-   "Cow's milk protein intolerance",
-   "Post-infective carbohydrate malabsorption"
-  ],
-  "additionalInvestigations": [
-   "Stool pH and reducing substances demonstrating acidic sugar-containing stool",
-   "Faecal osmotic gap and response of diarrhoea to withdrawal of glucose and galactose",
-   "Glucose hydrogen breath test showing malabsorption",
-   "Molecular genetic testing for SLC5A1 variants",
-   "Urinalysis for intermittent glucosuria and monitoring of hydration and electrolytes"
-  ],
-  "redFlags": [
-   "Rapid severe dehydration in the neonate from high-volume osmotic diarrhoea",
-   "Electrolyte disturbance requiring urgent correction",
-   "Failure to thrive if the offending sugars are not eliminated",
-   "Return of diarrhoea on dietary lapses containing glucose, galactose, lactose or sucrose"
-  ],
-  "prognosis": "With a strict fructose-based diet free of glucose and galactose the prognosis is excellent and growth is normal; tolerance to small carbohydrate loads may improve modestly with age. Lifelong dietary vigilance is required.",
-  "pitfalls": [
-   "Switching to a lactose-free but glucose-containing formula, which does not relieve symptoms",
-   "Confusing the disorder with lactase deficiency, missing the need to also exclude glucose and galactose",
-   "Overlooking hidden glucose and galactose sources in feeds, foods and medicines",
-   "Misinterpreting benign glucosuria as diabetes"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute a strict glucose- and galactose-free diet, replacing lactose- and sucrose-containing feeds with a fructose-based formula that bypasses the defective SGLT1 transporter",
-   "Rehydrate and correct electrolyte and acid-base disturbance during the profuse osmotic diarrhoea, using oral rehydration or intravenous fluids in the acute neonatal presentation",
-   "Involve a paediatric dietitian to ensure nutritional adequacy and to guide cautious testing of carbohydrate tolerance, which may improve modestly with age",
-   "Monitor growth, hydration status and electrolytes, and confirm resolution of diarrhoea on withdrawal of dietary glucose and galactose",
-   "Offer genetic counselling for autosomal recessive inheritance, discussing recurrence risk and carrier testing for the family",
-   "Escalate to hospital assessment for any breakthrough diarrhoea causing dehydration or faltering growth"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glucose_galactose_malabsorption-pathway",
-   "title": "Glucose-galactose malabsorption: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive monosaccharide transport defect caused by SLC5A1 variants affecting the sodium/glucose cotransporter SGLT1",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid severe dehydration in the neonate from high-volume osmotic diarrhoea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool pH and reducing substances demonstrating acidic sugar-containing stool, Faecal osmotic gap and response of diarrhoea to withdrawal of glucose and galactose, Glucose hydrogen breath test showing malabsorption"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute a strict glucose- and galactose-free diet, replacing lactose- and sucrose-containing feeds with a fructose-based formula that bypasses the defective SGLT1 transporter"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Switching to a lactose-free but glucose-containing formula, which does not relieve symptoms"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glucose-galactose malabsorption."
-  }
- ],
- "tables": [
-  {
-   "id": "glucose_galactose_malabsorption-matrix",
-   "title": "Glucose-galactose malabsorption: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive monosaccharide transport defect caused by SLC5A1 variants affecting the sodium/glucose cotransporter SGLT1",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Genetics",
+  "specialty": "Gastroenterology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive monosaccharide transport defect caused by SLC5A1 variants affecting the sodium/glucose cotransporter SGLT1",
+      "Presents in the neonatal period with severe watery osmotic diarrhoea beginning with the first milk feeds",
+      "Because SGLT1 also transports galactose, both glucose and galactose (and therefore lactose- and sucrose-containing feeds) provoke symptoms",
+      "The diarrhoea is osmotic and stops promptly on withdrawal of dietary glucose and galactose, with acidic stool and reducing substances",
+      "Fructose is absorbed by a different transporter and is tolerated, forming the basis of a fructose-based feed",
+      "Intermittent glucosuria may be present because SGLT1 contributes to renal monosaccharide handling",
+      "Lifelong avoidance of glucose and galactose with a fructose-based diet allows normal growth"
     ],
-    [
-     "Key Investigations",
-     "Stool pH and reducing substances demonstrating acidic sugar-containing stool, Faecal osmotic gap and response of diarrhoea to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glucose-galactose malabsorption is an osmotic diarrhoea caused by defective apical monosaccharide uptake. Variants in SLC5A1 impair the sodium/glucose cotransporter SGLT1, which normally drives coupled absorption of glucose, galactose and sodium across the enterocyte brush border. When this transporter fails, glucose and galactose accumulate in the lumen along with sodium and water, producing a profuse osmotic diarrhoea. Because dietary lactose and sucrose are digested to these monosaccharides, all glucose- and galactose-containing feeds cause symptoms, whereas fructose, absorbed via GLUT5, is well tolerated.",
+    "additionalDifferentials": [
+      "Congenital sucrase-isomaltase deficiency",
+      "Congenital and adult-type lactase deficiency",
+      "Congenital secretory diarrhoeas (chloride and sodium diarrhoea)",
+      "Microvillus inclusion disease and tufting enteropathy",
+      "Cow's milk protein intolerance",
+      "Post-infective carbohydrate malabsorption"
     ],
-    [
-     "Primary Differentials",
-     "Congenital sucrase-isomaltase deficiency, Congenital and adult-type lactase deficiency, Congenital secretory diarrhoeas (chloride",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool pH and reducing substances demonstrating acidic sugar-containing stool",
+      "Faecal osmotic gap and response of diarrhoea to withdrawal of glucose and galactose",
+      "Glucose hydrogen breath test showing malabsorption",
+      "Molecular genetic testing for SLC5A1 variants",
+      "Urinalysis for intermittent glucosuria and monitoring of hydration and electrolytes"
     ],
-    [
-     "Management Strategy",
-     "Institute a strict glucose- and galactose-free diet, replacing lactose- and sucrose-containing feeds with a fructose-based",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid severe dehydration in the neonate from high-volume osmotic diarrhoea",
+      "Electrolyte disturbance requiring urgent correction",
+      "Failure to thrive if the offending sugars are not eliminated",
+      "Return of diarrhoea on dietary lapses containing glucose, galactose, lactose or sucrose"
     ],
-    [
-     "Clinical Pitfall",
-     "Switching to a lactose-free but glucose-containing formula, which does not relieve symptoms",
-     "Prevent diagnostic or management error"
+    "prognosis": "With a strict fructose-based diet free of glucose and galactose the prognosis is excellent and growth is normal; tolerance to small carbohydrate loads may improve modestly with age. Lifelong dietary vigilance is required.",
+    "pitfalls": [
+      "Switching to a lactose-free but glucose-containing formula, which does not relieve symptoms",
+      "Confusing the disorder with lactase deficiency, missing the need to also exclude glucose and galactose",
+      "Overlooking hidden glucose and galactose sources in feeds, foods and medicines",
+      "Misinterpreting benign glucosuria as diabetes"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute a strict glucose- and galactose-free diet, replacing lactose- and sucrose-containing feeds with a fructose-based formula that bypasses the defective SGLT1 transporter",
+      "Rehydrate and correct electrolyte and acid-base disturbance during the profuse osmotic diarrhoea, using oral rehydration or intravenous fluids in the acute neonatal presentation",
+      "Involve a paediatric dietitian to ensure nutritional adequacy and to guide cautious testing of carbohydrate tolerance, which may improve modestly with age",
+      "Monitor growth, hydration status and electrolytes, and confirm resolution of diarrhoea on withdrawal of dietary glucose and galactose",
+      "Offer genetic counselling for autosomal recessive inheritance, discussing recurrence risk and carrier testing for the family",
+      "Escalate to hospital assessment for any breakthrough diarrhoea causing dehydration or faltering growth"
     ]
-   ],
-   "caption": "Overview comparison matrix for glucose-galactose malabsorption."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glucose-galactose-malabsorption-real-image",
-   "title": "Glucose-galactose malabsorption: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "glucose_galactose_malabsorption-pathway",
+      "title": "Glucose-galactose malabsorption: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive monosaccharide transport defect caused by SLC5A1 variants affecting the sodium/glucose cotransporter SGLT1",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid severe dehydration in the neonate from high-volume osmotic diarrhoea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool pH and reducing substances demonstrating acidic sugar-containing stool, Faecal osmotic gap and response of diarrhoea to withdrawal of glucose and galactose, Glucose hydrogen breath test showing malabsorption"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute a strict glucose- and galactose-free diet, replacing lactose- and sucrose-containing feeds with a fructose-based formula that bypasses the defective SGLT1 transporter"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Switching to a lactose-free but glucose-containing formula, which does not relieve symptoms"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glucose-galactose malabsorption."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glucose_galactose_malabsorption-matrix",
+      "title": "Glucose-galactose malabsorption: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive monosaccharide transport defect caused by SLC5A1 variants affecting the sodium/glucose cotransporter SGLT1",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool pH and reducing substances demonstrating acidic sugar-containing stool, Faecal osmotic gap and response of diarrhoea to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital sucrase-isomaltase deficiency, Congenital and adult-type lactase deficiency, Congenital secretory diarrhoeas (chloride",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute a strict glucose- and galactose-free diet, replacing lactose- and sucrose-containing feeds with a fructose-based",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Switching to a lactose-free but glucose-containing formula, which does not relieve symptoms",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glucose-galactose malabsorption."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glucose_galactose_malabsorption-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool pH and reducing substances",
+          "cells": [
+            {
+              "text": "Acidic, sugar-containing stool"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal osmotic gap and response to glucose and galactose withdrawal",
+          "cells": [
+            {
+              "text": "Diarrhoea resolves on withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose hydrogen breath test",
+          "cells": [
+            {
+              "text": "Malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for SLC5A1 variants",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for glucosuria",
+          "cells": [
+            {
+              "text": "Intermittent glucosuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration and electrolyte monitoring",
+          "cells": [
+            {
+              "text": "Hydration and electrolyte status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glucose_galactose_malabsorption-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital sucrase-isomaltase deficiency",
+          "cells": [
+            {
+              "text": "Sucrose malabsorption rather than glucose or galactose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital lactase deficiency",
+          "cells": [
+            {
+              "text": "Lactose malabsorption; glucose and galactose also need exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glucose_galactose_malabsorption-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict glucose- and galactose-free diet",
+          "cells": [
+            {
+              "text": "Replaces lactose- and sucrose-containing feeds with a fructose-based formula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehydration and electrolyte correction",
+          "cells": [
+            {
+              "text": "During profuse osmotic diarrhoea; oral rehydration or intravenous fluids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric dietitian",
+          "cells": [
+            {
+              "text": "Nutritional adequacy and cautious carbohydrate tolerance testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and electrolyte monitoring",
+          "cells": [
+            {
+              "text": "Confirms resolution of diarrhoea on withdrawal of glucose and galactose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier testing for the family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hospital escalation",
+          "cells": [
+            {
+              "text": "Breakthrough diarrhoea causing dehydration or faltering growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glucose_galactose_malabsorption-dx-mgmt",
+      "title": "Diagnosis and management of Glucose-galactose malabsorption",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glucose-galactose malabsorption: osmotic diarrhoea in the neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe dehydration, electrolyte disturbance, failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration and electrolyte correction for high-volume diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool pH and reducing substances, breath test, SLC5A1 testing and osmotic gap",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does withdrawal of glucose and galactose resolve the diarrhoea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sucrase-isomaltase or lactase deficiency, or secretory diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict glucose- and galactose-free diet with fructose-based formula",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rehydrate and correct electrolytes during profuse osmotic diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Paediatric dietitian for nutritional adequacy and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent with a strict fructose-based diet; growth is normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

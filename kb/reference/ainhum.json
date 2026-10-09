@@ -1,173 +1,492 @@
 {
- "id": "ainhum",
- "name": "Ainhum (dactylolysis spontanea)",
- "aliases": [
-  "dactylolysis spontanea",
-  "spontaneous dactylolysis",
-  "ainhum",
-  "true ainhum"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A progressive, constricting fibrous band that forms at the base of a digit, most characteristically the fifth toe, eventually causing spontaneous autoamputation",
-   "Predominantly seen in adults of African and other tropical-region descent, often in those who habitually walk barefoot",
-   "Progresses through stages from a painful constricting groove to bulbous swelling of the distal digit, bone resorption and finally spontaneous separation",
-   "Termed 'true ainhum' when idiopathic, distinguished from 'pseudo-ainhum' where a similar constricting band arises secondary to another condition",
-   "Radiographs show soft-tissue constriction with progressive tapering and osteolysis of the underlying phalanx",
-   "Pseudo-ainhum should prompt a search for underlying causes such as scleroderma, leprosy, psoriasis, keratoderma or diabetic/neuropathic disease",
-   "Management ranges from Z-plasty release of the constricting band early on to surgical amputation once the digit is non-viable"
+  "id": "ainhum",
+  "name": "Ainhum (dactylolysis spontanea)",
+  "aliases": [
+    "dactylolysis spontanea",
+    "spontaneous dactylolysis",
+    "ainhum",
+    "true ainhum"
   ],
-  "pathophysiology": "Ainhum is a slowly progressive constricting fibrotic process affecting a digit, classically the fifth toe. A hyperkeratotic groove develops and deepens into a circumferential fibrous band that progressively strangulates the soft tissues, impairing local blood flow and lymphatic drainage. The resulting distal congestion causes bulbous swelling, while chronic ischaemia and pressure drive progressive resorption of the underlying phalangeal bone, culminating in spontaneous autoamputation. The idiopathic 'true' form has been linked to chronic trauma from barefoot walking and possibly vascular insufficiency, whereas 'pseudo-ainhum' represents an identical constricting band occurring secondary to systemic or dermatological disease that must be identified.",
-  "additionalDifferentials": [
-   "Pseudo-ainhum secondary to scleroderma or systemic sclerosis",
-   "Leprosy (Hansen disease) with digital changes",
-   "Psoriasis or hereditary keratoderma with constricting bands",
-   "Diabetic or neuropathic digital disease",
-   "Congenital constriction (amniotic) band syndrome",
-   "Peripheral vascular disease with digital ischaemia"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs of the digit showing soft-tissue constriction and progressive phalangeal osteolysis",
-   "Clinical examination to stage the constricting band and assess distal viability",
-   "Screening for secondary causes (scleroderma serology, leprosy assessment, skin examination for keratoderma)",
-   "Assessment of peripheral circulation and neuropathy",
-   "Biopsy of the band in atypical cases to exclude other pathology"
-  ],
-  "redFlags": [
-   "Signs of secondary infection or gangrene in the constricted digit",
-   "Rapid progression or features suggesting an underlying systemic disease (pseudo-ainhum)",
-   "Multiple or atypically distributed digits involved",
-   "Neurovascular compromise threatening adjacent digits"
-  ],
-  "prognosis": "True ainhum is slowly progressive and, if untreated, leads over years to spontaneous autoamputation of the affected digit; early band release can preserve the digit, and outcome in pseudo-ainhum depends on the underlying disease.",
-  "pitfalls": [
-   "Failing to distinguish pseudo-ainhum and therefore missing a treatable underlying systemic disease",
-   "Delaying surgical band release until the digit is already non-viable",
-   "Overlooking secondary infection in the constricted, congested digit",
-   "Attributing the lesion to trauma alone without appropriate imaging and screening"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early surgical release of the constricting band with Z-plasty to interrupt the fibrous ring and preserve the digit",
-   "Topical keratolytics and emollients to soften the hyperkeratotic groove in early disease",
-   "Amputation of the digit when autoamputation is imminent or the distal part is non-viable or infected",
-   "Identify and treat pseudo-ainhum by managing the underlying disorder such as scleroderma, leprosy, psoriasis, keratoderma or neuropathy",
-   "Footwear advice and foot protection to reduce chronic trauma from barefoot walking",
-   "Wound care and prevention of secondary infection of the strangulated digit",
-   "Regular review to stage band progression and assess distal viability and circulation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ainhum-pathway",
-   "title": "Ainhum (dactylolysis spontanea): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A progressive, constricting fibrous band that forms at the base of a digit, most characteristically the fifth toe, eventually causing spontaneous autoamputation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of secondary infection or gangrene in the constricted digit",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs of the digit showing soft-tissue constriction and progressive phalangeal osteolysis, Clinical examination to stage the constricting band and assess distal viability, Screening for secondary causes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early surgical release of the constricting band with Z-plasty to interrupt the fibrous ring and preserve the digit"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish pseudo-ainhum and therefore missing a treatable underlying systemic disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ainhum (dactylolysis spontanea)."
-  }
- ],
- "tables": [
-  {
-   "id": "ainhum-matrix",
-   "title": "Ainhum (dactylolysis spontanea): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A progressive, constricting fibrous band that forms at the base of a digit, most characteristically the fifth toe, eventually",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A progressive, constricting fibrous band that forms at the base of a digit, most characteristically the fifth toe, eventually causing spontaneous autoamputation",
+      "Predominantly seen in adults of African and other tropical-region descent, often in those who habitually walk barefoot",
+      "Progresses through stages from a painful constricting groove to bulbous swelling of the distal digit, bone resorption and finally spontaneous separation",
+      "Termed 'true ainhum' when idiopathic, distinguished from 'pseudo-ainhum' where a similar constricting band arises secondary to another condition",
+      "Radiographs show soft-tissue constriction with progressive tapering and osteolysis of the underlying phalanx",
+      "Pseudo-ainhum should prompt a search for underlying causes such as scleroderma, leprosy, psoriasis, keratoderma or diabetic/neuropathic disease",
+      "Management ranges from Z-plasty release of the constricting band early on to surgical amputation once the digit is non-viable"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs of the digit showing soft-tissue constriction and progressive phalangeal osteolysis, Clinical examination to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ainhum is a slowly progressive constricting fibrotic process affecting a digit, classically the fifth toe. A hyperkeratotic groove develops and deepens into a circumferential fibrous band that progressively strangulates the soft tissues, impairing local blood flow and lymphatic drainage. The resulting distal congestion causes bulbous swelling, while chronic ischaemia and pressure drive progressive resorption of the underlying phalangeal bone, culminating in spontaneous autoamputation. The idiopathic 'true' form has been linked to chronic trauma from barefoot walking and possibly vascular insufficiency, whereas 'pseudo-ainhum' represents an identical constricting band occurring secondary to systemic or dermatological disease that must be identified.",
+    "additionalDifferentials": [
+      "Pseudo-ainhum secondary to scleroderma or systemic sclerosis",
+      "Leprosy (Hansen disease) with digital changes",
+      "Psoriasis or hereditary keratoderma with constricting bands",
+      "Diabetic or neuropathic digital disease",
+      "Congenital constriction (amniotic) band syndrome",
+      "Peripheral vascular disease with digital ischaemia"
     ],
-    [
-     "Primary Differentials",
-     "Pseudo-ainhum secondary to scleroderma or systemic sclerosis, Leprosy (Hansen disease) with digital changes, Psoriasis or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs of the digit showing soft-tissue constriction and progressive phalangeal osteolysis",
+      "Clinical examination to stage the constricting band and assess distal viability",
+      "Screening for secondary causes (scleroderma serology, leprosy assessment, skin examination for keratoderma)",
+      "Assessment of peripheral circulation and neuropathy",
+      "Biopsy of the band in atypical cases to exclude other pathology"
     ],
-    [
-     "Management Strategy",
-     "Early surgical release of the constricting band with Z-plasty to interrupt the fibrous ring and preserve the digit",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of secondary infection or gangrene in the constricted digit",
+      "Rapid progression or features suggesting an underlying systemic disease (pseudo-ainhum)",
+      "Multiple or atypically distributed digits involved",
+      "Neurovascular compromise threatening adjacent digits"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish pseudo-ainhum and therefore missing a treatable underlying systemic disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "True ainhum is slowly progressive and, if untreated, leads over years to spontaneous autoamputation of the affected digit; early band release can preserve the digit, and outcome in pseudo-ainhum depends on the underlying disease.",
+    "pitfalls": [
+      "Failing to distinguish pseudo-ainhum and therefore missing a treatable underlying systemic disease",
+      "Delaying surgical band release until the digit is already non-viable",
+      "Overlooking secondary infection in the constricted, congested digit",
+      "Attributing the lesion to trauma alone without appropriate imaging and screening"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early surgical release of the constricting band with Z-plasty to interrupt the fibrous ring and preserve the digit",
+      "Topical keratolytics and emollients to soften the hyperkeratotic groove in early disease",
+      "Amputation of the digit when autoamputation is imminent or the distal part is non-viable or infected",
+      "Identify and treat pseudo-ainhum by managing the underlying disorder such as scleroderma, leprosy, psoriasis, keratoderma or neuropathy",
+      "Footwear advice and foot protection to reduce chronic trauma from barefoot walking",
+      "Wound care and prevention of secondary infection of the strangulated digit",
+      "Regular review to stage band progression and assess distal viability and circulation"
     ]
-   ],
-   "caption": "Overview comparison matrix for ainhum (dactylolysis spontanea)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ainhum-real-image",
-   "title": "Ainhum (dactylolysis spontanea): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "ainhum-pathway",
+      "title": "Ainhum (dactylolysis spontanea): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A progressive, constricting fibrous band that forms at the base of a digit, most characteristically the fifth toe, eventually causing spontaneous autoamputation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of secondary infection or gangrene in the constricted digit",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs of the digit showing soft-tissue constriction and progressive phalangeal osteolysis, Clinical examination to stage the constricting band and assess distal viability, Screening for secondary causes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early surgical release of the constricting band with Z-plasty to interrupt the fibrous ring and preserve the digit"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish pseudo-ainhum and therefore missing a treatable underlying systemic disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ainhum (dactylolysis spontanea)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ainhum-matrix",
+      "title": "Ainhum (dactylolysis spontanea): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A progressive, constricting fibrous band that forms at the base of a digit, most characteristically the fifth toe, eventually",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs of the digit showing soft-tissue constriction and progressive phalangeal osteolysis, Clinical examination to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pseudo-ainhum secondary to scleroderma or systemic sclerosis, Leprosy (Hansen disease) with digital changes, Psoriasis or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early surgical release of the constricting band with Z-plasty to interrupt the fibrous ring and preserve the digit",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish pseudo-ainhum and therefore missing a treatable underlying systemic disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ainhum (dactylolysis spontanea)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ainhum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs of the digit",
+          "cells": [
+            {
+              "text": "Soft-tissue constriction and phalangeal osteolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical staging of the constricting band and distal viability",
+          "cells": [
+            {
+              "text": "Band stage and viability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for secondary causes (scleroderma serology, leprosy, keratoderma)",
+          "cells": [
+            {
+              "text": "Pseudo-ainhum causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of peripheral circulation and neuropathy",
+          "cells": [
+            {
+              "text": "Neurovascular status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of the band in atypical cases",
+          "cells": [
+            {
+              "text": "Excludes other pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ainhum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudo-ainhum secondary to scleroderma or systemic sclerosis",
+          "cells": [
+            {
+              "text": "Systemic sclerosis"
+            },
+            {
+              "text": "Scleroderma serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leprosy with digital changes",
+          "cells": [
+            {
+              "text": "Digital changes in leprosy"
+            },
+            {
+              "text": "Leprosy assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriasis or hereditary keratoderma with constricting bands",
+          "cells": [
+            {
+              "text": "Keratoderma"
+            },
+            {
+              "text": "Skin examination for keratoderma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ainhum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early surgical release of the band with Z-plasty",
+          "cells": [
+            {
+              "text": "Preserves the digit"
+            },
+            {
+              "text": "Interrupts the fibrous ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical keratolytics and emollients",
+          "cells": [
+            {
+              "text": "Early disease with hyperkeratotic groove"
+            },
+            {
+              "text": "Softens the groove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amputation of the digit",
+          "cells": [
+            {
+              "text": "Imminent autoamputation, non-viable or infected digit"
+            },
+            {
+              "text": "When necessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of pseudo-ainhum underlying disorder",
+          "cells": [
+            {
+              "text": "Scleroderma, leprosy, psoriasis, keratoderma or neuropathy"
+            },
+            {
+              "text": "Treat the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Footwear advice and foot protection",
+          "cells": [
+            {
+              "text": "Chronic trauma from barefoot walking"
+            },
+            {
+              "text": "Preventive advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and prevention of secondary infection",
+          "cells": [
+            {
+              "text": "Strangulated digit"
+            },
+            {
+              "text": "Infection prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular review of band progression and distal viability",
+          "cells": [
+            {
+              "text": "Staging and circulation"
+            },
+            {
+              "text": "Ongoing review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ainhum-dx-mgmt",
+      "title": "Diagnosis and management of Ainhum (dactylolysis spontanea)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive constricting groove at the base of a digit, often a fifth toe",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Secondary infection, gangrene or several digits involved?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical and wound review; consider amputation if non-viable",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs of the digit; staging of band; circulation and neuropathy check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary cause found (scleroderma, leprosy, keratoderma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the underlying disorder; pseudo-ainhum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "True ainhum: early surgical release with Z-plasty",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical keratolytics and emollients in early disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Footwear advice and foot protection to prevent chronic trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound care and monitoring of band progression and distal viability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated true ainhum leads to autoamputation; early release can save digit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

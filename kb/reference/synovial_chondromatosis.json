@@ -1,171 +1,469 @@
 {
- "id": "synovial_chondromatosis",
- "name": "Synovial chondromatosis",
- "aliases": [
-  "synovial osteochondromatosis",
-  "primary synovial chondromatosis",
-  "Reichel syndrome"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign proliferative disorder in which the synovium undergoes cartilaginous metaplasia, forming multiple cartilage nodules that detach as loose bodies",
-   "Typically monoarticular, most often affecting the knee, followed by the hip, elbow and shoulder",
-   "Presents with joint pain, swelling, stiffness, crepitus and mechanical symptoms such as locking or catching from the loose bodies",
-   "When the loose bodies calcify or ossify they become visible on plain radiographs as multiple similarly sized calcified bodies within the joint",
-   "Non-mineralised cartilaginous bodies may be radiographically occult, so MRI is valuable to demonstrate them and the synovial disease",
-   "Diagnosis is confirmed histologically, and malignant transformation to synovial chondrosarcoma is rare but recognised",
-   "Treatment is surgical removal of loose bodies with synovectomy, and recurrence can occur if active synovial disease remains"
+  "id": "synovial_chondromatosis",
+  "name": "Synovial chondromatosis",
+  "aliases": [
+    "synovial osteochondromatosis",
+    "primary synovial chondromatosis",
+    "Reichel syndrome"
   ],
-  "pathophysiology": "Synovial chondromatosis is a benign neoplastic or metaplastic process in which the synovial membrane produces multiple foci of hyaline cartilage. These nodules enlarge, may calcify or ossify, and can detach from the synovium to become free-floating intra-articular loose bodies that continue to grow by drawing nutrition from the synovial fluid. Primary synovial chondromatosis arises de novo from the synovium and is now recognised to be a true clonal neoplastic process in many cases, whereas secondary chondromatosis develops from cartilage and bone fragments in a joint already damaged by osteoarthritis or trauma. The loose bodies mechanically damage articular cartilage and produce the locking, effusion and secondary degenerative change seen clinically.",
-  "additionalDifferentials": [
-   "Secondary osteochondromatosis from osteoarthritis or trauma",
-   "Pigmented villonodular synovitis",
-   "Loose bodies from osteochondritis dissecans",
-   "Synovial chondrosarcoma",
-   "Rheumatoid or other inflammatory synovitis",
-   "Intra-articular tumour or synovial sarcoma"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs showing multiple calcified intra-articular bodies of similar size",
-   "MRI to detect non-calcified cartilaginous bodies and characterise the synovial disease",
-   "CT to define ossified loose bodies and bony involvement",
-   "Ultrasound to demonstrate effusion and intra-articular bodies",
-   "Histological examination of resected tissue to confirm the diagnosis and exclude chondrosarcoma"
-  ],
-  "redFlags": [
-   "Rapid growth, aggressive bone destruction or a soft-tissue mass suggesting chondrosarcoma",
-   "Recurrent disease after surgery raising concern for persistent active or malignant synovium",
-   "Progressive joint destruction with severe mechanical impairment",
-   "Atypical extra-articular extension of the process"
-  ],
-  "prognosis": "Primary synovial chondromatosis is benign and treatable with surgery, but recurrence is not uncommon when active synovium persists and untreated disease can cause secondary osteoarthritis; malignant transformation to chondrosarcoma is rare but carries a worse outlook.",
-  "pitfalls": [
-   "Missing non-calcified cartilaginous loose bodies on plain radiographs and relying on them alone",
-   "Confusing it with pigmented villonodular synovitis on imaging",
-   "Failing to consider malignant transformation in aggressive or recurrent disease",
-   "Removing loose bodies without addressing the active synovium, leading to recurrence"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Resnick's Diagnosis of Bone and Joint Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment is surgical removal of the intra-articular loose bodies combined with synovectomy to remove the active synovium, performed arthroscopically or open",
-   "In secondary disease, manage the underlying joint pathology such as osteoarthritis that generated the cartilage fragments",
-   "Manage secondary degenerative change with analgesia and physiotherapy, and joint replacement for advanced arthritis",
-   "Monitor for recurrence, which is common when active synovium persists after incomplete synovectomy",
-   "Submit resected tissue for histological examination and remain alert to rare malignant transformation to chondrosarcoma",
-   "Refer to orthopaedic surgery, with rheumatology input as appropriate"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "synovial_chondromatosis-pathway",
-   "title": "Synovial chondromatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign proliferative disorder in which the synovium undergoes cartilaginous metaplasia, forming multiple cartilage nodules that detach as loose bodies",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, aggressive bone destruction or a soft-tissue mass suggesting chondrosarcoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs showing multiple calcified intra-articular bodies of similar size, MRI to detect non-calcified cartilaginous bodies and characterise the synovial disease, CT to define ossified loose bodies and bony"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment is surgical removal of the intra-articular loose bodies combined with synovectomy to remove the active synovium, performed arthroscopically or open"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing non-calcified cartilaginous loose bodies on plain radiographs and relying on them alone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of synovial chondromatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "synovial_chondromatosis-matrix",
-   "title": "Synovial chondromatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign proliferative disorder in which the synovium undergoes cartilaginous metaplasia, forming multiple cartilage nodules that",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign proliferative disorder in which the synovium undergoes cartilaginous metaplasia, forming multiple cartilage nodules that detach as loose bodies",
+      "Typically monoarticular, most often affecting the knee, followed by the hip, elbow and shoulder",
+      "Presents with joint pain, swelling, stiffness, crepitus and mechanical symptoms such as locking or catching from the loose bodies",
+      "When the loose bodies calcify or ossify they become visible on plain radiographs as multiple similarly sized calcified bodies within the joint",
+      "Non-mineralised cartilaginous bodies may be radiographically occult, so MRI is valuable to demonstrate them and the synovial disease",
+      "Diagnosis is confirmed histologically, and malignant transformation to synovial chondrosarcoma is rare but recognised",
+      "Treatment is surgical removal of loose bodies with synovectomy, and recurrence can occur if active synovial disease remains"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs showing multiple calcified intra-articular bodies of similar size, MRI to detect non-calcified cartilaginous",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Synovial chondromatosis is a benign neoplastic or metaplastic process in which the synovial membrane produces multiple foci of hyaline cartilage. These nodules enlarge, may calcify or ossify, and can detach from the synovium to become free-floating intra-articular loose bodies that continue to grow by drawing nutrition from the synovial fluid. Primary synovial chondromatosis arises de novo from the synovium and is now recognised to be a true clonal neoplastic process in many cases, whereas secondary chondromatosis develops from cartilage and bone fragments in a joint already damaged by osteoarthritis or trauma. The loose bodies mechanically damage articular cartilage and produce the locking, effusion and secondary degenerative change seen clinically.",
+    "additionalDifferentials": [
+      "Secondary osteochondromatosis from osteoarthritis or trauma",
+      "Pigmented villonodular synovitis",
+      "Loose bodies from osteochondritis dissecans",
+      "Synovial chondrosarcoma",
+      "Rheumatoid or other inflammatory synovitis",
+      "Intra-articular tumour or synovial sarcoma"
     ],
-    [
-     "Primary Differentials",
-     "Secondary osteochondromatosis from osteoarthritis or trauma, Pigmented villonodular synovitis, Loose bodies from osteochondritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs showing multiple calcified intra-articular bodies of similar size",
+      "MRI to detect non-calcified cartilaginous bodies and characterise the synovial disease",
+      "CT to define ossified loose bodies and bony involvement",
+      "Ultrasound to demonstrate effusion and intra-articular bodies",
+      "Histological examination of resected tissue to confirm the diagnosis and exclude chondrosarcoma"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment is surgical removal of the intra-articular loose bodies combined with synovectomy to remove the active",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, aggressive bone destruction or a soft-tissue mass suggesting chondrosarcoma",
+      "Recurrent disease after surgery raising concern for persistent active or malignant synovium",
+      "Progressive joint destruction with severe mechanical impairment",
+      "Atypical extra-articular extension of the process"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing non-calcified cartilaginous loose bodies on plain radiographs and relying on them alone",
-     "Prevent diagnostic or management error"
+    "prognosis": "Primary synovial chondromatosis is benign and treatable with surgery, but recurrence is not uncommon when active synovium persists and untreated disease can cause secondary osteoarthritis; malignant transformation to chondrosarcoma is rare but carries a worse outlook.",
+    "pitfalls": [
+      "Missing non-calcified cartilaginous loose bodies on plain radiographs and relying on them alone",
+      "Confusing it with pigmented villonodular synovitis on imaging",
+      "Failing to consider malignant transformation in aggressive or recurrent disease",
+      "Removing loose bodies without addressing the active synovium, leading to recurrence"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Resnick's Diagnosis of Bone and Joint Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment is surgical removal of the intra-articular loose bodies combined with synovectomy to remove the active synovium, performed arthroscopically or open",
+      "In secondary disease, manage the underlying joint pathology such as osteoarthritis that generated the cartilage fragments",
+      "Manage secondary degenerative change with analgesia and physiotherapy, and joint replacement for advanced arthritis",
+      "Monitor for recurrence, which is common when active synovium persists after incomplete synovectomy",
+      "Submit resected tissue for histological examination and remain alert to rare malignant transformation to chondrosarcoma",
+      "Refer to orthopaedic surgery, with rheumatology input as appropriate"
     ]
-   ],
-   "caption": "Overview comparison matrix for synovial chondromatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "synovial-chondromatosis-real-image",
-   "title": "Synovial chondromatosis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "synovial_chondromatosis-pathway",
+      "title": "Synovial chondromatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign proliferative disorder in which the synovium undergoes cartilaginous metaplasia, forming multiple cartilage nodules that detach as loose bodies",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, aggressive bone destruction or a soft-tissue mass suggesting chondrosarcoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs showing multiple calcified intra-articular bodies of similar size, MRI to detect non-calcified cartilaginous bodies and characterise the synovial disease, CT to define ossified loose bodies and bony"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment is surgical removal of the intra-articular loose bodies combined with synovectomy to remove the active synovium, performed arthroscopically or open"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing non-calcified cartilaginous loose bodies on plain radiographs and relying on them alone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of synovial chondromatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "synovial_chondromatosis-matrix",
+      "title": "Synovial chondromatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign proliferative disorder in which the synovium undergoes cartilaginous metaplasia, forming multiple cartilage nodules that",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs showing multiple calcified intra-articular bodies of similar size, MRI to detect non-calcified cartilaginous",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary osteochondromatosis from osteoarthritis or trauma, Pigmented villonodular synovitis, Loose bodies from osteochondritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment is surgical removal of the intra-articular loose bodies combined with synovectomy to remove the active",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing non-calcified cartilaginous loose bodies on plain radiographs and relying on them alone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for synovial chondromatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "synovial_chondromatosis-dx-mgmt",
+      "title": "Diagnosis and management of Synovial chondromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected synovial chondromatosis: monoarticular joint pain, swelling and locking",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, bone destruction, or recurrence after surgery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review to exclude chondrosarcoma with histological examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs for calcified bodies; MRI for non-calcified bodies and synovial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show multiple intra-articular cartilaginous bodies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteochondromatosis from osteoarthritis, PVNS or synovial sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Arthroscopic or open removal of loose bodies with synovectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat underlying osteoarthritis or trauma in secondary disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia, physiotherapy, and joint replacement for advanced arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for recurrence when active synovium persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Submit resected tissue for histology to exclude chondrosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Primary disease is benign and treatable; recurrence is not uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "synovial_chondromatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Multiple calcified intra-articular bodies of similar size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Non-calcified cartilaginous bodies and the synovial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Ossified loose bodies and bony involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Effusion and intra-articular bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of resected tissue",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and excludes chondrosarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "synovial_chondromatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pigmented villonodular synovitis",
+          "cells": [
+            {
+              "text": "Can be confused on imaging; histology confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary osteochondromatosis from osteoarthritis or trauma",
+          "cells": [
+            {
+              "text": "Cartilage fragments generated by underlying osteoarthritis or trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial chondrosarcoma",
+          "cells": [
+            {
+              "text": "Rapid growth or aggressive bone destruction raises concern for malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "synovial_chondromatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Removal of loose bodies with synovectomy",
+          "cells": [
+            {
+              "text": "Arthroscopic or open; removes the active synovium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying joint disease",
+          "cells": [
+            {
+              "text": "In secondary disease, such as osteoarthritis that generated the fragments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Secondary degenerative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint replacement",
+          "cells": [
+            {
+              "text": "Advanced arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence monitoring",
+          "cells": [
+            {
+              "text": "Common when active synovium persists after incomplete synovectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological examination",
+          "cells": [
+            {
+              "text": "Resected tissue, given rare transformation to chondrosarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic referral",
+          "cells": [
+            {
+              "text": "Rheumatology input as appropriate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

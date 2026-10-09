@@ -1,180 +1,660 @@
 {
- "id": "apeced_syndrome",
- "name": "APECED syndrome",
- "aliases": [
-  "Autoimmune polyendocrinopathy-candidiasis-ectodermal dystrophy",
-  "Autoimmune polyglandular syndrome type 1",
-  "APS-1"
- ],
- "class": "non_infective",
- "system": "Immune system",
- "specialty": "Clinical immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by biallelic mutations in the autoimmune regulator (AIRE) gene, impairing thymic negative selection and permitting escape of autoreactive T cells.",
-   "Classic diagnostic triad is chronic mucocutaneous candidiasis, autoimmune hypoparathyroidism and autoimmune adrenal (Addisonian) insufficiency; two of three confirm the diagnosis.",
-   "Chronic mucocutaneous candidiasis is usually the earliest manifestation, often appearing in infancy or early childhood.",
-   "Hypoparathyroidism typically precedes adrenal failure, and components accrue over years so lifelong surveillance is essential.",
-   "High-titre neutralising autoantibodies against type I interferons are almost universal and can be used as a diagnostic marker.",
-   "Autoantibodies to interleukin-17 and interleukin-22 correlate with the chronic candidiasis.",
-   "Additional features include hypogonadism, type 1 diabetes, pernicious anaemia, autoimmune hepatitis, enamel hypoplasia, nail dystrophy and keratoconjunctivitis.",
-   "Inheritance is usually autosomal recessive, with notable founder populations among Finns, Sardinians and Iranian Jews."
+  "id": "apeced_syndrome",
+  "name": "APECED syndrome",
+  "aliases": [
+    "Autoimmune polyendocrinopathy-candidiasis-ectodermal dystrophy",
+    "Autoimmune polyglandular syndrome type 1",
+    "APS-1"
   ],
-  "pathophysiology": "APECED arises from loss-of-function mutations in AIRE, a transcriptional regulator expressed by medullary thymic epithelial cells. AIRE drives promiscuous expression of tissue-restricted self-antigens within the thymus, allowing developing T cells that recognise these antigens to be deleted or diverted to regulatory lineages. When AIRE is defective, this central tolerance fails, and autoreactive T cells escape to the periphery where they mount organ-specific autoimmune attacks against multiple endocrine and non-endocrine tissues. Neutralising autoantibodies to type I interferons and to Th17 cytokines further explain the susceptibility to chronic mucocutaneous candidiasis. The result is progressive, multi-organ autoimmunity accumulating throughout life.",
-  "additionalDifferentials": [
-   "Autoimmune polyglandular syndrome type 2 (Schmidt syndrome)",
-   "Isolated autoimmune Addison disease",
-   "Isolated idiopathic hypoparathyroidism",
-   "IPEX syndrome (FOXP3 deficiency)",
-   "Chronic mucocutaneous candidiasis due to STAT1 gain-of-function mutation",
-   "DiGeorge syndrome with hypoparathyroidism",
-   "Thymoma-associated autoimmunity"
-  ],
-  "additionalInvestigations": [
-   "AIRE gene sequencing for confirmatory diagnosis",
-   "Anti-interferon-omega and anti-interferon-alpha autoantibodies",
-   "Serum calcium, phosphate and parathyroid hormone",
-   "Short synacthen test with adrenocorticotrophic hormone and plasma renin/aldosterone",
-   "Organ-specific autoantibodies (21-hydroxylase, glutamic acid decarboxylase, intrinsic factor, hepatic)",
-   "Fasting glucose, thyroid function and gonadal hormone profile",
-   "Fungal culture of mucocutaneous lesions"
-  ],
-  "redFlags": [
-   "Adrenal crisis with hypotension, hyponatraemia and hyperkalaemia",
-   "Symptomatic hypocalcaemia with tetany, laryngospasm or seizures",
-   "Fulminant autoimmune hepatitis",
-   "Development of oral or oesophageal squamous carcinoma complicating chronic candidiasis",
-   "Autoimmune enteropathy or intestinal dysfunction causing severe malabsorption"
-  ],
-  "prognosis": "With hormone replacement and antifungal management most patients survive into adulthood, but mortality is raised by unrecognised adrenal crisis, hypocalcaemia, fulminant hepatitis and oral carcinoma. Lifelong multidisciplinary surveillance is required because new components continue to emerge.",
-  "pitfalls": [
-   "Diagnosing isolated Addison disease or hypoparathyroidism without recognising the wider syndrome.",
-   "Failing to anticipate and screen for additional autoimmune components as they evolve over time.",
-   "Missing life-threatening adrenal insufficiency in a child already labelled with candidiasis and hypoparathyroidism.",
-   "Not counselling about surveillance for oral squamous carcinoma in long-standing mucocutaneous candidiasis.",
-   "Overlooking neutralising anti-interferon antibodies as a diagnostic and prognostic biomarker."
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology, current edition",
-   "Stiehm's Immune Deficiencies, current edition",
-   "International Union of Immunological Societies phenotypic classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong glucocorticoid and mineralocorticoid replacement for autoimmune adrenal (Addisonian) insufficiency, with stress-dose escalation during illness, surgery or trauma",
-   "Correct autoimmune hypoparathyroidism with activated vitamin D analogues (alfacalcidol or calcitriol) plus calcium, monitoring for hypercalciuria and nephrocalcinosis",
-   "Suppress chronic mucocutaneous candidiasis with azole antifungals, rotating agents and reviewing for azole resistance",
-   "Replace further endocrine axes as they fail — levothyroxine for autoimmune hypothyroidism, insulin for autoimmune diabetes, sex-steroid replacement for gonadal failure — and treat autoimmune hepatitis with corticosteroid-based immunosuppression such as azathioprine",
-   "Lifelong multisystem surveillance for newly emerging autoimmune components, with periodic endocrine, hepatic and haematological screening",
-   "Educate the family on adrenal-crisis recognition, provide an emergency parenteral hydrocortisone kit, and surveil the oral mucosa for squamous carcinoma given chronic candidiasis",
-   "Coordinate care through clinical immunology and endocrinology with dietetic and dental input",
-   "Offer genetic counselling and AIRE testing for siblings and family, reflecting autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "apeced_syndrome-pathway",
-   "title": "APECED syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by biallelic mutations in the autoimmune regulator (AIRE) gene, impairing thymic negative selection and permitting escape of autoreactive T cells.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Adrenal crisis with hypotension, hyponatraemia and hyperkalaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: AIRE gene sequencing for confirmatory diagnosis, Anti-interferon-omega and anti-interferon-alpha autoantibodies, Serum calcium, phosphate and parathyroid hormone"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong glucocorticoid and mineralocorticoid replacement for autoimmune adrenal (Addisonian) insufficiency, with stress-dose escalation during illness, surgery or trauma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing isolated Addison disease or hypoparathyroidism without recognising the wider syndrome."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of apeced syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "apeced_syndrome-matrix",
-   "title": "APECED syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by biallelic mutations in the autoimmune regulator (AIRE) gene, impairing thymic negative selection and permitting escape",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immune system",
+  "specialty": "Clinical immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by biallelic mutations in the autoimmune regulator (AIRE) gene, impairing thymic negative selection and permitting escape of autoreactive T cells.",
+      "Classic diagnostic triad is chronic mucocutaneous candidiasis, autoimmune hypoparathyroidism and autoimmune adrenal (Addisonian) insufficiency; two of three confirm the diagnosis.",
+      "Chronic mucocutaneous candidiasis is usually the earliest manifestation, often appearing in infancy or early childhood.",
+      "Hypoparathyroidism typically precedes adrenal failure, and components accrue over years so lifelong surveillance is essential.",
+      "High-titre neutralising autoantibodies against type I interferons are almost universal and can be used as a diagnostic marker.",
+      "Autoantibodies to interleukin-17 and interleukin-22 correlate with the chronic candidiasis.",
+      "Additional features include hypogonadism, type 1 diabetes, pernicious anaemia, autoimmune hepatitis, enamel hypoplasia, nail dystrophy and keratoconjunctivitis.",
+      "Inheritance is usually autosomal recessive, with notable founder populations among Finns, Sardinians and Iranian Jews."
     ],
-    [
-     "Key Investigations",
-     "AIRE gene sequencing for confirmatory diagnosis, Anti-interferon-omega and anti-interferon-alpha autoantibodies, Serum calcium,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "APECED arises from loss-of-function mutations in AIRE, a transcriptional regulator expressed by medullary thymic epithelial cells. AIRE drives promiscuous expression of tissue-restricted self-antigens within the thymus, allowing developing T cells that recognise these antigens to be deleted or diverted to regulatory lineages. When AIRE is defective, this central tolerance fails, and autoreactive T cells escape to the periphery where they mount organ-specific autoimmune attacks against multiple endocrine and non-endocrine tissues. Neutralising autoantibodies to type I interferons and to Th17 cytokines further explain the susceptibility to chronic mucocutaneous candidiasis. The result is progressive, multi-organ autoimmunity accumulating throughout life.",
+    "additionalDifferentials": [
+      "Autoimmune polyglandular syndrome type 2 (Schmidt syndrome)",
+      "Isolated autoimmune Addison disease",
+      "Isolated idiopathic hypoparathyroidism",
+      "IPEX syndrome (FOXP3 deficiency)",
+      "Chronic mucocutaneous candidiasis due to STAT1 gain-of-function mutation",
+      "DiGeorge syndrome with hypoparathyroidism",
+      "Thymoma-associated autoimmunity"
     ],
-    [
-     "Primary Differentials",
-     "Autoimmune polyglandular syndrome type 2 (Schmidt syndrome), Isolated autoimmune Addison disease, Isolated idiopathic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "AIRE gene sequencing for confirmatory diagnosis",
+      "Anti-interferon-omega and anti-interferon-alpha autoantibodies",
+      "Serum calcium, phosphate and parathyroid hormone",
+      "Short synacthen test with adrenocorticotrophic hormone and plasma renin/aldosterone",
+      "Organ-specific autoantibodies (21-hydroxylase, glutamic acid decarboxylase, intrinsic factor, hepatic)",
+      "Fasting glucose, thyroid function and gonadal hormone profile",
+      "Fungal culture of mucocutaneous lesions"
     ],
-    [
-     "Management Strategy",
-     "Lifelong glucocorticoid and mineralocorticoid replacement for autoimmune adrenal (Addisonian) insufficiency, with stress-dose",
-     "Core treatment modality"
+    "redFlags": [
+      "Adrenal crisis with hypotension, hyponatraemia and hyperkalaemia",
+      "Symptomatic hypocalcaemia with tetany, laryngospasm or seizures",
+      "Fulminant autoimmune hepatitis",
+      "Development of oral or oesophageal squamous carcinoma complicating chronic candidiasis",
+      "Autoimmune enteropathy or intestinal dysfunction causing severe malabsorption"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing isolated Addison disease or hypoparathyroidism without recognising the wider syndrome.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With hormone replacement and antifungal management most patients survive into adulthood, but mortality is raised by unrecognised adrenal crisis, hypocalcaemia, fulminant hepatitis and oral carcinoma. Lifelong multidisciplinary surveillance is required because new components continue to emerge.",
+    "pitfalls": [
+      "Diagnosing isolated Addison disease or hypoparathyroidism without recognising the wider syndrome.",
+      "Failing to anticipate and screen for additional autoimmune components as they evolve over time.",
+      "Missing life-threatening adrenal insufficiency in a child already labelled with candidiasis and hypoparathyroidism.",
+      "Not counselling about surveillance for oral squamous carcinoma in long-standing mucocutaneous candidiasis.",
+      "Overlooking neutralising anti-interferon antibodies as a diagnostic and prognostic biomarker."
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology, current edition",
+      "Stiehm's Immune Deficiencies, current edition",
+      "International Union of Immunological Societies phenotypic classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong glucocorticoid and mineralocorticoid replacement for autoimmune adrenal (Addisonian) insufficiency, with stress-dose escalation during illness, surgery or trauma",
+      "Correct autoimmune hypoparathyroidism with activated vitamin D analogues (alfacalcidol or calcitriol) plus calcium, monitoring for hypercalciuria and nephrocalcinosis",
+      "Suppress chronic mucocutaneous candidiasis with azole antifungals, rotating agents and reviewing for azole resistance",
+      "Replace further endocrine axes as they fail — levothyroxine for autoimmune hypothyroidism, insulin for autoimmune diabetes, sex-steroid replacement for gonadal failure — and treat autoimmune hepatitis with corticosteroid-based immunosuppression such as azathioprine",
+      "Lifelong multisystem surveillance for newly emerging autoimmune components, with periodic endocrine, hepatic and haematological screening",
+      "Educate the family on adrenal-crisis recognition, provide an emergency parenteral hydrocortisone kit, and surveil the oral mucosa for squamous carcinoma given chronic candidiasis",
+      "Coordinate care through clinical immunology and endocrinology with dietetic and dental input",
+      "Offer genetic counselling and AIRE testing for siblings and family, reflecting autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for apeced syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "apeced-syndrome-real-image",
-   "title": "APECED syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "apeced_syndrome-pathway",
+      "title": "APECED syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by biallelic mutations in the autoimmune regulator (AIRE) gene, impairing thymic negative selection and permitting escape of autoreactive T cells.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Adrenal crisis with hypotension, hyponatraemia and hyperkalaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: AIRE gene sequencing for confirmatory diagnosis, Anti-interferon-omega and anti-interferon-alpha autoantibodies, Serum calcium, phosphate and parathyroid hormone"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong glucocorticoid and mineralocorticoid replacement for autoimmune adrenal (Addisonian) insufficiency, with stress-dose escalation during illness, surgery or trauma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing isolated Addison disease or hypoparathyroidism without recognising the wider syndrome."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of apeced syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "apeced_syndrome-matrix",
+      "title": "APECED syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by biallelic mutations in the autoimmune regulator (AIRE) gene, impairing thymic negative selection and permitting escape",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "AIRE gene sequencing for confirmatory diagnosis, Anti-interferon-omega and anti-interferon-alpha autoantibodies, Serum calcium,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autoimmune polyglandular syndrome type 2 (Schmidt syndrome), Isolated autoimmune Addison disease, Isolated idiopathic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong glucocorticoid and mineralocorticoid replacement for autoimmune adrenal (Addisonian) insufficiency, with stress-dose",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing isolated Addison disease or hypoparathyroidism without recognising the wider syndrome.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for apeced syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 351-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "apeced_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AIRE gene sequencing",
+          "cells": [
+            {
+              "text": "Confirmatory diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-interferon-omega and anti-interferon-alpha autoantibodies",
+          "cells": [
+            {
+              "text": "Interferon autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate and parathyroid hormone",
+          "cells": [
+            {
+              "text": "Hypoparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short synacthen test with ACTH and renin and aldosterone",
+          "cells": [
+            {
+              "text": "Adrenal axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-specific autoantibodies",
+          "cells": [
+            {
+              "text": "21-hydroxylase, glutamic acid decarboxylase, intrinsic factor, hepatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose, thyroid function and gonadal hormone profile",
+          "cells": [
+            {
+              "text": "Further endocrine axes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture of mucocutaneous lesions",
+          "cells": [
+            {
+              "text": "Candidiasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apeced_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated autoimmune Addison disease",
+          "cells": [
+            {
+              "text": "Diagnosing it in isolation misses the wider syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated idiopathic hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Diagnosing it in isolation misses the wider syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apeced_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong glucocorticoid and mineralocorticoid replacement",
+          "cells": [
+            {
+              "text": "Autoimmune adrenal insufficiency; stress-dose escalation during illness"
+            },
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoparathyroidism treatment",
+          "cells": [
+            {
+              "text": "Activated vitamin D analogues (alfacalcidol or calcitriol) with calcium"
+            },
+            {
+              "text": "Monitor for hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Azole antifungals",
+          "cells": [
+            {
+              "text": "Suppress chronic mucocutaneous candidiasis; rotate agents"
+            },
+            {
+              "text": "Review for azole resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further endocrine replacement",
+          "cells": [
+            {
+              "text": "Levothyroxine, insulin, sex-steroid replacement"
+            },
+            {
+              "text": "As further axes fail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multisystem surveillance",
+          "cells": [
+            {
+              "text": "Endocrine, hepatic and haematological screening"
+            },
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis education",
+          "cells": [
+            {
+              "text": "Emergency parenteral hydrocortisone kit; oral mucosa surveillance"
+            },
+            {
+              "text": "Family education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "AIRE testing for siblings and family"
+            },
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apeced_syndrome-ddx-2",
+      "kind": "ddx",
+      "title": "Features of PGA I versus PGA II",
+      "rowHeader": "Condition",
+      "columns": [
+        "PGA I",
+        "PGA II"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidemiology",
+          "cells": [
+            {
+              "text": "Autosomal recessive; mutations in the APECED gene; childhood onset; equal male:female ratio"
+            },
+            {
+              "text": "Polygenic inheritance; HLA-DR3 and HLA-DR4 associated; adult onset; female predominance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 1)",
+          "cells": [
+            {
+              "text": "Mucocutaneous candidiasis"
+            },
+            {
+              "text": "Adrenal insufficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 2)",
+          "cells": [
+            {
+              "text": "Hypoparathyroidism"
+            },
+            {
+              "text": "Hypothyroidism"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 3)",
+          "cells": [
+            {
+              "text": "Adrenal insufficiency"
+            },
+            {
+              "text": "Graves' disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 4)",
+          "cells": [
+            {
+              "text": "Hypogonadism"
+            },
+            {
+              "text": "Type 1 diabetes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 5)",
+          "cells": [
+            {
+              "text": "Alopecia"
+            },
+            {
+              "text": "Hypogonadism"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 6)",
+          "cells": [
+            {
+              "text": "Hypothyroidism"
+            },
+            {
+              "text": "Hypophysitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 7)",
+          "cells": [
+            {
+              "text": "Dental enamel hypoplasia"
+            },
+            {
+              "text": "Myasthenia gravis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 8)",
+          "cells": [
+            {
+              "text": "Malabsorption"
+            },
+            {
+              "text": "Vitiligo"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 9)",
+          "cells": [
+            {
+              "text": "Chronic active hepatitis"
+            },
+            {
+              "text": "Alopecia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 10)",
+          "cells": [
+            {
+              "text": "Vitiligo"
+            },
+            {
+              "text": "Pernicious anemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease associations (pair 11)",
+          "cells": [
+            {
+              "text": "Pernicious anemia"
+            },
+            {
+              "text": "Celiac disease"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Disease associations are printed as side-by-side lists; each pair is the PGA I item next to the PGA II item on the same line."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "apeced_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of APECED syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Candidiasis with adrenal or parathyroid failure, possibly multiple endocrine loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Adrenal crisis with hypotension or symptomatic hypocalcaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency adrenal crisis treatment and calcium correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AIRE sequencing, interferon autoantibodies, calcium and PTH, synacthen test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "AIRE gene sequencing confirms the syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lifelong glucocorticoid and mineralocorticoid replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat AIRE and endocrine tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activated vitamin D analogues with calcium for hypoparathyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Azole antifungals for chronic mucocutaneous candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong multisystem surveillance and emergency hydrocortisone kit",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and AIRE testing for siblings",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

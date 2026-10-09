@@ -1,177 +1,464 @@
 {
- "id": "gastrinoma_zollinger_ellison",
- "name": "Gastrinoma (Zollinger-Ellison syndrome)",
- "aliases": [
-  "Zollinger-Ellison syndrome",
-  "ZES",
-  "gastrin-secreting tumour",
-  "gastrin-secreting neuroendocrine tumour"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Suspect the syndrome when peptic ulcers are multiple, refractory to standard treatment, in atypical sites (distal duodenum or jejunum), or recur after apparently adequate therapy",
-   "Secretory diarrhoea and steatorrhoea are common and may dominate the picture, driven by massive acid output that inactivates pancreatic enzymes",
-   "A markedly raised fasting serum gastrin together with elevated gastric acid output points strongly to the diagnosis",
-   "Acid-suppressing drugs elevate gastrin and should ideally be withheld before measurement, though safe withdrawal requires careful judgement in ulcer-prone patients",
-   "The secretin stimulation test provokes a paradoxical rise in gastrin from tumour cells and helps confirm the diagnosis in equivocal cases",
-   "Around a fifth to a quarter of cases arise within multiple endocrine neoplasia type 1, so screen for hyperparathyroidism and pituitary disease",
-   "Most tumours lie within the gastrinoma triangle around the duodenum and pancreatic head and are frequently small and multiple",
-   "Somatostatin-receptor imaging such as gallium-labelled DOTATATE scanning has become central to locating primary and metastatic disease"
+  "id": "gastrinoma_zollinger_ellison",
+  "name": "Gastrinoma (Zollinger-Ellison syndrome)",
+  "aliases": [
+    "Zollinger-Ellison syndrome",
+    "ZES",
+    "gastrin-secreting tumour",
+    "gastrin-secreting neuroendocrine tumour"
   ],
-  "pathophysiology": "Gastrinoma is a gastrin-secreting neuroendocrine tumour, usually arising in the duodenal wall or pancreas. Autonomous, unregulated gastrin release drives sustained hypersecretion of gastric acid and trophic expansion of the parietal cell mass. The resulting acid load overwhelms mucosal defences, producing severe and recurrent peptic ulceration, while the low intraluminal pH in the small bowel inactivates pancreatic lipase and injures the mucosa, causing diarrhoea and fat malabsorption. A substantial minority occur as part of multiple endocrine neoplasia type 1, and a significant proportion behave malignantly with regional nodal and hepatic spread.",
-  "additionalDifferentials": [
-   "Helicobacter pylori-associated peptic ulcer disease",
-   "Non-steroidal anti-inflammatory drug-induced ulceration",
-   "Antral G-cell hyperplasia",
-   "Retained gastric antrum syndrome after gastric surgery",
-   "Chronic atrophic gastritis with secondary hypergastrinaemia",
-   "Other causes of chronic secretory diarrhoea such as VIPoma"
-  ],
-  "additionalInvestigations": [
-   "Fasting serum gastrin, ideally measured off acid-suppressing therapy",
-   "Gastric pH or acid-output assessment to confirm hyperchlorhydria",
-   "Secretin stimulation test to demonstrate a paradoxical gastrin rise",
-   "Somatostatin-receptor imaging (e.g. gallium DOTATATE positron emission tomography) for localisation and staging",
-   "Cross-sectional imaging and endoscopic ultrasound to define primary tumour and metastases",
-   "Serum calcium, parathyroid hormone and pituitary screening to exclude multiple endocrine neoplasia type 1"
-  ],
-  "redFlags": [
-   "Complicated ulcer disease with haemorrhage or perforation",
-   "Severe dehydration and electrolyte disturbance from high-volume secretory diarrhoea",
-   "Hepatic metastases indicating advanced malignant disease",
-   "Features of coexisting multiple endocrine neoplasia type 1 such as hypercalcaemia",
-   "Rapid symptom rebound on stopping acid suppression"
-  ],
-  "prognosis": "Effective acid suppression with proton-pump inhibition controls symptoms in most patients, and complete surgical resection of localised sporadic tumours can be curative. Outlook is largely determined by tumour biology and the presence of hepatic metastases, with indolent disease often compatible with prolonged survival.",
-  "pitfalls": [
-   "Attributing hypergastrinaemia to the tumour when it is actually driven by acid-suppressing drugs or atrophic gastritis",
-   "Dangerously withdrawing acid suppression to test gastrin in a patient at risk of ulcer complications",
-   "Overlooking multiple endocrine neoplasia type 1 and its associated hyperparathyroidism",
-   "Assuming a single tumour when duodenal gastrinomas are often small and multiple",
-   "Delaying somatostatin-receptor imaging and missing occult metastatic disease"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "DeGroot's Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress the massive acid output with high-dose proton-pump inhibitor therapy to heal ulcers and control the secretory diarrhoea",
-   "Surgically resect localised sporadic gastrinoma, offering the prospect of cure after accurate localisation",
-   "Use somatostatin analogues for symptom and tumour control in unresectable or metastatic disease",
-   "For hepatic metastatic disease, consider peptide receptor radionuclide therapy, targeted agents and liver-directed treatments",
-   "Screen for MEN1 with serum calcium, parathyroid hormone and pituitary assessment, adapting management when disease is multifocal",
-   "Monitor fasting gastrin, chromogranin A and imaging for recurrence and progression",
-   "Provide genetic counselling and family screening in MEN1-associated disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gastrinoma_zollinger_ellison-pathway",
-   "title": "Gastrinoma (Zollinger-Ellison syndrome): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Suspect the syndrome when peptic ulcers are multiple, refractory to standard treatment, in atypical sites (distal duodenum or jejunum), or recur after apparently adequate therapy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Complicated ulcer disease with haemorrhage or perforation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting serum gastrin, ideally measured off acid-suppressing therapy, Gastric pH or acid-output assessment to confirm hyperchlorhydria, Secretin stimulation test to demonstrate a paradoxical gastrin rise"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress the massive acid output with high-dose proton-pump inhibitor therapy to heal ulcers and control the secretory diarrhoea"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing hypergastrinaemia to the tumour when it is actually driven by acid-suppressing drugs or atrophic gastritis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gastrinoma (zollinger-ellison syndrome)."
-  }
- ],
- "tables": [
-  {
-   "id": "gastrinoma_zollinger_ellison-matrix",
-   "title": "Gastrinoma (Zollinger-Ellison syndrome): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Suspect the syndrome when peptic ulcers are multiple, refractory to standard treatment, in atypical sites (distal duodenum or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Suspect the syndrome when peptic ulcers are multiple, refractory to standard treatment, in atypical sites (distal duodenum or jejunum), or recur after apparently adequate therapy",
+      "Secretory diarrhoea and steatorrhoea are common and may dominate the picture, driven by massive acid output that inactivates pancreatic enzymes",
+      "A markedly raised fasting serum gastrin together with elevated gastric acid output points strongly to the diagnosis",
+      "Acid-suppressing drugs elevate gastrin and should ideally be withheld before measurement, though safe withdrawal requires careful judgement in ulcer-prone patients",
+      "The secretin stimulation test provokes a paradoxical rise in gastrin from tumour cells and helps confirm the diagnosis in equivocal cases",
+      "Around a fifth to a quarter of cases arise within multiple endocrine neoplasia type 1, so screen for hyperparathyroidism and pituitary disease",
+      "Most tumours lie within the gastrinoma triangle around the duodenum and pancreatic head and are frequently small and multiple",
+      "Somatostatin-receptor imaging such as gallium-labelled DOTATATE scanning has become central to locating primary and metastatic disease"
     ],
-    [
-     "Key Investigations",
-     "Fasting serum gastrin, ideally measured off acid-suppressing therapy, Gastric pH or acid-output assessment to confirm",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gastrinoma is a gastrin-secreting neuroendocrine tumour, usually arising in the duodenal wall or pancreas. Autonomous, unregulated gastrin release drives sustained hypersecretion of gastric acid and trophic expansion of the parietal cell mass. The resulting acid load overwhelms mucosal defences, producing severe and recurrent peptic ulceration, while the low intraluminal pH in the small bowel inactivates pancreatic lipase and injures the mucosa, causing diarrhoea and fat malabsorption. A substantial minority occur as part of multiple endocrine neoplasia type 1, and a significant proportion behave malignantly with regional nodal and hepatic spread.",
+    "additionalDifferentials": [
+      "Helicobacter pylori-associated peptic ulcer disease",
+      "Non-steroidal anti-inflammatory drug-induced ulceration",
+      "Antral G-cell hyperplasia",
+      "Retained gastric antrum syndrome after gastric surgery",
+      "Chronic atrophic gastritis with secondary hypergastrinaemia",
+      "Other causes of chronic secretory diarrhoea such as VIPoma"
     ],
-    [
-     "Primary Differentials",
-     "Helicobacter pylori-associated peptic ulcer disease, Non-steroidal anti-inflammatory drug-induced ulceration, Antral G-cell",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting serum gastrin, ideally measured off acid-suppressing therapy",
+      "Gastric pH or acid-output assessment to confirm hyperchlorhydria",
+      "Secretin stimulation test to demonstrate a paradoxical gastrin rise",
+      "Somatostatin-receptor imaging (e.g. gallium DOTATATE positron emission tomography) for localisation and staging",
+      "Cross-sectional imaging and endoscopic ultrasound to define primary tumour and metastases",
+      "Serum calcium, parathyroid hormone and pituitary screening to exclude multiple endocrine neoplasia type 1"
     ],
-    [
-     "Management Strategy",
-     "Suppress the massive acid output with high-dose proton-pump inhibitor therapy to heal ulcers and control the secretory diarrhoea",
-     "Core treatment modality"
+    "redFlags": [
+      "Complicated ulcer disease with haemorrhage or perforation",
+      "Severe dehydration and electrolyte disturbance from high-volume secretory diarrhoea",
+      "Hepatic metastases indicating advanced malignant disease",
+      "Features of coexisting multiple endocrine neoplasia type 1 such as hypercalcaemia",
+      "Rapid symptom rebound on stopping acid suppression"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing hypergastrinaemia to the tumour when it is actually driven by acid-suppressing drugs or atrophic gastritis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Effective acid suppression with proton-pump inhibition controls symptoms in most patients, and complete surgical resection of localised sporadic tumours can be curative. Outlook is largely determined by tumour biology and the presence of hepatic metastases, with indolent disease often compatible with prolonged survival.",
+    "pitfalls": [
+      "Attributing hypergastrinaemia to the tumour when it is actually driven by acid-suppressing drugs or atrophic gastritis",
+      "Dangerously withdrawing acid suppression to test gastrin in a patient at risk of ulcer complications",
+      "Overlooking multiple endocrine neoplasia type 1 and its associated hyperparathyroidism",
+      "Assuming a single tumour when duodenal gastrinomas are often small and multiple",
+      "Delaying somatostatin-receptor imaging and missing occult metastatic disease"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "DeGroot's Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress the massive acid output with high-dose proton-pump inhibitor therapy to heal ulcers and control the secretory diarrhoea",
+      "Surgically resect localised sporadic gastrinoma, offering the prospect of cure after accurate localisation",
+      "Use somatostatin analogues for symptom and tumour control in unresectable or metastatic disease",
+      "For hepatic metastatic disease, consider peptide receptor radionuclide therapy, targeted agents and liver-directed treatments",
+      "Screen for MEN1 with serum calcium, parathyroid hormone and pituitary assessment, adapting management when disease is multifocal",
+      "Monitor fasting gastrin, chromogranin A and imaging for recurrence and progression",
+      "Provide genetic counselling and family screening in MEN1-associated disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for gastrinoma (zollinger-ellison syndrome)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gastrinoma-zollinger-ellison-real-image",
-   "title": "Gastrinoma (Zollinger-Ellison syndrome): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "gastrinoma_zollinger_ellison-pathway",
+      "title": "Gastrinoma (Zollinger-Ellison syndrome): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Suspect the syndrome when peptic ulcers are multiple, refractory to standard treatment, in atypical sites (distal duodenum or jejunum), or recur after apparently adequate therapy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Complicated ulcer disease with haemorrhage or perforation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting serum gastrin, ideally measured off acid-suppressing therapy, Gastric pH or acid-output assessment to confirm hyperchlorhydria, Secretin stimulation test to demonstrate a paradoxical gastrin rise"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress the massive acid output with high-dose proton-pump inhibitor therapy to heal ulcers and control the secretory diarrhoea"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing hypergastrinaemia to the tumour when it is actually driven by acid-suppressing drugs or atrophic gastritis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gastrinoma (zollinger-ellison syndrome)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gastrinoma_zollinger_ellison-matrix",
+      "title": "Gastrinoma (Zollinger-Ellison syndrome): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Suspect the syndrome when peptic ulcers are multiple, refractory to standard treatment, in atypical sites (distal duodenum or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting serum gastrin, ideally measured off acid-suppressing therapy, Gastric pH or acid-output assessment to confirm",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Helicobacter pylori-associated peptic ulcer disease, Non-steroidal anti-inflammatory drug-induced ulceration, Antral G-cell",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress the massive acid output with high-dose proton-pump inhibitor therapy to heal ulcers and control the secretory diarrhoea",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing hypergastrinaemia to the tumour when it is actually driven by acid-suppressing drugs or atrophic gastritis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gastrinoma (zollinger-ellison syndrome)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastrinoma_zollinger_ellison-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting serum gastrin, ideally off acid-suppressing therapy",
+          "cells": [
+            {
+              "text": "Fasting gastrin level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric pH or acid-output assessment",
+          "cells": [
+            {
+              "text": "Confirms hyperchlorhydria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secretin stimulation test",
+          "cells": [
+            {
+              "text": "Paradoxical gastrin rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin-receptor imaging (gallium DOTATATE PET)",
+          "cells": [
+            {
+              "text": "Localisation and staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging and endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Primary tumour and metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, PTH and pituitary screening",
+          "cells": [
+            {
+              "text": "Excludes MEN1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrinoma_zollinger_ellison-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "VIPoma",
+          "cells": [
+            {
+              "text": "Other cause of chronic secretory diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic atrophic gastritis",
+          "cells": [
+            {
+              "text": "Secondary hypergastrinaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrinoma_zollinger_ellison-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose proton-pump inhibitor",
+          "cells": [
+            {
+              "text": "Controls massive acid output; heals ulcers and secretory diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Localised sporadic gastrinoma; offers cure after accurate localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues",
+          "cells": [
+            {
+              "text": "Symptom and tumour control in unresectable or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver-directed or radionuclide therapy",
+          "cells": [
+            {
+              "text": "Peptide receptor radionuclide therapy, targeted agents, liver-directed treatments for hepatic metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEN1 screening",
+          "cells": [
+            {
+              "text": "Serum calcium, PTH and pituitary assessment; adapt management when multifocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Fasting gastrin, chromogranin A and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening in MEN1-associated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastrinoma_zollinger_ellison-dx-mgmt",
+      "title": "Diagnosis and management of Gastrinoma (Zollinger-Ellison syndrome)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Zollinger-Ellison syndrome: ulcers with massive gastric acid output",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemorrhage, dehydration from diarrhoea, hepatic metastases, MEN1)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of ulcer haemorrhage or perforation, with fluid correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting gastrin, acid output, secretin test and DOTATATE PET imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the secretin test show a paradoxical gastrin rise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider H pylori or NSAID ulcers, VIPoma, G-cell hyperplasia or atrophic gastritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose proton-pump inhibitor to heal ulcers and control secretory diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resect localised sporadic gastrinoma after accurate localisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Somatostatin analogues for unresectable or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for MEN1 with calcium, PTH and pituitary assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acid suppression controls symptoms in most; resection of localised tumour can cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

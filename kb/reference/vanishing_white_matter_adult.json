@@ -1,177 +1,437 @@
 {
- "id": "vanishing_white_matter_adult",
- "name": "Adult-onset vanishing white matter disease (EIF2B)",
- "aliases": [
-  "VWM",
-  "EIF2B-related leukoencephalopathy",
-  "leukoencephalopathy with vanishing white matter",
-  "childhood ataxia with central hypomyelination (CACH)",
-  "ovarioleukodystrophy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive leukoencephalopathy caused by variants in any of the five subunits of eukaryotic translation initiation factor 2B (EIF2B1 to EIF2B5)",
-   "The defining clinical feature is episodic, stepwise deterioration provoked by stressors such as febrile illness, minor head trauma or acute fright, sometimes with disproportionate decline or coma followed by partial recovery",
-   "The adult-onset form is generally milder and more slowly progressive than the infantile disease, with spasticity, cerebellar ataxia and cognitive or behavioural change predominating",
-   "Affected women may have primary or secondary ovarian failure, giving the ovarioleukodystrophy phenotype, which is an important clue in females",
-   "The MRI hallmark is diffuse white matter rarefaction and cystic degeneration, so that over time the abnormal white matter takes on a signal close to cerebrospinal fluid on all sequences, sometimes with a radiating stripe pattern within it",
-   "Diagnosis rests on the characteristic imaging together with the stress-sensitive clinical course, confirmed by EIF2B gene testing",
-   "There is no specific therapy; management is supportive and includes avoiding and promptly treating triggers such as fever and head injury"
+  "id": "vanishing_white_matter_adult",
+  "name": "Adult-onset vanishing white matter disease (EIF2B)",
+  "aliases": [
+    "VWM",
+    "EIF2B-related leukoencephalopathy",
+    "leukoencephalopathy with vanishing white matter",
+    "childhood ataxia with central hypomyelination (CACH)",
+    "ovarioleukodystrophy"
   ],
-  "pathophysiology": "Vanishing white matter disease is caused by biallelic variants in genes encoding subunits of eukaryotic translation initiation factor 2B (eIF2B), a guanine nucleotide exchange factor central to the initiation of protein synthesis and to the integrated stress response. Impaired eIF2B activity dysregulates the cellular response to stress, rendering glial cells, particularly astrocytes and oligodendrocytes, abnormally vulnerable. Physiological stressors such as fever, trauma or fright overwhelm this defective stress response, precipitating white matter injury. Progressive loss and cystic breakdown of the white matter produce the characteristic rarefaction in which affected tissue comes to resemble cerebrospinal fluid on imaging.",
-  "additionalDifferentials": [
-   "Multiple sclerosis and other inflammatory demyelination",
-   "Other adult-onset genetic leukoencephalopathies (including LBSL and adult Alexander disease)",
-   "Mitochondrial leukoencephalopathy",
-   "Toxic or post-infectious leukoencephalopathy",
-   "CADASIL and other hereditary small-vessel diseases",
-   "Premature ovarian insufficiency with an unrelated incidental white matter change"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to demonstrate diffuse white matter rarefaction with cystic change and a CSF-like signal, and any radiating stripe pattern",
-   "EIF2B1 to EIF2B5 sequencing or gene panel to confirm the diagnosis",
-   "Endocrine assessment of ovarian function in affected women",
-   "Neuropsychological evaluation to characterise cognitive involvement",
-   "Exclusion of inflammatory and infective causes (CSF, oligoclonal bands) where multiple sclerosis is considered",
-   "Serial imaging to document the evolving white matter rarefaction"
-  ],
-  "redFlags": [
-   "Rapid deterioration or coma following fever, head trauma or acute fright",
-   "New encephalopathy in a patient with known disease requiring assessment for a treatable trigger",
-   "Progressive cognitive decline with loss of independence",
-   "Dysphagia and aspiration risk as the disease advances"
-  ],
-  "prognosis": "Adult-onset vanishing white matter disease is usually slower and milder than childhood forms, but remains progressive and is punctuated by stress-related episodes of decline that may not fully reverse; the overall course varies widely with genotype and age at onset. Careful avoidance of triggers can reduce episodic deterioration, though cumulative disability tends to accrue over time.",
-  "pitfalls": [
-   "Not recognising the stress-provoked, stepwise course as a specific clue to the diagnosis",
-   "Misinterpreting the CSF-like white matter as atrophy or old ischaemia rather than rarefaction",
-   "Overlooking ovarian failure in women, which points towards the diagnosis",
-   "Mislabelling the disorder as multiple sclerosis and giving inappropriate immunotherapy",
-   "Failing to advise patients and families about avoiding and promptly managing fever and head injury"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy; management is supportive with rigorous avoidance of decompensation triggers",
-   "Aggressive prevention and early treatment of fever and infection with antipyretics and prompt antimicrobials, and avoidance of head trauma",
-   "Prophylactic planning around anaesthesia, illness and vaccination to minimise stress-provoked decline",
-   "Physiotherapy, occupational therapy and mobility aids for spasticity and cerebellar ataxia, with antispasticity agents such as baclofen as needed",
-   "Endocrine assessment and hormone replacement for ovarian failure in the ovarioleukodystrophy phenotype",
-   "Neuropsychological support and management of cognitive and behavioural change",
-   "Serial MRI and multidisciplinary neurogenetics follow-up",
-   "Autosomal recessive genetic counselling with EIF2B testing and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vanishing_white_matter_adult-pathway",
-   "title": "Adult-onset vanishing white matter disease (EIF2B): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive leukoencephalopathy caused by variants in any of the five subunits of eukaryotic translation initiation factor 2B (EIF2B1 to EIF2B5)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid deterioration or coma following fever, head trauma or acute fright",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to demonstrate diffuse white matter rarefaction with cystic change and a CSF-like signal, and any radiating stripe pattern, EIF2B1 to EIF2B5 sequencing or gene panel to confirm the diagnosis, Endocrine assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy; management is supportive with rigorous avoidance of decompensation triggers"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not recognising the stress-provoked, stepwise course as a specific clue to the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of adult-onset vanishing white matter disease (eif2b)."
-  }
- ],
- "tables": [
-  {
-   "id": "vanishing_white_matter_adult-matrix",
-   "title": "Adult-onset vanishing white matter disease (EIF2B): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive leukoencephalopathy caused by variants in any of the five subunits of eukaryotic translation initiation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive leukoencephalopathy caused by variants in any of the five subunits of eukaryotic translation initiation factor 2B (EIF2B1 to EIF2B5)",
+      "The defining clinical feature is episodic, stepwise deterioration provoked by stressors such as febrile illness, minor head trauma or acute fright, sometimes with disproportionate decline or coma followed by partial recovery",
+      "The adult-onset form is generally milder and more slowly progressive than the infantile disease, with spasticity, cerebellar ataxia and cognitive or behavioural change predominating",
+      "Affected women may have primary or secondary ovarian failure, giving the ovarioleukodystrophy phenotype, which is an important clue in females",
+      "The MRI hallmark is diffuse white matter rarefaction and cystic degeneration, so that over time the abnormal white matter takes on a signal close to cerebrospinal fluid on all sequences, sometimes with a radiating stripe pattern within it",
+      "Diagnosis rests on the characteristic imaging together with the stress-sensitive clinical course, confirmed by EIF2B gene testing",
+      "There is no specific therapy; management is supportive and includes avoiding and promptly treating triggers such as fever and head injury"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to demonstrate diffuse white matter rarefaction with cystic change and a CSF-like signal, and any radiating stripe",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vanishing white matter disease is caused by biallelic variants in genes encoding subunits of eukaryotic translation initiation factor 2B (eIF2B), a guanine nucleotide exchange factor central to the initiation of protein synthesis and to the integrated stress response. Impaired eIF2B activity dysregulates the cellular response to stress, rendering glial cells, particularly astrocytes and oligodendrocytes, abnormally vulnerable. Physiological stressors such as fever, trauma or fright overwhelm this defective stress response, precipitating white matter injury. Progressive loss and cystic breakdown of the white matter produce the characteristic rarefaction in which affected tissue comes to resemble cerebrospinal fluid on imaging.",
+    "additionalDifferentials": [
+      "Multiple sclerosis and other inflammatory demyelination",
+      "Other adult-onset genetic leukoencephalopathies (including LBSL and adult Alexander disease)",
+      "Mitochondrial leukoencephalopathy",
+      "Toxic or post-infectious leukoencephalopathy",
+      "CADASIL and other hereditary small-vessel diseases",
+      "Premature ovarian insufficiency with an unrelated incidental white matter change"
     ],
-    [
-     "Primary Differentials",
-     "Multiple sclerosis and other inflammatory demyelination, Other adult-onset genetic leukoencephalopathies (including LBSL and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to demonstrate diffuse white matter rarefaction with cystic change and a CSF-like signal, and any radiating stripe pattern",
+      "EIF2B1 to EIF2B5 sequencing or gene panel to confirm the diagnosis",
+      "Endocrine assessment of ovarian function in affected women",
+      "Neuropsychological evaluation to characterise cognitive involvement",
+      "Exclusion of inflammatory and infective causes (CSF, oligoclonal bands) where multiple sclerosis is considered",
+      "Serial imaging to document the evolving white matter rarefaction"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy; management is supportive with rigorous avoidance of decompensation triggers",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid deterioration or coma following fever, head trauma or acute fright",
+      "New encephalopathy in a patient with known disease requiring assessment for a treatable trigger",
+      "Progressive cognitive decline with loss of independence",
+      "Dysphagia and aspiration risk as the disease advances"
     ],
-    [
-     "Clinical Pitfall",
-     "Not recognising the stress-provoked, stepwise course as a specific clue to the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Adult-onset vanishing white matter disease is usually slower and milder than childhood forms, but remains progressive and is punctuated by stress-related episodes of decline that may not fully reverse; the overall course varies widely with genotype and age at onset. Careful avoidance of triggers can reduce episodic deterioration, though cumulative disability tends to accrue over time.",
+    "pitfalls": [
+      "Not recognising the stress-provoked, stepwise course as a specific clue to the diagnosis",
+      "Misinterpreting the CSF-like white matter as atrophy or old ischaemia rather than rarefaction",
+      "Overlooking ovarian failure in women, which points towards the diagnosis",
+      "Mislabelling the disorder as multiple sclerosis and giving inappropriate immunotherapy",
+      "Failing to advise patients and families about avoiding and promptly managing fever and head injury"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy; management is supportive with rigorous avoidance of decompensation triggers",
+      "Aggressive prevention and early treatment of fever and infection with antipyretics and prompt antimicrobials, and avoidance of head trauma",
+      "Prophylactic planning around anaesthesia, illness and vaccination to minimise stress-provoked decline",
+      "Physiotherapy, occupational therapy and mobility aids for spasticity and cerebellar ataxia, with antispasticity agents such as baclofen as needed",
+      "Endocrine assessment and hormone replacement for ovarian failure in the ovarioleukodystrophy phenotype",
+      "Neuropsychological support and management of cognitive and behavioural change",
+      "Serial MRI and multidisciplinary neurogenetics follow-up",
+      "Autosomal recessive genetic counselling with EIF2B testing and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for adult-onset vanishing white matter disease (eif2b)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vanishing-white-matter-adult-real-image",
-   "title": "Adult-onset vanishing white matter disease (EIF2B): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "vanishing_white_matter_adult-pathway",
+      "title": "Adult-onset vanishing white matter disease (EIF2B): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive leukoencephalopathy caused by variants in any of the five subunits of eukaryotic translation initiation factor 2B (EIF2B1 to EIF2B5)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid deterioration or coma following fever, head trauma or acute fright",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to demonstrate diffuse white matter rarefaction with cystic change and a CSF-like signal, and any radiating stripe pattern, EIF2B1 to EIF2B5 sequencing or gene panel to confirm the diagnosis, Endocrine assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy; management is supportive with rigorous avoidance of decompensation triggers"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not recognising the stress-provoked, stepwise course as a specific clue to the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of adult-onset vanishing white matter disease (eif2b)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vanishing_white_matter_adult-matrix",
+      "title": "Adult-onset vanishing white matter disease (EIF2B): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive leukoencephalopathy caused by variants in any of the five subunits of eukaryotic translation initiation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to demonstrate diffuse white matter rarefaction with cystic change and a CSF-like signal, and any radiating stripe",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Multiple sclerosis and other inflammatory demyelination, Other adult-onset genetic leukoencephalopathies (including LBSL and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy; management is supportive with rigorous avoidance of decompensation triggers",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not recognising the stress-provoked, stepwise course as a specific clue to the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for adult-onset vanishing white matter disease (eif2b)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vanishing_white_matter_adult-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Diffuse white matter rarefaction with cystic change and CSF-like signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EIF2B1 to EIF2B5 sequencing or gene panel",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine assessment of ovarian function",
+          "cells": [
+            {
+              "text": "Ovarian function in affected women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological evaluation",
+          "cells": [
+            {
+              "text": "Cognitive involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF and oligoclonal band testing",
+          "cells": [
+            {
+              "text": "Excludes inflammatory and infective causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vanishing_white_matter_adult-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple sclerosis and other inflammatory demyelination",
+          "cells": [
+            {
+              "text": "Excluded by CSF and oligoclonal band testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial leukoencephalopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CADASIL and other hereditary small-vessel disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vanishing_white_matter_adult-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; rigorous avoidance of decompensation triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early treatment of fever and infection",
+          "cells": [
+            {
+              "text": "Antipyretics and prompt antimicrobials; avoidance of head trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaesthesia, illness and vaccination planning",
+          "cells": [
+            {
+              "text": "Minimises stress-provoked decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Motor function and independence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vanishing_white_matter_adult-dx-mgmt",
+      "title": "Diagnosis and management of Adult-onset vanishing white matter disease (EIF2B)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected adult vanishing white matter: stepwise decline after fever, trauma or fright",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (coma after a trigger, new encephalopathy or progressive decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for a treatable trigger of new encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI for white matter rarefaction, EIF2B1-5 testing, CSF and oligoclonal bands",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm an EIF2B subunit variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MS, LBSL, mitochondrial leukoencephalopathy or CADASIL; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with rigorous avoidance of decompensation triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early antipyretic and antimicrobial treatment of fever and infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anaesthesia, illness and vaccination planning to limit stress-provoked decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for motor function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Adult-onset form is generally milder and more slowly progressive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

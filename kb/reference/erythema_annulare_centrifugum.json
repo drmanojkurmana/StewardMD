@@ -1,173 +1,471 @@
 {
- "id": "erythema_annulare_centrifugum",
- "name": "Erythema annulare centrifugum",
- "aliases": [
-  "EAC",
-  "figurate erythema",
-  "gyrate erythema"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as slowly enlarging annular or polycyclic erythematous lesions that spread centrifugally with central clearing, favouring the trunk and proximal limbs",
-   "A trailing scale on the inner edge of the advancing border is characteristic of the superficial type",
-   "It is a reactive figurate erythema and often a marker of an underlying trigger rather than a primary disease",
-   "Recognised triggers include infections (dermatophytes, viruses, bacteria), drugs, foods and, less commonly, underlying malignancy",
-   "The superficial form is often mildly itchy with the classic trailing scale, whereas the deep form is indurated, non-scaling and more sharply defined",
-   "Biopsy of the superficial type shows a tight ('coat-sleeve') perivascular lymphocytic infiltrate in the dermis",
-   "Management focuses on identifying and treating the underlying cause; the eruption often settles once the trigger is removed"
+  "id": "erythema_annulare_centrifugum",
+  "name": "Erythema annulare centrifugum",
+  "aliases": [
+    "EAC",
+    "figurate erythema",
+    "gyrate erythema"
   ],
-  "pathophysiology": "Erythema annulare centrifugum is regarded as a hypersensitivity reaction pattern in which the skin responds to a variety of antigenic stimuli, such as microbial antigens, drugs or, occasionally, tumour-associated antigens. The reactive process produces a perivascular lymphocytic infiltrate in the dermis; the superficial variant additionally shows spongiosis and parakeratosis accounting for the trailing scale, while the deep variant has a denser, deeper infiltrate without epidermal change. Centrifugal spread with central clearing gives the characteristic annular and polycyclic configurations.",
-  "additionalDifferentials": [
-   "Tinea corporis",
-   "Erythema gyratum repens",
-   "Subacute cutaneous lupus erythematosus (annular type)",
-   "Annular urticaria and urticarial vasculitis",
-   "Granuloma annulare",
-   "Erythema migrans of Lyme disease"
-  ],
-  "additionalInvestigations": [
-   "Skin scrapings and mycology to exclude dermatophyte infection",
-   "Skin biopsy to confirm the reaction pattern and exclude mimics",
-   "Screening for infective and drug triggers guided by history",
-   "Full blood count and inflammatory markers",
-   "Age-appropriate malignancy screen if lesions are persistent or atypical",
-   "Autoantibody testing where lupus is a consideration"
-  ],
-  "redFlags": [
-   "Rapidly progressive or atypical lesions raising concern for erythema gyratum repens and internal malignancy",
-   "Persistent eruption unresponsive to treatment of obvious triggers",
-   "Systemic symptoms suggesting an underlying serious illness",
-   "Features overlapping with subacute cutaneous lupus"
-  ],
-  "prognosis": "The course is variable, from lesions clearing within weeks to a chronic relapsing pattern lasting months or years; prognosis largely reflects the identifiable underlying trigger, and the eruption often resolves once that is addressed.",
-  "pitfalls": [
-   "Mistaking it for tinea and not confirming with mycology, or vice versa",
-   "Failing to distinguish it from erythema gyratum repens, which prompts a malignancy search",
-   "Overlooking a drug or infective trigger",
-   "Assuming an underlying malignancy in every case, when most are idiopathic or reactive to benign triggers"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identification and treatment of the underlying trigger, since the eruption is reactive and often resolves once a driving infection, drug, food or occult malignancy is addressed",
-   "Topical antifungal treatment where a dermatophyte infection is demonstrated on scrapings",
-   "Withdrawal of any implicated drug",
-   "Topical corticosteroids for symptomatic relief of the itchy superficial form",
-   "Oral antihistamines and emollients to control pruritus and skin dryness",
-   "Age-appropriate malignancy screening where lesions are persistent, atypical or recur without an obvious cause",
-   "Reassurance and observation, recognising the benign and frequently self-limiting course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "erythema_annulare_centrifugum-pathway",
-   "title": "Erythema annulare centrifugum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as slowly enlarging annular or polycyclic erythematous lesions that spread centrifugally with central clearing, favouring the trunk and proximal limbs",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or atypical lesions raising concern for erythema gyratum repens and internal malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin scrapings and mycology to exclude dermatophyte infection, Skin biopsy to confirm the reaction pattern and exclude mimics, Screening for infective and drug triggers guided by history"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identification and treatment of the underlying trigger, since the eruption is reactive and often resolves once a driving infection, drug, food or occult malignancy is addressed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for tinea and not confirming with mycology, or vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of erythema annulare centrifugum."
-  }
- ],
- "tables": [
-  {
-   "id": "erythema_annulare_centrifugum-matrix",
-   "title": "Erythema annulare centrifugum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as slowly enlarging annular or polycyclic erythematous lesions that spread centrifugally with central clearing,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as slowly enlarging annular or polycyclic erythematous lesions that spread centrifugally with central clearing, favouring the trunk and proximal limbs",
+      "A trailing scale on the inner edge of the advancing border is characteristic of the superficial type",
+      "It is a reactive figurate erythema and often a marker of an underlying trigger rather than a primary disease",
+      "Recognised triggers include infections (dermatophytes, viruses, bacteria), drugs, foods and, less commonly, underlying malignancy",
+      "The superficial form is often mildly itchy with the classic trailing scale, whereas the deep form is indurated, non-scaling and more sharply defined",
+      "Biopsy of the superficial type shows a tight ('coat-sleeve') perivascular lymphocytic infiltrate in the dermis",
+      "Management focuses on identifying and treating the underlying cause; the eruption often settles once the trigger is removed"
     ],
-    [
-     "Key Investigations",
-     "Skin scrapings and mycology to exclude dermatophyte infection, Skin biopsy to confirm the reaction pattern and exclude mimics,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Erythema annulare centrifugum is regarded as a hypersensitivity reaction pattern in which the skin responds to a variety of antigenic stimuli, such as microbial antigens, drugs or, occasionally, tumour-associated antigens. The reactive process produces a perivascular lymphocytic infiltrate in the dermis; the superficial variant additionally shows spongiosis and parakeratosis accounting for the trailing scale, while the deep variant has a denser, deeper infiltrate without epidermal change. Centrifugal spread with central clearing gives the characteristic annular and polycyclic configurations.",
+    "additionalDifferentials": [
+      "Tinea corporis",
+      "Erythema gyratum repens",
+      "Subacute cutaneous lupus erythematosus (annular type)",
+      "Annular urticaria and urticarial vasculitis",
+      "Granuloma annulare",
+      "Erythema migrans of Lyme disease"
     ],
-    [
-     "Primary Differentials",
-     "Tinea corporis, Erythema gyratum repens, Subacute cutaneous lupus erythematosus (annular type)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin scrapings and mycology to exclude dermatophyte infection",
+      "Skin biopsy to confirm the reaction pattern and exclude mimics",
+      "Screening for infective and drug triggers guided by history",
+      "Full blood count and inflammatory markers",
+      "Age-appropriate malignancy screen if lesions are persistent or atypical",
+      "Autoantibody testing where lupus is a consideration"
     ],
-    [
-     "Management Strategy",
-     "Identification and treatment of the underlying trigger, since the eruption is reactive and often resolves once a driving",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or atypical lesions raising concern for erythema gyratum repens and internal malignancy",
+      "Persistent eruption unresponsive to treatment of obvious triggers",
+      "Systemic symptoms suggesting an underlying serious illness",
+      "Features overlapping with subacute cutaneous lupus"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for tinea and not confirming with mycology, or vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable, from lesions clearing within weeks to a chronic relapsing pattern lasting months or years; prognosis largely reflects the identifiable underlying trigger, and the eruption often resolves once that is addressed.",
+    "pitfalls": [
+      "Mistaking it for tinea and not confirming with mycology, or vice versa",
+      "Failing to distinguish it from erythema gyratum repens, which prompts a malignancy search",
+      "Overlooking a drug or infective trigger",
+      "Assuming an underlying malignancy in every case, when most are idiopathic or reactive to benign triggers"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identification and treatment of the underlying trigger, since the eruption is reactive and often resolves once a driving infection, drug, food or occult malignancy is addressed",
+      "Topical antifungal treatment where a dermatophyte infection is demonstrated on scrapings",
+      "Withdrawal of any implicated drug",
+      "Topical corticosteroids for symptomatic relief of the itchy superficial form",
+      "Oral antihistamines and emollients to control pruritus and skin dryness",
+      "Age-appropriate malignancy screening where lesions are persistent, atypical or recur without an obvious cause",
+      "Reassurance and observation, recognising the benign and frequently self-limiting course"
     ]
-   ],
-   "caption": "Overview comparison matrix for erythema annulare centrifugum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "erythema-annulare-centrifugum-real-image",
-   "title": "Erythema annulare centrifugum: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "erythema_annulare_centrifugum-pathway",
+      "title": "Erythema annulare centrifugum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as slowly enlarging annular or polycyclic erythematous lesions that spread centrifugally with central clearing, favouring the trunk and proximal limbs",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or atypical lesions raising concern for erythema gyratum repens and internal malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin scrapings and mycology to exclude dermatophyte infection, Skin biopsy to confirm the reaction pattern and exclude mimics, Screening for infective and drug triggers guided by history"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identification and treatment of the underlying trigger, since the eruption is reactive and often resolves once a driving infection, drug, food or occult malignancy is addressed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for tinea and not confirming with mycology, or vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of erythema annulare centrifugum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "erythema_annulare_centrifugum-matrix",
+      "title": "Erythema annulare centrifugum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as slowly enlarging annular or polycyclic erythematous lesions that spread centrifugally with central clearing,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin scrapings and mycology to exclude dermatophyte infection, Skin biopsy to confirm the reaction pattern and exclude mimics,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tinea corporis, Erythema gyratum repens, Subacute cutaneous lupus erythematosus (annular type)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identification and treatment of the underlying trigger, since the eruption is reactive and often resolves once a driving",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for tinea and not confirming with mycology, or vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for erythema annulare centrifugum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythema_annulare_centrifugum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin scrapings and mycology",
+          "cells": [
+            {
+              "text": "Excludes dermatophyte infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Confirms the reaction pattern and excludes mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for infective and drug triggers",
+          "cells": [
+            {
+              "text": "Guided by history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age-appropriate malignancy screen",
+          "cells": [
+            {
+              "text": "Persistent, atypical or recurrent lesions without an obvious cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody testing",
+          "cells": [
+            {
+              "text": "Where lupus is a consideration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_annulare_centrifugum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythema gyratum repens",
+          "cells": [
+            {
+              "text": "Rapidly progressive, widespread bands with a strong link to internal cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute cutaneous lupus erythematosus (annular type)",
+          "cells": [
+            {
+              "text": "Overlapping features; autoantibody testing where lupus is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tinea corporis",
+          "cells": [
+            {
+              "text": "Distinguished by mycology on scrapings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_annulare_centrifugum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying trigger",
+          "cells": [
+            {
+              "text": "Infection, drug, food or occult malignancy; the eruption often settles once the trigger is removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antifungal",
+          "cells": [
+            {
+              "text": "Where a dermatophyte infection is demonstrated on scrapings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw implicated drug",
+          "cells": [
+            {
+              "text": "If a culprit drug is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Symptomatic relief of the itchy superficial form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines and emollients",
+          "cells": [
+            {
+              "text": "Pruritus and skin dryness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Persistent, atypical or recurrent lesions without an obvious cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Benign and frequently self-limiting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythema_annulare_centrifugum-dx-mgmt",
+      "title": "Diagnosis and management of Erythema annulare centrifugum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly enlarging annular or polycyclic lesions with central clearing and trailing scale",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapidly progressive or atypical lesions, systemic symptoms, persistence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for erythema gyratum repens and internal malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin scrapings and mycology; skin biopsy; infective and drug trigger review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dermatophyte or other trigger identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Malignancy screen if persistent or atypical; consider other annular eruptions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical antifungal where a dermatophyte is demonstrated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw any implicated drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroid for itchy superficial lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral antihistamines and emollients for pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure; the course is benign and often self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable: clears within weeks, or relapses chronically over months to years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

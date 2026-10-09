@@ -1,175 +1,424 @@
 {
- "id": "hereditary_diffuse_leukoencephalopathy_spheroids",
- "name": "Hereditary diffuse leukoencephalopathy with spheroids (CSF1R)",
- "aliases": [
-  "HDLS",
-  "CSF1R-related leukoencephalopathy",
-  "adult-onset leukoencephalopathy with axonal spheroids and pigmented glia",
-  "ALSP",
-  "CSF1R"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Cognitive & Movement",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents in mid-adulthood with a combination of progressive cognitive decline, behavioural and personality change, and motor features such as parkinsonism, spasticity and gait disturbance",
-   "Caused by dominantly inherited mutations in the CSF1R gene, which encodes the colony-stimulating factor 1 receptor important for microglial function",
-   "MRI characteristically shows patchy, asymmetrical white matter change with frontal and periventricular predominance and involvement of the corpus callosum",
-   "Small foci of restricted diffusion that persist over time and punctate white matter calcification, best seen on CT or susceptibility-weighted imaging, are supportive clues",
-   "Seizures, apraxia and frontal-release signs may occur, and the phenotype is frequently mistaken for a primary psychiatric disorder or atypical dementia",
-   "A family history of early-onset dementia or leukoencephalopathy strengthens suspicion but many cases appear sporadic",
-   "Diagnosis is confirmed by CSF1R genetic testing, avoiding the need for brain biopsy in most patients"
+  "id": "hereditary_diffuse_leukoencephalopathy_spheroids",
+  "name": "Hereditary diffuse leukoencephalopathy with spheroids (CSF1R)",
+  "aliases": [
+    "HDLS",
+    "CSF1R-related leukoencephalopathy",
+    "adult-onset leukoencephalopathy with axonal spheroids and pigmented glia",
+    "ALSP",
+    "CSF1R"
   ],
-  "pathophysiology": "Hereditary diffuse leukoencephalopathy with spheroids is an adult-onset white matter disorder caused by dominant mutations in CSF1R, which encodes a receptor essential for the survival and function of microglia, the resident immune cells of the brain. Impaired microglial signalling leads to a primary microgliopathy with secondary demyelination, axonal loss and the formation of swollen axonal spheroids together with pigmented glia within affected white matter. The frontal-predominant white matter degeneration underlies the characteristic combination of cognitive, behavioural and motor decline, and the disorder is grouped with adult-onset leukoencephalopathy with axonal spheroids and pigmented glia under the umbrella of CSF1R-related disease.",
-  "additionalDifferentials": [
-   "Behavioural variant frontotemporal dementia",
-   "Multiple sclerosis, particularly progressive forms",
-   "Cerebral small-vessel disease and CADASIL",
-   "Primary or metabolic leukodystrophies of adult onset",
-   "Vanishing white matter disease and other genetic leukoencephalopathies",
-   "CNS vasculitis or inflammatory leukoencephalopathy",
-   "Toxic or treatment-related leukoencephalopathy"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain with diffusion-weighted and susceptibility-weighted sequences to characterise the white matter pattern",
-   "CT of the head to detect punctate white matter calcification",
-   "CSF1R gene testing to confirm the diagnosis",
-   "Neuropsychological assessment to characterise the cognitive and behavioural profile",
-   "Cerebrospinal fluid analysis to help exclude inflammatory and infective causes",
-   "Metabolic and leukodystrophy screen to exclude alternative white matter disorders"
-  ],
-  "redFlags": [
-   "Rapidly progressive cognitive and motor decline in a relatively young adult",
-   "Recurrent seizures superimposed on a leukoencephalopathy",
-   "Behavioural change misattributed to a primary psychiatric illness delaying diagnosis",
-   "Family history of early-onset dementia raising genetic and counselling implications"
-  ],
-  "prognosis": "The disorder is relentlessly progressive, with accumulating cognitive, behavioural and motor disability leading to dependency and reduced survival over a variable period of years; management is supportive and multidisciplinary, and genetic counselling is important for at-risk relatives.",
-  "pitfalls": [
-   "Misdiagnosing the condition as a primary psychiatric disorder or as multiple sclerosis",
-   "Overlooking the diagnostic value of persistent restricted diffusion foci and white matter calcification",
-   "Failing to offer genetic testing and counselling once a leukoencephalopathy pattern is recognised",
-   "Assuming an absent family history excludes a CSF1R mutation"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No established disease-modifying drug therapy; allogeneic haematopoietic stem-cell transplantation is under investigation as a means of replacing CSF1R-deficient microglia and stabilising progression in selected early cases",
-   "Symptomatic treatment of motor features with antispasticity agents for spasticity, dopaminergic trials for parkinsonism, and anticonvulsants for seizures",
-   "Management of cognitive and behavioural or psychiatric symptoms with judicious psychotropic support, avoiding the mistreatment that follows misdiagnosis as a primary psychiatric disorder",
-   "Multidisciplinary rehabilitation with physiotherapy, occupational therapy and speech and swallow assessment to address gait, function and aspiration risk",
-   "Advance care planning, carer support and coordinated management of progressive dependency",
-   "Genetic counselling and predictive testing for at-risk relatives given autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_diffuse_leukoencephalopathy_spheroids-pathway",
-   "title": "Hereditary diffuse leukoencephalopathy with spheroids (CSF1R): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents in mid-adulthood with a combination of progressive cognitive decline, behavioural and personality change, and motor features such as parkinsonism, spasticity and gait disturbance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive cognitive and motor decline in a relatively young adult",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain with diffusion-weighted and susceptibility-weighted sequences to characterise the white matter pattern, CT of the head to detect punctate white matter calcification, CSF1R gene testing to confirm the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No established disease-modifying drug therapy; allogeneic haematopoietic stem-cell transplantation is under investigation as a means of replacing CSF1R-deficient microglia and stabilising progression in selected early"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the condition as a primary psychiatric disorder or as multiple sclerosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary diffuse leukoencephalopathy with spheroids (csf1r)."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_diffuse_leukoencephalopathy_spheroids-matrix",
-   "title": "Hereditary diffuse leukoencephalopathy with spheroids (CSF1R): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents in mid-adulthood with a combination of progressive cognitive decline, behavioural and personality change, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Cognitive & Movement",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents in mid-adulthood with a combination of progressive cognitive decline, behavioural and personality change, and motor features such as parkinsonism, spasticity and gait disturbance",
+      "Caused by dominantly inherited mutations in the CSF1R gene, which encodes the colony-stimulating factor 1 receptor important for microglial function",
+      "MRI characteristically shows patchy, asymmetrical white matter change with frontal and periventricular predominance and involvement of the corpus callosum",
+      "Small foci of restricted diffusion that persist over time and punctate white matter calcification, best seen on CT or susceptibility-weighted imaging, are supportive clues",
+      "Seizures, apraxia and frontal-release signs may occur, and the phenotype is frequently mistaken for a primary psychiatric disorder or atypical dementia",
+      "A family history of early-onset dementia or leukoencephalopathy strengthens suspicion but many cases appear sporadic",
+      "Diagnosis is confirmed by CSF1R genetic testing, avoiding the need for brain biopsy in most patients"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain with diffusion-weighted and susceptibility-weighted sequences to characterise the white matter pattern, CT of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary diffuse leukoencephalopathy with spheroids is an adult-onset white matter disorder caused by dominant mutations in CSF1R, which encodes a receptor essential for the survival and function of microglia, the resident immune cells of the brain. Impaired microglial signalling leads to a primary microgliopathy with secondary demyelination, axonal loss and the formation of swollen axonal spheroids together with pigmented glia within affected white matter. The frontal-predominant white matter degeneration underlies the characteristic combination of cognitive, behavioural and motor decline, and the disorder is grouped with adult-onset leukoencephalopathy with axonal spheroids and pigmented glia under the umbrella of CSF1R-related disease.",
+    "additionalDifferentials": [
+      "Behavioural variant frontotemporal dementia",
+      "Multiple sclerosis, particularly progressive forms",
+      "Cerebral small-vessel disease and CADASIL",
+      "Primary or metabolic leukodystrophies of adult onset",
+      "Vanishing white matter disease and other genetic leukoencephalopathies",
+      "CNS vasculitis or inflammatory leukoencephalopathy",
+      "Toxic or treatment-related leukoencephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Behavioural variant frontotemporal dementia, Multiple sclerosis, particularly progressive forms, Cerebral small-vessel disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain with diffusion-weighted and susceptibility-weighted sequences to characterise the white matter pattern",
+      "CT of the head to detect punctate white matter calcification",
+      "CSF1R gene testing to confirm the diagnosis",
+      "Neuropsychological assessment to characterise the cognitive and behavioural profile",
+      "Cerebrospinal fluid analysis to help exclude inflammatory and infective causes",
+      "Metabolic and leukodystrophy screen to exclude alternative white matter disorders"
     ],
-    [
-     "Management Strategy",
-     "No established disease-modifying drug therapy; allogeneic haematopoietic stem-cell transplantation is under investigation as a",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive cognitive and motor decline in a relatively young adult",
+      "Recurrent seizures superimposed on a leukoencephalopathy",
+      "Behavioural change misattributed to a primary psychiatric illness delaying diagnosis",
+      "Family history of early-onset dementia raising genetic and counselling implications"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the condition as a primary psychiatric disorder or as multiple sclerosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is relentlessly progressive, with accumulating cognitive, behavioural and motor disability leading to dependency and reduced survival over a variable period of years; management is supportive and multidisciplinary, and genetic counselling is important for at-risk relatives.",
+    "pitfalls": [
+      "Misdiagnosing the condition as a primary psychiatric disorder or as multiple sclerosis",
+      "Overlooking the diagnostic value of persistent restricted diffusion foci and white matter calcification",
+      "Failing to offer genetic testing and counselling once a leukoencephalopathy pattern is recognised",
+      "Assuming an absent family history excludes a CSF1R mutation"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No established disease-modifying drug therapy; allogeneic haematopoietic stem-cell transplantation is under investigation as a means of replacing CSF1R-deficient microglia and stabilising progression in selected early cases",
+      "Symptomatic treatment of motor features with antispasticity agents for spasticity, dopaminergic trials for parkinsonism, and anticonvulsants for seizures",
+      "Management of cognitive and behavioural or psychiatric symptoms with judicious psychotropic support, avoiding the mistreatment that follows misdiagnosis as a primary psychiatric disorder",
+      "Multidisciplinary rehabilitation with physiotherapy, occupational therapy and speech and swallow assessment to address gait, function and aspiration risk",
+      "Advance care planning, carer support and coordinated management of progressive dependency",
+      "Genetic counselling and predictive testing for at-risk relatives given autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary diffuse leukoencephalopathy with spheroids (csf1r)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-diffuse-leukoencephalopathy-spheroids-real-image",
-   "title": "Hereditary diffuse leukoencephalopathy with spheroids (CSF1R): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hereditary_diffuse_leukoencephalopathy_spheroids-pathway",
+      "title": "Hereditary diffuse leukoencephalopathy with spheroids (CSF1R): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents in mid-adulthood with a combination of progressive cognitive decline, behavioural and personality change, and motor features such as parkinsonism, spasticity and gait disturbance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive cognitive and motor decline in a relatively young adult",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain with diffusion-weighted and susceptibility-weighted sequences to characterise the white matter pattern, CT of the head to detect punctate white matter calcification, CSF1R gene testing to confirm the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No established disease-modifying drug therapy; allogeneic haematopoietic stem-cell transplantation is under investigation as a means of replacing CSF1R-deficient microglia and stabilising progression in selected early"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the condition as a primary psychiatric disorder or as multiple sclerosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary diffuse leukoencephalopathy with spheroids (csf1r)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_diffuse_leukoencephalopathy_spheroids-matrix",
+      "title": "Hereditary diffuse leukoencephalopathy with spheroids (CSF1R): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents in mid-adulthood with a combination of progressive cognitive decline, behavioural and personality change, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain with diffusion-weighted and susceptibility-weighted sequences to characterise the white matter pattern, CT of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Behavioural variant frontotemporal dementia, Multiple sclerosis, particularly progressive forms, Cerebral small-vessel disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No established disease-modifying drug therapy; allogeneic haematopoietic stem-cell transplantation is under investigation as a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the condition as a primary psychiatric disorder or as multiple sclerosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary diffuse leukoencephalopathy with spheroids (csf1r)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_diffuse_leukoencephalopathy_spheroids-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with diffusion-weighted and susceptibility-weighted sequences",
+          "cells": [
+            {
+              "text": "Patchy, asymmetrical white matter change; small persistent foci of restricted diffusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the head",
+          "cells": [
+            {
+              "text": "Punctate white matter calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF1R gene testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Cognitive and behavioural profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "Helps exclude inflammatory and infective causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and leukodystrophy screen",
+          "cells": [
+            {
+              "text": "Excludes alternative white matter disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_diffuse_leukoencephalopathy_spheroids-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Disease-modifying therapy",
+          "cells": [
+            {
+              "text": "No established drug; allogeneic haematopoietic stem-cell transplantation is discussed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity agents",
+          "cells": [
+            {
+              "text": "Motor features with spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychotropic treatment",
+          "cells": [
+            {
+              "text": "Judicious use for cognitive, behavioural and psychiatric symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advance care planning",
+          "cells": [
+            {
+              "text": "Carer support and management of progressive dependency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Predictive testing for at-risk relatives, given autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_diffuse_leukoencephalopathy_spheroids-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary diffuse leukoencephalopathy with spheroids (CSF1R)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive cognitive and motor decline in a relatively young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizures, rapid decline, or a family history of early-onset dementia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: seizure control and urgent neurology review for rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with DWI and SWI; CT for punctate calcification; CSF1R gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a CSF1R variant confirmed, with other leukoencephalopathies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider frontotemporal dementia, MS, CADASIL or another leukodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No established disease-modifying drug; symptomatic management",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antispasticity agents for motor features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Judicious psychotropic treatment for behavioural symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational and speech therapy; advance care planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptomatic progressive disease; carer support and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,169 +1,562 @@
 {
- "id": "anagen_effluvium",
- "name": "Anagen effluvium",
- "aliases": [
-  "AE",
-  "anagen arrest",
-  "chemotherapy-induced alopecia"
- ],
- "class": "non_infective",
- "system": "Dermatology / Trichology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Abrupt, often near-total hair loss occurring within days to a few weeks of an insult, in contrast to the delayed shedding of telogen effluvium",
-   "Most commonly caused by cytotoxic chemotherapy; other causes include radiotherapy, severe toxin or heavy-metal exposure such as thallium or arsenic, and occasionally severe protein-energy malnutrition",
-   "Hairs are lost during the anagen (growing) phase, so shed shafts show tapered or fractured proximal ends rather than the club roots of telogen hairs",
-   "Because about ninety per cent of scalp follicles are in anagen at any time, the loss can be dramatic and cosmetically severe",
-   "Trichoscopy may show tapering hairs, black dots and broken hairs, and follicular ostia are preserved so the process is non-scarring",
-   "Regrowth is expected once the offending agent is withdrawn, although texture or colour may change temporarily, producing the well-recognised post-chemotherapy curls",
-   "Scalp cooling during chemotherapy can reduce severity with some regimens; otherwise the mainstay is reassurance and cosmetic support such as wigs"
+  "id": "anagen_effluvium",
+  "name": "Anagen effluvium",
+  "aliases": [
+    "AE",
+    "anagen arrest",
+    "chemotherapy-induced alopecia"
   ],
-  "pathophysiology": "Anagen effluvium arises when an insult abruptly impairs the rapidly dividing matrix keratinocytes of follicles in the active growth phase. Cytotoxic drugs, ionising radiation and certain poisons arrest mitosis, producing a narrowed, weakened hair shaft that fractures within the follicular canal, so hair is shed while still in anagen and without the latency seen in telogen effluvium. Because the germinative cells are inhibited rather than destroyed and the follicular architecture is preserved, hair regrows once the toxic stimulus is removed, though certain intensive regimens can occasionally cause permanent loss.",
-  "additionalDifferentials": [
-   "Telogen effluvium, which is delayed, less complete and sheds club hairs",
-   "Alopecia areata, especially diffuse or totalis forms",
-   "Loose anagen syndrome in children",
-   "Congenital or acquired hair-shaft disorders causing fragility",
-   "Trichotillomania producing broken hairs"
-  ],
-  "additionalInvestigations": [
-   "History of chemotherapy, radiotherapy or toxin exposure",
-   "Light microscopy of shed or plucked hairs to identify tapered anagen roots and shaft narrowing",
-   "Trichoscopy to detect tapering and broken hairs with preserved ostia",
-   "Heavy-metal screening where poisoning is suspected",
-   "Scalp biopsy only if the diagnosis is unclear or a scarring process is suspected"
-  ],
-  "redFlags": [
-   "Failure of regrowth months after the toxin is withdrawn, suggesting permanent chemotherapy-induced alopecia or an alternative diagnosis",
-   "Systemic features of heavy-metal poisoning such as neuropathy or gastrointestinal upset",
-   "Signs of scarring with loss of ostia indicating a different, irreversible process"
-  ],
-  "prognosis": "Regrowth is the rule once the causative agent is stopped, usually beginning within weeks to a few months, although permanent alopecia is increasingly recognised after certain intensive regimens, notably the taxanes.",
-  "pitfalls": [
-   "Confusing the rapid, near-complete loss of anagen effluvium with the slower, partial shedding of telogen effluvium",
-   "Overlooking non-chemotherapy causes such as thallium or arsenic poisoning",
-   "Failing to warn patients of possible permanent alopecia with high-risk regimens",
-   "Assuming any regrowth abnormality is pathological when transient colour and texture change is common"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and, where possible, withdraw or avoid the causative insult such as a cytotoxic drug or toxin",
-   "Offer scalp cooling during chemotherapy to reduce the severity of hair loss",
-   "Institute chelation therapy where heavy-metal poisoning such as thallium or arsenic is the cause",
-   "Reassure the patient that regrowth is expected once the offending agent is stopped, though texture or colour may change temporarily",
-   "Provide camouflage such as wigs and psychological support during the period of alopecia",
-   "Remain alert to the possibility of permanent alopecia after certain intensive regimens, notably the taxanes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anagen_effluvium-pathway",
-   "title": "Anagen effluvium: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Abrupt, often near-total hair loss occurring within days to a few weeks of an insult, in contrast to the delayed shedding of telogen effluvium",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Failure of regrowth months after the toxin is withdrawn, suggesting permanent chemotherapy-induced alopecia or an alternative diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: History of chemotherapy, radiotherapy or toxin exposure, Light microscopy of shed or plucked hairs to identify tapered anagen roots and shaft narrowing, Trichoscopy to detect tapering and broken hairs with preserved ostia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and, where possible, withdraw or avoid the causative insult such as a cytotoxic drug or toxin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the rapid, near-complete loss of anagen effluvium with the slower, partial shedding of telogen effluvium"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anagen effluvium."
-  }
- ],
- "tables": [
-  {
-   "id": "anagen_effluvium-matrix",
-   "title": "Anagen effluvium: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Abrupt, often near-total hair loss occurring within days to a few weeks of an insult, in contrast to the delayed shedding of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Trichology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Abrupt, often near-total hair loss occurring within days to a few weeks of an insult, in contrast to the delayed shedding of telogen effluvium",
+      "Most commonly caused by cytotoxic chemotherapy; other causes include radiotherapy, severe toxin or heavy-metal exposure such as thallium or arsenic, and occasionally severe protein-energy malnutrition",
+      "Hairs are lost during the anagen (growing) phase, so shed shafts show tapered or fractured proximal ends rather than the club roots of telogen hairs",
+      "Because about ninety per cent of scalp follicles are in anagen at any time, the loss can be dramatic and cosmetically severe",
+      "Trichoscopy may show tapering hairs, black dots and broken hairs, and follicular ostia are preserved so the process is non-scarring",
+      "Regrowth is expected once the offending agent is withdrawn, although texture or colour may change temporarily, producing the well-recognised post-chemotherapy curls",
+      "Scalp cooling during chemotherapy can reduce severity with some regimens; otherwise the mainstay is reassurance and cosmetic support such as wigs"
     ],
-    [
-     "Key Investigations",
-     "History of chemotherapy, radiotherapy or toxin exposure, Light microscopy of shed or plucked hairs to identify tapered anagen",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Anagen effluvium arises when an insult abruptly impairs the rapidly dividing matrix keratinocytes of follicles in the active growth phase. Cytotoxic drugs, ionising radiation and certain poisons arrest mitosis, producing a narrowed, weakened hair shaft that fractures within the follicular canal, so hair is shed while still in anagen and without the latency seen in telogen effluvium. Because the germinative cells are inhibited rather than destroyed and the follicular architecture is preserved, hair regrows once the toxic stimulus is removed, though certain intensive regimens can occasionally cause permanent loss.",
+    "additionalDifferentials": [
+      "Telogen effluvium, which is delayed, less complete and sheds club hairs",
+      "Alopecia areata, especially diffuse or totalis forms",
+      "Loose anagen syndrome in children",
+      "Congenital or acquired hair-shaft disorders causing fragility",
+      "Trichotillomania producing broken hairs"
     ],
-    [
-     "Primary Differentials",
-     "Telogen effluvium, which is delayed, less complete and sheds club hairs, Alopecia areata, especially diffuse or totalis forms,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "History of chemotherapy, radiotherapy or toxin exposure",
+      "Light microscopy of shed or plucked hairs to identify tapered anagen roots and shaft narrowing",
+      "Trichoscopy to detect tapering and broken hairs with preserved ostia",
+      "Heavy-metal screening where poisoning is suspected",
+      "Scalp biopsy only if the diagnosis is unclear or a scarring process is suspected"
     ],
-    [
-     "Management Strategy",
-     "Identify and, where possible, withdraw or avoid the causative insult such as a cytotoxic drug or toxin",
-     "Core treatment modality"
+    "redFlags": [
+      "Failure of regrowth months after the toxin is withdrawn, suggesting permanent chemotherapy-induced alopecia or an alternative diagnosis",
+      "Systemic features of heavy-metal poisoning such as neuropathy or gastrointestinal upset",
+      "Signs of scarring with loss of ostia indicating a different, irreversible process"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the rapid, near-complete loss of anagen effluvium with the slower, partial shedding of telogen effluvium",
-     "Prevent diagnostic or management error"
+    "prognosis": "Regrowth is the rule once the causative agent is stopped, usually beginning within weeks to a few months, although permanent alopecia is increasingly recognised after certain intensive regimens, notably the taxanes.",
+    "pitfalls": [
+      "Confusing the rapid, near-complete loss of anagen effluvium with the slower, partial shedding of telogen effluvium",
+      "Overlooking non-chemotherapy causes such as thallium or arsenic poisoning",
+      "Failing to warn patients of possible permanent alopecia with high-risk regimens",
+      "Assuming any regrowth abnormality is pathological when transient colour and texture change is common"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and, where possible, withdraw or avoid the causative insult such as a cytotoxic drug or toxin",
+      "Offer scalp cooling during chemotherapy to reduce the severity of hair loss",
+      "Institute chelation therapy where heavy-metal poisoning such as thallium or arsenic is the cause",
+      "Reassure the patient that regrowth is expected once the offending agent is stopped, though texture or colour may change temporarily",
+      "Provide camouflage such as wigs and psychological support during the period of alopecia",
+      "Remain alert to the possibility of permanent alopecia after certain intensive regimens, notably the taxanes"
     ]
-   ],
-   "caption": "Overview comparison matrix for anagen effluvium."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anagen-effluvium-real-image",
-   "title": "Anagen effluvium: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "anagen_effluvium-pathway",
+      "title": "Anagen effluvium: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Abrupt, often near-total hair loss occurring within days to a few weeks of an insult, in contrast to the delayed shedding of telogen effluvium",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Failure of regrowth months after the toxin is withdrawn, suggesting permanent chemotherapy-induced alopecia or an alternative diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: History of chemotherapy, radiotherapy or toxin exposure, Light microscopy of shed or plucked hairs to identify tapered anagen roots and shaft narrowing, Trichoscopy to detect tapering and broken hairs with preserved ostia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and, where possible, withdraw or avoid the causative insult such as a cytotoxic drug or toxin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the rapid, near-complete loss of anagen effluvium with the slower, partial shedding of telogen effluvium"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anagen effluvium."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anagen_effluvium-matrix",
+      "title": "Anagen effluvium: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Abrupt, often near-total hair loss occurring within days to a few weeks of an insult, in contrast to the delayed shedding of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "History of chemotherapy, radiotherapy or toxin exposure, Light microscopy of shed or plucked hairs to identify tapered anagen",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Telogen effluvium, which is delayed, less complete and sheds club hairs, Alopecia areata, especially diffuse or totalis forms,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and, where possible, withdraw or avoid the causative insult such as a cytotoxic drug or toxin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the rapid, near-complete loss of anagen effluvium with the slower, partial shedding of telogen effluvium",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anagen effluvium."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 53-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anagen_effluvium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History of chemotherapy, radiotherapy or toxin exposure",
+          "cells": [
+            {
+              "text": "Causative insult"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Light microscopy of shed or plucked hairs",
+          "cells": [
+            {
+              "text": "Tapered anagen roots and shaft narrowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Tapering and broken hairs with preserved ostia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heavy-metal screening where poisoning is suspected",
+          "cells": [
+            {
+              "text": "Thallium or arsenic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp biopsy only if unclear or scarring suspected",
+          "cells": [
+            {
+              "text": "Scarring process"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anagen_effluvium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Telogen effluvium",
+          "cells": [
+            {
+              "text": "Delayed, partial shedding of club hairs"
+            },
+            {
+              "text": "Hair root examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alopecia areata, especially diffuse or totalis forms",
+          "cells": [
+            {
+              "text": "Discrete or diffuse patches"
+            },
+            {
+              "text": "Dermoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loose anagen syndrome in children",
+          "cells": [
+            {
+              "text": "Easily pulled anagen hairs"
+            },
+            {
+              "text": "Hair pull test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair-shaft disorders causing fragility",
+          "cells": [
+            {
+              "text": "Brittle hairs"
+            },
+            {
+              "text": "Microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichotillomania",
+          "cells": [
+            {
+              "text": "Broken hairs of varying length"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anagen_effluvium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdrawal or avoidance of the causative drug or toxin",
+          "cells": [
+            {
+              "text": "Causative insult"
+            },
+            {
+              "text": "Where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp cooling during chemotherapy",
+          "cells": [
+            {
+              "text": "Severity of hair loss"
+            },
+            {
+              "text": "Offered during chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chelation therapy for heavy-metal poisoning",
+          "cells": [
+            {
+              "text": "Thallium or arsenic"
+            },
+            {
+              "text": "Where the cause is metal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and expected regrowth",
+          "cells": [
+            {
+              "text": "Recovery"
+            },
+            {
+              "text": "Texture or colour may change temporarily"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wigs, camouflage and psychological support",
+          "cells": [
+            {
+              "text": "Impact of alopecia"
+            },
+            {
+              "text": "During alopecia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vigilance for permanent alopecia after intensive regimens",
+          "cells": [
+            {
+              "text": "Taxane-associated permanent loss"
+            },
+            {
+              "text": "Ongoing awareness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anagen_effluvium-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of alopecia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "I.A Nonscarring: primary cutaneous disorders",
+          "cells": [
+            {
+              "text": "Telogen effluvium; androgenetic alopecia; alopecia areata; tinea capitis; traumatic alopecia (a)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "I.B Nonscarring: drugs",
+          "cells": [
+            {
+              "text": "Drugs (no individual agents listed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "I.C Nonscarring: systemic diseases",
+          "cells": [
+            {
+              "text": "Systemic lupus erythematosus; secondary syphilis; hypothyroidism; hyperthyroidism; hypopituitarism; deficiencies of protein, iron, biotin, and zinc"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "II.A Scarring: primary cutaneous disorders",
+          "cells": [
+            {
+              "text": "Cutaneous lupus (chronic discoid lesions) (b); lichen planus; central centrifugal cicatricial alopecia; folliculitis decalvans; linear scleroderma (morphea)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "II.B Scarring: systemic diseases",
+          "cells": [
+            {
+              "text": "Discoid lesions in systemic lupus erythematosus (b); sarcoidosis; cutaneous metastases"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnotes a and b are referenced but their text is not on the printed page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anagen_effluvium-dx-mgmt",
+      "title": "Diagnosis and management of Anagen effluvium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abrupt near-total hair loss within days to weeks of a toxic insult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Failure to regrow months after withdrawal, or scarring with lost ostia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent toxicology review if heavy-metal exposure is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History of chemotherapy or toxin; hair microscopy; trichoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Tapered anagen roots with preserved ostia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Withdraw the causative drug or toxin where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review telogen effluvium, alopecia areata and hair-shaft disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Scalp cooling during chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chelation for thallium or arsenic poisoning",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wigs and psychological support during alopecia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Regrowth is the rule; permanent loss reported after taxane regimens",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

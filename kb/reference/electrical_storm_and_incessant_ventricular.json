@@ -1,186 +1,660 @@
 {
- "id": "electrical_storm_and_incessant_ventricular",
- "name": "Electrical Storm and Incessant Ventricular Tachycardia",
- "system": "Cardiovascular",
- "class": "non_infective",
- "chapter": 263,
- "page": 1972,
- "aliases": [
-  "VT storm",
-  "Ventricular tachycardia storm",
-  "Incessant VT",
-  "Arrhythmic storm"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1972",
-  "clinicalPearls": [
-   "Electrical storm (VT/VF storm) is defined as three or more episodes of ventricular tachycardia or ventricular fibrillation within 24 hours, each requiring intervention to terminate (Harrison 22e p.1972).",
-   "It is uncommon in the general population but carries great concern because, untreated, it follows a rapid course that can lead to death; prompt recognition and intervention are essential (Harrison 22e p.1972).",
-   "Storm occurs in about 4% of patients with a primary-prevention ICD but in as many as 20% of patients with prior known VT or resuscitated sudden death (Harrison 22e p.1972).",
-   "VT is termed incessant when it recurs shortly after electrical, pharmacologic, or spontaneous conversion to sinus rhythm; it is typically monomorphic (Harrison 22e p.1972).",
-   "A slow incessant monomorphic VT may rarely escape ICD detection because its rate falls below the programmed detection threshold (Harrison 22e p.1972).",
-   "Antiarrhythmic drugs themselves can be proarrhythmic and render VT incessant (e.g., amiodarone or a sodium-channel blocker such as flecainide) (Harrison 22e p.1972).",
-   "Multiple ICD shocks constitute a medical emergency warranting activation of emergency medical services; patients should never drive themselves to hospital after receiving a shock (Harrison 22e p.1972).",
-   "After any ICD shock, device interrogation is crucial to confirm therapy was delivered for a true ventricular arrhythmia rather than for lead malfunction or an atrial arrhythmia (Harrison 22e p.1972).",
-   "Antitachycardia pacing terminates over 70% of VT episodes—even rapid VT—so appropriate ICD programming markedly reduces shocks and improves quality of life (Harrison 22e p.1972).",
-   "Programming VF detection zones above 220 beats/min in primary-prevention ICDs and using longer detection times significantly reduce unnecessary and inappropriate shocks (Harrison 22e p.1972).",
-   "Determining whether the storming rhythm is monomorphic or polymorphic guides management, as does inspecting initiation/termination patterns on stored ICD electrograms for precipitating factors (Harrison 22e p.1973).",
-   "Reducing sympathetic drive is a core management principle: stellate ganglion block and upper thoracic epidural anesthesia can restore stability in some patients (Harrison 22e p.1973)."
+  "id": "electrical_storm_and_incessant_ventricular",
+  "name": "Electrical Storm and Incessant Ventricular Tachycardia",
+  "system": "Cardiovascular",
+  "class": "non_infective",
+  "chapter": 263,
+  "page": 1972,
+  "aliases": [
+    "VT storm",
+    "Ventricular tachycardia storm",
+    "Incessant VT",
+    "Arrhythmic storm"
   ],
-  "pathophysiology": "Electrical storm reflects repeated, often rapidly recurring ventricular tachyarrhythmias arising from an unstable myocardial substrate combined with heightened sympathetic drive and acute triggering factors. Substrates vary: in the setting of acute myocardial ischemia/infarction, surviving Purkinje cells within infarcted myocardium can show triggered automaticity, generating recurrent polymorphic VT/VF. PVC-initiated polymorphic VT/VF can also occur without infarction or ischemia (idiopathic VF), where triggering premature ventricular contractions arise from fascicular tissue or papillary muscles, sometimes from scarred myocardium seen on cardiac MRI. Other substrates include acquired or congenital long QT (torsades des pointes from abnormal repolarization), Brugada syndrome (right ventricular outflow tract/epicardial substrate), and inflammatory cardiomyopathies. Incessant VT is usually monomorphic and may be driven or sustained by the proarrhythmic action of antiarrhythmic drugs (Harrison 22e p.1972-1974).",
-  "additionalDifferentials": [
-   "Acute coronary syndrome / myocardial ischemia precipitating polymorphic VT or VF",
-   "Acquired or congenital long QT syndrome with torsades des pointes",
-   "Brugada syndrome",
-   "Inflammatory cardiomyopathy (giant cell myocarditis, cardiac sarcoidosis, viral myocarditis)",
-   "Idiopathic PVC-initiated polymorphic VT/VF from fascicular tissue or papillary muscles",
-   "Proarrhythmia from antiarrhythmic therapy"
-  ],
-  "infectionMimics": [
-   "Viral myocarditis presenting with VT/VF storm"
-  ],
-  "nonInfectiousMimics": [
-   "Lead malfunction or atrial arrhythmia causing inappropriate ICD shocks rather than true ventricular arrhythmia",
-   "Electrolyte disturbance provoking ventricular arrhythmia"
-  ],
-  "additionalInvestigations": [
-   "ICD interrogation to confirm appropriate ventricular detection/therapy and to review stored electrograms for arrhythmia onset and triggers",
-   "ECG monitoring to classify the rhythm as monomorphic versus polymorphic and to assess the QT interval and Brugada pattern (Rsr' with ST elevation in V1/V2)",
-   "Serum electrolyte assessment, especially potassium and magnesium",
-   "Evaluation for ischemia / acute coronary syndrome and cardiac function",
-   "Cardiac MRI to detect scarred myocardium when PVC-initiated polymorphic VT/VF is suspected",
-   "Endomyocardial biopsy when a new inflammatory cardiomyopathy is suspected in a patient without prior cardiac disease"
-  ],
-  "redFlags": [
-   "Multiple ICD shocks (a medical emergency)",
-   "Polymorphic VT or VF, especially if accompanied by features of acute coronary syndrome",
-   "Hemodynamically unstable or recurrent ventricular arrhythmia requiring repeated cardioversion",
-   "Signs of gradual cardiac decompensation in a hemodynamically stable but incessant VT",
-   "New-onset frequent ventricular arrhythmia in a patient with no known prior cardiac disease (consider inflammatory myocarditis)"
-  ],
-  "prognosis": "Spontaneous ventricular arrhythmias—particularly those requiring shock for termination—are associated with an increased subsequent risk of death and hospitalization in patients with depressed ventricular function. Untreated storm progresses rapidly and can be fatal, but catheter ablation, antiarrhythmic drug therapy, and adjunctive measures can be life-saving. An arrhythmic episode should prompt reevaluation for declining cardiac function, ischemia, or intercurrent illness (Harrison 22e p.1972).",
-  "pitfalls": [
-   "Assuming every ICD shock reflects a true ventricular arrhythmia—lead malfunction or an atrial arrhythmia can trigger inappropriate shocks, so interrogation is required (Harrison 22e p.1972).",
-   "Overlooking that interventions to control the arrhythmia may themselves worsen outcome—most antiarrhythmics can cause bradycardia requiring ICD pacing, which can itself impair ventricular function (Harrison 22e p.1972).",
-   "Failing to recognize antiarrhythmic proarrhythmia as a cause of incessant VT (Harrison 22e p.1972).",
-   "Missing a slow incessant monomorphic VT that falls outside programmed ICD detection parameters (Harrison 22e p.1972).",
-   "Not searching for a treatable substrate (ischemia, long QT, Brugada, inflammatory cardiomyopathy) that dictates specific therapy (Harrison 22e p.1974)."
-  ],
-  "severityClassification": "Defined event: electrical storm = >=3 episodes of VT or VF within 24 h each requiring intervention to terminate. VT is classified as monomorphic versus polymorphic, and as sustained versus incessant; substrate-based categories include ischemic, long QT, Brugada, PVC-initiated, and inflammatory (Harrison 22e p.1972-1974).",
-  "references": [
-   "Harrison 22e p.1972",
-   "Harrison 22e p.1973",
-   "Harrison 22e p.1974"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate identification and correction of reversible triggers, including myocardial ischaemia, electrolyte disturbance with potassium and magnesium repletion, and withdrawal of proarrhythmic drugs",
-   "Intravenous antiarrhythmic therapy, chiefly amiodarone, combined with beta-blockade including non-selective agents to counter the heightened sympathetic drive",
-   "Sympathetic modulation with sedation, and for refractory storm deep sedation with intubation and stellate ganglion block or cardiac sympathetic denervation",
-   "ICD interrogation and reprogramming to confirm appropriate detection and therapy and to reduce ineffective or inappropriate shocks",
-   "Catheter ablation of the arrhythmogenic substrate or the triggering premature ventricular contractions in drug-refractory storm",
-   "Substrate-specific measures, including isoprenaline or quinidine for Brugada storm, magnesium and avoidance of QT-prolonging drugs in torsades de pointes, and revascularisation for an ischaemic substrate",
-   "Temporary mechanical circulatory support such as an intra-aortic balloon pump or ECMO as a bridge in haemodynamically unstable refractory storm",
-   "Escalation to a specialist electrophysiology and heart-failure centre, with consideration of transplantation in end-stage disease"
-  ]
- },
- "algorithms": [
-  {
-   "id": "electrical_storm_and_incessant_ventricular-pathway",
-   "title": "Electrical Storm and Incessant Ventricular Tachycardia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Electrical storm (VT/VF storm) is defined as three or more episodes of ventricular tachycardia or ventricular fibrillation within 24 hours, each requiring intervention to terminate (Harrison 22e p.1972).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Multiple ICD shocks (a medical emergency)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: ICD interrogation to confirm appropriate ventricular detection/therapy and to review stored electrograms for arrhythmia onset and triggers, ECG monitoring to classify the rhythm as monomorphic versus polymorphic and to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate identification and correction of reversible triggers, including myocardial ischaemia, electrolyte disturbance with potassium and magnesium repletion, and withdrawal of proarrhythmic drugs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming every ICD shock reflects a true ventricular arrhythmia - lead malfunction or an atrial arrhythmia can trigger inappropriate shocks, so interrogation is required (Harrison 22e p.1972)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of electrical storm and incessant ventricular tachycardia."
-  }
- ],
- "tables": [
-  {
-   "id": "electrical_storm_and_incessant_ventricular-matrix",
-   "title": "Electrical Storm and Incessant Ventricular Tachycardia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Electrical storm (VT/VF storm) is defined as three or more episodes of ventricular tachycardia or ventricular fibrillation within",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1972",
+    "clinicalPearls": [
+      "Electrical storm (VT/VF storm) is defined as three or more episodes of ventricular tachycardia or ventricular fibrillation within 24 hours, each requiring intervention to terminate (Harrison 22e p.1972).",
+      "It is uncommon in the general population but carries great concern because, untreated, it follows a rapid course that can lead to death; prompt recognition and intervention are essential (Harrison 22e p.1972).",
+      "Storm occurs in about 4% of patients with a primary-prevention ICD but in as many as 20% of patients with prior known VT or resuscitated sudden death (Harrison 22e p.1972).",
+      "VT is termed incessant when it recurs shortly after electrical, pharmacologic, or spontaneous conversion to sinus rhythm; it is typically monomorphic (Harrison 22e p.1972).",
+      "A slow incessant monomorphic VT may rarely escape ICD detection because its rate falls below the programmed detection threshold (Harrison 22e p.1972).",
+      "Antiarrhythmic drugs themselves can be proarrhythmic and render VT incessant (e.g., amiodarone or a sodium-channel blocker such as flecainide) (Harrison 22e p.1972).",
+      "Multiple ICD shocks constitute a medical emergency warranting activation of emergency medical services; patients should never drive themselves to hospital after receiving a shock (Harrison 22e p.1972).",
+      "After any ICD shock, device interrogation is crucial to confirm therapy was delivered for a true ventricular arrhythmia rather than for lead malfunction or an atrial arrhythmia (Harrison 22e p.1972).",
+      "Antitachycardia pacing terminates over 70% of VT episodes—even rapid VT—so appropriate ICD programming markedly reduces shocks and improves quality of life (Harrison 22e p.1972).",
+      "Programming VF detection zones above 220 beats/min in primary-prevention ICDs and using longer detection times significantly reduce unnecessary and inappropriate shocks (Harrison 22e p.1972).",
+      "Determining whether the storming rhythm is monomorphic or polymorphic guides management, as does inspecting initiation/termination patterns on stored ICD electrograms for precipitating factors (Harrison 22e p.1973).",
+      "Reducing sympathetic drive is a core management principle: stellate ganglion block and upper thoracic epidural anesthesia can restore stability in some patients (Harrison 22e p.1973)."
     ],
-    [
-     "Key Investigations",
-     "ICD interrogation to confirm appropriate ventricular detection/therapy and to review stored electrograms for arrhythmia onset and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Electrical storm reflects repeated, often rapidly recurring ventricular tachyarrhythmias arising from an unstable myocardial substrate combined with heightened sympathetic drive and acute triggering factors. Substrates vary: in the setting of acute myocardial ischemia/infarction, surviving Purkinje cells within infarcted myocardium can show triggered automaticity, generating recurrent polymorphic VT/VF. PVC-initiated polymorphic VT/VF can also occur without infarction or ischemia (idiopathic VF), where triggering premature ventricular contractions arise from fascicular tissue or papillary muscles, sometimes from scarred myocardium seen on cardiac MRI. Other substrates include acquired or congenital long QT (torsades des pointes from abnormal repolarization), Brugada syndrome (right ventricular outflow tract/epicardial substrate), and inflammatory cardiomyopathies. Incessant VT is usually monomorphic and may be driven or sustained by the proarrhythmic action of antiarrhythmic drugs (Harrison 22e p.1972-1974).",
+    "additionalDifferentials": [
+      "Acute coronary syndrome / myocardial ischemia precipitating polymorphic VT or VF",
+      "Acquired or congenital long QT syndrome with torsades des pointes",
+      "Brugada syndrome",
+      "Inflammatory cardiomyopathy (giant cell myocarditis, cardiac sarcoidosis, viral myocarditis)",
+      "Idiopathic PVC-initiated polymorphic VT/VF from fascicular tissue or papillary muscles",
+      "Proarrhythmia from antiarrhythmic therapy"
     ],
-    [
-     "Primary Differentials",
-     "Acute coronary syndrome / myocardial ischemia precipitating polymorphic VT or VF, Acquired or congenital long QT syndrome with",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Viral myocarditis presenting with VT/VF storm"
     ],
-    [
-     "Management Strategy",
-     "Immediate identification and correction of reversible triggers, including myocardial ischaemia, electrolyte disturbance with",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Lead malfunction or atrial arrhythmia causing inappropriate ICD shocks rather than true ventricular arrhythmia",
+      "Electrolyte disturbance provoking ventricular arrhythmia"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming every ICD shock reflects a true ventricular arrhythmia - lead malfunction or an atrial arrhythmia can trigger",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "ICD interrogation to confirm appropriate ventricular detection/therapy and to review stored electrograms for arrhythmia onset and triggers",
+      "ECG monitoring to classify the rhythm as monomorphic versus polymorphic and to assess the QT interval and Brugada pattern (Rsr' with ST elevation in V1/V2)",
+      "Serum electrolyte assessment, especially potassium and magnesium",
+      "Evaluation for ischemia / acute coronary syndrome and cardiac function",
+      "Cardiac MRI to detect scarred myocardium when PVC-initiated polymorphic VT/VF is suspected",
+      "Endomyocardial biopsy when a new inflammatory cardiomyopathy is suspected in a patient without prior cardiac disease"
+    ],
+    "redFlags": [
+      "Multiple ICD shocks (a medical emergency)",
+      "Polymorphic VT or VF, especially if accompanied by features of acute coronary syndrome",
+      "Hemodynamically unstable or recurrent ventricular arrhythmia requiring repeated cardioversion",
+      "Signs of gradual cardiac decompensation in a hemodynamically stable but incessant VT",
+      "New-onset frequent ventricular arrhythmia in a patient with no known prior cardiac disease (consider inflammatory myocarditis)"
+    ],
+    "prognosis": "Spontaneous ventricular arrhythmias—particularly those requiring shock for termination—are associated with an increased subsequent risk of death and hospitalization in patients with depressed ventricular function. Untreated storm progresses rapidly and can be fatal, but catheter ablation, antiarrhythmic drug therapy, and adjunctive measures can be life-saving. An arrhythmic episode should prompt reevaluation for declining cardiac function, ischemia, or intercurrent illness (Harrison 22e p.1972).",
+    "pitfalls": [
+      "Assuming every ICD shock reflects a true ventricular arrhythmia—lead malfunction or an atrial arrhythmia can trigger inappropriate shocks, so interrogation is required (Harrison 22e p.1972).",
+      "Overlooking that interventions to control the arrhythmia may themselves worsen outcome—most antiarrhythmics can cause bradycardia requiring ICD pacing, which can itself impair ventricular function (Harrison 22e p.1972).",
+      "Failing to recognize antiarrhythmic proarrhythmia as a cause of incessant VT (Harrison 22e p.1972).",
+      "Missing a slow incessant monomorphic VT that falls outside programmed ICD detection parameters (Harrison 22e p.1972).",
+      "Not searching for a treatable substrate (ischemia, long QT, Brugada, inflammatory cardiomyopathy) that dictates specific therapy (Harrison 22e p.1974)."
+    ],
+    "severityClassification": "Defined event: electrical storm = >=3 episodes of VT or VF within 24 h each requiring intervention to terminate. VT is classified as monomorphic versus polymorphic, and as sustained versus incessant; substrate-based categories include ischemic, long QT, Brugada, PVC-initiated, and inflammatory (Harrison 22e p.1972-1974).",
+    "references": [
+      "Harrison 22e p.1972",
+      "Harrison 22e p.1973",
+      "Harrison 22e p.1974"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate identification and correction of reversible triggers, including myocardial ischaemia, electrolyte disturbance with potassium and magnesium repletion, and withdrawal of proarrhythmic drugs",
+      "Intravenous antiarrhythmic therapy, chiefly amiodarone, combined with beta-blockade including non-selective agents to counter the heightened sympathetic drive",
+      "Sympathetic modulation with sedation, and for refractory storm deep sedation with intubation and stellate ganglion block or cardiac sympathetic denervation",
+      "ICD interrogation and reprogramming to confirm appropriate detection and therapy and to reduce ineffective or inappropriate shocks",
+      "Catheter ablation of the arrhythmogenic substrate or the triggering premature ventricular contractions in drug-refractory storm",
+      "Substrate-specific measures, including isoprenaline or quinidine for Brugada storm, magnesium and avoidance of QT-prolonging drugs in torsades de pointes, and revascularisation for an ischaemic substrate",
+      "Temporary mechanical circulatory support such as an intra-aortic balloon pump or ECMO as a bridge in haemodynamically unstable refractory storm",
+      "Escalation to a specialist electrophysiology and heart-failure centre, with consideration of transplantation in end-stage disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for electrical storm and incessant ventricular tachycardia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "electrical-storm-and-incessant-ventricular-real-image",
-   "title": "Electrical Storm and Incessant Ventricular Tachycardia: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "electrical_storm_and_incessant_ventricular-pathway",
+      "title": "Electrical Storm and Incessant Ventricular Tachycardia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Electrical storm (VT/VF storm) is defined as three or more episodes of ventricular tachycardia or ventricular fibrillation within 24 hours, each requiring intervention to terminate (Harrison 22e p.1972).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Multiple ICD shocks (a medical emergency)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: ICD interrogation to confirm appropriate ventricular detection/therapy and to review stored electrograms for arrhythmia onset and triggers, ECG monitoring to classify the rhythm as monomorphic versus polymorphic and to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate identification and correction of reversible triggers, including myocardial ischaemia, electrolyte disturbance with potassium and magnesium repletion, and withdrawal of proarrhythmic drugs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming every ICD shock reflects a true ventricular arrhythmia - lead malfunction or an atrial arrhythmia can trigger inappropriate shocks, so interrogation is required (Harrison 22e p.1972)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of electrical storm and incessant ventricular tachycardia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "electrical_storm_and_incessant_ventricular-matrix",
+      "title": "Electrical Storm and Incessant Ventricular Tachycardia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Electrical storm (VT/VF storm) is defined as three or more episodes of ventricular tachycardia or ventricular fibrillation within",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "ICD interrogation to confirm appropriate ventricular detection/therapy and to review stored electrograms for arrhythmia onset and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute coronary syndrome / myocardial ischemia precipitating polymorphic VT or VF, Acquired or congenital long QT syndrome with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate identification and correction of reversible triggers, including myocardial ischaemia, electrolyte disturbance with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming every ICD shock reflects a true ventricular arrhythmia - lead malfunction or an atrial arrhythmia can trigger",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for electrical storm and incessant ventricular tachycardia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "EMCrit, Stellate Ganglion Block for electrical storm",
+      "url": "https://emcrit.org/emcrit/stellate-ganglion-block/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "electrical_storm_and_incessant_ventricular-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and characterising electrical storm",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrical storm",
+          "unit": "episodes per 24 h",
+          "cells": [
+            {
+              "text": "3 or more VT or VF, each needing intervention",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "{{hy:Medical emergency}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incessant VT",
+          "cells": [
+            {
+              "text": "Recurs shortly after any conversion to sinus rhythm"
+            },
+            {
+              "text": "Usually monomorphic; may be too slow for ICD detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incidence, primary-prevention ICD",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 4"
+            },
+            {
+              "text": "Up to 20% with prior VT or resuscitated arrest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICD interrogation",
+          "cells": [
+            {
+              "text": "Confirms true ventricular arrhythmia"
+            },
+            {
+              "text": "Excludes lead fault or atrial arrhythmia; stored electrograms show triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monomorphic vs polymorphic morphology",
+          "cells": [
+            {
+              "text": "Guides management"
+            },
+            {
+              "text": "Polymorphic suggests ischaemia, long QT, Brugada"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "QT interval and V1 to V2 pattern",
+          "cells": [
+            {
+              "text": "Long QT or Brugada pattern"
+            },
+            {
+              "text": "Specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium and magnesium",
+          "cells": [
+            {
+              "text": "Electrolyte trigger"
+            },
+            {
+              "text": "Replete"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI or endomyocardial biopsy",
+          "cells": [
+            {
+              "text": "Scar or inflammatory cardiomyopathy"
+            },
+            {
+              "text": "New storm without prior heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATP success",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Terminates over 70 of VT episodes",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "Reduces shocks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "electrical_storm_and_incessant_ventricular-ddx",
+      "kind": "ddx",
+      "title": "Causes and substrates of electrical storm",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute ischaemia or ACS",
+          "cells": [
+            {
+              "text": "{{hy:Polymorphic VT or VF}}"
+            },
+            {
+              "text": "ECG, troponin, angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long QT with torsades",
+          "cells": [
+            {
+              "text": "Prolonged QT, drug or congenital"
+            },
+            {
+              "text": "ECG QT measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brugada syndrome",
+          "cells": [
+            {
+              "text": "Rsr' with ST elevation in V1 to V2"
+            },
+            {
+              "text": "ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory cardiomyopathy",
+          "cells": [
+            {
+              "text": "Giant cell, sarcoid or viral myocarditis"
+            },
+            {
+              "text": "Cardiac MRI, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PVC-triggered polymorphic VT or VF",
+          "cells": [
+            {
+              "text": "Purkinje or papillary muscle triggers"
+            },
+            {
+              "text": "Stored electrograms, MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiarrhythmic proarrhythmia",
+          "cells": [
+            {
+              "text": "Amiodarone or flecainide making VT incessant"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inappropriate ICD shocks",
+          "cells": [
+            {
+              "text": "Lead malfunction or atrial arrhythmia"
+            },
+            {
+              "text": "ICD interrogation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "electrical_storm_and_incessant_ventricular-treatment",
+      "kind": "treatment",
+      "title": "Management of electrical storm",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct triggers: ischaemia, potassium, magnesium, proarrhythmic drugs",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Revascularise ischaemic substrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV amiodarone",
+          "cells": [
+            {
+              "text": "{{hy:First-line antiarrhythmic}}"
+            },
+            {
+              "text": "Can cause hypotension and bradycardia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-blockade (propranolol, esmolol or metoprolol)",
+          "cells": [
+            {
+              "text": "With amiodarone to blunt sympathetic drive"
+            },
+            {
+              "text": "Non-selective agents favoured"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sedation; deep sedation and intubation if refractory",
+          "cells": [
+            {
+              "text": "Ongoing storm"
+            },
+            {
+              "text": "Reduces sympathetic drive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICD reprogramming",
+          "cells": [
+            {
+              "text": "Ineffective or inappropriate shocks"
+            },
+            {
+              "text": "ATP and VF zone above 220 bpm reduce shocks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left stellate ganglion block (about 10 mL 1 to 2% lidocaine)",
+          "cells": [
+            {
+              "text": "Drug-refractory storm"
+            },
+            {
+              "text": "Meta-analysis: 70% complete resolution; no proven mortality benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "cells": [
+            {
+              "text": "Refractory storm or triggering PVCs"
+            },
+            {
+              "text": "Can be life-saving"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isoprenaline or quinidine; magnesium",
+          "cells": [
+            {
+              "text": "Brugada storm; torsades"
+            },
+            {
+              "text": "Avoid QT-prolonging drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IABP or ECMO",
+          "cells": [
+            {
+              "text": "Haemodynamically unstable refractory storm"
+            },
+            {
+              "text": "Bridge to ablation or transplant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Open sources consulted did not state IV doses for amiodarone or beta-blockers."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "electrical_storm_and_incessant_ventricular-dx-mgmt",
+      "title": "Management of electrical storm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Three or more VT or VF episodes in 24 h, or multiple ICD shocks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamically unstable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Defibrillation and ACLS",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Interrogate ICD; 12-lead ECG; potassium, magnesium; ischaemia check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Polymorphic VT or VF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat ischaemia, long QT or Brugada specifically",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV amiodarone plus beta-blocker; sedation; reprogram ICD",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Storm controlled?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Deep sedation, stellate ganglion block, catheter ablation",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Mechanical support and specialist centre if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Substrate workup and long-term plan",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

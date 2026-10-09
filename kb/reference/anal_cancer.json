@@ -1,180 +1,547 @@
 {
- "id": "anal_cancer",
- "name": "Anal cancer",
- "aliases": [
-  "anal carcinoma",
-  "anal squamous cell carcinoma",
-  "anal canal cancer"
- ],
- "class": "non_infective",
- "system": "Oncology",
- "specialty": "Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The great majority are squamous cell carcinomas strongly linked to persistent high-risk human papillomavirus infection, particularly HPV types 16 and 18",
-   "Risk is increased in people with a history of receptive anal intercourse, multiple sexual partners, HIV infection, immunosuppression, and prior HPV-related anogenital neoplasia",
-   "Common presenting features include anal bleeding, a palpable lump, discomfort or pain, pruritus, and a sensation of a mass, which are frequently misattributed to haemorrhoids",
-   "Digital rectal examination and inguinal node assessment are essential, and any persistent or atypical anal lesion should be biopsied rather than assumed benign",
-   "The cornerstone of curative treatment is combined chemoradiotherapy, which preserves the anal sphincter and avoids the need for a permanent stoma in most patients",
-   "Surgery in the form of abdominoperineal resection is generally reserved for residual or recurrent disease after chemoradiotherapy rather than as first-line therapy",
-   "Anal squamous cell cancer must be distinguished from rectal adenocarcinoma extending to the anus, as their management pathways differ substantially",
-   "Screening and surveillance with anal cytology and high-resolution anoscopy are considered for high-risk groups such as people living with HIV"
+  "id": "anal_cancer",
+  "name": "Anal cancer",
+  "aliases": [
+    "anal carcinoma",
+    "anal squamous cell carcinoma",
+    "anal canal cancer"
   ],
-  "pathophysiology": "Most anal cancers develop from squamous or transitional epithelium of the anal canal, driven by persistent infection with oncogenic human papillomavirus. Viral oncoproteins inactivate tumour suppressor pathways, producing progressive squamous intraepithelial lesions (anal intraepithelial neoplasia) that can advance to invasive squamous cell carcinoma. Immunosuppression, especially from HIV, impairs viral clearance and accelerates this process. Tumours spread locally into the sphincter complex and surrounding tissues and metastasise to inguinal, perirectal, and pelvic lymph nodes.",
-  "additionalDifferentials": [
-   "Haemorrhoids or anal fissure",
-   "Anal intraepithelial neoplasia without invasion",
-   "Perianal condylomata (anogenital warts)",
-   "Rectal adenocarcinoma extending to the anal canal",
-   "Perianal abscess or fistula",
-   "Anal melanoma or other rare anal tumours"
-  ],
-  "additionalInvestigations": [
-   "Digital rectal examination with inspection and palpation of inguinal nodes",
-   "Biopsy of the anal lesion for histological confirmation",
-   "Pelvic MRI to assess local tumour extent and nodal involvement",
-   "CT of chest, abdomen, and pelvis, and PET-CT where available, for staging",
-   "HIV testing and assessment of immune status given the strong association"
-  ],
-  "redFlags": [
-   "Persistent anal bleeding or a non-healing anal lesion attributed to haemorrhoids",
-   "A firm or ulcerated anal mass with associated pain",
-   "Enlarged inguinal lymph nodes suggesting nodal spread",
-   "New anal symptoms in an immunosuppressed or HIV-positive patient"
-  ],
-  "prognosis": "Localised anal squamous cell carcinoma has a favourable prognosis with organ-preserving chemoradiotherapy and high rates of local control; outcome worsens with larger tumours, nodal involvement, and metastatic disease.",
-  "pitfalls": [
-   "Diagnosing haemorrhoids without examining or biopsying a persistent anal lesion",
-   "Confusing anal squamous cell carcinoma with rectal adenocarcinoma and applying the wrong treatment pathway",
-   "Proceeding to primary radical surgery instead of first-line chemoradiotherapy",
-   "Overlooking HIV status and immunosuppression that influence management and prognosis"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "DeVita's Cancer: Principles & Practice of Oncology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive concurrent chemoradiotherapy with a fluoropyrimidine plus mitomycin is the curative standard for localized squamous cell carcinoma, preserving the anal sphincter; a cisplatin-based regimen is an alternative with similar efficacy",
-   "Radiotherapy is delivered by IMRT rather than older techniques to reduce skin, gastrointestinal, and genitourinary toxicity",
-   "Radiotherapy alone can be considered for frail or elderly patients with early, low-risk disease who cannot tolerate chemotherapy, but chemoradiotherapy is preferred when tolerated",
-   "A narrow subset of small, well-differentiated, superficial perianal lesions without sphincter or nodal involvement may be managed with local excision alone, reserving chemoradiotherapy for close/positive margins or higher-risk features",
-   "Tumor regression after chemoradiotherapy can continue for up to a year, so repeat biopsy of a slowly regressing lesion should generally be avoided; only clearly progressive or non-regressing/recurrent disease should be biopsied",
-   "Confirmed persistent or recurrent disease after chemoradiotherapy is managed with salvage abdominoperineal resection, adding groin dissection for involved inguinal nodes and en bloc resection for adjacent organ invasion; negative margins are the strongest predictor of survival",
-   "Tissue flap reconstruction is frequently used after salvage APR given the high rate of perineal wound complications",
-   "Metastatic squamous cell carcinoma is treated with systemic chemotherapy, preferring a platinum-taxane combination as first-line, with platinum-fluoropyrimidine as an alternative and a docetaxel-platinum-fluoropyrimidine triplet as another option",
-   "Metastasectomy can be considered for carefully selected patients with limited metastatic disease, particularly isolated liver metastases, and good performance status",
-   "PD-1-targeted checkpoint inhibitor monotherapy is a second-line option for refractory, unresectable, or metastatic disease",
-   "Chemoradiotherapy should generally not be withheld in HIV-positive patients, though low CD4 counts warrant closer toxicity monitoring during treatment",
-   "Any persistent or atypical anal lesion, or bleeding misattributed to hemorrhoids, warrants biopsy and referral rather than empirical treatment for benign anorectal disease",
-   "New diagnoses should be managed within a multidisciplinary team spanning radiation oncology, medical oncology, and colorectal/surgical oncology",
-   "Post-treatment surveillance relies on clinical examination, anoscopy, and inguinal node palpation starting roughly 8 to 12 weeks after chemoradiotherapy, continuing regularly for several years since most relapses occur within the first three years"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anal_cancer-pathway",
-   "title": "Anal cancer: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The great majority are squamous cell carcinomas strongly linked to persistent high-risk human papillomavirus infection, particularly HPV types 16 and 18",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent anal bleeding or a non-healing anal lesion attributed to haemorrhoids",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Digital rectal examination with inspection and palpation of inguinal nodes, Biopsy of the anal lesion for histological confirmation, Pelvic MRI to assess local tumour extent and nodal involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive concurrent chemoradiotherapy with a fluoropyrimidine plus mitomycin is the curative standard for localized squamous cell carcinoma, preserving the anal sphincter; a cisplatin-based regimen is an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing haemorrhoids without examining or biopsying a persistent anal lesion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anal cancer."
-  }
- ],
- "tables": [
-  {
-   "id": "anal_cancer-matrix",
-   "title": "Anal cancer: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The great majority are squamous cell carcinomas strongly linked to persistent high-risk human papillomavirus infection,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology",
+  "specialty": "Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The great majority are squamous cell carcinomas strongly linked to persistent high-risk human papillomavirus infection, particularly HPV types 16 and 18",
+      "Risk is increased in people with a history of receptive anal intercourse, multiple sexual partners, HIV infection, immunosuppression, and prior HPV-related anogenital neoplasia",
+      "Common presenting features include anal bleeding, a palpable lump, discomfort or pain, pruritus, and a sensation of a mass, which are frequently misattributed to haemorrhoids",
+      "Digital rectal examination and inguinal node assessment are essential, and any persistent or atypical anal lesion should be biopsied rather than assumed benign",
+      "The cornerstone of curative treatment is combined chemoradiotherapy, which preserves the anal sphincter and avoids the need for a permanent stoma in most patients",
+      "Surgery in the form of abdominoperineal resection is generally reserved for residual or recurrent disease after chemoradiotherapy rather than as first-line therapy",
+      "Anal squamous cell cancer must be distinguished from rectal adenocarcinoma extending to the anus, as their management pathways differ substantially",
+      "Screening and surveillance with anal cytology and high-resolution anoscopy are considered for high-risk groups such as people living with HIV"
     ],
-    [
-     "Key Investigations",
-     "Digital rectal examination with inspection and palpation of inguinal nodes, Biopsy of the anal lesion for histological",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Most anal cancers develop from squamous or transitional epithelium of the anal canal, driven by persistent infection with oncogenic human papillomavirus. Viral oncoproteins inactivate tumour suppressor pathways, producing progressive squamous intraepithelial lesions (anal intraepithelial neoplasia) that can advance to invasive squamous cell carcinoma. Immunosuppression, especially from HIV, impairs viral clearance and accelerates this process. Tumours spread locally into the sphincter complex and surrounding tissues and metastasise to inguinal, perirectal, and pelvic lymph nodes.",
+    "additionalDifferentials": [
+      "Haemorrhoids or anal fissure",
+      "Anal intraepithelial neoplasia without invasion",
+      "Perianal condylomata (anogenital warts)",
+      "Rectal adenocarcinoma extending to the anal canal",
+      "Perianal abscess or fistula",
+      "Anal melanoma or other rare anal tumours"
     ],
-    [
-     "Primary Differentials",
-     "Haemorrhoids or anal fissure, Anal intraepithelial neoplasia without invasion, Perianal condylomata (anogenital warts)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Digital rectal examination with inspection and palpation of inguinal nodes",
+      "Biopsy of the anal lesion for histological confirmation",
+      "Pelvic MRI to assess local tumour extent and nodal involvement",
+      "CT of chest, abdomen, and pelvis, and PET-CT where available, for staging",
+      "HIV testing and assessment of immune status given the strong association"
     ],
-    [
-     "Management Strategy",
-     "Definitive concurrent chemoradiotherapy with a fluoropyrimidine plus mitomycin is the curative standard for localized squamous",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent anal bleeding or a non-healing anal lesion attributed to haemorrhoids",
+      "A firm or ulcerated anal mass with associated pain",
+      "Enlarged inguinal lymph nodes suggesting nodal spread",
+      "New anal symptoms in an immunosuppressed or HIV-positive patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing haemorrhoids without examining or biopsying a persistent anal lesion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Localised anal squamous cell carcinoma has a favourable prognosis with organ-preserving chemoradiotherapy and high rates of local control; outcome worsens with larger tumours, nodal involvement, and metastatic disease.",
+    "pitfalls": [
+      "Diagnosing haemorrhoids without examining or biopsying a persistent anal lesion",
+      "Confusing anal squamous cell carcinoma with rectal adenocarcinoma and applying the wrong treatment pathway",
+      "Proceeding to primary radical surgery instead of first-line chemoradiotherapy",
+      "Overlooking HIV status and immunosuppression that influence management and prognosis"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "DeVita's Cancer: Principles & Practice of Oncology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive concurrent chemoradiotherapy with a fluoropyrimidine plus mitomycin is the curative standard for localized squamous cell carcinoma, preserving the anal sphincter; a cisplatin-based regimen is an alternative with similar efficacy",
+      "Radiotherapy is delivered by IMRT rather than older techniques to reduce skin, gastrointestinal, and genitourinary toxicity",
+      "Radiotherapy alone can be considered for frail or elderly patients with early, low-risk disease who cannot tolerate chemotherapy, but chemoradiotherapy is preferred when tolerated",
+      "A narrow subset of small, well-differentiated, superficial perianal lesions without sphincter or nodal involvement may be managed with local excision alone, reserving chemoradiotherapy for close/positive margins or higher-risk features",
+      "Tumor regression after chemoradiotherapy can continue for up to a year, so repeat biopsy of a slowly regressing lesion should generally be avoided; only clearly progressive or non-regressing/recurrent disease should be biopsied",
+      "Confirmed persistent or recurrent disease after chemoradiotherapy is managed with salvage abdominoperineal resection, adding groin dissection for involved inguinal nodes and en bloc resection for adjacent organ invasion; negative margins are the strongest predictor of survival",
+      "Tissue flap reconstruction is frequently used after salvage APR given the high rate of perineal wound complications",
+      "Metastatic squamous cell carcinoma is treated with systemic chemotherapy, preferring a platinum-taxane combination as first-line, with platinum-fluoropyrimidine as an alternative and a docetaxel-platinum-fluoropyrimidine triplet as another option",
+      "Metastasectomy can be considered for carefully selected patients with limited metastatic disease, particularly isolated liver metastases, and good performance status",
+      "PD-1-targeted checkpoint inhibitor monotherapy is a second-line option for refractory, unresectable, or metastatic disease",
+      "Chemoradiotherapy should generally not be withheld in HIV-positive patients, though low CD4 counts warrant closer toxicity monitoring during treatment",
+      "Any persistent or atypical anal lesion, or bleeding misattributed to hemorrhoids, warrants biopsy and referral rather than empirical treatment for benign anorectal disease",
+      "New diagnoses should be managed within a multidisciplinary team spanning radiation oncology, medical oncology, and colorectal/surgical oncology",
+      "Post-treatment surveillance relies on clinical examination, anoscopy, and inguinal node palpation starting roughly 8 to 12 weeks after chemoradiotherapy, continuing regularly for several years since most relapses occur within the first three years"
     ]
-   ],
-   "caption": "Overview comparison matrix for anal cancer."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anal-cancer-real-image",
-   "title": "Anal cancer: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "anal_cancer-pathway",
+      "title": "Anal cancer: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The great majority are squamous cell carcinomas strongly linked to persistent high-risk human papillomavirus infection, particularly HPV types 16 and 18",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent anal bleeding or a non-healing anal lesion attributed to haemorrhoids",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Digital rectal examination with inspection and palpation of inguinal nodes, Biopsy of the anal lesion for histological confirmation, Pelvic MRI to assess local tumour extent and nodal involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive concurrent chemoradiotherapy with a fluoropyrimidine plus mitomycin is the curative standard for localized squamous cell carcinoma, preserving the anal sphincter; a cisplatin-based regimen is an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing haemorrhoids without examining or biopsying a persistent anal lesion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anal cancer."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anal_cancer-matrix",
+      "title": "Anal cancer: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The great majority are squamous cell carcinomas strongly linked to persistent high-risk human papillomavirus infection,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Digital rectal examination with inspection and palpation of inguinal nodes, Biopsy of the anal lesion for histological",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Haemorrhoids or anal fissure, Anal intraepithelial neoplasia without invasion, Perianal condylomata (anogenital warts)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive concurrent chemoradiotherapy with a fluoropyrimidine plus mitomycin is the curative standard for localized squamous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing haemorrhoids without examining or biopsying a persistent anal lesion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anal cancer."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anal_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Digital rectal examination with inguinal node palpation",
+          "cells": [
+            {
+              "text": "Local and nodal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of the anal lesion",
+          "cells": [
+            {
+              "text": "Histological confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Local tumour extent and nodal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest, abdomen and pelvis, and PET-CT where available",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and immune status assessment",
+          "cells": [
+            {
+              "text": "Strong association with HIV"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_cancer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemorrhoids or anal fissure",
+          "cells": [
+            {
+              "text": "Bleeding attributed to haemorrhoids"
+            },
+            {
+              "text": "Examination and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal intraepithelial neoplasia without invasion",
+          "cells": [
+            {
+              "text": "Pre-invasive lesion"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal condylomata",
+          "cells": [
+            {
+              "text": "Warts"
+            },
+            {
+              "text": "Inspection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectal adenocarcinoma extending to the anal canal",
+          "cells": [
+            {
+              "text": "Adenocarcinoma origin"
+            },
+            {
+              "text": "Biopsy and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal abscess or fistula",
+          "cells": [
+            {
+              "text": "Sepsis or track"
+            },
+            {
+              "text": "Examination and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal melanoma or other rare anal tumours",
+          "cells": [
+            {
+              "text": "Pigmented or rare tumour"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_cancer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Concurrent chemoradiotherapy with fluoropyrimidine plus mitomycin",
+          "cells": [
+            {
+              "text": "Localised squamous cell carcinoma"
+            },
+            {
+              "text": "Curative standard; preserves sphincter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cisplatin-based chemoradiotherapy",
+          "cells": [
+            {
+              "text": "When the standard regimen is not suitable"
+            },
+            {
+              "text": "Similar efficacy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IMRT radiotherapy",
+          "cells": [
+            {
+              "text": "Reduces toxicity"
+            },
+            {
+              "text": "Modern technique"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy alone for frail patients with early low-risk disease",
+          "cells": [
+            {
+              "text": "Cannot tolerate chemotherapy"
+            },
+            {
+              "text": "Chemoradiotherapy preferred if tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salvage abdominoperineal resection with groin dissection as needed",
+          "cells": [
+            {
+              "text": "Persistent or recurrent disease"
+            },
+            {
+              "text": "Negative margins key"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum-taxane chemotherapy for metastatic disease",
+          "cells": [
+            {
+              "text": "Metastatic squamous cell carcinoma"
+            },
+            {
+              "text": "First-line systemic option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PD-1 checkpoint inhibitor monotherapy",
+          "cells": [
+            {
+              "text": "Refractory or metastatic disease"
+            },
+            {
+              "text": "Second-line option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-treatment surveillance with examination, anoscopy and node palpation",
+          "cells": [
+            {
+              "text": "Relapse risk"
+            },
+            {
+              "text": "Several years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anal_cancer-dx-mgmt",
+      "title": "Diagnosis and management of Anal cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent anal bleeding or lump, often dismissed as haemorrhoids",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Enlarged inguinal nodes, firm ulcerated mass or HIV with new symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent colorectal and oncology referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DRE and node check; biopsy; pelvic MRI; CT or PET staging; HIV test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Squamous carcinoma confirmed on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chemoradiotherapy with fluoropyrimidine and mitomycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review haemorrhoids, AIN, condylomata and rectal cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IMRT; radiotherapy alone if frail or cannot tolerate chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Salvage APR for persistent or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Chemotherapy or checkpoint inhibitor for metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Localised disease has good control; outcome worse with nodes or metastases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

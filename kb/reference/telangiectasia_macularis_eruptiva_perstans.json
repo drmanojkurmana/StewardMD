@@ -1,168 +1,428 @@
 {
- "id": "telangiectasia_macularis_eruptiva_perstans",
- "name": "Telangiectasia macularis eruptiva perstans",
- "aliases": [
-  "TMEP"
- ],
- "class": "non_infective",
- "system": "Skin",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Dermatology references / mastocytosis literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare adult form of cutaneous mastocytosis characterised by persistent telangiectatic red-brown macules",
-   "Lesions are typically on the trunk and may be widespread, with fine telangiectasia within them",
-   "The Darier sign is often subtle or absent, unlike in typical urticaria pigmentosa",
-   "It occurs almost exclusively in adults and may be associated with systemic mastocytosis",
-   "Diagnosis relies on biopsy demonstrating increased mast cells around dilated dermal vessels",
-   "Evaluation for systemic disease and mediator symptoms is appropriate given the adult onset"
+  "id": "telangiectasia_macularis_eruptiva_perstans",
+  "name": "Telangiectasia macularis eruptiva perstans",
+  "aliases": [
+    "TMEP"
   ],
-  "pathophysiology": "Telangiectasia macularis eruptiva perstans is a variant of cutaneous mastocytosis in which increased dermal mast cells cluster around dilated superficial blood vessels, producing persistent telangiectatic pigmented macules. As in other mastocytosis, clonal mast cells (often KIT-associated) release mediators, though the weal-and-flare response is frequently muted. Because it presents in adults, it is regarded, like other adult cutaneous mastocytosis, as potentially reflecting underlying systemic mast cell disease.",
-  "additionalDifferentials": [
-   "Other cutaneous or systemic mastocytosis",
-   "Generalised essential telangiectasia",
-   "Hereditary haemorrhagic telangiectasia",
-   "Poikiloderma",
-   "Connective tissue disease-related telangiectasia"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with mast cell staining around dermal vessels",
-   "Serum baseline tryptase",
-   "Assessment for systemic mastocytosis in view of adult onset",
-   "History of mediator symptoms and triggers",
-   "Dermoscopy to characterise the telangiectasia"
-  ],
-  "redFlags": [
-   "Features suggesting systemic mastocytosis",
-   "Recurrent mediator or anaphylactic symptoms",
-   "A markedly raised tryptase",
-   "Rapidly progressive or extensive disease"
-  ],
-  "prognosis": "The cutaneous lesions are persistent but benign; prognosis is influenced by any associated systemic mastocytosis, which should be sought given the adult onset.",
-  "pitfalls": [
-   "Missing associated systemic mastocytosis",
-   "Expecting a florid Darier sign, which is often absent",
-   "Confusing it with non-mast-cell telangiectatic disorders",
-   "Not measuring tryptase in an adult with suggestive lesions"
-  ],
-  "references": [
-   "Dermatology reference texts (standard reference)",
-   "Mastocytosis clinical guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Advise avoidance of mast-cell degranulation triggers such as heat, friction, alcohol, opioids and non-steroidal anti-inflammatory drugs",
-   "Control mediator symptoms with H1 and H2 antihistamines",
-   "Add a mast-cell stabiliser such as sodium cromoglicate, or consider a leukotriene antagonist, for refractory symptoms",
-   "Offer phototherapy for widespread or cosmetically troublesome cutaneous lesions",
-   "Prescribe an adrenaline auto-injector and an anaphylaxis action plan for patients at risk of systemic reactions",
-   "Evaluate for underlying systemic mastocytosis with baseline serum tryptase given the adult onset, referring to haematology if suspected",
-   "Escalate urgently and treat anaphylaxis with intramuscular adrenaline if systemic mast-cell mediator release occurs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "telangiectasia_macularis_eruptiva_perstans-pathway",
-   "title": "Telangiectasia macularis eruptiva perstans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare adult form of cutaneous mastocytosis characterised by persistent telangiectatic red-brown macules",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting systemic mastocytosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with mast cell staining around dermal vessels, Serum baseline tryptase, Assessment for systemic mastocytosis in view of adult onset"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Advise avoidance of mast-cell degranulation triggers such as heat, friction, alcohol, opioids and non-steroidal anti-inflammatory drugs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing associated systemic mastocytosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of telangiectasia macularis eruptiva perstans."
-  }
- ],
- "tables": [
-  {
-   "id": "telangiectasia_macularis_eruptiva_perstans-matrix",
-   "title": "Telangiectasia macularis eruptiva perstans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare adult form of cutaneous mastocytosis characterised by persistent telangiectatic red-brown macules",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dermatology references / mastocytosis literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare adult form of cutaneous mastocytosis characterised by persistent telangiectatic red-brown macules",
+      "Lesions are typically on the trunk and may be widespread, with fine telangiectasia within them",
+      "The Darier sign is often subtle or absent, unlike in typical urticaria pigmentosa",
+      "It occurs almost exclusively in adults and may be associated with systemic mastocytosis",
+      "Diagnosis relies on biopsy demonstrating increased mast cells around dilated dermal vessels",
+      "Evaluation for systemic disease and mediator symptoms is appropriate given the adult onset"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with mast cell staining around dermal vessels, Serum baseline tryptase, Assessment for systemic mastocytosis in view",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Telangiectasia macularis eruptiva perstans is a variant of cutaneous mastocytosis in which increased dermal mast cells cluster around dilated superficial blood vessels, producing persistent telangiectatic pigmented macules. As in other mastocytosis, clonal mast cells (often KIT-associated) release mediators, though the weal-and-flare response is frequently muted. Because it presents in adults, it is regarded, like other adult cutaneous mastocytosis, as potentially reflecting underlying systemic mast cell disease.",
+    "additionalDifferentials": [
+      "Other cutaneous or systemic mastocytosis",
+      "Generalised essential telangiectasia",
+      "Hereditary haemorrhagic telangiectasia",
+      "Poikiloderma",
+      "Connective tissue disease-related telangiectasia"
     ],
-    [
-     "Primary Differentials",
-     "Other cutaneous or systemic mastocytosis, Generalised essential telangiectasia, Hereditary haemorrhagic telangiectasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with mast cell staining around dermal vessels",
+      "Serum baseline tryptase",
+      "Assessment for systemic mastocytosis in view of adult onset",
+      "History of mediator symptoms and triggers",
+      "Dermoscopy to characterise the telangiectasia"
     ],
-    [
-     "Management Strategy",
-     "Advise avoidance of mast-cell degranulation triggers such as heat, friction, alcohol, opioids and non-steroidal anti-inflammatory",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting systemic mastocytosis",
+      "Recurrent mediator or anaphylactic symptoms",
+      "A markedly raised tryptase",
+      "Rapidly progressive or extensive disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing associated systemic mastocytosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The cutaneous lesions are persistent but benign; prognosis is influenced by any associated systemic mastocytosis, which should be sought given the adult onset.",
+    "pitfalls": [
+      "Missing associated systemic mastocytosis",
+      "Expecting a florid Darier sign, which is often absent",
+      "Confusing it with non-mast-cell telangiectatic disorders",
+      "Not measuring tryptase in an adult with suggestive lesions"
+    ],
+    "references": [
+      "Dermatology reference texts (standard reference)",
+      "Mastocytosis clinical guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Advise avoidance of mast-cell degranulation triggers such as heat, friction, alcohol, opioids and non-steroidal anti-inflammatory drugs",
+      "Control mediator symptoms with H1 and H2 antihistamines",
+      "Add a mast-cell stabiliser such as sodium cromoglicate, or consider a leukotriene antagonist, for refractory symptoms",
+      "Offer phototherapy for widespread or cosmetically troublesome cutaneous lesions",
+      "Prescribe an adrenaline auto-injector and an anaphylaxis action plan for patients at risk of systemic reactions",
+      "Evaluate for underlying systemic mastocytosis with baseline serum tryptase given the adult onset, referring to haematology if suspected",
+      "Escalate urgently and treat anaphylaxis with intramuscular adrenaline if systemic mast-cell mediator release occurs"
     ]
-   ],
-   "caption": "Overview comparison matrix for telangiectasia macularis eruptiva perstans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "telangiectasia-macularis-eruptiva-perstans-real-image",
-   "title": "Telangiectasia macularis eruptiva perstans: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "telangiectasia_macularis_eruptiva_perstans-pathway",
+      "title": "Telangiectasia macularis eruptiva perstans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare adult form of cutaneous mastocytosis characterised by persistent telangiectatic red-brown macules",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting systemic mastocytosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with mast cell staining around dermal vessels, Serum baseline tryptase, Assessment for systemic mastocytosis in view of adult onset"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Advise avoidance of mast-cell degranulation triggers such as heat, friction, alcohol, opioids and non-steroidal anti-inflammatory drugs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing associated systemic mastocytosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of telangiectasia macularis eruptiva perstans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "telangiectasia_macularis_eruptiva_perstans-matrix",
+      "title": "Telangiectasia macularis eruptiva perstans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare adult form of cutaneous mastocytosis characterised by persistent telangiectatic red-brown macules",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with mast cell staining around dermal vessels, Serum baseline tryptase, Assessment for systemic mastocytosis in view",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other cutaneous or systemic mastocytosis, Generalised essential telangiectasia, Hereditary haemorrhagic telangiectasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Advise avoidance of mast-cell degranulation triggers such as heat, friction, alcohol, opioids and non-steroidal anti-inflammatory",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing associated systemic mastocytosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for telangiectasia macularis eruptiva perstans."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references / mastocytosis literature",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "telangiectasia_macularis_eruptiva_perstans-dx-mgmt",
+      "title": "Diagnosis and management of Telangiectasia macularis eruptiva perstans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected telangiectasia macularis eruptiva perstans: adult telangiectatic macules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: systemic mediator symptoms, raised tryptase, or extensive disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intramuscular adrenaline for anaphylaxis; haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for mast cells around vessels; serum baseline tryptase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show mast cells clustered around dilated dermal vessels?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider generalised essential telangiectasia, HHT or connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid heat, friction, alcohol, opioids and NSAIDs as triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "H1 and H2 antihistamines for mediator symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium cromoglicate or leukotriene antagonist for refractory symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Phototherapy for widespread or troublesome lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Adrenaline auto-injector and anaphylaxis plan for at-risk patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lesions persist but are benign; prognosis depends on any systemic mastocytosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "telangiectasia_macularis_eruptiva_perstans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with mast cell staining",
+          "cells": [
+            {
+              "text": "Mast cells clustered around dilated dermal vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum baseline tryptase",
+          "cells": [
+            {
+              "text": "Raised tryptase; warning sign of systemic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for systemic mastocytosis",
+          "cells": [
+            {
+              "text": "Adult onset, which is regarded as warranting evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of mediator symptoms and triggers",
+          "cells": [
+            {
+              "text": "Flushing, anaphylaxis and other symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Characterises the telangiectasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "telangiectasia_macularis_eruptiva_perstans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Heat, friction, alcohol, opioids and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "H1 and H2 antihistamines",
+          "cells": [
+            {
+              "text": "Mediator symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium cromoglicate or leukotriene antagonist",
+          "cells": [
+            {
+              "text": "Refractory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "Widespread or cosmetically troublesome lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenaline auto-injector and anaphylaxis plan",
+          "cells": [
+            {
+              "text": "Patients at risk of systemic reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline tryptase and haematology referral",
+          "cells": [
+            {
+              "text": "Adult onset, if systemic mastocytosis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent anaphylaxis care",
+          "cells": [
+            {
+              "text": "Intramuscular adrenaline if systemic mediator release occurs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

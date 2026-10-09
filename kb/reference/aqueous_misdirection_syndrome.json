@@ -1,177 +1,474 @@
 {
- "id": "aqueous_misdirection_syndrome",
- "name": "aqueous misdirection syndrome",
- "aliases": [
-  "malignant glaucoma",
-  "ciliary block glaucoma"
- ],
- "class": "non_infective",
- "system": "ophthalmology",
- "specialty": "ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by a uniformly shallow or flat anterior chamber, both centrally and peripherally, with raised or normal intraocular pressure.",
-   "Classically arises after incisional glaucoma or cataract surgery in an eye predisposed by short axial length, a small anterior segment or nanophthalmos.",
-   "A patent peripheral iridotomy that fails to deepen the chamber effectively excludes pupillary block and points to aqueous misdirection.",
-   "Central to the mechanism is posterior diversion of aqueous into or behind the vitreous, pushing the whole lens-iris or vitreous face forward.",
-   "Medical therapy combines cycloplegia to tighten the zonules and posteriorly rotate the ciliary body, aqueous suppressants and hyperosmotic agents to shrink the vitreous.",
-   "Miotics paradoxically worsen the condition and must be avoided.",
-   "Nd:YAG laser disruption of the anterior hyaloid, often through an iridotomy or after capsulotomy, can re-establish a normal aqueous pathway in pseudophakic eyes.",
-   "Refractory cases require pars plana vitrectomy with disruption of the anterior hyaloid, sometimes combined with lens removal, to create a unified fluid compartment."
+  "id": "aqueous_misdirection_syndrome",
+  "name": "aqueous misdirection syndrome",
+  "aliases": [
+    "malignant glaucoma",
+    "ciliary block glaucoma"
   ],
-  "pathophysiology": "Aqueous humour is abnormally diverted posteriorly, becoming trapped within or behind the vitreous body instead of flowing forward through the pupil to the trabecular meshwork. A postulated ciliolenticular or ciliovitreal block, in which the ciliary processes rotate forward and appose the lens equator, capsule or anterior hyaloid, prevents anterior aqueous movement. Accumulating aqueous in the vitreous cavity raises posterior segment pressure, driving the lens-iris diaphragm or vitreous face anteriorly and flattening the entire anterior chamber. Because the block is at the level of the ciliary body and hyaloid rather than the pupil, peripheral iridotomy does not relieve it. Reduced vitreous fluid conductivity and a crowded, small anterior segment predispose to the self-sustaining cycle.",
-  "additionalDifferentials": [
-   "pupillary block angle-closure glaucoma",
-   "suprachoroidal haemorrhage",
-   "annular choroidal effusion or detachment",
-   "overfiltration with a flat chamber and hypotony after trabeculectomy",
-   "wound leak with shallow anterior chamber",
-   "pseudophakic capsular block syndrome",
-   "posterior segment mass pushing the lens-iris diaphragm forward"
-  ],
-  "additionalInvestigations": [
-   "gonioscopy and assessment of anterior chamber depth centrally and peripherally",
-   "ultrasound biomicroscopy showing anterior ciliary body rotation and iridolenticular apposition",
-   "B-scan ultrasonography to exclude suprachoroidal haemorrhage or choroidal effusion",
-   "anterior segment optical coherence tomography of the angle and chamber",
-   "assessment of iridotomy patency",
-   "intraocular pressure measurement over time",
-   "axial length biometry documenting a short or nanophthalmic eye"
-  ],
-  "redFlags": [
-   "flat anterior chamber with raised pressure unresponsive to iridotomy",
-   "rapidly rising pressure after intraocular surgery in a small eye",
-   "features suggesting suprachoroidal haemorrhage requiring urgent differentiation",
-   "corneal decompensation from lens-corneal touch"
-  ],
-  "prognosis": "With prompt recognition and a stepwise medical, laser and surgical approach the anterior chamber can usually be re-formed and pressure controlled, but the condition is often recurrent and the fellow eye is at risk after any future intraocular surgery.",
-  "pitfalls": [
-   "Administering miotics, which aggravate the anterior displacement of the lens-iris diaphragm.",
-   "Repeatedly performing or enlarging an iridotomy when pupillary block has already been excluded.",
-   "Missing an occult suprachoroidal haemorrhage that mimics the flat chamber picture.",
-   "Failing to warn the patient and plan prophylaxis before surgery on the predisposed fellow eye.",
-   "Delaying definitive vitrectomy in phakic or refractory cases and allowing prolonged corneal-lens touch."
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Glaucoma",
-   "Shields Textbook of Glaucoma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin intense cycloplegia with atropine to tighten the zonules and rotate the ciliary body posteriorly, re-establishing forward aqueous flow",
-   "Add aqueous suppressants such as topical beta-blockers, alpha-agonists and carbonic anhydrase inhibitors, with hyperosmotic agents to shrink the vitreous and lower pressure",
-   "Avoid miotics such as pilocarpine, which paradoxically worsen the block",
-   "Use Nd:YAG laser disruption of the anterior hyaloid and posterior capsule, with argon laser to the ciliary processes, when medical therapy fails",
-   "Proceed to pars plana vitrectomy with anterior hyaloid disruption, often combined with irido-zonulo-hyaloidectomy, for refractory cases",
-   "Exclude mimics including pupillary block, suprachoroidal haemorrhage and choroidal effusion before treating",
-   "Monitor intraocular pressure and anterior chamber depth for recurrence and take preventive precautions in the fellow eye during any future intraocular surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aqueous_misdirection_syndrome-pathway",
-   "title": "aqueous misdirection syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by a uniformly shallow or flat anterior chamber, both centrally and peripherally, with raised or normal intraocular pressure.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: flat anterior chamber with raised pressure unresponsive to iridotomy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: gonioscopy and assessment of anterior chamber depth centrally and peripherally, ultrasound biomicroscopy showing anterior ciliary body rotation and iridolenticular apposition, B-scan ultrasonography to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin intense cycloplegia with atropine to tighten the zonules and rotate the ciliary body posteriorly, re-establishing forward aqueous flow"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Administering miotics, which aggravate the anterior displacement of the lens-iris diaphragm."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aqueous misdirection syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "aqueous_misdirection_syndrome-matrix",
-   "title": "aqueous misdirection syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by a uniformly shallow or flat anterior chamber, both centrally and peripherally, with raised or normal intraocular",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ophthalmology",
+  "specialty": "ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by a uniformly shallow or flat anterior chamber, both centrally and peripherally, with raised or normal intraocular pressure.",
+      "Classically arises after incisional glaucoma or cataract surgery in an eye predisposed by short axial length, a small anterior segment or nanophthalmos.",
+      "A patent peripheral iridotomy that fails to deepen the chamber effectively excludes pupillary block and points to aqueous misdirection.",
+      "Central to the mechanism is posterior diversion of aqueous into or behind the vitreous, pushing the whole lens-iris or vitreous face forward.",
+      "Medical therapy combines cycloplegia to tighten the zonules and posteriorly rotate the ciliary body, aqueous suppressants and hyperosmotic agents to shrink the vitreous.",
+      "Miotics paradoxically worsen the condition and must be avoided.",
+      "Nd:YAG laser disruption of the anterior hyaloid, often through an iridotomy or after capsulotomy, can re-establish a normal aqueous pathway in pseudophakic eyes.",
+      "Refractory cases require pars plana vitrectomy with disruption of the anterior hyaloid, sometimes combined with lens removal, to create a unified fluid compartment."
     ],
-    [
-     "Key Investigations",
-     "gonioscopy and assessment of anterior chamber depth centrally and peripherally, ultrasound biomicroscopy showing anterior ciliary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Aqueous humour is abnormally diverted posteriorly, becoming trapped within or behind the vitreous body instead of flowing forward through the pupil to the trabecular meshwork. A postulated ciliolenticular or ciliovitreal block, in which the ciliary processes rotate forward and appose the lens equator, capsule or anterior hyaloid, prevents anterior aqueous movement. Accumulating aqueous in the vitreous cavity raises posterior segment pressure, driving the lens-iris diaphragm or vitreous face anteriorly and flattening the entire anterior chamber. Because the block is at the level of the ciliary body and hyaloid rather than the pupil, peripheral iridotomy does not relieve it. Reduced vitreous fluid conductivity and a crowded, small anterior segment predispose to the self-sustaining cycle.",
+    "additionalDifferentials": [
+      "pupillary block angle-closure glaucoma",
+      "suprachoroidal haemorrhage",
+      "annular choroidal effusion or detachment",
+      "overfiltration with a flat chamber and hypotony after trabeculectomy",
+      "wound leak with shallow anterior chamber",
+      "pseudophakic capsular block syndrome",
+      "posterior segment mass pushing the lens-iris diaphragm forward"
     ],
-    [
-     "Primary Differentials",
-     "pupillary block angle-closure glaucoma, suprachoroidal haemorrhage, annular choroidal effusion or detachment",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "gonioscopy and assessment of anterior chamber depth centrally and peripherally",
+      "ultrasound biomicroscopy showing anterior ciliary body rotation and iridolenticular apposition",
+      "B-scan ultrasonography to exclude suprachoroidal haemorrhage or choroidal effusion",
+      "anterior segment optical coherence tomography of the angle and chamber",
+      "assessment of iridotomy patency",
+      "intraocular pressure measurement over time",
+      "axial length biometry documenting a short or nanophthalmic eye"
     ],
-    [
-     "Management Strategy",
-     "Begin intense cycloplegia with atropine to tighten the zonules and rotate the ciliary body posteriorly, re-establishing forward",
-     "Core treatment modality"
+    "redFlags": [
+      "flat anterior chamber with raised pressure unresponsive to iridotomy",
+      "rapidly rising pressure after intraocular surgery in a small eye",
+      "features suggesting suprachoroidal haemorrhage requiring urgent differentiation",
+      "corneal decompensation from lens-corneal touch"
     ],
-    [
-     "Clinical Pitfall",
-     "Administering miotics, which aggravate the anterior displacement of the lens-iris diaphragm.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt recognition and a stepwise medical, laser and surgical approach the anterior chamber can usually be re-formed and pressure controlled, but the condition is often recurrent and the fellow eye is at risk after any future intraocular surgery.",
+    "pitfalls": [
+      "Administering miotics, which aggravate the anterior displacement of the lens-iris diaphragm.",
+      "Repeatedly performing or enlarging an iridotomy when pupillary block has already been excluded.",
+      "Missing an occult suprachoroidal haemorrhage that mimics the flat chamber picture.",
+      "Failing to warn the patient and plan prophylaxis before surgery on the predisposed fellow eye.",
+      "Delaying definitive vitrectomy in phakic or refractory cases and allowing prolonged corneal-lens touch."
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Glaucoma",
+      "Shields Textbook of Glaucoma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin intense cycloplegia with atropine to tighten the zonules and rotate the ciliary body posteriorly, re-establishing forward aqueous flow",
+      "Add aqueous suppressants such as topical beta-blockers, alpha-agonists and carbonic anhydrase inhibitors, with hyperosmotic agents to shrink the vitreous and lower pressure",
+      "Avoid miotics such as pilocarpine, which paradoxically worsen the block",
+      "Use Nd:YAG laser disruption of the anterior hyaloid and posterior capsule, with argon laser to the ciliary processes, when medical therapy fails",
+      "Proceed to pars plana vitrectomy with anterior hyaloid disruption, often combined with irido-zonulo-hyaloidectomy, for refractory cases",
+      "Exclude mimics including pupillary block, suprachoroidal haemorrhage and choroidal effusion before treating",
+      "Monitor intraocular pressure and anterior chamber depth for recurrence and take preventive precautions in the fellow eye during any future intraocular surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for aqueous misdirection syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aqueous-misdirection-syndrome-real-image",
-   "title": "aqueous misdirection syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "aqueous_misdirection_syndrome-pathway",
+      "title": "aqueous misdirection syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by a uniformly shallow or flat anterior chamber, both centrally and peripherally, with raised or normal intraocular pressure.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: flat anterior chamber with raised pressure unresponsive to iridotomy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: gonioscopy and assessment of anterior chamber depth centrally and peripherally, ultrasound biomicroscopy showing anterior ciliary body rotation and iridolenticular apposition, B-scan ultrasonography to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin intense cycloplegia with atropine to tighten the zonules and rotate the ciliary body posteriorly, re-establishing forward aqueous flow"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Administering miotics, which aggravate the anterior displacement of the lens-iris diaphragm."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aqueous misdirection syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aqueous_misdirection_syndrome-matrix",
+      "title": "aqueous misdirection syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by a uniformly shallow or flat anterior chamber, both centrally and peripherally, with raised or normal intraocular",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "gonioscopy and assessment of anterior chamber depth centrally and peripherally, ultrasound biomicroscopy showing anterior ciliary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "pupillary block angle-closure glaucoma, suprachoroidal haemorrhage, annular choroidal effusion or detachment",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin intense cycloplegia with atropine to tighten the zonules and rotate the ciliary body posteriorly, re-establishing forward",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Administering miotics, which aggravate the anterior displacement of the lens-iris diaphragm.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aqueous misdirection syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aqueous_misdirection_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gonioscopy and anterior chamber depth",
+          "cells": [
+            {
+              "text": "Central and peripheral chamber depth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound biomicroscopy",
+          "cells": [
+            {
+              "text": "Anterior ciliary body rotation and iridolenticular apposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Excludes suprachoroidal haemorrhage or choroidal effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment optical coherence tomography",
+          "cells": [
+            {
+              "text": "Angle and chamber"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of iridotomy patency",
+          "cells": [
+            {
+              "text": "Patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axial length biometry",
+          "cells": [
+            {
+              "text": "Short or nanophthalmic eye"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aqueous_misdirection_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pupillary block angle-closure glaucoma",
+          "cells": [
+            {
+              "text": "Excluded before treatment; iridotomy patency is checked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suprachoroidal haemorrhage",
+          "cells": [
+            {
+              "text": "Excluded by B-scan ultrasonography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aqueous_misdirection_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intense cycloplegia with atropine",
+          "cells": [
+            {
+              "text": "Tightens zonules and rotates the ciliary body posteriorly"
+            },
+            {
+              "text": "Re-establishes forward aqueous flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aqueous suppressants and hyperosmotic agents",
+          "cells": [
+            {
+              "text": "Beta-blockers, alpha-agonists, carbonic anhydrase inhibitors, hyperosmotics"
+            },
+            {
+              "text": "Shrinks the vitreous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid miotics",
+          "cells": [
+            {
+              "text": "Pilocarpine and other miotics"
+            },
+            {
+              "text": "Paradoxically worsen the block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nd:YAG laser disruption",
+          "cells": [
+            {
+              "text": "Anterior hyaloid and posterior capsule; argon laser to ciliary processes"
+            },
+            {
+              "text": "When medical therapy fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pars plana vitrectomy",
+          "cells": [
+            {
+              "text": "Anterior hyaloid disruption, often with irido-zonulo-hyaloidectomy"
+            },
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Intraocular pressure and anterior chamber depth for recurrence"
+            },
+            {
+              "text": "Precautions in the fellow eye during future intraocular surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aqueous_misdirection_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of aqueous misdirection syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Flat anterior chamber with raised pressure, often in a small eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Raised pressure unresponsive to iridotomy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review; exclude pupillary block and suprachoroidal haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gonioscopy, UBM for ciliary body rotation, B-scan, AS-OCT, axial length",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ciliary body rotation with iridolenticular apposition on UBM?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intense cycloplegia with atropine to re-establish forward flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aqueous suppressants and hyperosmotic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid miotics such as pilocarpine, which worsen the block",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nd:YAG hyaloid disruption or vitrectomy if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor pressure and chamber depth for recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

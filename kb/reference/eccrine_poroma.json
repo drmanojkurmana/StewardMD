@@ -1,174 +1,463 @@
 {
- "id": "eccrine_poroma",
- "name": "eccrine poroma",
- "aliases": [
-  "poroma",
-  "acrospiroma",
-  "poroma of the sweat duct"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as a solitary, slowly growing, often reddish or skin-coloured papule or nodule, classically on the sole or side of the foot.",
-   "The palms, and increasingly other sites such as the trunk and head, may also be affected, reflecting derivation from any acrosyringeal duct.",
-   "Lesions are frequently vascular in appearance and may sit in a shallow cup-shaped depression with a surrounding keratotic collarette.",
-   "They can bleed readily on minor trauma and are commonly mistaken for a pyogenic granuloma or amelanotic melanoma.",
-   "Dermoscopy may show polymorphous vessels, a pink-white structureless background and a vascular pattern that overlaps with malignant lesions.",
-   "Histology shows a well-demarcated proliferation of small, monomorphous cuboidal poroid cells connected to the epidermis, with ductal differentiation.",
-   "Porocarcinoma, the malignant counterpart, may arise de novo or within a long-standing poroma and shows atypia, infiltration and mitoses.",
-   "Complete excision with histopathological confirmation is the treatment of choice, given the difficulty of clinical differentiation from malignancy."
+  "id": "eccrine_poroma",
+  "name": "eccrine poroma",
+  "aliases": [
+    "poroma",
+    "acrospiroma",
+    "poroma of the sweat duct"
   ],
-  "pathophysiology": "Poroma is a benign adnexal neoplasm arising from the terminal portion of the sweat duct, the acrosyringium, and although traditionally termed eccrine it may show apocrine or folliculosebaceous differentiation. Tumour cells are small, uniform poroid keratinocytes forming broad anastomosing cords connected to the overlying epidermis, punctuated by ductal lumina reflecting the sweat-duct lineage. Recurrent gene fusions involving YAP1 with MAML2 or NUTM1 have been identified, indicating a shared oncogenic driver across the poroma-porocarcinoma spectrum. Malignant transformation to porocarcinoma involves acquisition of cytological atypia, infiltrative growth and a capacity for lymphatic and distant spread.",
-  "additionalDifferentials": [
-   "pyogenic granuloma",
-   "amelanotic melanoma",
-   "basal cell carcinoma",
-   "squamous cell carcinoma",
-   "porocarcinoma",
-   "viral wart or verruca",
-   "irritated seborrhoeic keratosis"
-  ],
-  "additionalInvestigations": [
-   "dermoscopy to characterise the vascular pattern",
-   "excisional biopsy with histopathology",
-   "immunohistochemistry demonstrating ductal (EMA/CEA) differentiation where required",
-   "sentinel lymph node assessment if porocarcinoma is confirmed",
-   "staging imaging when malignancy with metastatic potential is diagnosed"
-  ],
-  "redFlags": [
-   "rapid growth, ulceration or bleeding suggesting porocarcinoma",
-   "an infiltrative, indurated or fixed lesion",
-   "recurrence after excision",
-   "regional lymphadenopathy indicating possible metastatic porocarcinoma"
-  ],
-  "prognosis": "Benign poroma is cured by complete excision with a low recurrence rate. Porocarcinoma carries a less favourable outlook, with potential for local recurrence and lymphatic or distant metastasis, so early recognition is important.",
-  "pitfalls": [
-   "Mistaking a bleeding vascular poroma for a pyogenic granuloma and destroying it without histology.",
-   "Overlooking porocarcinoma arising within a long-standing poroma that suddenly changes.",
-   "Failing to excise completely, allowing recurrence.",
-   "Confusing the lesion with a plantar wart and applying inappropriate keratolytic or destructive therapy."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "Weedon's Skin Pathology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the benign poroma with complete surgical excision, which is curative with a low recurrence rate",
-   "Confirm the diagnosis histologically and distinguish it from porocarcinoma, pyogenic granuloma and amelanotic melanoma",
-   "If porocarcinoma is confirmed, perform wide local excision with clear margins, or Mohs micrographic surgery for anatomically critical sites",
-   "Arrange sentinel lymph node assessment and staging imaging when malignant transformation with metastatic potential is diagnosed",
-   "Refer to dermatology or plastic surgery for excision, and to oncology for porocarcinoma with nodal or distant spread",
-   "Provide clinical follow-up for local recurrence and, in porocarcinoma, for lymphatic or distant metastasis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eccrine_poroma-pathway",
-   "title": "eccrine poroma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as a solitary, slowly growing, often reddish or skin-coloured papule or nodule, classically on the sole or side of the foot.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rapid growth, ulceration or bleeding suggesting porocarcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: dermoscopy to characterise the vascular pattern, excisional biopsy with histopathology, immunohistochemistry demonstrating ductal (EMA/CEA) differentiation where required"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the benign poroma with complete surgical excision, which is curative with a low recurrence rate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a bleeding vascular poroma for a pyogenic granuloma and destroying it without histology."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eccrine poroma."
-  }
- ],
- "tables": [
-  {
-   "id": "eccrine_poroma-matrix",
-   "title": "eccrine poroma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as a solitary, slowly growing, often reddish or skin-coloured papule or nodule, classically on the sole or side of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as a solitary, slowly growing, often reddish or skin-coloured papule or nodule, classically on the sole or side of the foot.",
+      "The palms, and increasingly other sites such as the trunk and head, may also be affected, reflecting derivation from any acrosyringeal duct.",
+      "Lesions are frequently vascular in appearance and may sit in a shallow cup-shaped depression with a surrounding keratotic collarette.",
+      "They can bleed readily on minor trauma and are commonly mistaken for a pyogenic granuloma or amelanotic melanoma.",
+      "Dermoscopy may show polymorphous vessels, a pink-white structureless background and a vascular pattern that overlaps with malignant lesions.",
+      "Histology shows a well-demarcated proliferation of small, monomorphous cuboidal poroid cells connected to the epidermis, with ductal differentiation.",
+      "Porocarcinoma, the malignant counterpart, may arise de novo or within a long-standing poroma and shows atypia, infiltration and mitoses.",
+      "Complete excision with histopathological confirmation is the treatment of choice, given the difficulty of clinical differentiation from malignancy."
     ],
-    [
-     "Key Investigations",
-     "dermoscopy to characterise the vascular pattern, excisional biopsy with histopathology, immunohistochemistry demonstrating ductal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Poroma is a benign adnexal neoplasm arising from the terminal portion of the sweat duct, the acrosyringium, and although traditionally termed eccrine it may show apocrine or folliculosebaceous differentiation. Tumour cells are small, uniform poroid keratinocytes forming broad anastomosing cords connected to the overlying epidermis, punctuated by ductal lumina reflecting the sweat-duct lineage. Recurrent gene fusions involving YAP1 with MAML2 or NUTM1 have been identified, indicating a shared oncogenic driver across the poroma-porocarcinoma spectrum. Malignant transformation to porocarcinoma involves acquisition of cytological atypia, infiltrative growth and a capacity for lymphatic and distant spread.",
+    "additionalDifferentials": [
+      "pyogenic granuloma",
+      "amelanotic melanoma",
+      "basal cell carcinoma",
+      "squamous cell carcinoma",
+      "porocarcinoma",
+      "viral wart or verruca",
+      "irritated seborrhoeic keratosis"
     ],
-    [
-     "Primary Differentials",
-     "pyogenic granuloma, amelanotic melanoma, basal cell carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "dermoscopy to characterise the vascular pattern",
+      "excisional biopsy with histopathology",
+      "immunohistochemistry demonstrating ductal (EMA/CEA) differentiation where required",
+      "sentinel lymph node assessment if porocarcinoma is confirmed",
+      "staging imaging when malignancy with metastatic potential is diagnosed"
     ],
-    [
-     "Management Strategy",
-     "Treat the benign poroma with complete surgical excision, which is curative with a low recurrence rate",
-     "Core treatment modality"
+    "redFlags": [
+      "rapid growth, ulceration or bleeding suggesting porocarcinoma",
+      "an infiltrative, indurated or fixed lesion",
+      "recurrence after excision",
+      "regional lymphadenopathy indicating possible metastatic porocarcinoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a bleeding vascular poroma for a pyogenic granuloma and destroying it without histology.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign poroma is cured by complete excision with a low recurrence rate. Porocarcinoma carries a less favourable outlook, with potential for local recurrence and lymphatic or distant metastasis, so early recognition is important.",
+    "pitfalls": [
+      "Mistaking a bleeding vascular poroma for a pyogenic granuloma and destroying it without histology.",
+      "Overlooking porocarcinoma arising within a long-standing poroma that suddenly changes.",
+      "Failing to excise completely, allowing recurrence.",
+      "Confusing the lesion with a plantar wart and applying inappropriate keratolytic or destructive therapy."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "Weedon's Skin Pathology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the benign poroma with complete surgical excision, which is curative with a low recurrence rate",
+      "Confirm the diagnosis histologically and distinguish it from porocarcinoma, pyogenic granuloma and amelanotic melanoma",
+      "If porocarcinoma is confirmed, perform wide local excision with clear margins, or Mohs micrographic surgery for anatomically critical sites",
+      "Arrange sentinel lymph node assessment and staging imaging when malignant transformation with metastatic potential is diagnosed",
+      "Refer to dermatology or plastic surgery for excision, and to oncology for porocarcinoma with nodal or distant spread",
+      "Provide clinical follow-up for local recurrence and, in porocarcinoma, for lymphatic or distant metastasis"
     ]
-   ],
-   "caption": "Overview comparison matrix for eccrine poroma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eccrine-poroma-real-image",
-   "title": "eccrine poroma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "eccrine_poroma-pathway",
+      "title": "eccrine poroma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as a solitary, slowly growing, often reddish or skin-coloured papule or nodule, classically on the sole or side of the foot.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rapid growth, ulceration or bleeding suggesting porocarcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: dermoscopy to characterise the vascular pattern, excisional biopsy with histopathology, immunohistochemistry demonstrating ductal (EMA/CEA) differentiation where required"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the benign poroma with complete surgical excision, which is curative with a low recurrence rate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a bleeding vascular poroma for a pyogenic granuloma and destroying it without histology."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eccrine poroma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eccrine_poroma-matrix",
+      "title": "eccrine poroma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as a solitary, slowly growing, often reddish or skin-coloured papule or nodule, classically on the sole or side of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "dermoscopy to characterise the vascular pattern, excisional biopsy with histopathology, immunohistochemistry demonstrating ductal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "pyogenic granuloma, amelanotic melanoma, basal cell carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the benign poroma with complete surgical excision, which is curative with a low recurrence rate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a bleeding vascular poroma for a pyogenic granuloma and destroying it without histology.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eccrine poroma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eccrine_poroma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Vascular pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for EMA and CEA",
+          "cells": [
+            {
+              "text": "Ductal differentiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sentinel lymph node assessment",
+          "cells": [
+            {
+              "text": "Nodal spread if porocarcinoma confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "Metastatic potential when malignancy is diagnosed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eccrine_poroma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyogenic granuloma",
+          "cells": [
+            {
+              "text": "Bleeding vascular lesion that can be mistaken for poroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amelanotic melanoma",
+          "cells": [
+            {
+              "text": "Non-pigmented lesion that must be excluded by histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porocarcinoma",
+          "cells": [
+            {
+              "text": "Malignant change within a poroma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eccrine_poroma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Curative for benign poroma, with low recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Distinguishes poroma from porocarcinoma and amelanotic melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide local excision",
+          "cells": [
+            {
+              "text": "Confirmed porocarcinoma with clear margins; Mohs for critical sites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodal and staging assessment",
+          "cells": [
+            {
+              "text": "Sentinel node and imaging when metastatic potential is diagnosed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referrals",
+          "cells": [
+            {
+              "text": "Dermatology or plastic surgery for excision; oncology for nodal or distant spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Local recurrence and, in porocarcinoma, metastasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eccrine_poroma-dx-mgmt",
+      "title": "Diagnosis and management of eccrine poroma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected eccrine poroma: vascular nodule on the skin of an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, ulceration, infiltration, regional lymph nodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent excision and histology for suspected porocarcinoma; check nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy; excisional biopsy with histology; EMA and CEA staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology confirm a benign poroma rather than porocarcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pyogenic granuloma, amelanotic melanoma or basal or squamous carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision, which is curative for benign poroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Histological confirmation to exclude porocarcinoma and melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Wide local excision with clear margins if porocarcinoma is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sentinel node assessment and staging imaging for metastatic potential",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Oncology referral for nodal or distant spread; local follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign poroma is cured by complete excision; porocarcinoma can metastasise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

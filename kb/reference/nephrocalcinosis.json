@@ -1,176 +1,454 @@
 {
- "id": "nephrocalcinosis",
- "name": "Nephrocalcinosis",
- "aliases": [
-  "renal calcinosis",
-  "medullary nephrocalcinosis",
-  "cortical nephrocalcinosis",
-  "renal parenchymal calcification"
- ],
- "class": "non_infective",
- "system": "Renal / Nephrology",
- "specialty": "Nephrology / Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Nephrocalcinosis is generalised deposition of calcium salts within the renal parenchyma, distinct from discrete calculi in the collecting system",
-   "The medullary pattern is far more common and usually reflects a disorder of calcium handling",
-   "The classic medullary causes are hyperparathyroidism, distal (type 1) renal tubular acidosis and medullary sponge kidney",
-   "Further medullary causes include hypervitaminosis D, sarcoidosis, milk-alkali syndrome and primary hyperoxaluria",
-   "Cortical nephrocalcinosis is rarer and follows acute cortical necrosis, chronic glomerulonephritis or severe pyelonephritis",
-   "It is often found incidentally on imaging; ultrasound shows echogenic medullary pyramids in the medullary pattern",
-   "Management is directed at the underlying metabolic cause rather than at the calcification itself",
-   "Distal renal tubular acidosis is suggested when nephrocalcinosis accompanies a hyperchloraemic metabolic acidosis with an inappropriately alkaline urine, and is treated with alkali replacement"
+  "id": "nephrocalcinosis",
+  "name": "Nephrocalcinosis",
+  "aliases": [
+    "renal calcinosis",
+    "medullary nephrocalcinosis",
+    "cortical nephrocalcinosis",
+    "renal parenchymal calcification"
   ],
-  "pathophysiology": "Nephrocalcinosis denotes deposition of calcium, as oxalate or phosphate, diffusely through the renal tissue, most often in the medulla. Medullary deposition arises when there is an increased filtered calcium load, impaired urinary acidification or reduced inhibitor activity, as in hyperparathyroidism, distal renal tubular acidosis (where alkaline urine and hypocitraturia favour calcium phosphate precipitation), medullary sponge kidney with stasis in dilated collecting ducts, and states of hypercalcaemia or hyperoxaluria. Cortical nephrocalcinosis instead follows destructive processes such as acute cortical necrosis or chronic infection, where calcium is laid down in devitalised tissue as dystrophic calcification.",
-  "additionalDifferentials": [
-   "Medullary sponge kidney",
-   "Distal renal tubular acidosis",
-   "Primary hyperparathyroidism and other hypercalcaemic states",
-   "Primary or enteric hyperoxaluria",
-   "Sarcoidosis and vitamin D excess",
-   "Acute cortical necrosis or chronic pyelonephritis for the cortical pattern",
-   "Papillary calcification of medullary origin"
-  ],
-  "additionalInvestigations": [
-   "Renal ultrasound, supplemented by CT, to confirm and characterise a medullary versus cortical pattern",
-   "Serum calcium, phosphate and parathyroid hormone",
-   "Serum and urine pH, bicarbonate and electrolytes to assess for distal renal tubular acidosis",
-   "24-hour urine calcium, oxalate and citrate",
-   "Serum vitamin D and, where indicated, angiotensin-converting enzyme for sarcoidosis",
-   "Urinalysis and renal function tests"
-  ],
-  "redFlags": [
-   "Progressive chronic kidney disease from an untreated underlying disorder",
-   "Severe hypercalcaemia with acute kidney injury",
-   "Nephrocalcinosis in a child suggesting primary hyperoxaluria or an inherited tubulopathy",
-   "Superimposed stones causing obstruction"
-  ],
-  "prognosis": "The renal outlook depends on the underlying cause and how early it is treated; some tubulopathies stabilise with alkali therapy, whereas primary hyperoxaluria and progressive hypercalcaemic disorders can lead to established renal failure.",
-  "pitfalls": [
-   "Confusing nephrocalcinosis, which is parenchymal, with nephrolithiasis in the collecting system",
-   "Failing to search for a treatable metabolic cause such as distal renal tubular acidosis or hyperparathyroidism",
-   "Missing primary hyperoxaluria in a child, in whom it is progressive and serious",
-   "Attributing renal impairment to the calcification rather than the underlying disease"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology (Feehally et al.)",
-   "Campbell-Walsh-Wein Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying disorder of calcium handling rather than the calcification itself",
-   "Give alkali therapy (potassium citrate or bicarbonate) to correct distal renal tubular acidosis and raise urinary citrate",
-   "Manage primary hyperoxaluria with high fluid intake, citrate, pyridoxine in responsive type 1 disease and oxalate reduction, referring for consideration of liver and kidney transplantation in advanced cases",
-   "Treat hypercalcaemic drivers with parathyroidectomy for hyperparathyroidism, withdrawal of excess vitamin D, and corticosteroids for sarcoidosis",
-   "Maintain generous fluid intake and appropriate dietary measures to reduce urinary crystallisation",
-   "Monitor renal function and serial imaging alongside serum and urine calcium, oxalate and citrate",
-   "Refer for genetic testing and counselling where a hereditary tubulopathy or primary hyperoxaluria is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nephrocalcinosis-pathway",
-   "title": "Nephrocalcinosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Nephrocalcinosis is generalised deposition of calcium salts within the renal parenchyma, distinct from discrete calculi in the collecting system",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive chronic kidney disease from an untreated underlying disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal ultrasound, supplemented by CT, to confirm and characterise a medullary versus cortical pattern, Serum calcium, phosphate and parathyroid hormone, Serum and urine pH, bicarbonate and electrolytes to assess for distal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying disorder of calcium handling rather than the calcification itself"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing nephrocalcinosis, which is parenchymal, with nephrolithiasis in the collecting system"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nephrocalcinosis."
-  }
- ],
- "tables": [
-  {
-   "id": "nephrocalcinosis-matrix",
-   "title": "Nephrocalcinosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Nephrocalcinosis is generalised deposition of calcium salts within the renal parenchyma, distinct from discrete calculi in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Nephrology",
+  "specialty": "Nephrology / Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Nephrocalcinosis is generalised deposition of calcium salts within the renal parenchyma, distinct from discrete calculi in the collecting system",
+      "The medullary pattern is far more common and usually reflects a disorder of calcium handling",
+      "The classic medullary causes are hyperparathyroidism, distal (type 1) renal tubular acidosis and medullary sponge kidney",
+      "Further medullary causes include hypervitaminosis D, sarcoidosis, milk-alkali syndrome and primary hyperoxaluria",
+      "Cortical nephrocalcinosis is rarer and follows acute cortical necrosis, chronic glomerulonephritis or severe pyelonephritis",
+      "It is often found incidentally on imaging; ultrasound shows echogenic medullary pyramids in the medullary pattern",
+      "Management is directed at the underlying metabolic cause rather than at the calcification itself",
+      "Distal renal tubular acidosis is suggested when nephrocalcinosis accompanies a hyperchloraemic metabolic acidosis with an inappropriately alkaline urine, and is treated with alkali replacement"
     ],
-    [
-     "Key Investigations",
-     "Renal ultrasound, supplemented by CT, to confirm and characterise a medullary versus cortical pattern, Serum calcium, phosphate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nephrocalcinosis denotes deposition of calcium, as oxalate or phosphate, diffusely through the renal tissue, most often in the medulla. Medullary deposition arises when there is an increased filtered calcium load, impaired urinary acidification or reduced inhibitor activity, as in hyperparathyroidism, distal renal tubular acidosis (where alkaline urine and hypocitraturia favour calcium phosphate precipitation), medullary sponge kidney with stasis in dilated collecting ducts, and states of hypercalcaemia or hyperoxaluria. Cortical nephrocalcinosis instead follows destructive processes such as acute cortical necrosis or chronic infection, where calcium is laid down in devitalised tissue as dystrophic calcification.",
+    "additionalDifferentials": [
+      "Medullary sponge kidney",
+      "Distal renal tubular acidosis",
+      "Primary hyperparathyroidism and other hypercalcaemic states",
+      "Primary or enteric hyperoxaluria",
+      "Sarcoidosis and vitamin D excess",
+      "Acute cortical necrosis or chronic pyelonephritis for the cortical pattern",
+      "Papillary calcification of medullary origin"
     ],
-    [
-     "Primary Differentials",
-     "Medullary sponge kidney, Distal renal tubular acidosis, Primary hyperparathyroidism and other hypercalcaemic states",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal ultrasound, supplemented by CT, to confirm and characterise a medullary versus cortical pattern",
+      "Serum calcium, phosphate and parathyroid hormone",
+      "Serum and urine pH, bicarbonate and electrolytes to assess for distal renal tubular acidosis",
+      "24-hour urine calcium, oxalate and citrate",
+      "Serum vitamin D and, where indicated, angiotensin-converting enzyme for sarcoidosis",
+      "Urinalysis and renal function tests"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying disorder of calcium handling rather than the calcification itself",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive chronic kidney disease from an untreated underlying disorder",
+      "Severe hypercalcaemia with acute kidney injury",
+      "Nephrocalcinosis in a child suggesting primary hyperoxaluria or an inherited tubulopathy",
+      "Superimposed stones causing obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing nephrocalcinosis, which is parenchymal, with nephrolithiasis in the collecting system",
-     "Prevent diagnostic or management error"
+    "prognosis": "The renal outlook depends on the underlying cause and how early it is treated; some tubulopathies stabilise with alkali therapy, whereas primary hyperoxaluria and progressive hypercalcaemic disorders can lead to established renal failure.",
+    "pitfalls": [
+      "Confusing nephrocalcinosis, which is parenchymal, with nephrolithiasis in the collecting system",
+      "Failing to search for a treatable metabolic cause such as distal renal tubular acidosis or hyperparathyroidism",
+      "Missing primary hyperoxaluria in a child, in whom it is progressive and serious",
+      "Attributing renal impairment to the calcification rather than the underlying disease"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology (Feehally et al.)",
+      "Campbell-Walsh-Wein Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying disorder of calcium handling rather than the calcification itself",
+      "Give alkali therapy (potassium citrate or bicarbonate) to correct distal renal tubular acidosis and raise urinary citrate",
+      "Manage primary hyperoxaluria with high fluid intake, citrate, pyridoxine in responsive type 1 disease and oxalate reduction, referring for consideration of liver and kidney transplantation in advanced cases",
+      "Treat hypercalcaemic drivers with parathyroidectomy for hyperparathyroidism, withdrawal of excess vitamin D, and corticosteroids for sarcoidosis",
+      "Maintain generous fluid intake and appropriate dietary measures to reduce urinary crystallisation",
+      "Monitor renal function and serial imaging alongside serum and urine calcium, oxalate and citrate",
+      "Refer for genetic testing and counselling where a hereditary tubulopathy or primary hyperoxaluria is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for nephrocalcinosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nephrocalcinosis-real-image",
-   "title": "Nephrocalcinosis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "nephrocalcinosis-pathway",
+      "title": "Nephrocalcinosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Nephrocalcinosis is generalised deposition of calcium salts within the renal parenchyma, distinct from discrete calculi in the collecting system",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive chronic kidney disease from an untreated underlying disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal ultrasound, supplemented by CT, to confirm and characterise a medullary versus cortical pattern, Serum calcium, phosphate and parathyroid hormone, Serum and urine pH, bicarbonate and electrolytes to assess for distal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying disorder of calcium handling rather than the calcification itself"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing nephrocalcinosis, which is parenchymal, with nephrolithiasis in the collecting system"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nephrocalcinosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nephrocalcinosis-matrix",
+      "title": "Nephrocalcinosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Nephrocalcinosis is generalised deposition of calcium salts within the renal parenchyma, distinct from discrete calculi in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal ultrasound, supplemented by CT, to confirm and characterise a medullary versus cortical pattern, Serum calcium, phosphate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Medullary sponge kidney, Distal renal tubular acidosis, Primary hyperparathyroidism and other hypercalcaemic states",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying disorder of calcium handling rather than the calcification itself",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing nephrocalcinosis, which is parenchymal, with nephrolithiasis in the collecting system",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nephrocalcinosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nephrocalcinosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal ultrasound, with CT if needed",
+          "cells": [
+            {
+              "text": "Medullary versus cortical pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate and parathyroid hormone",
+          "cells": [
+            {
+              "text": "Hypercalcaemic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine pH, bicarbonate and electrolytes",
+          "cells": [
+            {
+              "text": "Distal renal tubular acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urine calcium, oxalate and citrate",
+          "cells": [
+            {
+              "text": "Calcium load and hyperoxaluria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum vitamin D and ACE, where indicated",
+          "cells": [
+            {
+              "text": "Vitamin D excess or sarcoidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nephrocalcinosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Medullary sponge kidney",
+          "cells": [
+            {
+              "text": "Medullary pattern without a metabolic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal renal tubular acidosis",
+          "cells": [
+            {
+              "text": "Impaired acidification; treatable with alkali"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Hypercalcaemic state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary or enteric hyperoxaluria",
+          "cells": [
+            {
+              "text": "Oxalate deposition; progressive in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute cortical necrosis or chronic pyelonephritis",
+          "cells": [
+            {
+              "text": "Cortical pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nephrocalcinosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying calcium disorder",
+          "cells": [
+            {
+              "text": "Direct therapy at the cause, not the calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alkali therapy",
+          "cells": [
+            {
+              "text": "Potassium citrate or bicarbonate for distal renal tubular acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperoxaluria management",
+          "cells": [
+            {
+              "text": "High fluid intake, citrate and pyridoxine in responsive type 1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Consideration of combined liver and kidney treatment for primary hyperoxaluria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nephrocalcinosis-dx-mgmt",
+      "title": "Diagnosis and management of Nephrocalcinosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Renal calcification on ultrasound or CT, with or without stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive kidney injury, severe hypercalcaemia, hyperoxaluria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of hypercalcaemia or obstruction; nephrology referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal ultrasound or CT, calcium, PTH, acid-base, 24-hour urine oxalate and citrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Medullary pattern with a raised urinary calcium or acid-base defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cortical causes or medullary sponge kidney; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying disorder of calcium handling",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Alkali therapy for distal renal tubular acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High fluids, citrate and oxalate reduction for hyperoxaluria",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nephrology and specialist referral for progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on cause; hyperoxaluria or hypercalcaemia can progress to renal failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

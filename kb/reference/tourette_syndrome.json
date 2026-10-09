@@ -1,174 +1,463 @@
 {
- "id": "tourette_syndrome",
- "name": "Tourette syndrome",
- "aliases": [
-  "Tourette's disorder",
-  "Gilles de la Tourette syndrome",
-  "TS"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The diagnosis requires both multiple motor tics and one or more vocal (phonic) tics, present at some time during the illness, with onset before age 18 and persistence for more than a year",
-   "Tics are sudden, rapid, recurrent, nonrhythmic movements or vocalisations that wax and wane in severity and often shift in type over time",
-   "Many patients experience premonitory urges, an uncomfortable sensation relieved by performing the tic, and can suppress tics temporarily at the cost of rising inner tension",
-   "Coprolalia, the involuntary utterance of obscenities, is popularly associated with the condition but actually occurs in only a minority of patients",
-   "Comorbidity is the rule rather than the exception, particularly attention-deficit/hyperactivity disorder and obsessive-compulsive disorder, which often cause more impairment than the tics",
-   "Behavioural treatment, especially comprehensive behavioural intervention for tics including habit reversal training, is first-line; medication is reserved for troublesome tics",
-   "Pharmacological options for severe tics include agents acting on dopaminergic transmission and certain alpha-adrenergic agents, chosen by symptom burden and comorbidity",
-   "Psychoeducation, school liaison, and treating comorbid conditions usually improve function more than suppressing the tics themselves"
+  "id": "tourette_syndrome",
+  "name": "Tourette syndrome",
+  "aliases": [
+    "Tourette's disorder",
+    "Gilles de la Tourette syndrome",
+    "TS"
   ],
-  "pathophysiology": "Tourette syndrome is a neurodevelopmental disorder involving dysfunction of cortico-striato-thalamo-cortical circuits, with abnormalities in dopaminergic neurotransmission within the basal ganglia thought to underlie the generation of tics. It is highly heritable with a complex polygenic basis, and environmental and possibly immune-mediated factors may modulate expression, while overlapping circuitry accounts for the frequent association with obsessive-compulsive and attentional symptoms.",
-  "additionalDifferentials": [
-   "Provisional (transient) tic disorder or persistent motor or vocal tic disorder",
-   "Stereotypic movement disorder",
-   "Myoclonus, dystonia, or chorea from a neurological cause",
-   "Obsessive-compulsive disorder with compulsions resembling tics",
-   "Medication-induced or substance-induced movement disorder",
-   "Functional (psychogenic) movement disorder"
-  ],
-  "additionalInvestigations": [
-   "Detailed clinical history and observation of tics over time",
-   "Screening for comorbid ADHD, obsessive-compulsive disorder, anxiety, and mood disorders",
-   "Standardised tic severity rating scales to monitor course",
-   "Neurological examination to exclude other movement disorders",
-   "Further neurological workup only if atypical features suggest a secondary cause"
-  ],
-  "redFlags": [
-   "Self-injurious tics causing physical harm",
-   "Abrupt, explosive onset or neurological signs suggesting a secondary or acquired cause",
-   "Severe comorbid depression with suicidal ideation",
-   "Marked functional deterioration from comorbid ADHD or obsessive-compulsive symptoms"
-  ],
-  "prognosis": "Tics typically emerge in childhood, peak in severity in early adolescence, and then decline in many patients, with a substantial proportion experiencing marked improvement or near-resolution by adulthood. Prognosis for overall function depends heavily on comorbid conditions, which often persist and drive impairment, so their recognition and treatment strongly influence outcome.",
-  "pitfalls": [
-   "Focusing on tic suppression while neglecting more impairing comorbid ADHD or obsessive-compulsive disorder",
-   "Assuming coprolalia is required for diagnosis when it is uncommon",
-   "Overmedicating mild tics that do not warrant pharmacotherapy",
-   "Misinterpreting suppressible tics as voluntary or attention-seeking",
-   "Missing an atypical presentation that points to a secondary movement disorder"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Psychoeducation and reassurance about the natural, waxing-and-waning course, with school and family support",
-   "Comprehensive behavioural intervention for tics, including habit reversal training, as first-line treatment",
-   "Identify and treat comorbid attention-deficit/hyperactivity disorder and obsessive-compulsive disorder, which often cause greater impairment than the tics",
-   "Reserve medication for troublesome tics, using an alpha-2 agonist such as clonidine or guanfacine, or a dopamine-blocking agent such as aripiprazole or risperidone",
-   "Botulinum toxin injection for disabling focal motor or phonic tics",
-   "Consider deep brain stimulation for severe, treatment-refractory tics in adults",
-   "Coordinate multidisciplinary care across psychiatry, neurology, and psychology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tourette_syndrome-pathway",
-   "title": "Tourette syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The diagnosis requires both multiple motor tics and one or more vocal (phonic) tics, present at some time during the illness, with onset before age 18 and persistence for more than a year",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Self-injurious tics causing physical harm",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed clinical history and observation of tics over time, Screening for comorbid ADHD, obsessive-compulsive disorder, anxiety, and mood disorders, Standardised tic severity rating scales to monitor course"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Psychoeducation and reassurance about the natural, waxing-and-waning course, with school and family support"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing on tic suppression while neglecting more impairing comorbid ADHD or obsessive-compulsive disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tourette syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "tourette_syndrome-matrix",
-   "title": "Tourette syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The diagnosis requires both multiple motor tics and one or more vocal (phonic) tics, present at some time during the illness,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The diagnosis requires both multiple motor tics and one or more vocal (phonic) tics, present at some time during the illness, with onset before age 18 and persistence for more than a year",
+      "Tics are sudden, rapid, recurrent, nonrhythmic movements or vocalisations that wax and wane in severity and often shift in type over time",
+      "Many patients experience premonitory urges, an uncomfortable sensation relieved by performing the tic, and can suppress tics temporarily at the cost of rising inner tension",
+      "Coprolalia, the involuntary utterance of obscenities, is popularly associated with the condition but actually occurs in only a minority of patients",
+      "Comorbidity is the rule rather than the exception, particularly attention-deficit/hyperactivity disorder and obsessive-compulsive disorder, which often cause more impairment than the tics",
+      "Behavioural treatment, especially comprehensive behavioural intervention for tics including habit reversal training, is first-line; medication is reserved for troublesome tics",
+      "Pharmacological options for severe tics include agents acting on dopaminergic transmission and certain alpha-adrenergic agents, chosen by symptom burden and comorbidity",
+      "Psychoeducation, school liaison, and treating comorbid conditions usually improve function more than suppressing the tics themselves"
     ],
-    [
-     "Key Investigations",
-     "Detailed clinical history and observation of tics over time, Screening for comorbid ADHD, obsessive-compulsive disorder, anxiety,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tourette syndrome is a neurodevelopmental disorder involving dysfunction of cortico-striato-thalamo-cortical circuits, with abnormalities in dopaminergic neurotransmission within the basal ganglia thought to underlie the generation of tics. It is highly heritable with a complex polygenic basis, and environmental and possibly immune-mediated factors may modulate expression, while overlapping circuitry accounts for the frequent association with obsessive-compulsive and attentional symptoms.",
+    "additionalDifferentials": [
+      "Provisional (transient) tic disorder or persistent motor or vocal tic disorder",
+      "Stereotypic movement disorder",
+      "Myoclonus, dystonia, or chorea from a neurological cause",
+      "Obsessive-compulsive disorder with compulsions resembling tics",
+      "Medication-induced or substance-induced movement disorder",
+      "Functional (psychogenic) movement disorder"
     ],
-    [
-     "Primary Differentials",
-     "Provisional (transient) tic disorder or persistent motor or vocal tic disorder, Stereotypic movement disorder, Myoclonus,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed clinical history and observation of tics over time",
+      "Screening for comorbid ADHD, obsessive-compulsive disorder, anxiety, and mood disorders",
+      "Standardised tic severity rating scales to monitor course",
+      "Neurological examination to exclude other movement disorders",
+      "Further neurological workup only if atypical features suggest a secondary cause"
     ],
-    [
-     "Management Strategy",
-     "Psychoeducation and reassurance about the natural, waxing-and-waning course, with school and family support",
-     "Core treatment modality"
+    "redFlags": [
+      "Self-injurious tics causing physical harm",
+      "Abrupt, explosive onset or neurological signs suggesting a secondary or acquired cause",
+      "Severe comorbid depression with suicidal ideation",
+      "Marked functional deterioration from comorbid ADHD or obsessive-compulsive symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing on tic suppression while neglecting more impairing comorbid ADHD or obsessive-compulsive disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Tics typically emerge in childhood, peak in severity in early adolescence, and then decline in many patients, with a substantial proportion experiencing marked improvement or near-resolution by adulthood. Prognosis for overall function depends heavily on comorbid conditions, which often persist and drive impairment, so their recognition and treatment strongly influence outcome.",
+    "pitfalls": [
+      "Focusing on tic suppression while neglecting more impairing comorbid ADHD or obsessive-compulsive disorder",
+      "Assuming coprolalia is required for diagnosis when it is uncommon",
+      "Overmedicating mild tics that do not warrant pharmacotherapy",
+      "Misinterpreting suppressible tics as voluntary or attention-seeking",
+      "Missing an atypical presentation that points to a secondary movement disorder"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Psychoeducation and reassurance about the natural, waxing-and-waning course, with school and family support",
+      "Comprehensive behavioural intervention for tics, including habit reversal training, as first-line treatment",
+      "Identify and treat comorbid attention-deficit/hyperactivity disorder and obsessive-compulsive disorder, which often cause greater impairment than the tics",
+      "Reserve medication for troublesome tics, using an alpha-2 agonist such as clonidine or guanfacine, or a dopamine-blocking agent such as aripiprazole or risperidone",
+      "Botulinum toxin injection for disabling focal motor or phonic tics",
+      "Consider deep brain stimulation for severe, treatment-refractory tics in adults",
+      "Coordinate multidisciplinary care across psychiatry, neurology, and psychology"
     ]
-   ],
-   "caption": "Overview comparison matrix for tourette syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tourette-syndrome-real-image",
-   "title": "Tourette syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "tourette_syndrome-pathway",
+      "title": "Tourette syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The diagnosis requires both multiple motor tics and one or more vocal (phonic) tics, present at some time during the illness, with onset before age 18 and persistence for more than a year",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Self-injurious tics causing physical harm",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed clinical history and observation of tics over time, Screening for comorbid ADHD, obsessive-compulsive disorder, anxiety, and mood disorders, Standardised tic severity rating scales to monitor course"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Psychoeducation and reassurance about the natural, waxing-and-waning course, with school and family support"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing on tic suppression while neglecting more impairing comorbid ADHD or obsessive-compulsive disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tourette syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tourette_syndrome-matrix",
+      "title": "Tourette syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The diagnosis requires both multiple motor tics and one or more vocal (phonic) tics, present at some time during the illness,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed clinical history and observation of tics over time, Screening for comorbid ADHD, obsessive-compulsive disorder, anxiety,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Provisional (transient) tic disorder or persistent motor or vocal tic disorder, Stereotypic movement disorder, Myoclonus,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Psychoeducation and reassurance about the natural, waxing-and-waning course, with school and family support",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing on tic suppression while neglecting more impairing comorbid ADHD or obsessive-compulsive disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tourette syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tourette_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Tourette syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tourette syndrome: multiple motor tics and at least one vocal tic in childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: self-injurious tics, abrupt onset, or suicidal ideation with depression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent psychiatric or neurological review for harm or secondary cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Detailed tic history; comorbidity screen; tic severity scale; neurological exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do tics meet criteria for Tourette syndrome with comorbidity screened?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider provisional tic disorder, stereotypy or a secondary movement disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Psychoeducation and school and family support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Habit reversal training as first-line behavioural treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat comorbid ADHD and obsessive-compulsive disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Clonidine, guanfacine or an antipsychotic for troublesome tics",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Botulinum toxin for disabling focal tics",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Tics often peak in early adolescence and decline; comorbidity drives long-term function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tourette_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history and observation of tics over time",
+          "cells": [
+            {
+              "text": "Multiple motor and at least one vocal tic, onset before 18"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for ADHD, OCD, anxiety and mood disorders",
+          "cells": [
+            {
+              "text": "Comorbidity, which often drives impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tic severity rating scales",
+          "cells": [
+            {
+              "text": "Course monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Other movement disorders excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further neurological work-up",
+          "cells": [
+            {
+              "text": "Only if atypical features suggest a secondary cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tourette_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Provisional or persistent motor or vocal tic disorder",
+          "cells": [
+            {
+              "text": "Shorter duration or fewer tic types than Tourette syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myoclonus, dystonia or chorea from a neurological cause",
+          "cells": [
+            {
+              "text": "Abrupt or explosive onset, or neurological signs, point to a secondary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-induced movement disorder",
+          "cells": [
+            {
+              "text": "Temporal relation to a drug"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tourette_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychoeducation and reassurance",
+          "cells": [
+            {
+              "text": "Waxing-and-waning course; school and family support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comprehensive behavioural intervention",
+          "cells": [
+            {
+              "text": "Habit reversal training as first-line treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid ADHD and OCD",
+          "cells": [
+            {
+              "text": "Often cause greater impairment than the tics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication for troublesome tics",
+          "cells": [
+            {
+              "text": "Alpha-2 agonist such as clonidine or guanfacine, or aripiprazole or risperidone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Disabling focal motor or phonic tics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation",
+          "cells": [
+            {
+              "text": "Severe, treatment-refractory tics in adults"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

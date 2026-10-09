@@ -1,173 +1,451 @@
 {
- "id": "focal_dermal_hypoplasia",
- "name": "Focal dermal hypoplasia",
- "aliases": [
-  "Goltz syndrome",
-  "Goltz-Gorlin syndrome",
-  "PORCN",
-  "focal dermal hypoplasia syndrome"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A multisystem ectodermal-mesodermal disorder in which atrophic, linear skin lesions follow the lines of Blaschko",
-   "Soft, yellow-pink outpouchings of herniated fat through the thinned dermis (fat herniation) are a characteristic cutaneous sign",
-   "Raspberry-like papillomas around the mouth, anus and vulva, and periungual/mucosal papillomas, are frequent",
-   "Skeletal defects, classically osteopathia striata on radiographs and limb anomalies such as syndactyly and 'lobster-claw' hands, are common",
-   "Ocular (colobomata, microphthalmia) and dental anomalies frequently accompany the skin findings",
-   "X-linked dominant, caused by PORCN mutations; usually lethal in males, so most patients are female and mosaicism explains survival in the few affected males",
-   "Management is supportive and multidisciplinary, addressing skin, skeletal, ocular and dental problems"
+  "id": "focal_dermal_hypoplasia",
+  "name": "Focal dermal hypoplasia",
+  "aliases": [
+    "Goltz syndrome",
+    "Goltz-Gorlin syndrome",
+    "PORCN",
+    "focal dermal hypoplasia syndrome"
   ],
-  "pathophysiology": "Focal dermal hypoplasia (Goltz syndrome) is an X-linked dominant disorder caused by mutations in PORCN, which encodes an endoplasmic-reticulum membrane O-acyltransferase required for the palmitoylation and secretion of WNT signalling proteins. WNT signalling is fundamental to the development of skin, bone, eyes, teeth and other structures, so its impairment produces the widespread mesoectodermal defects. The condition is generally lethal in hemizygous males; affected males who survive typically have somatic mosaicism. Random X-inactivation in females creates functional mosaicism, which accounts for the Blaschko-linear distribution of the skin lesions, where dermal connective tissue is hypoplastic and subcutaneous fat herniates through the attenuated dermis.",
-  "additionalDifferentials": [
-   "Incontinentia pigmenti",
-   "MIDAS/microphthalmia with linear skin defects syndrome",
-   "Aplasia cutis congenita",
-   "Nevus lipomatosus superficialis",
-   "Rothmund-Thomson syndrome",
-   "Other Blaschko-linear mosaic genodermatoses"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of PORCN",
-   "Skin biopsy showing marked dermal thinning with fat approaching the epidermis",
-   "Skeletal radiographs for osteopathia striata and limb anomalies",
-   "Ophthalmological examination for colobomata and microphthalmia",
-   "Dental assessment for enamel and tooth anomalies",
-   "Multidisciplinary developmental and organ-system evaluation"
-  ],
-  "redFlags": [
-   "Significant ocular malformation threatening vision",
-   "Major limb or skeletal anomaly requiring surgical management",
-   "Symptomatic internal or gastrointestinal papillomatosis",
-   "Complications of extensive skin fragility such as infection"
-  ],
-  "prognosis": "Prognosis is highly variable and depends on the pattern and severity of extracutaneous involvement rather than the skin disease; many affected individuals have a normal lifespan. Ocular, skeletal and dental problems account for most long-term morbidity and often require ongoing multidisciplinary care.",
-  "pitfalls": [
-   "Focusing on the skin lesions and failing to screen for skeletal, ocular and dental anomalies",
-   "Misinterpreting fat herniation as a benign lipomatous naevus without recognising the syndrome",
-   "Overlooking the diagnosis in a rare affected male, in whom mosaicism is expected",
-   "Not offering genetic counselling given X-linked dominant inheritance and male lethality"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Harper's Textbook of Paediatric Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive skin care with management of symptomatic or bleeding papillomas by excision, laser ablation or cryotherapy",
-   "Orthopaedic and reconstructive surgery for limb anomalies such as syndactyly and split-hand deformity",
-   "Ophthalmological assessment and management of colobomata and microphthalmia to optimise vision",
-   "Dental care for enamel and tooth anomalies",
-   "Multidisciplinary developmental and organ-system evaluation directed at the pattern of extracutaneous involvement",
-   "Genetic counselling for X-linked dominant inheritance with PORCN testing, discussion of male lethality and mosaicism, and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "focal_dermal_hypoplasia-pathway",
-   "title": "Focal dermal hypoplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A multisystem ectodermal-mesodermal disorder in which atrophic, linear skin lesions follow the lines of Blaschko",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant ocular malformation threatening vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of PORCN, Skin biopsy showing marked dermal thinning with fat approaching the epidermis, Skeletal radiographs for osteopathia striata and limb anomalies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive skin care with management of symptomatic or bleeding papillomas by excision, laser ablation or cryotherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing on the skin lesions and failing to screen for skeletal, ocular and dental anomalies"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of focal dermal hypoplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "focal_dermal_hypoplasia-matrix",
-   "title": "Focal dermal hypoplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A multisystem ectodermal-mesodermal disorder in which atrophic, linear skin lesions follow the lines of Blaschko",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A multisystem ectodermal-mesodermal disorder in which atrophic, linear skin lesions follow the lines of Blaschko",
+      "Soft, yellow-pink outpouchings of herniated fat through the thinned dermis (fat herniation) are a characteristic cutaneous sign",
+      "Raspberry-like papillomas around the mouth, anus and vulva, and periungual/mucosal papillomas, are frequent",
+      "Skeletal defects, classically osteopathia striata on radiographs and limb anomalies such as syndactyly and 'lobster-claw' hands, are common",
+      "Ocular (colobomata, microphthalmia) and dental anomalies frequently accompany the skin findings",
+      "X-linked dominant, caused by PORCN mutations; usually lethal in males, so most patients are female and mosaicism explains survival in the few affected males",
+      "Management is supportive and multidisciplinary, addressing skin, skeletal, ocular and dental problems"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of PORCN, Skin biopsy showing marked dermal thinning with fat approaching the epidermis, Skeletal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Focal dermal hypoplasia (Goltz syndrome) is an X-linked dominant disorder caused by mutations in PORCN, which encodes an endoplasmic-reticulum membrane O-acyltransferase required for the palmitoylation and secretion of WNT signalling proteins. WNT signalling is fundamental to the development of skin, bone, eyes, teeth and other structures, so its impairment produces the widespread mesoectodermal defects. The condition is generally lethal in hemizygous males; affected males who survive typically have somatic mosaicism. Random X-inactivation in females creates functional mosaicism, which accounts for the Blaschko-linear distribution of the skin lesions, where dermal connective tissue is hypoplastic and subcutaneous fat herniates through the attenuated dermis.",
+    "additionalDifferentials": [
+      "Incontinentia pigmenti",
+      "MIDAS/microphthalmia with linear skin defects syndrome",
+      "Aplasia cutis congenita",
+      "Nevus lipomatosus superficialis",
+      "Rothmund-Thomson syndrome",
+      "Other Blaschko-linear mosaic genodermatoses"
     ],
-    [
-     "Primary Differentials",
-     "Incontinentia pigmenti, MIDAS/microphthalmia with linear skin defects syndrome, Aplasia cutis congenita",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of PORCN",
+      "Skin biopsy showing marked dermal thinning with fat approaching the epidermis",
+      "Skeletal radiographs for osteopathia striata and limb anomalies",
+      "Ophthalmological examination for colobomata and microphthalmia",
+      "Dental assessment for enamel and tooth anomalies",
+      "Multidisciplinary developmental and organ-system evaluation"
     ],
-    [
-     "Management Strategy",
-     "Supportive skin care with management of symptomatic or bleeding papillomas by excision, laser ablation or cryotherapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant ocular malformation threatening vision",
+      "Major limb or skeletal anomaly requiring surgical management",
+      "Symptomatic internal or gastrointestinal papillomatosis",
+      "Complications of extensive skin fragility such as infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing on the skin lesions and failing to screen for skeletal, ocular and dental anomalies",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is highly variable and depends on the pattern and severity of extracutaneous involvement rather than the skin disease; many affected individuals have a normal lifespan. Ocular, skeletal and dental problems account for most long-term morbidity and often require ongoing multidisciplinary care.",
+    "pitfalls": [
+      "Focusing on the skin lesions and failing to screen for skeletal, ocular and dental anomalies",
+      "Misinterpreting fat herniation as a benign lipomatous naevus without recognising the syndrome",
+      "Overlooking the diagnosis in a rare affected male, in whom mosaicism is expected",
+      "Not offering genetic counselling given X-linked dominant inheritance and male lethality"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Harper's Textbook of Paediatric Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive skin care with management of symptomatic or bleeding papillomas by excision, laser ablation or cryotherapy",
+      "Orthopaedic and reconstructive surgery for limb anomalies such as syndactyly and split-hand deformity",
+      "Ophthalmological assessment and management of colobomata and microphthalmia to optimise vision",
+      "Dental care for enamel and tooth anomalies",
+      "Multidisciplinary developmental and organ-system evaluation directed at the pattern of extracutaneous involvement",
+      "Genetic counselling for X-linked dominant inheritance with PORCN testing, discussion of male lethality and mosaicism, and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for focal dermal hypoplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "focal-dermal-hypoplasia-real-image",
-   "title": "Focal dermal hypoplasia: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "focal_dermal_hypoplasia-pathway",
+      "title": "Focal dermal hypoplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A multisystem ectodermal-mesodermal disorder in which atrophic, linear skin lesions follow the lines of Blaschko",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant ocular malformation threatening vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of PORCN, Skin biopsy showing marked dermal thinning with fat approaching the epidermis, Skeletal radiographs for osteopathia striata and limb anomalies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive skin care with management of symptomatic or bleeding papillomas by excision, laser ablation or cryotherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing on the skin lesions and failing to screen for skeletal, ocular and dental anomalies"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of focal dermal hypoplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "focal_dermal_hypoplasia-matrix",
+      "title": "Focal dermal hypoplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A multisystem ectodermal-mesodermal disorder in which atrophic, linear skin lesions follow the lines of Blaschko",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of PORCN, Skin biopsy showing marked dermal thinning with fat approaching the epidermis, Skeletal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Incontinentia pigmenti, MIDAS/microphthalmia with linear skin defects syndrome, Aplasia cutis congenita",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive skin care with management of symptomatic or bleeding papillomas by excision, laser ablation or cryotherapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing on the skin lesions and failing to screen for skeletal, ocular and dental anomalies",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for focal dermal hypoplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "focal_dermal_hypoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of PORCN",
+          "cells": [
+            {
+              "text": "X-linked dominant variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Marked dermal thinning with fat near the epidermis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal radiographs",
+          "cells": [
+            {
+              "text": "Osteopathia striata and limb anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Colobomata and microphthalmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental assessment",
+          "cells": [
+            {
+              "text": "Enamel and tooth anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "focal_dermal_hypoplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Incontinentia pigmenti",
+          "cells": [
+            {
+              "text": "Blaschko-linear inflammatory skin lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MIDAS syndrome",
+          "cells": [
+            {
+              "text": "Microphthalmia with linear skin defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aplasia cutis congenita",
+          "cells": [
+            {
+              "text": "Localised skin absence at birth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "focal_dermal_hypoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Excision, laser or cryotherapy for papillomas",
+          "cells": [
+            {
+              "text": "Symptomatic or bleeding papillomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and reconstructive surgery",
+          "cells": [
+            {
+              "text": "Limb anomalies such as syndactyly and split hand"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological management",
+          "cells": [
+            {
+              "text": "Colobomata and microphthalmia; optimise vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental care",
+          "cells": [
+            {
+              "text": "Enamel and tooth anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary developmental and organ review",
+          "cells": [
+            {
+              "text": "Pattern of extracutaneous involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked dominant inheritance; male lethality and mosaicism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "focal_dermal_hypoplasia-dx-mgmt",
+      "title": "Diagnosis and management of Focal dermal hypoplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Linear atrophic skin lesions with fat herniation and papillomas at birth or early life",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (vision threat, major limb anomaly, symptomatic internal papillomatosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review for vision-threatening malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PORCN testing; skin biopsy; skeletal radiographs; eye and dental examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic PORCN variant with multisystem features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider incontinentia pigmenti, MIDAS or aplasia cutis congenita",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excise, laser or freeze symptomatic papillomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reconstructive surgery for limb anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmological care for colobomata and microphthalmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for X-linked dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; depends on extracutaneous involvement rather than the skin disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

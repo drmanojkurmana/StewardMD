@@ -1,172 +1,218 @@
 {
- "id": "branchial_cyst",
- "name": "Branchial cyst",
- "aliases": [
-  "branchial cleft cyst",
-  "branchial cleft anomaly",
-  "second branchial cleft cyst"
- ],
- "class": "non_infective",
- "system": "Paediatric surgery / Thoracic",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A lateral neck swelling arising from incomplete regression of the embryological branchial (pharyngeal) apparatus, most commonly from the second cleft",
-   "The typical location is along the anterior border of the sternocleidomastoid muscle in the upper to mid neck",
-   "It often becomes clinically apparent in older children or young adults, sometimes enlarging after an upper respiratory infection",
-   "Anomalies may take the form of a cyst, sinus, or fistula; a fistulous opening at the lower neck that discharges may indicate a tract to the pharynx",
-   "Infected cysts present as tender, inflamed, sometimes fluctuant masses and should have infection controlled before elective excision",
-   "Ultrasound is a useful first-line study, with cross-sectional imaging helping to define the tract before surgery",
-   "Definitive management is complete surgical excision of the cyst and any associated tract to prevent recurrence",
-   "In adults, a persistently cystic lateral neck mass should raise suspicion of a cystic nodal metastasis rather than a benign branchial cyst"
+  "id": "branchial_cyst",
+  "name": "Branchial cyst",
+  "aliases": [
+    "branchial cleft cyst",
+    "branchial cleft anomaly",
+    "second branchial cleft cyst"
   ],
-  "pathophysiology": "The branchial apparatus of clefts, arches, and pouches contributes to head and neck development and normally regresses. Failure of obliteration of a cleft or its associated structures leaves an epithelial-lined remnant that can form a cyst, a blind-ending sinus, or a complete fistula connecting skin to pharynx. Second cleft anomalies characteristically pass between the internal and external carotid arteries toward the tonsillar fossa. Retained secretions distend the cyst, and communication with the pharynx or skin predisposes to recurrent infection.",
-  "additionalDifferentials": [
-   "Cervical lymphadenopathy or reactive node",
-   "Cystic hygroma (lymphatic malformation)",
-   "Cystic metastatic lymph node (in older patients)",
-   "Dermoid or epidermoid cyst",
-   "Tuberculous or atypical mycobacterial lymphadenitis"
-  ],
-  "additionalInvestigations": [
-   "Neck ultrasound to characterise the cystic lesion",
-   "CT or MRI to map the tract and its relationship to the carotid vessels before excision",
-   "Fine-needle aspiration when malignancy or nodal metastasis is a concern, particularly in adults",
-   "Fistulography in cases with a discharging sinus or fistula",
-   "Inflammatory markers and cultures if infection is present"
-  ],
-  "redFlags": [
-   "A cystic lateral neck mass in an older patient that may represent metastatic squamous carcinoma",
-   "Acute infection with abscess formation requiring drainage",
-   "Rapid enlargement or solid components suggesting an alternative or malignant diagnosis",
-   "Airway or vascular compromise from a large or deep lesion"
-  ],
-  "prognosis": "Benign branchial anomalies have an excellent prognosis after complete excision, with recurrence mainly seen when a tract is incompletely removed or when surgery is undertaken during active infection. Long-term outlook is worse only when a presumed cyst proves to be a cystic malignancy.",
-  "pitfalls": [
-   "Assuming a lateral neck cyst in an adult is benign without excluding malignancy",
-   "Incomplete excision of the tract, leading to recurrence",
-   "Operating during acute infection, increasing the risk of incomplete removal and complications",
-   "Injuring adjacent nerves or vessels because the tract's course was not defined preoperatively"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Bailey & Love's Short Practice of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision of the cyst and any sinus or fistulous tract for cure",
-   "Antibiotic treatment and control of infection before elective surgery, avoiding excision during active inflammation",
-   "Ultrasound with cross-sectional imaging to map the tract relative to the carotid vessels before excision",
-   "Fine-needle aspiration to exclude malignancy or nodal metastasis, particularly in adults",
-   "Meticulous complete tract excision to prevent recurrence",
-   "Referral to paediatric surgery or otolaryngology",
-   "Postoperative monitoring for recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "branchial_cyst-pathway",
-   "title": "Branchial cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A lateral neck swelling arising from incomplete regression of the embryological branchial (pharyngeal) apparatus, most commonly from the second cleft",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A cystic lateral neck mass in an older patient that may represent metastatic squamous carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Neck ultrasound to characterise the cystic lesion, CT or MRI to map the tract and its relationship to the carotid vessels before excision, Fine-needle aspiration when malignancy or nodal metastasis is a concern,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision of the cyst and any sinus or fistulous tract for cure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a lateral neck cyst in an adult is benign without excluding malignancy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of branchial cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "branchial_cyst-matrix",
-   "title": "Branchial cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A lateral neck swelling arising from incomplete regression of the embryological branchial (pharyngeal) apparatus, most commonly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric surgery / Thoracic",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A lateral neck swelling arising from incomplete regression of the embryological branchial (pharyngeal) apparatus, most commonly from the second cleft",
+      "The typical location is along the anterior border of the sternocleidomastoid muscle in the upper to mid neck",
+      "It often becomes clinically apparent in older children or young adults, sometimes enlarging after an upper respiratory infection",
+      "Anomalies may take the form of a cyst, sinus, or fistula; a fistulous opening at the lower neck that discharges may indicate a tract to the pharynx",
+      "Infected cysts present as tender, inflamed, sometimes fluctuant masses and should have infection controlled before elective excision",
+      "Ultrasound is a useful first-line study, with cross-sectional imaging helping to define the tract before surgery",
+      "Definitive management is complete surgical excision of the cyst and any associated tract to prevent recurrence",
+      "In adults, a persistently cystic lateral neck mass should raise suspicion of a cystic nodal metastasis rather than a benign branchial cyst"
     ],
-    [
-     "Key Investigations",
-     "Neck ultrasound to characterise the cystic lesion, CT or MRI to map the tract and its relationship to the carotid vessels before",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The branchial apparatus of clefts, arches, and pouches contributes to head and neck development and normally regresses. Failure of obliteration of a cleft or its associated structures leaves an epithelial-lined remnant that can form a cyst, a blind-ending sinus, or a complete fistula connecting skin to pharynx. Second cleft anomalies characteristically pass between the internal and external carotid arteries toward the tonsillar fossa. Retained secretions distend the cyst, and communication with the pharynx or skin predisposes to recurrent infection.",
+    "additionalDifferentials": [
+      "Cervical lymphadenopathy or reactive node",
+      "Cystic hygroma (lymphatic malformation)",
+      "Cystic metastatic lymph node (in older patients)",
+      "Dermoid or epidermoid cyst",
+      "Tuberculous or atypical mycobacterial lymphadenitis"
     ],
-    [
-     "Primary Differentials",
-     "Cervical lymphadenopathy or reactive node, Cystic hygroma (lymphatic malformation), Cystic metastatic lymph node (in older",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Neck ultrasound to characterise the cystic lesion",
+      "CT or MRI to map the tract and its relationship to the carotid vessels before excision",
+      "Fine-needle aspiration when malignancy or nodal metastasis is a concern, particularly in adults",
+      "Fistulography in cases with a discharging sinus or fistula",
+      "Inflammatory markers and cultures if infection is present"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision of the cyst and any sinus or fistulous tract for cure",
-     "Core treatment modality"
+    "redFlags": [
+      "A cystic lateral neck mass in an older patient that may represent metastatic squamous carcinoma",
+      "Acute infection with abscess formation requiring drainage",
+      "Rapid enlargement or solid components suggesting an alternative or malignant diagnosis",
+      "Airway or vascular compromise from a large or deep lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a lateral neck cyst in an adult is benign without excluding malignancy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign branchial anomalies have an excellent prognosis after complete excision, with recurrence mainly seen when a tract is incompletely removed or when surgery is undertaken during active infection. Long-term outlook is worse only when a presumed cyst proves to be a cystic malignancy.",
+    "pitfalls": [
+      "Assuming a lateral neck cyst in an adult is benign without excluding malignancy",
+      "Incomplete excision of the tract, leading to recurrence",
+      "Operating during acute infection, increasing the risk of incomplete removal and complications",
+      "Injuring adjacent nerves or vessels because the tract's course was not defined preoperatively"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Bailey & Love's Short Practice of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision of the cyst and any sinus or fistulous tract for cure",
+      "Antibiotic treatment and control of infection before elective surgery, avoiding excision during active inflammation",
+      "Ultrasound with cross-sectional imaging to map the tract relative to the carotid vessels before excision",
+      "Fine-needle aspiration to exclude malignancy or nodal metastasis, particularly in adults",
+      "Meticulous complete tract excision to prevent recurrence",
+      "Referral to paediatric surgery or otolaryngology",
+      "Postoperative monitoring for recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for branchial cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "branchial-cyst-real-image",
-   "title": "Branchial cyst: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "branchial_cyst-pathway",
+      "title": "Branchial cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A lateral neck swelling arising from incomplete regression of the embryological branchial (pharyngeal) apparatus, most commonly from the second cleft",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A cystic lateral neck mass in an older patient that may represent metastatic squamous carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Neck ultrasound to characterise the cystic lesion, CT or MRI to map the tract and its relationship to the carotid vessels before excision, Fine-needle aspiration when malignancy or nodal metastasis is a concern,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision of the cyst and any sinus or fistulous tract for cure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a lateral neck cyst in an adult is benign without excluding malignancy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of branchial cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "branchial_cyst-matrix",
+      "title": "Branchial cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A lateral neck swelling arising from incomplete regression of the embryological branchial (pharyngeal) apparatus, most commonly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Neck ultrasound to characterise the cystic lesion, CT or MRI to map the tract and its relationship to the carotid vessels before",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cervical lymphadenopathy or reactive node, Cystic hygroma (lymphatic malformation), Cystic metastatic lymph node (in older",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision of the cyst and any sinus or fistulous tract for cure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a lateral neck cyst in an adult is benign without excluding malignancy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for branchial cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "branchial_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in branchial cyst",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Neck ultrasound", "cells": [{"text": "First-line characterisation of the cystic lesion"}], "cite": "c1"},
+        {"parameter": "CT or MRI", "cells": [{"text": "Tract and its relationship to the carotid vessels before excision"}], "cite": "c1"},
+        {"parameter": "Fine-needle aspiration", "cells": [{"text": "Malignancy or nodal metastasis, particularly in adults"}], "cite": "c1"},
+        {"parameter": "Fistulography", "cells": [{"text": "Discharging sinus or fistula"}], "cite": "c1"},
+        {"parameter": "Inflammatory markers and cultures", "cells": [{"text": "Infection, when present"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "branchial_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options in branchial cyst",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Control of infection", "cells": [{"text": "Antibiotics before elective surgery; avoid excision during active inflammation"}, {"text": "Infected cyst"}], "cite": "c1"},
+        {"parameter": "Imaging for surgical planning", "cells": [{"text": "Ultrasound with cross-sectional imaging to map the tract relative to the carotid vessels"}, {"text": "Before excision"}], "cite": "c1"},
+        {"parameter": "Exclusion of malignancy", "cells": [{"text": "Fine-needle aspiration in adults to exclude malignancy or nodal metastasis"}, {"text": "Adults"}], "cite": "c1"},
+        {"parameter": "Complete surgical excision", "cells": [{"text": "Excise the cyst and any sinus or fistulous tract"}, {"text": "Definitive cure"}], "cite": "c1"},
+        {"parameter": "Meticulous tract removal", "cells": [{"text": "Complete removal of the tract to prevent recurrence"}, {"text": "Reduces recurrence"}], "cite": "c1"},
+        {"parameter": "Referral", "cells": [{"text": "Paediatric surgery or otolaryngology"}, {"text": "Specialist surgery"}], "cite": "c1"},
+        {"parameter": "Postoperative monitoring", "cells": [{"text": "Monitor for recurrence"}, {"text": "Ongoing"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "branchial_cyst-dx-mgmt",
+      "title": "Diagnosis and management of branchial cyst",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Lateral neck swelling along the anterior border of the sternocleidomastoid", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: cystic lateral mass in an older patient, rapid enlargement, solid component, or abscess?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: fine-needle aspiration to exclude cystic nodal metastasis; drain abscess if present", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Neck ultrasound; CT or MRI to map the tract before surgery", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Active infection present?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Control infection with antibiotics, then elective surgery", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Complete excision of the cyst and any sinus or fistulous tract", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Excellent prognosis after complete excision; surveillance for recurrence", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Malignancy confirmed: manage as cancer rather than a branchial cyst", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n9", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n7", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

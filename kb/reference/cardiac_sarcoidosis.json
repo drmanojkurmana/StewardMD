@@ -1,174 +1,220 @@
 {
- "id": "cardiac_sarcoidosis",
- "name": "Cardiac sarcoidosis",
- "aliases": [
-  "myocardial sarcoidosis",
-  "sarcoid heart disease",
-  "cardiac sarcoid"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "ESC guidelines / HRS expert consensus on arrhythmias in cardiac sarcoidosis / Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Non-caseating granulomas infiltrate the myocardium in a patchy distribution, so clinically silent involvement is common and disease may be underestimated",
-   "Unexplained high-grade atrioventricular block in a younger or middle-aged adult should prompt evaluation for cardiac sarcoidosis",
-   "Ventricular arrhythmias and sudden cardiac death can be presenting features because granulomas and scar create re-entry circuits",
-   "The basal interventricular septum is a characteristic site of involvement, and patchy scarring can mimic other cardiomyopathies",
-   "Cardiac MRI shows patchy late gadolinium enhancement, typically in a non-coronary distribution, and FDG-PET detects active inflammatory disease",
-   "Endomyocardial biopsy has low sensitivity because involvement is patchy, so a negative biopsy does not exclude the diagnosis",
-   "Extracardiac sarcoidosis (pulmonary, lymph node, skin, eye) supports the diagnosis and offers more accessible biopsy sites",
-   "Management combines corticosteroids and other immunosuppression for active inflammation with device therapy and heart failure treatment as indicated"
+  "id": "cardiac_sarcoidosis",
+  "name": "Cardiac sarcoidosis",
+  "aliases": [
+    "myocardial sarcoidosis",
+    "sarcoid heart disease",
+    "cardiac sarcoid"
   ],
-  "pathophysiology": "Cardiac sarcoidosis is characterised by the formation of non-caseating epithelioid granulomas within the myocardium as part of a systemic, likely immune-mediated, granulomatous disorder. The infiltration is patchy and may involve the conduction system, the ventricular myocardium, and less often the pericardium. Granulomatous inflammation in the region of the atrioventricular node and bundle branches produces conduction block, while active inflammation and the fibrotic scar that follows it form the substrate for ventricular tachyarrhythmias and, over time, regional wall thinning, aneurysm formation, and heart failure. Because the process is focal, imaging that maps inflammation and scar is central to diagnosis.",
-  "additionalDifferentials": [
-   "Giant cell myocarditis",
-   "Idiopathic dilated cardiomyopathy",
-   "Arrhythmogenic right ventricular cardiomyopathy",
-   "Ischaemic cardiomyopathy",
-   "Other infiltrative cardiomyopathies such as amyloidosis",
-   "Lymphocytic or infective myocarditis"
-  ],
-  "additionalInvestigations": [
-   "Cardiac MRI with late gadolinium enhancement to map patchy non-coronary scar",
-   "FDG-PET after appropriate dietary preparation to detect active myocardial inflammation",
-   "Twelve-lead ECG and ambulatory monitoring for conduction block and ventricular arrhythmia",
-   "Echocardiography to assess ventricular function, regional wall abnormalities, and septal thinning",
-   "Assessment for extracardiac sarcoidosis, including chest imaging and accessible-site biopsy",
-   "Endomyocardial biopsy in selected cases, recognising its limited sensitivity"
-  ],
-  "redFlags": [
-   "Unexplained high-grade or complete heart block in a younger adult",
-   "Sustained ventricular tachycardia or aborted sudden cardiac death",
-   "Progressive heart failure with new left ventricular dysfunction",
-   "Syncope suggesting arrhythmia or conduction disease"
-  ],
-  "prognosis": "Prognosis varies with the extent of myocardial involvement; early recognition and treatment of inflammation together with device therapy improve outcomes, but extensive scarring, ventricular arrhythmia, and heart failure are associated with a worse prognosis.",
-  "pitfalls": [
-   "Excluding the diagnosis on the basis of a negative endomyocardial biopsy despite patchy disease",
-   "Overlooking sarcoidosis as a cause of unexplained heart block in younger patients",
-   "Failing to search for more accessible extracardiac biopsy targets",
-   "Not considering device therapy for arrhythmic risk while treating inflammation"
-  ],
-  "references": [
-   "HRS expert consensus statement on arrhythmias associated with cardiac sarcoidosis",
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress granulomatous inflammation with corticosteroids as first-line therapy, adding steroid-sparing agents such as methotrexate or azathioprine for maintenance or relapse",
-   "Implant a cardioverter-defibrillator for ventricular arrhythmia or high sudden-death risk, and pace for high-grade atrioventricular block",
-   "Treat ventricular tachyarrhythmias with antiarrhythmic drugs and catheter ablation of scar-related circuits where refractory",
-   "Manage heart failure with guideline-directed medical therapy",
-   "Guide immunosuppression by mapping active inflammation on FDG-PET and scar on late-gadolinium cardiac magnetic resonance, with serial monitoring",
-   "Assess and treat extracardiac sarcoidosis and coordinate combined cardiology and respiratory care",
-   "Refer for advanced heart-failure evaluation or transplantation in end-stage disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cardiac_sarcoidosis-pathway",
-   "title": "Cardiac sarcoidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Non-caseating granulomas infiltrate the myocardium in a patchy distribution, so clinically silent involvement is common and disease may be underestimated",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unexplained high-grade or complete heart block in a younger adult",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cardiac MRI with late gadolinium enhancement to map patchy non-coronary scar, FDG-PET after appropriate dietary preparation to detect active myocardial inflammation, Twelve-lead ECG and ambulatory monitoring for conduction"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress granulomatous inflammation with corticosteroids as first-line therapy, adding steroid-sparing agents such as methotrexate or azathioprine for maintenance or relapse"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis on the basis of a negative endomyocardial biopsy despite patchy disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cardiac sarcoidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cardiac_sarcoidosis-matrix",
-   "title": "Cardiac sarcoidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Non-caseating granulomas infiltrate the myocardium in a patchy distribution, so clinically silent involvement is common and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ESC guidelines / HRS expert consensus on arrhythmias in cardiac sarcoidosis / Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Non-caseating granulomas infiltrate the myocardium in a patchy distribution, so clinically silent involvement is common and disease may be underestimated",
+      "Unexplained high-grade atrioventricular block in a younger or middle-aged adult should prompt evaluation for cardiac sarcoidosis",
+      "Ventricular arrhythmias and sudden cardiac death can be presenting features because granulomas and scar create re-entry circuits",
+      "The basal interventricular septum is a characteristic site of involvement, and patchy scarring can mimic other cardiomyopathies",
+      "Cardiac MRI shows patchy late gadolinium enhancement, typically in a non-coronary distribution, and FDG-PET detects active inflammatory disease",
+      "Endomyocardial biopsy has low sensitivity because involvement is patchy, so a negative biopsy does not exclude the diagnosis",
+      "Extracardiac sarcoidosis (pulmonary, lymph node, skin, eye) supports the diagnosis and offers more accessible biopsy sites",
+      "Management combines corticosteroids and other immunosuppression for active inflammation with device therapy and heart failure treatment as indicated"
     ],
-    [
-     "Key Investigations",
-     "Cardiac MRI with late gadolinium enhancement to map patchy non-coronary scar, FDG-PET after appropriate dietary preparation to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cardiac sarcoidosis is characterised by the formation of non-caseating epithelioid granulomas within the myocardium as part of a systemic, likely immune-mediated, granulomatous disorder. The infiltration is patchy and may involve the conduction system, the ventricular myocardium, and less often the pericardium. Granulomatous inflammation in the region of the atrioventricular node and bundle branches produces conduction block, while active inflammation and the fibrotic scar that follows it form the substrate for ventricular tachyarrhythmias and, over time, regional wall thinning, aneurysm formation, and heart failure. Because the process is focal, imaging that maps inflammation and scar is central to diagnosis.",
+    "additionalDifferentials": [
+      "Giant cell myocarditis",
+      "Idiopathic dilated cardiomyopathy",
+      "Arrhythmogenic right ventricular cardiomyopathy",
+      "Ischaemic cardiomyopathy",
+      "Other infiltrative cardiomyopathies such as amyloidosis",
+      "Lymphocytic or infective myocarditis"
     ],
-    [
-     "Primary Differentials",
-     "Giant cell myocarditis, Idiopathic dilated cardiomyopathy, Arrhythmogenic right ventricular cardiomyopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cardiac MRI with late gadolinium enhancement to map patchy non-coronary scar",
+      "FDG-PET after appropriate dietary preparation to detect active myocardial inflammation",
+      "Twelve-lead ECG and ambulatory monitoring for conduction block and ventricular arrhythmia",
+      "Echocardiography to assess ventricular function, regional wall abnormalities, and septal thinning",
+      "Assessment for extracardiac sarcoidosis, including chest imaging and accessible-site biopsy",
+      "Endomyocardial biopsy in selected cases, recognising its limited sensitivity"
     ],
-    [
-     "Management Strategy",
-     "Suppress granulomatous inflammation with corticosteroids as first-line therapy, adding steroid-sparing agents such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Unexplained high-grade or complete heart block in a younger adult",
+      "Sustained ventricular tachycardia or aborted sudden cardiac death",
+      "Progressive heart failure with new left ventricular dysfunction",
+      "Syncope suggesting arrhythmia or conduction disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis on the basis of a negative endomyocardial biopsy despite patchy disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies with the extent of myocardial involvement; early recognition and treatment of inflammation together with device therapy improve outcomes, but extensive scarring, ventricular arrhythmia, and heart failure are associated with a worse prognosis.",
+    "pitfalls": [
+      "Excluding the diagnosis on the basis of a negative endomyocardial biopsy despite patchy disease",
+      "Overlooking sarcoidosis as a cause of unexplained heart block in younger patients",
+      "Failing to search for more accessible extracardiac biopsy targets",
+      "Not considering device therapy for arrhythmic risk while treating inflammation"
+    ],
+    "references": [
+      "HRS expert consensus statement on arrhythmias associated with cardiac sarcoidosis",
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress granulomatous inflammation with corticosteroids as first-line therapy, adding steroid-sparing agents such as methotrexate or azathioprine for maintenance or relapse",
+      "Implant a cardioverter-defibrillator for ventricular arrhythmia or high sudden-death risk, and pace for high-grade atrioventricular block",
+      "Treat ventricular tachyarrhythmias with antiarrhythmic drugs and catheter ablation of scar-related circuits where refractory",
+      "Manage heart failure with guideline-directed medical therapy",
+      "Guide immunosuppression by mapping active inflammation on FDG-PET and scar on late-gadolinium cardiac magnetic resonance, with serial monitoring",
+      "Assess and treat extracardiac sarcoidosis and coordinate combined cardiology and respiratory care",
+      "Refer for advanced heart-failure evaluation or transplantation in end-stage disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for cardiac sarcoidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cardiac-sarcoidosis-real-image",
-   "title": "Cardiac sarcoidosis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "cardiac_sarcoidosis-pathway",
+      "title": "Cardiac sarcoidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Non-caseating granulomas infiltrate the myocardium in a patchy distribution, so clinically silent involvement is common and disease may be underestimated",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unexplained high-grade or complete heart block in a younger adult",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cardiac MRI with late gadolinium enhancement to map patchy non-coronary scar, FDG-PET after appropriate dietary preparation to detect active myocardial inflammation, Twelve-lead ECG and ambulatory monitoring for conduction"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress granulomatous inflammation with corticosteroids as first-line therapy, adding steroid-sparing agents such as methotrexate or azathioprine for maintenance or relapse"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis on the basis of a negative endomyocardial biopsy despite patchy disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cardiac sarcoidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cardiac_sarcoidosis-matrix",
+      "title": "Cardiac sarcoidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Non-caseating granulomas infiltrate the myocardium in a patchy distribution, so clinically silent involvement is common and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cardiac MRI with late gadolinium enhancement to map patchy non-coronary scar, FDG-PET after appropriate dietary preparation to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Giant cell myocarditis, Idiopathic dilated cardiomyopathy, Arrhythmogenic right ventricular cardiomyopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress granulomatous inflammation with corticosteroids as first-line therapy, adding steroid-sparing agents such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis on the basis of a negative endomyocardial biopsy despite patchy disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cardiac sarcoidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC guidelines / HRS expert consensus on arrhythmias in cardiac sarcoidosis / Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cardiac_sarcoidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in cardiac sarcoidosis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Cardiac MRI with late gadolinium enhancement", "cells": [{"text": "Patchy scar in a non-coronary distribution"}], "cite": "c1"},
+        {"parameter": "FDG-PET after dietary preparation", "cells": [{"text": "Active myocardial inflammation"}], "cite": "c1"},
+        {"parameter": "12-lead ECG and ambulatory monitoring", "cells": [{"text": "Conduction block and ventricular arrhythmia"}], "cite": "c1"},
+        {"parameter": "Echocardiography", "cells": [{"text": "Ventricular function, regional wall abnormality and septal thinning"}], "cite": "c1"},
+        {"parameter": "Extracardiac assessment", "cells": [{"text": "Chest imaging and accessible-site biopsy"}], "cite": "c1"},
+        {"parameter": "Endomyocardial biopsy", "cells": [{"text": "Selected cases; limited sensitivity because involvement is patchy"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "cardiac_sarcoidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options in cardiac sarcoidosis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Corticosteroids", "cells": [{"text": "First-line suppression of granulomatous inflammation"}, {"text": "Active disease"}], "cite": "c1"},
+        {"parameter": "Steroid-sparing agents", "cells": [{"text": "Methotrexate or azathioprine for maintenance or relapse"}, {"text": "Maintenance"}], "cite": "c1"},
+        {"parameter": "Implantable cardioverter-defibrillator", "cells": [{"text": "Ventricular arrhythmia or high sudden-death risk"}, {"text": "Protection"}], "cite": "c1"},
+        {"parameter": "Pacing", "cells": [{"text": "High-grade atrioventricular block"}, {"text": "Conduction disease"}], "cite": "c1"},
+        {"parameter": "Ventricular tachyarrhythmia", "cells": [{"text": "Antiarrhythmic drugs and catheter ablation of scar-related circuits where refractory"}, {"text": "Refractory"}], "cite": "c1"},
+        {"parameter": "Heart failure", "cells": [{"text": "Guideline-directed medical therapy"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Immunosuppression guidance", "cells": [{"text": "FDG-PET for active inflammation and late-gadolinium MRI for scar, with serial monitoring"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Extracardiac and advanced care", "cells": [{"text": "Assess extracardiac disease; combined cardiology and respiratory care; transplantation evaluation in end-stage disease"}, {"text": "Multidisciplinary"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cardiac_sarcoidosis-dx-mgmt",
+      "title": "Diagnosis and management of cardiac sarcoidosis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Unexplained high-grade heart block, ventricular arrhythmia or new heart failure in a younger adult", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: sustained ventricular tachycardia, aborted sudden death, or syncope?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent device assessment and arrhythmia management; cardiology review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Cardiac MRI with late gadolinium enhancement; FDG-PET; ECG and ambulatory monitoring; extracardiac screen", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Patchy non-coronary scar or active inflammation on imaging?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Corticosteroids with steroid-sparing agents; ICD or pacing as indicated", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Consider giant cell myocarditis, idiopathic cardiomyopathy or arrhythmogenic cardiomyopathy", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Patchy involvement may be underestimated; treatment guided by imaging and device need", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

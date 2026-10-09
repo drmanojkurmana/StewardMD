@@ -1,172 +1,461 @@
 {
- "id": "trichostrongyliasis",
- "name": "Trichostrongyliasis",
- "aliases": [
-  "Trichostrongylus infection",
-  "trichostrongylosis",
-  "pseudohookworm infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Trichostrongylus species, small nematodes chiefly of herbivores, with human infection common in rural farming communities of Asia, the Middle East and elsewhere",
-   "Acquired by ingesting infective larvae on contaminated vegetables and greens, in contrast to the skin-penetrating route of true hookworms",
-   "Most infections are light and asymptomatic; heavier burdens cause abdominal pain, diarrhoea, nausea and, occasionally, mild anaemia",
-   "Peripheral eosinophilia is common and may be the clue that prompts stool examination",
-   "The eggs resemble hookworm eggs but are larger with more pointed ends, and can be mistaken for them on routine microscopy",
-   "Treatment is with a benzimidazole anthelmintic such as albendazole, which is highly effective",
-   "Prevention relies on adequate sanitation, avoiding use of animal manure on food crops and washing or cooking vegetables"
+  "id": "trichostrongyliasis",
+  "name": "Trichostrongyliasis",
+  "aliases": [
+    "Trichostrongylus infection",
+    "trichostrongylosis",
+    "pseudohookworm infection"
   ],
-  "pathophysiology": "Trichostrongylus species are small nematodes that normally parasitise the intestines of sheep, goats, cattle and other herbivores. Eggs passed in the faeces of these animals develop in soil into infective larvae that contaminate low-growing vegetables and herbage. Humans acquire infection by ingesting these larvae rather than through skin penetration. In the small intestine the larvae mature into adult worms that attach superficially to the mucosa, where light infections cause little harm. Heavier worm burdens produce localised mucosal irritation and inflammation with abdominal symptoms and diarrhoea, and chronic infection can contribute to mild blood and protein loss and anaemia. Eggs shed in the faeces return to the soil to continue the cycle, sustained by both animal reservoirs and human contamination.",
-  "additionalDifferentials": [
-   "Hookworm infection (Ancylostoma or Necator), given similar eggs",
-   "Strongyloidiasis and other intestinal nematode infection",
-   "Giardiasis and other protozoal enteritis",
-   "Irritable bowel syndrome or functional dyspepsia",
-   "Other causes of eosinophilia with gastrointestinal symptoms",
-   "Coeliac disease or another cause of mild malabsorption"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy for ova and parasites, with concentration methods",
-   "Careful egg morphometry to distinguish from hookworm eggs",
-   "Full blood count for eosinophilia and anaemia",
-   "Larval culture of stool to confirm the species where required",
-   "Repeat stool sampling in light infection",
-   "Dietary and occupational history of exposure to livestock and raw vegetables"
-  ],
-  "redFlags": [
-   "Significant anaemia in heavy or chronic infection",
-   "Persistent diarrhoea with weight loss",
-   "Symptoms unresponsive to appropriate anthelmintic therapy",
-   "Coexisting malnutrition, particularly in children"
-  ],
-  "prognosis": "Prognosis is excellent, as infection is usually mild and clears readily with anthelmintic treatment; heavy chronic infection resolves once the worm burden is eradicated.",
-  "pitfalls": [
-   "Misidentifying the eggs as hookworm and misdirecting management",
-   "Missing light infections on a single stool sample",
-   "Attributing eosinophilia to allergy rather than looking for intestinal helminths",
-   "Overlooking the animal reservoir and manure exposure when advising on prevention"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with a benzimidazole anthelmintic such as albendazole or mebendazole, with pyrantel as an alternative, to eradicate the intestinal worm burden",
-   "Provide supportive care by correcting iron-deficiency anaemia and supporting nutrition in heavier or chronic infection",
-   "Confirm clearance with follow-up stool microscopy, repeating treatment if eggs persist",
-   "Screen and treat exposed household or community members in endemic farming settings",
-   "Advise prevention through thorough washing or cooking of vegetables and greens, improved sanitation and avoidance of fresh animal manure on crops to interrupt the soil cycle",
-   "Seek infectious diseases or tropical medicine input for heavy or diagnostically uncertain infections"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trichostrongyliasis-pathway",
-   "title": "Trichostrongyliasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Trichostrongylus species, small nematodes chiefly of herbivores, with human infection common in rural farming communities of Asia, the Middle East and elsewhere",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant anaemia in heavy or chronic infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy for ova and parasites, with concentration methods, Careful egg morphometry to distinguish from hookworm eggs, Full blood count for eosinophilia and anaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with a benzimidazole anthelmintic such as albendazole or mebendazole, with pyrantel as an alternative, to eradicate the intestinal worm burden"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misidentifying the eggs as hookworm and misdirecting management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trichostrongyliasis."
-  }
- ],
- "tables": [
-  {
-   "id": "trichostrongyliasis-matrix",
-   "title": "Trichostrongyliasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Trichostrongylus species, small nematodes chiefly of herbivores, with human infection common in rural farming",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Trichostrongylus species, small nematodes chiefly of herbivores, with human infection common in rural farming communities of Asia, the Middle East and elsewhere",
+      "Acquired by ingesting infective larvae on contaminated vegetables and greens, in contrast to the skin-penetrating route of true hookworms",
+      "Most infections are light and asymptomatic; heavier burdens cause abdominal pain, diarrhoea, nausea and, occasionally, mild anaemia",
+      "Peripheral eosinophilia is common and may be the clue that prompts stool examination",
+      "The eggs resemble hookworm eggs but are larger with more pointed ends, and can be mistaken for them on routine microscopy",
+      "Treatment is with a benzimidazole anthelmintic such as albendazole, which is highly effective",
+      "Prevention relies on adequate sanitation, avoiding use of animal manure on food crops and washing or cooking vegetables"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy for ova and parasites, with concentration methods, Careful egg morphometry to distinguish from hookworm eggs,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trichostrongylus species are small nematodes that normally parasitise the intestines of sheep, goats, cattle and other herbivores. Eggs passed in the faeces of these animals develop in soil into infective larvae that contaminate low-growing vegetables and herbage. Humans acquire infection by ingesting these larvae rather than through skin penetration. In the small intestine the larvae mature into adult worms that attach superficially to the mucosa, where light infections cause little harm. Heavier worm burdens produce localised mucosal irritation and inflammation with abdominal symptoms and diarrhoea, and chronic infection can contribute to mild blood and protein loss and anaemia. Eggs shed in the faeces return to the soil to continue the cycle, sustained by both animal reservoirs and human contamination.",
+    "additionalDifferentials": [
+      "Hookworm infection (Ancylostoma or Necator), given similar eggs",
+      "Strongyloidiasis and other intestinal nematode infection",
+      "Giardiasis and other protozoal enteritis",
+      "Irritable bowel syndrome or functional dyspepsia",
+      "Other causes of eosinophilia with gastrointestinal symptoms",
+      "Coeliac disease or another cause of mild malabsorption"
     ],
-    [
-     "Primary Differentials",
-     "Hookworm infection (Ancylostoma or Necator), given similar eggs, Strongyloidiasis and other intestinal nematode infection,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy for ova and parasites, with concentration methods",
+      "Careful egg morphometry to distinguish from hookworm eggs",
+      "Full blood count for eosinophilia and anaemia",
+      "Larval culture of stool to confirm the species where required",
+      "Repeat stool sampling in light infection",
+      "Dietary and occupational history of exposure to livestock and raw vegetables"
     ],
-    [
-     "Management Strategy",
-     "Treat with a benzimidazole anthelmintic such as albendazole or mebendazole, with pyrantel as an alternative, to eradicate the",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant anaemia in heavy or chronic infection",
+      "Persistent diarrhoea with weight loss",
+      "Symptoms unresponsive to appropriate anthelmintic therapy",
+      "Coexisting malnutrition, particularly in children"
     ],
-    [
-     "Clinical Pitfall",
-     "Misidentifying the eggs as hookworm and misdirecting management",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent, as infection is usually mild and clears readily with anthelmintic treatment; heavy chronic infection resolves once the worm burden is eradicated.",
+    "pitfalls": [
+      "Misidentifying the eggs as hookworm and misdirecting management",
+      "Missing light infections on a single stool sample",
+      "Attributing eosinophilia to allergy rather than looking for intestinal helminths",
+      "Overlooking the animal reservoir and manure exposure when advising on prevention"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with a benzimidazole anthelmintic such as albendazole or mebendazole, with pyrantel as an alternative, to eradicate the intestinal worm burden",
+      "Provide supportive care by correcting iron-deficiency anaemia and supporting nutrition in heavier or chronic infection",
+      "Confirm clearance with follow-up stool microscopy, repeating treatment if eggs persist",
+      "Screen and treat exposed household or community members in endemic farming settings",
+      "Advise prevention through thorough washing or cooking of vegetables and greens, improved sanitation and avoidance of fresh animal manure on crops to interrupt the soil cycle",
+      "Seek infectious diseases or tropical medicine input for heavy or diagnostically uncertain infections"
     ]
-   ],
-   "caption": "Overview comparison matrix for trichostrongyliasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trichostrongyliasis-real-image",
-   "title": "Trichostrongyliasis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "trichostrongyliasis-pathway",
+      "title": "Trichostrongyliasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Trichostrongylus species, small nematodes chiefly of herbivores, with human infection common in rural farming communities of Asia, the Middle East and elsewhere",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant anaemia in heavy or chronic infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy for ova and parasites, with concentration methods, Careful egg morphometry to distinguish from hookworm eggs, Full blood count for eosinophilia and anaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with a benzimidazole anthelmintic such as albendazole or mebendazole, with pyrantel as an alternative, to eradicate the intestinal worm burden"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misidentifying the eggs as hookworm and misdirecting management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trichostrongyliasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trichostrongyliasis-matrix",
+      "title": "Trichostrongyliasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Trichostrongylus species, small nematodes chiefly of herbivores, with human infection common in rural farming",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy for ova and parasites, with concentration methods, Careful egg morphometry to distinguish from hookworm eggs,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hookworm infection (Ancylostoma or Necator), given similar eggs, Strongyloidiasis and other intestinal nematode infection,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with a benzimidazole anthelmintic such as albendazole or mebendazole, with pyrantel as an alternative, to eradicate the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misidentifying the eggs as hookworm and misdirecting management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trichostrongyliasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichostrongyliasis-dx-mgmt",
+      "title": "Diagnosis and management of Trichostrongyliasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichostrongyliasis: abdominal pain and eosinophilia after raw greens",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: significant anaemia, persistent diarrhoea with weight loss, or malnutrition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nutritional and anaemia assessment in heavy infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy with concentration; egg morphometry; full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are Trichostrongylus eggs found, distinguished from hookworm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hookworm, strongyloidiasis, giardiasis or functional bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Albendazole or mebendazole to clear the worm burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct iron-deficiency anaemia and support nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Follow-up stool microscopy to confirm clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and treat exposed contacts in endemic settings",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Sanitation and washing or cooking of vegetables",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent; infection is usually mild and clears with anthelmintic treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichostrongyliasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with concentration methods",
+          "cells": [
+            {
+              "text": "Trichostrongylus eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Egg morphometry",
+          "cells": [
+            {
+              "text": "Separates from hookworm eggs, which are smaller"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia and anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Larval culture",
+          "cells": [
+            {
+              "text": "Species confirmation, where required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat stool sampling",
+          "cells": [
+            {
+              "text": "Light infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichostrongyliasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hookworm infection",
+          "cells": [
+            {
+              "text": "Similar eggs; morphometry separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strongyloidiasis",
+          "cells": [
+            {
+              "text": "Larval-stage detection and a different life cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardiasis",
+          "cells": [
+            {
+              "text": "Protozoal cysts or trophozoites on stool testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichostrongyliasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzimidazole anthelmintic",
+          "cells": [
+            {
+              "text": "Albendazole or mebendazole; pyrantel as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron and nutrition support",
+          "cells": [
+            {
+              "text": "Heavier or chronic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clearance check",
+          "cells": [
+            {
+              "text": "Follow-up stool microscopy; repeat treatment if eggs persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening of exposed contacts",
+          "cells": [
+            {
+              "text": "Endemic farming settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Washing or cooking vegetables; sanitation; no fresh manure on crops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Heavy or diagnostically uncertain infections"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

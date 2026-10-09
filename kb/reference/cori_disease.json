@@ -1,177 +1,455 @@
 {
- "id": "cori_disease",
- "name": "Cori disease (glycogen storage disease type III)",
- "aliases": [
-  "glycogen storage disease type III",
-  "GSD III",
-  "Forbes disease",
-  "debrancher enzyme deficiency",
-  "amylo-1,6-glucosidase deficiency",
-  "AGL deficiency",
-  "limit dextrinosis"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder caused by deficiency of the glycogen debranching enzyme (AGL gene), leading to accumulation of abnormal, short-branched glycogen (limit dextrin)",
-   "Presents in childhood with fasting ketotic hypoglycaemia and prominent hepatomegaly, often resembling a milder von Gierke disease",
-   "Type IIIa affects both liver and muscle, whereas type IIIb affects the liver only",
-   "Because gluconeogenesis is intact, hypoglycaemia is typically ketotic and lactate and uric acid are usually normal, unlike type I",
-   "Serum transaminases are often markedly elevated, and hepatomegaly frequently improves after puberty",
-   "In type IIIa a progressive myopathy and cardiomyopathy can emerge in later childhood or adult life",
-   "Management centres on avoiding fasting with frequent feeds, uncooked cornstarch therapy, and a diet relatively high in protein"
+  "id": "cori_disease",
+  "name": "Cori disease (glycogen storage disease type III)",
+  "aliases": [
+    "glycogen storage disease type III",
+    "GSD III",
+    "Forbes disease",
+    "debrancher enzyme deficiency",
+    "amylo-1,6-glucosidase deficiency",
+    "AGL deficiency",
+    "limit dextrinosis"
   ],
-  "pathophysiology": "Cori disease results from deficiency of the glycogen debranching enzyme, which normally works with phosphorylase to fully degrade glycogen at its branch points. Loss of debranching activity halts glycogenolysis once the outer glucose chains are removed, leaving an abnormal glycogen molecule with short outer branches (limit dextrin) that accumulates in liver and, in type IIIa, in skeletal and cardiac muscle. Because gluconeogenesis remains functional, patients can still generate glucose from non-carbohydrate precursors, so fasting hypoglycaemia is generally milder than in type I and is accompanied by ketosis rather than lactic acidosis. Chronic glycogen and metabolic stress produce hepatomegaly and transaminitis, and in muscle-involving disease lead to progressive myopathy and cardiomyopathy.",
-  "additionalDifferentials": [
-   "Glycogen storage disease type I (von Gierke)",
-   "Glycogen storage disease types VI and IX",
-   "Glycogen storage disease type IV (branching enzyme deficiency)",
-   "Other causes of ketotic hypoglycaemia in childhood",
-   "Hepatic causes of hepatomegaly with transaminitis",
-   "Muscular dystrophies or metabolic myopathies when muscle involvement predominates"
-  ],
-  "additionalInvestigations": [
-   "Blood glucose, ketones, lactate, and uric acid during controlled fasting",
-   "Liver function tests demonstrating elevated transaminases",
-   "Creatine kinase and cardiac assessment (echocardiography, ECG) in suspected type IIIa",
-   "Fasting studies distinguishing ketotic from lactic-acidotic hypoglycaemia",
-   "Molecular genetic testing of the AGL gene",
-   "Muscle or liver enzyme assay where diagnostic confirmation is needed"
-  ],
-  "redFlags": [
-   "Symptomatic hypoglycaemia with reduced consciousness or seizures",
-   "Progressive muscle weakness or exercise intolerance suggesting myopathy",
-   "Features of cardiomyopathy such as heart failure or arrhythmia in type IIIa",
-   "Progression to hepatic fibrosis or cirrhosis"
-  ],
-  "prognosis": "Hepatic and hypoglycaemic manifestations often improve after puberty and overall prognosis is better than type I; however, in type IIIa progressive myopathy and cardiomyopathy can dominate the long-term course and determine outcome.",
-  "pitfalls": [
-   "Mistaking Cori disease for von Gierke disease and expecting lactic acidosis and hyperuricaemia",
-   "Overlooking muscle and cardiac involvement in type IIIa during follow-up",
-   "Assuming hepatomegaly and transaminitis reflect primary liver disease",
-   "Neglecting cardiac surveillance in patients with muscle-affecting disease"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Dietary management is the mainstay: frequent complex-carbohydrate feeds and uncooked cornstarch, with overnight feeding in infancy, to prevent fasting ketotic hypoglycaemia",
-   "Provide a high-protein diet to exploit intact gluconeogenesis and support muscle in type IIIa",
-   "Educate on sick-day rules and emergency carbohydrate provision to avert hypoglycaemic crises during intercurrent illness",
-   "Monitor blood glucose, ketones, transaminases and creatine kinase, with growth and nutritional assessment",
-   "Undertake cardiac surveillance with echocardiography and electrocardiography for cardiomyopathy, and neuromuscular monitoring for progressive myopathy in type IIIa",
-   "Provide hepatology follow-up for liver fibrosis and adenoma surveillance",
-   "Offer genetic counselling for this autosomal recessive disorder and family screening, coordinated through a metabolic medicine multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cori_disease-pathway",
-   "title": "Cori disease (glycogen storage disease type III): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder caused by deficiency of the glycogen debranching enzyme (AGL gene), leading to accumulation of abnormal, short-branched glycogen (limit dextrin)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic hypoglycaemia with reduced consciousness or seizures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood glucose, ketones, lactate, and uric acid during controlled fasting, Liver function tests demonstrating elevated transaminases, Creatine kinase and cardiac assessment (echocardiography, ECG) in suspected type IIIa"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Dietary management is the mainstay: frequent complex-carbohydrate feeds and uncooked cornstarch, with overnight feeding in infancy, to prevent fasting ketotic hypoglycaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking Cori disease for von Gierke disease and expecting lactic acidosis and hyperuricaemia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cori disease (glycogen storage disease type iii)."
-  }
- ],
- "tables": [
-  {
-   "id": "cori_disease-matrix",
-   "title": "Cori disease (glycogen storage disease type III): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder caused by deficiency of the glycogen debranching enzyme (AGL gene), leading to accumulation of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder caused by deficiency of the glycogen debranching enzyme (AGL gene), leading to accumulation of abnormal, short-branched glycogen (limit dextrin)",
+      "Presents in childhood with fasting ketotic hypoglycaemia and prominent hepatomegaly, often resembling a milder von Gierke disease",
+      "Type IIIa affects both liver and muscle, whereas type IIIb affects the liver only",
+      "Because gluconeogenesis is intact, hypoglycaemia is typically ketotic and lactate and uric acid are usually normal, unlike type I",
+      "Serum transaminases are often markedly elevated, and hepatomegaly frequently improves after puberty",
+      "In type IIIa a progressive myopathy and cardiomyopathy can emerge in later childhood or adult life",
+      "Management centres on avoiding fasting with frequent feeds, uncooked cornstarch therapy, and a diet relatively high in protein"
     ],
-    [
-     "Key Investigations",
-     "Blood glucose, ketones, lactate, and uric acid during controlled fasting, Liver function tests demonstrating elevated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cori disease results from deficiency of the glycogen debranching enzyme, which normally works with phosphorylase to fully degrade glycogen at its branch points. Loss of debranching activity halts glycogenolysis once the outer glucose chains are removed, leaving an abnormal glycogen molecule with short outer branches (limit dextrin) that accumulates in liver and, in type IIIa, in skeletal and cardiac muscle. Because gluconeogenesis remains functional, patients can still generate glucose from non-carbohydrate precursors, so fasting hypoglycaemia is generally milder than in type I and is accompanied by ketosis rather than lactic acidosis. Chronic glycogen and metabolic stress produce hepatomegaly and transaminitis, and in muscle-involving disease lead to progressive myopathy and cardiomyopathy.",
+    "additionalDifferentials": [
+      "Glycogen storage disease type I (von Gierke)",
+      "Glycogen storage disease types VI and IX",
+      "Glycogen storage disease type IV (branching enzyme deficiency)",
+      "Other causes of ketotic hypoglycaemia in childhood",
+      "Hepatic causes of hepatomegaly with transaminitis",
+      "Muscular dystrophies or metabolic myopathies when muscle involvement predominates"
     ],
-    [
-     "Primary Differentials",
-     "Glycogen storage disease type I (von Gierke), Glycogen storage disease types VI and IX, Glycogen storage disease type IV",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood glucose, ketones, lactate, and uric acid during controlled fasting",
+      "Liver function tests demonstrating elevated transaminases",
+      "Creatine kinase and cardiac assessment (echocardiography, ECG) in suspected type IIIa",
+      "Fasting studies distinguishing ketotic from lactic-acidotic hypoglycaemia",
+      "Molecular genetic testing of the AGL gene",
+      "Muscle or liver enzyme assay where diagnostic confirmation is needed"
     ],
-    [
-     "Management Strategy",
-     "Dietary management is the mainstay: frequent complex-carbohydrate feeds and uncooked cornstarch, with overnight feeding in",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic hypoglycaemia with reduced consciousness or seizures",
+      "Progressive muscle weakness or exercise intolerance suggesting myopathy",
+      "Features of cardiomyopathy such as heart failure or arrhythmia in type IIIa",
+      "Progression to hepatic fibrosis or cirrhosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking Cori disease for von Gierke disease and expecting lactic acidosis and hyperuricaemia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hepatic and hypoglycaemic manifestations often improve after puberty and overall prognosis is better than type I; however, in type IIIa progressive myopathy and cardiomyopathy can dominate the long-term course and determine outcome.",
+    "pitfalls": [
+      "Mistaking Cori disease for von Gierke disease and expecting lactic acidosis and hyperuricaemia",
+      "Overlooking muscle and cardiac involvement in type IIIa during follow-up",
+      "Assuming hepatomegaly and transaminitis reflect primary liver disease",
+      "Neglecting cardiac surveillance in patients with muscle-affecting disease"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Dietary management is the mainstay: frequent complex-carbohydrate feeds and uncooked cornstarch, with overnight feeding in infancy, to prevent fasting ketotic hypoglycaemia",
+      "Provide a high-protein diet to exploit intact gluconeogenesis and support muscle in type IIIa",
+      "Educate on sick-day rules and emergency carbohydrate provision to avert hypoglycaemic crises during intercurrent illness",
+      "Monitor blood glucose, ketones, transaminases and creatine kinase, with growth and nutritional assessment",
+      "Undertake cardiac surveillance with echocardiography and electrocardiography for cardiomyopathy, and neuromuscular monitoring for progressive myopathy in type IIIa",
+      "Provide hepatology follow-up for liver fibrosis and adenoma surveillance",
+      "Offer genetic counselling for this autosomal recessive disorder and family screening, coordinated through a metabolic medicine multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for cori disease (glycogen storage disease type iii)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cori-disease-real-image",
-   "title": "Cori disease (glycogen storage disease type III): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cori_disease-pathway",
+      "title": "Cori disease (glycogen storage disease type III): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder caused by deficiency of the glycogen debranching enzyme (AGL gene), leading to accumulation of abnormal, short-branched glycogen (limit dextrin)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic hypoglycaemia with reduced consciousness or seizures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood glucose, ketones, lactate, and uric acid during controlled fasting, Liver function tests demonstrating elevated transaminases, Creatine kinase and cardiac assessment (echocardiography, ECG) in suspected type IIIa"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Dietary management is the mainstay: frequent complex-carbohydrate feeds and uncooked cornstarch, with overnight feeding in infancy, to prevent fasting ketotic hypoglycaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking Cori disease for von Gierke disease and expecting lactic acidosis and hyperuricaemia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cori disease (glycogen storage disease type iii)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cori_disease-matrix",
+      "title": "Cori disease (glycogen storage disease type III): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder caused by deficiency of the glycogen debranching enzyme (AGL gene), leading to accumulation of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood glucose, ketones, lactate, and uric acid during controlled fasting, Liver function tests demonstrating elevated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glycogen storage disease type I (von Gierke), Glycogen storage disease types VI and IX, Glycogen storage disease type IV",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Dietary management is the mainstay: frequent complex-carbohydrate feeds and uncooked cornstarch, with overnight feeding in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking Cori disease for von Gierke disease and expecting lactic acidosis and hyperuricaemia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cori disease (glycogen storage disease type iii)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cori_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood glucose, ketones, lactate and uric acid during controlled fasting",
+          "cells": [
+            {
+              "text": "Ketotic rather than lactic-acidotic hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Elevated transaminases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase, echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Suspected type IIIa muscle and cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of AGL",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cori_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glycogen storage disease type I (von Gierke)",
+          "cells": [
+            {
+              "text": "Pitfall: expecting lactic acidosis and hyperuricaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycogen storage disease type IV",
+          "cells": [
+            {
+              "text": "Named look-alike with branching enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycogen storage disease types VI and IX",
+          "cells": [
+            {
+              "text": "Named hepatic look-alikes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cori_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Frequent complex-carbohydrate feeds",
+          "cells": [
+            {
+              "text": "Uncooked cornstarch and overnight feeding in infancy to prevent fasting hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-protein diet",
+          "cells": [
+            {
+              "text": "Exploits intact gluconeogenesis and supports muscle in type IIIa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day rules",
+          "cells": [
+            {
+              "text": "Emergency carbohydrate provision during illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood glucose, ketones, transaminases, creatine kinase, growth and nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and neuromuscular surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and ECG for cardiomyopathy; monitoring for progressive myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatology follow-up",
+          "cells": [
+            {
+              "text": "Liver fibrosis and adenoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cori_disease-dx-mgmt",
+      "title": "Diagnosis and management of Cori disease (glycogen storage disease type III)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cori disease (GSD III): fasting hypoglycaemia with hepatomegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, progressive weakness, cardiomyopathy, fibrosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucose correction for symptomatic hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting glucose, ketones and lactate; transaminases; CK; ECG; AGL testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does fasting show ketotic hypoglycaemia with AGL variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider von Gierke disease, GSD IV or other ketotic hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Frequent complex-carbohydrate feeds and uncooked cornstarch",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-protein diet to exploit gluconeogenesis in type IIIa",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sick-day rules and emergency carbohydrate during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac and neuromuscular surveillance; hepatology follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hepatic and hypoglycaemic features often improve after puberty; myopathy progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,462 @@
 {
- "id": "macular_hole",
- "name": "Macular hole",
- "aliases": [
-  "full-thickness macular hole",
-  "FTMH",
-  "idiopathic macular hole"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with gradual central visual loss and metamorphopsia, often first noticed as a distortion on an Amsler grid",
-   "Most cases are idiopathic and age-related, affecting women more often, and are usually unilateral at presentation",
-   "The Watzke-Allen slit-beam test and a positive scotoma to a fixation target support the diagnosis at the bedside",
-   "Optical coherence tomography is the diagnostic standard and stages the hole while distinguishing it from a pseudohole or lamellar hole",
-   "Vitreomacular traction from posterior vitreous separation is the principal mechanism in idiopathic disease",
-   "Surgical repair by vitrectomy with internal limiting membrane peel and gas tamponade closes most holes, sometimes with face-down posturing",
-   "Trauma and high myopia are recognised secondary causes and myopic holes carry a higher detachment risk",
-   "Earlier and smaller holes achieve better closure rates and visual recovery than large chronic ones"
+  "id": "macular_hole",
+  "name": "Macular hole",
+  "aliases": [
+    "full-thickness macular hole",
+    "FTMH",
+    "idiopathic macular hole"
   ],
-  "pathophysiology": "An idiopathic full-thickness macular hole develops when tangential and anteroposterior traction from the perifoveal vitreous acts on the fovea during posterior vitreous detachment. This traction elevates and then dehisces the foveal tissue, creating a full-thickness defect with surrounding cuff of subretinal fluid and cystic change. Progressive stages run from foveal detachment and pseudocyst through to an established round hole. Secondary holes may follow blunt trauma or the mechanical stresses of high myopia, where posterior staphyloma adds traction.",
-  "additionalDifferentials": [
-   "Macular pseudohole from an epiretinal membrane",
-   "Lamellar macular hole",
-   "Vitreomacular traction syndrome without a hole",
-   "Cystoid macular oedema",
-   "Central serous chorioretinopathy",
-   "Solar or laser maculopathy"
-  ],
-  "additionalInvestigations": [
-   "Optical coherence tomography to confirm and stage a full-thickness hole and measure its diameter",
-   "Amsler grid and Watzke-Allen testing to characterise the central defect",
-   "Dilated fundus examination of both eyes as the fellow eye carries some risk",
-   "Axial length or refraction assessment when myopic traction is suspected",
-   "History of ocular trauma in atypical or younger patients"
-  ],
-  "redFlags": [
-   "Myopic macular hole with signs of retinal detachment requiring urgent surgical assessment",
-   "Sudden worsening or new peripheral field loss suggesting an associated detachment",
-   "Bilateral or fellow-eye symptoms indicating risk to the only good eye",
-   "Traumatic hole with other posterior segment injury"
-  ],
-  "prognosis": "Modern vitrectomy with membrane peeling closes the large majority of idiopathic holes, and visual improvement is best when the hole is small and of short duration; large, chronic, or myopic holes have lower closure rates and more limited recovery.",
-  "pitfalls": [
-   "Confusing a pseudohole or lamellar hole with a full-thickness hole without OCT confirmation",
-   "Delaying referral so that a small, highly repairable hole enlarges and chronifies",
-   "Overlooking a coexisting retinal detachment in a myopic eye",
-   "Setting unrealistic expectations for visual recovery in long-standing holes"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Vitrectomy with internal limiting membrane peel and gas tamponade is the definitive treatment, closing the large majority of full-thickness holes",
-   "Post-operative prone or face-down posturing and avoidance of air travel and altitude while intraocular gas persists",
-   "Consider observation for very early vitreomacular-traction-stage holes that may resolve spontaneously, with pharmacological vitreolysis using ocriplasmin in selected traction cases",
-   "Optical coherence tomography to confirm and stage the hole and to monitor anatomical closure after surgery",
-   "Manage the cataract that commonly follows vitrectomy",
-   "Examine and monitor the fellow eye given its risk, with Amsler grid self-monitoring",
-   "Prompt referral to a vitreoretinal surgeon, as earlier repair of small, recent holes gives the best visual outcome"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "macular_hole-pathway",
-   "title": "Macular hole: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with gradual central visual loss and metamorphopsia, often first noticed as a distortion on an Amsler grid",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Myopic macular hole with signs of retinal detachment requiring urgent surgical assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Optical coherence tomography to confirm and stage a full-thickness hole and measure its diameter, Amsler grid and Watzke-Allen testing to characterise the central defect, Dilated fundus examination of both eyes as the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Vitrectomy with internal limiting membrane peel and gas tamponade is the definitive treatment, closing the large majority of full-thickness holes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a pseudohole or lamellar hole with a full-thickness hole without OCT confirmation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of macular hole."
-  }
- ],
- "tables": [
-  {
-   "id": "macular_hole-matrix",
-   "title": "Macular hole: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with gradual central visual loss and metamorphopsia, often first noticed as a distortion on an Amsler grid",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with gradual central visual loss and metamorphopsia, often first noticed as a distortion on an Amsler grid",
+      "Most cases are idiopathic and age-related, affecting women more often, and are usually unilateral at presentation",
+      "The Watzke-Allen slit-beam test and a positive scotoma to a fixation target support the diagnosis at the bedside",
+      "Optical coherence tomography is the diagnostic standard and stages the hole while distinguishing it from a pseudohole or lamellar hole",
+      "Vitreomacular traction from posterior vitreous separation is the principal mechanism in idiopathic disease",
+      "Surgical repair by vitrectomy with internal limiting membrane peel and gas tamponade closes most holes, sometimes with face-down posturing",
+      "Trauma and high myopia are recognised secondary causes and myopic holes carry a higher detachment risk",
+      "Earlier and smaller holes achieve better closure rates and visual recovery than large chronic ones"
     ],
-    [
-     "Key Investigations",
-     "Optical coherence tomography to confirm and stage a full-thickness hole and measure its diameter, Amsler grid and Watzke-Allen",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An idiopathic full-thickness macular hole develops when tangential and anteroposterior traction from the perifoveal vitreous acts on the fovea during posterior vitreous detachment. This traction elevates and then dehisces the foveal tissue, creating a full-thickness defect with surrounding cuff of subretinal fluid and cystic change. Progressive stages run from foveal detachment and pseudocyst through to an established round hole. Secondary holes may follow blunt trauma or the mechanical stresses of high myopia, where posterior staphyloma adds traction.",
+    "additionalDifferentials": [
+      "Macular pseudohole from an epiretinal membrane",
+      "Lamellar macular hole",
+      "Vitreomacular traction syndrome without a hole",
+      "Cystoid macular oedema",
+      "Central serous chorioretinopathy",
+      "Solar or laser maculopathy"
     ],
-    [
-     "Primary Differentials",
-     "Macular pseudohole from an epiretinal membrane, Lamellar macular hole, Vitreomacular traction syndrome without a hole",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Optical coherence tomography to confirm and stage a full-thickness hole and measure its diameter",
+      "Amsler grid and Watzke-Allen testing to characterise the central defect",
+      "Dilated fundus examination of both eyes as the fellow eye carries some risk",
+      "Axial length or refraction assessment when myopic traction is suspected",
+      "History of ocular trauma in atypical or younger patients"
     ],
-    [
-     "Management Strategy",
-     "Vitrectomy with internal limiting membrane peel and gas tamponade is the definitive treatment, closing the large majority of",
-     "Core treatment modality"
+    "redFlags": [
+      "Myopic macular hole with signs of retinal detachment requiring urgent surgical assessment",
+      "Sudden worsening or new peripheral field loss suggesting an associated detachment",
+      "Bilateral or fellow-eye symptoms indicating risk to the only good eye",
+      "Traumatic hole with other posterior segment injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a pseudohole or lamellar hole with a full-thickness hole without OCT confirmation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Modern vitrectomy with membrane peeling closes the large majority of idiopathic holes, and visual improvement is best when the hole is small and of short duration; large, chronic, or myopic holes have lower closure rates and more limited recovery.",
+    "pitfalls": [
+      "Confusing a pseudohole or lamellar hole with a full-thickness hole without OCT confirmation",
+      "Delaying referral so that a small, highly repairable hole enlarges and chronifies",
+      "Overlooking a coexisting retinal detachment in a myopic eye",
+      "Setting unrealistic expectations for visual recovery in long-standing holes"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Vitrectomy with internal limiting membrane peel and gas tamponade is the definitive treatment, closing the large majority of full-thickness holes",
+      "Post-operative prone or face-down posturing and avoidance of air travel and altitude while intraocular gas persists",
+      "Consider observation for very early vitreomacular-traction-stage holes that may resolve spontaneously, with pharmacological vitreolysis using ocriplasmin in selected traction cases",
+      "Optical coherence tomography to confirm and stage the hole and to monitor anatomical closure after surgery",
+      "Manage the cataract that commonly follows vitrectomy",
+      "Examine and monitor the fellow eye given its risk, with Amsler grid self-monitoring",
+      "Prompt referral to a vitreoretinal surgeon, as earlier repair of small, recent holes gives the best visual outcome"
     ]
-   ],
-   "caption": "Overview comparison matrix for macular hole."
-  }
- ],
- "diagrams": [
-  {
-   "id": "macular-hole-real-image",
-   "title": "Macular hole: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "macular_hole-pathway",
+      "title": "Macular hole: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with gradual central visual loss and metamorphopsia, often first noticed as a distortion on an Amsler grid",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Myopic macular hole with signs of retinal detachment requiring urgent surgical assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Optical coherence tomography to confirm and stage a full-thickness hole and measure its diameter, Amsler grid and Watzke-Allen testing to characterise the central defect, Dilated fundus examination of both eyes as the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Vitrectomy with internal limiting membrane peel and gas tamponade is the definitive treatment, closing the large majority of full-thickness holes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a pseudohole or lamellar hole with a full-thickness hole without OCT confirmation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of macular hole."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "macular_hole-matrix",
+      "title": "Macular hole: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with gradual central visual loss and metamorphopsia, often first noticed as a distortion on an Amsler grid",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Optical coherence tomography to confirm and stage a full-thickness hole and measure its diameter, Amsler grid and Watzke-Allen",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Macular pseudohole from an epiretinal membrane, Lamellar macular hole, Vitreomacular traction syndrome without a hole",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Vitrectomy with internal limiting membrane peel and gas tamponade is the definitive treatment, closing the large majority of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a pseudohole or lamellar hole with a full-thickness hole without OCT confirmation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for macular hole."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "macular_hole-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Full-thickness hole, stage and diameter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watzke-Allen slit-beam test and Amsler grid",
+          "cells": [
+            {
+              "text": "Positive central scotoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination of both eyes",
+          "cells": [
+            {
+              "text": "Coexisting detachment and fellow-eye risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axial length or refraction",
+          "cells": [
+            {
+              "text": "Myopic traction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of ocular trauma",
+          "cells": [
+            {
+              "text": "Secondary causes in younger patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "macular_hole-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Macular pseudohole from epiretinal membrane",
+          "cells": [
+            {
+              "text": "No true full-thickness defect on OCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lamellar macular hole",
+          "cells": [
+            {
+              "text": "Partial-thickness defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreomacular traction without a hole",
+          "cells": [
+            {
+              "text": "Traction without full-thickness loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central serous chorioretinopathy",
+          "cells": [
+            {
+              "text": "Subretinal fluid pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "macular_hole-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitrectomy with membrane peel",
+          "cells": [
+            {
+              "text": "Internal limiting membrane peel and gas tamponade; closes most holes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positioning",
+          "cells": [
+            {
+              "text": "Face-down posturing; avoid air travel and altitude while gas persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early small holes",
+          "cells": [
+            {
+              "text": "Observation for very early traction-stage holes; ocriplasmin in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-operative cataract",
+          "cells": [
+            {
+              "text": "Managed as it commonly follows vitrectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fellow eye",
+          "cells": [
+            {
+              "text": "Examined and monitored with Amsler self-check"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "macular_hole-dx-mgmt",
+      "title": "Diagnosis and management of Macular hole",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gradual central blur and metamorphopsia in an older adult, often in one eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (myopic eye with detachment signs or sudden field loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vitreoretinal referral for detachment or trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Optical coherence tomography, Watzke-Allen test, fellow-eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does OCT show a full-thickness macular hole?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pseudohole, lamellar hole or vitreomacular traction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Refer promptly to a vitreoretinal surgeon",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vitrectomy with internal limiting membrane peel and gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Face-down posturing and altitude restriction while gas persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "OCT monitoring of anatomical closure after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor the fellow eye with Amsler grid self-checks",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most idiopathic holes close; small, recent holes give the best visual outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

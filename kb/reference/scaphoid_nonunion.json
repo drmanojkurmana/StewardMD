@@ -1,174 +1,452 @@
 {
- "id": "scaphoid_nonunion",
- "name": "scaphoid nonunion",
- "aliases": [
-  "scaphoid fracture nonunion",
-  "ununited scaphoid fracture"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Hand and wrist surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Scaphoid nonunion typically follows a missed, inadequately immobilised or displaced waist fracture, and the retrograde blood supply predisposes the proximal pole to avascular necrosis.",
-   "The blood supply enters distally via dorsal ridge branches of the radial artery, so more proximal fractures heal least reliably.",
-   "Untreated nonunion produces a humpback (flexion) deformity with a DISI posture and a predictable arthritic cascade termed SNAC.",
-   "SNAC progresses from radial styloid and distal scaphoid arthritis to periscaphoid and midcarpal degeneration, characteristically sparing the radiolunate joint.",
-   "CT reconstructed along the long axis of the scaphoid best defines union, displacement and humpback deformity.",
-   "MRI assesses proximal pole vascularity and helps decide between vascularised and non-vascularised bone grafting.",
-   "Vascularised bone grafting is favoured for an avascular proximal pole, whereas structural wedge grafting is used to correct humpback deformity."
+  "id": "scaphoid_nonunion",
+  "name": "scaphoid nonunion",
+  "aliases": [
+    "scaphoid fracture nonunion",
+    "ununited scaphoid fracture"
   ],
-  "pathophysiology": "The scaphoid is largely covered by articular cartilage and receives most of its blood supply retrogradely from branches of the radial artery entering the distal dorsal ridge. A fracture, particularly of the waist or proximal pole, can devascularise the proximal fragment. Persistent motion combined with poor vascularity prevents bridging bone and produces a fibrous or sclerotic nonunion. Volar bone resorption causes the scaphoid to collapse into flexion, the humpback deformity, with compensatory lunate extension producing DISI. Altered load transmission then drives progressive periscaphoid and midcarpal arthritis, the SNAC pattern.",
-  "additionalDifferentials": [
-   "Acute scaphoid fracture",
-   "Congenital bipartite scaphoid",
-   "Kienböck disease",
-   "Scapholunate dissociation or SLAC wrist",
-   "Preiser disease (idiopathic scaphoid osteonecrosis)",
-   "Radial styloid or trapezial osteoarthritis",
-   "De Quervain tenosynovitis"
-  ],
-  "additionalInvestigations": [
-   "PA, lateral, oblique and dedicated scaphoid-view radiographs",
-   "CT reconstructed along the scaphoid long axis for union and deformity assessment",
-   "MRI to evaluate proximal pole vascularity",
-   "Contralateral comparison radiographs",
-   "Intraoperative assessment of punctate bleeding to gauge bone vascularity",
-   "Metabolic or inflammatory screen in atypical presentations"
-  ],
-  "redFlags": [
-   "Proximal pole sclerosis or fragmentation indicating avascular necrosis",
-   "Established humpback deformity with DISI",
-   "Radiographic SNAC changes signalling irreversible arthritis",
-   "Persistent wrist pain and functional decline in a young manual worker"
-  ],
-  "prognosis": "With appropriate grafting and fixation before arthritis develops, union rates are good, but established SNAC arthritis is irreversible and ultimately requires salvage surgery.",
-  "pitfalls": [
-   "Missing the original fracture on initial radiographs and mislabelling it a sprain.",
-   "Assuming union on plain films without CT confirmation.",
-   "Neglecting proximal pole vascularity assessment before selecting a graft.",
-   "Failing to correct humpback deformity and leaving residual malalignment.",
-   "Overlooking established SNAC arthritis when planning reconstruction."
-  ],
-  "references": [
-   "Green's Operative Hand Surgery",
-   "Rockwood and Green's Fractures in Adults",
-   "Wheeless' Textbook of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat nonunion before arthritis develops with internal fixation and bone grafting to achieve union",
-   "Use a structural interpositional graft to correct the humpback flexion deformity and restore scaphoid length and alignment",
-   "Select a vascularised bone graft when the proximal pole is avascular or a non-vascularised graft has failed",
-   "Manage established SNAC arthritis with salvage procedures such as proximal row carpectomy, scaphoid excision with four-corner fusion, or total wrist fusion",
-   "Assess proximal pole vascularity with MRI and intraoperative punctate bleeding to guide graft choice",
-   "Provide postoperative immobilisation followed by hand therapy, and refer to a hand surgeon for definitive management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scaphoid_nonunion-pathway",
-   "title": "scaphoid nonunion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Scaphoid nonunion typically follows a missed, inadequately immobilised or displaced waist fracture, and the retrograde blood supply predisposes the proximal pole to avascular necrosis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Proximal pole sclerosis or fragmentation indicating avascular necrosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: PA, lateral, oblique and dedicated scaphoid-view radiographs, CT reconstructed along the scaphoid long axis for union and deformity assessment, MRI to evaluate proximal pole vascularity"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat nonunion before arthritis develops with internal fixation and bone grafting to achieve union"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the original fracture on initial radiographs and mislabelling it a sprain."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scaphoid nonunion."
-  }
- ],
- "tables": [
-  {
-   "id": "scaphoid_nonunion-matrix",
-   "title": "scaphoid nonunion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Scaphoid nonunion typically follows a missed, inadequately immobilised or displaced waist fracture, and the retrograde blood",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Hand and wrist surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Scaphoid nonunion typically follows a missed, inadequately immobilised or displaced waist fracture, and the retrograde blood supply predisposes the proximal pole to avascular necrosis.",
+      "The blood supply enters distally via dorsal ridge branches of the radial artery, so more proximal fractures heal least reliably.",
+      "Untreated nonunion produces a humpback (flexion) deformity with a DISI posture and a predictable arthritic cascade termed SNAC.",
+      "SNAC progresses from radial styloid and distal scaphoid arthritis to periscaphoid and midcarpal degeneration, characteristically sparing the radiolunate joint.",
+      "CT reconstructed along the long axis of the scaphoid best defines union, displacement and humpback deformity.",
+      "MRI assesses proximal pole vascularity and helps decide between vascularised and non-vascularised bone grafting.",
+      "Vascularised bone grafting is favoured for an avascular proximal pole, whereas structural wedge grafting is used to correct humpback deformity."
     ],
-    [
-     "Key Investigations",
-     "PA, lateral, oblique and dedicated scaphoid-view radiographs, CT reconstructed along the scaphoid long axis for union and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The scaphoid is largely covered by articular cartilage and receives most of its blood supply retrogradely from branches of the radial artery entering the distal dorsal ridge. A fracture, particularly of the waist or proximal pole, can devascularise the proximal fragment. Persistent motion combined with poor vascularity prevents bridging bone and produces a fibrous or sclerotic nonunion. Volar bone resorption causes the scaphoid to collapse into flexion, the humpback deformity, with compensatory lunate extension producing DISI. Altered load transmission then drives progressive periscaphoid and midcarpal arthritis, the SNAC pattern.",
+    "additionalDifferentials": [
+      "Acute scaphoid fracture",
+      "Congenital bipartite scaphoid",
+      "Kienböck disease",
+      "Scapholunate dissociation or SLAC wrist",
+      "Preiser disease (idiopathic scaphoid osteonecrosis)",
+      "Radial styloid or trapezial osteoarthritis",
+      "De Quervain tenosynovitis"
     ],
-    [
-     "Primary Differentials",
-     "Acute scaphoid fracture, Congenital bipartite scaphoid, Kienböck disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "PA, lateral, oblique and dedicated scaphoid-view radiographs",
+      "CT reconstructed along the scaphoid long axis for union and deformity assessment",
+      "MRI to evaluate proximal pole vascularity",
+      "Contralateral comparison radiographs",
+      "Intraoperative assessment of punctate bleeding to gauge bone vascularity",
+      "Metabolic or inflammatory screen in atypical presentations"
     ],
-    [
-     "Management Strategy",
-     "Treat nonunion before arthritis develops with internal fixation and bone grafting to achieve union",
-     "Core treatment modality"
+    "redFlags": [
+      "Proximal pole sclerosis or fragmentation indicating avascular necrosis",
+      "Established humpback deformity with DISI",
+      "Radiographic SNAC changes signalling irreversible arthritis",
+      "Persistent wrist pain and functional decline in a young manual worker"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the original fracture on initial radiographs and mislabelling it a sprain.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate grafting and fixation before arthritis develops, union rates are good, but established SNAC arthritis is irreversible and ultimately requires salvage surgery.",
+    "pitfalls": [
+      "Missing the original fracture on initial radiographs and mislabelling it a sprain.",
+      "Assuming union on plain films without CT confirmation.",
+      "Neglecting proximal pole vascularity assessment before selecting a graft.",
+      "Failing to correct humpback deformity and leaving residual malalignment.",
+      "Overlooking established SNAC arthritis when planning reconstruction."
+    ],
+    "references": [
+      "Green's Operative Hand Surgery",
+      "Rockwood and Green's Fractures in Adults",
+      "Wheeless' Textbook of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat nonunion before arthritis develops with internal fixation and bone grafting to achieve union",
+      "Use a structural interpositional graft to correct the humpback flexion deformity and restore scaphoid length and alignment",
+      "Select a vascularised bone graft when the proximal pole is avascular or a non-vascularised graft has failed",
+      "Manage established SNAC arthritis with salvage procedures such as proximal row carpectomy, scaphoid excision with four-corner fusion, or total wrist fusion",
+      "Assess proximal pole vascularity with MRI and intraoperative punctate bleeding to guide graft choice",
+      "Provide postoperative immobilisation followed by hand therapy, and refer to a hand surgeon for definitive management"
     ]
-   ],
-   "caption": "Overview comparison matrix for scaphoid nonunion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scaphoid-nonunion-real-image",
-   "title": "scaphoid nonunion: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "scaphoid_nonunion-pathway",
+      "title": "scaphoid nonunion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Scaphoid nonunion typically follows a missed, inadequately immobilised or displaced waist fracture, and the retrograde blood supply predisposes the proximal pole to avascular necrosis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Proximal pole sclerosis or fragmentation indicating avascular necrosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: PA, lateral, oblique and dedicated scaphoid-view radiographs, CT reconstructed along the scaphoid long axis for union and deformity assessment, MRI to evaluate proximal pole vascularity"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat nonunion before arthritis develops with internal fixation and bone grafting to achieve union"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the original fracture on initial radiographs and mislabelling it a sprain."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scaphoid nonunion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scaphoid_nonunion-matrix",
+      "title": "scaphoid nonunion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Scaphoid nonunion typically follows a missed, inadequately immobilised or displaced waist fracture, and the retrograde blood",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "PA, lateral, oblique and dedicated scaphoid-view radiographs, CT reconstructed along the scaphoid long axis for union and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute scaphoid fracture, Congenital bipartite scaphoid, Kienböck disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat nonunion before arthritis develops with internal fixation and bone grafting to achieve union",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the original fracture on initial radiographs and mislabelling it a sprain.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scaphoid nonunion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scaphoid_nonunion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PA, lateral, oblique and scaphoid-view radiographs",
+          "cells": [
+            {
+              "text": "Baseline assessment of the nonunion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT along the scaphoid long axis",
+          "cells": [
+            {
+              "text": "Union and deformity assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Proximal pole vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral comparison radiographs",
+          "cells": [
+            {
+              "text": "Reference for normal alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraoperative punctate bleeding",
+          "cells": [
+            {
+              "text": "Gauges bone vascularity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scaphoid_nonunion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute scaphoid fracture",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preiser disease",
+          "cells": [
+            {
+              "text": "Idiopathic scaphoid osteonecrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scapholunate dissociation or SLAC wrist",
+          "cells": [
+            {
+              "text": "Ligament and arthritic pattern rather than scaphoid nonunion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scaphoid_nonunion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Internal fixation with bone grafting",
+          "cells": [
+            {
+              "text": "Treat nonunion before arthritis develops to achieve union"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural interpositional graft",
+          "cells": [
+            {
+              "text": "Corrects humpback flexion deformity, restores length and alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascularised bone graft",
+          "cells": [
+            {
+              "text": "Avascular proximal pole or failed non-vascularised graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salvage procedures",
+          "cells": [
+            {
+              "text": "Established SNAC arthritis: proximal row carpectomy, scaphoid excision with four-corner fusion, or wrist fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascularity assessment",
+          "cells": [
+            {
+              "text": "MRI and intraoperative punctate bleeding guide graft choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immobilisation and hand therapy",
+          "cells": [
+            {
+              "text": "After surgery; hand surgeon manages definitively"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scaphoid_nonunion-dx-mgmt",
+      "title": "Diagnosis and management of scaphoid nonunion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent wrist pain after a scaphoid injury, often missed as a sprain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Proximal pole sclerosis, humpback deformity with DISI, or SNAC changes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hand surgeon referral before irreversible SNAC arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scaphoid radiographs, CT along scaphoid axis, MRI for proximal pole vascularity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT confirm nonunion without arthritis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider Preiser disease, bipartite scaphoid, SLAC wrist, Kienbock disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Internal fixation with bone graft before arthritis develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Structural interpositional graft for humpback deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vascularised graft if proximal pole avascular or earlier graft failed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Salvage (proximal row carpectomy or four-corner fusion) if SNAC arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good union rates with early grafting; SNAC arthritis is irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

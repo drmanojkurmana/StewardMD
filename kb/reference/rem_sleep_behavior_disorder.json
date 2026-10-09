@@ -1,178 +1,389 @@
 {
- "id": "rem_sleep_behavior_disorder",
- "name": "REM sleep behaviour disorder",
- "aliases": [
-  "RBD",
-  "REM behaviour disorder",
-  "REM sleep behavior disorder",
-  "REM sleep without atonia with dream enactment",
-  "rem sleep behaviour disorder"
- ],
- "class": "non_infective",
- "system": "Sleep medicine",
- "specialty": "Sleep Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / International Classification of Sleep Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from loss of the normal muscle atonia of REM sleep, allowing patients to physically enact their dreams",
-   "Behaviours include talking, shouting, punching, kicking and leaping from bed, often mirroring vivid or violent dream content",
-   "Injuries to the patient or the bed partner are common and frequently prompt presentation",
-   "Episodes cluster in the latter half of the night when REM sleep predominates",
-   "Polysomnography confirming REM sleep without atonia is required for diagnosis",
-   "Idiopathic RBD is a strong prodromal marker of the synucleinopathies, notably Parkinson's disease, dementia with Lewy bodies and multiple system atrophy",
-   "Management combines clonazepam and/or melatonin with practical measures to make the sleeping environment safe",
-   "Secondary RBD can be provoked by antidepressants, other drugs, alcohol withdrawal or brainstem lesions"
+  "id": "rem_sleep_behavior_disorder",
+  "name": "REM sleep behaviour disorder",
+  "aliases": [
+    "RBD",
+    "REM behaviour disorder",
+    "REM sleep behavior disorder",
+    "REM sleep without atonia with dream enactment",
+    "rem sleep behaviour disorder"
   ],
-  "pathophysiology": "During normal REM sleep, brainstem circuits centred on the sublaterodorsal nucleus of the pons actively inhibit spinal motor neurones, producing the characteristic muscle atonia. In REM sleep behaviour disorder these circuits fail, so the motor accompaniments of dreaming are no longer suppressed and dreams are acted out. Because these pontine and medullary structures are affected early by alpha-synuclein pathology, the disorder often heralds a neurodegenerative synucleinopathy years before other features appear.",
-  "additionalDifferentials": [
-   "Non-REM parasomnias such as sleepwalking, sleep terrors and confusional arousals",
-   "Obstructive sleep apnoea with arousals mimicking dream enactment (pseudo-RBD)",
-   "Nocturnal seizures, particularly of frontal lobe origin",
-   "Periodic limb movement disorder",
-   "Nightmare disorder",
-   "Post-traumatic stress-related nocturnal behaviours"
-  ],
-  "additionalInvestigations": [
-   "Video-polysomnography demonstrating REM sleep without atonia, with or without captured behaviours",
-   "Collateral history from the bed partner about the nature and timing of behaviours",
-   "Neurological examination for early parkinsonism or cognitive change",
-   "Review of medications, particularly antidepressants, and of alcohol use",
-   "MRI brain if a structural brainstem lesion is suspected, especially in younger patients"
-  ],
-  "redFlags": [
-   "Emerging parkinsonism, cognitive decline or autonomic failure suggesting evolving synucleinopathy",
-   "Onset in a young person or focal neurological signs pointing to a structural or demyelinating lesion",
-   "Serious injury to the patient or bed partner",
-   "Atypical features suggesting nocturnal seizures rather than a parasomnia"
-  ],
-  "prognosis": "Symptoms are usually controllable with clonazepam or melatonin together with a safe sleep environment; however, most people with idiopathic RBD will develop a neurodegenerative synucleinopathy over subsequent years, so long-term neurological follow-up is advised.",
-  "pitfalls": [
-   "Attributing dream enactment to nightmares without confirmatory polysomnography",
-   "Missing obstructive sleep apnoea causing pseudo-RBD",
-   "Neglecting bedroom safety advice, leaving the patient or partner at risk of injury",
-   "Failing to counsel appropriately and to monitor for later neurodegenerative disease",
-   "Overlooking an antidepressant or other drug as a precipitant"
-  ],
-  "references": [
-   "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
-   "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
-  ],
-  "crossLinks": [
-   "recurrent_isolated_sleep_paralysis"
-  ],
-  "management": [
-   "Make the sleep environment safe first, padding or lowering the bed, removing sharp objects and weapons, and considering separate sleeping arrangements for an injured bed partner",
-   "Melatonin as first-line pharmacotherapy to restore REM atonia with a favourable tolerability profile",
-   "Clonazepam where melatonin is insufficient, used with caution in older adults and those with cognitive impairment, gait instability or sleep apnoea",
-   "Review and withdraw precipitating drugs, especially serotonergic antidepressants, and reduce alcohol use",
-   "Identify and treat comorbid sleep disorders such as obstructive sleep apnoea, and assess for narcolepsy where suggested",
-   "Long-term neurological follow-up for emerging parkinsonism or cognitive change, as isolated disease is a strong prodrome of an alpha-synucleinopathy",
-   "Counsel the patient and family about injury prevention and the recognised risk of future neurodegenerative disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rem_sleep_behavior_disorder-pathway",
-   "title": "REM sleep behaviour disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from loss of the normal muscle atonia of REM sleep, allowing patients to physically enact their dreams",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emerging parkinsonism, cognitive decline or autonomic failure suggesting evolving synucleinopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Video-polysomnography demonstrating REM sleep without atonia, with or without captured behaviours, Collateral history from the bed partner about the nature and timing of behaviours, Neurological examination for early"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Make the sleep environment safe first, padding or lowering the bed, removing sharp objects and weapons, and considering separate sleeping arrangements for an injured bed partner"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing dream enactment to nightmares without confirmatory polysomnography"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rem sleep behaviour disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "rem_sleep_behavior_disorder-matrix",
-   "title": "REM sleep behaviour disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from loss of the normal muscle atonia of REM sleep, allowing patients to physically enact their dreams",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Sleep medicine",
+  "specialty": "Sleep Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / International Classification of Sleep Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from loss of the normal muscle atonia of REM sleep, allowing patients to physically enact their dreams",
+      "Behaviours include talking, shouting, punching, kicking and leaping from bed, often mirroring vivid or violent dream content",
+      "Injuries to the patient or the bed partner are common and frequently prompt presentation",
+      "Episodes cluster in the latter half of the night when REM sleep predominates",
+      "Polysomnography confirming REM sleep without atonia is required for diagnosis",
+      "Idiopathic RBD is a strong prodromal marker of the synucleinopathies, notably Parkinson's disease, dementia with Lewy bodies and multiple system atrophy",
+      "Management combines clonazepam and/or melatonin with practical measures to make the sleeping environment safe",
+      "Secondary RBD can be provoked by antidepressants, other drugs, alcohol withdrawal or brainstem lesions"
     ],
-    [
-     "Key Investigations",
-     "Video-polysomnography demonstrating REM sleep without atonia, with or without captured behaviours, Collateral history from the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During normal REM sleep, brainstem circuits centred on the sublaterodorsal nucleus of the pons actively inhibit spinal motor neurones, producing the characteristic muscle atonia. In REM sleep behaviour disorder these circuits fail, so the motor accompaniments of dreaming are no longer suppressed and dreams are acted out. Because these pontine and medullary structures are affected early by alpha-synuclein pathology, the disorder often heralds a neurodegenerative synucleinopathy years before other features appear.",
+    "additionalDifferentials": [
+      "Non-REM parasomnias such as sleepwalking, sleep terrors and confusional arousals",
+      "Obstructive sleep apnoea with arousals mimicking dream enactment (pseudo-RBD)",
+      "Nocturnal seizures, particularly of frontal lobe origin",
+      "Periodic limb movement disorder",
+      "Nightmare disorder",
+      "Post-traumatic stress-related nocturnal behaviours"
     ],
-    [
-     "Primary Differentials",
-     "Non-REM parasomnias such as sleepwalking, sleep terrors and confusional arousals, Obstructive sleep apnoea with arousals",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Video-polysomnography demonstrating REM sleep without atonia, with or without captured behaviours",
+      "Collateral history from the bed partner about the nature and timing of behaviours",
+      "Neurological examination for early parkinsonism or cognitive change",
+      "Review of medications, particularly antidepressants, and of alcohol use",
+      "MRI brain if a structural brainstem lesion is suspected, especially in younger patients"
     ],
-    [
-     "Management Strategy",
-     "Make the sleep environment safe first, padding or lowering the bed, removing sharp objects and weapons, and considering separate",
-     "Core treatment modality"
+    "redFlags": [
+      "Emerging parkinsonism, cognitive decline or autonomic failure suggesting evolving synucleinopathy",
+      "Onset in a young person or focal neurological signs pointing to a structural or demyelinating lesion",
+      "Serious injury to the patient or bed partner",
+      "Atypical features suggesting nocturnal seizures rather than a parasomnia"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing dream enactment to nightmares without confirmatory polysomnography",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms are usually controllable with clonazepam or melatonin together with a safe sleep environment; however, most people with idiopathic RBD will develop a neurodegenerative synucleinopathy over subsequent years, so long-term neurological follow-up is advised.",
+    "pitfalls": [
+      "Attributing dream enactment to nightmares without confirmatory polysomnography",
+      "Missing obstructive sleep apnoea causing pseudo-RBD",
+      "Neglecting bedroom safety advice, leaving the patient or partner at risk of injury",
+      "Failing to counsel appropriately and to monitor for later neurodegenerative disease",
+      "Overlooking an antidepressant or other drug as a precipitant"
+    ],
+    "references": [
+      "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
+      "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
+    ],
+    "crossLinks": [
+      "recurrent_isolated_sleep_paralysis"
+    ],
+    "management": [
+      "Make the sleep environment safe first, padding or lowering the bed, removing sharp objects and weapons, and considering separate sleeping arrangements for an injured bed partner",
+      "Melatonin as first-line pharmacotherapy to restore REM atonia with a favourable tolerability profile",
+      "Clonazepam where melatonin is insufficient, used with caution in older adults and those with cognitive impairment, gait instability or sleep apnoea",
+      "Review and withdraw precipitating drugs, especially serotonergic antidepressants, and reduce alcohol use",
+      "Identify and treat comorbid sleep disorders such as obstructive sleep apnoea, and assess for narcolepsy where suggested",
+      "Long-term neurological follow-up for emerging parkinsonism or cognitive change, as isolated disease is a strong prodrome of an alpha-synucleinopathy",
+      "Counsel the patient and family about injury prevention and the recognised risk of future neurodegenerative disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for rem sleep behaviour disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rem-sleep-behavior-disorder-real-image",
-   "title": "REM sleep behaviour disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "rem_sleep_behavior_disorder-pathway",
+      "title": "REM sleep behaviour disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from loss of the normal muscle atonia of REM sleep, allowing patients to physically enact their dreams",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emerging parkinsonism, cognitive decline or autonomic failure suggesting evolving synucleinopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Video-polysomnography demonstrating REM sleep without atonia, with or without captured behaviours, Collateral history from the bed partner about the nature and timing of behaviours, Neurological examination for early"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Make the sleep environment safe first, padding or lowering the bed, removing sharp objects and weapons, and considering separate sleeping arrangements for an injured bed partner"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing dream enactment to nightmares without confirmatory polysomnography"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rem sleep behaviour disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rem_sleep_behavior_disorder-matrix",
+      "title": "REM sleep behaviour disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from loss of the normal muscle atonia of REM sleep, allowing patients to physically enact their dreams",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Video-polysomnography demonstrating REM sleep without atonia, with or without captured behaviours, Collateral history from the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-REM parasomnias such as sleepwalking, sleep terrors and confusional arousals, Obstructive sleep apnoea with arousals",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Make the sleep environment safe first, padding or lowering the bed, removing sharp objects and weapons, and considering separate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing dream enactment to nightmares without confirmatory polysomnography",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rem sleep behaviour disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rem_sleep_behavior_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-polysomnography",
+          "cells": [
+            {
+              "text": "REM sleep without atonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collateral history from the bed partner",
+          "cells": [
+            {
+              "text": "Dream enactment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rem_sleep_behavior_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sleepwalking or sleep terrors",
+          "cells": [
+            {
+              "text": "Non-REM parasomnia"
+            },
+            {
+              "text": "Polysomnography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea with arousals",
+          "cells": [
+            {
+              "text": "Arousals"
+            },
+            {
+              "text": "Polysomnography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rem_sleep_behavior_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sleep environment",
+          "cells": [
+            {
+              "text": "Padding or lowering the bed to make sleep safe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melatonin",
+          "cells": [
+            {
+              "text": "First-line pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Evolving parkinsonism or autonomic failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rem_sleep_behavior_disorder-dx-mgmt",
+      "title": "Diagnosis and management of REM sleep behaviour disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected REM sleep behaviour disorder: dream enactment with violent movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Emerging parkinsonism, cognitive decline, autonomic failure, or onset in a young person?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for emerging synucleinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-polysomnography; collateral history from bed partner",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is REM sleep without atonia confirmed on polysomnography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-REM parasomnia or OSA with arousals; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Make the sleep environment safe: padding or lowering the bed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Melatonin as first-line pharmacotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for evolving parkinsonism or autonomic failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Neurology follow-up for synucleinopathy surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

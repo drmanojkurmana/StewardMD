@@ -1,177 +1,464 @@
 {
- "id": "coronary_slow_flow_phenomenon",
- "name": "coronary slow flow phenomenon",
- "aliases": [
-  "coronary slow flow",
-  "cardiac syndrome Y",
-  "primary slow coronary flow"
- ],
- "class": "non_infective",
- "system": "cardiovascular",
- "specialty": "cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined angiographically as delayed opacification of the distal coronary vasculature in the absence of obstructive epicardial disease, quantified by an elevated corrected TIMI frame count.",
-   "Presents most often as recurrent rest or exertional chest pain, frequently prompting repeated emergency attendances and angiography with unremarkable epicardial findings.",
-   "Predominantly affects younger to middle-aged men, and cigarette smoking and metabolic syndrome features are commonly associated.",
-   "Should be distinguished from the no-reflow phenomenon that follows percutaneous intervention or infarction, which has a different mechanism and context.",
-   "Resting electrocardiogram and biomarkers are usually normal between episodes, though transient ischaemic changes and occasionally raised troponin can occur during pain.",
-   "The disorder is generally considered a marker of small-vessel and microvascular dysfunction rather than a benign angiographic curiosity.",
-   "Calcium-channel blockers, particularly dihydropyridines, and addressing risk factors form the mainstay of symptom management, with nitrates often disappointing.",
-   "Recurrent chest pain, arrhythmia and, rarely, sudden cardiac death have been reported, so the phenomenon is not uniformly innocuous."
+  "id": "coronary_slow_flow_phenomenon",
+  "name": "coronary slow flow phenomenon",
+  "aliases": [
+    "coronary slow flow",
+    "cardiac syndrome Y",
+    "primary slow coronary flow"
   ],
-  "pathophysiology": "Coronary slow flow phenomenon reflects delayed passage of contrast through angiographically smooth epicardial arteries, attributed principally to structural and functional abnormality of the coronary microcirculation. Contributing mechanisms include microvascular endothelial dysfunction with impaired vasodilator response, small-vessel medial hypertrophy and myointimal proliferation, heightened microvascular resistance and tone, subclinical diffuse atheroma, and low-grade inflammation and oxidative stress. The net effect is a raised distal resistance and impaired coronary flow reserve producing intermittent myocardial ischaemia despite the absence of a flow-limiting epicardial stenosis.",
-  "additionalDifferentials": [
-   "microvascular angina",
-   "vasospastic angina",
-   "obstructive coronary artery disease",
-   "no-reflow following percutaneous coronary intervention",
-   "takotsubo cardiomyopathy",
-   "myocarditis",
-   "non-cardiac chest pain"
-  ],
-  "additionalInvestigations": [
-   "quantitative coronary angiography with corrected TIMI frame count",
-   "twelve-lead electrocardiogram during symptomatic episodes",
-   "cardiac troponin measurement during chest pain",
-   "coronary flow reserve or index of microcirculatory resistance assessment",
-   "transthoracic echocardiography to exclude structural disease",
-   "metabolic and lipid profiling for associated risk factors",
-   "cardiac magnetic resonance to exclude alternative myocardial pathology"
-  ],
-  "redFlags": [
-   "chest pain accompanied by a rise in cardiac troponin",
-   "documented ventricular arrhythmia or syncope",
-   "haemodynamic compromise during an episode",
-   "progressive escalation in frequency or severity of symptoms"
-  ],
-  "prognosis": "Most patients have a relatively favourable survival outlook but suffer recurrent chest pain with impaired quality of life and repeated healthcare use; occasional reports of arrhythmia and sudden death indicate the condition is not entirely benign.",
-  "pitfalls": [
-   "Labelling the angiogram simply normal and reassuring the patient without recognising the slow-flow pattern and its microvascular basis.",
-   "Confusing primary slow coronary flow with post-procedural no-reflow, which has distinct causes and treatment.",
-   "Assuming a completely benign course and thereby dismissing recurrent disabling symptoms.",
-   "Relying on nitrates, which frequently provide little benefit in this microvascular disorder."
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines on the management of chronic coronary syndromes",
-   "COVADIS criteria for microvascular angina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Aggressively modify cardiovascular risk factors, prioritising smoking cessation and treatment of the metabolic syndrome components",
-   "Use calcium-channel blockers as first-line antianginal therapy to reduce microvascular tone and symptom burden",
-   "Add agents targeting microvascular ischaemia such as nicorandil or ranolazine, and dipyridamole, for refractory symptoms",
-   "Prescribe a statin and address endothelial dysfunction as part of secondary prevention",
-   "Reassure regarding the generally favourable survival while recognising the disorder is not entirely benign and can recur",
-   "Arrange cardiology follow-up for symptom review, avoiding repeated unnecessary angiography once the diagnosis is established",
-   "Consider coronary physiology assessment with the index of microcirculatory resistance to guide therapy in refractory cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "coronary_slow_flow_phenomenon-pathway",
-   "title": "coronary slow flow phenomenon: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined angiographically as delayed opacification of the distal coronary vasculature in the absence of obstructive epicardial disease, quantified by an elevated corrected TIMI frame count.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: chest pain accompanied by a rise in cardiac troponin",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: quantitative coronary angiography with corrected TIMI frame count, twelve-lead electrocardiogram during symptomatic episodes, cardiac troponin measurement during chest pain"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Aggressively modify cardiovascular risk factors, prioritising smoking cessation and treatment of the metabolic syndrome components"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the angiogram simply normal and reassuring the patient without recognising the slow-flow pattern and its microvascular basis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coronary slow flow phenomenon."
-  }
- ],
- "tables": [
-  {
-   "id": "coronary_slow_flow_phenomenon-matrix",
-   "title": "coronary slow flow phenomenon: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined angiographically as delayed opacification of the distal coronary vasculature in the absence of obstructive epicardial",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "cardiovascular",
+  "specialty": "cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined angiographically as delayed opacification of the distal coronary vasculature in the absence of obstructive epicardial disease, quantified by an elevated corrected TIMI frame count.",
+      "Presents most often as recurrent rest or exertional chest pain, frequently prompting repeated emergency attendances and angiography with unremarkable epicardial findings.",
+      "Predominantly affects younger to middle-aged men, and cigarette smoking and metabolic syndrome features are commonly associated.",
+      "Should be distinguished from the no-reflow phenomenon that follows percutaneous intervention or infarction, which has a different mechanism and context.",
+      "Resting electrocardiogram and biomarkers are usually normal between episodes, though transient ischaemic changes and occasionally raised troponin can occur during pain.",
+      "The disorder is generally considered a marker of small-vessel and microvascular dysfunction rather than a benign angiographic curiosity.",
+      "Calcium-channel blockers, particularly dihydropyridines, and addressing risk factors form the mainstay of symptom management, with nitrates often disappointing.",
+      "Recurrent chest pain, arrhythmia and, rarely, sudden cardiac death have been reported, so the phenomenon is not uniformly innocuous."
     ],
-    [
-     "Key Investigations",
-     "quantitative coronary angiography with corrected TIMI frame count, twelve-lead electrocardiogram during symptomatic episodes,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Coronary slow flow phenomenon reflects delayed passage of contrast through angiographically smooth epicardial arteries, attributed principally to structural and functional abnormality of the coronary microcirculation. Contributing mechanisms include microvascular endothelial dysfunction with impaired vasodilator response, small-vessel medial hypertrophy and myointimal proliferation, heightened microvascular resistance and tone, subclinical diffuse atheroma, and low-grade inflammation and oxidative stress. The net effect is a raised distal resistance and impaired coronary flow reserve producing intermittent myocardial ischaemia despite the absence of a flow-limiting epicardial stenosis.",
+    "additionalDifferentials": [
+      "microvascular angina",
+      "vasospastic angina",
+      "obstructive coronary artery disease",
+      "no-reflow following percutaneous coronary intervention",
+      "takotsubo cardiomyopathy",
+      "myocarditis",
+      "non-cardiac chest pain"
     ],
-    [
-     "Primary Differentials",
-     "microvascular angina, vasospastic angina, obstructive coronary artery disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "quantitative coronary angiography with corrected TIMI frame count",
+      "twelve-lead electrocardiogram during symptomatic episodes",
+      "cardiac troponin measurement during chest pain",
+      "coronary flow reserve or index of microcirculatory resistance assessment",
+      "transthoracic echocardiography to exclude structural disease",
+      "metabolic and lipid profiling for associated risk factors",
+      "cardiac magnetic resonance to exclude alternative myocardial pathology"
     ],
-    [
-     "Management Strategy",
-     "Aggressively modify cardiovascular risk factors, prioritising smoking cessation and treatment of the metabolic syndrome components",
-     "Core treatment modality"
+    "redFlags": [
+      "chest pain accompanied by a rise in cardiac troponin",
+      "documented ventricular arrhythmia or syncope",
+      "haemodynamic compromise during an episode",
+      "progressive escalation in frequency or severity of symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the angiogram simply normal and reassuring the patient without recognising the slow-flow pattern and its microvascular",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients have a relatively favourable survival outlook but suffer recurrent chest pain with impaired quality of life and repeated healthcare use; occasional reports of arrhythmia and sudden death indicate the condition is not entirely benign.",
+    "pitfalls": [
+      "Labelling the angiogram simply normal and reassuring the patient without recognising the slow-flow pattern and its microvascular basis.",
+      "Confusing primary slow coronary flow with post-procedural no-reflow, which has distinct causes and treatment.",
+      "Assuming a completely benign course and thereby dismissing recurrent disabling symptoms.",
+      "Relying on nitrates, which frequently provide little benefit in this microvascular disorder."
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines on the management of chronic coronary syndromes",
+      "COVADIS criteria for microvascular angina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Aggressively modify cardiovascular risk factors, prioritising smoking cessation and treatment of the metabolic syndrome components",
+      "Use calcium-channel blockers as first-line antianginal therapy to reduce microvascular tone and symptom burden",
+      "Add agents targeting microvascular ischaemia such as nicorandil or ranolazine, and dipyridamole, for refractory symptoms",
+      "Prescribe a statin and address endothelial dysfunction as part of secondary prevention",
+      "Reassure regarding the generally favourable survival while recognising the disorder is not entirely benign and can recur",
+      "Arrange cardiology follow-up for symptom review, avoiding repeated unnecessary angiography once the diagnosis is established",
+      "Consider coronary physiology assessment with the index of microcirculatory resistance to guide therapy in refractory cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for coronary slow flow phenomenon."
-  }
- ],
- "diagrams": [
-  {
-   "id": "coronary-slow-flow-phenomenon-real-image",
-   "title": "coronary slow flow phenomenon: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "coronary_slow_flow_phenomenon-pathway",
+      "title": "coronary slow flow phenomenon: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined angiographically as delayed opacification of the distal coronary vasculature in the absence of obstructive epicardial disease, quantified by an elevated corrected TIMI frame count.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: chest pain accompanied by a rise in cardiac troponin",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: quantitative coronary angiography with corrected TIMI frame count, twelve-lead electrocardiogram during symptomatic episodes, cardiac troponin measurement during chest pain"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Aggressively modify cardiovascular risk factors, prioritising smoking cessation and treatment of the metabolic syndrome components"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the angiogram simply normal and reassuring the patient without recognising the slow-flow pattern and its microvascular basis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coronary slow flow phenomenon."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "coronary_slow_flow_phenomenon-matrix",
+      "title": "coronary slow flow phenomenon: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined angiographically as delayed opacification of the distal coronary vasculature in the absence of obstructive epicardial",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "quantitative coronary angiography with corrected TIMI frame count, twelve-lead electrocardiogram during symptomatic episodes,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "microvascular angina, vasospastic angina, obstructive coronary artery disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Aggressively modify cardiovascular risk factors, prioritising smoking cessation and treatment of the metabolic syndrome components",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the angiogram simply normal and reassuring the patient without recognising the slow-flow pattern and its microvascular",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coronary slow flow phenomenon."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coronary_slow_flow_phenomenon-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Quantitative coronary angiography with corrected TIMI frame count",
+          "cells": [
+            {
+              "text": "Slow flow pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Twelve-lead ECG during symptomatic episodes",
+          "cells": [
+            {
+              "text": "Ischaemic changes during episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac troponin during chest pain",
+          "cells": [
+            {
+              "text": "Troponin rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary flow reserve or index of microcirculatory resistance",
+          "cells": [
+            {
+              "text": "Microvascular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Alternative myocardial pathology excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_slow_flow_phenomenon-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Microvascular angina",
+          "cells": [
+            {
+              "text": "Named look-alike with microvascular ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasospastic angina",
+          "cells": [
+            {
+              "text": "Named look-alike with spasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No-reflow following percutaneous coronary intervention",
+          "cells": [
+            {
+              "text": "Pitfall: distinct cause and treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_slow_flow_phenomenon-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk factor modification",
+          "cells": [
+            {
+              "text": "Smoking cessation and metabolic syndrome treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium-channel blockers",
+          "cells": [
+            {
+              "text": "First-line antianginal therapy to reduce microvascular tone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nicorandil, ranolazine or dipyridamole",
+          "cells": [
+            {
+              "text": "Added for refractory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Statin and endothelial care",
+          "cells": [
+            {
+              "text": "Part of secondary prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Favourable survival; not entirely benign and can recur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology follow-up",
+          "cells": [
+            {
+              "text": "Avoid repeated unnecessary angiography once diagnosed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiology assessment",
+          "cells": [
+            {
+              "text": "Index of microcirculatory resistance to guide refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coronary_slow_flow_phenomenon-dx-mgmt",
+      "title": "Diagnosis and management of coronary slow flow phenomenon",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coronary slow flow phenomenon: chest pain with normal-appearing arteries",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (troponin rise, arrhythmia or syncope, haemodynamic compromise)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for troponin rise or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corrected TIMI frame count; ECG during pain; troponin; flow reserve; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does angiography show slow flow with normal epicardial arteries?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vasospastic angina, microvascular angina or obstructive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Risk factor modification, prioritising smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Calcium-channel blockers as first-line antianginal therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nicorandil, ranolazine or dipyridamole for refractory symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Statin and secondary prevention; avoid repeated angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Favourable survival, but recurrent chest pain and reduced quality of life are common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

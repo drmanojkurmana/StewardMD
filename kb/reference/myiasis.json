@@ -1,177 +1,464 @@
 {
- "id": "myiasis",
- "name": "Myiasis",
- "aliases": [
-  "fly larval infestation",
-  "maggot infestation",
-  "Dermatobia hominis (human botfly)",
-  "Cordylobia anthropophaga (tumbu fly)",
-  "Cochliomyia hominivorax (screwworm)"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Myiasis is infestation of living tissue by dipterous (fly) larvae; clinical patterns include furuncular (boil-like), wound (traumatic), migratory (creeping), and cavity/body-orifice forms",
-   "Furuncular myiasis is classically caused by the human botfly (Dermatobia hominis) in the Americas and the tumbu fly (Cordylobia anthropophaga) in sub-Saharan Africa",
-   "Dermatobia eggs are carried to skin by biting insects (phoresis), whereas tumbu fly eggs are laid on soil or drying laundry and larvae penetrate contact skin",
-   "The typical furuncular lesion is a painful nodule with a central punctum that intermittently discharges serosanguineous fluid; patients often describe movement or a sensation of crawling",
-   "A central breathing pore that bubbles, and sometimes a visible larval tip, help confirm the diagnosis; occlusion can bring the larva to the surface",
-   "Wound and cavity myiasis (e.g. screwworm) can be aggressively tissue-destructive and occurs in neglected wounds, orifices or debilitated patients",
-   "Treatment is removal of the larva (occlusion and extraction or minor surgical removal), wound care, and tetanus/antibiotic cover for secondary infection where indicated"
+  "id": "myiasis",
+  "name": "Myiasis",
+  "aliases": [
+    "fly larval infestation",
+    "maggot infestation",
+    "Dermatobia hominis (human botfly)",
+    "Cordylobia anthropophaga (tumbu fly)",
+    "Cochliomyia hominivorax (screwworm)"
   ],
-  "pathophysiology": "Fly larvae invade host tissue by species-specific routes: some deposit larvae directly, some lay eggs transferred by biting arthropods, and others deposit eggs on soil or clothing from which larvae penetrate intact or broken skin. The larva develops within the dermis or a wound, feeding on tissue and exudate while maintaining a respiratory opening at the skin surface. Local host inflammation produces a furuncle-like nodule in obligate skin-dwelling species, whereas facultative or obligate wound feeders such as screwworm can burrow and destroy tissue extensively. Secondary bacterial infection frequently complicates the lesion.",
-  "additionalDifferentials": [
-   "Bacterial furuncle or abscess",
-   "Tungiasis",
-   "Infected epidermoid cyst",
-   "Cutaneous larva migrans (for migratory forms)",
-   "Retained foreign body with granuloma",
-   "Cellulitis of other cause"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination with travel/exposure history and inspection of the central punctum",
-   "Occlusion test to observe the larval breathing movements",
-   "Dermoscopy or ultrasound to visualise the embedded larva in furuncular myiasis",
-   "Identification of the extracted larva to species where relevant",
-   "Wound swab and culture if secondary bacterial infection is suspected",
-   "Assessment of tetanus immunisation status"
-  ],
-  "redFlags": [
-   "Aggressive wound or cavity (e.g. nasal, orbital, aural) myiasis with rapid tissue destruction",
-   "Screwworm infestation requiring prompt eradication and public health notification",
-   "Secondary cellulitis, abscess or signs of systemic sepsis",
-   "Involvement of the eye, sinuses or central structures threatening deep spread",
-   "Infestation in a neglected, debilitated or cognitively impaired patient"
-  ],
-  "prognosis": "Furuncular myiasis is generally benign and resolves completely once the larva is removed, whereas wound and cavity myiasis, especially screwworm, can cause serious tissue destruction and requires urgent intervention; secondary infection is the main complication.",
-  "pitfalls": [
-   "Rupturing or fragmenting the larva during extraction, leaving parts that provoke a foreign-body reaction",
-   "Misdiagnosing furuncular myiasis as a simple boil and incising without recognising the larva",
-   "Underestimating aggressive wound or cavity myiasis and its capacity for deep destruction",
-   "Neglecting tetanus prophylaxis and secondary infection management",
-   "Failing to notify authorities for obligate parasites such as screwworm where reportable"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Remove the larva completely: occlude the central breathing punctum to force it towards the surface, then extract it by manual expression or minor surgical removal",
-   "Debride devitalised tissue and remove all larvae surgically in wound and cavity forms, with urgent thorough intervention for tissue-destructive screwworm infestation",
-   "Treat or prevent secondary bacterial infection with antibiotics and thorough wound cleaning",
-   "Ensure tetanus immunisation is up to date",
-   "Consider systemic or topical ivermectin to aid larval killing in extensive, orbital or cavity myiasis",
-   "Advise prevention through insect-bite avoidance and ironing clothing or linen dried outdoors in tumbu-fly regions",
-   "Refer to surgery, ENT or ophthalmology for orbital, nasal or aggressive cavity involvement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myiasis-pathway",
-   "title": "Myiasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Myiasis is infestation of living tissue by dipterous (fly) larvae; clinical patterns include furuncular (boil-like), wound (traumatic), migratory (creeping), and cavity/body-orifice forms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aggressive wound or cavity (e.g. nasal, orbital, aural) myiasis with rapid tissue destruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination with travel/exposure history and inspection of the central punctum, Occlusion test to observe the larval breathing movements, Dermoscopy or ultrasound to visualise the embedded larva in furuncular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Remove the larva completely: occlude the central breathing punctum to force it towards the surface, then extract it by manual expression or minor surgical removal"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Rupturing or fragmenting the larva during extraction, leaving parts that provoke a foreign-body reaction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myiasis."
-  }
- ],
- "tables": [
-  {
-   "id": "myiasis-matrix",
-   "title": "Myiasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Myiasis is infestation of living tissue by dipterous (fly) larvae; clinical patterns include furuncular (boil-like), wound",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Myiasis is infestation of living tissue by dipterous (fly) larvae; clinical patterns include furuncular (boil-like), wound (traumatic), migratory (creeping), and cavity/body-orifice forms",
+      "Furuncular myiasis is classically caused by the human botfly (Dermatobia hominis) in the Americas and the tumbu fly (Cordylobia anthropophaga) in sub-Saharan Africa",
+      "Dermatobia eggs are carried to skin by biting insects (phoresis), whereas tumbu fly eggs are laid on soil or drying laundry and larvae penetrate contact skin",
+      "The typical furuncular lesion is a painful nodule with a central punctum that intermittently discharges serosanguineous fluid; patients often describe movement or a sensation of crawling",
+      "A central breathing pore that bubbles, and sometimes a visible larval tip, help confirm the diagnosis; occlusion can bring the larva to the surface",
+      "Wound and cavity myiasis (e.g. screwworm) can be aggressively tissue-destructive and occurs in neglected wounds, orifices or debilitated patients",
+      "Treatment is removal of the larva (occlusion and extraction or minor surgical removal), wound care, and tetanus/antibiotic cover for secondary infection where indicated"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination with travel/exposure history and inspection of the central punctum, Occlusion test to observe the larval",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fly larvae invade host tissue by species-specific routes: some deposit larvae directly, some lay eggs transferred by biting arthropods, and others deposit eggs on soil or clothing from which larvae penetrate intact or broken skin. The larva develops within the dermis or a wound, feeding on tissue and exudate while maintaining a respiratory opening at the skin surface. Local host inflammation produces a furuncle-like nodule in obligate skin-dwelling species, whereas facultative or obligate wound feeders such as screwworm can burrow and destroy tissue extensively. Secondary bacterial infection frequently complicates the lesion.",
+    "additionalDifferentials": [
+      "Bacterial furuncle or abscess",
+      "Tungiasis",
+      "Infected epidermoid cyst",
+      "Cutaneous larva migrans (for migratory forms)",
+      "Retained foreign body with granuloma",
+      "Cellulitis of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Bacterial furuncle or abscess, Tungiasis, Infected epidermoid cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination with travel/exposure history and inspection of the central punctum",
+      "Occlusion test to observe the larval breathing movements",
+      "Dermoscopy or ultrasound to visualise the embedded larva in furuncular myiasis",
+      "Identification of the extracted larva to species where relevant",
+      "Wound swab and culture if secondary bacterial infection is suspected",
+      "Assessment of tetanus immunisation status"
     ],
-    [
-     "Management Strategy",
-     "Remove the larva completely: occlude the central breathing punctum to force it towards the surface, then extract it by manual",
-     "Core treatment modality"
+    "redFlags": [
+      "Aggressive wound or cavity (e.g. nasal, orbital, aural) myiasis with rapid tissue destruction",
+      "Screwworm infestation requiring prompt eradication and public health notification",
+      "Secondary cellulitis, abscess or signs of systemic sepsis",
+      "Involvement of the eye, sinuses or central structures threatening deep spread",
+      "Infestation in a neglected, debilitated or cognitively impaired patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Rupturing or fragmenting the larva during extraction, leaving parts that provoke a foreign-body reaction",
-     "Prevent diagnostic or management error"
+    "prognosis": "Furuncular myiasis is generally benign and resolves completely once the larva is removed, whereas wound and cavity myiasis, especially screwworm, can cause serious tissue destruction and requires urgent intervention; secondary infection is the main complication.",
+    "pitfalls": [
+      "Rupturing or fragmenting the larva during extraction, leaving parts that provoke a foreign-body reaction",
+      "Misdiagnosing furuncular myiasis as a simple boil and incising without recognising the larva",
+      "Underestimating aggressive wound or cavity myiasis and its capacity for deep destruction",
+      "Neglecting tetanus prophylaxis and secondary infection management",
+      "Failing to notify authorities for obligate parasites such as screwworm where reportable"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Remove the larva completely: occlude the central breathing punctum to force it towards the surface, then extract it by manual expression or minor surgical removal",
+      "Debride devitalised tissue and remove all larvae surgically in wound and cavity forms, with urgent thorough intervention for tissue-destructive screwworm infestation",
+      "Treat or prevent secondary bacterial infection with antibiotics and thorough wound cleaning",
+      "Ensure tetanus immunisation is up to date",
+      "Consider systemic or topical ivermectin to aid larval killing in extensive, orbital or cavity myiasis",
+      "Advise prevention through insect-bite avoidance and ironing clothing or linen dried outdoors in tumbu-fly regions",
+      "Refer to surgery, ENT or ophthalmology for orbital, nasal or aggressive cavity involvement"
     ]
-   ],
-   "caption": "Overview comparison matrix for myiasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myiasis-real-image",
-   "title": "Myiasis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "myiasis-pathway",
+      "title": "Myiasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Myiasis is infestation of living tissue by dipterous (fly) larvae; clinical patterns include furuncular (boil-like), wound (traumatic), migratory (creeping), and cavity/body-orifice forms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aggressive wound or cavity (e.g. nasal, orbital, aural) myiasis with rapid tissue destruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination with travel/exposure history and inspection of the central punctum, Occlusion test to observe the larval breathing movements, Dermoscopy or ultrasound to visualise the embedded larva in furuncular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Remove the larva completely: occlude the central breathing punctum to force it towards the surface, then extract it by manual expression or minor surgical removal"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Rupturing or fragmenting the larva during extraction, leaving parts that provoke a foreign-body reaction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myiasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myiasis-matrix",
+      "title": "Myiasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Myiasis is infestation of living tissue by dipterous (fly) larvae; clinical patterns include furuncular (boil-like), wound",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination with travel/exposure history and inspection of the central punctum, Occlusion test to observe the larval",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacterial furuncle or abscess, Tungiasis, Infected epidermoid cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Remove the larva completely: occlude the central breathing punctum to force it towards the surface, then extract it by manual",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Rupturing or fragmenting the larva during extraction, leaving parts that provoke a foreign-body reaction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myiasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination with travel and exposure history",
+          "cells": [
+            {
+              "text": "Central punctum on inspection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occlusion test",
+          "cells": [
+            {
+              "text": "Larval breathing movements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy or ultrasound",
+          "cells": [
+            {
+              "text": "Embedded larva in furuncular myiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identification of the extracted larva",
+          "cells": [
+            {
+              "text": "Species, where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound swab and culture",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetanus immunisation status",
+          "cells": [
+            {
+              "text": "Assessed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial furuncle or abscess",
+          "cells": [
+            {
+              "text": "A central breathing pore that bubbles, and a visible larval tip, distinguish myiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retained foreign body with granuloma",
+          "cells": [
+            {
+              "text": "Larval fragments left behind provoke a foreign-body reaction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete larval removal",
+          "cells": [
+            {
+              "text": "Occlude the breathing punctum, then extract by manual expression or minor surgical removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debridement in wound and cavity forms",
+          "cells": [
+            {
+              "text": "Remove all larvae and devitalised tissue; urgent for screwworm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics and wound cleaning",
+          "cells": [
+            {
+              "text": "Treat or prevent secondary bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetanus immunisation",
+          "cells": [
+            {
+              "text": "Ensure it is up to date"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ivermectin",
+          "cells": [
+            {
+              "text": "Systemic or topical, to aid larval killing in extensive, orbital or cavity myiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Insect-bite avoidance; ironing clothing or linen dried outdoors in tumbu-fly regions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Surgery, ENT or ophthalmology for orbital, nasal or aggressive cavity involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myiasis-dx-mgmt",
+      "title": "Diagnosis and management of Myiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful nodule with a central punctum that discharges fluid after travel or exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aggressive wound or cavity myiasis, screwworm, orbital or nasal)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent removal and debridement; notify public health for screwworm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine the punctum, occlusion test, dermoscopy or ultrasound, culture if infected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Larva visualised, with the breathing pore demonstrated on occlusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bacterial furuncle or abscess; re-examine for an embedded larva",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Occlude the breathing punctum, then extract the larva completely",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical debridement in wound and cavity forms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics and wound cleaning for secondary infection; check tetanus status",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ivermectin for extensive, orbital or cavity myiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Furuncular myiasis resolves once the larva is removed; screwworm can destroy tissue",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

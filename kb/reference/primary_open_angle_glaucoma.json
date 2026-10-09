@@ -1,173 +1,460 @@
 {
- "id": "primary_open_angle_glaucoma",
- "name": "Primary open-angle glaucoma",
- "aliases": [
-  "POAG",
-  "open-angle glaucoma",
-  "chronic simple glaucoma",
-  "chronic open-angle glaucoma"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically an insidious, painless, bilateral (often asymmetric) chronic optic neuropathy detected on screening rather than by symptoms",
-   "Peripheral visual field is lost first, with central acuity preserved until late, so patients are frequently unaware until damage is advanced",
-   "The drainage angle is open on gonioscopy, distinguishing it from angle-closure disease",
-   "Hallmark disc changes include increased cup-to-disc ratio, focal neuroretinal rim thinning or notching, and disc haemorrhages",
-   "Risk rises with elevated intraocular pressure, older age, family history, African ancestry, high myopia, and thin central corneas",
-   "Normal-tension glaucoma shows characteristic optic nerve and field damage despite pressures in the statistically normal range",
-   "Management aims to lower intraocular pressure with topical medication first, escalating to laser trabeculoplasty or surgical drainage (trabeculectomy) to slow progression"
+  "id": "primary_open_angle_glaucoma",
+  "name": "Primary open-angle glaucoma",
+  "aliases": [
+    "POAG",
+    "open-angle glaucoma",
+    "chronic simple glaucoma",
+    "chronic open-angle glaucoma"
   ],
-  "pathophysiology": "Primary open-angle glaucoma is a progressive optic neuropathy in which aqueous outflow through an anatomically open trabecular meshwork is impaired, raising resistance to drainage. The resulting intraocular pressure, sometimes within the normal range, contributes to mechanical and vascular stress at the optic nerve head, causing loss of retinal ganglion cell axons. This produces characteristic cupping of the optic disc and a corresponding pattern of arcuate and peripheral visual field loss that advances slowly over years.",
-  "additionalDifferentials": [
-   "Normal-tension glaucoma",
-   "Ocular hypertension without nerve damage",
-   "Secondary open-angle glaucoma (pigmentary, pseudoexfoliation, steroid-induced)",
-   "Non-glaucomatous optic neuropathy",
-   "Physiological large optic disc cup"
-  ],
-  "additionalInvestigations": [
-   "Applanation tonometry to measure intraocular pressure",
-   "Gonioscopy to confirm the angle is open",
-   "Dilated optic disc examination for cupping and rim changes",
-   "Automated perimetry (visual field testing) to detect and monitor field loss",
-   "Optical coherence tomography of the retinal nerve fibre layer and ganglion cell complex",
-   "Central corneal thickness (pachymetry), which influences pressure interpretation and risk"
-  ],
-  "redFlags": [
-   "Progressive visual field loss or disc change despite apparently controlled pressure",
-   "Disc (splinter) haemorrhage, a marker of ongoing progression",
-   "Very high presenting pressure or advanced cupping threatening fixation",
-   "Rapid deterioration suggesting a secondary or aggressive glaucoma"
-  ],
-  "prognosis": "With early detection and sustained pressure control most patients retain useful vision for life, but untreated or poorly controlled disease progresses to irreversible visual field loss and blindness.",
-  "pitfalls": [
-   "Relying on a single pressure reading, as pressure fluctuates and can be normal in normal-tension glaucoma",
-   "Attributing all disc cupping to glaucoma without correlating fields and nerve fibre layer",
-   "Poor adherence to topical therapy going unrecognised as the cause of progression",
-   "Overlooking secondary causes such as pseudoexfoliation or long-term steroid use"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical prostaglandin analogue such as latanoprost as first-line therapy to lower intraocular pressure, the only modifiable risk factor",
-   "Additional pressure-lowering drops including beta-blockers, alpha-2 agonists, carbonic anhydrase inhibitors or rho-kinase inhibitors, added or substituted to reach the target pressure",
-   "Selective laser trabeculoplasty as a first-line alternative or adjunct to medical therapy",
-   "Incisional or minimally invasive glaucoma surgery, such as trabeculectomy or a drainage device, for progression despite maximal tolerated medical treatment",
-   "Regular monitoring with applanation tonometry, optic disc and retinal nerve fibre layer imaging, and automated perimetry to detect progression",
-   "Support for adherence and correct drop technique, with patient education on the asymptomatic nature of early disease",
-   "Ongoing ophthalmology follow-up with low-vision support and rehabilitation for advanced visual loss"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_open_angle_glaucoma-pathway",
-   "title": "Primary open-angle glaucoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically an insidious, painless, bilateral (often asymmetric) chronic optic neuropathy detected on screening rather than by symptoms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive visual field loss or disc change despite apparently controlled pressure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Applanation tonometry to measure intraocular pressure, Gonioscopy to confirm the angle is open, Dilated optic disc examination for cupping and rim changes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical prostaglandin analogue such as latanoprost as first-line therapy to lower intraocular pressure, the only modifiable risk factor"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on a single pressure reading, as pressure fluctuates and can be normal in normal-tension glaucoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary open-angle glaucoma."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_open_angle_glaucoma-matrix",
-   "title": "Primary open-angle glaucoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically an insidious, painless, bilateral (often asymmetric) chronic optic neuropathy detected on screening rather than by",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically an insidious, painless, bilateral (often asymmetric) chronic optic neuropathy detected on screening rather than by symptoms",
+      "Peripheral visual field is lost first, with central acuity preserved until late, so patients are frequently unaware until damage is advanced",
+      "The drainage angle is open on gonioscopy, distinguishing it from angle-closure disease",
+      "Hallmark disc changes include increased cup-to-disc ratio, focal neuroretinal rim thinning or notching, and disc haemorrhages",
+      "Risk rises with elevated intraocular pressure, older age, family history, African ancestry, high myopia, and thin central corneas",
+      "Normal-tension glaucoma shows characteristic optic nerve and field damage despite pressures in the statistically normal range",
+      "Management aims to lower intraocular pressure with topical medication first, escalating to laser trabeculoplasty or surgical drainage (trabeculectomy) to slow progression"
     ],
-    [
-     "Key Investigations",
-     "Applanation tonometry to measure intraocular pressure, Gonioscopy to confirm the angle is open, Dilated optic disc examination",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary open-angle glaucoma is a progressive optic neuropathy in which aqueous outflow through an anatomically open trabecular meshwork is impaired, raising resistance to drainage. The resulting intraocular pressure, sometimes within the normal range, contributes to mechanical and vascular stress at the optic nerve head, causing loss of retinal ganglion cell axons. This produces characteristic cupping of the optic disc and a corresponding pattern of arcuate and peripheral visual field loss that advances slowly over years.",
+    "additionalDifferentials": [
+      "Normal-tension glaucoma",
+      "Ocular hypertension without nerve damage",
+      "Secondary open-angle glaucoma (pigmentary, pseudoexfoliation, steroid-induced)",
+      "Non-glaucomatous optic neuropathy",
+      "Physiological large optic disc cup"
     ],
-    [
-     "Primary Differentials",
-     "Normal-tension glaucoma, Ocular hypertension without nerve damage, Secondary open-angle glaucoma (pigmentary, pseudoexfoliation,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Applanation tonometry to measure intraocular pressure",
+      "Gonioscopy to confirm the angle is open",
+      "Dilated optic disc examination for cupping and rim changes",
+      "Automated perimetry (visual field testing) to detect and monitor field loss",
+      "Optical coherence tomography of the retinal nerve fibre layer and ganglion cell complex",
+      "Central corneal thickness (pachymetry), which influences pressure interpretation and risk"
     ],
-    [
-     "Management Strategy",
-     "Topical prostaglandin analogue such as latanoprost as first-line therapy to lower intraocular pressure, the only modifiable risk",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive visual field loss or disc change despite apparently controlled pressure",
+      "Disc (splinter) haemorrhage, a marker of ongoing progression",
+      "Very high presenting pressure or advanced cupping threatening fixation",
+      "Rapid deterioration suggesting a secondary or aggressive glaucoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on a single pressure reading, as pressure fluctuates and can be normal in normal-tension glaucoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early detection and sustained pressure control most patients retain useful vision for life, but untreated or poorly controlled disease progresses to irreversible visual field loss and blindness.",
+    "pitfalls": [
+      "Relying on a single pressure reading, as pressure fluctuates and can be normal in normal-tension glaucoma",
+      "Attributing all disc cupping to glaucoma without correlating fields and nerve fibre layer",
+      "Poor adherence to topical therapy going unrecognised as the cause of progression",
+      "Overlooking secondary causes such as pseudoexfoliation or long-term steroid use"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical prostaglandin analogue such as latanoprost as first-line therapy to lower intraocular pressure, the only modifiable risk factor",
+      "Additional pressure-lowering drops including beta-blockers, alpha-2 agonists, carbonic anhydrase inhibitors or rho-kinase inhibitors, added or substituted to reach the target pressure",
+      "Selective laser trabeculoplasty as a first-line alternative or adjunct to medical therapy",
+      "Incisional or minimally invasive glaucoma surgery, such as trabeculectomy or a drainage device, for progression despite maximal tolerated medical treatment",
+      "Regular monitoring with applanation tonometry, optic disc and retinal nerve fibre layer imaging, and automated perimetry to detect progression",
+      "Support for adherence and correct drop technique, with patient education on the asymptomatic nature of early disease",
+      "Ongoing ophthalmology follow-up with low-vision support and rehabilitation for advanced visual loss"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary open-angle glaucoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-open-angle-glaucoma-real-image",
-   "title": "Primary open-angle glaucoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "primary_open_angle_glaucoma-pathway",
+      "title": "Primary open-angle glaucoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically an insidious, painless, bilateral (often asymmetric) chronic optic neuropathy detected on screening rather than by symptoms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive visual field loss or disc change despite apparently controlled pressure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Applanation tonometry to measure intraocular pressure, Gonioscopy to confirm the angle is open, Dilated optic disc examination for cupping and rim changes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical prostaglandin analogue such as latanoprost as first-line therapy to lower intraocular pressure, the only modifiable risk factor"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on a single pressure reading, as pressure fluctuates and can be normal in normal-tension glaucoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary open-angle glaucoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_open_angle_glaucoma-matrix",
+      "title": "Primary open-angle glaucoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically an insidious, painless, bilateral (often asymmetric) chronic optic neuropathy detected on screening rather than by",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Applanation tonometry to measure intraocular pressure, Gonioscopy to confirm the angle is open, Dilated optic disc examination",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Normal-tension glaucoma, Ocular hypertension without nerve damage, Secondary open-angle glaucoma (pigmentary, pseudoexfoliation,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical prostaglandin analogue such as latanoprost as first-line therapy to lower intraocular pressure, the only modifiable risk",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a single pressure reading, as pressure fluctuates and can be normal in normal-tension glaucoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary open-angle glaucoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_open_angle_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Applanation tonometry",
+          "cells": [
+            {
+              "text": "Intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Whether the angle is open"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated optic disc examination",
+          "cells": [
+            {
+              "text": "Cupping and rim changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Field loss, detected and monitored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer and ganglion cell complex",
+          "cells": [
+            {
+              "text": "Nerve fibre layer and ganglion cell complex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central corneal thickness (pachymetry)",
+          "cells": [
+            {
+              "text": "Influences pressure interpretation and risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_open_angle_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ocular hypertension without nerve damage",
+          "cells": [
+            {
+              "text": "Raised pressure without nerve damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary open-angle glaucoma (pigmentary, pseudoexfoliation, steroid-induced)",
+          "cells": [
+            {
+              "text": "Pigmentary, pseudoexfoliation or steroid-induced cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_open_angle_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostaglandin analogue (first line)",
+          "cells": [
+            {
+              "text": "Latanoprost to lower intraocular pressure, the only modifiable risk factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional pressure-lowering drops",
+          "cells": [
+            {
+              "text": "Beta-blockers, alpha-2 agonists, carbonic anhydrase inhibitors or rho-kinase inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective laser trabeculoplasty",
+          "cells": [
+            {
+              "text": "First-line alternative or adjunct to medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for progression",
+          "cells": [
+            {
+              "text": "Trabeculectomy or drainage device after progression despite maximal tolerated medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Tonometry, optic disc and RNFL imaging, and perimetry to detect progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adherence and education",
+          "cells": [
+            {
+              "text": "Support adherence and drop technique; early disease is asymptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Ophthalmology follow-up with low-vision support and rehabilitation for advanced loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_open_angle_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary open-angle glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary open-angle glaucoma: raised IOP, cupping or field loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progression despite controlled IOP, disc haemorrhage or advanced cupping?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for rapid or secondary glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Applanation tonometry; gonioscopy; disc examination; perimetry; RNFL OCT; pachymetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do disc, field and OCT findings confirm glaucomatous damage with an open angle?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ocular hypertension or non-glaucomatous neuropathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Latanoprost as first-line therapy to lower intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add beta-blockers, alpha-2 agonists, CAIs or rho-kinase inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Selective laser trabeculoplasty as first-line alternative or adjunct",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trabeculectomy or drainage device if progression despite medical therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong monitoring of pressure, disc, RNFL and fields; low-vision support if advanced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

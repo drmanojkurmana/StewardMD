@@ -1,176 +1,235 @@
 {
- "id": "broncholithiasis",
- "name": "broncholithiasis",
- "aliases": [
-  "broncholith",
-  "endobronchial calculus"
- ],
- "class": "non_infective",
- "system": "respiratory",
- "specialty": "respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Murray and Nadel's Textbook of Respiratory Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Broncholithiasis denotes calcified or ossified material within the airway lumen, most often a calcified peribronchial lymph node that erodes into an adjacent bronchus.",
-   "It classically follows healed granulomatous infection — historically tuberculosis and, in endemic regions, histoplasmosis — where calcified nodes gradually breach the bronchial wall.",
-   "Lithoptysis, the expectoration of gritty stone or sand-like material, is pathognomonic but occurs in only a minority of patients.",
-   "Common presentations are chronic cough, recurrent focal infection, localised wheeze and haemoptysis, the last resulting from erosion into bronchial vessels.",
-   "A broncholith adjacent to a vessel can cause massive haemoptysis or, rarely, erode into the oesophagus producing a broncho-oesophageal fistula.",
-   "CT typically shows a calcified endobronchial or peribronchial focus with distal atelectasis, obstructive pneumonitis, mucoid impaction or bronchiectasis.",
-   "Bronchoscopy may reveal a whitish, hard, mobile intraluminal stone; forceful blind extraction of a partially eroded broncholith risks torrential bleeding and should be avoided.",
-   "Management ranges from bronchoscopic removal of loose stones to surgical resection when the broncholith is embedded, associated with fistula, or causing recurrent haemoptysis or infection."
+  "id": "broncholithiasis",
+  "name": "broncholithiasis",
+  "aliases": [
+    "broncholith",
+    "endobronchial calculus"
   ],
-  "pathophysiology": "Broncholithiasis usually begins with granulomatous inflammation of hilar or mediastinal lymph nodes, most often from healed tuberculosis or fungal infection such as histoplasmosis, silicosis being a less common contributor. Over years the affected nodes calcify and harden. Continuous transmission of respiratory and cardiac motion between the rigid calcified node and the pliable adjacent bronchial wall produces chronic mechanical erosion, allowing the calcified material to migrate into or through the wall and project into the lumen. Once endobronchial, the broncholith obstructs airflow and mucus clearance, causing distal atelectasis, post-obstructive infection, mucoid impaction and bronchiectasis. Erosion into accompanying bronchial or pulmonary vessels produces haemoptysis that may be severe, and erosion between airway and oesophagus or mediastinum can create fistulae. The process is mechanical and inflammatory rather than a disorder of systemic calcium metabolism.",
-  "additionalDifferentials": [
-   "endobronchial tumour (carcinoid or bronchogenic carcinoma)",
-   "aspirated calcified or radiopaque foreign body",
-   "calcified endobronchial tuberculosis or fungal granuloma",
-   "mucoid impaction from other causes of bronchial obstruction",
-   "bronchiectasis from unrelated cause",
-   "carcinoid or hamartoma with calcification",
-   "broncholith mimicking a bronchial stone within a congenital sequestration"
-  ],
-  "additionalInvestigations": [
-   "high-resolution and contrast CT of the chest to localise the calcified focus and assess vascular relations",
-   "flexible and, where indicated, rigid bronchoscopy to confirm and characterise the broncholith",
-   "sputum examination and culture for mycobacteria and fungi",
-   "assessment for prior granulomatous exposure (tuberculin or interferon-gamma release testing, fungal serology)",
-   "CT angiography where erosion into a vessel or significant haemoptysis is suspected",
-   "contrast swallow or CT if broncho-oesophageal fistula is considered",
-   "histological examination of expectorated or extracted material"
-  ],
-  "redFlags": [
-   "massive or recurrent haemoptysis suggesting erosion into a bronchial or pulmonary vessel",
-   "recurrent obstructive pneumonia in the same segment",
-   "features of broncho-oesophageal fistula such as coughing on swallowing or recurrent aspiration",
-   "signs of a large-airway obstruction with atelectasis or lobar collapse"
-  ],
-  "prognosis": "Outcome is generally favourable once the broncholith is removed and complications addressed, though embedded stones, fistulae or recurrent haemoptysis may require surgery and calcified nodal disease can occasionally produce further broncholiths over time.",
-  "pitfalls": [
-   "Attempting forceful bronchoscopic extraction of a partially embedded broncholith and precipitating catastrophic haemorrhage.",
-   "Missing a small calcified endobronchial focus on non-contrast or low-resolution imaging.",
-   "Attributing recurrent focal pneumonia to simple infection without seeking an obstructing broncholith.",
-   "Overlooking an evolving broncho-oesophageal fistula in a patient with cough on swallowing.",
-   "Assuming a systemic disorder of calcium metabolism rather than recognising the granulomatous nodal origin."
-  ],
-  "references": [
-   "Murray and Nadel's Textbook of Respiratory Medicine, current edition",
-   "Fishman's Pulmonary Diseases and Disorders, current edition",
-   "Standard thoracic surgery reference texts on airway complications of granulomatous disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Remove loose or partially eroded broncholiths bronchoscopically, using rigid bronchoscopy for larger or firmly embedded stones",
-   "Undertake surgical resection or broncholithectomy for embedded stones, fistula, or recurrent complications",
-   "Manage haemoptysis with CT angiography and bronchial artery embolisation for significant or massive bleeding, given the risk of erosion into vessels",
-   "Treat post-obstructive infection with appropriate antibiotics, adding antituberculous or antifungal therapy if active granulomatous infection is confirmed",
-   "Identify and repair any broncho-oesophageal fistula",
-   "Arrange follow-up imaging as calcified nodal disease may generate further broncholiths, and refer to thoracic surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "broncholithiasis-pathway",
-   "title": "broncholithiasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Broncholithiasis denotes calcified or ossified material within the airway lumen, most often a calcified peribronchial lymph node that erodes into an adjacent bronchus.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: massive or recurrent haemoptysis suggesting erosion into a bronchial or pulmonary vessel",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: high-resolution and contrast CT of the chest to localise the calcified focus and assess vascular relations, flexible and, where indicated, rigid bronchoscopy to confirm and characterise the broncholith, sputum examination"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Remove loose or partially eroded broncholiths bronchoscopically, using rigid bronchoscopy for larger or firmly embedded stones"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attempting forceful bronchoscopic extraction of a partially embedded broncholith and precipitating catastrophic haemorrhage."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of broncholithiasis."
-  }
- ],
- "tables": [
-  {
-   "id": "broncholithiasis-matrix",
-   "title": "broncholithiasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Broncholithiasis denotes calcified or ossified material within the airway lumen, most often a calcified peribronchial lymph node",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "respiratory",
+  "specialty": "respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Murray and Nadel's Textbook of Respiratory Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Broncholithiasis denotes calcified or ossified material within the airway lumen, most often a calcified peribronchial lymph node that erodes into an adjacent bronchus.",
+      "It classically follows healed granulomatous infection — historically tuberculosis and, in endemic regions, histoplasmosis — where calcified nodes gradually breach the bronchial wall.",
+      "Lithoptysis, the expectoration of gritty stone or sand-like material, is pathognomonic but occurs in only a minority of patients.",
+      "Common presentations are chronic cough, recurrent focal infection, localised wheeze and haemoptysis, the last resulting from erosion into bronchial vessels.",
+      "A broncholith adjacent to a vessel can cause massive haemoptysis or, rarely, erode into the oesophagus producing a broncho-oesophageal fistula.",
+      "CT typically shows a calcified endobronchial or peribronchial focus with distal atelectasis, obstructive pneumonitis, mucoid impaction or bronchiectasis.",
+      "Bronchoscopy may reveal a whitish, hard, mobile intraluminal stone; forceful blind extraction of a partially eroded broncholith risks torrential bleeding and should be avoided.",
+      "Management ranges from bronchoscopic removal of loose stones to surgical resection when the broncholith is embedded, associated with fistula, or causing recurrent haemoptysis or infection."
     ],
-    [
-     "Key Investigations",
-     "high-resolution and contrast CT of the chest to localise the calcified focus and assess vascular relations, flexible and, where",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Broncholithiasis usually begins with granulomatous inflammation of hilar or mediastinal lymph nodes, most often from healed tuberculosis or fungal infection such as histoplasmosis, silicosis being a less common contributor. Over years the affected nodes calcify and harden. Continuous transmission of respiratory and cardiac motion between the rigid calcified node and the pliable adjacent bronchial wall produces chronic mechanical erosion, allowing the calcified material to migrate into or through the wall and project into the lumen. Once endobronchial, the broncholith obstructs airflow and mucus clearance, causing distal atelectasis, post-obstructive infection, mucoid impaction and bronchiectasis. Erosion into accompanying bronchial or pulmonary vessels produces haemoptysis that may be severe, and erosion between airway and oesophagus or mediastinum can create fistulae. The process is mechanical and inflammatory rather than a disorder of systemic calcium metabolism.",
+    "additionalDifferentials": [
+      "endobronchial tumour (carcinoid or bronchogenic carcinoma)",
+      "aspirated calcified or radiopaque foreign body",
+      "calcified endobronchial tuberculosis or fungal granuloma",
+      "mucoid impaction from other causes of bronchial obstruction",
+      "bronchiectasis from unrelated cause",
+      "carcinoid or hamartoma with calcification",
+      "broncholith mimicking a bronchial stone within a congenital sequestration"
     ],
-    [
-     "Primary Differentials",
-     "endobronchial tumour (carcinoid or bronchogenic carcinoma), aspirated calcified or radiopaque foreign body, calcified",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "high-resolution and contrast CT of the chest to localise the calcified focus and assess vascular relations",
+      "flexible and, where indicated, rigid bronchoscopy to confirm and characterise the broncholith",
+      "sputum examination and culture for mycobacteria and fungi",
+      "assessment for prior granulomatous exposure (tuberculin or interferon-gamma release testing, fungal serology)",
+      "CT angiography where erosion into a vessel or significant haemoptysis is suspected",
+      "contrast swallow or CT if broncho-oesophageal fistula is considered",
+      "histological examination of expectorated or extracted material"
     ],
-    [
-     "Management Strategy",
-     "Remove loose or partially eroded broncholiths bronchoscopically, using rigid bronchoscopy for larger or firmly embedded stones",
-     "Core treatment modality"
+    "redFlags": [
+      "massive or recurrent haemoptysis suggesting erosion into a bronchial or pulmonary vessel",
+      "recurrent obstructive pneumonia in the same segment",
+      "features of broncho-oesophageal fistula such as coughing on swallowing or recurrent aspiration",
+      "signs of a large-airway obstruction with atelectasis or lobar collapse"
     ],
-    [
-     "Clinical Pitfall",
-     "Attempting forceful bronchoscopic extraction of a partially embedded broncholith and precipitating catastrophic haemorrhage.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is generally favourable once the broncholith is removed and complications addressed, though embedded stones, fistulae or recurrent haemoptysis may require surgery and calcified nodal disease can occasionally produce further broncholiths over time.",
+    "pitfalls": [
+      "Attempting forceful bronchoscopic extraction of a partially embedded broncholith and precipitating catastrophic haemorrhage.",
+      "Missing a small calcified endobronchial focus on non-contrast or low-resolution imaging.",
+      "Attributing recurrent focal pneumonia to simple infection without seeking an obstructing broncholith.",
+      "Overlooking an evolving broncho-oesophageal fistula in a patient with cough on swallowing.",
+      "Assuming a systemic disorder of calcium metabolism rather than recognising the granulomatous nodal origin."
+    ],
+    "references": [
+      "Murray and Nadel's Textbook of Respiratory Medicine, current edition",
+      "Fishman's Pulmonary Diseases and Disorders, current edition",
+      "Standard thoracic surgery reference texts on airway complications of granulomatous disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Remove loose or partially eroded broncholiths bronchoscopically, using rigid bronchoscopy for larger or firmly embedded stones",
+      "Undertake surgical resection or broncholithectomy for embedded stones, fistula, or recurrent complications",
+      "Manage haemoptysis with CT angiography and bronchial artery embolisation for significant or massive bleeding, given the risk of erosion into vessels",
+      "Treat post-obstructive infection with appropriate antibiotics, adding antituberculous or antifungal therapy if active granulomatous infection is confirmed",
+      "Identify and repair any broncho-oesophageal fistula",
+      "Arrange follow-up imaging as calcified nodal disease may generate further broncholiths, and refer to thoracic surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for broncholithiasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "broncholithiasis-real-image",
-   "title": "broncholithiasis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "broncholithiasis-pathway",
+      "title": "broncholithiasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Broncholithiasis denotes calcified or ossified material within the airway lumen, most often a calcified peribronchial lymph node that erodes into an adjacent bronchus.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: massive or recurrent haemoptysis suggesting erosion into a bronchial or pulmonary vessel",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: high-resolution and contrast CT of the chest to localise the calcified focus and assess vascular relations, flexible and, where indicated, rigid bronchoscopy to confirm and characterise the broncholith, sputum examination"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Remove loose or partially eroded broncholiths bronchoscopically, using rigid bronchoscopy for larger or firmly embedded stones"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attempting forceful bronchoscopic extraction of a partially embedded broncholith and precipitating catastrophic haemorrhage."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of broncholithiasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "broncholithiasis-matrix",
+      "title": "broncholithiasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Broncholithiasis denotes calcified or ossified material within the airway lumen, most often a calcified peribronchial lymph node",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "high-resolution and contrast CT of the chest to localise the calcified focus and assess vascular relations, flexible and, where",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "endobronchial tumour (carcinoid or bronchogenic carcinoma), aspirated calcified or radiopaque foreign body, calcified",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Remove loose or partially eroded broncholiths bronchoscopically, using rigid bronchoscopy for larger or firmly embedded stones",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attempting forceful bronchoscopic extraction of a partially embedded broncholith and precipitating catastrophic haemorrhage.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for broncholithiasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray and Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "broncholithiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in broncholithiasis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "High-resolution and contrast CT of the chest", "cells": [{"text": "Calcified focus, distal atelectasis, obstructive pneumonitis or bronchiectasis; vascular relations"}], "cite": "c1"},
+        {"parameter": "Flexible or rigid bronchoscopy", "cells": [{"text": "Whitish, hard, mobile intraluminal stone"}], "cite": "c1"},
+        {"parameter": "Sputum examination and culture", "cells": [{"text": "Mycobacteria and fungi"}], "cite": "c1"},
+        {"parameter": "Tuberculin or interferon-gamma release testing; fungal serology", "cells": [{"text": "Prior granulomatous exposure"}], "cite": "c1"},
+        {"parameter": "CT angiography", "cells": [{"text": "Erosion into a vessel or significant haemoptysis"}], "cite": "c1"},
+        {"parameter": "Contrast swallow or CT", "cells": [{"text": "Broncho-oesophageal fistula"}], "cite": "c1"},
+        {"parameter": "Histology of extracted or expectorated material", "cells": [{"text": "Nature of the material"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "broncholithiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike endobronchial lesions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Endobronchial tumour (carcinoid or bronchogenic carcinoma)", "cells": [{"text": "Bronchoscopy shows a whitish, hard, mobile stone in broncholithiasis rather than a mass"}], "cite": "c1"},
+        {"parameter": "Calcified endobronchial tuberculosis or fungal granuloma", "cells": [{"text": "Evidence of prior granulomatous exposure on tuberculin, interferon-gamma or fungal serology"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "broncholithiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options in broncholithiasis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Bronchoscopic removal", "cells": [{"text": "Loose or partially eroded stones; rigid bronchoscopy for larger or firmly embedded stones"}, {"text": "Avoid forceful blind extraction"}], "cite": "c1"},
+        {"parameter": "Surgical broncholithectomy", "cells": [{"text": "Embedded stones, fistula, or recurrent complications"}, {"text": "Definitive"}], "cite": "c1"},
+        {"parameter": "Haemoptysis", "cells": [{"text": "CT angiography and bronchial artery embolisation for significant or massive bleeding"}, {"text": "Acute"}], "cite": "c1"},
+        {"parameter": "Post-obstructive infection", "cells": [{"text": "Antibiotics; antituberculous or antifungal therapy if active granulomatous infection is confirmed"}, {"text": "Culture-guided"}], "cite": "c1"},
+        {"parameter": "Broncho-oesophageal fistula", "cells": [{"text": "Identify and repair"}, {"text": "Surgical"}], "cite": "c1"},
+        {"parameter": "Follow-up and referral", "cells": [{"text": "Follow-up imaging, since calcified nodal disease may generate further broncholiths; thoracic surgery referral"}, {"text": "Ongoing"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "broncholithiasis-dx-mgmt",
+      "title": "Diagnosis and management of broncholithiasis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Chronic cough, recurrent focal pneumonia, haemoptysis, or lithoptysis after healed granulomatous infection", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: massive or recurrent haemoptysis, recurrent obstructive pneumonia, or features of fistula?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: CT angiography; bronchial artery embolisation; thoracic surgery review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "High-resolution contrast CT; bronchoscopy to confirm a hard, mobile intraluminal stone", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Stone loose or partially eroded?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Bronchoscopic removal (rigid bronchoscopy for larger stones); avoid forceful extraction", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Surgical broncholithectomy for embedded stone, fistula or recurrent complications", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Treat post-obstructive infection; antituberculous or antifungal therapy if granulomatous infection confirmed", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Generally favourable once the stone is removed; follow-up for further broncholiths", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

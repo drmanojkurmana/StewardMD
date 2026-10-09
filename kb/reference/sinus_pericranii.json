@@ -1,173 +1,451 @@
 {
- "id": "sinus_pericranii",
- "name": "Sinus pericranii",
- "aliases": [
-  "SP",
-  "pericranial sinus"
- ],
- "class": "non_infective",
- "system": "Vascular anomalies / Dermatology",
- "specialty": "Vascular Anomalies",
- "referenceOnly": true,
- "reference": {
-  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An abnormal venous communication connecting the intracranial dural venous sinuses to extracranial scalp veins through a defect in the skull",
-   "Presents as a soft, bluish, compressible scalp swelling, often near the midline over the frontal or parietal region",
-   "The lesion characteristically enlarges with manoeuvres that raise venous pressure (Valsalva, bending forward, crying) and empties on compression or when upright",
-   "It can be congenital or acquired following trauma, and may be isolated or associated with other venous or developmental anomalies",
-   "Cross-sectional imaging with venous phase (CT venography or MRI/MRV) demonstrates the transcalvarial venous connection",
-   "A key management concern is whether the lesion is dominant for intracranial venous drainage, which affects safety of intervention",
-   "Complications include cosmetic concern, bleeding with trauma, and rarely air embolism or infection",
-   "Management is individualised, ranging from observation to surgical or endovascular treatment after defining venous drainage"
+  "id": "sinus_pericranii",
+  "name": "Sinus pericranii",
+  "aliases": [
+    "SP",
+    "pericranial sinus"
   ],
-  "pathophysiology": "Sinus pericranii is a venous anomaly in which a direct, valveless communication forms between the intracranial dural venous sinuses and the extracranial veins of the scalp, passing through one or more defects (emissary channels) in the skull. Blood flows bidirectionally through this connection so that the extracranial venous pouch fills when intracranial venous pressure rises and empties with compression or upright posture. The anomaly may be developmental or arise after trauma, and its clinical significance hinges on whether it merely drains scalp veins or also carries important intracranial venous outflow.",
-  "additionalDifferentials": [
-   "Scalp venous malformation",
-   "Dermoid or epidermoid cyst of the scalp",
-   "Cephalohaematoma or subgaleal collection",
-   "Encephalocele or meningocele",
-   "Eosinophilic granuloma or other lytic skull lesion",
-   "Aneurysmal bone cyst of the calvarium"
-  ],
-  "additionalInvestigations": [
-   "MRI with MR venography to characterise the venous anatomy",
-   "CT and CT venography to define the calvarial defect and transosseous channel",
-   "Catheter venography when detailed drainage assessment is needed before intervention",
-   "Doppler ultrasound to demonstrate compressibility and venous flow",
-   "Assessment of whether the sinus is dominant for intracranial drainage",
-   "Skull radiographs may show the bony defect"
-  ],
-  "redFlags": [
-   "Evidence that the lesion provides dominant intracranial venous drainage, raising risk with intervention",
-   "Significant bleeding after minor trauma to the swelling",
-   "Signs of air embolism or intracranial complication",
-   "Associated developmental venous anomalies affecting cerebral drainage",
-   "Rapid change in size or new neurological symptoms"
-  ],
-  "prognosis": "Many lesions are stable and can be observed with a good prognosis; when treatment is indicated for cosmetic, symptomatic or safety reasons, outcomes are generally favourable provided the venous drainage pattern is defined beforehand to avoid compromising intracranial outflow.",
-  "pitfalls": [
-   "Intervening without first establishing whether the sinus is dominant for intracranial venous drainage",
-   "Mistaking it for a simple cyst or cephalohaematoma and attempting incision",
-   "Overlooking the diagnostic positional and Valsalva-related size change",
-   "Failing to consider associated venous or developmental anomalies"
-  ],
-  "references": [
-   "ISSVA Classification of Vascular Anomalies",
-   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Define the venous drainage pattern, in particular whether the lesion is dominant for intracranial outflow, before any intervention, as this is the pivotal management decision",
-   "Observation of asymptomatic, non-dominant lesions given the generally benign course",
-   "Surgical excision with ligation of the transcalvarial connection, or endovascular embolisation, for cosmetic, symptomatic or safety reasons once the lesion is shown not to be dominant",
-   "Avoidance of any procedure that would compromise intracranial venous outflow if the sinus is dominant",
-   "Coordinated vascular anomalies, neurosurgery and interventional neuroradiology input",
-   "Imaging surveillance with MR venography for change in size or drainage"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sinus_pericranii-pathway",
-   "title": "Sinus pericranii: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An abnormal venous communication connecting the intracranial dural venous sinuses to extracranial scalp veins through a defect in the skull",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Evidence that the lesion provides dominant intracranial venous drainage, raising risk with intervention",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI with MR venography to characterise the venous anatomy, CT and CT venography to define the calvarial defect and transosseous channel, Catheter venography when detailed drainage assessment is needed before intervention"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Define the venous drainage pattern, in particular whether the lesion is dominant for intracranial outflow, before any intervention, as this is the pivotal management decision"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Intervening without first establishing whether the sinus is dominant for intracranial venous drainage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sinus pericranii."
-  }
- ],
- "tables": [
-  {
-   "id": "sinus_pericranii-matrix",
-   "title": "Sinus pericranii: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An abnormal venous communication connecting the intracranial dural venous sinuses to extracranial scalp veins through a defect in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular anomalies / Dermatology",
+  "specialty": "Vascular Anomalies",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An abnormal venous communication connecting the intracranial dural venous sinuses to extracranial scalp veins through a defect in the skull",
+      "Presents as a soft, bluish, compressible scalp swelling, often near the midline over the frontal or parietal region",
+      "The lesion characteristically enlarges with manoeuvres that raise venous pressure (Valsalva, bending forward, crying) and empties on compression or when upright",
+      "It can be congenital or acquired following trauma, and may be isolated or associated with other venous or developmental anomalies",
+      "Cross-sectional imaging with venous phase (CT venography or MRI/MRV) demonstrates the transcalvarial venous connection",
+      "A key management concern is whether the lesion is dominant for intracranial venous drainage, which affects safety of intervention",
+      "Complications include cosmetic concern, bleeding with trauma, and rarely air embolism or infection",
+      "Management is individualised, ranging from observation to surgical or endovascular treatment after defining venous drainage"
     ],
-    [
-     "Key Investigations",
-     "MRI with MR venography to characterise the venous anatomy, CT and CT venography to define the calvarial defect and transosseous",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sinus pericranii is a venous anomaly in which a direct, valveless communication forms between the intracranial dural venous sinuses and the extracranial veins of the scalp, passing through one or more defects (emissary channels) in the skull. Blood flows bidirectionally through this connection so that the extracranial venous pouch fills when intracranial venous pressure rises and empties with compression or upright posture. The anomaly may be developmental or arise after trauma, and its clinical significance hinges on whether it merely drains scalp veins or also carries important intracranial venous outflow.",
+    "additionalDifferentials": [
+      "Scalp venous malformation",
+      "Dermoid or epidermoid cyst of the scalp",
+      "Cephalohaematoma or subgaleal collection",
+      "Encephalocele or meningocele",
+      "Eosinophilic granuloma or other lytic skull lesion",
+      "Aneurysmal bone cyst of the calvarium"
     ],
-    [
-     "Primary Differentials",
-     "Scalp venous malformation, Dermoid or epidermoid cyst of the scalp, Cephalohaematoma or subgaleal collection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI with MR venography to characterise the venous anatomy",
+      "CT and CT venography to define the calvarial defect and transosseous channel",
+      "Catheter venography when detailed drainage assessment is needed before intervention",
+      "Doppler ultrasound to demonstrate compressibility and venous flow",
+      "Assessment of whether the sinus is dominant for intracranial drainage",
+      "Skull radiographs may show the bony defect"
     ],
-    [
-     "Management Strategy",
-     "Define the venous drainage pattern, in particular whether the lesion is dominant for intracranial outflow, before any",
-     "Core treatment modality"
+    "redFlags": [
+      "Evidence that the lesion provides dominant intracranial venous drainage, raising risk with intervention",
+      "Significant bleeding after minor trauma to the swelling",
+      "Signs of air embolism or intracranial complication",
+      "Associated developmental venous anomalies affecting cerebral drainage",
+      "Rapid change in size or new neurological symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Intervening without first establishing whether the sinus is dominant for intracranial venous drainage",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many lesions are stable and can be observed with a good prognosis; when treatment is indicated for cosmetic, symptomatic or safety reasons, outcomes are generally favourable provided the venous drainage pattern is defined beforehand to avoid compromising intracranial outflow.",
+    "pitfalls": [
+      "Intervening without first establishing whether the sinus is dominant for intracranial venous drainage",
+      "Mistaking it for a simple cyst or cephalohaematoma and attempting incision",
+      "Overlooking the diagnostic positional and Valsalva-related size change",
+      "Failing to consider associated venous or developmental anomalies"
+    ],
+    "references": [
+      "ISSVA Classification of Vascular Anomalies",
+      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Define the venous drainage pattern, in particular whether the lesion is dominant for intracranial outflow, before any intervention, as this is the pivotal management decision",
+      "Observation of asymptomatic, non-dominant lesions given the generally benign course",
+      "Surgical excision with ligation of the transcalvarial connection, or endovascular embolisation, for cosmetic, symptomatic or safety reasons once the lesion is shown not to be dominant",
+      "Avoidance of any procedure that would compromise intracranial venous outflow if the sinus is dominant",
+      "Coordinated vascular anomalies, neurosurgery and interventional neuroradiology input",
+      "Imaging surveillance with MR venography for change in size or drainage"
     ]
-   ],
-   "caption": "Overview comparison matrix for sinus pericranii."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sinus-pericranii-real-image",
-   "title": "Sinus pericranii: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "sinus_pericranii-pathway",
+      "title": "Sinus pericranii: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An abnormal venous communication connecting the intracranial dural venous sinuses to extracranial scalp veins through a defect in the skull",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Evidence that the lesion provides dominant intracranial venous drainage, raising risk with intervention",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI with MR venography to characterise the venous anatomy, CT and CT venography to define the calvarial defect and transosseous channel, Catheter venography when detailed drainage assessment is needed before intervention"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Define the venous drainage pattern, in particular whether the lesion is dominant for intracranial outflow, before any intervention, as this is the pivotal management decision"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Intervening without first establishing whether the sinus is dominant for intracranial venous drainage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sinus pericranii."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sinus_pericranii-matrix",
+      "title": "Sinus pericranii: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An abnormal venous communication connecting the intracranial dural venous sinuses to extracranial scalp veins through a defect in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI with MR venography to characterise the venous anatomy, CT and CT venography to define the calvarial defect and transosseous",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Scalp venous malformation, Dermoid or epidermoid cyst of the scalp, Cephalohaematoma or subgaleal collection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Define the venous drainage pattern, in particular whether the lesion is dominant for intracranial outflow, before any",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Intervening without first establishing whether the sinus is dominant for intracranial venous drainage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sinus pericranii."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sinus_pericranii-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with MR venography",
+          "cells": [
+            {
+              "text": "Venous anatomy, including the transcalvarial connection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT and CT venography",
+          "cells": [
+            {
+              "text": "Calvarial defect and transosseous channel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter venography",
+          "cells": [
+            {
+              "text": "Detailed drainage pattern before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Compressibility and venous flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of intracranial drainage",
+          "cells": [
+            {
+              "text": "Whether the lesion is dominant for intracranial venous outflow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull radiographs",
+          "cells": [
+            {
+              "text": "Bony defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinus_pericranii-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermoid or epidermoid cyst of the scalp",
+          "cells": [
+            {
+              "text": "Mistaken for a simple cyst; this lesion enlarges with Valsalva and empties on compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cephalohaematoma or subgaleal collection",
+          "cells": [
+            {
+              "text": "Enlarges with Valsalva and empties on compression; should not be incised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinus_pericranii-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Define venous drainage first",
+          "cells": [
+            {
+              "text": "Whether the lesion is dominant for intracranial outflow; the pivotal decision before any intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic, non-dominant lesions, given the generally benign course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision or endovascular embolisation",
+          "cells": [
+            {
+              "text": "For cosmetic, symptomatic or safety reasons, once the lesion is shown not to be dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid compromising outflow",
+          "cells": [
+            {
+              "text": "If the sinus is dominant for intracranial drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Vascular anomalies, neurosurgery and interventional neuroradiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging surveillance",
+          "cells": [
+            {
+              "text": "MR venography for change in size or drainage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sinus_pericranii-dx-mgmt",
+      "title": "Diagnosis and management of Sinus pericranii",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Soft, bluish scalp swelling that enlarges with Valsalva: suspected sinus pericranii",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dominant intracranial drainage, bleeding after trauma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review; avoid any procedure that could impair venous outflow",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MR venography or CT venography for the transcalvarial connection and drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion shown to be non-dominant for intracranial venous drainage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Dominant sinus: avoid intervention and seek specialist venous assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic, non-dominant lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excision with ligation or embolisation for cosmetic, symptomatic or safety reasons",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "MR venography surveillance for change in size or drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Vascular, neurosurgical and neuroradiology input as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many lesions are stable; treatment outcomes are good once drainage is defined",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,184 +1,621 @@
 {
- "id": "mycoplasma_infection",
- "name": "Mycoplasma Infection",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 193,
- "page": 1464,
- "aliases": [
-  "Mycoplasma pneumoniae",
-  "atypical pneumonia",
-  "walking pneumonia"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1464-1466",
-  "clinicalPearls": [
-   "M. pneumoniae pneumonia is also called Eaton agent pneumonia, primary atypical pneumonia, and 'walking' pneumonia (Harrison 22e p.1465).",
-   "Onset of pneumonia is usually gradual over several days; the most common presenting symptom is cough, which is typically nonproductive, though headache, malaise, chills, and fever are noted in the majority of patients (Harrison 22e p.1465).",
-   "Pneumonia develops in only 3-13% of infected individuals; upper respiratory illness is far more common, with an estimated incidence up to 20 times that of pneumonia (Harrison 22e p.1465).",
-   "Wheezes or rales are detected in about 80% of patients with M. pneumoniae pneumonia, but in many patients pneumonia can be diagnosed only by chest radiography (Harrison 22e p.1465).",
-   "The most common radiographic pattern is peribronchial pneumonia with thickened bronchial markings, streaks of interstitial infiltration, and subsegmental atelectasis; segmental or lobar consolidation is not uncommon (Harrison 22e p.1465).",
-   "Clinical presentation does not reliably distinguish M. pneumoniae pneumonia from other causes of community-acquired pneumonia (Harrison 22e p.1465).",
-   "Many patients with extrapulmonary M. pneumoniae disease do not have respiratory disease (Harrison 22e p.1465).",
-   "Hematologic manifestations include hemolytic anemia, aplastic anemia, cold agglutinins, disseminated intravascular coagulation, and hypercoagulopathy; when anemia occurs it generally develops in the second or third week of illness (Harrison 22e p.1466).",
-   "Erythema multiforme major (Stevens-Johnson syndrome) is the most clinically significant skin eruption associated with M. pneumoniae and appears to occur more commonly with M. pneumoniae than with other infectious agents; in M. pneumoniae-induced rash and mucositis (MIRM)/reactive infectious mucocutaneous eruption (RIME) there may be minimal cutaneous involvement with prominent mucosal disease (Harrison 22e p.1466, p.591).",
-   "M. pneumoniae has been implicated as a likely etiologic agent in 5-7% of cases of encephalitis (Harrison 22e p.1465).",
-   "Diagnosis is most sensitively and rapidly made by combining PCR of respiratory tract secretions with serologic testing of paired acute- and convalescent-phase samples (Harrison 22e p.1466).",
-   "M. pneumoniae is the most frequently detected 'atypical' organism in adult community-acquired pneumonia; older pooled data gave a prevalence of about 22.7%, and more recent (2002-2015) analyses gave about 7.2% (Harrison 22e p.1465)."
+  "id": "mycoplasma_infection",
+  "name": "Mycoplasma Infection",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 193,
+  "page": 1464,
+  "aliases": [
+    "Mycoplasma pneumoniae",
+    "atypical pneumonia",
+    "walking pneumonia"
   ],
-  "pathophysiology": "Mycoplasmas are prokaryotes of the class Mollicutes, the smallest organisms capable of independent replication; they lack a cell wall and are bound only by a cell membrane, which explains the inactivity of beta-lactam antibiotics (penicillins and cephalosporins) against them. M. pneumoniae is generally an extracellular pathogen that attaches to ciliated respiratory epithelial cells via a complex terminal organelle using interactive adhesins and accessory proteins. Tissue injury is thought to be mediated by production of hydrogen peroxide and an ADP-ribosylating and vacuolating cytotoxin similar to pertussis toxin. Lacking a cell wall, mycoplasmas lack cell-wall-derived innate immune stimulators (lipopolysaccharide, lipoteichoic acid, peptidoglycan), but membrane lipoproteins act through Toll-like receptors (primarily TLR2). Innate immunity provides most lung defense, cellular immunity may be immunopathogenic, and humoral immunity protects against dissemination; patients with humoral immunodeficiency are prone to disseminated disease (arthritis, meningitis, osteomyelitis). Extrapulmonary manifestations may arise from disseminated infection, postinfectious autoimmune phenomena (e.g., Guillain-Barre syndrome), or possibly an ADP-ribosylating toxin (Harrison 22e p.1464-1466).",
-  "additionalDifferentials": [
-   "Chlamydia (Chlamydophila) pneumoniae community-acquired pneumonia",
-   "Legionella species pneumonia",
-   "Streptococcus pneumoniae and other bacterial community-acquired pneumonia",
-   "Viral respiratory tract infection / pneumonia"
-  ],
-  "infectionMimics": [
-   "Chlamydophila pneumoniae pneumonia",
-   "Legionella pneumonia",
-   "Viral atypical pneumonia"
-  ],
-  "nonInfectiousMimics": [
-   "Asthma / reactive airway disease (wheezing overlap)",
-   "Drug-induced or herpes-associated erythema multiforme major (overlapping with Mycoplasma-associated SJS/MIRM)"
-  ],
-  "additionalInvestigations": [
-   "Respiratory PCR for M. pneumoniae (sensitivity 65-90%, specificity 90-100%) - allows rapid early diagnosis",
-   "Paired acute- and convalescent-phase serology (IgM and IgG) by enzyme-linked immunoassay; a single acute sample is inadequate because antibodies may not develop until ~2 weeks",
-   "Respiratory culture on special media (sensitivity <=60%, specificity 100%) - not recommended for routine diagnosis as it may take weeks",
-   "Chest radiography",
-   "Cerebrospinal fluid PCR for extrapulmonary (CNS) infection",
-   "Macrolide-resistance testing by culture and/or PCR when resistance is suspected"
-  ],
-  "redFlags": [
-   "Neurologic manifestations: meningoencephalitis, encephalitis, Guillain-Barre syndrome, aseptic meningitis, transverse myelitis, acute disseminated encephalomyelitis, cerebrovascular thromboembolic events, acute psychosis, cerebellar ataxia, cranial neuropathy",
-   "Severe mucocutaneous disease: erythema multiforme major / Stevens-Johnson syndrome / MIRM",
-   "Hemolytic anemia, disseminated intravascular coagulation, hypercoagulopathy",
-   "Disseminated infection (septic arthritis, meningitis, osteomyelitis), especially in hypogammaglobulinemic / humorally immunodeficient patients",
-   "Community-acquired pneumonia failing to respond to a penicillin or cephalosporin"
-  ],
-  "prognosis": "M. pneumoniae pneumonia is generally self-limited, with symptoms usually resolving within 2-3 weeks of onset even without treatment; appropriate antimicrobial therapy significantly shortens the duration of clinical illness. Infection uncommonly results in critical illness and only rarely in death. Long-term recurrent wheezing or reactive airway disease may follow resolution of acute pneumonia, and a possible link to asthma is under investigation. Immunity following severe infection is more protective and longer-lasting than after mild infection, and genuine second attacks of pneumonia are reported infrequently (Harrison 22e p.1465).",
-  "pitfalls": [
-   "Because mycoplasmas lack a cell wall, beta-lactam antibiotics (penicillins and cephalosporins) are ineffective; consider M. pneumoniae particularly when community-acquired pneumonia fails to respond to these agents (Harrison 22e p.1464-1465).",
-   "M. pneumoniae lacks a cell wall and is therefore not visible on Gram stain (Harrison 22e p.1466).",
-   "Measurement of cold agglutinin titers is no longer recommended for diagnosis because the findings are nonspecific and specific M. pneumoniae assays are now available (Harrison 22e p.1466).",
-   "A single acute-phase serum sample is not adequate for diagnosis, and IgM antibody can persist for up to 1 year, so its presence may indicate recent rather than acute infection - paired samples are needed (Harrison 22e p.1466).",
-   "Little evidence supports the commonly held belief that M. pneumoniae is an important cause of otitis media, with or without bullous myringitis (Harrison 22e p.1465).",
-   "A test of cure for eradication is not suggested, because appropriate antibiotics do not appear to shorten the duration of detection by culture or PCR (Harrison 22e p.1466).",
-   "Ciprofloxacin and ofloxacin are not recommended for M. pneumoniae owing to high MICs and poor experimental performance, in contrast to respiratory fluoroquinolones (Harrison 22e p.1466)."
-  ],
-  "severityClassification": "No formal severity classification is given for Mycoplasma infection; M. pneumoniae illness is generally graded clinically from mild self-limited upper respiratory illness through pneumonia to severe/refractory or critical disease, with macrolide resistance and extrapulmonary involvement marking more severe courses (Harrison 22e p.1464-1466).",
-  "references": [
-   "Harrison 22e p.1464-1466",
-   "Harrison 22e p.591"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with a macrolide such as azithromycin or clarithromycin as first-line therapy, avoiding beta-lactams because the wall-less organism is intrinsically resistant to them",
-   "Use a tetracycline such as doxycycline or a respiratory fluoroquinolone where macrolide resistance is suspected or in adults",
-   "Provide supportive care with antipyretics, analgesia, hydration, and rest, recognising that many infections are self-limiting",
-   "Relieve wheeze with bronchodilators and reserve hospital admission and supplemental oxygen for severe pneumonia or respiratory compromise",
-   "Identify and manage extrapulmonary manifestations such as haemolytic anaemia, neurological involvement, and severe mucocutaneous reactions",
-   "Send macrolide-resistance testing by culture or PCR when response to first-line therapy is poor"
-  ]
- },
- "algorithms": [
-  {
-   "id": "mycoplasma_infection-pathway",
-   "title": "Mycoplasma Infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "M. pneumoniae pneumonia is also called Eaton agent pneumonia, primary atypical pneumonia, and 'walking' pneumonia (Harrison 22e p.1465).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurologic manifestations: meningoencephalitis, encephalitis, Guillain-Barre syndrome, aseptic meningitis, transverse myelitis, acute disseminated encephalomyelitis, cerebrovascular thromboembolic events,",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Respiratory PCR for M. pneumoniae (sensitivity 65-90%, specificity 90-100%) - allows rapid early diagnosis, Paired acute- and convalescent-phase serology (IgM and IgG) by enzyme-linked immunoassay; a single acute sample is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with a macrolide such as azithromycin or clarithromycin as first-line therapy, avoiding beta-lactams because the wall-less organism is intrinsically resistant to them"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Because mycoplasmas lack a cell wall, beta-lactam antibiotics (penicillins and cephalosporins) are ineffective; consider M. pneumoniae particularly when community-acquired pneumonia fails to respond to these agents"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mycoplasma infection."
-  }
- ],
- "tables": [
-  {
-   "id": "mycoplasma_infection-matrix",
-   "title": "Mycoplasma Infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "M. pneumoniae pneumonia is also called Eaton agent pneumonia, primary atypical pneumonia, and 'walking' pneumonia (Harrison 22e",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1464-1466",
+    "clinicalPearls": [
+      "M. pneumoniae pneumonia is also called Eaton agent pneumonia, primary atypical pneumonia, and 'walking' pneumonia (Harrison 22e p.1465).",
+      "Onset of pneumonia is usually gradual over several days; the most common presenting symptom is cough, which is typically nonproductive, though headache, malaise, chills, and fever are noted in the majority of patients (Harrison 22e p.1465).",
+      "Pneumonia develops in only 3-13% of infected individuals; upper respiratory illness is far more common, with an estimated incidence up to 20 times that of pneumonia (Harrison 22e p.1465).",
+      "Wheezes or rales are detected in about 80% of patients with M. pneumoniae pneumonia, but in many patients pneumonia can be diagnosed only by chest radiography (Harrison 22e p.1465).",
+      "The most common radiographic pattern is peribronchial pneumonia with thickened bronchial markings, streaks of interstitial infiltration, and subsegmental atelectasis; segmental or lobar consolidation is not uncommon (Harrison 22e p.1465).",
+      "Clinical presentation does not reliably distinguish M. pneumoniae pneumonia from other causes of community-acquired pneumonia (Harrison 22e p.1465).",
+      "Many patients with extrapulmonary M. pneumoniae disease do not have respiratory disease (Harrison 22e p.1465).",
+      "Hematologic manifestations include hemolytic anemia, aplastic anemia, cold agglutinins, disseminated intravascular coagulation, and hypercoagulopathy; when anemia occurs it generally develops in the second or third week of illness (Harrison 22e p.1466).",
+      "Erythema multiforme major (Stevens-Johnson syndrome) is the most clinically significant skin eruption associated with M. pneumoniae and appears to occur more commonly with M. pneumoniae than with other infectious agents; in M. pneumoniae-induced rash and mucositis (MIRM)/reactive infectious mucocutaneous eruption (RIME) there may be minimal cutaneous involvement with prominent mucosal disease (Harrison 22e p.1466, p.591).",
+      "M. pneumoniae has been implicated as a likely etiologic agent in 5-7% of cases of encephalitis (Harrison 22e p.1465).",
+      "Diagnosis is most sensitively and rapidly made by combining PCR of respiratory tract secretions with serologic testing of paired acute- and convalescent-phase samples (Harrison 22e p.1466).",
+      "M. pneumoniae is the most frequently detected 'atypical' organism in adult community-acquired pneumonia; older pooled data gave a prevalence of about 22.7%, and more recent (2002-2015) analyses gave about 7.2% (Harrison 22e p.1465)."
     ],
-    [
-     "Key Investigations",
-     "Respiratory PCR for M. pneumoniae (sensitivity 65-90%, specificity 90-100%) - allows rapid early diagnosis, Paired acute- and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mycoplasmas are prokaryotes of the class Mollicutes, the smallest organisms capable of independent replication; they lack a cell wall and are bound only by a cell membrane, which explains the inactivity of beta-lactam antibiotics (penicillins and cephalosporins) against them. M. pneumoniae is generally an extracellular pathogen that attaches to ciliated respiratory epithelial cells via a complex terminal organelle using interactive adhesins and accessory proteins. Tissue injury is thought to be mediated by production of hydrogen peroxide and an ADP-ribosylating and vacuolating cytotoxin similar to pertussis toxin. Lacking a cell wall, mycoplasmas lack cell-wall-derived innate immune stimulators (lipopolysaccharide, lipoteichoic acid, peptidoglycan), but membrane lipoproteins act through Toll-like receptors (primarily TLR2). Innate immunity provides most lung defense, cellular immunity may be immunopathogenic, and humoral immunity protects against dissemination; patients with humoral immunodeficiency are prone to disseminated disease (arthritis, meningitis, osteomyelitis). Extrapulmonary manifestations may arise from disseminated infection, postinfectious autoimmune phenomena (e.g., Guillain-Barre syndrome), or possibly an ADP-ribosylating toxin (Harrison 22e p.1464-1466).",
+    "additionalDifferentials": [
+      "Chlamydia (Chlamydophila) pneumoniae community-acquired pneumonia",
+      "Legionella species pneumonia",
+      "Streptococcus pneumoniae and other bacterial community-acquired pneumonia",
+      "Viral respiratory tract infection / pneumonia"
     ],
-    [
-     "Primary Differentials",
-     "Chlamydia (Chlamydophila) pneumoniae community-acquired pneumonia, Legionella species pneumonia, Streptococcus pneumoniae and",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Chlamydophila pneumoniae pneumonia",
+      "Legionella pneumonia",
+      "Viral atypical pneumonia"
     ],
-    [
-     "Management Strategy",
-     "Treat with a macrolide such as azithromycin or clarithromycin as first-line therapy, avoiding beta-lactams because the wall-less",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Asthma / reactive airway disease (wheezing overlap)",
+      "Drug-induced or herpes-associated erythema multiforme major (overlapping with Mycoplasma-associated SJS/MIRM)"
     ],
-    [
-     "Clinical Pitfall",
-     "Because mycoplasmas lack a cell wall, beta-lactam antibiotics (penicillins and cephalosporins) are ineffective; consider M.",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Respiratory PCR for M. pneumoniae (sensitivity 65-90%, specificity 90-100%) - allows rapid early diagnosis",
+      "Paired acute- and convalescent-phase serology (IgM and IgG) by enzyme-linked immunoassay; a single acute sample is inadequate because antibodies may not develop until ~2 weeks",
+      "Respiratory culture on special media (sensitivity <=60%, specificity 100%) - not recommended for routine diagnosis as it may take weeks",
+      "Chest radiography",
+      "Cerebrospinal fluid PCR for extrapulmonary (CNS) infection",
+      "Macrolide-resistance testing by culture and/or PCR when resistance is suspected"
+    ],
+    "redFlags": [
+      "Neurologic manifestations: meningoencephalitis, encephalitis, Guillain-Barre syndrome, aseptic meningitis, transverse myelitis, acute disseminated encephalomyelitis, cerebrovascular thromboembolic events, acute psychosis, cerebellar ataxia, cranial neuropathy",
+      "Severe mucocutaneous disease: erythema multiforme major / Stevens-Johnson syndrome / MIRM",
+      "Hemolytic anemia, disseminated intravascular coagulation, hypercoagulopathy",
+      "Disseminated infection (septic arthritis, meningitis, osteomyelitis), especially in hypogammaglobulinemic / humorally immunodeficient patients",
+      "Community-acquired pneumonia failing to respond to a penicillin or cephalosporin"
+    ],
+    "prognosis": "M. pneumoniae pneumonia is generally self-limited, with symptoms usually resolving within 2-3 weeks of onset even without treatment; appropriate antimicrobial therapy significantly shortens the duration of clinical illness. Infection uncommonly results in critical illness and only rarely in death. Long-term recurrent wheezing or reactive airway disease may follow resolution of acute pneumonia, and a possible link to asthma is under investigation. Immunity following severe infection is more protective and longer-lasting than after mild infection, and genuine second attacks of pneumonia are reported infrequently (Harrison 22e p.1465).",
+    "pitfalls": [
+      "Because mycoplasmas lack a cell wall, beta-lactam antibiotics (penicillins and cephalosporins) are ineffective; consider M. pneumoniae particularly when community-acquired pneumonia fails to respond to these agents (Harrison 22e p.1464-1465).",
+      "M. pneumoniae lacks a cell wall and is therefore not visible on Gram stain (Harrison 22e p.1466).",
+      "Measurement of cold agglutinin titers is no longer recommended for diagnosis because the findings are nonspecific and specific M. pneumoniae assays are now available (Harrison 22e p.1466).",
+      "A single acute-phase serum sample is not adequate for diagnosis, and IgM antibody can persist for up to 1 year, so its presence may indicate recent rather than acute infection - paired samples are needed (Harrison 22e p.1466).",
+      "Little evidence supports the commonly held belief that M. pneumoniae is an important cause of otitis media, with or without bullous myringitis (Harrison 22e p.1465).",
+      "A test of cure for eradication is not suggested, because appropriate antibiotics do not appear to shorten the duration of detection by culture or PCR (Harrison 22e p.1466).",
+      "Ciprofloxacin and ofloxacin are not recommended for M. pneumoniae owing to high MICs and poor experimental performance, in contrast to respiratory fluoroquinolones (Harrison 22e p.1466)."
+    ],
+    "severityClassification": "No formal severity classification is given for Mycoplasma infection; M. pneumoniae illness is generally graded clinically from mild self-limited upper respiratory illness through pneumonia to severe/refractory or critical disease, with macrolide resistance and extrapulmonary involvement marking more severe courses (Harrison 22e p.1464-1466).",
+    "references": [
+      "Harrison 22e p.1464-1466",
+      "Harrison 22e p.591"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with a macrolide such as azithromycin or clarithromycin as first-line therapy, avoiding beta-lactams because the wall-less organism is intrinsically resistant to them",
+      "Use a tetracycline such as doxycycline or a respiratory fluoroquinolone where macrolide resistance is suspected or in adults",
+      "Provide supportive care with antipyretics, analgesia, hydration, and rest, recognising that many infections are self-limiting",
+      "Relieve wheeze with bronchodilators and reserve hospital admission and supplemental oxygen for severe pneumonia or respiratory compromise",
+      "Identify and manage extrapulmonary manifestations such as haemolytic anaemia, neurological involvement, and severe mucocutaneous reactions",
+      "Send macrolide-resistance testing by culture or PCR when response to first-line therapy is poor"
     ]
-   ],
-   "caption": "Overview comparison matrix for mycoplasma infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mycoplasma-infection-real-image",
-   "title": "Mycoplasma Infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "mycoplasma_infection-pathway",
+      "title": "Mycoplasma Infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "M. pneumoniae pneumonia is also called Eaton agent pneumonia, primary atypical pneumonia, and 'walking' pneumonia (Harrison 22e p.1465).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurologic manifestations: meningoencephalitis, encephalitis, Guillain-Barre syndrome, aseptic meningitis, transverse myelitis, acute disseminated encephalomyelitis, cerebrovascular thromboembolic events,",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Respiratory PCR for M. pneumoniae (sensitivity 65-90%, specificity 90-100%) - allows rapid early diagnosis, Paired acute- and convalescent-phase serology (IgM and IgG) by enzyme-linked immunoassay; a single acute sample is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with a macrolide such as azithromycin or clarithromycin as first-line therapy, avoiding beta-lactams because the wall-less organism is intrinsically resistant to them"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Because mycoplasmas lack a cell wall, beta-lactam antibiotics (penicillins and cephalosporins) are ineffective; consider M. pneumoniae particularly when community-acquired pneumonia fails to respond to these agents"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mycoplasma infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mycoplasma_infection-matrix",
+      "title": "Mycoplasma Infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "M. pneumoniae pneumonia is also called Eaton agent pneumonia, primary atypical pneumonia, and 'walking' pneumonia (Harrison 22e",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Respiratory PCR for M. pneumoniae (sensitivity 65-90%, specificity 90-100%) - allows rapid early diagnosis, Paired acute- and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chlamydia (Chlamydophila) pneumoniae community-acquired pneumonia, Legionella species pneumonia, Streptococcus pneumoniae and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with a macrolide such as azithromycin or clarithromycin as first-line therapy, avoiding beta-lactams because the wall-less",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Because mycoplasmas lack a cell wall, beta-lactam antibiotics (penicillins and cephalosporins) are ineffective; consider M.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mycoplasma infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Mycoplasma pneumoniae: Clinical Care",
+      "kind": "web",
+      "url": "https://www.cdc.gov/mycoplasma/hcp/clinical-care/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycoplasma_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of Mycoplasma pneumoniae infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical picture",
+          "cells": [
+            {
+              "text": "Gradual onset, dry cough, headache, malaise, fever"
+            },
+            {
+              "text": "Cannot be separated reliably from other CAP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia rate",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "3 to 13% of infections",
+              "range": [
+                3,
+                13
+              ]
+            },
+            {
+              "text": "Upper respiratory illness far more common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest signs",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Wheeze or crackles in about 80%",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Often diagnosed only on chest film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Peribronchial infiltrates, subsegmental atelectasis"
+            },
+            {
+              "text": "Lobar consolidation possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory PCR",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 65 to 90%, specificity 90 to 100%",
+              "range": [
+                65,
+                90
+              ]
+            },
+            {
+              "text": "{{hy:Test of choice for early diagnosis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired serology",
+          "cells": [
+            {
+              "text": "IgM and IgG on acute and convalescent sera"
+            },
+            {
+              "text": "Single sample inadequate; IgM persists up to 1 year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 60% or less",
+              "op": "<=",
+              "value": 60
+            },
+            {
+              "text": "Slow; not for routine use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold agglutinins",
+          "cells": [
+            {
+              "text": "Nonspecific"
+            },
+            {
+              "text": "No longer recommended"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain",
+          "cells": [
+            {
+              "text": "No organisms seen"
+            },
+            {
+              "text": "No cell wall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycoplasma_infection-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Mycoplasma infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chlamydia pneumoniae",
+          "cells": [
+            {
+              "text": "Similar atypical picture, often hoarseness"
+            },
+            {
+              "text": "Respiratory PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Legionella pneumonia",
+          "cells": [
+            {
+              "text": "High fever, diarrhoea, hyponatraemia, sicker"
+            },
+            {
+              "text": "Urine antigen, PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumococcal pneumonia",
+          "cells": [
+            {
+              "text": "Abrupt onset, lobar, responds to beta-lactam"
+            },
+            {
+              "text": "Sputum Gram stain, urine antigen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral pneumonia",
+          "cells": [
+            {
+              "text": "Seasonal, myalgia"
+            },
+            {
+              "text": "Viral PCR panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asthma exacerbation",
+          "cells": [
+            {
+              "text": "Wheeze without infiltrate"
+            },
+            {
+              "text": "Chest film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug or HSV-associated erythema multiforme",
+          "cells": [
+            {
+              "text": "Mucocutaneous disease without respiratory infection"
+            },
+            {
+              "text": "Mycoplasma PCR and HSV testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycoplasma_infection-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Mycoplasma infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Macrolide (azithromycin, clarithromycin)",
+          "cells": [
+            {
+              "text": "{{hy:First line for children and adults}}"
+            },
+            {
+              "text": "Beta-lactams are ineffective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Older children and adults, or no response to macrolide"
+            },
+            {
+              "text": "Weigh harms in children and pregnancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Respiratory fluoroquinolone",
+          "cells": [
+            {
+              "text": "Adults, including suspected macrolide resistance"
+            },
+            {
+              "text": "Avoid ciprofloxacin and ofloxacin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Macrolide resistance testing",
+          "cells": [
+            {
+              "text": "Poor response to macrolide"
+            },
+            {
+              "text": "US resistance under 10%; varies worldwide"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Most infections self-limited"
+            },
+            {
+              "text": "Antipyretics, fluids, bronchodilator for wheeze"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrapulmonary disease",
+          "cells": [
+            {
+              "text": "Haemolysis, encephalitis, SJS or MIRM"
+            },
+            {
+              "text": "Specialist care; manage complication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No test of cure",
+          "cells": [
+            {
+              "text": "After treatment"
+            },
+            {
+              "text": "PCR stays positive despite effective therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Neither CDC nor the entry gives doses or durations; dose per local CAP guidance."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycoplasma_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycoplasma infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cough, fever, headache with gradual onset",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infiltrate present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Likely upper respiratory illness; supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Respiratory PCR if result changes care",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Severe pneumonia or extrapulmonary signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Admit; treat complication; macrolide or alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Macrolide; doxycycline or fluoroquinolone in adults",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Not improving on macrolide?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Switch to doxycycline or fluoroquinolone; test resistance",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete course; no test of cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

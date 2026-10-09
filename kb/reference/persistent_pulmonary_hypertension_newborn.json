@@ -1,175 +1,500 @@
 {
- "id": "persistent_pulmonary_hypertension_newborn",
- "name": "Persistent pulmonary hypertension of the newborn",
- "aliases": [
-  "PPHN",
-  "persistent foetal circulation",
-  "persistent pulmonary hypertension of the neonate"
- ],
- "class": "non_infective",
- "system": "Neonatology",
- "specialty": "Neonatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cloherty and Stark Manual of Neonatal Care / Avery's Diseases of the Newborn",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Suspect PPHN in a term or near-term infant with marked hypoxaemia and cyanosis that is out of proportion to the degree of parenchymal lung disease seen on chest imaging",
-   "The hallmark is a right-to-left shunt across the patent ductus arteriosus and foramen ovale because pulmonary vascular resistance stays elevated after birth",
-   "A pre-ductal to post-ductal oxygen saturation gradient (right hand higher than a lower limb) suggests ductal-level right-to-left shunting",
-   "Echocardiography is essential to estimate pulmonary artery pressure, assess shunt direction, evaluate ventricular function, and exclude structural congenital heart disease",
-   "Common associations include meconium aspiration, sepsis or pneumonia, congenital diaphragmatic hernia, respiratory distress syndrome, and pulmonary hypoplasia",
-   "Management principles centre on optimising oxygenation and lung recruitment, avoiding acidosis and stress, and using inhaled nitric oxide as a selective pulmonary vasodilator",
-   "The oxygenation index is used to gauge severity and to guide escalation, with extracorporeal membrane oxygenation reserved for refractory cases"
+  "id": "persistent_pulmonary_hypertension_newborn",
+  "name": "Persistent pulmonary hypertension of the newborn",
+  "aliases": [
+    "PPHN",
+    "persistent foetal circulation",
+    "persistent pulmonary hypertension of the neonate"
   ],
-  "pathophysiology": "Persistent pulmonary hypertension of the newborn arises from a failure of the normal postnatal fall in pulmonary vascular resistance. In foetal life high pulmonary resistance directs blood away from the lungs through the ductus arteriosus and foramen ovale; at birth lung expansion and rising oxygen normally cause pulmonary vessels to dilate. In PPHN this transition fails because of maladaptation (reactive vasoconstriction from hypoxia, acidosis, or parenchymal disease), maldevelopment (abnormally muscularised pulmonary arteries), or underdevelopment (pulmonary hypoplasia). Sustained high pulmonary resistance maintains right-to-left shunting across the ductus and foramen ovale, producing profound hypoxaemia, and hypoxia and acidosis further raise pulmonary pressure in a self-perpetuating cycle.",
-  "additionalDifferentials": [
-   "Cyanotic congenital heart disease such as transposition of the great arteries or obstructed total anomalous pulmonary venous return",
-   "Meconium aspiration syndrome",
-   "Neonatal sepsis or pneumonia",
-   "Congenital diaphragmatic hernia with pulmonary hypoplasia",
-   "Respiratory distress syndrome or surfactant deficiency",
-   "Air leak such as pneumothorax causing acute deterioration"
-  ],
-  "additionalInvestigations": [
-   "Pre-ductal and post-ductal oxygen saturation and blood gas comparison to demonstrate shunting",
-   "Echocardiography to estimate pulmonary pressures, define shunt direction, and exclude structural heart disease",
-   "Chest radiograph to characterise parenchymal disease and exclude air leak or diaphragmatic hernia",
-   "Serial oxygenation index calculation to grade severity and guide escalation",
-   "Sepsis screen including blood culture and inflammatory markers",
-   "Continuous monitoring of blood pressure, perfusion, and arterial gases"
-  ],
-  "redFlags": [
-   "Severe refractory hypoxaemia with a rising oxygenation index despite maximal support",
-   "Systemic hypotension and poor perfusion indicating cardiovascular decompensation",
-   "Suspected duct-dependent congenital heart disease requiring urgent cardiology input",
-   "Deterioration suggesting pneumothorax or other air leak"
-  ],
-  "prognosis": "With modern management including inhaled nitric oxide and extracorporeal support most infants survive, but outcome depends heavily on the underlying cause and severity. Prolonged severe hypoxaemia carries a risk of neurodevelopmental impairment and sensorineural hearing loss, so structured follow-up is recommended.",
-  "pitfalls": [
-   "Mistaking PPHN for cyanotic congenital heart disease, or vice versa, without echocardiography",
-   "Provoking pulmonary vasoconstriction through excessive handling, pain, hypothermia, or acidosis",
-   "Aggressive hyperventilation and over-ventilation causing lung injury without sustained benefit",
-   "Failing to recognise and treat coexisting sepsis or an air leak",
-   "Delaying referral for extracorporeal membrane oxygenation in deteriorating refractory disease"
-  ],
-  "references": [
-   "Cloherty and Stark Manual of Neonatal Care",
-   "Avery's Diseases of the Newborn"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Optimise oxygenation and lung recruitment with gentle ventilation and surfactant for parenchymal disease, avoiding hyperoxia and lung overdistension",
-   "Inhaled nitric oxide as the selective pulmonary vasodilator of choice",
-   "Maintain adequate systemic blood pressure with fluids and inotropic or vasopressor support and correct metabolic acidosis to reduce right-to-left shunting",
-   "Provide sedation, analgesia and minimal handling to avoid agitation-triggered deterioration, and prevent hypothermia",
-   "Treat the underlying cause such as sepsis, pneumonia, meconium aspiration, respiratory distress syndrome or pulmonary hypoplasia",
-   "Escalate to extracorporeal membrane oxygenation for refractory hypoxaemia with a persistently rising oxygenation index",
-   "Use echocardiography to guide vasodilator and haemodynamic therapy and to exclude structural congenital heart disease",
-   "Institute structured neurodevelopmental and audiological follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "persistent_pulmonary_hypertension_newborn-pathway",
-   "title": "Persistent pulmonary hypertension of the newborn: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Suspect PPHN in a term or near-term infant with marked hypoxaemia and cyanosis that is out of proportion to the degree of parenchymal lung disease seen on chest imaging",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe refractory hypoxaemia with a rising oxygenation index despite maximal support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pre-ductal and post-ductal oxygen saturation and blood gas comparison to demonstrate shunting, Echocardiography to estimate pulmonary pressures, define shunt direction, and exclude structural heart disease, Chest"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Optimise oxygenation and lung recruitment with gentle ventilation and surfactant for parenchymal disease, avoiding hyperoxia and lung overdistension"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking PPHN for cyanotic congenital heart disease, or vice versa, without echocardiography"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of persistent pulmonary hypertension of the newborn."
-  }
- ],
- "tables": [
-  {
-   "id": "persistent_pulmonary_hypertension_newborn-matrix",
-   "title": "Persistent pulmonary hypertension of the newborn: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Suspect PPHN in a term or near-term infant with marked hypoxaemia and cyanosis that is out of proportion to the degree of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neonatology",
+  "specialty": "Neonatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cloherty and Stark Manual of Neonatal Care / Avery's Diseases of the Newborn",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Suspect PPHN in a term or near-term infant with marked hypoxaemia and cyanosis that is out of proportion to the degree of parenchymal lung disease seen on chest imaging",
+      "The hallmark is a right-to-left shunt across the patent ductus arteriosus and foramen ovale because pulmonary vascular resistance stays elevated after birth",
+      "A pre-ductal to post-ductal oxygen saturation gradient (right hand higher than a lower limb) suggests ductal-level right-to-left shunting",
+      "Echocardiography is essential to estimate pulmonary artery pressure, assess shunt direction, evaluate ventricular function, and exclude structural congenital heart disease",
+      "Common associations include meconium aspiration, sepsis or pneumonia, congenital diaphragmatic hernia, respiratory distress syndrome, and pulmonary hypoplasia",
+      "Management principles centre on optimising oxygenation and lung recruitment, avoiding acidosis and stress, and using inhaled nitric oxide as a selective pulmonary vasodilator",
+      "The oxygenation index is used to gauge severity and to guide escalation, with extracorporeal membrane oxygenation reserved for refractory cases"
     ],
-    [
-     "Key Investigations",
-     "Pre-ductal and post-ductal oxygen saturation and blood gas comparison to demonstrate shunting, Echocardiography to estimate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Persistent pulmonary hypertension of the newborn arises from a failure of the normal postnatal fall in pulmonary vascular resistance. In foetal life high pulmonary resistance directs blood away from the lungs through the ductus arteriosus and foramen ovale; at birth lung expansion and rising oxygen normally cause pulmonary vessels to dilate. In PPHN this transition fails because of maladaptation (reactive vasoconstriction from hypoxia, acidosis, or parenchymal disease), maldevelopment (abnormally muscularised pulmonary arteries), or underdevelopment (pulmonary hypoplasia). Sustained high pulmonary resistance maintains right-to-left shunting across the ductus and foramen ovale, producing profound hypoxaemia, and hypoxia and acidosis further raise pulmonary pressure in a self-perpetuating cycle.",
+    "additionalDifferentials": [
+      "Cyanotic congenital heart disease such as transposition of the great arteries or obstructed total anomalous pulmonary venous return",
+      "Meconium aspiration syndrome",
+      "Neonatal sepsis or pneumonia",
+      "Congenital diaphragmatic hernia with pulmonary hypoplasia",
+      "Respiratory distress syndrome or surfactant deficiency",
+      "Air leak such as pneumothorax causing acute deterioration"
     ],
-    [
-     "Primary Differentials",
-     "Cyanotic congenital heart disease such as transposition of the great arteries or obstructed total anomalous pulmonary venous",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pre-ductal and post-ductal oxygen saturation and blood gas comparison to demonstrate shunting",
+      "Echocardiography to estimate pulmonary pressures, define shunt direction, and exclude structural heart disease",
+      "Chest radiograph to characterise parenchymal disease and exclude air leak or diaphragmatic hernia",
+      "Serial oxygenation index calculation to grade severity and guide escalation",
+      "Sepsis screen including blood culture and inflammatory markers",
+      "Continuous monitoring of blood pressure, perfusion, and arterial gases"
     ],
-    [
-     "Management Strategy",
-     "Optimise oxygenation and lung recruitment with gentle ventilation and surfactant for parenchymal disease, avoiding hyperoxia and",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe refractory hypoxaemia with a rising oxygenation index despite maximal support",
+      "Systemic hypotension and poor perfusion indicating cardiovascular decompensation",
+      "Suspected duct-dependent congenital heart disease requiring urgent cardiology input",
+      "Deterioration suggesting pneumothorax or other air leak"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking PPHN for cyanotic congenital heart disease, or vice versa, without echocardiography",
-     "Prevent diagnostic or management error"
+    "prognosis": "With modern management including inhaled nitric oxide and extracorporeal support most infants survive, but outcome depends heavily on the underlying cause and severity. Prolonged severe hypoxaemia carries a risk of neurodevelopmental impairment and sensorineural hearing loss, so structured follow-up is recommended.",
+    "pitfalls": [
+      "Mistaking PPHN for cyanotic congenital heart disease, or vice versa, without echocardiography",
+      "Provoking pulmonary vasoconstriction through excessive handling, pain, hypothermia, or acidosis",
+      "Aggressive hyperventilation and over-ventilation causing lung injury without sustained benefit",
+      "Failing to recognise and treat coexisting sepsis or an air leak",
+      "Delaying referral for extracorporeal membrane oxygenation in deteriorating refractory disease"
+    ],
+    "references": [
+      "Cloherty and Stark Manual of Neonatal Care",
+      "Avery's Diseases of the Newborn"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Optimise oxygenation and lung recruitment with gentle ventilation and surfactant for parenchymal disease, avoiding hyperoxia and lung overdistension",
+      "Inhaled nitric oxide as the selective pulmonary vasodilator of choice",
+      "Maintain adequate systemic blood pressure with fluids and inotropic or vasopressor support and correct metabolic acidosis to reduce right-to-left shunting",
+      "Provide sedation, analgesia and minimal handling to avoid agitation-triggered deterioration, and prevent hypothermia",
+      "Treat the underlying cause such as sepsis, pneumonia, meconium aspiration, respiratory distress syndrome or pulmonary hypoplasia",
+      "Escalate to extracorporeal membrane oxygenation for refractory hypoxaemia with a persistently rising oxygenation index",
+      "Use echocardiography to guide vasodilator and haemodynamic therapy and to exclude structural congenital heart disease",
+      "Institute structured neurodevelopmental and audiological follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for persistent pulmonary hypertension of the newborn."
-  }
- ],
- "diagrams": [
-  {
-   "id": "persistent-pulmonary-hypertension-newborn-real-image",
-   "title": "Persistent pulmonary hypertension of the newborn: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "persistent_pulmonary_hypertension_newborn-pathway",
+      "title": "Persistent pulmonary hypertension of the newborn: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Suspect PPHN in a term or near-term infant with marked hypoxaemia and cyanosis that is out of proportion to the degree of parenchymal lung disease seen on chest imaging",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe refractory hypoxaemia with a rising oxygenation index despite maximal support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pre-ductal and post-ductal oxygen saturation and blood gas comparison to demonstrate shunting, Echocardiography to estimate pulmonary pressures, define shunt direction, and exclude structural heart disease, Chest"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Optimise oxygenation and lung recruitment with gentle ventilation and surfactant for parenchymal disease, avoiding hyperoxia and lung overdistension"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking PPHN for cyanotic congenital heart disease, or vice versa, without echocardiography"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of persistent pulmonary hypertension of the newborn."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "persistent_pulmonary_hypertension_newborn-matrix",
+      "title": "Persistent pulmonary hypertension of the newborn: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Suspect PPHN in a term or near-term infant with marked hypoxaemia and cyanosis that is out of proportion to the degree of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pre-ductal and post-ductal oxygen saturation and blood gas comparison to demonstrate shunting, Echocardiography to estimate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cyanotic congenital heart disease such as transposition of the great arteries or obstructed total anomalous pulmonary venous",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Optimise oxygenation and lung recruitment with gentle ventilation and surfactant for parenchymal disease, avoiding hyperoxia and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking PPHN for cyanotic congenital heart disease, or vice versa, without echocardiography",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for persistent pulmonary hypertension of the newborn."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cloherty and Stark Manual of Neonatal Care / Avery's Diseases of the Newborn",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "persistent_pulmonary_hypertension_newborn-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pre- and post-ductal oxygen saturation and blood gas comparison",
+          "cells": [
+            {
+              "text": "Shunting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary pressures, shunt direction and structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Parenchymal disease, air leak or diaphragmatic hernia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial oxygenation index calculation",
+          "cells": [
+            {
+              "text": "Grades severity and guides escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis screen with blood culture and inflammatory markers",
+          "cells": [
+            {
+              "text": "Sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous monitoring of blood pressure, perfusion and arterial gases",
+          "cells": [
+            {
+              "text": "Cardiovascular and gas status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "persistent_pulmonary_hypertension_newborn-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital diaphragmatic hernia",
+          "cells": [
+            {
+              "text": "With pulmonary hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Air leak such as pneumothorax",
+          "cells": [
+            {
+              "text": "Causes acute deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyanotic congenital heart disease",
+          "cells": [
+            {
+              "text": "Transposition of the great arteries, among others"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory distress syndrome",
+          "cells": [
+            {
+              "text": "Surfactant deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "persistent_pulmonary_hypertension_newborn-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oxygenation and lung recruitment",
+          "cells": [
+            {
+              "text": "Gentle ventilation and surfactant for parenchymal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled nitric oxide",
+          "cells": [
+            {
+              "text": "Selective pulmonary vasodilator of choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and acidosis",
+          "cells": [
+            {
+              "text": "Fluids, inotropes or vasopressors, and correction of metabolic acidosis to reduce shunting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sedation and minimal handling",
+          "cells": [
+            {
+              "text": "Prevents agitation-triggered deterioration; prevent hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "Sepsis, pneumonia, meconium aspiration, respiratory distress syndrome or pulmonary hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECMO",
+          "cells": [
+            {
+              "text": "Escalation for refractory hypoxaemia with a persistently rising oxygenation index"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography guidance",
+          "cells": [
+            {
+              "text": "Guides vasodilator and haemodynamic therapy; excludes structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Structured neurodevelopmental and audiological follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "persistent_pulmonary_hypertension_newborn-dx-mgmt",
+      "title": "Diagnosis and management of Persistent pulmonary hypertension of the newborn",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Term newborn with severe hypoxaemia and pre- and post-ductal saturation difference",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (refractory hypoxaemia, hypotension, duct-dependent heart disease, air leak)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to extracorporeal membrane oxygenation for refractory hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pre- and post-ductal saturations; echocardiography; serial oxygenation index; sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echocardiography confirm shunting with no structural heart disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cyanotic heart disease, diaphragmatic hernia, air leak or pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gentle ventilation and surfactant for parenchymal disease to optimise oxygenation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inhaled nitric oxide as the selective pulmonary vasodilator of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Support blood pressure and correct acidosis to reduce shunting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Provide sedation and minimal handling to avoid agitation-triggered deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the underlying cause, such as sepsis, pneumonia or meconium aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most infants survive with modern care; prolonged hypoxaemia risks neurological harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

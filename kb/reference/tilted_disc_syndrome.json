@@ -1,173 +1,462 @@
 {
- "id": "tilted_disc_syndrome",
- "name": "tilted disc syndrome",
- "aliases": [
-  "Fuchs coloboma",
-  "congenital tilted disc"
- ],
- "class": "non_infective",
- "system": "ophthalmic",
- "specialty": "ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Congenital anomaly caused by oblique insertion of the optic nerve into the globe, producing an ovoid disc with a raised superotemporal and depressed inferonasal margin.",
-   "Almost always bilateral though frequently asymmetric; the disc long axis is typically directed inferonasally.",
-   "Situs inversus of the retinal vessels is a characteristic sign, with vessels emerging in an anomalous nasal direction before doubling back.",
-   "An inferonasal fundus ectasia (staphylomatous crescent) and thinning of the retinal pigment epithelium and choroid accompany the tilt.",
-   "Refractive error is usually myopic astigmatism with the astigmatic axis oriented obliquely along the ectasia.",
-   "Superotemporal visual field defects that characteristically do NOT respect the vertical midline help distinguish it from chiasmal compression.",
-   "Refracting the patient and repeating perimetry after correcting the induced myopic defocus can abolish the pseudo-bitemporal field loss.",
-   "Considered a mild form of the optic disc dysplasia/coloboma spectrum and is usually a benign, non-progressive finding."
+  "id": "tilted_disc_syndrome",
+  "name": "tilted disc syndrome",
+  "aliases": [
+    "Fuchs coloboma",
+    "congenital tilted disc"
   ],
-  "pathophysiology": "Tilted disc syndrome arises from incomplete or abnormal closure of the embryonic fetal fissure and an oblique entry of the optic nerve through the scleral canal during development. The result is an obliquely inserted, ovoid optic disc with the superotemporal portion elevated and the inferonasal portion recessed, accompanied by an inferonasal ectasia in which the retinal pigment epithelium, choroid and sclera are attenuated. This localised ectasia distorts the regional refractive geometry, producing myopic astigmatism, and the associated retinal thinning creates relative field depression corresponding to the ectatic zone. Because the anomaly straddles but does not strictly honour the vertical raphe, field defects mimic but do not truly respect the vertical meridian.",
-  "additionalDifferentials": [
-   "Chiasmal compression from pituitary adenoma or craniopharyngioma",
-   "Optic nerve coloboma",
-   "Peripapillary staphyloma",
-   "Myopic degeneration with peripapillary atrophy",
-   "Optic disc hypoplasia",
-   "Glaucomatous optic neuropathy",
-   "Retinoschisis producing field loss"
-  ],
-  "additionalInvestigations": [
-   "Automated static perimetry with refractive correction in place",
-   "Optical coherence tomography of the optic nerve head and peripapillary retinal nerve fibre layer",
-   "Cycloplegic refraction to characterise myopic astigmatism",
-   "Fundus photography documenting situs inversus and inferonasal crescent",
-   "Fundus autofluorescence to delineate peripapillary RPE changes",
-   "Neuroimaging (MRI of the sella/chiasm) when field defect respects the vertical midline or is progressive"
-  ],
-  "redFlags": [
-   "Visual field defect that strictly respects the vertical midline, suggesting a chiasmal lesion rather than the disc anomaly",
-   "Progressive field loss or new dyschromatopsia on follow-up",
-   "Development of a serous macular detachment or subretinal fluid",
-   "Choroidal neovascular membrane presenting with sudden central distortion"
-  ],
-  "prognosis": "Vision is generally stable and good once refractive error is corrected, and the anomaly itself is non-progressive. Rarely, associated maculopathy such as serous detachment or choroidal neovascularisation may threaten central acuity.",
-  "pitfalls": [
-   "Misinterpreting the pseudo-bitemporal field defect as chiasmal compression and initiating unnecessary neuroimaging without first correcting refraction and repeating perimetry.",
-   "Overlooking associated inferonasal serous retinal detachment or choroidal neovascularisation as the cause of new symptoms.",
-   "Attributing the ovoid disc appearance to glaucoma and treating for raised intraocular pressure inappropriately.",
-   "Failing to recognise associated systemic or midline associations in syndromic cases."
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Neuro-Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the myopic astigmatism with spectacles or contact lenses, which is the mainstay and generally restores good vision",
-   "Reassure and observe, as the anomaly is congenital and non-progressive",
-   "Confirm that visual field defects do not respect the vertical midline, arranging MRI of the sella and chiasm if a defect is progressive or truly respects the midline to exclude chiasmal compression",
-   "Monitor the macula for complications such as serous retinal detachment or choroidal neovascularisation",
-   "Treat choroidal neovascularisation, if it develops, with intravitreal anti-VEGF therapy",
-   "Follow with automated perimetry and optical coherence tomography to track fields and the peripapillary retina"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tilted_disc_syndrome-pathway",
-   "title": "tilted disc syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Congenital anomaly caused by oblique insertion of the optic nerve into the globe, producing an ovoid disc with a raised superotemporal and depressed inferonasal margin.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Visual field defect that strictly respects the vertical midline, suggesting a chiasmal lesion rather than the disc anomaly",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Automated static perimetry with refractive correction in place, Optical coherence tomography of the optic nerve head and peripapillary retinal nerve fibre layer, Cycloplegic refraction to characterise myopic astigmatism"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the myopic astigmatism with spectacles or contact lenses, which is the mainstay and generally restores good vision"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the pseudo-bitemporal field defect as chiasmal compression and initiating unnecessary neuroimaging without first correcting refraction and repeating perimetry."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tilted disc syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "tilted_disc_syndrome-matrix",
-   "title": "tilted disc syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Congenital anomaly caused by oblique insertion of the optic nerve into the globe, producing an ovoid disc with a raised",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ophthalmic",
+  "specialty": "ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Congenital anomaly caused by oblique insertion of the optic nerve into the globe, producing an ovoid disc with a raised superotemporal and depressed inferonasal margin.",
+      "Almost always bilateral though frequently asymmetric; the disc long axis is typically directed inferonasally.",
+      "Situs inversus of the retinal vessels is a characteristic sign, with vessels emerging in an anomalous nasal direction before doubling back.",
+      "An inferonasal fundus ectasia (staphylomatous crescent) and thinning of the retinal pigment epithelium and choroid accompany the tilt.",
+      "Refractive error is usually myopic astigmatism with the astigmatic axis oriented obliquely along the ectasia.",
+      "Superotemporal visual field defects that characteristically do NOT respect the vertical midline help distinguish it from chiasmal compression.",
+      "Refracting the patient and repeating perimetry after correcting the induced myopic defocus can abolish the pseudo-bitemporal field loss.",
+      "Considered a mild form of the optic disc dysplasia/coloboma spectrum and is usually a benign, non-progressive finding."
     ],
-    [
-     "Key Investigations",
-     "Automated static perimetry with refractive correction in place, Optical coherence tomography of the optic nerve head and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tilted disc syndrome arises from incomplete or abnormal closure of the embryonic fetal fissure and an oblique entry of the optic nerve through the scleral canal during development. The result is an obliquely inserted, ovoid optic disc with the superotemporal portion elevated and the inferonasal portion recessed, accompanied by an inferonasal ectasia in which the retinal pigment epithelium, choroid and sclera are attenuated. This localised ectasia distorts the regional refractive geometry, producing myopic astigmatism, and the associated retinal thinning creates relative field depression corresponding to the ectatic zone. Because the anomaly straddles but does not strictly honour the vertical raphe, field defects mimic but do not truly respect the vertical meridian.",
+    "additionalDifferentials": [
+      "Chiasmal compression from pituitary adenoma or craniopharyngioma",
+      "Optic nerve coloboma",
+      "Peripapillary staphyloma",
+      "Myopic degeneration with peripapillary atrophy",
+      "Optic disc hypoplasia",
+      "Glaucomatous optic neuropathy",
+      "Retinoschisis producing field loss"
     ],
-    [
-     "Primary Differentials",
-     "Chiasmal compression from pituitary adenoma or craniopharyngioma, Optic nerve coloboma, Peripapillary staphyloma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Automated static perimetry with refractive correction in place",
+      "Optical coherence tomography of the optic nerve head and peripapillary retinal nerve fibre layer",
+      "Cycloplegic refraction to characterise myopic astigmatism",
+      "Fundus photography documenting situs inversus and inferonasal crescent",
+      "Fundus autofluorescence to delineate peripapillary RPE changes",
+      "Neuroimaging (MRI of the sella/chiasm) when field defect respects the vertical midline or is progressive"
     ],
-    [
-     "Management Strategy",
-     "Correct the myopic astigmatism with spectacles or contact lenses, which is the mainstay and generally restores good vision",
-     "Core treatment modality"
+    "redFlags": [
+      "Visual field defect that strictly respects the vertical midline, suggesting a chiasmal lesion rather than the disc anomaly",
+      "Progressive field loss or new dyschromatopsia on follow-up",
+      "Development of a serous macular detachment or subretinal fluid",
+      "Choroidal neovascular membrane presenting with sudden central distortion"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the pseudo-bitemporal field defect as chiasmal compression and initiating unnecessary neuroimaging without first",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vision is generally stable and good once refractive error is corrected, and the anomaly itself is non-progressive. Rarely, associated maculopathy such as serous detachment or choroidal neovascularisation may threaten central acuity.",
+    "pitfalls": [
+      "Misinterpreting the pseudo-bitemporal field defect as chiasmal compression and initiating unnecessary neuroimaging without first correcting refraction and repeating perimetry.",
+      "Overlooking associated inferonasal serous retinal detachment or choroidal neovascularisation as the cause of new symptoms.",
+      "Attributing the ovoid disc appearance to glaucoma and treating for raised intraocular pressure inappropriately.",
+      "Failing to recognise associated systemic or midline associations in syndromic cases."
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Neuro-Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the myopic astigmatism with spectacles or contact lenses, which is the mainstay and generally restores good vision",
+      "Reassure and observe, as the anomaly is congenital and non-progressive",
+      "Confirm that visual field defects do not respect the vertical midline, arranging MRI of the sella and chiasm if a defect is progressive or truly respects the midline to exclude chiasmal compression",
+      "Monitor the macula for complications such as serous retinal detachment or choroidal neovascularisation",
+      "Treat choroidal neovascularisation, if it develops, with intravitreal anti-VEGF therapy",
+      "Follow with automated perimetry and optical coherence tomography to track fields and the peripapillary retina"
     ]
-   ],
-   "caption": "Overview comparison matrix for tilted disc syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tilted-disc-syndrome-real-image",
-   "title": "tilted disc syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "tilted_disc_syndrome-pathway",
+      "title": "tilted disc syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Congenital anomaly caused by oblique insertion of the optic nerve into the globe, producing an ovoid disc with a raised superotemporal and depressed inferonasal margin.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Visual field defect that strictly respects the vertical midline, suggesting a chiasmal lesion rather than the disc anomaly",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Automated static perimetry with refractive correction in place, Optical coherence tomography of the optic nerve head and peripapillary retinal nerve fibre layer, Cycloplegic refraction to characterise myopic astigmatism"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the myopic astigmatism with spectacles or contact lenses, which is the mainstay and generally restores good vision"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the pseudo-bitemporal field defect as chiasmal compression and initiating unnecessary neuroimaging without first correcting refraction and repeating perimetry."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tilted disc syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tilted_disc_syndrome-matrix",
+      "title": "tilted disc syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Congenital anomaly caused by oblique insertion of the optic nerve into the globe, producing an ovoid disc with a raised",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Automated static perimetry with refractive correction in place, Optical coherence tomography of the optic nerve head and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chiasmal compression from pituitary adenoma or craniopharyngioma, Optic nerve coloboma, Peripapillary staphyloma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the myopic astigmatism with spectacles or contact lenses, which is the mainstay and generally restores good vision",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the pseudo-bitemporal field defect as chiasmal compression and initiating unnecessary neuroimaging without first",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tilted disc syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tilted_disc_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of tilted disc syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tilted disc: ovoid optic disc with a visual field defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: field defect respecting the vertical midline, or sudden central distortion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent MRI of sella and chiasm; retinal review for choroidal neovascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Perimetry after refractive correction; OCT of nerve head; fundus photography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the field defect disappear after refraction is corrected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chiasmal compression, optic coloboma or glaucoma; image as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct myopic astigmatism with spectacles or contact lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure; the anomaly is congenital and non-progressive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "MRI of sella and chiasm if the defect is progressive or midline-respecting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor the macula for serous detachment or neovascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Anti-VEGF therapy if choroidal neovascularisation develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Vision generally stable and good once refraction is corrected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tilted_disc_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Automated perimetry with refractive correction in place",
+          "cells": [
+            {
+              "text": "Field defect after correcting refraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the optic nerve head",
+          "cells": [
+            {
+              "text": "Peripapillary retinal nerve fibre layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Myopic astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus photography",
+          "cells": [
+            {
+              "text": "Situs inversus of vessels and inferonasal crescent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of sella and chiasm",
+          "cells": [
+            {
+              "text": "Field defect that respects the vertical midline or is progressive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tilted_disc_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chiasmal compression from pituitary adenoma or craniopharyngioma",
+          "cells": [
+            {
+              "text": "Field defect strictly respects the vertical midline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic nerve coloboma",
+          "cells": [
+            {
+              "text": "Developmental disc defect; tilted disc has a benign non-progressive course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucomatous optic neuropathy",
+          "cells": [
+            {
+              "text": "Raised intraocular pressure is not the cause of the ovoid disc appearance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tilted_disc_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct myopic astigmatism",
+          "cells": [
+            {
+              "text": "Spectacles or contact lenses; the mainstay, restoring good vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Congenital and non-progressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging when indicated",
+          "cells": [
+            {
+              "text": "Progressive or midline-respecting field defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macular monitoring",
+          "cells": [
+            {
+              "text": "Serous detachment or choroidal neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-VEGF therapy",
+          "cells": [
+            {
+              "text": "Choroidal neovascularisation, if it develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perimetry and OCT follow-up",
+          "cells": [
+            {
+              "text": "Fields and peripapillary retina"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

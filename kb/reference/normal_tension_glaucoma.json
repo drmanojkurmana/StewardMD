@@ -1,175 +1,426 @@
 {
- "id": "normal_tension_glaucoma",
- "name": "Normal tension glaucoma",
- "aliases": [
-  "NTG",
-  "normal-pressure glaucoma",
-  "low-tension glaucoma",
-  "normotensive glaucoma"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A form of open-angle glaucoma with characteristic glaucomatous optic-nerve cupping and visual field loss despite intraocular pressure that remains within the statistically normal range",
-   "The optic disc often shows more focal notching, acquired pits, and a higher frequency of splinter disc haemorrhages at the neuroretinal rim than typical high-pressure glaucoma",
-   "Field defects tend to be deeper, more localised, and closer to fixation, so central vision may be threatened earlier",
-   "Vascular dysregulation is common, with associations such as migraine, Raynaud phenomenon, nocturnal hypotension, and obstructive sleep apnoea",
-   "Diagnosis requires excluding secondary and previously higher-pressure causes, including diurnal pressure spikes missed on single readings and thin corneas that underestimate true pressure",
-   "Management still centres on lowering intraocular pressure, since a substantial pressure reduction slows progression even when the baseline pressure appears normal",
-   "A disc haemorrhage is an important warning sign of ongoing damage and warrants closer monitoring or intensified treatment"
+  "id": "normal_tension_glaucoma",
+  "name": "Normal tension glaucoma",
+  "aliases": [
+    "NTG",
+    "normal-pressure glaucoma",
+    "low-tension glaucoma",
+    "normotensive glaucoma"
   ],
-  "pathophysiology": "Normal tension glaucoma is a progressive optic neuropathy showing the structural and functional hallmarks of glaucoma while intraocular pressure stays within the normal statistical range. Damage is thought to arise from a combination of pressure-dependent stress on a susceptible optic nerve head and pressure-independent factors, particularly impaired optic-nerve blood flow from vascular dysregulation, systemic and nocturnal hypotension, and possibly a low cerebrospinal-fluid pressure that increases the translaminar pressure gradient. The result is loss of retinal ganglion cells and their axons, producing focal rim thinning, disc haemorrhages, and corresponding nerve-fibre-bundle field defects that often lie nearer fixation than in high-pressure disease.",
-  "additionalDifferentials": [
-   "Primary open-angle glaucoma with unrecognised pressure spikes or thin corneas",
-   "Previously elevated (burnt-out) glaucoma such as a resolved pressure-raising episode",
-   "Compressive or infiltrative optic neuropathy mimicking glaucomatous cupping",
-   "Ischaemic optic neuropathy with pallor and field loss",
-   "Congenital optic disc anomalies such as pits or colobomas",
-   "Old optic neuritis or other non-glaucomatous optic atrophy"
-  ],
-  "additionalInvestigations": [
-   "Diurnal intraocular pressure phasing to detect peaks missed on isolated measurements",
-   "Central corneal thickness measurement to correct apparent pressure readings",
-   "OCT of the retinal nerve fibre layer and ganglion cell complex to quantify structural loss",
-   "Automated perimetry to characterise and monitor field defects near fixation",
-   "Neuroimaging when disc pallor, atypical field loss, or rapid progression suggests a non-glaucomatous cause",
-   "Assessment for vascular risk factors including blood pressure profile and sleep apnoea when indicated"
-  ],
-  "redFlags": [
-   "Optic disc pallor out of proportion to cupping or field loss respecting the vertical midline, suggesting a compressive or neurological cause needing imaging",
-   "Rapidly progressive field loss despite apparently normal pressure",
-   "Recurrent disc haemorrhages signalling continued optic-nerve damage",
-   "Central or paracentral defects threatening fixation and reading vision"
-  ],
-  "prognosis": "Many eyes progress slowly, and lowering intraocular pressure substantially reduces the rate of visual field deterioration, but a subset with marked vascular dysregulation or recurrent disc haemorrhages progress despite treatment and risk central visual loss.",
-  "pitfalls": [
-   "Withholding treatment because the pressure looks normal, ignoring evidence of progression",
-   "Missing diurnal pressure spikes or overestimating true pressure in eyes with thick corneas and underestimating it in thin corneas",
-   "Failing to image the brain and orbit when disc or field features are atypical for glaucoma",
-   "Overlooking nocturnal hypotension, sometimes iatrogenic from evening antihypertensives, as a driver of progression",
-   "Interpreting any normal-pressure cupping as glaucoma without excluding neurological causes"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Shields' Textbook of Glaucoma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lower intraocular pressure substantially with topical medical therapy led by a prostaglandin analogue, since pressure reduction slows progression even from a normal baseline",
-   "Escalate pressure-lowering with additional classes such as beta-blockers, alpha-agonists or carbonic anhydrase inhibitors, laser trabeculoplasty, or filtration surgery like trabeculectomy for continued progression",
-   "Address pressure-independent vascular factors — avoid excessive antihypertensive-induced nocturnal hypotension and treat obstructive sleep apnoea and migraine-related dysregulation",
-   "Monitor progression with serial OCT of the retinal nerve fibre layer and ganglion cell complex and with automated perimetry focused on defects near fixation",
-   "Detect missed pressure peaks with diurnal phasing and correct apparent readings for central corneal thickness",
-   "Exclude non-glaucomatous and neurological causes with neuroimaging when disc pallor, atypical field loss or rapid progression is present",
-   "Refer to ophthalmology for structured glaucoma surveillance and stepwise treatment escalation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "normal_tension_glaucoma-pathway",
-   "title": "Normal tension glaucoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A form of open-angle glaucoma with characteristic glaucomatous optic-nerve cupping and visual field loss despite intraocular pressure that remains within the statistically normal range",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Optic disc pallor out of proportion to cupping or field loss respecting the vertical midline, suggesting a compressive or neurological cause needing imaging",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diurnal intraocular pressure phasing to detect peaks missed on isolated measurements, Central corneal thickness measurement to correct apparent pressure readings, OCT of the retinal nerve fibre layer and ganglion cell"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lower intraocular pressure substantially with topical medical therapy led by a prostaglandin analogue, since pressure reduction slows progression even from a normal baseline"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Withholding treatment because the pressure looks normal, ignoring evidence of progression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of normal tension glaucoma."
-  }
- ],
- "tables": [
-  {
-   "id": "normal_tension_glaucoma-matrix",
-   "title": "Normal tension glaucoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A form of open-angle glaucoma with characteristic glaucomatous optic-nerve cupping and visual field loss despite intraocular",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A form of open-angle glaucoma with characteristic glaucomatous optic-nerve cupping and visual field loss despite intraocular pressure that remains within the statistically normal range",
+      "The optic disc often shows more focal notching, acquired pits, and a higher frequency of splinter disc haemorrhages at the neuroretinal rim than typical high-pressure glaucoma",
+      "Field defects tend to be deeper, more localised, and closer to fixation, so central vision may be threatened earlier",
+      "Vascular dysregulation is common, with associations such as migraine, Raynaud phenomenon, nocturnal hypotension, and obstructive sleep apnoea",
+      "Diagnosis requires excluding secondary and previously higher-pressure causes, including diurnal pressure spikes missed on single readings and thin corneas that underestimate true pressure",
+      "Management still centres on lowering intraocular pressure, since a substantial pressure reduction slows progression even when the baseline pressure appears normal",
+      "A disc haemorrhage is an important warning sign of ongoing damage and warrants closer monitoring or intensified treatment"
     ],
-    [
-     "Key Investigations",
-     "Diurnal intraocular pressure phasing to detect peaks missed on isolated measurements, Central corneal thickness measurement to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Normal tension glaucoma is a progressive optic neuropathy showing the structural and functional hallmarks of glaucoma while intraocular pressure stays within the normal statistical range. Damage is thought to arise from a combination of pressure-dependent stress on a susceptible optic nerve head and pressure-independent factors, particularly impaired optic-nerve blood flow from vascular dysregulation, systemic and nocturnal hypotension, and possibly a low cerebrospinal-fluid pressure that increases the translaminar pressure gradient. The result is loss of retinal ganglion cells and their axons, producing focal rim thinning, disc haemorrhages, and corresponding nerve-fibre-bundle field defects that often lie nearer fixation than in high-pressure disease.",
+    "additionalDifferentials": [
+      "Primary open-angle glaucoma with unrecognised pressure spikes or thin corneas",
+      "Previously elevated (burnt-out) glaucoma such as a resolved pressure-raising episode",
+      "Compressive or infiltrative optic neuropathy mimicking glaucomatous cupping",
+      "Ischaemic optic neuropathy with pallor and field loss",
+      "Congenital optic disc anomalies such as pits or colobomas",
+      "Old optic neuritis or other non-glaucomatous optic atrophy"
     ],
-    [
-     "Primary Differentials",
-     "Primary open-angle glaucoma with unrecognised pressure spikes or thin corneas, Previously elevated (burnt-out) glaucoma such as a",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diurnal intraocular pressure phasing to detect peaks missed on isolated measurements",
+      "Central corneal thickness measurement to correct apparent pressure readings",
+      "OCT of the retinal nerve fibre layer and ganglion cell complex to quantify structural loss",
+      "Automated perimetry to characterise and monitor field defects near fixation",
+      "Neuroimaging when disc pallor, atypical field loss, or rapid progression suggests a non-glaucomatous cause",
+      "Assessment for vascular risk factors including blood pressure profile and sleep apnoea when indicated"
     ],
-    [
-     "Management Strategy",
-     "Lower intraocular pressure substantially with topical medical therapy led by a prostaglandin analogue, since pressure reduction",
-     "Core treatment modality"
+    "redFlags": [
+      "Optic disc pallor out of proportion to cupping or field loss respecting the vertical midline, suggesting a compressive or neurological cause needing imaging",
+      "Rapidly progressive field loss despite apparently normal pressure",
+      "Recurrent disc haemorrhages signalling continued optic-nerve damage",
+      "Central or paracentral defects threatening fixation and reading vision"
     ],
-    [
-     "Clinical Pitfall",
-     "Withholding treatment because the pressure looks normal, ignoring evidence of progression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many eyes progress slowly, and lowering intraocular pressure substantially reduces the rate of visual field deterioration, but a subset with marked vascular dysregulation or recurrent disc haemorrhages progress despite treatment and risk central visual loss.",
+    "pitfalls": [
+      "Withholding treatment because the pressure looks normal, ignoring evidence of progression",
+      "Missing diurnal pressure spikes or overestimating true pressure in eyes with thick corneas and underestimating it in thin corneas",
+      "Failing to image the brain and orbit when disc or field features are atypical for glaucoma",
+      "Overlooking nocturnal hypotension, sometimes iatrogenic from evening antihypertensives, as a driver of progression",
+      "Interpreting any normal-pressure cupping as glaucoma without excluding neurological causes"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Shields' Textbook of Glaucoma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lower intraocular pressure substantially with topical medical therapy led by a prostaglandin analogue, since pressure reduction slows progression even from a normal baseline",
+      "Escalate pressure-lowering with additional classes such as beta-blockers, alpha-agonists or carbonic anhydrase inhibitors, laser trabeculoplasty, or filtration surgery like trabeculectomy for continued progression",
+      "Address pressure-independent vascular factors — avoid excessive antihypertensive-induced nocturnal hypotension and treat obstructive sleep apnoea and migraine-related dysregulation",
+      "Monitor progression with serial OCT of the retinal nerve fibre layer and ganglion cell complex and with automated perimetry focused on defects near fixation",
+      "Detect missed pressure peaks with diurnal phasing and correct apparent readings for central corneal thickness",
+      "Exclude non-glaucomatous and neurological causes with neuroimaging when disc pallor, atypical field loss or rapid progression is present",
+      "Refer to ophthalmology for structured glaucoma surveillance and stepwise treatment escalation"
     ]
-   ],
-   "caption": "Overview comparison matrix for normal tension glaucoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "normal-tension-glaucoma-real-image",
-   "title": "Normal tension glaucoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "normal_tension_glaucoma-pathway",
+      "title": "Normal tension glaucoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A form of open-angle glaucoma with characteristic glaucomatous optic-nerve cupping and visual field loss despite intraocular pressure that remains within the statistically normal range",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Optic disc pallor out of proportion to cupping or field loss respecting the vertical midline, suggesting a compressive or neurological cause needing imaging",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diurnal intraocular pressure phasing to detect peaks missed on isolated measurements, Central corneal thickness measurement to correct apparent pressure readings, OCT of the retinal nerve fibre layer and ganglion cell"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lower intraocular pressure substantially with topical medical therapy led by a prostaglandin analogue, since pressure reduction slows progression even from a normal baseline"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Withholding treatment because the pressure looks normal, ignoring evidence of progression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of normal tension glaucoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "normal_tension_glaucoma-matrix",
+      "title": "Normal tension glaucoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A form of open-angle glaucoma with characteristic glaucomatous optic-nerve cupping and visual field loss despite intraocular",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diurnal intraocular pressure phasing to detect peaks missed on isolated measurements, Central corneal thickness measurement to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary open-angle glaucoma with unrecognised pressure spikes or thin corneas, Previously elevated (burnt-out) glaucoma such as a",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lower intraocular pressure substantially with topical medical therapy led by a prostaglandin analogue, since pressure reduction",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Withholding treatment because the pressure looks normal, ignoring evidence of progression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for normal tension glaucoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "normal_tension_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diurnal intraocular pressure phasing",
+          "cells": [
+            {
+              "text": "Detects peaks missed on single readings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central corneal thickness",
+          "cells": [
+            {
+              "text": "Corrects apparent pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc and visual field assessment",
+          "cells": [
+            {
+              "text": "Structural and functional progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging when disc pallor is disproportionate",
+          "cells": [
+            {
+              "text": "Compressive or neurological cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "normal_tension_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary open-angle glaucoma with pressure spikes",
+          "cells": [
+            {
+              "text": "Unrecognised peaks in pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Burnt-out glaucoma",
+          "cells": [
+            {
+              "text": "Previously raised pressure now resolved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive optic neuropathy",
+          "cells": [
+            {
+              "text": "Disc pallor out of proportion to cupping"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "normal_tension_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical prostaglandin analogue",
+          "cells": [
+            {
+              "text": "First-line to lower intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substantial pressure reduction",
+          "cells": [
+            {
+              "text": "Slows progression even from a normal baseline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular field and disc monitoring",
+          "cells": [
+            {
+              "text": "Tracks progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address vascular risk factors",
+          "cells": [
+            {
+              "text": "Relevant in a subset with vascular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "normal_tension_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Normal tension glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Optic nerve cupping and field loss with normal pressure readings",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disc pallor out of proportion, rapid field loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroimaging if disc pallor suggests a compressive cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diurnal pressure phasing, corneal thickness, disc and field assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Glaucomatous cupping and field loss with pressure in the normal range?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider compressive or other optic neuropathy; image the optic pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lower intraocular pressure with a prostaglandin analogue",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Substantial reduction to slow progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Regular field and disc monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address vascular risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many progress slowly; lowering pressure reduces the rate of field loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

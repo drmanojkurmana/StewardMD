@@ -114,7 +114,7 @@ try {
           else ok(fg.stem && !fg.exp && fg.stemBeforeOpts, tag + ": imgPlace stem: the image sits between the stem and the options");
           ok(await until(`var i=document.querySelector("#smdPrep .pn-yq-fig img"); return !!(i && i.complete && i.naturalWidth > 0);`, 5000), tag + ": the bank image loads from <VER>/img/");
           await ev(`document.querySelector("#smdPrep .pn-yq-fig [data-act=y-zoom]").click(); return 1;`);
-          ok(await until(`var z=document.querySelector("#smdPrep #pnYqZoom img"); return !!z && z.getAttribute("src")===${JSON.stringify(fg.src)};`, 3000), tag + ": tap enlarges the same image");
+          ok(await until(`var z=document.querySelector(".pv .pv-img"); return !!z && z.getAttribute("src")===${JSON.stringify(fg.src)};`, 3000), tag + ": tap enlarges the same image (shared viewer)");
           await ev(`PREP.back(); return 1;`);
         }
         if (SYNTH && i === 0 && size === "phone") {

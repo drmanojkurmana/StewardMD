@@ -1,177 +1,462 @@
 {
- "id": "paroxysmal_dyskinesia_secondary",
- "name": "paroxysmal dyskinesia secondary",
- "aliases": [
-  "secondary paroxysmal dyskinesia",
-  "symptomatic paroxysmal dyskinesia"
- ],
- "class": "non_infective",
- "system": "nervous system",
- "specialty": "neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Secondary paroxysmal dyskinesias are episodic, self-limiting attacks of chorea, dystonia, athetosis or ballism arising from an identifiable acquired cause rather than a primary genetic channelopathy.",
-   "Multiple sclerosis is a classic cause, producing brief, stereotyped paroxysmal dystonic or dyskinetic attacks, often precipitated by movement.",
-   "Other causes include stroke and basal ganglia lesions, non-ketotic hyperglycaemia, hypoparathyroidism and other calcium disturbances, and central nervous system infection.",
-   "Attacks are classified by trigger: kinesigenic (movement-induced), non-kinesigenic (spontaneous) and exertion-induced, mirroring the phenomenology of primary forms.",
-   "Consciousness is preserved throughout and there is no ictal EEG correlate, helping distinguish attacks from focal seizures.",
-   "A secondary cause is suggested by later age at onset, atypical or prolonged attacks, interictal neurological signs and abnormal neuroimaging.",
-   "Kinesigenic secondary forms, like their primary counterparts, often respond well to low-dose sodium-channel-blocking anticonvulsants.",
-   "The cornerstone of management is identifying and treating the underlying disorder, which may abolish the attacks."
+  "id": "paroxysmal_dyskinesia_secondary",
+  "name": "paroxysmal dyskinesia secondary",
+  "aliases": [
+    "secondary paroxysmal dyskinesia",
+    "symptomatic paroxysmal dyskinesia"
   ],
-  "pathophysiology": "Secondary paroxysmal dyskinesias arise when an acquired lesion or metabolic disturbance intermittently destabilises basal ganglia or related motor circuits, producing transient, self-terminating episodes of abnormal movement. In demyelinating disease, ephaptic transmission across demyelinated fibres in the basal ganglia, thalamus or their connections is thought to generate the brief, movement-triggered paroxysms. Structural lesions of the striatum or thalamus, and metabolic derangements such as hyperglycaemia or hypocalcaemia, transiently alter neuronal excitability and striatal output. The episodic nature, preserved consciousness and absence of an EEG correlate distinguish these movement paroxysms from epileptic seizures, reflecting a subcortical rather than cortical generator.",
-  "additionalDifferentials": [
-   "Primary (genetic) paroxysmal kinesigenic and non-kinesigenic dyskinesias",
-   "Focal motor seizures and frontal lobe epilepsy",
-   "Episodic ataxias",
-   "Tonic spasms of multiple sclerosis",
-   "Hyperekplexia and startle syndromes",
-   "Functional (psychogenic) paroxysmal movement disorder",
-   "Tics"
-  ],
-  "additionalInvestigations": [
-   "MRI brain and spinal cord for demyelination or structural lesions",
-   "Serum glucose (including for non-ketotic hyperglycaemia) and HbA1c",
-   "Serum calcium, phosphate, magnesium and parathyroid hormone",
-   "EEG, ideally ictal, to exclude epilepsy",
-   "Cerebrospinal fluid analysis and oligoclonal bands where demyelination suspected",
-   "Genetic testing (e.g. PRRT2) when a primary disorder remains possible",
-   "Autoimmune and paraneoplastic antibody screen in selected cases"
-  ],
-  "redFlags": [
-   "First presentation of demyelinating disease requiring urgent neurological evaluation",
-   "New focal neurological deficit indicating stroke or a structural lesion",
-   "Severe hyperglycaemia or profound hypocalcaemia needing urgent correction",
-   "Features suggesting central nervous system infection or encephalitis",
-   "Prolonged or increasingly frequent attacks with interictal deficits"
-  ],
-  "prognosis": "Prognosis depends on the underlying cause; attacks often resolve or improve markedly once a metabolic derangement is corrected or the primary disorder is treated. Kinesigenic secondary forms are frequently well controlled with low-dose anticonvulsants, whereas outlook otherwise tracks that of the causative disease.",
-  "pitfalls": [
-   "Misdiagnosing attacks as epileptic seizures and committing to inappropriate long-term antiepileptic strategy.",
-   "Labelling episodes as functional without excluding demyelination, structural lesions or metabolic causes.",
-   "Overlooking non-ketotic hyperglycaemia or hypocalcaemia as readily reversible triggers.",
-   "Assuming a primary genetic disorder in a late-onset or atypical presentation.",
-   "Failing to reassess for multiple sclerosis when paroxysmal attacks are the initial manifestation."
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Movement Disorders reviews of paroxysmal dyskinesias"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause, correcting non-ketotic hyperglycaemia, restoring calcium in hypoparathyroidism, or treating the causative structural or demyelinating lesion",
-   "Treat multiple-sclerosis-related paroxysmal attacks with carbamazepine or another sodium-channel-blocking anticonvulsant, which are often rapidly effective",
-   "Control kinesigenic secondary attacks with low-dose anticonvulsants as in the primary form",
-   "Manage the primary demyelinating disease with appropriate disease-modifying therapy and treatment of relapses",
-   "Correct metabolic derangements and monitor glucose, calcium and related parameters to prevent recurrence",
-   "Investigate and follow with neuroimaging and neurology input, as overall prognosis tracks that of the causative disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paroxysmal_dyskinesia_secondary-pathway",
-   "title": "paroxysmal dyskinesia secondary: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Secondary paroxysmal dyskinesias are episodic, self-limiting attacks of chorea, dystonia, athetosis or ballism arising from an identifiable acquired cause rather than a primary genetic channelopathy.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: First presentation of demyelinating disease requiring urgent neurological evaluation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain and spinal cord for demyelination or structural lesions, Serum glucose (including for non-ketotic hyperglycaemia) and HbA1c, Serum calcium, phosphate, magnesium and parathyroid hormone"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause, correcting non-ketotic hyperglycaemia, restoring calcium in hypoparathyroidism, or treating the causative structural or demyelinating lesion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing attacks as epileptic seizures and committing to inappropriate long-term antiepileptic strategy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paroxysmal dyskinesia secondary."
-  }
- ],
- "tables": [
-  {
-   "id": "paroxysmal_dyskinesia_secondary-matrix",
-   "title": "paroxysmal dyskinesia secondary: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Secondary paroxysmal dyskinesias are episodic, self-limiting attacks of chorea, dystonia, athetosis or ballism arising from an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "nervous system",
+  "specialty": "neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Secondary paroxysmal dyskinesias are episodic, self-limiting attacks of chorea, dystonia, athetosis or ballism arising from an identifiable acquired cause rather than a primary genetic channelopathy.",
+      "Multiple sclerosis is a classic cause, producing brief, stereotyped paroxysmal dystonic or dyskinetic attacks, often precipitated by movement.",
+      "Other causes include stroke and basal ganglia lesions, non-ketotic hyperglycaemia, hypoparathyroidism and other calcium disturbances, and central nervous system infection.",
+      "Attacks are classified by trigger: kinesigenic (movement-induced), non-kinesigenic (spontaneous) and exertion-induced, mirroring the phenomenology of primary forms.",
+      "Consciousness is preserved throughout and there is no ictal EEG correlate, helping distinguish attacks from focal seizures.",
+      "A secondary cause is suggested by later age at onset, atypical or prolonged attacks, interictal neurological signs and abnormal neuroimaging.",
+      "Kinesigenic secondary forms, like their primary counterparts, often respond well to low-dose sodium-channel-blocking anticonvulsants.",
+      "The cornerstone of management is identifying and treating the underlying disorder, which may abolish the attacks."
     ],
-    [
-     "Key Investigations",
-     "MRI brain and spinal cord for demyelination or structural lesions, Serum glucose (including for non-ketotic hyperglycaemia) and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Secondary paroxysmal dyskinesias arise when an acquired lesion or metabolic disturbance intermittently destabilises basal ganglia or related motor circuits, producing transient, self-terminating episodes of abnormal movement. In demyelinating disease, ephaptic transmission across demyelinated fibres in the basal ganglia, thalamus or their connections is thought to generate the brief, movement-triggered paroxysms. Structural lesions of the striatum or thalamus, and metabolic derangements such as hyperglycaemia or hypocalcaemia, transiently alter neuronal excitability and striatal output. The episodic nature, preserved consciousness and absence of an EEG correlate distinguish these movement paroxysms from epileptic seizures, reflecting a subcortical rather than cortical generator.",
+    "additionalDifferentials": [
+      "Primary (genetic) paroxysmal kinesigenic and non-kinesigenic dyskinesias",
+      "Focal motor seizures and frontal lobe epilepsy",
+      "Episodic ataxias",
+      "Tonic spasms of multiple sclerosis",
+      "Hyperekplexia and startle syndromes",
+      "Functional (psychogenic) paroxysmal movement disorder",
+      "Tics"
     ],
-    [
-     "Primary Differentials",
-     "Primary (genetic) paroxysmal kinesigenic and non-kinesigenic dyskinesias, Focal motor seizures and frontal lobe epilepsy,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain and spinal cord for demyelination or structural lesions",
+      "Serum glucose (including for non-ketotic hyperglycaemia) and HbA1c",
+      "Serum calcium, phosphate, magnesium and parathyroid hormone",
+      "EEG, ideally ictal, to exclude epilepsy",
+      "Cerebrospinal fluid analysis and oligoclonal bands where demyelination suspected",
+      "Genetic testing (e.g. PRRT2) when a primary disorder remains possible",
+      "Autoimmune and paraneoplastic antibody screen in selected cases"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause, correcting non-ketotic hyperglycaemia, restoring calcium in hypoparathyroidism, or",
-     "Core treatment modality"
+    "redFlags": [
+      "First presentation of demyelinating disease requiring urgent neurological evaluation",
+      "New focal neurological deficit indicating stroke or a structural lesion",
+      "Severe hyperglycaemia or profound hypocalcaemia needing urgent correction",
+      "Features suggesting central nervous system infection or encephalitis",
+      "Prolonged or increasingly frequent attacks with interictal deficits"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing attacks as epileptic seizures and committing to inappropriate long-term antiepileptic strategy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the underlying cause; attacks often resolve or improve markedly once a metabolic derangement is corrected or the primary disorder is treated. Kinesigenic secondary forms are frequently well controlled with low-dose anticonvulsants, whereas outlook otherwise tracks that of the causative disease.",
+    "pitfalls": [
+      "Misdiagnosing attacks as epileptic seizures and committing to inappropriate long-term antiepileptic strategy.",
+      "Labelling episodes as functional without excluding demyelination, structural lesions or metabolic causes.",
+      "Overlooking non-ketotic hyperglycaemia or hypocalcaemia as readily reversible triggers.",
+      "Assuming a primary genetic disorder in a late-onset or atypical presentation.",
+      "Failing to reassess for multiple sclerosis when paroxysmal attacks are the initial manifestation."
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Movement Disorders reviews of paroxysmal dyskinesias"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause, correcting non-ketotic hyperglycaemia, restoring calcium in hypoparathyroidism, or treating the causative structural or demyelinating lesion",
+      "Treat multiple-sclerosis-related paroxysmal attacks with carbamazepine or another sodium-channel-blocking anticonvulsant, which are often rapidly effective",
+      "Control kinesigenic secondary attacks with low-dose anticonvulsants as in the primary form",
+      "Manage the primary demyelinating disease with appropriate disease-modifying therapy and treatment of relapses",
+      "Correct metabolic derangements and monitor glucose, calcium and related parameters to prevent recurrence",
+      "Investigate and follow with neuroimaging and neurology input, as overall prognosis tracks that of the causative disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for paroxysmal dyskinesia secondary."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paroxysmal-dyskinesia-secondary-real-image",
-   "title": "paroxysmal dyskinesia secondary: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "paroxysmal_dyskinesia_secondary-pathway",
+      "title": "paroxysmal dyskinesia secondary: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Secondary paroxysmal dyskinesias are episodic, self-limiting attacks of chorea, dystonia, athetosis or ballism arising from an identifiable acquired cause rather than a primary genetic channelopathy.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: First presentation of demyelinating disease requiring urgent neurological evaluation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain and spinal cord for demyelination or structural lesions, Serum glucose (including for non-ketotic hyperglycaemia) and HbA1c, Serum calcium, phosphate, magnesium and parathyroid hormone"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause, correcting non-ketotic hyperglycaemia, restoring calcium in hypoparathyroidism, or treating the causative structural or demyelinating lesion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing attacks as epileptic seizures and committing to inappropriate long-term antiepileptic strategy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paroxysmal dyskinesia secondary."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paroxysmal_dyskinesia_secondary-matrix",
+      "title": "paroxysmal dyskinesia secondary: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Secondary paroxysmal dyskinesias are episodic, self-limiting attacks of chorea, dystonia, athetosis or ballism arising from an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain and spinal cord for demyelination or structural lesions, Serum glucose (including for non-ketotic hyperglycaemia) and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary (genetic) paroxysmal kinesigenic and non-kinesigenic dyskinesias, Focal motor seizures and frontal lobe epilepsy,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause, correcting non-ketotic hyperglycaemia, restoring calcium in hypoparathyroidism, or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing attacks as epileptic seizures and committing to inappropriate long-term antiepileptic strategy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paroxysmal dyskinesia secondary."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paroxysmal_dyskinesia_secondary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain and spinal cord",
+          "cells": [
+            {
+              "text": "Demyelination or structural lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Non-ketotic hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium, phosphate, magnesium and PTH",
+          "cells": [
+            {
+              "text": "Hypoparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ictal EEG",
+          "cells": [
+            {
+              "text": "Epilepsy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis with oligoclonal bands",
+          "cells": [
+            {
+              "text": "Demyelination suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and paraneoplastic antibody screen",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_dyskinesia_secondary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary paroxysmal dyskinesia",
+          "cells": [
+            {
+              "text": "Genetic and no acquired cause; secondary causes are excluded first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal motor seizures",
+          "cells": [
+            {
+              "text": "Ictal EEG distinguishes epileptic attacks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_dyskinesia_secondary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Correct non-ketotic hyperglycaemia or hypocalcaemia; treat any structural lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium-channel blockers in MS",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Carbamazepine or another sodium-channel blocker, often rapidly effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kinesigenic secondary attacks",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Low-dose anticonvulsants as in the primary form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disease-modifying therapy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For the underlying demyelinating disease and relapses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic monitoring",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Glucose and calcium monitoring to prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paroxysmal_dyskinesia_secondary-dx-mgmt",
+      "title": "Diagnosis and management of paroxysmal dyskinesia secondary",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief attacks of chorea or dystonia in a patient with a known or suspected acquired cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (first demyelinating event, new focal deficit or severe hyperglycaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for stroke, demyelination or encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spine, glucose, calcium and PTH, ictal EEG, CSF with oligoclonal bands",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an acquired lesion or metabolic cause identified for the paroxysmal attacks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary PKD or PNKD, focal epilepsy, episodic ataxia or tics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct non-ketotic hyperglycaemia or hypocalcaemia and treat any structural lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Carbamazepine or another sodium-channel blocker for multiple sclerosis attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Disease-modifying therapy and relapse treatment for demyelinating disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor glucose and calcium to prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often resolves once the cause is corrected; outlook tracks the underlying disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

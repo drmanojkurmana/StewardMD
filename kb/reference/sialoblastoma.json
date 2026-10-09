@@ -1,175 +1,471 @@
 {
- "id": "sialoblastoma",
- "name": "Sialoblastoma",
- "aliases": [
-  "Congenital basal cell adenoma",
-  "Embryoma of salivary gland"
- ],
- "class": "non_infective",
- "system": "Head and neck / Salivary glands",
- "specialty": "Head and neck surgery / Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Head and Neck Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare congenital or perinatal salivary neoplasm, arising most often in the parotid and less commonly the submandibular gland.",
-   "It presents at birth or in the neonatal period as a firm mass, and may be detected on antenatal imaging.",
-   "Histology recapitulates primitive salivary anlage, with basaloid epithelial cells in organoid nests showing peripheral palisading and both ductal and myoepithelial differentiation.",
-   "Behaviour is variable and best regarded as of low to intermediate malignant potential, with a real risk of local recurrence and occasional metastasis.",
-   "Recognised associations include hepatoblastoma, nevus sebaceus and other congenital anomalies, and molecular studies have identified HRAS, PIK3CA and beta-catenin alterations.",
-   "Complete surgical excision with facial nerve preservation where feasible is the mainstay of management.",
-   "Chemotherapy has a role for unresectable, incompletely excised or aggressive tumours.",
-   "It must be distinguished from other congenital head and neck masses such as teratoma, haemangioma and embryonal rhabdomyosarcoma."
+  "id": "sialoblastoma",
+  "name": "Sialoblastoma",
+  "aliases": [
+    "Congenital basal cell adenoma",
+    "Embryoma of salivary gland"
   ],
-  "pathophysiology": "Sialoblastoma is thought to arise from retained primitive (blastematous) salivary gland epithelium that fails to complete normal differentiation, producing a tumour that mirrors the embryonic developing gland. Neoplastic basaloid cells are organised into solid and organoid nests with peripheral palisading and focal ductal lumina, reflecting arrested dual epithelial and myoepithelial differentiation. Molecular studies have implicated activation of growth-signalling pathways, with reported HRAS and PIK3CA mutations and beta-catenin (WNT pathway) alterations driving proliferation of the primitive epithelium. The recognised association with hepatoblastoma and certain cutaneous and congenital anomalies suggests that, in some cases, sialoblastoma forms part of a broader developmental or embryonal tumour predisposition.",
-  "additionalDifferentials": [
-   "Congenital haemangioma",
-   "Teratoma",
-   "Embryonal rhabdomyosarcoma",
-   "Basal cell adenoma or adenocarcinoma",
-   "Adenoid cystic carcinoma",
-   "Neuroblastoma or other small round blue cell tumour"
-  ],
-  "additionalInvestigations": [
-   "MRI of the head and neck to define extent and relation to the facial nerve",
-   "Ultrasound of the mass",
-   "Biopsy with histology and immunohistochemistry for ductal and myoepithelial markers",
-   "Serum alpha-fetoprotein interpreted in the neonatal context, and to help exclude teratoma",
-   "Staging imaging where malignant behaviour is suspected",
-   "Screening for associated hepatoblastoma"
-  ],
-  "redFlags": [
-   "Rapid growth of the mass",
-   "Facial nerve weakness",
-   "Skin ulceration or fixation",
-   "Infiltrative margins or incomplete excision",
-   "Evidence of regional or distant metastasis"
-  ],
-  "prognosis": "Prognosis is variable; complete excision offers a good outcome, but local recurrence is not uncommon and close surveillance is required. Metastasis is infrequent but reported, and outcome is worse with incompletely excised or aggressive tumours.",
-  "pitfalls": [
-   "Mistaking it for a benign basal cell adenoma and undertreating",
-   "Underestimating the risk of local recurrence after excision",
-   "Achieving incomplete excision, particularly around the facial nerve in a neonate",
-   "Overlooking an associated hepatoblastoma"
-  ],
-  "references": [
-   "WHO Classification of Head and Neck Tumours",
-   "Gnepp's Diagnostic Surgical Pathology of the Head and Neck",
-   "Cummings Otolaryngology: Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision with preservation of the facial nerve where feasible as the mainstay of treatment",
-   "Adjuvant chemotherapy for incompletely resected, recurrent or metastatic tumours",
-   "MRI-based mapping of tumour extent and its relation to the facial nerve to guide resection",
-   "Histological and immunohistochemical confirmation with ductal and myoepithelial markers",
-   "Close post-operative surveillance for local recurrence given the low-to-intermediate malignant potential",
-   "Screening for associated hepatoblastoma with serum alpha-fetoprotein and imaging",
-   "Management within a multidisciplinary paediatric head-and-neck oncology team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sialoblastoma-pathway",
-   "title": "Sialoblastoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare congenital or perinatal salivary neoplasm, arising most often in the parotid and less commonly the submandibular gland.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth of the mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the head and neck to define extent and relation to the facial nerve, Ultrasound of the mass, Biopsy with histology and immunohistochemistry for ductal and myoepithelial markers"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision with preservation of the facial nerve where feasible as the mainstay of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for a benign basal cell adenoma and undertreating"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sialoblastoma."
-  }
- ],
- "tables": [
-  {
-   "id": "sialoblastoma-matrix",
-   "title": "Sialoblastoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare congenital or perinatal salivary neoplasm, arising most often in the parotid and less commonly the submandibular gland.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Head and neck / Salivary glands",
+  "specialty": "Head and neck surgery / Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Head and Neck Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare congenital or perinatal salivary neoplasm, arising most often in the parotid and less commonly the submandibular gland.",
+      "It presents at birth or in the neonatal period as a firm mass, and may be detected on antenatal imaging.",
+      "Histology recapitulates primitive salivary anlage, with basaloid epithelial cells in organoid nests showing peripheral palisading and both ductal and myoepithelial differentiation.",
+      "Behaviour is variable and best regarded as of low to intermediate malignant potential, with a real risk of local recurrence and occasional metastasis.",
+      "Recognised associations include hepatoblastoma, nevus sebaceus and other congenital anomalies, and molecular studies have identified HRAS, PIK3CA and beta-catenin alterations.",
+      "Complete surgical excision with facial nerve preservation where feasible is the mainstay of management.",
+      "Chemotherapy has a role for unresectable, incompletely excised or aggressive tumours.",
+      "It must be distinguished from other congenital head and neck masses such as teratoma, haemangioma and embryonal rhabdomyosarcoma."
     ],
-    [
-     "Key Investigations",
-     "MRI of the head and neck to define extent and relation to the facial nerve, Ultrasound of the mass, Biopsy with histology and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sialoblastoma is thought to arise from retained primitive (blastematous) salivary gland epithelium that fails to complete normal differentiation, producing a tumour that mirrors the embryonic developing gland. Neoplastic basaloid cells are organised into solid and organoid nests with peripheral palisading and focal ductal lumina, reflecting arrested dual epithelial and myoepithelial differentiation. Molecular studies have implicated activation of growth-signalling pathways, with reported HRAS and PIK3CA mutations and beta-catenin (WNT pathway) alterations driving proliferation of the primitive epithelium. The recognised association with hepatoblastoma and certain cutaneous and congenital anomalies suggests that, in some cases, sialoblastoma forms part of a broader developmental or embryonal tumour predisposition.",
+    "additionalDifferentials": [
+      "Congenital haemangioma",
+      "Teratoma",
+      "Embryonal rhabdomyosarcoma",
+      "Basal cell adenoma or adenocarcinoma",
+      "Adenoid cystic carcinoma",
+      "Neuroblastoma or other small round blue cell tumour"
     ],
-    [
-     "Primary Differentials",
-     "Congenital haemangioma, Teratoma, Embryonal rhabdomyosarcoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the head and neck to define extent and relation to the facial nerve",
+      "Ultrasound of the mass",
+      "Biopsy with histology and immunohistochemistry for ductal and myoepithelial markers",
+      "Serum alpha-fetoprotein interpreted in the neonatal context, and to help exclude teratoma",
+      "Staging imaging where malignant behaviour is suspected",
+      "Screening for associated hepatoblastoma"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision with preservation of the facial nerve where feasible as the mainstay of treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth of the mass",
+      "Facial nerve weakness",
+      "Skin ulceration or fixation",
+      "Infiltrative margins or incomplete excision",
+      "Evidence of regional or distant metastasis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for a benign basal cell adenoma and undertreating",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is variable; complete excision offers a good outcome, but local recurrence is not uncommon and close surveillance is required. Metastasis is infrequent but reported, and outcome is worse with incompletely excised or aggressive tumours.",
+    "pitfalls": [
+      "Mistaking it for a benign basal cell adenoma and undertreating",
+      "Underestimating the risk of local recurrence after excision",
+      "Achieving incomplete excision, particularly around the facial nerve in a neonate",
+      "Overlooking an associated hepatoblastoma"
+    ],
+    "references": [
+      "WHO Classification of Head and Neck Tumours",
+      "Gnepp's Diagnostic Surgical Pathology of the Head and Neck",
+      "Cummings Otolaryngology: Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision with preservation of the facial nerve where feasible as the mainstay of treatment",
+      "Adjuvant chemotherapy for incompletely resected, recurrent or metastatic tumours",
+      "MRI-based mapping of tumour extent and its relation to the facial nerve to guide resection",
+      "Histological and immunohistochemical confirmation with ductal and myoepithelial markers",
+      "Close post-operative surveillance for local recurrence given the low-to-intermediate malignant potential",
+      "Screening for associated hepatoblastoma with serum alpha-fetoprotein and imaging",
+      "Management within a multidisciplinary paediatric head-and-neck oncology team"
     ]
-   ],
-   "caption": "Overview comparison matrix for sialoblastoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sialoblastoma-real-image",
-   "title": "Sialoblastoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sialoblastoma-pathway",
+      "title": "Sialoblastoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare congenital or perinatal salivary neoplasm, arising most often in the parotid and less commonly the submandibular gland.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth of the mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the head and neck to define extent and relation to the facial nerve, Ultrasound of the mass, Biopsy with histology and immunohistochemistry for ductal and myoepithelial markers"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision with preservation of the facial nerve where feasible as the mainstay of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for a benign basal cell adenoma and undertreating"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sialoblastoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sialoblastoma-matrix",
+      "title": "Sialoblastoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare congenital or perinatal salivary neoplasm, arising most often in the parotid and less commonly the submandibular gland.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the head and neck to define extent and relation to the facial nerve, Ultrasound of the mass, Biopsy with histology and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital haemangioma, Teratoma, Embryonal rhabdomyosarcoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision with preservation of the facial nerve where feasible as the mainstay of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for a benign basal cell adenoma and undertreating",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sialoblastoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Head and Neck Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sialoblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI head and neck",
+          "cells": [
+            {
+              "text": "Extent and relation to the facial nerve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of the mass",
+          "cells": [
+            {
+              "text": "Initial characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Ductal and myoepithelial markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Interpreted in neonatal context; helps exclude teratoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "When malignant behaviour is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatoblastoma screening",
+          "cells": [
+            {
+              "text": "Associated tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sialoblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Basal cell adenoma",
+          "cells": [
+            {
+              "text": "Mistaking sialoblastoma for it leads to undertreatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Teratoma",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein helps exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Embryonal rhabdomyosarcoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sialoblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Mainstay; preserve the facial nerve where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "Incompletely resected, recurrent or metastatic tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI mapping",
+          "cells": [
+            {
+              "text": "Defines extent and nerve relation to guide resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Ductal and myoepithelial markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-operative surveillance",
+          "cells": [
+            {
+              "text": "Local recurrence risk with low-to-intermediate malignant potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatoblastoma screening",
+          "cells": [
+            {
+              "text": "Serum alpha-fetoprotein and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric head-and-neck oncology team",
+          "cells": [
+            {
+              "text": "Multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sialoblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Sialoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital or infant salivary gland mass: suspected sialoblastoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid growth, facial weakness, skin ulceration, metastasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent staging and oncology team review; plan nerve-sparing resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI head and neck, ultrasound, biopsy with immunohistochemistry, alpha-fetoprotein",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology confirm sialoblastoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider haemangioma, teratoma, rhabdomyosarcoma or other small round cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete excision preserving the facial nerve where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant chemotherapy for incomplete, recurrent or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for hepatoblastoma with alpha-fetoprotein and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Close surveillance for local recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good outcome after complete excision, but local recurrence is not uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

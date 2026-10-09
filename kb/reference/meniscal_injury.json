@@ -1,173 +1,451 @@
 {
- "id": "meniscal_injury",
- "name": "Meniscal injury",
- "aliases": [
-  "meniscal tear",
-  "torn meniscus",
-  "cartilage tear of the knee",
-  "bucket-handle tear"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "In younger patients tears usually follow a twisting injury on a loaded, flexed knee; in older patients they are often degenerative and may occur with minimal trauma",
-   "Typical symptoms are joint-line pain, an effusion developing over a day or so, and mechanical features such as clicking, catching, or locking",
-   "A knee locked in flexion that cannot be fully extended suggests a displaced bucket-handle tear and warrants prompt treatment",
-   "Joint-line tenderness and provocative rotation tests (e.g. McMurray's) support the diagnosis, and MRI is the investigation of choice",
-   "The peripheral (outer) third of the meniscus is vascular and can heal, favouring repair, whereas the avascular inner portion has poor healing potential",
-   "Repair is preferred where feasible, especially in younger patients with peripheral tears, to preserve meniscal function; partial meniscectomy is reserved for irreparable tears",
-   "Meniscus preservation is important because meniscectomy increases contact stress and the long-term risk of osteoarthritis",
-   "Degenerative tears in older knees with early arthritis often respond as well to conservative management and rehabilitation as to arthroscopic surgery"
+  "id": "meniscal_injury",
+  "name": "Meniscal injury",
+  "aliases": [
+    "meniscal tear",
+    "torn meniscus",
+    "cartilage tear of the knee",
+    "bucket-handle tear"
   ],
-  "pathophysiology": "The menisci are fibrocartilaginous, wedge-shaped structures that deepen the tibial articular surface, distribute load, absorb shock, and contribute to joint stability and lubrication. A twisting force on a weight-bearing flexed knee shears the meniscus between the femoral and tibial condyles, producing longitudinal, radial, horizontal, or complex tears; a longitudinal tear whose free fragment displaces into the notch forms a bucket-handle lesion that can block extension. With age the meniscal tissue degenerates and tears more readily under low loads. Only the peripheral third has a blood supply capable of healing, so the location of a tear largely determines whether repair or excision is appropriate. Loss of meniscal tissue raises articular contact pressures and predisposes to degenerative change.",
-  "additionalDifferentials": [
-   "Anterior cruciate ligament tear",
-   "Collateral ligament injury",
-   "Osteochondral injury or loose body",
-   "Patellofemoral pain or patellar instability",
-   "Osteoarthritis of the knee",
-   "Plica syndrome",
-   "Osteochondritis dissecans"
-  ],
-  "additionalInvestigations": [
-   "MRI of the knee to characterise the tear and assess associated ligament and cartilage injury",
-   "Clinical joint-line palpation and provocative tests (e.g. McMurray's, Apley's grind)",
-   "Plain radiographs to assess for degenerative change or loose bodies and to exclude fracture",
-   "Diagnostic arthroscopy in selected cases where imaging is equivocal and intervention is planned"
-  ],
-  "redFlags": [
-   "A truly locked knee unable to fully extend, suggesting a displaced bucket-handle tear needing prompt surgery",
-   "Acute tense haemarthrosis suggesting a significant associated injury such as an ACL rupture",
-   "Hot, swollen, systemically unwell knee raising concern for septic arthritis",
-   "Signs of associated ligamentous instability or fracture"
-  ],
-  "prognosis": "Peripheral tears repaired successfully can restore durable meniscal function, while small stable tears may settle with conservative care; extensive meniscectomy relieves mechanical symptoms but increases the long-term likelihood of osteoarthritis, and degenerative tears in already arthritic knees have a more limited response to surgery.",
-  "pitfalls": [
-   "Performing meniscectomy on a degenerative tear in an arthritic knee that would do as well with rehabilitation",
-   "Removing repairable peripheral tissue rather than attempting repair, accelerating arthritis",
-   "Missing a locked knee from a displaced bucket-handle tear",
-   "Overlooking a concurrent ACL injury that leaves the meniscal repair at risk of re-tear"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative management with activity modification, analgesia and physiotherapy including quadriceps strengthening for small, stable and degenerate tears",
-   "Arthroscopic meniscal repair for peripheral vascular-zone tears, especially in younger patients, to preserve meniscal function",
-   "Partial meniscectomy limited to irreparable tears in the avascular inner zone",
-   "Prompt arthroscopy for a locked, displaced bucket-handle tear blocking extension",
-   "Aspiration of a tense effusion and treatment of any associated ligament or chondral injury",
-   "Structured rehabilitation with graduated return to loading and weight optimisation",
-   "Long-term follow-up for degenerative change, given the raised osteoarthritis risk after meniscal loss"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "meniscal_injury-pathway",
-   "title": "Meniscal injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "In younger patients tears usually follow a twisting injury on a loaded, flexed knee; in older patients they are often degenerative and may occur with minimal trauma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A truly locked knee unable to fully extend, suggesting a displaced bucket-handle tear needing prompt surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the knee to characterise the tear and assess associated ligament and cartilage injury, Clinical joint-line palpation and provocative tests (e.g. McMurray's, Apley's grind), Plain radiographs to assess for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative management with activity modification, analgesia and physiotherapy including quadriceps strengthening for small, stable and degenerate tears"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing meniscectomy on a degenerative tear in an arthritic knee that would do as well with rehabilitation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of meniscal injury."
-  }
- ],
- "tables": [
-  {
-   "id": "meniscal_injury-matrix",
-   "title": "Meniscal injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "In younger patients tears usually follow a twisting injury on a loaded, flexed knee; in older patients they are often",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "In younger patients tears usually follow a twisting injury on a loaded, flexed knee; in older patients they are often degenerative and may occur with minimal trauma",
+      "Typical symptoms are joint-line pain, an effusion developing over a day or so, and mechanical features such as clicking, catching, or locking",
+      "A knee locked in flexion that cannot be fully extended suggests a displaced bucket-handle tear and warrants prompt treatment",
+      "Joint-line tenderness and provocative rotation tests (e.g. McMurray's) support the diagnosis, and MRI is the investigation of choice",
+      "The peripheral (outer) third of the meniscus is vascular and can heal, favouring repair, whereas the avascular inner portion has poor healing potential",
+      "Repair is preferred where feasible, especially in younger patients with peripheral tears, to preserve meniscal function; partial meniscectomy is reserved for irreparable tears",
+      "Meniscus preservation is important because meniscectomy increases contact stress and the long-term risk of osteoarthritis",
+      "Degenerative tears in older knees with early arthritis often respond as well to conservative management and rehabilitation as to arthroscopic surgery"
     ],
-    [
-     "Key Investigations",
-     "MRI of the knee to characterise the tear and assess associated ligament and cartilage injury, Clinical joint-line palpation and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The menisci are fibrocartilaginous, wedge-shaped structures that deepen the tibial articular surface, distribute load, absorb shock, and contribute to joint stability and lubrication. A twisting force on a weight-bearing flexed knee shears the meniscus between the femoral and tibial condyles, producing longitudinal, radial, horizontal, or complex tears; a longitudinal tear whose free fragment displaces into the notch forms a bucket-handle lesion that can block extension. With age the meniscal tissue degenerates and tears more readily under low loads. Only the peripheral third has a blood supply capable of healing, so the location of a tear largely determines whether repair or excision is appropriate. Loss of meniscal tissue raises articular contact pressures and predisposes to degenerative change.",
+    "additionalDifferentials": [
+      "Anterior cruciate ligament tear",
+      "Collateral ligament injury",
+      "Osteochondral injury or loose body",
+      "Patellofemoral pain or patellar instability",
+      "Osteoarthritis of the knee",
+      "Plica syndrome",
+      "Osteochondritis dissecans"
     ],
-    [
-     "Primary Differentials",
-     "Anterior cruciate ligament tear, Collateral ligament injury, Osteochondral injury or loose body",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the knee to characterise the tear and assess associated ligament and cartilage injury",
+      "Clinical joint-line palpation and provocative tests (e.g. McMurray's, Apley's grind)",
+      "Plain radiographs to assess for degenerative change or loose bodies and to exclude fracture",
+      "Diagnostic arthroscopy in selected cases where imaging is equivocal and intervention is planned"
     ],
-    [
-     "Management Strategy",
-     "Conservative management with activity modification, analgesia and physiotherapy including quadriceps strengthening for small,",
-     "Core treatment modality"
+    "redFlags": [
+      "A truly locked knee unable to fully extend, suggesting a displaced bucket-handle tear needing prompt surgery",
+      "Acute tense haemarthrosis suggesting a significant associated injury such as an ACL rupture",
+      "Hot, swollen, systemically unwell knee raising concern for septic arthritis",
+      "Signs of associated ligamentous instability or fracture"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing meniscectomy on a degenerative tear in an arthritic knee that would do as well with rehabilitation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Peripheral tears repaired successfully can restore durable meniscal function, while small stable tears may settle with conservative care; extensive meniscectomy relieves mechanical symptoms but increases the long-term likelihood of osteoarthritis, and degenerative tears in already arthritic knees have a more limited response to surgery.",
+    "pitfalls": [
+      "Performing meniscectomy on a degenerative tear in an arthritic knee that would do as well with rehabilitation",
+      "Removing repairable peripheral tissue rather than attempting repair, accelerating arthritis",
+      "Missing a locked knee from a displaced bucket-handle tear",
+      "Overlooking a concurrent ACL injury that leaves the meniscal repair at risk of re-tear"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative management with activity modification, analgesia and physiotherapy including quadriceps strengthening for small, stable and degenerate tears",
+      "Arthroscopic meniscal repair for peripheral vascular-zone tears, especially in younger patients, to preserve meniscal function",
+      "Partial meniscectomy limited to irreparable tears in the avascular inner zone",
+      "Prompt arthroscopy for a locked, displaced bucket-handle tear blocking extension",
+      "Aspiration of a tense effusion and treatment of any associated ligament or chondral injury",
+      "Structured rehabilitation with graduated return to loading and weight optimisation",
+      "Long-term follow-up for degenerative change, given the raised osteoarthritis risk after meniscal loss"
     ]
-   ],
-   "caption": "Overview comparison matrix for meniscal injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "meniscal-injury-real-image",
-   "title": "Meniscal injury: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "meniscal_injury-pathway",
+      "title": "Meniscal injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "In younger patients tears usually follow a twisting injury on a loaded, flexed knee; in older patients they are often degenerative and may occur with minimal trauma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A truly locked knee unable to fully extend, suggesting a displaced bucket-handle tear needing prompt surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the knee to characterise the tear and assess associated ligament and cartilage injury, Clinical joint-line palpation and provocative tests (e.g. McMurray's, Apley's grind), Plain radiographs to assess for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative management with activity modification, analgesia and physiotherapy including quadriceps strengthening for small, stable and degenerate tears"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing meniscectomy on a degenerative tear in an arthritic knee that would do as well with rehabilitation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of meniscal injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "meniscal_injury-matrix",
+      "title": "Meniscal injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "In younger patients tears usually follow a twisting injury on a loaded, flexed knee; in older patients they are often",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the knee to characterise the tear and assess associated ligament and cartilage injury, Clinical joint-line palpation and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anterior cruciate ligament tear, Collateral ligament injury, Osteochondral injury or loose body",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative management with activity modification, analgesia and physiotherapy including quadriceps strengthening for small,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing meniscectomy on a degenerative tear in an arthritic knee that would do as well with rehabilitation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for meniscal injury."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meniscal_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the knee",
+          "cells": [
+            {
+              "text": "Tear, associated ligament and cartilage injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint-line palpation and provocative tests (McMurray, Apley grind)",
+          "cells": [
+            {
+              "text": "Joint-line tenderness and provocative test findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Degenerative change, loose bodies and fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic arthroscopy, where imaging is equivocal",
+          "cells": [
+            {
+              "text": "Equivocal imaging with planned intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meniscal_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anterior cruciate ligament tear",
+          "cells": [
+            {
+              "text": "Acute tense haemarthrosis suggests ACL rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoarthritis of the knee",
+          "cells": [
+            {
+              "text": "Degenerative change on radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "Hot, swollen, systemically unwell knee"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meniscal_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Activity modification, analgesia and physiotherapy with quadriceps strengthening for small, stable and degenerate tears"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic meniscal repair",
+          "cells": [
+            {
+              "text": "Peripheral vascular-zone tears, especially in younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partial meniscectomy",
+          "cells": [
+            {
+              "text": "Irreparable tears in the avascular inner zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt arthroscopy",
+          "cells": [
+            {
+              "text": "Locked, displaced bucket-handle tear blocking extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration and associated injuries",
+          "cells": [
+            {
+              "text": "Tense effusion; treatment of associated ligament or chondral injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Graduated return to loading and weight optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Degenerative change; raised osteoarthritis risk after meniscal loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meniscal_injury-dx-mgmt",
+      "title": "Diagnosis and management of Meniscal injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Knee pain with joint-line tenderness and mechanical symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Truly locked knee, tense haemarthrosis, or hot swollen knee with systemic illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent arthroscopy for a locked knee; assess for septic arthritis if unwell",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the knee; provocative tests; radiographs for degeneration or loose bodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a meniscal tear confirmed on MRI or arthroscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ACL injury, osteochondral lesion or patellofemoral pain; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care with activity modification, analgesia and quadriceps strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Arthroscopic repair of peripheral vascular-zone tears, especially in younger patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Partial meniscectomy limited to irreparable inner-zone tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aspiration of tense effusion and treatment of associated ligament or chondral injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rehabilitation and long-term follow-up for osteoarthritis risk after meniscal loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

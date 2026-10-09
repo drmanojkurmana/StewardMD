@@ -1,172 +1,421 @@
 {
- "id": "gestational_diabetes_mellitus",
- "name": "Gestational diabetes mellitus",
- "aliases": [
-  "GDM",
-  "gestational diabetes",
-  "pregnancy-related glucose intolerance"
- ],
- "class": "non_infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as carbohydrate intolerance first recognised during pregnancy, distinguishing it from pre-existing diabetes detected in early pregnancy",
-   "Diagnosis rests on an oral glucose tolerance test, usually performed around 24 to 28 weeks, or earlier in high-risk women",
-   "Risk factors include obesity, advanced maternal age, prior GDM, macrosomic infant, family history of diabetes, polycystic ovary syndrome, and certain ethnic backgrounds",
-   "First-line management is medical nutrition therapy, glucose self-monitoring, and physical activity, with pharmacotherapy added if glycaemic targets are not met",
-   "Fetal complications include macrosomia, shoulder dystocia, birth trauma, neonatal hypoglycaemia, and polycythaemia",
-   "Maternal hyperglycaemia drives fetal hyperinsulinaemia, which promotes excessive fetal growth and adiposity",
-   "Most women return to normal glucose tolerance after delivery, but there is a substantially increased lifetime risk of type 2 diabetes",
-   "Postpartum glucose testing is essential to detect persistent diabetes and to guide long-term risk reduction"
+  "id": "gestational_diabetes_mellitus",
+  "name": "Gestational diabetes mellitus",
+  "aliases": [
+    "GDM",
+    "gestational diabetes",
+    "pregnancy-related glucose intolerance"
   ],
-  "pathophysiology": "Pregnancy is a progressively insulin-resistant state driven by placental hormones such as human placental lactogen, progesterone, and cortisol. Gestational diabetes develops when maternal pancreatic beta-cell insulin secretion cannot compensate for this physiological resistance, leading to maternal hyperglycaemia. Glucose crosses the placenta freely and stimulates fetal insulin secretion; the resulting fetal hyperinsulinaemia acts as a growth factor causing macrosomia and, after cord clamping removes the maternal glucose supply, predisposes the neonate to hypoglycaemia.",
-  "additionalDifferentials": [
-   "Pre-existing (overt) type 1 or type 2 diabetes unmasked in pregnancy",
-   "Impaired glucose tolerance predating pregnancy",
-   "Stress or steroid-induced hyperglycaemia",
-   "Monogenic diabetes (e.g. MODY)"
-  ],
-  "additionalInvestigations": [
-   "Oral glucose tolerance test with fasting and post-load values",
-   "Home capillary glucose monitoring (fasting and postprandial) to guide therapy",
-   "HbA1c to help distinguish pre-existing diabetes when measured early",
-   "Serial fetal growth ultrasound and amniotic fluid assessment",
-   "Postpartum oral glucose tolerance test to reclassify glucose status"
-  ],
-  "redFlags": [
-   "Marked fetal macrosomia or polyhydramnios increasing risk of shoulder dystocia and stillbirth",
-   "Very poor glycaemic control suggesting undiagnosed overt diabetes",
-   "Coexisting hypertension or pre-eclampsia",
-   "Reduced fetal movements or non-reassuring fetal surveillance"
-  ],
-  "prognosis": "Well-controlled gestational diabetes has an excellent outcome, approaching that of the non-diabetic population. Poor control raises risks of macrosomia, operative delivery, birth trauma, and neonatal metabolic problems. Long term, affected women have a markedly increased risk of type 2 diabetes and cardiovascular disease, and their offspring have higher rates of obesity and glucose intolerance.",
-  "pitfalls": [
-   "Missing overt pre-existing diabetes by not testing high-risk women in early pregnancy",
-   "Relying on symptoms, which are usually absent, rather than screening",
-   "Assuming a normal-sized fetus excludes risk of neonatal hypoglycaemia",
-   "Failing to arrange postpartum glucose reassessment and long-term follow-up",
-   "Neglecting neonatal glucose monitoring after delivery"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin with medical nutrition therapy, capillary glucose self-monitoring, and physical activity as first-line management",
-   "Add pharmacotherapy when glycaemic targets are unmet, using insulin as the preferred agent and metformin as an alternative",
-   "Monitor the foetus with serial growth ultrasound and amniotic fluid assessment for macrosomia and polyhydramnios",
-   "Plan the timing and mode of delivery with attention to macrosomia and shoulder dystocia risk",
-   "Anticipate neonatal hypoglycaemia with early feeding and neonatal glucose monitoring",
-   "Coordinate care across obstetrics, the diabetes team, dietetics, and neonatology",
-   "Arrange postpartum oral glucose tolerance testing to reclassify glucose status and counsel on future type 2 diabetes risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gestational_diabetes_mellitus-pathway",
-   "title": "Gestational diabetes mellitus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as carbohydrate intolerance first recognised during pregnancy, distinguishing it from pre-existing diabetes detected in early pregnancy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked fetal macrosomia or polyhydramnios increasing risk of shoulder dystocia and stillbirth",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Oral glucose tolerance test with fasting and post-load values, Home capillary glucose monitoring (fasting and postprandial) to guide therapy, HbA1c to help distinguish pre-existing diabetes when measured early"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin with medical nutrition therapy, capillary glucose self-monitoring, and physical activity as first-line management"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing overt pre-existing diabetes by not testing high-risk women in early pregnancy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gestational diabetes mellitus."
-  }
- ],
- "tables": [
-  {
-   "id": "gestational_diabetes_mellitus-matrix",
-   "title": "Gestational diabetes mellitus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as carbohydrate intolerance first recognised during pregnancy, distinguishing it from pre-existing diabetes detected in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as carbohydrate intolerance first recognised during pregnancy, distinguishing it from pre-existing diabetes detected in early pregnancy",
+      "Diagnosis rests on an oral glucose tolerance test, usually performed around 24 to 28 weeks, or earlier in high-risk women",
+      "Risk factors include obesity, advanced maternal age, prior GDM, macrosomic infant, family history of diabetes, polycystic ovary syndrome, and certain ethnic backgrounds",
+      "First-line management is medical nutrition therapy, glucose self-monitoring, and physical activity, with pharmacotherapy added if glycaemic targets are not met",
+      "Fetal complications include macrosomia, shoulder dystocia, birth trauma, neonatal hypoglycaemia, and polycythaemia",
+      "Maternal hyperglycaemia drives fetal hyperinsulinaemia, which promotes excessive fetal growth and adiposity",
+      "Most women return to normal glucose tolerance after delivery, but there is a substantially increased lifetime risk of type 2 diabetes",
+      "Postpartum glucose testing is essential to detect persistent diabetes and to guide long-term risk reduction"
     ],
-    [
-     "Key Investigations",
-     "Oral glucose tolerance test with fasting and post-load values, Home capillary glucose monitoring (fasting and postprandial) to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pregnancy is a progressively insulin-resistant state driven by placental hormones such as human placental lactogen, progesterone, and cortisol. Gestational diabetes develops when maternal pancreatic beta-cell insulin secretion cannot compensate for this physiological resistance, leading to maternal hyperglycaemia. Glucose crosses the placenta freely and stimulates fetal insulin secretion; the resulting fetal hyperinsulinaemia acts as a growth factor causing macrosomia and, after cord clamping removes the maternal glucose supply, predisposes the neonate to hypoglycaemia.",
+    "additionalDifferentials": [
+      "Pre-existing (overt) type 1 or type 2 diabetes unmasked in pregnancy",
+      "Impaired glucose tolerance predating pregnancy",
+      "Stress or steroid-induced hyperglycaemia",
+      "Monogenic diabetes (e.g. MODY)"
     ],
-    [
-     "Primary Differentials",
-     "Pre-existing (overt) type 1 or type 2 diabetes unmasked in pregnancy, Impaired glucose tolerance predating pregnancy, Stress or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Oral glucose tolerance test with fasting and post-load values",
+      "Home capillary glucose monitoring (fasting and postprandial) to guide therapy",
+      "HbA1c to help distinguish pre-existing diabetes when measured early",
+      "Serial fetal growth ultrasound and amniotic fluid assessment",
+      "Postpartum oral glucose tolerance test to reclassify glucose status"
     ],
-    [
-     "Management Strategy",
-     "Begin with medical nutrition therapy, capillary glucose self-monitoring, and physical activity as first-line management",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked fetal macrosomia or polyhydramnios increasing risk of shoulder dystocia and stillbirth",
+      "Very poor glycaemic control suggesting undiagnosed overt diabetes",
+      "Coexisting hypertension or pre-eclampsia",
+      "Reduced fetal movements or non-reassuring fetal surveillance"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing overt pre-existing diabetes by not testing high-risk women in early pregnancy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Well-controlled gestational diabetes has an excellent outcome, approaching that of the non-diabetic population. Poor control raises risks of macrosomia, operative delivery, birth trauma, and neonatal metabolic problems. Long term, affected women have a markedly increased risk of type 2 diabetes and cardiovascular disease, and their offspring have higher rates of obesity and glucose intolerance.",
+    "pitfalls": [
+      "Missing overt pre-existing diabetes by not testing high-risk women in early pregnancy",
+      "Relying on symptoms, which are usually absent, rather than screening",
+      "Assuming a normal-sized fetus excludes risk of neonatal hypoglycaemia",
+      "Failing to arrange postpartum glucose reassessment and long-term follow-up",
+      "Neglecting neonatal glucose monitoring after delivery"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin with medical nutrition therapy, capillary glucose self-monitoring, and physical activity as first-line management",
+      "Add pharmacotherapy when glycaemic targets are unmet, using insulin as the preferred agent and metformin as an alternative",
+      "Monitor the foetus with serial growth ultrasound and amniotic fluid assessment for macrosomia and polyhydramnios",
+      "Plan the timing and mode of delivery with attention to macrosomia and shoulder dystocia risk",
+      "Anticipate neonatal hypoglycaemia with early feeding and neonatal glucose monitoring",
+      "Coordinate care across obstetrics, the diabetes team, dietetics, and neonatology",
+      "Arrange postpartum oral glucose tolerance testing to reclassify glucose status and counsel on future type 2 diabetes risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for gestational diabetes mellitus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gestational-diabetes-mellitus-real-image",
-   "title": "Gestational diabetes mellitus: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "gestational_diabetes_mellitus-pathway",
+      "title": "Gestational diabetes mellitus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as carbohydrate intolerance first recognised during pregnancy, distinguishing it from pre-existing diabetes detected in early pregnancy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked fetal macrosomia or polyhydramnios increasing risk of shoulder dystocia and stillbirth",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Oral glucose tolerance test with fasting and post-load values, Home capillary glucose monitoring (fasting and postprandial) to guide therapy, HbA1c to help distinguish pre-existing diabetes when measured early"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin with medical nutrition therapy, capillary glucose self-monitoring, and physical activity as first-line management"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing overt pre-existing diabetes by not testing high-risk women in early pregnancy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gestational diabetes mellitus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gestational_diabetes_mellitus-matrix",
+      "title": "Gestational diabetes mellitus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as carbohydrate intolerance first recognised during pregnancy, distinguishing it from pre-existing diabetes detected in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Oral glucose tolerance test with fasting and post-load values, Home capillary glucose monitoring (fasting and postprandial) to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pre-existing (overt) type 1 or type 2 diabetes unmasked in pregnancy, Impaired glucose tolerance predating pregnancy, Stress or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin with medical nutrition therapy, capillary glucose self-monitoring, and physical activity as first-line management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing overt pre-existing diabetes by not testing high-risk women in early pregnancy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gestational diabetes mellitus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gestational_diabetes_mellitus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral glucose tolerance test with fasting and post-load values",
+          "cells": [
+            {
+              "text": "Fasting and post-load glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Home capillary glucose monitoring",
+          "cells": [
+            {
+              "text": "Fasting and postprandial glucose to guide therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HbA1c when measured early",
+          "cells": [
+            {
+              "text": "Helps distinguish pre-existing diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial fetal growth ultrasound and amniotic fluid assessment",
+          "cells": [
+            {
+              "text": "Macrosomia and polyhydramnios"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum oral glucose tolerance test",
+          "cells": [
+            {
+              "text": "Reclassifies glucose status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gestational_diabetes_mellitus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Medical nutrition therapy",
+          "cells": [
+            {
+              "text": "First-line, with capillary glucose self-monitoring and physical activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin",
+          "cells": [
+            {
+              "text": "Preferred pharmacotherapy when glycaemic targets are unmet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metformin",
+          "cells": [
+            {
+              "text": "Alternative pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal surveillance",
+          "cells": [
+            {
+              "text": "Serial growth ultrasound and amniotic fluid assessment for macrosomia and polyhydramnios"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delivery planning",
+          "cells": [
+            {
+              "text": "Timing and mode, with macrosomia and shoulder dystocia risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal care",
+          "cells": [
+            {
+              "text": "Early feeding and glucose monitoring to anticipate hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum testing",
+          "cells": [
+            {
+              "text": "Oral glucose tolerance test to reclassify glucose status and counsel on type 2 risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gestational_diabetes_mellitus-dx-mgmt",
+      "title": "Diagnosis and management of Gestational diabetes mellitus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gestational diabetes: glucose intolerance first detected in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (macrosomia or polyhydramnios, very poor control, pre-eclampsia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric review for macrosomia or non-reassuring fetal surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oral glucose tolerance test, home glucose monitoring and HbA1c if measured early",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are glucose values above threshold on the oral glucose tolerance test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pre-existing diabetes, MODY or stress-induced hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Medical nutrition therapy, capillary glucose self-monitoring and physical activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Insulin as the preferred drug if targets are unmet; metformin as an alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial growth ultrasound and amniotic fluid assessment in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Postpartum oral glucose tolerance test to reclassify glucose status",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Well controlled, it has an excellent outcome, approaching the non-diabetic population",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

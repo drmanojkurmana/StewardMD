@@ -1,175 +1,388 @@
 {
- "id": "warfarin_related_nephropathy",
- "name": "Anticoagulant-related nephropathy",
- "aliases": [
-  "warfarin-related nephropathy",
-  "WRN",
-  "anticoagulant-related nephropathy",
-  "ARN"
- ],
- "class": "non_infective",
- "system": "Renal / Nephrology",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acute kidney injury occurring in over-anticoagulated patients, classically with a supratherapeutic INR on warfarin, and also reported with direct oral anticoagulants",
-   "Thought to result from glomerular haemorrhage with red cells filling and obstructing the tubules as red-cell casts",
-   "Biopsy shows numerous red-cell casts occluding tubules with acute tubular injury, often on a background of pre-existing chronic kidney disease",
-   "Presents as an otherwise unexplained rise in creatinine coinciding with excessive anticoagulation, frequently with haematuria",
-   "Pre-existing renal disease, diabetes, hypertension and older age increase susceptibility",
-   "It is a diagnosis of exclusion after ruling out other causes of acute kidney injury and glomerular bleeding",
-   "Management is correction of over-anticoagulation, careful review of the need for and intensity of therapy, and supportive care, with biopsy reserved for uncertain cases"
+  "id": "warfarin_related_nephropathy",
+  "name": "Anticoagulant-related nephropathy",
+  "aliases": [
+    "warfarin-related nephropathy",
+    "WRN",
+    "anticoagulant-related nephropathy",
+    "ARN"
   ],
-  "pathophysiology": "Anticoagulant-related nephropathy is proposed to arise when excessive anticoagulation permits bleeding across the glomerular filtration barrier, allowing red cells to pass into Bowman's space and the tubular lumina. The red cells aggregate with Tamm-Horsfall protein to form obstructing red-cell casts in the tubules, causing tubular obstruction, direct epithelial injury and reduced glomerular filtration. Underlying glomerular disease or endothelial and basement-membrane fragility, as in diabetes or hypertension, predisposes to this glomerular haemorrhage, explaining why it occurs largely in patients with pre-existing renal impairment. Oxidative tubular injury from haem and impaired repair in a chronically damaged kidney may compound the acute insult.",
-  "additionalDifferentials": [
-   "Acute interstitial nephritis",
-   "Acute tubular injury from ischaemia or nephrotoxins",
-   "Rapidly progressive (crescentic) glomerulonephritis",
-   "Atheroembolic renal disease",
-   "IgA nephropathy or other glomerular disease with macroscopic haematuria",
-   "Obstructive uropathy from clot"
-  ],
-  "additionalInvestigations": [
-   "INR or anticoagulant activity level and review of anticoagulant dosing",
-   "Serial renal function and urinalysis with microscopy for red cells and red-cell casts",
-   "Exclusion of glomerulonephritis with relevant serology (ANCA, anti-GBM, complement)",
-   "Renal imaging to exclude obstruction and assess kidney size",
-   "Assessment of pre-existing chronic kidney disease and comorbidities",
-   "Renal biopsy in selected cases showing red-cell casts and tubular injury"
-  ],
-  "redFlags": [
-   "Marked or persistent supratherapeutic anticoagulation with rising creatinine",
-   "Heavy macroscopic haematuria or clot obstruction",
-   "Rapidly progressive renal failure prompting exclusion of glomerulonephritis",
-   "Bleeding elsewhere indicating dangerous over-anticoagulation"
-  ],
-  "prognosis": "Anticoagulant-related nephropathy is associated with incomplete renal recovery, accelerated progression of underlying chronic kidney disease and increased mortality, particularly in those with pre-existing renal impairment. Prompt correction of over-anticoagulation and attention to comorbidities improve the chance of stabilising function, but a proportion sustain a permanent decline.",
-  "pitfalls": [
-   "Overlooking excessive anticoagulation as the cause of unexplained acute kidney injury",
-   "Attributing haematuria solely to urological causes and missing glomerular bleeding",
-   "Failing to exclude a coexisting glomerulonephritis before ascribing injury to anticoagulation",
-   "Not reassessing the intensity and indication for anticoagulant therapy",
-   "Assuming full renal recovery once the INR is corrected"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "Brenner and Rector's The Kidney"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct over-anticoagulation promptly by withholding the anticoagulant and reversing warfarin with vitamin K or prothrombin complex concentrate according to the bleeding risk",
-   "Reassess the ongoing indication and target intensity of anticoagulation, tighten monitoring and consider switching agent to minimise recurrence",
-   "Provide supportive acute kidney injury care by avoiding nephrotoxins, optimising volume status and renal perfusion, and dose-adjusting renally cleared drugs",
-   "Manage the underlying chronic kidney disease and its drivers, controlling blood pressure and diabetes and using renin-angiotensin blockade where appropriate",
-   "Exclude and treat other causes of glomerular haematuria and acute kidney injury, since this remains a diagnosis of exclusion supported by biopsy in selected cases",
-   "Monitor renal function and urinalysis serially and provide renal replacement therapy if injury is severe",
-   "Refer to nephrology for ongoing assessment and management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "warfarin_related_nephropathy-pathway",
-   "title": "Anticoagulant-related nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acute kidney injury occurring in over-anticoagulated patients, classically with a supratherapeutic INR on warfarin, and also reported with direct oral anticoagulants",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked or persistent supratherapeutic anticoagulation with rising creatinine",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: INR or anticoagulant activity level and review of anticoagulant dosing, Serial renal function and urinalysis with microscopy for red cells and red-cell casts, Exclusion of glomerulonephritis with relevant serology (ANCA,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct over-anticoagulation promptly by withholding the anticoagulant and reversing warfarin with vitamin K or prothrombin complex concentrate according to the bleeding risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking excessive anticoagulation as the cause of unexplained acute kidney injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anticoagulant-related nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "warfarin_related_nephropathy-matrix",
-   "title": "Anticoagulant-related nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acute kidney injury occurring in over-anticoagulated patients, classically with a supratherapeutic INR on warfarin, and also",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Nephrology",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acute kidney injury occurring in over-anticoagulated patients, classically with a supratherapeutic INR on warfarin, and also reported with direct oral anticoagulants",
+      "Thought to result from glomerular haemorrhage with red cells filling and obstructing the tubules as red-cell casts",
+      "Biopsy shows numerous red-cell casts occluding tubules with acute tubular injury, often on a background of pre-existing chronic kidney disease",
+      "Presents as an otherwise unexplained rise in creatinine coinciding with excessive anticoagulation, frequently with haematuria",
+      "Pre-existing renal disease, diabetes, hypertension and older age increase susceptibility",
+      "It is a diagnosis of exclusion after ruling out other causes of acute kidney injury and glomerular bleeding",
+      "Management is correction of over-anticoagulation, careful review of the need for and intensity of therapy, and supportive care, with biopsy reserved for uncertain cases"
     ],
-    [
-     "Key Investigations",
-     "INR or anticoagulant activity level and review of anticoagulant dosing, Serial renal function and urinalysis with microscopy for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Anticoagulant-related nephropathy is proposed to arise when excessive anticoagulation permits bleeding across the glomerular filtration barrier, allowing red cells to pass into Bowman's space and the tubular lumina. The red cells aggregate with Tamm-Horsfall protein to form obstructing red-cell casts in the tubules, causing tubular obstruction, direct epithelial injury and reduced glomerular filtration. Underlying glomerular disease or endothelial and basement-membrane fragility, as in diabetes or hypertension, predisposes to this glomerular haemorrhage, explaining why it occurs largely in patients with pre-existing renal impairment. Oxidative tubular injury from haem and impaired repair in a chronically damaged kidney may compound the acute insult.",
+    "additionalDifferentials": [
+      "Acute interstitial nephritis",
+      "Acute tubular injury from ischaemia or nephrotoxins",
+      "Rapidly progressive (crescentic) glomerulonephritis",
+      "Atheroembolic renal disease",
+      "IgA nephropathy or other glomerular disease with macroscopic haematuria",
+      "Obstructive uropathy from clot"
     ],
-    [
-     "Primary Differentials",
-     "Acute interstitial nephritis, Acute tubular injury from ischaemia or nephrotoxins, Rapidly progressive (crescentic)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "INR or anticoagulant activity level and review of anticoagulant dosing",
+      "Serial renal function and urinalysis with microscopy for red cells and red-cell casts",
+      "Exclusion of glomerulonephritis with relevant serology (ANCA, anti-GBM, complement)",
+      "Renal imaging to exclude obstruction and assess kidney size",
+      "Assessment of pre-existing chronic kidney disease and comorbidities",
+      "Renal biopsy in selected cases showing red-cell casts and tubular injury"
     ],
-    [
-     "Management Strategy",
-     "Correct over-anticoagulation promptly by withholding the anticoagulant and reversing warfarin with vitamin K or prothrombin",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked or persistent supratherapeutic anticoagulation with rising creatinine",
+      "Heavy macroscopic haematuria or clot obstruction",
+      "Rapidly progressive renal failure prompting exclusion of glomerulonephritis",
+      "Bleeding elsewhere indicating dangerous over-anticoagulation"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking excessive anticoagulation as the cause of unexplained acute kidney injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "Anticoagulant-related nephropathy is associated with incomplete renal recovery, accelerated progression of underlying chronic kidney disease and increased mortality, particularly in those with pre-existing renal impairment. Prompt correction of over-anticoagulation and attention to comorbidities improve the chance of stabilising function, but a proportion sustain a permanent decline.",
+    "pitfalls": [
+      "Overlooking excessive anticoagulation as the cause of unexplained acute kidney injury",
+      "Attributing haematuria solely to urological causes and missing glomerular bleeding",
+      "Failing to exclude a coexisting glomerulonephritis before ascribing injury to anticoagulation",
+      "Not reassessing the intensity and indication for anticoagulant therapy",
+      "Assuming full renal recovery once the INR is corrected"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "Brenner and Rector's The Kidney"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct over-anticoagulation promptly by withholding the anticoagulant and reversing warfarin with vitamin K or prothrombin complex concentrate according to the bleeding risk",
+      "Reassess the ongoing indication and target intensity of anticoagulation, tighten monitoring and consider switching agent to minimise recurrence",
+      "Provide supportive acute kidney injury care by avoiding nephrotoxins, optimising volume status and renal perfusion, and dose-adjusting renally cleared drugs",
+      "Manage the underlying chronic kidney disease and its drivers, controlling blood pressure and diabetes and using renin-angiotensin blockade where appropriate",
+      "Exclude and treat other causes of glomerular haematuria and acute kidney injury, since this remains a diagnosis of exclusion supported by biopsy in selected cases",
+      "Monitor renal function and urinalysis serially and provide renal replacement therapy if injury is severe",
+      "Refer to nephrology for ongoing assessment and management"
     ]
-   ],
-   "caption": "Overview comparison matrix for anticoagulant-related nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "warfarin-related-nephropathy-real-image",
-   "title": "Anticoagulant-related nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "warfarin_related_nephropathy-pathway",
+      "title": "Anticoagulant-related nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acute kidney injury occurring in over-anticoagulated patients, classically with a supratherapeutic INR on warfarin, and also reported with direct oral anticoagulants",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked or persistent supratherapeutic anticoagulation with rising creatinine",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: INR or anticoagulant activity level and review of anticoagulant dosing, Serial renal function and urinalysis with microscopy for red cells and red-cell casts, Exclusion of glomerulonephritis with relevant serology (ANCA,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct over-anticoagulation promptly by withholding the anticoagulant and reversing warfarin with vitamin K or prothrombin complex concentrate according to the bleeding risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking excessive anticoagulation as the cause of unexplained acute kidney injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anticoagulant-related nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "warfarin_related_nephropathy-matrix",
+      "title": "Anticoagulant-related nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acute kidney injury occurring in over-anticoagulated patients, classically with a supratherapeutic INR on warfarin, and also",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "INR or anticoagulant activity level and review of anticoagulant dosing, Serial renal function and urinalysis with microscopy for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute interstitial nephritis, Acute tubular injury from ischaemia or nephrotoxins, Rapidly progressive (crescentic)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct over-anticoagulation promptly by withholding the anticoagulant and reversing warfarin with vitamin K or prothrombin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking excessive anticoagulation as the cause of unexplained acute kidney injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anticoagulant-related nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "warfarin_related_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "INR or anticoagulant activity level",
+          "cells": [
+            {
+              "text": "Supratherapeutic anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial renal function and urinalysis with microscopy",
+          "cells": [
+            {
+              "text": "Red cells and renal impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "warfarin_related_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute interstitial nephritis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute tubular injury from ischaemia or nephrotoxins",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapidly progressive glomerulonephritis",
+          "cells": [
+            {
+              "text": "Crescentic disease needs separate exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "warfarin_related_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withhold anticoagulant",
+          "cells": [
+            {
+              "text": "Correct over-anticoagulation promptly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reverse warfarin",
+          "cells": [
+            {
+              "text": "Vitamin K or prothrombin complex concentrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassess anticoagulation",
+          "cells": [
+            {
+              "text": "Balance the need for anticoagulation against renal and bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "warfarin_related_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Anticoagulant-related nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected warfarin-related nephropathy: acute kidney injury with supratherapeutic INR",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (persistent over-anticoagulation, heavy haematuria or clot obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent reversal of anticoagulation and urology review for clot obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "INR, serial renal function, urinalysis with microscopy for red cells",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is over-anticoagulation confirmed with a supratherapeutic INR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider interstitial nephritis, tubular injury or glomerulonephritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withhold the anticoagulant promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reverse warfarin with vitamin K or prothrombin complex concentrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassess the anticoagulation plan and dosing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Renal recovery depends on prompt correction of anticoagulation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

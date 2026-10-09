@@ -1,176 +1,454 @@
 {
- "id": "neonatal_onset_multisystem_inflammatory_disease",
- "name": "neonatal onset multisystem inflammatory disease",
- "aliases": [
-  "NOMID",
-  "CINCA syndrome",
-  "chronic infantile neurological cutaneous and articular syndrome"
- ],
- "class": "non_infective",
- "system": "Immunological",
- "specialty": "Paediatric Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Pediatric Rheumatology, Cassidy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most severe phenotype of the cryopyrin-associated periodic syndrome spectrum, caused by gain-of-function NLRP3 variants that are frequently de novo and often present as somatic mosaicism.",
-   "Presents in the neonatal period with a near-continuous migratory urticarial rash, in contrast to the episodic attacks of the milder phenotypes.",
-   "Chronic aseptic meningitis produces raised intracranial pressure, chronic headache, papilloedema, optic atrophy, sensorineural hearing loss and, if untreated, developmental delay.",
-   "A characteristic deforming arthropathy with bony overgrowth of the epiphyses, especially of the patella and long-bone growth plates, is highly suggestive and can be radiographically distinctive.",
-   "Dysmorphic features evolve, including frontal bossing, saddle-shaped nose and macrocephaly, together with growth failure.",
-   "Reactive AA amyloidosis is a serious late complication of poorly controlled disease.",
-   "Early interleukin-1 blockade transforms the natural history and can prevent irreversible neurological, ophthalmological and auditory damage.",
-   "Cerebrospinal fluid typically shows a raised opening pressure with a sterile neutrophil-predominant pleocytosis."
+  "id": "neonatal_onset_multisystem_inflammatory_disease",
+  "name": "neonatal onset multisystem inflammatory disease",
+  "aliases": [
+    "NOMID",
+    "CINCA syndrome",
+    "chronic infantile neurological cutaneous and articular syndrome"
   ],
-  "pathophysiology": "Highly activating NLRP3 variants cause near-constitutive assembly of the cryopyrin inflammasome with minimal need for any trigger, driving continuous caspase-1 activation and overwhelming secretion of interleukin-1 beta and interleukin-18. The resulting unremitting innate immune activation produces persistent multisystem inflammation: neutrophilic urticarial dermatosis, chronic aseptic leptomeningitis with raised intracranial pressure, cochlear and optic nerve damage, and a growth-plate arthropathy with disordered endochondral ossification and epiphyseal overgrowth. Somatic mosaicism, in which the activating variant is present in only a proportion of cells, is common and can yield a negative conventional germline test despite classic disease.",
-  "additionalDifferentials": [
-   "Muckle-Wells syndrome",
-   "Familial cold autoinflammatory syndrome",
-   "Deficiency of the interleukin-1 receptor antagonist",
-   "Systemic juvenile idiopathic arthritis of very early onset",
-   "Congenital (TORCH) infection",
-   "Neonatal sepsis or congenital bacterial meningitis",
-   "Aicardi-Goutieres syndrome and other interferonopathies"
-  ],
-  "additionalInvestigations": [
-   "NLRP3 gene analysis with deep or next-generation sequencing to detect somatic mosaicism",
-   "Cerebrospinal fluid examination for raised opening pressure and sterile pleocytosis",
-   "Magnetic resonance imaging of the brain for leptomeningeal enhancement and ventricular changes",
-   "Pure-tone audiometry and serial ophthalmological assessment including fundoscopy for papilloedema",
-   "Skeletal radiographs demonstrating epiphyseal and physeal overgrowth",
-   "Acute-phase reactants with serum amyloid A and urinalysis for amyloidosis surveillance"
-  ],
-  "redFlags": [
-   "Signs of raised intracranial pressure such as papilloedema, bulging fontanelle or persistent vomiting",
-   "Progressive visual or hearing loss indicating ongoing neurosensory damage",
-   "Developmental regression or seizures",
-   "Proteinuria signalling renal AA amyloidosis"
-  ],
-  "prognosis": "Without treatment the disorder causes progressive neurological, visual and auditory disability, deforming arthropathy and a shortened lifespan. Early interleukin-1 blockade substantially improves outcome and can preserve neurosensory function, though damage sustained before treatment is often irreversible.",
-  "pitfalls": [
-   "Concluding the diagnosis is excluded by a negative germline NLRP3 test when somatic mosaicism has not been sought",
-   "Misinterpreting the sterile neutrophilic cerebrospinal fluid pleocytosis as bacterial meningitis",
-   "Delaying interleukin-1 blockade and allowing irreversible neurosensory injury to accumulate",
-   "Overlooking the diagnostic value of the characteristic epiphyseal bony overgrowth on imaging"
-  ],
-  "references": [
-   "Textbook of Pediatric Rheumatology, Cassidy (current edition)",
-   "SHARE recommendations for the management of autoinflammatory diseases",
-   "Nelson Textbook of Pediatrics (current edition)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start interleukin-1 blockade (anakinra, canakinumab or rilonacept) as the disease-specific mainstay to suppress inflammasome-driven inflammation and preserve neurosensory function",
-   "Manage raised intracranial pressure from chronic aseptic meningitis and provide hearing and visual aids for established deficits",
-   "Monitor acute-phase reactants and serum amyloid A to guide therapy and confirm inflammatory control",
-   "Undertake serial audiometry, ophthalmological review with fundoscopy, and skeletal assessment of the deforming arthropathy",
-   "Screen for reactive AA amyloidosis with urinalysis for proteinuria as a late complication",
-   "Confirm the NLRP3 variant using deep or next-generation sequencing to detect somatic mosaicism, with genetic counselling",
-   "Coordinate multidisciplinary care across paediatric rheumatology, neurology, audiology and ophthalmology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neonatal_onset_multisystem_inflammatory_disease-pathway",
-   "title": "neonatal onset multisystem inflammatory disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most severe phenotype of the cryopyrin-associated periodic syndrome spectrum, caused by gain-of-function NLRP3 variants that are frequently de novo and often present as somatic mosaicism.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of raised intracranial pressure such as papilloedema, bulging fontanelle or persistent vomiting",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: NLRP3 gene analysis with deep or next-generation sequencing to detect somatic mosaicism, Cerebrospinal fluid examination for raised opening pressure and sterile pleocytosis, Magnetic resonance imaging of the brain for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start interleukin-1 blockade (anakinra, canakinumab or rilonacept) as the disease-specific mainstay to suppress inflammasome-driven inflammation and preserve neurosensory function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Concluding the diagnosis is excluded by a negative germline NLRP3 test when somatic mosaicism has not been sought"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neonatal onset multisystem inflammatory disease."
-  }
- ],
- "tables": [
-  {
-   "id": "neonatal_onset_multisystem_inflammatory_disease-matrix",
-   "title": "neonatal onset multisystem inflammatory disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most severe phenotype of the cryopyrin-associated periodic syndrome spectrum, caused by gain-of-function NLRP3 variants that are",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunological",
+  "specialty": "Paediatric Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Pediatric Rheumatology, Cassidy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most severe phenotype of the cryopyrin-associated periodic syndrome spectrum, caused by gain-of-function NLRP3 variants that are frequently de novo and often present as somatic mosaicism.",
+      "Presents in the neonatal period with a near-continuous migratory urticarial rash, in contrast to the episodic attacks of the milder phenotypes.",
+      "Chronic aseptic meningitis produces raised intracranial pressure, chronic headache, papilloedema, optic atrophy, sensorineural hearing loss and, if untreated, developmental delay.",
+      "A characteristic deforming arthropathy with bony overgrowth of the epiphyses, especially of the patella and long-bone growth plates, is highly suggestive and can be radiographically distinctive.",
+      "Dysmorphic features evolve, including frontal bossing, saddle-shaped nose and macrocephaly, together with growth failure.",
+      "Reactive AA amyloidosis is a serious late complication of poorly controlled disease.",
+      "Early interleukin-1 blockade transforms the natural history and can prevent irreversible neurological, ophthalmological and auditory damage.",
+      "Cerebrospinal fluid typically shows a raised opening pressure with a sterile neutrophil-predominant pleocytosis."
     ],
-    [
-     "Key Investigations",
-     "NLRP3 gene analysis with deep or next-generation sequencing to detect somatic mosaicism, Cerebrospinal fluid examination for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Highly activating NLRP3 variants cause near-constitutive assembly of the cryopyrin inflammasome with minimal need for any trigger, driving continuous caspase-1 activation and overwhelming secretion of interleukin-1 beta and interleukin-18. The resulting unremitting innate immune activation produces persistent multisystem inflammation: neutrophilic urticarial dermatosis, chronic aseptic leptomeningitis with raised intracranial pressure, cochlear and optic nerve damage, and a growth-plate arthropathy with disordered endochondral ossification and epiphyseal overgrowth. Somatic mosaicism, in which the activating variant is present in only a proportion of cells, is common and can yield a negative conventional germline test despite classic disease.",
+    "additionalDifferentials": [
+      "Muckle-Wells syndrome",
+      "Familial cold autoinflammatory syndrome",
+      "Deficiency of the interleukin-1 receptor antagonist",
+      "Systemic juvenile idiopathic arthritis of very early onset",
+      "Congenital (TORCH) infection",
+      "Neonatal sepsis or congenital bacterial meningitis",
+      "Aicardi-Goutieres syndrome and other interferonopathies"
     ],
-    [
-     "Primary Differentials",
-     "Muckle-Wells syndrome, Familial cold autoinflammatory syndrome, Deficiency of the interleukin-1 receptor antagonist",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "NLRP3 gene analysis with deep or next-generation sequencing to detect somatic mosaicism",
+      "Cerebrospinal fluid examination for raised opening pressure and sterile pleocytosis",
+      "Magnetic resonance imaging of the brain for leptomeningeal enhancement and ventricular changes",
+      "Pure-tone audiometry and serial ophthalmological assessment including fundoscopy for papilloedema",
+      "Skeletal radiographs demonstrating epiphyseal and physeal overgrowth",
+      "Acute-phase reactants with serum amyloid A and urinalysis for amyloidosis surveillance"
     ],
-    [
-     "Management Strategy",
-     "Start interleukin-1 blockade (anakinra, canakinumab or rilonacept) as the disease-specific mainstay to suppress",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of raised intracranial pressure such as papilloedema, bulging fontanelle or persistent vomiting",
+      "Progressive visual or hearing loss indicating ongoing neurosensory damage",
+      "Developmental regression or seizures",
+      "Proteinuria signalling renal AA amyloidosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Concluding the diagnosis is excluded by a negative germline NLRP3 test when somatic mosaicism has not been sought",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without treatment the disorder causes progressive neurological, visual and auditory disability, deforming arthropathy and a shortened lifespan. Early interleukin-1 blockade substantially improves outcome and can preserve neurosensory function, though damage sustained before treatment is often irreversible.",
+    "pitfalls": [
+      "Concluding the diagnosis is excluded by a negative germline NLRP3 test when somatic mosaicism has not been sought",
+      "Misinterpreting the sterile neutrophilic cerebrospinal fluid pleocytosis as bacterial meningitis",
+      "Delaying interleukin-1 blockade and allowing irreversible neurosensory injury to accumulate",
+      "Overlooking the diagnostic value of the characteristic epiphyseal bony overgrowth on imaging"
+    ],
+    "references": [
+      "Textbook of Pediatric Rheumatology, Cassidy (current edition)",
+      "SHARE recommendations for the management of autoinflammatory diseases",
+      "Nelson Textbook of Pediatrics (current edition)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start interleukin-1 blockade (anakinra, canakinumab or rilonacept) as the disease-specific mainstay to suppress inflammasome-driven inflammation and preserve neurosensory function",
+      "Manage raised intracranial pressure from chronic aseptic meningitis and provide hearing and visual aids for established deficits",
+      "Monitor acute-phase reactants and serum amyloid A to guide therapy and confirm inflammatory control",
+      "Undertake serial audiometry, ophthalmological review with fundoscopy, and skeletal assessment of the deforming arthropathy",
+      "Screen for reactive AA amyloidosis with urinalysis for proteinuria as a late complication",
+      "Confirm the NLRP3 variant using deep or next-generation sequencing to detect somatic mosaicism, with genetic counselling",
+      "Coordinate multidisciplinary care across paediatric rheumatology, neurology, audiology and ophthalmology"
     ]
-   ],
-   "caption": "Overview comparison matrix for neonatal onset multisystem inflammatory disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neonatal-onset-multisystem-inflammatory-disease-real-image",
-   "title": "neonatal onset multisystem inflammatory disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "neonatal_onset_multisystem_inflammatory_disease-pathway",
+      "title": "neonatal onset multisystem inflammatory disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most severe phenotype of the cryopyrin-associated periodic syndrome spectrum, caused by gain-of-function NLRP3 variants that are frequently de novo and often present as somatic mosaicism.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of raised intracranial pressure such as papilloedema, bulging fontanelle or persistent vomiting",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: NLRP3 gene analysis with deep or next-generation sequencing to detect somatic mosaicism, Cerebrospinal fluid examination for raised opening pressure and sterile pleocytosis, Magnetic resonance imaging of the brain for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start interleukin-1 blockade (anakinra, canakinumab or rilonacept) as the disease-specific mainstay to suppress inflammasome-driven inflammation and preserve neurosensory function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Concluding the diagnosis is excluded by a negative germline NLRP3 test when somatic mosaicism has not been sought"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neonatal onset multisystem inflammatory disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neonatal_onset_multisystem_inflammatory_disease-matrix",
+      "title": "neonatal onset multisystem inflammatory disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most severe phenotype of the cryopyrin-associated periodic syndrome spectrum, caused by gain-of-function NLRP3 variants that are",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "NLRP3 gene analysis with deep or next-generation sequencing to detect somatic mosaicism, Cerebrospinal fluid examination for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Muckle-Wells syndrome, Familial cold autoinflammatory syndrome, Deficiency of the interleukin-1 receptor antagonist",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start interleukin-1 blockade (anakinra, canakinumab or rilonacept) as the disease-specific mainstay to suppress",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Concluding the diagnosis is excluded by a negative germline NLRP3 test when somatic mosaicism has not been sought",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neonatal onset multisystem inflammatory disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology, Cassidy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_onset_multisystem_inflammatory_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NLRP3 deep or next-generation sequencing",
+          "cells": [
+            {
+              "text": "Detects somatic mosaicism; a germline test can be negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid examination",
+          "cells": [
+            {
+              "text": "Raised opening pressure; sterile neutrophil-predominant pleocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Leptomeningeal enhancement and ventricular changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and ophthalmology with fundoscopy",
+          "cells": [
+            {
+              "text": "Hearing loss and papilloedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal radiographs",
+          "cells": [
+            {
+              "text": "Epiphyseal and physeal overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum amyloid A and urinalysis",
+          "cells": [
+            {
+              "text": "Acute-phase response and amyloid surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_onset_multisystem_inflammatory_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Muckle-Wells syndrome",
+          "cells": [
+            {
+              "text": "A milder cryopyrin-associated phenotype with episodic attacks, unlike this near-continuous rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis or congenital bacterial meningitis",
+          "cells": [
+            {
+              "text": "Sterile CSF neutrophilic pleocytosis argues against bacterial meningitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_onset_multisystem_inflammatory_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra, canakinumab or rilonacept as the mainstay; preserves neurosensory function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure care",
+          "cells": [
+            {
+              "text": "Management of chronic aseptic meningitis; hearing and visual aids for deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase monitoring",
+          "cells": [
+            {
+              "text": "Serum amyloid A to confirm inflammatory control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry and ophthalmology",
+          "cells": [
+            {
+              "text": "Fundoscopy and skeletal assessment of the arthropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis screen",
+          "cells": [
+            {
+              "text": "Urinalysis for proteinuria as a late complication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NLRP3 confirmation and counselling",
+          "cells": [
+            {
+              "text": "Deep or next-generation sequencing to detect mosaicism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_onset_multisystem_inflammatory_disease-dx-mgmt",
+      "title": "Diagnosis and management of neonatal onset multisystem inflammatory disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonatal near-continuous urticarial rash with chronic meningitis features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised intracranial pressure, progressive hearing or visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent interleukin-1 blockade; manage raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NLRP3 deep sequencing, CSF, brain MRI, audiometry, fundoscopy, skeletal films, SAA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Activating NLRP3 variant with sterile CSF pleocytosis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat NLRP3 testing for somatic mosaicism; exclude infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade with anakinra, canakinumab or rilonacept as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage raised intracranial pressure; hearing and visual aids for deficits",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial audiometry, fundoscopy and skeletal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for AA amyloidosis with urinalysis for proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated leads to neurosensory and skeletal disability; early IL-1 blockade helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

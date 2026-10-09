@@ -1,177 +1,372 @@
 {
- "id": "zellweger_syndrome",
- "name": "Zellweger syndrome",
- "aliases": [
-  "cerebrohepatorenal syndrome",
-  "PEX gene disorder",
-  "peroxisome biogenesis disorder",
-  "Zellweger spectrum disorder",
-  "PBD-ZSD"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive peroxisome biogenesis disorder caused by variants in one of many PEX genes, most often PEX1",
-   "It is the most severe end of the Zellweger spectrum, which also includes neonatal adrenoleukodystrophy and infantile Refsum disease",
-   "Failure of peroxisome assembly impairs multiple peroxisomal functions, including very-long-chain fatty acid beta-oxidation and plasmalogen synthesis",
-   "The biochemical signature is raised plasma very-long-chain fatty acids, with low plasmalogens and abnormal bile acid intermediates",
-   "Neonates present with profound hypotonia, poor feeding, seizures, a characteristic dysmorphic facies and a large fontanelle",
-   "Hepatic dysfunction, renal cortical cysts and chondrodysplasia punctata (stippled epiphyses) are supporting features",
-   "Sensorineural deafness and retinal and other ocular abnormalities are common",
-   "There is no curative treatment; management is supportive and the classic form is usually fatal in infancy"
+  "id": "zellweger_syndrome",
+  "name": "Zellweger syndrome",
+  "aliases": [
+    "cerebrohepatorenal syndrome",
+    "PEX gene disorder",
+    "peroxisome biogenesis disorder",
+    "Zellweger spectrum disorder",
+    "PBD-ZSD"
   ],
-  "pathophysiology": "Peroxisomes are organelles that carry out several essential metabolic reactions, including the beta-oxidation of very-long-chain fatty acids, synthesis of ether phospholipids (plasmalogens) and bile acids, and detoxification of hydrogen peroxide. PEX genes encode peroxins required to assemble the peroxisomal membrane and import matrix enzymes. In Zellweger syndrome, defective peroxins prevent normal peroxisome assembly, so matrix enzymes are not imported and are degraded, leaving functionally empty or absent peroxisomes. The resulting accumulation of very-long-chain fatty acids and deficiency of plasmalogens disrupt membrane and myelin integrity and neuronal migration, producing the severe multisystem, and particularly neurological, phenotype.",
-  "additionalDifferentials": [
-   "Other neonatal hypotonia and encephalopathy syndromes",
-   "Single peroxisomal enzyme defects (for example X-linked adrenoleukodystrophy, D-bifunctional protein deficiency)",
-   "Congenital muscular dystrophies and congenital myopathies",
-   "Chromosomal and other multiple congenital anomaly syndromes",
-   "Rhizomelic chondrodysplasia punctata",
-   "Neonatal metabolic encephalopathies of other causes"
-  ],
-  "additionalInvestigations": [
-   "Plasma very-long-chain fatty acid profile (raised) as the key screening test",
-   "Erythrocyte plasmalogen levels (reduced) and plasma bile acid intermediates",
-   "Molecular genetic testing of the PEX genes",
-   "Neuroimaging assessing neuronal migration defects and white matter change",
-   "Renal ultrasound for cortical cysts and skeletal imaging for stippled epiphyses",
-   "Hearing and ophthalmological assessment and liver function tests"
-  ],
-  "redFlags": [
-   "Profound neonatal hypotonia with seizures and poor feeding",
-   "Dysmorphic facies with a large fontanelle and hepatic dysfunction",
-   "Progressive deterioration with apnoea and failure to thrive",
-   "Coagulopathy or bleeding from hepatic involvement"
-  ],
-  "prognosis": "The classic Zellweger phenotype carries a very poor prognosis, with most affected infants dying within the first year of life. Milder disorders within the Zellweger spectrum have longer survival with progressive neurological, hepatic, visual and hearing impairment.",
-  "pitfalls": [
-   "Attributing severe neonatal hypotonia to a neuromuscular disorder without checking peroxisomal biochemistry",
-   "Missing the diagnosis by not requesting very-long-chain fatty acids",
-   "Overlooking associated hearing and visual impairment that affect management",
-   "Failing to recognise milder Zellweger spectrum phenotypes presenting later"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive and palliative care as the mainstay, since no treatment corrects the peroxisome-biogenesis defect",
-   "Support nutrition with assisted or gastrostomy feeding for poor feeding and hypotonia, and supplement the fat-soluble vitamins A, D, E and K",
-   "Consider bile acid supplementation with cholic acid for the abnormal bile acid intermediates and hepatic dysfunction, giving vitamin K to correct coagulopathy",
-   "Control seizures with antiepileptic drugs",
-   "Manage sensory impairment with hearing aids for deafness and cataract or ophthalmological surgery for visual involvement",
-   "Monitor hepatic function, growth and neurological status with regular review",
-   "Offer genetic counselling and PEX-gene testing for this autosomal recessive disorder, with carrier testing and prenatal and reproductive options",
-   "Coordinate multidisciplinary care with early involvement of palliative services given the very poor prognosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "zellweger_syndrome-pathway",
-   "title": "Zellweger syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive peroxisome biogenesis disorder caused by variants in one of many PEX genes, most often PEX1",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Profound neonatal hypotonia with seizures and poor feeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma very-long-chain fatty acid profile (raised) as the key screening test, Erythrocyte plasmalogen levels (reduced) and plasma bile acid intermediates, Molecular genetic testing of the PEX genes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive and palliative care as the mainstay, since no treatment corrects the peroxisome-biogenesis defect"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing severe neonatal hypotonia to a neuromuscular disorder without checking peroxisomal biochemistry"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of zellweger syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "zellweger_syndrome-matrix",
-   "title": "Zellweger syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive peroxisome biogenesis disorder caused by variants in one of many PEX genes, most often PEX1",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive peroxisome biogenesis disorder caused by variants in one of many PEX genes, most often PEX1",
+      "It is the most severe end of the Zellweger spectrum, which also includes neonatal adrenoleukodystrophy and infantile Refsum disease",
+      "Failure of peroxisome assembly impairs multiple peroxisomal functions, including very-long-chain fatty acid beta-oxidation and plasmalogen synthesis",
+      "The biochemical signature is raised plasma very-long-chain fatty acids, with low plasmalogens and abnormal bile acid intermediates",
+      "Neonates present with profound hypotonia, poor feeding, seizures, a characteristic dysmorphic facies and a large fontanelle",
+      "Hepatic dysfunction, renal cortical cysts and chondrodysplasia punctata (stippled epiphyses) are supporting features",
+      "Sensorineural deafness and retinal and other ocular abnormalities are common",
+      "There is no curative treatment; management is supportive and the classic form is usually fatal in infancy"
     ],
-    [
-     "Key Investigations",
-     "Plasma very-long-chain fatty acid profile (raised) as the key screening test, Erythrocyte plasmalogen levels (reduced) and plasma",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Peroxisomes are organelles that carry out several essential metabolic reactions, including the beta-oxidation of very-long-chain fatty acids, synthesis of ether phospholipids (plasmalogens) and bile acids, and detoxification of hydrogen peroxide. PEX genes encode peroxins required to assemble the peroxisomal membrane and import matrix enzymes. In Zellweger syndrome, defective peroxins prevent normal peroxisome assembly, so matrix enzymes are not imported and are degraded, leaving functionally empty or absent peroxisomes. The resulting accumulation of very-long-chain fatty acids and deficiency of plasmalogens disrupt membrane and myelin integrity and neuronal migration, producing the severe multisystem, and particularly neurological, phenotype.",
+    "additionalDifferentials": [
+      "Other neonatal hypotonia and encephalopathy syndromes",
+      "Single peroxisomal enzyme defects (for example X-linked adrenoleukodystrophy, D-bifunctional protein deficiency)",
+      "Congenital muscular dystrophies and congenital myopathies",
+      "Chromosomal and other multiple congenital anomaly syndromes",
+      "Rhizomelic chondrodysplasia punctata",
+      "Neonatal metabolic encephalopathies of other causes"
     ],
-    [
-     "Primary Differentials",
-     "Other neonatal hypotonia and encephalopathy syndromes, Single peroxisomal enzyme defects (for example X-linked",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma very-long-chain fatty acid profile (raised) as the key screening test",
+      "Erythrocyte plasmalogen levels (reduced) and plasma bile acid intermediates",
+      "Molecular genetic testing of the PEX genes",
+      "Neuroimaging assessing neuronal migration defects and white matter change",
+      "Renal ultrasound for cortical cysts and skeletal imaging for stippled epiphyses",
+      "Hearing and ophthalmological assessment and liver function tests"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive and palliative care as the mainstay, since no treatment corrects the peroxisome-biogenesis defect",
-     "Core treatment modality"
+    "redFlags": [
+      "Profound neonatal hypotonia with seizures and poor feeding",
+      "Dysmorphic facies with a large fontanelle and hepatic dysfunction",
+      "Progressive deterioration with apnoea and failure to thrive",
+      "Coagulopathy or bleeding from hepatic involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing severe neonatal hypotonia to a neuromuscular disorder without checking peroxisomal biochemistry",
-     "Prevent diagnostic or management error"
+    "prognosis": "The classic Zellweger phenotype carries a very poor prognosis, with most affected infants dying within the first year of life. Milder disorders within the Zellweger spectrum have longer survival with progressive neurological, hepatic, visual and hearing impairment.",
+    "pitfalls": [
+      "Attributing severe neonatal hypotonia to a neuromuscular disorder without checking peroxisomal biochemistry",
+      "Missing the diagnosis by not requesting very-long-chain fatty acids",
+      "Overlooking associated hearing and visual impairment that affect management",
+      "Failing to recognise milder Zellweger spectrum phenotypes presenting later"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive and palliative care as the mainstay, since no treatment corrects the peroxisome-biogenesis defect",
+      "Support nutrition with assisted or gastrostomy feeding for poor feeding and hypotonia, and supplement the fat-soluble vitamins A, D, E and K",
+      "Consider bile acid supplementation with cholic acid for the abnormal bile acid intermediates and hepatic dysfunction, giving vitamin K to correct coagulopathy",
+      "Control seizures with antiepileptic drugs",
+      "Manage sensory impairment with hearing aids for deafness and cataract or ophthalmological surgery for visual involvement",
+      "Monitor hepatic function, growth and neurological status with regular review",
+      "Offer genetic counselling and PEX-gene testing for this autosomal recessive disorder, with carrier testing and prenatal and reproductive options",
+      "Coordinate multidisciplinary care with early involvement of palliative services given the very poor prognosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for zellweger syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "zellweger-syndrome-real-image",
-   "title": "Zellweger syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "zellweger_syndrome-pathway",
+      "title": "Zellweger syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive peroxisome biogenesis disorder caused by variants in one of many PEX genes, most often PEX1",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Profound neonatal hypotonia with seizures and poor feeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma very-long-chain fatty acid profile (raised) as the key screening test, Erythrocyte plasmalogen levels (reduced) and plasma bile acid intermediates, Molecular genetic testing of the PEX genes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive and palliative care as the mainstay, since no treatment corrects the peroxisome-biogenesis defect"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing severe neonatal hypotonia to a neuromuscular disorder without checking peroxisomal biochemistry"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of zellweger syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "zellweger_syndrome-matrix",
+      "title": "Zellweger syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive peroxisome biogenesis disorder caused by variants in one of many PEX genes, most often PEX1",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma very-long-chain fatty acid profile (raised) as the key screening test, Erythrocyte plasmalogen levels (reduced) and plasma",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other neonatal hypotonia and encephalopathy syndromes, Single peroxisomal enzyme defects (for example X-linked",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive and palliative care as the mainstay, since no treatment corrects the peroxisome-biogenesis defect",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing severe neonatal hypotonia to a neuromuscular disorder without checking peroxisomal biochemistry",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for zellweger syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "zellweger_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma very-long-chain fatty acid profile",
+          "cells": [
+            {
+              "text": "Raised; key screening test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrocyte plasmalogen",
+          "cells": [
+            {
+              "text": "Reduced; peroxisomal biochemistry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zellweger_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other neonatal hypotonia and encephalopathy syndromes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single peroxisomal enzyme defects",
+          "cells": [
+            {
+              "text": "Separated by specific enzyme assays"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zellweger_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "No treatment corrects the peroxisome biogenesis defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom control",
+          "cells": [
+            {
+              "text": "Seizures and feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "zellweger_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Zellweger syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Zellweger syndrome: profound neonatal hypotonia with dysmorphic facies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, poor feeding or large fontanelle)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent supportive care for seizures and feeding failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Very-long-chain fatty acids, erythrocyte plasmalogens, PEX gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are very-long-chain fatty acids raised with reduced plasmalogens?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other neonatal hypotonia syndromes or single enzyme defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive and palliative care as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Symptom control for seizures and feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Check peroxisomal biochemistry before attributing hypotonia to a neuromuscular cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "No curative therapy; severe multisystem disease with early mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,464 @@
 {
- "id": "systemic_sclerosis_limited",
- "name": "Limited cutaneous systemic sclerosis (CREST)",
- "aliases": [
-  "CREST syndrome",
-  "limited scleroderma",
-  "lcSSc",
-  "anticentromere antibody",
-  "ACA"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Vascular",
- "specialty": "Rheumatology / Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Skin thickening is confined distal to the elbows and knees (with facial involvement) and often follows years of longstanding Raynaud phenomenon",
-   "The CREST constellation summarises Calcinosis, Raynaud, oEsophageal dysmotility, Sclerodactyly, and Telangiectasia",
-   "Anticentromere antibodies are the characteristic serological marker and correlate with the limited subset",
-   "Pulmonary arterial hypertension is the leading disease-specific cause of late mortality and may develop insidiously after many years",
-   "Regular echocardiographic and pulmonary function screening is used to detect pulmonary vascular disease before it becomes symptomatic",
-   "Digital pitting scars, ischaemic ulcers, and telangiectasia over the face and hands are common examination findings",
-   "Cutaneous change progresses slowly, so internal organ surveillance rather than skin score often drives management"
+  "id": "systemic_sclerosis_limited",
+  "name": "Limited cutaneous systemic sclerosis (CREST)",
+  "aliases": [
+    "CREST syndrome",
+    "limited scleroderma",
+    "lcSSc",
+    "anticentromere antibody",
+    "ACA"
   ],
-  "pathophysiology": "Limited cutaneous systemic sclerosis is a chronic autoimmune connective tissue disorder in which immune activation, small-vessel endothelial injury, and progressive fibrosis interact. Persistent vascular damage drives Raynaud phenomenon and a proliferative vasculopathy, while activated fibroblasts and myofibroblasts deposit excessive collagen in a distal-limited distribution. Autoantibodies, classically anticentromere, reflect the underlying immune dysregulation. Over years the vasculopathy may extend to the pulmonary arteries, producing pulmonary arterial hypertension, and to the gastrointestinal tract, causing oesophageal and gut dysmotility.",
-  "additionalDifferentials": [
-   "Diffuse cutaneous systemic sclerosis",
-   "Mixed connective tissue disease",
-   "Primary Raynaud phenomenon",
-   "Eosinophilic fasciitis",
-   "Scleromyxoedema or scleroedema",
-   "Nephrogenic systemic fibrosis"
-  ],
-  "additionalInvestigations": [
-   "Antinuclear antibody with anticentromere and extractable nuclear antigen profiling",
-   "Nailfold capillaroscopy to demonstrate scleroderma-pattern microvascular change",
-   "Transthoracic echocardiography to screen for pulmonary arterial hypertension",
-   "Pulmonary function tests with diffusing capacity to detect vascular or interstitial disease",
-   "Right heart catheterisation when non-invasive screening suggests pulmonary hypertension",
-   "Oesophageal studies for reflux and dysmotility when symptomatic"
-  ],
-  "redFlags": [
-   "Progressive breathlessness or reduced diffusing capacity suggesting pulmonary arterial hypertension",
-   "Critical digital ischaemia or non-healing ulceration risking tissue loss",
-   "Recurrent aspiration or severe reflux from oesophageal dysmotility",
-   "Rapidly progressive skin involvement suggesting evolution toward diffuse disease"
-  ],
-  "prognosis": "Limited cutaneous disease generally follows an indolent course with better survival than diffuse disease, but the development of pulmonary arterial hypertension markedly worsens outcome. Early detection through surveillance and targeted pulmonary vasodilator therapy improves prognosis.",
-  "pitfalls": [
-   "Attributing longstanding Raynaud to a primary cause and missing evolving systemic sclerosis",
-   "Failing to screen periodically for pulmonary arterial hypertension because skin disease appears stable",
-   "Overlooking silent oesophageal dysmotility and its aspiration risk",
-   "Assuming the limited subset never causes serious internal organ disease"
-  ],
-  "references": [
-   "Kelley & Firestein's Textbook of Rheumatology",
-   "EULAR recommendations for the treatment of systemic sclerosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Vasodilator therapy for Raynaud phenomenon and digital ulcers, using calcium channel blockers, phosphodiesterase-5 inhibitors, and endothelin receptor antagonists or prostacyclin analogues",
-   "Targeted pulmonary vasodilator therapy for pulmonary arterial hypertension, the leading disease-specific cause of late death",
-   "Proton pump inhibitors and prokinetics for oesophageal dysmotility and reflux",
-   "Regular echocardiographic and pulmonary function surveillance to detect pulmonary arterial hypertension before it becomes symptomatic",
-   "Management of calcinosis, telangiectasia and digital ischaemia, with wound care for ischaemic ulcers",
-   "Prompt ACE-inhibitor therapy should renal crisis occur, though it is uncommon in the limited subset",
-   "Multidisciplinary follow-up across rheumatology, respiratory and cardiology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "systemic_sclerosis_limited-pathway",
-   "title": "Limited cutaneous systemic sclerosis (CREST): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Skin thickening is confined distal to the elbows and knees (with facial involvement) and often follows years of longstanding Raynaud phenomenon",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive breathlessness or reduced diffusing capacity suggesting pulmonary arterial hypertension",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antinuclear antibody with anticentromere and extractable nuclear antigen profiling, Nailfold capillaroscopy to demonstrate scleroderma-pattern microvascular change, Transthoracic echocardiography to screen for pulmonary"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Vasodilator therapy for Raynaud phenomenon and digital ulcers, using calcium channel blockers, phosphodiesterase-5 inhibitors, and endothelin receptor antagonists or prostacyclin analogues"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing longstanding Raynaud to a primary cause and missing evolving systemic sclerosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of limited cutaneous systemic sclerosis (crest)."
-  }
- ],
- "tables": [
-  {
-   "id": "systemic_sclerosis_limited-matrix",
-   "title": "Limited cutaneous systemic sclerosis (CREST): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Skin thickening is confined distal to the elbows and knees (with facial involvement) and often follows years of longstanding",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Vascular",
+  "specialty": "Rheumatology / Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Skin thickening is confined distal to the elbows and knees (with facial involvement) and often follows years of longstanding Raynaud phenomenon",
+      "The CREST constellation summarises Calcinosis, Raynaud, oEsophageal dysmotility, Sclerodactyly, and Telangiectasia",
+      "Anticentromere antibodies are the characteristic serological marker and correlate with the limited subset",
+      "Pulmonary arterial hypertension is the leading disease-specific cause of late mortality and may develop insidiously after many years",
+      "Regular echocardiographic and pulmonary function screening is used to detect pulmonary vascular disease before it becomes symptomatic",
+      "Digital pitting scars, ischaemic ulcers, and telangiectasia over the face and hands are common examination findings",
+      "Cutaneous change progresses slowly, so internal organ surveillance rather than skin score often drives management"
     ],
-    [
-     "Key Investigations",
-     "Antinuclear antibody with anticentromere and extractable nuclear antigen profiling, Nailfold capillaroscopy to demonstrate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Limited cutaneous systemic sclerosis is a chronic autoimmune connective tissue disorder in which immune activation, small-vessel endothelial injury, and progressive fibrosis interact. Persistent vascular damage drives Raynaud phenomenon and a proliferative vasculopathy, while activated fibroblasts and myofibroblasts deposit excessive collagen in a distal-limited distribution. Autoantibodies, classically anticentromere, reflect the underlying immune dysregulation. Over years the vasculopathy may extend to the pulmonary arteries, producing pulmonary arterial hypertension, and to the gastrointestinal tract, causing oesophageal and gut dysmotility.",
+    "additionalDifferentials": [
+      "Diffuse cutaneous systemic sclerosis",
+      "Mixed connective tissue disease",
+      "Primary Raynaud phenomenon",
+      "Eosinophilic fasciitis",
+      "Scleromyxoedema or scleroedema",
+      "Nephrogenic systemic fibrosis"
     ],
-    [
-     "Primary Differentials",
-     "Diffuse cutaneous systemic sclerosis, Mixed connective tissue disease, Primary Raynaud phenomenon",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antinuclear antibody with anticentromere and extractable nuclear antigen profiling",
+      "Nailfold capillaroscopy to demonstrate scleroderma-pattern microvascular change",
+      "Transthoracic echocardiography to screen for pulmonary arterial hypertension",
+      "Pulmonary function tests with diffusing capacity to detect vascular or interstitial disease",
+      "Right heart catheterisation when non-invasive screening suggests pulmonary hypertension",
+      "Oesophageal studies for reflux and dysmotility when symptomatic"
     ],
-    [
-     "Management Strategy",
-     "Vasodilator therapy for Raynaud phenomenon and digital ulcers, using calcium channel blockers, phosphodiesterase-5 inhibitors,",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive breathlessness or reduced diffusing capacity suggesting pulmonary arterial hypertension",
+      "Critical digital ischaemia or non-healing ulceration risking tissue loss",
+      "Recurrent aspiration or severe reflux from oesophageal dysmotility",
+      "Rapidly progressive skin involvement suggesting evolution toward diffuse disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing longstanding Raynaud to a primary cause and missing evolving systemic sclerosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Limited cutaneous disease generally follows an indolent course with better survival than diffuse disease, but the development of pulmonary arterial hypertension markedly worsens outcome. Early detection through surveillance and targeted pulmonary vasodilator therapy improves prognosis.",
+    "pitfalls": [
+      "Attributing longstanding Raynaud to a primary cause and missing evolving systemic sclerosis",
+      "Failing to screen periodically for pulmonary arterial hypertension because skin disease appears stable",
+      "Overlooking silent oesophageal dysmotility and its aspiration risk",
+      "Assuming the limited subset never causes serious internal organ disease"
+    ],
+    "references": [
+      "Kelley & Firestein's Textbook of Rheumatology",
+      "EULAR recommendations for the treatment of systemic sclerosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Vasodilator therapy for Raynaud phenomenon and digital ulcers, using calcium channel blockers, phosphodiesterase-5 inhibitors, and endothelin receptor antagonists or prostacyclin analogues",
+      "Targeted pulmonary vasodilator therapy for pulmonary arterial hypertension, the leading disease-specific cause of late death",
+      "Proton pump inhibitors and prokinetics for oesophageal dysmotility and reflux",
+      "Regular echocardiographic and pulmonary function surveillance to detect pulmonary arterial hypertension before it becomes symptomatic",
+      "Management of calcinosis, telangiectasia and digital ischaemia, with wound care for ischaemic ulcers",
+      "Prompt ACE-inhibitor therapy should renal crisis occur, though it is uncommon in the limited subset",
+      "Multidisciplinary follow-up across rheumatology, respiratory and cardiology"
     ]
-   ],
-   "caption": "Overview comparison matrix for limited cutaneous systemic sclerosis (crest)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "systemic-sclerosis-limited-real-image",
-   "title": "Limited cutaneous systemic sclerosis (CREST): 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "systemic_sclerosis_limited-pathway",
+      "title": "Limited cutaneous systemic sclerosis (CREST): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Skin thickening is confined distal to the elbows and knees (with facial involvement) and often follows years of longstanding Raynaud phenomenon",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive breathlessness or reduced diffusing capacity suggesting pulmonary arterial hypertension",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antinuclear antibody with anticentromere and extractable nuclear antigen profiling, Nailfold capillaroscopy to demonstrate scleroderma-pattern microvascular change, Transthoracic echocardiography to screen for pulmonary"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Vasodilator therapy for Raynaud phenomenon and digital ulcers, using calcium channel blockers, phosphodiesterase-5 inhibitors, and endothelin receptor antagonists or prostacyclin analogues"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing longstanding Raynaud to a primary cause and missing evolving systemic sclerosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of limited cutaneous systemic sclerosis (crest)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "systemic_sclerosis_limited-matrix",
+      "title": "Limited cutaneous systemic sclerosis (CREST): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Skin thickening is confined distal to the elbows and knees (with facial involvement) and often follows years of longstanding",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antinuclear antibody with anticentromere and extractable nuclear antigen profiling, Nailfold capillaroscopy to demonstrate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Diffuse cutaneous systemic sclerosis, Mixed connective tissue disease, Primary Raynaud phenomenon",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Vasodilator therapy for Raynaud phenomenon and digital ulcers, using calcium channel blockers, phosphodiesterase-5 inhibitors,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing longstanding Raynaud to a primary cause and missing evolving systemic sclerosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for limited cutaneous systemic sclerosis (crest)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "systemic_sclerosis_limited-dx-mgmt",
+      "title": "Diagnosis and management of Limited cutaneous systemic sclerosis (CREST)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected limited systemic sclerosis (CREST): distal skin thickening with Raynaud",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive breathlessness, critical digital ischaemia, or aspiration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiopulmonary review; right heart catheterisation if PAH is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANA with anticentromere; capillaroscopy; echocardiography; lung function with DLCO",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echocardiography or right heart catheterisation show pulmonary hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary Raynaud, diffuse disease or mixed connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vasodilators for Raynaud phenomenon and digital ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Targeted pulmonary vasodilators for pulmonary arterial hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Proton pump inhibitors and prokinetics for dysmotility",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular echocardiography and lung function surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Wound care and management of calcinosis and digital ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Indolent course; PAH worsens outcome, so early detection improves prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "systemic_sclerosis_limited-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANA with anticentromere and ENA profiling",
+          "cells": [
+            {
+              "text": "Anticentromere antibodies, the characteristic serological marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nailfold capillaroscopy",
+          "cells": [
+            {
+              "text": "Scleroderma-pattern microvascular change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary arterial hypertension screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests with diffusing capacity",
+          "cells": [
+            {
+              "text": "Vascular or interstitial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension, when non-invasive screening suggests it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_sclerosis_limited-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse cutaneous systemic sclerosis",
+          "cells": [
+            {
+              "text": "Skin thickening is confined distal to the elbows and knees in the limited form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary Raynaud phenomenon",
+          "cells": [
+            {
+              "text": "Longstanding Raynaud should prompt a search for evolving systemic sclerosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_sclerosis_limited-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vasodilators for Raynaud phenomenon and digital ulcers",
+          "cells": [
+            {
+              "text": "Calcium channel blockers, phosphodiesterase-5 inhibitors, endothelin receptor antagonists or prostacyclin analogues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted pulmonary vasodilators",
+          "cells": [
+            {
+              "text": "Pulmonary arterial hypertension, the leading disease-specific cause of late death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proton pump inhibitors and prokinetics",
+          "cells": [
+            {
+              "text": "Oesophageal dysmotility and reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiographic and lung function surveillance",
+          "cells": [
+            {
+              "text": "Detects pulmonary arterial hypertension before it becomes symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and calcinosis management",
+          "cells": [
+            {
+              "text": "Ischaemic ulcers, calcinosis and telangiectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE inhibitor if renal crisis occurs",
+          "cells": [
+            {
+              "text": "Uncommon in the limited subset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Rheumatology, respiratory and cardiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

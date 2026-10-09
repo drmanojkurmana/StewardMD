@@ -1,175 +1,397 @@
 {
- "id": "vipoma",
- "name": "VIPoma",
- "aliases": [
-  "vasoactive intestinal peptide-secreting tumour",
-  "Verner-Morrison syndrome",
-  "WDHA syndrome",
-  "pancreatic cholera"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare pancreatic neuroendocrine tumour secreting vasoactive intestinal peptide, producing the syndrome of watery diarrhoea, hypokalaemia, and achlorhydria",
-   "The diarrhoea is large-volume and secretory, meaning it persists during fasting, unlike osmotic diarrhoea",
-   "Profound potassium loss in stool causes hypokalaemia with weakness, and dehydration can be severe",
-   "VIP also tends to reduce gastric acid secretion (achlorhydria or hypochlorhydria) and may cause flushing and hypercalcaemia",
-   "Diagnosis relies on demonstrating a markedly elevated fasting plasma VIP level in the setting of secretory diarrhoea",
-   "Most tumours are located in the pancreas and a substantial proportion are malignant with metastases at diagnosis, so cross-sectional and functional imaging are needed for localisation and staging",
-   "Consider an association with multiple endocrine neoplasia type 1 in appropriate clinical contexts",
-   "Initial management prioritises aggressive rehydration and correction of electrolyte disturbance, with somatostatin analogues to control secretion and surgery for resectable disease"
+  "id": "vipoma",
+  "name": "VIPoma",
+  "aliases": [
+    "vasoactive intestinal peptide-secreting tumour",
+    "Verner-Morrison syndrome",
+    "WDHA syndrome",
+    "pancreatic cholera"
   ],
-  "pathophysiology": "A VIPoma is a functioning neuroendocrine tumour, usually arising in the pancreatic islets, that secretes excessive vasoactive intestinal peptide. VIP stimulates intestinal secretion of water and electrolytes while inhibiting absorption, producing a high-volume secretory diarrhoea that continues despite fasting. The consequent losses of potassium and bicarbonate in stool lead to hypokalaemia and metabolic acidosis, and VIP's inhibition of gastric acid secretion causes achlorhydria. VIP can also promote vasodilation and flushing and, through its effects on bone and calcium handling, contribute to hypercalcaemia. A significant proportion of these tumours are malignant and may have metastasised, most often to the liver, by the time of diagnosis.",
-  "additionalDifferentials": [
-   "Other secretory diarrhoeas such as gastrinoma (Zollinger-Ellison syndrome)",
-   "Carcinoid syndrome",
-   "Chronic infective or inflammatory diarrhoea",
-   "Laxative abuse",
-   "Medullary thyroid carcinoma causing diarrhoea",
-   "Systemic mastocytosis"
-  ],
-  "additionalInvestigations": [
-   "Fasting plasma VIP concentration",
-   "Serum electrolytes, bicarbonate, calcium, and glucose to characterise the metabolic disturbance",
-   "Stool studies to confirm a secretory pattern and exclude other causes",
-   "Cross-sectional imaging (CT or MRI) of the pancreas and liver for localisation and staging",
-   "Somatostatin-receptor functional imaging for occult or metastatic disease",
-   "Screening for other endocrine tumours where MEN1 is suspected"
-  ],
-  "redFlags": [
-   "Severe dehydration and haemodynamic instability from massive fluid loss",
-   "Life-threatening hypokalaemia with cardiac dysrhythmia",
-   "Metastatic disease, most commonly hepatic, at presentation",
-   "Refractory diarrhoea unresponsive to initial supportive measures"
-  ],
-  "prognosis": "Symptom control with rehydration and somatostatin analogues is usually achievable, and complete surgical resection of localised disease can be curative; however, many tumours are malignant with metastases at diagnosis, and prognosis then depends on tumour burden and response to systemic therapy.",
-  "pitfalls": [
-   "Attributing chronic watery diarrhoea to common causes and delaying measurement of VIP",
-   "Failing to recognise the secretory nature of the diarrhoea because it persists with fasting",
-   "Under-resuscitating profound fluid and potassium losses",
-   "Overlooking a possible MEN1 association and associated tumours"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Endocrine Society guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Somatostatin analogues such as octreotide or lanreotide to suppress vasoactive intestinal peptide secretion and control the secretory diarrhoea",
-   "Aggressive rehydration and correction of hypokalaemia, bicarbonate loss and metabolic acidosis in the acute setting",
-   "Surgical resection of localised tumour, which can be curative, with debulking for symptom control in advanced disease",
-   "Systemic and liver-directed therapy for metastatic disease, including peptide receptor radionuclide therapy, targeted agents such as everolimus or sunitinib, and hepatic embolisation",
-   "Monitor plasma VIP, electrolytes and cross-sectional and somatostatin-receptor imaging for treatment response and recurrence",
-   "Manage within a neuroendocrine tumour multidisciplinary team",
-   "Screen for MEN1 and offer genetic counselling where a familial endocrine syndrome is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vipoma-pathway",
-   "title": "VIPoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare pancreatic neuroendocrine tumour secreting vasoactive intestinal peptide, producing the syndrome of watery diarrhoea, hypokalaemia, and achlorhydria",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe dehydration and haemodynamic instability from massive fluid loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting plasma VIP concentration, Serum electrolytes, bicarbonate, calcium, and glucose to characterise the metabolic disturbance, Stool studies to confirm a secretory pattern and exclude other causes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Somatostatin analogues such as octreotide or lanreotide to suppress vasoactive intestinal peptide secretion and control the secretory diarrhoea"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing chronic watery diarrhoea to common causes and delaying measurement of VIP"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vipoma."
-  }
- ],
- "tables": [
-  {
-   "id": "vipoma-matrix",
-   "title": "VIPoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare pancreatic neuroendocrine tumour secreting vasoactive intestinal peptide, producing the syndrome of watery diarrhoea,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare pancreatic neuroendocrine tumour secreting vasoactive intestinal peptide, producing the syndrome of watery diarrhoea, hypokalaemia, and achlorhydria",
+      "The diarrhoea is large-volume and secretory, meaning it persists during fasting, unlike osmotic diarrhoea",
+      "Profound potassium loss in stool causes hypokalaemia with weakness, and dehydration can be severe",
+      "VIP also tends to reduce gastric acid secretion (achlorhydria or hypochlorhydria) and may cause flushing and hypercalcaemia",
+      "Diagnosis relies on demonstrating a markedly elevated fasting plasma VIP level in the setting of secretory diarrhoea",
+      "Most tumours are located in the pancreas and a substantial proportion are malignant with metastases at diagnosis, so cross-sectional and functional imaging are needed for localisation and staging",
+      "Consider an association with multiple endocrine neoplasia type 1 in appropriate clinical contexts",
+      "Initial management prioritises aggressive rehydration and correction of electrolyte disturbance, with somatostatin analogues to control secretion and surgery for resectable disease"
     ],
-    [
-     "Key Investigations",
-     "Fasting plasma VIP concentration, Serum electrolytes, bicarbonate, calcium, and glucose to characterise the metabolic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A VIPoma is a functioning neuroendocrine tumour, usually arising in the pancreatic islets, that secretes excessive vasoactive intestinal peptide. VIP stimulates intestinal secretion of water and electrolytes while inhibiting absorption, producing a high-volume secretory diarrhoea that continues despite fasting. The consequent losses of potassium and bicarbonate in stool lead to hypokalaemia and metabolic acidosis, and VIP's inhibition of gastric acid secretion causes achlorhydria. VIP can also promote vasodilation and flushing and, through its effects on bone and calcium handling, contribute to hypercalcaemia. A significant proportion of these tumours are malignant and may have metastasised, most often to the liver, by the time of diagnosis.",
+    "additionalDifferentials": [
+      "Other secretory diarrhoeas such as gastrinoma (Zollinger-Ellison syndrome)",
+      "Carcinoid syndrome",
+      "Chronic infective or inflammatory diarrhoea",
+      "Laxative abuse",
+      "Medullary thyroid carcinoma causing diarrhoea",
+      "Systemic mastocytosis"
     ],
-    [
-     "Primary Differentials",
-     "Other secretory diarrhoeas such as gastrinoma (Zollinger-Ellison syndrome), Carcinoid syndrome, Chronic infective or inflammatory",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting plasma VIP concentration",
+      "Serum electrolytes, bicarbonate, calcium, and glucose to characterise the metabolic disturbance",
+      "Stool studies to confirm a secretory pattern and exclude other causes",
+      "Cross-sectional imaging (CT or MRI) of the pancreas and liver for localisation and staging",
+      "Somatostatin-receptor functional imaging for occult or metastatic disease",
+      "Screening for other endocrine tumours where MEN1 is suspected"
     ],
-    [
-     "Management Strategy",
-     "Somatostatin analogues such as octreotide or lanreotide to suppress vasoactive intestinal peptide secretion and control the",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe dehydration and haemodynamic instability from massive fluid loss",
+      "Life-threatening hypokalaemia with cardiac dysrhythmia",
+      "Metastatic disease, most commonly hepatic, at presentation",
+      "Refractory diarrhoea unresponsive to initial supportive measures"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing chronic watery diarrhoea to common causes and delaying measurement of VIP",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptom control with rehydration and somatostatin analogues is usually achievable, and complete surgical resection of localised disease can be curative; however, many tumours are malignant with metastases at diagnosis, and prognosis then depends on tumour burden and response to systemic therapy.",
+    "pitfalls": [
+      "Attributing chronic watery diarrhoea to common causes and delaying measurement of VIP",
+      "Failing to recognise the secretory nature of the diarrhoea because it persists with fasting",
+      "Under-resuscitating profound fluid and potassium losses",
+      "Overlooking a possible MEN1 association and associated tumours"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Endocrine Society guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Somatostatin analogues such as octreotide or lanreotide to suppress vasoactive intestinal peptide secretion and control the secretory diarrhoea",
+      "Aggressive rehydration and correction of hypokalaemia, bicarbonate loss and metabolic acidosis in the acute setting",
+      "Surgical resection of localised tumour, which can be curative, with debulking for symptom control in advanced disease",
+      "Systemic and liver-directed therapy for metastatic disease, including peptide receptor radionuclide therapy, targeted agents such as everolimus or sunitinib, and hepatic embolisation",
+      "Monitor plasma VIP, electrolytes and cross-sectional and somatostatin-receptor imaging for treatment response and recurrence",
+      "Manage within a neuroendocrine tumour multidisciplinary team",
+      "Screen for MEN1 and offer genetic counselling where a familial endocrine syndrome is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for vipoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vipoma-real-image",
-   "title": "VIPoma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "vipoma-pathway",
+      "title": "VIPoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare pancreatic neuroendocrine tumour secreting vasoactive intestinal peptide, producing the syndrome of watery diarrhoea, hypokalaemia, and achlorhydria",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe dehydration and haemodynamic instability from massive fluid loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting plasma VIP concentration, Serum electrolytes, bicarbonate, calcium, and glucose to characterise the metabolic disturbance, Stool studies to confirm a secretory pattern and exclude other causes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Somatostatin analogues such as octreotide or lanreotide to suppress vasoactive intestinal peptide secretion and control the secretory diarrhoea"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing chronic watery diarrhoea to common causes and delaying measurement of VIP"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vipoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vipoma-matrix",
+      "title": "VIPoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare pancreatic neuroendocrine tumour secreting vasoactive intestinal peptide, producing the syndrome of watery diarrhoea,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting plasma VIP concentration, Serum electrolytes, bicarbonate, calcium, and glucose to characterise the metabolic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other secretory diarrhoeas such as gastrinoma (Zollinger-Ellison syndrome), Carcinoid syndrome, Chronic infective or inflammatory",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Somatostatin analogues such as octreotide or lanreotide to suppress vasoactive intestinal peptide secretion and control the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing chronic watery diarrhoea to common causes and delaying measurement of VIP",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vipoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vipoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting plasma VIP concentration",
+          "cells": [
+            {
+              "text": "Raised VIP in the secretory syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes, bicarbonate, calcium and glucose",
+          "cells": [
+            {
+              "text": "Hypokalaemia and metabolic disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool studies",
+          "cells": [
+            {
+              "text": "Confirms a secretory pattern and excludes other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Pancreatic tumour and hepatic metastases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vipoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastrinoma (Zollinger-Ellison syndrome)",
+          "cells": [
+            {
+              "text": "Another secretory diarrhoea; VIP measurement separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinoid syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laxative abuse",
+          "cells": [
+            {
+              "text": "Diarrhoea that stops with fasting; secretory diarrhoea persists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vipoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Somatostatin analogues",
+          "cells": [
+            {
+              "text": "Octreotide or lanreotide to suppress VIP secretion and control diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive rehydration",
+          "cells": [
+            {
+              "text": "Correction of hypokalaemia, bicarbonate loss and metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vipoma-dx-mgmt",
+      "title": "Diagnosis and management of VIPoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected VIPoma: large-volume watery diarrhoea with hypokalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe dehydration, dangerous hypokalaemia or hepatic metastases)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration and potassium correction; monitor for dysrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting plasma VIP, electrolytes, stool studies, cross-sectional imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is fasting plasma VIP raised with a secretory stool pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider gastrinoma, carcinoid or laxative abuse; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aggressive rehydration and correction of hypokalaemia and acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Somatostatin analogue such as octreotide or lanreotide to control diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tumour localisation and treatment planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Secretory diarrhoea persists with fasting; outcome depends on tumour stage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }
